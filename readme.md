@@ -4,21 +4,21 @@
 - **[Kazoucoin](http://kazoucoin.com)**
 ## Configuration
 
-Cloner le fichier puis faire un <code>composer update</code> si vous ete sur window faite <code>composer install --ignore-platform-reqs</code>
+Cloner le fichier puis faire un ``` composer update ``` si vous ete sur window faite ``` composer install --ignore-platform-reqs ```
 
 Ensuite faite un <code>npm i</code> et <code>npm run watch</code>
 
-Configurer votre votre fichier <code>.env</code> en duplicant celle de <code>.env.example</code> 
+Configurer votre votre fichier ``` .env``` en duplicant celle de ``` .env.example ```
 
-Faite ensuite <code>php artisan key:generate</code> et faire <code>php artisan serve</code>
+Faite ensuite  ``` php artisan key:generate ``` et faire  ``` php artisan serve ```
 
 Vous aurrez ce lien **[http://127.0.0.1:8000](http://127.0.0.1:8000)** 
 
-Apres la configuration de la base de donner <code>php artisan migrate:fresh --seed</code>
+Apres la configuration de la base de donner  ``` php artisan migrate:fresh --seed```
 
 ##Configuration base de donner
 
-<code>mysql -uroot -p</code> entrer votre mot de passe mysql <code>CREATE DATABASE ivemo;</code>
+``` mysql -uroot -p``` entrer votre mot de passe mysql ``` CREATE DATABASE ivemo;```
 
 ## Security Vulnerabilities
 
