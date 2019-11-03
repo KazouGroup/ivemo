@@ -18,7 +18,7 @@ class FaqController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth',['except' => ['api','view']]);
+        $this->middleware('auth',['except' => ['api','view','apibystatus']]);
     }
     /**
      * Display a listing of the resource.
@@ -30,6 +30,11 @@ class FaqController extends Controller
         return view('admin.faq.index');
     }
 
+    public function v1()
+    {
+        return view('admin.faq.index');
+    }
+
     public function sites()
     {
         return view('admin.faq.index');
@@ -37,12 +42,18 @@ class FaqController extends Controller
 
     public function api()
     {
-       // $faqs =  FaqResource::collection(faq::with('user')->latest()
-       //     ->paginate(10));
-        $faqs =  FaqResource::collection(faq::with('user')->latest()
-            ->get());
+        $faqs =  FaqResource::collection(faq::with('user')->latest()->get());
 
         return response()->json($faqs,200);
+    }
+
+    public function apibystatus()
+    {
+        $faqs =  FaqResource::collection(faq::with('user')
+            ->where('status',1)->latest()
+            ->paginate(12));
+
+        return response()->json($faqs);
     }
 
     public function view($slug)

@@ -92452,7 +92452,7 @@ QuillToolbar.defaultColors = defaultColors;
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -101032,6 +101032,51 @@ function (_Component) {
 
 /***/ }),
 
+/***/ "./resources/js/components/admin/faq/Faq.js":
+/*!**************************************************!*\
+  !*** ./resources/js/components/admin/faq/Faq.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var Faq = function Faq(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card card-collapse"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-header",
+    role: "tab",
+    id: "headingOne"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    className: "mb-0"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "collapsed",
+    "data-toggle": "collapse",
+    href: "#collapseOne",
+    "aria-expanded": "false",
+    "aria-controls": "collapseOne"
+  }, props.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "material-icons"
+  }, "keyboard_arrow_down")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "collapseOne",
+    className: "collapse",
+    role: "tabpanel",
+    "aria-labelledby": "headingOne",
+    "data-parent": "#accordion"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-body"
+  }, "Anim pariatur cliche reprehenderit, enim eiusmod")));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Faq);
+
+/***/ }),
+
 /***/ "./resources/js/components/admin/faq/FaqCreate.js":
 /*!********************************************************!*\
   !*** ./resources/js/components/admin/faq/FaqCreate.js ***!
@@ -101902,13 +101947,20 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "submit text-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: '/dashboard/faqs/create',
+        to: '/dashboard/faqs/create/',
         className: 'btn btn-success btn-raised'
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "material-icons"
       }, "forum"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
         className: "title_hover"
-      }, "New FAQS")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "New FAQS")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: '/dashboard/faqs/v1/all/',
+        className: 'btn btn-primary btn-raised'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "chat"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+        className: "title_hover"
+      }, "FAQS Site")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "material-datatables"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
         id: "datatables",
@@ -101987,6 +102039,137 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (FaqIndex);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/faq/FaqSite.js":
+/*!******************************************************!*\
+  !*** ./resources/js/components/admin/faq/FaqSite.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../inc/admin/TopNavAdmin */ "./resources/js/components/inc/admin/TopNavAdmin.js");
+/* harmony import */ var _inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../inc/admin/NavAdmin */ "./resources/js/components/inc/admin/NavAdmin.js");
+/* harmony import */ var _inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../inc/admin/FooterAdmin */ "./resources/js/components/inc/admin/FooterAdmin.js");
+/* harmony import */ var _Faq__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Faq */ "./resources/js/components/admin/faq/Faq.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+
+var FaqSite =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(FaqSite, _Component);
+
+  function FaqSite() {
+    var _this;
+
+    _classCallCheck(this, FaqSite);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(FaqSite).call(this));
+    _this.state = {
+      faqs: []
+    };
+    return _this;
+  }
+
+  _createClass(FaqSite, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.loadItems();
+    }
+  }, {
+    key: "loadItems",
+    value: function loadItems() {
+      var _this2 = this;
+
+      var url = "/api/faqs/v1";
+      axios.get(url).then(function (response) {
+        return _this2.setState({
+          faqs: _toConsumableArray(response.data)
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var faqs = this.state.faqs;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-panel"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container-fluid"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "toolbar"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "submit text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: '/dashboard/faqs/',
+        className: 'btn btn-success btn-raised'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "forum"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+        className: "title_hover"
+      }, "FAQS")))), faqs.map(function (item) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Faq__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({
+          key: item.id
+        }, item));
+      }))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+    }
+  }]);
+
+  return FaqSite;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (FaqSite);
 
 /***/ }),
 
@@ -102485,18 +102668,20 @@ function FooterAdmin() {
     to: '/dashboard'
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://creative-tim.com/presentation"
-  }, "About Us")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, "About Us")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: '/dashboard/faqs/v1/all'
+  }, "Faqs")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "http://blog.creative-tim.com"
   }, "Blog")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.creative-tim.com/license"
   }, "Licenses")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "copyright float-right"
-  }, "\xA9", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("script", null, "document.write(new Date().getFullYear())"), ", made with ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "material-icons"
+  }, "\xA9", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("script", null, "document.write(new Date().getFullYear())"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "material-icons text-danger"
   }, "favorite"), " by", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "https://www.creative-tim.com",
+    href: "/dashboard",
     target: "_blank"
-  }, "Creative Tim"), " for a better web.")));
+  }, " KazouGroup"), " for a better web.")));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (FooterAdmin);
@@ -102912,6 +103097,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_DashboardIndex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../admin/DashboardIndex */ "./resources/js/components/admin/DashboardIndex.js");
 /* harmony import */ var _admin_link_LinkIndex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../admin/link/LinkIndex */ "./resources/js/components/admin/link/LinkIndex.js");
 /* harmony import */ var _admin_faq_FaqView__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../admin/faq/FaqView */ "./resources/js/components/admin/faq/FaqView.js");
+/* harmony import */ var _admin_faq_FaqSite__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../admin/faq/FaqSite */ "./resources/js/components/admin/faq/FaqSite.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -102929,6 +103115,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -102962,6 +103149,10 @@ function (_Component) {
         exact: true,
         path: "/dashboard/faqs/",
         component: _admin_faq_FaqIndex__WEBPACK_IMPORTED_MODULE_3__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        exact: true,
+        path: "/dashboard/faqs/v1/all/",
+        component: _admin_faq_FaqSite__WEBPACK_IMPORTED_MODULE_9__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
         path: "/dashboard/faqs/create/",
@@ -103008,8 +103199,8 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/boclairtemgoua/sites/projet/ivemo/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/boclairtemgoua/sites/projet/ivemo/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\perso\ivemo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\perso\ivemo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

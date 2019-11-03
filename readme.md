@@ -16,7 +16,7 @@ Vous aurrez ce lien **[http://127.0.0.1:8000](http://127.0.0.1:8000)**
 
 Apres la configuration de la base de donner  ``` php artisan migrate:fresh --seed```
 
-##Configuration base de donner
+## Configuration base de donner
 
 ``` mysql -uroot -p``` entrer votre mot de passe mysql ``` CREATE DATABASE ivemo;```
 

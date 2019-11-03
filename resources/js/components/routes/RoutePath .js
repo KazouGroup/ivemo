@@ -7,6 +7,7 @@ import FaqEdit from "../admin/faq/FaqEdit";
 import DashboardIndex from "../admin/DashboardIndex";
 import LinkIndex from "../admin/link/LinkIndex";
 import FaqView from "../admin/faq/FaqView";
+import FaqSite from "../admin/faq/FaqSite";
 
 export default class RoutePath  extends Component{
     render(){
@@ -15,6 +16,7 @@ export default class RoutePath  extends Component{
                 <Switch>
                     <Route exact path="/dashboard/" component={DashboardIndex} />
                     <Route exact path="/dashboard/faqs/" component={FaqIndex} />
+                    <Route exact path="/dashboard/faqs/v1/all/" component={FaqSite} />
                     <Route exact path="/dashboard/faqs/create/" component={FaqCreate} />
                     <Route exact path="/dashboard/faqs/:faq/edit/" component={FaqEdit} />
                     <Route exact path="/dashboard/faqs/v/:slug/" component={FaqView} />

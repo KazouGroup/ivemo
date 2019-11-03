@@ -18,6 +18,11 @@ function FooterAdmin() {
                             </a>
                         </li>
                         <li>
+                            <Link to={'/dashboard/faqs/v1/all'}>
+                                Faqs
+                            </Link>
+                        </li>
+                        <li>
                             <a href="http://blog.creative-tim.com">
                                 Blog
                             </a>
@@ -34,8 +39,8 @@ function FooterAdmin() {
                     <script>
                         document.write(new Date().getFullYear())
                     </script>
-                    , made with <i className="material-icons">favorite</i> by
-                    <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+                    <i className="material-icons text-danger">favorite</i> by
+                    <a href="/dashboard" target="_blank"> KazouGroup</a> for a better web.
                 </div>
             </div>
         </footer>

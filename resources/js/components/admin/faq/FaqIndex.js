@@ -238,9 +238,13 @@ class FaqIndex extends Component {
                                             <br/>
                                             <div className="toolbar">
                                                 <div className="submit text-center">
-                                                    <Link to={'/dashboard/faqs/create'}  className={'btn btn-success btn-raised'}>
+                                                    <Link to={'/dashboard/faqs/create/'}  className={'btn btn-success btn-raised'}>
                                                         <i className="material-icons">forum</i>
                                                         <b className="title_hover">New FAQS</b>
+                                                    </Link>
+                                                    <Link to={'/dashboard/faqs/v1/all/'}  className={'btn btn-primary btn-raised'}>
+                                                        <i className="material-icons">chat</i>
+                                                        <b className="title_hover">FAQS Site</b>
                                                     </Link>
                                                 </div>
 
