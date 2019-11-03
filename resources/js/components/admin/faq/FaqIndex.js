@@ -9,7 +9,8 @@ class FaqIndex extends Component {
     constructor () {
         super();
         this.state = {
-            faqs: []
+            faqs: [],
+            error: null
         };
         // bind
         this.deleteItem = this.deleteItem.bind(this);
@@ -26,7 +27,7 @@ class FaqIndex extends Component {
     // handle delete
     deleteItem(id) {
         Swal.fire({
-            title: 'Delete Faq?',
+            title: 'Delete FaqLists?',
             text: "Are you sure you want to delete this faq?",
             type: 'warning',
             animation: false,
@@ -85,7 +86,7 @@ class FaqIndex extends Component {
 
         axios.get('/dashboard/active_faqs/' + id).then(() => {
             /** Alert notify bootstrapp **/
-            $.notify('<strong>Faq activated Successfully.</strong>', {
+            $.notify('<strong>FaqLists activated Successfully.</strong>', {
                 allow_dismiss: false,
                 type: 'info',
                 placement: {
@@ -116,7 +117,7 @@ class FaqIndex extends Component {
 
         axios.get('/dashboard/disable_faqs/' + id).then(() => {
             /** Alert notify bootstrapp **/
-            $.notify('<strong>Faq desactivated Successfully.</strong>', {
+            $.notify('<strong>FaqLists desactivated Successfully.</strong>', {
                 allow_dismiss: false,
                 type: 'primary',
                 placement: {
@@ -142,11 +143,18 @@ class FaqIndex extends Component {
     }
 
     loadItems() {
-        axios.get(`/api/faqs`).then(response =>
-            this.setState({
-                faqs: [...response.data],
-            }),
-        );
+        let url = `/api/faqs`;
+        fetch(url).then(res => res.json())
+            .then((result) => {
+                    this.setState({
+                        faqs: result
+                    });
+                },(error) => {
+                    this.setState({
+                        error
+                    });
+                }
+            )
     }
     reload(){
         this.loadItems()

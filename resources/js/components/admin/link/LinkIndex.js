@@ -43,7 +43,7 @@ class FaqIndex extends Component {
     // handle delete
     deleteItem(id) {
         Swal.fire({
-            title: 'Delete Faq?',
+            title: 'Delete FaqLists?',
             text: "Are you sure you want to delete this faq?",
             type: 'warning',
             animation: false,

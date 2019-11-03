@@ -3,9 +3,9 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import TopNavAdmin from "../../inc/admin/TopNavAdmin";
 import NavAdmin from "../../inc/admin/NavAdmin";
 import FooterAdmin from "../../inc/admin/FooterAdmin";
-import Faq from "./Faq";
+import FaqLists from "./FaqLists";
 
-class FaqSite extends Component {
+class FaqAdminSite extends Component {
     constructor () {
         super();
         this.state = {
@@ -29,7 +29,7 @@ class FaqSite extends Component {
 
 
     render() {
-        let { faqs } = this.state;
+        const { faqs } = this.state;
         return (
             <div className="wrapper">
 
@@ -55,9 +55,14 @@ class FaqSite extends Component {
                                                     </Link>
                                                 </div>
                                             </div>
-                                            {faqs.map((item) => (
-                                                <Faq key={item.id} {...item}/>
-                                            ))}
+
+                                                {faqs.map((item) => (
+                                                    <FaqLists key={item.id} {...item}/>
+                                                ))}
+
+                                            <div className="submit text-center">
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -70,4 +75,4 @@ class FaqSite extends Component {
         );
     }
 }
-export default FaqSite;
+export default FaqAdminSite;

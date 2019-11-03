@@ -101032,10 +101032,10 @@ function (_Component) {
 
 /***/ }),
 
-/***/ "./resources/js/components/admin/faq/Faq.js":
-/*!**************************************************!*\
-  !*** ./resources/js/components/admin/faq/Faq.js ***!
-  \**************************************************/
+/***/ "./resources/js/components/admin/faq/FaqAdminSite.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/admin/faq/FaqAdminSite.js ***!
+  \***********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -101043,37 +101043,125 @@ function (_Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../inc/admin/TopNavAdmin */ "./resources/js/components/inc/admin/TopNavAdmin.js");
+/* harmony import */ var _inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../inc/admin/NavAdmin */ "./resources/js/components/inc/admin/NavAdmin.js");
+/* harmony import */ var _inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../inc/admin/FooterAdmin */ "./resources/js/components/inc/admin/FooterAdmin.js");
+/* harmony import */ var _FaqLists__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FaqLists */ "./resources/js/components/admin/faq/FaqLists.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
-var Faq = function Faq(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card card-collapse"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-header",
-    role: "tab",
-    id: "headingOne"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "mb-0"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "collapsed",
-    "data-toggle": "collapse",
-    href: "#collapseOne",
-    "aria-expanded": "false",
-    "aria-controls": "collapseOne"
-  }, props.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "material-icons"
-  }, "keyboard_arrow_down")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "collapseOne",
-    className: "collapse",
-    role: "tabpanel",
-    "aria-labelledby": "headingOne",
-    "data-parent": "#accordion"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-body"
-  }, "Anim pariatur cliche reprehenderit, enim eiusmod")));
-};
 
-/* harmony default export */ __webpack_exports__["default"] = (Faq);
+
+
+
+
+
+var FaqAdminSite =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(FaqAdminSite, _Component);
+
+  function FaqAdminSite() {
+    var _this;
+
+    _classCallCheck(this, FaqAdminSite);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(FaqAdminSite).call(this));
+    _this.state = {
+      faqs: []
+    };
+    return _this;
+  }
+
+  _createClass(FaqAdminSite, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.loadItems();
+    }
+  }, {
+    key: "loadItems",
+    value: function loadItems() {
+      var _this2 = this;
+
+      var url = "/api/faqs/v1";
+      axios.get(url).then(function (response) {
+        return _this2.setState({
+          faqs: _toConsumableArray(response.data)
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var faqs = this.state.faqs;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-panel"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container-fluid"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "toolbar"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "submit text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: '/dashboard/faqs/',
+        className: 'btn btn-success btn-raised'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "forum"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+        className: "title_hover"
+      }, "FAQS")))), faqs.map(function (item) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FaqLists__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({
+          key: item.id
+        }, item));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "submit text-center"
+      }))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+    }
+  }]);
+
+  return FaqAdminSite;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (FaqAdminSite);
 
 /***/ }),
 
@@ -101637,14 +101725,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../inc/admin/FooterAdmin */ "./resources/js/components/inc/admin/FooterAdmin.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -101680,7 +101760,8 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(FaqIndex).call(this));
     _this.state = {
-      faqs: []
+      faqs: [],
+      error: null
     }; // bind
 
     _this.deleteItem = _this.deleteItem.bind(_assertThisInitialized(_this));
@@ -101702,7 +101783,7 @@ function (_Component) {
       var _this2 = this;
 
       Swal.fire({
-        title: 'Delete Faq?',
+        title: 'Delete FaqLists?',
         text: "Are you sure you want to delete this faq?",
         type: 'warning',
         animation: false,
@@ -101768,7 +101849,7 @@ function (_Component) {
 
       axios.get('/dashboard/active_faqs/' + id).then(function () {
         /** Alert notify bootstrapp **/
-        $.notify('<strong>Faq activated Successfully.</strong>', {
+        $.notify('<strong>FaqLists activated Successfully.</strong>', {
           allow_dismiss: false,
           type: 'info',
           placement: {
@@ -101803,7 +101884,7 @@ function (_Component) {
 
       axios.get('/dashboard/disable_faqs/' + id).then(function () {
         /** Alert notify bootstrapp **/
-        $.notify('<strong>Faq desactivated Successfully.</strong>', {
+        $.notify('<strong>FaqLists desactivated Successfully.</strong>', {
           allow_dismiss: false,
           type: 'primary',
           placement: {
@@ -101833,9 +101914,16 @@ function (_Component) {
     value: function loadItems() {
       var _this5 = this;
 
-      axios.get("/api/faqs").then(function (response) {
-        return _this5.setState({
-          faqs: _toConsumableArray(response.data)
+      var url = "/api/faqs";
+      fetch(url).then(function (res) {
+        return res.json();
+      }).then(function (result) {
+        _this5.setState({
+          faqs: result
+        });
+      }, function (error) {
+        _this5.setState({
+          error: error
         });
       });
     }
@@ -102042,10 +102130,10 @@ function (_Component) {
 
 /***/ }),
 
-/***/ "./resources/js/components/admin/faq/FaqSite.js":
-/*!******************************************************!*\
-  !*** ./resources/js/components/admin/faq/FaqSite.js ***!
-  \******************************************************/
+/***/ "./resources/js/components/admin/faq/FaqLists.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/admin/faq/FaqLists.js ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -102053,123 +102141,40 @@ function (_Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../inc/admin/TopNavAdmin */ "./resources/js/components/inc/admin/TopNavAdmin.js");
-/* harmony import */ var _inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../inc/admin/NavAdmin */ "./resources/js/components/inc/admin/NavAdmin.js");
-/* harmony import */ var _inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../inc/admin/FooterAdmin */ "./resources/js/components/inc/admin/FooterAdmin.js");
-/* harmony import */ var _Faq__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Faq */ "./resources/js/components/admin/faq/Faq.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
-
-
-
-
-
-
-var FaqSite =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(FaqSite, _Component);
-
-  function FaqSite() {
-    var _this;
-
-    _classCallCheck(this, FaqSite);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(FaqSite).call(this));
-    _this.state = {
-      faqs: []
-    };
-    return _this;
-  }
-
-  _createClass(FaqSite, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.loadItems();
+var FaqLists = function FaqLists(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card card-collapse"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-header",
+    role: "tab",
+    id: "heading".concat(props.id)
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    className: "mb-0"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "collapsed",
+    "data-toggle": "collapse",
+    href: "#collapse".concat(props.id),
+    "aria-expanded": "false",
+    "aria-controls": "collapse".concat(props.id)
+  }, props.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "material-icons"
+  }, "keyboard_arrow_down")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "collapse".concat(props.id),
+    className: "collapse",
+    role: "tabpanel",
+    "aria-labelledby": "heading".concat(props.id),
+    "data-parent": "#accordion"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-body",
+    dangerouslySetInnerHTML: {
+      __html: props.body
     }
-  }, {
-    key: "loadItems",
-    value: function loadItems() {
-      var _this2 = this;
+  })));
+};
 
-      var url = "/api/faqs/v1";
-      axios.get(url).then(function (response) {
-        return _this2.setState({
-          faqs: _toConsumableArray(response.data)
-        });
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var faqs = this.state.faqs;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "main-panel"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "content"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container-fluid"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-body"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "toolbar"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "submit text-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: '/dashboard/faqs/',
-        className: 'btn btn-success btn-raised'
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "material-icons"
-      }, "forum"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
-        className: "title_hover"
-      }, "FAQS")))), faqs.map(function (item) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Faq__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({
-          key: item.id
-        }, item));
-      }))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
-    }
-  }]);
-
-  return FaqSite;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (FaqSite);
+/* harmony default export */ __webpack_exports__["default"] = (FaqLists);
 
 /***/ }),
 
@@ -102428,7 +102433,7 @@ function (_Component) {
       var _this3 = this;
 
       Swal.fire({
-        title: 'Delete Faq?',
+        title: 'Delete FaqLists?',
         text: "Are you sure you want to delete this faq?",
         type: 'warning',
         animation: false,
@@ -103097,7 +103102,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_DashboardIndex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../admin/DashboardIndex */ "./resources/js/components/admin/DashboardIndex.js");
 /* harmony import */ var _admin_link_LinkIndex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../admin/link/LinkIndex */ "./resources/js/components/admin/link/LinkIndex.js");
 /* harmony import */ var _admin_faq_FaqView__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../admin/faq/FaqView */ "./resources/js/components/admin/faq/FaqView.js");
-/* harmony import */ var _admin_faq_FaqSite__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../admin/faq/FaqSite */ "./resources/js/components/admin/faq/FaqSite.js");
+/* harmony import */ var _admin_faq_FaqAdminSite__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../admin/faq/FaqAdminSite */ "./resources/js/components/admin/faq/FaqAdminSite.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -103152,7 +103157,7 @@ function (_Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
         path: "/dashboard/faqs/v1/all/",
-        component: _admin_faq_FaqSite__WEBPACK_IMPORTED_MODULE_9__["default"]
+        component: _admin_faq_FaqAdminSite__WEBPACK_IMPORTED_MODULE_9__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
         path: "/dashboard/faqs/create/",
