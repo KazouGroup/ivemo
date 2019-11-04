@@ -15,6 +15,8 @@ Route::group(['middleware' => 'auth:web'], function(){
         /** C'est route son dans le directory partials */
         require(__DIR__ . DIRECTORY_SEPARATOR . 'partials'. DIRECTORY_SEPARATOR . 'index.php');
 
+        require(__DIR__ . DIRECTORY_SEPARATOR . 'users.php');
+
     });
 
 });

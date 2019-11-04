@@ -14,9 +14,6 @@ require('./bootstrap');
 
 //require('./components/Index');
 require('./components/routes/RoutePath ');
-//require('./components/admin/DashboardIndex');
-//require('./components/inc/admin/TopNavAdmin');
-//require('./components/inc/admin/NavAdmin');
 
 
 

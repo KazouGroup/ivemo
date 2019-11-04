@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Model\user;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -56,9 +57,26 @@ class UserController extends Controller
     public function user()
     {
         $user = new UserResource(auth()->user());
-
         return response()->json($user,200);
     }
+
+    public function admin_profile()
+    {
+        $user = Auth::user();
+        return view('admin.profile.edit',compact('user'));
+    }
+
+    public function admin_profile_edit()
+    {
+        $user = Auth::user();
+        return view('admin.profile.edit',compact('user'));
+    }
+
+    public function user_edit()
+    {
+
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

@@ -1,6 +1,8 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+
+use App\Model\color;
 use App\Model\user;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
@@ -21,6 +23,9 @@ $factory->define(user::class, function (Faker $faker) {
         'username' => $faker->unique()->name,
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
+        'color_name' => function () {
+            return color::inRandomOrder()->first()->name;
+        },
         'email_verified_at' => now(),
         'avatar' => $faker->imageUrl($width = 400, $height = 400),
         'avatarcover' => $faker->imageUrl,

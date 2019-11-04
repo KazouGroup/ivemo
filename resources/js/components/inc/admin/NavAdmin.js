@@ -53,13 +53,13 @@ export default class NavAdmin extends Component {
                             <div className="collapse" id="collapseExample">
                                 <ul className="nav">
                                     <li className="nav-item">
-                                        <Link className="nav-link" to={'/dashboard/'}>
+                                        <Link className="nav-link" to={'/dashboard/profile/'}>
                                             <span className="sidebar-mini"> MP </span>
                                             <span className="sidebar-normal"> My Profile </span>
                                         </Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link className="nav-link" to={'/dashboard/'}>
+                                        <Link className="nav-link" to={'/dashboard/profile/edit/'}>
                                             <span className="sidebar-mini"> EP </span>
                                             <span className="sidebar-normal"> Edit Profile </span>
                                         </Link>
@@ -90,7 +90,7 @@ export default class NavAdmin extends Component {
                     </div>
                     <ul className="nav">
                         <li className="nav-item">
-                            <NavLink className="nav-link" to={'/dashboard'}>
+                            <NavLink className="nav-link" to={'/dashboard/'}>
                                 <i className="material-icons">dashboard</i>
                                 <p> Dashboard </p>
                             </NavLink>

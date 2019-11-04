@@ -8,6 +8,8 @@ import DashboardIndex from "../admin/DashboardIndex";
 import LinkIndex from "../admin/link/LinkIndex";
 import FaqView from "../admin/faq/FaqView";
 import FaqAdminSite from "../admin/faq/FaqAdminSite";
+import ProfileUserEdit from "../admin/profile/ProfileUserEdit";
+import ProfileUserAdmin from "../admin/profile/ProfileUserAdmin";
 
 export default class RoutePath  extends Component{
     render(){
@@ -15,6 +17,8 @@ export default class RoutePath  extends Component{
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/dashboard/" component={DashboardIndex} />
+                    <Route exact path="/dashboard/profile/" component={ProfileUserAdmin} />
+                    <Route exact path="/dashboard/profile/edit/" component={ProfileUserEdit} />
                     <Route exact path="/dashboard/faqs/" component={FaqIndex} />
                     <Route exact path="/dashboard/faqs/v1/all/" component={FaqAdminSite} />
                     <Route exact path="/dashboard/faqs/create/" component={FaqCreate} />

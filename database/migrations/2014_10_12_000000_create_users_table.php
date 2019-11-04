@@ -18,10 +18,12 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('name');
             $table->string('sex')->nullable();
+            $table->string('color_name')->nullable();
             $table->string('avatar')->nullable()->default('https://www.kazoucoin.com/assets/img/default-avatar.png');
             $table->string('avatarcover')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->longText('body')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

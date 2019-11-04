@@ -1,9 +1,11 @@
 <?php
 
+use App\Model\color;
 use App\Model\faq;
 use App\Model\link;
 use App\Model\user;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
@@ -35,11 +37,25 @@ class CompileTableSeeder extends Seeder
             'username' =>'bokino12',
             'name' =>'Boclair Temgoua',
             'email' => "temgoua2012@gmail.com",
+            'color_name' => "success",
             "password" => bcrypt('0000000'),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ]);
         $god->syncRoles('super-admin');
+
+
+        // Insert color to the database
+        $colors = array(
+            array('name' => 'danger'),
+            array('name' => 'info'),
+            array('name' => 'success'),
+            array('name' => 'warning'),
+            array('name' => 'rose'),
+            array('name' => 'dark'),
+            array('name' => 'primary'),
+        );
+        DB::table('colors') -> insert($colors);
     }
 
     private function addTestData()
@@ -48,6 +64,7 @@ class CompileTableSeeder extends Seeder
         $admin_user = User::create([
             'username' =>'randrino17',
             'name' =>'Nzeukang',
+            'color_name' => "info",
             'email' => "nzeukangrandrin@gmail.com",
             "password" => bcrypt('123456789'),
             'email_verified_at' => now(),
