@@ -294,10 +294,10 @@
    */
   var adaptInputValidator = function adaptInputValidator(legacyValidator) {
     return function adaptedInputValidator(inputValue, extraParams) {
-      return legacyValidator.call(this, inputValue, extraParams).then(function() {
-        return undefined;
-      }, function(validationError) {
-        return validationError;
+      return legacyValidator.call(this, inputValue, extraParams).then(function () {
+          return undefined;
+      }, function (validationError) {
+          return validationError;
       });
     };
   };
@@ -1014,16 +1014,16 @@
         if (i < currentSteps.length) {
           document.body.setAttribute('data-swal2-queue-step', i);
 
-          swal(currentSteps[i]).then(function(result) {
-            if (typeof result.value !== 'undefined') {
-              queueResult.push(result.value);
-              step(i + 1, callback);
-            } else {
-              resetQueue();
-              resolve({
-                dismiss: result.dismiss
-              });
-            }
+          swal(currentSteps[i]).then(function (result) {
+              if (typeof result.value !== 'undefined') {
+                  queueResult.push(result.value);
+                  step(i + 1, callback);
+              } else {
+                  resetQueue();
+                  resolve({
+                      dismiss: result.dismiss
+                  });
+              }
           });
         } else {
           resetQueue();
@@ -1795,27 +1795,27 @@
 
         if (innerParams.preConfirm) {
           _this.resetValidationError();
-          var preConfirmPromise = Promise.resolve().then(function() {
-            return innerParams.preConfirm(value, innerParams.extraParams);
+          var preConfirmPromise = Promise.resolve().then(function () {
+              return innerParams.preConfirm(value, innerParams.extraParams);
           });
           if (innerParams.expectRejections) {
-            preConfirmPromise.then(function(preConfirmValue) {
-              return succeedWith(preConfirmValue || value);
-            }, function(validationError) {
-              _this.hideLoading();
-              if (validationError) {
-                _this.showValidationError(validationError);
-              }
+            preConfirmPromise.then(function (preConfirmValue) {
+                return succeedWith(preConfirmValue || value);
+            }, function (validationError) {
+                _this.hideLoading();
+                if (validationError) {
+                    _this.showValidationError(validationError);
+                }
             });
           } else {
-            preConfirmPromise.then(function(preConfirmValue) {
-              if (isVisible(domCache.validationError) || preConfirmValue === false) {
-                _this.hideLoading();
-              } else {
-                succeedWith(preConfirmValue || value);
-              }
-            }, function(error$$1) {
-              return errorWith(error$$1);
+            preConfirmPromise.then(function (preConfirmValue) {
+                if (isVisible(domCache.validationError) || preConfirmValue === false) {
+                    _this.hideLoading();
+                } else {
+                    succeedWith(preConfirmValue || value);
+                }
+            }, function (error$$1) {
+                return errorWith(error$$1);
             });
           }
         } else {
@@ -1843,32 +1843,32 @@
 
                 if (innerParams.inputValidator) {
                   _this.disableInput();
-                  var validationPromise = Promise.resolve().then(function() {
-                    return innerParams.inputValidator(inputValue, innerParams.extraParams);
+                  var validationPromise = Promise.resolve().then(function () {
+                      return innerParams.inputValidator(inputValue, innerParams.extraParams);
                   });
                   if (innerParams.expectRejections) {
-                    validationPromise.then(function() {
-                      _this.enableButtons();
-                      _this.enableInput();
-                      confirm(inputValue);
-                    }, function(validationError) {
-                      _this.enableButtons();
-                      _this.enableInput();
-                      if (validationError) {
-                        _this.showValidationError(validationError);
-                      }
+                    validationPromise.then(function () {
+                        _this.enableButtons();
+                        _this.enableInput();
+                        confirm(inputValue);
+                    }, function (validationError) {
+                        _this.enableButtons();
+                        _this.enableInput();
+                        if (validationError) {
+                            _this.showValidationError(validationError);
+                        }
                     });
                   } else {
-                    validationPromise.then(function(validationError) {
-                      _this.enableButtons();
-                      _this.enableInput();
-                      if (validationError) {
-                        _this.showValidationError(validationError);
-                      } else {
-                        confirm(inputValue);
-                      }
-                    }, function(error$$1) {
-                      return errorWith(error$$1);
+                    validationPromise.then(function (validationError) {
+                        _this.enableButtons();
+                        _this.enableInput();
+                        if (validationError) {
+                            _this.showValidationError(validationError);
+                        } else {
+                            confirm(inputValue);
+                        }
+                    }, function (error$$1) {
+                        return errorWith(error$$1);
                     });
                   }
                 } else {
@@ -2221,9 +2221,9 @@
         };
         if (isThenable(innerParams.inputOptions)) {
           constructor.showLoading();
-          innerParams.inputOptions.then(function(inputOptions) {
-            _this.hideLoading();
-            processInputOptions(inputOptions);
+          innerParams.inputOptions.then(function (inputOptions) {
+              _this.hideLoading();
+              processInputOptions(inputOptions);
           });
         } else if (_typeof(innerParams.inputOptions) === 'object') {
           processInputOptions(innerParams.inputOptions);
@@ -2233,10 +2233,10 @@
       } else if (['text', 'email', 'number', 'tel', 'textarea'].indexOf(innerParams.input) !== -1 && isThenable(innerParams.inputValue)) {
         constructor.showLoading();
         hide(input);
-        innerParams.inputValue.then(function(inputValue) {
-          input.value = innerParams.input === 'number' ? parseFloat(inputValue) || 0 : inputValue + '';
-          show(input);
-          _this.hideLoading();
+        innerParams.inputValue.then(function (inputValue) {
+            input.value = innerParams.input === 'number' ? parseFloat(inputValue) || 0 : inputValue + '';
+            show(input);
+            _this.hideLoading();
         }).catch(function(err) {
           error('Error in inputValue promise: ' + err);
           input.value = '';

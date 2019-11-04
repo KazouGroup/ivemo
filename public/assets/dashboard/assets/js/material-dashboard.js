@@ -670,23 +670,23 @@ md = {
             confirmButtonClass: 'btn btn-success',
             cancelButtonClass: 'btn btn-danger',
             buttonsStyling: false
-          }).then(function(result) {
+          }).then(function (result) {
 
             var eventData;
             event_title = $('#input-field').val();
 
             if (event_title) {
-              eventData = {
-                title: event_title,
-                start: start,
-                end: end
-              };
-              $calendar.fullCalendar('renderEvent', eventData, true); // stick? = true
+                eventData = {
+                    title: event_title,
+                    start: start,
+                    end: end
+                };
+                $calendar.fullCalendar('renderEvent', eventData, true); // stick? = true
             }
 
             $calendar.fullCalendar('unselect');
 
-          })
+        })
           .catch(swal.noop);
       },
       editable: true,

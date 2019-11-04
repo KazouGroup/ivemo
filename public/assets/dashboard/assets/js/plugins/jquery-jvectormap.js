@@ -767,29 +767,29 @@ jvm.SVGShapeElement.prototype.applyAttr = function(attr, value) {
 
   if (attr === 'fill' && jvm.isImageUrl(value)) {
     if (!jvm.SVGShapeElement.images[value]) {
-      jvm.whenImageLoaded(value).then(function(img) {
-        imageEl = new jvm.SVGElement('image');
-        imageEl.node.setAttributeNS('http://www.w3.org/1999/xlink', 'href', value);
-        imageEl.applyAttr('x', '0');
-        imageEl.applyAttr('y', '0');
-        imageEl.applyAttr('width', img[0].width);
-        imageEl.applyAttr('height', img[0].height);
+      jvm.whenImageLoaded(value).then(function (img) {
+          imageEl = new jvm.SVGElement('image');
+          imageEl.node.setAttributeNS('http://www.w3.org/1999/xlink', 'href', value);
+          imageEl.applyAttr('x', '0');
+          imageEl.applyAttr('y', '0');
+          imageEl.applyAttr('width', img[0].width);
+          imageEl.applyAttr('height', img[0].height);
 
-        patternEl = new jvm.SVGElement('pattern');
-        patternEl.applyAttr('id', 'image' + jvm.SVGShapeElement.imageCounter);
-        patternEl.applyAttr('x', 0);
-        patternEl.applyAttr('y', 0);
-        patternEl.applyAttr('width', img[0].width / 2);
-        patternEl.applyAttr('height', img[0].height / 2);
-        patternEl.applyAttr('viewBox', '0 0 ' + img[0].width + ' ' + img[0].height);
-        patternEl.applyAttr('patternUnits', 'userSpaceOnUse');
-        patternEl.node.appendChild(imageEl.node);
+          patternEl = new jvm.SVGElement('pattern');
+          patternEl.applyAttr('id', 'image' + jvm.SVGShapeElement.imageCounter);
+          patternEl.applyAttr('x', 0);
+          patternEl.applyAttr('y', 0);
+          patternEl.applyAttr('width', img[0].width / 2);
+          patternEl.applyAttr('height', img[0].height / 2);
+          patternEl.applyAttr('viewBox', '0 0 ' + img[0].width + ' ' + img[0].height);
+          patternEl.applyAttr('patternUnits', 'userSpaceOnUse');
+          patternEl.node.appendChild(imageEl.node);
 
-        that.canvas.defsElement.node.appendChild(patternEl.node);
+          that.canvas.defsElement.node.appendChild(patternEl.node);
 
-        jvm.SVGShapeElement.images[value] = jvm.SVGShapeElement.imageCounter++;
+          jvm.SVGShapeElement.images[value] = jvm.SVGShapeElement.imageCounter++;
 
-        that.applyAttr('fill', 'url(#image' + jvm.SVGShapeElement.images[value] + ')');
+          that.applyAttr('fill', 'url(#image' + jvm.SVGShapeElement.images[value] + ')');
       });
     } else {
       this.applyAttr('fill', 'url(#image' + jvm.SVGShapeElement.images[value] + ')');
@@ -822,17 +822,17 @@ jvm.SVGImageElement.prototype.applyAttr = function(attr, value) {
   var that = this;
 
   if (attr == 'image') {
-    jvm.whenImageLoaded(value).then(function(img) {
-      that.node.setAttributeNS('http://www.w3.org/1999/xlink', 'href', value);
-      that.width = img[0].width;
-      that.height = img[0].height;
-      that.applyAttr('width', that.width);
-      that.applyAttr('height', that.height);
+    jvm.whenImageLoaded(value).then(function (img) {
+        that.node.setAttributeNS('http://www.w3.org/1999/xlink', 'href', value);
+        that.width = img[0].width;
+        that.height = img[0].height;
+        that.applyAttr('width', that.width);
+        that.applyAttr('height', that.height);
 
-      that.applyAttr('x', that.cx - that.width / 2);
-      that.applyAttr('y', that.cy - that.height / 2);
+        that.applyAttr('x', that.cx - that.width / 2);
+        that.applyAttr('y', that.cy - that.height / 2);
 
-      jvm.$(that.node).trigger('imageloaded', [img]);
+        jvm.$(that.node).trigger('imageloaded', [img]);
     });
   } else if (attr == 'cx') {
     this.cx = value;
@@ -3369,11 +3369,11 @@ jvm.MultiMap.prototype = {
       deferred = jvm.$.Deferred();
 
     if (!this.mapsLoaded[code]) {
-      jvm.$.get(this.params.mapUrlByCode(code, this)).then(function() {
-        that.mapsLoaded[code] = true;
-        deferred.resolve();
-      }, function() {
-        deferred.reject();
+      jvm.$.get(this.params.mapUrlByCode(code, this)).then(function () {
+          that.mapsLoaded[code] = true;
+          deferred.resolve();
+      }, function () {
+          deferred.reject();
       });
     } else {
       deferred.resolve();
@@ -3390,27 +3390,27 @@ jvm.MultiMap.prototype = {
       }),
       downloadPromise = this.downloadMap(code);
 
-    focusPromise.then(function() {
-      if (downloadPromise.state() === 'pending') {
+    focusPromise.then(function () {
+        if (downloadPromise.state() === 'pending') {
         that.spinner.show();
-      }
+        }
     });
     downloadPromise.always(function() {
       that.spinner.hide();
     });
     this.drillDownPromise = jvm.$.when(downloadPromise, focusPromise);
-    this.drillDownPromise.then(function() {
-      currentMap.params.container.hide();
-      if (!that.maps[name]) {
+    this.drillDownPromise.then(function () {
+        currentMap.params.container.hide();
+        if (!that.maps[name]) {
         that.addMap(name, {
-          map: name,
-          multiMapLevel: currentMap.params.multiMapLevel + 1
+            map: name,
+            multiMapLevel: currentMap.params.multiMapLevel + 1
         });
-      } else {
+        } else {
         that.maps[name].params.container.show();
-      }
-      that.history.push(that.maps[name]);
-      that.backButton.show();
+        }
+        that.history.push(that.maps[name]);
+        that.backButton.show();
     });
   },
 
@@ -3424,19 +3424,19 @@ jvm.MultiMap.prototype = {
       x: 0.5,
       y: 0.5,
       animate: true
-    }).then(function() {
-      currentMap.params.container.hide();
-      prevMap.params.container.show();
-      prevMap.updateSize();
-      if (that.history.length === 1) {
+    }).then(function () {
+        currentMap.params.container.hide();
+        prevMap.params.container.show();
+        prevMap.updateSize();
+        if (that.history.length === 1) {
         that.backButton.hide();
-      }
-      prevMap.setFocus({
+        }
+        prevMap.setFocus({
         scale: 1,
         x: 0.5,
         y: 0.5,
         animate: true
-      });
+        });
     });
   }
 };

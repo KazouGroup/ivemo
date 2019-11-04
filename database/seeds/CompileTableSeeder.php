@@ -36,6 +36,7 @@ class CompileTableSeeder extends Seeder
         $god = User::create([
             'username' =>'bokino12',
             'name' =>'Boclair Temgoua',
+            'status_user' => 1,
             'email' => "temgoua2012@gmail.com",
             'color_name' => "success",
             "password" => bcrypt('0000000'),
@@ -65,6 +66,7 @@ class CompileTableSeeder extends Seeder
             'username' =>'randrino17',
             'name' =>'Nzeukang',
             'color_name' => "info",
+            'status_user' => 1,
             'email' => "nzeukangrandrin@gmail.com",
             "password" => bcrypt('123456789'),
             'email_verified_at' => now(),
@@ -73,7 +75,7 @@ class CompileTableSeeder extends Seeder
         $admin_user->syncRoles('super-admin');
 
 
-        factory(user::class, 10)->create();
+        factory(user::class, 100)->create();
         factory(faq::class, 100)->create();
         factory(link::class, 5)->create();
 

@@ -136,6 +136,10 @@ class FaqController extends Controller
      */
     public function update(Request $request, faq $faq)
     {
+        $this->validate($request,[
+            'title'=>'required|string',
+        ]);
+
         $faq = faq::findOrFail($faq->id);
 
 

@@ -5,11 +5,23 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Model\user;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    private $auth;
+
+    public function __construct(Guard $auth){
+        $this->middleware('auth',['except' => ['api','apiadministrator','show']]);
+        $this->auth = $auth;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +29,28 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.user.index');
     }
+
+    public function administrator()
+    {
+        return view('admin.user.index');
+    }
+
+    public function api()
+    {
+        $users = UserResource::collection(User::where('status_user',0)
+            ->latest()->get());
+        return response()->json($users,200);
+    }
+
+    public function apiadministrator()
+    {
+        $users = UserResource::collection(User::where('status_user',1)
+            ->latest()->get());
+        return response()->json($users,200);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -50,7 +82,6 @@ class UserController extends Controller
     public function show($id)
     {
         $user = new UserResource(user::where('id', $id)->findOrFail($id));
-
         return response()->json($user,200);
     }
 

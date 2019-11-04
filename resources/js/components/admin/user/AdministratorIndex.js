@@ -3,32 +3,34 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import TopNavAdmin from "../../inc/admin/TopNavAdmin";
 import NavAdmin from "../../inc/admin/NavAdmin";
 import FooterAdmin from "../../inc/admin/FooterAdmin";
-import FaqLists from "./FaqLists";
+import UserLists from "./UserLists";
 
-class FaqAdminSite extends Component {
+class AdministratorIndex extends Component {
     constructor () {
         super();
         this.state = {
-            faqs: [],
+            users: [],
         };
     }
 
     componentDidMount () {
         this.loadItems();
     }
-
     loadItems() {
-        let url = `/api/faqs/v1`;
-        axios.get(url).then(response =>
-            this.setState({
-                faqs: [...response.data],
-            }));
+        let url = `/api/administrators`;
+        fetch(url).then(res => res.json())
+            .then((result) => {
+                this.setState({
+                    users: result
+                });
+            }, (error) => {
+                this.setState({
+                    error
+                });
+            })
     }
-
-
-
     render() {
-        const { faqs } = this.state;
+        const {users} = this.state;
         return (
             <div className="wrapper">
 
@@ -46,22 +48,16 @@ class FaqAdminSite extends Component {
                                 <div className="col-md-12">
                                     <div className="card">
                                         <div className="card-body">
-                                            <div className="toolbar">
-                                                <div className="submit text-center">
-                                                    <Link to={'/dashboard/faqs/'}  className={'btn btn-success btn-raised'}>
-                                                        <i className="material-icons">forum</i>
-                                                        <b className="title_hover">FAQS</b>
-                                                    </Link>
-                                                </div>
-                                            </div>
 
-                                                {faqs.map((item) => (
-                                                    <FaqLists key={item.id} {...item}/>
+
+                                            <br/>
+                                            <br/>
+                                            <div className={'row'}>
+                                                {users.map((item) => (
+                                                    <UserLists key={item.id} {...item}/>
                                                 ))}
-
-                                            <div className="submit text-center">
-
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -74,4 +70,4 @@ class FaqAdminSite extends Component {
         );
     }
 }
-export default FaqAdminSite;
+export default AdministratorIndex;

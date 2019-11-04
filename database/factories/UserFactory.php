@@ -21,8 +21,11 @@ use Illuminate\Support\Str;
 $factory->define(user::class, function (Faker $faker) {
     return [
         'username' => $faker->unique()->name,
+        'sex' => $faker->titleFemale,
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
+        'body' => $faker->realText,
+        'status_user' => $faker->boolean,
         'color_name' => function () {
             return color::inRandomOrder()->first()->name;
         },

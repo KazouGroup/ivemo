@@ -19,9 +19,7 @@ export default class FaqView extends Component {
         axios.get(`/api/faqs/v/${faqSlug}`).then(response =>
             this.setState({
                 faq: response.data
-            })
-
-        );
+            }));
     }
     // lifecycle method
     componentDidMount() {

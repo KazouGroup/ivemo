@@ -17,8 +17,9 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('username')->unique();
             $table->string('name');
-            $table->string('sex')->nullable();
+            $table->string('sex')->default('Male');
             $table->string('color_name')->nullable();
+            $table->boolean('status_user')->nullable();
             $table->string('avatar')->nullable()->default('https://www.kazoucoin.com/assets/img/default-avatar.png');
             $table->string('avatarcover')->nullable();
             $table->string('email')->unique();

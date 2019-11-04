@@ -18,9 +18,7 @@ export default class NavAdmin extends Component {
                 name: response.data.name,
                 avatar: response.data.avatar,
                 created_at: response.data.created_at,
-            })
-
-        );
+            }));
     }
     // lifecycle method
     componentDidMount() {
@@ -127,6 +125,42 @@ export default class NavAdmin extends Component {
                                             <span className="sidebar-mini"> P </span>
                                             <span className="sidebar-normal"> Pricing </span>
                                         </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li className="nav-item ">
+                            <a className="nav-link" data-toggle="collapse" href="#pagesAdministration">
+                                <i className="material-icons">info</i>
+                                <p> Dashboard
+                                    <b className="caret"></b>
+                                </p>
+                            </a>
+                            <div className="collapse" id="pagesAdministration">
+                                <ul className="nav">
+                                    <li  className="nav-item ">
+                                        <a className="nav-link" data-toggle="collapse" href="#aidesUsers">
+                                            <span className="sidebar-mini"><b>UR</b></span>
+                                            <span className="sidebar-normal"><b>Users</b>
+                                          <b className="caret"></b>
+                                        </span>
+                                        </a>
+                                        <div className="collapse" id="aidesUsers">
+                                            <ul className="nav">
+                                                <li className="nav-item ">
+                                                    <Link className="nav-link" to={'/dashboard/users/'}>
+                                                        <span className="sidebar-mini"> UR </span>
+                                                        <span className="sidebar-normal"> Users </span>
+                                                    </Link>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li className="nav-item ">
+                                        <Link className="nav-link" to={'/dashboard/administrators'}>
+                                            <span className="sidebar-mini"> AM </span>
+                                            <span className="sidebar-normal"> Administrators </span>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>

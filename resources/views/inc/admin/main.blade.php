@@ -9,10 +9,12 @@
 
     @can('dashboard')
 
+        @if(auth()->user()->status_user === 1)
         @section('content')
 
 
         @show
+        @endif
 
     @endcan
 

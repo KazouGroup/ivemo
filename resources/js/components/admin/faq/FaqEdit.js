@@ -118,9 +118,7 @@ export default class FaqEdit extends Component {
                 //faq: response.data,
                 title: response.data.title,
                 body: response.data.body,
-            })
-
-        );
+            }));
     }
     // lifecycle method
     componentDidMount() {
@@ -163,8 +161,7 @@ export default class FaqEdit extends Component {
                                                             <label className="bmd-label-floating">
 
                                                             </label>
-                                                            <input required={'required'}
-                                                                   id='title'
+                                                            <input id='title'
                                                                    type='text'
                                                                    className={`form-control ${this.hasErrorFor('title') ? 'is-invalid' : ''}`}
                                                                    name='title'
