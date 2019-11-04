@@ -74,7 +74,7 @@ class CompileTableSeeder extends Seeder
 
 
         factory(user::class, 10)->create();
-        factory(faq::class, 500)->create();
+        factory(faq::class, 100)->create();
         factory(link::class, 5)->create();
 
         // Output

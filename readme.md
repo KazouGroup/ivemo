@@ -6,7 +6,7 @@
 
 Cloner le fichier puis faire un ``` composer update ``` si vous ete sur window faite ``` composer install --ignore-platform-reqs ```
 
-Ensuite faite un <code>npm i</code> et <code>npm run watch</code>
+Ensuite faite un ``` npm i ``` et ``` npm run watch ```
 
 Configurer votre votre fichier ``` .env``` en duplicant celle de ``` .env.example ```
 

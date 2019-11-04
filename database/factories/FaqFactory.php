@@ -22,6 +22,7 @@ $factory->define(faq::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence(4),
         'ip' => $faker->ipv4,
+        'status' => $faker->boolean,
         'body' => $faker->realText,
         'user_id' => function () {
             return user::inRandomOrder()->first()->id;
