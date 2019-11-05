@@ -46,17 +46,18 @@ class CompileTableSeeder extends Seeder
         $god->syncRoles('super-admin');
 
 
-        // Insert color to the database
-        $colors = array(
-            array('name' => 'danger'),
-            array('name' => 'info'),
-            array('name' => 'success'),
-            array('name' => 'warning'),
-            array('name' => 'rose'),
-            array('name' => 'dark'),
-            array('name' => 'primary'),
-        );
-        DB::table('colors') -> insert($colors);
+        $colors = [
+            ['name' => 'danger', 'slug' => 'success'],
+            ['name' => 'info', 'slug' => 'success'],
+            ['name' => 'success ', 'slug' => 'success '],
+            ['name' => 'warning ', 'slug' => 'warning '],
+            ['name' => 'rose ', 'slug' => 'rose '],
+            ['name' => 'dark ', 'slug' => 'dark '],
+            ['name' => 'primary ', 'slug' => 'primary '],
+        ];
+
+        foreach($colors as $item)
+            color::create($item);
     }
 
     private function addTestData()
