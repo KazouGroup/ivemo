@@ -142,7 +142,29 @@ class FaqIndex extends Component {
             });
         })
     }
+    mydatatables(){
+        $( function () {
+            $('#datatables').DataTable({
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+                order: [[ 0, 'asc' ], [ 3, 'desc' ]],
+                responsive: true,
+                destroy: true,
+                retrieve:true,
+                autoFill: true,
+                colReorder: true,
+                language: {
+                    search: "<i class='material-icons'>search</i>",
+                    searchPlaceholder: "Search Record",
+                },
+                "sPaginationType": "full_numbers",
 
+            });
+        });
+    }
     loadItems() {
         let url = `/api/faqs`;
         fetch(url).then(res => res.json())
@@ -150,6 +172,7 @@ class FaqIndex extends Component {
                 this.setState({
                     faqs: result
                 });
+                this.mydatatables();
             }, (error) => {
                 this.setState({
                     error
@@ -161,8 +184,8 @@ class FaqIndex extends Component {
     }
     componentDidMount () {
         this.loadItems();
-    }
 
+    }
     render() {
         let { faqs } = this.state;
         return (

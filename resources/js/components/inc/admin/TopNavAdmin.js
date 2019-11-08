@@ -61,8 +61,8 @@ export default class TopNavAdmin extends Component {
                                 </a>
                                 <div className="dropdown-menu dropdown-menu-right"
                                      aria-labelledby="navbarDropdownProfile">
-                                    <a className="dropdown-item" href="#">Profile</a>
-                                    <a className="dropdown-item" href="#">Settings</a>
+                                    <Link to={'/dashboard/profile/'} className="dropdown-item">Profile</Link>
+                                    <Link to={'/dashboard/profile/edit/'} className="dropdown-item">Settings</Link>
                                     <div className="dropdown-divider"></div>
                                     <a className="dropdown-item" href="#">Log out</a>
                                 </div>

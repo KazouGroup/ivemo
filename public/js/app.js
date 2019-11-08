@@ -102003,6 +102003,27 @@ function (_Component) {
       });
     }
   }, {
+    key: "mydatatables",
+    value: function mydatatables() {
+      $(function () {
+        $('#datatables').DataTable({
+          "pagingType": "full_numbers",
+          "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+          order: [[0, 'asc'], [3, 'desc']],
+          responsive: true,
+          destroy: true,
+          retrieve: true,
+          autoFill: true,
+          colReorder: true,
+          language: {
+            search: "<i class='material-icons'>search</i>",
+            searchPlaceholder: "Search Record"
+          },
+          "sPaginationType": "full_numbers"
+        });
+      });
+    }
+  }, {
     key: "loadItems",
     value: function loadItems() {
       var _this5 = this;
@@ -102014,6 +102035,8 @@ function (_Component) {
         _this5.setState({
           faqs: result
         });
+
+        _this5.mydatatables();
       }, function (error) {
         _this5.setState({
           error: error
@@ -104524,12 +104547,12 @@ function (_Component) {
       }, "Account")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dropdown-menu dropdown-menu-right",
         "aria-labelledby": "navbarDropdownProfile"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "dropdown-item",
-        href: "#"
-      }, "Profile"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "dropdown-item",
-        href: "#"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: '/dashboard/profile/',
+        className: "dropdown-item"
+      }, "Profile"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: '/dashboard/profile/edit/',
+        className: "dropdown-item"
       }, "Settings"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dropdown-divider"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
