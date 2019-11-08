@@ -15,7 +15,8 @@ export default class NavAdmin extends Component {
 
         axios.get(`/account/user`).then(response =>
             this.setState({
-                name: response.data.name,
+                first_name: response.data.first_name,
+                last_name: response.data.last_name,
                 avatar: response.data.avatar,
                 created_at: response.data.created_at,
             }));
@@ -44,7 +45,7 @@ export default class NavAdmin extends Component {
                         <div className="user-info">
                             <a data-toggle="collapse" href="#collapseExample" className="username">
                               <span>
-                                  {this.state.name}
+                                  {this.state.first_name} {this.state.last_name}
                                 <b className="caret"></b>
                               </span>
                             </a>

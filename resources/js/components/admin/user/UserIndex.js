@@ -49,7 +49,15 @@ class UserIndex extends Component {
                                 <div className="col-md-12">
                                     <div className="card">
                                         <div className="card-body">
+                                            <div className="toolbar">
+                                                <div className="submit text-center">
+                                                    <Link to={'/dashboard/users/create/'}  className={'btn btn-success btn-raised'}>
+                                                        <i className="material-icons">forum</i>
+                                                        <b className="title_hover">User</b>
+                                                    </Link>
+                                                </div>
 
+                                            </div>
                                             <br/>
                                             <br/>
                                             <div className={'row'}>

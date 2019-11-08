@@ -21,8 +21,7 @@ use Illuminate\Support\Str;
 $factory->define(link::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence(4),
-        'user_id' => function () {
-            return user::inRandomOrder()->first()->id;
-        }
+        'user_id' => user::inRandomOrder()->first()->id,
+
     ];
 });

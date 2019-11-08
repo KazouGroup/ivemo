@@ -305,7 +305,7 @@ class FaqIndex extends Component {
                                                                                 title="Administrator Offline">
                                                                         </button>
                                                                     }
-                                                                    { (item.user.name.length > 15 ? item.user.name.substring(0,15)+ "..." : item.user.name)  }
+                                                                    { (item.user.first_name.length > 15 ? item.user.first_name.name.substring(0,15)+ "..." : item.user.first_name.name)  }
                                                                  </Link>
                                                             </td>
                                                             <td><b>{moment(item.updated_at).format('DD/MM/YYYY')}</b></td>

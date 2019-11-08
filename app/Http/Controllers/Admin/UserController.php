@@ -8,6 +8,7 @@ use App\Model\user;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -59,7 +60,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.user.create');
     }
 
     /**
@@ -70,7 +71,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'first_name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255','alpha_dash','unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+
+        ]);
+
+        $user = user::create([
+            'first_name' => $request['first_name'],
+            'username' => $request['username'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+        ]);
+
+        return response()->json($user,200);
     }
 
     /**
@@ -114,9 +130,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(user $user)
     {
-        //
+        $data = [
+            'user' => $user
+        ];
+        return view('admin.user.show',$data);
     }
 
     /**
@@ -128,7 +147,27 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //dd(request()->all());
+        $this->validate($request, [
+            'username' => 'required|string|unique:users,username,' . $id,
+            'email' => 'required|email|unique:users,email,' . $id,
+            "sex" => "required|in:Female,Male",
+        ]);
+
+        $user = user::find($id);
+        $user->username = $request->username;
+        $user->first_name = $request->first_name;
+        $user->status_user = $request->status_user;
+        $user->status_user = $request->status_user;
+        $user->email = $request->email;
+        $user->sex = $request->sex;
+
+        //$roles = $request->input('roles') ? $request->input('roles') : [];
+        //$user->role_user = $request->role_user;
+
+        $user->save();
+
+        return response()->json($user,200);
     }
 
     /**

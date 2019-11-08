@@ -20,15 +20,14 @@ use Illuminate\Support\Str;
 
 $factory->define(user::class, function (Faker $faker) {
     return [
-        'username' => $faker->unique()->name,
+        'username' => $faker->unique()->userName,
         'sex' => $faker->titleFemale,
-        'name' => $faker->name,
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
         'body' => $faker->realText,
         'status_user' => $faker->boolean,
-        'color_name' => function () {
-            return color::inRandomOrder()->first()->name;
-        },
+        'color_name' => color::inRandomOrder()->first()->name,
         'email_verified_at' => now(),
         'avatar' => $faker->imageUrl($width = 400, $height = 400),
         'avatarcover' => $faker->imageUrl,

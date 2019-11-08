@@ -65,7 +65,7 @@ export default class ProfileUserAdmin extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">perm_identity</i>
                                             </div>
-                                            <h4 className="card-title">{user.name}
+                                            <h4 className="card-title">{user.first_name}
                                             </h4>
                                         </div>
                                         <div className="card-body">
@@ -133,7 +133,7 @@ export default class ProfileUserAdmin extends Component {
                                         </div>
                                         <div className="card-body">
                                             <h6 className="card-category text-gray">CEO / Co-Founder</h6>
-                                            <h4 className="card-title" dangerouslySetInnerHTML={{__html: user.name}}/>
+                                            <h4 className="card-title" dangerouslySetInnerHTML={{__html: user.first_name}}/>
                                             <p className="card-description" dangerouslySetInnerHTML={{__html: user.body}}/>
                                             <a href="#pablo" className="btn btn-primary btn-sm ">Follow</a>
                                         </div>

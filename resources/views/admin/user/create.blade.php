@@ -1,5 +1,5 @@
 @extends('inc.admin.main')
-@section('title', '| Faqs Create')
+@section('title', '| User Create')
 
 
 @section('style')

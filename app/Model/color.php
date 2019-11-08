@@ -53,7 +53,7 @@ class color extends Model implements Auditable
     public function sluggable()
     {
         return [
-            'color_name' => [
+            'slug' => [
                 'source' => 'name',
                 'separator' => '+'
             ]

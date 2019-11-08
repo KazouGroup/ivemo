@@ -35,7 +35,7 @@ class CompileTableSeeder extends Seeder
 
         $god = User::create([
             'username' =>'bokino12',
-            'name' =>'Boclair Temgoua',
+            'first_name' =>'Boclair Temgoua',
             'status_user' => 1,
             'email' => "temgoua2012@gmail.com",
             'color_name' => "success",
@@ -47,13 +47,13 @@ class CompileTableSeeder extends Seeder
 
 
         $colors = [
-            ['name' => 'danger', 'slug' => 'success'],
-            ['name' => 'info', 'slug' => 'success'],
-            ['name' => 'success ', 'slug' => 'success '],
-            ['name' => 'warning ', 'slug' => 'warning '],
-            ['name' => 'rose ', 'slug' => 'rose '],
-            ['name' => 'dark ', 'slug' => 'dark '],
-            ['name' => 'primary ', 'slug' => 'primary '],
+            ['name' => 'danger','user_id' => 1],
+            ['name' => 'info', 'user_id' => 1],
+            ['name' => 'success ', 'user_id' => 1],
+            ['name' => 'warning ', 'user_id' => 1],
+            ['name' => 'rose ', 'user_id' => 1],
+            ['name' => 'dark ','user_id' => 1],
+            ['name' => 'primary ','user_id' => 1],
         ];
 
         foreach($colors as $item)
@@ -65,7 +65,7 @@ class CompileTableSeeder extends Seeder
         // Seeds
         $admin_user = User::create([
             'username' =>'randrino17',
-            'name' =>'Nzeukang',
+            'first_name' =>'Nzeukang',
             'color_name' => "info",
             'status_user' => 1,
             'email' => "nzeukangrandrin@gmail.com",

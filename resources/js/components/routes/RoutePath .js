@@ -13,6 +13,7 @@ import ProfileUserAdmin from "../admin/profile/ProfileUserAdmin";
 import UserIndex from "../admin/user/UserIndex";
 import AdministratorIndex from "../admin/user/AdministratorIndex";
 import UserEdit from "../admin/user/UserEdit";
+import UserCreate from "../admin/user/UserCreate";
 
 export default class RoutePath  extends Component{
     render(){
@@ -22,6 +23,7 @@ export default class RoutePath  extends Component{
                     <Route exact path="/dashboard/" component={DashboardIndex} />
                     <Route exact path="/dashboard/administrators/" component={AdministratorIndex} />
                     <Route exact path="/dashboard/users/" component={UserIndex} />
+                    <Route exact path="/dashboard/users/create/" component={UserCreate} />
                     <Route exact path="/dashboard/users/:user/edit" component={UserEdit} />
                     <Route exact path="/dashboard/profile/" component={ProfileUserAdmin} />
                     <Route exact path="/dashboard/profile/edit/" component={ProfileUserEdit} />
