@@ -738,14 +738,14 @@ demo = {
         cancelButtonClass: 'btn btn-danger',
         confirmButtonText: 'Yes, delete it!',
         buttonsStyling: false
-      }).then(function() {
-        swal({
-          title: 'Deleted!',
-          text: 'Your file has been deleted.',
-          type: 'success',
-          confirmButtonClass: "btn btn-success",
-          buttonsStyling: false
-        })
+      }).then(function () {
+          swal({
+              title: 'Deleted!',
+              text: 'Your file has been deleted.',
+              type: 'success',
+              confirmButtonClass: "btn btn-success",
+              buttonsStyling: false
+          })
       }).catch(swal.noop)
     } else if (type == 'warning-message-and-cancel') {
       swal({
@@ -758,25 +758,25 @@ demo = {
         confirmButtonClass: "btn btn-success",
         cancelButtonClass: "btn btn-danger",
         buttonsStyling: false
-      }).then(function() {
-        swal({
-          title: 'Deleted!',
-          text: 'Your imaginary file has been deleted.',
-          type: 'success',
-          confirmButtonClass: "btn btn-success",
-          buttonsStyling: false
-        }).catch(swal.noop)
-      }, function(dismiss) {
-        // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
-        if (dismiss === 'cancel') {
+      }).then(function () {
           swal({
-            title: 'Cancelled',
-            text: 'Your imaginary file is safe :)',
-            type: 'error',
-            confirmButtonClass: "btn btn-info",
-            buttonsStyling: false
+              title: 'Deleted!',
+              text: 'Your imaginary file has been deleted.',
+              type: 'success',
+              confirmButtonClass: "btn btn-success",
+              buttonsStyling: false
           }).catch(swal.noop)
-        }
+      }, function (dismiss) {
+// dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+          if (dismiss === 'cancel') {
+              swal({
+      title: 'Cancelled',
+      text: 'Your imaginary file is safe :)',
+      type: 'error',
+      confirmButtonClass: "btn btn-info",
+      buttonsStyling: false
+              }).catch(swal.noop)
+          }
       })
 
     } else if (type == 'custom-html') {
@@ -806,16 +806,16 @@ demo = {
         confirmButtonClass: 'btn btn-success',
         cancelButtonClass: 'btn btn-danger',
         buttonsStyling: false
-      }).then(function(result) {
-        swal({
-          type: 'success',
-          html: 'You entered: <strong>' +
+      }).then(function (result) {
+          swal({
+              type: 'success',
+              html: 'You entered: <strong>' +
             $('#input-field').val() +
             '</strong>',
-          confirmButtonClass: 'btn btn-success',
-          buttonsStyling: false
+              confirmButtonClass: 'btn btn-success',
+              buttonsStyling: false
 
-        })
+          })
       }).catch(swal.noop)
     }
   },

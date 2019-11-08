@@ -16,12 +16,16 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('username')->unique();
-            $table->string('name');
-            $table->string('sex')->nullable();
+            $table->string('first_name');
+            $table->string('last_name')->nullable();
+            $table->string('sex')->default('Male');
+            $table->string('color_name')->nullable();
+            $table->boolean('status_user')->nullable();
             $table->string('avatar')->nullable()->default('https://www.kazoucoin.com/assets/img/default-avatar.png');
             $table->string('avatarcover')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->longText('body')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

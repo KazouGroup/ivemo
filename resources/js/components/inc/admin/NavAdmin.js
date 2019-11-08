@@ -15,12 +15,11 @@ export default class NavAdmin extends Component {
 
         axios.get(`/account/user`).then(response =>
             this.setState({
-                name: response.data.name,
+                first_name: response.data.first_name,
+                last_name: response.data.last_name,
                 avatar: response.data.avatar,
                 created_at: response.data.created_at,
-            })
-
-        );
+            }));
     }
     // lifecycle method
     componentDidMount() {
@@ -46,20 +45,20 @@ export default class NavAdmin extends Component {
                         <div className="user-info">
                             <a data-toggle="collapse" href="#collapseExample" className="username">
                               <span>
-                                  {this.state.name}
+                                  {this.state.first_name} {this.state.last_name}
                                 <b className="caret"></b>
                               </span>
                             </a>
                             <div className="collapse" id="collapseExample">
                                 <ul className="nav">
                                     <li className="nav-item">
-                                        <Link className="nav-link" to={'/dashboard/'}>
+                                        <Link className="nav-link" to={'/dashboard/profile/'}>
                                             <span className="sidebar-mini"> MP </span>
                                             <span className="sidebar-normal"> My Profile </span>
                                         </Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link className="nav-link" to={'/dashboard/'}>
+                                        <Link className="nav-link" to={'/dashboard/profile/edit/'}>
                                             <span className="sidebar-mini"> EP </span>
                                             <span className="sidebar-normal"> Edit Profile </span>
                                         </Link>
@@ -90,7 +89,7 @@ export default class NavAdmin extends Component {
                     </div>
                     <ul className="nav">
                         <li className="nav-item">
-                            <NavLink className="nav-link" to={'/dashboard'}>
+                            <NavLink className="nav-link" to={'/dashboard/'}>
                                 <i className="material-icons">dashboard</i>
                                 <p> Dashboard </p>
                             </NavLink>
@@ -127,6 +126,42 @@ export default class NavAdmin extends Component {
                                             <span className="sidebar-mini"> P </span>
                                             <span className="sidebar-normal"> Pricing </span>
                                         </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li className="nav-item ">
+                            <a className="nav-link" data-toggle="collapse" href="#pagesAdministration">
+                                <i className="material-icons">info</i>
+                                <p> Dashboard
+                                    <b className="caret"></b>
+                                </p>
+                            </a>
+                            <div className="collapse" id="pagesAdministration">
+                                <ul className="nav">
+                                    <li  className="nav-item ">
+                                        <a className="nav-link" data-toggle="collapse" href="#aidesUsers">
+                                            <span className="sidebar-mini"><b>UR</b></span>
+                                            <span className="sidebar-normal"><b>Users</b>
+                                          <b className="caret"></b>
+                                        </span>
+                                        </a>
+                                        <div className="collapse" id="aidesUsers">
+                                            <ul className="nav">
+                                                <li className="nav-item ">
+                                                    <Link className="nav-link" to={'/dashboard/users/'}>
+                                                        <span className="sidebar-mini"> UR </span>
+                                                        <span className="sidebar-normal"> Users </span>
+                                                    </Link>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li className="nav-item ">
+                                        <Link className="nav-link" to={'/dashboard/administrators'}>
+                                            <span className="sidebar-mini"> AM </span>
+                                            <span className="sidebar-normal"> Administrators </span>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>

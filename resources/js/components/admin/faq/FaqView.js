@@ -10,8 +10,6 @@ export default class FaqView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: '',
-            body: '',
             faq: [],
         };
     }
@@ -20,17 +18,15 @@ export default class FaqView extends Component {
         let faqSlug = this.props.match.params.slug;
         axios.get(`/api/faqs/v/${faqSlug}`).then(response =>
             this.setState({
-                title: response.data.title,
-                body: response.data.body,
-            })
-
-        );
+                faq: response.data
+            }));
     }
     // lifecycle method
     componentDidMount() {
         this.loadItems();
     }
     render() {
+        const {faq} = this.state;
         return (
             <div className="wrapper">
 
@@ -63,14 +59,14 @@ export default class FaqView extends Component {
                                                         <h5 className="mb-0">
                                                             <a data-toggle="collapse" href="#collapseOne"
                                                                aria-expanded="true" aria-controls="collapseOne">
-                                                                {this.state.title}
+                                                                {faq.title}
                                                                 <i className="material-icons">keyboard_arrow_down</i>
                                                             </a>
                                                         </h5>
                                                     </div>
                                                     <div id="collapseOne" className="collapse show" role="tabpanel"
                                                          aria-labelledby="headingOne" data-parent="#accordion">
-                                                        <div className="card-body text-justify" dangerouslySetInnerHTML={{__html: this.state.body}}/>
+                                                        <div className="card-body text-justify" dangerouslySetInnerHTML={{__html: faq.body}}/>
                                                     </div>
                                                 </div>
                                             </div>

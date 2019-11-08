@@ -1,7 +1,7 @@
 ## KazouGroup 
 
-- **[Kazoutech](http://kazoutech.com)**
-- **[Kazoucoin](http://kazoucoin.com)**
+- **[KazouTech](http://kazoutech.com)**
+- **[KazouCoin](http://kazoucoin.com)**
 ## Configuration
 
 1- Clonez le projet en http ou ssh

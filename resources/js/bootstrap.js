@@ -16,6 +16,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * allows your team to easily build robust real-time web applications.
  */
 
+window.bus = window.user.user;
+/* Ici je recupere tous les information lier a l'utilisateur connecter */
+import Auth from './api/auth'
+
+window.user.user = new Auth(window.user);
+
+//console.log(window.bus);
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
  * all outgoing HTTP requests automatically have it attached. This is just

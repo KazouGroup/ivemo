@@ -69,6 +69,7 @@
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/dashboard') }}">Dasboard</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -81,7 +82,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Ivemo
                 </div>
 
                 <div class="links">

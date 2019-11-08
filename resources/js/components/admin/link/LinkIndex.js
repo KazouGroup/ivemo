@@ -37,7 +37,7 @@ class FaqIndex extends Component {
             // remove from local state
             let isNotId = faq => faq.id !== id;
             let updatedItems = this.state.faqs.props(isNotId);
-            this.setState({ faqs: updatedItems });
+            this.setState({faqs: updatedItems});
         })
     }
     // handle delete
@@ -61,7 +61,7 @@ class FaqIndex extends Component {
                 // remove from local state
                 let isNotId = faq => faq.id !== id;
                 let updatedItems = this.state.faqs.filter(isNotId);
-                this.setState({ faqs: updatedItems });
+                this.setState({faqs: updatedItems});
 
                 //Envoyer la requet au server
                 axios.delete(`/dashboard/faqs/${id}`).then(() => {
@@ -69,7 +69,8 @@ class FaqIndex extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update FAQ',
-                            message: 'The data FAQ has ben deleted successfully'},
+                            message: 'The data FAQ has ben deleted successfully'
+                        },
                         {
                             allow_dismiss: false,
                             type: 'primary',
@@ -110,8 +111,7 @@ class FaqIndex extends Component {
         axios.get(`/api/faqs`).then(response =>
             this.setState({
                 faqs: [...response.data],
-            }),
-        );
+            }));
     }
 
     componentDidMount () {

@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import TopNavAdmin from "../../inc/admin/TopNavAdmin";
 import NavAdmin from "../../inc/admin/NavAdmin";
 import FooterAdmin from "../../inc/admin/FooterAdmin";
 
 export default class FaqCreate extends Component {
+    constructor(props) {
+        super(props);
 
-    constructor() {
-        super();
         this.createItem = this.createItem.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.handleChangeBody = this.handleChangeBody.bind(this);
@@ -19,15 +19,14 @@ export default class FaqCreate extends Component {
             body: '',
             errors: []
         };
-
         this.modules = {
             toolbar: [
-                [{ 'font': [] }],
-                [{ 'size': ['small', false, 'large', 'huge'] }],
+                [{'font': []}],
+                [{'size': ['small', false, 'large', 'huge']}],
                 ['bold', 'italic', 'underline'],
                 [{'list': 'ordered'}, {'list': 'bullet'}],
-                [{ 'align': [] }],
-                [{ 'color': [] }, { 'background': [] }],
+                [{'align': []}],
+                [{'color': []}, {'background': []}],
                 ['clean']
             ]
         };
@@ -42,17 +41,20 @@ export default class FaqCreate extends Component {
     }
 
     handleChangeBody(value) {
-        this.setState({ body: value })
+        this.setState({body: value})
     }
-    handleFieldChange (event) {
+
+    handleFieldChange(event) {
         this.setState({
             [event.target.name]: event.target.value
         })
     }
-    hasErrorFor (field) {
+
+    hasErrorFor(field) {
         return !!this.state.errors[field]
     }
-    renderErrorFor (field) {
+
+    renderErrorFor(field) {
         if (this.hasErrorFor(field)) {
             return (
                 <span className='invalid-feedback'>
@@ -61,6 +63,7 @@ export default class FaqCreate extends Component {
             )
         }
     }
+
     createItem(e) {
         e.preventDefault();
 
@@ -122,9 +125,9 @@ export default class FaqCreate extends Component {
                                                     <i className="material-icons">chat</i>
                                                 </div>
                                                 <br/>
-                                                    <h4 className="card-title" ><b>Create</b> -
-                                                        <small className="category"> New Faqs</small>
-                                                    </h4>
+                                                <h4 className="card-title"><b>Create</b> -
+                                                    <small className="category"> New Faqs</small>
+                                                </h4>
                                             </div>
                                         </div>
                                         <div className="card-body">
@@ -137,12 +140,12 @@ export default class FaqCreate extends Component {
                                                                 Title
                                                             </label>
                                                             <input required={'required'}
-                                                                id='title'
-                                                                type='text'
-                                                                className={`form-control ${this.hasErrorFor('title') ? 'is-invalid' : ''}`}
-                                                                name='title'
-                                                                value={this.state.title}
-                                                                onChange={this.handleFieldChange}
+                                                                   id='title'
+                                                                   type='text'
+                                                                   className={`form-control ${this.hasErrorFor('title') ? 'is-invalid' : ''}`}
+                                                                   name='title'
+                                                                   value={this.state.title}
+                                                                   onChange={this.handleFieldChange}
                                                             />
                                                             {this.renderErrorFor('title')}
                                                         </div>
@@ -156,35 +159,38 @@ export default class FaqCreate extends Component {
                                                             </label>
                                                             <br/>
                                                             <ReactQuill theme="snow" modules={this.modules}
-                                                                        formats={this.formats}  value={this.state.body || ''} onChange={this.handleChangeBody}/>
-                                                                <div className="form-check">
-                                                                    <label className="form-check-label pull-right">
-                                                                        You can use the
-                                                                        <a href="https://help.github.com/articles/getting-started-with-writing-and-formatting-on-github/"
-                                                                           className="text-danger" target="_blank">
-                                                                            Markdown here
-                                                                        </a>
-                                                                        <span className="form-check-sign"></span>
-                                                                    </label>
-                                                                </div>
-                                                                {this.renderErrorFor('body')}
+                                                                        formats={this.formats}
+                                                                        value={this.state.body || ''}
+                                                                        onChange={this.handleChangeBody}/>
+                                                            <div className="form-check">
+                                                                <label className="form-check-label pull-right">
+                                                                    You can use the
+                                                                    <a href="https://help.github.com/articles/getting-started-with-writing-and-formatting-on-github/"
+                                                                       className="text-danger" target="_blank">
+                                                                        Markdown here
+                                                                    </a>
+                                                                    <span className="form-check-sign"></span>
+                                                                </label>
+                                                            </div>
+                                                            {this.renderErrorFor('body')}
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <hr/>
-                                                    <div className="submit">
-                                                        <div className="text-center">
-                                                            <Link to={'/dashboard/faqs'} className="btn btn-danger" id="button_hover">
-                                                                <i className="material-icons">chevron_left</i>
-                                                                <b className="title_hover">Back</b>
-                                                            </Link>
-                                                            <button id="button_hover" type="submit"
-                                                                    className="btn btn-success btn-raised">
-                                                                <i className="material-icons">save_alt</i>
-                                                                <b className="title_hover">Save</b>
-                                                            </button>
-                                                        </div>
+                                                <div className="submit">
+                                                    <div className="text-center">
+                                                        <Link to={'/dashboard/faqs'} className="btn btn-danger"
+                                                              id="button_hover">
+                                                            <i className="material-icons">chevron_left</i>
+                                                            <b className="title_hover">Back</b>
+                                                        </Link>
+                                                        <button id="button_hover" type="submit"
+                                                                className="btn btn-success btn-raised">
+                                                            <i className="material-icons">save_alt</i>
+                                                            <b className="title_hover">Save</b>
+                                                        </button>
                                                     </div>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
