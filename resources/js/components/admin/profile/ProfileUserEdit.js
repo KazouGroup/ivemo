@@ -172,7 +172,7 @@ export default class ProfileUserEdit extends Component {
                                                                    type='text'
                                                                    className={`form-control ${this.hasErrorFor('username') ? 'is-invalid' : ''}`}
                                                                    name='username'
-                                                                   value={this.state.username}
+                                                                   value={this.state.username || ""}
                                                                    onChange={this.handleFieldChange}
                                                             />
                                                             {this.renderErrorFor('username')}
@@ -186,7 +186,7 @@ export default class ProfileUserEdit extends Component {
                                                                    type='email'
                                                                    className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
                                                                    name='email'
-                                                                   value={this.state.email}
+                                                                   value={this.state.email || ""}
                                                                    onChange={this.handleFieldChange}
                                                             />
                                                             {this.renderErrorFor('email')}
@@ -202,7 +202,7 @@ export default class ProfileUserEdit extends Component {
                                                                    type='text'
                                                                    className={`form-control ${this.hasErrorFor('first_name') ? 'is-invalid' : ''}`}
                                                                    name='first_name'
-                                                                   value={this.state.first_name}
+                                                                   value={this.state.first_name || ""}
                                                                    onChange={this.handleFieldChange}
                                                             />
                                                             {this.renderErrorFor('first_name')}
@@ -215,7 +215,7 @@ export default class ProfileUserEdit extends Component {
                                                                    type='text'
                                                                    className={`form-control ${this.hasErrorFor('last_name') ? 'is-invalid' : ''}`}
                                                                    name='last_name'
-                                                                   value={this.state.last_name}
+                                                                   value={this.state.last_name || ""}
                                                                    onChange={this.handleFieldChange}
                                                             />
                                                             {this.renderErrorFor('last_name')}
@@ -246,9 +246,6 @@ export default class ProfileUserEdit extends Component {
                                                     </div>
                                                 </div>
                                                 <div className="text-center">
-                                                    <Link to={'/dashboard/users/p/datatables/'} className={`btn  pull-center btn-secondary`}>
-                                                        Cancel
-                                                    </Link>
                                                     <button type="submit" className={`btn  pull-center btn-${this.state.color_name}`}>
                                                         Update Profile
                                                     </button>

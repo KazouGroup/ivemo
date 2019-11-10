@@ -25,6 +25,13 @@ const UserLists= (props)=>
                     :
                     <h6><span className="badge badge-danger" title="User online">Offline</span></h6>
                 }
+                <h6>
+                    {props.roles.map((role,index) => (
+                    <span key={index}  className="badge badge-success">
+                    <b>{role}</b>
+                    </span>
+                    ))}
+                </h6>
                 <h4 className="card-title"><b>{props.first_name} {props.last_name}</b></h4>
                 <h4 className="card-title"><b>Sex:</b> {props.sex}</h4>
                 <h4 className="card-title"><b>Age:</b> 12 ans</h4>

@@ -175,6 +175,7 @@ class AdministratorDatatables extends Component {
                                                     <tr>
                                                         <th><b>Avatar</b></th>
                                                         <th><b>First Name</b></th>
+                                                        <th><b>Role</b></th>
                                                         <th><b>Last Updated</b></th>
                                                         <th className="disabled-sorting text-right">Actions</th>
                                                     </tr>
@@ -183,6 +184,7 @@ class AdministratorDatatables extends Component {
                                                     <tr>
                                                         <th>Avatar</th>
                                                         <th>First Name</th>
+                                                        <th>Role</th>
                                                         <th>Last Updated</th>
                                                         <th className="text-right">Actions</th>
                                                     </tr>
@@ -212,8 +214,14 @@ class AdministratorDatatables extends Component {
                                                                     {(item.first_name.length > 15 ? item.first_name.substring(0, 15) + "..." : item.first_name)}
                                                                 </Link>
                                                             </td>
-                                                            <td><b>{moment(item.created_at).format('DD/MM/YYYY')}</b>
+                                                            <td>
+                                                                {item.roles.map((role,index) => (
+                                                                    <span key={index}  className="badge badge-success">
+                                                                    <b>{role}</b>
+                                                                    </span>
+                                                                ))}
                                                             </td>
+                                                            <td><b>{moment(item.created_at).format('DD/MM/YYYY')}</b></td>
                                                             <td className="text-right">
 
                                                                 <button type="button" onClick={() => this.sendItem(item.id)}

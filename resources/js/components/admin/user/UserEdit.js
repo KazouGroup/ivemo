@@ -4,6 +4,7 @@ import ReactQuill from 'react-quill';
 import TopNavAdmin from "../../inc/admin/TopNavAdmin";
 import NavAdmin from "../../inc/admin/NavAdmin";
 import FooterAdmin from "../../inc/admin/FooterAdmin";
+import UserLists from "./UserLists";
 
 class UserEdit extends Component {
 
@@ -18,6 +19,8 @@ class UserEdit extends Component {
             email: '',
             body: '',
             sex: '',
+            roles: '',
+            allroles: [],
 
             errors: [],
         };
@@ -83,6 +86,7 @@ class UserEdit extends Component {
             last_name: this.state.last_name,
             body: this.state.body,
             sex: this.state.sex,
+            roles: this.state.roles,
         };
         axios.put(`/dashboard/users/${userId}`, user).then(() => {
 
@@ -136,6 +140,11 @@ class UserEdit extends Component {
                 sex: response.data.sex,
                 color_name: response.data.color_name,
                 status_user: response.data.status_user,
+                roles: response.data.roles,
+            }));
+        axios.get(`/api/roles`).then(response =>
+            this.setState({
+                allroles: [...response.data],
             }));
     }
     // lifecycle method
@@ -144,6 +153,7 @@ class UserEdit extends Component {
     }
     render() {
         console.log(this.props.match.params.user);
+        let { allroles } = this.state;
         return (
             <div className="wrapper">
 
@@ -220,8 +230,8 @@ class UserEdit extends Component {
                                                             <input id='last_name'
                                                                    type='text'
                                                                    className={`form-control ${this.hasErrorFor('last_name') ? 'is-invalid' : ''}`}
-                                                                   name='first_name'
-                                                                   value={this.state.last_name}
+                                                                   name='last_name'
+                                                                   value={this.state.last_name || ""}
                                                                    onChange={this.handleFieldChange}
                                                             />
                                                             {this.renderErrorFor('last_name')}
@@ -258,6 +268,23 @@ class UserEdit extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div className={'row'}>
+                                                    <div className={'col-md-12'}>
+                                                        <div className="form-group bmd-form-group">
+                                                            <label>
+                                                                <select name="roles" value={this.state.roles}
+                                                                        className={`form-control ${this.hasErrorFor('roles') ? 'is-invalid' : ''}`}
+                                                                        onChange={this.handleFieldChange}>
+                                                                    <option value="" disabled>Choose Role User</option>
+                                                                    {allroles.map((role,index) => (
+                                                                    <option  key={index} value={role.name}>{role.name}</option>
+                                                                    ))}
+                                                                </select>
+                                                            </label>
+                                                            {this.renderErrorFor('status_user')}
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div className="row">
                                                     <div className="col-md-12">
                                                         <div className="form-group">
@@ -268,9 +295,15 @@ class UserEdit extends Component {
                                                     </div>
                                                 </div>
                                                 <div className="text-center">
-                                                    <Link to={'/dashboard/users/p/datatables/'} className={`btn  pull-center btn-secondary`}>
-                                                        Cancel
-                                                    </Link>
+                                                    {this.state.status_user === 1 ?
+                                                        <Link to={'/dashboard/administrators/p/datatables/'} className={`btn  pull-center btn-secondary`}>
+                                                            Cancel
+                                                        </Link>
+                                                        :
+                                                        <Link to={'/dashboard/users/p/datatables/'} className={`btn  pull-center btn-secondary`}>
+                                                            Cancel
+                                                        </Link>
+                                                    }
                                                     <button type="submit" className={`btn  pull-center btn-${this.state.color_name}`}>
                                                         Update Profile
                                                     </button>

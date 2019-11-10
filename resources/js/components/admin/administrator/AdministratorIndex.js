@@ -12,7 +12,6 @@ class AdministratorIndex extends Component {
             users: [],
         };
     }
-
     componentDidMount () {
         this.loadItems();
     }

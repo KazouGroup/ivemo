@@ -32,7 +32,7 @@ class UpdateRequest extends BaseRequest
             'username' => "required|string|min:2|max:25|unique:users,username,{$this->id}",
             'email' => ['required', 'email', Rule::unique((new User)->getTable())->ignore(auth()->id())],
             //'email' => "required|email|max:255|unique:users,email,{$this->id}",
-            'country_id' => 'required',
+            //'country_id' => 'required',
         ];
     }
     public function messages()

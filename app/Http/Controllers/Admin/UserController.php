@@ -181,8 +181,10 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->sex = $request->sex;
 
-        //$roles = $request->input('roles') ? $request->input('roles') : [];
-        //$user->role_user = $request->role_user;
+        $roles = $request->input('roles') ? $request->input('roles') : [];
+        $permissions = $request->input('permissions') ? $request->input('permissions') : [];
+        $user->syncRoles($permissions);
+        $user->syncRoles($roles);
 
         $user->save();
 
@@ -248,9 +250,7 @@ class UserController extends Controller
             'username',
             'color_name',
             'avatar',
-            'avatarcover',
-            'password',
-            'country_id'
+            'avatarcover'
         ));
         return response()->json($data,200);
     }
