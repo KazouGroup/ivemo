@@ -4,31 +4,40 @@ import TopNavAdmin from "../../inc/admin/TopNavAdmin";
 import NavAdmin from "../../inc/admin/NavAdmin";
 import FooterAdmin from "../../inc/admin/FooterAdmin";
 import UserLists from "./UserLists";
-import FaqLists from "../faq/FaqLists";
 
 class UserIndex extends Component {
     constructor () {
         super();
         this.state = {
             users: [],
+            per: 12,
+            page: 1,
+            totalPages: null,
         };
     }
 
     componentDidMount () {
         this.loadItems();
     }
+
     loadItems() {
-        let url = `/api/users`;
-        fetch(url).then(res => res.json())
-            .then((result) => {
-                this.setState({
-                    users: result
-                });
-            }, (error) => {
-                this.setState({
-                    error
-                });
-            })
+        const {per, page, users} = this.state;
+        let url = `/api/users?per=${per}&page=${page}`;
+       fetch(url).then(res => res.json())
+           .then((result) => {this.setState({
+                   users: [...users, ...result]
+               })
+           }, (error) => {
+               this.setState({
+                   error
+               });
+           })
+    }
+
+    loadMore(){
+        this.setState(prevState =>({
+            page: prevState.page + 1,
+        }),this.loadItems)
     }
     render() {
         const { users } = this.state;
@@ -51,9 +60,13 @@ class UserIndex extends Component {
                                         <div className="card-body">
                                             <div className="toolbar">
                                                 <div className="submit text-center">
+                                                    <Link to={'/dashboard/users/p/datatables/'}  className={'btn btn-primary btn-raised'}>
+                                                        <i className="material-icons">info</i>
+                                                        <b className="title_hover">Users Datatables</b>
+                                                    </Link>
                                                     <Link to={'/dashboard/users/create/'}  className={'btn btn-success btn-raised'}>
                                                         <i className="material-icons">forum</i>
-                                                        <b className="title_hover">User</b>
+                                                        <b className="title_hover">New User</b>
                                                     </Link>
                                                 </div>
 
@@ -66,6 +79,12 @@ class UserIndex extends Component {
                                                 ))}
                                             </div>
 
+                                            <div className="submit text-center">
+                                                <button type={'button'}  onClick={() => this.loadMore()}  className={'btn btn-success btn-warning'}>
+                                                    <i className="material-icons">forum</i>
+                                                    <b className="title_hover">Load More</b>
+                                                </button>
+                                            </div>
 
                                         </div>
                                     </div>

@@ -86,118 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js":
-/*!**************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js ***!
-  \**************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _assertThisInitialized; });
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
-/*!************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
-  \************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _extends; });
-function _extends() {
-  _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-
-  return _extends.apply(this, arguments);
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js ***!
-  \******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _inheritsLoose; });
-function _inheritsLoose(subClass, superClass) {
-  subClass.prototype = Object.create(superClass.prototype);
-  subClass.prototype.constructor = subClass;
-  subClass.__proto__ = superClass;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js":
-/*!*********************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js ***!
-  \*********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectWithoutPropertiesLoose; });
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-
-  return target;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/inheritsLoose.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/inheritsLoose.js ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _inheritsLoose(subClass, superClass) {
-  subClass.prototype = Object.create(superClass.prototype);
-  subClass.prototype.constructor = subClass;
-  subClass.__proto__ = superClass;
-}
-
-module.exports = _inheritsLoose;
-
-/***/ }),
-
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
@@ -1606,7 +1494,7 @@ module.exports = function spread(callback) {
 
 
 var bind = __webpack_require__(/*! ./helpers/bind */ "./node_modules/axios/lib/helpers/bind.js");
-var isBuffer = __webpack_require__(/*! is-buffer */ "./node_modules/is-buffer/index.js");
+var isBuffer = __webpack_require__(/*! is-buffer */ "./node_modules/axios/node_modules/is-buffer/index.js");
 
 /*global toString:true*/
 
@@ -1937,6 +1825,28 @@ module.exports = {
   extend: extend,
   trim: trim
 };
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/node_modules/is-buffer/index.js":
+/*!************************************************************!*\
+  !*** ./node_modules/axios/node_modules/is-buffer/index.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*!
+ * Determine if an object is a Buffer
+ *
+ * @author   Feross Aboukhadijeh <https://feross.org>
+ * @license  MIT
+ */
+
+module.exports = function isBuffer (obj) {
+  return obj != null && obj.constructor != null &&
+    typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
+}
 
 
 /***/ }),
@@ -5257,7 +5167,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "locationsAreEqual", function() { return locationsAreEqual; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parsePath", function() { return parsePath; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createPath", function() { return createPath; });
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/history/node_modules/@babel/runtime/helpers/esm/extends.js");
 /* harmony import */ var resolve_pathname__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! resolve-pathname */ "./node_modules/resolve-pathname/esm/resolve-pathname.js");
 /* harmony import */ var value_equal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! value-equal */ "./node_modules/value-equal/esm/value-equal.js");
 /* harmony import */ var tiny_warning__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tiny-warning */ "./node_modules/tiny-warning/dist/tiny-warning.esm.js");
@@ -6185,6 +6095,36 @@ function createMemoryHistory(props) {
 
 /***/ }),
 
+/***/ "./node_modules/history/node_modules/@babel/runtime/helpers/esm/extends.js":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/history/node_modules/@babel/runtime/helpers/esm/extends.js ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _extends; });
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+/***/ }),
+
 /***/ "./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js":
 /*!**********************************************************************************!*\
   !*** ./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js ***!
@@ -6390,28 +6330,6 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
 
   buffer[offset + i - d] |= s * 128
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/is-buffer/index.js":
-/*!*****************************************!*\
-  !*** ./node_modules/is-buffer/index.js ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/*!
- * Determine if an object is a Buffer
- *
- * @author   Feross Aboukhadijeh <https://feross.org>
- * @license  MIT
- */
-
-module.exports = function isBuffer (obj) {
-  return obj != null && obj.constructor != null &&
-    typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
 }
 
 
@@ -28519,55 +28437,6 @@ module.exports = toString;
 
 /***/ }),
 
-/***/ "./node_modules/memoize-one/dist/memoize-one.esm.js":
-/*!**********************************************************!*\
-  !*** ./node_modules/memoize-one/dist/memoize-one.esm.js ***!
-  \**********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-function areInputsEqual(newInputs, lastInputs) {
-    if (newInputs.length !== lastInputs.length) {
-        return false;
-    }
-    for (var i = 0; i < newInputs.length; i++) {
-        if (newInputs[i] !== lastInputs[i]) {
-            return false;
-        }
-    }
-    return true;
-}
-
-function memoizeOne(resultFn, isEqual) {
-    if (isEqual === void 0) { isEqual = areInputsEqual; }
-    var lastThis;
-    var lastArgs = [];
-    var lastResult;
-    var calledOnce = false;
-    function memoized() {
-        var newArgs = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            newArgs[_i] = arguments[_i];
-        }
-        if (calledOnce && lastThis === this && isEqual(newArgs, lastArgs)) {
-            return lastResult;
-        }
-        lastResult = resultFn.apply(this, newArgs);
-        calledOnce = true;
-        lastThis = this;
-        lastArgs = newArgs;
-        return lastResult;
-    }
-    return memoized;
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (memoizeOne);
-
-
-/***/ }),
-
 /***/ "./node_modules/mini-create-react-context/dist/esm/index.js":
 /*!******************************************************************!*\
   !*** ./node_modules/mini-create-react-context/dist/esm/index.js ***!
@@ -28579,7 +28448,7 @@ function memoizeOne(resultFn, isEqual) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/inheritsLoose.js");
+/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/mini-create-react-context/node_modules/@babel/runtime/helpers/inheritsLoose.js");
 /* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
@@ -28762,6 +28631,23 @@ var index = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext || create
 
 /* harmony default export */ __webpack_exports__["default"] = (index);
 
+
+/***/ }),
+
+/***/ "./node_modules/mini-create-react-context/node_modules/@babel/runtime/helpers/inheritsLoose.js":
+/*!*****************************************************************************************************!*\
+  !*** ./node_modules/mini-create-react-context/node_modules/@babel/runtime/helpers/inheritsLoose.js ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _inheritsLoose(subClass, superClass) {
+  subClass.prototype = Object.create(superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  subClass.__proto__ = superClass;
+}
+
+module.exports = _inheritsLoose;
 
 /***/ }),
 
@@ -46483,6 +46369,457 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 /***/ }),
 
+/***/ "./node_modules/path-to-regexp/index.js":
+/*!**********************************************!*\
+  !*** ./node_modules/path-to-regexp/index.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isarray = __webpack_require__(/*! isarray */ "./node_modules/path-to-regexp/node_modules/isarray/index.js")
+
+/**
+ * Expose `pathToRegexp`.
+ */
+module.exports = pathToRegexp
+module.exports.parse = parse
+module.exports.compile = compile
+module.exports.tokensToFunction = tokensToFunction
+module.exports.tokensToRegExp = tokensToRegExp
+
+/**
+ * The main path matching regexp utility.
+ *
+ * @type {RegExp}
+ */
+var PATH_REGEXP = new RegExp([
+  // Match escaped characters that would otherwise appear in future matches.
+  // This allows the user to escape special characters that won't transform.
+  '(\\\\.)',
+  // Match Express-style parameters and un-named parameters with a prefix
+  // and optional suffixes. Matches appear as:
+  //
+  // "/:test(\\d+)?" => ["/", "test", "\d+", undefined, "?", undefined]
+  // "/route(\\d+)"  => [undefined, undefined, undefined, "\d+", undefined, undefined]
+  // "/*"            => ["/", undefined, undefined, undefined, undefined, "*"]
+  '([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?|(\\*))'
+].join('|'), 'g')
+
+/**
+ * Parse a string for the raw tokens.
+ *
+ * @param  {string}  str
+ * @param  {Object=} options
+ * @return {!Array}
+ */
+function parse (str, options) {
+  var tokens = []
+  var key = 0
+  var index = 0
+  var path = ''
+  var defaultDelimiter = options && options.delimiter || '/'
+  var res
+
+  while ((res = PATH_REGEXP.exec(str)) != null) {
+    var m = res[0]
+    var escaped = res[1]
+    var offset = res.index
+    path += str.slice(index, offset)
+    index = offset + m.length
+
+    // Ignore already escaped sequences.
+    if (escaped) {
+      path += escaped[1]
+      continue
+    }
+
+    var next = str[index]
+    var prefix = res[2]
+    var name = res[3]
+    var capture = res[4]
+    var group = res[5]
+    var modifier = res[6]
+    var asterisk = res[7]
+
+    // Push the current path onto the tokens.
+    if (path) {
+      tokens.push(path)
+      path = ''
+    }
+
+    var partial = prefix != null && next != null && next !== prefix
+    var repeat = modifier === '+' || modifier === '*'
+    var optional = modifier === '?' || modifier === '*'
+    var delimiter = res[2] || defaultDelimiter
+    var pattern = capture || group
+
+    tokens.push({
+      name: name || key++,
+      prefix: prefix || '',
+      delimiter: delimiter,
+      optional: optional,
+      repeat: repeat,
+      partial: partial,
+      asterisk: !!asterisk,
+      pattern: pattern ? escapeGroup(pattern) : (asterisk ? '.*' : '[^' + escapeString(delimiter) + ']+?')
+    })
+  }
+
+  // Match any characters still remaining.
+  if (index < str.length) {
+    path += str.substr(index)
+  }
+
+  // If the path exists, push it onto the end.
+  if (path) {
+    tokens.push(path)
+  }
+
+  return tokens
+}
+
+/**
+ * Compile a string to a template function for the path.
+ *
+ * @param  {string}             str
+ * @param  {Object=}            options
+ * @return {!function(Object=, Object=)}
+ */
+function compile (str, options) {
+  return tokensToFunction(parse(str, options))
+}
+
+/**
+ * Prettier encoding of URI path segments.
+ *
+ * @param  {string}
+ * @return {string}
+ */
+function encodeURIComponentPretty (str) {
+  return encodeURI(str).replace(/[\/?#]/g, function (c) {
+    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
+  })
+}
+
+/**
+ * Encode the asterisk parameter. Similar to `pretty`, but allows slashes.
+ *
+ * @param  {string}
+ * @return {string}
+ */
+function encodeAsterisk (str) {
+  return encodeURI(str).replace(/[?#]/g, function (c) {
+    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
+  })
+}
+
+/**
+ * Expose a method for transforming tokens into the path function.
+ */
+function tokensToFunction (tokens) {
+  // Compile all the tokens into regexps.
+  var matches = new Array(tokens.length)
+
+  // Compile all the patterns before compilation.
+  for (var i = 0; i < tokens.length; i++) {
+    if (typeof tokens[i] === 'object') {
+      matches[i] = new RegExp('^(?:' + tokens[i].pattern + ')$')
+    }
+  }
+
+  return function (obj, opts) {
+    var path = ''
+    var data = obj || {}
+    var options = opts || {}
+    var encode = options.pretty ? encodeURIComponentPretty : encodeURIComponent
+
+    for (var i = 0; i < tokens.length; i++) {
+      var token = tokens[i]
+
+      if (typeof token === 'string') {
+        path += token
+
+        continue
+      }
+
+      var value = data[token.name]
+      var segment
+
+      if (value == null) {
+        if (token.optional) {
+          // Prepend partial segment prefixes.
+          if (token.partial) {
+            path += token.prefix
+          }
+
+          continue
+        } else {
+          throw new TypeError('Expected "' + token.name + '" to be defined')
+        }
+      }
+
+      if (isarray(value)) {
+        if (!token.repeat) {
+          throw new TypeError('Expected "' + token.name + '" to not repeat, but received `' + JSON.stringify(value) + '`')
+        }
+
+        if (value.length === 0) {
+          if (token.optional) {
+            continue
+          } else {
+            throw new TypeError('Expected "' + token.name + '" to not be empty')
+          }
+        }
+
+        for (var j = 0; j < value.length; j++) {
+          segment = encode(value[j])
+
+          if (!matches[i].test(segment)) {
+            throw new TypeError('Expected all "' + token.name + '" to match "' + token.pattern + '", but received `' + JSON.stringify(segment) + '`')
+          }
+
+          path += (j === 0 ? token.prefix : token.delimiter) + segment
+        }
+
+        continue
+      }
+
+      segment = token.asterisk ? encodeAsterisk(value) : encode(value)
+
+      if (!matches[i].test(segment)) {
+        throw new TypeError('Expected "' + token.name + '" to match "' + token.pattern + '", but received "' + segment + '"')
+      }
+
+      path += token.prefix + segment
+    }
+
+    return path
+  }
+}
+
+/**
+ * Escape a regular expression string.
+ *
+ * @param  {string} str
+ * @return {string}
+ */
+function escapeString (str) {
+  return str.replace(/([.+*?=^!:${}()[\]|\/\\])/g, '\\$1')
+}
+
+/**
+ * Escape the capturing group by escaping special characters and meaning.
+ *
+ * @param  {string} group
+ * @return {string}
+ */
+function escapeGroup (group) {
+  return group.replace(/([=!:$\/()])/g, '\\$1')
+}
+
+/**
+ * Attach the keys as a property of the regexp.
+ *
+ * @param  {!RegExp} re
+ * @param  {Array}   keys
+ * @return {!RegExp}
+ */
+function attachKeys (re, keys) {
+  re.keys = keys
+  return re
+}
+
+/**
+ * Get the flags for a regexp from the options.
+ *
+ * @param  {Object} options
+ * @return {string}
+ */
+function flags (options) {
+  return options.sensitive ? '' : 'i'
+}
+
+/**
+ * Pull out keys from a regexp.
+ *
+ * @param  {!RegExp} path
+ * @param  {!Array}  keys
+ * @return {!RegExp}
+ */
+function regexpToRegexp (path, keys) {
+  // Use a negative lookahead to match only capturing groups.
+  var groups = path.source.match(/\((?!\?)/g)
+
+  if (groups) {
+    for (var i = 0; i < groups.length; i++) {
+      keys.push({
+        name: i,
+        prefix: null,
+        delimiter: null,
+        optional: false,
+        repeat: false,
+        partial: false,
+        asterisk: false,
+        pattern: null
+      })
+    }
+  }
+
+  return attachKeys(path, keys)
+}
+
+/**
+ * Transform an array into a regexp.
+ *
+ * @param  {!Array}  path
+ * @param  {Array}   keys
+ * @param  {!Object} options
+ * @return {!RegExp}
+ */
+function arrayToRegexp (path, keys, options) {
+  var parts = []
+
+  for (var i = 0; i < path.length; i++) {
+    parts.push(pathToRegexp(path[i], keys, options).source)
+  }
+
+  var regexp = new RegExp('(?:' + parts.join('|') + ')', flags(options))
+
+  return attachKeys(regexp, keys)
+}
+
+/**
+ * Create a path regexp from string input.
+ *
+ * @param  {string}  path
+ * @param  {!Array}  keys
+ * @param  {!Object} options
+ * @return {!RegExp}
+ */
+function stringToRegexp (path, keys, options) {
+  return tokensToRegExp(parse(path, options), keys, options)
+}
+
+/**
+ * Expose a function for taking tokens and returning a RegExp.
+ *
+ * @param  {!Array}          tokens
+ * @param  {(Array|Object)=} keys
+ * @param  {Object=}         options
+ * @return {!RegExp}
+ */
+function tokensToRegExp (tokens, keys, options) {
+  if (!isarray(keys)) {
+    options = /** @type {!Object} */ (keys || options)
+    keys = []
+  }
+
+  options = options || {}
+
+  var strict = options.strict
+  var end = options.end !== false
+  var route = ''
+
+  // Iterate over the tokens and create our regexp string.
+  for (var i = 0; i < tokens.length; i++) {
+    var token = tokens[i]
+
+    if (typeof token === 'string') {
+      route += escapeString(token)
+    } else {
+      var prefix = escapeString(token.prefix)
+      var capture = '(?:' + token.pattern + ')'
+
+      keys.push(token)
+
+      if (token.repeat) {
+        capture += '(?:' + prefix + capture + ')*'
+      }
+
+      if (token.optional) {
+        if (!token.partial) {
+          capture = '(?:' + prefix + '(' + capture + '))?'
+        } else {
+          capture = prefix + '(' + capture + ')?'
+        }
+      } else {
+        capture = prefix + '(' + capture + ')'
+      }
+
+      route += capture
+    }
+  }
+
+  var delimiter = escapeString(options.delimiter || '/')
+  var endsWithDelimiter = route.slice(-delimiter.length) === delimiter
+
+  // In non-strict mode we allow a slash at the end of match. If the path to
+  // match already ends with a slash, we remove it for consistency. The slash
+  // is valid at the end of a path match, not in the middle. This is important
+  // in non-ending mode, where "/test/" shouldn't match "/test//route".
+  if (!strict) {
+    route = (endsWithDelimiter ? route.slice(0, -delimiter.length) : route) + '(?:' + delimiter + '(?=$))?'
+  }
+
+  if (end) {
+    route += '$'
+  } else {
+    // In non-ending mode, we need the capturing groups to match as much as
+    // possible by using a positive lookahead to the end or next path segment.
+    route += strict && endsWithDelimiter ? '' : '(?=' + delimiter + '|$)'
+  }
+
+  return attachKeys(new RegExp('^' + route, flags(options)), keys)
+}
+
+/**
+ * Normalize the given path string, returning a regular expression.
+ *
+ * An empty array can be passed in for the keys, which will hold the
+ * placeholder key descriptions. For example, using `/user/:id`, `keys` will
+ * contain `[{ name: 'id', delimiter: '/', optional: false, repeat: false }]`.
+ *
+ * @param  {(string|RegExp|Array)} path
+ * @param  {(Array|Object)=}       keys
+ * @param  {Object=}               options
+ * @return {!RegExp}
+ */
+function pathToRegexp (path, keys, options) {
+  if (!isarray(keys)) {
+    options = /** @type {!Object} */ (keys || options)
+    keys = []
+  }
+
+  options = options || {}
+
+  if (path instanceof RegExp) {
+    return regexpToRegexp(path, /** @type {!Array} */ (keys))
+  }
+
+  if (isarray(path)) {
+    return arrayToRegexp(/** @type {!Array} */ (path), /** @type {!Array} */ (keys), options)
+  }
+
+  return stringToRegexp(/** @type {string} */ (path), /** @type {!Array} */ (keys), options)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/path-to-regexp/node_modules/isarray/index.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/path-to-regexp/node_modules/isarray/index.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = Array.isArray || function (arr) {
+  return Object.prototype.toString.call(arr) == '[object Array]';
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/process/browser.js":
 /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
@@ -59382,23 +59719,23 @@ function initializeLazyComponentType(lazyComponent) {
     var thenable = ctor();
     lazyComponent._result = thenable;
     thenable.then(function (moduleObject) {
-        if (lazyComponent._status === Pending) {
+      if (lazyComponent._status === Pending) {
         var defaultExport = moduleObject.default;
 
         {
-            if (defaultExport === undefined) {
-                warning$1(false, 'lazy: Expected the result of a dynamic import() call. ' + 'Instead received: %s\n\nYour code should look like: \n  ' + "const MyComponent = lazy(() => import('./MyComponent'))", moduleObject);
-            }
+          if (defaultExport === undefined) {
+            warning$1(false, 'lazy: Expected the result of a dynamic import() call. ' + 'Instead received: %s\n\nYour code should look like: \n  ' + "const MyComponent = lazy(() => import('./MyComponent'))", moduleObject);
+          }
         }
 
         lazyComponent._status = Resolved;
         lazyComponent._result = defaultExport;
-        }
+      }
     }, function (error) {
-        if (lazyComponent._status === Pending) {
-    lazyComponent._status = Rejected;
-    lazyComponent._result = error;
-        }
+      if (lazyComponent._status === Pending) {
+        lazyComponent._status = Rejected;
+        lazyComponent._result = error;
+      }
     });
   }
 }
@@ -64566,23 +64903,23 @@ function initializeLazyComponentType(lazyComponent) {
     var thenable = ctor();
     lazyComponent._result = thenable;
     thenable.then(function (moduleObject) {
-        if (lazyComponent._status === Pending) {
+      if (lazyComponent._status === Pending) {
         var defaultExport = moduleObject.default;
 
         {
-            if (defaultExport === undefined) {
-                warning$1(false, 'lazy: Expected the result of a dynamic import() call. ' + 'Instead received: %s\n\nYour code should look like: \n  ' + "const MyComponent = lazy(() => import('./MyComponent'))", moduleObject);
-            }
+          if (defaultExport === undefined) {
+            warning$1(false, 'lazy: Expected the result of a dynamic import() call. ' + 'Instead received: %s\n\nYour code should look like: \n  ' + "const MyComponent = lazy(() => import('./MyComponent'))", moduleObject);
+          }
         }
 
         lazyComponent._status = Resolved;
         lazyComponent._result = defaultExport;
-        }
+      }
     }, function (error) {
-        if (lazyComponent._status === Pending) {
-    lazyComponent._status = Rejected;
-    lazyComponent._result = error;
-        }
+      if (lazyComponent._status === Pending) {
+        lazyComponent._status = Rejected;
+        lazyComponent._result = error;
+      }
     });
   }
 }
@@ -92452,7 +92789,7 @@ QuillToolbar.defaultColors = defaultColors;
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92492,15 +92829,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return react_router__WEBPACK_IMPORTED_MODULE_0__["withRouter"]; });
 
-/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/react-router-dom/node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var history__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! history */ "./node_modules/history/esm/history.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var tiny_warning__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tiny-warning */ "./node_modules/tiny-warning/dist/tiny-warning.esm.js");
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/react-router-dom/node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/react-router-dom/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
 /* harmony import */ var tiny_invariant__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tiny-invariant */ "./node_modules/tiny-invariant/dist/tiny-invariant.esm.js");
 
 
@@ -92818,6 +93155,81 @@ if (true) {
 
 /***/ }),
 
+/***/ "./node_modules/react-router-dom/node_modules/@babel/runtime/helpers/esm/extends.js":
+/*!******************************************************************************************!*\
+  !*** ./node_modules/react-router-dom/node_modules/@babel/runtime/helpers/esm/extends.js ***!
+  \******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _extends; });
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+/***/ }),
+
+/***/ "./node_modules/react-router-dom/node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":
+/*!************************************************************************************************!*\
+  !*** ./node_modules/react-router-dom/node_modules/@babel/runtime/helpers/esm/inheritsLoose.js ***!
+  \************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _inheritsLoose; });
+function _inheritsLoose(subClass, superClass) {
+  subClass.prototype = Object.create(superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  subClass.__proto__ = superClass;
+}
+
+/***/ }),
+
+/***/ "./node_modules/react-router-dom/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js":
+/*!***************************************************************************************************************!*\
+  !*** ./node_modules/react-router-dom/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js ***!
+  \***************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectWithoutPropertiesLoose; });
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+/***/ }),
+
 /***/ "./node_modules/react-router/esm/react-router.js":
 /*!*******************************************************!*\
   !*** ./node_modules/react-router/esm/react-router.js ***!
@@ -92842,7 +93254,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useParams", function() { return useParams; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useRouteMatch", function() { return useRouteMatch; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return withRouter; });
-/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/react-router/node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
@@ -92851,12 +93263,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tiny_warning__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tiny-warning */ "./node_modules/tiny-warning/dist/tiny-warning.esm.js");
 /* harmony import */ var mini_create_react_context__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! mini-create-react-context */ "./node_modules/mini-create-react-context/dist/esm/index.js");
 /* harmony import */ var tiny_invariant__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tiny-invariant */ "./node_modules/tiny-invariant/dist/tiny-invariant.esm.js");
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var path_to_regexp__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! path-to-regexp */ "./node_modules/react-router/node_modules/path-to-regexp/index.js");
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/react-router/node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var path_to_regexp__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! path-to-regexp */ "./node_modules/path-to-regexp/index.js");
 /* harmony import */ var path_to_regexp__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(path_to_regexp__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var react_is__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-is */ "./node_modules/react-is/index.js");
 /* harmony import */ var react_is__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_is__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/react-router/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
 /* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! hoist-non-react-statics */ "./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js");
 /* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_11__);
 
@@ -93617,2548 +94029,78 @@ if (true) {
 
 /***/ }),
 
-/***/ "./node_modules/react-router/node_modules/isarray/index.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/react-router/node_modules/isarray/index.js ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = Array.isArray || function (arr) {
-  return Object.prototype.toString.call(arr) == '[object Array]';
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/react-router/node_modules/path-to-regexp/index.js":
-/*!************************************************************************!*\
-  !*** ./node_modules/react-router/node_modules/path-to-regexp/index.js ***!
-  \************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var isarray = __webpack_require__(/*! isarray */ "./node_modules/react-router/node_modules/isarray/index.js")
-
-/**
- * Expose `pathToRegexp`.
- */
-module.exports = pathToRegexp
-module.exports.parse = parse
-module.exports.compile = compile
-module.exports.tokensToFunction = tokensToFunction
-module.exports.tokensToRegExp = tokensToRegExp
-
-/**
- * The main path matching regexp utility.
- *
- * @type {RegExp}
- */
-var PATH_REGEXP = new RegExp([
-  // Match escaped characters that would otherwise appear in future matches.
-  // This allows the user to escape special characters that won't transform.
-  '(\\\\.)',
-  // Match Express-style parameters and un-named parameters with a prefix
-  // and optional suffixes. Matches appear as:
-  //
-  // "/:test(\\d+)?" => ["/", "test", "\d+", undefined, "?", undefined]
-  // "/route(\\d+)"  => [undefined, undefined, undefined, "\d+", undefined, undefined]
-  // "/*"            => ["/", undefined, undefined, undefined, undefined, "*"]
-  '([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?|(\\*))'
-].join('|'), 'g')
-
-/**
- * Parse a string for the raw tokens.
- *
- * @param  {string}  str
- * @param  {Object=} options
- * @return {!Array}
- */
-function parse (str, options) {
-  var tokens = []
-  var key = 0
-  var index = 0
-  var path = ''
-  var defaultDelimiter = options && options.delimiter || '/'
-  var res
-
-  while ((res = PATH_REGEXP.exec(str)) != null) {
-    var m = res[0]
-    var escaped = res[1]
-    var offset = res.index
-    path += str.slice(index, offset)
-    index = offset + m.length
-
-    // Ignore already escaped sequences.
-    if (escaped) {
-      path += escaped[1]
-      continue
-    }
-
-    var next = str[index]
-    var prefix = res[2]
-    var name = res[3]
-    var capture = res[4]
-    var group = res[5]
-    var modifier = res[6]
-    var asterisk = res[7]
-
-    // Push the current path onto the tokens.
-    if (path) {
-      tokens.push(path)
-      path = ''
-    }
-
-    var partial = prefix != null && next != null && next !== prefix
-    var repeat = modifier === '+' || modifier === '*'
-    var optional = modifier === '?' || modifier === '*'
-    var delimiter = res[2] || defaultDelimiter
-    var pattern = capture || group
-
-    tokens.push({
-      name: name || key++,
-      prefix: prefix || '',
-      delimiter: delimiter,
-      optional: optional,
-      repeat: repeat,
-      partial: partial,
-      asterisk: !!asterisk,
-      pattern: pattern ? escapeGroup(pattern) : (asterisk ? '.*' : '[^' + escapeString(delimiter) + ']+?')
-    })
-  }
-
-  // Match any characters still remaining.
-  if (index < str.length) {
-    path += str.substr(index)
-  }
-
-  // If the path exists, push it onto the end.
-  if (path) {
-    tokens.push(path)
-  }
-
-  return tokens
-}
-
-/**
- * Compile a string to a template function for the path.
- *
- * @param  {string}             str
- * @param  {Object=}            options
- * @return {!function(Object=, Object=)}
- */
-function compile (str, options) {
-  return tokensToFunction(parse(str, options))
-}
-
-/**
- * Prettier encoding of URI path segments.
- *
- * @param  {string}
- * @return {string}
- */
-function encodeURIComponentPretty (str) {
-  return encodeURI(str).replace(/[\/?#]/g, function (c) {
-    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
-  })
-}
-
-/**
- * Encode the asterisk parameter. Similar to `pretty`, but allows slashes.
- *
- * @param  {string}
- * @return {string}
- */
-function encodeAsterisk (str) {
-  return encodeURI(str).replace(/[?#]/g, function (c) {
-    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
-  })
-}
-
-/**
- * Expose a method for transforming tokens into the path function.
- */
-function tokensToFunction (tokens) {
-  // Compile all the tokens into regexps.
-  var matches = new Array(tokens.length)
-
-  // Compile all the patterns before compilation.
-  for (var i = 0; i < tokens.length; i++) {
-    if (typeof tokens[i] === 'object') {
-      matches[i] = new RegExp('^(?:' + tokens[i].pattern + ')$')
-    }
-  }
-
-  return function (obj, opts) {
-    var path = ''
-    var data = obj || {}
-    var options = opts || {}
-    var encode = options.pretty ? encodeURIComponentPretty : encodeURIComponent
-
-    for (var i = 0; i < tokens.length; i++) {
-      var token = tokens[i]
-
-      if (typeof token === 'string') {
-        path += token
-
-        continue
-      }
-
-      var value = data[token.name]
-      var segment
-
-      if (value == null) {
-        if (token.optional) {
-          // Prepend partial segment prefixes.
-          if (token.partial) {
-            path += token.prefix
-          }
-
-          continue
-        } else {
-          throw new TypeError('Expected "' + token.name + '" to be defined')
-        }
-      }
-
-      if (isarray(value)) {
-        if (!token.repeat) {
-          throw new TypeError('Expected "' + token.name + '" to not repeat, but received `' + JSON.stringify(value) + '`')
-        }
-
-        if (value.length === 0) {
-          if (token.optional) {
-            continue
-          } else {
-            throw new TypeError('Expected "' + token.name + '" to not be empty')
-          }
-        }
-
-        for (var j = 0; j < value.length; j++) {
-          segment = encode(value[j])
-
-          if (!matches[i].test(segment)) {
-            throw new TypeError('Expected all "' + token.name + '" to match "' + token.pattern + '", but received `' + JSON.stringify(segment) + '`')
-          }
-
-          path += (j === 0 ? token.prefix : token.delimiter) + segment
-        }
-
-        continue
-      }
-
-      segment = token.asterisk ? encodeAsterisk(value) : encode(value)
-
-      if (!matches[i].test(segment)) {
-        throw new TypeError('Expected "' + token.name + '" to match "' + token.pattern + '", but received "' + segment + '"')
-      }
-
-      path += token.prefix + segment
-    }
-
-    return path
-  }
-}
-
-/**
- * Escape a regular expression string.
- *
- * @param  {string} str
- * @return {string}
- */
-function escapeString (str) {
-  return str.replace(/([.+*?=^!:${}()[\]|\/\\])/g, '\\$1')
-}
-
-/**
- * Escape the capturing group by escaping special characters and meaning.
- *
- * @param  {string} group
- * @return {string}
- */
-function escapeGroup (group) {
-  return group.replace(/([=!:$\/()])/g, '\\$1')
-}
-
-/**
- * Attach the keys as a property of the regexp.
- *
- * @param  {!RegExp} re
- * @param  {Array}   keys
- * @return {!RegExp}
- */
-function attachKeys (re, keys) {
-  re.keys = keys
-  return re
-}
-
-/**
- * Get the flags for a regexp from the options.
- *
- * @param  {Object} options
- * @return {string}
- */
-function flags (options) {
-  return options.sensitive ? '' : 'i'
-}
-
-/**
- * Pull out keys from a regexp.
- *
- * @param  {!RegExp} path
- * @param  {!Array}  keys
- * @return {!RegExp}
- */
-function regexpToRegexp (path, keys) {
-  // Use a negative lookahead to match only capturing groups.
-  var groups = path.source.match(/\((?!\?)/g)
-
-  if (groups) {
-    for (var i = 0; i < groups.length; i++) {
-      keys.push({
-        name: i,
-        prefix: null,
-        delimiter: null,
-        optional: false,
-        repeat: false,
-        partial: false,
-        asterisk: false,
-        pattern: null
-      })
-    }
-  }
-
-  return attachKeys(path, keys)
-}
-
-/**
- * Transform an array into a regexp.
- *
- * @param  {!Array}  path
- * @param  {Array}   keys
- * @param  {!Object} options
- * @return {!RegExp}
- */
-function arrayToRegexp (path, keys, options) {
-  var parts = []
-
-  for (var i = 0; i < path.length; i++) {
-    parts.push(pathToRegexp(path[i], keys, options).source)
-  }
-
-  var regexp = new RegExp('(?:' + parts.join('|') + ')', flags(options))
-
-  return attachKeys(regexp, keys)
-}
-
-/**
- * Create a path regexp from string input.
- *
- * @param  {string}  path
- * @param  {!Array}  keys
- * @param  {!Object} options
- * @return {!RegExp}
- */
-function stringToRegexp (path, keys, options) {
-  return tokensToRegExp(parse(path, options), keys, options)
-}
-
-/**
- * Expose a function for taking tokens and returning a RegExp.
- *
- * @param  {!Array}          tokens
- * @param  {(Array|Object)=} keys
- * @param  {Object=}         options
- * @return {!RegExp}
- */
-function tokensToRegExp (tokens, keys, options) {
-  if (!isarray(keys)) {
-    options = /** @type {!Object} */ (keys || options)
-    keys = []
-  }
-
-  options = options || {}
-
-  var strict = options.strict
-  var end = options.end !== false
-  var route = ''
-
-  // Iterate over the tokens and create our regexp string.
-  for (var i = 0; i < tokens.length; i++) {
-    var token = tokens[i]
-
-    if (typeof token === 'string') {
-      route += escapeString(token)
-    } else {
-      var prefix = escapeString(token.prefix)
-      var capture = '(?:' + token.pattern + ')'
-
-      keys.push(token)
-
-      if (token.repeat) {
-        capture += '(?:' + prefix + capture + ')*'
-      }
-
-      if (token.optional) {
-        if (!token.partial) {
-          capture = '(?:' + prefix + '(' + capture + '))?'
-        } else {
-          capture = prefix + '(' + capture + ')?'
-        }
-      } else {
-        capture = prefix + '(' + capture + ')'
-      }
-
-      route += capture
-    }
-  }
-
-  var delimiter = escapeString(options.delimiter || '/')
-  var endsWithDelimiter = route.slice(-delimiter.length) === delimiter
-
-  // In non-strict mode we allow a slash at the end of match. If the path to
-  // match already ends with a slash, we remove it for consistency. The slash
-  // is valid at the end of a path match, not in the middle. This is important
-  // in non-ending mode, where "/test/" shouldn't match "/test//route".
-  if (!strict) {
-    route = (endsWithDelimiter ? route.slice(0, -delimiter.length) : route) + '(?:' + delimiter + '(?=$))?'
-  }
-
-  if (end) {
-    route += '$'
-  } else {
-    // In non-ending mode, we need the capturing groups to match as much as
-    // possible by using a positive lookahead to the end or next path segment.
-    route += strict && endsWithDelimiter ? '' : '(?=' + delimiter + '|$)'
-  }
-
-  return attachKeys(new RegExp('^' + route, flags(options)), keys)
-}
-
-/**
- * Normalize the given path string, returning a regular expression.
- *
- * An empty array can be passed in for the keys, which will hold the
- * placeholder key descriptions. For example, using `/user/:id`, `keys` will
- * contain `[{ name: 'id', delimiter: '/', optional: false, repeat: false }]`.
- *
- * @param  {(string|RegExp|Array)} path
- * @param  {(Array|Object)=}       keys
- * @param  {Object=}               options
- * @return {!RegExp}
- */
-function pathToRegexp (path, keys, options) {
-  if (!isarray(keys)) {
-    options = /** @type {!Object} */ (keys || options)
-    keys = []
-  }
-
-  options = options || {}
-
-  if (path instanceof RegExp) {
-    return regexpToRegexp(path, /** @type {!Array} */ (keys))
-  }
-
-  if (isarray(path)) {
-    return arrayToRegexp(/** @type {!Array} */ (path), /** @type {!Array} */ (keys), options)
-  }
-
-  return stringToRegexp(/** @type {string} */ (path), /** @type {!Array} */ (keys), options)
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/react-window/dist/index.esm.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/react-window/dist/index.esm.js ***!
-  \*****************************************************/
-/*! exports provided: VariableSizeGrid, VariableSizeList, FixedSizeGrid, FixedSizeList, areEqual, shouldComponentUpdate */
+/***/ "./node_modules/react-router/node_modules/@babel/runtime/helpers/esm/extends.js":
+/*!**************************************************************************************!*\
+  !*** ./node_modules/react-router/node_modules/@babel/runtime/helpers/esm/extends.js ***!
+  \**************************************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VariableSizeGrid", function() { return VariableSizeGrid; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VariableSizeList", function() { return VariableSizeList; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FixedSizeGrid", function() { return FixedSizeGrid; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FixedSizeList", function() { return FixedSizeList; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "areEqual", function() { return areEqual; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "shouldComponentUpdate", function() { return shouldComponentUpdate; });
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
-/* harmony import */ var _babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/esm/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js");
-/* harmony import */ var memoize_one__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! memoize-one */ "./node_modules/memoize-one/dist/memoize-one.esm.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _extends; });
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
 
-
-
-
-
-
-
-// Animation frame based implementation of setTimeout.
-// Inspired by Joe Lambert, https://gist.github.com/joelambert/1002116#file-requesttimeout-js
-var hasNativePerformanceNow = typeof performance === 'object' && typeof performance.now === 'function';
-var now = hasNativePerformanceNow ? function () {
-  return performance.now();
-} : function () {
-  return Date.now();
-};
-function cancelTimeout(timeoutID) {
-  cancelAnimationFrame(timeoutID.id);
-}
-function requestTimeout(callback, delay) {
-  var start = now();
-
-  function tick() {
-    if (now() - start >= delay) {
-      callback.call(null);
-    } else {
-      timeoutID.id = requestAnimationFrame(tick);
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
     }
-  }
 
-  var timeoutID = {
-    id: requestAnimationFrame(tick)
+    return target;
   };
-  return timeoutID;
+
+  return _extends.apply(this, arguments);
 }
 
-var size = -1; // This utility copied from "dom-helpers" package.
+/***/ }),
 
-function getScrollbarSize(recalculate) {
-  if (recalculate === void 0) {
-    recalculate = false;
-  }
+/***/ "./node_modules/react-router/node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":
+/*!********************************************************************************************!*\
+  !*** ./node_modules/react-router/node_modules/@babel/runtime/helpers/esm/inheritsLoose.js ***!
+  \********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-  if (size === -1 || recalculate) {
-    var div = document.createElement('div');
-    var style = div.style;
-    style.width = '50px';
-    style.height = '50px';
-    style.overflow = 'scroll';
-    document.body.appendChild(div);
-    size = div.offsetWidth - div.clientWidth;
-    document.body.removeChild(div);
-  }
-
-  return size;
-}
-var cachedRTLResult = null; // TRICKY According to the spec, scrollLeft should be negative for RTL aligned elements.
-// Chrome does not seem to adhere; its scrollLeft values are positive (measured relative to the left).
-// Safari's elastic bounce makes detecting this even more complicated wrt potential false positives.
-// The safest way to check this is to intentionally set a negative offset,
-// and then verify that the subsequent "scroll" event matches the negative offset.
-// If it does not match, then we can assume a non-standard RTL scroll implementation.
-
-function getRTLOffsetType(recalculate) {
-  if (recalculate === void 0) {
-    recalculate = false;
-  }
-
-  if (cachedRTLResult === null || recalculate) {
-    var outerDiv = document.createElement('div');
-    var outerStyle = outerDiv.style;
-    outerStyle.width = '50px';
-    outerStyle.height = '50px';
-    outerStyle.overflow = 'scroll';
-    outerStyle.direction = 'rtl';
-    var innerDiv = document.createElement('div');
-    var innerStyle = innerDiv.style;
-    innerStyle.width = '100px';
-    innerStyle.height = '100px';
-    outerDiv.appendChild(innerDiv);
-    document.body.appendChild(outerDiv);
-
-    if (outerDiv.scrollLeft > 0) {
-      cachedRTLResult = 'positive-descending';
-    } else {
-      outerDiv.scrollLeft = 1;
-
-      if (outerDiv.scrollLeft === 0) {
-        cachedRTLResult = 'negative';
-      } else {
-        cachedRTLResult = 'positive-ascending';
-      }
-    }
-
-    document.body.removeChild(outerDiv);
-    return cachedRTLResult;
-  }
-
-  return cachedRTLResult;
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _inheritsLoose; });
+function _inheritsLoose(subClass, superClass) {
+  subClass.prototype = Object.create(superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  subClass.__proto__ = superClass;
 }
 
-var IS_SCROLLING_DEBOUNCE_INTERVAL = 150;
+/***/ }),
 
-var defaultItemKey = function defaultItemKey(_ref) {
-  var columnIndex = _ref.columnIndex,
-      data = _ref.data,
-      rowIndex = _ref.rowIndex;
-  return rowIndex + ":" + columnIndex;
-}; // In DEV mode, this Set helps us only log a warning once per component instance.
-// This avoids spamming the console every time a render happens.
+/***/ "./node_modules/react-router/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js":
+/*!***********************************************************************************************************!*\
+  !*** ./node_modules/react-router/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js ***!
+  \***********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectWithoutPropertiesLoose; });
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
 
-var devWarningsOverscanCount = null;
-var devWarningsOverscanRowsColumnsCount = null;
-var devWarningsTagName = null;
-
-if (true) {
-  if (typeof window !== 'undefined' && typeof window.WeakSet !== 'undefined') {
-    devWarningsOverscanCount =
-    /*#__PURE__*/
-    new WeakSet();
-    devWarningsOverscanRowsColumnsCount =
-    /*#__PURE__*/
-    new WeakSet();
-    devWarningsTagName =
-    /*#__PURE__*/
-    new WeakSet();
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
   }
+
+  return target;
 }
-
-function createGridComponent(_ref2) {
-  var _class, _temp;
-
-  var getColumnOffset = _ref2.getColumnOffset,
-      getColumnStartIndexForOffset = _ref2.getColumnStartIndexForOffset,
-      getColumnStopIndexForStartIndex = _ref2.getColumnStopIndexForStartIndex,
-      getColumnWidth = _ref2.getColumnWidth,
-      getEstimatedTotalHeight = _ref2.getEstimatedTotalHeight,
-      getEstimatedTotalWidth = _ref2.getEstimatedTotalWidth,
-      getOffsetForColumnAndAlignment = _ref2.getOffsetForColumnAndAlignment,
-      getOffsetForRowAndAlignment = _ref2.getOffsetForRowAndAlignment,
-      getRowHeight = _ref2.getRowHeight,
-      getRowOffset = _ref2.getRowOffset,
-      getRowStartIndexForOffset = _ref2.getRowStartIndexForOffset,
-      getRowStopIndexForStartIndex = _ref2.getRowStopIndexForStartIndex,
-      initInstanceProps = _ref2.initInstanceProps,
-      shouldResetStyleCacheOnItemSizeChange = _ref2.shouldResetStyleCacheOnItemSizeChange,
-      validateProps = _ref2.validateProps;
-  return _temp = _class =
-  /*#__PURE__*/
-  function (_PureComponent) {
-    Object(_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(Grid, _PureComponent);
-
-    // Always use explicit constructor for React components.
-    // It produces less code after transpilation. (#26)
-    // eslint-disable-next-line no-useless-constructor
-    function Grid(props) {
-      var _this;
-
-      _this = _PureComponent.call(this, props) || this;
-      _this._instanceProps = initInstanceProps(_this.props, Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__["default"])(Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__["default"])(_this)));
-      _this._resetIsScrollingTimeoutId = null;
-      _this._outerRef = void 0;
-      _this.state = {
-        instance: Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__["default"])(Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__["default"])(_this)),
-        isScrolling: false,
-        horizontalScrollDirection: 'forward',
-        scrollLeft: typeof _this.props.initialScrollLeft === 'number' ? _this.props.initialScrollLeft : 0,
-        scrollTop: typeof _this.props.initialScrollTop === 'number' ? _this.props.initialScrollTop : 0,
-        scrollUpdateWasRequested: false,
-        verticalScrollDirection: 'forward'
-      };
-      _this._callOnItemsRendered = void 0;
-      _this._callOnItemsRendered = Object(memoize_one__WEBPACK_IMPORTED_MODULE_3__["default"])(function (overscanColumnStartIndex, overscanColumnStopIndex, overscanRowStartIndex, overscanRowStopIndex, visibleColumnStartIndex, visibleColumnStopIndex, visibleRowStartIndex, visibleRowStopIndex) {
-        return _this.props.onItemsRendered({
-          overscanColumnStartIndex: overscanColumnStartIndex,
-          overscanColumnStopIndex: overscanColumnStopIndex,
-          overscanRowStartIndex: overscanRowStartIndex,
-          overscanRowStopIndex: overscanRowStopIndex,
-          visibleColumnStartIndex: visibleColumnStartIndex,
-          visibleColumnStopIndex: visibleColumnStopIndex,
-          visibleRowStartIndex: visibleRowStartIndex,
-          visibleRowStopIndex: visibleRowStopIndex
-        });
-      });
-      _this._callOnScroll = void 0;
-      _this._callOnScroll = Object(memoize_one__WEBPACK_IMPORTED_MODULE_3__["default"])(function (scrollLeft, scrollTop, horizontalScrollDirection, verticalScrollDirection, scrollUpdateWasRequested) {
-        return _this.props.onScroll({
-          horizontalScrollDirection: horizontalScrollDirection,
-          scrollLeft: scrollLeft,
-          scrollTop: scrollTop,
-          verticalScrollDirection: verticalScrollDirection,
-          scrollUpdateWasRequested: scrollUpdateWasRequested
-        });
-      });
-      _this._getItemStyle = void 0;
-
-      _this._getItemStyle = function (rowIndex, columnIndex) {
-        var _this$props = _this.props,
-            columnWidth = _this$props.columnWidth,
-            direction = _this$props.direction,
-            rowHeight = _this$props.rowHeight;
-
-        var itemStyleCache = _this._getItemStyleCache(shouldResetStyleCacheOnItemSizeChange && columnWidth, shouldResetStyleCacheOnItemSizeChange && direction, shouldResetStyleCacheOnItemSizeChange && rowHeight);
-
-        var key = rowIndex + ":" + columnIndex;
-        var style;
-
-        if (itemStyleCache.hasOwnProperty(key)) {
-          style = itemStyleCache[key];
-        } else {
-          var _style;
-
-          itemStyleCache[key] = style = (_style = {
-            position: 'absolute'
-          }, _style[direction === 'rtl' ? 'right' : 'left'] = getColumnOffset(_this.props, columnIndex, _this._instanceProps), _style.top = getRowOffset(_this.props, rowIndex, _this._instanceProps), _style.height = getRowHeight(_this.props, rowIndex, _this._instanceProps), _style.width = getColumnWidth(_this.props, columnIndex, _this._instanceProps), _style);
-        }
-
-        return style;
-      };
-
-      _this._getItemStyleCache = void 0;
-      _this._getItemStyleCache = Object(memoize_one__WEBPACK_IMPORTED_MODULE_3__["default"])(function (_, __, ___) {
-        return {};
-      });
-
-      _this._onScroll = function (event) {
-        var _event$currentTarget = event.currentTarget,
-            clientHeight = _event$currentTarget.clientHeight,
-            clientWidth = _event$currentTarget.clientWidth,
-            scrollLeft = _event$currentTarget.scrollLeft,
-            scrollTop = _event$currentTarget.scrollTop,
-            scrollHeight = _event$currentTarget.scrollHeight,
-            scrollWidth = _event$currentTarget.scrollWidth;
-
-        _this.setState(function (prevState) {
-          if (prevState.scrollLeft === scrollLeft && prevState.scrollTop === scrollTop) {
-            // Scroll position may have been updated by cDM/cDU,
-            // In which case we don't need to trigger another render,
-            // And we don't want to update state.isScrolling.
-            return null;
-          }
-
-          var direction = _this.props.direction; // TRICKY According to the spec, scrollLeft should be negative for RTL aligned elements.
-          // This is not the case for all browsers though (e.g. Chrome reports values as positive, measured relative to the left).
-          // It's also easier for this component if we convert offsets to the same format as they would be in for ltr.
-          // So the simplest solution is to determine which browser behavior we're dealing with, and convert based on it.
-
-          var calculatedScrollLeft = scrollLeft;
-
-          if (direction === 'rtl') {
-            switch (getRTLOffsetType()) {
-              case 'negative':
-                calculatedScrollLeft = -scrollLeft;
-                break;
-
-              case 'positive-descending':
-                calculatedScrollLeft = scrollWidth - clientWidth - scrollLeft;
-                break;
-            }
-          } // Prevent Safari's elastic scrolling from causing visual shaking when scrolling past bounds.
-
-
-          calculatedScrollLeft = Math.max(0, Math.min(calculatedScrollLeft, scrollWidth - clientWidth));
-          var calculatedScrollTop = Math.max(0, Math.min(scrollTop, scrollHeight - clientHeight));
-          return {
-            isScrolling: true,
-            horizontalScrollDirection: prevState.scrollLeft < scrollLeft ? 'forward' : 'backward',
-            scrollLeft: calculatedScrollLeft,
-            scrollTop: calculatedScrollTop,
-            verticalScrollDirection: prevState.scrollTop < scrollTop ? 'forward' : 'backward',
-            scrollUpdateWasRequested: false
-          };
-        }, _this._resetIsScrollingDebounced);
-      };
-
-      _this._outerRefSetter = function (ref) {
-        var outerRef = _this.props.outerRef;
-        _this._outerRef = ref;
-
-        if (typeof outerRef === 'function') {
-          outerRef(ref);
-        } else if (outerRef != null && typeof outerRef === 'object' && outerRef.hasOwnProperty('current')) {
-          outerRef.current = ref;
-        }
-      };
-
-      _this._resetIsScrollingDebounced = function () {
-        if (_this._resetIsScrollingTimeoutId !== null) {
-          cancelTimeout(_this._resetIsScrollingTimeoutId);
-        }
-
-        _this._resetIsScrollingTimeoutId = requestTimeout(_this._resetIsScrolling, IS_SCROLLING_DEBOUNCE_INTERVAL);
-      };
-
-      _this._resetIsScrolling = function () {
-        _this._resetIsScrollingTimeoutId = null;
-
-        _this.setState({
-          isScrolling: false
-        }, function () {
-          // Clear style cache after state update has been committed.
-          // This way we don't break pure sCU for items that don't use isScrolling param.
-          _this._getItemStyleCache(-1);
-        });
-      };
-
-      return _this;
-    }
-
-    Grid.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
-      validateSharedProps(nextProps, prevState);
-      validateProps(nextProps);
-      return null;
-    };
-
-    var _proto = Grid.prototype;
-
-    _proto.scrollTo = function scrollTo(_ref3) {
-      var scrollLeft = _ref3.scrollLeft,
-          scrollTop = _ref3.scrollTop;
-
-      if (scrollLeft !== undefined) {
-        scrollLeft = Math.max(0, scrollLeft);
-      }
-
-      if (scrollTop !== undefined) {
-        scrollTop = Math.max(0, scrollTop);
-      }
-
-      this.setState(function (prevState) {
-        if (scrollLeft === undefined) {
-          scrollLeft = prevState.scrollLeft;
-        }
-
-        if (scrollTop === undefined) {
-          scrollTop = prevState.scrollTop;
-        }
-
-        if (prevState.scrollLeft === scrollLeft && prevState.scrollTop === scrollTop) {
-          return null;
-        }
-
-        return {
-          horizontalScrollDirection: prevState.scrollLeft < scrollLeft ? 'forward' : 'backward',
-          scrollLeft: scrollLeft,
-          scrollTop: scrollTop,
-          scrollUpdateWasRequested: true,
-          verticalScrollDirection: prevState.scrollTop < scrollTop ? 'forward' : 'backward'
-        };
-      }, this._resetIsScrollingDebounced);
-    };
-
-    _proto.scrollToItem = function scrollToItem(_ref4) {
-      var _ref4$align = _ref4.align,
-          align = _ref4$align === void 0 ? 'auto' : _ref4$align,
-          columnIndex = _ref4.columnIndex,
-          rowIndex = _ref4.rowIndex;
-      var _this$props2 = this.props,
-          columnCount = _this$props2.columnCount,
-          height = _this$props2.height,
-          rowCount = _this$props2.rowCount,
-          width = _this$props2.width;
-      var _this$state = this.state,
-          scrollLeft = _this$state.scrollLeft,
-          scrollTop = _this$state.scrollTop;
-      var scrollbarSize = getScrollbarSize();
-
-      if (columnIndex !== undefined) {
-        columnIndex = Math.max(0, Math.min(columnIndex, columnCount - 1));
-      }
-
-      if (rowIndex !== undefined) {
-        rowIndex = Math.max(0, Math.min(rowIndex, rowCount - 1));
-      }
-
-      var estimatedTotalHeight = getEstimatedTotalHeight(this.props, this._instanceProps);
-      var estimatedTotalWidth = getEstimatedTotalWidth(this.props, this._instanceProps); // The scrollbar size should be considered when scrolling an item into view,
-      // to ensure it's fully visible.
-      // But we only need to account for its size when it's actually visible.
-
-      var horizontalScrollbarSize = estimatedTotalWidth > width ? scrollbarSize : 0;
-      var verticalScrollbarSize = estimatedTotalHeight > height ? scrollbarSize : 0;
-      this.scrollTo({
-        scrollLeft: columnIndex !== undefined ? getOffsetForColumnAndAlignment(this.props, columnIndex, align, scrollLeft, this._instanceProps, verticalScrollbarSize) : scrollLeft,
-        scrollTop: rowIndex !== undefined ? getOffsetForRowAndAlignment(this.props, rowIndex, align, scrollTop, this._instanceProps, horizontalScrollbarSize) : scrollTop
-      });
-    };
-
-    _proto.componentDidMount = function componentDidMount() {
-      var _this$props3 = this.props,
-          initialScrollLeft = _this$props3.initialScrollLeft,
-          initialScrollTop = _this$props3.initialScrollTop;
-
-      if (this._outerRef != null) {
-        var outerRef = this._outerRef;
-
-        if (typeof initialScrollLeft === 'number') {
-          outerRef.scrollLeft = initialScrollLeft;
-        }
-
-        if (typeof initialScrollTop === 'number') {
-          outerRef.scrollTop = initialScrollTop;
-        }
-      }
-
-      this._callPropsCallbacks();
-    };
-
-    _proto.componentDidUpdate = function componentDidUpdate() {
-      var direction = this.props.direction;
-      var _this$state2 = this.state,
-          scrollLeft = _this$state2.scrollLeft,
-          scrollTop = _this$state2.scrollTop,
-          scrollUpdateWasRequested = _this$state2.scrollUpdateWasRequested;
-
-      if (scrollUpdateWasRequested && this._outerRef != null) {
-        // TRICKY According to the spec, scrollLeft should be negative for RTL aligned elements.
-        // This is not the case for all browsers though (e.g. Chrome reports values as positive, measured relative to the left).
-        // So we need to determine which browser behavior we're dealing with, and mimic it.
-        var outerRef = this._outerRef;
-
-        if (direction === 'rtl') {
-          switch (getRTLOffsetType()) {
-            case 'negative':
-              outerRef.scrollLeft = -scrollLeft;
-              break;
-
-            case 'positive-ascending':
-              outerRef.scrollLeft = scrollLeft;
-              break;
-
-            default:
-              var clientWidth = outerRef.clientWidth,
-                  scrollWidth = outerRef.scrollWidth;
-              outerRef.scrollLeft = scrollWidth - clientWidth - scrollLeft;
-              break;
-          }
-        } else {
-          outerRef.scrollLeft = Math.max(0, scrollLeft);
-        }
-
-        outerRef.scrollTop = Math.max(0, scrollTop);
-      }
-
-      this._callPropsCallbacks();
-    };
-
-    _proto.componentWillUnmount = function componentWillUnmount() {
-      if (this._resetIsScrollingTimeoutId !== null) {
-        cancelTimeout(this._resetIsScrollingTimeoutId);
-      }
-    };
-
-    _proto.render = function render() {
-      var _this$props4 = this.props,
-          children = _this$props4.children,
-          className = _this$props4.className,
-          columnCount = _this$props4.columnCount,
-          direction = _this$props4.direction,
-          height = _this$props4.height,
-          innerRef = _this$props4.innerRef,
-          innerElementType = _this$props4.innerElementType,
-          innerTagName = _this$props4.innerTagName,
-          itemData = _this$props4.itemData,
-          _this$props4$itemKey = _this$props4.itemKey,
-          itemKey = _this$props4$itemKey === void 0 ? defaultItemKey : _this$props4$itemKey,
-          outerElementType = _this$props4.outerElementType,
-          outerTagName = _this$props4.outerTagName,
-          rowCount = _this$props4.rowCount,
-          style = _this$props4.style,
-          useIsScrolling = _this$props4.useIsScrolling,
-          width = _this$props4.width;
-      var isScrolling = this.state.isScrolling;
-
-      var _this$_getHorizontalR = this._getHorizontalRangeToRender(),
-          columnStartIndex = _this$_getHorizontalR[0],
-          columnStopIndex = _this$_getHorizontalR[1];
-
-      var _this$_getVerticalRan = this._getVerticalRangeToRender(),
-          rowStartIndex = _this$_getVerticalRan[0],
-          rowStopIndex = _this$_getVerticalRan[1];
-
-      var items = [];
-
-      if (columnCount > 0 && rowCount) {
-        for (var _rowIndex = rowStartIndex; _rowIndex <= rowStopIndex; _rowIndex++) {
-          for (var _columnIndex = columnStartIndex; _columnIndex <= columnStopIndex; _columnIndex++) {
-            items.push(Object(react__WEBPACK_IMPORTED_MODULE_4__["createElement"])(children, {
-              columnIndex: _columnIndex,
-              data: itemData,
-              isScrolling: useIsScrolling ? isScrolling : undefined,
-              key: itemKey({
-                columnIndex: _columnIndex,
-                data: itemData,
-                rowIndex: _rowIndex
-              }),
-              rowIndex: _rowIndex,
-              style: this._getItemStyle(_rowIndex, _columnIndex)
-            }));
-          }
-        }
-      } // Read this value AFTER items have been created,
-      // So their actual sizes (if variable) are taken into consideration.
-
-
-      var estimatedTotalHeight = getEstimatedTotalHeight(this.props, this._instanceProps);
-      var estimatedTotalWidth = getEstimatedTotalWidth(this.props, this._instanceProps);
-      return Object(react__WEBPACK_IMPORTED_MODULE_4__["createElement"])(outerElementType || outerTagName || 'div', {
-        className: className,
-        onScroll: this._onScroll,
-        ref: this._outerRefSetter,
-        style: Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
-          position: 'relative',
-          height: height,
-          width: width,
-          overflow: 'auto',
-          WebkitOverflowScrolling: 'touch',
-          willChange: 'transform',
-          direction: direction
-        }, style)
-      }, Object(react__WEBPACK_IMPORTED_MODULE_4__["createElement"])(innerElementType || innerTagName || 'div', {
-        children: items,
-        ref: innerRef,
-        style: {
-          height: estimatedTotalHeight,
-          pointerEvents: isScrolling ? 'none' : undefined,
-          width: estimatedTotalWidth
-        }
-      }));
-    };
-
-    _proto._callPropsCallbacks = function _callPropsCallbacks() {
-      var _this$props5 = this.props,
-          columnCount = _this$props5.columnCount,
-          onItemsRendered = _this$props5.onItemsRendered,
-          onScroll = _this$props5.onScroll,
-          rowCount = _this$props5.rowCount;
-
-      if (typeof onItemsRendered === 'function') {
-        if (columnCount > 0 && rowCount > 0) {
-          var _this$_getHorizontalR2 = this._getHorizontalRangeToRender(),
-              _overscanColumnStartIndex = _this$_getHorizontalR2[0],
-              _overscanColumnStopIndex = _this$_getHorizontalR2[1],
-              _visibleColumnStartIndex = _this$_getHorizontalR2[2],
-              _visibleColumnStopIndex = _this$_getHorizontalR2[3];
-
-          var _this$_getVerticalRan2 = this._getVerticalRangeToRender(),
-              _overscanRowStartIndex = _this$_getVerticalRan2[0],
-              _overscanRowStopIndex = _this$_getVerticalRan2[1],
-              _visibleRowStartIndex = _this$_getVerticalRan2[2],
-              _visibleRowStopIndex = _this$_getVerticalRan2[3];
-
-          this._callOnItemsRendered(_overscanColumnStartIndex, _overscanColumnStopIndex, _overscanRowStartIndex, _overscanRowStopIndex, _visibleColumnStartIndex, _visibleColumnStopIndex, _visibleRowStartIndex, _visibleRowStopIndex);
-        }
-      }
-
-      if (typeof onScroll === 'function') {
-        var _this$state3 = this.state,
-            _horizontalScrollDirection = _this$state3.horizontalScrollDirection,
-            _scrollLeft = _this$state3.scrollLeft,
-            _scrollTop = _this$state3.scrollTop,
-            _scrollUpdateWasRequested = _this$state3.scrollUpdateWasRequested,
-            _verticalScrollDirection = _this$state3.verticalScrollDirection;
-
-        this._callOnScroll(_scrollLeft, _scrollTop, _horizontalScrollDirection, _verticalScrollDirection, _scrollUpdateWasRequested);
-      }
-    }; // Lazily create and cache item styles while scrolling,
-    // So that pure component sCU will prevent re-renders.
-    // We maintain this cache, and pass a style prop rather than index,
-    // So that List can clear cached styles and force item re-render if necessary.
-
-
-    _proto._getHorizontalRangeToRender = function _getHorizontalRangeToRender() {
-      var _this$props6 = this.props,
-          columnCount = _this$props6.columnCount,
-          overscanColumnCount = _this$props6.overscanColumnCount,
-          overscanColumnsCount = _this$props6.overscanColumnsCount,
-          overscanCount = _this$props6.overscanCount,
-          rowCount = _this$props6.rowCount;
-      var _this$state4 = this.state,
-          horizontalScrollDirection = _this$state4.horizontalScrollDirection,
-          isScrolling = _this$state4.isScrolling,
-          scrollLeft = _this$state4.scrollLeft;
-      var overscanCountResolved = overscanColumnCount || overscanColumnsCount || overscanCount || 1;
-
-      if (columnCount === 0 || rowCount === 0) {
-        return [0, 0, 0, 0];
-      }
-
-      var startIndex = getColumnStartIndexForOffset(this.props, scrollLeft, this._instanceProps);
-      var stopIndex = getColumnStopIndexForStartIndex(this.props, startIndex, scrollLeft, this._instanceProps); // Overscan by one item in each direction so that tab/focus works.
-      // If there isn't at least one extra item, tab loops back around.
-
-      var overscanBackward = !isScrolling || horizontalScrollDirection === 'backward' ? Math.max(1, overscanCountResolved) : 1;
-      var overscanForward = !isScrolling || horizontalScrollDirection === 'forward' ? Math.max(1, overscanCountResolved) : 1;
-      return [Math.max(0, startIndex - overscanBackward), Math.max(0, Math.min(columnCount - 1, stopIndex + overscanForward)), startIndex, stopIndex];
-    };
-
-    _proto._getVerticalRangeToRender = function _getVerticalRangeToRender() {
-      var _this$props7 = this.props,
-          columnCount = _this$props7.columnCount,
-          overscanCount = _this$props7.overscanCount,
-          overscanRowCount = _this$props7.overscanRowCount,
-          overscanRowsCount = _this$props7.overscanRowsCount,
-          rowCount = _this$props7.rowCount;
-      var _this$state5 = this.state,
-          isScrolling = _this$state5.isScrolling,
-          verticalScrollDirection = _this$state5.verticalScrollDirection,
-          scrollTop = _this$state5.scrollTop;
-      var overscanCountResolved = overscanRowCount || overscanRowsCount || overscanCount || 1;
-
-      if (columnCount === 0 || rowCount === 0) {
-        return [0, 0, 0, 0];
-      }
-
-      var startIndex = getRowStartIndexForOffset(this.props, scrollTop, this._instanceProps);
-      var stopIndex = getRowStopIndexForStartIndex(this.props, startIndex, scrollTop, this._instanceProps); // Overscan by one item in each direction so that tab/focus works.
-      // If there isn't at least one extra item, tab loops back around.
-
-      var overscanBackward = !isScrolling || verticalScrollDirection === 'backward' ? Math.max(1, overscanCountResolved) : 1;
-      var overscanForward = !isScrolling || verticalScrollDirection === 'forward' ? Math.max(1, overscanCountResolved) : 1;
-      return [Math.max(0, startIndex - overscanBackward), Math.max(0, Math.min(rowCount - 1, stopIndex + overscanForward)), startIndex, stopIndex];
-    };
-
-    return Grid;
-  }(react__WEBPACK_IMPORTED_MODULE_4__["PureComponent"]), _class.defaultProps = {
-    direction: 'ltr',
-    itemData: undefined,
-    useIsScrolling: false
-  }, _temp;
-}
-
-var validateSharedProps = function validateSharedProps(_ref5, _ref6) {
-  var children = _ref5.children,
-      direction = _ref5.direction,
-      height = _ref5.height,
-      innerTagName = _ref5.innerTagName,
-      outerTagName = _ref5.outerTagName,
-      overscanColumnsCount = _ref5.overscanColumnsCount,
-      overscanCount = _ref5.overscanCount,
-      overscanRowsCount = _ref5.overscanRowsCount,
-      width = _ref5.width;
-  var instance = _ref6.instance;
-
-  if (true) {
-    if (typeof overscanCount === 'number') {
-      if (devWarningsOverscanCount && !devWarningsOverscanCount.has(instance)) {
-        devWarningsOverscanCount.add(instance);
-        console.warn('The overscanCount prop has been deprecated. ' + 'Please use the overscanColumnCount and overscanRowCount props instead.');
-      }
-    }
-
-    if (typeof overscanColumnsCount === 'number' || typeof overscanRowsCount === 'number') {
-      if (devWarningsOverscanRowsColumnsCount && !devWarningsOverscanRowsColumnsCount.has(instance)) {
-        devWarningsOverscanRowsColumnsCount.add(instance);
-        console.warn('The overscanColumnsCount and overscanRowsCount props have been deprecated. ' + 'Please use the overscanColumnCount and overscanRowCount props instead.');
-      }
-    }
-
-    if (innerTagName != null || outerTagName != null) {
-      if (devWarningsTagName && !devWarningsTagName.has(instance)) {
-        devWarningsTagName.add(instance);
-        console.warn('The innerTagName and outerTagName props have been deprecated. ' + 'Please use the innerElementType and outerElementType props instead.');
-      }
-    }
-
-    if (children == null) {
-      throw Error('An invalid "children" prop has been specified. ' + 'Value should be a React component. ' + ("\"" + (children === null ? 'null' : typeof children) + "\" was specified."));
-    }
-
-    switch (direction) {
-      case 'ltr':
-      case 'rtl':
-        // Valid values
-        break;
-
-      default:
-        throw Error('An invalid "direction" prop has been specified. ' + 'Value should be either "ltr" or "rtl". ' + ("\"" + direction + "\" was specified."));
-    }
-
-    if (typeof width !== 'number') {
-      throw Error('An invalid "width" prop has been specified. ' + 'Grids must specify a number for width. ' + ("\"" + (width === null ? 'null' : typeof width) + "\" was specified."));
-    }
-
-    if (typeof height !== 'number') {
-      throw Error('An invalid "height" prop has been specified. ' + 'Grids must specify a number for height. ' + ("\"" + (height === null ? 'null' : typeof height) + "\" was specified."));
-    }
-  }
-};
-
-var DEFAULT_ESTIMATED_ITEM_SIZE = 50;
-
-var getEstimatedTotalHeight = function getEstimatedTotalHeight(_ref, _ref2) {
-  var rowCount = _ref.rowCount;
-  var rowMetadataMap = _ref2.rowMetadataMap,
-      estimatedRowHeight = _ref2.estimatedRowHeight,
-      lastMeasuredRowIndex = _ref2.lastMeasuredRowIndex;
-  var totalSizeOfMeasuredRows = 0; // Edge case check for when the number of items decreases while a scroll is in progress.
-  // https://github.com/bvaughn/react-window/pull/138
-
-  if (lastMeasuredRowIndex >= rowCount) {
-    lastMeasuredRowIndex = rowCount - 1;
-  }
-
-  if (lastMeasuredRowIndex >= 0) {
-    var itemMetadata = rowMetadataMap[lastMeasuredRowIndex];
-    totalSizeOfMeasuredRows = itemMetadata.offset + itemMetadata.size;
-  }
-
-  var numUnmeasuredItems = rowCount - lastMeasuredRowIndex - 1;
-  var totalSizeOfUnmeasuredItems = numUnmeasuredItems * estimatedRowHeight;
-  return totalSizeOfMeasuredRows + totalSizeOfUnmeasuredItems;
-};
-
-var getEstimatedTotalWidth = function getEstimatedTotalWidth(_ref3, _ref4) {
-  var columnCount = _ref3.columnCount;
-  var columnMetadataMap = _ref4.columnMetadataMap,
-      estimatedColumnWidth = _ref4.estimatedColumnWidth,
-      lastMeasuredColumnIndex = _ref4.lastMeasuredColumnIndex;
-  var totalSizeOfMeasuredRows = 0; // Edge case check for when the number of items decreases while a scroll is in progress.
-  // https://github.com/bvaughn/react-window/pull/138
-
-  if (lastMeasuredColumnIndex >= columnCount) {
-    lastMeasuredColumnIndex = columnCount - 1;
-  }
-
-  if (lastMeasuredColumnIndex >= 0) {
-    var itemMetadata = columnMetadataMap[lastMeasuredColumnIndex];
-    totalSizeOfMeasuredRows = itemMetadata.offset + itemMetadata.size;
-  }
-
-  var numUnmeasuredItems = columnCount - lastMeasuredColumnIndex - 1;
-  var totalSizeOfUnmeasuredItems = numUnmeasuredItems * estimatedColumnWidth;
-  return totalSizeOfMeasuredRows + totalSizeOfUnmeasuredItems;
-};
-
-var getItemMetadata = function getItemMetadata(itemType, props, index, instanceProps) {
-  var itemMetadataMap, itemSize, lastMeasuredIndex;
-
-  if (itemType === 'column') {
-    itemMetadataMap = instanceProps.columnMetadataMap;
-    itemSize = props.columnWidth;
-    lastMeasuredIndex = instanceProps.lastMeasuredColumnIndex;
-  } else {
-    itemMetadataMap = instanceProps.rowMetadataMap;
-    itemSize = props.rowHeight;
-    lastMeasuredIndex = instanceProps.lastMeasuredRowIndex;
-  }
-
-  if (index > lastMeasuredIndex) {
-    var offset = 0;
-
-    if (lastMeasuredIndex >= 0) {
-      var itemMetadata = itemMetadataMap[lastMeasuredIndex];
-      offset = itemMetadata.offset + itemMetadata.size;
-    }
-
-    for (var i = lastMeasuredIndex + 1; i <= index; i++) {
-      var size = itemSize(i);
-      itemMetadataMap[i] = {
-        offset: offset,
-        size: size
-      };
-      offset += size;
-    }
-
-    if (itemType === 'column') {
-      instanceProps.lastMeasuredColumnIndex = index;
-    } else {
-      instanceProps.lastMeasuredRowIndex = index;
-    }
-  }
-
-  return itemMetadataMap[index];
-};
-
-var findNearestItem = function findNearestItem(itemType, props, instanceProps, offset) {
-  var itemMetadataMap, lastMeasuredIndex;
-
-  if (itemType === 'column') {
-    itemMetadataMap = instanceProps.columnMetadataMap;
-    lastMeasuredIndex = instanceProps.lastMeasuredColumnIndex;
-  } else {
-    itemMetadataMap = instanceProps.rowMetadataMap;
-    lastMeasuredIndex = instanceProps.lastMeasuredRowIndex;
-  }
-
-  var lastMeasuredItemOffset = lastMeasuredIndex > 0 ? itemMetadataMap[lastMeasuredIndex].offset : 0;
-
-  if (lastMeasuredItemOffset >= offset) {
-    // If we've already measured items within this range just use a binary search as it's faster.
-    return findNearestItemBinarySearch(itemType, props, instanceProps, lastMeasuredIndex, 0, offset);
-  } else {
-    // If we haven't yet measured this high, fallback to an exponential search with an inner binary search.
-    // The exponential search avoids pre-computing sizes for the full set of items as a binary search would.
-    // The overall complexity for this approach is O(log n).
-    return findNearestItemExponentialSearch(itemType, props, instanceProps, Math.max(0, lastMeasuredIndex), offset);
-  }
-};
-
-var findNearestItemBinarySearch = function findNearestItemBinarySearch(itemType, props, instanceProps, high, low, offset) {
-  while (low <= high) {
-    var middle = low + Math.floor((high - low) / 2);
-    var currentOffset = getItemMetadata(itemType, props, middle, instanceProps).offset;
-
-    if (currentOffset === offset) {
-      return middle;
-    } else if (currentOffset < offset) {
-      low = middle + 1;
-    } else if (currentOffset > offset) {
-      high = middle - 1;
-    }
-  }
-
-  if (low > 0) {
-    return low - 1;
-  } else {
-    return 0;
-  }
-};
-
-var findNearestItemExponentialSearch = function findNearestItemExponentialSearch(itemType, props, instanceProps, index, offset) {
-  var itemCount = itemType === 'column' ? props.columnCount : props.rowCount;
-  var interval = 1;
-
-  while (index < itemCount && getItemMetadata(itemType, props, index, instanceProps).offset < offset) {
-    index += interval;
-    interval *= 2;
-  }
-
-  return findNearestItemBinarySearch(itemType, props, instanceProps, Math.min(index, itemCount - 1), Math.floor(index / 2), offset);
-};
-
-var getOffsetForIndexAndAlignment = function getOffsetForIndexAndAlignment(itemType, props, index, align, scrollOffset, instanceProps, scrollbarSize) {
-  var size = itemType === 'column' ? props.width : props.height;
-  var itemMetadata = getItemMetadata(itemType, props, index, instanceProps); // Get estimated total size after ItemMetadata is computed,
-  // To ensure it reflects actual measurements instead of just estimates.
-
-  var estimatedTotalSize = itemType === 'column' ? getEstimatedTotalWidth(props, instanceProps) : getEstimatedTotalHeight(props, instanceProps);
-  var maxOffset = Math.max(0, Math.min(estimatedTotalSize - size, itemMetadata.offset));
-  var minOffset = Math.max(0, itemMetadata.offset - size + scrollbarSize + itemMetadata.size);
-
-  if (align === 'smart') {
-    if (scrollOffset >= minOffset - size && scrollOffset <= maxOffset + size) {
-      align = 'auto';
-    } else {
-      align = 'center';
-    }
-  }
-
-  switch (align) {
-    case 'start':
-      return maxOffset;
-
-    case 'end':
-      return minOffset;
-
-    case 'center':
-      return Math.round(minOffset + (maxOffset - minOffset) / 2);
-
-    case 'auto':
-    default:
-      if (scrollOffset >= minOffset && scrollOffset <= maxOffset) {
-        return scrollOffset;
-      } else if (minOffset > maxOffset) {
-        // Because we only take into account the scrollbar size when calculating minOffset
-        // this value can be larger than maxOffset when at the end of the list
-        return minOffset;
-      } else if (scrollOffset < minOffset) {
-        return minOffset;
-      } else {
-        return maxOffset;
-      }
-
-  }
-};
-
-var VariableSizeGrid =
-/*#__PURE__*/
-createGridComponent({
-  getColumnOffset: function getColumnOffset(props, index, instanceProps) {
-    return getItemMetadata('column', props, index, instanceProps).offset;
-  },
-  getColumnStartIndexForOffset: function getColumnStartIndexForOffset(props, scrollLeft, instanceProps) {
-    return findNearestItem('column', props, instanceProps, scrollLeft);
-  },
-  getColumnStopIndexForStartIndex: function getColumnStopIndexForStartIndex(props, startIndex, scrollLeft, instanceProps) {
-    var columnCount = props.columnCount,
-        width = props.width;
-    var itemMetadata = getItemMetadata('column', props, startIndex, instanceProps);
-    var maxOffset = scrollLeft + width;
-    var offset = itemMetadata.offset + itemMetadata.size;
-    var stopIndex = startIndex;
-
-    while (stopIndex < columnCount - 1 && offset < maxOffset) {
-      stopIndex++;
-      offset += getItemMetadata('column', props, stopIndex, instanceProps).size;
-    }
-
-    return stopIndex;
-  },
-  getColumnWidth: function getColumnWidth(props, index, instanceProps) {
-    return instanceProps.columnMetadataMap[index].size;
-  },
-  getEstimatedTotalHeight: getEstimatedTotalHeight,
-  getEstimatedTotalWidth: getEstimatedTotalWidth,
-  getOffsetForColumnAndAlignment: function getOffsetForColumnAndAlignment(props, index, align, scrollOffset, instanceProps, scrollbarSize) {
-    return getOffsetForIndexAndAlignment('column', props, index, align, scrollOffset, instanceProps, scrollbarSize);
-  },
-  getOffsetForRowAndAlignment: function getOffsetForRowAndAlignment(props, index, align, scrollOffset, instanceProps, scrollbarSize) {
-    return getOffsetForIndexAndAlignment('row', props, index, align, scrollOffset, instanceProps, scrollbarSize);
-  },
-  getRowOffset: function getRowOffset(props, index, instanceProps) {
-    return getItemMetadata('row', props, index, instanceProps).offset;
-  },
-  getRowHeight: function getRowHeight(props, index, instanceProps) {
-    return instanceProps.rowMetadataMap[index].size;
-  },
-  getRowStartIndexForOffset: function getRowStartIndexForOffset(props, scrollTop, instanceProps) {
-    return findNearestItem('row', props, instanceProps, scrollTop);
-  },
-  getRowStopIndexForStartIndex: function getRowStopIndexForStartIndex(props, startIndex, scrollTop, instanceProps) {
-    var rowCount = props.rowCount,
-        height = props.height;
-    var itemMetadata = getItemMetadata('row', props, startIndex, instanceProps);
-    var maxOffset = scrollTop + height;
-    var offset = itemMetadata.offset + itemMetadata.size;
-    var stopIndex = startIndex;
-
-    while (stopIndex < rowCount - 1 && offset < maxOffset) {
-      stopIndex++;
-      offset += getItemMetadata('row', props, stopIndex, instanceProps).size;
-    }
-
-    return stopIndex;
-  },
-  initInstanceProps: function initInstanceProps(props, instance) {
-    var _ref5 = props,
-        estimatedColumnWidth = _ref5.estimatedColumnWidth,
-        estimatedRowHeight = _ref5.estimatedRowHeight;
-    var instanceProps = {
-      columnMetadataMap: {},
-      estimatedColumnWidth: estimatedColumnWidth || DEFAULT_ESTIMATED_ITEM_SIZE,
-      estimatedRowHeight: estimatedRowHeight || DEFAULT_ESTIMATED_ITEM_SIZE,
-      lastMeasuredColumnIndex: -1,
-      lastMeasuredRowIndex: -1,
-      rowMetadataMap: {}
-    };
-
-    instance.resetAfterColumnIndex = function (columnIndex, shouldForceUpdate) {
-      if (shouldForceUpdate === void 0) {
-        shouldForceUpdate = true;
-      }
-
-      instance.resetAfterIndices({
-        columnIndex: columnIndex,
-        shouldForceUpdate: shouldForceUpdate
-      });
-    };
-
-    instance.resetAfterRowIndex = function (rowIndex, shouldForceUpdate) {
-      if (shouldForceUpdate === void 0) {
-        shouldForceUpdate = true;
-      }
-
-      instance.resetAfterIndices({
-        rowIndex: rowIndex,
-        shouldForceUpdate: shouldForceUpdate
-      });
-    };
-
-    instance.resetAfterIndices = function (_ref6) {
-      var columnIndex = _ref6.columnIndex,
-          rowIndex = _ref6.rowIndex,
-          _ref6$shouldForceUpda = _ref6.shouldForceUpdate,
-          shouldForceUpdate = _ref6$shouldForceUpda === void 0 ? true : _ref6$shouldForceUpda;
-
-      if (typeof columnIndex === 'number') {
-        instanceProps.lastMeasuredColumnIndex = Math.min(instanceProps.lastMeasuredColumnIndex, columnIndex - 1);
-      }
-
-      if (typeof rowIndex === 'number') {
-        instanceProps.lastMeasuredRowIndex = Math.min(instanceProps.lastMeasuredRowIndex, rowIndex - 1);
-      } // We could potentially optimize further by only evicting styles after this index,
-      // But since styles are only cached while scrolling is in progress-
-      // It seems an unnecessary optimization.
-      // It's unlikely that resetAfterIndex() will be called while a user is scrolling.
-
-
-      instance._getItemStyleCache(-1);
-
-      if (shouldForceUpdate) {
-        instance.forceUpdate();
-      }
-    };
-
-    return instanceProps;
-  },
-  shouldResetStyleCacheOnItemSizeChange: false,
-  validateProps: function validateProps(_ref7) {
-    var columnWidth = _ref7.columnWidth,
-        rowHeight = _ref7.rowHeight;
-
-    if (true) {
-      if (typeof columnWidth !== 'function') {
-        throw Error('An invalid "columnWidth" prop has been specified. ' + 'Value should be a function. ' + ("\"" + (columnWidth === null ? 'null' : typeof columnWidth) + "\" was specified."));
-      } else if (typeof rowHeight !== 'function') {
-        throw Error('An invalid "rowHeight" prop has been specified. ' + 'Value should be a function. ' + ("\"" + (rowHeight === null ? 'null' : typeof rowHeight) + "\" was specified."));
-      }
-    }
-  }
-});
-
-var IS_SCROLLING_DEBOUNCE_INTERVAL$1 = 150;
-
-var defaultItemKey$1 = function defaultItemKey(index, data) {
-  return index;
-}; // In DEV mode, this Set helps us only log a warning once per component instance.
-// This avoids spamming the console every time a render happens.
-
-
-var devWarningsDirection = null;
-var devWarningsTagName$1 = null;
-
-if (true) {
-  if (typeof window !== 'undefined' && typeof window.WeakSet !== 'undefined') {
-    devWarningsDirection =
-    /*#__PURE__*/
-    new WeakSet();
-    devWarningsTagName$1 =
-    /*#__PURE__*/
-    new WeakSet();
-  }
-}
-
-function createListComponent(_ref) {
-  var _class, _temp;
-
-  var getItemOffset = _ref.getItemOffset,
-      getEstimatedTotalSize = _ref.getEstimatedTotalSize,
-      getItemSize = _ref.getItemSize,
-      getOffsetForIndexAndAlignment = _ref.getOffsetForIndexAndAlignment,
-      getStartIndexForOffset = _ref.getStartIndexForOffset,
-      getStopIndexForStartIndex = _ref.getStopIndexForStartIndex,
-      initInstanceProps = _ref.initInstanceProps,
-      shouldResetStyleCacheOnItemSizeChange = _ref.shouldResetStyleCacheOnItemSizeChange,
-      validateProps = _ref.validateProps;
-  return _temp = _class =
-  /*#__PURE__*/
-  function (_PureComponent) {
-    Object(_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(List, _PureComponent);
-
-    // Always use explicit constructor for React components.
-    // It produces less code after transpilation. (#26)
-    // eslint-disable-next-line no-useless-constructor
-    function List(props) {
-      var _this;
-
-      _this = _PureComponent.call(this, props) || this;
-      _this._instanceProps = initInstanceProps(_this.props, Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__["default"])(Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__["default"])(_this)));
-      _this._outerRef = void 0;
-      _this._resetIsScrollingTimeoutId = null;
-      _this.state = {
-        instance: Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__["default"])(Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__["default"])(_this)),
-        isScrolling: false,
-        scrollDirection: 'forward',
-        scrollOffset: typeof _this.props.initialScrollOffset === 'number' ? _this.props.initialScrollOffset : 0,
-        scrollUpdateWasRequested: false
-      };
-      _this._callOnItemsRendered = void 0;
-      _this._callOnItemsRendered = Object(memoize_one__WEBPACK_IMPORTED_MODULE_3__["default"])(function (overscanStartIndex, overscanStopIndex, visibleStartIndex, visibleStopIndex) {
-        return _this.props.onItemsRendered({
-          overscanStartIndex: overscanStartIndex,
-          overscanStopIndex: overscanStopIndex,
-          visibleStartIndex: visibleStartIndex,
-          visibleStopIndex: visibleStopIndex
-        });
-      });
-      _this._callOnScroll = void 0;
-      _this._callOnScroll = Object(memoize_one__WEBPACK_IMPORTED_MODULE_3__["default"])(function (scrollDirection, scrollOffset, scrollUpdateWasRequested) {
-        return _this.props.onScroll({
-          scrollDirection: scrollDirection,
-          scrollOffset: scrollOffset,
-          scrollUpdateWasRequested: scrollUpdateWasRequested
-        });
-      });
-      _this._getItemStyle = void 0;
-
-      _this._getItemStyle = function (index) {
-        var _this$props = _this.props,
-            direction = _this$props.direction,
-            itemSize = _this$props.itemSize,
-            layout = _this$props.layout;
-
-        var itemStyleCache = _this._getItemStyleCache(shouldResetStyleCacheOnItemSizeChange && itemSize, shouldResetStyleCacheOnItemSizeChange && layout, shouldResetStyleCacheOnItemSizeChange && direction);
-
-        var style;
-
-        if (itemStyleCache.hasOwnProperty(index)) {
-          style = itemStyleCache[index];
-        } else {
-          var _style;
-
-          var _offset = getItemOffset(_this.props, index, _this._instanceProps);
-
-          var size = getItemSize(_this.props, index, _this._instanceProps); // TODO Deprecate direction "horizontal"
-
-          var isHorizontal = direction === 'horizontal' || layout === 'horizontal';
-          itemStyleCache[index] = style = (_style = {
-            position: 'absolute'
-          }, _style[direction === 'rtl' ? 'right' : 'left'] = isHorizontal ? _offset : 0, _style.top = !isHorizontal ? _offset : 0, _style.height = !isHorizontal ? size : '100%', _style.width = isHorizontal ? size : '100%', _style);
-        }
-
-        return style;
-      };
-
-      _this._getItemStyleCache = void 0;
-      _this._getItemStyleCache = Object(memoize_one__WEBPACK_IMPORTED_MODULE_3__["default"])(function (_, __, ___) {
-        return {};
-      });
-
-      _this._onScrollHorizontal = function (event) {
-        var _event$currentTarget = event.currentTarget,
-            clientWidth = _event$currentTarget.clientWidth,
-            scrollLeft = _event$currentTarget.scrollLeft,
-            scrollWidth = _event$currentTarget.scrollWidth;
-
-        _this.setState(function (prevState) {
-          if (prevState.scrollOffset === scrollLeft) {
-            // Scroll position may have been updated by cDM/cDU,
-            // In which case we don't need to trigger another render,
-            // And we don't want to update state.isScrolling.
-            return null;
-          }
-
-          var direction = _this.props.direction;
-          var scrollOffset = scrollLeft;
-
-          if (direction === 'rtl') {
-            // TRICKY According to the spec, scrollLeft should be negative for RTL aligned elements.
-            // This is not the case for all browsers though (e.g. Chrome reports values as positive, measured relative to the left).
-            // It's also easier for this component if we convert offsets to the same format as they would be in for ltr.
-            // So the simplest solution is to determine which browser behavior we're dealing with, and convert based on it.
-            switch (getRTLOffsetType()) {
-              case 'negative':
-                scrollOffset = -scrollLeft;
-                break;
-
-              case 'positive-descending':
-                scrollOffset = scrollWidth - clientWidth - scrollLeft;
-                break;
-            }
-          } // Prevent Safari's elastic scrolling from causing visual shaking when scrolling past bounds.
-
-
-          scrollOffset = Math.max(0, Math.min(scrollOffset, scrollWidth - clientWidth));
-          return {
-            isScrolling: true,
-            scrollDirection: prevState.scrollOffset < scrollLeft ? 'forward' : 'backward',
-            scrollOffset: scrollOffset,
-            scrollUpdateWasRequested: false
-          };
-        }, _this._resetIsScrollingDebounced);
-      };
-
-      _this._onScrollVertical = function (event) {
-        var _event$currentTarget2 = event.currentTarget,
-            clientHeight = _event$currentTarget2.clientHeight,
-            scrollHeight = _event$currentTarget2.scrollHeight,
-            scrollTop = _event$currentTarget2.scrollTop;
-
-        _this.setState(function (prevState) {
-          if (prevState.scrollOffset === scrollTop) {
-            // Scroll position may have been updated by cDM/cDU,
-            // In which case we don't need to trigger another render,
-            // And we don't want to update state.isScrolling.
-            return null;
-          } // Prevent Safari's elastic scrolling from causing visual shaking when scrolling past bounds.
-
-
-          var scrollOffset = Math.max(0, Math.min(scrollTop, scrollHeight - clientHeight));
-          return {
-            isScrolling: true,
-            scrollDirection: prevState.scrollOffset < scrollOffset ? 'forward' : 'backward',
-            scrollOffset: scrollOffset,
-            scrollUpdateWasRequested: false
-          };
-        }, _this._resetIsScrollingDebounced);
-      };
-
-      _this._outerRefSetter = function (ref) {
-        var outerRef = _this.props.outerRef;
-        _this._outerRef = ref;
-
-        if (typeof outerRef === 'function') {
-          outerRef(ref);
-        } else if (outerRef != null && typeof outerRef === 'object' && outerRef.hasOwnProperty('current')) {
-          outerRef.current = ref;
-        }
-      };
-
-      _this._resetIsScrollingDebounced = function () {
-        if (_this._resetIsScrollingTimeoutId !== null) {
-          cancelTimeout(_this._resetIsScrollingTimeoutId);
-        }
-
-        _this._resetIsScrollingTimeoutId = requestTimeout(_this._resetIsScrolling, IS_SCROLLING_DEBOUNCE_INTERVAL$1);
-      };
-
-      _this._resetIsScrolling = function () {
-        _this._resetIsScrollingTimeoutId = null;
-
-        _this.setState({
-          isScrolling: false
-        }, function () {
-          // Clear style cache after state update has been committed.
-          // This way we don't break pure sCU for items that don't use isScrolling param.
-          _this._getItemStyleCache(-1, null);
-        });
-      };
-
-      return _this;
-    }
-
-    List.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
-      validateSharedProps$1(nextProps, prevState);
-      validateProps(nextProps);
-      return null;
-    };
-
-    var _proto = List.prototype;
-
-    _proto.scrollTo = function scrollTo(scrollOffset) {
-      scrollOffset = Math.max(0, scrollOffset);
-      this.setState(function (prevState) {
-        if (prevState.scrollOffset === scrollOffset) {
-          return null;
-        }
-
-        return {
-          scrollDirection: prevState.scrollOffset < scrollOffset ? 'forward' : 'backward',
-          scrollOffset: scrollOffset,
-          scrollUpdateWasRequested: true
-        };
-      }, this._resetIsScrollingDebounced);
-    };
-
-    _proto.scrollToItem = function scrollToItem(index, align) {
-      if (align === void 0) {
-        align = 'auto';
-      }
-
-      var itemCount = this.props.itemCount;
-      var scrollOffset = this.state.scrollOffset;
-      index = Math.max(0, Math.min(index, itemCount - 1));
-      this.scrollTo(getOffsetForIndexAndAlignment(this.props, index, align, scrollOffset, this._instanceProps));
-    };
-
-    _proto.componentDidMount = function componentDidMount() {
-      var _this$props2 = this.props,
-          direction = _this$props2.direction,
-          initialScrollOffset = _this$props2.initialScrollOffset,
-          layout = _this$props2.layout;
-
-      if (typeof initialScrollOffset === 'number' && this._outerRef != null) {
-        var outerRef = this._outerRef; // TODO Deprecate direction "horizontal"
-
-        if (direction === 'horizontal' || layout === 'horizontal') {
-          outerRef.scrollLeft = initialScrollOffset;
-        } else {
-          outerRef.scrollTop = initialScrollOffset;
-        }
-      }
-
-      this._callPropsCallbacks();
-    };
-
-    _proto.componentDidUpdate = function componentDidUpdate() {
-      var _this$props3 = this.props,
-          direction = _this$props3.direction,
-          layout = _this$props3.layout;
-      var _this$state = this.state,
-          scrollOffset = _this$state.scrollOffset,
-          scrollUpdateWasRequested = _this$state.scrollUpdateWasRequested;
-
-      if (scrollUpdateWasRequested && this._outerRef != null) {
-        var outerRef = this._outerRef; // TODO Deprecate direction "horizontal"
-
-        if (direction === 'horizontal' || layout === 'horizontal') {
-          if (direction === 'rtl') {
-            // TRICKY According to the spec, scrollLeft should be negative for RTL aligned elements.
-            // This is not the case for all browsers though (e.g. Chrome reports values as positive, measured relative to the left).
-            // So we need to determine which browser behavior we're dealing with, and mimic it.
-            switch (getRTLOffsetType()) {
-              case 'negative':
-                outerRef.scrollLeft = -scrollOffset;
-                break;
-
-              case 'positive-ascending':
-                outerRef.scrollLeft = scrollOffset;
-                break;
-
-              default:
-                var clientWidth = outerRef.clientWidth,
-                    scrollWidth = outerRef.scrollWidth;
-                outerRef.scrollLeft = scrollWidth - clientWidth - scrollOffset;
-                break;
-            }
-          } else {
-            outerRef.scrollLeft = scrollOffset;
-          }
-        } else {
-          outerRef.scrollTop = scrollOffset;
-        }
-      }
-
-      this._callPropsCallbacks();
-    };
-
-    _proto.componentWillUnmount = function componentWillUnmount() {
-      if (this._resetIsScrollingTimeoutId !== null) {
-        cancelTimeout(this._resetIsScrollingTimeoutId);
-      }
-    };
-
-    _proto.render = function render() {
-      var _this$props4 = this.props,
-          children = _this$props4.children,
-          className = _this$props4.className,
-          direction = _this$props4.direction,
-          height = _this$props4.height,
-          innerRef = _this$props4.innerRef,
-          innerElementType = _this$props4.innerElementType,
-          innerTagName = _this$props4.innerTagName,
-          itemCount = _this$props4.itemCount,
-          itemData = _this$props4.itemData,
-          _this$props4$itemKey = _this$props4.itemKey,
-          itemKey = _this$props4$itemKey === void 0 ? defaultItemKey$1 : _this$props4$itemKey,
-          layout = _this$props4.layout,
-          outerElementType = _this$props4.outerElementType,
-          outerTagName = _this$props4.outerTagName,
-          style = _this$props4.style,
-          useIsScrolling = _this$props4.useIsScrolling,
-          width = _this$props4.width;
-      var isScrolling = this.state.isScrolling; // TODO Deprecate direction "horizontal"
-
-      var isHorizontal = direction === 'horizontal' || layout === 'horizontal';
-      var onScroll = isHorizontal ? this._onScrollHorizontal : this._onScrollVertical;
-
-      var _this$_getRangeToRend = this._getRangeToRender(),
-          startIndex = _this$_getRangeToRend[0],
-          stopIndex = _this$_getRangeToRend[1];
-
-      var items = [];
-
-      if (itemCount > 0) {
-        for (var _index = startIndex; _index <= stopIndex; _index++) {
-          items.push(Object(react__WEBPACK_IMPORTED_MODULE_4__["createElement"])(children, {
-            data: itemData,
-            key: itemKey(_index, itemData),
-            index: _index,
-            isScrolling: useIsScrolling ? isScrolling : undefined,
-            style: this._getItemStyle(_index)
-          }));
-        }
-      } // Read this value AFTER items have been created,
-      // So their actual sizes (if variable) are taken into consideration.
-
-
-      var estimatedTotalSize = getEstimatedTotalSize(this.props, this._instanceProps);
-      return Object(react__WEBPACK_IMPORTED_MODULE_4__["createElement"])(outerElementType || outerTagName || 'div', {
-        className: className,
-        onScroll: onScroll,
-        ref: this._outerRefSetter,
-        style: Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
-          position: 'relative',
-          height: height,
-          width: width,
-          overflow: 'auto',
-          WebkitOverflowScrolling: 'touch',
-          willChange: 'transform',
-          direction: direction
-        }, style)
-      }, Object(react__WEBPACK_IMPORTED_MODULE_4__["createElement"])(innerElementType || innerTagName || 'div', {
-        children: items,
-        ref: innerRef,
-        style: {
-          height: isHorizontal ? '100%' : estimatedTotalSize,
-          pointerEvents: isScrolling ? 'none' : undefined,
-          width: isHorizontal ? estimatedTotalSize : '100%'
-        }
-      }));
-    };
-
-    _proto._callPropsCallbacks = function _callPropsCallbacks() {
-      if (typeof this.props.onItemsRendered === 'function') {
-        var itemCount = this.props.itemCount;
-
-        if (itemCount > 0) {
-          var _this$_getRangeToRend2 = this._getRangeToRender(),
-              _overscanStartIndex = _this$_getRangeToRend2[0],
-              _overscanStopIndex = _this$_getRangeToRend2[1],
-              _visibleStartIndex = _this$_getRangeToRend2[2],
-              _visibleStopIndex = _this$_getRangeToRend2[3];
-
-          this._callOnItemsRendered(_overscanStartIndex, _overscanStopIndex, _visibleStartIndex, _visibleStopIndex);
-        }
-      }
-
-      if (typeof this.props.onScroll === 'function') {
-        var _this$state2 = this.state,
-            _scrollDirection = _this$state2.scrollDirection,
-            _scrollOffset = _this$state2.scrollOffset,
-            _scrollUpdateWasRequested = _this$state2.scrollUpdateWasRequested;
-
-        this._callOnScroll(_scrollDirection, _scrollOffset, _scrollUpdateWasRequested);
-      }
-    }; // Lazily create and cache item styles while scrolling,
-    // So that pure component sCU will prevent re-renders.
-    // We maintain this cache, and pass a style prop rather than index,
-    // So that List can clear cached styles and force item re-render if necessary.
-
-
-    _proto._getRangeToRender = function _getRangeToRender() {
-      var _this$props5 = this.props,
-          itemCount = _this$props5.itemCount,
-          overscanCount = _this$props5.overscanCount;
-      var _this$state3 = this.state,
-          isScrolling = _this$state3.isScrolling,
-          scrollDirection = _this$state3.scrollDirection,
-          scrollOffset = _this$state3.scrollOffset;
-
-      if (itemCount === 0) {
-        return [0, 0, 0, 0];
-      }
-
-      var startIndex = getStartIndexForOffset(this.props, scrollOffset, this._instanceProps);
-      var stopIndex = getStopIndexForStartIndex(this.props, startIndex, scrollOffset, this._instanceProps); // Overscan by one item in each direction so that tab/focus works.
-      // If there isn't at least one extra item, tab loops back around.
-
-      var overscanBackward = !isScrolling || scrollDirection === 'backward' ? Math.max(1, overscanCount) : 1;
-      var overscanForward = !isScrolling || scrollDirection === 'forward' ? Math.max(1, overscanCount) : 1;
-      return [Math.max(0, startIndex - overscanBackward), Math.max(0, Math.min(itemCount - 1, stopIndex + overscanForward)), startIndex, stopIndex];
-    };
-
-    return List;
-  }(react__WEBPACK_IMPORTED_MODULE_4__["PureComponent"]), _class.defaultProps = {
-    direction: 'ltr',
-    itemData: undefined,
-    layout: 'vertical',
-    overscanCount: 2,
-    useIsScrolling: false
-  }, _temp;
-} // NOTE: I considered further wrapping individual items with a pure ListItem component.
-// This would avoid ever calling the render function for the same index more than once,
-// But it would also add the overhead of a lot of components/fibers.
-// I assume people already do this (render function returning a class component),
-// So my doing it would just unnecessarily double the wrappers.
-
-var validateSharedProps$1 = function validateSharedProps(_ref2, _ref3) {
-  var children = _ref2.children,
-      direction = _ref2.direction,
-      height = _ref2.height,
-      layout = _ref2.layout,
-      innerTagName = _ref2.innerTagName,
-      outerTagName = _ref2.outerTagName,
-      width = _ref2.width;
-  var instance = _ref3.instance;
-
-  if (true) {
-    if (innerTagName != null || outerTagName != null) {
-      if (devWarningsTagName$1 && !devWarningsTagName$1.has(instance)) {
-        devWarningsTagName$1.add(instance);
-        console.warn('The innerTagName and outerTagName props have been deprecated. ' + 'Please use the innerElementType and outerElementType props instead.');
-      }
-    } // TODO Deprecate direction "horizontal"
-
-
-    var isHorizontal = direction === 'horizontal' || layout === 'horizontal';
-
-    switch (direction) {
-      case 'horizontal':
-      case 'vertical':
-        if (devWarningsDirection && !devWarningsDirection.has(instance)) {
-          devWarningsDirection.add(instance);
-          console.warn('The direction prop should be either "ltr" (default) or "rtl". ' + 'Please use the layout prop to specify "vertical" (default) or "horizontal" orientation.');
-        }
-
-        break;
-
-      case 'ltr':
-      case 'rtl':
-        // Valid values
-        break;
-
-      default:
-        throw Error('An invalid "direction" prop has been specified. ' + 'Value should be either "ltr" or "rtl". ' + ("\"" + direction + "\" was specified."));
-    }
-
-    switch (layout) {
-      case 'horizontal':
-      case 'vertical':
-        // Valid values
-        break;
-
-      default:
-        throw Error('An invalid "layout" prop has been specified. ' + 'Value should be either "horizontal" or "vertical". ' + ("\"" + layout + "\" was specified."));
-    }
-
-    if (children == null) {
-      throw Error('An invalid "children" prop has been specified. ' + 'Value should be a React component. ' + ("\"" + (children === null ? 'null' : typeof children) + "\" was specified."));
-    }
-
-    if (isHorizontal && typeof width !== 'number') {
-      throw Error('An invalid "width" prop has been specified. ' + 'Horizontal lists must specify a number for width. ' + ("\"" + (width === null ? 'null' : typeof width) + "\" was specified."));
-    } else if (!isHorizontal && typeof height !== 'number') {
-      throw Error('An invalid "height" prop has been specified. ' + 'Vertical lists must specify a number for height. ' + ("\"" + (height === null ? 'null' : typeof height) + "\" was specified."));
-    }
-  }
-};
-
-var DEFAULT_ESTIMATED_ITEM_SIZE$1 = 50;
-
-var getItemMetadata$1 = function getItemMetadata(props, index, instanceProps) {
-  var _ref = props,
-      itemSize = _ref.itemSize;
-  var itemMetadataMap = instanceProps.itemMetadataMap,
-      lastMeasuredIndex = instanceProps.lastMeasuredIndex;
-
-  if (index > lastMeasuredIndex) {
-    var offset = 0;
-
-    if (lastMeasuredIndex >= 0) {
-      var itemMetadata = itemMetadataMap[lastMeasuredIndex];
-      offset = itemMetadata.offset + itemMetadata.size;
-    }
-
-    for (var i = lastMeasuredIndex + 1; i <= index; i++) {
-      var size = itemSize(i);
-      itemMetadataMap[i] = {
-        offset: offset,
-        size: size
-      };
-      offset += size;
-    }
-
-    instanceProps.lastMeasuredIndex = index;
-  }
-
-  return itemMetadataMap[index];
-};
-
-var findNearestItem$1 = function findNearestItem(props, instanceProps, offset) {
-  var itemMetadataMap = instanceProps.itemMetadataMap,
-      lastMeasuredIndex = instanceProps.lastMeasuredIndex;
-  var lastMeasuredItemOffset = lastMeasuredIndex > 0 ? itemMetadataMap[lastMeasuredIndex].offset : 0;
-
-  if (lastMeasuredItemOffset >= offset) {
-    // If we've already measured items within this range just use a binary search as it's faster.
-    return findNearestItemBinarySearch$1(props, instanceProps, lastMeasuredIndex, 0, offset);
-  } else {
-    // If we haven't yet measured this high, fallback to an exponential search with an inner binary search.
-    // The exponential search avoids pre-computing sizes for the full set of items as a binary search would.
-    // The overall complexity for this approach is O(log n).
-    return findNearestItemExponentialSearch$1(props, instanceProps, Math.max(0, lastMeasuredIndex), offset);
-  }
-};
-
-var findNearestItemBinarySearch$1 = function findNearestItemBinarySearch(props, instanceProps, high, low, offset) {
-  while (low <= high) {
-    var middle = low + Math.floor((high - low) / 2);
-    var currentOffset = getItemMetadata$1(props, middle, instanceProps).offset;
-
-    if (currentOffset === offset) {
-      return middle;
-    } else if (currentOffset < offset) {
-      low = middle + 1;
-    } else if (currentOffset > offset) {
-      high = middle - 1;
-    }
-  }
-
-  if (low > 0) {
-    return low - 1;
-  } else {
-    return 0;
-  }
-};
-
-var findNearestItemExponentialSearch$1 = function findNearestItemExponentialSearch(props, instanceProps, index, offset) {
-  var itemCount = props.itemCount;
-  var interval = 1;
-
-  while (index < itemCount && getItemMetadata$1(props, index, instanceProps).offset < offset) {
-    index += interval;
-    interval *= 2;
-  }
-
-  return findNearestItemBinarySearch$1(props, instanceProps, Math.min(index, itemCount - 1), Math.floor(index / 2), offset);
-};
-
-var getEstimatedTotalSize = function getEstimatedTotalSize(_ref2, _ref3) {
-  var itemCount = _ref2.itemCount;
-  var itemMetadataMap = _ref3.itemMetadataMap,
-      estimatedItemSize = _ref3.estimatedItemSize,
-      lastMeasuredIndex = _ref3.lastMeasuredIndex;
-  var totalSizeOfMeasuredItems = 0; // Edge case check for when the number of items decreases while a scroll is in progress.
-  // https://github.com/bvaughn/react-window/pull/138
-
-  if (lastMeasuredIndex >= itemCount) {
-    lastMeasuredIndex = itemCount - 1;
-  }
-
-  if (lastMeasuredIndex >= 0) {
-    var itemMetadata = itemMetadataMap[lastMeasuredIndex];
-    totalSizeOfMeasuredItems = itemMetadata.offset + itemMetadata.size;
-  }
-
-  var numUnmeasuredItems = itemCount - lastMeasuredIndex - 1;
-  var totalSizeOfUnmeasuredItems = numUnmeasuredItems * estimatedItemSize;
-  return totalSizeOfMeasuredItems + totalSizeOfUnmeasuredItems;
-};
-
-var VariableSizeList =
-/*#__PURE__*/
-createListComponent({
-  getItemOffset: function getItemOffset(props, index, instanceProps) {
-    return getItemMetadata$1(props, index, instanceProps).offset;
-  },
-  getItemSize: function getItemSize(props, index, instanceProps) {
-    return instanceProps.itemMetadataMap[index].size;
-  },
-  getEstimatedTotalSize: getEstimatedTotalSize,
-  getOffsetForIndexAndAlignment: function getOffsetForIndexAndAlignment(props, index, align, scrollOffset, instanceProps) {
-    var direction = props.direction,
-        height = props.height,
-        layout = props.layout,
-        width = props.width; // TODO Deprecate direction "horizontal"
-
-    var isHorizontal = direction === 'horizontal' || layout === 'horizontal';
-    var size = isHorizontal ? width : height;
-    var itemMetadata = getItemMetadata$1(props, index, instanceProps); // Get estimated total size after ItemMetadata is computed,
-    // To ensure it reflects actual measurements instead of just estimates.
-
-    var estimatedTotalSize = getEstimatedTotalSize(props, instanceProps);
-    var maxOffset = Math.max(0, Math.min(estimatedTotalSize - size, itemMetadata.offset));
-    var minOffset = Math.max(0, itemMetadata.offset - size + itemMetadata.size);
-
-    if (align === 'smart') {
-      if (scrollOffset >= minOffset - size && scrollOffset <= maxOffset + size) {
-        align = 'auto';
-      } else {
-        align = 'center';
-      }
-    }
-
-    switch (align) {
-      case 'start':
-        return maxOffset;
-
-      case 'end':
-        return minOffset;
-
-      case 'center':
-        return Math.round(minOffset + (maxOffset - minOffset) / 2);
-
-      case 'auto':
-      default:
-        if (scrollOffset >= minOffset && scrollOffset <= maxOffset) {
-          return scrollOffset;
-        } else if (scrollOffset < minOffset) {
-          return minOffset;
-        } else {
-          return maxOffset;
-        }
-
-    }
-  },
-  getStartIndexForOffset: function getStartIndexForOffset(props, offset, instanceProps) {
-    return findNearestItem$1(props, instanceProps, offset);
-  },
-  getStopIndexForStartIndex: function getStopIndexForStartIndex(props, startIndex, scrollOffset, instanceProps) {
-    var direction = props.direction,
-        height = props.height,
-        itemCount = props.itemCount,
-        layout = props.layout,
-        width = props.width; // TODO Deprecate direction "horizontal"
-
-    var isHorizontal = direction === 'horizontal' || layout === 'horizontal';
-    var size = isHorizontal ? width : height;
-    var itemMetadata = getItemMetadata$1(props, startIndex, instanceProps);
-    var maxOffset = scrollOffset + size;
-    var offset = itemMetadata.offset + itemMetadata.size;
-    var stopIndex = startIndex;
-
-    while (stopIndex < itemCount - 1 && offset < maxOffset) {
-      stopIndex++;
-      offset += getItemMetadata$1(props, stopIndex, instanceProps).size;
-    }
-
-    return stopIndex;
-  },
-  initInstanceProps: function initInstanceProps(props, instance) {
-    var _ref4 = props,
-        estimatedItemSize = _ref4.estimatedItemSize;
-    var instanceProps = {
-      itemMetadataMap: {},
-      estimatedItemSize: estimatedItemSize || DEFAULT_ESTIMATED_ITEM_SIZE$1,
-      lastMeasuredIndex: -1
-    };
-
-    instance.resetAfterIndex = function (index, shouldForceUpdate) {
-      if (shouldForceUpdate === void 0) {
-        shouldForceUpdate = true;
-      }
-
-      instanceProps.lastMeasuredIndex = Math.min(instanceProps.lastMeasuredIndex, index - 1); // We could potentially optimize further by only evicting styles after this index,
-      // But since styles are only cached while scrolling is in progress-
-      // It seems an unnecessary optimization.
-      // It's unlikely that resetAfterIndex() will be called while a user is scrolling.
-
-      instance._getItemStyleCache(-1);
-
-      if (shouldForceUpdate) {
-        instance.forceUpdate();
-      }
-    };
-
-    return instanceProps;
-  },
-  shouldResetStyleCacheOnItemSizeChange: false,
-  validateProps: function validateProps(_ref5) {
-    var itemSize = _ref5.itemSize;
-
-    if (true) {
-      if (typeof itemSize !== 'function') {
-        throw Error('An invalid "itemSize" prop has been specified. ' + 'Value should be a function. ' + ("\"" + (itemSize === null ? 'null' : typeof itemSize) + "\" was specified."));
-      }
-    }
-  }
-});
-
-var FixedSizeGrid =
-/*#__PURE__*/
-createGridComponent({
-  getColumnOffset: function getColumnOffset(_ref, index) {
-    var columnWidth = _ref.columnWidth;
-    return index * columnWidth;
-  },
-  getColumnWidth: function getColumnWidth(_ref2, index) {
-    var columnWidth = _ref2.columnWidth;
-    return columnWidth;
-  },
-  getRowOffset: function getRowOffset(_ref3, index) {
-    var rowHeight = _ref3.rowHeight;
-    return index * rowHeight;
-  },
-  getRowHeight: function getRowHeight(_ref4, index) {
-    var rowHeight = _ref4.rowHeight;
-    return rowHeight;
-  },
-  getEstimatedTotalHeight: function getEstimatedTotalHeight(_ref5) {
-    var rowCount = _ref5.rowCount,
-        rowHeight = _ref5.rowHeight;
-    return rowHeight * rowCount;
-  },
-  getEstimatedTotalWidth: function getEstimatedTotalWidth(_ref6) {
-    var columnCount = _ref6.columnCount,
-        columnWidth = _ref6.columnWidth;
-    return columnWidth * columnCount;
-  },
-  getOffsetForColumnAndAlignment: function getOffsetForColumnAndAlignment(_ref7, columnIndex, align, scrollLeft, instanceProps, scrollbarSize) {
-    var columnCount = _ref7.columnCount,
-        columnWidth = _ref7.columnWidth,
-        width = _ref7.width;
-    var lastColumnOffset = Math.max(0, columnCount * columnWidth - width);
-    var maxOffset = Math.min(lastColumnOffset, columnIndex * columnWidth);
-    var minOffset = Math.max(0, columnIndex * columnWidth - width + scrollbarSize + columnWidth);
-
-    if (align === 'smart') {
-      if (scrollLeft >= minOffset - width && scrollLeft <= maxOffset + width) {
-        align = 'auto';
-      } else {
-        align = 'center';
-      }
-    }
-
-    switch (align) {
-      case 'start':
-        return maxOffset;
-
-      case 'end':
-        return minOffset;
-
-      case 'center':
-        // "Centered" offset is usually the average of the min and max.
-        // But near the edges of the list, this doesn't hold true.
-        var middleOffset = Math.round(minOffset + (maxOffset - minOffset) / 2);
-
-        if (middleOffset < Math.ceil(width / 2)) {
-          return 0; // near the beginning
-        } else if (middleOffset > lastColumnOffset + Math.floor(width / 2)) {
-          return lastColumnOffset; // near the end
-        } else {
-          return middleOffset;
-        }
-
-      case 'auto':
-      default:
-        if (scrollLeft >= minOffset && scrollLeft <= maxOffset) {
-          return scrollLeft;
-        } else if (minOffset > maxOffset) {
-          // Because we only take into account the scrollbar size when calculating minOffset
-          // this value can be larger than maxOffset when at the end of the list
-          return minOffset;
-        } else if (scrollLeft < minOffset) {
-          return minOffset;
-        } else {
-          return maxOffset;
-        }
-
-    }
-  },
-  getOffsetForRowAndAlignment: function getOffsetForRowAndAlignment(_ref8, rowIndex, align, scrollTop, instanceProps, scrollbarSize) {
-    var rowHeight = _ref8.rowHeight,
-        height = _ref8.height,
-        rowCount = _ref8.rowCount;
-    var lastRowOffset = Math.max(0, rowCount * rowHeight - height);
-    var maxOffset = Math.min(lastRowOffset, rowIndex * rowHeight);
-    var minOffset = Math.max(0, rowIndex * rowHeight - height + scrollbarSize + rowHeight);
-
-    if (align === 'smart') {
-      if (scrollTop >= minOffset - height && scrollTop <= maxOffset + height) {
-        align = 'auto';
-      } else {
-        align = 'center';
-      }
-    }
-
-    switch (align) {
-      case 'start':
-        return maxOffset;
-
-      case 'end':
-        return minOffset;
-
-      case 'center':
-        // "Centered" offset is usually the average of the min and max.
-        // But near the edges of the list, this doesn't hold true.
-        var middleOffset = Math.round(minOffset + (maxOffset - minOffset) / 2);
-
-        if (middleOffset < Math.ceil(height / 2)) {
-          return 0; // near the beginning
-        } else if (middleOffset > lastRowOffset + Math.floor(height / 2)) {
-          return lastRowOffset; // near the end
-        } else {
-          return middleOffset;
-        }
-
-      case 'auto':
-      default:
-        if (scrollTop >= minOffset && scrollTop <= maxOffset) {
-          return scrollTop;
-        } else if (minOffset > maxOffset) {
-          // Because we only take into account the scrollbar size when calculating minOffset
-          // this value can be larger than maxOffset when at the end of the list
-          return minOffset;
-        } else if (scrollTop < minOffset) {
-          return minOffset;
-        } else {
-          return maxOffset;
-        }
-
-    }
-  },
-  getColumnStartIndexForOffset: function getColumnStartIndexForOffset(_ref9, scrollLeft) {
-    var columnWidth = _ref9.columnWidth,
-        columnCount = _ref9.columnCount;
-    return Math.max(0, Math.min(columnCount - 1, Math.floor(scrollLeft / columnWidth)));
-  },
-  getColumnStopIndexForStartIndex: function getColumnStopIndexForStartIndex(_ref10, startIndex, scrollLeft) {
-    var columnWidth = _ref10.columnWidth,
-        columnCount = _ref10.columnCount,
-        width = _ref10.width;
-    var left = startIndex * columnWidth;
-    var numVisibleColumns = Math.ceil((width + scrollLeft - left) / columnWidth);
-    return Math.max(0, Math.min(columnCount - 1, startIndex + numVisibleColumns - 1 // -1 is because stop index is inclusive
-    ));
-  },
-  getRowStartIndexForOffset: function getRowStartIndexForOffset(_ref11, scrollTop) {
-    var rowHeight = _ref11.rowHeight,
-        rowCount = _ref11.rowCount;
-    return Math.max(0, Math.min(rowCount - 1, Math.floor(scrollTop / rowHeight)));
-  },
-  getRowStopIndexForStartIndex: function getRowStopIndexForStartIndex(_ref12, startIndex, scrollTop) {
-    var rowHeight = _ref12.rowHeight,
-        rowCount = _ref12.rowCount,
-        height = _ref12.height;
-    var top = startIndex * rowHeight;
-    var numVisibleRows = Math.ceil((height + scrollTop - top) / rowHeight);
-    return Math.max(0, Math.min(rowCount - 1, startIndex + numVisibleRows - 1 // -1 is because stop index is inclusive
-    ));
-  },
-  initInstanceProps: function initInstanceProps(props) {// Noop
-  },
-  shouldResetStyleCacheOnItemSizeChange: true,
-  validateProps: function validateProps(_ref13) {
-    var columnWidth = _ref13.columnWidth,
-        rowHeight = _ref13.rowHeight;
-
-    if (true) {
-      if (typeof columnWidth !== 'number') {
-        throw Error('An invalid "columnWidth" prop has been specified. ' + 'Value should be a number. ' + ("\"" + (columnWidth === null ? 'null' : typeof columnWidth) + "\" was specified."));
-      }
-
-      if (typeof rowHeight !== 'number') {
-        throw Error('An invalid "rowHeight" prop has been specified. ' + 'Value should be a number. ' + ("\"" + (rowHeight === null ? 'null' : typeof rowHeight) + "\" was specified."));
-      }
-    }
-  }
-});
-
-var FixedSizeList =
-/*#__PURE__*/
-createListComponent({
-  getItemOffset: function getItemOffset(_ref, index) {
-    var itemSize = _ref.itemSize;
-    return index * itemSize;
-  },
-  getItemSize: function getItemSize(_ref2, index) {
-    var itemSize = _ref2.itemSize;
-    return itemSize;
-  },
-  getEstimatedTotalSize: function getEstimatedTotalSize(_ref3) {
-    var itemCount = _ref3.itemCount,
-        itemSize = _ref3.itemSize;
-    return itemSize * itemCount;
-  },
-  getOffsetForIndexAndAlignment: function getOffsetForIndexAndAlignment(_ref4, index, align, scrollOffset) {
-    var direction = _ref4.direction,
-        height = _ref4.height,
-        itemCount = _ref4.itemCount,
-        itemSize = _ref4.itemSize,
-        layout = _ref4.layout,
-        width = _ref4.width;
-    // TODO Deprecate direction "horizontal"
-    var isHorizontal = direction === 'horizontal' || layout === 'horizontal';
-    var size = isHorizontal ? width : height;
-    var lastItemOffset = Math.max(0, itemCount * itemSize - size);
-    var maxOffset = Math.min(lastItemOffset, index * itemSize);
-    var minOffset = Math.max(0, index * itemSize - size + itemSize);
-
-    if (align === 'smart') {
-      if (scrollOffset >= minOffset - size && scrollOffset <= maxOffset + size) {
-        align = 'auto';
-      } else {
-        align = 'center';
-      }
-    }
-
-    switch (align) {
-      case 'start':
-        return maxOffset;
-
-      case 'end':
-        return minOffset;
-
-      case 'center':
-        {
-          // "Centered" offset is usually the average of the min and max.
-          // But near the edges of the list, this doesn't hold true.
-          var middleOffset = Math.round(minOffset + (maxOffset - minOffset) / 2);
-
-          if (middleOffset < Math.ceil(size / 2)) {
-            return 0; // near the beginning
-          } else if (middleOffset > lastItemOffset + Math.floor(size / 2)) {
-            return lastItemOffset; // near the end
-          } else {
-            return middleOffset;
-          }
-        }
-
-      case 'auto':
-      default:
-        if (scrollOffset >= minOffset && scrollOffset <= maxOffset) {
-          return scrollOffset;
-        } else if (scrollOffset < minOffset) {
-          return minOffset;
-        } else {
-          return maxOffset;
-        }
-
-    }
-  },
-  getStartIndexForOffset: function getStartIndexForOffset(_ref5, offset) {
-    var itemCount = _ref5.itemCount,
-        itemSize = _ref5.itemSize;
-    return Math.max(0, Math.min(itemCount - 1, Math.floor(offset / itemSize)));
-  },
-  getStopIndexForStartIndex: function getStopIndexForStartIndex(_ref6, startIndex, scrollOffset) {
-    var direction = _ref6.direction,
-        height = _ref6.height,
-        itemCount = _ref6.itemCount,
-        itemSize = _ref6.itemSize,
-        layout = _ref6.layout,
-        width = _ref6.width;
-    // TODO Deprecate direction "horizontal"
-    var isHorizontal = direction === 'horizontal' || layout === 'horizontal';
-    var offset = startIndex * itemSize;
-    var size = isHorizontal ? width : height;
-    var numVisibleItems = Math.ceil((size + scrollOffset - offset) / itemSize);
-    return Math.max(0, Math.min(itemCount - 1, startIndex + numVisibleItems - 1 // -1 is because stop index is inclusive
-    ));
-  },
-  initInstanceProps: function initInstanceProps(props) {// Noop
-  },
-  shouldResetStyleCacheOnItemSizeChange: true,
-  validateProps: function validateProps(_ref7) {
-    var itemSize = _ref7.itemSize;
-
-    if (true) {
-      if (typeof itemSize !== 'number') {
-        throw Error('An invalid "itemSize" prop has been specified. ' + 'Value should be a number. ' + ("\"" + (itemSize === null ? 'null' : typeof itemSize) + "\" was specified."));
-      }
-    }
-  }
-});
-
-// Pulled from react-compat
-// https://github.com/developit/preact-compat/blob/7c5de00e7c85e2ffd011bf3af02899b63f699d3a/src/index.js#L349
-function shallowDiffers(prev, next) {
-  for (var attribute in prev) {
-    if (!(attribute in next)) {
-      return true;
-    }
-  }
-
-  for (var _attribute in next) {
-    if (prev[_attribute] !== next[_attribute]) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
-// It knows to compare individual style props and ignore the wrapper object.
-// See https://reactjs.org/docs/react-api.html#reactmemo
-
-function areEqual(prevProps, nextProps) {
-  var prevStyle = prevProps.style,
-      prevRest = Object(_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_5__["default"])(prevProps, ["style"]);
-
-  var nextStyle = nextProps.style,
-      nextRest = Object(_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_5__["default"])(nextProps, ["style"]);
-
-  return !shallowDiffers(prevStyle, nextStyle) && !shallowDiffers(prevRest, nextRest);
-}
-
-// It knows to compare individual style props and ignore the wrapper object.
-// See https://reactjs.org/docs/react-component.html#shouldcomponentupdate
-
-function shouldComponentUpdate(nextProps, nextState) {
-  return !areEqual(this.props, nextProps) || shallowDiffers(this.state, nextState);
-}
-
-
-//# sourceMappingURL=index.esm.js.map
-
 
 /***/ }),
 
@@ -101126,6 +99068,499 @@ function (_Component) {
 
 /***/ }),
 
+/***/ "./resources/js/components/admin/administrator/AdministratorDatatables.js":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/admin/administrator/AdministratorDatatables.js ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../inc/admin/NavAdmin */ "./resources/js/components/inc/admin/NavAdmin.js");
+/* harmony import */ var _inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../inc/admin/TopNavAdmin */ "./resources/js/components/inc/admin/TopNavAdmin.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../inc/admin/FooterAdmin */ "./resources/js/components/inc/admin/FooterAdmin.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+var AdministratorDatatables =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(AdministratorDatatables, _Component);
+
+  function AdministratorDatatables() {
+    var _this;
+
+    _classCallCheck(this, AdministratorDatatables);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(AdministratorDatatables).call(this));
+    _this.state = {
+      users: [],
+      user: [],
+      error: null
+    };
+    return _this;
+  }
+
+  _createClass(AdministratorDatatables, [{
+    key: "mydatatables",
+    value: function mydatatables() {
+      $(function () {
+        $('#datatables').DataTable({
+          "pagingType": "full_numbers",
+          "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+          order: [[0, 'asc'], [3, 'desc']],
+          responsive: true,
+          destroy: true,
+          retrieve: true,
+          autoFill: true,
+          colReorder: true,
+          language: {
+            search: "<i class='material-icons'>search</i>",
+            searchPlaceholder: "Search Record"
+          },
+          "sPaginationType": "full_numbers"
+        });
+      });
+    }
+  }, {
+    key: "sendItem",
+    value: function sendItem(item) {
+      $('#addNew').modal('show');
+      this.user = item;
+    }
+  }, {
+    key: "loadItems",
+    value: function loadItems() {
+      var _this2 = this;
+
+      var url = "/api/administrators";
+      fetch(url).then(function (res) {
+        return res.json();
+      }).then(function (result) {
+        _this2.setState({
+          users: result
+        });
+
+        _this2.mydatatables();
+      }, function (error) {
+        _this2.setState({
+          error: error
+        });
+      });
+    }
+  }, {
+    key: "reload",
+    value: function reload() {
+      this.loadItems();
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.loadItems();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var avatar_style = {
+        width: "40px",
+        height: "40px",
+        top: "15px",
+        left: "15px",
+        borderRadius: "50%"
+      };
+      var users = this.state.users;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-panel"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container-fluid"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-6 col-md-6 col-sm-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card card-stats"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header card-header-warning card-header-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "weekend")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "card-category"
+      }, "Bookings"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "card-title"
+      }, "184")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-footer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "stats"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons text-danger"
+      }, "warning"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#pablo"
+      }, "Get More Space..."))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-6 col-md-6 col-sm-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card card-stats"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header card-header-rose card-header-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "equalizer")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "card-category"
+      }, "Website Visits"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "card-title"
+      }, users.length)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-footer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "stats"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "local_offer"), " Tracked from Google Analytics"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header card-header-success"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "card-title"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Datatables Administrators")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "card-title"
+      }, "Administrators Available")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6 text-right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        id: "tooltipSize",
+        className: "material-icons"
+      }, "chat"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "header text-right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this3.reload();
+        },
+        className: 'btn btn-success btn-raised  btn-sm',
+        title: "Refresh Page"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "replay"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+        className: "title_hover"
+      }, "Refresh"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "toolbar"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "submit text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+        to: '/dashboard/administrators/',
+        className: 'btn btn-primary btn-raised'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "chat"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+        className: "title_hover"
+      }, "Administrators Site")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "material-datatables"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        id: "datatables",
+        className: "table table-striped table-no-bordered table-hover",
+        cellSpacing: "0",
+        width: "100%"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Avatar")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "First Name")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Last Updated")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        className: "disabled-sorting text-right"
+      }, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tfoot", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Avatar"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "First Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Last Updated"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        className: "text-right"
+      }, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, users.map(function (item) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+          key: item.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          to: '/dashboard/users/'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: item.avatar,
+          alt: item.first_name,
+          style: avatar_style
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          to: '/dashboard'
+        }, item.statusOnline ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          className: "btn btn-success btn-round btn-just-icon btn-sm",
+          title: "Administrator Online"
+        }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          className: "btn btn-danger btn-round btn-just-icon btn-sm",
+          title: "Administrator Offline"
+        }), item.first_name.length > 15 ? item.first_name.substring(0, 15) + "..." : item.first_name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, moment(item.created_at).format('DD/MM/YYYY'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          className: "text-right"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          onClick: function onClick() {
+            return _this3.sendItem(item.id);
+          },
+          className: "btn btn-link btn-info btn-round btn-just-icon",
+          title: "Send invitation"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "material-icons"
+        }, "mail")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          to: "/dashboard/faqs/v/".concat(item.slug, "/"),
+          className: "btn btn-link  btn-warning btn-round btn-just-icon",
+          title: "View user"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "material-icons"
+        }, "visibility")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          className: "btn btn-link  btn-success btn-round btn-just-icon",
+          title: "Edit",
+          to: "/dashboard/users/".concat(item.id, "/edit/"),
+          key: item.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "material-icons"
+        }, "edit"))));
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal fade",
+        id: "addNew",
+        tabIndex: '-1',
+        role: "dialog",
+        "aria-labelledby": "addNewLabel",
+        "aria-hidden": "true"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-dialog",
+        role: "document"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        className: "modal-title",
+        id: "updateNewLabel"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Invite Administrator")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "close",
+        "data-dismiss": "modal",
+        "aria-label": "Close"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        "aria-hidden": "true"
+      }, "\xD7"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        id: "RegisterValidation",
+        role: "form",
+        method: "POST",
+        action: "",
+        acceptCharset: 'UTF-8'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "bmd-label-floating"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        name: "name",
+        placeholder: "Name administrator",
+        className: "form-control"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "bmd-label-floating"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "email",
+        name: 'email',
+        value: this.state.email,
+        placeholder: "Email administrator",
+        className: "form-control"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-footer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-danger",
+        "data-dismiss": "modal"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "btn-label"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "clear"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Close"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-success btn-raised"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "btn-label"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "mail"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Yes, Send")))))))))))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+    }
+  }]);
+
+  return AdministratorDatatables;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (AdministratorDatatables);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/administrator/AdministratorIndex.js":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/admin/administrator/AdministratorIndex.js ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../inc/admin/TopNavAdmin */ "./resources/js/components/inc/admin/TopNavAdmin.js");
+/* harmony import */ var _inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../inc/admin/NavAdmin */ "./resources/js/components/inc/admin/NavAdmin.js");
+/* harmony import */ var _inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../inc/admin/FooterAdmin */ "./resources/js/components/inc/admin/FooterAdmin.js");
+/* harmony import */ var _user_UserLists__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../user/UserLists */ "./resources/js/components/admin/user/UserLists.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+
+var AdministratorIndex =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(AdministratorIndex, _Component);
+
+  function AdministratorIndex() {
+    var _this;
+
+    _classCallCheck(this, AdministratorIndex);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(AdministratorIndex).call(this));
+    _this.state = {
+      users: []
+    };
+    return _this;
+  }
+
+  _createClass(AdministratorIndex, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.loadItems();
+    }
+  }, {
+    key: "loadItems",
+    value: function loadItems() {
+      var _this2 = this;
+
+      var url = "/api/administrators";
+      fetch(url).then(function (res) {
+        return res.json();
+      }).then(function (result) {
+        _this2.setState({
+          users: result
+        });
+      }, function (error) {
+        _this2.setState({
+          error: error
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var users = this.state.users;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-panel"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container-fluid"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "toolbar"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "submit text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: '/dashboard/administrators/p/datatables/',
+        className: 'btn btn-primary btn-raised'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "info"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+        className: "title_hover"
+      }, "Administrators Datatables")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: 'row'
+      }, users.map(function (item) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_UserLists__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({
+          key: item.id
+        }, item));
+      })))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+    }
+  }]);
+
+  return AdministratorIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (AdministratorIndex);
+
+/***/ }),
+
 /***/ "./resources/js/components/admin/faq/FaqAdminSite.js":
 /*!***********************************************************!*\
   !*** ./resources/js/components/admin/faq/FaqAdminSite.js ***!
@@ -101242,7 +99677,7 @@ function (_Component) {
         className: "material-icons"
       }, "forum"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
         className: "title_hover"
-      }, "FAQS")))), faqs.map(function (item) {
+      }, "FAQS")))), faqs.map(function (item, index) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FaqLists__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({
           key: item.id
         }, item));
@@ -101812,10 +100247,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_window__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-window */ "./node_modules/react-window/dist/index.esm.js");
-/* harmony import */ var _inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../inc/admin/TopNavAdmin */ "./resources/js/components/inc/admin/TopNavAdmin.js");
-/* harmony import */ var _inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../inc/admin/NavAdmin */ "./resources/js/components/inc/admin/NavAdmin.js");
-/* harmony import */ var _inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../inc/admin/FooterAdmin */ "./resources/js/components/inc/admin/FooterAdmin.js");
+/* harmony import */ var _inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../inc/admin/TopNavAdmin */ "./resources/js/components/inc/admin/TopNavAdmin.js");
+/* harmony import */ var _inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../inc/admin/NavAdmin */ "./resources/js/components/inc/admin/NavAdmin.js");
+/* harmony import */ var _inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../inc/admin/FooterAdmin */ "./resources/js/components/inc/admin/FooterAdmin.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -101833,7 +100267,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -101861,16 +100294,10 @@ function (_Component) {
     _this.activeItem = _this.activeItem.bind(_assertThisInitialized(_this));
     _this.disableItem = _this.disableItem.bind(_assertThisInitialized(_this));
     return _this;
-  }
+  } // handle delete
+
 
   _createClass(FaqIndex, [{
-    key: "activeItem",
-    value: function activeItem(id) {}
-  }, {
-    key: "disableItem",
-    value: function disableItem(id) {} // handle delete
-
-  }, {
     key: "deleteItem",
     value: function deleteItem(id) {
       var _this2 = this;
@@ -101940,9 +100367,9 @@ function (_Component) {
     value: function activeItem(id) {
       var _this3 = this;
 
-      axios.get('/dashboard/active_faqs/' + id).then(function () {
+      axios.get("/dashboard/active_faqs/".concat(id)).then(function () {
         /** Alert notify bootstrapp **/
-        $.notify('<strong>FaqLists activated Successfully.</strong>', {
+        $.notify('<strong>Faq activated Successfully.</strong>', {
           allow_dismiss: false,
           type: 'info',
           placement: {
@@ -101975,9 +100402,9 @@ function (_Component) {
     value: function disableItem(id) {
       var _this4 = this;
 
-      axios.get('/dashboard/disable_faqs/' + id).then(function () {
+      axios.get("/dashboard/disable_faqs/".concat(id)).then(function () {
         /** Alert notify bootstrapp **/
-        $.notify('<strong>FaqLists desactivated Successfully.</strong>', {
+        $.notify('<strong>Faq desactivated Successfully.</strong>', {
           allow_dismiss: false,
           type: 'primary',
           placement: {
@@ -102061,9 +100488,9 @@ function (_Component) {
       var faqs = this.state.faqs;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "main-panel"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "content"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container-fluid"
@@ -102183,7 +100610,7 @@ function (_Component) {
         }, item.status ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "badge badge-info"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Active")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "badge badge-danger"
+          className: "badge badge-primary"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Deactive")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: '/dashboard'
         }, item.statusOnline ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -102235,7 +100662,7 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "material-icons"
         }, "delete_forever"))));
-      })))))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
+      })))))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
     }
   }]);
 
@@ -102624,133 +101051,24 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
-
       var faqs = this.state.faqs;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "main-content",
-        id: "panel"
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-panel"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "header bg-primary pb-6"
+        className: "content"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container-fluid"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "header-body"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row align-items-center py-4"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-lg-6 col-7"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "h2 text-white d-inline-block mb-0"
-      }, "FAQS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
-        "aria-label": "breadcrumb",
-        className: "d-none d-md-inline-block ml-md-4"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
-        className: "breadcrumb breadcrumb-links breadcrumb-dark"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "breadcrumb-item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-book"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "breadcrumb-item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#"
-      }, "FAQS")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "breadcrumb-item active",
-        "aria-current": "page"
-      }, "New FAQ")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-lg-6 col-5 text-right"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/dashboard/faqs/create/",
-        className: "btn btn-sm btn-neutral"
-      }, "New"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#",
-        className: "btn btn-sm btn-neutral"
-      }, "Filters")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container-fluid mt--6"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col"
+        className: "col-md-12"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-header"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-        className: "mb-0"
-      }, "FAQS")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "table-responsive py-4"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
-        className: "table table-flush",
-        id: "datatable-buttons"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", {
-        className: "thead-light"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Slug"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Office"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Age"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Status"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-        className: "table-actions"
-      }, "Action"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tfoot", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Slug"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Office"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Age"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Status"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-        className: "table-actions"
-      }, "Action"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, faqs.map(function (item) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
-          key: item.id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.slug), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "New York"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "27"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "custom-toggle"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "checkbox",
-          id: "status",
-          value: item.status,
-          onClick: function onClick() {
-            return _this5.changeStatus(item.id);
-          },
-          defaultChecked: item.status
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "custom-toggle-slider rounded-circle",
-          "data-label-off": "No",
-          "data-label-on": "Yes"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-          className: "table-actions"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "#",
-          className: "btn btn-warning btn-icon-only rounded-circle",
-          "data-toggle": "tooltip",
-          "data-original-title": "View faq"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          className: "fas fa-eye"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "ml-auto"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "togglebutton switch-sidebar-mini"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "checkbox",
-          id: "status",
-          value: item.status,
-          onClick: function onClick() {
-            return _this5.changeStatus(item);
-          },
-          defaultChecked: item.status
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "toggle"
-        })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          className: "btn btn-success btn-icon-only rounded-circle",
-          "data-toggle": "tooltip",
-          "data-original-title": "Edit faq",
-          to: "/dashboard/faqs/".concat(item.id, "/edit/"),
-          key: item.id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          className: "fas fa-user-edit"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          type: "button",
-          onClick: function onClick() {
-            return _this5.deleteItem(item.id);
-          },
-          className: "btn btn-danger btn-icon-only rounded-circle"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "btn-inner--icon"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          className: "fas fa-trash"
-        })))));
-      }))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__["default"], null))));
+        className: "card-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Link"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
     }
   }]);
 
@@ -102758,6 +101076,947 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (FaqIndex);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/partials/permission/PermissionIndex.js":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/admin/partials/permission/PermissionIndex.js ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../inc/admin/TopNavAdmin */ "./resources/js/components/inc/admin/TopNavAdmin.js");
+/* harmony import */ var _inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../inc/admin/NavAdmin */ "./resources/js/components/inc/admin/NavAdmin.js");
+/* harmony import */ var _inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../inc/admin/FooterAdmin */ "./resources/js/components/inc/admin/FooterAdmin.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+var PermissionIndex =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(PermissionIndex, _Component);
+
+  function PermissionIndex(props) {
+    var _this;
+
+    _classCallCheck(this, PermissionIndex);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(PermissionIndex).call(this, props));
+    _this.state = {
+      color_name: '',
+      name: '',
+      permissions: [],
+      errors: []
+    }; // bind
+
+    _this.deleteItem = _this.deleteItem.bind(_assertThisInitialized(_this));
+    _this.createItem = _this.createItem.bind(_assertThisInitialized(_this));
+    _this.handleFieldChange = _this.handleFieldChange.bind(_assertThisInitialized(_this));
+    _this.hasErrorFor = _this.hasErrorFor.bind(_assertThisInitialized(_this));
+    _this.renderErrorFor = _this.renderErrorFor.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(PermissionIndex, [{
+    key: "handleFieldChange",
+    value: function handleFieldChange(event) {
+      this.setState(_defineProperty({}, event.target.name, event.target.value));
+    }
+  }, {
+    key: "hasErrorFor",
+    value: function hasErrorFor(field) {
+      return !!this.state.errors[field];
+    }
+  }, {
+    key: "renderErrorFor",
+    value: function renderErrorFor(field) {
+      if (this.hasErrorFor(field)) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "invalid-feedback"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, this.state.errors[field][0]));
+      }
+    }
+  }, {
+    key: "newModal",
+    value: function newModal() {
+      //Masquer le modal après la création
+      $('#addNew').modal('show');
+    }
+  }, {
+    key: "createItem",
+    value: function createItem(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      var history = this.props.history;
+      var permission = {
+        name: this.state.name
+      };
+      axios.post('/dashboard/permissions', permission).then(function (response) {
+        // then clear the value input
+        _this2.setState({
+          name: ''
+        }); // add new data to list of datas
+
+
+        _this2.setState({
+          permissions: [response.data].concat(_toConsumableArray(_this2.state.permissions))
+        }); //Masquer le modal après la création
+
+
+        $('#addNew').modal('hide'); //$.notify('<strong>The permission has ben Save successfully...</strong>', {
+        //    allow_dismiss: false,
+        //    type: 'success',
+        //    placement: {
+        //        from: 'bottom',
+        //        align: 'right'
+        //    },
+        //    animate: {
+        //        enter: 'animated fadeInRight',
+        //        exit: 'animated fadeOutRight'
+        //    },
+        //});
+        // redirect
+
+        history.push('/dashboard/permissions');
+      })["catch"](function (error) {
+        _this2.setState({
+          errors: error.response.data.errors
+        });
+
+        $.notify("Ooop! Something wrong. Try later...", {
+          type: 'danger',
+          animate: {
+            enter: 'animated bounceInDown',
+            exit: 'animated bounceOutUp'
+          }
+        });
+      });
+    } // handle delete
+
+  }, {
+    key: "deleteItem",
+    value: function deleteItem(id) {
+      var _this3 = this;
+
+      Swal.fire({
+        title: 'Delete Permission?',
+        text: "Are you sure you want to delete this permission?",
+        type: 'warning',
+        animation: false,
+        customClass: 'animated shake',
+        buttonsStyling: false,
+        confirmButtonClass: "btn btn-success",
+        cancelButtonClass: 'btn btn-danger',
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+        showCancelButton: true,
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          // remove from local state
+          var isNotId = function isNotId(permission) {
+            return permission.id !== id;
+          };
+
+          var updatedItems = _this3.state.permissions.filter(isNotId);
+
+          _this3.setState({
+            permissions: updatedItems
+          }); //Envoyer la requet au server
+
+
+          axios["delete"]("/dashboard/permissions/".concat(id)).then(function () {
+            /** Alert notify bootstrapp **/
+            $.notify({
+              // title: 'Update FAQ',
+              message: 'Permission has ben deleted successfully'
+            }, {
+              allow_dismiss: false,
+              type: 'primary',
+              placement: {
+                from: 'bottom',
+                align: 'right'
+              },
+              animate: {
+                enter: 'animated fadeInRight',
+                exit: 'animated fadeOutRight'
+              }
+            });
+            /** End alert ***/
+          })["catch"](function () {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+              type: 'danger',
+              animate: {
+                enter: 'animated bounceInDown',
+                exit: 'animated bounceOutUp'
+              }
+            });
+          });
+        }
+      });
+    }
+  }, {
+    key: "mydatatables",
+    value: function mydatatables() {
+      $(function () {
+        $('#datatables').DataTable({
+          "pagingType": "full_numbers",
+          "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+          order: [[0, 'asc'], [3, 'desc']],
+          responsive: true,
+          destroy: true,
+          retrieve: true,
+          autoFill: true,
+          colReorder: true,
+          language: {
+            search: "<i class='material-icons'>search</i>",
+            searchPlaceholder: "Search Record"
+          },
+          "sPaginationType": "full_numbers"
+        });
+      });
+    }
+  }, {
+    key: "loadItems",
+    value: function loadItems() {
+      var _this4 = this;
+
+      var url = "/api/permissions";
+      fetch(url).then(function (res) {
+        return res.json();
+      }).then(function (result) {
+        _this4.setState({
+          permissions: result
+        });
+
+        _this4.mydatatables();
+      }, function (error) {
+        _this4.setState({
+          error: error
+        });
+      });
+      axios.get("/account/user").then(function (response) {
+        return _this4.setState({
+          color_name: response.data.color_name
+        });
+      });
+    }
+  }, {
+    key: "reload",
+    value: function reload() {
+      this.loadItems();
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this5 = this;
+
+      setTimeout(function () {
+        _this5.loadItems();
+      }, 1500);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this6 = this;
+
+      var permissions = this.state.permissions;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-panel"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container-fluid"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-6 col-md-6 col-sm-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card card-stats"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header card-header-warning card-header-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "weekend")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "card-category"
+      }, "Bookings"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "card-title"
+      }, "184")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-footer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "stats"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons text-danger"
+      }, "warning"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#pablo"
+      }, "Get More Space..."))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-6 col-md-6 col-sm-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card card-stats"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header card-header-rose card-header-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "equalizer")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "card-category"
+      }, "Website Visits"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "card-title"
+      }, permissions.length)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-footer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "stats"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "local_offer"), " Tracked from Google Analytics"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header card-header-".concat(this.state.color_name)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "card-title"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Datatables Permissions")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "card-title"
+      }, "Administrators Permissions")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6 text-right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        id: "tooltipSize",
+        className: "material-icons"
+      }, "chat"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "header text-right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this6.reload();
+        },
+        className: 'btn btn-success btn-raised  btn-sm',
+        title: "Refresh Page"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "replay"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+        className: "title_hover"
+      }, "Refresh"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "toolbar"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "submit text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this6.newModal();
+        },
+        id: "button_hover",
+        className: "btn btn-success btn-raised"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "btn-label"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "playlist_add_check")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+        className: "title_hover"
+      }, "New Permission")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "material-datatables"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        id: "datatables",
+        className: "table table-striped table-no-bordered table-hover",
+        cellSpacing: "0",
+        width: "100%"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Name")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Guard name")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Last Updated")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        className: "disabled-sorting text-right"
+      }, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tfoot", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Guard name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Last Updated"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        className: "text-right"
+      }, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, permissions.map(function (item) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+          key: item.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, item.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, item.guard_name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, moment(item.created_at).fromNow())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          className: "text-right"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          className: "btn btn-link  btn-success btn-round btn-just-icon",
+          title: "Edit",
+          to: "/dashboard/permissions/".concat(item.id, "/edit/"),
+          key: item.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "material-icons"
+        }, "edit")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: 'button',
+          onClick: function onClick() {
+            return _this6.deleteItem(item.id);
+          },
+          className: "btn btn-link btn-danger btn-round btn-just-icon",
+          title: "Delete"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "material-icons"
+        }, "delete_forever"))));
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal fade",
+        id: "addNew",
+        tabIndex: '-1',
+        role: "dialog",
+        "aria-labelledby": "addNewLabel",
+        "aria-hidden": "true"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-dialog",
+        role: "document"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        className: "modal-title",
+        id: "updateNewLabel"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "New Permission")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "close",
+        "data-dismiss": "modal",
+        "aria-label": "Close"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        "aria-hidden": "true"
+      }, "\xD7"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        role: "form",
+        method: "POST",
+        onSubmit: this.createItem,
+        action: "",
+        acceptCharset: 'UTF-8'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "bmd-label-floating"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        required: 'required',
+        placeholder: 'Name permission',
+        id: "name",
+        type: "text",
+        className: "form-control ".concat(this.hasErrorFor('name') ? 'is-invalid' : ''),
+        name: "name",
+        value: this.state.name,
+        onChange: this.handleFieldChange
+      }), this.renderErrorFor('name')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-footer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-danger",
+        "data-dismiss": "modal"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "btn-label"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "clear"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Close"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-success btn-raised"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "btn-label"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "check"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Yes, Save")))))))))))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+    }
+  }]);
+
+  return PermissionIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (PermissionIndex);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/partials/role/RoleEdit.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/admin/partials/role/RoleEdit.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../inc/admin/NavAdmin */ "./resources/js/components/inc/admin/NavAdmin.js");
+/* harmony import */ var _inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../inc/admin/TopNavAdmin */ "./resources/js/components/inc/admin/TopNavAdmin.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../inc/admin/FooterAdmin */ "./resources/js/components/inc/admin/FooterAdmin.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+var RoleEdit =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(RoleEdit, _Component);
+
+  function RoleEdit(props) {
+    var _this;
+
+    _classCallCheck(this, RoleEdit);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(RoleEdit).call(this, props));
+    _this.state = {
+      color_name: '',
+      name: '',
+      role: {},
+      errors: []
+    }; // bind
+
+    _this.updateItem = _this.updateItem.bind(_assertThisInitialized(_this));
+    _this.handleFieldChange = _this.handleFieldChange.bind(_assertThisInitialized(_this));
+    _this.hasErrorFor = _this.hasErrorFor.bind(_assertThisInitialized(_this));
+    _this.renderErrorFor = _this.renderErrorFor.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(RoleEdit, [{
+    key: "handleFieldChange",
+    value: function handleFieldChange(e) {
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
+    } //has get error
+
+  }, {
+    key: "hasErrorFor",
+    value: function hasErrorFor(field) {
+      return !!this.state.errors[field];
+    }
+  }, {
+    key: "renderErrorFor",
+    value: function renderErrorFor(field) {
+      if (this.hasErrorFor(field)) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "invalid-feedback"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, this.state.errors[field][0]));
+      }
+    }
+  }, {
+    key: "updateItem",
+    value: function updateItem() {} // get all the tasks from backend
+
+  }, {
+    key: "loadItems",
+    value: function loadItems() {
+      var _this2 = this;
+
+      var roleId = this.props.match.params.id;
+      axios.get("/dashboard/roles/".concat(roleId)).then(function (response) {
+        return _this2.setState({
+          //role: response.data,
+          name: response.data.name
+        });
+      });
+    } // lifecycle method
+
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.loadItems();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      console.log(this.props.match.params.id);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-panel"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container-fluid"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header card-header-icon card-header-success"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "chat")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "card-title"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, this.state.name)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.updateItem
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "bmd-label-floating"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "name",
+        type: "text",
+        className: "form-control ".concat(this.hasErrorFor('name') ? 'is-invalid' : ''),
+        name: "name",
+        placeholder: 'Name Role',
+        value: this.state.name,
+        onChange: this.handleFieldChange
+      }), this.renderErrorFor('name'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "bmd-label-floating"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "name",
+        type: "text",
+        className: "form-control ".concat(this.hasErrorFor('name') ? 'is-invalid' : ''),
+        name: "name",
+        value: this.state.name,
+        onChange: this.handleFieldChange
+      }), this.renderErrorFor('name')))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "submit"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+        to: '/dashboard/faqs',
+        className: "btn btn-danger",
+        id: "button_hover"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "chevron_left"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+        className: "title_hover"
+      }, "Back")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        id: "button_hover",
+        type: "submit",
+        className: "btn btn-success btn-raised"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "save_alt"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+        className: "title_hover"
+      }, "Save"))))))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+    }
+  }]);
+
+  return RoleEdit;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (RoleEdit);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/partials/role/RoleIndex.js":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/admin/partials/role/RoleIndex.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../inc/admin/NavAdmin */ "./resources/js/components/inc/admin/NavAdmin.js");
+/* harmony import */ var _inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../inc/admin/TopNavAdmin */ "./resources/js/components/inc/admin/TopNavAdmin.js");
+/* harmony import */ var _inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../inc/admin/FooterAdmin */ "./resources/js/components/inc/admin/FooterAdmin.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+var RoleIndex =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(RoleIndex, _Component);
+
+  function RoleIndex() {
+    var _this;
+
+    _classCallCheck(this, RoleIndex);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(RoleIndex).call(this));
+    _this.state = {
+      color_name: '',
+      roles: []
+    }; // bind
+
+    return _this;
+  }
+
+  _createClass(RoleIndex, [{
+    key: "mydatatables",
+    value: function mydatatables() {
+      $(function () {
+        $('#datatables').DataTable({
+          "pagingType": "full_numbers",
+          "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+          order: [[0, 'asc'], [3, 'desc']],
+          responsive: true,
+          destroy: true,
+          retrieve: true,
+          autoFill: true,
+          colReorder: true,
+          language: {
+            search: "<i class='material-icons'>search</i>",
+            searchPlaceholder: "Search Record"
+          },
+          "sPaginationType": "full_numbers"
+        });
+      });
+    }
+  }, {
+    key: "loadItems",
+    value: function loadItems() {
+      var _this2 = this;
+
+      fetch("/api/roles").then(function (res) {
+        return res.json();
+      }).then(function (result) {
+        _this2.setState({
+          roles: result
+        });
+
+        _this2.mydatatables();
+      }, function (error) {
+        _this2.setState({
+          error: error
+        });
+      });
+      axios.get("/account/user").then(function (response) {
+        return _this2.setState({
+          color_name: response.data.color_name
+        });
+      });
+    }
+  }, {
+    key: "reload",
+    value: function reload() {
+      this.loadItems();
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this3 = this;
+
+      setTimeout(function () {
+        _this3.loadItems();
+      }, 1500);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this4 = this;
+
+      var roles = this.state.roles;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-panel"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container-fluid"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-6 col-md-6 col-sm-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card card-stats"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header card-header-warning card-header-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "weekend")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "card-category"
+      }, "Bookings"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "card-title"
+      }, "184")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-footer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "stats"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons text-danger"
+      }, "warning"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#pablo"
+      }, "Get More Space..."))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-6 col-md-6 col-sm-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card card-stats"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header card-header-rose card-header-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "equalizer")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "card-category"
+      }, "Website Visits"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "card-title"
+      }, roles.length)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-footer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "stats"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "local_offer"), " Tracked from Google Analytics"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header card-header-".concat(this.state.color_name)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "card-title"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Datatables Roles")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "card-title"
+      }, "Administrators Roles")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6 text-right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        id: "tooltipSize",
+        className: "material-icons"
+      }, "chat"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "toolbar"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "material-datatables"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        id: "datatables",
+        className: "table table-striped table-no-bordered table-hover",
+        cellSpacing: "0",
+        width: "100%"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Name")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Guard name")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Last Updated")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        className: "disabled-sorting text-right"
+      }, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tfoot", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Guard name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Last Updated"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        className: "text-right"
+      }, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, roles.map(function (item) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+          key: item.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, item.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.permissions.map(function (permission) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "badge badge-success badge-purple"
+          }, permission);
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, moment(item.created_at).fromNow())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          className: "text-right"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
+          className: "btn btn-link  btn-success btn-round btn-just-icon",
+          title: "Edit",
+          to: "/dashboard/roles/".concat(item.id, "/edit/"),
+          key: item.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "material-icons"
+        }, "edit")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: 'button',
+          onClick: function onClick() {
+            return _this4.deleteItem(item.id);
+          },
+          className: "btn btn-link btn-danger btn-round btn-just-icon",
+          title: "Delete"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "material-icons"
+        }, "delete_forever"))));
+      })))))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
+    }
+  }]);
+
+  return RoleIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (RoleIndex);
 
 /***/ }),
 
@@ -103009,7 +102268,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../inc/admin/TopNavAdmin */ "./resources/js/components/inc/admin/TopNavAdmin.js");
 /* harmony import */ var _inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../inc/admin/NavAdmin */ "./resources/js/components/inc/admin/NavAdmin.js");
 /* harmony import */ var _inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../inc/admin/FooterAdmin */ "./resources/js/components/inc/admin/FooterAdmin.js");
+/* harmony import */ var react_quill__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-quill */ "./node_modules/react-quill/lib/index.js");
+/* harmony import */ var react_quill__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_quill__WEBPACK_IMPORTED_MODULE_5__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -103019,13 +102282,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -103038,13 +102302,151 @@ var ProfileUserEdit =
 function (_Component) {
   _inherits(ProfileUserEdit, _Component);
 
-  function ProfileUserEdit() {
+  function ProfileUserEdit(props) {
+    var _this;
+
     _classCallCheck(this, ProfileUserEdit);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(ProfileUserEdit).apply(this, arguments));
-  }
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfileUserEdit).call(this, props));
+    _this.state = {
+      username: '',
+      first_name: '',
+      last_name: '',
+      email: '',
+      body: '',
+      sex: '',
+      errors: []
+    };
+    _this.modules = {
+      toolbar: [[{
+        'font': []
+      }], [{
+        'size': ['small', false, 'large', 'huge']
+      }], ['bold', 'italic', 'underline'], [{
+        'list': 'ordered'
+      }, {
+        'list': 'bullet'
+      }], [{
+        'align': []
+      }], [{
+        'color': []
+      }, {
+        'background': []
+      }] //['clean']
+      ]
+    };
+    _this.formats = ['font', 'size', 'bold', 'italic', 'underline', 'list', 'bullet', 'align', 'color', 'background']; // bind
+
+    _this.updateItem = _this.updateItem.bind(_assertThisInitialized(_this));
+    _this.handleFieldChange = _this.handleFieldChange.bind(_assertThisInitialized(_this));
+    _this.handleChangeBody = _this.handleChangeBody.bind(_assertThisInitialized(_this));
+    _this.hasErrorFor = _this.hasErrorFor.bind(_assertThisInitialized(_this));
+    _this.renderErrorFor = _this.renderErrorFor.bind(_assertThisInitialized(_this));
+    return _this;
+  } // handle change
+
 
   _createClass(ProfileUserEdit, [{
+    key: "handleChangeBody",
+    value: function handleChangeBody(value) {
+      this.setState({
+        body: value
+      });
+    }
+  }, {
+    key: "handleFieldChange",
+    value: function handleFieldChange(e) {
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
+    } //has get error
+
+  }, {
+    key: "hasErrorFor",
+    value: function hasErrorFor(field) {
+      return !!this.state.errors[field];
+    }
+  }, {
+    key: "renderErrorFor",
+    value: function renderErrorFor(field) {
+      if (this.hasErrorFor(field)) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "invalid-feedback"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, this.state.errors[field][0]));
+      }
+    } // handle submit
+
+  }, {
+    key: "updateItem",
+    value: function updateItem(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      var user = {
+        email: this.state.email,
+        username: this.state.username,
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
+        body: this.state.body,
+        sex: this.state.sex
+      };
+      axios.put("/profile/users", user).then(function () {
+        /**
+         * Init alert
+         */
+        $.notify({
+          message: 'Your profile has been updated successfully'
+        }, {
+          allow_dismiss: false,
+          type: 'success',
+          placement: {
+            from: 'bottom',
+            align: 'right'
+          },
+          animate: {
+            enter: 'animated fadeInRight',
+            exit: 'animated fadeOutRight'
+          }
+        }); //Redirect after create
+
+        _this2.props.history.push("/dashboard/profile/edit/");
+      })["catch"](function (error) {
+        _this2.setState({
+          errors: error.response.data.errors
+        }); //Alert
+
+
+        $.notify("Ooop! Something wrong. Try later", {
+          type: 'danger',
+          animate: {
+            enter: 'animated bounceInDown',
+            exit: 'animated bounceOutUp'
+          }
+        });
+      });
+    }
+  }, {
+    key: "loadItems",
+    value: function loadItems() {
+      var _this3 = this;
+
+      axios.get("/account/user").then(function (response) {
+        return _this3.setState({
+          email: response.data.email,
+          username: response.data.username,
+          first_name: response.data.first_name,
+          last_name: response.data.last_name,
+          body: response.data.body,
+          avatar: response.data.avatar,
+          sex: response.data.sex,
+          color_name: response.data.color_name
+        });
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.loadItems();
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -103058,12 +102460,144 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
+        className: "col-md-8"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.updateItem
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header card-header-icon card-header-".concat(this.state.color_name)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "perm_identity")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "card-title"
+      }, this.state.first_name, " ", this.state.last_name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-body"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "edit profile"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group bmd-form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Username"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        required: 'required',
+        id: "username",
+        type: "text",
+        className: "form-control ".concat(this.hasErrorFor('username') ? 'is-invalid' : ''),
+        name: "username",
+        value: this.state.username,
+        onChange: this.handleFieldChange
+      }), this.renderErrorFor('username'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group bmd-form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Email address"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        required: 'required',
+        id: "email",
+        type: "email",
+        className: "form-control ".concat(this.hasErrorFor('email') ? 'is-invalid' : ''),
+        name: "email",
+        value: this.state.email,
+        onChange: this.handleFieldChange
+      }), this.renderErrorFor('email')))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-4"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group bmd-form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Fist Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        required: 'required',
+        id: "first_name",
+        type: "text",
+        className: "form-control ".concat(this.hasErrorFor('first_name') ? 'is-invalid' : ''),
+        name: "first_name",
+        value: this.state.first_name,
+        onChange: this.handleFieldChange
+      }), this.renderErrorFor('first_name'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-4"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group bmd-form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Last Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "last_name",
+        type: "text",
+        className: "form-control ".concat(this.hasErrorFor('last_name') ? 'is-invalid' : ''),
+        name: "last_name",
+        value: this.state.last_name,
+        onChange: this.handleFieldChange
+      }), this.renderErrorFor('last_name'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-4"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group bmd-form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        name: 'sex',
+        value: this.state.sex,
+        className: "form-control ".concat(this.hasErrorFor('sex') ? 'is-invalid' : ''),
+        onChange: this.handleFieldChange
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "",
+        disabled: true
+      }, "Choose Your Sex"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "Male"
+      }, "Male"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "Female"
+      }, "Female"))), this.renderErrorFor('sex')))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "About Me"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_5___default.a, {
+        theme: "snow",
+        modules: this.modules,
+        formats: this.formats,
+        value: this.state.body || '',
+        onChange: this.handleChangeBody
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: '/dashboard/users/p/datatables/',
+        className: "btn  pull-center btn-secondary"
+      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        className: "btn  pull-center btn-".concat(this.state.color_name)
+      }, "Update Profile")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "clearfix"
+      }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-4"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card card-profile"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-avatar"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#pablo"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "img",
+        src: this.state.avatar
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "card-category text-gray"
+      }, "CEO / Co-Founder"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: 'card-title',
+        dangerouslySetInnerHTML: {
+          __html: this.state.sex
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "card-title",
+        dangerouslySetInnerHTML: {
+          __html: this.state.first_name
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "card-description",
+        dangerouslySetInnerHTML: {
+          __html: this.state.body
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#pablo",
+        className: "btn btn-primary btn-sm "
+      }, "Follow"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
     }
   }]);
 
@@ -103071,126 +102605,6 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
-
-/***/ }),
-
-/***/ "./resources/js/components/admin/user/AdministratorIndex.js":
-/*!******************************************************************!*\
-  !*** ./resources/js/components/admin/user/AdministratorIndex.js ***!
-  \******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../inc/admin/TopNavAdmin */ "./resources/js/components/inc/admin/TopNavAdmin.js");
-/* harmony import */ var _inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../inc/admin/NavAdmin */ "./resources/js/components/inc/admin/NavAdmin.js");
-/* harmony import */ var _inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../inc/admin/FooterAdmin */ "./resources/js/components/inc/admin/FooterAdmin.js");
-/* harmony import */ var _UserLists__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./UserLists */ "./resources/js/components/admin/user/UserLists.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-
-
-
-var AdministratorIndex =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(AdministratorIndex, _Component);
-
-  function AdministratorIndex() {
-    var _this;
-
-    _classCallCheck(this, AdministratorIndex);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(AdministratorIndex).call(this));
-    _this.state = {
-      users: []
-    };
-    return _this;
-  }
-
-  _createClass(AdministratorIndex, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.loadItems();
-    }
-  }, {
-    key: "loadItems",
-    value: function loadItems() {
-      var _this2 = this;
-
-      var url = "/api/administrators";
-      fetch(url).then(function (res) {
-        return res.json();
-      }).then(function (result) {
-        _this2.setState({
-          users: result
-        });
-      }, function (error) {
-        _this2.setState({
-          error: error
-        });
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var users = this.state.users;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "main-panel"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "content"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container-fluid"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-body"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: 'row'
-      }, users.map(function (item) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserLists__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({
-          key: item.id
-        }, item));
-      })))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
-    }
-  }]);
-
-  return AdministratorIndex;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (AdministratorIndex);
 
 /***/ }),
 
@@ -103501,6 +102915,289 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (UserCreate);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/user/UserDatatables.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/admin/user/UserDatatables.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../inc/admin/NavAdmin */ "./resources/js/components/inc/admin/NavAdmin.js");
+/* harmony import */ var _inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../inc/admin/TopNavAdmin */ "./resources/js/components/inc/admin/TopNavAdmin.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../inc/admin/FooterAdmin */ "./resources/js/components/inc/admin/FooterAdmin.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+var UserDatatables =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(UserDatatables, _Component);
+
+  function UserDatatables() {
+    var _this;
+
+    _classCallCheck(this, UserDatatables);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(UserDatatables).call(this));
+    _this.state = {
+      users: [],
+      error: null
+    };
+    return _this;
+  }
+
+  _createClass(UserDatatables, [{
+    key: "mydatatables",
+    value: function mydatatables() {
+      $(function () {
+        $('#datatables').DataTable({
+          "pagingType": "full_numbers",
+          "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+          order: [[0, 'asc'], [3, 'desc']],
+          responsive: true,
+          destroy: true,
+          retrieve: true,
+          autoFill: true,
+          colReorder: true,
+          language: {
+            search: "<i class='material-icons'>search</i>",
+            searchPlaceholder: "Search Record"
+          },
+          "sPaginationType": "full_numbers"
+        });
+      });
+    }
+  }, {
+    key: "loadItems",
+    value: function loadItems() {
+      var _this2 = this;
+
+      var url = "/api/users";
+      fetch(url).then(function (res) {
+        return res.json();
+      }).then(function (result) {
+        _this2.setState({
+          users: result
+        });
+
+        _this2.mydatatables();
+      }, function (error) {
+        _this2.setState({
+          error: error
+        });
+      });
+    }
+  }, {
+    key: "reload",
+    value: function reload() {
+      this.loadItems();
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.loadItems();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var avatar_style = {
+        width: "40px",
+        height: "40px",
+        top: "15px",
+        left: "15px",
+        borderRadius: "50%"
+      };
+      var users = this.state.users;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-panel"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_TopNavAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container-fluid"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-6 col-md-6 col-sm-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card card-stats"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header card-header-warning card-header-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "weekend")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "card-category"
+      }, "Bookings"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "card-title"
+      }, "184")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-footer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "stats"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons text-danger"
+      }, "warning"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#pablo"
+      }, "Get More Space..."))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-6 col-md-6 col-sm-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card card-stats"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header card-header-rose card-header-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "equalizer")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "card-category"
+      }, "Website Visits"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "card-title"
+      }, users.length)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-footer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "stats"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "local_offer"), " Tracked from Google Analytics"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header card-header-success"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "card-title"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Datatables Users")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "card-title"
+      }, "Users Available")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6 text-right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        id: "tooltipSize",
+        className: "material-icons"
+      }, "chat"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "header text-right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this3.reload();
+        },
+        className: 'btn btn-success btn-raised  btn-sm',
+        title: "Refresh Page"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "replay"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+        className: "title_hover"
+      }, "Refresh"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "toolbar"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "submit text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+        to: '/dashboard/users/create/',
+        className: 'btn btn-success btn-raised'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "forum"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+        className: "title_hover"
+      }, "New User")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+        to: '/dashboard/users/',
+        className: 'btn btn-primary btn-raised'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "chat"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+        className: "title_hover"
+      }, "Users Site")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "material-datatables"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        id: "datatables",
+        className: "table table-striped table-no-bordered table-hover",
+        cellSpacing: "0",
+        width: "100%"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Avatar")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "First Name")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Last Updated")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        className: "disabled-sorting text-right"
+      }, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tfoot", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Avatar"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "First Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Last Updated"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        className: "text-right"
+      }, "Actions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, users.map(function (item) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+          key: item.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          to: '/dashboard/users/'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: item.avatar,
+          alt: item.first_name,
+          style: avatar_style
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          to: '/dashboard'
+        }, item.statusOnline ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          className: "btn btn-success btn-round btn-just-icon btn-sm",
+          title: "Administrator Online"
+        }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          className: "btn btn-danger btn-round btn-just-icon btn-sm",
+          title: "Administrator Offline"
+        }), item.first_name.length > 15 ? item.first_name.substring(0, 15) + "..." : item.first_name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, moment(item.created_at).format('DD/MM/YYYY'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          className: "text-right"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          to: "/dashboard/faqs/v/".concat(item.slug, "/"),
+          className: "btn btn-link  btn-warning btn-round btn-just-icon",
+          title: "View"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "material-icons"
+        }, "visibility")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          className: "btn btn-link  btn-success btn-round btn-just-icon",
+          title: "Edit",
+          to: "/dashboard/users/".concat(item.id, "/edit/"),
+          key: item.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "material-icons"
+        }, "edit"))));
+      })))))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+    }
+  }]);
+
+  return UserDatatables;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (UserDatatables);
 
 /***/ }),
 
@@ -103835,7 +103532,7 @@ function (_Component) {
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "text-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: '/dashboard/users/',
+        to: '/dashboard/users/p/datatables/',
         className: "btn  pull-center btn-secondary"
       }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
@@ -103903,10 +103600,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _inc_admin_NavAdmin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../inc/admin/NavAdmin */ "./resources/js/components/inc/admin/NavAdmin.js");
 /* harmony import */ var _inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../inc/admin/FooterAdmin */ "./resources/js/components/inc/admin/FooterAdmin.js");
 /* harmony import */ var _UserLists__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./UserLists */ "./resources/js/components/admin/user/UserLists.js");
-/* harmony import */ var _faq_FaqLists__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../faq/FaqLists */ "./resources/js/components/admin/faq/FaqLists.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -103931,7 +103635,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
 var UserIndex =
 /*#__PURE__*/
 function (_Component) {
@@ -103944,7 +103647,10 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(UserIndex).call(this));
     _this.state = {
-      users: []
+      users: [],
+      per: 12,
+      page: 1,
+      totalPages: null
     };
     return _this;
   }
@@ -103959,12 +103665,16 @@ function (_Component) {
     value: function loadItems() {
       var _this2 = this;
 
-      var url = "/api/users";
+      var _this$state = this.state,
+          per = _this$state.per,
+          page = _this$state.page,
+          users = _this$state.users;
+      var url = "/api/users?per=".concat(per, "&page=").concat(page);
       fetch(url).then(function (res) {
         return res.json();
       }).then(function (result) {
         _this2.setState({
-          users: result
+          users: [].concat(_toConsumableArray(users), _toConsumableArray(result))
         });
       }, function (error) {
         _this2.setState({
@@ -103973,8 +103683,19 @@ function (_Component) {
       });
     }
   }, {
+    key: "loadMore",
+    value: function loadMore() {
+      this.setState(function (prevState) {
+        return {
+          page: prevState.page + 1
+        };
+      }, this.loadItems);
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var users = this.state.users;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "wrapper"
@@ -103997,19 +103718,38 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "submit text-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: '/dashboard/users/p/datatables/',
+        className: 'btn btn-primary btn-raised'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "info"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+        className: "title_hover"
+      }, "Users Datatables")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: '/dashboard/users/create/',
         className: 'btn btn-success btn-raised'
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "material-icons"
       }, "forum"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
         className: "title_hover"
-      }, "User")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "New User")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: 'row'
       }, users.map(function (item) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserLists__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({
           key: item.id
         }, item));
-      })))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "submit text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: 'button',
+        onClick: function onClick() {
+          return _this3.loadMore();
+        },
+        className: 'btn btn-success btn-warning'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "forum"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+        className: "title_hover"
+      }, "Load More"))))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
     }
   }]);
 
@@ -104336,14 +104076,14 @@ function (_Component) {
         className: "sidebar-normal"
       }, " FAQS ")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item "
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "nav-link",
-        href: "../examples/pages/pricing.html"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: '/dashboard/links/',
+        className: "nav-link"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "sidebar-mini"
-      }, " P "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }, " LK "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "sidebar-normal"
-      }, " Pricing ")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      }, " Links ")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item "
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "nav-link",
@@ -104388,12 +104128,30 @@ function (_Component) {
         className: "nav-item "
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "nav-link",
-        to: '/dashboard/administrators'
+        to: '/dashboard/administrators/'
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "sidebar-mini"
       }, " AM "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "sidebar-normal"
-      }, " Administrators ")))))))));
+      }, " Administrators "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "nav-item "
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "nav-link",
+        to: '/dashboard/permissions/'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "sidebar-mini"
+      }, " PM "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "sidebar-normal"
+      }, " Permissions "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "nav-item "
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "nav-link",
+        to: '/dashboard/roles/'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "sidebar-mini"
+      }, " RL "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "sidebar-normal"
+      }, " Roles ")))))))));
     }
   }]);
 
@@ -104569,6 +104327,86 @@ function (_Component) {
 
 /***/ }),
 
+/***/ "./resources/js/components/inc/error/Error404.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/inc/error/Error404.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../admin/FooterAdmin */ "./resources/js/components/inc/admin/FooterAdmin.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var Error404 =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Error404, _Component);
+
+  function Error404() {
+    _classCallCheck(this, Error404);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Error404).apply(this, arguments));
+  }
+
+  _createClass(Error404, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "wrapper wrapper-full-page"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "page-header error-page header-filter"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "title"
+      }, "404"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Page not found :("), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Ooooups! Looks like you got lost."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: '/dashboard/',
+        className: "btn btn-danger",
+        id: "button_hover"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "material-icons"
+      }, "chevron_left"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+        className: "title_hover"
+      }, "Back Home")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_admin_FooterAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
+    }
+  }]);
+
+  return Error404;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (Error404);
+
+/***/ }),
+
 /***/ "./resources/js/components/routes/RoutePath .js":
 /*!******************************************************!*\
   !*** ./resources/js/components/routes/RoutePath .js ***!
@@ -104594,9 +104432,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_profile_ProfileUserEdit__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../admin/profile/ProfileUserEdit */ "./resources/js/components/admin/profile/ProfileUserEdit.js");
 /* harmony import */ var _admin_profile_ProfileUserAdmin__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../admin/profile/ProfileUserAdmin */ "./resources/js/components/admin/profile/ProfileUserAdmin.js");
 /* harmony import */ var _admin_user_UserIndex__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../admin/user/UserIndex */ "./resources/js/components/admin/user/UserIndex.js");
-/* harmony import */ var _admin_user_AdministratorIndex__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../admin/user/AdministratorIndex */ "./resources/js/components/admin/user/AdministratorIndex.js");
+/* harmony import */ var _admin_administrator_AdministratorIndex__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../admin/administrator/AdministratorIndex */ "./resources/js/components/admin/administrator/AdministratorIndex.js");
 /* harmony import */ var _admin_user_UserEdit__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../admin/user/UserEdit */ "./resources/js/components/admin/user/UserEdit.js");
 /* harmony import */ var _admin_user_UserCreate__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../admin/user/UserCreate */ "./resources/js/components/admin/user/UserCreate.js");
+/* harmony import */ var _admin_user_UserDatatables__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../admin/user/UserDatatables */ "./resources/js/components/admin/user/UserDatatables.js");
+/* harmony import */ var _admin_administrator_AdministratorDatatables__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../admin/administrator/AdministratorDatatables */ "./resources/js/components/admin/administrator/AdministratorDatatables.js");
+/* harmony import */ var _inc_error_Error404__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../inc/error/Error404 */ "./resources/js/components/inc/error/Error404.js");
+/* harmony import */ var _admin_partials_permission_PermissionIndex__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../admin/partials/permission/PermissionIndex */ "./resources/js/components/admin/partials/permission/PermissionIndex.js");
+/* harmony import */ var _admin_partials_role_RoleIndex__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../admin/partials/role/RoleIndex */ "./resources/js/components/admin/partials/role/RoleIndex.js");
+/* harmony import */ var _admin_partials_role_RoleEdit__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../admin/partials/role/RoleEdit */ "./resources/js/components/admin/partials/role/RoleEdit.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -104614,6 +104458,12 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
 
 
 
@@ -104653,11 +104503,19 @@ function (_Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
         path: "/dashboard/administrators/",
-        component: _admin_user_AdministratorIndex__WEBPACK_IMPORTED_MODULE_13__["default"]
+        component: _admin_administrator_AdministratorIndex__WEBPACK_IMPORTED_MODULE_13__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        exact: true,
+        path: "/dashboard/administrators/p/datatables/",
+        component: _admin_administrator_AdministratorDatatables__WEBPACK_IMPORTED_MODULE_17__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
         path: "/dashboard/users/",
         component: _admin_user_UserIndex__WEBPACK_IMPORTED_MODULE_12__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        exact: true,
+        path: "/dashboard/users/p/datatables/",
+        component: _admin_user_UserDatatables__WEBPACK_IMPORTED_MODULE_16__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
         path: "/dashboard/users/create/",
@@ -104698,6 +104556,21 @@ function (_Component) {
         exact: true,
         path: "/dashboard/links/",
         component: _admin_link_LinkIndex__WEBPACK_IMPORTED_MODULE_7__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        exact: true,
+        path: "/dashboard/permissions/",
+        component: _admin_partials_permission_PermissionIndex__WEBPACK_IMPORTED_MODULE_19__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        exact: true,
+        path: "/dashboard/roles/",
+        component: _admin_partials_role_RoleIndex__WEBPACK_IMPORTED_MODULE_20__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        exact: true,
+        path: "/dashboard/roles/:id/edit",
+        component: _admin_partials_role_RoleEdit__WEBPACK_IMPORTED_MODULE_21__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "*",
+        component: _inc_error_Error404__WEBPACK_IMPORTED_MODULE_18__["default"]
       })));
     }
   }]);

@@ -1,5 +1,5 @@
 @extends('inc.admin.main')
-@section('title', '| Dashboard User')
+@section('title', '| Dashboard Users')
 
 @section('style')
 
