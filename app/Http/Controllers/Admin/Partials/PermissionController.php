@@ -53,12 +53,25 @@ class PermissionController extends Controller
         return response('Created',Response::HTTP_CREATED);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $permission = new PermissionResource(Permission::where('id', $id)->findOrFail($id));
+
+        return response()->json($permission,200);
+    }
+
     public function edit(Permission $permission)
     {
         $data = [
-            'permissions' => $permission
+            'permission' => $permission
         ];
-        return view('admin.role.edit',$data);
+        return view('admin.permission.edit',$data);
     }
     /**
      * Update Permission in storage.

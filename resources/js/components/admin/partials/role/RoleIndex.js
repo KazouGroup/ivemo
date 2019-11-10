@@ -3,6 +3,7 @@ import NavAdmin from "../../../inc/admin/NavAdmin";
 import TopNavAdmin from "../../../inc/admin/TopNavAdmin";
 import FooterAdmin from "../../../inc/admin/FooterAdmin";
 import {Link} from "react-router-dom";
+import RoleLists from "./RoleLists";
 
 
 
@@ -166,30 +167,7 @@ class RoleIndex extends Component {
                                                     </tfoot>
                                                     <tbody>
                                                     {roles.map((item) => (
-                                                        <tr key={item.id}>
-                                                            <td><b>{item.name}</b></td>
-                                                            <td>
-                                                            {item.permissions.map((permission) => (
-                                                             <span className="badge badge-success badge-purple">
-                                                                {permission}
-                                                             </span>
-                                                            ))}
-                                                            </td>
-                                                            <td><b>{moment(item.created_at).fromNow()}</b>
-                                                            </td>
-                                                            <td className="text-right">
-
-                                                                <Link className="btn btn-link  btn-success btn-round btn-just-icon"
-                                                                      title="Edit" to={`/dashboard/roles/${item.id}/edit/`} key={item.id}>
-                                                                    <i className="material-icons">edit</i>
-                                                                </Link>
-
-                                                                <button type={'button'} onClick={() => this.deleteItem(item.id)}
-                                                                        className="btn btn-link btn-danger btn-round btn-just-icon" title="Delete">
-                                                                    <i className="material-icons">delete_forever</i>
-                                                                </button>
-                                                            </td>
-                                                        </tr>
+                                                        <RoleLists key={item.id} {...item}/>
                                                     ))}
                                                     </tbody>
                                                 </table>

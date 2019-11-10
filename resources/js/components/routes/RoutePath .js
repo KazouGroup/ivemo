@@ -20,6 +20,7 @@ import Error404 from "../inc/error/Error404";
 import PermissionIndex from "../admin/partials/permission/PermissionIndex";
 import RoleIndex from "../admin/partials/role/RoleIndex";
 import RoleEdit from "../admin/partials/role/RoleEdit";
+import PermissionEdit from "../admin/partials/permission/PermissionEdit";
 
 export default class RoutePath  extends Component{
     render(){
@@ -42,6 +43,7 @@ export default class RoutePath  extends Component{
                     <Route exact path="/dashboard/faqs/v/:slug/" component={FaqView} />
                     <Route exact path="/dashboard/links/" component={LinkIndex} />
                     <Route exact path="/dashboard/permissions/" component={PermissionIndex} />
+                    <Route exact path="/dashboard/permissions/:permission/edit" component={PermissionEdit} />
                     <Route exact path="/dashboard/roles/" component={RoleIndex} />
                     <Route exact path="/dashboard/roles/:id/edit" component={RoleEdit} />
                     <Route path="*" component={Error404}/>
