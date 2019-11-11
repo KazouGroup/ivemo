@@ -11,7 +11,6 @@ export default class ProfileUserAdmin extends Component {
         this.state = {
             user: {},
         };
-
         this.modules = {
             toolbar: [
                 [{ 'font': [] }],
@@ -21,7 +20,7 @@ export default class ProfileUserAdmin extends Component {
                 [{ 'align': [] }],
                 [{ 'color': [] }, { 'background': [] }],
                 //['clean']
-            ]
+            ],
         };
         this.formats = [
             'font',
@@ -31,6 +30,14 @@ export default class ProfileUserAdmin extends Component {
             'align',
             'color', 'background'
         ];
+
+        this.handleFieldChange = this.handleFieldChange.bind(this);
+    }
+
+    handleFieldChange (e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
     // get all the tasks from backend
     loadItems() {
@@ -73,27 +80,27 @@ export default class ProfileUserAdmin extends Component {
                                                 <div className="col-md-6">
                                                     <div className="form-group bmd-form-group">
                                                         <label>Username</label>
-                                                        <input type='text'  className="form-control"/>
+                                                        <input type='text'  onChange={this.handleFieldChange} value={user.username || ""}  className="form-control"/>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-6">
                                                     <div className="form-group bmd-form-group">
-                                                        <label className="bmd-label-floating">Email address</label>
-                                                        <input type="email" className="form-control"/>
+                                                        <label>Email address</label>
+                                                        <input type="email"  onChange={this.handleFieldChange} value={user.email || ""} className="form-control"/>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="row">
                                                 <div className="col-md-6">
                                                     <div className="form-group bmd-form-group">
-                                                        <label className="bmd-label-floating">Fist Name</label>
-                                                        <input type="text" className="form-control"/>
+                                                        <label>Fist Name</label>
+                                                        <input type="text"  onChange={this.handleFieldChange} value={user.first_name || ""} className="form-control"/>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-6">
                                                     <div className="form-group bmd-form-group">
-                                                        <label className="bmd-label-floating">Last Name</label>
-                                                        <input type="text" className="form-control"/>
+                                                        <label>Last Name</label>
+                                                        <input type="text"  onChange={this.handleFieldChange} value={user.last_name || ""} className="form-control"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -132,8 +139,12 @@ export default class ProfileUserAdmin extends Component {
                                             </a>
                                         </div>
                                         <div className="card-body">
+                                            <span className="badge badge-success">
+                                               <b>{user.roles}</b>
+                                            </span>
                                             <h6 className="card-category text-gray">CEO / Co-Founder</h6>
                                             <h4 className="card-title" dangerouslySetInnerHTML={{__html: user.first_name}}/>
+
                                             <p className="card-description" dangerouslySetInnerHTML={{__html: user.body}}/>
                                             <a href="#pablo" className="btn btn-primary btn-sm ">Follow</a>
                                         </div>
