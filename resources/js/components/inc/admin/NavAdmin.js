@@ -157,13 +157,13 @@ export default class NavAdmin extends Component {
                                             </ul>
                                         </div>
                                     </li>
-                                    <li className="nav-item ">
+                                    <li className="nav-item">
                                         <Link className="nav-link" to={'/dashboard/administrators/'}>
                                             <span className="sidebar-mini"> AM </span>
                                             <span className="sidebar-normal"> Administrators </span>
                                         </Link>
                                     </li>
-                                    <li className="nav-item ">
+                                    <li className="nav-item">
                                         <Link className="nav-link" to={'/dashboard/permissions/'}>
                                             <span className="sidebar-mini"> PM </span>
                                             <span className="sidebar-normal"> Permissions </span>

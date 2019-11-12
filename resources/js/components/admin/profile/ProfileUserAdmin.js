@@ -122,7 +122,7 @@ export default class ProfileUserAdmin extends Component {
                                                 </div>
                                             </div>
                                             <div className="text-center">
-                                                <Link to={'/dashboard/profile/edit/'} className={`btn  pull-center btn-${user.color_name}`}>
+                                                <Link to={'/dashboard/profile/edit/'} className={`btn btn-sm pull-center btn-${user.color_name}`}>
                                                     Edit Profile
                                                 </Link>
                                             </div>

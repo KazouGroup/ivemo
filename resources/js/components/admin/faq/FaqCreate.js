@@ -179,13 +179,13 @@ export default class FaqCreate extends Component {
                                                 <hr/>
                                                 <div className="submit">
                                                     <div className="text-center">
-                                                        <Link to={'/dashboard/faqs'} className="btn btn-danger"
+                                                        <Link to={'/dashboard/faqs'} className="btn btn-danger btn-sm"
                                                               id="button_hover">
                                                             <i className="material-icons">chevron_left</i>
                                                             <b className="title_hover">Back</b>
                                                         </Link>
                                                         <button id="button_hover" type="submit"
-                                                                className="btn btn-success btn-raised">
+                                                                className="btn btn-success btn-sm btn-raised">
                                                             <i className="material-icons">save_alt</i>
                                                             <b className="title_hover">Save</b>
                                                         </button>

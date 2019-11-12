@@ -13,10 +13,13 @@ export default class ProfileUserEdit extends Component {
             username: '',
             first_name: '',
             last_name: '',
+            color_name: '',
             email: '',
             body: '',
             sex: '',
+            avatar: '',
 
+            colors: [],
             errors: [],
         };
 
@@ -71,6 +74,23 @@ export default class ProfileUserEdit extends Component {
             )
         }
     }
+    updateImage(e){
+        let file = e.target.files[0];
+        let reader = new FileReader();
+        let limit = 1024 * 1024 * 2;
+        if(file['size'] > limit){
+            swal({
+                type: 'error',
+                title: 'Oops...',
+                text: 'You are uploading a large file',
+            });
+            return false;
+        }
+        reader.onloadend = (file) => {
+            this.form.avatar = reader.result;
+        };
+        reader.readAsDataURL(file);
+    }
     // handle submit
     updateItem(e) {
         e.preventDefault();
@@ -79,6 +99,7 @@ export default class ProfileUserEdit extends Component {
             username: this.state.username,
             first_name: this.state.first_name,
             last_name: this.state.last_name,
+            color_name: this.state.color_name,
             body: this.state.body,
             sex: this.state.sex,
         };
@@ -132,6 +153,7 @@ export default class ProfileUserEdit extends Component {
                 sex: response.data.sex,
                 color_name: response.data.color_name,
             }));
+        axios.get(`/api/colors`).then(response => this.setState({colors: [...response.data],}));
     }
 
     componentDidMount() {
@@ -139,6 +161,7 @@ export default class ProfileUserEdit extends Component {
     }
 
     render() {
+        let { colors } = this.state;
         return (
             <div className="wrapper">
 
@@ -150,131 +173,180 @@ export default class ProfileUserEdit extends Component {
 
                     <div className="content">
                         <div className="container-fluid">
-
-                            <div className="row">
-                                <div className="col-md-8">
-                                    <form onSubmit={this.updateItem}>
-                                        <div className="card">
-                                            <div className={`card-header card-header-icon card-header-${this.state.color_name}`}>
-                                                <div className="card-icon">
-                                                    <i className="material-icons">perm_identity</i>
+                            <form onSubmit={this.updateItem} encType="multipart/form-data" >
+                                <div className="row">
+                                    <div className="col-md-8">
+                                            <div className="card">
+                                                <div className={`card-header card-header-icon card-header-${this.state.color_name}`}>
+                                                    <div className="card-icon">
+                                                        <i className="material-icons">perm_identity</i>
+                                                    </div>
+                                                    <h4 className="card-title">{this.state.first_name} {this.state.last_name}
+                                                    </h4>
                                                 </div>
-                                                <h4 className="card-title">{this.state.first_name} {this.state.last_name}
-                                                </h4>
+                                                <div className="card-body">
+                                                    <div className="row">
+                                                        <div className="col-md-6">
+                                                            <div className="form-group bmd-form-group">
+                                                                <label>Username</label>
+                                                                <input required={'required'}
+                                                                       id='username'
+                                                                       type='text'
+                                                                       className={`form-control ${this.hasErrorFor('username') ? 'is-invalid' : ''}`}
+                                                                       name='username'
+                                                                       value={this.state.username || ""}
+                                                                       onChange={this.handleFieldChange}
+                                                                />
+                                                                {this.renderErrorFor('username')}
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-6">
+                                                            <div className="form-group bmd-form-group">
+                                                                <label>Email address</label>
+                                                                <input required={'required'}
+                                                                       id='email'
+                                                                       type='email'
+                                                                       className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
+                                                                       name='email'
+                                                                       value={this.state.email || ""}
+                                                                       onChange={this.handleFieldChange}
+                                                                />
+                                                                {this.renderErrorFor('email')}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col-md-6">
+                                                            <div className="form-group bmd-form-group">
+                                                                <label>Fist Name</label>
+                                                                <input required={'required'}
+                                                                       id='first_name'
+                                                                       type='text'
+                                                                       className={`form-control ${this.hasErrorFor('first_name') ? 'is-invalid' : ''}`}
+                                                                       name='first_name'
+                                                                       value={this.state.first_name || ""}
+                                                                       onChange={this.handleFieldChange}
+                                                                />
+                                                                {this.renderErrorFor('first_name')}
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-6">
+                                                            <div className="form-group bmd-form-group">
+                                                                <label>Last Name</label>
+                                                                <input id='last_name'
+                                                                       type='text'
+                                                                       className={`form-control ${this.hasErrorFor('last_name') ? 'is-invalid' : ''}`}
+                                                                       name='last_name'
+                                                                       value={this.state.last_name || ""}
+                                                                       onChange={this.handleFieldChange}
+                                                                />
+                                                                {this.renderErrorFor('last_name')}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className={'row'}>
+                                                        <div className="col-md-6">
+                                                            <div className="form-group bmd-form-group">
+                                                                <label>
+                                                                    <select name={'sex'} value={this.state.sex}
+                                                                            className={`form-control ${this.hasErrorFor('sex') ? 'is-invalid' : ''}`}
+                                                                            onChange={this.handleFieldChange}>
+                                                                        <option value="" disabled>Choose Your Sex</option>
+                                                                        <option value="Male">Male</option>
+                                                                        <option value="Female">Female</option>
+                                                                    </select>
+                                                                </label>
+                                                                {this.renderErrorFor('sex')}
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-6">
+                                                            <div className="form-group bmd-form-group">
+                                                                <label>
+                                                                    <select name={'color_name'} value={this.state.color_name}
+                                                                            className={`form-control ${this.hasErrorFor('color_name') ? 'is-invalid' : ''}`}
+                                                                            onChange={this.handleFieldChange}>
+                                                                        <option value="" disabled>Choose Your Color</option>
+                                                                        {colors.map((color) => (
+                                                                            <option  key={color.id} value={color.slug}>{color.name}</option>
+                                                                        ))}
+                                                                    </select>
+                                                                </label>
+                                                                {this.renderErrorFor('color_name')}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col-md-12">
+                                                            <div className="form-group">
+                                                                <label>About Me</label>
+                                                                <ReactQuill theme="snow" modules={this.modules}
+                                                                            formats={this.formats}  value={this.state.body || ''} onChange={this.handleChangeBody}/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="text-center">
+                                                        <button type="submit" className={`btn  btn-sm pull-center btn-${this.state.color_name}`}>
+                                                            Update Profile
+                                                        </button>
+                                                    </div>
+
+                                                    <div className="clearfix"></div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div className="col-md-4">
+                                        <div className="card card-profile">
+                                            <div className="row">
+                                                <div className="col-md-6 ml-auto mr-auto">
+                                                    <div className="profile text-center ">
+                                                        <div className="avatar">
+                                                            <div className="fileinput fileinput-new text-center"
+                                                                 data-provides="fileinput">
+                                                                <div className="fileinput-new thumbnail img-circle img-raised">
+                                                                    <img className="img" src={this.state.avatar}/>
+                                                                </div>
+                                                                <div className="fileinput-preview fileinput-exists thumbnail img-circle img-raised">
+
+                                                                </div>
+                                                                <div>
+                                                                     <span className="btn btn-raised btn-sm btn-info btn-file">
+                                                                                    <span className="fileinput-new">
+                                                                                        <b> Add Profile</b>
+                                                                             </span>
+                                                                             <span className="fileinput-exists">
+                                                                            <i className="material-icons">edit</i>
+                                                                            <b> Change</b>
+                                                                          </span>
+                                                                         <input onChange={this.updateImage} id="avatar" type="file" className="form-control" name="avatar"/>
+                                                                        </span>
+                                                                    <br/>
+                                                                    <a href="#pablo"
+                                                                       className="btn btn-danger fileinput-exists btn-sm"
+                                                                       data-dismiss="fileinput">
+                                                                        <i className="fa fa-times">
+
+                                                                        </i>
+                                                                        <b>Remove</b>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-6">
-                                                        <div className="form-group bmd-form-group">
-                                                            <label>Username</label>
-                                                            <input required={'required'}
-                                                                   id='username'
-                                                                   type='text'
-                                                                   className={`form-control ${this.hasErrorFor('username') ? 'is-invalid' : ''}`}
-                                                                   name='username'
-                                                                   value={this.state.username || ""}
-                                                                   onChange={this.handleFieldChange}
-                                                            />
-                                                            {this.renderErrorFor('username')}
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-6">
-                                                        <div className="form-group bmd-form-group">
-                                                            <label>Email address</label>
-                                                            <input required={'required'}
-                                                                   id='email'
-                                                                   type='email'
-                                                                   className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                                                   name='email'
-                                                                   value={this.state.email || ""}
-                                                                   onChange={this.handleFieldChange}
-                                                            />
-                                                            {this.renderErrorFor('email')}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-md-4">
-                                                        <div className="form-group bmd-form-group">
-                                                            <label>Fist Name</label>
-                                                            <input required={'required'}
-                                                                   id='first_name'
-                                                                   type='text'
-                                                                   className={`form-control ${this.hasErrorFor('first_name') ? 'is-invalid' : ''}`}
-                                                                   name='first_name'
-                                                                   value={this.state.first_name || ""}
-                                                                   onChange={this.handleFieldChange}
-                                                            />
-                                                            {this.renderErrorFor('first_name')}
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-4">
-                                                        <div className="form-group bmd-form-group">
-                                                            <label>Last Name</label>
-                                                            <input id='last_name'
-                                                                   type='text'
-                                                                   className={`form-control ${this.hasErrorFor('last_name') ? 'is-invalid' : ''}`}
-                                                                   name='last_name'
-                                                                   value={this.state.last_name || ""}
-                                                                   onChange={this.handleFieldChange}
-                                                            />
-                                                            {this.renderErrorFor('last_name')}
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-4">
-                                                        <div className="form-group bmd-form-group">
-                                                            <label>
-                                                                <select name={'sex'} value={this.state.sex}
-                                                                        className={`form-control ${this.hasErrorFor('sex') ? 'is-invalid' : ''}`}
-                                                                        onChange={this.handleFieldChange}>
-                                                                    <option value="" disabled>Choose Your Sex</option>
-                                                                    <option value="Male">Male</option>
-                                                                    <option value="Female">Female</option>
-                                                                </select>
-                                                            </label>
-                                                            {this.renderErrorFor('sex')}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div className="form-group">
-                                                            <label>About Me</label>
-                                                            <ReactQuill theme="snow" modules={this.modules}
-                                                                        formats={this.formats}  value={this.state.body || ''} onChange={this.handleChangeBody}/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="text-center">
-                                                    <button type="submit" className={`btn  pull-center btn-${this.state.color_name}`}>
-                                                        Update Profile
-                                                    </button>
-                                                </div>
-
-                                                <div className="clearfix"></div>
+                                                <h6 className="card-category text-gray">CEO / Co-Founder</h6>
+                                                <h6 className={'card-title'} dangerouslySetInnerHTML={{__html: this.state.sex}}/>
+                                                <h6 className="card-title"
+                                                    dangerouslySetInnerHTML={{__html: this.state.first_name}}/>
+                                                <p className="card-description"
+                                                   dangerouslySetInnerHTML={{__html: this.state.body}}/>
+                                                <a href="#pablo" className="btn btn-primary btn-sm">Follow</a>
                                             </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div className="col-md-4">
-                                    <div className="card card-profile">
-                                        <div className="card-avatar">
-                                            <a href="#pablo">
-                                                <img className="img" src={this.state.avatar}/>
-                                            </a>
-                                        </div>
-                                        <div className="card-body">
-                                            <h6 className="card-category text-gray">CEO / Co-Founder</h6>
-                                            <h6 className={'card-title'} dangerouslySetInnerHTML={{__html: this.state.sex}}/>
-                                            <h6 className="card-title"
-                                                dangerouslySetInnerHTML={{__html: this.state.first_name}}/>
-                                            <p className="card-description"
-                                               dangerouslySetInnerHTML={{__html: this.state.body}}/>
-                                            <a href="#pablo" className="btn btn-primary btn-sm ">Follow</a>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     <FooterAdmin/>

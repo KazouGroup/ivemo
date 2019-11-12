@@ -4,7 +4,6 @@ import ReactQuill from 'react-quill';
 import TopNavAdmin from "../../inc/admin/TopNavAdmin";
 import NavAdmin from "../../inc/admin/NavAdmin";
 import FooterAdmin from "../../inc/admin/FooterAdmin";
-import UserLists from "./UserLists";
 
 class UserEdit extends Component {
 
@@ -268,23 +267,26 @@ class UserEdit extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className={'row'}>
-                                                    <div className={'col-md-12'}>
-                                                        <div className="form-group bmd-form-group">
-                                                            <label>
-                                                                <select name="roles" value={this.state.roles}
-                                                                        className={`form-control ${this.hasErrorFor('roles') ? 'is-invalid' : ''}`}
-                                                                        onChange={this.handleFieldChange}>
-                                                                    <option value="" disabled>Choose Role User</option>
-                                                                    {allroles.map((role,index) => (
-                                                                    <option  key={index} value={role.name}>{role.name}</option>
-                                                                    ))}
-                                                                </select>
-                                                            </label>
-                                                            {this.renderErrorFor('status_user')}
+                                                {this.state.status_user === 1 ?
+                                                    <div className={'row'}>
+                                                        <div className={'col-md-12'}>
+                                                            <div className="form-group bmd-form-group">
+                                                                <label>
+                                                                    <select name="roles" value={this.state.roles}
+                                                                            className={`form-control ${this.hasErrorFor('roles') ? 'is-invalid' : ''}`}
+                                                                            onChange={this.handleFieldChange}>
+                                                                        <option value="" disabled>Choose Role User</option>
+                                                                        {allroles.map((role,index) => (
+                                                                            <option  key={index} value={role.name}>{role.name}</option>
+                                                                        ))}
+                                                                    </select>
+                                                                </label>
+                                                                {this.renderErrorFor('status_user')}
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                    : null
+                                                }
                                                 <div className="row">
                                                     <div className="col-md-12">
                                                         <div className="form-group">
@@ -296,15 +298,15 @@ class UserEdit extends Component {
                                                 </div>
                                                 <div className="text-center">
                                                     {this.state.status_user === 1 ?
-                                                        <Link to={'/dashboard/administrators/p/datatables/'} className={`btn  pull-center btn-secondary`}>
-                                                            Cancel
+                                                        <Link to={'/dashboard/administrators/p/datatables/'} className={`btn  pull-center btn-secondary btn-sm`}>
+                                                            Back
                                                         </Link>
                                                         :
-                                                        <Link to={'/dashboard/users/p/datatables/'} className={`btn  pull-center btn-secondary`}>
-                                                            Cancel
+                                                        <Link to={'/dashboard/users/p/datatables/'} className={`btn  pull-center btn-secondary btn-sm`}>
+                                                            Back
                                                         </Link>
                                                     }
-                                                    <button type="submit" className={`btn  pull-center btn-${this.state.color_name}`}>
+                                                    <button type="submit" className={`btn  pull-center btn-sm btn-${this.state.color_name}`}>
                                                         Update Profile
                                                     </button>
                                                 </div>

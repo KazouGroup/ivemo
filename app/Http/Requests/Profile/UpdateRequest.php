@@ -29,9 +29,9 @@ class UpdateRequest extends BaseRequest
     public function rules()
     {
         return [
-            'username' => "required|string|min:2|max:25|unique:users,username,{$this->id}",
+            'username' => "required|string|min:2|max:25|unique:users,username,".auth()->check(),
             'email' => ['required', 'email', Rule::unique((new User)->getTable())->ignore(auth()->id())],
-            //'email' => "required|email|max:255|unique:users,email,{$this->id}",
+            "sex" => "required|in:Female,Male",
             //'country_id' => 'required',
         ];
     }
