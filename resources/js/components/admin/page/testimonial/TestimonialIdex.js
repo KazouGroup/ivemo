@@ -50,8 +50,8 @@ class TestimonialIdex extends Component {
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
             cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it',
             showCancelButton: true,
             reverseButtons: true
         }).then((result) => {

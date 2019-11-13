@@ -6,6 +6,7 @@ Route::get('dashboard/profile/','UserController@admin_profile');
 Route::put('/profile/users','UserController@updateUser');
 Route::get('dashboard/profile/edit','UserController@admin_profile_edit');
 
+
 Route::resource('/dashboard/users', 'UserController');
 Route::get('/dashboard/users/p/datatables', 'UserController@datatablesusers');
 Route::get('/dashboard/administrators/p/datatables', 'UserController@datatablesadministrators');

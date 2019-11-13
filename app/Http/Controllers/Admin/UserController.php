@@ -129,13 +129,13 @@ class UserController extends Controller
     public function admin_profile()
     {
         $user = Auth::user();
-        return view('admin.profile.edit',compact('user'));
+        return view('admin.user.show',compact('user'));
     }
 
     public function admin_profile_edit()
     {
         $user = Auth::user();
-        return view('admin.profile.edit',compact('user'));
+        return view('admin.user.show',compact('user'));
     }
 
     public function user_edit()

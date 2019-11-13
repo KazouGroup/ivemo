@@ -16,7 +16,7 @@ export default class TestimonialView extends Component {
     // get all the tasks from backend
     loadItems() {
         let Slug = this.props.match.params.testimonial;
-        axios.get(`/api/testimonial/v/${Slug}`).then(response =>
+        axios.get(`/api/testimonials/v/${Slug}`).then(response =>
             this.setState({
                 testimonial: response.data
             }));
@@ -47,7 +47,7 @@ export default class TestimonialView extends Component {
                                         <div className="card-body">
                                             <div className="submit">
                                                 <div className="text-right">
-                                                    <Link to={'/dashboard/faqs'} className="btn btn-primary btn-sm" id="button_hover">
+                                                    <Link to={'/dashboard/testimonials'} className="btn btn-primary btn-sm" id="button_hover">
                                                         <i className="material-icons">chevron_left</i>
                                                         <b className="title_hover">Back</b>
                                                     </Link>
@@ -66,7 +66,7 @@ export default class TestimonialView extends Component {
                                                     </div>
                                                     <div id="collapseOne" className="collapse show" role="tabpanel"
                                                          aria-labelledby="headingOne" data-parent="#accordion">
-                                                        <div className="card-body text-justify" dangerouslySetInnerHTML={{__html: faq.body}}/>
+                                                        <div className="card-body text-justify" dangerouslySetInnerHTML={{__html: testimonial.body}}/>
                                                     </div>
                                                 </div>
                                             </div>

@@ -46,4 +46,21 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
     {
         $this->notify(new VerifyEmailUsers());
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::created(function ($user) {
+            // Add role to the user
+            $user->syncRoles('1');
+            $user->profile()->create([
+                'full_name' => $user->email,
+            ]);
+        });
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(profile::class);
+    }
 }

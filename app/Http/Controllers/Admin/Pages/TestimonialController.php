@@ -17,7 +17,7 @@ class TestimonialController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth',['except' => ['api']]);
+        $this->middleware('auth',['except' => ['api','apiview']]);
     }
     /**
      * Display a listing of the resource.
@@ -98,14 +98,14 @@ class TestimonialController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function vector(testimonial $testimonial)
+    public function vector($slug)
     {
-        return view('admin.testimonial.show', [
-            'testimonial' => $testimonial,
-        ]);
+        $testimonial = testimonial::where('slug',$slug)->firstOrFail();
+
+        return view('admin.testimonial.show',compact('testimonial'));
     }
 
-    public function view($slug)
+    public function apiview($slug)
     {
         $testimonial = new TestimonialResource(testimonial::where('slug',$slug)->firstOrFail());
         return $testimonial;

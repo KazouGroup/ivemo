@@ -8,12 +8,12 @@ import DashboardIndex from "../admin/DashboardIndex";
 import LinkIndex from "../admin/link/LinkIndex";
 import FaqView from "../admin/page/faq/FaqView";
 import FaqAdminSite from "../admin/page/faq/FaqAdminSite";
-import ProfileUserEdit from "../admin/profile/ProfileUserEdit";
-import ProfileUserAdmin from "../admin/profile/ProfileUserAdmin";
+import AdminProfileUserEdit from "../admin/profile/AdminProfileUserEdit";
+import AdminProfileUserAdmin from "../admin/profile/AdminProfileUserAdmin";
 import UserIndex from "../admin/user/UserIndex";
 import AdministratorIndex from "../admin/administrator/AdministratorIndex";
-import UserEdit from "../admin/user/UserEdit";
-import UserCreate from "../admin/user/UserCreate";
+import DashboardUserEdit from "../admin/user/DashboardUserEdit";
+import DashboardUserCreate from "../admin/user/DashboardUserCreate";
 import UserDatatables from "../admin/user/UserDatatables";
 import AdministratorDatatables from "../admin/administrator/AdministratorDatatables";
 import Error404 from "../inc/error/Error404";
@@ -24,6 +24,7 @@ import PermissionEdit from "../admin/partials/permission/PermissionEdit";
 import TestimonialIdex from "../admin/page/testimonial/TestimonialIdex";
 import TestimonialEdit from "../admin/page/testimonial/TestimonialEdit";
 import TestimonialView from "../admin/page/testimonial/TestimonialView";
+import DashboardProfileEdit from "../admin/user/DashboardProfileEdit";
 
 export default class RoutePath  extends Component{
     render(){
@@ -35,10 +36,11 @@ export default class RoutePath  extends Component{
                     <Route exact path="/dashboard/administrators/p/datatables/" component={AdministratorDatatables} />
                     <Route exact path="/dashboard/users/" component={UserIndex} />
                     <Route exact path="/dashboard/users/p/datatables/" component={UserDatatables} />
-                    <Route exact path="/dashboard/users/create/" component={UserCreate} />
-                    <Route exact path="/dashboard/users/:user/edit" component={UserEdit} />
-                    <Route exact path="/dashboard/profile/" component={ProfileUserAdmin} />
-                    <Route exact path="/dashboard/profile/edit/" component={ProfileUserEdit} />
+                    <Route exact path="/dashboard/users/create/" component={DashboardUserCreate} />
+                    <Route exact path="/dashboard/users/:user/edit" component={DashboardUserEdit} />
+                    <Route exact path="/dashboard/profile/" component={AdminProfileUserAdmin} />
+                    <Route exact path="/dashboard/profile/edit/" component={AdminProfileUserEdit} />
+                    <Route exact path="/dashboard/profile/add_info/:profile/edit/" component={DashboardProfileEdit} />
                     <Route exact path="/dashboard/faqs/" component={FaqIndex} />
                     <Route exact path="/dashboard/faqs/v1/all/" component={FaqAdminSite} />
                     <Route exact path="/dashboard/faqs/create/" component={FaqCreate} />

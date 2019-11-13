@@ -1,5 +1,5 @@
 @extends('inc.admin.main')
-<?php $item = htmlspecialchars($user->first_name); ?>
+<?php $item = htmlspecialchars($profile->full_name); ?>
 @section('title',"- $item")
 
 @section('style')
