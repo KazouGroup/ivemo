@@ -267,26 +267,23 @@ class UserEdit extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                {this.state.status_user === 1 ?
-                                                    <div className={'row'}>
-                                                        <div className={'col-md-12'}>
-                                                            <div className="form-group bmd-form-group">
-                                                                <label>
-                                                                    <select name="roles" value={this.state.roles}
-                                                                            className={`form-control ${this.hasErrorFor('roles') ? 'is-invalid' : ''}`}
-                                                                            onChange={this.handleFieldChange}>
-                                                                        <option value="" disabled>Choose Role User</option>
-                                                                        {allroles.map((role,index) => (
-                                                                            <option  key={index} value={role.name}>{role.name}</option>
-                                                                        ))}
-                                                                    </select>
-                                                                </label>
-                                                                {this.renderErrorFor('status_user')}
-                                                            </div>
+                                                <div className={'row'}>
+                                                    <div className={'col-md-12'}>
+                                                        <div className="form-group bmd-form-group">
+                                                            <label>
+                                                                <select name="roles" value={this.state.roles}
+                                                                        className={`form-control ${this.hasErrorFor('roles') ? 'is-invalid' : ''}`}
+                                                                        onChange={this.handleFieldChange}>
+                                                                    <option value="" disabled>Choose Role User</option>
+                                                                    {allroles.map((role,index) => (
+                                                                        <option  key={index} value={role.name}>{role.name}</option>
+                                                                    ))}
+                                                                </select>
+                                                            </label>
+                                                            {this.renderErrorFor('status_user')}
                                                         </div>
                                                     </div>
-                                                    : null
-                                                }
+                                                </div>
                                                 <div className="row">
                                                     <div className="col-md-12">
                                                         <div className="form-group">

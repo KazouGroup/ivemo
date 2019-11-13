@@ -285,6 +285,9 @@ export default class ProfileUserEdit extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="text-center">
+                                                        <Link to={'/dashboard/profile/'} className={`btn  btn-sm pull-center btn-info`}>
+                                                            Profile
+                                                        </Link>
                                                         <button type="submit" className={`btn  btn-sm pull-center btn-${this.state.color_name}`}>
                                                             Update Profile
                                                         </button>

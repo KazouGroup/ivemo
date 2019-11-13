@@ -3,6 +3,7 @@
 use App\Model\color;
 use App\Model\faq;
 use App\Model\link;
+use App\Model\testimonial;
 use App\Model\user;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -79,9 +80,10 @@ class CompileTableSeeder extends Seeder
         factory(user::class, 100)->create();
         factory(faq::class, 100)->create();
         factory(link::class, 5)->create();
+        factory(testimonial::class, 500)->create();
 
         // Output
-        $this->command->info('Test user added.');
+        $this->command->info('Test data added.');
     }
 
 }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-import FaqCreate from "./admin/faq/FaqCreate";
-import FaqEdit from "./admin/faq/FaqEdit";
-import FaqIndex from "./admin/faq/FaqIndex";
+import FaqCreate from "./admin/page/faq/FaqCreate";
+import FaqEdit from "./admin/page/faq/FaqEdit";
+import FaqIndex from "./admin/page/faq/FaqIndex";
 import DashboardIndex from "./admin/DashboardIndex";
 
 

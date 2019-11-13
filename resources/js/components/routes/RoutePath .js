@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-import FaqIndex from "../admin/faq/FaqIndex";
-import FaqCreate from "../admin/faq/FaqCreate";
-import FaqEdit from "../admin/faq/FaqEdit";
+import FaqIndex from "../admin/page/faq/FaqIndex";
+import FaqCreate from "../admin/page/faq/FaqCreate";
+import FaqEdit from "../admin/page/faq/FaqEdit";
 import DashboardIndex from "../admin/DashboardIndex";
 import LinkIndex from "../admin/link/LinkIndex";
-import FaqView from "../admin/faq/FaqView";
-import FaqAdminSite from "../admin/faq/FaqAdminSite";
+import FaqView from "../admin/page/faq/FaqView";
+import FaqAdminSite from "../admin/page/faq/FaqAdminSite";
 import ProfileUserEdit from "../admin/profile/ProfileUserEdit";
 import ProfileUserAdmin from "../admin/profile/ProfileUserAdmin";
 import UserIndex from "../admin/user/UserIndex";
@@ -21,6 +21,9 @@ import PermissionIndex from "../admin/partials/permission/PermissionIndex";
 import RoleIndex from "../admin/partials/role/RoleIndex";
 import RoleEdit from "../admin/partials/role/RoleEdit";
 import PermissionEdit from "../admin/partials/permission/PermissionEdit";
+import TestimonialIdex from "../admin/page/testimonial/TestimonialIdex";
+import TestimonialEdit from "../admin/page/testimonial/TestimonialEdit";
+import TestimonialView from "../admin/page/testimonial/TestimonialView";
 
 export default class RoutePath  extends Component{
     render(){
@@ -46,6 +49,9 @@ export default class RoutePath  extends Component{
                     <Route exact path="/dashboard/permissions/:permission/edit" component={PermissionEdit} />
                     <Route exact path="/dashboard/roles/" component={RoleIndex} />
                     <Route exact path="/dashboard/roles/:id/edit" component={RoleEdit} />
+                    <Route exact path="/dashboard/testimonials" component={TestimonialIdex} />
+                    <Route exact path="/dashboard/testimonials/:id/edit" component={TestimonialEdit} />
+                    <Route exact path="/dashboard/testimonials/v/:testimonial/" component={TestimonialView} />
                     <Route path="*" component={Error404}/>
                 </Switch>
             </BrowserRouter>

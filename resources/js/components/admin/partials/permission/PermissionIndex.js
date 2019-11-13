@@ -371,7 +371,7 @@ class PermissionIndex extends Component {
                                                                 </div>
                                                                 <div className="modal-footer">
                                                                     <div className="text-center">
-                                                                        <button type="button" className="btn btn-danger"
+                                                                        <button type="button" className="btn btn-danger btn-sm"
                                                                                 data-dismiss="modal">
                                                                     <span className="btn-label">
                                                                         <i className="material-icons">clear</i>
@@ -379,7 +379,7 @@ class PermissionIndex extends Component {
                                                                     </span>
                                                                         </button>
                                                                         <button type="submit"
-                                                                                className="btn btn-success btn-raised">
+                                                                                className="btn btn-success btn-raised btn-sm">
                                                                             <span className="btn-label">
                                                                                 <i className="material-icons">check</i>
                                                                                 <b>Yes, Save</b>

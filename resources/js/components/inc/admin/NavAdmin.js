@@ -78,7 +78,7 @@ export default class NavAdmin extends Component {
                                     </li>
 
                                     <li className="nav-item">
-                                        <a className="nav-link" id="btnShowAlertLogout" >
+                                        <a href="#" className="nav-link" id="btnShowAlertLogout" >
                                             <span className="sidebar-mini"><b>L</b></span>
                                             <span className="sidebar-normal"><b>Logout</b></span>
                                         </a>
@@ -125,6 +125,12 @@ export default class NavAdmin extends Component {
                                         <Link to={'/dashboard/links/'} className="nav-link">
                                             <span className="sidebar-mini"> LK </span>
                                             <span className="sidebar-normal"> Links </span>
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item ">
+                                        <Link className="nav-link" to={'/dashboard/testimonials/'}>
+                                            <span className="sidebar-mini"> TM </span>
+                                            <span className="sidebar-normal"> Testimonials </span>
                                         </Link>
                                     </li>
                                 </ul>
