@@ -4,7 +4,7 @@ Route::get('/account/user', 'UserController@user')->name('users.user');
 
 Route::get('dashboard/profile/','UserController@admin_profile');
 Route::put('/profile/users','UserController@updateUser');
-Route::get('dashboard/profile/edit','UserController@admin_profile_edit');
+Route::get('dashboard/profile/edit','UserController@admin_profile_edit')->name('admin_profile_edit');
 
 
 Route::resource('/dashboard/users', 'UserController');
