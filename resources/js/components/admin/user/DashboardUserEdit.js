@@ -11,6 +11,7 @@ class DashboardUserEdit extends Component {
         super(props);
         this.state = {
             user: [],
+            id: '',
             username: '',
             first_name: '',
             status_user: '',
@@ -45,6 +46,8 @@ class DashboardUserEdit extends Component {
         ];
         // bind
         this.updateItem = this.updateItem.bind(this);
+        this.followItem = this.followItem.bind(this);
+        this.unfollowItem = this.unfollowItem.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.handleChangeBody = this.handleChangeBody.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
@@ -72,6 +75,20 @@ class DashboardUserEdit extends Component {
                 </span>
             )
         }
+    }
+    followItem(id){
+        axios.post(`/profile/user/${id}/follow`)
+            .then(res => {
+                /** End alert ***/
+                this.loadItems();
+            })
+    }
+    unfollowItem(id){
+        axios.post(`/profile/user/${id}/unfollow`)
+            .then(res => {
+                /** End alert ***/
+                this.loadItems();
+            })
     }
     // handle submit
     updateItem(e) {
@@ -130,6 +147,7 @@ class DashboardUserEdit extends Component {
         let userId = this.props.match.params.user;
         axios.get(`/api/users/${userId}`).then(response =>
             this.setState({
+                id: response.data.id,
                 email: response.data.email,
                 username: response.data.username,
                 first_name: response.data.first_name,
@@ -321,15 +339,16 @@ class DashboardUserEdit extends Component {
                                             </a>
                                         </div>
                                         <div className="card-body">
-                                            <h6 className="card-category text-gray">CEO / Co-Founder</h6>
-                                            <h4 className="card-title" dangerouslySetInnerHTML={{__html: this.state.first_name}}/>
-                                            <p className="card-description" dangerouslySetInnerHTML={{__html: this.state.body}}/>
                                             {this.state.status_user === 1 ?
                                                 <button type="button" className="btn btn-success btn-sm ">Administrator</button>
                                                 :
                                                 <button type="button" className="btn btn-success btn-sm ">User</button>
                                             }
-                                            <a href="#pablo" className="btn btn-primary btn-sm ">Follow</a>
+                                            <h6 className="card-category text-gray">CEO / Co-Founder</h6>
+                                            <h4 className="card-title" dangerouslySetInnerHTML={{__html: this.state.first_name}}/>
+                                            <p className="card-description" dangerouslySetInnerHTML={{__html: this.state.body}}/>
+                                            <button type="button"  onClick={() => this.unfollowItem(this.state.id)} className="btn pull-center btn-primary btn-sm ">Unfollow</button>
+                                            <button type="button"  onClick={() => this.followItem(this.state.id)} className="btn pull-center btn-outline-primary btn-sm ">Follow</button>
                                         </div>
                                     </div>
                                 </div>
