@@ -6,6 +6,7 @@ use App\Notifications\VerifyEmailUsers;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -57,6 +58,11 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
                 'full_name' => $user->email,
             ]);
         });
+    }
+
+    public function isOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
     }
 
     public function profile()

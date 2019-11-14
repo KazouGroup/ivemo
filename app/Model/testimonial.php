@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class testimonial extends Model implements Auditable
@@ -44,6 +45,11 @@ class testimonial extends Model implements Auditable
             }
             $model->ip = request()->ip();
         });
+    }
+
+    public function isOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
     }
 
 }

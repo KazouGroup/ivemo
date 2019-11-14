@@ -10,7 +10,9 @@ export default class FaqView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            faq: [],
+            faq: {
+                user:''
+            },
         };
     }
     // get all the tasks from backend
@@ -69,6 +71,13 @@ export default class FaqView extends Component {
                                                         <div className="card-body text-justify" dangerouslySetInnerHTML={{__html: faq.body}}/>
                                                     </div>
                                                 </div>
+                                                <label className="form-check-label pull-right">
+                                                    By:
+                                                    <Link to={'/dashboard'} className="text-danger">
+                                                         {faq.user.first_name}
+                                                    </Link>
+                                                    <span className="form-check-sign"></span>
+                                                </label>
                                             </div>
                                         </div>
                                     </div>

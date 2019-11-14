@@ -13,7 +13,7 @@ export default class FaqEdit extends Component {
         this.state = {
             title: '',
             body: '',
-            faq: [],
+            faq: {},
             errors: [],
         };
 
@@ -125,7 +125,7 @@ export default class FaqEdit extends Component {
         this.loadItems();
     }
     render() {
-        console.log(this.props.match.params.id);
+        console.log(this.props.match.params.faq);
         return (
             <div className="wrapper">
 
