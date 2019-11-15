@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\UpdateRequest;
+use App\Http\Resources\FollowerResource;
 use App\Http\Resources\UserResource;
+use App\Model\follower;
 use App\Model\user;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
@@ -23,7 +25,7 @@ class UserController extends Controller
     private $auth;
 
     public function __construct(Guard $auth){
-        $this->middleware('auth',['except' => ['api','apiadministrator','show','apidatatables']]);
+        $this->middleware('auth',['except' => ['api','apiadministrator','show','apidatatables','apifollowers']]);
         $this->auth = $auth;
     }
     /**
@@ -53,20 +55,26 @@ class UserController extends Controller
 
     public function api()
     {
-        $users = UserResource::collection(User::where('status_user',0)
+        $users = UserResource::collection(user::where('status_user',0)
             ->latest()->paginate(12));
         return response()->json($users,200);
     }
 
+    public function apifollowers()
+    {
+        $followers = FollowerResource::collection(follower::all());
+        return response()->json($followers,200);
+    }
+
     public function apidatatables()
     {
-        $users = UserResource::collection(User::latest()->get());
+        $users = UserResource::collection(user::latest()->get());
         return response()->json($users,200);
     }
 
     public function apiadministrator()
     {
-        $users = UserResource::collection(User::where('status_user',1)
+        $users = UserResource::collection(user::where('status_user',1)
             ->latest()->get());
         return response()->json($users,200);
     }

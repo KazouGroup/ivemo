@@ -117,7 +117,7 @@ class ProfileController extends Controller
      * @param $profileId
      *
      */
-    public function unFollowUser(user $profile)
+    public function unFollowUser(int $profile)
     {
         $user = User::find($profile);
         if(! $user) {

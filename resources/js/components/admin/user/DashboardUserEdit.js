@@ -21,6 +21,7 @@ class DashboardUserEdit extends Component {
             sex: '',
             roles: '',
             allroles: [],
+            followers: [],
 
             errors: [],
         };
@@ -162,6 +163,10 @@ class DashboardUserEdit extends Component {
         axios.get(`/api/roles`).then(response =>
             this.setState({
                 allroles: [...response.data],
+            }));
+        axios.get(`/api/followers`).then(response =>
+            this.setState({
+                followers: [...response.data],
             }));
     }
     // lifecycle method
