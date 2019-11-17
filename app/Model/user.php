@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Notifications\VerifyEmailUsers;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -31,12 +32,14 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
         'password', 'remember_token',
     ];
 
+    protected $dates = ['birthday'];
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
     protected $casts = [
+        'birthday' => 'date:d/m/Y',
         'email_verified_at' => 'datetime',
     ];
     /**
@@ -70,6 +73,21 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
     {
         return $this->hasOne(profile::class);
     }
+
+    public function setBirthdayAttribute($birthday){
+        $this->attributes['birthday'] = Carbon::createFromFormat('d/m/Y', $birthday);
+    }
+
+    public function getDataBirthdayItAttribute()
+    {
+        return !empty($this->birthday)? $this->birthday->format('d/m/Y') : '';
+    }
+
+
+    public function getAgeAttribute(){
+        return $this->birthday->diffInYears();
+    }
+
 
     public function followers()
     {

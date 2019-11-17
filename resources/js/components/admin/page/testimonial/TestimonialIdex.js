@@ -125,7 +125,7 @@ class TestimonialIdex extends Component {
         fetch(url).then(res => res.json())
             .then((result) => {
                 this.setState({
-                    testimonials: result
+                    testimonials: [...result]
                 });
                 this.mydatatables();
             }, (error) => {

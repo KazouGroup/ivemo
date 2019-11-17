@@ -84,6 +84,6 @@ class faq extends Model implements Auditable
      */
     public function comments()
     {
-        return $this->hasMany(comment::class,'commentable_id');
+        return $this->hasMany(comment::class,'commentable');
     }
 }

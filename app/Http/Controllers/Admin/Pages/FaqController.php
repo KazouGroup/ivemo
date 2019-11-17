@@ -30,11 +30,6 @@ class FaqController extends Controller
         return view('admin.faq.index');
     }
 
-    public function v1()
-    {
-        return view('admin.faq.index');
-    }
-
     public function sites()
     {
         return view('admin.faq.index');
@@ -129,6 +124,11 @@ class FaqController extends Controller
             'faq' => $faq,
         ];
         return view('admin.faq.show',$data);
+    }
+
+    public function v1()
+    {
+        return view('admin.faq.index');
     }
 
     public function vector($slug)

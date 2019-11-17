@@ -43,6 +43,6 @@ class categoryfaq extends Model
 
     public function faqs()
     {
-        return $this->hasMany(faq::class,'commentable');
+        return $this->hasMany(faq::class,'categoryfaq_id');
     }
 }

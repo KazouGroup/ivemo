@@ -23,6 +23,7 @@ $factory->define(user::class, function (Faker $faker) {
         'username' => $faker->unique()->userName,
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
+        'birthday' => now(),
         'email' => $faker->unique()->safeEmail,
         'body' => $faker->realText,
         'status_user' => $faker->boolean,

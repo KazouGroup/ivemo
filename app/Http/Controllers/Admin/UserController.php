@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
@@ -199,13 +200,19 @@ class UserController extends Controller
         return response()->json($user,200);
     }
 
-    public function updateUser(UpdateRequest $request)
+    public function updateUser(Request $request)
     {
+        $this->validate($request, [
+            'username' => "required|string|min:2|max:25|unique:users,username,".auth()->check(),
+            'email' => ['required', 'email', Rule::unique((new User)->getTable())->ignore(auth()->id())],
+            "sex" => "required|in:Female,Male",
+        ]);
 
         $user = auth()->user();
 
         $data = $user->update($request->only(
             'first_name',
+            'birthday',
             'last_name',
             'email',
             'username',

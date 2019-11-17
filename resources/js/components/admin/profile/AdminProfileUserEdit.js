@@ -15,6 +15,7 @@ export default class AdminProfileUserEdit extends Component {
             first_name: '',
             last_name: '',
             color_name: '',
+            birthday: '',
             email: '',
             body: '',
             sex: '',
@@ -46,6 +47,7 @@ export default class AdminProfileUserEdit extends Component {
         // bind
 
         this.updateItem = this.updateItem.bind(this);
+        this.updateImage = this.updateImage.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.handleChangeBody = this.handleChangeBody.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
@@ -77,6 +79,7 @@ export default class AdminProfileUserEdit extends Component {
     }
     updateImage(e){
         let file = e.target.files[0];
+        console.log(e);
         let reader = new FileReader();
         let limit = 1024 * 1024 * 2;
         if(file['size'] > limit){
@@ -101,6 +104,7 @@ export default class AdminProfileUserEdit extends Component {
             first_name: this.state.first_name,
             last_name: this.state.last_name,
             color_name: this.state.color_name,
+            birthday: this.state.birthday,
             body: this.state.body,
             sex: this.state.sex,
         };
@@ -142,6 +146,24 @@ export default class AdminProfileUserEdit extends Component {
             });
         });
     }
+    mydatepicker(){
+        $( function () {
+            $('.datepicker').datetimepicker({
+                format: 'DD/MM/YYYY',
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-chevron-up",
+                    down: "fa fa-chevron-down",
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-remove'
+                }
+            });
+        });
+    }
     loadItems() {
         axios.get(`/account/user`).then(response =>
             this.setState({
@@ -155,7 +177,9 @@ export default class AdminProfileUserEdit extends Component {
                 avatar: response.data.avatar,
                 sex: response.data.sex,
                 color_name: response.data.color_name,
+                birthday: response.data.birthday,
             }));
+            this.mydatepicker();
         axios.get(`/api/colors`).then(response => this.setState({colors: [...response.data],}));
     }
 
@@ -219,7 +243,7 @@ export default class AdminProfileUserEdit extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="row">
-                                                        <div className="col-md-6">
+                                                        <div className="col-md-4">
                                                             <div className="form-group bmd-form-group">
                                                                 <label>Fist Name</label>
                                                                 <input required={'required'}
@@ -233,7 +257,7 @@ export default class AdminProfileUserEdit extends Component {
                                                                 {this.renderErrorFor('first_name')}
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-6">
+                                                        <div className="col-md-4">
                                                             <div className="form-group bmd-form-group">
                                                                 <label>Last Name</label>
                                                                 <input id='last_name'
@@ -244,6 +268,19 @@ export default class AdminProfileUserEdit extends Component {
                                                                        onChange={this.handleFieldChange}
                                                                 />
                                                                 {this.renderErrorFor('last_name')}
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-4">
+                                                            <div className="form-group bmd-form-group">
+                                                                <label>Data birthday</label>
+                                                                <input id='birthday'
+                                                                       type='text'
+                                                                       className={`form-control datepicker ${this.hasErrorFor('birthday') ? 'is-invalid' : ''}`}
+                                                                       name='birthday'
+                                                                       value={this.state.birthday || ""}
+                                                                       onChange={this.handleFieldChange}
+                                                                />
+                                                                {this.renderErrorFor('birthday')}
                                                             </div>
                                                         </div>
                                                     </div>

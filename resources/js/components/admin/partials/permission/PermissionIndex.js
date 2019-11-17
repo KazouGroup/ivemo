@@ -47,49 +47,23 @@ class PermissionIndex extends Component {
     createItem(e){
         e.preventDefault();
         const { history } = this.props;
-        const permission = {
+        let permission = {
             name: this.state.name,
         };
         axios.post('/dashboard/permissions', permission)
             .then(response => {
-                // then clear the value input
-                this.setState({
-                    name: ''
-                });
-                // add new data to list of datas
-                this.setState({
-                    permissions: [response.data, ...this.state.permissions]
-                });
                 //Masquer le modal après la création
                 $('#addNew').modal('hide');
 
-                //$.notify('<strong>The permission has ben Save successfully...</strong>', {
-                //    allow_dismiss: false,
-                //    type: 'success',
-                //    placement: {
-                //        from: 'bottom',
-                //        align: 'right'
-                //    },
-                //    animate: {
-                //        enter: 'animated fadeInRight',
-                //        exit: 'animated fadeOutRight'
-                //    },
-                //});
+                console.log(response.data);
+                // add new data to list of datas
+                this.setState({
+                    permissions: [response.data]
+                });
 
                 // redirect
                 history.push('/dashboard/permissions')
-            }).catch(error => {
-            this.setState({
-                errors: error.response.data.errors
-            });
-            $.notify("Ooop! Something wrong. Try later...", {
-                type: 'danger',
-                animate: {
-                    enter: 'animated bounceInDown',
-                    exit: 'animated bounceOutUp'
-                }
-            });
-        })
+            })
     }
     // handle delete
     deleteItem(id) {
@@ -178,7 +152,7 @@ class PermissionIndex extends Component {
         fetch(url).then(res => res.json())
             .then((result) => {
                 this.setState({
-                    permissions: result
+                    permissions: [...result]
                 });
                 this.mydatatables();
             }, (error) => {

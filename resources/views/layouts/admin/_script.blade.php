@@ -43,6 +43,8 @@
 <script src="/assets/dashboard/assets/js/material-dashboard.js?v=2.1.0" type="text/javascript"></script>
 <script src="{{ mix('/js/app.js') }}"></script>
 
+@include('notify::messages')
+@notifyJs
 
 @if(config('app.env') != 'local')
 @endif

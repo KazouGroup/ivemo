@@ -138,7 +138,9 @@ export default class FaqView extends Component {
                                                                              src={this.state.user.avatar} title={this.state.user.last_name} />
                                                                     </div>
                                                                 </Link>
+
                                                                 <CommentCreate handleCommentSubmit={this.handleCommentSubmit}/>
+
                                                             </div>
                                                         </div>
                                                     </div>

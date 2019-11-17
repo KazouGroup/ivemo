@@ -28,7 +28,7 @@
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="/assets/dashboard/assets/demo/demo.css" rel="stylesheet" />
 <link rel="stylesheet" href="/assets/dashboard/assets/css/plugins/animate.css">
-
+@notifyCss
 @section('style')
     @show
 

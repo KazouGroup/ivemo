@@ -14,6 +14,8 @@ class UserIndex extends Component {
             page: 1,
             totalPages: null,
         };
+
+        this.loadMore = this.loadMore.bind(this);
     }
 
     componentDidMount () {
@@ -80,10 +82,11 @@ class UserIndex extends Component {
                                             </div>
 
                                             <div className="submit text-center">
-                                                <button type={'button'}  onClick={() => this.loadMore()}  className={'btn btn-success btn-warning'}>
+                                                <button type={'button'}  onClick={this.loadMore}  className={'btn btn-success btn-warning'}>
                                                     <i className="material-icons">forum</i>
                                                     <b className="title_hover">Load More</b>
                                                 </button>
+
                                             </div>
 
                                         </div>
