@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\categoryfaq;
 use App\Model\color;
 use App\Model\faq;
 use App\Model\link;
@@ -78,8 +79,10 @@ class CompileTableSeeder extends Seeder
 
 
         factory(user::class, 100)->create();
+        factory(categoryfaq::class, 5)->create();
         factory(faq::class, 100)->create();
         factory(link::class, 5)->create();
+
         factory(testimonial::class, 500)->create();
 
         // Output

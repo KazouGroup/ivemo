@@ -1,6 +1,6 @@
 @extends('inc.admin.main')
 <?php $item = htmlspecialchars($faq->title); ?>
-@section('title',"- $item")
+@section('title'," $item")
 
 @section('style')
 

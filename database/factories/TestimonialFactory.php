@@ -12,7 +12,7 @@ $factory->define(testimonial::class, function (Faker $faker) {
         'role' => $faker->catchPhrase,
         'ip' => $faker->ipv4,
         'status' => $faker->boolean,
-        'body' => $faker->randomHtml(2,3),
+        'body' => $faker->paragraph,
         'slug' => $faker->uuid,
         'user_id' => user::inRandomOrder()->first()->id,
     ];

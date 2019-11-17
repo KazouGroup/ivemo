@@ -279,6 +279,7 @@ class FaqIndex extends Component {
                                                     <thead>
                                                     <tr>
                                                         <th><b>Title</b></th>
+                                                        <th><b>Category FAQS</b></th>
                                                         <th><b>Status</b></th>
                                                         <th><b>Edited by</b></th>
                                                         <th><b>Last Updated</b></th>
@@ -288,6 +289,7 @@ class FaqIndex extends Component {
                                                     <tfoot>
                                                     <tr>
                                                         <th>Title</th>
+                                                        <th>Category FAQS</th>
                                                         <th>Status</th>
                                                         <th>Edited by</th>
                                                         <th>Last Updated</th>
@@ -297,14 +299,19 @@ class FaqIndex extends Component {
                                                     <tbody>
                                                     {faqs.map((item) => (
                                                         <tr key={item.id}>
-                                                            <td>{item.title}</td>
+                                                            <td>{ (item.title.length > 10 ? item.title.substring(0,10)+ "..." : item.title)  }</td>
+                                                            <td>
+                                                                <Link to={`/dashboard/faqs/c/${item.categoryfaq.slug}/`}>
+                                                                    <b>{item.categoryfaq.name}</b>
+                                                                </Link>
+                                                            </td>
                                                             <td>
                                                                 <div className="timeline-heading">
-                                                                { item.status ?
-                                                                    <span className="badge badge-info"><b>Active</b></span>
-                                                                    :
-                                                                    <span className="badge badge-primary"><b>Deactive</b></span>
-                                                                }
+                                                                    { item.status ?
+                                                                        <span className="badge badge-info"><b>Active</b></span>
+                                                                        :
+                                                                        <span className="badge badge-primary"><b>Deactive</b></span>
+                                                                    }
                                                                 </div>
                                                             </td>
                                                             <td>
@@ -321,20 +328,20 @@ class FaqIndex extends Component {
                                                                         </button>
                                                                     }
                                                                     { (item.user.first_name.length > 15 ? item.user.first_name.name.substring(0,15)+ "..." : item.user.first_name.name)  }
-                                                                 </Link>
+                                                                </Link>
                                                             </td>
                                                             <td><b>{moment(item.updated_at).format('DD/MM/YYYY')}</b></td>
                                                             <td className="text-right">
                                                                 {item.status ?
                                                                     <button onClick={() => this.disableItem(item.id)}
-                                                                        className="btn btn-link btn-info btn-round btn-just-icon "
-                                                                        title="Disable">
+                                                                            className="btn btn-link btn-info btn-round btn-just-icon "
+                                                                            title="Disable">
                                                                         <i className="material-icons">check_circle</i>
                                                                     </button>
                                                                     :
                                                                     <button onClick={() => this.activeItem(item.id)}
-                                                                        className="btn btn-link btn-danger btn-round btn-just-icon "
-                                                                        title="Activate">
+                                                                            className="btn btn-link btn-danger btn-round btn-just-icon "
+                                                                            title="Activate">
                                                                         <i className="material-icons">power_settings_new</i>
                                                                     </button>
                                                                 }

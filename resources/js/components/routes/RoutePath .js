@@ -25,6 +25,8 @@ import TestimonialIdex from "../admin/page/testimonial/TestimonialIdex";
 import TestimonialEdit from "../admin/page/testimonial/TestimonialEdit";
 import TestimonialView from "../admin/page/testimonial/TestimonialView";
 import DashboardProfileEdit from "../admin/user/DashboardProfileEdit";
+import FaqByCategory from "../admin/page/faq/FaqByCategory";
+import CategoryFaqIndex from "../admin/partials/categoryfaq/CategoryFaqIndex";
 
 export default class RoutePath  extends Component{
     render(){
@@ -45,6 +47,7 @@ export default class RoutePath  extends Component{
                     <Route exact path="/dashboard/faqs/v1/all/" component={FaqAdminSite} />
                     <Route exact path="/dashboard/faqs/create/" component={FaqCreate} />
                     <Route exact path="/dashboard/faqs/:faq/edit/" component={FaqEdit} />
+                    <Route exact path="/dashboard/faqs/c/:categoryfaq/" component={FaqByCategory} />
                     <Route exact path="/dashboard/faqs/v/:slug/" component={FaqView} />
                     <Route exact path="/dashboard/links/" component={LinkIndex} />
                     <Route exact path="/dashboard/permissions/" component={PermissionIndex} />
@@ -54,6 +57,7 @@ export default class RoutePath  extends Component{
                     <Route exact path="/dashboard/testimonials" component={TestimonialIdex} />
                     <Route exact path="/dashboard/testimonials/:id/edit" component={TestimonialEdit} />
                     <Route exact path="/dashboard/testimonials/v/:testimonial/" component={TestimonialView} />
+                    <Route exact path="/dashboard/categories_faqs/" component={CategoryFaqIndex} />
                     <Route path="*" component={Error404}/>
                 </Switch>
             </BrowserRouter>

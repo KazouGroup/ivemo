@@ -13,7 +13,9 @@ export default class FaqEdit extends Component {
         this.state = {
             title: '',
             body: '',
+            categoryfaq_id: '',
             faq: {},
+            categories_faqs: [],
             errors: [],
         };
 
@@ -73,7 +75,8 @@ export default class FaqEdit extends Component {
         e.preventDefault();
         let faq = {
             title: this.state.title,
-            body: this.state.body
+            body: this.state.body,
+            categoryfaq_id: this.state.categoryfaq_id,
         };
         axios.put(`/dashboard/faqs/${faqId}`, faq).then(() => {
 
@@ -118,6 +121,11 @@ export default class FaqEdit extends Component {
                 //faq: response.data,
                 title: response.data.title,
                 body: response.data.body,
+                categoryfaq_id: response.data.categoryfaq_id,
+            }));
+        axios.get('/api/categories_faqs').then(response =>
+            this.setState({
+                categories_faqs: [...response.data],
             }));
     }
     // lifecycle method
@@ -125,7 +133,7 @@ export default class FaqEdit extends Component {
         this.loadItems();
     }
     render() {
-        console.log(this.props.match.params.faq);
+        //console.log(this.props.match.params.faq);
         return (
             <div className="wrapper">
 
@@ -156,7 +164,7 @@ export default class FaqEdit extends Component {
 
                                             <form onSubmit={this.updateItem}>
                                                 <div className="row">
-                                                    <div className="col-md-12">
+                                                    <div className="col-md-6">
                                                         <div className="form-group">
                                                             <label className="bmd-label-floating">
 
@@ -169,6 +177,21 @@ export default class FaqEdit extends Component {
                                                                    onChange={this.handleFieldChange}
                                                             />
                                                             {this.renderErrorFor('title')}
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-md-6">
+                                                        <div className="form-group bmd-form-group">
+                                                            <label>
+                                                                <select name={'categoryfaq_id'} value={this.state.categoryfaq_id}
+                                                                        className={`form-control ${this.hasErrorFor('categoryfaq_id') ? 'is-invalid' : ''}`}
+                                                                        onChange={this.handleFieldChange}>
+                                                                    <option value="" disabled>Choose Your Category FAQS</option>
+                                                                    {this.state.categories_faqs.map((categoryfaq) => (
+                                                                        <option  key={categoryfaq.id} value={categoryfaq.id}>{categoryfaq.name}</option>
+                                                                    ))}
+                                                                </select>
+                                                            </label>
+                                                            {this.renderErrorFor('categoryfaq_id')}
                                                         </div>
                                                     </div>
                                                 </div>

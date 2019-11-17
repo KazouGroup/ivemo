@@ -28,7 +28,7 @@ export default class NavAdmin extends Component {
     render() {
         return (
             <div className="sidebar" data-color="rose" data-background-color="black"
-                 data-image="/assets/dashboard/assets/img/sidebar-1.jpg">
+                 data-image={this.state.avatar}>
                 <div className="logo">
                     <a href="http://www.creative-tim.com" className="simple-text logo-mini">
                         IV
@@ -116,6 +116,12 @@ export default class NavAdmin extends Component {
                                                     <Link className="nav-link" to={'/dashboard/faqs/'}>
                                                         <span className="sidebar-mini"> FQ </span>
                                                         <span className="sidebar-normal"> FAQS </span>
+                                                    </Link>
+                                                </li>
+                                                <li className="nav-item ">
+                                                    <Link className="nav-link" to={'/dashboard/categories_faqs/'}>
+                                                        <span className="sidebar-mini"> CF </span>
+                                                        <span className="sidebar-normal"> Categories FAQS </span>
                                                     </Link>
                                                 </li>
                                             </ul>

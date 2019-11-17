@@ -4,11 +4,12 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class testimonial extends Model implements Auditable
 {
-    use \OwenIt\Auditing\Auditable;
+    use AuditableTrait;
 
     protected $guarded = [];
 

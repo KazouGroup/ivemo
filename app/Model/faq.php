@@ -5,12 +5,14 @@ namespace App\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class faq extends Model implements Auditable
 {
-    use \OwenIt\Auditing\Auditable;
-    protected $fillable = ['body','title','status'];
+    use AuditableTrait;
+
+    protected $fillable = ['body','title','status','categoryfaq_id'];
 
     /**
      * @return array
@@ -29,7 +31,12 @@ class faq extends Model implements Auditable
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
+    }
+
+    public function categoryfaq()
+    {
+        return $this->belongsTo(categoryfaq::class,'categoryfaq_id');
     }
 
     protected static function boot()
@@ -70,5 +77,13 @@ class faq extends Model implements Auditable
             ]
 
         ];
+    }
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function comments()
+    {
+        return $this->hasMany(comment::class,'commentable_id');
     }
 }
