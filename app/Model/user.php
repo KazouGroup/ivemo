@@ -74,10 +74,6 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
         return $this->hasOne(profile::class);
     }
 
-    public function setBirthdayAttribute($birthday){
-        $this->attributes['birthday'] = Carbon::createFromFormat('d/m/Y', $birthday);
-    }
-
     public function getDataBirthdayItAttribute()
     {
         return !empty($this->birthday)? $this->birthday->format('d/m/Y') : '';

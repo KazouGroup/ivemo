@@ -206,6 +206,7 @@ class UserController extends Controller
             'username' => "required|string|min:2|max:25|unique:users,username,".auth()->check(),
             'email' => ['required', 'email', Rule::unique((new User)->getTable())->ignore(auth()->id())],
             "sex" => "required|in:Female,Male",
+            'birthday' => 'required|date_format:d/m/Y',
         ]);
 
         $user = auth()->user();

@@ -4,47 +4,21 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 class  FooterAdmin extends  Component {
     render() {
         return (
-            <footer className="footer">
-                <div className="container-fluid">
-                    <nav className="float-left">
-                        <ul>
-                            <li>
-                                <Link to={'/dashboard'}>
-                                    Dashboard
-                                </Link>
-                            </li>
-                            <li>
-                                <a href="https://creative-tim.com/presentation">
-                                    About Us
-                                </a>
-                            </li>
-                            <li>
-                                <Link to={'/dashboard/faqs/v1/all'}>
-                                    Faqs
-                                </Link>
-                            </li>
-                            <li>
-                                <a href="http://blog.creative-tim.com">
-                                    Blog
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.creative-tim.com/license">
-                                    Licenses
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div className="copyright float-right">
-                        &copy;
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script>
-                        <i className="material-icons text-danger">favorite</i> by
-                        <a href="/dashboard" target="_blank"> KazouGroup</a> for a better web.
-                    </div>
-                </div>
-            </footer>
+            <div>
+                <div className="sidenav-overlay"></div>
+                <div className="drag-target"></div>
+                <footer className="footer footer-static footer-light navbar-shadow">
+                    <p className="clearfix blue-grey lighten-2 mb-0"><span
+                        className="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2019<a
+                        className="text-bold-800 grey darken-2" href="https://1.envato.market/pixinvent_portfolio"
+                        target="_blank">Pixinvent,</a>All rights Reserved</span><span
+                        className="float-md-right d-none d-md-block">Hand-crafted & Made with<i
+                        className="feather icon-heart pink"></i></span>
+                        <button className="btn btn-primary btn-icon scroll-top" type="button"><i
+                            className="feather icon-arrow-up"></i></button>
+                    </p>
+                </footer>
+            </div>
         );
     }
 }
