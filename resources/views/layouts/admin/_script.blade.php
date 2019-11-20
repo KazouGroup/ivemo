@@ -9,6 +9,15 @@
 <script src="/assets/dashboard/assets/vendor/chart.js/dist/Chart.extension.js"></script>
 <script src="/assets/dashboard/assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 <script src="/assets/dashboard/assets/vendor/bootstrap-notify/bootstrap-notify.min.js"></script>
+<script src="/assets/dashboard/assets/vendor/list.js/dist/list.min.js"></script>
+<script src="/assets/dashboard/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/assets/dashboard/assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/assets/dashboard/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/assets/dashboard/assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="/assets/dashboard/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="/assets/dashboard/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+<script src="/assets/dashboard/assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="/assets/dashboard/assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
 <!-- Argon JS -->
 <script src="/assets/dashboard/assets/js/argon.js?v=1.1.0"></script>
 <script src="{{ mix('/js/app.js') }}"></script>

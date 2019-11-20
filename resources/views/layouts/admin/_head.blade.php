@@ -28,6 +28,9 @@
 <!-- Page plugins -->
 <link rel="stylesheet" href="/assets/dashboard/assets/vendor/animate.css/animate.min.css">
 <link rel="stylesheet" href="/assets/dashboard/assets/vendor/sweetalert2/dist/sweetalert2.min.css">
+<link rel="stylesheet" href="/assets/dashboard/assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="/assets/dashboard/assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
+<link rel="stylesheet" href="/assets/dashboard/assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css">
 <!-- Argon CSS -->
 <link rel="stylesheet" href="/assets/dashboard/assets/css/argon.css?v=1.1.0" type="text/css">
 @notifyCss

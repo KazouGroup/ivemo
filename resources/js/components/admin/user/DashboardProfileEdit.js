@@ -169,7 +169,11 @@ class DashboardProfileEdit extends Component {
                                     <div className="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                                         <div className="d-flex justify-content-between">
 
-                                            <a href="#" className="btn btn-sm btn-success mr-4">Connect</a>
+                                            {this.state.user.statusOnline ?
+                                                <button type={'button'} className="btn btn-sm btn-success mr-4">Connect</button>
+                                                :
+                                                <button type={'button'} className="btn btn-sm btn-danger mr-4">Offline</button>
+                                            }
                                             <a href="#" className="btn btn-sm btn-default float-right">Message</a>
                                         </div>
                                     </div>

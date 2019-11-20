@@ -20,6 +20,7 @@ class DashboardUserEdit extends Component {
             body: '',
             sex: '',
             roles: '',
+            statusOnline: '',
             allroles: [],
             followers: [],
 
@@ -159,6 +160,7 @@ class DashboardUserEdit extends Component {
                 color_name: response.data.color_name,
                 status_user: response.data.status_user,
                 roles: response.data.roles,
+                statusOnline: response.data.statusOnline,
             }));
         axios.get(`/api/roles`).then(response =>
             this.setState({
@@ -174,7 +176,7 @@ class DashboardUserEdit extends Component {
         this.loadItems();
     }
     render() {
-        console.log(this.props.match.params.user);
+       // console.log(this.props.match.params.user);
         let { allroles } = this.state;
         return (
             <div className="wrapper">
@@ -235,8 +237,11 @@ class DashboardUserEdit extends Component {
                                     </div>
                                     <div className="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                                         <div className="d-flex justify-content-between">
-
-                                            <a href="#" className="btn btn-sm btn-success mr-4">Connect</a>
+                                            {this.state.statusOnline ?
+                                                <button type={'button'} className="btn btn-sm btn-success mr-4">Connect</button>
+                                                :
+                                                <button type={'button'} className="btn btn-sm btn-danger mr-4">Offline</button>
+                                            }
                                             <a href="#" className="btn btn-sm btn-default float-right">Message</a>
                                         </div>
                                     </div>
