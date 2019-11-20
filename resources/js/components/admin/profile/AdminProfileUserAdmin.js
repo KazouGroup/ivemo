@@ -253,12 +253,8 @@ export default class AdminProfileUserAdmin extends Component {
                                                 <h3 className="mb-0">Profile </h3>
                                             </div>
                                             <div className="col-4 text-right">
-                                                {user.status_user === 1 ?
-                                                    <button type="button" className="btn btn-success btn-sm ">Administrator</button>
-                                                    :
-                                                    <button type="button" className="btn btn-success btn-sm ">User</button>
-                                                }
                                                 <button type="button" className="btn btn-primary btn-sm ">{user.roles}</button>
+                                                <Link to={'/dashboard/profile/edit/'} className="btn btn-outline-info btn-sm ">Edit profile</Link>
                                             </div>
                                         </div>
                                     </div>
