@@ -128,6 +128,28 @@ export default class AdminProfileUserEdit extends Component {
             });
         });
     }
+
+    mydatepicker(){
+        $( function () {
+
+            var $datepicker = $('.datepicker');
+            // Methods
+            function init($this) {
+                var options = {
+                    disableTouchKeyboard: true,
+                    autoclose: false
+                };
+                $this.datepicker(options);
+            }
+            // Events
+            if ($datepicker.length) {
+                $datepicker.each(function() {
+                    init($(this));
+                });
+            }
+        });
+    }
+
     loadItems() {
         axios.get(`/account/user`).then(response =>
             this.setState({
@@ -144,6 +166,7 @@ export default class AdminProfileUserEdit extends Component {
                 birthday: response.data.birthday,
                 status_user: response.data.status_user,
             }));
+        this.mydatepicker();
         axios.get(`/api/colors`).then(response => this.setState({colors: [...response.data],}));
     }
 
@@ -327,8 +350,28 @@ export default class AdminProfileUserEdit extends Component {
                                         <form onSubmit={this.updateItem} encType="multipart/form-data" >
                                             <h6 className="heading-small text-muted mb-4">User information</h6>
                                             <div className="pl-lg-4">
+                                                <div className={'row'}>
+                                                    <div className="dropzone dropzone-single"
+                                                         data-toggle="dropzone" data-dropzone-url="http://">
+                                                        <div className="fallback">
+                                                            <div className="custom-file">
+                                                                <input type="file" className="custom-file-input"
+                                                                       id="projectCoverUploads"/>
+                                                                    <label className="custom-file-label"
+                                                                           htmlFor="projectCoverUploads">Choose
+                                                                        file</label>
+                                                            </div>
+                                                        </div>
+                                                        <div className="dz-preview dz-preview-single">
+                                                            <div className="dz-preview-cover">
+                                                                <img className="dz-preview-img" src="..." alt="..."
+                                                                     data-dz-thumbnail/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div className="row">
-                                                    <div className="col-lg-6">
+                                                    <div className="col-lg-4">
                                                         <div className="form-group">
                                                             <label className="form-control-label" htmlFor="input-username">Username</label>
                                                             <input required={'required'}
@@ -342,7 +385,7 @@ export default class AdminProfileUserEdit extends Component {
                                                             {this.renderErrorFor('username')}
                                                         </div>
                                                     </div>
-                                                    <div className="col-lg-6">
+                                                    <div className="col-lg-4">
                                                         <div className="form-group">
                                                             <label className="form-control-label" htmlFor="input-email">Email address</label>
                                                             <input required={'required'}
@@ -351,6 +394,18 @@ export default class AdminProfileUserEdit extends Component {
                                                                    className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
                                                                    name='email'
                                                                    value={this.state.email || ""}
+                                                                   onChange={this.handleFieldChange}
+                                                            />
+                                                            {this.renderErrorFor('email')}
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-lg-4">
+                                                        <div className="form-group">
+                                                            <label className="form-control-label">Datepicker</label>
+                                                            <input name='birthday'
+                                                                   className={`form-control datepicker ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
+                                                                   placeholder="Select date" type="text"
+                                                                   value={this.state.birthday || ""}
                                                                    onChange={this.handleFieldChange}
                                                             />
                                                             {this.renderErrorFor('email')}
