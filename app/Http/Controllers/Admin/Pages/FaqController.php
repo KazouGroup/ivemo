@@ -169,22 +169,12 @@ class FaqController extends Controller
      * @param faq $faq
      * @return \Illuminate\Http\JsonResponse
      */
-    public function disable(faq $faq, $id)
+    public function status(faq $faq,$id)
     {
         $faq = faq::where('id', $id)->findOrFail($id);
-        $faq->update([
-            'status' => 0,
-        ]);
-        return response('Deactivated',Response::HTTP_ACCEPTED);
-    }
+        $faq->update(['status' => !$faq->status]);
 
-    public function active(faq $faq, $id)
-    {
-        $faq = faq::where('id', $id)->findOrFail($id);
-        $faq->update([
-            'status' => 1,
-        ]);
-        return response('Activated',Response::HTTP_ACCEPTED);
+        return response('Update', Response::HTTP_ACCEPTED);
     }
 
     /**

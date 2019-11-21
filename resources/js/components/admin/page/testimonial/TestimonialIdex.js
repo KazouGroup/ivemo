@@ -300,7 +300,7 @@ class TestimonialIdex extends Component {
                                                                     <label>
                                                                         <input type="checkbox" name="status" id={`status`} value={item.status}
                                                                                onClick={() => this.changeStatus(item.id)} defaultChecked={item.status}/>
-                                                                    <span className="toggle"></span>
+                                                                        <span className="toggle"></span>
                                                                     </label>
                                                                 </button>
 

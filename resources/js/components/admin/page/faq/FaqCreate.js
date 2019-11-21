@@ -77,7 +77,7 @@ export default class FaqCreate extends Component {
         axios.post('/dashboard/faqs', faq)
             .then(() => {
 
-                $.notify('<strong>The data FAQ has ben Save successfully...</strong>', {
+                $.notify('<strong>The data FAQ has been Save successfully...</strong>', {
                     allow_dismiss: false,
                     type: 'success',
                     placement: {
@@ -96,6 +96,7 @@ export default class FaqCreate extends Component {
                 errors: error.response.data.errors
             });
             $.notify("Ooop! Something wrong. Try later...", {
+                allow_dismiss: false,
                 type: 'danger',
                 animate: {
                     enter: 'animated bounceInDown',
@@ -122,113 +123,111 @@ export default class FaqCreate extends Component {
 
                 <NavAdmin/>
 
-                <div className="main-panel">
+                <div className="main-content" id="panel">
 
                     <TopNavAdmin/>
 
-                    <div className="content">
+                    <div className="header bg-primary pb-6">
                         <div className="container-fluid">
-
-
-                            <div className="row">
-                                <div className="col-md-12">
-                                    <div className="card">
-                                        <div className="card-header card-header-icon card-header-success">
-                                            <div className="row">
-                                                <div className="card-icon">
-                                                    <i className="material-icons">chat</i>
-                                                </div>
-                                                <br/>
-                                                <h4 className="card-title"><b>Create</b> -
-                                                    <small className="category"> New Faqs</small>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                        <div className="card-body">
-
-                                            <form onSubmit={this.createItem}>
-                                                <div className="row">
-                                                    <div className="col-md-6">
-                                                        <div className="form-group">
-                                                            <label className="bmd-label-floating">
-                                                                Title
-                                                            </label>
-                                                            <input required={'required'}
-                                                                   id='title'
-                                                                   type='text'
-                                                                   className={`form-control ${this.hasErrorFor('title') ? 'is-invalid' : ''}`}
-                                                                   name='title'
-                                                                   value={this.state.title}
-                                                                   onChange={this.handleFieldChange}
-                                                            />
-                                                            {this.renderErrorFor('title')}
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-6">
-                                                        <div className="form-group bmd-form-group">
-                                                            <label>
-                                                                <select name={'categoryfaq_id'} value={this.state.categoryfaq_id}
-                                                                        className={`form-control ${this.hasErrorFor('categoryfaq_id') ? 'is-invalid' : ''}`}
-                                                                        onChange={this.handleFieldChange}>
-                                                                    <option value="" disabled>Choose Your Category FAQS</option>
-                                                                    {this.state.categories_faqs.map((categoryfaq) => (
-                                                                        <option  key={categoryfaq.id} value={categoryfaq.id}>{categoryfaq.name}</option>
-                                                                    ))}
-                                                                </select>
-                                                            </label>
-                                                            {this.renderErrorFor('categoryfaq_id')}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div className="form-group">
-                                                            <label className="bmd-label-floating">
-                                                                Description
-                                                            </label>
-                                                            <br/>
-                                                            <ReactQuill theme="snow" modules={this.modules}
-                                                                        formats={this.formats}
-                                                                        value={this.state.body || ''}
-                                                                        onChange={this.handleChangeBody}/>
-                                                            <div className="form-check">
-                                                                <label className="form-check-label pull-right">
-                                                                    You can use the
-                                                                    <a href="https://help.github.com/articles/getting-started-with-writing-and-formatting-on-github/"
-                                                                       className="text-danger" target="_blank">
-                                                                        Markdown here
-                                                                    </a>
-                                                                    <span className="form-check-sign"></span>
-                                                                </label>
-                                                            </div>
-                                                            {this.renderErrorFor('body')}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr/>
-                                                <div className="submit">
-                                                    <div className="text-center">
-                                                        <Link to={'/dashboard/faqs'} className="btn btn-danger btn-sm"
-                                                              id="button_hover">
-                                                            <i className="material-icons">chevron_left</i>
-                                                            <b className="title_hover">Back</b>
-                                                        </Link>
-                                                        <button id="button_hover" type="submit"
-                                                                className="btn btn-success btn-sm btn-raised">
-                                                            <i className="material-icons">save_alt</i>
-                                                            <b className="title_hover">Save</b>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                            <div className="header-body">
+                                <div className="row align-items-center py-4">
+                                    <div className="col-lg-6 col-7">
+                                        <h6 className="h2 text-white d-inline-block mb-0">Default</h6>
+                                        <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
+                                            <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
+                                                <li className="breadcrumb-item"><Link to={'/dashboard/'}><i className="fas fa-home"></i></Link></li>
+                                                <li className="breadcrumb-item"><Link to={'/dashboard/'}>Dashboards</Link></li>
+                                                <li className="breadcrumb-item active" aria-current="page">NEW FAQS</li>
+                                            </ol>
+                                        </nav>
+                                    </div>
+                                    <div className="col-lg-6 col-5 text-right">
+                                        <Link to={'/dashboard/faqs/'} className="btn btn-sm btn-neutral">Back</Link>
+                                        <a href="#" className="btn btn-sm btn-neutral">Filters</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <FooterAdmin/>
+
+                    <div className="container-fluid mt--6">
+
+                        <div className="row justify-content-center">
+                            <div className="col-lg-8 card-wrapper ct-example">
+
+                                <div className="card">
+                                    <div className="card-header">
+                                        <h3 className="mb-0">New FAQS</h3>
+                                    </div>
+                                    <div className="card-body">
+                                        <form onSubmit={this.createItem}>
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <div className="form-group">
+                                                        <label className="form-control-label">Title FAQS</label>
+                                                        <input required={'required'}
+                                                               id='title'
+                                                               type='text'
+                                                               className={`form-control ${this.hasErrorFor('title') ? 'is-invalid' : ''}`}
+                                                               name='title'
+                                                               value={this.state.title}
+                                                               onChange={this.handleFieldChange}
+                                                        />
+                                                        {this.renderErrorFor('title')}
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <div className="form-group">
+                                                        <label className="form-control-label">One of two cols</label>
+                                                        <select name={'categoryfaq_id'} value={this.state.categoryfaq_id}
+                                                                className={`form-control ${this.hasErrorFor('categoryfaq_id') ? 'is-invalid' : ''}`}
+                                                                onChange={this.handleFieldChange}>
+                                                            <option value="" disabled>Choose Your Category FAQS</option>
+                                                            {this.state.categories_faqs.map((categoryfaq) => (
+                                                                <option  key={categoryfaq.id} value={categoryfaq.id}>{categoryfaq.name}</option>
+                                                            ))}
+                                                        </select>
+                                                        {this.renderErrorFor('categoryfaq_id')}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className={'row'}>
+                                                <div className="col-md-12">
+                                                    <div className="form-group">
+                                                        <label className="bmd-label-floating">
+                                                            Description
+                                                        </label>
+                                                        <br/>
+                                                        <ReactQuill theme="snow" modules={this.modules}
+                                                                    formats={this.formats}
+                                                                    value={this.state.body || ''}
+                                                                    onChange={this.handleChangeBody}/>
+                                                        {this.renderErrorFor('body')}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="submit">
+                                                <div className="text-center">
+                                                    <Link to={'/dashboard/faqs/'} className="btn btn-icon btn-secondary" type="submit">
+                                                        <span className="btn-inner--text">Back</span>
+                                                    </Link>
+                                                    <button className="btn btn-icon btn-primary" type="submit">
+                                                        <span className="btn-inner--text">Save</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <FooterAdmin/>
+                    </div>
                 </div>
+
             </div>
         );
     }

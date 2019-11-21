@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import TopNavAdmin from "../../../inc/admin/TopNavAdmin";
 import NavAdmin from "../../../inc/admin/NavAdmin";
 import FooterAdmin from "../../../inc/admin/FooterAdmin";
+import moment from "moment";
 
 class PermissionIndex extends Component {
     constructor (props) {
@@ -52,17 +53,22 @@ class PermissionIndex extends Component {
         };
         axios.post('/dashboard/permissions', permission)
             .then(response => {
+                // clear form input
+                this.setState({
+                    name: ''
+                });
                 //Masquer le modal après la création
                 $('#addNew').modal('hide');
 
                 console.log(response.data);
-                // add new data to list of datas
+                // add new permission to list of tasks
+                this.setState(prevState => ({
+                    tasks: prevState.permissions.concat(response.data)
+                }));
+            }).catch(error => {
                 this.setState({
-                    permissions: [response.data]
-                });
-
-                // redirect
-                history.push('/dashboard/permissions')
+                    errors: error.response.data.errors
+                })
             })
     }
     // handle delete
@@ -83,13 +89,13 @@ class PermissionIndex extends Component {
         }).then((result) => {
             if (result.value) {
 
-                // remove from local state
-                let isNotId = permission => permission.id !== id;
-                let updatedItems = this.state.permissions.filter(isNotId);
-                this.setState({permissions: updatedItems});
-
                 //Envoyer la requet au server
                 axios.delete(`/dashboard/permissions/${id}`).then(() => {
+
+                    // remove from local state
+                    let isNotId = permission => permission.id !== id;
+                    let updatedItems = this.state.permissions.filter(isNotId);
+                    this.setState({permissions: updatedItems});
 
                     /** Alert notify bootstrapp **/
                     $.notify({
@@ -125,23 +131,18 @@ class PermissionIndex extends Component {
     }
     mydatatables(){
         $( function () {
-            $('#datatables').DataTable({
-                "pagingType": "full_numbers",
-                "lengthMenu": [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, "All"]
-                ],
-                order: [[ 0, 'asc' ], [ 3, 'desc' ]],
+            $('#datatable-buttons').DataTable({
                 responsive: true,
                 destroy: true,
                 retrieve:true,
                 autoFill: true,
                 colReorder: true,
                 language: {
-                    search: "<i class='material-icons'>search</i>",
-                    searchPlaceholder: "Search Record",
+                    paginate: {
+                        previous: "<i class='fas fa-angle-left'>",
+                        next: "<i class='fas fa-angle-right'>"
+                    }
                 },
-                "sPaginationType": "full_numbers",
 
             });
         });
@@ -183,188 +184,51 @@ class PermissionIndex extends Component {
 
                 <NavAdmin/>
 
-                <div className="main-panel">
+                <div className="main-content" id="panel">
 
                     <TopNavAdmin/>
 
-                    <div className="content">
+                    <div className="header bg-primary pb-6">
                         <div className="container-fluid">
-
-
-                            <div className="row">
-                                <div className="col-lg-6 col-md-6 col-sm-6">
-                                    <div className="card card-stats">
-                                        <div className="card-header card-header-warning card-header-icon">
-                                            <div className="card-icon">
-                                                <i className="material-icons">weekend</i>
-                                            </div>
-                                            <p className="card-category">Bookings</p>
-                                            <h3 className="card-title">184</h3>
-                                        </div>
-                                        <div className="card-footer">
-                                            <div className="stats">
-                                                <i className="material-icons text-danger">warning</i>
-                                                <a href="#pablo">Get More Space...</a>
-                                            </div>
-                                        </div>
+                            <div className="header-body">
+                                <div className="row align-items-center py-4">
+                                    <div className="col-lg-6 col-7">
+                                        <h6 className="h2 text-white d-inline-block mb-0">Default</h6>
+                                        <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
+                                            <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
+                                                <li className="breadcrumb-item"><Link to={'/dashboard/'}><i className="fas fa-home"></i></Link></li>
+                                                <li className="breadcrumb-item"><Link to={'/dashboard/'}>Dashboards</Link></li>
+                                                <li className="breadcrumb-item active" aria-current="page">Permissions</li>
+                                            </ol>
+                                        </nav>
+                                    </div>
+                                    <div className="col-lg-6 col-5 text-right">
+                                        <button type={'button'} onClick={() => this.newModal()} className="btn btn-sm btn-neutral">New</button>
+                                        <button type={'button'} onClick={() => this.reload()} className="btn btn-sm btn-neutral">Refresh</button>
                                     </div>
                                 </div>
 
-                                <div className="col-lg-6 col-md-6 col-sm-6">
-                                    <div className="card card-stats">
-                                        <div className="card-header card-header-rose card-header-icon">
-                                            <div className="card-icon">
-                                                <i className="material-icons">equalizer</i>
-                                            </div>
-                                            <p className="card-category">Website Visits</p>
-                                            <h3 className="card-title">{permissions.length}</h3>
-                                        </div>
-                                        <div className="card-footer">
-                                            <div className="stats">
-                                                <i className="material-icons">local_offer</i> Tracked from Google
-                                                Analytics
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div className="row">
-                                <div className="col-md-12">
-                                    <div className="card">
-                                        <div className={`card-header card-header-${this.state.color_name}`}>
-                                            <div className="row">
-                                                <div className="col-md-6">
-                                                    <h4 className="card-title">
-                                                        <b>Datatables Permissions</b>
-                                                    </h4>
-                                                    <p className="card-title">
-                                                        Administrators Permissions
-                                                    </p>
-                                                </div>
-                                                <div className="col-md-6 text-right">
-                                                    <span>
-                                                        <i id="tooltipSize" className="material-icons">chat</i>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="card-body">
-                                            <div className="header text-right">
-                                                <button onClick={() => this.reload()} className={'btn btn-success btn-raised  btn-sm'}
-                                                        title="Refresh Page">
-                                                    <i className="material-icons">replay</i>
-                                                    <b className="title_hover">Refresh</b>
-                                                </button>
-                                            </div>
-                                            <div className="toolbar">
-                                                <div className="submit text-center">
-                                                    <button  onClick={() => this.newModal()} id="button_hover" className="btn btn-success btn-raised">
-                                                        <span className="btn-label">
-                                                            <i className="material-icons">playlist_add_check</i>
-                                                        </span>
-                                                    <b className="title_hover">New Permission</b>
-                                                </button>
-                                            </div>
-
-                                            </div>
-                                            <div className="material-datatables">
-                                                <table id="datatables"
-                                                       className="table table-striped table-no-bordered table-hover"
-                                                       cellSpacing="0" width="100%">
-                                                    <thead>
-                                                    <tr>
-                                                        <th><b>Name</b></th>
-                                                        <th><b>Guard name</b></th>
-                                                        <th><b>Last Updated</b></th>
-                                                        <th className="disabled-sorting text-right">Actions</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tfoot>
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Guard name</th>
-                                                        <th>Last Updated</th>
-                                                        <th className="text-right">Actions</th>
-                                                    </tr>
-                                                    </tfoot>
-                                                    <tbody>
-                                                    {permissions.map((item) => (
-                                                        <tr key={item.id}>
-                                                            <td><b>{item.name}</b></td>
-                                                            <td><b>{item.guard_name}</b></td>
-                                                            <td><b>{moment(item.created_at).fromNow()}</b>
-                                                            </td>
-                                                            <td className="text-right">
-
-                                                                <Link className="btn btn-link  btn-success btn-round btn-just-icon"
-                                                                    title="Edit" to={`/dashboard/permissions/${item.id}/edit/`} key={item.id}>
-                                                                    <i className="material-icons">edit</i>
-                                                                </Link>
-
-                                                                <button type={'button'} onClick={() => this.deleteItem(item.id)}
-                                                                    className="btn btn-link btn-danger btn-round btn-just-icon" title="Delete">
-                                                                    <i className="material-icons">delete_forever</i>
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                    ))}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                            <div className="modal fade" id="addNew" tabIndex={'-1'} role="dialog"
-                                                 aria-labelledby="addNewLabel"
-                                                 aria-hidden="true">
-                                                <div className="modal-dialog" role="document">
-                                                    <div className="modal-content">
-                                                        <div className="modal-header">
-                                                            <h5 className="modal-title" id="updateNewLabel"><b>New Permission</b></h5>
-                                                            <button type="button" className="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div className="modal-body">
-                                                            <form role="form" method="POST" onSubmit={this.createItem} action="" acceptCharset={'UTF-8'}>
-                                                                <div className="form-group">
-                                                                    <label className="bmd-label-floating">
-
-                                                                    </label>
-                                                                    <input required={'required'}
-                                                                           placeholder={'Name permission'}
-                                                                           id='name'
-                                                                           type='text'
-                                                                           className={`form-control ${this.hasErrorFor('name') ? 'is-invalid' : ''}`}
-                                                                           name='name'
-                                                                           value={this.state.name}
-                                                                           onChange={this.handleFieldChange}
-                                                                    />
-                                                                    {this.renderErrorFor('name')}
-                                                                </div>
-                                                                <div className="modal-footer">
-                                                                    <div className="text-center">
-                                                                        <button type="button" className="btn btn-danger btn-sm"
-                                                                                data-dismiss="modal">
-                                                                    <span className="btn-label">
-                                                                        <i className="material-icons">clear</i>
-                                                                        <b>Close</b>
-                                                                    </span>
-                                                                        </button>
-                                                                        <button type="submit"
-                                                                                className="btn btn-success btn-raised btn-sm">
-                                                                            <span className="btn-label">
-                                                                                <i className="material-icons">check</i>
-                                                                                <b>Yes, Save</b>
-                                                                            </span>
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
+                                <div className="row">
+                                    <div className="col-xl-12 col-md-12">
+                                        <div className="card card-stats">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col">
+                                                        <h5 className="card-title text-uppercase text-muted mb-0">Permissions</h5>
+                                                        <span className="h2 font-weight-bold mb-0">{permissions.length}</span>
+                                                    </div>
+                                                    <div className="col-auto">
+                                                        <div
+                                                            className="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                                                            <i className="ni ni-money-coins"></i>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <p className="mt-3 mb-0 text-sm">
+                                                    <span className="text-success mr-2"><i
+                                                        className="fa fa-arrow-up"></i> 3.48%</span>
+                                                    <span className="text-nowrap">Since last month</span>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -372,8 +236,109 @@ class PermissionIndex extends Component {
                             </div>
                         </div>
                     </div>
-                    <FooterAdmin/>
+
+                    <div className="container-fluid mt--6">
+
+                        <div className="row">
+                            <div className="col">
+                                <div className="card">
+                                    <div className="card-header">
+                                        <h3 className="mb-0">Permissions</h3>
+                                        <p className="text-sm mb-0">
+                                            Permissions informations
+                                        </p>
+                                    </div>
+                                    <div className="table-responsive py-4">
+                                        <table  className="table table-flush" id="datatable-buttons">
+                                            <thead className="thead-light">
+                                            <tr>
+                                                <th><b>Name</b></th>
+                                                <th><b>Guard name</b></th>
+                                                <th><b>Last Updated</b></th>
+                                                <th className="disabled-sorting text-right">Actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tfoot>
+                                            <tr>
+                                                <th><b>Name</b></th>
+                                                <th><b>Guard name</b></th>
+                                                <th><b>Last Updated</b></th>
+                                                <th className="disabled-sorting text-right">Actions</th>
+                                            </tr>
+                                            </tfoot>
+                                            <tbody>
+                                            {permissions.map((item) => (
+                                                <tr key={item.id}>
+                                                    <td><b>{item.name}</b></td>
+                                                    <td><b>{item.guard_name}</b></td>
+                                                    <td><b>{moment(item.created_at).fromNow()}</b></td>
+                                                    <td className="text-right">
+
+                                                        <Link to={`/dashboard/permissions/${item.id}/edit/`} key={item.id} className="table-action table-active" data-toggle="tooltip"
+                                                              data-original-title="Edit product">
+                                                            <i className="fas fa-edit"></i>
+                                                        </Link>
+                                                        <a href="#!"   onClick={() => this.deleteItem(item.id)}  className="table-action table-action-delete"
+                                                           data-toggle="tooltip" data-original-title="Delete product">
+                                                            <i className="fas fa-trash"></i>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                    <div className="modal fade" id="addNew" tabIndex="-1" role="dialog"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div className="modal-dialog modal-dialog-centered" role="document">
+                                            <div className="modal-content">
+                                                <div className="modal-header">
+                                                    <h5 className="modal-title" id="exampleModalLabel">New permission</h5>
+                                                    <button type="button" className="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form role="form" method="POST" onSubmit={this.createItem} action="" acceptCharset={'UTF-8'}>
+                                                <div className="modal-body">
+                                                    <div className="form-group">
+                                                        <label className="bmd-label-floating">
+
+                                                        </label>
+                                                        <input required={'required'}
+                                                               placeholder={'Name permission'}
+                                                               id='name'
+                                                               type='text'
+                                                               className={`form-control ${this.hasErrorFor('name') ? 'is-invalid' : ''}`}
+                                                               name='name'
+                                                               value={this.state.name}
+                                                               onChange={this.handleFieldChange}
+                                                        />
+                                                        {this.renderErrorFor('name')}
+                                                    </div>
+                                                </div>
+                                                <div className="modal-footer">
+                                                    <button type="button" className="btn btn-secondary"
+                                                            data-dismiss="modal">Close
+                                                    </button>
+                                                    <button type="submit" className="btn btn-primary">Save</button>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <FooterAdmin/>
+                    </div>
                 </div>
+
             </div>
         );
     }
