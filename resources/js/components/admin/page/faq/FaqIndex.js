@@ -236,7 +236,6 @@ class FaqIndex extends Component {
                                                 <th><b>Title</b></th>
                                                 <th><b>Category FAQS</b></th>
                                                 <th><b>Status</b></th>
-                                                <th><b>Edited by</b></th>
                                                 <th><b>Date update</b></th>
                                                 <th><b>Status</b></th>
                                                 <th className="disabled-sorting text-right">Actions</th>
@@ -247,7 +246,6 @@ class FaqIndex extends Component {
                                                 <th><b>Title</b></th>
                                                 <th><b>Category FAQS</b></th>
                                                 <th><b>Status</b></th>
-                                                <th><b>Edited by</b></th>
                                                 <th><b>Date update</b></th>
                                                 <th><b>Status</b></th>
                                                 <th className="disabled-sorting text-right">Actions</th>
@@ -270,22 +268,6 @@ class FaqIndex extends Component {
                                                                 <span className="badge badge-primary"><b>Deactive</b></span>
                                                             }
                                                         </div>
-                                                    </td>
-                                                    <td>
-                                                        <Link to={'/dashboard'}>
-                                                            {item.statusOnline ?
-                                                                <button type="button"
-                                                                        className="btn btn-success btn-round btn-just-icon btn-sm"
-                                                                        title="Administrator Online">
-                                                                </button>
-                                                                :
-                                                                <button type="button"
-                                                                        className="btn btn-danger btn-round btn-just-icon btn-sm"
-                                                                        title="Administrator Offline">
-                                                                </button>
-                                                            }
-                                                            { (item.user.first_name.length > 15 ? item.user.first_name.name.substring(0,15)+ "..." : item.user.first_name.name)  }
-                                                        </Link>
                                                     </td>
                                                     <td><b>{moment(item.updated_at).format('DD/MM/YYYY')}</b></td>
                                                     <td>  <label className="custom-toggle custom-toggle-info">

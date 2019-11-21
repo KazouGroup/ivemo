@@ -9,7 +9,6 @@ class PermissionIndex extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            color_name:'',
             name:'',
             permissions: [],
             errors: []
@@ -161,10 +160,6 @@ class PermissionIndex extends Component {
                     error
                 });
             });
-        axios.get(`/account/user`).then(response =>
-            this.setState({
-                color_name: response.data.color_name,
-            }));
     }
     reload(){
         this.loadItems()
@@ -188,7 +183,7 @@ class PermissionIndex extends Component {
 
                     <TopNavAdmin/>
 
-                    <div className="header bg-primary pb-6">
+                    <div className={`header pb-6 bg-primary`}>
                         <div className="container-fluid">
                             <div className="header-body">
                                 <div className="row align-items-center py-4">

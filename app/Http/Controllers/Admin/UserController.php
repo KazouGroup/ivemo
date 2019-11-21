@@ -8,6 +8,7 @@ use App\Http\Resources\FollowerResource;
 use App\Http\Resources\UserResource;
 use App\Model\follower;
 use App\Model\user;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,7 @@ class UserController extends Controller
     private $auth;
 
     public function __construct(Guard $auth){
-        $this->middleware('auth',['except' => ['api','apiadministrator','show','apidatatables','apifollowers']]);
+        $this->middleware('auth',['except' => ['api','apiadministrator','show','apidatatables','apifollowers','dataLastMonth','dataCurrentMonth']]);
         $this->auth = $auth;
     }
     /**
@@ -81,6 +82,19 @@ class UserController extends Controller
     }
 
 
+    public function dataLastMonth()
+    {
+        $users = user::where('created_at', '>=', now()->subMonth())->get();
+
+        return $users;
+    }
+
+    public function dataCurrentMonth()
+    {
+        $users = user::where('created_at', '>=', now()->subMonth())->get();
+
+        return $users;
+    }
     /**
      * Show the form for creating a new resource.
      *

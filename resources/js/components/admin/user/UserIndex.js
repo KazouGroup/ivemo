@@ -4,6 +4,9 @@ import TopNavAdmin from "../../inc/admin/TopNavAdmin";
 import NavAdmin from "../../inc/admin/NavAdmin";
 import FooterAdmin from "../../inc/admin/FooterAdmin";
 import UserLists from "./UserLists";
+import moment from 'moment'
+require("moment/min/locales.min");
+moment.locale('fr');
 
 class UserIndex extends Component {
     constructor () {

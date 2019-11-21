@@ -234,7 +234,7 @@ class UserDatatables  extends Component {
                                                         { (item.first_name.length > 15 ? item.first_name.substring(0,15)+ "..." : item.first_name)  }
                                                     </Link>
                                                 </td>
-                                                <td><b>{moment(item.created_at).format('DD/MM/YYYY')}</b></td>
+                                                <td><b>{moment(item.created_at).fromNow()}</b></td>
                                                 <td className="text-right">
                                                     <div className="dropdown">
                                                         <a className="btn btn-sm btn-icon-only text-light" href="#"
