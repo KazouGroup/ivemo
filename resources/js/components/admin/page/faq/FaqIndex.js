@@ -80,7 +80,7 @@ class FaqIndex extends Component {
         axios.get(`/dashboard/change_status_faqs/${id}`)
             .then(res => {
 
-                $.notify('<strong>Faq has been update Successfully.</strong>', {
+                $.notify('<strong>Faq has been updated Successfully.</strong>', {
                     allow_dismiss: false,
                     type: 'info',
                     placement: {

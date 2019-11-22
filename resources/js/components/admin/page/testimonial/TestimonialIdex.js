@@ -3,6 +3,9 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import TopNavAdmin from "../../../inc/admin/TopNavAdmin";
 import NavAdmin from "../../../inc/admin/NavAdmin";
 import FooterAdmin from "../../../inc/admin/FooterAdmin";
+import moment from 'moment'
+require("moment/min/locales.min");
+moment.locale('fr');
 
 class TestimonialIdex extends Component {
     constructor () {

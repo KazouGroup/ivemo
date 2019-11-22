@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import TopNavAdmin from "../../../inc/admin/TopNavAdmin";
 import NavAdmin from "../../../inc/admin/NavAdmin";
@@ -129,93 +129,96 @@ export default class TestimonialEdit extends Component {
 
                 <NavAdmin/>
 
-                <div className="main-panel">
+                <div className="main-content" id="panel">
 
                     <TopNavAdmin/>
 
-                    <div className="content">
+                    <div className="header bg-primary pb-6">
                         <div className="container-fluid">
-
-
-                            <div className="row">
-                                <div className="col-md-12">
-                                    <div className="card">
-                                        <div className="card-header card-header-icon card-header-success">
-                                            <div className="row">
-                                                <div className="card-icon">
-                                                    <i className="material-icons">chat</i>
-                                                </div>
-                                                <br/>
-                                                <h4 className="card-title" ><b>{this.state.title}</b>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                        <div className="card-body">
-
-                                            <form onSubmit={this.updateItem}>
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div className="form-group">
-                                                            <label className="bmd-label-floating">
-
-                                                            </label>
-                                                            <input id='role'
-                                                                   type='text'
-                                                                   className={`form-control ${this.hasErrorFor('role') ? 'is-invalid' : ''}`}
-                                                                   name='role'
-                                                                   value={this.state.role}
-                                                                   onChange={this.handleFieldChange}
-                                                            />
-                                                            {this.renderErrorFor('role')}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div className="form-group">
-                                                            <label className="bmd-label-floating">
-                                                                Description
-                                                            </label>
-                                                            <br/>
-                                                            <ReactQuill theme="snow" modules={this.modules}
-                                                                        formats={this.formats}  value={this.state.body || ''} onChange={this.handleChangeBody}/>
-                                                            <div className="form-check">
-                                                                <label className="form-check-label pull-right">
-                                                                    You can use the
-                                                                    <a href="https://help.github.com/articles/getting-started-with-writing-and-formatting-on-github/"
-                                                                       className="text-danger" target="_blank">
-                                                                        Markdown here
-                                                                    </a>
-                                                                    <span className="form-check-sign"></span>
-                                                                </label>
-                                                            </div>
-                                                            {this.renderErrorFor('body')}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr/>
-                                                <div className="submit">
-                                                    <div className="text-center">
-                                                        <Link to={'/dashboard/testimonials/'} className="btn btn-danger btn-sm" id="button_hover">
-                                                            <i className="material-icons">chevron_left</i>
-                                                            <b className="title_hover">Back</b>
-                                                        </Link>
-                                                        <button id="button_hover" type="submit"
-                                                                className="btn btn-success btn-raised btn-sm">
-                                                            <i className="material-icons">save_alt</i>
-                                                            <b className="title_hover">Save</b>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                            <div className="header-body">
+                                <div className="row align-items-center py-4">
+                                    <div className="col-lg-6 col-7">
+                                        <h6 className="h2 text-white d-inline-block mb-0">Default</h6>
+                                        <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
+                                            <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
+                                                <li className="breadcrumb-item"><Link to={'/dashboard/'}><i className="fas fa-home"></i></Link></li>
+                                                <li className="breadcrumb-item"><Link to={'/dashboard/'}>Dashboards</Link></li>
+                                                <li className="breadcrumb-item active" aria-current="page">{ (this.state.role.length > 35 ? this.state.role.substring(0,35)+ "..." : this.state.role)  }</li>
+                                            </ol>
+                                        </nav>
+                                    </div>
+                                    <div className="col-lg-6 col-5 text-right">
+                                        <Link to={'/dashboard/testimonials/'} className="btn btn-sm btn-neutral">Back</Link>
+                                        <NavLink to={'/dashboard/testimonials/create/'} className="btn btn-sm btn-neutral">New</NavLink>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <FooterAdmin/>
+
+                    <div className="container-fluid mt--6">
+
+                        <div className="row justify-content-center">
+                            <div className="col-lg-8 card-wrapper ct-example">
+
+                                <div className="card">
+                                    <div className="card-header">
+                                        <h3 className="mb-0">{this.state.role}</h3>
+                                    </div>
+                                    <div className="card-body">
+                                        <form onSubmit={this.updateItem}>
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    <div className="form-group">
+                                                        <label className="form-control-label">Role</label>
+                                                        <input id='role'
+                                                               type='text'
+                                                               className={`form-control ${this.hasErrorFor('role') ? 'is-invalid' : ''}`}
+                                                               name='role'
+                                                               value={this.state.role}
+                                                               onChange={this.handleFieldChange}
+                                                        />
+                                                        {this.renderErrorFor('role')}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className={'row'}>
+                                                <div className="col-md-12">
+                                                    <div className="form-group">
+                                                        <label className="bmd-label-floating">
+                                                            Description
+                                                        </label>
+                                                        <br/>
+                                                        <ReactQuill theme="snow" modules={this.modules}
+                                                                    formats={this.formats}
+                                                                    value={this.state.body || ''}
+                                                                    onChange={this.handleChangeBody}/>
+                                                        {this.renderErrorFor('body')}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="submit">
+                                                <div className="text-center">
+                                                    <Link to={'/dashboard/testimonials/'} className="btn btn-icon btn-secondary" type="submit">
+                                                        <span className="btn-inner--text">Back</span>
+                                                    </Link>
+                                                    <button className="btn btn-icon btn-primary" type="submit">
+                                                        <span className="btn-inner--text">Save</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <FooterAdmin/>
+                    </div>
                 </div>
+
             </div>
         );
     }

@@ -3,40 +3,39 @@ import {Link} from "react-router-dom";
 
 const UserLists= (props)=>
 
-    <div  className="col-md-4 col-sm-4 ">
-        <div className="card card-profile">
-            <div className="card-avatar">
-                <Link to={`/dashboard/users/${props.id}/edit/`} >
-                    <img className="img" src={`${props.avatar}`} alt={`${props.name}`}/>
+    <li className="list-group-item px-0">
+        <div className="row align-items-center">
+            <div className="col-auto">
+
+                <Link to={`/dashboard/users/${props.id}/edit/`} className="avatar rounded-circle">
+                    <img src={`${props.avatar}`} alt={`${props.name}`}/>
                 </Link>
             </div>
-            <div className="stats text-center">
-                <Link to={`/dashboard/users/${props.id}/edit/`}  className="btn btn-warning btn-just-icon btn-fill btn-round btn-sm">
-                    <i className="material-icons">visibility</i>
-                </Link>
-                <Link to={`/dashboard/users/${props.id}/edit/`} className="btn btn-success btn-just-icon btn-fill btn-sm btn-round btn-wd" title="Edit">
-                    <i className="material-icons">mode_edit</i>
-                    <div className="ripple-container"></div>
-                </Link>
-            </div>
-            <div className="card-body">
-                { props.statusOnline ?
-                    <h6><span className="badge badge-success" title="User online">Online</span></h6>
+            <div className="col ml--2">
+                <h4 className="mb-0">
+                    <a href="#!">{props.first_name} {props.last_name}</a>
+                </h4>
+                {props.statusOnline ?
+                    <div>
+                        <span className="text-success">●</span>
+                        <small>Online</small>
+                    </div>
                     :
-                    <h6><span className="badge badge-danger" title="User online">Offline</span></h6>
+                    <div>
+                        <span className="text-danger">●</span>
+                        <small>Offline</small>
+                    </div>
                 }
-                <h6>
-                    {props.roles.map((role,index) => (
-                    <span key={index}  className="badge badge-success">
-                    <b>{role}</b>
-                    </span>
-                    ))}
-                </h6>
-                <h4 className="card-title"><b>{props.first_name} {props.last_name}</b></h4>
-                <h4 className="card-title"><b>Sex:</b> {props.sex}</h4>
-                <h4 className="card-title"><b>Age:</b> 12 ans</h4>
+            </div>
+            <div className="col-auto">
+                {props.roles.map((role,index) => (
+                    <button key={index} type="button" className="btn btn-sm btn-primary">{role}</button>
+                ))}
+                <Link to={`/dashboard/users/${props.id}/edit/`} className="btn btn-sm btn-info" title="Edit">
+                    Edit
+                </Link>
             </div>
         </div>
-    </div>;
+    </li>;
 
 export default UserLists;

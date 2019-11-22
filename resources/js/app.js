@@ -19,6 +19,4 @@ require('./components/routes/RoutePath ');
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 
-import moment from 'moment'
-require("moment/min/locales.min");
-moment.locale('fr');
+
