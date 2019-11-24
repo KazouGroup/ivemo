@@ -475,15 +475,15 @@ class DashboardUserEdit extends Component {
                                             </div>
                                             <div className="text-center">
                                                 {this.state.status_user === 1 ?
-                                                    <Link to={'/dashboard/administrators/p/datatables/'} className={`btn  pull-center btn-secondary btn-sm`}>
+                                                    <Link to={'/dashboard/administrators/p/datatables/'} className={`btn  pull-center btn-secondary`}>
                                                         Back
                                                     </Link>
                                                     :
-                                                    <Link to={'/dashboard/users/p/datatables/'} className={`btn  pull-center btn-secondary btn-sm`}>
+                                                    <Link to={'/dashboard/users/p/datatables/'} className={`btn  pull-center btn-secondary`}>
                                                         Back
                                                     </Link>
                                                 }
-                                                <button type="submit" className={`btn  pull-center btn-sm btn-${this.state.color_name}`}>
+                                                <button type="submit" className={`btn  pull-center btn-${this.state.color_name}`}>
                                                     Update Profile
                                                 </button>
                                             </div>

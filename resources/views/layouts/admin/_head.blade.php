@@ -3,6 +3,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
+<meta property="og:title" content="__OG_TITLE__">
+<meta property="og:description" content="__OG_DESCRIPTION__">
+<title>ivemo @yield('title')</title>
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -17,8 +20,6 @@
     'permissions' => auth()->user()->getAllPermissions(),
     ]) !!}
 </script>
-
-<title>{{ config('app.name') }} @yield('title')</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 <!-- BEGIN: Vendor CSS-->
 <!-- Icons -->

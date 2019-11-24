@@ -17,6 +17,7 @@ class CreateProfilesTable extends Migration
             $table->bigIncrements('id');
             $table->string('facebook_link')->nullable();
             $table->string('twitter_link')->nullable();
+            $table->string('site_internet')->nullable();
             $table->string('full_name')->nullable();
             $table->timestamps();
 

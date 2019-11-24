@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Profile\UpdateRequest;
 use App\Http\Resources\ProfileResource;
 use App\model\profile;
 use App\Model\user;
@@ -80,7 +81,7 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, profile $profile)
+    public function update(UpdateRequest $request, profile $profile)
     {
         $inputs = $request->all();
 

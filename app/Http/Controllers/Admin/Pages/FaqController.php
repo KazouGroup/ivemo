@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Pages;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Faq\StoreRequest;
+use App\Http\Requests\Faq\UpdateRequest;
 use App\Http\Resources\FaqResource;
 use App\Model\categoryfaq;
 use App\Model\faq;
@@ -82,13 +84,10 @@ class FaqController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $inputs = $request->validate([
-            'title' => 'required',
-            'body' => 'required',
-            'categoryfaq_id' => 'required',
-        ]);
+
+        $inputs = $request->all();
 
         $faq = faq::create([
             'title' => $inputs['title'],
@@ -143,12 +142,9 @@ class FaqController extends Controller
      * @param  int  $id
      * @return array|\Illuminate\Http\Response
      */
-    public function update(Request $request, faq $faq)
+    public function update(UpdateRequest $request, faq $faq)
     {
-        $this->validate($request,[
-            'title'=>'required|string',
-            'categoryfaq_id'=>'required',
-        ]);
+
 
         $faq = faq::findOrFail($faq->id);
 

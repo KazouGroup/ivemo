@@ -13,7 +13,7 @@ export default class AdminProfileUserAdmin extends Component {
         };
         this.modules = {
             toolbar: [
-                [{ 'font': [] }],
+                //[{ 'font': [] }],
                 [{ 'size': ['small', false, 'large', 'huge'] }],
                 ['bold', 'italic', 'underline'],
                 [{'list': 'ordered'}, {'list': 'bullet'}],
@@ -23,7 +23,7 @@ export default class AdminProfileUserAdmin extends Component {
             ],
         };
         this.formats = [
-            'font',
+            //'font',
             'size',
             'bold', 'italic', 'underline',
             'list', 'bullet',
@@ -253,7 +253,6 @@ export default class AdminProfileUserAdmin extends Component {
                                                 <h3 className="mb-0">Profile </h3>
                                             </div>
                                             <div className="col-4 text-right">
-                                                <button type="button" className="btn btn-primary btn-sm ">{user.roles}</button>
                                                 <Link to={'/dashboard/profile/edit/'} className="btn btn-outline-info btn-sm ">Edit profile</Link>
                                             </div>
                                         </div>
@@ -303,7 +302,7 @@ export default class AdminProfileUserAdmin extends Component {
                                             </div>
                                         </div>
                                         <div className="text-center">
-                                            <Link to={`/dashboard/profile/add_info/${user.id}/edit`} className={`btn  pull-center btn-warning btn-sm`}>
+                                            <Link to={`/dashboard/profile/add_info/${user.id}/edit`} className={`btn  pull-center btn-warning`}>
                                                 Add Info Profile
                                             </Link>
                                         </div>

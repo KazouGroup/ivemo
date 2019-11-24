@@ -19,6 +19,7 @@ class DashboardProfileEdit extends Component {
             twitter_link: '',
             youtube_link: '',
             full_name: '',
+            site_internet: '',
             user: '',
             errors: [],
         };
@@ -39,6 +40,7 @@ class DashboardProfileEdit extends Component {
         const profile = {
             facebook_link: this.state.facebook_link,
             twitter_link: this.state.twitter_link,
+            site_internet: this.state.site_internet,
             full_name: this.state.full_name,
         };
 
@@ -99,6 +101,7 @@ class DashboardProfileEdit extends Component {
             this.setState({
                 facebook_link: response.data.facebook_link,
                 twitter_link: response.data.twitter_link,
+                site_internet: response.data.site_internet,
                 full_name: response.data.full_name,
                 user: response.data.user,
             }));
@@ -169,11 +172,7 @@ class DashboardProfileEdit extends Component {
                                     <div className="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                                         <div className="d-flex justify-content-between">
 
-                                            {this.state.user.statusOnline ?
-                                                <button type={'button'} className="btn btn-sm btn-success mr-4">Connect</button>
-                                                :
-                                                <button type={'button'} className="btn btn-sm btn-danger mr-4">Offline</button>
-                                            }
+                                            <button type={'button'} className="btn btn-sm btn-success mr-4">Connect</button>
                                             <a href="#" className="btn btn-sm btn-default float-right">Message</a>
                                         </div>
                                     </div>
@@ -281,7 +280,7 @@ class DashboardProfileEdit extends Component {
                                             <h6 className="heading-small text-muted mb-4">User information</h6>
                                             <div className="pl-lg-4">
                                                 <div className="row">
-                                                    <div className="col-lg-4">
+                                                    <div className="col-lg-6">
                                                         <div className="form-group">
                                                             <label className="form-control-label" htmlFor="input-username">Full Name</label>
                                                             <input required={'required'}
@@ -295,7 +294,7 @@ class DashboardProfileEdit extends Component {
                                                             {this.renderErrorFor('full_name')}
                                                         </div>
                                                     </div>
-                                                    <div className="col-lg-4">
+                                                    <div className="col-lg-6">
                                                         <div className="form-group">
                                                             <label className="form-control-label"
                                                                    htmlFor="input-first_name">Facebook link</label>
@@ -309,7 +308,9 @@ class DashboardProfileEdit extends Component {
                                                             {this.renderErrorFor('facebook_link')}
                                                         </div>
                                                     </div>
-                                                    <div className="col-lg-4">
+                                                </div>
+                                                <div className={'row'}>
+                                                    <div className="col-lg-6">
                                                         <div className="form-group">
                                                             <label className="form-control-label"
                                                                    htmlFor="input-last_name">Twitter link</label>
@@ -323,13 +324,28 @@ class DashboardProfileEdit extends Component {
                                                             {this.renderErrorFor('twitter_link')}
                                                         </div>
                                                     </div>
+                                                    <div className="col-lg-6">
+                                                        <div className="form-group">
+                                                            <label className="form-control-label"
+                                                                   htmlFor="input-last_name">Site internet</label>
+                                                            <input id='site_internet'
+                                                                   placeholder="http://yoursite.com"
+                                                                   type='text'
+                                                                   className={`form-control ${this.hasErrorFor('site_internet') ? 'is-invalid' : ''}`}
+                                                                   name='site_internet'
+                                                                   value={this.state.site_internet || ""}
+                                                                   onChange={this.handleFieldChange}
+                                                            />
+                                                            {this.renderErrorFor('site_internet')}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div className="text-center">
-                                                <Link to={'/dashboard/profile/edit/'} className={`btn  pull-center btn-secondary btn-sm`}>
+                                                <Link to={'/dashboard/profile/edit/'} className={`btn  pull-center btn-secondary`}>
                                                     Info personal
                                                 </Link>
-                                                <button type="submit" className={`btn  pull-center btn-sm btn-${this.state.user.color_name}`}>
+                                                <button type="submit" className={`btn  pull-center btn-${this.state.user.color_name}`}>
                                                     Update Profile
                                                 </button>
                                             </div>

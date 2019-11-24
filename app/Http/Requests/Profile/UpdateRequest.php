@@ -1,26 +1,8 @@
 <?php
-
 namespace App\Http\Requests\Profile;
 
-use App\Model\User;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-
-/**
- * Class UpdateRequest
- * @package App\Http\Requests\User\Account
- */
 class UpdateRequest extends BaseRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return auth()->check();
-    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -28,28 +10,7 @@ class UpdateRequest extends BaseRequest
      */
     public function rules()
     {
-        return [
-            'username' => "required|string|min:2|max:25|unique:users,username,".auth()->check(),
-            'email' => ['required', 'email', Rule::unique((new User)->getTable())->ignore(auth()->id())],
-            "sex" => "required|in:Female,Male",
-            //'country_id' => 'required',
-        ];
+        return $this->getRules('update', $this->route('profiles'));
     }
-    public function messages()
-    {
-        return [
-            'country_id.required' => 'Le pays est obligatoire',
-        ];
-    }
-    /**
-     *  Filters to be applied to the input.
-     *
-     * @return array
-     */
-    public function filters()
-    {
-        return [
-            'username' => 'trim|capitalize|escape'
-        ];
-    }
-}
+
+} // class

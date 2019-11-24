@@ -391,6 +391,7 @@ export default class AdminProfileUserEdit extends Component {
                                                             <input required={'required'}
                                                                    id='email'
                                                                    type='email'
+                                                                   placeholder="Email address"
                                                                    className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
                                                                    name='email'
                                                                    value={this.state.email || ""}
@@ -488,13 +489,13 @@ export default class AdminProfileUserEdit extends Component {
                                                 </div>
                                             </div>
                                             <div className="text-center">
-                                                <Link to={'/dashboard/profile/'} className={`btn  btn-sm pull-center btn-info`}>
+                                                <Link to={'/dashboard/profile/'} className={`btn pull-center btn-info`}>
                                                     Profile
                                                 </Link>
-                                                <Link to={`/dashboard/profile/add_info/${this.state.id}/edit`} className={`btn  pull-center btn-warning btn-sm`}>
+                                                <Link to={`/dashboard/profile/add_info/${this.state.id}/edit`} className={`btn  pull-center btn-warning`}>
                                                     Add Info Profile
                                                 </Link>
-                                                <button type="submit" className={`btn  btn-sm pull-center btn-${this.state.color_name}`}>
+                                                <button type="submit" className={`btn pull-center btn-${this.state.color_name}`}>
                                                     Update Profile
                                                 </button>
                                             </div>

@@ -20,6 +20,7 @@ class ProfileResource extends JsonResource
             'facebook_link' => $this->facebook_link,
             'twitter_link' => $this->twitter_link,
             'youtube_link' => $this->youtube_link,
+            'site_internet' => $this->site_internet,
             'user' => $this->user,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,

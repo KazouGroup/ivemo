@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link, NavLink} from 'react-router-dom';
 
-export default class NavAdmin extends Component {
+class NavAdmin extends Component {
     render() {
         return (
             <nav className="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white"
@@ -63,3 +63,4 @@ export default class NavAdmin extends Component {
         );
     }
 }
+export default NavAdmin;

@@ -28,6 +28,9 @@ import DashboardProfileEdit from "../admin/user/DashboardProfileEdit";
 import FaqByCategory from "../admin/page/faq/FaqByCategory";
 import CategoryFaqIndex from "../admin/partials/categoryfaq/CategoryFaqIndex";
 
+
+
+//const DashboardProfileEdit = withTitle({ component: Persons, title: '🧠 Persons' });
 export default class RoutePath  extends Component{
     render(){
         return(
