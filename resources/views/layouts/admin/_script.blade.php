@@ -27,7 +27,7 @@
 <script src="/assets/dashboard/assets/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
 <!-- Argon JS -->
 <script src="/assets/dashboard/assets/js/argon.js?v=1.1.0"></script>
-<script src="{{ mix('/js/app.js') }}"></script>
+<script src="{{ mix('/js/reactjs/app.js') }}"></script>
 
 @include('notify::messages')
 @notifyJs

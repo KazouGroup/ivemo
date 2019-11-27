@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Profile\PasswordRequest;
 use App\Http\Requests\Profile\UpdateRequest;
 use App\Http\Resources\ProfileResource;
 use App\model\profile;
 use App\Model\user;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 class ProfileController extends Controller
@@ -74,6 +76,18 @@ class ProfileController extends Controller
         }
     }
 
+
+    public function changePassword(Request $request)
+    {
+        return view('admin.profile.index');
+    }
+
+    public function updatePassword(PasswordRequest $request)
+    {
+        auth()->user()->update(['password' => Hash::make($request->get('password'))]);
+
+        return response()->json(['errors' => ['old_password'=> ['Current password does not match']]]);
+    }
     /**
      * Update the specified resource in storage.
      *
