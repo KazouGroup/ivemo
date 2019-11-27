@@ -1,7 +1,5 @@
 import React,{useState} from "react";
 
-
-
 const CommentCreate = (props)=> {
     const {handleCommentSubmit} = props;
 

@@ -14,3 +14,4 @@ yarn-error.log
 .vagrant
 .phpintel
 .phpunit.result.cache
+/nbproject/private/

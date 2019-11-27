@@ -197,7 +197,6 @@ export default class DashboardIndex extends Component {
                                 </div>
                             </div>
                         </div>
-
                         <FooterAdmin/>
                     </div>
                 </div>

@@ -40,12 +40,6 @@ class testimonial extends Model implements Auditable
             }
             $model->ip = request()->ip();
         });
-        static::updating(function($model){
-            if (auth()->check()){
-                $model->user_id = auth()->id();
-            }
-            $model->ip = request()->ip();
-        });
     }
 
     public function isOnline()

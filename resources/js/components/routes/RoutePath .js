@@ -27,6 +27,7 @@ import TestimonialView from "../admin/page/testimonial/TestimonialView";
 import DashboardProfileEdit from "../admin/user/DashboardProfileEdit";
 import FaqByCategory from "../admin/page/faq/FaqByCategory";
 import CategoryFaqIndex from "../admin/partials/categoryfaq/CategoryFaqIndex";
+import AdminChangePassword from "../admin/profile/AdminChangePassword";
 
 
 
@@ -46,6 +47,7 @@ export default class RoutePath  extends Component{
                     <Route exact path="/dashboard/profile/" component={AdminProfileUserAdmin} />
                     <Route exact path="/dashboard/profile/edit/" component={AdminProfileUserEdit} />
                     <Route exact path="/dashboard/profile/add_info/:profile/edit/" component={DashboardProfileEdit} />
+                    <Route exact path="/dashboard/profile/change_password" component={AdminChangePassword} />
                     <Route exact path="/dashboard/faqs/" component={FaqIndex} />
                     <Route exact path="/dashboard/faqs/v1/all/" component={FaqAdminSite} />
                     <Route exact path="/dashboard/faqs/create/" component={FaqCreate} />

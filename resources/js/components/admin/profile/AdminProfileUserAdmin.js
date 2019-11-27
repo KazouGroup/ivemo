@@ -76,7 +76,7 @@ export default class AdminProfileUserAdmin extends Component {
                                                     </Link>
                                                 </li>
                                                 <li className="breadcrumb-item"><Link to={'/dashboard/'}>Dashboards</Link></li>
-                                                <li className="breadcrumb-item active" aria-current="page">profile</li>
+                                                <li className="breadcrumb-item active" aria-current="page">{user.first_name}</li>
                                             </ol>
                                         </nav>
                                     </div>

@@ -177,10 +177,10 @@ export default class TopNavAdmin extends Component {
                                         <i className="ni ni-settings-gear-65"></i>
                                         <span>Settings</span>
                                     </Link>
-                                    <a href="#" className="dropdown-item">
+                                    <Link to={'/dashboard/profile/change_password'} className="dropdown-item">
                                         <i className="ni ni-calendar-grid-58"></i>
-                                        <span>Activity</span>
-                                    </a>
+                                        <span>Change Password</span>
+                                    </Link>
                                     <a href="#" className="dropdown-item">
                                         <i className="ni ni-support-16"></i>
                                         <span>Support</span>
