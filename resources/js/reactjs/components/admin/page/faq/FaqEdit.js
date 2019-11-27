@@ -169,7 +169,7 @@ export default class FaqEdit extends Component {
                     <div className="container-fluid mt--6">
 
                         <div className="row justify-content-center">
-                            <div className="col-lg-8 card-wrapper ct-example">
+                            <div className="col-lg-10 card-wrapper ct-example">
 
                                 <div className="card">
                                     <div className="card-header">

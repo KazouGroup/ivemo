@@ -40,7 +40,7 @@ class FaqIndex extends Component {
                 this.setState({faqs: updatedItems});
 
                 //Envoyer la requet au server
-                axios.delete(`${location.pathname}${id}`).then(() => {
+                axios.delete(`/dashboard/faqs/${id}`).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
