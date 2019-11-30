@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Profile\PasswordRequest;
+use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\Profile\UpdateRequest;
 use App\Http\Resources\ProfileResource;
 use App\model\profile;
