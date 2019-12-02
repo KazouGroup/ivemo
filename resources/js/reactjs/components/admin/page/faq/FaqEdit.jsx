@@ -163,7 +163,7 @@ export default class FaqEdit extends Component {
                                                     </div>
                                                     <br/>
                                                     <div className="card-body">
-                                                        <form onSubmit={this.createItem}>
+                                                        <form onSubmit={this.updateItem}>
                                                             <div className="row">
                                                                 <div className="col-md-6">
                                                                     <div className="form-group">
