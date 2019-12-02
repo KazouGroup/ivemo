@@ -3,7 +3,13 @@ import NavAdmin from "../../../inc/admin/NavAdmin";
 import TopNavAdmin from "../../../inc/admin/TopNavAdmin";
 import {Link, NavLink} from "react-router-dom";
 import FooterAdmin from "../../../inc/admin/FooterAdmin";
-import ReactQuill from "react-quill";
+import {
+    CardHeader,
+    FormGroup,
+    Input,
+    Row,
+    Col
+} from "reactstrap";
 
 class PermissionEdit extends Component  {
     constructor (props) {
@@ -130,27 +136,32 @@ class PermissionEdit extends Component  {
                             <div className="col-lg-8 card-wrapper ct-example">
 
                                 <div className="card">
-                                    <div className="card-header">
+                                    <CardHeader>
                                         <h3 className="mb-0">{this.state.name}</h3>
-                                    </div>
+                                    </CardHeader>
                                     <div className="card-body">
                                         <form onSubmit={this.updateItem}>
-                                            <div className="row">
-                                                <div className="col-md-12">
-                                                    <div className="form-group">
-                                                        <label className="form-control-label">Name</label>
-                                                        <input id='name' required={'required'}
-                                                               type='text'
-                                                               className={`form-control ${this.hasErrorFor('name') ? 'is-invalid' : ''}`}
-                                                               name='name'
-                                                               value={this.state.name}
-                                                               onChange={this.handleFieldChange}
+                                            <Row>
+                                                <Col md="12">
+                                                    <FormGroup>
+                                                        <label
+                                                            className="form-control-label"
+                                                            htmlFor="example3cols3Input"
+                                                        >
+                                                            Name permission
+                                                        </label>
+                                                        <Input
+                                                            id='name' required={'required'}
+                                                            type='text'
+                                                            className={`form-control ${this.hasErrorFor('name') ? 'is-invalid' : ''}`}
+                                                            name='name'
+                                                            value={this.state.name}
+                                                            onChange={this.handleFieldChange}
                                                         />
                                                         {this.renderErrorFor('name')}
-                                                    </div>
-                                                </div>
-                                            </div>
-
+                                                    </FormGroup>
+                                                </Col>
+                                            </Row>
                                             <div className="submit">
                                                 <div className="text-center">
                                                     <Link to={'/dashboard/permissions/'} className="btn btn-icon btn-secondary" type="submit">

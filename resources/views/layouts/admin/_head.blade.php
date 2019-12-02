@@ -20,20 +20,16 @@
     'permissions' => auth()->user()->getAllPermissions(),
     ]) !!}
 </script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-<!-- BEGIN: Vendor CSS-->
-<!-- Icons -->
-<link rel="stylesheet" href="/assets/dashboard/assets/vendor/nucleo/css/nucleo.css" type="text/css">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/admin/assets/img/apple-icon.png">
+<link rel="icon" type="image/png" href="/assets/admin/assets/img/favicon.png">
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+<!--     Fonts and icons     -->
+
+<!--     Fonts and icons     -->
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-<link rel="stylesheet" href="/assets/dashboard/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css"/>
-<!-- Page plugins -->
-<link rel="stylesheet" href="/assets/dashboard/assets/vendor/animate.css/animate.min.css">
-<link rel="stylesheet" href="/assets/dashboard/assets/vendor/sweetalert2/dist/sweetalert2.min.css">
-<link rel="stylesheet" href="/assets/dashboard/assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="/assets/dashboard/assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
-<link rel="stylesheet" href="/assets/dashboard/assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css">
-<!-- Argon CSS -->
-<link rel="stylesheet" href="/assets/dashboard/assets/css/argon.css?v=1.1.0" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<!-- CSS Files -->
+<link href="/assets/admin/assets/css/material-dashboard.min.css?v=2.1.0" rel="stylesheet" />
 @notifyCss
 @section('style')
     @show
