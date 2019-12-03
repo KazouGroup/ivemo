@@ -108,7 +108,7 @@ class NavAdmin extends Component {
                                 </ul>
                             </div>
                         </li>
-                        <li className="nav-item ">
+                        <li className={`nav-item ${this.activeRoute('/dashboard/permissions/','/dashboard/roles/')}`}>
                             <a className="nav-link" data-toggle="collapse" href="#administrationExamples">
                                 <i className="material-icons">person_outline</i>
                                 <p><b>Administrations</b>
@@ -117,13 +117,13 @@ class NavAdmin extends Component {
                             </a>
                             <div className="collapse" id="administrationExamples">
                                 <ul className="nav">
-                                    <li className="nav-item">
+                                    <li className={`nav-item ${this.activeRoute('/dashboard/permissions/')}`}>
                                         <NavLink to={'/dashboard/permissions/'} className="nav-link">
                                             <span className="sidebar-mini"><b>PM</b></span>
                                             <span className="sidebar-normal"><b>Permissions</b></span>
                                         </NavLink>
                                     </li>
-                                    <li className="nav-item">
+                                    <li className={`nav-item ${this.activeRoute('/dashboard/roles/')}`}>
                                         <NavLink to={'/dashboard/roles/'} className="nav-link">
                                             <span className="sidebar-mini"><b>RL</b></span>
                                             <span className="sidebar-normal"><b>Roles</b></span>

@@ -26,7 +26,7 @@ import TestimonialIdex from "../components/admin/page/testimonial/TestimonialIde
 import TestimonialEdit from "../components/admin/page/testimonial/TestimonialEdit";
 import TestimonialView from "../components/admin/page/testimonial/TestimonialView";
 import CategoryFaqIndex from "../components/admin/partials/categoryfaq/CategoryFaqIndex";
-import Error404 from "../components/inc/error/Error404";
+
 
 
 
@@ -59,7 +59,7 @@ const RouteDashboard = props => (
         <Route exact path="/dashboard/testimonials/:id/edit" component={TestimonialEdit}/>
         <Route exact path="/dashboard/testimonials/v/:testimonial/" component={TestimonialView}/>
         <Route exact path="/dashboard/categories_faqs/" component={CategoryFaqIndex}/>
-        <Route path="*" component={Error404}/>
+
     </Switch>
 );
 export default RouteDashboard;

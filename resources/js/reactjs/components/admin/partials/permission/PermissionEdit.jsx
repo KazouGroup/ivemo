@@ -4,14 +4,12 @@ import TopNavAdmin from "../../../inc/admin/TopNavAdmin";
 import {Link, NavLink} from "react-router-dom";
 import FooterAdmin from "../../../inc/admin/FooterAdmin";
 import {
-    CardHeader,
     FormGroup,
     Input,
     Row,
     Col
 } from "reactstrap";
 import StatusAdmin from "../../../inc/admin/StatusAdmin";
-import ReactQuill from "react-quill";
 
 class PermissionEdit extends Component  {
     constructor (props) {

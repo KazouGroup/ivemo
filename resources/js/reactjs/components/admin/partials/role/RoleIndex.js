@@ -2,8 +2,9 @@ import React, { Component} from "react";
 import NavAdmin from "../../../inc/admin/NavAdmin";
 import TopNavAdmin from "../../../inc/admin/TopNavAdmin";
 import FooterAdmin from "../../../inc/admin/FooterAdmin";
-import {Link} from "react-router-dom";
 import RoleLists from "./RoleLists";
+import StatusAdmin from "../../../inc/admin/StatusAdmin";
+import {Button, Card, Row} from "reactstrap";
 
 
 
@@ -13,6 +14,7 @@ class RoleIndex extends Component {
         super();
         this.state = {
             color_name:'',
+            user: [],
             roles: [],
         };
         // bind
@@ -20,18 +22,14 @@ class RoleIndex extends Component {
 
     mydatatables(){
         $( function () {
-            $('#datatable-buttons').DataTable({
+            $('#datatable').DataTable({
+                "pagingType": "full_numbers",
                 responsive: true,
                 destroy: true,
                 retrieve:true,
                 autoFill: true,
                 colReorder: true,
-                language: {
-                    paginate: {
-                        previous: "<i class='fas fa-angle-left'>",
-                        next: "<i class='fas fa-angle-right'>"
-                    }
-                },
+                "sPaginationType": "full_numbers",
 
             });
         });
@@ -48,10 +46,7 @@ class RoleIndex extends Component {
                     error
                 });
             });
-        axios.get(`/account/user`).then(response =>
-            this.setState({
-                color_name: response.data.color_name,
-            }));
+        axios.get(`/account/user`).then(response => this.setState({user: response.data}));
     }
     reload(){
         this.loadItems()
@@ -63,111 +58,117 @@ class RoleIndex extends Component {
     }
 
     render() {
-        const { roles } = this.state;
+        const { roles,user } = this.state;
         return(
-            <div className="wrapper">
-
+            <>
                 <NavAdmin/>
-
-                <div className="main-content" id="panel">
-
+                <div className={'main-panel'}>
                     <TopNavAdmin/>
-
-                    <div className={`header pb-6 bg-primary`}>
+                    <div className={'content'}>
                         <div className="container-fluid">
-                            <div className="header-body">
-                                <div className="row align-items-center py-4">
-                                    <div className="col-lg-6 col-7">
-                                        <h6 className="h2 text-white d-inline-block mb-0">Ivemo</h6>
-                                        <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
-                                            <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
-                                                <li className="breadcrumb-item"><Link to={'/dashboard/'}><i className="fas fa-home"></i></Link></li>
-                                                <li className="breadcrumb-item"><Link to={'/dashboard/'}>Dashboards</Link></li>
-                                                <li className="breadcrumb-item active" aria-current="page">Roles</li>
-                                            </ol>
-                                        </nav>
-                                    </div>
-                                    <div className="col-lg-6 col-5 text-right">
-                                        <button type={'button'}  className="btn btn-sm btn-neutral">New</button>
-                                        <button type={'button'} onClick={() => this.reload()} className="btn btn-sm btn-neutral">Refresh</button>
-                                    </div>
-                                </div>
-
-                                <div className="row">
-                                    <div className="col-xl-12 col-md-12">
-                                        <div className="card card-stats">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col">
-                                                        <h5 className="card-title text-uppercase text-muted mb-0">Roles</h5>
-                                                        <span className="h2 font-weight-bold mb-0">{roles.length}</span>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <div
-                                                            className="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                                                            <i className="ni ni-money-coins"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <p className="mt-3 mb-0 text-sm">
-                                                    <span className="text-success mr-2"><i
-                                                        className="fa fa-arrow-up"></i> 3.48%</span>
-                                                    <span className="text-nowrap">Since last month</span>
-                                                </p>
+                            <b/>
+                            <StatusAdmin key={user.id} {...user}/>
+                            <b/>
+                            <div className="row">
+                                <div className="col-md-12 expo">
+                                    <div className="card card-stats">
+                                        <div className={`card-header card-header-icon card-header-${user.color_name}`}>
+                                            <div className="card-icon">
+                                                <i className="material-icons">forum</i>
+                                            </div>
+                                            <p className="card-category"><b>Roles</b></p>
+                                            <h3 className="card-title"><b>{roles.length}</b></h3>
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="stats">
+                                                <i className="material-icons">forum</i><b>Roles</b>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div className="container-fluid mt--6">
+                            <div className="row">
+                                <div className="col-md-12 expo">
+                                    <Card>
+                                        <div className={`card-header card-header-${user.color_name}`}>
+                                            <Row>
+                                                <div className="col-md-6">
+                                                    <h4 className="card-title">
+                                                        <b>Datatables Permissions</b>
+                                                    </h4>
+                                                    <p className="card-title">
+                                                        Permissions Available
+                                                    </p>
+                                                </div>
+                                                <div className="col-md-6 text-right">
+                                                    <span>
+                                                        <i id="tooltipSize" className="material-icons">forum</i>
+                                                    </span>
+                                                </div>
+                                            </Row>
+                                        </div>
+                                        <div className="card-body">
+                                            <div className="header text-right">
 
-                        <div className="row">
-                            <div className="col">
-                                <div className="card">
-                                    <div className="card-header">
-                                        <h3 className="mb-0">Roles</h3>
-                                        <p className="text-sm mb-0">
-                                            Roles informations
-                                        </p>
-                                    </div>
-                                    <div className="table-responsive py-4">
-                                        <table  className="table table-flush" id="datatable-buttons">
-                                            <thead className="thead-light">
-                                            <tr>
-                                                <th><b>Name</b></th>
-                                                <th><b>Guard name</b></th>
-                                                <th><b>Last Updated</b></th>
-                                                <th className="disabled-sorting text-right">Actions</th>
-                                            </tr>
-                                            </thead>
-                                            <tfoot>
-                                            <tr>
-                                                <th><b>Name</b></th>
-                                                <th><b>Guard name</b></th>
-                                                <th><b>Last Updated</b></th>
-                                                <th className="disabled-sorting text-right">Actions</th>
-                                            </tr>
-                                            </tfoot>
-                                            <tbody>
-                                            {roles.map((item) => (
-                                                <RoleLists key={item.id} {...item}/>
-                                            ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                <button onClick={() => this.reload()}
+                                                        className="btn btn-success btn-raised button_note btn-sm"
+                                                        title="Refresh Page">
+                                                    <i className="material-icons">replay</i>
+                                                    <b className="title_hover">Refresh</b>
+                                                </button>
+                                            </div>
+                                            <br/>
+                                            <div className="material-datatables">
+                                                <div className="toolbar">
 
+                                                    <div className="submit text-center">
+
+                                                        <button onClick={() => this.newModal()}
+                                                                className="btn btn-success btn-raised button_note btn-sm"
+                                                                title="Refresh Page">
+                                                            <i className="material-icons">forum</i>
+                                                            <b className="title_hover">New permission</b>
+                                                        </button>
+
+                                                    </div>
+
+                                                </div>
+                                                <table id="datatable"
+                                                       className="table table-striped table-no-bordered table-hover"
+                                                       cellSpacing="0" width="100%">
+                                                    <thead>
+                                                    <tr>
+                                                        <th><b>Name</b></th>
+                                                        <th><b>Guard name</b></th>
+                                                        <th><b>Last Updated</b></th>
+                                                        <th className="disabled-sorting text-right">Actions</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                    <tr>
+                                                        <th><b>Name</b></th>
+                                                        <th><b>Guard name</b></th>
+                                                        <th><b>Last Updated</b></th>
+                                                        <th className="disabled-sorting text-right">Actions</th>
+                                                    </tr>
+                                                    </tfoot>
+                                                    <tbody>
+                                                    {roles.map((item) => (
+                                                        <RoleLists key={item.id} {...item}/>
+                                                    ))}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </Card>
                                 </div>
                             </div>
                         </div>
-
-                        <FooterAdmin/>
                     </div>
+                    <FooterAdmin/>
                 </div>
-
-            </div>
+            </>
         )
     }
 }
