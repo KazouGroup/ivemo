@@ -8,7 +8,7 @@ import {
   whiteColor,
   blackColor,
   hexToRgb
-} from "assets/jss/material-dashboard-pro-react.js";
+} from "../../material-dashboard-pro-react.js";
 const cardHeaderStyle = {
   cardHeader: {
     padding: "0.75rem 1.25rem",

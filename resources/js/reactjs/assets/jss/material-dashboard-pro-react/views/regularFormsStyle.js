@@ -2,8 +2,8 @@ import {
   cardTitle,
   successColor,
   dangerColor
-} from "assets/jss/material-dashboard-pro-react.js";
-import customCheckboxRadioSwitch from "assets/jss/material-dashboard-pro-react/customCheckboxRadioSwitch.js";
+} from "../../material-dashboard-pro-react.js";
+import customCheckboxRadioSwitch from "../../material-dashboard-pro-react/customCheckboxRadioSwitch.js";
 
 const regularFormsStyle = {
   ...customCheckboxRadioSwitch,

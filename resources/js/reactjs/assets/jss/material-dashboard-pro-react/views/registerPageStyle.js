@@ -4,9 +4,9 @@ import {
   blackColor,
   hexToRgb,
   grayColor
-} from "assets/jss/material-dashboard-pro-react.js";
+} from "../../material-dashboard-pro-react.js";
 
-import customCheckboxRadioSwitch from "assets/jss/material-dashboard-pro-react/customCheckboxRadioSwitch.js";
+import customCheckboxRadioSwitch from "../../material-dashboard-pro-react/customCheckboxRadioSwitch.js";
 
 const registerPageStyle = {
   ...customCheckboxRadioSwitch,

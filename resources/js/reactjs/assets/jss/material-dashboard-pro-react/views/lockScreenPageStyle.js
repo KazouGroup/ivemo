@@ -4,7 +4,7 @@ import {
   whiteColor,
   blackColor,
   hexToRgb
-} from "assets/jss/material-dashboard-pro-react.js";
+} from "../../material-dashboard-pro-react.js";
 
 const lockScreenPageStyle = theme => ({
   cardTitle,

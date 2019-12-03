@@ -1,4 +1,4 @@
-import { title, whiteColor } from "assets/jss/material-dashboard-pro-react.js";
+import { title, whiteColor } from "../../material-dashboard-pro-react.js";
 
 const errorPageStyles = () => ({
   contentCenter: {

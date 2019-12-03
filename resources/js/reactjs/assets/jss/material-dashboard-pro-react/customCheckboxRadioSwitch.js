@@ -6,7 +6,7 @@ import {
   blackColor,
   whiteColor,
   hexToRgb
-} from "assets/jss/material-dashboard-pro-react.js";
+} from "../material-dashboard-pro-react.js";
 
 const customCheckboxRadioSwitch = {
   checkRoot: {

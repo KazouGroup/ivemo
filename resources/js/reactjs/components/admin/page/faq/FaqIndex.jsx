@@ -282,7 +282,7 @@ class FaqIndex extends Component {
                                                                 </Button>{" "}
                                                                 <Link to={'/dashboard/faqs/' + item.id + '/edit/'}
                                                                       className="btn btn-link btn-success btn-round btn-just-icon"
-                                                                      title="Show">
+                                                                      title="Edit">
                                                                     <i className="material-icons">edit</i>
                                                                 </Link>
                                                                 <Button onClick={() => this.deleteItem(item.id)}

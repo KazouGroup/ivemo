@@ -7,7 +7,7 @@ import {
   roseColor,
   grayColor,
   whiteColor
-} from "assets/jss/material-dashboard-pro-react.js";
+} from "../../material-dashboard-pro-react.js";
 
 const badgeStyle = {
   badge: {

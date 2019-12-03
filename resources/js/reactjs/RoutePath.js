@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Switch,HashRouter , Route, Link } from 'react-router-dom';
 import FaqIndex from "./components/admin/page/faq/FaqIndex";
 import FaqCreate from "./components/admin/page/faq/FaqCreate";
 import FaqEdit from "./components/admin/page/faq/FaqEdit";
@@ -31,6 +31,8 @@ import AdminChangePassword from "./components/admin/profile/AdminChangePassword"
 
 import "./assets/scss/material-dashboard-pro-react.scss?v=1.8.0";
 
+import "./assets/jss/material-dashboard-pro-react.js?v=1.8.0";
+
 export default class RoutePath  extends Component{
     render(){
         return(
@@ -47,7 +49,7 @@ export default class RoutePath  extends Component{
                     <Route exact path="/dashboard/profile/edit/" component={AdminProfileUserEdit} />
                     <Route exact path="/dashboard/profile/add_info/:profile/edit/" component={DashboardProfileEdit} />
                     <Route exact path="/dashboard/profile/change_password" component={AdminChangePassword} />
-                    <Route exact path="/dashboard/faqs/" component={FaqIndex} />
+                    <Route exact  path="/dashboard/faqs/" component={FaqIndex} />
                     <Route exact path="/dashboard/faqs/v1/all/" component={FaqAdminSite} />
                     <Route exact path="/dashboard/faqs/create/" component={FaqCreate} />
                     <Route exact path="/dashboard/faqs/:faq/edit/" component={FaqEdit} />
