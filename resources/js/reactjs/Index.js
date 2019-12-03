@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
-import RouterSite from "./RouterSite";
+import RouteDashboard from "./router/RouteDashboard";
+import RouteUser from "./router/RouteUser";
 
 class Index extends Component {
     render() {
         return (
             <BrowserRouter>
-                <Route component={RouterSite} />
+                <Route component={RouteDashboard} />
+                <Route component={RouteUser} />
             </BrowserRouter>
         );
     }
