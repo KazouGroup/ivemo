@@ -93,7 +93,7 @@
 /*! no exports provided */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/Users/boclairtemgoua/sites/projet/ivemo/resources/js/app.js'");
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/Index.js):\nError: ENOENT: no such file or directory, open '/Users/boclairtemgoua/sites/projet/ivemo/resources/js/app.js'");
 
 /***/ }),
 

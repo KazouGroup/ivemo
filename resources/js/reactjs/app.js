@@ -12,7 +12,7 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./RoutePath');
+require('./Index');
 
 
 import 'react-quill/dist/quill.snow.css';
