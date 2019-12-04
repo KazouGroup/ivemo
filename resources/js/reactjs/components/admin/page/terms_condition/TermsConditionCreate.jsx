@@ -5,11 +5,8 @@ import StatusAdmin from "../../../inc/admin/StatusAdmin";
 import {Link} from "react-router-dom";
 import ReactQuill from "react-quill";
 import FooterAdmin from "../../../inc/admin/FooterAdmin";
-// react component plugin for creating a beautiful datetime dropdown picker
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 
-import FormControl from "@material-ui/core/FormControl";
+
 
 class TermsConditionCreate extends Component {
     constructor () {
@@ -17,7 +14,6 @@ class TermsConditionCreate extends Component {
         this.state = {
             title:'',
             body:'',
-            date_save:'',
             user: [],
             errors: [],
         };
@@ -43,20 +39,10 @@ class TermsConditionCreate extends Component {
         ];
         // bind
         this.createItem = this.createItem.bind(this);
-        this.dateChange = this.dateChange.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.handleChangeBody = this.handleChangeBody.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
-    }
-
-    dateChange(date) {
-        this.setState({
-                date: date
-            },
-            () => {
-                console.log(this.state.date);
-            });
     }
     // handle change
     handleChangeBody(value) {
@@ -166,7 +152,7 @@ class TermsConditionCreate extends Component {
                                                         </div>
                                                         <form onSubmit={this.createItem}>
                                                             <div className="row">
-                                                                <div className="col-md-6">
+                                                                <div className="col-md-12">
                                                                     <div className="form-group">
                                                                         <label></label>
                                                                         <input required={'required'}
@@ -179,13 +165,6 @@ class TermsConditionCreate extends Component {
                                                                                onChange={this.handleFieldChange}
                                                                         />
                                                                         {this.renderErrorFor('title')}
-                                                                    </div>
-                                                                </div>
-                                                                <div className="col-md-6">
-                                                                    <div className="form-group">
-                                                                        <label></label>
-                                                                        <DatePicker selected={this.state.date} onChange={this.dateChange}/>
-                                                                        {this.renderErrorFor('date_save')}
                                                                     </div>
                                                                 </div>
                                                             </div>

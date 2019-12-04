@@ -27,7 +27,7 @@ class TermsConditionController extends Controller
      */
     public function index()
     {
-        return view('terms_condition.index');
+        return view('admin.terms_condition.index');
     }
 
     public function api()
