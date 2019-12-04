@@ -280,7 +280,12 @@ class FaqIndex extends Component {
                                                                         <span className="toggle"/>
                                                                     </label>
                                                                 </Button>{" "}
-                                                                <Link to={'/dashboard/faqs/' + item.id + '/edit/'}
+                                                                <Link to={`/dashboard/faqs/v/${item.slug}`}
+                                                                      className="btn btn-link btn-warning btn-round btn-just-icon"
+                                                                      title="Show">
+                                                                    <i className="material-icons">visibility</i>
+                                                                </Link>
+                                                                <Link  to={'/dashboard/faqs/' + item.id + '/edit/'}
                                                                       className="btn btn-link btn-success btn-round btn-just-icon"
                                                                       title="Edit">
                                                                     <i className="material-icons">edit</i>

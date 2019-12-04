@@ -163,6 +163,18 @@ export default class FaqEdit extends Component {
                                                     </div>
                                                     <br/>
                                                     <div className="card-body">
+                                                        <div className="submit">
+                                                            <div className="text-right">
+                                                                <Link to={'/dashboard/faqs/'} className="btn btn-primary btn-sm" id="button_hover">
+                                                                    <i className="material-icons">chevron_left</i>
+                                                                    <b className="title_hover">Back</b>
+                                                                </Link>
+                                                                <Link to={'/dashboard/faqs/create/'} className="btn btn-info btn-sm" id="button_hover">
+                                                                    <i className="material-icons">forum</i>
+                                                                    <b className="title_hover">New FAQS</b>
+                                                                </Link>
+                                                            </div>
+                                                        </div>
                                                         <form onSubmit={this.updateItem}>
                                                             <div className="row">
                                                                 <div className="col-md-6">

@@ -156,6 +156,14 @@ class TestimonialEdit extends Component {
                                                     </div>
                                                     <br/>
                                                     <div className="card-body">
+                                                        <div className="submit">
+                                                            <div className="text-right">
+                                                                <Link to={'/dashboard/testimonials/'} className="btn btn-primary btn-sm" id="button_hover">
+                                                                    <i className="material-icons">chevron_left</i>
+                                                                    <b className="title_hover">Back</b>
+                                                                </Link>
+                                                            </div>
+                                                        </div>
                                                         <form onSubmit={this.updateItem}>
                                                             <div className="row">
                                                                 <div className="col-md-12">

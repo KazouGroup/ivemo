@@ -14,8 +14,8 @@ class Index extends Component {
         );
     }
 }
-ReactDOM.render(
-    <Index />
-    , document.getElementById('root')
-);
+
+if (document.getElementById('root')) {
+    ReactDOM.render(<Index />, document.getElementById('root'));
+}
 export default Index;

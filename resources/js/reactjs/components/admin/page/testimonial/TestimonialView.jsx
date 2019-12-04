@@ -47,7 +47,7 @@ export default class TestimonialView extends Component {
                                         <div className="card-body">
                                             <div className="submit">
                                                 <div className="text-right">
-                                                    <Link to={'/dashboard/testimonials'} className="btn btn-primary btn-sm" id="button_hover">
+                                                    <Link to={'/dashboard/testimonials/'} className="btn btn-primary btn-sm" id="button_hover">
                                                         <i className="material-icons">chevron_left</i>
                                                         <b className="title_hover">Back</b>
                                                     </Link>

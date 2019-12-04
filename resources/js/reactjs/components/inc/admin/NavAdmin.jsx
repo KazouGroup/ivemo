@@ -84,7 +84,7 @@ class NavAdmin extends Component {
                                 <p><b>Dashboard</b></p>
                             </NavLink>
                         </li>
-                        <li className={`nav-item ${this.activeRoute('/dashboard/faqs/','/dashboard/categoryfaqs/')}`}>
+                        <li className={`nav-item ${this.activeRoute('/dashboard/faqs/','/dashboard/categories_faqs/')}`}>
                             <a className="nav-link" data-toggle="collapse" href="#faqsExamples">
                                 <i className="material-icons">contact_support</i>
                                 <p><b>FAQs</b>
@@ -93,8 +93,8 @@ class NavAdmin extends Component {
                             </a>
                             <div className="collapse" id="faqsExamples">
                                 <ul className="nav">
-                                    <li className={`nav-item ${this.activeRoute('/dashboard/categoryfaqs/')}`}>
-                                        <NavLink to={'/dashboard/categoryfaqs/'} className="nav-link">
+                                    <li className={`nav-item ${this.activeRoute('/dashboard/categories_faqs/')}`}>
+                                        <NavLink to={'/dashboard/categories_faqs/'} className="nav-link">
                                             <span className="sidebar-mini"><b>CF</b></span>
                                             <span className="sidebar-normal"><b>Category FAQs</b></span>
                                         </NavLink>
@@ -142,7 +142,7 @@ class NavAdmin extends Component {
 }
 NavAdmin.defaultProps = {
     showNotification: false,
-    backColor: "orange",
+    backColor: "green",
     backgroundColor: "black",
     minimizeSidebar: () => {}
 };
@@ -152,10 +152,13 @@ NavAdmin.propTypes = {
     showNotification: PropTypes.bool,
     // background color for the component
     backgroundColor: PropTypes.oneOf([
+        "azure",
         "blue",
         "black",
-        "yellow",
+        "purple",
+        "danger",
         "green",
+        "yellow",
         "orange",
         "red"
     ]),
