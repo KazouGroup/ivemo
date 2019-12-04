@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Model;
+
+use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Auditable as AuditableTrait;
+use OwenIt\Auditing\Contracts\Auditable;
+
+class termscondition extends Model implements Auditable
+{
+    use AuditableTrait;
+    protected $fillable = ['title','body','slug'];
+
+    protected $table = 'terms_conditions';
+
+    /**
+     * @return array
+     */
+    public function generateTags(): array
+    {
+        return [
+            $this->title,
+        ];
+    }
+
+    use Sluggable;
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title',
+                'separator' => '+'
+            ]
+
+        ];
+    }
+}

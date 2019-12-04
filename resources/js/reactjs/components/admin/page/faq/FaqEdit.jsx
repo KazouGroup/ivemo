@@ -97,7 +97,7 @@ export default class FaqEdit extends Component {
                 },
             });
             //Redirect after create
-            this.props.history.push('/dashboard/faqs');
+            this.props.history.push('/dashboard/faqs/');
 
         }).catch(error => {
             this.setState({

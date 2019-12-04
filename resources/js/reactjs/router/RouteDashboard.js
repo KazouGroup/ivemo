@@ -26,6 +26,9 @@ import TestimonialIdex from "../components/admin/page/testimonial/TestimonialIde
 import TestimonialEdit from "../components/admin/page/testimonial/TestimonialEdit";
 import TestimonialView from "../components/admin/page/testimonial/TestimonialView";
 import CategoryFaqIndex from "../components/admin/partials/categoryfaq/CategoryFaqIndex";
+import TermsConditionIndex from "../components/admin/page/terms_condition/TermsConditionIndex";
+import TermsConditionCreate from "../components/admin/page/terms_condition/TermsConditionCreate";
+import TermsConditionEdit from "../components/admin/page/terms_condition/TermsConditionEdit";
 
 
 
@@ -59,6 +62,9 @@ const RouteDashboard = props => (
         <Route exact path="/dashboard/testimonials/:id/edit" component={TestimonialEdit}/>
         <Route exact path="/dashboard/testimonials/v/:testimonial/" component={TestimonialView}/>
         <Route exact path="/dashboard/categories_faqs/" component={CategoryFaqIndex}/>
+        <Route exact path="/dashboard/terms_conditions/" component={TermsConditionIndex}/>
+        <Route exact path="/dashboard/terms_conditions/create/" component={TermsConditionCreate}/>
+        <Route exact path="/dashboard/terms_conditions/:id/edit/" component={TermsConditionEdit}/>
 
     </Switch>
 );

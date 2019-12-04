@@ -132,6 +132,24 @@ class NavAdmin extends Component {
                                 </ul>
                             </div>
                         </li>
+                        <li className={`nav-item ${this.activeRoute('/dashboard/terms_conditions/')}`}>
+                            <a className="nav-link" data-toggle="collapse" href="#TermCondition">
+                                <i className="material-icons">forum</i>
+                                <p><b>Condition</b>
+                                    <b className="caret"/>
+                                </p>
+                            </a>
+                            <div className="collapse" id="TermCondition">
+                                <ul className="nav">
+                                    <li className={`nav-item ${this.activeRoute('/dashboard/terms_conditions/')}`}>
+                                        <NavLink to={'/dashboard/terms_conditions/'} className="nav-link">
+                                            <span className="sidebar-mini"><b>TC</b></span>
+                                            <span className="sidebar-normal"><b>Term & Condition</b></span>
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
