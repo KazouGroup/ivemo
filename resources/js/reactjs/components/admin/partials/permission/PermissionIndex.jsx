@@ -66,8 +66,10 @@ class PermissionIndex extends Component {
                 //Masquer le modal après la création
                 $('#addNew').modal('hide');
 
+
                 this.setState(prevState => ({
-                    permissions: prevState.permissions.concat(response.data)
+                    //permissions: prevState.permissions.concat(response.data)
+                    permissions: [...prevState.permissions]
                 }));
             }).catch(error => {
                 this.setState({
@@ -272,23 +274,7 @@ class PermissionIndex extends Component {
                                                     </tfoot>
                                                     <tbody>
                                                     {permissions.map((item) => (
-                                                        <tr key={item.id}>
-                                                          <PermissionList key={item.id} {...item}/>
-                                                            <td className="text-right">
-
-                                                                <Link to={`/dashboard/permissions/${item.id}/edit/`} key={item.id}
-                                                                      className="btn btn-link btn-success btn-round btn-just-icon" data-toggle="tooltip"
-                                                                      data-original-title="Edit permissions">
-                                                                    <i className="material-icons">edit</i>
-                                                                </Link>
-
-                                                                <Button onClick={() => this.deleteItem(item.id)}
-                                                                        className="btn btn-link btn-danger btn-round btn-just-icon"
-                                                                        color="danger" size="sm">
-                                                                    <i className="material-icons">delete_forever</i>
-                                                                </Button>{" "}
-                                                            </td>
-                                                        </tr>
+                                                        <PermissionList key={item.id} {...item} deleteItem={this.deleteItem}/>
                                                     ))}
                                                     </tbody>
                                                 </table>
