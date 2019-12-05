@@ -54,10 +54,11 @@ class TermsConditionController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $inputs = $request->all();
 
-        $termscondition = new termscondition();
-        $termscondition->fill($inputs);
+        $termscondition = new termscondition;
+
+        $termscondition->body = $request->body;
+        $termscondition->title = $request->title;
         $termscondition->save();
 
         return response()->json($termscondition);
@@ -71,7 +72,9 @@ class TermsConditionController extends Controller
      */
     public function show($id)
     {
-        //
+        $termscondition = new TermsConditionResource(termscondition::where('id', $id)->findOrFail($id));
+
+        return response()->json($termscondition,200);
     }
 
     /**
@@ -82,7 +85,8 @@ class TermsConditionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $termscondition = termscondition::where('id',$id)->first();
+        return view('admin.terms_condition.show', compact('termscondition'));
     }
 
     public function view($slug)
@@ -95,7 +99,7 @@ class TermsConditionController extends Controller
     public function vector($slug)
     {
         $termscondition = termscondition::where('slug',$slug)->first();
-        return view('admin.faq.show', compact('termscondition'));
+        return view('admin.terms_condition.show', compact('termscondition'));
     }
 
     public function site($slug)
@@ -117,6 +121,17 @@ class TermsConditionController extends Controller
         $termscondition->update($inputs);
     }
 
+    /**
+     * @param termscondition $termscondition
+     * @return array|\Illuminate\Http\JsonResponse
+     */
+    public function status(termscondition $termscondition,$id)
+    {
+        $termscondition = termscondition::where('id', $id)->findOrFail($id);
+        $termscondition->update(['status' => !$termscondition->status]);
+
+        return ['message' => 'Status change successfully'];
+    }
     /**
      * Remove the specified resource from storage.
      *

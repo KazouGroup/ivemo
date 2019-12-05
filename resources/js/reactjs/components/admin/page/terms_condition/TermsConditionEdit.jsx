@@ -157,7 +157,7 @@ class TermsConditionEdit extends Component {
                                                                     <i className="material-icons">chevron_left</i>
                                                                     <b className="title_hover">Back</b>
                                                                 </Link>
-                                                                <Link to={'/dashboard/faqs/create/'} className="btn btn-info btn-sm" id="button_hover">
+                                                                <Link to={'/dashboard/terms_conditions/create/'} className="btn btn-info btn-sm" id="button_hover">
                                                                     <i className="material-icons">forum</i>
                                                                     <b className="title_hover">New Terms & conditions</b>
                                                                 </Link>

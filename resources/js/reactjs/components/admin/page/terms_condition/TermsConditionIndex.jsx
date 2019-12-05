@@ -1,18 +1,18 @@
 import React,{Component} from "react";
-import NavAdmin from "../../../inc/admin/NavAdmin";
-import TopNavAdmin from "../../../inc/admin/TopNavAdmin";
-import StatusAdmin from "../../../inc/admin/StatusAdmin";
 import {Button, Card, Row} from "reactstrap";
 import {Link} from "react-router-dom";
 import moment from "moment";
+import NavAdmin from "../../../inc/admin/NavAdmin";
+import TopNavAdmin from "../../../inc/admin/TopNavAdmin";
+import StatusAdmin from "../../../inc/admin/StatusAdmin";
 import FooterAdmin from "../../../inc/admin/FooterAdmin";
-
 
 
 class TermsConditionIndex extends Component {
     constructor () {
         super();
         this.state = {
+            status:'',
             user: [],
             termsconditions: [],
             error: null
@@ -20,20 +20,7 @@ class TermsConditionIndex extends Component {
         };
 
         this.deleteItem = this.deleteItem.bind(this);
-    }
-    componentDidMount () {
-        axios.get(`/account/user`).then(response => this.setState({user: response.data}));
-        fetch(`/api/terms_conditions`).then(res => res.json())
-            .then((result) => {
-                this.setState({
-                    termsconditions: [...result]
-                });
-                this.mydatatables();
-            }, (error) => {
-                this.setState({
-                    error
-                });
-            })
+        this.changeStatus = this.changeStatus.bind(this);
     }
     mydatatables(){
         $( function () {
@@ -106,6 +93,43 @@ class TermsConditionIndex extends Component {
                 })
             }
         });
+    }
+    // Change status
+    changeStatus(id){
+        axios.get(`/dashboard/change_status_terms_conditions/${id}`)
+            .then(res => {
+                $.notify('<strong>Data has been updated Successfully.</strong>', {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animated fadeInUp",
+                        exit: "animated fadeOutDown"
+                    },
+                });
+                /** End alert ***/
+                this.loadItems();
+            })
+    }
+    loadItems(){
+        axios.get(`/account/user`).then(response => this.setState({user: response.data}));
+        fetch(`/api/terms_conditions`).then(res => res.json())
+            .then((result) => {
+                this.setState({
+                    termsconditions: [...result]
+                });
+                this.mydatatables();
+            }, (error) => {
+                this.setState({
+                    error
+                });
+            })
+    };
+    componentDidMount () {
+        this.loadItems();
     }
     render() {
         const {user,termsconditions} = this.state;

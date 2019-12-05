@@ -16,6 +16,7 @@ class TermsConditionResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'title' => $this->title,
             'body' => $this->body,
             'status' => $this->status,
             'slug' => $this->slug,

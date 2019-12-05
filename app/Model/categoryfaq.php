@@ -13,6 +13,10 @@ class categoryfaq extends Model
     protected $table = 'categories_faqs';
 
 
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

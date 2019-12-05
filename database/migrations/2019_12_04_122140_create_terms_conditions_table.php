@@ -18,7 +18,7 @@ class CreateTermsConditionsTable extends Migration
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
             $table->longText('body')->nullable();
-            $table->boolean('status')->nullable();
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

@@ -10,7 +10,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 class termscondition extends Model implements Auditable
 {
     use AuditableTrait;
-    protected $fillable = ['title','body','slug'];
+    protected $fillable = ['title','body','slug','status'];
 
     protected $table = 'terms_conditions';
 
@@ -23,6 +23,10 @@ class termscondition extends Model implements Auditable
             $this->title,
         ];
     }
+
+    protected $casts = [
+        'status' => 'boolean',
+    ];
 
     use Sluggable;
     /**

@@ -23,6 +23,9 @@ class faq extends Model implements Auditable
             $this->user->name,
         ];
     }
+    protected $casts = [
+        'status' => 'boolean',
+    ];
 
     public static function faqId(string $id): self
     {
