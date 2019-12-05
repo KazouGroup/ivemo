@@ -7,7 +7,6 @@ import moment from "moment";
 import StatusAdmin from "../../../inc/admin/StatusAdmin";
 import {Button, Card, Row} from "reactstrap";
 import PermissionList from "./PermissionList";
-import FaqLists from "../../page/faq/FaqLists";
 
 class PermissionIndex extends Component {
     constructor (props) {
@@ -56,7 +55,8 @@ class PermissionIndex extends Component {
         let permission = {
             name: this.state.name,
         };
-        axios.post('/dashboard/permissions', permission)
+        let url = route('permissions.store');
+        dyaxios.post(url, permission)
             .then(response => {
                 // clear form input
                 this.setState({
@@ -93,8 +93,9 @@ class PermissionIndex extends Component {
         }).then((result) => {
             if (result.value) {
 
+                const url = route('permissions.destroy', id);
                 //Envoyer la requet au server
-                axios.delete(`/dashboard/permissions/${id}`).then(() => {
+                dyaxios.delete(url).then(() => {
 
                     // remove from local state
                     let isNotId = permission => permission.id !== id;
@@ -149,7 +150,7 @@ class PermissionIndex extends Component {
     }
 
     loadItems() {
-        axios.get(`/account/user`).then(response => this.setState({user: response.data}));
+        dyaxios.get(`/account/user`).then(response => this.setState({user: response.data}));
         fetch(`/api/permissions`).then(res => res.json())
             .then((result) => {
                 this.setState({

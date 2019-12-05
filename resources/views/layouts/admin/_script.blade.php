@@ -1,4 +1,4 @@
-
+@routes
 <script src="/assets/admin/assets/js/core/jquery.min.js"></script>
 <script src="/assets/admin/assets/js/core/popper.min.js"></script>
 <script src="/assets/admin/assets/js/core/bootstrap-material-design.min.js"></script>
@@ -24,7 +24,9 @@
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="/assets/admin/assets/js/material-dashboard.js?v=2.1.0" type="text/javascript"></script>
 
+<script src="{{ mix('/js/reactjs/axios.js') }}"></script>
 <script src="{{ mix('/js/reactjs/app.js') }}"></script>
+
 
 
 @include('notify::messages')

@@ -51,7 +51,8 @@ class PermissionEdit extends Component  {
         let permission = {
             name: this.state.name,
         };
-        axios.put(`/dashboard/permissions/${itemId}`, permission).then(() => {
+        let url = route(`permissions.update`, itemId);
+        dyaxios.put(url, permission).then(() => {
 
             /**
              * Init alert
@@ -89,7 +90,7 @@ class PermissionEdit extends Component  {
     loadItems() {
         axios.get(`/account/user`).then(response => this.setState({user: response.data}));
         let itemId = this.props.match.params.permission;
-        axios.get(`/dashboard/permissions/${itemId}`).then(response =>
+        dyaxios.get(route(`permissions.show`,itemId)).then(response =>
             this.setState({
                 name: response.data.name,
             }));
