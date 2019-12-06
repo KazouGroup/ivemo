@@ -132,6 +132,12 @@ class NavAdmin extends Component {
                                 </ul>
                             </div>
                         </li>
+                        <li className={`nav-item ${this.activeRoute('/dashboard/contacts/')}`}>
+                            <NavLink to={'/dashboard/contacts/'} className="nav-link">
+                                <i className="material-icons">import_contacts</i>
+                                <p><b>Contacts</b></p>
+                            </NavLink>
+                        </li>
                         <li className={`nav-item ${this.activeRoute('/dashboard/terms_conditions/')}`}>
                             <a className="nav-link" data-toggle="collapse" href="#TermCondition">
                                 <i className="material-icons">forum</i>
