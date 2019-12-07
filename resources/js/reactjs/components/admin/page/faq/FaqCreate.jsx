@@ -122,6 +122,7 @@ export default class FaqCreate extends Component {
     }
     render() {
         const {user} = this.state;
+        document.title = `FAQS Create New`;
         return (
             <>
                 <NavAdmin/>

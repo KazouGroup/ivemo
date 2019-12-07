@@ -54,6 +54,7 @@ export default class AdminProfileUserAdmin extends Component {
     render() {
         const {user} = this.state;
         return (
+
             <div className="wrapper">
 
                 <NavAdmin/>

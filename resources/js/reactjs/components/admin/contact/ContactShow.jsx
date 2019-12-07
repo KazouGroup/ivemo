@@ -1,4 +1,9 @@
 import React, {Component} from "react";
+import NavAdmin from "../../inc/admin/NavAdmin";
+import TopNavAdmin from "../../inc/admin/TopNavAdmin";
+import StatusAdmin from "../../inc/admin/StatusAdmin";
+import {Link} from "react-router-dom";
+import FooterAdmin from "../../inc/admin/FooterAdmin";
 
 
 class ContactShow extends Component{
@@ -12,23 +17,46 @@ class ContactShow extends Component{
 
     // get all the tasks from backend
     loadItems() {
-        let faqId = this.props.match.params.faq;
+        let itemSlug = this.props.match.params.slug;
         axios.get(`/account/user`).then(response => this.setState({user: response.data}));
-        let url = route('')
-        axios.get(`/dashboard/faqs/${faqId}`).then(response => this.setState({contact: response.data,}));
-        axios.get('/api/categories_faqs').then(response =>
-            this.setState({
-                categories_faqs: [...response.data],
-            }));
+        let url = route('contacts.show',itemSlug);
+        axios.get(url).then(response => this.setState({contact: response.data,}));
     }
     // lifecycle method
     componentDidMount() {
         this.loadItems();
     }
     render() {
+        const {user,contact} = this.state;
+        const composantTitle = `${contact.subject}`;
+        document.title = `${composantTitle}`;
         return(
             <>
+                <NavAdmin/>
+                <div className={'main-panel'}>
+                    <TopNavAdmin/>
+                    <div className={'content'}>
+                        <div className="container-fluid">
+                            <b/>
+                            <StatusAdmin key={user.id} {...user}/>
+                            <b/>
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <div className="container">
+                                        <div className="row">
+                                            <div className="col-md-12 expo">
+                                                <div className="card">
 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <FooterAdmin/>
+                </div>
             </>
         )
     }

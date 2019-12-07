@@ -97,6 +97,8 @@ class ContactIndex extends Component{
 
     render() {
         const {user,contacts} = this.state;
+        const composantTitle = 'Contacts';
+        document.title = `Ivemo - ${composantTitle}`;
         return(
             <>
                 <NavAdmin/>

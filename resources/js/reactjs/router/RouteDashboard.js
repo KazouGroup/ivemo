@@ -30,6 +30,7 @@ import TermsConditionIndex from "../components/admin/page/terms_condition/TermsC
 import TermsConditionCreate from "../components/admin/page/terms_condition/TermsConditionCreate";
 import TermsConditionEdit from "../components/admin/page/terms_condition/TermsConditionEdit";
 import ContactIndex from "../components/admin/contact/ContactIndex";
+import ContactShow from "../components/admin/contact/ContactShow";
 
 
 
@@ -67,7 +68,7 @@ const RouteDashboard = props => (
         <Route exact path="/dashboard/terms_conditions/create/" component={TermsConditionCreate}/>
         <Route exact path="/dashboard/terms_conditions/:id/edit/" component={TermsConditionEdit}/>
         <Route exact path="/dashboard/contacts/" component={ContactIndex}/>
-        <Route exact path="/dashboard/contacts/:slug/" component={ContactIndex}/>
+        <Route exact path="/dashboard/contacts/:slug/" component={ContactShow}/>
 
     </Switch>
 );

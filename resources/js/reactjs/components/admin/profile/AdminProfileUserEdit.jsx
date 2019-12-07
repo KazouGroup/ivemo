@@ -4,6 +4,9 @@ import TopNavAdmin from "../../inc/admin/TopNavAdmin";
 import NavAdmin from "../../inc/admin/NavAdmin";
 import FooterAdmin from "../../inc/admin/FooterAdmin";
 import ReactQuill from "react-quill";
+import StatusAdmin from "../../inc/admin/StatusAdmin";
+import {Card, Row} from "reactstrap";
+import ContactList from "../contact/ContactList";
 
 export default class AdminProfileUserEdit extends Component {
 
@@ -175,205 +178,40 @@ export default class AdminProfileUserEdit extends Component {
     }
 
     render() {
+        document.title = `Profile ${this.state.username}`;
         let { colors } = this.state;
         return (
-
-            <div className="wrapper">
-
+            <>
                 <NavAdmin/>
-
-                <div className="main-content" id="panel">
-
+                <div className={'main-panel'}>
                     <TopNavAdmin/>
-
-                    <div className="header bg-primary pb-6">
+                    <div className="content">
                         <div className="container-fluid">
-                            <div className="header-body">
-                                <div className="row align-items-center py-4">
-                                    <div className="col-lg-6 col-7">
-                                        <h6 className="h2 text-white d-inline-block mb-0">Default</h6>
-                                        <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
-                                            <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
-                                                <li className="breadcrumb-item">
-                                                    <Link to={'/dashboard/'}>
-                                                    <i className="fas fa-home"></i>
-                                                    </Link>
-                                                </li>
-                                                <li className="breadcrumb-item"><Link to={'/dashboard/'}>Dashboards</Link></li>
-                                                <li className="breadcrumb-item active" aria-current="page">profile edit</li>
-                                            </ol>
-                                        </nav>
-                                    </div>
-                                    <div className="col-lg-6 col-5 text-right">
-                                        <a href="#" className="btn btn-sm btn-neutral">New</a>
-                                        <a href="#" className="btn btn-sm btn-neutral">Filters</a>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="container-fluid mt--6">
-
-                        <div className="row">
-
-                            <div className="col-xl-4 order-xl-2">
-
-                                <div className="card card-profile">
-                                    <img src="/assets/dashboard/assets/img/theme/img-1-1000x600.jpg" alt={this.state.first_name }
-                                         className="card-img-top"/>
-                                        <div className="row justify-content-center">
-                                            <div className="col-lg-3 order-lg-2">
-                                                <div className="card-profile-image">
-                                                    <a href="#">
-                                                        <img src={this.state.avatar } alt={this.state.first_name }
-                                                             className="rounded-circle"/>
-                                                    </a>
-                                                </div>
+                            <div className="row">
+                                <div className="col-md-8">
+                                    <div className="card">
+                                        <div className={`card-header card-header-icon card-header-${this.state.color_name}`}>
+                                            <div className="card-icon">
+                                                <i className="material-icons">perm_identity</i>
                                             </div>
+                                            <h4 className="card-title">Profile -
+                                                <small className="category">  {this.state.last_name } {this.state.first_name }</small>
+                                            </h4>
                                         </div>
-                                        <div className="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-                                            <div className="d-flex justify-content-between">
-
-                                                <a href="#" className="btn btn-sm btn-success mr-4">Connect</a>
-                                                <a href="#" className="btn btn-sm btn-default float-right">Message</a>
-                                            </div>
-                                        </div>
-                                        <div className="card-body pt-0">
-                                            <div className="row">
-                                                <div className="col">
-                                                    <div className="card-profile-stats d-flex justify-content-center">
-                                                        <div>
-                                                            <span className="heading">22</span>
-                                                            <span className="description">Friends</span>
-                                                        </div>
-                                                        <div>
-                                                            <span className="heading">10</span>
-                                                            <span className="description">Photos</span>
-                                                        </div>
-                                                        <div>
-                                                            <span className="heading">89</span>
-                                                            <span className="description">Comments</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="text-center">
-                                                <h5 className="h3">
-                                                    {this.state.last_name } {this.state.first_name }<span className="font-weight-light">, 27</span>
-                                                </h5>
-                                                <div className="h5 font-weight-300">
-                                                    <i className="ni location_pin mr-2"></i>Bucharest, Romania
-                                                </div>
-                                                <div className="h5 mt-4" dangerouslySetInnerHTML={{__html: this.state.body}}>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                </div>
-                                <div className="card">
-                                    <div className="card-header">
-                                        <h5 className="h3 mb-0">Progress track</h5>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div className="col-xl-8 order-xl-1">
-                                <div className="row">
-                                    <div className="col-lg-6">
-                                        <div className="card bg-gradient-info border-0">
-                                            <div className="card-body">
+                                        <div className="card-body">
+                                            <form onSubmit={this.updateItem} encType="multipart/form-data" >
                                                 <div className="row">
-                                                    <div className="col">
-                                                        <h5 className="card-title text-uppercase text-muted mb-0 text-white">Total
-                                                            traffic</h5>
-                                                        <span
-                                                            className="h2 font-weight-bold mb-0 text-white">350,897</span>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <div
-                                                            className="icon icon-shape bg-white text-dark rounded-circle shadow">
-                                                            <i className="ni ni-active-40"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <p className="mt-3 mb-0 text-sm">
-                                                    <span className="text-white mr-2"><i className="fa fa-arrow-up"></i> 3.48%</span>
-                                                    <span className="text-nowrap text-light">Since last month</span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="card bg-gradient-danger border-0">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col">
-                                                        <h5 className="card-title text-uppercase text-muted mb-0 text-white">Performance</h5>
-                                                        <span
-                                                            className="h2 font-weight-bold mb-0 text-white">49,65%</span>
-                                                    </div>
-                                                    <div className="col-auto">
-                                                        <div
-                                                            className="icon icon-shape bg-white text-dark rounded-circle shadow">
-                                                            <i className="ni ni-spaceship"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <p className="mt-3 mb-0 text-sm">
-                                                    <span className="text-white mr-2"><i className="fa fa-arrow-up"></i> 3.48%</span>
-                                                    <span className="text-nowrap text-light">Since last month</span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="card">
-                                    <div className="card-header">
-                                        <div className="row align-items-center">
-                                            <div className="col-8">
-                                                <h3 className="mb-0">Edit profile </h3>
-                                            </div>
-                                            <div className="col-4 text-right">
-                                                {this.state.status_user === 1 ?
-                                                    <button type="button" className="btn btn-success btn-sm ">Administrator</button>
-                                                    :
-                                                    <button type="button" className="btn btn-success btn-sm ">User</button>
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="card-body">
-                                        <form onSubmit={this.updateItem} encType="multipart/form-data" >
-                                            <h6 className="heading-small text-muted mb-4">User information</h6>
-                                            <div className="pl-lg-4">
-                                                <div className={'row'}>
-                                                    <div className="dropzone dropzone-single"
-                                                         data-toggle="dropzone" data-dropzone-url="http://">
-                                                        <div className="fallback">
-                                                            <div className="custom-file">
-                                                                <input type="file" className="custom-file-input"
-                                                                       id="projectCoverUploads"/>
-                                                                    <label className="custom-file-label"
-                                                                           htmlFor="projectCoverUploads">Choose
-                                                                        file</label>
-                                                            </div>
-                                                        </div>
-                                                        <div className="dz-preview dz-preview-single">
-                                                            <div className="dz-preview-cover">
-                                                                <img className="dz-preview-img" src="..." alt="..."
-                                                                     data-dz-thumbnail/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-lg-4">
+                                                    <div className="col-md-5">
                                                         <div className="form-group">
-                                                            <label className="form-control-label" htmlFor="input-username">Username</label>
+                                                            <label className="bmd-label-floating">Company
+                                                                (disabled)</label>
+                                                            <input type="text" className="form-control"
+                                                                   disabled/>
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-md-3">
+                                                        <div className="form-group">
+                                                            <label className="form-control-label">Username</label>
                                                             <input required={'required'}
                                                                    id='username'
                                                                    type='text'
@@ -385,9 +223,10 @@ export default class AdminProfileUserEdit extends Component {
                                                             {this.renderErrorFor('username')}
                                                         </div>
                                                     </div>
-                                                    <div className="col-lg-4">
+                                                    <div className="col-md-4">
                                                         <div className="form-group">
-                                                            <label className="form-control-label" htmlFor="input-email">Email address</label>
+                                                            <label className="form-control-label">Email
+                                                                address</label>
                                                             <input required={'required'}
                                                                    id='email'
                                                                    type='email'
@@ -400,24 +239,12 @@ export default class AdminProfileUserEdit extends Component {
                                                             {this.renderErrorFor('email')}
                                                         </div>
                                                     </div>
-                                                    <div className="col-lg-4">
-                                                        <div className="form-group">
-                                                            <label className="form-control-label">Datepicker</label>
-                                                            <input name='birthday'
-                                                                   className={`form-control datepicker ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                                                   placeholder="Select date" type="text"
-                                                                   value={this.state.birthday || ""}
-                                                                   onChange={this.handleFieldChange}
-                                                            />
-                                                            {this.renderErrorFor('email')}
-                                                        </div>
-                                                    </div>
                                                 </div>
                                                 <div className="row">
-                                                    <div className="col-lg-6">
+                                                    <div className="col-md-6">
                                                         <div className="form-group">
-                                                            <label className="form-control-label"
-                                                                   htmlFor="input-first_name">First name</label>
+                                                            <label className="form-control-label">Fist
+                                                                Name</label>
                                                             <input required={'required'}
                                                                    id='first_name'
                                                                    type='text'
@@ -429,10 +256,10 @@ export default class AdminProfileUserEdit extends Component {
                                                             {this.renderErrorFor('first_name')}
                                                         </div>
                                                     </div>
-                                                    <div className="col-lg-6">
+                                                    <div className="col-md-6">
                                                         <div className="form-group">
-                                                            <label className="form-control-label"
-                                                                   htmlFor="input-last_name">Last name</label>
+                                                            <label className="form-control-label">Last
+                                                                Name</label>
                                                             <input id='last_name'
                                                                    type='text'
                                                                    className={`form-control ${this.hasErrorFor('last_name') ? 'is-invalid' : ''}`}
@@ -444,14 +271,10 @@ export default class AdminProfileUserEdit extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <hr className="my-4"/>
-                                            <h6 className="heading-small text-muted mb-4">Contact information</h6>
-                                            <div className="pl-lg-4">
                                                 <div className="row">
                                                     <div className="col-lg-6">
                                                         <div className="form-group">
-                                                            <label className="form-control-label">sex</label>
+                                                            <label></label>
                                                             <select name={'sex'} value={this.state.sex}
                                                                     className={`form-control ${this.hasErrorFor('sex') ? 'is-invalid' : ''}`}
                                                                     onChange={this.handleFieldChange}>
@@ -464,7 +287,7 @@ export default class AdminProfileUserEdit extends Component {
                                                     </div>
                                                     <div className="col-lg-6">
                                                         <div className="form-group">
-                                                            <label className="form-control-label">Color</label>
+                                                            <label></label>
                                                             <select name={'color_name'} value={this.state.color_name}
                                                                     className={`form-control ${this.hasErrorFor('color_name') ? 'is-invalid' : ''}`}
                                                                     onChange={this.handleFieldChange}>
@@ -477,39 +300,54 @@ export default class AdminProfileUserEdit extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <hr className="my-4"/>
-
-                                            <h6 className="heading-small text-muted mb-4">About me</h6>
-                                            <div className="pl-lg-4">
-                                                <div className="form-group">
-                                                    <label className="form-control-label">About Me</label>
-                                                    <ReactQuill theme="snow" modules={this.modules}
-                                                                formats={this.formats}  value={this.state.body || ''} onChange={this.handleChangeBody}/>
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div className="form-group">
+                                                            <label>About Me</label>
+                                                            <div className="form-group">
+                                                                <ReactQuill theme="snow" modules={this.modules}
+                                                                            formats={this.formats}  value={this.state.body || ''} onChange={this.handleChangeBody}/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="text-center">
-                                                <Link to={'/dashboard/profile/'} className={`btn pull-center btn-info`}>
-                                                    Profile
-                                                </Link>
-                                                <Link to={`/dashboard/profile/add_info/${this.state.id}/edit`} className={`btn  pull-center btn-warning`}>
-                                                    Add Info Profile
-                                                </Link>
-                                                <button type="submit" className={`btn pull-center btn-${this.state.color_name}`}>
-                                                    Update Profile
-                                                </button>
-                                            </div>
-                                        </form>
+                                                <div className="text-center">
+                                                    <Link to={'/dashboard/profile/'} className={`btn pull-center btn-info`}>
+                                                        Profile
+                                                    </Link>
+                                                    <Link to={`/dashboard/profile/add_info/${this.state.id}/edit`} className={`btn  pull-center btn-warning`}>
+                                                        Add Info Profile
+                                                    </Link>
+                                                    <button type="submit" className={`btn pull-center btn-${this.state.color_name}`}>
+                                                        Update Profile
+                                                    </button>
+                                                </div>
+                                                <div className="clearfix"/>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-4">
+                                    <div className="card card-profile">
+                                        <div className="card-avatar">
+                                            <a href="#pablo">
+                                                <img className="img" src={this.state.avatar}/>
+                                            </a>
+                                        </div>
+                                        <div className="card-body">
+                                            <h6 className="card-category text-gray">CEO / Co-Founder</h6>
+                                            <h4 className="card-title">{this.state.last_name } {this.state.first_name }</h4>
+                                            <p className="card-description" dangerouslySetInnerHTML={{__html: this.state.body}}/>
+                                            <a href="#pablo" className="btn btn-rose btn-round">Follow</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <FooterAdmin/>
                     </div>
+                    <FooterAdmin/>
                 </div>
-
-            </div>
+            </>
         );
     }
 }

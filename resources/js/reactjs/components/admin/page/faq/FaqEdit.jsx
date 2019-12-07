@@ -135,6 +135,7 @@ export default class FaqEdit extends Component {
     }
     render() {
         const {user} = this.state;
+        document.title = `Edit ${this.state.title}`;
         return (
             <>
                 <NavAdmin/>

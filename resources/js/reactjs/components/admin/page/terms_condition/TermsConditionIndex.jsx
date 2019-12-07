@@ -133,6 +133,8 @@ class TermsConditionIndex extends Component {
     }
     render() {
         const {user,termsconditions} = this.state;
+        const composantTitle = 'Terms & Condition';
+        document.title = `Ivemo - ${composantTitle}`;
         return(
             <>
                 <NavAdmin/>

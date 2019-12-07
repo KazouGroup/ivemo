@@ -145,6 +145,7 @@ class FaqIndex extends Component {
     }
     render() {
         let {faqs, user} = this.state;
+        document.title = `FAQS Dashboard`;
         return (
             <>
                 <NavAdmin/>

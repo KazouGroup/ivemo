@@ -140,6 +140,8 @@ class TestimonialIdex extends Component {
     }
 
     render() {
+        let { testimonials,user } = this.state;
+        const composantTitle = `Testimonials`;
         const avatar_style = {
             width: "40px",
             height: "40px",
@@ -147,8 +149,7 @@ class TestimonialIdex extends Component {
             left: "15px",
             borderRadius: "50%"
         };
-        let { testimonials,user } = this.state;
-
+        document.title = `Ivemo | ${composantTitle}`;
         return (
             <>
                 <NavAdmin/>

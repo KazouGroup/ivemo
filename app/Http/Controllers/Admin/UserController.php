@@ -232,6 +232,7 @@ class UserController extends Controller
             'email',
             'username',
             'body',
+            'sex',
             'color_name'
         ));
         return response()->json($data,200);

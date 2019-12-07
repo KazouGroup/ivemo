@@ -102,6 +102,12 @@ class PermissionEdit extends Component  {
 
     render() {
         const {user} = this.state;
+        const composantTitle = `${this.state.name}`;
+        const requiredField = {
+            color: "red",
+            fontSize: "12px"
+        };
+        document.title = `${composantTitle}`;
         return(
             <>
                 <NavAdmin/>
@@ -134,11 +140,8 @@ class PermissionEdit extends Component  {
                                                             <Row>
                                                                 <Col md="12">
                                                                     <FormGroup>
-                                                                        <label
-                                                                            className="form-control-label"
-                                                                            htmlFor="example3cols3Input"
-                                                                        >
-                                                                            Name permission
+                                                                        <label>Name permission
+                                                                            <span style={requiredField}>*</span>
                                                                         </label>
                                                                         <Input
                                                                             id='name' required={'required'}

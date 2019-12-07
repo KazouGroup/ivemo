@@ -15,7 +15,7 @@ class ContactList extends Component {
                     <td><b>{this.props.email}</b></td>
                     <td><b>{moment(this.props.created_at).fromNow()}</b></td>
                     <td className="text-right">
-                        <Link to={`/dashboard/contact/${this.props.slug}`} key={this.props.id}
+                        <Link to={`/dashboard/contacts/${this.props.slug}`} key={this.props.id}
                               className="btn btn-link btn-warning btn-round btn-just-icon" data-toggle="tooltip"
                               data-original-title="Show message">
                             <i className="material-icons">visibility</i>

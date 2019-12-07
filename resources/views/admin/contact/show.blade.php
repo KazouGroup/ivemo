@@ -1,6 +1,6 @@
 @extends('inc.admin.main')
-<?php $item = htmlspecialchars($contact->title); ?>
-@section('title'," $item")
+<?php $item = htmlspecialchars($contact->subject); ?>
+@section('title'," - $item")
 
 @section('style')
 

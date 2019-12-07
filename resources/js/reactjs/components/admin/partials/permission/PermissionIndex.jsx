@@ -177,7 +177,12 @@ class PermissionIndex extends Component {
     render() {
 
         let { permissions,user } = this.state;
-
+        const composantTitle = 'Permissions';
+        const requiredField = {
+            color: "red",
+            fontSize: "12px"
+        };
+        document.title = `Ivemo - ${composantTitle}`;
         return (
             <>
                 <NavAdmin/>
@@ -294,8 +299,8 @@ class PermissionIndex extends Component {
                                                         <form role="form" method="POST" onSubmit={this.createItem} action="" acceptCharset={'UTF-8'}>
                                                             <div className="modal-body">
                                                                 <div className="form-group">
-                                                                    <label className="bmd-label-floating">
-
+                                                                    <label>Name permission
+                                                                        <span style={requiredField}>*</span>
                                                                     </label>
                                                                     <input required={'required'}
                                                                            placeholder={'Name permission'}

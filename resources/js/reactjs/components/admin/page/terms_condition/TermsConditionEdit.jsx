@@ -5,6 +5,7 @@ import StatusAdmin from "../../../inc/admin/StatusAdmin";
 import {Link} from "react-router-dom";
 import ReactQuill from "react-quill";
 import FooterAdmin from "../../../inc/admin/FooterAdmin";
+import {FormGroup} from "reactstrap";
 
 
 
@@ -123,6 +124,12 @@ class TermsConditionEdit extends Component {
 
     render() {
         const {user} = this.state;
+        const composantTitle = `${this.state.title}`;
+        const requiredField = {
+            color: "red",
+            fontSize: "12px"
+        };
+        document.title = `${composantTitle}`;
         return(
             <>
                 <NavAdmin/>
@@ -167,6 +174,9 @@ class TermsConditionEdit extends Component {
                                                             <div className="row">
                                                                 <div className="col-md-12">
                                                                     <div className="form-group">
+                                                                        <label>Title
+                                                                            <span style={requiredField}>*</span>
+                                                                        </label>
                                                                         <input required={'required'}
                                                                                id='title'
                                                                                type='text'
@@ -183,8 +193,8 @@ class TermsConditionEdit extends Component {
                                                             <div className={'row'}>
                                                                 <div className="col-md-12">
                                                                     <div className="form-group">
-                                                                        <label className="bmd-label-floating">
-                                                                            Description
+                                                                        <label>Description
+                                                                            <span style={requiredField}>*</span>
                                                                         </label>
                                                                         <br/>
                                                                         <ReactQuill theme="snow"
@@ -199,7 +209,7 @@ class TermsConditionEdit extends Component {
 
                                                             <div className="submit">
                                                                 <div className="text-center">
-                                                                    <Link to={'/dashboard/faqs/'}
+                                                                    <Link to={'/dashboard/terms_conditions/'}
                                                                           className="btn btn-icon btn-secondary"
                                                                           type="submit">
                                                                             <span
