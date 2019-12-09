@@ -39,8 +39,8 @@ class TermsConditionIndex extends Component {
     // handle delete
     deleteItem(id) {
         Swal.fire({
-            title: 'Delete Testimonial?',
-            text: "Are you sure you want to delete this testimonial?",
+            title: 'Delete Data?',
+            text: "Are you sure you want to delete this data?",
             type: 'warning',
             animation: false,
             customClass: 'animated shake',
@@ -239,7 +239,7 @@ class TermsConditionIndex extends Component {
                                                                 <Button
                                                                     className="togglebutton btn btn-link bmd-btn-fab-sm btn-group-toggle"
                                                                     color="danger" size="sm">
-                                                                    <label>
+                                                                    <label title={item.status ? 'Disable' : 'Activate'}>
                                                                         <input type="checkbox" name="status"
                                                                                id={`status`} value={item.status}
                                                                                onClick={() => this.changeStatus(item.id)}

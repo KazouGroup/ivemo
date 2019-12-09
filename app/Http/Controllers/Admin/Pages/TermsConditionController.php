@@ -7,7 +7,8 @@ use App\Http\Requests\TermsCondition\StoreRequest;
 use App\Http\Requests\TermsCondition\UpdateRequest;
 use App\Http\Resources\TermsConditionResource;
 use App\Model\termscondition;
-use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
+use File;
 
 class TermsConditionController extends Controller
 {
@@ -59,6 +60,26 @@ class TermsConditionController extends Controller
 
         $termscondition->body = $request->body;
         $termscondition->title = $request->title;
+
+        if ($request->photo) {
+
+            $namefile = sha1(date('YmdHis') . str_random(30));
+
+            $name =   $namefile.'.' . explode('/',explode(':',substr($request->photo,0,strpos
+                ($request->photo,';')))[1])[1];
+
+            $dir = 'assets/img/condition/';
+            if(!file_exists($dir)){
+                mkdir($dir, 0775, true);
+            }
+            $destinationPath = public_path("assets/img/condition/{$name}");
+            Image::make($request->photo)->save($destinationPath);
+
+            //Save Image to database
+            $myfilename = "/assets/img/condition/{$name}";
+            $termscondition->photo = $myfilename;
+        }
+
         $termscondition->save();
 
         return response()->json($termscondition);
@@ -141,6 +162,8 @@ class TermsConditionController extends Controller
     public function destroy($id)
     {
         $termscondition = termscondition::findOrFail($id);
+        $oldFilename = $termscondition->photo;
+        File::delete(public_path($oldFilename));
         $termscondition->delete();
 
         return ['message' => 'Deleted successfully'];

@@ -15,6 +15,7 @@ class TermsConditionEdit extends Component {
         this.state = {
             title:'',
             body:'',
+            photo:'',
             user: [],
             errors: [],
         };
@@ -40,6 +41,7 @@ class TermsConditionEdit extends Component {
         ];
         // bind
         this.updateItem = this.updateItem.bind(this);
+        this.updateImage = this.updateImage.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.handleChangeBody = this.handleChangeBody.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
@@ -67,12 +69,23 @@ class TermsConditionEdit extends Component {
             )
         }
     }
+    updateImage(e){
+        e.preventDefault();
+        let reader = new FileReader();
+        let file = e.target.files[0];
+        reader.onloadend = (file) => {
+            this.setState({ file: file, photo: reader.result });
+            console.log(reader.result)
+        };
+        reader.readAsDataURL(file)
+    }
     updateItem(e) {
         let Id = this.props.match.params.id;
         e.preventDefault();
         let item = {
             title: this.state.title,
             body: this.state.body,
+            photo: this.state.photo,
         };
         axios.put(`/dashboard/terms_conditions/${Id}`, item).then(() => {
 
@@ -115,6 +128,7 @@ class TermsConditionEdit extends Component {
             this.setState({
                 title: response.data.title,
                 body: response.data.body,
+                photo: response.data.photo,
             }));
     }
     // lifecycle method
@@ -123,7 +137,7 @@ class TermsConditionEdit extends Component {
     }
 
     render() {
-        const {user} = this.state;
+        const {user,photo} = this.state;
         const composantTitle = `${this.state.title}`;
         const requiredField = {
             color: "red",
@@ -187,6 +201,16 @@ class TermsConditionEdit extends Component {
                                                                                onChange={this.handleFieldChange}
                                                                         />
                                                                         {this.renderErrorFor('title')}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="row">
+
+                                                                <div className="col-md-8 ml-auto mr-auto">
+                                                                    <div className="profile text-center">
+                                                                        <br/>
+                                                                        <img src={photo} alt={'name'}/>
+                                                                        <input id="photo" type="file" onChange={this.updateImage}  className="form-control" name="photo"/>
                                                                     </div>
                                                                 </div>
                                                             </div>

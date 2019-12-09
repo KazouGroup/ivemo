@@ -18,6 +18,7 @@ class TermsConditionResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'body' => $this->body,
+            'photo' => $this->photo,
             'status' => $this->status,
             'slug' => $this->slug,
             'created_at' => (string) $this->created_at,

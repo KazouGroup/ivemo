@@ -1,11 +1,10 @@
-import React,{Component} from "react";
+import React, {Component} from "react";
 import NavAdmin from "../../../inc/admin/NavAdmin";
 import TopNavAdmin from "../../../inc/admin/TopNavAdmin";
 import StatusAdmin from "../../../inc/admin/StatusAdmin";
 import {Link} from "react-router-dom";
 import ReactQuill from "react-quill";
 import FooterAdmin from "../../../inc/admin/FooterAdmin";
-
 
 
 class TermsConditionCreate extends Component {
@@ -16,6 +15,7 @@ class TermsConditionCreate extends Component {
             body:'',
             user: [],
             errors: [],
+            photo: '',
         };
 
         this.modules = {
@@ -39,6 +39,7 @@ class TermsConditionCreate extends Component {
         ];
         // bind
         this.createItem = this.createItem.bind(this);
+        this.updateImage = this.updateImage.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.handleChangeBody = this.handleChangeBody.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
@@ -66,12 +67,24 @@ class TermsConditionCreate extends Component {
             )
         }
     }
+
+    updateImage(e){
+        e.preventDefault();
+        let reader = new FileReader();
+        let file = e.target.files[0];
+        reader.onloadend = (file) => {
+            this.setState({ file: file, photo: reader.result });
+            console.log(reader.result)
+        };
+        reader.readAsDataURL(file)
+    }
     // handle submit
     createItem(e) {
         e.preventDefault();
         let item = {
             title: this.state.title,
             body: this.state.body,
+            photo: this.state.photo,
         };
         axios.post(`/dashboard/terms_conditions`, item).then(() => {
 
@@ -113,7 +126,11 @@ class TermsConditionCreate extends Component {
     }
 
     render() {
-        const {user} = this.state;
+        const {user,photo} = this.state;
+        const composantTitle = `Terms & Condition`;
+        const requiredField = {color: "red", fontSize: "12px"};
+        const FileUpluaod = {cursor: "pointer"};
+        document.title = `Ivemo - ${composantTitle}`;
         return(
             <>
                 <NavAdmin/>
@@ -150,11 +167,13 @@ class TermsConditionCreate extends Component {
                                                                 </Link>
                                                             </div>
                                                         </div>
-                                                        <form onSubmit={this.createItem}>
+                                                        <form onSubmit={this.createItem} encType="multipart/form-data">
                                                             <div className="row">
                                                                 <div className="col-md-12">
                                                                     <div className="form-group">
-                                                                        <label></label>
+                                                                        <label>Title
+                                                                            <span style={requiredField}>*</span>
+                                                                        </label>
                                                                         <input required={'required'}
                                                                                id='title'
                                                                                type='text'
@@ -168,11 +187,21 @@ class TermsConditionCreate extends Component {
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div className="row">
+
+                                                                <div className="col-md-8 ml-auto mr-auto">
+                                                                    <div className="profile text-center">
+                                                                        <br/>
+                                                                        <img src={photo} alt={'name'}/>
+                                                                        <input id="photo" type="file" onChange={this.updateImage}  className="form-control" name="photo"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                             <div className={'row'}>
                                                                 <div className="col-md-12">
                                                                     <div className="form-group">
-                                                                        <label className="bmd-label-floating">
-                                                                            Description
+                                                                        <label>Description
+                                                                            <span style={requiredField}>*</span>
                                                                         </label>
                                                                         <br/>
                                                                         <ReactQuill theme="snow"

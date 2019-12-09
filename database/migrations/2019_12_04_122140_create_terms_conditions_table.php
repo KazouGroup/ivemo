@@ -17,6 +17,7 @@ class CreateTermsConditionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
+            $table->string('photo')->nullable();
             $table->longText('body')->nullable();
             $table->boolean('status')->default(false);
             $table->timestamps();

@@ -5,7 +5,7 @@
 
 <meta property="og:title" content="__OG_TITLE__">
 <meta property="og:description" content="__OG_DESCRIPTION__">
-<title>ivemo @yield('title')</title>
+<title>@yield('title')</title>
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -29,6 +29,7 @@
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 <!-- CSS Files -->
+<link rel="stylesheet" href="/assets/css/style.css">
 <link href="/assets/admin/assets/css/material-dashboard.min.css?v=2.1.0" rel="stylesheet" />
 @notifyCss
 @section('style')
