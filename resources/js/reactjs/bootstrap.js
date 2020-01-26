@@ -16,11 +16,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * allows your team to easily build robust real-time web applications.
  */
 
-window.bus = window.user.user;
-/* Ici je recupere tous les information lier a l'utilisateur connecter */
 import Auth from './api/auth'
 
-window.user.user = new Auth(window.user);
+//window.$auth = new Auth(window.userIvemo);
+
+window.$userIvemo =  window.userIvemo.user;
+window.$guest = window.userIvemo.guest;
+window.$authcheck = window.userIvemo.authcheck;
 
 //console.log(window.bus);
 /**

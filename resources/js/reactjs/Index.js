@@ -8,14 +8,13 @@ class Index extends Component {
     render() {
         return (
             <BrowserRouter>
-                <Route component={RouteDashboard} />
                 <Route component={RouteUser} />
             </BrowserRouter>
         );
     }
 }
 
-if (document.getElementById('root')) {
-    ReactDOM.render(<Index />, document.getElementById('root'));
+if (document.getElementById('app_ivemo')) {
+    ReactDOM.render(<Index />, document.getElementById('app_ivemo'));
 }
 export default Index;
