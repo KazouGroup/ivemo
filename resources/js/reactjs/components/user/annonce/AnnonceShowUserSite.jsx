@@ -110,15 +110,10 @@ class AnnonceShowUserSite extends Component {
 
 
                     <div className="main main-raised">
-                        <div className="container">
-                            <div className="row">
-                            </div>
-                        </div>
 
                         <div className="container">
                             <br />
                             <div className="row">
-
 
                                 <div className="col-lg-8 col-md-12 mx-auto">
 
@@ -200,6 +195,7 @@ class AnnonceShowUserSite extends Component {
                                         </div>
                                     </div>
 
+
                                     <div className="card">
                                         <div className="card-body">
                                             <div className="card-title">
@@ -223,6 +219,13 @@ class AnnonceShowUserSite extends Component {
                                                     <a href="https://www.kazoutech.com" className="btn btn-sm btn-primary" target="_banck">
                                                         <i className="now-ui-icons objects_globe"></i>
                                                     </a>
+                                                    <NavLink to={`/annonces/`} className="btn btn-sm btn-success" rel="tooltip" title="Editer" data-placement="bottom">
+                                                        <i className="now-ui-icons ui-1_simple-delete"></i>
+                                                    </NavLink>
+                                                    <Button
+                                                        className="btn btn-sm btn-danger" rel="tooltip" title="Supprimer" data-placement="bottom">
+                                                        <i className="now-ui-icons ui-1_simple-remove"></i>
+                                                    </Button>{" "}
                                                 </div>
                                             </div>
                                             <div className="card-title">
@@ -243,7 +246,7 @@ class AnnonceShowUserSite extends Component {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <hr/>
+                                            <hr />
                                             <b>Informations légales de l'agence</b>
                                             <br />
                                             <span>
@@ -262,87 +265,94 @@ class AnnonceShowUserSite extends Component {
                                                 <div class="card card-plain">
                                                     <div class="card-header" role="tab" id="headingOne">
                                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                        <b>Envie de visiter ? Une question sur cet appartement ?</b>
+                                                            <b>Envie de visiter ? Une question sur cet appartement ?</b>
                                                             <i class="now-ui-icons arrows-1_minimal-down"></i>
                                                         </a>
                                                     </div>
                                                     <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                                                    <div className="card-body">
-                                                        <div className="row">
-                                                            <div className="col-md-12">
-                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                        <div className="card-body">
+                                                            <div className="row">
+                                                                <div className="col-md-12">
+                                                                    <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                                  
-                                                                    <form role="form" id="contact-form" onSubmit={this.createItem} acceptCharset="UTF-8">
 
-                                                                        <div className="input-group">
-                                                                            <div className="input-group-prepend">
-                                                                                <span className="input-group-text"><i className="now-ui-icons users_circle-08"></i></span>
+                                                                        <form role="form" id="contact-form" onSubmit={this.createItem} acceptCharset="UTF-8">
+
+                                                                            <div className="input-group">
+                                                                                <div className="input-group-prepend">
+                                                                                    <span className="input-group-text"><i className="now-ui-icons users_circle-08"></i></span>
+                                                                                </div>
+                                                                                <input id='last_name'
+                                                                                    type='text'
+                                                                                    className={`form-control ${this.hasErrorFor('last_name') ? 'is-invalid' : ''}`}
+                                                                                    name='last_name'
+                                                                                    placeholder="Nom"
+                                                                                    aria-label="Last Name"
+                                                                                    autoComplete="last_name"
+                                                                                    value={this.state.last_name}
+                                                                                    onChange={this.handleFieldChange}
+                                                                                />
+                                                                                {this.renderErrorFor('last_name')}
                                                                             </div>
-                                                                            <input id='last_name'
-                                                                                type='text'
-                                                                                className={`form-control ${this.hasErrorFor('last_name') ? 'is-invalid' : ''}`}
-                                                                                name='last_name'
-                                                                                placeholder="Nom"
-                                                                                aria-label="Last Name"
-                                                                                autoComplete="last_name"
-                                                                                value={this.state.last_name}
-                                                                                onChange={this.handleFieldChange}
-                                                                            />
-                                                                            {this.renderErrorFor('last_name')}
-                                                                        </div>
-                                                                        <div className="input-group">
-                                                                            <div className="input-group-prepend">
-                                                                                <span className="input-group-text"><i className="now-ui-icons ui-1_email-85"></i></span>
+                                                                            <div className="input-group">
+                                                                                <div className="input-group-prepend">
+                                                                                    <span className="input-group-text"><i className="now-ui-icons ui-1_email-85"></i></span>
+                                                                                </div>
+                                                                                <input id='email'
+                                                                                    type='email'
+                                                                                    className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
+                                                                                    name='email'
+                                                                                    placeholder="Email"
+                                                                                    aria-label="Email"
+                                                                                    autoComplete="email"
+                                                                                    value={this.state.email}
+                                                                                    onChange={this.handleFieldChange}
+                                                                                />
+                                                                                {this.renderErrorFor('email')}
                                                                             </div>
-                                                                            <input id='email'
-                                                                                type='email'
-                                                                                className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                                                                name='email'
-                                                                                placeholder="Email"
-                                                                                aria-label="Email"
-                                                                                autoComplete="email"
-                                                                                value={this.state.email}
-                                                                                onChange={this.handleFieldChange}
-                                                                            />
-                                                                            {this.renderErrorFor('email')}
-                                                                        </div>
-                                                                        <div className="input-group">
-                                                                            <div className="input-group-prepend">
-                                                                                <span className="input-group-text"><i className="now-ui-icons tech_mobile"></i></span>
+                                                                            <div className="input-group">
+                                                                                <div className="input-group-prepend">
+                                                                                    <span className="input-group-text"><i className="now-ui-icons tech_mobile"></i></span>
+                                                                                </div>
+                                                                                <input id='phone'
+                                                                                    type='text'
+                                                                                    className={`form-control ${this.hasErrorFor('phone') ? 'is-invalid' : ''}`}
+                                                                                    name='phone'
+                                                                                    placeholder="Téléphone"
+                                                                                    aria-label="Téléphone"
+                                                                                    value={this.state.phone}
+                                                                                    onChange={this.handleFieldChange}
+                                                                                />
+                                                                                {this.renderErrorFor('phone')}
                                                                             </div>
-                                                                            <input id='phone'
-                                                                                type='text'
-                                                                                className={`form-control ${this.hasErrorFor('phone') ? 'is-invalid' : ''}`}
-                                                                                name='phone'
-                                                                                placeholder="Téléphone"
-                                                                                aria-label="Téléphone"
-                                                                                value={this.state.phone}
-                                                                                onChange={this.handleFieldChange}
-                                                                            />
-                                                                            {this.renderErrorFor('phone')}
-                                                                        </div>
-                                                                        <div className="form-group">
-                                                                            <textarea name="message" value={this.state.message}
-                                                                                onChange={this.handleFieldChange}
-                                                                                placeholder={'Posez ici toutes vos questions !'}
-                                                                                className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                                id="message"
-                                                                                rows="10" />
-                                                                            {this.renderErrorFor('message')}
-                                                                        </div>
-                                                                        <div className="submit text-center">
-                                                                            <button className="btn btn-primary btn-lg" type="submit">
-                                                                                <i className="now-ui-icons ui-1_email-85"></i> Contacter l'agence
+                                                                            <div className="form-group">
+                                                                                <textarea name="message" value={this.state.message}
+                                                                                    onChange={this.handleFieldChange}
+                                                                                    placeholder={'Posez ici toutes vos questions !'}
+                                                                                    className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
+                                                                                    id="message"
+                                                                                    rows="10" />
+                                                                                {this.renderErrorFor('message')}
+                                                                            </div>
+                                                                            <div className="form-check text-left">
+                                                                                <label className="form-check-label">
+                                                                                    <input className="form-check-input" id="remember" type="checkbox" defaultChecked={this.state.remember} value={this.state.remember} name="remember" onChange={this.handleFieldChange} />
+                                                                                    <span className="form-check-sign"></span>
+                                                                                    <span>Je ne souhaite pas recevoir les annonces similaires. En savoir plus</span>
+                                                                                </label>
+                                                                            </div>
+                                                                            <div className="submit text-center">
+                                                                                <button className="btn btn-primary btn-lg" type="submit">
+                                                                                    <i className="now-ui-icons ui-1_email-85"></i> Contacter l'agence
                                                                             </button>
-                                                                        </div>
-                                                                    </form>
+                                                                            </div>
+                                                                        </form>
 
 
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
                                                     </div>
                                                 </div>
 
@@ -353,7 +363,6 @@ class AnnonceShowUserSite extends Component {
                                     </div>
 
                                 </div>
-
 
                                 <div className="col-lg-4 col-md-12 mx-auto">
 
@@ -376,8 +385,8 @@ class AnnonceShowUserSite extends Component {
                                                             <Button className="btn btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
                                                                 <i className="now-ui-icons tech_mobile"></i>
                                                             </Button>
-                                                            <a href="https://www.kazoutech.com" className="btn btn-sm btn-primary" target="_banck">
-                                                                <i className="now-ui-icons objects_globe"></i>
+                                                            <a href="https://www.kazoutech.com" className="btn btn-sm btn-success" target="_banck">
+                                                                <i className="now-ui-icons ui-2_chat-round"></i>
                                                             </a>
                                                         </div>
                                                         <div className="card-header text-center">
@@ -471,16 +480,184 @@ class AnnonceShowUserSite extends Component {
                                             </div>
                                         </div>
                                     </div>
+
+                                </div>
+                            </div>
+
+                            <div className="text-center">
+                                <h4 className="title">Votre projet immobilier en toute sérénité</h4>
+                            </div>
+
+                            <div className="card">
+                                <div className="card-body">
+
+                                    <div class="row">
+
+
+                                        <div class="col-md-6 col-lg-4">
+                                            <div class="card card-blog card-plain">
+                                                <div class="card-image">
+                                                    <a href="#pablo">
+                                                        <img class="img img-raised rounded" src="/assets/vendor/assets/img/examples/card-blog6.jpg" />
+                                                    </a>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="text-center">
+                                                        <h6 class="category text-danger">
+                                                            <i class="now-ui-icons media-2_sound-wave"></i> business
+                                                    </h6>
+                                                        <h5 class="card-title">
+                                                            <a href="#nuk">Axel Springer Spends $343M To Buy Business Insider</a>
+                                                        </h5>
+                                                    </div>
+                                                    <p>
+                                                        German media giant Axel Springer has announced it’s acquiring online business news publication Business Inside..</p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-lg-4">
+                                            <div class="card card-blog card-plain">
+                                                <div class="card-image">
+                                                    <a href="#pablo">
+                                                        <img class="img img-raised rounded" src="/assets/vendor/assets/img/examples/card-blog6.jpg" />
+                                                    </a>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="text-center">
+                                                        <h6 class="category text-danger">
+                                                            <i class="now-ui-icons media-2_sound-wave"></i> business
+                                                    </h6>
+                                                        <h5 class="card-title">
+                                                            <a href="#nuk">Buy Business Insider</a>
+                                                        </h5>
+                                                    </div>
+                                                    <p>
+                                                        German media giant Axel Springer has announced it’s acquiring online business news publication Business Inside..</p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-lg-4">
+                                            <div class="card card-blog card-plain">
+                                                <div class="card-image">
+                                                    <a href="#pablo">
+                                                        <img class="img img-raised rounded" src="/assets/vendor/assets/img/bg32.jpg" />
+                                                    </a>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="text-center">
+                                                        <h6 class="category text-danger">
+                                                            <i class="now-ui-icons media-2_sound-wave"></i> business
+                                                    </h6>
+                                                        <h5 class="card-title">
+                                                            <a href="#nuk">Insider Axel Springer Spends</a>
+                                                        </h5>
+                                                    </div>
+                                                    <p>
+                                                        German media giant Axel Springer has announced it’s acquiring online business news publication Business Inside..</p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                            <div className="card-body">
+
+                                <div className="text-center">
+                                    <h4 className="title">Annonces similaires</h4>
+                                </div>
+                                <div class="row">
+
+
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="card card-blog">
+                                            <div class="card-image">
+                                                <img class="img rounded" src="/assets/vendor/assets/img/examples/card-blog6.jpg" />
+                                            </div>
+                                            <div class="card-body">
+                                                <h6 class="category text-warning">
+                                                    <i class="now-ui-icons media-1_camera-compact"></i> Photo</h6>
+                                                <h5 class="card-title">
+                                                    <a href="#pablo">Indispensible to nature photography: the hide</a>
+                                                </h5>
+                                                <div class="card-footer">
+                                                    <div class="stats stats-right">
+                                                        <i class="now-ui-icons ui-2_favourite-28"></i> 342 ·
+                                                    <i class="now-ui-icons files_single-copy-04"></i> 45
+                                                    </div>
+                                                    <div class="author">
+                                                        <img src="/assets/vendor/assets/img/examples/card-blog6.jpg" alt="..." class="avatar img-raised" />
+                                                        <span>Devin Coldewey</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="card card-blog">
+                                            <div class="card-image">
+                                                <img class="img rounded" src="/assets/vendor/assets/img/bg32.jpg" />
+                                            </div>
+                                            <div class="card-body">
+                                                <h6 class="category text-warning">
+                                                    <i class="now-ui-icons media-1_camera-compact"></i> Photo</h6>
+                                                <h5 class="card-title">
+                                                    <a href="#pablo">Indispensible to nature photography: the hide</a>
+                                                </h5>
+                                                <div class="card-footer">
+                                                    <div class="stats stats-right">
+                                                        <i class="now-ui-icons ui-2_favourite-28"></i> 342 ·
+                                                    <i class="now-ui-icons files_single-copy-04"></i> 45
+                                                    </div>
+                                                    <div class="author">
+                                                        <img src="/assets/vendor/assets/img/james.jpg" alt="..." class="avatar img-raised" />
+                                                        <span>Devin Coldewey</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="card card-blog">
+                                            <div class="card-image">
+                                                <img class="img rounded" src="/assets/vendor/assets/img/examples/card-blog6.jpg" />
+                                            </div>
+                                            <div class="card-body">
+                                                <h6 class="category text-warning">
+                                                    <i class="now-ui-icons media-1_camera-compact"></i> Photo</h6>
+                                                <h5 class="card-title">
+                                                    <a href="#pablo">Indispensible to nature photography: the hide</a>
+                                                </h5>
+                                                <div class="card-footer">
+                                                    <div class="stats stats-right">
+                                                        <i class="now-ui-icons ui-2_favourite-28"></i> 342 ·
+                                                    <i class="now-ui-icons files_single-copy-04"></i> 45
+                                                    </div>
+                                                    <div class="author">
+                                                        <img src="/assets/vendor/assets/img/james.jpg" alt="..." class="avatar img-raised" />
+                                                        <span>Devin Coldewey</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
 
-
-
-
-
-
-
-
                             </div>
+
                         </div>
 
 
