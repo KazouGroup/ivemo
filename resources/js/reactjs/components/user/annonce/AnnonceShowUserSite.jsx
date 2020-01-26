@@ -224,27 +224,55 @@ class AnnonceShowUserSite extends Component {
                                                         <i className="now-ui-icons objects_globe"></i>
                                                     </a>
                                                 </div>
-
-
                                             </div>
+                                            <div className="card-title">
+                                                <i className="now-ui-icons location_pin"></i> <b>91 RUE DU FAUBOURG SAINT HONORE 75008 PARIS 8EME</b>
+                                                <br />
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-6">
+                                                            <a href="https://www.kazoutech.com" title="Profil agence">
+                                                                <small><b>Consulter le profil de l'agence</b></small>
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-md-6 col-6">
+                                                            <a href="https://www.kazoutech.com" title="Site internet de agence">
+                                                                <small><b>Consulter le site de l'agence</b></small>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                            <b>Informations légales de l'agence</b>
+                                            <br />
+                                            <span>
+                                                EIFFEL HOUSING SAS, au capital de 10000,00€
 
-                                        </div>
+                                                Carte professionnelle 6282 délivrée par la Préfecture de Paris.
 
-                                    </div>
-                                    <div className="content-center">
-                                        <div className="row">
-                                            <div className="col-md-6 mx-auto text-center">
-                                                <div className="card">
+                                                Siège : 91, rue du Faubourg Saint Honoré 75008 PARIS FRANCE
+
+                                                Garantie Financière Galian pour un montant de 120000,00€
+
+                                                RCS : Paris 801151929
+                                                </span>
+
+                                            <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                                                <div class="card card-plain">
+                                                    <div class="card-header" role="tab" id="headingOne">
+                                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                        <b>Envie de visiter ? Une question sur cet appartement ?</b>
+                                                            <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
                                                     <div className="card-body">
                                                         <div className="row">
                                                             <div className="col-md-12">
                                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                                    <div className="card-header text-center">
-                                                                        <div className="card-title">
-                                                                            <b>Contactez l'agence par email</b>
-                                                                        </div>
-                                                                    </div>
+                                                                  
                                                                     <form role="form" id="contact-form" onSubmit={this.createItem} acceptCharset="UTF-8">
 
                                                                         <div className="input-group">
@@ -297,16 +325,16 @@ class AnnonceShowUserSite extends Component {
                                                                         <div className="form-group">
                                                                             <textarea name="message" value={this.state.message}
                                                                                 onChange={this.handleFieldChange}
-                                                                                placeholder={'Posez ici touts vos questions !'}
+                                                                                placeholder={'Posez ici toutes vos questions !'}
                                                                                 className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
                                                                                 id="message"
                                                                                 rows="10" />
                                                                             {this.renderErrorFor('message')}
                                                                         </div>
                                                                         <div className="submit text-center">
-                                                                            <button className="btn btn-primary btn-lg btn-round" type="submit">
+                                                                            <button className="btn btn-primary btn-lg" type="submit">
                                                                                 <i className="now-ui-icons ui-1_email-85"></i> Contacter l'agence
-                                                                </button>
+                                                                            </button>
                                                                         </div>
                                                                     </form>
 
@@ -315,9 +343,13 @@ class AnnonceShowUserSite extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    </div>
                                                 </div>
+
                                             </div>
+
                                         </div>
+
                                     </div>
 
                                 </div>
@@ -413,7 +445,7 @@ class AnnonceShowUserSite extends Component {
                                                             <div className="form-group">
                                                                 <textarea name="message" value={this.state.message}
                                                                     onChange={this.handleFieldChange}
-                                                                    placeholder={'Posez ici touts vos questions !'}
+                                                                    placeholder={'Posez ici toutes vos questions !'}
                                                                     className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
                                                                     id="message"
                                                                     rows="10" />
@@ -427,7 +459,7 @@ class AnnonceShowUserSite extends Component {
                                                                 </label>
                                                             </div>
                                                             <div className="submit text-center">
-                                                                <button className="btn btn-primary btn-lg btn-round" type="submit">
+                                                                <button className="btn btn-primary btn-lg" type="submit">
                                                                     <i className="now-ui-icons ui-1_email-85"></i> Contacter l'agence
                                                                 </button>
                                                             </div>
