@@ -21,4 +21,9 @@ class PageController extends Controller
     {
         return view('user.annonce.index'); 
     }
+
+    public function annonceshow()
+    {
+        return view('user.annonce.show'); 
+    }
 }

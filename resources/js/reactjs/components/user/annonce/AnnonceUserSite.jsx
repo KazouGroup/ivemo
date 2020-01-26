@@ -99,7 +99,7 @@ class AnnonceUserSite extends Component {
                                                         <br />
                                                         <div className="card-header d-flex align-items-center">
                                                             <div className="text-left pull-left">
-                                                                <NavLink to={`/charbonneur/`}>
+                                                                <NavLink to={`/annonce/show/`}>
                                                                     <h6 className="text-info ml-auto mr-auto">
                                                                         Yaounde
                                                                         </h6>
@@ -115,7 +115,7 @@ class AnnonceUserSite extends Component {
                                                     <div className="col-md-7">
                                                         <div className="card-header d-flex align-items-center">
                                                             <div className="text-left pull-left">
-                                                                <NavLink to={`/charbonneur/`}>
+                                                                <NavLink to={`/annonce/show/`}>
                                                                     <h6 className="text-info ml-auto mr-auto">
                                                                         Enterprise
                                                                         </h6>
@@ -123,7 +123,7 @@ class AnnonceUserSite extends Component {
                                                             </div>
                                                             <div className="text-right ml-auto">
                                                                 <a href="#pablo" className="btn btn-sm btn-outline-primary">
-                                                                    <i className="now-ui-icons ui-2_favourite-28"></i> Sauvegarder
+                                                                    <i className="now-ui-icons ui-2_favourite-28"></i> 
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -145,11 +145,11 @@ class AnnonceUserSite extends Component {
                                                         </p>
                                                         <div className="card-header d-flex align-items-center">
                                                             <div className="d-flex align-items-center">
-                                                                <NavLink to={`/charbonneur/`}>
+                                                                <NavLink to={`/annonce/show/`}>
                                                                     <img src="/assets/vendor/assets/img/bg1.jpg" style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                                                 </NavLink>
                                                                 <div className="mx-3">
-                                                                    <NavLink to={`/charbonneur/`} className="text-dark font-weight-600 text-sm">Boclair Temgoua
+                                                                    <NavLink to={`/annonce/show/`} className="text-dark font-weight-600 text-sm">Boclair Temgoua
                                                                     <small className="d-block text-muted">12 janv 2019</small>
                                                                     </NavLink>
                                                                 </div>
@@ -208,7 +208,7 @@ class AnnonceUserSite extends Component {
                                                         <br />
                                                         <div className="card-header d-flex align-items-center">
                                                             <div className="text-left pull-left">
-                                                                <NavLink to={`/charbonneur/`}>
+                                                                <NavLink to={`/annonce/show/`}>
                                                                     <h6 className="text-info ml-auto mr-auto">
                                                                         Yaounde
                                                                         </h6>
@@ -232,7 +232,7 @@ class AnnonceUserSite extends Component {
                                                             </div>
                                                             <div className="text-right ml-auto">
                                                                 <a href="#pablo" className="btn btn-sm btn-outline-primary">
-                                                                    <i className="now-ui-icons ui-2_favourite-28"></i> Sauvegarder
+                                                                    <i className="now-ui-icons ui-2_favourite-28"></i>
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -254,11 +254,11 @@ class AnnonceUserSite extends Component {
                                                         </p>
                                                         <div className="card-header d-flex align-items-center">
                                                             <div className="d-flex align-items-center">
-                                                                <NavLink to={`/charbonneur/`}>
+                                                                <NavLink to={`/annonce/show/`}>
                                                                     <img src="/assets/vendor/assets/img/bg1.jpg" style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                                                 </NavLink>
                                                                 <div className="mx-3">
-                                                                    <NavLink to={`/charbonneur/`} className="text-dark font-weight-600 text-sm">Boclair Temgoua
+                                                                    <NavLink to={`/annonce/show/`} className="text-dark font-weight-600 text-sm">Boclair Temgoua
                                                                     <small className="d-block text-muted">12 janv 2019</small>
                                                                     </NavLink>
                                                                 </div>
@@ -266,16 +266,9 @@ class AnnonceUserSite extends Component {
                                                             <Button className="btn btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
                                                                 <i className="now-ui-icons tech_mobile"></i>
                                                             </Button>
-                                                            <NavLink to={`/annonces/`} className="btn btn-sm btn-primary">
+                                                            <NavLink to={`/annonce/show/`} className="btn btn-sm btn-primary">
                                                                 <i className="now-ui-icons location_pin"></i>
                                                             </NavLink>
-                                                            <NavLink to={`/annonces/`} className="btn btn-sm btn-success" rel="tooltip" title="Editer" data-placement="bottom">
-                                                                <i className="now-ui-icons ui-1_simple-delete"></i>
-                                                            </NavLink>
-                                                            <Button
-                                                                className="btn btn-sm btn-danger" rel="tooltip" title="Supprimer" data-placement="bottom">
-                                                                <i className="now-ui-icons ui-1_simple-remove"></i>
-                                                            </Button>{" "}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -340,7 +333,7 @@ class AnnonceUserSite extends Component {
                                                             </div>
                                                             <div className="text-right ml-auto">
                                                                 <a href="#pablo" className="btn btn-sm btn-primary">
-                                                                    <i className="now-ui-icons ui-2_favourite-28"></i> Annuler la sauvegarde
+                                                                    <i className="now-ui-icons ui-2_favourite-28"></i> 
                                                                 </a>
                                                             </div>
                                                         </div>

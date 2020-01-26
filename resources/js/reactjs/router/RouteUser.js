@@ -5,6 +5,7 @@ import LoginUser from "../components/user/auth/LoginUser";
 import AboutUserSite from "../components/user/about/AboutUserSite";
 import ContactUserSite from "../components/user/contact/ContactUserSite";
 import AnnonceUserSite from "../components/user/annonce/AnnonceUserSite";
+import AnnonceShowUserSite from "../components/user/annonce/AnnonceShowUserSite";
 
 
 const RouteUser = props => (
@@ -15,6 +16,7 @@ const RouteUser = props => (
           <Route exact path="/about/" component={AboutUserSite}/>
           <Route exact path="/contact/" component={ContactUserSite}/>
           <Route exact path="/annonce/" component={AnnonceUserSite}/>
+          <Route exact path="/annonce/show/" component={AnnonceShowUserSite}/>
     </Switch>
 
 );
