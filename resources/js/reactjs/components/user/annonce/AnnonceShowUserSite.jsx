@@ -93,14 +93,11 @@ class AnnonceShowUserSite extends Component {
         return (
             <div className="about-us sidebar-collapse">
 
-                <nav class="navbar navbar-expand-lg bg-primary">
+                <nav className="navbar navbar-expand-lg bg-white">
                     <NavUserSite />
                 </nav>
 
                 <div className="wrapper">
-
-
-
 
                     <div className="main main-raised">
 
@@ -111,6 +108,7 @@ class AnnonceShowUserSite extends Component {
                                 <div className="col-lg-8 col-md-12 mx-auto">
 
                                     <div className="card-body">
+                                        
                                         <div className="card-image">
 
                                             <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
@@ -224,14 +222,14 @@ class AnnonceShowUserSite extends Component {
                                             <div className="card-title">
                                                 <i className="now-ui-icons location_pin"></i> <b>91 RUE DU FAUBOURG SAINT HONORE 75008 PARIS 8EME</b>
                                                 <br />
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <div class="col-md-6 col-6">
+                                                <div className="container">
+                                                    <div className="row">
+                                                        <div className="col-md-6 col-6">
                                                             <a href="https://www.kazoutech.com" title="Profil agence">
                                                                 <small><b>Consulter le profil de l'agence</b></small>
                                                             </a>
                                                         </div>
-                                                        <div class="col-md-6 col-6">
+                                                        <div className="col-md-6 col-6">
                                                             <a href="https://www.kazoutech.com" title="Site internet de agence">
                                                                 <small><b>Consulter le site de l'agence</b></small>
                                                             </a>
@@ -254,15 +252,15 @@ class AnnonceShowUserSite extends Component {
                                                 RCS : Paris 801151929
                                                 </span>
 
-                                            <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
-                                                <div class="card card-plain">
-                                                    <div class="card-header" role="tab" id="headingOne">
+                                            <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                <div className="card card-plain">
+                                                    <div className="card-header" role="tab" id="headingOne">
                                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                             <b>Envie de visiter ? Une question sur cet appartement ?</b>
-                                                            <i class="now-ui-icons arrows-1_minimal-down"></i>
+                                                            <i className="now-ui-icons arrows-1_minimal-down"></i>
                                                         </a>
                                                     </div>
-                                                    <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                                    <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
                                                         <div className="card-body">
                                                             <div className="row">
                                                                 <div className="col-md-12">
@@ -484,22 +482,22 @@ class AnnonceShowUserSite extends Component {
                             <div className="card">
                                 <div className="card-body">
 
-                                    <div class="row">
+                                    <div className="row">
 
 
-                                        <div class="col-md-6 col-lg-4">
-                                            <div class="card card-blog card-plain">
-                                                <div class="card-image">
+                                        <div className="col-md-6 col-lg-4">
+                                            <div className="card card-blog card-plain">
+                                                <div className="card-image">
                                                     <a href="#pablo">
-                                                        <img class="img img-raised rounded" src="/assets/vendor/assets/img/examples/card-blog6.jpg" />
+                                                        <img className="img img-raised rounded" src="/assets/vendor/assets/img/examples/card-blog6.jpg" />
                                                     </a>
                                                 </div>
-                                                <div class="card-body">
-                                                    <div class="text-center">
-                                                        <h6 class="category text-danger">
-                                                            <i class="now-ui-icons media-2_sound-wave"></i> business
+                                                <div className="card-body">
+                                                    <div className="text-center">
+                                                        <h6 className="category text-danger">
+                                                            <i className="now-ui-icons media-2_sound-wave"></i> business
                                                     </h6>
-                                                        <h5 class="card-title">
+                                                        <h5 className="card-title">
                                                             <a href="#nuk">Axel Springer Spends $343M To Buy Business Insider</a>
                                                         </h5>
                                                     </div>
@@ -510,19 +508,19 @@ class AnnonceShowUserSite extends Component {
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6 col-lg-4">
-                                            <div class="card card-blog card-plain">
-                                                <div class="card-image">
+                                        <div className="col-md-6 col-lg-4">
+                                            <div className="card card-blog card-plain">
+                                                <div className="card-image">
                                                     <a href="#pablo">
-                                                        <img class="img img-raised rounded" src="/assets/vendor/assets/img/examples/card-blog6.jpg" />
+                                                        <img className="img img-raised rounded" src="/assets/vendor/assets/img/examples/card-blog6.jpg" />
                                                     </a>
                                                 </div>
-                                                <div class="card-body">
-                                                    <div class="text-center">
-                                                        <h6 class="category text-danger">
-                                                            <i class="now-ui-icons media-2_sound-wave"></i> business
+                                                <div className="card-body">
+                                                    <div className="text-center">
+                                                        <h6 className="category text-danger">
+                                                            <i className="now-ui-icons media-2_sound-wave"></i> business
                                                     </h6>
-                                                        <h5 class="card-title">
+                                                        <h5 className="card-title">
                                                             <a href="#nuk">Buy Business Insider</a>
                                                         </h5>
                                                     </div>
@@ -533,19 +531,19 @@ class AnnonceShowUserSite extends Component {
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6 col-lg-4">
-                                            <div class="card card-blog card-plain">
-                                                <div class="card-image">
+                                        <div className="col-md-6 col-lg-4">
+                                            <div className="card card-blog card-plain">
+                                                <div className="card-image">
                                                     <a href="#pablo">
-                                                        <img class="img img-raised rounded" src="/assets/vendor/assets/img/bg32.jpg" />
+                                                        <img className="img img-raised rounded" src="/assets/vendor/assets/img/bg32.jpg" />
                                                     </a>
                                                 </div>
-                                                <div class="card-body">
-                                                    <div class="text-center">
-                                                        <h6 class="category text-danger">
-                                                            <i class="now-ui-icons media-2_sound-wave"></i> business
+                                                <div className="card-body">
+                                                    <div className="text-center">
+                                                        <h6 className="category text-danger">
+                                                            <i className="now-ui-icons media-2_sound-wave"></i> business
                                                     </h6>
-                                                        <h5 class="card-title">
+                                                        <h5 className="card-title">
                                                             <a href="#nuk">Insider Axel Springer Spends</a>
                                                         </h5>
                                                     </div>
@@ -569,27 +567,27 @@ class AnnonceShowUserSite extends Component {
                                 <div className="text-center">
                                     <h4 className="title">Annonces similaires</h4>
                                 </div>
-                                <div class="row">
+                                <div className="row">
 
 
-                                    <div class="col-md-6 col-lg-4">
-                                        <div class="card card-blog">
-                                            <div class="card-image">
-                                                <img class="img rounded" src="/assets/vendor/assets/img/examples/card-blog6.jpg" />
+                                    <div className="col-md-6 col-lg-4">
+                                        <div className="card card-blog">
+                                            <div className="card-image">
+                                                <img className="img rounded" src="/assets/vendor/assets/img/examples/card-blog6.jpg" />
                                             </div>
-                                            <div class="card-body">
-                                                <div class="text-center">
-                                                    <h6 class="category text-info"> Appartement</h6>
+                                            <div className="card-body">
+                                                <div className="text-center">
+                                                    <h6 className="category text-info"> Appartement</h6>
                                                 </div>
-                                                <h6 class="card-title">
+                                                <h6 className="card-title">
                                                     <a href="#pablo">Indispensible to nature photography: the hide je suis dans la place la famille je suis erdus dans tout cette erte</a>
                                                 </h6>
-                                                <div class="card-footer">
-                                                    <div class="stats stats-right">
+                                                <div className="card-footer">
+                                                    <div className="stats stats-right">
                                                         <b>2 245 FCFA</b>
                                                     </div>
-                                                    <div class="author">
-                                                        <img src="/assets/vendor/assets/img/examples/card-blog6.jpg" alt="..." class="avatar img-raised" />
+                                                    <div className="author">
+                                                        <img src="/assets/vendor/assets/img/examples/card-blog6.jpg" alt="..." className="avatar img-raised" />
                                                         <span>Devin Coldewey</span>
                                                     </div>
                                                 </div>
@@ -597,24 +595,24 @@ class AnnonceShowUserSite extends Component {
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 col-lg-4">
-                                        <div class="card card-blog">
-                                            <div class="card-image">
-                                                <img class="img rounded" src="/assets/vendor/assets/img/bg32.jpg" />
+                                    <div className="col-md-6 col-lg-4">
+                                        <div className="card card-blog">
+                                            <div className="card-image">
+                                                <img className="img rounded" src="/assets/vendor/assets/img/bg32.jpg" />
                                             </div>
-                                            <div class="card-body">
-                                                <h6 class="category text-warning">
-                                                    <i class="now-ui-icons media-1_camera-compact"></i> Photo</h6>
-                                                <h5 class="card-title">
+                                            <div className="card-body">
+                                                <h6 className="category text-warning">
+                                                    <i className="now-ui-icons media-1_camera-compact"></i> Photo</h6>
+                                                <h5 className="card-title">
                                                     <a href="#pablo">Indispensible to nature photography: the hide</a>
                                                 </h5>
-                                                <div class="card-footer">
-                                                    <div class="stats stats-right">
-                                                        <i class="now-ui-icons ui-2_favourite-28"></i> 342 ·
-                                                    <i class="now-ui-icons files_single-copy-04"></i> 45
+                                                <div className="card-footer">
+                                                    <div className="stats stats-right">
+                                                        <i className="now-ui-icons ui-2_favourite-28"></i> 342 ·
+                                                    <i className="now-ui-icons files_single-copy-04"></i> 45
                                                     </div>
-                                                    <div class="author">
-                                                        <img src="/assets/vendor/assets/img/james.jpg" alt="..." class="avatar img-raised" />
+                                                    <div className="author">
+                                                        <img src="/assets/vendor/assets/img/james.jpg" alt="..." className="avatar img-raised" />
                                                         <span>Devin Coldewey</span>
                                                     </div>
                                                 </div>
@@ -622,24 +620,24 @@ class AnnonceShowUserSite extends Component {
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 col-lg-4">
-                                        <div class="card card-blog">
-                                            <div class="card-image">
-                                                <img class="img rounded" src="/assets/vendor/assets/img/examples/card-blog6.jpg" />
+                                    <div className="col-md-6 col-lg-4">
+                                        <div className="card card-blog">
+                                            <div className="card-image">
+                                                <img className="img rounded" src="/assets/vendor/assets/img/examples/card-blog6.jpg" />
                                             </div>
-                                            <div class="card-body">
-                                                <h6 class="category text-warning">
-                                                    <i class="now-ui-icons media-1_camera-compact"></i> Photo</h6>
-                                                <h6 class="card-title">
+                                            <div className="card-body">
+                                                <h6 className="category text-warning">
+                                                    <i className="now-ui-icons media-1_camera-compact"></i> Photo</h6>
+                                                <h6 className="card-title">
                                                     <a href="#pablo">Indispensible to nature photography: the hide</a>
                                                 </h6>
-                                                <div class="card-footer">
-                                                    <div class="stats stats-right">
-                                                        <i class="now-ui-icons ui-2_favourite-28"></i> 342 ·
-                                                    <i class="now-ui-icons files_single-copy-04"></i> 45
+                                                <div className="card-footer">
+                                                    <div className="stats stats-right">
+                                                        <i className="now-ui-icons ui-2_favourite-28"></i> 342 ·
+                                                    <i className="now-ui-icons files_single-copy-04"></i> 45
                                                     </div>
-                                                    <div class="author">
-                                                        <img src="/assets/vendor/assets/img/james.jpg" alt="..." class="avatar img-raised" />
+                                                    <div className="author">
+                                                        <img src="/assets/vendor/assets/img/james.jpg" alt="..." className="avatar img-raised" />
                                                         <span>Devin Coldewey</span>
                                                     </div>
                                                 </div>
