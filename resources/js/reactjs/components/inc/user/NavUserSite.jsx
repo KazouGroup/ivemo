@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 
-class NavUserSIte extends Component {
+class NavUserSite extends Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -19,8 +19,7 @@ class NavUserSIte extends Component {
 
         return (
 
-            <nav className="navbar navbar-expand-lg bg-white fixed-top navbar-transparent" color-on-scroll="500">
-                <div className="container">
+            <div className="container">
 
                     <div className="navbar-translate">
                         <Link to={'/'} className="navbar-brand" rel="tooltip" title="Ivemo home page" data-placement="bottom">
@@ -131,9 +130,11 @@ class NavUserSIte extends Component {
                         </ul>
                     </div>
                 </div>
-            </nav>
+                
+
+            
         )
     }
 }
 
-export default NavUserSIte;
+export default NavUserSite;

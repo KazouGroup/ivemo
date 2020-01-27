@@ -92,20 +92,13 @@ class AnnonceShowUserSite extends Component {
     render() {
         return (
             <div className="about-us sidebar-collapse">
-                <NavUserSite />
+
+                <nav class="navbar navbar-expand-lg bg-primary">
+                    <NavUserSite />
+                </nav>
 
                 <div className="wrapper">
-                    <div className="page-header page-header-mini">
-                        <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
-                        </div>
-                        <div className="content-center">
-                            <div className="row">
-                                <div className="col-md-8 ml-auto mr-auto">
-                                    <h3 className="title">Annonce</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
 
 
 
@@ -585,15 +578,15 @@ class AnnonceShowUserSite extends Component {
                                                 <img class="img rounded" src="/assets/vendor/assets/img/examples/card-blog6.jpg" />
                                             </div>
                                             <div class="card-body">
-                                                <h6 class="category text-warning">
-                                                    <i class="now-ui-icons media-1_camera-compact"></i> Photo</h6>
-                                                <h5 class="card-title">
-                                                    <a href="#pablo">Indispensible to nature photography: the hide</a>
-                                                </h5>
+                                                <div class="text-center">
+                                                    <h6 class="category text-info"> Appartement</h6>
+                                                </div>
+                                                <h6 class="card-title">
+                                                    <a href="#pablo">Indispensible to nature photography: the hide je suis dans la place la famille je suis erdus dans tout cette erte</a>
+                                                </h6>
                                                 <div class="card-footer">
                                                     <div class="stats stats-right">
-                                                        <i class="now-ui-icons ui-2_favourite-28"></i> 342 ·
-                                                    <i class="now-ui-icons files_single-copy-04"></i> 45
+                                                        <b>2 245 FCFA</b>
                                                     </div>
                                                     <div class="author">
                                                         <img src="/assets/vendor/assets/img/examples/card-blog6.jpg" alt="..." class="avatar img-raised" />
@@ -637,9 +630,9 @@ class AnnonceShowUserSite extends Component {
                                             <div class="card-body">
                                                 <h6 class="category text-warning">
                                                     <i class="now-ui-icons media-1_camera-compact"></i> Photo</h6>
-                                                <h5 class="card-title">
+                                                <h6 class="card-title">
                                                     <a href="#pablo">Indispensible to nature photography: the hide</a>
-                                                </h5>
+                                                </h6>
                                                 <div class="card-footer">
                                                     <div class="stats stats-right">
                                                         <i class="now-ui-icons ui-2_favourite-28"></i> 342 ·

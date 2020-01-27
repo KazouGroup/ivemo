@@ -21,7 +21,9 @@ class AboutUserSite extends Component {
     render() {
         return (
             <div className="about-us sidebar-collapse">
-                <NavUserSite />
+                <nav className="navbar navbar-expand-lg bg-white fixed-top navbar-transparent" color-on-scroll="400">
+                    <NavUserSite />
+                </nav>
 
                 <div className="wrapper">
                     <div className="page-header page-header-mini">
@@ -29,9 +31,9 @@ class AboutUserSite extends Component {
                         </div>
                         <div className="content-center">
                             <div className="row">
-                            <div className="col-md-8 ml-auto mr-auto">
-                                <h2 className="title">About Ivemo</h2>
-                            </div>
+                                <div className="col-md-8 ml-auto mr-auto">
+                                    <h2 className="title">About Ivemo</h2>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -114,7 +116,7 @@ class AboutUserSite extends Component {
 
 
 
-                    <FooterBigUserSite/>
+                    <FooterBigUserSite />
                 </div>
             </div>
         )

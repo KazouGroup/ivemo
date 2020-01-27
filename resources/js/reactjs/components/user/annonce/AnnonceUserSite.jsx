@@ -22,7 +22,10 @@ class AnnonceUserSite extends Component {
     render() {
         return (
             <div className="about-us sidebar-collapse">
-                <NavUserSite />
+
+                 <nav className="navbar navbar-expand-lg bg-white fixed-top navbar-transparent" color-on-scroll="400">
+                    <NavUserSite />
+                </nav>
 
                 <div className="wrapper">
                     <div className="page-header page-header-mini">
@@ -79,13 +82,19 @@ class AnnonceUserSite extends Component {
                                                                 </ol>
                                                                 <div className="carousel-inner" role="listbox">
                                                                     <div className="carousel-item">
-                                                                        <img className="d-block" src="/assets/vendor/assets/img/bg1.jpg" alt="First slide" />
+                                                                        <Link to={`/annonce/show/`}>
+                                                                            <img className="d-block" src="/assets/vendor/assets/img/bg1.jpg" alt="First slide" />
+                                                                        </Link>
                                                                     </div>
                                                                     <div className="carousel-item">
-                                                                        <img className="d-block" src="/assets/vendor/assets/img/bg3.jpg" alt="Second slide" />
+                                                                        <Link to={`/annonce/show/`}>
+                                                                            <img className="d-block" src="/assets/vendor/assets/img/bg3.jpg" alt="Second slide" />
+                                                                        </Link>
                                                                     </div>
                                                                     <div className="carousel-item active">
-                                                                        <img className="d-block" src="/assets/vendor/assets/img/bg4.jpg" alt="Third slide" />
+                                                                        <Link to={`/annonce/show/`}>
+                                                                            <img className="d-block" src="/assets/vendor/assets/img/bg4.jpg" alt="Third slide" />
+                                                                        </Link>
                                                                     </div>
                                                                 </div>
                                                                 <a className="carousel-control-prev" href="#carouselAnnonceIndicators" role="button" data-slide="prev">
@@ -123,7 +132,7 @@ class AnnonceUserSite extends Component {
                                                             </div>
                                                             <div className="text-right ml-auto">
                                                                 <a href="#pablo" className="btn btn-sm btn-outline-primary">
-                                                                    <i className="now-ui-icons ui-2_favourite-28"></i> 
+                                                                    <i className="now-ui-icons ui-2_favourite-28"></i>
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -333,7 +342,7 @@ class AnnonceUserSite extends Component {
                                                             </div>
                                                             <div className="text-right ml-auto">
                                                                 <a href="#pablo" className="btn btn-sm btn-primary">
-                                                                    <i className="now-ui-icons ui-2_favourite-28"></i> 
+                                                                    <i className="now-ui-icons ui-2_favourite-28"></i>
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -397,32 +406,32 @@ class AnnonceUserSite extends Component {
                                                             <div className="card-header" role="tab" id="headingOne">
                                                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                                     <b>Location à Douala</b>
-                                                            <i className="now-ui-icons arrows-1_minimal-down"></i>
+                                                                    <i className="now-ui-icons arrows-1_minimal-down"></i>
                                                                 </a>
                                                             </div>
                                                             <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
                                                                 <div className="card-body">
-                                                                <tr> 
+                                                                    <tr>
                                                                         <td> <a href="#pablo">Locations studio à Douala</a></td>
                                                                         <td> 200 annonces</td>
                                                                     </tr>
-                                                                    <tr> 
+                                                                    <tr>
                                                                         <td> <a href="#pablo">Locations chambre à Douala</a></td>
                                                                         <td> 1 300 annonces</td>
                                                                     </tr>
-                                                                    <tr> 
+                                                                    <tr>
                                                                         <td> <a href="#pablo">Locations appartement 2 pièces à Douala</a></td>
                                                                         <td> 380 annonces</td>
                                                                     </tr>
-                                                                    <tr> 
+                                                                    <tr>
                                                                         <td> <a href="#pablo">Locations appartement 3 pièces à Douala</a></td>
                                                                         <td> 9 200 annonces</td>
                                                                     </tr>
-                                                                    <tr> 
+                                                                    <tr>
                                                                         <td> <a href="#pablo">Locations appartement 4 pièces à Douala</a></td>
                                                                         <td> 5 200 annonces</td>
                                                                     </tr>
-                                                                    <tr> 
+                                                                    <tr>
                                                                         <td> <a href="#pablo">Locations appartement 5 pièces à Douala</a></td>
                                                                         <td> 1 200 annonces</td>
                                                                     </tr>
@@ -432,21 +441,21 @@ class AnnonceUserSite extends Component {
                                                         <div className="card card-plain">
                                                             <div className="card-header" role="tab" id="headingThree">
                                                                 <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                                   <b>Autres transactions à Douala </b>
-                                                            <i className="now-ui-icons arrows-1_minimal-down"></i>
+                                                                    <b>Autres transactions à Douala </b>
+                                                                    <i className="now-ui-icons arrows-1_minimal-down"></i>
                                                                 </a>
                                                             </div>
                                                             <div id="collapseThree" className="collapse" role="tabpanel" aria-labelledby="headingThree">
                                                                 <div className="card-body">
-                                                                    <tr> 
+                                                                    <tr>
                                                                         <td> <a href="#pablo">Toutes les ventes de maison Douala</a></td>
                                                                         <td> 200 annonces</td>
                                                                     </tr>
-                                                                    <tr> 
+                                                                    <tr>
                                                                         <td> <a href="#pablo">Toutes les ventes de terrains Douala</a></td>
                                                                         <td> 1 300 annonces</td>
                                                                     </tr>
-                                                                    <tr> 
+                                                                    <tr>
                                                                         <td> <a href="#pablo">Tous les achats de maison de prestige Douala</a></td>
                                                                         <td> 380 annonces</td>
                                                                     </tr>

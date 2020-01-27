@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom'
 import NavUserSite from "../inc/user/NavUserSite";
-import FooterUserSite from "../inc/user/FooterUserSite";
+import FooterBigUserSite from "../inc/user/FooterBigUserSite";
 
 
 class IndexSite extends Component {
@@ -21,7 +21,9 @@ class IndexSite extends Component {
     render() {
         return (
             <div className="pricing sidebar-collapse">
-                <NavUserSite />
+                <nav className="navbar navbar-expand-lg bg-white fixed-top navbar-transparent" color-on-scroll="400">
+                    <NavUserSite />
+                </nav>
 
                 <div className="wrapper">
                     <div id="carouselExampleIndicators" className="carousel slide">
@@ -155,9 +157,8 @@ class IndexSite extends Component {
                         </div>
                     </div>
 
-
+                    <FooterBigUserSite />
                 </div>
-
             </div>
         )
     }

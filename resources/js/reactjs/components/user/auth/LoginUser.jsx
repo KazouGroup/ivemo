@@ -54,18 +54,18 @@ class LoginUser extends Component {
             .then(() => {
                 window.location.replace(`/`);
             }).catch(error => {
-            this.setState({
-                errors: error.response.data.errors
-            });
-            $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
-                allow_dismiss: false,
-                type: 'danger',
-                animate: {
-                    enter: 'animated bounceInDown',
-                    exit: 'animated bounceOutUp'
-                }
-            });
-        })
+                this.setState({
+                    errors: error.response.data.errors
+                });
+                $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
+                    allow_dismiss: false,
+                    type: 'danger',
+                    animate: {
+                        enter: 'animated bounceInDown',
+                        exit: 'animated bounceOutUp'
+                    }
+                });
+            })
     }
 
     // lifecycle method
@@ -76,7 +76,9 @@ class LoginUser extends Component {
     render() {
         return (
             <div className="login-page sidebar-collapse">
-                <NavUserSite />
+                <nav className="navbar navbar-expand-lg bg-white fixed-top navbar-transparent" color-on-scroll="400">
+                    <NavUserSite />
+                </nav>
 
                 <div className="page-header header-filter" >
                     <div className="page-header-image" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/login.jpg' + ")" }}></div>
@@ -115,18 +117,18 @@ class LoginUser extends Component {
                                                     name='password'
                                                     value={this.state.password}
                                                     onChange={this.handleFieldChange}
-                                                    autoComplete="password" autoFocus/>
+                                                    autoComplete="password" autoFocus />
                                                 {this.renderErrorFor('password')}
                                             </div>
                                             <div className="form-check text-left">
                                                 <label className="form-check-label">
-                                                <input className="form-check-input" id="remember" type="checkbox" defaultChecked={this.state.remember} value={this.state.remember} name="remember" onChange={this.handleFieldChange} />
-                                                <span className="form-check-sign"></span>
+                                                    <input className="form-check-input" id="remember" type="checkbox" defaultChecked={this.state.remember} value={this.state.remember} name="remember" onChange={this.handleFieldChange} />
+                                                    <span className="form-check-sign"></span>
                                                     <span>Se souvenir de moi</span>
                                                 </label>
                                             </div>
                                         </div>
-                                        
+
                                         <div className="card-footer text-center">
                                             <button type="submit" className="btn btn-primary btn-round btn-lg btn-block">Se connecter</button>
                                         </div>
@@ -145,7 +147,7 @@ class LoginUser extends Component {
                             </div>
                         </div>
                     </div>
-                    <FooterUserSite/>
+                    <FooterUserSite />
                 </div>
             </div>
         )
