@@ -3,6 +3,8 @@
 use App\Model\categoryfaq;
 use App\Model\color;
 use App\Model\contact;
+use App\Model\categoryannoncelocation;
+use App\Model\categoryannoncevente;
 use App\Model\faq;
 use App\Model\link;
 use App\Model\testimonial;
@@ -62,6 +64,27 @@ class CompileTableSeeder extends Seeder
 
         foreach($colors as $item)
             color::create($item);
+
+            $categoryannoncelocations = [
+                ['name' => 'Appartement','slug' => str_slug('Appartement'),'user_id'=> 1],
+                ['name' => 'Chambre','slug' => str_slug('Chambre'),'user_id'=> 1],
+                ['name' => 'Loft, atelier & surface','slug' => str_slug('Loft, atelier & surface'),'user_id'=> 1],
+                ['name' => 'Maison','slug' => str_slug('Maison'),'user_id'=> 1],
+                ['name' => 'Studio','slug' => str_slug('Studio'),'user_id'=> 1],
+            ];
+
+            foreach($categoryannoncelocations as $item)
+            categoryannoncelocation::create($item);
+
+            $categoryannonceventes = [
+                ['name' => 'Appartement','slug' => str_slug('Appartement'),'user_id'=> 1],
+                ['name' => 'Maison','slug' => str_slug('Maison'),'user_id'=> 1],
+                ['name' => 'Terrain','slug' => str_slug('Terrain'),'user_id'=> 1],
+                ['name' => 'Voiture','slug' => str_slug('Voiture'),'user_id'=> 1],
+            ];
+
+            foreach($categoryannonceventes as $item)
+            categoryannoncevente::create($item);
     }
 
     private function addTestData()

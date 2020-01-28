@@ -6,6 +6,8 @@ import AboutUserSite from "../components/user/about/AboutUserSite";
 import ContactUserSite from "../components/user/contact/ContactUserSite";
 import AnnonceUserSite from "../components/user/annonce/AnnonceUserSite";
 import AnnonceShowUserSite from "../components/user/annonce/AnnonceShowUserSite";
+import AnnonceShowCreateUserSite from "../components/user/annonce/AnnonceShowCreateUserSite";
+import AnnonceBienAvendreCreate from "../components/user/annonce/AnnonceBienAvendreCreate";
 
 
 const RouteUser = props => (
@@ -17,6 +19,8 @@ const RouteUser = props => (
           <Route exact path="/contact/" component={ContactUserSite}/>
           <Route exact path="/annonce/" component={AnnonceUserSite}/>
           <Route exact path="/annonce/show/" component={AnnonceShowUserSite}/>
+          <Route exact path="/annonce/show/create/" component={AnnonceShowCreateUserSite}/>
+          <Route exact path="/annonce/show/vendre/create/" component={AnnonceBienAvendreCreate}/>
     </Switch>
 
 );

@@ -23,7 +23,7 @@ class AnnonceUserSite extends Component {
         return (
             <div className="about-us sidebar-collapse">
 
-                 <nav className="navbar navbar-expand-lg bg-white fixed-top navbar-transparent" color-on-scroll="400">
+                <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
                     <NavUserSite />
                 </nav>
 
@@ -411,33 +411,39 @@ class AnnonceUserSite extends Component {
                                                             </div>
                                                             <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
                                                                 <div className="card-body">
-                                                                    <tr>
-                                                                        <td> <a href="#pablo">Locations studio à Douala</a></td>
-                                                                        <td> 200 annonces</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td> <a href="#pablo">Locations chambre à Douala</a></td>
-                                                                        <td> 1 300 annonces</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td> <a href="#pablo">Locations appartement 2 pièces à Douala</a></td>
-                                                                        <td> 380 annonces</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td> <a href="#pablo">Locations appartement 3 pièces à Douala</a></td>
-                                                                        <td> 9 200 annonces</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td> <a href="#pablo">Locations appartement 4 pièces à Douala</a></td>
-                                                                        <td> 5 200 annonces</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td> <a href="#pablo">Locations appartement 5 pièces à Douala</a></td>
-                                                                        <td> 1 200 annonces</td>
-                                                                    </tr>
+                                                                    <table>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Locations studio à Douala</a></td>
+                                                                                <td className="text-right"> 200 annonces</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Locations chambre à Douala</a></td>
+                                                                                <td className="text-right"> 1 300 annonces</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Locations appartement 2 pièces à Douala</a></td>
+                                                                                <td className="text-right"> 380 annonces</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Locations appartement 3 pièces à Douala</a></td>
+                                                                                <td className="text-right"> 9 200 annonces</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Locations appartement 4 pièces à Douala</a></td>
+                                                                                <td className="text-right"> 5 200 annonces</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Locations appartement 5 pièces à Douala</a></td>
+                                                                                <td className="text-right"> 1 200 annonces</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
                                                                 </div>
                                                             </div>
                                                         </div>
+
+
                                                         <div className="card card-plain">
                                                             <div className="card-header" role="tab" id="headingThree">
                                                                 <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -447,21 +453,26 @@ class AnnonceUserSite extends Component {
                                                             </div>
                                                             <div id="collapseThree" className="collapse" role="tabpanel" aria-labelledby="headingThree">
                                                                 <div className="card-body">
-                                                                    <tr>
-                                                                        <td> <a href="#pablo">Toutes les ventes de maison Douala</a></td>
-                                                                        <td> 200 annonces</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td> <a href="#pablo">Toutes les ventes de terrains Douala</a></td>
-                                                                        <td> 1 300 annonces</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td> <a href="#pablo">Tous les achats de maison de prestige Douala</a></td>
-                                                                        <td> 380 annonces</td>
-                                                                    </tr>
+                                                                    <table>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Toutes les ventes de maison Douala</a></td>
+                                                                                <td className="text-right"> 200 annonces</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Toutes les ventes de terrains Douala</a></td>
+                                                                                <td className="text-right"> 1 300 annonces</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Tous les achats de maison de prestige Douala</a></td>
+                                                                                <td className="text-right"> 380 annonces</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
                                                                 </div>
                                                             </div>
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>

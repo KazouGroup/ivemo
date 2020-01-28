@@ -21,7 +21,7 @@ class IndexSite extends Component {
     render() {
         return (
             <div className="pricing sidebar-collapse">
-                <nav className="navbar navbar-expand-lg bg-white fixed-top navbar-transparent" color-on-scroll="400">
+                <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
                     <NavUserSite />
                 </nav>
 

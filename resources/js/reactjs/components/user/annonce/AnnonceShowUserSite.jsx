@@ -93,7 +93,7 @@ class AnnonceShowUserSite extends Component {
         return (
             <div className="about-us sidebar-collapse">
 
-                <nav className="navbar navbar-expand-lg bg-white">
+                <nav className="navbar navbar-expand-lg bg-primary">
                     <NavUserSite />
                 </nav>
 
@@ -108,7 +108,7 @@ class AnnonceShowUserSite extends Component {
                                 <div className="col-lg-8 col-md-12 mx-auto">
 
                                     <div className="card-body">
-                                        
+
                                         <div className="card-image">
 
                                             <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
@@ -356,6 +356,12 @@ class AnnonceShowUserSite extends Component {
                                 </div>
 
                                 <div className="col-lg-4 col-md-12 mx-auto">
+
+                                <div className="submit text-center">
+                                        <NavLink className="btn btn-danger btn-lg" to={`/annonce/show/create/`}>
+                                             <h6>Poster votre annonce</h6>
+                                        </NavLink>
+                                    </div>
 
                                     <div className="card">
                                         <div className="card-body">
