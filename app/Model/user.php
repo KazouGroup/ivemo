@@ -3,24 +3,26 @@
 namespace App\Model;
 
 use App\Notifications\VerifyEmailUsers;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
+use Laravel\Passport\HasApiTokens;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Permission\Traits\HasRoles;
 
 class user extends Authenticatable implements MustVerifyEmail,Auditable
 {
-    use Notifiable,HasRoles,\OwenIt\Auditing\Auditable;
+    use Notifiable,HasApiTokens,HasRoles,AuditableTrait;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'username','user_status','email', 'password','first_name','sex',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -31,12 +33,14 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
         'password', 'remember_token',
     ];
 
+    protected $dates = ['birthday'];
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
     protected $casts = [
+        'birthday' => 'date:d/m/Y',
         'email_verified_at' => 'datetime',
     ];
     /**
@@ -47,5 +51,51 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
     public function sendEmailVerificationNotification()
     {
         $this->notify(new VerifyEmailUsers());
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::created(function ($user) {
+            // Add role to the user
+            $user->syncRoles('1');
+            $user->profile()->create([
+                'full_name' => $user->email,
+            ]);
+        });
+    }
+
+    public function isOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(profile::class);
+    }
+
+    public function getDataBirthdayItAttribute()
+    {
+        return !empty($this->birthday)? $this->birthday->format('d/m/Y') : '';
+    }
+
+
+    public function getAgeAttribute(){
+        return $this->birthday->diffInYears();
+    }
+
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'leader_id', 'follower_id')->withTimestamps();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'leader_id')->withTimestamps();
     }
 }

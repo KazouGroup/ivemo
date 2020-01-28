@@ -17,6 +17,10 @@ Route::group(['middleware' => 'auth:web'], function(){
 
         require(__DIR__ . DIRECTORY_SEPARATOR . 'users.php');
 
+        require(__DIR__ . DIRECTORY_SEPARATOR . 'profiles.php');
+
+        require(__DIR__ . DIRECTORY_SEPARATOR . 'comments.php');
+
     });
 
 });

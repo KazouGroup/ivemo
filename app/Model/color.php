@@ -21,6 +21,9 @@ class color extends Model implements Auditable
         ];
     }
 
+    protected $casts = [
+        'status' => 'boolean',
+    ];
 
     public function user()
     {

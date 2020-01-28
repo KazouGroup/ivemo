@@ -1,8 +1,11 @@
 <?php
 
+use App\Model\categoryfaq;
 use App\Model\color;
+use App\Model\contact;
 use App\Model\faq;
 use App\Model\link;
+use App\Model\testimonial;
 use App\Model\user;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -37,6 +40,7 @@ class CompileTableSeeder extends Seeder
             'username' =>'bokino12',
             'first_name' =>'Boclair Temgoua',
             'status_user' => 1,
+            //'birthday' => now(),
             'email' => "temgoua2012@gmail.com",
             'color_name' => "primary",
             "password" => bcrypt('0000000'),
@@ -67,6 +71,7 @@ class CompileTableSeeder extends Seeder
             'username' =>'randrino17',
             'first_name' =>'Nzeukang',
             'color_name' => "info",
+            //'birthday' => now(),
             'status_user' => 1,
             'email' => "nzeukangrandrin@gmail.com",
             "password" => bcrypt('123456789'),
@@ -77,11 +82,15 @@ class CompileTableSeeder extends Seeder
 
 
         factory(user::class, 100)->create();
+        factory(categoryfaq::class, 5)->create();
         factory(faq::class, 100)->create();
+        factory(contact::class, 200)->create();
         factory(link::class, 5)->create();
 
+        factory(testimonial::class, 500)->create();
+
         // Output
-        $this->command->info('Test user added.');
+        $this->command->info('Test data added.');
     }
 
 }

@@ -22,6 +22,9 @@ class FaqResource extends JsonResource
             'body' => $this->body,
             'ip' => $this->ip,
             'user' => $this->user,
+            'categoryfaq' => $this->categoryfaq,
+            'categoryfaq_id' => $this->categoryfaq_id,
+            'statusOnline' => $this->user->isOnline(),
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
         ];

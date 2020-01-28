@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin\Pages;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Faq\StoreRequest;
+use App\Http\Requests\Faq\UpdateRequest;
 use App\Http\Resources\FaqResource;
+use App\Model\categoryfaq;
 use App\Model\faq;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class FaqController extends Controller
@@ -18,7 +20,7 @@ class FaqController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth',['except' => ['api','view','apibystatus']]);
+        $this->middleware('auth',['except' => ['api','view','apibystatus','faqbycatagoryapi']]);
     }
     /**
      * Display a listing of the resource.
@@ -30,11 +32,6 @@ class FaqController extends Controller
         return view('admin.faq.index');
     }
 
-    public function v1()
-    {
-        return view('admin.faq.index');
-    }
-
     public function sites()
     {
         return view('admin.faq.index');
@@ -42,18 +39,27 @@ class FaqController extends Controller
 
     public function api()
     {
-        $faqs =  FaqResource::collection(faq::with('user')->latest()->get());
+        $faqs =  FaqResource::collection(faq::with('user','categoryfaq')->latest()->get());
 
         return response()->json($faqs,200);
     }
 
     public function apibystatus()
     {
-        $faqs =  FaqResource::collection(faq::with('user')
+        $faqs =  FaqResource::collection(faq::with('user','categoryfaq')
             ->where('status',1)->latest()
             ->paginate(12));
 
         return response()->json($faqs);
+    }
+
+    public function faqbycatagoryapi($categoryfaq)
+    {
+        $faqs = FaqResource::collection(categoryfaq::whereSlug($categoryfaq)->firstOrFail()->faqs()
+            ->with('user','categoryfaq')->latest()->get());
+
+        return response()->json($faqs,200);
+
     }
 
     public function view($slug)
@@ -78,16 +84,15 @@ class FaqController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $inputs = $request->validate([
-            'title' => 'required',
-            'body' => 'required',
-        ]);
+
+        $inputs = $request->all();
 
         $faq = faq::create([
             'title' => $inputs['title'],
             'body' => $inputs['body'],
+            'categoryfaq_id' => $inputs['categoryfaq_id'],
         ]);
 
         return response()->json($faq,200);
@@ -120,12 +125,15 @@ class FaqController extends Controller
         return view('admin.faq.show',$data);
     }
 
-    public function vector(faq $faq)
+    public function v1()
     {
-        $data = [
-            'faq' => $faq,
-        ];
-        return view('admin.faq.show', $data);
+        return view('admin.faq.index');
+    }
+
+    public function vector($slug)
+    {
+        $faq = faq::where('slug',$slug)->first();
+        return view('admin.faq.show', compact('faq'));
     }
     /**
      * Update the specified resource in storage.
@@ -134,19 +142,18 @@ class FaqController extends Controller
      * @param  int  $id
      * @return array|\Illuminate\Http\Response
      */
-    public function update(Request $request, faq $faq)
+    public function update(UpdateRequest $request, faq $faq)
     {
-        $this->validate($request,[
-            'title'=>'required|string',
-        ]);
+
 
         $faq = faq::findOrFail($faq->id);
 
 
         $faq->title = $request->title;
         $faq->body = $request->body;
+        $faq->categoryfaq_id = $request->categoryfaq_id;
         $faq->slug = null;
-        //$faq->categoryfaq_id = $request->categoryfaq_id;
+
 
         $faq->save();
 
@@ -158,22 +165,12 @@ class FaqController extends Controller
      * @param faq $faq
      * @return \Illuminate\Http\JsonResponse
      */
-    public function disable(faq $faq, $id)
+    public function status(faq $faq,$id)
     {
         $faq = faq::where('id', $id)->findOrFail($id);
-        $faq->update([
-            'status' => 0,
-        ]);
-        return response('Deactivated',Response::HTTP_ACCEPTED);
-    }
+        $faq->update(['status' => !$faq->status]);
 
-    public function active(faq $faq, $id)
-    {
-        $faq = faq::where('id', $id)->findOrFail($id);
-        $faq->update([
-            'status' => 1,
-        ]);
-        return response('Activated',Response::HTTP_ACCEPTED);
+        return response('Update', Response::HTTP_ACCEPTED);
     }
 
     /**

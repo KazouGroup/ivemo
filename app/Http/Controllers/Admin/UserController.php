@@ -4,13 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\UpdateRequest;
+use App\Http\Resources\FollowerResource;
 use App\Http\Resources\UserResource;
+use App\Model\follower;
 use App\Model\user;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
@@ -23,7 +27,7 @@ class UserController extends Controller
     private $auth;
 
     public function __construct(Guard $auth){
-        $this->middleware('auth',['except' => ['api','apiadministrator','show','apidatatables']]);
+        $this->middleware('auth',['except' => ['api','apiadministrator','show','apidatatables','apifollowers','dataLastMonth','dataCurrentMonth']]);
         $this->auth = $auth;
     }
     /**
@@ -53,25 +57,44 @@ class UserController extends Controller
 
     public function api()
     {
-        $users = UserResource::collection(User::where('status_user',0)
+        $users = UserResource::collection(user::where('status_user',0)
             ->latest()->paginate(12));
         return response()->json($users,200);
     }
 
+    public function apifollowers()
+    {
+        $followers = FollowerResource::collection(follower::all());
+        return response()->json($followers,200);
+    }
+
     public function apidatatables()
     {
-        $users = UserResource::collection(User::latest()->get());
+        $users = UserResource::collection(user::latest()->get());
         return response()->json($users,200);
     }
 
     public function apiadministrator()
     {
-        $users = UserResource::collection(User::where('status_user',1)
+        $users = UserResource::collection(user::where('status_user',1)
             ->latest()->get());
         return response()->json($users,200);
     }
 
 
+    public function dataLastMonth()
+    {
+        $users = user::where('created_at', '>=', now()->subMonth())->get();
+
+        return $users;
+    }
+
+    public function dataCurrentMonth()
+    {
+        $users = user::where('created_at', '>=', now()->subMonth())->get();
+
+        return $users;
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -129,13 +152,13 @@ class UserController extends Controller
     public function admin_profile()
     {
         $user = Auth::user();
-        return view('admin.profile.edit',compact('user'));
+        return view('admin.user.show',compact('user'));
     }
 
     public function admin_profile_edit()
     {
         $user = Auth::user();
-        return view('admin.profile.edit',compact('user'));
+        return view('admin.user.show',compact('user'));
     }
 
     public function user_edit()
@@ -181,76 +204,36 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->sex = $request->sex;
 
-        //$roles = $request->input('roles') ? $request->input('roles') : [];
-        //$user->role_user = $request->role_user;
+        $roles = $request->input('roles') ? $request->input('roles') : [];
+        $permissions = $request->input('permissions') ? $request->input('permissions') : [];
+        $user->syncRoles($permissions);
+        $user->syncRoles($roles);
 
         $user->save();
 
         return response()->json($user,200);
     }
 
-    public function updateUser(UpdateRequest $request)
+    public function updateUser(Request $request)
     {
+        $this->validate($request, [
+            'username' => "required|string|min:2|max:25|unique:users,username,".auth()->check(),
+            'email' => ['required', 'email', Rule::unique((new User)->getTable())->ignore(auth()->id())],
+            "sex" => "required|in:Female,Male",
+            //'birthday' => 'required|date_format:d/m/Y',
+        ]);
 
         $user = auth()->user();
-        /**
-         * Avatr image upload
-         */
-        $currentPhoto = $user->avatar;
-        if ($request->avatar != $currentPhoto){
-
-            $namefile = sha1(date('YmdHis') . str_random(30));
-            $name = $namefile .'.' . explode('/',explode(':',substr($request->avatar,0,strpos
-                ($request->avatar,';')))[1])[1];
-
-            $dir = 'assets/img/avatars/user/';
-            if(!file_exists($dir)){
-                mkdir($dir, 0775, true);
-            }
-            Image::make($request->avatar)->fit(400,400)->save(public_path('assets/img/avatars/user/').$name);
-
-
-            $request->merge(['avatar' =>  "/assets/img/avatars/user/{$name}"]);
-
-            // Ici on suprimme l'image existant
-            $oldFilename = $currentPhoto;
-            File::delete(public_path($oldFilename));
-        }
-
-        /**
-         * Coverpage Uploade
-         */
-        $currentCoverPhoto = $user->avatarcover;
-        if ($request->avatarcover != $currentCoverPhoto){
-
-            $namefile = sha1(date('YmdHis') . str_random(30));
-            $name = $namefile .'.' . explode('/',explode(':',substr($request->avatarcover,0,strpos
-                ($request->avatarcover,';')))[1])[1];
-
-            $dir = 'assets/img/avatarcovers/user/';
-            if(!file_exists($dir)){
-                mkdir($dir, 0775, true);
-            }
-            Image::make($request->avatarcover)->save(public_path('assets/img/avatarcovers/user/').$name);
-
-
-            $request->merge(['avatarcover' =>  "/assets/img/avatarcovers/user/{$name}"]);
-
-            // Ici on suprimme l'image existant
-            $oldCoverFilename = $currentCoverPhoto;
-            File::delete(public_path($oldCoverFilename));
-        }
 
         $data = $user->update($request->only(
             'first_name',
+           // 'birthday',
             'last_name',
             'email',
             'username',
-            'color_name',
-            'avatar',
-            'avatarcover',
-            'password',
-            'country_id'
+            'body',
+            'sex',
+            'color_name'
         ));
         return response()->json($data,200);
     }

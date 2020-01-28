@@ -1,36 +1,56 @@
 <?php
-
 namespace App\Http\Requests\Profile;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Http\JsonResponse;
-use Waavi\Sanitizer\Laravel\SanitizesInput;
+use App\Http\Requests\Request;
 
-abstract class BaseRequest extends FormRequest
+
+class BaseRequest extends Request
 {
-    use  SanitizesInput;
+    // --------------------------------------------------------------------------
+
     /**
-     * For more sanitizer rule check https://github.com/Waavi/Sanitizer
+     * Return the array of validation rules for the given group.
+     *
+     * @param string $group The group name: 'store' or 'update'.
+     * @param object $partner The partner object or null if the group is 'store'.
+     * @return array
      */
-    public function validateResolved()
+    protected function getRules($group)
     {
-        {
-            $this->sanitize();
-            parent::validateResolved();
+        if ($group == 'store') {
+            $rules = [
+               //
+            ];
         }
+        else { // 'edit'
+            $rules = [
+                'site_internet' => ['nullable','url'],
+            ];
+        }
+
+        return $rules;
     }
+
+    // --------------------------------------------------------------------------
+
+    // --------------------------------------------------------------------------
+
     /**
-     * Get the validation rules that apply to the request.
+     * the attributes method replaces the :attribute placeholder on the validation messages
+     * with given attribute names
      *
      * @return array
      */
-    abstract public function rules();
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    abstract public function authorize();
-}
+
+    public function attributes()
+    {
+        return [
+           //
+        ];
+    }
+
+    // --------------------------------------------------------------------------
+
+    // --------------------------------------------------------------------------
+
+} // class

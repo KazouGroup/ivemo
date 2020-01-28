@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Model\categoryfaq;
 use App\Model\faq;
 use App\Model\user;
 use Faker\Generator as Faker;
@@ -19,11 +20,14 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(faq::class, function (Faker $faker) {
+    $title = $faker->sentence(9);
     return [
-        'title' => $faker->sentence(4),
+        'title' => $title,
+        'slug' => str_slug($title),
         'ip' => $faker->ipv4,
         'status' => $faker->boolean,
-        'body' => $faker->realText,
+        'body' => $faker->paragraph,
+        'categoryfaq_id' => categoryfaq::inRandomOrder()->first()->id,
         'user_id' => user::inRandomOrder()->first()->id,
     ];
 });

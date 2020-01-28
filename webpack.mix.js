@@ -1,15 +1,16 @@
 const mix = require('laravel-mix');
+const compile_react = require('./webpack/react');
+const compile_vue = require('./webpack/vuejs');
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
 
-mix.react('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+const output = 'public';
+compile_react(output);
+compile_vue(output);
+
+
+
+if (mix.inProduction()) {
+    mix.version();
+}
+
+
