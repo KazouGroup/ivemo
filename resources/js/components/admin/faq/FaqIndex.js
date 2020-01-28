@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-import { FixedSizeList as List } from 'react-window';
 import TopNavAdmin from "../../inc/admin/TopNavAdmin";
 import NavAdmin from "../../inc/admin/NavAdmin";
 import FooterAdmin from "../../inc/admin/FooterAdmin";
@@ -16,13 +15,6 @@ class FaqIndex extends Component {
         this.deleteItem = this.deleteItem.bind(this);
         this.activeItem = this.activeItem.bind(this);
         this.disableItem = this.disableItem.bind(this);
-    }
-
-    activeItem(id){
-
-    }
-    disableItem(id){
-
     }
     // handle delete
     deleteItem(id) {
@@ -85,9 +77,9 @@ class FaqIndex extends Component {
     /** Ici c'est l'activation de la couleur  **/
     activeItem(id) {
 
-        axios.get('/dashboard/active_faqs/' + id).then(() => {
+        axios.get(`/dashboard/active_faqs/${id}`).then(() => {
             /** Alert notify bootstrapp **/
-            $.notify('<strong>FaqLists activated Successfully.</strong>', {
+            $.notify('<strong>Faq activated Successfully.</strong>', {
                 allow_dismiss: false,
                 type: 'info',
                 placement: {
@@ -116,9 +108,9 @@ class FaqIndex extends Component {
     /** Ici c'est la desactivation de la couleur **/
     disableItem(id) {
 
-        axios.get('/dashboard/disable_faqs/' + id).then(() => {
+        axios.get(`/dashboard/disable_faqs/${id}`).then(() => {
             /** Alert notify bootstrapp **/
-            $.notify('<strong>FaqLists desactivated Successfully.</strong>', {
+            $.notify('<strong>Faq desactivated Successfully.</strong>', {
                 allow_dismiss: false,
                 type: 'primary',
                 placement: {
@@ -311,7 +303,7 @@ class FaqIndex extends Component {
                                                                 { item.status ?
                                                                     <span className="badge badge-info"><b>Active</b></span>
                                                                     :
-                                                                    <span className="badge badge-danger"><b>Deactive</b></span>
+                                                                    <span className="badge badge-primary"><b>Deactive</b></span>
                                                                 }
                                                                 </div>
                                                             </td>

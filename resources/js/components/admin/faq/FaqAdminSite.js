@@ -55,7 +55,7 @@ class FaqAdminSite extends Component {
                                                 </div>
                                             </div>
 
-                                                {faqs.map((item) => (
+                                                {faqs.map((item,index) => (
                                                     <FaqLists key={item.id} {...item}/>
                                                 ))}
 

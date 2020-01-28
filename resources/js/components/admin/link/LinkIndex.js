@@ -123,131 +123,32 @@ class FaqIndex extends Component {
         let { faqs } = this.state;
 
         return (
-            <div>
+            <div className="wrapper">
 
                 <NavAdmin/>
 
-                <div className="main-content" id="panel">
+                <div className="main-panel">
 
                     <TopNavAdmin/>
-                    <div className="header bg-primary pb-6">
+
+                    <div className="content">
                         <div className="container-fluid">
-                            <div className="header-body">
-                                <div className="row align-items-center py-4">
-                                    <div className="col-lg-6 col-7">
-                                        <h6 className="h2 text-white d-inline-block mb-0">FAQS</h6>
-                                        <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
-                                            <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
-                                                <li className="breadcrumb-item">
-                                                    <a href="#">
-                                                        <i className="fas fa-book"></i>
-                                                    </a>
-                                                </li>
-                                                <li className="breadcrumb-item">
-                                                    <a href="#">FAQS</a>
-                                                </li>
-                                                <li className="breadcrumb-item active" aria-current="page">
-                                                    New FAQ
-                                                </li>
-                                            </ol>
-                                        </nav>
-                                    </div>
-                                    <div className="col-lg-6 col-5 text-right">
-                                        <Link to={`/dashboard/faqs/create/`} className="btn btn-sm btn-neutral">
-                                            New
-                                        </Link>
-                                        <a href="#" className="btn btn-sm btn-neutral">Filters</a>
+
+
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <h2>Link</h2>
+
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div className="container-fluid mt--6">
-                        <div className="row">
-                            <div className="col">
-                                <div className="card">
-                                    <div className="card-header">
-                                        <h3 className="mb-0">FAQS</h3>
-                                    </div>
-                                    <div className="table-responsive py-4">
-                                        <table className="table table-flush" id="datatable-buttons">
-                                            <thead className="thead-light">
-                                            <tr>
-                                                <th>Title</th>
-                                                <th>Slug</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Status</th>
-                                                <th className="table-actions">Action</th>
-                                            </tr>
-                                            </thead>
-                                            <tfoot>
-                                            <tr>
-                                                <th>Title</th>
-                                                <th>Slug</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Status</th>
-                                                <th className="table-actions">Action</th>
-                                            </tr>
-                                            </tfoot>
-                                            <tbody>
-
-                                            {faqs.map(item => (
-                                                <tr key={item.id}>
-                                                    <td>{item.title}</td>
-                                                    <td>{item.slug}</td>
-                                                    <td>New York</td>
-                                                    <td>27</td>
-                                                    <td>
-                                                        <label className="custom-toggle">
-                                                            <input type="checkbox"  id={`status`} value={item.status} onClick={() => this.changeStatus(item.id)}
-                                                                   defaultChecked={item.status}/>
-                                                            <span className="custom-toggle-slider rounded-circle"
-                                                                  data-label-off="No" data-label-on="Yes">
-                                                        </span>
-                                                        </label>
-                                                    </td>
-                                                    <td className="table-actions">
-                                                        <a href="#" className="btn btn-warning btn-icon-only rounded-circle" data-toggle="tooltip"
-                                                           data-original-title="View faq">
-                                                            <i className="fas fa-eye"></i>
-                                                        </a>
-                                                        <label className="ml-auto">
-                                                            <div
-                                                                className="togglebutton switch-sidebar-mini">
-                                                                <label>
-                                                                    <input type="checkbox"  id={`status`} value={item.status} onClick={() => this.changeStatus(item)}
-                                                                           defaultChecked={item.status}/>
-                                                                    <span className="toggle"></span>
-                                                                </label>
-                                                            </div>
-                                                        </label>
-                                                        <Link className="btn btn-success btn-icon-only rounded-circle" data-toggle="tooltip"
-                                                              data-original-title="Edit faq"
-                                                              to={`/dashboard/faqs/${item.id}/edit/`}
-                                                              key={item.id}>
-                                                            <i className="fas fa-user-edit"></i>
-                                                        </Link>
-                                                        <button type="button" onClick={() => this.deleteItem(item.id)}
-                                                                className="btn btn-danger btn-icon-only rounded-circle">
-                                                    <span className="btn-inner--icon">
-                                                           <i className="fas fa-trash"></i>
-                                                    </span>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            ))}
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <FooterAdmin/>
-                    </div>
+                    <FooterAdmin/>
                 </div>
             </div>
         );

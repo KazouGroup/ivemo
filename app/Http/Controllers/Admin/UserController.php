@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Profile\UpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Model\user;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
@@ -20,7 +23,7 @@ class UserController extends Controller
     private $auth;
 
     public function __construct(Guard $auth){
-        $this->middleware('auth',['except' => ['api','apiadministrator','show']]);
+        $this->middleware('auth',['except' => ['api','apiadministrator','show','apidatatables']]);
         $this->auth = $auth;
     }
     /**
@@ -33,6 +36,16 @@ class UserController extends Controller
         return view('admin.user.index');
     }
 
+    public function datatablesusers()
+    {
+        return view('admin.user.index');
+    }
+
+    public function datatablesadministrators()
+    {
+        return view('admin.user.index');
+    }
+
     public function administrator()
     {
         return view('admin.user.index');
@@ -41,7 +54,13 @@ class UserController extends Controller
     public function api()
     {
         $users = UserResource::collection(User::where('status_user',0)
-            ->latest()->get());
+            ->latest()->paginate(12));
+        return response()->json($users,200);
+    }
+
+    public function apidatatables()
+    {
+        $users = UserResource::collection(User::latest()->get());
         return response()->json($users,200);
     }
 
@@ -168,6 +187,72 @@ class UserController extends Controller
         $user->save();
 
         return response()->json($user,200);
+    }
+
+    public function updateUser(UpdateRequest $request)
+    {
+
+        $user = auth()->user();
+        /**
+         * Avatr image upload
+         */
+        $currentPhoto = $user->avatar;
+        if ($request->avatar != $currentPhoto){
+
+            $namefile = sha1(date('YmdHis') . str_random(30));
+            $name = $namefile .'.' . explode('/',explode(':',substr($request->avatar,0,strpos
+                ($request->avatar,';')))[1])[1];
+
+            $dir = 'assets/img/avatars/user/';
+            if(!file_exists($dir)){
+                mkdir($dir, 0775, true);
+            }
+            Image::make($request->avatar)->fit(400,400)->save(public_path('assets/img/avatars/user/').$name);
+
+
+            $request->merge(['avatar' =>  "/assets/img/avatars/user/{$name}"]);
+
+            // Ici on suprimme l'image existant
+            $oldFilename = $currentPhoto;
+            File::delete(public_path($oldFilename));
+        }
+
+        /**
+         * Coverpage Uploade
+         */
+        $currentCoverPhoto = $user->avatarcover;
+        if ($request->avatarcover != $currentCoverPhoto){
+
+            $namefile = sha1(date('YmdHis') . str_random(30));
+            $name = $namefile .'.' . explode('/',explode(':',substr($request->avatarcover,0,strpos
+                ($request->avatarcover,';')))[1])[1];
+
+            $dir = 'assets/img/avatarcovers/user/';
+            if(!file_exists($dir)){
+                mkdir($dir, 0775, true);
+            }
+            Image::make($request->avatarcover)->save(public_path('assets/img/avatarcovers/user/').$name);
+
+
+            $request->merge(['avatarcover' =>  "/assets/img/avatarcovers/user/{$name}"]);
+
+            // Ici on suprimme l'image existant
+            $oldCoverFilename = $currentCoverPhoto;
+            File::delete(public_path($oldCoverFilename));
+        }
+
+        $data = $user->update($request->only(
+            'first_name',
+            'last_name',
+            'email',
+            'username',
+            'color_name',
+            'avatar',
+            'avatarcover',
+            'password',
+            'country_id'
+        ));
+        return response()->json($data,200);
     }
 
     /**

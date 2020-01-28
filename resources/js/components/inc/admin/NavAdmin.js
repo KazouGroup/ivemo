@@ -122,10 +122,10 @@ export default class NavAdmin extends Component {
                                         </div>
                                     </li>
                                     <li className="nav-item ">
-                                        <a className="nav-link" href="../examples/pages/pricing.html">
-                                            <span className="sidebar-mini"> P </span>
-                                            <span className="sidebar-normal"> Pricing </span>
-                                        </a>
+                                        <Link to={'/dashboard/links/'} className="nav-link">
+                                            <span className="sidebar-mini"> LK </span>
+                                            <span className="sidebar-normal"> Links </span>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
@@ -158,9 +158,21 @@ export default class NavAdmin extends Component {
                                         </div>
                                     </li>
                                     <li className="nav-item ">
-                                        <Link className="nav-link" to={'/dashboard/administrators'}>
+                                        <Link className="nav-link" to={'/dashboard/administrators/'}>
                                             <span className="sidebar-mini"> AM </span>
                                             <span className="sidebar-normal"> Administrators </span>
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item ">
+                                        <Link className="nav-link" to={'/dashboard/permissions/'}>
+                                            <span className="sidebar-mini"> PM </span>
+                                            <span className="sidebar-normal"> Permissions </span>
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item ">
+                                        <Link className="nav-link" to={'/dashboard/roles/'}>
+                                            <span className="sidebar-mini"> RL </span>
+                                            <span className="sidebar-normal"> Roles </span>
                                         </Link>
                                     </li>
                                 </ul>

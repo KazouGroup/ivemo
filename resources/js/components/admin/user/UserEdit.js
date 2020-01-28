@@ -268,7 +268,7 @@ class UserEdit extends Component {
                                                     </div>
                                                 </div>
                                                 <div className="text-center">
-                                                    <Link to={'/dashboard/users/'} className={`btn  pull-center btn-secondary`}>
+                                                    <Link to={'/dashboard/users/p/datatables/'} className={`btn  pull-center btn-secondary`}>
                                                         Cancel
                                                     </Link>
                                                     <button type="submit" className={`btn  pull-center btn-${this.state.color_name}`}>
