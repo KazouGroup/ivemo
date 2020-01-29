@@ -97,9 +97,9 @@ class NavUserSite extends Component {
                                                 <i className="now-ui-icons business_bulb-63" /> Dashboard
                                             </a>
                                         )}
-                                        <a className="dropdown-item" href="../examples/profile-page.html">
+                                        <Link className="dropdown-item" to={`/profile/account/`}>
                                             <i className="now-ui-icons users_single-02"></i> Profile Page
-                                            </a>
+                                        </Link>
                                         <a style={{ cursor: "pointer" }} className="dropdown-item" onClick={() => this.navLogout()}>
                                             <i className="now-ui-icons ui-1_simple-remove" /> Déconnexion
                                             </a>

@@ -8,6 +8,8 @@ import AnnonceUserSite from "../components/user/annonce/AnnonceUserSite";
 import AnnonceShowUserSite from "../components/user/annonce/AnnonceShowUserSite";
 import AnnonceShowCreateUserSite from "../components/user/annonce/AnnonceShowCreateUserSite";
 import AnnonceBienAvendreCreate from "../components/user/annonce/AnnonceBienAvendreCreate";
+import ProfileAccountUser from "../components/user/profile/ProfileAccountUser";
+import ProfileAccountChangePasswordUser from "../components/user/profile/ProfileAccountChangePasswordUser";
 
 
 const RouteUser = props => (
@@ -21,6 +23,8 @@ const RouteUser = props => (
           <Route exact path="/annonce/show/" component={AnnonceShowUserSite}/>
           <Route exact path="/annonce/show/create/" component={AnnonceShowCreateUserSite}/>
           <Route exact path="/annonce/show/vendre/create/" component={AnnonceBienAvendreCreate}/>
+          <Route exact path="/profile/account/" component={ProfileAccountUser}/>
+          <Route exact path="/profile/change_password/" component={ProfileAccountChangePasswordUser}/>
     </Switch>
 
 );

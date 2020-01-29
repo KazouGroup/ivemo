@@ -25,7 +25,7 @@ $factory->define(user::class, function (Faker $faker) {
         'last_name' => $faker->lastName,
         'birthday' => now(),
         'email' => $faker->unique()->safeEmail,
-        'body' => $faker->realText,
+        'description' => $faker->realText,
         'status_user' => $faker->boolean,
         'color_name' => color::inRandomOrder()->first()->name,
         'email_verified_at' => $faker->dateTime,

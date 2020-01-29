@@ -357,7 +357,7 @@ class AnnonceShowCreateUserSite extends Component {
 
                                                 <div className="submit text-center">
                                                     <button className="btn btn-primary btn-lg" type="submit">
-                                                        Poster votre annonce
+                                                    <i className="now-ui-icons ui-1_check"></i> <b>Poster votre annonce</b>
                                                     </button>
                                                 </div>
                                             </div>
