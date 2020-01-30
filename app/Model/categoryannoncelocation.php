@@ -30,4 +30,9 @@ class categoryannoncelocation extends Model
             }
         });
     }
+
+    public function conseillocations()
+    {
+        return $this->hasMany(conseillocation::class, 'categoryannoncelocation_id');
+    }
 }

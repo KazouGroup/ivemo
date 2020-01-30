@@ -1,12 +1,12 @@
 @extends('inc.user.main')
 <?php $item = htmlspecialchars(config('app.name'));?>
-@section('title', 'Anonnce - '.$item)
+@section('title', 'Conseil pour la location et la presentation de vos biens  - '.$item)
 
 @section('style')
 @endsection
 
 @section('init')
-    <!-- Site wrapper -->
+<!-- Site wrapper -->
 @endsection
 
 @section('content')

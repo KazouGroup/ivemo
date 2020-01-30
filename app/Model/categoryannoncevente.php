@@ -30,4 +30,9 @@ class categoryannoncevente extends Model
             }
         });
     }
+
+    public function conseilventes()
+    {
+        return $this->hasMany(conseilvente::class, 'categoryannoncevente_id');
+    }
 }

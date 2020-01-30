@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Link } from 'react-router-dom'
+import React, {Component} from "react";
+import {Link} from 'react-router-dom'
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 
@@ -22,12 +22,13 @@ class AboutUserSite extends Component {
         return (
             <div className="about-us sidebar-collapse">
                 <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
-                    <NavUserSite />
+                    <NavUserSite/>
                 </nav>
 
                 <div className="wrapper">
                     <div className="page-header page-header-mini">
-                        <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
+                        <div className="page-header-image" data-parallax="true"
+                             style={{backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")"}}>
                         </div>
                         <div className="content-center">
                             <div className="row">
@@ -44,7 +45,8 @@ class AboutUserSite extends Component {
                             <div className="container">
                                 <div className="row">
                                     <div className="col-md-6 ml-auto mr-auto text-center">
-                                        <h4 className="description">Notre team et tous les informations concernant la plate forme. </h4>
+                                        <h4 className="description">Notre team et tous les informations concernant la
+                                            plate forme. </h4>
                                         <div className="section-space"></div>
                                     </div>
                                 </div>
@@ -65,7 +67,7 @@ class AboutUserSite extends Component {
                                                 </ul>
                                                 <a href="#pablo" className="btn btn-info btn-round">
                                                     Get it Now
-                  </a>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -83,9 +85,10 @@ class AboutUserSite extends Component {
                                                     <li>Unlimited emails</li>
                                                     <li>Full Support</li>
                                                 </ul>
-                                                <a href="#pablo" className="btn btn-neutral btn-primary disabled btn-round">
+                                                <a href="#pablo"
+                                                   className="btn btn-neutral btn-primary disabled btn-round">
                                                     Current Plan
-                  </a>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -105,7 +108,7 @@ class AboutUserSite extends Component {
                                                 </ul>
                                                 <a href="#pablo" className="btn btn-danger btn-round">
                                                     Upgrade Plan
-                  </a>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -115,8 +118,7 @@ class AboutUserSite extends Component {
                     </div>
 
 
-
-                    <FooterBigUserSite />
+                    <FooterBigUserSite/>
                 </div>
             </div>
         )
