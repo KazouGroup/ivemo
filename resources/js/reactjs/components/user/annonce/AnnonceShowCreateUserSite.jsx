@@ -185,21 +185,40 @@ class AnnonceShowCreateUserSite extends Component {
                                                                                 />
                                                                                 {this.renderErrorFor('last_name')}
                                                                             </div>
-                                                                            <label htmlFor="title">Selectionez votre votre type be bien</label>
-                                                                            <div className="form-group">
-                                                                                <select name={'city_id'} value={this.state.city_id}
-                                                                                    className={`form-control`}
-                                                                                    id="city_id" onChange={this.handleFieldChange}>
-                                                                                    <option value="" disabled>Selectioner une ville</option>
-                                                                                    <option value="">Appartement</option>
-                                                                                    <option value="">Chambre</option>
-                                                                                    <option value="">Studio</option>
-                                                                                    <option value="">Maison</option>
-                                                                                    
-                                                                                </select>
-                                                                                {this.renderErrorFor('email')}
-                                                                            </div>
+                                                                            <div className="row">
+                                                                                <div className="col-md-6">
+                                                                                    <label htmlFor="title">Selectionez votre votre type be bien</label>
+                                                                                    <div className="form-group">
+                                                                                        <select name={'city_id'} value={this.state.city_id}
+                                                                                                className={`form-control`}
+                                                                                                id="city_id" onChange={this.handleFieldChange}>
+                                                                                            <option value="" disabled>Selectioner une ville</option>
+                                                                                            <option value="">Appartement</option>
+                                                                                            <option value="">Chambre</option>
+                                                                                            <option value="">Studio</option>
+                                                                                            <option value="">Maison</option>
 
+                                                                                        </select>
+                                                                                        {this.renderErrorFor('categorie')}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="col-md-6">
+                                                                                    <label htmlFor="title">Selectionez votre ville</label>
+                                                                                    <div className="form-group">
+                                                                                        <select name={'city_id'} value={this.state.city_id}
+                                                                                                className={`form-control`}
+                                                                                                id="city_id" onChange={this.handleFieldChange}>
+                                                                                            <option value="" disabled>Selectioner une ville</option>
+                                                                                            <option value="">Douala</option>
+                                                                                            <option value="">Yaounde</option>
+                                                                                            <option value="">Bafoussam</option>
+                                                                                            <option value="">Bertoua</option>
+
+                                                                                        </select>
+                                                                                        {this.renderErrorFor('city')}
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
