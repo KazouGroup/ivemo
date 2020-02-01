@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\annoncetype;
 use App\Model\categoryfaq;
 use App\Model\color;
 use App\Model\contact;
@@ -62,6 +63,7 @@ class CompileTableSeeder extends Seeder
             ['name' => 'primary ','user_id' => 1],
         ];
 
+
         foreach($colors as $item)
             color::create($item);
 
@@ -85,6 +87,15 @@ class CompileTableSeeder extends Seeder
 
             foreach($categoryannonceventes as $item)
             categoryannoncevente::create($item);
+
+            $annoncetypes = [
+                ['name' => 'locations','slug'=> 'location'],
+                ['name' => 'ventes','slug'=> 'ventes'],
+                ['name' => 'reservations','slug'=> 'reservations']
+            ];
+
+            foreach ($annoncetypes as $item)
+                annoncetype::create($item);
     }
 
     private function addTestData()

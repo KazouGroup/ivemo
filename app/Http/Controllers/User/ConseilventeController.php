@@ -59,7 +59,8 @@ class ConseilventeController extends Controller
 
     public function apiconseillocationbycategoryannonceventeslug($categoryannoncevente, $conseilvente)
     {
-        $conseilvente = new ConseilventeResource(conseilvente::whereSlug($conseilvente)
+        $conseilvente = new ConseilventeResource(conseilvente::whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+            ->where('status',1)->whereSlug($conseilvente)
             ->firstOrFail());
         return response()->json($conseilvente, 200);
     }

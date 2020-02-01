@@ -55,10 +55,11 @@ class ConseillocationController extends Controller
         return response()->json($conseillocations,200);
     }
 
-    public function apiconseillocationbycategoryannoncelocationslug($categoryannoncelocation,$conseillocation)
+    public function apiconseillocationbycategoryannoncelocationslug(categoryannoncelocation $categoryannoncelocation,$conseillocation)
     {
 
-        $conseillocation = new ConseillocationResource(conseillocation::whereSlug($conseillocation)->firstOrFail());
+        $conseillocation = new ConseillocationResource(conseillocation::whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
+            ->where('status',1)->whereSlug($conseillocation)->firstOrFail());
 
         return response()->json($conseillocation,200);
     }

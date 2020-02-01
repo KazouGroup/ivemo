@@ -31,8 +31,18 @@ class categoryannoncelocation extends Model
         });
     }
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function conseillocations()
     {
         return $this->hasMany(conseillocation::class, 'categoryannoncelocation_id');
+    }
+
+    public function annoncelocations()
+    {
+        return $this->hasMany(annoncelocation::class, 'categoryannoncelocation_id');
     }
 }
