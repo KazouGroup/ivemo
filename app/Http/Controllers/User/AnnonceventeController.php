@@ -22,9 +22,9 @@ class AnnonceventeController extends Controller
         ]]);
     }
 
-    public function apiannonceventebyannoncetype($annoncetype)
+    public function apiannonceventebyannoncetype(annoncetype $annoncetype)
     {
-        $annoncesventetypes = new AnnoncetypeResource(annoncetype::whereSlug($annoncetype)
+        $annoncesventetypes = new AnnoncetypeResource(annoncetype::whereSlug($annoncetype->slug)
             ->first());
 
         return response()->json($annoncesventetypes, 200);

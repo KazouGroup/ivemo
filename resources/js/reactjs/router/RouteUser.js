@@ -10,6 +10,7 @@ import AnnonceShowCreateUserSite from "../components/user/annonce/AnnonceShowCre
 import AnnonceBienAvendreCreate from "../components/user/annonce/AnnonceBienAvendreCreate";
 import ProfileAccountUser from "../components/user/profile/ProfileAccountUser";
 import ProfileAccountChangePasswordUser from "../components/user/profile/ProfileAccountChangePasswordUser";
+import AnnoncereservationIndex from "../components/user/annoncereservation/AnnoncereservationIndex";
 
 
 const RouteUser = props => (
@@ -21,6 +22,7 @@ const RouteUser = props => (
           <Route exact path="/contact/" component={ContactUserSite}/>
           <Route exact path="/annonce/" component={AnnonceUserSite}/>
           <Route exact path="/annonce/show/" component={AnnonceShowUserSite}/>
+          <Route exact path="/annonces/:annoncetype/" component={AnnoncereservationIndex}/>
           <Route exact path="/annonce/show/create/" component={AnnonceShowCreateUserSite}/>
           <Route exact path="/annonce/show/vendre/create/" component={AnnonceBienAvendreCreate}/>
           <Route exact path="/profile/account/" component={ProfileAccountUser}/>

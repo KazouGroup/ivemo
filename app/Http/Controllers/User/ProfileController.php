@@ -70,8 +70,7 @@ class ProfileController extends Controller
     public function apipersonalreservations()
     {
         $user = auth()->user();
-        $personnalreservations = reservation::whereIn('user_id',[$user->id])
-            ->with('user','annoncereservation')
+        $personnalreservations = reservation::whereIn('user_id',[$user->id])->with('user','annoncereservation')
             ->orderBy('created_at','DESC')
             ->distinct()->get()->toArray();
 
@@ -79,13 +78,11 @@ class ProfileController extends Controller
     }
     public function apiannoncesbookeds()
     {
+        //->with('annoncetype','user','categoryannoncereservation','city')
         $personnalreservations = reservation::with('user','annoncereservation')
             ->orderBy('created_at','DESC')
             ->whereHas('annoncereservation', function ($q) {
-                $q->whereIn('user_id',[auth()->user()->id])
-                    ->whereHas('categoryannoncereservation', function ($q) {
-                        $q->with('user','categoryannoncereservation');
-                    });
+                $q->whereIn('user_id',[auth()->user()->id]);
             })->distinct()->get()->toArray();
 
         return response()->json($personnalreservations, 200);

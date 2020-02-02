@@ -16,19 +16,20 @@ class AnnoncereservationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth',['except' => [
-            'api','apiannoncereservations','apiannoncereservationbyannoncetype','apiannoncereservationbycity',
-            'apiannoncelocationbycategoryannoncereservation','apiannoncelocationbycategoryannoncereservationslug'
+        $this->middleware('auth',['only' => [
+            'create','store','edit','update','destroy'
         ]]);
     }
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(annoncetype $annoncetype)
     {
-        //
+        return view('user.annoncereservation.annonces_index',[
+           'annoncestype' => $annoncetype,
+        ]);
     }
 
     public function api()
@@ -46,7 +47,7 @@ class AnnoncereservationController extends Controller
         return response()->json($annoncereservations, 200);
     }
 
-    public function apiannoncelocationbyannoncetype($annoncetype)
+    public function apiannoncereservationbyannoncetype ($annoncetype)
     {
         $annonces = new AnnoncetypeResource(annoncetype::whereSlug($annoncetype)
             ->first());
