@@ -19,12 +19,14 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(user::class, function (Faker $faker) {
+    $first_name = $faker->firstName.' '.$faker->lastName;
     $users =  [
         'username' => $faker->unique()->userName,
-        'first_name' => $faker->firstName,
+        'first_name' => $first_name,
+        'slug' => str_slug($first_name),
         'last_name' => $faker->lastName,
         'birthday' => now(),
-        'email' => $faker->unique()->safeEmail,
+        'email' => $faker->unique()->freeEmail,
         'description' => $faker->realText,
         'status_user' => $faker->boolean,
         'color_name' => color::inRandomOrder()->first()->name,

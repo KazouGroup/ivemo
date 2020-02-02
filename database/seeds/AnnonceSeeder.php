@@ -1,6 +1,8 @@
 <?php
 
 use App\Model\annoncelocation;
+use App\Model\annoncereservation;
+use App\Model\reservation;
 use Illuminate\Database\Seeder;
 
 class AnnonceSeeder extends Seeder
@@ -12,7 +14,9 @@ class AnnonceSeeder extends Seeder
      */
     public function run()
     {
-        factory( annoncelocation::class, 200)->create();
+        factory(annoncelocation::class, 200)->create();
+        factory(annoncereservation::class, 200)->create();
+        factory(reservation::class, 600)->create();
 
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AnnoncetypeResource extends JsonResource
+class CategoryannoncereservationResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,26 +15,18 @@ class AnnoncetypeResource extends JsonResource
     public function toArray($request)
     {
 
-        $annoncelocations = $this->annoncelocations()->whereIn('annoncetype_id',[$this->id])
-            ->with('user','categoryannoncelocation','city','annoncetype')
-            ->orderBy('created_at','DESC')
+        $annoncereservations = $this->annoncereservations()->with('user','categoryannoncereservation','city','annoncetype')
+            ->whereIn('categoryannoncereservation_id',[$this->id])->orderBy('created_at','DESC')
             ->where(function ($q){
                 $q->where('status',1);
             })->distinct()->get()->toArray();
-
-        $annoncereservations = $this->annoncereservations()->whereIn('annoncetype_id',[$this->id])
-            ->with('user','categoryannoncereservation','city','annoncetype')
-            ->orderBy('created_at','DESC')
-            ->where(function ($q){
-                $q->where('status',1);
-            })->distinct()->get()->toArray();
-
         return [
             'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
+            'icon' => $this->icon,
+            'user' => $this->user,
             'annoncereservations' => $annoncereservations,
-            'annoncelocations' => $annoncelocations,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
         ];

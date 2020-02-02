@@ -40,4 +40,9 @@ class annoncetype extends Model
     {
         return $this->hasMany(annoncelocation::class, 'annoncetype_id');
     }
+
+    public function annoncereservations()
+    {
+        return $this->hasMany(annoncereservation::class, 'annoncetype_id');
+    }
 }

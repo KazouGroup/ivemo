@@ -54,4 +54,9 @@ class city extends Model
     {
         return $this->hasMany(annoncelocation::class, 'city_id');
     }
+
+    public function annoncereservations()
+    {
+        return $this->hasMany(annoncereservation::class, 'city_id');
+    }
 }

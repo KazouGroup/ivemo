@@ -56,13 +56,21 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
     protected static function boot()
     {
         parent::boot();
-        static::created(function ($user) {
-            // Add role to the user
+        static::creating(function ($user){
             $user->syncRoles('1');
             $user->profile()->create([
                 'full_name' => $user->email,
             ]);
+            if (auth()->check()){
+                $user->user_id = auth()->id();
+            }
         });
+        static::updating(function($user){
+            if (auth()->check()){
+                $user->user_id = auth()->id();
+            }
+        });
+
     }
 
     public function isOnline()
@@ -91,6 +99,10 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
         return $this->belongsToMany(User::class, 'followers', 'leader_id', 'follower_id')->withTimestamps();
     }
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

@@ -1,6 +1,7 @@
 <?php
 
 use App\Model\annoncetype;
+use App\Model\categoryannoncereservation;
 use App\Model\categoryfaq;
 use App\Model\color;
 use App\Model\contact;
@@ -42,6 +43,7 @@ class CompileTableSeeder extends Seeder
         $god = User::create([
             'username' =>'bokino12',
             'first_name' =>'Boclair Temgoua',
+            'slug' => str_slug('Boclair Temgoua'),
             'status_user' => 1,
             //'birthday' => now(),
             'email' => "temgoua2012@gmail.com",
@@ -89,13 +91,24 @@ class CompileTableSeeder extends Seeder
             categoryannoncevente::create($item);
 
             $annoncetypes = [
-                ['name' => 'locations','slug'=> 'location'],
-                ['name' => 'ventes','slug'=> 'ventes'],
-                ['name' => 'reservations','slug'=> 'reservations']
+                ['name' => 'Locations','slug'=> 'location'],
+                ['name' => 'Ventes','slug'=> 'ventes'],
+                ['name' => 'Reservations','slug'=> 'reservations']
             ];
 
             foreach ($annoncetypes as $item)
                 annoncetype::create($item);
+
+            $categoryannoncereservations = [
+                ['name' => 'Appartement','slug' => str_slug('Appartement'),'user_id'=> 1],
+                ['name' => 'Chambre d\'hotel','slug' => str_slug('Chambre d\'hotel'),'user_id'=> 1],
+                ['name' => 'Suite d\'hotel','slug' => str_slug('Suite d\'hotel'),'user_id'=> 1],
+                ['name' => 'Hall d\'hotel','slug' => str_slug('Hall d\'hotel'),'user_id'=> 1],
+                ['name' => 'Villa','slug' => str_slug('Villa'),'user_id'=> 1],
+            ];
+
+        foreach ($categoryannoncereservations as $item)
+            categoryannoncereservation::create($item);
     }
 
     private function addTestData()
@@ -104,6 +117,7 @@ class CompileTableSeeder extends Seeder
         $admin_user = User::create([
             'username' =>'randrino17',
             'first_name' =>'Nzeukang',
+            'slug' => str_slug('Nzeukang'),
             'color_name' => "info",
             //'birthday' => now(),
             'status_user' => 1,

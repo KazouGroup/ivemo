@@ -3,18 +3,25 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AnnoncetypeResource;
+use App\Http\Resources\UserResource;
+use App\Model\annoncereservation;
+use App\Model\annoncetype;
+use App\Model\user;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-     /**
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except' => [
+            'api','apiprofilepublique','apiannoncereservationbyprofilpublique'
+        ]]);
     }
     /**
      * Display a listing of the resource.
@@ -24,6 +31,23 @@ class ProfileController extends Controller
     public function index()
     {
         //
+    }
+
+    public function apiprofilepublique($user)
+    {
+        $user = new UserResource(user::whereSlug($user)
+            ->first());
+
+        return response()->json($user, 200);
+    }
+
+    public function apiannoncereservationbyprofilpublique(user $user,annoncetype $annoncetype)
+    {
+        $annoncereservations = annoncereservation::whereIn('user_id',[$user->id])
+            ->whereIn('annoncetype_id',[$annoncetype->id])
+            ->with('user','categoryannoncereservation','city','annoncetype')->latest()->get();
+
+        return response()->json($annoncereservations, 200);
     }
      /**
      * Show the form for creating a new resource.

@@ -3,27 +3,22 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\AnnoncelocationResource;
+use App\Http\Resources\AnnoncereservationResource;
 use App\Http\Resources\AnnoncetypeResource;
-use App\Http\Resources\CategoryannoncelocationResource;
-use App\Model\annoncelocation;
+use App\Http\Resources\CategoryannoncereservationResource;
+use App\Model\annoncereservation;
 use App\Model\annoncetype;
-use App\Model\categoryannoncelocation;
+use App\Model\categoryannoncereservation;
 use App\Model\city;
 use Illuminate\Http\Request;
 
-class AnnoncelocationController extends Controller
+class AnnoncereservationController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth',['except' => [
-            'api','apiannoncelocations','apiannoncelocationbyannoncetype','apiannoncelocationbycity',
-            'apiannoncelocationbycategoryannoncelocation','apiannoncelocationbycategoryannoncelocationslug'
+            'api','apiannoncereservations','apiannoncereservationbyannoncetype','apiannoncereservationbycity',
+            'apiannoncelocationbycategoryannoncereservation','apiannoncelocationbycategoryannoncereservationslug'
         ]]);
     }
     /**
@@ -33,7 +28,7 @@ class AnnoncelocationController extends Controller
      */
     public function index()
     {
-        return view('user.annonce.annoncelocation.index');
+        //
     }
 
     public function api()
@@ -43,12 +38,12 @@ class AnnoncelocationController extends Controller
         return response()->json($annoncelocations, 200);
     }
 
-    public function apiannoncelocations()
+    public function apiannoncereservations()
     {
-        $annoncelocations = AnnoncelocationResource::collection(annoncelocation::with('user','categoryannoncelocation')
+        $annoncereservations = AnnoncereservationResource::collection(annoncereservation::with('user','categoryannoncereservation','city','annoncetype')
             ->where('status',1)->latest()->get());
 
-        return response()->json($annoncelocations, 200);
+        return response()->json($annoncereservations, 200);
     }
 
     public function apiannoncelocationbyannoncetype($annoncetype)
@@ -59,37 +54,38 @@ class AnnoncelocationController extends Controller
         return response()->json($annonces, 200);
     }
 
-    public function apiannoncelocationbycategoryannoncelocation($annoncetype,$categoryannoncelocation)
+    public function apiannoncelocationbycategoryannoncereservation($annoncetype,$categoryannoncereservation)
     {
-        $annoncelocation = new CategoryannoncelocationResource(categoryannoncelocation::whereSlug($categoryannoncelocation)
+        $annoncereservation = new CategoryannoncereservationResource(categoryannoncereservation::whereSlug($categoryannoncereservation)
             ->first());
-        return response()->json($annoncelocation, 200);
+        return response()->json($annoncereservation, 200);
     }
 
-    public function apiannoncelocationbycity(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city)
+    public function apiannoncereservationbycity(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city)
     {
-        $annoncelocations = $city->annoncelocations()
-            ->with('user','categoryannoncelocation','city','annoncetype')
+        $annoncereservations = $city->annoncereservations()
+            ->with('user','categoryannoncereservation','city','annoncetype')
             ->whereIn('city_id',[$city->id])
-            ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
+            ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->orderBy('created_at','DESC')
             ->where(function ($q){
                 $q->where('status',1);
             })->distinct()->get()->toArray();
 
-        return response()->json($annoncelocations, 200);
+        return response()->json($annoncereservations, 200);
     }
 
-    public function apiannoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$annoncelocation)
-    {
-        $annoncelocation = new AnnoncelocationResource(annoncelocation::whereIn('annoncetype_id',[$annoncetype->id])
-        ->whereIn('city_id',[$city->id])
-        ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
-        ->where('status',1)
-        ->whereSlug($annoncelocation)->firstOrFail());
 
-        return response()->json($annoncelocation, 200);
+    public function apiannoncelocationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,$annoncereservation)
+    {
+        $annoncereservation = new AnnoncereservationResource(annoncereservation::whereIn('annoncetype_id',[$annoncetype->id])
+            ->whereIn('city_id',[$city->id])
+            ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
+            ->where('status',1)
+            ->whereSlug($annoncereservation)->firstOrFail());
+
+        return response()->json($annoncereservation, 200);
     }
 
     /**
