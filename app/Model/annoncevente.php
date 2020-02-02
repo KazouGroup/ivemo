@@ -11,7 +11,7 @@ class annoncevente extends Model
    protected $guarded = [];
 
    protected $table = 'annonceventes';
-   
+
    protected static function boot()
     {
         parent::boot();
@@ -27,7 +27,7 @@ class annoncevente extends Model
             }
         });
     }
-    
+
 
     public function getRouteKeyName()
     {
@@ -48,7 +48,7 @@ class annoncevente extends Model
     {
         return $this ->belongsTo(city::class, 'city_id');
     }
-    
+
     public function annoncetype()
     {
         return $this->belongsTo(annoncetype::class,'annoncetype_id');

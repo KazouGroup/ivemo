@@ -63,8 +63,7 @@ class AnnoncereservationController extends Controller
 
     public function apiannoncereservationbycity(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city)
     {
-        $annoncereservations = $city->annoncereservations()
-            ->with('user','categoryannoncereservation','city','annoncetype')
+        $annoncereservations = $city->annoncereservations()->with('user','categoryannoncereservation','city','annoncetype')
             ->whereIn('city_id',[$city->id])
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->whereIn('annoncetype_id',[$annoncetype->id])

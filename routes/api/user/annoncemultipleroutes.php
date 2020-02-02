@@ -10,21 +10,21 @@ Route::get(
 )->name('api.annoncelocations_site');
 
 Route::get(
-    'annonces/{annoncetype}',
+    'annonces_locations/{annoncetype}',
     'AnnoncelocationController@apiannoncelocationbyannoncetype'
 )->name('api.annoncelocationbyannoncetype_site');
 
 Route::get(
-    'annonces/{annoncetype}/{categoryannoncelocation}',
+    'annonces_locations/{annoncetype}/{categoryannoncelocation}',
     'AnnoncelocationController@apiannoncelocationbycategoryannoncelocation'
 )->name('api.annoncelocationbycategoryannoncelocations_site');
 
 Route::get(
-    'annonces/{annoncetype}/{categoryannoncelocation}/{city}',
+    'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}',
     'AnnoncelocationController@apiannoncelocationbycity'
 )->name('api.annoncelocationbycities_site');
 
 Route::get(
-    'annonces/{annoncetype}/{categoryannoncelocation}/{city}/{annoncelocation}',
+    'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}/{annoncelocation}',
     'AnnoncelocationController@apiannoncelocationbycategoryannoncelocationslug'
 )->name('api.annoncelocationbycategoryannoncelocationslug_site');

@@ -31,6 +31,11 @@ class categoryannoncevente extends Model
         });
     }
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function conseilventes()
     {
         return $this->hasMany(conseilvente::class, 'categoryannoncevente_id');

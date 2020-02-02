@@ -9,6 +9,7 @@ use App\Http\Resources\CategoryannonceventeResource;
 use App\Model\annoncevente;
 use App\Model\annoncetype;
 use App\Model\categoryannoncevente;
+use App\Model\city;
 use Illuminate\Http\Request;
 
 class AnnonceventeController extends Controller
@@ -31,7 +32,6 @@ class AnnonceventeController extends Controller
 
     public function apiannonceventebycategoryannoncevente($annoncetype,$categoryannoncevente)
     {
-        dd($categoryannoncevente);
         $annoncevente = new CategoryannonceventeResource(categoryannoncevente::whereSlug($categoryannoncevente)
             ->first());
         return response()->json($annoncevente, 200);
@@ -39,8 +39,7 @@ class AnnonceventeController extends Controller
 
     public function apiannonceventebycity(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city)
     {
-        $annonceventecities = $city->annonceventes()
-            ->with('user','categoryannoncevente','city','annoncetype')
+        $annonceventecities = $city->annonceventes()->with('user','categoryannoncevente','city','annoncetype')
             ->whereIn('city_id',[$city->id])
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
             ->whereIn('annoncetype_id',[$annoncetype->id])
