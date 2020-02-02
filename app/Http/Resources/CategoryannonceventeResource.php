@@ -19,6 +19,12 @@ class CategoryannonceventeResource extends JsonResource
             ->where(function ($q){
                 $q->where('status',1);
             })->distinct()->get()->toArray();
+
+        $annonceventes = $this->annonceventes()->with('user','categoryannoncevente','city','annoncetype')
+            ->whereIn('categoryannoncevente_id',[$this->id])->orderBy('created_at','DESC')
+               ->where(function ($q){
+                $q->where('status',1)->whereIn('annoncetype_id',[2]);
+            })->distinct()->get()->toArray();    
         return [
             'id' => $this->id,
             'slug' => $this->slug,
@@ -26,6 +32,7 @@ class CategoryannonceventeResource extends JsonResource
             'icon' => $this->icon,
             'user' => $this->user,
             'conseilventes' => $conseilventes,
+            'annonceventes' => $annonceventes,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
         ];

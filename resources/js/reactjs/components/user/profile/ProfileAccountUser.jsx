@@ -284,7 +284,7 @@ class ProfileAccountUser extends Component {
                                                     <div className="card-header d-flex align-items-center">
                                                         <div className="d-flex align-items-center">
                                                             <NavLink to={`/profile/account/`}>
-                                                                <img src="/assets/vendor/assets/img/bg1.jpg" style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
+                                                                <img src={this.state.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                                             </NavLink>
                                                             <div className="mx-3">
                                                                 <NavLink to={`/profile/account/`} className="text-dark font-weight-600 text-sm"><b>{this.state.first_name}</b>
