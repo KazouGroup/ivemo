@@ -107,11 +107,22 @@ class AnnoncereservationController extends Controller
             ->withCount(['annoncereservations' => function ($q){
                 $q->where('status',1);
             }])
-            ->orderBy('annoncereservations_count','desc')->get());
+            ->orderBy('annoncereservations_count','desc')->take(6)->get());
 
         return response()->json($annoncereservations, 200);
     }
 
+    public function apicitiesannoncesbycategory(categoryannoncereservation $categoryannoncereservation)
+    {
+        $annoncereservations = $categoryannoncereservation->annoncereservations()->with('user','categoryannoncereservation','city','annoncetype')
+            ->where('status',1)
+            ->orderBy('created_at','DESC')
+            ->where(function ($q){
+                $q->whereIn('annoncetype_id',[3]);
+            })->distinct()->get()->toArray();
+
+        return response()->json($annoncereservations, 200);
+    }
 
     public function apiannoncelocationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,$annoncereservation)
     {
