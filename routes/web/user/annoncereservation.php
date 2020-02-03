@@ -1,21 +1,21 @@
 <?php
 
 Route::get(
-    'annonces/{annoncetype}',
+    'annonces_reservations/{annoncetype}',
     'AnnoncereservationController@index'
 )->name('annoncereservationbyannoncetype_site');
 
 Route::get(
-    'annonces/{annoncetype}/{categoryannoncereservation}',
+    'annonces_reservations/{annoncetype}/{categoryannoncereservation}',
     'AnnoncereservationController@annoncelocationbycategoryannoncereservation'
 )->name('annoncelocationbycategoryannoncereservations_site');
 
 Route::get(
-    'annonces/{annoncetype}/{categoryannoncereservation}/{city}',
+    'annonces_reservations/{annoncetype}/{categoryannoncereservation}/{city}',
     'AnnoncereservationController@annoncereservationbycity'
 )->name('annoncereservationbycities_site');
 
 Route::get(
-    'annonces/{annoncetype}/{categoryannoncereservation}/{city}/{annoncereservation}',
+    'annonces_reservations/{annoncetype}/{categoryannoncereservation}/{city}/{annoncereservation}',
     'AnnoncereservationController@annoncelocationbycategoryannoncereservationslug'
 )->name('annoncelocationbycategoryannoncereservationslug_site');

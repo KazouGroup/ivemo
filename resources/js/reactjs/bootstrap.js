@@ -24,6 +24,7 @@ window.$userIvemo =  window.userIvemo.user;
 window.$guest = window.userIvemo.guest;
 window.$authcheck = window.userIvemo.authcheck;
 
+
 //console.log(window.bus);
 /**
  * Next we will register the CSRF Token as a common header with Axios so that

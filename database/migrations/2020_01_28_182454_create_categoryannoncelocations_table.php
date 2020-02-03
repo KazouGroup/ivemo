@@ -16,6 +16,7 @@ class CreateCategoryannoncelocationsTable extends Migration
         Schema::create('categoryannoncelocations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable();
+            $table->string('color_name')->nullable();
             $table->string('slug')->nullable();
             $table->string('icon')->nullable();
             $table->timestamps();

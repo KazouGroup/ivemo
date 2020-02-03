@@ -48,6 +48,7 @@
         "react-spring": "^8.0.27",
         "react-window": "^1.8.5",
         "reactstrap": "^8.4.1",
+        "remarkable": "^2.0.0",
         "vform": "^1.0.1",
         "vue": "^2.6.11",
         "vue-infinite-loading": "^2.4.4",

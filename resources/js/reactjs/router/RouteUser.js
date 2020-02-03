@@ -1,5 +1,5 @@
 import React from "react";
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch,withRouter} from 'react-router-dom';
 import IndexSite from "../components/user/IndexSite";
 import LoginUser from "../components/user/auth/LoginUser";
 import AboutUserSite from "../components/user/about/AboutUserSite";
@@ -11,6 +11,10 @@ import AnnonceBienAvendreCreate from "../components/user/annonce/AnnonceBienAven
 import ProfileAccountUser from "../components/user/profile/ProfileAccountUser";
 import ProfileAccountChangePasswordUser from "../components/user/profile/ProfileAccountChangePasswordUser";
 import AnnoncereservationIndex from "../components/user/annoncereservation/AnnoncereservationIndex";
+import Annoncebycategoryannoncereservation
+    from "../components/user/annoncereservation/Annoncebycategoryannoncereservation";
+import Annoncebycategoryannoncereservationcity
+    from "../components/user/annoncereservation/Annoncebycategoryannoncereservationcity";
 
 
 const RouteUser = props => (
@@ -22,7 +26,9 @@ const RouteUser = props => (
           <Route exact path="/contact/" component={ContactUserSite}/>
           <Route exact path="/annonce/" component={AnnonceUserSite}/>
           <Route exact path="/annonce/show/" component={AnnonceShowUserSite}/>
-          <Route exact path="/annonces/:annoncetype/" component={AnnoncereservationIndex}/>
+          <Route exact path="/annonces_reservations/:annoncetype/" component={AnnoncereservationIndex}/>
+          <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/" component={withRouter(Annoncebycategoryannoncereservation)}/>
+          <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/" component={withRouter(Annoncebycategoryannoncereservationcity)}/>
           <Route exact path="/annonce/show/create/" component={AnnonceShowCreateUserSite}/>
           <Route exact path="/annonce/show/vendre/create/" component={AnnonceBienAvendreCreate}/>
           <Route exact path="/profile/account/" component={ProfileAccountUser}/>

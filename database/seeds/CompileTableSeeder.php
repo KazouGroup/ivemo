@@ -81,10 +81,10 @@ class CompileTableSeeder extends Seeder
             categoryannoncelocation::create($item);
 
             $categoryannonceventes = [
-                ['name' => 'Appartement','slug' => str_slug('Appartement'),'user_id'=> 1],
-                ['name' => 'Maison','slug' => str_slug('Maison'),'user_id'=> 1],
-                ['name' => 'Terrain','slug' => str_slug('Terrain'),'user_id'=> 1],
-                ['name' => 'Voiture','slug' => str_slug('Voiture'),'user_id'=> 1],
+                ['name' => 'Appartement','slug' => str_slug('Appartement'),'color_name' => 'info','user_id'=> 1],
+                ['name' => 'Maison','slug' => str_slug('Maison'),'color_name' => 'success','user_id'=> 1],
+                ['name' => 'Terrain','slug' => str_slug('Terrain'),'color_name' => 'danger','user_id'=> 1],
+                ['name' => 'Voiture','slug' => str_slug('Voiture'),'color_name' => 'primary','user_id'=> 1],
             ];
 
             foreach($categoryannonceventes as $item)
@@ -100,11 +100,11 @@ class CompileTableSeeder extends Seeder
                 annoncetype::create($item);
 
             $categoryannoncereservations = [
-                ['name' => 'Appartement','slug' => str_slug('Appartement'),'user_id'=> 1],
-                ['name' => 'Chambre d\'hotel','slug' => str_slug('Chambre d\'hotel'),'user_id'=> 1],
-                ['name' => 'Suite d\'hotel','slug' => str_slug('Suite d\'hotel'),'user_id'=> 1],
-                ['name' => 'Hall d\'hotel','slug' => str_slug('Hall d\'hotel'),'user_id'=> 1],
-                ['name' => 'Villa','slug' => str_slug('Villa'),'user_id'=> 1],
+                ['name' => 'Appartement','slug' => str_slug('Appartement'),'color_name' => 'info','user_id'=> 1],
+                ['name' => 'Chambre d\'hotel','slug' => str_slug('Chambre d-hotel'),'color_name' => 'primary','user_id'=> 1],
+                ['name' => 'Suite d\'hotel','slug' => str_slug('Suite d-hotel'),'color_name' => 'success','user_id'=> 1],
+                ['name' => 'Hall d\'hotel','slug' => str_slug('Hall d-hotel'),'color_name' => 'danger','user_id'=> 1],
+                ['name' => 'Villa','slug' => str_slug('Villa'),'color_name' => 'success','user_id'=> 1],
             ];
 
         foreach ($categoryannoncereservations as $item)

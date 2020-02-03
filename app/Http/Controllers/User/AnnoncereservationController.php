@@ -32,11 +32,35 @@ class AnnoncereservationController extends Controller
         ]);
     }
 
+    public function annoncelocationbycategoryannoncereservation(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation)
+    {
+       return view('user.annoncereservation.annonces_category',[
+               'annoncestype' => $annoncetype,
+               'categoryannoncereservation' => $categoryannoncereservation,
+            ]);
+    }
+
+    public function annoncereservationbycity(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city)
+    {
+        return view('user.annoncereservation.annonces_city',[
+                   'annoncestype' => $annoncetype,
+                   'categoryannoncereservation' => $categoryannoncereservation,
+                   'city' => $city,
+                ]);
+    }
+
     public function api()
     {
         $annoncelocations = AnnoncelocationResource::collection(annoncelocation::with('user','categoryannoncelocation')->latest()->get());
 
         return response()->json($annoncelocations, 200);
+    }
+
+    public function apicategoryannoncereservation()
+    {
+        $categoryannoncereservations = CategoryannoncereservationResource::collection(categoryannoncereservation::with('user')->latest()->get());
+
+        return response()->json($categoryannoncereservations, 200);
     }
 
     public function apiannoncereservations()

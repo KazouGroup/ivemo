@@ -15,7 +15,6 @@ class ProfileAccountUser extends Component {
             email: '',
             first_name: '',
             username: '',
-            email: '',
             last_name: '',
             subject: '',
             description: '',

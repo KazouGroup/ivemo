@@ -30,6 +30,7 @@ class CategoryannoncelocationResource extends JsonResource
             'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
+            'color_name' => $this->color_name,
             'icon' => $this->icon,
             'user' => $this->user,
             'conseillocations' => $conseillocations,
