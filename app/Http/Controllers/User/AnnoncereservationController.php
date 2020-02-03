@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\AnnoncereservationResource;
 use App\Http\Resources\AnnoncetypeResource;
 use App\Http\Resources\CategoryannoncereservationResource;
+use App\Http\Resources\CityResource;
 use App\Model\annoncereservation;
 use App\Model\annoncetype;
 use App\Model\categoryannoncereservation;
@@ -88,14 +89,25 @@ class AnnoncereservationController extends Controller
 
     public function apiannoncereservationbycity(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city)
     {
-        $annoncereservations = $city->annoncereservations()->with('user','categoryannoncereservation','city','annoncetype')
-            ->whereIn('city_id',[$city->id])
+        $annoncereservations = $city->annoncereservations()->with('user','categoryannoncereservation','city','annoncetype')->whereIn('city_id',[$city->id])
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->orderBy('created_at','DESC')
             ->where(function ($q){
                 $q->where('status',1);
             })->distinct()->get()->toArray();
+
+        return response()->json($annoncereservations, 200);
+    }
+
+    public function apicitiesannonces()
+    {
+        $annoncereservations = CityResource::collection(city::with('user')
+            ->where('status',1)
+            ->withCount(['annoncereservations' => function ($q){
+                $q->where('status',1);
+            }])
+            ->orderBy('annoncereservations_count','desc')->get());
 
         return response()->json($annoncereservations, 200);
     }

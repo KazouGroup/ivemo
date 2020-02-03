@@ -6,6 +6,12 @@ Route::get(
 )->name('api.categoryannoncereservation_site');
 
 Route::get(
+    'annonces_reservations_by_cities',
+    'AnnoncereservationController@apicitiesannonces'
+)->name('api.citiesannonces_site');
+
+
+Route::get(
     'annonces_reservations/{annoncetype}',
     'AnnoncereservationController@apiannoncereservationbyannoncetype'
 )->name('api.annoncereservationbyannoncetype_site');

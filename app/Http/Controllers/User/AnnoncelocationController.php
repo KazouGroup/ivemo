@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\AnnoncelocationResource;
 use App\Http\Resources\AnnoncetypeResource;
 use App\Http\Resources\CategoryannoncelocationResource;
+use App\Http\Resources\CityResource;
 use App\Model\annoncelocation;
 use App\Model\annoncetype;
 use App\Model\categoryannoncelocation;
@@ -21,9 +22,8 @@ class AnnoncelocationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth',['except' => [
-            'api','apiannoncelocations','apiannoncelocationbyannoncetype','apiannoncelocationbycity',
-            'apiannoncelocationbycategoryannoncelocation','apiannoncelocationbycategoryannoncelocationslug'
+        $this->middleware('auth',['only' => [
+            'create','store','edit','update','destroy'
         ]]);
     }
     /**
@@ -80,6 +80,19 @@ class AnnoncelocationController extends Controller
 
         return response()->json($annoncelocations, 200);
     }
+
+    public function apicitiesannonces()
+    {
+        $annoncelocations = CityResource::collection(city::with('user')
+            ->where('status',1)
+            ->withCount(['annoncelocations' => function ($q){
+                $q->where('status',1);
+            }])
+            ->orderBy('annoncelocations_count','desc')->get());
+
+        return response()->json($annoncelocations, 200);
+    }
+
 
     public function apiannoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$annoncelocation)
     {

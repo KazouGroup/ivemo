@@ -10,6 +10,11 @@ Route::get(
 )->name('api.annoncelocations_site');
 
 Route::get(
+    'annonces_locations_by_cities',
+    'AnnoncelocationController@apicitiesannonces'
+)->name('api.citiesannoncelocations_site');
+
+Route::get(
     'annonces_locations/{annoncetype}',
     'AnnoncelocationController@apiannoncelocationbyannoncetype'
 )->name('api.annoncelocationbyannoncetype_site');
