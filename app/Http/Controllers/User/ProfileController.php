@@ -73,6 +73,8 @@ class ProfileController extends Controller
             ->with([
                 'annoncereservation.categoryannoncereservation' => function ($q){
                     $q->select('id','name','slug','user_id');},
+                'annoncereservation.city' => function ($q){
+                    $q->select('id','name','slug','user_id');},
                 'annoncereservation.annoncetype' => function ($q){
                     $q->select('id','name','slug');},
                 'annoncereservation.user' => function ($q){
@@ -87,6 +89,8 @@ class ProfileController extends Controller
             ->orderBy('created_at','DESC')
             ->with([
                 'annoncereservation.categoryannoncereservation' => function ($q){
+                    $q->select('id','name','slug','user_id');},
+                'annoncereservation.city' => function ($q){
                     $q->select('id','name','slug','user_id');},
                 'annoncereservation.annoncetype' => function ($q){
                     $q->select('id','name','slug');},
