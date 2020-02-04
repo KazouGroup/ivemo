@@ -6,7 +6,6 @@ import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import AnnoncereservationList from "./AnnoncereservationList";
 import PropTypes from "prop-types";
-import Navtabscategoryreservation from "./inc/Navtabscategoryreservation";
 
 
 class Annoncebycategoryannoncereservationcity extends Component {
@@ -14,6 +13,8 @@ class Annoncebycategoryannoncereservationcity extends Component {
         super(props);
         this.state = {
             annoncereservationbycity:[],
+            categoryannoncereservations: [],
+            citiesannoncesreservations: [],
         }
     }
 
@@ -23,6 +24,12 @@ class Annoncebycategoryannoncereservationcity extends Component {
         let itemcityannonce = this.props.match.params.city;
         let url = route('api.annoncereservationbycities_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce]);
         dyaxios.get(url).then(response => this.setState({annoncereservationbycity: response.data,}));
+        dyaxios.get(route('api.categoryannoncereservation_site')).then(response => this.setState({categoryannoncereservations: response.data,}));
+        fetch(route('api.citiesannonces_reservations_site')).then(res => res.json()).then((result) => {
+            this.setState({
+                citiesannoncesreservations: [...result]
+            });
+        })
     }
 
     // lifecycle method
@@ -30,13 +37,26 @@ class Annoncebycategoryannoncereservationcity extends Component {
         this.loadItem();
     }
 
+    getRepString (annoncereservations_count) {
+        annoncereservations_count = annoncereservations_count +'';
+        if (annoncereservations_count < 1000) {
+            return annoncereservations_count;
+        }
+        if (annoncereservations_count < 10000) {
+            return annoncereservations_count.charAt(0) + ',' + annoncereservations_count.substring(1);
+        }
+        return (annoncereservations_count/1000).toFixed(annoncereservations_count % 1000 !== 0)+'k';
+    }
+
     render() {
-        const {annoncereservationbycity} = this.state;
-        let annoncereservationcity = this.props.match.params.city;
+        const {annoncereservationbycity,categoryannoncereservations,citiesannoncesreservations} = this.state;
+        let Slugannoncetype = this.props.match.params.annoncetype;
+        let Slugategoryannoncereservation = this.props.match.params.categoryannoncereservation;
+        let Slugcity = this.props.match.params.city;
         return (
             <>
                 <Helmet>
-                    <title>Reservation dans la ville de {`${annoncereservationcity}`} - Ivemo</title>
+                    <title>Reservation dans la ville de {`${Slugcity}`} - Ivemo</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
@@ -60,9 +80,28 @@ class Annoncebycategoryannoncereservationcity extends Component {
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
-                                        {annoncereservationbycity.map((item) => (
-                                            <AnnoncereservationList key={item.id} {...item} />
-                                        ))}
+                                        <ul className="nav nav-tabs nav-tabs-neutral justify-content-center"
+                                            role="tablist" data-background-color={this.props.backgroundColor}>
+
+                                            {categoryannoncereservations.map((item) => (
+                                                <li key={item.id} className="nav-item">
+                                                    <NavLink to={`/annonces_reservations/reservations/${item.slug}/${Slugcity}/`} className="nav-link">
+                                                        <b>{item.name}</b>
+                                                    </NavLink>
+                                                </li>
+                                            ))}
+
+                                        </ul>
+                                        <br/>
+
+                                        {annoncereservationbycity.length >= 0 && (
+                                            <>
+                                                {annoncereservationbycity.map((item) => (
+                                                    <AnnoncereservationList key={item.id} {...item} />
+                                                ))}
+                                            </>
+                                        )}
+
 
                                     </div>
 
@@ -85,7 +124,7 @@ class Annoncebycategoryannoncereservationcity extends Component {
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingOne">
                                                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <b>Reservation dans la ville de Douala</b>
+                                                                        <b>Faites une reservation dans ces villes</b>
                                                                         <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
@@ -93,30 +132,18 @@ class Annoncebycategoryannoncereservationcity extends Component {
                                                                     <div className="card-body">
                                                                         <table>
                                                                             <tbody>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Reservation Appartement à Douala</a></td>
-                                                                                <td className="text-right"> 200 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Locations chambre à Douala</a></td>
-                                                                                <td className="text-right"> 1 300 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Locations appartement 2 pièces à Douala</a></td>
-                                                                                <td className="text-right"> 380 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Locations appartement 3 pièces à Douala</a></td>
-                                                                                <td className="text-right"> 9 200 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Locations appartement 4 pièces à Douala</a></td>
-                                                                                <td className="text-right"> 5 200 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Locations appartement 5 pièces à Douala</a></td>
-                                                                                <td className="text-right"> 1 200 annonces</td>
-                                                                            </tr>
+
+                                                                            {citiesannoncesreservations.map((item) => (
+                                                                                <tr key={item.id}>
+                                                                                    <td>
+                                                                                        <NavLink to={`/annonces_reservations/${Slugannoncetype}/${Slugategoryannoncereservation}/${item.slug}/`}>
+                                                                                            Reservation {Slugategoryannoncereservation} à  {item.name}
+                                                                                        </NavLink>
+                                                                                    </td>
+                                                                                    <td className="text-right">{this.getRepString(item.annoncereservations_count)}  annonces</td>
+                                                                                </tr>
+                                                                            ))}
+
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
@@ -184,5 +211,15 @@ class Annoncebycategoryannoncereservationcity extends Component {
         )
     }
 }
+Annoncebycategoryannoncereservationcity.defaultProps = {
+    backgroundColor: "black",
+};
 
+Annoncebycategoryannoncereservationcity.propTypes = {
+    // background color for the component
+    backgroundColor: PropTypes.oneOf([
+        "black",
+        "orange",
+    ]),
+};
 export default Annoncebycategoryannoncereservationcity;

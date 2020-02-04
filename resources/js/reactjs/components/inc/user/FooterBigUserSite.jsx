@@ -1,10 +1,31 @@
 import React, { Component } from "react";
 import { Link,NavLink } from 'react-router-dom';
+import AnnoncereservationList from "../../user/annoncereservation/AnnoncereservationList";
 
 
 class FooterBigUserSite extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            citiesannoncesreservations: [],
+        }
+    }
+
+    loadItems(){
+        let url = route('api.citiesannonces_reservations_site');
+        fetch(url).then(res => res.json()).then((result) => {
+                this.setState({
+                    citiesannoncesreservations: [...result]
+                });
+            });
+    }
+
+    componentDidMount() {
+        this.loadItems();
+    }
 
     render() {
+        const {citiesannoncesreservations} = this.state;
 
         return (
             <footer className="footer footer-big" data-background-color="black">
@@ -22,7 +43,7 @@ class FooterBigUserSite extends Component {
                                         data-toggle="tooltip" data-original-title="Follow us">
                                         <i className="fab fa-twitter" />
                                     </a>
-                                    
+
                                     <a target="_blank" href="https://www.facebook.com/creativetim"
                                         className="btn btn-sm" data-toggle="tooltip" data-original-title="Like us">
                                         <i className="fab fa-facebook-square" />
@@ -98,12 +119,12 @@ class FooterBigUserSite extends Component {
                                         </li>
                                     </ul>
                                 </div>
-                                
+
                             </div>
 
                             <div className="col-md-2 col-6">
                                 <h5>Reservation Hotel</h5>
-                                <ul className="links-vertical">                              
+                                <ul className="links-vertical">
                                  <li>
                                     <a href="#pablo" className="text-muted">
                                         Akwa palace
@@ -131,45 +152,27 @@ class FooterBigUserSite extends Component {
                                     </li>
                                     <li>
                                         <a href="#pablo" className="text-muted">
-                                            Affiliates Program
+                                            Affiliates
                         </a>
                                     </li>
                                 </ul>
                             </div>
 
                             <div className="col-md-2 col-6">
-                                <h5>Ventes de terrain</h5>
+                                <h5>Top villes pour vos reservations</h5>
                                 <ul className="links-vertical">
-                                    <li>
-                                        <a href="#pablo" className="text-muted">
-                                            Sales FAQ
-                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#pablo" className="text-muted">
-                                            How to Register
-                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#pablo" className="text-muted">
-                                            Sell Goods
-                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#pablo" className="text-muted">
-                                            Receive Payment
-                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#pablo" className="text-muted">
-                                            Transactions Issues
-                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#pablo" className="text-muted">
-                                            Affiliates Program
-                        </a>
-                                    </li>
+
+                                    {citiesannoncesreservations.map((item) => (
+
+                                        <li key={item.id}>
+                                            <a href="#pablo" className="text-muted">
+                                                {item.name}
+                                            </a>
+                                        </li>
+                                    ))}
+
+
+
                                 </ul>
                             </div>
 

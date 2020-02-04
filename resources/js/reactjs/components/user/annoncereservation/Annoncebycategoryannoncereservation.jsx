@@ -14,6 +14,7 @@ class Annoncebycategoryannoncereservation extends Component {
         super(props);
         this.state = {
             annoncereservationbycategory: {annoncereservations:[]},
+            citiesannoncesreservations: [],
         }
     }
 
@@ -22,6 +23,11 @@ class Annoncebycategoryannoncereservation extends Component {
         let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
         let url = route('api.annoncelocationbycategoryannoncereservations_site',[itemannoncetype,itemCategoryannoncereservation]);
         dyaxios.get(url).then(response => this.setState({annoncereservationbycategory: response.data,}));
+        fetch(route('api.citiesannonces_reservations_site')).then(res => res.json()).then((result) => {
+            this.setState({
+                citiesannoncesreservations: [...result]
+            });
+        });
     }
 
     // lifecycle method
@@ -29,9 +35,21 @@ class Annoncebycategoryannoncereservation extends Component {
         this.loadItem();
     }
 
+     getRepString (annoncereservations_count) {
+         annoncereservations_count = annoncereservations_count +'';
+        if (annoncereservations_count < 1000) {
+            return annoncereservations_count;
+        }
+        if (annoncereservations_count < 10000) {
+            return annoncereservations_count.charAt(0) + ',' + annoncereservations_count.substring(1);
+        }
+        return (annoncereservations_count/1000).toFixed(annoncereservations_count % 1000 !== 0)+'k';
+    }
+
     render() {
-        const {annoncereservationbycategory} = this.state;
+        const {annoncereservationbycategory,citiesannoncesreservations} = this.state;
         const allannoncereservationsbycategory = annoncereservationbycategory.annoncereservations;
+        const annoncetype = this.props.match.params.annoncetype;
         return (
             <>
                 <Helmet>
@@ -97,55 +115,20 @@ class Annoncebycategoryannoncereservation extends Component {
                                                                         <table>
                                                                             <tbody>
 
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <NavLink to={`/`}>
-                                                                                        Reservez un(e) <strong>{annoncereservationbycategory.name}</strong> à Douala
-                                                                                    </NavLink>
-                                                                                </td>
-                                                                                <td className="text-right"> 200 annonces</td>
-                                                                            </tr>
+                                                                            {citiesannoncesreservations.map((item) => (
+                                                                                <tr key={item.id}>
+                                                                                    <td>
+                                                                                        <NavLink to={`/annonces_reservations/${annoncetype}/${annoncereservationbycategory.slug}/${item.slug}/`}>
+                                                                                            Reservation {annoncereservationbycategory.name} à  {item.name}
+                                                                                        </NavLink>
+                                                                                    </td>
+                                                                                    <td className="text-right">{this.getRepString(item.annoncereservations_count)}  annonces</td>
+                                                                                </tr>
+                                                                            ))}
 
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <a href="#pablo">
-                                                                                        Reservez un(e) <strong>{annoncereservationbycategory.name}</strong> à Yaounde
-                                                                                    </a>
-                                                                                </td>
-                                                                                <td className="text-right"> 1 300 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <a href="#pablo">
-                                                                                        Reservez un(e) <strong>{annoncereservationbycategory.name}</strong> à Daschang
-                                                                                    </a>
-                                                                                </td>
-                                                                                <td className="text-right"> 380 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <a href="#pablo">
-                                                                                        Reservez un(e) <strong>{annoncereservationbycategory.name}</strong> à Bafang
-                                                                                    </a>
-                                                                                </td>
-                                                                                <td className="text-right"> 9 200 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <a href="#pablo">
-                                                                                        Reservez un(e) <strong>{annoncereservationbycategory.name}</strong> à Bamenda
-                                                                                    </a>
-                                                                                </td>
-                                                                                <td className="text-right"> 5 200 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <a href="#pablo">
-                                                                                        Reservez un(e) <strong>{annoncereservationbycategory.name}</strong> à Douala
-                                                                                    </a>
-                                                                                </td>
-                                                                                <td className="text-right"> 1 200 annonces</td>
-                                                                            </tr>
+
+
+
                                                                             </tbody>
                                                                         </table>
                                                                     </div>

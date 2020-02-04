@@ -12,6 +12,7 @@ class AnnoncereservationIndex extends Component {
         super(props);
         this.state = {
             annoncereservationbytype: {annoncereservations:[]},
+            categoryannoncereservations: [],
         }
     }
 
@@ -19,6 +20,7 @@ class AnnoncereservationIndex extends Component {
         let itemAnnoncereservation = this.props.match.params.annoncetype;
         let url = route('api.annoncereservationbyannoncetype_site', itemAnnoncereservation);
         dyaxios.get(url).then(response => this.setState({annoncereservationbytype: response.data,}));
+        dyaxios.get(route('api.categoryannoncereservation_site')).then(response => this.setState({categoryannoncereservations: response.data,}));
     }
 
     // lifecycle method
@@ -27,7 +29,7 @@ class AnnoncereservationIndex extends Component {
     }
 
     render() {
-        const {annoncereservationbytype} = this.state;
+        const {annoncereservationbytype,categoryannoncereservations} = this.state;
         const allannoncereserbvations = annoncereservationbytype.annoncereservations;
         return (
             <>
@@ -93,38 +95,26 @@ class AnnoncereservationIndex extends Component {
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingOne">
                                                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <b>Location à Douala</b>
-                                                                        <i className="now-ui-icons arrows-1_minimal-down"></i>
+                                                                        <b>Quesque vous aviez besoin?</b>
+                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
                                                                 <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
                                                                     <div className="card-body">
                                                                         <table>
                                                                             <tbody>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Locations studio à Douala</a></td>
-                                                                                <td className="text-right"> 200 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Locations chambre à Douala</a></td>
-                                                                                <td className="text-right"> 1 300 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Locations appartement 2 pièces à Douala</a></td>
-                                                                                <td className="text-right"> 380 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Locations appartement 3 pièces à Douala</a></td>
-                                                                                <td className="text-right"> 9 200 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Locations appartement 4 pièces à Douala</a></td>
-                                                                                <td className="text-right"> 5 200 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Locations appartement 5 pièces à Douala</a></td>
-                                                                                <td className="text-right"> 1 200 annonces</td>
-                                                                            </tr>
+
+                                                                            {categoryannoncereservations.map((item) => (
+                                                                                <tr key={item.id}>
+                                                                                    <td>
+                                                                                        <NavLink to={`/annonces_reservations/reservations/${item.slug}/`}>
+                                                                                            Reservation {item.name}
+                                                                                        </NavLink>
+                                                                                    </td>
+                                                                                    <td className="text-right"> 200 annonces</td>
+                                                                                </tr>
+                                                                            ))}
+
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
