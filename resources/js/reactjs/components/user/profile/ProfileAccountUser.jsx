@@ -157,6 +157,274 @@ class ProfileAccountUser extends Component {
 
                                     <div className="row">
 
+
+                                        <div className="col-lg-8 col-md-12 mx-auto">
+
+                                            <ul className="nav nav-tabs nav-tabs-neutral justify-content-center"
+                                                role="tablist" data-background-color={this.props.backgroundColor}>
+                                                <li className="nav-item">
+                                                    <NavLink to={`/profile/account/`} className="nav-link">
+                                                        <i className="now-ui-icons users_circle-08"></i> Profile
+                                                    </NavLink>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <NavLink to={`/profile/change_password/`} className="nav-link">
+                                                        <i className="now-ui-icons ui-1_lock-circle-open"></i> Changer
+                                                        le mot de passe
+                                                    </NavLink>
+                                                </li>
+                                            </ul>
+                                            <br/>
+
+
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <div className="card-title">
+                                                        <b>Contact de votre agence</b>
+                                                    </div>
+                                                    <div className="card-header d-flex align-items-center">
+                                                        <div className="d-flex align-items-center">
+                                                            <NavLink to={`/profile/account/`}>
+                                                                <img src={this.state.avatar}
+                                                                     style={{height: "40px", width: "80px"}} alt=""
+                                                                     className="avatar"/>
+                                                            </NavLink>
+                                                            <div className="mx-3">
+                                                                <NavLink to={`/profile/account/`}
+                                                                         className="text-dark font-weight-600 text-sm"><b>{this.state.first_name}</b>
+                                                                    <small
+                                                                        className="d-block text-muted"><b>{this.state.last_name} {moment($userIvemo.created_at).format('DD/MM/YYYY')}</b></small>
+                                                                </NavLink>
+                                                            </div>
+                                                        </div>
+                                                        <div className="text-right ml-auto">
+                                                            <Button className="btn btn-sm btn-info" rel="tooltip"
+                                                                    title="3426712192" data-placement="bottom">
+                                                                <i className="now-ui-icons tech_mobile"></i>
+                                                            </Button>
+                                                            {this.state.url_site !== null && (
+                                                                <a href={this.state.url_site}
+                                                                   className="btn btn-sm btn-primary" target="_banck">
+                                                                    <i className="now-ui-icons objects_globe"></i>
+                                                                </a>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                    <div className="card-title">
+                                                        {this.state.address !== null && (
+                                                            <><i className="now-ui-icons location_pin"></i>
+                                                                <b>{this.state.address}</b></>
+                                                        )}
+                                                        <br/>
+                                                        <div className="container">
+                                                            <div className="row">
+                                                                <div className="col-md-6 col-6">
+                                                                    <a href="https://www.kazoutech.com"
+                                                                       title="Profil agence">
+                                                                        <small><b>Consulter le profil de votre
+                                                                            agence</b></small>
+                                                                    </a>
+                                                                </div>
+                                                                {this.state.url_site !== null && (
+                                                                    <div className="col-md-6 col-6">
+                                                                        <a href={this.state.url_site}
+                                                                           title="Site internet de agence"
+                                                                           target="_banck">
+                                                                            <small><b>Consulter votre site</b></small>
+                                                                        </a>
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr/>
+                                                    <div id="accordion" role="tablist" aria-multiselectable="true"
+                                                         className="card-collapse">
+                                                        <div className="card card-plain">
+                                                            <div className="card-header" role="tab"
+                                                                 id="headingTypebien">
+                                                                <a data-toggle="collapse" data-parent="#accordion"
+                                                                   href="#collapseTypebien" aria-expanded="true"
+                                                                   aria-controls="collapseTypebien">
+                                                                    <b>Address et contact </b>
+                                                                    <i className="now-ui-icons arrows-1_minimal-down"></i>
+                                                                </a>
+                                                            </div>
+                                                            <div id="collapseTypebien" className="collapse show"
+                                                                 role="tabpanel" aria-labelledby="headingTypebien">
+                                                                <div className="card-body">
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <div id="accordion" role="tablist"
+                                                                                 aria-multiselectable="true"
+                                                                                 className="card-collapse">
+
+                                                                                <div className="row">
+                                                                                    <div className="col-md-7 col-7">
+                                                                                        <label
+                                                                                            htmlFor="address"><b>Addres</b></label>
+                                                                                        <div className="input-group">
+                                                                                            <div
+                                                                                                className="input-group-prepend">
+                                                                                                <span
+                                                                                                    className="input-group-text"><i
+                                                                                                    className="now-ui-icons users_circle-08"></i></span>
+                                                                                            </div>
+                                                                                            <input id='address'
+                                                                                                   type='text'
+                                                                                                   className={`form-control ${this.hasErrorFor('address') ? 'is-invalid' : ''}`}
+                                                                                                   name='address'
+                                                                                                   placeholder="Ou est citué votre agence"
+                                                                                                   aria-label="Address"
+                                                                                                   autoComplete="address"
+                                                                                                   value={this.state.address || ''}
+                                                                                                   onChange={this.handleFieldChange}
+                                                                                            />
+                                                                                            {this.renderErrorFor('address')}
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div className="col-md-5 col-5">
+                                                                                        <label htmlFor="title"><b>Numero
+                                                                                            telephone</b></label>
+                                                                                        <div className="input-group">
+                                                                                            <div
+                                                                                                className="input-group-prepend">
+                                                                                                <span
+                                                                                                    className="input-group-text"><i
+                                                                                                    className="now-ui-icons tech_mobile"></i></span>
+                                                                                            </div>
+                                                                                            <input id='phone'
+                                                                                                   type='text'
+                                                                                                   className={`form-control ${this.hasErrorFor('phone') ? 'is-invalid' : ''}`}
+                                                                                                   name='phone'
+                                                                                                   placeholder="+237 77688066"
+                                                                                                   aria-label="Phone"
+                                                                                                   autoComplete="phone"
+                                                                                                   value={this.state.phone || ''}
+                                                                                                   onChange={this.handleFieldChange}
+                                                                                            />
+                                                                                            {this.renderErrorFor('phone')}
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+
+                                                                                <div className="row">
+                                                                                    <div className="col-md-6 col-6">
+                                                                                        <label htmlFor="url_site"><b>Site
+                                                                                            internet</b></label>
+                                                                                        <div className="input-group">
+                                                                                            <div
+                                                                                                className="input-group-prepend">
+                                                                                                <span
+                                                                                                    className="input-group-text"><i
+                                                                                                    className="now-ui-icons objects_globe"></i></span>
+                                                                                            </div>
+                                                                                            <input id='url_site'
+                                                                                                   type='text'
+                                                                                                   className={`form-control ${this.hasErrorFor('url_site') ? 'is-invalid' : ''}`}
+                                                                                                   name='url_site'
+                                                                                                   placeholder="https://www.kazoutech.com"
+                                                                                                   aria-label="https://www.kazoutech.com"
+                                                                                                   autoComplete="url_site"
+                                                                                                   value={this.state.url_site || ''}
+                                                                                                   onChange={this.handleFieldChange}
+                                                                                            />
+                                                                                            {this.renderErrorFor('url_site')}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div className="col-md-6 col-6">
+
+                                                                                        <label
+                                                                                            htmlFor="url_site"><b>Email </b></label>
+                                                                                        <div className="input-group">
+                                                                                            <div
+                                                                                                className="input-group-prepend">
+                                                                                                <span
+                                                                                                    className="input-group-text"><i
+                                                                                                    className="now-ui-icons ui-1_email-85"></i></span>
+                                                                                            </div>
+                                                                                            <input id='email'
+                                                                                                   type='email'
+                                                                                                   className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
+                                                                                                   name='email'
+                                                                                                   placeholder="email@gmail.com"
+                                                                                                   aria-label="email@gmail.com"
+                                                                                                   autoComplete="email"
+                                                                                                   value={this.state.email || ''}
+                                                                                                   onChange={this.handleFieldChange}
+                                                                                            />
+                                                                                            {this.renderErrorFor('email')}
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div id="accordion" role="tablist" aria-multiselectable="true"
+                                                         className="card-collapse">
+                                                        <div className="card card-plain">
+                                                            <div className="card-header" role="tab"
+                                                                 id="headingDescription">
+                                                                <a data-toggle="collapse" data-parent="#accordion"
+                                                                   href="#collapseDescription" aria-expanded="true"
+                                                                   aria-controls="collapseDescription">
+                                                                    <b>Description sur vous ou sur votre agence </b>
+                                                                    <i className="now-ui-icons arrows-1_minimal-down"></i>
+                                                                </a>
+                                                            </div>
+                                                            <div id="collapseDescription" className="collapse show"
+                                                                 role="tabpanel" aria-labelledby="headingDescription">
+                                                                <div className="card-body">
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <div id="accordion" role="tablist"
+                                                                                 aria-multiselectable="true"
+                                                                                 className="card-collapse">
+
+                                                                                <div className="form-group">
+                                                                                    <textarea name="description"
+                                                                                              value={this.state.description || ''}
+                                                                                              onChange={this.handleFieldChange}
+                                                                                              placeholder={'Ex: Crée depuis 2020 nous evrons dans l\'esposion et l\'echange'}
+                                                                                              className={`form-control ${this.hasErrorFor('description') ? 'is-invalid' : ''} form-control-alternative"`}
+                                                                                              id="description"
+                                                                                              rows="10"/>
+                                                                                    {this.renderErrorFor('description')}
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div className="submit text-center">
+                                                        <button className="btn btn-success" type="submit">
+                                                            <i className="now-ui-icons ui-1_check"></i>
+                                                            <b>Enregistrer</b>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
                                         <div className="col-lg-4 col-md-12 mx-auto">
 
 
@@ -257,229 +525,6 @@ class ProfileAccountUser extends Component {
 
                                         </div>
 
-
-                                        <div className="col-lg-8 col-md-12 mx-auto">
-
-                                            <ul class="nav nav-tabs nav-tabs-neutral justify-content-center" role="tablist" data-background-color={this.props.backgroundColor}>
-                                                <li class="nav-item">
-                                                    <NavLink to={`/profile/account/`} className="nav-link">
-                                                        <i className="now-ui-icons users_circle-08"></i> Profile
-                                                    </NavLink>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <NavLink to={`/profile/change_password/`} className="nav-link">
-                                                        <i className="now-ui-icons ui-1_lock-circle-open"></i> Changer le mot de passe
-                                                    </NavLink>
-                                                </li>
-                                            </ul>
-                                            <br />
-
-
-                                            <div className="card">
-                                                <div className="card-body">
-                                                    <div className="card-title">
-                                                        <b>Contact de votre agence</b>
-                                                    </div>
-                                                    <div className="card-header d-flex align-items-center">
-                                                        <div className="d-flex align-items-center">
-                                                            <NavLink to={`/profile/account/`}>
-                                                                <img src={this.state.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
-                                                            </NavLink>
-                                                            <div className="mx-3">
-                                                                <NavLink to={`/profile/account/`} className="text-dark font-weight-600 text-sm"><b>{this.state.first_name}</b>
-                                                                    <small className="d-block text-muted"><b>{this.state.last_name} {moment($userIvemo.created_at).format('DD/MM/YYYY')}</b></small>
-                                                                </NavLink>
-                                                            </div>
-                                                        </div>
-                                                        <div className="text-right ml-auto">
-                                                            <Button className="btn btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
-                                                                <i className="now-ui-icons tech_mobile"></i>
-                                                            </Button>
-                                                            {this.state.url_site !== null && (
-                                                                <a href={this.state.url_site} className="btn btn-sm btn-primary" target="_banck">
-                                                                    <i className="now-ui-icons objects_globe"></i>
-                                                                </a>
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                    <div className="card-title">
-                                                        {this.state.address !== null && (
-                                                            <><i className="now-ui-icons location_pin"></i> <b>{this.state.address}</b></>
-                                                        )}
-                                                        <br />
-                                                        <div className="container">
-                                                            <div className="row">
-                                                                <div className="col-md-6 col-6">
-                                                                    <a href="https://www.kazoutech.com" title="Profil agence">
-                                                                        <small><b>Consulter le profil de votre agence</b></small>
-                                                                    </a>
-                                                                </div>
-                                                                {this.state.url_site !== null && (
-                                                                    <div className="col-md-6 col-6">
-                                                                        <a href={this.state.url_site} title="Site internet de agence" target="_banck">
-                                                                            <small><b>Consulter votre site</b></small>
-                                                                        </a>
-                                                                    </div>
-                                                                )}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <hr />
-                                                    <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                        <div className="card card-plain">
-                                                            <div className="card-header" role="tab" id="headingTypebien">
-                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTypebien" aria-expanded="true" aria-controls="collapseTypebien">
-                                                                    <b>Address et contact </b>
-                                                                    <i className="now-ui-icons arrows-1_minimal-down"></i>
-                                                                </a>
-                                                            </div>
-                                                            <div id="collapseTypebien" className="collapse show" role="tabpanel" aria-labelledby="headingTypebien">
-                                                                <div className="card-body">
-                                                                    <div className="row">
-                                                                        <div className="col-md-12">
-                                                                            <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-
-                                                                                <div className="row">
-                                                                                    <div className="col-md-7 col-7">
-                                                                                        <label htmlFor="address"><b>Addres</b></label>
-                                                                                        <div className="input-group">
-                                                                                            <div className="input-group-prepend">
-                                                                                                <span className="input-group-text"><i className="now-ui-icons users_circle-08"></i></span>
-                                                                                            </div>
-                                                                                            <input id='address'
-                                                                                                type='text'
-                                                                                                className={`form-control ${this.hasErrorFor('address') ? 'is-invalid' : ''}`}
-                                                                                                name='address'
-                                                                                                placeholder="Ou est citué votre agence"
-                                                                                                aria-label="Address"
-                                                                                                autoComplete="address"
-                                                                                                value={this.state.address || ''}
-                                                                                                onChange={this.handleFieldChange}
-                                                                                            />
-                                                                                            {this.renderErrorFor('address')}
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div className="col-md-5 col-5">
-                                                                                        <label htmlFor="title"><b>Numero telephone</b></label>
-                                                                                        <div className="input-group">
-                                                                                            <div className="input-group-prepend">
-                                                                                                <span className="input-group-text"><i className="now-ui-icons tech_mobile"></i></span>
-                                                                                            </div>
-                                                                                            <input id='phone'
-                                                                                                type='text'
-                                                                                                className={`form-control ${this.hasErrorFor('phone') ? 'is-invalid' : ''}`}
-                                                                                                name='phone'
-                                                                                                placeholder="+237 77688066"
-                                                                                                aria-label="Phone"
-                                                                                                autoComplete="phone"
-                                                                                                value={this.state.phone || ''}
-                                                                                                onChange={this.handleFieldChange}
-                                                                                            />
-                                                                                            {this.renderErrorFor('phone')}
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-
-                                                                                <div className="row">
-                                                                                    <div className="col-md-6 col-6">
-                                                                                        <label htmlFor="url_site"><b>Site internet</b></label>
-                                                                                        <div className="input-group">
-                                                                                            <div className="input-group-prepend">
-                                                                                                <span className="input-group-text"><i className="now-ui-icons objects_globe"></i></span>
-                                                                                            </div>
-                                                                                            <input id='url_site'
-                                                                                                type='text'
-                                                                                                className={`form-control ${this.hasErrorFor('url_site') ? 'is-invalid' : ''}`}
-                                                                                                name='url_site'
-                                                                                                placeholder="https://www.kazoutech.com"
-                                                                                                aria-label="https://www.kazoutech.com"
-                                                                                                autoComplete="url_site"
-                                                                                                value={this.state.url_site || ''}
-                                                                                                onChange={this.handleFieldChange}
-                                                                                            />
-                                                                                            {this.renderErrorFor('url_site')}
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div className="col-md-6 col-6">
-
-                                                                                        <label htmlFor="url_site"><b>Email </b></label>
-                                                                                        <div className="input-group">
-                                                                                            <div className="input-group-prepend">
-                                                                                                <span className="input-group-text"><i className="now-ui-icons ui-1_email-85"></i></span>
-                                                                                            </div>
-                                                                                            <input id='email'
-                                                                                                type='email'
-                                                                                                className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                                                                                name='email'
-                                                                                                placeholder="email@gmail.com"
-                                                                                                aria-label="email@gmail.com"
-                                                                                                autoComplete="email"
-                                                                                                value={this.state.email || ''}
-                                                                                                onChange={this.handleFieldChange}
-                                                                                            />
-                                                                                            {this.renderErrorFor('email')}
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-
-
-
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                        <div className="card card-plain">
-                                                            <div className="card-header" role="tab" id="headingDescription">
-                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseDescription" aria-expanded="true" aria-controls="collapseDescription">
-                                                                    <b>Description sur vous ou sur votre agence </b>
-                                                                    <i className="now-ui-icons arrows-1_minimal-down"></i>
-                                                                </a>
-                                                            </div>
-                                                            <div id="collapseDescription" className="collapse show" role="tabpanel" aria-labelledby="headingDescription">
-                                                                <div className="card-body">
-                                                                    <div className="row">
-                                                                        <div className="col-md-12">
-                                                                            <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-
-                                                                                <div className="form-group">
-                                                                                    <textarea name="description" value={this.state.description || ''}
-                                                                                        onChange={this.handleFieldChange}
-                                                                                        placeholder={'Ex: Crée depuis 2020 nous evrons dans l\'esposion et l\'echange'}
-                                                                                        className={`form-control ${this.hasErrorFor('description') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                                        id="description"
-                                                                                        rows="10" />
-                                                                                    {this.renderErrorFor('description')}
-                                                                                </div>
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div className="submit text-center">
-                                                        <button className="btn btn-success" type="submit">
-                                                            <i className="now-ui-icons ui-1_check"></i> <b>Enregistrer</b>
-                                                        </button>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
 
 
                                     </div>

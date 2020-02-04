@@ -122,6 +122,196 @@ class ProfileAccountChangePasswordUser extends Component {
 
                                     <div className="row">
 
+
+                                        <div className="col-lg-8 col-md-12 mx-auto">
+
+                                            <ul className="nav nav-tabs nav-tabs-neutral justify-content-center"
+                                                role="tablist" data-background-color={this.props.backgroundColor}>
+                                                <li className="nav-item">
+                                                    <NavLink to={`/profile/account/`} className="nav-link">
+                                                        <i className="now-ui-icons users_circle-08"></i> Profile
+                                                    </NavLink>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <NavLink to={`/profile/change_password/`} className="nav-link">
+                                                        <i className="now-ui-icons ui-1_lock-circle-open"></i> Changer
+                                                        le mot de passe
+                                                    </NavLink>
+                                                </li>
+                                            </ul>
+                                            <br/>
+
+
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <div className="card-title">
+                                                        <b>Contact de votre agence</b>
+                                                    </div>
+                                                    <div className="card-header d-flex align-items-center">
+                                                        <div className="d-flex align-items-center">
+                                                            <NavLink to={`/profile/account/`}>
+                                                                <img src={$userIvemo.avatar}
+                                                                     style={{height: "40px", width: "80px"}} alt=""
+                                                                     className="avatar"/>
+                                                            </NavLink>
+                                                            <div className="mx-3">
+                                                                <NavLink to={`/profile/account/`}
+                                                                         className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
+                                                                    <small
+                                                                        className="d-block text-muted"><b>{$userIvemo.last_name} {moment($userIvemo.created_at).format('DD/MM/YYYY')}</b></small>
+                                                                </NavLink>
+                                                            </div>
+                                                        </div>
+                                                        <div className="text-right ml-auto">
+                                                            <Button className="btn btn-sm btn-info" rel="tooltip"
+                                                                    title="3426712192" data-placement="bottom">
+                                                                <i className="now-ui-icons tech_mobile"></i>
+                                                            </Button>
+                                                            {$userIvemo.url_site !== null && (
+                                                                <a href={$userIvemo.url_site}
+                                                                   className="btn btn-sm btn-primary" target="_banck">
+                                                                    <i className="now-ui-icons objects_globe"></i>
+                                                                </a>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                    <div className="card-title">
+                                                        {$userIvemo.address !== null && (
+                                                            <><i className="now-ui-icons location_pin"></i>
+                                                                <b>{$userIvemo.address}</b></>
+                                                        )}
+                                                        <br/>
+                                                        <div className="container">
+                                                            <div className="row">
+                                                                <div className="col-md-6 col-6">
+                                                                    <a href="https://www.kazoutech.com"
+                                                                       title="Profil agence">
+                                                                        <small><b>Consulter le profil de votre
+                                                                            agence</b></small>
+                                                                    </a>
+                                                                </div>
+                                                                {$userIvemo.url_site !== null && (
+                                                                    <div className="col-md-6 col-6">
+                                                                        <a href={$userIvemo.url_site}
+                                                                           title="Site internet de agence"
+                                                                           target="_banck">
+                                                                            <small><b>Consulter votre site</b></small>
+                                                                        </a>
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr/>
+                                                    <div id="accordion" role="tablist" aria-multiselectable="true"
+                                                         className="card-collapse">
+                                                        <div className="card card-plain">
+                                                            <div className="card-header" role="tab"
+                                                                 id="headingTypebien">
+                                                                <a data-toggle="collapse" data-parent="#accordion"
+                                                                   href="#collapseTypebien" aria-expanded="true"
+                                                                   aria-controls="collapseTypebien">
+                                                                    <b>Changer le mot de passe </b>
+                                                                    <i className="now-ui-icons arrows-1_minimal-down"></i>
+                                                                </a>
+                                                            </div>
+                                                            <div id="collapseTypebien" className="collapse show"
+                                                                 role="tabpanel" aria-labelledby="headingTypebien">
+                                                                <div className="card-body">
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <div id="accordion" role="tablist"
+                                                                                 aria-multiselectable="true"
+                                                                                 className="card-collapse">
+
+
+                                                                                <label htmlFor="address"><b>Mot de passe
+                                                                                    actuelle</b></label>
+                                                                                <div className="input-group">
+                                                                                    <div
+                                                                                        className="input-group-prepend">
+                                                                                        <span
+                                                                                            className="input-group-text"><i
+                                                                                            className="now-ui-icons ui-1_lock-circle-open"></i></span>
+                                                                                    </div>
+                                                                                    <input id='password'
+                                                                                           type='password'
+                                                                                           className={`form-control ${this.hasErrorFor('password') ? 'is-invalid' : ''}`}
+                                                                                           name='password'
+                                                                                           placeholder="Mot de passe actuel"
+                                                                                           aria-label="password"
+                                                                                           autoComplete="password"
+                                                                                           value={this.state.password || ''}
+                                                                                           onChange={this.handleFieldChange}
+                                                                                    />
+                                                                                    {this.renderErrorFor('password')}
+                                                                                </div>
+                                                                                <label htmlFor="address"><b>Nouveau mot
+                                                                                    de passe</b></label>
+                                                                                <div className="input-group">
+                                                                                    <div
+                                                                                        className="input-group-prepend">
+                                                                                        <span
+                                                                                            className="input-group-text"><i
+                                                                                            className="now-ui-icons ui-1_lock-circle-open"></i></span>
+                                                                                    </div>
+                                                                                    <input id='address'
+                                                                                           type='text'
+                                                                                           className={`form-control ${this.hasErrorFor('address') ? 'is-invalid' : ''}`}
+                                                                                           name='address'
+                                                                                           placeholder="Ou est citué votre agence"
+                                                                                           aria-label="Address"
+                                                                                           autoComplete="address"
+                                                                                           value={this.state.address || ''}
+                                                                                           onChange={this.handleFieldChange}
+                                                                                    />
+                                                                                    {this.renderErrorFor('address')}
+                                                                                </div>
+                                                                                <label htmlFor="address"><b>Confirmer le
+                                                                                    mot de passe</b></label>
+                                                                                <div className="input-group">
+                                                                                    <div
+                                                                                        className="input-group-prepend">
+                                                                                        <span
+                                                                                            className="input-group-text"><i
+                                                                                            className="now-ui-icons ui-1_lock-circle-open"></i></span>
+                                                                                    </div>
+                                                                                    <input id='address'
+                                                                                           type='text'
+                                                                                           className={`form-control ${this.hasErrorFor('address') ? 'is-invalid' : ''}`}
+                                                                                           name='address'
+                                                                                           placeholder="Ou est citué votre agence"
+                                                                                           aria-label="Address"
+                                                                                           autoComplete="address"
+                                                                                           value={this.state.address || ''}
+                                                                                           onChange={this.handleFieldChange}
+                                                                                    />
+                                                                                    {this.renderErrorFor('address')}
+                                                                                </div>
+
+                                                                                <div className="submit text-center">
+                                                                                    <button className="btn btn-success"
+                                                                                            type="submit">
+                                                                                        <i className="now-ui-icons ui-1_check"></i>
+                                                                                        <b>Enregistrer</b>
+                                                                                    </button>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
                                         <div className="col-lg-4 col-md-12 mx-auto">
 
 
@@ -196,160 +386,6 @@ class ProfileAccountChangePasswordUser extends Component {
 
                                         </div>
 
-
-                                        <div className="col-lg-8 col-md-12 mx-auto">
-
-                                            <ul class="nav nav-tabs nav-tabs-neutral justify-content-center" role="tablist" data-background-color={this.props.backgroundColor}>
-                                                <li class="nav-item">
-                                                    <NavLink to={`/profile/account/`} className="nav-link">
-                                                        <i className="now-ui-icons users_circle-08"></i> Profile
-                                                    </NavLink>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <NavLink to={`/profile/change_password/`} className="nav-link">
-                                                        <i className="now-ui-icons ui-1_lock-circle-open"></i> Changer le mot de passe
-                                                    </NavLink>
-                                                </li>
-                                            </ul>
-                                            <br />
-
-
-                                            <div className="card">
-                                                <div className="card-body">
-                                                    <div className="card-title">
-                                                        <b>Contact de votre agence</b>
-                                                    </div>
-                                                    <div className="card-header d-flex align-items-center">
-                                                        <div className="d-flex align-items-center">
-                                                            <NavLink to={`/profile/account/`}>
-                                                                <img src={$userIvemo.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
-                                                            </NavLink>
-                                                            <div className="mx-3">
-                                                                <NavLink to={`/profile/account/`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
-                                                                    <small className="d-block text-muted"><b>{$userIvemo.last_name} {moment($userIvemo.created_at).format('DD/MM/YYYY')}</b></small>
-                                                                </NavLink>
-                                                            </div>
-                                                        </div>
-                                                        <div className="text-right ml-auto">
-                                                            <Button className="btn btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
-                                                                <i className="now-ui-icons tech_mobile"></i>
-                                                            </Button>
-                                                            {$userIvemo.url_site !== null && (
-                                                                <a href={$userIvemo.url_site} className="btn btn-sm btn-primary" target="_banck">
-                                                                    <i className="now-ui-icons objects_globe"></i>
-                                                                </a>
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                    <div className="card-title">
-                                                        {$userIvemo.address !== null && (
-                                                            <><i className="now-ui-icons location_pin"></i> <b>{$userIvemo.address}</b></>
-                                                        )}
-                                                        <br />
-                                                        <div className="container">
-                                                            <div className="row">
-                                                                <div className="col-md-6 col-6">
-                                                                    <a href="https://www.kazoutech.com" title="Profil agence">
-                                                                        <small><b>Consulter le profil de votre agence</b></small>
-                                                                    </a>
-                                                                </div>
-                                                                {$userIvemo.url_site !== null && (
-                                                                    <div className="col-md-6 col-6">
-                                                                        <a href={$userIvemo.url_site} title="Site internet de agence" target="_banck">
-                                                                            <small><b>Consulter votre site</b></small>
-                                                                        </a>
-                                                                    </div>
-                                                                )}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <hr />
-                                                    <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                        <div className="card card-plain">
-                                                            <div className="card-header" role="tab" id="headingTypebien">
-                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTypebien" aria-expanded="true" aria-controls="collapseTypebien">
-                                                                    <b>Changer le mot de passe </b>
-                                                                    <i className="now-ui-icons arrows-1_minimal-down"></i>
-                                                                </a>
-                                                            </div>
-                                                            <div id="collapseTypebien" className="collapse show" role="tabpanel" aria-labelledby="headingTypebien">
-                                                                <div className="card-body">
-                                                                    <div className="row">
-                                                                        <div className="col-md-12">
-                                                                            <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-
-
-                                                                                <label htmlFor="address"><b>Mot de passe actuelle</b></label>
-                                                                                <div className="input-group">
-                                                                                    <div className="input-group-prepend">
-                                                                                        <span className="input-group-text"><i className="now-ui-icons ui-1_lock-circle-open"></i></span>
-                                                                                    </div>
-                                                                                    <input id='password'
-                                                                                        type='password'
-                                                                                        className={`form-control ${this.hasErrorFor('password') ? 'is-invalid' : ''}`}
-                                                                                        name='password'
-                                                                                        placeholder="Mot de passe actuel"
-                                                                                        aria-label="password"
-                                                                                        autoComplete="password"
-                                                                                        value={this.state.password || ''}
-                                                                                        onChange={this.handleFieldChange}
-                                                                                    />
-                                                                                    {this.renderErrorFor('password')}
-                                                                                </div>
-                                                                                <label htmlFor="address"><b>Nouveau mot de passe</b></label>
-                                                                                <div className="input-group">
-                                                                                    <div className="input-group-prepend">
-                                                                                        <span className="input-group-text"><i className="now-ui-icons ui-1_lock-circle-open"></i></span>
-                                                                                    </div>
-                                                                                    <input id='address'
-                                                                                        type='text'
-                                                                                        className={`form-control ${this.hasErrorFor('address') ? 'is-invalid' : ''}`}
-                                                                                        name='address'
-                                                                                        placeholder="Ou est citué votre agence"
-                                                                                        aria-label="Address"
-                                                                                        autoComplete="address"
-                                                                                        value={this.state.address || ''}
-                                                                                        onChange={this.handleFieldChange}
-                                                                                    />
-                                                                                    {this.renderErrorFor('address')}
-                                                                                </div>
-                                                                                <label htmlFor="address"><b>Confirmer le mot de passe</b></label>
-                                                                                <div className="input-group">
-                                                                                    <div className="input-group-prepend">
-                                                                                        <span className="input-group-text"><i className="now-ui-icons ui-1_lock-circle-open"></i></span>
-                                                                                    </div>
-                                                                                    <input id='address'
-                                                                                        type='text'
-                                                                                        className={`form-control ${this.hasErrorFor('address') ? 'is-invalid' : ''}`}
-                                                                                        name='address'
-                                                                                        placeholder="Ou est citué votre agence"
-                                                                                        aria-label="Address"
-                                                                                        autoComplete="address"
-                                                                                        value={this.state.address || ''}
-                                                                                        onChange={this.handleFieldChange}
-                                                                                    />
-                                                                                    {this.renderErrorFor('address')}
-                                                                                </div>
-                                                                                
-                                                                                <div className="submit text-center">
-                                                                                    <button className="btn btn-success" type="submit">
-                                                                                        <i className="now-ui-icons ui-1_check"></i> <b>Enregistrer</b>
-                                                                                    </button>
-                                                                                </div>
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
 
 
                                     </div>

@@ -5,6 +5,7 @@ import { Button } from "reactstrap";
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import AnnoncereservationList from "./AnnoncereservationList";
+import Categoriesannoncereservation from "./inc/Categoriesannoncereservation";
 
 
 class AnnoncereservationIndex extends Component {
@@ -12,7 +13,6 @@ class AnnoncereservationIndex extends Component {
         super(props);
         this.state = {
             annoncereservationbytype: {annoncereservations:[]},
-            categoryannoncereservations: [],
         }
     }
 
@@ -20,7 +20,6 @@ class AnnoncereservationIndex extends Component {
         let itemAnnoncereservation = this.props.match.params.annoncetype;
         let url = route('api.annoncereservationbyannoncetype_site', itemAnnoncereservation);
         dyaxios.get(url).then(response => this.setState({annoncereservationbytype: response.data,}));
-        dyaxios.get(route('api.categoryannoncereservation_site')).then(response => this.setState({categoryannoncereservations: response.data,}));
     }
 
     // lifecycle method
@@ -81,10 +80,9 @@ class AnnoncereservationIndex extends Component {
 
                                         <div className="submit text-center">
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"></i> <b>Poster votre annonce</b>
+                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
                                             </NavLink>
                                         </div>
-
 
 
                                         <div className="card">
@@ -92,35 +90,8 @@ class AnnoncereservationIndex extends Component {
                                                 <div className="row">
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                            <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingOne">
-                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <b>Quesque vous aviez besoin?</b>
-                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
-                                                                    </a>
-                                                                </div>
-                                                                <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                                                                    <div className="card-body">
-                                                                        <table>
-                                                                            <tbody>
 
-                                                                            {categoryannoncereservations.map((item) => (
-                                                                                <tr key={item.id}>
-                                                                                    <td>
-                                                                                        <NavLink to={`/annonces_reservations/reservations/${item.slug}/`}>
-                                                                                            Reservation {item.name}
-                                                                                        </NavLink>
-                                                                                    </td>
-                                                                                    <td className="text-right"> 200 annonces</td>
-                                                                                </tr>
-                                                                            ))}
-
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
+                                                          <Categoriesannoncereservation/>
 
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingThree">
@@ -159,13 +130,6 @@ class AnnoncereservationIndex extends Component {
 
 
                                     </div>
-
-
-
-
-
-
-
 
                                 </div>
                             </div>

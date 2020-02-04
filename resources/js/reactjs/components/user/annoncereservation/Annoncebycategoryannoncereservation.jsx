@@ -35,17 +35,6 @@ class Annoncebycategoryannoncereservation extends Component {
         this.loadItem();
     }
 
-     getRepString (annoncereservations_count) {
-         annoncereservations_count = annoncereservations_count +'';
-        if (annoncereservations_count < 1000) {
-            return annoncereservations_count;
-        }
-        if (annoncereservations_count < 10000) {
-            return annoncereservations_count.charAt(0) + ',' + annoncereservations_count.substring(1);
-        }
-        return (annoncereservations_count/1000).toFixed(annoncereservations_count % 1000 !== 0)+'k';
-    }
-
     render() {
         const {annoncereservationbycategory,citiesannoncesreservations} = this.state;
         const allannoncereservationsbycategory = annoncereservationbycategory.annoncereservations;
@@ -105,7 +94,7 @@ class Annoncebycategoryannoncereservation extends Component {
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingOne">
                                                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <b>Reservation {annoncereservationbycategory.name}</b>
+                                                                        <b>Reservater un(e) {annoncereservationbycategory.name}</b>
                                                                         <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
@@ -119,10 +108,9 @@ class Annoncebycategoryannoncereservation extends Component {
                                                                                 <tr key={item.id}>
                                                                                     <td>
                                                                                         <NavLink to={`/annonces_reservations/${annoncetype}/${annoncereservationbycategory.slug}/${item.slug}/`}>
-                                                                                            Reservation {annoncereservationbycategory.name} à  {item.name}
+                                                                                            Reserver un(e) <strong>{annoncereservationbycategory.name}</strong> dans la ville de <strong> {item.name}</strong>
                                                                                         </NavLink>
                                                                                     </td>
-                                                                                    <td className="text-right">{this.getRepString(item.annoncereservations_count)}  annonces</td>
                                                                                 </tr>
                                                                             ))}
 

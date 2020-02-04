@@ -60,7 +60,11 @@ class AnnoncereservationController extends Controller
 
     public function apicategoryannoncereservation()
     {
-        $categoryannoncereservations = CategoryannoncereservationResource::collection(categoryannoncereservation::with('user')->latest()->get());
+        $categoryannoncereservations = CategoryannoncereservationResource::collection(categoryannoncereservation::with('user')
+          ->withCount(['annoncereservations' => function ($q){
+                        $q->where('status',1);
+           }])
+         ->orderBy('annoncereservations_count','desc')->distinct()->get());
 
         return response()->json($categoryannoncereservations, 200);
     }
@@ -108,17 +112,6 @@ class AnnoncereservationController extends Controller
                 $q->where('status',1);
             }])
             ->orderBy('annoncereservations_count','desc')->take(6)->get());
-
-        return response()->json($annoncereservations, 200);
-    }
-
-    public function apicitiesannoncesbycategory(categoryannoncereservation $categoryannoncereservation)
-    {
-        $annoncereservations = CategoryannoncereservationResource::collection(categoryannoncereservation::with('user')
-            ->withCount(['annoncereservations' => function ($q){
-                $q->where('status',1);
-            }])
-            ->orderBy('annoncereservations_count','desc')->get());
 
         return response()->json($annoncereservations, 200);
     }

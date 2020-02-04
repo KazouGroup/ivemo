@@ -15,6 +15,7 @@ import Annoncebycategoryannoncereservation
     from "../components/user/annoncereservation/Annoncebycategoryannoncereservation";
 import Annoncebycategoryannoncereservationcity
     from "../components/user/annoncereservation/Annoncebycategoryannoncereservationcity";
+import PersonalannoncereservationsUser from "../components/user/profile/PersonalannoncereservationsUser";
 
 
 const RouteUser = props => (
@@ -32,6 +33,7 @@ const RouteUser = props => (
           <Route exact path="/annonce/show/create/" component={AnnonceShowCreateUserSite}/>
           <Route exact path="/annonce/show/vendre/create/" component={AnnonceBienAvendreCreate}/>
           <Route exact path="/profile/account/" component={ProfileAccountUser}/>
+          <Route exact path="/profile/personal_reservations/" component={PersonalannoncereservationsUser}/>
           <Route exact path="/profile/change_password/" component={ProfileAccountChangePasswordUser}/>
     </Switch>
 

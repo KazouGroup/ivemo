@@ -122,6 +122,14 @@ class ProfileController extends Controller
         return response()->json($user,200);
     }
 
+    public function personal_reservations()
+    {
+        return view('user.profile.paersonal_annoncereservations',[
+        'user' => auth()->user()
+
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

@@ -70,7 +70,7 @@ class FooterBigUserSite extends Component {
                                             </NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to={`/annonce/`} className="text-muted">
+                                            <NavLink to={`/annonces_reservations/reservations/`} className="text-muted">
                                                 Presentation
                                             </NavLink>
                                         </li>
