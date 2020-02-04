@@ -83,6 +83,8 @@ class ProfileController extends Controller
 
         return response()->json($personnalreservations, 200);
     }
+
+
     public function apiannoncereservationbookeds()
     {
         $personnalreservations = reservation::with('user','annoncereservation')
@@ -140,10 +142,18 @@ class ProfileController extends Controller
 
     public function personal_reservations()
     {
-        return view('user.profile.paersonal_annoncereservations',[
+        return view('user.profile.personal_annoncereservations',[
         'user' => auth()->user()
 
         ]);
+    }
+
+    public function annonces_reservations_booked()
+    {
+        return view('user.profile.personal_annoncereservations',[
+           'user' => auth()->user()
+
+           ]);
     }
 
     /**

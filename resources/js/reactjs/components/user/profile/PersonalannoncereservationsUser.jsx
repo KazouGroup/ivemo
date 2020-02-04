@@ -13,7 +13,7 @@ class PersonalannoncereservationsUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            personnalannoncereservations:[],
+            personnalannoncereservations:{annoncereservation:[],user:[]},
         };
 
     }
@@ -71,13 +71,8 @@ class PersonalannoncereservationsUser extends Component {
                                                     </NavLink>
                                                 </li>
                                                 <li className="nav-item">
-                                                    <NavLink to={`/profile/account/`} className="nav-link">
-                                                         Profile
-                                                    </NavLink>
-                                                </li>
-                                                <li className="nav-item">
-                                                    <NavLink to={`/profile/change_password/`} className="nav-link">
-                                                         Changer le mot de passe
+                                                    <NavLink to={`/profile/annonces_reservations_booked/`} className="nav-link">
+                                                         Annonces reservées
                                                     </NavLink>
                                                 </li>
                                             </ul>
@@ -93,7 +88,7 @@ class PersonalannoncereservationsUser extends Component {
 
                                                             <div className="card-body">
                                                                 <h4 className="text-center">
-                                                                    Vous avez reserver cette <strong>Appartement</strong> du <b>12/09/2019 au 23/10/2020</b>
+                                                                    Vous avez reserver cet(te) <strong>{item.annoncereservation.categoryannoncereservation.name}</strong> du <b>12/09/2019 au 23/10/2020</b>
                                                                 </h4>
                                                                 <div className="card card-plain card-blog">
                                                                     <div className="row">
@@ -134,8 +129,8 @@ class PersonalannoncereservationsUser extends Component {
                                                                             <div className="card-header d-flex align-items-center">
                                                                                 <div className="text-left pull-left">
                                                                                     <NavLink to={`/annonce/show/`}>
-                                                                                        <h6 className="text-info ml-auto mr-auto">
-                                                                                            Yaounde
+                                                                                        <h6 className={`text-info ml-auto mr-auto`}>
+                                                                                            {item.annoncereservation.city.name}
                                                                                         </h6>
                                                                                     </NavLink>
                                                                                 </div>
@@ -151,13 +146,13 @@ class PersonalannoncereservationsUser extends Component {
                                                                                 <div className="text-left pull-left">
                                                                                     <NavLink to={`/annonce/show/`}>
                                                                                         <h6 className="text-info ml-auto mr-auto">
-                                                                                            Enterprise
+                                                                                            {item.annoncereservation.categoryannoncereservation.name}
                                                                                         </h6>
                                                                                     </NavLink>
                                                                                 </div>
                                                                                 <div className="text-right ml-auto">
                                                                                     <a href="#pablo" className="btn btn-sm btn-outline-primary">
-                                                                                        <i className="now-ui-icons ui-2_favourite-28"></i>
+                                                                                        <i className="now-ui-icons ui-2_favourite-28"/>
                                                                                     </a>
                                                                                 </div>
                                                                             </div>

@@ -59,6 +59,7 @@ class Annoncebycategoryannoncereservationcity extends Component {
         const {annoncereservationbycity,categoryannoncereservations,citiesannoncesreservations,annoncereservationbycategory} = this.state;
         let Slugannoncetype = this.props.match.params.annoncetype;
         let Slugcity = this.props.match.params.city;
+        let SlugCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
         return (
             <>
                 <Helmet>
@@ -92,7 +93,7 @@ class Annoncebycategoryannoncereservationcity extends Component {
                                             {categoryannoncereservations.length > 0 &&(
                                                 <>
                                                     <li className="nav-item">
-                                                        <Link to={`/annonces_reservations/${Slugannoncetype}/`} className="nav-link">
+                                                        <Link to={`/annonces_reservations/${Slugannoncetype}/${SlugCategoryannoncereservation}/`} className="nav-link">
                                                             <i className="now-ui-icons arrows-1_minimal-left"/> <b></b>
                                                         </Link>
                                                     </li>
