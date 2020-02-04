@@ -12,6 +12,7 @@ use App\Model\annoncetype;
 use App\Model\categoryannoncereservation;
 use App\Model\city;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AnnoncereservationController extends Controller
 {
@@ -102,8 +103,7 @@ class AnnoncereservationController extends Controller
 
     public function apicitiesannonces()
     {
-        $annoncereservations = CityResource::collection(city::with('user')
-            ->where('status',1)
+        $annoncereservations = CityResource::collection(city::with('user')->where('status',1)
             ->withCount(['annoncereservations' => function ($q){
                 $q->where('status',1);
             }])
@@ -114,12 +114,11 @@ class AnnoncereservationController extends Controller
 
     public function apicitiesannoncesbycategory(categoryannoncereservation $categoryannoncereservation)
     {
-        $annoncereservations = $categoryannoncereservation->annoncereservations()->with('user','categoryannoncereservation','city','annoncetype')
-            ->where('status',1)
-            ->orderBy('created_at','DESC')
-            ->where(function ($q){
-                $q->whereIn('annoncetype_id',[3]);
-            })->distinct()->get()->toArray();
+        $annoncereservations = CategoryannoncereservationResource::collection(categoryannoncereservation::with('user')
+            ->withCount(['annoncereservations' => function ($q){
+                $q->where('status',1);
+            }])
+            ->orderBy('annoncereservations_count','desc')->get());
 
         return response()->json($annoncereservations, 200);
     }
