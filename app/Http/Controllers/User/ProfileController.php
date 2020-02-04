@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\AnnoncetypeResource;
 use App\Http\Resources\UserResource;
 use App\Model\annoncelocation;
 use App\Model\annoncereservation;
@@ -69,25 +68,38 @@ class ProfileController extends Controller
 
     public function apipersonalreservations()
     {
-        $user = auth()->user();
-        $personnalreservations = reservation::whereIn('user_id',[$user->id])->with('user','annoncereservation')
+        $personnalreservations = reservation::whereIn('user_id',[auth()->user()->id])->with('user','annoncereservation')
             ->orderBy('created_at','DESC')
-            ->distinct()->get()->toArray();
+            ->with([
+                'annoncereservation.categoryannoncereservation' => function ($q){
+                    $q->select('id','name','slug','user_id');},
+                'annoncereservation.annoncetype' => function ($q){
+                    $q->select('id','name','slug');},
+                'annoncereservation.user' => function ($q){
+                    $q->distinct()->get();}
+            ])->distinct()->get()->toArray();
 
         return response()->json($personnalreservations, 200);
     }
-    public function apiannoncesbookeds()
+    public function apiannoncereservationbookeds()
     {
-        //->with('annoncetype','user','categoryannoncereservation','city')
         $personnalreservations = reservation::with('user','annoncereservation')
             ->orderBy('created_at','DESC')
-            ->whereHas('annoncereservation', function ($q) {
+            ->with([
+                'annoncereservation.categoryannoncereservation' => function ($q){
+                    $q->select('id','name','slug','user_id');},
+                'annoncereservation.annoncetype' => function ($q){
+                    $q->select('id','name','slug');},
+                'annoncereservation.user' => function ($q){
+                    $q->distinct()->get();}
+            ])->whereHas('annoncereservation', function ($q) {
                 $q->whereIn('user_id',[auth()->user()->id]);
             })->distinct()->get()->toArray();
 
         return response()->json($personnalreservations, 200);
     }
      /**
+      *
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

@@ -16,8 +16,8 @@ Route::get(
 )->name('api.profile_personal_reservations.site');
 
 Route::get(
-    'api/annonces_booked',
-    'ProfileController@apiannoncesbookeds'
+    'api/annonces_reservations_booked',
+    'ProfileController@apiannoncereservationbookeds'
 )->name('api.annonces_bookeds.site');
 
 Route::get(
