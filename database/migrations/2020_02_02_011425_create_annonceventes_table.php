@@ -35,7 +35,7 @@ class CreateAnnonceventesTable extends Migration
             $table->foreign('annoncetype_id')->references('id')->on('annoncetypes')->onUpdate('restrict');
 
             $table->unsignedBigInteger('categoryannoncevente_id')->nullable()->index();
-            $table->foreign('categoryannoncevente_id')->references('id')->on('categoryannonceventes')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('categoryannoncevente_id')->references('id')->on('categoryannonceventes')->onDelete('restrict');
         });
     }
 

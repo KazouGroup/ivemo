@@ -40,4 +40,9 @@ class categoryannoncereservation extends Model
     {
         return $this->hasMany(annoncereservation::class, 'categoryannoncereservation_id');
     }
+
+    public function blogannoncereservations()
+    {
+        return $this->hasMany(blogannoncereservation::class, 'categoryannoncereservation_id');
+    }
 }

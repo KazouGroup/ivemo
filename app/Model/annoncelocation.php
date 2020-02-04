@@ -52,6 +52,10 @@ class annoncelocation extends Model
         return $this->belongsTo(annoncetype::class,'annoncetype_id');
     }
 
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
     use Sluggable;
     /**
      * Return the sluggable configuration array for this model.
