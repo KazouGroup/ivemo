@@ -37,9 +37,8 @@ class BlogannoncereservationController extends Controller
         $blogannoncereservation = $categoryannoncereservation->blogannoncereservations()->with('user','categoryannoncereservation')
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->orderBy('created_at','DESC')
-            ->where(function ($q){
-                $q->where('status',1);
-            })->take(3)->distinct()->get()->toArray();
+            ->where('status',1)
+            ->take(3)->distinct()->get()->toArray();
         return response()->json($blogannoncereservation, 200);
     }
 

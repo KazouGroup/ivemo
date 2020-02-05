@@ -100,15 +100,24 @@ class AnnoncereservationController extends Controller
         return response()->json($annoncereservation, 200);
     }
 
+    public function apiannoncereservationintersse(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation)
+    {
+        $annoncereservation = $categoryannoncereservation->annoncereservations()->with('user','city','annoncetype','categoryannoncereservation')
+            ->whereIn('annoncetype_id',[$annoncetype->id])
+            ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
+            ->orderBy('created_at','DESC')->where('status',1)
+            ->take(4)->distinct()->get()->toArray();
+        return response()->json($annoncereservation, 200);
+    }
+
     public function apiannoncereservationbycity(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city)
     {
-        $annoncereservations = $city->annoncereservations()->with('user','categoryannoncereservation','city','annoncetype')->whereIn('city_id',[$city->id])
+        $annoncereservations = $city->annoncereservations()->with('user','categoryannoncereservation','city','annoncetype')
+            ->whereIn('city_id',[$city->id])
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->whereIn('annoncetype_id',[$annoncetype->id])
-            ->orderBy('created_at','DESC')
-            ->where(function ($q){
-                $q->where('status',1);
-            })->distinct()->get()->toArray();
+            ->orderBy('created_at','DESC')->where('status',1)
+            ->distinct()->get()->toArray();
 
         return response()->json($annoncereservations, 200);
     }
