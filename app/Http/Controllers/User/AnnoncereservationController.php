@@ -100,11 +100,12 @@ class AnnoncereservationController extends Controller
         return response()->json($annoncereservation, 200);
     }
 
-    public function apiannoncereservationintersse(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation)
+    public function apiannoncereservationintersse(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city)
     {
         $annoncereservation = $categoryannoncereservation->annoncereservations()->with('user','city','annoncetype','categoryannoncereservation')
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
+            ->whereIn('city_id',[$city->id])
             ->orderBy('created_at','DESC')->where('status',1)
             ->take(4)->distinct()->get()->toArray();
         return response()->json($annoncereservation, 200);

@@ -11,7 +11,7 @@ Route::get(
 )->name('api.citiesannonces_reservations_site');
 
 Route::get(
-    'annonces_interesses/{annoncetype}/{categoryannoncereservation}',
+    'annonces_interesses/{annoncetype}/{categoryannoncereservation}/{city}',
     'AnnoncereservationController@apiannoncereservationintersse'
 )->name('api.annoncereservationintersse_site');
 
