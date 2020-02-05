@@ -35,8 +35,15 @@ class BlogannoncereservationController extends Controller
     public function apiannonceblogcategoryreservationslug($categoryannoncereservation, $date, $blogannoncereservation)
     {
         $blogannoncereservation = new BlogannoncereservationResource(blogannoncereservation::whereDate('created_at',$date)->whereSlug($blogannoncereservation)
-            ->first());
+            ->where('status',1)->first());
         return response()->json($blogannoncereservation, 200);
+    }
+
+    public function annonceblogcategoryreservationslug($categoryannoncereservation, $date,blogannoncereservation $blogannoncereservation)
+    {
+            return view('user.blog.blogannoncereservation.show',[
+                         'blogannoncereservation' => $blogannoncereservation,
+                      ]);
     }
     /**
      * Display a listing of the resource.

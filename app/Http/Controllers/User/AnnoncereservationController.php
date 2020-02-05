@@ -51,6 +51,14 @@ class AnnoncereservationController extends Controller
                 ]);
     }
 
+    public function annoncelocationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
+    {
+
+        return view('user.annoncereservation.annonces_show',[
+                   'annoncereservation' => $annoncereservation,
+                ]);
+    }
+
     public function api()
     {
         $annoncelocations = AnnoncelocationResource::collection(annoncelocation::with('user','categoryannoncelocation')->latest()->get());
