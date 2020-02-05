@@ -32,6 +32,17 @@ class BlogannoncereservationController extends Controller
         return response()->json($blogannoncereservation, 200);
     }
 
+    public function apiblogannoncereservationinteresse(categoryannoncereservation $categoryannoncereservation)
+    {
+        $blogannoncereservation = $categoryannoncereservation->blogannoncereservations()->with('user','categoryannoncereservation')
+            ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
+            ->orderBy('created_at','DESC')
+            ->where(function ($q){
+                $q->where('status',1);
+            })->take(3)->distinct()->get()->toArray();
+        return response()->json($blogannoncereservation, 200);
+    }
+
     public function apiannonceblogcategoryreservationslug($categoryannoncereservation, $date, $blogannoncereservation)
     {
         $blogannoncereservation = new BlogannoncereservationResource(blogannoncereservation::whereDate('created_at',$date)->whereSlug($blogannoncereservation)
@@ -41,9 +52,9 @@ class BlogannoncereservationController extends Controller
 
     public function annonceblogcategoryreservationslug($categoryannoncereservation, $date,blogannoncereservation $blogannoncereservation)
     {
-            return view('user.blog.blogannoncereservation.show',[
-                         'blogannoncereservation' => $blogannoncereservation,
-                      ]);
+       return view('user.blog.blogannoncereservation.show',[
+             'blogannoncereservation' => $blogannoncereservation,
+        ]);
     }
     /**
      * Display a listing of the resource.
