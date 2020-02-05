@@ -1,28 +1,31 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
 import { Button } from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-import {Remarkable} from "remarkable";
+import { Remarkable } from "remarkable";
 import BlogannoncereservationInteresse from "./BlogannoncereservationInteresse";
+import moment from "moment";
 
 
 class BlogannoncereservationShow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            blogannoncereservation:[],
+            blogannoncereservation: {user:[],categoryannoncereservation:[]},
         };
 
     }
 
-    loadItems(){
+    loadItems() {
         let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
         let itemdate = this.props.match.params.date;
         let itemblogannoncereservation = this.props.match.params.blogannoncereservation;
-        let url = route('api.blogannoncecategoryreservationslug_site',[itemCategoryannoncereservation,itemdate,itemblogannoncereservation]);
-        dyaxios.get(url).then(response => this.setState({blogannoncereservation: response.data,}));
+        let url = route('api.blogannoncecategoryreservationslug_site', [itemCategoryannoncereservation, itemdate, itemblogannoncereservation]);
+        dyaxios.get(url).then(response => this.setState({ blogannoncereservation: response.data, }));
     }
 
 
@@ -35,14 +38,14 @@ class BlogannoncereservationShow extends Component {
         return { __html: md.render(blogannoncereservation.description) };
     }
     render() {
-        const {blogannoncereservation} = this.state;
+        const { blogannoncereservation } = this.state;
         return (
             <>
                 <Helmet>
-                    <title>{`${blogannoncereservation.title}`}- Ivemo</title>
+                    <title>{`${blogannoncereservation.title}`} - Ivemo</title>
                 </Helmet>
 
-                <div className="about-us sidebar-collapse">
+                <div className="landing-page sidebar-collapse">
 
                     <nav className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
@@ -63,13 +66,52 @@ class BlogannoncereservationShow extends Component {
                                             <div className="container">
                                                 <div className="row justify-content-center">
                                                     <div className="col-md-12 ml-auto mr-auto">
-                                                        <div id="carouselExampleIndicators"
-                                                             className="carousel slide" data-ride="carousel">
+
+                                                        <div className="card-header d-flex align-items-center">
+                                                            <div className="d-flex align-items-center">
+                                                                <NavLink to={`/annonce/show/`}>
+                                                                    <img src={blogannoncereservation.user.avatar}
+                                                                         style={{ height: "40px", width: "80px",borderRadius: "5px" }}
+                                                                         alt={blogannoncereservation.user.first_name}
+                                                                         className="avatar" />
+                                                                </NavLink>
+                                                                <div className="mx-3">
+                                                                    <NavLink to={`/annonce/show/`} className="text-dark font-weight-600 text-sm"><b>{blogannoncereservation.user.first_name}</b>
+                                                                        <small className="d-block text-muted">{moment(blogannoncereservation.created_at).calendar()}</small>
+                                                                    </NavLink>
+                                                                </div>
+                                                            </div>
+                                                            {!$guest && (
+                                                                <>
+                                                                    {$userIvemo.id === blogannoncereservation.user_id && (
+                                                                        <>
+                                                                            <div className="text-right ml-auto">
+                                                                                <NavLink to={`/annonces/`} className="btn btn-sm btn-success" rel="tooltip" title="Editer cette article de blog" data-placement="bottom">
+                                                                                    <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                                </NavLink>
+                                                                                <Button
+                                                                                    className="btn btn-sm btn-danger" rel="tooltip" title="Supprimer cette article de blog" data-placement="bottom">
+                                                                                    <i className="now-ui-icons ui-1_simple-remove"/>
+                                                                                </Button>{" "}
+                                                                            </div>
+                                                                        </>
+                                                                    )}
+
+                                                                </>
+                                                            )}
+                                                        </div>
+
+                                                        <div className="carousel slide" data-ride="carousel">
 
                                                             <div className="carousel-inner" role="listbox">
                                                                 <div className="carousel-item active">
-                                                                    <img className="d-block"
-                                                                         src={blogannoncereservation.photo} alt={blogannoncereservation.title}/>
+                                                                    <Zoom>
+                                                                        <img className="d-block"
+                                                                             src={blogannoncereservation.photo}
+                                                                             style={{ width: "1400px", height: "400px",borderRadius: "5px" }}
+                                                                             alt={blogannoncereservation.title} />
+                                                                    </Zoom>
+
                                                                 </div>
 
                                                             </div>
@@ -86,7 +128,7 @@ class BlogannoncereservationShow extends Component {
 
                                                         <h2 className="title text-center">{blogannoncereservation.title}</h2>
 
-                                                        <div className="title mb-2 text-justify" dangerouslySetInnerHTML={this.getDescription(blogannoncereservation)}/>
+                                                        <div className="title mb-2 text-justify" dangerouslySetInnerHTML={this.getDescription(blogannoncereservation)} />
 
                                                     </div>
                                                 </div>
@@ -98,11 +140,11 @@ class BlogannoncereservationShow extends Component {
                                     </div>
                                 </div>
 
-                                <BlogannoncereservationInteresse  {...this.props}/>
+                                <BlogannoncereservationInteresse  {...this.props} />
 
                                 <div className="text-center">
-                                    <Link to={`/blog/`}
-                                          className="btn btn-outline-info">Voir plus d'articles ici
+                                    <Link to={`/blogs/annonce_reservations/`}
+                                        className="btn btn-outline-info">Voir plus d'articles ici
                                     </Link>
                                 </div>
 

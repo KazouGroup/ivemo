@@ -34,14 +34,14 @@ const RouteUser = props => (
           <Route exact path="/annonces_reservations/:annoncetype/" component={AnnoncereservationIndex}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/" component={withRouter(Annoncebycategoryannoncereservation)}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/" component={withRouter(Annoncebycategoryannoncereservationcity)}/>
-          <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/:annoncereservation/" component={Annoncebycategoryannoncereservationcityshow}/>
+          <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/:annoncereservation/" component={withRouter(Annoncebycategoryannoncereservationcityshow)}/>
           <Route exact path="/annonce/show/create/" component={AnnonceShowCreateUserSite}/>
           <Route exact path="/annonce/show/vendre/create/" component={AnnonceBienAvendreCreate}/>
           <Route exact path="/profile/account/" component={ProfileAccountUser}/>
           <Route exact path="/profile/personal_reservations/" component={PersonalannoncereservationsUser}/>
           <Route exact path="/profile/annonces_reservations_booked/" component={Profileannoncesreservationsbooked}/>
           <Route exact path="/profile/change_password/" component={ProfileAccountChangePasswordUser}/>
-          <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/:date/:blogannoncereservation" component={BlogannoncereservationShow}/>
+          <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/:date/:blogannoncereservation" component={withRouter(BlogannoncereservationShow)}/>
     </Switch>
 
 );

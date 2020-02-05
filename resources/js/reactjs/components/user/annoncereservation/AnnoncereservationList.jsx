@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Remarkable } from 'remarkable';
 import { Button } from "reactstrap";
+import moment from "moment";
 
 
 class AnnoncereservationList extends Component {
@@ -106,7 +107,7 @@ class AnnoncereservationList extends Component {
                                         </NavLink>
                                         <div className="mx-3">
                                             <NavLink to={`/annonce/show/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
-                                                <small className="d-block text-muted">12 janv 2019</small>
+                                                <small className="d-block text-muted">{moment(this.props.created_at).format('LL')}</small>
                                             </NavLink>
                                         </div>
                                     </div>
@@ -133,6 +134,7 @@ class AnnoncereservationList extends Component {
 
                                         </>
                                     )}
+
 
                                 </div>
                             </div>

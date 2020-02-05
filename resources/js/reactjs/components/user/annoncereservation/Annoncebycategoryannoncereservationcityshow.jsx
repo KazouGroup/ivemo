@@ -4,8 +4,10 @@ import { Helmet } from 'react-helmet';
 import { Button } from "reactstrap";
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
-import AnnoncereservationList from "./AnnoncereservationList";
 import PropTypes from "prop-types";
+import BlogannoncereservationIntesseAnnonseShow
+    from "../blog/blogannoncereservation/BlogannoncereservationIntesseAnnonseShow";
+import AnnonceservationInteresse from "./AnnonceservationInteresse";
 
 
 class Annoncebycategoryannoncereservationcityshow extends Component {
@@ -115,6 +117,11 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
                                         <div className="card-body">
+                                            <div className="submit text-left">
+                                                <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
+                                                    <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos résultats </b>
+                                                </button>
+                                            </div>
 
                                             <div className="card-image">
 
@@ -403,7 +410,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                             <hr />
                                                             <div className="card-header text-center">
                                                                 <div className="card-title">
-                                                                    <b>Contactez l'agence par email</b>
+                                                                    <b>Reserver cet(te) Chambre d'hotel</b>
                                                                 </div>
                                                             </div>
                                                             <form role="form" id="contact-form" onSubmit={this.createItem} acceptCharset="UTF-8">
@@ -488,179 +495,11 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                     </div>
                                 </div>
 
-                                <div className="text-center">
-                                    <h4 className="title">Votre projet immobilier en toute sérénité</h4>
-                                </div>
 
-                                <div className="card">
-                                    <div className="card-body">
-
-                                        <div className="row">
+                                <BlogannoncereservationIntesseAnnonseShow {...this.props} />
 
 
-                                            <div className="col-md-6 col-lg-4">
-                                                <div className="card card-blog card-plain">
-                                                    <div className="card-image">
-                                                        <a href="#pablo">
-                                                            <img className="img img-raised rounded" src="/assets/vendor/assets/img/examples/card-blog6.jpg" />
-                                                        </a>
-                                                    </div>
-                                                    <div className="card-body">
-                                                        <div className="text-center">
-                                                            <h6 className="category text-danger">
-                                                                <i className="now-ui-icons media-2_sound-wave"></i> business
-                                                            </h6>
-                                                            <h5 className="card-title">
-                                                                <a href="#nuk">Axel Springer Spends $343M To Buy Business Insider</a>
-                                                            </h5>
-                                                        </div>
-                                                        <p>
-                                                            German media giant Axel Springer has announced it’s acquiring online business news publication Business Inside..</p>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-md-6 col-lg-4">
-                                                <div className="card card-blog card-plain">
-                                                    <div className="card-image">
-                                                        <a href="#pablo">
-                                                            <img className="img img-raised rounded" src="/assets/vendor/assets/img/examples/card-blog6.jpg" />
-                                                        </a>
-                                                    </div>
-                                                    <div className="card-body">
-                                                        <div className="text-center">
-                                                            <h6 className="category text-danger">
-                                                                <i className="now-ui-icons media-2_sound-wave"></i> business
-                                                            </h6>
-                                                            <h5 className="card-title">
-                                                                <a href="#nuk">Buy Business Insider</a>
-                                                            </h5>
-                                                        </div>
-                                                        <p>
-                                                            German media giant Axel Springer has announced it’s acquiring online business news publication Business Inside..</p>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-md-6 col-lg-4">
-                                                <div className="card card-blog card-plain">
-                                                    <div className="card-image">
-                                                        <a href="#pablo">
-                                                            <img className="img img-raised rounded" src="/assets/vendor/assets/img/bg32.jpg" />
-                                                        </a>
-                                                    </div>
-                                                    <div className="card-body">
-                                                        <div className="text-center">
-                                                            <h6 className="category text-danger">
-                                                                <i className="now-ui-icons media-2_sound-wave"></i> business
-                                                            </h6>
-                                                            <h5 className="card-title">
-                                                                <a href="#nuk">Insider Axel Springer Spends</a>
-                                                            </h5>
-                                                        </div>
-                                                        <p>
-                                                            German media giant Axel Springer has announced it’s acquiring online business news publication Business Inside..</p>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-
-                                <div className="card-body">
-
-                                    <div className="text-center">
-                                        <h4 className="title">Annonces similaires</h4>
-                                    </div>
-                                    <div className="row">
-
-
-                                        <div className="col-md-6 col-lg-4">
-                                            <div className="card card-blog">
-                                                <div className="card-image">
-                                                    <img className="img rounded" src="/assets/vendor/assets/img/examples/card-blog6.jpg" />
-                                                </div>
-                                                <div className="card-body">
-                                                    <div className="text-center">
-                                                        <h6 className="category text-info"> Appartement</h6>
-                                                    </div>
-                                                    <h6 className="card-title">
-                                                        <a href="#pablo">Indispensible to nature photography: the hide je suis dans la place la famille je suis erdus dans tout cette erte</a>
-                                                    </h6>
-                                                    <div className="card-footer">
-                                                        <div className="stats stats-right">
-                                                            <b>2 245 FCFA</b>
-                                                        </div>
-                                                        <div className="author">
-                                                            <img src="/assets/vendor/assets/img/examples/card-blog6.jpg" alt="..." className="avatar img-raised" />
-                                                            <span>Devin Coldewey</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="col-md-6 col-lg-4">
-                                            <div className="card card-blog">
-                                                <div className="card-image">
-                                                    <img className="img rounded" src="/assets/vendor/assets/img/bg32.jpg" />
-                                                </div>
-                                                <div className="card-body">
-                                                    <h6 className="category text-warning">
-                                                        <i className="now-ui-icons media-1_camera-compact"></i> Photo</h6>
-                                                    <h5 className="card-title">
-                                                        <a href="#pablo">Indispensible to nature photography: the hide</a>
-                                                    </h5>
-                                                    <div className="card-footer">
-                                                        <div className="stats stats-right">
-                                                            <i className="now-ui-icons ui-2_favourite-28"></i> 342 ·
-                                                            <i className="now-ui-icons files_single-copy-04"></i> 45
-                                                        </div>
-                                                        <div className="author">
-                                                            <img src="/assets/vendor/assets/img/james.jpg" alt="..." className="avatar img-raised" />
-                                                            <span>Devin Coldewey</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="col-md-6 col-lg-4">
-                                            <div className="card card-blog">
-                                                <div className="card-image">
-                                                    <img className="img rounded" src="/assets/vendor/assets/img/examples/card-blog6.jpg" />
-                                                </div>
-                                                <div className="card-body">
-                                                    <h6 className="category text-warning">
-                                                        <i className="now-ui-icons media-1_camera-compact"></i> Photo</h6>
-                                                    <h6 className="card-title">
-                                                        <a href="#pablo">Indispensible to nature photography: the hide</a>
-                                                    </h6>
-                                                    <div className="card-footer">
-                                                        <div className="stats stats-right">
-                                                            <i className="now-ui-icons ui-2_favourite-28"></i> 342 ·
-                                                            <i className="now-ui-icons files_single-copy-04"></i> 45
-                                                        </div>
-                                                        <div className="author">
-                                                            <img src="/assets/vendor/assets/img/james.jpg" alt="..." className="avatar img-raised" />
-                                                            <span>Devin Coldewey</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
+                                <AnnonceservationInteresse {...this.props}/>
 
                             </div>
 

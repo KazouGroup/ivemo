@@ -41,21 +41,21 @@ class BlogannoncereservationInteresse extends Component {
                         <div key={item.id} className="col-md-6 col-lg-4 col-sm-auto">
                             <div className="card card-product">
                                 <div className="card-image">
-                                    <Link to={`/blog/${item.categoryannoncereservation.slug}/${item.slug}/`}>
+                                    <Link to={`/blogs/annonce_reservations/${item.categoryannoncereservation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>
                                         <img className="img rounded" alt={item.title} src={item.photo}/>
                                     </Link>
                                 </div>
                                 <div className="card-body text-center">
-                                    <Link to={`/blog/${item.categoryannoncereservation.slug}/`} className={`btn btn-sm btn-${item.color.name}`}>
-                                        {item.occupation.name}
+                                    <Link to={`/blogs/annonce_reservations/${item.categoryannoncereservation.slug}/`} className={`btn btn-sm btn-${item.categoryannoncereservation.color_name}`}>
+                                        {item.categoryannoncereservation.name}
                                     </Link>
                                     <h6 className="card-title text-center">
-                                        <NavLink to={`/blog/${item.categoryannoncereservation.slug}/${item.slug}/`} className="card-link"> {item.title}</NavLink>
+                                        <NavLink to={`/blogs/annonce_reservations/${item.categoryannoncereservation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`} className="card-link"> {item.title}</NavLink>
                                     </h6>
                                     <b/>
                                     <p className="card-description">
-                                        <b dangerouslySetInnerHTML={{__html: (item.body.length > 48 ? item.body.substring(0, 48) + "..." : item.body)}}/>
-                                        <NavLink to={`/blog/${item.categoryannoncereservation.slug}/${item.slug}/`}> lire la suite </NavLink>
+                                        <b dangerouslySetInnerHTML={{__html: (item.description.length > 48 ? item.description.substring(0, 48) + "..." : item.description)}}/>
+                                        <Link to={`/blogs/annonce_reservations/${item.categoryannoncereservation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}> lire la suite </Link>
                                     </p>
                                 </div>
                             </div>

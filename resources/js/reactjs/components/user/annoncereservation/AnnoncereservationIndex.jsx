@@ -97,7 +97,7 @@ class AnnoncereservationIndex extends Component {
                                                                 <div className="card-header" role="tab" id="headingThree">
                                                                     <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                                                         <b>Autres transactions à Douala </b>
-                                                                        <i className="now-ui-icons arrows-1_minimal-down"></i>
+                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
                                                                 <div id="collapseThree" className="collapse" role="tabpanel" aria-labelledby="headingThree">
