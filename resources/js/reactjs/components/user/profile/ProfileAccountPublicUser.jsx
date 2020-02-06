@@ -3,7 +3,6 @@ import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Button } from "reactstrap";
 import NavUserSite from "../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import FooterUserSite from "../../inc/user/FooterUserSite";
 import FormContactProfileAccountUser from "./form/FormContactProfileAccountUser";
 

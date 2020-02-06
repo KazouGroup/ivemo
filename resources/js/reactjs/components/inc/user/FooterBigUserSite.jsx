@@ -62,7 +62,7 @@ class FooterBigUserSite extends Component {
                                         <li>
                                             <Link to={`/blog/`} className="text-muted">
                                                 Blog
-                        </Link>
+                                            </Link>
                                         </li>
                                         <li>
                                             <NavLink to={`/about/`} className="text-muted">

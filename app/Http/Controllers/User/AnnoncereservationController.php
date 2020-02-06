@@ -19,7 +19,7 @@ class AnnoncereservationController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','destroy'
+            'create','store','edit','update','destroy','sendannoncereservation'
         ]]);
     }
     /**
@@ -55,7 +55,10 @@ class AnnoncereservationController extends Controller
     {
 
         return view('user.annoncereservation.annonces_show',[
+                   'annoncetype' => $annoncetype,
                    'annoncereservation' => $annoncereservation,
+                   'categoryannoncereservation' => $categoryannoncereservation,
+                   'city' => $city,
                 ]);
     }
 
@@ -143,6 +146,14 @@ class AnnoncereservationController extends Controller
             ->whereSlug($annoncereservation)->firstOrFail());
 
         return response()->json($annoncereservation, 200);
+    }
+
+    public function sendannoncereservation(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,$annoncereservation)
+    {
+        $annoncereservationsend = new AnnoncereservationResource(annoncereservation::whereSlug($annoncereservation
+        )->first());
+
+        return response()->json($annoncereservationsend, 200);
     }
 
     /**

@@ -115,4 +115,5 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
     {
         return $this->belongsTo(categoryfaq::class,'categoryfaq_id');
     }
+
 }

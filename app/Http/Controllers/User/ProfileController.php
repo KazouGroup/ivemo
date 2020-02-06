@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Contactuser\StoreRequest;
 use App\Http\Resources\UserResource;
 use App\Model\annoncelocation;
 use App\Model\annoncereservation;
 use App\Model\annoncetype;
+use App\Model\contactuser;
 use App\Model\reservation;
 use App\Model\user;
+use App\Services\ContactuserService;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -21,7 +24,8 @@ class ProfileController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['except' => [
-            'api','apiprofilepublique','apiannoncereservationbyprofilpublique','apiannoncelocationbyprofilpublique','public_profile'
+            'api','apiprofilepublique','apiannoncereservationbyprofilpublique','public_profile_send_message',
+            'apiannoncelocationbyprofilpublique','public_profile'
         ]]);
     }
     /**
@@ -104,6 +108,14 @@ class ProfileController extends Controller
 
         return response()->json($personnalreservations, 200);
     }
+
+    public function apipersonalmessagescontacts()
+    {
+        $contactusers = contactuser::whereIn('user_id',[auth()->user()->id])
+            ->distinct()->get()->toArray();
+
+        return response()->json($contactusers, 200);
+    }
      /**
       *
      * Show the form for creating a new resource.
@@ -161,6 +173,22 @@ class ProfileController extends Controller
       return view('user.profile.profile_account',[
                 'user' => $user,
             ]);
+    }
+
+    public function public_profile_send_message(StoreRequest $request, user $user)
+    {
+        $contactuser = new contactuser();
+
+        $slug = sha1(('YmdHis') . str_random(30));
+        $contactuser->fill($request->all());
+        $contactuser->slug = $slug;
+        $contactuser->user_id = $user->id;
+
+        ContactuserService::newEmail($request,$user);
+
+        $contactuser->save();
+
+        return redirect()->back();
     }
 
     /**

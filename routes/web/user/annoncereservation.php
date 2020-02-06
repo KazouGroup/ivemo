@@ -19,3 +19,8 @@ Route::get(
     'annonces_reservations/{annoncetype}/{categoryannoncereservation}/{city}/{annoncereservation}',
     'AnnoncereservationController@annoncelocationbycategoryannoncereservationslug'
 )->name('annoncelocationbycategoryannoncereservationslug_site');
+
+Route::post(
+    'annonces_reservations/{annoncetype}/{categoryannoncereservation}/{city}/{annoncereservation}/send_reservation',
+    'AnnoncereservationController@sendannoncereservation'
+)->name('sendannoncereservation_site');

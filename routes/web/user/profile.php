@@ -21,6 +21,11 @@ Route::get(
 )->name('api.annonces_bookeds.site');
 
 Route::get(
+    'api/personal_messages_contacts',
+    'ProfileController@apipersonalmessagescontacts'
+)->name('api.personal_messages_contacts.site');
+
+Route::get(
     'profile/personal_reservations',
     'ProfileController@personal_reservations'
 )->name('profile_personal_reservations.site');
@@ -34,6 +39,11 @@ Route::get(
     '@{user}',
     'ProfileController@public_profile'
 )->name('public_profile.site');
+
+Route::post(
+    '@{user}/send_message',
+    'ProfileController@public_profile_send_message'
+)->name('public_profile_send_message.site');
 
 Route::get(
     'profile/change_password',
