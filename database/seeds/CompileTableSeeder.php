@@ -43,7 +43,7 @@ class CompileTableSeeder extends Seeder
         $god = User::create([
             'username' =>'bokino12',
             'first_name' =>'Boclair Temgoua',
-            'slug' => str_slug('Boclair Temgoua'),
+            'slug' => 'boclair_temgoua',
             'status_user' => 1,
             //'birthday' => now(),
             'email' => "temgoua2012@gmail.com",

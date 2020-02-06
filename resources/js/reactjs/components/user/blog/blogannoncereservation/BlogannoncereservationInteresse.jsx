@@ -38,7 +38,7 @@ class BlogannoncereservationInteresse extends Component {
                 <div className="row">
 
                     {blogsinteresse.map((item) => (
-                        <div key={item.id} className="col-md-6 col-lg-4 col-sm-auto">
+                        <div key={item.id} className="col-md-4 mx-auto">
                             <div className="card card-product">
                                 <div className="card-image">
                                     <Link to={`/blogs/annonce_reservations/${item.categoryannoncereservation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>

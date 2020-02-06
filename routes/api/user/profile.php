@@ -2,7 +2,7 @@
 
 
 Route::get(
-    'profile/{user}',
+    '@{user}',
     'ProfileController@apiprofilepublique'
 )->name('api.profilpublique');
 

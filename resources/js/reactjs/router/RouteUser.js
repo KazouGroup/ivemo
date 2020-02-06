@@ -20,6 +20,7 @@ import Profileannoncesreservationsbooked from "../components/user/profile/Profil
 import Annoncebycategoryannoncereservationcityshow
     from "../components/user/annoncereservation/Annoncebycategoryannoncereservationcityshow";
 import BlogannoncereservationShow from "../components/user/blog/blogannoncereservation/BlogannoncereservationShow";
+import ProfileAccountPublicUser from "../components/user/profile/ProfileAccountPublicUser";
 
 
 const RouteUser = props => (
@@ -38,6 +39,7 @@ const RouteUser = props => (
           <Route exact path="/annonce/show/create/" component={AnnonceShowCreateUserSite}/>
           <Route exact path="/annonce/show/vendre/create/" component={AnnonceBienAvendreCreate}/>
           <Route exact path="/profile/account/" component={ProfileAccountUser}/>
+          <Route exact path="/@:user/" component={withRouter(ProfileAccountPublicUser)}/>
           <Route exact path="/profile/personal_reservations/" component={PersonalannoncereservationsUser}/>
           <Route exact path="/profile/annonces_reservations_booked/" component={Profileannoncesreservationsbooked}/>
           <Route exact path="/profile/change_password/" component={ProfileAccountChangePasswordUser}/>

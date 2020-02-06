@@ -102,11 +102,11 @@ class AnnoncereservationList extends Component {
                                 <span dangerouslySetInnerHTML={this.getDescription()}/>
                                 <div className="card-header d-flex align-items-center">
                                     <div className="d-flex align-items-center">
-                                        <NavLink to={`/annonce/show/`}>
+                                        <NavLink to={`/@${this.props.user.slug}/`}>
                                             <img src={this.props.user.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                         </NavLink>
                                         <div className="mx-3">
-                                            <NavLink to={`/annonce/show/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
+                                            <NavLink to={`/@${this.props.user.slug}/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
                                                 <small className="d-block text-muted">{moment(this.props.created_at).format('LL')}</small>
                                             </NavLink>
                                         </div>

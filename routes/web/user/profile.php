@@ -31,6 +31,11 @@ Route::get(
 )->name('annonces_reservations_booked.site');
 
 Route::get(
+    '@{user}',
+    'ProfileController@public_profile'
+)->name('public_profile.site');
+
+Route::get(
     'profile/change_password',
     'ProfileController@change_password'
 )->name('change_password.site');

@@ -21,7 +21,7 @@ class ProfileController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['except' => [
-            'api','apiprofilepublique','apiannoncereservationbyprofilpublique','apiannoncelocationbyprofilpublique'
+            'api','apiprofilepublique','apiannoncereservationbyprofilpublique','apiannoncelocationbyprofilpublique','public_profile'
         ]]);
     }
     /**
@@ -154,6 +154,13 @@ class ProfileController extends Controller
            'user' => auth()->user()
 
            ]);
+    }
+
+    public function public_profile(user $user)
+    {
+      return view('user.profile.profile_account',[
+                'user' => $user,
+            ]);
     }
 
     /**
