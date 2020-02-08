@@ -13,6 +13,7 @@ $factory->define(blogannoncereservation::class, function (Faker $faker) {
         'title' => $title,
         'photo' => $faker->imageUrl($width = 1400, $height = 800),
         'slug' => str_slug($title),
+        'red_time' => $faker->randomDigitNot(5),
         'description' => $faker->realText(rand(10000, 40000)),
         'categoryannoncereservation_id' => categoryannoncereservation::inRandomOrder()->first()->id,
         'user_id' => user::inRandomOrder()->first()->id,

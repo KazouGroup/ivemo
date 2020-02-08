@@ -50,8 +50,8 @@ class BlogannoncereservationIntesseAnnonseShow extends Component {
                                     </div>
                                     <div className="card-body">
                                         <div className="text-center">
-                                            <Link className="nav-link" to={`/blogs/annonce_reservations/${item.categoryannoncereservation.slug}/`} >
-                                                <span className={`badge badge-${item.categoryannoncereservation.color_name}`}>{item.categoryannoncereservation.name}</span>
+                                            <Link to={`/blogs/annonce_reservations/${item.categoryannoncereservation.slug}/`} className={`btn btn-sm btn-${item.categoryannoncereservation.color_name}`}>
+                                                {item.categoryannoncereservation.name}
                                             </Link>
                                             <h6 className="card-title">
                                                 <NavLink to={`/blogs/annonce_reservations/${item.categoryannoncereservation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`} className="card-link"> {item.title}</NavLink>

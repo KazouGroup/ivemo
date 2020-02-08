@@ -42,7 +42,7 @@ class Annoncebycategoryannoncereservation extends Component {
         return (
             <>
                 <Helmet>
-                    <title>{`${annoncereservationbycategory.name}`} - Ivemo</title>
+                    <title>{`${annoncereservationbycategory.name || 'Ivemo'} - `} Ivemo</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">

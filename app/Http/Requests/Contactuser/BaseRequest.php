@@ -17,12 +17,12 @@ class BaseRequest extends Request
      */
     protected function getRules($group)
     {
-        if ($group == 'store') {
+        if ($group == 'public_profile_send_message') {
             $rules = [
-                //'full_name' => 'required',
-                //'message' => 'required',
+                'full_name' => 'required',
+                'message' => 'required',
                 'email' => 'required',
-               // 'subject' => 'required',
+                'subject' => 'required',
             ];
         }
         else { // 'edit'

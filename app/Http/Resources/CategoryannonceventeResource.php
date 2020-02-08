@@ -32,6 +32,7 @@ class CategoryannonceventeResource extends JsonResource
             'color_name' => $this->color_name,
             'icon' => $this->icon,
             'user' => $this->user,
+            'photo' => $this->photo,
             'conseilventes' => $conseilventes,
             'annonceventes' => $annonceventes,
             'created_at' => (string) $this->created_at,

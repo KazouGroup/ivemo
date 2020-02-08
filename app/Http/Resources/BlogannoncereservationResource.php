@@ -21,6 +21,7 @@ class BlogannoncereservationResource extends JsonResource
             'description' => $this->description,
             'slug' => $this->slug,
             'status' => $this->status,
+            'red_time' => $this->red_time,
             'user_id' => $this->user_id,
             'user' => $this->user,
             'categoryannoncereservation' => $this->categoryannoncereservation,

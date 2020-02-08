@@ -63,7 +63,7 @@ class Annoncebycategoryannoncereservationcity extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Reservation dans la ville de {`${Slugcity}`} - Ivemo</title>
+                    <title>Reservation {`${SlugCategoryannoncereservation || "Ivemo"}`} dans la ville de {`${Slugcity}`} - Ivemo</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">

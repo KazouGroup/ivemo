@@ -39,10 +39,11 @@ class BlogannoncereservationShow extends Component {
     }
     render() {
         const { blogannoncereservation } = this.state;
+        let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
         return (
             <>
                 <Helmet>
-                    <title>{`${blogannoncereservation.title}`} - Ivemo</title>
+                    <title>{`${blogannoncereservation.title || 'Annonce'}`} - Ivemo</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
@@ -143,7 +144,7 @@ class BlogannoncereservationShow extends Component {
                                 <BlogannoncereservationInteresse  {...this.props} />
 
                                 <div className="text-center">
-                                    <Link to={`/blogs/annonce_reservations/`}
+                                    <Link to={`/blogs/annonce_reservations/${itemCategoryannoncereservation}/`}
                                         className="btn btn-outline-info">Voir plus d'articles ici
                                     </Link>
                                 </div>

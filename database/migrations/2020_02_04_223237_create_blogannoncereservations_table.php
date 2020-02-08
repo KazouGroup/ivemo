@@ -17,6 +17,7 @@ class CreateBlogannoncereservationsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title')->nullable();
             $table->string('photo')->nullable();
+            $table->integer('red_time')->nullable();
             $table->longText('description')->nullable();
             $table->string('slug')->nullable();
             $table->boolean('status')->nullable()->default(true);

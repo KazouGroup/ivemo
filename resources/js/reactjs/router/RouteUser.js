@@ -21,6 +21,8 @@ import Annoncebycategoryannoncereservationcityshow
     from "../components/user/annoncereservation/Annoncebycategoryannoncereservationcityshow";
 import BlogannoncereservationShow from "../components/user/blog/blogannoncereservation/BlogannoncereservationShow";
 import ProfileAccountPublicUser from "../components/user/profile/ProfileAccountPublicUser";
+import BlogannoncereservationIBycategoryreservation
+    from "../components/user/blog/blogannoncereservation/BlogannoncereservationIBycategoryreservation";
 
 
 const RouteUser = props => (
@@ -43,7 +45,8 @@ const RouteUser = props => (
           <Route exact path="/profile/personal_reservations/" component={PersonalannoncereservationsUser}/>
           <Route exact path="/profile/annonces_reservations_booked/" component={Profileannoncesreservationsbooked}/>
           <Route exact path="/profile/change_password/" component={ProfileAccountChangePasswordUser}/>
-          <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/:date/:blogannoncereservation" component={withRouter(BlogannoncereservationShow)}/>
+          <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/" component={withRouter(BlogannoncereservationIBycategoryreservation)}/>
+          <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/:date/:blogannoncereservation/" component={withRouter(BlogannoncereservationShow)}/>
     </Switch>
 
 );

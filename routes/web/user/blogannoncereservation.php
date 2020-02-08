@@ -1,7 +1,7 @@
 <?php
 Route::get(
     'blogs/annonce_reservations/{categoryannoncereservation}',
-    'BlogannoncereservationController@aannonceblogcategoryreservation'
+    'BlogannoncereservationController@annonceblogcategoryreservation'
 )->name('blogannoncecategoryreservation_site');
 
 Route::get(

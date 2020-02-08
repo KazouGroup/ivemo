@@ -35,6 +35,7 @@ class CategoryannoncereservationResource extends JsonResource
             'color_name' => $this->color_name,
             'annoncereservations_count' => $this->annoncereservations_count,
             'icon' => $this->icon,
+            'photo' => $this->photo,
             'user' => $this->user,
             'annoncereservations' => $annoncereservations,
             'blogannoncereservations' => $blogannoncereservations,

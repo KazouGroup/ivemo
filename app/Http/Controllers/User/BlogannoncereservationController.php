@@ -49,6 +49,13 @@ class BlogannoncereservationController extends Controller
         return response()->json($blogannoncereservation, 200);
     }
 
+    public function annonceblogcategoryreservation(categoryannoncereservation $categoryannoncereservation)
+    {
+       return view('user.blog.blogannoncereservation.category',[
+             'categoryannoncereservation' => $categoryannoncereservation,
+        ]);
+    }
+
     public function annonceblogcategoryreservationslug($categoryannoncereservation, $date,blogannoncereservation $blogannoncereservation)
     {
        return view('user.blog.blogannoncereservation.show',[

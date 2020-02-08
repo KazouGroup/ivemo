@@ -17,6 +17,7 @@ class CreateCategoryannoncelocationsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->nullable();
             $table->string('color_name')->nullable();
+            $table->string('photo')->nullable();
             $table->string('slug')->nullable();
             $table->string('icon')->nullable();
             $table->timestamps();
