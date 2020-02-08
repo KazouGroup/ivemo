@@ -199,7 +199,6 @@ class Profileannoncesreservationsbooked extends Component {
                                                                 </div>
                                                             </div>
 
-
                                                         </div>
                                                     </div>
 

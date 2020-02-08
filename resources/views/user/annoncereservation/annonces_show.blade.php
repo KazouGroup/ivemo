@@ -12,7 +12,7 @@
 @section('content')
 
 <div class="container">
-    <form method="post" action="{{route('sendannoncereservation_site', [$annoncetype->slug, $categoryannoncereservation->slug, $city->slug, $annoncereservation->slug])}}">
+    <form method="post" action="{{route('sendannoncereservation_site',[$annoncetype->slug, $categoryannoncereservation->slug, $city->slug, $annoncereservation->slug])}}">
         @csrf
         <h1 class="title">Reserver cette chambre {{$annoncereservation->title}} a {{$annoncereservation->city->name}}</h1>
         <div class="row">

@@ -10,6 +10,7 @@ use App\Model\categoryannoncevente;
 use App\Model\contactuser;
 use App\Model\faq;
 use App\Model\link;
+use App\Model\teamuser;
 use App\Model\testimonial;
 use App\Model\user;
 use Illuminate\Database\Seeder;
@@ -137,6 +138,7 @@ class CompileTableSeeder extends Seeder
         factory(faq::class, 100)->create();
         factory(contact::class, 200)->create();
         factory(contactuser::class, 500)->create();
+        factory(teamuser::class, 200)->create();
         factory(link::class, 5)->create();
 
         factory(testimonial::class, 500)->create();

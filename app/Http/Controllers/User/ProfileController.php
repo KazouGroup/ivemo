@@ -188,7 +188,7 @@ class ProfileController extends Controller
 
         $contactuser->save();
 
-        return redirect()->back();
+        return response()->json($contactuser,200);
     }
 
     /**
@@ -247,3 +247,4 @@ class ProfileController extends Controller
         //
     }
 }
+

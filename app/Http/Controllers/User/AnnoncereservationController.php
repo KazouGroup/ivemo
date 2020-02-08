@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Reservation\StoreRequest;
 use App\Http\Resources\AnnoncereservationResource;
 use App\Http\Resources\AnnoncetypeResource;
 use App\Http\Resources\CategoryannoncereservationResource;
@@ -11,6 +12,7 @@ use App\Model\annoncereservation;
 use App\Model\annoncetype;
 use App\Model\categoryannoncereservation;
 use App\Model\city;
+use App\Model\reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -148,12 +150,19 @@ class AnnoncereservationController extends Controller
         return response()->json($annoncereservation, 200);
     }
 
-    public function sendannoncereservation(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,$annoncereservation)
+    public function sendannoncereservation(StoreRequest $request, annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
     {
-        $annoncereservationsend = new AnnoncereservationResource(annoncereservation::whereSlug($annoncereservation
-        )->first());
+        $user = auth()->user();
+        $reservation = new reservation();
 
-        return response()->json($annoncereservationsend, 200);
+
+        $reservation->fill($request->all());
+        $reservation->user_id = $user->id;
+        $reservation->annoncereservation_id = $annoncereservation->id;
+
+        $reservation->save();
+
+        return response()->json($reservation,200);
     }
 
     /**
