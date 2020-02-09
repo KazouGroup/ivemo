@@ -77,4 +77,9 @@ class annoncereservation extends Model
     {
         return $this->hasMany(reservation::class, 'annoncereservation_id');
     }
+
+    public function imagereservations()
+    {
+        return $this->hasMany(imagereservation::class, 'annoncereservation_id');
+    }
 }

@@ -30,7 +30,7 @@ class AnnoncetypeResource extends JsonResource
             })->distinct()->get()->toArray();
 
         $annoncereservations = $this->annoncereservations()->whereIn('annoncetype_id',[$this->id])
-            ->with('user','categoryannoncereservation','city','annoncetype')
+            ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
             ->orderBy('created_at','DESC')
             ->where(function ($q){
                 $q->where('status',1);

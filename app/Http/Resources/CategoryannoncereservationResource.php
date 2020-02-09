@@ -15,7 +15,7 @@ class CategoryannoncereservationResource extends JsonResource
     public function toArray($request)
     {
 
-        $annoncereservations = $this->annoncereservations()->with('user','categoryannoncereservation','city','annoncetype')
+        $annoncereservations = $this->annoncereservations()->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
             ->whereIn('categoryannoncereservation_id',[$this->id])
             ->orderBy('created_at','DESC')
             ->where(function ($q){

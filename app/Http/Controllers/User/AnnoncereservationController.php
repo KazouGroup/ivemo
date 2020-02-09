@@ -107,8 +107,8 @@ class AnnoncereservationController extends Controller
 
     public function apiannoncereservationintersse(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city)
     {
-        $annoncereservation = $categoryannoncereservation->annoncereservations()->with('user','city','annoncetype','categoryannoncereservation')
-            ->whereIn('annoncetype_id',[$annoncetype->id])
+        $annoncereservation = $categoryannoncereservation->annoncereservations()->whereIn('annoncetype_id',[$annoncetype->id])
+            ->with('user','city','annoncetype','categoryannoncereservation','imagereservations','imagereservations')
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->whereIn('city_id',[$city->id])
             ->orderBy('created_at','DESC')->where('status',1)
@@ -118,8 +118,8 @@ class AnnoncereservationController extends Controller
 
     public function apiannoncereservationbycity(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city)
     {
-        $annoncereservations = $city->annoncereservations()->with('user','categoryannoncereservation','city','annoncetype')
-            ->whereIn('city_id',[$city->id])
+        $annoncereservations = $city->annoncereservations()->whereIn('city_id',[$city->id])
+            ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->orderBy('created_at','DESC')->where('status',1)
