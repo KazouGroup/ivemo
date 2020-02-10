@@ -54,7 +54,22 @@ class FormContactProfileAccountUser extends Component {
         let url = route('public_profile_send_message.site',[itemuser]);
         dyaxios.post(url, item)
             .then(() => {
-              console.log("okkk coul");
+
+                $.notify({
+                        message: `Votre message a été bien envoyé à cette utilisateur`
+                    },
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animated fadeInUp",
+                            exit: "animated fadeOutDown"
+                        },
+                    });
 
                 this.setState({
                     email: "",
@@ -84,7 +99,6 @@ class FormContactProfileAccountUser extends Component {
                 <div className="card-body">
 
                     <div className="row">
-                        <label>Nom complet</label>
                         <div className="input-group">
                             <div className="input-group-prepend">
                                                         <span className="input-group-text">
@@ -105,8 +119,6 @@ class FormContactProfileAccountUser extends Component {
                     </div>
 
                     <div className="row">
-
-                        <label>Email</label>
                         <div className="input-group">
                             <div className="input-group-prepend">
                                                         <span className="input-group-text">
@@ -126,7 +138,6 @@ class FormContactProfileAccountUser extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <label>Numero de téléphone</label>
                         <div className="input-group">
                             <div className="input-group-prepend">
                                                         <span className="input-group-text">
@@ -147,7 +158,7 @@ class FormContactProfileAccountUser extends Component {
 
                     </div>
                     <div className="row">
-                        <label>Suject</label>
+
                         <div className="input-group">
                             <div className="input-group-prepend">
                                                         <span className="input-group-text">
@@ -167,7 +178,7 @@ class FormContactProfileAccountUser extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <label>Votre message</label>
+
                         <div className="input-group">
                                                        <textarea name="message" value={this.state.message}
                                                                  onChange={this.handleFieldChange}
@@ -180,14 +191,13 @@ class FormContactProfileAccountUser extends Component {
                     </div>
                     <div className="submit text-center">
                         <button className="btn btn-primary btn-lg" type="submit">
-                            <i className="now-ui-icons ui-1_email-85"/> Contacter l'agence
+                            <i className="now-ui-icons ui-1_email-85"/> Contacter
                         </button>
                     </div>
                 </div>
 
 
             </form>
-
 
         )
     }

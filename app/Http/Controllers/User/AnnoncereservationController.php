@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Reservation\StoreRequest;
+use App\Http\Requests\Contactuser\StorecontactRequest;
 use App\Http\Resources\AnnoncereservationResource;
 use App\Http\Resources\AnnoncetypeResource;
 use App\Http\Resources\CategoryannoncereservationResource;
@@ -11,6 +12,8 @@ use App\Http\Resources\CityResource;
 use App\Model\annoncereservation;
 use App\Model\annoncetype;
 use App\Model\categoryannoncereservation;
+use App\Services\ContactuserService;
+use App\Model\contactuser;
 use App\Model\city;
 use App\Model\reservation;
 use Illuminate\Http\Request;
@@ -163,6 +166,24 @@ class AnnoncereservationController extends Controller
         $reservation->save();
 
         return response()->json($reservation,200);
+    }
+
+     public function sendcontactmessageuser(StorecontactRequest $request, annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
+    {
+
+
+              $contactuser = new contactuser();
+
+              $slug = sha1(('YmdHis') . str_random(30));
+              $contactuser->fill($request->all());
+              $contactuser->slug = $slug;
+              $contactuser->user_id = $annoncelocation->user_id;
+
+              ContactuserService::newEmail($request,$user);
+
+              $contactuser->save();
+
+              return response()->json($contactuser,200);
     }
 
     /**

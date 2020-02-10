@@ -7,13 +7,15 @@ import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import './ProfileAccountUser.css';
 import Categoriesannoncereservation from "../annoncereservation/inc/Categoriesannoncereservation";
+import moment from "moment";
+import {Remarkable} from "remarkable";
 
 
 class PersonalannoncereservationsUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            personnalannoncereservations:{annoncereservation:[],user:[]},
+            personnalannoncereservations:{annoncereservation:{imagereservations:[]},user:[]},
         };
 
     }
@@ -33,6 +35,10 @@ class PersonalannoncereservationsUser extends Component {
 
     }
 
+    getDescription(item) {
+        const md = new Remarkable();
+        return { __html: md.render(item.annoncereservation.description.length > 80 ? item.annoncereservation.description.substring(0, 80) + "..." : item.annoncereservation.description) };
+    }
     render() {
         const {personnalannoncereservations} = this.state;
 
@@ -87,9 +93,20 @@ class PersonalannoncereservationsUser extends Component {
                                                         <div key={item.id} className="card">
 
                                                             <div className="card-body">
+                                                                {item.status ?
+                                                                    <div className="alert alert-danger">
+                                                                        <span>Votre reservation n'à pas ancore été approuver par <b>{item.annoncereservation.user.first_name}</b></span>
+                                                                    </div>
+                                                                    :
+                                                                    <div className="alert alert-success">
+                                                                        <span>Reservation approuver par <b>{item.annoncereservation.user.first_name}</b></span>
+                                                                    </div>
+                                                                }
+
                                                                 <h4 className="text-center">
                                                                     Vous avez reserver cet(te) <strong>{item.annoncereservation.categoryannoncereservation.name}</strong> du <b>12/09/2019 au 23/10/2020</b>
                                                                 </h4>
+
                                                                 <div className="card card-plain card-blog">
                                                                     <div className="row">
                                                                         <div className="col-md-5">
@@ -101,21 +118,16 @@ class PersonalannoncereservationsUser extends Component {
                                                                                         <li data-target="#carouselAnnonceIndicators" data-slide-to="2" className="active"></li>
                                                                                     </ol>
                                                                                     <div className="carousel-inner" role="listbox">
-                                                                                        <div className="carousel-item">
-                                                                                            <Link to={`/annonce/show/`}>
-                                                                                                <img className="d-block" src="/assets/vendor/assets/img/bg1.jpg" alt="First slide" />
-                                                                                            </Link>
-                                                                                        </div>
-                                                                                        <div className="carousel-item">
-                                                                                            <Link to={`/annonce/show/`}>
-                                                                                                <img className="d-block" src="/assets/vendor/assets/img/bg3.jpg" alt="Second slide" />
-                                                                                            </Link>
-                                                                                        </div>
-                                                                                        <div className="carousel-item active">
-                                                                                            <Link to={`/annonce/show/`}>
-                                                                                                <img className="d-block" src="/assets/vendor/assets/img/bg4.jpg" alt="Third slide" />
-                                                                                            </Link>
-                                                                                        </div>
+
+                                                                                        {item.annoncereservation.imagereservations.map((image,index) => (
+                                                                                            <div key={image.id} className={`carousel-item ${index === 0 ? "active" : ""}`}>
+                                                                                                <Link to={`/annonces_reservations/reservations/${item.annoncereservation.categoryannoncereservation.slug}/${item.annoncereservation.city.slug}/${item.annoncereservation.slug}/`}>
+                                                                                                    <img className="d-block"
+                                                                                                         src={image.photo}
+                                                                                                         alt={image.title}/>
+                                                                                                </Link>
+                                                                                            </div>
+                                                                                        ))}
                                                                                     </div>
                                                                                     <a className="carousel-control-prev" href="#carouselAnnonceIndicators" role="button" data-slide="prev">
                                                                                         <i className="now-ui-icons arrows-1_minimal-left"></i>
@@ -128,7 +140,7 @@ class PersonalannoncereservationsUser extends Component {
                                                                             <br />
                                                                             <div className="card-header d-flex align-items-center">
                                                                                 <div className="text-left pull-left">
-                                                                                    <NavLink to={`/annonce/show/`}>
+                                                                                    <NavLink to={`/annonces_reservations/reservations/${item.annoncereservation.categoryannoncereservation.slug}/${item.annoncereservation.city.slug}/`}>
                                                                                         <h6 className={`text-info ml-auto mr-auto`}>
                                                                                             {item.annoncereservation.city.name}
                                                                                         </h6>
@@ -144,42 +156,37 @@ class PersonalannoncereservationsUser extends Component {
                                                                         <div className="col-md-7">
                                                                             <div className="card-header d-flex align-items-center">
                                                                                 <div className="text-left pull-left">
-                                                                                    <NavLink to={`/annonce/show/`}>
-                                                                                        <h6 className="text-info ml-auto mr-auto">
+                                                                                    <NavLink to={`/annonces_reservations/reservations/${item.annoncereservation.categoryannoncereservation.slug}/`}>
+                                                                                        <h6 className={`text-${item.annoncereservation.categoryannoncereservation.color_name} ml-auto mr-auto`}>
                                                                                             {item.annoncereservation.categoryannoncereservation.name}
                                                                                         </h6>
                                                                                     </NavLink>
                                                                                 </div>
                                                                                 <div className="text-right ml-auto">
-                                                                                    <a href="#pablo" className="btn btn-sm btn-outline-primary">
-                                                                                        <i className="now-ui-icons ui-2_favourite-28"/>
-                                                                                    </a>
+                                                                                    <h5 className="text-success"><b>100 000 <small>FCFA</small></b></h5>
                                                                                 </div>
                                                                             </div>
                                                                             <div className="row">
                                                                                 <div className="col-md-6 col-6">
                                                                                     <h6 className="category text-dark">4 p . 3 ch . 180 m2</h6>
                                                                                 </div>
-                                                                                <div className="col-md-6 col-6">
-                                                                                    <strong className="text-dark"><b>50 000 FCFA/mois</b></strong>
-                                                                                </div>
+
 
                                                                             </div>
                                                                             <h6 className="card-title">
-                                                                                <a href="#pablo">Warner Music Group buys concert</a>
+                                                                                <Link to={`/annonces_reservations/reservations/${item.annoncereservation.categoryannoncereservation.slug}/${item.annoncereservation.city.slug}/${item.annoncereservation.slug}/`}>
+                                                                                    {item.annoncereservation.title}
+                                                                                </Link>
                                                                             </h6>
-                                                                            <p>
-                                                                                Warner Music Group announced today it’s
-                                                                                acquiring the selected .
-                                                                            </p>
+                                                                            <span dangerouslySetInnerHTML={this.getDescription(item)}/>
                                                                             <div className="card-header d-flex align-items-center">
                                                                                 <div className="d-flex align-items-center">
-                                                                                    <NavLink to={`/annonce/show/`}>
-                                                                                        <img src="/assets/vendor/assets/img/bg1.jpg" style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
+                                                                                    <NavLink to={`/@${item.annoncereservation.user.slug}/`}>
+                                                                                        <img src={item.annoncereservation.user.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                                                                     </NavLink>
                                                                                     <div className="mx-3">
-                                                                                        <NavLink to={`/annonce/show/`} className="text-dark font-weight-600 text-sm">Boclair Temgoua
-                                                                                            <small className="d-block text-muted">12 janv 2019</small>
+                                                                                        <NavLink to={`/@${item.annoncereservation.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{item.annoncereservation.user.first_name}</b>
+                                                                                            <small className="d-block text-muted">{moment(item.annoncereservation.created_at).format('LL')}</small>
                                                                                         </NavLink>
                                                                                     </div>
                                                                                 </div>

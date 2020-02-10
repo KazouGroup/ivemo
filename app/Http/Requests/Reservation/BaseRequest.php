@@ -19,9 +19,13 @@ class BaseRequest extends Request
     {
         if ($group == 'sendannoncereservation') {
             $rules = [
-                'full_name' => 'required',
-                'annoncereservation_id' => 'required',
-                'user' => 'required',
+                'full_name' => 'required|string|min:2|max:150',
+                'email' => 'required|email|min:2|max:150',
+                'phone' => 'required',
+                'description' => 'required|min:2',
+                'adult_number' => 'required',
+                'children_number' => 'required',
+                //'annoncereservation_id' => 'required',
             ];
         }
         else { // 'edit'

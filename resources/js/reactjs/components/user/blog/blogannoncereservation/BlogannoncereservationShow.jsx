@@ -68,6 +68,23 @@ class BlogannoncereservationShow extends Component {
                                                 <div className="row justify-content-center">
                                                     <div className="col-md-12 ml-auto mr-auto">
 
+                                                        <div className="carousel slide" data-ride="carousel">
+
+                                                            <div className="carousel-inner" role="listbox">
+                                                                <div className="carousel-item active">
+                                                                    <Zoom>
+                                                                        <img className="d-block"
+                                                                             src={blogannoncereservation.photo}
+                                                                             style={{ width: "1400px", height: "400px",borderRadius: "5px" }}
+                                                                             alt={blogannoncereservation.title} />
+                                                                    </Zoom>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
                                                         <div className="card-header d-flex align-items-center">
                                                             <div className="d-flex align-items-center">
                                                                 <NavLink to={`/annonce/show/`}>
@@ -102,22 +119,6 @@ class BlogannoncereservationShow extends Component {
                                                             )}
                                                         </div>
 
-                                                        <div className="carousel slide" data-ride="carousel">
-
-                                                            <div className="carousel-inner" role="listbox">
-                                                                <div className="carousel-item active">
-                                                                    <Zoom>
-                                                                        <img className="d-block"
-                                                                             src={blogannoncereservation.photo}
-                                                                             style={{ width: "1400px", height: "400px",borderRadius: "5px" }}
-                                                                             alt={blogannoncereservation.title} />
-                                                                    </Zoom>
-
-                                                                </div>
-
-                                                            </div>
-
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

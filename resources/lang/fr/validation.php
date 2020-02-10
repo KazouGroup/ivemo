@@ -123,6 +123,7 @@ return [
         'name' => 'nom',
         'username' => "username",
         'email' => 'adresse courriel',
+        'full_name' => 'nom complet',
         'first_name' => 'prénom',
         'last_name' => 'nom',
         'password' => 'mot de passe',

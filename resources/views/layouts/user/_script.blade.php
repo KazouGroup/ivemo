@@ -15,7 +15,9 @@
   <script src="/assets/vendor/assets/js/plugins/bootstrap-selectpicker.js" type="text/javascript"></script>
   <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
   <script src="/assets/vendor/assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
-  
+  <script src="/assets/vendor/assets/js/plugins/jquery.dataTables.min.js" type="text/javascript"></script>
+  <script src="/assets/vendor/assets/js/plugins/bootstrap-notify.js"></script>
+
   <script src="/assets/vendor/assets/js/now-ui-kit.js?v=1.3.1" type="text/javascript"></script>
   <script src="{{ mix('/js/reactjs/axios.js') }}"></script>
   <script src="{{ mix('/js/reactjs/app.js') }}"></script>

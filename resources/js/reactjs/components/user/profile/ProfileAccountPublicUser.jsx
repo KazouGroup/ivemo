@@ -6,7 +6,7 @@ import NavUserSite from "../../inc/user/NavUserSite";
 import FooterUserSite from "../../inc/user/FooterUserSite";
 import FormContactProfileAccountUser from "./form/FormContactProfileAccountUser";
 import PropTypes from "prop-types";
-import Annoncebycategoryannoncereservationcity from "../annoncereservation/Annoncebycategoryannoncereservationcity";
+import ProfileAccountTeamUser from "./ProfileAccountTeamUser";
 
 
 class ProfileAccountPublicUser extends Component {
@@ -86,6 +86,43 @@ class ProfileAccountPublicUser extends Component {
                                                 </div>
                                             </div>
                                         </div>
+
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+
+                                                        <div className="card card-plain">
+
+                                                            <div className="card-body">
+                                                                <table>
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td> <NavLink to={`/`}>Toutes les reservations</NavLink></td>
+                                                                        <td className="text-right"> 200 annonces</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td> <NavLink to={`/`}>Toutes les ventes</NavLink></td>
+                                                                        <td className="text-right"> 21 annonces</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td> <NavLink to={`/`}>Toutes les ventes</NavLink></td>
+                                                                        <td className="text-right"> 150 annonces</td>
+                                                                    </tr>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
                                     </div>
 
 
@@ -120,6 +157,18 @@ class ProfileAccountPublicUser extends Component {
                                                 </a>
                                                 <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                                     <NavLink to={`/profile/personal_reservations/`} className="dropdown-item">Reservation</NavLink>
+                                                    <NavLink to={`/profile/change_password/`} className="dropdown-item">Changer le mot de passe</NavLink>
+                                                </div>
+                                            </li>
+
+                                            <li className="nav-item dropdown">
+                                                <a className="nav-link dropdown-toggle" href="http://example.com"
+                                                   id="navbarDropdownMenuLink" data-toggle="dropdown"
+                                                   aria-haspopup="true" aria-expanded="false">
+                                                    <b>Blog</b>
+                                                </a>
+                                                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                                    <NavLink to={`/@${userPublick.slug}/blogs_annonce_reservations/`} className="dropdown-item">Reservation</NavLink>
                                                     <NavLink to={`/profile/change_password/`} className="dropdown-item">Changer le mot de passe</NavLink>
                                                 </div>
                                             </li>
@@ -346,96 +395,9 @@ class ProfileAccountPublicUser extends Component {
                                             </div>
                                         </div>
 
-                                        <div className="card">
-                                            <div className="card-body">
 
-                                                <div className="row">
+                                        <ProfileAccountTeamUser {...this.props}/>
 
-                                                    <div className="col-md-4 mx-auto">
-                                                        <div className="card card-profile card-plain">
-                                                            <div className="card-avatar">
-                                                                <a href="#pablo">
-                                                                    <img className="img img-raised" src="/assets/vendor/assets/img/mike.jpg"/>
-                                                                </a>
-                                                            </div>
-                                                            <div className="card-body">
-                                                                <h4 className="card-title">Alec Mike</h4>
-                                                                <h6 className="category text-gray">
-                                                                    Designer
-                                                                </h6>
-                                                                <p className="card-description">
-                                                                    One of the co-founders. Alec drives the technical strategy of
-                                                                    the platform, customer support and brand.
-                                                                </p>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-4 mx-auto">
-                                                        <div className="card card-profile card-plain">
-                                                            <div className="card-avatar">
-                                                                <a href="#pablo">
-                                                                    <img className="img img-raised" src="/assets/vendor/assets/img/mike.jpg"/>
-                                                                </a>
-                                                            </div>
-                                                            <div className="card-body">
-                                                                <h4 className="card-title">Alec Mike</h4>
-                                                                <h6 className="category text-gray">
-                                                                    Designer
-                                                                </h6>
-                                                                <p className="card-description">
-                                                                    One of the co-founders. Alec drives the technical strategy of
-                                                                    the platform, customer support and brand.
-                                                                </p>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-4 mx-auto">
-                                                        <div className="card card-profile card-plain">
-                                                            <div className="card-avatar">
-                                                                <a href="#pablo">
-                                                                    <img className="img img-raised" src="/assets/vendor/assets/img/mike.jpg"/>
-                                                                </a>
-                                                            </div>
-                                                            <div className="card-body">
-                                                                <h4 className="card-title">Alec Mike</h4>
-                                                                <h6 className="category text-gray">
-                                                                    Designer
-                                                                </h6>
-                                                                <p className="card-description">
-                                                                    One of the co-founders. Alec drives the technical strategy of
-                                                                    the platform, customer support and brand.
-                                                                </p>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-4 mx-auto">
-                                                        <div className="card card-profile card-plain">
-                                                            <div className="card-avatar">
-                                                                <a href="#pablo">
-                                                                    <img className="img img-raised" src="/assets/vendor/assets/img/mike.jpg"/>
-                                                                </a>
-                                                            </div>
-                                                            <div className="card-body">
-                                                                <h4 className="card-title">Alec Mike</h4>
-                                                                <h6 className="category text-gray">
-                                                                    Designer
-                                                                </h6>
-                                                                <p className="card-description">
-                                                                    One of the co-founders. Alec drives the technical strategy of
-                                                                    the platform, customer support and brand.
-                                                                </p>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-                                        </div>
 
                                         <div className="card">
                                             <div className="card-body">

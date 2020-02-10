@@ -18,13 +18,37 @@ class Profileannoncesreservationsbooked extends Component {
 
     }
 
+    mydatatables(){
+        $( function () {
+            $('#datatable').DataTable({
+                "pagingType": "full_numbers",
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search records",
+                },
+                responsive: true,
+                destroy: true,
+                retrieve:true,
+                autoFill: true,
+                colReorder: true,
+                "sPaginationType": "full_numbers",
+
+            });
+        });
+    }
 
     loadItem() {
-        fetch(route('api.annonces_bookeds.site')).then(res => res.json()).then((result) => {
-            this.setState({
-                annoncesreservationsbookeds: [...result]
-            });
-        })
+        fetch(route('api.annonces_bookeds.site')).then(res => res.json())
+            .then((result) => {
+                this.setState({
+                    annoncesreservationsbookeds: result
+                });
+                this.mydatatables();
+            }, (error) => {
+                this.setState({
+                    error
+                });
+            })
     }
 
     // lifecycle method
@@ -62,7 +86,7 @@ class Profileannoncesreservationsbooked extends Component {
 
 
 
-                                    <div className="col-lg-8 col-md-12 mx-auto">
+                                    <div className="col-lg-9 col-md-12 mx-auto">
 
                                         <ul className="nav nav-tabs nav-tabs-neutral justify-content-center" role="tablist" data-background-color={this.props.backgroundColor}>
                                             <li className="nav-item">
@@ -79,143 +103,102 @@ class Profileannoncesreservationsbooked extends Component {
                                         <br />
 
 
-                                        {annoncesreservationsbookeds.length > 0 && (
 
-                                            <>
-                                                {annoncesreservationsbookeds.map((item) =>(
+                                        <div className="card">
 
-                                                    <div key={item.id} className="card">
+                                            <div className="card-body">
+                                                <div className="toolbar">
 
-                                                        <div className="card-body">
-
-                                                            <div className="card card-plain card-blog">
-                                                                <div className="row">
-                                                                    <div className="col-md-5">
-                                                                        <div className="card-image">
-                                                                            <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
-                                                                                <ol className="carousel-indicators">
-                                                                                    <li data-target="#carouselAnnonceIndicators" data-slide-to="0" className=""></li>
-                                                                                    <li data-target="#carouselAnnonceIndicators" data-slide-to="1" className=""></li>
-                                                                                    <li data-target="#carouselAnnonceIndicators" data-slide-to="2" className="active"></li>
-                                                                                </ol>
-                                                                                <div className="carousel-inner" role="listbox">
-                                                                                    <div className="carousel-item">
-                                                                                        <Link to={`/annonce/show/`}>
-                                                                                            <img className="d-block" src="/assets/vendor/assets/img/bg1.jpg" alt="First slide" />
-                                                                                        </Link>
-                                                                                    </div>
-                                                                                    <div className="carousel-item">
-                                                                                        <Link to={`/annonce/show/`}>
-                                                                                            <img className="d-block" src="/assets/vendor/assets/img/bg3.jpg" alt="Second slide" />
-                                                                                        </Link>
-                                                                                    </div>
-                                                                                    <div className="carousel-item active">
-                                                                                        <Link to={`/annonce/show/`}>
-                                                                                            <img className="d-block" src="/assets/vendor/assets/img/bg4.jpg" alt="Third slide" />
-                                                                                        </Link>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <a className="carousel-control-prev" href="#carouselAnnonceIndicators" role="button" data-slide="prev">
-                                                                                    <i className="now-ui-icons arrows-1_minimal-left"></i>
-                                                                                </a>
-                                                                                <a className="carousel-control-next" href="#carouselAnnonceIndicators" role="button" data-slide="next">
-                                                                                    <i className="now-ui-icons arrows-1_minimal-right"></i>
-                                                                                </a>
-                                                                            </div>
+                                                </div>
+                                                <table id="datatable" className="table table-striped table-bordered"
+                                                       cellSpacing="0" width="100%">
+                                                    <thead>
+                                                    <tr>
+                                                        <th><b>Titre</b></th>
+                                                        <th><b>Type</b></th>
+                                                        <th><b>Email</b></th>
+                                                        <th><b>Periode</b></th>
+                                                        <th><b>Status</b></th>
+                                                        <th className="disabled-sorting text-right"><b>Actions</b></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                    <tr>
+                                                        <th>Titre</th>
+                                                        <th>Type</th>
+                                                        <th>Email</th>
+                                                        <th>Periode</th>
+                                                        <th>Status</th>
+                                                        <th className="disabled-sorting text-right">Actions</th>
+                                                    </tr>
+                                                    </tfoot>
+                                                    <tbody>
+                                                    {annoncesreservationsbookeds.length >= 0 && (
+                                                        <>
+                                                            {annoncesreservationsbookeds.map((item) =>(
+                                                                <tr key={item.id}>
+                                                                    <td>{(item.annoncereservation.title.length > 15 ? item.annoncereservation.title.substring(0, 15) + "..." : item.annoncereservation.title)}</td>
+                                                                    <td>{item.annoncereservation.categoryannoncereservation.name}</td>
+                                                                    <td>{(item.email.length > 10 ? item.email.substring(0, 10) + "..." : item.email)}</td>
+                                                                    <td><b>13/11/2019 </b>au <b>11/09/2020</b></td>
+                                                                    <td>
+                                                                        <div className="timeline-heading">
+                                                                            {item.status ?
+                                                                                <span
+                                                                                    className="badge badge-success"><b>Confirmée</b></span>
+                                                                                :
+                                                                                <span
+                                                                                    className="badge badge-danger"><b>En attente</b></span>
+                                                                            }
                                                                         </div>
-                                                                        <br />
-                                                                        <div className="card-header d-flex align-items-center">
-                                                                            <div className="text-left pull-left">
-                                                                                <NavLink to={`/annonce/show/`}>
-                                                                                    <h6 className="text-info ml-auto mr-auto">
-                                                                                        {item.annoncereservation.city.name}
-                                                                                    </h6>
-                                                                                </NavLink>
-                                                                            </div>
-                                                                            <div className="text-right ml-auto">
-                                                                                <a href="#pablo">
-                                                                                    <b>Partager</b>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="col-md-7">
-                                                                        <div className="card-header d-flex align-items-center">
-                                                                            <div className="text-left pull-left">
-                                                                                <NavLink to={`/annonce/show/`}>
-                                                                                    <h6 className="text-info ml-auto mr-auto">
-                                                                                        {item.annoncereservation.categoryannoncereservation.name}
-                                                                                    </h6>
-                                                                                </NavLink>
-                                                                            </div>
-                                                                            <div className="text-right ml-auto">
-                                                                                <a href="#pablo" className="btn btn-sm btn-outline-primary">
-                                                                                    <i className="now-ui-icons ui-2_favourite-28"></i>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="row">
-                                                                            <div className="col-md-6 col-6">
-                                                                                <h6 className="category text-dark">4 p . 3 ch . 180 m2</h6>
-                                                                            </div>
-                                                                            <div className="col-md-6 col-6">
-                                                                                <strong className="text-dark"><b>50 000 FCFA/mois</b></strong>
-                                                                            </div>
+                                                                    </td>
+                                                                    <td className="text-right">
+                                                                        {item.status ?
+                                                                            <button type="button" rel="tooltip"
+                                                                                    className="btn btn-success btn-icon btn-sm"
+                                                                                    data-original-title="Reservation confirmée" title="Reservation confirmée">
+                                                                                <i className="now-ui-icons ui-1_check"/>
+                                                                            </button>
+                                                                            :
+                                                                            <button type="button" rel="tooltip"
+                                                                                    className="btn btn-danger btn-icon btn-sm"
+                                                                                    data-original-title="Reservation en attente de confirmation" title="Reservation en attente de confirmation">
+                                                                                <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                            </button>
+                                                                        }
 
-                                                                        </div>
-                                                                        <h6 className="card-title">
-                                                                            <a href="#pablo">Warner Music Group buys concert</a>
-                                                                        </h6>
-                                                                        <p>
-                                                                            Warner Music Group announced today it’s
-                                                                            acquiring the selected .
-                                                                        </p>
-                                                                        <div className="card-header d-flex align-items-center">
-                                                                            <div className="d-flex align-items-center">
-                                                                                <NavLink to={`/annonce/show/`}>
-                                                                                    <img src="/assets/vendor/assets/img/bg1.jpg" style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
-                                                                                </NavLink>
-                                                                                <div className="mx-3">
-                                                                                    <NavLink to={`/annonce/show/`} className="text-dark font-weight-600 text-sm">Boclair Temgoua
-                                                                                        <small className="d-block text-muted">12 janv 2019</small>
-                                                                                    </NavLink>
-                                                                                </div>
-                                                                            </div>
-                                                                            <Button className="btn btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
-                                                                                <i className="now-ui-icons tech_mobile"></i>
-                                                                            </Button>
-                                                                            <NavLink to={`/annonces/`} className="btn btn-sm btn-primary">
-                                                                                <i className="now-ui-icons location_pin"></i>
-                                                                            </NavLink>
-                                                                            <NavLink to={`/annonces/`} className="btn btn-sm btn-success" rel="tooltip" title="Editer cette reservation" data-placement="bottom">
-                                                                                <i className="now-ui-icons ui-1_simple-delete"></i>
-                                                                            </NavLink>
-                                                                            <Button
-                                                                                className="btn btn-sm btn-danger" rel="tooltip" title="Supprimer cette reservation" data-placement="bottom">
-                                                                                <i className="now-ui-icons ui-1_simple-remove"></i>
-                                                                            </Button>{" "}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-
-                                                ))}
-
-                                            </>
-
-
-                                        )}
+                                                                        <button type="button" rel="tooltip"
+                                                                                className="btn btn-warning btn-icon btn-sm   btn-neutral  "
+                                                                                data-original-title="Voir cette reservation" title="">
+                                                                            <i className="now-ui-icons education_glasses"/>
+                                                                        </button>
+                                                                        <button type="button" rel="tooltip"
+                                                                                className="btn btn-danger btn-icon btn-sm   btn-neutral  "
+                                                                                data-original-title="" title="">
+                                                                            <i className="now-ui-icons ui-1_simple-remove"/>
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            ))}
+                                                        </>
+                                                    )}
 
 
 
 
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
 
                                     </div>
 
-                                    <div className="col-lg-4 col-md-12 mx-auto">
+
+
+
+
+                                    <div className="col-lg-3 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>

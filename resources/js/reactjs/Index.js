@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
 import RouteDashboard from "./router/RouteDashboard";
 import RouteUser from "./router/RouteUser";
+import 'animate.css/animate.css';
+import 'datatables.net-autofill-bs4'
 
 class Index extends Component {
     render() {

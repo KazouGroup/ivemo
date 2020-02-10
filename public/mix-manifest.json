@@ -1,5 +1,6 @@
 {
     "/js/reactjs/app.js": "/js/reactjs/app.js",
     "/js/reactjs/axios.js": "/js/reactjs/axios.js",
-    "/js/vuejs/app.js": "/js/vuejs/app.js"
+    "/js/vuejs/app.js": "/js/vuejs/app.js",
+    "/assets/vendor/assets/css/animate.css": "/assets/vendor/assets/css/animate.css"
 }

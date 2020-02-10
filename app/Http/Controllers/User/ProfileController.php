@@ -76,14 +76,18 @@ class ProfileController extends Controller
             ->orderBy('created_at','DESC')
             ->with([
                 'annoncereservation.categoryannoncereservation' => function ($q){
-                    $q->select('id','name','slug','user_id');},
+                    $q->select('id','name','slug','color_name','user_id');},
+                'annoncereservation.imagereservations' => function ($q){
+                    $q->distinct()->get();},
                 'annoncereservation.city' => function ($q){
                     $q->select('id','name','slug','user_id');},
                 'annoncereservation.annoncetype' => function ($q){
                     $q->select('id','name','slug');},
                 'annoncereservation.user' => function ($q){
                     $q->distinct()->get();}
-            ])->distinct()->get()->toArray();
+            ])->whereHas('annoncereservation', function ($q) {
+                 $q->where('status',1);
+             })->distinct()->get()->toArray();
 
         return response()->json($personnalreservations, 200);
     }

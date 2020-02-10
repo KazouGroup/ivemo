@@ -12,7 +12,7 @@ $factory->define(teamuser::class, function (Faker $faker) {
         'role' => $faker->userName,
         'description' => $faker->realText(rand(20, 60)),
         'status' => $faker->boolean,
-        'photo'=> $faker->imageUrl($width = 1400, $height = 800),
+        'photo'=> $faker->imageUrl($width = 400, $height = 400),
         'user_id' => user::inRandomOrder()->first()->id,
     ];
 });

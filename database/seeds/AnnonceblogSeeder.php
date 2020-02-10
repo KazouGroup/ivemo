@@ -12,6 +12,6 @@ class AnnonceblogSeeder extends Seeder
      */
     public function run()
     {
-        factory(blogannoncereservation::class, 100)->create();
+        factory(blogannoncereservation::class, 1000)->create();
     }
 }

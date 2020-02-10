@@ -36,18 +36,18 @@ class NavUserSite extends Component {
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
                             <NavLink to={'/'} className="nav-link">
-                                <i className="now-ui-icons shopping_shop"></i>
+                                <i className="now-ui-icons shopping_shop"/>
                                 <b>Acceuil</b>
                             </NavLink>
                         </li>
                         <li className="nav-item dropdown">
                             <a href="#" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
-                                <i className="now-ui-icons files_paper" aria-hidden="true"></i>
+                                <i className="now-ui-icons files_paper" aria-hidden="true"/>
                                 <p>Sections</p>
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                 <a className="dropdown-item" href="../sections.html#projects">
-                                    <i className="now-ui-icons education_paper"></i> Projects
+                                    <i className="now-ui-icons education_paper"/> Projects
                                     </a>
                                 <a className="dropdown-item" href="../sections.html#pricing">
                                     <i className="now-ui-icons business_money-coins"></i> Pricing
@@ -62,7 +62,7 @@ class NavUserSite extends Component {
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="../sections.html#blogs">
-                                <i className="now-ui-icons text_align-left"></i>
+                                <i className="now-ui-icons text_align-left"/>
                                 <b>Blogs</b>
                             </a>
                         </li>
@@ -71,14 +71,14 @@ class NavUserSite extends Component {
                             <>
                                 <li className="nav-item">
                                     <NavLink to={'/login/'} className="nav-link">
-                                        <i className="now-ui-icons users_circle-08"></i>
+                                        <i className="now-ui-icons users_circle-08"/>
                                         <p>Login</p>
                                     </NavLink>
                                 </li>
 
                                 <li className="nav-item">
                                     <a className="nav-link btn btn-primary text-left" href="/register/">
-                                        <i className="now-ui-icons tech_mobile"></i>
+                                        <i className="now-ui-icons tech_mobile"/>
                                         <p>Signup</p>
                                     </a>
                                 </li>

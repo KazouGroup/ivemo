@@ -10,6 +10,7 @@ use App\Model\blogannoncereservation;
 use App\Model\categoryannoncelocation;
 use App\Model\categoryannoncereservation;
 use Illuminate\Http\Request;
+use App\Model\user;
 
 class BlogannoncereservationController extends Controller
 {
@@ -36,7 +37,7 @@ class BlogannoncereservationController extends Controller
     {
         $blogannoncereservation = $categoryannoncereservation->blogannoncereservations()->with('user','categoryannoncereservation')
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
-            ->orderBy('created_at','DESC')
+            ->orderByRaw('RAND()')
             ->where('status',1)
             ->take(3)->distinct()->get()->toArray();
         return response()->json($blogannoncereservation, 200);
@@ -47,6 +48,16 @@ class BlogannoncereservationController extends Controller
         $blogannoncereservation = new BlogannoncereservationResource(blogannoncereservation::whereDate('created_at',$date)->whereSlug($blogannoncereservation)
             ->where('status',1)->first());
         return response()->json($blogannoncereservation, 200);
+    }
+
+     public function apiblogsannoncereservationspublique(user $user)
+    {
+       $blogannoncereservations = blogannoncereservation::whereIn('user_id',[$user->id])
+           ->orderBy('created_at','DESC')
+           ->where('status',1)->get()->toArray();
+
+        return response()->json($blogannoncereservations, 200);
+
     }
 
     public function annonceblogcategoryreservation(categoryannoncereservation $categoryannoncereservation)

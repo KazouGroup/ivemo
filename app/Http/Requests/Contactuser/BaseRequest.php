@@ -24,6 +24,13 @@ class BaseRequest extends Request
                 'email' => 'required',
                 'subject' => 'required',
             ];
+        }elseif($group == 'sendcontactmessageuser') {
+            $rules = [
+                'full_name' => 'required',
+                'message' => 'required',
+                'email' => 'required',
+                'subject' => 'required',
+            ];
         }
         else { // 'edit'
             $rules = [

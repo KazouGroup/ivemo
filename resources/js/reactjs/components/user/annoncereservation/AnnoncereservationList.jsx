@@ -15,8 +15,6 @@ class AnnoncereservationList extends Component {
     render() {
         return (
 
-
-
             <div className="card">
                 <div className="card-body">
                     <div className="card card-plain card-blog">
@@ -25,33 +23,24 @@ class AnnoncereservationList extends Component {
                                 <div className="card-image">
                                     <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
                                         <ol className="carousel-indicators">
-                                            <li data-target="#carouselAnnonceIndicators" data-slide-to="0" className=""></li>
-                                            <li data-target="#carouselAnnonceIndicators" data-slide-to="1" className=""></li>
-                                            <li data-target="#carouselAnnonceIndicators" data-slide-to="2" className="active"></li>
+                                            {this.props.imagereservations.map((value,index) => {
+                                                return <li key={value.id} data-target={`#carouselAnnonceIndicators`} data-slide-to={index} className={index === 0 ? "active" : ""}/>
+                                            })}
                                         </ol>
                                         <div className="carousel-inner" role="listbox">
-                                            <div className="carousel-item">
-                                                <Link to={`/annonce/show/`}>
-                                                    <img className="d-block" src="/assets/vendor/assets/img/bg1.jpg" alt="First slide" />
-                                                </Link>
-                                            </div>
-                                            <div className="carousel-item">
-                                                <Link to={`/annonce/show/`}>
-                                                    <img className="d-block" src="/assets/vendor/assets/img/bg3.jpg" alt="Second slide" />
-                                                </Link>
-                                            </div>
-                                            <div className="carousel-item active">
-                                                <Link to={`/annonce/show/`}>
-                                                    <img className="d-block" src="/assets/vendor/assets/img/bg4.jpg" alt="Third slide" />
-                                                </Link>
-                                            </div>
+
+                                            {this.props.imagereservations.map((item,index) => (
+                                                <div key={item.id} className={`carousel-item ${index === 0 ? "active" : ""}`}>
+                                                    <Link to={`/annonces_reservations/reservations/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/${this.props.slug}/`}>
+                                                        <img className="d-block"
+                                                             src={item.photo}
+                                                             alt={item.title}/>
+                                                    </Link>
+                                                </div>
+                                            ))}
+
                                         </div>
-                                        <a className="carousel-control-prev" href="#carouselAnnonceIndicators" role="button" data-slide="prev">
-                                            <i className="now-ui-icons arrows-1_minimal-left"></i>
-                                        </a>
-                                        <a className="carousel-control-next" href="#carouselAnnonceIndicators" role="button" data-slide="next">
-                                            <i className="now-ui-icons arrows-1_minimal-right"></i>
-                                        </a>
+
                                     </div>
                                 </div>
                                 <br />
@@ -64,11 +53,11 @@ class AnnoncereservationList extends Component {
                                         </NavLink>
                                     </div>
                                     <div className="text-right ml-auto text-success">
-                                        <a href="#pablo">
+                                        <Link  to={`/annonces_reservations/reservations/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/${this.props.slug}/`}>
                                             <h6 className="text-primary ml-auto mr-auto">
                                                 Reserver
                                             </h6>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +86,9 @@ class AnnoncereservationList extends Component {
 
                                 </div>
                                 <h6 className="card-title">
-                                    <Link to={`/annonces_reservations/reservations/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/${this.props.slug}/`}>Warner Music Group buys concert</Link>
+                                    <Link to={`/annonces_reservations/reservations/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/${this.props.slug}/`}>
+                                        {this.props.title}
+                                    </Link>
                                 </h6>
                                 <span dangerouslySetInnerHTML={this.getDescription()}/>
                                 <div className="card-header d-flex align-items-center">
@@ -111,30 +102,33 @@ class AnnoncereservationList extends Component {
                                             </NavLink>
                                         </div>
                                     </div>
-                                    <Button className="btn btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
-                                        <i className="now-ui-icons tech_mobile"/>
-                                    </Button>
-                                    <NavLink to={`/annonces/`} className="btn btn-sm btn-primary">
-                                        <i className="now-ui-icons location_pin"/>
-                                    </NavLink>
 
-                                    {!$guest && (
-                                        <>
-                                            {$userIvemo.id === this.props.user_id && (
-                                                <>
-                                                    <NavLink to={`/annonces/`} className="btn btn-sm btn-success" rel="tooltip" title="Editer" data-placement="bottom">
-                                                        <i className="now-ui-icons ui-1_simple-delete"/>
-                                                    </NavLink>
-                                                    <Button
-                                                        className="btn btn-sm btn-danger" rel="tooltip" title="Supprimer" data-placement="bottom">
-                                                        <i className="now-ui-icons ui-1_simple-remove"/>
-                                                    </Button>{" "}
-                                                </>
-                                            )}
+                                    <div className="text-right mx-auto">
 
-                                        </>
-                                    )}
+                                        <Button className="btn btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
+                                            <i className="now-ui-icons tech_mobile"/>
+                                        </Button>
+                                        <NavLink to={`/annonces/`} className="btn btn-sm btn-primary">
+                                            <i className="now-ui-icons location_pin"/>
+                                        </NavLink>
 
+                                        {!$guest && (
+                                            <>
+                                                {$userIvemo.id === this.props.user_id && (
+                                                    <>
+                                                        <NavLink to={`/annonces/`} className="btn btn-sm btn-success" rel="tooltip" title="Editer" data-placement="bottom">
+                                                            <i className="now-ui-icons ui-1_simple-delete"/>
+                                                        </NavLink>
+                                                        <Button
+                                                            className="btn btn-sm btn-danger" rel="tooltip" title="Supprimer" data-placement="bottom">
+                                                            <i className="now-ui-icons ui-1_simple-remove"/>
+                                                        </Button>{" "}
+                                                    </>
+                                                )}
+
+                                            </>
+                                        )}
+                                    </div>
 
                                 </div>
                             </div>

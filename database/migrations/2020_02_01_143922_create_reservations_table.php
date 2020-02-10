@@ -19,7 +19,10 @@ class CreateReservationsTable extends Migration
             $table->date('start_reservation')->nullable();
             $table->date('end_reservation')->nullable();
             $table->string('phone')->nullable();
+            $table->boolean('status')->default(false);
             $table->string('email')->nullable();
+            $table->unsignedBigInteger('adult_number')->nullable();
+            $table->unsignedBigInteger('children_number')->nullable();
             $table->longText('description')->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('user_id')->nullable()->index();

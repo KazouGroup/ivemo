@@ -8,96 +8,36 @@ import PropTypes from "prop-types";
 import BlogannoncereservationIntesseAnnonseShow
     from "../blog/blogannoncereservation/BlogannoncereservationIntesseAnnonseShow";
 import AnnonceservationInteresse from "./AnnonceservationInteresse";
+import FormContactAnnoncereservationUser from "./inc/FormContactAnnoncereservationUser";
+import FormcontactuseronreservationShow from "./inc/FormcontactuseronreservationShow";
 
 
 class Annoncebycategoryannoncereservationcityshow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            first_name: '',
-            last_name: '',
-            subject: '',
-            message: '',
-            errors: [],
+            annoncereservation:{categoryannoncereservation:[],user:[],imagereservations:[]},
         };
-        this.createItem = this.createItem.bind(this);
-        this.handleFieldChange = this.handleFieldChange.bind(this);
-        this.hasErrorFor = this.hasErrorFor.bind(this);
-        this.renderErrorFor = this.renderErrorFor.bind(this);
-    }
 
-    handleFieldChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value,
-        });
-        this.state.errors[event.target.name] = '';
-    }
-
-    // Handle Errors
-    hasErrorFor(field) {
-        return !!this.state.errors[field];
-    }
-
-    renderErrorFor(field) {
-        if (this.hasErrorFor(field)) {
-            return (
-                <span className='invalid-feedback'>
-                    <strong>{this.state.errors[field][0]}</strong>
-                </span>
-            )
-        }
-    }
-
-    createItem(e) {
-        e.preventDefault();
-
-        let item = {
-            email: this.state.email,
-            first_name: this.state.first_name,
-            last_name: this.state.last_name,
-            subject: this.state.subject,
-            message: this.state.message,
-        };
-        dyaxios.post(route('contact.save'), item)
-            .then(() => {
-                $.notify('<strong>Merçi pour votre message ...</strong>', {
-                    allow_dismiss: false,
-                    type: 'success',
-                    placement: {
-                        from: 'bottom',
-                        align: 'right'
-                    },
-                    animate: {
-                        enter: 'animated fadeInRight',
-                        exit: 'animated fadeOutRight'
-                    },
-                });
-
-                this.setState({
-                    email: "",
-                    first_name: "",
-                    last_name: "",
-                    subject: "",
-                    message: "",
-                });
-            }).catch(error => {
-            this.setState({
-                errors: error.response.data.errors
-            });
-        })
     }
 
     // lifecycle method
     componentDidMount() {
-        //
+        let itemannoncetype = this.props.match.params.annoncetype;
+        let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
+        let itemcityannonce = this.props.match.params.city;
+        let itemannoncereservation = this.props.match.params.annoncereservation;
+        /*Ici c'est pour recuperer les annonce par villes*/
+        let url = route('api.annoncelocationbycategoryannoncereservationslug_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemannoncereservation]);
+        dyaxios.get(url).then(response => this.setState({annoncereservation: response.data,}));
     }
 
     render() {
+        const {annoncereservation} = this.state;
         return (
             <>
                 <Helmet>
-                    <title>Annonce show - Ivemo</title>
+                    <title>{`${annoncereservation.title || "Ivemo"}`} - Ivemo</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
@@ -127,26 +67,26 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
 
                                                 <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
                                                     <ol className="carousel-indicators">
-                                                        <li data-target="#carouselAnnonceIndicators" data-slide-to="0" className=""></li>
-                                                        <li data-target="#carouselAnnonceIndicators" data-slide-to="1" className=""></li>
-                                                        <li data-target="#carouselAnnonceIndicators" data-slide-to="2" className="active"></li>
+                                                        {annoncereservation.imagereservations.map((value,index) => {
+                                                            return <li key={value.id} data-target={`#carouselAnnonceIndicators`} data-slide-to={index} className={index === 0 ? "active" : ""}/>
+                                                        })}
                                                     </ol>
                                                     <div className="carousel-inner" role="listbox">
-                                                        <div className="carousel-item">
-                                                            <img className="d-block" src="/assets/vendor/assets/img/bg1.jpg" alt="First slide" />
-                                                        </div>
-                                                        <div className="carousel-item">
-                                                            <img className="d-block" src="/assets/vendor/assets/img/bg3.jpg" alt="Second slide" />
-                                                        </div>
-                                                        <div className="carousel-item active">
-                                                            <img className="d-block" src="/assets/vendor/assets/img/bg4.jpg" alt="Third slide" />
-                                                        </div>
+
+                                                        {annoncereservation.imagereservations.map((item,index) => (
+                                                            <div key={item.id} className={`carousel-item ${index === 0 ? "active" : ""}`}>
+                                                                <img className="d-block"
+                                                                     src={item.photo}
+                                                                     alt={item.title}/>
+                                                            </div>
+                                                        ))}
+
                                                     </div>
                                                     <a className="carousel-control-prev" href="#carouselAnnonceIndicators" role="button" data-slide="prev">
-                                                        <i className="now-ui-icons arrows-1_minimal-left"></i>
+                                                        <i className="now-ui-icons arrows-1_minimal-left"/>
                                                     </a>
                                                     <a className="carousel-control-next" href="#carouselAnnonceIndicators" role="button" data-slide="next">
-                                                        <i className="now-ui-icons arrows-1_minimal-right"></i>
+                                                        <i className="now-ui-icons arrows-1_minimal-right"/>
                                                     </a>
                                                 </div>
                                             </div>
@@ -155,7 +95,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                 <div className="text-left pull-left">
                                                     <NavLink to={`/annonce/show/`}>
                                                         <h6 className="text-info ml-auto mr-auto">
-                                                            Appartement
+                                                            {annoncereservation.categoryannoncereservation.name}
                                                         </h6>
                                                     </NavLink>
                                                 </div>
@@ -208,11 +148,11 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                 </div>
                                                 <div className="card-header d-flex align-items-center">
                                                     <div className="d-flex align-items-center">
-                                                        <NavLink to={`/annonce/show/`}>
-                                                            <img src="/assets/vendor/assets/img/bg1.jpg" style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
+                                                        <NavLink to={`/@${annoncereservation.user.slug}/`}>
+                                                            <img src={annoncereservation.user.avatar} style={{ height: "40px", width: "80px" }} alt={annoncereservation.user.first_name} className="avatar" />
                                                         </NavLink>
                                                         <div className="mx-3">
-                                                            <NavLink to={`/annonce/show/`} className="text-dark font-weight-600 text-sm"><b>Boclair Temgoua</b>
+                                                            <NavLink to={`/@${annoncereservation.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{annoncereservation.user.first_name}</b>
                                                                 <small className="d-block text-muted">12 janv 2019</small>
                                                             </NavLink>
                                                         </div>
@@ -224,13 +164,23 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                         <a href="https://www.kazoutech.com" className="btn btn-sm btn-primary" target="_banck">
                                                             <i className="now-ui-icons objects_globe"></i>
                                                         </a>
-                                                        <NavLink to={`/annonces/`} className="btn btn-sm btn-success" rel="tooltip" title="Editer" data-placement="bottom">
-                                                            <i className="now-ui-icons ui-1_simple-delete"></i>
-                                                        </NavLink>
-                                                        <Button
-                                                            className="btn btn-sm btn-danger" rel="tooltip" title="Supprimer" data-placement="bottom">
-                                                            <i className="now-ui-icons ui-1_simple-remove"></i>
-                                                        </Button>{" "}
+
+                                                        {!$guest && (
+                                                            <>
+                                                                {$userIvemo.id === annoncereservation.user_id && (
+                                                                    <>
+                                                                        <NavLink to={`/annonces/`} className="btn btn-sm btn-success" rel="tooltip" title="Editer" data-placement="bottom">
+                                                                            <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                        </NavLink>
+                                                                        <Button
+                                                                            className="btn btn-sm btn-danger" rel="tooltip" title="Supprimer" data-placement="bottom">
+                                                                            <i className="now-ui-icons ui-1_simple-remove"/>
+                                                                        </Button>{" "}
+                                                                    </>
+                                                                )}
+
+                                                            </>
+                                                        )}
                                                     </div>
                                                 </div>
                                                 <div className="card-title">
@@ -271,7 +221,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                         <div className="card-header" role="tab" id="headingOne">
                                                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                                 <b>Envie de visiter ? Une question sur cet appartement ?</b>
-                                                                <i className="now-ui-icons arrows-1_minimal-down"></i>
+                                                                <i className="now-ui-icons arrows-1_minimal-down"/>
                                                             </a>
                                                         </div>
                                                         <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
@@ -281,77 +231,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
 
-                                                                            <form role="form" id="contact-form" onSubmit={this.createItem} acceptCharset="UTF-8">
-
-                                                                                <div className="input-group">
-                                                                                    <div className="input-group-prepend">
-                                                                                        <span className="input-group-text"><i className="now-ui-icons users_circle-08"></i></span>
-                                                                                    </div>
-                                                                                    <input id='last_name'
-                                                                                           type='text'
-                                                                                           className={`form-control ${this.hasErrorFor('last_name') ? 'is-invalid' : ''}`}
-                                                                                           name='last_name'
-                                                                                           placeholder="Nom"
-                                                                                           aria-label="Last Name"
-                                                                                           autoComplete="last_name"
-                                                                                           value={this.state.last_name}
-                                                                                           onChange={this.handleFieldChange}
-                                                                                    />
-                                                                                    {this.renderErrorFor('last_name')}
-                                                                                </div>
-                                                                                <div className="input-group">
-                                                                                    <div className="input-group-prepend">
-                                                                                        <span className="input-group-text"><i className="now-ui-icons ui-1_email-85"></i></span>
-                                                                                    </div>
-                                                                                    <input id='email'
-                                                                                           type='email'
-                                                                                           className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                                                                           name='email'
-                                                                                           placeholder="Email"
-                                                                                           aria-label="Email"
-                                                                                           autoComplete="email"
-                                                                                           value={this.state.email}
-                                                                                           onChange={this.handleFieldChange}
-                                                                                    />
-                                                                                    {this.renderErrorFor('email')}
-                                                                                </div>
-                                                                                <div className="input-group">
-                                                                                    <div className="input-group-prepend">
-                                                                                        <span className="input-group-text"><i className="now-ui-icons tech_mobile"></i></span>
-                                                                                    </div>
-                                                                                    <input id='phone'
-                                                                                           type='text'
-                                                                                           className={`form-control ${this.hasErrorFor('phone') ? 'is-invalid' : ''}`}
-                                                                                           name='phone'
-                                                                                           placeholder="Téléphone"
-                                                                                           aria-label="Téléphone"
-                                                                                           value={this.state.phone}
-                                                                                           onChange={this.handleFieldChange}
-                                                                                    />
-                                                                                    {this.renderErrorFor('phone')}
-                                                                                </div>
-                                                                                <div className="form-group">
-                                                                                    <textarea name="message" value={this.state.message}
-                                                                                              onChange={this.handleFieldChange}
-                                                                                              placeholder={'Posez ici toutes vos questions !'}
-                                                                                              className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                                              id="message"
-                                                                                              rows="10" />
-                                                                                    {this.renderErrorFor('message')}
-                                                                                </div>
-                                                                                <div className="form-check text-left">
-                                                                                    <label className="form-check-label">
-                                                                                        <input className="form-check-input" id="remember" type="checkbox" defaultChecked={this.state.remember} value={this.state.remember} name="remember" onChange={this.handleFieldChange} />
-                                                                                        <span className="form-check-sign"></span>
-                                                                                        <span>Je ne souhaite pas recevoir les annonces similaires. En savoir plus</span>
-                                                                                    </label>
-                                                                                </div>
-                                                                                <div className="submit text-center">
-                                                                                    <button className="btn btn-primary btn-lg" type="submit">
-                                                                                        <i className="now-ui-icons ui-1_email-85"></i> Contacter l'agence
-                                                                                    </button>
-                                                                                </div>
-                                                                            </form>
+                                                                        <FormContactAnnoncereservationUser {...this.props}/>
 
 
                                                                         </div>
@@ -384,11 +264,11 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                             <div className="card-header d-flex align-items-center">
                                                                 <div className="d-flex align-items-center">
-                                                                    <NavLink to={`/annonce/show/`}>
-                                                                        <img src="/assets/vendor/assets/img/bg1.jpg" style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
+                                                                    <NavLink to={`/@${annoncereservation.user.slug}/`}>
+                                                                        <img src={annoncereservation.user.avatar} style={{ height: "40px", width: "80px" }} alt={annoncereservation.user.first_name} className="avatar" />
                                                                     </NavLink>
                                                                     <div className="mx-3">
-                                                                        <NavLink to={`/annonce/show/`} className="text-dark font-weight-600 text-sm"><b>Boclair Temgoua</b>
+                                                                        <NavLink to={`/@${annoncereservation.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{annoncereservation.user.first_name}</b>
                                                                             <small className="d-block text-muted">12 janv 2019</small>
                                                                         </NavLink>
                                                                     </div>
@@ -410,81 +290,11 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                             <hr />
                                                             <div className="card-header text-center">
                                                                 <div className="card-title">
-                                                                    <b>Reserver cet(te) Chambre d'hotel</b>
+                                                                    Contacter <b>{annoncereservation.user.first_name} </b>
                                                                 </div>
                                                             </div>
-                                                            <form role="form" id="contact-form" onSubmit={this.createItem} acceptCharset="UTF-8">
 
-                                                                <div className="input-group">
-                                                                    <div className="input-group-prepend">
-                                                                        <span className="input-group-text"><i className="now-ui-icons users_circle-08"></i></span>
-                                                                    </div>
-                                                                    <input id='last_name'
-                                                                           type='text'
-                                                                           className={`form-control ${this.hasErrorFor('last_name') ? 'is-invalid' : ''}`}
-                                                                           name='last_name'
-                                                                           placeholder="Nom"
-                                                                           aria-label="Last Name"
-                                                                           autoComplete="last_name"
-                                                                           value={this.state.last_name}
-                                                                           onChange={this.handleFieldChange}
-                                                                    />
-                                                                    {this.renderErrorFor('last_name')}
-                                                                </div>
-                                                                <div className="input-group">
-                                                                    <div className="input-group-prepend">
-                                                                        <span className="input-group-text"><i className="now-ui-icons ui-1_email-85"></i></span>
-                                                                    </div>
-                                                                    <input id='email'
-                                                                           type='email'
-                                                                           className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                                                           name='email'
-                                                                           placeholder="Email"
-                                                                           aria-label="Email"
-                                                                           autoComplete="email"
-                                                                           value={this.state.email}
-                                                                           onChange={this.handleFieldChange}
-                                                                    />
-                                                                    {this.renderErrorFor('email')}
-                                                                </div>
-                                                                <div className="input-group">
-                                                                    <div className="input-group-prepend">
-                                                                        <span className="input-group-text"><i className="now-ui-icons tech_mobile"></i></span>
-                                                                    </div>
-                                                                    <input id='phone'
-                                                                           type='text'
-                                                                           className={`form-control ${this.hasErrorFor('phone') ? 'is-invalid' : ''}`}
-                                                                           name='phone'
-                                                                           placeholder="Téléphone"
-                                                                           aria-label="Téléphone"
-                                                                           value={this.state.phone}
-                                                                           onChange={this.handleFieldChange}
-                                                                    />
-                                                                    {this.renderErrorFor('phone')}
-                                                                </div>
-                                                                <div className="form-group">
-                                                                    <textarea name="message" value={this.state.message}
-                                                                              onChange={this.handleFieldChange}
-                                                                              placeholder={'Posez ici toutes vos questions !'}
-                                                                              className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                              id="message"
-                                                                              rows="10" />
-                                                                    {this.renderErrorFor('message')}
-                                                                </div>
-                                                                <div className="form-check text-left">
-                                                                    <label className="form-check-label">
-                                                                        <input className="form-check-input" id="remember" type="checkbox" defaultChecked={this.state.remember} value={this.state.remember} name="remember" onChange={this.handleFieldChange} />
-                                                                        <span className="form-check-sign"></span>
-                                                                        <span>Je ne souhaite pas recevoir les annonces similaires. En savoir plus</span>
-                                                                    </label>
-                                                                </div>
-                                                                <div className="submit text-center">
-                                                                    <button className="btn btn-primary btn-lg" type="submit">
-                                                                        <i className="now-ui-icons ui-1_email-85"></i> Contacter l'agence
-                                                                    </button>
-                                                                </div>
-                                                            </form>
-
+                                                           <FormcontactuseronreservationShow {...this.props}/>
 
                                                         </div>
                                                     </div>
