@@ -7,14 +7,14 @@ use App\Jobs\ContactuserJob;
 
 class ContactuserService
 {
-    public static function newEmail($request,$user)
+    public static function newEmail($request,$annoncereservation)
     {
         $full_name = $request->get('full_name');
         $phone = $request->get('phone');
         $email = $request->get('email');
         $subject = $request->get('subject');
         $message = $request->get('message');
-        $to = $user->email;
+        $to = $annoncereservation->user->email;
 
 
         $from = ['address' => $request->get('email') , 'name' => $request->get('full_name')];

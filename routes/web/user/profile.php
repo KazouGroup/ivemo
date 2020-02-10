@@ -36,6 +36,16 @@ Route::get(
 )->name('annonces_reservations_booked.site');
 
 Route::get(
+    'profile/annonces_reservations_booked/confirmed/{id}',
+    'ProfileController@annonces_reservations_booked_confirmed'
+)->name('annonces_reservations_booked_confirmed.site');
+
+Route::get(
+    'profile/annonces_reservations_booked/unconfirmed/{id}',
+    'ProfileController@annonces_reservations_booked_unconfirmed'
+)->name('annonces_reservations_booked_unconfirmed.site');
+
+Route::get(
     '@{user}',
     'ProfileController@public_profile'
 )->name('public_profile.site');

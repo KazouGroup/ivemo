@@ -13,6 +13,7 @@ use App\Model\reservation;
 use App\Model\user;
 use App\Services\ContactuserService;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProfileController extends Controller
 {
@@ -113,6 +114,35 @@ class ProfileController extends Controller
         return response()->json($personnalreservations, 200);
     }
 
+        public function annonces_reservations_booked_confirmed(reservation $reservation, $id)
+        {
+             $reservation = reservation::where('id', $id)->findOrFail($id);
+
+            if(auth()->user()->id === $reservation->annoncereservation->user_id){
+                        $reservation->update([
+                            'status' => 1,
+                        ]);
+
+              return response('Confirmed',Response::HTTP_ACCEPTED);
+            }
+
+
+        }
+
+        public function annonces_reservations_booked_unconfirmed(reservation $reservation, $id)
+        {
+            $reservation = reservation::where('id', $id)->findOrFail($id);
+               if(auth()->user()->id === $reservation->annoncereservation->user_id){
+                $reservation->update([ 'status' => 0,]);
+                 return response('Unconfirmed',Response::HTTP_ACCEPTED);
+               }
+
+        }
+
+
+
+
+
     public function apipersonalmessagescontacts()
     {
         $contactusers = contactuser::whereIn('user_id',[auth()->user()->id])
@@ -144,6 +174,7 @@ class ProfileController extends Controller
             'user' => $user,
         ]);
     }
+
     /**
      * Show the form for creating a new resource.
      *

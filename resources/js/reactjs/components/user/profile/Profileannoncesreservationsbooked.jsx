@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Swal from 'sweetalert2';
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Button } from "reactstrap";
@@ -15,6 +16,115 @@ class Profileannoncesreservationsbooked extends Component {
         this.state = {
             annoncesreservationsbookeds:{annoncereservation:[],user:[]},
         };
+        this.confirmItem = this.confirmItem.bind(this);
+    }
+    confirmItem(item){
+        Swal.fire({
+            title: 'Confirmer la reservation?',
+            text: "êtes vous sure de vouloir confirmer cette reservation?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                //Envoyer la requet au server
+                let url = route('annonces_reservations_booked_confirmed.site',[item.id]);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update FAQ',
+                            message: 'Reservation confirmée avec suces'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'bottom',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animated fadeInUp",
+                                exit: "animated fadeOutDown"
+                            },
+                        });
+                    /** End alert ***/
+                    /** End alert ***/
+                    this.loadItems();
+
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
+
+    }
+
+    unconfirmItem(item){
+        Swal.fire({
+            title: 'Annullé la reservation?',
+            text: "êtes vous sure de vouloir annuller cette reservation?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                //Envoyer la requet au server
+                let url = route('annonces_reservations_booked_unconfirmed.site',[item.id]);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update FAQ',
+                            message: 'Reservation annullé avec success'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'bottom',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animated fadeInUp",
+                                exit: "animated fadeOutDown"
+                            },
+                        });
+                    /** End alert ***/
+                    /** End alert ***/
+                    this.loadItems();
+
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
 
     }
 
@@ -37,7 +147,7 @@ class Profileannoncesreservationsbooked extends Component {
         });
     }
 
-    loadItem() {
+    loadItems() {
         fetch(route('api.annonces_bookeds.site')).then(res => res.json())
             .then((result) => {
                 this.setState({
@@ -53,7 +163,7 @@ class Profileannoncesreservationsbooked extends Component {
 
     // lifecycle method
     componentDidMount() {
-        this.loadItem();
+        this.loadItems();
 
     }
 
@@ -154,13 +264,13 @@ class Profileannoncesreservationsbooked extends Component {
                                                                     </td>
                                                                     <td className="text-right">
                                                                         {item.status ?
-                                                                            <button type="button" rel="tooltip"
+                                                                            <button type="button" rel="tooltip" onClick={() => this.unconfirmItem(item)}
                                                                                     className="btn btn-success btn-icon btn-sm"
                                                                                     data-original-title="Reservation confirmée" title="Reservation confirmée">
                                                                                 <i className="now-ui-icons ui-1_check"/>
                                                                             </button>
                                                                             :
-                                                                            <button type="button" rel="tooltip"
+                                                                            <button type="button" rel="tooltip" onClick={() => this.confirmItem(item)}
                                                                                     className="btn btn-danger btn-icon btn-sm"
                                                                                     data-original-title="Reservation en attente de confirmation" title="Reservation en attente de confirmation">
                                                                                 <i className="now-ui-icons ui-1_simple-delete"/>

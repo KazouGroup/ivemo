@@ -171,19 +171,18 @@ class AnnoncereservationController extends Controller
      public function sendcontactmessageuser(StorecontactRequest $request, annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
     {
 
+        $contactuser = new contactuser();
 
-              $contactuser = new contactuser();
+        $slug = sha1(('YmdHis') . str_random(30));
+        $contactuser->fill($request->all());
+        $contactuser->slug = $slug;
+        $contactuser->user_id = $annoncereservation->user_id;
 
-              $slug = sha1(('YmdHis') . str_random(30));
-              $contactuser->fill($request->all());
-              $contactuser->slug = $slug;
-              $contactuser->user_id = $annoncelocation->user_id;
+        ContactuserService::newEmail($request,$annoncereservation);
 
-              ContactuserService::newEmail($request,$user);
+        $contactuser->save();
 
-              $contactuser->save();
-
-              return response()->json($contactuser,200);
+        return response()->json($contactuser,200);
     }
 
     /**
