@@ -12,7 +12,7 @@ $factory->define(annoncevente::class, function (Faker $faker) {
     $title = $faker->sentence(9);
     return [
         'title' => $title,
-        'price' => $faker->randomNumber(4),
+        'price' => $faker->randomNumber(10),
         'surface' => $faker->randomNumber(4),
         'status' => $faker->boolean,
         'rooms' => $faker->randomDigitNot(5),

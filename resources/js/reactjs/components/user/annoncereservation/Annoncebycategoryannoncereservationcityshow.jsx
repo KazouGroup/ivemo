@@ -106,7 +106,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                     </a>
                                                 </div>
                                                 <div className="text-right ml-auto">
-                                                    <strong className="title text-dark"><b>50 000 FCFA/mois</b></strong>
+                                                    <h5 className="text-success"><b>{(annoncereservation.price)} <small>FCFA</small></b></h5>
                                                 </div>
                                             </div>
 

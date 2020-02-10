@@ -20,7 +20,7 @@ class CreateAnnoncereservationsTable extends Migration
             $table->string('district')->nullable();
             $table->boolean('status')->default(true);
             $table->longText('description')->nullable();
-            $table->decimal('price', 15,2)->nullable();
+            $table->unsignedBigInteger('price')->nullable();
             $table->date('disponible_date')->nullable();
             $table->timestamps();
 

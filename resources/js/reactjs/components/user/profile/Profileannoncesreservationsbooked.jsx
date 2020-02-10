@@ -247,7 +247,7 @@ class Profileannoncesreservationsbooked extends Component {
                                                         <>
                                                             {annoncesreservationsbookeds.map((item) =>(
                                                                 <tr key={item.id}>
-                                                                    <td>{(item.annoncereservation.title.length > 15 ? item.annoncereservation.title.substring(0, 15) + "..." : item.annoncereservation.title)}</td>
+                                                                    <td>{(item.annoncereservation.title.length > 10 ? item.annoncereservation.title.substring(0, 10) + "..." : item.annoncereservation.title)}</td>
                                                                     <td>{item.annoncereservation.categoryannoncereservation.name}</td>
                                                                     <td>{(item.email.length > 10 ? item.email.substring(0, 10) + "..." : item.email)}</td>
                                                                     <td><b>13/11/2019 </b>au <b>11/09/2020</b></td>
@@ -277,7 +277,7 @@ class Profileannoncesreservationsbooked extends Component {
                                                                             </button>
                                                                         }
 
-                                                                        <button type="button" rel="tooltip"
+                                                                        <button type="button" rel="tooltip" data-toggle="modal" data-target="#showreservation"
                                                                                 className="btn btn-warning btn-icon btn-sm   btn-neutral  "
                                                                                 data-original-title="Voir cette reservation" title="">
                                                                             <i className="now-ui-icons education_glasses"/>
@@ -301,6 +301,33 @@ class Profileannoncesreservationsbooked extends Component {
                                             </div>
 
                                         </div>
+
+                                        <div className="modal fade showreservation" id="showreservation" tabIndex="-1" role="dialog"
+                                             aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                            <div className="modal-dialog modal-lg">
+                                                <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <h5 className="modal-title" id="exampleModalLongTitle">Modal
+                                                            title</h5>
+                                                        <button type="button" className="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        ...
+                                                    </div>
+                                                    <div className="modal-footer">
+                                                        <button type="button" className="btn btn-secondary"
+                                                                data-dismiss="modal">Close
+                                                        </button>
+                                                        <button type="button" className="btn btn-primary">Save changes
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
 
                                     </div>
 
@@ -342,9 +369,6 @@ class Profileannoncesreservationsbooked extends Component {
 
 
                         </div>
-
-
-
 
                         <FooterBigUserSite />
                     </div>

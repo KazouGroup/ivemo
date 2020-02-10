@@ -12,6 +12,10 @@ class AnnoncereservationList extends Component {
         const md = new Remarkable();
         return { __html: md.render(this.props.description.length > 80 ? this.props.description.substring(0, 80) + "..." : this.props.description) };
     }
+    numberWithCommas() {
+        let parts=this.props.price.toLocaleString().split(".");
+        return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+    }
     render() {
         return (
 
@@ -71,9 +75,7 @@ class AnnoncereservationList extends Component {
                                         </NavLink>
                                     </div>
                                     <div className="text-right ml-auto">
-                                        <a href="#pablo" className="btn btn-sm btn-outline-primary">
-                                            <i className="now-ui-icons ui-2_favourite-28" />
-                                        </a>
+                                        <h5 className="text-success"><b>{this.numberWithCommas()} <small>FCFA</small></b></h5>
                                     </div>
                                 </div>
                                 <div className="row">
@@ -81,7 +83,7 @@ class AnnoncereservationList extends Component {
                                         <h6 className="category text-dark">4 p . 3 ch . 180 m2</h6>
                                     </div>
                                     <div className="col-md-6 col-6">
-                                        <strong className="text-dark"><b>50 000 FCFA/mois</b></strong>
+                                        <h6 className="category text-dark">la nuit</h6>
                                     </div>
 
                                 </div>
