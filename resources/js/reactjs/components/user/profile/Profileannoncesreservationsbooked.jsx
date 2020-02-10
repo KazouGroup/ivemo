@@ -160,7 +160,9 @@ class Profileannoncesreservationsbooked extends Component {
                 });
             })
     }
-
+    reload(){
+        this.loadItems()
+    }
     // lifecycle method
     componentDidMount() {
         this.loadItems();
@@ -218,7 +220,13 @@ class Profileannoncesreservationsbooked extends Component {
 
                                             <div className="card-body">
                                                 <div className="toolbar">
-
+                                                    <div className="header text-right">
+                                                        <button onClick={() => this.reload()}
+                                                                className="btn btn-success btn-raised btn-sm"
+                                                                title="Refresh Page">
+                                                            <b className="title_hover">Actualiser</b>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                                 <table id="datatable" className="table table-striped table-bordered"
                                                        cellSpacing="0" width="100%">

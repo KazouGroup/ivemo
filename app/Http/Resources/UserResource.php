@@ -34,7 +34,7 @@ class UserResource extends JsonResource
             'roles' => $this->roles()->pluck('name'),
             'followings' => $this->followings()->get()->count(),
             'followers' => $this->followers()->get()->count(),
-            //'profile' => $this->profile,
+            'profile' => $this->profile,
             //'provider' => $this->provider,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,

@@ -59,7 +59,7 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
         static::creating(function ($user){
             $user->syncRoles('1');
             $user->profile()->create([
-                'full_name' => $user->email,
+                'full_name' => $user->first_name,
             ]);
             if (auth()->check()){
                 $user->user_id = auth()->id();
@@ -80,7 +80,7 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
 
     public function profile()
     {
-        return $this->hasOne(profile::class);
+        return $this->hasOne(profile::class,'user_id');
     }
 
     public function getDataBirthdayItAttribute()

@@ -31,6 +31,9 @@ class AnnonceservationInteresse extends Component {
         const md = new Remarkable();
         return { __html: md.render(item.description.length > 40 ? item.description.substring(0, 40) + "..." : item.description) };
     }
+    numberWithCommas(item) {
+        return item.price.toLocaleString();
+    }
 
     render() {
         const {annoncereservationsinteresse} = this.state;
@@ -127,7 +130,7 @@ class AnnonceservationInteresse extends Component {
                                                         <h6 className="category text-dark">4 p . 3 ch . 180 m2</h6>
                                                     </div>
                                                     <div className="col-md-6 col-6">
-                                                        <strong className="text-dark"><b>50 000 FCFA/mois</b></strong>
+                                                        <h5 className="text-success"><b>{this.numberWithCommas(item)} <small>FCFA</small></b></h5>
                                                     </div>
 
                                                 </div>

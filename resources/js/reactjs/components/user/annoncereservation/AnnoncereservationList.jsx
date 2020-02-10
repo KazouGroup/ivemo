@@ -13,8 +13,7 @@ class AnnoncereservationList extends Component {
         return { __html: md.render(this.props.description.length > 80 ? this.props.description.substring(0, 80) + "..." : this.props.description) };
     }
     numberWithCommas() {
-        let parts=this.props.price.toLocaleString().split(".");
-        return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+        return this.props.price.toLocaleString();
     }
     render() {
         return (

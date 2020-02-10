@@ -163,7 +163,7 @@ class PersonalannoncereservationsUser extends Component {
                                                                                     </NavLink>
                                                                                 </div>
                                                                                 <div className="text-right ml-auto">
-                                                                                    <h5 className="text-success"><b>{item.annoncereservation.price} <small>FCFA</small></b></h5>
+                                                                                    <h5 className="text-success"><b>{(item.annoncereservation.price).toLocaleString()} <small>FCFA</small></b></h5>
                                                                                 </div>
                                                                             </div>
                                                                             <div className="row">

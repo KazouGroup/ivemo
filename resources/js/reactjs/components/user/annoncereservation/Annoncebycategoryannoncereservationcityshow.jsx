@@ -159,10 +159,10 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                     </div>
                                                     <div className="text-right ml-auto">
                                                         <Button className="btn btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
-                                                            <i className="now-ui-icons tech_mobile"></i>
+                                                            <i className="now-ui-icons tech_mobile"/>
                                                         </Button>
                                                         <a href="https://www.kazoutech.com" className="btn btn-sm btn-primary" target="_banck">
-                                                            <i className="now-ui-icons objects_globe"></i>
+                                                            <i className="now-ui-icons objects_globe"/>
                                                         </a>
 
                                                         {!$guest && (
@@ -184,14 +184,14 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                     </div>
                                                 </div>
                                                 <div className="card-title">
-                                                    <i className="now-ui-icons location_pin"></i> <b>91 RUE DU FAUBOURG SAINT HONORE 75008 PARIS 8EME</b>
+                                                    <i className="now-ui-icons location_pin"/> <b>91 RUE DU FAUBOURG SAINT HONORE 75008 PARIS 8EME</b>
                                                     <br />
                                                     <div className="container">
                                                         <div className="row">
                                                             <div className="col-md-6 col-6">
-                                                                <a href="https://www.kazoutech.com" title="Profil agence">
+                                                                <Link to={`/@${annoncereservation.user.slug}/`} title={annoncereservation.user.first_name}>
                                                                     <small><b>Consulter le profil de l'agence</b></small>
-                                                                </a>
+                                                                </Link>
                                                             </div>
                                                             <div className="col-md-6 col-6">
                                                                 <a href="https://www.kazoutech.com" title="Site internet de agence">
@@ -253,7 +253,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
 
                                         <div className="submit text-center">
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"></i> <b>Poster votre annonce</b>
+                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
                                             </NavLink>
                                         </div>
 
@@ -274,16 +274,16 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                                     </div>
                                                                 </div>
                                                                 <Button className="btn btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
-                                                                    <i className="now-ui-icons tech_mobile"></i>
+                                                                    <i className="now-ui-icons tech_mobile"/>
                                                                 </Button>
                                                                 <a href="https://www.kazoutech.com" className="btn btn-sm btn-success" target="_banck">
-                                                                    <i className="now-ui-icons ui-2_chat-round"></i>
+                                                                    <i className="now-ui-icons ui-2_chat-round"/>
                                                                 </a>
                                                             </div>
                                                             <div className="card-header text-center">
                                                                 <div className="card-title">
                                                                     <a href="#pablo" className="btn btn-sm btn-outline-success">
-                                                                        <i className="now-ui-icons tech_mobile"></i> <b>3425712192 / 34569821 ou 677688066</b>
+                                                                        <i className="now-ui-icons tech_mobile"/> <b>3425712192 / 34569821 ou 677688066</b>
                                                                     </a>
                                                                 </div>
                                                             </div>
