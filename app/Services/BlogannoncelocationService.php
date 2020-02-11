@@ -1,0 +1,36 @@
+<?php
+namespace App\Services;
+
+
+
+use App\Http\Resources\AnnoncelocationResource;
+use App\Http\Resources\BlogannoncelocationResource;
+use App\Model\annoncelocation;
+use App\Model\blogannoncelocation;
+use App\Model\categoryannoncelocation;
+use App\Model\city;
+
+class BlogannoncelocationService
+{
+
+
+    public static function apiblogannoncelocationinteresse($categoryannoncelocation)
+    {
+        $blogannoncelocation = $categoryannoncelocation->blogannoncelocations()->with('user','categoryannoncelocation')
+            ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
+            ->orderByRaw('RAND()')
+            ->where('status',1)
+            ->take(3)->distinct()->get()->toArray();;
+
+        return $blogannoncelocation;
+    }
+
+    public static function apiannonceblogcategorylocationslug($categoryannoncelocation, $date,$blogannoncelocation)
+    {
+        $blogannoncelocation = new BlogannoncelocationResource(blogannoncelocation::whereDate('created_at',$date)
+            ->whereSlug($blogannoncelocation)->where('status',1)->first());
+
+        return $blogannoncelocation;
+    }
+
+}

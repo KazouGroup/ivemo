@@ -36,7 +36,7 @@ class AnnoncelocationIndex extends Component {
                     <title>Bon plan de location de chambre, studio un appartement, maison ou une villa - Ivemo</title>
                 </Helmet>
 
-                <div className="about-us sidebar-collapse">
+                <div className="landing-page sidebar-collapse">
 
 
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
@@ -59,6 +59,7 @@ class AnnoncelocationIndex extends Component {
                         <div className="main main-raised">
                             <div className="container">
                                 <div className="row">
+
                                 </div>
                             </div>
 
@@ -80,7 +81,7 @@ class AnnoncelocationIndex extends Component {
 
                                         <div className="submit text-center">
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"></i> <b>Poster votre annonce</b>
+                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
                                             </NavLink>
                                         </div>
 
@@ -92,48 +93,12 @@ class AnnoncelocationIndex extends Component {
 
                                                             <Categoriesannoncereselocation/>
 
-
-                                                            <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingThree">
-                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                                        <b>Autres transactions à Douala </b>
-                                                                        <i className="now-ui-icons arrows-1_minimal-down"></i>
-                                                                    </a>
-                                                                </div>
-                                                                <div id="collapseThree" className="collapse" role="tabpanel" aria-labelledby="headingThree">
-                                                                    <div className="card-body">
-                                                                        <table>
-                                                                            <tbody>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Toutes les ventes de maison Douala</a></td>
-                                                                                <td className="text-right"> 200 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Toutes les ventes de terrains Douala</a></td>
-                                                                                <td className="text-right"> 1 300 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Tous les achats de maison de prestige Douala</a></td>
-                                                                                <td className="text-right"> 380 annonces</td>
-                                                                            </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-
-
-
-
-
 
 
                                 </div>

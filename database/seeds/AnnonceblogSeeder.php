@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\blogannoncelocation;
 use App\Model\blogannoncereservation;
 use Illuminate\Database\Seeder;
 
@@ -13,5 +14,6 @@ class AnnonceblogSeeder extends Seeder
     public function run()
     {
         factory(blogannoncereservation::class, 1000)->create();
+        factory(blogannoncelocation::class, 1000)->create();
     }
 }

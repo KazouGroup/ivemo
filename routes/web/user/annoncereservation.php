@@ -28,4 +28,4 @@ Route::post(
 Route::post(
     'annonces_reservations/{annoncetype}/{categoryannoncereservation}/{city}/{annoncereservation}/send_contact_message_user',
     'AnnoncereservationController@sendcontactmessageuser'
-)->name('sendcontactmessageuser_site');
+)->name('annoncereservationsendcontactmessageuser_site');

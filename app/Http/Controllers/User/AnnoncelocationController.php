@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Contactuser\StorecontactRequest;
 use App\Http\Resources\AnnoncelocationResource;
 use App\Http\Resources\AnnoncetypeResource;
 use App\Http\Resources\CategoryannoncelocationResource;
@@ -11,7 +12,9 @@ use App\Model\annoncelocation;
 use App\Model\annoncetype;
 use App\Model\categoryannoncelocation;
 use App\Model\city;
+use App\Model\contactuser;
 use App\Services\AnnoncelocationService;
+use App\Services\ContactuserService;
 use Illuminate\Http\Request;
 
 class AnnoncelocationController extends Controller
@@ -56,6 +59,14 @@ class AnnoncelocationController extends Controller
             'city' => $city,
         ]);
     }
+
+    public function annoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$date,annoncelocation $annoncelocation)
+    {
+        return view('user.annoncelocation.annonces_show',[
+            'annoncelocation' => $annoncelocation,
+        ]);
+    }
+
 
     public function api()
     {
@@ -133,15 +144,30 @@ class AnnoncelocationController extends Controller
     }
 
 
-    public function apiannoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$annoncelocation)
+    public function apiannoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$date,$annoncelocation)
     {
-        $annoncelocation = new AnnoncelocationResource(annoncelocation::whereIn('annoncetype_id',[$annoncetype->id])
-        ->whereIn('city_id',[$city->id])
-        ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
-        ->where('status',1)
-        ->whereSlug($annoncelocation)->firstOrFail());
+        $annoncelocation = AnnoncelocationService::apiannoncelocationbycategoryannoncelocationslug($annoncetype,$categoryannoncelocation,$city,$date,$annoncelocation);
 
         return response()->json($annoncelocation, 200);
+    }
+
+
+    public function sendcontactmessageuser(StorecontactRequest $request, annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$date,annoncelocation $annoncelocation)
+    {
+
+        $contactuser = new contactuser();
+
+        $slug = sha1(('YmdHis') . str_random(30));
+        $contactuser->fill($request->all());
+        $contactuser->slug = $slug;
+        $contactuser->user_id = $annoncelocation->user_id;
+        $contactuser->annoncelocation_id = $annoncelocation->annoncelocation_id;
+
+        ContactuserService::newEmailToannoncelocationpageShow($request,$annoncelocation);
+
+        $contactuser->save();
+
+        return response()->json($contactuser,200);
     }
 
     /**

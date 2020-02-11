@@ -3,6 +3,8 @@ namespace App\Services;
 
 
 
+use App\Http\Resources\AnnoncelocationResource;
+use App\Model\annoncelocation;
 use App\Model\categoryannoncelocation;
 use App\Model\city;
 
@@ -49,5 +51,17 @@ class AnnoncelocationService
             ])->first();
 
         return $annoncesbycities;
+    }
+
+    public static function apiannoncelocationbycategoryannoncelocationslug($annoncetype,$categoryannoncelocation,$city,$date,$annoncelocation)
+    {
+        $annoncelocation = new AnnoncelocationResource(annoncelocation::whereIn('annoncetype_id',[$annoncetype->id])
+            ->whereIn('city_id',[$city->id])
+            ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
+            ->where('status',1)
+            ->whereDate('created_at',$date)
+            ->whereSlug($annoncelocation)->firstOrFail());
+
+        return $annoncelocation;
     }
 }

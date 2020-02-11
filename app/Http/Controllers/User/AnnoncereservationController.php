@@ -178,8 +178,9 @@ class AnnoncereservationController extends Controller
         $contactuser->fill($request->all());
         $contactuser->slug = $slug;
         $contactuser->user_id = $annoncereservation->user_id;
+        $contactuser->annoncereservation_id = $annoncereservation->annoncereservation_id;
 
-        ContactuserService::newEmail($request,$annoncereservation);
+        ContactuserService::newEmailToannoncereservationpageShow($request,$annoncereservation);
 
         $contactuser->save();
 

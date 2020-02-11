@@ -74,7 +74,6 @@ class Annoncebycategoryannoncelocation extends Component {
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
-
                                         <br/>
 
                                         {allannoncelocationsbycategory.map((item) => (
@@ -99,6 +98,8 @@ class Annoncebycategoryannoncelocation extends Component {
                                                 <div className="row">
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+
+                                                            <Categoriesannoncereselocation/>
 
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingThree">
@@ -132,7 +133,7 @@ class Annoncebycategoryannoncelocation extends Component {
 
                                                             </div>
 
-                                                            <Categoriesannoncereselocation/>
+
 
 
 

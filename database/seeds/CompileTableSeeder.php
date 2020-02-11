@@ -74,11 +74,11 @@ class CompileTableSeeder extends Seeder
             color::create($item);
 
             $categoryannoncelocations = [
-                ['name' => 'Appartement','slug' => str_slug('Appartement'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
-                ['name' => 'Chambre','slug' => str_slug('Chambre'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
+                ['name' => 'Appartement','slug' => str_slug('Appartement'),'color_name' => 'info','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
+                ['name' => 'Chambre','slug' => str_slug('Chambre'),'color_name' => 'success','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
                 ['name' => 'Loft, atelier & surface','slug' => str_slug('Loft, atelier & surface'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
-                ['name' => 'Maison','slug' => str_slug('Maison'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
-                ['name' => 'Studio','slug' => str_slug('Studio'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
+                ['name' => 'Maison','slug' => str_slug('Maison'),'color_name' => 'danger','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
+                ['name' => 'Studio','slug' => str_slug('Studio'),'color_name' => 'primary','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
             ];
 
             foreach($categoryannoncelocations as $item)
@@ -137,7 +137,6 @@ class CompileTableSeeder extends Seeder
         factory(categoryfaq::class, 5)->create();
         factory(faq::class, 100)->create();
         factory(contact::class, 200)->create();
-        factory(contactuser::class, 500)->create();
         factory(teamuser::class, 200)->create();
         factory(link::class, 5)->create();
 

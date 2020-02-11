@@ -12,7 +12,7 @@ class categoryannoncelocation extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 
     protected static function boot()
@@ -44,5 +44,10 @@ class categoryannoncelocation extends Model
     public function annoncelocations()
     {
         return $this->hasMany(annoncelocation::class, 'categoryannoncelocation_id');
+    }
+
+    public function blogannoncelocations()
+    {
+        return $this->hasMany(blogannoncelocation::class, 'categoryannoncelocation_id');
     }
 }

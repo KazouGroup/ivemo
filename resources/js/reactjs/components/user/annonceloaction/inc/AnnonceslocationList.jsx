@@ -89,7 +89,7 @@ class AnnonceslocationList extends Component {
 
                                 </div>
                                 <h6 className="card-title">
-                                    <Link to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.slug}/`}>
+                                    <Link to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
                                         {this.props.title}
                                     </Link>
                                 </h6>

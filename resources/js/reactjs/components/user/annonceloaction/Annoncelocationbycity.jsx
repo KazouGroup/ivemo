@@ -79,10 +79,16 @@ class Annoncelocationbycity extends Component {
 
 
                                         <br/>
+                                        {allannoncelocationbycity.length >= 0 && (
+                                            <>
 
-                                        {allannoncelocationbycity.map((item) => (
-                                            <AnnonceslocationList key={item.id} {...item} />
-                                        ))}
+                                                {allannoncelocationbycity.map((item) => (
+                                                    <AnnonceslocationList key={item.id} {...item} />
+                                                ))}
+
+                                            </>
+                                        )}
+
 
                                     </div>
 

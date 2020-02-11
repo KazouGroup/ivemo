@@ -14,7 +14,7 @@ class CategoryannoncelocationResource extends JsonResource
      */
     public function toArray($request)
     {
-        $conseillocations = $this->conseillocations()->with('user','categoryannoncelocation')
+        $blogannoncelocations = $this->blogannoncelocations()->with('user','categoryannoncelocation')
         ->whereIn('categoryannoncelocation_id',[$this->id])->orderBy('created_at','DESC')
         ->where(function ($q){
             $q->where('status',1);
@@ -36,7 +36,7 @@ class CategoryannoncelocationResource extends JsonResource
             'icon' => $this->icon,
             'photo' => $this->photo,
             'user' => $this->user,
-            'conseillocations' => $conseillocations,
+            'blogannoncelocations' => $blogannoncelocations,
             'annoncelocations' => $annoncelocations,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,

@@ -25,6 +25,9 @@ class CreateContactusersTable extends Migration
             $table->timestamps();
 
             $table->unsignedBigInteger('user_id')->nullable()->index();
+            $table->unsignedBigInteger('annoncelocation_id')->nullable()->index();
+            $table->unsignedBigInteger('annoncereservation_id')->nullable()->index();
+            $table->unsignedBigInteger('annoncevente_id')->nullable()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
