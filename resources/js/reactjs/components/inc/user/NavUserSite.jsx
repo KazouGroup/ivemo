@@ -46,12 +46,12 @@ class NavUserSite extends Component {
                                 <p>Sections</p>
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <a className="dropdown-item" href="../sections.html#projects">
-                                    <i className="now-ui-icons education_paper"/> Projects
-                                    </a>
-                                <a className="dropdown-item" href="../sections.html#pricing">
-                                    <i className="now-ui-icons business_money-coins"></i> Pricing
-                                    </a>
+                                <Link to={`/annonces_locations/locations/`} className="dropdown-item" >
+                                    <i className="now-ui-icons education_paper"/> Locations
+                                    </Link>
+                                <Link to={`/annonces_reservations/reservations/`} className="dropdown-item">
+                                    <i className="now-ui-icons business_money-coins"/> Reservations
+                                    </Link>
                                 <a className="dropdown-item" href="../sections.html#testimonials">
                                     <i className="now-ui-icons ui-2_chat-round"></i> Testimonials
                                     </a>

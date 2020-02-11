@@ -28,7 +28,7 @@ class AnnoncereservationIndex extends Component {
     }
 
     render() {
-        const {annoncereservationbytype,categoryannoncereservations} = this.state;
+        const {annoncereservationbytype} = this.state;
         const allannoncereserbvations = annoncereservationbytype.annoncereservations;
         return (
             <>

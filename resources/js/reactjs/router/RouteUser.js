@@ -23,6 +23,9 @@ import BlogannoncereservationShow from "../components/user/blog/blogannoncereser
 import ProfileAccountPublicUser from "../components/user/profile/ProfileAccountPublicUser";
 import BlogannoncereservationIBycategoryreservation
     from "../components/user/blog/blogannoncereservation/BlogannoncereservationIBycategoryreservation";
+import AnnoncelocationIndex from "../components/user/annonceloaction/AnnoncelocationIndex";
+import Annoncebycategoryannoncelocation from "../components/user/annonceloaction/Annoncebycategoryannoncelocation";
+import Annoncelocationbycity from "../components/user/annonceloaction/Annoncelocationbycity";
 
 
 const RouteUser = props => (
@@ -38,6 +41,10 @@ const RouteUser = props => (
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/" component={withRouter(Annoncebycategoryannoncereservation)}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/" component={withRouter(Annoncebycategoryannoncereservationcity)}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/:annoncereservation/" component={withRouter(Annoncebycategoryannoncereservationcityshow)}/>
+
+          <Route exact path="/annonces_locations/:annoncetype/" component={withRouter(AnnoncelocationIndex)}/>
+          <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/" component={withRouter(Annoncebycategoryannoncelocation)}/>
+          <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/" component={withRouter(Annoncelocationbycity)}/>
           <Route exact path="/annonce/show/create/" component={AnnonceShowCreateUserSite}/>
           <Route exact path="/annonce/show/vendre/create/" component={AnnonceBienAvendreCreate}/>
           <Route exact path="/profile/account/" component={ProfileAccountUser}/>

@@ -9,6 +9,23 @@ Route::get(
     'AnnoncelocationController@apiannoncelocations'
 )->name('api.annoncelocations_site');
 
+
+Route::get(
+    'categoryannoncelocations',
+    'AnnoncelocationController@apicategoryannoncelocation'
+)->name('api.categoryannoncelocation_site');
+
+Route::get(
+    'annonces_locations_by_city_count/{categoryannoncelocation}',
+    'AnnoncelocationController@apiannoncelocationbycategorycitycount'
+)->name('api.annoncelocationbycategorycitycount_site');
+
+Route::get(
+    'annonces_locations_by_city_count/{categoryannoncelocation}/{city}',
+    'AnnoncelocationController@apiannoncelocationcategorybycitycount'
+)->name('api.annoncelocationcategorybycitycount_site');
+
+
 Route::get(
     'annonces_locations_by_cities',
     'AnnoncelocationController@apicitiesannonces'

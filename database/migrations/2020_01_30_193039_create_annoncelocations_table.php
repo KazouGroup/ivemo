@@ -21,8 +21,8 @@ class CreateAnnoncelocationsTable extends Migration
             $table->integer('surface')->nullable();
             $table->integer('rooms')->nullable();
             $table->integer('pieces')->nullable();
-            $table->decimal('price', 15,2)->nullable();
-            $table->decimal('award_price', 15,2)->nullable();
+            $table->unsignedBigInteger('price')->nullable();
+            $table->unsignedBigInteger('award_price')->nullable();
             $table->date('disponible_date')->nullable();
             $table->boolean('status')->nullable()->default(true);
             $table->timestamps();

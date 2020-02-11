@@ -114,7 +114,8 @@ class AnnoncereservationController extends Controller
             ->with('user','city','annoncetype','categoryannoncereservation','imagereservations','imagereservations')
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->whereIn('city_id',[$city->id])
-            ->orderByRaw('RAND()')->where('status',1)
+            ->orderByRaw('RAND()')
+            ->where('status',1)
             ->take(4)->distinct()->get()->toArray();
         return response()->json($annoncereservation, 200);
     }

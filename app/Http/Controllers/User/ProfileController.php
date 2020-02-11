@@ -107,7 +107,8 @@ class ProfileController extends Controller
                     $q->select('id','name','slug');},
                 'annoncereservation.user' => function ($q){
                     $q->distinct()->get();}
-            ])->whereHas('annoncereservation', function ($q) {
+            ])
+            ->whereHas('annoncereservation', function ($q) {
                 $q->whereIn('user_id',[auth()->user()->id]);
             })->distinct()->get()->toArray();
 

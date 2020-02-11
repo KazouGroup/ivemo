@@ -21,7 +21,8 @@ class CategoryannoncelocationResource extends JsonResource
         })->distinct()->get()->toArray();
 
         $annoncelocations = $this->annoncelocations()->with('user','categoryannoncelocation','city','annoncetype')
-            ->whereIn('categoryannoncelocation_id',[$this->id])->orderBy('created_at','DESC')
+            ->whereIn('categoryannoncelocation_id',[$this->id])
+            ->orderBy('created_at','DESC')
                ->where(function ($q){
                 $q->where('status',1)->whereIn('annoncetype_id',[1]);
             })->distinct()->get()->toArray();
@@ -31,6 +32,7 @@ class CategoryannoncelocationResource extends JsonResource
             'slug' => $this->slug,
             'name' => $this->name,
             'color_name' => $this->color_name,
+            'annoncelocations_count' => $this->annoncelocations_count,
             'icon' => $this->icon,
             'photo' => $this->photo,
             'user' => $this->user,
