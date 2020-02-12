@@ -57,6 +57,21 @@ class BlogannoncelocationController extends Controller
         return response()->json($blogannoncelocations, 200);
 
     }
+
+    public function annonceblogcategorylocation(categoryannoncelocation $categoryannoncelocation)
+    {
+        return view('user.blog.blogannoncelocation.category',[
+            'categoryannoncelocation' => $categoryannoncelocation,
+        ]);
+    }
+
+    public function annonceblogcategorylocationslug($categoryannoncelocation, $date,blogannoncelocation $blogannoncelocation)
+    {
+        return view('user.blog.blogannoncelocation.show',[
+            'blogannoncelocation' => $blogannoncelocation,
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *

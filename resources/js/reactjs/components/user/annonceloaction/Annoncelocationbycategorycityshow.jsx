@@ -5,9 +5,8 @@ import { Button } from "reactstrap";
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import FormcontactuseronlocationShow from "./inc/FormcontactuseronlocationShow";
-import BlogannoncereservationIntesseAnnonseShow
-    from "../blog/blogannoncereservation/BlogannoncereservationIntesseAnnonseShow";
 import BlogannoncelocationIntesseAnnonseShow from "../blog/blogannoncelocation/BlogannoncelocationIntesseAnnonseShow";
+
 
 class Annoncelocationbycategorycityshow extends Component {
     constructor(props) {
@@ -32,7 +31,6 @@ class Annoncelocationbycategorycityshow extends Component {
     componentDidMount() {
         this.loadItems();
     }
-
     render() {
         const {annoncelocation} = this.state;
         return (
@@ -107,7 +105,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                 </a>
                                                 </div>
                                                 <div className="text-right ml-auto">
-                                                    <strong className="title text-dark"><b>50 000 FCFA/mois</b></strong>
+                                                    <h5 className="text-success"><b>{annoncelocation.price} <small>FCFA/mois</small></b></h5>
                                                 </div>
                                             </div>
 

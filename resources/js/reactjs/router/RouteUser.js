@@ -27,6 +27,9 @@ import AnnoncelocationIndex from "../components/user/annonceloaction/Annonceloca
 import Annoncebycategoryannoncelocation from "../components/user/annonceloaction/Annoncebycategoryannoncelocation";
 import Annoncelocationbycity from "../components/user/annonceloaction/Annoncelocationbycity";
 import Annoncelocationbycategorycityshow from "../components/user/annonceloaction/Annoncelocationbycategorycityshow";
+import BlogannoncelocationShow from "../components/user/blog/blogannoncelocation/BlogannoncelocationShow";
+import BlogannoncelocationBycategorylocation
+    from "../components/user/blog/blogannoncelocation/BlogannoncelocationBycategorylocation";
 
 
 const RouteUser = props => (
@@ -56,6 +59,9 @@ const RouteUser = props => (
           <Route exact path="/profile/change_password/" component={ProfileAccountChangePasswordUser}/>
           <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/" component={withRouter(BlogannoncereservationIBycategoryreservation)}/>
           <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/:date/:blogannoncereservation/" component={withRouter(BlogannoncereservationShow)}/>
+
+          <Route exact path="/blogs/annonce_locations/:categoryannoncelocation/" component={withRouter(BlogannoncelocationBycategorylocation)}/>
+          <Route exact path="/blogs/annonce_locations/:categoryannoncelocation/:date/:blogannoncelocation/" component={withRouter(BlogannoncelocationShow)}/>
     </Switch>
 
 );

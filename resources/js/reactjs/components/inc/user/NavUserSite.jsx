@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, NavLink } from 'react-router-dom';
+import {Link, NavLink, withRouter} from 'react-router-dom';
 
 class NavUserSite extends Component {
     constructor(props) {
@@ -136,4 +136,4 @@ class NavUserSite extends Component {
     }
 }
 
-export default NavUserSite;
+export default withRouter(NavUserSite);

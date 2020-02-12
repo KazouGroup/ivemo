@@ -214,7 +214,7 @@ class ProfileController extends Controller
         $contactuser->slug = $slug;
         $contactuser->user_id = $user->id;
 
-        ContactuserService::newEmail($request,$user);
+        ContactuserService::newEmailToprofileUser($request,$user);
 
         $contactuser->save();
 

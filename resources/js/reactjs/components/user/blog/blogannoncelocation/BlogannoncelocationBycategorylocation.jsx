@@ -19,9 +19,9 @@ class BlogannoncelocationBycategorylocation extends Component {
 
     loadItems(){
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
-        let url = route('api.blogannoncecategoryreservations_site', [itemCategoryannoncelocation]);
+        let url = route('api.blogannonceblogcategorylocations_site', [itemCategoryannoncelocation]);
         dyaxios.get(url).then(response => this.setState({ blogannoncelocation: response.data, }));
-        dyaxios.get(route('api.categoryannoncereservation_site')).then(response => this.setState({categoryannoncelocations: response.data,}));
+        dyaxios.get(route('api.categoryannoncelocation_site')).then(response => this.setState({categoryannoncelocations: response.data,}));
     }
 
     // lifecycle method
@@ -35,7 +35,7 @@ class BlogannoncelocationBycategorylocation extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Guides et conseils reservation {`${blogannoncelocation.name || 'Annonce'}`} - Ivemo</title>
+                    <title>Guides et conseils locations {`${blogannoncelocation.name || 'Annonce'}`} - Ivemo</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
@@ -74,7 +74,7 @@ class BlogannoncelocationBycategorylocation extends Component {
 
                                     {categoryannoncelocations.map((item) =>(
                                         <li key={item.id} className="nav-item">
-                                            <NavLink to={`/blogs/annonce_reservations/${item.slug}/`} className="nav-link">
+                                            <NavLink to={`/blogs/annonce_locations/${item.slug}/`} className="nav-link">
                                                 <b>{item.name}</b>
                                             </NavLink>
                                         </li>
@@ -90,17 +90,17 @@ class BlogannoncelocationBycategorylocation extends Component {
                                         <div key={item.id} className="col-md-4 mx-auto">
                                             <div className="card card-blog">
                                                 <div className="card-image">
-                                                    <Link to={`/blogs/annonce_reservations/${item.categoryannoncereservation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>
+                                                    <Link to={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>
                                                         <img className="img rounded" alt={item.title} src={item.photo}/>
                                                     </Link>
                                                 </div>
                                                 <div className="card-body">
                                                     <h6 className="card-title text-center">
-                                                        <NavLink to={`/blogs/annonce_reservations/${item.categoryannoncereservation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`} className="card-link"> {item.title}</NavLink>
+                                                        <NavLink to={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`} className="card-link"> {item.title}</NavLink>
                                                     </h6>
                                                     <p className="card-description">
                                                         <b dangerouslySetInnerHTML={{__html: (item.description.length > 48 ? item.description.substring(0, 48) + "..." : item.description)}}/>
-                                                        <Link to={`/blogs/annonce_reservations/${item.categoryannoncereservation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}> lire la suite </Link>
+                                                        <Link to={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}> lire la suite </Link>
                                                     </p>
                                                     <div className="card-footer">
                                                         <div className="author">
