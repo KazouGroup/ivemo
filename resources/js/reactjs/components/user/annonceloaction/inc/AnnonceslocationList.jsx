@@ -76,13 +76,13 @@ class AnnonceslocationList extends Component {
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col-md-6 col-6">
-                                        <h6 className="category text-dark">{this.props.pieces} p . 3 {this.props.rooms} ch . {this.props.surface} m<sup>2</sup> </h6>
+                                    <div className="col-md-5 col-6">
+                                        <h6 className="category text-dark">{this.props.pieces} p . {this.props.rooms} ch . {this.props.surface} m<sup>2</sup> </h6>
                                     </div>
-                                    <div className="col-md-6 col-6">
+                                    <div className="col-md-7 col-6">
                                         <NavLink to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/`}>
-                                            <span className="title ml-auto mr-auto">
-                                                {this.props.city.name} - Bonamossadie
+                                            <span className="ml-auto mr-auto">
+                                                <strong>{this.props.city.name}</strong> - {this.props.district}
                                             </span>
                                         </NavLink>
                                     </div>

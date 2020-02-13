@@ -21,11 +21,6 @@ Route::get(
 )->name('api.annonces_bookeds.site');
 
 Route::get(
-    'api/personal_messages_contacts',
-    'ProfileController@apipersonalmessagescontacts'
-)->name('api.personal_messages_contacts.site');
-
-Route::get(
     'profile/personal_reservations',
     'ProfileController@personal_reservations'
 )->name('profile_personal_reservations.site');
@@ -34,6 +29,7 @@ Route::get(
     'profile/annonces_reservations_booked',
     'ProfileController@annonces_reservations_booked'
 )->name('annonces_reservations_booked.site');
+
 
 Route::get(
     'profile/annonces_reservations_booked/confirmed/{id}',
@@ -63,3 +59,8 @@ Route::get(
 Route::put('profile/update_password',
     'ProfileController@update_password'
 )->name('update_password.site');
+
+Route::delete(
+    'profile/personal_mails/delete_mail/{id}',
+    'ProfileController@personalmessagesdelete'
+)->name('personal_mails_delete.site');

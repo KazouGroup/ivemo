@@ -117,9 +117,9 @@ class NavUserSite extends Component {
                                         <a className="dropdown-item" href="../examples/blog-post.html">
                                             <i className="now-ui-icons text_align-left"></i> Blog Post
                                             </a>
-                                        <NavLink to={'/contact/'} className="dropdown-item">
-                                            <i className="now-ui-icons location_pin"></i> Contact
-                                            </NavLink>
+                                        <Link to={'/profile/personal_mails/contacts/'} className="dropdown-item">
+                                            <i className="now-ui-icons location_pin"/>Messages Contacts
+                                            </Link>
                                     </div>
                                 </li>
                             </>

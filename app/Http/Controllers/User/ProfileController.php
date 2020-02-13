@@ -12,8 +12,10 @@ use App\Model\contactuser;
 use App\Model\reservation;
 use App\Model\user;
 use App\Services\ContactuserService;
+use App\Services\ProfileService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use function foo\func;
 
 class ProfileController extends Controller
 {
@@ -117,10 +119,14 @@ class ProfileController extends Controller
 
     public function annonces_reservations_booked_confirmed(reservation $reservation, $id)
     {
+        $user = auth()->user();
         $reservation = reservation::where('id', $id)->findOrFail($id);
 
         if(auth()->user()->id === $reservation->annoncereservation->user_id){
             $reservation->update(['status' => 1,]);
+
+            ProfileService::newEmailConfirmationreservation($reservation,$user);
+
           return response('Confirmed',Response::HTTP_ACCEPTED);
         }
 
@@ -129,10 +135,12 @@ class ProfileController extends Controller
 
     public function annonces_reservations_booked_unconfirmed(reservation $reservation, $id)
     {
+
         $reservation = reservation::where('id', $id)->findOrFail($id);
 
            if(auth()->user()->id === $reservation->annoncereservation->user_id){
             $reservation->update([ 'status' => 0,]);
+
              return response('Unconfirmed',Response::HTTP_ACCEPTED);
            }
 
@@ -141,7 +149,43 @@ class ProfileController extends Controller
     public function apipersonalmessagescontacts()
     {
         $contactusers = contactuser::whereIn('user_id',[auth()->user()->id])
-            ->distinct()->get()->toArray();
+            ->orderBy('created_at','DESC')->distinct()->get()->toArray();
+
+        return response()->json($contactusers, 200);
+    }
+
+    public function apipersonalmessagescontactsshow(contactuser $contactuser)
+    {
+        $contactusers = contactuser::with('user')->whereSlug($contactuser->slug)->first();
+
+        return response()->json($contactusers, 200);
+    }
+
+    public function apipersonalmessagesannonces_locations_show(contactuser $contactuser)
+    {
+        $contactusers = contactuser::with('user','annoncelocation')
+          ->with([
+              'annoncelocation.categoryannoncelocation' => function ($q){
+                  $q->select('id','name','slug','user_id');},
+              'annoncelocation.city' => function ($q){
+                  $q->select('id','name','slug','user_id');},
+              'annoncelocation.annoncetype' => function ($q){
+                  $q->select('id','name','slug');},
+          ])->whereSlug($contactuser->slug)->first();
+
+        return response()->json($contactusers, 200);
+    }
+
+    public function apipersonalmessagesannonces_locations()
+    {
+        $contactusers = ProfileService::apipersonalmessagesannonces_locations();
+
+        return response()->json($contactusers, 200);
+    }
+
+    public function apipersonalmessagesannonces_reservations()
+    {
+        $contactusers = ProfileService::apipersonalmessagesannonces_reservations();
 
         return response()->json($contactusers, 200);
     }
@@ -221,6 +265,36 @@ class ProfileController extends Controller
         return response()->json($contactuser,200);
     }
 
+    public function personalmessagesannonces_locations()
+    {
+         return view('user.profile.contactuser.personal_mailannonces_locations',[
+             'user' => auth()->user()
+             ]);
+    }
+
+     public function personalmessagesannonces_locations_show(contactuser $contactuser)
+    {
+         return view('user.profile.contactuser.personal_mailannonces_locations_show',[
+             'user' => auth()->user(),
+             'contactuser' => $contactuser
+             ]);
+    }
+
+     public function personalmessagescontacts()
+    {
+         return view('user.profile.contactuser.personal_mailcontacts',[
+             'user' => auth()->user()
+             ]);
+    }
+
+     public function personalmessagescontactsshow(contactuser $contactuser)
+    {
+         return view('user.profile.contactuser.personal_mailcontacts_show',[
+             'user' => auth()->user(),
+             'contactuser' => $contactuser
+             ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -276,5 +350,18 @@ class ProfileController extends Controller
     {
         //
     }
+
+       public function personalmessagesdelete(contactuser $contactuser,$id)
+        {
+            $contactuser = contactuser::findOrFail($id);
+            $this->authorize('update',$contactuser);
+            if (auth()->user()->id === $contactuser->user_id){
+                $contactuser->delete();
+                return ['message' => 'message deleted '];
+            }else{
+             abort(404);
+            }
+
+        }
 }
 

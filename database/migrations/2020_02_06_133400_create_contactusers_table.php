@@ -20,15 +20,22 @@ class CreateContactusersTable extends Migration
             $table->string('slug')->nullable();
             $table->boolean('status_red')->default(false);
             $table->string('phone')->nullable();
+            $table->string('ip')->nullable();
             $table->string('subject')->nullable();
             $table->longText('message')->nullable();
             $table->timestamps();
 
             $table->unsignedBigInteger('user_id')->nullable()->index();
-            $table->unsignedBigInteger('annoncelocation_id')->nullable()->index();
-            $table->unsignedBigInteger('annoncereservation_id')->nullable()->index();
-            $table->unsignedBigInteger('annoncevente_id')->nullable()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->unsignedBigInteger('annoncevente_id')->nullable()->index();
+            $table->foreign('annoncevente_id')->references('id')->on('annonceventes')->onDelete('restrict');
+
+            $table->unsignedBigInteger('annoncereservation_id')->nullable()->index();
+            $table->foreign('annoncereservation_id')->references('id')->on('annoncereservations')->onDelete('restrict');
+
+            $table->unsignedBigInteger('annoncelocation_id')->nullable()->index();
+            $table->foreign('annoncelocation_id')->references('id')->on('annoncelocations')->onDelete('restrict');
         });
     }
 

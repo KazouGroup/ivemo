@@ -177,8 +177,8 @@ class AnnoncereservationController extends Controller
         $slug = sha1(('YmdHis') . str_random(30));
         $contactuser->fill($request->all());
         $contactuser->slug = $slug;
-        $contactuser->user_id = $annoncereservation->user_id;
-        $contactuser->annoncereservation_id = $annoncereservation->annoncereservation_id;
+        $contactuser->user_id = $annoncereservation->user->id;
+        $contactuser->annoncereservation_id = $annoncereservation->id;
 
         ContactuserService::newEmailToannoncereservationpageShow($request,$annoncereservation);
 

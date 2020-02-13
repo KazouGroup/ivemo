@@ -160,8 +160,8 @@ class AnnoncelocationController extends Controller
         $slug = sha1(('YmdHis') . str_random(30));
         $contactuser->fill($request->all());
         $contactuser->slug = $slug;
-        $contactuser->user_id = $annoncelocation->user_id;
-        $contactuser->annoncelocation_id = $annoncelocation->annoncelocation_id;
+        $contactuser->user_id = $annoncelocation->user->id;
+        $contactuser->annoncelocation_id = $annoncelocation->id;
 
         ContactuserService::newEmailToannoncelocationpageShow($request,$annoncelocation);
 

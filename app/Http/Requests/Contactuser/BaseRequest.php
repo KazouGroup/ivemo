@@ -19,17 +19,17 @@ class BaseRequest extends Request
     {
         if ($group == 'public_profile_send_message') {
             $rules = [
-                'full_name' => 'required',
+                'full_name' => ['required', 'string', 'max:255'],
                 'message' => 'required',
-                'email' => 'required',
-                'subject' => 'required',
+                'email' => ['required', 'string', 'email', 'max:255'],
+                'subject' => ['required', 'string', 'max:255'],
             ];
         }elseif($group == 'sendcontactmessageuser') {
             $rules = [
-                'full_name' => 'required',
+                'full_name' => ['required', 'string', 'max:255'],
                 'message' => 'required',
-                'email' => 'required',
-                'subject' => 'required',
+                'email' => ['required', 'string', 'email', 'max:255'],
+                'subject' => ['required', 'string', 'max:255'],
             ];
         }
         else { // 'edit'

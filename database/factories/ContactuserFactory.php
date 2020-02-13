@@ -14,7 +14,7 @@ $factory->define(contactuser::class, function (Faker $faker) {
     return [
         'full_name' => $faker->firstNameMale,
         'slug' => str_slug($myslug),
-        'email' => $faker->email,
+        'email' => $faker->freeEmail,
         'status_red' => $faker->boolean,
         'subject' => $faker->text(50),
         'message' => $faker->paragraph,

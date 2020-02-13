@@ -30,6 +30,12 @@ import Annoncelocationbycategorycityshow from "../components/user/annonceloactio
 import BlogannoncelocationShow from "../components/user/blog/blogannoncelocation/BlogannoncelocationShow";
 import BlogannoncelocationBycategorylocation
     from "../components/user/blog/blogannoncelocation/BlogannoncelocationBycategorylocation";
+import PersonalmessagesannonceslocationsUser
+    from "../components/user/profile/mail/PersonalmessagesannonceslocationsUser";
+import PersonalmessagescontactUser from "../components/user/profile/mail/PersonalmessagescontactUser";
+import PersonalmessagesannonceslocationsShowUser
+    from "../components/user/profile/mail/PersonalmessagesannonceslocationsShowUser";
+import PersonalmessagescontactShowUser from "../components/user/profile/mail/PersonalmessagescontactShowUser";
 
 
 const RouteUser = props => (
@@ -52,11 +58,18 @@ const RouteUser = props => (
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/:date/:annoncelocation/" component={withRouter(Annoncelocationbycategorycityshow)}/>
           <Route exact path="/annonce/show/create/" component={AnnonceShowCreateUserSite}/>
           <Route exact path="/annonce/show/vendre/create/" component={AnnonceBienAvendreCreate}/>
+
           <Route exact path="/profile/account/" component={ProfileAccountUser}/>
           <Route exact path="/@:user/" component={withRouter(ProfileAccountPublicUser)}/>
           <Route exact path="/profile/personal_reservations/" component={PersonalannoncereservationsUser}/>
           <Route exact path="/profile/annonces_reservations_booked/" component={Profileannoncesreservationsbooked}/>
           <Route exact path="/profile/change_password/" component={ProfileAccountChangePasswordUser}/>
+
+          <Route exact path="/profile/personal_mails/annonces_locations/:contactuser/" component={PersonalmessagesannonceslocationsShowUser}/>
+          <Route strict exact path="/profile/personal_mails/annonces_locations/" component={PersonalmessagesannonceslocationsUser}/>
+          <Route strict exact path="/profile/personal_mails/contacts/" component={PersonalmessagescontactUser}/>
+          <Route exact path="/profile/personal_mails/contacts/:contactuser/" component={PersonalmessagescontactShowUser}/>
+
           <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/" component={withRouter(BlogannoncereservationIBycategoryreservation)}/>
           <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/:date/:blogannoncereservation/" component={withRouter(BlogannoncereservationShow)}/>
 

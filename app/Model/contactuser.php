@@ -21,6 +21,15 @@ class contactuser extends Model
         return $this->belongsTo(annoncelocation::class,'annoncelocation_id');
     }
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model){
+            $model->ip = request()->ip();
+        });
+    }
+
     public function annoncereservation()
     {
         return $this->belongsTo(annoncereservation::class,'annoncereservation_id');

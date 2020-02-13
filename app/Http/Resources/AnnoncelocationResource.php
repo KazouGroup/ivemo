@@ -22,6 +22,7 @@ class AnnoncelocationResource extends JsonResource
             'surface' => $this->surface,
             'rooms' => $this->rooms,
             'pieces' => $this->pieces,
+            'district' => $this->district,
             'price' => $this->price,
             'award_price' => $this->award_price,
             'user' => $this->user,
