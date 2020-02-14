@@ -66,23 +66,33 @@ class PersonalannoncereservationsUser extends Component {
                                     <div className="row">
 
 
+                                        <div className="col-lg-4 col-md-12 mx-auto">
+
+                                            <div className="submit text-center">
+                                                <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
+                                                    <i className="now-ui-icons ui-1_simple-add"/> <b>Ajouter une reservation</b>
+                                                </NavLink>
+                                            </div>
+
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <div className="row">
+                                                        <div className="col-md-12">
+                                                            <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+
+                                                                <Categoriesannoncereservation/>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
 
 
                                         <div className="col-lg-8 col-md-12 mx-auto">
-
-                                            <ul className="nav nav-tabs nav-tabs-neutral justify-content-center" role="tablist" data-background-color={this.props.backgroundColor}>
-                                                <li className="nav-item">
-                                                    <NavLink to={`/profile/personal_reservations/`} className="nav-link">
-                                                         Reservations
-                                                    </NavLink>
-                                                </li>
-                                                <li className="nav-item">
-                                                    <NavLink to={`/profile/annonces_reservations_booked/`} className="nav-link">
-                                                         Annonces reservées
-                                                    </NavLink>
-                                                </li>
-                                            </ul>
-                                            <br />
 
 
                                             {personnalannoncereservations.length > 0 && (
@@ -225,30 +235,6 @@ class PersonalannoncereservationsUser extends Component {
 
                                         </div>
 
-                                        <div className="col-lg-4 col-md-12 mx-auto">
-
-                                            <div className="submit text-center">
-                                                <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                    <i className="now-ui-icons ui-1_simple-add"/> <b>Ajouter une reservation</b>
-                                                </NavLink>
-                                            </div>
-
-                                            <div className="card">
-                                                <div className="card-body">
-                                                    <div className="row">
-                                                        <div className="col-md-12">
-                                                            <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-
-                                                                <Categoriesannoncereservation/>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
 
 
                                     </div>

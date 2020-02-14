@@ -26,4 +26,7 @@ Route::post(
     'AnnoncelocationController@sendcontactmessageuser'
 )->name('annoncelocationsendcontactmessageuser_site');
 
-
+Route::delete(
+    'annonces_locations_delete/{id}',
+    'AnnoncelocationController@destroy'
+)->name('annonces_locations_delete.site');

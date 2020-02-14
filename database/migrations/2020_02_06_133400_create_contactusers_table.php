@@ -29,13 +29,13 @@ class CreateContactusersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->unsignedBigInteger('annoncevente_id')->nullable()->index();
-            $table->foreign('annoncevente_id')->references('id')->on('annonceventes')->onDelete('restrict');
+            $table->foreign('annoncevente_id')->references('id')->on('annonceventes')->onDelete('cascade');
 
             $table->unsignedBigInteger('annoncereservation_id')->nullable()->index();
-            $table->foreign('annoncereservation_id')->references('id')->on('annoncereservations')->onDelete('restrict');
+            $table->foreign('annoncereservation_id')->references('id')->on('annoncereservations')->onDelete('cascade');
 
             $table->unsignedBigInteger('annoncelocation_id')->nullable()->index();
-            $table->foreign('annoncelocation_id')->references('id')->on('annoncelocations')->onDelete('restrict');
+            $table->foreign('annoncelocation_id')->references('id')->on('annoncelocations')->onDelete('cascade');
         });
     }
 

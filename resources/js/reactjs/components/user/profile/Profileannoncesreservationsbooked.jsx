@@ -17,11 +17,12 @@ class Profileannoncesreservationsbooked extends Component {
             annoncesreservationsbookeds:{annoncereservation:[],user:[]},
         };
         this.confirmItem = this.confirmItem.bind(this);
+        this.unconfirmItem = this.unconfirmItem.bind(this);
     }
     confirmItem(item){
         Swal.fire({
             title: 'Confirmer la reservation?',
-            text: "êtes vous sure de vouloir confirmer cette reservation?",
+            text: "êtes vous sure de vouloir confirmer cette reservation? Un email de confirmation serrà envoyé à l'utilisateur",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -40,7 +41,7 @@ class Profileannoncesreservationsbooked extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update FAQ',
-                            message: 'Reservation confirmée avec suces'
+                            message: 'Reservation confirmée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -95,7 +96,7 @@ class Profileannoncesreservationsbooked extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update FAQ',
-                            message: 'Reservation annullé avec success'
+                            message: 'Reservation annullé avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -196,25 +197,32 @@ class Profileannoncesreservationsbooked extends Component {
                                 <div className="row">
 
 
+                                    <div className="col-lg-3 col-md-12 mx-auto">
 
+                                        <div className="submit text-center">
+                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
+                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Ajouter une reservation</b>
+                                            </NavLink>
+                                        </div>
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+
+                                                            <Categoriesannoncereservation/>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
 
                                     <div className="col-lg-9 col-md-12 mx-auto">
-
-                                        <ul className="nav nav-tabs nav-tabs-neutral justify-content-center" role="tablist" data-background-color={this.props.backgroundColor}>
-                                            <li className="nav-item">
-                                                <NavLink to={`/profile/personal_reservations/`} className="nav-link">
-                                                    Reservations
-                                                </NavLink>
-                                            </li>
-                                            <li className="nav-item">
-                                                <NavLink to={`/profile/annonces_reservations_booked/`} className="nav-link">
-                                                    Annonces reservées
-                                                </NavLink>
-                                            </li>
-                                        </ul>
-                                        <br />
-
-
 
                                         <div className="card">
 
@@ -224,7 +232,7 @@ class Profileannoncesreservationsbooked extends Component {
                                                         <button onClick={() => this.reload()}
                                                                 className="btn btn-success btn-raised btn-sm"
                                                                 title="Refresh Page">
-                                                            <b className="title_hover">Actualiser</b>
+                                                            <i className="now-ui-icons loader_refresh"/>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -343,30 +351,7 @@ class Profileannoncesreservationsbooked extends Component {
 
 
 
-                                    <div className="col-lg-3 col-md-12 mx-auto">
 
-                                        <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Ajouter une reservation</b>
-                                            </NavLink>
-                                        </div>
-
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-
-                                                            <Categoriesannoncereservation/>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
 
 
                                 </div>

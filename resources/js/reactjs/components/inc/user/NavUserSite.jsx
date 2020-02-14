@@ -116,10 +116,19 @@ class NavUserSite extends Component {
                                             </NavLink>
                                         <a className="dropdown-item" href="../examples/blog-post.html">
                                             <i className="now-ui-icons text_align-left"></i> Blog Post
-                                            </a>
+                                        </a>
+                                        <Link to={'/profile/personal_reservations/'} className="dropdown-item">
+                                            <i className="now-ui-icons shopping_tag-content"/>Mes reservations
+                                        </Link>
+                                        <Link to={'/profile/personal_settings/teams/'} className="dropdown-item">
+                                            <i className="now-ui-icons users_circle-08"/>Team
+                                        </Link>
+                                        <Link to={'/profile/annonces_reservations_booked/'} className="dropdown-item">
+                                            <i className="now-ui-icons shopping_bag-16"/>Reservations
+                                        </Link>
                                         <Link to={'/profile/personal_mails/contacts/'} className="dropdown-item">
                                             <i className="now-ui-icons location_pin"/>Messages Contacts
-                                            </Link>
+                                        </Link>
                                     </div>
                                 </li>
                             </>

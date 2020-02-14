@@ -7,6 +7,7 @@ import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import PropTypes from "prop-types";
 import AnnonceslocationList from "./inc/AnnonceslocationList";
 import Categoriesannoncereselocation from "./inc/Categoriesannoncereselocation";
+import Swal from "sweetalert2";
 
 
 class Annoncelocationbycity extends Component {
@@ -16,7 +17,8 @@ class Annoncelocationbycity extends Component {
             annoncelocationbycity: {annoncelocations:[]},
             cityannoncelocations:[],
 
-        }
+        };
+        this.deleteItem = this.deleteItem.bind(this);
     }
 
     loadItem(){
@@ -30,6 +32,60 @@ class Annoncelocationbycity extends Component {
         dyaxios.get(url1).then(response => this.setState({cityannoncelocations: response.data,}));
 
     }
+
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes vous sure de vouloir executer cette action",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                const url = route('annonces_locations_delete.site',id);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update',
+                            message: 'Annonce suprimée avec success'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'primary',
+                            placement: {
+                                from: 'bottom',
+                                align: 'right'
+                            },
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            },
+                        });
+                    /** End alert ***/
+
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
+    }
+
 
     // lifecycle method
     componentDidMount() {
@@ -83,7 +139,7 @@ class Annoncelocationbycity extends Component {
                                             <>
 
                                                 {allannoncelocationbycity.map((item) => (
-                                                    <AnnonceslocationList key={item.id} {...item} />
+                                                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem}/>
                                                 ))}
 
                                             </>

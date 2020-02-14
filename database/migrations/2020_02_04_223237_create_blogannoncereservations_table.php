@@ -27,7 +27,7 @@ class CreateBlogannoncereservationsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->unsignedBigInteger('categoryannoncereservation_id')->nullable()->index();
-            $table->foreign('categoryannoncereservation_id')->references('id')->on('categoryannoncereservations')->onDelete('restrict');
+            $table->foreign('categoryannoncereservation_id')->references('id')->on('categoryannoncereservations')->onDelete('cascade');
         });
     }
 

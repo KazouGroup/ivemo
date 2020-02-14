@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\teamuser;
 use App\Model\user;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class TeamuserController extends Controller
 {
@@ -23,7 +24,7 @@ class TeamuserController extends Controller
 
     public function apiteamuserpublique(user $user)
     {
-        $teamusers = teamuser::whereIn('user_id',[$user->id])
+        $teamusers = teamuser::with('user')->whereIn('user_id',[$user->id])
         ->orderBy('created_at','DESC')
         ->where('status',1)->get()->toArray();
         return response()->json($teamusers, 200);
@@ -32,13 +33,13 @@ class TeamuserController extends Controller
 
     public function apiteamuserprivate()
     {
-        $teamusers = teamuser::whereIn('user_id',[auth()->user()->id])
+        $teamusers = teamuser::with('user')->whereIn('user_id',[auth()->user()->id])
         ->orderBy('created_at','DESC')->get()->toArray();
         return response()->json($teamusers, 200);
     }
 
 
-    public function team_users()
+    public function teamuserprivate()
     {
         return view('user.teamuser.index',[
             'user'=> auth()->user(),
@@ -97,6 +98,33 @@ class TeamuserController extends Controller
         //
     }
 
+    public function activated($id)
+    {
+      $teamuser = teamuser::where('id', $id)->findOrFail($id);
+      $this->authorize('update',$teamuser);
+
+      if(auth()->user()->id === $teamuser->user_id){
+          $teamuser->update(['status' => 1,]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+      }else{
+         abort(404);
+      }
+    }
+
+    public function unactivated($id)
+    {
+        $teamuser = teamuser::where('id', $id)->findOrFail($id);
+        $this->authorize('update',$teamuser);
+
+        if(auth()->user()->id === $teamuser->user_id){
+            $teamuser->update(['status' => 0,]);
+
+          return response('Confirmed',Response::HTTP_ACCEPTED);
+        }else{
+           abort(404);
+        }
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -113,10 +141,18 @@ class TeamuserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array|\Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $teamuser = teamuser::where('id', $id)->findOrFail($id);
+        $this->authorize('update',$teamuser);
+
+        if (auth()->user()->id === $teamuser->user_id){
+            $teamuser->delete();
+            return ['message' => 'message deleted '];
+        }else{
+            abort(404);
+        }
     }
 }

@@ -6,6 +6,7 @@ import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import Categoriesannoncereselocation from "./inc/Categoriesannoncereselocation";
 import AnnonceslocationList from "./inc/AnnonceslocationList";
+import Swal from "sweetalert2";
 
 
 class AnnoncelocationIndex extends Component {
@@ -13,13 +14,72 @@ class AnnoncelocationIndex extends Component {
         super(props);
         this.state = {
             annoncelocationbytype: {annoncelocations:[]},
-        }
+        };
+
+        this.deleteItem = this.deleteItem.bind(this);
     }
 
     loadItems(){
         let itemAnnoncelocation = this.props.match.params.annoncetype;
         let url = route('api.annoncelocationbyannoncetype_site', itemAnnoncelocation);
         dyaxios.get(url).then(response => this.setState({annoncelocationbytype: response.data,}));
+    }
+
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes vous sure de vouloir executer cette action",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                const url = route('annonces_locations_delete.site',[id]);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+
+
+                    let isNotId = item => item.id !== id;
+                    let updatedItems = this.state.annoncelocationbytype.annoncelocations.filter(isNotId);
+                    this.setState({annoncelocationbytype: updatedItems});
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update',
+                            message: 'Annonce suprimée avec success'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'primary',
+                            placement: {
+                                from: 'bottom',
+                                align: 'right'
+                            },
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            },
+                        });
+                    /** End alert ***/
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
     }
 
     // lifecycle method
@@ -29,7 +89,18 @@ class AnnoncelocationIndex extends Component {
 
     render() {
         const {annoncelocationbytype} = this.state;
-        const allannoncelocations = annoncelocationbytype.annoncelocations;
+        const mapAnnoncelocations = annoncelocationbytype.annoncelocations.length ? (
+            annoncelocationbytype.annoncelocations.map(item => {
+                return(
+                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem}/>
+                )
+            })
+        ):(
+            <></>
+        );
+
+
+
         return (
             <>
                 <Helmet>
@@ -70,9 +141,7 @@ class AnnoncelocationIndex extends Component {
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
-                                        {allannoncelocations.map((item) => (
-                                        <AnnonceslocationList key={item.id} {...item} />
-                                        ))}
+                                        {mapAnnoncelocations}
 
                                     </div>
 

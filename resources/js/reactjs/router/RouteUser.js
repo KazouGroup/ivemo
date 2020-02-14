@@ -36,6 +36,7 @@ import PersonalmessagescontactUser from "../components/user/profile/mail/Persona
 import PersonalmessagesannonceslocationsShowUser
     from "../components/user/profile/mail/PersonalmessagesannonceslocationsShowUser";
 import PersonalmessagescontactShowUser from "../components/user/profile/mail/PersonalmessagescontactShowUser";
+import TeamsUserIndex from "../components/user/configurations/teams/TeamsUserIndex";
 
 
 const RouteUser = props => (
@@ -69,6 +70,9 @@ const RouteUser = props => (
           <Route strict exact path="/profile/personal_mails/annonces_locations/" component={PersonalmessagesannonceslocationsUser}/>
           <Route strict exact path="/profile/personal_mails/contacts/" component={PersonalmessagescontactUser}/>
           <Route exact path="/profile/personal_mails/contacts/:contactuser/" component={PersonalmessagescontactShowUser}/>
+
+
+          <Route exact path="/profile/personal_settings/teams/" component={TeamsUserIndex}/>
 
           <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/" component={withRouter(BlogannoncereservationIBycategoryreservation)}/>
           <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/:date/:blogannoncereservation/" component={withRouter(BlogannoncereservationShow)}/>

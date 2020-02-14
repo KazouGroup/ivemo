@@ -82,9 +82,10 @@ class AnnonceslocationList extends Component {
                                     <div className="col-md-7 col-6">
                                         <NavLink to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/`}>
                                             <span className="ml-auto mr-auto">
-                                                <strong>{this.props.city.name}</strong> - {this.props.district}
+                                                <strong>{this.props.city.name} </strong>
                                             </span>
                                         </NavLink>
+                                        - {this.props.district}
                                     </div>
 
                                 </div>
@@ -114,6 +115,10 @@ class AnnonceslocationList extends Component {
                                         <NavLink to={`/annonces/`} className="btn btn-sm btn-primary">
                                             <i className="now-ui-icons location_pin"/>
                                         </NavLink>
+                                        <Button
+                                            className="btn btn-sm btn-danger" rel="tooltip" onClick={() => this.props.deleteItem(this.props.id)} title="Supprimer" data-placement="bottom">
+                                            <i className="now-ui-icons ui-1_simple-remove"/>
+                                        </Button>{" "}
 
                                         {!$guest && (
                                             <>

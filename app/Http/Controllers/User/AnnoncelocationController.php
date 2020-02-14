@@ -229,10 +229,21 @@ class AnnoncelocationController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array|\Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(annoncetype $annoncetype,$id)
     {
-        //
+        $annoncelocation = annoncelocation::findOrFail($id);
+        $annoncelocation->delete();
+        return ['message' => 'message deleted '];
+
+
+       // //$this->authorize('update',$contactuser);
+       // if (auth()->user()->id === $annoncelocation->user_id){
+       //     //$annoncelocation->delete();
+       //     //return ['message' => 'message deleted '];
+       // }else{
+       //     abort(404);
+       // }
     }
 }
