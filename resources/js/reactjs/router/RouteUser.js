@@ -39,6 +39,7 @@ import PersonalmessagescontactShowUser from "../components/user/profile/mail/Per
 import TeamsUserIndex from "../components/user/configurations/teams/TeamsUserIndex";
 import PublicUserAnnonceLocations from "../components/user/profile/annonces/PublicUserAnnonceLocations";
 import PublicUserAnnonceReservations from "../components/user/profile/annonces/PublicUserAnnonceReservations";
+import TeamsUserEdite from "../components/user/configurations/teams/TeamsUserEdite";
 
 
 const RouteUser = props => (
@@ -79,6 +80,7 @@ const RouteUser = props => (
 
 
           <Route exact path="/profile/personal_settings/teams/" component={TeamsUserIndex}/>
+          <Route path="/profile/personal_settings/teams/:id/edit/" component={TeamsUserEdite}/>
 
           <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/" component={withRouter(BlogannoncereservationIBycategoryreservation)}/>
           <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/:date/:blogannoncereservation/" component={withRouter(BlogannoncereservationShow)}/>

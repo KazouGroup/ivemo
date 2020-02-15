@@ -19,8 +19,7 @@ class ProfileAccountTeamUser extends Component {
             }));
     }
     getDescription(item) {
-        const md = new Remarkable();
-        return { __html: md.render(item.description) };
+        return { __html: item.description };
     }
     render() {
         const {teamusers} = this.state;
@@ -45,7 +44,7 @@ class ProfileAccountTeamUser extends Component {
                                             </div>
                                             <div className="card-body">
                                                 <h4 className="card-title">{item.full_name}</h4>
-                                                <h6 className="category text-gray">
+                                                <h6 className="category text-primary">
                                                     {item.role}
                                                 </h6>
                                                 <p className="card-description" dangerouslySetInnerHTML={this.getDescription(item)} />

@@ -1,0 +1,42 @@
+::-webkit-scrollbar-thumb {
+    background-color: #636660;
+    border-radius: 20px;
+}
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+#toTop {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+    display: none;
+    z-index: 99;
+    border-radius: 10%;
+    width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+}
+#toTop:hover,
+.material-button:hover {
+    border: 2px solid white;
+}
+
+.IvemoImageCarouses-file-upload{
+    display: none;
+}
+.profile > img {
+    max-height: 100%;
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: middle;
+    max-width: 250px;
+    box-shadow: 0 10px 30px -12px rgba(0,0,0,.42), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
+}
+.profile button {
+    margin-top: -7px;
+}

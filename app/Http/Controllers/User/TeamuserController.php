@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Teamuser\StoreRequest;
+use App\Http\Requests\Teamuser\UpdateRequest;
 use App\Model\teamuser;
 use App\Model\user;
+use App\Services\TeamuserService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -71,20 +74,30 @@ class TeamuserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $teamuser= new teamuser();
+
+        $teamuser->fill($request->all());
+
+        TeamuserService::storeUploadImage($request,$teamuser);
+
+        $teamuser->save();
+
+        return response('Created',Response::HTTP_CREATED);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show($teamuser)
     {
-        //
+        $teamuser = teamuser::whereId($teamuser)->first();
+
+        return response()->json($teamuser, 200);
     }
 
     /**
@@ -93,9 +106,11 @@ class TeamuserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(teamuser $teamuser)
     {
-        //
+        return view('user.teamuser.edit',[
+            'teamuser'=> $teamuser,
+        ]);
     }
 
     public function activated($id)
@@ -130,11 +145,17 @@ class TeamuserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+        $teamuser = teamuser::findOrFail($id);
+
+        TeamuserService::updateUploadeImage($request,$teamuser);
+
+        $teamuser->update($request->all());
+
+        return response()->json($teamuser,200);
     }
 
     /**

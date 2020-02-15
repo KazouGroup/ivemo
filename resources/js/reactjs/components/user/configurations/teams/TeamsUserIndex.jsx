@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Button } from "reactstrap";
+import {Button, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import moment from "moment";
@@ -310,29 +310,42 @@ class TeamsUserIndex extends Component {
                                                                     </td>
                                                                     <td className="text-right">
                                                                         {item.status ?
-                                                                            <button type="button" rel="tooltip" onClick={() => this.unactiveItem(item)}
-                                                                                    className="btn btn-success btn-icon btn-sm"
-                                                                                    data-original-title="Desactiver" title="Desactiver l'utilisateur">
-                                                                                <i className="now-ui-icons ui-1_check"/>
-                                                                            </button>
+                                                                           <>
+                                                                               <button type="button" rel="tooltip" onClick={() => this.unactiveItem(item)}
+                                                                                       className="btn btn-success btn-icon btn-sm" id={'TooltipDesactiver'}>
+                                                                                   <i className="now-ui-icons ui-1_check"/>
+                                                                               </button>
+                                                                               <UncontrolledTooltip placement="bottom" target="TooltipDesactiver" delay={0}>
+                                                                                   Desactiver l'utilisateur
+                                                                               </UncontrolledTooltip>
+                                                                           </>
                                                                             :
-                                                                            <button type="button" rel="tooltip" onClick={() => this.activeItem(item)}
-                                                                                    className="btn btn-primary btn-icon btn-sm"
-                                                                                    data-original-title="Reservation en attente de confirmation" title="Activer l'utilisateur">
-                                                                                <i className="now-ui-icons ui-1_simple-delete"/>
-                                                                            </button>
-                                                                        }
+                                                                          <>
+                                                                              <button type="button" onClick={() => this.activeItem(item)}
+                                                                                      className="btn btn-primary btn-icon btn-sm"
+                                                                                      id={'TooltipActiver'}>
+                                                                                  <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                              </button>
+                                                                              <UncontrolledTooltip placement="bottom" target="TooltipActiver" delay={0}>
+                                                                                  Activer l'utilisateur
+                                                                              </UncontrolledTooltip>
+                                                                          </>
 
-                                                                        <button type="button" rel="tooltip" data-toggle="modal" data-target="#showreservation"
-                                                                                className="btn btn-info btn-icon btn-sm btn-neutral  "
-                                                                                data-original-title="Voir cette reservation" title="">
+                                                                        }
+                                                                        <Link to={`/profile/personal_settings/teams/${item.id}/edit/`} className="btn btn-info btn-icon btn-sm btn-neutral" id={'TooltipEditer'}>
                                                                             <i className="now-ui-icons ui-2_settings-90"/>
-                                                                        </button>
-                                                                        <button type="button" rel="tooltip" onClick={() => this.deleteItem(item.id)}
-                                                                                className="btn btn-danger btn-icon btn-sm btn-neutral"
-                                                                                data-original-title="" title="">
+                                                                        </Link>
+                                                                        <UncontrolledTooltip placement="bottom" target="TooltipEditer" delay={0}>
+                                                                            Éditer cette utilisateur
+                                                                        </UncontrolledTooltip>
+
+                                                                        <button type="button" id={'TooltipDelete'} onClick={() => this.deleteItem(item.id)}
+                                                                                className="btn btn-danger btn-icon btn-sm btn-neutral">
                                                                             <i className="now-ui-icons ui-1_simple-remove"/>
                                                                         </button>
+                                                                        <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
+                                                                            Supprimer
+                                                                        </UncontrolledTooltip>
                                                                     </td>
                                                                 </tr>
                                                             ))}

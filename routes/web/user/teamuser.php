@@ -11,6 +11,21 @@ Route::get(
     'TeamuserController@teamuserprivate'
 )->name('profile_team_users.site');
 
+Route::get(
+    'profile/personal_settings/teams/{teamuser}/edit',
+    'TeamuserController@edit'
+)->name('profile_team_users_edit.site');
+
+Route::get(
+    'api/profile/personal_settings/teams/{teamuser}',
+    'TeamuserController@show'
+)->name('api.profile_team_users_show.site');
+
+Route::put(
+    'profile/personal_settings/teams/{teamuser}',
+    'TeamuserController@update'
+)->name('profile_team_users_update.site');
+
 Route::delete(
     'profile/personal_settings/teams/{id}',
     'TeamuserController@destroy'
