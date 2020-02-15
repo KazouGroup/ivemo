@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Button } from "reactstrap";
+import { Button,Alert} from "reactstrap";
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import './ProfileAccountUser.css';
@@ -104,13 +104,13 @@ class PersonalannoncereservationsUser extends Component {
 
                                                             <div className="card-body">
                                                                 {item.status ?
-                                                                    <div className="alert alert-danger">
+                                                                    <Alert color="danger">
                                                                         <span>Votre reservation n'à pas ancore été approuver par <b>{item.annoncereservation.user.first_name}</b></span>
-                                                                    </div>
+                                                                    </Alert>
                                                                     :
-                                                                    <div className="alert alert-success">
+                                                                    <Alert color="success">
                                                                         <span>Reservation approuver par <b>{item.annoncereservation.user.first_name}</b></span>
-                                                                    </div>
+                                                                    </Alert>
                                                                 }
 
                                                                 <h4 className="text-center">

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Remarkable } from 'remarkable';
-import { Button } from "reactstrap";
+import { Button,UncontrolledTooltip } from "reactstrap";
 import moment from "moment";
 
 
@@ -115,8 +115,11 @@ class AnnonceslocationList extends Component {
                                         <NavLink to={`/annonces/`} className="btn btn-sm btn-primary">
                                             <i className="now-ui-icons location_pin"/>
                                         </NavLink>
+                                        <UncontrolledTooltip placement="bottom" target="bottom" delay={0}>
+                                            Supprimer cette annonce
+                                        </UncontrolledTooltip>
                                         <Button
-                                            className="btn btn-sm btn-danger" rel="tooltip" onClick={() => this.props.deleteItem(this.props.id)} title="Supprimer" data-placement="bottom">
+                                            className="btn btn-sm btn-danger" rel="tooltip" onClick={() => this.props.deleteItem(this.props.id)} color="secondary" id="bottom">
                                             <i className="now-ui-icons ui-1_simple-remove"/>
                                         </Button>{" "}
 

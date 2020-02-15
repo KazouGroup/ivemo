@@ -32,7 +32,7 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes vous sure de vouloir executer cette action",
+            text: "êtes-vous sûr de vouloir executer cette action",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",

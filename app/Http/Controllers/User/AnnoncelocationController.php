@@ -233,8 +233,8 @@ class AnnoncelocationController extends Controller
      */
     public function destroy(annoncetype $annoncetype,$id)
     {
-        $annoncelocation = annoncelocation::findOrFail($id);
-        $annoncelocation->delete();
+        //$annoncelocation = annoncelocation::findOrFail($id);
+        //$annoncelocation->delete();
         return ['message' => 'message deleted '];
 
 

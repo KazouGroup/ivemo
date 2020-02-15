@@ -92,31 +92,46 @@ class ProfileAccountPublicUser extends Component {
                                             <div className="card-body">
                                                 <div className="row">
                                                     <div className="col-md-12">
-
-                                                        <div className="card card-plain">
-
-                                                            <div className="card-body">
-                                                                <table>
-                                                                    <tbody>
-                                                                    <tr>
-                                                                        <td> <NavLink to={`/`}>Toutes les reservations</NavLink></td>
-                                                                        <td className="text-right"> 200 annonces</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td> <NavLink to={`/`}>Toutes les ventes</NavLink></td>
-                                                                        <td className="text-right"> 21 annonces</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td> <NavLink to={`/`}>Toutes les ventes</NavLink></td>
-                                                                        <td className="text-right"> 150 annonces</td>
-                                                                    </tr>
-
-                                                                    </tbody>
-                                                                </table>
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                            <div className="card card-plain">
+                                                                <div className="card-header" role="tab" id="headingOne">
+                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                        <b>Annonce {userPublick.first_name}</b>
+                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
+                                                                    </a>
+                                                                </div>
+                                                                <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                                                    <div className="card-body">
+                                                                        <table>
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <NavLink to={`/@${userPublick.slug}/annonces_locations/`}>
+                                                                                        Annones locations
+                                                                                    </NavLink>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <NavLink to={`/@${userPublick.slug}/annonces_reservations/`}>
+                                                                                        Annonces reservations
+                                                                                    </NavLink>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <NavLink to={`/`}>
+                                                                                        Annonces vente
+                                                                                    </NavLink>
+                                                                                </td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
                                                             </div>
 
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </div>

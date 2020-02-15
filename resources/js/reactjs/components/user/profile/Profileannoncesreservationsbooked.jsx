@@ -77,7 +77,7 @@ class Profileannoncesreservationsbooked extends Component {
     unconfirmItem(item){
         Swal.fire({
             title: 'Annullé la reservation?',
-            text: "êtes vous sure de vouloir annuller cette reservation?",
+            text: "êtes-vous sûr de vouloir annuller cette reservation?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",

@@ -37,6 +37,8 @@ import PersonalmessagesannonceslocationsShowUser
     from "../components/user/profile/mail/PersonalmessagesannonceslocationsShowUser";
 import PersonalmessagescontactShowUser from "../components/user/profile/mail/PersonalmessagescontactShowUser";
 import TeamsUserIndex from "../components/user/configurations/teams/TeamsUserIndex";
+import PublicUserAnnonceLocations from "../components/user/profile/annonces/PublicUserAnnonceLocations";
+import PublicUserAnnonceReservations from "../components/user/profile/annonces/PublicUserAnnonceReservations";
 
 
 const RouteUser = props => (
@@ -61,7 +63,11 @@ const RouteUser = props => (
           <Route exact path="/annonce/show/vendre/create/" component={AnnonceBienAvendreCreate}/>
 
           <Route exact path="/profile/account/" component={ProfileAccountUser}/>
+
           <Route exact path="/@:user/" component={withRouter(ProfileAccountPublicUser)}/>
+          <Route exact path="/@:user/annonces_locations/" component={withRouter(PublicUserAnnonceLocations)}/>
+          <Route exact path="/@:user/annonces_reservations/" component={withRouter(PublicUserAnnonceReservations)}/>
+
           <Route exact path="/profile/personal_reservations/" component={PersonalannoncereservationsUser}/>
           <Route exact path="/profile/annonces_reservations_booked/" component={Profileannoncesreservationsbooked}/>
           <Route exact path="/profile/change_password/" component={ProfileAccountChangePasswordUser}/>

@@ -8,6 +8,7 @@ use App\Http\Resources\UserResource;
 use App\Model\annoncelocation;
 use App\Model\annoncereservation;
 use App\Model\annoncetype;
+use App\Model\annoncevente;
 use App\Model\contactuser;
 use App\Model\reservation;
 use App\Model\user;
@@ -28,7 +29,9 @@ class ProfileController extends Controller
     {
         $this->middleware('auth',['except' => [
             'api','apiprofilepublique','apiannoncereservationbyprofilpublique','public_profile_send_message',
-            'apiannoncelocationbyprofilpublique','public_profile'
+            'apiannoncelocationbyprofilpublique','public_profile','publicprofilannoncereservations',
+            'publicprofilannoncelocations','apiprofilannoncelocations','apiprofilannoncereservations',
+            'apiprofilannoncereserventes'
         ]]);
     }
     /**
@@ -49,29 +52,6 @@ class ProfileController extends Controller
         return response()->json($user, 200);
     }
 
-    public function apiannoncereservationbyprofilpublique(user $user,annoncetype $annoncetype)
-    {
-        $annoncereservations = annoncereservation::whereIn('user_id',[$user->id])->whereIn('annoncetype_id',[$annoncetype->id])
-            ->with('user','categoryannoncereservation','city','annoncetype')
-            ->orderBy('created_at','DESC')
-            ->where(function ($q){
-                $q->where('status',1);
-            })->distinct()->get()->toArray();
-
-        return response()->json($annoncereservations, 200);
-    }
-
-    public function apiannoncelocationbyprofilpublique(user $user,annoncetype $annoncetype)
-    {
-        $annoncelocations = annoncelocation::whereIn('user_id',[$user->id])->whereIn('annoncetype_id',[$annoncetype->id])
-            ->with('user','categoryannoncelocation','city','annoncetype')
-            ->orderBy('created_at','DESC')
-            ->where(function ($q){
-                $q->where('status',1);
-            })->distinct()->get()->toArray();
-
-        return response()->json($annoncelocations, 200);
-    }
 
     public function apipersonalreservations()
     {
@@ -98,21 +78,7 @@ class ProfileController extends Controller
 
     public function apiannoncereservationbookeds()
     {
-        $personnalreservations = reservation::with('user','annoncereservation')
-            ->orderBy('created_at','DESC')
-            ->with([
-                'annoncereservation.categoryannoncereservation' => function ($q){
-                    $q->select('id','name','slug','user_id');},
-                'annoncereservation.city' => function ($q){
-                    $q->select('id','name','slug','user_id');},
-                'annoncereservation.annoncetype' => function ($q){
-                    $q->select('id','name','slug');},
-                'annoncereservation.user' => function ($q){
-                    $q->distinct()->get();}
-            ])
-            ->whereHas('annoncereservation', function ($q) {
-                $q->whereIn('user_id',[auth()->user()->id]);
-            })->distinct()->get()->toArray();
+        $personnalreservations = ProfileService::apiannoncereservationbookeds();
 
         return response()->json($personnalreservations, 200);
     }
@@ -129,8 +95,6 @@ class ProfileController extends Controller
 
           return response('Confirmed',Response::HTTP_ACCEPTED);
         }
-
-
     }
 
     public function annonces_reservations_booked_unconfirmed(reservation $reservation, $id)
@@ -163,15 +127,7 @@ class ProfileController extends Controller
 
     public function apipersonalmessagesannonces_locations_show(contactuser $contactuser)
     {
-        $contactusers = contactuser::with('user','annoncelocation')
-          ->with([
-              'annoncelocation.categoryannoncelocation' => function ($q){
-                  $q->select('id','name','slug','user_id');},
-              'annoncelocation.city' => function ($q){
-                  $q->select('id','name','slug','user_id');},
-              'annoncelocation.annoncetype' => function ($q){
-                  $q->select('id','name','slug');},
-          ])->whereSlug($contactuser->slug)->first();
+        $contactusers = ProfileService::apipersonalmessagesannonces_locations_show($contactuser);
 
         return response()->json($contactusers, 200);
     }
@@ -189,6 +145,55 @@ class ProfileController extends Controller
 
         return response()->json($contactusers, 200);
     }
+
+    public function apiprofilannoncelocations(user $user)
+    {
+
+        $userannoncelocations = annoncelocation::where('status',1)
+            ->with('user','categoryannoncelocation','city','annoncetype')
+            ->whereIn('user_id',[$user->id])
+            ->whereIn('annoncetype_id',[1])
+            ->distinct()->get()->toArray();
+
+        return response()->json($userannoncelocations, 200);
+    }
+
+   public function publicprofilannoncelocations(user $user)
+   {
+       return view('user.profile.annonces.publicprofilannoncelocations',[
+           'user' => $user,
+           ]);
+   }
+
+    public function apiprofilannoncereservations(user $user)
+    {
+        $annoncesreservations = annoncereservation::where('status',1)
+            ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
+            ->whereIn('user_id',[$user->id])
+            ->whereIn('annoncetype_id',[3])
+            ->distinct()->get()->toArray();
+
+        return response()->json($annoncesreservations, 200);
+    }
+
+    public function publicprofilannoncereservations(user $user)
+    {
+       return view('user.profile.annonces.publicprofilannoncereservations',[
+           'user' => $user,
+       ]);
+    }
+
+    public function apiprofilannoncereserventes(user $user)
+    {
+        //Querry a refaire
+        $annoncesventes = annoncevente::where('status',1)
+            ->with('user','categoryannoncevente','city','annoncetype')
+            ->whereIn('user_id',[$user->id])
+            ->get();
+
+        return response()->json($annoncesventes, 200);
+    }
+
      /**
       *
      * Show the form for creating a new resource.
@@ -206,9 +211,7 @@ class ProfileController extends Controller
 
     public function change_password()
     {
-
         $user = auth()->user();
-
         return view('user.profile.change_password_account',[
             'user' => $user,
         ]);
@@ -351,17 +354,17 @@ class ProfileController extends Controller
         //
     }
 
-       public function personalmessagesdelete(contactuser $contactuser,$id)
-        {
-            $contactuser = contactuser::findOrFail($id);
-            $this->authorize('update',$contactuser);
-            if (auth()->user()->id === $contactuser->user_id){
-                $contactuser->delete();
-                return ['message' => 'message deleted '];
-            }else{
-             abort(404);
-            }
+    public function personalmessagesdelete(contactuser $contactuser,$id)
+     {
+         $contactuser = contactuser::findOrFail($id);
+         $this->authorize('update',$contactuser);
+         if (auth()->user()->id === $contactuser->user_id){
+             $contactuser->delete();
+             return ['message' => 'message deleted '];
+         }else{
+          abort(404);
+         }
 
-        }
+     }
 }
 

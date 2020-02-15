@@ -7,11 +7,17 @@ Route::get(
 )->name('api.profilpublique');
 
 Route::get(
-    'profile/{user}/r/{annoncetype}',
-    'ProfileController@apiannoncereservationbyprofilpublique'
-)->name('api.annoncereservationbyprofilpublique');
+    '@{user}/annonces_locations',
+    'ProfileController@apiprofilannoncelocations'
+)->name('api.profilpublique_annoncelocations');
 
 Route::get(
-    'profile/{user}/l/{annoncetype}',
-    'ProfileController@apiannoncelocationbyprofilpublique'
-)->name('api.annoncelocationbyprofilpublique');
+    '@{user}/annonces_reservations',
+    'ProfileController@apiprofilannoncereservations'
+)->name('api.profilpublique_annoncereservations');
+
+Route::get(
+    '@{user}/annonces_ventes',
+    'ProfileController@apiprofilannoncereserventes'
+)->name('api.profilpublique_annonceventes');
+

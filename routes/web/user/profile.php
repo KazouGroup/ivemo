@@ -52,6 +52,16 @@ Route::post(
 )->name('public_profile_send_message.site');
 
 Route::get(
+    '@{user}/annonces_reservations',
+    'ProfileController@publicprofilannoncereservations'
+)->name('public_profile_annoncereservations.site');
+
+Route::get(
+    '@{user}/annonces_locations',
+    'ProfileController@publicprofilannoncelocations'
+)->name('public_profile_annoncelocations.site');
+
+Route::get(
     'profile/change_password',
     'ProfileController@change_password'
 )->name('change_password.site');

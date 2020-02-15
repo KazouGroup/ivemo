@@ -111,9 +111,14 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'leader_id')->withTimestamps();
     }
 
-    public function annoncereservation()
+    public function annoncelocations()
     {
-        return $this->belongsTo(categoryfaq::class,'categoryfaq_id');
+        return $this->hasMany(annoncelocation::class, 'user_id');
+    }
+
+    public function annoncereservations()
+    {
+        return $this->hasMany(annoncereservation::class, 'user_id');
     }
 
 }
