@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Row, Form, Input,InputGroup } from 'reactstrap';
 
 
 class FormContactProfileAccountUser extends Component {
@@ -94,17 +95,17 @@ class FormContactProfileAccountUser extends Component {
         return (
 
 
-            <form role="form" id="contact-form" onSubmit={this.sendmessageItem} acceptCharset="UTF-8">
+            <Form role="form" id="contact-form" onSubmit={this.sendmessageItem} acceptCharset="UTF-8">
 
                 <div className="card-body">
 
-                    <div className="row">
-                        <div className="input-group">
+                    <Row>
+                        <InputGroup>
                             <div className="input-group-prepend">
                                                         <span className="input-group-text">
                                                             <i className="now-ui-icons users_circle-08"/></span>
                             </div>
-                            <input id='full_name'
+                            <Input id='full_name'
                                    type='text'
                                    className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
                                    name='full_name'
@@ -115,16 +116,17 @@ class FormContactProfileAccountUser extends Component {
                                    onChange={this.handleFieldChange}
                             />
                             {this.renderErrorFor('full_name')}
-                        </div>
-                    </div>
+                        </InputGroup>
 
-                    <div className="row">
-                        <div className="input-group">
+                    </Row>
+
+                    <Row>
+                        <InputGroup>
                             <div className="input-group-prepend">
                                                         <span className="input-group-text">
                                                             <i className="now-ui-icons ui-1_email-85"/></span>
                             </div>
-                            <input id='email'
+                            <Input id='email'
                                    type='email'
                                    className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
                                    name='email'
@@ -135,16 +137,16 @@ class FormContactProfileAccountUser extends Component {
                                    onChange={this.handleFieldChange}
                             />
                             {this.renderErrorFor('email')}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="input-group">
+                        </InputGroup>
+                    </Row>
+                    <Row>
+                        <InputGroup>
                             <div className="input-group-prepend">
                                                         <span className="input-group-text">
                                                             <i className="now-ui-icons tech_mobile"/></span>
                             </div>
-                            <input id='phone'
-                                   type='text'
+                            <Input id='phone'
+                                   type='number'
                                    className={`form-control ${this.hasErrorFor('phone') ? 'is-invalid' : ''}`}
                                    name='phone'
                                    placeholder="Téléphone"
@@ -153,18 +155,15 @@ class FormContactProfileAccountUser extends Component {
                                    onChange={this.handleFieldChange}
                             />
                             {this.renderErrorFor('phone')}
-                        </div>
-
-
-                    </div>
-                    <div className="row">
-
-                        <div className="input-group">
+                        </InputGroup>
+                    </Row>
+                    <Row>
+                        <InputGroup>
                             <div className="input-group-prepend">
                                                         <span className="input-group-text">
-                                                            <i className="now-ui-icons users_circle-08"/></span>
+                                                            <i className="now-ui-icons text_caps-small"/></span>
                             </div>
-                            <input id='subject'
+                            <Input id='subject'
                                    type='text'
                                    className={`form-control ${this.hasErrorFor('subject') ? 'is-invalid' : ''}`}
                                    name='subject'
@@ -175,20 +174,19 @@ class FormContactProfileAccountUser extends Component {
                                    onChange={this.handleFieldChange}
                             />
                             {this.renderErrorFor('subject')}
-                        </div>
-                    </div>
-                    <div className="row">
-
-                        <div className="input-group">
-                                                       <textarea name="message" value={this.state.message}
-                                                                 onChange={this.handleFieldChange}
-                                                                 placeholder={'Posez ici toutes vos questions !'}
-                                                                 className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                 id="message"
-                                                                 rows="10" />
+                        </InputGroup>
+                    </Row>
+                    <Row>
+                        <InputGroup>
+                               <textarea name="message" value={this.state.message}
+                                         onChange={this.handleFieldChange}
+                                         placeholder={'Posez ici toutes vos questions !'}
+                                         className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
+                                         id="message"
+                                         rows="10" />
                             {this.renderErrorFor('message')}
-                        </div>
-                    </div>
+                        </InputGroup>
+                    </Row>
                     <div className="submit text-center">
                         <button className="btn btn-primary btn-lg" type="submit">
                             <i className="now-ui-icons ui-1_email-85"/> Contacter
@@ -197,7 +195,7 @@ class FormContactProfileAccountUser extends Component {
                 </div>
 
 
-            </form>
+            </Form>
 
         )
     }

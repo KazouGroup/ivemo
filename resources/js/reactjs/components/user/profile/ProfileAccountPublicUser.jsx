@@ -7,6 +7,7 @@ import FooterUserSite from "../../inc/user/FooterUserSite";
 import FormContactProfileAccountUser from "./form/FormContactProfileAccountUser";
 import PropTypes from "prop-types";
 import ProfileAccountTeamUser from "./ProfileAccountTeamUser";
+import NavLinkPublicAnnonceUser from "./annonces/NavLinkPublicAnnonceUser";
 
 
 class ProfileAccountPublicUser extends Component {
@@ -100,35 +101,10 @@ class ProfileAccountPublicUser extends Component {
                                                                         <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
-                                                                <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                                                                    <div className="card-body">
-                                                                        <table>
-                                                                            <tbody>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <NavLink to={`/@${userPublick.slug}/annonces_locations/`}>
-                                                                                        Annones locations
-                                                                                    </NavLink>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <NavLink to={`/@${userPublick.slug}/annonces_reservations/`}>
-                                                                                        Annonces reservations
-                                                                                    </NavLink>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <NavLink to={`/`}>
-                                                                                        Annonces vente
-                                                                                    </NavLink>
-                                                                                </td>
-                                                                            </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
+
+                                                                <NavLinkPublicAnnonceUser {...this.props}/>
+
+
                                                             </div>
 
                                                         </div>

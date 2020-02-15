@@ -109,17 +109,20 @@ class AnnonceslocationList extends Component {
 
                                     <div className="text-right mx-auto">
 
-                                        <Button className="btn btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
+                                        <UncontrolledTooltip placement="bottom" target="TooltipPhone" delay={0}>
+                                            3426712192
+                                        </UncontrolledTooltip>
+                                        <Button className="btn btn-sm btn-info"  color="secondary" id="TooltipPhone">
                                             <i className="now-ui-icons tech_mobile"/>
                                         </Button>
                                         <NavLink to={`/annonces/`} className="btn btn-sm btn-primary">
                                             <i className="now-ui-icons location_pin"/>
                                         </NavLink>
-                                        <UncontrolledTooltip placement="bottom" target="bottom" delay={0}>
+                                        <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
                                             Supprimer cette annonce
                                         </UncontrolledTooltip>
                                         <Button
-                                            className="btn btn-sm btn-danger" rel="tooltip" onClick={() => this.props.deleteItem(this.props.id)} color="secondary" id="bottom">
+                                            className="btn btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} color="secondary" id="TooltipDelete">
                                             <i className="now-ui-icons ui-1_simple-remove"/>
                                         </Button>{" "}
 

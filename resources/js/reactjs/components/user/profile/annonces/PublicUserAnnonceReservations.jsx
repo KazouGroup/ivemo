@@ -6,6 +6,7 @@ import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import AnnoncereservationList from "../../annoncereservation/AnnoncereservationList";
+import NavLinkPublicAnnonceUser from "./NavLinkPublicAnnonceUser";
 
 
 class PublicUserAnnonceReservations extends Component {
@@ -13,7 +14,6 @@ class PublicUserAnnonceReservations extends Component {
         super(props);
         this.state = {
             userPublick:[],
-            annoncelocations:[],
             annoncereservations:[],
         };
 
@@ -78,7 +78,6 @@ class PublicUserAnnonceReservations extends Component {
 
     loadItems(){
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.profilpublique_annoncelocations',[itemuser])).then(response => this.setState({annoncelocations: response.data,}));
         dyaxios.get(route('api.profilpublique_annoncereservations',[itemuser])).then(response => this.setState({annoncereservations: response.data,}));
         dyaxios.get(route('api.profilpublique',[itemuser])).then(response => this.setState({userPublick: response.data,}));
     }
@@ -89,7 +88,7 @@ class PublicUserAnnonceReservations extends Component {
     }
 
     render() {
-        const {annoncelocations,userPublick,annoncereservations} = this.state;
+        const {userPublick,annoncereservations} = this.state;
         const mapAnnoncereservations = annoncereservations.length ? (
             annoncereservations.map(item => {
                 return(
@@ -156,41 +155,10 @@ class PublicUserAnnonceReservations extends Component {
                                                                         <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
-                                                                <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                                                                    <div className="card-body">
-                                                                        <table>
-                                                                            <tbody>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <NavLink to={`/@${userPublick.slug}/annonces_locations/`}>
-                                                                                        Annones <b>locations</b>
-                                                                                    </NavLink>
-                                                                                </td>
-                                                                                {annoncelocations.length > 0 && (
-                                                                                    <td className="text-right"> {annoncelocations.length} annonces</td>
-                                                                                )}
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <NavLink to={`/@${userPublick.slug}/annonces_reservations/`}>
-                                                                                        Annonces <b>reservations</b>
-                                                                                    </NavLink>
-                                                                                </td>
-                                                                                {annoncereservations.length > 0 && (
-                                                                                    <td className="text-right"> {annoncereservations.length} annonces</td>
-                                                                                )}
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <NavLink to={`/`}>
-                                                                                        Annonces vente
-                                                                                    </NavLink>
-                                                                                </td>
-                                                                            </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
+
+                                                                <NavLinkPublicAnnonceUser {...this.props}/>
+
+
                                                             </div>
 
                                                         </div>
