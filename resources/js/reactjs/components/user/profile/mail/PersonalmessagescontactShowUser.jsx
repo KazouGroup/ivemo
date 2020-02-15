@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet';
-import { Button } from "reactstrap";
+import {Button, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import moment from "moment";
@@ -119,15 +119,9 @@ class PersonalmessagescontactShowUser extends Component {
 
                                 <div className="row">
 
-
                                     <NavlinkmailmessageUser />
 
-
-
-
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
-
 
                                         <div className="card">
                                             <div className="card-body">
@@ -167,21 +161,34 @@ class PersonalmessagescontactShowUser extends Component {
 
                                                             </div>
                                                         </div>
-                                                        <a href={`mailto:${contactuser.email}`} className="btn btn-primary pull-left">
+                                                        <a href={`mailto:${contactuser.email}`} className="btn btn-primary pull-left btn-sm" id="TooltipMail">
                                                             <i className="now-ui-icons text_caps-small" />
                                                             Répondre
                                                         </a>
+                                                        <UncontrolledTooltip placement="bottom" target="TooltipMail" delay={0}>
+                                                            Repondre à {contactuser.email}
+                                                        </UncontrolledTooltip>
                                                         {contactuser.phone ?
-                                                                <a href={`tel:${contactuser.phone}`} rel="tooltip" title={contactuser.phone} data-placement="bottom" className="btn btn-success pull-left">
-                                                                    <i className="now-ui-icons tech_mobile" />
-                                                                    Phone
-                                                                </a>:null}
+                                                               <>
+                                                                   <a href={`tel:${contactuser.phone}`} title={contactuser.phone}  id="TooltipPhone" className="btn btn-success pull-left">
+                                                                       <i className="now-ui-icons tech_mobile" />
+                                                                       Phone
+                                                                   </a>
+                                                                   <UncontrolledTooltip placement="bottom" target="TooltipPhone" delay={0}>
+                                                                       {contactuser.phone}
+                                                                   </UncontrolledTooltip>
+                                                               </>
+
+                                                            :null}
 
                                                         <Button onClick={() => this.deleteItem(contactuser.id)}
-                                                                className="btn btn-danger pull-left" rel="tooltip" title="Supprimer" data-placement="bottom">
+                                                                className="btn btn-danger pull-left btn-sm"  id="TooltipDelete">
                                                             <i className="now-ui-icons ui-1_simple-remove" />
                                                             Supprimer
                                                         </Button>{" "}
+                                                        <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
+                                                            Supprimer ce message
+                                                        </UncontrolledTooltip>
                                                     </div>
 
                                                 </div>
