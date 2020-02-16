@@ -15,13 +15,6 @@ class AnnoncetypeResource extends JsonResource
     public function toArray($request)
     {
 
-        $annoncelocations = $this->annoncelocations()->whereIn('annoncetype_id',[$this->id])
-            ->with('user','categoryannoncelocation','city','annoncetype')
-            ->orderBy('created_at','DESC')
-            ->where(function ($q){
-                $q->where('status',1);
-            })->distinct()->get()->toArray();
-
         $annonceventes = $this->annonceventes()->whereIn('annoncetype_id',[$this->id])
             ->with('user','categoryannoncevente','city','annoncetype')
             ->orderBy('created_at','DESC')
@@ -42,7 +35,6 @@ class AnnoncetypeResource extends JsonResource
             'name' => $this->name,
             'annonceventes' => $annonceventes,
             'annoncereservations' => $annoncereservations,
-            'annoncelocations' => $annoncelocations,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
         ];

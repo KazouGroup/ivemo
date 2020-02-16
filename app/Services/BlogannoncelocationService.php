@@ -14,6 +14,20 @@ class BlogannoncelocationService
 {
 
 
+    public static function apiannonceblogcategorylocations($categoryannoncelocation)
+    {
+        $blogannoncelocations = categoryannoncelocation::whereSlug($categoryannoncelocation->slug)
+            ->with([
+                'blogannoncelocations' => function ($q) use ($categoryannoncelocation){
+                    $q->where('status',1)
+                        ->with('user','categoryannoncelocation')
+                        ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
+                        ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();},
+            ])->first();
+
+        return $blogannoncelocations;
+    }
+
     public static function apiblogannoncelocationinteresse($categoryannoncelocation)
     {
         $blogannoncelocation = $categoryannoncelocation->blogannoncelocations()->with('user','categoryannoncelocation')

@@ -6,6 +6,7 @@ import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import FormcontactuseronlocationShow from "./inc/FormcontactuseronlocationShow";
 import BlogannoncelocationIntesseAnnonseShow from "../blog/blogannoncelocation/BlogannoncelocationIntesseAnnonseShow";
+import Swal from "sweetalert2";
 
 
 class Annoncelocationbycategorycityshow extends Component {
@@ -14,7 +15,60 @@ class Annoncelocationbycategorycityshow extends Component {
         this.state = {
             annoncelocation:{categoryannoncelocation:[],user:[]},
         };
+        this.deleteItem = this.deleteItem.bind(this);
+    }
 
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes-vous sûr de vouloir executer cette action",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                const url = route('annonces_locations_delete.site',[id]);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update',
+                            message: 'Annonce suprimée avec success'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'primary',
+                            placement: {
+                                from: 'bottom',
+                                align: 'right'
+                            },
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            },
+                        });
+                    /** End alert ***/
+                    this.props.history.push('/annonces_locations/locations/');
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
     }
 
     loadItems(){
@@ -166,9 +220,9 @@ class Annoncelocationbycategorycityshow extends Component {
                                                         <NavLink to={`/annonces/`} className="btn btn-sm btn-success" rel="tooltip" title="Editer" data-placement="bottom">
                                                             <i className="now-ui-icons ui-1_simple-delete"></i>
                                                         </NavLink>
-                                                        <Button
+                                                        <Button onClick={() => this.deleteItem(annoncelocation.id)}
                                                             className="btn btn-sm btn-danger" rel="tooltip" title="Supprimer" data-placement="bottom">
-                                                            <i className="now-ui-icons ui-1_simple-remove"></i>
+                                                            <i className="now-ui-icons ui-1_simple-remove"/>
                                                         </Button>{" "}
                                                     </div>
                                                 </div>
@@ -293,7 +347,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                 </div>
 
 
-                                <BlogannoncelocationIntesseAnnonseShow {...this.props}/>
+                                <BlogannoncelocationIntesseAnnonseShow {...this.props} />
 
 
 

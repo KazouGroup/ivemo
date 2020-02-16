@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Button } from "reactstrap";
+import {Button, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import moment from "moment";
 import PropTypes from "prop-types";
+import Swal from "sweetalert2";
 
 
 class BlogannoncelocationBycategorylocation extends Component {
@@ -14,7 +15,61 @@ class BlogannoncelocationBycategorylocation extends Component {
         this.state = {
             blogannoncelocation: {blogannoncelocations:[]},
             categoryannoncelocations:[],
-        }
+        };
+
+        this.deleteItem = this.deleteItem.bind(this);
+    }
+
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes-vous sûr de vouloir executer cette action",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                const url = route('blogannoncecategorylocationdelete_site',id);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update',
+                            message: 'Article de blog suprimée avec success'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'primary',
+                            placement: {
+                                from: 'bottom',
+                                align: 'right'
+                            },
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            },
+                        });
+                    /** End alert ***/
+                    this.loadItems();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
     }
 
     loadItems(){
@@ -95,6 +150,28 @@ class BlogannoncelocationBycategorylocation extends Component {
                                                     </Link>
                                                 </div>
                                                 <div className="card-body">
+                                                    {!$guest && (
+                                                        <>
+                                                            {($userIvemo.id === item.user_id && $userIvemo.id === item.user.id) && (
+                                                                <div className="row">
+                                                                    <div className="mx-auto">
+                                                                        <NavLink to={`/annonces/`} className="btn btn-sm btn-success" rel="tooltip" title="Editer" data-placement="bottom">
+                                                                            <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                        </NavLink>
+                                                                        <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
+                                                                            Supprimer cette annonce
+                                                                        </UncontrolledTooltip>
+                                                                        <Button
+                                                                            className="btn btn-sm btn-danger" onClick={() => this.deleteItem(item.id)} color="secondary" id="TooltipDelete">
+                                                                            <i className="now-ui-icons ui-1_simple-remove"/>
+                                                                        </Button>{" "}
+                                                                    </div>
+                                                                </div>
+
+                                                            )}
+
+                                                        </>
+                                                    )}
                                                     <h6 className="card-title text-center">
                                                         <NavLink to={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`} className="card-link"> {item.title}</NavLink>
                                                     </h6>

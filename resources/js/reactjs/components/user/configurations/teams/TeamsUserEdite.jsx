@@ -6,7 +6,7 @@ import {Button, Form, Input, InputGroup, Row, CardBody,Col,CardTitle} from "reac
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import NavlinkconfigurationUser from "../inc/NavlinkconfigurationUser";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill, Mixin, Toolbar } from 'react-quill';
 import '../../../../assets/css/ivemo.css'
 
 

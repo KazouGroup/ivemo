@@ -13,7 +13,7 @@ class AnnoncelocationIndex extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncelocationbytype: {annoncelocations:[]},
+            annoncelocations: [],
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -22,7 +22,7 @@ class AnnoncelocationIndex extends Component {
     loadItems(){
         let itemAnnoncelocation = this.props.match.params.annoncetype;
         let url = route('api.annoncelocationbyannoncetype_site', itemAnnoncelocation);
-        dyaxios.get(url).then(response => this.setState({annoncelocationbytype: response.data,}));
+        dyaxios.get(url).then(response => this.setState({annoncelocations: response.data.data,}));
     }
 
     deleteItem(id) {
@@ -46,8 +46,8 @@ class AnnoncelocationIndex extends Component {
 
 
                     let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.annoncelocationbytype.annoncelocations.filter(isNotId);
-                    this.setState({annoncelocationbytype: updatedItems});
+                    let updatedItems = this.state.annoncelocations.filter(isNotId);
+                    this.setState({annoncelocations: updatedItems});
 
                     /** Alert notify bootstrapp **/
                     $.notify({
@@ -88,9 +88,9 @@ class AnnoncelocationIndex extends Component {
     }
 
     render() {
-        const {annoncelocationbytype} = this.state;
-        const mapAnnoncelocations = annoncelocationbytype.annoncelocations.length ? (
-            annoncelocationbytype.annoncelocations.map(item => {
+        const {annoncelocations} = this.state;
+        const mapAnnoncelocations = annoncelocations.length ? (
+            annoncelocations.map(item => {
                 return(
                     <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem}/>
                 )
@@ -121,7 +121,7 @@ class AnnoncelocationIndex extends Component {
                             <div className="content-center">
                                 <div className="row">
                                     <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">Touver une maison ou chambre a louer </h3>
+                                        <h3 className="title">Touver une maison, une chambre ou un appartement à louer  </h3>
                                     </div>
                                 </div>
                             </div>

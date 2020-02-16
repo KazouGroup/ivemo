@@ -47,7 +47,7 @@ class AnnoncelocationService
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
                         ->whereIn('city_id',[$city->id])
-                        ->orderBy('created_at','DESC')->distinct()->get()->toArray();},
+                        ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();},
             ])->first();
 
         return $annoncesbycities;

@@ -62,6 +62,11 @@ Route::get(
 )->name('public_profile_annoncelocations.site');
 
 Route::get(
+    '@{user}/articles_locations',
+    'ProfileController@publicprofilarticleslocations'
+)->name('public_profile_articleslocations.site');
+
+Route::get(
     'profile/change_password',
     'ProfileController@change_password'
 )->name('change_password.site');

@@ -9,6 +9,8 @@ use App\Model\annoncelocation;
 use App\Model\annoncereservation;
 use App\Model\annoncetype;
 use App\Model\annoncevente;
+use App\Model\blogannoncelocation;
+use App\Model\blogannoncereservation;
 use App\Model\contactuser;
 use App\Model\reservation;
 use App\Model\user;
@@ -29,9 +31,9 @@ class ProfileController extends Controller
     {
         $this->middleware('auth',['except' => [
             'api','apiprofilepublique','apiannoncereservationbyprofilpublique','public_profile_send_message',
-            'apiannoncelocationbyprofilpublique','public_profile','publicprofilannoncereservations',
+            'apiannoncelocationbyprofilpublique','public_profile','publicprofilannoncereservations','apiprofilarticleslocations',
             'publicprofilannoncelocations','apiprofilannoncelocations','apiprofilannoncereservations',
-            'apiprofilannoncereserventes'
+            'apiprofilannoncereserventes','apiprofilarticlesreservations'
         ]]);
     }
     /**
@@ -154,6 +156,28 @@ class ProfileController extends Controller
             ->whereIn('user_id',[$user->id])
             ->whereIn('annoncetype_id',[1])
             ->distinct()->get()->toArray();
+
+        return response()->json($userannoncelocations, 200);
+    }
+
+    public function apiprofilarticleslocations(user $user)
+    {
+
+        $userannoncelocations = blogannoncelocation::where('status',1)
+            ->with('user','categoryannoncelocation')
+            ->whereIn('user_id',[$user->id])
+            ->distinct()->paginate(30)->toArray();
+
+        return response()->json($userannoncelocations, 200);
+    }
+
+    public function apiprofilarticlesreservations(user $user)
+    {
+
+        $userannoncelocations = blogannoncereservation::where('status',1)
+            ->with('user','categoryannoncereservation')
+            ->whereIn('user_id',[$user->id])
+            ->distinct()->paginate(30)->toArray();
 
         return response()->json($userannoncelocations, 200);
     }

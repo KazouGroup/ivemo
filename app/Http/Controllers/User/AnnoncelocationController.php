@@ -109,18 +109,28 @@ class AnnoncelocationController extends Controller
         return response()->json($annoncelocations, 200);
     }
 
-    public function apiannoncelocationbyannoncetype($annoncetype)
+    public function apiannoncelocationbyannoncetype(annoncetype $annoncetype)
     {
-        $annonces = new AnnoncetypeResource(annoncetype::whereSlug($annoncetype)
-            ->first());
+       $annonceslocations = $annoncetype->annoncelocations()->whereIn('annoncetype_id',[$annoncetype->id])
+           ->with('user','categoryannoncelocation','city','annoncetype')
+           ->orderBy('created_at','DESC')
+           ->where('status',1)
+           ->distinct()->paginate(30)->toArray();
 
-        return response()->json($annonces, 200);
+        return response()->json($annonceslocations, 200);
     }
 
-    public function apiannoncelocationbycategoryannoncelocation($annoncetype,$categoryannoncelocation)
+    public function apiannoncelocationbycategoryannoncelocation(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation)
     {
-        $annoncelocation = new CategoryannoncelocationResource(categoryannoncelocation::whereSlug($categoryannoncelocation)
-            ->first());
+        $annoncelocation = categoryannoncelocation::whereSlug($categoryannoncelocation->slug)
+            ->with([
+                'annoncelocations' => function ($q) use ($annoncetype,$categoryannoncelocation){
+                    $q->where('status',1)
+                        ->with('user','categoryannoncelocation','city','annoncetype')
+                        ->whereIn('annoncetype_id',[$annoncetype->id])
+                        ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
+                        ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();},
+            ])->first();
         return response()->json($annoncelocation, 200);
     }
 
@@ -233,8 +243,8 @@ class AnnoncelocationController extends Controller
      */
     public function destroy(annoncetype $annoncetype,$id)
     {
-        //$annoncelocation = annoncelocation::findOrFail($id);
-        //$annoncelocation->delete();
+        $annoncelocation = annoncelocation::findOrFail($id);
+        $annoncelocation->delete();
         return ['message' => 'message deleted '];
 
 

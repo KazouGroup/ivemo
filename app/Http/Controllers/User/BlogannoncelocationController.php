@@ -25,10 +25,10 @@ class BlogannoncelocationController extends Controller
         ]]);
     }
 
-    public function apiannonceblogcategorylocations($categoryannoncelocation)
+    public function apiannonceblogcategorylocations(categoryannoncelocation $categoryannoncelocation)
     {
-        $blogannoncelocations = new CategoryannoncelocationResource(categoryannoncelocation::whereSlug($categoryannoncelocation)
-            ->first());
+        $blogannoncelocations = BlogannoncelocationService::apiannonceblogcategorylocations($categoryannoncelocation);
+
         return response()->json($blogannoncelocations, 200);
     }
 
@@ -145,6 +145,9 @@ class BlogannoncelocationController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $blogannoncelocation = blogannoncelocation::findOrFail($id);
+       $blogannoncelocation->delete();
+       return ['message' => 'message deleted '];
+
     }
 }

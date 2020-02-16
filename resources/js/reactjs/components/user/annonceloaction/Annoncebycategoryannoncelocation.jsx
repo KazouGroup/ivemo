@@ -17,10 +17,11 @@ class Annoncebycategoryannoncelocation extends Component {
             annoncelocationbycategory: {annoncelocations:[]},
             cityannoncelocations:[],
 
-        }
+        };
+        this.deleteItem = this.deleteItem.bind(this);
     }
 
-    loadItem(){
+    loadItems(){
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let url = route('api.annoncelocationbycategoryannoncelocations_site',[itemannoncetype,itemCategoryannoncelocation]);
@@ -67,9 +68,9 @@ class Annoncebycategoryannoncelocation extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.props.history.push('/profile/personal_mails/annonces_locations/');
-
+                    this.loadItems();
                 }).catch(() => {
+
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
                         allow_dismiss: false,
@@ -87,7 +88,7 @@ class Annoncebycategoryannoncelocation extends Component {
 
     // lifecycle method
     componentDidMount() {
-        this.loadItem();
+        this.loadItems();
     }
 
     getcountcategoryannonceString (annoncelocations_count) {
@@ -106,7 +107,7 @@ class Annoncebycategoryannoncelocation extends Component {
         return (
             <>
                 <Helmet>
-                    <title>{`${annoncelocationbycategory.name || 'Ivemo'} - `} Ivemo</title>
+                    <title>Locations {`${annoncelocationbycategory.name || 'Ivemo'} - `} Ivemo</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
@@ -155,7 +156,6 @@ class Annoncebycategoryannoncelocation extends Component {
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                            <Categoriesannoncereselocation/>
 
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingThree">
@@ -189,11 +189,8 @@ class Annoncebycategoryannoncelocation extends Component {
 
                                                             </div>
 
-
-
-
-
-
+                                                            <Categoriesannoncereselocation/>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>

@@ -21,3 +21,13 @@ Route::get(
     'ProfileController@apiprofilannoncereserventes'
 )->name('api.profilpublique_annonceventes');
 
+Route::get(
+    '@{user}/articles_locations',
+    'ProfileController@apiprofilarticleslocations'
+)->name('api.profilpublique_articleslocations');
+
+Route::get(
+    '@{user}/articles_reservations',
+    'ProfileController@apiprofilarticlesreservations'
+)->name('api.profilpublique_articlesreservations');
+

@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import {Link,NavLink } from "react-router-dom";
 import moment from 'moment'
+import {Button, UncontrolledTooltip} from "reactstrap";
+import Swal from "sweetalert2";
 
 require("moment/min/locales.min");
 moment.locale('fr');
@@ -11,9 +13,8 @@ class BlogannoncelocationIntesseAnnonseShow extends Component {
         this.state = {
             blogsinteresse:[],
             //
-        }
+        };
     }
-
 
     componentDidMount() {
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;

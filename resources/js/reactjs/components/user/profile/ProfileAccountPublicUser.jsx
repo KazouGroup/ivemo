@@ -113,6 +113,49 @@ class ProfileAccountPublicUser extends Component {
                                             </div>
                                         </div>
 
+                                         <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                            <div className="card card-plain">
+                                                                <div className="card-header" role="tab" id="headingTwo">
+                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                        <b>Article de {userPublick.first_name}</b>
+                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
+                                                                    </a>
+                                                                </div>
+
+                                                                <div id="collapseTwo" className="collapse show" role="tabpanel" aria-labelledby="headingTwo">
+                                                                    <div className="card-body">
+                                                                        <table>
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <td> <Link to={`/articles_reservations/`}>Articles sur la locations</Link></td>
+                                                                                <td className="text-right"> 15 articles</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Articles sur la reservations</a></td>
+                                                                                <td className="text-right"> 10 articles</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Articles sur la ventes</a></td>
+                                                                                <td className="text-right"> 20 articles</td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
 
                                     </div>
 
@@ -398,19 +441,10 @@ class ProfileAccountPublicUser extends Component {
                                                 </div>
 
                                                 <FormContactProfileAccountUser {...this.props}/>
+
                                             </div>
                                         </div>
                                     </div>
-
-
-
-
-
-
-
-
-
-
 
                                 </div>
                             </div>

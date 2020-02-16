@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import {NavLink, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
 
 
@@ -76,4 +76,4 @@ Categoriesannoncereselocation.propTypes = {
         "orange",
     ]),
 };
-export default Categoriesannoncereselocation;
+export default withRouter(Categoriesannoncereselocation);
