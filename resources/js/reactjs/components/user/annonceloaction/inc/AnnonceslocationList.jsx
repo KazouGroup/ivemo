@@ -112,25 +112,25 @@ class AnnonceslocationList extends Component {
                                         <UncontrolledTooltip placement="bottom" target="TooltipPhone" delay={0}>
                                             3426712192
                                         </UncontrolledTooltip>
-                                        <Button className="btn btn-sm btn-info"  color="secondary" id="TooltipPhone">
+                                        <Button className="btn btn-icon btn-sm btn-info"  color="secondary" id="TooltipPhone">
                                             <i className="now-ui-icons tech_mobile"/>
                                         </Button>
-                                        <NavLink to={`/annonces/`} className="btn btn-sm btn-primary">
+                                        <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-primary">
                                             <i className="now-ui-icons location_pin"/>
                                         </NavLink>
 
                                         {!$guest && (
                                             <>
-                                                {$userIvemo.id === this.props.user_id && (
+                                                {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
                                                     <>
-                                                        <NavLink to={`/annonces/`} className="btn btn-sm btn-success btn-sm" rel="tooltip" title="Editer" data-placement="bottom">
+                                                        <NavLink to={`/annonces/`} className="btn btn-sm btn-success btn-icon btn-sm" rel="tooltip" title="Editer" data-placement="bottom">
                                                             <i className="now-ui-icons ui-1_simple-delete"/>
                                                         </NavLink>
                                                         <UncontrolledTooltip placement="bottom" target="TooltipDelete">
                                                             Supprimer cette annonce
                                                         </UncontrolledTooltip>
                                                         <Button
-                                                            className="btn btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} id="TooltipDelete">
+                                                            className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} id="TooltipDelete">
                                                             <i className="now-ui-icons ui-1_simple-remove"/>
                                                         </Button>{" "}
                                                     </>

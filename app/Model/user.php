@@ -12,6 +12,7 @@ use Laravel\Passport\HasApiTokens;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Str;
 
 class user extends Authenticatable implements MustVerifyEmail,Auditable
 {
@@ -51,10 +52,13 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
      protected static function boot()
           {
               parent::boot();
+
               static::creating(function ($user){
                   $user->syncRoles('1');
+                  $myslug = Str::uuid();
                   $user->profile()->create([
                       'full_name' => $user->first_name,
+                      'slug' => $myslug,
                   ]);
                   if (auth()->check()){
                       $user->user_id = auth()->id();

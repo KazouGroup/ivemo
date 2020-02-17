@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Button } from "reactstrap";
+import {Button, Navbar, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import FormcontactuseronlocationShow from "./inc/FormcontactuseronlocationShow";
@@ -13,7 +13,7 @@ class Annoncelocationbycategorycityshow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncelocation:{categoryannoncelocation:[],user:[],city:[]},
+            annoncelocation:{categoryannoncelocation:[],user:{profile:[]},city:[]},
         };
         this.deleteItem = this.deleteItem.bind(this);
     }
@@ -95,9 +95,9 @@ class Annoncelocationbycategorycityshow extends Component {
 
                 <div className="landing-page sidebar-collapse">
 
-                    <nav className="navbar navbar-expand-lg bg-primary">
+                    <Navbar className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
-                    </nav>
+                    </Navbar>
 
                     <div className="wrapper">
 
@@ -218,43 +218,64 @@ class Annoncelocationbycategorycityshow extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="text-right ml-auto">
-                                                        <Button className="btn btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
-                                                            <i className="now-ui-icons tech_mobile"></i>
+                                                        <Button className="btn btn-icon btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
+                                                            <i className="now-ui-icons tech_mobile"/>
                                                         </Button>
-                                                        <a href="https://www.kazoutech.com" className="btn btn-sm btn-primary" target="_banck">
-                                                            <i className="now-ui-icons objects_globe"></i>
+                                                        <a href="https://www.kazoutech.com" className="btn btn-icon btn-sm btn-primary" target="_banck">
+                                                            <i className="now-ui-icons objects_globe">/</i>
                                                         </a>
-                                                        <NavLink to={`/annonces/`} className="btn btn-sm btn-success" rel="tooltip" title="Editer" data-placement="bottom">
-                                                            <i className="now-ui-icons ui-1_simple-delete"></i>
-                                                        </NavLink>
-                                                        <Button onClick={() => this.deleteItem(annoncelocation.id)}
-                                                            className="btn btn-sm btn-danger" rel="tooltip" title="Supprimer" data-placement="bottom">
-                                                            <i className="now-ui-icons ui-1_simple-remove"/>
-                                                        </Button>{" "}
+
+                                                        {!$guest && (
+                                                            <>
+                                                                <UncontrolledTooltip placement="bottom" target="TooltipEditer">
+                                                                    Editer cette annonce
+                                                                </UncontrolledTooltip>
+                                                                <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-success" id="TooltipEditer">
+                                                                    <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                </NavLink>
+
+                                                                <UncontrolledTooltip placement="bottom" target="TooltipDelete">
+                                                                    Supprimer cette annonce
+                                                                </UncontrolledTooltip>
+                                                                <Button onClick={() => this.deleteItem(annoncelocation.id)}
+                                                                        className="btn btn-icon btn-sm btn-danger" id="TooltipDelete">
+                                                                    <i className="now-ui-icons ui-1_simple-remove"/>
+                                                                </Button>{" "}
+                                                            </>
+                                                        )}
+
                                                     </div>
                                                 </div>
                                                 <div className="card-title">
-                                                    <i className="now-ui-icons location_pin"></i> <b>91 RUE DU FAUBOURG SAINT HONORE 75008 PARIS 8EME</b>
+                                                    <i className="now-ui-icons location_pin"/> <b>91 RUE DU FAUBOURG SAINT HONORE 75008 PARIS 8EME</b>
                                                     <br />
                                                     <div className="container">
                                                         <div className="row">
                                                             <div className="col-md-6 col-6">
-                                                                <a href="https://www.kazoutech.com" title="Profil agence">
+                                                                <UncontrolledTooltip placement="bottom" target="TooltipShowprofile">
+                                                                    Profile de l'agence
+                                                                </UncontrolledTooltip>
+                                                                <Link to={`/@${annoncelocation.user.slug}/annonces_locations/`} title="Profil agence" id="TooltipShowprofile">
                                                                     <small><b>Consulter le profil de l'agence</b></small>
-                                                                </a>
+                                                                </Link>
                                                             </div>
-                                                            <div className="col-md-6 col-6">
-                                                                <a href="https://www.kazoutech.com" title="Site internet de agence">
-                                                                    <small><b>Consulter le site de l'agence</b></small>
-                                                                </a>
-                                                            </div>
+                                                            {annoncelocation.user.profile.site_internet && (
+                                                                <div className="col-md-6 col-6">
+                                                                    <a href={`${annoncelocation.user.profile.site_internet}`} title="Site internet de agence">
+                                                                        <small><b>Consulter le site de l'agence</b></small>
+                                                                    </a>
+                                                                </div>
+                                                            )}
+
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <hr />
-                                                <b>Informations légales de l'agence</b>
-                                                <br />
-                                                <span>
+                                                {annoncelocation.user.profile.description && (
+                                                    <>
+                                                        <b>Informations légales de l'agence</b>
+                                                        <br />
+                                                        <span>
                                                     EIFFEL HOUSING SAS, au capital de 10000,00€
 
                                                     Carte professionnelle 6282 délivrée par la Préfecture de Paris.
@@ -264,7 +285,10 @@ class Annoncelocationbycategorycityshow extends Component {
                                                     Garantie Financière Galian pour un montant de 120000,00€
 
                                                     RCS : Paris 801151929
-                                                </span>
+                                                    </span>
+                                                    </>
+                                                )}
+
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">

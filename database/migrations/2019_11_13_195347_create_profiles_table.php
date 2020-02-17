@@ -19,6 +19,8 @@ class CreateProfilesTable extends Migration
             $table->string('twitter_link')->nullable();
             $table->string('site_internet')->nullable();
             $table->string('full_name')->nullable();
+            $table->string('slug')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
 
             $table->unsignedBigInteger('user_id')->nullable()->index();

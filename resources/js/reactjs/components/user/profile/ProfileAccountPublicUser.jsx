@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Button } from "reactstrap";
+import { Button,Navbar } from "reactstrap";
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterUserSite from "../../inc/user/FooterUserSite";
 import FormContactProfileAccountUser from "./form/FormContactProfileAccountUser";
@@ -39,9 +39,9 @@ class ProfileAccountPublicUser extends Component {
 
                 <div className="profile-page sidebar-collapse">
 
-                    <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="500">
+                    <Navbar className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="500" >
                         <NavUserSite />
-                    </nav>
+                    </Navbar>
 
                     <div className="wrapper">
 

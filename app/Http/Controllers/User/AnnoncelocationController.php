@@ -244,16 +244,12 @@ class AnnoncelocationController extends Controller
     public function destroy(annoncetype $annoncetype,$id)
     {
         $annoncelocation = annoncelocation::findOrFail($id);
-        $annoncelocation->delete();
-        return ['message' => 'message deleted '];
-
-
-       // //$this->authorize('update',$contactuser);
-       // if (auth()->user()->id === $annoncelocation->user_id){
-       //     //$annoncelocation->delete();
-       //     //return ['message' => 'message deleted '];
-       // }else{
-       //     abort(404);
-       // }
+        $this->authorize('update',$annoncelocation);
+        if (auth()->user()->id === $annoncelocation->user_id){
+            $annoncelocation->delete();
+            return ['message' => 'message deleted '];
+        }else{
+            abort(404);
+        }
     }
 }
