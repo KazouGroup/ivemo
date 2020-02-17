@@ -36,6 +36,9 @@ class UserResource extends JsonResource
             'followers' => $this->followers()->get()->count(),
             'profile' => $this->profile,
             //'provider' => $this->provider,
+            'annoncelocations_count' => $this->annoncelocations_count,
+            'annoncereservations_count' => $this->annoncereservations_count,
+            'annonceventes_count' => $this->annonceventes_count,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
         ];

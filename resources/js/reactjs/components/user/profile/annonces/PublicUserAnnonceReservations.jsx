@@ -13,8 +13,7 @@ class PublicUserAnnonceReservations extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userPublick:[],
-            annoncereservations:[],
+            useranoncereservationPublick:{annoncereservations:[]},
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -38,11 +37,6 @@ class PublicUserAnnonceReservations extends Component {
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
-
-                    let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.annoncereservations.filter(isNotId);
-                    this.setState({annoncereservations: updatedItems});
-
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
@@ -61,6 +55,7 @@ class PublicUserAnnonceReservations extends Component {
                             },
                         });
                     /** End alert ***/
+                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -78,8 +73,7 @@ class PublicUserAnnonceReservations extends Component {
 
     loadItems(){
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.profilpublique_annoncereservations',[itemuser])).then(response => this.setState({annoncereservations: response.data,}));
-        dyaxios.get(route('api.profilpublique',[itemuser])).then(response => this.setState({userPublick: response.data,}));
+        fetch(route('api.profilpublique_annoncereservations',[itemuser])).then(res => res.json()).then((result) => {this.setState({useranoncereservationPublick: result})})
     }
 
     // lifecycle method
@@ -88,9 +82,9 @@ class PublicUserAnnonceReservations extends Component {
     }
 
     render() {
-        const {userPublick,annoncereservations} = this.state;
-        const mapAnnoncereservations = annoncereservations.length ? (
-            annoncereservations.map(item => {
+        const {useranoncereservationPublick} = this.state;
+        const mapAnnoncereservations = useranoncereservationPublick.annoncereservations.length ? (
+            useranoncereservationPublick.annoncereservations.map(item => {
                 return(
 
                     <AnnoncereservationList key={item.id} {...item} deleteItem={this.deleteItem}/>
@@ -102,7 +96,7 @@ class PublicUserAnnonceReservations extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Annonces reservations {`${userPublick.first_name || 'Profile'}`} - Ivemo</title>
+                    <title>Annonces reservations {`${useranoncereservationPublick.first_name || 'Profile'}`} - Ivemo</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
@@ -119,7 +113,7 @@ class PublicUserAnnonceReservations extends Component {
                             <div className="content-center">
                                 <div className="row">
                                     <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">Annonce reservations de {userPublick.first_name}</h3>
+                                        <h3 className="title">Annonce reservations de {useranoncereservationPublick.first_name}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -151,12 +145,12 @@ class PublicUserAnnonceReservations extends Component {
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingOne">
                                                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <b>Annonce de {userPublick.first_name}</b>
+                                                                        <b>Annonce de {useranoncereservationPublick.first_name}</b>
                                                                         <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
 
-                                                                <NavLinkPublicAnnonceUser {...this.props}/>
+                                                                <NavLinkPublicAnnonceUser {...this.props} {...useranoncereservationPublick}/>
 
 
                                                             </div>

@@ -6,35 +6,16 @@ class NavLinkPublicAnnonceUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncereservations: [],
-            annoncelocations: [],
+           //
         };
 
     }
-
-    loadItem() {
-        let itemuser = this.props.match.params.user;
-        fetch(route('api.profilpublique_annoncereservations',[itemuser])).then(res => res.json()).then((result) => {
-            this.setState({
-                annoncereservations: [...result]
-            });
-        });
-        fetch(route('api.profilpublique_annoncelocations',[itemuser])).then(res => res.json()).then((result) => {
-            this.setState({
-                annoncelocations: [...result]
-            });
-        })
-    }
-
     // lifecycle method
     componentDidMount() {
-        this.loadItem();
-
+        //
     }
 
     render() {
-        const { annoncelocations, annoncereservations } = this.state;
-        let itemuser = this.props.match.params.user;
         return (
 
             <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
@@ -43,30 +24,33 @@ class NavLinkPublicAnnonceUser extends Component {
                         <tbody>
                         <tr>
                             <td>
-                                <NavLink to={`/@${itemuser}/annonces_locations/`}>
+                                <NavLink to={`/@${this.props.slug}/annonces_locations/`}>
                                     Annones <b>locations</b>
                                 </NavLink>
                             </td>
-                            {annoncelocations.length > 0 && (
-                                <td className="text-right"> {annoncelocations.length} annonces</td>
+                            {this.props.annoncelocations_count && (
+                                <td className="text-right"> {this.props.annoncelocations_count} annonces</td>
                             )}
                         </tr>
                         <tr>
                             <td>
-                                <NavLink to={`/@${itemuser}/annonces_reservations/`}>
+                                <NavLink to={`/@${this.props.slug}/annonces_reservations/`}>
                                     Annonces <b>reservations</b>
                                 </NavLink>
                             </td>
-                            {annoncereservations.length > 0 && (
-                                <td className="text-right"> {annoncereservations.length} annonces</td>
+                            {this.props.annoncereservations_count && (
+                                <td className="text-right"> {this.props.annoncereservations_count} annonces</td>
                             )}
                         </tr>
                         <tr>
                             <td>
-                                <NavLink to={`/`}>
-                                    Annonces vente
+                                <NavLink to={`/@${this.props.slug}/annonces_ventes/`}>
+                                    Annonces <b>ventes</b>
                                 </NavLink>
                             </td>
+                            {this.props.annonceventes_count && (
+                                <td className="text-right"> {this.props.annonceventes_count} annonces</td>
+                            )}
                         </tr>
                         </tbody>
                     </table>

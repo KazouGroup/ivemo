@@ -13,7 +13,7 @@ class Annoncelocationbycategorycityshow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncelocation:{categoryannoncelocation:[],user:[]},
+            annoncelocation:{categoryannoncelocation:[],user:[],city:[]},
         };
         this.deleteItem = this.deleteItem.bind(this);
     }
@@ -146,22 +146,29 @@ class Annoncelocationbycategorycityshow extends Component {
                                             <br />
                                             <div className="d-flex align-items-center">
                                                 <div className="text-left pull-left">
-                                                    <NavLink to={`/annonce/show/`}>
-                                                        <h6 className="text-info ml-auto mr-auto">
-                                                            Appartement
-                                                                        </h6>
-                                                    </NavLink>
+                                                    <h6 className={`text-${annoncelocation.categoryannoncelocation.color_name} ml-auto mr-auto`}>
+                                                        {annoncelocation.categoryannoncelocation.name}
+                                                    </h6>
                                                 </div>
 
                                                 <div className="text-center ml-auto">
+                                                    <h6 className="text-dark">{annoncelocation.pieces} pièces . {annoncelocation.rooms && (<>{annoncelocation.rooms} chambres</>)}. {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
+                                                </div>
+
+                                                {/*
+                                                  <div className="text-center ml-auto">
                                                     <a href="#pablo" className="btn btn-primary btn-round">
                                                         <i className="now-ui-icons ui-2_favourite-28"></i> Dejà sauvegarder
                                                 </a>
                                                 </div>
+                                                */}
+
+
                                                 <div className="text-right ml-auto">
                                                     <h5 className="text-success"><b>{annoncelocation.price} <small>FCFA/mois</small></b></h5>
                                                 </div>
                                             </div>
+
 
 
                                         </div>

@@ -13,8 +13,7 @@ class PublicUserAnnonceLocations extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userPublick:[],
-            annoncelocations:[],
+            useranoncelocationPublick:{annoncelocations: []},
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -38,11 +37,6 @@ class PublicUserAnnonceLocations extends Component {
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
-
-                    let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.annoncelocations.filter(isNotId);
-                    this.setState({annoncelocations: updatedItems});
-
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
@@ -61,6 +55,7 @@ class PublicUserAnnonceLocations extends Component {
                             },
                         });
                     /** End alert ***/
+                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -78,8 +73,7 @@ class PublicUserAnnonceLocations extends Component {
 
     loadItems(){
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.profilpublique_annoncelocations',[itemuser])).then(response => this.setState({annoncelocations: response.data,}));
-        dyaxios.get(route('api.profilpublique',[itemuser])).then(response => this.setState({userPublick: response.data,}));
+        dyaxios.get(route('api.profilpublique_annoncelocations',[itemuser])).then(response => this.setState({useranoncelocationPublick: response.data,}));
     }
 
     // lifecycle method
@@ -88,9 +82,9 @@ class PublicUserAnnonceLocations extends Component {
     }
 
     render() {
-        const {annoncelocations,userPublick} = this.state;
-        const mapAnnoncelocations = annoncelocations.length ? (
-            annoncelocations.map(item => {
+        const {useranoncelocationPublick} = this.state;
+        const mapAnnoncelocations = useranoncelocationPublick.annoncelocations.length ? (
+            useranoncelocationPublick.annoncelocations.map(item => {
                 return(
 
                     <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem}/>
@@ -102,7 +96,7 @@ class PublicUserAnnonceLocations extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Annonces locations {`${userPublick.first_name || 'Profile'}`} - Ivemo</title>
+                    <title>Annonces locations {`${useranoncelocationPublick.first_name || 'Profile'}`} - Ivemo</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
@@ -119,7 +113,7 @@ class PublicUserAnnonceLocations extends Component {
                             <div className="content-center">
                                 <div className="row">
                                     <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">Toutes les annonces location de {userPublick.first_name}</h3>
+                                        <h3 className="title">Toutes les annonces location de {useranoncelocationPublick.first_name}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -151,12 +145,12 @@ class PublicUserAnnonceLocations extends Component {
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingOne">
                                                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <b>Annonce de {userPublick.first_name}</b>
+                                                                        <b>Annonce de {useranoncelocationPublick.first_name}</b>
                                                                         <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
 
-                                                                <NavLinkPublicAnnonceUser {...this.props}/>
+                                                                <NavLinkPublicAnnonceUser {...this.props} {...useranoncelocationPublick}/>
 
                                                             </div>
 

@@ -11,7 +11,9 @@ class profile extends Model implements Auditable
 {
     use AuditableTrait;
 
-    protected $guarded = [];
+   protected $guarded = [
+           'created_at','updated_at','user_id',
+    ];
 
     protected static function boot()
     {

@@ -102,7 +102,7 @@ class ProfileAccountPublicUser extends Component {
                                                                     </a>
                                                                 </div>
 
-                                                                <NavLinkPublicAnnonceUser {...this.props}/>
+                                                                <NavLinkPublicAnnonceUser {...this.props} {...userPublick}/>
 
 
                                                             </div>

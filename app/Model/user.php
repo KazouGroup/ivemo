@@ -22,7 +22,11 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
      *
      * @var array
      */
-    protected $guarded = [];
+    protected $guard_name = 'web';
+
+    protected $guarded = [
+           'id','created_at', 'updated_at',
+    ];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -43,6 +47,27 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
         'birthday' => 'date:d/m/Y',
         'email_verified_at' => 'datetime',
     ];
+
+     protected static function boot()
+          {
+              parent::boot();
+              static::creating(function ($user){
+                  $user->syncRoles('1');
+                  $user->profile()->create([
+                      'full_name' => $user->first_name,
+                  ]);
+                  if (auth()->check()){
+                      $user->user_id = auth()->id();
+                  }
+              });
+              static::updating(function($user){
+                  if (auth()->check()){
+                      $user->user_id = auth()->id();
+                  }
+              });
+
+          }
+
     /**
      * Send the email verification notification.
      *
@@ -53,25 +78,6 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
         $this->notify(new VerifyEmailUsers());
     }
 
-    protected static function boot()
-    {
-        parent::boot();
-        static::creating(function ($user){
-            $user->syncRoles('1');
-            $user->profile()->create([
-                'full_name' => $user->first_name,
-            ]);
-            if (auth()->check()){
-                $user->user_id = auth()->id();
-            }
-        });
-        static::updating(function($user){
-            if (auth()->check()){
-                $user->user_id = auth()->id();
-            }
-        });
-
-    }
 
     public function isOnline()
     {
@@ -82,6 +88,7 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
     {
         return $this->hasOne(profile::class,'user_id');
     }
+
 
     public function getDataBirthdayItAttribute()
     {
@@ -119,6 +126,11 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
     public function annoncereservations()
     {
         return $this->hasMany(annoncereservation::class, 'user_id');
+    }
+
+    public function annonceventes()
+    {
+        return $this->hasMany(annoncevente::class, 'user_id');
     }
 
 }
