@@ -133,6 +133,11 @@ class Annoncelocationbycity extends Component {
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+                                        <div className="submit text-left">
+                                            <Link to={`/annonces_locations/locations/${itemCategoryannoncelocation}/`} type="button" className="btn btn-neutral btn-sm">
+                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos résultats </b>
+                                            </Link>
+                                        </div>
 
 
                                         <br/>
