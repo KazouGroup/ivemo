@@ -20,7 +20,7 @@ class AnnoncelocationService
                     ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id]);
             }])->orderBy('annoncelocations_count','desc')
             ->take(6)
-            ->distinct()->get();;
+            ->distinct()->get();
 
         return $annoncesbycities;
     }

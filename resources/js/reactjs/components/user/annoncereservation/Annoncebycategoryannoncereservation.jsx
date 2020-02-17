@@ -23,7 +23,7 @@ class Annoncebycategoryannoncereservation extends Component {
         let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
         let url = route('api.annoncelocationbycategoryannoncereservations_site',[itemannoncetype,itemCategoryannoncereservation]);
         dyaxios.get(url).then(response => this.setState({annoncereservationbycategory: response.data,}));
-        fetch(route('api.citiesannonces_reservations_site')).then(res => res.json()).then((result) => {
+        fetch(route('api.annoncereservationbycategorycount_site',[itemCategoryannoncereservation])).then(res => res.json()).then((result) => {
             this.setState({
                 citiesannoncesreservations: [...result]
             });
@@ -33,6 +33,17 @@ class Annoncebycategoryannoncereservation extends Component {
     // lifecycle method
     componentDidMount() {
         this.loadItem();
+    }
+
+    getcountcategoryannonceString (annoncereservations_count) {
+        annoncereservations_count = annoncereservations_count +'';
+        if (annoncereservations_count < 1000) {
+            return annoncereservations_count;
+        }
+        if (annoncereservations_count < 10000) {
+            return annoncereservations_count.charAt(0) + ',' + annoncereservations_count.substring(1);
+        }
+        return (annoncereservations_count/1000).toFixed(annoncereservations_count % 1000 !== 0)+'k';
     }
 
     render() {
@@ -108,50 +119,18 @@ class Annoncebycategoryannoncereservation extends Component {
                                                                                 <tr key={item.id}>
                                                                                     <td>
                                                                                         <NavLink to={`/annonces_reservations/${annoncetype}/${annoncereservationbycategory.slug}/${item.slug}/`}>
-                                                                                            Reserver un(e) <strong>{annoncereservationbycategory.name}</strong> dans la ville de <strong> {item.name}</strong>
+                                                                                            Reserver un(e) <strong>{annoncereservationbycategory.name}</strong> à <strong> {item.name}</strong>
                                                                                         </NavLink>
                                                                                     </td>
+                                                                                    <td className="text-right"> {this.getcountcategoryannonceString(item.annoncereservations_count)} annonces</td>
                                                                                 </tr>
                                                                             ))}
 
-
-
-
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
                                                                 </div>
 
-                                                            </div>
-
-
-                                                            <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingThree">
-                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                                        <b>Autres transactions à Douala </b>
-                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
-                                                                    </a>
-                                                                </div>
-                                                                <div id="collapseThree" className="collapse" role="tabpanel" aria-labelledby="headingThree">
-                                                                    <div className="card-body">
-                                                                        <table>
-                                                                            <tbody>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Toutes les ventes de maison Douala</a></td>
-                                                                                <td className="text-right"> 200 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Toutes les ventes de terrains Douala</a></td>
-                                                                                <td className="text-right"> 1 300 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Tous les achats de maison de prestige Douala</a></td>
-                                                                                <td className="text-right"> 380 annonces</td>
-                                                                            </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
                                                             </div>
 
                                                         </div>
@@ -162,13 +141,6 @@ class Annoncebycategoryannoncereservation extends Component {
 
 
                                     </div>
-
-
-
-
-
-
-
 
                                 </div>
                             </div>

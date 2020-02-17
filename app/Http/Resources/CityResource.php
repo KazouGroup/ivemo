@@ -15,14 +15,6 @@ class CityResource extends JsonResource
     public function toArray($request)
     {
 
-        $annoncereservations = $this->annoncereservations()->with('user','categoryannoncereservation','city','annoncetype')
-            ->where('status',1)
-            ->whereIn('city_id',[$this->id])
-            ->orderBy('created_at','DESC')
-            ->where(function ($q){
-                $q->whereIn('annoncetype_id',[3]);
-            })->distinct()->get()->toArray();
-
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -31,7 +23,6 @@ class CityResource extends JsonResource
             'photo' => $this->photo,
             'slug' => $this->slug,
             'user' => $this->user,
-            'annoncereservations' => $annoncereservations,
             'annoncereservations_count' => $this->annoncereservations_count,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,

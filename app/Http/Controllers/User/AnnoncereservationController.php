@@ -12,6 +12,7 @@ use App\Http\Resources\CityResource;
 use App\Model\annoncereservation;
 use App\Model\annoncetype;
 use App\Model\categoryannoncereservation;
+use App\Services\AnnoncereservationService;
 use App\Services\ContactuserService;
 use App\Model\contactuser;
 use App\Model\city;
@@ -93,18 +94,32 @@ class AnnoncereservationController extends Controller
         return response()->json($annoncereservations, 200);
     }
 
-    public function apiannoncereservationbyannoncetype ($annoncetype)
+    public function apiannoncereservationbyannoncetype(annoncetype $annoncetype)
     {
-        $annonces = new AnnoncetypeResource(annoncetype::whereSlug($annoncetype)
-            ->first());
+        $annonces = annoncetype::whereSlug($annoncetype->slug)
+            ->with([
+                'annoncereservations' => function ($q) use ($annoncetype){
+                    $q->where('status',1)
+                        ->whereIn('annoncetype_id',[$annoncetype->id])
+                        ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
+                        ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();
+                },
+            ])->first();
 
         return response()->json($annonces, 200);
     }
 
-    public function apiannoncelocationbycategoryannoncereservation($annoncetype,$categoryannoncereservation)
+    public function apiannoncelocationbycategoryannoncereservation(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation)
     {
-        $annoncereservation = new CategoryannoncereservationResource(categoryannoncereservation::whereSlug($categoryannoncereservation)
-            ->first());
+        $annoncereservation = categoryannoncereservation::whereSlug($categoryannoncereservation->slug)
+            ->with([
+                'annoncereservations' => function ($q) use ($annoncetype,$categoryannoncereservation){
+                    $q->where('status',1)
+                        ->whereIn('annoncetype_id',[$annoncetype->id])
+                        ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
+                        ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
+                        ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();},
+            ])->first();
         return response()->json($annoncereservation, 200);
     }
 
@@ -122,12 +137,21 @@ class AnnoncereservationController extends Controller
 
     public function apiannoncereservationbycity(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city)
     {
-        $annoncereservations = $city->annoncereservations()->whereIn('city_id',[$city->id])
-            ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
-            ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
-            ->whereIn('annoncetype_id',[$annoncetype->id])
-            ->orderBy('created_at','DESC')->where('status',1)
-            ->distinct()->get()->toArray();
+        $annoncereservations= AnnoncereservationService::apiannoncereservationbycity($annoncetype,$categoryannoncereservation,$city);
+
+        return response()->json($annoncereservations, 200);
+    }
+
+    public function apiannoncereservationbycategorycount(categoryannoncereservation $categoryannoncereservation)
+    {
+        $annoncereservations = AnnoncereservationService::apiannoncereservationbycategorycount($categoryannoncereservation);
+
+        return response()->json($annoncereservations, 200);
+    }
+
+    public function apiannoncereservationcategorybycitycount(categoryannoncereservation $categoryannoncereservation,city $city)
+    {
+        $annoncereservations = AnnoncereservationService::apiannoncereservationcategorybycitycount($categoryannoncereservation,$city);
 
         return response()->json($annoncereservations, 200);
     }

@@ -6,13 +6,14 @@ import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import AnnoncereservationList from "./AnnoncereservationList";
 import PropTypes from "prop-types";
+import Categoriesannoncereservation from "./inc/Categoriesannoncereservation";
 
 
 class Annoncebycategoryannoncereservationcity extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncereservationbycity:[],
+            annoncereservationbycity:{annoncereservations:[]},
             categoryannoncereservations: [],
             citiesannoncesreservations: [],
             annoncereservationbycategory: [],
@@ -30,9 +31,9 @@ class Annoncebycategoryannoncereservationcity extends Component {
         let lien = route('api.annoncelocationbycategoryannoncereservations_site',[itemannoncetype,itemCategoryannoncereservation]);
         dyaxios.get(lien).then(response => this.setState({annoncereservationbycategory: response.data,}));
         /* Ici c'est pour recuperer les categories*/
-        dyaxios.get(route('api.categoryannoncereservation_site')).then(response => this.setState({categoryannoncereservations: response.data,}));
+        dyaxios.get(route('api.annoncereservationcategorybycitycount_site',[itemCategoryannoncereservation,itemcityannonce])).then(response => this.setState({categoryannoncereservations: response.data,}));
         /* Ici c'est pour recuperer les articles par annonces decroissant*/
-        fetch(route('api.citiesannonces_reservations_site')).then(res => res.json()).then((result) => {
+        fetch(route('api.annoncereservationcategorybycitycount_site',[itemCategoryannoncereservation,itemcityannonce])).then(res => res.json()).then((result) => {
             this.setState({
                 citiesannoncesreservations: [...result]
             });
@@ -44,26 +45,25 @@ class Annoncebycategoryannoncereservationcity extends Component {
         this.loadItem();
     }
 
-    //getRepString (annoncereservations_count) {
-    //    annoncereservations_count = annoncereservations_count +'';
-    //    if (annoncereservations_count < 1000) {
-    //        return annoncereservations_count;
-    //    }
-    //    if (annoncereservations_count < 10000) {
-    //        return annoncereservations_count.charAt(0) + ',' + annoncereservations_count.substring(1);
-    //    }
-    //    return (annoncereservations_count/1000).toFixed(annoncereservations_count % 1000 !== 0)+'k';
-    //}
+    getcountcategoryannonceString (annoncereservations_count) {
+        annoncereservations_count = annoncereservations_count +'';
+        if (annoncereservations_count < 1000) {
+            return annoncereservations_count;
+        }
+        if (annoncereservations_count < 10000) {
+            return annoncereservations_count.charAt(0) + ',' + annoncereservations_count.substring(1);
+        }
+        return (annoncereservations_count/1000).toFixed(annoncereservations_count % 1000 !== 0)+'k';
+    }
 
     render() {
         const {annoncereservationbycity,categoryannoncereservations,citiesannoncesreservations,annoncereservationbycategory} = this.state;
-        let Slugannoncetype = this.props.match.params.annoncetype;
-        let Slugcity = this.props.match.params.city;
         let SlugCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
+        let allannoncereservationbycity = annoncereservationbycity.annoncereservations;
         return (
             <>
                 <Helmet>
-                    <title>Reservation {`${SlugCategoryannoncereservation || "Ivemo"}`} dans la ville de {`${Slugcity}`} - Ivemo</title>
+                    <title>Reservation {`${SlugCategoryannoncereservation || "Ivemo"}`} dans la ville de {`${annoncereservationbycity.name}`} - Ivemo</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
@@ -85,35 +85,11 @@ class Annoncebycategoryannoncereservationcity extends Component {
                                 <div className="row">
 
 
-                                    <div className="col-lg-9 col-md-12 mx-auto">
+                                    <div className="col-lg-8 col-md-12 mx-auto">
 
-                                        <ul className="nav nav-tabs nav-tabs-neutral justify-content-center"
-                                            role="tablist" data-background-color={this.props.backgroundColor}>
-
-                                            {categoryannoncereservations.length > 0 &&(
-                                                <>
-                                                    <li className="nav-item">
-                                                        <Link to={`/annonces_reservations/${Slugannoncetype}/${SlugCategoryannoncereservation}/`} className="nav-link">
-                                                            <i className="now-ui-icons arrows-1_minimal-left"/> <b></b>
-                                                        </Link>
-                                                    </li>
-                                                    {categoryannoncereservations.map((item) => (
-                                                        <li key={item.id} className="nav-item">
-                                                            <NavLink to={`/annonces_reservations/reservations/${item.slug}/${Slugcity}/`} className="nav-link">
-                                                                <b>{item.name}</b>
-                                                            </NavLink>
-                                                        </li>
-                                                    ))}
-                                                </>
-                                            )}
-
-
-                                        </ul>
-                                        <br/>
-
-                                        {annoncereservationbycity.length >= 0 && (
+                                        {allannoncereservationbycity.length >= 0 && (
                                             <>
-                                                {annoncereservationbycity.map((item) => (
+                                                {allannoncereservationbycity.map((item) => (
                                                     <AnnoncereservationList key={item.id} {...item} />
                                                 ))}
                                             </>
@@ -123,7 +99,7 @@ class Annoncebycategoryannoncereservationcity extends Component {
                                     </div>
 
 
-                                    <div className="col-lg-3 col-md-12 mx-auto">
+                                    <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
@@ -141,7 +117,7 @@ class Annoncebycategoryannoncereservationcity extends Component {
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingOne">
                                                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <b>Faites vos reservations dans ces villes</b>
+                                                                        <b>Faites vos reservations à {annoncereservationbycity.name}</b>
                                                                         <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
@@ -150,13 +126,14 @@ class Annoncebycategoryannoncereservationcity extends Component {
                                                                         <table>
                                                                             <tbody>
 
-                                                                            {citiesannoncesreservations.map((item) => (
+                                                                            {categoryannoncereservations.map((item) => (
                                                                                 <tr key={item.id}>
                                                                                     <td>
-                                                                                        <NavLink to={`/annonces_reservations/${Slugannoncetype}/${annoncereservationbycategory.slug}/${item.slug}/`} >
-                                                                                            Reserver un(e) <strong>{annoncereservationbycategory.name}</strong> dans la ville de <strong> {item.name}</strong>
+                                                                                        <NavLink to={`/annonces_reservations/reservations/${item.slug}/${annoncereservationbycity.slug}/`} >
+                                                                                            Reserver un(e) <strong>{item.name}</strong> à <strong> {annoncereservationbycity.name}</strong>
                                                                                         </NavLink>
                                                                                     </td>
+                                                                                    <td className="text-right"> {this.getcountcategoryannonceString(item.annoncereservations_count)} annonces</td>
                                                                                 </tr>
                                                                             ))}
 
@@ -166,36 +143,7 @@ class Annoncebycategoryannoncereservationcity extends Component {
                                                                 </div>
                                                             </div>
 
-
-                                                            <div className="card card-plain">
-                                                                <div className="card-header" role="tab" aria-multiselectable="true" id="headingThree">
-                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                                                        <b>Autres transactions à {Slugcity} </b>
-                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
-                                                                    </a>
-                                                                </div>
-                                                                <div id="collapseThree" className="collapse show" role="tabpanel" aria-labelledby="headingThree">
-                                                                    <div className="card-body">
-                                                                        <table>
-                                                                            <tbody>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Toutes les ventes de maison Douala</a></td>
-                                                                                <td className="text-right"> 200 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Toutes les ventes de terrains Douala</a></td>
-                                                                                <td className="text-right"> 1 300 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Tous les achats de maison de prestige Douala</a></td>
-                                                                                <td className="text-right"> 380 annonces</td>
-                                                                            </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
+                                                            <Categoriesannoncereservation/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -204,13 +152,6 @@ class Annoncebycategoryannoncereservationcity extends Component {
 
 
                                     </div>
-
-
-
-
-
-
-
 
                                 </div>
                             </div>

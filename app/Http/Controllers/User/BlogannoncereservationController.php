@@ -26,16 +26,24 @@ class BlogannoncereservationController extends Controller
         ]]);
     }
 
-    public function apiannonceblogcategoryreservation($categoryannoncereservation)
+    public function apiannonceblogcategoryreservation(categoryannoncereservation $categoryannoncereservation)
     {
-        $blogannoncereservation = new CategoryannoncereservationResource(categoryannoncereservation::whereSlug($categoryannoncereservation)
-            ->first());
+        $blogannoncereservation = categoryannoncereservation::whereSlug($categoryannoncereservation->slug)
+            ->with(['blogannoncereservations' => function ($q) use ($categoryannoncereservation){
+                $q->where('status',1)
+            ->with('user','categoryannoncereservation')
+            ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
+            ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();},
+            ])->first();
+
         return response()->json($blogannoncereservation, 200);
     }
 
+
     public function apiblogannoncereservationinteresse(categoryannoncereservation $categoryannoncereservation)
     {
-        $blogannoncereservation = $categoryannoncereservation->blogannoncereservations()->with('user','categoryannoncereservation')
+        $blogannoncereservation = $categoryannoncereservation->blogannoncereservations()
+            ->with('user','categoryannoncereservation')
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->orderByRaw('RAND()')
             ->where('status',1)

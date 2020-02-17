@@ -22,19 +22,12 @@ class AnnoncetypeResource extends JsonResource
                 $q->where('status',1);
             })->distinct()->get()->toArray();
 
-        $annoncereservations = $this->annoncereservations()->whereIn('annoncetype_id',[$this->id])
-            ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
-            ->orderBy('created_at','DESC')
-            ->where(function ($q){
-                $q->where('status',1);
-            })->distinct()->get()->toArray();
 
         return [
             'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
             'annonceventes' => $annonceventes,
-            'annoncereservations' => $annoncereservations,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
         ];

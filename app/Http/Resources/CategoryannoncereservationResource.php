@@ -15,19 +15,6 @@ class CategoryannoncereservationResource extends JsonResource
     public function toArray($request)
     {
 
-        $annoncereservations = $this->annoncereservations()->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
-            ->whereIn('categoryannoncereservation_id',[$this->id])
-            ->orderBy('created_at','DESC')
-            ->where(function ($q){
-                $q->where('status',1);
-            })->distinct()->get()->toArray();
-
-        $blogannoncereservations = $this->blogannoncereservations()->with('user','categoryannoncereservation')
-            ->whereIn('categoryannoncereservation_id',[$this->id])
-            ->orderBy('created_at','DESC')
-            ->where(function ($q){
-                $q->where('status',1);
-            })->distinct()->get()->toArray();
         return [
             'id' => $this->id,
             'slug' => $this->slug,
@@ -37,8 +24,6 @@ class CategoryannoncereservationResource extends JsonResource
             'icon' => $this->icon,
             'photo' => $this->photo,
             'user' => $this->user,
-            'annoncereservations' => $annoncereservations,
-            'blogannoncereservations' => $blogannoncereservations,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
         ];
