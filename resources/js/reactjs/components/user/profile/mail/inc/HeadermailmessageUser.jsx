@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import {Remarkable} from "remarkable";
+import { Badge } from "reactstrap";
 import moment from "moment";
 import {Button} from "reactstrap";
 
@@ -24,19 +25,22 @@ class HeadermailmessageUser extends Component {
                 <td>
                     <div className="card-header d-flex align-items-center">
                         <div className="text-left pull-left">
-                            <NavLink to={`${location.pathname}${this.props.slug}/`}>
-                                <div className="ml-auto mr-auto">
-                                    <b>{this.props.subject}</b>
+                            <a href="#" onClick={() => this.props.readItem(this.props)}>
+                                <div className={`ml-auto mr-auto`}>
+                                    <b className={`${this.props.status_red ? "text-primary" : ""}`}>
+                                        {this.props.subject}
+                                    </b>
+                                    {this.props.status_red ? <Badge className="mr-1" color="danger">Non lus</Badge> : <Badge className="mr-1" color="success">Lus</Badge>}
                                 </div>
-                            </NavLink>
+                            </a>
                         </div>
                         <div className="text-right ml-auto">
                             <span><b>{moment(this.props.created_at).calendar()}</b></span>
                         </div>
                     </div>
-                    <NavLink to={`${location.pathname}${this.props.slug}/`}>
+                    <a href="#" onClick={() => this.props.readItem(this.props)} className={`${this.props.status_red ? "text-primary" : ""}`}>
                         <span dangerouslySetInnerHTML={this.getDescription()}/>
-                    </NavLink>
+                    </a>
 
                 </td>
                 <td className="text-right">

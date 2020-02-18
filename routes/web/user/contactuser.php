@@ -43,6 +43,11 @@ Route::get(
 )->name('personal_mails_contacts.site');
 
 Route::get(
+    'profile/personal_mails_active/{id}',
+    'ProfileController@personalmessagescontactsactive'
+)->name('personal_mails_contacts_active.site');
+
+Route::get(
     'profile/personal_mails/contacts/{contactuser}',
     'ProfileController@personalmessagescontactsshow'
 )->name('personal_mails_contacts_show.site');

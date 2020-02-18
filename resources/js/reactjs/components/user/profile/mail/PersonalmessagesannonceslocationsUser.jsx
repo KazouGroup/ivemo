@@ -20,6 +20,16 @@ class PersonalmessagesannonceslocationsUser extends Component {
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.readItem = this.readItem.bind(this);
+    }
+
+    readItem(item) {
+
+        const url = route('personal_mails_contacts_active.site',[item.id]);
+        dyaxios.get(url).then(() => {
+            this.props.history.push(`/profile/personal_mails/annonces_locations/${item.slug}/`);
+        })
+
     }
 
     deleteItem(id) {
@@ -105,7 +115,7 @@ class PersonalmessagesannonceslocationsUser extends Component {
             contactuserslocations.map(item => {
                 return(
 
-                    <HeadermailmessageUser key={item.id} {...item} deleteItem={this.deleteItem}/>
+                    <HeadermailmessageUser key={item.id} {...item} readItem={this.readItem} deleteItem={this.deleteItem}/>
                 )
             })
         ):(
@@ -159,7 +169,7 @@ class PersonalmessagesannonceslocationsUser extends Component {
                                                                     <tr>
                                                                         <td> <NavLink to={`/profile/personal_mails/annonces_locations/`}><b>Mail annonces locations</b></NavLink></td>
                                                                         {contactuserslocations.length > 0 && (
-                                                                            <td className="text-right">{contactuserslocations.length} messages</td>
+                                                                            <td className="text-right">{contactuserslocations.length || " "} messages</td>
                                                                         )}
                                                                     </tr>
 

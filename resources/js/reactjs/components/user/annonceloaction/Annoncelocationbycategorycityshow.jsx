@@ -227,20 +227,25 @@ class Annoncelocationbycategorycityshow extends Component {
 
                                                         {!$guest && (
                                                             <>
-                                                                <UncontrolledTooltip placement="bottom" target="TooltipEditer">
-                                                                    Editer cette annonce
-                                                                </UncontrolledTooltip>
-                                                                <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-success" id="TooltipEditer">
-                                                                    <i className="now-ui-icons ui-1_simple-delete"/>
-                                                                </NavLink>
+                                                                {($userIvemo.id === annoncelocation.user.id || $userIvemo.id === annoncelocation.user_id) && (
+                                                                    <>
+                                                                        <UncontrolledTooltip placement="bottom" target="TooltipEditer">
+                                                                            Editer cette annonce
+                                                                        </UncontrolledTooltip>
+                                                                        <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-success" id="TooltipEditer">
+                                                                            <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                        </NavLink>
 
-                                                                <UncontrolledTooltip placement="bottom" target="TooltipDelete">
-                                                                    Supprimer cette annonce
-                                                                </UncontrolledTooltip>
-                                                                <Button onClick={() => this.deleteItem(annoncelocation.id)}
-                                                                        className="btn btn-icon btn-sm btn-danger" id="TooltipDelete">
-                                                                    <i className="now-ui-icons ui-1_simple-remove"/>
-                                                                </Button>{" "}
+                                                                        <UncontrolledTooltip placement="bottom" target="TooltipDelete">
+                                                                            Supprimer cette annonce
+                                                                        </UncontrolledTooltip>
+                                                                        <Button onClick={() => this.deleteItem(annoncelocation.id)}
+                                                                                className="btn btn-icon btn-sm btn-danger" id="TooltipDelete">
+                                                                            <i className="now-ui-icons ui-1_simple-remove"/>
+                                                                        </Button>{" "}
+                                                                    </>
+                                                                )}
+
                                                             </>
                                                         )}
 

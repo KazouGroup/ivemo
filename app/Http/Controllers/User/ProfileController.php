@@ -364,6 +364,16 @@ class ProfileController extends Controller
              ]);
     }
 
+
+    public function personalmessagescontactsactive($id)
+    {
+         $contactuser = contactuser::where('id', $id)->findOrFail($id);
+
+         if(auth()->user()->id === $contactuser->user_id){
+          $contactuser->update([ 'status_red' => 0,]);
+          return response('read confirmed',Response::HTTP_ACCEPTED);
+         }
+    }
     /**
      * Store a newly created resource in storage.
      *

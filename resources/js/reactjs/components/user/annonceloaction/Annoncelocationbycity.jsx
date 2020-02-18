@@ -202,6 +202,34 @@ class Annoncelocationbycity extends Component {
 
                                                             <Categoriesannoncereselocation/>
 
+                                                            <div className="card card-plain">
+                                                                <div className="card-header" role="tab" id="headingAutre">
+                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseAutre" aria-expanded="false" aria-controls="collapseAutre">
+                                                                        <b>Autres transactions à {`${annoncelocationbycity.name}`}</b>
+                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
+                                                                    </a>
+                                                                </div>
+                                                                <div id="collapseAutre" className="collapse" role="tabpanel" aria-labelledby="headingAutre">
+                                                                    <div className="card-body">
+                                                                        <table>
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Toutes les ventes de maison Douala</a></td>
+                                                                                <td className="text-right"> 200 annonces</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Toutes les ventes de terrains Douala</a></td>
+                                                                                <td className="text-right"> 1 300 annonces</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Tous les achats de maison de prestige Douala</a></td>
+                                                                                <td className="text-right"> 380 annonces</td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
 
 

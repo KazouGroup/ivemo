@@ -18,6 +18,7 @@ class PersonalmessagescontactUser extends Component {
             contactuserslocations: [],
         };
         this.deleteItem = this.deleteItem.bind(this);
+        this.readItem = this.readItem.bind(this);
     }
 
 
@@ -32,6 +33,14 @@ class PersonalmessagescontactUser extends Component {
                 contactuserslocations: [...result]
             });
         });
+    }
+    readItem(item) {
+
+        const url = route('personal_mails_contacts_active.site',[item.id]);
+        dyaxios.get(url).then(() => {
+            this.props.history.push(`/profile/personal_mails/contacts/${item.slug}/`);
+        })
+
     }
 
     deleteItem(id) {
@@ -103,7 +112,7 @@ class PersonalmessagescontactUser extends Component {
             contactusersprofile.map(item => {
                 return(
 
-                    <HeadermailmessageUser key={item.id} {...item} deleteItem={this.deleteItem}/>
+                    <HeadermailmessageUser key={item.id} {...item} readItem={this.readItem} deleteItem={this.deleteItem}/>
                 )
             })
         ):(
