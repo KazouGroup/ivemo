@@ -31,8 +31,6 @@
   <!-- CSS Files -->
   <link href="/assets/vendor/assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="/assets/vendor/assets/css/now-ui-kit.css?v=1.3.1" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="/assets/vendor/assets/demo/demo.css" rel="stylesheet" />
 
 
 

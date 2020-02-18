@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import {Remarkable} from "remarkable";
+import {Button, UncontrolledTooltip} from "reactstrap";
+import {NavLink} from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 class ProfileAccountTeamUser extends Component {
@@ -8,6 +11,64 @@ class ProfileAccountTeamUser extends Component {
         this.state = {
             teamusers:[],
         };
+
+        this.deleteItem = this.deleteItem.bind(this);
+    }
+
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes vous sure de vouloir executer cette action",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                const url = route('profile_team_users_destroy.site',id);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+
+                    let isNotId = item => item.id !== id;
+                    let updatedItems = this.state.teamusers.filter(isNotId);
+                    this.setState({teamusers: updatedItems});
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update',
+                            message: 'Donné suprimée avec success'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'primary',
+                            placement: {
+                                from: 'bottom',
+                                align: 'right'
+                            },
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            },
+                        });
+                    /** End alert ***/
+
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
     }
 
     // lifecycle method
@@ -50,6 +111,30 @@ class ProfileAccountTeamUser extends Component {
                                                 <p className="card-description" dangerouslySetInnerHTML={this.getDescription(item)} />
 
                                             </div>
+
+
+                                            {!$guest && (
+                                                <>
+                                                    {$userIvemo.id === item.user.id && (
+                                                        <>
+                                                            <UncontrolledTooltip placement="bottom" target="TooltipEditer" delay={0}>
+                                                                Éditer cette utilisateur
+                                                            </UncontrolledTooltip>
+                                                            <NavLink to={`/profile/personal_settings/teams/${item.id}/edit/`} className="btn btn-sm btn-success btn-icon btn-sm" id="TooltipEditer">
+                                                                <i className="now-ui-icons ui-1_simple-delete"/>
+                                                            </NavLink>
+                                                            <button type="button" id={'TooltipDelete'} onClick={() => this.deleteItem(item.id)}
+                                                                    className="btn btn-icon btn-sm btn-danger">
+                                                                <i className="now-ui-icons ui-1_simple-remove"/>
+                                                            </button>
+                                                            <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
+                                                                Supprimer
+                                                            </UncontrolledTooltip>
+                                                        </>
+                                                    )}
+                                                </>
+                                            )}
+
                                         </div>
                                     </div>
                                 ))}

@@ -76,6 +76,7 @@ class CompileTableSeeder extends Seeder
             $categoryannoncelocations = [
                 ['name' => 'Appartement','slug' => str_slug('Appartement'),'color_name' => 'info','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
                 ['name' => 'Chambre','slug' => str_slug('Chambre'),'color_name' => 'success','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
+                ['name' => 'Stand d\'exposition','slug' => str_slug('Stand d\'exposition'),'color_name' => 'warning','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
                 ['name' => 'Loft, atelier & surface','slug' => str_slug('Loft, atelier & surface'),'color_name' => 'warning','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
                 ['name' => 'Maison','slug' => str_slug('Maison'),'color_name' => 'danger','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
                 ['name' => 'Studio','slug' => str_slug('Studio'),'color_name' => 'primary','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],

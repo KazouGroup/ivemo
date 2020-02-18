@@ -109,10 +109,10 @@ class AnnonceslocationList extends Component {
 
                                     <div className="text-right mx-auto">
 
-                                        <UncontrolledTooltip placement="bottom" target="TooltipPhone" delay={0}>
+                                        <UncontrolledTooltip placement="bottom" target="TooltipPhone">
                                             3426712192
                                         </UncontrolledTooltip>
-                                        <Button className="btn btn-icon btn-sm btn-info"  color="secondary" id="TooltipPhone">
+                                        <Button className="btn btn-icon btn-sm btn-info" id="TooltipPhone">
                                             <i className="now-ui-icons tech_mobile"/>
                                         </Button>
                                         <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-primary">

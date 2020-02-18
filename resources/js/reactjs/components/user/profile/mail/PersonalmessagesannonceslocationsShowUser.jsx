@@ -99,7 +99,7 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
 
             <>
                 <Helmet>
-                    <title>{`${contactuser.subject}`} {`${$userIvemo.first_name}`} - Ivemo</title>
+                    <title>{`${contactuser.subject || 'Messages contact annonces locations'}`} {`${$userIvemo.first_name}`} - Ivemo</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">

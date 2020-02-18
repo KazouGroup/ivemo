@@ -106,10 +106,10 @@ class AnnoncereservationList extends Component {
 
                                     <div className="text-right mx-auto">
 
-                                        <Button className="btn btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
+                                        <Button className="btn btn-icon btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
                                             <i className="now-ui-icons tech_mobile"/>
                                         </Button>
-                                        <NavLink to={`/annonces/`} className="btn btn-sm btn-primary">
+                                        <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-primary">
                                             <i className="now-ui-icons location_pin"/>
                                         </NavLink>
 
@@ -117,11 +117,11 @@ class AnnoncereservationList extends Component {
                                             <>
                                                 {$userIvemo.id === this.props.user_id && (
                                                     <>
-                                                        <NavLink to={`/annonces/`} className="btn btn-sm btn-success" rel="tooltip" title="Editer" data-placement="bottom">
+                                                        <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-success" rel="tooltip" title="Editer" data-placement="bottom">
                                                             <i className="now-ui-icons ui-1_simple-delete"/>
                                                         </NavLink>
                                                         <Button
-                                                            className="btn btn-sm btn-danger" rel="tooltip" title="Supprimer" data-placement="bottom">
+                                                            className="btn btn-icon btn-sm btn-danger" rel="tooltip" title="Supprimer" data-placement="bottom">
                                                             <i className="now-ui-icons ui-1_simple-remove"/>
                                                         </Button>{" "}
                                                     </>

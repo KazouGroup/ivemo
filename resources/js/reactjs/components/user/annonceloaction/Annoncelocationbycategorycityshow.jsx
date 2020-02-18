@@ -7,6 +7,7 @@ import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import FormcontactuseronlocationShow from "./inc/FormcontactuseronlocationShow";
 import BlogannoncelocationIntesseAnnonseShow from "../blog/blogannoncelocation/BlogannoncelocationIntesseAnnonseShow";
 import Swal from "sweetalert2";
+import moment from "moment";
 
 
 class Annoncelocationbycategorycityshow extends Component {
@@ -213,17 +214,22 @@ class Annoncelocationbycategorycityshow extends Component {
                                                         </NavLink>
                                                         <div className="mx-3">
                                                             <NavLink to={`/@${annoncelocation.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{annoncelocation.user.first_name}</b>
-                                                                <small className="d-block text-muted">12 janv 2019</small>
+                                                                <small className="d-block text-muted">{moment(annoncelocation.created_at).format('LL')}</small>
                                                             </NavLink>
                                                         </div>
                                                     </div>
                                                     <div className="text-right ml-auto">
-                                                        <Button className="btn btn-icon btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
+                                                        <UncontrolledTooltip placement="bottom" target="TooltipPhone">
+                                                            3425712192
+                                                        </UncontrolledTooltip>
+                                                        <Button className="btn btn-icon btn-sm btn-info" id="TooltipPhone">
                                                             <i className="now-ui-icons tech_mobile"/>
                                                         </Button>
-                                                        <a href="https://www.kazoutech.com" className="btn btn-icon btn-sm btn-primary" target="_banck">
-                                                            <i className="now-ui-icons objects_globe">/</i>
-                                                        </a>
+                                                        {annoncelocation.user.profile.site_internet && (
+                                                            <a href={`${annoncelocation.user.profile.site_internet}`} className="btn btn-icon btn-sm btn-primary" target="_banck">
+                                                                <i className="now-ui-icons objects_globe"/>
+                                                            </a>
+                                                        )}
 
                                                         {!$guest && (
                                                             <>

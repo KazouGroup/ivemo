@@ -72,6 +72,61 @@ class ProfileAccountPublicUser extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
+                                        {!$guest && (
+                                            <>
+                                                {$userIvemo.id === userPublick.id && (
+                                                    <div className="card">
+                                                        <div className="card-body">
+                                                            <div className="row">
+                                                                <div className="col-md-12">
+                                                                    <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                                        <div className="card card-plain">
+                                                                            <div className="card-header" role="tab" id="headingFour">
+                                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                                                                    <b>Configuration et edition</b>
+                                                                                    <i className="now-ui-icons arrows-1_minimal-down"/>
+                                                                                </a>
+                                                                            </div>
+
+                                                                            <div id="collapseFour" className="collapse show" role="tabpanel" aria-labelledby="headingFour">
+                                                                                <div className="card-body">
+                                                                                    <table>
+                                                                                        <tbody>
+                                                                                        <tr>
+                                                                                            <td> <Link to={`/articles_reservations/`}>Annonces</Link></td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td> <a href="#pablo">Articles</a></td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td> <Link to={`/profile/personal_mails/contacts/`}>Contacts et messages</Link></td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td> <Link to={`/profile/personal_reservations/`}>Reservations personnele</Link></td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td> <Link to={`/profile/annonces_reservations_booked/`}>Reservations des utilisateurs</Link></td>
+                                                                                        </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )}
+
+                                            </>
+
+                                        )}
+
+
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="row">
@@ -162,6 +217,7 @@ class ProfileAccountPublicUser extends Component {
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
+                                        {/*
                                         <ul className="nav nav-tabs nav-tabs-neutral justify-content-center"
                                             role="tablist" data-background-color={this.props.backgroundColor}>
 
@@ -209,6 +265,10 @@ class ProfileAccountPublicUser extends Component {
 
 
                                         </ul>
+                                        */}
+
+
+
 
                                         <br/>
 

@@ -158,10 +158,10 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="text-right ml-auto">
-                                                        <Button className="btn btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
+                                                        <Button className="btn btn-icon btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
                                                             <i className="now-ui-icons tech_mobile"/>
                                                         </Button>
-                                                        <a href="https://www.kazoutech.com" className="btn btn-sm btn-primary" target="_banck">
+                                                        <a href="https://www.kazoutech.com" className="btn btn-icon btn-sm btn-primary" target="_banck">
                                                             <i className="now-ui-icons objects_globe"/>
                                                         </a>
 
@@ -169,11 +169,11 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                             <>
                                                                 {$userIvemo.id === annoncereservation.user_id && (
                                                                     <>
-                                                                        <NavLink to={`/annonces/`} className="btn btn-sm btn-success" rel="tooltip" title="Editer" data-placement="bottom">
+                                                                        <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-success" rel="tooltip" title="Editer" data-placement="bottom">
                                                                             <i className="now-ui-icons ui-1_simple-delete"/>
                                                                         </NavLink>
                                                                         <Button
-                                                                            className="btn btn-sm btn-danger" rel="tooltip" title="Supprimer" data-placement="bottom">
+                                                                            className="btn btn-icon btn-sm btn-danger" rel="tooltip" title="Supprimer" data-placement="bottom">
                                                                             <i className="now-ui-icons ui-1_simple-remove"/>
                                                                         </Button>{" "}
                                                                     </>
@@ -305,11 +305,9 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                     </div>
                                 </div>
 
+                                <AnnonceservationInteresse {...this.props}/>
 
                                 <BlogannoncereservationIntesseAnnonseShow {...this.props} />
-
-
-                                <AnnonceservationInteresse {...this.props}/>
 
                             </div>
 

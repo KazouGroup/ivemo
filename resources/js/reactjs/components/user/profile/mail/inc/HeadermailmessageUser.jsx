@@ -25,7 +25,7 @@ class HeadermailmessageUser extends Component {
                 <td>
                     <div className="card-header d-flex align-items-center">
                         <div className="text-left pull-left">
-                            <a href="#" onClick={() => this.props.readItem(this.props)}>
+                            <a href={void(0)} onClick={() => this.props.readItem(this.props)} style={{cursor:"pointer"}}>
                                 <div className={`ml-auto mr-auto`}>
                                     <b className={`${this.props.status_red ? "text-primary" : ""}`}>
                                         {this.props.subject}
@@ -38,7 +38,7 @@ class HeadermailmessageUser extends Component {
                             <span><b>{moment(this.props.created_at).calendar()}</b></span>
                         </div>
                     </div>
-                    <a href="#" onClick={() => this.props.readItem(this.props)} className={`${this.props.status_red ? "text-primary" : ""}`}>
+                    <a href={void(0)} style={{cursor:"pointer"}} onClick={() => this.props.readItem(this.props)} className={`${this.props.status_red ? "text-primary" : ""}`}>
                         <span dangerouslySetInnerHTML={this.getDescription()}/>
                     </a>
 
