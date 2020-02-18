@@ -101,7 +101,7 @@ class TeamsUserEdite extends Component {
             .then(() => {
 
                 $.notify({
-                        message: '<strong>Informations mise à jour avec success...</strong>'
+                        message: 'Informations mise à jour avec success...'
                     },
                     {
                         allow_dismiss: false,
@@ -115,6 +115,7 @@ class TeamsUserEdite extends Component {
                             exit: "animated fadeOutDown"
                         },
                     });
+                this.props.history.goBack();
             }).catch(error => {
             this.setState({
                 errors: error.response.data.errors

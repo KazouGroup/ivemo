@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StoreRequest;
+use App\Http\Requests\PasswordRequest;
+use App\Http\Requests\Profile\UpdateprofileRequest;
 use App\Http\Resources\UserResource;
 use App\Model\annoncelocation;
 use App\Model\annoncereservation;
@@ -12,11 +14,13 @@ use App\Model\annoncevente;
 use App\Model\blogannoncelocation;
 use App\Model\blogannoncereservation;
 use App\Model\contactuser;
+use App\model\profile;
 use App\Model\reservation;
 use App\Model\user;
 use App\Services\ContactuserService;
 use App\Services\ProfileService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 use function foo\func;
 
@@ -290,7 +294,7 @@ class ProfileController extends Controller
      */
     public function api_profile_account()
     {
-        $user = auth()->user();
+        $user = new UserResource(auth()->user());
 
         return response()->json($user,200);
     }
@@ -373,6 +377,41 @@ class ProfileController extends Controller
           $contactuser->update([ 'status_red' => 0,]);
           return response('read confirmed',Response::HTTP_ACCEPTED);
          }
+    }
+
+    public function api_profile_add_info_account(profile $profile)
+    {
+        $profile = profile::whereSlug($profile->slug)
+            ->first();
+
+        return response()->json($profile,200);
+    }
+
+    public function profile_add_info_account(profile $profile)
+    {
+        $user = auth()->user();
+        return view('user.profile.profile_account',[
+            'user' => $user,
+        ]);
+    }
+
+    public function profile_add_info_account_update(UpdateprofileRequest $request,profile $profile)
+    {
+
+        $this->authorize('update',$profile);
+
+        $profile = profile::findOrFail($profile->id);
+
+        $profile->update($request->all());
+
+        return response()->json($profile,200);
+    }
+
+    public function updatePassword(PasswordRequest $request)
+    {
+        $user = auth()->user()->update(['password' => Hash::make($request->get('password'))]);
+
+        return response()->json($user,200);
     }
     /**
      * Store a newly created resource in storage.

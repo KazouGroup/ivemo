@@ -8,6 +8,7 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import NavlinkmailmessageUser from "./inc/NavlinkmailmessageUser";
 import HeadermailmessageUser from "./inc/HeadermailmessageUser";
 import {NavLink} from "react-router-dom";
+import NavNavigatePivateUser from "../NavNavigatePivateUser";
 
 
 class PersonalmessagescontactUser extends Component {
@@ -181,6 +182,8 @@ class PersonalmessagescontactUser extends Component {
                                             </div>
                                         </div>
 
+                                        {/* Ici c'est la navigation dans toutes les pages dans le profile*/}
+                                        <NavNavigatePivateUser/>
 
                                     </div>
 

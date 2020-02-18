@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import { Button,Alert} from "reactstrap";
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
-import './ProfileAccountUser.css';
+import './file_private/ProfileAccountUser.css';
 import Categoriesannoncereservation from "../annoncereservation/inc/Categoriesannoncereservation";
 import moment from "moment";
 import {Remarkable} from "remarkable";

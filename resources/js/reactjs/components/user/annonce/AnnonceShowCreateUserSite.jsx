@@ -115,6 +115,7 @@ class AnnonceShowCreateUserSite extends Component {
                                                 <div className="card-title">
                                                     <b>Contact de votre agence</b>
                                                 </div>
+
                                                 <div className="card-header d-flex align-items-center">
                                                     <div className="d-flex align-items-center">
                                                         <NavLink to={`/annonce/show/`}>
@@ -135,6 +136,7 @@ class AnnonceShowCreateUserSite extends Component {
                                                         </a>
                                                     </div>
                                                 </div>
+
                                                 <div className="card-title">
                                                     <i className="now-ui-icons location_pin"></i> <b>91 RUE DU FAUBOURG SAINT HONORE 75008 PARIS 8EME</b>
                                                     <br />
@@ -153,6 +155,8 @@ class AnnonceShowCreateUserSite extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
+
+
                                                 <hr />
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">

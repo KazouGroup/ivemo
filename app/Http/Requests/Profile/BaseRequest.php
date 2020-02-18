@@ -21,8 +21,17 @@ class BaseRequest extends Request
             $rules = [
                //
             ];
-        }
-        else { // 'edit'
+        }elseif ($group == 'profile_add_info_account_update'){
+            $rules = [
+                'site_internet' => ['nullable','url','string', 'max:255'],
+                'address' => ['nullable','string', 'max:255'],
+                'facebook_link' => ['nullable','string', 'max:255'],
+                'twitter_link' => ['nullable','string', 'max:255'],
+                'instagram_link' => ['nullable','string', 'max:255'],
+                'linkedin_link' => ['nullable','string', 'max:255'],
+
+            ];
+        } else { // 'edit'
             $rules = [
                 'site_internet' => ['nullable','url'],
             ];

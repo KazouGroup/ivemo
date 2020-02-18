@@ -7,6 +7,7 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import AnnoncereservationList from "../../annoncereservation/AnnoncereservationList";
 import NavLinkPublicAnnonceUser from "./NavLinkPublicAnnonceUser";
+import FormContactProfileAccountUser from "../form/FormContactProfileAccountUser";
 
 
 class PublicUserAnnonceReservations extends Component {
@@ -137,6 +138,7 @@ class PublicUserAnnonceReservations extends Component {
                                             </NavLink>
                                         </div>
 
+
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="row">
@@ -160,6 +162,24 @@ class PublicUserAnnonceReservations extends Component {
                                                 </div>
                                             </div>
                                         </div>
+
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+
+                                                        <div className="card-header text-center">
+                                                            <h4 className="card-title"><b>Contacter {useranoncereservationPublick.first_name}</b></h4>
+                                                        </div>
+
+                                                        <FormContactProfileAccountUser {...this.props}/>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
 
                                     </div>
 

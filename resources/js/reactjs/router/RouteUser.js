@@ -8,8 +8,8 @@ import AnnonceUserSite from "../components/user/annonce/AnnonceUserSite";
 import AnnonceShowUserSite from "../components/user/annonce/AnnonceShowUserSite";
 import AnnonceShowCreateUserSite from "../components/user/annonce/AnnonceShowCreateUserSite";
 import AnnonceBienAvendreCreate from "../components/user/annonce/AnnonceBienAvendreCreate";
-import ProfileAccountUser from "../components/user/profile/ProfileAccountUser";
-import ProfileAccountChangePasswordUser from "../components/user/profile/ProfileAccountChangePasswordUser";
+import ProfileAccountUser from "../components/user/profile/file_private/ProfileAccountUser";
+import ProfileAccountChangePasswordUser from "../components/user/profile/file_private/ProfileAccountChangePasswordUser";
 import AnnoncereservationIndex from "../components/user/annoncereservation/AnnoncereservationIndex";
 import Annoncebycategoryannoncereservation
     from "../components/user/annoncereservation/Annoncebycategoryannoncereservation";
@@ -40,6 +40,7 @@ import TeamsUserIndex from "../components/user/configurations/teams/TeamsUserInd
 import PublicUserAnnonceLocations from "../components/user/profile/annonces/PublicUserAnnonceLocations";
 import PublicUserAnnonceReservations from "../components/user/profile/annonces/PublicUserAnnonceReservations";
 import TeamsUserEdite from "../components/user/configurations/teams/TeamsUserEdite";
+import ProfileConfigUser from "../components/user/profile/file_private/ProfileConfigUser";
 
 
 const RouteUser = props => (
@@ -72,6 +73,7 @@ const RouteUser = props => (
           <Route exact path="/profile/personal_reservations/" component={PersonalannoncereservationsUser}/>
           <Route exact path="/profile/annonces_reservations_booked/" component={Profileannoncesreservationsbooked}/>
           <Route exact path="/profile/change_password/" component={ProfileAccountChangePasswordUser}/>
+          <Route exact path="/profile/:profile/account/" component={ProfileConfigUser}/>
 
           <Route exact path="/profile/personal_mails/annonces_locations/:contactuser/" component={PersonalmessagesannonceslocationsShowUser}/>
           <Route strict exact path="/profile/personal_mails/annonces_locations/" component={PersonalmessagesannonceslocationsUser}/>

@@ -9,6 +9,7 @@ import moment from "moment";
 import NavlinkmailmessageUser from "./inc/NavlinkmailmessageUser";
 import HeadermailmessageUser from "./inc/HeadermailmessageUser";
 import Swal from "sweetalert2";
+import NavNavigatePivateUser from "../NavNavigatePivateUser";
 
 
 class PersonalmessagesannonceslocationsUser extends Component {
@@ -182,6 +183,9 @@ class PersonalmessagesannonceslocationsUser extends Component {
                                                 </div>
                                             </div>
                                         </div>
+
+                                        {/* Ici c'est la navigation dans toutes les pages dans le profile*/}
+                                        <NavNavigatePivateUser/>
 
 
                                     </div>

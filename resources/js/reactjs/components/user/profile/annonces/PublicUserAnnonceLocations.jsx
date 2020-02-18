@@ -7,6 +7,7 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import AnnonceslocationList from "../../annonceloaction/inc/AnnonceslocationList";
 import Swal from "sweetalert2";
 import NavLinkPublicAnnonceUser from "./NavLinkPublicAnnonceUser";
+import FormContactProfileAccountUser from "../form/FormContactProfileAccountUser";
 
 
 class PublicUserAnnonceLocations extends Component {
@@ -155,6 +156,22 @@ class PublicUserAnnonceLocations extends Component {
                                                             </div>
 
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+
+                                                        <div className="card-header text-center">
+                                                            <h4 className="card-title"><b>Contacter {useranoncelocationPublick.first_name}</b></h4>
+                                                        </div>
+
+                                                        <FormContactProfileAccountUser {...this.props}/>
+
                                                     </div>
                                                 </div>
                                             </div>

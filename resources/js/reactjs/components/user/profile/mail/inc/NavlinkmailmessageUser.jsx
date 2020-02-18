@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link, NavLink, withRouter } from 'react-router-dom';
+import NavNavigatePivateUser from "../../NavNavigatePivateUser";
 
 
 class NavlinkmailmessageUser extends Component {
@@ -71,6 +72,9 @@ class NavlinkmailmessageUser extends Component {
                     </div>
                 </div>
 
+
+                {/* Ici c'est la navigation dans toutes les pages dans le profile*/}
+                <NavNavigatePivateUser/>
 
             </div>
 

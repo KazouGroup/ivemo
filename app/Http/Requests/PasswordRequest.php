@@ -27,7 +27,7 @@ class PasswordRequest extends FormRequest
         return [
             'old_password' => ['required', 'min:6', new CurrentPasswordCheckRule],
             'password' => ['required', 'min:6', 'confirmed', 'different:old_password'],
-            'confirm_password' => ['required', 'min:6'],
+            'password_confirmation' => ['required', 'min:6'],
         ];
     }
 
@@ -39,7 +39,7 @@ class PasswordRequest extends FormRequest
     public function attributes()
     {
         return [
-            'old_password' => __('current password'),
+            'old_password' => __('mot de passe actuel'),
         ];
     }
 }
