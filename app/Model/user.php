@@ -64,11 +64,7 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
                       $user->user_id = auth()->id();
                   }
               });
-              static::updating(function($user){
-                  if (auth()->check()){
-                      $user->user_id = auth()->id();
-                  }
-              });
+
 
           }
 

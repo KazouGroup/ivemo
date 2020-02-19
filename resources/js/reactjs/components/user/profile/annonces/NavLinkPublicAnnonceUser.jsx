@@ -58,8 +58,6 @@ class NavLinkPublicAnnonceUser extends Component {
                     </div>
                 </div>
 
-                {/* Ici c'est la navigation dans toutes les pages dans le profile*/}
-                <NavNavigatePivateUser/>
             </>
 
 
