@@ -158,8 +158,8 @@ class BlogannoncelocationBycategorylocation extends Component {
                                                                         <UncontrolledTooltip placement="bottom" target="TooltipEdit">
                                                                             Editer cet article
                                                                         </UncontrolledTooltip>
-                                                                        <NavLink to={`/blogs/annonce_locations/${item.slugin}/edit/`} className="btn btn-sm btn-icon btn-success" id="TooltipEdit">
-                                                                            <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                        <NavLink to={`/blogs/annonce_locations/${item.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" id="TooltipEdit">
+                                                                            <i className="now-ui-icons ui-2_settings-90"/>
                                                                         </NavLink>
                                                                         <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
                                                                             Supprimer cette annonce

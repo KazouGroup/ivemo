@@ -112,7 +112,7 @@ class AnnonceslocationList extends Component {
                                         <UncontrolledTooltip placement="bottom" target="TooltipPhone">
                                             3426712192
                                         </UncontrolledTooltip>
-                                        <Button className="btn btn-icon btn-sm btn-info" id="TooltipPhone">
+                                        <Button className="btn btn-icon btn-sm btn-warning" id="TooltipPhone">
                                             <i className="now-ui-icons tech_mobile"/>
                                         </Button>
                                         <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-primary">
@@ -123,8 +123,8 @@ class AnnonceslocationList extends Component {
                                             <>
                                                 {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
                                                     <>
-                                                        <NavLink to={`/annonces/`} className="btn btn-sm btn-success btn-icon btn-sm" rel="tooltip" title="Editer" data-placement="bottom">
-                                                            <i className="now-ui-icons ui-1_simple-delete"/>
+                                                        <NavLink to={`/annonces/`} className="btn btn-sm btn-info btn-icon btn-sm" rel="tooltip" title="Editer" data-placement="bottom">
+                                                            <i className="now-ui-icons ui-2_settings-90"/>
                                                         </NavLink>
                                                         <UncontrolledTooltip placement="bottom" target="TooltipDelete">
                                                             Supprimer cette annonce

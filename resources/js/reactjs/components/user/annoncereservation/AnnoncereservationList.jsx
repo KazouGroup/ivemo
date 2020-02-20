@@ -106,7 +106,7 @@ class AnnoncereservationList extends Component {
 
                                     <div className="text-right mx-auto">
 
-                                        <Button className="btn btn-icon btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
+                                        <Button className="btn btn-icon btn-sm btn-warning" rel="tooltip" title="3426712192" data-placement="bottom">
                                             <i className="now-ui-icons tech_mobile"/>
                                         </Button>
                                         <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-primary">
@@ -117,8 +117,8 @@ class AnnoncereservationList extends Component {
                                             <>
                                                 {$userIvemo.id === this.props.user_id && (
                                                     <>
-                                                        <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-success" rel="tooltip" title="Editer" data-placement="bottom">
-                                                            <i className="now-ui-icons ui-1_simple-delete"/>
+                                                        <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-info" rel="tooltip" title="Editer" data-placement="bottom">
+                                                            <i className="now-ui-icons ui-2_settings-90"/>
                                                         </NavLink>
                                                         <Button
                                                             className="btn btn-icon btn-sm btn-danger" rel="tooltip" title="Supprimer" data-placement="bottom">
