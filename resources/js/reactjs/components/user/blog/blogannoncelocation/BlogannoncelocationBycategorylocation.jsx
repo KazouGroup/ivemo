@@ -155,7 +155,10 @@ class BlogannoncelocationBycategorylocation extends Component {
                                                             {($userIvemo.id === item.user_id && $userIvemo.id === item.user.id) && (
                                                                 <div className="row">
                                                                     <div className="mx-auto">
-                                                                        <NavLink to={`/blogs/annonce_locations/${item.slugin}/edit/`} className="btn btn-sm btn-icon btn-success" rel="tooltip" title="Editer" data-placement="bottom">
+                                                                        <UncontrolledTooltip placement="bottom" target="TooltipEdit">
+                                                                            Editer cet article
+                                                                        </UncontrolledTooltip>
+                                                                        <NavLink to={`/blogs/annonce_locations/${item.slugin}/edit/`} className="btn btn-sm btn-icon btn-success" id="TooltipEdit">
                                                                             <i className="now-ui-icons ui-1_simple-delete"/>
                                                                         </NavLink>
                                                                         <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>

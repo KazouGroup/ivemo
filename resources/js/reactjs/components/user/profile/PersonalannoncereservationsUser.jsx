@@ -200,18 +200,18 @@ class PersonalannoncereservationsUser extends Component {
                                                                                         </NavLink>
                                                                                     </div>
                                                                                 </div>
-                                                                                <Button className="btn btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
-                                                                                    <i className="now-ui-icons tech_mobile"></i>
+                                                                                <Button className="btn btn-icon btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
+                                                                                    <i className="now-ui-icons tech_mobile"/>
                                                                                 </Button>
-                                                                                <NavLink to={`/annonces/`} className="btn btn-sm btn-primary">
-                                                                                    <i className="now-ui-icons location_pin"></i>
+                                                                                <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-primary">
+                                                                                    <i className="now-ui-icons location_pin"/>
                                                                                 </NavLink>
-                                                                                <NavLink to={`/annonces/`} className="btn btn-sm btn-success" rel="tooltip" title="Editer cette reservation" data-placement="bottom">
-                                                                                    <i className="now-ui-icons ui-1_simple-delete"></i>
+                                                                                <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-success" rel="tooltip" title="Editer cette reservation" data-placement="bottom">
+                                                                                    <i className="now-ui-icons ui-1_simple-delete"/>
                                                                                 </NavLink>
                                                                                 <Button
-                                                                                    className="btn btn-sm btn-danger" rel="tooltip" title="Supprimer cette reservation" data-placement="bottom">
-                                                                                    <i className="now-ui-icons ui-1_simple-remove"></i>
+                                                                                    className="btn btn-icon btn-sm btn-danger" rel="tooltip" title="Supprimer cette reservation" data-placement="bottom">
+                                                                                    <i className="now-ui-icons ui-1_simple-remove"/>
                                                                                 </Button>{" "}
                                                                             </div>
                                                                         </div>

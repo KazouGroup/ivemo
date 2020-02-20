@@ -16,7 +16,6 @@ class NavUserSite extends Component {
     }
 
     render() {
-
         return (
 
             <div className="container">
@@ -40,7 +39,7 @@ class NavUserSite extends Component {
                                 <b>Acceuil</b>
                             </NavLink>
                         </li>
-                        <li className="nav-item dropdown">
+                        <li className={`nav-item dropdown`}>
                             <a href="#" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                 <i className="now-ui-icons files_paper" aria-hidden="true"/>
                                 <p>Sections</p>
@@ -70,10 +69,10 @@ class NavUserSite extends Component {
 
                             <>
                                 <li className="nav-item">
-                                    <NavLink to={'/login/'} className="nav-link">
+                                    <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="nav-link">
                                         <i className="now-ui-icons users_circle-08"/>
                                         <p>Login</p>
-                                    </NavLink>
+                                    </a>
                                 </li>
 
                                 <li className="nav-item">
@@ -87,7 +86,7 @@ class NavUserSite extends Component {
                             <>
                                 <li className="nav-item dropdown">
                                     <a href=".." className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
-                                        <i className="now-ui-icons users_single-02"></i>
+                                        <i className="now-ui-icons users_single-02"/>
                                         <b>{$userIvemo.first_name}</b>
                                     </a>
                                     <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
@@ -98,7 +97,7 @@ class NavUserSite extends Component {
                                             </a>
                                         )}
                                         <Link className="dropdown-item" to={`/profile/account/`}>
-                                            <i className="now-ui-icons users_single-02"></i> Profile Page
+                                            <i className="now-ui-icons users_single-02"/> Profile Page
                                         </Link>
                                         <a style={{ cursor: "pointer" }} className="dropdown-item" onClick={() => this.navLogout()}>
                                             <i className="now-ui-icons ui-1_simple-remove" /> Déconnexion
@@ -108,14 +107,14 @@ class NavUserSite extends Component {
 
                                 <li className="nav-item dropdown">
                                     <a href="#" className="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown">
-                                        <i className="now-ui-icons business_chart-pie-36"></i>
+                                        <i className="now-ui-icons business_chart-pie-36"/>
                                     </a>
                                     <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                         <NavLink to={'/about/'} className="dropdown-item">
-                                            <i className="now-ui-icons business_bulb-63"></i> About-us
+                                            <i className="now-ui-icons business_bulb-63"/> About-us
                                             </NavLink>
                                         <a className="dropdown-item" href="../examples/blog-post.html">
-                                            <i className="now-ui-icons text_align-left"></i> Blog Post
+                                            <i className="now-ui-icons text_align-left"/> Blog Post
                                         </a>
                                         <Link to={'/profile/personal_reservations/'} className="dropdown-item">
                                             <i className="now-ui-icons shopping_tag-content"/>Mes reservations

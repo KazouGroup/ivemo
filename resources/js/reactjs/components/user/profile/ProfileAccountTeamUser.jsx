@@ -108,7 +108,7 @@ class ProfileAccountTeamUser extends Component {
                                                 <h6 className="category text-primary">
                                                     {item.role}
                                                 </h6>
-                                                <p className="card-description" dangerouslySetInnerHTML={this.getDescription(item)} />
+                                                <h6 className="category" dangerouslySetInnerHTML={this.getDescription(item)} />
 
                                             </div>
 

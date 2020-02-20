@@ -18,13 +18,15 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 //import Auth from './api/auth'
 
-//window.$auth = new Auth(window.userIvemo.use);
+//window.$auth = new Auth(window.dataIvemo.use);
 
-//console.log($auth.can('view-administrator'));
+//console.log($auth);
 
 window.$userIvemo =  window.userIvemo.user;
 window.$guest = window.userIvemo.guest;
+window.$url_site = window.userIvemo.url_site;
 window.$authcheck = window.userIvemo.authcheck;
+
 
 
 //console.log(window.bus);
