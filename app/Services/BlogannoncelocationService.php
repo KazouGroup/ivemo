@@ -47,4 +47,11 @@ class BlogannoncelocationService
         return $blogannoncelocation;
     }
 
+    public static function show($blogannoncelocation)
+    {
+        $blogannoncelocation = new BlogannoncelocationResource(blogannoncelocation::whereSlugin($blogannoncelocation)->first());
+
+        return $blogannoncelocation;
+    }
+
 }

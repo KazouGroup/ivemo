@@ -155,14 +155,14 @@ class BlogannoncelocationBycategorylocation extends Component {
                                                             {($userIvemo.id === item.user_id && $userIvemo.id === item.user.id) && (
                                                                 <div className="row">
                                                                     <div className="mx-auto">
-                                                                        <NavLink to={`/annonces/`} className="btn btn-sm btn-success" rel="tooltip" title="Editer" data-placement="bottom">
+                                                                        <NavLink to={`/blogs/annonce_locations/${item.slugin}/edit/`} className="btn btn-sm btn-icon btn-success" rel="tooltip" title="Editer" data-placement="bottom">
                                                                             <i className="now-ui-icons ui-1_simple-delete"/>
                                                                         </NavLink>
                                                                         <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
                                                                             Supprimer cette annonce
                                                                         </UncontrolledTooltip>
                                                                         <Button
-                                                                            className="btn btn-sm btn-danger" onClick={() => this.deleteItem(item.id)} color="secondary" id="TooltipDelete">
+                                                                            className="btn btn-sm btn-icon btn-danger" onClick={() => this.deleteItem(item.id)} color="secondary" id="TooltipDelete">
                                                                             <i className="now-ui-icons ui-1_simple-remove"/>
                                                                         </Button>{" "}
                                                                     </div>

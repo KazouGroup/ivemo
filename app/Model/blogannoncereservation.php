@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class blogannoncereservation extends Model
@@ -16,8 +17,10 @@ class blogannoncereservation extends Model
         parent::boot();
 
         static::creating(function ($model){
+            $myslug = Str::uuid();
             if (auth()->check()){
                 $model->user_id = auth()->id();
+                $model->slugin = $myslug;
             }
         });
         static::updating(function($model){

@@ -20,6 +20,7 @@ class CreateBlogannoncereservationsTable extends Migration
             $table->integer('red_time')->nullable();
             $table->longText('description')->nullable();
             $table->string('slug')->nullable();
+            $table->string('slugin')->nullable();
             $table->boolean('status')->nullable()->default(true);
             $table->timestamps();
 

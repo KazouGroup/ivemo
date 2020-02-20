@@ -8,7 +8,7 @@ Cloner le fichier puis faire un ``` composer update ``` si vous ete sur window f
 
 Ensuite faite un ``` npm i ``` et ``` npm run watch ```
 
-Configurer votre votre fichier ``` .env``` en duplicant celle de ``` .env.example ```
+Configurer votre fichier ``` .env``` en duplicant celle de ``` .env.example ```
 
 Faite ensuite  ``` php artisan key:generate ``` et faire  ``` php artisan serve ```
 

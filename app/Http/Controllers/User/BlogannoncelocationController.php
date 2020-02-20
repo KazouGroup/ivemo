@@ -21,7 +21,7 @@ class BlogannoncelocationController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','destroy'
+            'create','store','edit','update','destroy','show',
         ]]);
     }
 
@@ -109,10 +109,13 @@ class BlogannoncelocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($blogannoncelocation)
     {
-        //
+        $blogannoncelocation = BlogannoncelocationService::show($blogannoncelocation);
+
+        return response()->json($blogannoncelocation, 200);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -120,9 +123,12 @@ class BlogannoncelocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($blogannoncelocation)
     {
-        //
+        $blogannoncelocation = blogannoncelocation::whereSlugin($blogannoncelocation)->first();
+        return view('user.blog.blogannoncelocation.edit',[
+            'blogannoncelocation' => $blogannoncelocation,
+        ]);
     }
 
     /**
