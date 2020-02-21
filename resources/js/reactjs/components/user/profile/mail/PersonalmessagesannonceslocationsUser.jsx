@@ -161,14 +161,14 @@ class PersonalmessagesannonceslocationsUser extends Component {
                                                                     <tbody>
 
                                                                     <tr>
-                                                                        <td> <NavLink to={`/profile/personal_mails/contacts/`}><b>Mail contacts</b></NavLink></td>
+                                                                        <td> <NavLink to={`/profile/personal_mails/contacts/`}>Mail contacts</NavLink></td>
                                                                         {contactusersprofile.length > 0 && (
                                                                             <td className="text-right"> {contactusersprofile.length || " "} messages</td>
                                                                         )}
                                                                     </tr>
 
                                                                     <tr>
-                                                                        <td> <NavLink to={`/profile/personal_mails/annonces_locations/`}><b>Mail annonces locations</b></NavLink></td>
+                                                                        <td> <NavLink to={`/profile/personal_mails/annonces_locations/`}>Mail annonces locations</NavLink></td>
                                                                         {contactuserslocations.length > 0 && (
                                                                             <td className="text-right">{contactuserslocations.length || " "} messages</td>
                                                                         )}

@@ -70,7 +70,7 @@ const RouteUser = props => (
 
           <Route exact path="/profile/account/" component={ProfileAccountUser}/>
 
-          <Route exact path="/@:user/" component={withRouter(ProfileAccountPublicUser)}/>
+          <Route exact path="/@:user/" component={ProfileAccountPublicUser}/>
           <Route exact path="/@:user/annonces_locations/" component={PublicUserAnnonceLocations}/>
           <Route exact path="/@:user/annonces_reservations/" component={PublicUserAnnonceReservations}/>
 
