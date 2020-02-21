@@ -89,6 +89,8 @@ const RouteUser = props => (
 
 
           <Route exact path="/profile/personal_settings/teams/" component={TeamsUserIndex}/>
+          <Route exact path="/profile/personal_settings/annonces_locations/" component={TeamsUserIndex}/>
+
           <Route path="/profile/personal_settings/teams/:id/edit/" component={TeamsUserEdite}/>
 
           <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/" component={withRouter(BlogannoncereservationIBycategoryreservation)}/>
