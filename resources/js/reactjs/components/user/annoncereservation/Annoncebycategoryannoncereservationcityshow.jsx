@@ -59,7 +59,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                         <div className="card-body">
                                             <div className="submit text-left">
                                                 <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
-                                                    <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos résultats </b>
+                                                    <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour au annonces</b>
                                                 </button>
                                             </div>
 

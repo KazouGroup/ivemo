@@ -110,17 +110,19 @@ class AnnoncelocationInteresse extends Component {
                                                 </div>
                                                 <div className="row">
                                                     <div className="col-md-6 col-6">
-                                                        <h6 className="category text-dark">4 p . 3 ch . 180 m2</h6>
+                                                        <h6 className="category text-dark">{annoncelocationsinteresses.pieces} p . {annoncelocationsinteresses.rooms && (<>{annoncelocationsinteresses.rooms} ch</>)}. {annoncelocationsinteresses.surface && (<>{annoncelocationsinteresses.surface} m<sup>2</sup></>)}</h6>
                                                     </div>
-                                                    <NavLink to={`/annonces_reservations/${item.annoncetype.slug}/${item.categoryannoncelocation.slug}/${item.city.slug}/`}>
-                                                        <h6 className="text-info ml-auto mr-auto">
-                                                            {item.city.name}
-                                                        </h6>
-                                                    </NavLink>
-
+                                                    <div className="col-md-6 col-6">
+                                                        <NavLink to={`/annonces_locations/locations/${item.categoryannoncelocation.slug}/${item.city.slug}/`}>
+                                                            <span className="ml-auto mr-auto">
+                                                                <strong>{item.city.name} </strong>
+                                                            </span>
+                                                        </NavLink>
+                                                        - {item.district}
+                                                    </div>
                                                 </div>
                                                 <h6 className="card-title">
-                                                    <NavLink to={`/annonces_reservations/${item.annoncetype.slug}/${item.categoryannoncelocation.slug}/${item.city.slug}/${item.slug}/`}>
+                                                    <NavLink to={`/annonces_locations/${item.annoncetype.slug}/${item.categoryannoncelocation.slug}/${item.city.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>
                                                         {item.title}
                                                     </NavLink>
                                                 </h6>
@@ -137,22 +139,7 @@ class AnnoncelocationInteresse extends Component {
                                                         </div>
 
                                                     </div>
-                                                    {!$guest && (
-                                                        <>
-                                                            {$userIvemo.id === item.user_id && (
-                                                                <>
-                                                                    <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-info" rel="tooltip" title="Editer" data-placement="bottom">
-                                                                        <i className="now-ui-icons ui-2_settings-90" />
-                                                                    </NavLink>
-                                                                    <Button
-                                                                        className="btn btn-icon btn-sm btn-danger" rel="tooltip" title="Supprimer" data-placement="bottom">
-                                                                        <i className="now-ui-icons ui-1_simple-remove" />
-                                                                    </Button>
-                                                                </>
-                                                            )}
-
-                                                        </>
-                                                    )}
+                                                
                                                 </div>
 
                                             </div>

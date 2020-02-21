@@ -114,7 +114,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                         <div className="card-body">
                                             <div className="submit text-left">
                                                 <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
-                                                    <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos résultats </b>
+                                                    <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour au annonces </b>
                                                 </button>
                                             </div>
 
@@ -154,7 +154,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                 </div>
 
                                                 <div className="text-center ml-auto">
-                                                    <h6 className="text-dark">{annoncelocation.pieces} pièces . {annoncelocation.rooms && (<>{annoncelocation.rooms} chambres</>)}. {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
+                                                    <h6 className="text-dark">{annoncelocation.pieces} p . {annoncelocation.rooms && (<>{annoncelocation.rooms} ch</>)}. {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
                                                 </div>
 
                                                 {/*
@@ -178,7 +178,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                         <div className="card">
                                             <div className="card-body">
                                                 <h6 className="card-title">
-                                                    Description
+                                                    Description interieur
                                             </h6>
                                                 <span>Eres' daring 'Grigri Fortune' swimsuit has
                                                     the fit and coverage of a bikini in a one-piece silhouette.
@@ -188,7 +188,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                 </span>
                                                 <hr />
                                                 <h6 className="card-title">
-                                                    A L'interieur
+                                                    Exterieur
                                             </h6>
                                                 <span>Eres' daring 'Grigri Fortune' swimsuit has
                                                     the fit and coverage of a bikini in a one-piece silhouette.
