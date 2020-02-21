@@ -130,7 +130,7 @@ class ProfileController extends Controller
     public function apipersonalmessagescontacts()
     {
         $contactusers = contactuser::whereIn('user_id',[auth()->user()->id])
-            ->orderBy('created_at','DESC')->distinct()->get()->toArray();
+                        ->latest()->distinct()->get()->toArray();
 
         return response()->json($contactusers, 200);
     }

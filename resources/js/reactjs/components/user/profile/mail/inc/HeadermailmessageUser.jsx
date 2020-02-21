@@ -35,6 +35,10 @@ class HeadermailmessageUser extends Component {
                             </a>
                         </div>
                         <div className="text-right ml-auto">
+                        <Button onClick={() => this.props.deleteItem(this.props.id)}
+                            className="btn btn-danger btn-icon btn-sm btn-neutral" rel="tooltip" data-original-title="Supprimer" title="Supprimer" data-placement="bottom">
+                            <i className="now-ui-icons ui-1_simple-remove"/>
+                        </Button>{" "}
                             <span><b>{moment(this.props.created_at).calendar()}</b></span>
                         </div>
                     </div>
@@ -44,10 +48,7 @@ class HeadermailmessageUser extends Component {
 
                 </td>
                 <td className="text-right">
-                    <Button onClick={() => this.props.deleteItem(this.props.id)}
-                        className="btn btn-danger btn-icon btn-sm btn-neutral" rel="tooltip" data-original-title="Supprimer" title="Supprimer" data-placement="bottom">
-                        <i className="now-ui-icons ui-1_simple-remove"/>
-                    </Button>{" "}
+                   
                 </td>
             </tr>
 

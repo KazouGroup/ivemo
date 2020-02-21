@@ -250,7 +250,11 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
 
                                             </div>
                                         </div>
-
+                                        <div className="submit text-left">
+                                            <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
+                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à la boite de reception </b>
+                                            </button>
+                                        </div>
 
 
                                     </div>

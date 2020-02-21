@@ -161,7 +161,7 @@ class PersonalmessagescontactShowUser extends Component {
 
                                                             </div>
                                                         </div>
-                                                        <a href={`mailto:${contactuser.email}`} className="btn btn-primary pull-left btn-sm" id="TooltipMail">
+                                                        <a href={`mailto:${contactuser.email}`} className="btn btn-primary pull-left" id="TooltipMail">
                                                             <i className="now-ui-icons text_caps-small" />
                                                             Répondre
                                                         </a>
@@ -182,7 +182,7 @@ class PersonalmessagescontactShowUser extends Component {
                                                             :null}
 
                                                         <Button onClick={() => this.deleteItem(contactuser.id)}
-                                                                className="btn btn-danger pull-left btn-sm"  id="TooltipDelete">
+                                                                className="btn btn-danger pull-left"  id="TooltipDelete">
                                                             <i className="now-ui-icons ui-1_simple-remove" />
                                                             Supprimer
                                                         </Button>{" "}
