@@ -29,7 +29,7 @@ class AnnoncereservationIndex extends Component {
 
     render() {
         const {annoncereservationbytype} = this.state;
-        const allannoncereserbvations = annoncereservationbytype.annoncereservations;
+        const allannoncereservations = annoncereservationbytype.annoncereservations;
         return (
             <>
                 <Helmet>
@@ -69,7 +69,7 @@ class AnnoncereservationIndex extends Component {
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
-                                        {allannoncereserbvations.map((item) => (
+                                        {allannoncereservations.map((item) => (
                                             <AnnoncereservationList key={item.id} {...item} />
                                         ))}
 

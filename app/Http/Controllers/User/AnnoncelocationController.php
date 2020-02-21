@@ -161,6 +161,18 @@ class AnnoncelocationController extends Controller
         return response()->json($annoncelocation, 200);
     }
 
+    public function apiannoncelocationinteresse(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city)
+    {
+        $annoncelocation = $categoryannoncelocation->annoncelocations()->whereIn('annoncetype_id',[$annoncetype->id])
+            ->with('user','city','annoncetype','categoryannoncelocation')
+            ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
+            ->whereIn('city_id',[$city->id])
+            ->orderByRaw('RAND()')
+            ->where('status',1)
+            ->take(4)->distinct()->get()->toArray();
+        return response()->json($annoncelocation, 200);
+    }
+
 
     public function sendcontactmessageuser(StorecontactRequest $request, annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$date,annoncelocation $annoncelocation)
     {

@@ -126,7 +126,7 @@ class AnnoncereservationController extends Controller
     public function apiannoncereservationintersse(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city)
     {
         $annoncereservation = $categoryannoncereservation->annoncereservations()->whereIn('annoncetype_id',[$annoncetype->id])
-            ->with('user','city','annoncetype','categoryannoncereservation','imagereservations','imagereservations')
+            ->with('user','city','annoncetype','categoryannoncereservation','imagereservations')
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->whereIn('city_id',[$city->id])
             ->orderByRaw('RAND()')

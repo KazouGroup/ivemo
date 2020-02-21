@@ -92,7 +92,7 @@ class AnnonceservationInteresse extends Component {
 
                                                     {!$guest && (
                                                         <>
-                                                            {$userIvemo.id === this.props.user_id && (
+                                                            {$userIvemo.id === item.user_id && (
                                                                 <>
                                                                     <NavLink to={`/annonces/`} className="btn btn-sm btn-success" rel="tooltip" title="Editer" data-placement="bottom">
                                                                         <i className="now-ui-icons ui-1_simple-delete"/>
@@ -143,16 +143,14 @@ class AnnonceservationInteresse extends Component {
                                                 <div className="card-header d-flex align-items-center">
                                                     <div className="d-flex align-items-center">
                                                         <NavLink to={`/@${item.user.slug}/`}>
-                                                            <img src={item.user.first_name} style={{ height: "20px", width: "50px" }} alt="" className="avatar" />
+                                                            <img src={item.user.avatar} style={{ height: "20px", width: "50px" }} alt="" className="avatar" />
                                                         </NavLink>
                                                         <div className="mx-3">
                                                             <NavLink to={`/@${item.user.slug}/`} className="text-dark font-weight-600 text-sm">{item.user.first_name}
                                                                 <small className="d-block text-muted">{moment(item.created_at).format('LL')}</small>
                                                             </NavLink>
                                                         </div>
-                                                        <a href="#pablo" className="btn btn-sm btn-outline-primary">
-                                                            <i className="now-ui-icons ui-2_favourite-28"/>
-                                                        </a>
+
                                                     </div>
                                                 </div>
 

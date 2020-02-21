@@ -8,6 +8,7 @@ import FormcontactuseronlocationShow from "./inc/FormcontactuseronlocationShow";
 import BlogannoncelocationIntesseAnnonseShow from "../blog/blogannoncelocation/BlogannoncelocationIntesseAnnonseShow";
 import Swal from "sweetalert2";
 import moment from "moment";
+import AnnoncelocationInteresse from "./AnnoncelocationInteresse";
 
 
 class Annoncelocationbycategorycityshow extends Component {
@@ -388,6 +389,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                     </div>
                                 </div>
 
+                                <AnnoncelocationInteresse {...this.props}/>
 
                                 <BlogannoncelocationIntesseAnnonseShow {...this.props} />
 

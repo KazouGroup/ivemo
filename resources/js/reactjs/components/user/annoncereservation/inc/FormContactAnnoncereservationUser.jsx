@@ -99,6 +99,8 @@ class FormContactAnnoncereservationUser extends Component {
     }
 
     render() {
+        let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
+
         return (
 
 
@@ -249,7 +251,7 @@ class FormContactAnnoncereservationUser extends Component {
                     <div className="submit text-center">
                         {!$guest ?
                             <button className="btn btn-primary btn-lg" type="submit">
-                                 Reserver cette annonce
+                                 Reserver cette {itemCategoryannoncereservation}
                             </button>
                             :
                             <h6 className="title text-center">S'il vous plaît
