@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Button } from "reactstrap";
+import {Button, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import AnnonceslocationList from "../../annonceloaction/inc/AnnonceslocationList";
@@ -9,17 +9,128 @@ import Swal from "sweetalert2";
 import NavLinkPublicAnnonceUser from "./NavLinkPublicAnnonceUser";
 import FormContactProfileAccountUser from "../form/FormContactProfileAccountUser";
 import NavLinkPublicBlogannoncesUser from "../blogs/NavLinkPublicBlogannoncesUser";
+import NavlinkconfigurationUser from "../../configurations/inc/NavlinkconfigurationUser";
 
 
-class PublicUserAnnonceLocations extends Component {
+class PrivateUserAnnonceLocations extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            useranoncelocationPublick:{annoncelocations: []},
+            annoncelocations:[],
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.activeItem = this.activeItem.bind(this);
+        this.unactiveItem = this.unactiveItem.bind(this);
     }
+    activeItem(id){
+        Swal.fire({
+            title: 'Activer l\'annonce?',
+            text: "êtes vous sure de vouloir confirmer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                //Envoyer la requet au server
+                let url = route('annonces_locations_active.site',id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            //,
+                            message: 'Annonce activé avec succès'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'bottom',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animated fadeInUp",
+                                exit: "animated fadeOutDown"
+                            },
+                        });
+                    /** End alert ***/
+                    this.loadItems();
+
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
+
+    }
+
+    unactiveItem(id){
+        Swal.fire({
+            title: 'Désactiver l\'annonce?',
+            text: "êtes vous sure de vouloir confirmer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                //Envoyer la requet au server
+                let url = route('annonces_locations_unactivated.site',id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update FAQ',
+                            message: 'Annonce désactiver avec succès'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'bottom',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animated fadeInUp",
+                                exit: "animated fadeOutDown"
+                            },
+                        });
+                    /** End alert ***/
+                    this.loadItems();
+
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
+
+    }
+
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
@@ -35,10 +146,14 @@ class PublicUserAnnonceLocations extends Component {
         }).then((result) => {
             if (result.value) {
 
+
                 const url = route('annonces_locations_delete.site',[id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
+                    let isNotId = item => item.id !== id;
+                    let updatedItems = this.state.annoncelocations.filter(isNotId);
+                    this.setState({annoncelocations: updatedItems});
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
@@ -57,7 +172,6 @@ class PublicUserAnnonceLocations extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -73,10 +187,10 @@ class PublicUserAnnonceLocations extends Component {
         });
     }
 
-    loadItems(){
-        let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.profilpublique_annoncelocations',[itemuser])).then(response => this.setState({useranoncelocationPublick: response.data,}));
+    loadItems() {
+        dyaxios.get(route('api.annonceslocationsbyuser_site')).then(response => this.setState({annoncelocations: response.data.data,}));
     }
+
 
     // lifecycle method
     componentDidMount() {
@@ -84,12 +198,12 @@ class PublicUserAnnonceLocations extends Component {
     }
 
     render() {
-        const {useranoncelocationPublick} = this.state;
-        const mapAnnoncelocations = useranoncelocationPublick.annoncelocations.length ? (
-            useranoncelocationPublick.annoncelocations.map(item => {
+        const {annoncelocations} = this.state;
+        const mapAnnoncelocations = annoncelocations.length ? (
+            annoncelocations.map(item => {
                 return(
 
-                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem}/>
+                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} activeItem={this.activeItem} unactiveItem={this.unactiveItem}/>
                 )
             })
         ):(
@@ -98,110 +212,26 @@ class PublicUserAnnonceLocations extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Annonces locations {`${useranoncelocationPublick.first_name || 'Profile'}`} - Ivemo</title>
+                    <title>Annonces locations {`${$userIvemo.first_name}`} - Ivemo</title>
                 </Helmet>
 
-                <div className="about-us sidebar-collapse">
+                <div className="landing-page sidebar-collapse">
 
-
-                    <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
+                    <nav className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
 
+
                     <div className="wrapper">
-                        <div className="page-header page-header-mini">
-                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
-                            </div>
-                            <div className="content-center">
-                                <div className="row">
-                                    <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">Toutes les annonces location de {useranoncelocationPublick.first_name}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <div className="main main-raised">
-                            <div className="container">
-                                <div className="row">
-                                </div>
-                            </div>
 
                             <div className="container">
                                 <br />
+
                                 <div className="row">
 
-                                    <div className="col-lg-4 col-md-12 mx-auto">
-
-                                        <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
-                                            </NavLink>
-                                        </div>
-
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                            <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingOne">
-                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <b>Annonces de {useranoncelocationPublick.first_name}</b>
-                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
-                                                                    </a>
-                                                                </div>
-
-                                                                <NavLinkPublicAnnonceUser {...this.props} {...useranoncelocationPublick}/>
-
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                            <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingTwo">
-                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                        <b>Articles de {useranoncelocationPublick.first_name}</b>
-                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
-                                                                    </a>
-                                                                </div>
-
-                                                                <NavLinkPublicBlogannoncesUser {...this.props} {...useranoncelocationPublick}/>
-
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-
-                                                        <div className="card-header text-center">
-                                                            <h4 className="card-title"><b>Contacter {useranoncelocationPublick.first_name}</b></h4>
-                                                        </div>
-
-                                                        <FormContactProfileAccountUser {...this.props}/>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                    <NavlinkconfigurationUser/>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
@@ -209,20 +239,25 @@ class PublicUserAnnonceLocations extends Component {
 
                                     </div>
 
+
                                 </div>
+
 
                             </div>
 
+
+
                         </div>
 
-                        <FooterBigUserSite />
 
+                        <FooterBigUserSite />
                     </div>
                 </div>
+
             </>
 
         )
     }
 }
 
-export default PublicUserAnnonceLocations;
+export default PrivateUserAnnonceLocations;

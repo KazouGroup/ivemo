@@ -19,7 +19,64 @@ class PublicUserAnnonceLocations extends Component {
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.unactiveItem = this.unactiveItem.bind(this);
     }
+    unactiveItem(id){
+        Swal.fire({
+            title: 'Désactiver l\'annonce?',
+            text: "êtes vous sure de vouloir confirmer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                //Envoyer la requet au server
+                let url = route('annonces_locations_unactivated.site',id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update FAQ',
+                            message: 'Annonce désactiver avec succès',
+                            url: "/profile/personal_settings/annonces_locations/",
+                            target: "_blank"
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'bottom',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animated fadeInUp",
+                                exit: "animated fadeOutDown"
+                            },
+                        });
+                    /** End alert ***/
+                    this.loadItems();
+
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
+
+    }
+
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
@@ -89,7 +146,7 @@ class PublicUserAnnonceLocations extends Component {
             useranoncelocationPublick.annoncelocations.map(item => {
                 return(
 
-                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem}/>
+                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
                 )
             })
         ):(

@@ -33,10 +33,10 @@ class NavlinkconfigurationUser extends Component {
                                             <tbody>
 
                                                 <tr>
-                                                    <td> <NavLink to={`/profile/personal_settings/teams/`}><b>Notre Teams</b></NavLink></td>
+                                                    <td> <NavLink to={`/profile/personal_settings/teams/`}>Notre Teams</NavLink></td>
                                                 </tr>
                                                 <tr>
-                                                    <td> <NavLink to={`/profile/personal_settings/annonces_locations/`}><b>Annonces locations</b></NavLink></td>
+                                                    <td> <NavLink to={`/profile/personal_settings/annonces_locations/`}>Annonces locations</NavLink></td>
                                                 </tr>
 
                                             </tbody>

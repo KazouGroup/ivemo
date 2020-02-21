@@ -44,9 +44,37 @@ class AnnonceslocationList extends Component {
 
                                     </div>
                                 </div>
+                                {!$guest && (
+                                    <>
+                                        {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
+                                            <div className="text-center">
+                                                {this.props.status ?
+                                                    <>
+                                                        <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}
+                                                                className="btn btn-success btn-icon btn-sm">
+                                                            <i className="now-ui-icons ui-1_check"/>
+                                                        </button>
+                                                    </>
+                                                    :
+                                                    <>
+                                                        <button type="button" onClick={() => this.props.activeItem(this.props.id)}
+                                                                className="btn btn-primary btn-icon btn-sm">
+                                                            <i className="now-ui-icons ui-1_simple-delete"/>
+                                                        </button>
+                                                    </>
+                                                }
+                                            </div>
+                                        )}
+
+                                    </>
+
+                                )}
+
+
                                 <br />
                                 <div className="card-header d-flex align-items-center">
-                                    <div className="text-left pull-left">
+                                    {/*
+                                     <div className="text-left pull-left">
                                         <NavLink to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/`}>
                                             <h6 className="text-info ml-auto mr-auto">
                                                 {this.props.city.name}
@@ -60,6 +88,8 @@ class AnnonceslocationList extends Component {
                                             </h6>
                                         </Link>
                                     </div>
+                                    */}
+
                                 </div>
                             </div>
                             <div className="col-md-7">
@@ -77,7 +107,7 @@ class AnnonceslocationList extends Component {
                                 </div>
                                 <div className="row">
                                     <div className="col-md-5 col-6">
-                                        <h6 className="category text-dark">{this.props.pieces} p . {this.props.rooms} ch . {this.props.surface} m<sup>2</sup> </h6>
+                                        <h6 className="text-dark">{this.props.pieces} p . {this.props.rooms && (<>{this.props.rooms} ch</>)}. {this.props.surface && (<>{this.props.surface} m<sup>2</sup></>)}</h6>
                                     </div>
                                     <div className="col-md-7 col-6">
                                         <NavLink to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/`}>

@@ -36,6 +36,16 @@ Route::post(
     'AnnoncelocationController@sendcontactmessageuser'
 )->name('annoncelocationsendcontactmessageuser_site');
 
+Route::get(
+    'annonces_locations_active/{id}',
+    'AnnoncelocationController@activated'
+)->name('annonces_locations_active.site');
+
+Route::get(
+    'annonces_locations_unactive/{id}',
+    'AnnoncelocationController@unactivated'
+)->name('annonces_locations_unactivated.site');
+
 Route::delete(
     'annonces_locations_delete/{id}',
     'AnnoncelocationController@destroy'

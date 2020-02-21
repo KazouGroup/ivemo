@@ -16,6 +16,7 @@ use App\Model\contactuser;
 use App\Services\AnnoncelocationService;
 use App\Services\ContactuserService;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AnnoncelocationController extends Controller
 {
@@ -27,7 +28,7 @@ class AnnoncelocationController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','destroy','apiannonceslocationsbyuser','annonceslocationsbyuser'
+            'create','store','edit','update','destroy','apiannonceslocationsbyuser','annonceslocationsbyuser','activated','unactivated'
         ]]);
     }
     /**
@@ -104,7 +105,8 @@ class AnnoncelocationController extends Controller
     public function apiannonceslocationsbyuser()
     {
         $data = annoncelocation::with('user','categoryannoncelocation','city','annoncetype')
-            ->orderBy('created_at','DESC')->distinct()->get()->toArray();
+            ->whereIn('user_id',[auth()->user()->id])
+            ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();
 
         return response()->json($data, 200);
     }
@@ -118,8 +120,7 @@ class AnnoncelocationController extends Controller
 
     public function apiannoncelocations()
     {
-        $annoncelocations = AnnoncelocationResource::collection(annoncelocation::with('user','categoryannoncelocation')
-            ->whereIn('user_id',[auth()->user()->id])
+        $annoncelocations = AnnoncelocationResource::collection(annoncelocation::with('user','categoryannoncelocation','city','annoncetype')
             ->where('status',1)->latest()->get());
 
         return response()->json($annoncelocations, 200);
@@ -261,6 +262,37 @@ class AnnoncelocationController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+
+    public function activated($id)
+    {
+        $annoncelocation = annoncelocation::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$annoncelocation);
+
+        if(auth()->user()->id === $annoncelocation->user_id){
+
+            $annoncelocation->update(['status' => 1,]);
+
+            return response('Confirmed',Response::HTTP_ACCEPTED);
+        }else{
+            abort(404);
+        }
+    }
+
+    public function unactivated($id)
+    {
+        $annoncelocation = annoncelocation::where('id', $id)->findOrFail($id);
+        $this->authorize('update',$annoncelocation);
+
+        if(auth()->user()->id === $annoncelocation->user_id){
+            $annoncelocation->update(['status' => 0,]);
+
+            return response('Confirmed',Response::HTTP_ACCEPTED);
+        }else{
+            abort(404);
+        }
     }
 
     /**

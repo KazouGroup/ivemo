@@ -380,7 +380,6 @@ class TeamsUserIndex extends Component {
                     </div>
                 </div>
 
-
             </>
 
         )
