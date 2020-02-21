@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\BlogannoncereservationResource;
 use App\Http\Resources\CategoryannoncelocationResource;
 use App\Http\Resources\CategoryannoncereservationResource;
+use App\Services\BlogannoncereservationService;
 use App\Model\blogannoncereservation;
 use App\Model\categoryannoncelocation;
 use App\Model\categoryannoncereservation;
@@ -118,9 +119,12 @@ class BlogannoncereservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($blogannoncereservation)
     {
-        //
+        
+        $blogannoncereservation = BlogannoncereservationService::show($blogannoncereservation);
+
+        return response()->json($blogannoncereservation, 200);
     }
 
     /**
@@ -129,9 +133,13 @@ class BlogannoncereservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($blogannoncereservation)
     {
-        //
+
+        $blogannoncereservation = blogannoncereservation::whereSlugin($blogannoncereservation)->first();
+        return view('user.blog.blogannoncereservation.edit',[
+            'blogannoncereservation' => $blogannoncereservation,
+        ]);
     }
 
     /**

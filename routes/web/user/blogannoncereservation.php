@@ -8,3 +8,13 @@ Route::get(
     'blogs/annonce_reservations/{categoryannoncereservation}/{date}/{blogannoncereservation}',
     'BlogannoncereservationController@annonceblogcategoryreservationslug'
 )->name('blogannoncecategoryreservationslug_site');
+
+Route::get(
+    'blogs/annonce_reservation/{blogannoncereservation}/edit',
+    'BlogannoncereservationController@edit'
+)->name('blogannoncecategoryreservationedit_site');
+
+Route::get(
+    'api/blogs/annonce_reservation/{blogannoncereservation}',
+    'BlogannoncereservationController@show'
+)->name('api.blogannonceblogcategoryreservationslugin_site');

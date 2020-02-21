@@ -29,6 +29,7 @@ import Annoncelocationbycity from "../components/user/annonceloaction/Annonceloc
 import Annoncelocationbycategorycityshow from "../components/user/annonceloaction/Annoncelocationbycategorycityshow";
 import BlogannoncelocationShow from "../components/user/blog/blogannoncelocation/BlogannoncelocationShow";
 import BlogannoncelocationEdit from "../components/user/blog/blogannoncelocation/treatement/BlogannoncelocationEdit";
+import BlogannoncereservationEdit from "../components/user/blog/blogannoncereservation/treatement/BlogannoncereservationEdit";
 import BlogannoncelocationBycategorylocation
     from "../components/user/blog/blogannoncelocation/BlogannoncelocationBycategorylocation";
 import PersonalmessagesannonceslocationsUser
@@ -91,6 +92,7 @@ const RouteUser = props => (
           <Route exact path="/blogs/annonce_locations/:categoryannoncelocation/" component={withRouter(BlogannoncelocationBycategorylocation)}/>
           <Route exact path="/blogs/annonce_locations/:categoryannoncelocation/:date/:blogannoncelocation/" component={withRouter(BlogannoncelocationShow)}/>
           <Route exact path="/blogs/annonce_locations/:blogannoncelocation/edit/" component={BlogannoncelocationEdit}/>
+          <Route exact path="/blogs/annonce_reservation/:blogannoncereservation/edit/" component={BlogannoncereservationEdit}/>
     </Switch>
 
 );

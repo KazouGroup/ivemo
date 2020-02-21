@@ -131,7 +131,6 @@ class Annoncelocationbycity extends Component {
                                 <br />
                                 <div className="row">
 
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="submit text-left">
                                             <Link to={`/annonces_locations/locations/${itemCategoryannoncelocation}/`} type="button" className="btn btn-neutral btn-sm">

@@ -267,7 +267,7 @@ class BlogannoncelocationEdit extends Component {
 
                                                 <div className="submit text-center">
                                                     <button className="btn btn-primary btn-lg" type="submit">
-                                                        <i className="now-ui-icons ui-1_check"></i> <b>Poster votre annonce</b>
+                                                        <i className="now-ui-icons ui-1_check"></i> <b>Ajourner votre article</b>
                                                     </button>
                                                 </div>
                                             </div>

@@ -191,7 +191,7 @@ class AnnonceShowCreateUserSite extends Component {
                                                                             </div>
                                                                             <div className="row">
                                                                                 <div className="col-md-6">
-                                                                                    <label htmlFor="title">Selectionez votre votre type be bien</label>
+                                                                                    <label htmlFor="title">Selectionez votre type be bien</label>
                                                                                     <div className="form-group">
                                                                                         <select name={'city_id'} value={this.state.city_id}
                                                                                                 className={`form-control`}

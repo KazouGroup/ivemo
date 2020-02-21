@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Button } from "reactstrap";
+import {Button, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import moment from "moment";
@@ -95,6 +95,28 @@ class BlogannoncereservationIBycategoryreservation extends Component {
                                                     </Link>
                                                 </div>
                                                 <div className="card-body">
+                                                {!$guest && (
+                                                        <>
+                                                            {($userIvemo.id === item.user_id && $userIvemo.id === item.user.id) && (
+                                                                <div className="row">
+                                                                    <div className="mx-auto">
+                                                                        <NavLink to={`/blogs/annonce_reservation/${item.slugin}/edit/`} className="btn btn-sm btn-icon btn-success" rel="tooltip" title="Editer" data-placement="bottom">
+                                                                            <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                        </NavLink>
+                                                                        <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
+                                                                            Supprimer cette annonce
+                                                                        </UncontrolledTooltip>
+                                                                        <Button
+                                                                            className="btn btn-sm btn-icon btn-danger" onClick={() => this.deleteItem(item.id)} color="secondary" id="TooltipDelete">
+                                                                            <i className="now-ui-icons ui-1_simple-remove"/>
+                                                                        </Button>{" "}
+                                                                    </div>
+                                                                </div>
+
+                                                            )}
+
+                                                        </>
+                                                    )}
                                                     <h6 className="card-title text-center">
                                                         <NavLink to={`/blogs/annonce_reservations/${item.categoryannoncereservation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`} className="card-link"> {item.title}</NavLink>
                                                     </h6>

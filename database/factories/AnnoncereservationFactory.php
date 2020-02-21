@@ -21,6 +21,7 @@ $factory->define(annoncereservation::class, function (Faker $faker) {
         'disponible_date' => $disponible_date,
         'annoncetype_id' => 3,
         'slug' => str_slug($title),
+        
         'categoryannoncereservation_id' => categoryannoncereservation::inRandomOrder()->first()->id,
         'city_id' => city::inRandomOrder()->first()->id,
         'user_id' => user::inRandomOrder()->first()->id,
