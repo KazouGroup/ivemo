@@ -27,7 +27,7 @@ class AnnoncelocationController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','destroy'
+            'create','store','edit','update','destroy','apiannonceslocationsbyuser','annonceslocationsbyuser'
         ]]);
     }
     /**
@@ -101,9 +101,25 @@ class AnnoncelocationController extends Controller
         return response()->json($data, 200);
     }
 
+    public function apiannonceslocationsbyuser()
+    {
+        $data = annoncelocation::with('user','categoryannoncelocation','city','annoncetype')
+            ->orderBy('created_at','DESC')->distinct()->get()->toArray();
+
+        return response()->json($data, 200);
+    }
+
+    public function annonceslocationsbyuser()
+    {
+        return view('user.profile.annonces.privateprofilannoncelocations',[
+            'user' => auth()->user(),
+        ]);
+    }
+
     public function apiannoncelocations()
     {
         $annoncelocations = AnnoncelocationResource::collection(annoncelocation::with('user','categoryannoncelocation')
+            ->whereIn('user_id',[auth()->user()->id])
             ->where('status',1)->latest()->get());
 
         return response()->json($annoncelocations, 200);
