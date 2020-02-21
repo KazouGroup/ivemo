@@ -90,22 +90,6 @@ class AnnonceservationInteresse extends Component {
                                                         <i className="now-ui-icons location_pin"/>
                                                     </NavLink>
 
-                                                    {!$guest && (
-                                                        <>
-                                                            {$userIvemo.id === item.user_id && (
-                                                                <>
-                                                                    <NavLink to={`/annonces/`} className="btn btn-sm btn-success" rel="tooltip" title="Editer" data-placement="bottom">
-                                                                        <i className="now-ui-icons ui-1_simple-delete"/>
-                                                                    </NavLink>
-                                                                    <Button
-                                                                        className="btn btn-sm btn-danger" rel="tooltip" title="Supprimer" data-placement="bottom">
-                                                                        <i className="now-ui-icons ui-1_simple-remove"/>
-                                                                    </Button>{" "}
-                                                                </>
-                                                            )}
-
-                                                        </>
-                                                    )}
                                                 </div>
                                             </div>
                                             <div className="col-md-7">
@@ -118,21 +102,24 @@ class AnnonceservationInteresse extends Component {
                                                         </NavLink>
                                                     </div>
                                                     <div className="text-right ml-auto">
-                                                        <NavLink to={`/annonces_reservations/${item.annoncetype.slug}/${item.categoryannoncereservation.slug}/${item.city.slug}/`}>
-                                                            <h6 className="text-info ml-auto mr-auto">
-                                                                {item.city.name}
-                                                            </h6>
-                                                        </NavLink>
+                                                        <div className="col-md-12 col-12">
+                                                            <h5 className="text-success"><b>{this.numberWithCommas(item)} <small>FCFA</small></b></h5>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                                 <div className="row">
                                                     <div className="col-md-6 col-6">
-                                                        <h6 className="category text-dark">4 p . 3 ch . 180 m2</h6>
+                                                        <h6 className="category text-dark"> p.  ch.  m<sup>2</sup></h6>
                                                     </div>
                                                     <div className="col-md-6 col-6">
-                                                        <h5 className="text-success"><b>{this.numberWithCommas(item)} <small>FCFA</small></b></h5>
+                                                        <NavLink to={`/annonces_locations/locations/${item.categoryannoncereservation.slug}/${item.city.slug}/`}>
+                                                            <span className="ml-auto mr-auto">
+                                                                <strong>{item.city.name} </strong>
+                                                            </span>
+                                                        </NavLink>
+                                                        - {item.district}
                                                     </div>
-
                                                 </div>
                                                 <h6 className="card-title">
                                                     <NavLink to={`/annonces_reservations/${item.annoncetype.slug}/${item.categoryannoncereservation.slug}/${item.city.slug}/${item.slug}/`}>
