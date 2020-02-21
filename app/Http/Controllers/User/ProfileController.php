@@ -37,7 +37,8 @@ class ProfileController extends Controller
             'api','apiprofilepublique','apiannoncereservationbyprofilpublique','public_profile_send_message',
             'apiannoncelocationbyprofilpublique','public_profile','publicprofilannoncereservations','apiprofilarticleslocations',
             'publicprofilannoncelocations','apiprofilannoncelocations','apiprofilannoncereservations',
-            'apiprofilannoncereserventes','apiprofilarticlesreservations','apiprofilblogannoncelocations','publicprofilarticleslocations'
+            'apiprofilannoncereserventes','apiprofilarticlesreservations','apiprofilblogannoncelocations',
+            'publicprofilarticleslocations','apiprofilblogannoncereservations','profilblogannoncereservations'
         ]]);
     }
     /**
@@ -215,6 +216,7 @@ class ProfileController extends Controller
 
 
 
+
     public function apiprofilannoncereserventes(user $user)
     {
         $annoncesreservations = user::whereSlug($user->slug)
@@ -244,28 +246,9 @@ class ProfileController extends Controller
 
     public function apiprofilblogannoncelocations(user $user)
     {
-        $blogannoncelocations = user::whereSlug($user->slug)
-            ->with(['blogannoncelocations' => function ($q) use ($user){
-                $q->with('user','categoryannoncelocation')
-                    ->whereIn('user_id',[$user->id])
-                    ->where('status',1)
-                    ->distinct()->paginate(40)->toArray()
-                ;},
-            ])
-            ->withCount(['annoncelocations' => function ($q){
-                $q->where('status',1);
-            }])->withCount(['annoncereservations' => function ($q){
-                $q->where('status',1);
-            }])->withCount(['annonceventes' => function ($q){
-                $q->where('status',1);
-            }])->withCount(['blogannoncelocations' => function ($q){
-                $q->where('status',1);
-            }])->withCount(['blogannoncereservations' => function ($q){
-                $q->where('status',1);
-            }])
-            ->first();
+        $personnalblogannonces = ProfileService::apiprofilblogannoncelocations($user);
 
-        return response()->json($blogannoncelocations, 200);
+        return response()->json($personnalblogannonces, 200);
     }
 
     public function publicprofilarticleslocations(user $user)
@@ -274,7 +257,22 @@ class ProfileController extends Controller
             'user' => $user,
         ]);
     }
-     /**
+    public function apiprofilblogannoncereservations(user $user)
+    {
+
+        $personnalblogannonces = ProfileService::apiprofilblogannoncereservations($user);
+
+        return response()->json($personnalblogannonces, 200);
+    }
+
+    public function profilblogannoncereservations(user $user)
+    {
+        return view('user.profile.blogs.publicprofilannoncereservations',[
+            'user' => $user,
+        ]);
+    }
+
+    /**
       *
      * Show the form for creating a new resource.
      *

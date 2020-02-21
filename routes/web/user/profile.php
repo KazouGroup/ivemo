@@ -83,6 +83,11 @@ Route::get(
 )->name('public_profile_articleslocations.site');
 
 Route::get(
+    '@{user}/blogs/annonce_reservations/',
+    'ProfileController@profilblogannoncereservations'
+)->name('public_profile_articlesreservation.site');
+
+Route::get(
     'profile/change_password',
     'ProfileController@change_password'
 )->name('change_password.site');

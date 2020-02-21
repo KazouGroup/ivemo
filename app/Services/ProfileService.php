@@ -160,4 +160,56 @@ class ProfileService
         return $personnalreservations;
     }
 
+    public static function apiprofilblogannoncelocations($user)
+    {
+        $personnalblogannonces = user::whereSlug($user->slug)
+            ->with(['blogannoncelocations' => function ($q) use ($user){
+                $q->with('user','categoryannoncelocation')
+                    ->whereIn('user_id',[$user->id])
+                    ->where('status',1)
+                    ->distinct()->paginate(40)->toArray()
+                ;},
+            ])
+            ->withCount(['annoncelocations' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['annoncereservations' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['annonceventes' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['blogannoncelocations' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['blogannoncereservations' => function ($q){
+                $q->where('status',1);
+            }])
+            ->first();
+
+        return $personnalblogannonces;
+    }
+
+    public static function apiprofilblogannoncereservations($user)
+    {
+        $personnalblogannonces = user::whereSlug($user->slug)
+            ->with(['blogannoncereservations' => function ($q) use ($user){
+                $q->with('user','categoryannoncereservation')
+                    ->whereIn('user_id',[$user->id])
+                    ->where('status',1)
+                    ->distinct()->paginate(40)->toArray()
+                ;},
+            ])
+            ->withCount(['annoncelocations' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['annoncereservations' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['annonceventes' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['blogannoncelocations' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['blogannoncereservations' => function ($q){
+                $q->where('status',1);
+            }])
+            ->first();
+
+        return $personnalblogannonces;
+    }
+
 }

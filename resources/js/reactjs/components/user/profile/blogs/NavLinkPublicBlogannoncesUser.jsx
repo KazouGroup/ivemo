@@ -35,7 +35,7 @@ class NavLinkPublicBlogannoncesUser extends Component {
                             </tr>
                             <tr>
                                 <td>
-                                    <NavLink to={`/@${this.props.slug}/blogs/annonce_locations/`}>
+                                    <NavLink to={`/@${this.props.slug}/blogs/annonce_reservations/`}>
                                         Articles sur la <b>reservations</b>
                                     </NavLink>
                                 </td>

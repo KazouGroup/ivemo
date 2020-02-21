@@ -6,9 +6,9 @@ import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import FormContactProfileAccountUser from "../form/FormContactProfileAccountUser";
-import NavLinkPublicBlogannoncesUser from "../blogs/NavLinkPublicBlogannoncesUser";
+import NavLinkPublicBlogannoncesUser from "./NavLinkPublicBlogannoncesUser";
 import NavLinkPublicAnnonceUser from "../annonces/NavLinkPublicAnnonceUser";
-import PublicUserBlogannonceList from "./PublicUserBlogannonceList";
+import PublicUserBlogannoncelocationList from "./PublicUserBlogannoncelocationList";
 
 
 class PublicUserBlogannonceLocation extends Component {
@@ -89,7 +89,7 @@ class PublicUserBlogannonceLocation extends Component {
             userbloglocationPublick.blogannoncelocations.map(item => {
                 return(
 
-                    <PublicUserBlogannonceList key={item.id} {...item} deleteItem={this.deleteItem}/>
+                    <PublicUserBlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem}/>
                 )
             })
         ):(

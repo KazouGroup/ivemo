@@ -44,6 +44,7 @@ import PublicUserAnnonceReservations from "../components/user/profile/annonces/P
 import TeamsUserEdite from "../components/user/configurations/teams/TeamsUserEdite";
 import ProfileConfigUser from "../components/user/profile/file_private/ProfileConfigUser";
 import PublicUserBlogannonceLocation from "../components/user/profile/blogs/PublicUserBlogannonceLocation";
+import PublicUserBlogannonceReservation from "../components/user/profile/blogs/PublicUserBlogannonceReservation";
 
 
 const RouteUser = props => (
@@ -70,10 +71,11 @@ const RouteUser = props => (
           <Route exact path="/profile/account/" component={ProfileAccountUser}/>
 
           <Route exact path="/@:user/" component={withRouter(ProfileAccountPublicUser)}/>
-          <Route exact path="/@:user/annonces_locations/" component={withRouter(PublicUserAnnonceLocations)}/>
-          <Route exact path="/@:user/annonces_reservations/" component={withRouter(PublicUserAnnonceReservations)}/>
+          <Route exact path="/@:user/annonces_locations/" component={PublicUserAnnonceLocations}/>
+          <Route exact path="/@:user/annonces_reservations/" component={PublicUserAnnonceReservations}/>
 
-          <Route exact path="/@:user/blogs/annonce_locations/" component={withRouter(PublicUserBlogannonceLocation)}/>
+          <Route exact path="/@:user/blogs/annonce_locations/" component={PublicUserBlogannonceLocation}/>
+          <Route exact path="/@:user/blogs/annonce_reservations/" component={PublicUserBlogannonceReservation}/>
 
           <Route exact path="/profile/personal_reservations/" component={PersonalannoncereservationsUser}/>
           <Route exact path="/profile/annonces_reservations_booked/" component={Profileannoncesreservationsbooked}/>
@@ -95,7 +97,7 @@ const RouteUser = props => (
           <Route exact path="/blogs/annonce_locations/:categoryannoncelocation/" component={withRouter(BlogannoncelocationBycategorylocation)}/>
           <Route exact path="/blogs/annonce_locations/:categoryannoncelocation/:date/:blogannoncelocation/" component={withRouter(BlogannoncelocationShow)}/>
           <Route exact path="/blogs/annonce_locations/:blogannoncelocation/edit/" component={BlogannoncelocationEdit}/>
-          <Route exact path="/blogs/annonce_reservation/:blogannoncereservation/edit/" component={BlogannoncereservationEdit}/>
+          <Route exact path="/blogs/annonce_reservations/:blogannoncereservation/edit/" component={BlogannoncereservationEdit}/>
     </Switch>
 
 );

@@ -35,3 +35,8 @@ Route::get(
     '@{user}/blogs/annonce_locations',
     'ProfileController@apiprofilblogannoncelocations'
 )->name('api.profilpublique_blogannoncelocations');
+
+Route::get(
+    '@{user}/blogs/annonce_reservations',
+    'ProfileController@apiprofilblogannoncereservations'
+)->name('api.profilpublique_blogannoncerewservations');

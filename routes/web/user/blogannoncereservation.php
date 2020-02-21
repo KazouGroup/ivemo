@@ -10,11 +10,11 @@ Route::get(
 )->name('blogannoncecategoryreservationslug_site');
 
 Route::get(
-    'blogs/annonce_reservation/{blogannoncereservation}/edit',
+    'blogs/annonce_reservations/{blogannoncereservation}/edit',
     'BlogannoncereservationController@edit'
 )->name('blogannoncecategoryreservationedit_site');
 
 Route::get(
-    'api/blogs/annonce_reservation/{blogannoncereservation}',
+    'api/blogs/annonce_reservations/{blogannoncereservation}',
     'BlogannoncereservationController@show'
 )->name('api.blogannonceblogcategoryreservationslugin_site');
