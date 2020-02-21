@@ -12,6 +12,16 @@ Route::get(
 )->name('annoncelocationbycategoryannoncelocations_site');
 
 Route::get(
+    'api/profile/personal_settings/annonces_locations',
+    'AnnoncelocationController@apiannonceslocationsbyuser'
+)->name('api.annonceslocationsbyuser_site');
+
+Route::get(
+    'profile/personal_settings/annonces_locations',
+    'AnnoncelocationController@annonceslocationsbyuser'
+)->name('annonceslocationsbyuser_site');
+
+Route::get(
     'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}',
     'AnnoncelocationController@annoncelocationnbycity'
 )->name('annoncelocationbycities_site');
