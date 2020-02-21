@@ -211,6 +211,19 @@ class PublicUserBlogannonceReservation extends Component {
 
                                         </Row>
 
+
+                                        <div className="card">
+                                            <div className="card-body">
+
+                                                <div className="card-header text-center">
+                                                    <h4 className="card-title"><b>Contacter {userblogreservationPublick.first_name}</b></h4>
+                                                </div>
+
+                                                <FormContactProfileAccountUser {...this.props}/>
+
+                                            </div>
+                                        </div>
+
                                     </div>
 
                                 </div>

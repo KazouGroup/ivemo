@@ -183,7 +183,7 @@ class FormContactProfileAccountUser extends Component {
                                          placeholder={'Posez ici toutes vos questions !'}
                                          className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
                                          id="message"
-                                         rows="10" />
+                                         rows="15" />
                             {this.renderErrorFor('message')}
                         </InputGroup>
                     </Row>
