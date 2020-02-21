@@ -83,7 +83,7 @@ class faq extends Model implements Auditable
     }
 
     /**
-     * Get the comments for the blog post.
+     * Get the comments for the blogs post.
      */
     public function comments()
     {

@@ -108,7 +108,7 @@ class ProfileAccountTeamUser extends Component {
                                                 <h6 className="category text-primary">
                                                     {item.role}
                                                 </h6>
-                                                <p className="card-description" dangerouslySetInnerHTML={this.getDescription(item)} />
+                                                <h6 className="category" dangerouslySetInnerHTML={this.getDescription(item)} />
 
                                             </div>
 
@@ -120,8 +120,8 @@ class ProfileAccountTeamUser extends Component {
                                                             <UncontrolledTooltip placement="bottom" target="TooltipEditer" delay={0}>
                                                                 Éditer cette utilisateur
                                                             </UncontrolledTooltip>
-                                                            <NavLink to={`/profile/personal_settings/teams/${item.id}/edit/`} className="btn btn-sm btn-success btn-icon btn-sm" id="TooltipEditer">
-                                                                <i className="now-ui-icons ui-1_simple-delete"/>
+                                                            <NavLink to={`/profile/personal_settings/teams/${item.id}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" id="TooltipEditer">
+                                                                <i className="now-ui-icons ui-2_settings-90"/>
                                                             </NavLink>
                                                             <button type="button" id={'TooltipDelete'} onClick={() => this.deleteItem(item.id)}
                                                                     className="btn btn-icon btn-sm btn-danger">

@@ -71,14 +71,14 @@ class BlogannoncereservationController extends Controller
 
     public function annonceblogcategoryreservation(categoryannoncereservation $categoryannoncereservation)
     {
-       return view('user.blog.blogannoncereservation.category',[
+       return view('user.blogs.blogannoncereservation.category',[
              'categoryannoncereservation' => $categoryannoncereservation,
         ]);
     }
 
     public function annonceblogcategoryreservationslug($categoryannoncereservation, $date,blogannoncereservation $blogannoncereservation)
     {
-       return view('user.blog.blogannoncereservation.show',[
+       return view('user.blogs.blogannoncereservation.show',[
              'blogannoncereservation' => $blogannoncereservation,
         ]);
     }
@@ -121,7 +121,7 @@ class BlogannoncereservationController extends Controller
      */
     public function show($blogannoncereservation)
     {
-        
+
         $blogannoncereservation = BlogannoncereservationService::show($blogannoncereservation);
 
         return response()->json($blogannoncereservation, 200);
@@ -137,7 +137,7 @@ class BlogannoncereservationController extends Controller
     {
 
         $blogannoncereservation = blogannoncereservation::whereSlugin($blogannoncereservation)->first();
-        return view('user.blog.blogannoncereservation.edit',[
+        return view('user.blogs.blogannoncereservation.edit',[
             'blogannoncereservation' => $blogannoncereservation,
         ]);
     }

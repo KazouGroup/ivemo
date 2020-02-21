@@ -37,7 +37,7 @@ class ProfileController extends Controller
             'api','apiprofilepublique','apiannoncereservationbyprofilpublique','public_profile_send_message',
             'apiannoncelocationbyprofilpublique','public_profile','publicprofilannoncereservations','apiprofilarticleslocations',
             'publicprofilannoncelocations','apiprofilannoncelocations','apiprofilannoncereservations',
-            'apiprofilannoncereserventes','apiprofilarticlesreservations'
+            'apiprofilannoncereserventes','apiprofilarticlesreservations','apiprofilblogannoncelocations','publicprofilarticleslocations'
         ]]);
     }
     /**
@@ -59,8 +59,11 @@ class ProfileController extends Controller
                 $q->where('status',1);
             }])->withCount(['annonceventes' => function ($q){
                 $q->where('status',1);
-            }])
-            ->first());
+            }])->withCount(['blogannoncelocations' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['blogannoncereservations' => function ($q){
+                $q->where('status',1);
+            }])->first());
 
         return response()->json($user, 200);
     }
@@ -161,23 +164,7 @@ class ProfileController extends Controller
 
     public function apiprofilannoncelocations(user $user)
     {
-        $userannoncelocations = user::whereSlug($user->slug)
-            ->with(['annoncelocations' => function ($q) use ($user){
-                    $q->with('user','categoryannoncelocation','city','annoncetype')
-                        ->whereIn('annoncetype_id',[1])
-                        ->whereIn('user_id',[$user->id])
-                        ->where('status',1)
-                        ->distinct()->paginate(40)->toArray()
-                    ;},
-            ])
-            ->withCount(['annoncelocations' => function ($q){
-                $q->where('status',1);
-            }])->withCount(['annoncereservations' => function ($q){
-                $q->where('status',1);
-            }])->withCount(['annonceventes' => function ($q){
-                $q->where('status',1);
-            }])
-            ->first();
+        $userannoncelocations = ProfileService::apiprofilannoncelocations($user);
 
         return response()->json($userannoncelocations, 200);
     }
@@ -214,23 +201,7 @@ class ProfileController extends Controller
     public function apiprofilannoncereservations(user $user)
     {
 
-        $annoncesreservations = user::whereSlug($user->slug)
-            ->with(['annoncereservations' => function ($q) use ($user){
-                $q->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
-                    ->whereIn('annoncetype_id',[3])
-                    ->whereIn('user_id',[$user->id])
-                    ->where('status',1)
-                    ->distinct()->paginate(40)->toArray()
-                ;},
-            ])
-            ->withCount(['annoncelocations' => function ($q){
-                $q->where('status',1);
-            }])->withCount(['annoncereservations' => function ($q){
-                $q->where('status',1);
-            }])->withCount(['annonceventes' => function ($q){
-                $q->where('status',1);
-            }])
-            ->first();
+        $annoncesreservations = ProfileService::apiprofilannoncereservations($user);
 
         return response()->json($annoncesreservations, 200);
     }
@@ -241,6 +212,8 @@ class ProfileController extends Controller
            'user' => $user,
        ]);
     }
+
+
 
     public function apiprofilannoncereserventes(user $user)
     {
@@ -259,11 +232,48 @@ class ProfileController extends Controller
                 $q->where('status',1);
             }])->withCount(['annonceventes' => function ($q){
                 $q->where('status',1);
+            }])->withCount(['blogannoncelocations' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['blogannoncereservations' => function ($q){
+                $q->where('status',1);
             }])->first();
 
         return response()->json($annoncesreservations, 200);
     }
 
+
+    public function apiprofilblogannoncelocations(user $user)
+    {
+        $blogannoncelocations = user::whereSlug($user->slug)
+            ->with(['blogannoncelocations' => function ($q) use ($user){
+                $q->with('user','categoryannoncelocation')
+                    ->whereIn('user_id',[$user->id])
+                    ->where('status',1)
+                    ->distinct()->paginate(40)->toArray()
+                ;},
+            ])
+            ->withCount(['annoncelocations' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['annoncereservations' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['annonceventes' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['blogannoncelocations' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['blogannoncereservations' => function ($q){
+                $q->where('status',1);
+            }])
+            ->first();
+
+        return response()->json($blogannoncelocations, 200);
+    }
+
+    public function publicprofilarticleslocations(user $user)
+    {
+        return view('user.profile.blogs.publicprofilblogannoncelocations',[
+            'user' => $user,
+        ]);
+    }
      /**
       *
      * Show the form for creating a new resource.

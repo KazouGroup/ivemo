@@ -123,9 +123,19 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
         return $this->hasMany(annoncelocation::class, 'user_id');
     }
 
+    public function blogannoncelocations()
+    {
+        return $this->hasMany(blogannoncelocation::class, 'user_id');
+    }
+
     public function annoncereservations()
     {
         return $this->hasMany(annoncereservation::class, 'user_id');
+    }
+
+    public function blogannoncereservations()
+    {
+        return $this->hasMany(blogannoncereservation::class, 'user_id');
     }
 
     public function annonceventes()

@@ -24,6 +24,16 @@ Route::get(
     'BlogannoncelocationController@show'
 )->name('api.blogannonceblogcategorylocationslugin_site');
 
+Route::get(
+    'blogs/annonce_locations_active/{id}',
+    'BlogannoncelocationController@activated'
+)->name('blogannoncecategorylocationactive_site.site');
+
+Route::get(
+    'blogs/annonce_locations_unactive/{id}',
+    'BlogannoncelocationController@unactivated'
+)->name('blogannoncecategorylocationunactive_site.site');
+
 Route::delete(
     'blogs/annonce_locations_delete/{id}',
     'BlogannoncelocationController@destroy'

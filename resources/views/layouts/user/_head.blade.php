@@ -8,18 +8,20 @@
 @auth
     <meta name="userID" content="{{ auth()->user()->id }}">
     <script>
-    window.userIvemo = {!! json_encode([
+    window.dataIvemo = {!! json_encode([
     'roles' => auth()->user()->roles,
     'permissions' => auth()->user()->getAllPermissions(),
     ]) !!}
     </script>
 @endauth
+
 <script>window.Ivemo = { csrfToken: '{{ csrf_token() }}' }; </script>
 <script>
     window.userIvemo = {!! json_encode([
     'user' => auth()->user(),
     'guest' => auth()->guest(),
     'authcheck' => auth()->check(),
+     'url_site' => htmlspecialchars(config('app.url')),
     ]) !!}
 </script>
 

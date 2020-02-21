@@ -1,9 +1,21 @@
 import React, { Component } from "react";
-import { Link, NavLink } from 'react-router-dom';
-import { Button, Form, Input, InputGroup, Row, CardBody, Col, CardTitle } from "reactstrap";
+import {Link, NavLink, withRouter} from 'react-router-dom';
+import {
+    Button,
+    Form,
+    Input,
+    InputGroup,
+    Row,
+    CardBody,
+    Col,
+    CardTitle,
+    FormGroup,
+    UncontrolledTooltip
+} from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import ReactQuill, { Quill, Mixin, Toolbar } from 'react-quill';
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
+import Swal from "sweetalert2";
 
 
 class BlogannoncelocationEdit extends Component {
@@ -11,6 +23,9 @@ class BlogannoncelocationEdit extends Component {
         super(props);
 
         this.updateItem = this.updateItem.bind(this);
+        this.activeItem = this.activeItem.bind(this);
+        this.unactiveItem = this.unactiveItem.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
         this.updateImage = this.updateImage.bind(this);
         this.removeImage = this.removeImage.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -18,9 +33,12 @@ class BlogannoncelocationEdit extends Component {
         this.renderErrorFor = this.renderErrorFor.bind(this);
         this.handleChangeBody = this.handleChangeBody.bind(this);
         this.state = {
+            id: '',
             title: '',
             photo: '',
+            status: '',
             description: '',
+            red_time: '',
             categoryannoncelocation_id: '',
             showDefaultImage: false,
             errors: [],
@@ -84,6 +102,131 @@ class BlogannoncelocationEdit extends Component {
             )
         }
     }
+    activeItem(id){
+        //Envoyer la requet au server
+        let url = route('blogannoncecategorylocationactive_site.site',[id]);
+        dyaxios.get(url).then(() => {
+
+            /** Alert notify bootstrapp **/
+            $.notify({
+                    //,
+                    message: 'Article de blogs activé avec succès'
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animated fadeInUp",
+                        exit: "animated fadeOutDown"
+                    },
+                });
+            /** End alert ***/
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animated bounceInDown',
+                    exit: 'animated bounceOutUp'
+                }
+            });
+        })
+
+    }
+
+    unactiveItem(id){
+        //Envoyer la requet au server
+        let url = route('blogannoncecategorylocationunactive_site.site',[id]);
+        dyaxios.get(url).then(() => {
+
+            /** Alert notify bootstrapp **/
+            $.notify({
+                    // title: 'Update FAQ',
+                    message: 'Article de blogs désactiver avec succès'
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animated fadeInUp",
+                        exit: "animated fadeOutDown"
+                    },
+                });
+            /** End alert ***/
+            this.loadItems();
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animated bounceInDown',
+                    exit: 'animated bounceOutUp'
+                }
+            });
+        })
+
+    }
+
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes-vous sûr de vouloir executer cette action",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                const url = route('blogannoncecategorylocationdelete_site',id);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update',
+                            message: 'Article de blogs suprimée avec success'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'primary',
+                            placement: {
+                                from: 'bottom',
+                                align: 'right'
+                            },
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            },
+                        });
+                    /** End alert ***/
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
+    }
 
     updateItem(e) {
         e.preventDefault();
@@ -91,6 +234,7 @@ class BlogannoncelocationEdit extends Component {
         let item = {
             title: this.state.title,
             photo: this.state.photo,
+            red_time: this.state.red_time,
             description: this.state.description,
             categoryannoncelocation_id: this.state.categoryannoncelocation_id,
         };
@@ -99,7 +243,7 @@ class BlogannoncelocationEdit extends Component {
             .then(() => {
                 $.notify({
                     //,
-                    message: 'Votre article de blog a bien été modifié'
+                    message: 'Votre article de blogs a bien été modifié'
                 },
                     {
                         allow_dismiss: false,
@@ -125,16 +269,19 @@ class BlogannoncelocationEdit extends Component {
         let url = route('api.blogannonceblogcategorylocationslugin_site', [Itemdata]);
         dyaxios.get(url).then(response =>
             this.setState({
+                id: response.data.id,
                 title: response.data.title,
                 photo: response.data.photo,
+                status: response.data.status,
+                red_time: response.data.red_time,
                 categoryannoncelocation_id: response.data.categoryannoncelocation_id,
                 description: response.data.description,
             }));
-        fetch(route('api.categoryannoncelocation_site')).then(res => res.json()).then((result) => { this.setState({ categoryannoncelocations: result }) })
     }
     // lifecycle method
     componentDidMount() {
         this.loadItems();
+        fetch(route('api.categoryannoncelocation_site')).then(res => res.json()).then((result) => { this.setState({ categoryannoncelocations: result }) })
     }
 
     render() {
@@ -165,7 +312,7 @@ class BlogannoncelocationEdit extends Component {
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="card-title">
-                                                    <b>Editez l'article {this.state.title}</b>
+                                                    <b>{this.state.title}</b>
                                                 </div>
 
                                                 <div className="card-header d-flex align-items-center">
@@ -180,44 +327,76 @@ class BlogannoncelocationEdit extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="text-right ml-auto">
-                                                        <Button className="btn btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
-                                                            <i className="now-ui-icons tech_mobile"></i>
-                                                        </Button>
-                                                        <a href="https://www.kazoutech.com" className="btn btn-sm btn-primary" target="_banck">
-                                                            <i className="now-ui-icons objects_globe"></i>
-                                                        </a>
+                                                        {this.state.status ?
+                                                            <>
+                                                                <button type="button" rel="tooltip" onClick={() => this.unactiveItem(this.state.id)}
+                                                                        className="btn btn-success btn-icon btn-sm" >
+                                                                    <i className="now-ui-icons ui-1_check"/>
+                                                                </button>
+                                                            </>
+                                                            :
+                                                            <>
+                                                                <button type="button" onClick={() => this.activeItem(this.state.id)}
+                                                                        className="btn btn-primary btn-icon btn-sm">
+                                                                    <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                </button>
+                                                            </>
+
+                                                        }
+                                                        <Button
+                                                            className="btn btn-sm btn-icon btn-danger" onClick={() => this.deleteItem(this.state.id)} >
+                                                            <i className="now-ui-icons ui-1_simple-remove"/>
+                                                        </Button>{" "}
                                                     </div>
                                                 </div>
                                                 <hr />
-                                                <div className="card-body">
+                                                <CardBody>
 
-                                                    <div className="row">
-                                                        <div className="col-md-8">
-                                                            <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-
-                                                                <label htmlFor="title">Donner un titre à cet article</label>
-                                                                <div className="input-group">
-                                                                    <div className="input-group-prepend">
-                                                                        <span className="input-group-text"><i className="now-ui-icons users_circle-08"></i></span>
-                                                                    </div>
-                                                                    <Input id='title'
-                                                                        type='text'
-                                                                        className={`form-control ${this.hasErrorFor('title') ? 'is-invalid' : ''}`}
-                                                                        name='title'
-                                                                        placeholder="Titre de l'article"
-                                                                        aria-label="Titre de l'article"
-                                                                        value={this.state.title || ''}
-                                                                        onChange={this.handleFieldChange}
-                                                                    />
-                                                                    {this.renderErrorFor('title')}
+                                                    <Row>
+                                                        <div className="col-md-12">
+                                                            <label htmlFor="title">Donner un titre à cet article</label>
+                                                            <InputGroup>
+                                                                <div className="input-group-prepend">
+                                                                    <span className="input-group-text"><i className="now-ui-icons users_circle-08"/></span>
                                                                 </div>
-
-                                                            </div>
-
+                                                                <Input id='title'
+                                                                       type='text'
+                                                                       className={`form-control ${this.hasErrorFor('title') ? 'is-invalid' : ''}`}
+                                                                       name='title'
+                                                                       placeholder="Titre de l'article"
+                                                                       aria-label="Titre de l'article"
+                                                                       value={this.state.title || ''}
+                                                                       required
+                                                                       onChange={this.handleFieldChange}
+                                                                />
+                                                                {this.renderErrorFor('title')}
+                                                            </InputGroup>
                                                         </div>
-                                                        <div className="col-md-4">
+                                                    </Row>
+
+                                                    <Row>
+                                                        <div className="col-md-6">
+                                                            <label htmlFor="title">Estmer en temp de lecture en mim</label>
+                                                            <InputGroup>
+                                                                <div className="input-group-prepend">
+                                                                    <span className="input-group-text"><i className="now-ui-icons tech_watch-time"/></span>
+                                                                </div>
+                                                                <Input id='red_time'
+                                                                       type='number'
+                                                                       className={`form-control ${this.hasErrorFor('red_time') ? 'is-invalid' : ''}`}
+                                                                       name='red_time'
+                                                                       placeholder="Ex: 8"
+                                                                       aria-label="Titre de l'article"
+                                                                       value={this.state.red_time || ''}
+                                                                       required
+                                                                       onChange={this.handleFieldChange}
+                                                                />
+                                                                {this.renderErrorFor('red_time')}
+                                                            </InputGroup>
+                                                        </div>
+                                                        <div className="col-md-6">
                                                             <label htmlFor="title">Selectionez la categorie</label>
-                                                            <div className="form-group">
+                                                            <FormGroup>
                                                                 <select name={'categoryannoncelocation_id'} value={this.state.categoryannoncelocation_id}
                                                                     className={`form-control`}
                                                                     id="categoryannoncelocation_id" onChange={this.handleFieldChange}>
@@ -227,9 +406,9 @@ class BlogannoncelocationEdit extends Component {
                                                                     ))}
                                                                 </select>
                                                                 {this.renderErrorFor('categoryannoncelocation_id')}
-                                                            </div>
+                                                            </FormGroup>
                                                         </div>
-                                                    </div>
+                                                    </Row>
                                                     <Row>
                                                         <div className="col-md-4 mx-auto">
                                                             <div className="profile text-center">
@@ -247,7 +426,7 @@ class BlogannoncelocationEdit extends Component {
                                                     </Row>
                                                     <Row>
                                                         <div className="col-md-12">
-                                                            <div className="form-group">
+                                                            <FormGroup>
                                                                 <label className="labels">
                                                                     Décrivez votre article
                                                                         <span className="text-danger">*</span>
@@ -259,15 +438,15 @@ class BlogannoncelocationEdit extends Component {
                                                                     value={this.state.description || ''}
                                                                     onChange={this.handleChangeBody} />
                                                                 {this.renderErrorFor('description')}
-                                                            </div>
+                                                            </FormGroup>
                                                         </div>
                                                     </Row>
 
-                                                </div>
+                                                </CardBody>
 
                                                 <div className="submit text-center">
-                                                    <button className="btn btn-primary btn-lg" type="submit">
-                                                        <i className="now-ui-icons ui-1_check"></i> <b>Ajourner votre article</b>
+                                                    <button className="btn btn-primary" type="submit">
+                                                        <b>Mettre à jour l'article de blog</b>
                                                     </button>
                                                 </div>
                                             </div>
@@ -289,4 +468,4 @@ class BlogannoncelocationEdit extends Component {
     }
 }
 
-export default BlogannoncelocationEdit;
+export default withRouter(BlogannoncelocationEdit);

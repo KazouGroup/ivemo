@@ -134,11 +134,11 @@ class LoginModalUser extends Component {
                                     </div>
                                 </div>
 
-                                <div className="mx-auto">
-                                    <div className="card-footer text-center">
-                                        <button type="submit" className="btn btn-neutral btn-round btn-lg btn-block">Se connecter</button>
-                                    </div>
+
+                                <div className="modal-footer text-center">
+                                    <input type="submit" value="Se connecter" className="btn btn-neutral btn-round btn-lg btn-block"/>
                                 </div>
+
                             </form>
                         </div>
                     </div>

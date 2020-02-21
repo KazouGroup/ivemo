@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import AnnoncereservationList from "../../annoncereservation/AnnoncereservationList";
 import NavLinkPublicAnnonceUser from "./NavLinkPublicAnnonceUser";
 import FormContactProfileAccountUser from "../form/FormContactProfileAccountUser";
+import NavLinkPublicBlogannoncesUser from "../blogs/NavLinkPublicBlogannoncesUser";
 
 
 class PublicUserAnnonceReservations extends Component {
@@ -154,6 +155,29 @@ class PublicUserAnnonceReservations extends Component {
 
                                                                 <NavLinkPublicAnnonceUser {...this.props} {...useranoncereservationPublick}/>
 
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                            <div className="card card-plain">
+                                                                <div className="card-header" role="tab" id="headingTwo">
+                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                        <b>Articles de {useranoncereservationPublick.first_name}</b>
+                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
+                                                                    </a>
+                                                                </div>
+
+                                                                <NavLinkPublicBlogannoncesUser {...this.props} {...useranoncereservationPublick}/>
 
                                                             </div>
 

@@ -8,6 +8,7 @@ import AnnonceslocationList from "../../annonceloaction/inc/AnnonceslocationList
 import Swal from "sweetalert2";
 import NavLinkPublicAnnonceUser from "./NavLinkPublicAnnonceUser";
 import FormContactProfileAccountUser from "../form/FormContactProfileAccountUser";
+import NavLinkPublicBlogannoncesUser from "../blogs/NavLinkPublicBlogannoncesUser";
 
 
 class PublicUserAnnonceLocations extends Component {
@@ -146,12 +147,35 @@ class PublicUserAnnonceLocations extends Component {
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingOne">
                                                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <b>Annonce de {useranoncelocationPublick.first_name}</b>
+                                                                        <b>Annonces de {useranoncelocationPublick.first_name}</b>
                                                                         <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
 
                                                                 <NavLinkPublicAnnonceUser {...this.props} {...useranoncelocationPublick}/>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                            <div className="card card-plain">
+                                                                <div className="card-header" role="tab" id="headingTwo">
+                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                        <b>Articles de {useranoncelocationPublick.first_name}</b>
+                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
+                                                                    </a>
+                                                                </div>
+
+                                                                <NavLinkPublicBlogannoncesUser {...this.props} {...useranoncelocationPublick}/>
 
                                                             </div>
 

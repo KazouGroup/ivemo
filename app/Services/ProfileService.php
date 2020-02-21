@@ -10,6 +10,7 @@ use App\Model\categoryfaq;
 use App\Model\contactuser;
 use App\Model\faq;
 use App\Model\reservation;
+use App\Model\user;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileService
@@ -102,6 +103,59 @@ class ProfileService
             ->whereHas('annoncereservation', function ($q) {
                 $q->whereIn('user_id',[auth()->user()->id]);
             })->distinct()->get()->toArray();
+
+        return $personnalreservations;
+    }
+
+    public static function apiprofilannoncereservations($user)
+    {
+        $personnalreservations = user::whereSlug($user->slug)
+            ->with(['annoncereservations' => function ($q) use ($user){
+                $q->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
+                    ->whereIn('annoncetype_id',[3])
+                    ->whereIn('user_id',[$user->id])
+                    ->where('status',1)
+                    ->distinct()->paginate(40)->toArray()
+                ;},
+            ])
+            ->withCount(['annoncelocations' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['annoncereservations' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['annonceventes' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['blogannoncelocations' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['blogannoncereservations' => function ($q){
+                $q->where('status',1);
+            }])
+            ->first();
+
+        return $personnalreservations;
+    }
+
+    public static function apiprofilannoncelocations($user)
+    {
+        $personnalreservations = user::whereSlug($user->slug)
+            ->with(['annoncelocations' => function ($q) use ($user){
+                $q->with('user','categoryannoncelocation','city','annoncetype')
+                    ->whereIn('annoncetype_id',[1])
+                    ->whereIn('user_id',[$user->id])
+                    ->where('status',1)
+                    ->distinct()->paginate(40)->toArray()
+                ;},
+            ])
+            ->withCount(['annoncelocations' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['annoncereservations' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['annonceventes' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['blogannoncelocations' => function ($q){
+                $q->where('status',1);
+            }])->withCount(['blogannoncereservations' => function ($q){
+                $q->where('status',1);
+            }])->first();
 
         return $personnalreservations;
     }

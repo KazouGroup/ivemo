@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import ProfileAccountTeamUser from "./ProfileAccountTeamUser";
 import NavLinkPublicAnnonceUser from "./annonces/NavLinkPublicAnnonceUser";
 import NavNavigatePivateUser from "./NavNavigatePivateUser";
+import NavLinkPublicBlogannoncesUser from "./blogs/NavLinkPublicBlogannoncesUser";
 
 
 class ProfileAccountPublicUser extends Component {
@@ -111,7 +112,7 @@ class ProfileAccountPublicUser extends Component {
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingOne">
                                                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <b>Annonce {userPublick.first_name}</b>
+                                                                        <b>Annonces {userPublick.first_name}</b>
                                                                         <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
@@ -133,34 +134,15 @@ class ProfileAccountPublicUser extends Component {
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                             <div className="card card-plain">
+
                                                                 <div className="card-header" role="tab" id="headingTwo">
                                                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                        <b>Article de {userPublick.first_name}</b>
+                                                                        <b>Articles de {userPublick.first_name}</b>
                                                                         <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
 
-                                                                <div id="collapseTwo" className="collapse show" role="tabpanel" aria-labelledby="headingTwo">
-                                                                    <div className="card-body">
-                                                                        <table>
-                                                                            <tbody>
-                                                                            <tr>
-                                                                                <td> <Link to={`/articles_reservations/`}>Articles sur la locations</Link></td>
-                                                                                <td className="text-right"> 15 articles</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Articles sur la reservations</a></td>
-                                                                                <td className="text-right"> 10 articles</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Articles sur la ventes</a></td>
-                                                                                <td className="text-right"> 20 articles</td>
-                                                                            </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
-
+                                                                <NavLinkPublicBlogannoncesUser {...this.props} {...userPublick}/>
 
                                                             </div>
 
@@ -175,56 +157,6 @@ class ProfileAccountPublicUser extends Component {
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
-
-                                        {/*
-                                        <ul className="nav nav-tabs nav-tabs-neutral justify-content-center"
-                                            role="tablist" data-background-color={this.props.backgroundColor}>
-
-                                            <li className="nav-item">
-                                                <NavLink to={`/annonces_reservations/reservations/`} className="nav-link">
-                                                    <b>Information</b>
-                                                </NavLink>
-                                            </li>
-
-                                            <li className="nav-item">
-                                                <NavLink to={`/annonces_reservations/reservations/`} className="nav-link">
-                                                    <b>Demande</b>
-                                                </NavLink>
-                                            </li>
-
-                                            <li className="nav-item">
-                                                <NavLink to={`/annonces_reservations/reservations/`} className="nav-link">
-                                                    <b>Notre Team</b>
-                                                </NavLink>
-                                            </li>
-
-                                            <li className="nav-item dropdown">
-                                                <a className="nav-link dropdown-toggle" href="http://example.com"
-                                                   id="navbarDropdownMenuLink" data-toggle="dropdown"
-                                                   aria-haspopup="true" aria-expanded="false">
-                                                    <b>Profile</b>
-                                                </a>
-                                                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                    <NavLink to={`/profile/personal_reservations/`} className="dropdown-item">Reservation</NavLink>
-                                                    <NavLink to={`/profile/change_password/`} className="dropdown-item">Changer le mot de passe</NavLink>
-                                                </div>
-                                            </li>
-
-                                            <li className="nav-item dropdown">
-                                                <a className="nav-link dropdown-toggle" href="http://example.com"
-                                                   id="navbarDropdownMenuLink" data-toggle="dropdown"
-                                                   aria-haspopup="true" aria-expanded="false">
-                                                    <b>Blog</b>
-                                                </a>
-                                                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                    <NavLink to={`/@${userPublick.slug}/blogs_annonce_reservations/`} className="dropdown-item">Reservation</NavLink>
-                                                    <NavLink to={`/profile/change_password/`} className="dropdown-item">Changer le mot de passe</NavLink>
-                                                </div>
-                                            </li>
-
-
-                                        </ul>
-                                        */}
 
                                         <div className="card">
                                             <div className="card-body">
@@ -478,16 +410,4 @@ class ProfileAccountPublicUser extends Component {
         )
     }
 }
-ProfileAccountPublicUser.defaultProps = {
-    backgroundColor: "black",
-};
-
-ProfileAccountPublicUser.propTypes = {
-    // background color for the component
-    backgroundColor: PropTypes.oneOf([
-        "black",
-        "orange",
-    ]),
-};
-
 export default ProfileAccountPublicUser;

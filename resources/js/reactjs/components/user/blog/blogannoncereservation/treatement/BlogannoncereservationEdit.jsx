@@ -99,7 +99,7 @@ class BlogannoncereservationEdit extends Component {
             .then(() => {
                 $.notify({
                     //,
-                    message: 'Votre article de blog a bien été modifié'
+                    message: 'Votre article de blogs a bien été modifié'
                 },
                     {
                         allow_dismiss: false,

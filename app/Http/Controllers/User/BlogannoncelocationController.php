@@ -10,6 +10,7 @@ use App\Model\categoryannoncelocation;
 use App\Model\user;
 use App\Services\BlogannoncelocationService;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class BlogannoncelocationController extends Controller
 {
@@ -21,7 +22,7 @@ class BlogannoncelocationController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','destroy','show',
+            'create','store','edit','update','destroy','show','activated','unactivated',
         ]]);
     }
 
@@ -60,14 +61,14 @@ class BlogannoncelocationController extends Controller
 
     public function annonceblogcategorylocation(categoryannoncelocation $categoryannoncelocation)
     {
-        return view('user.blog.blogannoncelocation.category',[
+        return view('user.blogs.blogannoncelocation.category',[
             'categoryannoncelocation' => $categoryannoncelocation,
         ]);
     }
 
     public function annonceblogcategorylocationslug($categoryannoncelocation, $date,blogannoncelocation $blogannoncelocation)
     {
-        return view('user.blog.blogannoncelocation.show',[
+        return view('user.blogs.blogannoncelocation.show',[
             'blogannoncelocation' => $blogannoncelocation,
         ]);
     }
@@ -126,11 +127,38 @@ class BlogannoncelocationController extends Controller
     public function edit($blogannoncelocation)
     {
         $blogannoncelocation = blogannoncelocation::whereSlugin($blogannoncelocation)->first();
-        return view('user.blog.blogannoncelocation.edit',[
+        return view('user.blogs.blogannoncelocation.edit',[
             'blogannoncelocation' => $blogannoncelocation,
         ]);
     }
 
+   public function activated($id)
+   {
+      $blogannoncelocation = blogannoncelocation::where('id', $id)->findOrFail($id);
+
+      if(auth()->user()->id === $blogannoncelocation->user_id){
+
+          $blogannoncelocation->update(['status' => 1,]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+      }else{
+         abort(404);
+      }
+    }
+
+    public function unactivated($id)
+    {
+        $blogannoncelocation = blogannoncelocation::where('id', $id)->findOrFail($id);
+
+        if(auth()->user()->id === $blogannoncelocation->user_id){
+
+            $blogannoncelocation->update(['status' => 0,]);
+
+          return response('Confirmed',Response::HTTP_ACCEPTED);
+        }else{
+           abort(404);
+        }
+    }
     /**
      * Update the specified resource in storage.
      *

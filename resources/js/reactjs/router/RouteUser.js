@@ -43,6 +43,7 @@ import PublicUserAnnonceLocations from "../components/user/profile/annonces/Publ
 import PublicUserAnnonceReservations from "../components/user/profile/annonces/PublicUserAnnonceReservations";
 import TeamsUserEdite from "../components/user/configurations/teams/TeamsUserEdite";
 import ProfileConfigUser from "../components/user/profile/file_private/ProfileConfigUser";
+import PublicUserBlogannonceLocation from "../components/user/profile/blogs/PublicUserBlogannonceLocation";
 
 
 const RouteUser = props => (
@@ -71,6 +72,8 @@ const RouteUser = props => (
           <Route exact path="/@:user/" component={withRouter(ProfileAccountPublicUser)}/>
           <Route exact path="/@:user/annonces_locations/" component={withRouter(PublicUserAnnonceLocations)}/>
           <Route exact path="/@:user/annonces_reservations/" component={withRouter(PublicUserAnnonceReservations)}/>
+
+          <Route exact path="/@:user/blogs/annonce_locations/" component={withRouter(PublicUserBlogannonceLocation)}/>
 
           <Route exact path="/profile/personal_reservations/" component={PersonalannoncereservationsUser}/>
           <Route exact path="/profile/annonces_reservations_booked/" component={Profileannoncesreservationsbooked}/>
