@@ -29,3 +29,9 @@ Route::post(
     'annonces_reservations/{annoncetype}/{categoryannoncereservation}/{city}/{annoncereservation}/send_contact_message_user',
     'AnnoncereservationController@sendcontactmessageuser'
 )->name('annoncereservationsendcontactmessageuser_site');
+
+
+Route::delete(
+    'annonces_reservations_delete/{id}',
+    'AnnoncereservationController@destroy'
+)->name('annonces_reservations_delete.site');

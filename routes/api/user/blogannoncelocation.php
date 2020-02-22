@@ -1,6 +1,11 @@
 <?php
 
 Route::get(
+    'blogs/annonce_locations',
+    'BlogannoncelocationController@apiannoncebloglocation'
+)->name('api.blogannoncelocations_site');
+
+Route::get(
     'blogs/annonce_locations/{categoryannoncelocation}',
     'BlogannoncelocationController@apiannonceblogcategorylocations'
 )->name('api.blogannonceblogcategorylocations_site');

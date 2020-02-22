@@ -12,6 +12,8 @@ use App\Model\categoryannoncelocation;
 use App\Model\categoryannoncereservation;
 use Illuminate\Http\Request;
 use App\Model\user;
+use File;
+use Symfony\Component\HttpFoundation\Response;
 
 class BlogannoncereservationController extends Controller
 {
@@ -23,8 +25,17 @@ class BlogannoncereservationController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','destroy'
+            'create','store','edit','update','destroy','activated','unactivated'
         ]]);
+    }
+
+    public function apiannonceblogreservation()
+    {
+        $blogannoncereservations = blogannoncereservation::with('user','categoryannoncereservation')
+            ->where('status',1)->orderBy('created_at','DESC')
+            ->distinct()->paginate(40)->toArray();
+
+        return response()->json($blogannoncereservations, 200);
     }
 
     public function apiannonceblogcategoryreservation(categoryannoncereservation $categoryannoncereservation)
@@ -67,6 +78,11 @@ class BlogannoncereservationController extends Controller
 
         return response()->json($blogannoncereservations, 200);
 
+    }
+
+    public function annonceblogreservation()
+    {
+       return view('user.blogs.blogannoncereservation.index');
     }
 
     public function annonceblogcategoryreservation(categoryannoncereservation $categoryannoncereservation)
@@ -142,6 +158,37 @@ class BlogannoncereservationController extends Controller
         ]);
     }
 
+    public function activated($id)
+    {
+        $blogannoncereservation = blogannoncereservation::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$blogannoncereservation);
+
+        if(auth()->user()->id === $blogannoncereservation->user_id){
+
+            $blogannoncereservation->update(['status' => 1,]);
+
+            return response('Confirmed',Response::HTTP_ACCEPTED);
+        }else{
+            abort(404);
+        }
+    }
+
+    public function unactivated($id)
+    {
+        $blogannoncereservation = blogannoncereservation::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$blogannoncereservation);
+
+        if(auth()->user()->id === $blogannoncereservation->user_id){
+            $blogannoncereservation->update(['status' => 0,]);
+
+            return response('Confirmed',Response::HTTP_ACCEPTED);
+        }else{
+            abort(404);
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -158,10 +205,24 @@ class BlogannoncereservationController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array|\Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $blogannoncereservation = blogannoncereservation::findOrFail($id);
+
+        $this->authorize('update',$blogannoncereservation);
+
+        if(auth()->user()->id === $blogannoncereservation->user_id){
+
+            $oldFilename = $blogannoncereservation->photo;
+            File::delete(public_path($oldFilename));
+
+            $blogannoncereservation->delete();
+
+            return ['message' => 'Deleted successfully'];
+        }else{
+            abort(404);
+        }
     }
 }

@@ -81,6 +81,8 @@ class AnnoncelocationController extends Controller
         $categoryannoncelocations = CategoryannoncelocationResource::collection(categoryannoncelocation::with('user')
             ->withCount(['annoncelocations' => function ($q){
                 $q->where('status',1);
+            }])->withCount(['blogannoncelocations' => function ($q){
+                $q->where('status',1);
             }])
             ->orderBy('annoncelocations_count','desc')
             ->distinct()->get());

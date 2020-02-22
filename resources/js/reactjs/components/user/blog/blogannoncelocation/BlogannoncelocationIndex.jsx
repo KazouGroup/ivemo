@@ -1,21 +1,22 @@
-import React, { Component } from "react";
-import { Link, NavLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
-import {Button, UncontrolledTooltip} from "reactstrap";
+import React, {Component} from "react";
+import {Link,NavLink } from "react-router-dom";
+import moment from 'moment'
+import {Helmet} from "react-helmet";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-import moment from "moment";
-import PropTypes from "prop-types";
+import {Button} from "reactstrap";
 import Swal from "sweetalert2";
-import BlogannoncelocationList from "./BlogannoncelocationList";
 import Navblogannoncelocations from "./inc/Navblogannoncelocations";
+import BlogannoncelocationList from "./BlogannoncelocationList";
+require("moment/min/locales.min");
+moment.locale('fr');
 
-
-class BlogannoncelocationBycategorylocation extends Component {
+class BlogannoncelocationIndex extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            blogannoncelocation: {blogannoncelocations:[]},
+            blogannoncelocations:{categoryannoncelocation:[],user:[]},
+
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -41,6 +42,10 @@ class BlogannoncelocationBycategorylocation extends Component {
                 let url = route('blogannoncecategorylocationunactive_site.site',id);
                 dyaxios.get(url).then(() => {
 
+                    let isNotId = item => item.id !== id;
+                    let updatedItems = this.state.blogannoncelocations.filter(isNotId);
+                    this.setState({blogannoncelocations: updatedItems});
+
                     /** Alert notify bootstrapp **/
                     $.notify({
                             message: "Cette annonce a été masquée <a href=\"/profile/personal_settings/blogs/annonces_locations/\" target=\"_blank\" class=\"btn btn-info btn-sm\">Modifier ici</a>",
@@ -60,7 +65,6 @@ class BlogannoncelocationBycategorylocation extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Something wrong. Try later", {
@@ -94,6 +98,10 @@ class BlogannoncelocationBycategorylocation extends Component {
                 const url = route('blogannoncecategorylocationdelete_site',id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
+
+                    let isNotId = item => item.id !== id;
+                    let updatedItems = this.state.blogannoncelocations.filter(isNotId);
+                    this.setState({blogannoncelocations: updatedItems});
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
@@ -112,7 +120,7 @@ class BlogannoncelocationBycategorylocation extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.loadItems();
+
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -128,22 +136,17 @@ class BlogannoncelocationBycategorylocation extends Component {
         });
     }
 
-    loadItems(){
-        let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
-        let url = route('api.blogannonceblogcategorylocations_site', [itemCategoryannoncelocation]);
-        dyaxios.get(url).then(response => this.setState({ blogannoncelocation: response.data, }));
-    }
-
-    // lifecycle method
     componentDidMount() {
-        this.loadItems();
+        dyaxios.get(route('api.blogannoncelocations_site')).then(response =>
+            this.setState({
+                blogannoncelocations: [...response.data.data],
+            }));
     }
 
     render() {
-        const {blogannoncelocation} = this.state;
-        const blogannoncelocationsbycategorylocations = blogannoncelocation.blogannoncelocations;
-        const mapAnnoncelocations = blogannoncelocationsbycategorylocations.length ? (
-            blogannoncelocationsbycategorylocations.map(item => {
+        const {blogannoncelocations} = this.state;
+        const mapAnnoncelocations = blogannoncelocations.length ? (
+            blogannoncelocations.map(item => {
                 return(
                     <BlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
                 )
@@ -154,24 +157,24 @@ class BlogannoncelocationBycategorylocation extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Guides et conseils locations {`${blogannoncelocation.name || 'Annonce'}`} - Ivemo</title>
+                    <title>Conseils tout savoir sur les locations - Ivemo</title>
                 </Helmet>
 
-                <div className="about-us sidebar-collapse">
+                <div className="landing-page sidebar-collapse">
 
 
-                    <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="500">
+                    <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
                         <NavUserSite />
                     </nav>
 
                     <div className="wrapper">
                         <div className="page-header page-header-mini">
-                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + blogannoncelocation.photo + ")" }}>
+                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
                             </div>
                             <div className="content-center">
                                 <div className="row">
                                     <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">{blogannoncelocation.name}</h3>
+                                        <h3 className="title">Trouver une maison, une chambre ou un appartement à louer  </h3>
                                     </div>
                                 </div>
                             </div>
@@ -290,9 +293,11 @@ class BlogannoncelocationBycategorylocation extends Component {
                         <FooterBigUserSite />
                     </div>
                 </div>
-            </>
 
+            </>
         )
     }
+
 }
-export default BlogannoncelocationBycategorylocation;
+
+export default BlogannoncelocationIndex;

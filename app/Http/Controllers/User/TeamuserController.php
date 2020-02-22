@@ -10,6 +10,7 @@ use App\Model\user;
 use App\Services\TeamuserService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use File;
 
 class TeamuserController extends Controller
 {
@@ -170,6 +171,8 @@ class TeamuserController extends Controller
         $this->authorize('update',$teamuser);
 
         if (auth()->user()->id === $teamuser->user_id){
+            $oldFilename = $teamuser->photo;
+            File::delete(public_path($oldFilename));
             $teamuser->delete();
             return ['message' => 'message deleted '];
         }else{

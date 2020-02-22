@@ -35,7 +35,7 @@ class PublicUserBlogannonceReservation extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('blogannoncecategorylocationdelete_site',[id]);
+                const url = route('blogannoncecategoryreservationdelete_site',id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 

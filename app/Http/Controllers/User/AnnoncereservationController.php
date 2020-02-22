@@ -79,8 +79,9 @@ class AnnoncereservationController extends Controller
     {
         $categoryannoncereservations = CategoryannoncereservationResource::collection(categoryannoncereservation::with('user')
           ->withCount(['annoncereservations' => function ($q){
-                        $q->where('status',1);
-           }])
+              $q->where('status',1);
+           }])->withCount(['blogannoncereservations' => function ($q){
+               $q->where('status',1);}])
          ->orderBy('annoncereservations_count','desc')->distinct()->get());
 
         return response()->json($categoryannoncereservations, 200);

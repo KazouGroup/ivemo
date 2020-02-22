@@ -21,6 +21,7 @@ class CategoryannoncelocationResource extends JsonResource
             'name' => $this->name,
             'color_name' => $this->color_name,
             'annoncelocations_count' => $this->annoncelocations_count,
+            'blogannoncelocations_count' => $this->blogannoncelocations_count,
             'icon' => $this->icon,
             'photo' => $this->photo,
             'user' => $this->user,
