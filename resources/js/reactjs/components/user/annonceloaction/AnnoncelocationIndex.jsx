@@ -17,12 +17,72 @@ class AnnoncelocationIndex extends Component {
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.unactiveItem = this.unactiveItem.bind(this);
     }
 
     loadItems(){
         let itemAnnoncelocation = this.props.match.params.annoncetype;
         let url = route('api.annoncelocationbyannoncetype_site', itemAnnoncelocation);
         dyaxios.get(url).then(response => this.setState({annoncelocations: response.data.data,}));
+    }
+
+    unactiveItem(id){
+        Swal.fire({
+            title: 'Désactiver l\'annonce?',
+            text: "êtes vous sure de vouloir confirmer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                //Envoyer la requet au server
+                let url = route('annonces_locations_unactivated.site',id);
+                dyaxios.get(url).then(() => {
+
+                    let isNotId = item => item.id !== id;
+                    let updatedItems = this.state.annoncelocations.filter(isNotId);
+                    this.setState({annoncelocations: updatedItems});
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update FAQ',
+                            //message: 'Annonce désactiver avec succès',
+                            message: "Cette annonce a été masquée au utilisateur <a href=\"/profile/personal_settings/annonces_locations/\" target=\"_blank\">Modifier ici</a>",
+                            url: "/profile/personal_settings/annonces_locations/",
+                            target: "_blank"
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'bottom',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animated fadeInUp",
+                                exit: "animated fadeOutDown"
+                            },
+                        });
+                    /** End alert ***/
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
+
     }
 
     deleteItem(id) {
@@ -92,7 +152,7 @@ class AnnoncelocationIndex extends Component {
         const mapAnnoncelocations = annoncelocations.length ? (
             annoncelocations.map(item => {
                 return(
-                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem}/>
+                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
                 )
             })
         ):(

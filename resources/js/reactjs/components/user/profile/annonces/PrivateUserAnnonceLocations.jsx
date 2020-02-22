@@ -158,6 +158,7 @@ class PrivateUserAnnonceLocations extends Component {
                     $.notify({
                             // title: 'Update',
                             message: 'Annonce suprimée avec success'
+
                         },
                         {
                             allow_dismiss: false,

@@ -19,9 +19,10 @@ class Annoncelocationbycity extends Component {
 
         };
         this.deleteItem = this.deleteItem.bind(this);
+        this.unactiveItem = this.unactiveItem.bind(this);
     }
 
-    loadItem(){
+    loadItems(){
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let itemCity = this.props.match.params.city;
@@ -30,6 +31,61 @@ class Annoncelocationbycity extends Component {
 
         let url1 = route('api.annoncelocationcategorybycitycount_site',[itemCategoryannoncelocation,itemCity]);
         dyaxios.get(url1).then(response => this.setState({cityannoncelocations: response.data,}));
+
+    }
+    unactiveItem(id){
+        Swal.fire({
+            title: 'Désactiver l\'annonce?',
+            text: "êtes vous sure de vouloir confirmer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                //Envoyer la requet au server
+                let url = route('annonces_locations_unactivated.site',id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update FAQ',
+                            //message: 'Annonce désactiver avec succès',
+                            message: "Cette annonce a été masquée au utilisateur <a href=\"/profile/personal_settings/annonces_locations/\" target=\"_blank\">Modifier ici</a>",
+                            url: "/profile/personal_settings/annonces_locations/",
+                            target: "_blank"
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'bottom',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animated fadeInUp",
+                                exit: "animated fadeOutDown"
+                            },
+                        });
+                    /** End alert ***/
+                    this.loadItems();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
 
     }
 
@@ -70,7 +126,7 @@ class Annoncelocationbycity extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.loadItem();
+                    this.loadItems();
 
                 }).catch(() => {
                     //Failled message
@@ -90,7 +146,7 @@ class Annoncelocationbycity extends Component {
 
     // lifecycle method
     componentDidMount() {
-        this.loadItem();
+        this.loadItems();
     }
 
     getcountcategoryannonceString (annoncelocations_count) {
@@ -144,7 +200,7 @@ class Annoncelocationbycity extends Component {
                                             <>
 
                                                 {allannoncelocationbycity.map((item) => (
-                                                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem}/>
+                                                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
                                                 ))}
 
                                             </>
