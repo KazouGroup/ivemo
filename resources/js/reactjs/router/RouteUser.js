@@ -46,6 +46,8 @@ import ProfileConfigUser from "../components/user/profile/file_private/ProfileCo
 import PublicUserBlogannonceLocation from "../components/user/profile/blogs/PublicUserBlogannonceLocation";
 import PublicUserBlogannonceReservation from "../components/user/profile/blogs/PublicUserBlogannonceReservation";
 import PrivateUserAnnonceLocations from "../components/user/profile/annonces/PrivateUserAnnonceLocations";
+import BlogannoncereservationIndex from "../components/user/blog/blogannoncereservation/BlogannoncereservationIndex";
+import BlogannoncelocationIndex from "../components/user/blog/blogannoncelocation/BlogannoncelocationIndex";
 
 
 const RouteUser = props => (
@@ -95,9 +97,11 @@ const RouteUser = props => (
           <Route exact path="/profile/personal_settings/annonces_locations/" component={PrivateUserAnnonceLocations}/>
 
 
+          <Route exact path="/blogs/annonce_reservations/" component={BlogannoncereservationIndex}/>
           <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/" component={withRouter(BlogannoncereservationIBycategoryreservation)}/>
           <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/:date/:blogannoncereservation/" component={withRouter(BlogannoncereservationShow)}/>
 
+          <Route exact path="/blogs/annonce_locations/" component={BlogannoncelocationIndex}/>
           <Route exact path="/blogs/annonce_locations/:categoryannoncelocation/" component={withRouter(BlogannoncelocationBycategorylocation)}/>
           <Route exact path="/blogs/annonce_locations/:categoryannoncelocation/:date/:blogannoncelocation/" component={withRouter(BlogannoncelocationShow)}/>
           <Route exact path="/blogs/annonce_locations/:blogannoncelocation/edit/" component={BlogannoncelocationEdit}/>

@@ -46,24 +46,26 @@ class NavUserSite extends Component {
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                 <Link to={`/annonces_locations/locations/`} className="dropdown-item" >
-                                    <i className="now-ui-icons education_paper"/> Locations
-                                    </Link>
+                                    <i className="now-ui-icons files_paper"/> Locations
+                                </Link>
                                 <Link to={`/annonces_reservations/reservations/`} className="dropdown-item">
                                     <i className="now-ui-icons business_money-coins"/> Reservations
-                                    </Link>
-                                <a className="dropdown-item" href="../sections.html#testimonials">
-                                    <i className="now-ui-icons ui-2_chat-round"></i> Testimonials
-                                    </a>
-                                <a className="dropdown-item" href="../sections.html#contactus">
-                                    <i className="now-ui-icons tech_mobile"></i> Contact Us
-                                    </a>
+                                </Link>
                             </div>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="../sections.html#blogs">
-                                <i className="now-ui-icons text_align-left"/>
-                                <b>Blogs</b>
+                        <li className="nav-item dropdown">
+                            <a href="#" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
+                                <i className="now-ui-icons text_align-left" aria-hidden="true"/>
+                                <p>Conseils</p>
                             </a>
+                            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <Link to={`/blogs/annonce_locations/`} className="dropdown-item" >
+                                    <i className="now-ui-icons files_paper"/> Locations
+                                </Link>
+                                <Link to={`/blogs/annonce_reservations/`} className="dropdown-item">
+                                    <i className="now-ui-icons business_money-coins"/> Reservations
+                                </Link>
+                            </div>
                         </li>
                         {$guest ?
 

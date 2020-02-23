@@ -43,7 +43,8 @@ class PublicUserAnnonceLocations extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update FAQ',
-                            message: 'Annonce désactiver avec succès',
+                            //message: 'Annonce désactiver avec succès',
+                            message: "Cette annonce a été masquée au utilisateur <a href=\"/profile/personal_settings/annonces_locations/\" target=\"_blank\">Modifier ici</a>",
                             url: "/profile/personal_settings/annonces_locations/",
                             target: "_blank"
                         },

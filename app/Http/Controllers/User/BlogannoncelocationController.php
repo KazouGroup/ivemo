@@ -26,6 +26,20 @@ class BlogannoncelocationController extends Controller
         ]]);
     }
 
+    public function apiannoncebloglocation()
+    {
+        $categoryannoncelocations = blogannoncelocation::with('user','categoryannoncelocation')
+            ->where('status',1)->orderBy('created_at','DESC')
+            ->distinct()->paginate(40)->toArray();
+
+        return response()->json($categoryannoncelocations, 200);
+    }
+
+    public function annoncebloglocation()
+    {
+        return view('user.blogs.blogannoncelocation.index');
+    }
+
     public function apiannonceblogcategorylocations(categoryannoncelocation $categoryannoncelocation)
     {
         $blogannoncelocations = BlogannoncelocationService::apiannonceblogcategorylocations($categoryannoncelocation);

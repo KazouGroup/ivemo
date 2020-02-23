@@ -1,4 +1,10 @@
 <?php
+
+Route::get(
+    'blogs/annonce_reservations/',
+    'BlogannoncereservationController@annonceblogreservation'
+)->name('blogannoncereservations_site');
+
 Route::get(
     'blogs/annonce_reservations/{categoryannoncereservation}',
     'BlogannoncereservationController@annonceblogcategoryreservation'
@@ -15,6 +21,21 @@ Route::get(
 )->name('blogannoncecategoryreservationedit_site');
 
 Route::get(
-    'api/blogs/annonce_reservations/{blogannoncereservation}',
+    'api/blogs/annonce_reservation/{blogannoncereservation}',
     'BlogannoncereservationController@show'
 )->name('api.blogannonceblogcategoryreservationslugin_site');
+
+Route::get(
+    'blogs/annonce_reservations_activated/{id}',
+    'BlogannoncereservationController@activated'
+)->name('blogannoncecategoryreservationactivated_site');
+
+Route::get(
+    'blogs/annonce_reservations_unactivated/{id}',
+    'BlogannoncereservationController@unactivated'
+)->name('blogannoncecategoryreservationunactivated_site');
+
+Route::delete(
+    'blogs/annonce_reservations_delete/{id}',
+    'BlogannoncereservationController@destroy'
+)->name('blogannoncecategoryreservationdelete_site');

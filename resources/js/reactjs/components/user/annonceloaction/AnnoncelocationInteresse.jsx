@@ -110,7 +110,7 @@ class AnnoncelocationInteresse extends Component {
                                                 </div>
                                                 <div className="row">
                                                     <div className="col-md-6 col-6">
-                                                        <h6 className="category text-dark">{annoncelocationsinteresses.pieces} p . {annoncelocationsinteresses.rooms && (<>{annoncelocationsinteresses.rooms} ch</>)}. {annoncelocationsinteresses.surface && (<>{annoncelocationsinteresses.surface} m<sup>2</sup></>)}</h6>
+                                                        <h6 className="category text-dark">{item.pieces} p . {item.rooms && (<>{item.rooms} ch</>)}. {item.surface && (<>{item.surface} m<sup>2</sup></>)}</h6>
                                                     </div>
                                                     <div className="col-md-6 col-6">
                                                         <NavLink to={`/annonces_locations/locations/${item.categoryannoncelocation.slug}/${item.city.slug}/`}>
@@ -130,7 +130,7 @@ class AnnoncelocationInteresse extends Component {
                                                 <div className="card-header d-flex align-items-center">
                                                     <div className="d-flex align-items-center">
                                                         <NavLink to={`/@${item.user.slug}/`}>
-                                                            <img src={item.user.avatar} style={{ height: "20px", width: "50px" }} alt="" className="avatar" />
+                                                            <img src={item.user.avatar} style={{ height: "30px", width: "70px" }} alt={item.user.first_name} className="avatar" />
                                                         </NavLink>
                                                         <div className="mx-3">
                                                             <NavLink to={`/@${item.user.slug}/`} className="text-dark font-weight-600 text-sm">{item.user.first_name}
@@ -139,7 +139,7 @@ class AnnoncelocationInteresse extends Component {
                                                         </div>
 
                                                     </div>
-                                                
+
                                                 </div>
 
                                             </div>

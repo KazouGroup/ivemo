@@ -7,6 +7,8 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import moment from "moment";
 import PropTypes from "prop-types";
 import Swal from "sweetalert2";
+import BlogannoncelocationList from "./BlogannoncelocationList";
+import Navblogannoncelocations from "./inc/Navblogannoncelocations";
 
 
 class BlogannoncelocationBycategorylocation extends Component {
@@ -14,10 +16,64 @@ class BlogannoncelocationBycategorylocation extends Component {
         super(props);
         this.state = {
             blogannoncelocation: {blogannoncelocations:[]},
-            categoryannoncelocations:[],
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.unactiveItem = this.unactiveItem.bind(this);
+    }
+
+    unactiveItem(id){
+        Swal.fire({
+            title: 'Masquer cette article?',
+            text: "êtes vous sure de vouloir confirmer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                //Envoyer la requet au server
+                let url = route('blogannoncecategorylocationunactive_site.site',id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            message: "Cette annonce a été masquée <a href=\"/profile/personal_settings/blogs/annonces_locations/\" target=\"_blank\" class=\"btn btn-info btn-sm\">Modifier ici</a>",
+                            url: "/profile/personal_settings/blogs/annonces_locations/",
+                            target: "_blank"
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'bottom',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animated fadeInUp",
+                                exit: "animated fadeOutDown"
+                            },
+                        });
+                    /** End alert ***/
+                    this.loadItems();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
+
     }
 
     deleteItem(id) {
@@ -76,7 +132,6 @@ class BlogannoncelocationBycategorylocation extends Component {
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let url = route('api.blogannonceblogcategorylocations_site', [itemCategoryannoncelocation]);
         dyaxios.get(url).then(response => this.setState({ blogannoncelocation: response.data, }));
-        dyaxios.get(route('api.categoryannoncelocation_site')).then(response => this.setState({categoryannoncelocations: response.data,}));
     }
 
     // lifecycle method
@@ -85,8 +140,17 @@ class BlogannoncelocationBycategorylocation extends Component {
     }
 
     render() {
-        const {blogannoncelocation,categoryannoncelocations} = this.state;
+        const {blogannoncelocation} = this.state;
         const blogannoncelocationsbycategorylocations = blogannoncelocation.blogannoncelocations;
+        const mapAnnoncelocations = blogannoncelocationsbycategorylocations.length ? (
+            blogannoncelocationsbycategorylocations.map(item => {
+                return(
+                    <BlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
+                )
+            })
+        ):(
+            <></>
+        );
         return (
             <>
                 <Helmet>
@@ -117,90 +181,106 @@ class BlogannoncelocationBycategorylocation extends Component {
                             <div className="container">
                                 <div className="row">
 
-
                                 </div>
                             </div>
 
                             <div className="container">
                                 <br />
-
-                                <ul className="nav nav-tabs nav-tabs-neutral justify-content-center"
-                                    role="tablist" data-background-color={this.props.backgroundColor}>
-
-                                    {categoryannoncelocations.map((item) =>(
-                                        <li key={item.id} className="nav-item">
-                                            <NavLink to={`/blogs/annonce_locations/${item.slug}/`} className="nav-link">
-                                                <b>{item.name}</b>
-                                            </NavLink>
-                                        </li>
-                                    ))}
-
-                                </ul>
-                                <br/>
-
                                 <div className="row">
 
 
-                                    {blogannoncelocationsbycategorylocations.map((item) => (
-                                        <div key={item.id} className="col-md-4 mx-auto">
-                                            <div className="card card-blog">
-                                                <div className="card-image">
-                                                    <Link to={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>
-                                                        <img className="img rounded" alt={item.title} src={item.photo}/>
-                                                    </Link>
-                                                </div>
-                                                <div className="card-body">
-                                                    {!$guest && (
-                                                        <>
-                                                            {($userIvemo.id === item.user_id && $userIvemo.id === item.user.id) && (
-                                                                <div className="row">
-                                                                    <div className="mx-auto">
-                                                                        <UncontrolledTooltip placement="bottom" target="TooltipEdit">
-                                                                            Editer cet article
-                                                                        </UncontrolledTooltip>
-                                                                        <NavLink to={`/blogs/annonce_locations/${item.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" id="TooltipEdit">
-                                                                            <i className="now-ui-icons ui-2_settings-90"/>
-                                                                        </NavLink>
-                                                                        <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
-                                                                            Supprimer cette annonce
-                                                                        </UncontrolledTooltip>
-                                                                        <Button
-                                                                            className="btn btn-sm btn-icon btn-danger" onClick={() => this.deleteItem(item.id)} color="secondary" id="TooltipDelete">
-                                                                            <i className="now-ui-icons ui-1_simple-remove"/>
-                                                                        </Button>{" "}
+                                    <div className="col-lg-8 col-md-12 mx-auto">
+
+                                        {mapAnnoncelocations}
+
+                                    </div>
+
+
+                                    <div className="col-lg-4 col-md-12 mx-auto">
+
+                                        <div className="submit text-center">
+                                            <NavLink className="btn btn-primary" to={`/annonce/show/create/`}>
+                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article</b>
+                                            </NavLink>
+                                        </div>
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+
+                                                            <Navblogannoncelocations/>
+
+
+                                                            <div className="card card-plain">
+                                                                <div className="card-header" role="tab" id="headingThree">
+                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                                        <b>Annonces locations populaire</b>
+                                                                    </a>
+                                                                </div>
+                                                                <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                                                    <div className="card-body">
+                                                                        <table>
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <a href="#pablo">
+                                                                                        <span className="title">
+                                                                                            MateLabs mixes machine learning model
+                                                                                      </span>
+                                                                                    </a>
+
+                                                                                </td>
+                                                                                <td className="text-right">
+                                                                                    <NavLink to={`/`}>
+                                                                                        <img src="/assets/vendor/assets/img/julie.jpg" style={{ height: "50px", width: "70px" }} alt="#" className="avatar" />
+                                                                                    </NavLink>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <a href="#pablo">
+                                                                                        <span className="title">
+                                                                                            Temgoua mixes machine learning model
+                                                                                      </span>
+                                                                                    </a>
+                                                                                </td>
+                                                                                <td className="text-right">
+                                                                                    <NavLink to={`/`}>
+                                                                                        <img src="/assets/vendor/assets/img/examples/card-blog11.jpg" style={{ height: "50px", width: "70px" }} alt="#" className="avatar" />
+                                                                                    </NavLink>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <a href="#pablo">
+                                                                                        <span className="title">
+                                                                                            Bokino mixes machine learning model
+                                                                                      </span>
+                                                                                    </a>
+                                                                                </td>
+                                                                                <td className="text-right">
+                                                                                    <NavLink to={`/`}>
+                                                                                        <img src="/assets/vendor/assets/img/examples/card-blog11.jpg" style={{ height: "50px", width: "70px" }} alt="#" className="avatar" />
+                                                                                    </NavLink>
+                                                                                </td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </table>
                                                                     </div>
                                                                 </div>
+                                                            </div>
 
-                                                            )}
-
-                                                        </>
-                                                    )}
-                                                    <h6 className="card-title text-center">
-                                                        <NavLink to={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`} className="card-link"> {item.title}</NavLink>
-                                                    </h6>
-                                                    <p className="card-description">
-                                                        <b dangerouslySetInnerHTML={{__html: (item.description.length > 48 ? item.description.substring(0, 48) + "..." : item.description)}}/>
-                                                        <Link to={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}> lire la suite </Link>
-                                                    </p>
-                                                    <div className="card-footer">
-                                                        <div className="author">
-                                                           <Link to={`/@${item.user.slug}/`}>
-                                                               <img src={item.user.avatar} alt={item.user.first_name}
-                                                                    className="avatar img-raised"/>
-                                                               <span>{item.user.first_name}</span>
-                                                           </Link>
-                                                        </div>
-                                                        <div className="stats stats-right">
-                                                            <i className="now-ui-icons tech_watch-time"/> {item.red_time} min lecture
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    ))}
+                                    </div>
+
 
                                 </div>
-
                             </div>
 
 
@@ -215,16 +295,4 @@ class BlogannoncelocationBycategorylocation extends Component {
         )
     }
 }
-BlogannoncelocationBycategorylocation.defaultProps = {
-    backgroundColor: "orange",
-};
-
-BlogannoncelocationBycategorylocation.propTypes = {
-    // background color for the component
-    backgroundColor: PropTypes.oneOf([
-        "black",
-        "orange",
-    ]),
-};
-
 export default BlogannoncelocationBycategorylocation;
