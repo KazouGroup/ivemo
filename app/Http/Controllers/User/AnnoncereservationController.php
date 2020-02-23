@@ -136,7 +136,7 @@ class AnnoncereservationController extends Controller
         return response()->json($annoncereservation, 200);
     }
 
-    public function apiannoncereservationinteresseslug(categoryannoncereservation $categoryannoncereservation)
+    public function apiannoncereservationinteresseslugin(categoryannoncereservation $categoryannoncereservation)
     {
         $annoncereservation = $categoryannoncereservation->annoncereservations()->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->with('user','city','annoncetype','categoryannoncereservation','imagereservations')

@@ -65,7 +65,6 @@ class AnnonceslocationList extends Component {
                                                 }
                                             </div>
                                         )}
-
                                     </>
 
                                 )}

@@ -26,9 +26,9 @@ Route::get(
 )->name('api.annoncereservationintersse_site');
 
 Route::get(
-    'annonces_interesses/{categoryannoncereservation}/',
-    'AnnoncereservationController@apiannoncereservationinteresseslug'
-)->name('api.annoncereservationintersse_site');
+    'annonces_reservations_interesses/{categoryannoncereservation}/',
+    'AnnoncereservationController@apiannoncereservationinteresseslugin'
+)->name('api.annoncereservationinteresse_site');
 
 Route::get(
     'annonces_reservations/{annoncetype}',

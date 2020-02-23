@@ -8,7 +8,7 @@ import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import { Remarkable } from "remarkable";
 import BlogannoncereservationInteresse from "./BlogannoncereservationInteresse";
-import AnnonceservationInteresse from "../../annoncereservation/AnnonceservationInteresse"
+import AnnoncereservationInteresseforBlog from "./AnnoncereservationInteresseforBlog";
 import moment from "moment";
 
 
@@ -143,7 +143,7 @@ class BlogannoncereservationShow extends Component {
                                     </div>
                                 </div>
 
-                                <AnnonceservationInteresse {... this.props}/>
+                                <AnnoncereservationInteresseforBlog {... this.props}/>
 
                                 <BlogannoncereservationInteresse  {...this.props} />
 

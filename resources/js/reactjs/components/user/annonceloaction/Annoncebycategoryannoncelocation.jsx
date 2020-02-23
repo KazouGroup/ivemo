@@ -16,7 +16,6 @@ class Annoncebycategoryannoncelocation extends Component {
         this.state = {
             annoncelocationbycategory: {annoncelocations:[]},
             cityannoncelocations:[],
-
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);

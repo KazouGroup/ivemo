@@ -79,7 +79,7 @@ class AnnoncereservationList extends Component {
                                 </div>
                                 <div className="row">
                                     <div className="col-md-6 col-6">
-                                        <h6 className="category text-dark">4 p . 3 ch . 180 m2</h6>
+                                        <h6 className="category text-dark">{this.props.pieces} p . {this.props.rooms && (<>{this.props.rooms} ch</>)}. {this.props.surface && (<>{this.props.surface} m<sup>2</sup></>)}</h6>
                                     </div>
                                     <div className="col-md-6 col-6">
                                         <h6 className="category text-dark">la nuit</h6>
