@@ -190,6 +190,11 @@ class BlogannoncelocationBycategorylocation extends Component {
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+                                    <div className="submit text-left">
+                                                <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
+                                                    <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour aux annonces</b>
+                                                </button>
+                                            </div>
 
                                         {mapAnnoncelocations}
 

@@ -30,8 +30,6 @@ Route::get(
     'BlogannoncelocationController@show'
 )->name('api.blogannonceblogcategorylocationslugin_site');
 
-
-
 Route::get(
     'profile/{user}/personal_settings/blogs/annonce_locations',
     'BlogannoncelocationController@blogannonceslocationsbyuser'

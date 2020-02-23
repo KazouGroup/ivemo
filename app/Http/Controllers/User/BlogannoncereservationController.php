@@ -87,6 +87,13 @@ class BlogannoncereservationController extends Controller
         return response()->json($blogannoncereservations, 200);
     }
 
+    public function blogannoncesreservationsbyuser()
+    {
+        return view('user.blogs.blogannoncereservation.blogannoncesreservationsbyuser',[
+            'user' => auth()->user(),
+        ]);
+    }
+
 
     public function annonceblogreservation()
     {

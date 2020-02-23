@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Button,UncontrolledTooltip } from "reactstrap";
-import NavUserSite from "../../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
+import NavUserSite from "../../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
-import AnnoncereservationList from "../../annoncereservation/inc/AnnoncereservationList";
-import NavLinkPublicAnnonceUser from "./NavLinkPublicAnnonceUser";
-import FormContactProfileAccountUser from "../form/FormContactProfileAccountUser";
-import NavLinkPublicBlogannoncesUser from "../blogs/public/NavLinkPublicBlogannoncesUser";
+import AnnoncereservationList from "../../../annoncereservation/inc/AnnoncereservationList";
+import NavLinkPublicAnnonceUser from "../NavLinkPublicAnnonceUser";
+import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";
+import NavLinkPublicBlogannoncesUser from "../../blogs/public/NavLinkPublicBlogannoncesUser";
 
 
 class PublicUserAnnonceReservations extends Component {

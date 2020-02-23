@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Button } from "reactstrap";
-import NavUserSite from "../../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-import AnnonceslocationList from "../../annonceloaction/inc/AnnonceslocationList";
+import NavUserSite from "../../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
+import AnnonceslocationList from "../../../annonceloaction/inc/AnnonceslocationList";
 import Swal from "sweetalert2";
-import NavLinkPublicAnnonceUser from "./NavLinkPublicAnnonceUser";
-import FormContactProfileAccountUser from "../form/FormContactProfileAccountUser";
-import NavLinkPublicBlogannoncesUser from "../blogs/public/NavLinkPublicBlogannoncesUser";
+import NavLinkPublicAnnonceUser from "../NavLinkPublicAnnonceUser";
+import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";
+import NavLinkPublicBlogannoncesUser from "../../blogs/public/NavLinkPublicBlogannoncesUser";
 
 
 class PublicUserAnnonceLocations extends Component {

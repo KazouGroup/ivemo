@@ -39,16 +39,18 @@ import PersonalmessagesannonceslocationsShowUser
     from "../components/user/profile/mail/PersonalmessagesannonceslocationsShowUser";
 import PersonalmessagescontactShowUser from "../components/user/profile/mail/PersonalmessagescontactShowUser";
 import TeamsUserIndex from "../components/user/configurations/teams/TeamsUserIndex";
-import PublicUserAnnonceLocations from "../components/user/profile/annonces/PublicUserAnnonceLocations";
-import PublicUserAnnonceReservations from "../components/user/profile/annonces/PublicUserAnnonceReservations";
+import PublicUserAnnonceLocations from "../components/user/profile/annonces/public/PublicUserAnnonceLocations";
+import PublicUserAnnonceReservations from "../components/user/profile/annonces/public/PublicUserAnnonceReservations";
 import TeamsUserEdite from "../components/user/configurations/teams/TeamsUserEdite";
 import ProfileConfigUser from "../components/user/profile/file_private/ProfileConfigUser";
 import PublicUserBlogannonceLocation from "../components/user/profile/blogs/public/PublicUserBlogannonceLocation";
 import PublicUserBlogannonceReservation from "../components/user/profile/blogs/public/PublicUserBlogannonceReservation";
-import PrivateUserAnnonceLocations from "../components/user/profile/annonces/PrivateUserAnnonceLocations";
+import PrivateUserAnnonceLocations from "../components/user/profile/annonces/private/PrivateUserAnnonceLocations";
 import BlogannoncereservationIndex from "../components/user/blog/blogannoncereservation/BlogannoncereservationIndex";
 import BlogannoncelocationIndex from "../components/user/blog/blogannoncelocation/BlogannoncelocationIndex";
 import PrivateUserBlogannonceLocation from "../components/user/profile/blogs/private/PrivateUserBlogannonceLocation";
+import PrivateUserBlogannonceReservation
+    from "../components/user/profile/blogs/private/PrivateUserBlogannonceReservation";
 
 
 const RouteUser = props => (
@@ -95,8 +97,10 @@ const RouteUser = props => (
           <Route exact path="/profile/personal_settings/teams/" component={TeamsUserIndex}/>
           <Route path="/profile/personal_settings/teams/:id/edit/" component={TeamsUserEdite}/>
 
-          <Route exact path="/profile/personal_settings/annonces_locations/" component={PrivateUserAnnonceLocations}/>
+          <Route exact path="/profile/:user/personal_settings/annonces_locations/" component={PrivateUserAnnonceLocations}/>
+
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_locations/" component={PrivateUserBlogannonceLocation}/>
+          <Route exact path="/profile/:user/personal_settings/blogs/annonce_reservations/" component={PrivateUserBlogannonceReservation}/>
 
 
           <Route exact path="/blogs/annonce_reservations/" component={BlogannoncereservationIndex}/>

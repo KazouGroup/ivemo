@@ -7,6 +7,7 @@ use App\Http\Resources\AnnoncelocationResource;
 use App\Model\annoncelocation;
 use App\Model\categoryannoncelocation;
 use App\Model\city;
+use App\Model\user;
 
 class AnnoncelocationService
 {
@@ -52,6 +53,33 @@ class AnnoncelocationService
             ])->first();
 
         return $annoncesbycities;
+    }
+
+    public static function apiannonceslocationsbyuser($user)
+    {
+        $annonceslocations = user::whereSlug($user->slug)
+            ->with(['annoncelocations' => function ($q) use ($user){
+                $q->with('user','categoryannoncelocation','city','annoncetype')
+                    ->whereIn('user_id',[$user->id])
+                    ->orderBy('created_at','DESC')
+                    ->distinct()->paginate(40)->toArray()
+                ;},
+            ])
+            ->withCount(['annoncelocations' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id]);
+            }])->withCount(['annoncereservations' => function ($q) use ($user){
+                $q ->whereIn('user_id',[$user->id]);
+            }])->withCount(['annonceventes' => function ($q) use ($user){
+                $q ->whereIn('user_id',[$user->id]);
+            }])->withCount(['blogannoncelocations' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id]);
+            }])->withCount(['blogannoncereservations' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id]);
+            }])->withCount(['blogannonceventes' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id]);
+            }])->first();;
+
+        return $annonceslocations;
     }
 
     public static function apiannoncelocationbycategoryannoncelocationslug($annoncetype,$categoryannoncelocation,$city,$date,$annoncelocation)

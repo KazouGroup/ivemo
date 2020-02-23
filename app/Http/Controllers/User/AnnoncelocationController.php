@@ -13,6 +13,7 @@ use App\Model\annoncetype;
 use App\Model\categoryannoncelocation;
 use App\Model\city;
 use App\Model\contactuser;
+use App\Model\user;
 use App\Services\AnnoncelocationService;
 use App\Services\ContactuserService;
 use Illuminate\Http\Request;
@@ -104,11 +105,9 @@ class AnnoncelocationController extends Controller
         return response()->json($data, 200);
     }
 
-    public function apiannonceslocationsbyuser()
+    public function apiannonceslocationsbyuser(user $user)
     {
-        $data = annoncelocation::with('user','categoryannoncelocation','city','annoncetype')
-            ->whereIn('user_id',[auth()->user()->id])
-            ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();
+        $data = AnnoncelocationService::apiannonceslocationsbyuser($user);
 
         return response()->json($data, 200);
     }
@@ -191,7 +190,7 @@ class AnnoncelocationController extends Controller
             ->take(4)->distinct()->get()->toArray();
         return response()->json($annoncelocation, 200);
     }
-    
+
     public function apiannoncelocationinteresseslug(categoryannoncelocation $categoryannoncelocation)
     {
         $annoncelocation = $categoryannoncelocation->annoncelocations()->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])

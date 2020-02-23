@@ -55,7 +55,7 @@ class NavlinkconfigurationUser extends Component {
                                                     <tbody>
                                                     <tr>
                                                         <td>
-                                                            <NavLink to={`/profile/personal_settings/annonces_locations/`}>
+                                                            <NavLink to={`/profile/${this.props.slug}/personal_settings/annonces_locations/`}>
                                                                 annonces sur locations
                                                             </NavLink>
                                                         </td>
@@ -63,7 +63,7 @@ class NavlinkconfigurationUser extends Component {
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <NavLink to={`/profile/personal_settings/annonces_reservations/`}>
+                                                            <NavLink to={`/profile/${this.props.slug}/personal_settings/annonces_reservations/`}>
                                                                 annonces sur reservations
                                                             </NavLink>
                                                         </td>
@@ -71,7 +71,7 @@ class NavlinkconfigurationUser extends Component {
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <NavLink to={`/profile/personal_settings/annonces_ventes/`}>
+                                                            <NavLink to={`/profile/${this.props.slug}/personal_settings/annonces_ventes/`}>
                                                                 annonces sur reservations
                                                             </NavLink>
                                                         </td>
@@ -103,7 +103,7 @@ class NavlinkconfigurationUser extends Component {
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <NavLink to={`/profile/${this.props.slug}/personal_settings/blogs/annonces_reservations/`}>
+                                                            <NavLink to={`/profile/${this.props.slug}/personal_settings/blogs/annonce_reservations/`}>
                                                                 articles sur la reservation
                                                             </NavLink>
                                                         </td>
@@ -111,7 +111,7 @@ class NavlinkconfigurationUser extends Component {
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <NavLink to={`/profile/${this.props.slug}/personal_settings/blogs/annonces_ventes/`}>
+                                                            <NavLink to={`/profile/${this.props.slug}/personal_settings/blogs/annonce_ventes/`}>
                                                                 article sur la vente
                                                             </NavLink>
                                                         </td>

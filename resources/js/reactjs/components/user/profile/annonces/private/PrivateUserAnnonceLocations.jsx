@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import {Button, UncontrolledTooltip} from "reactstrap";
-import NavUserSite from "../../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-import AnnonceslocationList from "../../annonceloaction/inc/AnnonceslocationList";
+import NavUserSite from "../../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
+import AnnonceslocationList from "../../../annonceloaction/inc/AnnonceslocationList";
 import Swal from "sweetalert2";
-import NavlinkconfigurationUser from "../../configurations/inc/NavlinkconfigurationUser";
+import NavlinkconfigurationUser from "../../../configurations/inc/NavlinkconfigurationUser";
 
 
 class PrivateUserAnnonceLocations extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncelocations:[],
+            userannoncelocations:{annoncelocations:[]},
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -143,14 +143,10 @@ class PrivateUserAnnonceLocations extends Component {
         }).then((result) => {
             if (result.value) {
 
-
                 const url = route('annonces_locations_delete.site',[id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
-                    let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.annoncelocations.filter(isNotId);
-                    this.setState({annoncelocations: updatedItems});
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
@@ -170,6 +166,7 @@ class PrivateUserAnnonceLocations extends Component {
                             },
                         });
                     /** End alert ***/
+                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -186,7 +183,8 @@ class PrivateUserAnnonceLocations extends Component {
     }
 
     loadItems() {
-        dyaxios.get(route('api.annonceslocationsbyuser_site')).then(response => this.setState({annoncelocations: response.data.data,}));
+        let itemuser = this.props.match.params.user;
+        dyaxios.get(route('api.annonceslocationsbyuser_site',[itemuser])).then(response => this.setState({userannoncelocations: response.data,}));
     }
 
 
@@ -196,9 +194,9 @@ class PrivateUserAnnonceLocations extends Component {
     }
 
     render() {
-        const {annoncelocations} = this.state;
-        const mapAnnoncelocations = annoncelocations.length ? (
-            annoncelocations.map(item => {
+        const {userannoncelocations} = this.state;
+        const mapAnnoncelocations = userannoncelocations.annoncelocations.length ? (
+            userannoncelocations.annoncelocations.map(item => {
                 return(
 
                     <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} activeItem={this.activeItem} unactiveItem={this.unactiveItem}/>
@@ -229,7 +227,7 @@ class PrivateUserAnnonceLocations extends Component {
 
                                 <div className="row">
 
-                                    <NavlinkconfigurationUser/>
+                                    <NavlinkconfigurationUser {...this.props} {...userannoncelocations}/>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
