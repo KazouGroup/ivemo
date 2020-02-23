@@ -40,6 +40,7 @@ class UserResource extends JsonResource
             'blogannoncelocations_count' => $this->blogannoncelocations_count,
             'annoncereservations_count' => $this->annoncereservations_count,
             'blogannoncereservations_count' => $this->blogannoncereservations_count,
+            'blogannonceventes_count' => $this->blogannonceventes_count,
             'annonceventes_count' => $this->annonceventes_count,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,

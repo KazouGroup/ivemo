@@ -8,13 +8,6 @@ class NavlinkconfigurationUser extends Component {
         this.state = {
             //
         }
-
-    }
-
-    // lifecycle method
-    componentDidMount() {
-        //
-
     }
 
     render() {
@@ -66,7 +59,7 @@ class NavlinkconfigurationUser extends Component {
                                                                 annonces sur locations
                                                             </NavLink>
                                                         </td>
-                                                        <td className="text-right"> 200 annonces</td>
+                                                        <td className="text-right"> {this.props.annoncelocations_count} {this.props.annoncelocations_count < 1 ? "annonce" : "annonces"}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>
@@ -74,7 +67,7 @@ class NavlinkconfigurationUser extends Component {
                                                                 annonces sur reservations
                                                             </NavLink>
                                                         </td>
-                                                        <td className="text-right"> 1 300 annonces</td>
+                                                        <td className="text-right"> {this.props.annoncereservations_count} {this.props.annoncereservations_count < 1 ? "annonce" : "annonces"}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>
@@ -82,7 +75,7 @@ class NavlinkconfigurationUser extends Component {
                                                                 annonces sur reservations
                                                             </NavLink>
                                                         </td>
-                                                        <td className="text-right"> 380 annonces</td>
+                                                        <td className="text-right"> {this.props.annonceventes_count} {this.props.annonceventes_count < 1 ? "annonce" : "annonces"}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -102,27 +95,27 @@ class NavlinkconfigurationUser extends Component {
                                                     <tbody>
                                                     <tr>
                                                         <td>
-                                                            <NavLink to={`/profile/personal_settings/blogs/annonce_locations/`}>
+                                                            <NavLink to={`/profile/${this.props.slug}/personal_settings/blogs/annonce_locations/`}>
                                                                 articles sur la location
                                                             </NavLink>
                                                         </td>
-                                                        <td className="text-right"> 200 articles</td>
+                                                        <td className="text-right">{this.props.blogannoncelocations_count} {this.props.blogannoncelocations_count < 1 ? "article" : "articles"}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <NavLink to={`/profile/personal_settings/annonces_reservations/`}>
+                                                            <NavLink to={`/profile/${this.props.slug}/personal_settings/blogs/annonces_reservations/`}>
                                                                 articles sur la reservation
                                                             </NavLink>
                                                         </td>
-                                                        <td className="text-right"> 1 300 articles</td>
+                                                        <td className="text-right"> {this.props.blogannoncereservations_count} {this.props.blogannoncereservations_count < 1 ? "article" : "articles"}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <NavLink to={`/profile/personal_settings/annonces_ventes/`}>
+                                                            <NavLink to={`/profile/${this.props.slug}/personal_settings/blogs/annonces_ventes/`}>
                                                                 article sur la vente
                                                             </NavLink>
                                                         </td>
-                                                        <td className="text-right"> 380 articles</td>
+                                                        <td className="text-right"> {this.props.blogannonceventes_count} {this.props.blogannonceventes_count < 1 ? "article" : "articles"}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>

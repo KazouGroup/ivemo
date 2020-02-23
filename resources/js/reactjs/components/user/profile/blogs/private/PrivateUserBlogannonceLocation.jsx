@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Button,Row } from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
@@ -13,11 +12,117 @@ class PrivateUserBlogannonceLocation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            blogannoncelocations:{categoryannoncelocation:[],user:[]},
+            userblogannoncelocationsPrivate:{blogannoncelocations:[]},
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.activeItem = this.activeItem.bind(this);
+        this.unactiveItem = this.unactiveItem.bind(this);
     }
+    activeItem(id){
+        Swal.fire({
+            title: 'Afficher cette article?',
+            text: "êtes vous sure de vouloir confirmer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                //Envoyer la requet au server
+                let url = route('blogannoncecategorylocationactive_site.site',id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            message: "Cette articles est desormais visible aux utilisateurs",
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'bottom',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animated fadeInUp",
+                                exit: "animated fadeOutDown"
+                            },
+                        });
+                    /** End alert ***/
+                    this.loadItems();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
+
+    }
+
+    unactiveItem(id){
+        Swal.fire({
+            title: 'Masquer cette article?',
+            text: "êtes vous sure de vouloir confirmer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                //Envoyer la requet au server
+                let url = route('blogannoncecategorylocationunactive_site.site',id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            message: "Cette article a été masquée aux utilisateurs",
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'bottom',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animated fadeInUp",
+                                exit: "animated fadeOutDown"
+                            },
+                        });
+                    /** End alert ***/
+                    this.loadItems();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
+
+    }
+
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
@@ -72,10 +177,8 @@ class PrivateUserBlogannonceLocation extends Component {
     }
 
     loadItems(){
-        dyaxios.get(route('api.blogannoncelocations_site')).then(response =>
-            this.setState({
-                blogannoncelocations: [...response.data.data],
-            }));
+        let itemuser = this.props.match.params.user;
+        dyaxios.get(route('api.blogannonceslocationsbyuser_site',[itemuser])).then(response => this.setState({userblogannoncelocationsPrivate: response.data,}));
     }
 
     // lifecycle method
@@ -84,11 +187,11 @@ class PrivateUserBlogannonceLocation extends Component {
     }
 
     render() {
-        const {blogannoncelocations} = this.state;
-        const mapBlogannoncelocations = blogannoncelocations.length ? (
-            blogannoncelocations.map(item => {
+        const {userblogannoncelocationsPrivate} = this.state;
+        const mapBlogannoncelocations = userblogannoncelocationsPrivate.blogannoncelocations.length ? (
+            userblogannoncelocationsPrivate.blogannoncelocations.map(item => {
                 return(
-                    <BlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
+                    <BlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
                 )
             })
         ):(
@@ -116,7 +219,7 @@ class PrivateUserBlogannonceLocation extends Component {
 
                                 <div className="row">
 
-                                    <NavlinkconfigurationUser/>
+                                    <NavlinkconfigurationUser {...this.props} {...userblogannoncelocationsPrivate}/>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
 

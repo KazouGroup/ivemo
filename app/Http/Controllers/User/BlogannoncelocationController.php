@@ -23,6 +23,8 @@ class BlogannoncelocationController extends Controller
     {
         $this->middleware('auth',['only' => [
             'create','store','edit','update','destroy','show','activated','unactivated',
+            'apiblogannonceslocationsbyuser',
+            'blogannonceslocationsbyuser'
         ]]);
     }
 
@@ -54,6 +56,21 @@ class BlogannoncelocationController extends Controller
 
         return response()->json($blogannoncelocations, 200);
     }
+
+    public function apiblogannonceslocationsbyuser(user $user)
+    {
+        $blogannoncelocations = BlogannoncelocationService::apiblogannonceslocationsbyuser($user);
+
+        return response()->json($blogannoncelocations, 200);
+    }
+
+    public function blogannonceslocationsbyuser()
+    {
+        return view('user.blogs.blogannoncelocation.blogannonceslocationsbyuser',[
+            'user' => auth()->user(),
+        ]);
+    }
+
 
     public function apiannonceblogcategorylocationslug($categoryannoncelocation, $date,$blogannoncelocation)
     {

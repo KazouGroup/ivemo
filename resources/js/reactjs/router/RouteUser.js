@@ -96,7 +96,7 @@ const RouteUser = props => (
           <Route path="/profile/personal_settings/teams/:id/edit/" component={TeamsUserEdite}/>
 
           <Route exact path="/profile/personal_settings/annonces_locations/" component={PrivateUserAnnonceLocations}/>
-          <Route exact path="/profile/personal_settings/blogs/annonce_locations/" component={PrivateUserBlogannonceLocation}/>
+          <Route exact path="/profile/:user/personal_settings/blogs/annonce_locations/" component={PrivateUserBlogannonceLocation}/>
 
 
           <Route exact path="/blogs/annonce_reservations/" component={BlogannoncereservationIndex}/>

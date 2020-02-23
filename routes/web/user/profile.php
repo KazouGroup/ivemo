@@ -46,7 +46,6 @@ Route::get(
     'ProfileController@annonces_reservations_booked'
 )->name('annonces_reservations_booked.site');
 
-
 Route::get(
     'profile/annonces_reservations_booked/confirmed/{id}',
     'ProfileController@annonces_reservations_booked_confirmed'
@@ -56,7 +55,6 @@ Route::get(
     'profile/annonces_reservations_booked/unconfirmed/{id}',
     'ProfileController@annonces_reservations_booked_unconfirmed'
 )->name('annonces_reservations_booked_unconfirmed.site');
-
 
 Route::get(
     'profile/change_password',

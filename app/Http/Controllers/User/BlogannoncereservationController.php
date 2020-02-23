@@ -25,7 +25,7 @@ class BlogannoncereservationController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','destroy','activated','unactivated'
+            'create','store','edit','update','destroy','activated','unactivated','apiblogannoncesreservationsbyuser'
         ]]);
     }
 
@@ -79,6 +79,14 @@ class BlogannoncereservationController extends Controller
         return response()->json($blogannoncereservations, 200);
 
     }
+
+    public function apiblogannoncesreservationsbyuser(user $user)
+    {
+        $blogannoncereservations = BlogannoncereservationService::apiblogannoncesreservationsbyuser($user);
+
+        return response()->json($blogannoncereservations, 200);
+    }
+
 
     public function annonceblogreservation()
     {
