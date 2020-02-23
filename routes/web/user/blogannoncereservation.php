@@ -26,6 +26,11 @@ Route::get(
 )->name('api.blogannonceblogcategoryreservationslugin_site');
 
 Route::get(
+    'api/profile/{user}/personal_settings/blogs/annonce_reservations/',
+    'BlogannoncereservationController@apiblogannoncesreservationsbyuser'
+)->name('api.blogannoncesreservationsbyuser_site');
+
+Route::get(
     'blogs/annonce_reservations_activated/{id}',
     'BlogannoncereservationController@activated'
 )->name('blogannoncecategoryreservationactivated_site');

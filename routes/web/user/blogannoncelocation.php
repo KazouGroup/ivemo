@@ -30,6 +30,18 @@ Route::get(
     'BlogannoncelocationController@show'
 )->name('api.blogannonceblogcategorylocationslugin_site');
 
+
+
+Route::get(
+    'profile/{user}/personal_settings/blogs/annonce_locations',
+    'BlogannoncelocationController@blogannonceslocationsbyuser'
+)->name('blogannonceslocationsbyuser_site');
+
+Route::get(
+    'api/profile/{user}/personal_settings/blogs/annonce_locations/',
+    'BlogannoncelocationController@apiblogannonceslocationsbyuser'
+)->name('api.blogannonceslocationsbyuser_site');
+
 Route::get(
     'blogs/annonce_locations_active/{id}',
     'BlogannoncelocationController@activated'

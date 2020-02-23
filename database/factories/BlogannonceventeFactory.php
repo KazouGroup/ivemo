@@ -2,13 +2,13 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model\blogannoncereservation;
-use App\Model\categoryannoncereservation;
+use App\Model\blogannoncevente;
+use App\Model\categoryannoncevente;
 use App\Model\user;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
-$factory->define(blogannoncereservation::class, function (Faker $faker) {
+$factory->define(blogannoncevente::class, function (Faker $faker) {
     $title = $faker->sentence(9);
     $myslug = Str::uuid();
     return [
@@ -18,8 +18,8 @@ $factory->define(blogannoncereservation::class, function (Faker $faker) {
         'slugin' => $myslug,
         'red_time' => $faker->randomDigitNot(5),
         'description' => $faker->realText(rand(10000, 40000)),
-        'categoryannoncereservation_id' => categoryannoncereservation::inRandomOrder()->first()->id,
+        'categoryannoncevente_id' => categoryannoncevente::inRandomOrder()->first()->id,
         'user_id' => user::inRandomOrder()->first()->id,
-         'created_at' => $faker->dateTime,
+        'created_at' => $faker->dateTime,
     ];
 });

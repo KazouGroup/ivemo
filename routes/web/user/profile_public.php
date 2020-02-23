@@ -26,7 +26,6 @@ Route::get(
     'ProfilepublicController@publicprofilarticleslocations'
 )->name('public_profile_articleslocations.site');
 
-
 Route::get(
     '@{user}/blogs/annonce_reservations/',
     'ProfilepublicController@profilblogannoncereservations'
