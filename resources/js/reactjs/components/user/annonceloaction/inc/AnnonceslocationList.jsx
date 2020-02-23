@@ -144,7 +144,7 @@ class AnnonceslocationList extends Component {
                                         <Button className="btn btn-icon btn-sm btn-warning" id="TooltipPhone">
                                             <i className="now-ui-icons tech_mobile"/>
                                         </Button>
-                                        <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-primary">
+                                        <NavLink to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="btn btn-icon btn-sm btn-primary">
                                             <i className="now-ui-icons location_pin"/>
                                         </NavLink>
 

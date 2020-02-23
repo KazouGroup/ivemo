@@ -51,7 +51,7 @@ class Categoriesannoncereselocation extends Component {
                                             Trouver un(e) <strong>{item.name}</strong> à louer
                                         </NavLink>
                                     </td>
-                                    <td className="text-right"> {this.getcountcategoryannonceString(item.annoncelocations_count)} annonces</td>
+                                    <td className="text-right"> {this.getcountcategoryannonceString(item.annoncelocations_count)} {item.annoncelocations_count > 1 ? "annonces" : "annonce"}</td>
                                 </tr>
                             ))}
 
@@ -65,15 +65,4 @@ class Categoriesannoncereselocation extends Component {
     }
 
 }
-Categoriesannoncereselocation.defaultProps = {
-    backgroundColor: "black",
-};
-
-Categoriesannoncereselocation.propTypes = {
-    // background color for the component
-    backgroundColor: PropTypes.oneOf([
-        "black",
-        "orange",
-    ]),
-};
 export default withRouter(Categoriesannoncereselocation);

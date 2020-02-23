@@ -210,11 +210,11 @@ class Annoncelocationbycategorycityshow extends Component {
                                                 </div>
                                                 <div className="card-header d-flex align-items-center">
                                                     <div className="d-flex align-items-center">
-                                                        <NavLink to={`/@${annoncelocation.user.slug}/`}>
+                                                        <NavLink to={`/@${annoncelocation.user.slug}/annonces_locations/`}>
                                                             <img src={annoncelocation.user.avatar} style={{ height: "40px", width: "80px" }} alt={annoncelocation.user.first_name} className="avatar" />
                                                         </NavLink>
                                                         <div className="mx-3">
-                                                            <NavLink to={`/@${annoncelocation.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{annoncelocation.user.first_name}</b>
+                                                            <NavLink to={`/@${annoncelocation.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{annoncelocation.user.first_name}</b>
                                                                 <small className="d-block text-muted">{moment(annoncelocation.created_at).format('LL')}</small>
                                                             </NavLink>
                                                         </div>
@@ -348,11 +348,11 @@ class Annoncelocationbycategorycityshow extends Component {
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                             <div className="card-header d-flex align-items-center">
                                                                 <div className="d-flex align-items-center">
-                                                                    <NavLink to={`/@${annoncelocation.user.slug}/`}>
+                                                                    <NavLink to={`/@${annoncelocation.user.slug}/annonces_locations/`}>
                                                                         <img src={annoncelocation.user.avatar} style={{ height: "40px", width: "80px" }} alt={annoncelocation.user.first_name} className="avatar" />
                                                                     </NavLink>
                                                                     <div className="mx-3">
-                                                                        <NavLink to={`/@${annoncelocation.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{annoncelocation.user.first_name}</b>
+                                                                        <NavLink to={`/@${annoncelocation.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{annoncelocation.user.first_name}</b>
                                                                             <small className="d-block text-muted">12 janv 2019</small>
                                                                         </NavLink>
                                                                     </div>

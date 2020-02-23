@@ -36,7 +36,7 @@ class BlogannoncelocationList extends Component {
 
                                 <div className="card-footer">
                                     <div className="author">
-                                        <Link to={`/@${this.props.user.slug}/`}>
+                                        <Link to={`/@${this.props.user.slug}/annonces_locations/`}>
                                             <img src={this.props.user.avatar} alt={this.props.user.first_name}
                                                  className="avatar img-raised"/>
                                             <b>{this.props.user.first_name}</b>

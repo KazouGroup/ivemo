@@ -16,7 +16,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncereservation:{categoryannoncereservation:[],user:[],imagereservations:[]},
+            annoncereservation:{annoncetype:[],categoryannoncereservation:[],user:[],imagereservations:[]},
         };
 
     }
@@ -93,18 +93,21 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                             <br />
                                             <div className="d-flex align-items-center">
                                                 <div className="text-left pull-left">
-                                                    <NavLink to={`/annonce/show/`}>
-                                                        <h6 className="text-info ml-auto mr-auto">
+                                                    <NavLink to={`/annonces_reservations/${annoncereservation.annoncetype.slug}/${annoncereservation.categoryannoncereservation.slug}/`}>
+                                                        <h6 className={`text-${annoncereservation.categoryannoncereservation.color_name} ml-auto mr-auto`}>
                                                             {annoncereservation.categoryannoncereservation.name}
                                                         </h6>
                                                     </NavLink>
                                                 </div>
 
+                                                {/*
                                                 <div className="text-center ml-auto">
                                                     <a href="#pablo" className="btn btn-primary btn-round">
-                                                        <i className="now-ui-icons ui-2_favourite-28"></i> Dejà sauvegarder
+                                                        <i className="now-ui-icons ui-2_favourite-28"/> Dejà sauvegarder
                                                     </a>
                                                 </div>
+                                                */}
+
                                                 <div className="text-right ml-auto">
                                                     <h5 className="text-success"><b>{(annoncereservation.price)} <small>FCFA</small></b></h5>
                                                 </div>

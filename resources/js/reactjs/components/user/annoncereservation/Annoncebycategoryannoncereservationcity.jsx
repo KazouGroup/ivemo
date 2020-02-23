@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { Button } from "reactstrap";
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
-import AnnoncereservationList from "./AnnoncereservationList";
+import AnnoncereservationList from "./inc/AnnoncereservationList";
 import PropTypes from "prop-types";
 import Categoriesannoncereservation from "./inc/Categoriesannoncereservation";
 
