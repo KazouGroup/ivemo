@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Button,Row } from "reactstrap";
-import NavUserSite from "../../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
+import NavUserSite from "../../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
-import FormContactProfileAccountUser from "../form/FormContactProfileAccountUser";
+import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";
 import NavLinkPublicBlogannoncesUser from "./NavLinkPublicBlogannoncesUser";
-import NavLinkPublicAnnonceUser from "../annonces/NavLinkPublicAnnonceUser";
+import NavLinkPublicAnnonceUser from "../../annonces/NavLinkPublicAnnonceUser";
 import PublicUserBlogannoncelocationList from "./PublicUserBlogannoncelocationList";
 
 

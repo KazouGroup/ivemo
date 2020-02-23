@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import ProfileAccountTeamUser from "./ProfileAccountTeamUser";
 import NavLinkPublicAnnonceUser from "./annonces/NavLinkPublicAnnonceUser";
 import NavNavigatePivateUser from "./NavNavigatePivateUser";
-import NavLinkPublicBlogannoncesUser from "./blogs/NavLinkPublicBlogannoncesUser";
+import NavLinkPublicBlogannoncesUser from "./blogs/public/NavLinkPublicBlogannoncesUser";
 
 
 class ProfileAccountPublicUser extends Component {

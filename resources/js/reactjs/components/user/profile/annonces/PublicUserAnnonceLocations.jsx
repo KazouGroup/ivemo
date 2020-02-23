@@ -8,7 +8,7 @@ import AnnonceslocationList from "../../annonceloaction/inc/AnnonceslocationList
 import Swal from "sweetalert2";
 import NavLinkPublicAnnonceUser from "./NavLinkPublicAnnonceUser";
 import FormContactProfileAccountUser from "../form/FormContactProfileAccountUser";
-import NavLinkPublicBlogannoncesUser from "../blogs/NavLinkPublicBlogannoncesUser";
+import NavLinkPublicBlogannoncesUser from "../blogs/public/NavLinkPublicBlogannoncesUser";
 
 
 class PublicUserAnnonceLocations extends Component {
