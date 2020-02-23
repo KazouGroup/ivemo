@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, NavLink, withRouter } from 'react-router-dom';
-import NavNavigatePivateUser from "../NavNavigatePivateUser";
+import NavNavigatePivateUser from "../../NavNavigatePivateUser";
 
 
 class NavLinkPublicBlogannoncesUser extends Component {

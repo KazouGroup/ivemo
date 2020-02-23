@@ -57,35 +57,6 @@ Route::get(
     'ProfileController@annonces_reservations_booked_unconfirmed'
 )->name('annonces_reservations_booked_unconfirmed.site');
 
-Route::get(
-    '@{user}',
-    'ProfileController@public_profile'
-)->name('public_profile.site');
-
-Route::post(
-    '@{user}/send_message',
-    'ProfileController@public_profile_send_message'
-)->name('public_profile_send_message.site');
-
-Route::get(
-    '@{user}/annonces_reservations',
-    'ProfileController@publicprofilannoncereservations'
-)->name('public_profile_annoncereservations.site');
-
-Route::get(
-    '@{user}/annonces_locations',
-    'ProfileController@publicprofilannoncelocations'
-)->name('public_profile_annoncelocations.site');
-
-Route::get(
-    '@{user}/blogs/annonce_locations/',
-    'ProfileController@publicprofilarticleslocations'
-)->name('public_profile_articleslocations.site');
-
-Route::get(
-    '@{user}/blogs/annonce_reservations/',
-    'ProfileController@profilblogannoncereservations'
-)->name('public_profile_articlesreservation.site');
 
 Route::get(
     'profile/change_password',

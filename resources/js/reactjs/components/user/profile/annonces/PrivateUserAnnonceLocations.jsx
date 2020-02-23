@@ -6,9 +6,6 @@ import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import AnnonceslocationList from "../../annonceloaction/inc/AnnonceslocationList";
 import Swal from "sweetalert2";
-import NavLinkPublicAnnonceUser from "./NavLinkPublicAnnonceUser";
-import FormContactProfileAccountUser from "../form/FormContactProfileAccountUser";
-import NavLinkPublicBlogannoncesUser from "../blogs/NavLinkPublicBlogannoncesUser";
 import NavlinkconfigurationUser from "../../configurations/inc/NavlinkconfigurationUser";
 
 
