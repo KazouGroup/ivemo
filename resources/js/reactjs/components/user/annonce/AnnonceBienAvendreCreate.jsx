@@ -314,7 +314,7 @@ class AnnonceBienAvendreCreate extends Component {
                                                                                     </div>
                                                                                 </div>
                                                                                 <small>*optionnel: les champs ne sont
-                                                                                    pas obligatoires vous avez le cjoix
+                                                                                    pas obligatoires vous avez le choix
                                                                                     de le remplire ou pas</small>
                                                                             </div>
 

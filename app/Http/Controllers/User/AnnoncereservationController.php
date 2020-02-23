@@ -123,12 +123,22 @@ class AnnoncereservationController extends Controller
         return response()->json($annoncereservation, 200);
     }
 
-    public function apiannoncereservationintersse(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city)
+    public function apiannoncereservationinteresse(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city)
     {
         $annoncereservation = $categoryannoncereservation->annoncereservations()->whereIn('annoncetype_id',[$annoncetype->id])
             ->with('user','city','annoncetype','categoryannoncereservation','imagereservations')
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->whereIn('city_id',[$city->id])
+            ->orderByRaw('RAND()')
+            ->where('status',1)
+            ->take(4)->distinct()->get()->toArray();
+        return response()->json($annoncereservation, 200);
+    }
+
+    public function apiannoncereservationinteresseslug(categoryannoncereservation $categoryannoncereservation)
+    {
+        $annoncereservation = $categoryannoncereservation->annoncereservations()->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
+            ->with('user','city','annoncetype','categoryannoncereservation','imagereservations')
             ->orderByRaw('RAND()')
             ->where('status',1)
             ->take(4)->distinct()->get()->toArray();
@@ -177,6 +187,7 @@ class AnnoncereservationController extends Controller
 
         return response()->json($annoncereservation, 200);
     }
+
 
     public function sendannoncereservation(StoreRequest $request, annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
     {

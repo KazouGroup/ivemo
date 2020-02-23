@@ -22,7 +22,12 @@ Route::get(
 
 Route::get(
     'annonces_interesses/{annoncetype}/{categoryannoncereservation}/{city}',
-    'AnnoncereservationController@apiannoncereservationintersse'
+    'AnnoncereservationController@apiannoncereservationinteresse'
+)->name('api.annoncereservationintersse_site');
+
+Route::get(
+    'annonces_interesses/{categoryannoncereservation}/',
+    'AnnoncereservationController@apiannoncereservationinteresseslug'
 )->name('api.annoncereservationintersse_site');
 
 Route::get(
