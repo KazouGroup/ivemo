@@ -12,6 +12,7 @@ use App\Http\Resources\CityResource;
 use App\Model\annoncereservation;
 use App\Model\annoncetype;
 use App\Model\categoryannoncereservation;
+use App\Model\user;
 use App\Services\AnnoncereservationService;
 use App\Services\ContactuserService;
 use App\Model\contactuser;
@@ -19,13 +20,14 @@ use App\Model\city;
 use App\Model\reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Response;
 
 class AnnoncereservationController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','destroy','sendannoncereservation'
+            'create','store','edit','update','destroy','sendannoncereservation','annoncesreservationsbyuser','apiannoncesreservationsbyuser'
         ]]);
     }
     /**
@@ -223,6 +225,19 @@ class AnnoncereservationController extends Controller
         return response()->json($contactuser,200);
     }
 
+    public function apiannoncesreservationsbyuser(user $user)
+    {
+        $data = AnnoncereservationService::apiannoncesreservationsbyuser($user);
+
+        return response()->json($data, 200);
+    }
+
+    public function annoncesreservationsbyuser()
+    {
+        return view('user.profile.annonces.privateprofilannoncereservations',[
+            'user' => auth()->user(),
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -278,14 +293,51 @@ class AnnoncereservationController extends Controller
         //
     }
 
+    public function activated($id)
+    {
+        $annoncereservation = annoncereservation::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$annoncereservation);
+
+        if(auth()->user()->id === $annoncereservation->user_id){
+
+            $annoncereservation->update(['status' => 1,]);
+
+            return response('Confirmed',Response::HTTP_ACCEPTED);
+        }else{
+            abort(404);
+        }
+    }
+
+    public function unactivated($id)
+    {
+        $annoncereservation = annoncereservation::where('id', $id)->findOrFail($id);
+        $this->authorize('update',$annoncereservation);
+
+        if(auth()->user()->id === $annoncereservation->user_id){
+            $annoncereservation->update(['status' => 0,]);
+
+            return response('Confirmed',Response::HTTP_ACCEPTED);
+        }else{
+            abort(404);
+        }
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array|\Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(annoncetype $annoncetype,$id)
     {
-        //
+        $annoncereservation = annoncereservation::findOrFail($id);
+        $this->authorize('update',$annoncereservation);
+        if (auth()->user()->id === $annoncereservation->user_id){
+            $annoncereservation->delete();
+
+            return ['message' => 'message deleted '];
+        }else{
+            abort(404);
+        }
     }
 }

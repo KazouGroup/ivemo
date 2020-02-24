@@ -56,7 +56,7 @@ class NavlinkconfigurationUser extends Component {
                                                     <tr>
                                                         <td>
                                                             <NavLink to={`/profile/${this.props.slug}/personal_settings/annonces_locations/`}>
-                                                                annonces sur locations
+                                                                annonces sur les locations
                                                             </NavLink>
                                                         </td>
                                                         <td className="text-right"> {this.props.annoncelocations_count} {this.props.annoncelocations_count < 1 ? "annonce" : "annonces"}</td>
@@ -64,7 +64,7 @@ class NavlinkconfigurationUser extends Component {
                                                     <tr>
                                                         <td>
                                                             <NavLink to={`/profile/${this.props.slug}/personal_settings/annonces_reservations/`}>
-                                                                annonces sur reservations
+                                                                annonces sur les reservations
                                                             </NavLink>
                                                         </td>
                                                         <td className="text-right"> {this.props.annoncereservations_count} {this.props.annoncereservations_count < 1 ? "annonce" : "annonces"}</td>
@@ -72,7 +72,7 @@ class NavlinkconfigurationUser extends Component {
                                                     <tr>
                                                         <td>
                                                             <NavLink to={`/profile/${this.props.slug}/personal_settings/annonces_ventes/`}>
-                                                                annonces sur reservations
+                                                                annonces sur les ventes
                                                             </NavLink>
                                                         </td>
                                                         <td className="text-right"> {this.props.annonceventes_count} {this.props.annonceventes_count < 1 ? "annonce" : "annonces"}</td>

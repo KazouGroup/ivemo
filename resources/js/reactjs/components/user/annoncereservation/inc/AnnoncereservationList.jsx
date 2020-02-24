@@ -109,7 +109,7 @@ class AnnoncereservationList extends Component {
                                         <Button className="btn btn-icon btn-sm btn-warning" rel="tooltip" title="3426712192" data-placement="bottom">
                                             <i className="now-ui-icons tech_mobile"/>
                                         </Button>
-                                        <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-primary">
+                                        <NavLink to={`/annonces_reservations/reservations/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/${this.props.slug}/`} className="btn btn-icon btn-sm btn-primary">
                                             <i className="now-ui-icons location_pin"/>
                                         </NavLink>
 
@@ -121,7 +121,7 @@ class AnnoncereservationList extends Component {
                                                             <i className="now-ui-icons ui-2_settings-90"/>
                                                         </NavLink>
                                                         <Button
-                                                            className="btn btn-icon btn-sm btn-danger" rel="tooltip" title="Supprimer" data-placement="bottom">
+                                                            className="btn btn-icon btn-sm btn-danger" rel="tooltip" title="Supprimer" onClick={() => this.props.deleteItem(this.props.id)} data-placement="bottom">
                                                             <i className="now-ui-icons ui-1_simple-remove"/>
                                                         </Button>{" "}
                                                     </>
