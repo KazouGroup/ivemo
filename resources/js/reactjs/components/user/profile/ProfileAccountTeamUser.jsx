@@ -10,9 +10,17 @@ class ProfileAccountTeamUser extends Component {
         super(props);
         this.state = {
             teamusers:[],
+            visiable: 6,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.loadmoresItem = this.loadmoresItem.bind(this);
+    }
+
+    loadmoresItem(){
+        this.setState((old) =>{
+            return {visiable: old.visiable + 6}
+        })
     }
 
     deleteItem(id) {
@@ -83,7 +91,7 @@ class ProfileAccountTeamUser extends Component {
         return { __html: item.description };
     }
     render() {
-        const {teamusers} = this.state;
+        const {teamusers,visiable} = this.state;
         return (
             <>
                 {teamusers.length > 0 && (
@@ -96,7 +104,7 @@ class ProfileAccountTeamUser extends Component {
 
                             <div className="row">
 
-                                {teamusers.map((item) => (
+                                {teamusers.slice(0,visiable).map((item) => (
 
                                     <div key={item.id} className="col-md-4 mx-auto">
                                         <div className="card card-profile card-plain">
@@ -141,6 +149,17 @@ class ProfileAccountTeamUser extends Component {
 
 
                             </div>
+
+                            {visiable < teamusers.length && (
+                                <div className="row">
+                                    <div className="col-md-4 ml-auto mr-auto text-center">
+                                        <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                           <b>Voir plus </b>
+                                            <i className="now-ui-icons arrows-1_minimal-down"/>
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
 
                         </div>
                     </div>

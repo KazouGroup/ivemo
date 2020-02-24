@@ -49,6 +49,7 @@ class blogannoncevente extends Model
 
     protected $casts = [
         'status' => 'boolean',
+        'status_admin' => 'boolean',
     ];
 
 

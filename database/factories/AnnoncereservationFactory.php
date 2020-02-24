@@ -16,12 +16,13 @@ $factory->define(annoncereservation::class, function (Faker $faker) {
         'title' => $title,
         'district' => $faker->city,
         'status' => $faker->boolean,
+        'status_admin' => $faker->boolean,
         'description' => $faker->realText(rand(10000, 40000)),
         'price' => $faker->randomNumber(7),
         'disponible_date' => $disponible_date,
         'annoncetype_id' => 3,
         'slug' => str_slug($title),
-        
+
         'categoryannoncereservation_id' => categoryannoncereservation::inRandomOrder()->first()->id,
         'city_id' => city::inRandomOrder()->first()->id,
         'user_id' => user::inRandomOrder()->first()->id,

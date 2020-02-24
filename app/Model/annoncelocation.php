@@ -54,6 +54,7 @@ class annoncelocation extends Model
 
     protected $casts = [
         'status' => 'boolean',
+        'status_admin' => 'boolean',
     ];
 
     use Sluggable;

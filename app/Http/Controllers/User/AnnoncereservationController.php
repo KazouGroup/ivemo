@@ -79,9 +79,9 @@ class AnnoncereservationController extends Controller
     {
         $categoryannoncereservations = CategoryannoncereservationResource::collection(categoryannoncereservation::with('user')
           ->withCount(['annoncereservations' => function ($q){
-              $q->where('status',1);
+              $q->where(['status' => 1,'status_admin' => 1]);
            }])->withCount(['blogannoncereservations' => function ($q){
-               $q->where('status',1);}])
+               $q->where(['status' => 1,'status_admin' => 1]);}])
          ->orderBy('annoncereservations_count','desc')->distinct()->get());
 
         return response()->json($categoryannoncereservations, 200);
@@ -100,7 +100,7 @@ class AnnoncereservationController extends Controller
         $annonces = annoncetype::whereSlug($annoncetype->slug)
             ->with([
                 'annoncereservations' => function ($q) use ($annoncetype){
-                    $q->where('status',1)
+                    $q->where(['status' => 1,'status_admin' => 1])
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
                         ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();
@@ -115,7 +115,7 @@ class AnnoncereservationController extends Controller
         $annoncereservation = categoryannoncereservation::whereSlug($categoryannoncereservation->slug)
             ->with([
                 'annoncereservations' => function ($q) use ($annoncetype,$categoryannoncereservation){
-                    $q->where('status',1)
+                    $q->where(['status' => 1,'status_admin' => 1])
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
                         ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
@@ -131,7 +131,7 @@ class AnnoncereservationController extends Controller
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->whereIn('city_id',[$city->id])
             ->orderByRaw('RAND()')
-            ->where('status',1)
+            ->where(['status' => 1,'status_admin' => 1])
             ->take(4)->distinct()->get()->toArray();
         return response()->json($annoncereservation, 200);
     }
@@ -141,7 +141,7 @@ class AnnoncereservationController extends Controller
         $annoncereservation = $categoryannoncereservation->annoncereservations()->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->with('user','city','annoncetype','categoryannoncereservation','imagereservations')
             ->orderByRaw('RAND()')
-            ->where('status',1)
+            ->where(['status' => 1,'status_admin' => 1])
             ->take(4)->distinct()->get()->toArray();
         return response()->json($annoncereservation, 200);
     }
@@ -171,7 +171,7 @@ class AnnoncereservationController extends Controller
     {
         $annoncereservations = CityResource::collection(city::with('user')->where('status',1)
             ->withCount(['annoncereservations' => function ($q){
-                $q->where('status',1);
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])
             ->orderBy('annoncereservations_count','desc')->take(6)->get());
 
@@ -183,7 +183,7 @@ class AnnoncereservationController extends Controller
         $annoncereservation = new AnnoncereservationResource(annoncereservation::whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('city_id',[$city->id])
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
-            ->where('status',1)
+            ->where(['status' => 1,'status_admin' => 1])
             ->whereSlug($annoncereservation)->firstOrFail());
 
         return response()->json($annoncereservation, 200);

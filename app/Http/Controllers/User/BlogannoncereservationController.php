@@ -32,7 +32,7 @@ class BlogannoncereservationController extends Controller
     public function apiannonceblogreservation()
     {
         $blogannoncereservations = blogannoncereservation::with('user','categoryannoncereservation')
-            ->where('status',1)->orderBy('created_at','DESC')
+            ->where(['status' => 1,'status_admin' => 1])->orderBy('created_at','DESC')
             ->distinct()->paginate(40)->toArray();
 
         return response()->json($blogannoncereservations, 200);
@@ -42,7 +42,7 @@ class BlogannoncereservationController extends Controller
     {
         $blogannoncereservation = categoryannoncereservation::whereSlug($categoryannoncereservation->slug)
             ->with(['blogannoncereservations' => function ($q) use ($categoryannoncereservation){
-                $q->where('status',1)
+                $q->where(['status' => 1,'status_admin' => 1])
             ->with('user','categoryannoncereservation')
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();},
@@ -58,7 +58,7 @@ class BlogannoncereservationController extends Controller
             ->with('user','categoryannoncereservation')
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->orderByRaw('RAND()')
-            ->where('status',1)
+            ->where(['status' => 1,'status_admin' => 1])
             ->take(3)->distinct()->get()->toArray();
         return response()->json($blogannoncereservation, 200);
     }
@@ -66,7 +66,7 @@ class BlogannoncereservationController extends Controller
     public function apiannonceblogcategoryreservationslug($categoryannoncereservation, $date, $blogannoncereservation)
     {
         $blogannoncereservation = new BlogannoncereservationResource(blogannoncereservation::whereDate('created_at',$date)->whereSlug($blogannoncereservation)
-            ->where('status',1)->first());
+            ->where(['status' => 1,'status_admin' => 1])->first());
         return response()->json($blogannoncereservation, 200);
     }
 
@@ -74,7 +74,7 @@ class BlogannoncereservationController extends Controller
     {
        $blogannoncereservations = blogannoncereservation::whereIn('user_id',[$user->id])
            ->orderBy('created_at','DESC')
-           ->where('status',1)->get()->toArray();
+           ->where(['status' => 1,'status_admin' => 1])->get()->toArray();
 
         return response()->json($blogannoncereservations, 200);
 

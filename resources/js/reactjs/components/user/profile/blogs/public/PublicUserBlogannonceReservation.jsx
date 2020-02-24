@@ -16,9 +16,16 @@ class PublicUserBlogannonceReservation extends Component {
         super(props);
         this.state = {
             userblogreservationPublick:{blogannoncereservations: []},
+            visiable: 10,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.loadmoresItem = this.loadmoresItem.bind(this);
+    }
+    loadmoresItem(){
+        this.setState((old) =>{
+            return {visiable: old.visiable + 10}
+        })
     }
     deleteItem(id) {
         Swal.fire({
@@ -84,9 +91,9 @@ class PublicUserBlogannonceReservation extends Component {
     }
 
     render() {
-        const {userblogreservationPublick} = this.state;
+        const {userblogreservationPublick,visiable} = this.state;
         const mapBlogannoncereservations = userblogreservationPublick.blogannoncereservations.length ? (
-            userblogreservationPublick.blogannoncereservations.map(item => {
+            userblogreservationPublick.blogannoncereservations.slice(0,visiable).map(item => {
                 return(
 
                     <PublicUserBlogannoncereservationList key={item.id} {...item} deleteItem={this.deleteItem}/>
@@ -210,6 +217,16 @@ class PublicUserBlogannonceReservation extends Component {
                                             {mapBlogannoncereservations}
 
                                         </Row>
+                                        {visiable < userblogreservationPublick.blogannoncereservations.length && (
+                                            <div className="row">
+                                                <div className="col-md-4 ml-auto mr-auto text-center">
+                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                                        <b>Voir plus </b>
+                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
 
 
                                         <div className="card">

@@ -36,11 +36,6 @@ class categoryannoncevente extends Model
         return 'slug';
     }
 
-    public function conseilventes()
-    {
-        return $this->hasMany(conseilvente::class, 'categoryannoncevente_id');
-    }
-
     public function annonceventes()
     {
         return $this->hasMany(annoncevente::class, 'categoryannoncevente_id');

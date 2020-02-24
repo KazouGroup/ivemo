@@ -17,7 +17,7 @@ class AnnoncelocationService
     {
         $annoncesbycities = city::with('user')
             ->withCount(['annoncelocations' => function ($q) use ($categoryannoncelocation){
-                $q->where('status',1)
+                $q->where(['status' => 1,'status_admin' => 1])
                     ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id]);
             }])->orderBy('annoncelocations_count','desc')
             ->take(6)
@@ -30,7 +30,7 @@ class AnnoncelocationService
     {
         $annoncesbycities = categoryannoncelocation::with('user')
             ->withCount(['annoncelocations' => function ($q) use ($categoryannoncelocation,$city){
-                $q->where('status',1)
+                $q->where(['status' => 1,'status_admin' => 1])
                     ->whereIn('city_id',[$city->id]);
             }])->orderBy('annoncelocations_count','desc')
             ->take(6)->distinct()->get();
@@ -43,7 +43,7 @@ class AnnoncelocationService
         $annoncesbycities = city::whereSlug($city->slug)
             ->with([
                 'annoncelocations' => function ($q) use ($annoncetype,$categoryannoncelocation,$city){
-                    $q->where('status',1)
+                    $q->where(['status' => 1,'status_admin' => 1])
                         ->with('user','categoryannoncelocation','city','annoncetype')
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
@@ -62,7 +62,7 @@ class AnnoncelocationService
                 $q->with('user','categoryannoncelocation','city','annoncetype')
                     ->whereIn('user_id',[$user->id])
                     ->orderBy('created_at','DESC')
-                    ->distinct()->paginate(40)->toArray()
+                    ->distinct()->get()->toArray()
                 ;},
             ])
             ->withCount(['annoncelocations' => function ($q) use ($user){
@@ -87,7 +87,7 @@ class AnnoncelocationService
         $annoncelocation = new AnnoncelocationResource(annoncelocation::whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('city_id',[$city->id])
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
-            ->where('status',1)
+            ->where(['status' => 1,'status_admin' => 1])
             ->with(['user.profile' => function ($q){$q->distinct()->get();},])
             ->whereDate('created_at',$date)
             ->whereSlug($annoncelocation)->firstOrFail());
