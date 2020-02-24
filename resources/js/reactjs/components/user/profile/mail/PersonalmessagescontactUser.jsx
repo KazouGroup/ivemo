@@ -7,7 +7,7 @@ import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import NavlinkmailmessageUser from "./inc/NavlinkmailmessageUser";
 import HeadermailmessageUser from "./inc/HeadermailmessageUser";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import NavNavigatePivateUser from "../NavNavigatePivateUser";
 
 
@@ -17,9 +17,17 @@ class PersonalmessagescontactUser extends Component {
         this.state = {
             contactusersprofile: [],
             contactuserslocations: [],
+            visiable: 20,
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.readItem = this.readItem.bind(this);
+        this.loadmoresItem = this.loadmoresItem.bind(this);
+    }
+
+    loadmoresItem() {
+        this.setState((old) => {
+            return { visiable: old.visiable + 20 }
+        })
     }
 
 
@@ -37,7 +45,7 @@ class PersonalmessagescontactUser extends Component {
     }
     readItem(item) {
 
-        const url = route('personal_mails_contacts_active.site',[item.id]);
+        const url = route('personal_mails_contacts_active.site', [item.id]);
         dyaxios.get(url).then(() => {
             this.props.history.push(`/profile/personal_mails/contacts/${item.slug}/`);
         })
@@ -59,19 +67,19 @@ class PersonalmessagescontactUser extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('personal_mails_delete.site',id);
+                const url = route('personal_mails_delete.site', id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
                     let isNotId = item => item.id !== id;
                     let updatedItems = this.state.contactusersprofile.filter(isNotId);
-                    this.setState({contactusersprofile: updatedItems});
+                    this.setState({ contactusersprofile: updatedItems });
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            // title: 'Update',
-                            message: 'Message suprimée avec success'
-                        },
+                        // title: 'Update',
+                        message: 'Message suprimée avec success'
+                    },
                         {
                             allow_dismiss: false,
                             type: 'primary',
@@ -108,17 +116,17 @@ class PersonalmessagescontactUser extends Component {
 
 
     render() {
-        const {contactusersprofile,contactuserslocations} = this.state;
+        const { contactusersprofile, contactuserslocations, visiable } = this.state;
         const mapContactusers = contactusersprofile.length ? (
-            contactusersprofile.map(item => {
-                return(
+            contactusersprofile.slice(0, visiable).map(item => {
+                return (
 
-                    <HeadermailmessageUser key={item.id} {...item} readItem={this.readItem} deleteItem={this.deleteItem}/>
+                    <HeadermailmessageUser key={item.id} {...item} readItem={this.readItem} deleteItem={this.deleteItem} />
                 )
             })
-        ):(
-            <></>
-        );
+        ) : (
+                <></>
+            );
 
 
         return (
@@ -158,19 +166,19 @@ class PersonalmessagescontactUser extends Component {
                                                                 <table>
                                                                     <tbody>
 
-                                                                    <tr>
-                                                                        <td> <NavLink to={`/profile/personal_mails/contacts/`}>Mail contacts</NavLink></td>
-                                                                        {contactusersprofile.length > 0 && (
-                                                                            <td className="text-right"> {contactusersprofile.length || " "} messages</td>
-                                                                        )}
-                                                                    </tr>
+                                                                        <tr>
+                                                                            <td> <NavLink to={`/profile/personal_mails/contacts/`}>Mail contacts</NavLink></td>
+                                                                            {contactusersprofile.length > 0 && (
+                                                                                <td className="text-right"> {contactusersprofile.length || " "} messages</td>
+                                                                            )}
+                                                                        </tr>
 
-                                                                    <tr>
-                                                                        <td> <NavLink to={`/profile/personal_mails/annonces_locations/`}>Mail annonces locations</NavLink></td>
-                                                                        {contactuserslocations.length > 0 && (
-                                                                            <td className="text-right">{contactuserslocations.length} messages</td>
-                                                                        )}
-                                                                    </tr>
+                                                                        <tr>
+                                                                            <td> <NavLink to={`/profile/personal_mails/annonces_locations/`}>Mail annonces locations</NavLink></td>
+                                                                            {contactuserslocations.length > 0 && (
+                                                                                <td className="text-right">{contactuserslocations.length} messages</td>
+                                                                            )}
+                                                                        </tr>
 
                                                                     </tbody>
                                                                 </table>
@@ -183,7 +191,7 @@ class PersonalmessagescontactUser extends Component {
                                         </div>
 
                                         {/* Ici c'est la navigation dans toutes les pages dans le profile*/}
-                                        <NavNavigatePivateUser/>
+                                        <NavNavigatePivateUser />
 
                                     </div>
 
@@ -196,11 +204,23 @@ class PersonalmessagescontactUser extends Component {
                                                 <table>
                                                     <tbody>
 
-                                                    {mapContactusers}
+                                                        {mapContactusers}
 
                                                     </tbody>
                                                 </table>
                                             </div>
+
+
+                                        {visiable < contactusersprofile.length && (
+                                            <div className="row">
+                                                <div className="col-md-4 ml-auto mr-auto text-center">
+                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-secondary btn-block">
+                                                        <b>Voir plus </b>
+                                                        <i className="now-ui-icons arrows-1_minimal-down" />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
                                         </div>
 
                                     </div>

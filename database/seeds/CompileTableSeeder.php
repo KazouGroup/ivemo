@@ -7,14 +7,12 @@ use App\Model\color;
 use App\Model\contact;
 use App\Model\categoryannoncelocation;
 use App\Model\categoryannoncevente;
-use App\Model\contactuser;
 use App\Model\faq;
 use App\Model\link;
 use App\Model\teamuser;
 use App\Model\testimonial;
 use App\Model\user;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Faker\Factory as Faker;
@@ -139,7 +137,7 @@ class CompileTableSeeder extends Seeder
         factory(categoryfaq::class, 5)->create();
         factory(faq::class, 100)->create();
         factory(contact::class, 200)->create();
-        factory(teamuser::class, 200)->create();
+        factory(teamuser::class, 150)->create();
         factory(link::class, 5)->create();
 
         factory(testimonial::class, 500)->create();

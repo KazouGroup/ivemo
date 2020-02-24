@@ -22,15 +22,15 @@ class ProfilepublicController extends Controller
     {
         $user = new UserResource(user::whereSlug($user)
             ->withCount(['annoncelocations' => function ($q){
-                $q->where('status',1);
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])->withCount(['annoncereservations' => function ($q){
-                $q->where('status',1);
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])->withCount(['annonceventes' => function ($q){
-                $q->where('status',1);
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])->withCount(['blogannoncelocations' => function ($q){
-                $q->where('status',1);
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])->withCount(['blogannoncereservations' => function ($q){
-                $q->where('status',1);
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])->first());
 
         return response()->json($user, 200);
@@ -38,6 +38,7 @@ class ProfilepublicController extends Controller
 
     public function apiprofilannoncelocations(user $user)
     {
+
         $userannoncelocations = ProfileService::apiprofilannoncelocations($user);
 
         return response()->json($userannoncelocations, 200);
@@ -58,20 +59,20 @@ class ProfilepublicController extends Controller
                 $q->with('user','categoryannoncevente','city','annoncetype')
                     ->whereIn('annoncetype_id',[2])
                     ->whereIn('user_id',[$user->id])
-                    ->where('status',1)
+                    ->where(['status' => 1,'status_admin' => 1])
                     ->distinct()->paginate(40)->toArray()
                 ;},
             ])
             ->withCount(['annoncelocations' => function ($q){
-                $q->where('status',1);
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])->withCount(['annoncereservations' => function ($q){
-                $q->where('status',1);
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])->withCount(['annonceventes' => function ($q){
-                $q->where('status',1);
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])->withCount(['blogannoncelocations' => function ($q){
-                $q->where('status',1);
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])->withCount(['blogannoncereservations' => function ($q){
-                $q->where('status',1);
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])->first();
 
         return response()->json($annoncesreservations, 200);

@@ -20,6 +20,7 @@ class AnnoncereservationResource extends JsonResource
             'slug' => $this->slug,
             'district' => $this->district,
             'status' => $this->status,
+            'status_admin' => $this->status_admin,
             'description' => $this->description,
             'price' => $this->price,
             'city_id' => $this->city_id,

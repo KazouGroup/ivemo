@@ -16,9 +16,16 @@ class PublicUserBlogannonceLocation extends Component {
         super(props);
         this.state = {
             userbloglocationPublick:{blogannoncelocations: []},
+            visiable: 10,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.loadmoresItem = this.loadmoresItem.bind(this);
+    }
+    loadmoresItem(){
+        this.setState((old) =>{
+            return {visiable: old.visiable + 10}
+        })
     }
     deleteItem(id) {
         Swal.fire({
@@ -84,9 +91,9 @@ class PublicUserBlogannonceLocation extends Component {
     }
 
     render() {
-        const {userbloglocationPublick} = this.state;
+        const {userbloglocationPublick,visiable} = this.state;
         const mapBlogannoncelocations = userbloglocationPublick.blogannoncelocations.length ? (
-            userbloglocationPublick.blogannoncelocations.map(item => {
+            userbloglocationPublick.blogannoncelocations.slice(0,visiable).map(item => {
                 return(
 
                     <PublicUserBlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem}/>
@@ -210,6 +217,17 @@ class PublicUserBlogannonceLocation extends Component {
                                             {mapBlogannoncelocations}
 
                                         </Row>
+
+                                        {visiable < userbloglocationPublick.blogannoncelocations.length && (
+                                            <div className="row">
+                                                <div className="col-md-4 ml-auto mr-auto text-center">
+                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                                        <b>Voir plus </b>
+                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
 
                                         <div className="card">
                                             <div className="card-body">

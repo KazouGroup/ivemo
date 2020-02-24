@@ -20,7 +20,7 @@ class BlogannoncelocationService
         $blogannoncelocations = categoryannoncelocation::whereSlug($categoryannoncelocation->slug)
             ->with([
                 'blogannoncelocations' => function ($q) use ($categoryannoncelocation){
-                    $q->where('status',1)
+                    $q->where(['status' => 1,'status_admin' => 1])
                         ->with('user','categoryannoncelocation')
                         ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
                         ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();},
@@ -34,7 +34,7 @@ class BlogannoncelocationService
         $blogannoncelocation = $categoryannoncelocation->blogannoncelocations()->with('user','categoryannoncelocation')
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
             ->orderByRaw('RAND()')
-            ->where('status',1)
+            ->where(['status' => 1,'status_admin' => 1])
             ->take(3)->distinct()->get()->toArray();;
 
         return $blogannoncelocation;
@@ -70,7 +70,7 @@ class BlogannoncelocationService
     public static function apiannonceblogcategorylocationslug($categoryannoncelocation, $date,$blogannoncelocation)
     {
         $blogannoncelocation = new BlogannoncelocationResource(blogannoncelocation::whereDate('created_at',$date)
-            ->whereSlug($blogannoncelocation)->where('status',1)->first());
+            ->whereSlug($blogannoncelocation)->where(['status' => 1,'status_admin' => 1])->first());
 
         return $blogannoncelocation;
     }

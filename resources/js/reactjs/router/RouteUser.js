@@ -56,6 +56,7 @@ import BlogannoncelocationIndex from "../components/user/blog/blogannoncelocatio
 import PrivateUserBlogannonceLocation from "../components/user/profile/blogs/private/PrivateUserBlogannonceLocation";
 import PrivateUserBlogannonceReservation
     from "../components/user/profile/blogs/private/PrivateUserBlogannonceReservation";
+import PrivateUserAnnonceReservations from "../components/user/profile/annonces/private/PrivateUserAnnonceReservations";
 
 
 const RouteUser = props => (
@@ -109,6 +110,7 @@ const RouteUser = props => (
           <Route path="/profile/personal_settings/teams/:id/edit/" component={TeamsUserEdite}/>
 
           <Route exact path="/profile/:user/personal_settings/annonces_locations/" component={PrivateUserAnnonceLocations}/>
+          <Route exact path="/profile/:user/personal_settings/annonces_reservations/" component={PrivateUserAnnonceReservations}/>
 
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_locations/" component={PrivateUserBlogannonceLocation}/>
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_reservations/" component={PrivateUserBlogannonceReservation}/>

@@ -36,10 +36,6 @@ class categoryannoncelocation extends Model
         return 'slug';
     }
 
-    public function conseillocations()
-    {
-        return $this->hasMany(conseillocation::class, 'categoryannoncelocation_id');
-    }
 
     public function annoncelocations()
     {

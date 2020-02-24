@@ -6,6 +6,16 @@ Route::get(
 )->name('annoncereservationbyannoncetype_site');
 
 Route::get(
+    'api/profile/{user}/personal_settings/annonces_reservations',
+    'AnnoncereservationController@apiannoncesreservationsbyuser'
+)->name('api.annoncesreservationsbyuser_site');
+
+Route::get(
+    'profile/{user}/personal_settings/annonces_reservations',
+    'AnnoncereservationController@annoncesreservationsbyuser'
+)->name('annoncesreservationsbyuser_site');
+
+Route::get(
     'annonces_reservations/{annoncetype}/{categoryannoncereservation}',
     'AnnoncereservationController@annoncelocationbycategoryannoncereservation'
 )->name('annoncelocationbycategoryannoncereservations_site');
@@ -30,6 +40,15 @@ Route::post(
     'AnnoncereservationController@sendcontactmessageuser'
 )->name('annoncereservationsendcontactmessageuser_site');
 
+Route::get(
+    'annonces_reservations_active/{id}',
+    'AnnoncereservationController@activated'
+)->name('annonces_reservations_active.site');
+
+Route::get(
+    'annonces_reservations_unactive/{id}',
+    'AnnoncereservationController@unactivated'
+)->name('annonces_reservations_unactivated.site');
 
 Route::delete(
     'annonces_reservations_delete/{id}',

@@ -18,15 +18,22 @@ class PersonalmessagesannonceslocationsUser extends Component {
         this.state = {
             contactusersprofile: [],
             contactuserslocations: [],
+            visiable: 10,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
         this.readItem = this.readItem.bind(this);
+        this.loadmoresItem = this.loadmoresItem.bind(this);
+    }
+    loadmoresItem() {
+        this.setState((old) => {
+            return { visiable: old.visiable + 10 }
+        })
     }
 
     readItem(item) {
 
-        const url = route('personal_mails_contacts_active.site',[item.id]);
+        const url = route('personal_mails_contacts_active.site', [item.id]);
         dyaxios.get(url).then(() => {
             this.props.history.push(`/profile/personal_mails/annonces_locations/${item.slug}/`);
         })
@@ -48,19 +55,19 @@ class PersonalmessagesannonceslocationsUser extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('personal_mails_delete.site',id);
+                const url = route('personal_mails_delete.site', id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
                     let isNotId = item => item.id !== id;
                     let updatedItems = this.state.contactuserslocations.filter(isNotId);
-                    this.setState({contactuserslocations: updatedItems});
+                    this.setState({ contactuserslocations: updatedItems });
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            // title: 'Update',
-                            message: 'Message suprimée avec success'
-                        },
+                        // title: 'Update',
+                        message: 'Message suprimée avec success'
+                    },
                         {
                             allow_dismiss: false,
                             type: 'primary',
@@ -111,17 +118,17 @@ class PersonalmessagesannonceslocationsUser extends Component {
 
 
     render() {
-        const {contactusersprofile,contactuserslocations} = this.state;
+        const { contactusersprofile, contactuserslocations, visiable } = this.state;
         const mapContactusers = contactuserslocations.length ? (
-            contactuserslocations.map(item => {
-                return(
+            contactuserslocations.slice(0, visiable).map(item => {
+                return (
 
-                    <HeadermailmessageUser key={item.id} {...item} readItem={this.readItem} deleteItem={this.deleteItem}/>
+                    <HeadermailmessageUser key={item.id} {...item} readItem={this.readItem} deleteItem={this.deleteItem} />
                 )
             })
-        ):(
-            <></>
-        );
+        ) : (
+                <></>
+            );
         return (
 
             <>
@@ -160,19 +167,19 @@ class PersonalmessagesannonceslocationsUser extends Component {
                                                                 <table>
                                                                     <tbody>
 
-                                                                    <tr>
-                                                                        <td> <NavLink to={`/profile/personal_mails/contacts/`}>Mail contacts</NavLink></td>
-                                                                        {contactusersprofile.length > 0 && (
-                                                                            <td className="text-right"> {contactusersprofile.length || " "} messages</td>
-                                                                        )}
-                                                                    </tr>
+                                                                        <tr>
+                                                                            <td> <NavLink to={`/profile/personal_mails/contacts/`}>Mail contacts</NavLink></td>
+                                                                            {contactusersprofile.length > 0 && (
+                                                                                <td className="text-right"> {contactusersprofile.length || " "} messages</td>
+                                                                            )}
+                                                                        </tr>
 
-                                                                    <tr>
-                                                                        <td> <NavLink to={`/profile/personal_mails/annonces_locations/`}>Mail annonces locations</NavLink></td>
-                                                                        {contactuserslocations.length > 0 && (
-                                                                            <td className="text-right">{contactuserslocations.length || " "} messages</td>
-                                                                        )}
-                                                                    </tr>
+                                                                        <tr>
+                                                                            <td> <NavLink to={`/profile/personal_mails/annonces_locations/`}>Mail annonces locations</NavLink></td>
+                                                                            {contactuserslocations.length > 0 && (
+                                                                                <td className="text-right">{contactuserslocations.length || " "} messages</td>
+                                                                            )}
+                                                                        </tr>
 
                                                                     </tbody>
                                                                 </table>
@@ -185,7 +192,7 @@ class PersonalmessagesannonceslocationsUser extends Component {
                                         </div>
 
                                         {/* Ici c'est la navigation dans toutes les pages dans le profile*/}
-                                        <NavNavigatePivateUser/>
+                                        <NavNavigatePivateUser />
 
 
                                     </div>
@@ -198,11 +205,21 @@ class PersonalmessagesannonceslocationsUser extends Component {
                                                 <table>
                                                     <tbody>
 
-                                                    {mapContactusers}
+                                                        {mapContactusers}
 
                                                     </tbody>
                                                 </table>
                                             </div>
+                                            {visiable < contactuserslocations.length && (
+                                                <div className="row">
+                                                    <div className="col-md-4 ml-auto mr-auto text-center">
+                                                        <button type="button" onClick={this.loadmoresItem} className="btn btn-secondary btn-block">
+                                                            <b>Voir plus </b>
+                                                            <i className="now-ui-icons arrows-1_minimal-down" />
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            )}
                                         </div>
 
                                     </div>

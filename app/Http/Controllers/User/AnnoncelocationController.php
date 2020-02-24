@@ -81,9 +81,9 @@ class AnnoncelocationController extends Controller
     {
         $categoryannoncelocations = CategoryannoncelocationResource::collection(categoryannoncelocation::with('user')
             ->withCount(['annoncelocations' => function ($q){
-                $q->where('status',1);
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])->withCount(['blogannoncelocations' => function ($q){
-                $q->where('status',1);
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])
             ->orderBy('annoncelocations_count','desc')
             ->distinct()->get());
@@ -122,7 +122,7 @@ class AnnoncelocationController extends Controller
     public function apiannoncelocations()
     {
         $annoncelocations = AnnoncelocationResource::collection(annoncelocation::with('user','categoryannoncelocation','city','annoncetype')
-            ->where('status',1)->latest()->get());
+            ->where(['status' => 1,'status_admin' => 1])->latest()->get());
 
         return response()->json($annoncelocations, 200);
     }
@@ -132,7 +132,7 @@ class AnnoncelocationController extends Controller
        $annonceslocations = $annoncetype->annoncelocations()->whereIn('annoncetype_id',[$annoncetype->id])
            ->with('user','categoryannoncelocation','city','annoncetype')
            ->orderBy('created_at','DESC')
-           ->where('status',1)
+           ->where(['status' => 1,'status_admin' => 1])
            ->distinct()->paginate(30)->toArray();
 
         return response()->json($annonceslocations, 200);
@@ -143,7 +143,7 @@ class AnnoncelocationController extends Controller
         $annoncelocation = categoryannoncelocation::whereSlug($categoryannoncelocation->slug)
             ->with([
                 'annoncelocations' => function ($q) use ($annoncetype,$categoryannoncelocation){
-                    $q->where('status',1)
+                    $q->where(['status' => 1,'status_admin' => 1])
                         ->with('user','categoryannoncelocation','city','annoncetype')
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
@@ -164,7 +164,7 @@ class AnnoncelocationController extends Controller
         $annoncelocations = CityResource::collection(city::with('user')
             ->where('status',1)
             ->withCount(['annoncelocations' => function ($q){
-                $q->where('status',1);
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])
             ->orderBy('annoncelocations_count','desc')->get());
 
@@ -186,7 +186,7 @@ class AnnoncelocationController extends Controller
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
             ->whereIn('city_id',[$city->id])
             ->orderByRaw('RAND()')
-            ->where('status',1)
+            ->where(['status' => 1,'status_admin' => 1])
             ->take(4)->distinct()->get()->toArray();
         return response()->json($annoncelocation, 200);
     }
@@ -196,7 +196,7 @@ class AnnoncelocationController extends Controller
         $annoncelocation = $categoryannoncelocation->annoncelocations()->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
         ->with('user','city','annoncetype','categoryannoncelocation')
         ->orderByRaw('RAND()')
-        ->where('status',1)
+        ->where(['status' => 1,'status_admin' => 1])
         ->take(4)->distinct()->get()->toArray();
         return response()->json($annoncelocation, 200);
     }

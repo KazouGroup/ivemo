@@ -13,11 +13,20 @@ class PrivateUserBlogannonceLocation extends Component {
         super(props);
         this.state = {
             userblogannoncelocationsPrivate:{blogannoncelocations:[]},
+            visiable: 10,
+
         };
 
         this.deleteItem = this.deleteItem.bind(this);
         this.activeItem = this.activeItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
+        this.loadmoresItem = this.loadmoresItem.bind(this);
+    }
+
+    loadmoresItem(){
+        this.setState((old) =>{
+            return {visiable: old.visiable + 10}
+        })
     }
     activeItem(id){
         Swal.fire({
@@ -187,9 +196,9 @@ class PrivateUserBlogannonceLocation extends Component {
     }
 
     render() {
-        const {userblogannoncelocationsPrivate} = this.state;
+        const {userblogannoncelocationsPrivate,visiable} = this.state;
         const mapBlogannoncelocations = userblogannoncelocationsPrivate.blogannoncelocations.length ? (
-            userblogannoncelocationsPrivate.blogannoncelocations.map(item => {
+            userblogannoncelocationsPrivate.blogannoncelocations.slice(0,visiable).map(item => {
                 return(
                     <BlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
                 )
@@ -224,6 +233,17 @@ class PrivateUserBlogannonceLocation extends Component {
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
                                         {mapBlogannoncelocations}
+
+                                        {visiable < userblogannoncelocationsPrivate.blogannoncelocations.length && (
+                                            <div className="row">
+                                                <div className="col-md-4 ml-auto mr-auto text-center">
+                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-secondary btn-block">
+                                                        <b>Voir plus </b>
+                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
 
                                     </div>
 

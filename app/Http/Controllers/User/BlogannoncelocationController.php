@@ -31,7 +31,7 @@ class BlogannoncelocationController extends Controller
     public function apiannoncebloglocation()
     {
         $categoryannoncelocations = blogannoncelocation::with('user','categoryannoncelocation')
-            ->where('status',1)->orderBy('created_at','DESC')
+            ->where(['status' => 1,'status_admin' => 1])->orderBy('created_at','DESC')
             ->distinct()->paginate(40)->toArray();
 
         return response()->json($categoryannoncelocations, 200);
@@ -84,7 +84,7 @@ class BlogannoncelocationController extends Controller
     {
         $blogannoncelocations = blogannoncelocation::whereIn('user_id',[$user->id])
             ->orderBy('created_at','DESC')
-            ->where('status',1)->get()->toArray();
+            ->where(['status' => 1,'status_admin' => 1])->get()->toArray();
 
         return response()->json($blogannoncelocations, 200);
 

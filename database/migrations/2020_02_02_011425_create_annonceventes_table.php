@@ -22,9 +22,10 @@ class CreateAnnonceventesTable extends Migration
             $table->integer('rooms')->nullable();
             $table->integer('pieces')->nullable();
             $table->decimal('price', 15,2)->nullable();
-            $table->decimal('award_price', 15,2)->nullable();
+            $table->unsignedBigInteger('award_price')->nullable();
             $table->date('disponible_date')->nullable();
             $table->boolean('status')->nullable()->default(true);
+            $table->boolean('status_admin')->nullable()->default(true);
             $table->timestamps();
             $table->unsignedBigInteger('photo_id')->nullable()->index();
             $table->unsignedBigInteger('city_id')->nullable()->index();
