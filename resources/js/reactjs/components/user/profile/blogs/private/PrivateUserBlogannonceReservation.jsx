@@ -5,7 +5,6 @@ import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../../../configurations/inc/NavlinkconfigurationUser";
-import BlogannoncelocationList from "../../../blog/blogannoncelocation/BlogannoncelocationList";
 import BlogannoncereservationList from "../../../blog/blogannoncereservation/BlogannoncereservationList";
 
 
@@ -14,12 +13,21 @@ class PrivateUserBlogannonceReservation extends Component {
         super(props);
         this.state = {
             userblogannoncereservationsPrivate:{blogannoncereservations:[]},
+            visiable: 10,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
         this.activeItem = this.activeItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
+        this.loadmoresItem = this.loadmoresItem.bind(this);
     }
+
+    loadmoresItem(){
+        this.setState((old) =>{
+            return {visiable: old.visiable + 10}
+        })
+    }
+
     activeItem(id){
         Swal.fire({
             title: 'Afficher cette article?',
@@ -188,9 +196,9 @@ class PrivateUserBlogannonceReservation extends Component {
     }
 
     render() {
-        const {userblogannoncereservationsPrivate} = this.state;
+        const {userblogannoncereservationsPrivate,visiable} = this.state;
         const mapBlogannoncereservations = userblogannoncereservationsPrivate.blogannoncereservations.length ? (
-            userblogannoncereservationsPrivate.blogannoncereservations.map(item => {
+            userblogannoncereservationsPrivate.blogannoncereservations.slice(0,visiable).map(item => {
                 return(
                     <BlogannoncereservationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
                 )
@@ -225,6 +233,17 @@ class PrivateUserBlogannonceReservation extends Component {
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
                                         {mapBlogannoncereservations}
+
+                                        {visiable < userblogannoncereservationsPrivate.blogannoncereservations.length && (
+                                            <div className="row">
+                                                <div className="col-md-4 ml-auto mr-auto text-center">
+                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-secondary btn-block">
+                                                        <b>Voir plus </b>
+                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
 
                                     </div>
 
