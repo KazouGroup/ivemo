@@ -30,6 +30,7 @@ class AnnoncelocationResource extends JsonResource
             'city_id' => $this->city_id,
             'annoncetype' => $this->annoncetype,
             'status' => $this->status,
+            'status_admin' => $this->status_admin,
             'categoryannoncelocation' => $this->categoryannoncelocation,
             'categoryannoncelocation_id' => $this->categoryannoncelocation_id,
             'disponible_date' => (string) $this->disponible_date,

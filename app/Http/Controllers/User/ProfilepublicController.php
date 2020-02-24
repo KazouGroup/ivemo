@@ -38,6 +38,7 @@ class ProfilepublicController extends Controller
 
     public function apiprofilannoncelocations(user $user)
     {
+
         $userannoncelocations = ProfileService::apiprofilannoncelocations($user);
 
         return response()->json($userannoncelocations, 200);
