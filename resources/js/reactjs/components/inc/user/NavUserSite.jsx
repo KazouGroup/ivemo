@@ -51,6 +51,9 @@ class NavUserSite extends Component {
                                 <Link to={`/annonces_reservations/reservations/`} className="dropdown-item">
                                     <i className="now-ui-icons business_money-coins"/> Reservations
                                 </Link>
+                                <Link to={`/annonces_ventes/ventes/`} className="dropdown-item">
+                                    <i className="now-ui-icons business_money-coins"/> Ventes
+                                </Link>
                             </div>
                         </li>
                         <li className="nav-item dropdown">

@@ -32,6 +32,11 @@ import BlogannoncelocationEdit from "../components/user/blog/blogannoncelocation
 import BlogannoncereservationEdit from "../components/user/blog/blogannoncereservation/treatement/BlogannoncereservationEdit";
 import BlogannoncelocationBycategorylocation
     from "../components/user/blog/blogannoncelocation/BlogannoncelocationBycategorylocation";
+import AnnonceventeIndex from "../components/user/annoncevente/AnnonceventeIndex";
+import Annoncebycategoryannoncevente from "../components/user/annoncevente/Annoncebycategoryannoncevente";
+import Annoncebycategoryannonceventecity from "../components/user/annoncevente/Annoncebycategoryannonceventecity";
+import Annonceventebycategorycityshow from "../components/user/annoncevente/Annonceventebycategorycityshow";
+
 import PersonalmessagesannonceslocationsUser
     from "../components/user/profile/mail/PersonalmessagesannonceslocationsUser";
 import PersonalmessagescontactUser from "../components/user/profile/mail/PersonalmessagescontactUser";
@@ -73,6 +78,12 @@ const RouteUser = props => (
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/:date/:annoncelocation/" component={withRouter(Annoncelocationbycategorycityshow)}/>
           <Route exact path="/annonce/show/create/" component={AnnonceShowCreateUserSite}/>
           <Route exact path="/annonce/show/vendre/create/" component={AnnonceBienAvendreCreate}/>
+
+          <Route exact path="/annonces_ventes/:annoncetype/" component={withRouter(AnnonceventeIndex)}/>
+          <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/" component={withRouter(Annoncebycategoryannoncevente)}/>
+          <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/:city/" component={withRouter(Annoncebycategoryannonceventecity)}/>
+          <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/:city/:date/:annoncevente/" component={withRouter(Annonceventebycategorycityshow)}/>
+
 
           <Route exact path="/profile/account/" component={ProfileAccountUser}/>
 

@@ -5,35 +5,73 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AnnonceventeResource;
 use App\Http\Resources\AnnoncetypeResource;
+use App\Http\Resources\CategoryannoncelocationResource;
 use App\Http\Resources\CategoryannonceventeResource;
 use App\Model\annoncevente;
 use App\Model\annoncetype;
 use App\Model\categoryannoncevente;
 use App\Model\city;
+use App\Services\AnnonceventeService;
 use Illuminate\Http\Request;
 
 class AnnonceventeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth',['except' => [
-            'apiannonceventebyannoncetype','apiannonceventebycity',
-            'apiannonceventebycategoryannoncevente','apiannonceventebycategoryannonceventeslug'
+        $this->middleware('auth', ['only' => [
+            'create', 'store', 'edit', 'update', 'destroy'
         ]]);
     }
 
-    public function apiannonceventebyannoncetype(annoncetype $annoncetype)
+    public function api()
     {
-        $annoncesventetypes = new AnnoncetypeResource(annoncetype::whereSlug($annoncetype->slug)
-            ->first());
+        $annonceventes = AnnonceventeResource::collection(annoncevente::with('user', 'categoryannoncevente')->latest()->get());
 
-        return response()->json($annoncesventetypes, 200);
+        return response()->json($annonceventes, 200);
     }
 
-    public function apiannonceventebycategoryannoncevente($annoncetype,$categoryannoncevente)
+    public function apiannoncevente()
     {
-        $annoncevente = new CategoryannonceventeResource(categoryannoncevente::whereSlug($categoryannoncevente)
-            ->first());
+        $annoncevente = AnnonceventeResource::collection(annoncevente::with('user', 'categoryannoncevente', 'city', 'annoncetype')
+        ->where('status', 1)->latest()->get());
+
+        return response()->json($annoncevente, 200);
+    }
+
+    public function apicategoryannoncevente()
+    {
+        $categoryannonceventes = CategoryannonceventeResource::collection(categoryannoncevente::with('user')
+            ->withCount(['annonceventes' => function ($q){
+                $q->where('status',1);
+            }])
+            ->orderBy('annonceventes_count','desc')
+            ->distinct()->get());
+
+        return response()->json($categoryannonceventes, 200);    }
+
+
+    public function apiannonceventebyannoncetype(annoncetype $annoncetype)
+    {
+        $annoncesventes = $annoncetype->annonceventes()->whereIn('annoncetype_id',[$annoncetype->id])
+            ->with('user','categoryannoncevente','city','annoncetype')
+            ->orderBy('created_at','DESC')
+            ->where('status',1)
+            ->distinct()->paginate(30)->toArray();
+
+        return response()->json($annoncesventes, 200);
+    }
+
+    public function apiannonceventebycategoryannoncevente(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente)
+    {
+        $annoncevente = categoryannoncevente::whereSlug($categoryannoncevente->slug)
+            ->with([
+                'annonceventes' => function ($q) use ($annoncetype,$categoryannoncevente){
+                    $q->where('status',1)
+                        ->with('user','categoryannoncevente','city','annoncetype')
+                        ->whereIn('annoncetype_id',[$annoncetype->id])
+                        ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+                        ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();},
+            ])->first();
         return response()->json($annoncevente, 200);
     }
 
@@ -64,13 +102,28 @@ class AnnonceventeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function index()
+    public function index(annoncetype $annoncetype)
     {
-        //
+        return view('user.annoncevente.annonce_index',[
+            'annoncetype' => $annoncetype,
+        ]);
     }
 
+    public function apiannonceventebycategorycitycount(categoryannoncevente $categoryannoncevente )
+    {
+        $annoncesbycategoriescities = AnnonceventeService::apiannonceventebycategorycitycount($categoryannoncevente);
+
+        return response()->json($annoncesbycategoriescities, 200);
+    }
+
+    public function apiannonceventecategorybycitycount(categoryannoncevente $categoryannoncevente,city $city )
+    {
+        $data = AnnonceventeService::apiannoncelocationcategorybycitycount($categoryannoncevente,$city);
+
+        return response()->json($data, 200);
+    }
     /**
      * Show the form for creating a new resource
      * .

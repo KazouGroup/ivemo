@@ -90,6 +90,7 @@ class CompileTableSeeder extends Seeder
                 ['name' => 'Maison','slug' => str_slug('Maison'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'success','user_id'=> 1],
                 ['name' => 'Terrain','slug' => str_slug('Terrain'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'danger','user_id'=> 1],
                 ['name' => 'Voiture','slug' => str_slug('Voiture'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'primary','user_id'=> 1],
+                ['name' => 'Boutique','slug' => str_slug('Boutique'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'primary','user_id'=> 1],
             ];
 
             foreach($categoryannonceventes as $item)
