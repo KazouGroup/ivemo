@@ -1,4 +1,19 @@
 <?php
+Route::get(
+    'annoncesventes',
+    'AnnonceventeController@api'
+)->name('api.annonceventes');
+
+Route::get(
+    'annonces',
+    'AnnonceventeController@apiannoncevente'
+)->name('api.annonceventes_site');
+
+
+Route::get(
+    'categoryannonceventes',
+    'AnnonceventeController@apicategoryannoncevente'
+)->name('api.categoryannoncevente_site');
 
 Route::get(
     'categoryannonceventes',
@@ -24,3 +39,13 @@ Route::get(
     'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}/{annoncevente}',
     'AnnonceventeController@apiannonceventebycategoryannonceventeslug'
 )->name('api.annoncelocationbycategoryannonceventeslug_site');
+
+Route::get(
+    'annonces_ventes_by_city_count/{categoryannoncevente}',
+    'AnnonceventeController@apiannonceventebycategorycitycount'
+)->name('api.annonceventebycategorycitycount_site');
+
+Route::get(
+    'annonces_ventes_by_city_count/{categoryannoncevente}/{city}',
+    'AnnonceventeController@apiannonceventebycategorycitycount'
+)->name('api.annonceventebycategorycitycount_site');
