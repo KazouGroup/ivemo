@@ -33,7 +33,7 @@ class AnnonceventeController extends Controller
     public function apiannoncevente()
     {
         $annoncevente = AnnonceventeResource::collection(annoncevente::with('user', 'categoryannoncevente', 'city', 'annoncetype')
-        ->where('status', 1)->latest()->get());
+        ->where(['status' => 1,'status_admin' => 1])->latest()->get());
 
         return response()->json($annoncevente, 200);
     }
@@ -42,7 +42,9 @@ class AnnonceventeController extends Controller
     {
         $categoryannonceventes = CategoryannonceventeResource::collection(categoryannoncevente::with('user')
             ->withCount(['annonceventes' => function ($q){
-                $q->where('status',1);
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannonceventes' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])
             ->orderBy('annonceventes_count','desc')
             ->distinct()->get());
@@ -55,7 +57,7 @@ class AnnonceventeController extends Controller
         $annoncesventes = $annoncetype->annonceventes()->whereIn('annoncetype_id',[$annoncetype->id])
             ->with('user','categoryannoncevente','city','annoncetype')
             ->orderBy('created_at','DESC')
-            ->where('status',1)
+            ->where(['status' => 1,'status_admin' => 1])
             ->distinct()->paginate(30)->toArray();
 
         return response()->json($annoncesventes, 200);
@@ -66,7 +68,7 @@ class AnnonceventeController extends Controller
         $annoncevente = categoryannoncevente::whereSlug($categoryannoncevente->slug)
             ->with([
                 'annonceventes' => function ($q) use ($annoncetype,$categoryannoncevente){
-                    $q->where('status',1)
+                    $q->where(['status' => 1,'status_admin' => 1])
                         ->with('user','categoryannoncevente','city','annoncetype')
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
@@ -94,7 +96,7 @@ class AnnonceventeController extends Controller
         $annoncevente = new AnnonceventeResource(annoncevente::whereIn('annoncetype_id',[$annoncetype->id])
         ->whereIn('city_id',[$city->id])
         ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
-        ->where('status',1)
+        ->where(['status' => 1,'status_admin' => 1])
         ->whereSlug($annoncevente)->firstOrFail());
 
         return response()->json($annoncevente, 200);

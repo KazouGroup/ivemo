@@ -24,6 +24,7 @@ class CategoryannonceventeResource extends JsonResource
             'user' => $this->user,
             'photo' => $this->photo,
             'annonceventes_count' => $this->annonceventes_count,
+            'blogannonceventes_count' => $this->blogannonceventes_count,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
         ];

@@ -33,6 +33,10 @@ class BlogannonceventeController extends Controller
         return response()->json($blogannoncereseventes, 200);
     }
 
+    public function annonceblogvente()
+    {
+        return view('user.blogs.blogannoncevente.index');
+    }
 
     public function apiannonceblogcategoryvente(categoryannoncevente $categoryannoncevente)
     {
@@ -65,6 +69,14 @@ class BlogannonceventeController extends Controller
         $blogannoncereseventes = BlogannonceventeService::apiblogsannonceventespublique($user);
 
         return response()->json($blogannoncereseventes, 200);
+    }
+
+
+    public function annonceblogcategoryvente(categoryannoncevente $categoryannoncevente)
+    {
+        return view('user.blogs.blogannoncevente.category',[
+            'categoryannoncevente' => $categoryannoncevente,
+        ]);
     }
     /**
      * Display a listing of the resource.

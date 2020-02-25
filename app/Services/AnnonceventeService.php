@@ -4,8 +4,11 @@ namespace App\Services;
 
 
 
+use App\Http\Resources\AnnoncelocationResource;
+use App\Model\annoncelocation;
 use App\Model\categoryannoncevente;
 use App\Model\city;
+use App\Model\user;
 
 class AnnonceventeService
 {
@@ -27,7 +30,7 @@ class AnnonceventeService
     {
         $annoncesbycities = categoryannoncevente::with('user')
             ->withCount(['annonceventes' => function ($q) use ($categoryannoncevente,$city){
-                $q->where('status',1)
+                $q->where(['status' => 1,'status_admin' => 1])
                     ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id]);
             }])->orderBy('annonceventes_count','desc')
             ->take(6)
@@ -68,7 +71,7 @@ class AnnonceventeService
         $annoncelocation = new AnnoncelocationResource(annoncelocation::whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('city_id',[$city->id])
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
-            ->where('status',1)
+            ->where(['status' => 1,'status_admin' => 1])
             ->with(['user.profile' => function ($q){$q->distinct()->get();},])
             ->whereDate('created_at',$date)
             ->whereSlug($annoncelocation)->firstOrFail());

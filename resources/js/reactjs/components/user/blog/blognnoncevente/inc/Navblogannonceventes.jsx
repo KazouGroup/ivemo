@@ -12,19 +12,19 @@ class Navblogannonceventes extends Component {
     }
 
     componentDidMount() {
-        let url = route('api.categoryannoncereservation_site');
+        let url = route('api.categoryannoncevente_site');
         dyaxios.get(url).then(response => this.setState({categoryannonceventes: response.data,}));
     }
 
-    getcountcategoryannonceString (categoryannonceventes_count) {
-        categoryannonceventes_count = categoryannonceventes_count +'';
-        if (categoryannonceventes_count < 1000) {
-            return categoryannonceventes_count;
+    getcountcategoryannonceString (blogannonceventes_count) {
+        blogannonceventes_count = blogannonceventes_count +'';
+        if (blogannonceventes_count < 1000) {
+            return blogannonceventes_count;
         }
-        if (categoryannonceventes_count < 10000) {
-            return categoryannonceventes_count.charAt(0) + ',' + categoryannonceventes_count.substring(1);
+        if (blogannonceventes_count < 10000) {
+            return blogannonceventes_count.charAt(0) + ',' + blogannonceventes_count.substring(1);
         }
-        return (categoryannonceventes_count/1000).toFixed(categoryannonceventes_count % 1000 !== 0)+'k';
+        return (blogannonceventes_count/1000).toFixed(blogannonceventes_count % 1000 !== 0)+'k';
     }
 
     render() {
@@ -51,7 +51,7 @@ class Navblogannonceventes extends Component {
                                              <strong>{item.name}</strong>
                                         </NavLink>
                                     </td>
-                                    <td className="text-right"> {this.getcountcategoryannonceString(item.categoryannonceventes_count)} articles</td>
+                                    <td className="text-right"> {this.getcountcategoryannonceString(item.blogannonceventes_count)} articles</td>
                                 </tr>
                             ))}
 

@@ -57,6 +57,9 @@ import PrivateUserBlogannonceLocation from "../components/user/profile/blogs/pri
 import PrivateUserBlogannonceReservation
     from "../components/user/profile/blogs/private/PrivateUserBlogannonceReservation";
 import PrivateUserAnnonceReservations from "../components/user/profile/annonces/private/PrivateUserAnnonceReservations";
+import BlogannonceventeIndex from "../components/user/blog/blognnoncevente/BlogannonceventeIndex";
+import BlogannonceventesBycategoryvente from "../components/user/blog/blognnoncevente/BlogannonceventesBycategoryvente";
+import BlogannonceventeShow from "../components/user/blog/blognnoncevente/BlogannonceventeShow";
 
 
 const RouteUser = props => (
@@ -126,6 +129,10 @@ const RouteUser = props => (
           <Route exact path="/blogs/annonce_locations/:categoryannoncelocation/:date/:blogannoncelocation/" component={withRouter(BlogannoncelocationShow)}/>
           <Route exact path="/blogs/annonce_locations/:blogannoncelocation/edit/" component={BlogannoncelocationEdit}/>
           <Route exact path="/blogs/annonce_reservations/:blogannoncereservation/edit/" component={BlogannoncereservationEdit}/>
+
+          <Route exact path="/blogs/annonce_ventes/" component={BlogannonceventeIndex}/>
+          <Route exact path="/blogs/annonce_ventes/:categoryannoncevente/" component={withRouter(BlogannonceventesBycategoryvente)}/>
+          <Route exact path="/blogs/annonce_ventes/:categoryannoncevente/:date/:blogannoncevente/" component={BlogannonceventeShow}/>
     </Switch>
 
 );

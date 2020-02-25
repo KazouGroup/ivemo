@@ -1,22 +1,21 @@
-import React, {Component} from "react";
-import {Link,NavLink } from "react-router-dom";
-import moment from 'moment'
-import {Helmet} from "react-helmet";
+import React, { Component } from "react";
+import { Link, NavLink } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import {Button, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-import {Button} from "reactstrap";
+import moment from "moment";
+import PropTypes from "prop-types";
 import Swal from "sweetalert2";
 import Navblogannonceventes from "./inc/Navblogannonceventes";
 import BlogannonceventeList from "./BlogannonceventeList";
-require("moment/min/locales.min");
-moment.locale('fr');
 
-class BlogannonceventeIndex extends Component {
+
+class BlogannonceventesBycategoryvente extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            blogannonceventes:{categoryannoncevente:[],user:[]},
-
+            blogannonceventes: {blogannonceventes:[]},
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -42,10 +41,6 @@ class BlogannonceventeIndex extends Component {
                 let url = route('blogannoncecategoryventeunactivated_site',id);
                 dyaxios.get(url).then(() => {
 
-                    let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.blogannonceventes.filter(isNotId);
-                    this.setState({blogannonceventes: updatedItems});
-
                     /** Alert notify bootstrapp **/
                     $.notify({
                             message: "Cette annonce a été masquée <a href=\"/profile/personal_settings/blogs/annonces_ventes/\" target=\"_blank\" class=\"btn btn-info btn-sm\">Modifier ici</a>",
@@ -65,6 +60,7 @@ class BlogannonceventeIndex extends Component {
                             },
                         });
                     /** End alert ***/
+                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Something wrong. Try later", {
@@ -98,10 +94,6 @@ class BlogannonceventeIndex extends Component {
                 const url = route('blogannoncecategoryventedelete_site',id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
-
-                    let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.blogannonceventes.filter(isNotId);
-                    this.setState({blogannonceventes: updatedItems});
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
@@ -120,7 +112,7 @@ class BlogannonceventeIndex extends Component {
                             },
                         });
                     /** End alert ***/
-
+                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -136,17 +128,21 @@ class BlogannonceventeIndex extends Component {
         });
     }
 
+    loadItems(){
+        let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
+        let url = route('api.blogannoncecategoryventes_site', [itemCategoryannoncevente]);
+        dyaxios.get(url).then(response => this.setState({ blogannonceventes: response.data, }));
+    }
+
+    // lifecycle method
     componentDidMount() {
-        dyaxios.get(route('api.blogannonceventes_site')).then(response =>
-            this.setState({
-                blogannonceventes: [...response.data.data],
-            }));
+        this.loadItems();
     }
 
     render() {
         const {blogannonceventes} = this.state;
-        const mapBlogannonceventes = blogannonceventes.length ? (
-            blogannonceventes.map(item => {
+        const mapBlogannonceventes = blogannonceventes.blogannonceventes.length ? (
+            blogannonceventes.blogannonceventes.map(item => {
                 return(
                     <BlogannonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
                 )
@@ -157,7 +153,7 @@ class BlogannonceventeIndex extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Conseils tout savoir sur les achat et vente de vos biens - Ivemo</title>
+                    <title>Guides et conseils ventes {`${blogannonceventes.name || 'Annonce'}`} - Ivemo</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
@@ -169,12 +165,12 @@ class BlogannonceventeIndex extends Component {
 
                     <div className="wrapper">
                         <div className="page-header page-header-mini">
-                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
+                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + blogannonceventes.photo + ")" }}>
                             </div>
                             <div className="content-center">
                                 <div className="row">
                                     <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">Trouver une maison, une chambre ou un appartement à acheter  </h3>
+                                        <h3 className="title">{blogannonceventes.name} </h3>
                                     </div>
                                 </div>
                             </div>
@@ -215,66 +211,6 @@ class BlogannonceventeIndex extends Component {
 
                                                             <Navblogannonceventes/>
 
-
-                                                            <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingThree">
-                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                                        <b>Annonces locations populaire</b>
-                                                                    </a>
-                                                                </div>
-                                                                <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                                                                    <div className="card-body">
-                                                                        <table>
-                                                                            <tbody>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <a href="#pablo">
-                                                                                        <span className="title">
-                                                                                            MateLabs mixes machine learning model
-                                                                                      </span>
-                                                                                    </a>
-
-                                                                                </td>
-                                                                                <td className="text-right">
-                                                                                    <NavLink to={`/`}>
-                                                                                        <img src="/assets/vendor/assets/img/julie.jpg" style={{ height: "50px", width: "70px" }} alt="#" className="avatar" />
-                                                                                    </NavLink>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <a href="#pablo">
-                                                                                        <span className="title">
-                                                                                            Temgoua mixes machine learning model
-                                                                                      </span>
-                                                                                    </a>
-                                                                                </td>
-                                                                                <td className="text-right">
-                                                                                    <NavLink to={`/`}>
-                                                                                        <img src="/assets/vendor/assets/img/examples/card-blog11.jpg" style={{ height: "50px", width: "70px" }} alt="#" className="avatar" />
-                                                                                    </NavLink>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <a href="#pablo">
-                                                                                        <span className="title">
-                                                                                            Bokino mixes machine learning model
-                                                                                      </span>
-                                                                                    </a>
-                                                                                </td>
-                                                                                <td className="text-right">
-                                                                                    <NavLink to={`/`}>
-                                                                                        <img src="/assets/vendor/assets/img/examples/card-blog11.jpg" style={{ height: "50px", width: "70px" }} alt="#" className="avatar" />
-                                                                                    </NavLink>
-                                                                                </td>
-                                                                            </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -293,11 +229,9 @@ class BlogannonceventeIndex extends Component {
                         <FooterBigUserSite />
                     </div>
                 </div>
-
             </>
+
         )
     }
-
 }
-
-export default BlogannonceventeIndex;
+export default BlogannonceventesBycategoryvente;
