@@ -95,8 +95,9 @@ const RouteUser = props => (
           <Route exact path="/profile/personal_mails/contacts/:contactuser/" component={PersonalmessagescontactShowUser}/>
 
 
-          <Route exact path="/profile/personal_settings/teams/" component={TeamsUserIndex}/>
-          <Route path="/profile/personal_settings/teams/:id/edit/" component={TeamsUserEdite}/>
+          <Route exact path="/profile/:user/personal_settings/teams/" component={TeamsUserIndex}/>
+          <Route exact path="/profile/:user/personal_settings/teams/" component={TeamsUserIndex}/>
+          <Route path="/profile/:user/personal_settings/teams/:id/edit/" component={TeamsUserEdite}/>
 
           <Route exact path="/profile/:user/personal_settings/annonces_locations/" component={PrivateUserAnnonceLocations}/>
           <Route exact path="/profile/:user/personal_settings/annonces_reservations/" component={PrivateUserAnnonceReservations}/>

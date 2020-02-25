@@ -66,7 +66,9 @@ class AnnoncereservationService
                     ->distinct()->get()->toArray()
                 ;},
             ])
-            ->withCount(['annoncelocations' => function ($q) use ($user){
+            ->withCount(['teamusers' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id]);
+            }])->withCount(['annoncelocations' => function ($q) use ($user){
                 $q->whereIn('user_id',[$user->id]);
             }])->withCount(['annoncereservations' => function ($q) use ($user){
                 $q ->whereIn('user_id',[$user->id]);

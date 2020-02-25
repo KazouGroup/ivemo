@@ -40,4 +40,9 @@ class categoryannoncevente extends Model
     {
         return $this->hasMany(annoncevente::class, 'categoryannoncevente_id');
     }
+
+    public function blogannonceventes()
+    {
+        return $this->hasMany(blogannoncevente::class, 'categoryannoncevente_id');
+    }
 }

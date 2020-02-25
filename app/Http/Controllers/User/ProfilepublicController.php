@@ -86,17 +86,6 @@ class ProfilepublicController extends Controller
         return response()->json($personnalblogannonces, 200);
     }
 
-    public function apiprofilarticleslocations(user $user)
-    {
-
-        $userannoncelocations = blogannoncelocation::where('status',1)
-            ->with('user','categoryannoncelocation')
-            ->whereIn('user_id',[$user->id])
-            ->distinct()->paginate(30)->toArray();
-
-        return response()->json($userannoncelocations, 200);
-    }
-
     public function apiprofilblogannoncelocations(user $user)
     {
         $personnalblogannonces = ProfileService::apiprofilblogannoncelocations($user);
@@ -104,16 +93,6 @@ class ProfilepublicController extends Controller
         return response()->json($personnalblogannonces, 200);
     }
 
-    public function apiprofilarticlesreservations(user $user)
-    {
-
-        $userannoncelocations = blogannoncereservation::where('status',1)
-            ->with('user','categoryannoncereservation')
-            ->whereIn('user_id',[$user->id])
-            ->distinct()->paginate(30)->toArray();
-
-        return response()->json($userannoncelocations, 200);
-    }
 
     public function public_profile_send_message(StoreRequest $request, user $user)
     {

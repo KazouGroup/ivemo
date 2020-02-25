@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Model\user;
 use Intervention\Image\Facades\Image;
 use File;
 
@@ -45,6 +46,35 @@ class TeamuserService
             $oldFilename = $currentPhoto;
             File::delete(public_path($oldFilename));
         }
+    }
+
+    public static function apiteamuserprivate($user)
+    {
+       $teamusers = user::whereSlug($user->slug)
+           ->with(['teamusers' => function ($q) use ($user){
+               $q->with('user')
+                   ->whereIn('user_id',[$user->id])
+                   ->orderBy('created_at','DESC')
+                   ->distinct()->get()->toArray()
+               ;},
+           ])
+           ->withCount(['teamusers' => function ($q) use ($user){
+               $q->whereIn('user_id',[$user->id]);
+           }]) ->withCount(['annoncelocations' => function ($q) use ($user){
+               $q->whereIn('user_id',[$user->id]);
+           }])->withCount(['annoncereservations' => function ($q) use ($user){
+               $q ->whereIn('user_id',[$user->id]);
+           }])->withCount(['annonceventes' => function ($q) use ($user){
+               $q ->whereIn('user_id',[$user->id]);
+           }])->withCount(['blogannoncelocations' => function ($q) use ($user){
+               $q->whereIn('user_id',[$user->id]);
+           }])->withCount(['blogannoncereservations' => function ($q) use ($user){
+               $q->whereIn('user_id',[$user->id]);
+           }])->withCount(['blogannonceventes' => function ($q) use ($user){
+               $q->whereIn('user_id',[$user->id]);
+           }])->first();
+
+       return $teamusers;
     }
 
 }

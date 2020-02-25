@@ -121,7 +121,7 @@ class NavUserSite extends Component {
                                         <Link to={'/profile/personal_reservations/'} className="dropdown-item">
                                             <i className="now-ui-icons shopping_tag-content"/>Mes reservations
                                         </Link>
-                                        <Link to={'/profile/personal_settings/teams/'} className="dropdown-item">
+                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/teams/`} className="dropdown-item">
                                             <i className="now-ui-icons users_circle-08"/>Team
                                         </Link>
                                         <Link to={'/profile/annonces_reservations_booked/'} className="dropdown-item">

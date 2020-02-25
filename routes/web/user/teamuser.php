@@ -2,22 +2,22 @@
 
 
 Route::get(
-    'api/profile/personal_settings/teams',
+    'api/profile/{user}/personal_settings/teams',
     'TeamuserController@apiteamuserprivate'
 )->name('api.teamuserprivate');
 
 Route::get(
-    'profile/personal_settings/teams',
+    'profile/{user}/personal_settings/teams',
     'TeamuserController@teamuserprivate'
 )->name('profile_team_users.site');
 
 Route::get(
-    'profile/personal_settings/teams/{teamuser}/edit',
+    'profile/{user}/personal_settings/teams/{teamuser}/edit',
     'TeamuserController@edit'
 )->name('profile_team_users_edit.site');
 
 Route::get(
-    'api/profile/personal_settings/teams/{teamuser}',
+    'api/profile/{user}/personal_settings/teams/{teamuser}',
     'TeamuserController@show'
 )->name('api.profile_team_users_show.site');
 

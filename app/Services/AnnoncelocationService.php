@@ -65,7 +65,9 @@ class AnnoncelocationService
                     ->distinct()->get()->toArray()
                 ;},
             ])
-            ->withCount(['annoncelocations' => function ($q) use ($user){
+            ->withCount(['teamusers' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id]);
+            }])->withCount(['annoncelocations' => function ($q) use ($user){
                 $q->whereIn('user_id',[$user->id]);
             }])->withCount(['annoncereservations' => function ($q) use ($user){
                 $q ->whereIn('user_id',[$user->id]);
@@ -77,7 +79,7 @@ class AnnoncelocationService
                 $q->whereIn('user_id',[$user->id]);
             }])->withCount(['blogannonceventes' => function ($q) use ($user){
                 $q->whereIn('user_id',[$user->id]);
-            }])->first();;
+            }])->first();
 
         return $annonceslocations;
     }

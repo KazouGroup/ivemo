@@ -32,10 +32,11 @@ class NavlinkconfigurationUser extends Component {
                                                     <tbody>
                                                     <tr>
                                                         <td>
-                                                            <NavLink to={`/profile/personal_settings/teams/`}>
+                                                            <NavLink to={`/profile/${this.props.slug}/personal_settings/teams/`}>
                                                                 Notre Teams
                                                             </NavLink>
                                                         </td>
+                                                        <td className="text-right"> {this.props.teamusers_count} {this.props.teamusers_count < 1 ? "membre" : "membres"}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>

@@ -15,7 +15,7 @@ class TeamsUserIndex extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            teamusers:[],
+            userteamusers:{teamusers:[]},
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -41,9 +41,6 @@ class TeamsUserIndex extends Component {
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
-                    let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.teamusers.filter(isNotId);
-                    this.setState({teamusers: updatedItems});
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
@@ -62,6 +59,7 @@ class TeamsUserIndex extends Component {
                             },
                         });
                     /** End alert ***/
+                    this.loadItems();
 
                 }).catch(() => {
                     //Failled message
@@ -113,7 +111,6 @@ class TeamsUserIndex extends Component {
                                 exit: "animated fadeOutDown"
                             },
                         });
-                    /** End alert ***/
                     /** End alert ***/
                     this.loadItems();
 
@@ -169,7 +166,6 @@ class TeamsUserIndex extends Component {
                             },
                         });
                     /** End alert ***/
-                    /** End alert ***/
                     this.loadItems();
 
                 }).catch(() => {
@@ -187,37 +183,9 @@ class TeamsUserIndex extends Component {
 
     }
 
-    mydatatables(){
-        $( function () {
-            $('#datatable').DataTable({
-                "pagingType": "full_numbers",
-                language: {
-                    search: "_INPUT_",
-                    searchPlaceholder: "Search records",
-                },
-                responsive: true,
-                destroy: true,
-                retrieve:true,
-                autoFill: true,
-                colReorder: true,
-                "sPaginationType": "full_numbers",
-
-            });
-        });
-    }
-
     loadItems() {
-        fetch(route('api.teamuserprivate')).then(res => res.json())
-            .then((result) => {
-                this.setState({
-                    teamusers: result
-                });
-                this.mydatatables();
-            }, (error) => {
-                this.setState({
-                    error
-                });
-            })
+        let itemuser = this.props.match.params.user;
+        dyaxios.get(route('api.teamuserprivate', [itemuser])).then(response => this.setState({ userteamusers: response.data, }));
     }
     reload(){
         this.loadItems()
@@ -228,7 +196,7 @@ class TeamsUserIndex extends Component {
 
     }
     render() {
-        const {teamusers} = this.state;
+        const {userteamusers} = this.state;
         const avatar_style = {
             width: "40px",
             height: "40px",
@@ -259,7 +227,7 @@ class TeamsUserIndex extends Component {
 
                                 <div className="row">
 
-                                    <NavlinkconfigurationUser/>
+                                    <NavlinkconfigurationUser {...this.props} {...userteamusers} />
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="card">
@@ -286,9 +254,9 @@ class TeamsUserIndex extends Component {
                                                     </tr>
                                                     </tfoot>
                                                     <tbody>
-                                                    {teamusers.length >= 0 && (
+                                                    {userteamusers.teamusers.length >= 0 && (
                                                         <>
-                                                            {teamusers.map((item) =>(
+                                                            {userteamusers.teamusers.map((item) =>(
                                                                 <tr key={item.id}>
                                                                     <td>
                                                                         <Link to={'/dashboard/users/'}>

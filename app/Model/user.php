@@ -148,4 +148,9 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
         return $this->hasMany(annoncevente::class, 'user_id');
     }
 
+    public function teamusers()
+    {
+        return $this->hasMany(teamuser::class, 'user_id');
+    }
+
 }

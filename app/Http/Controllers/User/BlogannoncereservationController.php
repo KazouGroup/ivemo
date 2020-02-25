@@ -59,7 +59,7 @@ class BlogannoncereservationController extends Controller
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
-            ->take(3)->distinct()->get()->toArray();
+            ->take(4)->distinct()->get()->toArray();
         return response()->json($blogannoncereservation, 200);
     }
 

@@ -35,10 +35,10 @@ class TeamuserController extends Controller
     }
 
 
-    public function apiteamuserprivate()
+    public function apiteamuserprivate(user $user)
     {
-        $teamusers = teamuser::with('user')->whereIn('user_id',[auth()->user()->id])
-        ->orderBy('created_at','DESC')->get()->toArray();
+        $teamusers = TeamuserService::apiteamuserprivate($user);
+
         return response()->json($teamusers, 200);
     }
 
