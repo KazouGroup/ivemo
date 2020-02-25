@@ -32,8 +32,6 @@ class UserResource extends JsonResource
             'email_verified_at' => $this->email_verified_at,
             'statusOnline' => $this->isOnline(),
             'roles' => $this->roles()->pluck('name'),
-            'followings' => $this->followings()->get()->count(),
-            'followers' => $this->followers()->get()->count(),
             'profile' => $this->profile,
             //'provider' => $this->provider,
             'annoncelocations_count' => $this->annoncelocations_count,

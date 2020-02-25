@@ -7,15 +7,15 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import moment from "moment";
 import PropTypes from "prop-types";
 import Swal from "sweetalert2";
-import Navblogannonceventes from "./inc/Navblogannonceventes";
-import BlogannonceventeList from "./BlogannonceventeList";
+import Navblogannoncereservations from "./inc/Navblogannoncereservations";
+import BlogannoncereservationList from "./BlogannoncereservationList";
 
 
-class BlogannonceventesBycategoryvente extends Component {
+class BlogannoncereservationBycategoryreservation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            blogannonceventes: {blogannonceventes:[]},
+            blogannoncereservation: {blogannoncereservations:[]},
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -38,13 +38,13 @@ class BlogannonceventesBycategoryvente extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('blogannoncecategoryventeunactivated_site',id);
+                let url = route('blogannoncecategoryreservationunactivated_site',id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette annonce a été masquée <a href=\"/profile/"+$userIvemo.slug+"/personal_settings/blogs/annonce_ventes/\" target=\"_blank\" class=\"btn btn-info btn-sm\">Modifier ici</a>",
-                            url: "/profile/"+$userIvemo.slug+"/personal_settings/blogs/annonce_ventes/",
+                            message: "Cette annonce a été masquée <a href=\"/profile/"+$userIvemo.slug+"/personal_settings/blogs/annonces_locations/\" target=\"_blank\" class=\"btn btn-info btn-sm\">Modifier ici</a>",
+                            url: "/profile/"+$userIvemo.slug+"/personal_settings/blogs/annonces_locations/",
                             target: "_blank"
                         },
                         {
@@ -91,7 +91,7 @@ class BlogannonceventesBycategoryvente extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('blogannoncecategoryventedelete_site',id);
+                const url = route('blogannoncecategoryreservationdelete_site',id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
                     /** Alert notify bootstrapp **/
@@ -129,9 +129,9 @@ class BlogannonceventesBycategoryvente extends Component {
     }
 
     loadItems(){
-        let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
-        let url = route('api.blogannoncecategoryventes_site', [itemCategoryannoncevente]);
-        dyaxios.get(url).then(response => this.setState({ blogannonceventes: response.data, }));
+        let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
+        let url = route('api.blogannoncecategoryreservations_site', [itemCategoryannoncereservation]);
+        dyaxios.get(url).then(response => this.setState({ blogannoncereservation: response.data, }));
     }
 
     // lifecycle method
@@ -140,11 +140,12 @@ class BlogannonceventesBycategoryvente extends Component {
     }
 
     render() {
-        const {blogannonceventes} = this.state;
-        const mapBlogannonceventes = blogannonceventes.blogannonceventes.length ? (
-            blogannonceventes.blogannonceventes.map(item => {
+        const {blogannoncereservation} = this.state;
+        const blogannoncereservationsbycategoryreservations = blogannoncereservation.blogannoncereservations;
+        const mapAnnoncereservations = blogannoncereservationsbycategoryreservations.length ? (
+            blogannoncereservationsbycategoryreservations.map(item => {
                 return(
-                    <BlogannonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
+                    <BlogannoncereservationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
                 )
             })
         ):(
@@ -153,7 +154,7 @@ class BlogannonceventesBycategoryvente extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Guides et conseils ventes {`${blogannonceventes.name || 'Annonce'}`} - Ivemo</title>
+                    <title>Guides et conseils reservation {`${blogannoncereservation.name || 'Annonce'}`} - Ivemo</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
@@ -165,12 +166,12 @@ class BlogannonceventesBycategoryvente extends Component {
 
                     <div className="wrapper">
                         <div className="page-header page-header-mini">
-                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + blogannonceventes.photo + ")" }}>
+                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + blogannoncereservation.photo + ")" }}>
                             </div>
                             <div className="content-center">
                                 <div className="row">
                                     <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">{blogannonceventes.name} </h3>
+                                        <h3 className="title">{blogannoncereservation.name} </h3>
                                     </div>
                                 </div>
                             </div>
@@ -190,7 +191,7 @@ class BlogannonceventesBycategoryvente extends Component {
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
-                                        {mapBlogannonceventes}
+                                        {mapAnnoncereservations}
 
                                     </div>
 
@@ -209,7 +210,7 @@ class BlogannonceventesBycategoryvente extends Component {
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                            <Navblogannonceventes/>
+                                                            <Navblogannoncereservations/>
 
                                                         </div>
                                                     </div>
@@ -234,4 +235,4 @@ class BlogannonceventesBycategoryvente extends Component {
         )
     }
 }
-export default BlogannonceventesBycategoryvente;
+export default BlogannoncereservationBycategoryreservation;

@@ -21,8 +21,8 @@ import Annoncebycategoryannoncereservationcityshow
     from "../components/user/annoncereservation/Annoncebycategoryannoncereservationcityshow";
 import BlogannoncereservationShow from "../components/user/blog/blogannoncereservation/BlogannoncereservationShow";
 import ProfileAccountPublicUser from "../components/user/profile/ProfileAccountPublicUser";
-import BlogannoncereservationIBycategoryreservation
-    from "../components/user/blog/blogannoncereservation/BlogannoncereservationIBycategoryreservation";
+import BlogannoncereservationBycategoryreservation
+    from "../components/user/blog/blogannoncereservation/BlogannoncereservationBycategoryreservation";
 import AnnoncelocationIndex from "../components/user/annonceloaction/AnnoncelocationIndex";
 import Annoncebycategoryannoncelocation from "../components/user/annonceloaction/Annoncebycategoryannoncelocation";
 import Annoncelocationbycity from "../components/user/annonceloaction/Annoncelocationbycity";
@@ -60,6 +60,7 @@ import PrivateUserAnnonceReservations from "../components/user/profile/annonces/
 import BlogannonceventeIndex from "../components/user/blog/blognnoncevente/BlogannonceventeIndex";
 import BlogannonceventesBycategoryvente from "../components/user/blog/blognnoncevente/BlogannonceventesBycategoryvente";
 import BlogannonceventeShow from "../components/user/blog/blognnoncevente/BlogannonceventeShow";
+import PrivateUserBlogannonceVente from "../components/user/profile/blogs/private/PrivateUserBlogannonceVente";
 
 
 const RouteUser = props => (
@@ -103,10 +104,12 @@ const RouteUser = props => (
           <Route exact path="/profile/change_password/" component={ProfileAccountChangePasswordUser}/>
           <Route exact path="/profile/:profile/account/" component={ProfileConfigUser}/>
 
-          <Route exact path="/profile/personal_mails/annonces_locations/:contactuser/" component={PersonalmessagesannonceslocationsShowUser}/>
-          <Route strict exact path="/profile/personal_mails/annonces_locations/" component={PersonalmessagesannonceslocationsUser}/>
+
+          <Route strict exact path="/profile/:user/personal_mails/annonces_locations/" component={PersonalmessagesannonceslocationsUser}/>
+          <Route exact path="/profile/:user/personal_mails/annonces_locations/:contactuser/" component={PersonalmessagesannonceslocationsShowUser}/>
+
           <Route strict exact path="/profile/:user/personal_mails/contacts/" component={PersonalmessagescontactUser}/>
-          <Route exact path="/profile/personal_mails/contacts/:contactuser/" component={PersonalmessagescontactShowUser}/>
+          <Route exact path="/profile/:user/personal_mails/contacts/:contactuser/" component={PersonalmessagescontactShowUser}/>
 
 
           <Route exact path="/profile/:user/personal_settings/teams/" component={TeamsUserIndex}/>
@@ -118,10 +121,11 @@ const RouteUser = props => (
 
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_locations/" component={PrivateUserBlogannonceLocation}/>
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_reservations/" component={PrivateUserBlogannonceReservation}/>
+          <Route exact path="/profile/:user/personal_settings/blogs/annonce_ventes/" component={PrivateUserBlogannonceVente}/>
 
 
           <Route exact path="/blogs/annonce_reservations/" component={BlogannoncereservationIndex}/>
-          <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/" component={withRouter(BlogannoncereservationIBycategoryreservation)}/>
+          <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/" component={withRouter(BlogannoncereservationBycategoryreservation)}/>
           <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/:date/:blogannoncereservation/" component={withRouter(BlogannoncereservationShow)}/>
 
           <Route exact path="/blogs/annonce_locations/" component={BlogannoncelocationIndex}/>

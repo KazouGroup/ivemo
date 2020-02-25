@@ -38,7 +38,7 @@ class PersonalmessagescontactUser extends Component {
 
         const url = route('personal_mails_contacts_active.site', [item.id]);
         dyaxios.get(url).then(() => {
-            this.props.history.push(`/profile/personal_mails/contacts/${item.slug}/`);
+            this.props.history.push(`/profile/${$userIvemo.slug}/personal_mails/contacts/${item.slug}/`);
         })
 
     }

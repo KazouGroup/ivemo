@@ -25,7 +25,7 @@ class BlogannoncereservationController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','destroy','activated','unactivated','apiblogannoncesreservationsbyuser'
+            'create','store','edit','update','destroy','activated','unactivated','apiblogannoncesreservationsbyuser','blogannoncesreservationsbyuser'
         ]]);
     }
 

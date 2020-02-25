@@ -1,23 +1,19 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Button } from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-import moment from "moment";
-import NavlinkmailmessageUser from "./inc/NavlinkmailmessageUser";
 import HeadermailmessageUser from "./inc/HeadermailmessageUser";
 import Swal from "sweetalert2";
 import NavNavigatePivateUser from "../NavNavigatePivateUser";
+import NavlinkmailmessageUser from "./inc/NavlinkmailmessageUser";
 
 
 class PersonalmessagesannonceslocationsUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            contactusersprofile: [],
-            contactuserslocations: [],
+            contactuserslocations: {contactusers:[]},
             visiable: 10,
         };
 
@@ -35,7 +31,7 @@ class PersonalmessagesannonceslocationsUser extends Component {
 
         const url = route('personal_mails_contacts_active.site', [item.id]);
         dyaxios.get(url).then(() => {
-            this.props.history.push(`/profile/personal_mails/annonces_locations/${item.slug}/`);
+            this.props.history.push(`/profile/${$userIvemo.slug}/personal_mails/annonces_locations/${item.slug}/`);
         })
 
     }
@@ -59,10 +55,6 @@ class PersonalmessagesannonceslocationsUser extends Component {
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
-                    let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.contactuserslocations.filter(isNotId);
-                    this.setState({ contactuserslocations: updatedItems });
-
                     /** Alert notify bootstrapp **/
                     $.notify({
                         // title: 'Update',
@@ -81,7 +73,7 @@ class PersonalmessagesannonceslocationsUser extends Component {
                             },
                         });
                     /** End alert ***/
-
+                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -98,16 +90,8 @@ class PersonalmessagesannonceslocationsUser extends Component {
     }
 
     loadItems() {
-        fetch(route('api.personal_mails_contacts.site')).then(res => res.json()).then((result) => {
-            this.setState({
-                contactusersprofile: [...result]
-            });
-        });
-        fetch(route('api.personal_mails_annonces_locations.site')).then(res => res.json()).then((result) => {
-            this.setState({
-                contactuserslocations: [...result]
-            });
-        });
+        let itemuser = this.props.match.params.user;
+        dyaxios.get(route('api.personal_mails_annonces_locations.site', [itemuser])).then(response => this.setState({ contactuserslocations: response.data, }));
     }
 
     // lifecycle method
@@ -118,9 +102,9 @@ class PersonalmessagesannonceslocationsUser extends Component {
 
 
     render() {
-        const { contactusersprofile, contactuserslocations, visiable } = this.state;
-        const mapContactusers = contactuserslocations.length ? (
-            contactuserslocations.slice(0, visiable).map(item => {
+        const { contactuserslocations, visiable } = this.state;
+        const mapContactusers = contactuserslocations.contactusers.length ? (
+            contactuserslocations.contactusers.slice(0, visiable).map(item => {
                 return (
 
                     <HeadermailmessageUser key={item.id} {...item} readItem={this.readItem} deleteItem={this.deleteItem} />
@@ -153,7 +137,6 @@ class PersonalmessagesannonceslocationsUser extends Component {
                                 <div className="row">
 
 
-
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="card">
@@ -162,28 +145,7 @@ class PersonalmessagesannonceslocationsUser extends Component {
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-
-                                                            <div className="card-body">
-                                                                <table>
-                                                                    <tbody>
-
-                                                                        <tr>
-                                                                            <td> <NavLink to={`/profile/personal_mails/contacts/`}>Mail contacts</NavLink></td>
-                                                                            {contactusersprofile.length > 0 && (
-                                                                                <td className="text-right"> {contactusersprofile.length || " "} messages</td>
-                                                                            )}
-                                                                        </tr>
-
-                                                                        <tr>
-                                                                            <td> <NavLink to={`/profile/personal_mails/annonces_locations/`}>Mail annonces locations</NavLink></td>
-                                                                            {contactuserslocations.length > 0 && (
-                                                                                <td className="text-right">{contactuserslocations.length || " "} messages</td>
-                                                                            )}
-                                                                        </tr>
-
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
+                                                            <NavlinkmailmessageUser {...this.props} {...contactuserslocations}/>
 
                                                         </div>
                                                     </div>
@@ -193,7 +155,6 @@ class PersonalmessagesannonceslocationsUser extends Component {
 
                                         {/* Ici c'est la navigation dans toutes les pages dans le profile*/}
                                         <NavNavigatePivateUser />
-
 
                                     </div>
 
@@ -210,7 +171,7 @@ class PersonalmessagesannonceslocationsUser extends Component {
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            {visiable < contactuserslocations.length && (
+                                            {visiable < contactuserslocations.contactusers.length && (
                                                 <div className="row">
                                                     <div className="col-md-4 ml-auto mr-auto text-center">
                                                         <button type="button" onClick={this.loadmoresItem} className="btn btn-secondary btn-block">

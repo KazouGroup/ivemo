@@ -1,25 +1,84 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import {Button, UncontrolledTooltip} from "reactstrap";
-import NavUserSite from "../../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-import moment from "moment";
-import PropTypes from "prop-types";
+import NavUserSite from "../../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
-import Navblogannoncereservations from "./inc/Navblogannoncereservations";
-import BlogannoncereservationList from "./BlogannoncereservationList";
+import NavlinkconfigurationUser from "../../../configurations/inc/NavlinkconfigurationUser";
+import BlogannoncereservationList from "../../../blog/blogannoncereservation/BlogannoncereservationList";
+import BlogannonceventeList from "../../../blog/blognnoncevente/BlogannonceventeList";
 
 
-class BlogannoncereservationIBycategoryreservation extends Component {
+class PrivateUserBlogannonceVente extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            blogannoncereservation: {blogannoncereservations:[]},
+            userblogannonceventesPrivate:{blogannonceventes:[]},
+            visiable: 10,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.activeItem = this.activeItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
+        this.loadmoresItem = this.loadmoresItem.bind(this);
+    }
+
+    loadmoresItem(){
+        this.setState((old) =>{
+            return {visiable: old.visiable + 10}
+        })
+    }
+
+    activeItem(id){
+        Swal.fire({
+            title: 'Afficher cette article?',
+            text: "êtes vous sure de vouloir confirmer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                //Envoyer la requet au server
+                let url = route('blogannoncecategoryventeactivated_site',id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            message: "Cette articles est desormais visible aux utilisateurs",
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'bottom',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animated fadeInUp",
+                                exit: "animated fadeOutDown"
+                            },
+                        });
+                    /** End alert ***/
+                    this.loadItems();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
+
     }
 
     unactiveItem(id){
@@ -38,14 +97,12 @@ class BlogannoncereservationIBycategoryreservation extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('blogannoncecategoryreservationunactivated_site',id);
+                let url = route('blogannoncecategoryventeunactivated_site',id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette annonce a été masquée <a href=\"/profile/personal_settings/blogs/annonces_locations/\" target=\"_blank\" class=\"btn btn-info btn-sm\">Modifier ici</a>",
-                            url: "/profile/personal_settings/blogs/annonces_locations/",
-                            target: "_blank"
+                            message: "Cette article a été masquée aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -91,13 +148,14 @@ class BlogannoncereservationIBycategoryreservation extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('blogannoncecategoryreservationdelete_site',id);
+                const url = route('blogannoncecategoryventedelete_site',[id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
+
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Article de blogs suprimée avec success'
+                            message: 'Articles suprimée avec success'
                         },
                         {
                             allow_dismiss: false,
@@ -129,9 +187,8 @@ class BlogannoncereservationIBycategoryreservation extends Component {
     }
 
     loadItems(){
-        let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
-        let url = route('api.blogannoncecategoryreservations_site', [itemCategoryannoncereservation]);
-        dyaxios.get(url).then(response => this.setState({ blogannoncereservation: response.data, }));
+        let itemuser = this.props.match.params.user;
+        dyaxios.get(route('api.blogannoncesventesbyuser_site',[itemuser])).then(response => this.setState({userblogannonceventesPrivate: response.data,}));
     }
 
     // lifecycle method
@@ -140,12 +197,11 @@ class BlogannoncereservationIBycategoryreservation extends Component {
     }
 
     render() {
-        const {blogannoncereservation} = this.state;
-        const blogannoncereservationsbycategoryreservations = blogannoncereservation.blogannoncereservations;
-        const mapAnnoncereservations = blogannoncereservationsbycategoryreservations.length ? (
-            blogannoncereservationsbycategoryreservations.map(item => {
+        const {userblogannonceventesPrivate,visiable} = this.state;
+        const mapBlogannoncereservations = userblogannonceventesPrivate.blogannonceventes.length ? (
+            userblogannonceventesPrivate.blogannonceventes.slice(0,visiable).map(item => {
                 return(
-                    <BlogannoncereservationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
+                    <BlogannonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
                 )
             })
         ):(
@@ -154,78 +210,54 @@ class BlogannoncereservationIBycategoryreservation extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Guides et conseils reservation {`${blogannoncereservation.name || 'Annonce'}`} - Ivemo</title>
+                    <title>Articles sur la locations {`${$userIvemo.first_name || 'Profile'}`} - Ivemo</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
 
-
-                    <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
+                    <nav className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
 
+
                     <div className="wrapper">
-                        <div className="page-header page-header-mini">
-                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + blogannoncereservation.photo + ")" }}>
-                            </div>
-                            <div className="content-center">
-                                <div className="row">
-                                    <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">{blogannoncereservation.name} </h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <div className="main main-raised">
-                            <div className="container">
-                                <div className="row">
-
-                                </div>
-                            </div>
 
                             <div className="container">
                                 <br />
+
                                 <div className="row">
 
+                                    <NavlinkconfigurationUser {...this.props} {...userblogannonceventesPrivate}/>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
-                                        {mapAnnoncereservations}
+                                        {mapBlogannoncereservations}
 
-                                    </div>
-
-
-                                    <div className="col-lg-4 col-md-12 mx-auto">
-
-                                        <div className="submit text-center">
-                                            <NavLink className="btn btn-primary" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article</b>
-                                            </NavLink>
-                                        </div>
-
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-
-                                                            <Navblogannoncereservations/>
-
-                                                        </div>
-                                                    </div>
+                                        {visiable < userblogannonceventesPrivate.blogannonceventes.length && (
+                                            <div className="row">
+                                                <div className="col-md-4 ml-auto mr-auto text-center">
+                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-secondary btn-block">
+                                                        <b>Voir plus </b>
+                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
+                                                    </button>
                                                 </div>
                                             </div>
-                                        </div>
+                                        )}
+
                                     </div>
 
 
                                 </div>
+
+
                             </div>
 
 
 
                         </div>
+
 
                         <FooterBigUserSite />
                     </div>
@@ -235,4 +267,5 @@ class BlogannoncereservationIBycategoryreservation extends Component {
         )
     }
 }
-export default BlogannoncereservationIBycategoryreservation;
+
+export default PrivateUserBlogannonceVente;
