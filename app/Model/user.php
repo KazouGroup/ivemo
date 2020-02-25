@@ -101,21 +101,9 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
     }
 
 
-    public function followers()
-    {
-        return $this->belongsToMany(User::class, 'followers', 'leader_id', 'follower_id')->withTimestamps();
-    }
-
     public function getRouteKeyName()
     {
         return 'slug';
-    }
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function followings()
-    {
-        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'leader_id')->withTimestamps();
     }
 
     public function annoncelocations()
@@ -151,6 +139,10 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
     public function teamusers()
     {
         return $this->hasMany(teamuser::class, 'user_id');
+    }
+    public function contactusers()
+    {
+        return $this->hasMany(contactuser::class, 'user_id');
     }
 
 }

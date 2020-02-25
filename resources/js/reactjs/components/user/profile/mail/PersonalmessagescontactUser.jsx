@@ -15,9 +15,8 @@ class PersonalmessagescontactUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            contactusersprofile: [],
-            contactuserslocations: [],
-            visiable: 20,
+            contactusersprofile: {contactusers:[]},
+            visiable: 10,
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.readItem = this.readItem.bind(this);
@@ -26,22 +25,14 @@ class PersonalmessagescontactUser extends Component {
 
     loadmoresItem() {
         this.setState((old) => {
-            return { visiable: old.visiable + 20 }
+            return { visiable: old.visiable + 10 }
         })
     }
 
 
     loadItems() {
-        fetch(route('api.personal_mails_contacts.site')).then(res => res.json()).then((result) => {
-            this.setState({
-                contactusersprofile: [...result]
-            });
-        });
-        fetch(route('api.personal_mails_annonces_locations.site')).then(res => res.json()).then((result) => {
-            this.setState({
-                contactuserslocations: [...result]
-            });
-        });
+        let itemuser = this.props.match.params.user;
+        dyaxios.get(route('api.personal_mails_contacts.site', [itemuser])).then(response => this.setState({ contactusersprofile: response.data, }));
     }
     readItem(item) {
 
@@ -71,10 +62,6 @@ class PersonalmessagescontactUser extends Component {
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
-                    let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.contactusersprofile.filter(isNotId);
-                    this.setState({ contactusersprofile: updatedItems });
-
                     /** Alert notify bootstrapp **/
                     $.notify({
                         // title: 'Update',
@@ -93,7 +80,7 @@ class PersonalmessagescontactUser extends Component {
                             },
                         });
                     /** End alert ***/
-
+                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -116,9 +103,9 @@ class PersonalmessagescontactUser extends Component {
 
 
     render() {
-        const { contactusersprofile, contactuserslocations, visiable } = this.state;
-        const mapContactusers = contactusersprofile.length ? (
-            contactusersprofile.slice(0, visiable).map(item => {
+        const { contactusersprofile, visiable } = this.state;
+        const mapContactusers = contactusersprofile.contactusers.length ? (
+            contactusersprofile.contactusers.slice(0, visiable).map(item => {
                 return (
 
                     <HeadermailmessageUser key={item.id} {...item} readItem={this.readItem} deleteItem={this.deleteItem} />
@@ -161,28 +148,7 @@ class PersonalmessagescontactUser extends Component {
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-
-                                                            <div className="card-body">
-                                                                <table>
-                                                                    <tbody>
-
-                                                                        <tr>
-                                                                            <td> <NavLink to={`/profile/personal_mails/contacts/`}>Mail contacts</NavLink></td>
-                                                                            {contactusersprofile.length > 0 && (
-                                                                                <td className="text-right"> {contactusersprofile.length || " "} messages</td>
-                                                                            )}
-                                                                        </tr>
-
-                                                                        <tr>
-                                                                            <td> <NavLink to={`/profile/personal_mails/annonces_locations/`}>Mail annonces locations</NavLink></td>
-                                                                            {contactuserslocations.length > 0 && (
-                                                                                <td className="text-right">{contactuserslocations.length} messages</td>
-                                                                            )}
-                                                                        </tr>
-
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
+                                                            <NavlinkmailmessageUser {...this.props} {...contactusersprofile}/>
 
                                                         </div>
                                                     </div>
@@ -211,7 +177,7 @@ class PersonalmessagescontactUser extends Component {
                                             </div>
 
 
-                                        {visiable < contactusersprofile.length && (
+                                        {visiable < contactusersprofile.contactusers.length && (
                                             <div className="row">
                                                 <div className="col-md-4 ml-auto mr-auto text-center">
                                                     <button type="button" onClick={this.loadmoresItem} className="btn btn-secondary btn-block">

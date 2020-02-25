@@ -16,8 +16,8 @@ class BlogannonceventeInteresse extends Component {
 
 
     componentDidMount() {
-        let itemCategoryannoncereservation = this.props.match.params.categoryannoncevente;
-        dyaxios.get(route('api.blogannoncereservationinteresse_site',[itemCategoryannoncereservation])).then(response =>
+        let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
+        dyaxios.get(route('api.blogannonceventeinteresse_site',[itemCategoryannoncevente])).then(response =>
             this.setState({
                 blogsinteresse: [...response.data],
             }));

@@ -105,7 +105,7 @@ const RouteUser = props => (
 
           <Route exact path="/profile/personal_mails/annonces_locations/:contactuser/" component={PersonalmessagesannonceslocationsShowUser}/>
           <Route strict exact path="/profile/personal_mails/annonces_locations/" component={PersonalmessagesannonceslocationsUser}/>
-          <Route strict exact path="/profile/personal_mails/contacts/" component={PersonalmessagescontactUser}/>
+          <Route strict exact path="/profile/:user/personal_mails/contacts/" component={PersonalmessagescontactUser}/>
           <Route exact path="/profile/personal_mails/contacts/:contactuser/" component={PersonalmessagescontactShowUser}/>
 
 
@@ -132,7 +132,7 @@ const RouteUser = props => (
 
           <Route exact path="/blogs/annonce_ventes/" component={BlogannonceventeIndex}/>
           <Route exact path="/blogs/annonce_ventes/:categoryannoncevente/" component={withRouter(BlogannonceventesBycategoryvente)}/>
-          <Route exact path="/blogs/annonce_ventes/:categoryannoncevente/:date/:blogannoncevente/" component={BlogannonceventeShow}/>
+          <Route exact path="/blogs/annonce_ventes/:categoryannoncevente/:date/:blogannoncevente/" component={withRouter(BlogannonceventeShow)}/>
     </Switch>
 
 );

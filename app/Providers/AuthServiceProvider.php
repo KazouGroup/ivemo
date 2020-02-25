@@ -9,6 +9,7 @@ use App\Model\blogannoncereservation;
 use App\Model\contactuser;
 use App\model\profile;
 use App\Model\teamuser;
+use App\Model\user;
 use App\Policies\AnnoncelocationPolicy;
 use App\Policies\AnnoncereservationPolicy;
 use App\Policies\BlogannoncelocationPolicy;

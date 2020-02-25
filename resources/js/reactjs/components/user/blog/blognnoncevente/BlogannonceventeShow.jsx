@@ -23,9 +23,9 @@ class BlogannonceventeShow extends Component {
     loadItems() {
         let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
         let itemdate = this.props.match.params.date;
-        let itemblogannonvente = this.props.match.params.blogannonceventes;
-        let url = route('api.blogannoncecategoryreservationslug_site', [itemCategoryannoncevente, itemdate, itemblogannonvente]);
-        dyaxios.get(url).then(response => this.setState({ blogannonceventes: response.data, }));
+        let itemblogannonvente = this.props.match.params.blogannoncevente;
+        let url = route('api.blogannoncecategoryventeslug_site', [itemCategoryannoncevente, itemdate, itemblogannonvente]);
+        dyaxios.get(url).then(response => this.setState({ blogannoncevente: response.data, }));
     }
 
 
@@ -33,9 +33,9 @@ class BlogannonceventeShow extends Component {
     componentDidMount() {
         this.loadItems();
     }
-    getDescription(blogannoncereservation) {
+    getDescription(blogannoncevente) {
         const md = new Remarkable();
-        return { __html: md.render(blogannoncereservation.description) };
+        return { __html: md.render(blogannoncevente.description) };
     }
     render() {
         const { blogannoncevente } = this.state;

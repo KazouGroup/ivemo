@@ -52,7 +52,7 @@ class BlogannonceventeController extends Controller
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
             ->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
-            ->take(4)->distinct()->get()->toArray();
+            ->take(3)->distinct()->get()->toArray();
         return response()->json($blogannoncereseventes, 200);
     }
 
@@ -76,6 +76,13 @@ class BlogannonceventeController extends Controller
     {
         return view('user.blogs.blogannoncevente.category',[
             'categoryannoncevente' => $categoryannoncevente,
+        ]);
+    }
+
+    public function annonceblogcategoryventeslug($categoryannoncevente, $date,blogannoncevente $blogannoncevente)
+    {
+        return view('user.blogs.blogannoncevente.show',[
+            'blogannoncevente' => $blogannoncevente,
         ]);
     }
     /**

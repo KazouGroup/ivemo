@@ -227,16 +227,26 @@ class AnnoncereservationController extends Controller
 
     public function apiannoncesreservationsbyuser(user $user)
     {
-        $data = AnnoncereservationService::apiannoncesreservationsbyuser($user);
+        if (auth()->user()->id === $user->id){
+            $data = AnnoncereservationService::apiannoncesreservationsbyuser($user);
 
-        return response()->json($data, 200);
+            return response()->json($data, 200);
+        }else{
+            abort(404);
+        }
+
     }
 
-    public function annoncesreservationsbyuser()
+    public function annoncesreservationsbyuser(user $user)
     {
-        return view('user.profile.annonces.privateprofilannoncereservations',[
-            'user' => auth()->user(),
-        ]);
+        if (auth()->user()->id === $user->id){
+            return view('user.profile.annonces.privateprofilannoncereservations',[
+                'user' => auth()->user(),
+            ]);
+        }else{
+            abort(404);
+        }
+
     }
     /**
      * Show the form for creating a new resource.

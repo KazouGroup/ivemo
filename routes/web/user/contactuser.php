@@ -3,12 +3,12 @@
 
 
 Route::get(
-    'api/personal_mails/contacts',
+    'api/{user}/personal_mails/contacts',
     'ProfileController@apipersonalmessagescontacts'
 )->name('api.personal_mails_contacts.site');
 
 Route::get(
-    'api/personal_mails/contacts/{contactuser}',
+    'api/{user}/personal_mails/contacts/{contactuser}',
     'ProfileController@apipersonalmessagescontactsshow'
 )->name('api.personal_mails_contacts_show.site');
 
@@ -38,7 +38,7 @@ Route::get(
 )->name('personal_mails_annonces_locations_show.site');
 
 Route::get(
-    'profile/personal_mails/contacts',
+    'profile/{user}/personal_mails/contacts',
     'ProfileController@personalmessagescontacts'
 )->name('personal_mails_contacts.site');
 
