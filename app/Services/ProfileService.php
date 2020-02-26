@@ -131,6 +131,8 @@ class ProfileService
                 $q->where(['status' => 1,'status_admin' => 1]);
             }])->withCount(['blogannoncereservations' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannonceventes' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])
             ->first();
 
@@ -158,6 +160,8 @@ class ProfileService
                 $q->where(['status' => 1,'status_admin' => 1]);
             }])->withCount(['blogannoncereservations' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannonceventes' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])->first();
 
         return $personnalreservations;
@@ -182,6 +186,8 @@ class ProfileService
             }])->withCount(['blogannoncelocations' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1]);
             }])->withCount(['blogannoncereservations' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannonceventes' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1]);
             }])
             ->first();
@@ -208,6 +214,36 @@ class ProfileService
             }])->withCount(['blogannoncelocations' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1]);
             }])->withCount(['blogannoncereservations' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannonceventes' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])
+            ->first();
+
+        return $personnalblogannonces;
+    }
+
+    public static function apiprofilblogannonceventes($user)
+    {
+        $personnalblogannonces = user::whereSlug($user->slug)
+            ->with(['blogannonceventes' => function ($q) use ($user){
+                $q->with('user','categoryannoncevente')
+                    ->whereIn('user_id',[$user->id])
+                    ->where(['status' => 1,'status_admin' => 1])
+                    ->distinct()->get()->toArray()
+                ;},
+            ])
+            ->withCount(['annoncelocations' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['annoncereservations' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['annonceventes' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannoncelocations' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannoncereservations' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannonceventes' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1]);
             }])
             ->first();

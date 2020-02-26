@@ -61,6 +61,7 @@ import BlogannonceventeIndex from "../components/user/blog/blognnoncevente/Bloga
 import BlogannonceventesBycategoryvente from "../components/user/blog/blognnoncevente/BlogannonceventesBycategoryvente";
 import BlogannonceventeShow from "../components/user/blog/blognnoncevente/BlogannonceventeShow";
 import PrivateUserBlogannonceVente from "../components/user/profile/blogs/private/PrivateUserBlogannonceVente";
+import PublicUserBlogannonceVente from "../components/user/profile/blogs/public/PublicUserBlogannonceVente";
 
 
 const RouteUser = props => (
@@ -98,6 +99,7 @@ const RouteUser = props => (
 
           <Route exact path="/@:user/blogs/annonce_locations/" component={PublicUserBlogannonceLocation}/>
           <Route exact path="/@:user/blogs/annonce_reservations/" component={PublicUserBlogannonceReservation}/>
+          <Route exact path="/@:user/blogs/annonce_ventes/" component={PublicUserBlogannonceVente}/>
 
           <Route exact path="/profile/personal_reservations/" component={PersonalannoncereservationsUser}/>
           <Route exact path="/profile/annonces_reservations_booked/" component={Profileannoncesreservationsbooked}/>

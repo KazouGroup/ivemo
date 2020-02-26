@@ -9,11 +9,13 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
 $factory->define(blogannoncevente::class, function (Faker $faker) {
+    $backgroundColor = trim($faker->safeHexcolor, '#');
+    $foregroundColor = trim($faker->safeHexcolor, '#');
     $title = $faker->sentence(9);
     $myslug = Str::uuid();
     return [
         'title' => $title,
-        'photo' => $faker->imageUrl($width = 1400, $height = 800),
+        'photo' => "https://dummyimage.com/wsvga/" . $backgroundColor . "/". $foregroundColor ."&text=" . $faker->word,
         'slug' => str_slug($title),
         'slugin' => $myslug,
         'status' => $faker->boolean,

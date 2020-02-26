@@ -30,3 +30,8 @@ Route::get(
     '@{user}/blogs/annonce_reservations/',
     'ProfilepublicController@profilblogannoncereservations'
 )->name('public_profile_articlesreservation.site');
+
+Route::get(
+    '@{user}/blogs/annonce_ventes/',
+    'ProfilepublicController@profilblogannonceventes'
+)->name('public_profile_articlesventes.site');

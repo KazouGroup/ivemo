@@ -31,6 +31,8 @@ class ProfilepublicController extends Controller
                 $q->where(['status' => 1,'status_admin' => 1]);
             }])->withCount(['blogannoncereservations' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannonceventes' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])->first());
 
         return response()->json($user, 200);
@@ -73,6 +75,8 @@ class ProfilepublicController extends Controller
                 $q->where(['status' => 1,'status_admin' => 1]);
             }])->withCount(['blogannoncereservations' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannonceventes' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])->first();
 
         return response()->json($annoncesreservations, 200);
@@ -89,6 +93,13 @@ class ProfilepublicController extends Controller
     public function apiprofilblogannoncelocations(user $user)
     {
         $personnalblogannonces = ProfileService::apiprofilblogannoncelocations($user);
+
+        return response()->json($personnalblogannonces, 200);
+    }
+
+    public function apiprofilblogannonceventes(user $user)
+    {
+        $personnalblogannonces = ProfileService::apiprofilblogannonceventes($user);
 
         return response()->json($personnalblogannonces, 200);
     }
@@ -142,6 +153,13 @@ class ProfilepublicController extends Controller
     public function profilblogannoncereservations(user $user)
     {
         return view('user.profile.blogs.publicprofilannoncereservations',[
+            'user' => $user,
+        ]);
+    }
+
+    public function profilblogannonceventes(user $user)
+    {
+        return view('user.profile.blogs.publicprofilblogannonceventes',[
             'user' => $user,
         ]);
     }
