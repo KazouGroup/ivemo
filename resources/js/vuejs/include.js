@@ -147,7 +147,10 @@ Vue.use(VueQuillEditor);
 window.Fire = new Vue();
 
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('navsmall-admin', require('./components/inc/NavsmallAdmin').default);
+Vue.component('footer-admin', require('./components/inc/FooterAdmin').default);
+Vue.component('navbig-admin', require('./components/inc/NavbigAdmin').default);
+//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 
 /**

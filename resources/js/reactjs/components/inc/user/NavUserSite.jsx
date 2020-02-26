@@ -99,7 +99,7 @@ class NavUserSite extends Component {
                                     </a>
                                     <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
 
-                                        {$userIvemo.my_status === 'active' && (
+                                        {$userIvemo.status_user && (
                                             <a href="/dashboard" className="dropdown-item">
                                                 <i className="now-ui-icons business_bulb-63" /> Dashboard
                                             </a>
