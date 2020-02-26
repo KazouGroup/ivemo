@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Contactuser\StorecontactRequest;
 use App\Http\Resources\AnnonceventeResource;
-use App\Http\Resources\AnnoncetypeResource;
-use App\Http\Resources\CategoryannoncelocationResource;
 use App\Http\Resources\CategoryannonceventeResource;
 use App\Model\annoncevente;
 use App\Model\annoncetype;
 use App\Model\categoryannoncevente;
 use App\Model\city;
+use App\Model\contactuser;
 use App\Services\AnnonceventeService;
+use App\Services\ContactuserService;
 use Illuminate\Http\Request;
 
 class AnnonceventeController extends Controller
@@ -91,13 +92,15 @@ class AnnonceventeController extends Controller
         return response()->json($annonceventecities, 200);
     }
 
-    public function apiannonceventebycategoryannonceventeslug(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,$annoncevente)
+    public function apiannonceventebycategoryannonceventeslug(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,$date,$annoncevente)
     {
         $annoncevente = new AnnonceventeResource(annoncevente::whereIn('annoncetype_id',[$annoncetype->id])
         ->whereIn('city_id',[$city->id])
         ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
         ->where(['status' => 1,'status_admin' => 1])
-        ->whereSlug($annoncevente)->firstOrFail());
+        ->with(['user.profile' => function ($q){$q->distinct()->get();},])
+        ->whereDate('created_at',$date)
+         ->whereSlug($annoncevente)->firstOrFail());
 
         return response()->json($annoncevente, 200);
     }
@@ -113,18 +116,82 @@ class AnnonceventeController extends Controller
         ]);
     }
 
-    public function apiannonceventebycategorycitycount(categoryannoncevente $categoryannoncevente )
+    public function annonceventebycategoryannoncevente(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente)
+    {
+        return view('user.annoncevente.annonces_category',[
+            'annoncestype' => $annoncetype,
+            'categoryannoncevente' => $categoryannoncevente,
+        ]);
+    }
+
+    public function annonceventebycity(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city)
+    {
+        return view('user.annoncevente.annonces_city',[
+            'annoncetype' => $annoncetype,
+            'categoryannoncevente' => $categoryannoncevente,
+            'city' => $city,
+        ]);
+    }
+
+    public function annonceventebycategoryannonceventeslug(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,$date,annoncevente $annoncevente)
+    {
+        return view('user.annoncevente.annonces_show',[
+            'categoryannoncevente' => $categoryannoncevente,
+        ]);
+    }
+
+    public function apiannonceventebycategorycount(categoryannoncevente $categoryannoncevente )
     {
         $annoncesbycategoriescities = AnnonceventeService::apiannonceventebycategorycitycount($categoryannoncevente);
 
         return response()->json($annoncesbycategoriescities, 200);
     }
 
-    public function apiannonceventecategorybycitycount(categoryannoncevente $categoryannoncevente,city $city )
+    public function apiannonceventebycategorycitycount(categoryannoncevente $categoryannoncevente,city $city )
     {
-        $data = AnnonceventeService::apiannoncelocationcategorybycitycount($categoryannoncevente,$city);
+        $data = AnnonceventeService::apiannonceventecategorybycitycount($categoryannoncevente,$city);
 
         return response()->json($data, 200);
+    }
+
+    public function sendcontactmessageuser(StorecontactRequest $request, annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,annoncevente $annoncevente)
+    {
+
+        $contactuser = new contactuser();
+
+        $slug = sha1(('YmdHis') . str_random(30));
+        $contactuser->fill($request->all());
+        $contactuser->slug = $slug;
+        $contactuser->user_id = $annoncevente->user->id;
+        $contactuser->annoncevente_id = $annoncevente->id;
+
+        ContactuserService::newEmailToannonceventepageShow($request,$annoncevente);
+
+        $contactuser->save();
+
+        return response()->json($contactuser,200);
+    }
+
+    public function apiannonceventeinteresse(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city)
+    {
+        $annoncevente = $categoryannoncevente->annonceventes()->whereIn('annoncetype_id',[$annoncetype->id])
+            ->with('user','city','annoncetype','categoryannoncevente')
+            ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+            ->whereIn('city_id',[$city->id])
+            ->orderByRaw('RAND()')
+            ->where(['status' => 1,'status_admin' => 1])
+            ->take(4)->distinct()->get()->toArray();
+        return response()->json($annoncevente, 200);
+    }
+
+    public function apiannonceventeinteresseslug(categoryannoncevente $categoryannoncevente)
+    {
+        $annoncevente = $categoryannoncevente->annonceventes()->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+            ->with('user','city','annoncetype','categoryannoncevente')
+            ->orderByRaw('RAND()')
+            ->where(['status' => 1,'status_admin' => 1])
+            ->take(4)->distinct()->get()->toArray();
+        return response()->json($annoncevente, 200);
     }
     /**
      * Show the form for creating a new resource

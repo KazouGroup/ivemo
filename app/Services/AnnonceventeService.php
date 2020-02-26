@@ -26,7 +26,7 @@ class AnnonceventeService
         return $annoncesbycities;
     }
 
-    public static function apiannoncelocationcategorybycitycount($categoryannoncevente,$city)
+    public static function apiannonceventecategorybycitycount($categoryannoncevente,$city)
     {
         $annoncesbycities = categoryannoncevente::with('user')
             ->withCount(['annonceventes' => function ($q) use ($categoryannoncevente,$city){

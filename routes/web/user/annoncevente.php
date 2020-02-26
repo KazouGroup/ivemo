@@ -15,3 +15,13 @@ Route::get(
     'AnnonceventeController@apiannonceventecategorybycitycount'
 )->name('annonceventecities_site');
 
+Route::get(
+    'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}/{date}/{slug}',
+    'AnnonceventeController@annonceventebycategoryannonceventeslug'
+)->name('annonceventebycategoryannonceventeslug_site');
+
+Route::post(
+    'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}/{date}/{annoncevente}/send_contact_message_user',
+    'AnnonceventeController@sendcontactmessageuser'
+)->name('annonceventesendcontactmessageuser_site');
+

@@ -22,16 +22,27 @@ Route::get(
 )->name('api.annonceventebycities_site');
 
 Route::get(
-    'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}/{annoncevente}',
+    'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}/{date}/{annoncevente}',
     'AnnonceventeController@apiannonceventebycategoryannonceventeslug'
-)->name('api.annoncelocationbycategoryannonceventeslug_site');
+)->name('api.annonceventebycategoryannonceventeslug_site');
+
 
 Route::get(
     'annonces_ventes_by_city_count/{categoryannoncevente}',
-    'AnnonceventeController@apiannonceventebycategorycitycount'
+    'AnnonceventeController@apiannonceventebycategorycount'
 )->name('api.annonceventebycategorycitycount_site');
 
 Route::get(
     'annonces_ventes_by_city_count/{categoryannoncevente}/{city}',
     'AnnonceventeController@apiannonceventebycategorycitycount'
 )->name('api.annonceventebycategorycitycount_site');
+
+Route::get(
+    'annonces_ventes_interesses/{annoncetype}/{categoryannoncevente}/{city}',
+    'AnnonceventeController@apiannonceventeinteresse'
+)->name('api.annonceventeinteresse_site');
+
+Route::get(
+    'annonces_ventes_interesses/{categoryannoncevente}',
+    'AnnonceventeController@apiannonceventeinteresseslug'
+)->name('api.annonceventeinteressebycategory_site');
