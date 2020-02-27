@@ -13,11 +13,12 @@ use App\Model\user;
 class AnnonceventeService
 {
 
-    public static function apiannonceventebycategorycitycount($categoryannoncevente)
+    public static function apiannonceventebycategorycount($categoryannoncevente)
     {
         $annoncesbycities = city::with('user')
             ->withCount(['annonceventes' => function ($q) use ($categoryannoncevente){
-                $q->where('status',1)
+                $q->where(['status' => 1,'status_admin' => 1])
+                    ->whereHas('city', function ($q) {$q->where('status',1);})
                     ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id]);
             }])->orderBy('annonceventes_count','desc')
             ->take(6)
@@ -31,7 +32,8 @@ class AnnonceventeService
         $annoncesbycities = categoryannoncevente::with('user')
             ->withCount(['annonceventes' => function ($q) use ($categoryannoncevente,$city){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->whereIn('city_id',[$city->id]);
+                    ->whereIn('city_id',[$city->id])
+                    ->whereHas('city', function ($q) {$q->where('status',1);});
             }])->orderBy('annonceventes_count','desc')
             ->take(6)
             ->distinct()->get();

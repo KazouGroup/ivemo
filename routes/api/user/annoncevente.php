@@ -34,7 +34,7 @@ Route::get(
 
 Route::get(
     'annonces_ventes_by_city_count/{categoryannoncevente}/{city}',
-    'AnnonceventeController@apiannonceventebycategorycitycount'
+    'AnnonceventeController@apiannonceventecategorybycitycount'
 )->name('api.annonceventecategorybycitycount_site');
 
 Route::get(

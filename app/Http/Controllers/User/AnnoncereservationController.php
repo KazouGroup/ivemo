@@ -121,6 +121,7 @@ class AnnoncereservationController extends Controller
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
                         ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
+                        ->whereHas('city', function ($q) {$q->where('status',1);})
                         ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();},
             ])->first();
         return response()->json($annoncereservation, 200);

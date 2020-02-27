@@ -18,7 +18,8 @@ class AnnoncelocationService
         $annoncesbycities = city::with('user')
             ->withCount(['annoncelocations' => function ($q) use ($categoryannoncelocation){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id]);
+                    ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
+                    ->whereHas('city', function ($q) {$q->where('status',1);});
             }])->orderBy('annoncelocations_count','desc')
             ->take(6)
             ->distinct()->get();
@@ -31,7 +32,8 @@ class AnnoncelocationService
         $annoncesbycities = categoryannoncelocation::with('user')
             ->withCount(['annoncelocations' => function ($q) use ($categoryannoncelocation,$city){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->whereIn('city_id',[$city->id]);
+                    ->whereIn('city_id',[$city->id])
+                    ->whereHas('city', function ($q) {$q->where('status',1);});
             }])->orderBy('annoncelocations_count','desc')
             ->take(6)->distinct()->get();
 
@@ -41,6 +43,7 @@ class AnnoncelocationService
     public static function apiannoncelocationbycity($annoncetype,$categoryannoncelocation,$city)
     {
         $annoncesbycities = city::whereSlug($city->slug)
+            ->where(['status' => 1])
             ->with([
                 'annoncelocations' => function ($q) use ($annoncetype,$categoryannoncelocation,$city){
                     $q->where(['status' => 1,'status_admin' => 1])

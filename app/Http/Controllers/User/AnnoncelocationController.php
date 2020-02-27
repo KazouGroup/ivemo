@@ -159,6 +159,7 @@ class AnnoncelocationController extends Controller
                         ->with('user','categoryannoncelocation','city','annoncetype')
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
+                        ->whereHas('city', function ($q) {$q->where('status',1);})
                         ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();},
             ])->first();
         return response()->json($annoncelocation, 200);

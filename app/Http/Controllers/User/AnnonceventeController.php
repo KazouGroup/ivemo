@@ -46,7 +46,8 @@ class AnnonceventeController extends Controller
     {
         $categoryannonceventes = CategoryannonceventeResource::collection(categoryannoncevente::with('user')
             ->withCount(['annonceventes' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
+                $q->where(['status' => 1,'status_admin' => 1])
+                    ->whereHas('city', function ($q) {$q->where('status',1);});
             }])->withCount(['blogannonceventes' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1]);
             }])
@@ -76,6 +77,7 @@ class AnnonceventeController extends Controller
                         ->with('user','categoryannoncevente','city','annoncetype')
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+                        ->whereHas('city', function ($q) {$q->where('status',1);})
                         ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();},
             ])->first();
         return response()->json($annoncevente, 200);
@@ -83,14 +85,18 @@ class AnnonceventeController extends Controller
 
     public function apiannonceventebycity(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city)
     {
-        $annonceventecities = $city->annonceventes()->with('user','categoryannoncevente','city','annoncetype')
-            ->whereIn('city_id',[$city->id])
-            ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
-            ->whereIn('annoncetype_id',[$annoncetype->id])
-            ->orderBy('created_at','DESC')
-            ->where(function ($q){
-                $q->where('status',1);
-            })->distinct()->get()->toArray();
+        $annonceventecities = city::whereSlug($city->slug)
+            ->where('status',1)
+            ->with([
+                'annonceventes' => function ($q) use ($annoncetype,$categoryannoncevente,$city){
+                    $q->where(['status' => 1,'status_admin' => 1])
+                        ->with('user','categoryannoncevente','city','annoncetype')
+                        ->whereIn('annoncetype_id',[$annoncetype->id])
+                        ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+                        ->whereIn('city_id',[$city->id])
+                        ->whereHas('city', function ($q) {$q->where('status',1);})
+                        ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();},
+            ])->first();
 
         return response()->json($annonceventecities, 200);
     }
@@ -145,12 +151,12 @@ class AnnonceventeController extends Controller
 
     public function apiannonceventebycategorycount(categoryannoncevente $categoryannoncevente )
     {
-        $annoncesbycategoriescities = AnnonceventeService::apiannonceventebycategorycitycount($categoryannoncevente);
+        $annoncesbycategoriescities = AnnonceventeService::apiannonceventebycategorycount($categoryannoncevente);
 
         return response()->json($annoncesbycategoriescities, 200);
     }
 
-    public function apiannonceventebycategorycitycount(categoryannoncevente $categoryannoncevente,city $city )
+    public function apiannonceventecategorybycitycount(categoryannoncevente $categoryannoncevente,city $city )
     {
         $data = AnnonceventeService::apiannonceventecategorybycitycount($categoryannoncevente,$city);
 
