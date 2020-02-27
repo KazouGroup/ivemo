@@ -304,6 +304,7 @@ class Annonceventebycategorycityshow extends Component {
                                     </div>
                                 </div>
 
+                                <AnnonceventeInteresseList {...this.props}/>
 
                                 <BlogannonceventeIntesseAnnonseShow {...this.props} />
 

@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import moment from 'moment'
 import { Button } from "reactstrap";
 import { Remarkable } from "remarkable";
+import AnnonceventeInteresseList from "./inc/AnnonceventeInteresseList";
 
 require("moment/min/locales.min");
 moment.locale('fr');
