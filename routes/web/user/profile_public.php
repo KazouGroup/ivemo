@@ -22,6 +22,11 @@ Route::get(
 )->name('public_profile_annoncereservations.site');
 
 Route::get(
+    '@{user}/annonces_ventes',
+    'ProfilepublicController@publicprofilannonceventes'
+)->name('public_profile_annonceventes.site');
+
+Route::get(
     '@{user}/blogs/annonce_locations/',
     'ProfilepublicController@publicprofilarticleslocations'
 )->name('public_profile_articleslocations.site');

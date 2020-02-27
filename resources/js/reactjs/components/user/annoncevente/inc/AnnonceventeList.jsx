@@ -133,7 +133,7 @@ class AnnonceventeList extends Component {
                                         </NavLink>
                                         <div className="mx-3">
                                             <NavLink to={`/@${this.props.user.slug}/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
-                                                <small className="d-block text-muted">{moment(this.props.created_at).format('LL')}</small>
+                                                <small className="d-block text-muted"><b>{moment(this.props.created_at).format('LL')}</b></small>
                                             </NavLink>
                                         </div>
                                     </div>

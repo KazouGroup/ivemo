@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";
 import NavLinkPublicBlogannoncesUser from "./NavLinkPublicBlogannoncesUser";
 import NavLinkPublicAnnonceUser from "../../annonces/NavLinkPublicAnnonceUser";
-import PublicUserBlogannonceventeList from "./PublicUserBlogannonceventeList";
+import PublicUserBlogannonceventeList from "./inc/PublicUserBlogannonceventeList";
 
 
 class PublicUserBlogannonceVente extends Component {

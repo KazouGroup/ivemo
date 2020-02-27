@@ -101,7 +101,7 @@ class PublicUserAnnonceReservations extends Component {
                     <title>Annonces reservations {`${useranoncereservationPublick.first_name || 'Profile'}`} - Ivemo</title>
                 </Helmet>
 
-                <div className="about-us sidebar-collapse">
+                <div className="landing-page sidebar-collapse">
 
 
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
@@ -210,6 +210,18 @@ class PublicUserAnnonceReservations extends Component {
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
                                         {mapAnnoncereservations}
+
+                                        <div className="card">
+                                            <div className="card-body">
+
+                                                <div className="card-header text-center">
+                                                    <h4 className="card-title"><b>Contacter {useranoncereservationPublick.first_name}</b></h4>
+                                                </div>
+
+                                                <FormContactProfileAccountUser {...this.props}/>
+
+                                            </div>
+                                        </div>
 
                                     </div>
 

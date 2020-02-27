@@ -56,28 +56,7 @@ class ProfilepublicController extends Controller
 
     public function apiprofilannoncereserventes(user $user)
     {
-        $annoncesreservations = user::whereSlug($user->slug)
-            ->with(['annonceventes' => function ($q) use ($user){
-                $q->with('user','categoryannoncevente','city','annoncetype')
-                    ->whereIn('annoncetype_id',[2])
-                    ->whereIn('user_id',[$user->id])
-                    ->where(['status' => 1,'status_admin' => 1])
-                    ->distinct()->paginate(40)->toArray()
-                ;},
-            ])
-            ->withCount(['annoncelocations' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['annoncereservations' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['annonceventes' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['blogannoncelocations' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['blogannoncereservations' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['blogannonceventes' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
-            }])->first();
+        $annoncesreservations = ProfileService::apiprofilannoncereserventes($user);
 
         return response()->json($annoncesreservations, 200);
     }
@@ -139,6 +118,13 @@ class ProfilepublicController extends Controller
     public function publicprofilannoncereservations(user $user)
     {
         return view('user.profile.annonces.publicprofilannoncereservations',[
+            'user' => $user,
+        ]);
+    }
+
+    public function publicprofilannonceventes(user $user)
+    {
+        return view('user.profile.annonces.publicprofilannonceventes',[
             'user' => $user,
         ]);
     }
