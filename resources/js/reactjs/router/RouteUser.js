@@ -64,6 +64,7 @@ import PrivateUserBlogannonceVente from "../components/user/profile/blogs/privat
 import PublicUserBlogannonceVente from "../components/user/profile/blogs/public/PublicUserBlogannonceVente";
 import PrivateUserAnnonceVentes from "../components/user/profile/annonces/private/PrivateUserAnnonceVentes";
 import PublicUserAnnonceVentes from "../components/user/profile/annonces/public/PublicUserAnnonceVentes";
+import RegisterUser from "../components/user/auth/RegisterUser";
 
 
 const RouteUser = props => (
@@ -71,6 +72,7 @@ const RouteUser = props => (
     <Switch>
           <Route exact path="/" component={IndexSite}/>
           <Route exact path="/login/" component={LoginUser}/>
+          <Route exact path="/register/" component={RegisterUser}/>
           <Route exact path="/about/" component={AboutUserSite}/>
           <Route exact path="/contact/" component={ContactUserSite}/>
           <Route exact path="/annonce/" component={AnnonceUserSite}/>

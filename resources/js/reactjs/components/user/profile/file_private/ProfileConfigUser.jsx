@@ -23,9 +23,12 @@ class ProfileConfigUser extends Component {
             twitter_link: '',
             address: '',
             instagram_link: '',
+            city_id: '',
             linkedin_link: '',
+            birthdate: '',
             site_internet: '',
             description: '',
+            cities: [],
             errors: [],
         };
     }
@@ -58,8 +61,10 @@ class ProfileConfigUser extends Component {
             facebook_link: this.state.facebook_link,
             twitter_link: this.state.twitter_link,
             instagram_link: this.state.instagram_link,
+            city_id: this.state.city_id,
             address: this.state.address,
             linkedin_link: this.state.linkedin_link,
+            birthdate: this.state.birthdate,
             site_internet: this.state.site_internet,
             description: this.state.description,
         };
@@ -97,13 +102,16 @@ class ProfileConfigUser extends Component {
     }
 
     loadItem() {
+        dyaxios.get(route('api.all_cities')).then(response => this.setState({ cities: response.data, }));
         const itemprofile = this.props.match.params.profile;
         dyaxios.get(route('api_profile_add_info_account.site',[itemprofile])).then(response =>
             this.setState({
                 facebook_link: response.data.facebook_link,
                 twitter_link: response.data.twitter_link,
                 instagram_link: response.data.instagram_link,
+                city_id: response.data.city_id,
                 linkedin_link: response.data.linkedin_link,
+                birthdate: response.data.birthdate,
                 address: response.data.address,
                 site_internet: response.data.site_internet,
                 description: response.data.description,
@@ -116,6 +124,7 @@ class ProfileConfigUser extends Component {
     }
 
     render() {
+        const {cities} = this.state;
         return (
 
             <>
@@ -152,9 +161,6 @@ class ProfileConfigUser extends Component {
 
                                             <div className="card">
                                                 <CardBody>
-                                                    <CardTitle>
-                                                        <b>Contact de votre agence</b>
-                                                    </CardTitle>
 
                                                     <div className="card-header d-flex align-items-center">
                                                         <div className="d-flex align-items-center">
@@ -209,9 +215,9 @@ class ProfileConfigUser extends Component {
                                                     <hr/>
 
                                                     <Row>
-                                                        <div className="col-md-7 col-7">
+                                                        <div className="col-md-4">
                                                             <label
-                                                                htmlFor="address"><b>Addres</b></label>
+                                                                htmlFor="address"><b>Adresse de résidence</b></label>
                                                             <div className="input-group">
                                                                 <div
                                                                     className="input-group-prepend">
@@ -223,9 +229,9 @@ class ProfileConfigUser extends Component {
                                                                        type='text'
                                                                        className={`form-control ${this.hasErrorFor('address') ? 'is-invalid' : ''}`}
                                                                        name='address'
-                                                                       placeholder="Ou est citué votre agence"
+                                                                       placeholder="Entrez votre adresse de résidence"
                                                                        aria-label="Address"
-                                                                       autoComplete="address"
+                                                                       autoComplete="address" maxLength="200"
                                                                        value={this.state.address || ''}
                                                                        onChange={this.handleFieldChange}
                                                                 />
@@ -233,25 +239,129 @@ class ProfileConfigUser extends Component {
                                                             </div>
                                                         </div>
 
-                                                        <div className="col-md-5 col-5">
-                                                            <label htmlFor="title"><b>Facebook</b></label>
-                                                            <div className="input-group">
-                                                                <div className="input-group-prepend">
-                                                                    <span className="input-group-text">
-                                                                         <i className="now-ui-icons objects_globe"/>
-                                                                    </span>
-                                                                </div>
-                                                                <input id='facebook_link'
-                                                                       type='text'
-                                                                       className={`form-control ${this.hasErrorFor('facebook_link') ? 'is-invalid' : ''}`}
-                                                                       name='facebook_link'
-                                                                       placeholder="Lien profile facebook"
-                                                                       aria-label="facebook_link"
-                                                                       autoComplete="facebook_link"
-                                                                       value={this.state.facebook_link || ''}
-                                                                       onChange={this.handleFieldChange}
-                                                                />
-                                                                {this.renderErrorFor('facebook_link')}
+                                                        <div className="col-md-4">
+                                                            <label htmlFor="birthdate"><b>Votre année de naissance</b></label>
+                                                            <div className="form-group">
+
+                                                                <select value={this.state.birthdate} className={`form-control ${this.hasErrorFor('birthdate') ? 'is-invalid' : ''}`}
+                                                                        onChange={this.handleFieldChange} name="birthdate" required="required">
+                                                                    <option value="2020"> 2020</option>
+                                                                    <option value="2019"> 2019</option>
+                                                                    <option value="2018"> 2018</option>
+                                                                    <option value="2017"> 2017</option>
+                                                                    <option value="2016"> 2016</option>
+                                                                    <option value="2015"> 2015</option>
+                                                                    <option value="2014"> 2014</option>
+                                                                    <option value="2013"> 2013</option>
+                                                                    <option value="2012"> 2012</option>
+                                                                    <option value="2011"> 2011</option>
+                                                                    <option value="2010"> 2010</option>
+                                                                    <option value="2009"> 2009</option>
+                                                                    <option value="2008"> 2008</option>
+                                                                    <option value="2007"> 2007</option>
+                                                                    <option value="2006"> 2006</option>
+                                                                    <option value="2005"> 2005</option>
+                                                                    <option value="2004"> 2004</option>
+                                                                    <option value="2003"> 2003</option>
+                                                                    <option value="2002"> 2002</option>
+                                                                    <option value="2001"> 2001</option>
+                                                                    <option value="2000"> 2000</option>
+                                                                    <option value="1999"> 1999</option>
+                                                                    <option value="1998"> 1998</option>
+                                                                    <option value="1997"> 1997</option>
+                                                                    <option value="1996"> 1996</option>
+                                                                    <option value="1995"> 1995</option>
+                                                                    <option value="1994"> 1994</option>
+                                                                    <option value="1993"> 1993</option>
+                                                                    <option value="1992"> 1992</option>
+                                                                    <option value="1991"> 1991</option>
+                                                                    <option value="1990"> 1990</option>
+                                                                    <option value="1989"> 1989</option>
+                                                                    <option value="1988"> 1988</option>
+                                                                    <option value="1987"> 1987</option>
+                                                                    <option value="1986"> 1986</option>
+                                                                    <option value="1985"> 1985</option>
+                                                                    <option value="1984"> 1984</option>
+                                                                    <option value="1983"> 1983</option>
+                                                                    <option value="1982"> 1982</option>
+                                                                    <option value="1981"> 1981</option>
+                                                                    <option value="1980"> 1980</option>
+                                                                    <option value="1979"> 1979</option>
+                                                                    <option value="1978"> 1978</option>
+                                                                    <option value="1977"> 1977</option>
+                                                                    <option value="1976"> 1976</option>
+                                                                    <option value="1975"> 1975</option>
+                                                                    <option value="1974"> 1974</option>
+                                                                    <option value="1973"> 1973</option>
+                                                                    <option value="1972"> 1972</option>
+                                                                    <option value="1971"> 1971</option>
+                                                                    <option value="1970"> 1970</option>
+                                                                    <option value="1969"> 1969</option>
+                                                                    <option value="1968"> 1968</option>
+                                                                    <option value="1967"> 1967</option>
+                                                                    <option value="1966"> 1966</option>
+                                                                    <option value="1965"> 1965</option>
+                                                                    <option value="1964"> 1964</option>
+                                                                    <option value="1963"> 1963</option>
+                                                                    <option value="1962"> 1962</option>
+                                                                    <option value="1961"> 1961</option>
+                                                                    <option value="1960"> 1960</option>
+                                                                    <option value="1959"> 1959</option>
+                                                                    <option value="1958"> 1958</option>
+                                                                    <option value="1957"> 1957</option>
+                                                                    <option value="1956"> 1956</option>
+                                                                    <option value="1955"> 1955</option>
+                                                                    <option value="1954"> 1954</option>
+                                                                    <option value="1953"> 1953</option>
+                                                                    <option value="1952"> 1952</option>
+                                                                    <option value="1951"> 1951</option>
+                                                                    <option value="1950"> 1950</option>
+                                                                    <option value="1949"> 1949</option>
+                                                                    <option value="1948"> 1948</option>
+                                                                    <option value="1947"> 1947</option>
+                                                                    <option value="1946"> 1946</option>
+                                                                    <option value="1945"> 1945</option>
+                                                                    <option value="1944"> 1944</option>
+                                                                    <option value="1943"> 1943</option>
+                                                                    <option value="1942"> 1942</option>
+                                                                    <option value="1941"> 1941</option>
+                                                                    <option value="1940"> 1940</option>
+                                                                    <option value="1939"> 1939</option>
+                                                                    <option value="1938"> 1938</option>
+                                                                    <option value="1937"> 1937</option>
+                                                                    <option value="1936"> 1936</option>
+                                                                    <option value="1935"> 1935</option>
+                                                                    <option value="1934"> 1934</option>
+                                                                    <option value="1933"> 1933</option>
+                                                                    <option value="1932"> 1932</option>
+                                                                    <option value="1931"> 1931</option>
+                                                                    <option value="1930"> 1930</option>
+                                                                    <option value="1929"> 1929</option>
+                                                                    <option value="1928"> 1928</option>
+                                                                    <option value="1927"> 1927</option>
+                                                                    <option value="1926"> 1926</option>
+                                                                    <option value="1925"> 1925</option>
+                                                                    <option value="1924"> 1924</option>
+                                                                    <option value="1923"> 1923</option>
+                                                                    <option value="1922"> 1922</option>
+                                                                    <option value="1921"> 1921</option>
+                                                                </select>
+
+                                                                {this.renderErrorFor('birthdate')}
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="col-md-4">
+                                                            <label htmlFor="city_id"><b>Votre ville</b></label>
+                                                            <div className="form-group">
+                                                                <select value={this.state.city_id} className={`form-control ${this.hasErrorFor('city_id') ? 'is-invalid' : ''}`}
+                                                                        onChange={this.handleFieldChange} name="city_id" required="required">
+                                                                    <option value="" disabled>Votre ville</option>
+                                                                    {cities.map((item) => (
+                                                                        <option key={item.id} value={item.id}>{item.name}</option>
+                                                                    ))}
+                                                                </select>
+                                                                {this.renderErrorFor('city_id')}
                                                             </div>
                                                         </div>
 
@@ -308,7 +418,7 @@ class ProfileConfigUser extends Component {
                                                     </div>
 
                                                     <div className="row">
-                                                        <div className="col-md-6 col-6">
+                                                        <div className="col-md-4">
                                                             <label htmlFor="url_site"><b>Linkedin</b></label>
                                                             <div className="input-group">
                                                                 <div
@@ -330,7 +440,7 @@ class ProfileConfigUser extends Component {
                                                                 {this.renderErrorFor('linkedin_link')}
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-6 col-6">
+                                                        <div className="col-md-4">
 
                                                             <label htmlFor="url_site"><b>Instagram</b></label>
                                                             <div className="input-group">
@@ -353,6 +463,28 @@ class ProfileConfigUser extends Component {
                                                                 {this.renderErrorFor('instagram_link')}
                                                             </div>
                                                         </div>
+                                                        <div className="col-md-4">
+
+                                                            <label htmlFor="title"><b>Facebook</b></label>
+                                                            <div className="input-group">
+                                                                <div className="input-group-prepend">
+                                                                    <span className="input-group-text">
+                                                                         <i className="now-ui-icons objects_globe"/>
+                                                                    </span>
+                                                                </div>
+                                                                <input id='facebook_link'
+                                                                       type='text'
+                                                                       className={`form-control ${this.hasErrorFor('facebook_link') ? 'is-invalid' : ''}`}
+                                                                       name='facebook_link'
+                                                                       placeholder="Lien profile facebook"
+                                                                       aria-label="facebook_link"
+                                                                       autoComplete="facebook_link"
+                                                                       value={this.state.facebook_link || ''}
+                                                                       onChange={this.handleFieldChange}
+                                                                />
+                                                                {this.renderErrorFor('facebook_link')}
+                                                            </div>
+                                                        </div>
 
                                                     </div>
 
@@ -361,6 +493,7 @@ class ProfileConfigUser extends Component {
                                                                                     <textarea name="description"
                                                                                               value={this.state.description || ''}
                                                                                               onChange={this.handleFieldChange}
+                                                                                              minLength="3"
                                                                                               placeholder={'Ex: Crée depuis 2020 nous evrons dans l\'esposion et l\'echange'}
                                                                                               className={`form-control ${this.hasErrorFor('description') ? 'is-invalid' : ''} form-control-alternative"`}
                                                                                               id="description"
@@ -369,7 +502,7 @@ class ProfileConfigUser extends Component {
                                                     </div>
 
                                                     <div className="submit text-center">
-                                                        <button className="btn btn-success" type="submit">
+                                                        <button className="btn btn-primary btn-round" type="submit">
                                                             <i className="now-ui-icons ui-1_check"/>
                                                             <b>Enregistrer</b>
                                                         </button>
