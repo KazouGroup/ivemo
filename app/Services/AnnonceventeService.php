@@ -78,4 +78,33 @@ class AnnonceventeService
 
         return $annoncelocation;
     }
+
+    public static function apiannoncesventesbyuser($user)
+    {
+        $annoncelocations = user::whereSlug($user->slug)
+            ->with(['annonceventes' => function ($q) use ($user){
+                $q->with('user','categoryannoncevente','city','annoncetype')
+                    ->whereIn('user_id',[$user->id])
+                    ->orderBy('created_at','DESC')
+                    ->distinct()->get()->toArray()
+                ;},
+            ])
+            ->withCount(['teamusers' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id]);
+            }])->withCount(['annoncelocations' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id]);
+            }])->withCount(['annoncereservations' => function ($q) use ($user){
+                $q ->whereIn('user_id',[$user->id]);
+            }])->withCount(['annonceventes' => function ($q) use ($user){
+                $q ->whereIn('user_id',[$user->id]);
+            }])->withCount(['blogannoncelocations' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id]);
+            }])->withCount(['blogannoncereservations' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id]);
+            }])->withCount(['blogannonceventes' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id]);
+            }])->first();
+
+        return $annoncelocations;
+    }
 }

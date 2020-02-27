@@ -16,6 +16,16 @@ Route::get(
 )->name('annonceventecities_site');
 
 Route::get(
+    'api/profile/{user}/personal_settings/annonces_ventes',
+    'AnnonceventeController@apiannoncesventesbyuser'
+)->name('api.annoncesventesbyuser_site');
+
+Route::get(
+    'profile/{user}/personal_settings/annonces_ventes',
+    'AnnonceventeController@annoncesventesbyuser'
+)->name('annoncesventesbyuser_site');
+
+Route::get(
     'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}/{date}/{slug}',
     'AnnonceventeController@annonceventebycategoryannonceventeslug'
 )->name('annonceventebycategoryannonceventeslug_site');

@@ -121,7 +121,7 @@ class AnnoncelocationController extends Controller
 
     public function annonceslocationsbyuser(user $user)
     {
-        if (auth()->user()->user === $user->id){
+        if (auth()->user()->id === $user->id){
             return view('user.profile.annonces.privateprofilannoncelocations',[
                 'user' => auth()->user(),
             ]);

@@ -11,6 +11,7 @@ use App\Model\annoncetype;
 use App\Model\categoryannoncevente;
 use App\Model\city;
 use App\Model\contactuser;
+use App\Model\user;
 use App\Services\AnnonceventeService;
 use App\Services\ContactuserService;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class AnnonceventeController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['only' => [
-            'create', 'store', 'edit', 'update', 'destroy'
+            'create', 'store', 'edit', 'update', 'destroy','apiannoncesventesbyuser','annoncesventesbyuser'
         ]]);
     }
 
@@ -193,6 +194,30 @@ class AnnonceventeController extends Controller
             ->take(3)->distinct()->get()->toArray();
         return response()->json($annoncevente, 200);
     }
+
+    public function apiannoncesventesbyuser(user $user)
+    {
+        if (auth()->user()->id === $user->id){
+            $annonceventes = AnnonceventeService::apiannoncesventesbyuser($user);
+
+            return response()->json($annonceventes, 200);
+        }else{
+            abort(404);
+        }
+    }
+
+    public function annoncesventesbyuser(user $user)
+    {
+        if (auth()->user()->id === $user->id){
+            return view('user.profile.annonces.privateprofilannonceventes',[
+                'user' => auth()->user(),
+            ]);
+        }else{
+            abort(404);
+        }
+
+    }
+
     /**
      * Show the form for creating a new resource
      * .
