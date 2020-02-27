@@ -43,8 +43,8 @@ class BlogannonceventesBycategoryvente extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette annonce a été masquée <a href=\"/profile/personal_settings/blogs/annonces_ventes/\" target=\"_blank\" class=\"btn btn-info btn-sm\">Modifier ici</a>",
-                            url: "/profile/personal_settings/blogs/annonces_ventes/",
+                            message: "Cette annonce a été masquée <a href=\"/profile/"+$userIvemo.slug+"/personal_settings/blogs/annonce_ventes/\" target=\"_blank\" class=\"btn btn-info btn-sm\">Modifier ici</a>",
+                            url: "/profile/"+$userIvemo.slug+"/personal_settings/blogs/annonce_ventes/",
                             target: "_blank"
                         },
                         {

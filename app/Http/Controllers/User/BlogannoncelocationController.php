@@ -59,16 +59,26 @@ class BlogannoncelocationController extends Controller
 
     public function apiblogannonceslocationsbyuser(user $user)
     {
-        $blogannoncelocations = BlogannoncelocationService::apiblogannonceslocationsbyuser($user);
+        if (auth()->user()->id === $user->id){
+            $blogannoncelocations = BlogannoncelocationService::apiblogannonceslocationsbyuser($user);
 
-        return response()->json($blogannoncelocations, 200);
+            return response()->json($blogannoncelocations, 200);
+        }else{
+            abort(404);
+        }
+
     }
 
-    public function blogannonceslocationsbyuser()
+    public function blogannonceslocationsbyuser(user $user)
     {
-        return view('user.blogs.blogannoncelocation.blogannonceslocationsbyuser',[
-            'user' => auth()->user(),
-        ]);
+        if (auth()->user()->id === $user->id){
+            return view('user.blogs.blogannoncelocation.blogannonceslocationsbyuser',[
+                'user' => auth()->user(),
+            ]);
+        }else{
+            abort(404);
+        }
+
     }
 
 

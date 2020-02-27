@@ -9,7 +9,8 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import moment from "moment";
 import { Remarkable } from "remarkable";
 import FootermailmessageUser from "./inc/FootermailmessageUser";
-import NavlinkmailmessageUser from "./inc/NavlinkmailmessageUser";
+import NavNavigatePivateUser from "../NavNavigatePivateUser";
+import NavlinkmailmessageUserShow from "./inc/NavlinkmailmessageUserShow";
 
 
 class PersonalmessagescontactShowUser extends Component {
@@ -24,8 +25,9 @@ class PersonalmessagescontactShowUser extends Component {
 
 
     loadItem() {
+        let itemuser = this.props.match.params.user;
         let itemcontactuser = this.props.match.params.contactuser;
-        let url = route('api.personal_mails_contacts_show.site', [itemcontactuser]);
+        let url = route('api.personal_mails_contacts_show.site', [itemuser,itemcontactuser]);
         dyaxios.get(url).then(response => this.setState({ contactuser: response.data, }));
     }
 
@@ -119,7 +121,26 @@ class PersonalmessagescontactShowUser extends Component {
 
                                 <div className="row">
 
-                                    <NavlinkmailmessageUser />
+                                    <div className="col-lg-4 col-md-12 mx-auto">
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+
+                                                            <NavlinkmailmessageUserShow/>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Ici c'est la navigation dans toutes les pages dans le profile*/}
+                                        <NavNavigatePivateUser />
+
+                                    </div>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
 

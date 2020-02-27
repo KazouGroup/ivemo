@@ -9,6 +9,8 @@ use App\Model\categoryannoncevente;
 use App\Model\user;
 use App\Services\BlogannonceventeService;
 use Illuminate\Http\Request;
+use File;
+use Symfony\Component\HttpFoundation\Response;
 
 class BlogannonceventeController extends Controller
 {
@@ -20,7 +22,7 @@ class BlogannonceventeController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','destroy','activated','unactivated','apiblogannoncesventesbyuser'
+            'create','store','edit','update','destroy','activated','unactivated','apiblogannoncesventesbyuser','blogannoncesventesbyuser'
         ]]);
     }
 
@@ -52,7 +54,7 @@ class BlogannonceventeController extends Controller
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
             ->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
-            ->take(4)->distinct()->get()->toArray();
+            ->take(3)->distinct()->get()->toArray();
         return response()->json($blogannoncereseventes, 200);
     }
 
@@ -77,6 +79,39 @@ class BlogannonceventeController extends Controller
         return view('user.blogs.blogannoncevente.category',[
             'categoryannoncevente' => $categoryannoncevente,
         ]);
+    }
+
+    public function annonceblogcategoryventeslug($categoryannoncevente, $date,blogannoncevente $blogannoncevente)
+    {
+        return view('user.blogs.blogannoncevente.show',[
+            'blogannoncevente' => $blogannoncevente,
+        ]);
+    }
+
+    public function apiblogannoncesventesbyuser(user $user)
+    {
+        if (auth()->user()->id === $user->id){
+
+            $blogannonceventes = BlogannonceventeService::apiblogannoncesventesbyuser($user);
+
+            return response()->json($blogannonceventes, 200);
+        }else{
+            abort(404);
+        }
+
+    }
+
+    public function blogannoncesventesbyuser(user $user)
+    {
+        if (auth()->user()->id === $user->id){
+
+            return view('user.blogs.blogannoncevente.blogannoncesreservationsbyuser',[
+                'user' => auth()->user(),
+            ]);
+        }else{
+            abort(404);
+        }
+
     }
     /**
      * Display a listing of the resource.
@@ -143,14 +178,61 @@ class BlogannonceventeController extends Controller
         //
     }
 
+
+    public function activated($id)
+    {
+        $blogannoncevente = blogannoncevente::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$blogannoncevente);
+
+        if(auth()->user()->id === $blogannoncevente->user_id){
+
+            $blogannoncevente->update(['status' => 1,]);
+
+            return response('Confirmed',Response::HTTP_ACCEPTED);
+        }else{
+            abort(404);
+        }
+    }
+
+    public function unactivated($id)
+    {
+        $blogannoncevente = blogannoncevente::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$blogannoncevente);
+
+        if(auth()->user()->id === $blogannoncevente->user_id){
+
+            $blogannoncevente->update(['status' => 0,]);
+
+            return response('Confirmed',Response::HTTP_ACCEPTED);
+        }else{
+            abort(404);
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function destroy($id)
     {
-        //
+        $blogannoncevente = blogannoncevente::findOrFail($id);
+
+        $this->authorize('update',$blogannoncevente);
+
+        if(auth()->user()->id === $blogannoncevente->user_id){
+
+            $oldFilename = $blogannoncevente->photo;
+            File::delete(public_path($oldFilename));
+
+            $blogannoncevente->delete();
+
+            return ['message' => 'Deleted successfully'];
+        }else{
+            abort(404);
+        }
     }
 }

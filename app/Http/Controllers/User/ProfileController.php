@@ -46,6 +46,19 @@ class ProfileController extends Controller
     }
 
 
+    public function api_user_account(user $user)
+    {
+       $user = user::whereSlug($user->slug)
+            ->withCount(['contactusers' => function ($q){
+                $q->where('status_red',1);
+            }])
+            ->first();
+
+        return response()->json($user, 200);
+
+    }
+
+
     public function apipersonalreservations()
     {
         $personnalreservations = reservation::whereIn('user_id',[auth()->user()->id])->with('user','annoncereservation')
@@ -103,33 +116,57 @@ class ProfileController extends Controller
 
     }
 
-    public function apipersonalmessagescontacts()
+    public function apipersonalmessagescontacts(user $user)
     {
-        $contactusers = contactuser::whereIn('user_id',[auth()->user()->id])
-                        ->latest()->distinct()->get()->toArray();
 
-        return response()->json($contactusers, 200);
+        if (auth()->user()->id === $user->id){
+
+            $contactusers = user::whereSlug($user->slug)
+                ->with(['contactusers' => function ($q) use ($user){
+                    $q->whereIn('user_id',[$user->id])
+                        ->distinct()->get()->toArray()
+                    ;},
+                ])
+                ->withCount(['contactusers' => function ($q){
+                    $q->where('status_red',1);
+                }])
+                ->first();
+
+            return response()->json($contactusers, 200);
+        }else{
+            return redirect()->back();
+        }
+
     }
 
-    public function apipersonalmessagescontactsshow(contactuser $contactuser)
+    public function apipersonalmessagescontactsshow(user $user,contactuser $contactuser)
     {
+        $this->authorize('update',$contactuser);
+
         $contactusers = contactuser::with('user')->whereSlug($contactuser->slug)->first();
 
+
         return response()->json($contactusers, 200);
     }
 
-    public function apipersonalmessagesannonces_locations_show(contactuser $contactuser)
+    public function apipersonalmessagesannonces_locations_show($user,contactuser $contactuser)
     {
         $contactusers = ProfileService::apipersonalmessagesannonces_locations_show($contactuser);
 
         return response()->json($contactusers, 200);
     }
 
-    public function apipersonalmessagesannonces_locations()
+    public function apipersonalmessagesannonces_locations(user $user)
     {
-        $contactusers = ProfileService::apipersonalmessagesannonces_locations();
+        if (auth()->user()->id === $user->id){
 
-        return response()->json($contactusers, 200);
+            $contactusers = ProfileService::apipersonalmessagesannonces_locations($user);
+
+            return response()->json($contactusers, 200);
+        }else{
+            abort(404);
+        }
+
     }
 
     public function apipersonalmessagesannonces_reservations()
@@ -190,7 +227,7 @@ class ProfileController extends Controller
            ]);
     }
 
-    public function personalmessagesannonces_locations()
+    public function personalmessagesannonces_locations(user $user)
     {
          return view('user.profile.contactuser.personal_mailannonces_locations',[
              'user' => auth()->user()
@@ -199,21 +236,30 @@ class ProfileController extends Controller
 
      public function personalmessagesannonces_locations_show(contactuser $contactuser)
     {
+        $this->authorize('update',$contactuser);
+
          return view('user.profile.contactuser.personal_mailannonces_locations_show',[
              'user' => auth()->user(),
              'contactuser' => $contactuser
              ]);
     }
 
-     public function personalmessagescontacts()
+     public function personalmessagescontacts(user $user)
     {
-         return view('user.profile.contactuser.personal_mailcontacts',[
-             'user' => auth()->user()
-             ]);
+        if (auth()->user()->id === $user->id){
+            return view('user.profile.contactuser.personal_mailcontacts',[
+                'user' => auth()->user()
+            ]);
+        }else{
+            return abort(404);
+        }
+
     }
 
-     public function personalmessagescontactsshow(contactuser $contactuser)
+     public function personalmessagescontactsshow($user,contactuser $contactuser)
     {
+        $this->authorize('update',$contactuser);
+
          return view('user.profile.contactuser.personal_mailcontacts_show',[
              'user' => auth()->user(),
              'contactuser' => $contactuser
@@ -224,6 +270,8 @@ class ProfileController extends Controller
     public function personalmessagescontactsactive($id)
     {
          $contactuser = contactuser::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$contactuser);
 
          if(auth()->user()->id === $contactuser->user_id){
           $contactuser->update([ 'status_red' => 0,]);

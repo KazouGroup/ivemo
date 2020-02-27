@@ -1,22 +1,26 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    @include('layouts.admin._head')
+@include('layouts.admin._head')
 
-    @yield('style')
+@yield('style')
 </head>
 <body>
 
+<div  class="wrapper " id="app">
     @can('dashboard')
+        @if(auth()->user()->status_user)
 
-        @if(auth()->user()->status_user === 1)
+            <navbig-admin></navbig-admin>
+
         @section('content')
 
 
         @show
-        @endif
 
+        @endif
     @endcan
+</div>
 
 @include('layouts.admin._script')
 

@@ -107,16 +107,28 @@ class AnnoncelocationController extends Controller
 
     public function apiannonceslocationsbyuser(user $user)
     {
-        $data = AnnoncelocationService::apiannonceslocationsbyuser($user);
+        if (auth()->user()->id === $user->id){
 
-        return response()->json($data, 200);
+            $data = AnnoncelocationService::apiannonceslocationsbyuser($user);
+
+            return response()->json($data, 200);
+
+        }else{
+            return abort(404);
+        }
+
     }
 
-    public function annonceslocationsbyuser()
+    public function annonceslocationsbyuser(user $user)
     {
-        return view('user.profile.annonces.privateprofilannoncelocations',[
-            'user' => auth()->user(),
-        ]);
+        if (auth()->user()->user === $user->id){
+            return view('user.profile.annonces.privateprofilannoncelocations',[
+                'user' => auth()->user(),
+            ]);
+        }else{
+            abort(404);
+        }
+
     }
 
     public function apiannoncelocations()

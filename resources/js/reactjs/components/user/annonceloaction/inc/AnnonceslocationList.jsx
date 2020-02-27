@@ -123,7 +123,9 @@ class AnnonceslocationList extends Component {
                                         {this.props.title}
                                     </Link>
                                 </h6>
-                                <span dangerouslySetInnerHTML={this.getDescription()}/>
+                                <Link to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
+                                    <span dangerouslySetInnerHTML={this.getDescription()}/>
+                                </Link>
                                 <div className="card-header d-flex align-items-center">
                                     <div className="d-flex align-items-center">
                                         <NavLink to={`/@${this.props.user.slug}/`}>

@@ -25,7 +25,7 @@ class BlogannoncereservationController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','destroy','activated','unactivated','apiblogannoncesreservationsbyuser'
+            'create','store','edit','update','destroy','activated','unactivated','apiblogannoncesreservationsbyuser','blogannoncesreservationsbyuser'
         ]]);
     }
 
@@ -82,16 +82,26 @@ class BlogannoncereservationController extends Controller
 
     public function apiblogannoncesreservationsbyuser(user $user)
     {
-        $blogannoncereservations = BlogannoncereservationService::apiblogannoncesreservationsbyuser($user);
+        if (auth()->user()->id === $user->id){
+            $blogannoncereservations = BlogannoncereservationService::apiblogannoncesreservationsbyuser($user);
 
-        return response()->json($blogannoncereservations, 200);
+            return response()->json($blogannoncereservations, 200);
+        }else{
+            abort(404);
+        }
+
     }
 
-    public function blogannoncesreservationsbyuser()
+    public function blogannoncesreservationsbyuser(user $user)
     {
-        return view('user.blogs.blogannoncereservation.blogannoncesreservationsbyuser',[
-            'user' => auth()->user(),
-        ]);
+        if (auth()->user()->id === $user->id){
+            return view('user.blogs.blogannoncereservation.blogannoncesreservationsbyuser',[
+                'user' => auth()->user(),
+            ]);
+        }else{
+            abort(404);
+        }
+
     }
 
 

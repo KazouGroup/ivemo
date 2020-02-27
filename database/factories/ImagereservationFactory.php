@@ -7,8 +7,10 @@ use App\Model\imagereservation;
 use Faker\Generator as Faker;
 
 $factory->define(imagereservation::class, function (Faker $faker) {
+    $backgroundColor = trim($faker->safeHexcolor, '#');
+    $foregroundColor = trim($faker->safeHexcolor, '#');
     return [
-        'photo'=> $faker->imageUrl($width = 1400, $height = 800),
+        'photo' => "https://dummyimage.com/wsvga/" . $backgroundColor . "/". $foregroundColor ."&text=" . $faker->word,
         'annoncereservation_id' => annoncereservation::inRandomOrder()->first()->id,
     ];
 });

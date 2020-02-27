@@ -47,7 +47,7 @@ class BlogannoncelocationService
                 $q->with('user','categoryannoncelocation')
                     ->whereIn('user_id',[$user->id])
                     ->orderBy('created_at','DESC')
-                    ->distinct()->paginate(40)->toArray()
+                    ->distinct()->get()->toArray()
                 ;},
             ])
             ->withCount(['teamusers' => function ($q) use ($user){

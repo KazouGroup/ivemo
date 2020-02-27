@@ -99,7 +99,7 @@ class NavUserSite extends Component {
                                     </a>
                                     <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
 
-                                        {$userIvemo.my_status === 'active' && (
+                                        {$userIvemo.status_user && (
                                             <a href="/dashboard" className="dropdown-item">
                                                 <i className="now-ui-icons business_bulb-63" /> Dashboard
                                             </a>
@@ -133,8 +133,8 @@ class NavUserSite extends Component {
                                         <Link to={'/profile/annonces_reservations_booked/'} className="dropdown-item">
                                             <i className="now-ui-icons shopping_bag-16"/>Reservations
                                         </Link>
-                                        <Link to={'/profile/personal_mails/contacts/'} className="dropdown-item">
-                                            <i className="now-ui-icons location_pin"/>Messages Contacts
+                                        <Link to={`/profile/${$userIvemo.slug}/personal_mails/contacts/`} className="dropdown-item">
+                                            <i className="now-ui-icons location_pin"/>Messages
                                         </Link>
                                     </div>
                                 </li>

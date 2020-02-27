@@ -26,21 +26,31 @@ class NavLinkPublicBlogannoncesUser extends Component {
                             <tr>
                                 <td>
                                     <NavLink to={`/@${this.props.slug}/blogs/annonce_locations/`}>
-                                        Articles sur la <b>locations</b>
+                                        Articles sur les <b>locations</b>
                                     </NavLink>
                                 </td>
                                 {this.props.blogannoncelocations_count && (
-                                    <td className="text-right"> {this.props.blogannoncelocations_count} articles</td>
+                                    <td className="text-right"> {this.props.blogannoncelocations_count} {this.props.blogannoncelocations_count < 1 ? "article" : "articles"}</td>
                                 )}
                             </tr>
                             <tr>
                                 <td>
                                     <NavLink to={`/@${this.props.slug}/blogs/annonce_reservations/`}>
-                                        Articles sur la <b>reservations</b>
+                                        Articles sur les <b>reservations</b>
                                     </NavLink>
                                 </td>
                                 {this.props.blogannoncereservations_count && (
-                                    <td className="text-right"> {this.props.blogannoncereservations_count} articles</td>
+                                    <td className="text-right"> {this.props.blogannoncereservations_count} {this.props.blogannoncereservations_count < 1 ? "article" : "articles"}</td>
+                                )}
+                            </tr>
+                            <tr>
+                                <td>
+                                    <NavLink to={`/@${this.props.slug}/blogs/annonce_ventes/`}>
+                                        Articles sur les <b>ventes</b>
+                                    </NavLink>
+                                </td>
+                                {this.props.blogannonceventes_count && (
+                                    <td className="text-right"> {this.props.blogannonceventes_count} {this.props.blogannonceventes_count < 1 ? "article" : "articles"}</td>
                                 )}
                             </tr>
                             </tbody>

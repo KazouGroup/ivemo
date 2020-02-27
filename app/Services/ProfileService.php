@@ -16,23 +16,26 @@ use Illuminate\Support\Facades\Auth;
 class ProfileService
 {
 
-    public static function apipersonalmessagesannonces_locations()
+    public static function apipersonalmessagesannonces_locations($user)
     {
-        $contactusers =  contactuser::with('annoncelocation','user')
-            ->whereIn('user_id',[auth()->user()->id])
-            ->orderBy('created_at','DESC')
-            ->with([
-                'annoncelocation.categoryannoncelocation' => function ($q){
-                    $q->select('id','name','slug','user_id');},
-                'annoncelocation.city' => function ($q){
-                    $q->select('id','name','slug','user_id');},
-                'annoncelocation.annoncetype' => function ($q){
-                    $q->select('id','name','slug');},
-                'annoncelocation.user' => function ($q){
-                    $q->distinct()->get();}
-            ])->whereHas('annoncelocation', function ($q) {
-                $q->whereIn('user_id',[auth()->user()->id]);
-            })->distinct()->get()->toArray();;
+        $contactusers = user::whereSlug($user->slug)
+            ->with(['contactusers' => function ($q) use ($user){
+                $q->whereIn('user_id',[auth()->user()->id])
+                    ->with('annoncelocation','user')
+                    ->orderBy('created_at','DESC')
+                    ->with([
+                        'annoncelocation.categoryannoncelocation' => function ($q){
+                            $q->select('id','name','slug','user_id');},
+                        'annoncelocation.city' => function ($q){
+                            $q->select('id','name','slug','user_id');},
+                        'annoncelocation.annoncetype' => function ($q){
+                            $q->select('id','name','slug');},
+                        'annoncelocation.user' => function ($q){
+                            $q->distinct()->get();}
+                    ])->whereHas('annoncelocation', function ($q) {
+                        $q->whereIn('user_id',[auth()->user()->id]);
+                    })->distinct()->get()->toArray();},
+            ])->first();
 
         return $contactusers;
     }
@@ -128,6 +131,8 @@ class ProfileService
                 $q->where(['status' => 1,'status_admin' => 1]);
             }])->withCount(['blogannoncereservations' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannonceventes' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])
             ->first();
 
@@ -155,6 +160,8 @@ class ProfileService
                 $q->where(['status' => 1,'status_admin' => 1]);
             }])->withCount(['blogannoncereservations' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannonceventes' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
             }])->first();
 
         return $personnalreservations;
@@ -179,6 +186,8 @@ class ProfileService
             }])->withCount(['blogannoncelocations' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1]);
             }])->withCount(['blogannoncereservations' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannonceventes' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1]);
             }])
             ->first();
@@ -205,6 +214,36 @@ class ProfileService
             }])->withCount(['blogannoncelocations' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1]);
             }])->withCount(['blogannoncereservations' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannonceventes' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])
+            ->first();
+
+        return $personnalblogannonces;
+    }
+
+    public static function apiprofilblogannonceventes($user)
+    {
+        $personnalblogannonces = user::whereSlug($user->slug)
+            ->with(['blogannonceventes' => function ($q) use ($user){
+                $q->with('user','categoryannoncevente')
+                    ->whereIn('user_id',[$user->id])
+                    ->where(['status' => 1,'status_admin' => 1])
+                    ->distinct()->get()->toArray()
+                ;},
+            ])
+            ->withCount(['annoncelocations' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['annoncereservations' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['annonceventes' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannoncelocations' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannoncereservations' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannonceventes' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1]);
             }])
             ->first();

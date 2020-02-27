@@ -47,6 +47,11 @@ Route::get(
 )->name('annonces_reservations_booked.site');
 
 Route::get(
+    'api/user_profile/{user}',
+    'ProfileController@api_user_account'
+)->name('api_user_profile_account.site');
+
+Route::get(
     'profile/annonces_reservations_booked/confirmed/{id}',
     'ProfileController@annonces_reservations_booked_confirmed'
 )->name('annonces_reservations_booked_confirmed.site');

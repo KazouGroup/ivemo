@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('sex')->default('Male');
             $table->date('birthday')->nullable();
             $table->string('color_name')->default('primary');
-            $table->boolean('status_user')->nullable();
+            $table->boolean('status_user')->default(false);
             $table->string('avatar')->nullable()->default('https://www.kazoucoin.com/assets/img/default-avatar.png');
             $table->string('avatarcover')->nullable();
             $table->string('phone')->nullable();

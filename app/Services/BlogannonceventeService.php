@@ -52,6 +52,34 @@ class BlogannonceventeService
         return $blogannoncereseventes;
     }
 
+    public static function apiblogannoncesventesbyuser($user)
+    {
+        $blogannoncereseventes = user::whereSlug($user->slug)
+            ->with(['blogannonceventes' => function ($q) use ($user){
+                $q->with('user','categoryannoncevente')
+                    ->whereIn('user_id',[$user->id])
+                    ->orderBy('created_at','DESC')
+                    ->distinct()->get()->toArray()
+                ;},
+            ])
+            ->withCount(['teamusers' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id]);
+            }])->withCount(['annoncelocations' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id]);
+            }])->withCount(['annoncereservations' => function ($q) use ($user){
+                $q ->whereIn('user_id',[$user->id]);
+            }])->withCount(['annonceventes' => function ($q) use ($user){
+                $q ->whereIn('user_id',[$user->id]);
+            }])->withCount(['blogannoncelocations' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id]);
+            }])->withCount(['blogannoncereservations' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id]);
+            }])->withCount(['blogannonceventes' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id]);
+            }])->first();
+
+        return $blogannoncereseventes;
+    }
 
 
 }
