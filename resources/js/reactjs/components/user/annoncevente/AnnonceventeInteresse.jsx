@@ -20,9 +20,9 @@ class AnnonceventeInteresse extends Component {
 
     componentDidMount() {
         let itemannoncetype = this.props.match.params.annoncetype;
-        let itemCategoryannoncelocation = this.props.match.params.categoryannoncevente;
+        let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
         let itemCityannonce = this.props.match.params.city;
-        dyaxios.get(route('api.annonceventeinteresse_site', [itemannoncetype, itemCategoryannoncelocation, itemCityannonce])).then(response =>
+        dyaxios.get(route('api.annonceventeinteresse_site', [itemannoncetype, itemCategoryannoncevente, itemCityannonce])).then(response =>
             this.setState({
                 annonceventesinteresses: [...response.data],
             }));

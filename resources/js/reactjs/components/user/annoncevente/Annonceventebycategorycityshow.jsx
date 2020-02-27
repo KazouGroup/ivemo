@@ -6,7 +6,7 @@ import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import BlogannonceventeIntesseAnnonseShow from "../blog/blognnoncevente/BlogannonceventeIntesseAnnonseShow";
 import FormcontactuseronannonceventeShow from "./inc/FormcontactuseronannonceventShow";
-import AnnonceventeInteresseList from "./inc/AnnonceventeInteresseList";
+import AnnonceventeInteresse from "./AnnonceventeInteresse";
 
 
 class Annonceventebycategorycityshow extends Component {
@@ -304,7 +304,7 @@ class Annonceventebycategorycityshow extends Component {
                                     </div>
                                 </div>
 
-                                <AnnonceventeInteresseList {...this.props}/>
+                                <AnnonceventeInteresse {...this.props}/>
 
                                 <BlogannonceventeIntesseAnnonseShow {...this.props} />
 
