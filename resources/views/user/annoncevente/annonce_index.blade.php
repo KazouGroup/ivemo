@@ -1,6 +1,6 @@
 @extends('inc.user.main')
 <?php $item = htmlspecialchars(config('app.name'));?>
-@section('title', 'vendez un terrain, une maison, un appartement ou une boutique - '.$item)
+@section('title', 'Vendez un terrain, une maison, un appartement ou une boutique et plusieurs autres de vos biens - '.$item)
 
 @section('style')
 @endsection

@@ -81,7 +81,8 @@ class AnnoncelocationController extends Controller
     {
         $categoryannoncelocations = CategoryannoncelocationResource::collection(categoryannoncelocation::with('user')
             ->withCount(['annoncelocations' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
+                $q->where(['status' => 1,'status_admin' => 1])
+                ->whereHas('city', function ($q) {$q->where('status',1);});
             }])->withCount(['blogannoncelocations' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1]);
             }])
@@ -177,7 +178,8 @@ class AnnoncelocationController extends Controller
         $annoncelocations = CityResource::collection(city::with('user')
             ->where('status',1)
             ->withCount(['annoncelocations' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
+                $q->where(['status' => 1,'status_admin' => 1])
+                    ->whereHas('city', function ($q) {$q->where('status',1);});
             }])
             ->orderBy('annoncelocations_count','desc')->get());
 

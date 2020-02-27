@@ -50,8 +50,7 @@ class AnnonceventeController extends Controller
                     ->whereHas('city', function ($q) {$q->where('status',1);});
             }])->withCount(['blogannonceventes' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1]);
-            }])
-            ->orderBy('annonceventes_count','desc')
+            }])->orderBy('annonceventes_count','desc')
             ->distinct()->get());
 
         return response()->json($categoryannonceventes, 200);    }
@@ -63,7 +62,7 @@ class AnnonceventeController extends Controller
             ->with('user','categoryannoncevente','city','annoncetype')
             ->orderBy('created_at','DESC')
             ->where(['status' => 1,'status_admin' => 1])
-            ->distinct()->paginate(30)->toArray();
+            ->distinct()->paginate(40)->toArray();
 
         return response()->json($annoncesventes, 200);
     }
@@ -78,7 +77,7 @@ class AnnonceventeController extends Controller
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
                         ->whereHas('city', function ($q) {$q->where('status',1);})
-                        ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();},
+                        ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();},
             ])->first();
         return response()->json($annoncevente, 200);
     }
@@ -95,7 +94,7 @@ class AnnonceventeController extends Controller
                         ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
                         ->whereIn('city_id',[$city->id])
                         ->whereHas('city', function ($q) {$q->where('status',1);})
-                        ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();},
+                        ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();},
             ])->first();
 
         return response()->json($annonceventecities, 200);

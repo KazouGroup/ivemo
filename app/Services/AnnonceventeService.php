@@ -18,8 +18,8 @@ class AnnonceventeService
         $annoncesbycities = city::with('user')
             ->withCount(['annonceventes' => function ($q) use ($categoryannoncevente){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->whereHas('city', function ($q) {$q->where('status',1);})
-                    ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id]);
+                    ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+                    ->whereHas('city', function ($q) {$q->where('status',1);});
             }])->orderBy('annonceventes_count','desc')
             ->take(6)
             ->distinct()->get();

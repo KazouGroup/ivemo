@@ -19,7 +19,8 @@ class AnnoncereservationService
         $annoncereservations = city::with('user')
             ->withCount(['annoncereservations' => function ($q) use ($categoryannoncereservation){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id]);
+                    ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
+                    ->whereHas('city', function ($q) {$q->where('status',1);});
             }])->orderBy('annoncereservations_count','desc')
             ->take(6)->distinct()->get();
 
@@ -32,7 +33,8 @@ class AnnoncereservationService
         $annoncereservations = categoryannoncereservation::with('user')
             ->withCount(['annoncereservations' => function ($q) use ($categoryannoncereservation,$city){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->whereIn('city_id',[$city->id]);
+                    ->whereIn('city_id',[$city->id])
+                    ->whereHas('city', function ($q) {$q->where('status',1);});
             }])->orderBy('annoncereservations_count','desc')
             ->take(6)->distinct()->get();
 
@@ -49,6 +51,7 @@ class AnnoncereservationService
                         ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
                         ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
                         ->whereIn('annoncetype_id',[$annoncetype->id])
+                        ->whereHas('city', function ($q) {$q->where('status',1);})
                         ->orderBy('created_at','DESC')->where('status',1)
                         ->distinct()->paginate(40)->toArray();},
             ])->first();
@@ -63,6 +66,7 @@ class AnnoncereservationService
                 $q->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
                     ->whereIn('user_id',[$user->id])
                     ->orderBy('created_at','DESC')
+                    ->whereHas('city', function ($q) {$q->where('status',1);})
                     ->distinct()->get()->toArray()
                 ;},
             ])
