@@ -35,7 +35,7 @@ Route::get(
 Route::get(
     'annonces_ventes_by_city_count/{categoryannoncevente}/{city}',
     'AnnonceventeController@apiannonceventebycategorycitycount'
-)->name('api.annonceventebycategorycitycount_site');
+)->name('api.annonceventecategorybycitycount_site');
 
 Route::get(
     'annonces_ventes_interesses/{annoncetype}/{categoryannoncevente}/{city}',

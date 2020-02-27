@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Model\annoncelocation;
 use App\Model\annoncereservation;
+use App\Model\annoncevente;
 use App\Model\blogannoncelocation;
 use App\Model\blogannoncereservation;
 use App\Model\blogannoncevente;
@@ -13,6 +14,7 @@ use App\Model\teamuser;
 use App\Model\user;
 use App\Policies\AnnoncelocationPolicy;
 use App\Policies\AnnoncereservationPolicy;
+use App\Policies\AnnonceventePolicy;
 use App\Policies\BlogannoncelocationPolicy;
 use App\Policies\BlogannoncereservationPolicy;
 use App\Policies\BlogannonceventePolicy;
@@ -34,6 +36,7 @@ class AuthServiceProvider extends ServiceProvider
         contactuser::class => ContactuserPolicy::class,
         annoncelocation::class => AnnoncelocationPolicy::class,
         annoncereservation::class => AnnoncereservationPolicy::class,
+        annoncevente::class => AnnonceventePolicy::class,
         blogannoncereservation::class => BlogannoncereservationPolicy::class,
         blogannoncelocation::class => BlogannoncelocationPolicy::class,
         blogannoncevente::class => BlogannonceventePolicy::class,

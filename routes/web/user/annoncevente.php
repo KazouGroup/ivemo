@@ -6,8 +6,18 @@ Route::get(
 )->name('annonceventebyannoncetypes_site');
 
 Route::get(
+    'annonces_ventes_active/{id}',
+    'AnnonceventeController@activated'
+)->name('annonces_ventes_active.site');
+
+Route::get(
+    'annonces_ventes_unactive/{id}',
+    'AnnonceventeController@unactivated'
+)->name('annonces_ventes_unactivated.site');
+
+Route::get(
     'annonces_ventes/{annoncetype}/{categoryannoncevente}',
-    'AnnonceventeController@apiannonceventebycategoryannoncevente'
+    'AnnonceventeController@annonceventebycategoryannoncevente'
 )->name('annonceventebycategoryannonceventes_site');
 
 Route::get(

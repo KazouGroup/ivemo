@@ -15,13 +15,15 @@ use App\Model\user;
 use App\Services\AnnonceventeService;
 use App\Services\ContactuserService;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AnnonceventeController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth', ['only' => [
-            'create', 'store', 'edit', 'update', 'destroy','apiannoncesventesbyuser','annoncesventesbyuser'
+            'create', 'store', 'edit', 'update', 'destroy','apiannoncesventesbyuser','annoncesventesbyuser',
+            'activated', 'unactivated'
         ]]);
     }
 
@@ -216,6 +218,36 @@ class AnnonceventeController extends Controller
             abort(404);
         }
 
+    }
+
+    public function activated($id)
+    {
+        $annoncevente = annoncevente::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$annoncevente);
+
+        if(auth()->user()->id === $annoncevente->user_id){
+
+            $annoncevente->update(['status' => 1,]);
+
+            return response('Confirmed',Response::HTTP_ACCEPTED);
+        }else{
+            abort(404);
+        }
+    }
+
+    public function unactivated($id)
+    {
+        $annoncevente = annoncevente::where('id', $id)->findOrFail($id);
+        $this->authorize('update',$annoncevente);
+
+        if(auth()->user()->id === $annoncevente->user_id){
+            $annoncevente->update(['status' => 0,]);
+
+            return response('Confirmed',Response::HTTP_ACCEPTED);
+        }else{
+            abort(404);
+        }
     }
 
     /**
