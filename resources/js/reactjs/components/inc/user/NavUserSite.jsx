@@ -84,10 +84,10 @@ class NavUserSite extends Component {
                                 </li>
 
                                 <li className="nav-item">
-                                    <a className="nav-link btn btn-primary text-left" href="/register/">
+                                    <Link to={`/register/`} className="nav-link btn btn-primary text-left">
                                         <i className="now-ui-icons tech_mobile"/>
                                         <p>Signup</p>
-                                    </a>
+                                    </Link>
                                 </li>
                             </>
                             :

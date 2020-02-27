@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Admin\Partials;
 
-use App\categoryprofile;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\CategoryFaqResource;
-use App\Model\categoryfaq;
+use App\Http\Resources\CityResource;
+use App\Http\Resources\ColorResource;
+use App\Model\city;
+use App\Model\color;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
-class CategoryFaqController extends Controller
+class CityController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -17,7 +19,7 @@ class CategoryFaqController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth',['except' => ['api','apicategoryprofiles']]);
+        $this->middleware('auth',['except' => ['api','apiexterne']]);
     }
     /**
      * Display a listing of the resource.
@@ -26,26 +28,20 @@ class CategoryFaqController extends Controller
      */
     public function index()
     {
-        return view('admin.category_faq.index');
+
     }
 
-    public function api()
+    public function apiexterne()
     {
-        $categories_faqs =  CategoryFaqResource::collection(categoryfaq::with('user')->latest()->get());
+        $cities = CityResource::collection(city::with('user')->where('status',1)->latest()->get());
 
-        return response()->json($categories_faqs,200);
+        return response()->json($cities,200);
     }
 
-    public function apicategoryprofiles()
-    {
-        $categoryprofile =  categoryprofile::select('id','name', 'label')->get();
-
-        return response()->json($categoryprofile,200);
-    }
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response$
      */
     public function create()
     {
@@ -58,18 +54,12 @@ class CategoryFaqController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    public function status(categoryfaq $categoryfaq,$id)
-    {
-        $categoryfaq = categoryfaq::where('id', $id)->findOrFail($id);
-        $categoryfaq->update(['status' => !$categoryfaq->status]);
+   public function store(Request $request)
+   {
 
-        return response()->json($categoryfaq,200);
-    }
+   }
+
     /**
      * Display the specified resource.
      *
@@ -78,7 +68,7 @@ class CategoryFaqController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -97,21 +87,22 @@ class CategoryFaqController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        //
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function destroy($id)
     {
-        //
+
     }
+
 }

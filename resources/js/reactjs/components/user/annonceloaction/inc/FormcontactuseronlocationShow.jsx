@@ -112,6 +112,7 @@ class FormcontactuseronlocationShow extends Component {
                                    type='text'
                                    className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
                                    name='full_name'
+                                   minLength="5"
                                    placeholder="Nom complet"
                                    aria-label="Nom complet"
                                    autoComplete="full_name"
@@ -132,6 +133,7 @@ class FormcontactuseronlocationShow extends Component {
                                    type='email'
                                    className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
                                    name='email'
+                                   minLength="3"
                                    placeholder="Email"
                                    aria-label="Email"
                                    autoComplete="email"
@@ -170,6 +172,7 @@ class FormcontactuseronlocationShow extends Component {
                             </div>
                             <input id='subject'
                                    type='text'
+                                   minLength="5"
                                    className={`form-control ${this.hasErrorFor('subject') ? 'is-invalid' : ''}`}
                                    name='subject'
                                    placeholder="Object..."
@@ -187,6 +190,7 @@ class FormcontactuseronlocationShow extends Component {
                                                        <textarea name="message" value={this.state.message}
                                                                  onChange={this.handleFieldChange}
                                                                  placeholder={'Posez ici toutes vos questions !'}
+                                                                 minLength="5"
                                                                  className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
                                                                  id="message"
                                                                  rows="10" />

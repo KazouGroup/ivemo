@@ -22,6 +22,7 @@ class ProfileAccountUser extends Component {
             avatarcover: '',
             email: '',
             phone: '',
+            categoryprofiles: [],
             errors: [],
             showDefaultImage: false,
         };
@@ -115,6 +116,7 @@ class ProfileAccountUser extends Component {
     }
 
     loadItem() {
+        dyaxios.get(route('api.categoryprofiles')).then(response => this.setState({ categoryprofiles: response.data, }));
         dyaxios.get(route('api_profile_account.site')).then(response =>
             this.setState({
                 username: response.data.username,
@@ -135,7 +137,7 @@ class ProfileAccountUser extends Component {
     }
 
     render() {
-        const { avatar } = this.state;
+        const { categoryprofiles,avatar } = this.state;
         return (
 
             <>
@@ -223,6 +225,8 @@ class ProfileAccountUser extends Component {
 
                                                     </div>
 
+                                                    {/*
+
                                                     <Row>
                                                         <div className="col-md-8">
                                                             <div className="profile text-center">
@@ -253,6 +257,7 @@ class ProfileAccountUser extends Component {
                                                             </div>
                                                         </div>
                                                     </Row>
+                                                    */}
 
                                                     <div className="row">
                                                         <div className="col-md-6 col-6">
@@ -303,9 +308,42 @@ class ProfileAccountUser extends Component {
 
                                                     </div>
 
+                                                    <div className="row">
+                                                        <div className="col-md-6 col-6">
+                                                            <label htmlFor="address"><b>Sex</b></label>
+                                                            <div className="form-group">
+
+                                                                <select value={this.state.sex} className={`form-control ${this.hasErrorFor('sex') ? 'is-invalid' : ''}`}
+                                                                        onChange={this.handleFieldChange} name="sex" required="required">
+                                                                    <option value="female"> Mme</option>
+                                                                    <option value="male"> M</option>
+                                                                </select>
+
+                                                                {this.renderErrorFor('sex')}
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="col-md-6 col-6">
+                                                            <label htmlFor="phone"><b>Pourquoi êtes-vous sur Ivemo ?</b></label>
+                                                            <div className="form-group">
+
+                                                                <select value={this.state.sex} className={`form-control ${this.hasErrorFor('sex') ? 'is-invalid' : ''}`}
+                                                                        onChange={this.handleFieldChange} name="sex" required="required">
+                                                                    <option value="" disabled>Pourquoi êtes-vous sur Ivemo</option>
+                                                                    {categoryprofiles.map((item) => (
+                                                                        <option key={item.id} value={item.id}>{item.name}</option>
+                                                                    ))}
+                                                                </select>
+
+                                                                {this.renderErrorFor('sex')}
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
 
                                                     <div className="submit text-center">
-                                                        <button className="btn btn-success" type="submit">
+                                                        <button className="btn btn-primary btn-round" type="submit">
                                                             <i className="now-ui-icons ui-1_check"/>
                                                             <b>Enregistrer</b>
                                                         </button>
