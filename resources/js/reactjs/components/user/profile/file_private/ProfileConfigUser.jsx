@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import {Button, Form, Input, InputGroup, Row, CardBody,Col,CardTitle} from "reactstrap";
+import {Button, Form, Input, InputGroup, Row, CardBody, Col, CardTitle, FormGroup} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import './ProfileAccountUser.css';
 import NavProfileAccountPrivate from "./NavProfileAccountPrivate";
 import moment from "moment";
+import ReactQuill from "react-quill";
 
 
 class ProfileConfigUser extends Component {
@@ -18,6 +19,7 @@ class ProfileConfigUser extends Component {
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
+        this.handleChangeBody = this.handleChangeBody.bind(this);
         this.state = {
             facebook_link: '',
             twitter_link: '',
@@ -31,8 +33,30 @@ class ProfileConfigUser extends Component {
             cities: [],
             errors: [],
         };
+        this.modules = {
+            toolbar: [
+                [{ 'size': ['small', false, 'large', 'huge'] }],
+                ['bold', 'italic', 'underline'],
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                [{ 'align': [] }],
+                [{ 'color': [] }, { 'background': [] }],
+                ['link']
+            ]
+        };
+        this.formats = [
+            'size',
+            'bold', 'italic', 'underline',
+            'list', 'bullet',
+            'align',
+            'color', 'background',
+            'link',
+        ];
     }
-
+    // Handle Change
+    handleChangeBody(value) {
+        this.setState({ description: value });
+        document.querySelector('.editor-control').classList.remove('is-invalid');
+    }
     handleFieldChange(event) {
         this.setState({
             [event.target.name]: event.target.value,
@@ -243,8 +267,9 @@ class ProfileConfigUser extends Component {
                                                             <label htmlFor="birthdate"><b>Votre année de naissance</b></label>
                                                             <div className="form-group">
 
-                                                                <select value={this.state.birthdate} className={`form-control ${this.hasErrorFor('birthdate') ? 'is-invalid' : ''}`}
+                                                                <select value={this.state.birthdate || ''} className={`form-control ${this.hasErrorFor('birthdate') ? 'is-invalid' : ''}`}
                                                                         onChange={this.handleFieldChange} name="birthdate" required="required">
+                                                                    <option value="" disabled>Année de naissance</option>
                                                                     <option value="2020"> 2020</option>
                                                                     <option value="2019"> 2019</option>
                                                                     <option value="2018"> 2018</option>
@@ -354,7 +379,7 @@ class ProfileConfigUser extends Component {
                                                         <div className="col-md-4">
                                                             <label htmlFor="city_id"><b>Votre ville</b></label>
                                                             <div className="form-group">
-                                                                <select value={this.state.city_id} className={`form-control ${this.hasErrorFor('city_id') ? 'is-invalid' : ''}`}
+                                                                <select value={this.state.city_id || ''} className={`form-control ${this.hasErrorFor('city_id') ? 'is-invalid' : ''}`}
                                                                         onChange={this.handleFieldChange} name="city_id" required="required">
                                                                     <option value="" disabled>Votre ville</option>
                                                                     {cities.map((item) => (
@@ -489,17 +514,19 @@ class ProfileConfigUser extends Component {
                                                     </div>
 
                                                     <label htmlFor="url_site"><b>Description </b></label>
-                                                    <div className="form-group">
-                                                                                    <textarea name="description"
-                                                                                              value={this.state.description || ''}
-                                                                                              onChange={this.handleFieldChange}
-                                                                                              minLength="3"
-                                                                                              placeholder={'Ex: Crée depuis 2020 nous evrons dans l\'esposion et l\'echange'}
-                                                                                              className={`form-control ${this.hasErrorFor('description') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                                              id="description"
-                                                                                              rows="10"/>
+                                                    <FormGroup>
+                                                        <label className="labels">
+                                                            Décrivez votre article
+                                                            <span className="text-danger">*</span>
+                                                        </label>
+                                                        <br />
+                                                        <ReactQuill theme="snow" modules={this.modules}
+                                                                    formats={this.formats}
+                                                                    className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
+                                                                    value={this.state.description || ''}
+                                                                    onChange={this.handleChangeBody} />
                                                         {this.renderErrorFor('description')}
-                                                    </div>
+                                                    </FormGroup>
 
                                                     <div className="submit text-center">
                                                         <button className="btn btn-primary btn-round" type="submit">

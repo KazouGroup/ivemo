@@ -22,7 +22,7 @@ class ProfileForallAnnonceShow extends Component {
                         </NavLink>
                         <div className="mx-3">
                             <NavLink to={`/@${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{this.props.user.first_name}</b>
-                                <small className="d-block text-muted">{moment(this.props.created_at).format('LL')}</small>
+                                <small className="d-block text-muted">{moment(this.props.user.created_at).format('LL')}</small>
                             </NavLink>
                         </div>
                     </div>
@@ -44,11 +44,13 @@ class ProfileForallAnnonceShow extends Component {
                                 {($userIvemo.id === this.props.user.id || $userIvemo.id === this.props.user_id) && (
                                     <>
                                         <UncontrolledTooltip placement="bottom" target="TooltipEditer">
-                                            Editer cette annonce
+                                            Desactiver cette annonce
                                         </UncontrolledTooltip>
-                                        <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-success" id="TooltipEditer">
-                                            <i className="now-ui-icons ui-1_simple-delete"/>
-                                        </NavLink>
+
+                                        <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}
+                                                className="btn btn-success btn-icon btn-sm" id="TooltipEditer">
+                                            <i className="now-ui-icons ui-1_check"/>
+                                        </button>
 
                                         <UncontrolledTooltip placement="bottom" target="TooltipDelete">
                                             Supprimer cette annonce
@@ -85,7 +87,7 @@ class ProfileForallAnnonceShow extends Component {
                             </div>
                             {this.props.user.profile.site_internet && (
                                 <div className="col-md-6 col-6">
-                                    <a href={`${this.props.user.profile.site_internet}`} title="Site internet de agence">
+                                    <a href={`${this.props.user.profile.site_internet}`} target="_blank" title="Site internet de agence">
                                         <small><b>Consulter le site de l'utilisateur</b></small>
                                     </a>
                                 </div>
@@ -99,7 +101,7 @@ class ProfileForallAnnonceShow extends Component {
                     <>
                         <b>Informations légales de l'utilisateur</b>
                         <br />
-                        <span>{this.props.user.profile.description}</span>
+                        <b dangerouslySetInnerHTML={{__html: (this.props.user.profile.description)}}/>
                     </>
                 )}
             </>

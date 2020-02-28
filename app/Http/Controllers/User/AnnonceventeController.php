@@ -141,7 +141,7 @@ class AnnonceventeController extends Controller
         ]);
     }
 
-    public function annonceventebycategoryannonceventeslug(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,$date,annoncevente $annoncevente)
+    public function annonceventebycategoryannonceventeslug(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,$date,$annoncevente)
     {
         return view('user.annoncevente.annonces_show',[
             'categoryannoncevente' => $categoryannoncevente,

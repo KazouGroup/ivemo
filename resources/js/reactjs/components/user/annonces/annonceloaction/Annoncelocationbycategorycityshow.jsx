@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import moment from "moment";
 import AnnoncelocationInteresse from "./AnnoncelocationInteresse";
 import ProfileForallAnnonceShow from "../ProfileForallAnnonceShow";
+import BlogannoncelocationList from "../../blog/blogannoncelocation/BlogannoncelocationList";
 
 
 class Annoncelocationbycategorycityshow extends Component {
@@ -19,6 +20,59 @@ class Annoncelocationbycategorycityshow extends Component {
             annoncelocation:{categoryannoncelocation:[],user:{profile:[]},city:[]},
         };
         this.deleteItem = this.deleteItem.bind(this);
+        this.unactiveItem = this.unactiveItem.bind(this);
+    }
+
+    unactiveItem(id){
+        Swal.fire({
+            title: 'Désactiver l\'annonce?',
+            text: "êtes vous sure de vouloir confirmer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                //Envoyer la requet au server
+                let url = route('annonces_locations_unactivated.site',id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            message: "Cette annonce a été masquée au utilisateur",
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'bottom',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animated fadeInUp",
+                                exit: "animated fadeOutDown"
+                            },
+                        });
+                    /** End alert ***/
+                    this.props.history.push("/profile/"+ $userIvemo.slug +"/personal_settings/annonces_locations/");
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
+
     }
 
     deleteItem(id) {
@@ -207,7 +261,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                         <div className="card">
                                             <div className="card-body">
 
-                                              <ProfileForallAnnonceShow {...annoncelocation}/>
+                                              <ProfileForallAnnonceShow {...annoncelocation} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
 
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
