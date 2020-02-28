@@ -23,6 +23,8 @@ class UserResource extends JsonResource
             'slug' => $this->slug,
             'email' => $this->email,
             'sex' => $this->sex,
+            'phone' => $this->phone,
+            'categoryprofile_id' => $this->categoryprofile_id,
             //'birthday' => $this->birthday->format('d/m/Y'),
             'birthday' => $this->birthday,
             'color_name' => $this->color_name,

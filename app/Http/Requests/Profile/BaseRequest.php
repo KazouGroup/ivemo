@@ -2,6 +2,8 @@
 namespace App\Http\Requests\Profile;
 
 use App\Http\Requests\Request;
+use App\Model\user;
+use Illuminate\Validation\Rule;
 
 
 class BaseRequest extends Request
@@ -31,6 +33,14 @@ class BaseRequest extends Request
                 'twitter_link' => ['nullable','string', 'max:255'],
                 'instagram_link' => ['nullable','string', 'max:255'],
                 'linkedin_link' => ['nullable','string', 'max:255'],
+
+            ];
+        }elseif ($group == 'profile_account_update'){
+            $rules = [
+                'username' => "required|string|min:2|max:100|unique:users,username,".auth()->check(),
+                'email' => ['required','string','email', Rule::unique((new User)->getTable())->ignore(auth()->id())],
+                "sex" => "required|in:female,male",
+                "phone" => "required|numeric",
 
             ];
         } else { // 'edit'

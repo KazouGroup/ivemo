@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import moment from 'moment'
-import { Button } from "reactstrap";
+import { Button,Row } from "reactstrap";
 import { Remarkable } from "remarkable";
 import AnnonceventeInteresseList from "./inc/AnnonceventeInteresseList";
 
@@ -13,10 +13,16 @@ class AnnonceventeInteresse extends Component {
         super(props);
         this.state = {
             annonceventesinteresses: [],
-            //
-        }
+            visiable: 2,
+        };
+        this.loadmoresItem = this.loadmoresItem.bind(this);
     }
 
+    loadmoresItem(){
+        this.setState((old) =>{
+            return {visiable: old.visiable + 4}
+        })
+    }
 
     componentDidMount() {
         let itemannoncetype = this.props.match.params.annoncetype;
@@ -29,7 +35,7 @@ class AnnonceventeInteresse extends Component {
     }
 
     render() {
-        const { annonceventesinteresses } = this.state;
+        const { annonceventesinteresses,visiable } = this.state;
         return (
             <>
 
@@ -40,15 +46,25 @@ class AnnonceventeInteresse extends Component {
                     </div>
                 )}
 
-                <div className="row">
+                <Row>
 
-                    {annonceventesinteresses.map((item) => (
+                    {annonceventesinteresses.slice(0,visiable).map((item) => (
 
                         <AnnonceventeInteresseList key={item.id} {...item}/>
 
                     ))}
 
-                </div>
+                </Row>
+
+                {visiable < annonceventesinteresses.length && (
+                    <Row>
+                        <div className="col-md-4 ml-auto mr-auto text-center">
+                            <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                <b>Voir plus d'annonces</b>
+                            </button>
+                        </div>
+                    </Row>
+                )}
 
             </>
         )

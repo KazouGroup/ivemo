@@ -188,7 +188,7 @@ class AnnonceventeController extends Controller
             ->whereIn('city_id',[$city->id])
             ->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
-            ->take(3)->distinct()->get()->toArray();
+            ->take(10)->distinct()->get()->toArray();
         return response()->json($annoncevente, 200);
     }
 

@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('slug')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('sex')->default('Male');
+            $table->string('sex')->default('male');
             $table->date('birthday')->nullable();
             $table->string('color_name')->default('primary');
             $table->boolean('status_user')->default(false);

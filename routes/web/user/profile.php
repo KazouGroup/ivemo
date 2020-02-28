@@ -16,6 +16,11 @@ Route::get(
     'ProfileController@profile_account'
 )->name('profile_add_info_account.site');
 
+Route::put(
+    'profile/account',
+    'ProfileController@profile_account_update'
+)->name('profile_add_info_account_update.site');
+
 Route::get(
     'profile/{profile}/account',
     'ProfileController@profile_add_info_account'

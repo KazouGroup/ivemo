@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StoreRequest;
 use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\Profile\UpdateprofileRequest;
+use App\Http\Requests\Profile\UpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Model\annoncelocation;
 use App\Model\annoncereservation;
@@ -21,6 +22,7 @@ use App\Services\ContactuserService;
 use App\Services\ProfileService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Symfony\Component\HttpFoundation\Response;
 use function foo\func;
 
@@ -295,16 +297,22 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function profile_add_info_account_update(UpdateprofileRequest $request,profile $profile)
+    public function profile_account_update(UpdateRequest $request)
     {
+        $user = auth()->user();
 
-        $this->authorize('update',$profile);
+        $data = $user->update($request->only(
+            'first_name',
+            'last_name',
+            'email',
+            'username',
+            'phone',
+            'categoryprofile_id',
+            'sex',
+            'color_name'
+        ));
+        return response()->json($data,200);
 
-        $profile = profile::findOrFail($profile->id);
-
-        $profile->update($request->all());
-
-        return response()->json($profile,200);
     }
 
     public function updatePassword(PasswordRequest $request)

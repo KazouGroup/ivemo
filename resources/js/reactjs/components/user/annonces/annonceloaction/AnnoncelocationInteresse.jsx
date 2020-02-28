@@ -13,10 +13,17 @@ class AnnoncelocationInteresse extends Component {
         super(props);
         this.state = {
             annoncelocationsinteresses: [],
-            //
-        }
+            visiable: 2,
+        };
+
+        this.loadmoresItem = this.loadmoresItem.bind(this);
     }
 
+    loadmoresItem(){
+        this.setState((old) =>{
+            return {visiable: old.visiable + 4}
+        })
+    }
 
     componentDidMount() {
         let itemannoncetype = this.props.match.params.annoncetype;
@@ -29,7 +36,7 @@ class AnnoncelocationInteresse extends Component {
     }
 
     render() {
-        const { annoncelocationsinteresses } = this.state;
+        const { annoncelocationsinteresses,visiable } = this.state;
         return (
             <>
 
@@ -42,13 +49,23 @@ class AnnoncelocationInteresse extends Component {
 
                 <div className="row">
 
-                    {annoncelocationsinteresses.map((item) => (
+                    {annoncelocationsinteresses.slice(0,visiable).map((item) => (
 
                         <AnnoncelocationInteresseList key={item.id} {...item}/>
 
                     ))}
 
                 </div>
+
+                {visiable < annoncelocationsinteresses.length && (
+                    <div className="row">
+                        <div className="col-md-4 ml-auto mr-auto text-center">
+                            <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                <b>Voir plus d'annonces</b>
+                            </button>
+                        </div>
+                    </div>
+                )}
 
             </>
         )

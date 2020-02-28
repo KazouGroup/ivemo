@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Link,NavLink } from "react-router-dom";
 import moment from 'moment'
-import {Button} from "reactstrap";
+import {Button, Row} from "reactstrap";
 import {Remarkable} from "remarkable";
 import AnnoncereservationInteresseList from "./inc/AnnoncereservationInteresseList";
 import AnnoncereservationList from "./inc/AnnoncereservationList";
@@ -14,8 +14,16 @@ class AnnonceservationInteresse extends Component {
         super(props);
         this.state = {
             annoncereservationsinteresse:[],
-            //
-        }
+            visiable: 2,
+        };
+
+        this.loadmoresItem = this.loadmoresItem.bind(this);
+    }
+
+    loadmoresItem(){
+        this.setState((old) =>{
+            return {visiable: old.visiable + 4}
+        })
     }
 
 
@@ -30,7 +38,7 @@ class AnnonceservationInteresse extends Component {
     }
 
     render() {
-        const {annoncereservationsinteresse} = this.state;
+        const {annoncereservationsinteresse,visiable} = this.state;
         return (
             <>
 
@@ -41,14 +49,24 @@ class AnnonceservationInteresse extends Component {
                     </div>
                 )}
 
-                <div className="row">
+                <Row>
 
-                    {annoncereservationsinteresse.map((item) => (
+                    {annoncereservationsinteresse.slice(0,visiable).map((item) => (
 
                         <AnnoncereservationInteresseList key={item.id} {...item}/>
                     ))}
 
-                </div>
+                </Row>
+
+                {visiable < annoncereservationsinteresse.length && (
+                    <Row>
+                        <div className="col-md-4 ml-auto mr-auto text-center">
+                            <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                <b>Voir plus d'annonces</b>
+                            </button>
+                        </div>
+                    </Row>
+                )}
 
             </>
         )

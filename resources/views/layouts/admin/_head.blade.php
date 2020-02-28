@@ -26,6 +26,7 @@
 <!-- CSS Files -->
 <link href="/assets/admin/assets/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/assets/admin/assets/css/now-ui-dashboard.css?v=1.4.1" rel="stylesheet" />
+
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="/assets/admin/assets/demo/demo.css" rel="stylesheet" />
 @notifyCss

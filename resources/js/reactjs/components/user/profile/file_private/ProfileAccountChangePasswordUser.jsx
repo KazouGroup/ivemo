@@ -57,7 +57,6 @@ class ProfileAccountChangePasswordUser extends Component {
         dyaxios.put(route('update_password.site'), item)
             .then(() => {
                 $.notify({
-                        // title: 'Update FAQ',
                         message: 'Mot de passe mis à jour'
                     },
                     {

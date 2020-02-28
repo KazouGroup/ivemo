@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import {Button, UncontrolledTooltip} from "reactstrap";
+import {Button, UncontrolledTooltip,Tooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-import moment from "moment";
-import { Remarkable } from "remarkable";
 import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../inc/NavlinkconfigurationUser";
 
@@ -16,11 +14,18 @@ class TeamsUserIndex extends Component {
         super(props);
         this.state = {
             userteamusers:{teamusers:[]},
+            visiable: 10,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
         this.activeItem = this.activeItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
+        this.loadmoresItem = this.loadmoresItem.bind(this);
+    }
+    loadmoresItem(){
+        this.setState((old) =>{
+            return {visiable: old.visiable + 10}
+        })
     }
     deleteItem(id) {
         Swal.fire({
@@ -196,7 +201,7 @@ class TeamsUserIndex extends Component {
 
     }
     render() {
-        const {userteamusers} = this.state;
+        const {userteamusers,visiable} = this.state;
         const avatar_style = {
             width: "40px",
             height: "40px",
@@ -233,98 +238,111 @@ class TeamsUserIndex extends Component {
                                         <div className="card">
                                             <div className="card-body">
 
-                                                <table id="datatable" className="table table-striped table-bordered"
-                                                       cellSpacing="0" width="100%">
-                                                    <thead>
-                                                    <tr>
-                                                        <th><b>Profile</b></th>
-                                                        <th><b>Nom complet</b></th>
-                                                        <th><b>Position Job</b></th>
-                                                        <th className="text-center"><b>Status</b></th>
-                                                        <th className="disabled-sorting text-right"><b>Actions</b></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tfoot>
-                                                    <tr>
-                                                        <th>Profile</th>
-                                                        <th>Nom complet</th>
-                                                        <th>Position Job</th>
-                                                        <th className="text-center">Status</th>
-                                                        <th className="disabled-sorting text-right">Actions</th>
-                                                    </tr>
-                                                    </tfoot>
-                                                    <tbody>
-                                                    {userteamusers.teamusers.length >= 0 && (
-                                                        <>
-                                                            {userteamusers.teamusers.map((item) =>(
-                                                                <tr key={item.id}>
-                                                                    <td>
-                                                                        <Link to={'/dashboard/users/'}>
-                                                                            <img src={item.photo} alt={item.full_name} style={avatar_style}/>
-                                                                        </Link>
-                                                                    </td>
-                                                                    <td>{item.full_name}</td>
-                                                                    <td>{item.role}</td>
-                                                                    <td>
-                                                                        <div className="timeline-heading">
+
+                                                <div className="table-responsive">
+                                                    <table id="datatable" className="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th><b>Profile</b></th>
+                                                            <th><b>Nom complet</b></th>
+                                                            <th><b>Position Job</b></th>
+                                                            <th className="text-center"><b>Status</b></th>
+                                                            <th className="disabled-sorting text-right"><b>Actions</b></th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tfoot>
+                                                        <tr>
+                                                            <th>Profile</th>
+                                                            <th>Nom complet</th>
+                                                            <th>Position Job</th>
+                                                            <th className="text-center">Status</th>
+                                                            <th className="disabled-sorting text-right">Actions</th>
+                                                        </tr>
+                                                        </tfoot>
+                                                        <tbody>
+                                                        {userteamusers.teamusers.length >= 0 && (
+                                                            <>
+                                                                {userteamusers.teamusers.slice(0,visiable).map((item) =>(
+                                                                    <tr key={item.id}>
+                                                                        <td>
+                                                                            <Link to={'/dashboard/users/'}>
+                                                                                <img src={item.photo} alt={item.full_name} style={avatar_style}/>
+                                                                            </Link>
+                                                                        </td>
+                                                                        <td>{item.full_name}</td>
+                                                                        <td>{item.role}</td>
+                                                                        <td>
+                                                                            <div className="timeline-heading">
+                                                                                {item.status ?
+                                                                                    < h6 className = "card-category text-success" >
+                                                                                        Visible
+                                                                                    </h6>
+                                                                                    :
+                                                                                    < h6 className = "card-category text-primary" >
+                                                                                        Non visible
+                                                                                    </h6>
+                                                                                }
+                                                                            </div>
+                                                                        </td>
+                                                                        <td className="text-right">
                                                                             {item.status ?
-                                                                                <span
-                                                                                    className="badge badge-success"><b>Visible</b></span>
+                                                                                <>
+                                                                                    <Button onClick={() => this.unactiveItem(item)}
+                                                                                            className="btn btn-success btn-icon btn-sm" id={'TooltipDesactiver'} >
+                                                                                        <i className="now-ui-icons ui-1_check"/>
+                                                                                    </Button>
+                                                                                    <UncontrolledTooltip placement="bottom" target="TooltipDesactiver">
+                                                                                        Desactiver {item.full_name}
+                                                                                    </UncontrolledTooltip>
+                                                                                </>
                                                                                 :
-                                                                                <span
-                                                                                    className="badge badge-primary"><b>Non visible</b></span>
+                                                                                <>
+                                                                                    <Button onClick={() => this.activeItem(item)}
+                                                                                            className="btn btn-primary btn-icon btn-sm"
+                                                                                            id={'TooltipActiver'}>
+                                                                                        <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                                    </Button>
+                                                                                    <UncontrolledTooltip placement="bottom" target="TooltipActiver" delay={0}>
+                                                                                        Activer {item.full_name}
+                                                                                    </UncontrolledTooltip>
+                                                                                </>
+
                                                                             }
-                                                                        </div>
-                                                                    </td>
-                                                                    <td className="text-right">
-                                                                        {item.status ?
-                                                                           <>
-                                                                               <button type="button" rel="tooltip" onClick={() => this.unactiveItem(item)}
-                                                                                       className="btn btn-success btn-icon btn-sm" id={'TooltipDesactiver'}>
-                                                                                   <i className="now-ui-icons ui-1_check"/>
-                                                                               </button>
-                                                                               <UncontrolledTooltip placement="bottom" target="TooltipDesactiver" delay={0}>
-                                                                                   Desactiver l'utilisateur
-                                                                               </UncontrolledTooltip>
-                                                                           </>
-                                                                            :
-                                                                          <>
-                                                                              <button type="button" onClick={() => this.activeItem(item)}
-                                                                                      className="btn btn-primary btn-icon btn-sm"
-                                                                                      id={'TooltipActiver'}>
-                                                                                  <i className="now-ui-icons ui-1_simple-delete"/>
-                                                                              </button>
-                                                                              <UncontrolledTooltip placement="bottom" target="TooltipActiver" delay={0}>
-                                                                                  Activer l'utilisateur
-                                                                              </UncontrolledTooltip>
-                                                                          </>
+                                                                            <Link to={`/profile/personal_settings/teams/${item.id}/edit/`} className="btn btn-info btn-icon btn-sm btn-neutral" id={'TooltipEditer'}>
+                                                                                <i className="now-ui-icons ui-2_settings-90"/>
+                                                                            </Link>
+                                                                            <UncontrolledTooltip placement="bottom" target="TooltipEditer" delay={0}>
+                                                                                Éditer cette {item.full_name}
+                                                                            </UncontrolledTooltip>
 
-                                                                        }
-                                                                        <Link to={`/profile/personal_settings/teams/${item.id}/edit/`} className="btn btn-info btn-icon btn-sm btn-neutral" id={'TooltipEditer'}>
-                                                                            <i className="now-ui-icons ui-2_settings-90"/>
-                                                                        </Link>
-                                                                        <UncontrolledTooltip placement="bottom" target="TooltipEditer" delay={0}>
-                                                                            Éditer cette utilisateur
-                                                                        </UncontrolledTooltip>
+                                                                            <button type="button" id={'TooltipDelete'} onClick={() => this.deleteItem(item.id)}
+                                                                                    className="btn btn-danger btn-icon btn-sm btn-neutral">
+                                                                                <i className="now-ui-icons ui-1_simple-remove"/>
+                                                                            </button>
+                                                                            <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
+                                                                                Supprimer
+                                                                            </UncontrolledTooltip>
+                                                                        </td>
+                                                                    </tr>
+                                                                ))}
+                                                            </>
+                                                        )}
 
-                                                                        <button type="button" id={'TooltipDelete'} onClick={() => this.deleteItem(item.id)}
-                                                                                className="btn btn-danger btn-icon btn-sm btn-neutral">
-                                                                            <i className="now-ui-icons ui-1_simple-remove"/>
-                                                                        </button>
-                                                                        <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
-                                                                            Supprimer
-                                                                        </UncontrolledTooltip>
-                                                                    </td>
-                                                                </tr>
-                                                            ))}
-                                                        </>
-                                                    )}
+                                                        </tbody>
+                                                    </table>
 
+                                                </div>
 
-
-
-                                                    </tbody>
-                                                </table>
+                                                {visiable < userteamusers.teamusers.length && (
+                                                    <div className="row">
+                                                        <div className="col-md-4 ml-auto mr-auto text-center">
+                                                            <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                                                <b>Voir plus </b>
+                                                                <i className="now-ui-icons arrows-1_minimal-down"/>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                )}
 
                                             </div>
                                         </div>
