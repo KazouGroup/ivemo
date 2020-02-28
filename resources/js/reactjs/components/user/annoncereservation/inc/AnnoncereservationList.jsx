@@ -91,7 +91,9 @@ class AnnoncereservationList extends Component {
                                         {this.props.title}
                                     </Link>
                                 </h6>
-                                <span dangerouslySetInnerHTML={this.getDescription()}/>
+                                <Link to={`/annonces_reservations/reservations/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/${this.props.slug}/`}>
+                                    <span dangerouslySetInnerHTML={this.getDescription()}/>
+                                </Link>
                                 <div className="card-header d-flex align-items-center">
                                     <div className="d-flex align-items-center">
                                         <NavLink to={`/@${this.props.user.slug}/`}>

@@ -16,10 +16,17 @@ class PublicUserAnnonceLocations extends Component {
         super(props);
         this.state = {
             useranoncelocationPublick:{annoncelocations: []},
+            visiable: 10,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
+        this.loadmoresItem = this.loadmoresItem.bind(this);
+    }
+    loadmoresItem() {
+        this.setState((old) => {
+            return { visiable: old.visiable + 10 }
+        })
     }
     unactiveItem(id){
         Swal.fire({
@@ -142,9 +149,9 @@ class PublicUserAnnonceLocations extends Component {
     }
 
     render() {
-        const {useranoncelocationPublick} = this.state;
+        const {useranoncelocationPublick,visiable} = this.state;
         const mapAnnoncelocations = useranoncelocationPublick.annoncelocations.length ? (
-            useranoncelocationPublick.annoncelocations.map(item => {
+            useranoncelocationPublick.annoncelocations.slice(0, visiable).map(item => {
                 return(
 
                     <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
@@ -206,7 +213,6 @@ class PublicUserAnnonceLocations extends Component {
                                                                 <div className="card-header" role="tab" id="headingOne">
                                                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                                         <b>Annonces de {useranoncelocationPublick.first_name}</b>
-                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
 
@@ -229,7 +235,6 @@ class PublicUserAnnonceLocations extends Component {
                                                                 <div className="card-header" role="tab" id="headingTwo">
                                                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                                                                         <b>Articles de {useranoncelocationPublick.first_name}</b>
-                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
 
@@ -264,6 +269,17 @@ class PublicUserAnnonceLocations extends Component {
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
                                         {mapAnnoncelocations}
+
+                                        {visiable < useranoncelocationPublick.annoncelocations.length && (
+                                            <div className="row">
+                                                <div className="col-md-4 ml-auto mr-auto text-center">
+                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-secondary btn-block">
+                                                        <b>Voir plus </b>
+                                                        <i className="now-ui-icons arrows-1_minimal-down" />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
 
                                         <div className="card">
                                             <div className="card-body">

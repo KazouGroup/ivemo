@@ -51,7 +51,7 @@ class PublicUserBlogannonceventeList extends Component {
                             <NavLink to={`/blogs/annonce_ventes/${this.props.categoryannoncevente.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="card-link"> {this.props.title}</NavLink>
                         </h6>
                         <p className="card-description">
-                            <b dangerouslySetInnerHTML={{__html: (this.props.description.length > 48 ? this.props.description.substring(0, 48) + "..." : this.props.description)}}/>
+                            <b dangerouslySetInnerHTML={{__html: (this.props.description.length > 40 ? this.props.description.substring(0, 40) + "..." : this.props.description)}}/>
                             <Link to={`/blogs/annonce_ventes/${this.props.categoryannoncevente.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}> lire la suite </Link>
                         </p>
                         <CardFooter>

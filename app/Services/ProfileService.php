@@ -118,7 +118,7 @@ class ProfileService
                     ->whereIn('annoncetype_id',[3])
                     ->whereIn('user_id',[$user->id])
                     ->where(['status' => 1,'status_admin' => 1])
-                    ->distinct()->paginate(40)->toArray()
+                    ->distinct()->get()->toArray()
                 ;},
             ])
             ->withCount(['annoncelocations' => function ($q){
@@ -147,7 +147,7 @@ class ProfileService
                     ->whereIn('annoncetype_id',[1])
                     ->whereIn('user_id',[$user->id])
                     ->where(['status' => 1,'status_admin' => 1])
-                    ->distinct()->paginate(40)->toArray()
+                    ->distinct()->get()->toArray()
                 ;},
             ])
             ->withCount(['annoncelocations' => function ($q){
@@ -259,7 +259,7 @@ class ProfileService
                     ->whereIn('annoncetype_id',[2])
                     ->whereIn('user_id',[$user->id])
                     ->where(['status' => 1,'status_admin' => 1])
-                    ->distinct()->paginate(40)->toArray()
+                    ->distinct()->get()->toArray()
                 ;},
             ])
             ->withCount(['annoncelocations' => function ($q){

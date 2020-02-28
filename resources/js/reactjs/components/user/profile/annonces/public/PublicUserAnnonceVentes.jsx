@@ -150,7 +150,6 @@ class PublicUserAnnonceVentes extends Component {
                                                                 <div className="card-header" role="tab" id="headingOne">
                                                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                                         <b>Annonce de {userannonceventePublick.first_name}</b>
-                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
 
@@ -174,7 +173,6 @@ class PublicUserAnnonceVentes extends Component {
                                                                 <div className="card-header" role="tab" id="headingTwo">
                                                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                                                                         <b>Articles de {userannonceventePublick.first_name}</b>
-                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
 
