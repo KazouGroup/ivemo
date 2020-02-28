@@ -189,6 +189,7 @@ class AnnoncereservationController extends Controller
             ->whereIn('city_id',[$city->id])
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->where(['status' => 1,'status_admin' => 1])
+            ->with(['user.profile' => function ($q){$q->distinct()->get();},])
             ->whereSlug($annoncereservation)->firstOrFail());
 
         return response()->json($annoncereservation, 200);

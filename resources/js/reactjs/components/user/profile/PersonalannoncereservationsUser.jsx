@@ -6,7 +6,7 @@ import { Button,Alert} from "reactstrap";
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import './file_private/ProfileAccountUser.css';
-import Categoriesannoncereservation from "../annoncereservation/inc/Categoriesannoncereservation";
+import Categoriesannoncereservation from "../annonces/annoncereservation/inc/Categoriesannoncereservation";
 import moment from "moment";
 import {Remarkable} from "remarkable";
 

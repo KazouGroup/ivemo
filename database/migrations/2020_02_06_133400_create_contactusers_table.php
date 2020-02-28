@@ -21,7 +21,7 @@ class CreateContactusersTable extends Migration
             $table->boolean('status_red')->default(false);
             $table->string('phone')->nullable();
             $table->string('ip')->nullable();
-            $table->string('subject')->nullable();
+            $table->mediumText('subject')->nullable();
             $table->longText('message')->nullable();
             $table->timestamps();
 

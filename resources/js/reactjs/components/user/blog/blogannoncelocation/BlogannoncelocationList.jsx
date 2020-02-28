@@ -10,7 +10,7 @@ class BlogannoncelocationList extends Component {
 
     getDescription() {
         const md = new Remarkable();
-        return { __html: md.render(this.props.description.length > 80 ? this.props.description.substring(0, 80) + "..." : this.props.description) };
+        return { __html: md.render(this.props.description.length > 60 ? this.props.description.substring(0, 60) + "..." : this.props.description) };
     }
     render() {
         return (
@@ -36,7 +36,7 @@ class BlogannoncelocationList extends Component {
 
                                 <div className="card-footer">
                                     <div className="author">
-                                        <Link to={`/@${this.props.user.slug}/annonces_locations/`}>
+                                        <Link to={`/@${this.props.user.slug}/blogs/annonce_locations/`}>
                                             <img src={this.props.user.avatar} alt={this.props.user.first_name}
                                                  className="avatar img-raised"/>
                                             <b>{this.props.user.first_name}</b>

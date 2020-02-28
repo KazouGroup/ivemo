@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { Button, UncontrolledTooltip } from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
-import AnnonceslocationList from "../../../annonceloaction/inc/AnnonceslocationList";
+import AnnonceslocationList from "../../../annonces/annonceloaction/inc/AnnonceslocationList";
 import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../../../configurations/inc/NavlinkconfigurationUser";
 
@@ -241,7 +241,7 @@ class PrivateUserAnnonceLocations extends Component {
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
                                         {mapAnnoncelocations}
-                                        
+
 
                                         {visiable < userannoncelocations.annoncelocations.length && (
                                             <div className="row">

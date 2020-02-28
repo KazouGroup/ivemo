@@ -2,20 +2,20 @@ import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Button } from "reactstrap";
-import NavUserSite from "../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
-import PropTypes from "prop-types";
-import AnnonceslocationList from "./inc/AnnonceslocationList";
-import Categoriesannoncereselocation from "./inc/Categoriesannoncereselocation";
+import NavUserSite from "../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
+import AnnonceventeList from "./inc/AnnonceventeList";
+import Categoriesannoncevente from "./inc/Categoriesannoncevente";
 
 
-class Annoncebycategoryannoncelocation extends Component {
+class Annoncebycategoryannonceventecity extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncelocationbycategory: {annoncelocations:[]},
-            cityannoncelocations:[],
+            annonceventebycity: {annonceventes:[]},
+            cityannonceventes:[],
+
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
@@ -23,11 +23,13 @@ class Annoncebycategoryannoncelocation extends Component {
 
     loadItems(){
         let itemannoncetype = this.props.match.params.annoncetype;
-        let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
-        let url = route('api.annoncelocationbycategoryannoncelocations_site',[itemannoncetype,itemCategoryannoncelocation]);
-        dyaxios.get(url).then(response => this.setState({annoncelocationbycategory: response.data,}));
-        let url1 = route('api.annoncelocationbycategorycitycount_site',[itemCategoryannoncelocation]);
-        dyaxios.get(url1).then(response => this.setState({cityannoncelocations: response.data,}));
+        let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
+        let itemCity = this.props.match.params.city;
+        let url = route('api.annonceventebycities_site',[itemannoncetype,itemCategoryannoncevente,itemCity]);
+        dyaxios.get(url).then(response => this.setState({annonceventebycity: response.data,}));
+
+        let url1 = route('api.annonceventecategorybycitycount_site',[itemCategoryannoncevente,itemCity]);
+        dyaxios.get(url1).then(response => this.setState({cityannonceventes: response.data,}));
 
     }
     unactiveItem(id){
@@ -86,7 +88,6 @@ class Annoncebycategoryannoncelocation extends Component {
 
     }
 
-
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
@@ -102,7 +103,7 @@ class Annoncebycategoryannoncelocation extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('annonces_locations_delete.site',id);
+                const url = route('annonces_locations_delete.site',[id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
@@ -125,8 +126,8 @@ class Annoncebycategoryannoncelocation extends Component {
                         });
                     /** End alert ***/
                     this.loadItems();
-                }).catch(() => {
 
+                }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
                         allow_dismiss: false,
@@ -147,23 +148,24 @@ class Annoncebycategoryannoncelocation extends Component {
         this.loadItems();
     }
 
-    getcountcategoryannonceString (annoncelocations_count) {
-        annoncelocations_count = annoncelocations_count +'';
-        if (annoncelocations_count < 1000) {
-            return annoncelocations_count;
+    getcountcategoryannonceString (annonceventes_count) {
+        annonceventes_count = annonceventes_count +'';
+        if (annonceventes_count < 1000) {
+            return annonceventes_count;
         }
-        if (annoncelocations_count < 10000) {
-            return annoncelocations_count.charAt(0) + ',' + annoncelocations_count.substring(1);
+        if (annonceventes_count < 10000) {
+            return annonceventes_count.charAt(0) + ',' + annonceventes_count.substring(1);
         }
-        return (annoncelocations_count/1000).toFixed(annoncelocations_count % 1000 !== 0)+'k';
+        return (annonceventes_count/1000).toFixed(annonceventes_count % 1000 !== 0)+'k';
     }
     render() {
-        const {annoncelocationbycategory,cityannoncelocations} = this.state;
-        const allannoncelocationsbycategory = annoncelocationbycategory.annoncelocations;
+        const {annonceventebycity,cityannonceventes} = this.state;
+        const allannonceventebycity = annonceventebycity.annonceventes;
+        let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
         return (
             <>
                 <Helmet>
-                    <title>Locations {`${annoncelocationbycategory.name || 'Ivemo'} - `} Ivemo</title>
+                    <title>Ventes {`${itemCategoryannoncevente || "Ivemo"}`} dans la ville de {`${annonceventebycity.name || ""}`} - Ivemo</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
@@ -184,19 +186,25 @@ class Annoncebycategoryannoncelocation extends Component {
                                 <br />
                                 <div className="row">
 
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="submit text-left">
-                                            <Link to={`/annonces_locations/locations/`} >
-                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos résultats </b>
-                                            </Link>
+                                            <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
+                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos annonces </b>
+                                            </button>
                                         </div>
 
-                                        <br/>
 
-                                        {allannoncelocationsbycategory.map((item) => (
-                                            <AnnonceslocationList key={item.id} {...item}  deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
-                                        ))}
+                                        <br/>
+                                        {allannonceventebycity.length >= 0 && (
+                                            <>
+
+                                                {allannonceventebycity.map((item) => (
+                                                    <AnnonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
+                                                ))}
+
+                                            </>
+                                        )}
+
 
                                     </div>
 
@@ -217,28 +225,26 @@ class Annoncebycategoryannoncelocation extends Component {
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingThree">
                                                                     <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                                        <b>Locations {annoncelocationbycategory.name} </b>
+                                                                        <b>Ventes à {annonceventebycity.name} </b>
                                                                         <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
-
                                                                 <div id="collapseThree" className="collapse show" role="tabpanel" aria-labelledby="headingThree">
                                                                     <div className="card-body">
                                                                         <table>
                                                                             <tbody>
 
-                                                                            {cityannoncelocations.map((item) => (
+                                                                            {cityannonceventes.map((item) => (
                                                                                 <tr key={item.id}>
                                                                                     <td>
-                                                                                        <NavLink to={`/annonces_locations/locations/${annoncelocationbycategory.slug}/${item.slug}/`}>
-                                                                                            locations <b>{annoncelocationbycategory.name}</b> à <b>{item.name}</b>
+                                                                                        <NavLink to={`/annonces_ventes/ventes/${item.slug}/${annonceventebycity.slug}/`}>
+                                                                                            ventes <b>{item.name}</b> à <b>{annonceventebycity.name}</b>
                                                                                         </NavLink>
                                                                                     </td>
-                                                                                    <td className="text-right"> {this.getcountcategoryannonceString(item.annoncelocations_count)} annonces</td>
+                                                                                    <td className="text-right"> {this.getcountcategoryannonceString(item.annonceventes_count)} {item.annonceventes_count > 1 ? "annonces" : "annonce"}</td>
                                                                                 </tr>
                                                                             ))}
 
@@ -246,11 +252,40 @@ class Annoncebycategoryannoncelocation extends Component {
                                                                         </table>
                                                                     </div>
                                                                 </div>
-
-
                                                             </div>
 
-                                                            <Categoriesannoncereselocation/>
+                                                            <Categoriesannoncevente/>
+
+                                                            <div className="card card-plain">
+                                                                <div className="card-header" role="tab" id="headingAutre">
+                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseAutre" aria-expanded="false" aria-controls="collapseAutre">
+                                                                        <b>Autres transactions à {`${annonceventebycity.name}`}</b>
+                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
+                                                                    </a>
+                                                                </div>
+                                                                <div id="collapseAutre" className="collapse" role="tabpanel" aria-labelledby="headingAutre">
+                                                                    <div className="card-body">
+                                                                        <table>
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Toutes les ventes de maison Douala</a></td>
+                                                                                <td className="text-right"> 200 annonces</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Toutes les ventes de terrains Douala</a></td>
+                                                                                <td className="text-right"> 1 300 annonces</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Tous les achats de maison de prestige Douala</a></td>
+                                                                                <td className="text-right"> 380 annonces</td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
 
                                                         </div>
                                                     </div>
@@ -260,13 +295,6 @@ class Annoncebycategoryannoncelocation extends Component {
 
 
                                     </div>
-
-
-
-
-
-
-
 
                                 </div>
                             </div>
@@ -284,4 +312,4 @@ class Annoncebycategoryannoncelocation extends Component {
     }
 }
 
-export default Annoncebycategoryannoncelocation;
+export default Annoncebycategoryannonceventecity;

@@ -24,7 +24,7 @@ class CreateProfilesTable extends Migration
             $table->string('address')->nullable();
             $table->string('full_name')->nullable();
             $table->string('slug')->nullable();
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->timestamps();
 
             $table->unsignedBigInteger('user_id')->nullable()->index();

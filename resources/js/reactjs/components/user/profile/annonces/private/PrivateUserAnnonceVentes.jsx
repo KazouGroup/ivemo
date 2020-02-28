@@ -5,7 +5,7 @@ import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../../../configurations/inc/NavlinkconfigurationUser";
-import AnnonceventeList from "../../../annoncevente/inc/AnnonceventeList";
+import AnnonceventeList from "../../../annonces/annoncevente/inc/AnnonceventeList";
 
 
 class PrivateUserAnnonceVentes extends Component {

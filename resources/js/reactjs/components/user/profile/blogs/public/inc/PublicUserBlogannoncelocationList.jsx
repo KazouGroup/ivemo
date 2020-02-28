@@ -63,7 +63,7 @@ class PublicUserBlogannoncelocationList extends Component {
                                 </Link>
                             </div>
                             <div className="stats stats-right">
-                                <i className="now-ui-icons tech_watch-time"/> {this.props.red_time} min lecture
+                                <i className="now-ui-icons tech_watch-time"/> {moment(this.props.created_at).format('ll')} - {this.props.red_time} min lecture
                             </div>
                         </CardFooter>
                     </CardBody>

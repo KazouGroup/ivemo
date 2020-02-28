@@ -2,19 +2,20 @@ import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Button } from "reactstrap";
-import NavUserSite from "../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
+import NavUserSite from "../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
+import PropTypes from "prop-types";
+import AnnonceslocationList from "./inc/AnnonceslocationList";
+import Categoriesannoncereselocation from "./inc/Categoriesannoncereselocation";
 import Swal from "sweetalert2";
-import AnnonceventeList from "./inc/AnnonceventeList";
-import Categoriesannoncevente from "./inc/Categoriesannoncevente";
 
 
-class Annoncebycategoryannoncevente extends Component {
+class Annoncebycategoryannoncelocation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annonceventebycategory: {annonceventes:[]},
-            cityannonceventes:[],
+            annoncelocationbycategory: {annoncelocations:[]},
+            cityannoncelocations:[],
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
@@ -22,11 +23,11 @@ class Annoncebycategoryannoncevente extends Component {
 
     loadItems(){
         let itemannoncetype = this.props.match.params.annoncetype;
-        let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
-        let url = route('api.annonceventebycategoryannonceventes_site',[itemannoncetype,itemCategoryannoncevente]);
-        dyaxios.get(url).then(response => this.setState({annonceventebycategory: response.data,}));
-        let url1 = route('api.annonceventebycategorycitycount_site',[itemCategoryannoncevente]);
-        dyaxios.get(url1).then(response => this.setState({cityannonceventes: response.data,}));
+        let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
+        let url = route('api.annoncelocationbycategoryannoncelocations_site',[itemannoncetype,itemCategoryannoncelocation]);
+        dyaxios.get(url).then(response => this.setState({annoncelocationbycategory: response.data,}));
+        let url1 = route('api.annoncelocationbycategorycitycount_site',[itemCategoryannoncelocation]);
+        dyaxios.get(url1).then(response => this.setState({cityannoncelocations: response.data,}));
 
     }
     unactiveItem(id){
@@ -45,15 +46,15 @@ class Annoncebycategoryannoncevente extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('annonces_ventes_unactivated.site',id);
+                let url = route('annonces_locations_unactivated.site',id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update FAQ',
                             //message: 'Annonce désactiver avec succès',
-                            message: "Cette annonce a été masquée au utilisateurs <a href=\"/profile/personal_settings/annonces_ventes/\" target=\"_blank\">Modifier ici</a>",
-                            url: "/profile/personal_settings/annonces_ventes/",
+                            message: "Cette annonce a été masquée au utilisateur <a href=\"/profile/personal_settings/annonces_locations/\" target=\"_blank\">Modifier ici</a>",
+                            url: "/profile/personal_settings/annonces_locations/",
                             target: "_blank"
                         },
                         {
@@ -101,7 +102,7 @@ class Annoncebycategoryannoncevente extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('annonces_ventes_delete.site',id);
+                const url = route('annonces_locations_delete.site',id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
@@ -146,23 +147,23 @@ class Annoncebycategoryannoncevente extends Component {
         this.loadItems();
     }
 
-    getcountcategoryannonceString (annonceventes_count) {
-        annonceventes_count = annonceventes_count +'';
-        if (annonceventes_count < 1000) {
-            return annonceventes_count;
+    getcountcategoryannonceString (annoncelocations_count) {
+        annoncelocations_count = annoncelocations_count +'';
+        if (annoncelocations_count < 1000) {
+            return annoncelocations_count;
         }
-        if (annonceventes_count < 10000) {
-            return annonceventes_count.charAt(0) + ',' + annonceventes_count.substring(1);
+        if (annoncelocations_count < 10000) {
+            return annoncelocations_count.charAt(0) + ',' + annoncelocations_count.substring(1);
         }
-        return (annonceventes_count/1000).toFixed(annonceventes_count % 1000 !== 0)+'k';
+        return (annoncelocations_count/1000).toFixed(annoncelocations_count % 1000 !== 0)+'k';
     }
     render() {
-        const {annonceventebycategory,cityannonceventes} = this.state;
-        const allannonceventesbycategory = annonceventebycategory.annonceventes;
+        const {annoncelocationbycategory,cityannoncelocations} = this.state;
+        const allannoncelocationsbycategory = annoncelocationbycategory.annoncelocations;
         return (
             <>
                 <Helmet>
-                    <title>Ventes {`${annonceventebycategory.name || 'Ivemo'} - `} Ivemo</title>
+                    <title>Locations {`${annoncelocationbycategory.name || 'Ivemo'} - `} Ivemo</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
@@ -186,15 +187,15 @@ class Annoncebycategoryannoncevente extends Component {
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="submit text-left">
-                                            <Link to={`/annonces_ventes/ventes/`} >
-                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos annonces </b>
+                                            <Link to={`/annonces_locations/locations/`} >
+                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos résultats </b>
                                             </Link>
                                         </div>
 
                                         <br/>
 
-                                        {allannonceventesbycategory.map((item) => (
-                                            <AnnonceventeList key={item.id} {...item}  deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
+                                        {allannoncelocationsbycategory.map((item) => (
+                                            <AnnonceslocationList key={item.id} {...item}  deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
                                         ))}
 
                                     </div>
@@ -208,6 +209,8 @@ class Annoncebycategoryannoncevente extends Component {
                                             </NavLink>
                                         </div>
 
+
+
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="row">
@@ -218,7 +221,7 @@ class Annoncebycategoryannoncevente extends Component {
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingThree">
                                                                     <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                                        <b>Ventes {annonceventebycategory.name} </b>
+                                                                        <b>Locations {annoncelocationbycategory.name} </b>
                                                                         <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
@@ -228,14 +231,14 @@ class Annoncebycategoryannoncevente extends Component {
                                                                         <table>
                                                                             <tbody>
 
-                                                                            {cityannonceventes.map((item) => (
+                                                                            {cityannoncelocations.map((item) => (
                                                                                 <tr key={item.id}>
                                                                                     <td>
-                                                                                        <NavLink to={`/annonces_ventes/ventes/${annonceventebycategory.slug}/${item.slug}/`}>
-                                                                                            ventes <b>{annonceventebycategory.name}</b> à <b>{item.name}</b>
+                                                                                        <NavLink to={`/annonces_locations/locations/${annoncelocationbycategory.slug}/${item.slug}/`}>
+                                                                                            locations <b>{annoncelocationbycategory.name}</b> à <b>{item.name}</b>
                                                                                         </NavLink>
                                                                                     </td>
-                                                                                    <td className="text-right"> {this.getcountcategoryannonceString(item.annonceventes_count)}  {item.annonceventes_count <= 1 ? "annonce" : "annonces"}</td>
+                                                                                    <td className="text-right"> {this.getcountcategoryannonceString(item.annoncelocations_count)} annonces</td>
                                                                                 </tr>
                                                                             ))}
 
@@ -247,7 +250,7 @@ class Annoncebycategoryannoncevente extends Component {
 
                                                             </div>
 
-                                                            <Categoriesannoncevente/>
+                                                            <Categoriesannoncereselocation/>
 
                                                         </div>
                                                     </div>
@@ -257,6 +260,12 @@ class Annoncebycategoryannoncevente extends Component {
 
 
                                     </div>
+
+
+
+
+
+
 
 
                                 </div>
@@ -275,4 +284,4 @@ class Annoncebycategoryannoncevente extends Component {
     }
 }
 
-export default Annoncebycategoryannoncevente;
+export default Annoncebycategoryannoncelocation;

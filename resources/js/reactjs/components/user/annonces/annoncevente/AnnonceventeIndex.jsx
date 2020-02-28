@@ -2,24 +2,24 @@ import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Button } from "reactstrap";
-import NavUserSite from "../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
-import AnnoncereservationList from "./inc/AnnoncereservationList";
-import Categoriesannoncereservation from "./inc/Categoriesannoncereservation";
+import NavUserSite from "../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
+import AnnonceventeList from "./inc/AnnonceventeList";
+import Categoriesannoncevente from "./inc/Categoriesannoncevente";
 
 
-class AnnoncereservationIndex extends Component {
+class AnnonceventeIndex extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncereservationbytype: {annoncereservations:[]},
+            annonceventes: [],
         }
     }
 
     loadItems(){
-        let itemAnnoncereservation = this.props.match.params.annoncetype;
-        let url = route('api.annoncereservationbyannoncetype_site', itemAnnoncereservation);
-        dyaxios.get(url).then(response => this.setState({annoncereservationbytype: response.data,}));
+        let itemAnnoncevente = this.props.match.params.annoncetype;
+        let url = route('api.annonceventebyannoncetype_site', itemAnnoncevente);
+        dyaxios.get(url).then(response => this.setState({annonceventes: response.data.data,}));
     }
 
     // lifecycle method
@@ -28,12 +28,11 @@ class AnnoncereservationIndex extends Component {
     }
 
     render() {
-        const {annoncereservationbytype} = this.state;
-        const allannoncereservations = annoncereservationbytype.annoncereservations;
+        const {annonceventes} = this.state;
         return (
             <>
                 <Helmet>
-                    <title>Reservez une chambre d'hotel, un appartement ou une villa - Ivemo</title>
+                    <title>Vendez un terrain, une maison, un appartement ou une boutique et plusieurs autres de vos biens - Ivemo</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
@@ -50,7 +49,7 @@ class AnnoncereservationIndex extends Component {
                             <div className="content-center">
                                 <div className="row">
                                     <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">Reservez votre chambre d'hotel ou un appartement </h3>
+                                        <h3 className="title">Vendez un terrain, une maison, un appartement ou une boutique </h3>
                                     </div>
                                 </div>
                             </div>
@@ -69,8 +68,8 @@ class AnnoncereservationIndex extends Component {
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
-                                        {allannoncereservations.map((item) => (
-                                            <AnnoncereservationList key={item.id} {...item} />
+                                        {annonceventes.map((item) => (
+                                            <AnnonceventeList key={item.id} {...item} />
                                         ))}
 
                                     </div>
@@ -91,7 +90,7 @@ class AnnoncereservationIndex extends Component {
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                          <Categoriesannoncereservation/>
+                                                            <Categoriesannoncevente/>
 
                                                         </div>
                                                     </div>
@@ -99,10 +98,13 @@ class AnnoncereservationIndex extends Component {
                                             </div>
                                         </div>
 
+
                                     </div>
 
                                 </div>
                             </div>
+
+
 
                         </div>
 
@@ -115,4 +117,4 @@ class AnnoncereservationIndex extends Component {
     }
 }
 
-export default AnnoncereservationIndex;
+export default AnnonceventeIndex;

@@ -2,20 +2,19 @@ import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Button } from "reactstrap";
-import NavUserSite from "../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
-import BlogannoncereservationIntesseAnnonseShow
-    from "../blog/blogannoncereservation/BlogannoncereservationIntesseAnnonseShow";
-import AnnonceservationInteresse from "./AnnonceservationInteresse";
-import FormContactAnnoncereservationUser from "./inc/FormContactAnnoncereservationUser";
-import FormcontactuseronreservationShow from "./inc/FormcontactuseronreservationShow";
+import NavUserSite from "../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
+import BlogannonceventeIntesseAnnonseShow from "../../blog/blognnoncevente/BlogannonceventeIntesseAnnonseShow";
+import FormcontactuseronannonceventeShow from "./inc/FormcontactuseronannonceventShow";
+import AnnonceventeInteresse from "./AnnonceventeInteresse";
+import ProfileForallAnnonceShow from "../ProfileForallAnnonceShow";
 
 
-class Annoncebycategoryannoncereservationcityshow extends Component {
+class Annonceventebycategorycityshow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncereservation:{annoncetype:[],categoryannoncereservation:[],user:[],imagereservations:[]},
+            annoncevente:{annoncetype:[],categoryannoncevente:[],user:{profile:[]},imagereservations:[]},
         };
 
     }
@@ -23,20 +22,21 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
     // lifecycle method
     componentDidMount() {
         let itemannoncetype = this.props.match.params.annoncetype;
-        let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
+        let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
         let itemcityannonce = this.props.match.params.city;
-        let itemannoncereservation = this.props.match.params.annoncereservation;
+        let itemdate = this.props.match.params.date;
+        let itemannoncevente = this.props.match.params.annoncevente;
         /*Ici c'est pour recuperer les annonce par villes*/
-        let url = route('api.annoncelocationbycategoryannoncereservationslug_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemannoncereservation]);
-        dyaxios.get(url).then(response => this.setState({annoncereservation: response.data,}));
+        let url = route('api.annonceventebycategoryannonceventeslug_site',[itemannoncetype,itemCategoryannoncevente,itemcityannonce,itemdate,itemannoncevente]);
+        dyaxios.get(url).then(response => this.setState({annoncevente: response.data,}));
     }
 
     render() {
-        const {annoncereservation} = this.state;
+        const {annoncevente} = this.state;
         return (
             <>
                 <Helmet>
-                    <title>{`${annoncereservation.title || "Ivemo"}`} - Ivemo</title>
+                    <title>{`${annoncevente.title || "Ivemo"}`} - Ivemo</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
@@ -66,35 +66,35 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
 
                                                 <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
                                                     <ol className="carousel-indicators">
-                                                        {annoncereservation.imagereservations.map((value,index) => {
-                                                            return <li key={value.id} data-target={`#carouselAnnonceIndicators`} data-slide-to={index} className={index === 0 ? "active" : ""}/>
-                                                        })}
+                                                        <li data-target="#carouselAnnonceIndicators" data-slide-to="0" className=""></li>
+                                                        <li data-target="#carouselAnnonceIndicators" data-slide-to="1" className=""></li>
+                                                        <li data-target="#carouselAnnonceIndicators" data-slide-to="2" className="active"></li>
                                                     </ol>
                                                     <div className="carousel-inner" role="listbox">
-
-                                                        {annoncereservation.imagereservations.map((item,index) => (
-                                                            <div key={item.id} className={`carousel-item ${index === 0 ? "active" : ""}`}>
-                                                                <img className="d-block"
-                                                                     src={item.photo}
-                                                                     alt={item.title}/>
-                                                            </div>
-                                                        ))}
-
+                                                        <div className="carousel-item">
+                                                            <img className="d-block" src="/assets/vendor/assets/img/bg1.jpg" alt="First slide" />
+                                                        </div>
+                                                        <div className="carousel-item">
+                                                            <img className="d-block" src="/assets/vendor/assets/img/bg3.jpg" alt="Second slide" />
+                                                        </div>
+                                                        <div className="carousel-item active">
+                                                            <img className="d-block" src="/assets/vendor/assets/img/bg4.jpg" alt="Third slide" />
+                                                        </div>
                                                     </div>
                                                     <a className="carousel-control-prev" href="#carouselAnnonceIndicators" role="button" data-slide="prev">
-                                                        <i className="now-ui-icons arrows-1_minimal-left"/>
+                                                        <i className="now-ui-icons arrows-1_minimal-left"></i>
                                                     </a>
                                                     <a className="carousel-control-next" href="#carouselAnnonceIndicators" role="button" data-slide="next">
-                                                        <i className="now-ui-icons arrows-1_minimal-right"/>
+                                                        <i className="now-ui-icons arrows-1_minimal-right"></i>
                                                     </a>
                                                 </div>
                                             </div>
                                             <br />
                                             <div className="d-flex align-items-center">
                                                 <div className="text-left pull-left">
-                                                    <NavLink to={`/annonces_reservations/${annoncereservation.annoncetype.slug}/${annoncereservation.categoryannoncereservation.slug}/`}>
-                                                        <h6 className={`text-${annoncereservation.categoryannoncereservation.color_name} ml-auto mr-auto`}>
-                                                            {annoncereservation.categoryannoncereservation.name}
+                                                    <NavLink to={`/annonces_ventes/${annoncevente.annoncetype.slug}/${annoncevente.categoryannoncevente.slug}/`}>
+                                                        <h6 className={`text-${annoncevente.categoryannoncevente.color_name} ml-auto mr-auto`}>
+                                                            {annoncevente.categoryannoncevente.name}
                                                         </h6>
                                                     </NavLink>
                                                 </div>
@@ -108,7 +108,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                 */}
 
                                                 <div className="text-right ml-auto">
-                                                    <h5 className="text-success"><b>{(annoncereservation.price)} <small>FCFA</small></b></h5>
+                                                    <h5 className="text-success"><b>{(annoncevente.price)} <small>FCFA</small></b></h5>
                                                 </div>
                                             </div>
 
@@ -145,78 +145,8 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
 
                                         <div className="card">
                                             <div className="card-body">
-                                                <div className="card-title">
-                                                    <b>Contacter l'agence</b>
-                                                </div>
-                                                <div className="card-header d-flex align-items-center">
-                                                    <div className="d-flex align-items-center">
-                                                        <NavLink to={`/@${annoncereservation.user.slug}/`}>
-                                                            <img src={annoncereservation.user.avatar} style={{ height: "40px", width: "80px" }} alt={annoncereservation.user.first_name} className="avatar" />
-                                                        </NavLink>
-                                                        <div className="mx-3">
-                                                            <NavLink to={`/@${annoncereservation.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{annoncereservation.user.first_name}</b>
-                                                                <small className="d-block text-muted">12 janv 2019</small>
-                                                            </NavLink>
-                                                        </div>
-                                                    </div>
-                                                    <div className="text-right ml-auto">
-                                                        <Button className="btn btn-icon btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
-                                                            <i className="now-ui-icons tech_mobile"/>
-                                                        </Button>
-                                                        <a href="https://www.kazoutech.com" className="btn btn-icon btn-sm btn-primary" target="_banck">
-                                                            <i className="now-ui-icons objects_globe"/>
-                                                        </a>
 
-                                                        {!$guest && (
-                                                            <>
-                                                                {$userIvemo.id === annoncereservation.user_id && (
-                                                                    <>
-                                                                        <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-success" rel="tooltip" title="Editer" data-placement="bottom">
-                                                                            <i className="now-ui-icons ui-1_simple-delete"/>
-                                                                        </NavLink>
-                                                                        <Button
-                                                                            className="btn btn-icon btn-sm btn-danger" rel="tooltip" title="Supprimer" data-placement="bottom">
-                                                                            <i className="now-ui-icons ui-1_simple-remove"/>
-                                                                        </Button>{" "}
-                                                                    </>
-                                                                )}
-
-                                                            </>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                                <div className="card-title">
-                                                    <i className="now-ui-icons location_pin"/> <b>91 RUE DU FAUBOURG SAINT HONORE 75008 PARIS 8EME</b>
-                                                    <br />
-                                                    <div className="container">
-                                                        <div className="row">
-                                                            <div className="col-md-6 col-6">
-                                                                <Link to={`/@${annoncereservation.user.slug}/`} title={annoncereservation.user.first_name}>
-                                                                    <small><b>Consulter le profil de l'agence</b></small>
-                                                                </Link>
-                                                            </div>
-                                                            <div className="col-md-6 col-6">
-                                                                <a href="https://www.kazoutech.com" title="Site internet de agence">
-                                                                    <small><b>Consulter le site de l'agence</b></small>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <b>Informations légales de l'agence</b>
-                                                <br />
-                                                <span>
-                                                    EIFFEL HOUSING SAS, au capital de 10000,00€
-
-                                                    Carte professionnelle 6282 délivrée par la Préfecture de Paris.
-
-                                                    Siège : 91, rue du Faubourg Saint Honoré 75008 PARIS FRANCE
-
-                                                    Garantie Financière Galian pour un montant de 120000,00€
-
-                                                    RCS : Paris 801151929
-                                                </span>
+                                                <ProfileForallAnnonceShow {...annoncevente}/>
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">
@@ -232,8 +162,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                                     <div className="col-md-12">
                                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-
-                                                                        <FormContactAnnoncereservationUser {...this.props}/>
+                                                                            <FormcontactuseronannonceventeShow {... this.props}/>
 
 
                                                                         </div>
@@ -266,11 +195,11 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                             <div className="card-header d-flex align-items-center">
                                                                 <div className="d-flex align-items-center">
-                                                                    <NavLink to={`/@${annoncereservation.user.slug}/`}>
-                                                                        <img src={annoncereservation.user.avatar} style={{ height: "40px", width: "80px" }} alt={annoncereservation.user.first_name} className="avatar" />
+                                                                    <NavLink to={`/@${annoncevente.user.slug}/`}>
+                                                                        <img src={annoncevente.user.avatar} style={{ height: "40px", width: "80px" }} alt={annoncevente.user.first_name} className="avatar" />
                                                                     </NavLink>
                                                                     <div className="mx-3">
-                                                                        <NavLink to={`/@${annoncereservation.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{annoncereservation.user.first_name}</b>
+                                                                        <NavLink to={`/@${annoncevente.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{annoncevente.user.first_name}</b>
                                                                             <small className="d-block text-muted">12 janv 2019</small>
                                                                         </NavLink>
                                                                     </div>
@@ -292,12 +221,11 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                             <hr />
                                                             <div className="card-header text-center">
                                                                 <div className="card-title">
-                                                                    Contacter <b>{annoncereservation.user.first_name} </b>
+                                                                    Contacter <b>{annoncevente.user.first_name} </b>
                                                                 </div>
                                                             </div>
 
-                                                           <FormcontactuseronreservationShow {...this.props}/>
-
+                                                                    <FormcontactuseronannonceventeShow {... this.props}/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -307,28 +235,21 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                     </div>
                                 </div>
 
-                                <AnnonceservationInteresse {...this.props}/>
+                                <AnnonceventeInteresse {...this.props}/>
 
-                                <BlogannoncereservationIntesseAnnonseShow {...this.props} />
+                                <BlogannonceventeIntesseAnnonseShow {...this.props} />
 
                             </div>
 
-
-
                         </div>
-
-
-
 
                         <FooterBigUserSite />
                     </div>
                 </div>
             </>
 
-
-
         )
     }
 }
 
-export default Annoncebycategoryannoncereservationcityshow;
+export default Annonceventebycategorycityshow;

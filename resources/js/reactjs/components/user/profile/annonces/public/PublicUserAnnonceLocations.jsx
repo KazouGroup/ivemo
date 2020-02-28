@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { Button } from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
-import AnnonceslocationList from "../../../annonceloaction/inc/AnnonceslocationList";
+import AnnonceslocationList from "../../../annonces/annonceloaction/inc/AnnonceslocationList";
 import Swal from "sweetalert2";
 import NavLinkPublicAnnonceUser from "../NavLinkPublicAnnonceUser";
 import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";

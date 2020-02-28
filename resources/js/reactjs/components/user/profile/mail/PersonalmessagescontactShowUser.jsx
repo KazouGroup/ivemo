@@ -68,7 +68,7 @@ class PersonalmessagescontactShowUser extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.props.history.push('/profile/personal_mails/contacts/');
+                    this.props.history.push(`/profile/${$userIvemo.slug}/personal_mails/contacts/`);
 
                 }).catch(() => {
                     //Failled message

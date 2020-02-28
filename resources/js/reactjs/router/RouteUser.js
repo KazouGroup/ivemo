@@ -10,32 +10,32 @@ import AnnonceShowCreateUserSite from "../components/user/annonce/AnnonceShowCre
 import AnnonceBienAvendreCreate from "../components/user/annonce/AnnonceBienAvendreCreate";
 import ProfileAccountUser from "../components/user/profile/file_private/ProfileAccountUser";
 import ProfileAccountChangePasswordUser from "../components/user/profile/file_private/ProfileAccountChangePasswordUser";
-import AnnoncereservationIndex from "../components/user/annoncereservation/AnnoncereservationIndex";
+import AnnoncereservationIndex from "../components/user/annonces/annoncereservation/AnnoncereservationIndex";
 import Annoncebycategoryannoncereservation
-    from "../components/user/annoncereservation/Annoncebycategoryannoncereservation";
+    from "../components/user/annonces/annoncereservation/Annoncebycategoryannoncereservation";
 import Annoncebycategoryannoncereservationcity
-    from "../components/user/annoncereservation/Annoncebycategoryannoncereservationcity";
+    from "../components/user/annonces/annoncereservation/Annoncebycategoryannoncereservationcity";
 import PersonalannoncereservationsUser from "../components/user/profile/PersonalannoncereservationsUser";
 import Profileannoncesreservationsbooked from "../components/user/profile/Profileannoncesreservationsbooked";
 import Annoncebycategoryannoncereservationcityshow
-    from "../components/user/annoncereservation/Annoncebycategoryannoncereservationcityshow";
+    from "../components/user/annonces/annoncereservation/Annoncebycategoryannoncereservationcityshow";
 import BlogannoncereservationShow from "../components/user/blog/blogannoncereservation/BlogannoncereservationShow";
 import ProfileAccountPublicUser from "../components/user/profile/ProfileAccountPublicUser";
 import BlogannoncereservationBycategoryreservation
     from "../components/user/blog/blogannoncereservation/BlogannoncereservationBycategoryreservation";
-import AnnoncelocationIndex from "../components/user/annonceloaction/AnnoncelocationIndex";
-import Annoncebycategoryannoncelocation from "../components/user/annonceloaction/Annoncebycategoryannoncelocation";
-import Annoncelocationbycity from "../components/user/annonceloaction/Annoncelocationbycity";
-import Annoncelocationbycategorycityshow from "../components/user/annonceloaction/Annoncelocationbycategorycityshow";
+import AnnoncelocationIndex from "../components/user/annonces/annonceloaction/AnnoncelocationIndex";
+import Annoncebycategoryannoncelocation from "../components/user/annonces/annonceloaction/Annoncebycategoryannoncelocation";
+import Annoncelocationbycity from "../components/user/annonces/annonceloaction/Annoncelocationbycity";
+import Annoncelocationbycategorycityshow from "../components/user/annonces/annonceloaction/Annoncelocationbycategorycityshow";
 import BlogannoncelocationShow from "../components/user/blog/blogannoncelocation/BlogannoncelocationShow";
 import BlogannoncelocationEdit from "../components/user/blog/blogannoncelocation/treatement/BlogannoncelocationEdit";
 import BlogannoncereservationEdit from "../components/user/blog/blogannoncereservation/treatement/BlogannoncereservationEdit";
 import BlogannoncelocationBycategorylocation
     from "../components/user/blog/blogannoncelocation/BlogannoncelocationBycategorylocation";
-import AnnonceventeIndex from "../components/user/annoncevente/AnnonceventeIndex";
-import Annoncebycategoryannoncevente from "../components/user/annoncevente/Annoncebycategoryannoncevente";
-import Annoncebycategoryannonceventecity from "../components/user/annoncevente/Annoncebycategoryannonceventecity";
-import Annonceventebycategorycityshow from "../components/user/annoncevente/Annonceventebycategorycityshow";
+import AnnonceventeIndex from "../components/user/annonces/annoncevente/AnnonceventeIndex";
+import Annoncebycategoryannoncevente from "../components/user/annonces/annoncevente/Annoncebycategoryannoncevente";
+import Annoncebycategoryannonceventecity from "../components/user/annonces/annoncevente/Annoncebycategoryannonceventecity";
+import Annonceventebycategorycityshow from "../components/user/annonces/annoncevente/Annonceventebycategorycityshow";
 
 import PersonalmessagesannonceslocationsUser
     from "../components/user/profile/mail/PersonalmessagesannonceslocationsUser";

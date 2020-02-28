@@ -1,48 +1,106 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Button } from "reactstrap";
-import NavUserSite from "../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
-import BlogannonceventeIntesseAnnonseShow from "../blog/blognnoncevente/BlogannonceventeIntesseAnnonseShow";
-import FormcontactuseronannonceventeShow from "./inc/FormcontactuseronannonceventShow";
-import AnnonceventeInteresse from "./AnnonceventeInteresse";
+import {Button, Navbar, UncontrolledTooltip} from "reactstrap";
+import NavUserSite from "../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
+import FormcontactuseronlocationShow from "./inc/FormcontactuseronlocationShow";
+import BlogannoncelocationIntesseAnnonseShow from "../../blog/blogannoncelocation/BlogannoncelocationIntesseAnnonseShow";
+import Swal from "sweetalert2";
+import moment from "moment";
+import AnnoncelocationInteresse from "./AnnoncelocationInteresse";
+import ProfileForallAnnonceShow from "../ProfileForallAnnonceShow";
 
 
-class Annonceventebycategorycityshow extends Component {
+class Annoncelocationbycategorycityshow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncevente:{annoncetype:[],categoryannoncevente:[],user:[],imagereservations:[]},
+            annoncelocation:{categoryannoncelocation:[],user:{profile:[]},city:[]},
         };
+        this.deleteItem = this.deleteItem.bind(this);
+    }
 
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes-vous sûr de vouloir executer cette action",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                const url = route('annonces_locations_delete.site',[id]);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update',
+                            message: 'Annonce suprimée avec success'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'primary',
+                            placement: {
+                                from: 'bottom',
+                                align: 'right'
+                            },
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            },
+                        });
+                    /** End alert ***/
+                    this.props.history.push('/annonces_locations/locations/');
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
+    }
+
+    loadItems(){
+        let itemannoncetype = this.props.match.params.annoncetype;
+        let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
+        let itemCity = this.props.match.params.city;
+        let itemdate = this.props.match.params.date;
+        let itemannoncelocation = this.props.match.params.annoncelocation;
+        let url = route('api.annoncelocationbycategoryannoncelocationslug_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemdate,itemannoncelocation]);
+        dyaxios.get(url).then(response => this.setState({annoncelocation: response.data,}));
     }
 
     // lifecycle method
     componentDidMount() {
-        let itemannoncetype = this.props.match.params.annoncetype;
-        let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
-        let itemcityannonce = this.props.match.params.city;
-        let itemdate = this.props.match.params.date;
-        let itemannoncevente = this.props.match.params.annoncevente;
-        /*Ici c'est pour recuperer les annonce par villes*/
-        let url = route('api.annonceventebycategoryannonceventeslug_site',[itemannoncetype,itemCategoryannoncevente,itemcityannonce,itemdate,itemannoncevente]);
-        dyaxios.get(url).then(response => this.setState({annoncevente: response.data,}));
+        this.loadItems();
     }
-
     render() {
-        const {annoncevente} = this.state;
+        const {annoncelocation} = this.state;
         return (
             <>
                 <Helmet>
-                    <title>{`${annoncevente.title || "Ivemo"}`} - Ivemo</title>
+                    <title>{`${annoncelocation.title || "Ivemo"}`} - Ivemo</title>
                 </Helmet>
 
-                <div className="about-us sidebar-collapse">
+                <div className="landing-page sidebar-collapse">
 
-                    <nav className="navbar navbar-expand-lg bg-primary">
+                    <Navbar className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
-                    </nav>
+                    </Navbar>
 
                     <div className="wrapper">
 
@@ -57,7 +115,7 @@ class Annonceventebycategorycityshow extends Component {
                                         <div className="card-body">
                                             <div className="submit text-left">
                                                 <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
-                                                    <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour au annonces</b>
+                                                    <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour au annonces </b>
                                                 </button>
                                             </div>
 
@@ -91,25 +149,29 @@ class Annonceventebycategorycityshow extends Component {
                                             <br />
                                             <div className="d-flex align-items-center">
                                                 <div className="text-left pull-left">
-                                                    <NavLink to={`/annonces_ventes/${annoncevente.annoncetype.slug}/${annoncevente.categoryannoncevente.slug}/`}>
-                                                        <h6 className={`text-${annoncevente.categoryannoncevente.color_name} ml-auto mr-auto`}>
-                                                            {annoncevente.categoryannoncevente.name}
-                                                        </h6>
-                                                    </NavLink>
+                                                    <h6 className={`text-${annoncelocation.categoryannoncelocation.color_name} ml-auto mr-auto`}>
+                                                        {annoncelocation.categoryannoncelocation.name}
+                                                    </h6>
+                                                </div>
+
+                                                <div className="text-center ml-auto">
+                                                    <h6 className="text-dark">{annoncelocation.pieces} p . {annoncelocation.rooms && (<>{annoncelocation.rooms} ch</>)}. {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
                                                 </div>
 
                                                 {/*
-                                                <div className="text-center ml-auto">
+                                                  <div className="text-center ml-auto">
                                                     <a href="#pablo" className="btn btn-primary btn-round">
-                                                        <i className="now-ui-icons ui-2_favourite-28"/> Dejà sauvegarder
-                                                    </a>
+                                                        <i className="now-ui-icons ui-2_favourite-28"></i> Dejà sauvegarder
+                                                </a>
                                                 </div>
                                                 */}
 
+
                                                 <div className="text-right ml-auto">
-                                                    <h5 className="text-success"><b>{(annoncevente.price)} <small>FCFA</small></b></h5>
+                                                    <h5 className="text-success"><b>{annoncelocation.price} <small>FCFA/mois</small></b></h5>
                                                 </div>
                                             </div>
+
 
 
                                         </div>
@@ -117,8 +179,8 @@ class Annonceventebycategorycityshow extends Component {
                                         <div className="card">
                                             <div className="card-body">
                                                 <h6 className="card-title">
-                                                    Description
-                                                </h6>
+                                                    Description interieur
+                                            </h6>
                                                 <span>Eres' daring 'Grigri Fortune' swimsuit has
                                                     the fit and coverage of a bikini in a one-piece silhouette.
                                                     This fuchsia style is crafted from the label's sculpting peau
@@ -127,8 +189,8 @@ class Annonceventebycategorycityshow extends Component {
                                                 </span>
                                                 <hr />
                                                 <h6 className="card-title">
-                                                    A L'interieur
-                                                </h6>
+                                                    Exterieur
+                                            </h6>
                                                 <span>Eres' daring 'Grigri Fortune' swimsuit has
                                                     the fit and coverage of a bikini in a one-piece silhouette.
                                                     This fuchsia style is crafted from the label's sculpting peau
@@ -144,85 +206,16 @@ class Annonceventebycategorycityshow extends Component {
 
                                         <div className="card">
                                             <div className="card-body">
-                                                <div className="card-title">
-                                                    <b>Contacter l'agence</b>
-                                                </div>
-                                                <div className="card-header d-flex align-items-center">
-                                                    <div className="d-flex align-items-center">
-                                                        <NavLink to={`/@${annoncevente.user.slug}/`}>
-                                                            <img src={annoncevente.user.avatar} style={{ height: "40px", width: "80px" }} alt={annoncevente.user.first_name} className="avatar" />
-                                                        </NavLink>
-                                                        <div className="mx-3">
-                                                            <NavLink to={`/@${annoncevente.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{annoncevente.user.first_name}</b>
-                                                                <small className="d-block text-muted">12 janv 2019</small>
-                                                            </NavLink>
-                                                        </div>
-                                                    </div>
-                                                    <div className="text-right ml-auto">
-                                                        <Button className="btn btn-icon btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
-                                                            <i className="now-ui-icons tech_mobile"/>
-                                                        </Button>
-                                                        <a href="https://www.kazoutech.com" className="btn btn-icon btn-sm btn-primary" target="_banck">
-                                                            <i className="now-ui-icons objects_globe"/>
-                                                        </a>
 
-                                                        {!$guest && (
-                                                            <>
-                                                                {$userIvemo.id === annoncevente.user_id && (
-                                                                    <>
-                                                                        <NavLink to={`/annonces/`} className="btn btn-icon btn-sm btn-success" rel="tooltip" title="Editer" data-placement="bottom">
-                                                                            <i className="now-ui-icons ui-1_simple-delete"/>
-                                                                        </NavLink>
-                                                                        <Button
-                                                                            className="btn btn-icon btn-sm btn-danger" rel="tooltip" title="Supprimer" data-placement="bottom">
-                                                                            <i className="now-ui-icons ui-1_simple-remove"/>
-                                                                        </Button>{" "}
-                                                                    </>
-                                                                )}
+                                              <ProfileForallAnnonceShow {...annoncelocation}/>
 
-                                                            </>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                                <div className="card-title">
-                                                    <i className="now-ui-icons location_pin"/> <b>91 RUE DU FAUBOURG SAINT HONORE 75008 PARIS 8EME</b>
-                                                    <br />
-                                                    <div className="container">
-                                                        <div className="row">
-                                                            <div className="col-md-6 col-6">
-                                                                <Link to={`/@${annoncevente.user.slug}/`} title={annoncevente.user.first_name}>
-                                                                    <small><b>Consulter le profil de l'agence</b></small>
-                                                                </Link>
-                                                            </div>
-                                                            <div className="col-md-6 col-6">
-                                                                <a href="https://www.kazoutech.com" title="Site internet de agence">
-                                                                    <small><b>Consulter le site de l'agence</b></small>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <b>Informations légales de l'agence</b>
-                                                <br />
-                                                <span>
-                                                    EIFFEL HOUSING SAS, au capital de 10000,00€
-
-                                                    Carte professionnelle 6282 délivrée par la Préfecture de Paris.
-
-                                                    Siège : 91, rue du Faubourg Saint Honoré 75008 PARIS FRANCE
-
-                                                    Garantie Financière Galian pour un montant de 120000,00€
-
-                                                    RCS : Paris 801151929
-                                                </span>
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">
                                                         <div className="card-header" role="tab" id="headingOne">
                                                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                <b>Envie de visiter ? Une question sur cet appartement ?</b>
-                                                                <i className="now-ui-icons arrows-1_minimal-down"/>
+                                                                <b>Envie de visiter ? Une question sur cet(te) {annoncelocation.categoryannoncelocation.name} ?</b>
+                                                                <i className="now-ui-icons arrows-1_minimal-down"></i>
                                                             </a>
                                                         </div>
                                                         <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
@@ -231,8 +224,7 @@ class Annonceventebycategorycityshow extends Component {
                                                                     <div className="col-md-12">
                                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                                            <FormcontactuseronannonceventeShow {... this.props}/>
-
+                                                                            <FormcontactuseronlocationShow {...this.props}/>
 
                                                                         </div>
                                                                     </div>
@@ -264,11 +256,11 @@ class Annonceventebycategorycityshow extends Component {
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                             <div className="card-header d-flex align-items-center">
                                                                 <div className="d-flex align-items-center">
-                                                                    <NavLink to={`/@${annoncevente.user.slug}/`}>
-                                                                        <img src={annoncevente.user.avatar} style={{ height: "40px", width: "80px" }} alt={annoncevente.user.first_name} className="avatar" />
+                                                                    <NavLink to={`/@${annoncelocation.user.slug}/annonces_locations/`}>
+                                                                        <img src={annoncelocation.user.avatar} style={{ height: "40px", width: "80px" }} alt={annoncelocation.user.first_name} className="avatar" />
                                                                     </NavLink>
                                                                     <div className="mx-3">
-                                                                        <NavLink to={`/@${annoncevente.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{annoncevente.user.first_name}</b>
+                                                                        <NavLink to={`/@${annoncelocation.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{annoncelocation.user.first_name}</b>
                                                                             <small className="d-block text-muted">12 janv 2019</small>
                                                                         </NavLink>
                                                                     </div>
@@ -290,11 +282,12 @@ class Annonceventebycategorycityshow extends Component {
                                                             <hr />
                                                             <div className="card-header text-center">
                                                                 <div className="card-title">
-                                                                    Contacter <b>{annoncevente.user.first_name} </b>
+                                                                    Contacter <b>{annoncelocation.user.first_name} </b>
                                                                 </div>
                                                             </div>
 
-                                                                    <FormcontactuseronannonceventeShow {... this.props}/>
+                                                            <FormcontactuseronlocationShow {...this.props}/>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -304,21 +297,30 @@ class Annonceventebycategorycityshow extends Component {
                                     </div>
                                 </div>
 
-                                <AnnonceventeInteresse {...this.props}/>
+                                <AnnoncelocationInteresse {...this.props}/>
 
-                                <BlogannonceventeIntesseAnnonseShow {...this.props} />
+                                <BlogannoncelocationIntesseAnnonseShow {...this.props} />
+
+
 
                             </div>
 
+
+
                         </div>
+
+
+
 
                         <FooterBigUserSite />
                     </div>
                 </div>
             </>
 
+
+
         )
     }
 }
 
-export default Annonceventebycategorycityshow;
+export default Annoncelocationbycategorycityshow;
