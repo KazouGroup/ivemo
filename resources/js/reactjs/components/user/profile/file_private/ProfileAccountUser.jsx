@@ -18,6 +18,7 @@ class ProfileAccountUser extends Component {
             last_name: '',
             sex: '',
             color_name: '',
+            slug: '',
             avatar: '',
             avatarcover: '',
             email: '',
@@ -82,6 +83,7 @@ class ProfileAccountUser extends Component {
             last_name: this.state.last_name,
             sex: this.state.sex,
             color_name: this.state.color_name,
+            slug: this.state.slug,
             avatar: this.state.avatar,
             avatarcover: this.state.avatarcover,
             categoryprofile_id: this.state.categoryprofile_id,
@@ -92,7 +94,7 @@ class ProfileAccountUser extends Component {
             .then(() => {
 
                 $.notify({
-                        message: 'Votre profile a été mise à jour avec succès... '
+                        message: 'Votre profile a été mise à jour avec succès'
                     },
                     {
                         allow_dismiss: false,
@@ -106,6 +108,9 @@ class ProfileAccountUser extends Component {
                             exit: "animated fadeOutDown"
                         },
                     });
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
             }).catch(error => {
                 this.setState({
                     errors: error.response.data.errors
@@ -121,6 +126,7 @@ class ProfileAccountUser extends Component {
                 first_name: response.data.first_name,
                 last_name: response.data.last_name,
                 sex: response.data.sex,
+                slug: response.data.slug,
                 color_name: response.data.color_name,
                 avatar: response.data.avatar,
                 avatarcover: response.data.avatarcover,
@@ -175,7 +181,56 @@ class ProfileAccountUser extends Component {
                                             <div className="card">
                                                 <div className="card-body">
 
+                                                    <Row>
+                                                        <div className="col-md-6 col-6">
+                                                            <label htmlFor="first_name"><b>Nom</b></label>
+                                                            <div className="input-group">
+                                                                <div className="input-group-prepend">
+                                                                    <span className="input-group-text">
+                                                                        <i className="now-ui-icons users_circle-08"/>
+                                                                    </span>
+                                                                </div>
+                                                                <input id='first_name'
+                                                                       type='text'
+                                                                       className={`form-control ${this.hasErrorFor('first_name') ? 'is-invalid' : ''}`}
+                                                                       name='first_name'
+                                                                       placeholder="Non de l'agence ou celle personnelle"
+                                                                       aria-label="first_name"
+                                                                       autoComplete="first_name"
+                                                                       required={'required'}
+                                                                       maxLength="250"
+                                                                       value={this.state.first_name || ''}
+                                                                       onChange={this.handleFieldChange}
+                                                                />
+                                                                {this.renderErrorFor('first_name')}
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-6 col-6">
+                                                            <label htmlFor="last_name"><b>Prénom</b></label>
+                                                            <div className="input-group">
+                                                                <div className="input-group-prepend">
+                                                                    <span className="input-group-text">
+                                                                        <i className="now-ui-icons users_circle-08"/>
+                                                                    </span>
+                                                                </div>
+                                                                <input id='last_name'
+                                                                       type='text'
+                                                                       className={`form-control ${this.hasErrorFor('last_name') ? 'is-invalid' : ''}`}
+                                                                       name='last_name'
+                                                                       placeholder="Prenom "
+                                                                       aria-label="last_name"
+                                                                       autoComplete="last_name"
+                                                                       maxLength="250"
+                                                                       value={this.state.last_name || ''}
+                                                                       onChange={this.handleFieldChange}
+                                                                />
+                                                                {this.renderErrorFor('last_name')}
+                                                            </div>
+                                                        </div>
+                                                    </Row>
+
                                                     <div className="row">
+
                                                         <div className="col-md-6 col-6">
                                                             <label htmlFor="address"><b>Pseudo</b></label>
                                                             <div className="input-group">
@@ -201,26 +256,26 @@ class ProfileAccountUser extends Component {
                                                         </div>
 
                                                         <div className="col-md-6 col-6">
-                                                            <label htmlFor="title"><b>Nom</b></label>
+                                                            <label htmlFor="title"><b>Pseudo profile</b></label>
                                                             <div className="input-group">
                                                                 <div className="input-group-prepend">
                                                                     <span className="input-group-text">
-                                                                        <i className="now-ui-icons user-profile"/>
+                                                                        <i className="now-ui-icons text_caps-small"/>
                                                                     </span>
                                                                 </div>
-                                                                <input id='first_name'
+                                                                <input id='slug'
                                                                        type='text'
-                                                                       className={`form-control ${this.hasErrorFor('first_name') ? 'is-invalid' : ''}`}
-                                                                       name='first_name'
-                                                                       placeholder="Non de l'agence ou celle personnelle"
-                                                                       aria-label="first_name"
-                                                                       autoComplete="first_name"
+                                                                       className={`form-control ${this.hasErrorFor('slug') ? 'is-invalid' : ''}`}
+                                                                       name='slug'
+                                                                       placeholder="@mypseudo_profile"
+                                                                       aria-label="slug"
+                                                                       autoComplete="slug"
                                                                        required={'required'}
                                                                        maxLength="250"
-                                                                       value={this.state.first_name || ''}
+                                                                       value={this.state.slug || ''}
                                                                        onChange={this.handleFieldChange}
                                                                 />
-                                                                {this.renderErrorFor('first_name')}
+                                                                {this.renderErrorFor('slug')}
                                                             </div>
                                                         </div>
 
@@ -290,7 +345,7 @@ class ProfileAccountUser extends Component {
                                                             <div className="input-group">
                                                                 <div className="input-group-prepend">
                                                                     <span className="input-group-text">
-                                                                        <i className="now-ui-icons user-profile"/>
+                                                                        <i className="now-ui-icons tech_mobile"/>
                                                                     </span>
                                                                 </div>
                                                                 <input id='phone'

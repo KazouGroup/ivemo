@@ -96,7 +96,7 @@ class ProfileConfigUser extends Component {
             .then(() => {
                 $.notify({
                         // title: 'Update FAQ',
-                        message: 'Profil mis à jour correctement'
+                        message: 'Votre profile a été mise à jour avec succès'
                     },
                     {
                         allow_dismiss: false,
@@ -237,9 +237,8 @@ class ProfileConfigUser extends Component {
                                                     </div>
 
                                                     <hr/>
-
                                                     <Row>
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-12">
                                                             <label
                                                                 htmlFor="address"><b>Adresse de résidence</b></label>
                                                             <div className="input-group">
@@ -262,8 +261,9 @@ class ProfileConfigUser extends Component {
                                                                 {this.renderErrorFor('address')}
                                                             </div>
                                                         </div>
-
-                                                        <div className="col-md-4">
+                                                    </Row>
+                                                    <Row>
+                                                        <div className="col-md-6">
                                                             <label htmlFor="birthdate"><b>Votre année de naissance</b></label>
                                                             <div className="form-group">
 
@@ -376,7 +376,7 @@ class ProfileConfigUser extends Component {
                                                             </div>
                                                         </div>
 
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-6">
                                                             <label htmlFor="city_id"><b>Votre ville</b></label>
                                                             <div className="form-group">
                                                                 <select value={this.state.city_id || ''} className={`form-control ${this.hasErrorFor('city_id') ? 'is-invalid' : ''}`}

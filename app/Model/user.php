@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Notifications\VerifyEmailUsers;
 use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -26,7 +27,7 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
     protected $guard_name = 'web';
 
     protected $guarded = [
-           'id','created_at', 'updated_at',
+        'created_at','updated_at'
     ];
 
     /**
@@ -51,23 +52,22 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
     ];
 
      protected static function boot()
-          {
-              parent::boot();
+     {
+        parent::boot();
 
-              static::creating(function ($user){
-                  $user->syncRoles('1');
-                  $myslug = Str::uuid();
-                  $user->profile()->create([
-                      'full_name' => $user->first_name,
-                      'slug' => $myslug,
-                  ]);
-                  if (auth()->check()){
-                      $user->user_id = auth()->id();
-                  }
-              });
+        static::created(function ($user){
+            $user->syncRoles('1');
+            $myslug = Str::uuid();
+            $user->profile()->create([
+                'full_name' => $user->first_name,
+                'slug' => $myslug,
+            ]);
+            if (auth()->check()){
+                $user->user_id = auth()->id();
+            }
+        });
 
-
-          }
+     }
 
     /**
      * Send the email verification notification.
@@ -79,6 +79,22 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
         $this->notify(new VerifyEmailUsers());
     }
 
+    use Sluggable;
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'first_name',
+                'separator' => '_'
+            ]
+
+        ];
+    }
 
     public function isOnline()
     {

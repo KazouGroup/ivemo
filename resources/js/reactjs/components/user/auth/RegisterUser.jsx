@@ -106,7 +106,7 @@ class RegisterUser extends Component {
                                         </div>
                                         <form className="form" method="POST" onSubmit={this.saveItem}>
                                             <div className="row">
-                                                <div className="col-md-4">
+                                                <div className="col-md-6">
                                                     <div className="input-group">
                                                         <div className="input-group-prepend">
                                                     <span className="input-group-text">
@@ -123,7 +123,7 @@ class RegisterUser extends Component {
                                                         {this.renderErrorFor('username')}
                                                     </div>
                                                 </div>
-                                                <div className="col-md-8">
+                                                <div className="col-md-6">
                                                     <div className="input-group">
                                                         <div className="input-group-prepend">
                                                     <span className="input-group-text">

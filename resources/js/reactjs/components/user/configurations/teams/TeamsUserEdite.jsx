@@ -26,6 +26,7 @@ class TeamsUserEdite extends Component {
             role: '',
             photo: '',
             description: '',
+            userProfile: {profile:[]},
             errors: [],
             showDefaultImage: false
         };
@@ -88,6 +89,7 @@ class TeamsUserEdite extends Component {
         }
     }
     updateItem(e) {
+        let itemuser = this.props.match.params.user;
         let Id = this.props.match.params.id;
         e.preventDefault();
 
@@ -97,7 +99,7 @@ class TeamsUserEdite extends Component {
             photo: this.state.photo,
             description: this.state.description,
         };
-        dyaxios.put(route('profile_team_users_update.site', [Id]), item)
+        dyaxios.put(route('profile_team_users_update.site', [itemuser,Id]), item)
             .then(() => {
 
                 $.notify({
@@ -133,8 +135,9 @@ class TeamsUserEdite extends Component {
 
     // get all the tasks from backend
     loadItems() {
+        let itemuser = this.props.match.params.user;
         let Itemdata = this.props.match.params.id;
-        let url = route('api.profile_team_users_show.site', [Itemdata]);
+        let url = route('api.profile_team_users_show.site', [itemuser,Itemdata]);
         dyaxios.get(url).then(response =>
             this.setState({
                 full_name: response.data.full_name,
@@ -142,6 +145,7 @@ class TeamsUserEdite extends Component {
                 photo: response.data.photo,
                 description: response.data.description,
             }));
+        dyaxios.get(route('api_user_profile_data.site', [itemuser])).then(response => this.setState({ userProfile: response.data, }));
     }
     // lifecycle method
     componentDidMount() {
@@ -149,7 +153,7 @@ class TeamsUserEdite extends Component {
 
     }
     render() {
-        const { photo} = this.state;
+        const { userProfile,photo} = this.state;
         const avatar_style = {
             width: "40px",
             height: "40px",
@@ -180,7 +184,17 @@ class TeamsUserEdite extends Component {
 
                                 <div className="row">
 
-                                    <NavlinkconfigurationUser/>
+                                    <div className="col-lg-4 col-md-12 mx-auto">
+
+                                        <div className="submit text-center">
+                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
+                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Ajouter un nouveau menbre</b>
+                                            </NavLink>
+                                        </div>
+
+                                        <NavlinkconfigurationUser {...this.props} {...userProfile} />
+
+                                    </div>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="card">

@@ -34,7 +34,7 @@ class color extends Model implements Auditable
     {
         parent::boot();
 
-        static::creating(function ($model){
+        static::created(function ($model){
             if (auth()->check()){
                 $model->user_id = auth()->id();
             }

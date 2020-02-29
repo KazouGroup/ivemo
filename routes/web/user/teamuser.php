@@ -22,7 +22,7 @@ Route::get(
 )->name('api.profile_team_users_show.site');
 
 Route::put(
-    'profile/personal_settings/teams/{teamuser}',
+    'profile/{user}/personal_settings/teams/{teamuser}',
     'TeamuserController@update'
 )->name('profile_team_users_update.site');
 

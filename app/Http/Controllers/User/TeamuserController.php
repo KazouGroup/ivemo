@@ -94,7 +94,7 @@ class TeamuserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($teamuser)
+    public function show($user, $teamuser)
     {
         $teamuser = teamuser::whereId($teamuser)->first();
 
@@ -107,7 +107,7 @@ class TeamuserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(teamuser $teamuser)
+    public function edit($user , teamuser $teamuser)
     {
         return view('user.teamuser.edit',[
             'teamuser'=> $teamuser,
@@ -148,7 +148,7 @@ class TeamuserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(UpdateRequest $request,$user, $id)
     {
         $teamuser = teamuser::findOrFail($id);
 

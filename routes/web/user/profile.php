@@ -6,6 +6,11 @@ Route::get(
 )->name('api_profile_account.site');
 
 Route::get(
+    'api/user/{profile}',
+    'ProfileController@api_user_profile_account'
+)->name('api_user_profile_data.site');
+
+Route::get(
     'api/profile/{profile}/account',
     'ProfileController@api_profile_add_info_account'
 )->name('api_profile_add_info_account.site');

@@ -232,7 +232,19 @@ class TeamsUserIndex extends Component {
 
                                 <div className="row">
 
-                                    <NavlinkconfigurationUser {...this.props} {...userteamusers} />
+                                    <div className="col-lg-4 col-md-12 mx-auto">
+
+                                        <div className="submit text-center">
+                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
+                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Ajouter un nouveau menbre</b>
+                                            </NavLink>
+                                        </div>
+
+                                        <NavlinkconfigurationUser {...this.props} {...userteamusers} />
+
+                                    </div>
+
+
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="card">
@@ -308,12 +320,9 @@ class TeamsUserIndex extends Component {
                                                                                 </>
 
                                                                             }
-                                                                            <Link to={`/profile/personal_settings/teams/${item.id}/edit/`} className="btn btn-info btn-icon btn-sm btn-neutral" id={'TooltipEditer'}>
+                                                                            <Link to={`/profile/${$userIvemo.slug}/personal_settings/teams/${item.id}/edit/`} className="btn btn-info btn-icon btn-sm btn-neutral" data-toggle="tooltip" data-placement="bottom" title={`Éditer cette ${item.full_name}`}>
                                                                                 <i className="now-ui-icons ui-2_settings-90"/>
                                                                             </Link>
-                                                                            <UncontrolledTooltip placement="bottom" target="TooltipEditer" delay={0}>
-                                                                                Éditer cette {item.full_name}
-                                                                            </UncontrolledTooltip>
 
                                                                             <button type="button" id={'TooltipDelete'} onClick={() => this.deleteItem(item.id)}
                                                                                     className="btn btn-danger btn-icon btn-sm btn-neutral">

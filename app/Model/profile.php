@@ -12,19 +12,9 @@ class profile extends Model implements Auditable
     use AuditableTrait;
 
    protected $guarded = [
-           'created_at','updated_at','user_id',
+           'created_at','updated_at'
     ];
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::updating(function($model){
-            if (auth()->check()){
-                $model->user_id = auth()->id();
-            }
-        });
-    }
 
     public function getRouteKeyName()
     {
@@ -34,10 +24,5 @@ class profile extends Model implements Auditable
     public function user()
     {
         return $this->belongsTo(User::class,'user_id');
-    }
-
-    public function isOnline()
-    {
-        return Cache::has('user-is-online-' . $this->id);
     }
 }

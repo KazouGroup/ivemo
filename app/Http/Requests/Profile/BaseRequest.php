@@ -37,7 +37,8 @@ class BaseRequest extends Request
             ];
         }elseif ($group == 'profile_account_update'){
             $rules = [
-                'username' => "required|string|min:2|max:100|unique:users,username,".auth()->check(),
+                'username' => ['required','string','min:2','max:100', Rule::unique((new User)->getTable())->ignore(auth()->id())],
+                'slug' => ['required','string','alpha_dash','min:2','max:100', Rule::unique((new User)->getTable())->ignore(auth()->id())],
                 'email' => ['required','string','email', Rule::unique((new User)->getTable())->ignore(auth()->id())],
                 "sex" => "required|in:female,male",
                 "phone" => "required|numeric",

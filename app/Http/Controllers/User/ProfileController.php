@@ -158,6 +158,33 @@ class ProfileController extends Controller
         return response()->json($contactusers, 200);
     }
 
+    public function api_user_profile_account($user)
+    {
+        $user = user::whereSlug($user)
+            ->with(['profile' => function ($q) use ($user){
+                $q->whereIn('user_id',[auth()->user()->id])
+                    ->distinct()->get()->toArray()
+                ;},
+            ])
+            ->withCount(['teamusers' => function ($q) use ($user){
+                $q->whereIn('user_id',[auth()->user()->id]);
+            }])->withCount(['annoncelocations' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['annoncereservations' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['annonceventes' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannoncelocations' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannoncereservations' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->withCount(['blogannonceventes' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])->first();
+
+        return response()->json($user, 200);
+    }
+
     public function apipersonalmessagesannonces_locations(user $user)
     {
         if (auth()->user()->id === $user->id){
@@ -289,6 +316,15 @@ class ProfileController extends Controller
         return response()->json($profile,200);
     }
 
+    public function profile_add_info_account_update(UpdateprofileRequest $request ,profile $profile)
+    {
+        $this->authorize('update',$profile);
+
+        $profile = $profile->update($request->all());
+
+        return response()->json($profile,200);
+    }
+
     public function profile_add_info_account(profile $profile)
     {
         $user = auth()->user();
@@ -305,6 +341,7 @@ class ProfileController extends Controller
             'first_name',
             'last_name',
             'email',
+            'slug',
             'username',
             'phone',
             'categoryprofile_id',
