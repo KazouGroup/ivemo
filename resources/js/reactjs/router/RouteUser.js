@@ -65,6 +65,7 @@ import PublicUserBlogannonceVente from "../components/user/profile/blogs/public/
 import PrivateUserAnnonceVentes from "../components/user/profile/annonces/private/PrivateUserAnnonceVentes";
 import PublicUserAnnonceVentes from "../components/user/profile/annonces/public/PublicUserAnnonceVentes";
 import RegisterUser from "../components/user/auth/RegisterUser";
+import SubscriberuserUserIndex from "../components/user/configurations/SubscriberuserUserIndex";
 
 
 const RouteUser = props => (
@@ -118,6 +119,8 @@ const RouteUser = props => (
           <Route strict exact path="/profile/:user/personal_mails/contacts/" component={PersonalmessagescontactUser}/>
           <Route exact path="/profile/:user/personal_mails/contacts/:contactuser/" component={PersonalmessagescontactShowUser}/>
 
+
+          <Route exact path="/profile/:user/personal_settings/subscriber_users/" component={SubscriberuserUserIndex}/>
 
           <Route exact path="/profile/:user/personal_settings/teams/" component={TeamsUserIndex}/>
           <Route exact path="/profile/:user/personal_settings/teams/" component={TeamsUserIndex}/>

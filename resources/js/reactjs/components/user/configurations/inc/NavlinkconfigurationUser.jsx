@@ -22,30 +22,6 @@ class NavlinkconfigurationUser extends Component {
                                 <div className="card card-plain">
                                     <div className="card-header" role="tab" id="headingOne">
                                         <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                            <b>Inforations personnel</b>
-                                        </a>
-                                    </div>
-                                    <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                                        <div className="card-body">
-                                            <table>
-                                                <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <NavLink to={`/profile/${this.props.slug}/personal_settings/teams/`}>
-                                                            Notre Teams
-                                                        </NavLink>
-                                                    </td>
-                                                    <td className="text-right"> {this.props.teamusers_count} {this.props.teamusers_count < 1 ? "membre" : "membres"}</td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="card card-plain">
-                                    <div className="card-header" role="tab" id="headingOne">
-                                        <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                             <b>Toutes mes annonces</b>
                                         </a>
                                     </div>
@@ -116,6 +92,38 @@ class NavlinkconfigurationUser extends Component {
                                                         </NavLink>
                                                     </td>
                                                     <td className="text-right"> {this.props.blogannonceventes_count} {this.props.blogannonceventes_count < 1 ? "article" : "articles"}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="card card-plain">
+                                    <div className="card-header" role="tab" id="headingOne">
+                                        <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            <b>Inforations personnel</b>
+                                        </a>
+                                    </div>
+                                    <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                        <div className="card-body">
+                                            <table>
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <NavLink to={`/profile/${this.props.slug}/personal_settings/teams/`}>
+                                                            Notre Teams
+                                                        </NavLink>
+                                                    </td>
+                                                    <td className="text-right"> {this.props.teamusers_count} {this.props.teamusers_count < 1 ? "membre" : "membres"}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <NavLink to={`/profile/${this.props.slug}/personal_settings/subscriber_users/`}>
+                                                            Email des abonnements
+                                                        </NavLink>
+                                                    </td>
+                                                    <td className="text-right"> {this.props.subscriberusers_count} {this.props.subscriberusers_count < 1 ? "email" : "emails"}</td>
                                                 </tr>
                                                 </tbody>
                                             </table>

@@ -49,7 +49,9 @@ class BlogannoncelocationService
                     ->orderBy('created_at','DESC')
                     ->distinct()->get()->toArray()
                 ;},
-            ])
+            ])->withCount(['subscriberusers' => function ($q){
+                $q->whereIn('user_id',[auth()->user()->id]);
+            }])
             ->withCount(['teamusers' => function ($q) use ($user){
                 $q->whereIn('user_id',[$user->id]);
             }])->withCount(['annoncelocations' => function ($q) use ($user){

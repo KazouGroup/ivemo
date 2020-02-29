@@ -3,28 +3,18 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Contactuser\StoreRequest;
 use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\Profile\UpdateprofileRequest;
 use App\Http\Requests\Profile\UpdateRequest;
 use App\Http\Resources\UserResource;
-use App\Model\annoncelocation;
-use App\Model\annoncereservation;
-use App\Model\annoncetype;
-use App\Model\annoncevente;
-use App\Model\blogannoncelocation;
-use App\Model\blogannoncereservation;
 use App\Model\contactuser;
 use App\model\profile;
 use App\Model\reservation;
 use App\Model\user;
-use App\Services\ContactuserService;
 use App\Services\ProfileService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 use Symfony\Component\HttpFoundation\Response;
-use function foo\func;
 
 class ProfileController extends Controller
 {

@@ -291,7 +291,7 @@ class TeamsUserEdite extends Component {
                                                         </Row>
 
                                                         <div className="submit text-center">
-                                                            <Link to={`/profile/personal_settings/teams/`} className="btn btn-secondary">
+                                                            <Link to={`/profile/${$userIvemo.slug}/personal_settings/teams/`} className="btn btn-secondary">
                                                                 <i className="now-ui-icons ui-1_simple-delete"/> Annuler
                                                             </Link>
                                                             <Button className="btn btn-primary" type="submit">
