@@ -1,6 +1,6 @@
 @extends('inc.user.main')
 <?php $item = htmlspecialchars(config('app.name'));?>
-@section('title', 'Éditer '.$blogannoncelocation->title.' - '.$item)
+@section('title', $blogannoncelocation->title.' - '.$item)
 
 @section('style')
 @endsection

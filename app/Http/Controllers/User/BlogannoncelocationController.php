@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Blog\Blogannoncelocation\UpdateRequest;
 use App\Http\Resources\BlogannoncelocationResource;
 use App\Http\Resources\CategoryannoncelocationResource;
 use App\Model\blogannoncelocation;
@@ -11,6 +12,7 @@ use App\Model\user;
 use App\Services\BlogannoncelocationService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use File;
 
 class BlogannoncelocationController extends Controller
 {
@@ -23,8 +25,7 @@ class BlogannoncelocationController extends Controller
     {
         $this->middleware('auth',['only' => [
             'create','store','edit','update','destroy','show','activated','unactivated',
-            'apiblogannonceslocationsbyuser',
-            'blogannonceslocationsbyuser'
+            'apiblogannonceslocationsbyuser', 'blogannonceslocationsbyuser'
         ]]);
     }
 
@@ -112,6 +113,21 @@ class BlogannoncelocationController extends Controller
         return view('user.blogs.blogannoncelocation.show',[
             'blogannoncelocation' => $blogannoncelocation,
         ]);
+    }
+
+
+    public function categoryannoncelocations_by_user()
+    {
+        $categoryannoncelocations = CategoryannoncelocationResource::collection(categoryannoncelocation::with('user')
+            ->withCount(['annoncelocations' => function ($q){
+                $q->whereHas('city', function ($q) {$q->where('status',1);});
+            }])->withCount(['blogannoncelocations' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1]);
+            }])
+            ->orderBy('annoncelocations_count','desc')
+            ->distinct()->get());
+
+        return response()->json($categoryannoncelocations, 200);
     }
 
     /**
@@ -204,25 +220,40 @@ class BlogannoncelocationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int  $blogannoncelocation
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request,$blogannoncelocation)
     {
-        //
+        $blogannoncelocation = blogannoncelocation::whereSlugin($blogannoncelocation)->first();
+
+        BlogannoncelocationService::updateUploadeImage($request,$blogannoncelocation);
+
+        $blogannoncelocation->update($request->all());
+
+        return response()->json($blogannoncelocation,200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function destroy($id)
     {
-       $blogannoncelocation = blogannoncelocation::findOrFail($id);
-       $blogannoncelocation->delete();
-       return ['message' => 'message deleted '];
+        $blogannoncelocation = blogannoncelocation::findOrFail($id);
+
+        $this->authorize('update',$blogannoncelocation);
+
+        if (auth()->user()->id === $blogannoncelocation->user_id){
+            $oldFilename = $blogannoncelocation->photo;
+            File::delete(public_path($oldFilename));
+            $blogannoncelocation->delete();
+            return ['message' => 'message deleted '];
+        }else{
+            abort(404);
+        }
 
     }
 }

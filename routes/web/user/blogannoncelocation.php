@@ -20,7 +20,7 @@ Route::get(
     'BlogannoncelocationController@annonceblogcategorylocationslug'
 )->name('blogannoncecategorylocationslug_site');
 
-Route::get(
+Route::put(
     'blogs/annonce_locations/{blogannoncelocation}',
     'BlogannoncelocationController@update'
 )->name('blogannoncecategorylocationupdate_site');

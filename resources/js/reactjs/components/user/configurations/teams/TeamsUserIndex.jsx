@@ -300,23 +300,16 @@ class TeamsUserIndex extends Component {
                                                                             {item.status ?
                                                                                 <>
                                                                                     <Button onClick={() => this.unactiveItem(item)}
-                                                                                            className="btn btn-success btn-icon btn-sm" id={'TooltipDesactiver'} >
+                                                                                            className="btn btn-success btn-icon btn-sm" title={item.full_name} >
                                                                                         <i className="now-ui-icons ui-1_check"/>
                                                                                     </Button>
-                                                                                    <UncontrolledTooltip placement="bottom" target="TooltipDesactiver">
-                                                                                        Desactiver {item.full_name}
-                                                                                    </UncontrolledTooltip>
                                                                                 </>
                                                                                 :
                                                                                 <>
                                                                                     <Button onClick={() => this.activeItem(item)}
-                                                                                            className="btn btn-primary btn-icon btn-sm"
-                                                                                            id={'TooltipActiver'}>
+                                                                                            className="btn btn-primary btn-icon btn-sm" title={item.full_name} >
                                                                                         <i className="now-ui-icons ui-1_simple-delete"/>
                                                                                     </Button>
-                                                                                    <UncontrolledTooltip placement="bottom" target="TooltipActiver" delay={0}>
-                                                                                        Activer {item.full_name}
-                                                                                    </UncontrolledTooltip>
                                                                                 </>
 
                                                                             }

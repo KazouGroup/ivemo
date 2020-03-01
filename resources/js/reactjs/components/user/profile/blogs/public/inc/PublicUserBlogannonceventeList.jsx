@@ -55,16 +55,30 @@ class PublicUserBlogannonceventeList extends Component {
                             <Link to={`/blogs/annonce_ventes/${this.props.categoryannoncevente.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}> lire la suite </Link>
                         </p>
                         <CardFooter>
-                            <div className="author">
-                                <Link to={`/@${this.props.user.slug}/`}>
-                                    <img src={this.props.user.avatar} alt={this.props.user.first_name}
-                                         className="avatar img-raised"/>
-                                    <span>{this.props.user.first_name}</span>
-                                </Link>
+                            <div className="d-flex align-items-center">
+
+                                <div className="author">
+                                    <Link to={`/@${this.props.user.slug}/`}>
+                                        <img src={this.props.user.avatar} alt={this.props.user.first_name}
+                                             className="avatar img-raised"/>
+                                    </Link>
+                                </div>
+                                <div className="mx-3">
+                                    <NavLink to={`/@${this.props.user.slug}/`} className="text-dark font-weight-600 text-sm">
+                                        <b>{this.props.user.first_name}</b>
+                                        <small className="d-block text-muted"><b>{moment(this.props.created_at).format('ll')}</b></small>
+                                    </NavLink>
+                                </div>
+
+                                <div className="stats stats-right">
+                                    <i className="now-ui-icons tech_watch-time"/> {this.props.red_time} min de lecture
+                                </div>
                             </div>
-                            <div className="stats stats-right">
-                                <i className="now-ui-icons tech_watch-time"/> {moment(this.props.created_at).format('ll')}  {this.props.red_time} min lecture
-                            </div>
+
+
+
+
+
                         </CardFooter>
                     </CardBody>
                 </div>

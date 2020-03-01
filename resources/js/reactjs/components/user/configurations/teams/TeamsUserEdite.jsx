@@ -258,20 +258,23 @@ class TeamsUserEdite extends Component {
                                                         </Row>
 
                                                         <Row>
-                                                            <div className="col-md-4 mx-auto">
+                                                            <div className="col-md-6 mx-auto">
                                                                 <div className="profile text-center">
-                                                                    <img src={this.state.showDefaultImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : photo} alt={'name'}/>
-                                                                    <input id="photo" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('photo') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="photo"/>
+                                                                    <img src={this.state.showDefaultImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : photo} alt={'name'} />
+                                                                    <input id="photo" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('photo') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="photo" />
                                                                     {this.renderErrorFor('photo')}
-                                                                    <label htmlFor="photo" className="btn btn-primary">
-                                                                        <span className="btn-inner--text">Ajouter l'image</span>
-                                                                    </label>
-                                                                    <button hidden={this.state.showDefaultImage ? true : false} onClick={this.removeImage} className="btn btn-danger">
-                                                                        <span className="btn-inner--text">Remove</span>
-                                                                    </button>
+                                                                    <div className="text-center">
+                                                                        <label htmlFor="photo" className="btn btn-primary">
+                                                                            <span className="btn-inner--text">Ajouter l'image</span>
+                                                                        </label>
+                                                                        <label hidden={this.state.showDefaultImage ? true : false} onClick={this.removeImage} className="btn btn-danger">
+                                                                            <span className="btn-inner--text">Remove</span>
+                                                                        </label>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </Row>
+
                                                         <Row>
                                                             <div className="col-md-12">
                                                                 <div className="form-group">

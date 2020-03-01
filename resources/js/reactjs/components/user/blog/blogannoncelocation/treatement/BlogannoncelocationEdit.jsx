@@ -16,6 +16,8 @@ import NavUserSite from "../../../../inc/user/NavUserSite";
 import ReactQuill, { Quill, Mixin, Toolbar } from 'react-quill';
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
+import Navblogannoncelocationsbyuser from "../inc/Navblogannoncelocationsbyuser";
+import moment from "moment";
 
 
 class BlogannoncelocationEdit extends Component {
@@ -213,6 +215,7 @@ class BlogannoncelocationEdit extends Component {
                             },
                         });
                     /** End alert ***/
+                    this.props.history.goBack();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -238,8 +241,8 @@ class BlogannoncelocationEdit extends Component {
             description: this.state.description,
             categoryannoncelocation_id: this.state.categoryannoncelocation_id,
         };
-        let itemslugin = this.props.match.params.blogannoncelocation;
-        dyaxios.put(route('blogannoncecategorylocationupdate_site', [itemslugin]), item)
+        let Itemdata = this.props.match.params.blogannoncelocation;
+        dyaxios.put(route('blogannoncecategorylocationupdate_site', [Itemdata]), item)
             .then(() => {
                 $.notify({
                     //,
@@ -260,6 +263,14 @@ class BlogannoncelocationEdit extends Component {
             }).catch(error => {
                 this.setState({
                     errors: error.response.data.errors
+                });
+                $.notify("Ooop! Something wrong. Try later...", {
+                    allow_dismiss: false,
+                    type: 'danger',
+                    animate: {
+                        enter: 'animated bounceInDown',
+                        exit: 'animated bounceOutUp'
+                    }
                 });
             })
     }
@@ -287,7 +298,7 @@ class BlogannoncelocationEdit extends Component {
     render() {
         const { photo, categoryannoncelocations } = this.state;
         const composantTitle = `${this.state.title || 'Ivemo'}`;
-        document.title = `Edit ${composantTitle} | Ivemo`;
+        document.title = `${composantTitle} - Ivemo`;
         return (
             <div className="about-us sidebar-collapse">
                 <nav className="navbar navbar-expand-lg bg-primary">
@@ -303,7 +314,31 @@ class BlogannoncelocationEdit extends Component {
 
                                 <div className="row">
 
-                                    <div className="col-lg-10 col-md-12 mx-auto">
+                                    <div className="col-lg-4 col-md-12 mx-auto">
+
+                                        <div className="submit text-center">
+                                            <NavLink className="btn btn-primary" to={`/annonce/show/create/`}>
+                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article</b>
+                                            </NavLink>
+                                        </div>
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+
+                                                           <Navblogannoncelocationsbyuser/>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="submit text-left">
                                             <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
                                                 <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos blogs </b>
@@ -322,7 +357,7 @@ class BlogannoncelocationEdit extends Component {
                                                         </NavLink>
                                                         <div className="mx-3">
                                                             <NavLink to={`/@${$userIvemo.slug}`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
-                                                                <small className="d-block text-muted">12 janv 2019</small>
+                                                                <small className="d-block text-muted"><b>{moment($userIvemo.created_at).format('LL')}</b></small>
                                                             </NavLink>
                                                         </div>
                                                     </div>
@@ -363,10 +398,12 @@ class BlogannoncelocationEdit extends Component {
                                                                        type='text'
                                                                        className={`form-control ${this.hasErrorFor('title') ? 'is-invalid' : ''}`}
                                                                        name='title'
+                                                                       maxLength="200"
+                                                                       minLength="4"
                                                                        placeholder="Titre de l'article"
                                                                        aria-label="Titre de l'article"
                                                                        value={this.state.title || ''}
-                                                                       required
+
                                                                        onChange={this.handleFieldChange}
                                                                 />
                                                                 {this.renderErrorFor('title')}
@@ -376,7 +413,7 @@ class BlogannoncelocationEdit extends Component {
 
                                                     <Row>
                                                         <div className="col-md-6">
-                                                            <label htmlFor="title">Estmer en temp de lecture en mim</label>
+                                                            <label htmlFor="title">Estimer en temp <b>{this.state.red_time} min lecture</b></label>
                                                             <InputGroup>
                                                                 <div className="input-group-prepend">
                                                                     <span className="input-group-text"><i className="now-ui-icons tech_watch-time"/></span>
@@ -385,8 +422,8 @@ class BlogannoncelocationEdit extends Component {
                                                                        type='number'
                                                                        className={`form-control ${this.hasErrorFor('red_time') ? 'is-invalid' : ''}`}
                                                                        name='red_time'
-                                                                       placeholder="Ex: 8"
-                                                                       aria-label="Titre de l'article"
+                                                                       placeholder="Estimer un temp de lecture en min"
+                                                                       aria-label="Estimer un temp de lecture "
                                                                        value={this.state.red_time || ''}
                                                                        required
                                                                        onChange={this.handleFieldChange}
@@ -410,17 +447,19 @@ class BlogannoncelocationEdit extends Component {
                                                         </div>
                                                     </Row>
                                                     <Row>
-                                                        <div className="col-md-4 mx-auto">
-                                                            <div className="profile text-center">
+                                                        <div className="col-md-6 mx-auto">
+                                                            <div className="text-center">
                                                                 <img src={this.state.showDefaultImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : photo} alt={'name'} />
                                                                 <input id="photo" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('photo') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="photo" />
                                                                 {this.renderErrorFor('photo')}
-                                                                <label htmlFor="photo" className="btn btn-primary">
-                                                                    <span className="btn-inner--text">Ajouter l'image</span>
-                                                                </label>
-                                                                <button hidden={this.state.showDefaultImage ? true : false} onClick={this.removeImage} className="btn btn-danger">
-                                                                    <span className="btn-inner--text">Remove</span>
-                                                                </button>
+                                                                <div className="text-center">
+                                                                    <label htmlFor="photo" className="btn btn-primary">
+                                                                        <span className="btn-inner--text">Ajouter l'image</span>
+                                                                    </label>
+                                                                    <label hidden={this.state.showDefaultImage ? true : false} onClick={this.removeImage} className="btn btn-danger">
+                                                                        <span className="btn-inner--text">Remove</span>
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </Row>

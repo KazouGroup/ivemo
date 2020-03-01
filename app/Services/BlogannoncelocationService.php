@@ -2,14 +2,12 @@
 namespace App\Services;
 
 
-
-use App\Http\Resources\AnnoncelocationResource;
 use App\Http\Resources\BlogannoncelocationResource;
-use App\Model\annoncelocation;
 use App\Model\blogannoncelocation;
 use App\Model\categoryannoncelocation;
-use App\Model\city;
 use App\Model\user;
+use Intervention\Image\Facades\Image;
+use File;
 
 class BlogannoncelocationService
 {
@@ -81,10 +79,27 @@ class BlogannoncelocationService
 
     public static function show($blogannoncelocation)
     {
-        $blogannoncelocation = new BlogannoncelocationResource(blogannoncelocation::whereSlugin($blogannoncelocation)
-            ->where(['status' => 1,'status_admin' => 1])->first());
+        $blogannoncelocation = new BlogannoncelocationResource(blogannoncelocation::whereSlugin($blogannoncelocation)->first());
 
         return $blogannoncelocation;
+    }
+
+
+    public static function updateUploadeImage($request,$blogannoncelocation)
+    {
+        $currentPhoto = $blogannoncelocation->photo;
+
+        if ($request->photo != $currentPhoto){
+            $namefile = sha1(date('YmdHis') . str_random(30));
+            $name =   $namefile.'.' . explode('/',explode(':',substr($request->photo,0,strpos
+                ($request->photo,';')))[1])[1];
+            $dir = 'assets/img/blogannoncelocation/';
+            if(!file_exists($dir)){mkdir($dir, 0775, true);}
+            Image::make($request->photo)->fit(10000,40000)->save(public_path('assets/img/blogannoncelocation/').$name);
+            $request->merge(['photo' =>  "/assets/img/blogannoncelocation/{$name}"]);
+            $oldFilename = $currentPhoto;
+            File::delete(public_path($oldFilename));
+        }
     }
 
 }

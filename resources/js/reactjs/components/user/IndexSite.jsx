@@ -26,7 +26,8 @@ class IndexSite extends Component {
                 </nav>
 
                 <div className="wrapper">
-                    <div className="page-header page-header-mini">
+
+                    <div className="page-header page-header-small">
                         <div className="page-header-image" data-parallax="true"
                              style={{backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")"}}>
                         </div>
@@ -40,82 +41,112 @@ class IndexSite extends Component {
                     </div>
 
 
-                    <div className="section">
-                        <div className="container">
+                    <div className="container">
 
 
-                            <div className="row d-flex align-items-end">
-                                <div className="col-lg-6 col-md-8">
-                                    <h5 className="title">De quel service avez-vous besoin ?</h5>
-                                    <p className="text-muted">
-                                        Pour chaque situation, trouvez le prestataire dont les compétences répondent à vos attentes et à votre niveau d’exigence.
-                                    </p>
+                        <div className="row d-flex align-items-end">
+                            <div className="col-lg-6 col-md-8">
+                                <h5 className="title">De quel service avez-vous besoin ?</h5>
+                                <p className="text-muted">
+                                    Pour chaque situation, trouvez le prestataire dont les compétences répondent à vos attentes et à votre niveau d’exigence.
+                                </p>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-4">
+                                <a href="#">
+
+
+                                    <div className="card card-background card-raised" data-background-color=""
+                                         style={{backgroundImage: "url(" + '/assets/vendor/assets/img/examples/card-blog15.jpg' + ")"}}>
+                                        <div className="info">
+                                            <div className="icon icon-white">
+                                                <i className="now-ui-icons business_bulb-63"></i>
+                                            </div>
+                                            <div className="description">
+                                                <h4 className="info-title">Collaborate on ideas</h4>
+                                                <p>Your designer will come back to you with an initial set of ideas.</p>
+                                                <Link to={`/`} className="btn btn-primary">Vendre/acheter des biens</Link>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div className="col-md-4">
+
+                                <a href="#">
+                                    <div className="card card-background card-raised" data-background-color=""
+                                         style={{backgroundImage: "url(" + '/assets/vendor/assets/img/examples/card-blog15.jpg' + ")"}}>
+                                        <div className="info">
+                                            <div className="icon icon-white">
+                                                <i className="now-ui-icons business_badge"></i>
+                                            </div>
+                                            <div className="description">
+                                                <h4 className="info-title">Pick your designer</h4>
+                                                <p>Havenly interior designers are vetted professionals and real
+                                                    people.</p>
+                                                <Link to={`/`} className="btn btn-danger">Trouver des biens</Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+                            <div className="col-md-4">
+                                <a href="#">
+                                    <div className="card card-background card-raised" data-background-color=""
+                                         style={{backgroundImage: "url(" + '/assets/vendor/assets/img/examples/card-blog15.jpg' + ")"}}>
+                                        <div className="info">
+                                            <div className="icon icon-white">
+                                                <i className="now-ui-icons location_map-big"></i>
+                                            </div>
+                                            <div className="description">
+                                                <h4 className="info-title">Visualize your room</h4>
+                                                <p>Share a floor plan, and we'll create a visualization of your
+                                                    room.</p>
+
+                                                <Link to={`/`} className="btn btn-info">Reserver des annonces</Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+                        </div>
+
+
+                        <div className="row">
+                            <div className="col-md-4">
+                                <div className="info info-hover">
+                                    <div className="icon icon-primary">
+                                        <i className="now-ui-icons ui-2_chat-round"></i>
+                                    </div>
+                                    <h4 className="info-title">Social Conversations</h4>
+                                    <p className="description">Gain access to the demographics, psychographics, and
+                                        location of unique people.</p>
                                 </div>
                             </div>
-                            <div className="row">
-                                <div className="col-md-4">
-                                    <a href="#">
-
-
-                                        <div className="card card-background card-raised" data-background-color=""
-                                             style={{backgroundImage: "url(" + '/assets/vendor/assets/img/examples/card-blog15.jpg' + ")"}}>
-                                            <div className="info">
-                                                <div className="icon icon-white">
-                                                    <i className="now-ui-icons business_bulb-63"></i>
-                                                </div>
-                                                <div className="description">
-                                                    <h4 className="info-title">Collaborate on ideas</h4>
-                                                    <p>Your designer will come back to you with an initial set of ideas.</p>
-                                                    <Link to={`/`} className="btn btn-primary">Vendre/acheter des biens</Link>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div className="col-md-4">
-
-                                    <a href="#">
-                                        <div className="card card-background card-raised" data-background-color=""
-                                             style={{backgroundImage: "url(" + '/assets/vendor/assets/img/examples/card-blog15.jpg' + ")"}}>
-                                            <div className="info">
-                                                <div className="icon icon-white">
-                                                    <i className="now-ui-icons business_badge"></i>
-                                                </div>
-                                                <div className="description">
-                                                    <h4 className="info-title">Pick your designer</h4>
-                                                    <p>Havenly interior designers are vetted professionals and real
-                                                        people.</p>
-                                                    <Link to={`/`} className="btn btn-danger">Trouver des biens</Link>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                </div>
-                                <div className="col-md-4">
-                                    <a href="#">
-                                        <div className="card card-background card-raised" data-background-color=""
-                                             style={{backgroundImage: "url(" + '/assets/vendor/assets/img/examples/card-blog15.jpg' + ")"}}>
-                                            <div className="info">
-                                                <div className="icon icon-white">
-                                                    <i className="now-ui-icons location_map-big"></i>
-                                                </div>
-                                                <div className="description">
-                                                    <h4 className="info-title">Visualize your room</h4>
-                                                    <p>Share a floor plan, and we'll create a visualization of your
-                                                        room.</p>
-
-                                                    <Link to={`/`} className="btn btn-info">Reserver des annonces</Link>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-
+                            <div className="col-md-4">
+                                <div className="info info-hover">
+                                    <div className="icon icon-success">
+                                        <i className="now-ui-icons business_chart-pie-36"></i>
+                                    </div>
+                                    <h4 className="info-title">Analyze Performance</h4>
+                                    <p className="description">Unify data from Facebook, Instagram, Twitter,
+                                        LinkedIn, and Youtube to gain rich insights.</p>
                                 </div>
                             </div>
-
-
+                            <div className="col-md-4">
+                                <div className="info info-hover">
+                                    <div className="icon icon-warning">
+                                        <i className="now-ui-icons design-2_ruler-pencil"></i>
+                                    </div>
+                                    <h4 className="info-title">Measure Conversions</h4>
+                                    <p className="description">Track actions taken on your website, understand the
+                                        impact on your bottom line.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

@@ -175,6 +175,11 @@ class AnnonceslocationList extends Component {
                             </div>
                         </div>
                     </div>
+                    {!this.props.status_admin &&(
+                        <div className="alert alert-danger text-center" role="alert">
+                            <span>Cette annonce à éte momentanément désactivée car elle ne respecte pas nos régle et nos principe <a href="#pablo">Clique sur ce lien</a> pour en savoir plus</span>
+                        </div>
+                    )}
                 </div>
             </div>
 

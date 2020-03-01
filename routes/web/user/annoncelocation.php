@@ -1,5 +1,9 @@
 <?php
 
+Route::get(
+    'api/categoryannoncelocations_by_user',
+    'AnnoncelocationController@apicategoryannoncelocations_by_user'
+)->name('api.categoryannoncelocations_by_user_site');
 
 Route::get(
     'annonces_locations/{annoncetype}',

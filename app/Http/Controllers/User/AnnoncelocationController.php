@@ -29,7 +29,7 @@ class AnnoncelocationController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','destroy','apiannonceslocationsbyuser','annonceslocationsbyuser','activated','unactivated'
+            'create','store','edit','update','destroy','apiannonceslocationsbyuser','annonceslocationsbyuser','apicategoryannoncelocations_by_user','activated','unactivated'
         ]]);
     }
     /**
@@ -87,6 +87,20 @@ class AnnoncelocationController extends Controller
                 $q->where(['status' => 1,'status_admin' => 1]);
             }])
             ->orderBy('annoncelocations_count','desc')
+            ->distinct()->get());
+
+        return response()->json($categoryannoncelocations, 200);
+    }
+
+    public function apicategoryannoncelocations_by_user()
+    {
+        $categoryannoncelocations = CategoryannoncelocationResource::collection(categoryannoncelocation::with('user')
+            ->withCount(['annoncelocations' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1])
+                    ->whereIn('user_id',[auth()->user()->id]);
+            }])->withCount(['blogannoncelocations' => function ($q){
+                $q->whereIn('user_id',[auth()->user()->id]);
+            }])->orderBy('annoncelocations_count','desc')
             ->distinct()->get());
 
         return response()->json($categoryannoncelocations, 200);
