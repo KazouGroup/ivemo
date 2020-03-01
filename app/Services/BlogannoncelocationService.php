@@ -81,7 +81,8 @@ class BlogannoncelocationService
 
     public static function show($blogannoncelocation)
     {
-        $blogannoncelocation = new BlogannoncelocationResource(blogannoncelocation::whereSlugin($blogannoncelocation)->first());
+        $blogannoncelocation = new BlogannoncelocationResource(blogannoncelocation::whereSlugin($blogannoncelocation)
+            ->where(['status' => 1,'status_admin' => 1])->first());
 
         return $blogannoncelocation;
     }

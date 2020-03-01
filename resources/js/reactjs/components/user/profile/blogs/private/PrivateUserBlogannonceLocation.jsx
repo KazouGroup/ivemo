@@ -247,9 +247,8 @@ class PrivateUserBlogannonceLocation extends Component {
                                         {visiable < userblogannoncelocationsPrivate.blogannoncelocations.length && (
                                             <div className="row">
                                                 <div className="col-md-4 ml-auto mr-auto text-center">
-                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-secondary btn-block">
+                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
                                                         <b>Voir plus </b>
-                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
                                                     </button>
                                                 </div>
                                             </div>
@@ -263,10 +262,7 @@ class PrivateUserBlogannonceLocation extends Component {
 
                             </div>
 
-
-
                         </div>
-
 
                         <FooterBigUserSite />
                     </div>
