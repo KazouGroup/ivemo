@@ -14,5 +14,6 @@ $factory->define(teamuser::class, function (Faker $faker) {
         'status' => $faker->boolean,
         'photo'=> $faker->imageUrl($width = 400, $height = 400),
         'user_id' => user::inRandomOrder()->first()->id,
+        'created_at' => $faker->dateTime,
     ];
 });

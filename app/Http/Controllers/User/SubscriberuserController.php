@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Exports\SubscriberuserExport;
 use App\Http\Controllers\Controller;
 use App\Model\subscriberuser;
 use App\Model\user;
+use Maatwebsite\Excel\Facades\Excel;
 use Newsletter;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,6 +56,12 @@ class SubscriberuserController extends Controller
            abort(404);
        }
 
+    }
+
+
+    public function export()
+    {
+        return Excel::download(new SubscriberuserExport(), 'Email-subscriber.xlsx');
     }
 
     public function subscriberuserprivate(user $user)

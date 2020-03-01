@@ -182,7 +182,7 @@ class ProfileAccountPublicUser extends Component {
                                             <div className="card-body">
 
                                                 <div className="card-header text-center">
-                                                    <h4 className="card-title"><b>Abonnez-vous à la newsletter</b></h4>
+                                                    <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
                                                     <p className="card-title">
                                                         Abonnez-vous à la newsletter de <b>{userPublick.first_name}</b> afin d'être averti des nouvelles mises à jour
                                                     </p>

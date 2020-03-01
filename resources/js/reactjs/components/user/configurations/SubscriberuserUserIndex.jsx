@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import {Button, UncontrolledTooltip,Tooltip} from "reactstrap";
+import {Button, UncontrolledTooltip, Tooltip, FormText} from "reactstrap";
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
@@ -65,6 +65,15 @@ class SubscriberuserUserIndex extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
+                                        <div className="submit text-center">
+                                            <a href={`${route('subscriberuser_public_mail.export')}`} className="btn btn-danger">
+                                                <i className="fa fa-file-excel"/> Telecharger
+                                            </a>
+                                            <FormText className="text-muted" color="default" id="emailHelp">
+                                                <b>Telecharger toutes emails abonner à votre newsletter nous recomandons de ne pas spamer </b>
+                                            </FormText>
+                                        </div>
+
                                         <NavlinkconfigurationUser {...this.props} {...userItems} />
 
                                     </div>
@@ -75,21 +84,20 @@ class SubscriberuserUserIndex extends Component {
                                         <div className="card">
                                             <div className="card-body">
 
-
                                                 <div className="table-responsive">
                                                     <table id="datatable" className="table table-striped">
                                                         <thead>
                                                         <tr>
                                                             <th><b>Email</b></th>
-                                                            <th><b>Date d'abonement</b></th>
-                                                            <th className="disabled-sorting text-right"><b>Actions</b></th>
+                                                            <th><b>IP</b></th>
+                                                            <th className="disabled-sorting text-right"><b>Date d'abonement</b></th>
                                                         </tr>
                                                         </thead>
                                                         <tfoot>
                                                         <tr>
                                                             <th>Email</th>
-                                                            <th>Date d'abonement</th>
-                                                            <th className="disabled-sorting text-right">Actions</th>
+                                                            <th>IP</th>
+                                                            <th className="disabled-sorting text-right">Date d'abonement</th>
                                                         </tr>
                                                         </tfoot>
                                                         <tbody>
@@ -98,16 +106,9 @@ class SubscriberuserUserIndex extends Component {
                                                                 {userItems.subscriberusers.slice(0,visiable).map((item) =>(
                                                                     <tr key={item.id}>
                                                                         <td>{item.user_email}</td>
-                                                                        <td>{moment(item.created_at).format('LL')}</td>
+                                                                        <td>{item.ip}</td>
                                                                         <td className="text-right">
-
-                                                                            <button type="button" id={'TooltipDelete'}
-                                                                                    className="btn btn-danger btn-icon btn-sm btn-neutral">
-                                                                                <i className="now-ui-icons ui-1_simple-remove"/>
-                                                                            </button>
-                                                                            <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
-                                                                                Supprimer
-                                                                            </UncontrolledTooltip>
+                                                                            {moment(item.created_at).format('LL')}
                                                                         </td>
                                                                     </tr>
                                                                 ))}
