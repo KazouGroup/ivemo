@@ -6,6 +6,16 @@ Route::get(
 )->name('blogannoncelocation_site');
 
 Route::get(
+    'blogs/annonce_locations/ab/new',
+    'BlogannoncelocationController@create'
+)->name('blogannoncelocationabnew_site');
+
+Route::post(
+    'blogs/annonce_locations/save',
+    'BlogannoncelocationController@store'
+)->name('blogannoncecategorylocationstore_site');
+
+Route::get(
     'blogs/annonce_locations/{categoryannoncelocation}',
     'BlogannoncelocationController@annonceblogcategorylocation'
 )->name('blogannoncecategorylocation_site');

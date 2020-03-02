@@ -6,6 +6,7 @@ import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../../../configurations/inc/NavlinkconfigurationUser";
 import BlogannoncelocationList from "../../../blog/blogannoncelocation/BlogannoncelocationList";
+import Navblogannoncelocationsbyuser from "../../../blog/blogannoncelocation/inc/Navblogannoncelocationsbyuser";
 
 
 class PrivateUserBlogannonceLocation extends Component {
@@ -234,6 +235,20 @@ class PrivateUserBlogannonceLocation extends Component {
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
                                                 <i className="now-ui-icons ui-1_simple-add"/> <b>Ajouter une nouvelle article sur la location</b>
                                             </NavLink>
+                                        </div>
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+
+                                                            <Navblogannoncelocationsbyuser/>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <NavlinkconfigurationUser {...userblogannoncelocationsPrivate} />

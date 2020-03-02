@@ -9,8 +9,7 @@ class BlogannoncelocationList extends Component {
 
 
     getDescription() {
-        const md = new Remarkable();
-        return { __html: md.render(this.props.description.length > 60 ? this.props.description.substring(0, 60) + "..." : this.props.description) };
+        return { __html: (this.props.description.length > 60 ? this.props.description.substring(0, 60) + "..." : this.props.description) };
     }
     render() {
         return (

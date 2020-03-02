@@ -6,8 +6,8 @@ use App\Http\Resources\BlogannoncelocationResource;
 use App\Model\blogannoncelocation;
 use App\Model\categoryannoncelocation;
 use App\Model\user;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
-use File;
 
 class BlogannoncelocationService
 {
@@ -84,6 +84,25 @@ class BlogannoncelocationService
         return $blogannoncelocation;
     }
 
+    public static function storeUploadImage($request,$blogannoncelocation)
+    {
+
+        if ($request->photo) {
+            $namefile = sha1(date('YmdHis') . str_random(30));
+            $name =   $namefile.'.' . explode('/',explode(':',substr($request->photo,0,strpos
+                ($request->photo,';')))[1])[1];
+            $dir = 'assets/img/blogannoncelocation/';
+            if(!file_exists($dir)){
+                mkdir($dir, 0775, true);
+            }
+            $destinationPath = public_path("assets/img/blogannoncelocation/{$name}");
+            Image::make($request->photo)->save($destinationPath);
+
+            $myfilename = "/assets/img/blogannoncelocation/{$name}";
+            $blogannoncelocation->photo = $myfilename;
+        }
+
+    }
 
     public static function updateUploadeImage($request,$blogannoncelocation)
     {
@@ -95,7 +114,7 @@ class BlogannoncelocationService
                 ($request->photo,';')))[1])[1];
             $dir = 'assets/img/blogannoncelocation/';
             if(!file_exists($dir)){mkdir($dir, 0775, true);}
-            Image::make($request->photo)->fit(10000,40000)->save(public_path('assets/img/blogannoncelocation/').$name);
+            Image::make($request->photo)->save(public_path('assets/img/blogannoncelocation/').$name);
             $request->merge(['photo' =>  "/assets/img/blogannoncelocation/{$name}"]);
             $oldFilename = $currentPhoto;
             File::delete(public_path($oldFilename));

@@ -90,8 +90,7 @@ class BlogannoncelocationShow extends Component {
         this.loadItems();
     }
     getDescription(blogannoncelocation) {
-        const md = new Remarkable();
-        return { __html: md.render(blogannoncelocation.description) };
+        return { __html: blogannoncelocation.description};
     }
     render() {
         const { blogannoncelocation } = this.state;
@@ -195,7 +194,7 @@ class BlogannoncelocationShow extends Component {
 
                                                         <h2 className="title text-center">{blogannoncelocation.title}</h2>
 
-                                                        <div className="title mb-2 text-justify" dangerouslySetInnerHTML={this.getDescription(blogannoncelocation)} />
+                                                        <div className="title text-justify" dangerouslySetInnerHTML={this.getDescription(blogannoncelocation)} />
 
 
                                                     </div>
@@ -210,7 +209,7 @@ class BlogannoncelocationShow extends Component {
 
                                     </div>
                                 </div>
-  
+
                                 <AnnoncelocationInteresseforBlog {...this.props} />
 
 

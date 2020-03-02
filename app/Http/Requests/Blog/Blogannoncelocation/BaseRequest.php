@@ -22,6 +22,7 @@ class BaseRequest extends Request
                 'title' => 'required|string|min:2|max:200',
                 'red_time' => 'required|numeric',
                 'description' => 'required',
+                'photo' => 'required',
                 'categoryannoncelocation_id' => 'required',
             ];
         }
@@ -30,6 +31,7 @@ class BaseRequest extends Request
                 'title' => 'required|string|min:2|max:200',
                 'red_time' => 'required|numeric',
                 'description' => 'required',
+                'photo' => 'required',
                 'categoryannoncelocation_id' => 'required',
             ];
         }

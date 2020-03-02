@@ -202,7 +202,7 @@ class BlogannoncelocationIndex extends Component {
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
-                                            <NavLink className="btn btn-primary" to={`/annonce/show/create/`}>
+                                            <NavLink className="btn btn-primary" to={`/blogs/annonce_locations/ab/new/`}>
                                                 <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article</b>
                                             </NavLink>
                                         </div>

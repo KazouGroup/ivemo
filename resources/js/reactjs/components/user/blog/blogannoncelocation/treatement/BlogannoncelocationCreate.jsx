@@ -20,14 +20,11 @@ import Navblogannoncelocationsbyuser from "../inc/Navblogannoncelocationsbyuser"
 import moment from "moment";
 
 
-class BlogannoncelocationEdit extends Component {
+class BlogannoncelocationCreate extends Component {
     constructor(props) {
         super(props);
 
-        this.updateItem = this.updateItem.bind(this);
-        this.activeItem = this.activeItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
-        this.deleteItem = this.deleteItem.bind(this);
+        this.saveItem = this.saveItem.bind(this);
         this.updateImage = this.updateImage.bind(this);
         this.removeImage = this.removeImage.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -104,134 +101,8 @@ class BlogannoncelocationEdit extends Component {
             )
         }
     }
-    activeItem(id){
-        //Envoyer la requet au server
-        let url = route('blogannoncecategorylocationactive_site.site',[id]);
-        dyaxios.get(url).then(() => {
 
-            /** Alert notify bootstrapp **/
-            $.notify({
-                    //,
-                    message: 'Article de blogs activé avec succès'
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
-                    },
-                    animate: {
-                        enter: "animated fadeInUp",
-                        exit: "animated fadeOutDown"
-                    },
-                });
-            /** End alert ***/
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animated bounceInDown',
-                    exit: 'animated bounceOutUp'
-                }
-            });
-        })
-
-    }
-
-    unactiveItem(id){
-        //Envoyer la requet au server
-        let url = route('blogannoncecategorylocationunactive_site.site',[id]);
-        dyaxios.get(url).then(() => {
-
-            /** Alert notify bootstrapp **/
-            $.notify({
-                    // title: 'Update FAQ',
-                    message: 'Article de blogs désactiver avec succès'
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
-                    },
-                    animate: {
-                        enter: "animated fadeInUp",
-                        exit: "animated fadeOutDown"
-                    },
-                });
-            /** End alert ***/
-            this.loadItems();
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animated bounceInDown',
-                    exit: 'animated bounceOutUp'
-                }
-            });
-        })
-
-    }
-
-    deleteItem(id) {
-        Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                const url = route('blogannoncecategorylocationdelete_site',id);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            // title: 'Update',
-                            message: 'Article de blogs suprimée avec success'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-                    this.props.history.goBack();
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
-
-    updateItem(e) {
+    saveItem(e) {
         e.preventDefault();
 
         let item = {
@@ -241,12 +112,11 @@ class BlogannoncelocationEdit extends Component {
             description: this.state.description,
             categoryannoncelocation_id: this.state.categoryannoncelocation_id,
         };
-        let Itemdata = this.props.match.params.blogannoncelocation;
-        dyaxios.put(route('blogannoncecategorylocationupdate_site', [Itemdata]), item)
+        dyaxios.post(route('blogannoncecategorylocationstore_site'), item)
             .then(() => {
                 $.notify({
                     //,
-                    message: 'Votre article de blogs a bien été modifié'
+                    message: 'Votre article de blogs a bien été crée'
                 },
                     {
                         allow_dismiss: false,
@@ -260,6 +130,7 @@ class BlogannoncelocationEdit extends Component {
                             exit: "animated fadeOutDown"
                         },
                     });
+                this.props.history.push(`/blogs/annonce_locations/`);
             }).catch(error => {
                 this.setState({
                     errors: error.response.data.errors
@@ -274,30 +145,14 @@ class BlogannoncelocationEdit extends Component {
                 });
             })
     }
-
-    loadItems() {
-        let Itemdata = this.props.match.params.blogannoncelocation;
-        let url = route('api.blogannonceblogcategorylocationslugin_site', [Itemdata]);
-        dyaxios.get(url).then(response =>
-            this.setState({
-                id: response.data.id,
-                title: response.data.title,
-                photo: response.data.photo,
-                status: response.data.status,
-                red_time: response.data.red_time,
-                categoryannoncelocation_id: response.data.categoryannoncelocation_id,
-                description: response.data.description,
-            }));
-    }
     // lifecycle method
     componentDidMount() {
-        this.loadItems();
         fetch(route('api.categoryannoncelocation_site')).then(res => res.json()).then((result) => { this.setState({ categoryannoncelocations: result }) })
     }
 
     render() {
         const { photo, categoryannoncelocations } = this.state;
-        const composantTitle = `${this.state.title || 'Ivemo'}`;
+        const composantTitle = `${this.state.title || 'Article'}`;
         document.title = `${composantTitle} - Ivemo`;
         return (
             <div className="about-us sidebar-collapse">
@@ -310,7 +165,7 @@ class BlogannoncelocationEdit extends Component {
                         <div className="container">
                             <br />
 
-                            <form role="form" onSubmit={this.updateItem} acceptCharset="UTF-8">
+                            <form role="form" onSubmit={this.saveItem} acceptCharset="UTF-8">
 
                                 <div className="row">
 
@@ -360,28 +215,6 @@ class BlogannoncelocationEdit extends Component {
                                                                 <small className="d-block text-muted"><b>{moment($userIvemo.created_at).format('LL')}</b></small>
                                                             </NavLink>
                                                         </div>
-                                                    </div>
-                                                    <div className="text-right ml-auto">
-                                                        {this.state.status ?
-                                                            <>
-                                                                <button type="button" rel="tooltip" onClick={() => this.unactiveItem(this.state.id)}
-                                                                        className="btn btn-success btn-icon btn-sm" >
-                                                                    <i className="now-ui-icons ui-1_check"/>
-                                                                </button>
-                                                            </>
-                                                            :
-                                                            <>
-                                                                <button type="button" onClick={() => this.activeItem(this.state.id)}
-                                                                        className="btn btn-primary btn-icon btn-sm">
-                                                                    <i className="now-ui-icons ui-1_simple-delete"/>
-                                                                </button>
-                                                            </>
-
-                                                        }
-                                                        <Button
-                                                            className="btn btn-sm btn-icon btn-danger" onClick={() => this.deleteItem(this.state.id)} >
-                                                            <i className="now-ui-icons ui-1_simple-remove"/>
-                                                        </Button>{" "}
                                                     </div>
                                                 </div>
                                                 <hr />
@@ -487,7 +320,7 @@ class BlogannoncelocationEdit extends Component {
 
                                                 <div className="submit text-center">
                                                     <button className="btn btn-primary" type="submit">
-                                                        <b>Mettre à jour l'article de blog</b>
+                                                        <b>Sauvegarder l'article de blog</b>
                                                     </button>
                                                 </div>
                                             </div>
@@ -509,4 +342,4 @@ class BlogannoncelocationEdit extends Component {
     }
 }
 
-export default withRouter(BlogannoncelocationEdit);
+export default withRouter(BlogannoncelocationCreate);

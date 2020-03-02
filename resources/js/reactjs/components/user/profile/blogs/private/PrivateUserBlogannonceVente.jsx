@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../../../configurations/inc/NavlinkconfigurationUser";
 import BlogannoncereservationList from "../../../blog/blogannoncereservation/BlogannoncereservationList";
 import BlogannonceventeList from "../../../blog/blognnoncevente/BlogannonceventeList";
+import Navblogannoncelocationsbyuser from "../../../blog/blogannoncelocation/inc/Navblogannoncelocationsbyuser";
 
 
 class PrivateUserBlogannonceVente extends Component {
@@ -235,6 +236,20 @@ class PrivateUserBlogannonceVente extends Component {
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
                                                 <i className="now-ui-icons ui-1_simple-add"/> <b>Ajouter une nouvelle article sur la vente/achat</b>
                                             </NavLink>
+                                        </div>
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+
+                                                            <Navblogannoncelocationsbyuser/>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <NavlinkconfigurationUser {...userblogannonceventesPrivate} />

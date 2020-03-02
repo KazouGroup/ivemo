@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Blog\Blogannoncelocation\StoreRequest;
 use App\Http\Requests\Blog\Blogannoncelocation\UpdateRequest;
 use App\Http\Resources\BlogannoncelocationResource;
 use App\Http\Resources\CategoryannoncelocationResource;
@@ -11,6 +12,7 @@ use App\Model\categoryannoncelocation;
 use App\Model\user;
 use App\Services\BlogannoncelocationService;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpFoundation\Response;
 use File;
 
@@ -147,7 +149,7 @@ class BlogannoncelocationController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.blogs.blogannoncelocation.create');
     }
 
     /**
@@ -156,9 +158,17 @@ class BlogannoncelocationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $blogannoncelocation= new blogannoncelocation();
+
+        $blogannoncelocation->fill($request->all());
+
+        BlogannoncelocationService::storeUploadImage($request,$blogannoncelocation);
+
+        $blogannoncelocation->save();
+
+        return response('Created',Response::HTTP_CREATED);
     }
 
     /**
@@ -225,7 +235,7 @@ class BlogannoncelocationController extends Controller
      */
     public function update(UpdateRequest $request,$blogannoncelocation)
     {
-        $blogannoncelocation = blogannoncelocation::whereSlugin($blogannoncelocation)->first();
+        $blogannoncelocation = blogannoncelocation::whereSlugin($blogannoncelocation)->firstOrFail();
 
         BlogannoncelocationService::updateUploadeImage($request,$blogannoncelocation);
 

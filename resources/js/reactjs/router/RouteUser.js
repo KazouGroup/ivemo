@@ -66,6 +66,8 @@ import PrivateUserAnnonceVentes from "../components/user/profile/annonces/privat
 import PublicUserAnnonceVentes from "../components/user/profile/annonces/public/PublicUserAnnonceVentes";
 import RegisterUser from "../components/user/auth/RegisterUser";
 import SubscriberuserUserIndex from "../components/user/configurations/SubscriberuserUserIndex";
+import BlogannoncelocationCreate
+    from "../components/user/blog/blogannoncelocation/treatement/BlogannoncelocationCreate";
 
 
 const RouteUser = props => (
@@ -142,6 +144,7 @@ const RouteUser = props => (
           <Route exact path="/blogs/annonce_locations/" component={BlogannoncelocationIndex}/>
           <Route exact path="/blogs/annonce_locations/:categoryannoncelocation/" component={withRouter(BlogannoncelocationBycategorylocation)}/>
           <Route exact path="/blogs/annonce_locations/:categoryannoncelocation/:date/:blogannoncelocation/" component={withRouter(BlogannoncelocationShow)}/>
+          <Route exact path="/blogs/annonce_locations/ab/new/" component={BlogannoncelocationCreate}/>
           <Route exact path="/blogs/annonce_locations/:blogannoncelocation/edit/" component={BlogannoncelocationEdit}/>
           <Route exact path="/blogs/annonce_reservations/:blogannoncereservation/edit/" component={BlogannoncereservationEdit}/>
 
