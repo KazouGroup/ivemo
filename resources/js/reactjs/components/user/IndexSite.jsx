@@ -29,7 +29,7 @@ class IndexSite extends Component {
 
                     <div className="page-header page-header-small">
                         <div className="page-header-image" data-parallax="true"
-                             style={{backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")"}}>
+                            style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
                         </div>
                         <div className="content-center">
                             <div className="row">
@@ -53,65 +53,65 @@ class IndexSite extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-md-4">
-                                <a href="#">
 
 
-                                    <div className="card card-background card-raised" data-background-color=""
-                                         style={{backgroundImage: "url(" + '/assets/vendor/assets/img/examples/card-blog15.jpg' + ")"}}>
-                                        <div className="info">
-                                            <div className="icon icon-white">
-                                                <i className="now-ui-icons business_bulb-63"></i>
-                                            </div>
-                                            <div className="description">
-                                                <h4 className="info-title">Collaborate on ideas</h4>
-                                                <p>Your designer will come back to you with an initial set of ideas.</p>
-                                                <Link to={`/`} className="btn btn-primary">Vendre/acheter des biens</Link>
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
                             <div className="col-md-4">
 
-                                <a href="#">
+                                <Link to={`/annonces_locations/locations/`}>
                                     <div className="card card-background card-raised" data-background-color=""
-                                         style={{backgroundImage: "url(" + '/assets/vendor/assets/img/examples/card-blog15.jpg' + ")"}}>
+                                        style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/examples/card-blog15.jpg' + ")" }}>
                                         <div className="info">
                                             <div className="icon icon-white">
                                                 <i className="now-ui-icons business_badge"></i>
                                             </div>
                                             <div className="description">
-                                                <h4 className="info-title">Pick your designer</h4>
-                                                <p>Havenly interior designers are vetted professionals and real
-                                                    people.</p>
-                                                <Link to={`/`} className="btn btn-danger">Trouver des biens</Link>
+                                                <h4 className="info-title">LOCATIONS</h4>
+                                                <Link to={`/annonces_locations/locations/`} className="btn btn-danger">Voir les annonces</Link>
                                             </div>
                                         </div>
                                     </div>
-                                </a>
+                                </Link>
 
                             </div>
+
                             <div className="col-md-4">
-                                <a href="#">
+                                <Link to={`/annonces_reservations/reservations/`}>
                                     <div className="card card-background card-raised" data-background-color=""
-                                         style={{backgroundImage: "url(" + '/assets/vendor/assets/img/examples/card-blog15.jpg' + ")"}}>
+                                        style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/examples/card-blog15.jpg' + ")" }}>
                                         <div className="info">
                                             <div className="icon icon-white">
                                                 <i className="now-ui-icons location_map-big"></i>
                                             </div>
                                             <div className="description">
-                                                <h4 className="info-title">Visualize your room</h4>
-                                                <p>Share a floor plan, and we'll create a visualization of your
-                                                    room.</p>
+                                                <h4 className="info-title">RESERVATIONS</h4>
 
-                                                <Link to={`/`} className="btn btn-info">Reserver des annonces</Link>
+                                                <Link to={`/annonces_reservations/reservations/`} className="btn btn-info">Voir les annonces</Link>
                                             </div>
                                         </div>
                                     </div>
-                                </a>
+                                </Link>
 
+                            </div>
+
+                            <div className="col-md-4">
+
+                                <Link to={`/`}>
+
+                                    <div className="card card-background card-raised" data-background-color=""
+                                        style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/examples/card-blog15.jpg' + ")" }}>
+                                        <div className="info">
+                                            <div className="icon icon-white">
+                                                <i className="now-ui-icons business_bulb-63"></i>
+                                            </div>
+                                            <div className="description">
+                                                <h4 className="info-title">VENTES/ACHATS</h4>
+                                                <Link to={`/annonces_ventes/ventes/`} className="btn btn-primary">Voir les annonces</Link>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Link>
                             </div>
                         </div>
 
@@ -122,9 +122,8 @@ class IndexSite extends Component {
                                     <div className="icon icon-primary">
                                         <i className="now-ui-icons ui-2_chat-round"></i>
                                     </div>
-                                    <h4 className="info-title">Social Conversations</h4>
-                                    <p className="description">Gain access to the demographics, psychographics, and
-                                        location of unique people.</p>
+                                    <h4 className="info-title">tester</h4>
+                                    <p className="description">J'aimerais acheter ou</p>
                                 </div>
                             </div>
                             <div className="col-md-4">
@@ -151,7 +150,7 @@ class IndexSite extends Component {
                     </div>
 
 
-                    <FooterBigUserSite/>
+                    <FooterBigUserSite />
                 </div>
             </div>
         )

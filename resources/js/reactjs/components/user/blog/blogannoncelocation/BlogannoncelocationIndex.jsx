@@ -163,7 +163,7 @@ class BlogannoncelocationIndex extends Component {
                 <div className="landing-page sidebar-collapse">
 
 
-                    <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
+                    <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400" >
                         <NavUserSite />
                     </nav>
 
