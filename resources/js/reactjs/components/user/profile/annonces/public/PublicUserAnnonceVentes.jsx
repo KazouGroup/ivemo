@@ -17,9 +17,16 @@ class PublicUserAnnonceVentes extends Component {
         super(props);
         this.state = {
             userannonceventePublick:{annonceventes:[]},
+            visiable: 10,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.loadmoresItem = this.loadmoresItem.bind(this);
+    }
+    loadmoresItem() {
+        this.setState((old) => {
+            return { visiable: old.visiable + 10 }
+        })
     }
     deleteItem(id) {
         Swal.fire({
@@ -85,9 +92,9 @@ class PublicUserAnnonceVentes extends Component {
     }
 
     render() {
-        const {userannonceventePublick} = this.state;
+        const {userannonceventePublick,visiable} = this.state;
         const mapAnnonceventes = userannonceventePublick.annonceventes.length ? (
-            userannonceventePublick.annonceventes.map(item => {
+            userannonceventePublick.annonceventes.slice(0, visiable).map(item => {
                 return(
 
                     <AnnonceventeList key={item.id} {...item} deleteItem={this.deleteItem}/>
@@ -114,11 +121,15 @@ class PublicUserAnnonceVentes extends Component {
                             <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
                             </div>
                             <div className="content-center">
-                                <div className="row">
-                                    <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">Annonce ventes de {userannonceventePublick.first_name}</h3>
-                                    </div>
-                                </div>
+
+                                <h2 className="title">{userannonceventePublick.first_name}</h2>
+                                <Link to={`/@${userannonceventePublick.slug}/`} className="text-white">
+                                    <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userannonceventePublick.first_name}</b>
+                                </Link>
+                                {userannonceventePublick.annonceventes_count > 0 &&(
+                                    <h5><b>{userannonceventePublick.annonceventes_count}</b> {userannonceventePublick.annonceventes_count > 1 ? "annonces" : "annonce"} posté par {userannonceventePublick.first_name} sur la vente et l'achat</h5>
+                                )}
+
                             </div>
                         </div>
 
@@ -136,7 +147,7 @@ class PublicUserAnnonceVentes extends Component {
 
                                         <div className="submit text-center">
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
+                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster un article </b>
                                             </NavLink>
                                         </div>
 
@@ -210,6 +221,15 @@ class PublicUserAnnonceVentes extends Component {
 
                                         {mapAnnonceventes}
 
+                                        {visiable < userannonceventePublick.annonceventes.length && (
+                                            <div className="row">
+                                                <div className="col-md-4 ml-auto mr-auto text-center">
+                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                                        <b>Voir plus </b>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
 
                                         <div className="card">
                                             <div className="card-body">

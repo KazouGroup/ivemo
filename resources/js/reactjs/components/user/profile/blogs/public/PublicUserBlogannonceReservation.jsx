@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Button,Row } from "reactstrap";
+import { Button, Row } from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
@@ -9,22 +9,23 @@ import FormContactProfileAccountUser from "../../form/FormContactProfileAccountU
 import NavLinkPublicBlogannoncesUser from "./NavLinkPublicBlogannoncesUser";
 import NavLinkPublicAnnonceUser from "../../annonces/NavLinkPublicAnnonceUser";
 import PublicUserBlogannoncereservationList from "./inc/PublicUserBlogannoncereservationList";
+import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
 
 
 class PublicUserBlogannonceReservation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userblogreservationPublick:{blogannoncereservations: []},
+            userblogreservationPublick: { blogannoncereservations: [] },
             visiable: 10,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
     }
-    loadmoresItem(){
-        this.setState((old) =>{
-            return {visiable: old.visiable + 10}
+    loadmoresItem() {
+        this.setState((old) => {
+            return { visiable: old.visiable + 10 }
         })
     }
     deleteItem(id) {
@@ -42,15 +43,15 @@ class PublicUserBlogannonceReservation extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('blogannoncecategoryreservationdelete_site',id);
+                const url = route('blogannoncecategoryreservationdelete_site', id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            // title: 'Update',
-                            message: 'Articles suprimée avec success'
-                        },
+                        // title: 'Update',
+                        message: 'Articles suprimée avec success'
+                    },
                         {
                             allow_dismiss: false,
                             type: 'primary',
@@ -80,9 +81,9 @@ class PublicUserBlogannonceReservation extends Component {
         });
     }
 
-    loadItems(){
+    loadItems() {
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.profilpublique_blogannoncerewservations',[itemuser])).then(response => this.setState({userblogreservationPublick: response.data,}));
+        dyaxios.get(route('api.profilpublique_blogannoncerewservations', [itemuser])).then(response => this.setState({ userblogreservationPublick: response.data, }));
     }
 
     // lifecycle method
@@ -91,17 +92,17 @@ class PublicUserBlogannonceReservation extends Component {
     }
 
     render() {
-        const {userblogreservationPublick,visiable} = this.state;
+        const { userblogreservationPublick, visiable } = this.state;
         const mapBlogannoncereservations = userblogreservationPublick.blogannoncereservations.length ? (
-            userblogreservationPublick.blogannoncereservations.slice(0,visiable).map(item => {
-                return(
+            userblogreservationPublick.blogannoncereservations.slice(0, visiable).map(item => {
+                return (
 
-                    <PublicUserBlogannoncereservationList key={item.id} {...item} deleteItem={this.deleteItem}/>
+                    <PublicUserBlogannoncereservationList key={item.id} {...item} deleteItem={this.deleteItem} />
                 )
             })
-        ):(
-            <></>
-        );
+        ) : (
+                <></>
+            );
         return (
             <>
                 <Helmet>
@@ -120,11 +121,19 @@ class PublicUserBlogannonceReservation extends Component {
                             <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
                             </div>
                             <div className="content-center">
-                                <div className="row">
-                                    <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">Toutes les de {userblogreservationPublick.first_name}</h3>
-                                    </div>
+
+                                <div className="card-body">
+
+                                    <h2 className="title">{userblogreservationPublick.first_name}</h2>
+                                    <Link to={`/@${userblogreservationPublick.slug}/`} className="text-white">
+                                        <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userblogreservationPublick.first_name}</b>
+                                    </Link>
+                                    {userblogreservationPublick.blogannoncereservations_count > 0 &&(
+                                        <h5><b>{userblogreservationPublick.blogannoncereservations_count}</b> {userblogreservationPublick.blogannoncereservations_count > 1 ? "articles" : "article"} posté par {userblogreservationPublick.first_name} sur la reservation</h5>
+                                    )}
+
                                 </div>
+
                             </div>
                         </div>
 
@@ -142,7 +151,7 @@ class PublicUserBlogannonceReservation extends Component {
 
                                         <div className="submit text-center">
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article</b>
+                                                <i className="now-ui-icons ui-1_simple-add" /> <b>Poster votre article</b>
                                             </NavLink>
                                         </div>
 
@@ -158,7 +167,7 @@ class PublicUserBlogannonceReservation extends Component {
                                                                     </a>
                                                                 </div>
 
-                                                                <NavLinkPublicAnnonceUser {...this.props} {...userblogreservationPublick}/>
+                                                                <NavLinkPublicAnnonceUser {...this.props} {...userblogreservationPublick} />
 
                                                             </div>
 
@@ -168,6 +177,11 @@ class PublicUserBlogannonceReservation extends Component {
                                             </div>
                                         </div>
 
+                                        <div className="submit text-center">
+                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
+                                                <i className="now-ui-icons ui-1_simple-add" /> <b>Poster un article sur la reservation</b>
+                                            </NavLink>
+                                        </div>
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="row">
@@ -180,7 +194,7 @@ class PublicUserBlogannonceReservation extends Component {
                                                                     </a>
                                                                 </div>
 
-                                                                <NavLinkPublicBlogannoncesUser {...this.props} {...userblogreservationPublick}/>
+                                                                <NavLinkPublicBlogannoncesUser {...this.props} {...userblogreservationPublick} />
 
                                                             </div>
 
@@ -199,7 +213,7 @@ class PublicUserBlogannonceReservation extends Component {
                                                             <h4 className="card-title"><b>Contacter {userblogreservationPublick.first_name}</b></h4>
                                                         </div>
 
-                                                        <FormContactProfileAccountUser {...this.props}/>
+                                                        <FormContactProfileAccountUser {...this.props} />
 
                                                     </div>
                                                 </div>
@@ -220,7 +234,6 @@ class PublicUserBlogannonceReservation extends Component {
                                                 <div className="col-md-4 ml-auto mr-auto text-center">
                                                     <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
                                                         <b>Voir plus </b>
-                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
                                                     </button>
                                                 </div>
                                             </div>
@@ -234,10 +247,27 @@ class PublicUserBlogannonceReservation extends Component {
                                                     <h4 className="card-title"><b>Contacter {userblogreservationPublick.first_name}</b></h4>
                                                 </div>
 
-                                                <FormContactProfileAccountUser {...this.props}/>
+                                                <FormContactProfileAccountUser {...this.props} />
 
                                             </div>
                                         </div>
+
+                                        <div className="card card-raised card-form-horizontal">
+
+                                            <div className="card-body">
+
+                                                <div className="card-header text-center">
+                                                    <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
+                                                    <p className="card-title">
+                                                        Abonnez-vous à la newsletter de <b>{userblogreservationPublick.first_name}</b> afin d'être notifié des mises à jour
+                                                    </p>
+                                                </div>
+
+                                                <FormNewletterSubcribeProfileAccountUser {...this.props} />
+
+                                            </div>
+                                        </div>
+
 
                                     </div>
 

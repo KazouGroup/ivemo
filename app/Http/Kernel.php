@@ -39,6 +39,7 @@ class Kernel extends HttpKernel
             /* *** Info add *** */
             \App\Http\Middleware\LogLastUserActivity::class,
             \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
+            \JacobBennett\Http2ServerPush\Middleware\AddHttp2ServerPush::class,
         ],
 
         'api' => [

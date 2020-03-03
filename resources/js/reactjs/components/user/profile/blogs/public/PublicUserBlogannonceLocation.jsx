@@ -9,6 +9,7 @@ import FormContactProfileAccountUser from "../../form/FormContactProfileAccountU
 import NavLinkPublicBlogannoncesUser from "./NavLinkPublicBlogannoncesUser";
 import NavLinkPublicAnnonceUser from "../../annonces/NavLinkPublicAnnonceUser";
 import PublicUserBlogannoncelocationList from "./inc/PublicUserBlogannoncelocationList";
+import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
 
 
 class PublicUserBlogannonceLocation extends Component {
@@ -117,15 +118,24 @@ class PublicUserBlogannonceLocation extends Component {
 
                     <div className="wrapper">
                         <div className="page-header page-header-mini">
-                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
+                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/examples/card-blog15.jpg' + ")" }}>
                             </div>
                             <div className="content-center">
-                                <div className="row">
-                                    <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">Toutes les de {userbloglocationPublick.first_name}</h3>
-                                    </div>
+
+                                <div className="card-body">
+
+                                    <h2 className="title">{userbloglocationPublick.first_name}</h2>
+                                    <Link to={`/@${userbloglocationPublick.slug}/`} className="text-white">
+                                        <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userbloglocationPublick.first_name}</b>
+                                    </Link>
+                                    {userbloglocationPublick.blogannoncelocations_count > 0 &&(
+                                        <h5><b>{userbloglocationPublick.blogannoncelocations_count}</b> {userbloglocationPublick.blogannoncelocations_count > 1 ? "articles" : "article"} posté par {userbloglocationPublick.first_name} sur la location</h5>
+                                    )}
+
                                 </div>
+
                             </div>
+
                         </div>
 
                         <div className="main main-raised">
@@ -166,6 +176,12 @@ class PublicUserBlogannonceLocation extends Component {
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+
+                                        <div className="submit text-center">
+                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
+                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster un article sur la location</b>
+                                            </NavLink>
                                         </div>
 
                                         <div className="card">
@@ -221,7 +237,6 @@ class PublicUserBlogannonceLocation extends Component {
                                                 <div className="col-md-4 ml-auto mr-auto text-center">
                                                     <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
                                                         <b>Voir plus </b>
-                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
                                                     </button>
                                                 </div>
                                             </div>
@@ -238,6 +253,24 @@ class PublicUserBlogannonceLocation extends Component {
 
                                             </div>
                                         </div>
+
+
+                                        <div className="card card-raised card-form-horizontal">
+
+                                            <div className="card-body">
+
+                                                <div className="card-header text-center">
+                                                    <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
+                                                    <p className="card-title">
+                                                        Abonnez-vous à la newsletter de <b>{userbloglocationPublick.first_name}</b> afin d'être notifié des mises à jour
+                                                    </p>
+                                                </div>
+
+                                                <FormNewletterSubcribeProfileAccountUser {...this.props}/>
+
+                                            </div>
+                                        </div>
+
 
                                     </div>
 

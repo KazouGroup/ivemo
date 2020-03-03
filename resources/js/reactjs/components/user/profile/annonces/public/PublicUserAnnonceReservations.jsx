@@ -16,9 +16,16 @@ class PublicUserAnnonceReservations extends Component {
         super(props);
         this.state = {
             useranoncereservationPublick:{annoncereservations:[]},
+            visiable: 10,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.loadmoresItem = this.loadmoresItem.bind(this);
+    }
+    loadmoresItem() {
+        this.setState((old) => {
+            return { visiable: old.visiable + 10 }
+        })
     }
     deleteItem(id) {
         Swal.fire({
@@ -84,9 +91,9 @@ class PublicUserAnnonceReservations extends Component {
     }
 
     render() {
-        const {useranoncereservationPublick} = this.state;
+        const {useranoncereservationPublick,visiable} = this.state;
         const mapAnnoncereservations = useranoncereservationPublick.annoncereservations.length ? (
-            useranoncereservationPublick.annoncereservations.map(item => {
+            useranoncereservationPublick.annoncereservations.slice(0, visiable).map(item => {
                 return(
 
                     <AnnoncereservationList key={item.id} {...item} deleteItem={this.deleteItem}/>
@@ -113,11 +120,15 @@ class PublicUserAnnonceReservations extends Component {
                             <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
                             </div>
                             <div className="content-center">
-                                <div className="row">
-                                    <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">Annonce reservations de {useranoncereservationPublick.first_name}</h3>
-                                    </div>
-                                </div>
+
+                                <h2 className="title">{useranoncereservationPublick.first_name}</h2>
+                                <Link to={`/@${useranoncereservationPublick.slug}/`} className="text-white">
+                                    <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useranoncereservationPublick.first_name}</b>
+                                </Link>
+                                {useranoncereservationPublick.annoncereservations_count > 0 &&(
+                                    <h5><b>{useranoncereservationPublick.annoncereservations_count}</b> {useranoncereservationPublick.annoncereservations_count > 1 ? "annonces" : "annonce"} posté par {useranoncereservationPublick.first_name} sur la reservation</h5>
+                                )}
+
                             </div>
                         </div>
 
@@ -135,7 +146,7 @@ class PublicUserAnnonceReservations extends Component {
 
                                         <div className="submit text-center">
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
+                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster une reservation</b>
                                             </NavLink>
                                         </div>
 
@@ -208,6 +219,16 @@ class PublicUserAnnonceReservations extends Component {
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
                                         {mapAnnoncereservations}
+
+                                        {visiable < useranoncereservationPublick.annoncereservations.length && (
+                                            <div className="row">
+                                                <div className="col-md-4 ml-auto mr-auto text-center">
+                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                                        <b>Voir plus </b>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
 
                                         <div className="card">
                                             <div className="card-body">

@@ -178,11 +178,15 @@ class PublicUserAnnonceLocations extends Component {
                             <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
                             </div>
                             <div className="content-center">
-                                <div className="row">
-                                    <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">Toutes les annonces location de {useranoncelocationPublick.first_name}</h3>
-                                    </div>
-                                </div>
+
+                                <h2 className="title">{useranoncelocationPublick.first_name}</h2>
+                                <Link to={`/@${useranoncelocationPublick.slug}/`} className="text-white">
+                                    <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useranoncelocationPublick.first_name}</b>
+                                </Link>
+                                {useranoncelocationPublick.annoncelocations_count > 0 &&(
+                                    <h5><b>{useranoncelocationPublick.annoncelocations_count}</b> {useranoncelocationPublick.annoncelocations_count > 1 ? "annonces" : "annonce"} posté par {useranoncelocationPublick.first_name} sur la location</h5>
+                                )}
+
                             </div>
                         </div>
 
@@ -200,7 +204,7 @@ class PublicUserAnnonceLocations extends Component {
 
                                         <div className="submit text-center">
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
+                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster une location</b>
                                             </NavLink>
                                         </div>
 
@@ -225,6 +229,7 @@ class PublicUserAnnonceLocations extends Component {
                                                 </div>
                                             </div>
                                         </div>
+
 
                                         <div className="card">
                                             <div className="card-body">
@@ -273,9 +278,8 @@ class PublicUserAnnonceLocations extends Component {
                                         {visiable < useranoncelocationPublick.annoncelocations.length && (
                                             <div className="row">
                                                 <div className="col-md-4 ml-auto mr-auto text-center">
-                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-secondary btn-block">
+                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
                                                         <b>Voir plus </b>
-                                                        <i className="now-ui-icons arrows-1_minimal-down" />
                                                     </button>
                                                 </div>
                                             </div>

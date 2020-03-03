@@ -9,6 +9,7 @@ import FormContactProfileAccountUser from "../../form/FormContactProfileAccountU
 import NavLinkPublicBlogannoncesUser from "./NavLinkPublicBlogannoncesUser";
 import NavLinkPublicAnnonceUser from "../../annonces/NavLinkPublicAnnonceUser";
 import PublicUserBlogannonceventeList from "./inc/PublicUserBlogannonceventeList";
+import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
 
 
 class PublicUserBlogannonceVente extends Component {
@@ -120,11 +121,19 @@ class PublicUserBlogannonceVente extends Component {
                             <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
                             </div>
                             <div className="content-center">
-                                <div className="row">
-                                    <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">Toutes les de {userblogventePublick.first_name}</h3>
-                                    </div>
+
+                                <div className="card-body">
+
+                                    <h2 className="title">{userblogventePublick.first_name}</h2>
+                                    <Link to={`/@${userblogventePublick.slug}/`} className="text-white">
+                                        <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userblogventePublick.first_name}</b>
+                                    </Link>
+                                    {userblogventePublick.blogannonceventes_count > 0 &&(
+                                        <h5><b>{userblogventePublick.blogannonceventes_count}</b> {userblogventePublick.blogannonceventes_count > 1 ? "articles" : "article"} posté par {userblogventePublick.first_name} sur la vente et l'achat</h5>
+                                    )}
+
                                 </div>
+
                             </div>
                         </div>
 
@@ -166,6 +175,12 @@ class PublicUserBlogannonceVente extends Component {
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+
+                                        <div className="submit text-center">
+                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
+                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster un article sur la vente/achat</b>
+                                            </NavLink>
                                         </div>
 
                                         <div className="card">
@@ -234,6 +249,22 @@ class PublicUserBlogannonceVente extends Component {
                                                 </div>
 
                                                 <FormContactProfileAccountUser {...this.props}/>
+
+                                            </div>
+                                        </div>
+
+                                        <div className="card card-raised card-form-horizontal">
+
+                                            <div className="card-body">
+
+                                                <div className="card-header text-center">
+                                                    <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
+                                                    <p className="card-title">
+                                                        Abonnez-vous à la newsletter de <b>{userblogventePublick.first_name}</b> afin d'être notifié des mises à jour
+                                                    </p>
+                                                </div>
+
+                                                <FormNewletterSubcribeProfileAccountUser {...this.props}/>
 
                                             </div>
                                         </div>

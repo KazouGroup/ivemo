@@ -96,7 +96,7 @@ class IndexSite extends Component {
 
                             <div className="col-md-4">
 
-                                <Link to={`/`}>
+                                <Link to={`/annonces_ventes/ventes/`}>
 
                                     <div className="card card-background card-raised" data-background-color=""
                                         style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/examples/card-blog15.jpg' + ")" }}>
