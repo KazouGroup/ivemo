@@ -33,7 +33,8 @@ class AnnoncelocationService
             ->withCount(['annoncelocations' => function ($q) use ($categoryannoncelocation,$city){
                 $q->where(['status' => 1,'status_admin' => 1])
                     ->whereIn('city_id',[$city->id])
-                    ->whereHas('city', function ($q) {$q->where('status',1);});
+                    ->whereHas('city', function ($q) {$q->where('status',1);})
+                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);});
             }])->orderBy('annoncelocations_count','desc')
             ->take(6)->distinct()->get();
 
@@ -52,6 +53,7 @@ class AnnoncelocationService
                         ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
                         ->whereIn('city_id',[$city->id])
                         ->whereHas('city', function ($q) {$q->where('status',1);})
+                        ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                         ->orderBy('created_at','DESC')
                         ->distinct()->paginate(30)->toArray();},
             ])->first();

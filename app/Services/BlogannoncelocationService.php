@@ -18,12 +18,14 @@ class BlogannoncelocationService
         $blogannoncelocations = categoryannoncelocation::whereSlug($categoryannoncelocation->slug)
             ->withCount(['blogannoncelocations' => function ($q) use ($categoryannoncelocation){
                 $q->where(['status' => 1,'status_admin' => 1])
+                    ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                     ->with('user','categoryannoncelocation')
                     ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id]);
             }])
             ->with([
                 'blogannoncelocations' => function ($q) use ($categoryannoncelocation){
                     $q->where(['status' => 1,'status_admin' => 1])
+                        ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                         ->with('user','categoryannoncelocation')
                         ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
                         ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();},
@@ -37,6 +39,7 @@ class BlogannoncelocationService
         $blogannoncelocation = $categoryannoncelocation->blogannoncelocations()->with('user','categoryannoncelocation')
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
             ->orderByRaw('RAND()')
+            ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->where(['status' => 1,'status_admin' => 1])
             ->take(3)->distinct()->get()->toArray();;
 
@@ -48,6 +51,7 @@ class BlogannoncelocationService
         $blogannoncelocations = user::whereSlug($user->slug)
             ->with(['blogannoncelocations' => function ($q) use ($user){
                 $q->with('user','categoryannoncelocation')
+                    ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id])
                     ->orderBy('created_at','DESC')
                     ->distinct()->get()->toArray()
@@ -77,7 +81,9 @@ class BlogannoncelocationService
     public static function apiannonceblogcategorylocationslug($categoryannoncelocation, $date,$blogannoncelocation)
     {
         $blogannoncelocation = new BlogannoncelocationResource(blogannoncelocation::whereDate('created_at',$date)
-            ->whereSlug($blogannoncelocation)->where(['status' => 1,'status_admin' => 1])->first());
+            ->whereSlug($blogannoncelocation)
+            ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+            ->where(['status' => 1,'status_admin' => 1])->first());
 
         return $blogannoncelocation;
     }

@@ -22,6 +22,7 @@ class BlogannoncereservationService
             ->with(['blogannoncereservations' => function ($q) use ($user){
                 $q->with('user','categoryannoncereservation')
                     ->whereIn('user_id',[$user->id])
+                    ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
                     ->orderBy('created_at','DESC')
                     ->distinct()->get()->toArray()
                 ;},

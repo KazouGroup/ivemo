@@ -167,11 +167,15 @@ class BlogannoncelocationBycategorylocation extends Component {
                             <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + blogannoncelocation.photo + ")" }}>
                             </div>
                             <div className="content-center">
-                                <div className="row">
-                                    <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">{blogannoncelocation.name}</h3>
-                                    </div>
-                                </div>
+
+                                <h1 className="title">{blogannoncelocation.name}</h1>
+                                <Link to={`/blogs/annonce_locations/`} className="text-white">
+                                    <i className="fa fa-chevron-circle-left" /> <b>Retour aux articles</b>
+                                </Link>
+                                {blogannoncelocation.blogannoncelocations_count > 0 &&(
+                                    <h5><b>{blogannoncelocation.blogannoncelocations_count}</b> {blogannoncelocation.blogannoncelocations_count > 1 ? "articles" : "article"} posté sur la location</h5>
+                                )}
+
                             </div>
                         </div>
 

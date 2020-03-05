@@ -30,6 +30,7 @@ class BlogannoncereservationController extends Controller
     {
         $blogannoncereservations = blogannoncereservation::with('user','categoryannoncereservation')
             ->where(['status' => 1,'status_admin' => 1])->orderBy('created_at','DESC')
+            ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
             ->distinct()->paginate(40)->toArray();
 
         return response()->json($blogannoncereservations, 200);
@@ -38,9 +39,14 @@ class BlogannoncereservationController extends Controller
     public function apiannonceblogcategoryreservation(categoryannoncereservation $categoryannoncereservation)
     {
         $blogannoncereservation = categoryannoncereservation::whereSlug($categoryannoncereservation->slug)
+            ->withCount(['blogannoncereservations' => function ($q) use ($categoryannoncereservation){
+                $q->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
+                    ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
+                    ->where(['status' => 1,'status_admin' => 1]);}])
             ->with(['blogannoncereservations' => function ($q) use ($categoryannoncereservation){
-                $q->where(['status' => 1,'status_admin' => 1])
-            ->with('user','categoryannoncereservation')
+                $q->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
+                    ->where(['status' => 1,'status_admin' => 1])
+            ->with('user','categoryannoncereservation')->where(['status' => 1])
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();},
             ])->first();
@@ -53,6 +59,7 @@ class BlogannoncereservationController extends Controller
     {
         $blogannoncereservation = $categoryannoncereservation->blogannoncereservations()
             ->with('user','categoryannoncereservation')
+            ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
@@ -70,6 +77,7 @@ class BlogannoncereservationController extends Controller
      public function apiblogsannoncereservationspublique(user $user)
     {
        $blogannoncereservations = blogannoncereservation::whereIn('user_id',[$user->id])
+           ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
            ->orderBy('created_at','DESC')
            ->where(['status' => 1,'status_admin' => 1])->get()->toArray();
 
@@ -184,7 +192,7 @@ class BlogannoncereservationController extends Controller
     {
         $blogannoncereservation = blogannoncereservation::where('id', $id)->findOrFail($id);
 
-       // $this->authorize('update',$blogannoncereservation);
+        $this->authorize('update',$blogannoncereservation);
 
         if(auth()->user()->id === $blogannoncereservation->user_id){
 

@@ -19,6 +19,7 @@ class CreateCategoryannonceventesTable extends Migration
             $table->string('color_name')->nullable();
             $table->string('photo')->nullable();
             $table->string('slug')->nullable();
+            $table->boolean('status')->default(false);
             $table->string('icon')->nullable();
             $table->timestamps();
 

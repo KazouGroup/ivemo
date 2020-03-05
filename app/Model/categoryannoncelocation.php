@@ -31,6 +31,10 @@ class categoryannoncelocation extends Model
         });
     }
 
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
     public function getRouteKeyName()
     {
         return 'slug';

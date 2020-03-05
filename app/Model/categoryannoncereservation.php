@@ -36,6 +36,10 @@ class categoryannoncereservation extends Model
         return 'slug';
     }
 
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
     public function annoncereservations()
     {
         return $this->hasMany(annoncereservation::class, 'categoryannoncereservation_id');

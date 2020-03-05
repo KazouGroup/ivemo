@@ -5,6 +5,7 @@ import NavUserSite from "../../../../inc/user/NavUserSite";
 import ReactQuill, { Quill, Mixin, Toolbar } from 'react-quill';
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
+import Navblogannoncereservationsbyuser from "../inc/Navblogannoncereservationsbyuser";
 
 
 class BlogannoncereservationEdit extends Component {
@@ -260,6 +261,7 @@ class BlogannoncereservationEdit extends Component {
             this.setState({
                 id: response.data.id,
                 title: response.data.title,
+                status: response.data.status,
                 photo: response.data.photo,
                 categoryannoncereservation_id: response.data.categoryannoncereservation_id,
                 description: response.data.description,
@@ -290,7 +292,31 @@ class BlogannoncereservationEdit extends Component {
 
                                 <div className="row">
 
-                                    <div className="col-lg-10 col-md-12 mx-auto">
+                                    <div className="col-lg-4 col-md-12 mx-auto">
+
+                                        <div className="submit text-center">
+                                            <NavLink className="btn btn-primary" to={`/blogs/annonce_locations/ab/new/`}>
+                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article</b>
+                                            </NavLink>
+                                        </div>
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+
+                                                            <Navblogannoncereservationsbyuser/>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="submit text-left">
                                             <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
                                                 <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos blogs </b>

@@ -35,6 +35,9 @@ class categoryannoncevente extends Model
     {
         return 'slug';
     }
+    protected $casts = [
+        'status' => 'boolean',
+    ];
 
     public function annonceventes()
     {

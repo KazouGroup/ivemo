@@ -72,23 +72,23 @@ class CompileTableSeeder extends Seeder
             color::create($item);
 
             $categoryannoncelocations = [
-                ['name' => 'Appartement','slug' => str_slug('Appartement'),'color_name' => 'info','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
-                ['name' => 'Chambre','slug' => str_slug('Chambre'),'color_name' => 'success','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
-                ['name' => 'Stand d\'exposition','slug' => str_slug('Stand d\'exposition'),'color_name' => 'warning','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
-                ['name' => 'Loft, atelier & surface','slug' => str_slug('Loft, atelier & surface'),'color_name' => 'warning','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
-                ['name' => 'Maison','slug' => str_slug('Maison'),'color_name' => 'danger','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
-                ['name' => 'Studio','slug' => str_slug('Studio'),'color_name' => 'primary','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
+                ['name' => 'Appartement','status' => true, 'slug' => str_slug('Appartement'),'color_name' => 'info','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
+                ['name' => 'Chambre','status' => true,'slug' => str_slug('Chambre'),'color_name' => 'success','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
+                ['name' => 'Stand d\'exposition','status' => true,'slug' => str_slug('Stand d\'exposition'),'color_name' => 'warning','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
+                ['name' => 'Loft, atelier & surface','status' => true,'slug' => str_slug('Loft, atelier & surface'),'color_name' => 'warning','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
+                ['name' => 'Maison','status' => true,'slug' => str_slug('Maison'),'color_name' => 'danger','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
+                ['name' => 'Studio','status' => true,'slug' => str_slug('Studio'),'color_name' => 'primary','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
             ];
 
             foreach($categoryannoncelocations as $item)
             categoryannoncelocation::create($item);
 
             $categoryannonceventes = [
-                ['name' => 'Appartement','slug' => str_slug('Appartement'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'info','user_id'=> 1],
-                ['name' => 'Maison','slug' => str_slug('Maison'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'success','user_id'=> 1],
-                ['name' => 'Terrain','slug' => str_slug('Terrain'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'danger','user_id'=> 1],
-                ['name' => 'Voiture','slug' => str_slug('Voiture'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'primary','user_id'=> 1],
-                ['name' => 'Boutique','slug' => str_slug('Boutique'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'primary','user_id'=> 1],
+                ['name' => 'Appartement','status' => true,'slug' => str_slug('Appartement'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'info','user_id'=> 1],
+                ['name' => 'Maison','status' => true,'slug' => str_slug('Maison'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'success','user_id'=> 1],
+                ['name' => 'Terrain','status' => true,'slug' => str_slug('Terrain'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'danger','user_id'=> 1],
+                ['name' => 'Voiture','status' => true,'slug' => str_slug('Voiture'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'primary','user_id'=> 1],
+                ['name' => 'Boutique','status' => true,'slug' => str_slug('Boutique'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'primary','user_id'=> 1],
             ];
 
             foreach($categoryannonceventes as $item)
@@ -104,11 +104,11 @@ class CompileTableSeeder extends Seeder
                 annoncetype::create($item);
 
             $categoryannoncereservations = [
-                ['name' => 'Appartement','slug' => str_slug('Appartement'),'color_name' => 'info','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
-                ['name' => 'Chambre d\'hotel','slug' => str_slug('Chambre d-hotel'),'color_name' => 'primary','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
-                ['name' => 'Suite d\'hotel','slug' => str_slug('Suite d-hotel'),'color_name' => 'success','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
-                ['name' => 'Hall d\'hotel','slug' => str_slug('Hall d-hotel'),'color_name' => 'danger','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
-                ['name' => 'Villa','slug' => str_slug('Villa'),'color_name' => 'success','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
+                ['name' => 'Appartement','status' => true,'slug' => str_slug('Appartement'),'color_name' => 'info','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
+                ['name' => 'Chambre d\'hotel','status' => true,'slug' => str_slug('Chambre d-hotel'),'color_name' => 'primary','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
+                ['name' => 'Suite d\'hotel','status' => true,'slug' => str_slug('Suite d-hotel'),'color_name' => 'success','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
+                ['name' => 'Hall d\'hotel','status' => true,'slug' => str_slug('Hall d-hotel'),'color_name' => 'danger','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
+                ['name' => 'Villa','status' => true,'slug' => str_slug('Villa'),'color_name' => 'success','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
             ];
 
         foreach ($categoryannoncereservations as $item)

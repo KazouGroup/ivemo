@@ -18,6 +18,7 @@ class CreateCategoryannoncereservationsTable extends Migration
             $table->string('name')->nullable();
             $table->string('color_name')->nullable();
             $table->string('photo')->nullable();
+            $table->boolean('status')->default(false);
             $table->string('slug')->nullable();
             $table->timestamps();
 

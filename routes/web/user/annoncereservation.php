@@ -1,5 +1,11 @@
 <?php
 
+
+Route::get(
+    'api/categoryannoncereservations_by_user',
+    'AnnoncereservationController@apicategoryannoncereservations_by_user'
+)->name('api.categoryannoncereservations_by_user_site');
+
 Route::get(
     'annonces_reservations/{annoncetype}',
     'AnnoncereservationController@index'

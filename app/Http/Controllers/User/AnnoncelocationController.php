@@ -80,6 +80,7 @@ class AnnoncelocationController extends Controller
     public function apicategoryannoncelocation()
     {
         $categoryannoncelocations = CategoryannoncelocationResource::collection(categoryannoncelocation::with('user')
+            ->where(['status' => 1])
             ->withCount(['annoncelocations' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1])
                 ->whereHas('city', function ($q) {$q->where('status',1);});
@@ -95,11 +96,14 @@ class AnnoncelocationController extends Controller
     public function apicategoryannoncelocations_by_user()
     {
         $categoryannoncelocations = CategoryannoncelocationResource::collection(categoryannoncelocation::with('user')
+            ->where(['status' => 1])
             ->withCount(['annoncelocations' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1])
+                $q->whereHas('city', function ($q) {$q->where('status',1);})
+                    ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[auth()->user()->id]);
             }])->withCount(['blogannoncelocations' => function ($q){
-                $q->whereIn('user_id',[auth()->user()->id]);
+                $q->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[auth()->user()->id]);
             }])->orderBy('annoncelocations_count','desc')
             ->distinct()->get());
 
@@ -168,6 +172,7 @@ class AnnoncelocationController extends Controller
     public function apiannoncelocationbycategoryannoncelocation(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation)
     {
         $annoncelocation = categoryannoncelocation::whereSlug($categoryannoncelocation->slug)
+            ->where(['status' => 1])
             ->with([
                 'annoncelocations' => function ($q) use ($annoncetype,$categoryannoncelocation){
                     $q->where(['status' => 1,'status_admin' => 1])

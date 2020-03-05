@@ -5,14 +5,11 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Blog\Blogannoncelocation\StoreRequest;
 use App\Http\Requests\Blog\Blogannoncelocation\UpdateRequest;
-use App\Http\Resources\BlogannoncelocationResource;
 use App\Http\Resources\CategoryannoncelocationResource;
 use App\Model\blogannoncelocation;
 use App\Model\categoryannoncelocation;
 use App\Model\user;
 use App\Services\BlogannoncelocationService;
-use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpFoundation\Response;
 use File;
 
@@ -34,6 +31,7 @@ class BlogannoncelocationController extends Controller
     public function apiannoncebloglocation()
     {
         $categoryannoncelocations = blogannoncelocation::with('user','categoryannoncelocation')
+            ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->where(['status' => 1,'status_admin' => 1])->orderBy('created_at','DESC')
             ->distinct()->paginate(40)->toArray();
 
@@ -97,7 +95,9 @@ class BlogannoncelocationController extends Controller
     {
         $blogannoncelocations = blogannoncelocation::whereIn('user_id',[$user->id])
             ->orderBy('created_at','DESC')
-            ->where(['status' => 1,'status_admin' => 1])->get()->toArray();
+            ->where(['status' => 1,'status_admin' => 1])
+            ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+            ->get()->toArray();
 
         return response()->json($blogannoncelocations, 200);
 
@@ -121,10 +121,13 @@ class BlogannoncelocationController extends Controller
     public function categoryannoncelocations_by_user()
     {
         $categoryannoncelocations = CategoryannoncelocationResource::collection(categoryannoncelocation::with('user')
+            ->where(['status' => 1])
             ->withCount(['annoncelocations' => function ($q){
-                $q->whereHas('city', function ($q) {$q->where('status',1);});
+                $q->whereHas('city', function ($q) {$q->where('status',1);})
+                  ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);});
             }])->withCount(['blogannoncelocations' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
+                $q->where(['status' => 1,'status_admin' => 1])
+                  ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);});
             }])
             ->orderBy('annoncelocations_count','desc')
             ->distinct()->get());
@@ -203,6 +206,8 @@ class BlogannoncelocationController extends Controller
    {
       $blogannoncelocation = blogannoncelocation::where('id', $id)->findOrFail($id);
 
+      $this->authorize('update',$blogannoncelocation);
+
       if(auth()->user()->id === $blogannoncelocation->user_id){
 
           $blogannoncelocation->update(['status' => 1,]);
@@ -216,6 +221,8 @@ class BlogannoncelocationController extends Controller
     public function unactivated($id)
     {
         $blogannoncelocation = blogannoncelocation::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$blogannoncelocation);
 
         if(auth()->user()->id === $blogannoncelocation->user_id){
 

@@ -168,11 +168,15 @@ class BlogannonceventesBycategoryvente extends Component {
                             <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + blogannonceventes.photo + ")" }}>
                             </div>
                             <div className="content-center">
-                                <div className="row">
-                                    <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">{blogannonceventes.name} </h3>
-                                    </div>
-                                </div>
+
+                                <h1 className="title">{blogannonceventes.name}</h1>
+                                <Link to={`/blogs/annonce_ventes/`} className="text-white">
+                                    <i className="fa fa-chevron-circle-left" /> <b>Retour aux articles</b>
+                                </Link>
+                                {blogannonceventes.blogannonceventes_count > 0 &&(
+                                    <h5><b>{blogannonceventes.blogannonceventes_count}</b> {blogannonceventes.blogannonceventes_count > 1 ? "articles" : "article"} posté sur la vente et achat</h5>
+                                )}
+
                             </div>
                         </div>
 

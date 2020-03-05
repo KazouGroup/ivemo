@@ -90,6 +90,19 @@ class AnnoncereservationController extends Controller
         return response()->json($categoryannoncereservations, 200);
     }
 
+    public function apicategoryannoncereservations_by_user()
+    {
+        $categoryannoncereservations = CategoryannoncereservationResource::collection(categoryannoncereservation::with('user')
+          ->withCount(['annoncereservations' => function ($q){
+              $q->whereHas('city', function ($q) {$q->where('status',1);})
+                  ->whereIn('user_id',[auth()->user()->id]);
+           }])->withCount(['blogannoncereservations' => function ($q){
+               $q->whereIn('user_id',[auth()->user()->id]);}])
+         ->orderBy('annoncereservations_count','desc')->distinct()->get());
+
+        return response()->json($categoryannoncereservations, 200);
+    }
+
     public function apiannoncereservations()
     {
         $annoncereservations = AnnoncereservationResource::collection(annoncereservation::with('user','categoryannoncereservation','city','annoncetype')

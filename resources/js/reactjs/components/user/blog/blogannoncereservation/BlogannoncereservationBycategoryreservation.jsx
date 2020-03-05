@@ -169,11 +169,19 @@ class BlogannoncereservationBycategoryreservation extends Component {
                             <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + blogannoncereservation.photo + ")" }}>
                             </div>
                             <div className="content-center">
-                                <div className="row">
-                                    <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">{blogannoncereservation.name} </h3>
-                                    </div>
+
+                                <div className="card-body">
+
+                                    <h1 className="title">{blogannoncereservation.name}</h1>
+                                    <Link to={`/blogs/annonce_reservations/`} className="text-white">
+                                        <i className="fa fa-chevron-circle-left" /> <b>Retour aux articles</b>
+                                    </Link>
+                                    {blogannoncereservation.blogannoncereservations_count > 0 &&(
+                                        <h5><b>{blogannoncereservation.blogannoncereservations_count}</b> {blogannoncereservation.blogannoncereservations_count > 1 ? "articles" : "article"} posté sur la reservation</h5>
+                                    )}
+
                                 </div>
+
                             </div>
                         </div>
 
