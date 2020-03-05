@@ -22,6 +22,6 @@ $factory->define(contactuser::class, function (Faker $faker) {
         'annoncereservation_id' => annoncereservation::inRandomOrder()->first()->id,
         'annoncelocation_id' => annoncelocation::inRandomOrder()->first()->id,
         'annoncevente_id' => annoncevente::inRandomOrder()->first()->id,
-        'created_at' => $faker->dateTime,
+        //'created_at' => $faker->dateTime,
     ];
 });
