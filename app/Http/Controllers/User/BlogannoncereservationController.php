@@ -184,7 +184,7 @@ class BlogannoncereservationController extends Controller
     {
         $blogannoncereservation = blogannoncereservation::where('id', $id)->findOrFail($id);
 
-        $this->authorize('update',$blogannoncereservation);
+       // $this->authorize('update',$blogannoncereservation);
 
         if(auth()->user()->id === $blogannoncereservation->user_id){
 
