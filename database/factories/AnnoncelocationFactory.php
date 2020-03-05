@@ -26,6 +26,6 @@ $factory->define(annoncelocation::class, function (Faker $faker) {
         'categoryannoncelocation_id' => categoryannoncelocation::inRandomOrder()->first()->id,
         'city_id' => city::inRandomOrder()->first()->id,
         'user_id' => user::inRandomOrder()->first()->id,
-        'created_at' => $faker->dateTime,
+        //'created_at' => $faker->dateTime,
     ];
 });

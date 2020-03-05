@@ -179,7 +179,7 @@ class PublicUserAnnonceLocations extends Component {
                             </div>
                             <div className="content-center">
 
-                                <h2 className="title">{useranoncelocationPublick.first_name}</h2>
+                                <h1 className="title">{useranoncelocationPublick.first_name}</h1>
                                 <Link to={`/@${useranoncelocationPublick.slug}/`} className="text-white">
                                     <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useranoncelocationPublick.first_name}</b>
                                 </Link>

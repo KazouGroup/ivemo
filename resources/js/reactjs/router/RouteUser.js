@@ -68,6 +68,7 @@ import RegisterUser from "../components/user/auth/RegisterUser";
 import SubscriberuserUserIndex from "../components/user/configurations/SubscriberuserUserIndex";
 import BlogannoncelocationCreate
     from "../components/user/blog/blogannoncelocation/treatement/BlogannoncelocationCreate";
+import TeamsUserCreate from "../components/user/configurations/teams/TeamsUserCreate";
 
 
 const RouteUser = props => (
@@ -126,6 +127,7 @@ const RouteUser = props => (
 
           <Route exact path="/profile/:user/personal_settings/teams/" component={TeamsUserIndex}/>
           <Route exact path="/profile/:user/personal_settings/teams/" component={TeamsUserIndex}/>
+          <Route exact path="/profile/:user/personal_settings/teams/create/" component={TeamsUserCreate}/>
           <Route path="/profile/:user/personal_settings/teams/:id/edit/" component={TeamsUserEdite}/>
 
           <Route exact path="/profile/:user/personal_settings/annonces_locations/" component={PrivateUserAnnonceLocations}/>

@@ -66,7 +66,9 @@ class TeamuserController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.teamuser.create',[
+            'user'=> auth()->user(),
+        ]);
     }
 
     /**
@@ -75,7 +77,7 @@ class TeamuserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request,user $user)
     {
         $teamuser= new teamuser();
 
@@ -83,6 +85,7 @@ class TeamuserController extends Controller
 
         TeamuserService::storeUploadImage($request,$teamuser);
 
+        $teamuser->user_id = $user->id;
         $teamuser->save();
 
         return response('Created',Response::HTTP_CREATED);

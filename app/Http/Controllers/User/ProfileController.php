@@ -156,6 +156,9 @@ class ProfileController extends Controller
                     ->distinct()->get()->toArray()
                 ;},
             ])
+            ->withCount(['subscriberusers' => function ($q){
+                $q->whereIn('user_id',[auth()->user()->id]);
+            }])
             ->withCount(['teamusers' => function ($q) use ($user){
                 $q->whereIn('user_id',[auth()->user()->id]);
             }])->withCount(['annoncelocations' => function ($q){

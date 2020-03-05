@@ -8,6 +8,7 @@ import {Button} from "reactstrap";
 import Swal from "sweetalert2";
 import Navblogannoncelocations from "./inc/Navblogannoncelocations";
 import BlogannoncelocationList from "./BlogannoncelocationList";
+import Navlinknewblogannoncelocation from "./treatement/Navlinknewblogannoncelocation";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -48,8 +49,8 @@ class BlogannoncelocationIndex extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette annonce a été masquée <a href=\"/profile/"+$userIvemo.slug+"/personal_settings/blogs/annonces_locations/\" target=\"_blank\" class=\"btn btn-info btn-sm\">Modifier ici</a>",
-                            url: "/profile/"+$userIvemo.slug+"/personal_settings/blogs/annonces_locations/",
+                            message: "Cette annonce a été masquée <a href=\"/profile/"+$userIvemo.slug+"/personal_settings/blogs/annonce_locations/\" target=\"_blank\" class=\"btn btn-info btn-sm\">Modifier ici</a>",
+                            url: "/profile/"+$userIvemo.slug+"/personal_settings/blogs/annonce_locations/",
                             target: "_blank"
                         },
                         {
@@ -201,11 +202,7 @@ class BlogannoncelocationIndex extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
-                                        <div className="submit text-center">
-                                            <NavLink className="btn btn-primary" to={`/blogs/annonce_locations/ab/new/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article</b>
-                                            </NavLink>
-                                        </div>
+                                      <Navlinknewblogannoncelocation/>
 
                                         <div className="card">
                                             <div className="card-body">

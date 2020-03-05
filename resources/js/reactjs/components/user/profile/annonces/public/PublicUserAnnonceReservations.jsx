@@ -121,7 +121,7 @@ class PublicUserAnnonceReservations extends Component {
                             </div>
                             <div className="content-center">
 
-                                <h2 className="title">{useranoncereservationPublick.first_name}</h2>
+                                <h1 className="title">{useranoncereservationPublick.first_name}</h1>
                                 <Link to={`/@${useranoncereservationPublick.slug}/`} className="text-white">
                                     <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useranoncereservationPublick.first_name}</b>
                                 </Link>

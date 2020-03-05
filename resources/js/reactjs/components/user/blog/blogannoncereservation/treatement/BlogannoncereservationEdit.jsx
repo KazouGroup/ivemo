@@ -4,6 +4,7 @@ import { Button, Form, Input, InputGroup, Row, CardBody, Col, CardTitle } from "
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import ReactQuill, { Quill, Mixin, Toolbar } from 'react-quill';
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
+import Swal from "sweetalert2";
 
 
 class BlogannoncereservationEdit extends Component {
@@ -11,6 +12,9 @@ class BlogannoncereservationEdit extends Component {
         super(props);
 
         this.updateItem = this.updateItem.bind(this);
+        this.activeItem = this.activeItem.bind(this);
+        this.unactiveItem = this.unactiveItem.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
         this.updateImage = this.updateImage.bind(this);
         this.removeImage = this.removeImage.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -18,6 +22,8 @@ class BlogannoncereservationEdit extends Component {
         this.renderErrorFor = this.renderErrorFor.bind(this);
         this.handleChangeBody = this.handleChangeBody.bind(this);
         this.state = {
+            id: '',
+            status: '',
             title: '',
             photo: '',
             description: '',
@@ -60,6 +66,132 @@ class BlogannoncereservationEdit extends Component {
     hasErrorFor(field) {
         return !!this.state.errors[field];
     }
+    activeItem(id){
+        //Envoyer la requet au server
+        let url = route('blogannoncecategoryreservationactivated_site',[id]);
+        dyaxios.get(url).then(() => {
+
+            /** Alert notify bootstrapp **/
+            $.notify({
+                    //,
+                    message: 'Article de blogs activé avec succès'
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animated fadeInUp",
+                        exit: "animated fadeOutDown"
+                    },
+                });
+            /** End alert ***/
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animated bounceInDown',
+                    exit: 'animated bounceOutUp'
+                }
+            });
+        })
+
+    }
+
+    unactiveItem(id){
+        //Envoyer la requet au server
+        let url = route('blogannoncecategoryreservationunactivated_site',[id]);
+        dyaxios.get(url).then(() => {
+
+            /** Alert notify bootstrapp **/
+            $.notify({
+                    // title: 'Update FAQ',
+                    message: 'Article de blogs désactiver avec succès'
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animated fadeInUp",
+                        exit: "animated fadeOutDown"
+                    },
+                });
+            /** End alert ***/
+            this.loadItems();
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animated bounceInDown',
+                    exit: 'animated bounceOutUp'
+                }
+            });
+        })
+
+    }
+
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes-vous sûr de vouloir executer cette action",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                const url = route('blogannoncecategoryreservationdelete_site',id);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update',
+                            message: 'Article de blogs suprimée avec success'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'primary',
+                            placement: {
+                                from: 'bottom',
+                                align: 'right'
+                            },
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            },
+                        });
+                    /** End alert ***/
+                    this.props.history.goBack();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
+    }
 
     updateImage(e) {
         e.preventDefault();
@@ -90,6 +222,7 @@ class BlogannoncereservationEdit extends Component {
 
         let item = {
             title: this.state.title,
+            status: this.state.status,
             photo: this.state.photo,
             description: this.state.description,
             categoryannoncereservation_id: this.state.categoryannoncereservation_id,
@@ -125,16 +258,17 @@ class BlogannoncereservationEdit extends Component {
         let url = route('api.blogannonceblogcategoryreservationslugin_site', [Itemdata]);
         dyaxios.get(url).then(response =>
             this.setState({
+                id: response.data.id,
                 title: response.data.title,
                 photo: response.data.photo,
                 categoryannoncereservation_id: response.data.categoryannoncereservation_id,
                 description: response.data.description,
             }));
-        fetch(route('api.categoryannoncereservation_site')).then(res => res.json()).then((result) => { this.setState({ categoryannoncereservations: result }) })
     }
     // lifecycle method
     componentDidMount() {
         this.loadItems();
+        fetch(route('api.categoryannoncereservation_site')).then(res => res.json()).then((result) => { this.setState({ categoryannoncereservations: result }) })
     }
 
     render() {
@@ -180,12 +314,26 @@ class BlogannoncereservationEdit extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="text-right ml-auto">
-                                                        <Button className="btn btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
-                                                            <i className="now-ui-icons tech_mobile"></i>
-                                                        </Button>
-                                                        <a href="https://www.kazoutech.com" className="btn btn-sm btn-primary" target="_banck">
-                                                            <i className="now-ui-icons objects_globe"></i>
-                                                        </a>
+                                                        {this.state.status ?
+                                                            <>
+                                                                <button type="button" rel="tooltip" onClick={() => this.unactiveItem(this.state.id)}
+                                                                        className="btn btn-success btn-icon btn-sm" >
+                                                                    <i className="now-ui-icons ui-1_check"/>
+                                                                </button>
+                                                            </>
+                                                            :
+                                                            <>
+                                                                <button type="button" onClick={() => this.activeItem(this.state.id)}
+                                                                        className="btn btn-primary btn-icon btn-sm">
+                                                                    <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                </button>
+                                                            </>
+
+                                                        }
+                                                        <Button
+                                                            className="btn btn-sm btn-icon btn-danger" onClick={() => this.deleteItem(this.state.id)} >
+                                                            <i className="now-ui-icons ui-1_simple-remove"/>
+                                                        </Button>{" "}
                                                     </div>
                                                 </div>
                                                 <hr />
@@ -231,17 +379,19 @@ class BlogannoncereservationEdit extends Component {
                                                         </div>
                                                     </div>
                                                     <Row>
-                                                        <div className="col-md-4 mx-auto">
-                                                            <div className="profile text-center">
+                                                        <div className="col-md-6 mx-auto">
+                                                            <div className="text-center">
                                                                 <img src={this.state.showDefaultImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : photo} alt={'name'} />
                                                                 <input id="photo" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('photo') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="photo" />
                                                                 {this.renderErrorFor('photo')}
-                                                                <label htmlFor="photo" className="btn btn-primary">
-                                                                    <span className="btn-inner--text">Ajouter l'image</span>
-                                                                </label>
-                                                                <button hidden={this.state.showDefaultImage ? true : false} onClick={this.removeImage} className="btn btn-danger">
-                                                                    <span className="btn-inner--text">Remove</span>
-                                                                </button>
+                                                                <div className="text-center">
+                                                                    <label htmlFor="photo" className="btn btn-primary">
+                                                                        <span className="btn-inner--text">Ajouter l'image</span>
+                                                                    </label>
+                                                                    <label hidden={this.state.showDefaultImage ? true : false} onClick={this.removeImage} className="btn btn-danger">
+                                                                        <span className="btn-inner--text">Remove</span>
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </Row>

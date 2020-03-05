@@ -22,7 +22,7 @@ class BaseRequest extends Request
                 'full_name' => ['required', 'string', 'max:255'],
                 'role' => ['required', 'string', 'max:255'],
                 'photo' => 'required',
-                'description' => 'required',
+                'description' => 'required'
             ];
         }
         else { // 'edit'

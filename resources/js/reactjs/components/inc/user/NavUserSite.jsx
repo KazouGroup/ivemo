@@ -21,7 +21,7 @@ class NavUserSite extends Component {
             <div className="container">
 
                 <div className="navbar-translate">
-                    <Link to={'/'} className="navbar-brand" rel="tooltip" title="Ivemo home page" data-placement="bottom">
+                    <Link to={'/'} className="navbar-brand" >
                         <img src=".." />
                         Ivemo
                         </Link>

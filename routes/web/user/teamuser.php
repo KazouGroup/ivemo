@@ -12,6 +12,16 @@ Route::get(
 )->name('profile_team_users.site');
 
 Route::get(
+    'profile/{user}/personal_settings/teams/create',
+    'TeamuserController@create'
+)->name('profile_team_users_create.site');
+
+Route::post(
+    'profile/{user}/personal_settings/teams',
+    'TeamuserController@store'
+)->name('profile_team_users_store.site');
+
+Route::get(
     'profile/{user}/personal_settings/teams/{teamuser}/edit',
     'TeamuserController@edit'
 )->name('profile_team_users_edit.site');

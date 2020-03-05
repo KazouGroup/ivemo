@@ -24,6 +24,6 @@ $factory->define(blogannoncereservation::class, function (Faker $faker) {
         'description' => $faker->realText(rand(10000, 40000)),
         'categoryannoncereservation_id' => categoryannoncereservation::inRandomOrder()->first()->id,
         'user_id' => user::inRandomOrder()->first()->id,
-         'created_at' => $faker->dateTime,
+        //'created_at' => $faker->dateTime,
     ];
 });

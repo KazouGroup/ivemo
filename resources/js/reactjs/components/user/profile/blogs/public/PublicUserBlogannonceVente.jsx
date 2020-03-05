@@ -124,7 +124,7 @@ class PublicUserBlogannonceVente extends Component {
 
                                 <div className="card-body">
 
-                                    <h2 className="title">{userblogventePublick.first_name}</h2>
+                                    <h1 className="title">{userblogventePublick.first_name}</h1>
                                     <Link to={`/@${userblogventePublick.slug}/`} className="text-white">
                                         <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userblogventePublick.first_name}</b>
                                     </Link>

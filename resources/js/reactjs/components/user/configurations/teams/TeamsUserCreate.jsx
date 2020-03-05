@@ -10,11 +10,11 @@ import ReactQuill, { Quill, Mixin, Toolbar } from 'react-quill';
 import '../../../../assets/css/ivemo.css'
 
 
-class TeamsUserEdite extends Component {
+class TeamsUserCreate extends Component {
     constructor(props) {
         super(props);
 
-        this.updateItem = this.updateItem.bind(this);
+        this.saveItem = this.saveItem.bind(this);
         this.updateImage = this.updateImage.bind(this);
         this.removeImage = this.removeImage.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -28,7 +28,7 @@ class TeamsUserEdite extends Component {
             description: '',
             userProfile: {profile:[]},
             errors: [],
-            showDefaultImage: false
+            showDefaultImage: true
         };
         this.modules = {
             toolbar: [
@@ -88,9 +88,8 @@ class TeamsUserEdite extends Component {
             )
         }
     }
-    updateItem(e) {
+    saveItem(e) {
         let itemuser = this.props.match.params.user;
-        let Id = this.props.match.params.id;
         e.preventDefault();
 
         let item = {
@@ -99,11 +98,11 @@ class TeamsUserEdite extends Component {
             photo: this.state.photo,
             description: this.state.description,
         };
-        dyaxios.put(route('profile_team_users_update.site', [itemuser,Id]), item)
+        dyaxios.post(route('profile_team_users_store.site', [itemuser]), item)
             .then(() => {
 
                 $.notify({
-                        message: 'Informations mise à jour avec success...'
+                        message: 'Informations sauvegardé avec success...'
                     },
                     {
                         allow_dismiss: false,
@@ -117,7 +116,7 @@ class TeamsUserEdite extends Component {
                             exit: "animated fadeOutDown"
                         },
                     });
-                this.props.history.goBack();
+                this.props.history.push(`/profile/${$userIvemo.slug}/personal_settings/teams/`);
             }).catch(error => {
             this.setState({
                 errors: error.response.data.errors
@@ -136,15 +135,6 @@ class TeamsUserEdite extends Component {
     // get all the tasks from backend
     loadItems() {
         let itemuser = this.props.match.params.user;
-        let Itemdata = this.props.match.params.id;
-        let url = route('api.profile_team_users_show.site', [itemuser,Itemdata]);
-        dyaxios.get(url).then(response =>
-            this.setState({
-                full_name: response.data.full_name,
-                role: response.data.role,
-                photo: response.data.photo,
-                description: response.data.description,
-            }));
         dyaxios.get(route('api_user_profile_data.site', [itemuser])).then(response => this.setState({ userProfile: response.data, }));
     }
     // lifecycle method
@@ -154,18 +144,11 @@ class TeamsUserEdite extends Component {
     }
     render() {
         const { userProfile,photo} = this.state;
-        const avatar_style = {
-            width: "40px",
-            height: "40px",
-            top: "15px",
-            left: "15px",
-            borderRadius: "50%"
-        };
         return (
 
             <>
                 <Helmet>
-                    <title>Éditer {`${this.state.full_name || " " }`} - Ivemo</title>
+                    <title>Nouveau membre {`${this.state.full_name || " " }`} - Ivemo</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
@@ -201,7 +184,7 @@ class TeamsUserEdite extends Component {
                                             <div className="card-body">
 
 
-                                                <Form  onSubmit={this.updateItem} acceptCharset="UTF-8">
+                                                <Form  onSubmit={this.saveItem} acceptCharset="UTF-8">
                                                     <CardBody>
 
                                                         <Row>
@@ -335,4 +318,4 @@ class TeamsUserEdite extends Component {
         )
     }
 }
-export default TeamsUserEdite;
+export default TeamsUserCreate;

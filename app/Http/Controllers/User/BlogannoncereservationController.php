@@ -4,11 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BlogannoncereservationResource;
-use App\Http\Resources\CategoryannoncelocationResource;
-use App\Http\Resources\CategoryannoncereservationResource;
 use App\Services\BlogannoncereservationService;
 use App\Model\blogannoncereservation;
-use App\Model\categoryannoncelocation;
 use App\Model\categoryannoncereservation;
 use Illuminate\Http\Request;
 use App\Model\user;

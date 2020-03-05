@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import {Button, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-import moment from "moment";
-import PropTypes from "prop-types";
 import Swal from "sweetalert2";
 import BlogannoncelocationList from "./BlogannoncelocationList";
 import Navblogannoncelocations from "./inc/Navblogannoncelocations";
+import Navlinknewblogannoncelocation from "./treatement/Navlinknewblogannoncelocation";
 
 
 class BlogannoncelocationBycategorylocation extends Component {
@@ -203,11 +201,7 @@ class BlogannoncelocationBycategorylocation extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
-                                        <div className="submit text-center">
-                                            <NavLink className="btn btn-primary" to={`/blogs/annonce_locations/ab/new/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article</b>
-                                            </NavLink>
-                                        </div>
+                                        <Navlinknewblogannoncelocation/>
 
                                         <div className="card">
                                             <div className="card-body">

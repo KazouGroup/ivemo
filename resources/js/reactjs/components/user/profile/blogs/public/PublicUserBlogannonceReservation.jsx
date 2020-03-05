@@ -124,7 +124,7 @@ class PublicUserBlogannonceReservation extends Component {
 
                                 <div className="card-body">
 
-                                    <h2 className="title">{userblogreservationPublick.first_name}</h2>
+                                    <h1 className="title">{userblogreservationPublick.first_name}</h1>
                                     <Link to={`/@${userblogreservationPublick.slug}/`} className="text-white">
                                         <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userblogreservationPublick.first_name}</b>
                                     </Link>

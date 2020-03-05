@@ -34,7 +34,7 @@ class IndexSite extends Component {
                         <div className="content-center">
                             <div className="row">
                                 <div className="col-md-8 ml-auto mr-auto">
-                                    <h2 className="title">About Ivemo</h2>
+                                    <h2 className="title">Bienvenue sur Ivemo</h2>
                                 </div>
                             </div>
                         </div>

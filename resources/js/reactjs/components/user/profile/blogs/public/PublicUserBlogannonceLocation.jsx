@@ -10,6 +10,7 @@ import NavLinkPublicBlogannoncesUser from "./NavLinkPublicBlogannoncesUser";
 import NavLinkPublicAnnonceUser from "../../annonces/NavLinkPublicAnnonceUser";
 import PublicUserBlogannoncelocationList from "./inc/PublicUserBlogannoncelocationList";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
+import Navlinknewblogannoncelocation from "../../../blog/blogannoncelocation/treatement/Navlinknewblogannoncelocation";
 
 
 class PublicUserBlogannonceLocation extends Component {
@@ -124,7 +125,7 @@ class PublicUserBlogannonceLocation extends Component {
 
                                 <div className="card-body">
 
-                                    <h2 className="title">{userbloglocationPublick.first_name}</h2>
+                                    <h1 className="title">{userbloglocationPublick.first_name}</h1>
                                     <Link to={`/@${userbloglocationPublick.slug}/`} className="text-white">
                                         <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userbloglocationPublick.first_name}</b>
                                     </Link>
@@ -178,11 +179,8 @@ class PublicUserBlogannonceLocation extends Component {
                                             </div>
                                         </div>
 
-                                        <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster un article sur la location</b>
-                                            </NavLink>
-                                        </div>
+                                        {/* Ici c'est le component la creation*/}
+                                        <Navlinknewblogannoncelocation/>
 
                                         <div className="card">
                                             <div className="card-body">

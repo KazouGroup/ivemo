@@ -235,7 +235,7 @@ class TeamsUserIndex extends Component {
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
+                                            <NavLink className="btn btn-danger" to={`/profile/${$userIvemo.slug}/personal_settings/teams/create/`}>
                                                 <i className="now-ui-icons ui-1_simple-add"/> <b>Ajouter un nouveau menbre</b>
                                             </NavLink>
                                         </div>

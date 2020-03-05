@@ -39,7 +39,7 @@ class BlogannoncelocationCreate extends Component {
             description: '',
             red_time: '',
             categoryannoncelocation_id: '',
-            showDefaultImage: false,
+            showDefaultImage: true,
             errors: [],
             categoryannoncelocations: [],
         };
