@@ -10,6 +10,8 @@ import NavLinkPublicBlogannoncesUser from "./NavLinkPublicBlogannoncesUser";
 import NavLinkPublicAnnonceUser from "../../annonces/NavLinkPublicAnnonceUser";
 import PublicUserBlogannoncereservationList from "./inc/PublicUserBlogannoncereservationList";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
+import Navlinknewblogannoncereservation
+    from "../../../blog/blogannoncereservation/treatement/Navlinknewblogannoncereservation";
 
 
 class PublicUserBlogannonceReservation extends Component {
@@ -151,7 +153,7 @@ class PublicUserBlogannonceReservation extends Component {
 
                                         <div className="submit text-center">
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add" /> <b>Poster votre article</b>
+                                                <i className="now-ui-icons ui-1_simple-add" /> <b>Poster votre annonce</b>
                                             </NavLink>
                                         </div>
 
@@ -177,11 +179,8 @@ class PublicUserBlogannonceReservation extends Component {
                                             </div>
                                         </div>
 
-                                        <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add" /> <b>Poster un article sur la reservation</b>
-                                            </NavLink>
-                                        </div>
+                                        <Navlinknewblogannoncereservation/>
+
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="row">

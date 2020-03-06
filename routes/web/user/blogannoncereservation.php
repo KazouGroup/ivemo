@@ -6,6 +6,16 @@ Route::get(
 )->name('blogannoncereservations_site');
 
 Route::get(
+    'blogs/annonce_reservations/ab/new',
+    'BlogannoncereservationController@create'
+)->name('blogannoncereservationabnew_site');
+
+Route::post(
+    'blogs/annonce_reservations/save',
+    'BlogannoncereservationController@store'
+)->name('blogannoncecategoryreservationtore_site');
+
+Route::get(
     'blogs/annonce_reservations/{categoryannoncereservation}',
     'BlogannoncereservationController@annonceblogcategoryreservation'
 )->name('blogannoncecategoryreservation_site');
@@ -19,6 +29,11 @@ Route::get(
     'blogs/annonce_reservations/{blogannoncereservation}/edit',
     'BlogannoncereservationController@edit'
 )->name('blogannoncecategoryreservationedit_site');
+
+Route::put(
+    'blogs/annonce_reservations/{blogannoncereservation}',
+    'BlogannoncereservationController@update'
+)->name('blogannoncecategoryreservationupdate_site');
 
 Route::get(
     'api/blogs/annonce_reservation/{blogannoncereservation}',

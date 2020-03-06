@@ -69,6 +69,8 @@ import SubscriberuserUserIndex from "../components/user/configurations/Subscribe
 import BlogannoncelocationCreate
     from "../components/user/blog/blogannoncelocation/treatement/BlogannoncelocationCreate";
 import TeamsUserCreate from "../components/user/configurations/teams/TeamsUserCreate";
+import BlogannoncereservationCreate
+    from "../components/user/blog/blogannoncereservation/treatement/BlogannoncereservationCreate";
 
 
 const RouteUser = props => (
@@ -148,7 +150,10 @@ const RouteUser = props => (
           <Route exact path="/blogs/annonce_locations/:categoryannoncelocation/:date/:blogannoncelocation/" component={withRouter(BlogannoncelocationShow)}/>
           <Route exact path="/blogs/annonce_locations/ab/new/" component={BlogannoncelocationCreate}/>
           <Route exact path="/blogs/annonce_locations/:blogannoncelocation/edit/" component={BlogannoncelocationEdit}/>
+
+          <Route exact path="/blogs/annonce_reservations/ab/new/" component={BlogannoncereservationCreate}/>
           <Route exact path="/blogs/annonce_reservations/:blogannoncereservation/edit/" component={BlogannoncereservationEdit}/>
+
 
           <Route exact path="/blogs/annonce_ventes/" component={BlogannonceventeIndex}/>
           <Route exact path="/blogs/annonce_ventes/:categoryannoncevente/" component={withRouter(BlogannonceventesBycategoryvente)}/>

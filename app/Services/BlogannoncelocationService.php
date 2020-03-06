@@ -16,6 +16,7 @@ class BlogannoncelocationService
     public static function apiannonceblogcategorylocations($categoryannoncelocation)
     {
         $blogannoncelocations = categoryannoncelocation::whereSlug($categoryannoncelocation->slug)
+            ->where(['status' => 1])
             ->withCount(['blogannoncelocations' => function ($q) use ($categoryannoncelocation){
                 $q->where(['status' => 1,'status_admin' => 1])
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})

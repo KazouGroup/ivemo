@@ -80,7 +80,7 @@ class AnnoncelocationController extends Controller
     public function apicategoryannoncelocation()
     {
         $categoryannoncelocations = CategoryannoncelocationResource::collection(categoryannoncelocation::with('user')
-            ->where(['status' => 1])
+            ->where('status',1)
             ->withCount(['annoncelocations' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1])
                 ->whereHas('city', function ($q) {$q->where('status',1);});

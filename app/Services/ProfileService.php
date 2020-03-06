@@ -181,6 +181,7 @@ class ProfileService
         $personnalblogannonces = user::whereSlug($user->slug)
             ->with(['blogannoncelocations' => function ($q) use ($user){
                 $q->with('user','categoryannoncelocation')
+                    ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id])
                     ->where(['status' => 1,'status_admin' => 1])
                     ->distinct()->get()->toArray()
@@ -252,6 +253,7 @@ class ProfileService
                 $q->with('user','categoryannoncevente')
                     ->whereIn('user_id',[$user->id])
                     ->where(['status' => 1,'status_admin' => 1])
+                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->distinct()->get()->toArray()
                 ;},
             ])

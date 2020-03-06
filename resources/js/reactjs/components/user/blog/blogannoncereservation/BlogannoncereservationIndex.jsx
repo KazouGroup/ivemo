@@ -8,6 +8,7 @@ import {Button} from "reactstrap";
 import Swal from "sweetalert2";
 import BlogannoncereservationList from "./BlogannoncereservationList";
 import Navblogannoncereservations from "./inc/Navblogannoncereservations";
+import Navlinknewblogannoncereservation from "./treatement/Navlinknewblogannoncereservation";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -201,11 +202,7 @@ class BlogannoncereservationIndex extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
-                                        <div className="submit text-center">
-                                            <NavLink className="btn btn-primary" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article</b>
-                                            </NavLink>
-                                        </div>
+                                        <Navlinknewblogannoncereservation/>
 
                                         <div className="card">
                                             <div className="card-body">

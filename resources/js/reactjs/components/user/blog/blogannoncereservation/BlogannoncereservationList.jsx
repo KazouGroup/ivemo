@@ -9,8 +9,7 @@ class BlogannoncereservationList extends Component {
 
 
     getDescription() {
-        const md = new Remarkable();
-        return { __html: md.render(this.props.description.length > 80 ? this.props.description.substring(0, 80) + "..." : this.props.description) };
+        return { __html: (this.props.description.length > 80 ? this.props.description.substring(0, 80) + "..." : this.props.description) };
     }
     render() {
         return (
@@ -30,6 +29,7 @@ class BlogannoncereservationList extends Component {
                                              {this.props.categoryannoncereservation.name}
                                          </Link>
                                      </span>
+                                <br/>
                                 <Link to={`/blogs/annonce_reservations/${this.props.categoryannoncereservation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
                                     <span dangerouslySetInnerHTML={this.getDescription()}/>
                                 </Link>

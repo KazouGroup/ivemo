@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Http\Resources\BlogannoncereservationResource;
 use App\Model\blogannoncereservation;
 use App\Model\user;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
 
 class BlogannoncereservationService
 {
@@ -31,22 +33,65 @@ class BlogannoncereservationService
             }])->withCount(['teamusers' => function ($q) use ($user){
                 $q->whereIn('user_id',[$user->id]);
             }])->withCount(['annoncelocations' => function ($q) use ($user){
-                $q->whereIn('user_id',[$user->id]);
+                $q->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[$user->id]);
             }])->withCount(['annoncereservations' => function ($q) use ($user){
-                $q ->whereIn('user_id',[$user->id]);
+                $q->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[$user->id]);
             }])->withCount(['annonceventes' => function ($q) use ($user){
-                $q ->whereIn('user_id',[$user->id]);
+                $q->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[$user->id]);
             }])->withCount(['blogannoncelocations' => function ($q) use ($user){
-                $q->whereIn('user_id',[$user->id]);
+                $q->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[$user->id]);
             }])->withCount(['blogannoncereservations' => function ($q) use ($user){
-                $q->whereIn('user_id',[$user->id]);
+                $q->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[$user->id]);
             }])->withCount(['blogannonceventes' => function ($q) use ($user){
-                $q->whereIn('user_id',[$user->id]);
+                $q->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[$user->id]);
             }])->first();
 
         return $blogannoncereservations;
     }
 
+    public static function storeUploadImage($request,$blogannoncereservation)
+    {
+
+        if ($request->photo) {
+            $namefile = sha1(date('YmdHis') . str_random(30));
+            $name =   $namefile.'.' . explode('/',explode(':',substr($request->photo,0,strpos
+                ($request->photo,';')))[1])[1];
+            $dir = 'assets/img/blogannoncereservation/';
+            if(!file_exists($dir)){
+                mkdir($dir, 0775, true);
+            }
+            $destinationPath = public_path("assets/img/blogannoncereservation/{$name}");
+            Image::make($request->photo)->save($destinationPath);
+
+            $myfilename = "/assets/img/blogannoncereservation/{$name}";
+            $blogannoncereservation->photo = $myfilename;
+        }
+
+    }
+
+
+    public static function updateUploadeImage($request,$blogannoncereservation)
+    {
+        $currentPhoto = $blogannoncereservation->photo;
+
+        if ($request->photo != $currentPhoto){
+            $namefile = sha1(date('YmdHis') . str_random(30));
+            $name =   $namefile.'.' . explode('/',explode(':',substr($request->photo,0,strpos
+                ($request->photo,';')))[1])[1];
+            $dir = 'assets/img/blogannoncereservation/';
+            if(!file_exists($dir)){mkdir($dir, 0775, true);}
+            Image::make($request->photo)->save(public_path('assets/img/blogannoncereservation/').$name);
+            $request->merge(['photo' =>  "/assets/img/blogannoncereservation/{$name}"]);
+            $oldFilename = $currentPhoto;
+            File::delete(public_path($oldFilename));
+        }
+    }
 
 
 }

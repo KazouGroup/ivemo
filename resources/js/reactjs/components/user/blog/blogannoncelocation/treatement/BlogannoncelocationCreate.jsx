@@ -32,10 +32,8 @@ class BlogannoncelocationCreate extends Component {
         this.renderErrorFor = this.renderErrorFor.bind(this);
         this.handleChangeBody = this.handleChangeBody.bind(this);
         this.state = {
-            id: '',
             title: '',
             photo: '',
-            status: '',
             description: '',
             red_time: '',
             categoryannoncelocation_id: '',

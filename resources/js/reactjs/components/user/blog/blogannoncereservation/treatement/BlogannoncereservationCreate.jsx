@@ -8,14 +8,11 @@ import Swal from "sweetalert2";
 import Navblogannoncereservationsbyuser from "../inc/Navblogannoncereservationsbyuser";
 
 
-class BlogannoncereservationEdit extends Component {
+class BlogannoncereservationCreate extends Component {
     constructor(props) {
         super(props);
 
-        this.updateItem = this.updateItem.bind(this);
-        this.activeItem = this.activeItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
-        this.deleteItem = this.deleteItem.bind(this);
+        this.saveItem = this.saveItem.bind(this);
         this.updateImage = this.updateImage.bind(this);
         this.removeImage = this.removeImage.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -23,14 +20,12 @@ class BlogannoncereservationEdit extends Component {
         this.renderErrorFor = this.renderErrorFor.bind(this);
         this.handleChangeBody = this.handleChangeBody.bind(this);
         this.state = {
-            id: '',
-            status: '',
             title: '',
             photo: '',
             red_time: '',
             description: '',
             categoryannoncereservation_id: '',
-            showDefaultImage: false,
+            showDefaultImage: true,
             errors: [],
             categoryannoncereservations: [],
         };
@@ -67,132 +62,6 @@ class BlogannoncereservationEdit extends Component {
     // Handle Errors
     hasErrorFor(field) {
         return !!this.state.errors[field];
-    }
-    activeItem(id){
-        //Envoyer la requet au server
-        let url = route('blogannoncecategoryreservationactivated_site',[id]);
-        dyaxios.get(url).then(() => {
-
-            /** Alert notify bootstrapp **/
-            $.notify({
-                    //,
-                    message: 'Article de blogs activé avec succès'
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
-                    },
-                    animate: {
-                        enter: "animated fadeInUp",
-                        exit: "animated fadeOutDown"
-                    },
-                });
-            /** End alert ***/
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animated bounceInDown',
-                    exit: 'animated bounceOutUp'
-                }
-            });
-        })
-
-    }
-
-    unactiveItem(id){
-        //Envoyer la requet au server
-        let url = route('blogannoncecategoryreservationunactivated_site',[id]);
-        dyaxios.get(url).then(() => {
-
-            /** Alert notify bootstrapp **/
-            $.notify({
-                    // title: 'Update FAQ',
-                    message: 'Article de blogs désactiver avec succès'
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
-                    },
-                    animate: {
-                        enter: "animated fadeInUp",
-                        exit: "animated fadeOutDown"
-                    },
-                });
-            /** End alert ***/
-            this.loadItems();
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animated bounceInDown',
-                    exit: 'animated bounceOutUp'
-                }
-            });
-        })
-
-    }
-
-    deleteItem(id) {
-        Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                const url = route('blogannoncecategoryreservationdelete_site',id);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            // title: 'Update',
-                            message: 'Article de blogs suprimée avec success'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-                    this.props.history.goBack();
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
     }
 
     updateImage(e) {
@@ -240,23 +109,21 @@ class BlogannoncereservationEdit extends Component {
         }
     }
 
-    updateItem(e) {
+    saveItem(e) {
         e.preventDefault();
 
         let item = {
             title: this.state.title,
-            status: this.state.status,
             photo: this.state.photo,
             red_time: this.state.red_time,
             description: this.state.description,
             categoryannoncereservation_id: this.state.categoryannoncereservation_id,
         };
-        let itemslugin = this.props.match.params.blogannoncereservation;
-        dyaxios.put(route('blogannoncecategoryreservationupdate_site', [itemslugin]), item)
+        dyaxios.post(route('blogannoncecategoryreservationtore_site'), item)
             .then(() => {
                 $.notify({
                     //,
-                    message: 'Votre article de blogs a bien été modifié'
+                    message: 'Votre article de blogs a bien été crée'
                 },
                     {
                         allow_dismiss: false,
@@ -270,36 +137,20 @@ class BlogannoncereservationEdit extends Component {
                             exit: "animated fadeOutDown"
                         },
                     });
+                this.props.history.push(`/blogs/annonce_reservations/`);
             }).catch(error => {
                 this.setState({
                     errors: error.response.data.errors
                 });
             })
     }
-
-    loadItems() {
-        let Itemdata = this.props.match.params.blogannoncereservation;
-        let url = route('api.blogannonceblogcategoryreservationslugin_site', [Itemdata]);
-        dyaxios.get(url).then(response =>
-            this.setState({
-                id: response.data.id,
-                title: response.data.title,
-                status: response.data.status,
-                photo: response.data.photo,
-                red_time: response.data.red_time,
-                categoryannoncereservation_id: response.data.categoryannoncereservation_id,
-                description: response.data.description,
-            }));
-    }
-    // lifecycle method
     componentDidMount() {
-        this.loadItems();
         fetch(route('api.categoryannoncereservation_site')).then(res => res.json()).then((result) => { this.setState({ categoryannoncereservations: result }) })
     }
 
     render() {
         const { photo, categoryannoncereservations } = this.state;
-        const composantTitle = `${this.state.title || 'Ivemo'}`;
+        const composantTitle = `${this.state.title || 'Article'}`;
         document.title = `${composantTitle} - Ivemo`;
         return (
             <div className="about-us sidebar-collapse">
@@ -312,14 +163,14 @@ class BlogannoncereservationEdit extends Component {
                         <div className="container">
                             <br />
 
-                            <form role="form" onSubmit={this.updateItem} acceptCharset="UTF-8">
+                            <form role="form" onSubmit={this.saveItem} acceptCharset="UTF-8">
 
                                 <div className="row">
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
-                                            <NavLink className="btn btn-primary" to={`/blogs/annonce_reservations/ab/new/`}>
+                                            <NavLink className="btn btn-primary" to={`/blogs/annonce_locations/ab/new/`}>
                                                 <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article</b>
                                             </NavLink>
                                         </div>
@@ -364,26 +215,7 @@ class BlogannoncereservationEdit extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="text-right ml-auto">
-                                                        {this.state.status ?
-                                                            <>
-                                                                <button type="button" rel="tooltip" onClick={() => this.unactiveItem(this.state.id)}
-                                                                        className="btn btn-success btn-icon btn-sm" >
-                                                                    <i className="now-ui-icons ui-1_check"/>
-                                                                </button>
-                                                            </>
-                                                            :
-                                                            <>
-                                                                <button type="button" onClick={() => this.activeItem(this.state.id)}
-                                                                        className="btn btn-primary btn-icon btn-sm">
-                                                                    <i className="now-ui-icons ui-1_simple-delete"/>
-                                                                </button>
-                                                            </>
 
-                                                        }
-                                                        <Button
-                                                            className="btn btn-sm btn-icon btn-danger" onClick={() => this.deleteItem(this.state.id)} >
-                                                            <i className="now-ui-icons ui-1_simple-remove"/>
-                                                        </Button>{" "}
                                                     </div>
                                                 </div>
                                                 <hr />
@@ -492,7 +324,7 @@ class BlogannoncereservationEdit extends Component {
 
                                                 <div className="submit text-center">
                                                     <button className="btn btn-primary" type="submit">
-                                                        <b>Mettre à jour l'article de blog</b>
+                                                        <b>Sauvegarder l'article de blog</b>
                                                     </button>
                                                 </div>
                                             </div>
@@ -514,4 +346,4 @@ class BlogannoncereservationEdit extends Component {
     }
 }
 
-export default BlogannoncereservationEdit;
+export default BlogannoncereservationCreate;

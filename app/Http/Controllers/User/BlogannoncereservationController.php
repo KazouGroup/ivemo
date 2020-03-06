@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Blog\Blogannoncereservation\StoreRequest;
+use App\Http\Requests\Blog\Blogannoncereservation\UpdateRequest;
 use App\Http\Resources\BlogannoncereservationResource;
 use App\Services\BlogannoncereservationService;
 use App\Model\blogannoncereservation;
@@ -29,9 +31,9 @@ class BlogannoncereservationController extends Controller
     public function apiannonceblogreservation()
     {
         $blogannoncereservations = blogannoncereservation::with('user','categoryannoncereservation')
-            ->where(['status' => 1,'status_admin' => 1])->orderBy('created_at','DESC')
+            ->where(['status' => 1,'status_admin' => 1])
             ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
-            ->distinct()->paginate(40)->toArray();
+            ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();
 
         return response()->json($blogannoncereservations, 200);
     }
@@ -39,6 +41,7 @@ class BlogannoncereservationController extends Controller
     public function apiannonceblogcategoryreservation(categoryannoncereservation $categoryannoncereservation)
     {
         $blogannoncereservation = categoryannoncereservation::whereSlug($categoryannoncereservation->slug)
+            ->where(['status' => 1])
             ->withCount(['blogannoncereservations' => function ($q) use ($categoryannoncereservation){
                 $q->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
                     ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
@@ -145,7 +148,7 @@ class BlogannoncereservationController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.blogs.blogannoncereservation.create');
     }
 
     /**
@@ -154,9 +157,17 @@ class BlogannoncereservationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $blogannoncereservation= new blogannoncereservation();
+
+        $blogannoncereservation->fill($request->all());
+
+        BlogannoncereservationService::storeUploadImage($request,$blogannoncereservation);
+
+        $blogannoncereservation->save();
+
+        return response('Created',Response::HTTP_CREATED);
     }
 
     /**
@@ -223,12 +234,20 @@ class BlogannoncereservationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int  $blogannoncereservation
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $blogannoncereservation)
     {
-        //
+        $blogannoncereservation = blogannoncereservation::whereSlugin($blogannoncereservation)->firstOrFail();
+
+        $this->authorize('update',$blogannoncereservation);
+
+        BlogannoncereservationService::updateUploadeImage($request,$blogannoncereservation);
+
+        $blogannoncereservation->update($request->all());
+
+        return response()->json($blogannoncereservation,200);
     }
 
     /**

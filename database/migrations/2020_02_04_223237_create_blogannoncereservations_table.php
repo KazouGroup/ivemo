@@ -21,7 +21,7 @@ class CreateBlogannoncereservationsTable extends Migration
             $table->longText('description')->nullable();
             $table->string('slug')->nullable();
             $table->string('slugin')->nullable();
-            $table->boolean('status')->nullable()->default(true);
+            $table->boolean('status')->default(true);
             $table->boolean('status_admin')->default(true);
             $table->timestamps();
 

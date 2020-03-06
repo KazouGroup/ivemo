@@ -29,6 +29,7 @@ class BlogannoncelocationList extends Component {
                                              {this.props.categoryannoncelocation.name}
                                          </Link>
                                      </span>
+                                <br/>
                                 <Link to={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
                                     <span dangerouslySetInnerHTML={this.getDescription()}/>
                                 </Link>
