@@ -44,22 +44,28 @@ class AnnonceventeController extends Controller
 
     public function apicategoryannoncevente()
     {
-        $categoryannonceventes = CategoryannonceventeResource::collection(categoryannoncevente::with('user')
+        $categoryannonceventes = CategoryannonceventeResource::collection(categoryannoncevente::with('user')->where(['status' => 1])
             ->withCount(['annonceventes' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1])
+                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);});
             }])->withCount(['blogannonceventes' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
+                $q->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+                    ->where(['status' => 1,'status_admin' => 1]);
             }])->orderBy('annonceventes_count','desc')
             ->distinct()->get());
 
-        return response()->json($categoryannonceventes, 200);    }
+        return response()->json($categoryannonceventes, 200);
+
+    }
 
 
     public function apiannonceventebyannoncetype(annoncetype $annoncetype)
     {
         $annoncesventes = $annoncetype->annonceventes()->whereIn('annoncetype_id',[$annoncetype->id])
             ->with('user','categoryannoncevente','city','annoncetype')
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')
             ->where(['status' => 1,'status_admin' => 1])
             ->distinct()->paginate(40)->toArray();
@@ -67,38 +73,43 @@ class AnnonceventeController extends Controller
         return response()->json($annoncesventes, 200);
     }
 
+    /**
+     * @param annoncetype $annoncetype
+     * @param categoryannoncevente $categoryannoncevente
+     * @return \Illuminate\Http\JsonResponse
+     *
+     */
+
     public function apiannonceventebycategoryannoncevente(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente)
     {
-        $annoncevente = categoryannoncevente::whereSlug($categoryannoncevente->slug)
-            ->with([
-                'annonceventes' => function ($q) use ($annoncetype,$categoryannoncevente){
-                    $q->where(['status' => 1,'status_admin' => 1])
-                        ->with('user','categoryannoncevente','city','annoncetype')
-                        ->whereIn('annoncetype_id',[$annoncetype->id])
-                        ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
-                        ->whereHas('city', function ($q) {$q->where('status',1);})
-                        ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();},
-            ])->first();
+        $annoncevente = AnnonceventeService::apiannonceventebycategoryannoncevente($annoncetype,$categoryannoncevente);
+
         return response()->json($annoncevente, 200);
     }
 
+    /**
+     * @param annoncetype $annoncetype
+     * @param categoryannoncevente $categoryannoncevente
+     * @param city $city
+     * @return \Illuminate\Http\JsonResponse
+     *
+     */
+
     public function apiannonceventebycity(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city)
     {
-        $annonceventecities = city::whereSlug($city->slug)
-            ->where('status',1)
-            ->with([
-                'annonceventes' => function ($q) use ($annoncetype,$categoryannoncevente,$city){
-                    $q->where(['status' => 1,'status_admin' => 1])
-                        ->with('user','categoryannoncevente','city','annoncetype')
-                        ->whereIn('annoncetype_id',[$annoncetype->id])
-                        ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
-                        ->whereIn('city_id',[$city->id])
-                        ->whereHas('city', function ($q) {$q->where('status',1);})
-                        ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();},
-            ])->first();
+        $annonceventecities = AnnonceventeService::apiannonceventebycity($annoncetype,$categoryannoncevente,$city);
 
         return response()->json($annonceventecities, 200);
     }
+
+    /**
+     * @param annoncetype $annoncetype
+     * @param categoryannoncevente $categoryannoncevente
+     * @param city $city
+     * @param $date
+     * @param $annoncevente
+     * @return \Illuminate\Http\JsonResponse
+     */
 
     public function apiannonceventebycategoryannonceventeslug(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,$date,$annoncevente)
     {

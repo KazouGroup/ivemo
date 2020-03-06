@@ -13,11 +13,17 @@ class BlogannonceventeService
 
     public static function apiannonceblogcategoryvente($categoryannoncevente)
     {
-        $blogannoncereseventes = categoryannoncevente::whereSlug($categoryannoncevente->slug)
-            ->with(['blogannonceventes' => function ($q) use ($categoryannoncevente){
+        $blogannoncereseventes = categoryannoncevente::whereSlug($categoryannoncevente->slug)->where(['status' => 1])
+            ->withCount(['blogannonceventes' => function ($q)  use ($categoryannoncevente){
                 $q->where(['status' => 1,'status_admin' => 1])
                     ->with('user','categoryannoncevente')
                     ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);});
+            }])->with(['blogannonceventes' => function ($q) use ($categoryannoncevente){
+                $q->where(['status' => 1,'status_admin' => 1])
+                    ->with('user','categoryannoncevente')
+                    ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();},
             ])->first();
 
@@ -31,21 +37,33 @@ class BlogannonceventeService
                 $q->with('user','categoryannoncevente')
                     ->whereIn('user_id',[$user->id])
                     ->where(['status' => 1,'status_admin' => 1])
+                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->distinct()->get()->toArray()
                 ;},
             ])
-            ->withCount(['annoncelocations' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['annoncereservations' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['annonceventes' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['blogannoncelocations' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['blogannoncereservations' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['blogannonceventes' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
+            ->withCount(['annoncelocations' => function ($q) use ($user){
+                $q->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+                    ->where(['status' => 1,'status_admin' => 1])
+                    ->whereIn('user_id',[$user->id]);
+            }])->withCount(['annoncereservations' => function ($q) use ($user){
+                $q->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
+                    ->where(['status' => 1,'status_admin' => 1])
+                    ->whereIn('user_id',[$user->id]);
+            }])->withCount(['annonceventes' => function ($q) use ($user){
+                $q->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+                    ->where(['status' => 1,'status_admin' => 1])
+                    ->whereIn('user_id',[$user->id]);
+            }])->withCount(['blogannoncelocations' => function ($q) use ($user){
+                $q->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+                    ->where(['status' => 1,'status_admin' => 1])
+                    ->whereIn('user_id',[$user->id]);
+            }])->withCount(['blogannoncereservations' => function ($q) use ($user){
+                $q->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[$user->id]);
+            }])->withCount(['blogannonceventes' => function ($q) use ($user){
+                $q->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+                    ->where(['status' => 1,'status_admin' => 1])
+                    ->whereIn('user_id',[$user->id]);
             }])
             ->first();
 

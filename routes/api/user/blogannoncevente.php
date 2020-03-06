@@ -20,7 +20,7 @@ Route::get(
     'BlogannonceventeController@apiannonceblogcategoryventeslug'
 )->name('api.blogannoncecategoryventeslug_site');
 
-Route::get(
-    '@{user}/blogs_annonce_ventes',
-    'BlogannonceventeController@apiblogsannonceventespublique'
-)->name('api.blogs_annonce_ventespublique');
+//Route::get(
+//    '@{user}/blogs_annonce_ventes',
+//    'BlogannonceventeController@apiblogsannonceventespublique'
+//)->name('api.blogs_annonce_ventespublique');

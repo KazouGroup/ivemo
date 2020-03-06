@@ -29,7 +29,9 @@ class BlogannonceventeController extends Controller
     public function apiannonceblogresevente()
     {
         $blogannoncereseventes = blogannoncevente::with('user','categoryannoncevente')
-            ->where(['status' => 1,'status_admin' => 1])->orderBy('created_at','DESC')
+            ->where(['status' => 1,'status_admin' => 1])
+            ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+            ->orderBy('created_at','DESC')
             ->distinct()->paginate(40)->toArray();
 
         return response()->json($blogannoncereseventes, 200);
@@ -54,6 +56,7 @@ class BlogannonceventeController extends Controller
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
             ->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
+            ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
             ->take(3)->distinct()->get()->toArray();
         return response()->json($blogannoncereseventes, 200);
     }
@@ -66,12 +69,12 @@ class BlogannonceventeController extends Controller
         return response()->json($blogannonceresevente, 200);
     }
 
-    public function apiblogsannonceventespublique(user $user)
-    {
-        $blogannoncereseventes = BlogannonceventeService::apiblogsannonceventespublique($user);
+    //public function apiblogsannonceventespublique(user $user)
+    //{
+    //    $blogannoncereseventes = BlogannonceventeService::apiblogsannonceventespublique($user);
 
-        return response()->json($blogannoncereseventes, 200);
-    }
+    //    return response()->json($blogannoncereseventes, 200);
+    //}
 
 
     public function annonceblogcategoryvente(categoryannoncevente $categoryannoncevente)

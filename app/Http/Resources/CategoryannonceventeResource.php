@@ -19,6 +19,7 @@ class CategoryannonceventeResource extends JsonResource
             'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
+            'status' => $this->status,
             'color_name' => $this->color_name,
             'icon' => $this->icon,
             'user' => $this->user,
