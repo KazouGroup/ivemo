@@ -13,9 +13,9 @@ class PublicUserBlogannoncelocationList extends Component {
             <div key={this.props.id} className="col-md-6 mx-auto">
                 <div className="card card-blog">
                     <div className="card-image">
-                        <Link to={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
+                        <a target="_blank" href={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
                             <img className="img rounded" alt={this.props.title} src={this.props.photo}/>
-                        </Link>
+                        </a>
                     </div>
                     <CardBody>
                         {!$guest && (
@@ -48,11 +48,11 @@ class PublicUserBlogannoncelocationList extends Component {
                             </div>
                         </Row>
                         <h6 className="card-title text-center">
-                            <NavLink to={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="card-link"> {this.props.title}</NavLink>
+                            <a target="_blank" href={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="card-link"> {this.props.title}</a>
                         </h6>
                         <p className="card-description">
                             <b dangerouslySetInnerHTML={{__html: (this.props.description.length > 48 ? this.props.description.substring(0, 48) + "..." : this.props.description)}}/>
-                            <Link to={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}> lire la suite </Link>
+                            <a target="_blank" href={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}> lire la suite </a>
                         </p>
                         <CardFooter>
                             <div className="author">

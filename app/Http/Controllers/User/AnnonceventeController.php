@@ -213,6 +213,22 @@ class AnnonceventeController extends Controller
         return response()->json($annoncevente, 200);
     }
 
+    public function apicategoryannonceventes_by_user()
+    {
+        $categoryannonceventes = CategoryannonceventeResource::collection(categoryannoncevente::with('user')
+            ->where(['status' => 1])
+            ->withCount(['annonceventes' => function ($q){
+                $q->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+                    ->whereHas('city', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[auth()->user()->id]);
+            }])->withCount(['blogannonceventes' => function ($q){
+                $q->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[auth()->user()->id]);}])
+            ->orderBy('annonceventes_count','desc')->distinct()->get());
+
+        return response()->json($categoryannonceventes, 200);
+    }
+
     public function apiannoncesventesbyuser(user $user)
     {
         if (auth()->user()->id === $user->id){

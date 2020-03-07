@@ -23,16 +23,16 @@ class BlogannoncereservationList extends Component {
                             <div className="col-md-8">
 
                                      <span className="title">
-                                         <NavLink to={`/blogs/annonce_reservations/${this.props.categoryannoncereservation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="card-link"> {this.props.title} | </NavLink>
+                                         <a target="_blank" href={`/blogs/annonce_reservations/${this.props.categoryannoncereservation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="card-link"> {this.props.title} | </a>
                                          <Link to={`/blogs/annonce_reservations/${this.props.categoryannoncereservation.slug}/`}
                                                className={`btn btn-sm btn-${this.props.categoryannoncereservation.color_name}`}>
                                              {this.props.categoryannoncereservation.name}
                                          </Link>
                                      </span>
                                 <br/>
-                                <Link to={`/blogs/annonce_reservations/${this.props.categoryannoncereservation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
+                                <a target="_blank" href={`/blogs/annonce_reservations/${this.props.categoryannoncereservation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
                                     <span dangerouslySetInnerHTML={this.getDescription()}/>
-                                </Link>
+                                </a>
 
                                 <div className="card-footer">
                                     <div className="author">
@@ -54,10 +54,10 @@ class BlogannoncereservationList extends Component {
                             <div className="col-md-4">
 
                                 <div className="card-image">
-                                    <Link to={`/blogs/annonce_reservations/${this.props.categoryannoncereservation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
+                                    <a target="_blank" href={`/blogs/annonce_reservations/${this.props.categoryannoncereservation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
                                         <img className="img img-raised rounded"
                                              src={this.props.photo}/>
-                                    </Link>
+                                    </a>
                                 </div>
                                 {!$guest &&(
                                     <>

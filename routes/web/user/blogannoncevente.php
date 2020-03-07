@@ -6,6 +6,16 @@ Route::get(
 )->name('blogannonceventes_site');
 
 Route::get(
+    'blogs/annonce_ventes/ab/new',
+    'BlogannonceventeController@create'
+)->name('blogannonceventeabnew_site');
+
+Route::post(
+    'blogs/annonce_ventes/save',
+    'BlogannonceventeController@store'
+)->name('blogannoncecategoryventestore_site');
+
+Route::get(
     'blogs/annonce_ventes/{categoryannoncevente}',
     'BlogannonceventeController@annonceblogcategoryvente'
 )->name('blogannoncecategoryvente_site');
@@ -19,6 +29,11 @@ Route::get(
     'blogs/annonce_ventes/{blogannoncevente}/edit',
     'BlogannonceventeController@edit'
 )->name('blogannoncecategoryventeedit_site');
+
+Route::put(
+    'blogs/annonce_ventes/{blogannoncevente}',
+    'BlogannonceventeController@update'
+)->name('blogannoncecategoryventeupdate_site');
 
 Route::get(
     'api/blogs/annonce_vente/{blogannoncevente}',

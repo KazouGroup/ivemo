@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Blog\Blogannoncevente\StoreRequest;
+use App\Http\Requests\Blog\Blogannoncevente\UpdateRequest;
 use App\Http\Resources\BlogannonceventeResource;
 use App\Model\blogannoncevente;
 use App\Model\categoryannoncevente;
@@ -133,7 +135,7 @@ class BlogannonceventeController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.blogs.blogannoncevente.create');
     }
 
     /**
@@ -142,20 +144,31 @@ class BlogannonceventeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $blogannoncevente= new blogannoncevente();
+
+        $blogannoncevente->fill($request->all());
+
+        BlogannonceventeService::storeUploadImage($request,$blogannoncevente);
+
+        $blogannoncevente->save();
+
+        return response('Created',Response::HTTP_CREATED);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show($blogannoncevente)
     {
-        //
+
+        $blogannoncevente = BlogannonceventeService::show($blogannoncevente);
+
+        return response()->json($blogannoncevente, 200);
     }
 
     /**
@@ -164,9 +177,13 @@ class BlogannonceventeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($blogannoncevente)
     {
-        //
+
+        $blogannoncevente = blogannoncevente::whereSlugin($blogannoncevente)->first();
+        return view('user.blogs.blogannoncevente.edit',[
+            'blogannoncevente' => $blogannoncevente,
+        ]);
     }
 
     /**
@@ -174,11 +191,19 @@ class BlogannonceventeController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $blogannoncevente)
     {
-        //
+        $blogannoncevente = blogannoncevente::whereSlugin($blogannoncevente)->firstOrFail();
+
+        $this->authorize('update',$blogannoncevente);
+
+        BlogannonceventeService::updateUploadeImage($request,$blogannoncevente);
+
+        $blogannoncevente->update($request->all());
+
+        return response()->json($blogannoncevente,200);
     }
 
 

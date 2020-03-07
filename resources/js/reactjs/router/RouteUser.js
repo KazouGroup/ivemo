@@ -71,6 +71,8 @@ import BlogannoncelocationCreate
 import TeamsUserCreate from "../components/user/configurations/teams/TeamsUserCreate";
 import BlogannoncereservationCreate
     from "../components/user/blog/blogannoncereservation/treatement/BlogannoncereservationCreate";
+import BlogannonceventeEdit from "../components/user/blog/blognnoncevente/treatement/BlogannonceventeEdit";
+import BlogannonceventeCreate from "../components/user/blog/blognnoncevente/treatement/BlogannonceventeCreate";
 
 
 const RouteUser = props => (
@@ -153,6 +155,9 @@ const RouteUser = props => (
 
           <Route exact path="/blogs/annonce_reservations/ab/new/" component={BlogannoncereservationCreate}/>
           <Route exact path="/blogs/annonce_reservations/:blogannoncereservation/edit/" component={BlogannoncereservationEdit}/>
+
+          <Route exact path="/blogs/annonce_ventes/ab/new/" component={BlogannonceventeCreate}/>
+          <Route exact path="/blogs/annonce_ventes/:blogannoncevente/edit/" component={BlogannonceventeEdit}/>
 
 
           <Route exact path="/blogs/annonce_ventes/" component={BlogannonceventeIndex}/>

@@ -1,33 +1,34 @@
 import React, { Component } from "react";
 import {NavLink, withRouter} from "react-router-dom";
+import PropTypes from "prop-types";
 
 
-class Navblogannoncereservationsbyuser extends Component {
+class Navblogannonceventesbyuser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            categoryannoncereservations : [],
+            categoryannonceventes : [],
         }
     }
 
     componentDidMount() {
-        let url = route('api.categoryannoncereservations_by_user_site');
-        dyaxios.get(url).then(response => this.setState({categoryannoncereservations: response.data,}));
+        let url = route('api.categoryannonceventes_by_user_site');
+        dyaxios.get(url).then(response => this.setState({categoryannonceventes: response.data,}));
     }
 
-    getcountcategoryannonceString (blogannoncereservations_count) {
-        blogannoncereservations_count = blogannoncereservations_count +'';
-        if (blogannoncereservations_count < 1000) {
-            return blogannoncereservations_count;
+    getcountcategoryannonceString (blogannonceventes_count) {
+        blogannonceventes_count = blogannonceventes_count +'';
+        if (blogannonceventes_count < 1000) {
+            return blogannonceventes_count;
         }
-        if (blogannoncereservations_count < 10000) {
-            return blogannoncereservations_count.charAt(0) + ',' + blogannoncereservations_count.substring(1);
+        if (blogannonceventes_count < 10000) {
+            return blogannonceventes_count.charAt(0) + ',' + blogannonceventes_count.substring(1);
         }
-        return (blogannoncereservations_count/1000).toFixed(blogannoncereservations_count % 1000 !== 0)+'k';
+        return (blogannonceventes_count/1000).toFixed(blogannonceventes_count % 1000 !== 0)+'k';
     }
 
     render() {
-        const {categoryannoncereservations} = this.state;
+        const {categoryannonceventes} = this.state;
         return (
 
 
@@ -42,14 +43,14 @@ class Navblogannoncereservationsbyuser extends Component {
                         <table>
                             <tbody>
 
-                            {categoryannoncereservations.map((item) => (
+                            {categoryannonceventes.map((item) => (
                                 <tr key={item.id}>
                                     <td>
-                                        <NavLink to={`/blogs/annonce_reservations/${item.slug}/`}>
+                                        <NavLink to={`/blogs/annonce_ventes/${item.slug}/`}>
                                              <strong>{item.name}</strong>
                                         </NavLink>
                                     </td>
-                                    <td className="text-right"> {this.getcountcategoryannonceString(item.blogannoncereservations_count)} {item.blogannoncereservations_count < 1 ? "article" : "articles"}</td>
+                                    <td className="text-right"> {this.getcountcategoryannonceString(item.blogannonceventes_count)} {item.blogannonceventes_count < 1 ? "article" : "articles"}</td>
                                 </tr>
                             ))}
 
@@ -63,4 +64,4 @@ class Navblogannoncereservationsbyuser extends Component {
     }
 
 }
-export default withRouter(Navblogannoncereservationsbyuser);
+export default withRouter(Navblogannonceventesbyuser);

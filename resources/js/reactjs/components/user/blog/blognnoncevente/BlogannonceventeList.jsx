@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Remarkable } from 'remarkable';
 import { Button,UncontrolledTooltip } from "reactstrap";
 import moment from "moment";
 
@@ -9,8 +8,7 @@ class BlogannonceventeList extends Component {
 
 
     getDescription() {
-        const md = new Remarkable();
-        return { __html: md.render(this.props.description.length > 80 ? this.props.description.substring(0, 80) + "..." : this.props.description) };
+        return { __html: (this.props.description.length > 80 ? this.props.description.substring(0, 80) + "..." : this.props.description) };
     }
     render() {
         return (
@@ -24,15 +22,15 @@ class BlogannonceventeList extends Component {
                             <div className="col-md-8">
 
                                      <span className="title">
-                                         <NavLink to={`/blogs/annonce_ventes/${this.props.categoryannoncevente.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="card-link"> {this.props.title} | </NavLink>
+                                         <a target="_blank" href={`/blogs/annonce_ventes/${this.props.categoryannoncevente.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="card-link"> {this.props.title} | </a>
                                          <Link to={`/blogs/annonce_ventes/${this.props.categoryannoncevente.slug}/`}
                                                className={`btn btn-sm btn-${this.props.categoryannoncevente.color_name}`}>
                                              {this.props.categoryannoncevente.name}
                                          </Link>
                                      </span>
-                                <Link to={`/blogs/annonce_ventes/${this.props.categoryannoncevente.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
+                                <a target="_blank" href={`/blogs/annonce_ventes/${this.props.categoryannoncevente.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
                                     <span dangerouslySetInnerHTML={this.getDescription()}/>
-                                </Link>
+                                </a>
 
                                 <div className="card-footer">
                                     <div className="author">
@@ -54,10 +52,10 @@ class BlogannonceventeList extends Component {
                             <div className="col-md-4">
 
                                 <div className="card-image">
-                                    <Link to={`/blogs/annonce_ventes/${this.props.categoryannoncevente.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
+                                    <a target="_blank" href={`/blogs/annonce_ventes/${this.props.categoryannoncevente.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
                                         <img className="img img-raised rounded"
                                              src={this.props.photo}/>
-                                    </Link>
+                                    </a>
                                 </div>
                                 {!$guest &&(
                                     <>

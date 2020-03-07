@@ -34,8 +34,7 @@ class BlogannonceventeShow extends Component {
         this.loadItems();
     }
     getDescription(blogannoncevente) {
-        const md = new Remarkable();
-        return { __html: md.render(blogannoncevente.description) };
+        return { __html: (blogannoncevente.description) };
     }
     render() {
         const { blogannoncevente } = this.state;

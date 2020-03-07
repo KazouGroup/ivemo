@@ -1,6 +1,11 @@
 <?php
 
 Route::get(
+    'api/categoryannonceventes_by_user',
+    'AnnonceventeController@apicategoryannonceventes_by_user'
+)->name('api.categoryannonceventes_by_user_site');
+
+Route::get(
     'annonces_ventes/{annoncetype}',
     'AnnonceventeController@index'
 )->name('annonceventebyannoncetypes_site');

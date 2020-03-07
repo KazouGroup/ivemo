@@ -2,14 +2,22 @@
 namespace App\Services;
 
 
-use App\Http\Resources\BlogannoncereservationResource;
-use App\Model\blogannoncereservation;
+use App\Http\Resources\BlogannonceventeResource;
+use App\Model\blogannoncevente;
 use App\Model\categoryannoncevente;
 use App\Model\user;
+use Intervention\Image\Facades\Image;
+use File;
 
 class BlogannonceventeService
 {
 
+    public static function show($blogannoncevente)
+    {
+        $blogannoncevente = new BlogannonceventeResource(blogannoncevente::whereSlugin($blogannoncevente)->first());
+
+        return $blogannoncevente;
+    }
 
     public static function apiannonceblogcategoryvente($categoryannoncevente)
     {
@@ -108,4 +116,40 @@ class BlogannonceventeService
     }
 
 
+    public static function storeUploadImage($request,$blogannonceresevente)
+    {
+
+        if ($request->photo) {
+            $namefile = sha1(date('YmdHis') . str_random(30));
+            $name =   $namefile.'.' . explode('/',explode(':',substr($request->photo,0,strpos
+                ($request->photo,';')))[1])[1];
+            $dir = 'assets/img/blogannonceresevente/';
+            if(!file_exists($dir)){
+                mkdir($dir, 0775, true);
+            }
+            $destinationPath = public_path("assets/img/blogannonceresevente/{$name}");
+            Image::make($request->photo)->save($destinationPath);
+
+            $myfilename = "/assets/img/blogannonceresevente/{$name}";
+            $blogannonceresevente->photo = $myfilename;
+        }
+
+    }
+
+    public static function updateUploadeImage($request,$blogannonceresevente)
+    {
+        $currentPhoto = $blogannonceresevente->photo;
+
+        if ($request->photo != $currentPhoto){
+            $namefile = sha1(date('YmdHis') . str_random(30));
+            $name =   $namefile.'.' . explode('/',explode(':',substr($request->photo,0,strpos
+                ($request->photo,';')))[1])[1];
+            $dir = 'assets/img/blogannonceresevente/';
+            if(!file_exists($dir)){mkdir($dir, 0775, true);}
+            Image::make($request->photo)->save(public_path('assets/img/blogannonceresevente/').$name);
+            $request->merge(['photo' =>  "/assets/img/blogannonceresevente/{$name}"]);
+            $oldFilename = $currentPhoto;
+            File::delete(public_path($oldFilename));
+        }
+    }
 }

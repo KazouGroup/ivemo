@@ -10,6 +10,7 @@ import NavLinkPublicBlogannoncesUser from "./NavLinkPublicBlogannoncesUser";
 import NavLinkPublicAnnonceUser from "../../annonces/NavLinkPublicAnnonceUser";
 import PublicUserBlogannonceventeList from "./inc/PublicUserBlogannonceventeList";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
+import Navlinknewblogannoncevente from "../../../blog/blognnoncevente/treatement/Navlinknewblogannoncevente";
 
 
 class PublicUserBlogannonceVente extends Component {
@@ -177,11 +178,7 @@ class PublicUserBlogannonceVente extends Component {
                                             </div>
                                         </div>
 
-                                        <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster un article sur la vente/achat</b>
-                                            </NavLink>
-                                        </div>
+                                        <Navlinknewblogannoncevente/>
 
                                         <div className="card">
                                             <div className="card-body">

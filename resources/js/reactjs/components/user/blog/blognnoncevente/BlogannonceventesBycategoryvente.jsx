@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import Swal from "sweetalert2";
 import Navblogannonceventes from "./inc/Navblogannonceventes";
 import BlogannonceventeList from "./BlogannonceventeList";
+import Navlinknewblogannoncevente from "./treatement/Navlinknewblogannoncevente";
 
 
 class BlogannonceventesBycategoryvente extends Component {
@@ -201,11 +202,7 @@ class BlogannonceventesBycategoryvente extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
-                                        <div className="submit text-center">
-                                            <NavLink className="btn btn-primary" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article</b>
-                                            </NavLink>
-                                        </div>
+                                        <Navlinknewblogannoncevente/>
 
                                         <div className="card">
                                             <div className="card-body">
