@@ -227,7 +227,7 @@ class Annoncebycategoryannoncelocation extends Component {
 
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingThree">
-                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                                                                         <b>Locations {annoncelocationbycategory.name} </b>
                                                                         <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
@@ -242,7 +242,7 @@ class Annoncebycategoryannoncelocation extends Component {
                                                                                 <tr key={item.id}>
                                                                                     <td>
                                                                                         <NavLink to={`/annonces_locations/locations/${annoncelocationbycategory.slug}/${item.slug}/`}>
-                                                                                            locations <b>{annoncelocationbycategory.name}</b> à <b>{item.name}</b>
+                                                                                            locations <b style={{ textTransform: "lowercase" }}>{annoncelocationbycategory.name}</b> à <b>{item.name}</b>
                                                                                         </NavLink>
                                                                                     </td>
                                                                                     <td className="text-right"> {this.getcountcategoryannonceString(item.annoncelocations_count)} annonces</td>

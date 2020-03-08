@@ -50,8 +50,8 @@ class AnnonceventeController extends Controller
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);});
             }])->withCount(['blogannonceventes' => function ($q){
-                $q->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-                    ->where(['status' => 1,'status_admin' => 1]);
+                $q->where(['status' => 1,'status_admin' => 1])
+                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);});
             }])->orderBy('annonceventes_count','desc')
             ->distinct()->get());
 

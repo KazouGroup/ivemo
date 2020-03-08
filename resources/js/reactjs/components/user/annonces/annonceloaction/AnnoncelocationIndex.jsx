@@ -159,8 +159,6 @@ class AnnoncelocationIndex extends Component {
             <></>
         );
 
-
-
         return (
             <>
                 <Helmet>

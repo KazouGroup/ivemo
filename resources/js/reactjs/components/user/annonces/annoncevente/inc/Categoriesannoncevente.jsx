@@ -33,13 +33,13 @@ class Categoriesannoncevente extends Component {
 
 
             <div className="card card-plain">
-                <div className="card-header" role="tab" id="headingOne">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <div className="card-header" role="tab" id="headingIni">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseIni" aria-expanded="true" aria-controls="collapseIni">
                         <b>Quesque vous aviez besoin ?</b>
                         <i className="now-ui-icons arrows-1_minimal-down"/>
                     </a>
                 </div>
-                <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                <div id="collapseIni" className="collapse show" role="tabpanel" aria-labelledby="headingIni">
                     <div className="card-body">
                         <table>
                             <tbody>

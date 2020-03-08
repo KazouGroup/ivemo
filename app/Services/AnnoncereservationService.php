@@ -47,7 +47,17 @@ class AnnoncereservationService
     public static function apiannoncereservationbycity($annoncetype,$categoryannoncereservation,$city)
     {
         $annoncereservations = city::whereSlug($city->slug)
-            ->with([
+            ->where(['status' => 1])
+            ->withCount([
+                'annoncereservations' => function ($q) use ($annoncetype,$categoryannoncereservation,$city){
+                    $q->where(['status' => 1,'status_admin' => 1])
+                        ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
+                        ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
+                        ->whereIn('annoncetype_id',[$annoncetype->id])
+                        ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
+                        ->whereHas('city', function ($q) {$q->where('status',1);})
+                        ->orderBy('created_at','DESC')->where('status',1);},
+            ])->with([
                 'annoncereservations' => function ($q) use ($annoncetype,$categoryannoncereservation,$city){
                     $q->where(['status' => 1,'status_admin' => 1])
                         ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')

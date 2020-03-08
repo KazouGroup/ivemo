@@ -29,6 +29,15 @@ class AnnonceventeIndex extends Component {
 
     render() {
         const {annonceventes} = this.state;
+        const mapAnnonceventes = annonceventes.length ? (
+            annonceventes.map(item => {
+                return(
+                    <AnnonceventeList key={item.id} {...item} />
+                )
+            })
+        ):(
+            <></>
+        );
         return (
             <>
                 <Helmet>
@@ -68,9 +77,7 @@ class AnnonceventeIndex extends Component {
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
-                                        {annonceventes.map((item) => (
-                                            <AnnonceventeList key={item.id} {...item} />
-                                        ))}
+                                        {mapAnnonceventes}
 
                                     </div>
 
