@@ -23,7 +23,7 @@ class CityResource extends JsonResource
             'photo' => $this->photo,
             'slug' => $this->slug,
             'user' => $this->user,
-            'annoncereservations_count' => $this->annoncereservations_count,
+            'annoncelocations_count' => $this->annoncelocations_count,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
         ];

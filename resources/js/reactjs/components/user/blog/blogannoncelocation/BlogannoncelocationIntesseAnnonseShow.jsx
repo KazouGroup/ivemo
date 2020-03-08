@@ -45,9 +45,9 @@ class BlogannoncelocationIntesseAnnonseShow extends Component {
                             <div key={item.id} className="col-md-4 mx-auto">
                                 <div className="card card-blog card-plain">
                                     <div className="card-image">
-                                        <Link to={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>
+                                        <a target="_blank" href={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>
                                             <img className="img img-raised rounded" alt={item.title} src={item.photo}/>
-                                        </Link>
+                                        </a>
                                     </div>
                                     <div className="card-body">
                                         <div className="text-center">
@@ -55,12 +55,12 @@ class BlogannoncelocationIntesseAnnonseShow extends Component {
                                                 {item.categoryannoncelocation.name}
                                             </Link>
                                             <h6 className="card-title">
-                                                <NavLink to={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`} className="card-link"> {item.title}</NavLink>
+                                                <a target="_blank" href={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`} className="card-link"> {item.title}</a>
                                             </h6>
                                         </div>
                                         <p className="card-description">
                                             <b dangerouslySetInnerHTML={{__html: (item.description.length > 80 ? item.description.substring(0, 80) + "..." : item.description)}}/>
-                                            <Link to={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}> lire la suite </Link>
+                                            <a target="_blank" href={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}> lire la suite </a>
                                         </p>
 
                                     </div>

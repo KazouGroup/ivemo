@@ -83,9 +83,11 @@ class AnnoncelocationController extends Controller
             ->where('status',1)
             ->withCount(['annoncelocations' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1])
-                ->whereHas('city', function ($q) {$q->where('status',1);});
+                    ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+                    ->whereHas('city', function ($q) {$q->where('status',1);});
             }])->withCount(['blogannoncelocations' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
+                $q->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+                    ->where(['status' => 1,'status_admin' => 1]);
             }])
             ->orderBy('annoncelocations_count','desc')
             ->distinct()->get());
@@ -171,17 +173,8 @@ class AnnoncelocationController extends Controller
 
     public function apiannoncelocationbycategoryannoncelocation(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation)
     {
-        $annoncelocation = categoryannoncelocation::whereSlug($categoryannoncelocation->slug)
-            ->where(['status' => 1])
-            ->with([
-                'annoncelocations' => function ($q) use ($annoncetype,$categoryannoncelocation){
-                    $q->where(['status' => 1,'status_admin' => 1])
-                        ->with('user','categoryannoncelocation','city','annoncetype')
-                        ->whereIn('annoncetype_id',[$annoncetype->id])
-                        ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
-                        ->whereHas('city', function ($q) {$q->where('status',1);})
-                        ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();},
-            ])->first();
+        $annoncelocation = AnnoncelocationService::apiannoncelocationbycategoryannoncelocation($annoncetype,$categoryannoncelocation);
+
         return response()->json($annoncelocation, 200);
     }
 
@@ -198,6 +191,8 @@ class AnnoncelocationController extends Controller
             ->where('status',1)
             ->withCount(['annoncelocations' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1])
+                    ->with('user','categoryannoncelocation','city','annoncetype')
+                    ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);});
             }])
             ->orderBy('annoncelocations_count','desc')->get());
@@ -217,11 +212,14 @@ class AnnoncelocationController extends Controller
     {
         $annoncelocation = $categoryannoncelocation->annoncelocations()->whereIn('annoncetype_id',[$annoncetype->id])
             ->with('user','city','annoncetype','categoryannoncelocation')
+            ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+            ->whereHas('city', function ($q) {$q->where('status',1);})
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
             ->whereIn('city_id',[$city->id])
             ->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
             ->take(10)->distinct()->get()->toArray();
+
         return response()->json($annoncelocation, 200);
     }
 
@@ -229,6 +227,8 @@ class AnnoncelocationController extends Controller
     {
         $annoncelocation = $categoryannoncelocation->annoncelocations()->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
         ->with('user','city','annoncetype','categoryannoncelocation')
+        ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+        ->whereHas('city', function ($q) {$q->where('status',1);})
         ->orderByRaw('RAND()')
         ->where(['status' => 1,'status_admin' => 1])
         ->take(4)->distinct()->get()->toArray();
@@ -329,6 +329,7 @@ class AnnoncelocationController extends Controller
     public function unactivated($id)
     {
         $annoncelocation = annoncelocation::where('id', $id)->findOrFail($id);
+
         $this->authorize('update',$annoncelocation);
 
         if(auth()->user()->id === $annoncelocation->user_id){

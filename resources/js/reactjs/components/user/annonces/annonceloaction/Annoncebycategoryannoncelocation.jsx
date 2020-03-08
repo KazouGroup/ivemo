@@ -160,6 +160,15 @@ class Annoncebycategoryannoncelocation extends Component {
     render() {
         const {annoncelocationbycategory,cityannoncelocations} = this.state;
         const allannoncelocationsbycategory = annoncelocationbycategory.annoncelocations;
+        const mapAnnoncelocations = allannoncelocationsbycategory.length ? (
+            allannoncelocationsbycategory.map(item => {
+                return(
+                    <AnnonceslocationList key={item.id} {...item}  deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
+                )
+            })
+        ):(
+            <></>
+        );
         return (
             <>
                 <Helmet>
@@ -194,9 +203,7 @@ class Annoncebycategoryannoncelocation extends Component {
 
                                         <br/>
 
-                                        {allannoncelocationsbycategory.map((item) => (
-                                            <AnnonceslocationList key={item.id} {...item}  deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
-                                        ))}
+                                        {mapAnnoncelocations}
 
                                     </div>
 
