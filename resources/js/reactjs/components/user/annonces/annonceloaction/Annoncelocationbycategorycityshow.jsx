@@ -359,12 +359,7 @@ class Annoncelocationbycategorycityshow extends Component {
 
                             </div>
 
-
-
                         </div>
-
-
-
 
                         <FooterBigUserSite />
                     </div>

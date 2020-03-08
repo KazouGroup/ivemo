@@ -200,6 +200,7 @@ class Annoncebycategoryannonceventecity extends Component {
                                                 <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos annonces </b>
                                             </NavLink>
                                         </div>
+                                        <br/>
 
                                         {mapAnnonceventes}
 

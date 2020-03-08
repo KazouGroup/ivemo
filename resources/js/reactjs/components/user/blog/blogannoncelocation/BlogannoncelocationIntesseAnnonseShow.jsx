@@ -51,9 +51,9 @@ class BlogannoncelocationIntesseAnnonseShow extends Component {
                                     </div>
                                     <div className="card-body">
                                         <div className="text-center">
-                                            <Link to={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/`} className={`btn btn-sm btn-${item.categoryannoncelocation.color_name}`}>
+                                            <a target="_blank" href={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/`} className={`btn btn-sm btn-${item.categoryannoncelocation.color_name}`}>
                                                 {item.categoryannoncelocation.name}
-                                            </Link>
+                                            </a>
                                             <h6 className="card-title">
                                                 <a target="_blank" href={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`} className="card-link"> {item.title}</a>
                                             </h6>

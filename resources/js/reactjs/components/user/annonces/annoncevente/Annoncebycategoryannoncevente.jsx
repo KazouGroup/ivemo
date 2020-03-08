@@ -158,11 +158,19 @@ class Annoncebycategoryannoncevente extends Component {
     }
     render() {
         const {annonceventebycategory,cityannonceventes} = this.state;
-        const allannonceventesbycategory = annonceventebycategory.annonceventes;
+        const mapAnnonceventes = annonceventebycategory.annonceventes.length ? (
+            annonceventebycategory.annonceventes.map(item => {
+                return(
+                    <AnnonceventeList key={item.id} {...item}  deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
+                )
+            })
+        ):(
+            <></>
+        );
         return (
             <>
                 <Helmet>
-                    <title>Ventes {`${annonceventebycategory.name || 'Ivemo'} - `} Ivemo</title>
+                    <title>Vente {`${annonceventebycategory.name || 'Ivemo'} - `} Ivemo</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
@@ -190,12 +198,9 @@ class Annoncebycategoryannoncevente extends Component {
                                                 <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos annonces </b>
                                             </Link>
                                         </div>
-
                                         <br/>
 
-                                        {allannonceventesbycategory.map((item) => (
-                                            <AnnonceventeList key={item.id} {...item}  deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
-                                        ))}
+                                        {mapAnnonceventes}
 
                                     </div>
 
