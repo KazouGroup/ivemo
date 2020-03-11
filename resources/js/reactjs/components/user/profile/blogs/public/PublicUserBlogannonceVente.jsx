@@ -150,11 +150,12 @@ class PublicUserBlogannonceVente extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
-                                        <div className="submit text-center">
+                                        {/**<div className="submit text-center">
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
                                                 <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article</b>
                                             </NavLink>
-                                        </div>
+                                        </div> */}
+                                        
 
                                         <div className="card">
                                             <div className="card-body">

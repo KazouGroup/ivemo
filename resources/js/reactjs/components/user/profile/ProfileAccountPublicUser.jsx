@@ -11,6 +11,7 @@ import NavLinkPublicAnnonceUser from "./annonces/NavLinkPublicAnnonceUser";
 import NavNavigatePivateUser from "./NavNavigatePivateUser";
 import NavLinkPublicBlogannoncesUser from "./blogs/public/NavLinkPublicBlogannoncesUser";
 import FormNewletterSubcribeProfileAccountUser from "./form/FormNewletterSubcribeProfileAccountUser";
+import ProfileAccountAvisUser from "./ProfileAccountAvisUser";
 
 
 class ProfileAccountPublicUser extends Component {
@@ -165,6 +166,8 @@ class ProfileAccountPublicUser extends Component {
 
                                         <ProfileAccountTeamUser {...this.props}/>
 
+                                        <ProfileAccountAvisUser {...this.props}/>
+
                                         <div className="card">
                                             <div className="card-body">
 
@@ -176,6 +179,8 @@ class ProfileAccountPublicUser extends Component {
 
                                             </div>
                                         </div>
+
+
 
                                         <div className="card card-raised card-form-horizontal">
 

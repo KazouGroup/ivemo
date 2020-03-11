@@ -128,7 +128,7 @@ class ProfileAccountTeamUser extends Component {
                                                             <UncontrolledTooltip placement="bottom" target="TooltipEditer" delay={0}>
                                                                 Éditer cette utilisateur
                                                             </UncontrolledTooltip>
-                                                            <NavLink to={`/profile/personal_settings/teams/${item.id}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" id="TooltipEditer">
+                                                            <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/teams/${item.id}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" id="TooltipEditer">
                                                                 <i className="now-ui-icons ui-2_settings-90"/>
                                                             </NavLink>
                                                             <button type="button" id={'TooltipDelete'} onClick={() => this.deleteItem(item.id)}

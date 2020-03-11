@@ -5,6 +5,7 @@ import { Button, Row } from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
+import Skeleton from "react-loading-skeleton";
 import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";
 import NavLinkPublicBlogannoncesUser from "./NavLinkPublicBlogannoncesUser";
 import NavLinkPublicAnnonceUser from "../../annonces/NavLinkPublicAnnonceUser";
@@ -151,11 +152,12 @@ class PublicUserBlogannonceReservation extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
-                                        <div className="submit text-center">
+                                        {/** <div className="submit text-center">
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
                                                 <i className="now-ui-icons ui-1_simple-add" /> <b>Poster votre annonce</b>
                                             </NavLink>
-                                        </div>
+                                        </div>*/}
+
 
                                         <div className="card">
                                             <div className="card-body">
