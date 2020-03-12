@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Cache;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class profile extends Model implements Auditable
+class profile extends Model 
 {
-    use AuditableTrait;
+    //use AuditableTrait;
 
    protected $guarded = [
            'created_at','updated_at'

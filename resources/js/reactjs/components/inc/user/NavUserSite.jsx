@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import {Link, NavLink, withRouter} from 'react-router-dom';
 
-class NavUserSite extends Component {
+class NavUserSite extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {};

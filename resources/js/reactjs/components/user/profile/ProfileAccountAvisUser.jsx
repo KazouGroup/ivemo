@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,Fragment } from "react";
 import { Remarkable } from "remarkable";
 import { Button, Form, InputGroup, UncontrolledTooltip } from "reactstrap";
 import Pagination from "react-js-pagination";
@@ -298,7 +298,7 @@ class ProfileAccountAvisUser extends Component {
     render() {
         const { avisusers } = this.state;
         return (
-            <>
+            <Fragment>
                 <div className="card">
                     <div className="card-body">
 
@@ -334,7 +334,7 @@ class ProfileAccountAvisUser extends Component {
                                                     </div>
 
                                                     {!$guest && (
-                                                        <>
+                                                        <Fragment>
 
                                                             <div className="media-footer">
                                                                 {$userIvemo.status_user && (
@@ -345,14 +345,14 @@ class ProfileAccountAvisUser extends Component {
                                                                 )}
 
                                                                 {$userIvemo.id === item.to.id && (
-                                                                    <>
+                                                                    <Fragment>
                                                                         {item.response_description === null &&(
                                                                             <button type="button" onClick={() => this.responseFromItem(item) }
                                                                                     className="btn btn-primary btn-neutral pull-right">
                                                                                 <i className="now-ui-icons ui-1_send" /> Repondre
                                                                             </button>
                                                                         )}
-                                                                    </>
+                                                                    </Fragment>
                                                                 )}
 
                                                                 {$userIvemo.id === item.from.id && (
@@ -365,7 +365,7 @@ class ProfileAccountAvisUser extends Component {
 
                                                             </div>
 
-                                                        </>
+                                                        </Fragment>
                                                     )}
 
                                                     {item.response_description !== null && (
@@ -585,7 +585,7 @@ class ProfileAccountAvisUser extends Component {
                     </div>
                 </div>
 
-            </>
+            </Fragment>
 
 
 

@@ -1,20 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link, NavLink, withRouter } from 'react-router-dom';
-import NavNavigatePivateUser from "../../NavNavigatePivateUser";
 
 
-class NavLinkPublicBlogannoncesUser extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-           //
-        };
-
-    }
-    // lifecycle method
-    componentDidMount() {
-        //
-    }
+class NavLinkPublicBlogannoncesUser extends PureComponent {
 
     render() {
         return (
@@ -30,7 +18,7 @@ class NavLinkPublicBlogannoncesUser extends Component {
                                     </NavLink>
                                 </td>
                                 {this.props.blogannoncelocations_count > 0 && (
-                                    <td className="text-right"> {this.props.blogannoncelocations_count} {this.props.blogannoncelocations_count < 1 ? "article" : "articles"}</td>
+                                    <td className="text-right"> {this.props.blogannoncelocations_count} {this.props.blogannoncelocations_count > 1 ? "articles" : "article"}</td>
                                 )}
                             </tr>
                             <tr>
@@ -40,7 +28,7 @@ class NavLinkPublicBlogannoncesUser extends Component {
                                     </NavLink>
                                 </td>
                                 {this.props.blogannoncereservations_count > 0 && (
-                                    <td className="text-right"> {this.props.blogannoncereservations_count} {this.props.blogannoncereservations_count < 1 ? "article" : "articles"}</td>
+                                    <td className="text-right"> {this.props.blogannoncereservations_count} {this.props.blogannoncereservations_count > 1 ? "articles" : "article"}</td>
                                 )}
                             </tr>
                             <tr>
@@ -50,7 +38,7 @@ class NavLinkPublicBlogannoncesUser extends Component {
                                     </NavLink>
                                 </td>
                                 {this.props.blogannonceventes_count > 0 && (
-                                    <td className="text-right"> {this.props.blogannonceventes_count} {this.props.blogannonceventes_count < 1 ? "article" : "articles"}</td>
+                                    <td className="text-right"> {this.props.blogannonceventes_count} {this.props.blogannonceventes_count > 1 ? "articles" : "article"}</td>
                                 )}
                             </tr>
                             </tbody>

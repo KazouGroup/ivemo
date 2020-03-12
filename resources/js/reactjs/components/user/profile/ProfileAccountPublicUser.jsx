@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,Fragment } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Button,Navbar } from "reactstrap";
@@ -77,14 +77,14 @@ class ProfileAccountPublicUser extends Component {
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         {!$guest && (
-                                            <>
+                                            <Fragment>
                                                 {$userIvemo.id === userPublick.id && (
 
                                                    <NavNavigatePivateUser/>
 
                                                 )}
 
-                                            </>
+                                            </Fragment>
 
                                         )}
 

@@ -1,20 +1,9 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import NavNavigatePivateUser from "../NavNavigatePivateUser";
 
 
-class NavLinkPublicAnnonceUser extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-           //
-        };
-
-    }
-    // lifecycle method
-    componentDidMount() {
-        //
-    }
+class NavLinkPublicAnnonceUser extends PureComponent {
 
     render() {
         return (

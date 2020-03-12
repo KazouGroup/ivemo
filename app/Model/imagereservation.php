@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Cache;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class imagereservation extends Model implements Auditable
+class imagereservation extends Model 
 {
-    use AuditableTrait;
+    //use AuditableTrait;
 
     protected $guarded = [];
 

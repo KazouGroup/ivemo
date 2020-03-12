@@ -15,9 +15,9 @@ use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Str;
 
-class user extends Authenticatable implements MustVerifyEmail,Auditable
+class user extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable,HasApiTokens,HasRoles,AuditableTrait;
+    use Notifiable,HasApiTokens,HasRoles;
 
     /**
      * The attributes that are mass assignable.

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,Fragment } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Zoom from 'react-medium-image-zoom'
@@ -96,7 +96,7 @@ class BlogannoncelocationShow extends Component {
         const { blogannoncelocation } = this.state;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         return (
-            <>
+            <Fragment>
                 <Helmet>
                     <title>{`${blogannoncelocation.title || 'Annonce'}`} - Ivemo</title>
                 </Helmet>
@@ -127,22 +127,22 @@ class BlogannoncelocationShow extends Component {
 
                                                         <div className="card-header d-flex align-items-center">
                                                             <div className="d-flex align-items-center">
-                                                                <NavLink to={`/annonce/show/`}>
+                                                                <NavLink to={`/@${blogannoncelocation.user.slug}/blogs/annonce_locations/`}>
                                                                     <img src={blogannoncelocation.user.avatar}
                                                                         style={{ height: "40px", width: "80px", borderRadius: "5px" }}
                                                                         alt={blogannoncelocation.user.first_name}
                                                                         className="avatar" />
                                                                 </NavLink>
                                                                 <div className="mx-3">
-                                                                    <NavLink to={`/annonce/show/`} className="text-dark font-weight-600 text-sm"><b>{blogannoncelocation.user.first_name}</b>
+                                                                    <NavLink to={`/@${blogannoncelocation.user.slug}/blogs/annonce_locations/`} className="text-dark font-weight-600 text-sm"><b>{blogannoncelocation.user.first_name}</b>
                                                                         <small className="d-block text-muted">{moment(blogannoncelocation.created_at).calendar()}</small>
                                                                     </NavLink>
                                                                 </div>
                                                             </div>
                                                             {!$guest && (
-                                                                <>
+                                                                <Fragment>
                                                                     {$userIvemo.id === blogannoncelocation.user_id && (
-                                                                        <>
+                                                                        <Fragment>
                                                                             <div className="text-right ml-auto">
                                                                                 <UncontrolledTooltip placement="bottom" target="TooltipEdit">
                                                                                     Editer cet article
@@ -158,10 +158,10 @@ class BlogannoncelocationShow extends Component {
                                                                                     <i className="now-ui-icons ui-1_simple-remove" />
                                                                                 </Button>{" "}
                                                                             </div>
-                                                                        </>
+                                                                        </Fragment>
                                                                     )}
 
-                                                                </>
+                                                                </Fragment>
                                                             )}
                                                         </div>
 
@@ -170,10 +170,13 @@ class BlogannoncelocationShow extends Component {
                                                             <div className="carousel-inner" role="listbox">
                                                                 <div className="carousel-item active">
                                                                     <Zoom>
-                                                                        <img className="d-block"
-                                                                            src={blogannoncelocation.photo}
-                                                                            style={{ width: "1400px", height: "400px", borderRadius: "5px" }}
-                                                                            alt={blogannoncelocation.title} />
+                                                                        <div>
+                                                                            <img className="d-block"
+                                                                                 src={blogannoncelocation.photo}
+                                                                                 style={{ width: "1400px", height: "400px", borderRadius: "2px" }}
+                                                                                 alt={blogannoncelocation.title} />
+                                                                        </div>
+
                                                                     </Zoom>
 
                                                                 </div>
@@ -237,7 +240,7 @@ class BlogannoncelocationShow extends Component {
                         <FooterBigUserSite />
                     </div>
                 </div>
-            </>
+            </Fragment>
 
 
 
