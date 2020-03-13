@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import {Button, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-import moment from "moment";
-import PropTypes from "prop-types";
 import Swal from "sweetalert2";
 import Navblogannoncereservations from "./inc/Navblogannoncereservations";
 import BlogannoncereservationList from "./BlogannoncereservationList";
 import Navlinknewblogannoncereservation from "./treatement/Navlinknewblogannoncereservation";
+import Skeleton from "react-loading-skeleton";
 
 
 class BlogannoncereservationBycategoryreservation extends Component {
@@ -173,13 +171,21 @@ class BlogannoncereservationBycategoryreservation extends Component {
 
                                 <div className="card-body">
 
-                                    <h1 className="title">{blogannoncereservation.name}</h1>
-                                    <Link to={`/blogs/annonce_reservations/`} className="text-white">
-                                        <i className="fa fa-chevron-circle-left" /> <b>Retour aux articles</b>
-                                    </Link>
-                                    {blogannoncereservation.blogannoncereservations_count > 0 &&(
+                                    <h1 className="title">{blogannoncereservation.name || <Skeleton width={300} />}</h1>
+
+                                    {blogannoncereservation.name ?
+                                        <Link to={`/blogs/annonce_reservations/`} className="text-white">
+                                            <i className="fa fa-chevron-circle-left" /> <b>Retour aux articles</b>
+                                        </Link>
+                                        :
+                                        <Skeleton width={270}/>
+                                    }
+
+                                    {blogannoncereservation.blogannoncereservations_count > 0 ?
                                         <h5><b>{blogannoncereservation.blogannoncereservations_count}</b> {blogannoncereservation.blogannoncereservations_count > 1 ? "articles" : "article"} posté sur la reservation</h5>
-                                    )}
+                                        :
+                                        <h5> <Skeleton width={200}/></h5>
+                                    }
 
                                 </div>
 

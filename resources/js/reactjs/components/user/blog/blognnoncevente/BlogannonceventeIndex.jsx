@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import Navblogannonceventes from "./inc/Navblogannonceventes";
 import BlogannonceventeList from "./BlogannonceventeList";
 import Navlinknewblogannoncevente from "./treatement/Navlinknewblogannoncevente";
+import BlogannonceListSkeleton from "../../../inc/user/BlogannonceListSkeleton";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -153,7 +154,7 @@ class BlogannonceventeIndex extends Component {
                 )
             })
         ):(
-            <></>
+            <BlogannonceListSkeleton/>
         );
         return (
             <>

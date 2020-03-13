@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {NavLink, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
+import NavblogannonceSkeleton from "../../../../inc/user/NavblogannonceSkeleton";
 
 
 class Navblogannonceventes extends Component {
@@ -44,16 +45,25 @@ class Navblogannonceventes extends Component {
                         <table>
                             <tbody>
 
-                            {categoryannonceventes.map((item) => (
-                                <tr key={item.id}>
-                                    <td>
-                                        <NavLink to={`/blogs/annonce_ventes/${item.slug}/`}>
-                                             <strong>{item.name}</strong>
-                                        </NavLink>
-                                    </td>
-                                    <td className="text-right"> {this.getcountcategoryannonceString(item.blogannonceventes_count)} articles</td>
-                                </tr>
-                            ))}
+                            {categoryannonceventes.length > 0 ?
+                                <>
+                                    {categoryannonceventes.map((item) => (
+                                        <tr key={item.id}>
+                                            <td>
+                                                <NavLink to={`/blogs/annonce_ventes/${item.slug}/`}>
+                                                    <strong>{item.name}</strong>
+                                                </NavLink>
+                                            </td>
+                                            <td className="text-right"> {this.getcountcategoryannonceString(item.blogannonceventes_count)} articles</td>
+                                        </tr>
+                                    ))}
+                                </>
+                                :
+                                <NavblogannonceSkeleton/>
+
+                            }
+
+
 
                             </tbody>
                         </table>

@@ -11,6 +11,7 @@ import { Remarkable } from "remarkable";
 import FootermailmessageUser from "./inc/FootermailmessageUser";
 import NavNavigatePivateUser from "../NavNavigatePivateUser";
 import NavlinkmailmessageUserShow from "./inc/NavlinkmailmessageUserShow";
+import Skeleton from "react-loading-skeleton";
 
 
 class PersonalmessagescontactShowUser extends Component {
@@ -150,34 +151,43 @@ class PersonalmessagescontactShowUser extends Component {
                                                     <div className="card-header d-flex align-items-center">
                                                         <div className="text-left pull-left">
                                                             <h5 className="ml-auto mr-auto">
-                                                                <b>{contactuser.subject} </b>
+                                                                <b>{contactuser.subject || <Skeleton width={260} />} </b>
                                                             </h5>
                                                             <small className="ml-auto mr-auto">
                                                             </small>
                                                         </div>
                                                         <div className="text-right ml-auto">
                                                             <h6 className="ml-auto mr-auto">
-                                                                <strong>{moment(contactuser.created_at).format('DD/MM/YYYY')}</strong>
+                                                                {contactuser.created_at ?
+                                                                    <strong>{moment(contactuser.created_at).format('DD/MM/YYYY')}</strong>
+                                                                    :
+                                                                    <Skeleton width={50} />
+                                                                }
+
                                                             </h6>
 
                                                         </div>
                                                     </div>
 
+                                                    {contactuser.message ?
+                                                        <div className="title mb-2 text-justify" dangerouslySetInnerHTML={this.getDescription(contactuser)} />
+                                                        :
+                                                        <Skeleton count={2}/>
+                                                    }
 
-                                                    <div className="title mb-2 text-justify" dangerouslySetInnerHTML={this.getDescription(contactuser)} />
                                                     <hr />
                                                     <div className="media-footer">
                                                         <div className="card-header d-flex align-items-center">
                                                             <div className="text-left pull-left">
                                                                 <div className="ml-auto mr-auto">
-                                                                    <b>{contactuser.email} </b>
+                                                                    <b>{contactuser.email || <Skeleton width={70} />} </b>
                                                                 </div>
                                                                 <small className="ml-auto mr-auto">
                                                                 </small>
                                                             </div>
                                                             <div className="text-right ml-auto">
                                                                 <div className="ml-auto mr-auto">
-                                                                    <strong>{contactuser.full_name}</strong>
+                                                                    <strong>{contactuser.full_name || <Skeleton width={70} />}</strong>
                                                                 </div>
 
                                                             </div>

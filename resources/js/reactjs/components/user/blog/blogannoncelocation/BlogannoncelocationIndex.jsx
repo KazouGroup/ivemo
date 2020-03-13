@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import Navblogannoncelocations from "./inc/Navblogannoncelocations";
 import BlogannoncelocationList from "./BlogannoncelocationList";
 import Navlinknewblogannoncelocation from "./treatement/Navlinknewblogannoncelocation";
+import BlogannonceListSkeleton from "../../../inc/user/BlogannonceListSkeleton";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -149,14 +150,16 @@ class BlogannoncelocationIndex extends Component {
         const mapAnnoncelocations = blogannoncelocations.length ? (
             blogannoncelocations.map(item => {
                 return(
+
                     <BlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
                 )
             })
         ):(
-            <></>
+            <BlogannonceListSkeleton/>
         );
         return (
             <>
+
                 <Helmet>
                     <title>Conseils tout savoir sur les locations - Ivemo</title>
                 </Helmet>

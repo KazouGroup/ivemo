@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Component,Fragment } from "react";
 import {NavLink, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
+import NavblogannonceSkeleton from "../../../../inc/user/NavblogannonceSkeleton";
 
 
 class Navblogannoncelocations extends Component {
@@ -44,16 +45,25 @@ class Navblogannoncelocations extends Component {
                         <table>
                             <tbody>
 
-                            {categoryannoncelocations.map((item) => (
-                                <tr key={item.id}>
-                                    <td>
-                                        <NavLink to={`/blogs/annonce_locations/${item.slug}/`}>
-                                             <strong>{item.name}</strong>
-                                        </NavLink>
-                                    </td>
-                                    <td className="text-right"> {this.getcountcategoryannonceString(item.blogannoncelocations_count)} articles</td>
-                                </tr>
-                            ))}
+                            {categoryannoncelocations.length > 0 ?
+
+                                    <Fragment>
+                                        {categoryannoncelocations.map((item) => (
+                                            <tr key={item.id}>
+                                                <td>
+                                                    <NavLink to={`/blogs/annonce_locations/${item.slug}/`}>
+                                                        <strong>{item.name || <Skeleton width={80} />}</strong>
+                                                    </NavLink>
+                                                </td>
+                                                <td className="text-right"> {this.getcountcategoryannonceString(item.blogannoncelocations_count)} {item.blogannoncelocations_count > 1 ? "articles" : "article"}</td>
+                                            </tr>
+                                        ))}
+                                    </Fragment>
+                                    :
+
+                                    <NavblogannonceSkeleton/>
+                            }
+
 
                             </tbody>
                         </table>
@@ -65,4 +75,4 @@ class Navblogannoncelocations extends Component {
     }
 
 }
-export default withRouter(Navblogannoncelocations);
+export default Navblogannoncelocations;

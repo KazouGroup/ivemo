@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import Navblogannonceventes from "./inc/Navblogannonceventes";
 import BlogannonceventeList from "./BlogannonceventeList";
 import Navlinknewblogannoncevente from "./treatement/Navlinknewblogannoncevente";
+import Skeleton from "react-loading-skeleton";
 
 
 class BlogannonceventesBycategoryvente extends Component {
@@ -170,13 +171,21 @@ class BlogannonceventesBycategoryvente extends Component {
                             </div>
                             <div className="content-center">
 
-                                <h1 className="title">{blogannonceventes.name}</h1>
-                                <Link to={`/blogs/annonce_ventes/`} className="text-white">
-                                    <i className="fa fa-chevron-circle-left" /> <b>Retour aux articles</b>
-                                </Link>
-                                {blogannonceventes.blogannonceventes_count > 0 &&(
+                                <h1 className="title">{blogannonceventes.name || <Skeleton width={300} />}</h1>
+
+                                {blogannonceventes.name ?
+                                    <Link to={`/blogs/annonce_ventes/`} className="text-white">
+                                        <i className="fa fa-chevron-circle-left" /> <b>Retour aux articles</b>
+                                    </Link>
+                                    :
+                                    <Skeleton width={270}/>
+                                }
+
+                                {blogannonceventes.blogannonceventes_count > 0 ?
                                     <h5><b>{blogannonceventes.blogannonceventes_count}</b> {blogannonceventes.blogannonceventes_count > 1 ? "articles" : "article"} posté sur la vente et achat</h5>
-                                )}
+                                    :
+                                    <h5> <Skeleton width={200}/></h5>
+                                }
 
                             </div>
                         </div>

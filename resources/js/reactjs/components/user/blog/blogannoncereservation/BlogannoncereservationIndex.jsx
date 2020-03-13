@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import BlogannoncereservationList from "./BlogannoncereservationList";
 import Navblogannoncereservations from "./inc/Navblogannoncereservations";
 import Navlinknewblogannoncereservation from "./treatement/Navlinknewblogannoncereservation";
+import BlogannonceListSkeleton from "../../../inc/user/BlogannonceListSkeleton";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -153,7 +154,7 @@ class BlogannoncereservationIndex extends Component {
                 )
             })
         ):(
-            <></>
+            <BlogannonceListSkeleton/>
         );
         return (
             <>
