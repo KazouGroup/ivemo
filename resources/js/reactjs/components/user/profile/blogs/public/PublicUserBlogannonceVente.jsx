@@ -11,6 +11,7 @@ import NavLinkPublicAnnonceUser from "../../annonces/NavLinkPublicAnnonceUser";
 import PublicUserBlogannonceventeList from "./inc/PublicUserBlogannonceventeList";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
 import Navlinknewblogannoncevente from "../../../blog/blognnoncevente/treatement/Navlinknewblogannoncevente";
+import Skeleton from "react-loading-skeleton";
 
 
 class PublicUserBlogannonceVente extends Component {
@@ -125,13 +126,17 @@ class PublicUserBlogannonceVente extends Component {
 
                                 <div className="card-body">
 
-                                    <h1 className="title">{userblogventePublick.first_name}</h1>
-                                    <Link to={`/@${userblogventePublick.slug}/`} className="text-white">
-                                        <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userblogventePublick.first_name}</b>
-                                    </Link>
-                                    {userblogventePublick.blogannonceventes_count > 0 &&(
+                                    <h1 className="title">{userblogventePublick.first_name || <Skeleton width={300} />}</h1>
+                                    {userblogventePublick.slug ?
+                                        <Link to={`/@${userblogventePublick.slug}/`} className="text-white">
+                                            <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userblogventePublick.first_name}</b>
+                                        </Link>
+                                        :
+                                        <Skeleton width={270}/>
+                                    }
+                                    {userblogventePublick.blogannonceventes_count >= 0 ?
                                         <h5><b>{userblogventePublick.blogannonceventes_count}</b> {userblogventePublick.blogannonceventes_count > 1 ? "articles" : "article"} posté par {userblogventePublick.first_name} sur la vente et l'achat</h5>
-                                    )}
+                                    :<h5> <Skeleton width={200}/></h5>}
 
                                 </div>
 
@@ -155,7 +160,7 @@ class PublicUserBlogannonceVente extends Component {
                                                 <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article</b>
                                             </NavLink>
                                         </div> */}
-                                        
+
 
                                         <div className="card">
                                             <div className="card-body">

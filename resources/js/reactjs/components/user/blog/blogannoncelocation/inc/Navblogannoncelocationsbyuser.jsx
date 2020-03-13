@@ -1,34 +1,52 @@
 import React, { Component } from "react";
-import {NavLink, withRouter} from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
+import NavblogannonceSkeleton from "../../../../inc/user/NavblogannonceSkeleton";
+
 
 
 class Navblogannoncelocationsbyuser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            categoryannoncelocations : [],
+            categoryannoncelocations: [],
         }
     }
 
     componentDidMount() {
         let url = route('api.categoryannoncelocations_by_user_site');
-        dyaxios.get(url).then(response => this.setState({categoryannoncelocations: response.data,}));
+        dyaxios.get(url).then(response => this.setState({ categoryannoncelocations: response.data, }));
     }
 
-    getcountcategoryannonceString (blogannoncelocations_count) {
-        blogannoncelocations_count = blogannoncelocations_count +'';
+    getcountcategoryannonceString(blogannoncelocations_count) {
+        blogannoncelocations_count = blogannoncelocations_count + '';
         if (blogannoncelocations_count < 1000) {
             return blogannoncelocations_count;
         }
         if (blogannoncelocations_count < 10000) {
             return blogannoncelocations_count.charAt(0) + ',' + blogannoncelocations_count.substring(1);
         }
-        return (blogannoncelocations_count/1000).toFixed(blogannoncelocations_count % 1000 !== 0)+'k';
+        return (blogannoncelocations_count / 1000).toFixed(blogannoncelocations_count % 1000 !== 0) + 'k';
     }
 
     render() {
-        const {categoryannoncelocations} = this.state;
+        const { categoryannoncelocations } = this.state;
+        const mapCategoryannoncelocations = categoryannoncelocations.length ? (
+            categoryannoncelocations.map(item => {
+                return (
+                    <tr key={item.id}>
+                        <td>
+                            <NavLink to={`/blogs/annonce_locations/${item.slug}/`}>
+                                <strong>{item.name}</strong>
+                            </NavLink>
+                        </td>
+                        <td className="text-right"> {this.getcountcategoryannonceString(item.blogannoncelocations_count)} {item.blogannoncelocations_count < 1 ? "article" : "articles"}</td>
+                    </tr>
+                )
+            })
+        ) : (
+            <NavblogannonceSkeleton/>
+            );
         return (
 
 
@@ -43,16 +61,7 @@ class Navblogannoncelocationsbyuser extends Component {
                         <table>
                             <tbody>
 
-                            {categoryannoncelocations.map((item) => (
-                                <tr key={item.id}>
-                                    <td>
-                                        <NavLink to={`/blogs/annonce_locations/${item.slug}/`}>
-                                             <strong>{item.name}</strong>
-                                        </NavLink>
-                                    </td>
-                                    <td className="text-right"> {this.getcountcategoryannonceString(item.blogannoncelocations_count)} {item.blogannoncelocations_count < 1 ? "article" : "articles"}</td>
-                                </tr>
-                            ))}
+                                {mapCategoryannoncelocations}
 
                             </tbody>
                         </table>

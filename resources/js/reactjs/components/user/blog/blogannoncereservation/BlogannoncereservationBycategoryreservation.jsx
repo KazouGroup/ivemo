@@ -181,7 +181,7 @@ class BlogannoncereservationBycategoryreservation extends Component {
                                         <Skeleton width={270}/>
                                     }
 
-                                    {blogannoncereservation.blogannoncereservations_count > 0 ?
+                                    {blogannoncereservation.blogannoncereservations_count >= 0 ?
                                         <h5><b>{blogannoncereservation.blogannoncereservations_count}</b> {blogannoncereservation.blogannoncereservations_count > 1 ? "articles" : "article"} posté sur la reservation</h5>
                                         :
                                         <h5> <Skeleton width={200}/></h5>

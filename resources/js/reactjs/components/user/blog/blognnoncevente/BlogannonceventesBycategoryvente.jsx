@@ -181,7 +181,7 @@ class BlogannonceventesBycategoryvente extends Component {
                                     <Skeleton width={270}/>
                                 }
 
-                                {blogannonceventes.blogannonceventes_count > 0 ?
+                                {blogannonceventes.blogannonceventes_count >= 0 ?
                                     <h5><b>{blogannonceventes.blogannonceventes_count}</b> {blogannonceventes.blogannonceventes_count > 1 ? "articles" : "article"} posté sur la vente et achat</h5>
                                     :
                                     <h5> <Skeleton width={200}/></h5>

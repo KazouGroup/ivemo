@@ -11,6 +11,7 @@ import NavLinkPublicAnnonceUser from "../../annonces/NavLinkPublicAnnonceUser";
 import PublicUserBlogannoncelocationList from "./inc/PublicUserBlogannoncelocationList";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
 import Navlinknewblogannoncelocation from "../../../blog/blogannoncelocation/treatement/Navlinknewblogannoncelocation";
+import Skeleton from "react-loading-skeleton";
 
 
 class PublicUserBlogannonceLocation extends Component {
@@ -125,13 +126,18 @@ class PublicUserBlogannonceLocation extends Component {
 
                                 <div className="card-body">
 
-                                    <h1 className="title">{userbloglocationPublick.first_name}</h1>
-                                    <Link to={`/@${userbloglocationPublick.slug}/`} className="text-white">
-                                        <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userbloglocationPublick.first_name}</b>
-                                    </Link>
-                                    {userbloglocationPublick.blogannoncelocations_count > 0 &&(
+                                    <h1 className="title">{userbloglocationPublick.first_name || <Skeleton width={300} />}</h1>
+                                    {userbloglocationPublick.slug ?
+                                        <Link to={`/@${userbloglocationPublick.slug}/`} className="text-white">
+                                            <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userbloglocationPublick.first_name}</b>
+                                        </Link>
+                                        :
+                                        <Skeleton width={270}/>
+                                    }
+
+                                    {userbloglocationPublick.blogannoncelocations_count >= 0 ?
                                         <h5><b>{userbloglocationPublick.blogannoncelocations_count}</b> {userbloglocationPublick.blogannoncelocations_count > 1 ? "articles" : "article"} posté par {userbloglocationPublick.first_name} sur la location</h5>
-                                    )}
+                                    : <h5> <Skeleton width={200}/></h5>}
 
                                 </div>
 
@@ -156,7 +162,7 @@ class PublicUserBlogannonceLocation extends Component {
                                                 <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article</b>
                                             </NavLink>
                                         </div> */}
-                                        
+
 
                                         <div className="card">
                                             <div className="card-body">

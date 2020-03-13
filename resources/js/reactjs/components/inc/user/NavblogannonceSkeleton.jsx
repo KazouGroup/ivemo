@@ -7,27 +7,9 @@ function NavblogannonceSkeleton(props) {
         <>
             <tr>
                 <td>
-                    <strong><Skeleton width={200} /></strong>
+                    <strong><Skeleton width={200} count={5}/></strong>
                 </td>
-                <td className="text-right"><Skeleton width={40} /> </td>
-            </tr>
-            <tr>
-                <td>
-                    <strong><Skeleton width={200} /></strong>
-                </td>
-                <td className="text-right"><Skeleton width={40} /> </td>
-            </tr>
-            <tr>
-                <td>
-                    <strong><Skeleton width={200} /></strong>
-                </td>
-                <td className="text-right"><Skeleton width={40} /> </td>
-            </tr>
-            <tr>
-                <td>
-                    <strong><Skeleton width={200} /></strong>
-                </td>
-                <td className="text-right"><Skeleton width={40} /> </td>
+                <td className="text-right"><Skeleton width={40} count={5}/> </td>
             </tr>
         </>
     )

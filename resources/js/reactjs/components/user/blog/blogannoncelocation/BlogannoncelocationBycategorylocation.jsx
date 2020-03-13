@@ -180,7 +180,7 @@ class BlogannoncelocationBycategorylocation extends Component {
                                 }
 
 
-                                {blogannoncelocation.blogannoncelocations_count > 0 ?
+                                {blogannoncelocation.blogannoncelocations_count >= 0 ?
                                     <h5><b>{blogannoncelocation.blogannoncelocations_count}</b> {blogannoncelocation.blogannoncelocations_count > 1 ? "articles" : "article"} posté sur la location</h5>
                                     :
                                    <h5> <Skeleton width={200}/></h5>
