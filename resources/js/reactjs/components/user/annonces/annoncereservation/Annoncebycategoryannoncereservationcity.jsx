@@ -7,6 +7,7 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import AnnoncereservationList from "./inc/AnnoncereservationList";
 import PropTypes from "prop-types";
 import Categoriesannoncereservation from "./inc/Categoriesannoncereservation";
+import NavblogannonceSkeleton from "../../../inc/user/NavblogannonceSkeleton";
 
 
 class Annoncebycategoryannoncereservationcity extends Component {
@@ -104,7 +105,6 @@ class Annoncebycategoryannoncereservationcity extends Component {
 
                                     </div>
 
-
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
@@ -112,8 +112,6 @@ class Annoncebycategoryannoncereservationcity extends Component {
                                                 <i className="now-ui-icons ui-1_simple-add" /> <b>Poster votre annonce</b>
                                             </NavLink>
                                         </div>
-
-
 
                                         <div className="card">
                                             <div className="card-body">
@@ -132,7 +130,8 @@ class Annoncebycategoryannoncereservationcity extends Component {
                                                                         <table>
                                                                             <tbody>
 
-                                                                                {categoryannoncereservations.map((item) => (
+                                                                            {categoryannoncereservations.length ?
+                                                                                <>{categoryannoncereservations.map((item) => (
                                                                                     <tr key={item.id}>
                                                                                         <td>
                                                                                             <NavLink to={`/annonces_reservations/reservations/${item.slug}/${annoncereservationbycity.slug}/`} >
@@ -141,7 +140,7 @@ class Annoncebycategoryannoncereservationcity extends Component {
                                                                                         </td>
                                                                                         <td className="text-right"> {this.getcountcategoryannonceString(item.annoncereservations_count)} annonces</td>
                                                                                     </tr>
-                                                                                ))}
+                                                                                ))}</>:<NavblogannonceSkeleton/>}
 
                                                                             </tbody>
                                                                         </table>

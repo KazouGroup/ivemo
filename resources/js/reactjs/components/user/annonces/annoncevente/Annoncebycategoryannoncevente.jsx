@@ -7,6 +7,7 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import AnnonceventeList from "./inc/AnnonceventeList";
 import Categoriesannoncevente from "./inc/Categoriesannoncevente";
+import NavblogannonceSkeleton from "../../../inc/user/NavblogannonceSkeleton";
 
 
 class Annoncebycategoryannoncevente extends Component {
@@ -233,17 +234,21 @@ class Annoncebycategoryannoncevente extends Component {
                                                                         <table>
                                                                             <tbody>
 
-                                                                            {cityannonceventes.map((item) => (
-                                                                                <tr key={item.id}>
-                                                                                    <td>
-                                                                                        <NavLink to={`/annonces_ventes/ventes/${annonceventebycategory.slug}/${item.slug}/`}>
-                                                                                            achat <b style={{ textTransform: "lowercase" }}>{annonceventebycategory.name}</b> à <b>{item.name}</b>
-                                                                                        </NavLink>
-                                                                                    </td>
-                                                                                    <td className="text-right"> {this.getcountcategoryannonceString(item.annonceventes_count)}  {item.annonceventes_count <= 1 ? "annonce" : "annonces"}</td>
-                                                                                </tr>
-                                                                            ))}
-
+                                                                            {cityannonceventes.length ?
+                                                                                <>
+                                                                                    {cityannonceventes.map((item) => (
+                                                                                        <tr key={item.id}>
+                                                                                            <td>
+                                                                                                <NavLink to={`/annonces_ventes/ventes/${annonceventebycategory.slug}/${item.slug}/`}>
+                                                                                                    achat <b style={{ textTransform: "lowercase" }}>{annonceventebycategory.name}</b> à <b>{item.name}</b>
+                                                                                                </NavLink>
+                                                                                            </td>
+                                                                                            <td className="text-right"> {this.getcountcategoryannonceString(item.annonceventes_count)}  {item.annonceventes_count <= 1 ? "annonce" : "annonces"}</td>
+                                                                                        </tr>
+                                                                                    ))}
+                                                                                </>
+                                                                                :
+                                                                                <NavblogannonceSkeleton/>}
                                                                             </tbody>
                                                                         </table>
                                                                     </div>

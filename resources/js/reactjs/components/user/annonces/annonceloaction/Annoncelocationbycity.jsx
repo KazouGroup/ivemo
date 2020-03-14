@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import AnnonceslocationList from "./inc/AnnonceslocationList";
 import Categoriesannoncereselocation from "./inc/Categoriesannoncereselocation";
 import Swal from "sweetalert2";
+import NavblogannonceSkeleton from "../../../inc/user/NavblogannonceSkeleton";
 
 
 class Annoncelocationbycity extends Component {
@@ -238,17 +239,19 @@ class Annoncelocationbycity extends Component {
                                                                         <table>
                                                                             <tbody>
 
-                                                                            {cityannoncelocations.map((item) => (
-                                                                                <tr key={item.id}>
-                                                                                    <td>
-                                                                                        <NavLink to={`/annonces_locations/locations/${item.slug}/${annoncelocationbycity.slug}/`}>
-                                                                                            locations <b style={{ textTransform: "lowercase" }}>{item.name}</b> à <b>{annoncelocationbycity.name}</b>
-                                                                                        </NavLink>
-                                                                                    </td>
-                                                                                    <td className="text-right"> {this.getcountcategoryannonceString(item.annoncelocations_count)} {item.annoncelocations_count > 1 ? "annonces" : "annonce"}</td>
-                                                                                </tr>
-                                                                            ))}
-
+                                                                            {cityannoncelocations.length ?
+                                                                                <>
+                                                                                    {cityannoncelocations.map((item) => (
+                                                                                        <tr key={item.id}>
+                                                                                            <td>
+                                                                                                <NavLink to={`/annonces_locations/locations/${item.slug}/${annoncelocationbycity.slug}/`}>
+                                                                                                    locations <b style={{ textTransform: "lowercase" }}>{item.name}</b> à <b>{annoncelocationbycity.name}</b>
+                                                                                                </NavLink>
+                                                                                            </td>
+                                                                                            <td className="text-right"> {this.getcountcategoryannonceString(item.annoncelocations_count)} {item.annoncelocations_count > 1 ? "annonces" : "annonce"}</td>
+                                                                                        </tr>
+                                                                                    ))}
+                                                                                </>:<NavblogannonceSkeleton/>}
                                                                             </tbody>
                                                                         </table>
                                                                     </div>

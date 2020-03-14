@@ -7,6 +7,7 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import Categoriesannoncereselocation from "./inc/Categoriesannoncereselocation";
 import AnnonceslocationList from "./inc/AnnonceslocationList";
 import Swal from "sweetalert2";
+import AnnoncesListSkeleton from "../../../inc/user/AnnoncesListSkeleton";
 
 
 class AnnoncelocationIndex extends Component {
@@ -156,7 +157,7 @@ class AnnoncelocationIndex extends Component {
                 )
             })
         ):(
-            <></>
+            <AnnoncesListSkeleton/>
         );
 
         return (

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {NavLink, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
+import NavblogannonceSkeleton from "../../../../inc/user/NavblogannonceSkeleton";
 
 
 class Categoriesannoncevente extends Component {
@@ -29,6 +30,21 @@ class Categoriesannoncevente extends Component {
 
     render() {
         const {categoryannonceventes} = this.state;
+        const mapCategoryannonceventes = categoryannonceventes.length ? (
+            categoryannonceventes.map(item => {
+                return(
+                    <tr key={item.id}>
+                        <td>
+                            <NavLink to={`/annonces_ventes/ventes/${item.slug}/`}>
+                                Trouver un(e) <strong>{item.name}</strong> en vente
+                            </NavLink>
+                        </td>
+                        <td className="text-right"> {this.getcountcategoryannonceString(item.annonceventes_count)} {item.annonceventes_count > 1 ? "annonces" : "annonce"}</td>
+                    </tr>              )
+            })
+        ):(
+            <NavblogannonceSkeleton/>
+        );
         return (
 
 
@@ -44,16 +60,7 @@ class Categoriesannoncevente extends Component {
                         <table>
                             <tbody>
 
-                            {categoryannonceventes.map((item) => (
-                                <tr key={item.id}>
-                                    <td>
-                                        <NavLink to={`/annonces_ventes/ventes/${item.slug}/`}>
-                                            Trouver un(e) <strong>{item.name}</strong> en vente
-                                        </NavLink>
-                                    </td>
-                                    <td className="text-right"> {this.getcountcategoryannonceString(item.annonceventes_count)} {item.annonceventes_count > 1 ? "annonces" : "annonce"}</td>
-                                </tr>
-                            ))}
+                            {mapCategoryannonceventes}
 
                             </tbody>
                         </table>

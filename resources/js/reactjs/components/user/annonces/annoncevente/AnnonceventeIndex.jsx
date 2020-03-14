@@ -6,6 +6,7 @@ import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import AnnonceventeList from "./inc/AnnonceventeList";
 import Categoriesannoncevente from "./inc/Categoriesannoncevente";
+import AnnoncesListSkeleton from "../../../inc/user/AnnoncesListSkeleton";
 
 
 class AnnonceventeIndex extends Component {
@@ -36,7 +37,7 @@ class AnnonceventeIndex extends Component {
                 )
             })
         ):(
-            <></>
+            <AnnoncesListSkeleton/>
         );
         return (
             <>

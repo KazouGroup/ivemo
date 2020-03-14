@@ -34,7 +34,22 @@ class IndexSite extends Component {
                         <div className="content-center">
                             <div className="row">
                                 <div className="col-md-8 ml-auto mr-auto">
-                                    <h2 className="title">Bienvenue sur Ivemo</h2>
+                                    <h4 className="title">La meilleure façon de reserver un bien, de trouver votre futur logement</h4>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-12 ml-auto mr-auto">
+                                    <Link to={`/annonces_locations/locations/`} className="btn btn-danger btn-lg">
+                                        Location
+                                    </Link>
+
+                                    <Link to={`/annonces_reservations/reservations/`} className="btn btn-info btn-lg">
+                                        Reservation
+                                    </Link>
+
+                                    <Link to={`/annonces_ventes/ventes/`} className="btn btn-primary btn-lg">
+                                        Achat
+                                    </Link>
                                 </div>
                             </div>
                         </div>

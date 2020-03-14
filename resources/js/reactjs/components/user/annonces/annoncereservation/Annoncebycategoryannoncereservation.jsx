@@ -7,6 +7,7 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import AnnoncereservationList from "./inc/AnnoncereservationList";
 import PropTypes from "prop-types";
 import Navtabscategoryreservation from "./inc/Navtabscategoryreservation";
+import NavblogannonceSkeleton from "../../../inc/user/NavblogannonceSkeleton";
 
 
 class Annoncebycategoryannoncereservation extends Component {
@@ -115,16 +116,18 @@ class Annoncebycategoryannoncereservation extends Component {
                                                                         <table>
                                                                             <tbody>
 
-                                                                            {citiesannoncesreservations.map((item) => (
-                                                                                <tr key={item.id}>
-                                                                                    <td>
-                                                                                        <NavLink to={`/annonces_reservations/${annoncetype}/${annoncereservationbycategory.slug}/${item.slug}/`}>
-                                                                                            Reserver un(e) <strong>{annoncereservationbycategory.name}</strong> à <strong> {item.name}</strong>
-                                                                                        </NavLink>
-                                                                                    </td>
-                                                                                    <td className="text-right"> {this.getcountcategoryannonceString(item.annoncereservations_count)} annonces</td>
-                                                                                </tr>
-                                                                            ))}
+                                                                            {citiesannoncesreservations.length ?
+                                                                                <>  {citiesannoncesreservations.map((item) => (
+                                                                                    <tr key={item.id}>
+                                                                                        <td>
+                                                                                            <NavLink to={`/annonces_reservations/${annoncetype}/${annoncereservationbycategory.slug}/${item.slug}/`}>
+                                                                                                Reserver un(e) <strong>{annoncereservationbycategory.name}</strong> à <strong> {item.name}</strong>
+                                                                                            </NavLink>
+                                                                                        </td>
+                                                                                        <td className="text-right"> {this.getcountcategoryannonceString(item.annoncereservations_count)} annonces</td>
+                                                                                    </tr>
+                                                                                ))}
+                                                                                </>: <NavblogannonceSkeleton/>}
 
                                                                             </tbody>
                                                                         </table>
