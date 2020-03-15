@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 import BlogannoncereservationList from "./BlogannoncereservationList";
 import Navblogannoncereservations from "./inc/Navblogannoncereservations";
 import Navlinknewblogannoncereservation from "./treatement/Navlinknewblogannoncereservation";
-import BlogannonceListSkeleton from "../../../inc/user/BlogannonceListSkeleton";
+import BlogannonceListSkeleton from "../../../inc/user/blog/BlogannonceListSkeleton";
 require("moment/min/locales.min");
 moment.locale('fr');
 

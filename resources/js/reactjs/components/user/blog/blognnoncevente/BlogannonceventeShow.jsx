@@ -88,9 +88,6 @@ class BlogannonceventeShow extends Component {
                                                                         <Fragment>
                                                                             <div className="text-right ml-auto">
 
-                                                                                <button className="btn btn-outline-danger btn-sm">supprimer</button>
-                                                                                <button className="btn btn-outline-info btn-sm">supprimer</button>
-
                                                                                 <UncontrolledTooltip placement="bottom" target="TooltipEdit">
                                                                                     Editer cet article
                                                                                 </UncontrolledTooltip>
@@ -101,8 +98,8 @@ class BlogannonceventeShow extends Component {
                                                                                     Supprimer cette annonce
                                                                                 </UncontrolledTooltip>
                                                                                 <Button
-                                                                                    className="btn btn-sm btn-icon btn-danger" onClick={() => this.deleteItem(blogannoncevente.id)} color="secondary" id="TooltipDelete">
-                                                                                    <i className="now-ui-icons ui-1_simple-remove" />
+                                                                                    className="btn btn-outline-danger btn-sm" onClick={() => this.deleteItem(blogannoncevente.id)} color="secondary" id="TooltipDelete">
+                                                                                    <i className="now-ui-icons ui-1_simple-remove" /> supprimer
                                                                                 </Button>{" "}
                                                                             </div>
                                                                         </Fragment>
