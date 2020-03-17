@@ -7,10 +7,8 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import FormcontactuseronlocationShow from "./inc/FormcontactuseronlocationShow";
 import BlogannoncelocationIntesseAnnonseShow from "../../blog/blogannoncelocation/BlogannoncelocationIntesseAnnonseShow";
 import Swal from "sweetalert2";
-import moment from "moment";
 import AnnoncelocationInteresse from "./AnnoncelocationInteresse";
 import ProfileForallAnnonceShow from "../ProfileForallAnnonceShow";
-import BlogannoncelocationList from "../../blog/blogannoncelocation/BlogannoncelocationList";
 
 
 class Annoncelocationbycategorycityshow extends Component {

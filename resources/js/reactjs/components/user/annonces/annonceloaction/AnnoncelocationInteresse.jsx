@@ -4,6 +4,7 @@ import moment from 'moment'
 import { Button } from "reactstrap";
 import { Remarkable } from "remarkable";
 import AnnoncelocationInteresseList from "./inc/AnnoncelocationInteresseList";
+import AnnoncesinteresseSkeleton from "../../../inc/user/annonce/AnnoncesinteresseSkeleton";
 
 require("moment/min/locales.min");
 moment.locale('fr');
@@ -49,11 +50,17 @@ class AnnoncelocationInteresse extends Component {
 
                 <div className="row">
 
-                    {annoncelocationsinteresses.slice(0,visiable).map((item) => (
+                    {annoncelocationsinteresses.length ?
+                        <>
+                            {annoncelocationsinteresses.slice(0,visiable).map((item) => (
 
-                        <AnnoncelocationInteresseList key={item.id} {...item}/>
+                                <AnnoncelocationInteresseList key={item.id} {...item}/>
 
-                    ))}
+                            ))}
+
+                        </>:<AnnoncesinteresseSkeleton/>}
+
+
 
                 </div>
 

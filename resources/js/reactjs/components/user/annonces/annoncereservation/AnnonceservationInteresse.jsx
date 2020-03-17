@@ -5,6 +5,7 @@ import {Button, Row} from "reactstrap";
 import {Remarkable} from "remarkable";
 import AnnoncereservationInteresseList from "./inc/AnnoncereservationInteresseList";
 import AnnoncereservationList from "./inc/AnnoncereservationList";
+import AnnoncesinteresseSkeleton from "../../../inc/user/annonce/AnnoncesinteresseSkeleton";
 
 require("moment/min/locales.min");
 moment.locale('fr');
@@ -51,10 +52,14 @@ class AnnonceservationInteresse extends Component {
 
                 <Row>
 
-                    {annoncereservationsinteresse.slice(0,visiable).map((item) => (
+                    {annoncereservationsinteresse.length ?
+                        <>
+                            {annoncereservationsinteresse.slice(0,visiable).map((item) => (
 
-                        <AnnoncereservationInteresseList key={item.id} {...item}/>
-                    ))}
+                                <AnnoncereservationInteresseList key={item.id} {...item}/>
+                            ))}
+                        </>:  <AnnoncesinteresseSkeleton/>}
+
 
                 </Row>
 

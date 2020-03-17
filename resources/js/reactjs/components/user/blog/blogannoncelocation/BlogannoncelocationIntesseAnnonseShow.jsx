@@ -3,6 +3,7 @@ import {Link,NavLink } from "react-router-dom";
 import moment from 'moment'
 import {Button, UncontrolledTooltip} from "reactstrap";
 import Swal from "sweetalert2";
+import BlogannonceinteresseSkeleton from "../../../inc/user/blog/BlogannonceinteresseSkeleton";
 
 require("moment/min/locales.min");
 moment.locale('fr');
@@ -41,34 +42,40 @@ class BlogannoncelocationIntesseAnnonseShow extends Component {
 
                         <div className="row">
 
-                            {blogsinteresse.map((item) => (
-                            <div key={item.id} className="col-md-4 mx-auto">
-                                <div className="card card-blog card-plain">
-                                    <div className="card-image">
-                                        <a target="_blank" href={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>
-                                            <img className="img img-raised rounded" alt={item.title} src={item.photo}/>
-                                        </a>
-                                    </div>
-                                    <div className="card-body">
-                                        <div className="text-center">
-                                            <a target="_blank" href={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/`} className={`btn btn-sm btn-${item.categoryannoncelocation.color_name}`}>
-                                                {item.categoryannoncelocation.name}
-                                            </a>
-                                            <h6 className="card-title">
-                                                <a target="_blank" href={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`} className="card-link"> {item.title}</a>
-                                            </h6>
-                                        </div>
-                                        <p className="card-description">
-                                            <b dangerouslySetInnerHTML={{__html: (item.description.length > 80 ? item.description.substring(0, 80) + "..." : item.description)}}/>
-                                            <a target="_blank" href={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}> lire la suite </a>
-                                        </p>
+                            {blogsinteresse.length ?
+                                <>
+                                    {blogsinteresse.map((item) => (
+                                        <div key={item.id} className="col-md-4 mx-auto">
+                                            <div className="card card-blog card-plain">
+                                                <div className="card-image">
+                                                    <a target="_blank" href={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>
+                                                        <img className="img img-raised rounded" alt={item.title} src={item.photo}/>
+                                                    </a>
+                                                </div>
+                                                <div className="card-body">
+                                                    <div className="text-center">
+                                                        <a target="_blank" href={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/`} className={`btn btn-sm btn-${item.categoryannoncelocation.color_name}`}>
+                                                            {item.categoryannoncelocation.name}
+                                                        </a>
+                                                        <h6 className="card-title">
+                                                            <a target="_blank" href={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`} className="card-link"> {item.title}</a>
+                                                        </h6>
+                                                    </div>
+                                                    <p className="card-description">
+                                                        <b dangerouslySetInnerHTML={{__html: (item.description.length > 80 ? item.description.substring(0, 80) + "..." : item.description)}}/>
+                                                        <a target="_blank" href={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}> lire la suite </a>
+                                                    </p>
 
-                                    </div>
-                                </div>
-                            </div>
-                            ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </>: <BlogannonceinteresseSkeleton/> }
+
 
                         </div>
+
+
 
                     </div>
                 </div>
