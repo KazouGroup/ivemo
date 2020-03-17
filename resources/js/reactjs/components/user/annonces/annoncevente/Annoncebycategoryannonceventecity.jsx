@@ -7,7 +7,7 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import AnnonceventeList from "./inc/AnnonceventeList";
 import Categoriesannoncevente from "./inc/Categoriesannoncevente";
-import NavblogannonceSkeleton from "../../../inc/user/NavblogannonceSkeleton";
+import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
 
 
 class Annoncebycategoryannonceventecity extends Component {
@@ -248,7 +248,7 @@ class Annoncebycategoryannonceventecity extends Component {
                                                                                             <td className="text-right"> {this.getcountcategoryannonceString(item.annonceventes_count)} {item.annonceventes_count > 1 ? "annonces" : "annonce"}</td>
                                                                                         </tr>
                                                                                     ))}
-                                                                                </>:<NavblogannonceSkeleton/>}
+                                                                                </>:<NavannoncecategorySkeleton/>}
                                                                             </tbody>
                                                                         </table>
                                                                     </div>

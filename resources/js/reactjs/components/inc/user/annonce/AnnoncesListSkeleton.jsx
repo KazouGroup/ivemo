@@ -1,8 +1,6 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
-import {Link, NavLink} from "react-router-dom";
-import moment from "moment";
-import {Button, UncontrolledTooltip} from "reactstrap";
+import { Card,CardBody,Row } from "reactstrap";
 
 
 function AnnoncesListSkeleton(props) {
@@ -10,10 +8,10 @@ function AnnoncesListSkeleton(props) {
     return(
 
      <>
-         <div className="card">
-             <div className="card-body">
+         <Card>
+             <CardBody>
                  <div className="card card-plain card-blog">
-                     <div className="row">
+                     <Row>
                          <div className="col-md-5">
 
                              <Skeleton circle={false} height={179} width={270} />
@@ -64,16 +62,15 @@ function AnnoncesListSkeleton(props) {
 
                              </div>
                          </div>
-                     </div>
+                     </Row>
                  </div>
 
-             </div>
-         </div>
-
-         <div className="card">
-             <div className="card-body">
+             </CardBody>
+         </Card>
+         <Card>
+             <CardBody>
                  <div className="card card-plain card-blog">
-                     <div className="row">
+                     <Row>
                          <div className="col-md-5">
 
                              <Skeleton circle={false} height={179} width={270} />
@@ -124,16 +121,15 @@ function AnnoncesListSkeleton(props) {
 
                              </div>
                          </div>
-                     </div>
+                     </Row>
                  </div>
 
-             </div>
-         </div>
-
-         <div className="card">
-             <div className="card-body">
+             </CardBody>
+         </Card>
+         <Card>
+             <CardBody>
                  <div className="card card-plain card-blog">
-                     <div className="row">
+                     <Row>
                          <div className="col-md-5">
 
                              <Skeleton circle={false} height={179} width={270} />
@@ -184,11 +180,12 @@ function AnnoncesListSkeleton(props) {
 
                              </div>
                          </div>
-                     </div>
+                     </Row>
                  </div>
 
-             </div>
-         </div>
+             </CardBody>
+         </Card>
+
      </>
     )
 }

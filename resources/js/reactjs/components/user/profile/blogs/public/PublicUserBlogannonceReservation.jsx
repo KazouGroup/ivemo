@@ -13,6 +13,7 @@ import PublicUserBlogannoncereservationList from "./inc/PublicUserBlogannonceres
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
 import Navlinknewblogannoncereservation
     from "../../../blog/blogannoncereservation/treatement/Navlinknewblogannoncereservation";
+import BlogannoncePublicuserSkeleton from "../../../../inc/user/blog/BlogannoncePublicuserSkeleton";
 
 
 class PublicUserBlogannonceReservation extends Component {
@@ -20,6 +21,7 @@ class PublicUserBlogannonceReservation extends Component {
         super(props);
         this.state = {
             userblogreservationPublick: { blogannoncereservations: [] },
+            isLoading: false,
             visiable: 10,
         };
 
@@ -85,8 +87,12 @@ class PublicUserBlogannonceReservation extends Component {
     }
 
     loadItems() {
+        this.setState({ isLoading: true });
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.profilpublique_blogannoncerewservations', [itemuser])).then(response => this.setState({ userblogreservationPublick: response.data, }));
+        dyaxios.get(route('api.profilpublique_blogannoncerewservations', [itemuser])).then(response => this.setState({
+            userblogreservationPublick: response.data,
+            isLoading: false,
+        }));
     }
 
     // lifecycle method
@@ -95,17 +101,16 @@ class PublicUserBlogannonceReservation extends Component {
     }
 
     render() {
-        const { userblogreservationPublick, visiable } = this.state;
-        const mapBlogannoncereservations = userblogreservationPublick.blogannoncereservations.length ? (
-            userblogreservationPublick.blogannoncereservations.slice(0, visiable).map(item => {
-                return (
-
+        const { userblogreservationPublick, visiable,isLoading } = this.state;
+        const mapBlogannoncereservations = isLoading ? (
+            <BlogannoncePublicuserSkeleton/>
+        ):(
+            userblogreservationPublick.blogannoncereservations.slice(0,visiable).map(item => {
+                return(
                     <PublicUserBlogannoncereservationList key={item.id} {...item} deleteItem={this.deleteItem} />
                 )
             })
-        ) : (
-                <></>
-            );
+        );
         return (
             <>
                 <Helmet>

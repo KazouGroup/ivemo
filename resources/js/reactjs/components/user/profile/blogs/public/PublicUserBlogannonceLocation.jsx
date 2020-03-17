@@ -12,6 +12,7 @@ import PublicUserBlogannoncelocationList from "./inc/PublicUserBlogannoncelocati
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
 import Navlinknewblogannoncelocation from "../../../blog/blogannoncelocation/treatement/Navlinknewblogannoncelocation";
 import Skeleton from "react-loading-skeleton";
+import BlogannoncePublicuserSkeleton from "../../../../inc/user/blog/BlogannoncePublicuserSkeleton";
 
 
 class PublicUserBlogannonceLocation extends Component {
@@ -19,6 +20,7 @@ class PublicUserBlogannonceLocation extends Component {
         super(props);
         this.state = {
             userbloglocationPublick:{blogannoncelocations: []},
+            isLoading: false,
             visiable: 10,
         };
 
@@ -84,8 +86,12 @@ class PublicUserBlogannonceLocation extends Component {
     }
 
     loadItems(){
+        this.setState({ isLoading: true });
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.profilpublique_blogannoncelocations',[itemuser])).then(response => this.setState({userbloglocationPublick: response.data,}));
+        dyaxios.get(route('api.profilpublique_blogannoncelocations',[itemuser])).then(response => this.setState({
+            userbloglocationPublick: response.data,
+            isLoading: false,
+        }));
     }
 
     // lifecycle method
@@ -94,16 +100,15 @@ class PublicUserBlogannonceLocation extends Component {
     }
 
     render() {
-        const {userbloglocationPublick,visiable} = this.state;
-        const mapBlogannoncelocations = userbloglocationPublick.blogannoncelocations.length ? (
+        const {userbloglocationPublick,visiable,isLoading} = this.state;
+        const mapBlogannoncelocations = isLoading ? (
+            <BlogannoncePublicuserSkeleton/>
+        ):(
             userbloglocationPublick.blogannoncelocations.slice(0,visiable).map(item => {
                 return(
-
                     <PublicUserBlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem}/>
                 )
             })
-        ):(
-            <></>
         );
         return (
             <>

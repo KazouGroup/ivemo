@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {NavLink, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
-import NavblogannonceSkeleton from "../../../../inc/user/NavblogannonceSkeleton";
+import NavannoncecategorySkeleton from "../../../../inc/user/NavannoncecategorySkeleton";
 
 
 class Navblogannonceventes extends Component {
@@ -59,7 +59,7 @@ class Navblogannonceventes extends Component {
                                     ))}
                                 </>
                                 :
-                                <NavblogannonceSkeleton/>
+                                <NavannoncecategorySkeleton/>
 
                             }
 

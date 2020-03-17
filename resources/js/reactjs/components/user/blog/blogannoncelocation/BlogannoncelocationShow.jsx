@@ -11,6 +11,7 @@ import { Remarkable } from "remarkable";
 import moment from "moment";
 import AnnoncelocationInteresseforBlog from "./AnnoncelocationInteresseforBlog"
 import BlogannoncelocationInteresse from "./BlogannoncelocationInteresse";
+import Skeleton from "react-loading-skeleton";
 
 
 class BlogannoncelocationShow extends Component {
@@ -22,6 +23,7 @@ class BlogannoncelocationShow extends Component {
             blogannoncelocation: { user: [], categoryannoncelocation: [] },
         };
 
+        this.deleteItem = this.deleteItem.bind(this);
     }
 
     deleteItem(id) {
@@ -60,7 +62,7 @@ class BlogannoncelocationShow extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.props.history.goBack();
+                    this.props.history.push(`/blogs/annonce_locations/`);
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -127,15 +129,18 @@ class BlogannoncelocationShow extends Component {
 
                                                         <div className="card-header d-flex align-items-center">
                                                             <div className="d-flex align-items-center">
-                                                                <NavLink to={`/@${blogannoncelocation.user.slug}/blogs/annonce_locations/`}>
-                                                                    <img src={blogannoncelocation.user.avatar}
-                                                                        style={{ height: "40px", width: "80px", borderRadius: "5px" }}
-                                                                        alt={blogannoncelocation.user.first_name}
-                                                                        className="avatar" />
-                                                                </NavLink>
+                                                                {blogannoncelocation.user.avatar ?
+                                                                    <NavLink to={`/@${blogannoncelocation.user.slug}/blogs/annonce_locations/`}>
+                                                                        <img src={blogannoncelocation.user.avatar}
+                                                                             style={{ height: "40px", width: "80px", borderRadius: "5px" }}
+                                                                             alt={blogannoncelocation.user.first_name}
+                                                                             className="avatar" />
+                                                                    </NavLink>
+                                                                    : <Skeleton circle={false} height={40} width={80} />}
+
                                                                 <div className="mx-3">
-                                                                    <NavLink to={`/@${blogannoncelocation.user.slug}/blogs/annonce_locations/`} className="text-dark font-weight-600 text-sm"><b>{blogannoncelocation.user.first_name}</b>
-                                                                        <small className="d-block text-muted">{moment(blogannoncelocation.created_at).calendar()}</small>
+                                                                    <NavLink to={`/@${blogannoncelocation.user.slug}/blogs/annonce_locations/`} className="text-dark font-weight-600 text-sm"><b>{blogannoncelocation.user.first_name || <Skeleton width={35} />}</b>
+                                                                        <small className="d-block text-muted">{moment(blogannoncelocation.created_at).fromNow()}</small>
                                                                     </NavLink>
                                                                 </div>
                                                             </div>
@@ -171,10 +176,13 @@ class BlogannoncelocationShow extends Component {
                                                                 <div className="carousel-item active">
                                                                     <Zoom>
                                                                         <div>
-                                                                            <img className="d-block"
-                                                                                 src={blogannoncelocation.photo}
-                                                                                 style={{ width: "1400px", height: "400px", borderRadius: "2px" }}
-                                                                                 alt={blogannoncelocation.title} />
+                                                                            {blogannoncelocation.photo ?
+                                                                                <img className="d-block"
+                                                                                     src={blogannoncelocation.photo}
+                                                                                     style={{ width: "1400px", height: "400px", borderRadius: "2px" }}
+                                                                                     alt={blogannoncelocation.title} />
+                                                                                     :<Skeleton circle={false} height={400} width={1040} />}
+
                                                                         </div>
 
                                                                     </Zoom>
@@ -195,9 +203,10 @@ class BlogannoncelocationShow extends Component {
                                                 <div className="row justify-content-center ">
                                                     <div className="col-lg-11 ml-auto mr-auto">
 
-                                                        <h2 className="title text-center">{blogannoncelocation.title}</h2>
+                                                        <h2 className="title text-center">{blogannoncelocation.title || <Skeleton width={300} />}</h2>
 
-                                                        <div className="title text-justify" dangerouslySetInnerHTML={this.getDescription(blogannoncelocation)} />
+                                                        {blogannoncelocation.description ? <div className="title text-justify" dangerouslySetInnerHTML={this.getDescription(blogannoncelocation)} />: <Skeleton count={5}/>}
+
 
 
                                                     </div>

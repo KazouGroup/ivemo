@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Button } from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-import PropTypes from "prop-types";
 import AnnonceslocationList from "./inc/AnnonceslocationList";
 import Categoriesannoncereselocation from "./inc/Categoriesannoncereselocation";
 import Swal from "sweetalert2";
-import NavblogannonceSkeleton from "../../../inc/user/NavblogannonceSkeleton";
-
+import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
+import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 
 class Annoncebycategoryannoncelocation extends Component {
     constructor(props) {
@@ -17,16 +15,18 @@ class Annoncebycategoryannoncelocation extends Component {
         this.state = {
             annoncelocationbycategory: {annoncelocations:[]},
             cityannoncelocations:[],
+            isLoading: false,
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
     }
 
     loadItems(){
+        this.setState({ isLoading: true });
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let url = route('api.annoncelocationbycategoryannoncelocations_site',[itemannoncetype,itemCategoryannoncelocation]);
-        dyaxios.get(url).then(response => this.setState({annoncelocationbycategory: response.data,}));
+        dyaxios.get(url).then(response => this.setState({annoncelocationbycategory: response.data, isLoading: false,}));
         let url1 = route('api.annoncelocationbycategorycitycount_site',[itemCategoryannoncelocation]);
         dyaxios.get(url1).then(response => this.setState({cityannoncelocations: response.data,}));
 
@@ -159,16 +159,16 @@ class Annoncebycategoryannoncelocation extends Component {
         return (annoncelocations_count/1000).toFixed(annoncelocations_count % 1000 !== 0)+'k';
     }
     render() {
-        const {annoncelocationbycategory,cityannoncelocations} = this.state;
+        const {annoncelocationbycategory,cityannoncelocations,isLoading} = this.state;
         const allannoncelocationsbycategory = annoncelocationbycategory.annoncelocations;
-        const mapAnnoncelocations = allannoncelocationsbycategory.length ? (
+        const mapAnnoncelocations = isLoading ? (
+            <AnnoncesListSkeleton/>
+        ):(
             allannoncelocationsbycategory.map(item => {
                 return(
                     <AnnonceslocationList key={item.id} {...item}  deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
                 )
             })
-        ):(
-            <></>
         );
         return (
             <>
@@ -253,7 +253,7 @@ class Annoncebycategoryannoncelocation extends Component {
                                                                                 ))}
                                                                                 </>
                                                                                 :
-                                                                                <NavblogannonceSkeleton/>}
+                                                                                <NavannoncecategorySkeleton/>}
 
                                                                             </tbody>
                                                                         </table>
@@ -273,13 +273,6 @@ class Annoncebycategoryannoncelocation extends Component {
 
 
                                     </div>
-
-
-
-
-
-
-
 
                                 </div>
                             </div>

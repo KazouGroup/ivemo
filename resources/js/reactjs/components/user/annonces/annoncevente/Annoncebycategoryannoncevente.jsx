@@ -7,7 +7,8 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import AnnonceventeList from "./inc/AnnonceventeList";
 import Categoriesannoncevente from "./inc/Categoriesannoncevente";
-import NavblogannonceSkeleton from "../../../inc/user/NavblogannonceSkeleton";
+import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
+import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 
 
 class Annoncebycategoryannoncevente extends Component {
@@ -16,16 +17,18 @@ class Annoncebycategoryannoncevente extends Component {
         this.state = {
             annonceventebycategory: {annonceventes:[]},
             cityannonceventes:[],
+            isLoading: false,
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
     }
 
     loadItems(){
+        this.setState({ isLoading: true });
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
         let url = route('api.annonceventebycategoryannonceventes_site',[itemannoncetype,itemCategoryannoncevente]);
-        dyaxios.get(url).then(response => this.setState({annonceventebycategory: response.data,}));
+        dyaxios.get(url).then(response => this.setState({annonceventebycategory: response.data,isLoading: false,}));
         let url1 = route('api.annonceventebycategorycitycount_site',[itemCategoryannoncevente]);
         dyaxios.get(url1).then(response => this.setState({cityannonceventes: response.data,}));
 
@@ -158,15 +161,15 @@ class Annoncebycategoryannoncevente extends Component {
         return (annonceventes_count/1000).toFixed(annonceventes_count % 1000 !== 0)+'k';
     }
     render() {
-        const {annonceventebycategory,cityannonceventes} = this.state;
-        const mapAnnonceventes = annonceventebycategory.annonceventes.length ? (
+        const {annonceventebycategory,cityannonceventes,isLoading} = this.state;
+        const mapAnnonceventes = isLoading ? (
+            <AnnoncesListSkeleton/>
+        ):(
             annonceventebycategory.annonceventes.map(item => {
                 return(
                     <AnnonceventeList key={item.id} {...item}  deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
                 )
             })
-        ):(
-            <></>
         );
         return (
             <>
@@ -248,7 +251,7 @@ class Annoncebycategoryannoncevente extends Component {
                                                                                     ))}
                                                                                 </>
                                                                                 :
-                                                                                <NavblogannonceSkeleton/>}
+                                                                                <NavannoncecategorySkeleton/>}
                                                                             </tbody>
                                                                         </table>
                                                                     </div>

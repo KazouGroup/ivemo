@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 import AnnonceslocationList from "./inc/AnnonceslocationList";
 import Categoriesannoncereselocation from "./inc/Categoriesannoncereselocation";
 import Swal from "sweetalert2";
-import NavblogannonceSkeleton from "../../../inc/user/NavblogannonceSkeleton";
+import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
 
 
 class Annoncelocationbycity extends Component {
@@ -251,7 +251,7 @@ class Annoncelocationbycity extends Component {
                                                                                             <td className="text-right"> {this.getcountcategoryannonceString(item.annoncelocations_count)} {item.annoncelocations_count > 1 ? "annonces" : "annonce"}</td>
                                                                                         </tr>
                                                                                     ))}
-                                                                                </>:<NavblogannonceSkeleton/>}
+                                                                                </>:<NavannoncecategorySkeleton/>}
                                                                             </tbody>
                                                                         </table>
                                                                     </div>

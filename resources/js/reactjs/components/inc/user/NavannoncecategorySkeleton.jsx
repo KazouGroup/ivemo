@@ -1,7 +1,7 @@
 import React  from "react";
 import Skeleton from "react-loading-skeleton";
 
-function NavblogannonceSkeleton(props) {
+function NavannoncecategorySkeleton(props) {
 
     return(
         <tr>
@@ -12,4 +12,4 @@ function NavblogannonceSkeleton(props) {
         </tr>
     )
 }
-export default NavblogannonceSkeleton
+export default NavannoncecategorySkeleton

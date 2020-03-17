@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import NavblogannonceSkeleton from "../../../../inc/user/NavblogannonceSkeleton";
+import NavannoncecategorySkeleton from "../../../../inc/user/NavannoncecategorySkeleton";
 
 
 
@@ -45,7 +45,7 @@ class Navblogannoncelocationsbyuser extends Component {
                 )
             })
         ) : (
-            <NavblogannonceSkeleton/>
+            <NavannoncecategorySkeleton/>
             );
         return (
 

@@ -7,7 +7,8 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import AnnoncereservationList from "./inc/AnnoncereservationList";
 import PropTypes from "prop-types";
 import Navtabscategoryreservation from "./inc/Navtabscategoryreservation";
-import NavblogannonceSkeleton from "../../../inc/user/NavblogannonceSkeleton";
+import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
+import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 
 
 class Annoncebycategoryannoncereservation extends Component {
@@ -16,14 +17,16 @@ class Annoncebycategoryannoncereservation extends Component {
         this.state = {
             annoncereservationbycategory: {annoncereservations:[]},
             citiesannoncesreservations: [],
+            isLoading: false,
         }
     }
 
     loadItem(){
+        this.setState({ isLoading: true });
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
         let url = route('api.annoncelocationbycategoryannoncereservations_site',[itemannoncetype,itemCategoryannoncereservation]);
-        dyaxios.get(url).then(response => this.setState({annoncereservationbycategory: response.data,}));
+        dyaxios.get(url).then(response => this.setState({annoncereservationbycategory: response.data,isLoading: false,}));
         fetch(route('api.annoncereservationbycategorycount_site',[itemCategoryannoncereservation])).then(res => res.json()).then((result) => {
             this.setState({
                 citiesannoncesreservations: [...result]
@@ -48,9 +51,18 @@ class Annoncebycategoryannoncereservation extends Component {
     }
 
     render() {
-        const {annoncereservationbycategory,citiesannoncesreservations} = this.state;
+        const {annoncereservationbycategory,citiesannoncesreservations,isLoading} = this.state;
         const allannoncereservationsbycategory = annoncereservationbycategory.annoncereservations;
         const annoncetype = this.props.match.params.annoncetype;
+        const mapAnnoncereservations = isLoading ? (
+            <AnnoncesListSkeleton/>
+        ):(
+            allannoncereservationsbycategory.map(item => {
+                return(
+                    <AnnoncereservationList key={item.id} {...item} />
+                )
+            })
+        );
         return (
             <>
                 <Helmet>
@@ -81,9 +93,7 @@ class Annoncebycategoryannoncereservation extends Component {
                                        <Navtabscategoryreservation/>
                                         <br/>
 
-                                        {allannoncereservationsbycategory.map((item) => (
-                                            <AnnoncereservationList key={item.id} {...item} />
-                                        ))}
+                                        {mapAnnoncereservations}
 
                                     </div>
 
@@ -127,7 +137,7 @@ class Annoncebycategoryannoncereservation extends Component {
                                                                                         <td className="text-right"> {this.getcountcategoryannonceString(item.annoncereservations_count)} annonces</td>
                                                                                     </tr>
                                                                                 ))}
-                                                                                </>: <NavblogannonceSkeleton/>}
+                                                                                </>: <NavannoncecategorySkeleton/>}
 
                                                                             </tbody>
                                                                         </table>

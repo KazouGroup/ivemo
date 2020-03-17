@@ -1,7 +1,7 @@
 import React, { Component,Fragment } from "react";
 import {NavLink, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
-import NavblogannonceSkeleton from "../../../../inc/user/NavblogannonceSkeleton";
+import NavannoncecategorySkeleton from "../../../../inc/user/NavannoncecategorySkeleton";
 
 
 class Navblogannoncelocations extends Component {
@@ -61,7 +61,7 @@ class Navblogannoncelocations extends Component {
                                     </Fragment>
                                     :
 
-                                    <NavblogannonceSkeleton/>
+                                    <NavannoncecategorySkeleton/>
                             }
 
 

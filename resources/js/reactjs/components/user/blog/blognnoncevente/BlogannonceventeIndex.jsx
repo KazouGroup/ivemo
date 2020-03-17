@@ -18,6 +18,7 @@ class BlogannonceventeIndex extends Component {
         super(props);
         this.state = {
             blogannonceventes:{categoryannoncevente:[],user:[]},
+            isLoading: false,
 
         };
 
@@ -139,14 +140,16 @@ class BlogannonceventeIndex extends Component {
     }
 
     componentDidMount() {
+        this.setState({ isLoading: true });
         dyaxios.get(route('api.blogannonceventes_site')).then(response =>
             this.setState({
                 blogannonceventes: [...response.data.data],
+                isLoading: false,
             }));
     }
 
     render() {
-        const {blogannonceventes} = this.state;
+        const {blogannonceventes,isLoading} = this.state;
         const mapBlogannonceventes = blogannonceventes.length ? (
             blogannonceventes.map(item => {
                 return(

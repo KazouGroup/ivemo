@@ -7,7 +7,7 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import AnnoncereservationList from "./inc/AnnoncereservationList";
 import PropTypes from "prop-types";
 import Categoriesannoncereservation from "./inc/Categoriesannoncereservation";
-import NavblogannonceSkeleton from "../../../inc/user/NavblogannonceSkeleton";
+import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
 
 
 class Annoncebycategoryannoncereservationcity extends Component {
@@ -140,7 +140,7 @@ class Annoncebycategoryannoncereservationcity extends Component {
                                                                                         </td>
                                                                                         <td className="text-right"> {this.getcountcategoryannonceString(item.annoncereservations_count)} annonces</td>
                                                                                     </tr>
-                                                                                ))}</>:<NavblogannonceSkeleton/>}
+                                                                                ))}</>:<NavannoncecategorySkeleton/>}
 
                                                                             </tbody>
                                                                         </table>

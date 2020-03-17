@@ -85,19 +85,20 @@ const RouteUser = props => (
           <Route exact path="/contact/" component={ContactUserSite}/>
           <Route exact path="/annonce/" component={AnnonceUserSite}/>
           <Route exact path="/annonce/show/" component={AnnonceShowUserSite}/>
+
           <Route exact path="/annonces_reservations/:annoncetype/" component={AnnoncereservationIndex}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/" component={withRouter(Annoncebycategoryannoncereservation)}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/" component={withRouter(Annoncebycategoryannoncereservationcity)}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/:annoncereservation/" component={withRouter(Annoncebycategoryannoncereservationcityshow)}/>
 
-          <Route exact path="/annonces_locations/:annoncetype/" component={withRouter(AnnoncelocationIndex)}/>
+          <Route exact path="/annonces_locations/:annoncetype/" component={AnnoncelocationIndex}/>
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/" component={withRouter(Annoncebycategoryannoncelocation)}/>
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/" component={withRouter(Annoncelocationbycity)}/>
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/:date/:annoncelocation/" component={withRouter(Annoncelocationbycategorycityshow)}/>
           <Route exact path="/annonce/show/create/" component={AnnonceShowCreateUserSite}/>
           <Route exact path="/annonce/show/vendre/create/" component={AnnonceBienAvendreCreate}/>
 
-          <Route exact path="/annonces_ventes/:annoncetype/" component={withRouter(AnnonceventeIndex)}/>
+          <Route exact path="/annonces_ventes/:annoncetype/" component={AnnonceventeIndex}/>
           <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/" component={withRouter(Annoncebycategoryannoncevente)}/>
           <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/:city/" component={withRouter(Annoncebycategoryannonceventecity)}/>
           <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/:city/:date/:annoncevente/" component={withRouter(Annonceventebycategorycityshow)}/>
