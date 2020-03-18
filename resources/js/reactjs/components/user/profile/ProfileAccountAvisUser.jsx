@@ -25,6 +25,8 @@ class ProfileAccountAvisUser extends Component {
         };
 
         this.sendavisItem = this.sendavisItem.bind(this);
+        this.cancelCourse = this.cancelCourse.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
         this.updateavisItem = this.updateavisItem.bind(this);
         this.editFromItem = this.editFromItem.bind(this);
         this.responseFromItem = this.responseFromItem.bind(this);
@@ -69,7 +71,7 @@ class ProfileAccountAvisUser extends Component {
           response_description:item.response_description,
           item: item
         });
-        console.log(item);
+        //console.log(item);
       }
 
     responseFromItem(item) {
@@ -82,6 +84,68 @@ class ProfileAccountAvisUser extends Component {
           item: item
         });
       }
+
+    cancelCourse(){
+        this.setState({
+            description: "",
+            response_description: "",
+        });
+    };
+
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes-vous sûr de vouloir executer cette action",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                const url = route('profile_avis_users_destroy.site',id);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+
+                    let isNotId = item => item.id !== id;
+                    let updatedItems = this.state.avisusers.filter(isNotId);
+                    this.setState({avisusers: updatedItems});
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update',
+                            message: 'Votre avis à été supprimée avec success '
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'primary',
+                            placement: {
+                                from: 'bottom',
+                                align: 'right'
+                            },
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            },
+                        });
+                    /** End alert ***/
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
+    }
 
     unactiveItem(id) {
         Swal.fire({
@@ -326,7 +390,7 @@ class ProfileAccountAvisUser extends Component {
                                                         <ReadMoreAndLess
                                                             className="read-more-content"
                                                             charLimit={250}
-                                                            readMoreText="En savoir plus"
+                                                            readMoreText="(Plus)"
                                                             readLessText=""
                                                         >
                                                             {item.description || <Skeleton count={5}/>}
@@ -356,11 +420,17 @@ class ProfileAccountAvisUser extends Component {
                                                                 )}
 
                                                                 {$userIvemo.id === item.from.id && (
+                                                                    <Fragment>
+                                                                        <Button onClick={() => this.deleteItem(item.id)}
+                                                                                className="btn btn-danger btn-neutral pull-right">
+                                                                            <i className="now-ui-icons ui-1_simple-remove" /> Supprimer
+                                                                        </Button>
 
-                                                                    <button onClick={() => this.editFromItem(item) }
-                                                                            className="btn btn-info btn-neutral pull-right">
-                                                                        <i className="now-ui-icons ui-2_settings-90" /> Editer
-                                                                    </button>
+                                                                        <button onClick={() => this.editFromItem(item) }
+                                                                                className="btn btn-info btn-neutral pull-right">
+                                                                            <i className="now-ui-icons ui-2_settings-90" /> Editer
+                                                                        </button>
+                                                                    </Fragment>
                                                                 )}
 
                                                             </div>
@@ -385,13 +455,14 @@ class ProfileAccountAvisUser extends Component {
                                                                 {!$guest && (
                                                                     <>
                                                                         {$userIvemo.id === item.to.id && (
-
-                                                                            <div className="media-footer">
-                                                                                <button onClick={() => this.responseFromItem(item) }
-                                                                                        className="btn btn-info btn-neutral pull-right">
-                                                                                    <i className="now-ui-icons ui-2_settings-90" /> Editer
-                                                                                </button>
-                                                                            </div>
+                                                                            <>
+                                                                                <div className="media-footer">
+                                                                                    <button onClick={() => this.responseFromItem(item) }
+                                                                                            className="btn btn-info btn-neutral pull-right">
+                                                                                        <i className="now-ui-icons ui-2_settings-90" /> Editer
+                                                                                    </button>
+                                                                                </div>
+                                                                            </>
                                                                         )}
 
                                                                     </>
@@ -454,10 +525,17 @@ class ProfileAccountAvisUser extends Component {
 
                                                     {this.renderErrorFor('description')}
                                                     <div className="media-footer">
+
                                                         <Button type="submit"
-                                                                className="btn btn-primary pull-right">
-                                                            <i className="now-ui-icons ui-1_send" /> Poster
+                                                            className="btn btn-primary pull-right">
+                                                        <i className="now-ui-icons ui-1_send" /> Poster
                                                         </Button>
+
+                                                        <Button onClick={this.cancelCourse}
+                                                                className="btn btn-secondary pull-right">
+                                                            <i className="now-ui-icons ui-1_simple-remove" /> Annuller
+                                                        </Button>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -493,7 +571,7 @@ class ProfileAccountAvisUser extends Component {
                                                 <ReadMoreAndLess
                                                     className="read-more-content"
                                                     charLimit={250}
-                                                    readMoreText="En savoir plus"
+                                                    readMoreText="(Plus)"
                                                     readLessText=""
                                                 >
                                                     {this.state.item.description || ""}
@@ -559,7 +637,7 @@ class ProfileAccountAvisUser extends Component {
                                                 <ReadMoreAndLess
                                                     className="read-more-content"
                                                     charLimit={250}
-                                                    readMoreText="En savoir plus"
+                                                    readMoreText="(Plus)"
                                                     readLessText=""
                                                 >
                                                     {this.state.item.response_description || ""}

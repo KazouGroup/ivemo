@@ -57,10 +57,12 @@ class AvisuserController extends Controller
     {
         $validatedData = $request->validate(['description' => 'required|min:2|max:10000']);
 
+        $authId = auth()->user()->id;
+
         $avisuser = avisuser::create([
             'description' => $validatedData['description'],
             'to_id' => $user->id,
-            'from_id' => auth()->user()->id,
+            'from_id' => $authId,
         ]);
 
         return $avisuser->toJson();
@@ -104,10 +106,19 @@ class AvisuserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array|\Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $avisuser = avisuser::findOrFail($id);
+
+        if (auth()->user()->id === $avisuser->from_id){
+            $avisuser->delete();
+
+            return ['message' => 'message deleted '];
+        }else{
+            abort(404);
+        }
+
     }
 }

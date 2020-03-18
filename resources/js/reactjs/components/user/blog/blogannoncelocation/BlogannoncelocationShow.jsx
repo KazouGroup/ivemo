@@ -47,7 +47,7 @@ class BlogannoncelocationShow extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Article de blogs suprimée avec success'
+                            message: 'Article de blogs supprimée avec success'
                         },
                         {
                             allow_dismiss: false,

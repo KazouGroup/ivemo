@@ -9,6 +9,7 @@ import BlogannoncelocationIntesseAnnonseShow from "../../blog/blogannoncelocatio
 import Swal from "sweetalert2";
 import AnnoncelocationInteresse from "./AnnoncelocationInteresse";
 import ProfileForallAnnonceShow from "../ProfileForallAnnonceShow";
+import Skeleton from "react-loading-skeleton";
 
 
 class Annoncelocationbycategorycityshow extends Component {
@@ -201,14 +202,27 @@ class Annoncelocationbycategorycityshow extends Component {
                                             <br />
                                             <div className="d-flex align-items-center">
                                                 <div className="text-left pull-left">
-                                                    <h6 className={`text-${annoncelocation.categoryannoncelocation.color_name} ml-auto mr-auto`}>
-                                                        {annoncelocation.categoryannoncelocation.name}
-                                                    </h6>
+                                                    {annoncelocation.categoryannoncelocation.name ?
+                                                        <h6 className={`text-${annoncelocation.categoryannoncelocation.color_name} ml-auto mr-auto`}>
+                                                            {annoncelocation.categoryannoncelocation.name}
+                                                        </h6>
+                                                        :
+                                                        <h6 className={`ml-auto mr-auto`}>
+                                                            <Skeleton width={150} />
+                                                        </h6>
+                                                    }
                                                 </div>
 
-                                                <div className="text-center ml-auto">
-                                                    <h6 className="text-dark">{annoncelocation.pieces} p . {annoncelocation.rooms && (<>{annoncelocation.rooms} ch</>)}. {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
-                                                </div>
+                                                {annoncelocation.pieces ?
+                                                    <div className="text-center ml-auto">
+                                                        <h6 className="text-dark">{annoncelocation.pieces} p . {annoncelocation.rooms && (<>{annoncelocation.rooms} ch</>)}. {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
+                                                    </div>
+                                                    :
+                                                    <div className="text-center ml-auto">
+                                                        <h6 className="text-dark"><Skeleton width={150} /></h6>
+                                                    </div>
+                                                }
+
 
                                                 {/*
                                                   <div className="text-center ml-auto">
@@ -220,7 +234,11 @@ class Annoncelocationbycategorycityshow extends Component {
 
 
                                                 <div className="text-right ml-auto">
-                                                    <h5 className="text-success"><b>{annoncelocation.price} <small>FCFA/mois</small></b></h5>
+                                                    {annoncelocation.price ?
+                                                        <h5 className="text-success"><b>{annoncelocation.price} <small>FCFA/mois</small></b></h5>
+                                                        :
+                                                        <h5 className="text-success"><b><Skeleton width={150} /></b></h5>
+                                                    }
                                                 </div>
                                             </div>
 

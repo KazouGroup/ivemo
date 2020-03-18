@@ -15,10 +15,10 @@ Route::put(
     'AvisuserController@avisuser_public_response'
 )->name('avisuser_public_response.site');
 
-//Route::delete(
-//    'profile/personal_settings/avisusers/{id}',
-//    'AvisuserController@destroy'
-//)->name('profile_avis_users_destroy.site');
+Route::delete(
+    'profile/personal_settings/delete_avisusers/{id}',
+    'AvisuserController@destroy'
+)->name('profile_avis_users_destroy.site');
 
 Route::get(
     'profile/personal_settings/active_avisusers/{id}',
