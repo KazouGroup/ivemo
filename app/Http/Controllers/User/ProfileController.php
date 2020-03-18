@@ -14,7 +14,9 @@ use App\Model\user;
 use App\Services\ProfileService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpFoundation\Response;
+use File;
 
 class ProfileController extends Controller
 {
@@ -329,19 +331,69 @@ class ProfileController extends Controller
     public function profile_account_update(UpdateRequest $request)
     {
         $user = auth()->user();
+        /**
+         * Avatr image upload
+         */
+        $currentPhoto = $user->avatar;
+        if ($request->avatar != $currentPhoto){
 
-        $data = $user->update($request->only(
+            $namefile = sha1(date('YmdHis') . str_random(30));
+            $name = $namefile .'.' . explode('/',explode(':',substr($request->avatar,0,strpos
+                ($request->avatar,';')))[1])[1];
+
+            $dir = 'assets/img/avatars/user/';
+            if(!file_exists($dir)){
+                mkdir($dir, 0775, true);
+            }
+            Image::make($request->avatar)->fit(100,100)->save(public_path('assets/img/avatars/user/').$name);
+
+
+            $request->merge(['avatar' =>  "/assets/img/avatars/user/{$name}"]);
+
+            // Ici on suprimme l'image existant
+            $oldFilename = $currentPhoto;
+            File::delete(public_path($oldFilename));
+        }
+
+        /**
+         * Coverpage Uploade
+         */
+        $currentCoverPhoto = $user->avatarcover;
+        if ($request->avatarcover != $currentCoverPhoto){
+
+            $namefile = sha1(date('YmdHis') . str_random(30));
+            $name = $namefile .'.' . explode('/',explode(':',substr($request->avatarcover,0,strpos
+                ($request->avatarcover,';')))[1])[1];
+
+            $dir = 'assets/img/avatarcovers/user/';
+            if(!file_exists($dir)){
+                mkdir($dir, 0775, true);
+            }
+            Image::make($request->avatarcover)->fit(1400,400)->save(public_path('assets/img/avatarcovers/user/').$name);
+
+
+            $request->merge(['avatarcover' =>  "/assets/img/avatarcovers/user/{$name}"]);
+
+            // Ici on suprimme l'image existant
+            $oldCoverFilename = $currentCoverPhoto;
+            File::delete(public_path($oldCoverFilename));
+        }
+
+        $user->update($request->only(
             'first_name',
             'last_name',
             'email',
             'slug',
             'username',
+            'avatar',
+            'avatarcover',
             'phone',
             'categoryprofile_id',
             'sex',
             'color_name'
         ));
-        return response()->json($data,200);
+
+        return ['message' => 'profile has ben updated'];
 
     }
 

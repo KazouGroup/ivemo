@@ -27,10 +27,13 @@ class ProfileAccountUser extends Component {
             categoryprofiles: [],
             errors: [],
             showDefaultImage: false,
+            showDefaultavatarcoverImage: false,
         };
         this.saveItem = this.saveItem.bind(this);
-        this.updateImage = this.updateImage.bind(this);
-        this.removeImage = this.removeImage.bind(this);
+        this.updateavatarImage = this.updateavatarImage.bind(this);
+        this.updateavatacoverImage = this.updateavatacoverImage.bind(this);
+        this.removeavatarImage = this.removeavatarImage.bind(this);
+        this.removeavatarcoverImage = this.removeavatarcoverImage.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
@@ -57,8 +60,9 @@ class ProfileAccountUser extends Component {
             )
         }
     }
+
     // Handle Upload Image
-    updateImage(e) {
+    updateavatarImage(e) {
         e.preventDefault();
         let reader = new FileReader();
         let file = e.target.files[0];
@@ -68,9 +72,28 @@ class ProfileAccountUser extends Component {
         };
         reader.readAsDataURL(file)
     }
-    removeImage(e) {
+
+    // Handle Upload Image
+    updateavatacoverImage(e) {
+        e.preventDefault();
+        let reader = new FileReader();
+        let file = e.target.files[0];
+        reader.onloadend = (file) => {
+            this.setState({ file: file, avatarcover: reader.result, showDefaultImage: false });
+            document.querySelector('.kazouImageCarousel-file-upload').classList.remove('is-invalid');
+        };
+        reader.readAsDataURL(file)
+    }
+
+    removeavatarImage(e) {
         e.preventDefault();
         this.setState({ file: '', avatar: '', showDefaultImage: true });
+        document.querySelector('.kazouImageCarousel-file-upload').classList.add('is-invalid');
+    }
+
+    removeavatarcoverImage(e) {
+        e.preventDefault();
+        this.setState({ file: '', avatarcover: '', showDefaultavatarcoverImage: true });
         document.querySelector('.kazouImageCarousel-file-upload').classList.add('is-invalid');
     }
 
@@ -142,7 +165,7 @@ class ProfileAccountUser extends Component {
     }
 
     render() {
-        const { categoryprofiles,avatar } = this.state;
+        const { categoryprofiles,avatar,avatarcover} = this.state;
         return (
 
             <>
@@ -281,39 +304,41 @@ class ProfileAccountUser extends Component {
 
                                                     </div>
 
-                                                    {/*
-
                                                     <Row>
-                                                        <div className="col-md-8">
-                                                            <div className="profile text-center">
-                                                                <label><b>Couverture</b></label>
-                                                                <img src={this.state.showDefaultImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : avatar} alt={$userIvemo.first_name}/>
-                                                                <input id="avatar" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('avatar') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="avatar"/>
+                                                        <div className="col-md-6">
+                                                            <div className="text-center">
+                                                                <img src={this.state.showDefaultImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : avatar} alt={'avatar'} />
+                                                                <input id="avatar" type="file" onChange={this.updateavatarImage} className={`form-control ${this.hasErrorFor('avatar') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="avatar" />
                                                                 {this.renderErrorFor('avatar')}
-                                                                <label htmlFor="avatar" className="btn btn-primary">
-                                                                    <span className="btn-inner--text">Ajouter l'image</span>
-                                                                </label>
-                                                                <button hidden={this.state.showDefaultImage ? true : false} onClick={this.removeImage} className="btn btn-danger">
-                                                                    <span className="btn-inner--text">Remove</span>
-                                                                </button>
+                                                                <div className="text-center">
+                                                                    <label htmlFor="avatar" className="btn btn-primary">
+                                                                        <span className="btn-inner--text">Modifier le profile</span>
+                                                                    </label>
+                                                                    <label hidden={this.state.showDefaultImage ? true : false} onClick={this.removeavatarImage} className="btn btn-danger">
+                                                                        <span className="btn-inner--text">Enlever</span>
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-4">
-                                                            <div className="profile text-center">
-                                                                <label><b>Avavtar</b></label>
-                                                                <img src={this.state.showDefaultImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : avatar} alt={$userIvemo.first_name}/>
-                                                                <input id="avatar" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('avatar') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="avatar"/>
-                                                                {this.renderErrorFor('avatar')}
-                                                                <label htmlFor="avatar" className="btn btn-primary">
-                                                                    <span className="btn-inner--text">Ajouter l'image</span>
-                                                                </label>
-                                                                <button hidden={this.state.showDefaultImage ? true : false} onClick={this.removeImage} className="btn btn-danger">
-                                                                    <span className="btn-inner--text">Remove</span>
-                                                                </button>
+                                                        <div className="col-md-6">
+
+                                                            <div className="text-center">
+                                                                <img src={this.state.showDefaultavatarcoverImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : avatarcover} alt={'avatarcover'} />
+                                                                <input id="avatarcover" type="file" onChange={this.updateavatacoverImage} className={`form-control ${this.hasErrorFor('avatarcover') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="avatarcover" />
+                                                                {this.renderErrorFor('avatarcover')}
+                                                                <div className="text-center">
+                                                                    <label htmlFor="avatarcover" className="btn btn-primary">
+                                                                        <span className="btn-inner--text">Modifier la couverture</span>
+                                                                    </label>
+                                                                    <label hidden={this.state.showDefaultavatarcoverImage ? true : false} onClick={this.removeavatarcoverImage} className="btn btn-danger">
+                                                                        <span className="btn-inner--text">Enlever</span>
+                                                                    </label>
+                                                                </div>
                                                             </div>
+
                                                         </div>
                                                     </Row>
-                                                    */}
+
 
                                                     <div className="row">
                                                         <div className="col-md-6 col-6">
@@ -400,7 +425,7 @@ class ProfileAccountUser extends Component {
 
 
                                                     <div className="submit text-center">
-                                                        <button className="btn btn-primary btn-round" type="submit">
+                                                        <button className="btn btn-primary" type="submit">
                                                             <i className="now-ui-icons ui-1_check"/>
                                                             <b>Enregistrer</b>
                                                         </button>

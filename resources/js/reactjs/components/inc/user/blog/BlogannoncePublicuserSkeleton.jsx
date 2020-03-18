@@ -29,16 +29,14 @@ function BlogannoncePublicuserSkeleton(props) {
                        <CardFooter>
                            <div className="author">
                                <Skeleton circle={true} height={30} width={30} />
-                               <Skeleton height={10} width={60} />
                            </div>
                            <div className="stats stats-right">
-                               <Skeleton height={20} width={60} />
+                               <Skeleton  width={100} />
                            </div>
                        </CardFooter>
                    </CardBody>
                </div>
            </div>
-
            <div className="col-md-6 mx-auto">
                <div className="card card-blog">
                    <div className="card-image">
@@ -59,16 +57,14 @@ function BlogannoncePublicuserSkeleton(props) {
                        <CardFooter>
                            <div className="author">
                                <Skeleton circle={true} height={30} width={30} />
-                               <Skeleton height={10} width={60} />
                            </div>
                            <div className="stats stats-right">
-                               <Skeleton height={20} width={60} />
+                               <Skeleton  width={100} />
                            </div>
                        </CardFooter>
                    </CardBody>
                </div>
            </div>
-
        </>
     )
 }

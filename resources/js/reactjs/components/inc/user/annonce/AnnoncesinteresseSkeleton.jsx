@@ -24,28 +24,25 @@ function AnnoncesinteresseSkeleton(props) {
                                  </div>
                              </div>
                              <div className="col-md-7">
-                                 <div className="card-header d-flex align-items-center">
-                                      <Skeleton width={60} />
+                                 <div className="text-left pull-left">
+                                     <Skeleton width={100} />
                                  </div>
-                                 <div className="row">
+                                 <div className="text-right ml-auto">
+                                     <h5 className="text-success"> <Skeleton width={100} /></h5>
+                                 </div>
 
+                                 <div className="text-left pull-left">
+                                     <Skeleton width={100} />
                                  </div>
+                                 <div className="text-right ml-auto">
+                                     <Skeleton width={60} /> <Skeleton width={60} />
+                                 </div>
+
                                  <h6 className="card-title">
                                      <Skeleton count={2}/>
                                  </h6>
 
-                                 <div className="card-header d-flex align-items-center">
-                                     <div className="d-flex align-items-center">
-
-                                         <Skeleton circle={false} height={20} width={50} />
-
-                                         <div className="mx-3">
-                                             <small className="d-block text-muted"> <Skeleton width={35} /></small>
-                                         </div>
-
-                                     </div>
-
-                                 </div>
+                                 <Skeleton circle={false} height={20} width={50} />
 
                              </div>
                          </div>
@@ -67,28 +64,25 @@ function AnnoncesinteresseSkeleton(props) {
                                  </div>
                              </div>
                              <div className="col-md-7">
-                                 <div className="card-header d-flex align-items-center">
-                                      <Skeleton width={60} />
+                                 <div className="text-left pull-left">
+                                     <Skeleton width={100} />
                                  </div>
-                                 <div className="row">
+                                 <div className="text-right ml-auto">
+                                     <h5 className="text-success"> <Skeleton width={100} /></h5>
+                                 </div>
 
+                                 <div className="text-left pull-left">
+                                     <Skeleton width={100} />
                                  </div>
+                                 <div className="text-right ml-auto">
+                                     <Skeleton width={60} /> <Skeleton width={60} />
+                                 </div>
+
                                  <h6 className="card-title">
                                      <Skeleton count={2}/>
                                  </h6>
 
-                                 <div className="card-header d-flex align-items-center">
-                                     <div className="d-flex align-items-center">
-
-                                         <Skeleton circle={false} height={20} width={50} />
-
-                                         <div className="mx-3">
-                                             <small className="d-block text-muted"> <Skeleton width={35} /></small>
-                                         </div>
-
-                                     </div>
-
-                                 </div>
+                                 <Skeleton circle={false} height={20} width={50} />
 
                              </div>
                          </div>
@@ -96,6 +90,7 @@ function AnnoncesinteresseSkeleton(props) {
                  </div>
              </div>
          </div>
+
      </>
     )
 }

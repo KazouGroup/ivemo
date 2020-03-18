@@ -23,6 +23,7 @@ class ProfileConfigUser extends Component {
         this.state = {
             facebook_link: '',
             twitter_link: '',
+            youtube_link: '',
             address: '',
             instagram_link: '',
             city_id: '',
@@ -84,6 +85,7 @@ class ProfileConfigUser extends Component {
         let item = {
             facebook_link: this.state.facebook_link,
             twitter_link: this.state.twitter_link,
+            youtube_link: this.state.youtube_link,
             instagram_link: this.state.instagram_link,
             city_id: this.state.city_id,
             address: this.state.address,
@@ -132,6 +134,7 @@ class ProfileConfigUser extends Component {
             this.setState({
                 facebook_link: response.data.facebook_link,
                 twitter_link: response.data.twitter_link,
+                youtube_link: response.data.youtube_link,
                 instagram_link: response.data.instagram_link,
                 city_id: response.data.city_id,
                 linkedin_link: response.data.linkedin_link,
@@ -202,7 +205,7 @@ class ProfileConfigUser extends Component {
                                                                 <i className="now-ui-icons tech_mobile"/>
                                                             </Button>
                                                             {this.state.site_internet && (
-                                                                <a href={`${this.state.site_internet}`} className="btn btn-sm btn-primary" target="_banck">
+                                                                <a href={`${this.state.site_internet}`} className="btn btn-sm btn-secondary" target="_banck">
                                                                     <i className="now-ui-icons objects_globe"/>
                                                                 </a>
                                                             )}
@@ -270,6 +273,7 @@ class ProfileConfigUser extends Component {
                                                                 <select value={this.state.birthdate || ''} className={`form-control ${this.hasErrorFor('birthdate') ? 'is-invalid' : ''}`}
                                                                         onChange={this.handleFieldChange} name="birthdate" required="required">
                                                                     <option value="" disabled>Année de naissance</option>
+                                                                    <option value="2021"> 2021</option>
                                                                     <option value="2020"> 2020</option>
                                                                     <option value="2019"> 2019</option>
                                                                     <option value="2018"> 2018</option>
@@ -443,7 +447,7 @@ class ProfileConfigUser extends Component {
                                                     </div>
 
                                                     <div className="row">
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-6">
                                                             <label htmlFor="url_site"><b>Linkedin</b></label>
                                                             <div className="input-group">
                                                                 <div
@@ -465,7 +469,7 @@ class ProfileConfigUser extends Component {
                                                                 {this.renderErrorFor('linkedin_link')}
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-4">
+                                                        <div className="col-md-6">
 
                                                             <label htmlFor="url_site"><b>Instagram</b></label>
                                                             <div className="input-group">
@@ -488,7 +492,11 @@ class ProfileConfigUser extends Component {
                                                                 {this.renderErrorFor('instagram_link')}
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-4">
+
+                                                    </div>
+
+                                                    <div className={`row`}>
+                                                        <div className="col-md-6">
 
                                                             <label htmlFor="title"><b>Facebook</b></label>
                                                             <div className="input-group">
@@ -511,6 +519,28 @@ class ProfileConfigUser extends Component {
                                                             </div>
                                                         </div>
 
+                                                        <div className="col-md-6">
+
+                                                            <label htmlFor="title"><b>Youtube</b></label>
+                                                            <div className="input-group">
+                                                                <div className="input-group-prepend">
+                                                                    <span className="input-group-text">
+                                                                         <i className="now-ui-icons objects_globe"/>
+                                                                    </span>
+                                                                </div>
+                                                                <input id='youtube_link'
+                                                                       type='text'
+                                                                       className={`form-control ${this.hasErrorFor('youtube_link') ? 'is-invalid' : ''}`}
+                                                                       name='youtube_link'
+                                                                       placeholder="Lien compte youtube"
+                                                                       aria-label="youtube_link"
+                                                                       autoComplete="youtube_link"
+                                                                       value={this.state.youtube_link || ''}
+                                                                       onChange={this.handleFieldChange}
+                                                                />
+                                                                {this.renderErrorFor('youtube_link')}
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                     <label htmlFor="url_site"><b>Description </b></label>
@@ -529,7 +559,7 @@ class ProfileConfigUser extends Component {
                                                     </FormGroup>
 
                                                     <div className="submit text-center">
-                                                        <button className="btn btn-primary btn-round" type="submit">
+                                                        <button className="btn btn-primary" type="submit">
                                                             <i className="now-ui-icons ui-1_check"/>
                                                             <b>Enregistrer</b>
                                                         </button>

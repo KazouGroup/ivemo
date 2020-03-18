@@ -207,7 +207,7 @@ class ProfileAccountChangePasswordUser extends Component {
                                                                 </div>
 
                                                                 <div className="submit text-center">
-                                                                    <button className="btn btn-primary btn-round"
+                                                                    <button className="btn btn-primary"
                                                                             type="submit">
                                                                         <i className="now-ui-icons ui-1_check"/>
                                                                         <b>Enregistrer</b>

@@ -20,6 +20,8 @@ class CreateProfilesTable extends Migration
             $table->string('instagram_link')->nullable();
             $table->string('site_internet')->nullable();
             $table->string('linkedin_link')->nullable();
+            $table->string('youtube_link')->nullable();
+            $table->boolean('status_avis')->default(true);
             $table->unsignedBigInteger('birthdate')->nullable();
             $table->string('address')->nullable();
             $table->string('full_name')->nullable();

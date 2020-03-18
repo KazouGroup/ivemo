@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class profile extends Model 
+class profile extends Model
 {
     //use AuditableTrait;
 
@@ -20,6 +20,10 @@ class profile extends Model
     {
         return 'slug';
     }
+
+    protected $casts = [
+        'status_avis' => 'boolean',
+    ];
 
     public function user()
     {

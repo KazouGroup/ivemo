@@ -12,6 +12,7 @@ import PublicUserBlogannonceventeList from "./inc/PublicUserBlogannonceventeList
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
 import Navlinknewblogannoncevente from "../../../blog/blognnoncevente/treatement/Navlinknewblogannoncevente";
 import Skeleton from "react-loading-skeleton";
+import BlogannoncePublicuserSkeleton from "../../../../inc/user/blog/BlogannoncePublicuserSkeleton";
 
 
 class PublicUserBlogannonceVente extends Component {
@@ -19,6 +20,7 @@ class PublicUserBlogannonceVente extends Component {
         super(props);
         this.state = {
             userblogventePublick:{blogannonceventes: []},
+            isLoading: false,
             visiable: 10,
         };
 
@@ -84,8 +86,9 @@ class PublicUserBlogannonceVente extends Component {
     }
 
     loadItems(){
+        this.setState({ isLoading: true });
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.profilpublique_blogannonceventes',[itemuser])).then(response => this.setState({userblogventePublick: response.data,}));
+        dyaxios.get(route('api.profilpublique_blogannonceventes',[itemuser])).then(response => this.setState({userblogventePublick: response.data,isLoading: false,}));
     }
 
     // lifecycle method
@@ -94,16 +97,15 @@ class PublicUserBlogannonceVente extends Component {
     }
 
     render() {
-        const {userblogventePublick,visiable} = this.state;
-        const mapBlogannonceventes = userblogventePublick.blogannonceventes.length ? (
+        const {userblogventePublick,visiable,isLoading} = this.state;
+        const mapBlogannonceventes = isLoading ? (
+            <BlogannoncePublicuserSkeleton/>
+        ):(
             userblogventePublick.blogannonceventes.slice(0,visiable).map(item => {
                 return(
-
                     <PublicUserBlogannonceventeList key={item.id} {...item} deleteItem={this.deleteItem}/>
                 )
             })
-        ):(
-            <></>
         );
         return (
             <>
