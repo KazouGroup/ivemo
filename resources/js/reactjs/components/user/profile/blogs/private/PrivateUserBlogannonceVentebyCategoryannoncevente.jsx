@@ -9,7 +9,7 @@ import BlogannonceventeList from "../../../blog/blognnoncevente/Blogannoncevente
 import Navblogannonceventesbyuser from "../../../blog/blognnoncevente/inc/Navblogannonceventesbyuser";
 
 
-class PrivateUserBlogannonceVente extends Component {
+class PrivateUserBlogannonceVentebyCategoryannoncevente extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -188,7 +188,8 @@ class PrivateUserBlogannonceVente extends Component {
 
     loadItems(){
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.blogannoncesventesbyuser_site',[itemuser])).then(response => this.setState({userblogannonceventesPrivate: response.data,}));
+        let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
+        dyaxios.get(route('api.blogannoncesventescategoryannonceventebyuser_site',[itemuser,itemCategoryannoncevente])).then(response => this.setState({userblogannonceventesPrivate: response.data,}));
     }
 
     // lifecycle method
@@ -251,7 +252,8 @@ class PrivateUserBlogannonceVente extends Component {
                                             </div>
                                         </div>
 
-                                        <NavlinkconfigurationUser {...userblogannonceventesPrivate} />
+                                        {/*<NavlinkconfigurationUser {...userblogannonceventesPrivate} />*/}
+
 
                                     </div>
 
@@ -291,4 +293,4 @@ class PrivateUserBlogannonceVente extends Component {
     }
 }
 
-export default PrivateUserBlogannonceVente;
+export default PrivateUserBlogannonceVentebyCategoryannoncevente;

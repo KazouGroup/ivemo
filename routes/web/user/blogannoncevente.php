@@ -46,9 +46,19 @@ Route::get(
 )->name('blogannoncesventesbyuser_site');
 
 Route::get(
+    'profile/{user}/personal_settings/blogs/annonce_ventes/{categoryannoncevente}',
+    'BlogannonceventeController@blogannoncesventescategoryannonceventebyuser'
+)->name('blogannoncesventescategoryannonceventebyuser_site');
+
+Route::get(
     'api/profile/{user}/personal_settings/blogs/annonce_ventes/',
     'BlogannonceventeController@apiblogannoncesventesbyuser'
 )->name('api.blogannoncesventesbyuser_site');
+
+Route::get(
+    'api/profile/{user}/personal_settings/blogs/annonce_ventes/{categoryannoncevente}',
+    'BlogannonceventeController@apiblogannoncesventescategoryannonceventebyuser'
+)->name('api.blogannoncesventescategoryannonceventebyuser_site');
 
 Route::get(
     'blogs/annonce_ventes_activated/{id}',

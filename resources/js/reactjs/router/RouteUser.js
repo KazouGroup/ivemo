@@ -77,6 +77,8 @@ import PersonalmessagesannoncesventesUser
     from "../components/user/profile/mail/contactusersvente/PersonalmessagesannoncesventesUser";
 import PersonalmessagesannoncesventesShowUser
     from "../components/user/profile/mail/contactusersvente/PersonalmessagesannoncesventesShowUser";
+import PrivateUserBlogannonceVentebyCategoryannoncevente
+    from "../components/user/profile/blogs/private/PrivateUserBlogannonceVentebyCategoryannoncevente";
 
 
 const RouteUser = props => (
@@ -150,6 +152,7 @@ const RouteUser = props => (
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_locations/" component={PrivateUserBlogannonceLocation}/>
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_reservations/" component={PrivateUserBlogannonceReservation}/>
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_ventes/" component={PrivateUserBlogannonceVente}/>
+          <Route exact path="/profile/:user/personal_settings/blogs/annonce_ventes/:categoryannoncevente/" component={withRouter(PrivateUserBlogannonceVentebyCategoryannoncevente)}/>
 
 
           <Route exact path="/blogs/annonce_reservations/" component={BlogannoncereservationIndex}/>

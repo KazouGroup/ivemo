@@ -11,6 +11,11 @@ Route::get(
 )->name('api.personal_mails_annonces_locations.site');
 
 Route::get(
+    'api/{user}/personal_mails/annonces_ventes_by_annonces',
+    'ContactuserslocationController@apipersonalmessagesannonces_by_locations'
+)->name('api.personal_mails_annonces_by_locations.site');
+
+Route::get(
     'api/{user}/personal_mails/annonces_locations/{contactuserslocation:slug}',
     'ContactuserslocationController@apipersonalmessagesannonces_locations_show'
 )->name('api.personal_mails_annonces_locations_show.site');
@@ -24,6 +29,11 @@ Route::get(
     'profile/{user}/personal_mails/annonces_locations/',
     'ContactuserslocationController@personalmessagesannonces_locations'
 )->name('personal_mails_annonces_locations.site');
+
+Route::get(
+    'profile/{user}/personal_mails/annonces_ventes_by_annonces/',
+    'ContactuserslocationController@personalmessagesannonces_by_locations'
+)->name('personal_mails_annonces_by_locations.site');
 
 Route::get(
     'profile/{user}/personal_mails/annonces_locations/{contactuserslocation:slug}',

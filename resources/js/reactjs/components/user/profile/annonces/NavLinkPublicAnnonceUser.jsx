@@ -18,9 +18,7 @@ class NavLinkPublicAnnonceUser extends PureComponent {
                                         Annones <b>locations</b>
                                     </NavLink>
                                 </td>
-                                {this.props.annoncelocations_count > 0 && (
-                                    <td className="text-right"> {this.props.annoncelocations_count} annonces</td>
-                                )}
+                                <td className="text-right"> {this.props.annoncelocations_count} {this.props.annoncelocations_count > 1 ? "annonces" : "annonce"}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -28,9 +26,7 @@ class NavLinkPublicAnnonceUser extends PureComponent {
                                         Annonces <b>reservations</b>
                                     </NavLink>
                                 </td>
-                                {this.props.annoncereservations_count > 0 && (
-                                    <td className="text-right"> {this.props.annoncereservations_count} annonces</td>
-                                )}
+                                <td className="text-right"> {this.props.annoncereservations_count} {this.props.annoncereservations_count > 1 ? "annonces" : "annonce"}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -38,9 +34,7 @@ class NavLinkPublicAnnonceUser extends PureComponent {
                                         Annonces <b>ventes</b>
                                     </NavLink>
                                 </td>
-                                {this.props.annonceventes_count > 0 && (
-                                    <td className="text-right"> {this.props.annonceventes_count} annonces</td>
-                                )}
+                                <td className="text-right"> {this.props.annonceventes_count} {this.props.annonceventes_count > 1 ? "annonces" : "annonce"}</td>
                             </tr>
                             </tbody>
                         </table>

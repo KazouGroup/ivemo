@@ -17,9 +17,7 @@ class NavLinkPublicBlogannoncesUser extends PureComponent {
                                         Articles sur les <b>locations</b>
                                     </NavLink>
                                 </td>
-                                {this.props.blogannoncelocations_count > 0 && (
-                                    <td className="text-right"> {this.props.blogannoncelocations_count} {this.props.blogannoncelocations_count > 1 ? "articles" : "article"}</td>
-                                )}
+                                <td className="text-right"> {this.props.blogannoncelocations_count} {this.props.blogannoncelocations_count > 1 ? "articles" : "article"}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -27,9 +25,7 @@ class NavLinkPublicBlogannoncesUser extends PureComponent {
                                         Articles sur les <b>reservations</b>
                                     </NavLink>
                                 </td>
-                                {this.props.blogannoncereservations_count > 0 && (
-                                    <td className="text-right"> {this.props.blogannoncereservations_count} {this.props.blogannoncereservations_count > 1 ? "articles" : "article"}</td>
-                                )}
+                                <td className="text-right"> {this.props.blogannoncereservations_count} {this.props.blogannoncereservations_count > 1 ? "articles" : "article"}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -37,9 +33,7 @@ class NavLinkPublicBlogannoncesUser extends PureComponent {
                                         Articles sur les <b>ventes</b>
                                     </NavLink>
                                 </td>
-                                {this.props.blogannonceventes_count > 0 && (
-                                    <td className="text-right"> {this.props.blogannonceventes_count} {this.props.blogannonceventes_count > 1 ? "articles" : "article"}</td>
-                                )}
+                                <td className="text-right"> {this.props.blogannonceventes_count} {this.props.blogannonceventes_count > 1 ? "articles" : "article"}</td>
                             </tr>
                             </tbody>
                         </table>

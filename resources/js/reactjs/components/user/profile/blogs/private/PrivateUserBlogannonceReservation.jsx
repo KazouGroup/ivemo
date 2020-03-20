@@ -6,7 +6,8 @@ import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../../../configurations/inc/NavlinkconfigurationUser";
 import BlogannoncereservationList from "../../../blog/blogannoncereservation/BlogannoncereservationList";
-import Navblogannoncelocationsbyuser from "../../../blog/blogannoncelocation/inc/Navblogannoncelocationsbyuser";
+import Navblogannoncereservationsbyuser
+    from "../../../blog/blogannoncereservation/inc/Navblogannoncereservationsbyuser";
 
 
 class PrivateUserBlogannonceReservation extends Component {
@@ -243,7 +244,7 @@ class PrivateUserBlogannonceReservation extends Component {
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                            <Navblogannoncelocationsbyuser/>
+                                                            <Navblogannoncereservationsbyuser/>
 
                                                         </div>
                                                     </div>

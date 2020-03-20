@@ -59,6 +59,19 @@ class ContactuserslocationController extends Controller
 
     }
 
+    public function apipersonalmessagesannonces_by_locations(user $user)
+    {
+        if (auth()->user()->id === $user->id){
+
+            $contactusers = ContactuserslocationService::apipersonalmessagesannonces_locations($user);
+
+            return response()->json($contactusers, 200);
+        }else{
+            abort(404);
+        }
+
+    }
+
     /**
      * Display a listing of the resource.
      *
