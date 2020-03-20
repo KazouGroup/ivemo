@@ -23,7 +23,7 @@ class HeadermailmessageUser extends Component {
 
             <tr>
                 <td>
-                    <div className="card-header d-flex align-items-center">
+                    <div key={this.props.id} className="card-header d-flex align-items-center">
                         <div className="text-left pull-left">
                             <a href={void(0)} onClick={() => this.props.readItem(this.props)} style={{cursor:"pointer"}}>
                                 <div className={`ml-auto mr-auto`}>
@@ -48,7 +48,7 @@ class HeadermailmessageUser extends Component {
 
                 </td>
                 <td className="text-right">
-                   
+
                 </td>
             </tr>
 

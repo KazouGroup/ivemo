@@ -4,14 +4,14 @@ import { Link, NavLink, withRouter } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet';
 import {Button, UncontrolledTooltip} from "reactstrap";
-import NavUserSite from "../../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
+import NavUserSite from "../../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import moment from "moment";
-import { Remarkable } from "remarkable";
-import FootermailmessageUser from "./inc/FootermailmessageUser";
-import NavNavigatePivateUser from "../NavNavigatePivateUser";
-import NavlinkmailmessageUserShow from "./inc/NavlinkmailmessageUserShow";
+import FootermailmessageUser from "../inc/FootermailmessageUser";
+import NavNavigatePivateUser from "../../NavNavigatePivateUser";
+import NavlinkmailmessageUserShow from "../inc/NavlinkmailmessageUserShow";
 import Skeleton from "react-loading-skeleton";
+import ReadMoreAndLess from "react-read-more-less";
 
 
 class PersonalmessagescontactShowUser extends Component {
@@ -47,7 +47,7 @@ class PersonalmessagescontactShowUser extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('personal_mails_delete.site',id);
+                const url = route('personal_contactusers_mails_delete.site',id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
@@ -92,11 +92,6 @@ class PersonalmessagescontactShowUser extends Component {
 
     }
 
-    getDescription(contactuser) {
-        const md = new Remarkable();
-        return { __html: md.render(contactuser.message) };
-    }
-
     render() {
         const {contactuser} = this.state;
         return (
@@ -138,8 +133,6 @@ class PersonalmessagescontactShowUser extends Component {
                                             </div>
                                         </div>
 
-                                        {/* Ici c'est la navigation dans toutes les pages dans le profile*/}
-                                        <NavNavigatePivateUser />
 
                                     </div>
 
@@ -151,7 +144,7 @@ class PersonalmessagescontactShowUser extends Component {
                                                     <div className="card-header d-flex align-items-center">
                                                         <div className="text-left pull-left">
                                                             <h5 className="ml-auto mr-auto">
-                                                                <b>{contactuser.subject || <Skeleton width={260} />} </b>
+                                                                <b>{contactuser.subject ||   <Skeleton width={260} />} </b>
                                                             </h5>
                                                             <small className="ml-auto mr-auto">
                                                             </small>
@@ -169,11 +162,18 @@ class PersonalmessagescontactShowUser extends Component {
                                                         </div>
                                                     </div>
 
-                                                    {contactuser.message ?
-                                                        <div className="title mb-2 text-justify" dangerouslySetInnerHTML={this.getDescription(contactuser)} />
-                                                        :
-                                                        <Skeleton count={2}/>
-                                                    }
+                                                    <div className="mb-2 text-justify">
+                                                        {contactuser.message ?
+                                                            <ReadMoreAndLess
+                                                            className="read-more-content"
+                                                            charLimit={250}
+                                                            readMoreText="(Plus)"
+                                                            readLessText=""
+                                                        >
+                                                            {contactuser.message}
+                                                        </ReadMoreAndLess>: <Skeleton count={2}/>}
+
+                                                    </div>
 
                                                     <hr />
                                                     <div className="media-footer">

@@ -24,10 +24,9 @@ class Annonceventebycategorycityshow extends Component {
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
         let itemcityannonce = this.props.match.params.city;
-        let itemdate = this.props.match.params.date;
         let itemannoncevente = this.props.match.params.annoncevente;
         /*Ici c'est pour recuperer les annonce par villes*/
-        let url = route('api.annonceventebycategoryannonceventeslug_site',[itemannoncetype,itemCategoryannoncevente,itemcityannonce,itemdate,itemannoncevente]);
+        let url = route('api.annonceventebycategoryannonceventeslug_site',[itemannoncetype,itemCategoryannoncevente,itemcityannonce,itemannoncevente]);
         dyaxios.get(url).then(response => this.setState({annoncevente: response.data,}));
     }
 
@@ -221,7 +220,7 @@ class Annonceventebycategorycityshow extends Component {
                                                             <hr />
                                                             <div className="card-header text-center">
                                                                 <div className="card-title">
-                                                                    Contacter <b>{annoncevente.user.first_name} </b>
+                                                                    Contacter <b>{annoncevente.user.first_name}</b> pour ce bien
                                                                 </div>
                                                             </div>
 

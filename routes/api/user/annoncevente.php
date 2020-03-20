@@ -22,7 +22,7 @@ Route::get(
 )->name('api.annonceventebycities_site');
 
 Route::get(
-    'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}/{date}/{annoncevente}',
+    'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}/{annoncevente}',
     'AnnonceventeController@apiannonceventebycategoryannonceventeslug'
 )->name('api.annonceventebycategoryannonceventeslug_site');
 

@@ -11,6 +11,7 @@ use App\Model\contactuser;
 use App\model\profile;
 use App\Model\reservation;
 use App\Model\user;
+use App\Services\HelpersService;
 use App\Services\ProfileService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -42,11 +43,7 @@ class ProfileController extends Controller
 
     public function api_user_account(user $user)
     {
-       $user = user::whereSlug($user->slug)
-            ->withCount(['contactusers' => function ($q){
-                $q->where('status_red',1);
-            }])
-            ->first();
+       $user = HelpersService::helperscontactuserscount($user)->first();
 
         return response()->json($user, 200);
 
@@ -110,45 +107,6 @@ class ProfileController extends Controller
 
     }
 
-    public function apipersonalmessagescontacts(user $user)
-    {
-
-        if (auth()->user()->id === $user->id){
-
-            $contactusers = user::whereSlug($user->slug)
-                ->with(['contactusers' => function ($q) use ($user){
-                    $q->whereIn('user_id',[$user->id])
-                        ->distinct()->get()->toArray()
-                    ;},
-                ])
-                ->withCount(['contactusers' => function ($q){
-                    $q->where('status_red',1);
-                }])
-                ->first();
-
-            return response()->json($contactusers, 200);
-        }else{
-            return redirect()->back();
-        }
-
-    }
-
-    public function apipersonalmessagescontactsshow(user $user,contactuser $contactuser)
-    {
-        $this->authorize('update',$contactuser);
-
-        $contactusers = contactuser::with('user')->whereSlug($contactuser->slug)->first();
-
-
-        return response()->json($contactusers, 200);
-    }
-
-    public function apipersonalmessagesannonces_locations_show($user,contactuser $contactuser)
-    {
-        $contactusers = ProfileService::apipersonalmessagesannonces_locations_show($contactuser);
-
-        return response()->json($contactusers, 200);
-    }
 
     public function api_user_profile_account($user)
     {
@@ -178,19 +136,6 @@ class ProfileController extends Controller
             }])->first();
 
         return response()->json($user, 200);
-    }
-
-    public function apipersonalmessagesannonces_locations(user $user)
-    {
-        if (auth()->user()->id === $user->id){
-
-            $contactusers = ProfileService::apipersonalmessagesannonces_locations($user);
-
-            return response()->json($contactusers, 200);
-        }else{
-            abort(404);
-        }
-
     }
 
     public function apipersonalmessagesannonces_reservations()
@@ -251,12 +196,6 @@ class ProfileController extends Controller
            ]);
     }
 
-    public function personalmessagesannonces_locations(user $user)
-    {
-         return view('user.profile.contactuser.personal_mailannonces_locations',[
-             'user' => auth()->user()
-             ]);
-    }
 
      public function personalmessagesannonces_locations_show(contactuser $contactuser)
     {
@@ -278,29 +217,6 @@ class ProfileController extends Controller
             return abort(404);
         }
 
-    }
-
-     public function personalmessagescontactsshow($user,contactuser $contactuser)
-    {
-        $this->authorize('update',$contactuser);
-
-         return view('user.profile.contactuser.personal_mailcontacts_show',[
-             'user' => auth()->user(),
-             'contactuser' => $contactuser
-             ]);
-    }
-
-
-    public function personalmessagescontactsactive($id)
-    {
-         $contactuser = contactuser::where('id', $id)->findOrFail($id);
-
-        $this->authorize('update',$contactuser);
-
-         if(auth()->user()->id === $contactuser->user_id){
-          $contactuser->update([ 'status_red' => 0,]);
-          return response('read confirmed',Response::HTTP_ACCEPTED);
-         }
     }
 
     public function api_profile_add_info_account(profile $profile)
@@ -458,18 +374,5 @@ class ProfileController extends Controller
     {
         //
     }
-
-    public function personalmessagesdelete(contactuser $contactuser,$id)
-     {
-         $contactuser = contactuser::findOrFail($id);
-         $this->authorize('update',$contactuser);
-         if (auth()->user()->id === $contactuser->user_id){
-             $contactuser->delete();
-             return ['message' => 'message deleted '];
-         }else{
-          abort(404);
-         }
-
-     }
 }
 

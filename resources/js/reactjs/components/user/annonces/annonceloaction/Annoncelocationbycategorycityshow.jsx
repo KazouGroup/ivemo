@@ -131,9 +131,8 @@ class Annoncelocationbycategorycityshow extends Component {
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let itemCity = this.props.match.params.city;
-        let itemdate = this.props.match.params.date;
         let itemannoncelocation = this.props.match.params.annoncelocation;
-        let url = route('api.annoncelocationbycategoryannoncelocationslug_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemdate,itemannoncelocation]);
+        let url = route('api.annoncelocationbycategoryannoncelocationslug_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemannoncelocation]);
         dyaxios.get(url).then(response => this.setState({annoncelocation: response.data,}));
     }
 
@@ -213,15 +212,9 @@ class Annoncelocationbycategorycityshow extends Component {
                                                     }
                                                 </div>
 
-                                                {annoncelocation.pieces ?
-                                                    <div className="text-center ml-auto">
-                                                        <h6 className="text-dark">{annoncelocation.pieces} p . {annoncelocation.rooms && (<>{annoncelocation.rooms} ch</>)}. {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
-                                                    </div>
-                                                    :
-                                                    <div className="text-center ml-auto">
-                                                        <h6 className="text-dark"><Skeleton width={150} /></h6>
-                                                    </div>
-                                                }
+                                                <div className="text-center ml-auto">
+                                                    <h6 className="text-dark">{annoncelocation.pieces} p . {annoncelocation.rooms && (<>{annoncelocation.rooms} ch</>)}. {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
+                                                </div>
 
 
                                                 {/*
@@ -352,7 +345,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                             <hr />
                                                             <div className="card-header text-center">
                                                                 <div className="card-title">
-                                                                    Contacter <b>{annoncelocation.user.first_name} </b>
+                                                                    Contacter <b>{annoncelocation.user.first_name}</b> pour ce bien
                                                                 </div>
                                                             </div>
 

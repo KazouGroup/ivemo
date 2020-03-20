@@ -179,9 +179,9 @@ class BlogannoncelocationShow extends Component {
                                                                             {blogannoncelocation.photo ?
                                                                                 <img className="d-block"
                                                                                      src={blogannoncelocation.photo}
-                                                                                     style={{ width: "1400px", height: "400px", borderRadius: "2px" }}
+                                                                                     style={{ width: "1400px", height: "600px", borderRadius: "2px" }}
                                                                                      alt={blogannoncelocation.title} />
-                                                                                     :<Skeleton circle={false} height={400} width={1040} />}
+                                                                                     :<Skeleton circle={false} height={600} width={1400} />}
 
                                                                         </div>
 

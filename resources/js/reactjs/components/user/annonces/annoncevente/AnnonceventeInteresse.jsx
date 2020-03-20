@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import moment from 'moment'
 import { Button,Row } from "reactstrap";
-import { Remarkable } from "remarkable";
 import AnnonceventeInteresseList from "./inc/AnnonceventeInteresseList";
 import AnnoncesinteresseSkeleton from "../../../inc/user/annonce/AnnoncesinteresseSkeleton";
 
@@ -14,6 +13,7 @@ class AnnonceventeInteresse extends Component {
         super(props);
         this.state = {
             annonceventesinteresses: [],
+            isLoading: false,
             visiable: 2,
         };
         this.loadmoresItem = this.loadmoresItem.bind(this);
@@ -26,17 +26,28 @@ class AnnonceventeInteresse extends Component {
     }
 
     componentDidMount() {
+        this.setState({ isLoading: true });
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
         let itemCityannonce = this.props.match.params.city;
         dyaxios.get(route('api.annonceventeinteresse_site', [itemannoncetype, itemCategoryannoncevente, itemCityannonce])).then(response =>
             this.setState({
                 annonceventesinteresses: [...response.data],
+                isLoading: false,
             }));
     }
 
     render() {
-        const { annonceventesinteresses,visiable } = this.state;
+        const { annonceventesinteresses,visiable,isLoading } = this.state;
+        const mapAnnonceventesinteresses = isLoading ? (
+            <AnnoncesinteresseSkeleton/>
+        ):(
+            annonceventesinteresses.slice(0,visiable).map(item => {
+                return(
+                    <AnnonceventeInteresseList key={item.id} {...item}/>
+                )
+            })
+        );
         return (
             <>
 
@@ -49,14 +60,7 @@ class AnnonceventeInteresse extends Component {
 
                 <Row>
 
-                    {annonceventesinteresses.length ?
-                        <>
-                            {annonceventesinteresses.slice(0,visiable).map((item) => (
-
-                                <AnnonceventeInteresseList key={item.id} {...item}/>
-
-                            ))}
-                        </>:<AnnoncesinteresseSkeleton/>}
+                    {mapAnnonceventesinteresses}
 
                 </Row>
 

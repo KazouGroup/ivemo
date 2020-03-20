@@ -128,7 +128,7 @@ class BlogannonceventeService
                 mkdir($dir, 0775, true);
             }
             $destinationPath = public_path("assets/img/blogannonceresevente/{$name}");
-            Image::make($request->photo)->save($destinationPath);
+            Image::make($request->photo)->fit(1400,650)->save($destinationPath);
 
             $myfilename = "/assets/img/blogannonceresevente/{$name}";
             $blogannonceresevente->photo = $myfilename;
@@ -146,7 +146,7 @@ class BlogannonceventeService
                 ($request->photo,';')))[1])[1];
             $dir = 'assets/img/blogannonceresevente/';
             if(!file_exists($dir)){mkdir($dir, 0775, true);}
-            Image::make($request->photo)->save(public_path('assets/img/blogannonceresevente/').$name);
+            Image::make($request->photo)->fit(1400,650)->save(public_path('assets/img/blogannonceresevente/').$name);
             $request->merge(['photo' =>  "/assets/img/blogannonceresevente/{$name}"]);
             $oldFilename = $currentPhoto;
             File::delete(public_path($oldFilename));

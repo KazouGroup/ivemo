@@ -79,8 +79,3 @@ Route::get(
 Route::put('profile/change_password/update_password',
     'ProfileController@updatePassword'
 )->name('update_password.site');
-
-Route::delete(
-    'profile/personal_mails/delete_mail/{id}',
-    'ProfileController@personalmessagesdelete'
-)->name('personal_mails_delete.site');

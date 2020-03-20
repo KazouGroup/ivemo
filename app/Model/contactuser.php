@@ -16,11 +16,6 @@ class contactuser extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
-    public function annoncelocation()
-    {
-        return $this->belongsTo(annoncelocation::class,'annoncelocation_id');
-    }
-
     protected static function boot()
     {
         parent::boot();
@@ -28,16 +23,6 @@ class contactuser extends Model
         static::creating(function ($model){
             $model->ip = request()->ip();
         });
-    }
-
-    public function annoncereservation()
-    {
-        return $this->belongsTo(annoncereservation::class,'annoncereservation_id');
-    }
-
-    public function annoncevente()
-    {
-        return $this->belongsTo(User::class,'annoncevente_id');
     }
 
     public function getRouteKeyName()

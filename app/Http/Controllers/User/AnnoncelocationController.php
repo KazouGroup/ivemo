@@ -15,7 +15,6 @@ use App\Model\city;
 use App\Model\contactuser;
 use App\Model\user;
 use App\Services\AnnoncelocationService;
-use App\Services\ContactuserService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -62,7 +61,7 @@ class AnnoncelocationController extends Controller
         ]);
     }
 
-    public function annoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$date,annoncelocation $annoncelocation)
+    public function annoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,annoncelocation $annoncelocation)
     {
         return view('user.annoncelocation.annonces_show',[
             'annoncelocation' => $annoncelocation,
@@ -201,9 +200,9 @@ class AnnoncelocationController extends Controller
     }
 
 
-    public function apiannoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$date,$annoncelocation)
+    public function apiannoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$annoncelocation)
     {
-        $annoncelocation = AnnoncelocationService::apiannoncelocationbycategoryannoncelocationslug($annoncetype,$categoryannoncelocation,$city,$date,$annoncelocation);
+        $annoncelocation = AnnoncelocationService::apiannoncelocationbycategoryannoncelocationslug($annoncetype,$categoryannoncelocation,$city,$annoncelocation);
 
         return response()->json($annoncelocation, 200);
     }
@@ -235,24 +234,6 @@ class AnnoncelocationController extends Controller
         return response()->json($annoncelocation, 200);
     }
 
-
-    public function sendcontactmessageuser(StorecontactRequest $request, annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$date,annoncelocation $annoncelocation)
-    {
-
-        $contactuser = new contactuser();
-
-        $slug = sha1(('YmdHis') . str_random(30));
-        $contactuser->fill($request->all());
-        $contactuser->slug = $slug;
-        $contactuser->user_id = $annoncelocation->user->id;
-        $contactuser->annoncelocation_id = $annoncelocation->id;
-
-        ContactuserService::newEmailToannoncelocationpageShow($request,$annoncelocation);
-
-        $contactuser->save();
-
-        return response()->json($contactuser,200);
-    }
 
     /**
      * Show the form for creating a new resource.

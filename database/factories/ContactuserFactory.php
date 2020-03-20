@@ -17,11 +17,8 @@ $factory->define(contactuser::class, function (Faker $faker) {
         'email' => $faker->freeEmail,
         'status_red' => $faker->boolean,
         'subject' => $faker->text(50),
-        'message' => $faker->paragraph,
+        'message' => $faker->realText(rand(1000, 4000)),
         'user_id' => user::inRandomOrder()->first()->id,
-        'annoncereservation_id' => annoncereservation::inRandomOrder()->first()->id,
-        'annoncelocation_id' => annoncelocation::inRandomOrder()->first()->id,
-        'annoncevente_id' => annoncevente::inRandomOrder()->first()->id,
         //'created_at' => $faker->dateTime,
     ];
 });

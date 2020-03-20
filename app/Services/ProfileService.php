@@ -16,30 +16,6 @@ use Illuminate\Support\Facades\Auth;
 class ProfileService
 {
 
-    public static function apipersonalmessagesannonces_locations($user)
-    {
-        $contactusers = user::whereSlug($user->slug)
-            ->with(['contactusers' => function ($q) use ($user){
-                $q->whereIn('user_id',[auth()->user()->id])
-                    ->with('annoncelocation','user')
-                    ->orderBy('created_at','DESC')
-                    ->with([
-                        'annoncelocation.categoryannoncelocation' => function ($q){
-                            $q->select('id','name','slug','user_id');},
-                        'annoncelocation.city' => function ($q){
-                            $q->select('id','name','slug','user_id');},
-                        'annoncelocation.annoncetype' => function ($q){
-                            $q->select('id','name','slug');},
-                        'annoncelocation.user' => function ($q){
-                            $q->distinct()->get();}
-                    ])->whereHas('annoncelocation', function ($q) {
-                        $q->whereIn('user_id',[auth()->user()->id]);
-                    })->distinct()->get()->toArray();},
-            ])->first();
-
-        return $contactusers;
-    }
-
 
     public static function newEmailConfirmationreservation($reservation,$user)
     {
@@ -71,20 +47,6 @@ class ProfileService
                     $q->distinct()->get();}
             ])->whereHas('annoncereservation', function ($q) {
                 $q->whereIn('user_id',[auth()->user()->id]);})->distinct()->get()->toArray();
-
-        return $contactusers;
-    }
-
-    public static function apipersonalmessagesannonces_locations_show($contactuser)
-    {
-        $contactusers = contactuser::with('user','annoncelocation')->with([
-                'annoncelocation.categoryannoncelocation' => function ($q){
-                    $q->select('id','name','slug','user_id');},
-                'annoncelocation.city' => function ($q){
-                    $q->select('id','name','slug','user_id');},
-                'annoncelocation.annoncetype' => function ($q){
-                    $q->select('id','name','slug');},
-            ])->whereSlug($contactuser->slug)->first();;
 
         return $contactusers;
     }

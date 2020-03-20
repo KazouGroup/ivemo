@@ -173,9 +173,9 @@ class BlogannonceventeShow extends Component {
                                                                         {blogannoncevente.photo ?
                                                                             <img className="d-block"
                                                                                  src={blogannoncevente.photo}
-                                                                                 style={{ width: "1400px", height: "400px",borderRadius: "5px" }}
+                                                                                 style={{ width: "1400px", height: "600px",borderRadius: "5px" }}
                                                                                  alt={blogannoncevente.title} />
-                                                                            : <Skeleton height={400} width={1040} />}
+                                                                            : <Skeleton height={600} width={1400} />}
                                                                     </Zoom>
 
                                                                 </div>

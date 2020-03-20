@@ -31,14 +31,9 @@ Route::get(
 )->name('annoncelocationbycities_site');
 
 Route::get(
-    'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}/{date}/{annoncelocation}',
+    'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}/{annoncelocation}',
     'AnnoncelocationController@annoncelocationbycategoryannoncelocationslug'
 )->name('annoncelocationbycategoryannoncereservationslug_site');
-
-Route::post(
-    'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}/{date}/{annoncelocation}/send_contact_message_user',
-    'AnnoncelocationController@sendcontactmessageuser'
-)->name('annoncelocationsendcontactmessageuser_site');
 
 Route::get(
     'annonces_locations_active/{id}',

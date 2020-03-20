@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet';
 import { Button } from "reactstrap";
-import NavUserSite from "../../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-import NavlinkmailmessageUser from "./inc/NavlinkmailmessageUser";
-import HeadermailmessageUser from "./inc/HeadermailmessageUser";
+import NavUserSite from "../../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
+import NavlinkmailmessageUser from "../inc/NavlinkmailmessageUser";
+import HeadermailmessageUser from "../inc/HeadermailmessageUser";
 import { NavLink } from "react-router-dom";
-import NavNavigatePivateUser from "../NavNavigatePivateUser";
+import NavNavigatePivateUser from "../../NavNavigatePivateUser";
+import MailListSkeleton from "../../../../inc/user/mail/MailListSkeleton";
 
 
 class PersonalmessagescontactUser extends Component {
@@ -16,6 +17,7 @@ class PersonalmessagescontactUser extends Component {
         super(props);
         this.state = {
             contactusersprofile: {contactusers:[]},
+            isLoading: false,
             visiable: 10,
         };
         this.deleteItem = this.deleteItem.bind(this);
@@ -31,12 +33,13 @@ class PersonalmessagescontactUser extends Component {
 
 
     loadItems() {
+        this.setState({ isLoading: true });
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.personal_mails_contacts.site', [itemuser])).then(response => this.setState({ contactusersprofile: response.data, }));
+        dyaxios.get(route('api.personal_mails_contacts.site', [itemuser])).then(response => this.setState({ contactusersprofile: response.data,isLoading: false, }));
     }
     readItem(item) {
 
-        const url = route('personal_mails_contacts_active.site', [item.id]);
+        const url = route('personal_contactusers_mails_active.site', [item.id]);
         dyaxios.get(url).then(() => {
             this.props.history.push(`/profile/${$userIvemo.slug}/personal_mails/contacts/${item.slug}/`);
         })
@@ -58,7 +61,7 @@ class PersonalmessagescontactUser extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('personal_mails_delete.site', id);
+                const url = route('personal_contactusers_mails_delete.site', id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
@@ -103,7 +106,7 @@ class PersonalmessagescontactUser extends Component {
 
 
     render() {
-        const { contactusersprofile, visiable } = this.state;
+        const { contactusersprofile, visiable,isLoading } = this.state;
         const mapContactusers = contactusersprofile.contactusers.length ? (
             contactusersprofile.contactusers.slice(0, visiable).map(item => {
                 return (
@@ -112,9 +115,8 @@ class PersonalmessagescontactUser extends Component {
                 )
             })
         ) : (
-                <></>
-            );
-
+            <></>
+        );
 
         return (
 
@@ -156,9 +158,6 @@ class PersonalmessagescontactUser extends Component {
                                             </div>
                                         </div>
 
-                                        {/* Ici c'est la navigation dans toutes les pages dans le profile*/}
-                                        <NavNavigatePivateUser />
-
                                     </div>
 
 
@@ -180,9 +179,8 @@ class PersonalmessagescontactUser extends Component {
                                         {visiable < contactusersprofile.contactusers.length && (
                                             <div className="row">
                                                 <div className="col-md-4 ml-auto mr-auto text-center">
-                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-secondary btn-block">
+                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
                                                         <b>Voir plus </b>
-                                                        <i className="now-ui-icons arrows-1_minimal-down" />
                                                     </button>
                                                 </div>
                                             </div>
