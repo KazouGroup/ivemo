@@ -16,7 +16,7 @@ class ContactuserService
         $contactusers = HelpersService::helperscontactuserscount($user)
             ->with(['contactusers' => function ($q) use ($user){
                 $q->whereIn('user_id',[$user->id])
-                    ->distinct()->get()->toArray()
+                    ->latest()->distinct()->get()->toArray()
                 ;},
             ])
             ->first();

@@ -49,7 +49,7 @@ class BlogannoncelocationService
 
     public static function apiblogannonceslocationsbyuser($user)
     {
-        $blogannoncelocations = user::whereSlug($user->slug)
+        $blogannoncelocations = HelpersService::helpersannonblogceteambyusercount($user)
             ->with(['blogannoncelocations' => function ($q) use ($user){
                 $q->with('user','categoryannoncelocation')
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
@@ -57,24 +57,23 @@ class BlogannoncelocationService
                     ->orderBy('created_at','DESC')
                     ->distinct()->get()->toArray()
                 ;},
-            ])->withCount(['subscriberusers' => function ($q){
-                $q->whereIn('user_id',[auth()->user()->id]);
-            }])
-            ->withCount(['teamusers' => function ($q) use ($user){
-                $q->whereIn('user_id',[$user->id]);
-            }])->withCount(['annoncelocations' => function ($q) use ($user){
-                $q->whereIn('user_id',[$user->id]);
-            }])->withCount(['annoncereservations' => function ($q) use ($user){
-                $q ->whereIn('user_id',[$user->id]);
-            }])->withCount(['annonceventes' => function ($q) use ($user){
-                $q ->whereIn('user_id',[$user->id]);
-            }])->withCount(['blogannoncelocations' => function ($q) use ($user){
-                $q->whereIn('user_id',[$user->id]);
-            }])->withCount(['blogannoncereservations' => function ($q) use ($user){
-                $q->whereIn('user_id',[$user->id]);
-            }])->withCount(['blogannonceventes' => function ($q) use ($user){
-                $q->whereIn('user_id',[$user->id]);
-            }])->first();
+            ])->first();
+
+        return $blogannoncelocations;
+    }
+
+    public static function apiblogannonceslocationscategoryannoncelocationbyuser($user,$categoryannoncelocation)
+    {
+        $blogannoncelocations = HelpersService::helpersannonblogceteambyusercount($user)
+            ->with(['blogannoncelocations' => function ($q) use ($user,$categoryannoncelocation){
+                $q->with('user','categoryannoncelocation')
+                    ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[$user->id])
+                    ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
+                    ->orderBy('created_at','DESC')
+                    ->distinct()->get()->toArray()
+                ;},
+            ])->first();
 
         return $blogannoncelocations;
     }

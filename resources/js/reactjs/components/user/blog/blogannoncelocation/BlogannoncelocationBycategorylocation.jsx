@@ -158,7 +158,6 @@ class BlogannoncelocationBycategorylocation extends Component {
 
                 <div className="about-us sidebar-collapse">
 
-
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="500">
                         <NavUserSite />
                     </nav>

@@ -7,9 +7,6 @@ import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import NavlinkmailmessageUser from "../inc/NavlinkmailmessageUser";
 import HeadermailmessageUser from "../inc/HeadermailmessageUser";
-import { NavLink } from "react-router-dom";
-import NavNavigatePivateUser from "../../NavNavigatePivateUser";
-import MailListSkeleton from "../../../../inc/user/mail/MailListSkeleton";
 
 
 class PersonalmessagescontactUser extends Component {
@@ -18,7 +15,7 @@ class PersonalmessagescontactUser extends Component {
         this.state = {
             contactusersprofile: {contactusers:[]},
             isLoading: false,
-            visiable: 10,
+            visiable: 20,
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.readItem = this.readItem.bind(this);
@@ -27,7 +24,7 @@ class PersonalmessagescontactUser extends Component {
 
     loadmoresItem() {
         this.setState((old) => {
-            return { visiable: old.visiable + 10 }
+            return { visiable: old.visiable + 20 }
         })
     }
 
@@ -106,7 +103,7 @@ class PersonalmessagescontactUser extends Component {
 
 
     render() {
-        const { contactusersprofile, visiable,isLoading } = this.state;
+        const { contactusersprofile, visiable } = this.state;
         const mapContactusers = contactusersprofile.contactusers.length ? (
             contactusersprofile.contactusers.slice(0, visiable).map(item => {
                 return (

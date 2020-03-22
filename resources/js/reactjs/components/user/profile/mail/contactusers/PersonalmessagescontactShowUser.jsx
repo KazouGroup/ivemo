@@ -8,7 +8,6 @@ import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import moment from "moment";
 import FootermailmessageUser from "../inc/FootermailmessageUser";
-import NavNavigatePivateUser from "../../NavNavigatePivateUser";
 import NavlinkmailmessageUserShow from "../inc/NavlinkmailmessageUserShow";
 import Skeleton from "react-loading-skeleton";
 import ReadMoreAndLess from "react-read-more-less";
@@ -88,6 +87,7 @@ class PersonalmessagescontactShowUser extends Component {
 
     // lifecycle method
     componentDidMount() {
+        window.scrollTo(0, 0)
         this.loadItem();
 
     }

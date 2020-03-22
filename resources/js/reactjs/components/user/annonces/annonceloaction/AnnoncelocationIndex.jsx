@@ -145,6 +145,7 @@ class AnnoncelocationIndex extends Component {
 
     // lifecycle method
     componentDidMount() {
+        window.scrollTo(0, 0)
         this.loadItems();
     }
 

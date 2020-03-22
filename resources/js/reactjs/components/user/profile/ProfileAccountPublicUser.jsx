@@ -106,15 +106,15 @@ class ProfileAccountPublicUser extends Component {
                                         <div className="pull-right">
                                             {userPublick.profile.site_internet && (
                                                 <a href={`${userPublick.profile.site_internet}`} className="btn btn-sm btn-secondary" target="_banck">
-                                                    <i className="now-ui-icons business_globe"/>
+                                                    <i className="now-ui-icons business_globe"/> Site internet
                                                 </a>
                                             )}
 
                                             <Button className="btn btn-sm btn-primary" rel="tooltip" title="3426712192" data-placement="bottom">
-                                                <i className="now-ui-icons tech_mobile"/>
+                                                <i className="now-ui-icons tech_mobile"/> 
                                             </Button>
-                                            <a href="https://www.kazoutech.com" className="btn btn-sm btn-success" target="_banck">
-                                                <i className="now-ui-icons ui-2_chat-round"/>
+                                            <a href="#contact" className="btn btn-sm btn-success">
+                                                <i className="now-ui-icons ui-2_chat-round"/> Contacter
                                             </a>
 
                                             {!$guest && (
@@ -242,7 +242,7 @@ class ProfileAccountPublicUser extends Component {
                                         {!userPublick.profile.status_avis ? <></> :<ProfileAccountAvisUser {...this.props}/>}
 
 
-                                        <div className="card">
+                                        <div className="card"  id="contact">
                                             <div className="card-body">
 
                                                 <div className="card-header text-center">

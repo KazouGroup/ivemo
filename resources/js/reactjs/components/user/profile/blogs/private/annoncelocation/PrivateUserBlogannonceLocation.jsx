@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import NavUserSite from "../../../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
+import NavUserSite from "../../../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
-import NavlinkconfigurationUser from "../../../configurations/inc/NavlinkconfigurationUser";
-import BlogannoncelocationList from "../../../blog/blogannoncelocation/BlogannoncelocationList";
-import Navblogannoncelocationsbyuser from "../../../blog/blogannoncelocation/inc/Navblogannoncelocationsbyuser";
+import NavlinkconfigurationUser from "../../../../configurations/inc/NavlinkconfigurationUser";
+import BlogannoncelocationList from "../../../../blog/blogannoncelocation/BlogannoncelocationList";
+import Navblogannoncelocationsbyuser from "../../../../blog/blogannoncelocation/inc/Navblogannoncelocationsbyuser";
 
 
 class PrivateUserBlogannonceLocation extends Component {
@@ -14,7 +14,7 @@ class PrivateUserBlogannonceLocation extends Component {
         super(props);
         this.state = {
             userblogannoncelocationsPrivate:{blogannoncelocations:[]},
-            visiable: 10,
+            visiable: 20,
 
         };
 
@@ -26,7 +26,7 @@ class PrivateUserBlogannonceLocation extends Component {
 
     loadmoresItem(){
         this.setState((old) =>{
-            return {visiable: old.visiable + 10}
+            return {visiable: old.visiable + 20}
         })
     }
     activeItem(id){

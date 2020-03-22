@@ -36,7 +36,7 @@ class Navblogannoncelocationsbyuser extends Component {
                 return (
                     <tr key={item.id}>
                         <td>
-                            <NavLink to={`/blogs/annonce_locations/${item.slug}/`}>
+                            <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_locations/${item.slug}/`}>
                                 <strong>{item.name}</strong>
                             </NavLink>
                         </td>

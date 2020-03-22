@@ -22,7 +22,7 @@ class PublicUserBlogannonceReservation extends Component {
         this.state = {
             userblogreservationPublick: { blogannoncereservations: [] },
             isLoading: false,
-            visiable: 10,
+            visiable: 20,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -30,7 +30,7 @@ class PublicUserBlogannonceReservation extends Component {
     }
     loadmoresItem() {
         this.setState((old) => {
-            return { visiable: old.visiable + 10 }
+            return { visiable: old.visiable + 20 }
         })
     }
     deleteItem(id) {

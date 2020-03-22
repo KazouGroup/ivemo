@@ -8,6 +8,7 @@ import 'animate.css/animate.css';
 import {createStore} from "redux";
 import {Provider} from "react-redux";
 import rootReducers from "./reducers/rootReducers";
+import ScrollToTop from "./components/inc/user/ScrollToTop";
 
 const store = createStore(rootReducers);
 
@@ -16,6 +17,7 @@ class Index extends Component {
     render() {
         return (
             <BrowserRouter>
+                <ScrollToTop/>
                 <Route component={RouteUser} />
             </BrowserRouter>
         );

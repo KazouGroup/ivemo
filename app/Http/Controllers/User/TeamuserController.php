@@ -37,6 +37,8 @@ class TeamuserController extends Controller
 
     public function apiteamuserprivate(user $user)
     {
+        $this->authorize('update', $user);
+
         $teamusers = TeamuserService::apiteamuserprivate($user);
 
         return response()->json($teamusers, 200);

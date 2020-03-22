@@ -44,6 +44,31 @@ class ContactusersventeService
         return $contactusers;
     }
 
+    public static function apipersonalmailsannoncesventesbyannonce($user)
+    {
+        $contactusers = HelpersService::helperscontactuserscount($user)
+            ->with(['annonceventes' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id])
+                    ->withCount(['contactusersventes' => function ($q) use ($user){
+                        $q->whereIn('user_id',[$user->id])
+                            ->with('annoncevente','user')
+                            ->whereHas('annoncevente', function ($q) use ($user) {
+                                $q->whereIn('user_id',[$user->id]);
+                            });},
+                    ])->with(['contactusersventes' => function ($q) use ($user){
+                        $q->whereIn('user_id',[$user->id])
+                            ->with('annoncevente','user')
+                            ->whereHas('annoncevente', function ($q) use ($user) {
+                                $q->whereIn('user_id',[$user->id]);
+                            });},
+                    ])->orderBy('contactusersventes_count','desc')
+                    ->distinct()->get()->toArray();},
+            ])->first();
+
+
+        return $contactusers;
+    }
+
 
     public static function apipersonalmessagesannonces_show($user,$contactusersvente)
     {

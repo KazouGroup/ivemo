@@ -9,10 +9,8 @@ import moment from "moment";
 import FootermailmessageUser from "../inc/FootermailmessageUser";
 import Swal from "sweetalert2";
 import NavlinkmailmessageUserShow from "../inc/NavlinkmailmessageUserShow";
-import NavNavigatePivateUser from "../../NavNavigatePivateUser";
 import ReadMoreAndLess from "react-read-more-less";
 import Skeleton from "react-loading-skeleton";
-import AnnonceslocationList from "../../../annonces/annonceloaction/inc/AnnonceslocationList";
 
 
 class PersonalmessagesannonceslocationsShowUser extends Component {
@@ -90,6 +88,7 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
 
     // lifecycle method
     componentDidMount() {
+        window.scrollTo(0, 0)
         this.loadItem();
 
     }

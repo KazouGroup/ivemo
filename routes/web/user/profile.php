@@ -15,7 +15,6 @@ Route::get(
     'ProfileController@api_profile_add_info_account'
 )->name('api_profile_add_info_account.site');
 
-
 Route::get(
     'profile/account',
     'ProfileController@profile_account'

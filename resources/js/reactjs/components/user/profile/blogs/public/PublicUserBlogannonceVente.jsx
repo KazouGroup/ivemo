@@ -21,7 +21,7 @@ class PublicUserBlogannonceVente extends Component {
         this.state = {
             userblogventePublick:{blogannonceventes: []},
             isLoading: false,
-            visiable: 10,
+            visiable: 20,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -29,7 +29,7 @@ class PublicUserBlogannonceVente extends Component {
     }
     loadmoresItem(){
         this.setState((old) =>{
-            return {visiable: old.visiable + 10}
+            return {visiable: old.visiable + 20}
         })
     }
     deleteItem(id) {

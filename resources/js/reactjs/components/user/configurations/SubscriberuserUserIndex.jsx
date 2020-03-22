@@ -5,7 +5,6 @@ import { Helmet } from 'react-helmet';
 import {Button, UncontrolledTooltip, Tooltip, FormText} from "reactstrap";
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
-import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "./inc/NavlinkconfigurationUser";
 import moment from "moment";
 
@@ -15,14 +14,14 @@ class SubscriberuserUserIndex extends Component {
         super(props);
         this.state = {
             userItems:{subscriberusers:[]},
-            visiable: 10,
+            visiable: 20,
         };
 
         this.loadmoresItem = this.loadmoresItem.bind(this);
     }
     loadmoresItem(){
         this.setState((old) =>{
-            return {visiable: old.visiable + 10}
+            return {visiable: old.visiable + 20}
         })
     }
 

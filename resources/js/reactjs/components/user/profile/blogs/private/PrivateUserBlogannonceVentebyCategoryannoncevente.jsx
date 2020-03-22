@@ -14,7 +14,7 @@ class PrivateUserBlogannonceVentebyCategoryannoncevente extends Component {
         super(props);
         this.state = {
             userblogannonceventesPrivate:{blogannonceventes:[]},
-            visiable: 10,
+            visiable: 20,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -25,7 +25,7 @@ class PrivateUserBlogannonceVentebyCategoryannoncevente extends Component {
 
     loadmoresItem(){
         this.setState((old) =>{
-            return {visiable: old.visiable + 10}
+            return {visiable: old.visiable + 20}
         })
     }
 

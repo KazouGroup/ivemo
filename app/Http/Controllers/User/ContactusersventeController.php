@@ -57,6 +57,19 @@ class ContactusersventeController extends Controller
 
     }
 
+    public function apipersonalmailsannoncesventesbyannonce(user $user)
+    {
+        if (auth()->user()->id === $user->id){
+
+            $contactusersventes = ContactusersventeService::apipersonalmailsannoncesventesbyannonce($user);
+
+            return response()->json($contactusersventes, 200);
+        }else{
+            abort(404);
+        }
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *

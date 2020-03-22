@@ -5,13 +5,10 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StoreRequest;
 use App\Http\Resources\UserResource;
-use App\Model\blogannoncelocation;
-use App\Model\blogannoncereservation;
 use App\Model\contactuser;
 use App\Model\user;
-use App\Services\ContactuserService;
+use App\Services\Contactusers\ContactuserService;
 use App\Services\ProfileService;
-use Illuminate\Http\Request;
 
 class ProfilepublicController extends Controller
 {

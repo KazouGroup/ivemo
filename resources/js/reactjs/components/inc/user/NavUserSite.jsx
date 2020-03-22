@@ -105,7 +105,10 @@ class NavUserSite extends PureComponent {
                                             </a>
                                         )}
                                         <Link className="dropdown-item" to={`/profile/account/`}>
-                                            <i className="now-ui-icons users_single-02"/> Profile Page
+                                            <i className="now-ui-icons users_single-02"/> Editer mon profile
+                                        </Link>
+                                        <Link className="dropdown-item" to={`/@${$userIvemo.slug}/`}>
+                                            <i className="now-ui-icons users_single-02"/> Profile
                                         </Link>
                                         <a style={{ cursor: "pointer" }} className="dropdown-item" onClick={() => this.navLogout()}>
                                             <i className="now-ui-icons ui-1_simple-remove" /> Déconnexion

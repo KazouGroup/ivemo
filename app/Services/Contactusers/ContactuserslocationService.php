@@ -30,7 +30,7 @@ class ContactuserslocationService
                     ])->whereHas('annoncelocation', function ($q) use ($user) {
                         $q->whereIn('user_id',[$user->id])
                           ->where('status_admin',1);
-                    })->distinct()->get()->toArray();},
+                    })->latest()->distinct()->get()->toArray();},
             ])->first();
 
 

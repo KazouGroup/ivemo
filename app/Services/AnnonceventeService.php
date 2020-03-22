@@ -119,6 +119,20 @@ class AnnonceventeService
                 $q->with('user','categoryannoncevente','city','annoncetype')
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id])
+                    ->withCount(['contactusersventes' => function ($q) use ($user){
+                        $q->whereIn('user_id',[$user->id])
+                            ->with('annoncevente','user')
+                            ->whereHas('annoncevente', function ($q) use ($user) {
+                                $q->whereIn('user_id',[$user->id]);
+                            });},
+                    ])
+                    ->with(['contactusersventes' => function ($q) use ($user){
+                        $q->whereIn('user_id',[$user->id])
+                            ->with('annoncevente','user')
+                            ->whereHas('annoncevente', function ($q) use ($user) {
+                                $q->whereIn('user_id',[$user->id]);
+                            })->distinct()->get()->toArray();},
+                    ])
                     ->orderBy('created_at','DESC')
                     ->distinct()->get()->toArray()
                 ;},

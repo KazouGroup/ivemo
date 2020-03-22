@@ -5,7 +5,6 @@ import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import HeadermailmessageUser from "../inc/HeadermailmessageUser";
 import Swal from "sweetalert2";
-import NavNavigatePivateUser from "../../NavNavigatePivateUser";
 import NavlinkmailmessageUser from "../inc/NavlinkmailmessageUser";
 
 
@@ -14,7 +13,7 @@ class PersonalmessagesannoncesventesUser extends Component {
         super(props);
         this.state = {
             contactusersventes: {contactusersventes:[]},
-            visiable: 10,
+            visiable: 20,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -23,7 +22,7 @@ class PersonalmessagesannoncesventesUser extends Component {
     }
     loadmoresItem() {
         this.setState((old) => {
-            return { visiable: old.visiable + 10 }
+            return { visiable: old.visiable + 20 }
         })
     }
 
