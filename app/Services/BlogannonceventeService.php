@@ -96,18 +96,15 @@ class BlogannonceventeService
 
     public static function apiblogannoncesventescategoryannonceventebyuser($user,$categoryannoncevente)
     {
-        $blogannoncereseventes = categoryannoncevente::whereSlug($categoryannoncevente->slug)->where(['status' => 1])
-            ->withCount(['blogannonceventes' => function ($q)  use ($user,$categoryannoncevente){
+        $blogannoncereseventes = HelpersService::helpersannonblogceteambyusercount($user,$categoryannoncevente)
+            ->with(['blogannonceventes' => function ($q) use ($user,$categoryannoncevente){
                 $q->with('user','categoryannoncevente')
-                    ->whereIn('user_id',[$user->id])
-                    ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
-                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);});
-            }])->with(['blogannonceventes' => function ($q) use ($user,$categoryannoncevente){
-                $q->with('user','categoryannoncevente')
-                    ->whereIn('user_id',[$user->id])
-                    ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-                    ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();},
+                    ->whereIn('user_id',[$user->id])
+                    ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+                    ->orderBy('created_at','DESC')
+                    ->distinct()->get()->toArray()
+                ;},
             ])->first();
 
         return $blogannoncereseventes;

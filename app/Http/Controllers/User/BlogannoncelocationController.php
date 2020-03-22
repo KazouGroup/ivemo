@@ -24,7 +24,8 @@ class BlogannoncelocationController extends Controller
     {
         $this->middleware('auth',['only' => [
             'create','store','edit','update','destroy','show','activated','unactivated',
-            'apiblogannonceslocationsbyuser', 'blogannonceslocationsbyuser','blogannonceslocationscategoryannoncelocationbyuser','apiblogannonceslocationscategoryannoncelocationbyuser'
+            'apiblogannonceslocationsbyuser', 'blogannonceslocationsbyuser',
+            'blogannonceslocationscategoryannoncelocationbyuser','apiblogannonceslocationscategoryannoncelocationbyuser'
         ]]);
     }
 

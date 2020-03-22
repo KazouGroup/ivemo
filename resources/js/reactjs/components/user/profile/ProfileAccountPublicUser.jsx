@@ -13,6 +13,7 @@ import NavLinkPublicBlogannoncesUser from "./blogs/public/NavLinkPublicBlogannon
 import FormNewletterSubcribeProfileAccountUser from "./form/FormNewletterSubcribeProfileAccountUser";
 import ProfileAccountAvisUser from "./file_public/ProfileAccountAvisUser";
 import Skeleton from "react-loading-skeleton";
+import ReadMoreAndLess from "react-read-more-less";
 
 
 class ProfileAccountPublicUser extends Component {
@@ -34,6 +35,9 @@ class ProfileAccountPublicUser extends Component {
         this.loadItems();
     }
 
+    getDescription(userPublick) {
+        return { __html: userPublick.profile.description};
+    }
     render() {
         const {userPublick} = this.state;
         return (
@@ -111,7 +115,7 @@ class ProfileAccountPublicUser extends Component {
                                             )}
 
                                             <Button className="btn btn-sm btn-primary" rel="tooltip" title="3426712192" data-placement="bottom">
-                                                <i className="now-ui-icons tech_mobile"/> 
+                                                <i className="now-ui-icons tech_mobile"/>
                                             </Button>
                                             <a href="#contact" className="btn btn-sm btn-success">
                                                 <i className="now-ui-icons ui-2_chat-round"/> Contacter
@@ -232,6 +236,22 @@ class ProfileAccountPublicUser extends Component {
 
                                         <div className="card">
                                             <div className="card-body">
+
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <h5><b>About Us</b></h5>
+                                                        <ReadMoreAndLess
+                                                            className="read-more-content"
+                                                            charLimit={250}
+                                                            readMoreText="(Plus)"
+                                                            readLessText=""
+                                                        >
+                                                            {userPublick.profile.description || ""}
+                                                        </ReadMoreAndLess>
+
+                                                    </div>
+
+                                                </div>
 
                                             </div>
                                         </div>

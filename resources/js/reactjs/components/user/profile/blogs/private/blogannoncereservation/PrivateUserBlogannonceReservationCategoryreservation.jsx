@@ -1,19 +1,20 @@
 import React, { Component } from "react";
-import { Link, NavLink } from 'react-router-dom';
+import {Link, NavLink, withRouter} from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import NavUserSite from "../../../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
+import NavUserSite from "../../../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
-import NavlinkconfigurationUser from "../../../configurations/inc/NavlinkconfigurationUser";
-import BlogannonceventeList from "../../../blog/blognnoncevente/BlogannonceventeList";
-import Navblogannonceventesbyuser from "../../../blog/blognnoncevente/inc/Navblogannonceventesbyuser";
+import NavlinkconfigurationUser from "../../../../configurations/inc/NavlinkconfigurationUser";
+import BlogannoncereservationList from "../../../../blog/blogannoncereservation/BlogannoncereservationList";
+import Navblogannoncereservationsbyuser
+    from "../../../../blog/blogannoncereservation/inc/Navblogannoncereservationsbyuser";
 
 
-class PrivateUserBlogannonceVente extends Component {
+class PrivateUserBlogannonceReservationCategoryreservation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userblogannonceventesPrivate:{blogannonceventes:[]},
+            userblogannoncereservationsPrivate:{blogannoncereservations:[]},
             visiable: 20,
         };
 
@@ -45,7 +46,7 @@ class PrivateUserBlogannonceVente extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('blogannoncecategoryventeactivated_site',id);
+                let url = route('blogannoncecategoryreservationactivated_site',id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
@@ -97,7 +98,7 @@ class PrivateUserBlogannonceVente extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('blogannoncecategoryventeunactivated_site',id);
+                let url = route('blogannoncecategoryreservationunactivated_site',id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
@@ -148,7 +149,7 @@ class PrivateUserBlogannonceVente extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('blogannoncecategoryventedelete_site',[id]);
+                const url = route('blogannoncecategoryreservationdelete_site',[id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
@@ -188,7 +189,8 @@ class PrivateUserBlogannonceVente extends Component {
 
     loadItems(){
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.blogannoncesventesbyuser_site',[itemuser])).then(response => this.setState({userblogannonceventesPrivate: response.data,}));
+        let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
+        dyaxios.get(route('api.blogannoncesreservationsbyuser_site',[itemuser,itemCategoryannoncereservation])).then(response => this.setState({userblogannoncereservationsPrivate: response.data,}));
     }
 
     // lifecycle method
@@ -197,11 +199,11 @@ class PrivateUserBlogannonceVente extends Component {
     }
 
     render() {
-        const {userblogannonceventesPrivate,visiable} = this.state;
-        const mapBlogannoncereservations = userblogannonceventesPrivate.blogannonceventes.length ? (
-            userblogannonceventesPrivate.blogannonceventes.slice(0,visiable).map(item => {
+        const {userblogannoncereservationsPrivate,visiable} = this.state;
+        const mapBlogannoncereservations = userblogannoncereservationsPrivate.blogannoncereservations.length ? (
+            userblogannoncereservationsPrivate.blogannoncereservations.slice(0,visiable).map(item => {
                 return(
-                    <BlogannonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
+                    <BlogannoncereservationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
                 )
             })
         ):(
@@ -233,7 +235,7 @@ class PrivateUserBlogannonceVente extends Component {
 
                                         <div className="submit text-center">
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Ajouter une nouvelle article sur la vente/achat</b>
+                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Ajouter une nouvelle article sur la reservation</b>
                                             </NavLink>
                                         </div>
 
@@ -243,7 +245,7 @@ class PrivateUserBlogannonceVente extends Component {
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                            <Navblogannonceventesbyuser/>
+                                                            <Navblogannoncereservationsbyuser/>
 
                                                         </div>
                                                     </div>
@@ -251,7 +253,9 @@ class PrivateUserBlogannonceVente extends Component {
                                             </div>
                                         </div>
 
-                                        <NavlinkconfigurationUser {...userblogannonceventesPrivate} />
+                                        <NavlinkconfigurationUser {...userblogannoncereservationsPrivate} />
+
+
 
                                     </div>
 
@@ -259,7 +263,7 @@ class PrivateUserBlogannonceVente extends Component {
 
                                         {mapBlogannoncereservations}
 
-                                        {visiable < userblogannonceventesPrivate.blogannonceventes.length && (
+                                        {visiable < userblogannoncereservationsPrivate.blogannoncereservations.length && (
                                             <div className="row">
                                                 <div className="col-md-4 ml-auto mr-auto text-center">
                                                     <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
@@ -291,4 +295,4 @@ class PrivateUserBlogannonceVente extends Component {
     }
 }
 
-export default PrivateUserBlogannonceVente;
+export default withRouter(PrivateUserBlogannonceReservationCategoryreservation);

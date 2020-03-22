@@ -177,7 +177,7 @@ class FormContactProfileAccountUser extends PureComponent {
                     </Row>
                     <Row>
                         <InputGroup>
-                               <textarea name="message" value={this.state.message}
+                               <Input type="textarea" name="message" value={this.state.message}
                                          onChange={this.handleFieldChange}
                                          placeholder={'Posez ici toutes vos questions !'}
                                          className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}

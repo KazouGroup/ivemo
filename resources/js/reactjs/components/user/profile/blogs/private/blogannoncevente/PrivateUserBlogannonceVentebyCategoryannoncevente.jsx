@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import NavUserSite from "../../../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
+import NavUserSite from "../../../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
-import NavlinkconfigurationUser from "../../../configurations/inc/NavlinkconfigurationUser";
-import BlogannonceventeList from "../../../blog/blognnoncevente/BlogannonceventeList";
-import Navblogannonceventesbyuser from "../../../blog/blognnoncevente/inc/Navblogannonceventesbyuser";
+import NavlinkconfigurationUser from "../../../../configurations/inc/NavlinkconfigurationUser";
+import BlogannonceventeList from "../../../../blog/blognnoncevente/BlogannonceventeList";
+import Navblogannonceventesbyuser from "../../../../blog/blognnoncevente/inc/Navblogannonceventesbyuser";
 
 
 class PrivateUserBlogannonceVentebyCategoryannoncevente extends Component {
@@ -252,7 +252,7 @@ class PrivateUserBlogannonceVentebyCategoryannoncevente extends Component {
                                             </div>
                                         </div>
 
-                                        {/*<NavlinkconfigurationUser {...userblogannonceventesPrivate} />*/}
+                                        <NavlinkconfigurationUser {...userblogannonceventesPrivate} />
 
 
                                     </div>

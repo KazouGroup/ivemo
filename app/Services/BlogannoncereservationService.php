@@ -55,6 +55,23 @@ class BlogannoncereservationService
         return $blogannoncereservations;
     }
 
+    public static function apiblogannoncesreservationscategoryannoncereservationbyuser($user,$categoryannoncereservation)
+    {
+
+        $blogannoncereservations = HelpersService::helpersannonblogceteambyusercount($user)
+            ->with(['blogannoncereservations' => function ($q) use ($user,$categoryannoncereservation){
+                $q->with('user','categoryannoncereservation')
+                    ->whereIn('user_id',[$user->id])
+                    ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
+                    ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
+                    ->orderBy('created_at','DESC')
+                    ->distinct()->get()->toArray()
+                ;},
+            ])->first();
+
+        return $blogannoncereservations;
+    }
+
     public static function storeUploadImage($request,$blogannoncereservation)
     {
 

@@ -8,7 +8,6 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import './ProfileAccountUser.css';
 import NavProfileAccountPrivate from "./NavProfileAccountPrivate";
 import moment from "moment";
-import ReactQuill from "react-quill";
 
 
 class ProfileConfigUser extends Component {
@@ -543,19 +542,29 @@ class ProfileConfigUser extends Component {
                                                         </div>
                                                     </div>
 
-                                                    <label htmlFor="url_site"><b>Description </b></label>
+                                                    <label htmlFor="description"><b>Description </b></label>
                                                     <FormGroup>
                                                         <label className="labels">
                                                             Décrivez votre article
                                                             <span className="text-danger">*</span>
                                                         </label>
                                                         <br />
-                                                        <ReactQuill theme="snow" modules={this.modules}
+                                                        <Input type="textarea" name="description" value={this.state.description}
+                                                                  onChange={this.handleFieldChange}
+                                                                  placeholder={'Donner une description...'}
+                                                                  className={`form-control ${this.hasErrorFor('description') ? 'is-invalid' : ''} form-control-alternative"`}
+                                                                  id="description"
+                                                                  rows="17" />
+                                                        {this.renderErrorFor('description')}
+                                                        {/*
+                                                         <ReactQuill theme="snow" modules={this.modules}
                                                                     formats={this.formats}
                                                                     className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                     value={this.state.description || ''}
                                                                     onChange={this.handleChangeBody} />
                                                         {this.renderErrorFor('description')}
+                                                        */}
+
                                                     </FormGroup>
 
                                                     <div className="submit text-center">

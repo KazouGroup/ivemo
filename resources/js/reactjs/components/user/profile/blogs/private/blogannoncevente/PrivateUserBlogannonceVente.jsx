@@ -5,17 +5,16 @@ import NavUserSite from "../../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../../../../configurations/inc/NavlinkconfigurationUser";
-import BlogannoncelocationList from "../../../../blog/blogannoncelocation/BlogannoncelocationList";
-import Navblogannoncelocationsbyuser from "../../../../blog/blogannoncelocation/inc/Navblogannoncelocationsbyuser";
+import BlogannonceventeList from "../../../../blog/blognnoncevente/BlogannonceventeList";
+import Navblogannonceventesbyuser from "../../../../blog/blognnoncevente/inc/Navblogannonceventesbyuser";
 
 
-class PrivateUserBlogannonceLocationByCategorylocation extends Component {
+class PrivateUserBlogannonceVente extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userblogannoncelocationsPrivate:{blogannoncelocations:[]},
+            userblogannonceventesPrivate:{blogannonceventes:[]},
             visiable: 20,
-
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -29,6 +28,7 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
             return {visiable: old.visiable + 20}
         })
     }
+
     activeItem(id){
         Swal.fire({
             title: 'Afficher cette article?',
@@ -45,7 +45,7 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('blogannoncecategorylocationactive_site.site',id);
+                let url = route('blogannoncecategoryventeactivated_site',id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
@@ -97,7 +97,7 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('blogannoncecategorylocationunactive_site.site',id);
+                let url = route('blogannoncecategoryventeunactivated_site',id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
@@ -148,7 +148,7 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('blogannoncecategorylocationdelete_site',[id]);
+                const url = route('blogannoncecategoryventedelete_site',[id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
@@ -188,8 +188,7 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
 
     loadItems(){
         let itemuser = this.props.match.params.user;
-        let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
-        dyaxios.get(route('api.blogannonceslocationscategoryannoncelocationbyuser_site',[itemuser,itemCategoryannoncelocation])).then(response => this.setState({userblogannoncelocationsPrivate: response.data,}));
+        dyaxios.get(route('api.blogannoncesventesbyuser_site',[itemuser])).then(response => this.setState({userblogannonceventesPrivate: response.data,}));
     }
 
     // lifecycle method
@@ -198,11 +197,11 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
     }
 
     render() {
-        const {userblogannoncelocationsPrivate,visiable} = this.state;
-        const mapBlogannoncelocations = userblogannoncelocationsPrivate.blogannoncelocations.length ? (
-            userblogannoncelocationsPrivate.blogannoncelocations.slice(0,visiable).map(item => {
+        const {userblogannonceventesPrivate,visiable} = this.state;
+        const mapBlogannoncereservations = userblogannonceventesPrivate.blogannonceventes.length ? (
+            userblogannonceventesPrivate.blogannonceventes.slice(0,visiable).map(item => {
                 return(
-                    <BlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
+                    <BlogannonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
                 )
             })
         ):(
@@ -234,7 +233,7 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
 
                                         <div className="submit text-center">
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Ajouter une nouvelle article sur la location</b>
+                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Ajouter une nouvelle article sur la vente/achat</b>
                                             </NavLink>
                                         </div>
 
@@ -244,7 +243,7 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                            <Navblogannoncelocationsbyuser/>
+                                                            <Navblogannonceventesbyuser/>
 
                                                         </div>
                                                     </div>
@@ -252,15 +251,15 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
                                             </div>
                                         </div>
 
-                                        <NavlinkconfigurationUser {...userblogannoncelocationsPrivate} />
+                                        <NavlinkconfigurationUser {...userblogannonceventesPrivate} />
 
                                     </div>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
-                                        {mapBlogannoncelocations}
+                                        {mapBlogannoncereservations}
 
-                                        {visiable < userblogannoncelocationsPrivate.blogannoncelocations.length && (
+                                        {visiable < userblogannonceventesPrivate.blogannonceventes.length && (
                                             <div className="row">
                                                 <div className="col-md-4 ml-auto mr-auto text-center">
                                                     <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
@@ -278,7 +277,10 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
 
                             </div>
 
+
+
                         </div>
+
 
                         <FooterBigUserSite />
                     </div>
@@ -289,4 +291,4 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
     }
 }
 
-export default PrivateUserBlogannonceLocationByCategorylocation;
+export default PrivateUserBlogannonceVente;
