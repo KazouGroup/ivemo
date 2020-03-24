@@ -44,6 +44,18 @@ class ContactusersventeController extends Controller
 
     }
 
+    public function personalmessagesannonces_ventes_by_mail(user $user)
+    {
+        if (auth()->user()->id === $user->id){
+            return view('user.profile.contactuservente.personal_mailannonces_ventes',[
+                'user' => auth()->user()
+            ]);
+        }else{
+            abort(404);
+        }
+
+    }
+
     public function apipersonalmailsannoncesventes(user $user)
     {
         if (auth()->user()->id === $user->id){

@@ -61,7 +61,7 @@ class ContactusersventeService
                             ->whereHas('annoncevente', function ($q) use ($user) {
                                 $q->whereIn('user_id',[$user->id]);
                             });},
-                    ])->orderBy('contactusersventes_count','desc')
+                    ])->orderBy('created_at','DESC')
                     ->distinct()->get()->toArray();},
             ])->first();
 

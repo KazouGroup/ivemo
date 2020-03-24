@@ -83,8 +83,7 @@ class AnnoncelocationService
             }])
             ->with([
                 'annoncelocations' => function ($q) use ($annoncetype,$categoryannoncelocation,$city){
-                    $q->where(['status' => 1,'status_admin' => 1])
-                        ->with('user','categoryannoncelocation','city','annoncetype')
+                    $q->where(['status' => 1,'status_admin' => 1])->with('user','categoryannoncelocation','city','annoncetype')
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
                         ->whereIn('city_id',[$city->id])
@@ -99,7 +98,8 @@ class AnnoncelocationService
 
     public static function apiannonceslocationsbyuser($user)
     {
-        $annonceslocations = HelpersService::helpersannonceteamcount($user)->with(['annoncelocations' => function ($q) use ($user){
+        $annonceslocations = HelpersService::helpersannonceteamcount($user)
+            ->with(['annoncelocations' => function ($q) use ($user){
                 $q->with('user','categoryannoncelocation','city','annoncetype')
                     ->whereIn('user_id',[$user->id])
                     ->whereHas('city', function ($q) {$q->where('status',1);})

@@ -185,7 +185,7 @@ class PersonalmessagesannoncesventesShowUser extends Component {
                                                                     <div className="col-md-7">
                                                                         <div className="card-header d-flex align-items-center">
                                                                             <div className="text-left pull-left">
-                                                                                <NavLink to={`/annonces_ventes/ventes//${contactuser.annoncevente.categoryannoncevente.slug}/`}>
+                                                                                <NavLink to={`/annonces_ventes/ventes/${contactuser.annoncevente.categoryannoncevente.slug}/`} >
                                                                                     <h6 className={`text-${contactuser.annoncevente.categoryannoncevente.color_name} ml-auto mr-auto`}>
                                                                                         {contactuser.annoncevente.categoryannoncevente.name}
                                                                                     </h6>
@@ -210,7 +210,7 @@ class PersonalmessagesannoncesventesShowUser extends Component {
 
                                                                         </div>
                                                                         <h6 className="card-title">
-                                                                            <Link to={`/annonces_ventes/ventes/${contactuser.annoncevente.categoryannoncevente.slug}/${contactuser.annoncevente.city.slug}/${contactuser.annoncevente.slug}/`}>
+                                                                            <Link to={`/annonces_ventes/ventes/${contactuser.annoncevente.categoryannoncevente.slug}/${contactuser.annoncevente.city.slug}/${contactuser.annoncevente.slug}/`} target="_blank">
                                                                                 {contactuser.annoncevente.title}
                                                                             </Link>
                                                                         </h6>

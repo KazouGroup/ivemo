@@ -83,6 +83,8 @@ import PrivateUserBlogannonceLocationByCategorylocation
     from "../components/user/profile/blogs/private/blogannoncelocation/PrivateUserBlogannonceLocationByCategorylocation";
 import PrivateUserBlogannonceReservationCategoryreservation
     from "../components/user/profile/blogs/private/blogannoncereservation/PrivateUserBlogannonceReservationCategoryreservation";
+import PersonalmessagesprivateannoncesventesUser
+    from "../components/user/profile/mail/contactusersvente/PersonalmessagesprivateannoncesventesUser";
 
 
 const RouteUser = props => (
@@ -135,6 +137,9 @@ const RouteUser = props => (
 
           <Route strict exact path="/profile/:user/personal_mails/annonces_locations/" component={withRouter(PersonalmessagesannonceslocationsUser)}/>
           <Route exact path="/profile/:user/personal_mails/annonces_locations/:contactuserslocation/" component={PersonalmessagesannonceslocationsShowUser}/>
+
+         {/*<Route strict exact path="/profile/:user/personal_mails/annonces_ventes_by_mail/" component={withRouter(PersonalmessagesprivateannoncesventesUser)}/>*/}
+
 
           <Route strict exact path="/profile/:user/personal_mails/annonces_ventes/" component={withRouter(PersonalmessagesannoncesventesUser)}/>
           <Route exact path="/profile/:user/personal_mails/annonces_ventes/:contactusersvente/" component={PersonalmessagesannoncesventesShowUser}/>

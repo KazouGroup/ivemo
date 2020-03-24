@@ -210,7 +210,7 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
 
                                                                         </div>
                                                                         <h6 className="card-title">
-                                                                            <Link to={`/annonces_locations/locations/${contactuser.annoncelocation.categoryannoncelocation.slug}/${contactuser.annoncelocation.city.slug}/${contactuser.annoncelocation.slug}/`}>
+                                                                            <Link to={`/annonces_locations/locations/${contactuser.annoncelocation.categoryannoncelocation.slug}/${contactuser.annoncelocation.city.slug}/${contactuser.annoncelocation.slug}/`} target="_blank">
                                                                                 {contactuser.annoncelocation.title}
                                                                             </Link>
                                                                         </h6>

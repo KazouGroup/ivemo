@@ -13,7 +13,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.personal_mails_annonces_ventes.site');
 
     Route::get(
-        'profile/{user}/personal_mails/annonces_ventes_by_annonces/',
+        '{user}/personal_mails/annonces_ventes_by_mail/',
         'ContactusersventeController@apipersonalmailsannoncesventesbyannonce'
     )->name('api.personal_mails_annonces_ventes_by_annonces.site');
 
@@ -38,8 +38,8 @@ Route::group(['prefix' => 'profile'], function () {
     )->name('personal_mails_annonces_ventes.site');
 
     Route::get(
-        '{user}/personal_mails/annonces_ventes_by_annonces/',
-        'ContactusersventeController@personalmessagesannonces_ventes_by_annonces'
+        '{user}/personal_mails/annonces_ventes_by_mail/',
+        'ContactusersventeController@personalmessagesannonces_ventes_by_mail'
     )->name('personal_mails_annonces_ventes_by_annonces.site');
 
     Route::get(

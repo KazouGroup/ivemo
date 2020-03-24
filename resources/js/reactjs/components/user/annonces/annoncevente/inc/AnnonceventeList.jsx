@@ -44,30 +44,37 @@ class AnnonceventeList extends Component {
 
                                     </div>
                                 </div>
-                                {!$guest && (
-                                    <>
-                                        {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
-                                            <div className="text-center">
-                                                {this.props.status ?
-                                                    <>
-                                                        <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}
-                                                                className="btn btn-success btn-icon btn-sm">
-                                                            <i className="now-ui-icons ui-1_check"/>
-                                                        </button>
-                                                    </>
-                                                    :
-                                                    <>
-                                                        <button type="button" onClick={() => this.props.activeItem(this.props.id)}
-                                                                className="btn btn-primary btn-icon btn-sm">
-                                                            <i className="now-ui-icons ui-1_simple-delete"/>
-                                                        </button>
-                                                    </>
-                                                }
-                                            </div>
-                                        )}
-                                    </>
 
-                                )}
+                                <div className="text-center">
+
+                                    {!$guest && (
+                                        <>
+                                            {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
+                                                <>
+                                                    {this.props.status ?
+                                                        <>
+                                                            <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}
+                                                                    className="btn btn-success btn-icon btn-sm">
+                                                                <i className="now-ui-icons ui-1_check"/>
+                                                            </button>
+                                                        </>
+                                                        :
+                                                        <>
+                                                            <button type="button" onClick={() => this.props.activeItem(this.props.id)}
+                                                                    className="btn btn-primary btn-icon btn-sm">
+                                                                <i className="now-ui-icons ui-1_simple-delete"/>
+                                                            </button>
+                                                        </>
+                                                    }
+                                                </>
+                                            )}
+                                        </>
+                                    )}
+
+
+                                </div>
+
+
 
 
                                 <br />

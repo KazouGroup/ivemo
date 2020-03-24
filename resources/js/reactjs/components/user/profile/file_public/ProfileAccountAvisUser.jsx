@@ -79,7 +79,6 @@ class ProfileAccountAvisUser extends Component {
 
         $('#addNew').modal('show');
         this.setState({
-          //description:item.description,
           response_description:item.response_description,
           item: item
         });
@@ -449,7 +448,14 @@ class ProfileAccountAvisUser extends Component {
                                                             <div className="media-body">
 
                                                                 <h5 className="media-heading"><b>Reponse</b> {item.to.first_name || <Skeleton width={80}/>}</h5>
-                                                                <b>{item.response_description || ""}</b>
+                                                                <ReadMoreAndLess
+                                                                    className="read-more-content"
+                                                                    charLimit={250}
+                                                                    readMoreText="(Plus)"
+                                                                    readLessText="(Moins)"
+                                                                >
+                                                                    {item.response_description || ""}
+                                                                </ReadMoreAndLess>
 
 
                                                                 {!$guest && (
