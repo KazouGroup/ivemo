@@ -105,7 +105,7 @@ class NavUserSite extends PureComponent {
                                             </a>
                                         )}
                                         <Link className="dropdown-item" to={`/profile/account/`}>
-                                            <i className="now-ui-icons users_single-02"/> Editer mon profile
+                                            <i className="now-ui-icons users_circle-08"/> Editer mon profile
                                         </Link>
                                         <Link className="dropdown-item" to={`/@${$userIvemo.slug}/`}>
                                             <i className="now-ui-icons users_single-02"/> Profile
@@ -130,14 +130,14 @@ class NavUserSite extends PureComponent {
                                         <Link to={`/profile/${$userIvemo.slug}/personal_settings/annonces_reservations/`} className="dropdown-item">
                                             <i className="now-ui-icons education_paper"/>Annonce reservations
                                         </Link>
-                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/annonces_ventes/`} className="dropdown-item">
-                                            <i className="now-ui-icons files_paper"/>Annonce ventes
+                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_locations/`} className="dropdown-item">
+                                            <i className="now-ui-icons text_align-center"/>Blog annonces locations
                                         </Link>
-                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/annonce_locations/`} className="dropdown-item">
-                                            <i className="now-ui-icons text_align-center"/>Blog ventes
+                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_reservations/`} className="dropdown-item">
+                                            <i className="now-ui-icons text_align-center"/>Blog annonces reservations
                                         </Link>
-                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/annonce_reservations/`} className="dropdown-item">
-                                            <i className="now-ui-icons text_align-center"/>Blog ventes
+                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_ventes/`} className="dropdown-item">
+                                            <i className="now-ui-icons text_align-center"/>Blog annonces ventes
                                         </Link>
                                         <Link to={`/profile/${$userIvemo.slug}/personal_settings/teams/`} className="dropdown-item">
                                             <i className="now-ui-icons users_circle-08"/>Team

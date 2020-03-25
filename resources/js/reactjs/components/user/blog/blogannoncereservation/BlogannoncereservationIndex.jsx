@@ -10,6 +10,7 @@ import BlogannoncereservationList from "./BlogannoncereservationList";
 import Navblogannoncereservations from "./inc/Navblogannoncereservations";
 import Navlinknewblogannoncereservation from "./treatement/Navlinknewblogannoncereservation";
 import BlogannonceListSkeleton from "../../../inc/user/blog/BlogannonceListSkeleton";
+import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -195,6 +196,15 @@ class BlogannoncereservationIndex extends Component {
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
+
 
                                         {mapAnnoncereservations}
 

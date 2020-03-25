@@ -12,6 +12,7 @@ import moment from "moment";
 import AnnoncelocationInteresseforBlog from "./AnnoncelocationInteresseforBlog"
 import BlogannoncelocationInteresse from "./BlogannoncelocationInteresse";
 import Skeleton from "react-loading-skeleton";
+import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 
 
 class BlogannoncelocationShow extends Component {
@@ -124,7 +125,13 @@ class BlogannoncelocationShow extends Component {
                                             <div className="container">
                                                 <div className="row justify-content-center">
                                                     <div className="col-md-12 ml-auto mr-auto">
-
+                                                        {!$guest &&(
+                                                            <>
+                                                                {!$userIvemo.email_verified_at &&(
+                                                                    <LinkValicationEmail/>
+                                                                )}
+                                                            </>
+                                                        )}
 
 
                                                         <div className="card-header d-flex align-items-center">

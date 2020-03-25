@@ -233,7 +233,7 @@ class PrivateUserBlogannonceReservation extends Component {
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
+                                            <NavLink className="btn btn-danger" to={`/blogs/annonce_reservations/ab/new/`}>
                                                 <i className="now-ui-icons ui-1_simple-add"/> <b>Ajouter une nouvelle article sur la reservation</b>
                                             </NavLink>
                                         </div>

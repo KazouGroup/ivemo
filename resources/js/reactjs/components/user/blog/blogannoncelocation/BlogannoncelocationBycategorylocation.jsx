@@ -8,6 +8,7 @@ import BlogannoncelocationList from "./BlogannoncelocationList";
 import Navblogannoncelocations from "./inc/Navblogannoncelocations";
 import Navlinknewblogannoncelocation from "./treatement/Navlinknewblogannoncelocation";
 import Skeleton from "react-loading-skeleton";
+import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 
 
 class BlogannoncelocationBycategorylocation extends Component {
@@ -201,11 +202,18 @@ class BlogannoncelocationBycategorylocation extends Component {
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
-                                    <div className="submit text-left">
-                                                <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
-                                                    <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour aux annonces</b>
-                                                </button>
-                                            </div>
+                                        <div className="submit text-left">
+                                            <Link to={`/blogs/annonce_locations/`} className="btn btn-neutral btn-sm">
+                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour aux articles</b>
+                                            </Link>
+                                        </div>
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
 
                                         {mapAnnoncelocations}
 

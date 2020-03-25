@@ -11,6 +11,7 @@ import Navblogannonceventes from "./inc/Navblogannonceventes";
 import BlogannonceventeList from "./BlogannonceventeList";
 import Navlinknewblogannoncevente from "./treatement/Navlinknewblogannoncevente";
 import Skeleton from "react-loading-skeleton";
+import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 
 
 class BlogannonceventesBycategoryvente extends Component {
@@ -203,6 +204,18 @@ class BlogannonceventesBycategoryvente extends Component {
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+                                        <div className="submit text-left">
+                                            <Link to={`/blogs/annonce_ventes/`} className="btn btn-neutral btn-sm">
+                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour aux articles</b>
+                                            </Link>
+                                        </div>
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
 
                                         {mapBlogannonceventes}
 

@@ -48,31 +48,7 @@ class NavlinkmailmessageUser extends Component {
                     </table>
                 </div>
 
-                {/* <div className="card-body">
-                    <table>
-                        <tbody>
-
-                        <tr>
-                            <td>
-                                <NavLink to={`/profile/${this.props.slug}/personal_mails/annonces_locations/`}>
-                                     Annonces locations
-                                </NavLink>
-                            </td>
-
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <NavLink to={`/profile/${this.props.slug}/personal_mails/annonces_ventes_by_mail/`}>
-                                 Annonces ventes
-                                </NavLink>
-                            </td>
-
-                        </tr>
-
-                        </tbody>
-                    </table>
-                </div>*/}
+                {/*ö*/}
 
 
             </Fragment>

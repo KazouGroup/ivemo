@@ -189,7 +189,7 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
     loadItems(){
         let itemuser = this.props.match.params.user;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
-        dyaxios.get(route('api.blogannoncesreservationscategoryannoncereservationbyuser_site',[itemuser,itemCategoryannoncelocation])).then(response => this.setState({userblogannoncelocationsPrivate: response.data,}));
+        dyaxios.get(route('api.blogannonceslocationscategoryannoncelocationbyuser_site',[itemuser,itemCategoryannoncelocation])).then(response => this.setState({userblogannoncelocationsPrivate: response.data,}));
     }
 
     // lifecycle method
@@ -233,7 +233,7 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
+                                            <NavLink className="btn btn-danger" to={`/blogs/annonce_locations/ab/new/`}>
                                                 <i className="now-ui-icons ui-1_simple-add"/> <b>Ajouter une nouvelle article sur la location</b>
                                             </NavLink>
                                         </div>

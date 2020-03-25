@@ -8,6 +8,7 @@ import Navblogannoncereservations from "./inc/Navblogannoncereservations";
 import BlogannoncereservationList from "./BlogannoncereservationList";
 import Navlinknewblogannoncereservation from "./treatement/Navlinknewblogannoncereservation";
 import Skeleton from "react-loading-skeleton";
+import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 
 
 class BlogannoncereservationBycategoryreservation extends Component {
@@ -205,6 +206,18 @@ class BlogannoncereservationBycategoryreservation extends Component {
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+                                        <div className="submit text-left">
+                                            <Link to={`/blogs/annonce_reservations/`} className="btn btn-neutral btn-sm">
+                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour aux articles</b>
+                                            </Link>
+                                        </div>
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
 
                                         {mapAnnoncereservations}
 

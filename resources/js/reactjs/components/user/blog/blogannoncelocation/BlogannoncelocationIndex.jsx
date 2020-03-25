@@ -10,6 +10,7 @@ import Navblogannoncelocations from "./inc/Navblogannoncelocations";
 import BlogannoncelocationList from "./BlogannoncelocationList";
 import Navlinknewblogannoncelocation from "./treatement/Navlinknewblogannoncelocation";
 import BlogannonceListSkeleton from "../../../inc/user/blog/BlogannonceListSkeleton";
+import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -196,6 +197,13 @@ class BlogannoncelocationIndex extends Component {
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
 
                                         {mapAnnoncelocations}
 
