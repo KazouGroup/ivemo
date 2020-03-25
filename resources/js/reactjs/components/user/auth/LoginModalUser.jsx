@@ -139,6 +139,20 @@ class LoginModalUser extends Component {
                                     <input type="submit" value="Se connecter" className="btn btn-neutral btn-round btn-lg btn-block"/>
                                 </div>
 
+
+                                <div className="modal-footer text-center">
+                                    <div className="pull-left">
+                                        <span>
+                                            <a href="/register/" className="link footer-link">Inscription</a>
+                                        </span>
+                                    </div>
+                                    <div className="pull-right">
+                                        <span>
+                                            <a href="/password/reset/" className="link footer-link">Mot de passe oublié?</a>
+                                        </span>
+                                    </div>
+                                </div>
+
                             </form>
                         </div>
                     </div>

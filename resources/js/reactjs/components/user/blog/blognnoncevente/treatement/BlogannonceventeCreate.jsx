@@ -207,7 +207,7 @@ class BlogannonceventeCreate extends Component {
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="card-title">
-                                                    <b>Editez l'article {this.state.title}</b>
+                                                    <b>{this.state.title}</b>
                                                 </div>
 
                                                 <div className="card-header d-flex align-items-center">

@@ -25,7 +25,7 @@ class BlogannonceventeController extends Controller
     {
         $this->middleware('auth',['only' => [
             'create','store','edit','update','destroy','activated','unactivated','apiblogannoncesventesbyuser',
-            'apiblogannoncesventescategoryannonceventebyuser','blogannoncesventesbyuser'
+            'apiblogannoncesventescategoryannonceventebyuser','blogannoncesventesbyuser','blogannoncesventescategoryannonceventebyuser'
         ]]);
     }
 

@@ -13,6 +13,7 @@ import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSub
 import Navlinknewblogannoncevente from "../../../blog/blognnoncevente/treatement/Navlinknewblogannoncevente";
 import Skeleton from "react-loading-skeleton";
 import BlogannoncePublicuserSkeleton from "../../../../inc/user/blog/BlogannoncePublicuserSkeleton";
+import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 
 
 class PublicUserBlogannonceVente extends Component {
@@ -229,6 +230,13 @@ class PublicUserBlogannonceVente extends Component {
                                     </div>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
 
                                         <Row>
 

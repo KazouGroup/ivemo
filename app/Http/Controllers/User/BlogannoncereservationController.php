@@ -139,7 +139,7 @@ class BlogannoncereservationController extends Controller
         ]);
     }
 
-    public function blogannoncesreservationscategoryannoncereservationbyuser(categoryannoncereservation $categoryannoncereservation)
+    public function blogannoncesreservationscategoryannoncereservationbyuser(user $user,categoryannoncereservation $categoryannoncereservation)
     {
        return view('user.blogs.blogannoncereservation.category',[
              'categoryannoncereservation' => $categoryannoncereservation,

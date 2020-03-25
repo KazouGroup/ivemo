@@ -191,7 +191,7 @@ class PrivateUserBlogannonceReservationCategoryreservation extends Component {
     loadItems(){
         let itemuser = this.props.match.params.user;
         let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
-        dyaxios.get(route('api.blogannonceslocationscategoryannoncelocationbyuser_site',[itemuser,itemCategoryannoncereservation])).then(response => this.setState({userblogannoncereservationsPrivate: response.data,}));
+        dyaxios.get(route('api.blogannoncesreservationscategoryannoncereservationbyuser_site',[itemuser,itemCategoryannoncereservation])).then(response => this.setState({userblogannoncereservationsPrivate: response.data,}));
     }
 
     // lifecycle method
@@ -308,4 +308,4 @@ class PrivateUserBlogannonceReservationCategoryreservation extends Component {
     }
 }
 
-export default withRouter(PrivateUserBlogannonceReservationCategoryreservation);
+export default PrivateUserBlogannonceReservationCategoryreservation;

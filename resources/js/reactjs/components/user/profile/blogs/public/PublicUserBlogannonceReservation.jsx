@@ -14,6 +14,7 @@ import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSub
 import Navlinknewblogannoncereservation
     from "../../../blog/blogannoncereservation/treatement/Navlinknewblogannoncereservation";
 import BlogannoncePublicuserSkeleton from "../../../../inc/user/blog/BlogannoncePublicuserSkeleton";
+import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 
 
 class PublicUserBlogannonceReservation extends Component {
@@ -233,6 +234,13 @@ class PublicUserBlogannonceReservation extends Component {
                                     </div>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
 
                                         <Row>
 

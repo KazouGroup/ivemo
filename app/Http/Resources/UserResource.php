@@ -36,6 +36,7 @@ class UserResource extends JsonResource
             'statusOnline' => $this->isOnline(),
             'roles' => $this->roles()->pluck('name'),
             'profile' => $this->profile,
+            'status_avis' => $this->status_avis,
             //'provider' => $this->provider,
             'annoncelocations_count' => $this->annoncelocations_count,
             'blogannoncelocations_count' => $this->blogannoncelocations_count,

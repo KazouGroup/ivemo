@@ -154,6 +154,7 @@ class ProfileAccountChangePasswordUser extends Component {
                                                                            type='password'
                                                                            className={`form-control ${this.hasErrorFor('old_password') ? 'is-invalid' : ''}`}
                                                                            name='old_password'
+                                                                           required={'required'}
                                                                            placeholder="Mot de passe actuel"
                                                                            aria-label="old_password"
                                                                            autoComplete="old_password"
@@ -175,6 +176,7 @@ class ProfileAccountChangePasswordUser extends Component {
                                                                            type='password'
                                                                            className={`form-control ${this.hasErrorFor('password') ? 'is-invalid' : ''}`}
                                                                            name='password'
+                                                                           required={'required'}
                                                                            placeholder="Nouveau mot de passe"
                                                                            aria-label="password"
                                                                            autoComplete="password"
@@ -197,6 +199,7 @@ class ProfileAccountChangePasswordUser extends Component {
                                                                            type='password'
                                                                            className={`form-control ${this.hasErrorFor('password_confirmation') ? 'is-invalid' : ''}`}
                                                                            name='password_confirmation'
+                                                                           required={'required'}
                                                                            placeholder="Confirmer le mot de psse"
                                                                            aria-label="password_confirmation"
                                                                            autoComplete="password_confirmation"

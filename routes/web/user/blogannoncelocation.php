@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['prefix' => 'profile'], function () {
+Route::group(['middleware' => 'auth','prefix' => 'profile'], function () {
 
     Route::get(
         '{user}/personal_settings/blogs/annonce_locations',
