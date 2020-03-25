@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../../../../configurations/inc/NavlinkconfigurationUser";
 import BlogannonceventeList from "../../../../blog/blognnoncevente/BlogannonceventeList";
 import Navblogannonceventesbyuser from "../../../../blog/blognnoncevente/inc/Navblogannonceventesbyuser";
+import LinkValicationEmail from "../../../../../inc/user/LinkValicationEmail";
 
 
 class PrivateUserBlogannonceVente extends Component {
@@ -256,6 +257,13 @@ class PrivateUserBlogannonceVente extends Component {
                                     </div>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
 
                                         {mapBlogannoncereservations}
 

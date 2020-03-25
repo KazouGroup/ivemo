@@ -6,6 +6,7 @@ import ReactQuill, { Quill, Mixin, Toolbar } from 'react-quill';
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import Navblogannonceventesbyuser from "../inc/Navblogannonceventesbyuser";
+import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 
 
 class BlogannonceventeEdit extends Component {
@@ -346,6 +347,13 @@ class BlogannonceventeEdit extends Component {
                                                 <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos blogs </b>
                                             </button>
                                         </div>
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="card-title">

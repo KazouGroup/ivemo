@@ -5,6 +5,7 @@ import NavUserSite from "../../../../inc/user/NavUserSite";
 import ReactQuill, { Quill, Mixin, Toolbar } from 'react-quill';
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Navblogannonceventesbyuser from "../inc/Navblogannonceventesbyuser";
+import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 
 
 class BlogannonceventeCreate extends Component {
@@ -196,6 +197,13 @@ class BlogannonceventeCreate extends Component {
                                                 <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos blogs </b>
                                             </button>
                                         </div>
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="card-title">

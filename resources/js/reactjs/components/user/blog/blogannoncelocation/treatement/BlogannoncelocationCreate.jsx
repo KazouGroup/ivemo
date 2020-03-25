@@ -18,6 +18,7 @@ import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import Navblogannoncelocationsbyuser from "../inc/Navblogannoncelocationsbyuser";
 import moment from "moment";
+import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 
 
 class BlogannoncelocationCreate extends Component {
@@ -197,6 +198,13 @@ class BlogannoncelocationCreate extends Component {
                                                 <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos blogs </b>
                                             </button>
                                         </div>
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="card-title">

@@ -8,6 +8,7 @@ import NavlinkconfigurationUser from "../../../../configurations/inc/Navlinkconf
 import BlogannoncereservationList from "../../../../blog/blogannoncereservation/BlogannoncereservationList";
 import Navblogannoncereservationsbyuser
     from "../../../../blog/blogannoncereservation/inc/Navblogannoncereservationsbyuser";
+import LinkValicationEmail from "../../../../../inc/user/LinkValicationEmail";
 
 
 class PrivateUserBlogannonceReservation extends Component {
@@ -259,6 +260,13 @@ class PrivateUserBlogannonceReservation extends Component {
                                     </div>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
 
                                         {mapBlogannoncereservations}
 
