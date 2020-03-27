@@ -17,6 +17,7 @@ class ProfileConfigUser extends Component {
 
         this.updateItem = this.updateItem.bind(this);
         this.handleCheckClick = this.handleCheckClick.bind(this);
+        this.handleStatusTeamUser = this.handleStatusTeamUser.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
@@ -32,6 +33,7 @@ class ProfileConfigUser extends Component {
             birthdate: '',
             site_internet: '',
             status_avis: '',
+            status_team_user: '',
             description: '',
             cities: [],
             errors: [],
@@ -71,6 +73,10 @@ class ProfileConfigUser extends Component {
         this.setState({ status_avis: !this.state.status_avis });
     };
 
+    handleStatusTeamUser(){
+        this.setState({ status_team_user: !this.state.status_team_user });
+    };
+
     // Handle Errors
     hasErrorFor(field) {
         return !!this.state.errors[field];
@@ -99,6 +105,7 @@ class ProfileConfigUser extends Component {
             linkedin_link: this.state.linkedin_link,
             birthdate: this.state.birthdate,
             status_avis: this.state.status_avis,
+            status_team_user: this.state.status_team_user,
             site_internet: this.state.site_internet,
             description: this.state.description,
         };
@@ -149,6 +156,7 @@ class ProfileConfigUser extends Component {
                 birthdate: response.data.birthdate,
                 address: response.data.address,
                 status_avis: response.data.status_avis,
+                status_team_user: response.data.status_team_user,
                 site_internet: response.data.site_internet,
                 description: response.data.description,
             }));
@@ -624,6 +632,23 @@ class ProfileConfigUser extends Component {
                                                                                                     type="checkbox" name="status_avis" checked={this.state.status_avis} value={this.state.status_avis}  onChange={this.handleCheckClick}/>
                                                                                                     <span className="form-check-sign"/>
                                                                                                     <b>Afficher ou masques les avis des utilisateurs</b>
+                                                                                            </label>
+                                                                                        </div>
+
+                                                                                    </div>
+
+                                                                                </div>
+
+                                                                                <div className="row">
+
+                                                                                    <div className="col-md-12 mx-auto">
+                                                                                        <div className="form-check">
+                                                                                            <label
+                                                                                                className="form-check-label">
+                                                                                                <input className="form-check-input"
+                                                                                                    type="checkbox" name="status_team_user" checked={this.state.status_team_user} value={this.state.status_team_user}  onChange={this.handleStatusTeamUser}/>
+                                                                                                    <span className="form-check-sign"/>
+                                                                                                    <b>Afficher ou masques votre team</b>
                                                                                             </label>
                                                                                         </div>
 

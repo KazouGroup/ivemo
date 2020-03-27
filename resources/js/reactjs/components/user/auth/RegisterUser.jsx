@@ -94,15 +94,12 @@ class RegisterUser extends Component {
                             <div className="col-md-7 ml-auto mr-auto">
                                 <div className="card">
                                     <div className="card-body">
-                                        <h4 className="card-title text-center">Register</h4>
+                                        <h4 className="card-title text-center">S'inscrire</h4>
                                         <div className="social text-center">
-                                            <button className="btn btn-icon btn-round btn-twitter">
-                                                <i className="fab fa-twitter"/>
-                                            </button>
-                                            <button className="btn btn-icon btn-round btn-facebook">
+                                            <a href={route('social.oauth', 'facebook')} className="btn btn-facebook">
                                                 <i className="fab fa-facebook"> </i>
-                                            </button>
-                                            <h5 className="card-description"> or be classical </h5>
+                                            </a>
+                                            <h5 className="card-description"> ou</h5>
                                         </div>
                                         <form className="form" method="POST" onSubmit={this.saveItem}>
                                             <div className="row">
@@ -228,7 +225,7 @@ class RegisterUser extends Component {
 
 
                                             <div className="card-footer text-center">
-                                                <input type="submit" value="Se connecter" className="btn btn-primary btn-round "/>
+                                                <input type="submit" value="Se connecter" className="btn btn-primary "/>
                                             </div>
                                         </form>
                                     </div>

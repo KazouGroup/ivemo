@@ -161,9 +161,7 @@ class BlogannoncelocationIndex extends Component {
         return (
             <>
 
-                <Helmet>
-                    <title>Conseils tout savoir sur les locations - Ivemo</title>
-                </Helmet>
+                <Helmet title="Conseils tout savoir sur les locations - Ivemo" />
 
                 <div className="landing-page sidebar-collapse">
 

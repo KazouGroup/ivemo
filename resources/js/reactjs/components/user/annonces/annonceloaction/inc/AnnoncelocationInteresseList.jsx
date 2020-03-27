@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component,Fragment} from "react";
 import {Link,NavLink } from "react-router-dom";
 import moment from 'moment'
 import {Button} from "reactstrap";
@@ -15,17 +15,13 @@ class AnnoncelocationInteresseList extends Component {
         }
     }
 
-    getDescription() {
-        const md = new Remarkable();
-        return { __html: md.render(this.props.description.length > 40 ? this.props.description.substring(0, 40) + "..." : this.props.description) };
-    }
     numberWithCommas() {
         return this.props.price.toLocaleString();
     }
 
     render() {
         return (
-            <>
+            <Fragment>
 
                 <div key={this.props.id} className="col-md-6 mx-auto">
                     <div className="card">
@@ -100,12 +96,10 @@ class AnnoncelocationInteresseList extends Component {
                                         </div>
                                         <h6 className="card-title">
                                             <NavLink to={`/annonces_locations/${this.props.annoncetype.slug}/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.slug}/`}>
-                                                {this.props.title}
+                                                {this.props.title.length > 40 ? this.props.title.substring(0, 40) + "..." : this.props.title}
                                             </NavLink>
                                         </h6>
-                                        {/*
-                                                <span dangerouslySetInnerHTML={this.getDescription(item)} />
-                                                */}
+
                                         <div className="card-header d-flex align-items-center">
                                             <div className="d-flex align-items-center">
                                                 <NavLink to={`/@${this.props.user.slug}/annonces_locations/`}>
@@ -128,7 +122,7 @@ class AnnoncelocationInteresseList extends Component {
                     </div>
                 </div>
 
-            </>
+            </Fragment>
         )
     }
 

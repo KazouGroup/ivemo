@@ -256,7 +256,8 @@ class ProfileAccountPublicUser extends Component {
                                             </div>
                                         </div>
 
-                                        <ProfileAccountTeamUser {...this.props}/>
+
+                                        {!userPublick.profile.status_team_user ? <></> : <ProfileAccountTeamUser {...this.props}/>}
 
 
                                         {!userPublick.profile.status_avis ? <></> :<ProfileAccountAvisUser {...this.props}/>}

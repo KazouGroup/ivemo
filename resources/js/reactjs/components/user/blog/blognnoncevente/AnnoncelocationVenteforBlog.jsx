@@ -1,20 +1,17 @@
 import React, { Component } from "react";
-import { Link, NavLink } from "react-router-dom";
 import moment from 'moment'
-import { Button } from "reactstrap";
-import { Remarkable } from "remarkable";
-import AnnoncelocationInteresseList from "../../annonces/annonceloaction/inc/AnnoncelocationInteresseList";
-import AnnoncereservationInteresseList from "../../annonces/annoncereservation/inc/AnnoncereservationInteresseList";
+import AnnonceventeInteresse from "../../annonces/annoncevente/AnnonceventeInteresse";
+import AnnonceventeInteresseList from "../../annonces/annoncevente/inc/AnnonceventeInteresseList";
 
 require("moment/min/locales.min");
 moment.locale('fr');
 
-class AnnoncelocationInteresseforBlog extends Component {
+class AnnoncelocationVenteforBlog extends Component {
     constructor(props) {
         super(props);
         this.loadmoresItem = this.loadmoresItem.bind(this);
         this.state = {
-            annoncelocationsinteresses: [],
+            annonceventesinteresses: [],
             visiable: 4,
             //
         }
@@ -27,19 +24,19 @@ class AnnoncelocationInteresseforBlog extends Component {
     }
 
     componentDidMount() {
-        let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
-        dyaxios.get(route('api.annoncelocationinteresse_by_categoryannoncelocation_site', [ itemCategoryannoncelocation])).then(response =>
+        let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
+        dyaxios.get(route('api.annonceventeinteressebycategory_site', [ itemCategoryannoncevente])).then(response =>
             this.setState({
-                annoncelocationsinteresses: [...response.data],
+                annonceventesinteresses: [...response.data],
             }));
     }
 
     render() {
-        const { annoncelocationsinteresses,visiable } = this.state;
+        const { annonceventesinteresses,visiable } = this.state;
         return (
             <>
 
-                {annoncelocationsinteresses.length > 0 && (
+                {annonceventesinteresses.length > 0 && (
 
                     <div className="text-center">
                         <h4 className="title">Ces annonces peuvent vous interesser </h4>
@@ -48,13 +45,13 @@ class AnnoncelocationInteresseforBlog extends Component {
 
                 <div className="row">
 
-                    {annoncelocationsinteresses.slice(0,visiable).map((item) => (
-                       <AnnoncelocationInteresseList key={item.id} {...item}/>
+                    {annonceventesinteresses.slice(0,visiable).map((item) => (
+                       <AnnonceventeInteresseList key={item.id} {...item}/>
                     ))}
 
                 </div>
 
-                {visiable < annoncelocationsinteresses.length && (
+                {visiable < annonceventesinteresses.length && (
                     <div className="row">
                         <div className="col-md-4 ml-auto mr-auto text-center">
                             <button type="button" onClick={this.loadmoresItem} className="btn btn-primary">
@@ -70,4 +67,4 @@ class AnnoncelocationInteresseforBlog extends Component {
 
 }
 
-export default AnnoncelocationInteresseforBlog;
+export default AnnoncelocationVenteforBlog;

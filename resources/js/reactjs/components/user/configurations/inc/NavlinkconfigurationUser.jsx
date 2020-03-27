@@ -35,7 +35,7 @@ class NavlinkconfigurationUser extends Component {
                                                             annonces sur les locations
                                                         </NavLink>
                                                     </td>
-                                                    <td className="text-right"> {this.props.annoncelocations_count} {this.props.annoncelocations_count < 1 ? "annonce" : "annonces"}</td>
+                                                    <td className="text-right"> {this.props.annoncelocations_count} {this.props.annoncelocations_count > 1 ? "annonces" : "annonce"}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -43,7 +43,7 @@ class NavlinkconfigurationUser extends Component {
                                                             annonces sur les reservations
                                                         </NavLink>
                                                     </td>
-                                                    <td className="text-right"> {this.props.annoncereservations_count} {this.props.annoncereservations_count < 1 ? "annonce" : "annonces"}</td>
+                                                    <td className="text-right"> {this.props.annoncereservations_count} {this.props.annoncereservations_count > 1 ? "annonces" : "annonce"}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -51,7 +51,7 @@ class NavlinkconfigurationUser extends Component {
                                                             annonces sur les ventes
                                                         </NavLink>
                                                     </td>
-                                                    <td className="text-right"> {this.props.annonceventes_count} {this.props.annonceventes_count < 1 ? "annonce" : "annonces"}</td>
+                                                    <td className="text-right"> {this.props.annonceventes_count} {this.props.annonceventes_count > 1 ? "annonces" : "annonce"}</td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -75,7 +75,7 @@ class NavlinkconfigurationUser extends Component {
                                                             articles sur la location
                                                         </NavLink>
                                                     </td>
-                                                    <td className="text-right">{this.props.blogannoncelocations_count} {this.props.blogannoncelocations_count < 1 ? "article" : "articles"}</td>
+                                                    <td className="text-right">{this.props.blogannoncelocations_count} {this.props.blogannoncelocations_count > 1 ? "articles" : "article"}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -83,7 +83,7 @@ class NavlinkconfigurationUser extends Component {
                                                             articles sur la reservation
                                                         </NavLink>
                                                     </td>
-                                                    <td className="text-right"> {this.props.blogannoncereservations_count} {this.props.blogannoncereservations_count < 1 ? "article" : "articles"}</td>
+                                                    <td className="text-right"> {this.props.blogannoncereservations_count} {this.props.blogannoncereservations_count > 1 ? "articles" : "article"}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -91,7 +91,7 @@ class NavlinkconfigurationUser extends Component {
                                                             article sur la vente
                                                         </NavLink>
                                                     </td>
-                                                    <td className="text-right"> {this.props.blogannonceventes_count} {this.props.blogannonceventes_count < 1 ? "article" : "articles"}</td>
+                                                    <td className="text-right"> {this.props.blogannonceventes_count} {this.props.blogannonceventes_count > 1 ? "articles" : "article"}</td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -115,7 +115,7 @@ class NavlinkconfigurationUser extends Component {
                                                             Notre Teams
                                                         </NavLink>
                                                     </td>
-                                                    <td className="text-right"> {this.props.teamusers_count} {this.props.teamusers_count < 1 ? "membre" : "membres"}</td>
+                                                    <td className="text-right"> {this.props.teamusers_count} {this.props.teamusers_count > 1 ? "membres" : "membre"}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -123,7 +123,7 @@ class NavlinkconfigurationUser extends Component {
                                                             Email des abonnements
                                                         </NavLink>
                                                     </td>
-                                                    <td className="text-right"> {this.props.subscriberusers_count} {this.props.subscriberusers_count < 1 ? "email" : "emails"}</td>
+                                                    <td className="text-right"> {this.props.subscriberusers_count} {this.props.subscriberusers_count > 1 ? "emails" : "email"}</td>
                                                 </tr>
                                                 </tbody>
                                             </table>

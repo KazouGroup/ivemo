@@ -40,7 +40,7 @@ class Navblogannoncelocationsbyuser extends Component {
                                 <strong>{item.name}</strong>
                             </NavLink>
                         </td>
-                        <td className="text-right"> {this.getcountcategoryannonceString(item.blogannoncelocations_count)} {item.blogannoncelocations_count < 1 ? "article" : "articles"}</td>
+                        <td className="text-right"> {this.getcountcategoryannonceString(item.blogannoncelocations_count)} {item.blogannoncelocations_count > 1 ? "articles" : "article"}</td>
                     </tr>
                 )
             })

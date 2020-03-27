@@ -43,6 +43,6 @@ Route::get(
 )->name('api.annonceventeinteresse_site');
 
 Route::get(
-    'annonces_ventes_interesses/{categoryannoncevente}',
+    'annonces_ventes_interesses_categoryannoncevente/{categoryannoncevente}',
     'AnnonceventeController@apiannonceventeinteresseslug'
 )->name('api.annonceventeinteressebycategory_site');

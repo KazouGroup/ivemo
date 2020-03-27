@@ -184,8 +184,11 @@ class AnnonceventeController extends Controller
 
     public function apiannonceventeinteresseslug(categoryannoncevente $categoryannoncevente)
     {
-        $annoncevente = $categoryannoncevente->annonceventes()->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+        $annoncevente = $categoryannoncevente->annonceventes()
+            ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
             ->with('user','city','annoncetype','categoryannoncevente')
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
             ->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
             ->take(3)->distinct()->get()->toArray();

@@ -53,10 +53,10 @@ Route::get(
 
 Route::get(
     'annonces_locations_interesses/{annoncetype}/{categoryannoncelocation}/{city}',
-    'AnnoncelocationController@apiannoncelocationinteresse'
-)->name('api.annoncelocationinteresse_site');
+    'AnnoncelocationController@apiannoncelocationinteressebycity'
+)->name('api.annoncelocationinteresse_by_city_site');
 
 Route::get(
-    'annonces_locations_interesses/{categoryannoncelocation}',
-    'AnnoncelocationController@apiannoncelocationinteresseslug'
-)->name('api.annoncelocationinteressebycategory_site');
+    'annonces_locations_categoryannoncelocation_interesses/{categoryannoncelocation}',
+    'AnnoncelocationController@apiannoncelocationinteressebycategoryannoncelocation'
+)->name('api.annoncelocationinteresse_by_categoryannoncelocation_site');

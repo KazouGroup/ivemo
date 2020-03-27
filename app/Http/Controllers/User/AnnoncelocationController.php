@@ -207,14 +207,29 @@ class AnnoncelocationController extends Controller
         return response()->json($annoncelocation, 200);
     }
 
-    public function apiannoncelocationinteresse(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city)
+    public function apiannoncelocationinteressebycategoryannoncelocation(categoryannoncelocation $categoryannoncelocation)
     {
-        $annoncelocation = $categoryannoncelocation->annoncelocations()->whereIn('annoncetype_id',[$annoncetype->id])
+        $annoncelocation = $categoryannoncelocation->annoncelocations()
             ->with('user','city','annoncetype','categoryannoncelocation')
+            ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
-            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->orWhereHas('city', function ($q) {$q->where('status',1);})
+            ->orderByRaw('RAND()')
+            ->where(['status' => 1,'status_admin' => 1])
+            ->take(10)->distinct()->get()->toArray();
+
+        return response()->json($annoncelocation, 200);
+    }
+
+    public function apiannoncelocationinteressebycity(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city)
+    {
+        $annoncelocation = $categoryannoncelocation->annoncelocations()
+            ->with('user','city','annoncetype','categoryannoncelocation')
+            ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
             ->whereIn('city_id',[$city->id])
+            ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+            ->whereHas('city', function ($q) {$q->where('status',1);})
             ->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
             ->take(10)->distinct()->get()->toArray();

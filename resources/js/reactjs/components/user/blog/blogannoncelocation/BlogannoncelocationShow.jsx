@@ -100,9 +100,8 @@ class BlogannoncelocationShow extends Component {
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         return (
             <Fragment>
-                <Helmet>
-                    <title>{`${blogannoncelocation.title || 'Annonce'}`} - Ivemo</title>
-                </Helmet>
+
+                <Helmet title={`${blogannoncelocation.title || 'Annonce'} - Ivemo`}/>
 
                 <div className="landing-page sidebar-collapse">
 

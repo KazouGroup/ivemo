@@ -12,6 +12,7 @@ import BlogannonceventeInteresse from "./BlogannonceventeInteresse";
 import Swal from "sweetalert2";
 import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
+import AnnoncelocationVenteforBlog from "./AnnoncelocationVenteforBlog";
 
 
 class BlogannonceventeShow extends Component {
@@ -216,6 +217,7 @@ class BlogannonceventeShow extends Component {
                                 </div>
 
 
+                                <AnnoncelocationVenteforBlog {...this.props}/>
 
                                 <BlogannonceventeInteresse  {...this.props} />
 
