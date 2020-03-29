@@ -13,6 +13,7 @@ import ReadMoreAndLess from "react-read-more-less";
 import Skeleton from "react-loading-skeleton";
 import ButtonctionshowmailmessageUser from "../inc/ButtonctionshowmailmessageUser";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
+import NavlinkmailmessagecontactonnocelocationUserShow from "../inc/NavlinkmailmessagecontactonnocelocationUserShow";
 
 
 class PersonalmessagesannonceslocationsShowUser extends Component {
@@ -168,19 +169,7 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-
-                                                            <NavlinkmailmessageUserShow/>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                      <NavlinkmailmessagecontactonnocelocationUserShow/>
 
                                     </div>
 

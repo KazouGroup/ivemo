@@ -71,7 +71,7 @@ class PersonalmessagesfavoritecontactUser extends Component {
     }
     readItem(item) {
 
-        const url = route('personal_contactusers_mails_active.site', [item.id]);
+        const url = route('personal_contactusers_mails_unactive.site', [item.id]);
         dyaxios.get(url).then(() => {
             this.props.history.push(`/profile/${$userIvemo.slug}/personal_mails/contacts/${item.slug}/`);
         })

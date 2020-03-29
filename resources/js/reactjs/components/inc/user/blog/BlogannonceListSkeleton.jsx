@@ -21,13 +21,7 @@ function BlogannonceListSkeleton(props) {
                                <Skeleton count={2}/>
 
                                <div className="card-footer">
-                                   <div className="author">
-                                       <Skeleton circle={true} height={35} width={35} />
-                                   </div>
-
-                                   <div className="stats stats-right">
-                                       <Skeleton width={58} /> <Skeleton width={50} /> <Skeleton width={5} /> <Skeleton width={50} /> <Skeleton width={50} />
-                                   </div>
+                                   <Skeleton circle={true} height={35} width={35} />
                                </div>
                            </div>
                            <div className="col-md-4">
@@ -58,13 +52,7 @@ function BlogannonceListSkeleton(props) {
                                <Skeleton count={2}/>
 
                                <div className="card-footer">
-                                   <div className="author">
-                                       <Skeleton circle={true} height={35} width={35} />
-                                   </div>
-
-                                   <div className="stats stats-right">
-                                       <Skeleton width={58} /> <Skeleton width={50} /> <Skeleton width={5} /> <Skeleton width={50} /> <Skeleton width={50} />
-                                   </div>
+                                   <Skeleton circle={true} height={35} width={35} />
                                </div>
                            </div>
                            <div className="col-md-4">
@@ -95,13 +83,7 @@ function BlogannonceListSkeleton(props) {
                                <Skeleton count={2}/>
 
                                <div className="card-footer">
-                                   <div className="author">
-                                       <Skeleton circle={true} height={35} width={35} />
-                                   </div>
-
-                                   <div className="stats stats-right">
-                                       <Skeleton width={58} /> <Skeleton width={50} /> <Skeleton width={5} /> <Skeleton width={50} /> <Skeleton width={50} />
-                                   </div>
+                                   <Skeleton circle={true} height={35} width={35} />
                                </div>
                            </div>
                            <div className="col-md-4">
