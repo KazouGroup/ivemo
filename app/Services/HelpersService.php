@@ -8,14 +8,38 @@ class HelpersService
     public static function helperscontactuserscount($user)
     {
         $data = user::whereSlug($user->slug)
-
             ->withCount(['contactusers' => function ($q) use ($user){
-                $q->where('status_red',1)
+                $q->where(['status_red' => 1])
+                    ->with('user')
+                    ->whereIn('user_id',[$user->id]);
+            }])
+            ->withCount(['archvementcontactusers' => function ($q) use ($user){
+                $q->where(['status_archvement' => 1])
+                    ->with('user')
+                    ->whereIn('user_id',[$user->id]);
+            }])->withCount(['favoritecontactusers' => function ($q) use ($user){
+                $q->where(['status_favorite' => 1])
                     ->with('user')
                     ->whereIn('user_id',[$user->id]);
             }])
             ->withCount(['contactusersventes' => function ($q) use ($user){
-                $q->where('status_red',1)
+                $q->where(['status_red' => 1])
+                    ->whereIn('user_id',[$user->id])
+                    ->with('annoncevente','user')
+                    ->whereHas('annoncevente', function ($q) use ($user) {
+                        $q->where('status_admin',1)
+                            ->whereIn('user_id',[$user->id]);
+                    });},
+            ])->withCount(['favoritecontactusersventes' => function ($q) use ($user){
+                $q->where(['status_favorite' => 1])
+                    ->whereIn('user_id',[$user->id])
+                    ->with('annoncevente','user')
+                    ->whereHas('annoncevente', function ($q) use ($user) {
+                        $q->where('status_admin',1)
+                            ->whereIn('user_id',[$user->id]);
+                    });},
+            ])->withCount(['archvementcontactusersventes' => function ($q) use ($user){
+                $q->where(['status_archvement' => 1])
                     ->whereIn('user_id',[$user->id])
                     ->with('annoncevente','user')
                     ->whereHas('annoncevente', function ($q) use ($user) {
@@ -24,7 +48,7 @@ class HelpersService
                     });},
             ])
             ->withCount(['contactuserslocations' => function ($q) use ($user){
-                $q->where('status_red',1)
+                $q->where(['status_red' => 1,'status_archvement' => 1])
                     ->whereIn('user_id',[$user->id])
                     ->with('annoncelocation','user')
                     ->whereHas('annoncelocation', function ($q) use ($user) {

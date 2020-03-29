@@ -28,4 +28,10 @@ class contactuserslocation extends Model
     {
         return $this->belongsTo(annoncelocation::class,'annoncelocation_id');
     }
+
+    protected $casts = [
+        'status_red' => 'boolean',
+        'status_favorite' => 'boolean',
+        'status_archvement' => 'boolean',
+    ];
 }

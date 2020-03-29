@@ -183,7 +183,12 @@ class AnnoncelocationIndex extends Component {
                                 <br/>
                                 <div className="row">
                                     <div className="col-md-10 ml-auto mr-auto">
-                                        <h5 className="title">Trouver une maison, une chambre ou un appartement à louer  </h5>
+                                        <div className="text-center">
+                                            <h4 className="title">Location des biens</h4>
+                                            <p className="description">
+                                               <b> Trouver une maison,un studio, une chambre ou un appartement et plien d'autre bien à louer</b>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="row">

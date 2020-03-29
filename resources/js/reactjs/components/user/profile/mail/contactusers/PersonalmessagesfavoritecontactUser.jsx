@@ -11,7 +11,7 @@ import HeadermailmessageUser from "../inc/HeadermailmessageUser";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 
 
-class PersonalmessagescontactUser extends Component {
+class PersonalmessagesfavoritecontactUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,15 +25,8 @@ class PersonalmessagescontactUser extends Component {
         this.unactiveItem = this.unactiveItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
         this.archvementItem = this.archvementItem.bind(this);
-        this.unarchvementItem = this.unarchvementItem.bind(this);
         this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
-    }
-
-    loadmoresItem() {
-        this.setState((old) => {
-            return { visiable: old.visiable + 20 }
-        })
     }
 
     unfavoriteItem(id){
@@ -50,12 +43,6 @@ class PersonalmessagescontactUser extends Component {
         })
     }
 
-    loadItems() {
-        this.setState({ isLoading: true });
-        let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.personal_mails_contacts.site', [itemuser])).then(response => this.setState({ contactusersprofile: response.data,isLoading: false, }));
-    }
-
     activeItem(id) {
         const url = route('personal_contactusers_mails_active.site', [id]);
         dyaxios.get(url).then(() => {
@@ -70,24 +57,29 @@ class PersonalmessagescontactUser extends Component {
         })
     }
 
+    loadmoresItem() {
+        this.setState((old) => {
+            return { visiable: old.visiable + 20 }
+        })
+    }
+
+
+    loadItems() {
+        this.setState({ isLoading: true });
+        let itemuser = this.props.match.params.user;
+        dyaxios.get(route('api.personal_mails_favorite_contacts.site', [itemuser])).then(response => this.setState({ contactusersprofile: response.data,isLoading: false, }));
+    }
     readItem(item) {
 
-        const url = route('personal_contactusers_mails_unactive.site', [item.id]);
+        const url = route('personal_contactusers_mails_active.site', [item.id]);
         dyaxios.get(url).then(() => {
             this.props.history.push(`/profile/${$userIvemo.slug}/personal_mails/contacts/${item.slug}/`);
         })
 
     }
 
-    unarchvementItem(id){
-        const url = route('personal_contactusers_mails_unarchvement.site', [id]);
-        dyaxios.get(url).then(() => {
-            this.loadItems();
-        })
-    }
-
     archvementItem(id){
-        const url = route('personal_contactusers_mails_archvement.site', [id]);
+        const url = route('personal_contactusers_mails_unarchvement.site', [id]);
         dyaxios.get(url).then(() => {
             this.loadItems();
         })
@@ -158,10 +150,11 @@ class PersonalmessagescontactUser extends Component {
             contactusersprofile.contactusers.slice(0, visiable).map(item => {
                 return (
 
-                    <HeadermailmessageUser key={item.id} {...item} readItem={this.readItem} deleteItem={this.deleteItem}
-                        activeItem={this.activeItem} unactiveItem={this.unactiveItem}
-                        archvementItem={this.archvementItem} unarchvementItem={this.unarchvementItem}
-                        unfavoriteItem={this.unfavoriteItem} favoriteItem={this.favoriteItem} />
+                    <HeadermailmessageUser key={item.id} {...item} readItem={this.readItem}
+                                           activeItem={this.activeItem} unactiveItem={this.unactiveItem}
+                                           archvementItem={this.archvementItem}
+                                           deleteItem={this.deleteItem}
+                                           unfavoriteItem={this.unfavoriteItem} favoriteItem={this.favoriteItem} />
                 )
             })
         ) : (
@@ -171,9 +164,7 @@ class PersonalmessagescontactUser extends Component {
         return (
 
             <>
-                <Helmet>
-                    <title>Messages contact {`${$userIvemo.first_name}`} - Ivemo</title>
-                </Helmet>
+                <Helmet title={`Messages suivis ${$userIvemo.first_name} - Ivemo`}/>
 
                 <div className="landing-page sidebar-collapse">
 
@@ -221,7 +212,7 @@ class PersonalmessagescontactUser extends Component {
                                                                         <td className="text-right"> {contactusersprofile.archvementcontactusers_count} {contactusersprofile.archvementcontactusers_count > 1 ? "messages" : "message"}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td> <NavLink to={`/profile/${contactusersprofile.slug}/personal_mails/favorite_contacts/`}>{contactusersprofile.favoritecontactusers_count > 1 ? "Messages suivis" : "Message suivis"}</NavLink></td>
+                                                                        <td> <NavLink to={`/profile/${contactusersprofile.slug}/personal_mails/archvement_contacts/`}>{contactusersprofile.favoritecontactusers_count > 1 ? "Messages suivis" : "Message suivis"}</NavLink></td>
                                                                         <td className="text-right"> {contactusersprofile.favoritecontactusers_count} {contactusersprofile.favoritecontactusers_count > 1 ? "messages" : "message"}</td>
                                                                     </tr>
                                                                     </tbody>
@@ -297,4 +288,4 @@ class PersonalmessagescontactUser extends Component {
         )
     }
 }
-export default PersonalmessagescontactUser;
+export default PersonalmessagesfavoritecontactUser;

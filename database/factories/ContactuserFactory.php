@@ -16,6 +16,8 @@ $factory->define(contactuser::class, function (Faker $faker) {
         'slug' => str_slug($myslug),
         'email' => $faker->freeEmail,
         'status_red' => $faker->boolean,
+        'status_archvement' => $faker->boolean,
+        'status_favorite' => $faker->boolean,
         'subject' => $faker->text(50),
         'message' => $faker->realText(rand(1000, 4000)),
         'user_id' => user::inRandomOrder()->first()->id,

@@ -18,8 +18,58 @@ class PersonalmessagesannoncesventesUser extends Component {
 
         this.deleteItem = this.deleteItem.bind(this);
         this.readItem = this.readItem.bind(this);
+        this.activeItem = this.activeItem.bind(this);
+        this.unactiveItem = this.unactiveItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unarchvementItem = this.unarchvementItem.bind(this);
+        this.archvementItem = this.archvementItem.bind(this);
     }
+
+
+    unfavoriteItem(id){
+        const url = route('personal_contactusersvente_mails_unfavorite.site', [id]);
+        dyaxios.get(url).then(() => {
+            this.loadItems();
+        })
+    }
+
+    favoriteItem(id){
+        const url = route('personal_contactusersvente_mails_favorite.site', [id]);
+        dyaxios.get(url).then(() => {
+            this.loadItems();
+        })
+    }
+
+    activeItem(id) {
+        const url = route('personal_contactusersvente_mails_active.site', [id]);
+        dyaxios.get(url).then(() => {
+            this.loadItems();
+        })
+    }
+
+    unactiveItem(id) {
+        const url = route('personal_contactusersvente_mails_unactive.site', [id]);
+        dyaxios.get(url).then(() => {
+            this.loadItems();
+        })
+    }
+
+    unarchvementItem(id){
+        const url = route('personal_contactusersvente_mails_unarchvement.site', [id]);
+        dyaxios.get(url).then(() => {
+            this.loadItems();
+        })
+    }
+
+    archvementItem(id){
+        const url = route('personal_contactusersvente_mails_archvement.site', [id]);
+        dyaxios.get(url).then(() => {
+            this.loadItems();
+        })
+    }
+
     loadmoresItem() {
         this.setState((old) => {
             return { visiable: old.visiable + 20 }
@@ -28,7 +78,7 @@ class PersonalmessagesannoncesventesUser extends Component {
 
     readItem(item) {
 
-        const url = route('personal_contactusersvente_mails_active.site', [item.id]);
+        const url = route('personal_contactusersvente_mails_unactive.site', [item.id]);
         dyaxios.get(url).then(() => {
             this.props.history.push(`/profile/${$userIvemo.slug}/personal_mails/annonces_ventes/${item.slug}/`);
         })
@@ -106,7 +156,10 @@ class PersonalmessagesannoncesventesUser extends Component {
             contactusersventes.contactusersventes.slice(0, visiable).map(item => {
                 return (
 
-                    <HeadermailmessageUser key={item.id} {...item} readItem={this.readItem} deleteItem={this.deleteItem} />
+                    <HeadermailmessageUser key={item.id} {...item} readItem={this.readItem} deleteItem={this.deleteItem}
+                                           activeItem={this.activeItem} unactiveItem={this.unactiveItem}
+                                           archvementItem={this.archvementItem} unarchvementItem={this.unarchvementItem}
+                                           unfavoriteItem={this.unfavoriteItem} favoriteItem={this.favoriteItem} />
                 )
             })
         ) : (
@@ -150,6 +203,35 @@ class PersonalmessagesannoncesventesUser extends Component {
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                            <div className="card-body">
+                                                                <table>
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td> <NavLink to={`/profile/${contactusersventes.slug}/personal_mails/archvement_annonces_ventes/`}>{contactusersventes.archvementcontactusersventes_count > 1 ? "Messages archivés" : "Message archivé"}</NavLink></td>
+                                                                        <td className="text-right"> {contactusersventes.archvementcontactusersventes_count} {contactusersventes.archvementcontactusersventes_count > 1 ? "messages" : "message"}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td> <NavLink to={`/profile/${contactusersventes.slug}/personal_mails/favorite_annonces_ventes/`}>{contactusersventes.favoritecontactusersventes_count > 1 ? "Messages suivis" : "Message suivis"}</NavLink></td>
+                                                                        <td className="text-right"> {contactusersventes.favoritecontactusersventes_count} {contactusersventes.favoritecontactusersventes_count > 1 ? "messages" : "message"}</td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+
                                         </div>
 
                                     </div>

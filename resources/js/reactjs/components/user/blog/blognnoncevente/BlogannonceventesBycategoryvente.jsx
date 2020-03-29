@@ -12,6 +12,7 @@ import BlogannonceventeList from "./BlogannonceventeList";
 import Navlinknewblogannoncevente from "./treatement/Navlinknewblogannoncevente";
 import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
+import BlogannonceListSkeleton from "../../../inc/user/blog/BlogannonceListSkeleton";
 
 
 class BlogannonceventesBycategoryvente extends Component {
@@ -19,6 +20,7 @@ class BlogannonceventesBycategoryvente extends Component {
         super(props);
         this.state = {
             blogannonceventes: {blogannonceventes:[]},
+            isLoading: false,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -132,9 +134,10 @@ class BlogannonceventesBycategoryvente extends Component {
     }
 
     loadItems(){
+        this.setState({ isLoading: true });
         let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
         let url = route('api.blogannoncecategoryventes_site', [itemCategoryannoncevente]);
-        dyaxios.get(url).then(response => this.setState({ blogannonceventes: response.data, }));
+        dyaxios.get(url).then(response => this.setState({ blogannonceventes: response.data,isLoading: false, }));
     }
 
     // lifecycle method
@@ -143,21 +146,19 @@ class BlogannonceventesBycategoryvente extends Component {
     }
 
     render() {
-        const {blogannonceventes} = this.state;
-        const mapBlogannonceventes = blogannonceventes.blogannonceventes.length ? (
+        const {blogannonceventes,isLoading} = this.state;
+        const mapBlogannonceventes = isLoading ? (
+            <BlogannonceListSkeleton/>
+        ):(
             blogannonceventes.blogannonceventes.map(item => {
                 return(
                     <BlogannonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
                 )
             })
-        ):(
-            <></>
         );
         return (
             <>
-                <Helmet>
-                    <title>Guides et conseils ventes {`${blogannonceventes.name || 'Annonce'}`} - Ivemo</title>
-                </Helmet>
+                <Helmet title={`Guides et conseils ventes ${blogannonceventes.name || 'Annonce'} - Ivemo`}/>
 
                 <div className="landing-page sidebar-collapse">
 

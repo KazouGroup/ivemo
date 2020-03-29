@@ -160,12 +160,32 @@ class user extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(contactuser::class, 'user_id');
     }
 
+    public function archvementcontactusers()
+    {
+        return $this->hasMany(contactuser::class, 'user_id');
+    }
+
+    public function favoritecontactusers()
+    {
+        return $this->hasMany(contactuser::class, 'user_id');
+    }
+
     public function contactuserslocations()
     {
         return $this->hasMany(contactuserslocation::class, 'user_id');
     }
 
     public function contactusersventes()
+    {
+        return $this->hasMany(contactusersvente::class, 'user_id');
+    }
+
+    public function  archvementcontactusersventes()
+    {
+        return $this->hasMany(contactusersvente::class, 'user_id');
+    }
+
+    public function favoritecontactusersventes()
     {
         return $this->hasMany(contactusersvente::class, 'user_id');
     }

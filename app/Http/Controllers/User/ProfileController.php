@@ -207,18 +207,6 @@ class ProfileController extends Controller
              ]);
     }
 
-     public function personalmessagescontacts(user $user)
-    {
-        if (auth()->user()->id === $user->id){
-            return view('user.profile.contactuser.personal_mailcontacts',[
-                'user' => auth()->user()
-            ]);
-        }else{
-            return abort(404);
-        }
-
-    }
-
     public function api_profile_add_info_account(profile $profile)
     {
         $profile = profile::whereSlug($profile->slug)

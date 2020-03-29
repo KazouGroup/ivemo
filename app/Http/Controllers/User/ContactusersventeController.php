@@ -56,11 +56,61 @@ class ContactusersventeController extends Controller
 
     }
 
+    public function personalmessagesarchvement_annonces_ventes(user $user)
+    {
+        if (auth()->user()->id === $user->id){
+            return view('user.profile.contactuservente.personal_mailannonces_ventes',[
+                'user' => auth()->user()
+            ]);
+        }else{
+            abort(404);
+        }
+
+    }
+
+    public function personalmessagesfavannonces_ventes(user $user)
+    {
+        if (auth()->user()->id === $user->id){
+            return view('user.profile.contactuservente.personal_mailannonces_ventes',[
+                'user' => auth()->user()
+            ]);
+        }else{
+            abort(404);
+        }
+
+    }
+
     public function apipersonalmailsannoncesventes(user $user)
     {
         if (auth()->user()->id === $user->id){
 
             $contactusersventes = ContactusersventeService::apipersonalmessagesannonces($user);
+
+            return response()->json($contactusersventes, 200);
+        }else{
+            abort(404);
+        }
+
+    }
+
+    public function apipersonalmailsarchvementannoncesventes(user $user)
+    {
+        if (auth()->user()->id === $user->id){
+
+            $contactusersventes = ContactusersventeService::apipersonalmailsarchvementannoncesventes($user);
+
+            return response()->json($contactusersventes, 200);
+        }else{
+            abort(404);
+        }
+
+    }
+
+    public function apipersonalmailsfavoriteannoncesventes(user $user)
+    {
+        if (auth()->user()->id === $user->id){
+
+            $contactusersventes = ContactusersventeService::apipersonalmailsfavoriteannoncesventes($user);
 
             return response()->json($contactusersventes, 200);
         }else{
@@ -148,8 +198,68 @@ class ContactusersventeController extends Controller
         $this->authorize('update',$contactusersvente);
 
         if(auth()->user()->id === $contactusersvente->user_id){
-            $contactusersvente->update([ 'status_red' => 0,]);
-            return response('active confirmed',Response::HTTP_ACCEPTED);
+            $contactusersvente->update(['status_red' => 1,]);
+            return response('success response',Response::HTTP_ACCEPTED);
+        }
+    }
+
+    public function personalmessagescontactsunactive($id)
+    {
+        $contactusersvente = contactusersvente::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$contactusersvente);
+
+        if(auth()->user()->id === $contactusersvente->user_id){
+            $contactusersvente->update(['status_red' => 0,]);
+            return response('success response',Response::HTTP_ACCEPTED);
+        }
+    }
+
+    public function personalmessagescontactsfavorite($id)
+    {
+        $contactusersvente = contactusersvente::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$contactusersvente);
+
+        if(auth()->user()->id === $contactusersvente->user_id){
+            $contactusersvente->update([ 'status_favorite' => 1,]);
+            return response('success response',Response::HTTP_ACCEPTED);
+        }
+    }
+
+    public function personalmessagescontactsunfavorite($id)
+    {
+        $contactusersvente = contactusersvente::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$contactusersvente);
+
+        if(auth()->user()->id === $contactusersvente->user_id){
+            $contactusersvente->update([ 'status_favorite' => 0,]);
+            return response('success response',Response::HTTP_ACCEPTED);
+        }
+    }
+
+    public function personalmessagescontactsunarchvement($id)
+    {
+        $contactusersvente = contactusersvente::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$contactusersvente);
+
+        if(auth()->user()->id === $contactusersvente->user_id){
+            $contactusersvente->update([ 'status_archvement' => 0,]);
+            return response('success response',Response::HTTP_ACCEPTED);
+        }
+    }
+
+    public function personalmessagescontactsarchvement($id)
+    {
+        $contactusersvente = contactusersvente::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$contactusersvente);
+
+        if(auth()->user()->id === $contactusersvente->user_id){
+            $contactusersvente->update([ 'status_archvement' => 1,]);
+            return response('success response',Response::HTTP_ACCEPTED);
         }
     }
 

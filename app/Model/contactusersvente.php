@@ -38,6 +38,8 @@ class contactusersvente extends Model
 
     protected $casts = [
         'status_red' => 'boolean',
+        'status_favorite' => 'boolean',
+        'status_archvement' => 'boolean',
     ];
 
 }

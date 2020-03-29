@@ -15,7 +15,8 @@ class ContactuserslocationService
     {
         $contactusers = HelpersService::helperscontactuserscount($user)
             ->with(['contactuserslocations' => function ($q) use ($user){
-                $q->whereIn('user_id',[$user->id])
+                $q->where(['status_archvement' => 1])
+                    ->whereIn('user_id',[$user->id])
                     ->with('annoncelocation','user')
                     ->orderBy('created_at','DESC')
                     ->with([

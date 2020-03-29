@@ -9,6 +9,7 @@ import Navblogannoncelocations from "./inc/Navblogannoncelocations";
 import Navlinknewblogannoncelocation from "./treatement/Navlinknewblogannoncelocation";
 import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
+import BlogannonceListSkeleton from "../../../inc/user/blog/BlogannonceListSkeleton";
 
 
 class BlogannoncelocationBycategorylocation extends Component {
@@ -16,6 +17,7 @@ class BlogannoncelocationBycategorylocation extends Component {
         super(props);
         this.state = {
             blogannoncelocation: {blogannoncelocations:[]},
+            isLoading: false,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -129,9 +131,10 @@ class BlogannoncelocationBycategorylocation extends Component {
     }
 
     loadItems(){
+        this.setState({ isLoading: true });
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let url = route('api.blogannonceblogcategorylocations_site', [itemCategoryannoncelocation]);
-        dyaxios.get(url).then(response => this.setState({ blogannoncelocation: response.data, }));
+        dyaxios.get(url).then(response => this.setState({ blogannoncelocation: response.data, isLoading: false, }));
     }
 
     // lifecycle method
@@ -140,22 +143,20 @@ class BlogannoncelocationBycategorylocation extends Component {
     }
 
     render() {
-        const {blogannoncelocation} = this.state;
+        const {blogannoncelocation,isLoading} = this.state;
         const blogannoncelocationsbycategorylocations = blogannoncelocation.blogannoncelocations;
-        const mapAnnoncelocations = blogannoncelocationsbycategorylocations.length ? (
+        const mapAnnoncelocations = isLoading ? (
+            <BlogannonceListSkeleton/>
+        ):(
             blogannoncelocationsbycategorylocations.map(item => {
                 return(
                     <BlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
                 )
             })
-        ):(
-            <></>
         );
         return (
             <>
-                <Helmet>
-                    <title>Guides et conseils locations {`${blogannoncelocation.name || 'Annonce'}`} - Ivemo</title>
-                </Helmet>
+                <Helmet title={`Guides et conseils locations ${blogannoncelocation.name || 'Annonce'} - Ivemo`}/>
 
                 <div className="about-us sidebar-collapse">
 

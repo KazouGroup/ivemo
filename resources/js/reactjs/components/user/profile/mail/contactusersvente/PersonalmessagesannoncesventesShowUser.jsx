@@ -21,6 +21,55 @@ class PersonalmessagesannoncesventesShowUser extends Component {
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.archvementItem = this.archvementItem.bind(this);
+        this.activeItem = this.activeItem.bind(this);
+        this.unactiveItem = this.unactiveItem.bind(this);
+        this.unarchvementItem = this.unarchvementItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
+    }
+
+
+    unfavoriteItem(id){
+        const url = route('personal_contactusersvente_mails_unfavorite.site', [id]);
+        dyaxios.get(url).then(() => {
+            this.loadItem();
+        })
+    }
+
+    favoriteItem(id){
+        const url = route('personal_contactusersvente_mails_favorite.site', [id]);
+        dyaxios.get(url).then(() => {
+            this.loadItem();
+        })
+    }
+
+    activeItem(id) {
+        const url = route('personal_contactusersvente_mails_active.site', [id]);
+        dyaxios.get(url).then(() => {
+            this.loadItem();
+        })
+    }
+
+    unactiveItem(id) {
+        const url = route('personal_contactusersvente_mails_unactive.site', [id]);
+        dyaxios.get(url).then(() => {
+            this.loadItem();
+        })
+    }
+
+    unarchvementItem(id){
+        const url = route('personal_contactusersvente_mails_unarchvement.site', [id]);
+        dyaxios.get(url).then(() => {
+            this.loadItem();
+        })
+    }
+
+    archvementItem(id){
+        const url = route('personal_contactusersvente_mails_archvement.site', [id]);
+        dyaxios.get(url).then(() => {
+            this.loadItem();
+        })
     }
 
 
@@ -88,7 +137,7 @@ class PersonalmessagesannoncesventesShowUser extends Component {
 
     // lifecycle method
     componentDidMount() {
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0);
         this.loadItem();
 
     }
@@ -149,6 +198,41 @@ class PersonalmessagesannoncesventesShowUser extends Component {
                                                         <div className="text-right ml-auto">
                                                             <h6 className="ml-auto mr-auto">
                                                                 <strong>{moment(contactuser.created_at).format('DD/MM/YYYY')}</strong>
+
+                                                                {contactuser.status_favorite ?
+                                                                    <Button onClick={() => this.unfavoriteItem(contactuser.id)}
+                                                                            className="btn btn-warning btn-icon btn-sm btn-neutral" title="Suivis">
+                                                                        <i className="fas fa-star"/>
+                                                                    </Button>
+                                                                    :
+                                                                    <Button onClick={() => this.favoriteItem(contactuser.id)}
+                                                                            className="btn btn-warning btn-icon btn-sm btn-neutral" title="Non suivis">
+                                                                        <i className="far fa-star"/>
+                                                                    </Button>
+                                                                }
+                                                                {contactuser.status_red ?
+                                                                    <Button onClick={() => this.unactiveItem(contactuser.id)}
+                                                                            className="btn btn-primary btn-icon btn-sm btn-neutral" title="Marquer comme lu">
+                                                                        <i className="fas fa-envelope"></i>
+                                                                    </Button>
+                                                                    :
+                                                                    <Button onClick={() => this.activeItem(contactuser.id)}
+                                                                            className="btn btn-success btn-icon btn-sm btn-neutral" title="Marquer comme non lu">
+                                                                        <i className="fas fa-envelope-open"></i>
+                                                                    </Button>
+                                                                }
+
+                                                                {contactuser.status_archvement ?
+                                                                    <Button onClick={() => this.unarchvementItem(contactuser.id)}
+                                                                            className="btn btn-info btn-icon btn-sm btn-neutral" title="Archivé">
+                                                                        <i className="fas fa-bookmark"/>
+                                                                    </Button>
+                                                                    :
+                                                                    <Button onClick={() => this.archvementItem(contactuser.id)}
+                                                                            className="btn btn-info btn-icon btn-sm btn-neutral" title="Non archivé">
+                                                                        <i className="far fa-bookmark"/>
+                                                                    </Button>
+                                                                }
                                                             </h6>
 
                                                         </div>
@@ -179,6 +263,24 @@ class PersonalmessagesannoncesventesShowUser extends Component {
                                                                                 </div>
 
                                                                             </div>
+                                                                        </div>
+
+                                                                        <div className="text-center">
+                                                                            {contactuser.annoncevente.status ?
+                                                                                <>
+                                                                                    <button type="button" rel="tooltip" title={`Annonce visible`}
+                                                                                            className="btn btn-success btn-icon btn-sm">
+                                                                                        <i className="now-ui-icons ui-1_check"/>
+                                                                                    </button>
+                                                                                </>
+                                                                                :
+                                                                                <>
+                                                                                    <button type="button" title={`Annonce non visible`}
+                                                                                            className="btn btn-primary btn-icon btn-sm">
+                                                                                        <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                                    </button>
+                                                                                </>
+                                                                            }
                                                                         </div>
 
                                                                     </div>

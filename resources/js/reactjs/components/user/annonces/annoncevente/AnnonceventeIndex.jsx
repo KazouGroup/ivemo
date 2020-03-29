@@ -58,8 +58,13 @@ class AnnonceventeIndex extends Component {
                             </div>
                             <div className="content-center">
                                 <div className="row">
-                                    <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">Vendez un terrain, une maison, un appartement ou une boutique </h3>
+                                    <div className="col-md-10 ml-auto mr-auto">
+                                        <div className="text-center">
+                                            <h4 className="title">Vendre ou acheter des biens</h4>
+                                            <p className="description">
+                                                <b> Vendez un terrain, une maison, un appartement ou une boutique </b>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

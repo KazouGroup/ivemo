@@ -18,6 +18,8 @@ class CreateContactusersventesTable extends Migration
             $table->string('full_name')->nullable();
             $table->string('email')->nullable();
             $table->string('slug')->nullable();
+            $table->boolean('status_archvement')->default(false);
+            $table->boolean('status_favorite')->default(false);
             $table->boolean('status_red')->default(true);
             $table->string('phone')->nullable();
             $table->string('ip')->nullable();

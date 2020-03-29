@@ -11,7 +11,8 @@ class LinkValicationEmail extends PureComponent {
     sendItem(e) {
         dyaxios.post(route('verification.resend')).then(() => {
 
-                $.notify({
+                $.notify(
+                    {
                         message: `Message de confirmation à <b>${$userIvemo.email}</b>`,
                     },
                     {

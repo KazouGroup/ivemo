@@ -110,7 +110,7 @@ class ProfileAccountPublicUser extends Component {
                                         <div className="pull-right">
                                             {userPublick.profile.site_internet && (
                                                 <a href={`${userPublick.profile.site_internet}`} className="btn btn-sm btn-secondary" target="_banck">
-                                                    <i className="now-ui-icons business_globe"/> Site internet
+                                                    <i className="now-ui-icons business_globe"/>
                                                 </a>
                                             )}
 
@@ -118,7 +118,7 @@ class ProfileAccountPublicUser extends Component {
                                                 <i className="now-ui-icons tech_mobile"/>
                                             </Button>
                                             <a href="#contact" className="btn btn-sm btn-success">
-                                                <i className="now-ui-icons ui-2_chat-round"/> Contacter
+                                                <i className="now-ui-icons ui-2_chat-round"/>
                                             </a>
 
                                             {!$guest && (
