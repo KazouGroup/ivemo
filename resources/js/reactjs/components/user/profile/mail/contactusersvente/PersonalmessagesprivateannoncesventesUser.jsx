@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import NavlinkmailmessageUser from "../inc/NavlinkmailmessageUser";
 import moment from "moment";
 import {Button, UncontrolledTooltip} from "reactstrap";
+import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 
 
 class PersonalmessagesprivateannoncesventesUser extends Component {
@@ -158,6 +159,14 @@ class PersonalmessagesprivateannoncesventesUser extends Component {
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
 
                                         <div className="card">
                                             <div className="card-body">

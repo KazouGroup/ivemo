@@ -70,11 +70,10 @@ class PersonalmessagesachvmentcontactUser extends Component {
     }
     readItem(item) {
 
-        const url = route('personal_contactusers_mails_active.site', [item.id]);
+        const url = route('personal_contactusers_mails_unactive.site', [item.id]);
         dyaxios.get(url).then(() => {
             this.props.history.push(`/profile/${$userIvemo.slug}/personal_mails/contacts/${item.slug}/`);
         })
-
     }
 
     unarchvementItem(id){
@@ -230,6 +229,13 @@ class PersonalmessagesachvmentcontactUser extends Component {
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+
+                                        <div className="alert alert-info" role="alert">
+                                            <div className="container text-center">
+                                                <strong>Messages archivés</strong>
+                                            </div>
+                                        </div>
+
                                         {!$guest &&(
                                             <>
                                                 {!$userIvemo.email_verified_at &&(

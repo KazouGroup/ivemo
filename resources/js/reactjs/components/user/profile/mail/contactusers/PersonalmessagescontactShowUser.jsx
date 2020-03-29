@@ -11,6 +11,7 @@ import FootermailmessageUser from "../inc/FootermailmessageUser";
 import Skeleton from "react-loading-skeleton";
 import ReadMoreAndLess from "react-read-more-less";
 import NavlinkmailmessagecontactUserShow from "../inc/NavlinkmailmessagecontactUserShow";
+import ButtonctionshowmailmessageUser from "../inc/ButtonctionshowmailmessageUser";
 
 
 class PersonalmessagescontactShowUser extends Component {
@@ -192,43 +193,11 @@ class PersonalmessagescontactShowUser extends Component {
                                                                     <Skeleton width={50} />
                                                                 }
 
-
-                                                                {contactuser.status_favorite ?
-                                                                    <Button onClick={() => this.unfavoriteItem(contactuser.id)}
-                                                                            className="btn btn-warning btn-icon btn-sm btn-neutral" title="Suivis">
-                                                                        <i className="fas fa-star"/>
-                                                                    </Button>
-                                                                    :
-                                                                    <Button onClick={() => this.favoriteItem(contactuser.id)}
-                                                                             className="btn btn-warning btn-icon btn-sm btn-neutral" title="Non suivis">
-                                                                        <i className="far fa-star"/>
-                                                                    </Button>
-                                                                }
-
-                                                                {contactuser.status_red ?
-                                                                    <Button onClick={() => this.unactiveItem(contactuser.id)}
-                                                                            className="btn btn-primary btn-icon btn-sm btn-neutral" title="Marquer comme lu">
-                                                                        <i className="fas fa-envelope"></i>
-                                                                    </Button>
-                                                                    :
-                                                                    <Button onClick={() => this.activeItem(contactuser.id)}
-                                                                            className="btn btn-success btn-icon btn-sm btn-neutral" title="Marquer comme non lu">
-                                                                        <i className="fas fa-envelope-open"></i>
-                                                                    </Button>
-                                                                }
-
-                                                                {contactuser.status_archvement ?
-                                                                    <Button onClick={() => this.unarchvementItem(contactuser.id)}
-                                                                            className="btn btn-info btn-icon btn-sm btn-neutral" title="Non archiver">
-                                                                        <i className="fas fa-bookmark"/>
-                                                                    </Button>
-                                                                    :
-                                                                    <Button onClick={() => this.archvementItem(contactuser.id)}
-                                                                            className="btn btn-info btn-icon btn-sm btn-neutral" title="Archiver">
-                                                                        <i className="far fa-bookmark"/>
-                                                                    </Button>
-                                                                }
-
+                                                                <ButtonctionshowmailmessageUser {...contactuser} deleteItem={this.deleteItem}
+                                                                                                archvementItem={this.archvementItem} unarchvementItem={this.unarchvementItem}
+                                                                                                activeItem={this.activeItem} unactiveItem={this.unactiveItem}
+                                                                                                favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem}
+                                                                />
                                                             </h6>
                                                         </div>
                                                     </div>
@@ -264,8 +233,7 @@ class PersonalmessagescontactShowUser extends Component {
                                                             </div>
                                                         </div>
                                                         <a href={`mailto:${contactuser.email}`} className="btn btn-primary pull-left" id="TooltipMail">
-                                                            <i className="now-ui-icons text_caps-small" />
-                                                            Répondre
+                                                            <i className="fas fa-reply-all"></i> Répondre
                                                         </a>
                                                         <UncontrolledTooltip placement="bottom" target="TooltipMail" delay={0}>
                                                             Repondre à {contactuser.email}
@@ -285,8 +253,7 @@ class PersonalmessagescontactShowUser extends Component {
 
                                                         <Button onClick={() => this.deleteItem(contactuser.id)}
                                                                 className="btn btn-danger pull-left"  id="TooltipDelete">
-                                                            <i className="now-ui-icons ui-1_simple-remove" />
-                                                            Supprimer
+                                                            <i className="far fa-trash-alt"></i> Supprimer
                                                         </Button>{" "}
                                                         <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
                                                             Supprimer ce message

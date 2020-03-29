@@ -48,7 +48,23 @@ class HelpersService
                     });},
             ])
             ->withCount(['contactuserslocations' => function ($q) use ($user){
-                $q->where(['status_red' => 1,'status_archvement' => 1])
+                $q->where(['status_red' => 1])
+                    ->whereIn('user_id',[$user->id])
+                    ->with('annoncelocation','user')
+                    ->whereHas('annoncelocation', function ($q) use ($user) {
+                        $q->where('status_admin',1)
+                            ->whereIn('user_id',[$user->id]);
+                    });},
+            ])->withCount(['archvementcontactuserslocations' => function ($q) use ($user){
+                $q->where(['status_archvement' => 1])
+                    ->whereIn('user_id',[$user->id])
+                    ->with('annoncelocation','user')
+                    ->whereHas('annoncelocation', function ($q) use ($user) {
+                        $q->where('status_admin',1)
+                            ->whereIn('user_id',[$user->id]);
+                    });},
+            ])->withCount(['favoritecontactuserslocations' => function ($q) use ($user){
+                $q->where(['status_favorite' => 1])
                     ->whereIn('user_id',[$user->id])
                     ->with('annoncelocation','user')
                     ->whereHas('annoncelocation', function ($q) use ($user) {

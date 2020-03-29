@@ -11,6 +11,8 @@ import Swal from "sweetalert2";
 import NavlinkmailmessageUserShow from "../inc/NavlinkmailmessageUserShow";
 import ReadMoreAndLess from "react-read-more-less";
 import Skeleton from "react-loading-skeleton";
+import ButtonctionshowmailmessageUser from "../inc/ButtonctionshowmailmessageUser";
+import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 
 
 class PersonalmessagesannonceslocationsShowUser extends Component {
@@ -21,8 +23,55 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.archvementItem = this.archvementItem.bind(this);
+        this.unarchvementItem = this.unarchvementItem.bind(this);
+        this.activeItem = this.activeItem.bind(this);
+        this.unactiveItem = this.unactiveItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
     }
 
+    unfavoriteItem(id){
+        const url = route('personal_contactuserslocation_mails_unfavorite.site', [id]);
+        dyaxios.get(url).then(() => {
+            this.loadItem();
+        })
+    }
+
+    favoriteItem(id){
+        const url = route('personal_contactuserslocation_mails_favorite.site', [id]);
+        dyaxios.get(url).then(() => {
+            this.loadItem();
+        })
+    }
+
+    activeItem(id) {
+        const url = route('personal_contactuserslocation_mails_active.site', [id]);
+        dyaxios.get(url).then(() => {
+            this.loadItem();
+        })
+    }
+
+    unactiveItem(id) {
+        const url = route('personal_contactuserslocation_mails_unactive.site', [id]);
+        dyaxios.get(url).then(() => {
+            this.loadItem();
+        })
+    }
+
+    unarchvementItem(id){
+        const url = route('personal_contactuserslocation_mails_unarchvement.site', [id]);
+        dyaxios.get(url).then(() => {
+            this.loadItem();
+        })
+    }
+
+    archvementItem(id){
+        const url = route('personal_contactuserslocation_mails_archvement.site', [id]);
+        dyaxios.get(url).then(() => {
+            this.loadItem();
+        })
+    }
 
     loadItem() {
         let itemuser = this.props.match.params.user;
@@ -137,6 +186,14 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
+
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="card card-plain card-blog">
@@ -149,6 +206,12 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
                                                         <div className="text-right ml-auto">
                                                             <h6 className="ml-auto mr-auto">
                                                                 <strong>{moment(contactuser.created_at).format('DD/MM/YYYY')}</strong>
+
+                                                                <ButtonctionshowmailmessageUser {...contactuser} deleteItem={this.deleteItem}
+                                                                                                archvementItem={this.archvementItem} unarchvementItem={this.unarchvementItem}
+                                                                                                activeItem={this.activeItem} unactiveItem={this.unactiveItem}
+                                                                                                favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem}
+                                                                />
                                                             </h6>
 
                                                         </div>
@@ -179,6 +242,24 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
                                                                                 </div>
 
                                                                             </div>
+                                                                        </div>
+
+                                                                        <div className="text-center">
+                                                                            {contactuser.annoncelocation.status ?
+                                                                                <>
+                                                                                    <button type="button" title={`Annonce visible`}
+                                                                                            className="btn btn-success btn-icon btn-sm">
+                                                                                        <i className="now-ui-icons ui-1_check"/>
+                                                                                    </button>
+                                                                                </>
+                                                                                :
+                                                                                <>
+                                                                                    <button type="button" title={`Annonce non visible`}
+                                                                                            className="btn btn-primary btn-icon btn-sm">
+                                                                                        <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                                    </button>
+                                                                                </>
+                                                                            }
                                                                         </div>
 
                                                                     </div>
@@ -276,20 +357,24 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
                                                     </div>
                                                     <hr />
                                                     <div className="media-footer">
-                                                        <a href={`mailto:${contactuser.email}`} className="btn btn-primary pull-left">
-                                                            <i className="now-ui-icons text_caps-small" />
-                                                            Répondre
+                                                        <a href={`mailto:${contactuser.email}`} className="btn btn-primary pull-left" id="TooltipMail">
+                                                            <i className="fas fa-reply-all"></i> Répondre
                                                         </a>
+                                                        <UncontrolledTooltip placement="bottom" target="TooltipMail" delay={0}>
+                                                            Repondre à {contactuser.email}
+                                                        </UncontrolledTooltip>
                                                         {contactuser.phone ?
                                                             <a href={`tel:${contactuser.phone}`} rel="tooltip" title={contactuser.phone} data-placement="bottom" className="btn btn-success pull-left">
                                                                 <i className="now-ui-icons tech_mobile" />
                                                                 Phone
                                                             </a>:null}
-                                                        <Button onClick={() => this.deleteItem(contactuser.id)}
-                                                                className="btn btn-danger pull-left" rel="tooltip" title="Supprimer" data-placement="bottom">
-                                                            <i className="now-ui-icons ui-1_simple-remove" />
-                                                            Supprimer
-                                                        </Button>{" "}
+                                                        <Button onClick={() => this.deleteItem(contactuser.id)} id="TooltipDelete"
+                                                                className="btn btn-danger pull-left" title="Supprimer">
+                                                            <i className="far fa-trash-alt"></i> Supprimer
+                                                        </Button>
+                                                        <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
+                                                            Supprimer ce message
+                                                        </UncontrolledTooltip>
                                                     </div>
 
                                                 </div>

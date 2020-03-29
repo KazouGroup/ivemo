@@ -91,6 +91,10 @@ import PersonalmessagesachvmentannoncesventesUser
     from "../components/user/profile/mail/contactusersvente/PersonalmessagesachvmentannoncesventesUser";
 import PersonalmessagesfavoriteannoncesventesUser
     from "../components/user/profile/mail/contactusersvente/PersonalmessagesfavoriteannoncesventesUser";
+import PersonalmessagesachvmentannonceslocationsUser
+    from "../components/user/profile/mail/contactuserslocation/PersonalmessagesachvmentannonceslocationsUser";
+import PersonalmessagesfavoriteannonceslocationsUser
+    from "../components/user/profile/mail/contactuserslocation/PersonalmessagesfavoriteannonceslocationsUser";
 
 
 const RouteUser = props => (
@@ -140,20 +144,22 @@ const RouteUser = props => (
           <Route exact path="/profile/change_password/" component={ProfileAccountChangePasswordUser}/>
           <Route exact path="/profile/:profile/account/" component={ProfileConfigUser}/>
 
-          <Route strict exact path="/profile/:user/personal_mails/annonces_locations/" component={withRouter(PersonalmessagesannonceslocationsUser)}/>
+          <Route exact path="/profile/:user/personal_mails/favorite_annonces_locations/" component={PersonalmessagesfavoriteannonceslocationsUser}/>
+          <Route exact path="/profile/:user/personal_mails/archvement_annonces_locations/" component={PersonalmessagesachvmentannonceslocationsUser}/>
+          <Route exact path="/profile/:user/personal_mails/annonces_locations/" component={withRouter(PersonalmessagesannonceslocationsUser)}/>
           <Route exact path="/profile/:user/personal_mails/annonces_locations/:contactuserslocation/" component={PersonalmessagesannonceslocationsShowUser}/>
 
          {/*<Route strict exact path="/profile/:user/personal_mails/annonces_ventes_by_mail/" component={withRouter(PersonalmessagesprivateannoncesventesUser)}/>*/}
 
 
-          <Route strict exact path="/profile/:user/personal_mails/annonces_ventes/" component={withRouter(PersonalmessagesannoncesventesUser)}/>
-          <Route strict exact path="/profile/:user/personal_mails/favorite_annonces_ventes/" component={PersonalmessagesfavoriteannoncesventesUser}/>
-          <Route strict exact path="/profile/:user/personal_mails/archvement_annonces_ventes/" component={PersonalmessagesachvmentannoncesventesUser}/>
+          <Route exact path="/profile/:user/personal_mails/annonces_ventes/" component={withRouter(PersonalmessagesannoncesventesUser)}/>
+          <Route exact path="/profile/:user/personal_mails/favorite_annonces_ventes/" component={PersonalmessagesfavoriteannoncesventesUser}/>
+          <Route exact path="/profile/:user/personal_mails/archvement_annonces_ventes/" component={PersonalmessagesachvmentannoncesventesUser}/>
           <Route exact path="/profile/:user/personal_mails/annonces_ventes/:contactusersvente/" component={PersonalmessagesannoncesventesShowUser}/>
 
-          <Route strict exact path="/profile/:user/personal_mails/favorite_contacts/" component={PersonalmessagesfavoritecontactUser}/>
-          <Route strict exact path="/profile/:user/personal_mails/archvement_contacts/" component={PersonalmessagesachvmentcontactUser}/>
-          <Route strict exact path="/profile/:user/personal_mails/contacts/" component={PersonalmessagescontactUser}/>
+          <Route exact path="/profile/:user/personal_mails/favorite_contacts/" component={PersonalmessagesfavoritecontactUser}/>
+          <Route exact path="/profile/:user/personal_mails/archvement_contacts/" component={PersonalmessagesachvmentcontactUser}/>
+          <Route exact path="/profile/:user/personal_mails/contacts/" component={withRouter(PersonalmessagescontactUser)}/>
           <Route exact path="/profile/:user/personal_mails/contacts/:contactuser/" component={PersonalmessagescontactShowUser}/>
 
 

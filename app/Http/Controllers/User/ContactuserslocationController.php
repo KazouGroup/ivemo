@@ -46,11 +46,65 @@ class ContactuserslocationController extends Controller
 
     }
 
+    public function personalmessagesarchvement_annonces_locations(user $user)
+    {
+        if (auth()->user()->id === $user->id){
+
+            return view('user.profile.contactuserlocation.personal_mailannonces_locations',[
+                'user' => auth()->user()
+            ]);
+
+        }else{
+            abort(404);
+        }
+
+    }
+
+    public function personalmessagesfavorite_annonces_locations(user $user)
+    {
+        if (auth()->user()->id === $user->id){
+
+            return view('user.profile.contactuserlocation.personal_mailannonces_locations',[
+                'user' => auth()->user()
+            ]);
+
+        }else{
+            abort(404);
+        }
+
+    }
+
     public function apipersonalmessagesannonces_locations(user $user)
     {
         if (auth()->user()->id === $user->id){
 
             $contactusers = ContactuserslocationService::apipersonalmessagesannonces_locations($user);
+
+            return response()->json($contactusers, 200);
+        }else{
+            abort(404);
+        }
+
+    }
+
+    public function apipersonalmessagesarchvement_annonces_locations(user $user)
+    {
+        if (auth()->user()->id === $user->id){
+
+            $contactusers = ContactuserslocationService::apipersonalmessagesarchvement_annonces_locations($user);
+
+            return response()->json($contactusers, 200);
+        }else{
+            abort(404);
+        }
+
+    }
+
+    public function apipersonalmessagesfavorite_annonces_locations(user $user)
+    {
+        if (auth()->user()->id === $user->id){
+
+            $contactusers = ContactuserslocationService::apipersonalmessagesfavorite_annonces_locations($user);
 
             return response()->json($contactusers, 200);
         }else{
@@ -138,8 +192,68 @@ class ContactuserslocationController extends Controller
         $this->authorize('update',$contactuserslocation);
 
         if(auth()->user()->id === $contactuserslocation->user_id){
+            $contactuserslocation->update([ 'status_red' => 1,]);
+            return response('read confirmed',Response::HTTP_ACCEPTED);
+        }
+    }
+
+    public function personalmessagescontactsunactive($id)
+    {
+        $contactuserslocation = contactuserslocation::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$contactuserslocation);
+
+        if(auth()->user()->id === $contactuserslocation->user_id){
             $contactuserslocation->update([ 'status_red' => 0,]);
             return response('read confirmed',Response::HTTP_ACCEPTED);
+        }
+    }
+
+    public function personalmessagescontactsfavorite($id)
+    {
+        $contactuserslocation = contactuserslocation::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$contactuserslocation);
+
+        if(auth()->user()->id === $contactuserslocation->user_id){
+            $contactuserslocation->update([ 'status_favorite' => 1,]);
+            return response('success response',Response::HTTP_ACCEPTED);
+        }
+    }
+
+    public function personalmessagescontactsunfavorite($id)
+    {
+        $contactuserslocation = contactuserslocation::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$contactuserslocation);
+
+        if(auth()->user()->id === $contactuserslocation->user_id){
+            $contactuserslocation->update([ 'status_favorite' => 0,]);
+            return response('success response',Response::HTTP_ACCEPTED);
+        }
+    }
+
+    public function personalmessagescontactsunarchvement($id)
+    {
+        $contactuserslocation = contactuserslocation::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$contactuserslocation);
+
+        if(auth()->user()->id === $contactuserslocation->user_id){
+            $contactuserslocation->update([ 'status_archvement' => 0,]);
+            return response('success response',Response::HTTP_ACCEPTED);
+        }
+    }
+
+    public function personalmessagescontactsarchvement($id)
+    {
+        $contactuserslocation = contactuserslocation::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$contactuserslocation);
+
+        if(auth()->user()->id === $contactuserslocation->user_id){
+            $contactuserslocation->update([ 'status_archvement' => 1,]);
+            return response('success response',Response::HTTP_ACCEPTED);
         }
     }
     /**

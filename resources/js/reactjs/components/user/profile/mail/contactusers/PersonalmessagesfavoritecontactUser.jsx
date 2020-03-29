@@ -212,7 +212,7 @@ class PersonalmessagesfavoritecontactUser extends Component {
                                                                         <td className="text-right"> {contactusersprofile.archvementcontactusers_count} {contactusersprofile.archvementcontactusers_count > 1 ? "messages" : "message"}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td> <NavLink to={`/profile/${contactusersprofile.slug}/personal_mails/archvement_contacts/`}>{contactusersprofile.favoritecontactusers_count > 1 ? "Messages suivis" : "Message suivis"}</NavLink></td>
+                                                                        <td> <NavLink to={`/profile/${contactusersprofile.slug}/personal_mails/favorite_contacts/`}>{contactusersprofile.favoritecontactusers_count > 1 ? "Messages suivis" : "Message suivis"}</NavLink></td>
                                                                         <td className="text-right"> {contactusersprofile.favoritecontactusers_count} {contactusersprofile.favoritecontactusers_count > 1 ? "messages" : "message"}</td>
                                                                     </tr>
                                                                     </tbody>
@@ -232,6 +232,13 @@ class PersonalmessagesfavoritecontactUser extends Component {
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+
+                                        <div className="alert alert-info" role="alert">
+                                            <div className="container text-center">
+                                                <strong>Messages suivis</strong>
+                                            </div>
+                                        </div>
+
                                         {!$guest &&(
                                             <>
                                                 {!$userIvemo.email_verified_at &&(

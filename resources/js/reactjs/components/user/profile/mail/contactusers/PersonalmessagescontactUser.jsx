@@ -241,6 +241,13 @@ class PersonalmessagescontactUser extends Component {
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+
+                                        <div className="alert alert-info" role="alert">
+                                            <div className="container text-center">
+                                                <strong>Boite de réception</strong>
+                                            </div>
+                                        </div>
+
                                         {!$guest &&(
                                             <>
                                                 {!$userIvemo.email_verified_at &&(

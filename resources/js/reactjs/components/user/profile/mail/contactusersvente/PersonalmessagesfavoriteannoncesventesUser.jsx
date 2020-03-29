@@ -6,6 +6,7 @@ import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import HeadermailmessageUser from "../inc/HeadermailmessageUser";
 import Swal from "sweetalert2";
 import NavlinkmailmessageUser from "../inc/NavlinkmailmessageUser";
+import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 
 
 class PersonalmessagesfavoriteannoncesventesUser extends Component {
@@ -238,6 +239,20 @@ class PersonalmessagesfavoriteannoncesventesUser extends Component {
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+
+                                        <div className="alert alert-info" role="alert">
+                                            <div className="container text-center">
+                                                <strong>Messages suivis de vos annonces sur la vente.</strong>
+                                            </div>
+                                        </div>
+
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
 
                                         <div className="card">
                                             <div className="card-body">
