@@ -122,7 +122,7 @@ class AnnonceslocationList extends Component {
                                                 <strong>{this.props.city.name} </strong>
                                             </span>
                                             </NavLink>
-                                            - {this.props.district}
+                                            - {this.props.district.length > 10 ? this.props.district.substring(0, 10) + "..." : this.props.district}
                                         </div>
 
                                     </div>

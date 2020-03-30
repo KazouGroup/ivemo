@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AnnonceventeResource;
 use App\Http\Resources\CategoryannonceventeResource;
+use App\Http\Resources\CityResource;
 use App\Model\annoncevente;
 use App\Model\annoncetype;
 use App\Model\categoryannoncevente;
@@ -56,6 +57,22 @@ class AnnonceventeController extends Controller
 
     }
 
+    public function apicategoryannonceventebycity(city $city)
+    {
+        $categoryannonceventes = CategoryannonceventeResource::collection(categoryannoncevente::with('user')
+            ->where(['status' => 1])
+            ->withCount(['annonceventes' => function ($q) use ($city){
+                $q->where(['status' => 1,'status_admin' => 1])
+                    ->whereIn('city_id',[$city->id])
+                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+                    ->whereHas('city', function ($q) {$q->where('status',1);});
+            }])->orderBy('annonceventes_count','desc')
+            ->distinct()->get());
+
+        return response()->json($categoryannonceventes, 200);
+
+    }
+
 
     public function apiannonceventebyannoncetype(annoncetype $annoncetype)
     {
@@ -97,6 +114,28 @@ class AnnonceventeController extends Controller
         $annonceventecities = AnnonceventeService::apiannonceventebycity($annoncetype,$categoryannoncevente,$city);
 
         return response()->json($annonceventecities, 200);
+    }
+
+    public function apiannonceventesbyannoncetypebycity(annoncetype $annoncetype,city $city)
+    {
+        $annonceventecities = AnnonceventeService::apiannonceventesbyannoncetypebycity($annoncetype,$city);
+
+        return response()->json($annonceventecities, 200);
+    }
+
+    public function apicitiesannonces()
+    {
+        $annoncelocations = CityResource::collection(city::with('user')
+            ->where('status',1)
+            ->withCount(['annonceventes' => function ($q){
+                $q->where(['status' => 1,'status_admin' => 1])
+                    ->with('user','categoryannoncevente','city','annoncetype')
+                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+                    ->whereHas('city', function ($q) {$q->where('status',1);});
+            }])
+            ->orderBy('name','asc')->get());
+
+        return response()->json($annoncelocations, 200);
     }
 
     /**
@@ -144,6 +183,14 @@ class AnnonceventeController extends Controller
         return view('user.annoncevente.annonces_city',[
             'annoncetype' => $annoncetype,
             'categoryannoncevente' => $categoryannoncevente,
+            'city' => $city,
+        ]);
+    }
+
+    public function annonceventesbyannoncetypebycity(annoncetype $annoncetype,city $city)
+    {
+        return view('user.annoncevente.annonces_by_city',[
+            'annoncetype' => $annoncetype,
             'city' => $city,
         ]);
     }

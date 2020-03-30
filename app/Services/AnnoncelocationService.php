@@ -12,7 +12,6 @@ use App\Model\user;
 class AnnoncelocationService
 {
 
-
     public static function apiannoncelocationbycategorycitycount($categoryannoncelocation)
     {
         $annoncesbycities = city::with('user')
@@ -86,6 +85,31 @@ class AnnoncelocationService
                     $q->where(['status' => 1,'status_admin' => 1])->with('user','categoryannoncelocation','city','annoncetype')
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
+                        ->whereIn('city_id',[$city->id])
+                        ->whereHas('city', function ($q) {$q->where('status',1);})
+                        ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+                        ->orderBy('created_at','DESC')
+                        ->distinct()->paginate(30)->toArray();},
+            ])->first();
+
+        return $annoncesbycities;
+    }
+
+    public static function apiannoncelocationsbyannoncetypebycity($annoncetype,$city)
+    {
+        $annoncesbycities = city::whereSlug($city->slug)
+            ->where(['status' => 1])
+            ->withCount(['annoncelocations' => function ($q) use ($annoncetype,$city){
+                $q->where(['status' => 1,'status_admin' => 1])
+                    ->with('user','categoryannoncelocation','city','annoncetype')
+                    ->whereIn('annoncetype_id',[$annoncetype->id])
+                    ->whereIn('city_id',[$city->id])
+                    ->whereHas('city', function ($q) {$q->where('status',1);})
+                    ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);});
+            }])
+            ->with(['annoncelocations' => function ($q) use ($annoncetype,$city){
+                    $q->where(['status' => 1,'status_admin' => 1])->with('user','categoryannoncelocation','city','annoncetype')
+                        ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->whereIn('city_id',[$city->id])
                         ->whereHas('city', function ($q) {$q->where('status',1);})
                         ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})

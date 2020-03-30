@@ -11,6 +11,11 @@ Route::get(
 )->name('annonceventebyannoncetypes_site');
 
 Route::get(
+    'annonce_ventes/{annoncetype}/{city}',
+    'AnnonceventeController@annonceventesbyannoncetypebycity'
+)->name('annonceventesbyannoncetypebycity_site');
+
+Route::get(
     'annonces_ventes_active/{id}',
     'AnnonceventeController@activated'
 )->name('annonces_ventes_active.site');

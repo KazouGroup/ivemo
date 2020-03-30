@@ -14,7 +14,6 @@ use App\Model\annoncetype;
 use App\Model\categoryannoncereservation;
 use App\Model\user;
 use App\Services\AnnoncereservationService;
-use App\Services\ContactuserService;
 use App\Model\contactuser;
 use App\Model\city;
 use App\Model\reservation;
@@ -59,6 +58,14 @@ class AnnoncereservationController extends Controller
                 ]);
     }
 
+    public function annoncereservationsbyannoncetypebycity(annoncetype $annoncetype,city $city)
+    {
+        return view('user.annoncereservation.annonces_by_city',[
+                   'annoncestype' => $annoncetype,
+                   'city' => $city,
+                ]);
+    }
+
     public function annoncelocationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
     {
 
@@ -68,13 +75,6 @@ class AnnoncereservationController extends Controller
                    'categoryannoncereservation' => $categoryannoncereservation,
                    'city' => $city,
                 ]);
-    }
-
-    public function api()
-    {
-        $annoncelocations = AnnoncelocationResource::collection(annoncelocation::with('user','categoryannoncelocation')->latest()->get());
-
-        return response()->json($annoncelocations, 200);
     }
 
     public function apicategoryannoncereservation()
@@ -90,6 +90,22 @@ class AnnoncereservationController extends Controller
                $q->where(['status' => 1,'status_admin' => 1])
                    ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);});
             }])
+            ->orderBy('annoncereservations_count','desc')
+            ->distinct()->get());
+
+        return response()->json($categoryannoncereservations, 200);
+    }
+
+    public function apicategoryannoncereservationbycity(city $city)
+    {
+        $categoryannoncereservations = CategoryannoncereservationResource::collection(categoryannoncereservation::with('user')
+          ->where(['status' => 1])
+          ->withCount(['annoncereservations' => function ($q) use ($city){
+              $q->where(['status' => 1,'status_admin' => 1])
+                  ->whereIn('city_id',[$city->id])
+                  ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
+                  ->whereHas('city', function ($q) {$q->where('status',1);});
+           }])
             ->orderBy('annoncereservations_count','desc')
             ->distinct()->get());
 
@@ -195,6 +211,20 @@ class AnnoncereservationController extends Controller
         return response()->json($annoncereservations, 200);
     }
 
+    public function apiannoncereservationbyannoncetypebycity(annoncetype $annoncetype,city $city)
+    {
+        $annoncereservations= AnnoncereservationService::apiannoncereservationbyannoncetypebycity($annoncetype,$city);
+
+        return response()->json($annoncereservations, 200);
+    }
+
+    public function apiannoncereservationsbyannoncetypebycity(annoncetype $annoncetype,city $city)
+    {
+        $annoncereservations= AnnoncereservationService::apiannoncereservationsbyannoncetypebycity($annoncetype,$city);
+
+        return response()->json($annoncereservations, 200);
+    }
+
     public function apiannoncereservationbycategorycount(categoryannoncereservation $categoryannoncereservation)
     {
         $annoncereservations = AnnoncereservationService::apiannoncereservationbycategorycount($categoryannoncereservation);
@@ -211,11 +241,15 @@ class AnnoncereservationController extends Controller
 
     public function apicitiesannonces()
     {
-        $annoncereservations = CityResource::collection(city::with('user')->where('status',1)
+        $annoncereservations = CityResource::collection(city::with('user')
+            ->where('status',1)
             ->withCount(['annoncereservations' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
+                $q->where(['status' => 1,'status_admin' => 1])
+                    ->with('user','categoryannoncereservation','city','annoncetype')
+                    ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
+                    ->whereHas('city', function ($q) {$q->where('status',1);});
             }])
-            ->orderBy('annoncereservations_count','desc')->take(6)->get());
+            ->orderBy('name','asc')->get());
 
         return response()->json($annoncereservations, 200);
     }

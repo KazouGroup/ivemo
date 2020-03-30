@@ -61,6 +61,14 @@ class AnnoncelocationController extends Controller
         ]);
     }
 
+    public function annoncelocationsbyannoncetypebycity(annoncetype $annoncetype,city $city)
+    {
+        return view('user.annoncelocation.annonces_by_city',[
+            'annoncetype' => $annoncetype,
+            'city' => $city,
+        ]);
+    }
+
     public function annoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,annoncelocation $annoncelocation)
     {
         return view('user.annoncelocation.annonces_show',[
@@ -87,6 +95,22 @@ class AnnoncelocationController extends Controller
             }])->withCount(['blogannoncelocations' => function ($q){
                 $q->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                     ->where(['status' => 1,'status_admin' => 1]);
+            }])
+            ->orderBy('annoncelocations_count','desc')
+            ->distinct()->get());
+
+        return response()->json($categoryannoncelocations, 200);
+    }
+
+    public function apicategoryannoncelocationbycity(city $city)
+    {
+        $categoryannoncelocations = CategoryannoncelocationResource::collection(categoryannoncelocation::with('user')
+            ->where('status',1)
+            ->withCount(['annoncelocations' => function ($q) use ($city){
+                $q->where(['status' => 1,'status_admin' => 1])
+                    ->whereIn('city_id',[$city->id])
+                    ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+                    ->whereHas('city', function ($q) {$q->where('status',1);});
             }])
             ->orderBy('annoncelocations_count','desc')
             ->distinct()->get());
@@ -184,6 +208,13 @@ class AnnoncelocationController extends Controller
         return response()->json($annoncelocations, 200);
     }
 
+    public function apiannoncelocationsbyannoncetypebycity(annoncetype $annoncetype,city $city)
+    {
+        $annoncelocations = AnnoncelocationService::apiannoncelocationsbyannoncetypebycity($annoncetype,$city);
+
+        return response()->json($annoncelocations, 200);
+    }
+
     public function apicitiesannonces()
     {
         $annoncelocations = CityResource::collection(city::with('user')
@@ -194,7 +225,7 @@ class AnnoncelocationController extends Controller
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);});
             }])
-            ->orderBy('annoncelocations_count','desc')->get());
+            ->orderBy('name','asc')->get());
 
         return response()->json($annoncelocations, 200);
     }
@@ -209,16 +240,14 @@ class AnnoncelocationController extends Controller
 
     public function apiannoncelocationinteressebycategoryannoncelocation(categoryannoncelocation $categoryannoncelocation)
     {
-        $annoncelocation = $categoryannoncelocation->annoncelocations()
-            ->with('user','city','annoncetype','categoryannoncelocation')
+        $annoncelocations = annoncelocation::with('user','city','annoncetype','categoryannoncelocation')
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
-            ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
-            ->orWhereHas('city', function ($q) {$q->where('status',1);})
+            ->WhereHas('city', function ($q) {$q->where('status',1);})
             ->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
             ->take(10)->distinct()->get()->toArray();
 
-        return response()->json($annoncelocation, 200);
+        return response()->json($annoncelocations, 200);
     }
 
     public function apiannoncelocationinteressebycity(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city)

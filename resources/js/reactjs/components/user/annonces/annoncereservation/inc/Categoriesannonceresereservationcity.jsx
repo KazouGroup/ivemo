@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import {NavLink, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
 import NavannoncecategorySkeleton from "../../../../inc/user/NavannoncecategorySkeleton";
 
 
-class Categoriesannoncereservation extends Component {
+class Categoriesannonceresereservationcity extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -13,7 +13,8 @@ class Categoriesannoncereservation extends Component {
     }
 
     componentDidMount() {
-        let url = route('api.categoryannoncereservation_site');
+        let itemCity = this.props.match.params.city;
+        let url = route('api.categoryannoncereservationbycity_site',[itemCity]);
         dyaxios.get(url).then(response => this.setState({categoryannoncereservations: response.data,}));
     }
 
@@ -35,12 +36,12 @@ class Categoriesannoncereservation extends Component {
                 return(
                     <tr key={item.id}>
                         <td>
-                            <NavLink to={`/annonces_reservations/reservations/${item.slug}/`}>
-                                Reserver un(e) <b style={{ textTransform: "lowercase" }}>{item.name}</b>
+                            <NavLink to={`/annonces_reservations/reservations/${item.slug}/${this.props.slug}/`}>
+                                reservation <b style={{ textTransform: "lowercase" }}>{item.name}</b> à <b>{this.props.name}</b>
                             </NavLink>
                         </td>
-                        <td className="text-right"> {this.getcountcategoryannonceString(item.annoncereservations_count)} annonces</td>
-                    </tr>               )
+                        <td className="text-right"> {this.getcountcategoryannonceString(item.annoncereservations_count)} {item.annoncereservations_count > 1 ? "annonces" : "annonce"}</td>
+                    </tr>                )
             })
         ):(
             <NavannoncecategorySkeleton/>
@@ -49,13 +50,13 @@ class Categoriesannoncereservation extends Component {
 
 
             <div className="card card-plain">
-                <div className="card-header" role="tab" id="headingOne">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <b>Quesque vous aviez besoin ?</b>
+                <div className="card-header" role="tab" id="headingIni">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseIni" aria-expanded="true" aria-controls="collapseIni">
+                        <b>Reservation à {this.props.name}?</b>
                         <i className="now-ui-icons arrows-1_minimal-down"/>
                     </a>
                 </div>
-                <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                <div id="collapseIni" className="collapse show" role="tabpanel" aria-labelledby="headingIni">
                     <div className="card-body">
                         <table>
                             <tbody>
@@ -72,15 +73,4 @@ class Categoriesannoncereservation extends Component {
     }
 
 }
-Categoriesannoncereservation.defaultProps = {
-    backgroundColor: "black",
-};
-
-Categoriesannoncereservation.propTypes = {
-    // background color for the component
-    backgroundColor: PropTypes.oneOf([
-        "black",
-        "orange",
-    ]),
-};
-export default Categoriesannoncereservation;
+export default withRouter(Categoriesannonceresereservationcity);

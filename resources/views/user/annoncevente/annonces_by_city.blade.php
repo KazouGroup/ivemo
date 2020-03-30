@@ -1,6 +1,6 @@
 @extends('inc.user.main')
 <?php $item = htmlspecialchars(config('app.name'));?>
-@section('title', 'Location, reservation et vente de maisons, appartements, studio et bien d\'autre bien - '.$item)
+@section('title', 'Ventes des maisons, villa, térrains et bien d\'autres dans la ville de '.$city->name.' - '.$item)
 
 @section('style')
 @endsection
@@ -10,10 +10,7 @@
 @endsection
 
 @section('content')
-<div id="app_ivemo"></div>
-
-
-
+    <div id="app_ivemo"></div>
 @endsection
 
 @section('script')

@@ -5,7 +5,6 @@ use App\Model\annoncereservation;
 use App\Model\annoncevente;
 use App\Model\contactuser;
 use App\Model\contactuserslocation;
-use App\Model\contactusersreservation;
 use App\Model\contactusersvente;
 use App\Model\imagereservation;
 use App\Model\reservation;
@@ -22,9 +21,9 @@ class AnnonceSeeder extends Seeder
      */
     public function run()
     {
-        factory(annoncelocation::class, 1000)->create();
-        factory(annoncevente::class, 1000)->create();
-        factory(annoncereservation::class, 1000)->create();
+        factory(annoncelocation::class, 3000)->create();
+        factory(annoncevente::class, 3000)->create();
+        factory(annoncereservation::class, 3000)->create();
         factory(reservation::class, 500)->create();
         factory(imagereservation::class, 1000)->create();
         factory(contactuser::class, 700)->create();

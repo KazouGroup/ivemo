@@ -101,7 +101,7 @@ class BlogannoncelocationShow extends Component {
         return (
             <Fragment>
 
-                <Helmet title={`${blogannoncelocation.title || 'Annonce'} - Ivemo`}/>
+                <Helmet title={`${blogannoncelocation.title || 'Ivemo'} - Ivemo`}/>
 
                 <div className="landing-page sidebar-collapse">
 

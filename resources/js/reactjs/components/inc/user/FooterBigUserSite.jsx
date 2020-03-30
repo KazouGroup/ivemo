@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link,NavLink } from 'react-router-dom';
-import AnnoncereservationList from "../../user/annonces/annoncereservation/inc/AnnoncereservationList";
 import LoginModalUser from "../../user/auth/LoginModalUser";
 
 
@@ -8,25 +7,15 @@ class FooterBigUserSite extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            citiesannoncesreservations: [],
+          //
         }
     }
 
-    loadItems(){
-        let url = route('api.citiesannonces_reservations_site');
-        fetch(url).then(res => res.json()).then((result) => {
-                this.setState({
-                    citiesannoncesreservations: [...result]
-                });
-            });
-    }
-
     componentDidMount() {
-        this.loadItems();
+        //
     }
 
     render() {
-        const {citiesannoncesreservations} = this.state;
 
         return (
             <>
@@ -158,24 +147,6 @@ class FooterBigUserSite extends Component {
                                                 Affiliates
                                             </a>
                                         </li>
-                                    </ul>
-                                </div>
-
-                                <div className="col-md-2 col-6">
-                                    <h5>Top villes pour vos reservations</h5>
-                                    <ul className="links-vertical">
-
-                                        {citiesannoncesreservations.map((item) => (
-
-                                            <li key={item.id}>
-                                                <Link to={`/`} className="text-muted">
-                                                    {item.name}
-                                                </Link>
-                                            </li>
-                                        ))}
-
-
-
                                     </ul>
                                 </div>
 

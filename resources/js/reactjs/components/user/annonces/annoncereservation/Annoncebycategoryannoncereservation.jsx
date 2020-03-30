@@ -6,9 +6,9 @@ import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import AnnoncereservationList from "./inc/AnnoncereservationList";
 import PropTypes from "prop-types";
-import Navtabscategoryreservation from "./inc/Navtabscategoryreservation";
 import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
 import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
+import Categoriesannoncereservation from "./inc/Categoriesannoncereservation";
 
 
 class Annoncebycategoryannoncereservation extends Component {
@@ -89,10 +89,12 @@ class Annoncebycategoryannoncereservation extends Component {
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
-
-                                       <Navtabscategoryreservation/>
+                                        <div className="submit text-left">
+                                            <Link to={`/annonces_reservations/reservations/`} >
+                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos annonces </b>
+                                            </Link>
+                                        </div>
                                         <br/>
-
                                         {mapAnnoncereservations}
 
                                     </div>
@@ -131,7 +133,7 @@ class Annoncebycategoryannoncereservation extends Component {
                                                                                     <tr key={item.id}>
                                                                                         <td>
                                                                                             <NavLink to={`/annonces_reservations/${annoncetype}/${annoncereservationbycategory.slug}/${item.slug}/`}>
-                                                                                                Reserver un(e) <strong>{annoncereservationbycategory.name}</strong> à <strong> {item.name}</strong>
+                                                                                                Reserver un(e) <b style={{ textTransform: "lowercase" }}>{annoncereservationbycategory.name}</b> à <strong> {item.name}</strong>
                                                                                             </NavLink>
                                                                                         </td>
                                                                                         <td className="text-right"> {this.getcountcategoryannonceString(item.annoncereservations_count)} annonces</td>
@@ -145,6 +147,8 @@ class Annoncebycategoryannoncereservation extends Component {
                                                                 </div>
 
                                                             </div>
+
+                                                            <Categoriesannoncereservation/>
 
                                                         </div>
                                                     </div>
