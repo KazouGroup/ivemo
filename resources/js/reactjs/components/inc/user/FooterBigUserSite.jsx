@@ -153,8 +153,52 @@ class FooterBigUserSite extends Component {
                             </div>
                         </div>
                         <hr />
+                        <div className="row">
+                            <div className="col-md-9">
+                                <div className="column">
+                                    <nav>
+                                        <ul>
+                                            <li className="d-inline-block">
+                                                <Link to={'/condition_utilisation/'} className="nav-link">
+                                                    Terms &amp; Conditions
+                                                </Link>
+                                            </li>
+                                            <li className="d-inline-block">
+                                                <Link to={'/politique_confidentialité/'} className="nav-link">
+                                                    Privacy Policy
+                                                </Link>
+                                            </li>
+                                            <li className="d-inline-block">
+                                                <Link to={'/licence_site/'} className="nav-link">
+                                                    Licence Site
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div className="col-md-3">
+                                <div className="dropdown">
+                                    Pays:
+                                    <div className="btn btn-link text-primary " href="#" role="button"
+                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i className="ni ni-chat-round"/>
+                                        <span>Cameroun</span>
+                                    </div>
+                                    <div className="dropdown-menu kazouTech-dropdown" x-placement="top-start">
+                                        <a href="#" className="dropdown-item active">
+                                            <span>Cameroun</span>
+                                        </a>
+                                        <a href="#" className="dropdown-item">
+                                            <span>Cote d'ivoire</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div className="copyright">
-                            Copyright © {new Date().getFullYear()}, Ivemo All Rights Reserved.
+                            Copyright © {new Date().getFullYear()}, Ivemo All Rights Reserved Realisé par
+                            <a href="/" className="pl-2 text-primary">KazouGroup Srl</a>.
                         </div>
                     </div>
                 </footer>
