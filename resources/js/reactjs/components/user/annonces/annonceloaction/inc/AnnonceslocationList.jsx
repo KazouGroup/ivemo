@@ -100,17 +100,15 @@ class AnnonceslocationList extends Component {
                                     </div>
                                 </div>
                                 <div className="col-md-7">
-                                    <div className="card-header d-flex align-items-center">
-                                        <div className="text-left pull-left">
-                                            <NavLink to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/`}>
-                                                <h6 className={`text-${this.props.categoryannoncelocation.color_name} ml-auto mr-auto`}>
-                                                    {this.props.categoryannoncelocation.name}
-                                                </h6>
-                                            </NavLink>
-                                        </div>
-                                        <div className="text-right ml-auto">
-                                            <h5 className="text-success"><b>{this.numberWithCommas()} <small>FCFA/mois</small></b></h5>
-                                        </div>
+                                    <div className="text-left pull-left">
+                                        <NavLink to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/`}>
+                                            <h6 className={`text-${this.props.categoryannoncelocation.color_name} ml-auto mr-auto`}>
+                                                {this.props.categoryannoncelocation.name}
+                                            </h6>
+                                        </NavLink>
+                                    </div>
+                                    <div className="text-right ml-auto">
+                                        <h5 className="text-success"><b>{this.numberWithCommas()} <small>FCFA/mois</small></b></h5>
                                     </div>
                                     <div className="row">
                                         <div className="col-md-5 col-6">

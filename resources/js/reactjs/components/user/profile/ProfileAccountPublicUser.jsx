@@ -78,31 +78,31 @@ class ProfileAccountPublicUser extends Component {
                                         <h3><b>{userPublick.first_name || <Skeleton width={100} />}</b></h3>
 
                                         {userPublick.profile.facebook_link && (
-                                            <a href={`${userPublick.profile.facebook_link}`} target="_banck" className="btn btn-icon btn-round btn-facebook">
+                                            <a href={`${userPublick.profile.facebook_link}`} target="_banck" className="btn btn-icon btn-sm btn-facebook">
                                                 <i className="fab fa-facebook-square"/>
                                             </a>
                                         )}
 
                                         {userPublick.profile.twitter_link && (
-                                            <a href={`${userPublick.profile.twitter_link}`} target="_banck" className="btn btn-icon btn-round btn-twitter">
+                                            <a href={`${userPublick.profile.twitter_link}`} target="_banck" className="btn btn-icon btn-sm btn-twitter">
                                                 <i className="fab fa-twitter"/>
                                             </a>
                                         )}
 
                                         {userPublick.profile.instagram_link && (
-                                            <a href={`${userPublick.profile.instagram_link}`} target="_banck" className="btn btn-icon btn-round btn-instagram">
+                                            <a href={`${userPublick.profile.instagram_link}`} target="_banck" className="btn btn-icon btn-sm btn-instagram">
                                                 <i className="fab fa-instagram"/>
                                             </a>
                                         )}
 
                                         {userPublick.profile.youtube_link && (
-                                            <a href={`${userPublick.profile.youtube_link}`} target="_banck" className="btn btn-icon btn-round btn-youtube">
+                                            <a href={`${userPublick.profile.youtube_link}`} target="_banck" className="btn btn-icon btn-sm btn-youtube">
                                                 <i className="fab fa-youtube"/>
                                             </a>
                                         )}
 
                                         {userPublick.profile.linkedin_link && (
-                                            <a href={`${userPublick.profile.linkedin_link}`} target="_banck" className="btn btn-icon btn-round btn-linkedin">
+                                            <a href={`${userPublick.profile.linkedin_link}`} target="_banck" className="btn btn-icon btn-sm btn-linkedin">
                                                 <i className="fab fa-linkedin"/>
                                             </a>
                                         )}
@@ -128,7 +128,6 @@ class ProfileAccountPublicUser extends Component {
                                                             <i className="now-ui-icons ui-2_settings-90"/>
                                                         </Link>
                                                     )}
-
                                                 </Fragment>
                                             )}
 

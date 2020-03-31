@@ -1,5 +1,6 @@
 <?php
 
+require(__DIR__ . DIRECTORY_SEPARATOR . 'agences_immobilies.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'annoncereservation.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'annoncelocation.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'annoncevente.php');

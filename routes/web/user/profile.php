@@ -25,6 +25,11 @@ Route::put(
     'ProfileController@profile_account_update'
 )->name('profile_add_info_account_update.site');
 
+Route::delete(
+    'profile/account_delete/{id}',
+    'ProfileController@profile_account_delete'
+)->name('profile_add_info_account_delete.site');
+
 Route::get(
     'profile/{profile}/account',
     'ProfileController@profile_add_info_account'

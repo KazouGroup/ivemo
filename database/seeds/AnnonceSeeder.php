@@ -21,16 +21,16 @@ class AnnonceSeeder extends Seeder
      */
     public function run()
     {
-        factory(annoncelocation::class, 3000)->create();
-        factory(annoncevente::class, 3000)->create();
-        factory(annoncereservation::class, 3000)->create();
+        factory(annoncelocation::class, 1000)->create();
+        factory(annoncevente::class, 1000)->create();
+        factory(annoncereservation::class, 1000)->create();
         factory(reservation::class, 500)->create();
         factory(imagereservation::class, 1000)->create();
-        factory(contactuser::class, 700)->create();
-        factory(contactuserslocation::class, 700)->create();
-        factory(contactusersvente::class, 700)->create();
-        factory(subscriber::class, 200)->create();
-        factory(subscriberuser::class, 2000)->create();
+        factory(contactuser::class, 100)->create();
+        factory(contactuserslocation::class, 100)->create();
+        factory(contactusersvente::class, 100)->create();
+        factory(subscriber::class, 10)->create();
+        factory(subscriberuser::class, 10)->create();
 
     }
 }

@@ -105,6 +105,7 @@ class PersonalmessagesannoncesventesUser extends Component {
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
+                    this.loadItems();
                     /** Alert notify bootstrapp **/
                     $.notify({
                         // title: 'Update',
@@ -123,7 +124,6 @@ class PersonalmessagesannoncesventesUser extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {

@@ -28,4 +28,14 @@ class profile extends Model
     {
         return $this->belongsTo(User::class,'user_id');
     }
+
+    public function city()
+    {
+        return $this->belongsTo(city::class,'city_id');
+    }
+
+    public function categoryprofile()
+    {
+        return $this->belongsTo(categoryprofile::class,'categoryprofile_id');
+    }
 }

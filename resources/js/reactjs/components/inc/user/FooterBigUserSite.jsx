@@ -77,21 +77,21 @@ class FooterBigUserSite extends Component {
 
                                 <div className="col-md-2 col-6">
                                     <div className="column">
-                                        <h5>Locations d'appartements</h5>
+                                        <h5>À propos</h5>
                                         <ul className="links-vertical">
                                             <li>
                                                 <a href="#pablo" className="text-muted">
-                                                    Sales FAQ
+                                                    Qui sommes-nous
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="#pablo" className="text-muted">
-                                                    How to Register
+                                                    Ivemo/news
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="#pablo" className="text-muted">
-                                                    Sell Goods
+                                                    Offres d’emploi
                                                 </a>
                                             </li>
                                             <li>
@@ -108,6 +108,11 @@ class FooterBigUserSite extends Component {
                                                 <a href="#pablo" className="text-muted">
                                                     Affiliates Program
                                                 </a>
+                                            </li>
+                                            <li>
+                                                <Link to={`/agences_immobilies/`} className="text-muted">
+                                                    Agences immobiliés
+                                                </Link>
                                             </li>
                                         </ul>
                                     </div>
@@ -145,6 +150,37 @@ class FooterBigUserSite extends Component {
                                         <li>
                                             <a href="#pablo" className="text-muted">
                                                 Affiliates
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div className="col-md-2 col-6">
+                                    <h5>Aide</h5>
+                                    <ul className="links-vertical">
+                                        <li>
+                                            <Link to={`/faqs/`} className="text-muted">
+                                                Foire aux questions (FAQ)
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/contact/`} className="text-muted">
+                                                Contactez ivemo
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/cookies_site/`} className="text-muted">
+                                                Confidentialité
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/cookies_site/`} className="text-muted">
+                                                Cookies
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <a href="#pablo" className="text-muted">
+                                                Conditions générales
                                             </a>
                                         </li>
                                     </ul>

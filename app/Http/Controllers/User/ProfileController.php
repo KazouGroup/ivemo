@@ -249,7 +249,7 @@ class ProfileController extends Controller
             if(!file_exists($dir)){
                 mkdir($dir, 0775, true);
             }
-            Image::make($request->avatar)->fit(100,100)->save(public_path('assets/img/avatars/user/').$name);
+            Image::make($request->avatar)->fit(200,123)->save(public_path('assets/img/avatars/user/').$name);
 
 
             $request->merge(['avatar' =>  "/assets/img/avatars/user/{$name}"]);
@@ -356,11 +356,21 @@ class ProfileController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array|\Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function profile_account_delete($id)
     {
-        //
+        $user = user::findOrFail($id);
+
+        if (auth()->user()->id === $user->id){
+            $oldFilename = $user->avatar;
+            File::delete(public_path($oldFilename));
+            $user->delete();
+            return ['message' => 'message deleted '];
+        }else{
+            abort(404);
+        }
+
     }
 }
 

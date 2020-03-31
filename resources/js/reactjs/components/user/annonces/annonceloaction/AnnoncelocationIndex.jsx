@@ -163,9 +163,7 @@ class AnnoncelocationIndex extends Component {
 
         return (
             <>
-                <Helmet>
-                    <title>Bon plan de location de chambre, studio un appartement, maison ou une villa - Ivemo</title>
-                </Helmet>
+                <Helmet title={`Bon plan de location de chambre, studio un appartement, maison ou une villa - Ivemo`}/>
 
                 <div className="landing-page sidebar-collapse">
 

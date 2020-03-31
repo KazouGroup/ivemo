@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import Switch from "react-bootstrap-switch";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import {Button, Form, Input, InputGroup, Row, CardBody, Col, CardTitle, FormGroup} from "reactstrap";
@@ -34,8 +32,10 @@ class ProfileConfigUser extends Component {
             site_internet: '',
             status_avis: '',
             status_team_user: '',
+            categoryprofile_id: '',
             description: '',
             cities: [],
+            categoryprofiles: [],
             errors: [],
         };
         this.modules = {
@@ -100,6 +100,7 @@ class ProfileConfigUser extends Component {
             twitter_link: this.state.twitter_link,
             youtube_link: this.state.youtube_link,
             instagram_link: this.state.instagram_link,
+            categoryprofile_id: this.state.categoryprofile_id,
             city_id: this.state.city_id,
             address: this.state.address,
             linkedin_link: this.state.linkedin_link,
@@ -143,6 +144,7 @@ class ProfileConfigUser extends Component {
     }
 
     loadItem() {
+        dyaxios.get(route('api.categoryprofiles')).then(response => this.setState({ categoryprofiles: response.data, }));
         dyaxios.get(route('api.all_cities')).then(response => this.setState({ cities: response.data, }));
         const itemprofile = this.props.match.params.profile;
         dyaxios.get(route('api_profile_add_info_account.site',[itemprofile])).then(response =>
@@ -151,6 +153,7 @@ class ProfileConfigUser extends Component {
                 twitter_link: response.data.twitter_link,
                 youtube_link: response.data.youtube_link,
                 instagram_link: response.data.instagram_link,
+                categoryprofile_id: response.data.categoryprofile_id,
                 city_id: response.data.city_id,
                 linkedin_link: response.data.linkedin_link,
                 birthdate: response.data.birthdate,
@@ -168,7 +171,7 @@ class ProfileConfigUser extends Component {
     }
 
     render() {
-        const {cities} = this.state;
+        const {categoryprofiles,cities} = this.state;
         return (
 
             <>
@@ -258,7 +261,7 @@ class ProfileConfigUser extends Component {
 
                                                     <hr/>
                                                     <Row>
-                                                        <div className="col-md-12">
+                                                        <div className="col-md-6 col-6">
                                                             <label
                                                                 htmlFor="address"><b>Adresse de résidence</b></label>
                                                             <div className="input-group">
@@ -281,9 +284,32 @@ class ProfileConfigUser extends Component {
                                                                 {this.renderErrorFor('address')}
                                                             </div>
                                                         </div>
+                                                        <div className="col-md-6 col-6">
+                                                            <label htmlFor="url_site"><b>Site
+                                                                internet</b></label>
+                                                            <div className="input-group">
+                                                                <div
+                                                                    className="input-group-prepend">
+                                                                    <span className="input-group-text">
+                                                                        <i className="now-ui-icons objects_globe"/>
+                                                                    </span>
+                                                                </div>
+                                                                <input id='site_internet'
+                                                                       type='url'
+                                                                       className={`form-control ${this.hasErrorFor('site_internet') ? 'is-invalid' : ''}`}
+                                                                       name='site_internet'
+                                                                       placeholder="https://www.ivemo.com"
+                                                                       aria-label="https://www.ivemo.com"
+                                                                       autoComplete="site_internet"
+                                                                       value={this.state.site_internet || ''}
+                                                                       onChange={this.handleFieldChange}
+                                                                />
+                                                                {this.renderErrorFor('site_internet')}
+                                                            </div>
+                                                        </div>
                                                     </Row>
                                                     <Row>
-                                                        <div className="col-md-6">
+                                                        <div className="col-md-4">
                                                             <label htmlFor="birthdate"><b>Votre année de naissance</b></label>
                                                             <div className="form-group">
 
@@ -397,7 +423,7 @@ class ProfileConfigUser extends Component {
                                                             </div>
                                                         </div>
 
-                                                        <div className="col-md-6">
+                                                        <div className="col-md-4">
                                                             <label htmlFor="city_id"><b>Votre ville</b></label>
                                                             <div className="form-group">
                                                                 <select value={this.state.city_id || ''} className={`form-control ${this.hasErrorFor('city_id') ? 'is-invalid' : ''}`}
@@ -408,6 +434,22 @@ class ProfileConfigUser extends Component {
                                                                     ))}
                                                                 </select>
                                                                 {this.renderErrorFor('city_id')}
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="col-md-4">
+                                                            <label htmlFor="phone"><b>Pourquoi êtes-vous sur Ivemo ?</b></label>
+                                                            <div className="form-group">
+
+                                                                <select value={this.state.categoryprofile_id || ''} className={`form-control ${this.hasErrorFor('categoryprofile_id') ? 'is-invalid' : ''}`}
+                                                                        onChange={this.handleFieldChange} name="categoryprofile_id" required="required">
+                                                                    <option value="" disabled>Pourquoi êtes-vous sur Ivemo</option>
+                                                                    {categoryprofiles.map((item) => (
+                                                                        <option key={item.id} value={item.id}>{item.name}</option>
+                                                                    ))}
+                                                                </select>
+
+                                                                {this.renderErrorFor('categoryprofile_id')}
                                                             </div>
                                                         </div>
 
@@ -667,7 +709,6 @@ class ProfileConfigUser extends Component {
 
                                                     <div className="submit text-center">
                                                         <button className="btn btn-primary" type="submit">
-                                                            <i className="now-ui-icons ui-1_check"/>
                                                             <b>Enregistrer</b>
                                                         </button>
                                                     </div>

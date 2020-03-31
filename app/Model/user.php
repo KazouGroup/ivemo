@@ -104,7 +104,6 @@ class user extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(profile::class,'user_id');
     }
 
-
     public function getDataBirthdayItAttribute()
     {
         return !empty($this->birthday)? $this->birthday->format('d/m/Y') : '';

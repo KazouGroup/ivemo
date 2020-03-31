@@ -104,6 +104,23 @@ class ProfilepublicController extends Controller
     }
 
 
+    public function public_profile_agences_send_message(StoreRequest $request)
+    {
+        $contactuser = new contactuser();
+
+        $slug = sha1(('YmdHis') . str_random(30));
+        $contactuser->fill($request->all());
+        $contactuser->slug = $slug;
+        //$contactuser->user_id = $user->id;
+
+        //ContactuserService::newEmailToprofileUser($request);
+
+        $contactuser->save();
+
+        return response()->json($contactuser,200);
+    }
+
+
     public function public_profile(user $user)
     {
         return view('user.profile.profile_account',[

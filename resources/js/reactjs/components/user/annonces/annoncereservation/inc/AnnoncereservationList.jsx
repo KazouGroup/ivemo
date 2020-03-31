@@ -65,17 +65,15 @@ class AnnoncereservationList extends Component {
                                 </div>
                             </div>
                             <div className="col-md-7">
-                                <div className="card-header d-flex align-items-center">
-                                    <div className="text-left pull-left">
-                                        <NavLink to={`/annonces_reservations/reservations/${this.props.categoryannoncereservation.slug}/`}>
-                                            <h6 className={`text-${this.props.categoryannoncereservation.color_name} ml-auto mr-auto`}>
-                                                {this.props.categoryannoncereservation.name}
-                                            </h6>
-                                        </NavLink>
-                                    </div>
-                                    <div className="text-right ml-auto">
-                                        <h5 className="text-success"><b>{this.numberWithCommas()} <small>FCFA</small></b></h5>
-                                    </div>
+                                <div className="text-left pull-left">
+                                    <NavLink to={`/annonces_reservations/reservations/${this.props.categoryannoncereservation.slug}/`}>
+                                        <h6 className={`text-${this.props.categoryannoncereservation.color_name} ml-auto mr-auto`}>
+                                            {this.props.categoryannoncereservation.name}
+                                        </h6>
+                                    </NavLink>
+                                </div>
+                                <div className="text-right ml-auto">
+                                    <h5 className="text-success"><b>{this.numberWithCommas()} <small>FCFA</small></b></h5>
                                 </div>
                                 <div className="row">
                                     <div className="col-md-6 col-6">

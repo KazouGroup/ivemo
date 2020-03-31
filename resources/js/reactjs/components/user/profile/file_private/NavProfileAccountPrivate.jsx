@@ -33,7 +33,6 @@ class NavProfileAccountPrivate extends Component {
                                         <div className="card-header" role="tab" id="headingOne">
                                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                 <b>Configuration du profile</b>
-                                                <i className="now-ui-icons arrows-1_minimal-down"/>
                                             </a>
                                         </div>
 

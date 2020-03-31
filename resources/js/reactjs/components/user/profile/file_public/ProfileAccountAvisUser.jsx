@@ -441,7 +441,7 @@ class ProfileAccountAvisUser extends Component {
 
                                                         <div className="media">
                                                             <div className="avatar">
-                                                                <img className="media-object img-raised"
+                                                                <img className="media-object img-raised rounded"
                                                                      alt={item.to.first_name}
                                                                      src={item.to.avatar} />
                                                             </div>

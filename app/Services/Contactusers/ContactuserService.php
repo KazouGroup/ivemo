@@ -42,7 +42,7 @@ class ContactuserService
     {
         $contactusers = HelpersService::helperscontactuserscount($user)
             ->with(['contactusers' => function ($q) use ($user){
-                $q->where(['status_archvement' => 1,'status_favorite' => 1])->whereIn('user_id',[$user->id])
+                $q->where(['status_favorite' => 1])->whereIn('user_id',[$user->id])
                     ->latest()->distinct()->get()->toArray()
                 ;},
             ])

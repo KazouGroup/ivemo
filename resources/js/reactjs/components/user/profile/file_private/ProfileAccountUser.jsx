@@ -2,17 +2,19 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import {Button, CardBody, Row} from "reactstrap";
+import {Button, CardBody, Row, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import './ProfileAccountUser.css';
 import NavProfileAccountPrivate from "./NavProfileAccountPrivate";
+import Swal from "sweetalert2";
 
 
 class ProfileAccountUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: '',
             username: '',
             first_name: '',
             last_name: '',
@@ -30,6 +32,7 @@ class ProfileAccountUser extends Component {
             showDefaultavatarcoverImage: false,
         };
         this.saveItem = this.saveItem.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
         this.updateavatarImage = this.updateavatarImage.bind(this);
         this.updateavatacoverImage = this.updateavatacoverImage.bind(this);
         this.removeavatarImage = this.removeavatarImage.bind(this);
@@ -141,10 +144,35 @@ class ProfileAccountUser extends Component {
             })
     }
 
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression de mon profile?',
+            text: "êtes-vous sûr de vouloir executer cette action",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                const url = route('profile_add_info_account_delete.site', id);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+                    window.location.reload()
+                })
+            }
+        });
+    }
+
     loadItem() {
         dyaxios.get(route('api.categoryprofiles')).then(response => this.setState({ categoryprofiles: response.data, }));
         dyaxios.get(route('api_profile_account.site')).then(response =>
             this.setState({
+                id: response.data.id,
                 username: response.data.username,
                 first_name: response.data.first_name,
                 last_name: response.data.last_name,
@@ -409,7 +437,7 @@ class ProfileAccountUser extends Component {
                                                             <label htmlFor="phone"><b>Pourquoi êtes-vous sur Ivemo ?</b></label>
                                                             <div className="form-group">
 
-                                                                <select value={this.state.categoryprofile_id} className={`form-control ${this.hasErrorFor('categoryprofile_id') ? 'is-invalid' : ''}`}
+                                                                <select value={this.state.categoryprofile_id || ''} className={`form-control ${this.hasErrorFor('categoryprofile_id') ? 'is-invalid' : ''}`}
                                                                         onChange={this.handleFieldChange} name="categoryprofile_id" required="required">
                                                                     <option value="" disabled>Pourquoi êtes-vous sur Ivemo</option>
                                                                     {categoryprofiles.map((item) => (
@@ -426,7 +454,6 @@ class ProfileAccountUser extends Component {
 
                                                     <div className="submit text-center">
                                                         <button className="btn btn-primary" type="submit">
-                                                            <i className="now-ui-icons ui-1_check"/>
                                                             <b>Enregistrer</b>
                                                         </button>
                                                     </div>
@@ -434,6 +461,12 @@ class ProfileAccountUser extends Component {
 
                                             </div>
 
+                                            <Button onClick={() => this.deleteItem(this.state.id)} className="btn btn-outline-danger pull-right"  id="TooltipDelete">
+                                                <i className="far fa-trash-alt"/> Supprimer le profile
+                                            </Button>{" "}
+                                            <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
+                                                Supprimer mon profile
+                                            </UncontrolledTooltip>
                                         </div>
 
 
