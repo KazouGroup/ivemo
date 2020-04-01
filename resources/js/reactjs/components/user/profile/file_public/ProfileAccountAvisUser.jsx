@@ -422,12 +422,12 @@ class ProfileAccountAvisUser extends Component {
                                                                     <Fragment>
                                                                         <Button onClick={() => this.deleteItem(item.id)}
                                                                                 className="btn btn-danger btn-neutral pull-right">
-                                                                            <i className="now-ui-icons ui-1_simple-remove" /> Supprimer
+                                                                            <i className="far fa-trash-alt"></i> Supprimer
                                                                         </Button>
 
                                                                         <button onClick={() => this.editFromItem(item) }
                                                                                 className="btn btn-info btn-neutral pull-right">
-                                                                            <i className="now-ui-icons ui-2_settings-90" /> Editer
+                                                                            <i className="far fa-edit"/> Editer
                                                                         </button>
                                                                     </Fragment>
                                                                 )}
@@ -465,7 +465,7 @@ class ProfileAccountAvisUser extends Component {
                                                                                 <div className="media-footer">
                                                                                     <button onClick={() => this.responseFromItem(item) }
                                                                                             className="btn btn-info btn-neutral pull-right">
-                                                                                        <i className="now-ui-icons ui-2_settings-90" /> Editer
+                                                                                        <i className="far fa-edit"/> Editer
                                                                                     </button>
                                                                                 </div>
                                                                             </>

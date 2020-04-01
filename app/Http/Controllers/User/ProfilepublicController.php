@@ -111,9 +111,6 @@ class ProfilepublicController extends Controller
         $slug = sha1(('YmdHis') . str_random(30));
         $contactuser->fill($request->all());
         $contactuser->slug = $slug;
-        //$contactuser->user_id = $user->id;
-
-        //ContactuserService::newEmailToprofileUser($request);
 
         $contactuser->save();
 

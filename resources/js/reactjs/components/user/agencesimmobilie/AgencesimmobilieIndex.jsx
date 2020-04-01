@@ -6,6 +6,8 @@ import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import AgencesimmobilieList from "./inc/AgencesimmobilieList";
 import AgenceimmobilieListSkeleton from "../../inc/user/agencesimmobilie/AgenceimmobilieListSkeleton";
+import Pagination from "react-js-pagination";
+import LinkValicationEmail from "../../inc/user/LinkValicationEmail";
 
 
 class AgencesimmobilieIndex extends Component {
@@ -21,15 +23,32 @@ class AgencesimmobilieIndex extends Component {
             errors: [],
             agencesimmobilies: [],
             Itemagenceimmobilie: {},
+            activePage: 1,
+            itemsCountPerPage: 1,
+            totalItemsCount: 1,
+            pageRangeDisplayed: 30,
 
         };
 
         this.contactUser = this.contactUser.bind(this);
         this.handleCheckClick = this.handleCheckClick.bind(this);
+        this.handlePageChange = this.handlePageChange.bind(this);
         this.sendmessageItem = this.sendmessageItem.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
+    }
+
+    handlePageChange(pageNumber) {
+        dyaxios.get(`/api/agences_immobilies?page=` + pageNumber)
+            .then(response => {
+                this.setState({
+                    agencesimmobilies: response.data.data,
+                    activePage: response.data.current_page,
+                    itemsCountPerPage: response.data.per_page,
+                    totalItemsCount: response.data.total,
+                });
+            });
     }
 
     handleFieldChange(event) {
@@ -116,11 +135,14 @@ class AgencesimmobilieIndex extends Component {
 
     loadItems(){
         let url = route('api.agencesimmobilie.site');
-        fetch(url).then(res => res.json()).then((result) => {
-            this.setState({
-                agencesimmobilies: [...result.data]
+        dyaxios.get(url).then(response => {
+                this.setState({
+                    agencesimmobilies: response.data.data,
+                    activePage: response.data.current_page,
+                    itemsCountPerPage: response.data.per_page,
+                    totalItemsCount: response.data.total,
+                });
             });
-        });
     }
 
     // lifecycle method
@@ -176,9 +198,30 @@ class AgencesimmobilieIndex extends Component {
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
+
                                         {mapAgenceimmobilies}
 
+                                        <Pagination
 
+                                            firstPageText={<i className="fa fa-angle-double-left" />}
+                                            lastPageText={<i className="fa fa-angle-double-right" />}
+
+                                            innerClass="pagination pagination-primary justify-content-center"
+                                            activePage={this.state.activePage}
+                                            itemsCountPerPage={this.state.itemsCountPerPage}
+                                            totalItemsCount={this.state.totalItemsCount}
+                                            pageRangeDisplayed={this.state.pageRangeDisplayed}
+                                            onChange={this.handlePageChange.bind(this)}
+                                            itemClass="page-item"
+                                            linkClass="page-link"
+                                        />
                                     </div>
 
 

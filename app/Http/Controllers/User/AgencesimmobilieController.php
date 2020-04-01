@@ -26,7 +26,7 @@ class AgencesimmobilieController extends Controller
             ])->with(['profile.categoryprofile' => function ($q){
                     $q->where(['status' => 1])
                         ->distinct()->get();}
-            ])->latest()->distinct()->paginate(40);
+            ])->latest()->distinct()->paginate(30)->toArray();
 
         return response()->json($users, 200);
     }
