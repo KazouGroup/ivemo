@@ -101,6 +101,7 @@ import Annonceventebyannoncetypebycity from "../components/user/annonces/annonce
 import Annoncereservationbyannoncetypebycity
     from "../components/user/annonces/annoncereservation/Annoncereservationbyannoncetypebycity";
 import AgencesimmobilieIndex from "../components/user/agencesimmobilie/AgencesimmobilieIndex";
+import FaqsIndexSite from "../components/user/pages/FaqsIndexSite";
 
 
 const RouteUser = props => (
@@ -112,6 +113,7 @@ const RouteUser = props => (
           <Route exact path="/register/" component={RegisterUser}/>
           <Route exact path="/about/" component={AboutUserSite}/>
           <Route exact path="/contact/" component={ContactUserSite}/>
+          <Route exact path="/faqs/" component={FaqsIndexSite}/>
           <Route exact path="/annonce/" component={AnnonceUserSite}/>
           <Route exact path="/annonce/show/" component={AnnonceShowUserSite}/>
 

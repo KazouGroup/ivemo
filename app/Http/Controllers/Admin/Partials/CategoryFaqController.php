@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Partials;
 
-use App\categoryprofile;
+use App\Model\categoryobjet;
+use App\Model\categoryprofile;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryFaqResource;
 use App\Model\categoryfaq;
+use App\Model\categoryuser;
 use Illuminate\Http\Request;
 
 class CategoryFaqController extends Controller
@@ -17,7 +19,7 @@ class CategoryFaqController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth',['except' => ['api','apicategoryprofiles']]);
+        $this->middleware('auth',['except' => ['api','apicategoryprofiles','apicategoryusers','apicategoryobjets']]);
     }
     /**
      * Display a listing of the resource.
@@ -41,6 +43,20 @@ class CategoryFaqController extends Controller
         $categoryprofile =  categoryprofile::select('id','name', 'label')->get();
 
         return response()->json($categoryprofile,200);
+    }
+
+    public function apicategoryusers()
+    {
+        $categoryusers =  categoryuser::select('id','name', 'label')->get();
+
+        return response()->json($categoryusers,200);
+    }
+
+    public function apicategoryobjets()
+    {
+        $categoryobjets =  categoryobjet::select('id','name', 'label')->get();
+
+        return response()->json($categoryobjets,200);
     }
     /**
      * Show the form for creating a new resource.

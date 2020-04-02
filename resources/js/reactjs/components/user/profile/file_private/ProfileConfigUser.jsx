@@ -310,7 +310,6 @@ class ProfileConfigUser extends Component {
                                                     </Row>
                                                     <Row>
                                                         <div className="col-md-4">
-                                                            <label htmlFor="birthdate"><b>Votre année de naissance</b></label>
                                                             <div className="form-group">
 
                                                                 <select value={this.state.birthdate || ''} className={`form-control ${this.hasErrorFor('birthdate') ? 'is-invalid' : ''}`}
@@ -424,7 +423,6 @@ class ProfileConfigUser extends Component {
                                                         </div>
 
                                                         <div className="col-md-4">
-                                                            <label htmlFor="city_id"><b>Votre ville</b></label>
                                                             <div className="form-group">
                                                                 <select value={this.state.city_id || ''} className={`form-control ${this.hasErrorFor('city_id') ? 'is-invalid' : ''}`}
                                                                         onChange={this.handleFieldChange} name="city_id" required="required">
@@ -438,7 +436,6 @@ class ProfileConfigUser extends Component {
                                                         </div>
 
                                                         <div className="col-md-4">
-                                                            <label htmlFor="phone"><b>Pourquoi êtes-vous sur Ivemo ?</b></label>
                                                             <div className="form-group">
 
                                                                 <select value={this.state.categoryprofile_id || ''} className={`form-control ${this.hasErrorFor('categoryprofile_id') ? 'is-invalid' : ''}`}

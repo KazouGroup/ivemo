@@ -319,7 +319,7 @@ class TeamsUserIndex extends Component {
 
                                                                             <button type="button" id={'TooltipDelete'} onClick={() => this.deleteItem(item.id)}
                                                                                     className="btn btn-danger btn-icon btn-sm btn-neutral">
-                                                                                <i className="now-ui-icons ui-1_simple-remove"/>
+                                                                                <i className="far fa-trash-alt"/>
                                                                             </button>
                                                                             <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
                                                                                 Supprimer

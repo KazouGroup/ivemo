@@ -17,19 +17,30 @@ class BaseRequest extends Request
      */
     protected function getRules($group)
     {
-        if ($group == 'public_profile_send_message') {
+        if ($group === 'public_profile_send_message') {
             $rules = [
                 'full_name' => ['required', 'string', 'max:255'],
                 'message' => 'required',
+                'phone' => ['nullable', 'numeric'],
                 'email' => ['required', 'string', 'email', 'max:255'],
                 'subject' => ['required', 'string', 'max:255'],
             ];
-        }elseif($group == 'sendcontactmessageuser') {
+        }elseif($group === 'sendcontactmessageuser') {
+            $rules = [
+                'full_name' => ['required', 'string', 'max:255'],
+                'message' => 'required',
+                'phone' => ['nullable', 'numeric'],
+                'email' => ['required', 'string', 'email', 'max:255'],
+                'subject' => ['required', 'string', 'max:255'],
+            ];
+        }elseif($group === 'contactusersfaqs') {
             $rules = [
                 'full_name' => ['required', 'string', 'max:255'],
                 'message' => 'required',
                 'email' => ['required', 'string', 'email', 'max:255'],
-                'subject' => ['required', 'string', 'max:255'],
+                'phone' => ['nullable', 'numeric'],
+                'categoryuser_id' => ['required', 'numeric'],
+                'categoryobjet_id' => ['required', 'numeric'],
             ];
         }
         else { // 'edit'
