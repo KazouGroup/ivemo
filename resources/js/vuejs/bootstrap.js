@@ -8,10 +8,11 @@ window.bus = new Vue();
 /* Ici je recupere tous les information lier a l'utilisateur connecter */
 import Auth from './api/auth'
 
-Vue.prototype.$auth = new Auth(userIvemo.user);
+Vue.prototype.$auth = new Auth(window.user);
 
-Vue.prototype.$userIvemo = window.userIvemo.user;
-Vue.prototype.$url_site = window.userIvemo.url_site;
+Vue.prototype.user = window.user.user;
+Vue.prototype.guest = window.user.guest;
+Vue.prototype.authcheck = window.user.authcheck;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support

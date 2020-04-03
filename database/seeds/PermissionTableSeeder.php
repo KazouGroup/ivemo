@@ -39,28 +39,19 @@ class PermissionTableSeeder extends Seeder
         Permission::create(['guard_name' => 'web' , 'name' => 'setting-task']);
 
         //Create permissions Administrations
-        Permission::create(['guard_name' => 'web' , 'name' => 'view-administrator']);
-        Permission::create(['guard_name' => 'web' , 'name' => 'create-administrator']);
-        Permission::create(['guard_name' => 'web' , 'name' => 'edit-administrator']);
-        Permission::create(['guard_name' => 'web' , 'name' => 'delete-administrator']);
+        Permission::create(['guard_name' => 'web' , 'name' => 'manage-administrator']);
+
+
+        Permission::create(['guard_name' => 'web' , 'name' => 'manage-categories']);
 
         //Create Permissions Faqs
-        Permission::create(['guard_name' => 'web' , 'name' => 'create-faq']);
-        Permission::create(['guard_name' => 'web' , 'name' => 'edit-faq']);
-        Permission::create(['guard_name' => 'web' , 'name' => 'delete-faq']);
-        Permission::create(['guard_name' => 'web' , 'name' => 'publish-faq']);
+        Permission::create(['guard_name' => 'web' , 'name' => 'manage-faq']);
 
         //Create permissions roles
-        Permission::create(['guard_name' => 'web' , 'name' => 'all-role']);
-        Permission::create(['guard_name' => 'web' , 'name' => 'create-role']);
-        Permission::create(['guard_name' => 'web' , 'name' => 'edit-role']);
-        Permission::create(['guard_name' => 'web' , 'name' => 'delete-role']);
+        Permission::create(['guard_name' => 'web' , 'name' => 'manage-role']);
 
         //Create permissions permissions
-        Permission::create(['guard_name' => 'web' , 'name' => 'all-permission']);
-        Permission::create(['guard_name' => 'web' , 'name' => 'create-permission']);
-        Permission::create(['guard_name' => 'web' , 'name' => 'edit-permission']);
-        Permission::create(['guard_name' => 'web' , 'name' => 'delete-permission']);
+        Permission::create(['guard_name' => 'web' , 'name' => 'manage-permission']);
 
         //Viea Subcribe Newletters permissions
         Permission::create(['guard_name' => 'web' , 'name' => 'view-email']);

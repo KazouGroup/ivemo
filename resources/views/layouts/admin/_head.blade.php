@@ -12,11 +12,10 @@
 <meta name="userID" content="{{ auth()->user()->id }}">
 <script>window.Ivemo = { csrfToken: '{{ csrf_token() }}' }; </script>
 <script>
-    window.userIvemo = {!! json_encode([
-      'roles' => auth()->user()->roles,
-    'permissions' => auth()->user()->getAllPermissions(),
+    window.user = {!! json_encode([
     'user' => auth()->user(),
-     'url_site' => htmlspecialchars(config('app.url')),
+    'roles' => auth()->user()->roles,
+    'permissions' => auth()->user()->getAllPermissions(),
     ]) !!}
 </script>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />

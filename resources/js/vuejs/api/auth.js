@@ -1,17 +1,17 @@
 export default class Auth {
 
-    constructor(userIvemo) {
-        this.userIvemo = userIvemo;
+    constructor(user) {
+        this.user = user;
     }
 
     roles() {
 
-        return this.userIvemo.roles.map(role => role.name);
+        return this.user.roles.map(role => role.name);
     }
 
     permissions() {
 
-        return this.userIvemo.permissions.map(permission => permission.name);
+        return this.user.permissions.map(permission => permission.name);
     }
 
 

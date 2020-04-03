@@ -6,9 +6,8 @@
         <div class="panel-header">
             <div class="header text-center">
                 <h2 class="title">FAQS</h2>
-                <p class="category">Toutes les données de la page faqs
-                    <a target="_blank" href="https://fullcalendar.io/">FullCalendar.io</a>. Please checkout their
-                    <a href="https://fullcalendar.io/docs/" target="_blank">full documentation</a>.</p>
+                <p class="category">Toutes les FAQS créé est de
+                    <a href="#">{{ faqs.length }}</a></p>
             </div>
         </div>
 
@@ -16,16 +15,15 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">DataTables.net</h4>
-                        </div>
                         <div class="card-body">
                             <div class="toolbar">
-                                <div class="header text-right">
-                                    <button @click="reload" class="btn btn-success btn-raised button_note btn-sm"
-                                            title="Refresh Page">
-                                        <b class="title_hover">Refresh</b>
-                                    </button>
+                                <div class="submit text-center">
+                                    <router-link v-if="$auth.can('manage-faq')" :to="{ name: 'faqs.create' }" class="btn btn-round btn-primary btn-raised">
+                                       <span class="btn-label">
+                                        <i class="now-ui-icons ui-1_simple-add"></i>
+                                      </span>
+                                        <b class="title_hover">New FAQS</b>
+                                    </router-link>
                                 </div>
                             </div>
                             <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -57,10 +55,11 @@
                                         <a href="#" class="btn btn-round btn-info btn-icon btn-sm like">
                                             <i class="fas fa-heart"></i>
                                         </a>
-                                        <a href="#" class="btn btn-round btn-warning btn-icon btn-sm edit">
-                                            <i class="far fa-calendar-alt"></i></a>
-                                        <button @click="deleteItem(item.id)"  class="btn btn-round btn-danger btn-icon btn-sm remove">
-                                            <i class="fas fa-times"></i>
+                                        <router-link :to="{ name: 'faqs.edit', params: { id: item.id  } }" class="btn btn-success btn-icon btn-sm edit">
+                                            <i class="fas fa-edit"></i>
+                                        </router-link>
+                                        <button @click="deleteItem(item.id)"  class="btn btn-danger btn-icon btn-sm remove">
+                                            <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -117,7 +116,6 @@
                 Swal.fire({
                     title: 'Delete FAQS',
                     text: "Are you sure you want to delete this FAQ?",
-                    type: 'warning',
                     animation: false,
                     customClass: 'animated pulse',
                     buttonsStyling: false,
