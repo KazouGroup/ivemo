@@ -9,3 +9,9 @@ Route::group(['namespace' => 'Admin'], function(){
 
 });
 
+Route::group(['namespace' => 'User'], function(){
+
+    require(__DIR__ . DIRECTORY_SEPARATOR . 'user'. DIRECTORY_SEPARATOR . 'index.php');
+
+});
+

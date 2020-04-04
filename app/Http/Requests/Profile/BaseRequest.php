@@ -2,6 +2,8 @@
 namespace App\Http\Requests\Profile;
 
 use App\Http\Requests\Request;
+use App\Model\user;
+use Illuminate\Validation\Rule;
 
 
 class BaseRequest extends Request
@@ -21,8 +23,28 @@ class BaseRequest extends Request
             $rules = [
                //
             ];
-        }
-        else { // 'edit'
+        }elseif ($group == 'profile_add_info_account_update'){
+            $rules = [
+                'site_internet' => ['nullable','url','string', 'max:255'],
+                'city_id' => ['required'],
+                'birthdate' => 'required|numeric|digits_between:4,4',
+                'address' => ['nullable','string', 'max:255'],
+                'facebook_link' => ['nullable','string', 'max:255'],
+                'twitter_link' => ['nullable','string', 'max:255'],
+                'instagram_link' => ['nullable','string', 'max:255'],
+                'linkedin_link' => ['nullable','string', 'max:255'],
+
+            ];
+        }elseif ($group == 'profile_account_update'){
+            $rules = [
+                'username' => ['required','string','min:2','max:100', Rule::unique((new User)->getTable())->ignore(auth()->id())],
+                'slug' => ['required','string','alpha_dash','min:2','max:100', Rule::unique((new User)->getTable())->ignore(auth()->id())],
+                'email' => ['required','string','email', Rule::unique((new User)->getTable())->ignore(auth()->id())],
+                "sex" => "required|in:female,male",
+                "phone" => "required|numeric",
+
+            ];
+        } else { // 'edit'
             $rules = [
                 'site_internet' => ['nullable','url'],
             ];

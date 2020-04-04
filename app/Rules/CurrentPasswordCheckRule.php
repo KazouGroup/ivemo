@@ -26,6 +26,6 @@ class CurrentPasswordCheckRule implements Rule
      */
     public function message()
     {
-        return __('The current password field does not match your password');
+        return __('Le champ du mot de passe actuel ne correspond pas à votre mot de passe');
     }
 }

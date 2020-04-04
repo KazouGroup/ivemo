@@ -10,7 +10,7 @@ class UpdateRequest extends BaseRequest
      */
     public function rules()
     {
-        return $this->getRules('update', $this->route('profiles'));
+        return $this->getRules('profile_account_update');
     }
 
 } // class

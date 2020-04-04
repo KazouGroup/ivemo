@@ -8,18 +8,20 @@
 @auth
     <meta name="userID" content="{{ auth()->user()->id }}">
     <script>
-    window.userIvemo = {!! json_encode([
+    window.dataIvemo = {!! json_encode([
     'roles' => auth()->user()->roles,
     'permissions' => auth()->user()->getAllPermissions(),
     ]) !!}
     </script>
 @endauth
+
 <script>window.Ivemo = { csrfToken: '{{ csrf_token() }}' }; </script>
 <script>
     window.userIvemo = {!! json_encode([
     'user' => auth()->user(),
     'guest' => auth()->guest(),
     'authcheck' => auth()->check(),
+     'url_site' => htmlspecialchars(config('app.url')),
     ]) !!}
 </script>
 
@@ -31,8 +33,6 @@
   <!-- CSS Files -->
   <link href="/assets/vendor/assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="/assets/vendor/assets/css/now-ui-kit.css?v=1.3.1" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="/assets/vendor/assets/demo/demo.css" rel="stylesheet" />
 
 
 

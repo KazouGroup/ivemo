@@ -8,7 +8,11 @@
 
 2- Positionnez vous dans le fichier (ex: cd nom_fichier)
 
+<<<<<<< HEAD
 3- Tapez ensuite  ``` composer update ``` si vous êtes sur window faites ``` composer install --ignore-platform-reqs ```
+=======
+Configurer votre fichier ``` .env``` en duplicant celle de ``` .env.example ```
+>>>>>>> master
 
 4- Créez une base de donnée sur votre local (ex sur MySql: create database nom_base_donnee)
 

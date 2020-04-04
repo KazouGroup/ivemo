@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Partials;
 
+use App\categoryprofile;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryFaqResource;
 use App\Model\categoryfaq;
@@ -16,7 +17,7 @@ class CategoryFaqController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth',['except' => ['api']]);
+        $this->middleware('auth',['except' => ['api','apicategoryprofiles']]);
     }
     /**
      * Display a listing of the resource.
@@ -33,6 +34,13 @@ class CategoryFaqController extends Controller
         $categories_faqs =  CategoryFaqResource::collection(categoryfaq::with('user')->latest()->get());
 
         return response()->json($categories_faqs,200);
+    }
+
+    public function apicategoryprofiles()
+    {
+        $categoryprofile =  categoryprofile::select('id','name', 'label')->get();
+
+        return response()->json($categoryprofile,200);
     }
     /**
      * Show the form for creating a new resource.

@@ -91,12 +91,12 @@ class ContactUserSite extends Component {
     render() {
         return (
             <div className="about-us sidebar-collapse">
-                <nav className="navbar navbar-expand-lg bg-white fixed-top navbar-transparent" color-on-scroll="400">
+                <nav className="navbar ivemoNarbarCustomisation navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
                     <NavUserSite />
                 </nav>
 
                 <div className="wrapper">
-                    <div className="page-header page-header-mini">
+                    <div className="page-header page-header-small">
                         <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg40.jpg' + ")" }}>
                         </div>
                         <div className="content-center">

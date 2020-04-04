@@ -26,4 +26,14 @@ class PageController extends Controller
     {
         return view('user.annonce.show'); 
     }
+
+    public function annonceshowcreate()
+    {
+        return view('user.annonce.create');   
+    }
+
+    public function annonceshowvendrecreate()
+    {
+        return view('user.annonce.create_vendre');  
+    }
 }
