@@ -10,6 +10,8 @@ require(__DIR__ . DIRECTORY_SEPARATOR . 'contactuserslocaction.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'contactusersvente.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'page.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'profile.php');
+require(__DIR__ . DIRECTORY_SEPARATOR . 'signalannonce.php');
+require(__DIR__ . DIRECTORY_SEPARATOR . 'signalblogannonce.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'profile_public.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'subscriberuser.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'teamuser.php');

@@ -24,6 +24,7 @@ class AnnonceslocationList extends Component {
                         <div className="card card-plain card-blog">
                             <div className="row">
                                 <div className="col-md-5">
+
                                     <div className="card-image">
                                         <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
                                             <ol className="carousel-indicators">
@@ -45,7 +46,12 @@ class AnnonceslocationList extends Component {
 
                                         </div>
                                     </div>
+
                                     <div className="text-center">
+                                        <button type="button" rel="tooltip" onClick={() => this.props.signalerUser(this.props)}
+                                                className="btn btn-neutral btn-sm">
+                                            <i className="far fa-flag"></i> Signaler
+                                        </button>
                                         {!$guest && (
                                             <>
                                                 {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
@@ -70,10 +76,6 @@ class AnnonceslocationList extends Component {
                                             </>
                                         )}
 
-                                        <button type="button" rel="tooltip"
-                                                className="btn btn-primary btn-icon btn-sm">
-                                            <i className="now-ui-icons ui-2_chat-round"/>
-                                        </button>
                                     </div>
 
 
@@ -112,7 +114,7 @@ class AnnonceslocationList extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="col-md-5 col-6">
-                                            <h6 className="text-dark">{this.props.pieces} p . {this.props.rooms && (<>{this.props.rooms} ch</>)}. {this.props.surface && (<>{this.props.surface} m<sup>2</sup></>)}</h6>
+                                            <h6 className="text-dark">{this.props.pieces > 0 ?<>{this.props.pieces} p.</>:null } {this.props.rooms > 0 ? <>{this.props.rooms} ch.</>:null} {this.props.surface > 0 ? <>{this.props.surface} m<sup>2</sup></>:null}</h6>
                                         </div>
                                         <div className="col-md-7 col-6">
                                             <NavLink to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/`}>
@@ -146,11 +148,8 @@ class AnnonceslocationList extends Component {
 
                                         <div className="text-right mx-auto">
 
-                                            <UncontrolledTooltip placement="bottom" target="TooltipPhone">
-                                                3426712192
-                                            </UncontrolledTooltip>
-                                            <Button className="btn btn-icon btn-sm btn-warning" id="TooltipPhone">
-                                                <i className="now-ui-icons tech_mobile"/>
+                                            <Button className="btn btn-icon btn-sm btn-warning" onClick={() => this.props.signalerUser(this.props)} title={`Contacter ${this.props.user.first_name}`}>
+                                                <i className="far fa-envelope"/>
                                             </Button>
                                             <NavLink to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.slug}/`} className="btn btn-icon btn-sm btn-primary">
                                                 <i className="now-ui-icons location_pin"/>

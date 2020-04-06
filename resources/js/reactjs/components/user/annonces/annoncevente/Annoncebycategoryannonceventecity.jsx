@@ -1,25 +1,120 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Button } from "reactstrap";
+import {Button, Form, Input} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import AnnonceventeList from "./inc/AnnonceventeList";
 import Categoriesannoncevente from "./inc/Categoriesannoncevente";
 import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
+import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 
 
 class Annoncebycategoryannonceventecity extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            email: '',
+            full_name: '',
+            message: '',
+            subject: 'Annonce double',
+            errors: [],
+            annonceItem: [],
             annonceventebycity: {annonceventes:[]},
             cityannonceventes:[],
 
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
+        this.signalerUser = this.signalerUser.bind(this);
+        this.handleCheckClick = this.handleCheckClick.bind(this);
+        this.signalemessageItem = this.signalemessageItem.bind(this);
+        this.handleFieldChange = this.handleFieldChange.bind(this);
+        this.hasErrorFor = this.hasErrorFor.bind(this);
+        this.renderErrorFor = this.renderErrorFor.bind(this);
+    }
+
+
+
+    handleFieldChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value,
+        });
+        this.state.errors[event.target.name] = '';
+    }
+
+    handleCheckClick(event){
+        this.setState({
+            subject: event.target.value
+        });
+
+    };
+    // Handle Errors
+    hasErrorFor(field) {
+        return !!this.state.errors[field];
+    }
+
+    renderErrorFor(field) {
+        if (this.hasErrorFor(field)) {
+            return (
+                <span className='invalid-feedback'>
+                    <strong>{this.state.errors[field][0]}</strong>
+                </span>
+            )
+        }
+    }
+
+    signalerUser(item) {
+        $('#addNew').modal('show');
+        this.setState({
+            annonceItem: item
+        });
+    }
+
+    signalemessageItem(e) {
+        e.preventDefault();
+
+        let item = {
+            email: this.state.email,
+            annoncevente_id: this.state.annonceItem.id,
+            full_name: this.state.full_name,
+            subject: this.state.subject,
+            message: this.state.message,
+        };
+        let url = route('signalannonceventes.site');
+        dyaxios.post(url, item)
+            .then(() => {
+
+                //Masquer le modal après la création
+                $('#addNew').modal('hide');
+
+                $.notify({
+                        message: `Cette annonce a été signalé avec succès`
+                    },
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'top',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animated fadeInDown",
+                            exit: "animated fadeOutUp"
+                        },
+                    });
+
+                this.setState({
+                    email: "",
+                    full_name: "",
+                    message: "",
+                });
+            }).catch(error => {
+            this.setState({
+                errors: error.response.data.errors
+            });
+        })
     }
 
     loadItems(){
@@ -49,16 +144,14 @@ class Annoncebycategoryannonceventecity extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('annonces_locations_unactivated.site',id);
+                let url = route('annonces_ventes_unactivated.site',id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            // title: 'Update FAQ',
+
                             //message: 'Annonce désactiver avec succès',
-                            message: "Cette annonce a été masquée au utilisateur <a href=\"/profile/personal_settings/annonces_locations/\" target=\"_blank\">Modifier ici</a>",
-                            url: "/profile/personal_settings/annonces_locations/",
-                            target: "_blank"
+                            message: "Cette annonce a été masquée au utilisateur"
                         },
                         {
                             allow_dismiss: false,
@@ -160,12 +253,12 @@ class Annoncebycategoryannonceventecity extends Component {
         return (annonceventes_count/1000).toFixed(annonceventes_count % 1000 !== 0)+'k';
     }
     render() {
-        const {annonceventebycity,cityannonceventes} = this.state;
+        const {annonceventebycity,cityannonceventes,annonceItem} = this.state;
         let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
         const mapAnnonceventes = annonceventebycity.annonceventes.length ? (
             annonceventebycity.annonceventes.map(item => {
                 return(
-                    <AnnonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
+                    <AnnonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser}/>
                 )
             })
         ):(
@@ -201,7 +294,13 @@ class Annoncebycategoryannonceventecity extends Component {
                                                 <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos annonces </b>
                                             </NavLink>
                                         </div>
-                                        <br/>
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
 
                                         {mapAnnonceventes}
 
@@ -295,6 +394,190 @@ class Annoncebycategoryannonceventecity extends Component {
                                         </div>
 
 
+                                    </div>
+
+                                    <div className="modal fade" id="addNew" tabIndex="-1" role="dialog" aria-labelledby="addNewLabel"
+                                         aria-hidden="true">
+                                        <div className="modal-dialog modal-lg">
+                                            <div className="modal-content">
+                                                <div className="modal-header">
+                                                    <h5 className="modal-title"><b>Signaler des erreurs publicitaires</b></h5>
+                                                    <button type="button" className="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <Form role="form"  onSubmit={this.signalemessageItem}  acceptCharset="UTF-8">
+
+                                                    <div className="modal-body">
+
+                                                        <div className="card-body">
+
+                                                            <div className="alert alert-danger text-center" role="alert">
+                                                                <div className="container">
+                                                                    {annonceItem.title}
+                                                                </div>
+                                                            </div>
+
+                                                            <p className="category">Spécifie le type d'erreur</p>
+
+                                                            <div className="row">
+                                                                <div className="col-md-6">
+                                                                    <div className="form-check form-check-radio">
+                                                                        <label className="form-check-label">
+                                                                            <Input className="form-check-input" type="radio"
+                                                                                   name="subject" id="subject"
+                                                                                   value="Annonce double" onChange={this.handleCheckClick} checked={this.state.subject === "Annonce double"}/>
+                                                                            <span className="form-check-sign"></span>
+                                                                            Annonce double
+                                                                        </label>
+                                                                    </div>
+                                                                    <div className="form-check form-check-radio">
+                                                                        <label className="form-check-label">
+                                                                            <input className="form-check-input" type="radio"
+                                                                                   name="subject" id="subject"
+                                                                                   value="Mauvaise catégorie" onChange={this.handleCheckClick} checked={this.state.subject === "Mauvaise catégorie"}/>
+                                                                            <span className="form-check-sign"></span>
+                                                                            Mauvaise catégorie
+                                                                        </label>
+                                                                    </div>
+                                                                    <div className="form-check form-check-radio">
+                                                                        <label className="form-check-label">
+                                                                            <input className="form-check-input" type="radio"
+                                                                                   name="subject" id="subject"
+                                                                                   value="Mauvaise ville" onChange={this.handleCheckClick} checked={this.state.subject === "Mauvaise ville"}/>
+                                                                            <span className="form-check-sign"></span>
+                                                                            Mauvaise ville
+                                                                        </label>
+                                                                    </div>
+                                                                    <div className="form-check form-check-radio">
+                                                                        <label className="form-check-label">
+                                                                            <Input className="form-check-input" type="radio"
+                                                                                   name="subject" id="subject"
+                                                                                   value="Téléphone / e-mail incorrect" onChange={this.handleCheckClick} checked={this.state.subject === "Téléphone / e-mail incorrect"}/>
+                                                                            <span className="form-check-sign"></span>
+                                                                            Téléphone / e-mail incorrect
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div className="col-md-6">
+                                                                    <div className="form-check form-check-radio">
+                                                                        <label className="form-check-label">
+                                                                            <Input className="form-check-input" type="radio"
+                                                                                   name="subject" id="subject"
+                                                                                   value="Erreur d'adresse / de carte" onChange={this.handleCheckClick} checked={this.state.subject === "Erreur d'adresse / de carte"}/>
+                                                                            <span className="form-check-sign"></span>
+                                                                            Erreur d'adresse / de carte
+                                                                        </label>
+                                                                    </div>
+
+                                                                    <div className="form-check form-check-radio">
+                                                                        <label className="form-check-label">
+                                                                            <Input className="form-check-input" type="radio"
+                                                                                   name="subject" id="subject"
+                                                                                   value="Propriété inexistante" onChange={this.handleCheckClick} checked={this.state.subject === "Propriété inexistante"}/>
+                                                                            <span className="form-check-sign"></span>
+                                                                            Propriété inexistante
+                                                                        </label>
+                                                                    </div>
+                                                                    <div className="form-check form-check-radio">
+                                                                        <label className="form-check-label">
+                                                                            <Input className="form-check-input" type="radio"
+                                                                                   name="subject" id="subject"
+                                                                                   value="Arnaque possible" onChange={this.handleCheckClick} checked={this.state.subject === "Arnaque possible"}/>
+                                                                            <span className="form-check-sign"></span>
+                                                                            Arnaque possible
+                                                                        </label>
+                                                                    </div>
+                                                                    <div className="form-check form-check-radio">
+                                                                        <label className="form-check-label">
+                                                                            <Input className="form-check-input" type="radio"
+                                                                                   name="subject" id="subject"
+                                                                                   value="Autre (précisez dans le commentaire)" onChange={this.handleCheckClick} checked={this.state.subject === "Autre (précisez dans le commentaire)"}/>
+                                                                            <span className="form-check-sign"></span>
+                                                                            Autre (précisez dans le commentaire)
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div className="row">
+                                                                <div className="col-md-6">
+                                                                    <div className="input-group">
+                                                                        <div className="input-group-prepend">
+                                                        <span className="input-group-text">
+                                                            <i className="now-ui-icons users_circle-08"/></span>
+                                                                        </div>
+                                                                        <input id='full_name'
+                                                                               type='text'
+                                                                               required="required"
+                                                                               className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
+                                                                               name='full_name'
+                                                                               placeholder="Nom complet"
+                                                                               aria-label="Nom complet"
+                                                                               autoComplete="full_name"
+                                                                               value={this.state.full_name}
+                                                                               onChange={this.handleFieldChange}
+                                                                        />
+                                                                        {this.renderErrorFor('full_name')}
+                                                                    </div>
+                                                                </div>
+                                                                <div className="col-md-6">
+                                                                    <div className="input-group">
+                                                                        <div className="input-group-prepend">
+                                                        <span className="input-group-text">
+                                                            <i className="now-ui-icons ui-1_email-85"/></span>
+                                                                        </div>
+                                                                        <input id='email'
+                                                                               type='email'
+                                                                               required="required"
+                                                                               className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
+                                                                               name='email'
+                                                                               placeholder="Email"
+                                                                               aria-label="Email"
+                                                                               autoComplete="email"
+                                                                               value={this.state.email}
+                                                                               onChange={this.handleFieldChange}
+                                                                        />
+                                                                        {this.renderErrorFor('email')}
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div className="row">
+
+                                                                <div className="input-group">
+                                                       <textarea name="message" value={this.state.message}
+                                                                 onChange={this.handleFieldChange}
+                                                                 placeholder={'Pourquoi signalez-vous cette article?'}
+                                                                 className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
+                                                                 id="message"
+                                                                 required="required"
+                                                                 rows="10" />
+                                                                    {this.renderErrorFor('message')}
+                                                                </div>
+                                                            </div>
+
+                                                            <div className="submit text-center">
+                                                                <button className="btn btn-primary btn-lg btn-block" type="submit">
+                                                                    <b>Signaler</b>
+                                                                </button>
+                                                            </div>
+
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </Form>
+
+
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>

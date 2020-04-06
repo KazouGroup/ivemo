@@ -63,6 +63,11 @@ class BlogannoncelocationList extends Component {
                                              src={this.props.photo}/>
                                     </a>
                                 </div>
+                                <div className="text-right">
+                                    <a style={{ cursor: "pointer" }} onClick={() => this.props.signalerUser(this.props)} className="nav-item">
+                                        <i className="far fa-flag"></i>
+                                    </a>
+                                </div>
                                 {!$guest &&(
                                     <>
                                         {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (

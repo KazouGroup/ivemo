@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Contactuser\StorecontactuseradvertRequest;
 use App\Http\Requests\Contactuser\StorecontactuserfaqRequest;
+use App\Model\contactusersadvert;
 use App\Model\contactusersfaq;
 use Illuminate\Http\Request;
 
@@ -29,6 +31,11 @@ class PageController extends Controller
         return view('user.page.faqs');
     }
 
+    public function fairelapublicite()
+    {
+        return view('user.page.fairelapublicite');
+    }
+
     public function contactusersfaqs(StorecontactuserfaqRequest $request)
     {
         $contactusersfaq = new contactusersfaq();
@@ -40,6 +47,20 @@ class PageController extends Controller
         $contactusersfaq->save();
 
         return response()->json($contactusersfaq,200);
+
+    }
+
+    public function contactusersadverts(StorecontactuseradvertRequest $request)
+    {
+        $contactusersadvert = new contactusersadvert();
+
+        $contactusersadvert->fill($request->all());
+
+        //ContactuserService::newEmailToprofileUser($request);
+
+        $contactusersadvert->save();
+
+        return response()->json($contactusersadvert,200);
 
     }
 

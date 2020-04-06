@@ -32,6 +32,10 @@
     'guest' => auth()->guest(),
     'authcheck' => auth()->check(),
      'url_site' => htmlspecialchars(config('app.url')),
+     'country' => htmlspecialchars(config('app.country')),
+     'country_sigle' => htmlspecialchars(config('app.country_sigle')),
+     'name_site' => htmlspecialchars(config('app.name')),
+     'phone_number' => htmlspecialchars(config('app.phone')),
     ]) !!}
 </script>
 

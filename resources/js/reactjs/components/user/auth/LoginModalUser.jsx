@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom'
-import NavUserSite from "../../inc/user/NavUserSite";
-import FooterUserSite from "../../inc/user/FooterUserSite";
 
 
 class LoginModalUser extends Component {
