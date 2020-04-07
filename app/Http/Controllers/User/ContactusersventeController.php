@@ -24,7 +24,7 @@ class ContactusersventeController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['except' => [
-            'sendcontactmessageuser',
+            'sendcontactmessageuser','contactusersvente',
         ]]);
     }
     /**
@@ -160,6 +160,18 @@ class ContactusersventeController extends Controller
         $contactusersvente->annoncevente_id = $annoncevente->id;
 
         ContactusersventeService::newEmailToannoncelocationpageShow($request,$annoncevente);
+
+        $contactusersvente->save();
+
+        return response()->json($contactusersvente,200);
+    }
+
+    public function contactusersvente(StorecontactRequest $request)
+    {
+        $contactusersvente = new contactusersvente();
+
+        $contactusersvente->fill($request->all());
+        $contactusersvente->slug = sha1(('YmdHis') . str_random(30));
 
         $contactusersvente->save();
 

@@ -78,6 +78,7 @@ class AnnonceventeController extends Controller
     {
         $annoncesventes = $annoncetype->annonceventes()->whereIn('annoncetype_id',[$annoncetype->id])
             ->with('user','categoryannoncevente','city','annoncetype')
+            ->with(['user.profile' => function ($q){$q->distinct()->get();}])
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')

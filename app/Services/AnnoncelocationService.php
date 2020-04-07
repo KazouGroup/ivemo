@@ -57,6 +57,7 @@ class AnnoncelocationService
                 'annoncelocations' => function ($q) use ($annoncetype,$categoryannoncelocation){
                     $q->where(['status' => 1,'status_admin' => 1])
                         ->with('user','categoryannoncelocation','city','annoncetype')
+                        ->with(['user.profile' => function ($q){$q->distinct()->get();}])
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
                         ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
@@ -82,7 +83,9 @@ class AnnoncelocationService
             }])
             ->with([
                 'annoncelocations' => function ($q) use ($annoncetype,$categoryannoncelocation,$city){
-                    $q->where(['status' => 1,'status_admin' => 1])->with('user','categoryannoncelocation','city','annoncetype')
+                    $q->where(['status' => 1,'status_admin' => 1])
+                        ->with('user','categoryannoncelocation','city','annoncetype')
+                        ->with(['user.profile' => function ($q){$q->distinct()->get();}])
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
                         ->whereIn('city_id',[$city->id])
@@ -108,13 +111,14 @@ class AnnoncelocationService
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);});
             }])
             ->with(['annoncelocations' => function ($q) use ($annoncetype,$city){
-                    $q->where(['status' => 1,'status_admin' => 1])->with('user','categoryannoncelocation','city','annoncetype')
+                    $q->where(['status' => 1,'status_admin' => 1])
+                        ->with('user','categoryannoncelocation','city','annoncetype')
+                        ->with(['user.profile' => function ($q){$q->distinct()->get();}])
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->whereIn('city_id',[$city->id])
                         ->whereHas('city', function ($q) {$q->where('status',1);})
                         ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
-                        ->orderBy('created_at','DESC')
-                        ->distinct()->paginate(30)->toArray();},
+                        ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();},
             ])->first();
 
         return $annoncesbycities;
@@ -125,6 +129,7 @@ class AnnoncelocationService
         $annonceslocations = HelpersService::helpersannonceteamcount($user)
             ->with(['annoncelocations' => function ($q) use ($user){
                 $q->with('user','categoryannoncelocation','city','annoncetype')
+                    ->with(['user.profile' => function ($q){$q->distinct()->get();}])
                     ->whereIn('user_id',[$user->id])
                     ->whereHas('city', function ($q) {$q->where('status',1);})
                     ->orderBy('created_at','DESC')

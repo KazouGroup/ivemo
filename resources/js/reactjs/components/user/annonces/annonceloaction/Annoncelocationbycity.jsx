@@ -10,6 +10,7 @@ import Categoriesannoncereselocation from "./inc/Categoriesannoncereselocation";
 import Swal from "sweetalert2";
 import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
+import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
 
 
 class Annoncelocationbycity extends Component {
@@ -645,134 +646,11 @@ class Annoncelocationbycity extends Component {
                                     </div>
 
 
-                                    <div className="modal fade" id="contactNew" tabIndex="-1" role="dialog" aria-labelledby="contactNewLabel"
-                                         aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h5 className="modal-title"><b>Contacter {annonceItem.user.first_name}</b></h5>
-                                                    <button type="button" className="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-
-                                                <Form role="form"  onSubmit={this.sendmessageItem}  acceptCharset="UTF-8">
-
-                                                    <div className="modal-body">
-
-                                                        <div className="card-body">
-
-                                                            <div className="row">
-                                                                <div className="input-group">
-                                                                    <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons users_circle-08"/></span>
-                                                                    </div>
-                                                                    <input id='full_name'
-                                                                           type='text'
-                                                                           className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
-                                                                           name='full_name'
-                                                                           minLength="5"
-                                                                           placeholder="Nom complet"
-                                                                           aria-label="Nom complet"
-                                                                           autoComplete="full_name"
-                                                                           value={this.state.full_name}
-                                                                           onChange={this.handleFieldChange}
-                                                                    />
-                                                                    {this.renderErrorFor('full_name')}
-                                                                </div>
-                                                            </div>
-
-                                                            <div className="row">
-                                                                <div className="input-group">
-                                                                    <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons ui-1_email-85"/></span>
-                                                                    </div>
-                                                                    <input id='email'
-                                                                           type='email'
-                                                                           className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                                                           name='email'
-                                                                           minLength="3"
-                                                                           placeholder="Email"
-                                                                           aria-label="Email"
-                                                                           autoComplete="email"
-                                                                           value={this.state.email}
-                                                                           onChange={this.handleFieldChange}
-                                                                    />
-                                                                    {this.renderErrorFor('email')}
-                                                                </div>
-                                                            </div>
-                                                            <div className="row">
-                                                                <div className="input-group">
-                                                                    <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons tech_mobile"/></span>
-                                                                    </div>
-                                                                    <input id='phone'
-                                                                           type='text'
-                                                                           className={`form-control ${this.hasErrorFor('phone') ? 'is-invalid' : ''}`}
-                                                                           name='phone'
-                                                                           placeholder="Téléphone"
-                                                                           aria-label="Téléphone"
-                                                                           value={this.state.phone}
-                                                                           onChange={this.handleFieldChange}
-                                                                    />
-                                                                    {this.renderErrorFor('phone')}
-                                                                </div>
-
-
-                                                            </div>
-                                                            <div className="row">
-
-                                                                <div className="input-group">
-                                                                    <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons users_circle-08"/></span>
-                                                                    </div>
-                                                                    <input id='subject'
-                                                                           type='text'
-                                                                           minLength="5"
-                                                                           className={`form-control ${this.hasErrorFor('subject') ? 'is-invalid' : ''}`}
-                                                                           name='subject'
-                                                                           placeholder="Object..."
-                                                                           aria-label="Object"
-                                                                           autoComplete="subject"
-                                                                           value={this.state.subject}
-                                                                           onChange={this.handleFieldChange}
-                                                                    />
-                                                                    {this.renderErrorFor('subject')}
-                                                                </div>
-                                                            </div>
-                                                            <div className="row">
-
-                                                                <div className="input-group">
-                                                       <textarea name="message" value={this.state.message}
-                                                                 onChange={this.handleFieldChange}
-                                                                 placeholder={'Posez ici toutes vos questions !'}
-                                                                 minLength="5"
-                                                                 className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                 id="message"
-                                                                 rows="10" />
-                                                                    {this.renderErrorFor('message')}
-                                                                </div>
-                                                            </div>
-                                                            <div className="submit text-center">
-                                                                <button className="btn btn-primary btn-lg btn-block" type="submit">
-                                                                    Contacter
-                                                                </button>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-                                                </Form>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <FormModalContactannonceUser {...this.props} {...annonceItem}
+                                                                 renderErrorFor={this.renderErrorFor}
+                                                                 handleFieldChange={this.handleFieldChange}
+                                                                 hasErrorFor={this.hasErrorFor}
+                                                                 sendmessageItem={this.sendmessageItem}/>
 
                                 </div>
                             </div>

@@ -9,6 +9,8 @@ import Categoriesannoncevente from "./inc/Categoriesannoncevente";
 import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 import Swal from "sweetalert2";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
+import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
+import AnnonceslocationList from "../annonceloaction/inc/AnnonceslocationList";
 
 
 class AnnonceventeIndex extends Component {
@@ -18,23 +20,25 @@ class AnnonceventeIndex extends Component {
             email: '',
             full_name: '',
             message: '',
-            object: '',
-            subject: 'Annonce double',
+            subject: '',
+            object: 'Annonce double',
             errors: [],
-            annonceItem: [],
+            annonceItem: {user:[]},
             isLoading: false,
             annonceventes: [],
         };
 
         this.unactiveItem = this.unactiveItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
-        this.handleCheckClick = this.handleCheckClick.bind(this);
         this.signalemessageItem = this.signalemessageItem.bind(this);
+        this.contactUser = this.contactUser.bind(this);
+        this.sendmessageItem = this.sendmessageItem.bind(this);
+        this.handleCheckClick = this.handleCheckClick.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
-    }
 
+    }
 
     handleFieldChange(event) {
         this.setState({
@@ -70,6 +74,63 @@ class AnnonceventeIndex extends Component {
             annonceItem: item
         });
     }
+
+    contactUser(item) {
+        $('#contactNew').modal('show');
+        this.setState({
+            annonceItem: item
+        });
+    }
+
+    sendmessageItem(e) {
+        e.preventDefault();
+
+        let item = {
+            email: this.state.email,
+            full_name: this.state.full_name,
+            phone: this.state.phone,
+            subject: this.state.subject,
+            user_id: this.state.annonceItem.user.id,
+            annoncevente_id: this.state.annonceItem.id,
+            message: this.state.message,
+        };
+        let url = route('contactusersventes.site');
+        dyaxios.post(url, item)
+            .then(() => {
+
+                //Masquer le modal après la création
+                $('#contactNew').modal('hide');
+
+                $.notify({
+                        message: `Votre message a été bien envoyé à cette utilisateur`
+                    },
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'top',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animated fadeInDown",
+                            exit: "animated fadeOutUp"
+                        },
+                    });
+
+                this.setState({
+                    email: "",
+                    full_name: "",
+                    phone: "",
+                    subject: "",
+                    message: "",
+                });
+            }).catch(error => {
+            this.setState({
+                errors: error.response.data.errors
+            });
+        })
+    }
+
 
     signalemessageItem(e) {
         e.preventDefault();
@@ -115,6 +176,7 @@ class AnnonceventeIndex extends Component {
             });
         })
     }
+
 
     unactiveItem(id){
         Swal.fire({
@@ -190,7 +252,7 @@ class AnnonceventeIndex extends Component {
         ):(
             annonceventes.map(item => {
                 return(
-                    <AnnonceventeList key={item.id} {...item} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser}/>
+                    <AnnonceventeList key={item.id} {...item} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser}/>
                 )
             })
         );
@@ -459,6 +521,13 @@ class AnnonceventeIndex extends Component {
                                             </div>
                                         </div>
                                     </div>
+
+
+                                    <FormModalContactannonceUser {...this.props} {...annonceItem}
+                                                                 renderErrorFor={this.renderErrorFor}
+                                                                 handleFieldChange={this.handleFieldChange}
+                                                                 hasErrorFor={this.hasErrorFor}
+                                                                 sendmessageItem={this.sendmessageItem}/>
 
                                 </div>
                             </div>

@@ -144,6 +144,7 @@ class AnnoncereservationController extends Controller
                     $q->where(['status' => 1,'status_admin' => 1])
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
+                        ->with(['user.profile' => function ($q){$q->distinct()->get();}])
                         ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
                         ->whereHas('city', function ($q) {$q->where('status',1);})
                         ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();
@@ -170,6 +171,7 @@ class AnnoncereservationController extends Controller
                     $q->where(['status' => 1,'status_admin' => 1])
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
+                        ->with(['user.profile' => function ($q){$q->distinct()->get();}])
                         ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
                         ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
                         ->whereHas('city', function ($q) {$q->where('status',1);})
@@ -182,6 +184,7 @@ class AnnoncereservationController extends Controller
     {
         $annoncereservation = $categoryannoncereservation->annoncereservations()->whereIn('annoncetype_id',[$annoncetype->id])
             ->with('user','city','annoncetype','categoryannoncereservation','imagereservations')
+            ->with(['user.profile' => function ($q){$q->distinct()->get();}])
             ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])

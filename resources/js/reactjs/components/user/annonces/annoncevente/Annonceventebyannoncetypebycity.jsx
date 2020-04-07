@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 import Categoriesannoncereseventecity from "./inc/Categoriesannoncereseventecity";
 import AnnonceventeList from "./inc/AnnonceventeList";
+import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
 
 
 class Annonceventebyannoncetypebycity extends Component {
@@ -18,9 +19,10 @@ class Annonceventebyannoncetypebycity extends Component {
             email: '',
             full_name: '',
             message: '',
-            subject: 'Annonce double',
+            subject: '',
+            object: 'Annonce double',
             errors: [],
-            annonceItem: [],
+            annonceItem: {user:[]},
             annonceventebycity: {annonceventes:[]},
             isLoading: false,
 
@@ -28,14 +30,14 @@ class Annonceventebyannoncetypebycity extends Component {
         this.deleteItem = this.deleteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
-        this.handleCheckClick = this.handleCheckClick.bind(this);
         this.signalemessageItem = this.signalemessageItem.bind(this);
+        this.contactUser = this.contactUser.bind(this);
+        this.sendmessageItem = this.sendmessageItem.bind(this);
+        this.handleCheckClick = this.handleCheckClick.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
     }
-
-
 
     handleFieldChange(event) {
         this.setState({
@@ -46,7 +48,7 @@ class Annonceventebyannoncetypebycity extends Component {
 
     handleCheckClick(event){
         this.setState({
-            subject: event.target.value
+            object: event.target.value
         });
 
     };
@@ -72,6 +74,63 @@ class Annonceventebyannoncetypebycity extends Component {
         });
     }
 
+    contactUser(item) {
+        $('#contactNew').modal('show');
+        this.setState({
+            annonceItem: item
+        });
+    }
+
+    sendmessageItem(e) {
+        e.preventDefault();
+
+        let item = {
+            email: this.state.email,
+            full_name: this.state.full_name,
+            phone: this.state.phone,
+            subject: this.state.subject,
+            user_id: this.state.annonceItem.user.id,
+            annoncevente_id: this.state.annonceItem.id,
+            message: this.state.message,
+        };
+        let url = route('contactusersventes.site');
+        dyaxios.post(url, item)
+            .then(() => {
+
+                //Masquer le modal après la création
+                $('#contactNew').modal('hide');
+
+                $.notify({
+                        message: `Votre message a été bien envoyé à cette utilisateur`
+                    },
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'top',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animated fadeInDown",
+                            exit: "animated fadeOutUp"
+                        },
+                    });
+
+                this.setState({
+                    email: "",
+                    full_name: "",
+                    phone: "",
+                    subject: "",
+                    message: "",
+                });
+            }).catch(error => {
+            this.setState({
+                errors: error.response.data.errors
+            });
+        })
+    }
+
+
     signalemessageItem(e) {
         e.preventDefault();
 
@@ -79,7 +138,7 @@ class Annonceventebyannoncetypebycity extends Component {
             email: this.state.email,
             annoncevente_id: this.state.annonceItem.id,
             full_name: this.state.full_name,
-            subject: this.state.subject,
+            object: this.state.object,
             message: this.state.message,
         };
         let url = route('signalannonceventes.site');
@@ -149,9 +208,9 @@ class Annonceventebyannoncetypebycity extends Component {
                     $.notify({
                             // title: 'Update FAQ',
                             //message: 'Annonce désactiver avec succès',
-                            message: "Cette annonce a été masquée au utilisateur <a href=\"/profile/personal_settings/annonces_locations/\" target=\"_blank\">Modifier ici</a>",
-                            url: "/profile/personal_settings/annonces_locations/",
-                            target: "_blank"
+                            message: "Cette annonce a été masquée aux utilisateurs",
+                            //url: "/profile/personal_settings/annonces_locations/",
+                            //target: "_blank"
                         },
                         {
                             allow_dismiss: false,
@@ -250,7 +309,7 @@ class Annonceventebyannoncetypebycity extends Component {
         ):(
             allannoncelocationbycity.map(item => {
                 return(
-                    <AnnonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser}/>
+                    <AnnonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser}/>
                 )
             })
         );
@@ -378,8 +437,8 @@ class Annonceventebyannoncetypebycity extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="subject" id="subject"
-                                                                                   value="Annonce double" onChange={this.handleCheckClick} checked={this.state.subject === "Annonce double"}/>
+                                                                                   name="object" id="object"
+                                                                                   value="Annonce double" onChange={this.handleCheckClick} checked={this.state.object === "Annonce double"}/>
                                                                             <span className="form-check-sign"></span>
                                                                             Annonce double
                                                                         </label>
@@ -387,8 +446,8 @@ class Annonceventebyannoncetypebycity extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <input className="form-check-input" type="radio"
-                                                                                   name="subject" id="subject"
-                                                                                   value="Mauvaise catégorie" onChange={this.handleCheckClick} checked={this.state.subject === "Mauvaise catégorie"}/>
+                                                                                   name="object" id="object"
+                                                                                   value="Mauvaise catégorie" onChange={this.handleCheckClick} checked={this.state.object === "Mauvaise catégorie"}/>
                                                                             <span className="form-check-sign"></span>
                                                                             Mauvaise catégorie
                                                                         </label>
@@ -396,8 +455,8 @@ class Annonceventebyannoncetypebycity extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <input className="form-check-input" type="radio"
-                                                                                   name="subject" id="subject"
-                                                                                   value="Mauvaise ville" onChange={this.handleCheckClick} checked={this.state.subject === "Mauvaise ville"}/>
+                                                                                   name="object" id="object"
+                                                                                   value="Mauvaise ville" onChange={this.handleCheckClick} checked={this.state.object === "Mauvaise ville"}/>
                                                                             <span className="form-check-sign"></span>
                                                                             Mauvaise ville
                                                                         </label>
@@ -405,8 +464,8 @@ class Annonceventebyannoncetypebycity extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="subject" id="subject"
-                                                                                   value="Téléphone / e-mail incorrect" onChange={this.handleCheckClick} checked={this.state.subject === "Téléphone / e-mail incorrect"}/>
+                                                                                   name="object" id="object"
+                                                                                   value="Téléphone / e-mail incorrect" onChange={this.handleCheckClick} checked={this.state.object === "Téléphone / e-mail incorrect"}/>
                                                                             <span className="form-check-sign"></span>
                                                                             Téléphone / e-mail incorrect
                                                                         </label>
@@ -417,8 +476,8 @@ class Annonceventebyannoncetypebycity extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="subject" id="subject"
-                                                                                   value="Erreur d'adresse / de carte" onChange={this.handleCheckClick} checked={this.state.subject === "Erreur d'adresse / de carte"}/>
+                                                                                   name="object" id="object"
+                                                                                   value="Erreur d'adresse / de carte" onChange={this.handleCheckClick} checked={this.state.object === "Erreur d'adresse / de carte"}/>
                                                                             <span className="form-check-sign"></span>
                                                                             Erreur d'adresse / de carte
                                                                         </label>
@@ -427,8 +486,8 @@ class Annonceventebyannoncetypebycity extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="subject" id="subject"
-                                                                                   value="Propriété inexistante" onChange={this.handleCheckClick} checked={this.state.subject === "Propriété inexistante"}/>
+                                                                                   name="object" id="object"
+                                                                                   value="Propriété inexistante" onChange={this.handleCheckClick} checked={this.state.object === "Propriété inexistante"}/>
                                                                             <span className="form-check-sign"></span>
                                                                             Propriété inexistante
                                                                         </label>
@@ -436,8 +495,8 @@ class Annonceventebyannoncetypebycity extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="subject" id="subject"
-                                                                                   value="Arnaque possible" onChange={this.handleCheckClick} checked={this.state.subject === "Arnaque possible"}/>
+                                                                                   name="object" id="object"
+                                                                                   value="Arnaque possible" onChange={this.handleCheckClick} checked={this.state.object === "Arnaque possible"}/>
                                                                             <span className="form-check-sign"></span>
                                                                             Arnaque possible
                                                                         </label>
@@ -445,8 +504,8 @@ class Annonceventebyannoncetypebycity extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="subject" id="subject"
-                                                                                   value="Autre (précisez dans le commentaire)" onChange={this.handleCheckClick} checked={this.state.subject === "Autre (précisez dans le commentaire)"}/>
+                                                                                   name="object" id="object"
+                                                                                   value="Autre (précisez dans le commentaire)" onChange={this.handleCheckClick} checked={this.state.object === "Autre (précisez dans le commentaire)"}/>
                                                                             <span className="form-check-sign"></span>
                                                                             Autre (précisez dans le commentaire)
                                                                         </label>
@@ -530,6 +589,13 @@ class Annonceventebyannoncetypebycity extends Component {
                                             </div>
                                         </div>
                                     </div>
+
+
+                                    <FormModalContactannonceUser {...this.props} {...annonceItem}
+                                                                 renderErrorFor={this.renderErrorFor}
+                                                                 handleFieldChange={this.handleFieldChange}
+                                                                 hasErrorFor={this.hasErrorFor}
+                                                                 sendmessageItem={this.sendmessageItem}/>
 
                                 </div>
                             </div>
