@@ -23,7 +23,7 @@ class BlogannoncelocationIndex extends Component {
             message: '',
             subject: 'Mauvaise catégorie',
             errors: [],
-            blogannoncelocationItem: [],
+            blogannonceItem: [],
             blogannoncelocations:{categoryannoncelocation:[],user:[]},
 
         };
@@ -69,7 +69,7 @@ class BlogannoncelocationIndex extends Component {
     signalerUser(item) {
         $('#addNew').modal('show');
         this.setState({
-            blogannoncelocation: item
+            blogannonceItem: item
         });
     }
 
@@ -78,7 +78,7 @@ class BlogannoncelocationIndex extends Component {
 
         let item = {
             email: this.state.email,
-            blogannoncelocation_id: this.state.blogannoncelocationItem.id,
+            blogannoncelocation_id: this.state.blogannonceItem.id,
             full_name: this.state.full_name,
             subject: this.state.subject,
             message: this.state.message,
@@ -239,7 +239,7 @@ class BlogannoncelocationIndex extends Component {
     }
 
     render() {
-        const {blogannoncelocations,blogannoncelocationItem} = this.state;
+        const {blogannoncelocations,blogannonceItem} = this.state;
         const mapAnnoncelocations = blogannoncelocations.length ? (
             blogannoncelocations.map(item => {
                 return(
@@ -400,7 +400,7 @@ class BlogannoncelocationIndex extends Component {
 
                                                             <div className="alert alert-danger text-center" role="alert">
                                                                 <div className="container">
-                                                                    {blogannoncelocationItem.title}
+                                                                    {blogannonceItem.title}
                                                                 </div>
                                                             </div>
 

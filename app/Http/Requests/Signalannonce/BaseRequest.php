@@ -22,7 +22,7 @@ class BaseRequest extends Request
             'message' => 'required',
             'phone' => ['nullable', 'numeric'],
             'email' => ['required', 'string', 'email', 'max:255'],
-            'subject' => ['required', 'string', 'max:255'],
+            'object' => ['required', 'string', 'max:255'],
         ];
     }
 

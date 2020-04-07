@@ -5,6 +5,11 @@ Route::post(
     'ContactuserslocationController@sendcontactmessageuser'
 )->name('annoncelocationsendcontactmessageuser_site');
 
+Route::post(
+    'annonces_locations/contactuserslocactions',
+    'ContactuserslocationController@contactuserslocaction'
+)->name('contactuserslocactions.site');
+
 Route::group(['prefix' => 'api'], function () {
 
     Route::get(

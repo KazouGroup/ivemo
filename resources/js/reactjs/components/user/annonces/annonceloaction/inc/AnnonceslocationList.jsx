@@ -148,7 +148,7 @@ class AnnonceslocationList extends Component {
 
                                         <div className="text-right mx-auto">
 
-                                            <Button className="btn btn-icon btn-sm btn-warning" onClick={() => this.props.signalerUser(this.props)} title={`Contacter ${this.props.user.first_name}`}>
+                                            <Button className="btn btn-icon btn-sm btn-warning" onClick={() => this.props.contactUser(this.props)} title={`Contacter ${this.props.user.first_name}`}>
                                                 <i className="far fa-envelope"/>
                                             </Button>
                                             <NavLink to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.slug}/`} className="btn btn-icon btn-sm btn-primary">

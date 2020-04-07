@@ -22,7 +22,7 @@ class BlogannoncelocationBycategorylocation extends Component {
             message: '',
             subject: 'Mauvaise catégorie',
             errors: [],
-            blogannoncelocationItem: [],
+            blogannonceItem: [],
             blogannoncelocationsData: {blogannoncelocations:[]},
             isLoading: false,
         };
@@ -69,7 +69,7 @@ class BlogannoncelocationBycategorylocation extends Component {
     signalerUser(item) {
         $('#addNew').modal('show');
         this.setState({
-            blogannoncelocationItem: item
+            blogannonceItem: item
         });
     }
 
@@ -78,7 +78,7 @@ class BlogannoncelocationBycategorylocation extends Component {
 
         let item = {
             email: this.state.email,
-            blogannoncelocation_id: this.state.blogannoncelocationItem.id,
+            blogannoncelocation_id: this.state.blogannonceItem.id,
             full_name: this.state.full_name,
             subject: this.state.subject,
             message: this.state.message,
@@ -237,7 +237,7 @@ class BlogannoncelocationBycategorylocation extends Component {
     }
 
     render() {
-        const {blogannoncelocationsData,isLoading,blogannoncelocationItem} = this.state;
+        const {blogannoncelocationsData,isLoading,blogannonceItem} = this.state;
         const blogannoncelocationsbycategorylocations = blogannoncelocationsData.blogannoncelocations;
         const mapAnnoncelocations = isLoading ? (
             <BlogannonceListSkeleton/>
@@ -415,7 +415,7 @@ class BlogannoncelocationBycategorylocation extends Component {
 
                                                             <div className="alert alert-danger text-center" role="alert">
                                                                 <div className="container">
-                                                                    {blogannoncelocationItem.title}
+                                                                    {blogannonceItem.title}
                                                                 </div>
                                                             </div>
 

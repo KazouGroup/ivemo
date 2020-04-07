@@ -17,33 +17,13 @@ class BaseRequest extends Request
      */
     protected function getRules($group)
     {
-        if ($group === 'signalblogannoncelocation') {
-            $rules = [
-                'full_name' => ['required', 'string','min:3', 'max:255'],
-                'message' => 'required',
-                'email' => ['required', 'string', 'email', 'max:255'],
-                'subject' => ['nullable', 'string', 'max:255'],
-            ];
-        }elseif($group === 'signalblogannoncereservation') {
-            $rules = [
-                'full_name' => ['required', 'string','min:3', 'max:255'],
-                'message' => 'required',
-                'email' => ['required', 'string', 'email', 'max:255'],
-                'subject' => ['nullable', 'string', 'max:255'],
-            ];
-        }elseif($group === 'signalblogannoncevente') {
-            $rules = [
-                'full_name' => ['required', 'string','min:3', 'max:255'],
-                'message' => 'required',
-                'email' => ['required', 'string', 'email', 'max:255'],
-                'subject' => ['nullable', 'string', 'max:255'],
-            ];
-        }
-        else { // 'edit'
-            $rules = [
-                ///
-            ];
-        }
+        $rules = [
+            'full_name' => ['required', 'string','min:3', 'max:255'],
+            'message' => 'required',
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'subject' => ['nullable', 'string', 'max:255'],
+        ];
+
 
         return $rules;
     }

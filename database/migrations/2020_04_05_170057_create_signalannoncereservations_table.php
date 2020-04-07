@@ -16,7 +16,7 @@ class CreateSignalannoncereservationsTable extends Migration
         Schema::create('signalannoncereservations', function (Blueprint $table) {
             $table->id();
             $table->string('full_name')->nullable();
-            $table->string('subject')->nullable();
+            $table->string('object')->nullable();
             $table->string('email')->nullable();
             $table->string('ip')->nullable();
             $table->longText('message')->nullable();

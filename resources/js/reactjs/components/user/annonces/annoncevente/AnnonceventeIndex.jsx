@@ -18,6 +18,7 @@ class AnnonceventeIndex extends Component {
             email: '',
             full_name: '',
             message: '',
+            object: '',
             subject: 'Annonce double',
             errors: [],
             annonceItem: [],
@@ -44,7 +45,7 @@ class AnnonceventeIndex extends Component {
 
     handleCheckClick(event){
         this.setState({
-            subject: event.target.value
+            object: event.target.value
         });
 
     };
@@ -77,7 +78,7 @@ class AnnonceventeIndex extends Component {
             email: this.state.email,
             annoncevente_id: this.state.annonceItem.id,
             full_name: this.state.full_name,
-            subject: this.state.subject,
+            object: this.state.object,
             message: this.state.message,
         };
         let url = route('signalannonceventes.site');
@@ -306,8 +307,8 @@ class AnnonceventeIndex extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="subject" id="subject"
-                                                                                   value="Annonce double" onChange={this.handleCheckClick} checked={this.state.subject === "Annonce double"}/>
+                                                                                   name="object" id="object"
+                                                                                   value="Annonce double" onChange={this.handleCheckClick} checked={this.state.object === "Annonce double"}/>
                                                                             <span className="form-check-sign"></span>
                                                                             Annonce double
                                                                         </label>
@@ -315,8 +316,8 @@ class AnnonceventeIndex extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <input className="form-check-input" type="radio"
-                                                                                   name="subject" id="subject"
-                                                                                   value="Mauvaise catégorie" onChange={this.handleCheckClick} checked={this.state.subject === "Mauvaise catégorie"}/>
+                                                                                   name="object" id="object"
+                                                                                   value="Mauvaise catégorie" onChange={this.handleCheckClick} checked={this.state.object === "Mauvaise catégorie"}/>
                                                                             <span className="form-check-sign"></span>
                                                                             Mauvaise catégorie
                                                                         </label>
@@ -324,8 +325,8 @@ class AnnonceventeIndex extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <input className="form-check-input" type="radio"
-                                                                                   name="subject" id="subject"
-                                                                                   value="Mauvaise ville" onChange={this.handleCheckClick} checked={this.state.subject === "Mauvaise ville"}/>
+                                                                                   name="object" id="object"
+                                                                                   value="Mauvaise ville" onChange={this.handleCheckClick} checked={this.state.object === "Mauvaise ville"}/>
                                                                             <span className="form-check-sign"></span>
                                                                             Mauvaise ville
                                                                         </label>
@@ -333,8 +334,8 @@ class AnnonceventeIndex extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="subject" id="subject"
-                                                                                   value="Téléphone / e-mail incorrect" onChange={this.handleCheckClick} checked={this.state.subject === "Téléphone / e-mail incorrect"}/>
+                                                                                   name="object" id="object"
+                                                                                   value="Téléphone / e-mail incorrect" onChange={this.handleCheckClick} checked={this.state.object === "Téléphone / e-mail incorrect"}/>
                                                                             <span className="form-check-sign"></span>
                                                                             Téléphone / e-mail incorrect
                                                                         </label>
@@ -345,8 +346,8 @@ class AnnonceventeIndex extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="subject" id="subject"
-                                                                                   value="Erreur d'adresse / de carte" onChange={this.handleCheckClick} checked={this.state.subject === "Erreur d'adresse / de carte"}/>
+                                                                                   name="object" id="object"
+                                                                                   value="Erreur d'adresse / de carte" onChange={this.handleCheckClick} checked={this.state.object === "Erreur d'adresse / de carte"}/>
                                                                             <span className="form-check-sign"></span>
                                                                             Erreur d'adresse / de carte
                                                                         </label>
@@ -355,8 +356,8 @@ class AnnonceventeIndex extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="subject" id="subject"
-                                                                                   value="Propriété inexistante" onChange={this.handleCheckClick} checked={this.state.subject === "Propriété inexistante"}/>
+                                                                                   name="object" id="object"
+                                                                                   value="Propriété inexistante" onChange={this.handleCheckClick} checked={this.state.object === "Propriété inexistante"}/>
                                                                             <span className="form-check-sign"></span>
                                                                             Propriété inexistante
                                                                         </label>
@@ -364,8 +365,8 @@ class AnnonceventeIndex extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="subject" id="subject"
-                                                                                   value="Arnaque possible" onChange={this.handleCheckClick} checked={this.state.subject === "Arnaque possible"}/>
+                                                                                   name="object" id="object"
+                                                                                   value="Arnaque possible" onChange={this.handleCheckClick} checked={this.state.object === "Arnaque possible"}/>
                                                                             <span className="form-check-sign"></span>
                                                                             Arnaque possible
                                                                         </label>
@@ -373,8 +374,8 @@ class AnnonceventeIndex extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="subject" id="subject"
-                                                                                   value="Autre (précisez dans le commentaire)" onChange={this.handleCheckClick} checked={this.state.subject === "Autre (précisez dans le commentaire)"}/>
+                                                                                   name="object" id="object"
+                                                                                   value="Autre (précisez dans le commentaire)" onChange={this.handleCheckClick} checked={this.state.object === "Autre (précisez dans le commentaire)"}/>
                                                                             <span className="form-check-sign"></span>
                                                                             Autre (précisez dans le commentaire)
                                                                         </label>

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Signalannonce\SignalannonceventeRequest;
 use App\Http\Requests\Signalblogannonce\SignalblogannoncereservationRequest;
+use App\Http\Requests\Signalblogannonce\SignalblogannonceventeRequest;
 use App\Http\Requests\Signalblogannonce\SignalblogannonlocationRequest;
-use App\Model\signalannoncereservation;
 use App\Model\signalblogannoncelocation;
+use App\Model\signalblogannoncereservation;
 use App\Model\signalblogannoncevente;
 use Illuminate\Http\Request;
 
@@ -41,17 +41,17 @@ class SignalblogannonceController extends Controller
     public function signalblogannoncereservation(SignalblogannoncereservationRequest $request)
     {
 
-        $signalannoncereservation = new signalannoncereservation();
+        $signalblogannoncereservation = new signalblogannoncereservation();
 
-        $signalannoncereservation->fill($request->all());
+        $signalblogannoncereservation->fill($request->all());
 
-        $signalannoncereservation->save();
+        $signalblogannoncereservation->save();
 
-        return response()->json($signalannoncereservation,200);
+        return response()->json($signalblogannoncereservation,200);
 
     }
 
-    public function signalblogannoncevente(SignalannonceventeRequest $request)
+    public function signalblogannoncevente(SignalblogannonceventeRequest $request)
     {
 
         $signalblogannoncevente = new signalblogannoncevente();
