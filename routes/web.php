@@ -20,6 +20,7 @@ Route::get('/', function () {
 require(__DIR__ . DIRECTORY_SEPARATOR . 'web' . DIRECTORY_SEPARATOR . 'index.php');
 
 /** Auth */
+Route::mixin(new \Laravel\Ui\AuthRouteMethods());
 Auth::routes(['verify' => true]);
 
 
