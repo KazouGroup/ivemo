@@ -103,6 +103,7 @@ import Annoncereservationbyannoncetypebycity
 import AgencesimmobilieIndex from "../components/user/agencesimmobilie/AgencesimmobilieIndex";
 import FaqsIndexSite from "../components/user/pages/FaqsIndexSite";
 import PubliciteIndexSite from "../components/user/pages/PubliciteIndexSite";
+import PolicyprivacyIndexSite from "../components/user/pages/PolicyprivacyIndexSite";
 
 
 const RouteUser = props => (
@@ -115,6 +116,7 @@ const RouteUser = props => (
           <Route exact path="/about/" component={AboutUserSite}/>
           <Route exact path="/contact/" component={ContactUserSite}/>
           <Route exact path="/faqs/" component={FaqsIndexSite}/>
+          <Route exact path="/policy_privacy/" component={PolicyprivacyIndexSite}/>
           <Route exact path="/advertisement/" component={PubliciteIndexSite}/>
           <Route exact path="/annonce/" component={AnnonceUserSite}/>
           <Route exact path="/annonce/show/" component={AnnonceShowUserSite}/>

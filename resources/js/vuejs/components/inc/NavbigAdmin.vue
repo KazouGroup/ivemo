@@ -1,13 +1,13 @@
 <template>
-    <div class="sidebar" data-color="blue">
+    <div class="sidebar" data-color="dark">
         <!--
           Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
       -->
         <div class="logo">
-            <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+            <a href="/" class="simple-text logo-mini">
                 IV
             </a>
-            <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+            <a href="/" class="simple-text logo-normal">
                 Ivemo
             </a>
             <div class="navbar-minimize">
@@ -20,12 +20,12 @@
         <div class="sidebar-wrapper" id="sidebar-wrapper">
             <div class="user">
                 <div class="photo">
-                    <img src="/assets/admin/assets/img/james.jpg" />
+                    <img :src="user.avatar" :alt="user.first_name"/>
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" class="collapsed">
               <span>
-                James Amos
+               {{ (user.first_name.length > 13 ? user.first_name.substring(0,13)+ "..." : user.first_name) }}
                 <b class="caret"></b>
               </span>
                     </a>
@@ -171,6 +171,26 @@
                         <i class="now-ui-icons media-1_album"></i>
                         <p>Calendar</p>
                     </a>
+                </li>
+
+                <li>
+                    <a data-toggle="collapse" href="#termpolicyconditionExamples">
+                        <i class="now-ui-icons text_caps-small"></i>
+                        <p>
+                            Termes,policy...
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse " id="termpolicyconditionExamples">
+                        <ul class="nav">
+                            <li>
+                                <router-link :to="{ name: 'policyprivacies.index'}">
+                                    <span class="sidebar-mini-icon">PP</span>
+                                    <span class="sidebar-normal"> Policy privacy </span>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </div>

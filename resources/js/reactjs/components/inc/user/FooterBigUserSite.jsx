@@ -160,7 +160,7 @@ class FooterBigUserSite extends Component {
                                                 </Link>
                                             </li>
                                             <li className="d-inline-block">
-                                                <Link to={'/politique_confidentialité/'} className="nav-link">
+                                                <Link to={'/policy_privacy/'} className="nav-link">
                                                     Privacy Policy
                                                 </Link>
                                             </li>

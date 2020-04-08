@@ -31,6 +31,11 @@ class PageController extends Controller
         return view('user.page.faqs');
     }
 
+    public function policyprivacy()
+    {
+        return view('user.page.policyprivacy');
+    }
+
     public function fairelapublicite()
     {
         return view('user.page.fairelapublicite');
