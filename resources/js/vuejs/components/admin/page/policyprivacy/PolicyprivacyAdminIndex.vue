@@ -237,6 +237,7 @@
                             this.$Progress.fail();
                             //Alert error
                             $.notify("Ooop! Something wrong. Try later", {
+                                allow_dismiss: false,
                                 type: 'danger',
                                 animate: {
                                     enter: 'animated bounceInDown',

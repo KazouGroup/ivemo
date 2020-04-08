@@ -53,7 +53,7 @@
                                 <hr>
                                 <div class="submit">
                                     <div class="text-center">
-                                        <router-link :to="{ name: 'faqs.index' }" class="btn btn-round btn-danger">
+                                        <router-link :to="{ name: 'policyprivacies.index' }" class="btn btn-round btn-danger">
                                             <b class="title_hover">Annuler</b>
                                         </router-link>
                                         <button v-if="$auth.can('manage-faq')" :disabled="form.busy" type="submit" class="btn btn-round btn-success btn-raised">
