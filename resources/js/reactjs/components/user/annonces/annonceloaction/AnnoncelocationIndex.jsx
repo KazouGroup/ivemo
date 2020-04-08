@@ -305,7 +305,7 @@ class AnnoncelocationIndex extends Component {
 
     render() {
         const {annoncelocations,annonceItem} = this.state;
-        const mapAnnoncelocations = annoncelocations.length ? (
+        const mapAnnoncelocations = annoncelocations.length >= 0 ? (
             annoncelocations.map(item => {
                 return(
                     <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser}/>

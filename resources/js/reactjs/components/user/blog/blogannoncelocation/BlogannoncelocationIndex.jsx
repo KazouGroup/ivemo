@@ -240,7 +240,7 @@ class BlogannoncelocationIndex extends Component {
 
     render() {
         const {blogannoncelocations,blogannonceItem} = this.state;
-        const mapAnnoncelocations = blogannoncelocations.length ? (
+        const mapAnnoncelocations = blogannoncelocations.length >= 0 ? (
             blogannoncelocations.map(item => {
                 return(
 

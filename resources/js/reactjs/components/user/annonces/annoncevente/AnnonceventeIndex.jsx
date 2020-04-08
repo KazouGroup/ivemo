@@ -10,7 +10,6 @@ import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton
 import Swal from "sweetalert2";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
-import AnnonceslocationList from "../annonceloaction/inc/AnnonceslocationList";
 
 
 class AnnonceventeIndex extends Component {
@@ -24,7 +23,6 @@ class AnnonceventeIndex extends Component {
             object: 'Annonce double',
             errors: [],
             annonceItem: {user:[]},
-            isLoading: false,
             annonceventes: [],
         };
 
@@ -235,10 +233,9 @@ class AnnonceventeIndex extends Component {
     }
 
     loadItems(){
-        this.setState({ isLoading: true });
         let itemAnnoncevente = this.props.match.params.annoncetype;
         let url = route('api.annonceventebyannoncetype_site', itemAnnoncevente);
-        dyaxios.get(url).then(response => this.setState({annonceventes: response.data.data, isLoading: false,}));
+        dyaxios.get(url).then(response => this.setState({annonceventes: response.data.data}));
     }
     // lifecycle method
     componentDidMount() {
@@ -246,15 +243,15 @@ class AnnonceventeIndex extends Component {
     }
 
     render() {
-        const {annonceventes,annonceItem,isLoading} = this.state;
-        const mapAnnonceventes = isLoading ? (
-            <AnnoncesListSkeleton/>
-        ):(
+        const {annonceventes,annonceItem} = this.state;
+        const mapAnnonceventes = annonceventes.length >= 0 ? (
             annonceventes.map(item => {
                 return(
                     <AnnonceventeList key={item.id} {...item} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser}/>
                 )
             })
+        ):(
+            <AnnoncesListSkeleton/>
         );
         return (
             <Fragment>

@@ -26,7 +26,6 @@ class Annoncebycategoryannoncevente extends Component {
             annonceItem: {user:[]},
             annonceventebycategory: {annonceventes:[]},
             cityannonceventes:[],
-            isLoading: false,
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
@@ -180,11 +179,10 @@ class Annoncebycategoryannoncevente extends Component {
 
 
     loadItems(){
-        this.setState({ isLoading: true });
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
         let url = route('api.annonceventebycategoryannonceventes_site',[itemannoncetype,itemCategoryannoncevente]);
-        dyaxios.get(url).then(response => this.setState({annonceventebycategory: response.data,isLoading: false,}));
+        dyaxios.get(url).then(response => this.setState({annonceventebycategory: response.data}));
         let url1 = route('api.annonceventebycategorycitycount_site',[itemCategoryannoncevente]);
         dyaxios.get(url1).then(response => this.setState({cityannonceventes: response.data,}));
 
@@ -314,15 +312,15 @@ class Annoncebycategoryannoncevente extends Component {
         return (annonceventes_count/1000).toFixed(annonceventes_count % 1000 !== 0)+'k';
     }
     render() {
-        const {annonceventebycategory,cityannonceventes,annonceItem,isLoading} = this.state;
-        const mapAnnonceventes = isLoading ? (
-            <AnnoncesListSkeleton/>
-        ):(
+        const {annonceventebycategory,cityannonceventes,annonceItem} = this.state;
+        const mapAnnonceventes = annonceventebycategory.annonceventes.length >= 0 ? (
             annonceventebycategory.annonceventes.map(item => {
                 return(
                     <AnnonceventeList key={item.id} {...item}  deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser}/>
                 )
             })
+        ):(
+            <AnnoncesListSkeleton/>
         );
         return (
             <Fragment>
@@ -394,7 +392,7 @@ class Annoncebycategoryannoncevente extends Component {
                                                                         <table>
                                                                             <tbody>
 
-                                                                            {cityannonceventes.length ?
+                                                                            {cityannonceventes.length >= 0 ?
                                                                                 <>
                                                                                     {cityannonceventes.map((item) => (
                                                                                         <tr key={item.id}>

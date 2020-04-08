@@ -399,7 +399,7 @@ class Annoncebycategoryannoncelocation extends Component {
                                                                         <table>
                                                                             <tbody>
 
-                                                                            {cityannoncelocations.length ?
+                                                                            {cityannoncelocations.length >= 0 ?
                                                                                 <>
                                                                                     {cityannoncelocations.map((item) => (
                                                                                     <tr key={item.id}>

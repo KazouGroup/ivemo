@@ -244,7 +244,7 @@ class BlogannonceventeIndex extends Component {
 
     render() {
         const {blogannonceventes,blogannonceItem,isLoading} = this.state;
-        const mapBlogannonceventes = blogannonceventes.length ? (
+        const mapBlogannonceventes = blogannonceventes.length >= 0 ? (
             blogannonceventes.map(item => {
                 return(
                     <BlogannonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser}/>

@@ -152,7 +152,7 @@ class AgencesimmobilieIndex extends Component {
 
     render() {
         const {agencesimmobilies,Itemagenceimmobilie} = this.state;
-        const mapAgenceimmobilies = agencesimmobilies.length ? (
+        const mapAgenceimmobilies = agencesimmobilies.length >= 0 ? (
             agencesimmobilies.map(item => {
                 return(
                     <AgencesimmobilieList key={item.id} {...item} contactUser={this.contactUser}/>

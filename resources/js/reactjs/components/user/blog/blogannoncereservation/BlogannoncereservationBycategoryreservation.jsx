@@ -238,7 +238,7 @@ class BlogannoncereservationBycategoryreservation extends Component {
     render() {
         const {blogannoncereservation,blogannonceItem} = this.state;
         const blogannoncereservationsbycategoryreservations = blogannoncereservation.blogannoncereservations;
-        const mapAnnoncereservations = blogannoncereservationsbycategoryreservations.length ? (
+        const mapAnnoncereservations = blogannoncereservationsbycategoryreservations.length >= 0 ? (
             blogannoncereservationsbycategoryreservations.map(item => {
                 return(
                     <BlogannoncereservationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser}/>
