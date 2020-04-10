@@ -23,11 +23,6 @@ class blogannoncevente extends Model
                 $model->slugin = $myslug;
             }
         });
-        static::updating(function($model){
-            if (auth()->check()){
-                $model->user_id = auth()->id();
-            }
-        });
     }
 
     public function getRouteKeyName()
@@ -38,6 +33,11 @@ class blogannoncevente extends Model
     public function user()
     {
         return $this->belongsTo(User::class,'user_id');
+    }
+
+    public function member()
+    {
+        return $this->belongsTo(User::class,'member_id');
     }
 
     public function categoryannoncevente()

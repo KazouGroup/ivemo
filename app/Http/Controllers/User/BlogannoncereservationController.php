@@ -35,7 +35,7 @@ class BlogannoncereservationController extends Controller
         $blogannoncereservations = blogannoncereservation::with('user','categoryannoncereservation')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
-            ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();
+            ->orderBy('created_at','DESC')->distinct()->paginate(40);
 
         return response()->json($blogannoncereservations, 200);
     }
@@ -53,7 +53,7 @@ class BlogannoncereservationController extends Controller
                     ->where(['status' => 1,'status_admin' => 1])
             ->with('user','categoryannoncereservation')->where(['status' => 1])
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
-            ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();},
+            ->orderBy('created_at','DESC')->distinct()->paginate(40);},
             ])->first();
 
         return response()->json($blogannoncereservation, 200);
@@ -68,7 +68,7 @@ class BlogannoncereservationController extends Controller
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
-            ->take(3)->distinct()->get()->toArray();
+            ->take(3)->distinct()->get();
         return response()->json($blogannoncereservation, 200);
     }
 
@@ -84,7 +84,7 @@ class BlogannoncereservationController extends Controller
        $blogannoncereservations = blogannoncereservation::whereIn('user_id',[$user->id])
            ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
            ->orderBy('created_at','DESC')
-           ->where(['status' => 1,'status_admin' => 1])->get()->toArray();
+           ->where(['status' => 1,'status_admin' => 1])->get();
 
         return response()->json($blogannoncereservations, 200);
 

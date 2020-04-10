@@ -29,7 +29,7 @@ class BlogannoncelocationService
                         ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                         ->with('user','categoryannoncelocation')
                         ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
-                        ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();},
+                        ->orderBy('created_at','DESC')->distinct()->paginate(30);},
             ])->first();
 
         return $blogannoncelocations;
@@ -55,7 +55,7 @@ class BlogannoncelocationService
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id])
                     ->orderBy('created_at','DESC')
-                    ->distinct()->get()->toArray()
+                    ->distinct()->get()
                 ;},
             ])->first();
 
@@ -71,7 +71,7 @@ class BlogannoncelocationService
                     ->whereIn('user_id',[$user->id])
                     ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
                     ->orderBy('created_at','DESC')
-                    ->distinct()->get()->toArray()
+                    ->distinct()->get()
                 ;},
             ])->first();
 

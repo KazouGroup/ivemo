@@ -32,7 +32,7 @@ class BlogannonceventeService
                     ->with('user','categoryannoncevente')
                     ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-                    ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();},
+                    ->orderBy('created_at','DESC')->distinct()->paginate(40);},
             ])->first();
 
         return $blogannoncereseventes;
@@ -96,14 +96,14 @@ class BlogannonceventeService
 
     public static function apiblogannoncesventescategoryannonceventebyuser($user,$categoryannoncevente)
     {
-        $blogannoncereseventes = HelpersService::helpersannonblogceteambyusercount($user,$categoryannoncevente)
+        $blogannoncereseventes = HelpersService::helpersannonblogceteambyusercount($user)
             ->with(['blogannonceventes' => function ($q) use ($user,$categoryannoncevente){
                 $q->with('user','categoryannoncevente')
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id])
                     ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
                     ->orderBy('created_at','DESC')
-                    ->distinct()->get()->toArray()
+                    ->distinct()->get()
                 ;},
             ])->first();
 

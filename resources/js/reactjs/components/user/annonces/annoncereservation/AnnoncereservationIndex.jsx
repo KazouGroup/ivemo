@@ -31,7 +31,7 @@ class AnnoncereservationIndex extends Component {
     render() {
         const {annoncereservationbytype} = this.state;
         const allannoncereservations = annoncereservationbytype.annoncereservations;
-        const mapAnnoncereservations = allannoncereservations.length ? (
+        const mapAnnoncereservations = allannoncereservations.length >= 0 ? (
             allannoncereservations.map(item => {
                 return(
                     <AnnoncereservationList key={item.id} {...item} />

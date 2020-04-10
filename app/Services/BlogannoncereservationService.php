@@ -65,7 +65,7 @@ class BlogannoncereservationService
                     ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
                     ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
                     ->orderBy('created_at','DESC')
-                    ->distinct()->get()->toArray()
+                    ->distinct()->get()
                 ;},
             ])->first();
 

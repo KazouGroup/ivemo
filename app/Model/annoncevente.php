@@ -21,11 +21,6 @@ class annoncevente extends Model
                 $model->user_id = auth()->id();
             }
         });
-        static::updating(function($model){
-            if (auth()->check()){
-                $model->user_id = auth()->id();
-            }
-        });
     }
 
 
@@ -37,6 +32,11 @@ class annoncevente extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function member()
+    {
+        return $this->belongsTo(User::class,'member_id');
     }
 
     public function categoryannoncevente()
@@ -57,6 +57,11 @@ class annoncevente extends Model
     public function contactusersventes()
     {
         return $this->hasMany(contactusersvente::class, 'annoncevente_id');
+    }
+
+    public function signalannonceventes()
+    {
+        return $this->hasMany(signalannoncevente::class, 'annoncevente_id');
     }
 
     protected $casts = [

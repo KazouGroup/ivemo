@@ -49,8 +49,8 @@ class AnnonceslocationList extends Component {
 
                                     <div className="text-center">
                                         <button type="button" rel="tooltip" onClick={() => this.props.signalerUser(this.props)}
-                                                className="btn btn-neutral btn-sm">
-                                            <i className="far fa-flag"></i> Signaler
+                                                className="btn btn-instagram btn-icon btn-sm">
+                                            <i className="far fa-flag"></i>
                                         </button>
                                         {!$guest && (
                                             <>

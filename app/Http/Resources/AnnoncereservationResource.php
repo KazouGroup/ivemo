@@ -33,6 +33,7 @@ class AnnoncereservationResource extends JsonResource
             'annoncetype' => $this->annoncetype,
             'categoryannoncereservation_id' => $this->categoryannoncereservation_id,
             'categoryannoncereservation' => $this->categoryannoncereservation,
+            'signalannoncereservations_count' => $this->signalannoncereservations_count,
             'imagereservations' => $this->imagereservations,
             'disponible_date' => (string) $this->disponible_date,
             'created_at' => (string) $this->created_at,

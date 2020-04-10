@@ -36,6 +36,8 @@ class PermissionTableSeeder extends Seeder
 
         Permission::create(['guard_name' => 'web' , 'name' => 'administration']);
 
+        Permission::create(['guard_name' => 'web' , 'name' => 'manage-signal']);
+
         Permission::create(['guard_name' => 'web' , 'name' => 'setting-task']);
 
         //Create permissions Administrations
@@ -43,6 +45,8 @@ class PermissionTableSeeder extends Seeder
 
 
         Permission::create(['guard_name' => 'web' , 'name' => 'manage-categories']);
+
+        Permission::create(['guard_name' => 'web' , 'name' => 'manage-blogs']);
 
         //Create Permissions Faqs
         Permission::create(['guard_name' => 'web' , 'name' => 'manage-faq']);

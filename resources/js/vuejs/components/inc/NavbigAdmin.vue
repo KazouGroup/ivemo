@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar" data-color="dark">
+    <div class="sidebar" data-color="orange">
         <!--
           Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
       -->
@@ -154,23 +154,69 @@
                         </ul>
                     </div>
                 </li>
+
                 <li>
-                    <a href="../examples/widgets.html">
-                        <i class="now-ui-icons objects_diamond"></i>
-                        <p>Widgets</p>
+                    <a data-toggle="collapse" href="#blogsExamples">
+                        <i class="now-ui-icons text_align-center"></i>
+                        <p>
+                            Blogs & articles
+                            <b class="caret"></b>
+                        </p>
                     </a>
+                    <div class="collapse " id="blogsExamples">
+                        <ul class="nav">
+                            <li>
+                                <router-link :to="{ name: 'blogannoncelocations.dashboard'}">
+                                    <span class="sidebar-mini-icon">ALS</span>
+                                    <span class="sidebar-normal"> Articles blogs locations </span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{ name: 'blogannoncereservations.dashboard'}">
+                                    <span class="sidebar-mini-icon">ARS</span>
+                                    <span class="sidebar-normal"> Articles blogs reservations </span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{ name: 'blogannonceventes.dashboard'}">
+                                    <span class="sidebar-mini-icon">AVS</span>
+                                    <span class="sidebar-normal"> Articles blogs ventes </span>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
-                <li>
-                    <a href="../examples/charts.html">
-                        <i class="now-ui-icons business_chart-pie-36"></i>
-                        <p>Charts</p>
+
+                <li v-if="$auth.can('manage-signal')">
+                    <a data-toggle="collapse" href="#signalExamples">
+                        <i class="now-ui-icons travel_info"></i>
+                        <p>
+                            Signal blogs,annonces...
+                            <b class="caret"></b>
+                        </p>
                     </a>
-                </li>
-                <li>
-                    <a href="../examples/calendar.html">
-                        <i class="now-ui-icons media-1_album"></i>
-                        <p>Calendar</p>
-                    </a>
+                    <div class="collapse " id="signalExamples">
+                        <ul class="nav">
+                            <li>
+                                <router-link :to="{ name: 'signalannoncelocations.index'}">
+                                    <span class="sidebar-mini-icon">ALS</span>
+                                    <span class="sidebar-normal"> Annonces locations signalées </span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{ name: 'signalannoncereservations.index'}">
+                                    <span class="sidebar-mini-icon">ARS</span>
+                                    <span class="sidebar-normal"> Annonces reservations signalées </span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{ name: 'signalannonceventes.index'}">
+                                    <span class="sidebar-mini-icon">AVS</span>
+                                    <span class="sidebar-normal"> Annonces ventes signalées </span>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
 
                 <li>

@@ -35,7 +35,7 @@ class BlogannonceventeController extends Controller
             ->where(['status' => 1,'status_admin' => 1])
             ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')
-            ->distinct()->paginate(40)->toArray();
+            ->distinct()->paginate(40);
 
         return response()->json($blogannoncereseventes, 200);
     }
@@ -67,7 +67,7 @@ class BlogannonceventeController extends Controller
             ->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-            ->take(3)->distinct()->get()->toArray();
+            ->take(3)->distinct()->get();
         return response()->json($blogannoncereseventes, 200);
     }
 

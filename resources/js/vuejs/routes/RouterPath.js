@@ -9,6 +9,19 @@ import CategoryAnnonceventeAdminIndex from "../components/admin/categories/Categ
 import PolicyprivacyAdminIndex from "../components/admin/page/policyprivacy/PolicyprivacyAdminIndex";
 import PolicyprivacyAdminCreate from "../components/admin/page/policyprivacy/PolicyprivacyAdminCreate";
 import PolicyprivacyAdminEdit from "../components/admin/page/policyprivacy/PolicyprivacyAdminEdit";
+import SignalannoncelocationsAdminIndex from "../components/admin/signal/signalannoncelocation/SignalannoncelocationsAdminIndex";
+import SignalannoncelocationsAdminShow
+    from "../components/admin/signal/signalannoncelocation/SignalannoncelocationsAdminShow";
+import SignalannonceventesAdminIndex from "../components/admin/signal/signalannoncevente/SignalannonceventesAdminIndex";
+import SignalannoncereservationAdminIndex
+    from "../components/admin/signal/signalannoncereservation/SignalannoncereservationAdminIndex";
+import BlogannonceventesAdminIndex from "../components/admin/blog/blogannoncevente/BlogannonceventesAdminIndex";
+import BlogannoncelocationsAdminIndex
+    from "../components/admin/blog/blogannoncelocation/BlogannoncelocationsAdminIndex";
+import BlogannoncereservationsAdminIndex
+    from "../components/admin/blog/blogannoncereservation/BlogannoncereservationsAdminIndex";
+import BlogannonceventesbycategoryAdmin
+    from "../components/admin/blog/blogannoncevente/BlogannonceventesbycategoryAdmin";
 
 
 export const routes = [
@@ -26,5 +39,20 @@ export const routes = [
     {path: '/dashboard/categoryannoncelocations/', name: 'categoryannoncelocations.index', component: CategoryAnnoncelocationAdminIndex},
     {path: '/dashboard/categoryannoncereservations/', name: 'categoryannoncereservations.index', component: CategoryAnnoncereservationAdminIndex},
     {path: '/dashboard/categoryannonceventes/', name: 'categoryannonceventes.index', component: CategoryAnnonceventeAdminIndex},
+
+    {path: '/dashboard/signalannoncelocations/', name: 'signalannoncelocations.index', component: SignalannoncelocationsAdminIndex},
+    {path: '/dashboard/signalannoncelocations/:annoncelocation/', name: 'signalannoncelocations.show', component: SignalannoncelocationsAdminShow},
+
+    {path: '/dashboard/signalannonceventes/', name: 'signalannonceventes.index', component: SignalannonceventesAdminIndex},
+    {path: '/dashboard/signalannonceventes/:annoncevente/', name: 'signalannonceventes.show', component: SignalannoncelocationsAdminShow},
+
+    {path: '/dashboard/signalannoncereservations/', name: 'signalannoncereservations.index', component: SignalannoncereservationAdminIndex},
+    {path: '/dashboard/signalannoncereservations/:annoncereservation/', name: 'signalannoncereservations.show', component: SignalannoncelocationsAdminShow},
+
+
+    {path: '/dashboard/blogannoncelocations/', name: 'blogannoncelocations.dashboard', component: BlogannoncelocationsAdminIndex},
+    {path: '/dashboard/blogannoncereservations/', name: 'blogannoncereservations.dashboard', component: BlogannoncereservationsAdminIndex},
+    {path: '/dashboard/blogannonceventes/', name: 'blogannonceventes.dashboard', component: BlogannonceventesAdminIndex},
+    {path: '/dashboard/blogannonceventes/:categoryannoncevente/', name: 'blogannonceventes_show.dashboard', component: BlogannonceventesbycategoryAdmin},
 
 ];

@@ -34,7 +34,7 @@ class BlogannoncelocationController extends Controller
         $categoryannoncelocations = blogannoncelocation::with('user','categoryannoncelocation')
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->where(['status' => 1,'status_admin' => 1])->orderBy('created_at','DESC')
-            ->distinct()->paginate(40)->toArray();
+            ->distinct()->paginate(40);
 
         return response()->json($categoryannoncelocations, 200);
     }

@@ -138,7 +138,7 @@ class CompileTableSeeder extends Seeder
         $admin_user->syncRoles('super-admin');
 
 
-        factory(user::class, 2)->create();
+        factory(user::class, 1)->create();
         factory(categoryfaq::class, 5)->create();
         factory(faq::class, 1)->create();
         factory(contact::class, 200)->create();

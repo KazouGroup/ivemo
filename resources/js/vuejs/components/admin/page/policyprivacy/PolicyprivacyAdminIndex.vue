@@ -6,8 +6,8 @@
         <div class="panel-header">
             <div class="header text-center">
                 <h2 class="title">Policy privacy</h2>
-                <p class="category">Toutes les policy privacy créé est de
-                    <a href="#">{{ policyprivacies.length }}</a></p>
+                <p class="text-white">Toutes les policy privacy créé est de
+                    <a href="#"><b>{{ policyprivacies.length }}</b></a></p>
             </div>
         </div>
 

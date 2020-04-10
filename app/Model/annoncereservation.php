@@ -20,11 +20,6 @@ class annoncereservation extends Model
                 $model->user_id = auth()->id();
             }
         });
-        static::updating(function($model){
-            if (auth()->check()){
-                $model->user_id = auth()->id();
-            }
-        });
     }
 
     public function getRouteKeyName()
@@ -35,6 +30,11 @@ class annoncereservation extends Model
     public function user()
     {
         return $this->belongsTo(User::class,'user_id');
+    }
+
+    public function member()
+    {
+        return $this->belongsTo(User::class,'member_id');
     }
 
     public function categoryannoncereservation()
@@ -82,5 +82,10 @@ class annoncereservation extends Model
     public function imagereservations()
     {
         return $this->hasMany(imagereservation::class, 'annoncereservation_id');
+    }
+
+    public function signalannoncereservations()
+    {
+        return $this->hasMany(signalannoncereservation::class, 'annoncereservation_id');
     }
 }
