@@ -23,8 +23,8 @@ Route::get(
 )->name('api.blogannoncereservations_dashboardunactive_count');
 
 Route::get(
-    'api/dashboardblogannoncelocations/{annoncereservation:slug}',
-    'DashboardblogannoncereservationController@annonce'
+    'api/dashboardblogannoncereservations/{categoryannoncereservation:slug}',
+    'DashboardblogannoncereservationController@categoryannoncereservation'
 )->name('api.blogannoncereservations_dashboard_show');
 
 Route::get(
@@ -33,9 +33,9 @@ Route::get(
 )->name('blogannoncereservations.dashboard');
 
 Route::get(
-    'dashboard/blogannoncereservations/{annoncereservation:slug}',
+    'dashboard/blogannoncereservations/{categoryannoncereservation:slug}',
     'DashboardblogannoncereservationController@show'
-)->name('blogannoncereservations.dashboard');
+)->name('blogannoncereservations_show.dashboard');
 
 Route::get('dashboard/active_blogannoncereservations/{id}',
     'DashboardblogannoncereservationController@activated'

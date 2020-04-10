@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Blogs;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BlogannoncelocationResource;
 use App\Model\blogannoncelocation;
+use App\Model\categoryannoncelocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,6 +29,21 @@ class DashboardblogannoncelocationController extends Controller
             ->distinct()->paginate(10));
 
         return response()->json($blogannoncelocations,200);
+    }
+
+    public function categoryannoncelocation(categoryannoncelocation $categoryannoncelocation)
+    {
+        $blogannoncelocations = categoryannoncelocation::whereSlug($categoryannoncelocation->slug)
+            ->withCount(['blogannoncelocations' => function ($q)  use ($categoryannoncelocation){
+                $q->with('user','categoryannoncelocation')
+                    ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id]);
+            }])->with(['blogannoncelocations' => function ($q) use ($categoryannoncelocation){
+                $q->with('user','categoryannoncelocation')
+                    ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
+                    ->orderBy('created_at','DESC')->distinct()->get();},
+            ])->first();;
+
+        return response()->json($blogannoncelocations, 200);
     }
 
     public function blogannoncecount()
@@ -54,6 +70,13 @@ class DashboardblogannoncelocationController extends Controller
     public function index()
     {
         return view('admin.blog.blogannoncelocations.index');
+    }
+
+    public function show(categoryannoncelocation $categoryannoncelocation)
+    {
+        return view('admin.blog.blogannoncelocations.show',[
+            'categoryannoncelocation' => $categoryannoncelocation,
+        ]);
     }
 
     public function activated($id)

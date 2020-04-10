@@ -23,8 +23,8 @@ Route::get(
 )->name('api.blogannoncelocations_dashboardunactive_count');
 
 Route::get(
-    'api/dashboardblogannoncelocations/{annoncelocation:slug}',
-    'DashboardblogannoncelocationController@annonce'
+    'api/dashboardblogannoncelocations/{categoryannoncelocation:slug}',
+    'DashboardblogannoncelocationController@categoryannoncelocation'
 )->name('api.blogannoncelocations_dashboard_show');
 
 Route::get(
@@ -33,9 +33,9 @@ Route::get(
 )->name('blogannoncelocations.dashboard');
 
 Route::get(
-    'dashboard/blogannoncelocations/{annoncelocation:slug}',
+    'dashboard/blogannoncelocations/{categoryannoncelocation:slug}',
     'DashboardblogannoncelocationController@show'
-)->name('blogannoncelocations.dashboard');
+)->name('blogannoncelocations_show.dashboard');
 
 Route::get('dashboard/active_blogannoncelocations/{id}',
     'DashboardblogannoncelocationController@activated'

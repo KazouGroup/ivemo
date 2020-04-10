@@ -35,16 +35,14 @@ class DashboardblogannonceventeController extends Controller
 
     public function categoryannoncevente(categoryannoncevente $categoryannoncevente)
     {
-        $blogannoncereseventes = categoryannoncevente::whereSlug($categoryannoncevente->slug)->where(['status' => 1])
+        $blogannoncereseventes = categoryannoncevente::whereSlug($categoryannoncevente->slug)
             ->withCount(['blogannonceventes' => function ($q)  use ($categoryannoncevente){
                 $q->with('user','categoryannoncevente')
-                    ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
-                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);});
+                    ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id]);
             }])->with(['blogannonceventes' => function ($q) use ($categoryannoncevente){
                 $q->with('user','categoryannoncevente')
                     ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
-                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-                    ->orderBy('created_at','DESC')->distinct()->paginate(40);},
+                    ->orderBy('created_at','DESC')->distinct()->get();},
             ])->first();;
 
         return response()->json($blogannoncereseventes, 200);

@@ -8,91 +8,7 @@
         </div>
 
         <div class="content">
-            <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="card card-stats">
-                        <div class="card-body ">
-                            <div class="statistics statistics-horizontal">
-                                <div class="info info-horizontal">
-                                    <div class="row">
-                                        <div class="col-5">
-                                            <div class="icon icon-primary icon-circle">
-                                                <i class="now-ui-icons text_align-center"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-7 text-right">
-                                            <h3 class="info-title">{{blogannonceventes_countFormatter(blogannoncereservations_count)}}</h3>
-                                            <h6 class="stats-title">Articles</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="card-footer ">
-                            <div class="stats">
-                                <i class="now-ui-icons text_align-center"></i> Articles blogs
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-sm-6">
-                    <div class="card card-stats">
-                        <div class="card-body ">
-                            <div class="statistics statistics-horizontal">
-                                <div class="info info-horizontal">
-                                    <div class="row">
-                                        <div class="col-5">
-                                            <div class="icon icon-success icon-circle">
-                                                <i class="now-ui-icons ui-1_check"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-7 text-right">
-                                            <h3 class="info-title">{{blogannonceventesactive_countFormatter(blogannoncereservationsactive_count)}}</h3>
-                                            <h6 class="stats-title">Actives</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="card-footer ">
-                            <div class="stats">
-                                <i class="now-ui-icons ui-1_check"/> Articles actives visible site
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-sm-6">
-                    <div class="card card-stats">
-                        <div class="card-body ">
-                            <div class="statistics statistics-horizontal">
-                                <div class="info info-horizontal">
-                                    <div class="row">
-                                        <div class="col-5">
-                                            <div class="icon icon-danger icon-circle">
-                                                <i class="now-ui-icons ui-1_simple-delete"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-7 text-right">
-                                            <h3 class="info-title">{{blogannonceventesunactive_countFormatter(blogannoncereservationsunactive_count)}}</h3>
-                                            <h6 class="stats-title">Unactives</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="card-footer ">
-                            <div class="stats">
-                                <i class="now-ui-icons ui-1_simple-delete"/> Articles unactives
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           <NavBlogannoncereservationsAdmin/>
 
             <div class="row">
                 <div class="col-md-12">
@@ -142,8 +58,10 @@
                                                 <b v-else>user deleted</b>
                                             </td>
                                             <td>
-                                                <b v-if="item.categoryannoncereservation_id">{{ (item.categoryannoncereservation.name.length > 15 ? item.categoryannoncereservation.name.substring(0,15)+ "..." : item.categoryannoncereservation.name) | upText }}</b>
-                                                <b v-else>user don't exist</b>
+                                                <router-link :to="{ name: 'blogannoncereservations_show.dashboard', params: { categoryannoncereservation: item.categoryannoncereservation.slug  } }">
+                                                    <b v-if="item.categoryannoncereservation_id">{{ (item.categoryannoncereservation.name.length > 15 ? item.categoryannoncereservation.name.substring(0,15)+ "..." : item.categoryannoncereservation.name) | upText }}</b>
+                                                    <b v-else>user don't exist</b>
+                                                </router-link>
                                             </td>
                                             <td class="text-center">
                                                 <div class="timeline-heading">
@@ -202,15 +120,14 @@
 
 <script>
     import moment from 'moment'
+    import NavBlogannoncereservationsAdmin from "./NavBlogannoncereservationsAdmin";
     export default {
+        components: {NavBlogannoncereservationsAdmin},
         data() {
             document.title = `Dashboard Articles de blogs locations - Ivemo`;
             return {
                 page: 1,
                 blogannoncereservations: [],
-                blogannoncereservations_count: [],
-                blogannoncereservationsactive_count: [],
-                blogannoncereservationsunactive_count: [],
             }
         },
 
@@ -219,104 +136,113 @@
                 return moment(item.created_at).format('YYYY-MM-DD')
             },
 
-            blogannonceventes_countFormatter(blogannoncereservations_count, precision) {
-                const abbrev = ['', 'k', 'M', 'B', 'T'];
-                const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncereservations_count)) / 3);
-                const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
-                const suffix = abbrev[order];
-                return (blogannoncereservations_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
-            },
+            /** Ici c'est l'activation  **/
+            activeItem(id){
+                Swal.fire({
+                    title: 'Show or activated this article?',
+                    text: "Are you sure to confirm this article?",
+                    buttonsStyling: false,
+                    confirmButtonClass: "btn btn-success",
+                    cancelButtonClass: 'btn btn-danger',
+                    confirmButtonText: 'Yes, confirm',
+                    cancelButtonText: 'No, cancel',
+                    showCancelButton: true,
+                    reverseButtons: true,
+                }).then((result) => {
+                    if (result.value) {
 
-            blogannonceventesactive_countFormatter(blogannoncereservationsactive_count, precision) {
-                const abbrev = ['', 'k', 'M', 'B', 'T'];
-                const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncereservationsactive_count)) / 3);
-                const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
-                const suffix = abbrev[order];
-                return (blogannoncereservationsactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
-            },
+                        this.$Progress.start();
+                        //Envoyer la requet au server
+                        let url = route('activated_blogannoncereservations.dashboard',id);
+                        dyaxios.get(url).then(() => {
 
-            blogannonceventesunactive_countFormatter(blogannoncereservationsunactive_count, precision) {
-                const abbrev = ['', 'k', 'M', 'B', 'T'];
-                const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncereservationsunactive_count)) / 3);
-                const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
-                const suffix = abbrev[order];
-                return (blogannoncereservationsunactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
-            },
-
-            /** Ici c'est l'activation de la couleur  **/
-            activeItem(id) {
-                //Progress bar star
-                this.$Progress.start();
-                dyaxios.get(route('activated_blogannoncereservations.dashboard',id)).then(() => {
-                    /** Alert notify bootstrapp **/
-                    $.notify(
-                        {
-                            message: `Data activated successfully`,
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'top',
-                                align: 'center'
-                            },
-                            animate: {
-                                enter: "animated fadeInDown",
-                                exit: "animated fadeOutUp"
-                            },
-                        });
-                    /** End alert ***/
-                    window.location.reload();
-                    //End Progress bar
-                    this.$Progress.finish();
-                }).catch(() => {
-                    //Alert error
-                    $.notify("Ooop! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
-                        }
-                    });
+                            /** Alert notify bootstrapp **/
+                            $.notify({
+                                    message: "This article has been activated for users",
+                                },
+                                {
+                                    allow_dismiss: false,
+                                    type: 'info',
+                                    placement: {
+                                        from: 'bottom',
+                                        align: 'center'
+                                    },
+                                    animate: {
+                                        enter: "animated fadeInUp",
+                                        exit: "animated fadeOutDown"
+                                    },
+                                });
+                            /** End alert ***/
+                            window.location.reload();
+                            //End Progress bar
+                            this.$Progress.finish();
+                        }).catch(() => {
+                            //Failled message
+                            $.notify("Ooop! Something wrong. Try later", {
+                                type: 'danger',
+                                animate: {
+                                    enter: 'animated bounceInDown',
+                                    exit: 'animated bounceOutUp'
+                                }
+                            });
+                        })
+                    }
                 })
-            },
-            /** Ici c'est la désactivation de la couleur **/
-            disableItem(id) {
-                //Start Progress bar
-                this.$Progress.start();
-                dyaxios.get(route('unactivated_blogannoncereservations.dashboard',id)).then(() => {
-                    /** Alert notify bootstrapp **/
-                    $.notify(
-                        {
-                            message: `Data desactivated successfully`,
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'top',
-                                align: 'center'
-                            },
-                            animate: {
-                                enter: "animated fadeInDown",
-                                exit: "animated fadeOutUp"
-                            },
-                        });
-                    /** End alert **/
-                    window.location.reload();
-                    //End Progres bar
-                    this.$Progress.finish();
 
-                }).catch(() => {
-                    //Alert error
-                    $.notify("Ooop! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
-                        }
-                    });
+            },
+            /** Ici c'est la désactivation **/
+            disableItem(id){
+                Swal.fire({
+                    title: 'Mask or unactivated this article?',
+                    text: "Are you sure to confirm this article?",
+                    buttonsStyling: false,
+                    confirmButtonClass: "btn btn-success",
+                    cancelButtonClass: 'btn btn-danger',
+                    confirmButtonText: 'Yes, confirm',
+                    cancelButtonText: 'No, cancel',
+                    showCancelButton: true,
+                    reverseButtons: true,
+                }).then((result) => {
+                    if (result.value) {
+
+                        this.$Progress.start();
+                        //Envoyer la requet au server
+                        let url = route('unactivated_blogannoncereservations.dashboard',id);
+                        dyaxios.get(url).then(() => {
+
+                            /** Alert notify bootstrapp **/
+                            $.notify({
+                                    message: "This article has been masked for users",
+                                },
+                                {
+                                    allow_dismiss: false,
+                                    type: 'info',
+                                    placement: {
+                                        from: 'bottom',
+                                        align: 'center'
+                                    },
+                                    animate: {
+                                        enter: "animated fadeInUp",
+                                        exit: "animated fadeOutDown"
+                                    },
+                                });
+                            /** End alert ***/
+                            window.location.reload();
+                            //End Progress bar
+                            this.$Progress.finish();
+                        }).catch(() => {
+                            //Failled message
+                            $.notify("Ooop! Something wrong. Try later", {
+                                type: 'danger',
+                                animate: {
+                                    enter: 'animated bounceInDown',
+                                    exit: 'animated bounceOutUp'
+                                }
+                            });
+                        })
+                    }
                 })
+
             },
 
             infiniteHandler($state) {
@@ -335,26 +261,7 @@
                 });
             },
 
-
-            loadItems(){
-                dyaxios.get(route('api.blogannoncereservations_dashboard_count')).then(response => {
-                    this.blogannoncereservations_count = response.data;});
-
-                dyaxios.get(route('api.blogannoncereservations_dashboardactive_count')).then(response => {
-                    this.blogannoncereservationsactive_count = response.data;});
-
-                dyaxios.get(route('api.blogannoncereservations_dashboardunactive_count')).then(response => {
-                    this.blogannoncereservationsunactive_count = response.data;});
-            }
         },
-
-        beforeRouteEnter (to, from, next) {
-            next(vm => {
-                vm.$Progress.start();
-                vm.loadItems();
-                vm.$Progress.finish();
-            });
-        }
     }
 </script>
 

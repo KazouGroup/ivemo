@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Blogs;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BlogannoncereservationResource;
 use App\Model\blogannoncereservation;
+use App\Model\categoryannoncereservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,6 +29,22 @@ class DashboardblogannoncereservationController extends Controller
             ->distinct()->paginate(10));
 
         return response()->json($blogannoncereservations,200);
+    }
+
+
+    public function categoryannoncereservation(categoryannoncereservation $categoryannoncereservation)
+    {
+        $blogannoncereservations = categoryannoncereservation::whereSlug($categoryannoncereservation->slug)
+            ->withCount(['blogannoncereservations' => function ($q)  use ($categoryannoncereservation){
+                $q->with('user','categoryannoncereservation')
+                    ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id]);
+            }])->with(['blogannoncereservations' => function ($q) use ($categoryannoncereservation){
+                $q->with('user','categoryannoncereservation')
+                    ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
+                    ->orderBy('created_at','DESC')->distinct()->get();},
+            ])->first();;
+
+        return response()->json($blogannoncereservations, 200);
     }
 
     public function blogannoncecount()
@@ -54,6 +71,14 @@ class DashboardblogannoncereservationController extends Controller
     public function index()
     {
         return view('admin.blog.blogannoncereservations.index');
+    }
+
+
+    public function show(categoryannoncereservation $categoryannoncereservation)
+    {
+        return view('admin.blog.blogannoncereservations.show',[
+            'categoryannoncereservation' => $categoryannoncereservation,
+        ]);
     }
 
     public function activated($id)
