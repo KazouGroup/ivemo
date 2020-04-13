@@ -62,15 +62,10 @@ class IndexSite extends Component {
 
 
                         <div className="container">
+                            <br/>
 
+                            <div className="row">
 
-                            <div className="row d-flex align-items-end">
-                                <div className="col-lg-6 col-md-8">
-                                    <h5 className="title">De quel service avez-vous besoin ?</h5>
-                                    <p className="text-muted">
-                                        Pour chaque situation, trouvez le prestataire dont les compétences répondent à vos attentes et à votre niveau d’exigence.
-                                    </p>
-                                </div>
                             </div>
 
                             <div className="row">

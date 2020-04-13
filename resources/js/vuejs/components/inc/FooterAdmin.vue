@@ -4,12 +4,12 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="https://www.creative-tim.com">
-                            Creative Tim
+                        <a href="/">
+                            Ivemo
                         </a>
                     </li>
                     <li>
-                        <a href="http://presentation.creative-tim.com">
+                        <a href="/about/">
                             About Us
                         </a>
                     </li>

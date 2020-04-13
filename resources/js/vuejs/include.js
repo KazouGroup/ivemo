@@ -150,6 +150,7 @@ window.Fire = new Vue();
 Vue.component('navsmall-admin', require('./components/inc/NavsmallAdmin').default);
 Vue.component('footer-admin', require('./components/inc/FooterAdmin').default);
 Vue.component('navbig-admin', require('./components/inc/NavbigAdmin').default);
+Vue.component('navbig-premium', require('./components/inc/NavbigPremium').default);
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 

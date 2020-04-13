@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Button,UncontrolledTooltip } from "reactstrap";
 import moment from "moment";
+import LazyLoad from "react-lazyload";
 
 
 class BlogannonceventeList extends Component {
@@ -56,8 +57,10 @@ class BlogannonceventeList extends Component {
 
                                 <div className="card-image">
                                     <a target="_blank" href={`/blogs/annonce_ventes/${this.props.categoryannoncevente.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
-                                        <img className="img img-raised rounded"
-                                             src={this.props.photo}/>
+                                        <LazyLoad>
+                                            <img className="img img-raised rounded"
+                                                 src={this.props.photo}/>
+                                        </LazyLoad>
                                     </a>
                                 </div>
                                 <div className="text-right">

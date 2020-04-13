@@ -122,7 +122,8 @@ class AnnoncereservationController extends Controller
                   ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);});
            }])->withCount(['blogannoncereservations' => function ($q){
                $q->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
-                   ->whereIn('user_id',[auth()->user()->id]);}])
+                   ->whereIn('user_id',[auth()->user()->id])
+                   ->where('status_admin',1);}])
          ->orderBy('annoncereservations_count','desc')->distinct()->get());
 
         return response()->json($categoryannoncereservations, 200);

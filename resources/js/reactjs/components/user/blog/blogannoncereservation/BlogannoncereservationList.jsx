@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { Remarkable } from 'remarkable';
 import { Button,UncontrolledTooltip } from "reactstrap";
 import moment from "moment";
+import LazyLoad from "react-lazyload";
 
 
 class BlogannoncereservationList extends Component {
@@ -58,8 +59,10 @@ class BlogannoncereservationList extends Component {
 
                                 <div className="card-image">
                                     <a target="_blank" href={`/blogs/annonce_reservations/${this.props.categoryannoncereservation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
-                                        <img className="img img-raised rounded"
-                                             src={this.props.photo}/>
+                                        <LazyLoad>
+                                            <img className="img img-raised rounded"
+                                                 src={this.props.photo}/>
+                                        </LazyLoad>
                                     </a>
                                 </div>
                                 <div className="text-right">

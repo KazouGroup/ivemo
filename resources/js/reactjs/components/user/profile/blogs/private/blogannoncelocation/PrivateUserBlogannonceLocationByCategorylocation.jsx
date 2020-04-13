@@ -8,12 +8,16 @@ import NavlinkconfigurationUser from "../../../../configurations/inc/Navlinkconf
 import BlogannoncelocationList from "../../../../blog/blogannoncelocation/BlogannoncelocationList";
 import Navblogannoncelocationsbyuser from "../../../../blog/blogannoncelocation/inc/Navblogannoncelocationsbyuser";
 import LinkValicationEmail from "../../../../../inc/user/LinkValicationEmail";
+const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
 class PrivateUserBlogannonceLocationByCategorylocation extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            blogannoncelocations_count: [],
+            blogannoncelocationsactive_count: [],
+            blogannoncelocationsunactive_count: [],
             userblogannoncelocationsPrivate:{blogannoncelocations:[]},
             visiable: 20,
 
@@ -190,6 +194,13 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
     loadItems(){
         let itemuser = this.props.match.params.user;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
+        fetch(route('api.blogannoncelocations_premium_category_count',[itemuser,itemCategoryannoncelocation])).then(res => res.json())
+            .then((result) => {this.setState({blogannoncelocations_count: result});});
+        fetch(route('api.blogannoncelocations_premiumactive_category_count',[itemuser,itemCategoryannoncelocation])).then(res => res.json())
+            .then((result) => {this.setState({blogannoncelocationsactive_count: result});});
+        fetch(route('api.blogannoncelocations_premiumunactive_category_count',[itemuser,itemCategoryannoncelocation])).then(res => res.json())
+            .then((result) => {this.setState({blogannoncelocationsunactive_count: result});});
+
         dyaxios.get(route('api.blogannonceslocationscategoryannoncelocationbyuser_site',[itemuser,itemCategoryannoncelocation])).then(response => this.setState({userblogannoncelocationsPrivate: response.data,}));
     }
 
@@ -198,8 +209,29 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
         this.loadItems();
     }
 
+    blogannonceventes_countFormatter(blogannoncelocations_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocations_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (blogannoncelocations_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+
+    blogannonceventesactive_countFormatter(blogannoncelocationsactive_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocationsactive_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (blogannoncelocationsactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+
+    blogannonceventesunactive_countFormatter(blogannoncelocationsunactive_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocationsunactive_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (blogannoncelocationsunactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+
     render() {
-        const {userblogannoncelocationsPrivate,visiable} = this.state;
+        const {userblogannoncelocationsPrivate,visiable,blogannoncelocations_count,blogannoncelocationsunactive_count,blogannoncelocationsactive_count} = this.state;
         const mapBlogannoncelocations = userblogannoncelocationsPrivate.blogannoncelocations.length ? (
             userblogannoncelocationsPrivate.blogannoncelocations.slice(0,visiable).map(item => {
                 return(
@@ -263,6 +295,7 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
                                                 <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos articles</b>
                                             </Link>
                                         </div>
+
                                         {!$guest &&(
                                             <>
                                                 {!$userIvemo.email_verified_at &&(
@@ -270,6 +303,31 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
                                                 )}
                                             </>
                                         )}
+                                        <div className="row">
+                                            <div className="col-md-4 col-4">
+                                                <div className="info info-hover">
+                                                    <div className="icon icon-warning icon-circle">
+                                                        <i className="now-ui-icons text_align-center"></i>                                                    </div>
+                                                    <h4 className="info-title"><b>{this.blogannonceventes_countFormatter(blogannoncelocations_count)}</b></h4>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-4 col-4">
+                                                <div className="info info-hover">
+                                                    <div className="icon icon-success icon-circle">
+                                                        <i className="now-ui-icons ui-1_check"></i>
+                                                    </div>
+                                                    <h4 className="info-title"><b>{this.blogannonceventesactive_countFormatter(blogannoncelocationsactive_count)}</b></h4>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-4 col-4">
+                                                <div className="info info-hover">
+                                                    <div className="icon icon-primary icon-circle">
+                                                        <i className="now-ui-icons ui-1_simple-delete"></i>
+                                                    </div>
+                                                    <h4 className="info-title"><b>{this.blogannonceventesunactive_countFormatter(blogannoncelocationsunactive_count)}</b></h4>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         {mapBlogannoncelocations}
 

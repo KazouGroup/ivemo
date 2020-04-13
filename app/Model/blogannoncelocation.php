@@ -2,7 +2,9 @@
 
 namespace App\Model;
 
+use App\Model\favorite\favoritebloglocation;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
@@ -69,4 +71,5 @@ class blogannoncelocation extends Model
 
         ];
     }
+
 }

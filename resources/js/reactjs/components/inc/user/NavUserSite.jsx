@@ -39,6 +39,15 @@ class NavUserSite extends PureComponent {
                                 <b>Acceuil</b>
                             </NavLink>
                         </li>
+                        {!$guest &&(
+                            <li className="nav-item">
+                                <a href={`/dashboard/premium/${$userIvemo.slug}/`} className="nav-link">
+                                    <i className="now-ui-icons design_app"/>
+                                    <b>Premium dashboard</b>
+                                </a>
+                            </li>
+                        )}
+
                         <li className={`nav-item dropdown`}>
                             <a href="#" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                 <i className="now-ui-icons files_paper" aria-hidden="true"/>

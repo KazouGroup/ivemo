@@ -12,6 +12,7 @@ import {Form, Input} from "reactstrap";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
 
+
 class Annoncebycategoryannoncelocation extends Component {
     constructor(props) {
         super(props);
@@ -302,15 +303,12 @@ class Annoncebycategoryannoncelocation extends Component {
         this.loadItems();
     }
 
-    getcountcategoryannonceString (annoncelocations_count) {
-        annoncelocations_count = annoncelocations_count +'';
-        if (annoncelocations_count < 1000) {
-            return annoncelocations_count;
-        }
-        if (annoncelocations_count < 10000) {
-            return annoncelocations_count.charAt(0) + ',' + annoncelocations_count.substring(1);
-        }
-        return (annoncelocations_count/1000).toFixed(annoncelocations_count % 1000 !== 0)+'k';
+    getcountcategoryannonceString(annoncelocations_count, precision) {
+        const abbrev = ['', 'k', 'M', 'B', 'T'];
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(annoncelocations_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (annoncelocations_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
     render() {
         const {annoncelocationbycategory,cityannoncelocations,annonceItem,isLoading} = this.state;

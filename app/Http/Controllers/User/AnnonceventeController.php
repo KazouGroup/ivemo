@@ -253,7 +253,8 @@ class AnnonceventeController extends Controller
                     ->whereIn('user_id',[auth()->user()->id]);
             }])->withCount(['blogannonceventes' => function ($q){
                 $q->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-                    ->whereIn('user_id',[auth()->user()->id]);}])
+                    ->whereIn('user_id',[auth()->user()->id])
+                    ->where('status_admin',1);}])
             ->orderBy('annonceventes_count','desc')->distinct()->get());
 
         return response()->json($categoryannonceventes, 200);

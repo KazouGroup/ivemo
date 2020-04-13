@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import { Remarkable } from "remarkable";
+import LazyLoad from 'react-lazyload';
 import moment from "moment";
 import AnnoncelocationInteresseforBlog from "./AnnoncelocationInteresseforBlog"
 import BlogannoncelocationInteresse from "./BlogannoncelocationInteresse";
@@ -183,10 +184,12 @@ class BlogannoncelocationShow extends Component {
                                                                     <Zoom>
                                                                         <div>
                                                                             {blogannoncelocation.photo ?
-                                                                                <img className="d-block"
-                                                                                     src={blogannoncelocation.photo}
-                                                                                     style={{ width: "1400px", height: "600px", borderRadius: "2px" }}
-                                                                                     alt={blogannoncelocation.title} />
+                                                                                <LazyLoad height={600} width={1400}>
+                                                                                    <img className="d-block"
+                                                                                         src={blogannoncelocation.photo}
+                                                                                         style={{ width: "1400px", height: "600px", borderRadius: "2px" }}
+                                                                                         alt={blogannoncelocation.title}/>
+                                                                                </LazyLoad>
                                                                                      :<Skeleton circle={false} height={600} width={1400} />}
 
                                                                         </div>

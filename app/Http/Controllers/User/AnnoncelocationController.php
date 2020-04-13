@@ -128,7 +128,8 @@ class AnnoncelocationController extends Controller
                     ->whereIn('user_id',[auth()->user()->id]);
             }])->withCount(['blogannoncelocations' => function ($q){
                 $q->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
-                    ->whereIn('user_id',[auth()->user()->id]);
+                    ->whereIn('user_id',[auth()->user()->id])->where('status_admin',1)
+                    ->where('status_admin',1);
             }])->orderBy('annoncelocations_count','desc')
             ->distinct()->get());
 

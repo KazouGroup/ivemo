@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Remarkable } from 'remarkable';
 import {Alert, Button, UncontrolledTooltip} from "reactstrap";
+import LazyLoad from 'react-lazyload';
 import moment from "moment";
 
 
@@ -46,10 +47,9 @@ class BlogannoncelocationList extends Component {
 
                                     <div className="stats stats-right">
 
-                                         <a href="#" className="nav-item text-info">
-                                            <i className="now-ui-icons location_bookmark"/>
+                                         <a href="#" className="nav-item">
+                                            <i className="now-ui-icons location_bookmark text-dark"/>
                                         </a>
-
 
                                         <i className="now-ui-icons tech_watch-time"/> {moment(this.props.created_at).format('ll')} - {this.props.red_time}  min de lecture
                                     </div>
@@ -59,8 +59,10 @@ class BlogannoncelocationList extends Component {
 
                                 <div className="card-image">
                                     <a target="_blank" href={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
-                                        <img className="img img-raised rounded"
-                                             src={this.props.photo}/>
+                                        <LazyLoad>
+                                            <img className="img img-raised rounded"
+                                                 src={this.props.photo}/>
+                                        </LazyLoad>
                                     </a>
                                 </div>
                                 <div className="text-right">
@@ -87,17 +89,11 @@ class BlogannoncelocationList extends Component {
                                                         </button>
                                                     </>
                                                 }
-                                                <UncontrolledTooltip placement="bottom" target="TooltipEdit">
-                                                    Editer l'article
-                                                </UncontrolledTooltip>
-                                                <NavLink to={`/blogs/annonce_locations/${this.props.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" id="TooltipEdit">
+                                                <NavLink to={`/blogs/annonce_locations/${this.props.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" title="Editer l'article">
                                                     <i className="now-ui-icons ui-2_settings-90"/>
                                                 </NavLink>
-                                                <UncontrolledTooltip placement="bottom" target="TooltipDelete">
-                                                    Supprimer cette article
-                                                </UncontrolledTooltip>
                                                 <Button
-                                                    className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} id="TooltipDelete">
+                                                    className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} title="Supprimer cette article">
                                                     <i className="now-ui-icons ui-1_simple-remove"/>
                                                 </Button>{" "}
                                             </div>
