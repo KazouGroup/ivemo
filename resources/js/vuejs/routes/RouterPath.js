@@ -26,9 +26,6 @@ import BlogannoncelocationsbycategoryAdmin
     from "../components/admin/blog/blogannoncelocation/BlogannoncelocationsbycategoryAdmin";
 import BlogannoncereservationsbycategoryAdmin
     from "../components/admin/blog/blogannoncereservation/BlogannoncereservationsbycategoryAdmin";
-import PremiumUserIndex from "../components/premium/PremiumUserIndex";
-import PremiumBlogannoncelocationsAdminIndex
-    from "../components/premium/blog/blogannoncelocation/PremiumBlogannoncelocationsAdminIndex";
 
 
 export const routes = [
@@ -65,14 +62,6 @@ export const routes = [
 
     {path: '/dashboard/blogannonceventes/', name: 'blogannonceventes.dashboard', component: BlogannonceventesAdminIndex},
     {path: '/dashboard/blogannonceventes/:categoryannoncevente/', name: 'blogannonceventes_show.dashboard', component: BlogannonceventesbycategoryAdmin},
-
-
-
-
-    {path: '/dashboard/premium/:user/', name: 'premium_user_index.site', component: PremiumUserIndex},
-    {path: '/dashboard/premium/:user/blogs/annonce_locations/', name: 'premium_user_annonce_locations.site', component: PremiumBlogannoncelocationsAdminIndex},
-    {path: '/dashboard/premium/:user/blogs/annonce_reservations/', name: 'premium_user_annonce_reservations.site', component: BlogannonceventesbycategoryAdmin},
-    {path: '/dashboard/premium/:user/blogs/annonce_ventes/', name: 'premium_user_annonce_ventes.site', component: BlogannonceventesbycategoryAdmin},
 
 
 ];

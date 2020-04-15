@@ -21,6 +21,7 @@ class CreateContactusersadvertsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('ip')->nullable();
             $table->boolean('status')->nullable();
+            $table->boolean('confirm_send');
             $table->longText('message')->nullable();
             $table->timestamps();
         });

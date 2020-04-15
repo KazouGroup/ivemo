@@ -47,6 +47,7 @@ class BaseRequest extends Request
                 'full_name' => ['required', 'string','min:3','max:255'],
                 'appointment_time' => ['required', 'string','min:2','max:20'],
                 'email' => ['required', 'string', 'email','min:2','max:255'],
+                'confirm_send' => ['required'],
                 'phone' => ['nullable', 'numeric'],
             ];
         }

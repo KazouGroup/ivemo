@@ -10,6 +10,7 @@ class ContactFromPublicitePageIndex extends Component {
             email: '',
             appointment_time: '',
             full_name: '',
+            confirm_send: '',
             phone: '',
             message: '',
             errors: [],
@@ -49,6 +50,7 @@ class ContactFromPublicitePageIndex extends Component {
             email: this.state.email,
             full_name: this.state.full_name,
             appointment_time: this.state.appointment_time,
+            confirm_send: this.state.confirm_send,
             phone: this.state.phone,
             message: this.state.message,
         };
@@ -76,6 +78,7 @@ class ContactFromPublicitePageIndex extends Component {
                     email: "",
                     full_name: "",
                     phone: "",
+                    confirm_send: "",
                     appointment_time: "",
                     message: "",
                 });
@@ -194,13 +197,15 @@ class ContactFromPublicitePageIndex extends Component {
                                     </InputGroup>
                                 </div>
                             </div>
-                            <div className="form-check text-left">
-                                <label className="form-check-label">
-                                    <Input className="form-check-input" id="remember" type="checkbox" name="remember" required/>
-                                    <span className="form-check-sign"/>
-                                    <span>Je suis majeur, j'ai lu et accepté
-                                        <a className="text-primary" data-action="open-privacy-disclamer"> Informations de confidentialité</a>
-                                    </span>
+                            <div
+                                className="custom-control custom-checkbox mb-3">
+                                <input name="confirm_send" className={`custom-control-input ${this.hasErrorFor('confirm_send') ? 'is-invalid' : ''}`}
+                                       id="confirm_send" value="1" type="checkbox" onChange={this.handleFieldChange} checked={this.state.confirm_send}/>
+                                <label className="custom-control-label"
+                                       htmlFor="confirm_send">
+                                            <span>Je suis majeur, j'ai lu et accepté
+                                                <a className="text-primary" data-action="open-privacy-disclamer"> Informations de confidentialité</a>
+                                            </span>
                                 </label>
                             </div>
                             <div className="row">
