@@ -40,7 +40,6 @@
 
 
 @include('notify::messages')
-@notifyJs
 
 @if(config('app.env') != 'local')
 @endif

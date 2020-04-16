@@ -35,7 +35,7 @@
 
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="/assets/admin/assets/demo/demo.css" rel="stylesheet" />
-@notifyCss
+
 @section('style')
     @show
 
