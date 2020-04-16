@@ -1,3 +1,3 @@
 <?php
 
-Route::get('roles','RoleController@api');
+Route::get('roles','RoleController@api')->name('api.roles');

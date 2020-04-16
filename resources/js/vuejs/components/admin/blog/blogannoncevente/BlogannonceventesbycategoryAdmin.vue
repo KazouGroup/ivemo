@@ -82,14 +82,14 @@
                                             <td class="text-center"><b>{{ item.created_at | myDate }}</b></td>
                                             <td class="text-right">
                                                 <template v-if="$auth.can('manage-blogs')">
-                                                    <button  v-if="item.status_admin" @click="disableItem(item.id)" class="btn btn-success btn-icon btn-sm" title="Disable">
+                                                    <button  v-if="item.status_admin" @click="disableItem(item.id)" class="btn btn-success btn-round btn-icon btn-sm" title="Disable">
                                                         <i class="now-ui-icons ui-1_check"/>
                                                     </button>
-                                                    <button  v-else-if="!item.status_admin" @click="activeItem(item.id)" class="btn btn-danger btn-icon btn-sm " title="Activate">
+                                                    <button  v-else-if="!item.status_admin" @click="activeItem(item.id)" class="btn btn-danger btn-icon btn-round btn-sm " title="Activate">
                                                         <i class="now-ui-icons ui-1_simple-delete"/>
                                                     </button>
                                                 </template>
-                                                <a :href="`/blogs/annonce_ventes/${item.categoryannoncevente.slug}/${getDate(item)}/${item.slug}/`" target="_blank" class="btn btn-info btn-icon btn-sm ">
+                                                <a :href="`/blogs/annonce_ventes/${item.categoryannoncevente.slug}/${getDate(item)}/${item.slug}/`" target="_blank" class="btn btn-info btn-round btn-icon btn-sm ">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
                                             </td>

@@ -13,9 +13,16 @@
 <script>window.Ivemo = { csrfToken: '{{ csrf_token() }}' }; </script>
 <script>
     window.user = {!! json_encode([
-    'user' => auth()->user(),
-    'roles' => auth()->user()->roles,
-    'permissions' => auth()->user()->getAllPermissions(),
+     'user' => auth()->user(),
+    'guest' => auth()->guest(),
+    'authcheck' => auth()->check(),
+     'url_site' => htmlspecialchars(config('app.url')),
+     'country' => htmlspecialchars(config('app.country')),
+     'country_sigle' => htmlspecialchars(config('app.country_sigle')),
+     'name_site' => htmlspecialchars(config('app.name')),
+     'phone_number' => htmlspecialchars(config('app.phone')),
+      'roles' => auth()->user()->roles,
+      'permissions' => auth()->user()->getAllPermissions(),
     ]) !!}
 </script>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />

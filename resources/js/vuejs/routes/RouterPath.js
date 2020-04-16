@@ -26,6 +26,9 @@ import BlogannoncelocationsbycategoryAdmin
     from "../components/admin/blog/blogannoncelocation/BlogannoncelocationsbycategoryAdmin";
 import BlogannoncereservationsbycategoryAdmin
     from "../components/admin/blog/blogannoncereservation/BlogannoncereservationsbycategoryAdmin";
+import CityAdminIndex from "../components/admin/partial/CityAdminIndex";
+import PermissionAdminIndex from "../components/admin/partial/PermissionAdminIndex";
+import RoleAdminIndex from "../components/admin/partial/RoleAdminIndex";
 
 
 export const routes = [
@@ -34,6 +37,10 @@ export const routes = [
     {path: '/dashboard/faqs/', name: 'faqs.index', component: FaqAdminIndex},
     {path: '/dashboard/faqs/create/', name: 'faqs.create', component: FaqAdminCreate},
     {path: '/dashboard/faqs/:id/edit/', name: 'faqs.edit', component: FaqAdminEdit},
+
+    {path: '/dashboard/cities/', name: 'cities.index', component: CityAdminIndex},
+    {path: '/dashboard/roles/', name: 'roles.index', component: RoleAdminIndex},
+    {path: '/dashboard/permissions/', name: 'permissions.index', component: PermissionAdminIndex},
 
     {path: '/dashboard/policyprivacies/', name: 'policyprivacies.index', component: PolicyprivacyAdminIndex},
     {path: '/dashboard/policyprivacies/create/', name: 'policyprivacies.create', component: PolicyprivacyAdminCreate},

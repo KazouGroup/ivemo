@@ -49,16 +49,26 @@
                                 <tr v-for="item in faqs" :key="item.id">
                                     <td>{{ (item.title.length > 15 ? item.title.substring(0,15)+ "..." : item.title) | upText }}</td>
                                     <td v-text="item.categoryfaq.name"></td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
+                                    <td>
+                                        <div class="timeline-heading">
+                                            <span v-if="item.status" class="badge badge-success"><b>Active</b></span>
+                                            <span v-else-if="!item.status"  class="badge badge-danger"><b>Deactive</b></span>
+                                        </div>
+                                    </td>
+                                    <td><b>{{ item.created_at | myDate }}</b></td>
                                     <td class="text-right">
-                                        <a href="#" class="btn btn-round btn-info btn-icon btn-sm like">
-                                            <i class="fas fa-heart"></i>
-                                        </a>
-                                        <router-link :to="{ name: 'faqs.edit', params: { id: item.id  } }" class="btn btn-success btn-icon btn-sm edit">
+                                        <template>
+                                            <button  v-if="item.status" @click="disableItem(item.id)" class="btn btn-success btn-icon btn-sm btn-round" title="Disable">
+                                                <i class="now-ui-icons ui-1_check"/>
+                                            </button>
+                                            <button  v-else-if="!item.status" @click="activeItem(item.id)" class="btn btn-danger btn-icon btn-round btn-sm " title="Activate">
+                                                <i class="now-ui-icons ui-1_simple-delete"/>
+                                            </button>
+                                        </template>
+                                        <router-link :to="{ name: 'faqs.edit', params: { id: item.id  } }" class="btn btn-info btn-icon btn-sm btn-round edit">
                                             <i class="fas fa-edit"></i>
                                         </router-link>
-                                        <button @click="deleteItem(item.id)"  class="btn btn-danger btn-icon btn-sm remove">
+                                        <button @click="deleteItem(item.id)"  class="btn btn-danger btn-icon btn-sm btn-round remove">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </td>
@@ -110,6 +120,84 @@
 
                     });
                 });
+            },
+
+            /** Ici c'est l'activation de la data  **/
+            activeItem(id) {
+                //Progress bar star
+                this.$Progress.start();
+                dyaxios.get(route('activated_faqs',id)).then(() => {
+                    /** Alert notify bootstrapp **/
+                    $.notify(
+                        {
+                            message: `Data activated successfully`,
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'top',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animated fadeInDown",
+                                exit: "animated fadeOutUp"
+                            },
+                        });
+                    /** End alert ***/
+
+                    //End Progress bar
+                    this.$Progress.finish();
+                    Fire.$emit('ItemGetter');
+                }).catch(() => {
+                    //Alert error
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            },
+            /** Ici c'est la désactivation de la data **/
+            disableItem(id) {
+                //Start Progress bar
+                this.$Progress.start();
+                dyaxios.get(route('unactivated_faqs',id)).then(() => {
+                    /** Alert notify bootstrapp **/
+                    $.notify(
+                        {
+                            message: `Data desactivated successfully`,
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'top',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animated fadeInDown",
+                                exit: "animated fadeOutUp"
+                            },
+                        });
+                    /** End alert **/
+
+                    //End Progres bar
+                    this.$Progress.finish();
+
+                    Fire.$emit('ItemGetter');
+                }).catch(() => {
+                    //Alert error
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
             },
 
             deleteItem(id){

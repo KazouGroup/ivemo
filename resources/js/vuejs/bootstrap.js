@@ -13,6 +13,11 @@ Vue.prototype.$auth = new Auth(window.user);
 Vue.prototype.user = window.user.user;
 Vue.prototype.guest = window.user.guest;
 Vue.prototype.authcheck = window.user.authcheck;
+Vue.prototype.url_site = window.user.url_site;
+Vue.prototype.country = window.user.country;
+Vue.prototype.country_sigle = window.user.country_sigle;
+Vue.prototype.name_site = window.user.name_site;
+Vue.prototype.phone_number = window.user.phone_number;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support

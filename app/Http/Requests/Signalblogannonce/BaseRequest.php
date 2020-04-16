@@ -20,6 +20,7 @@ class BaseRequest extends Request
         $rules = [
             'full_name' => ['required', 'string','min:3', 'max:255'],
             'message' => 'required',
+            //'confirm_send' => 'required',
             'email' => ['required', 'string', 'email', 'max:255'],
             'subject' => ['nullable', 'string', 'max:255'],
         ];

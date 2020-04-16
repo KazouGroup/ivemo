@@ -168,6 +168,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                     <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour au annonces </b>
                                                 </button>
                                             </div>
+                                            <br/>
 
                                             <div className="card-image">
 

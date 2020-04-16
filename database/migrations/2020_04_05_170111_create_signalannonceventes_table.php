@@ -19,6 +19,7 @@ class CreateSignalannonceventesTable extends Migration
             $table->string('object')->nullable();
             $table->string('email')->nullable();
             $table->string('ip')->nullable();
+            $table->boolean('confirm_send')->nullable();
             $table->longText('message')->nullable();
             $table->timestamps();
 

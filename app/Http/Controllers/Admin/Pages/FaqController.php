@@ -181,6 +181,26 @@ class FaqController extends Controller
         return response('Update', Response::HTTP_ACCEPTED);
     }
 
+
+    public function activated($id)
+    {
+        $faq = faq::where('id', $id)->findOrFail($id);
+
+        $faq->update(['status' => 1,]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+    }
+
+    public function unactivated($id)
+    {
+        $faq = faq::where('id', $id)->findOrFail($id);
+
+        $faq->update(['status' => 0,]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+    }
+
+
     /**
      * Remove the specified resource from storage.
      *

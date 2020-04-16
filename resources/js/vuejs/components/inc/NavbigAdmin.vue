@@ -62,6 +62,25 @@
                     </router-link >
                 </li>
                 <li>
+                    <a data-toggle="collapse" href="#partialsExamples">
+                        <i class="now-ui-icons design_palette"></i>
+                        <p>
+                            Partials
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse " id="partialsExamples">
+                        <ul class="nav">
+                            <li>
+                                <router-link :to="{ name: 'cities.index'}">
+                                    <span class="sidebar-mini-icon">CT</span>
+                                    <span class="sidebar-normal"> Cities </span>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
                     <a data-toggle="collapse" href="#pagesExamples">
                         <i class="now-ui-icons design_image"></i>
                         <p>
@@ -76,42 +95,6 @@
                                     <span class="sidebar-mini-icon">F</span>
                                     <span class="sidebar-normal"> Faqs </span>
                                 </router-link>
-                            </li>
-                            <li>
-                                <a href="../examples/pages/rtl.html">
-                                    <span class="sidebar-mini-icon">RS</span>
-                                    <span class="sidebar-normal"> RTL Support </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="../examples/pages/timeline.html">
-                                    <span class="sidebar-mini-icon">T</span>
-                                    <span class="sidebar-normal"> Timeline </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="../examples/pages/login.html">
-                                    <span class="sidebar-mini-icon">L</span>
-                                    <span class="sidebar-normal"> Login </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="../examples/pages/register.html">
-                                    <span class="sidebar-mini-icon">R</span>
-                                    <span class="sidebar-normal"> Register </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="../examples/pages/lock.html">
-                                    <span class="sidebar-mini-icon">LS</span>
-                                    <span class="sidebar-normal"> Lock Screen </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="../examples/pages/user.html">
-                                    <span class="sidebar-mini-icon">UP</span>
-                                    <span class="sidebar-normal"> User Profile </span>
-                                </a>
                             </li>
                         </ul>
                     </div>
@@ -181,6 +164,32 @@
                                 <router-link :to="{ name: 'blogannonceventes.dashboard'}">
                                     <span class="sidebar-mini-icon">AVS</span>
                                     <span class="sidebar-normal"> Articles blogs ventes </span>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a data-toggle="collapse" href="#adminExamples">
+                        <i class="now-ui-icons loader_gear"></i>
+                        <p>
+                            Config Dashboard
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse " id="adminExamples">
+                        <ul class="nav">
+                            <li v-if="$auth.can('manage-permission')">
+                                <router-link :to="{ name: 'permissions.index'}">
+                                    <span class="sidebar-mini-icon">PS</span>
+                                    <span class="sidebar-normal"> Permissions </span>
+                                </router-link>
+                            </li>
+                            <li v-if="$auth.can('manage-role')">
+                                <router-link :to="{ name: 'roles.index'}">
+                                    <span class="sidebar-mini-icon">Rl</span>
+                                    <span class="sidebar-normal"> Role </span>
                                 </router-link>
                             </li>
                         </ul>

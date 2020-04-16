@@ -353,6 +353,7 @@ class Annoncebycategoryannoncelocation extends Component {
                                                 <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos résultats </b>
                                             </Link>
                                         </div>
+                                        <br/>
 
                                         {!$guest &&(
                                             <>

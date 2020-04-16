@@ -61,18 +61,18 @@
                                     <td>{{ item.blogannonceventes_count }}</td>
                                     <td v-if="$auth.can('manage-categories')" class="text-right">
                                         <template>
-                                            <button  v-if="item.status" @click="disableItem(item.id)" class="btn btn-success btn-icon btn-sm" title="Disable">
+                                            <button  v-if="item.status" @click="disableItem(item.id)" class="btn btn-success btn-icon btn-round btn-sm" title="Disable">
                                                 <i class="now-ui-icons ui-1_check"/>
                                             </button>
-                                            <button  v-else-if="!item.status" @click="activeItem(item.id)" class="btn btn-danger btn-icon btn-sm " title="Activate">
+                                            <button  v-else-if="!item.status" @click="activeItem(item.id)" class="btn btn-danger btn-icon btn-round btn-sm " title="Activate">
                                                 <i class="now-ui-icons ui-1_simple-delete"/>
                                             </button>
                                         </template>
                                         <button @click="editItem(item)"
-                                                class="btn btn-info btn-icon btn-sm" title="Edit">
+                                                class="btn btn-info btn-icon btn-round btn-sm" title="Edit">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button @click="deleteItem(item.id)"  class="btn btn-danger btn-icon btn-sm remove">
+                                        <button @click="deleteItem(item.id)"  class="btn btn-danger btn-icon btn-round btn-sm remove">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </td>

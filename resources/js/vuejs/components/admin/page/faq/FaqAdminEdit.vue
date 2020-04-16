@@ -148,7 +148,7 @@
 
                         $.notify(
                             {
-                                message: `Toutes les informations mise à jour avec succès`,
+                                message: `Informations mise à jour avec succès`,
                             },
                             {
                                 allow_dismiss: false,

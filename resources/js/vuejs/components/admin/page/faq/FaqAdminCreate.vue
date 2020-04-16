@@ -135,7 +135,7 @@
 
                         $.notify(
                             {
-                                message: `Toutes les informations bien enregisté avec succès`,
+                                message: `Informations bien enregisté avec succès`,
                             },
                             {
                                 allow_dismiss: false,
