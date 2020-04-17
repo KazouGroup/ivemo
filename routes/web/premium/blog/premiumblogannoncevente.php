@@ -1,45 +1,71 @@
 <?php
 
 
-Route::get(
-    'api/dashboardblogannonceventes',
-    'DashboardblogannonceventeController@api'
-)->name('api.blogannonceventes_dashboard');
 
-Route::get(
-    'api/dashboardblogannonceventes_count',
-    'DashboardblogannonceventeController@blogannonceventescount'
-)->name('api.blogannonceventes_dashboard_count');
+Route::group(['prefix' => 'dashboard/premium'], function () {
 
-Route::get(
-    'api/dashboardblogannonceventesactive_count',
-    'DashboardblogannonceventeController@blogannonceventesactivecount'
-)->name('api.blogannonceventes_dashboardactive_count');
 
-Route::get(
-    'api/dashboardblogannonceventesunactive_count',
-    'DashboardblogannonceventeController@blogannonceventesunactivecount'
-)->name('api.blogannonceventes_dashboardunactive_count');
+    Route::get(
+        '{user:slug}/blogs/annonce_ventes',
+        'PremiumblogannonceventeController@index'
+    )->name('blogannonceventes_premium.dashboard');
 
-Route::get(
-    'api/dashboardblogannonceventes/{categoryannoncevente:slug}',
-    'DashboardblogannonceventeController@categoryannoncevente'
-)->name('api.blogannonceventes_dashboard_show');
+    Route::get(
+        '{user:slug}/blogs/annonce_ventes/create',
+        'PremiumblogannonceventeController@create'
+    )->name('blogannonceventes_premium_create.dashboard');
 
-Route::get(
-    'dashboard/blogannonceventes',
-    'DashboardblogannonceventeController@index'
-)->name('blogannonceventes.dashboard');
+    Route::get(
+        '{user:slug}/blogs/annonce_ventes/{blogannoncevente}/edit',
+        'PremiumblogannonceventeController@edit'
+    )->name('blogannonceventes_premium_edit.dashboard');
 
-Route::get(
-    'dashboard/blogannonceventes/{categoryannoncevente:slug}',
-    'DashboardblogannonceventeController@show'
-)->name('blogannonceventes_show.dashboard');
+    Route::get(
+        '{user:slug}/blogs/annonce_ventes/{categoryannoncevente}',
+        'PremiumblogannonceventeController@category'
+    )->name('blogannonceventes_premium_categoryannoncevente.dashboard');
 
-Route::get('dashboard/active_blogannonceventes/{id}',
-    'DashboardblogannonceventeController@activated'
-)->name('activated_blogannonceventes.dashboard');
+});
 
-Route::get('dashboard/unactive_blogannonceventes/{id}',
-    'DashboardblogannonceventeController@unactivated'
-)->name('unactivated_blogannonceventes.dashboard');
+
+
+Route::group(['prefix' => 'api'], function () {
+
+
+    Route::get(
+        '{user:slug}/premiumblogannoncevente',
+        'PremiumblogannonceventeController@data'
+    )->name('api.blogannonceventes_premium');
+
+    Route::get(
+        '{user:slug}/premiumblogannoncevente_count',
+        'PremiumblogannonceventeController@datacount'
+    )->name('api.blogannonceventes_premium_count');
+
+    Route::get(
+        '{user:slug}/premiumblogannonceventesactive_count',
+        'PremiumblogannonceventeController@dataactivecount'
+    )->name('api.blogannonceventes_premiumactive_count');
+
+    Route::get(
+        '{user:slug}/premiumblogannonceventesunactive_count',
+        'PremiumblogannonceventeController@dataunactivecount'
+    )->name('api.blogannonceventes_premiumunactive_count');
+
+    Route::get(
+        '{user:slug}/v/{categoryannoncevente}/premiumblogannoncevente_count',
+        'PremiumblogannonceventeController@datacategorycount'
+    )->name('api.blogannonceventes_premium_category_count');
+
+    Route::get(
+        '{user:slug}/v/{categoryannoncevente}/premiumblogannonceventesactive_count',
+        'PremiumblogannonceventeController@datacategoryactivecount'
+    )->name('api.blogannonceventes_premiumactive_category_count');
+
+    Route::get(
+        '{user:slug}/v/{categoryannoncevente}/premiumblogannonceventesunactive_count',
+        'PremiumblogannonceventeController@datacategoryunactivecount'
+    )->name('api.blogannonceventes_premiumunactive_category_count');
+
+});
+

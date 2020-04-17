@@ -7,7 +7,6 @@ import PremiumHorizontalNavUserSite from "../../inc/PremiumHorizontalNavUserSite
 import FooterPremiumUser from "../../inc/FooterPremiumUser";
 import {Button} from "reactstrap";
 import PremiumUserBlogannonceList from "./PremiumUserBlogannonceList";
-import TablePremiumUserSkeleton from "../../inc/TablePremiumUserSkeleton";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -395,19 +394,21 @@ class PremiumUserBlogannonceLocationbyCategory extends Component {
                                                    cellSpacing="0" width="100%">
                                                 <thead>
                                                 <tr>
-                                                    <th>Title</th>
-                                                    <th>Categorie</th>
-                                                    <th>Status</th>
-                                                    <th>Date de creation</th>
+                                                    <th><b>Image</b></th>
+                                                    <th><b>Title</b></th>
+                                                    <th><b>Categorie</b></th>
+                                                    <th><b>Status</b></th>
+                                                    <th><b>Crée</b></th>
                                                     <th className="disabled-sorting text-right">Actions</th>
                                                 </tr>
                                                 </thead>
                                                 <tfoot>
                                                 <tr>
+                                                    <th>Image</th>
                                                     <th>Title</th>
                                                     <th>Categorie</th>
                                                     <th>Status</th>
-                                                    <th>Date de creation</th>
+                                                    <th>Crée</th>
                                                     <th className="disabled-sorting text-right">Actions</th>
                                                 </tr>
                                                 </tfoot>

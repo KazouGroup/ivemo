@@ -51,7 +51,7 @@ class PrivateUserBlogannonceVente extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette articles est desormais visible aux utilisateurs",
+                            message: "Cette articles est visible aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,

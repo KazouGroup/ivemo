@@ -145,9 +145,7 @@ class BlogannonceventeIndex extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette annonce a été masquée <a href=\"/profile/"+$userIvemo.slug+"/personal_settings/blogs/annonce_ventes/\" target=\"_blank\" class=\"btn btn-info btn-sm\">Modifier ici</a>",
-                            url: "/profile/"+$userIvemo.slug+"/personal_settings/blogs/annonce_ventes/",
-                            target: "_blank"
+                            message: "Cette article a été masquée aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,

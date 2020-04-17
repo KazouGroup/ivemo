@@ -25,7 +25,7 @@ class SignalannonceSeeder extends Seeder
     public function run()
     {
         factory(signalannoncelocation::class, 5)->create();
-        factory(signalannoncereservation::class, 1500)->create();
+        factory(signalannoncereservation::class, 500)->create();
         factory(signalannoncevente::class, 5)->create();
 
     }

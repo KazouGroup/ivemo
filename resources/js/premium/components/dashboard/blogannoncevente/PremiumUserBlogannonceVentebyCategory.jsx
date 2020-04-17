@@ -5,29 +5,20 @@ import Swal from "sweetalert2";
 import PremiumVerticalNavUserSite from "../../inc/PremiumVerticalNavUserSite";
 import PremiumHorizontalNavUserSite from "../../inc/PremiumHorizontalNavUserSite";
 import FooterPremiumUser from "../../inc/FooterPremiumUser";
-import {Button, UncontrolledTooltip} from "reactstrap";
-import moment from "moment";
-require("moment/min/locales.min");
-moment.locale('fr');
-
+import {Button} from "reactstrap";
+import PremiumUserBlogannonceVenteList from "./PremiumUserBlogannonceVenteList";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
-const avatar_style = {
-    width: "40px",
-    height: "40px",
-    top: "15px",
-    left: "15px",
-    borderRadius: "50%"
-};
 
 
-class PremiumUserTeams extends Component {
+
+class PremiumUserBlogannonceVentebyCategory extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            teams_count: [],
-            teamsactive_count: [],
-            teamsunactive_count: [],
-            teams:[],
+            blogannonceventes_count: [],
+            blogannonceventesactive_count: [],
+            blogannonceventesunactive_count: [],
+            userblogannonce:[],
 
         };
 
@@ -36,10 +27,10 @@ class PremiumUserTeams extends Component {
         this.unactiveItem = this.unactiveItem.bind(this);
     }
 
-    deleteItem(id) {
+    activeItem(id){
         Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes vous sure de vouloir executer cette action",
+            title: 'Afficher cette article?',
+            text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -51,14 +42,123 @@ class PremiumUserTeams extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('profile_team_users_destroy.site',id);
+                //Envoyer la requet au server
+                let url = route('blogannoncecategoryventeactivated_site',id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            message: "Cette articles est visible aux utilisateurs",
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'bottom',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animated fadeInUp",
+                                exit: "animated fadeOutDown"
+                            },
+                        });
+                    /** End alert ***/
+                    this.loadItems();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
+
+    }
+
+    unactiveItem(id){
+        Swal.fire({
+            title: 'Masquer cette article?',
+            text: "êtes vous sure de vouloir confirmer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                //Envoyer la requet au server
+                let url = route('blogannoncecategoryventeunactivated_site',id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            message: "Cette article a été masquée aux utilisateurs",
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'bottom',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animated fadeInUp",
+                                exit: "animated fadeOutDown"
+                            },
+                        });
+                    /** End alert ***/
+                    this.loadItems();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
+
+    }
+
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes-vous sûr de vouloir executer cette action",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                // remove from local state
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.userblogannonce.filter(isNotId);
+                this.setState({userblogannonce: updatedItems});
+
+                const url = route('blogannoncecategoryventedelete_site',[id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Donné suprimée avec success'
+                            message: 'Articles suprimée avec success'
                         },
                         {
                             allow_dismiss: false,
@@ -73,8 +173,7 @@ class PremiumUserTeams extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.loadItems();
-
+                    window.location.reload();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -89,151 +188,44 @@ class PremiumUserTeams extends Component {
             }
         });
     }
-    activeItem(item){
-        Swal.fire({
-            title: 'Confirmer l\'activation?',
-            text: "êtes vous sure de vouloir confirmer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
 
-                //Envoyer la requet au server
-                let url = route('profile_team_users_active.site',[item.id]);
-                dyaxios.get(url).then(() => {
+    mydatatables(){
+        $(function() {
+            $('#datatable').DataTable({
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+                responsive: true,
+                retrieve:true,
+                destroy: true,
+                autoFill: true,
+                colReorder: true,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search records",
+                }
 
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            //,
-                            message: 'Utilisateur activé avec succès'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
-                            },
-                            animate: {
-                                enter: "animated fadeInUp",
-                                exit: "animated fadeOutDown"
-                            },
-                        });
-                    /** End alert ***/
-                    this.loadItems();
-
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
-                        }
-                    });
-                })
-            }
-        })
-
+            });
+        });
     }
-
-    unactiveItem(item){
-        Swal.fire({
-            title: 'Désactiver l\'utilisateur?',
-            text: "êtes vous sure de vouloir confirmer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                //Envoyer la requet au server
-                let url = route('profile_team_users_unactivated.site',[item.id]);
-                dyaxios.get(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            // title: 'Update FAQ',
-                            message: 'Utilisateur désactiver avec succès'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
-                            },
-                            animate: {
-                                enter: "animated fadeInUp",
-                                exit: "animated fadeOutDown"
-                            },
-                        });
-                    /** End alert ***/
-                    this.loadItems();
-
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
-                        }
-                    });
-                })
-            }
-        })
-
-    }
-
-   mydatatables(){
-       $(function() {
-           $('#datatable').DataTable({
-               "pagingType": "full_numbers",
-               "lengthMenu": [
-                   [10, 25, 50, -1],
-                   [10, 25, 50, "All"]
-               ],
-               responsive: true,
-               retrieve:true,
-               destroy: true,
-               autoFill: true,
-               colReorder: true,
-               language: {
-                   search: "_INPUT_",
-                   searchPlaceholder: "Search records",
-               }
-
-           });
-       });
-   }
 
     loadItems(){
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.teams_premium_count',[itemuser])).then(response =>
-            this.setState({teams_count: response.data}));
+        dyaxios.get(route('api.blogannonceventes_premium_count',[itemuser])).then(response =>
+            this.setState({blogannonceventes_count: response.data}));
 
-        dyaxios.get(route('api.teams_premiumactive_count',[itemuser])).then(response => {
-            this.setState({teamsactive_count: response.data})});
+        dyaxios.get(route('api.blogannonceventes_premiumactive_count',[itemuser])).then(response => {
+            this.setState({blogannonceventesactive_count: response.data})});
 
-        dyaxios.get(route('api.teams_premiumunactive_count',[itemuser])).then(response =>
-            this.setState({teamsunactive_count: response.data}));
+        dyaxios.get(route('api.blogannonceventes_premiumunactive_count',[itemuser])).then(response =>
+            this.setState({blogannonceventesunactive_count: response.data}));
 
-        fetch(route('api.teams_premium',[itemuser])).then(res => res.json())
+        fetch(route('api.blogannonceventes_premium',[itemuser])).then(res => res.json())
             .then((result) => {
                 this.mydatatables();
-                this.setState({teams: result});
+                this.setState({userblogannonce: result});
 
             })
     }
@@ -243,77 +235,32 @@ class PremiumUserTeams extends Component {
         this.loadItems();
     }
 
-    data_countFormatter(teams_count, precision) {
-        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(teams_count)) / 3);
+    blogannonces_countFormatter(blogannonceventes_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannonceventes_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
         const suffix = abbrev[order];
-        return (teams_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+        return (blogannonceventes_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
 
-    dataactive_countFormatter(teamsactive_count, precision) {
-        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(teamsactive_count)) / 3);
+    blogannoncesactive_countFormatter(blogannonceventesactive_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannonceventesactive_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
         const suffix = abbrev[order];
-        return (teamsactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+        return (blogannonceventesactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
 
-    dataunactive_countFormatter(teamsunactive_count, precision) {
-        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(teamsunactive_count)) / 3);
+    blogannoncesunactive_countFormatter(blogannonceventesunactive_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannonceventesunactive_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
         const suffix = abbrev[order];
-        return (teamsunactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+        return (blogannonceventesunactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
     render() {
-        const {teams,teams_count,teamsactive_count,teamsunactive_count} = this.state;
-        const mapTeamsusers = teams.length ? (
-            teams.map(item => {
+        const {userblogannonce,blogannonceventes_count,blogannonceventesactive_count,blogannonceventesunactive_count} = this.state;
+        const mapBlogannonceventes = userblogannonce.length ? (
+            userblogannonce.map(item => {
                 return(
-                    <tr key={item.id}>
-                        <td>
-                            <Link to={'/dashboard/users/'}>
-                                <img src={item.photo} alt={item.full_name} style={avatar_style}/>
-                            </Link>
-                        </td>
-                        <td>{item.full_name}</td>
-                        <td>{item.role}</td>
-                        <td className="text-center">
-                            <div className="timeline-heading">
-                                {item.status ?
-                                    <span className="badge badge-success"><b>Visible</b></span>
-                                    :
-                                    <span className="badge badge-primary"><b>Desactivé</b></span>
-                                }
-                            </div>
-                        </td>
-                        <td>{moment(item.created_at).fromNow()}</td>
-                        <td className="text-right">
-                            {item.status ?
-                                <>
-                                    <Button onClick={() => this.unactiveItem(item)}
-                                            className="btn btn-success btn-icon btn-sm btn-round" title={`Desactiver ${item.full_name}`} >
-                                        <i className="now-ui-icons ui-1_check"/>
-                                    </Button>
-                                </>
-                                :
-                                <>
-                                    <Button onClick={() => this.activeItem(item)}
-                                            className="btn btn-primary btn-icon btn-sm btn-round" title={`Activer ${item.full_name}`} >
-                                        <i className="now-ui-icons ui-1_simple-delete"/>
-                                    </Button>
-                                </>
-
-                            }
-                            <Link to={`/dashboard/premium/${item.user.slug}/teams/${item.id}/edit/`} className="btn btn-info btn-icon btn-sm btn-info btn-round" title={`Éditer cette ${item.full_name}`}>
-                                <i className="now-ui-icons ui-2_settings-90"/>
-                            </Link>
-
-                            <button type="button" title={'Supprimer'} onClick={() => this.deleteItem(item.id)}
-                                    className="btn btn-danger btn-icon btn-sm btn-danger btn-round">
-                                <i className="far fa-trash-alt"/>
-                            </button>
-                        </td>
-                    </tr>
-                )
+                    <PremiumUserBlogannonceVenteList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>                )
             })
         ):(
             <></>
@@ -333,8 +280,8 @@ class PremiumUserTeams extends Component {
 
                         <div className="panel-header">
                             <div className="header text-center">
-                                <h3 className="title">Teams vos membre</h3>
-                                <p className="text-white">Votre teams ou utilisateurs</p>
+                                <h3 className="title">Articles annonces locations</h3>
+                                <p className="text-white">Articles sur les annonces de locations</p>
                             </div>
                         </div>
 
@@ -353,8 +300,8 @@ class PremiumUserTeams extends Component {
                                                             </div>
                                                         </div>
                                                         <div className="col-7 text-right">
-                                                            <h3 className="info-title">{this.data_countFormatter(teams_count)}</h3>
-                                                            <h6 className="stats-title">Membres</h6>
+                                                            <h3 className="info-title">{this.blogannonces_countFormatter(blogannonceventes_count)}</h3>
+                                                            <h6 className="stats-title">Articles</h6>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -363,7 +310,7 @@ class PremiumUserTeams extends Component {
                                         <hr/>
                                         <div className="card-footer ">
                                             <div className="stats">
-                                                <i className="now-ui-icons text_align-center"></i> Membres créer
+                                                <i className="now-ui-icons text_align-center"></i> Articles sur les annonces locations
                                             </div>
                                         </div>
                                     </div>
@@ -381,7 +328,7 @@ class PremiumUserTeams extends Component {
                                                             </div>
                                                         </div>
                                                         <div className="col-7 text-right">
-                                                            <h3 className="info-title">{this.dataactive_countFormatter(teamsactive_count)}</h3>
+                                                            <h3 className="info-title">{this.blogannoncesactive_countFormatter(blogannonceventesactive_count)}</h3>
                                                             <h6 className="stats-title">Actives</h6>
                                                         </div>
                                                     </div>
@@ -391,7 +338,7 @@ class PremiumUserTeams extends Component {
                                         <hr/>
                                         <div className="card-footer ">
                                             <div className="stats">
-                                                <i className="now-ui-icons ui-1_check"/> Membres actives
+                                                <i className="now-ui-icons ui-1_check"/> Articles actives
                                             </div>
                                         </div>
                                     </div>
@@ -409,7 +356,7 @@ class PremiumUserTeams extends Component {
                                                             </div>
                                                         </div>
                                                         <div className="col-7 text-right">
-                                                            <h3 className="info-title">{this.dataunactive_countFormatter(teamsunactive_count)}</h3>
+                                                            <h3 className="info-title">{this.blogannoncesunactive_countFormatter(blogannonceventesunactive_count)}</h3>
                                                             <h6 className="stats-title">Desactivés</h6>
                                                         </div>
                                                     </div>
@@ -419,7 +366,7 @@ class PremiumUserTeams extends Component {
                                         <hr/>
                                         <div className="card-footer ">
                                             <div className="stats">
-                                                <i className="now-ui-icons ui-1_simple-delete"/> Membres désactivés
+                                                <i className="now-ui-icons ui-1_simple-delete"/> Articles désactivés
                                             </div>
                                         </div>
                                     </div>
@@ -433,41 +380,40 @@ class PremiumUserTeams extends Component {
                                             <div className="toolbar">
 
                                                 <div className="submit text-center">
-                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/teams/create/`}
+                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_ventes/create/`}
                                                           className="btn btn-primary btn-raised btn-round">
                                                            <span className="btn-label">
                                                             <i className="now-ui-icons ui-1_simple-add"></i>
                                                           </span>
-                                                        <b className="title_hover">Ajouter un nouveau menbre</b>
+                                                        <b className="title_hover">New article de blog vente</b>
                                                     </Link>
                                                 </div>
 
                                             </div>
-                                            <table id="datatable" className="table table-striped table-bordered" cellSpacing="0" width="100%">
+                                            <table id="datatable" className="table table-striped table-bordered"  cellSpacing="0" width="100%">
                                                 <thead>
                                                 <tr>
-                                                    <th><b>Profile</b></th>
-                                                    <th><b>Nom complet</b></th>
-                                                    <th><b>Position Job</b></th>
-                                                    <th className="text-center"><b>Status</b></th>
+                                                    <th><b>Image</b></th>
+                                                    <th><b>Title</b></th>
+                                                    <th><b>Categorie</b></th>
+                                                    <th><b>Status</b></th>
                                                     <th><b>Crée</b></th>
-                                                    <th className="disabled-sorting text-right"><b>Actions</b></th>
+                                                    <th className="disabled-sorting text-right">Actions</th>
                                                 </tr>
                                                 </thead>
                                                 <tfoot>
                                                 <tr>
-                                                    <th>Profile</th>
-                                                    <th>Nom complet</th>
-                                                    <th>Position Job</th>
-                                                    <th className="text-center">Status</th>
+                                                    <th>Image</th>
+                                                    <th>Title</th>
+                                                    <th>Categorie</th>
+                                                    <th>Status</th>
                                                     <th>Crée</th>
                                                     <th className="disabled-sorting text-right">Actions</th>
                                                 </tr>
                                                 </tfoot>
                                                 <tbody>
 
-                                                {mapTeamsusers}
-
+                                                {mapBlogannonceventes}
 
                                                 </tbody>
                                             </table>
@@ -487,4 +433,4 @@ class PremiumUserTeams extends Component {
     }
 }
 
-export default PremiumUserTeams;
+export default PremiumUserBlogannonceVentebyCategory;

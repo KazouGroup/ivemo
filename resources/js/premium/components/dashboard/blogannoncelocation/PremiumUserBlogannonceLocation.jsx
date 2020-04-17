@@ -235,21 +235,21 @@ class PremiumUserBlogannonceLocation extends Component {
         this.loadItems();
     }
 
-    blogannonceventes_countFormatter(blogannoncelocations_count, precision) {
+    blogannonces_countFormatter(blogannoncelocations_count, precision) {
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocations_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
         const suffix = abbrev[order];
         return (blogannoncelocations_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
 
-    blogannonceventesactive_countFormatter(blogannoncelocationsactive_count, precision) {
+    blogannoncesactive_countFormatter(blogannoncelocationsactive_count, precision) {
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocationsactive_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
         const suffix = abbrev[order];
         return (blogannoncelocationsactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
 
-    blogannonceventesunactive_countFormatter(blogannoncelocationsunactive_count, precision) {
+    blogannoncesunactive_countFormatter(blogannoncelocationsunactive_count, precision) {
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocationsunactive_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
         const suffix = abbrev[order];
@@ -267,7 +267,7 @@ class PremiumUserBlogannonceLocation extends Component {
         );
         return (
             <>
-                <Helmet title={`Dashboard ${$userIvemo.first_name || ""} - Ivemo`} />
+                <Helmet title={`Dashboard ${$userIvemo.first_name || ""} article de blog locations - Ivemo`} />
 
 
                 <div className="wrapper ">
@@ -280,7 +280,7 @@ class PremiumUserBlogannonceLocation extends Component {
 
                         <div className="panel-header">
                             <div className="header text-center">
-                                <h3 className="title">Articles annonces locations</h3>
+                                <h3 className="title">Articles des annonces locations</h3>
                                 <p className="text-white">Articles sur les annonces de locations</p>
                             </div>
                         </div>
@@ -300,7 +300,7 @@ class PremiumUserBlogannonceLocation extends Component {
                                                             </div>
                                                         </div>
                                                         <div className="col-7 text-right">
-                                                            <h3 className="info-title">{this.blogannonceventes_countFormatter(blogannoncelocations_count)}</h3>
+                                                            <h3 className="info-title">{this.blogannonces_countFormatter(blogannoncelocations_count)}</h3>
                                                             <h6 className="stats-title">Articles</h6>
                                                         </div>
                                                     </div>
@@ -328,7 +328,7 @@ class PremiumUserBlogannonceLocation extends Component {
                                                             </div>
                                                         </div>
                                                         <div className="col-7 text-right">
-                                                            <h3 className="info-title">{this.blogannonceventesactive_countFormatter(blogannoncelocationsactive_count)}</h3>
+                                                            <h3 className="info-title">{this.blogannoncesactive_countFormatter(blogannoncelocationsactive_count)}</h3>
                                                             <h6 className="stats-title">Actives</h6>
                                                         </div>
                                                     </div>
@@ -356,7 +356,7 @@ class PremiumUserBlogannonceLocation extends Component {
                                                             </div>
                                                         </div>
                                                         <div className="col-7 text-right">
-                                                            <h3 className="info-title">{this.blogannonceventesunactive_countFormatter(blogannoncelocationsunactive_count)}</h3>
+                                                            <h3 className="info-title">{this.blogannoncesunactive_countFormatter(blogannoncelocationsunactive_count)}</h3>
                                                             <h6 className="stats-title">Desactivés</h6>
                                                         </div>
                                                     </div>

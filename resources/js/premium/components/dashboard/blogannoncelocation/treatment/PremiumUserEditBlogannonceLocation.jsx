@@ -177,6 +177,9 @@ class PremiumUserEditBlogannonceLocation extends Component {
                             <div className="header text-center">
                                 <h3 className="title">Articles annonces locations</h3>
                                 <p className="text-white">{this.state.title}</p>
+                                <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/`} className="text-white">
+                                    <i className="fa fa-chevron-circle-left"></i> Retour aux annonces
+                                </Link>
                             </div>
                         </div>
 

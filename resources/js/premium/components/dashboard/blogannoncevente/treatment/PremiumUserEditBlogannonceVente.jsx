@@ -6,17 +6,17 @@ import PremiumVerticalNavUserSite from "../../../inc/PremiumVerticalNavUserSite"
 import PremiumHorizontalNavUserSite from "../../../inc/PremiumHorizontalNavUserSite";
 import FooterPremiumUser from "../../../inc/FooterPremiumUser";
 import {Button, CardBody, FormGroup, Input, InputGroup, Row} from "reactstrap";
-import NavPremiumUserBlogannonceLocation from "../NavPremiumUserBlogannonceLocation";
+import NavPremiumUserBlogannonceVente from "../NavPremiumUserBlogannonceVente";
 import ReactQuill from "react-quill";
 
 
 
 
-class PremiumUserNewBlogannonceLocation extends Component {
+class PremiumUserEditBlogannonceVente extends Component {
     constructor(props) {
         super(props);
 
-        this.saveItem = this.saveItem.bind(this);
+        this.updateItem = this.updateItem.bind(this);
         this.updateImage = this.updateImage.bind(this);
         this.removeImage = this.removeImage.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -28,10 +28,10 @@ class PremiumUserNewBlogannonceLocation extends Component {
             photo: '',
             description: '',
             red_time: '',
-            categoryannoncelocation_id: '',
-            showDefaultImage: true,
+            categoryannoncevente_id: '',
+            showDefaultImage: false,
             errors: [],
-            categoryannoncelocations: [],
+            categoryannonceventes: [],
         };
         this.modules = {
             toolbar: [
@@ -92,21 +92,24 @@ class PremiumUserNewBlogannonceLocation extends Component {
         }
     }
 
-    saveItem(e) {
+
+    updateItem(e) {
         e.preventDefault();
 
         let item = {
             title: this.state.title,
+            status: this.state.status,
             photo: this.state.photo,
             red_time: this.state.red_time,
             description: this.state.description,
-            categoryannoncelocation_id: this.state.categoryannoncelocation_id,
+            categoryannoncevente_id: this.state.categoryannoncevente_id,
         };
-        dyaxios.post(route('blogannoncecategorylocationstore_site'), item)
+        let itemslugin = this.props.match.params.blogannoncevente;
+        dyaxios.put(route('blogannoncecategoryventeupdate_site', [itemslugin]), item)
             .then(() => {
                 $.notify({
                         //,
-                        message: 'Votre article de blogs a bien été crée'
+                        message: 'Votre article de blogs a bien été modifié'
                     },
                     {
                         allow_dismiss: false,
@@ -120,7 +123,6 @@ class PremiumUserNewBlogannonceLocation extends Component {
                             exit: "animated fadeOutDown"
                         },
                     });
-                this.props.history.push(`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/`);
             }).catch(error => {
             this.setState({
                 errors: error.response.data.errors
@@ -136,16 +138,32 @@ class PremiumUserNewBlogannonceLocation extends Component {
         })
     }
 
+    loadItems() {
+        let Itemdata = this.props.match.params.blogannoncevente;
+        let url = route('api.blogannonceblogcategoryventeslugin_site', [Itemdata]);
+        dyaxios.get(url).then(response =>
+            this.setState({
+                id: response.data.id,
+                title: response.data.title,
+                status: response.data.status,
+                photo: response.data.photo,
+                red_time: response.data.red_time,
+                categoryannoncevente_id: response.data.categoryannoncevente_id,
+                description: response.data.description,
+            }));
+    }
+
     // lifecycle method
     componentDidMount() {
-        fetch(route('api.categoryannoncelocation_site')).then(res => res.json()).then((result) => { this.setState({ categoryannoncelocations: result }) })
+        this.loadItems();
+        fetch(route('api.categoryannoncevente_site')).then(res => res.json()).then((result) => { this.setState({ categoryannonceventes: result }) })
     }
 
     render() {
-        const {categoryannoncelocations,photo} = this.state;
+        const {categoryannonceventes,photo} = this.state;
         return (
             <>
-                <Helmet title={`Dashboard ${$userIvemo.first_name || ""} - Ivemo`} />
+                <Helmet title={`${this.state.title || $name_site} - Ivemo`} />
 
 
                 <div className="wrapper ">
@@ -158,9 +176,9 @@ class PremiumUserNewBlogannonceLocation extends Component {
 
                         <div className="panel-header">
                             <div className="header text-center">
-                                <h3 className="title">Articles annonces locations</h3>
+                                <h3 className="title">Articles annonces ventes</h3>
                                 <p className="text-white">{this.state.title}</p>
-                                <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/`} className="text-white">
+                                <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_ventes/`} className="text-white">
                                     <i className="fa fa-chevron-circle-left"></i> Retour aux annonces
                                 </Link>
                             </div>
@@ -168,7 +186,7 @@ class PremiumUserNewBlogannonceLocation extends Component {
 
                         <div className="content">
 
-                         <NavPremiumUserBlogannonceLocation/>
+                         <NavPremiumUserBlogannonceVente/>
 
                             <div className="row">
                                 <div className="col-md-12">
@@ -181,7 +199,7 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                             </div>
 
 
-                                            <form role="form" onSubmit={this.saveItem} acceptCharset="UTF-8">
+                                            <form role="form" onSubmit={this.updateItem} acceptCharset="UTF-8">
 
                                                 <CardBody>
 
@@ -234,15 +252,15 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                                         <div className="col-md-6">
                                                             <label htmlFor="title">Selectionez la categorie</label>
                                                             <FormGroup>
-                                                                <select name={'categoryannoncelocation_id'} value={this.state.categoryannoncelocation_id}
+                                                                <select name={'categoryannoncevente_id'} value={this.state.categoryannoncevente_id}
                                                                         className={`form-control`}
-                                                                        id="categoryannoncelocation_id" onChange={this.handleFieldChange}>
+                                                                        id="categoryannoncevente_id" onChange={this.handleFieldChange}>
                                                                     <option value="" disabled>Selectioner une category</option>
-                                                                    {categoryannoncelocations.map((item) => (
+                                                                    {categoryannonceventes.map((item) => (
                                                                         <option key={item.id} value={item.id}>{item.name}</option>
                                                                     ))}
                                                                 </select>
-                                                                {this.renderErrorFor('categoryannoncelocation_id')}
+                                                                {this.renderErrorFor('categoryannoncevente_id')}
                                                             </FormGroup>
                                                         </div>
                                                     </Row>
@@ -284,11 +302,11 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                                 </CardBody>
 
                                                 <div className="submit text-center">
-                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/`} className="btn btn-secondary">
+                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_ventes/`} className="btn btn-secondary">
                                                         <i className="now-ui-icons ui-1_simple-delete"/> Annuler
                                                     </Link>
                                                     <button className="btn btn-primary" type="submit">
-                                                        <b>Sauvegarder l'article de blog</b>
+                                                        <b>Mettre à jour l'article de blog</b>
                                                     </button>
                                                 </div>
                                             </form>
@@ -310,4 +328,4 @@ class PremiumUserNewBlogannonceLocation extends Component {
     }
 }
 
-export default PremiumUserNewBlogannonceLocation;
+export default PremiumUserEditBlogannonceVente;

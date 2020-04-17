@@ -1,6 +1,6 @@
 @extends('inc.premium.main')
 <?php $item = htmlspecialchars(config('app.name'));?>
-@section('title', $categoryannoncevente->name.' - '.$item)
+@section('title', $blogannoncevente->title.' - '.$item)
 
 @section('style')
 
@@ -13,5 +13,4 @@
 @section('script')
 
 @endsection
-
 

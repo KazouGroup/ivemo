@@ -11,6 +11,13 @@ import PremiumUserNewBlogannonceLocation
     from "../components/dashboard/blogannoncelocation/treatment/PremiumUserNewBlogannonceLocation";
 import PremiumUserEditBlogannonceLocation
     from "../components/dashboard/blogannoncelocation/treatment/PremiumUserEditBlogannonceLocation";
+import PremiumUserBlogannonceVente from "../components/dashboard/blogannoncevente/PremiumUserBlogannonceVente";
+import PremiumUserNewBlogannonceVente
+    from "../components/dashboard/blogannoncevente/treatment/PremiumUserNewBlogannonceVente";
+import PremiumUserEditBlogannonceVente
+    from "../components/dashboard/blogannoncevente/treatment/PremiumUserEditBlogannonceVente";
+import PremiumUserBlogannonceVentebyCategory
+    from "../components/dashboard/blogannoncevente/PremiumUserBlogannonceVentebyCategory";
 
 
 
@@ -29,7 +36,11 @@ const RouterUserPremium = props => (
         <Route exact path="/dashboard/premium/:user/blogs/annonce_locations/:categoryannoncelocation/" component={withRouter(PremiumUserBlogannonceLocationbyCategory)}/>
 
         <Route exact path="/dashboard/premium/:user/blogs/annonce_reservations/" component={IndexPremium}/>
-        <Route exact path="/dashboard/premium/:user/blogs/annonce_ventes/" component={PremiumUserBlogannonceLocation}/>
+
+        <Route exact path="/dashboard/premium/:user/blogs/annonce_ventes/" component={PremiumUserBlogannonceVente}/>
+        <Route exact path="/dashboard/premium/:user/blogs/annonce_ventes/create/" component={PremiumUserNewBlogannonceVente}/>
+        <Route exact path="/dashboard/premium/:user/blogs/annonce_ventes/:blogannoncevente/edit/" component={PremiumUserEditBlogannonceVente}/>
+        <Route exact path="/dashboard/premium/:user/blogs/annonce_ventes/:categoryannoncevente/" component={PremiumUserBlogannonceVentebyCategory}/>
 
     </Switch>
 
