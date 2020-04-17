@@ -20,12 +20,12 @@ class NavlinkconfigurationUser extends Component {
                             <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
                                 <div className="card card-plain">
-                                    <div className="card-header" role="tab" id="headingOne">
-                                        <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    <div className="card-header" role="tab" id="headingAnnonce">
+                                        <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseAnnonce" aria-expanded="false" aria-controls="collapseAnnonce">
                                             <b>Toutes mes annonces</b>
                                         </a>
                                     </div>
-                                    <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                    <div id="collapseAnnonce" className="collapse" role="tabpanel" aria-labelledby="headingAnnonce">
                                         <div className="card-body">
                                             <table>
                                                 <tbody>
@@ -60,12 +60,12 @@ class NavlinkconfigurationUser extends Component {
                                 </div>
 
                                 <div className="card card-plain">
-                                    <div className="card-header" role="tab" id="headingOne">
-                                        <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    <div className="card-header" role="tab" id="headingArticle">
+                                        <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseArticle" aria-expanded="false" aria-controls="collapseArticle">
                                             <b>Toutes mes articles</b>
                                         </a>
                                     </div>
-                                    <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                    <div id="collapseArticle" className="collapse" role="tabpanel" aria-labelledby="headingArticle">
                                         <div className="card-body">
                                             <table>
                                                 <tbody>
@@ -100,12 +100,12 @@ class NavlinkconfigurationUser extends Component {
                                 </div>
 
                                 <div className="card card-plain">
-                                    <div className="card-header" role="tab" id="headingOne">
-                                        <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    <div className="card-header" role="tab" id="headingInfopersonnel">
+                                        <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseInfopersonnel" aria-expanded="false" aria-controls="collapseInfopersonnel">
                                             <b>Inforations personnel</b>
                                         </a>
                                     </div>
-                                    <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                    <div id="collapseInfopersonnel" className="collapse" role="tabpanel" aria-labelledby="headingInfopersonnel">
                                         <div className="card-body">
                                             <table>
                                                 <tbody>
