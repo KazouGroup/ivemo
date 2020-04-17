@@ -33,7 +33,7 @@ Route::delete(
 Route::get(
     'profile/{profile}/account',
     'ProfileController@profile_add_info_account'
-)->name('profile_add_info_account.site');
+)->name('profile_profile_account_account.site');
 
 Route::put(
     'profile/{profile}',

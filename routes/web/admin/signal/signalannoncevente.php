@@ -13,7 +13,7 @@ Route::group(['namespace' => 'Signale'], function(){
     Route::get(
         'api/signalannonceventes/{annoncevente:slug}',
         'SignalannonceventeController@annoncevente'
-    )->name('api.signalannoncelocations_annoncelocation');
+    )->name('api.signalannonceventes_annonceventes');
 
     Route::get(
         'dashboard/signalannonceventes',

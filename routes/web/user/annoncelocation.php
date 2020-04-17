@@ -38,7 +38,7 @@ Route::get(
 Route::get(
     'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}/{annoncelocation}',
     'AnnoncelocationController@annoncelocationbycategoryannoncelocationslug'
-)->name('annoncelocationbycategoryannoncereservationslug_site');
+)->name('annoncelocationbycategoryannoncereservationslug.site');
 
 Route::get(
     'annonces_locations_active/{id}',

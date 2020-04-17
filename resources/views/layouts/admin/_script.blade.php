@@ -37,10 +37,6 @@
 <script src="{{ mix('/js/reactjs/axios.js') }}"></script>
 <script src="{{ mix('/js/vuejs/app.js') }}"></script>
 
-
-
-@include('notify::messages')
-
 @if(config('app.env') != 'local')
 @endif
 
