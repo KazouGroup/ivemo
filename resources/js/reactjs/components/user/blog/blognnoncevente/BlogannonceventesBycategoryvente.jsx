@@ -251,7 +251,7 @@ class BlogannonceventesBycategoryvente extends Component {
         );
         return (
             <>
-                <Helmet title={`Guides et conseils ventes ${blogannonceventes.name || 'Annonce'} - Ivemo`}/>
+                <Helmet title={`Guides et conseils ventes ${blogannonceventes.name || 'Annonce'} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 

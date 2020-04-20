@@ -253,7 +253,7 @@ class BlogannoncereservationIndex extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Conseils tout savoir sur les reservations - Ivemo</title>
+                    <title>Conseils tout savoir sur les reservations - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">

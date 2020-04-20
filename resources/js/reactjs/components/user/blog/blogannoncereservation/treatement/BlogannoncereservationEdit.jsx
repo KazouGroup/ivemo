@@ -301,7 +301,7 @@ class BlogannoncereservationEdit extends Component {
     render() {
         const { photo, categoryannoncereservations } = this.state;
         const composantTitle = `${this.state.title || 'Ivemo'}`;
-        document.title = `${composantTitle} - Ivemo`;
+        document.title = `${composantTitle} - ${$name_site}`;
         return (
             <div className="about-us sidebar-collapse">
                 <nav className="navbar navbar-expand-lg bg-primary">

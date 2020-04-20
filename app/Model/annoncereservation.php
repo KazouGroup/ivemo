@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class annoncereservation extends Model
 {
@@ -16,8 +17,18 @@ class annoncereservation extends Model
         parent::boot();
 
         static::creating(function ($model){
+            $myslug = Str::uuid();
             if (auth()->check()){
                 $model->user_id = auth()->id();
+                $model->slugin = $myslug;
+            }
+        });
+
+        static::updating(function($model){
+            $myslug = Str::uuid();
+            if (auth()->check()){
+                $model->user_id = auth()->id();
+                $model->slugin = $myslug;
             }
         });
     }

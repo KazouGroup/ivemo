@@ -17,6 +17,7 @@ class CreateAnnoncereservationsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
+            $table->string('slugin')->nullable();
             $table->string('district')->nullable();
             $table->boolean('status')->default(true);
             $table->boolean('status_admin')->default(true);

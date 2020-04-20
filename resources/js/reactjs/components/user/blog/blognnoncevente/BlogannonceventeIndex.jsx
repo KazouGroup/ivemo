@@ -254,7 +254,7 @@ class BlogannonceventeIndex extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Conseils tout savoir sur les achat et vente de vos biens - Ivemo</title>
+                    <title>Conseils tout savoir sur les achat et vente de vos biens - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">

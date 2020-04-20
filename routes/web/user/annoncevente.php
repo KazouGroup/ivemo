@@ -50,3 +50,18 @@ Route::get(
     'AnnonceventeController@annonceventebycategoryannonceventeslug'
 )->name('annonceventebycategoryannonceventeslug_site');
 
+
+Route::get(
+    'api/annonce_vente/{annoncetype}/{annoncevente:slugin}',
+    'AnnonceventeController@apiannonceventesbyannoncetypebyannoncevente'
+)->name('api.annonceventesbyannoncetypebyannoncevente_site');
+
+Route::get(
+    'annonce_vente/{annoncetype}/{annoncevente:slugin}/edit',
+    'AnnonceventeController@edit'
+)->name('annonceventesedit_site');
+
+Route::put(
+    'annonce_vente/{annoncetype}/{annoncevente:slugin}',
+    'AnnonceventeController@update'
+)->name('annonceventesupdate_site');

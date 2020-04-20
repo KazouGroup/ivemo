@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Str;
 
 
 class annoncevente extends Model
@@ -17,8 +18,18 @@ class annoncevente extends Model
         parent::boot();
 
         static::creating(function ($model){
+            $myslug = Str::uuid();
             if (auth()->check()){
                 $model->user_id = auth()->id();
+                $model->slugin = $myslug;
+            }
+        });
+
+        static::updating(function($model){
+            $myslug = Str::uuid();
+            if (auth()->check()){
+                $model->user_id = auth()->id();
+                $model->slugin = $myslug;
             }
         });
     }

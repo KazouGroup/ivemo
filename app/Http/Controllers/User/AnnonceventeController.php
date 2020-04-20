@@ -21,7 +21,7 @@ class AnnonceventeController extends Controller
     {
         $this->middleware('auth', ['only' => [
             'create', 'store', 'edit', 'update', 'destroy','apiannoncesventesbyuser','annoncesventesbyuser',
-            'activated', 'unactivated'
+            'activated', 'unactivated','apiannonceventesbyannoncetypebyannoncevente',
         ]]);
     }
 
@@ -137,6 +137,13 @@ class AnnonceventeController extends Controller
             ->orderBy('name','asc')->get());
 
         return response()->json($annoncelocations, 200);
+    }
+
+    public function apiannonceventesbyannoncetypebyannoncevente(annoncetype $annoncetype,$annoncevente)
+    {
+        $annoncelocation = AnnonceventeService::apiannonceventesbyannoncetypebyannoncevente($annoncetype,$annoncevente);
+
+        return response()->json($annoncelocation, 200);
     }
 
     /**
@@ -346,15 +353,11 @@ class AnnonceventeController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(annoncetype $annoncetype,annoncevente $annoncevente)
     {
-        //
+        return view('user.annoncevente.edit',[
+            'annoncevente' => $annoncevente,
+        ]);
     }
 
     /**

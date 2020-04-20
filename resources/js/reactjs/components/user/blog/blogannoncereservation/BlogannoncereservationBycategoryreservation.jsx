@@ -250,7 +250,7 @@ class BlogannoncereservationBycategoryreservation extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Guides et conseils reservation {`${blogannoncereservation.name || 'Annonce'}`} - Ivemo</title>
+                    <title>Guides et conseils reservation {`${blogannoncereservation.name || 'Annonce'}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">

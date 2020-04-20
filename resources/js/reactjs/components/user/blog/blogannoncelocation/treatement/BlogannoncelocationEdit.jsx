@@ -298,8 +298,8 @@ class BlogannoncelocationEdit extends Component {
 
     render() {
         const { photo, categoryannoncelocations } = this.state;
-        const composantTitle = `${this.state.title || 'Ivemo'}`;
-        document.title = `${composantTitle} - Ivemo`;
+        const composantTitle = `${this.state.title || $name_site}`;
+        document.title = `${composantTitle} - ${$name_site}`;
         return (
             <div className="about-us sidebar-collapse">
                 <nav className="navbar navbar-expand-lg bg-primary">

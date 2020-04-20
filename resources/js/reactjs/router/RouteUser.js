@@ -104,6 +104,7 @@ import AgencesimmobilieIndex from "../components/user/agencesimmobilie/Agencesim
 import FaqsIndexSite from "../components/user/pages/FaqsIndexSite";
 import PubliciteIndexSite from "../components/user/pages/PubliciteIndexSite";
 import PolicyprivacyIndexSite from "../components/user/pages/PolicyprivacyIndexSite";
+import AnnonceventeEdit from "../components/user/annonces/annoncevente/treatment/AnnonceventeEdit";
 
 
 const RouteUser = props => (
@@ -144,6 +145,7 @@ const RouteUser = props => (
           <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/" component={withRouter(Annoncebycategoryannoncevente)}/>
           <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/:city/" component={withRouter(Annoncebycategoryannonceventecity)}/>
           <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/:city/:annoncevente/" component={withRouter(Annonceventebycategorycityshow)}/>
+          <Route exact path="/annonce_vente/:annoncetype/:annoncevente/edit/" component={AnnonceventeEdit}/>
 
 
           <Route exact path="/profile/account/" component={ProfileAccountUser}/>

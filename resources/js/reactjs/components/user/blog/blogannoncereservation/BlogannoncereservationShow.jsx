@@ -101,7 +101,7 @@ class BlogannoncereservationShow extends Component {
         return (
             <>
                 <Helmet>
-                    <title>{`${blogannoncereservation.title || 'Annonce'}`} - Ivemo</title>
+                    <title>{`${blogannoncereservation.title || 'Annonce'}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">

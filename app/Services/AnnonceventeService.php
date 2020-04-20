@@ -5,14 +5,22 @@ namespace App\Services;
 
 
 use App\Http\Resources\AnnoncelocationResource;
+use App\Http\Resources\AnnonceventeResource;
 use App\Model\annoncelocation;
+use App\Model\annoncetype;
+use App\Model\annoncevente;
 use App\Model\categoryannoncevente;
 use App\Model\city;
-use App\Model\user;
 
 class AnnonceventeService
 {
 
+    public static function apiannonceventesbyannoncetypebyannoncevente(annoncetype $annoncetype,$annoncevente)
+    {
+        $annoncelocation = new AnnonceventeResource(annoncevente::whereSlugin($annoncevente)->first());
+
+        return $annoncelocation;
+    }
 
 
     public static function apiannonceventebycategoryannoncevente($annoncetype,$categoryannoncevente)

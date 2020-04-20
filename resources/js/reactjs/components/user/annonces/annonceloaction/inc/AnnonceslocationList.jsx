@@ -48,7 +48,7 @@ class AnnonceslocationList extends Component {
                                     </div>
 
                                     <div className="text-center">
-                                    
+
                                         {!$guest && (
                                             <>
                                                 {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
@@ -73,7 +73,7 @@ class AnnonceslocationList extends Component {
                                             </>
                                         )}
 
-                                       
+
                                     </div>
 
 
@@ -153,14 +153,16 @@ class AnnonceslocationList extends Component {
                                                 className="btn btn-instagram btn-icon btn-sm">
                                                 <i className="far fa-flag"></i>
                                             </button>
+                                            {/*
                                             <NavLink to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.slug}/`} className="btn btn-icon btn-sm btn-primary">
                                                 <i className="now-ui-icons location_pin"/>
                                             </NavLink>
-
+                                            */}
                                             {!$guest && (
                                                 <>
                                                     {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
                                                         <>
+
                                                             <NavLink to={`/annonces/`} className="btn btn-sm btn-info btn-icon btn-sm" rel="tooltip" title="Editer" data-placement="bottom">
                                                                 <i className="now-ui-icons ui-2_settings-90"/>
                                                             </NavLink>

@@ -250,7 +250,7 @@ class BlogannoncelocationBycategorylocation extends Component {
         );
         return (
             <>
-                <Helmet title={`Guides et conseils locations ${blogannoncelocationsData.name || 'Annonce'} - Ivemo`}/>
+                <Helmet title={`Guides et conseils locations ${blogannoncelocationsData.name || 'Annonce'} - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
 

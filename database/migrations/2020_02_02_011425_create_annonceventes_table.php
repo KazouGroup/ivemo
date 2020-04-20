@@ -18,6 +18,7 @@ class CreateAnnonceventesTable extends Migration
             $table->string('title')->nullable();
             $table->longText('description')->nullable();
             $table->string('slug')->nullable();
+            $table->string('slugin')->nullable();
             $table->string('district')->nullable();
             $table->integer('surface')->nullable();
             $table->integer('rooms')->nullable();
