@@ -28,7 +28,7 @@ class AnnoncelocationController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','destroy','apiannonceslocationsbyuser','annonceslocationsbyuser','apicategoryannoncelocations_by_user','activated','unactivated'
+            'create','store','edit','update','destroy','apiannonceslocationsbyuser','annonceslocationsbyuser','apicategoryannoncelocations_by_user','activated','unactivated','apiannoncelocationsbyannoncetypebyannoncelocation'
         ]]);
     }
     /**
@@ -315,15 +315,19 @@ class AnnoncelocationController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function apiannoncelocationsbyannoncetypebyannoncelocation(annoncetype $annoncetype,$annoncelocation)
     {
-        //
+        $data = AnnoncelocationService::apiannoncelocationsbyannoncetypebyannoncelocation($annoncetype,$annoncelocation);
+
+        return response()->json($data, 200);
+    }
+
+
+    public function edit(annoncetype $annoncetype,annoncelocation $annoncelocation)
+    {
+        return view('user.annoncelocation.edit',[
+            'annoncelocation' => $annoncelocation,
+        ]);
     }
 
     /**

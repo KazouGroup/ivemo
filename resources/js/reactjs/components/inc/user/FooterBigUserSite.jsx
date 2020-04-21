@@ -27,7 +27,7 @@ class FooterBigUserSite extends Component {
                                 <div className="col-md-5">
                                     <div className="column">
                                         <Link to={'/'}>
-                                            <img src=".." className="logo" alt="Ivemo" />
+                                            <img src=".." className="logo" alt={$name_site} />
                                         </Link>
                                     </div>
                                     <div className="btn-wrapper profile text-left mt-3">
@@ -193,7 +193,7 @@ class FooterBigUserSite extends Component {
                             </div>
                         </div>
                         <div className="copyright">
-                            Copyright © {new Date().getFullYear()}, Ivemo All Rights Reserved Realisé par
+                            Copyright © {new Date().getFullYear()}, {$name_site} All Rights Reserved Realisé par
                             <a href="/" className="pl-2 text-primary">KazouGroup Srl</a>.
                         </div>
                     </div>

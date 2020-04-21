@@ -17,9 +17,9 @@ class AnnonceventeService
 
     public static function apiannonceventesbyannoncetypebyannoncevente(annoncetype $annoncetype,$annoncevente)
     {
-        $annoncelocation = new AnnonceventeResource(annoncevente::whereSlugin($annoncevente)->first());
+        $data = new AnnonceventeResource(annoncevente::whereSlugin($annoncevente)->first());
 
-        return $annoncelocation;
+        return $data;
     }
 
 

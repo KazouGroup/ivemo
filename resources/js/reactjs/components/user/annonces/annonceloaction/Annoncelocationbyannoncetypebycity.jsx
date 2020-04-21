@@ -139,7 +139,7 @@ class Annoncelocationbyannoncetypebycity extends Component {
             email: this.state.email,
             annoncelocation_id: this.state.annonceItem.id,
             full_name: this.state.full_name,
-            subject: this.state.subject,
+            object: this.state.object,
             message: this.state.message,
         };
         let url = route('signalannoncelocations.site');

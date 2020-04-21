@@ -141,9 +141,9 @@ class AnnonceventeController extends Controller
 
     public function apiannonceventesbyannoncetypebyannoncevente(annoncetype $annoncetype,$annoncevente)
     {
-        $annoncelocation = AnnonceventeService::apiannonceventesbyannoncetypebyannoncevente($annoncetype,$annoncevente);
+        $data = AnnonceventeService::apiannonceventesbyannoncetypebyannoncevente($annoncetype,$annoncevente);
 
-        return response()->json($annoncelocation, 200);
+        return response()->json($data, 200);
     }
 
     /**

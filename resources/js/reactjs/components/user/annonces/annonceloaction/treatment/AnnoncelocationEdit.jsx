@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 import moment from "moment";
 
 
-class AnnonceventeEdit extends Component {
+class AnnoncelocationEdit extends Component {
     constructor(props) {
         super(props);
 
@@ -32,10 +32,10 @@ class AnnonceventeEdit extends Component {
             rooms: '',
             description: '',
             city_id: '',
-            categoryannoncevente_id: '',
+            categoryannoncelocation_id: '',
             errors: [],
             cities: [],
-            categoryannonceventes: [],
+            categoryannoncelocations: [],
         };
         this.modules = {
             toolbar: [
@@ -87,8 +87,8 @@ class AnnonceventeEdit extends Component {
             status: this.state.status,
         };
         let itemannoncetype = this.props.match.params.annoncetype;
-        let itemannoncevente = this.props.match.params.annoncevente;
-        dyaxios.put(route('annonceventesupdate_site', [itemannoncetype,itemannoncevente]), item)
+        let itemannoncelocation = this.props.match.params.annoncelocation;
+        dyaxios.put(route('annoncelocationsupdate_site', [itemannoncetype,itemannoncelocation]), item)
             .then(() => {
                 $.notify({
                         //,
@@ -167,7 +167,7 @@ class AnnonceventeEdit extends Component {
 
     activeItem(id){
         //Envoyer la requet au server
-        let url = route('annonces_ventes_active.site',[id]);
+        let url = route('annonces_annoncelocations_active.site',[id]);
         dyaxios.get(url).then(() => {
 
             /** Alert notify bootstrap **/
@@ -205,7 +205,7 @@ class AnnonceventeEdit extends Component {
     unactiveItem(id){
         console.log(id);
         //Envoyer la requet au server
-        let url = route('annonces_ventes_unactivated.site',[id]);
+        let url = route('annonces_annoncelocations_unactivated.site',[id]);
         dyaxios.get(url).then(() => {
 
             /** Alert notify bootstrapp **/
@@ -243,8 +243,8 @@ class AnnonceventeEdit extends Component {
 
     loadItems() {
         let itemannoncetype = this.props.match.params.annoncetype;
-        let itemannoncevente = this.props.match.params.annoncevente;
-        let url = route('api.annonceventesbyannoncetypebyannoncevente_site', [itemannoncetype,itemannoncevente]);
+        let itemannoncelocation = this.props.match.params.annoncelocation;
+        let url = route('api.annoncelocationsbyannoncetypebyannoncelocation_site', [itemannoncetype,itemannoncelocation]);
         dyaxios.get(url).then(response =>
             this.setState({
                 id: response.data.id,
@@ -256,13 +256,13 @@ class AnnonceventeEdit extends Component {
                 rooms: response.data.rooms,
                 description: response.data.description,
                 city_id: response.data.city_id,
-                categoryannoncevente_id: response.data.categoryannoncevente_id,
+                categoryannoncelocation_id: response.data.categoryannoncelocation_id,
             }));
     }
     // lifecycle method
     componentDidMount() {
         this.loadItems();
-        fetch(route('api.categoryannoncevente_site')).then(res => res.json()).then((result) => { this.setState({ categoryannonceventes: result }) })
+        fetch(route('api.categoryannoncelocation_site')).then(res => res.json()).then((result) => { this.setState({ categoryannoncelocations: result }) });
         fetch(route('api.all_cities')).then(res => res.json()).then((result) => { this.setState({ cities: result }) })
     }
 
@@ -271,7 +271,7 @@ class AnnonceventeEdit extends Component {
     }
 
     render() {
-        const {categoryannonceventes,cities} = this.state;
+        const {categoryannoncelocations,cities} = this.state;
         return (
             <Fragment>
                 <Helmet title={`${this.state.title || $name_site} - ${$name_site}`}/>
@@ -313,7 +313,9 @@ class AnnonceventeEdit extends Component {
                                                                 <NavLink to={`/annonce/show/`}
                                                                          className="text-dark font-weight-600 text-sm">
                                                                     <b>{$userIvemo.first_name}</b>
-                                                                    <small className="d-block text-muted"><b>{moment($userIvemo.created_at).format('LL')}</b></small>
+                                                                    <small className="d-block text-muted">
+                                                                        <b>{moment($userIvemo.created_at).format('LL')}</b>
+                                                                    </small>
                                                                 </NavLink>
                                                             </div>
                                                         </div>
@@ -390,15 +392,15 @@ class AnnonceventeEdit extends Component {
                                                                                             <span className="text-danger">*</span>
                                                                                         </label>
                                                                                         <div className="form-group">
-                                                                                            <select name={'categoryannoncevente_id'} value={this.state.categoryannoncevente_id}
+                                                                                            <select name={'categoryannoncelocation_id'} value={this.state.categoryannoncelocation_id}
                                                                                                     className={`form-control`}
-                                                                                                    id="categoryannoncevente_id" onChange={this.handleFieldChange}>
+                                                                                                    id="categoryannoncelocation_id" onChange={this.handleFieldChange}>
                                                                                                 <option value="" disabled>Selectioner une category</option>
-                                                                                                {categoryannonceventes.map((item) => (
+                                                                                                {categoryannoncelocations.map((item) => (
                                                                                                     <option key={item.id} value={item.id}>{item.name}</option>
                                                                                                 ))}
                                                                                             </select>
-                                                                                            {this.renderErrorFor('categoryannoncevente_id')}
+                                                                                            {this.renderErrorFor('categoryannoncelocation_id')}
                                                                                         </div>
                                                                                     </div>
                                                                                     <div className="col-md-6">
@@ -595,7 +597,7 @@ class AnnonceventeEdit extends Component {
                                                                 <div className="card-header text-center">
                                                                     {this.state.price && (
                                                                         <div className="ml-auto">
-                                                                            <h5 className="text-dark"><b>{this.numberWithCommas()} <small>FCFA</small></b></h5>
+                                                                            <h5 className="text-dark"><b>{this.numberWithCommas()} <small>FCFA/mois</small></b></h5>
                                                                         </div>
                                                                     )}
                                                                     <div className="card-title">
@@ -678,4 +680,4 @@ class AnnonceventeEdit extends Component {
     }
 }
 
-export default AnnonceventeEdit;
+export default AnnoncelocationEdit;

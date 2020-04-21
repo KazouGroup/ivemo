@@ -105,6 +105,7 @@ import FaqsIndexSite from "../components/user/pages/FaqsIndexSite";
 import PubliciteIndexSite from "../components/user/pages/PubliciteIndexSite";
 import PolicyprivacyIndexSite from "../components/user/pages/PolicyprivacyIndexSite";
 import AnnonceventeEdit from "../components/user/annonces/annoncevente/treatment/AnnonceventeEdit";
+import AnnoncelocationEdit from "../components/user/annonces/annonceloaction/treatment/AnnoncelocationEdit";
 
 
 const RouteUser = props => (
@@ -136,6 +137,7 @@ const RouteUser = props => (
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/" component={withRouter(Annoncebycategoryannoncelocation)}/>
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/" component={withRouter(Annoncelocationbycity)}/>
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/:annoncelocation/" component={withRouter(Annoncelocationbycategorycityshow)}/>
+          <Route exact path="/annonce_location/:annoncetype/:annoncelocation/edit/" component={AnnoncelocationEdit}/>
 
           <Route exact path="/annonce/show/create/" component={AnnonceShowCreateUserSite}/>
           <Route exact path="/annonce/show/vendre/create/" component={AnnonceBienAvendreCreate}/>

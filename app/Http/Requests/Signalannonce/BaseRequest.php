@@ -21,7 +21,6 @@ class BaseRequest extends Request
             'full_name' => ['required', 'string','min:3', 'max:255'],
             'message' => 'required',
             //'confirm_send' => 'required',
-            'phone' => ['nullable', 'numeric'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'object' => ['required', 'string', 'max:255'],
         ];

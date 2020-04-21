@@ -149,7 +149,7 @@ class AnnonceslocationList extends Component {
                                             <Button className="btn btn-icon btn-sm btn-warning" onClick={() => this.props.contactUser(this.props)} title={`Contacter ${this.props.user.first_name}`}>
                                                 <i className="far fa-envelope"/>
                                             </Button>
-                                            <button type="button" rel="tooltip" onClick={() => this.props.signalerUser(this.props)}
+                                            <button type="button" title="Signaler" onClick={() => this.props.signalerUser(this.props)}
                                                 className="btn btn-instagram btn-icon btn-sm">
                                                 <i className="far fa-flag"></i>
                                             </button>
@@ -163,14 +163,11 @@ class AnnonceslocationList extends Component {
                                                     {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
                                                         <>
 
-                                                            <NavLink to={`/annonces/`} className="btn btn-sm btn-info btn-icon btn-sm" rel="tooltip" title="Editer" data-placement="bottom">
+                                                            <NavLink to={`/annonce_location/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
                                                                 <i className="now-ui-icons ui-2_settings-90"/>
                                                             </NavLink>
-                                                            <UncontrolledTooltip placement="bottom" target="TooltipDelete">
-                                                                Supprimer cette annonce
-                                                            </UncontrolledTooltip>
                                                             <Button
-                                                                className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} id="TooltipDelete">
+                                                                className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} title="Supprimer cette annonce">
                                                                 <i className="now-ui-icons ui-1_simple-remove"/>
                                                             </Button>{" "}
                                                         </>

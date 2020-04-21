@@ -5,12 +5,20 @@ namespace App\Services;
 
 use App\Http\Resources\AnnoncelocationResource;
 use App\Model\annoncelocation;
+use App\Model\annoncetype;
 use App\Model\categoryannoncelocation;
 use App\Model\city;
 use App\Model\user;
 
 class AnnoncelocationService
 {
+
+    public static function apiannoncelocationsbyannoncetypebyannoncelocation(annoncetype $annoncetype,$annoncelocation)
+    {
+        $data = new AnnoncelocationResource(annoncelocation::whereSlugin($annoncelocation)->first());
+
+        return $data;
+    }
 
     public static function apiannoncelocationbycategorycitycount($categoryannoncelocation)
     {

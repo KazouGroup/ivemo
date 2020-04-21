@@ -54,3 +54,19 @@ Route::delete(
     'annonces_locations_delete/{id}',
     'AnnoncelocationController@destroy'
 )->name('annonces_locations_delete.site');
+
+
+Route::get(
+    'api/annonce_location/{annoncetype}/{annoncelocation:slugin}',
+    'AnnoncelocationController@apiannoncelocationsbyannoncetypebyannoncelocation'
+)->name('api.annoncelocationsbyannoncetypebyannoncelocation_site');
+
+Route::get(
+    'annonce_location/{annoncetype}/{annoncelocation:slugin}/edit',
+    'AnnoncelocationController@edit'
+)->name('annoncelocationsedit_site');
+
+Route::put(
+    'annonce_location/{annoncetype}/{annoncelocation:slugin}',
+    'AnnoncelocationController@update'
+)->name('annoncelocationsupdate_site');
