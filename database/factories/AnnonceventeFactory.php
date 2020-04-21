@@ -24,7 +24,7 @@ $factory->define(annoncevente::class, function (Faker $faker) {
         'annoncetype_id' => 2,
         'slug' => str_slug($title),
         'slugin' => Str::uuid(),
-        'description' => $faker->realText(rand(10000, 40000)),
+        'description' => $faker->realText(rand(100, 200)),
         'categoryannoncevente_id' => categoryannoncevente::inRandomOrder()->first()->id,
         'city_id' => city::inRandomOrder()->first()->id,
         'user_id' => user::inRandomOrder()->first()->id,

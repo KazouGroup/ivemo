@@ -165,7 +165,7 @@ class TeamsUserEdite extends Component {
 
             <>
                 <Helmet>
-                    <title>Éditer {`${this.state.full_name || " " }`} - Ivemo</title>
+                    <title>Éditer {`${this.state.full_name || " " }`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">

@@ -255,7 +255,7 @@ class AnnonceventeIndex extends Component {
         );
         return (
             <Fragment>
-                <Helmet title={`Vendez un terrain, une maison, un appartement ou une boutique et plusieurs autres de vos biens - Ivemo`}/>
+                <Helmet title={`Vendez un terrain, une maison, un appartement ou une boutique et plusieurs autres de vos biens - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 

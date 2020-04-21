@@ -163,7 +163,7 @@ class AgencesimmobilieIndex extends Component {
         );
         return (
             <>
-                <Helmet title={`Agences immobilières - Ivemo`}/>
+                <Helmet title={`Agences immobilières - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
 

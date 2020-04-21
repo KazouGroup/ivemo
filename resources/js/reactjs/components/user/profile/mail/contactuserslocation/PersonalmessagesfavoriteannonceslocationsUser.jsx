@@ -170,7 +170,7 @@ class PersonalmessagesfavoriteannonceslocationsUser extends Component {
         return (
 
             <>
-                <Helmet title={`Messages contact annonces locations ${$userIvemo.first_name} - Ivemo`}/>
+                <Helmet title={`Messages contact annonces locations ${$userIvemo.first_name} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 

@@ -14,7 +14,7 @@ class AboutUserSite extends Component {
 
     // lifecycle method
     componentDidMount() {
-        const composantTitle = 'About - Ivemo';
+        const composantTitle = `About - ${$name_site}`;
         document.title = `${composantTitle}`;
     }
 

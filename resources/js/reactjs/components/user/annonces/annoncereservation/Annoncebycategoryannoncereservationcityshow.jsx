@@ -37,7 +37,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
         return (
             <>
                 <Helmet>
-                    <title>{`${annoncereservation.title || "Ivemo"}`} - Ivemo</title>
+                    <title>{`${annoncereservation.title || $name_site}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">

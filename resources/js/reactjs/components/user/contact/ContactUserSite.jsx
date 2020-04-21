@@ -84,7 +84,7 @@ class ContactUserSite extends Component {
     }
     // lifecycle method
     componentDidMount() {
-        const composantTitle = 'Contactez Nous - Ivemo';
+        const composantTitle = `Contactez Nous - ${$name_site}`;
         document.title = `${composantTitle}`;
     }
 

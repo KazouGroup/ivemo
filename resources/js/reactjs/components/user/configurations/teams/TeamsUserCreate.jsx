@@ -148,7 +148,7 @@ class TeamsUserCreate extends Component {
 
             <>
                 <Helmet>
-                    <title>Nouveau membre {`${this.state.full_name || " " }`} - Ivemo</title>
+                    <title>Nouveau membre {`${this.state.full_name || " " }`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">

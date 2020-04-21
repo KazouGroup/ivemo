@@ -244,7 +244,7 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Articles sur la locations {`${$userIvemo.first_name || 'Profile'}`} - Ivemo</title>
+                    <title>Articles sur la locations {`${$userIvemo.first_name || 'Profile'}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">

@@ -5,6 +5,7 @@ import { Button,Row } from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
+import LazyLoad from "react-lazyload";
 import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";
 import NavLinkPublicBlogannoncesUser from "./NavLinkPublicBlogannoncesUser";
 import NavLinkPublicAnnonceUser from "../../annonces/NavLinkPublicAnnonceUser";
@@ -111,7 +112,7 @@ class PublicUserBlogannonceVente extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Articles sur la locations {`${userblogventePublick.first_name || 'Profile'}`} - Ivemo</title>
+                    <title>Articles sur la locations {`${userblogventePublick.first_name || 'Profile'}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">

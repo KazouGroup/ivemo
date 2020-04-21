@@ -29,7 +29,7 @@ class FaqsIndexSite extends Component {
         return (
             <Fragment>
 
-                <Helmet title={`Questions fréquentes posées aux particuliers (FAQ) - Ivemo`}/>
+                <Helmet title={`Questions fréquentes posées aux particuliers (FAQ) - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">

@@ -24,7 +24,7 @@ $factory->define(annoncelocation::class, function (Faker $faker) {
         'annoncetype_id' => 1,
         'slug' => str_slug($title),
         'slugin' => Str::uuid(),
-        'description' => $faker->realText(rand(10000, 40000)),
+        'description' => $faker->realText(rand(100, 200)),
         'categoryannoncelocation_id' => categoryannoncelocation::inRandomOrder()->first()->id,
         'city_id' => city::inRandomOrder()->first()->id,
         'user_id' => user::inRandomOrder()->first()->id,

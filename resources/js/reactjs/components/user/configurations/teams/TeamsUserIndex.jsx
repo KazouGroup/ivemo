@@ -213,7 +213,7 @@ class TeamsUserIndex extends Component {
 
             <>
                 <Helmet>
-                    <title>Teams {`${$userIvemo.first_name}`} - Ivemo</title>
+                    <title>Teams {`${$userIvemo.first_name}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">

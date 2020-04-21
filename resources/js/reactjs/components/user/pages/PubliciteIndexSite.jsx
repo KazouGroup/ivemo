@@ -25,7 +25,7 @@ class PubliciteIndexSite extends Component {
         return (
             <Fragment>
 
-                <Helmet title={`Publicité sur la plate forme - Ivemo`}/>
+                <Helmet title={`Publicité sur la plate forme - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">

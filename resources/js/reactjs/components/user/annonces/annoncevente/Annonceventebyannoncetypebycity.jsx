@@ -315,7 +315,7 @@ class Annonceventebyannoncetypebycity extends Component {
         );
         return (
             <>
-                <Helmet title={`Ventes des maisons, villa, térrains et bien d'autres dans la ville de ${annonceventebycity.name || "Ivemo"} - Ivemo`}/>
+                <Helmet title={`Ventes des maisons, villa, térrains et bien d'autres dans la ville de ${annonceventebycity.name || $name_site} - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
 

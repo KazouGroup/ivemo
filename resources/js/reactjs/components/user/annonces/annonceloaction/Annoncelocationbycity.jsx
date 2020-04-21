@@ -323,7 +323,7 @@ class Annoncelocationbycity extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Locations {`${itemCategoryannoncelocation || "Ivemo"}`} dans la ville de {`${annoncelocationbycity.name || ""}`} - Ivemo</title>
+                    <title>Locations {`${itemCategoryannoncelocation || $name_site}`} dans la ville de {`${annoncelocationbycity.name || ""}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">

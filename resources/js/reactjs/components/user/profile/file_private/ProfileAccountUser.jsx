@@ -198,7 +198,7 @@ class ProfileAccountUser extends Component {
 
             <>
                 <Helmet>
-                    <title> {`${$userIvemo.first_name || "Profile"}`} - Ivemo</title>
+                    <title> {`${$userIvemo.first_name || "Profile"}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">

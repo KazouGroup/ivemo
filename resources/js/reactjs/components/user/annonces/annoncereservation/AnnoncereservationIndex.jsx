@@ -44,7 +44,7 @@ class AnnoncereservationIndex extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Reservez une chambre d'hotel, un appartement ou une villa - Ivemo</title>
+                    <title>Reservez une chambre d'hotel, un appartement ou une villa - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">

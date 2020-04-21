@@ -164,7 +164,7 @@ class PersonalmessagesfavoritecontactUser extends Component {
         return (
 
             <>
-                <Helmet title={`Messages suivis ${$userIvemo.first_name} - Ivemo`}/>
+                <Helmet title={`Messages suivis ${$userIvemo.first_name} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 

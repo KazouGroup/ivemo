@@ -162,7 +162,7 @@ class Annoncereservationbyannoncetypebycity extends Component {
         );
         return (
             <>
-                <Helmet title={`Locations d'appartements, villa, chambres et bien d'autres dans la ville de ${annoncereservationbycity.name || "Ivemo"} - Ivemo`}/>
+                <Helmet title={`Locations d'appartements, villa, chambres et bien d'autres dans la ville de ${annoncereservationbycity.name || $name_site} - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
 

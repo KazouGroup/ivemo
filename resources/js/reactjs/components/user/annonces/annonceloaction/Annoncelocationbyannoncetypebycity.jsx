@@ -317,7 +317,7 @@ class Annoncelocationbyannoncetypebycity extends Component {
         );
         return (
             <>
-                <Helmet title={`Locations d'appartements, villa, chambres et bien d'autres dans la ville de ${annoncelocationbycity.name || "Ivemo"} - Ivemo`}/>
+                <Helmet title={`Locations d'appartements, villa, chambres et bien d'autres dans la ville de ${annoncelocationbycity.name || $name_site} - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
 

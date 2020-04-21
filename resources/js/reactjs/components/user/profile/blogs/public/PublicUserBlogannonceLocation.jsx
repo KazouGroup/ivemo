@@ -114,7 +114,7 @@ class PublicUserBlogannonceLocation extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Articles sur la locations {`${userbloglocationPublick.first_name || 'Profile'}`} - Ivemo</title>
+                    <title>Articles sur la locations {`${userbloglocationPublick.first_name || 'Profile'}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">

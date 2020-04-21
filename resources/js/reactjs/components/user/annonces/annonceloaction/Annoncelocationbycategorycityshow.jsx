@@ -144,7 +144,7 @@ class Annoncelocationbycategorycityshow extends Component {
         const {annoncelocation} = this.state;
         return (
             <>
-                <Helmet title={`${annoncelocation.title || "Ivemo"} - Ivemo`}/>
+                <Helmet title={`${annoncelocation.title || $name_site} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 

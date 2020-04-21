@@ -35,7 +35,7 @@ class Annonceventebycategorycityshow extends Component {
         return (
             <>
                 <Helmet>
-                    <title>{`${annoncevente.title || "Ivemo"}`} - Ivemo</title>
+                    <title>{`${annoncevente.title || $name_site}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
