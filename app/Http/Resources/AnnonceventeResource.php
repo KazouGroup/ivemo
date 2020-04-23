@@ -23,6 +23,7 @@ class AnnonceventeResource extends JsonResource
             'rooms' => $this->rooms,
             'pieces' => $this->pieces,
             'price' => $this->price,
+            'district' => $this->district,
             'award_price' => $this->award_price,
             'user' => $this->user,
             'user_id' => $this->user_id,

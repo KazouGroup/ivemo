@@ -29,6 +29,7 @@ class AnnoncelocationEdit extends Component {
             surface: '',
             price: '',
             pieces: '',
+            district: '',
             rooms: '',
             description: '',
             city_id: '',
@@ -84,7 +85,7 @@ class AnnoncelocationEdit extends Component {
 
         let item = {
             title: this.state.title,
-            status: this.state.status,
+            surface: this.state.surface,
         };
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemannoncelocation = this.props.match.params.annoncelocation;
@@ -92,7 +93,7 @@ class AnnoncelocationEdit extends Component {
             .then(() => {
                 $.notify({
                         //,
-                        message: 'Votre article de blogs a bien été modifié'
+                        message: 'Votre annonce a bien été modifié'
                     },
                     {
                         allow_dismiss: false,
@@ -253,6 +254,7 @@ class AnnoncelocationEdit extends Component {
                 surface: response.data.surface,
                 price: response.data.price,
                 pieces: response.data.pieces,
+                district: response.data.district,
                 rooms: response.data.rooms,
                 description: response.data.description,
                 city_id: response.data.city_id,
@@ -386,7 +388,7 @@ class AnnoncelocationEdit extends Component {
                                                                                 </div>
 
                                                                                 <div className="row">
-                                                                                    <div className="col-md-6">
+                                                                                    <div className="col-md-4">
                                                                                         <label className="labels">
                                                                                             Quelle est le type de bien ?
                                                                                             <span className="text-danger">*</span>
@@ -403,7 +405,7 @@ class AnnoncelocationEdit extends Component {
                                                                                             {this.renderErrorFor('categoryannoncelocation_id')}
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div className="col-md-6">
+                                                                                    <div className="col-md-4">
                                                                                         <label className="labels">
                                                                                             Quelle est la ville du bien ?
                                                                                             <span className="text-danger">*</span>
@@ -418,6 +420,26 @@ class AnnoncelocationEdit extends Component {
                                                                                                 ))}
                                                                                             </select>
                                                                                             {this.renderErrorFor('city_id')}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        className="col-md-4">
+                                                                                        <label className="labels">
+                                                                                            Quelle est le quartier du bien?
+                                                                                            <span className="text-danger">*</span>
+                                                                                        </label>
+                                                                                        <div className="form-group">
+                                                                                            <Input id='district'
+                                                                                                   type='text'
+                                                                                                   className={`form-control ${this.hasErrorFor('district') ? 'is-invalid' : ''}`}
+                                                                                                   name='district'
+                                                                                                   placeholder="Quartier"
+                                                                                                   aria-label="Quartier"
+                                                                                                   autoComplete="Quartier"
+                                                                                                   value={this.state.district}
+                                                                                                   onChange={this.handleFieldChange}
+                                                                                            />
+                                                                                            {this.renderErrorFor('district')}
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>

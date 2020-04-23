@@ -11,6 +11,7 @@ use App\Model\categoryannoncelocation;
 use App\Model\user;
 use App\Services\BlogannoncelocationService;
 use Illuminate\Support\Facades\Auth;
+use Mews\Purifier\Facades\Purifier;
 use Symfony\Component\HttpFoundation\Response;
 use File;
 
@@ -187,6 +188,8 @@ class BlogannoncelocationController extends Controller
 
         $blogannoncelocation->fill($request->all());
 
+        $blogannoncelocation->description = clean($request->description);
+
         BlogannoncelocationService::storeUploadImage($request,$blogannoncelocation);
 
         $blogannoncelocation->save();
@@ -266,6 +269,7 @@ class BlogannoncelocationController extends Controller
 
         BlogannoncelocationService::updateUploadeImage($request,$blogannoncelocation);
 
+        $blogannoncelocation->description = clean($request->description);
         $blogannoncelocation->update($request->all());
 
         return response()->json($blogannoncelocation,200);

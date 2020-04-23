@@ -183,6 +183,7 @@ class BlogannoncereservationController extends Controller
         $blogannoncereservation= new blogannoncereservation();
 
         $blogannoncereservation->fill($request->all());
+        $blogannoncereservation->description = clean($request->description);
 
         BlogannoncereservationService::storeUploadImage($request,$blogannoncereservation);
 
@@ -266,6 +267,7 @@ class BlogannoncereservationController extends Controller
 
         BlogannoncereservationService::updateUploadeImage($request,$blogannoncereservation);
 
+        $blogannoncereservation->description = clean($request->description);
         $blogannoncereservation->update($request->all());
 
         return response()->json($blogannoncereservation,200);

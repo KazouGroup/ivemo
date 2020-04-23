@@ -5,6 +5,7 @@ use App\Model\annoncereservation;
 use App\Model\annoncevente;
 use App\Model\contactuser;
 use App\Model\contactuserslocation;
+use App\Model\contactusersreservation;
 use App\Model\contactusersvente;
 use App\Model\imagereservation;
 use App\Model\reservation;
@@ -28,6 +29,7 @@ class AnnonceSeeder extends Seeder
         factory(imagereservation::class, 500)->create();
         factory(contactuser::class, 100)->create();
         factory(contactuserslocation::class, 100)->create();
+        factory(contactusersreservation::class, 200)->create();
         factory(contactusersvente::class, 100)->create();
         factory(subscriber::class, 10)->create();
         factory(subscriberuser::class, 10)->create();

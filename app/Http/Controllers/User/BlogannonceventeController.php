@@ -173,6 +173,7 @@ class BlogannonceventeController extends Controller
         $blogannoncevente= new blogannoncevente();
 
         $blogannoncevente->fill($request->all());
+        $blogannoncevente->description = clean($request->description);
 
         BlogannonceventeService::storeUploadImage($request,$blogannoncevente);
 
@@ -225,6 +226,7 @@ class BlogannonceventeController extends Controller
 
         BlogannonceventeService::updateUploadeImage($request,$blogannoncevente);
 
+        $blogannoncevente->description = clean($request->description);
         $blogannoncevente->update($request->all());
 
         return response()->json($blogannoncevente,200);

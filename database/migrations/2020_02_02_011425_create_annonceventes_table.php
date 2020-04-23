@@ -20,6 +20,7 @@ class CreateAnnonceventesTable extends Migration
             $table->string('slug')->nullable();
             $table->string('slugin')->nullable();
             $table->string('district')->nullable();
+            $table->string('ip')->nullable();
             $table->integer('surface')->nullable();
             $table->integer('rooms')->nullable();
             $table->integer('pieces')->nullable();
@@ -32,6 +33,7 @@ class CreateAnnonceventesTable extends Migration
             $table->unsignedBigInteger('photo_id')->nullable()->index();
             $table->unsignedBigInteger('member_id')->nullable()->index();
             $table->unsignedBigInteger('city_id')->nullable()->index();
+
             $table->unsignedBigInteger('user_id')->nullable()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 

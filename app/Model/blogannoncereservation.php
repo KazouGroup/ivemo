@@ -23,6 +23,10 @@ class blogannoncereservation extends Model
                 $model->slugin = $myslug;
             }
         });
+
+        static::updating(function($model){
+            $model->ip = request()->ip();
+        });
     }
 
     public function getRouteKeyName()

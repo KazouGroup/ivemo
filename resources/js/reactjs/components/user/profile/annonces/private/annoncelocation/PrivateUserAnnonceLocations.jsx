@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Button, UncontrolledTooltip } from "reactstrap";
-import NavUserSite from "../../../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
-import AnnonceslocationList from "../../../annonces/annonceloaction/inc/AnnonceslocationList";
+import NavUserSite from "../../../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../../../inc/user/FooterBigUserSite";
+import AnnonceslocationList from "../../../../annonces/annonceloaction/inc/AnnonceslocationList";
 import Swal from "sweetalert2";
-import NavlinkconfigurationUser from "../../../configurations/inc/NavlinkconfigurationUser";
+import NavlinkconfigurationUser from "../../../../configurations/inc/NavlinkconfigurationUser";
+import LinkValicationEmail from "../../../../../inc/user/LinkValicationEmail";
+import Navannoncelocationsbyuser from "../../../../annonces/annonceloaction/inc/Navannoncelocationsbyuser";
 
 
 class PrivateUserAnnonceLocations extends Component {
@@ -217,7 +219,7 @@ class PrivateUserAnnonceLocations extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Annonces locations {`${$userIvemo.first_name}`} - Ivemo</title>
+                    <title>Annonces locations {`${$userIvemo.first_name}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
@@ -244,11 +246,32 @@ class PrivateUserAnnonceLocations extends Component {
                                             </NavLink>
                                         </div>
 
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+
+                                                            <Navannoncelocationsbyuser/>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <NavlinkconfigurationUser {...userannoncelocations} />
 
                                     </div>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
 
                                         {mapAnnoncelocations}
 

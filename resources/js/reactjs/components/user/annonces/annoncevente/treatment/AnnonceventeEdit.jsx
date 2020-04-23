@@ -18,6 +18,7 @@ class AnnonceventeEdit extends Component {
         this.activeItem = this.activeItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
+        this.handleChangeBody = this.handleChangeBody.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
@@ -29,6 +30,7 @@ class AnnonceventeEdit extends Component {
             surface: '',
             price: '',
             pieces: '',
+            district: '',
             rooms: '',
             description: '',
             city_id: '',
@@ -55,6 +57,12 @@ class AnnonceventeEdit extends Component {
         ];
 
 
+    }
+
+    // Handle Change
+    handleChangeBody(value) {
+        this.setState({ description: value });
+        document.querySelector('.editor-control').classList.remove('is-invalid');
     }
 
     handleFieldChange(event) {
@@ -84,7 +92,14 @@ class AnnonceventeEdit extends Component {
 
         let item = {
             title: this.state.title,
-            status: this.state.status,
+            description: this.state.description,
+            district: this.state.district,
+            surface: this.state.surface,
+            rooms: this.state.rooms,
+            pieces: this.state.pieces,
+            price: this.state.price,
+            city_id: this.state.city_id,
+            categoryannoncevente_id: this.state.categoryannoncevente_id,
         };
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemannoncevente = this.props.match.params.annoncevente;
@@ -92,7 +107,7 @@ class AnnonceventeEdit extends Component {
             .then(() => {
                 $.notify({
                         //,
-                        message: 'Votre article de blogs a bien été modifié'
+                        message: 'Votre annonce a bien été mise à jour'
                     },
                     {
                         allow_dismiss: false,
@@ -109,6 +124,14 @@ class AnnonceventeEdit extends Component {
             }).catch(error => {
             this.setState({
                 errors: error.response.data.errors
+            });
+            $.notify("Ooop! Something wrong. Try later...", {
+                allow_dismiss: false,
+                type: 'danger',
+                animate: {
+                    enter: 'animated bounceInDown',
+                    exit: 'animated bounceOutUp'
+                }
             });
         })
     }
@@ -188,7 +211,7 @@ class AnnonceventeEdit extends Component {
                     },
                 });
             /** End alert ***/
-            this.loadItems();
+            this.props.history.goBack();
         }).catch(() => {
             //Failled message
             $.notify("Ooop! Something wrong. Try later", {
@@ -205,7 +228,7 @@ class AnnonceventeEdit extends Component {
     unactiveItem(id){
         console.log(id);
         //Envoyer la requet au server
-        let url = route('annonces_ventes_unactivated.site',[id]);
+        let url = route('annonces_ventes_unactivated.site',id);
         dyaxios.get(url).then(() => {
 
             /** Alert notify bootstrapp **/
@@ -226,7 +249,7 @@ class AnnonceventeEdit extends Component {
                     },
                 });
             /** End alert ***/
-            this.loadItems();
+            this.props.history.goBack();
         }).catch(() => {
             //Failled message
             $.notify("Ooop! Something wrong. Try later", {
@@ -252,6 +275,7 @@ class AnnonceventeEdit extends Component {
                 status: response.data.status,
                 surface: response.data.surface,
                 price: response.data.price,
+                district: response.data.district,
                 pieces: response.data.pieces,
                 rooms: response.data.rooms,
                 description: response.data.description,
@@ -297,7 +321,7 @@ class AnnonceventeEdit extends Component {
                                         <div className="col-lg-8 col-md-12 mx-auto">
                                             <div className="submit text-left">
                                                 <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
-                                                    <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos blogs </b>
+                                                    <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos annonces </b>
                                                 </button>
                                             </div>
                                             <div className="card">
@@ -384,9 +408,9 @@ class AnnonceventeEdit extends Component {
                                                                                 </div>
 
                                                                                 <div className="row">
-                                                                                    <div className="col-md-6">
+                                                                                    <div className="col-md-4">
                                                                                         <label className="labels">
-                                                                                            Quelle est le type de bien ?
+                                                                                            Type de bien ?
                                                                                             <span className="text-danger">*</span>
                                                                                         </label>
                                                                                         <div className="form-group">
@@ -401,9 +425,9 @@ class AnnonceventeEdit extends Component {
                                                                                             {this.renderErrorFor('categoryannoncevente_id')}
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div className="col-md-6">
+                                                                                    <div className="col-md-4">
                                                                                         <label className="labels">
-                                                                                            Quelle est la ville du bien ?
+                                                                                            Ville du bien ?
                                                                                             <span className="text-danger">*</span>
                                                                                         </label>
                                                                                         <div className="form-group">
@@ -416,6 +440,26 @@ class AnnonceventeEdit extends Component {
                                                                                                 ))}
                                                                                             </select>
                                                                                             {this.renderErrorFor('city_id')}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        className="col-md-4">
+                                                                                        <label className="labels">
+                                                                                            Quartier du bien?
+                                                                                            <span className="text-danger">*</span>
+                                                                                        </label>
+                                                                                        <div className="form-group">
+                                                                                            <Input id='district'
+                                                                                                   type='text'
+                                                                                                   className={`form-control ${this.hasErrorFor('district') ? 'is-invalid' : ''}`}
+                                                                                                   name='district'
+                                                                                                   placeholder="Quartier"
+                                                                                                   aria-label="Quartier"
+                                                                                                   autoComplete="Quartier"
+                                                                                                   value={this.state.district}
+                                                                                                   onChange={this.handleFieldChange}
+                                                                                            />
+                                                                                            {this.renderErrorFor('district')}
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -460,6 +504,7 @@ class AnnonceventeEdit extends Component {
                                                                                         <div className="form-group">
                                                                                             <Input id='surface'
                                                                                                    type='number'
+                                                                                                   maxLength="6"
                                                                                                    className={`form-control ${this.hasErrorFor('surface') ? 'is-invalid' : ''}`}
                                                                                                    name='surface'
                                                                                                    placeholder="Surface"
@@ -479,6 +524,7 @@ class AnnonceventeEdit extends Component {
                                                                                         <div className="form-group">
                                                                                             <Input id='pieces'
                                                                                                    type='number'
+                                                                                                   maxLength="3"
                                                                                                    className={`form-control ${this.hasErrorFor('pieces') ? 'is-invalid' : ''}`}
                                                                                                    name='pieces'
                                                                                                    placeholder="Pièces"
@@ -497,6 +543,7 @@ class AnnonceventeEdit extends Component {
                                                                                         <div className="form-group">
                                                                                             <Input id='rooms'
                                                                                                    type='number'
+                                                                                                   maxLength="3"
                                                                                                    className={`form-control ${this.hasErrorFor('rooms') ? 'is-invalid' : ''}`}
                                                                                                    name='rooms'
                                                                                                    placeholder="Chambres"

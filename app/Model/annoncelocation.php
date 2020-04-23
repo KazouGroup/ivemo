@@ -21,15 +21,12 @@ class annoncelocation extends Model
             if (auth()->check()){
                 $model->user_id = auth()->id();
                 $model->slugin = $myslug;
+                $model->ip = request()->ip();
             }
         });
 
         static::updating(function($model){
-            $myslug = Str::uuid();
-            if (auth()->check()){
-                $model->user_id = auth()->id();
-                $model->slugin = $myslug;
-            }
+            $model->ip = request()->ip();
         });
     }
 

@@ -61,7 +61,7 @@ class ContactFromFaqAndOderPageIndex extends Component {
             .then(() => {
 
                 $.notify({
-                        message: `Votre message a été bien envoyé chez Ivemo`
+                        message: `Votre message a été bien envoyé chez ${$name_site}`
                     },
                     {
                         allow_dismiss: false,

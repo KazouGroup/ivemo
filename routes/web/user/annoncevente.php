@@ -26,6 +26,16 @@ Route::get(
 )->name('annonces_ventes_unactivated.site');
 
 Route::get(
+    'annonces_ventes_admin_active/{id}',
+    'AnnonceventeController@adminactivated'
+)->name('annonces_ventes_admin_active.dashboard');
+
+Route::get(
+    'annonces_ventes_admin_unactive/{id}',
+    'AnnonceventeController@adminunactivated'
+)->name('annonces_ventes_admin_unactivated.dashboard');
+
+Route::get(
     'annonces_ventes/{annoncetype}/{categoryannoncevente}',
     'AnnonceventeController@annonceventebycategoryannoncevente'
 )->name('annonceventebycategoryannonceventes_site');
@@ -41,9 +51,19 @@ Route::get(
 )->name('api.annoncesventesbyuser_site');
 
 Route::get(
+    'api/profile/{user}/personal_settings/annonces_ventes/{categoryannoncevente}',
+    'AnnonceventeController@apiannoncesventesbyusercategoryannoncevente'
+)->name('api.annoncesventesbyusercategoryannoncevente_site');
+
+Route::get(
     'profile/{user}/personal_settings/annonces_ventes',
     'AnnonceventeController@annoncesventesbyuser'
 )->name('annoncesventesbyuser_site');
+
+Route::get(
+    'profile/{user}/personal_settings/annonces_ventes/{categoryannoncevente}',
+    'AnnonceventeController@annoncesventesbyusercategory'
+)->name('annoncesventesbyusercategory_site');
 
 Route::get(
     'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}/{annoncevente}',

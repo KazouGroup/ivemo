@@ -171,6 +171,38 @@
                 </li>
 
                 <li>
+                    <a data-toggle="collapse" href="#contactsExamples">
+                        <i class="now-ui-icons ui-1_email-85"></i>
+                        <p>
+                            Contacts
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse " id="contactsExamples">
+                        <ul class="nav">
+                            <li>
+                                <router-link :to="{ name: 'contactusersfaqs.index'}">
+                                    <span class="sidebar-mini-icon">CF</span>
+                                    <span class="sidebar-normal"> Contacts Faqs </span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{ name: 'blogannoncereservations.dashboard'}">
+                                    <span class="sidebar-mini-icon">ARS</span>
+                                    <span class="sidebar-normal"> Articles blogs reservations </span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{ name: 'blogannonceventes.dashboard'}">
+                                    <span class="sidebar-mini-icon">AVS</span>
+                                    <span class="sidebar-normal"> Articles blogs ventes </span>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
                     <a data-toggle="collapse" href="#adminExamples">
                         <i class="now-ui-icons loader_gear"></i>
                         <p>

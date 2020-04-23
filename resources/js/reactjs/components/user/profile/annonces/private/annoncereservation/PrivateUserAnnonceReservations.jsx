@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Button, UncontrolledTooltip } from "reactstrap";
-import NavUserSite from "../../../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
-import AnnonceslocationList from "../../../annonces/annonceloaction/inc/AnnonceslocationList";
+import NavUserSite from "../../../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../../../inc/user/FooterBigUserSite";
+import AnnonceslocationList from "../../../../annonces/annonceloaction/inc/AnnonceslocationList";
 import Swal from "sweetalert2";
-import NavlinkconfigurationUser from "../../../configurations/inc/NavlinkconfigurationUser";
-import AnnoncereservationList from "../../../annonces/annoncereservation/inc/AnnoncereservationList";
+import NavlinkconfigurationUser from "../../../../configurations/inc/NavlinkconfigurationUser";
+import AnnoncereservationList from "../../../../annonces/annoncereservation/inc/AnnoncereservationList";
 
 
 class PrivateUserAnnonceReservations extends Component {
@@ -218,7 +218,7 @@ class PrivateUserAnnonceReservations extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Annonces locations {`${$userIvemo.first_name}`} - Ivemo</title>
+                    <title>Annonces locations {`${$userIvemo.first_name}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">

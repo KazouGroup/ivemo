@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import NavUserSite from "../../../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
+import NavUserSite from "../../../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
-import NavlinkconfigurationUser from "../../../configurations/inc/NavlinkconfigurationUser";
-import AnnonceventeList from "../../../annonces/annoncevente/inc/AnnonceventeList";
+import NavlinkconfigurationUser from "../../../../configurations/inc/NavlinkconfigurationUser";
+import AnnonceventeList from "../../../../annonces/annoncevente/inc/AnnonceventeList";
+import LinkValicationEmail from "../../../../../inc/user/LinkValicationEmail";
+import Navannonceventesbyuser from "../../../../annonces/annoncevente/inc/Navannonceventesbyuser";
 
 
-class PrivateUserAnnonceVentes extends Component {
+class PrivateUserAnnonceVentesByCategory extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -44,7 +46,7 @@ class PrivateUserAnnonceVentes extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('annonces_reservations_active.site', id);
+                let url = route('annonces_ventes_active.site', id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
@@ -98,7 +100,7 @@ class PrivateUserAnnonceVentes extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('annonces_reservations_unactivated.site', id);
+                let url = route('annonces_ventes_unactivated.site', id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
@@ -151,7 +153,7 @@ class PrivateUserAnnonceVentes extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('annonces_reservations_delete.site', [id]);
+                const url = route('annonces_ventes_delete.site', [id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
@@ -192,7 +194,8 @@ class PrivateUserAnnonceVentes extends Component {
 
     loadItems() {
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.annoncesventesbyuser_site', [itemuser])).then(response => this.setState({ userannonceventes: response.data, }));
+        let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
+        dyaxios.get(route('api.annoncesventesbyusercategoryannoncevente_site', [itemuser,itemCategoryannoncevente])).then(response => this.setState({ userannonceventes: response.data, }));
     }
 
 
@@ -216,7 +219,7 @@ class PrivateUserAnnonceVentes extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Annonces locations {`${$userIvemo.first_name}`} - Ivemo</title>
+                    <title>Annonces locations {`${$userIvemo.first_name}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
@@ -242,11 +245,37 @@ class PrivateUserAnnonceVentes extends Component {
                                             </NavLink>
                                         </div>
 
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+
+                                                            <Navannonceventesbyuser/>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <NavlinkconfigurationUser {...userannonceventes} />
 
                                     </div>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+                                        <div className="submit text-left">
+                                            <Link to={`/profile/${$userIvemo.slug}/personal_settings/annonces_ventes/`} className="btn btn-neutral btn-sm">
+                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos annonces</b>
+                                            </Link>
+                                        </div>
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
 
                                         {mapAnnonceventes}
 
@@ -284,4 +313,4 @@ class PrivateUserAnnonceVentes extends Component {
     }
 }
 
-export default PrivateUserAnnonceVentes;
+export default PrivateUserAnnonceVentesByCategory;

@@ -11,8 +11,7 @@ class BaseRequest extends Request
     /**
      * Return the array of validation rules for the given group.
      *
-     * @param string $group The group name: 'store' or 'update'.
-     * @param object $partner The partner object or null if the group is 'store'.
+     * @param string $group The group name: 'public_profile_send_message','sendcontactmessageuser','contactusersfaqs'.
      * @return array
      */
     protected function getRules($group)

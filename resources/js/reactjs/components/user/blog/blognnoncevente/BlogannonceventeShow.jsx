@@ -156,16 +156,16 @@ class BlogannonceventeShow extends Component {
                                                                                 <UncontrolledTooltip placement="bottom" target="TooltipEdit">
                                                                                     Editer cet article
                                                                                 </UncontrolledTooltip>
-                                                                                <NavLink to={`/blogs/annonce_ventes/${blogannoncevente.slugin}/edit/`} className="btn btn-outline-info btn-sm" id="TooltipEdit">
-                                                                                    <i className="now-ui-icons ui-2_settings-90" /> editer
+                                                                                <NavLink to={`/blogs/annonce_ventes/${blogannoncevente.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" id="TooltipEdit">
+                                                                                    <i className="now-ui-icons ui-2_settings-90" />
                                                                                 </NavLink>
                                                                                 <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
                                                                                     Supprimer cette annonce
                                                                                 </UncontrolledTooltip>
                                                                                 <Button
-                                                                                    className="btn btn-outline-danger btn-sm" onClick={() => this.deleteItem(blogannoncevente.id)} color="secondary" id="TooltipDelete">
-                                                                                    <i className="now-ui-icons ui-1_simple-remove" /> supprimer
-                                                                                </Button>{" "}
+                                                                                    className="btn btn-sm btn-icon btn-danger" onClick={() => this.deleteItem(blogannoncevente.id)} color="secondary" id="TooltipDelete">
+                                                                                    <i className="now-ui-icons ui-1_simple-remove" />
+                                                                                </Button>
                                                                             </div>
                                                                         </Fragment>
                                                                     )}

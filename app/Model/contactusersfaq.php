@@ -24,12 +24,12 @@ class contactusersfaq extends Model
 
     public function categoryuser()
     {
-        return $this->belongsTo(categoryuser::class);
+        return $this->belongsTo(categoryuser::class,'categoryuser_id');
     }
 
     public function categoryobjet()
     {
-        return $this->belongsTo(categoryobjet::class);
+        return $this->belongsTo(categoryobjet::class,'categoryobjet_id');
     }
 
     public function getRouteKeyName()

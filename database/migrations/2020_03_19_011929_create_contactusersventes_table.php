@@ -23,6 +23,7 @@ class CreateContactusersventesTable extends Migration
             $table->boolean('status_red')->default(true);
             $table->string('phone')->nullable();
             $table->string('ip')->nullable();
+            $table->boolean('confirm_send')->nullable();
             $table->mediumText('subject')->nullable();
             $table->longText('message')->nullable();
             $table->timestamps();

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Pages;
+namespace App\Http\Controllers\Admin\Contacts;
 
 use App\Http\Controllers\Controller;
 use App\Model\contactusersadvert;

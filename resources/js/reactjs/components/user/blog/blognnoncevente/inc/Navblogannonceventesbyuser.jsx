@@ -35,7 +35,7 @@ class Navblogannonceventesbyuser extends Component {
             <div className="card card-plain">
                 <div className="card-header" role="tab" id="headingArticle">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseArticle" aria-expanded="true" aria-controls="collapseArticle">
-                        <b>Rubriques reservation</b>
+                        <b>Rubriques vente</b>
                     </a>
                 </div>
                 <div id="collapseArticle" className="collapse show" role="tabpanel" aria-labelledby="headingArticle">

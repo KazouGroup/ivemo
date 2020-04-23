@@ -14,6 +14,8 @@ Route::group(['middleware' => 'auth:web'], function(){
 
         require(__DIR__ . DIRECTORY_SEPARATOR . 'blog'. DIRECTORY_SEPARATOR . 'index.php');
 
+        require(__DIR__ . DIRECTORY_SEPARATOR . 'contacts'. DIRECTORY_SEPARATOR . 'index.php');
+
         /** C'est route son dans le directory pages */
         require(__DIR__ . DIRECTORY_SEPARATOR . 'pages'. DIRECTORY_SEPARATOR . 'index.php');
 

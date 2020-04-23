@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Annonces\Annoncevente\UpdateRequest;
 use App\Http\Resources\AnnonceventeResource;
 use App\Http\Resources\CategoryannonceventeResource;
 use App\Http\Resources\CityResource;
@@ -20,8 +21,10 @@ class AnnonceventeController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['only' => [
-            'create', 'store', 'edit', 'update', 'destroy','apiannoncesventesbyuser','annoncesventesbyuser',
-            'activated', 'unactivated','apiannonceventesbyannoncetypebyannoncevente',
+            'create', 'store', 'edit', 'update', 'destroy','adminunactivated','adminactivated',
+            'apiannoncesventesbyuser','annoncesventesbyuser','annoncesventesbyusercategory',
+            'apiannoncesventesbyusercategoryannoncevente', 'activated',
+            'unactivated','apiannonceventesbyannoncetypebyannoncevente',
         ]]);
     }
 
@@ -267,6 +270,17 @@ class AnnonceventeController extends Controller
         return response()->json($categoryannonceventes, 200);
     }
 
+    public function apiannoncesventesbyusercategoryannoncevente(user $user,categoryannoncevente $categoryannoncevente)
+    {
+        if (auth()->user()->id === $user->id){
+            $annonceventes = AnnonceventeService::apiannoncesventesbyusercategoryannoncevente($user,$categoryannoncevente);
+
+            return response()->json($annonceventes, 200);
+        }else{
+            abort(404);
+        }
+    }
+
     public function apiannoncesventesbyuser(user $user)
     {
         if (auth()->user()->id === $user->id){
@@ -290,6 +304,13 @@ class AnnonceventeController extends Controller
 
     }
 
+    public function annoncesventesbyusercategory(user $user,categoryannoncevente $categoryannoncevente)
+    {
+        return view('user.profile.annonces.privateprofilannonceventescategory',[
+            'categoryannoncevente' => $categoryannoncevente,
+        ]);
+    }
+
     public function activated($id)
     {
         $annoncevente = annoncevente::where('id', $id)->findOrFail($id);
@@ -309,6 +330,7 @@ class AnnonceventeController extends Controller
     public function unactivated($id)
     {
         $annoncevente = annoncevente::where('id', $id)->findOrFail($id);
+
         $this->authorize('update',$annoncevente);
 
         if(auth()->user()->id === $annoncevente->user_id){
@@ -318,6 +340,25 @@ class AnnonceventeController extends Controller
         }else{
             abort(404);
         }
+    }
+
+    public function adminactivated($id)
+    {
+        $annoncevente = annoncevente::where('id', $id)->findOrFail($id);
+
+        $annoncevente->update(['status' => 1,'member_id' => auth()->user()->id]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+    }
+
+    public function adminunactivated($id)
+    {
+        $annoncevente = annoncevente::where('id', $id)->findOrFail($id);
+
+        $annoncevente->update(['status_admin' => 0,'member_id' => auth()->user()->id]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+
     }
 
     /**
@@ -364,12 +405,22 @@ class AnnonceventeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  string  $blogannoncevente
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request,annoncetype $annoncetype, $annoncevente)
     {
-        //
+        $annoncevente = annoncevente::whereSlugin($annoncevente)->firstOrFail();
+
+        $this->authorize('update',$annoncevente);
+
+
+        $annoncevente->description = clean($request->description);
+
+        $annoncevente->update($request->all());
+
+        return response()->json($annoncevente,200);
+
     }
 
     /**
