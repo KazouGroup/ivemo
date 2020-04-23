@@ -75,29 +75,23 @@ class BlogannonceventeList extends Component {
                                                 {this.props.status ?
                                                     <>
                                                         <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}
-                                                                className="btn btn-success btn-icon btn-sm">
+                                                                className="btn btn-success btn-icon btn-sm" title="Desactiver l'article">
                                                             <i className="now-ui-icons ui-1_check"/>
                                                         </button>
                                                     </>
                                                     :
                                                     <>
                                                         <button type="button" onClick={() => this.props.activeItem(this.props.id)}
-                                                                className="btn btn-primary btn-icon btn-sm">
+                                                                className="btn btn-primary btn-icon btn-sm" title="Activer l'article">
                                                             <i className="now-ui-icons ui-1_simple-delete"/>
                                                         </button>
                                                     </>
                                                 }
-                                                <UncontrolledTooltip placement="bottom" target="TooltipEdit">
-                                                    Editer l'article
-                                                </UncontrolledTooltip>
-                                                <NavLink to={`/blogs/annonce_ventes/${this.props.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" id="TooltipEdit">
+                                                <NavLink to={`/blogs/annonce_ventes/${this.props.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" title=" Editer l'article">
                                                     <i className="now-ui-icons ui-2_settings-90"/>
                                                 </NavLink>
-                                                <UncontrolledTooltip placement="bottom" target="TooltipDelete">
-                                                    Supprimer cette article
-                                                </UncontrolledTooltip>
                                                 <Button
-                                                    className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} id="TooltipDelete">
+                                                    className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} title="Supprimer cette article">
                                                     <i className="now-ui-icons ui-1_simple-remove"/>
                                                 </Button>{" "}
                                             </div>

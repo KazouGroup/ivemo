@@ -74,12 +74,12 @@ Route::group(['prefix' => 'blogs'], function () {
     )->name('blogannoncecategoryventeupdate_site');
 
     Route::get(
-        'annonce_ventes_activated/{id}',
+        'annonce_ventes_activated/{blogannoncevente}',
         'BlogannonceventeController@activated'
     )->name('blogannoncecategoryventeactivated_site');
 
     Route::get(
-        'annonce_ventes_unactivated/{id}',
+        'annonce_ventes_unactivated/{blogannoncevente}',
         'BlogannonceventeController@unactivated'
     )->name('blogannoncecategoryventeunactivated_site');
 

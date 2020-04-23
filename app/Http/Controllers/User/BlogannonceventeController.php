@@ -233,9 +233,9 @@ class BlogannonceventeController extends Controller
     }
 
 
-    public function activated($id)
+    public function activated($blogannoncevente)
     {
-        $blogannoncevente = blogannoncevente::where('id', $id)->findOrFail($id);
+        $blogannoncevente = blogannoncevente::where('id', $blogannoncevente)->findOrFail($blogannoncevente);
 
         $this->authorize('update',$blogannoncevente);
 
@@ -249,9 +249,9 @@ class BlogannonceventeController extends Controller
         }
     }
 
-    public function unactivated($id)
+    public function unactivated($blogannoncevente)
     {
-        $blogannoncevente = blogannoncevente::where('id', $id)->findOrFail($id);
+        $blogannoncevente = blogannoncevente::where('id', $blogannoncevente)->findOrFail($blogannoncevente);
 
         $this->authorize('update',$blogannoncevente);
 

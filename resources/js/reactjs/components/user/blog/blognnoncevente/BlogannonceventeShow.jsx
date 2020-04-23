@@ -140,7 +140,7 @@ class BlogannonceventeShow extends Component {
                                                                              alt={blogannoncevente.user.first_name}
                                                                              className="avatar" />
                                                                     </NavLink>
-                                                                    : <Skeleton circle={false} height={40} width={80} />}
+                                                                    : <Skeleton height={40} width={80} />}
                                                                 <div className="mx-3">
                                                                     <NavLink to={`/@${blogannoncevente.user.slug}/blogs/annonce_ventes/`} className="text-dark font-weight-600 text-sm"><b>{blogannoncevente.user.first_name || <Skeleton width={35} />}</b>
                                                                         <small className="d-block text-muted">{moment(blogannoncevente.created_at).fromNow()}</small>
