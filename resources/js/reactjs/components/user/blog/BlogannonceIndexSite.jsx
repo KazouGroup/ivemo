@@ -121,6 +121,7 @@ class BlogannonceIndexSite extends Component {
                                             </>
                                         )}
 
+                                        {/* Blog des annonces locations */}
                                         {blogannoncelocations.length >= 0 && (
                                             <div className="row d-flex align-items-end">
                                                 <div className="col-md-12 mx-auto">
@@ -139,34 +140,46 @@ class BlogannonceIndexSite extends Component {
                                             </div>
                                         )}
 
-
-                                        <div className="row d-flex align-items-end">
-                                            <div className="col-md-12 mx-auto">
-                                                <h5 className="title">Blog sur les annonces reservations </h5>
+                                        {/* Blog des annonces reservations */}
+                                        {blogannoncereservations.length >=0 && (
+                                            <div className="row d-flex align-items-end">
+                                                <div className="col-md-12 mx-auto">
+                                                    <h5 className="title">Blog sur les annonces reservations </h5>
+                                                </div>
                                             </div>
+                                        )}
 
-                                        </div>
 
                                         {mapAnnoncereservations}
-                                        <div className="text-center">
-                                            <Link to={`/blogs/annonce_reservations/`} className="btn btn-danger btn-lg">
-                                                <b>Voir plus d'articles</b>
-                                            </Link>
-                                        </div>
 
-                                        <div className="row d-flex align-items-end">
-                                            <div className="col-md-12 mx-auto">
-                                                <h5 className="title">Blog sur les annonces ventes </h5>
+                                        {blogannoncereservations.length >= 0 && (
+                                            <div className="text-center">
+                                                <Link to={`/blogs/annonce_reservations/`} className="btn btn-danger btn-lg">
+                                                    <b>Voir plus d'articles</b>
+                                                </Link>
                                             </div>
+                                        )}
 
-                                        </div>
+                                        {/* Blog des annonces ventes */}
+                                        {blogannonceventes.length >= 0 && (
+                                            <div className="row d-flex align-items-end">
+                                                <div className="col-md-12 mx-auto">
+                                                    <h5 className="title">Blog sur les annonces ventes </h5>
+                                                </div>
+                                            </div>
+                                        )}
+
 
                                         {mapBlogannonceventes}
-                                        <div className="text-center">
-                                            <Link to={`/blogs/annonce_ventes/`} className="btn btn-danger btn-lg">
-                                                <b>Voir plus d'articles</b>
-                                            </Link>
-                                        </div>
+
+                                        {blogannonceventes.length >= 0 &&(
+                                            <div className="text-center">
+                                                <Link to={`/blogs/annonce_ventes/`} className="btn btn-danger btn-lg">
+                                                    <b>Voir plus d'articles</b>
+                                                </Link>
+                                            </div>
+                                        )}
+
 
                                     </div>
 
