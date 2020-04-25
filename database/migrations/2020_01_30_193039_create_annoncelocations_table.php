@@ -18,6 +18,7 @@ class CreateAnnoncelocationsTable extends Migration
             $table->string('title')->nullable();
             $table->longText('description')->nullable();
             $table->string('slug')->nullable();
+            $table->string('ip')->nullable();
             $table->string('slugin')->nullable();
             $table->string('district')->nullable();
             $table->integer('surface')->nullable();
