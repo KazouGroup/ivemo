@@ -8,7 +8,7 @@ class Categoriesannoncereselocation extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            categoryannoncelocations : [],
+            categoryannoncelocations : {user:[]},
         }
     }
 
@@ -30,7 +30,7 @@ class Categoriesannoncereselocation extends PureComponent {
 
     render() {
         const {categoryannoncelocations} = this.state;
-        const mapCategoryannoncelocations = categoryannoncelocations.length ? (
+        const mapCategoryannoncelocations = categoryannoncelocations.length >= 0 ? (
             categoryannoncelocations.map(item => {
                 return(
                     <tr key={item.id}>

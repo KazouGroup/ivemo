@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
+import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 
 
 class Annoncelocationbycity extends Component {
@@ -24,8 +25,8 @@ class Annoncelocationbycity extends Component {
             object: 'Annonce double',
             errors: [],
             annonceItem: {user:[]},
-            annoncelocationbycity: {annoncelocations:[]},
-            cityannoncelocations:[],
+            annoncelocationbycity: {annoncelocations:{categoryannoncelocation:[],city:[],user:[]}},
+            cityannoncelocations:{user:[]},
 
         };
         this.deleteItem = this.deleteItem.bind(this);
@@ -320,6 +321,15 @@ class Annoncelocationbycity extends Component {
         const {annoncelocationbycity,cityannoncelocations,annonceItem} = this.state;
         const allannoncelocationbycity = annoncelocationbycity.annoncelocations;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
+        const mapAnnoncelocations = allannoncelocationbycity.length >= 0 ? (
+            allannoncelocationbycity.map(item => {
+                return(
+                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser}/>
+                )
+            })
+        ):(
+            <AnnoncesListSkeleton/>
+        );
         return (
             <>
                 <Helmet>
@@ -358,15 +368,7 @@ class Annoncelocationbycity extends Component {
                                             </>
                                         )}
 
-                                        {allannoncelocationbycity.length >= 0 && (
-                                            <>
-
-                                                {allannoncelocationbycity.map((item) => (
-                                                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser}/>
-                                                ))}
-
-                                            </>
-                                        )}
+                                        {mapAnnoncelocations}
 
 
                                     </div>
@@ -400,7 +402,7 @@ class Annoncelocationbycity extends Component {
                                                                         <table>
                                                                             <tbody>
 
-                                                                            {cityannoncelocations.length ?
+                                                                            {cityannoncelocations.length >= 0 ?
                                                                                 <>
                                                                                     {cityannoncelocations.map((item) => (
                                                                                         <tr key={item.id}>

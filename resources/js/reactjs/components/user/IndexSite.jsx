@@ -6,6 +6,7 @@ import FooterBigUserSite from "../inc/user/FooterBigUserSite";
 import SectionLocationbyCity from "../inc/user/section_indexsite/SectionLocationbyCity";
 import SectionReservationbyCity from "../inc/user/section_indexsite/SectionReservationbyCity";
 import SectionVentebyCity from "../inc/user/section_indexsite/SectionVentebyCity";
+import SectionBlogannonce from "../inc/user/section_indexsite/SectionBlogannonce";
 
 
 class IndexSite extends Component {
@@ -125,7 +126,7 @@ class IndexSite extends Component {
                             </div>
 
 
-
+                            <SectionBlogannonce/>
 
 
                             <div className="row d-flex align-items-end">

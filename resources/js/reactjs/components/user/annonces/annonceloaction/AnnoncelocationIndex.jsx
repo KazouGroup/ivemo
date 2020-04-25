@@ -23,7 +23,7 @@ class AnnoncelocationIndex extends Component {
             object: 'Annonce double',
             errors: [],
             annonceItem: {user:[]},
-            annoncelocations: [],
+            annoncelocations: {categoryannoncelocation:[],city:[],user:[]},
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -232,14 +232,6 @@ class AnnoncelocationIndex extends Component {
 
     }
 
-    loadItems(){
-        let itemAnnoncelocation = this.props.match.params.annoncetype;
-        let url = route('api.annoncelocationbyannoncetype_site', itemAnnoncelocation);
-        dyaxios.get(url).then(response => this.setState({annoncelocations: response.data.data,}));
-    }
-
-
-
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
@@ -297,9 +289,14 @@ class AnnoncelocationIndex extends Component {
         });
     }
 
+    loadItems(){
+        let itemAnnoncelocation = this.props.match.params.annoncetype;
+        let url = route('api.annoncelocationbyannoncetype_site', itemAnnoncelocation);
+        dyaxios.get(url).then(response => this.setState({annoncelocations: response.data.data,}));
+    }
+
     // lifecycle method
     componentDidMount() {
-        window.scrollTo(0, 0);
         this.loadItems();
     }
 

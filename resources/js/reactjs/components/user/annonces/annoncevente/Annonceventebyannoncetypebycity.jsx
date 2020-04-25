@@ -23,8 +23,7 @@ class Annonceventebyannoncetypebycity extends Component {
             object: 'Annonce double',
             errors: [],
             annonceItem: {user:[]},
-            annonceventebycity: {annonceventes:[]},
-            isLoading: false,
+            annonceventebycity: {annonceventes:{annoncetype:[],categoryannoncevente:[],city:[],user:[]}},
 
         };
         this.deleteItem = this.deleteItem.bind(this);
@@ -177,11 +176,10 @@ class Annonceventebyannoncetypebycity extends Component {
     }
 
     loadItems(){
-        this.setState({ isLoading: true });
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCity = this.props.match.params.city;
         let url = route('api.annonceventesbyannoncetypebycity_site',[itemannoncetype,itemCity]);
-        dyaxios.get(url).then(response => this.setState({annonceventebycity: response.data,isLoading: false,}));
+        dyaxios.get(url).then(response => this.setState({annonceventebycity: response.data}));
 
 
     }
@@ -302,16 +300,15 @@ class Annonceventebyannoncetypebycity extends Component {
     }
 
     render() {
-        const {annonceventebycity,annonceItem,isLoading} = this.state;
-        const allannoncelocationbycity = annonceventebycity.annonceventes;
-        const mapAnnonceventes = isLoading ? (
-            <AnnoncesListSkeleton/>
-        ):(
-            allannoncelocationbycity.map(item => {
+        const {annonceventebycity,annonceItem} = this.state;
+        const mapAnnonceventes = annonceventebycity.annonceventes.length ? (
+            annonceventebycity.annonceventes.map(item => {
                 return(
                     <AnnonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser}/>
                 )
             })
+        ):(
+            <AnnoncesListSkeleton/>
         );
         return (
             <>

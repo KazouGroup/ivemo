@@ -23,7 +23,7 @@ class AnnonceventeIndex extends Component {
             object: 'Annonce double',
             errors: [],
             annonceItem: {user:[]},
-            annonceventes: [],
+            annonceventes: {annoncetype:[],categoryannoncevente:[],city:[],user:[]},
         };
 
         this.unactiveItem = this.unactiveItem.bind(this);

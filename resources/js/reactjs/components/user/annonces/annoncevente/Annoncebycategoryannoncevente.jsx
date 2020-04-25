@@ -24,8 +24,8 @@ class Annoncebycategoryannoncevente extends Component {
             object: 'Annonce double',
             errors: [],
             annonceItem: {user:[]},
-            annonceventebycategory: {annonceventes:[]},
-            cityannonceventes:[],
+            annonceventebycategory: {annonceventes:{annoncetype:[],categoryannoncevente:[],city:[],user:[]}},
+            cityannonceventes:{user:[]},
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);

@@ -108,6 +108,7 @@ import AnnonceventeEdit from "../components/user/annonces/annoncevente/treatment
 import AnnoncelocationEdit from "../components/user/annonces/annonceloaction/treatment/AnnoncelocationEdit";
 import PrivateUserAnnonceVentesByCategory
     from "../components/user/profile/annonces/private/annoncevente/PrivateUserAnnonceVentesByCategory";
+import BlogannonceIndexSite from "../components/user/blog/BlogannonceIndexSite";
 
 
 const RouteUser = props => (
@@ -208,6 +209,9 @@ const RouteUser = props => (
 
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_ventes/" component={PrivateUserBlogannonceVente}/>
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_ventes/:categoryannoncevente/" component={withRouter(PrivateUserBlogannonceVentebyCategoryannoncevente)}/>
+
+
+          <Route exact path="/blogs/" component={BlogannonceIndexSite}/>
 
           <Route exact path="/blogs/annonce_locations/ab/new/" component={BlogannoncelocationCreate}/>
           <Route exact path="/blogs/annonce_locations/:blogannoncelocation/edit/" component={BlogannoncelocationEdit}/>

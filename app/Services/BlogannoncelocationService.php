@@ -42,7 +42,7 @@ class BlogannoncelocationService
             ->orderByRaw('RAND()')
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->where(['status' => 1,'status_admin' => 1])
-            ->take(3)->distinct()->get()->toArray();;
+            ->take(3)->distinct()->get();
 
         return $blogannoncelocation;
     }

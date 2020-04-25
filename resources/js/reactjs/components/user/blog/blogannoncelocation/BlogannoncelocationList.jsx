@@ -47,9 +47,11 @@ class BlogannoncelocationList extends Component {
 
                                     <div className="stats stats-right">
 
+                                        {/*
                                          <a href="#" className="nav-item">
                                             <i className="now-ui-icons location_bookmark text-dark"/>
                                         </a>
+                                        */}
 
                                         <i className="now-ui-icons tech_watch-time"/> {moment(this.props.created_at).format('ll')} - {this.props.red_time}  min de lecture
                                     </div>

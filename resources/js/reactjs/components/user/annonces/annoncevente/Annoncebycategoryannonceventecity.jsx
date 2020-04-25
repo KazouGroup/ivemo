@@ -10,6 +10,7 @@ import Categoriesannoncevente from "./inc/Categoriesannoncevente";
 import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
+import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 
 
 class Annoncebycategoryannonceventecity extends Component {
@@ -23,7 +24,7 @@ class Annoncebycategoryannonceventecity extends Component {
             object: 'Annonce double',
             errors: [],
             annonceItem: {user:[]},
-            annonceventebycity: {annonceventes:[]},
+            annonceventebycity: {annonceventes:{annoncetype:[],categoryannoncevente:[],city:[],user:[]}},
             cityannonceventes:[],
 
         };
@@ -321,7 +322,7 @@ class Annoncebycategoryannonceventecity extends Component {
                 )
             })
         ):(
-            <></>
+            <AnnoncesListSkeleton/>
         );
         return (
             <>

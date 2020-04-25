@@ -24,9 +24,8 @@ class Annoncebycategoryannoncelocation extends Component {
             object: 'Annonce double',
             errors: [],
             annonceItem: {user:[]},
-            annoncelocationbycategory: {annoncelocations:[]},
+            annoncelocationbycategory: {annoncelocations:{categoryannoncelocation:[],city:[],user:[]}},
             cityannoncelocations:[],
-            isLoading: false,
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
@@ -178,11 +177,10 @@ class Annoncebycategoryannoncelocation extends Component {
 
 
     loadItems(){
-        this.setState({ isLoading: true });
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let url = route('api.annoncelocationbycategoryannoncelocations_site',[itemannoncetype,itemCategoryannoncelocation]);
-        dyaxios.get(url).then(response => this.setState({annoncelocationbycategory: response.data, isLoading: false,}));
+        dyaxios.get(url).then(response => this.setState({annoncelocationbycategory: response.data,}));
         let url1 = route('api.annoncelocationbycategorycitycount_site',[itemCategoryannoncelocation]);
         dyaxios.get(url1).then(response => this.setState({cityannoncelocations: response.data,}));
 
@@ -311,16 +309,16 @@ class Annoncebycategoryannoncelocation extends Component {
         return (annoncelocations_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
     render() {
-        const {annoncelocationbycategory,cityannoncelocations,annonceItem,isLoading} = this.state;
+        const {annoncelocationbycategory,cityannoncelocations,annonceItem} = this.state;
         const allannoncelocationsbycategory = annoncelocationbycategory.annoncelocations;
-        const mapAnnoncelocations = isLoading ? (
-            <AnnoncesListSkeleton/>
-        ):(
+        const mapAnnoncelocations = allannoncelocationsbycategory.length >= 0 ? (
             allannoncelocationsbycategory.map(item => {
                 return(
-                    <AnnonceslocationList key={item.id} {...item}  deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser}/>
+                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser}/>
                 )
             })
+        ):(
+            <AnnoncesListSkeleton/>
         );
         return (
             <>
