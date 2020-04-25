@@ -122,7 +122,7 @@ class BlogannonceIndexSite extends Component {
                                         )}
 
                                         {/* Blog des annonces locations */}
-                                        {blogannoncelocations.length >= 0 && (
+                                        {blogannoncelocations.length > 0 && (
                                             <div className="row d-flex align-items-end">
                                                 <div className="col-md-12 mx-auto">
                                                     <h5 className="title">Blog sur les annonces locations </h5>
@@ -132,7 +132,7 @@ class BlogannonceIndexSite extends Component {
 
                                         {mapAnnoncelocations}
 
-                                        {blogannoncelocations.length >= 0 && (
+                                        {blogannoncelocations.length > 0 && (
                                             <div className="text-center">
                                                 <Link to={`/blogs/annonce_locations/`} className="btn btn-danger btn-lg">
                                                     <b>Voir plus d'articles</b>
@@ -141,7 +141,7 @@ class BlogannonceIndexSite extends Component {
                                         )}
 
                                         {/* Blog des annonces reservations */}
-                                        {blogannoncereservations.length >=0 && (
+                                        {blogannoncereservations.length > 0 && (
                                             <div className="row d-flex align-items-end">
                                                 <div className="col-md-12 mx-auto">
                                                     <h5 className="title">Blog sur les annonces reservations </h5>
@@ -152,7 +152,7 @@ class BlogannonceIndexSite extends Component {
 
                                         {mapAnnoncereservations}
 
-                                        {blogannoncereservations.length >= 0 && (
+                                        {blogannoncereservations.length > 0 && (
                                             <div className="text-center">
                                                 <Link to={`/blogs/annonce_reservations/`} className="btn btn-danger btn-lg">
                                                     <b>Voir plus d'articles</b>
@@ -161,7 +161,7 @@ class BlogannonceIndexSite extends Component {
                                         )}
 
                                         {/* Blog des annonces ventes */}
-                                        {blogannonceventes.length >= 0 && (
+                                        {blogannonceventes.length > 0 && (
                                             <div className="row d-flex align-items-end">
                                                 <div className="col-md-12 mx-auto">
                                                     <h5 className="title">Blog sur les annonces ventes </h5>
@@ -172,7 +172,7 @@ class BlogannonceIndexSite extends Component {
 
                                         {mapBlogannonceventes}
 
-                                        {blogannonceventes.length >= 0 &&(
+                                        {blogannonceventes.length > 0 &&(
                                             <div className="text-center">
                                                 <Link to={`/blogs/annonce_ventes/`} className="btn btn-danger btn-lg">
                                                     <b>Voir plus d'articles</b>
