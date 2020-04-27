@@ -25,7 +25,8 @@ class IndexSite extends Component {
     render() {
         return (
             <>
-                <Helmet title={`Location, reservation et vente de maisons, appartements, studio et bien d'autre bien - Ivemo`} />
+                <Helmet title={`Location, reservation et vente de maisons, appartements, studio et bien d'autre bien - ${$name_site}`} />
+
                 <div className="pricing sidebar-collapse">
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
                         <NavUserSite />

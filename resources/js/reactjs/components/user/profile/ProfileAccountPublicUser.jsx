@@ -43,7 +43,7 @@ class ProfileAccountPublicUser extends Component {
         return (
             <>
                 <Helmet>
-                    <title>{`${userPublick.first_name || 'Profile'}`} - Ivemo</title>
+                    <title>{`${userPublick.first_name || 'Profile'}`} - ${$name_site}</title>
                 </Helmet>
 
                 <div className="profile-page sidebar-collapse">
