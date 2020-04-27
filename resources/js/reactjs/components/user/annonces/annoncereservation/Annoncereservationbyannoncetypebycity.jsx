@@ -15,8 +15,7 @@ class Annoncereservationbyannoncetypebycity extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncereservationbycity: {annoncereservations:[]},
-            isLoading: false,
+            annoncereservationbycity: {annoncereservations:{annoncetype:[],categoryannoncereservation:[],user:{profile:[]},imagereservations:[]}},
 
         };
         this.deleteItem = this.deleteItem.bind(this);
@@ -24,11 +23,10 @@ class Annoncereservationbyannoncetypebycity extends Component {
     }
 
     loadItems(){
-        this.setState({ isLoading: true });
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCity = this.props.match.params.city;
         let url = route('api.annoncereservationsbyannoncetypebycity_site',[itemannoncetype,itemCity]);
-        dyaxios.get(url).then(response => this.setState({annoncereservationbycity: response.data,isLoading: false,}));
+        dyaxios.get(url).then(response => this.setState({annoncereservationbycity: response.data}));
 
 
     }
@@ -149,16 +147,16 @@ class Annoncereservationbyannoncetypebycity extends Component {
     }
 
     render() {
-        const {annoncereservationbycity,isLoading} = this.state;
+        const {annoncereservationbycity} = this.state;
         const allannoncereservationbycity = annoncereservationbycity.annoncereservations;
-        const mapAnnoncereservations = isLoading ? (
-            <AnnoncesListSkeleton/>
-        ):(
+        const mapAnnoncereservations = allannoncereservationbycity.length >= 0 ? (
             allannoncereservationbycity.map(item => {
                 return(
                     <AnnoncereservationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
                 )
             })
+        ):(
+            <AnnoncesListSkeleton/>
         );
         return (
             <>

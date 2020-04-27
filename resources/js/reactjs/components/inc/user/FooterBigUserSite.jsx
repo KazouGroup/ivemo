@@ -85,9 +85,9 @@ class FooterBigUserSite extends Component {
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#pablo" className="text-muted">
+                                                <Link to={`/work_with_us/`} className="text-muted">
                                                     Offres d’emploi
-                                                </a>
+                                                </Link>
                                             </li>
                                             <li>
                                                 <a href="#pablo" className="text-muted">

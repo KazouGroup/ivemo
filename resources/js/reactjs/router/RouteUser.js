@@ -109,6 +109,10 @@ import AnnoncelocationEdit from "../components/user/annonces/annonceloaction/tre
 import PrivateUserAnnonceVentesByCategory
     from "../components/user/profile/annonces/private/annoncevente/PrivateUserAnnonceVentesByCategory";
 import BlogannonceIndexSite from "../components/user/blog/BlogannonceIndexSite";
+import EmailresetUser from "../components/user/auth/EmailresetUser";
+import WorkwithusIndexSite from "../components/user/pages/workwithus/WorkwithusIndexSite";
+import WorkwithusBycategorySite from "../components/user/pages/workwithus/WorkwithusBycategorySite";
+import WorkwithusShowUserSite from "../components/user/pages/workwithus/WorkwithusShowUserSite";
 
 
 const RouteUser = props => (
@@ -117,6 +121,7 @@ const RouteUser = props => (
 
           <Route exact path="/" component={IndexSite}/>
           <Route exact path="/login/" component={LoginUser}/>
+          <Route exact path="/password/reset/" component={EmailresetUser}/>
           <Route exact path="/register/" component={RegisterUser}/>
           <Route exact path="/about/" component={AboutUserSite}/>
           <Route exact path="/contact/" component={ContactUserSite}/>
@@ -125,6 +130,11 @@ const RouteUser = props => (
           <Route exact path="/advertisement/" component={PubliciteIndexSite}/>
           <Route exact path="/annonce/" component={AnnonceUserSite}/>
           <Route exact path="/annonce/show/" component={AnnonceShowUserSite}/>
+
+
+          <Route exact path="/work_with_us/" component={WorkwithusIndexSite}/>
+          <Route exact path="/work_with_us/:categoryworkwithus/" component={WorkwithusBycategorySite}/>
+          <Route exact path="/work_with_us/:categoryworkwithus/:workwithus/" component={WorkwithusShowUserSite}/>
 
           <Route exact path="/agences_immobilies/" component={AgencesimmobilieIndex}/>
 

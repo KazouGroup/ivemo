@@ -301,7 +301,7 @@ class Annonceventebyannoncetypebycity extends Component {
 
     render() {
         const {annonceventebycity,annonceItem} = this.state;
-        const mapAnnonceventes = annonceventebycity.annonceventes.length ? (
+        const mapAnnonceventes = annonceventebycity.annonceventes.length >= 0 ? (
             annonceventebycity.annonceventes.map(item => {
                 return(
                     <AnnonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser}/>

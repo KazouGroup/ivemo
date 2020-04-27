@@ -13,7 +13,7 @@ class AnnoncereservationIndex extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncereservationbytype: {annoncereservations:[]},
+            annoncereservationbytype: {annoncereservations:{annoncetype:[],categoryannoncereservation:[],user:{profile:[]},imagereservations:[]}},
         }
     }
 

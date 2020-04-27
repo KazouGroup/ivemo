@@ -138,12 +138,12 @@ class LoginUser extends Component {
                                         </div>
                                         <div className="pull-left">
                                             <h6>
-                                                <a href="/register/" className="link footer-link">Inscription</a>
+                                                <Link to={`/register/`} className="link footer-link">Inscription</Link>
                                             </h6>
                                         </div>
                                         <div className="pull-right">
                                             <h6>
-                                                <a href="/password/reset/" className="link footer-link">Mot de passe oublié?</a>
+                                                <Link to={`/password/reset/`} className="link footer-link">Mot de passe oublié?</Link>
                                             </h6>
                                         </div>
                                     </form>

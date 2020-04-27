@@ -51,7 +51,7 @@ class NavUserSite extends PureComponent {
                         <li className={`nav-item dropdown`}>
                             <a href="#" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                 <i className="now-ui-icons files_paper" aria-hidden="true"/>
-                                <p>Sections</p>
+                                <p>Annonces</p>
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                 <Link to={`/annonces_locations/locations/`} className="dropdown-item" >

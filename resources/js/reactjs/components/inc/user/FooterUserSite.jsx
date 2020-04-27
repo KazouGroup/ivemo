@@ -17,7 +17,7 @@ class FooterUserSite extends Component {
                             <ul>
                                 <li>
                                     <Link to={`/`}>
-                                        Ivemo
+                                        {$name_site}
                                     </Link>
                                 </li>
                                 <li>
@@ -40,7 +40,7 @@ class FooterUserSite extends Component {
                         <div className="copyright" id="copyright">
                             &copy;
                             { new Date().getFullYear()}, Designed by
-                            <Link to={`/`}> Ivemo</Link>. Coded by
+                            <Link to={`/`}> {$name_site}</Link>. Coded by
                             <a href="https://www.kazougroup.com" target="_bank"> KazouGroup Srl</a>.
                         </div>
                     </div>

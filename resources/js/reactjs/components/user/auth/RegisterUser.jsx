@@ -94,10 +94,13 @@ class RegisterUser extends Component {
                             <div className="col-md-7 ml-auto mr-auto">
                                 <div className="card">
                                     <div className="card-body">
-                                        <h4 className="card-title text-center">S'inscrire</h4>
+                                        <h4 className="card-description text-center"><b>S'inscrire</b></h4>
                                         <div className="social text-center">
-                                            <a href={route('social.oauth', 'facebook')} className="btn btn-facebook">
-                                                <i className="fab fa-facebook"> </i>
+                                            <a href={route('social.oauth', 'facebook')} className="btn btn-facebook btn-round">
+                                                <i className="fab fa-facebook"/> Se connecter avec Facebook
+                                            </a>
+                                            <a href={route('social.oauth', 'google')} className="btn btn-google btn-round">
+                                                <i className="fab fa-google"/> Se connecter avec Google
                                             </a>
                                             <h5 className="card-description"> ou</h5>
                                         </div>
@@ -140,20 +143,24 @@ class RegisterUser extends Component {
 
                                             </div>
 
-                                            <div className="input-group">
-                                                <div className="input-group-prepend">
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    <div className="input-group">
+                                                        <div className="input-group-prepend">
                                                         <span className="input-group-text">
                                                             <i className="now-ui-icons ui-1_email-85"/>
                                                         </span>
+                                                        </div>
+                                                        <input type="email" placeholder="Votre E-mail ..." aria-label="Votre E-mail ..."
+                                                               required="required"
+                                                               id="email"
+                                                               className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
+                                                               name='email'
+                                                               value={this.state.email}
+                                                               onChange={this.handleFieldChange}/>
+                                                        {this.renderErrorFor('email')}
+                                                    </div>
                                                 </div>
-                                                <input type="email" placeholder="Votre E-mail ..." aria-label="Votre E-mail ..."
-                                                       required="required"
-                                                       id="email"
-                                                       className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                                       name='email'
-                                                       value={this.state.email}
-                                                       onChange={this.handleFieldChange}/>
-                                                {this.renderErrorFor('email')}
                                             </div>
                                             {/*
 
@@ -225,8 +232,9 @@ class RegisterUser extends Component {
 
 
                                             <div className="card-footer text-center">
-                                                <input type="submit" value="Se connecter" className="btn btn-primary "/>
+                                                <input type="submit" value="Se connecter" className="btn btn-primary btn-round"/>
                                             </div>
+
                                         </form>
                                     </div>
                                 </div>

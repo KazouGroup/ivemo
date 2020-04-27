@@ -49,6 +49,14 @@ class BaseRequest extends Request
                 'confirm_send' => ['required'],
                 'phone' => ['nullable', 'numeric'],
             ];
+        }elseif($group === 'work_with_us_store') {
+            $rules = [
+                'full_name' => ['required', 'string','min:3','max:255'],
+                'email' => ['required', 'string', 'email','min:2','max:255'],
+                //'cv_file' => ['required'],
+                'confirm_send' => ['required'],
+                'phone' => ['required', 'numeric'],
+            ];
         }
         else { // 'edit'
             $rules = [

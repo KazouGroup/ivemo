@@ -7,7 +7,6 @@ use App\Http\Requests\Contactuser\StorecontactuseradvertRequest;
 use App\Http\Requests\Contactuser\StorecontactuserfaqRequest;
 use App\Model\contactusersadvert;
 use App\Model\contactusersfaq;
-use Illuminate\Http\Request;
 
 class PageController extends Controller
 {

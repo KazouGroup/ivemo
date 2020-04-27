@@ -1,6 +1,6 @@
 @extends('inc.user.main')
 <?php $item = htmlspecialchars(config('app.name'));?>
-@section('title', 'Reset Password - '.$item)
+@section('title', 'Travailler avec nous - '.$item)
 
 @section('style')
 @endsection
@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    <div id="app_ivemo"></div>
+<div id="app_ivemo"></div>
 @endsection
 
 @section('script')

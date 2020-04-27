@@ -89,8 +89,11 @@ class LoginModalUser extends Component {
                                 <div className="header header-primary text-center">
                                     <b>Se connecter avec</b>
                                     <div className="modal-footer text-center">
-                                        <a href={route('social.oauth','facebook')} className="btn btn-facebook btn-block">
+                                        <a href={route('social.oauth','facebook')} className="btn btn-facebook btn-block btn-round">
                                             Facebook
+                                        </a>
+                                        <a href={route('social.oauth','google')} className="btn btn-google btn-block btn-round">
+                                            Google
                                         </a>
                                     </div>
                                     <b>Ou</b>
