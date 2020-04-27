@@ -70,7 +70,7 @@ class LoginUser extends Component {
 
     // lifecycle method
     componentDidMount() {
-        const composantTitle = 'Connexion - Ivemo';
+        const composantTitle = `Connexion - ${$name_site}`;
         document.title = `${composantTitle}`;
     }
     render() {

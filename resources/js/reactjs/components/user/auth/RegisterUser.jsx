@@ -76,7 +76,7 @@ class RegisterUser extends Component {
 
     // lifecycle method
     componentDidMount() {
-        const composantTitle = 'Inscription - Ivemo';
+        const composantTitle = `Inscription - ${$name_site}`;
         document.title = `${composantTitle}`;
     }
     render() {

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import styles from "./ContactUserSite.module.css";
+import LinkValicationEmail from "../../inc/user/LinkValicationEmail";
 
 
 class ContactUserSite extends Component {
@@ -110,6 +111,22 @@ class ContactUserSite extends Component {
 
                     <div className="main">
                         <div className="contact-content">
+                            <br/>
+                            <div className="container">
+                                <div className="row justify-content-center">
+                                    <div className="col-md-12 ml-auto mr-auto">
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
+
+                                    </div>
+                                </div>
+                            </div>
+
                             <div className="container">
                                 <div className="row">
                                     <div className="col-md-8 ml-auto mr-auto">

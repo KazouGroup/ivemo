@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import {Link, NavLink, withRouter} from 'react-router-dom';
+import Swal from "sweetalert2";
 
 class LinkValicationEmail extends PureComponent {
     constructor(props) {
@@ -11,22 +12,14 @@ class LinkValicationEmail extends PureComponent {
     sendItem(e) {
         dyaxios.post(route('verification.resend')).then(() => {
 
-                $.notify(
-                    {
-                        message: `Message de confirmation à <b>${$userIvemo.email}</b>`,
-                    },
-                    {
-                        allow_dismiss: false,
-                        type: 'success',
-                        placement: {
-                            from: 'top',
-                            align: 'center'
-                        },
-                        animate: {
-                            enter: "animated fadeInDown",
-                            exit: "animated fadeOutUp"
-                        },
-                    });
+            Swal.fire({
+                text: `Un nouveau lien de vérification a été envoyé à votre adresse e-mail ${$userIvemo.email}`,
+                icon: 'success',
+                buttonsStyling: false,
+                confirmButtonClass: "btn btn-info",
+                confirmButtonText: 'Ok, compris',
+                reverseButtons: true,
+            });
             });
     }
 

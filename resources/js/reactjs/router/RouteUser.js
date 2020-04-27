@@ -113,6 +113,7 @@ import EmailresetUser from "../components/user/auth/EmailresetUser";
 import WorkwithusIndexSite from "../components/user/pages/workwithus/WorkwithusIndexSite";
 import WorkwithusBycategorySite from "../components/user/pages/workwithus/WorkwithusBycategorySite";
 import WorkwithusShowUserSite from "../components/user/pages/workwithus/WorkwithusShowUserSite";
+import VerifyEmailUser from "../components/user/auth/VerifyEmailUser";
 
 
 const RouteUser = props => (
@@ -120,8 +121,10 @@ const RouteUser = props => (
     <Switch>
 
           <Route exact path="/" component={IndexSite}/>
+          <Route exact path="/home/" component={IndexSite}/>
           <Route exact path="/login/" component={LoginUser}/>
           <Route exact path="/password/reset/" component={EmailresetUser}/>
+          <Route exact path="/email/verify/" component={VerifyEmailUser}/>
           <Route exact path="/register/" component={RegisterUser}/>
           <Route exact path="/about/" component={AboutUserSite}/>
           <Route exact path="/contact/" component={ContactUserSite}/>

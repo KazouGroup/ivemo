@@ -5,6 +5,7 @@ import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import {Helmet} from "react-helmet";
 import ContactFromFaqAndOderPageIndex from "./inc/ContactFromFaqAndOderPageIndex";
 import FaqUserList from "./inc/FaqUserList";
+import LinkValicationEmail from "../../inc/user/LinkValicationEmail";
 
 
 class FaqsIndexSite extends Component {
@@ -50,6 +51,22 @@ class FaqsIndexSite extends Component {
                         </div>
 
                         <div className="main main-raised">
+                            <br/>
+
+                            <div className="container">
+                                <div className="row justify-content-center">
+                                    <div className="col-md-12 ml-auto mr-auto">
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
+
+                                    </div>
+                                </div>
+                            </div>
 
                             <div className="container">
 

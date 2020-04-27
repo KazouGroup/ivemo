@@ -5,6 +5,7 @@ import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import {Helmet} from "react-helmet";
 import ContactFromPublicitePageIndex from "./inc/ContactFromPublicitePageIndex";
 import ReadMoreAndLess from "react-read-more-less";
+import LinkValicationEmail from "../../inc/user/LinkValicationEmail";
 
 
 class PubliciteIndexSite extends Component {
@@ -47,6 +48,36 @@ class PubliciteIndexSite extends Component {
                         </div>
 
                         <div className="main main-raised">
+                            <br/>
+                            <div className="container">
+                                <div className="row justify-content-center">
+                                    <div className="col-md-12 ml-auto mr-auto">
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="container">
+                                <div className="row justify-content-center">
+                                    <div className="col-md-12 ml-auto mr-auto">
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
+
+                                    </div>
+                                </div>
+                            </div>
 
                             <div className="container">
 

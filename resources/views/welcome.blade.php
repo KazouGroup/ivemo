@@ -11,9 +11,6 @@
 
 @section('content')
 <div id="app_ivemo"></div>
-
-
-
 @endsection
 
 @section('script')

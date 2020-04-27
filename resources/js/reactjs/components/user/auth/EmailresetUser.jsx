@@ -87,7 +87,7 @@ class EmailresetUser extends Component {
         return (
             <div className="register-page sidebar-collapse">
 
-                <Helmet title={`Reset Password - Ivemo`}/>
+                <Helmet title={`Reset Password - ${$name_site}`}/>
 
                 <nav className="navbar navbar-expand-lg bg-white fixed-top navbar-transparent" color-on-scroll="400">
                     <NavUserSite />
