@@ -63,7 +63,7 @@ class BlogannoncelocationList extends Component {
                                     <a target="_blank" href={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
                                         <LazyLoad>
                                             <img className="img img-raised rounded"
-                                                 src={this.props.photo}/>
+                                                 src={this.props.photo} alt={this.props.title}/>
                                         </LazyLoad>
                                     </a>
                                 </div>

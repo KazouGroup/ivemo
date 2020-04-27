@@ -27,17 +27,17 @@ class BlogannonceIndexSite extends Component {
 
 
     componentDidMount() {
-        fetch(route('api.blogs_annonces_locations')).then(res => res.json()).then((result) => {
+        fetch(route('api.blogs_annonces_four_locations')).then(res => res.json()).then((result) => {
             this.setState({
                 blogannoncelocations: [...result]
             });
         });
-        fetch(route('api.blogs_annonces_reservations')).then(res => res.json()).then((result) => {
+        fetch(route('api.blogs_annonces_four_reservations')).then(res => res.json()).then((result) => {
             this.setState({
                 blogannoncereservations: [...result]
             });
         });
-        fetch(route('api.blogs_annonces_ventes')).then(res => res.json()).then((result) => {
+        fetch(route('api.blogs_annonces_four_ventes')).then(res => res.json()).then((result) => {
             this.setState({
                 blogannonceventes: [...result]
             });
@@ -46,7 +46,7 @@ class BlogannonceIndexSite extends Component {
 
     render() {
         const {blogannoncelocations,blogannoncereservations,blogannonceventes} = this.state;
-        const mapAnnoncelocations = blogannoncelocations.length >= 0 ? (
+        const mapBlogannoncelocations = blogannoncelocations.length >= 0 ? (
             blogannoncelocations.map(item => {
                 return(
 
@@ -56,7 +56,7 @@ class BlogannonceIndexSite extends Component {
         ):(
             <BlogannonceListSkeleton/>
         );
-        const mapAnnoncereservations = blogannoncereservations.length >= 0 ? (
+        const mapBlogannoncereservations = blogannoncereservations.length >= 0 ? (
             blogannoncereservations.map(item => {
                 return(
                     <BlogannoncereservationForIndexList key={item.id} {...item} />
@@ -130,7 +130,7 @@ class BlogannonceIndexSite extends Component {
                                             </div>
                                         )}
 
-                                        {mapAnnoncelocations}
+                                        {mapBlogannoncelocations}
 
                                         {blogannoncelocations.length > 0 && (
                                             <div className="text-center">
@@ -150,7 +150,7 @@ class BlogannonceIndexSite extends Component {
                                         )}
 
 
-                                        {mapAnnoncereservations}
+                                        {mapBlogannoncereservations}
 
                                         {blogannoncereservations.length > 0 && (
                                             <div className="text-center">

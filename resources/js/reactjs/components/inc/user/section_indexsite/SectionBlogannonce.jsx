@@ -1,26 +1,152 @@
 import React, { Component } from "react";
 import { Link,NavLink } from 'react-router-dom';
-
+import LazyLoad from 'react-lazyload';
+import moment from "moment";
 
 class SectionBlogannonce extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            blogannoncelocations:{categoryannoncelocation:[],user:[]},
+            blogannoncereservations:{categoryannoncereservation:[],user:[]},
+            blogannonceventes:{categoryannoncevente:[],user:[]},
+        };
 
-        }
     }
 
-    loadItems(){
-
-    }
 
     componentDidMount() {
-       //
+        fetch(route('api.blogs_annonces_one_locations')).then(res => res.json()).then((result) => {
+            this.setState({
+                blogannoncelocations: [...result]
+            });
+        });
+        fetch(route('api.blogs_annonces_one_reservations')).then(res => res.json()).then((result) => {
+            this.setState({
+                blogannoncereservations: [...result]
+            });
+        });
+        fetch(route('api.blogs_annonces_one_ventes')).then(res => res.json()).then((result) => {
+            this.setState({
+                blogannonceventes: [...result]
+            });
+        });
     }
 
-
     render() {
-        const {annoncesbycities} = this.state;
+        const {blogannoncelocations,blogannoncereservations,blogannonceventes} = this.state;
+        const mapBlogannoncelocations = blogannoncelocations.length >= 0 ? (
+            blogannoncelocations.map(item => {
+                return(
+
+                    <div key={item.id} className="col-md-4">
+                        <div className="card card-plain card-blog">
+                            <div className="card-image">
+                                <a target="_blank" href={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>
+                                    <LazyLoad>
+                                        <img className="img rounded img-raised"
+                                             src={item.photo} alt={item.title}/>
+                                    </LazyLoad>
+                                </a>
+                            </div>
+                            <div className="card-body">
+                                <Link to={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/`}>
+                                    <h6 className={`category text-${item.categoryannoncelocation.color_name}`}>
+                                        <b>{item.categoryannoncelocation.name}</b>
+                                    </h6>
+                                </Link>
+
+                                <h5 className="card-title">
+                                    <a target="_blank" href={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>
+                                        <b>{item.title}</b>
+                                    </a>
+                                </h5>
+                                <p className="card-description" dangerouslySetInnerHTML={{ __html: (item.description.length > 100 ? item.description.substring(0, 100) + "..." : item.description) }}/>
+                                    <a target="_blank" href={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}> Lire plus </a>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                )
+            })
+        ):(
+            <></>
+        );
+
+        const mapBlogannoncereservations = blogannoncereservations.length >= 0 ? (
+            blogannoncereservations.map(item => {
+                return(
+
+                    <div key={item.id} className="col-md-4">
+                        <div className="card card-plain card-blog">
+                            <div className="card-image">
+                                <a target="_blank" href={`/blogs/annonce_reservations/${item.categoryannoncereservation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>
+                                    <LazyLoad>
+                                        <img className="img rounded img-raised"
+                                             src={item.photo} alt={item.title}/>
+                                    </LazyLoad>
+                                </a>
+                            </div>
+                            <div className="card-body">
+                                <Link to={`/blogs/annonce_reservations/${item.categoryannoncereservation.slug}/`}>
+                                    <h6 className={`category text-${item.categoryannoncereservation.color_name}`}>
+                                        <b>{item.categoryannoncereservation.name}</b>
+                                    </h6>
+                                </Link>
+
+                                <h5 className="card-title">
+                                    <a target="_blank" href={`/blogs/annonce_reservations/${item.categoryannoncereservation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>
+                                        <b>{item.title}</b>
+                                    </a>
+                                </h5>
+                                <p className="card-description" dangerouslySetInnerHTML={{ __html: (item.description.length > 100 ? item.description.substring(0, 100) + "..." : item.description) }}/>
+                                <a target="_blank" href={`/blogs/annonce_reservations/${item.categoryannoncereservation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}> Lire plus </a>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                )
+            })
+        ):(
+            <></>
+        );
+
+        const mapBlogannonceventes = blogannonceventes.length >= 0 ? (
+            blogannonceventes.map(item => {
+                return(
+
+                    <div key={item.id} className="col-md-4">
+                        <div className="card card-plain card-blog">
+                            <div className="card-image">
+                                <a target="_blank" href={`/blogs/annonce_ventes/${item.categoryannoncevente.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>
+                                    <LazyLoad>
+                                        <img className="img rounded img-raised"
+                                             src={item.photo} alt={item.title}/>
+                                    </LazyLoad>
+                                </a>
+                            </div>
+                            <div className="card-body">
+                                <Link to={`/blogs/annonce_ventes/${item.categoryannoncevente.slug}/`}>
+                                    <h6 className={`category text-${item.categoryannoncevente.color_name}`}>
+                                       <b> {item.categoryannoncevente.name}</b>
+                                    </h6>
+                                </Link>
+                                <h5 className="card-title">
+                                    <a target="_blank" href={`/blogs/annonce_ventes/${item.categoryannoncevente.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>
+                                        <b>{item.title}</b>
+                                    </a>
+                                </h5>
+                                <p className="card-description" dangerouslySetInnerHTML={{ __html: (item.description.length > 100 ? item.description.substring(0, 100) + "..." : item.description) }}/>
+                                <a target="_blank" href={`/blogs/annonce_ventes/${item.categoryannoncevente.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}> Lire plus </a>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                )
+            })
+        ):(
+            <></>
+        );
 
         return (
 
@@ -31,82 +157,14 @@ class SectionBlogannonce extends Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-4">
-                        <div className="card card-plain card-blog">
-                            <div className="card-image">
-                                <a href="#pablo">
-                                    <img className="img rounded img-raised"
-                                         src="/assets/vendor/assets/img/examples/card-blog15.jpg"/>
-                                </a>
-                            </div>
-                            <div className="card-body">
-                                <h6 className="category text-info">Enterprise</h6>
-                                <h5 className="card-title">
-                                    <a href="#pablo">Autodesk looks to future of 3D printing with
-                                        Project Escher</a>
-                                </h5>
-                                <p className="card-description">
-                                    Like so many organizations these days, Autodesk is a company in
-                                    transition. It was until recently a traditional boxed software
-                                    company selling licenses.
-                                    <a href="#pablo"> Read More </a>
-                                </p>
-                                <p></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card card-plain card-blog">
-                            <div className="card-image">
-                                <a href="#pablo">
-                                    <img className="img rounded img-raised"
-                                         src="/assets/vendor/assets/img/examples/card-blog15.jpg"/>
-                                </a>
-                            </div>
-                            <div className="card-body">
-                                <h6 className="category text-success">
-                                    Startups
-                                </h6>
-                                <h5 className="card-title">
-                                    <a href="#pablo">Lyft launching cross-platform service this
-                                        week</a>
-                                </h5>
-                                <p className="card-description">
-                                    Like so many organizations these days, Autodesk is a company in
-                                    transition. It was until recently a traditional boxed software
-                                    company selling licenses.
-                                    <a href="#pablo"> Read More </a>
-                                </p>
-                                <p></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card card-plain card-blog">
-                            <div className="card-image">
-                                <a href="#pablo">
-                                    <img className="img rounded img-raised"
-                                         src="/assets/vendor/assets/img/examples/card-blog15.jpg"/>
-                                </a>
-                            </div>
-                            <div className="card-body">
-                                <h6 className="category text-danger">
-                                    Enterprise
-                                </h6>
-                                <h5 className="card-title">
-                                    <a href="#pablo">6 insights into the French Fashion
-                                        landscape</a>
-                                </h5>
-                                <p className="card-description">
-                                    Like so many organizations these days, Autodesk is a company in
-                                    transition. It was until recently a traditional boxed software
-                                    company selling licenses.
-                                    <a href="#pablo"> Read More </a>
-                                </p>
-                                <p></p>
-                            </div>
-                        </div>
-                    </div>
+
+                    {mapBlogannoncelocations}
+
+                    {mapBlogannoncereservations}
+
+                    {mapBlogannonceventes}
+
+
                 </div>
 
                 <div className="text-center">

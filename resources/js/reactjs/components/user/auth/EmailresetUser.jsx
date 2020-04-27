@@ -1,10 +1,9 @@
-import React, { Component } from "react";
+import React, { Component,Fragment } from "react";
 import {Link, NavLink} from 'react-router-dom'
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterUserSite from "../../inc/user/FooterUserSite";
-import {Button, FormGroup, Row} from "reactstrap";
+import {Button, FormGroup, Row,InputGroup} from "reactstrap";
 import {Helmet} from "react-helmet";
-import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 
 
@@ -101,15 +100,21 @@ class EmailresetUser extends Component {
                             <div className="col-md-7 ml-auto mr-auto">
                                 <div className="card">
                                     <div className="card-body">
-                                        <h4 className="text-dark"><b>Se connecter</b></h4>
-                                        <div className="social text-center">
-                                            <a href={route('social.oauth', 'facebook')} className="btn btn-facebook btn-round">
-                                                <i className="fab fa-facebook"/> Se connecter avec Facebook
-                                            </a>
-                                            <a href={route('social.oauth', 'google')} className="btn btn-google btn-round">
-                                                <i className="fab fa-google"/> Se connecter avec Google
-                                            </a>
-                                        </div>
+
+                                        {$guest && (
+                                            <Fragment>
+                                                <h4 className="text-dark"><b>Se connecter</b></h4>
+                                                <div className="social text-center">
+                                                    <a href={route('social.oauth', 'facebook')} className="btn btn-facebook btn-round">
+                                                        <i className="fab fa-facebook"/> Se connecter avec Facebook
+                                                    </a>
+                                                    <a href={route('social.oauth', 'google')} className="btn btn-google btn-round">
+                                                        <i className="fab fa-google"/> Se connecter avec Google
+                                                    </a>
+                                                </div>
+                                            </Fragment>
+                                        )}
+
                                         <br/>
                                         <h5 className="text-dark">
                                             <b>Ajouter votre email pour réinitialiser votre mot de passe</b>
@@ -117,7 +122,7 @@ class EmailresetUser extends Component {
                                         <form role="form" id="contact-form" onSubmit={this.saveItem} acceptCharset="UTF-8">
 
 
-                                            <div className="input-group">
+                                            <InputGroup>
                                                 <div className="input-group-prepend">
                                                             <span className="input-group-text">
                                                                 <i className="now-ui-icons ui-1_email-85"></i>
@@ -136,7 +141,7 @@ class EmailresetUser extends Component {
                                                        onChange={this.handleFieldChange}
                                                 />
                                                 {this.renderErrorFor('email')}
-                                            </div>
+                                            </InputGroup>
 
                                             <div className="submit text-center">
                                                 <button className="btn btn-primary btn-round" type="submit">
