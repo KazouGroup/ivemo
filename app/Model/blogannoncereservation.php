@@ -5,10 +5,17 @@ namespace App\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Auditable as AuditableTrait;
+use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\Activitylog\Traits\LogsActivity;
 
-class blogannoncereservation extends Model
+class blogannoncereservation extends Model implements Auditable
 {
+    use AuditableTrait,LogsActivity;
+
     protected $guarded = [];
+
+    protected static $logAttributes = ['title','red_time','ip','description','status','status_admin','member_id','categoryannoncereservaion_id'];
 
     protected  $table = 'blogannoncereservations';
 

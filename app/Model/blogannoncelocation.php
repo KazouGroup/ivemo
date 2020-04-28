@@ -6,11 +6,18 @@ use App\Model\favorite\favoritebloglocation;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\Activitylog\Traits\LogsActivity;
 
-class blogannoncelocation extends Model
+class blogannoncelocation extends Model implements Auditable
 {
+    use AuditableTrait,LogsActivity;
+
     protected $guarded = [];
+
+    protected static $logAttributes = ['title','red_time','ip','description','status','status_admin','member_id','categoryannoncelocation_id'];
 
     protected  $table = 'blogannoncelocations';
 
