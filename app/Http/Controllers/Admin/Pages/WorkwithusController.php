@@ -48,9 +48,11 @@ class WorkwithusController extends Controller
 
     }
 
-    public function apiwork_with_us_show(categoryworkwithus $categoryworkwithus,$workwithus)
+    public function apiwork_with_us_show(categoryworkwithus $categoryworkwithus,workwithus $workwithus)
     {
-        $workwithuses = new WorkwithusResource(workwithus::whereSlug($workwithus)
+        visits($workwithus)->seconds(5)->increment();
+
+        $workwithuses = new WorkwithusResource(workwithus::whereSlug($workwithus->slug)
             ->where(['status' => 1])->first());
 
         return response()->json($workwithuses,200);

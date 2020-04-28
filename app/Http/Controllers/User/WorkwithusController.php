@@ -27,6 +27,7 @@ class WorkwithusController extends Controller
 
     public function work_with_us_show($categoryworkwithus,workwithus $workwithus)
     {
+        visits($workwithus)->seconds(5)->increment();
 
         return view('user.page.work_with_us.show',[
             'workwithus' => $workwithus

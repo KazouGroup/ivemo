@@ -49,6 +49,10 @@ class workwithus extends Model
         return $this->belongsTo(categoryworkwithus::class,'categoryworkwithus_id');
     }
 
+    public function visits()
+    {
+        return visits($this);
+    }
 
     protected $casts = [
         'status' => 'boolean',
