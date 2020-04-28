@@ -51,7 +51,10 @@ class blogannoncelocation extends Model
         return $this->belongsTo(categoryannoncelocation::class,'categoryannoncelocation_id');
     }
 
-
+    public function visits()
+    {
+        return visits($this);
+    }
 
     protected $casts = [
         'status' => 'boolean',

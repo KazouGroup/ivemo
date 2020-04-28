@@ -158,14 +158,16 @@ class AnnonceventeController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function apiannonceventebycategoryannonceventeslug(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,$annoncevente)
+    public function apiannonceventebycategoryannonceventeslug(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,annoncevente $annoncevente)
     {
+        visits($annoncevente)->seconds(5)->increment();
+
         $annoncevente = new AnnonceventeResource(annoncevente::whereIn('annoncetype_id',[$annoncetype->id])
         ->whereIn('city_id',[$city->id])
         ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
         ->where(['status' => 1,'status_admin' => 1])
         ->with(['user.profile' => function ($q){$q->distinct()->get();},])
-         ->whereSlug($annoncevente)->firstOrFail());
+         ->whereSlug($annoncevente->slug)->firstOrFail());
 
         return response()->json($annoncevente, 200);
     }
@@ -208,6 +210,8 @@ class AnnonceventeController extends Controller
 
     public function annonceventebycategoryannonceventeslug(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,annoncevente $annoncevente)
     {
+        visits($annoncevente)->seconds(5)->increment();
+
         return view('user.annoncevente.annonces_show',[
             'categoryannoncevente' => $categoryannoncevente,
             'annoncevente' => $annoncevente,

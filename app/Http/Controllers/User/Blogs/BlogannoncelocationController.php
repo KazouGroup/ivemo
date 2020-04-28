@@ -98,8 +98,10 @@ class BlogannoncelocationController extends Controller
     }
 
 
-    public function apiannonceblogcategorylocationslug($categoryannoncelocation, $date,$blogannoncelocation)
+    public function apiannonceblogcategorylocationslug($categoryannoncelocation, $date,blogannoncelocation $blogannoncelocation)
     {
+        visits($blogannoncelocation)->seconds(5)->increment();
+
         $blogannoncelocation = BlogannoncelocationService::apiannonceblogcategorylocationslug($categoryannoncelocation, $date,$blogannoncelocation);
 
         return response()->json($blogannoncelocation, 200);
@@ -133,6 +135,9 @@ class BlogannoncelocationController extends Controller
 
     public function annonceblogcategorylocationslug($categoryannoncelocation, $date,blogannoncelocation $blogannoncelocation)
     {
+
+        visits($blogannoncelocation)->seconds(5)->increment();
+
         return view('user.blogs.blogannoncelocation.show',[
             'blogannoncelocation' => $blogannoncelocation,
         ]);

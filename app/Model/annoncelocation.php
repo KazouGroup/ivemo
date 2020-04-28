@@ -65,6 +65,10 @@ class annoncelocation extends Model
         return $this->hasMany(signalannoncelocation::class, 'annoncelocation_id');
     }
 
+    public function visits()
+    {
+        return visits($this);
+    }
 
     protected $casts = [
         'status' => 'boolean',

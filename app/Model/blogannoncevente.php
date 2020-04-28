@@ -49,7 +49,10 @@ class blogannoncevente extends Model
         return $this->belongsTo(categoryannoncevente::class,'categoryannoncevente_id');
     }
 
-
+    public function visits()
+    {
+        return visits($this);
+    }
 
     protected $casts = [
         'status' => 'boolean',

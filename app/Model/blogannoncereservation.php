@@ -49,7 +49,10 @@ class blogannoncereservation extends Model
         return $this->belongsTo(categoryannoncereservation::class,'categoryannoncereservation_id');
     }
 
-
+    public function visits()
+    {
+        return visits($this);
+    }
 
     protected $casts = [
         'status' => 'boolean',

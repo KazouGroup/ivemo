@@ -72,6 +72,11 @@ class annoncevente extends Model
         return $this->hasMany(signalannoncevente::class, 'annoncevente_id');
     }
 
+    public function visits()
+    {
+        return visits($this);
+    }
+
     protected $casts = [
         'status' => 'boolean',
         'status_admin' => 'boolean',

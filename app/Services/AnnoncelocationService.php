@@ -155,7 +155,7 @@ class AnnoncelocationService
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
             ->where(['status' => 1,'status_admin' => 1])
             ->with(['user.profile' => function ($q){$q->distinct()->get();},])
-            ->whereSlug($annoncelocation)->firstOrFail());
+            ->whereSlug($annoncelocation->slug)->firstOrFail());
 
         return $annoncelocation;
     }

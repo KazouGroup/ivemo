@@ -72,9 +72,11 @@ class BlogannoncereservationController extends Controller
         return response()->json($blogannoncereservation, 200);
     }
 
-    public function apiannonceblogcategoryreservationslug($categoryannoncereservation, $date, $blogannoncereservation)
+    public function apiannonceblogcategoryreservationslug($categoryannoncereservation, $date,blogannoncereservation $blogannoncereservation)
     {
-        $blogannoncereservation = new BlogannoncereservationResource(blogannoncereservation::whereDate('created_at',$date)->whereSlug($blogannoncereservation)
+        visits($blogannoncereservation)->seconds(5)->increment();
+
+        $blogannoncereservation = new BlogannoncereservationResource(blogannoncereservation::whereDate('created_at',$date)->whereSlug($blogannoncereservation->slug)
             ->where(['status' => 1,'status_admin' => 1])->first());
         return response()->json($blogannoncereservation, 200);
     }
@@ -148,6 +150,8 @@ class BlogannoncereservationController extends Controller
 
     public function annonceblogcategoryreservationslug($categoryannoncereservation, $date,blogannoncereservation $blogannoncereservation)
     {
+       visits($blogannoncereservation)->seconds(5)->increment();
+
        return view('user.blogs.blogannoncereservation.show',[
              'blogannoncereservation' => $blogannoncereservation,
         ]);

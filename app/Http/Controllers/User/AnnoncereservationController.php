@@ -68,6 +68,7 @@ class AnnoncereservationController extends Controller
 
     public function annoncelocationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
     {
+        visits($annoncereservation)->seconds(5)->increment();
 
         return view('user.annoncereservation.annonces_show',[
                    'annoncetype' => $annoncetype,
@@ -258,14 +259,16 @@ class AnnoncereservationController extends Controller
         return response()->json($annoncereservations, 200);
     }
 
-    public function apiannoncelocationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,$annoncereservation)
+    public function apiannoncelocationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
     {
+        visits($annoncereservation)->seconds(5)->increment();
+
         $annoncereservation = new AnnoncereservationResource(annoncereservation::whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('city_id',[$city->id])
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->where(['status' => 1,'status_admin' => 1])
             ->with(['user.profile' => function ($q){$q->distinct()->get();},])
-            ->whereSlug($annoncereservation)->firstOrFail());
+            ->whereSlug($annoncereservation->slug)->firstOrFail());
 
         return response()->json($annoncereservation, 200);
     }
