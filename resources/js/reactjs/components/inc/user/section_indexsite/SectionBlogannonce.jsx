@@ -58,11 +58,10 @@ class SectionBlogannonce extends Component {
 
                                 <h5 className="card-title">
                                     <a target="_blank" href={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>
-                                        <b>{item.title}</b>
+                                        <b>{item.title.length > 70 ? item.title.substring(0, 70) + "..." : item.title}</b>
                                     </a>
                                 </h5>
-                                <p className="card-description" dangerouslySetInnerHTML={{ __html: (item.description.length > 100 ? item.description.substring(0, 100) + "..." : item.description) }}/>
-                                    <a target="_blank" href={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}> Lire plus </a>
+                                <span dangerouslySetInnerHTML={{ __html: (item.description.length > 150 ? item.description.substring(0, 150) + "<a class='text-dark' target=\"_blank\" href=\"/blogs/annonce_locations/"+item.categoryannoncelocation.slug+"/"+moment(item.created_at).format('YYYY-MM-DD')+"/"+item.slug+"/\">...<b>Lire plus</b></a>" : item.description) }}/>
                                 <p></p>
                             </div>
                         </div>
@@ -96,11 +95,10 @@ class SectionBlogannonce extends Component {
 
                                 <h5 className="card-title">
                                     <a target="_blank" href={`/blogs/annonce_reservations/${item.categoryannoncereservation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>
-                                        <b>{item.title}</b>
+                                        <b>{item.title.length > 70 ? item.title.substring(0, 70) + "..." : item.title}</b>
                                     </a>
                                 </h5>
-                                <p className="card-description" dangerouslySetInnerHTML={{ __html: (item.description.length > 100 ? item.description.substring(0, 100) + "..." : item.description) }}/>
-                                <a target="_blank" href={`/blogs/annonce_reservations/${item.categoryannoncereservation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}> Lire plus </a>
+                                <span dangerouslySetInnerHTML={{ __html: (item.description.length > 150 ? item.description.substring(0, 150) + "<a class='text-dark' target=\"_blank\" href=\"/blogs/annonce_reservations/"+item.categoryannoncereservation.slug+"/"+moment(item.created_at).format('YYYY-MM-DD')+"/"+item.slug+"/\">...<b>Lire plus</b></a>" : item.description) }}/>
                                 <p></p>
                             </div>
                         </div>
@@ -133,11 +131,10 @@ class SectionBlogannonce extends Component {
                                 </Link>
                                 <h5 className="card-title">
                                     <a target="_blank" href={`/blogs/annonce_ventes/${item.categoryannoncevente.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>
-                                        <b>{item.title}</b>
+                                        <b>{item.title.length > 70 ? item.title.substring(0, 70) + "..." : item.title}</b>
                                     </a>
                                 </h5>
-                                <p className="card-description" dangerouslySetInnerHTML={{ __html: (item.description.length > 100 ? item.description.substring(0, 100) + "..." : item.description) }}/>
-                                <a target="_blank" href={`/blogs/annonce_ventes/${item.categoryannoncevente.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}> Lire plus </a>
+                                <span dangerouslySetInnerHTML={{ __html: (item.description.length > 150 ? item.description.substring(0, 150) + "<a class='text-dark' target=\"_blank\" href=\"/blogs/annonce_ventes/"+item.categoryannoncevente.slug+"/"+moment(item.created_at).format('YYYY-MM-DD')+"/"+item.slug+"/\">...<b>Lire plus</b></a>" : item.description) }}/>
                                 <p></p>
                             </div>
                         </div>
