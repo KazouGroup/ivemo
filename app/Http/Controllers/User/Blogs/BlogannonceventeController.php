@@ -73,7 +73,7 @@ class BlogannonceventeController extends Controller
 
     public function apiannonceblogcategoryventeslug($categoryannoncevente, $date,blogannoncevente $blogannoncevente)
     {
-        visits($blogannoncevente)->seconds(5)->increment();
+        visits($blogannoncevente)->seconds(60)->increment();
 
         $blogannonceresevente = new BlogannonceventeResource(blogannoncevente::whereDate('created_at',$date)
             ->whereSlug($blogannoncevente->slug)
@@ -98,7 +98,7 @@ class BlogannonceventeController extends Controller
 
     public function annonceblogcategoryventeslug($categoryannoncevente, $date,blogannoncevente $blogannoncevente)
     {
-        visits($blogannoncevente)->seconds(5)->increment();
+        visits($blogannoncevente)->seconds(60)->increment();
 
         return view('user.blogs.blogannoncevente.show',[
             'blogannoncevente' => $blogannoncevente,

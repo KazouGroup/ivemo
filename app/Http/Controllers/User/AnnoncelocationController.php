@@ -71,7 +71,7 @@ class AnnoncelocationController extends Controller
 
     public function annoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,annoncelocation $annoncelocation)
     {
-        visits($annoncelocation)->seconds(5)->increment();
+        visits($annoncelocation)->seconds(60)->increment();
 
         return view('user.annoncelocation.annonces_show',[
             'annoncelocation' => $annoncelocation,
@@ -239,7 +239,7 @@ class AnnoncelocationController extends Controller
 
     public function apiannoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,annoncelocation $annoncelocation)
     {
-        visits($annoncelocation)->seconds(5)->increment();
+        visits($annoncelocation)->seconds(60)->increment();
 
         $annoncelocation = AnnoncelocationService::apiannoncelocationbycategoryannoncelocationslug($annoncetype,$categoryannoncelocation,$city,$annoncelocation);
 

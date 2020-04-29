@@ -160,7 +160,7 @@ class AnnonceventeController extends Controller
 
     public function apiannonceventebycategoryannonceventeslug(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,annoncevente $annoncevente)
     {
-        visits($annoncevente)->seconds(5)->increment();
+        visits($annoncevente)->seconds(60)->increment();
 
         $annoncevente = new AnnonceventeResource(annoncevente::whereIn('annoncetype_id',[$annoncetype->id])
         ->whereIn('city_id',[$city->id])
@@ -210,7 +210,7 @@ class AnnonceventeController extends Controller
 
     public function annonceventebycategoryannonceventeslug(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,annoncevente $annoncevente)
     {
-        visits($annoncevente)->seconds(5)->increment();
+        visits($annoncevente)->seconds(60)->increment();
 
         return view('user.annoncevente.annonces_show',[
             'categoryannoncevente' => $categoryannoncevente,

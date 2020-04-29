@@ -74,7 +74,7 @@ class BlogannoncereservationController extends Controller
 
     public function apiannonceblogcategoryreservationslug($categoryannoncereservation, $date,blogannoncereservation $blogannoncereservation)
     {
-        visits($blogannoncereservation)->seconds(5)->increment();
+        visits($blogannoncereservation)->seconds(60)->increment();
 
         $blogannoncereservation = new BlogannoncereservationResource(blogannoncereservation::whereDate('created_at',$date)->whereSlug($blogannoncereservation->slug)
             ->where(['status' => 1,'status_admin' => 1])->first());
@@ -150,7 +150,7 @@ class BlogannoncereservationController extends Controller
 
     public function annonceblogcategoryreservationslug($categoryannoncereservation, $date,blogannoncereservation $blogannoncereservation)
     {
-       visits($blogannoncereservation)->seconds(5)->increment();
+       visits($blogannoncereservation)->seconds(60)->increment();
 
        return view('user.blogs.blogannoncereservation.show',[
              'blogannoncereservation' => $blogannoncereservation,

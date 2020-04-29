@@ -68,7 +68,7 @@ class AnnoncereservationController extends Controller
 
     public function annoncelocationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
     {
-        visits($annoncereservation)->seconds(5)->increment();
+        visits($annoncereservation)->seconds(60)->increment();
 
         return view('user.annoncereservation.annonces_show',[
                    'annoncetype' => $annoncetype,
@@ -261,7 +261,7 @@ class AnnoncereservationController extends Controller
 
     public function apiannoncelocationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
     {
-        visits($annoncereservation)->seconds(5)->increment();
+        visits($annoncereservation)->seconds(60)->increment();
 
         $annoncereservation = new AnnoncereservationResource(annoncereservation::whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('city_id',[$city->id])
