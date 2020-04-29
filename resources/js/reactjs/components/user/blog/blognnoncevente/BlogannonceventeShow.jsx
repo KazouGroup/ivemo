@@ -174,20 +174,16 @@ class BlogannonceventeShow extends Component {
                                                             )}
                                                         </div>
 
-                                                        <div className="carousel slide" data-ride="carousel">
-
-                                                            <div className="carousel-inner" role="listbox">
-                                                                <div className="carousel-item active">
-                                                                    <Zoom>
-                                                                        {blogannoncevente.photo ?
-                                                                            <img className="d-block"
-                                                                                 src={blogannoncevente.photo}
-                                                                                 style={{ width: "1400px", height: "600px",borderRadius: "5px" }}
-                                                                                 alt={blogannoncevente.title} />
-                                                                            : <Skeleton height={600} width={1400} />}
-                                                                    </Zoom>
-
-                                                                </div>
+                                                        <div className="carousel-inner">
+                                                            <div className="carousel-item active">
+                                                                <Zoom>
+                                                                    {blogannoncevente.photo ?
+                                                                        <img className="d-block"
+                                                                             src={blogannoncevente.photo}
+                                                                             style={{ width: "1400px", height: "600px",borderRadius: "5px" }}
+                                                                             alt={blogannoncevente.title} />
+                                                                        : <Skeleton height={600} width={1400} />}
+                                                                </Zoom>
 
                                                             </div>
 

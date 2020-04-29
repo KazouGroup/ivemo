@@ -114,6 +114,8 @@ import WorkwithusIndexSite from "../components/user/pages/workwithus/WorkwithusI
 import WorkwithusBycategorySite from "../components/user/pages/workwithus/WorkwithusBycategorySite";
 import WorkwithusShowUserSite from "../components/user/pages/workwithus/WorkwithusShowUserSite";
 import VerifyEmailUser from "../components/user/auth/VerifyEmailUser";
+import ConditionutilisationIndexSite from "../components/user/pages/ConditionutilisationIndexSite";
+import LicencesiteIndexSite from "../components/user/pages/LicencesiteIndexSite";
 
 
 const RouteUser = props => (
@@ -130,6 +132,8 @@ const RouteUser = props => (
           <Route exact path="/contact/" component={ContactUserSite}/>
           <Route exact path="/faqs/" component={FaqsIndexSite}/>
           <Route exact path="/policy_privacy/" component={PolicyprivacyIndexSite}/>
+          <Route exact path="/condition_utilisation/" component={ConditionutilisationIndexSite}/>
+          <Route exact path="/licence_site/" component={LicencesiteIndexSite}/>
           <Route exact path="/advertisement/" component={PubliciteIndexSite}/>
           <Route exact path="/annonce/" component={AnnonceUserSite}/>
           <Route exact path="/annonce/show/" component={AnnonceShowUserSite}/>

@@ -276,6 +276,18 @@
                                     <span class="sidebar-normal"> Policy privacy </span>
                                 </router-link>
                             </li>
+                            <li>
+                                <router-link :to="{ name: 'conditionutilisations.index'}">
+                                    <span class="sidebar-mini-icon">CU</span>
+                                    <span class="sidebar-normal"> Condition utilisations </span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{ name: 'licencesites.index'}">
+                                    <span class="sidebar-mini-icon">LS</span>
+                                    <span class="sidebar-normal"> Licence site </span>
+                                </router-link>
+                            </li>
                         </ul>
                     </div>
                 </li>

@@ -35,12 +35,12 @@ class PolicyprivacyIndexSite extends Component {
                 )
             })
         ):(
-            <AnnoncesListSkeleton/>
+            <></>
         );
         return (
             <Fragment>
 
-                <Helmet title={`Publicité sur la plate forme - ${$name_site}`}/>
+                <Helmet title={`Politique de confidentialité - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
                     <nav className="navbar navbar-expand-lg bg-primary">

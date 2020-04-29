@@ -177,30 +177,27 @@ class BlogannoncelocationShow extends Component {
                                                             )}
                                                         </div>
 
-                                                        <div className="carousel slide" data-ride="carousel">
+                                                        <div className="carousel-inner" >
+                                                            <div className="carousel-item active">
+                                                                <Zoom>
+                                                                    <div>
+                                                                        {blogannoncelocation.photo ?
+                                                                            <LazyLoad height={600} width={1400}>
+                                                                                <img className="d-block"
+                                                                                     src={blogannoncelocation.photo}
+                                                                                     style={{ width: "1400px", height: "600px", borderRadius: "2px" }}
+                                                                                     alt={blogannoncelocation.title}/>
+                                                                            </LazyLoad>
+                                                                            :<Skeleton circle={false} height={600} width={1400} />}
 
-                                                            <div className="carousel-inner" role="listbox">
-                                                                <div className="carousel-item active">
-                                                                    <Zoom>
-                                                                        <div>
-                                                                            {blogannoncelocation.photo ?
-                                                                                <LazyLoad height={600} width={1400}>
-                                                                                    <img className="d-block"
-                                                                                         src={blogannoncelocation.photo}
-                                                                                         style={{ width: "1400px", height: "600px", borderRadius: "2px" }}
-                                                                                         alt={blogannoncelocation.title}/>
-                                                                                </LazyLoad>
-                                                                                     :<Skeleton circle={false} height={600} width={1400} />}
+                                                                    </div>
 
-                                                                        </div>
-
-                                                                    </Zoom>
-
-                                                                </div>
+                                                                </Zoom>
 
                                                             </div>
 
                                                         </div>
+
 
 
                                                     </div>

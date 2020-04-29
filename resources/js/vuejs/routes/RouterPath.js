@@ -30,6 +30,14 @@ import CityAdminIndex from "../components/admin/partial/CityAdminIndex";
 import PermissionAdminIndex from "../components/admin/partial/PermissionAdminIndex";
 import RoleAdminIndex from "../components/admin/partial/RoleAdminIndex";
 import ContactusersfaqsAdminIndex from "../components/admin/contact/contactuserfaq/ContactusersfaqsAdminIndex";
+import ConditionutilisationAdminIndex
+    from "../components/admin/page/conditionutilisation/ConditionutilisationAdminIndex";
+import ConditionutilisationAdminCreate
+    from "../components/admin/page/conditionutilisation/ConditionutilisationAdminCreate";
+import ConditionutilisationAdminEdit from "../components/admin/page/conditionutilisation/ConditionutilisationAdminEdit";
+import LicencesiteAdminIndex from "../components/admin/page/licencesite/LicencesiteAdminIndex";
+import LicencesiteAdminCreate from "../components/admin/page/licencesite/LicencesiteAdminCreate";
+import LicencesiteAdminEdit from "../components/admin/page/licencesite/LicencesiteAdminEdit";
 
 
 export const routes = [
@@ -48,6 +56,14 @@ export const routes = [
     {path: '/dashboard/policyprivacies/', name: 'policyprivacies.index', component: PolicyprivacyAdminIndex},
     {path: '/dashboard/policyprivacies/create/', name: 'policyprivacies.create', component: PolicyprivacyAdminCreate},
     {path: '/dashboard/policyprivacies/:id/edit/', name: 'policyprivacies.edit', component: PolicyprivacyAdminEdit},
+
+    {path: '/dashboard/conditionutilisations/', name: 'conditionutilisations.index', component: ConditionutilisationAdminIndex},
+    {path: '/dashboard/conditionutilisations/create/', name: 'conditionutilisations.create', component: ConditionutilisationAdminCreate},
+    {path: '/dashboard/conditionutilisations/:id/edit/', name: 'conditionutilisations.edit', component: ConditionutilisationAdminEdit},
+
+    {path: '/dashboard/licencesites/', name: 'licencesites.index', component: LicencesiteAdminIndex},
+    {path: '/dashboard/licencesites/create/', name: 'licencesites.create', component: LicencesiteAdminCreate},
+    {path: '/dashboard/licencesites/:id/edit/', name: 'licencesites.edit', component: LicencesiteAdminEdit},
 
     {path: '/dashboard/categories_faqs/', name: 'categories_faqs.index', component: CategoryFaqAdminIndex},
     {path: '/dashboard/categoryannoncelocations/', name: 'categoryannoncelocations.index', component: CategoryAnnoncelocationAdminIndex},

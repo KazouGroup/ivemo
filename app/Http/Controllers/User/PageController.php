@@ -35,6 +35,16 @@ class PageController extends Controller
         return view('user.page.policyprivacy');
     }
 
+    public function conditionutilisation()
+    {
+        return view('user.page.conditionutilisation');
+    }
+
+    public function licencesite()
+    {
+        return view('user.page.licencesite');
+    }
+
     public function fairelapublicite()
     {
         return view('user.page.fairelapublicite');
