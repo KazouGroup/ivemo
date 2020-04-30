@@ -131,6 +131,7 @@ class ProfileAccountAvisUser extends Component {
                             },
                         });
                     /** End alert ***/
+                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -165,7 +166,9 @@ class ProfileAccountAvisUser extends Component {
                 let url = route('profile_avis_users_unactivated.site', [id]);
                 dyaxios.get(url).then(() => {
 
-                    this.loadItems();
+                    let isNotId = item => item.id !== id;
+                    let updatedItems = this.state.avisusers.filter(isNotId);
+                    this.setState({avisusers: updatedItems});
                     /** Alert notify bootstrapp **/
                     $.notify({
                         //,
@@ -184,6 +187,7 @@ class ProfileAccountAvisUser extends Component {
                             },
                         });
                     /** End alert ***/
+                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Something wrong. Try later", {
@@ -517,9 +521,10 @@ class ProfileAccountAvisUser extends Component {
 
                                             <div className="media media-post">
                                                 <div className="avatar">
-                                                    <img className="media-object img-raised"
+                                                    <img className="media-object img-raised rounded"
                                                          alt={$userIvemo.first_name} src={$userIvemo.avatar} />
                                                 </div>
+
                                                 <div className="media-body">
                                                         <textarea name="description" value={this.state.description || ""}
                                                                   onChange={this.handleFieldChange}
