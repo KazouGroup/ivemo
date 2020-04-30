@@ -25,7 +25,7 @@ class Annoncebycategoryannoncelocation extends Component {
             errors: [],
             annonceItem: {user:[]},
             annoncelocationbycategory: {annoncelocations:{categoryannoncelocation:[],city:[],user:[]}},
-            cityannoncelocations:[],
+            cityannoncelocations:{user:[]},
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
@@ -405,7 +405,7 @@ class Annoncebycategoryannoncelocation extends Component {
                                                                                                 locations <b style={{ textTransform: "lowercase" }}>{annoncelocationbycategory.name}</b> à <b>{item.name}</b>
                                                                                             </NavLink>
                                                                                         </td>
-                                                                                        <td className="text-right"> {this.getcountcategoryannonceString(item.annoncelocations_count)} annonces</td>
+                                                                                        <td className="text-right"> {this.getcountcategoryannonceString(item.annoncelocations_count)} {item.annoncelocations_count > 1 ? "annonces" : "annonce"}</td>
                                                                                     </tr>
                                                                                 ))}
                                                                                 </>

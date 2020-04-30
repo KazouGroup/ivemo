@@ -97,9 +97,6 @@ class Annoncebycategoryannoncevente extends Component {
         dyaxios.post(url, item)
             .then(() => {
 
-                //Masquer le modal après la création
-                $('#contactNew').modal('hide');
-
                 $.notify({
                         message: `Votre message a été bien envoyé à cette utilisateur`
                     },
@@ -123,6 +120,9 @@ class Annoncebycategoryannoncevente extends Component {
                     subject: "",
                     message: "",
                 });
+
+                //Masquer le modal après la création
+                $('#contactNew').modal('hide');
             }).catch(error => {
             this.setState({
                 errors: error.response.data.errors
@@ -401,7 +401,7 @@ class Annoncebycategoryannoncevente extends Component {
                                                                                                     achat <b style={{ textTransform: "lowercase" }}>{annonceventebycategory.name}</b> à <b>{item.name}</b>
                                                                                                 </NavLink>
                                                                                             </td>
-                                                                                            <td className="text-right"> {this.getcountcategoryannonceString(item.annonceventes_count)}  {item.annonceventes_count <= 1 ? "annonce" : "annonces"}</td>
+                                                                                            <td className="text-right"> {this.getcountcategoryannonceString(item.annonceventes_count)}  {item.annonceventes_count > 1 ? "annonces" : "annonce"}</td>
                                                                                         </tr>
                                                                                     ))}
                                                                                 </>

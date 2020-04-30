@@ -25,7 +25,7 @@ class Annoncebycategoryannonceventecity extends Component {
             errors: [],
             annonceItem: {user:[]},
             annonceventebycity: {annonceventes:{annoncetype:[],categoryannoncevente:[],city:[],user:[]}},
-            cityannonceventes:[],
+            cityannonceventes:{user:[]},
 
         };
         this.deleteItem = this.deleteItem.bind(this);

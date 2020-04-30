@@ -8,7 +8,7 @@ class Categoriesannoncevente extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            categoryannonceventes : [],
+            categoryannonceventes : {user:[]},
         }
     }
 
