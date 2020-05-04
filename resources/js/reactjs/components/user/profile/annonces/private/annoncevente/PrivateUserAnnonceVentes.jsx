@@ -5,7 +5,7 @@ import NavUserSite from "../../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../../../../configurations/inc/NavlinkconfigurationUser";
-import AnnonceventeList from "../../../../annonces/annoncevente/inc/AnnonceventeList";
+import PrivateUserAnnonceventeList from "../../../../annonces/annoncevente/inc/PrivateUserAnnonceventeList";
 import LinkValicationEmail from "../../../../../inc/user/LinkValicationEmail";
 import Navannonceventesbyuser from "../../../../annonces/annoncevente/inc/Navannonceventesbyuser";
 
@@ -209,7 +209,7 @@ class PrivateUserAnnonceVentes extends Component {
             userannonceventes.annonceventes.slice(0, visiable).map(item => {
                 return (
 
-                    <AnnonceventeList key={item.id} {...item} deleteItem={this.deleteItem} activeItem={this.activeItem} unactiveItem={this.unactiveItem} />
+                    <PrivateUserAnnonceventeList key={item.id} {...item} deleteItem={this.deleteItem} activeItem={this.activeItem} unactiveItem={this.unactiveItem} />
                 )
             })
         ) : (

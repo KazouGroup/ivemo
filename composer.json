@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2.5",
         "awssat/laravel-visits": "^2.2",
+        "beyondcode/laravel-websockets": "^1.4",
         "cviebrock/eloquent-sluggable": "^7.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",

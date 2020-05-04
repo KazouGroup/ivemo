@@ -19,6 +19,7 @@ class AnnoncelocationEdit extends Component {
         this.unactiveItem = this.unactiveItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
+        this.handleChangeBody = this.handleChangeBody.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
 
@@ -58,6 +59,13 @@ class AnnoncelocationEdit extends Component {
 
     }
 
+     // Handle Change
+     handleChangeBody(value) {
+        this.setState({ description: value });
+        document.querySelector('.editor-control').classList.remove('is-invalid');
+   
+    }
+
     handleFieldChange(event) {
         this.setState({
             [event.target.name]: event.target.value,
@@ -85,7 +93,14 @@ class AnnoncelocationEdit extends Component {
 
         let item = {
             title: this.state.title,
+            description: this.state.description,
+            district: this.state.district,
             surface: this.state.surface,
+            rooms: this.state.rooms,
+            pieces: this.state.pieces,
+            price: this.state.price,
+            city_id: this.state.city_id,
+            categoryannoncelocation_id: this.state.categoryannoncelocation_id,
         };
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemannoncelocation = this.props.match.params.annoncelocation;
@@ -168,7 +183,7 @@ class AnnoncelocationEdit extends Component {
 
     activeItem(id){
         //Envoyer la requet au server
-        let url = route('annonces_annoncelocations_active.site',[id]);
+        let url = route('annonces_locations_active.site',[id]);
         dyaxios.get(url).then(() => {
 
             /** Alert notify bootstrap **/
@@ -204,9 +219,8 @@ class AnnoncelocationEdit extends Component {
     }
 
     unactiveItem(id){
-        console.log(id);
         //Envoyer la requet au server
-        let url = route('annonces_annoncelocations_unactivated.site',[id]);
+        let url = route('annonces_locations_unactivated.site',[id]);
         dyaxios.get(url).then(() => {
 
             /** Alert notify bootstrapp **/
@@ -274,6 +288,7 @@ class AnnoncelocationEdit extends Component {
 
     render() {
         const {categoryannoncelocations,cities} = this.state;
+        let itemannoncetype = this.props.match.params.annoncetype;
         return (
             <Fragment>
                 <Helmet title={`${this.state.title || $name_site} - ${$name_site}`}/>
@@ -323,23 +338,23 @@ class AnnoncelocationEdit extends Component {
                                                         </div>
                                                         <div className="text-right ml-auto">
                                                             {!this.state.status ?
-                                                                <>
-                                                                    <Button onClick={() => this.activeItem(this.state.id)}
-                                                                            className="btn btn-primary btn-icon btn-sm">
-                                                                        <i className="now-ui-icons ui-1_simple-delete"/>
-                                                                    </Button>
-                                                                </>
-                                                                :
-                                                                <>
-                                                                    <Button onClick={() => this.unactiveItem(this.state.id)}
-                                                                            className="btn btn-success btn-icon btn-sm" >
-                                                                        <i className="now-ui-icons ui-1_check"/>
-                                                                    </Button>
-                                                                </>
+                                                                    <>
+                                                                        <Button onClick={() => this.activeItem(this.state.id)}
+                                                                                className="btn btn-primary btn-icon btn-sm" title="Annonce activé">
+                                                                            <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                        </Button>
+                                                                    </>
+                                                                    :
+                                                                    <>
+                                                                        <Button onClick={() => this.unactiveItem(this.state.id)}
+                                                                                className="btn btn-success btn-icon btn-sm" title="Annonce desactivé">
+                                                                            <i className="now-ui-icons ui-1_check"/>
+                                                                        </Button>
+                                                                    </>
 
-                                                            }
+                                                                }
                                                             <Button
-                                                                className="btn btn-sm btn-icon btn-danger" onClick={() => this.deleteItem(this.state.id)} >
+                                                                className="btn btn-sm btn-icon btn-danger" onClick={() => this.deleteItem(this.state.id)} title="Suprimer cette annonce">
                                                                 <i className="now-ui-icons ui-1_simple-remove"/>
                                                             </Button>{" "}
                                                         </div>
@@ -353,7 +368,6 @@ class AnnoncelocationEdit extends Component {
                                                                    href="#collapseTypebien" aria-expanded="true"
                                                                    aria-controls="collapseTypebien">
                                                                     <b>Type de bien </b>
-                                                                    <i className="now-ui-icons arrows-1_minimal-down"></i>
                                                                 </a>
                                                             </div>
                                                             <div id="collapseTypebien" className="collapse show"
@@ -390,7 +404,7 @@ class AnnoncelocationEdit extends Component {
                                                                                 <div className="row">
                                                                                     <div className="col-md-4">
                                                                                         <label className="labels">
-                                                                                            Quelle est le type de bien ?
+                                                                                            Type de bien ?
                                                                                             <span className="text-danger">*</span>
                                                                                         </label>
                                                                                         <div className="form-group">
@@ -407,7 +421,7 @@ class AnnoncelocationEdit extends Component {
                                                                                     </div>
                                                                                     <div className="col-md-4">
                                                                                         <label className="labels">
-                                                                                            Quelle est la ville du bien ?
+                                                                                            Ville du bien ?
                                                                                             <span className="text-danger">*</span>
                                                                                         </label>
                                                                                         <div className="form-group">
@@ -425,7 +439,7 @@ class AnnoncelocationEdit extends Component {
                                                                                     <div
                                                                                         className="col-md-4">
                                                                                         <label className="labels">
-                                                                                            Quelle est le quartier du bien?
+                                                                                            Quartier du bien?
                                                                                             <span className="text-danger">*</span>
                                                                                         </label>
                                                                                         <div className="form-group">
@@ -462,7 +476,6 @@ class AnnoncelocationEdit extends Component {
                                                                    aria-controls="collapseOne">
                                                                     <b>Caracteristique du bien uniquement pour
                                                                         (Appartement,Maison,Terrain)</b>
-                                                                    <i className="now-ui-icons arrows-1_minimal-down"></i>
                                                                 </a>
                                                             </div>
                                                             <div id="collapseOne" className="collapse show" role="tabpanel"
@@ -554,7 +567,6 @@ class AnnoncelocationEdit extends Component {
                                                                    href="#collapseDescription" aria-expanded="true"
                                                                    aria-controls="collapseDescription">
                                                                     <b>Description de l'annonce </b>
-                                                                    <i className="now-ui-icons arrows-1_minimal-down"></i>
                                                                 </a>
                                                             </div>
                                                             <div id="collapseDescription" className="collapse show"
@@ -590,9 +602,11 @@ class AnnoncelocationEdit extends Component {
                                                     </div>
 
                                                     <div className="submit text-center">
-                                                        <button className="btn btn-primary" type="submit">
-                                                            <i className="now-ui-icons ui-1_check"></i> <b>Poster votre
-                                                            annonce</b>
+                                                        <button className="btn btn-secondary" type="button" onClick={this.props.history.goBack} title="Ne pas mettre à jour l'annonce">
+                                                             <b>Annuler</b>
+                                                        </button>
+                                                        <button className="btn btn-primary" type="submit" title="Mettre à jour l'annonce">
+                                                             <b>Poster votre annonce</b>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -604,7 +618,7 @@ class AnnoncelocationEdit extends Component {
                                         <div className="col-lg-4 col-md-12 mx-auto">
 
                                             <div className="submit text-center">
-                                                <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
+                                                <NavLink className="btn btn-danger" to={`/annonce_location/${itemannoncetype}/new/`}>
                                                     <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
                                                 </NavLink>
                                             </div>

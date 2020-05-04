@@ -290,8 +290,8 @@ class AnnoncelocationIndex extends Component {
     }
 
     loadItems(){
-        let itemAnnoncelocation = this.props.match.params.annoncetype;
-        let url = route('api.annoncelocationbyannoncetype_site', itemAnnoncelocation);
+        let itemannoncetype = this.props.match.params.annoncetype;
+        let url = route('api.annoncelocationbyannoncetype_site', itemannoncetype);
         dyaxios.get(url).then(response => this.setState({annoncelocations: response.data.data,}));
     }
 
@@ -302,6 +302,7 @@ class AnnoncelocationIndex extends Component {
 
     render() {
         const {annoncelocations,annonceItem} = this.state;
+        let itemannoncetype = this.props.match.params.annoncetype;
         const mapAnnoncelocations = annoncelocations.length >= 0 ? (
             annoncelocations.map(item => {
                 return(
@@ -414,7 +415,7 @@ class AnnoncelocationIndex extends Component {
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
+                                            <NavLink className="btn btn-danger" to={`/annonce_location/${itemannoncetype}/new/`}>
                                                 <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
                                             </NavLink>
                                         </div>

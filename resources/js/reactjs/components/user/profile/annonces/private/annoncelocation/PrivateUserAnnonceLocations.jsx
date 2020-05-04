@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { Button, UncontrolledTooltip } from "reactstrap";
 import NavUserSite from "../../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../../inc/user/FooterBigUserSite";
-import AnnonceslocationList from "../../../../annonces/annonceloaction/inc/AnnonceslocationList";
+import PrivateUserAnnonceslocationList from "../../../../annonces/annonceloaction/inc/PrivateUserAnnonceslocationList";
 import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../../../../configurations/inc/NavlinkconfigurationUser";
 import LinkValicationEmail from "../../../../../inc/user/LinkValicationEmail";
@@ -210,7 +210,7 @@ class PrivateUserAnnonceLocations extends Component {
             userannoncelocations.annoncelocations.slice(0, visiable).map(item => {
                 return (
 
-                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} activeItem={this.activeItem} unactiveItem={this.unactiveItem} />
+                    <PrivateUserAnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} activeItem={this.activeItem} unactiveItem={this.unactiveItem} />
                 )
             })
         ) : (

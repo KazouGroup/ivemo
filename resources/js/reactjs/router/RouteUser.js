@@ -116,6 +116,7 @@ import WorkwithusShowUserSite from "../components/user/pages/workwithus/Workwith
 import VerifyEmailUser from "../components/user/auth/VerifyEmailUser";
 import ConditionutilisationIndexSite from "../components/user/pages/ConditionutilisationIndexSite";
 import LicencesiteIndexSite from "../components/user/pages/LicencesiteIndexSite";
+import AnnoncelocationCreate from "../components/user/annonces/annonceloaction/treatment/AnnoncelocationCreate";
 
 
 const RouteUser = props => (
@@ -157,6 +158,7 @@ const RouteUser = props => (
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/" component={withRouter(Annoncebycategoryannoncelocation)}/>
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/" component={withRouter(Annoncelocationbycity)}/>
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/:annoncelocation/" component={withRouter(Annoncelocationbycategorycityshow)}/>
+          <Route exact path="/annonce_location/:annoncetype/new/" component={AnnoncelocationCreate}/>
           <Route exact path="/annonce_location/:annoncetype/:annoncelocation/edit/" component={AnnoncelocationEdit}/>
 
           <Route exact path="/annonce/show/create/" component={AnnonceShowCreateUserSite}/>

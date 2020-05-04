@@ -211,7 +211,8 @@ class AnnonceventeEdit extends Component {
                     },
                 });
             /** End alert ***/
-            this.props.history.goBack();
+           // this.props.history.goBack();
+            this.loadItems();
         }).catch(() => {
             //Failled message
             $.notify("Ooop! Something wrong. Try later", {
@@ -249,7 +250,8 @@ class AnnonceventeEdit extends Component {
                     },
                 });
             /** End alert ***/
-            this.props.history.goBack();
+            //this.props.history.goBack();
+            this.loadItems();
         }).catch(() => {
             //Failled message
             $.notify("Ooop! Something wrong. Try later", {
@@ -296,6 +298,7 @@ class AnnonceventeEdit extends Component {
 
     render() {
         const {categoryannonceventes,cities} = this.state;
+        let itemannoncetype = this.props.match.params.annoncetype;
         return (
             <Fragment>
                 <Helmet title={`${this.state.title || $name_site} - ${$name_site}`}/>
@@ -345,21 +348,21 @@ class AnnonceventeEdit extends Component {
                                                             {!this.state.status ?
                                                                 <>
                                                                     <Button onClick={() => this.activeItem(this.state.id)}
-                                                                            className="btn btn-primary btn-icon btn-sm">
+                                                                            className="btn btn-primary btn-icon btn-sm" title="Annonce activé">
                                                                         <i className="now-ui-icons ui-1_simple-delete"/>
                                                                     </Button>
                                                                 </>
                                                                 :
                                                                 <>
                                                                     <Button onClick={() => this.unactiveItem(this.state.id)}
-                                                                            className="btn btn-success btn-icon btn-sm" >
+                                                                            className="btn btn-success btn-icon btn-sm" title="Annonce desactivé">
                                                                         <i className="now-ui-icons ui-1_check"/>
                                                                     </Button>
                                                                 </>
 
                                                             }
                                                             <Button
-                                                                className="btn btn-sm btn-icon btn-danger" onClick={() => this.deleteItem(this.state.id)} >
+                                                                className="btn btn-sm btn-icon btn-danger" onClick={() => this.deleteItem(this.state.id)} title="Suprimer cette annonce">
                                                                 <i className="now-ui-icons ui-1_simple-remove"/>
                                                             </Button>{" "}
                                                         </div>
@@ -373,7 +376,6 @@ class AnnonceventeEdit extends Component {
                                                                    href="#collapseTypebien" aria-expanded="true"
                                                                    aria-controls="collapseTypebien">
                                                                     <b>Type de bien </b>
-                                                                    <i className="now-ui-icons arrows-1_minimal-down"></i>
                                                                 </a>
                                                             </div>
                                                             <div id="collapseTypebien" className="collapse show"
@@ -482,7 +484,6 @@ class AnnonceventeEdit extends Component {
                                                                    aria-controls="collapseOne">
                                                                     <b>Caracteristique du bien uniquement pour
                                                                         (Appartement,Maison,Terrain)</b>
-                                                                    <i className="now-ui-icons arrows-1_minimal-down"></i>
                                                                 </a>
                                                             </div>
                                                             <div id="collapseOne" className="collapse show" role="tabpanel"
@@ -577,7 +578,6 @@ class AnnonceventeEdit extends Component {
                                                                    href="#collapseDescription" aria-expanded="true"
                                                                    aria-controls="collapseDescription">
                                                                     <b>Description de l'annonce </b>
-                                                                    <i className="now-ui-icons arrows-1_minimal-down"></i>
                                                                 </a>
                                                             </div>
                                                             <div id="collapseDescription" className="collapse show"
@@ -613,9 +613,11 @@ class AnnonceventeEdit extends Component {
                                                     </div>
 
                                                     <div className="submit text-center">
-                                                        <button className="btn btn-primary" type="submit">
-                                                            <i className="now-ui-icons ui-1_check"></i> <b>Poster votre
-                                                            annonce</b>
+                                                        <button className="btn btn-secondary" type="button" onClick={this.props.history.goBack} title="Ne pas mettre à jour l'annonce">
+                                                             <b>Annuler</b>
+                                                        </button>
+                                                        <button className="btn btn-primary" type="submit" title="Mettre à jour l'annonce">
+                                                             <b>Poster votre annonce</b>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -627,7 +629,7 @@ class AnnonceventeEdit extends Component {
                                         <div className="col-lg-4 col-md-12 mx-auto">
 
                                             <div className="submit text-center">
-                                                <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
+                                                <NavLink className="btn btn-danger" to={`/annonce_vente/${itemannoncetype}/new/`}>
                                                     <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
                                                 </NavLink>
                                             </div>

@@ -350,7 +350,7 @@ class AnnonceventeController extends Controller
     {
         $annoncevente = annoncevente::where('id', $id)->findOrFail($id);
 
-        $annoncevente->update(['status' => 1,'member_id' => auth()->user()->id]);
+        $annoncevente->update(['status_admin' => 1,'member_id' => auth()->user()->id]);
 
         return response('Confirmed',Response::HTTP_ACCEPTED);
     }

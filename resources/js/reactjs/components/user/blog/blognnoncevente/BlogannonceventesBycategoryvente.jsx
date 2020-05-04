@@ -25,8 +25,7 @@ class BlogannonceventesBycategoryvente extends Component {
             subject: 'Mauvaise catégorie',
             errors: [],
             blogannonceItem: [],
-            blogannonceventes: {blogannonceventes:[]},
-            isLoading: false,
+            blogannonceventes: {blogannonceventes:{categoryannoncevente:[],user:[]}},
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -227,10 +226,9 @@ class BlogannonceventesBycategoryvente extends Component {
     }
 
     loadItems(){
-        this.setState({ isLoading: true });
         let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
         let url = route('api.blogannoncecategoryventes_site', [itemCategoryannoncevente]);
-        dyaxios.get(url).then(response => this.setState({ blogannonceventes: response.data,isLoading: false, }));
+        dyaxios.get(url).then(response => this.setState({ blogannonceventes: response.data }));
     }
 
     // lifecycle method
@@ -239,15 +237,15 @@ class BlogannonceventesBycategoryvente extends Component {
     }
 
     render() {
-        const {blogannonceventes,blogannonceItem,isLoading} = this.state;
-        const mapBlogannonceventes = isLoading ? (
-            <BlogannonceListSkeleton/>
-        ):(
+        const {blogannonceventes,blogannonceItem} = this.state;
+        const mapBlogannonceventes = blogannonceventes.blogannonceventes.length >= 0 ? (
             blogannonceventes.blogannonceventes.map(item => {
                 return(
                     <BlogannonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser}/>
                 )
             })
+        ):(
+            <BlogannonceListSkeleton/>
         );
         return (
             <>

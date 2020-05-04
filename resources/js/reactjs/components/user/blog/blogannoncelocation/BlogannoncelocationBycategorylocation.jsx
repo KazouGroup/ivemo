@@ -23,8 +23,7 @@ class BlogannoncelocationBycategorylocation extends Component {
             subject: 'Mauvaise catégorie',
             errors: [],
             blogannonceItem: [],
-            blogannoncelocationsData: {blogannoncelocations:[]},
-            isLoading: false,
+            blogannoncelocationsData: {blogannoncelocations:{categoryannoncelocation:[],user:[]}},
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -225,10 +224,9 @@ class BlogannoncelocationBycategorylocation extends Component {
     }
 
     loadItems(){
-        this.setState({ isLoading: true });
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let url = route('api.blogannonceblogcategorylocations_site', [itemCategoryannoncelocation]);
-        dyaxios.get(url).then(response => this.setState({ blogannoncelocationsData: response.data, isLoading: false, }));
+        dyaxios.get(url).then(response => this.setState({ blogannoncelocationsData: response.data }));
     }
 
     // lifecycle method
@@ -237,16 +235,17 @@ class BlogannoncelocationBycategorylocation extends Component {
     }
 
     render() {
-        const {blogannoncelocationsData,isLoading,blogannonceItem} = this.state;
+        const {blogannoncelocationsData,blogannonceItem} = this.state;
         const blogannoncelocationsbycategorylocations = blogannoncelocationsData.blogannoncelocations;
-        const mapAnnoncelocations = isLoading ? (
-            <BlogannonceListSkeleton/>
-        ):(
+        const mapBlogannoncelocations = blogannoncelocationsbycategorylocations.length >= 0 ? (
             blogannoncelocationsbycategorylocations.map(item => {
                 return(
+
                     <BlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser}/>
                 )
             })
+        ):(
+            <BlogannonceListSkeleton/>
         );
         return (
             <>
@@ -310,7 +309,7 @@ class BlogannoncelocationBycategorylocation extends Component {
                                             </>
                                         )}
 
-                                        {mapAnnoncelocations}
+                                        {mapBlogannoncelocations}
 
                                     </div>
 

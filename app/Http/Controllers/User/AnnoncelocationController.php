@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Annonces\Annoncelocation\StoreRequest;
+use App\Http\Requests\Annonces\Annoncelocation\UpdateRequest;
 use App\Http\Requests\Contactuser\StorecontactRequest;
 use App\Http\Resources\AnnoncelocationResource;
 use App\Http\Resources\AnnoncetypeResource;
@@ -81,7 +83,7 @@ class AnnoncelocationController extends Controller
 
     public function api()
     {
-        $annoncelocations = AnnoncelocationResource::collection(annoncelocation::with('user','categoryannoncelocation')->latest()->get());
+        $annoncelocations = AnnoncelocationResource::collection(annoncelocation::with('user','categoryannoncelocation')->orderBy('created_at','desc')->get());
 
         return response()->json($annoncelocations, 200);
     }
@@ -193,9 +195,8 @@ class AnnoncelocationController extends Controller
            ->with(['user.profile' => function ($q){$q->distinct()->get();}])
            ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
            ->whereHas('city', function ($q) {$q->where('status',1);})
-           ->orderBy('created_at','DESC')
            ->where(['status' => 1,'status_admin' => 1])
-           ->distinct()->paginate(30)->toArray();
+           ->orderBy('created_at','desc')->paginate(30);
 
         return response()->json($annonceslocations, 200);
     }
@@ -292,9 +293,11 @@ class AnnoncelocationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(annoncetype $annoncetype)
     {
-        //
+        return view('user.annoncelocation.create',[
+            'annoncetype' => $annoncetype,
+        ]);
     }
 
     /**
@@ -303,9 +306,18 @@ class AnnoncelocationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request,annoncetype $annoncetype)
     {
-        //
+        $annoncelocation= new annoncelocation();
+
+        $annoncelocation->fill($request->all());
+
+        $annoncelocation->annoncetype_id = $annoncetype->id;
+        $annoncelocation->description = clean($request->description);
+
+        $annoncelocation->save();
+
+        return response('Created',Response::HTTP_CREATED);
     }
 
     /**
@@ -341,9 +353,18 @@ class AnnoncelocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request,annoncetype $annoncetype,$annoncelocation)
     {
-        //
+        $annoncelocation = annoncelocation::whereSlugin($annoncelocation)->firstOrFail();
+
+        $this->authorize('update',$annoncelocation);
+
+
+        $annoncelocation->description = clean($request->description);
+
+        $annoncelocation->update($request->all());
+
+        return response()->json($annoncelocation,200);
     }
 
 
@@ -376,6 +397,25 @@ class AnnoncelocationController extends Controller
         }else{
             abort(404);
         }
+    }
+
+    public function adminactivated($id)
+    {
+        $annoncelocation = annoncelocation::where('id', $id)->findOrFail($id);
+
+        $annoncelocation->update(['status_admin' => 1,'member_id' => auth()->user()->id]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+    }
+
+    public function adminunactivated($id)
+    {
+        $annoncelocation = annoncelocation::where('id', $id)->findOrFail($id);
+
+        $annoncelocation->update(['status_admin' => 0,'member_id' => auth()->user()->id]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+
     }
 
     /**

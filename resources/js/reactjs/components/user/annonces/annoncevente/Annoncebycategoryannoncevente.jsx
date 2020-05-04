@@ -324,7 +324,9 @@ class Annoncebycategoryannoncevente extends Component {
         );
         return (
             <Fragment>
-                <Helmet tititle={`Vente ${annonceventebycategory.name || $name_site} - ${$name_site}`}/>
+                <Helmet title={`Vente ${annonceventebycategory.name || $name_site} - ${$name_site}`}/>
+
+
 
                 <div className="about-us sidebar-collapse">
 
