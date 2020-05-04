@@ -9,8 +9,7 @@ class PrivateUserAnnonceslocationList extends Component {
 
 
     getDescription() {
-        const md = new Remarkable();
-        return { __html: md.render(this.props.description.length > 80 ? this.props.description.substring(0, 80) + "..." : this.props.description) };
+        return { __html: (this.props.description.length > 80 ? this.props.description.substring(0, 80) + "..." : this.props.description) };
     }
     numberWithCommas() {
         return this.props.price.toLocaleString();

@@ -314,7 +314,7 @@ class AnnoncelocationEdit extends Component {
                                         <div className="col-lg-8 col-md-12 mx-auto">
                                             <div className="submit text-left">
                                                 <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
-                                                    <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos blogs </b>
+                                                    <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos annonces </b>
                                                 </button>
                                             </div>
                                             <div className="card">

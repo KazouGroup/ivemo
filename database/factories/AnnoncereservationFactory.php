@@ -28,6 +28,6 @@ $factory->define(annoncereservation::class, function (Faker $faker) {
         'categoryannoncereservation_id' => categoryannoncereservation::inRandomOrder()->first()->id,
         'city_id' => city::inRandomOrder()->first()->id,
         'user_id' => user::inRandomOrder()->first()->id,
-        //'created_at' => $faker->dateTime,
+        'created_at' => $faker->dateTime,
     ];
 });
