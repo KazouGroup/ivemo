@@ -31,7 +31,7 @@ class NavUserSite extends PureComponent {
                         <span className="navbar-toggler-bar bottom-bar"></span>
                     </button>
                 </div>
-                <div className="collapse navbar-collapse" data-nav-image="../assets/img//blurred-image-1.jpg" data-color="orange">
+                <div className="collapse navbar-collapse" data-nav-image="../assets/img/blurred-image-1.jpg" data-color="orange">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
                             <NavLink to={'/'} className="nav-link">
@@ -39,6 +39,7 @@ class NavUserSite extends PureComponent {
                                 <b>Acceuil</b>
                             </NavLink>
                         </li>
+                        {/**
                         {!$guest &&(
                             <li className="nav-item">
                                 <a href={`/dashboard/premium/${$userIvemo.slug}/`} className="nav-link">
@@ -47,7 +48,7 @@ class NavUserSite extends PureComponent {
                                 </a>
                             </li>
                         )}
-
+                         */}
                         <li className={`nav-item dropdown`}>
                             <a href="#" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                 <i className="now-ui-icons files_paper" aria-hidden="true"/>
