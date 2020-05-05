@@ -8,8 +8,8 @@ import FormcontactuseronlocationShow from "./inc/FormcontactuseronlocationShow";
 import BlogannoncelocationIntesseAnnonseShow from "../../blog/blogannoncelocation/BlogannoncelocationIntesseAnnonseShow";
 import Swal from "sweetalert2";
 import AnnoncelocationInteresse from "./AnnoncelocationInteresse";
-import ProfileForallAnnonceShow from "../ProfileForallAnnonceShow";
 import Skeleton from "react-loading-skeleton";
+import ProfileForallAnnoncelocationShow from "./inc/ProfileForallAnnoncelocationShow";
 
 
 class Annoncelocationbycategorycityshow extends Component {
@@ -58,7 +58,7 @@ class Annoncelocationbycategorycityshow extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.props.history.push("/profile/"+ $userIvemo.slug +"/personal_settings/annonces_locations/");
+                    this.props.history.push("/annonces_locations/"+ this.props.match.params.annoncetype +"/");
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Something wrong. Try later", {
@@ -139,6 +139,9 @@ class Annoncelocationbycategorycityshow extends Component {
     // lifecycle method
     componentDidMount() {
         this.loadItems();
+    }
+    getDescription(annoncelocation) {
+        return { __html: (annoncelocation.description) };
     }
     render() {
         const {annoncelocation} = this.state;
@@ -243,24 +246,8 @@ class Annoncelocationbycategorycityshow extends Component {
                                                 <h6 className="card-title">
                                                     Description interieur
                                             </h6>
-                                                <span>Eres' daring 'Grigri Fortune' swimsuit has
-                                                    the fit and coverage of a bikini in a one-piece silhouette.
-                                                    This fuchsia style is crafted from the label's sculpting peau
-                                                    douce fabric and has flattering
-                                                    cutouts through the torso and back. Wear yours with mirrored sunglasses on vacation.
-                                                </span>
-                                                <hr />
-                                                <h6 className="card-title">
-                                                    Exterieur
-                                            </h6>
-                                                <span>Eres' daring 'Grigri Fortune' swimsuit has
-                                                    the fit and coverage of a bikini in a one-piece silhouette.
-                                                    This fuchsia style is crafted from the label's sculpting peau
-                                                    douce fabric and has flattering
-                                                    cutouts through the torso and back. Wear yours with mirrored sunglasses on vacation.
-                                                </span>
 
-
+                                                {annoncelocation.description ? <span className="title text-justify" dangerouslySetInnerHTML={this.getDescription(annoncelocation)} />: <Skeleton count={3}/>}
 
                                             </div>
                                         </div>
@@ -269,7 +256,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                         <div className="card">
                                             <div className="card-body">
 
-                                              <ProfileForallAnnonceShow {...annoncelocation} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
+                                              <ProfileForallAnnoncelocationShow {...annoncelocation} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
 
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">

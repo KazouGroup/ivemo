@@ -7,7 +7,9 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import BlogannonceventeIntesseAnnonseShow from "../../blog/blognnoncevente/BlogannonceventeIntesseAnnonseShow";
 import FormcontactuseronannonceventeShow from "./inc/FormcontactuseronannonceventShow";
 import AnnonceventeInteresse from "./AnnonceventeInteresse";
-import ProfileForallAnnonceShow from "../ProfileForallAnnonceShow";
+import Skeleton from "react-loading-skeleton";
+import ProfileForallAnnonceventeShow from "./ProfileForallAnnonceventeShow";
+import Swal from "sweetalert2";
 
 
 class Annonceventebycategorycityshow extends Component {
@@ -17,6 +19,117 @@ class Annonceventebycategorycityshow extends Component {
             annoncevente:{annoncetype:[],categoryannoncevente:[],user:{profile:[]},imagereservations:[]},
         };
 
+        this.deleteItem = this.deleteItem.bind(this);
+        this.unactiveItem = this.unactiveItem.bind(this);
+
+    }
+
+    unactiveItem(id){
+        Swal.fire({
+            title: 'Désactiver l\'annonce?',
+            text: "êtes vous sure de vouloir confirmer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                //Envoyer la requet au server
+                let url = route('annonces_ventes_unactivated.site',id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+
+                            //message: 'Annonce désactiver avec succès',
+                            message: "Cette annonce a été masquée au utilisateur",
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'bottom',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animated fadeInUp",
+                                exit: "animated fadeOutDown"
+                            },
+                        });
+                    /** End alert ***/
+                    this.props.history.push("/annonces_ventes/"+ this.props.match.params.annoncetype +"/");
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
+
+    }
+
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes-vous sûr de vouloir executer cette action",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                const url = route('annonces_ventes_delete.site',[id]);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update',
+                            message: 'Annonce suprimée avec success'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'primary',
+                            placement: {
+                                from: 'bottom',
+                                align: 'right'
+                            },
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            },
+                        });
+                    /** End alert ***/
+                    this.loadItems();
+
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
     }
 
     // lifecycle method
@@ -30,6 +143,9 @@ class Annonceventebycategorycityshow extends Component {
         dyaxios.get(url).then(response => this.setState({annoncevente: response.data,}));
     }
 
+    getDescription(annoncevente) {
+        return { __html: (annoncevente.description) };
+    }
     render() {
         const {annoncevente} = this.state;
         return (
@@ -119,24 +235,8 @@ class Annonceventebycategorycityshow extends Component {
                                                 <h6 className="card-title">
                                                     Description
                                                 </h6>
-                                                <span>Eres' daring 'Grigri Fortune' swimsuit has
-                                                    the fit and coverage of a bikini in a one-piece silhouette.
-                                                    This fuchsia style is crafted from the label's sculpting peau
-                                                    douce fabric and has flattering
-                                                    cutouts through the torso and back. Wear yours with mirrored sunglasses on vacation.
-                                                </span>
-                                                <hr />
-                                                <h6 className="card-title">
-                                                    A L'interieur
-                                                </h6>
-                                                <span>Eres' daring 'Grigri Fortune' swimsuit has
-                                                    the fit and coverage of a bikini in a one-piece silhouette.
-                                                    This fuchsia style is crafted from the label's sculpting peau
-                                                    douce fabric and has flattering
-                                                    cutouts through the torso and back. Wear yours with mirrored sunglasses on vacation.
-                                                </span>
 
-
+                                                {annoncevente.description ? <span className="title text-justify" dangerouslySetInnerHTML={this.getDescription(annoncevente)} />: <Skeleton count={3}/>}
 
                                             </div>
                                         </div>
@@ -145,7 +245,7 @@ class Annonceventebycategorycityshow extends Component {
                                         <div className="card">
                                             <div className="card-body">
 
-                                                <ProfileForallAnnonceShow {...annoncevente}/>
+                                                <ProfileForallAnnonceventeShow {...annoncevente} unactiveItem={this.unactiveItem}/>
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">

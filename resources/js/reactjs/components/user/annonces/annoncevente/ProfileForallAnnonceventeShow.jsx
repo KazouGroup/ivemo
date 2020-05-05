@@ -5,7 +5,7 @@ import { Button,UncontrolledTooltip } from "reactstrap";
 import moment from "moment";
 
 
-class ProfileForallAnnonceShow extends Component {
+class ProfileForallAnnonceventeShow extends Component {
 
 
     render() {
@@ -43,16 +43,20 @@ class ProfileForallAnnonceShow extends Component {
                             <>
                                 {($userIvemo.id === this.props.user.id || $userIvemo.id === this.props.user_id) && (
                                     <>
-                                        <UncontrolledTooltip placement="bottom" target="TooltipEditer">
+                                        <UncontrolledTooltip placement="bottom" target="TooltipStatus">
                                             Desactiver cette annonce
                                         </UncontrolledTooltip>
 
                                         <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}
-                                                className="btn btn-success btn-icon btn-sm" id="TooltipEditer">
+                                                className="btn btn-success btn-icon btn-sm" id="TooltipStatus">
                                             <i className="now-ui-icons ui-1_check"/>
                                         </button>
 
-                                        <NavLink to={`/annonce_location/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
+                                        <UncontrolledTooltip placement="bottom" target="TooltipEditer">
+                                            Editer cette annonce
+                                        </UncontrolledTooltip>
+
+                                        <NavLink to={`/annonce_vente/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" id="TooltipEditer">
                                             <i className="now-ui-icons ui-2_settings-90"/>
                                         </NavLink>
 
@@ -116,4 +120,4 @@ class ProfileForallAnnonceShow extends Component {
 
 }
 
-export default ProfileForallAnnonceShow;
+export default ProfileForallAnnonceventeShow;
