@@ -141,7 +141,7 @@ class AnnoncelocationCreate extends Component {
         const {categoryannoncelocations,cities} = this.state;
         return (
             <Fragment>
-                <Helmet title={`${this.state.title || $name_site} - ${$name_site}`}/>
+                <Helmet title={`${this.state.title || "Nouvelle annonce"} - ${$name_site}`}/>
                 <div className="landing-page sidebar-collapse">
 
 
@@ -446,10 +446,10 @@ class AnnoncelocationCreate extends Component {
 
                                         <div className="col-lg-4 col-md-12 mx-auto">
 
-                                        <div className="submit text-center">
-                                                        <button className="btn btn-secondary" type="button" onClick={this.props.history.goBack} title="Ne pas mettre à jour l'annonce">
-                                                             <b>Annuler</b>
-                                                        </button>
+                                            <div className="submit text-center">
+                                              <button className="btn btn-secondary" type="button" onClick={this.props.history.goBack} title="Ne pas mettre à jour l'annonce">
+                                                   <b>Annuler</b>
+                                              </button>
                                             </div>
 
                                             <div className="card">

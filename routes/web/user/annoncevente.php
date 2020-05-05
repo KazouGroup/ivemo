@@ -85,3 +85,13 @@ Route::put(
     'annonce_vente/{annoncetype}/{annoncevente:slugin}',
     'AnnonceventeController@update'
 )->name('annonceventesupdate_site');
+
+Route::get(
+    'annonce_vente/{annoncetype}/new',
+    'AnnonceventeController@create'
+)->name('annonceventesnew_site');
+
+Route::post(
+    'annonce_vente/{annoncetype}/new',
+    'AnnonceventeController@store'
+)->name('annonceventesstore_site');

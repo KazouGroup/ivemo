@@ -417,7 +417,7 @@ class AnnonceventeEdit extends Component {
                                                                                         </label>
                                                                                         <div className="form-group">
                                                                                             <select name={'categoryannoncevente_id'} value={this.state.categoryannoncevente_id}
-                                                                                                    className={`form-control`}
+                                                                                                    className={`form-control ${this.hasErrorFor('categoryannoncevente_id') ? 'is-invalid' : ''}`}
                                                                                                     id="categoryannoncevente_id" onChange={this.handleFieldChange}>
                                                                                                 <option value="" disabled>Selectioner une category</option>
                                                                                                 {categoryannonceventes.map((item) => (
@@ -434,7 +434,7 @@ class AnnonceventeEdit extends Component {
                                                                                         </label>
                                                                                         <div className="form-group">
                                                                                             <select name={'city_id'} value={this.state.city_id}
-                                                                                                    className={`form-control`}
+                                                                                                    className={`form-control ${this.hasErrorFor('city_id') ? 'is-invalid' : ''}`}
                                                                                                     id="city_id" onChange={this.handleFieldChange}>
                                                                                                 <option value="" disabled>Selectioner une ville</option>
                                                                                                 {cities.map((item) => (

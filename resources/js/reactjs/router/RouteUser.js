@@ -117,6 +117,7 @@ import VerifyEmailUser from "../components/user/auth/VerifyEmailUser";
 import ConditionutilisationIndexSite from "../components/user/pages/ConditionutilisationIndexSite";
 import LicencesiteIndexSite from "../components/user/pages/LicencesiteIndexSite";
 import AnnoncelocationCreate from "../components/user/annonces/annonceloaction/treatment/AnnoncelocationCreate";
+import AnnonceventeCreate from "../components/user/annonces/annoncevente/treatment/AnnonceventeCreate";
 
 
 const RouteUser = props => (
@@ -169,6 +170,7 @@ const RouteUser = props => (
           <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/" component={withRouter(Annoncebycategoryannoncevente)}/>
           <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/:city/" component={withRouter(Annoncebycategoryannonceventecity)}/>
           <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/:city/:annoncevente/" component={withRouter(Annonceventebycategorycityshow)}/>
+          <Route exact path="/annonce_vente/:annoncetype/new/" component={AnnonceventeCreate}/>
           <Route exact path="/annonce_vente/:annoncetype/:annoncevente/edit/" component={AnnonceventeEdit}/>
 
 

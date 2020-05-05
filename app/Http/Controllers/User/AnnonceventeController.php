@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Annonces\Annoncevente\StoreRequest;
 use App\Http\Requests\Annonces\Annoncevente\UpdateRequest;
 use App\Http\Resources\AnnonceventeResource;
 use App\Http\Resources\CategoryannonceventeResource;
@@ -371,9 +372,11 @@ class AnnonceventeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(annoncetype $annoncetype)
     {
-        //
+        return view('user.annoncevente.create',[
+            'annoncetype' => $annoncetype,
+        ]);
     }
 
     /**
@@ -382,9 +385,18 @@ class AnnonceventeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request,annoncetype $annoncetype)
     {
-        //
+        $annoncevente= new annoncevente();
+
+        $annoncevente->fill($request->all());
+
+        $annoncevente->annoncetype_id = $annoncetype->id;
+        $annoncevente->description = clean($request->description);
+
+        $annoncevente->save();
+
+        return response('Created',Response::HTTP_CREATED);
     }
 
     /**

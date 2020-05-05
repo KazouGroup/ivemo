@@ -16,32 +16,17 @@ class BaseRequest extends Request
      */
     protected function getRules($group)
     {
-        if ($group == 'store') {
-            $rules = [
-                'title' => 'required|string|min:3|max:250',
-                'district' => 'required|string|min:3|max:200',
-                'description' => 'required|max:50000',
-                'price' => 'required|numeric|digits_between:2,13',
-                'surface' => 'required|numeric|digits_between:2,6',
-                'rooms' => 'nullable|numeric|digits_between:1,3',
-                'pieces' => 'nullable|numeric|digits_between:1,3',
-                'city_id' => 'required|numeric|digits_between:1,3',
-                'categoryannoncevente_id' => 'required|numeric|digits_between:1,3',
-            ];
-        }
-        else { // 'edit'
-            $rules = [
-                'title' => 'required|string|min:3|max:250',
-                'district' => 'required|string|min:3|max:200',
-                'description' => 'required|max:50000',
-                'price' => 'required|numeric|digits_between:2,13',
-                'surface' => 'required|numeric|digits_between:2,6',
-                'rooms' => 'nullable|numeric|digits_between:1,3',
-                'pieces' => 'nullable|numeric|digits_between:1,3',
-                'city_id' => 'required|numeric|digits_between:1,3',
-                'categoryannoncevente_id' => 'required|numeric|digits_between:1,3',
-            ];
-        }
+        $rules = [
+            'title' => 'required|string|min:3|max:250',
+            'district' => 'required|string|min:3|max:200',
+            'description' => 'required|max:50000',
+            'price' => 'required|numeric|digits_between:2,13',
+            'surface' => 'required|numeric|digits_between:2,6',
+            'rooms' => 'nullable|numeric|digits_between:1,3',
+            'pieces' => 'nullable|numeric|digits_between:1,3',
+            'city_id' => 'required|numeric|digits_between:1,3',
+            'categoryannoncevente_id' => 'required|numeric|digits_between:1,3',
+        ];
 
         return $rules;
     }

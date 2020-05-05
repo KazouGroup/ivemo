@@ -1,40 +1,64 @@
 import React, { Component,Fragment } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import {Button, Form, Input} from "reactstrap";
-import NavUserSite from "../../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-import AnnonceventeList from "./inc/AnnonceventeList";
-import Categoriesannoncevente from "./inc/Categoriesannoncevente";
-import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
+import {Button, Form, FormGroup, Input} from "reactstrap";
+import NavUserSite from "../../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
+import ReactQuill from "react-quill";
 import Swal from "sweetalert2";
-import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
-import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
+import moment from "moment";
 
 
 class AnnonceventeCreate extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            email: '',
-            full_name: '',
-            message: '',
-            subject: '',
-            object: 'Annonce double',
-            errors: [],
-            annonceItem: {user:[]},
-            annonceventes: [],
-        };
 
-        this.unactiveItem = this.unactiveItem.bind(this);
-        this.signalerUser = this.signalerUser.bind(this);
-        this.signalemessageItem = this.signalemessageItem.bind(this);
-        this.contactUser = this.contactUser.bind(this);
-        this.sendmessageItem = this.sendmessageItem.bind(this);
-        this.handleCheckClick = this.handleCheckClick.bind(this);
+
+        this.saveItem = this.saveItem.bind(this);
+        this.handleChangeBody = this.handleChangeBody.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
+
+        this.state = {
+            id: '',
+            status: '',
+            title: '',
+            surface: '',
+            price: '',
+            pieces: '',
+            district: '',
+            rooms: '',
+            description: '',
+            city_id: '',
+            categoryannoncevente_id: '',
+            errors: [],
+            cities: [],
+            categoryannonceventes: [],
+        };
+        this.modules = {
+            toolbar: [
+                [{ 'size': ['small', false, 'large', 'huge'] }],
+                ['bold', 'italic', 'underline'],
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                [{ 'align': [] }],
+                [{ 'color': [] }, { 'background': [] }],
+            ]
+        };
+        this.formats = [
+            'size',
+            'bold', 'italic', 'underline',
+            'list', 'bullet',
+            'align',
+            'color', 'background'
+        ];
+
+
+    }
+    // Handle Change
+    handleChangeBody(value) {
+        this.setState({ description: value });
+        document.querySelector('.editor-control').classList.remove('is-invalid');
 
     }
 
@@ -45,12 +69,6 @@ class AnnonceventeCreate extends Component {
         this.state.errors[event.target.name] = '';
     }
 
-    handleCheckClick(event){
-        this.setState({
-            object: event.target.value
-        });
-
-    };
     // Handle Errors
     hasErrorFor(field) {
         return !!this.state.errors[field];
@@ -66,469 +84,462 @@ class AnnonceventeCreate extends Component {
         }
     }
 
-    signalerUser(item) {
-        $('#addNew').modal('show');
-        this.setState({
-            annonceItem: item
-        });
-    }
-
-    contactUser(item) {
-        $('#contactNew').modal('show');
-        this.setState({
-            annonceItem: item
-        });
-    }
-
-    sendmessageItem(e) {
+    saveItem(e) {
         e.preventDefault();
 
         let item = {
-            email: this.state.email,
-            full_name: this.state.full_name,
-            phone: this.state.phone,
-            subject: this.state.subject,
-            user_id: this.state.annonceItem.user.id,
-            annoncevente_id: this.state.annonceItem.id,
-            message: this.state.message,
+            title: this.state.title,
+            description: this.state.description,
+            district: this.state.district,
+            surface: this.state.surface,
+            rooms: this.state.rooms,
+            pieces: this.state.pieces,
+            price: this.state.price,
+            city_id: this.state.city_id,
+            categoryannoncevente_id: this.state.categoryannoncevente_id,
         };
-        let url = route('contactusersventes.site');
-        dyaxios.post(url, item)
+        let itemannoncetype = this.props.match.params.annoncetype;
+        dyaxios.post(route('annonceventesstore_site', [itemannoncetype]), item)
             .then(() => {
-
-                //Masquer le modal après la création
-                $('#contactNew').modal('hide');
-
                 $.notify({
-                        message: `Votre message a été bien envoyé à cette utilisateur`
+                        //,
+                        message: 'Votre annonce a bien été mise à jour'
                     },
                     {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
-                            from: 'top',
+                            from: 'bottom',
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInDown",
-                            exit: "animated fadeOutUp"
+                            enter: "animated fadeInUp",
+                            exit: "animated fadeOutDown"
                         },
                     });
 
-                this.setState({
-                    email: "",
-                    full_name: "",
-                    phone: "",
-                    subject: "",
-                    message: "",
-                });
+                    this.props.history.goBack();
             }).catch(error => {
             this.setState({
                 errors: error.response.data.errors
+            });
+            $.notify("Ooop! Something wrong. Try later...", {
+                allow_dismiss: false,
+                type: 'danger',
+                animate: {
+                    enter: 'animated bounceInDown',
+                    exit: 'animated bounceOutUp'
+                }
             });
         })
     }
 
 
-    signalemessageItem(e) {
-        e.preventDefault();
-
-        let item = {
-            email: this.state.email,
-            annoncevente_id: this.state.annonceItem.id,
-            full_name: this.state.full_name,
-            object: this.state.object,
-            message: this.state.message,
-        };
-        let url = route('signalannonceventes.site');
-        dyaxios.post(url, item)
-            .then(() => {
-
-                //Masquer le modal après la création
-                $('#addNew').modal('hide');
-
-                $.notify({
-                        message: `Cette annonce a été signalé avec succès`
-                    },
-                    {
-                        allow_dismiss: false,
-                        type: 'info',
-                        placement: {
-                            from: 'top',
-                            align: 'center'
-                        },
-                        animate: {
-                            enter: "animated fadeInDown",
-                            exit: "animated fadeOutUp"
-                        },
-                    });
-
-                this.setState({
-                    email: "",
-                    full_name: "",
-                    message: "",
-                });
-            }).catch(error => {
-            this.setState({
-                errors: error.response.data.errors
-            });
-        })
-    }
-
-
-    unactiveItem(id){
-        Swal.fire({
-            title: 'Désactiver l\'annonce?',
-            text: "êtes vous sure de vouloir confirmer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                //Envoyer la requet au server
-                let url = route('annonces_ventes_unactivated.site',id);
-                dyaxios.get(url).then(() => {
-
-                    let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.annonceventes.filter(isNotId);
-                    this.setState({annonceventes: updatedItems});
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-
-                            //message: 'Annonce désactiver avec succès',
-                            message: "Cette annonce a été masquée au utilisateur",
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
-                            },
-                            animate: {
-                                enter: "animated fadeInUp",
-                                exit: "animated fadeOutDown"
-                            },
-                        });
-                    /** End alert ***/
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
-                        }
-                    });
-                })
-            }
-        })
-
-    }
-
-    loadItems(){
-        let itemAnnoncevente = this.props.match.params.annoncetype;
-        let url = route('api.annonceventebyannoncetype_site', itemAnnoncevente);
-        dyaxios.get(url).then(response => this.setState({annonceventes: response.data.data}));
-    }
     // lifecycle method
     componentDidMount() {
-        this.loadItems();
+        fetch(route('api.categoryannoncevente_site')).then(res => res.json()).then((result) => { this.setState({ categoryannonceventes: result }) })
+        fetch(route('api.all_cities')).then(res => res.json()).then((result) => { this.setState({ cities: result }) })
+    }
+
+    numberWithCommas() {
+        return this.state.price.toLocaleString(navigator.language, { minimumFractionDigits: 0 });
     }
 
     render() {
-        const {annonceventes,annonceItem} = this.state;
-        const mapAnnonceventes = annonceventes.length >= 0 ? (
-            annonceventes.map(item => {
-                return(
-                    <AnnonceventeList key={item.id} {...item} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser}/>
-                )
-            })
-        ):(
-            <AnnoncesListSkeleton/>
-        );
+        const {categoryannonceventes,cities} = this.state;
+        let itemannoncetype = this.props.match.params.annoncetype;
         return (
             <Fragment>
-                <Helmet title={`Vendez un terrain, une maison, un appartement ou une boutique et plusieurs autres de vos biens - Ivemo`}/>
-
+                <Helmet title={`${this.state.title || "Nouvelle annonce"} - ${$name_site}`}/>
                 <div className="landing-page sidebar-collapse">
 
 
-                    <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
+                    <nav className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
 
+
                     <div className="wrapper">
-                        <div className="page-header page-header-mini">
-                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
-                            </div>
-                            <div className="content-center">
-                                <div className="row">
-                                    <div className="col-md-10 ml-auto mr-auto">
-                                        <div className="text-center">
-                                            <h4 className="title">Vendre ou acheter des biens</h4>
-                                            <p className="description">
-                                                <b> Vendez un terrain, une maison, un appartement ou une boutique </b>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <div className="main main-raised">
-                            <div className="container">
-                                <div className="row">
-                                </div>
-                            </div>
 
                             <div className="container">
-                                <br />
-                                <div className="row">
+                                <br/>
 
+                                <Form role="form" id="contact-form" onSubmit={this.saveItem} acceptCharset="UTF-8">
 
-                                    <div className="col-lg-8 col-md-12 mx-auto">
+                                    <div className="row">
 
-                                        {!$guest &&(
-                                            <>
-                                                {!$userIvemo.email_verified_at &&(
-                                                    <LinkValicationEmail/>
-                                                )}
-                                            </>
-                                        )}
-
-                                        {mapAnnonceventes}
-
-                                    </div>
-
-
-                                    <div className="col-lg-4 col-md-12 mx-auto">
-
-                                        <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
-                                            </NavLink>
-                                        </div>
-
-
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-
-                                                            <Categoriesannoncevente/>
-
+                                        <div className="col-lg-8 col-md-12 mx-auto">
+                                            <div className="submit text-left">
+                                                <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
+                                                    <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos annonces </b>
+                                                </button>
+                                            </div>
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <div className="card-header d-flex align-items-center">
+                                                        <div className="d-flex align-items-center">
+                                                            <NavLink to={`/annonce/show/`}>
+                                                                <img src={$userIvemo.avatar}
+                                                                     style={{height: "40px", width: "80px"}} alt={$userIvemo.first_name}
+                                                                     className="avatar"/>
+                                                            </NavLink>
+                                                            <div className="mx-3">
+                                                                <NavLink to={`/annonce/show/`}
+                                                                         className="text-dark font-weight-600 text-sm">
+                                                                    <b>{$userIvemo.first_name}</b>
+                                                                    <small className="d-block text-muted"><b>{moment($userIvemo.created_at).format('LL')}</b></small>
+                                                                </NavLink>
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                    <hr/>
+                                                    <div id="accordion" role="tablist" aria-multiselectable="true"
+                                                         className="card-collapse">
+                                                        <div className="card card-plain">
+                                                            <div className="card-header" role="tab" id="headingTypebien">
+                                                                <a data-toggle="collapse" data-parent="#accordion"
+                                                                   href="#collapseTypebien" aria-expanded="true"
+                                                                   aria-controls="collapseTypebien">
+                                                                    <b>Type de bien </b>
+                                                                </a>
+                                                            </div>
+                                                            <div id="collapseTypebien" className="collapse show"
+                                                                 role="tabpanel" aria-labelledby="headingTypebien">
+                                                                <div className="card-body">
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <div id="accordion" role="tablist"
+                                                                                 aria-multiselectable="true"
+                                                                                 className="card-collapse">
+                                                                                <label className="labels">
+                                                                                    Donner un titre a ce bien
+                                                                                    <span className="text-danger">*</span>
+                                                                                </label>
+                                                                                <div className="input-group">
+                                                                                    <div className="input-group-prepend">
+                                                                                    <span
+                                                                                        className="input-group-text"><i
+                                                                                        className="now-ui-icons users_circle-08"></i></span>
+                                                                                    </div>
+                                                                                    <Input id='title'
+                                                                                           type='text'
+                                                                                           className={`form-control ${this.hasErrorFor('title') ? 'is-invalid' : ''}`}
+                                                                                           name='title'
+                                                                                           placeholder="Titre du bien"
+                                                                                           aria-label="Title du bien"
+                                                                                           autoComplete="title"
+                                                                                           value={this.state.title}
+                                                                                           onChange={this.handleFieldChange}
+                                                                                    />
+                                                                                    {this.renderErrorFor('title')}
+                                                                                </div>
+
+                                                                                <div className="row">
+                                                                                    <div className="col-md-4">
+                                                                                        <label className="labels">
+                                                                                            Type de bien ?
+                                                                                            <span className="text-danger">*</span>
+                                                                                        </label>
+                                                                                        <div className="form-group">
+                                                                                            <select name={'categoryannoncevente_id'} value={this.state.categoryannoncevente_id}
+                                                                                                    className={`form-control ${this.hasErrorFor('categoryannoncevente_id') ? 'is-invalid' : ''}`}
+                                                                                                    id="categoryannoncevente_id" onChange={this.handleFieldChange}>
+                                                                                                <option value="" disabled>Selectioner une category</option>
+                                                                                                {categoryannonceventes.map((item) => (
+                                                                                                    <option key={item.id} value={item.id}>{item.name}</option>
+                                                                                                ))}
+                                                                                            </select>
+                                                                                            {this.renderErrorFor('categoryannoncevente_id')}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div className="col-md-4">
+                                                                                        <label className="labels">
+                                                                                            Ville du bien ?
+                                                                                            <span className="text-danger">*</span>
+                                                                                        </label>
+                                                                                        <div className="form-group">
+                                                                                            <select name={'city_id'} value={this.state.city_id}
+                                                                                                    className={`form-control ${this.hasErrorFor('city_id') ? 'is-invalid' : ''}`}
+                                                                                                    id="city_id" onChange={this.handleFieldChange}>
+                                                                                                <option value="" disabled>Selectioner une ville</option>
+                                                                                                {cities.map((item) => (
+                                                                                                    <option key={item.id} value={item.id}>{item.name}</option>
+                                                                                                ))}
+                                                                                            </select>
+                                                                                            {this.renderErrorFor('city_id')}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        className="col-md-4">
+                                                                                        <label className="labels">
+                                                                                            Quartier du bien?
+                                                                                            <span className="text-danger">*</span>
+                                                                                        </label>
+                                                                                        <div className="form-group">
+                                                                                            <Input id='district'
+                                                                                                   type='text'
+                                                                                                   className={`form-control ${this.hasErrorFor('district') ? 'is-invalid' : ''}`}
+                                                                                                   name='district'
+                                                                                                   placeholder="Quartier"
+                                                                                                   aria-label="Quartier"
+                                                                                                   autoComplete="Quartier"
+                                                                                                   value={this.state.district}
+                                                                                                   onChange={this.handleFieldChange}
+                                                                                            />
+                                                                                            {this.renderErrorFor('district')}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div id="accordion" role="tablist" aria-multiselectable="true"
+                                                         className="card-collapse">
+                                                        <div className="card card-plain">
+                                                            <div className="card-header" role="tab" id="headingOne">
+                                                                <a data-toggle="collapse" data-parent="#accordion"
+                                                                   href="#collapseOne" aria-expanded="true"
+                                                                   aria-controls="collapseOne">
+                                                                    <b>Caracteristique du bien uniquement pour
+                                                                        (Appartement,Maison,Terrain)</b>
+                                                                </a>
+                                                            </div>
+                                                            <div id="collapseOne" className="collapse show" role="tabpanel"
+                                                                 aria-labelledby="headingOne">
+                                                                <div className="card-body">
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <div id="accordion" role="tablist"
+                                                                                 aria-multiselectable="true"
+                                                                                 className="card-collapse">
+
+                                                                                <div className="row">
+                                                                                    <div
+                                                                                        className="col-md-4 ml-auto mr-auto">
+                                                                                        <label className="labels">
+                                                                                            Surface
+                                                                                            <span className="text-danger">*</span>
+                                                                                        </label>
+                                                                                        <div className="form-group">
+                                                                                            <Input id='surface'
+                                                                                                   type='number'
+                                                                                                   maxLength="6"
+                                                                                                   className={`form-control ${this.hasErrorFor('surface') ? 'is-invalid' : ''}`}
+                                                                                                   name='surface'
+                                                                                                   placeholder="Surface"
+                                                                                                   aria-label="Surface"
+                                                                                                   autoComplete="surface"
+                                                                                                   value={this.state.surface}
+                                                                                                   onChange={this.handleFieldChange}
+                                                                                            />
+                                                                                            {this.renderErrorFor('surface')}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        className="col-md-4 ml-auto mr-auto">
+                                                                                        <label htmlFor="pieces">
+                                                                                            Pièces (optionnel)
+                                                                                        </label>
+                                                                                        <div className="form-group">
+                                                                                            <Input id='pieces'
+                                                                                                   type='number'
+                                                                                                   maxLength="3"
+                                                                                                   className={`form-control ${this.hasErrorFor('pieces') ? 'is-invalid' : ''}`}
+                                                                                                   name='pieces'
+                                                                                                   placeholder="Pièces"
+                                                                                                   aria-label="Pièces"
+                                                                                                   autoComplete="pieces"
+                                                                                                   value={this.state.pieces}
+                                                                                                   onChange={this.handleFieldChange}
+                                                                                            />
+                                                                                            {this.renderErrorFor('pieces')}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        className="col-md-4 ml-auto mr-auto">
+                                                                                        <label htmlFor="Chambres">Chambres
+                                                                                            (optionnel)</label>
+                                                                                        <div className="form-group">
+                                                                                            <Input id='rooms'
+                                                                                                   type='number'
+                                                                                                   maxLength="3"
+                                                                                                   className={`form-control ${this.hasErrorFor('rooms') ? 'is-invalid' : ''}`}
+                                                                                                   name='rooms'
+                                                                                                   placeholder="Chambres"
+                                                                                                   aria-label="Chambres"
+                                                                                                   autoComplete="rooms"
+                                                                                                   value={this.state.rooms}
+                                                                                                   onChange={this.handleFieldChange}
+                                                                                            />
+                                                                                            {this.renderErrorFor('rooms')}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <small>*optionnel: les champs ne sont
+                                                                                        pas obligatoires vous avez le choix
+                                                                                        de le remplire ou pas</small>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div id="accordion" role="tablist" aria-multiselectable="true"
+                                                         className="card-collapse">
+                                                        <div className="card card-plain">
+                                                            <div className="card-header" role="tab" id="headingDescription">
+                                                                <a data-toggle="collapse" data-parent="#accordion"
+                                                                   href="#collapseDescription" aria-expanded="true"
+                                                                   aria-controls="collapseDescription">
+                                                                    <b>Description de l'annonce </b>
+                                                                </a>
+                                                            </div>
+                                                            <div id="collapseDescription" className="collapse show"
+                                                                 role="tabpanel" aria-labelledby="headingDescription">
+                                                                <div className="card-body">
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <div id="accordion" role="tablist"
+                                                                                 aria-multiselectable="true"
+                                                                                 className="card-collapse">
+
+                                                                                <div className="form-group">
+                                                                                    <label className="labels">
+                                                                                        Décrivez votre article
+                                                                                        <span className="text-danger">*</span>
+                                                                                    </label>
+                                                                                    <br />
+                                                                                    <ReactQuill theme="snow" modules={this.modules}
+                                                                                                formats={this.formats}
+                                                                                                className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
+                                                                                                value={this.state.description || ''}
+                                                                                                onChange={this.handleChangeBody} />
+                                                                                    {this.renderErrorFor('description')}
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div className="submit text-center">
+                                                        <button className="btn btn-secondary" type="button" onClick={this.props.history.goBack} title="Ne pas mettre à jour l'annonce">
+                                                             <b>Annuler</b>
+                                                        </button>
+                                                        <button className="btn btn-primary" type="submit" title="Mettre à jour l'annonce">
+                                                             <b>Poster votre annonce</b>
+                                                        </button>
+                                                    </div>
                                                 </div>
+
                                             </div>
+
                                         </div>
 
+                                        <div className="col-lg-4 col-md-12 mx-auto">
 
-                                    </div>
+                                            <div className="submit text-center">
+                                                <button className="btn btn-secondary" type="button" onClick={this.props.history.goBack} title="Ne pas mettre à jour l'annonce">
+                                                    <b>Annuler</b>
+                                                </button>
+                                            </div>
 
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <div className="row">
+                                                        <div className="col-md-12">
+                                                            <div id="accordion" role="tablist" aria-multiselectable="true"
+                                                                 className="card-collapse">
 
-                                    <div className="modal fade" id="addNew" tabIndex="-1" role="dialog" aria-labelledby="addNewLabel"
-                                         aria-hidden="true">
-                                        <div className="modal-dialog modal-lg">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h5 className="modal-title"><b>Signaler des erreurs publicitaires</b></h5>
-                                                    <button type="button" className="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-
-                                                <Form role="form"  onSubmit={this.signalemessageItem}  acceptCharset="UTF-8">
-
-                                                    <div className="modal-body">
-
-                                                        <div className="card-body">
-
-                                                            <div className="alert alert-danger text-center" role="alert">
-                                                                <div className="container">
-                                                                    {annonceItem.title}
-                                                                </div>
-                                                            </div>
-
-                                                            <p className="category">Spécifie le type d'erreur</p>
-
-                                                            <div className="row">
-                                                                <div className="col-md-6">
-                                                                    <div className="form-check form-check-radio">
-                                                                        <label className="form-check-label">
-                                                                            <Input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Annonce double" onChange={this.handleCheckClick} checked={this.state.object === "Annonce double"}/>
-                                                                            <span className="form-check-sign"></span>
-                                                                            Annonce double
-                                                                        </label>
-                                                                    </div>
-                                                                    <div className="form-check form-check-radio">
-                                                                        <label className="form-check-label">
-                                                                            <input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Mauvaise catégorie" onChange={this.handleCheckClick} checked={this.state.object === "Mauvaise catégorie"}/>
-                                                                            <span className="form-check-sign"></span>
-                                                                            Mauvaise catégorie
-                                                                        </label>
-                                                                    </div>
-                                                                    <div className="form-check form-check-radio">
-                                                                        <label className="form-check-label">
-                                                                            <input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Mauvaise ville" onChange={this.handleCheckClick} checked={this.state.object === "Mauvaise ville"}/>
-                                                                            <span className="form-check-sign"></span>
-                                                                            Mauvaise ville
-                                                                        </label>
-                                                                    </div>
-                                                                    <div className="form-check form-check-radio">
-                                                                        <label className="form-check-label">
-                                                                            <Input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Téléphone / e-mail incorrect" onChange={this.handleCheckClick} checked={this.state.object === "Téléphone / e-mail incorrect"}/>
-                                                                            <span className="form-check-sign"></span>
-                                                                            Téléphone / e-mail incorrect
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div className="col-md-6">
-                                                                    <div className="form-check form-check-radio">
-                                                                        <label className="form-check-label">
-                                                                            <Input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Erreur d'adresse / de carte" onChange={this.handleCheckClick} checked={this.state.object === "Erreur d'adresse / de carte"}/>
-                                                                            <span className="form-check-sign"></span>
-                                                                            Erreur d'adresse / de carte
-                                                                        </label>
-                                                                    </div>
-
-                                                                    <div className="form-check form-check-radio">
-                                                                        <label className="form-check-label">
-                                                                            <Input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Propriété inexistante" onChange={this.handleCheckClick} checked={this.state.object === "Propriété inexistante"}/>
-                                                                            <span className="form-check-sign"></span>
-                                                                            Propriété inexistante
-                                                                        </label>
-                                                                    </div>
-                                                                    <div className="form-check form-check-radio">
-                                                                        <label className="form-check-label">
-                                                                            <Input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Arnaque possible" onChange={this.handleCheckClick} checked={this.state.object === "Arnaque possible"}/>
-                                                                            <span className="form-check-sign"></span>
-                                                                            Arnaque possible
-                                                                        </label>
-                                                                    </div>
-                                                                    <div className="form-check form-check-radio">
-                                                                        <label className="form-check-label">
-                                                                            <Input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Autre (précisez dans le commentaire)" onChange={this.handleCheckClick} checked={this.state.object === "Autre (précisez dans le commentaire)"}/>
-                                                                            <span className="form-check-sign"></span>
-                                                                            Autre (précisez dans le commentaire)
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-
-                                                            <div className="row">
-                                                                <div className="col-md-6">
-                                                                    <div className="input-group">
-                                                                        <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons users_circle-08"/></span>
+                                                                <div className="card-header text-center">
+                                                                    {this.state.price && (
+                                                                        <div className="ml-auto">
+                                                                            <h5 className="text-dark"><b>{this.numberWithCommas()} <small>FCFA</small></b></h5>
                                                                         </div>
-                                                                        <input id='full_name'
-                                                                               type='text'
-                                                                               required="required"
-                                                                               className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
-                                                                               name='full_name'
-                                                                               placeholder="Nom complet"
-                                                                               aria-label="Nom complet"
-                                                                               autoComplete="full_name"
-                                                                               value={this.state.full_name}
-                                                                               onChange={this.handleFieldChange}
-                                                                        />
-                                                                        {this.renderErrorFor('full_name')}
+                                                                    )}
+                                                                    <div className="card-title">
+                                                                        <b>Quel est le montant de votre bien ?</b>
                                                                     </div>
                                                                 </div>
-                                                                <div className="col-md-6">
-                                                                    <div className="input-group">
-                                                                        <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons ui-1_email-85"/></span>
-                                                                        </div>
-                                                                        <input id='email'
-                                                                               type='email'
-                                                                               required="required"
-                                                                               className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                                                               name='email'
-                                                                               placeholder="Email"
-                                                                               aria-label="Email"
-                                                                               autoComplete="email"
-                                                                               value={this.state.email}
-                                                                               onChange={this.handleFieldChange}
-                                                                        />
-                                                                        {this.renderErrorFor('email')}
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-
-                                                            <div className="row">
 
                                                                 <div className="input-group">
-                                                       <textarea name="message" value={this.state.message}
-                                                                 onChange={this.handleFieldChange}
-                                                                 placeholder={'Pourquoi signalez-vous cette article?'}
-                                                                 className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                 id="message"
-                                                                 required="required"
-                                                                 rows="10" />
-                                                                    {this.renderErrorFor('message')}
+                                                                    <div className="input-group-prepend">
+                                                                        <span className="input-group-text">
+                                                                            <i className="now-ui-icons business_money-coins"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                    <Input id='price'
+                                                                           type='number'
+                                                                           maxLength="13"
+                                                                           minLength="4"
+                                                                           className={`form-control ${this.hasErrorFor('price') ? 'is-invalid' : ''}`}
+                                                                           name='price'
+                                                                           placeholder="Montant de votre bien"
+                                                                           aria-label="Montant de votre bien"
+                                                                           autoComplete="price"
+                                                                           value={this.state.price}
+                                                                           onChange={this.handleFieldChange}
+                                                                    />
+                                                                    {this.renderErrorFor('price')}
                                                                 </div>
+                                                                <div id="accordion" role="tablist"
+                                                                     aria-multiselectable="true" className="card-collapse">
+
+                                                                    <div className="card card-plain">
+                                                                        <div className="card-header" role="tab"
+                                                                             id="headingAsavoir1">
+                                                                            <a className="collapsed" data-toggle="collapse"
+                                                                               data-parent="#accordion"
+                                                                               href="#collapseAsavoir1"
+                                                                               aria-expanded="false"
+                                                                               aria-controls="collapseAsavoir1">
+                                                                                Bon a savoir sur la vente !
+                                                                                <i className="now-ui-icons arrows-1_minimal-down"></i>
+                                                                            </a>
+                                                                        </div>
+                                                                        <div id="collapseAsavoir1" className="collapse"
+                                                                             role="tabpanel"
+                                                                             aria-labelledby="headingAsavoir1">
+                                                                            <div className="card-body text-info">
+                                                                                Pour trouver un client rapidement, il est
+                                                                                préférable de fixer un prix conforme au
+                                                                                marché locatif local.
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
                                                             </div>
-
-                                                            <div className="submit text-center">
-                                                                <button className="btn btn-primary btn-lg btn-block" type="submit">
-                                                                    <b>Signaler</b>
-                                                                </button>
-                                                            </div>
-
-
                                                         </div>
-
                                                     </div>
-
-                                                </Form>
-
-
+                                                </div>
                                             </div>
+
                                         </div>
+
                                     </div>
 
+                                </Form>
 
-                                    <FormModalContactannonceUser {...this.props} {...annonceItem}
-                                                                 renderErrorFor={this.renderErrorFor}
-                                                                 handleFieldChange={this.handleFieldChange}
-                                                                 hasErrorFor={this.hasErrorFor}
-                                                                 sendmessageItem={this.sendmessageItem}/>
-
-                                </div>
                             </div>
-
 
 
                         </div>
@@ -536,6 +547,7 @@ class AnnonceventeCreate extends Component {
                         <FooterBigUserSite />
                     </div>
                 </div>
+
             </Fragment>
 
         )
