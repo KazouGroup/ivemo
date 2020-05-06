@@ -26,6 +26,9 @@ class BlogannoncelocationIndex extends Component {
             blogannonceItem: [],
             blogannoncelocations:{categoryannoncelocation:[],user:[]},
 
+            progress: false,
+            completed: false,
+
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -36,6 +39,7 @@ class BlogannoncelocationIndex extends Component {
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
+
     }
 
     handleFieldChange(event) {
@@ -232,10 +236,15 @@ class BlogannoncelocationIndex extends Component {
     }
 
     componentDidMount() {
+        this.loadItems();
+    }
+
+    loadItems(){
+
         dyaxios.get(route('api.blogannoncelocations_site')).then(response =>
             this.setState({
-                blogannoncelocations: [...response.data.data],
-            }));
+                blogannoncelocations: [...response.data.data]
+            }))
     }
 
     render() {

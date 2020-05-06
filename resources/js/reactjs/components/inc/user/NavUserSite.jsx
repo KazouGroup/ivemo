@@ -135,19 +135,10 @@ class NavUserSite extends PureComponent {
                                             <i className="now-ui-icons shopping_tag-content"/>Mes reservations
                                         </Link>
                                         <Link to={`/profile/${$userIvemo.slug}/personal_settings/annonces_locations/`} className="dropdown-item">
-                                            <i className="now-ui-icons text_align-left"/>Annonce locations
-                                        </Link>
-                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/annonces_reservations/`} className="dropdown-item">
-                                            <i className="now-ui-icons education_paper"/>Annonce reservations
-                                        </Link>
-                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_locations/`} className="dropdown-item">
-                                            <i className="now-ui-icons text_align-center"/>Blog annonces locations
-                                        </Link>
-                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_reservations/`} className="dropdown-item">
-                                            <i className="now-ui-icons text_align-center"/>Blog annonces reservations
+                                            <i className="now-ui-icons text_align-left"/>Annonces
                                         </Link>
                                         <Link to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_ventes/`} className="dropdown-item">
-                                            <i className="now-ui-icons text_align-center"/>Blog annonces ventes
+                                            <i className="now-ui-icons text_align-center"/>Blog annonces
                                         </Link>
                                         <Link to={`/profile/${$userIvemo.slug}/personal_settings/teams/`} className="dropdown-item">
                                             <i className="now-ui-icons users_circle-08"/>Team
