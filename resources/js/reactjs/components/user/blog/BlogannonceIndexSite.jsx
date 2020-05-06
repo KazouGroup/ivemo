@@ -134,9 +134,19 @@ class BlogannonceIndexSite extends Component {
 
                                         {blogannoncelocations.length > 0 && (
                                             <div className="text-center">
-                                                <Link to={`/blogs/annonce_locations/`} className="btn btn-danger btn-lg">
+                                                <Link to={`/blogs/annonce_locations/`} className="btn btn-primary btn-lg">
                                                     <b>Voir plus d'articles</b>
                                                 </Link>
+
+                                                {!$guest ?
+                                                    <NavLink className="btn btn-danger btn-lg" to={`/blogs/annonce_locations/ab/new/`}>
+                                                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article sur la location</b>
+                                                    </NavLink>
+                                                    :
+                                                    <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="btn btn-danger btn-lg">
+                                                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article sur la location</b>
+                                                    </a>
+                                                }
                                             </div>
                                         )}
 
@@ -154,9 +164,18 @@ class BlogannonceIndexSite extends Component {
 
                                         {blogannoncereservations.length > 0 && (
                                             <div className="text-center">
-                                                <Link to={`/blogs/annonce_reservations/`} className="btn btn-danger btn-lg">
+                                                <Link to={`/blogs/annonce_reservations/`} className="btn btn-primary btn-lg">
                                                     <b>Voir plus d'articles</b>
                                                 </Link>
+                                                {!$guest ?
+                                                    <NavLink className="btn btn-danger btn-lg" to={`/blogs/annonce_reservations/ab/new/`}>
+                                                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article sur la reservation</b>
+                                                    </NavLink>
+                                                    :
+                                                    <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="btn btn-danger btn-lg">
+                                                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article sur la reservation</b>
+                                                    </a>
+                                                }
                                             </div>
                                         )}
 
@@ -174,9 +193,18 @@ class BlogannonceIndexSite extends Component {
 
                                         {blogannonceventes.length > 0 &&(
                                             <div className="text-center">
-                                                <Link to={`/blogs/annonce_ventes/`} className="btn btn-danger btn-lg">
+                                                <Link to={`/blogs/annonce_ventes/`} className="btn btn-primary btn-lg">
                                                     <b>Voir plus d'articles</b>
                                                 </Link>
+                                                {!$guest ?
+                                                    <NavLink className="btn btn-danger btn-lg" to={`/blogs/annonce_ventes/ab/new/`}>
+                                                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article sur la vente/achat</b>
+                                                    </NavLink>
+                                                    :
+                                                    <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="btn btn-danger btn-lg">
+                                                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article sur la vente/achat</b>
+                                                    </a>
+                                                }
                                             </div>
                                         )}
 
