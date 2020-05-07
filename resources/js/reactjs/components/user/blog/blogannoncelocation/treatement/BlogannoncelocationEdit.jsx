@@ -86,10 +86,29 @@ class BlogannoncelocationEdit extends Component {
         e.preventDefault();
         let reader = new FileReader();
         let file = e.target.files[0];
-        reader.onloadend = (file) => {
-            this.setState({ file: file, photo: reader.result, showDefaultImage: false });
-        };
-        reader.readAsDataURL(file)
+        if (file['size'] < 6000775){
+            reader.onloadend = (file) => {
+                this.setState({ file: file, photo: reader.result, showDefaultImage: false });
+            };
+            reader.readAsDataURL(file);
+        }else{
+            $.notify({
+                //,
+                message: 'La fichier ne peut pas être supérieure à 15 MB'
+            },
+                {
+                    allow_dismiss: false,
+                    type: 'danger',
+                    placement: {
+                        from: 'top',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animated fadeInDownBig",
+                        exit: "animated fadeOutUp"
+                    },
+                });
+        }
     }
     removeImage(e) {
         e.preventDefault();

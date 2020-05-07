@@ -95,6 +95,13 @@ class BlogannoncereservationShow extends Component {
         const md = new Remarkable();
         return { __html: md.render(blogannoncereservation.description) };
     }
+    data_countFormatter(visits_count, precision) {
+        const abbrev = ['', 'k', 'M', 'B', 'T'];
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(visits_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (visits_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     render() {
         const { blogannoncereservation } = this.state;
         let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
@@ -154,6 +161,9 @@ class BlogannoncereservationShow extends Component {
                                                                     {$userIvemo.id === blogannoncereservation.user_id && (
                                                                         <>
                                                                             <div className="text-right ml-auto">
+                                                                                <a href={`#${blogannoncereservation.visits_count}`} className="btn btn-sm btn-secondary">
+                                                                                    <i class="far fa-eye"></i> <b>{this.data_countFormatter(blogannoncereservation.visits_count)}</b>
+                                                                                </a>
                                                                                 <UncontrolledTooltip placement="bottom" target="TooltipEdit">
                                                                                     Editer cet article
                                                                                 </UncontrolledTooltip>
@@ -221,9 +231,9 @@ class BlogannoncereservationShow extends Component {
                                 <BlogannoncereservationInteresse  {...this.props} />
 
                                 <div className="text-center">
-                                    <Link to={`/blogs/annonce_reservations/${itemCategoryannoncereservation}/`}
+                                    <a href={`/blogs/annonce_reservations/${itemCategoryannoncereservation}/`}
                                         className="btn btn-outline-info">Voir plus d'articles ici
-                                    </Link>
+                                    </a>
                                 </div>
 
 

@@ -14,6 +14,7 @@ import AnnoncelocationInteresseforBlog from "./AnnoncelocationInteresseforBlog"
 import BlogannoncelocationInteresse from "./BlogannoncelocationInteresse";
 import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
+const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
 class BlogannoncelocationShow extends Component {
@@ -96,6 +97,12 @@ class BlogannoncelocationShow extends Component {
     getDescription(blogannoncelocation) {
         return { __html: blogannoncelocation.description};
     }
+    data_countFormatter(visits_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(visits_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (visits_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     render() {
         const { blogannoncelocation } = this.state;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
@@ -156,6 +163,10 @@ class BlogannoncelocationShow extends Component {
                                                                     {$userIvemo.id === blogannoncelocation.user_id && (
                                                                         <Fragment>
                                                                             <div className="text-right ml-auto">
+                                                                                <a href={`#${blogannoncelocation.visits_count}`} className="btn btn-sm btn-secondary">
+                                                                                    <i class="far fa-eye"></i> <b>{this.data_countFormatter(blogannoncelocation.visits_count)}</b>
+                                                                                </a>
+
                                                                                 <UncontrolledTooltip placement="bottom" target="TooltipEdit">
                                                                                     Editer cet article
                                                                                 </UncontrolledTooltip>
@@ -234,9 +245,9 @@ class BlogannoncelocationShow extends Component {
                                 <BlogannoncelocationInteresse {...this.props} />
 
                                 <div className="text-center">
-                                    <Link to={`/blogs/annonce_locations/${itemCategoryannoncelocation}/`}
+                                    <a href={`/blogs/annonce_locations/${itemCategoryannoncelocation}/`}
                                         className="btn btn-outline-info">Voir plus d'articles ici
-                                    </Link>
+                                    </a>
                                 </div>
 
 

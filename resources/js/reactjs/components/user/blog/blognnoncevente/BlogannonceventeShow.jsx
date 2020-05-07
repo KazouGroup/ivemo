@@ -92,6 +92,13 @@ class BlogannonceventeShow extends Component {
     getDescription(blogannoncevente) {
         return { __html: (blogannoncevente.description) };
     }
+    data_countFormatter(visits_count, precision) {
+        const abbrev = ['', 'k', 'M', 'B', 'T'];
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(visits_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (visits_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     render() {
         const { blogannoncevente } = this.state;
         let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
@@ -152,7 +159,9 @@ class BlogannonceventeShow extends Component {
                                                                     {$userIvemo.id === blogannoncevente.user_id && (
                                                                         <Fragment>
                                                                             <div className="text-right ml-auto">
-
+                                                                                <a href={`#${blogannoncevente.visits_count}`} className="btn btn-sm btn-secondary">
+                                                                                    <i class="far fa-eye"></i> <b>{this.data_countFormatter(blogannoncevente.visits_count)}</b>
+                                                                                </a>
                                                                                 <UncontrolledTooltip placement="bottom" target="TooltipEdit">
                                                                                     Editer cet article
                                                                                 </UncontrolledTooltip>
@@ -218,9 +227,9 @@ class BlogannonceventeShow extends Component {
                                 <BlogannonceventeInteresse  {...this.props} />
 
                                 <div className="text-center">
-                                    <Link to={`/blogs/annonce_ventes/${itemCategoryannoncevente}/`}
+                                    <a href={`/blogs/annonce_ventes/${itemCategoryannoncevente}/`}
                                         className="btn btn-outline-info">Voir plus d'articles ici
-                                    </Link>
+                                    </a>
                                 </div>
 
 
