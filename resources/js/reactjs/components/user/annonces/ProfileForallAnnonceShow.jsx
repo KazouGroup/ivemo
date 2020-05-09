@@ -17,11 +17,11 @@ class ProfileForallAnnonceShow extends Component {
                 </div>
                 <div className="card-header d-flex align-items-center">
                     <div className="d-flex align-items-center">
-                        <NavLink to={`/@${this.props.user.slug}/annonces_locations/`}>
+                        <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`}>
                             <img src={this.props.user.avatar} style={{ height: "40px", width: "80px" }} alt={this.props.user.first_name} className="avatar" />
                         </NavLink>
                         <div className="mx-3">
-                            <NavLink to={`/@${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{this.props.user.first_name}</b>
+                            <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{this.props.user.first_name}</b>
                                 <small className="d-block text-muted">{moment(this.props.user.created_at).format('LL')}</small>
                             </NavLink>
                         </div>
@@ -85,7 +85,7 @@ class ProfileForallAnnonceShow extends Component {
                                 <UncontrolledTooltip placement="bottom" target="TooltipShowprofile">
                                     Profile de {this.props.user.first_name}
                                 </UncontrolledTooltip>
-                                <Link to={`/@${this.props.user.slug}/`} title="Profil agence" id="TooltipShowprofile">
+                                <Link to={`/pro/${this.props.user.slug}/`} title="Profil agence" id="TooltipShowprofile">
                                     <small><b>Consulter le profil de l'utilisateur</b></small>
                                 </Link>
                             </div>

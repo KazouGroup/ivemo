@@ -24,6 +24,7 @@ class BlogannoncelocationBycategorylocation extends Component {
             errors: [],
             blogannonceItem: [],
             blogannoncelocationsData: {blogannoncelocations:{categoryannoncelocation:[],user:[]}},
+            visiable: 20,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -34,8 +35,14 @@ class BlogannoncelocationBycategorylocation extends Component {
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
+        this.loadmoresItem = this.loadmoresItem.bind(this);
     }
 
+    loadmoresItem(){
+        this.setState((old) =>{
+            return {visiable: old.visiable + 20}
+        })
+    }
 
     handleFieldChange(event) {
         this.setState({
@@ -235,10 +242,10 @@ class BlogannoncelocationBycategorylocation extends Component {
     }
 
     render() {
-        const {blogannoncelocationsData,blogannonceItem} = this.state;
+        const {blogannoncelocationsData,blogannonceItem,visiable} = this.state;
         const blogannoncelocationsbycategorylocations = blogannoncelocationsData.blogannoncelocations;
         const mapBlogannoncelocations = blogannoncelocationsbycategorylocations.length >= 0 ? (
-            blogannoncelocationsbycategorylocations.map(item => {
+            blogannoncelocationsbycategorylocations.slice(0,visiable).map(item => {
                 return(
 
                     <BlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser}/>
@@ -310,6 +317,14 @@ class BlogannoncelocationBycategorylocation extends Component {
                                         )}
 
                                         {mapBlogannoncelocations}
+
+                                        {visiable < blogannoncelocationsbycategorylocations.length && (
+                                            <div className="col-md-4 ml-auto mr-auto text-center">
+                                                <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                                    <b>Voir plus </b>
+                                                </button>
+                                            </div>
+                                        )}
 
                                     </div>
 

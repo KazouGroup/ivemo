@@ -176,14 +176,14 @@ const RouteUser = props => (
 
           <Route exact path="/profile/account/" component={ProfileAccountUser}/>
 
-          <Route exact path="/@:user/" component={ProfileAccountPublicUser}/>
-          <Route exact path="/@:user/annonces_locations/" component={PublicUserAnnonceLocations}/>
-          <Route exact path="/@:user/annonces_reservations/" component={PublicUserAnnonceReservations}/>
-          <Route exact path="/@:user/annonces_ventes/" component={PublicUserAnnonceVentes}/>
+          <Route exact path="/pro/:user/" component={ProfileAccountPublicUser}/>
+          <Route exact path="/pro/:user/annonces_locations/" component={PublicUserAnnonceLocations}/>
+          <Route exact path="/pro/:user/annonces_reservations/" component={PublicUserAnnonceReservations}/>
+          <Route exact path="/pro/:user/annonces_ventes/" component={PublicUserAnnonceVentes}/>
 
-          <Route exact path="/@:user/blogs/annonce_locations/" component={PublicUserBlogannonceLocation}/>
-          <Route exact path="/@:user/blogs/annonce_reservations/" component={PublicUserBlogannonceReservation}/>
-          <Route exact path="/@:user/blogs/annonce_ventes/" component={PublicUserBlogannonceVente}/>
+          <Route exact path="/pro/:user/blogs/annonce_locations/" component={PublicUserBlogannonceLocation}/>
+          <Route exact path="/pro/:user/blogs/annonce_reservations/" component={PublicUserBlogannonceReservation}/>
+          <Route exact path="/pro/:user/blogs/annonce_ventes/" component={PublicUserBlogannonceVente}/>
 
           <Route exact path="/profile/personal_reservations/" component={PersonalannoncereservationsUser}/>
           <Route exact path="/profile/annonces_reservations_booked/" component={Profileannoncesreservationsbooked}/>

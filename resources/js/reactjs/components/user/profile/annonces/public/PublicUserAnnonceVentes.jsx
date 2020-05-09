@@ -124,7 +124,7 @@ class PublicUserAnnonceVentes extends Component {
                             <div className="content-center">
 
                                 <h1 className="title">{userannonceventePublick.first_name}</h1>
-                                <Link to={`/@${userannonceventePublick.slug}/`} className="text-white">
+                                <Link to={`/pro/${userannonceventePublick.slug}/`} className="text-white">
                                     <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userannonceventePublick.first_name}</b>
                                 </Link>
                                 {userannonceventePublick.annonceventes_count > 0 &&(

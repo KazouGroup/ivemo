@@ -347,7 +347,7 @@ class ProfileAccountAvisUser extends Component {
 
     handlePageChange(pageNumber) {
         let itemuser = this.props.match.params.user;
-        dyaxios.get(`/api/@${itemuser}/avis_users?page=` + pageNumber)
+        dyaxios.get(`/api/pro/${itemuser}/avis_users?page=` + pageNumber)
             .then(response => {
                 this.setState({
                     avisusers: response.data.data,

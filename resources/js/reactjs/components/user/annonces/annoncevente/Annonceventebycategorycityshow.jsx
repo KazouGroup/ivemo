@@ -294,11 +294,11 @@ class Annonceventebycategorycityshow extends Component {
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                             <div className="card-header d-flex align-items-center">
                                                                 <div className="d-flex align-items-center">
-                                                                    <NavLink to={`/@${annoncevente.user.slug}/`}>
+                                                                    <NavLink to={`/pro/${annoncevente.user.slug}/`}>
                                                                         <img src={annoncevente.user.avatar} style={{ height: "40px", width: "80px" }} alt={annoncevente.user.first_name} className="avatar" />
                                                                     </NavLink>
                                                                     <div className="mx-3">
-                                                                        <NavLink to={`/@${annoncevente.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{annoncevente.user.first_name}</b>
+                                                                        <NavLink to={`/pro/${annoncevente.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{annoncevente.user.first_name}</b>
                                                                             <small className="d-block text-muted">12 janv 2019</small>
                                                                         </NavLink>
                                                                     </div>

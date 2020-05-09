@@ -181,7 +181,7 @@ class PublicUserAnnonceLocations extends Component {
                             <div className="content-center">
 
                                 <h1 className="title">{useranoncelocationPublick.first_name}</h1>
-                                <Link to={`/@${useranoncelocationPublick.slug}/`} className="text-white">
+                                <Link to={`/pro/${useranoncelocationPublick.slug}/`} className="text-white">
                                     <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useranoncelocationPublick.first_name}</b>
                                 </Link>
                                 {useranoncelocationPublick.annoncelocations_count > 0 &&(

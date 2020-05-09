@@ -7,6 +7,7 @@ import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import Navblogannoncereservationsbyuser from "../inc/Navblogannoncereservationsbyuser";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
+import moment from "moment";
 
 
 class BlogannoncereservationCreate extends Component {
@@ -213,12 +214,12 @@ class BlogannoncereservationCreate extends Component {
 
                                                 <div className="card-header d-flex align-items-center">
                                                     <div className="d-flex align-items-center">
-                                                        <NavLink to={`/@${$userIvemo.slug}`}>
+                                                        <NavLink to={`/pro/${$userIvemo.slug}`}>
                                                             <img src={$userIvemo.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                                         </NavLink>
                                                         <div className="mx-3">
-                                                            <NavLink to={`/@${$userIvemo.slug}`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
-                                                                <small className="d-block text-muted">12 janv 2019</small>
+                                                            <NavLink to={`/pro/${$userIvemo.slug}`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
+                                                                <small className="d-block text-muted"><b>{moment($userIvemo.created_at).format('LL')}</b></small>
                                                             </NavLink>
                                                         </div>
                                                     </div>

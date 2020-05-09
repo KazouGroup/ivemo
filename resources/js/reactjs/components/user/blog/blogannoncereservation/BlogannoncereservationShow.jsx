@@ -143,7 +143,7 @@ class BlogannoncereservationShow extends Component {
                                                         <div className="card-header d-flex align-items-center">
                                                             <div className="d-flex align-items-center">
                                                                 {blogannoncereservation.user.avatar ?
-                                                                    <NavLink to={`/@${blogannoncereservation.user.slug}/blogs/annonce_reservations/`}>
+                                                                    <NavLink to={`/pro/${blogannoncereservation.user.slug}/blogs/annonce_reservations/`}>
                                                                         <img src={blogannoncereservation.user.avatar}
                                                                              style={{ height: "40px", width: "80px",borderRadius: "5px" }}
                                                                              alt={blogannoncereservation.user.first_name}
@@ -151,7 +151,7 @@ class BlogannoncereservationShow extends Component {
                                                                     </NavLink>
                                                                     : <Skeleton circle={false} height={40} width={80} />}
                                                                 <div className="mx-3">
-                                                                    <NavLink to={`/@${blogannoncereservation.user.slug}/blogs/annonce_reservations/`} className="text-dark font-weight-600 text-sm"><b>{blogannoncereservation.user.first_name || <Skeleton width={35} />}</b>
+                                                                    <NavLink to={`/pro/${blogannoncereservation.user.slug}/blogs/annonce_reservations/`} className="text-dark font-weight-600 text-sm"><b>{blogannoncereservation.user.first_name || <Skeleton width={35} />}</b>
                                                                         <small className="d-block text-muted">{moment(blogannoncereservation.created_at).fromNow()}</small>
                                                                     </NavLink>
                                                                 </div>

@@ -134,7 +134,7 @@ class PublicUserBlogannonceLocation extends Component {
 
                                     <h1 className="title">{userbloglocationPublick.first_name || <Skeleton width={300} />}</h1>
                                     {userbloglocationPublick.slug ?
-                                        <Link to={`/@${userbloglocationPublick.slug}/`} className="text-white">
+                                        <Link to={`/pro/${userbloglocationPublick.slug}/`} className="text-white">
                                             <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userbloglocationPublick.first_name}</b>
                                         </Link>
                                         :

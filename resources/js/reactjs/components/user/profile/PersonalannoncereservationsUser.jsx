@@ -191,11 +191,11 @@ class PersonalannoncereservationsUser extends Component {
                                                                             <span dangerouslySetInnerHTML={this.getDescription(item)}/>
                                                                             <div className="card-header d-flex align-items-center">
                                                                                 <div className="d-flex align-items-center">
-                                                                                    <NavLink to={`/@${item.annoncereservation.user.slug}/`}>
+                                                                                    <NavLink to={`/po/${item.annoncereservation.user.slug}/`}>
                                                                                         <img src={item.annoncereservation.user.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                                                                     </NavLink>
                                                                                     <div className="mx-3">
-                                                                                        <NavLink to={`/@${item.annoncereservation.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{item.annoncereservation.user.first_name}</b>
+                                                                                        <NavLink to={`/po/${item.annoncereservation.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{item.annoncereservation.user.first_name}</b>
                                                                                             <small className="d-block text-muted">{moment(item.annoncereservation.created_at).format('LL')}</small>
                                                                                         </NavLink>
                                                                                     </div>

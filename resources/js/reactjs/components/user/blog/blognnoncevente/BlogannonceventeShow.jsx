@@ -141,7 +141,7 @@ class BlogannonceventeShow extends Component {
                                                         <div className="card-header d-flex align-items-center">
                                                             <div className="d-flex align-items-center">
                                                                 {blogannoncevente.user.avatar ?
-                                                                    <NavLink to={`/@${blogannoncevente.user.slug}/blogs/annonce_ventes/`}>
+                                                                    <NavLink to={`/pro/${blogannoncevente.user.slug}/blogs/annonce_ventes/`}>
                                                                         <img src={blogannoncevente.user.avatar}
                                                                              style={{ height: "40px", width: "80px", borderRadius: "5px" }}
                                                                              alt={blogannoncevente.user.first_name}
@@ -149,7 +149,7 @@ class BlogannonceventeShow extends Component {
                                                                     </NavLink>
                                                                     : <Skeleton height={40} width={80} />}
                                                                 <div className="mx-3">
-                                                                    <NavLink to={`/@${blogannoncevente.user.slug}/blogs/annonce_ventes/`} className="text-dark font-weight-600 text-sm"><b>{blogannoncevente.user.first_name || <Skeleton width={35} />}</b>
+                                                                    <NavLink to={`/pro/${blogannoncevente.user.slug}/blogs/annonce_ventes/`} className="text-dark font-weight-600 text-sm"><b>{blogannoncevente.user.first_name || <Skeleton width={35} />}</b>
                                                                         <small className="d-block text-muted">{moment(blogannoncevente.created_at).fromNow()}</small>
                                                                     </NavLink>
                                                                 </div>

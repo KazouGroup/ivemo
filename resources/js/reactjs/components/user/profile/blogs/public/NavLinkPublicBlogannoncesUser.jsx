@@ -13,7 +13,7 @@ class NavLinkPublicBlogannoncesUser extends PureComponent {
                             <tbody>
                             <tr>
                                 <td>
-                                    <NavLink to={`/@${this.props.slug}/blogs/annonce_locations/`}>
+                                    <NavLink to={`/pro/${this.props.slug}/blogs/annonce_locations/`}>
                                         Articles sur les <b>locations</b>
                                     </NavLink>
                                 </td>
@@ -21,7 +21,7 @@ class NavLinkPublicBlogannoncesUser extends PureComponent {
                             </tr>
                             <tr>
                                 <td>
-                                    <NavLink to={`/@${this.props.slug}/blogs/annonce_reservations/`}>
+                                    <NavLink to={`/pro/${this.props.slug}/blogs/annonce_reservations/`}>
                                         Articles sur les <b>reservations</b>
                                     </NavLink>
                                 </td>
@@ -29,7 +29,7 @@ class NavLinkPublicBlogannoncesUser extends PureComponent {
                             </tr>
                             <tr>
                                 <td>
-                                    <NavLink to={`/@${this.props.slug}/blogs/annonce_ventes/`}>
+                                    <NavLink to={`/pro/${this.props.slug}/blogs/annonce_ventes/`}>
                                         Articles sur les <b>ventes</b>
                                     </NavLink>
                                 </td>

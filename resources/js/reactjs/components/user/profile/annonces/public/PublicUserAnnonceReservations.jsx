@@ -122,7 +122,7 @@ class PublicUserAnnonceReservations extends Component {
                             <div className="content-center">
 
                                 <h1 className="title">{useranoncereservationPublick.first_name}</h1>
-                                <Link to={`/@${useranoncereservationPublick.slug}/`} className="text-white">
+                                <Link to={`/pro/${useranoncereservationPublick.slug}/`} className="text-white">
                                     <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useranoncereservationPublick.first_name}</b>
                                 </Link>
                                 {useranoncereservationPublick.annoncereservations_count > 0 &&(

@@ -288,11 +288,11 @@ class PersonalmessagesannoncesventesShowUser extends Component {
                                                                         </h6>
                                                                         <div className="card-header d-flex align-items-center">
                                                                             <div className="d-flex align-items-center">
-                                                                                <NavLink to={`/@${contactuser.annoncevente.user.slug}/`}>
+                                                                                <NavLink to={`/po/${contactuser.annoncevente.user.slug}/`}>
                                                                                     <img src={contactuser.annoncevente.user.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                                                                 </NavLink>
                                                                                 <div className="mx-3">
-                                                                                    <NavLink to={`/@${contactuser.annoncevente.user.slug}/`} className="text-dark font-weight-600 text-sm">{contactuser.annoncevente.user.first_name}
+                                                                                    <NavLink to={`/po/${contactuser.annoncevente.user.slug}/`} className="text-dark font-weight-600 text-sm">{contactuser.annoncevente.user.first_name}
                                                                                         <small className="d-block text-muted"><b>{moment(contactuser.annoncevente.created_at).format('LL')}</b></small>
                                                                                     </NavLink>
                                                                                 </div>

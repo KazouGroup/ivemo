@@ -1,17 +1,17 @@
 <?php
 
 Route::post(
-    '@{user}/avisuser_public_save',
+    'pro/{user}/avisuser_public_save',
     'AvisuserController@avisuser_public_save'
 )->name('avisuser_public_save.site');
 
 Route::put(
-    '@{user}/avisuser_public_update/{id}',
+    'pro/{user}/avisuser_public_update/{id}',
     'AvisuserController@avisuser_public_update'
 )->name('avisuser_public_update.site');
 
 Route::put(
-    '@{user}/avisuser_public_response/{id}',
+    'pro/{user}/avisuser_public_response/{id}',
     'AvisuserController@avisuser_public_response'
 )->name('avisuser_public_response.site');
 

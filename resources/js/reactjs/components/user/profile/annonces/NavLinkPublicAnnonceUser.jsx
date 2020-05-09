@@ -14,7 +14,7 @@ class NavLinkPublicAnnonceUser extends PureComponent {
                             <tbody>
                             <tr>
                                 <td>
-                                    <NavLink to={`/@${this.props.slug}/annonces_locations/`}>
+                                    <NavLink to={`/pro/${this.props.slug}/annonces_locations/`}>
                                         Annones <b>locations</b>
                                     </NavLink>
                                 </td>
@@ -22,7 +22,7 @@ class NavLinkPublicAnnonceUser extends PureComponent {
                             </tr>
                             <tr>
                                 <td>
-                                    <NavLink to={`/@${this.props.slug}/annonces_reservations/`}>
+                                    <NavLink to={`/pro/${this.props.slug}/annonces_reservations/`}>
                                         Annonces <b>reservations</b>
                                     </NavLink>
                                 </td>
@@ -30,7 +30,7 @@ class NavLinkPublicAnnonceUser extends PureComponent {
                             </tr>
                             <tr>
                                 <td>
-                                    <NavLink to={`/@${this.props.slug}/annonces_ventes/`}>
+                                    <NavLink to={`/pro/${this.props.slug}/annonces_ventes/`}>
                                         Annonces <b>ventes</b>
                                     </NavLink>
                                 </td>

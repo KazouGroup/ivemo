@@ -286,11 +286,11 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
                                                                         </h6>
                                                                         <div className="card-header d-flex align-items-center">
                                                                             <div className="d-flex align-items-center">
-                                                                                <NavLink to={`/@${contactuser.annoncelocation.user.slug}/`}>
+                                                                                <NavLink to={`/po/${contactuser.annoncelocation.user.slug}/`}>
                                                                                     <img src={contactuser.annoncelocation.user.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                                                                 </NavLink>
                                                                                 <div className="mx-3">
-                                                                                    <NavLink to={`/@${contactuser.annoncelocation.user.slug}/`} className="text-dark font-weight-600 text-sm">{contactuser.annoncelocation.user.first_name}
+                                                                                    <NavLink to={`/po/${contactuser.annoncelocation.user.slug}/`} className="text-dark font-weight-600 text-sm">{contactuser.annoncelocation.user.first_name}
                                                                                         <small className="d-block text-muted"><b>{moment(contactuser.annoncelocation.created_at).format('LL')}</b></small>
                                                                                     </NavLink>
                                                                                 </div>
