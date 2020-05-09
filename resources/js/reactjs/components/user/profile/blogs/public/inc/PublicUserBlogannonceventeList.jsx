@@ -62,13 +62,13 @@ class PublicUserBlogannonceventeList extends Component {
                             <div className="d-flex align-items-center">
 
                                 <div className="author">
-                                    <Link to={`/@${this.props.user.slug}/`}>
+                                    <Link to={`/pro/${this.props.user.slug}/`}>
                                         <img src={this.props.user.avatar} alt={this.props.user.first_name}
                                              className="avatar img-raised"/>
                                     </Link>
                                 </div>
                                 <div className="mx-3">
-                                    <NavLink to={`/@${this.props.user.slug}/`} className="text-dark font-weight-600 text-sm">
+                                    <NavLink to={`/pro/${this.props.user.slug}/`} className="text-dark font-weight-600 text-sm">
                                         <b>{this.props.user.first_name}</b>
                                         <small className="d-block text-muted"><b>{moment(this.props.created_at).format('ll')}</b></small>
                                     </NavLink>

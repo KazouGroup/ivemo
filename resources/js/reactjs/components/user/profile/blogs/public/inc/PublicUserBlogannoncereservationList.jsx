@@ -60,7 +60,7 @@ class PublicUserBlogannoncereservationList extends PureComponent {
                         </p>
                         <CardFooter>
                             <div className="author">
-                                <Link to={`/@${this.props.user.slug}/`}>
+                                <Link to={`/pro/${this.props.user.slug}/`}>
                                     <img src={this.props.user.avatar} alt={this.props.user.first_name}
                                          className="avatar img-raised"/>
                                     <span>{this.props.user.first_name}</span>

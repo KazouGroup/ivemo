@@ -1,11 +1,10 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component} from "react";
 import PropTypes from "prop-types";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import {Button, CardBody, Row, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
-//import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-const FooterBigUserSite = lazy(() => import("../../../inc/user/FooterBigUserSite"))
+import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import './ProfileAccountUser.css';
 import NavProfileAccountPrivate from "./NavProfileAccountPrivate";
 import Swal from "sweetalert2";
@@ -485,11 +484,8 @@ class ProfileAccountUser extends Component {
 
                         </div>
 
-                        <Suspense fallback="Loading...">
-
-                         <FooterBigUserSite />
-
-                        </Suspense>
+                        <FooterBigUserSite />
+                        
                     </div>
                 </div>
 

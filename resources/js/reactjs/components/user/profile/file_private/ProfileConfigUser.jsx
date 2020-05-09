@@ -211,11 +211,11 @@ class ProfileConfigUser extends Component {
 
                                                     <div className="card-header d-flex align-items-center">
                                                         <div className="d-flex align-items-center">
-                                                            <NavLink to={`/@${$userIvemo.slug}/`}>
+                                                            <NavLink to={`/pro/${$userIvemo.slug}/`}>
                                                                 <img src={$userIvemo.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                                             </NavLink>
                                                             <div className="mx-3">
-                                                                <NavLink to={`/@${$userIvemo.slug}/`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
+                                                                <NavLink to={`/pro/${$userIvemo.slug}/`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
                                                                     <small className="d-block text-muted">{moment($userIvemo.created_at).format('LL')}</small>
                                                                 </NavLink>
                                                             </div>
@@ -243,7 +243,7 @@ class ProfileConfigUser extends Component {
                                                         <div className="container">
                                                             <div className="row">
                                                                 <div className="col-md-6 col-6">
-                                                                    <Link to={`/@${$userIvemo.slug}/`} title="Profil agence">
+                                                                    <Link to={`/pro/${$userIvemo.slug}/`} title="Profil agence">
                                                                         <small><b>Consulter le profil de votre agence</b></small>
                                                                     </Link>
                                                                 </div>
