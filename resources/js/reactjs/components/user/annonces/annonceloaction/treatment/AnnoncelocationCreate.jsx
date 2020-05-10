@@ -59,7 +59,7 @@ class AnnoncelocationCreate extends Component {
     // Handle Change
     handleChangeBody(value) {
      this.setState({ description: value });
-     document.querySelector('.editor-control').classList.remove('is-invalid');
+     document.querySelector('editor-control').classList.remove('is-invalid');
 
     }
 
@@ -423,6 +423,7 @@ class AnnoncelocationCreate extends Component {
                                                                                     <br />
                                                                                     <ReactQuill theme="snow" modules={this.modules}
                                                                                                 formats={this.formats}
+                                                                                                placeholder={"Écrivez quelque chose ★"}
                                                                                                 className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                                                 value={this.state.description || ''}
                                                                                                 onChange={this.handleChangeBody} />

@@ -7,6 +7,7 @@ import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import ReactQuill from "react-quill";
 import Swal from "sweetalert2";
 import moment from "moment";
+import Navlinknewannoncelocation from "./Navlinknewannoncelocation";
 
 
 class AnnoncelocationEdit extends Component {
@@ -296,7 +297,6 @@ class AnnoncelocationEdit extends Component {
 
     render() {
         const {categoryannoncelocations,cities} = this.state;
-        let itemannoncetype = this.props.match.params.annoncetype;
         return (
             <Fragment>
                 <Helmet title={`${this.state.title || $name_site} - ${$name_site}`}/>
@@ -626,9 +626,7 @@ class AnnoncelocationEdit extends Component {
                                         <div className="col-lg-4 col-md-12 mx-auto">
 
                                             <div className="submit text-center">
-                                                <NavLink className="btn btn-danger" to={`/annonce_location/${itemannoncetype}/new/`}>
-                                                    <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
-                                                </NavLink>
+                                                <Navlinknewannoncelocation {...this.props} />
                                             </div>
 
                                             <div className="card">

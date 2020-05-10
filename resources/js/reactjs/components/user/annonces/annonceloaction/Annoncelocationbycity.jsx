@@ -12,6 +12,7 @@ import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkel
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
 import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
+import Navlinknewannoncelocation from "./treatment/Navlinknewannoncelocation";
 
 
 class Annoncelocationbycity extends Component {
@@ -377,9 +378,7 @@ class Annoncelocationbycity extends Component {
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce_location/${this.props.match.params.annoncetype}/new/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
-                                            </NavLink>
+                                            <Navlinknewannoncelocation {...this.props} />
                                         </div>
 
 

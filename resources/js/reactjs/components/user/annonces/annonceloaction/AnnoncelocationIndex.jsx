@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
+import Navlinknewannoncelocation from "./treatment/Navlinknewannoncelocation";
 
 
 class AnnoncelocationIndex extends Component {
@@ -302,7 +303,6 @@ class AnnoncelocationIndex extends Component {
 
     render() {
         const {annoncelocations,annonceItem} = this.state;
-        let itemannoncetype = this.props.match.params.annoncetype;
         const mapAnnoncelocations = annoncelocations.length >= 0 ? (
             annoncelocations.map(item => {
                 return(
@@ -415,9 +415,7 @@ class AnnoncelocationIndex extends Component {
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce_location/${itemannoncetype}/new/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
-                                            </NavLink>
+                                            <Navlinknewannoncelocation {...this.props} />
                                         </div>
 
                                         <div className="card">

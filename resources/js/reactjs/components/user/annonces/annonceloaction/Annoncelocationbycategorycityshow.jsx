@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import AnnoncelocationInteresse from "./AnnoncelocationInteresse";
 import Skeleton from "react-loading-skeleton";
 import ProfileForallAnnoncelocationShow from "./inc/ProfileForallAnnoncelocationShow";
+import Navlinknewannoncelocation from "./treatment/Navlinknewannoncelocation";
 
 
 class Annoncelocationbycategorycityshow extends Component {
@@ -292,9 +293,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce_location/${this.props.match.params.annoncetype}/new/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
-                                            </NavLink>
+                                            <Navlinknewannoncelocation {...this.props} />
                                         </div>
 
                                         <div className="card">

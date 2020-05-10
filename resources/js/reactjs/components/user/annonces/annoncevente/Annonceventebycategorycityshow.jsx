@@ -10,6 +10,7 @@ import AnnonceventeInteresse from "./AnnonceventeInteresse";
 import Skeleton from "react-loading-skeleton";
 import ProfileForallAnnonceventeShow from "./ProfileForallAnnonceventeShow";
 import Swal from "sweetalert2";
+import Navlinknewannoncevente from "./treatment/Navlinknewannoncevente";
 
 
 class Annonceventebycategorycityshow extends Component {
@@ -282,9 +283,7 @@ class Annonceventebycategorycityshow extends Component {
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce_vente/${this.props.match.params.annoncetype}/new/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
-                                            </NavLink>
+                                            <Navlinknewannoncevente {...this.props}/>
                                         </div>
 
                                         <div className="card">

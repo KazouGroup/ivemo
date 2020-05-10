@@ -11,6 +11,7 @@ import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton
 import {Form, Input} from "reactstrap";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
+import Navlinknewannoncelocation from "./treatment/Navlinknewannoncelocation";
 
 
 class Annoncebycategoryannoncelocation extends Component {
@@ -369,9 +370,7 @@ class Annoncebycategoryannoncelocation extends Component {
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce_location/${this.props.match.params.annoncetype}/new/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
-                                            </NavLink>
+                                            <Navlinknewannoncelocation {...this.props} />
                                         </div>
 
 
