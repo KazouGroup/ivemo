@@ -144,6 +144,14 @@ class BlogannoncereservationCreate extends Component {
                 this.setState({
                     errors: error.response.data.errors
                 });
+                $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
+                    allow_dismiss: false,
+                    type: 'danger',
+                    animate: {
+                        enter: 'animated bounceInDown',
+                        exit: 'animated bounceOutUp'
+                    }
+                });
             })
     }
     componentDidMount() {
