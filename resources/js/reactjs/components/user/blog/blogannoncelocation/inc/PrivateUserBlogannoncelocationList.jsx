@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Remarkable } from 'remarkable';
-import { Button,UncontrolledTooltip } from "reactstrap";
+import {Alert, Button, UncontrolledTooltip} from "reactstrap";
+import LazyLoad from 'react-lazyload';
 import moment from "moment";
-import LazyLoad from "react-lazyload";
 
 
-class BlogannoncereservationList extends Component {
+class PrivateUserBlogannoncelocationList extends Component {
 
 
     getDescription() {
-        return { __html: (this.props.description.length > 80 ? this.props.description.substring(0, 80) + "..." : this.props.description) };
+        return { __html: (this.props.description.length > 60 ? this.props.description.substring(0, 60) + "..." : this.props.description) };
     }
     render() {
         return (
@@ -24,30 +24,32 @@ class BlogannoncereservationList extends Component {
                             <div className="col-md-8">
 
                                      <span className="title">
-                                         <a target="_blank" href={`/blogs/annonce_reservations/${this.props.categoryannoncereservation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="card-link"> {this.props.title} | </a>
-                                         <Link to={`/blogs/annonce_reservations/${this.props.categoryannoncereservation.slug}/`}
-                                               className={`btn btn-sm btn-${this.props.categoryannoncereservation.color_name}`}>
-                                             {this.props.categoryannoncereservation.name}
+                                         <a target="_blank" href={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="card-link"> {this.props.title} | </a>
+                                         <Link to={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/`}
+                                               className={`btn btn-sm btn-${this.props.categoryannoncelocation.color_name}`}>
+                                             {this.props.categoryannoncelocation.name}
                                          </Link>
                                      </span>
                                 <br/>
-                                <a target="_blank" href={`/blogs/annonce_reservations/${this.props.categoryannoncereservation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
+                                <a target="_blank" href={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
                                     <span dangerouslySetInnerHTML={this.getDescription()}/>
                                 </a>
 
                                 <div className="card-footer">
                                     <div className="author">
-                                        <Link to={`/pro/${this.props.user.slug}/`}>
+                                        <Link to={`/pro/${this.props.user.slug}/blogs/annonce_locations/`}>
                                             <img src={this.props.user.avatar} alt={this.props.user.first_name}
                                                  className="avatar img-raised"/>
                                             <b>{this.props.user.first_name}</b>
                                         </Link>
                                     </div>
 
+
                                     <div className="stats stats-right">
+
                                         {/*
                                          <a href="#" className="nav-item">
-                                            <i className="now-ui-icons location_bookmark"/>
+                                            <i className="now-ui-icons location_bookmark text-dark"/>
                                         </a>
                                         */}
 
@@ -58,16 +60,11 @@ class BlogannoncereservationList extends Component {
                             <div className="col-md-4">
 
                                 <div className="card-image">
-                                    <a target="_blank" href={`/blogs/annonce_reservations/${this.props.categoryannoncereservation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
+                                    <a target="_blank" href={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
                                         <LazyLoad>
                                             <img className="img img-raised rounded"
                                                  src={this.props.photo} alt={this.props.title}/>
                                         </LazyLoad>
-                                    </a>
-                                </div>
-                                <div className="text-right">
-                                    <a style={{ cursor: "pointer" }} onClick={() => this.props.signalerUser(this.props)} className="nav-item">
-                                        <i className="far fa-flag"></i>
                                     </a>
                                 </div>
                                 {!$guest &&(
@@ -89,17 +86,11 @@ class BlogannoncereservationList extends Component {
                                                         </button>
                                                     </>
                                                 }
-                                                <UncontrolledTooltip placement="bottom" target="TooltipEdit">
-                                                    Editer l'article
-                                                </UncontrolledTooltip>
-                                                <NavLink to={`/blogs/annonce_reservations/${this.props.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" id="TooltipEdit">
+                                                <NavLink to={`/blogs/annonce_locations/${this.props.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" title="Editer l'article">
                                                     <i className="now-ui-icons ui-2_settings-90"/>
                                                 </NavLink>
-                                                <UncontrolledTooltip placement="bottom" target="TooltipDelete">
-                                                    Supprimer cette article
-                                                </UncontrolledTooltip>
                                                 <Button
-                                                    className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} id="TooltipDelete">
+                                                    className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} title="Supprimer cette article">
                                                     <i className="now-ui-icons ui-1_simple-remove"/>
                                                 </Button>{" "}
                                             </div>
@@ -109,6 +100,7 @@ class BlogannoncereservationList extends Component {
                                 )}
 
                             </div>
+
                         </div>
                     </div>
 
@@ -117,6 +109,7 @@ class BlogannoncereservationList extends Component {
                             <span>Cette article à éte momentanément désactivée car elle ne respecte pas nos régle et nos principe <a href="#pablo">Clique sur ce lien</a> pour en savoir plus</span>
                         </div>
                     )}
+
                 </div>
             </div>
 
@@ -125,4 +118,4 @@ class BlogannoncereservationList extends Component {
 
 }
 
-export default BlogannoncereservationList;
+export default PrivateUserBlogannoncelocationList;

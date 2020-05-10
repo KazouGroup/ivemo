@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
-import BlogannoncelocationList from "./BlogannoncelocationList";
+import BlogannoncelocationList from "./inc/BlogannoncelocationList";
 import Navblogannoncelocations from "./inc/Navblogannoncelocations";
 import Navlinknewblogannoncelocation from "./treatement/Navlinknewblogannoncelocation";
 import Skeleton from "react-loading-skeleton";

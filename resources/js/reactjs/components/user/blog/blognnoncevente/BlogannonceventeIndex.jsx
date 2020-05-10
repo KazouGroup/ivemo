@@ -7,7 +7,7 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import {Button, Form, Input} from "reactstrap";
 import Swal from "sweetalert2";
 import Navblogannonceventes from "./inc/Navblogannonceventes";
-import BlogannonceventeList from "./BlogannonceventeList";
+import BlogannonceventeList from "./inc/BlogannonceventeList";
 import Navlinknewblogannoncevente from "./treatement/Navlinknewblogannoncevente";
 import BlogannonceListSkeleton from "../../../inc/user/blog/BlogannonceListSkeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";

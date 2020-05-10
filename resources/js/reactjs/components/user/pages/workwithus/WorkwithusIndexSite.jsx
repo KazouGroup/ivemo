@@ -4,7 +4,7 @@ import NavUserSite from "../../../inc/user/NavUserSite";
 import {Helmet} from "react-helmet";
 import FooterUserSite from "../../../inc/user/FooterUserSite";
 import WorkwithusList from "./WorkwithusList";
-import BlogannoncelocationList from "../../blog/blogannoncelocation/BlogannoncelocationList";
+import BlogannoncelocationList from "../../blog/blogannoncelocation/inc/BlogannoncelocationList";
 
 
 class WorkwithusIndexSite extends Component {

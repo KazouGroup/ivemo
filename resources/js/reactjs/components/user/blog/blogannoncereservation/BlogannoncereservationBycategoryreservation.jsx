@@ -5,7 +5,7 @@ import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import Navblogannoncereservations from "./inc/Navblogannoncereservations";
-import BlogannoncereservationList from "./BlogannoncereservationList";
+import BlogannoncereservationList from "./inc/BlogannoncereservationList";
 import Navlinknewblogannoncereservation from "./treatement/Navlinknewblogannoncereservation";
 import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";

@@ -5,9 +5,11 @@ import NavUserSite from "../../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../../../../configurations/inc/NavlinkconfigurationUser";
-import BlogannoncelocationList from "../../../../blog/blogannoncelocation/BlogannoncelocationList";
 import Navblogannoncelocationsbyuser from "../../../../blog/blogannoncelocation/inc/Navblogannoncelocationsbyuser";
 import LinkValicationEmail from "../../../../../inc/user/LinkValicationEmail";
+import BlogannonceListSkeleton from "../../../../../inc/user/blog/BlogannonceListSkeleton";
+import PrivateUserBlogannoncelocationList
+    from "../../../../blog/blogannoncelocation/inc/PrivateUserBlogannoncelocationList";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -18,7 +20,7 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
             blogannoncelocations_count: [],
             blogannoncelocationsactive_count: [],
             blogannoncelocationsunactive_count: [],
-            userblogannoncelocationsPrivate:{blogannoncelocations:[]},
+            userblogannoncelocationsPrivate:{blogannoncelocations:{categoryannoncelocation:[],user:[]}},
             visiable: 20,
 
         };
@@ -232,14 +234,14 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
 
     render() {
         const {userblogannoncelocationsPrivate,visiable,blogannoncelocations_count,blogannoncelocationsunactive_count,blogannoncelocationsactive_count} = this.state;
-        const mapBlogannoncelocations = userblogannoncelocationsPrivate.blogannoncelocations.length ? (
+        const mapBlogannoncelocations = userblogannoncelocationsPrivate.blogannoncelocations.length >= 0 ? (
             userblogannoncelocationsPrivate.blogannoncelocations.slice(0,visiable).map(item => {
                 return(
-                    <BlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
+                    <PrivateUserBlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
                 )
             })
         ):(
-            <></>
+            <BlogannonceListSkeleton/>
         );
         return (
             <>

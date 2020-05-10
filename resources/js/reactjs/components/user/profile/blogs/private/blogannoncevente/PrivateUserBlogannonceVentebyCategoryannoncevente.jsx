@@ -5,16 +5,17 @@ import NavUserSite from "../../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../../../../configurations/inc/NavlinkconfigurationUser";
-import BlogannonceventeList from "../../../../blog/blognnoncevente/BlogannonceventeList";
 import Navblogannonceventesbyuser from "../../../../blog/blognnoncevente/inc/Navblogannonceventesbyuser";
 import LinkValicationEmail from "../../../../../inc/user/LinkValicationEmail";
+import BlogannonceListSkeleton from "../../../../../inc/user/blog/BlogannonceListSkeleton";
+import PrivateUserBlogannonceventeList from "../../../../blog/blognnoncevente/inc/PrivateUserBlogannonceventeList";
 
 
 class PrivateUserBlogannonceVentebyCategoryannoncevente extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userblogannonceventesPrivate:{blogannonceventes:[]},
+            userblogannonceventesPrivate:{blogannonceventes:{categoryannoncevente:[],user:[]}},
             visiable: 20,
         };
 
@@ -200,14 +201,14 @@ class PrivateUserBlogannonceVentebyCategoryannoncevente extends Component {
 
     render() {
         const {userblogannonceventesPrivate,visiable} = this.state;
-        const mapBlogannoncereservations = userblogannonceventesPrivate.blogannonceventes.length ? (
+        const mapBlogannoncereservations = userblogannonceventesPrivate.blogannonceventes.length >= 0 ? (
             userblogannonceventesPrivate.blogannonceventes.slice(0,visiable).map(item => {
                 return(
-                    <BlogannonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
+                    <PrivateUserBlogannonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
                 )
             })
         ):(
-            <></>
+            <BlogannonceListSkeleton/>
         );
         return (
             <>

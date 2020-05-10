@@ -8,7 +8,7 @@ import moment from "moment";
 import PropTypes from "prop-types";
 import Swal from "sweetalert2";
 import Navblogannonceventes from "./inc/Navblogannonceventes";
-import BlogannonceventeList from "./BlogannonceventeList";
+import BlogannonceventeList from "./inc/BlogannonceventeList";
 import Navlinknewblogannoncevente from "./treatement/Navlinknewblogannoncevente";
 import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";

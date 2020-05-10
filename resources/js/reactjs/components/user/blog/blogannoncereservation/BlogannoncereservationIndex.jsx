@@ -6,7 +6,7 @@ import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import {Button, Form, Input} from "reactstrap";
 import Swal from "sweetalert2";
-import BlogannoncereservationList from "./BlogannoncereservationList";
+import BlogannoncereservationList from "./inc/BlogannoncereservationList";
 import Navblogannoncereservations from "./inc/Navblogannoncereservations";
 import Navlinknewblogannoncereservation from "./treatement/Navlinknewblogannoncereservation";
 import BlogannonceListSkeleton from "../../../inc/user/blog/BlogannonceListSkeleton";
