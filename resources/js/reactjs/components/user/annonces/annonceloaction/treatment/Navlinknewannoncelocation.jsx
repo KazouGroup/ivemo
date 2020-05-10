@@ -9,11 +9,11 @@ class Navlinknewannoncelocation extends PureComponent {
             <>
                 {!$guest ?
                     <NavLink className="btn btn-danger" to={`/annonce_location/${this.props.match.params.annoncetype}/new/`}>
-                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
+                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre bien en location</b>
                     </NavLink>
                     :
                     <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="btn btn-danger">
-                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article sur la location</b>
+                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre bien en location</b>
                     </a>
                 }
 
