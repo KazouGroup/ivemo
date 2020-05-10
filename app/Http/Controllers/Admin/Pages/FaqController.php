@@ -20,7 +20,7 @@ class FaqController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth',['except' => ['api','view','apibystatus','faqbycatagoryapi']]);
+        $this->middleware('auth',['except' => ['api','view','apibystatus','faqbycatagoryapi','apisitesfaqs']]);
     }
     /**
      * Display a listing of the resource.
@@ -40,6 +40,14 @@ class FaqController extends Controller
     public function api()
     {
         $faqs =  FaqResource::collection(faq::with('user','categoryfaq')->latest()->get());
+
+        return response()->json($faqs,200);
+    }
+
+    public function apisitesfaqs()
+    {
+        $faqs =  FaqResource::collection(faq::with('user','categoryfaq')
+            ->where('status',1)->latest()->get());
 
         return response()->json($faqs,200);
     }
@@ -172,6 +180,26 @@ class FaqController extends Controller
 
         return response('Update', Response::HTTP_ACCEPTED);
     }
+
+
+    public function activated($id)
+    {
+        $faq = faq::where('id', $id)->findOrFail($id);
+
+        $faq->update(['status' => 1,]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+    }
+
+    public function unactivated($id)
+    {
+        $faq = faq::where('id', $id)->findOrFail($id);
+
+        $faq->update(['status' => 0,]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+    }
+
 
     /**
      * Remove the specified resource from storage.

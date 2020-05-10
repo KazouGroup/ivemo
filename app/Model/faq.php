@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Cache;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class faq extends Model implements Auditable
+class faq extends Model 
 {
-    use AuditableTrait;
+    //use AuditableTrait;
 
     protected $fillable = ['body','title','status','categoryfaq_id'];
 
@@ -83,7 +83,7 @@ class faq extends Model implements Auditable
     }
 
     /**
-     * Get the comments for the blog post.
+     * Get the comments for the blogs post.
      */
     public function comments()
     {

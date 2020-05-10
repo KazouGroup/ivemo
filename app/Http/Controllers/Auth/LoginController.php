@@ -6,6 +6,7 @@ use App\Model\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Validation\ValidationException;
 
@@ -79,19 +80,21 @@ class LoginController extends Controller
      */
     protected function sendFailedLoginResponse(Request $request)
     {
+        $user = User::where('username', $request->username);
 
-        if ( ! User::where('username', $request->username)->first() ) {
+        if (!$user->first()) {
             throw ValidationException::withMessages([
                 $this->username() => Lang::get('auth.username'),
             ]);
         }
 
 
-        if ( ! User::where('username', $request->username)->where('password', bcrypt($request->password))->first() ) {
-            throw ValidationException::withMessages([
-                $this->username() => Lang::get('auth.username'),
-            ]);
-        }
+
+       if ( ! $user->where('password', bcrypt($request->password))->first() ) {
+           throw ValidationException::withMessages([
+               $this->username() => Lang::get('auth.username'),
+           ]);
+       }
 
     }
 

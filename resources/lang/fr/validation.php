@@ -121,8 +121,11 @@ return [
 
     'attributes' => [
         'name' => 'nom',
-        'username' => "username",
+        'username' => "pseudo",
+        'district' => "quartier",
+        'subject' => "object",
         'email' => 'adresse courriel',
+        'full_name' => 'nom complet',
         'first_name' => 'prénom',
         'last_name' => 'nom',
         'password' => 'mot de passe',
@@ -131,6 +134,7 @@ return [
         'country' => 'pays',
         'address' => 'adresse',
         'phone' => 'téléphone',
+        'price' => 'prix',
         'mobile' => 'portable',
         'age' => 'âge',
         'sex' => 'sexe',

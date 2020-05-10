@@ -18,7 +18,7 @@ class CreateContactsTable extends Migration
             $table->string('full_name')->nullable();
             $table->string('email')->nullable();
             $table->string('ip')->nullable();
-            $table->string('subject')->nullable();
+            $table->mediumText('subject')->nullable();
             $table->string('slug')->nullable();
             $table->longText('message')->nullable();
             $table->timestamps();

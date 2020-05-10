@@ -1,0 +1,33 @@
+<?php
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+
+use App\Model;
+use App\Model\annoncereservation;
+use App\Model\categoryannoncereservation;
+use App\Model\city;
+use App\Model\user;
+use Faker\Generator as Faker;
+use Illuminate\Support\Str;
+
+$factory->define(annoncereservation::class, function (Faker $faker) {
+    $title = $faker->sentence(9);
+    $disponible_date = $faker->dateTimeBetween('-2 years','+10 years');
+    return [
+        'title' => $title,
+        'district' => $faker->city,
+        'status' => $faker->boolean,
+        'status_admin' => $faker->boolean,
+        'description' => $faker->realText(rand(100, 200)),
+        'price' => $faker->randomNumber(7),
+        'disponible_date' => $disponible_date,
+        'annoncetype_id' => 3,
+        'slug' => str_slug($title),
+        'slugin' => Str::uuid(),
+
+        'categoryannoncereservation_id' => categoryannoncereservation::inRandomOrder()->first()->id,
+        'city_id' => city::inRandomOrder()->first()->id,
+        'user_id' => user::inRandomOrder()->first()->id,
+        'created_at' => $faker->dateTime,
+    ];
+});

@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 
-class comment extends Model implements Auditable
+class comment extends Model 
 {
-    use AuditableTrait;
+    //use AuditableTrait;
 
     protected $guarded = [];
 

@@ -70,7 +70,7 @@ class LoginUser extends Component {
 
     // lifecycle method
     componentDidMount() {
-        const composantTitle = 'Connexion - Ivemo';
+        const composantTitle = `Connexion - ${$name_site}`;
         document.title = `${composantTitle}`;
     }
     render() {
@@ -95,7 +95,9 @@ class LoginUser extends Component {
                                         <div className="card-body">
                                             <div className="input-group no-border input-lg">
                                                 <div className="input-group-prepend">
-                                                    <span className="input-group-text"><i className="now-ui-icons users_circle-08"></i></span>
+                                                    <span className="input-group-text">
+                                                        <i className="now-ui-icons users_circle-08"/>
+                                                    </span>
                                                 </div>
                                                 <input type="text" placeholder="Pseudo, email" aria-label="Pseudo, email"
                                                     required="required"
@@ -108,7 +110,9 @@ class LoginUser extends Component {
                                             </div>
                                             <div className="input-group no-border input-lg">
                                                 <div className="input-group-prepend">
-                                                    <span className="input-group-text"><i className="now-ui-icons ui-1_lock-circle-open"></i></span>
+                                                    <span className="input-group-text">
+                                                        <i className="now-ui-icons ui-1_lock-circle-open"></i>
+                                                    </span>
                                                 </div>
                                                 <input type="password" placeholder="Mot de pass" aria-label="Mot de passe"
                                                     required="required"
@@ -134,12 +138,12 @@ class LoginUser extends Component {
                                         </div>
                                         <div className="pull-left">
                                             <h6>
-                                                <a href="/register/" className="link footer-link">Inscription</a>
+                                                <Link to={`/register/`} className="link footer-link">Inscription</Link>
                                             </h6>
                                         </div>
                                         <div className="pull-right">
                                             <h6>
-                                                <a href="/password/reset/" className="link footer-link">Mot de passe oublié?</a>
+                                                <Link to={`/password/reset/`} className="link footer-link">Mot de passe oublié?</Link>
                                             </h6>
                                         </div>
                                     </form>

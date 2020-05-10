@@ -4,33 +4,38 @@ namespace App\model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
-use OwenIt\Auditing\Auditable as AuditableTrait;
-use OwenIt\Auditing\Contracts\Auditable;
 
-class profile extends Model implements Auditable
+class profile extends Model
 {
-    use AuditableTrait;
+    //use AuditableTrait;
 
-    protected $guarded = [];
+   protected $guarded = [
+           'created_at','updated_at'
+    ];
 
-    protected static function boot()
+
+    public function getRouteKeyName()
     {
-        parent::boot();
-
-        static::updating(function($model){
-            if (auth()->check()){
-                $model->user_id = auth()->id();
-            }
-        });
+        return 'slug';
     }
+
+    protected $casts = [
+        'status_avis' => 'boolean',
+        'status_team_user' => 'boolean',
+    ];
 
     public function user()
     {
         return $this->belongsTo(User::class,'user_id');
     }
 
-    public function isOnline()
+    public function city()
     {
-        return Cache::has('user-is-online-' . $this->id);
+        return $this->belongsTo(city::class,'city_id');
+    }
+
+    public function categoryprofile()
+    {
+        return $this->belongsTo(categoryprofile::class,'categoryprofile_id');
     }
 }

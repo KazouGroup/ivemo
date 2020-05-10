@@ -6,9 +6,9 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class color extends Model implements Auditable
+class color extends Model
 {
-    use \OwenIt\Auditing\Auditable;
+    //use \OwenIt\Auditing\Auditable;
     protected $fillable = ['name','status'];
 
     /**
@@ -34,7 +34,7 @@ class color extends Model implements Auditable
     {
         parent::boot();
 
-        static::creating(function ($model){
+        static::created(function ($model){
             if (auth()->check()){
                 $model->user_id = auth()->id();
             }

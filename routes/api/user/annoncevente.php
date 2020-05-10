@@ -1,0 +1,63 @@
+<?php
+
+
+Route::get(
+    'categoryannonceventes',
+    'AnnonceventeController@apicategoryannoncevente'
+)->name('api.categoryannoncevente_site');
+
+Route::get(
+    'categoryannonceventes/{city}',
+    'AnnonceventeController@apicategoryannonceventebycity'
+)->name('api.categoryannonceventebycity_site');
+
+Route::get(
+    'annonces_ventes/{annoncetype}',
+    'AnnonceventeController@apiannonceventebyannoncetype'
+)->name('api.annonceventebyannoncetype_site');
+
+Route::get(
+    'annonce_ventes/{annoncetype}/{city}',
+    'AnnonceventeController@apiannonceventesbyannoncetypebycity'
+)->name('api.annonceventesbyannoncetypebycity_site');
+
+Route::get(
+    'annonces_ventes/{annoncetype}/{categoryannoncevente}',
+    'AnnonceventeController@apiannonceventebycategoryannoncevente'
+)->name('api.annonceventebycategoryannonceventes_site');
+
+Route::get(
+    'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}',
+    'AnnonceventeController@apiannonceventebycity'
+)->name('api.annonceventebycities_site');
+
+Route::get(
+    'annonces_ventes_by_cities',
+    'AnnonceventeController@apicitiesannonces'
+)->name('api.citiesannonceventes_site');
+
+Route::get(
+    'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}/{annoncevente}',
+    'AnnonceventeController@apiannonceventebycategoryannonceventeslug'
+)->name('api.annonceventebycategoryannonceventeslug_site');
+
+
+Route::get(
+    'annonces_ventes_by_city_count/{categoryannoncevente}',
+    'AnnonceventeController@apiannonceventebycategorycount'
+)->name('api.annonceventebycategorycitycount_site');
+
+Route::get(
+    'annonces_ventes_by_city_count/{categoryannoncevente}/{city}',
+    'AnnonceventeController@apiannonceventecategorybycitycount'
+)->name('api.annonceventecategorybycitycount_site');
+
+Route::get(
+    'annonces_ventes_interesses/{annoncetype}/{categoryannoncevente}/{city}',
+    'AnnonceventeController@apiannonceventeinteresse'
+)->name('api.annonceventeinteresse_site');
+
+Route::get(
+    'annonces_ventes_interesses_categoryannoncevente/{categoryannoncevente}',
+    'AnnonceventeController@apiannonceventeinteresseslug'
+)->name('api.annonceventeinteressebycategory_site');

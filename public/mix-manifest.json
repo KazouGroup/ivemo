@@ -1,8 +1,10 @@
 {
-    "/js/reactjs/app.js": "/js/reactjs/app.js?id=5abebc62de24a4462970",
-    "/js/reactjs/app.js.map": "/js/reactjs/app.js.map?id=4d1f25ba15f52226e419",
-    "/js/reactjs/axios.js": "/js/reactjs/axios.js?id=4b790eaa8337f98f24df",
-    "/js/reactjs/axios.js.map": "/js/reactjs/axios.js.map?id=0942ba71b7c033f44246",
-    "/js/vuejs/app.js": "/js/vuejs/app.js?id=b9236fed8fcd15a4c7ff",
-    "/js/vuejs/app.js.map": "/js/vuejs/app.js.map?id=ba3e0704b0b9c64f38eb"
+    "/js/premium/app.js": "/js/premium/app.js?id=1f1e4259df35f522e912",
+    "/js/premium/app.js.map": "/js/premium/app.js.map?id=8634a625a026a54dcd0a",
+    "/js/reactjs/app.js": "/js/reactjs/app.js?id=4f73c9c9639283452ff2",
+    "/js/reactjs/app.js.map": "/js/reactjs/app.js.map?id=62b39589f284a82469e4",
+    "/js/reactjs/axios.js": "/js/reactjs/axios.js?id=d844b697a9ed6655c542",
+    "/js/reactjs/axios.js.map": "/js/reactjs/axios.js.map?id=664b12d36dbec31b7d3f",
+    "/js/vuejs/app.js": "/js/vuejs/app.js?id=5419400d04ade7ee52dc",
+    "/js/vuejs/app.js.map": "/js/vuejs/app.js.map?id=65388ae1db78cff04824"
 }
