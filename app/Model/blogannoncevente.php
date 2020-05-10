@@ -43,12 +43,12 @@ class blogannoncevente extends Model implements Auditable
 
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(user::class,'user_id');
     }
 
     public function member()
     {
-        return $this->belongsTo(User::class,'member_id');
+        return $this->belongsTo(user::class,'member_id');
     }
 
     public function categoryannoncevente()

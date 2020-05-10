@@ -12,7 +12,7 @@ class categoryannoncevente extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(user::class);
     }
 
     protected static function boot()
