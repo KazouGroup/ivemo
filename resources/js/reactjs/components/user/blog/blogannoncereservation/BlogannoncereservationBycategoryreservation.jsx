@@ -268,20 +268,20 @@ class BlogannoncereservationBycategoryreservation extends Component {
 
                                 <div className="card-body">
 
-                                    <h1 className="title">{blogannoncereservation.name || <Skeleton width={300} />}</h1>
+                                    <h1 className="title">{blogannoncereservation.name || ""}</h1>
 
                                     {blogannoncereservation.name ?
                                         <Link to={`/blogs/annonce_reservations/`} className="text-white">
                                             <i className="fa fa-chevron-circle-left" /> <b>Retour aux articles</b>
                                         </Link>
                                         :
-                                        <Skeleton width={270}/>
+                                        <></>
                                     }
 
                                     {blogannoncereservation.blogannoncereservations_count >= 0 ?
                                         <h5><b>{blogannoncereservation.blogannoncereservations_count}</b> {blogannoncereservation.blogannoncereservations_count > 1 ? "articles" : "article"} posté sur la reservation</h5>
                                         :
-                                        <h5> <Skeleton width={200}/></h5>
+                                        <></>
                                     }
 
                                 </div>

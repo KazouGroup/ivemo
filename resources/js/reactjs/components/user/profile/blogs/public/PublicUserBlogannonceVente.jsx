@@ -130,17 +130,17 @@ class PublicUserBlogannonceVente extends Component {
 
                                 <div className="card-body">
 
-                                    <h1 className="title">{userblogventePublick.first_name || <Skeleton width={300} />}</h1>
+                                    <h1 className="title">{userblogventePublick.first_name || ""}</h1>
+
                                     {userblogventePublick.slug ?
                                         <Link to={`/pro/${userblogventePublick.slug}/`} className="text-white">
                                             <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userblogventePublick.first_name}</b>
                                         </Link>
-                                        :
-                                        <Skeleton width={270}/>
-                                    }
+                                        : <></>}
+
                                     {userblogventePublick.blogannonceventes_count >= 0 ?
                                         <h5><b>{userblogventePublick.blogannonceventes_count}</b> {userblogventePublick.blogannonceventes_count > 1 ? "articles" : "article"} posté par {userblogventePublick.first_name} sur la vente et l'achat</h5>
-                                    :<h5> <Skeleton width={200}/></h5>}
+                                    : <></>}
 
                                 </div>
 

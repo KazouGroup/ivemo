@@ -133,17 +133,17 @@ class PublicUserBlogannonceReservation extends Component {
 
                                 <div className="card-body">
 
-                                    <h1 className="title">{userblogreservationPublick.first_name || <Skeleton width={300} />}</h1>
+                                    <h1 className="title">{userblogreservationPublick.first_name || ""}</h1>
                                     {userblogreservationPublick.slug ?
                                         <Link to={`/pro/${userblogreservationPublick.slug}/`} className="text-white">
                                             <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userblogreservationPublick.first_name}</b>
                                         </Link>
                                         :
-                                        <Skeleton width={270}/>
+                                        <></>
                                     }
                                     {userblogreservationPublick.blogannoncereservations_count >= 0 ?
                                         <h5><b>{userblogreservationPublick.blogannoncereservations_count}</b> {userblogreservationPublick.blogannoncereservations_count > 1 ? "articles" : "article"} posté par {userblogreservationPublick.first_name} sur la reservation</h5>
-                                    :<h5> <Skeleton width={200}/></h5>}
+                                    : <></>}
 
                                 </div>
 

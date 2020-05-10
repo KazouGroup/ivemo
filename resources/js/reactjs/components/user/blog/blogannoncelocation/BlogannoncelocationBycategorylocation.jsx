@@ -270,21 +270,21 @@ class BlogannoncelocationBycategorylocation extends Component {
                             </div>
                             <div className="content-center">
 
-                                <h1 className="title">{blogannoncelocationsData.name || <Skeleton width={300} />}</h1>
+                                <h1 className="title">{blogannoncelocationsData.name || ""}</h1>
 
                                 {blogannoncelocationsData.name ?
                                     <Link to={`/blogs/annonce_locations/`} className="text-white">
                                         <i className="fa fa-chevron-circle-left" /> <b>Retour aux articles</b>
                                     </Link>
                                     :
-                                    <Skeleton width={270}/>
+                                    <></>
                                 }
 
 
                                 {blogannoncelocationsData.blogannoncelocations_count >= 0 ?
                                     <h5><b>{blogannoncelocationsData.blogannoncelocations_count}</b> {blogannoncelocationsData.blogannoncelocations_count > 1 ? "articles" : "article"} posté sur la location</h5>
                                     :
-                                   <h5> <Skeleton width={200}/></h5>
+                                   <></>
                                 }
 
                             </div>
