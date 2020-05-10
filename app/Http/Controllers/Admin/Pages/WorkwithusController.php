@@ -50,7 +50,7 @@ class WorkwithusController extends Controller
 
     public function apiwork_with_us_show(categoryworkwithus $categoryworkwithus,workwithus $workwithus)
     {
-        visits($workwithus)->seconds(5)->increment();
+        visits($workwithus)->seconds(60)->increment();;
 
         $workwithuses = new WorkwithusResource(workwithus::whereSlug($workwithus->slug)
             ->where(['status' => 1])->first());

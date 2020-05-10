@@ -8,6 +8,13 @@ import moment from "moment";
 class ProfileForallAnnonceventeShow extends Component {
 
 
+    data_countFormatter(visits_count, precision) {
+        const abbrev = ['', 'k', 'M', 'B', 'T'];
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(visits_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (visits_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     render() {
         return (
 
@@ -43,6 +50,10 @@ class ProfileForallAnnonceventeShow extends Component {
                             <>
                                 {($userIvemo.id === this.props.user.id || $userIvemo.id === this.props.user_id) && (
                                     <>
+                                        <a href={`#${this.props.visits_count}`}
+                                           className="btn btn-sm btn-secondary">
+                                            <i className="far fa-eye"></i> <b>{this.data_countFormatter(this.props.visits_count)}</b>
+                                        </a>
                                         <UncontrolledTooltip placement="bottom" target="TooltipStatus">
                                             Desactiver cette annonce
                                         </UncontrolledTooltip>

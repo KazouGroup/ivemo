@@ -30,6 +30,13 @@ class WorkwithusShowUserSite extends Component {
     getDescription(workwithuse) {
         return { __html: workwithuse.description};
     }
+    data_countFormatter(visits_count, precision) {
+        const abbrev = ['', 'k', 'M', 'B', 'T'];
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(visits_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (visits_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     render() {
         const {workwithuse} = this.state;
         return (
@@ -73,7 +80,7 @@ class WorkwithusShowUserSite extends Component {
                                                             <b>{workwithuse.title}</b>
                                                         </h5>
                                                         <span className="card-title">
-                                                            {workwithuse.categoryworkwithus.name} - <b>{workwithuse.city.name}</b> - <i className="now-ui-icons tech_watch-time"/> {moment(workwithuse.created_at).format('ll')}
+                                                            {workwithuse.categoryworkwithus.name} - <b>{workwithuse.city.name}</b> - <i className="now-ui-icons tech_watch-time"/> {moment(workwithuse.created_at).format('ll')} {!$guest &&(<>{$userIvemo.status_user &&(<>- <i className="far fa-eye"></i> {this.data_countFormatter(workwithuse.visits_count)}</>)}</>)}
                                                         </span>
                                                     </>
                                                 )}
