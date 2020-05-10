@@ -11,7 +11,6 @@ class ContactFromWorkwithusIndex extends Component {
             email: '',
             phone: '',
             cv_file: '',
-            confirm_send: '',
             message: '',
             errors: [],
         };
@@ -54,7 +53,6 @@ class ContactFromWorkwithusIndex extends Component {
             full_name: this.state.full_name,
             phone: this.state.phone,
             cv_file: this.state.cv_file,
-            confirm_send: this.state.confirm_send,
             message: this.state.message,
         };
         let itemCategoryworkwithus = this.props.match.params.categoryworkwithus;
@@ -197,7 +195,8 @@ class ContactFromWorkwithusIndex extends Component {
                            rows="10" />
                     {this.renderErrorFor('message')}
                 </div>
-                <div
+                {/*
+                 <div
                     className="custom-control custom-checkbox mb-3">
                     <input name="confirm_send" className={`custom-control-input ${this.hasErrorFor('confirm_send') ? 'is-invalid' : ''}`}
                            id="confirm_send" value="1" type="checkbox" onChange={this.handleFieldChange} checked={this.state.confirm_send}/>
@@ -208,6 +207,7 @@ class ContactFromWorkwithusIndex extends Component {
                       </span>
                     </label>
                 </div>
+                */}
                 <div className="submit text-center">
                     <button className="btn btn-primary btn-lg" type="submit">
                         Envoyer

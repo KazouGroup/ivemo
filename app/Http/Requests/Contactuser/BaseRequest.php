@@ -54,7 +54,7 @@ class BaseRequest extends Request
                 'full_name' => ['required', 'string','min:3','max:255'],
                 'email' => ['required', 'string', 'email','min:2','max:255'],
                 //'cv_file' => ['required'],
-                'confirm_send' => ['required'],
+                //'confirm_send' => ['required'],
                 'phone' => ['required', 'numeric'],
             ];
         }

@@ -18,12 +18,12 @@ class ContactuserJob implements ShouldQueue
 
     protected $full_name;
     protected $phone;
-    protected $email;
+    protected $emailuserFrom;
     protected $subject;
     protected $message;
     protected $emailTo;
     protected $emailFrom;
-    protected $cc;
+
     /**
      * Create a new job instance.
      *

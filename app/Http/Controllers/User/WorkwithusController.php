@@ -7,6 +7,7 @@ use App\Http\Requests\Contactuser\StorecontactworkwithusRequest;
 use App\Model\categoryworkwithus;
 use App\Model\contactworkwithus;
 use App\Model\workwithus;
+use App\Services\Contactusers\ContactworkwithusService;
 use App\Services\WorkwithusService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,6 +49,8 @@ class WorkwithusController extends Controller
         //    $file_cv_file_name = WorkwithusService::uploadCvfile($contactworkwithus->getUploadPath(), $inputs['cv_file'], $contactworkwithus->cv_file);
         //    $contactworkwithus->cv_file = $file_cv_file_name;
         //}
+
+        ContactworkwithusService::newEmailTocontactworkwithus($request);
 
         $contactworkwithus->save();
 

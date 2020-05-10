@@ -4,7 +4,6 @@ import NavUserSite from "../../../inc/user/NavUserSite";
 import {Helmet} from "react-helmet";
 import FooterUserSite from "../../../inc/user/FooterUserSite";
 import WorkwithusList from "./WorkwithusList";
-import BlogannoncelocationList from "../../blog/blogannoncelocation/BlogannoncelocationList";
 
 
 class WorkwithusBycategorySite extends Component {
@@ -76,31 +75,33 @@ class WorkwithusBycategorySite extends Component {
                                         </h5>
                                     </div>
 
-                                    <div className="col-md-10 mx-auto">
-                                        <h3 className="text-center title">Rejoignez-nous!</h3>
-                                        <h5 className="text-center description">
-                                            Si vous aimez les défis et souhaitez travailler dans un environnement jeune et dynamique, <b>{$name_site}</b> vous offrira le meilleur pour exprimer tout votre potentiel.
-                                        </h5>
-                                    </div>
+                                    {workwithuses.length >= 1 && (
+                                        <Fragment>
+                                            <div className="col-md-10 mx-auto">
+                                                <h3 className="text-center title">Rejoignez-nous!</h3>
+                                                <h5 className="text-center description">
+                                                    Si vous aimez les défis et souhaitez travailler dans un environnement jeune et dynamique, <b>{$name_site}</b> vous offrira le meilleur pour exprimer tout votre potentiel.
+                                                </h5>
+                                            </div>
 
 
-                                    <div className="col-md-12 mx-auto">
-                                        <div className="card card-plain">
-                                            <div className="card-body">
-                                                <div className="table-responsive">
-                                                    <table className="table">
-                                                        <tbody>
+                                            <div className="col-md-12 mx-auto">
+                                                <div className="card card-plain">
+                                                    <div className="card-body">
+                                                        <div className="table-responsive">
+                                                            <table className="table">
+                                                                <tbody>
 
-                                                        {mapWorkwithuses}
+                                                                {mapWorkwithuses}
 
-                                                        </tbody>
-                                                    </table>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-
-
+                                        </Fragment>
+                                    )}
                                 </div>
 
 

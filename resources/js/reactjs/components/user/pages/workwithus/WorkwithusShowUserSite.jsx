@@ -7,6 +7,7 @@ import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import FooterUserSite from "../../../inc/user/FooterUserSite";
 import ContactFromWorkwithusIndex from "../inc/ContactFromWorkwithusIndex";
+import moment from "moment";
 
 
 class WorkwithusShowUserSite extends Component {
@@ -66,12 +67,16 @@ class WorkwithusShowUserSite extends Component {
                                         <div className="card">
                                             <div className="card-body">
 
-                                                <h5 className="card-title">
-                                                    <b>{workwithuse.title}</b>
-                                                </h5>
-                                                <span className="card-title">
-                                                    {workwithuse.categoryworkwithus.name} - {workwithuse.city.name}
-                                                </span>
+                                                {workwithuse.title && (
+                                                    <>
+                                                        <h5 className="card-title">
+                                                            <b>{workwithuse.title}</b>
+                                                        </h5>
+                                                        <span className="card-title">
+                                                            {workwithuse.categoryworkwithus.name} - <b>{workwithuse.city.name}</b> - <i className="now-ui-icons tech_watch-time"/> {moment(workwithuse.created_at).format('ll')}
+                                                        </span>
+                                                    </>
+                                                )}
 
                                                 {workwithuse.description ? <div className="title text-justify" dangerouslySetInnerHTML={this.getDescription(workwithuse)} />: <Skeleton count={5}/>}
                                             </div>
