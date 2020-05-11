@@ -337,7 +337,7 @@ class ProfileAccountUser extends Component {
                                                     <Row>
                                                         <div className="col-md-6">
                                                             <div className="text-center">
-                                                                <img src={this.state.showDefaultImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : avatar} alt={'avatar'} />
+                                                                <img src={this.state.showDefaultImage ? `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg` : avatar || `${$url_site}/assets/vendor/assets/img/placeholder.jpg`} alt={'avatar'} />
                                                                 <input id="avatar" type="file" onChange={this.updateavatarImage} className={`form-control ${this.hasErrorFor('avatar') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="avatar" />
                                                                 {this.renderErrorFor('avatar')}
                                                                 <div className="text-center">
@@ -353,7 +353,7 @@ class ProfileAccountUser extends Component {
                                                         <div className="col-md-6">
 
                                                             <div className="text-center">
-                                                                <img src={this.state.showDefaultavatarcoverImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : avatarcover} alt={'avatarcover'} />
+                                                                <img src={this.state.showDefaultavatarcoverImage ? `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg` : avatarcover || `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg`} alt={'avatarcover'} />
                                                                 <input id="avatarcover" type="file" onChange={this.updateavatacoverImage} className={`form-control ${this.hasErrorFor('avatarcover') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="avatarcover" />
                                                                 {this.renderErrorFor('avatarcover')}
                                                                 <div className="text-center">
