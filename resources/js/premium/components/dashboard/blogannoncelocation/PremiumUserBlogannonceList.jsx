@@ -52,6 +52,7 @@ class PremiumUserBlogannonceList extends Component {
                             <b v-else>user don't exist</b>
                         }
                     </td>
+                    <td><b>{this.data_countFormatter(this.props.visits_count)}</b></td>
                     <td>
                         <div className="timeline-heading">
                             {this.props.status ?
@@ -75,21 +76,20 @@ class PremiumUserBlogannonceList extends Component {
                             }
                         </div>
                     </td>
-                    <td><b>{this.data_countFormatter(this.props.visits_count)}</b></td>
                     <td><b>{moment(this.props.created_at).fromNow()}</b></td>
                     <td className="text-right">
                         {this.props.status ?
                             <Fragment>
                                 <Button onClick={() => this.props.unactiveItem(this.props.id)}
                                         className="btn btn-success btn-just-icon btn-sm" title="Desactiver" >
-                                    <i className="material-icons">remove</i>
+                                    <i className="material-icons">done</i>
                                 </Button>
                             </Fragment>
                             :
                             <Fragment>
                                 <Button onClick={() => this.props.activeItem(this.props.id)}
                                         className="btn btn-rose btn-just-icon btn-sm" title="Activer" >
-                                    <i className="material-icons">done</i>
+                                    <i className="material-icons">remove</i>
                                 </Button>
                             </Fragment>
 

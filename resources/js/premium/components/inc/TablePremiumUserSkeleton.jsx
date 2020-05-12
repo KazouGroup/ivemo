@@ -15,8 +15,8 @@ function TablePremiumUserSkeleton(props) {
                 <td> <Skeleton width={120} /></td>
                 <td> <Skeleton width={120} /></td>
                 <td> <Skeleton width={120} /></td>
-                <td> <Skeleton width={50} /></td>
                 <td> <Skeleton width={15} /></td>
+                <td> <Skeleton width={50} /></td>
                 <td> <Skeleton width={100} /></td>
                 <td className="text-right">
                     <Skeleton width={110} />
@@ -28,8 +28,8 @@ function TablePremiumUserSkeleton(props) {
                 <td> <Skeleton width={120} /></td>
                 <td> <Skeleton width={120} /></td>
                 <td> <Skeleton width={120} /></td>
-                <td> <Skeleton width={50} /></td>
                 <td> <Skeleton width={15} /></td>
+                <td> <Skeleton width={50} /></td>
                 <td> <Skeleton width={100} /></td>
                 <td className="text-right">
                     <Skeleton width={110} />
@@ -41,8 +41,8 @@ function TablePremiumUserSkeleton(props) {
                 <td> <Skeleton width={120} /></td>
                 <td> <Skeleton width={120} /></td>
                 <td> <Skeleton width={120} /></td>
-                <td> <Skeleton width={50} /></td>
                 <td> <Skeleton width={15} /></td>
+                <td> <Skeleton width={50} /></td>
                 <td> <Skeleton width={100} /></td>
                 <td className="text-right">
                     <Skeleton width={110} />
@@ -54,8 +54,8 @@ function TablePremiumUserSkeleton(props) {
                 <td> <Skeleton width={120} /></td>
                 <td> <Skeleton width={120} /></td>
                 <td> <Skeleton width={120} /></td>
-                <td> <Skeleton width={50} /></td>
                 <td> <Skeleton width={15} /></td>
+                <td> <Skeleton width={50} /></td>
                 <td> <Skeleton width={100} /></td>
                 <td className="text-right">
                     <Skeleton width={110} />

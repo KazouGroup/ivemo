@@ -379,7 +379,13 @@ class PremiumUserBlogannonceLocation extends Component {
                                     <div className="card-body">
                                         <div className="toolbar">
                                             <div className="text-center">
-
+                                                <div className="submit text-center">
+                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/create/`}
+                                                          className="btn btn-primary btn-raised ">
+                                                        <i className="material-icons">add</i>
+                                                        <b className="title_hover">Poster un votre article sur la location</b>
+                                                    </Link>
+                                                </div>
                                             </div>
 
                                         </div>
@@ -390,8 +396,8 @@ class PremiumUserBlogannonceLocation extends Component {
                                                         <th><b>Image</b></th>
                                                         <th><b>Titre</b></th>
                                                         <th><b>Categorie</b></th>
-                                                        <th><b>Status</b></th>
                                                         <th><b>Vue</b></th>
+                                                        <th><b>Status</b></th>
                                                         <th><b>Date</b></th>
                                                         <th className="disabled-sorting text-right"><b>Actions</b></th>
                                                     </tr>
@@ -401,8 +407,8 @@ class PremiumUserBlogannonceLocation extends Component {
                                                         <th>Image</th>
                                                         <th>Titre</th>
                                                         <th>Categorie</th>
-                                                        <th>Status</th>
                                                         <th>Vue</th>
+                                                        <th>Status</th>
                                                         <th>Date</th>
                                                         <th className="text-right">Actions</th>
                                                     </tr>

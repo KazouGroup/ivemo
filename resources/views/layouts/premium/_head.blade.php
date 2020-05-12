@@ -38,6 +38,22 @@
 <!-- CSS Files -->
 <link href="/assets/dashboard/assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
 
+<style>
+    .profile > img {
+        max-height: 100%;
+        width: 100%;
+        display: inline-block;
+        margin-bottom: 10px;
+        overflow: hidden;
+        text-align: center;
+        vertical-align: middle;
+        max-width: 250px;
+        box-shadow: 0 10px 30px -12px rgba(0,0,0,.42), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
+    }
+    .profile button {
+        margin-top: -7px;
+    }
+</style>
 @section('style')
     @show
 
