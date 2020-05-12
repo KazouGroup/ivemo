@@ -23,6 +23,13 @@ class PremiumUserBlogannonceList extends Component {
         //
     }
 
+    data_countFormatter(blogannoncelocations_count, precision) {
+        const abbrev = ['', 'k', 'M', 'B', 'T'];
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocations_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
+        const suffix = abbrev[order];
+        return (blogannoncelocations_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     render() {
         return (
 
@@ -68,33 +75,34 @@ class PremiumUserBlogannonceList extends Component {
                             }
                         </div>
                     </td>
-                    <td>{moment(this.props.created_at).fromNow()}</td>
+                    <td><b>{this.data_countFormatter(this.props.visits_count)}</b></td>
+                    <td><b>{moment(this.props.created_at).fromNow()}</b></td>
                     <td className="text-right">
                         {this.props.status ?
                             <Fragment>
                                 <Button onClick={() => this.props.unactiveItem(this.props.id)}
-                                        className="btn btn-round btn-success btn-icon btn-sm" title="Desactiver" >
-                                    <i className="now-ui-icons ui-1_check"/>
+                                        className="btn btn-success btn-just-icon btn-sm" title="Desactiver" >
+                                    <i className="material-icons">remove</i>
                                 </Button>
                             </Fragment>
                             :
                             <Fragment>
                                 <Button onClick={() => this.props.activeItem(this.props.id)}
-                                        className="btn btn-round btn-primary btn-icon btn-sm" title="Activer" >
-                                    <i className="now-ui-icons ui-1_simple-delete"/>
+                                        className="btn btn-rose btn-just-icon btn-sm" title="Activer" >
+                                    <i className="material-icons">done</i>
                                 </Button>
                             </Fragment>
 
                         }
-                        <a target="_blank" href={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="btn btn-warning btn-icon btn-sm btn-round">
-                            <i className="fas fa-eye"></i>
+                        <a target="_blank" href={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="btn btn-warning btn-sm btn-just-icon">
+                            <i className="material-icons">visibility</i>
                         </a>
-                        <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/${this.props.slugin}/edit/`} className="btn btn-info btn-icon btn-sm btn-round" data-toggle="tooltip" data-placement="bottom" title={`Éditer cette ${this.props.full_name}`}>
-                            <i className="now-ui-icons ui-2_settings-90"/>
+                        <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/${this.props.slugin}/edit/`} className="btn btn-info btn-sm btn-just-icon" data-toggle="tooltip" data-placement="bottom" title={`Éditer cette ${this.props.full_name}`}>
+                            <i className="material-icons">edit</i>
                         </Link>
                         <button type="button" onClick={() => this.props.deleteItem(this.props.id)}
-                                className="btn btn-danger btn-icon btn-sm btn-round">
-                            <i className="far fa-trash-alt"/>
+                                className="btn btn-danger btn-sm btn-just-icon">
+                            <i className="material-icons">delete_forever</i>
                         </button>
                     </td>
                 </tr>

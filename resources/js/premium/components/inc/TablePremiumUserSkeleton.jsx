@@ -12,45 +12,53 @@ function TablePremiumUserSkeleton(props) {
 
             <tr>
 
-                <td> <Skeleton width={150} /></td>
-                <td> <Skeleton width={150} /></td>
-                <td> <Skeleton width={150} /></td>
-                <td> <Skeleton width={150} /></td>
+                <td> <Skeleton width={120} /></td>
+                <td> <Skeleton width={120} /></td>
+                <td> <Skeleton width={120} /></td>
+                <td> <Skeleton width={50} /></td>
+                <td> <Skeleton width={15} /></td>
+                <td> <Skeleton width={100} /></td>
                 <td className="text-right">
-                    <Skeleton width={150} />
+                    <Skeleton width={110} />
                 </td>
             </tr>
 
             <tr>
 
-                <td> <Skeleton width={150} /></td>
-                <td> <Skeleton width={150} /></td>
-                <td> <Skeleton width={150} /></td>
-                <td> <Skeleton width={150} /></td>
+                <td> <Skeleton width={120} /></td>
+                <td> <Skeleton width={120} /></td>
+                <td> <Skeleton width={120} /></td>
+                <td> <Skeleton width={50} /></td>
+                <td> <Skeleton width={15} /></td>
+                <td> <Skeleton width={100} /></td>
                 <td className="text-right">
-                    <Skeleton width={150} />
+                    <Skeleton width={110} />
                 </td>
             </tr>
 
             <tr>
 
-                <td> <Skeleton width={150} /></td>
-                <td> <Skeleton width={150} /></td>
-                <td> <Skeleton width={150} /></td>
-                <td> <Skeleton width={150} /></td>
+                <td> <Skeleton width={120} /></td>
+                <td> <Skeleton width={120} /></td>
+                <td> <Skeleton width={120} /></td>
+                <td> <Skeleton width={50} /></td>
+                <td> <Skeleton width={15} /></td>
+                <td> <Skeleton width={100} /></td>
                 <td className="text-right">
-                    <Skeleton width={150} />
+                    <Skeleton width={110} />
                 </td>
             </tr>
 
             <tr>
 
-                <td> <Skeleton width={150} /></td>
-                <td> <Skeleton width={150} /></td>
-                <td> <Skeleton width={150} /></td>
-                <td> <Skeleton width={150} /></td>
+                <td> <Skeleton width={120} /></td>
+                <td> <Skeleton width={120} /></td>
+                <td> <Skeleton width={120} /></td>
+                <td> <Skeleton width={50} /></td>
+                <td> <Skeleton width={15} /></td>
+                <td> <Skeleton width={100} /></td>
                 <td className="text-right">
-                    <Skeleton width={150} />
+                    <Skeleton width={110} />
                 </td>
             </tr>
 
