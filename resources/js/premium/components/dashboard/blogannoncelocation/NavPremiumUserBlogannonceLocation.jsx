@@ -33,6 +33,7 @@ class NavPremiumUserBlogannonceLocation extends Component {
     }
 
     blogannonceventes_countFormatter(blogannoncelocations_count, precision) {
+        const abbrev = ['', 'k', 'M', 'B', 'T'];
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocations_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
         const suffix = abbrev[order];
@@ -40,6 +41,7 @@ class NavPremiumUserBlogannonceLocation extends Component {
     }
 
     blogannonceventesactive_countFormatter(blogannoncelocationsactive_count, precision) {
+        const abbrev = ['', 'k', 'M', 'B', 'T'];
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocationsactive_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
         const suffix = abbrev[order];
@@ -47,6 +49,7 @@ class NavPremiumUserBlogannonceLocation extends Component {
     }
 
     blogannonceventesunactive_countFormatter(blogannoncelocationsunactive_count, precision) {
+        const abbrev = ['', 'k', 'M', 'B', 'T'];
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocationsunactive_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
         const suffix = abbrev[order];

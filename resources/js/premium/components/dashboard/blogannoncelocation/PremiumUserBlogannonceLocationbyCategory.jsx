@@ -7,6 +7,7 @@ import PremiumHorizontalNavUserSite from "../../inc/PremiumHorizontalNavUserSite
 import FooterPremiumUser from "../../inc/FooterPremiumUser";
 import {Button} from "reactstrap";
 import PremiumUserBlogannonceList from "./PremiumUserBlogannonceList";
+import TablePremiumUserSkeleton from "../../inc/TablePremiumUserSkeleton";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -200,12 +201,12 @@ class PremiumUserBlogannonceLocationbyCategory extends Component {
                responsive: true,
                retrieve:true,
                destroy: true,
-               autoFill: true,
                colReorder: true,
                language: {
-                   search: "_INPUT_",
-                   searchPlaceholder: "Search records",
-               }
+                   search: "<i class='material-icons'>search</i>",
+                   searchPlaceholder: "Search Record"
+               },
+               sPaginationType: "full_numbers"
 
            });
        });
@@ -235,26 +236,28 @@ class PremiumUserBlogannonceLocationbyCategory extends Component {
         this.loadItems();
     }
 
-    blogannonceventes_countFormatter(blogannoncelocations_count, precision) {
+    data_countFormatter(blogannoncelocations_count, precision) {
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocations_count)) / 3);
-        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
         const suffix = abbrev[order];
         return (blogannoncelocations_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
 
-    blogannonceventesactive_countFormatter(blogannoncelocationsactive_count, precision) {
+    dataactive_countFormatter(blogannoncelocationsactive_count, precision) {
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocationsactive_count)) / 3);
-        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
         const suffix = abbrev[order];
         return (blogannoncelocationsactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
 
-    blogannonceventesunactive_countFormatter(blogannoncelocationsunactive_count, precision) {
+    dataunactive_countFormatter(blogannoncelocationsunactive_count, precision) {
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocationsunactive_count)) / 3);
-        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
         const suffix = abbrev[order];
         return (blogannoncelocationsunactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
+
+
     render() {
         const {userblogannonce,blogannoncelocations_count,blogannoncelocationsactive_count,blogannoncelocationsunactive_count} = this.state;
         const mapBlogannoncelocations = userblogannonce.length ? (
@@ -263,171 +266,163 @@ class PremiumUserBlogannonceLocationbyCategory extends Component {
                     <PremiumUserBlogannonceList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>                )
             })
         ):(
-            <></>
+            <TablePremiumUserSkeleton/>
         );
         return (
             <>
-                <Helmet title={`Dashboard ${$userIvemo.first_name || ""} - Ivemo`} />
+                <Helmet title={`Dashboard ${$userIvemo.first_name || ""} article de blog locations - ${$name_site}`} />
 
+                <PremiumVerticalNavUserSite {...this.props} />
 
-                <div className="wrapper ">
+                <div className="main-panel">
 
-                    <PremiumVerticalNavUserSite {...this.props}/>
+                    <PremiumHorizontalNavUserSite />
 
-                    <div className="main-panel" id="main-panel">
-
-                        <PremiumHorizontalNavUserSite/>
-
-                        <div className="panel-header">
-                            <div className="header text-center">
-                                <h3 className="title">Articles annonces locations</h3>
-                                <p className="text-white">Articles sur les annonces de locations</p>
-                            </div>
-                        </div>
-
-                        <div className="content">
+                    <div className="content">
+                        <div className="container-fluid">
 
                             <div className="row">
-                                <div className="col-lg-4 mx-auto">
+                                <div className="col-lg-4 col-md-4 col-sm-4">
                                     <div className="card card-stats">
-                                        <div className="card-body ">
-                                            <div className="statistics statistics-horizontal">
-                                                <div className="info info-horizontal">
-                                                    <div className="row">
-                                                        <div className="col-5">
-                                                            <div className="icon icon-primary icon-circle">
-                                                                <i className="now-ui-icons text_align-center"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-7 text-right">
-                                                            <h3 className="info-title">{this.blogannonceventes_countFormatter(blogannoncelocations_count)}</h3>
-                                                            <h6 className="stats-title">Articles</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        <div className="card-header card-header-primary card-header-icon">
+                                            <div className="card-icon">
+                                                <i className="material-icons">view_headline</i>
+                                            </div>
+                                            <p className="card-category"><b>Articles</b></p>
+                                            <h3 className="card-title"><b>{this.data_countFormatter(blogannoncelocations_count)}</b></h3>
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="stats">
+                                                <i className="material-icons">view_headline</i> Articles sur les
+                                                annonces locations category
                                             </div>
                                         </div>
-                                        <hr/>
-                                        <div className="card-footer ">
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-4 col-sm-4">
+                                    <div className="card card-stats">
+                                        <div className="card-header card-header-success card-header-icon">
+                                            <div className="card-icon">
+                                                <i className="material-icons">done</i>
+                                            </div>
+                                            <p className="card-category"><b>Actives</b></p>
+                                            <h3 className="card-title"><b>{this.dataactive_countFormatter(blogannoncelocationsactive_count)}</b></h3>
+                                        </div>
+                                        <div className="card-footer">
                                             <div className="stats">
-                                                <i className="now-ui-icons text_align-center"></i> Articles sur les annonces locations
+                                                <i className="material-icons">done</i> Articles actives
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-4 col-sm-4">
+                                    <div className="card card-stats">
+                                        <div className="card-header card-header-danger card-header-icon">
+                                            <div className="card-icon">
+                                                <i className="material-icons">remove</i>
+                                            </div>
+                                            <p className="card-category"><b>Desactivés</b></p>
+                                            <h3 className="card-title"><b>{this.dataunactive_countFormatter(blogannoncelocationsunactive_count)}</b></h3>
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="stats">
+                                                <i className="material-icons">remove</i> Articles désactivés
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="col-lg-4 mx-auto">
-                                    <div className="card card-stats">
-                                        <div className="card-body ">
-                                            <div className="statistics statistics-horizontal">
-                                                <div className="info info-horizontal">
-                                                    <div className="row">
-                                                        <div className="col-5">
-                                                            <div className="icon icon-success icon-circle">
-                                                                <i className="now-ui-icons ui-1_check"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-7 text-right">
-                                                            <h3 className="info-title">{this.blogannonceventesactive_countFormatter(blogannoncelocationsactive_count)}</h3>
-                                                            <h6 className="stats-title">Actives</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr/>
-                                        <div className="card-footer ">
-                                            <div className="stats">
-                                                <i className="now-ui-icons ui-1_check"/> Articles actives
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            </div>
 
-                                <div className="col-lg-4 mx-auto">
+                            <div className="row">
+                                <div className="col-md-12 expo">
                                     <div className="card card-stats">
-                                        <div className="card-body ">
-                                            <div className="statistics statistics-horizontal">
-                                                <div className="info info-horizontal">
-                                                    <div className="row">
-                                                        <div className="col-5">
-                                                            <div className="icon icon-danger icon-circle">
-                                                                <i className="now-ui-icons ui-1_simple-delete"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-7 text-right">
-                                                            <h3 className="info-title">{this.blogannonceventesunactive_countFormatter(blogannoncelocationsunactive_count)}</h3>
-                                                            <h6 className="stats-title">Desactivés</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        <div className="card-header card-header-icon card-header-primary">
+                                            <div className="card-icon">
+                                                <i className="material-icons">view_headline</i>
                                             </div>
+                                            <p className="card-category">
+                                                <b>Articles sur les annonces locations</b>
+                                            </p>
+                                            <h3 className="card-title" style={{ color: "red" }}>
+                                                <b>{this.data_countFormatter(blogannoncelocations_count)}</b>
+                                            </h3>
                                         </div>
-                                        <hr/>
-                                        <div className="card-footer ">
+                                        <div className="card-footer">
                                             <div className="stats">
-                                                <i className="now-ui-icons ui-1_simple-delete"/> Articles désactivés
+                                                <i className="material-icons">view_headline</i>
+                                                <b>Articles sur les annonces locations</b>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
 
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="card">
+                                        <div className="card-header card-header-primary">
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <h4 className="card-title">
+                                                        <b>Articles sur les annonces locations</b>
+                                                    </h4>
+                                                    <p className="card-title">Articles sur les annonces locations</p>
+                                                </div>
+                                                <div className="col-md-6 text-right">
+                                                <span>
+                                                    <i id="tooltipSize" className="material-icons">view_headline</i>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div className="card-body">
                                             <div className="toolbar">
+                                                <div className="text-center">
 
-                                                <div className="submit text-center">
-                                                    <a href="/blogs/annonce_locations/ab/new/"
-                                                       className="btn btn-round btn-primary btn-raised">
-                                                           <span className="btn-label">
-                                                            <i className="now-ui-icons ui-1_simple-add"></i>
-                                                          </span>
-                                                        <b className="title_hover">New article de blog location</b>
-                                                    </a>
                                                 </div>
 
                                             </div>
-                                            <table id="datatable" className="table table-striped table-bordered"
-                                                   cellSpacing="0" width="100%">
-                                                <thead>
-                                                <tr>
-                                                    <th><b>Image</b></th>
-                                                    <th><b>Title</b></th>
-                                                    <th><b>Categorie</b></th>
-                                                    <th><b>Status</b></th>
-                                                    <th><b>Crée</b></th>
-                                                    <th className="disabled-sorting text-right">Actions</th>
-                                                </tr>
-                                                </thead>
-                                                <tfoot>
-                                                <tr>
-                                                    <th>Image</th>
-                                                    <th>Title</th>
-                                                    <th>Categorie</th>
-                                                    <th>Status</th>
-                                                    <th>Crée</th>
-                                                    <th className="disabled-sorting text-right">Actions</th>
-                                                </tr>
-                                                </tfoot>
-                                                <tbody>
-
-                                                {mapBlogannoncelocations}
-
-
-                                                </tbody>
-                                            </table>
+                                            <div className="material-datatables">
+                                                <table id="datatables" className="table table-striped table-no-bordered table-hover" cellSpacing={0} width="100%" style={{width:"100%"}}>
+                                                    <thead>
+                                                    <tr>
+                                                        <th><b>Image</b></th>
+                                                        <th><b>Titre</b></th>
+                                                        <th><b>Categorie</b></th>
+                                                        <th><b>Status</b></th>
+                                                        <th><b>Vue</b></th>
+                                                        <th><b>Date</b></th>
+                                                        <th className="disabled-sorting text-right"><b>Actions</b></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                    <tr>
+                                                        <th>Image</th>
+                                                        <th>Titre</th>
+                                                        <th>Categorie</th>
+                                                        <th>Status</th>
+                                                        <th>Vue</th>
+                                                        <th>Date</th>
+                                                        <th className="text-right">Actions</th>
+                                                    </tr>
+                                                    </tfoot>
+                                                    <tbody>
+                                                    {mapBlogannoncelocations}
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
-
-                        <FooterPremiumUser/>
-
                     </div>
+
+                    <FooterPremiumUser />
+
                 </div>
             </>
 

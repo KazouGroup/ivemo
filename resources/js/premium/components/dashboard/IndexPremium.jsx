@@ -33,132 +33,241 @@ class IndexPremium extends Component {
             <>
                 <Helmet title={`Dashboard ${$userIvemo.first_name || ""} - Ivemo`} />
 
+                <PremiumVerticalNavUserSite {...this.props}/>
 
-                <div className="wrapper ">
+                <div className="main-panel">
 
-                  <PremiumVerticalNavUserSite {...this.props}/>
+                  <PremiumHorizontalNavUserSite/>
 
-                    <div className="main-panel" id="main-panel">
+                    <div className="content">
+                        <div className="container-fluid">
 
-                        <PremiumHorizontalNavUserSite/>
+                            <div className="row">
+                                <div className="col-lg-4 col-md-4 col-sm-4">
+                                    <div className="card card-stats">
+                                        <div className="card-header card-header-primary card-header-icon">
+                                            <div className="card-icon">
+                                                <i className="material-icons">view_headline</i>
+                                            </div>
+                                            <p className="card-category"><b>Articles</b></p>
+                                            <h3 className="card-title"><b>148</b></h3>
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="stats">
+                                                <i className="material-icons">view_headline</i> Articles sur les
+                                                annonces reservations
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-4 col-sm-4">
+                                    <div className="card card-stats">
+                                        <div className="card-header card-header-success card-header-icon">
+                                            <div className="card-icon">
+                                                <i className="material-icons">done</i>
+                                            </div>
+                                            <p className="card-category"><b>Actives</b></p>
+                                            <h3 className="card-title"><b>18</b></h3>
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="stats">
+                                                <i className="material-icons">done</i> Articles actives
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-4 col-sm-4">
+                                    <div className="card card-stats">
+                                        <div className="card-header card-header-danger card-header-icon">
+                                            <div className="card-icon">
+                                                <i className="material-icons">remove</i>
+                                            </div>
+                                            <p className="card-category"><b>Desactivés</b></p>
+                                            <h3 className="card-title"><b>15</b></h3>
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="stats">
+                                                <i className="material-icons">remove</i> Articles désactivés
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                        <div className="panel-header">
-                            <div className="header text-center">
-                                <h2 className="title">Dashboard {userannoncelocations.slug}</h2>
-                                <p className="text-white">Handcrafted by our friends from</p>
+                            </div>
+
+                            <div className="row">
+                                <div className="col-md-12 expo">
+                                    <div className="card card-stats">
+                                        <div className="card-header card-header-icon card-header-primary">
+                                        <div className="card-icon">
+                                            <i className="material-icons">view_headline</i>
+                                        </div>
+                                        <p className="card-category">
+                                            <b>Articles sur les annonces locations</b>
+                                        </p>
+                                        <h3 className="card-title" style={{color: "red"}}>
+                                            <b>148</b>
+                                        </h3>
+                                    </div>
+                                    <div className="card-footer">
+                                        <div className="stats">
+                                            <i className="material-icons">view_headline</i>
+                                            <b>Articles sur les annonces locations</b>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div className="content">
-
-                            <div className="row">
-                                <div className="col-md-12">
-                                    <div className="card card-stats">
-                                        <div className="card-body">
-                                            <div className="row">
-                                                <div className="col-md-3">
-                                                    <div className="statistics">
-                                                        <div className="info">
-                                                            <div className="icon icon-primary">
-                                                                <i className="now-ui-icons ui-2_chat-round"></i>
-                                                            </div>
-                                                            <h3 className="info-title">859</h3>
-                                                            <h6 className="stats-title">Messages</h6>
-                                                        </div>
-                                                    </div>
+                            <br/>
+                                <div className="row">
+                                    <div className="col-md-4">
+                                        <div className="card card-product">
+                                            <div className="card-header card-header-image" data-header-animation="true">
+                                                <a href="#pablo">
+                                                    <img className="img" src="/assets/dashboard/assets/img/card-2.jpg"/>
+                                                </a>
+                                            </div>
+                                            <div className="card-body">
+                                                <div className="card-actions text-center">
+                                                    <button type="button"
+                                                            className="btn btn-danger btn-link fix-broken-card">
+                                                        <i className="material-icons">build</i> Fix Header!
+                                                    </button>
+                                                    <button type="button" className="btn btn-default btn-link"
+                                                            rel="tooltip" data-placement="bottom" title="View">
+                                                        <i className="material-icons">art_track</i>
+                                                    </button>
+                                                    <button type="button" className="btn btn-success btn-link"
+                                                            rel="tooltip" data-placement="bottom" title="Edit">
+                                                        <i className="material-icons">edit</i>
+                                                    </button>
+                                                    <button type="button" className="btn btn-danger btn-link"
+                                                            rel="tooltip" data-placement="bottom" title="Remove">
+                                                        <i className="material-icons">close</i>
+                                                    </button>
                                                 </div>
-                                                <div className="col-md-3">
-                                                    <div className="statistics">
-                                                        <div className="info">
-                                                            <div className="icon icon-success">
-                                                                <i className="now-ui-icons business_money-coins"></i>
-                                                            </div>
-                                                            <h3 className="info-title">
-                                                                <small>$</small>3,521</h3>
-                                                            <h6 className="stats-title">Today Revenue</h6>
-                                                        </div>
-                                                    </div>
+                                                <h4 className="card-title">
+                                                    <a href="#pablo">Cozy 5 Stars Apartment</a>
+                                                </h4>
+                                                <div className="card-description">
+                                                    The place is close to Barceloneta Beach and bus stop just 2 min by
+                                                    walk and near to "Naviglio" where you can enjoy the main night life
+                                                    in Barcelona.
                                                 </div>
-                                                <div className="col-md-3">
-                                                    <div className="statistics">
-                                                        <div className="info">
-                                                            <div className="icon icon-info">
-                                                                <i className="now-ui-icons users_single-02"></i>
-                                                            </div>
-                                                            <h3 className="info-title">562</h3>
-                                                            <h6 className="stats-title">Customers</h6>
-                                                        </div>
-                                                    </div>
+                                            </div>
+                                            <div className="card-footer">
+                                                <div className="price">
+                                                    <h4>$899/night</h4>
                                                 </div>
-                                                <div className="col-md-3">
-                                                    <div className="statistics">
-                                                        <div className="info">
-                                                            <div className="icon icon-danger">
-                                                                <i className="now-ui-icons objects_support-17"></i>
-                                                            </div>
-                                                            <h3 className="info-title">353</h3>
-                                                            <h6 className="stats-title">Support Requests</h6>
-                                                        </div>
-                                                    </div>
+                                                <div className="stats">
+                                                    <p className="card-category"><i
+                                                        className="material-icons">place</i> Barcelona, Spain</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-4">
+                                        <div className="card card-product">
+                                            <div className="card-header card-header-image" data-header-animation="true">
+                                                <a href="#pablo">
+                                                    <img className="img" src="/assets/dashboard/assets/img/card-3.jpg"/>
+                                                </a>
+                                            </div>
+                                            <div className="card-body">
+                                                <div className="card-actions text-center">
+                                                    <button type="button"
+                                                            className="btn btn-danger btn-link fix-broken-card">
+                                                        <i className="material-icons">build</i> Fix Header!
+                                                    </button>
+                                                    <button type="button" className="btn btn-default btn-link"
+                                                            rel="tooltip" data-placement="bottom" title="View">
+                                                        <i className="material-icons">art_track</i>
+                                                    </button>
+                                                    <button type="button" className="btn btn-success btn-link"
+                                                            rel="tooltip" data-placement="bottom" title="Edit">
+                                                        <i className="material-icons">edit</i>
+                                                    </button>
+                                                    <button type="button" className="btn btn-danger btn-link"
+                                                            rel="tooltip" data-placement="bottom" title="Remove">
+                                                        <i className="material-icons">close</i>
+                                                    </button>
+                                                </div>
+                                                <h4 className="card-title">
+                                                    <a href="#pablo">Office Studio</a>
+                                                </h4>
+                                                <div className="card-description">
+                                                    The place is close to Metro Station and bus stop just 2 min by walk
+                                                    and near to "Naviglio" where you can enjoy the night life in London,
+                                                    UK.
+                                                </div>
+                                            </div>
+                                            <div className="card-footer">
+                                                <div className="price">
+                                                    <h4>$1.119/night</h4>
+                                                </div>
+                                                <div className="stats">
+                                                    <p className="card-category"><i
+                                                        className="material-icons">place</i> London, UK</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-4">
+                                        <div className="card card-product">
+                                            <div className="card-header card-header-image" data-header-animation="true">
+                                                <a href="#pablo">
+                                                    <img className="img" src="/assets/dashboard/assets/img/card-1.jpg"/>
+                                                </a>
+                                            </div>
+                                            <div className="card-body">
+                                                <div className="card-actions text-center">
+                                                    <button type="button"
+                                                            className="btn btn-danger btn-link fix-broken-card">
+                                                        <i className="material-icons">build</i> Fix Header!
+                                                    </button>
+                                                    <button type="button" className="btn btn-default btn-link"
+                                                            rel="tooltip" data-placement="bottom" title="View">
+                                                        <i className="material-icons">art_track</i>
+                                                    </button>
+                                                    <button type="button" className="btn btn-success btn-link"
+                                                            rel="tooltip" data-placement="bottom" title="Edit">
+                                                        <i className="material-icons">edit</i>
+                                                    </button>
+                                                    <button type="button" className="btn btn-danger btn-link"
+                                                            rel="tooltip" data-placement="bottom" title="Remove">
+                                                        <i className="material-icons">close</i>
+                                                    </button>
+                                                </div>
+                                                <h4 className="card-title">
+                                                    <a href="#pablo">Beautiful Castle</a>
+                                                </h4>
+                                                <div className="card-description">
+                                                    The place is close to Metro Station and bus stop just 2 min by walk
+                                                    and near to "Naviglio" where you can enjoy the main night life in
+                                                    Milan.
+                                                </div>
+                                            </div>
+                                            <div className="card-footer">
+                                                <div className="price">
+                                                    <h4>$459/night</h4>
+                                                </div>
+                                                <div className="stats">
+                                                    <p className="card-category"><i
+                                                        className="material-icons">place</i> Milan, Italy</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div className="row">
-
-                                <div className="col-lg-6 col-md-12 text-center">
-                                    <div className="card card-contributions">
-
-                                        <div className="card-body ">
-                                            <h1 className="card-title">3,521</h1>
-                                            <h3 className="card-category">Total Public Contributions</h3>
-                                            <p className="card-description">After a very successful two-year run, we’re
-                                                going to be changing the way that contributions work.</p>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <div className="col-lg-6 col-md-12 text-center">
-                                    <div className="card card-contributions">
-
-                                        <div className="card-body ">
-                                            <h1 className="card-title">3,521</h1>
-                                            <h3 className="card-category">Total Public Contributions</h3>
-                                            <p className="card-description">After a very successful two-year run, we’re
-                                                going to be changing the way that contributions work.</p>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-                            <div className="row">
-                                <div className="col-md-12">
-                                    <div className="card">
-                                        <div className="card-header">
-
-                                        </div>
-                                        <div className="card-body">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
-
-                        <FooterPremiumUser/>
-
                     </div>
+
+                    <FooterPremiumUser/>
+
                 </div>
+
 
             </>
 

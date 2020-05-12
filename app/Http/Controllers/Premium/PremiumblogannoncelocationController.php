@@ -53,10 +53,8 @@ class PremiumblogannoncelocationController extends Controller
 
     public function data(user $user)
     {
-        $blogannoncelocations =  blogannoncelocation::with('user','categoryannoncelocation','member')
-            ->whereIn('user_id',[$user->id])
-            ->orderBy('created_at','DESC')
-            ->distinct()->get()->toArray();
+        $blogannoncelocations = BlogannoncelocationResource::collection(blogannoncelocation::with('user','categoryannoncelocation','member')
+            ->whereIn('user_id',[$user->id])->orderBy('created_at','DESC')->distinct()->get());
 
         return response()->json($blogannoncelocations,200);
     }
