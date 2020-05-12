@@ -6,8 +6,9 @@ import PremiumVerticalNavUserSite from "../../../inc/PremiumVerticalNavUserSite"
 import PremiumHorizontalNavUserSite from "../../../inc/PremiumHorizontalNavUserSite";
 import FooterPremiumUser from "../../../inc/FooterPremiumUser";
 import {Button, CardBody, FormGroup, Input, InputGroup, Row} from "reactstrap";
-import NavPremiumUserBlogannonceLocation from "../NavPremiumUserBlogannonceLocation";
 import ReactQuill from "react-quill";
+import NavPremiumUserBlogannonceLocation from "../NavPremiumUserBlogannonceLocation";
+const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
 
@@ -32,6 +33,7 @@ class PremiumUserNewBlogannonceLocation extends Component {
             showDefaultImage: true,
             errors: [],
             categoryannoncelocations: [],
+            blogannoncelocations_count: [],
         };
         this.modules = {
             toolbar: [
@@ -138,48 +140,87 @@ class PremiumUserNewBlogannonceLocation extends Component {
 
     // lifecycle method
     componentDidMount() {
+        let itemuser = this.props.match.params.user;
+        dyaxios.get(route('api.blogannoncelocations_premium_count',[itemuser])).then(response =>
+            this.setState({blogannoncelocations_count: response.data}));
         fetch(route('api.categoryannoncelocation_site')).then(res => res.json()).then((result) => { this.setState({ categoryannoncelocations: result }) })
     }
-
+    data_countFormatter(blogannoncelocations_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocations_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
+        const suffix = abbrev[order];
+        return (blogannoncelocations_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     render() {
-        const {categoryannoncelocations,photo} = this.state;
+        const {categoryannoncelocations,photo,blogannoncelocations_count} = this.state;
         return (
             <>
-                <Helmet title={`Dashboard ${$userIvemo.first_name || ""} - Ivemo`} />
 
+                <Helmet title={`${this.state.title || "Dashboard"} - ${$name_site}`} />
 
-                <div className="wrapper ">
+                <PremiumVerticalNavUserSite {...this.props} />
 
-                    <PremiumVerticalNavUserSite {...this.props}/>
+                <div className="main-panel">
 
-                    <div className="main-panel" id="main-panel">
+                    <PremiumHorizontalNavUserSite />
 
-                        <PremiumHorizontalNavUserSite/>
-
-                        <div className="panel-header">
-                            <div className="header text-center">
-                                <h3 className="title">Articles annonces locations</h3>
-                                <p className="text-white">{this.state.title}</p>
-                                <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/`} className="text-white">
-                                    <i className="fa fa-chevron-circle-left"></i> Retour aux annonces
-                                </Link>
-                            </div>
-                        </div>
-
-                        <div className="content">
+                    <div className="content">
+                        <div className="container-fluid">
 
                          <NavPremiumUserBlogannonceLocation/>
 
                             <div className="row">
+                                <div className="col-md-12 expo">
+                                    <div className="card card-stats">
+                                        <div className="card-header card-header-icon card-header-primary">
+                                            <div className="card-icon">
+                                                <i className="material-icons">view_headline</i>
+                                            </div>
+                                            <p className="card-category">
+                                                <b>Articles sur les annonces locations</b>
+                                            </p>
+                                            <h3 className="card-title" style={{ color: "red" }}>
+                                                <b>{this.data_countFormatter(blogannoncelocations_count)}</b>
+                                            </h3>
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="stats">
+                                                <i className="material-icons">view_headline</i>
+                                                <b>Articles sur les annonces locations</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div className="row">
                                 <div className="col-md-12">
                                     <div className="card">
+                                        <div className="card-header card-header-primary">
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <h4 className="card-title">
+                                                        <b>Articles sur les annonces locations</b>
+                                                    </h4>
+                                                    <p className="card-title">Articles sur les annonces locations</p>
+                                                </div>
+                                                <div className="col-md-6 text-right">
+                                                <span>
+                                                    <i id="tooltipSize" className="material-icons">view_headline</i>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div className="card-body">
-
                                             <div className="toolbar">
+                                                <div className="text-center">
+                                                    <div className="text-right ml-auto">
 
+                                                    </div>
+                                                </div>
 
                                             </div>
-
 
                                             <form role="form" onSubmit={this.saveItem} acceptCharset="UTF-8">
 
@@ -188,10 +229,7 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                                     <Row>
                                                         <div className="col-md-12">
                                                             <label htmlFor="title">Donner un titre à cet article</label>
-                                                            <InputGroup>
-                                                                <div className="input-group-prepend">
-                                                                    <span className="input-group-text"><i className="now-ui-icons users_circle-08"/></span>
-                                                                </div>
+                                                            <FormGroup>
                                                                 <Input id='title'
                                                                        type='text'
                                                                        className={`form-control ${this.hasErrorFor('title') ? 'is-invalid' : ''}`}
@@ -201,21 +239,18 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                                                        placeholder="Titre de l'article"
                                                                        aria-label="Titre de l'article"
                                                                        value={this.state.title || ''}
-
+                                                                       required
                                                                        onChange={this.handleFieldChange}
                                                                 />
                                                                 {this.renderErrorFor('title')}
-                                                            </InputGroup>
+                                                            </FormGroup>
                                                         </div>
                                                     </Row>
 
                                                     <Row>
                                                         <div className="col-md-6">
                                                             <label htmlFor="title">Estimer en temp <b>{this.state.red_time} min lecture</b></label>
-                                                            <InputGroup>
-                                                                <div className="input-group-prepend">
-                                                                    <span className="input-group-text"><i className="now-ui-icons tech_watch-time"/></span>
-                                                                </div>
+                                                            <FormGroup>
                                                                 <Input id='red_time'
                                                                        type='number'
                                                                        className={`form-control ${this.hasErrorFor('red_time') ? 'is-invalid' : ''}`}
@@ -229,28 +264,31 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                                                        onChange={this.handleFieldChange}
                                                                 />
                                                                 {this.renderErrorFor('red_time')}
-                                                            </InputGroup>
+                                                            </FormGroup>
                                                         </div>
+
                                                         <div className="col-md-6">
                                                             <label htmlFor="title">Selectionez la categorie</label>
                                                             <FormGroup>
+
                                                                 <select name={'categoryannoncelocation_id'} value={this.state.categoryannoncelocation_id}
-                                                                        className={`form-control`}
-                                                                        id="categoryannoncelocation_id" onChange={this.handleFieldChange}>
+                                                                        className={`form-control ${this.hasErrorFor('categoryannoncelocation_id') ? 'is-invalid' : ''}`}
+                                                                        id="categoryannoncelocation_id" onChange={this.handleFieldChange} required>
                                                                     <option value="" disabled>Selectioner une category</option>
                                                                     {categoryannoncelocations.map((item) => (
                                                                         <option key={item.id} value={item.id}>{item.name}</option>
                                                                     ))}
                                                                 </select>
+                                                                <br/>
                                                                 {this.renderErrorFor('categoryannoncelocation_id')}
                                                             </FormGroup>
                                                         </div>
                                                     </Row>
                                                     <Row>
-                                                        <div className="col-md-4 mx-auto">
-                                                            <div className="text-center">
-                                                                <img src={this.state.showDefaultImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : photo} alt={'name'} />
-                                                                <input id="photo" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('photo') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="photo" />
+                                                        <div className="col-md-6 mx-auto">
+                                                            <div className="profile text-center">
+                                                                <img src={this.state.showDefaultImage ? `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg` : photo} alt={'name'} />
+                                                                <input id="photo" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('photo') ? 'is-invalid' : ''}`} style={{display: "none"}} name="photo" />
                                                                 {this.renderErrorFor('photo')}
                                                                 <div className="text-center">
                                                                     <label htmlFor="photo" className="btn btn-primary">
@@ -288,7 +326,7 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                                         <i className="now-ui-icons ui-1_simple-delete"/> Annuler
                                                     </Link>
                                                     <button className="btn btn-primary" type="submit">
-                                                        <b>Sauvegarder l'article de blog</b>
+                                                        <b>Mettre à jour l'article de blog</b>
                                                     </button>
                                                 </div>
                                             </form>
@@ -298,11 +336,12 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
-
-                        <FooterPremiumUser/>
-
                     </div>
+
+                    <FooterPremiumUser />
+
                 </div>
             </>
 
