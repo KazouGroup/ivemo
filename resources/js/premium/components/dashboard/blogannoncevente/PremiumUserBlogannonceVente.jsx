@@ -19,7 +19,7 @@ class PremiumUserBlogannonceVente extends Component {
             blogannonceventes_count: [],
             blogannonceventesactive_count: [],
             blogannonceventesunactive_count: [],
-            userblogannonce:[],
+            userblogannonce:{user:[],categoryannoncevente:[]},
 
         };
 
