@@ -1,6 +1,6 @@
 @extends('inc.premium.main')
 <?php $item = htmlspecialchars(config('app.name'));?>
-@section('title', 'Dashboard Articles de blogs reservations - '.$item)
+@section('title', 'Dashboard '.$user->first_name.' - '.$item)
 
 @section('style')
 
@@ -13,4 +13,5 @@
 @section('script')
 
 @endsection
+
 

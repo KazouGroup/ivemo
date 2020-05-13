@@ -29,7 +29,7 @@ class PremiumblogannoncelocationController extends Controller
 
     public function create(user $user)
     {
-        return view('premium.blog.blogannoncelocations.index',compact('user'));
+        return view('premium.blog.blogannoncelocations.create',compact('user'));
     }
 
     public function category(user $user,$categoryannoncelocation)

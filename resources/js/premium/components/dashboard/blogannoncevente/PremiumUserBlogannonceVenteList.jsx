@@ -46,9 +46,7 @@ class PremiumUserBlogannonceVenteList extends Component {
                     <td>{ (this.props.title.length > 30 ? this.props.title.substring(0,30)+ "..." : this.props.title) }</td>
                     <td>
                         {this.props.categoryannoncevente_id ?
-                            <NavLink to={`/dashboard/premium/${this.props.user.slug}/blogs/annonce_ventes/${this.props.categoryannoncevente.slug}/`}>
-                                <b>{ (this.props.categoryannoncevente.name.length > 30 ? this.props.categoryannoncevente.name.substring(0,30)+ "..." : this.props.categoryannoncevente.name) }</b>
-                            </NavLink>
+                            <b>{ (this.props.categoryannoncevente.name.length > 30 ? this.props.categoryannoncevente.name.substring(0,30)+ "..." : this.props.categoryannoncevente.name) }</b>
                             :
                             <b v-else>user don't exist</b>
                         }

@@ -349,7 +349,7 @@ class PremiumUserEditBlogannonceVente extends Component {
         const {categoryannonceventes,photo,blogannonceventes_count,blogannonceventesactive_count,blogannonceventesunactive_count} = this.state;
         return (
             <>
-                <Helmet title={`${this.state.title || $name_site} - ${$name_site}`} />
+                <Helmet title={`${this.state.title || "Dashboard " + $userIvemo.first_name} - ${$name_site}`} />
 
                 <PremiumVerticalNavUserSite {...this.props} />
 

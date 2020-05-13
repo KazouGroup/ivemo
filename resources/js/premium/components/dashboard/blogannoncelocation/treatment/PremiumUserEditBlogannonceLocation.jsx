@@ -346,7 +346,7 @@ class PremiumUserEditBlogannonceLocation extends Component {
         const {categoryannoncelocations,photo, blogannoncelocations_count, blogannoncelocationsactive_count, blogannoncelocationsunactive_count} = this.state;
         return (
             <>
-                <Helmet title={`${this.state.title || $name_site} - ${$name_site}`} />
+                <Helmet title={`${this.state.title || "Dashboard " + $userIvemo.first_name} - ${$name_site}`} />
 
                 <PremiumVerticalNavUserSite {...this.props} />
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Premium;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BlogannoncereservationResource;
 use App\Model\blogannoncereservation;
 use App\Model\categoryannoncereservation;
 use App\Model\user;
@@ -27,7 +28,7 @@ class PremiumblogannoncereservationController extends Controller
 
     public function create(user $user)
     {
-        return view('premium.blog.blogannoncereservations.index',compact('user'));
+        return view('premium.blog.blogannoncereservations.create',compact('user'));
     }
 
     public function category(user $user,$categoryannoncereservation)
@@ -49,10 +50,10 @@ class PremiumblogannoncereservationController extends Controller
 
     public function data(user $user)
     {
-        $blogannoncereservations =  blogannoncereservation::with('user','categoryannoncereservation','member')
+        $blogannoncereservations = BlogannoncereservationResource::collection(blogannoncereservation::with('user','categoryannoncereservation','member')
             ->whereIn('user_id',[$user->id])
             ->orderBy('created_at','DESC')
-            ->distinct()->get()->toArray();
+            ->distinct()->get()->toArray());
 
         return response()->json($blogannoncereservations,200);
     }

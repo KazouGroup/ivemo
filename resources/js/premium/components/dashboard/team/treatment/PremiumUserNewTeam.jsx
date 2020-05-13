@@ -162,7 +162,7 @@ class PremiumUserNewTeam extends Component {
         const {photo,teams_count} = this.state;
         return (
             <>
-                <Helmet title={`Dashboard ${$userIvemo.first_name || ""} - Ivemo`} />
+                <Helmet title={`${this.state.full_name || "Dashboard " + $userIvemo.first_name} - ${$name_site}`} />
 
                 <PremiumVerticalNavUserSite {...this.props} />
 
@@ -313,7 +313,7 @@ class PremiumUserNewTeam extends Component {
                                                 </CardBody>
 
                                                 <div className="submit text-center">
-                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_ventes/`} className="btn btn-secondary">
+                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/teams/`} className="btn btn-secondary">
                                                         <i className="now-ui-icons ui-1_simple-delete"/> Annuler
                                                     </Link>
                                                     <button className="btn btn-primary" type="submit">

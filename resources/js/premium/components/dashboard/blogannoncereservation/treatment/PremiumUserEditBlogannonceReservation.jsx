@@ -5,19 +5,20 @@ import Swal from "sweetalert2";
 import PremiumVerticalNavUserSite from "../../../inc/PremiumVerticalNavUserSite";
 import PremiumHorizontalNavUserSite from "../../../inc/PremiumHorizontalNavUserSite";
 import FooterPremiumUser from "../../../inc/FooterPremiumUser";
-import {Button, CardBody, FormGroup, Input, InputGroup, Row} from "reactstrap";
+import {Form,Button, CardBody, FormGroup, Input, InputGroup, Row} from "reactstrap";
 import ReactQuill from "react-quill";
-import NavPremiumUserBlogannonceLocation from "../NavPremiumUserBlogannonceLocation";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
 
-
-class PremiumUserNewBlogannonceLocation extends Component {
+class PremiumUserEditBlogannonceReservation extends Component {
     constructor(props) {
         super(props);
 
-        this.saveItem = this.saveItem.bind(this);
+        this.updateItem = this.updateItem.bind(this);
+        this.activeItem = this.activeItem.bind(this);
+        this.unactiveItem = this.unactiveItem.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
         this.updateImage = this.updateImage.bind(this);
         this.removeImage = this.removeImage.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -29,11 +30,13 @@ class PremiumUserNewBlogannonceLocation extends Component {
             photo: '',
             description: '',
             red_time: '',
-            categoryannoncelocation_id: '',
-            showDefaultImage: true,
+            categoryannoncereservation_id: '',
+            showDefaultImage: false,
             errors: [],
-            categoryannoncelocations: [],
-            blogannoncelocations_count: [],
+            categoryannoncereservations: [],
+            blogannoncereservations_count: [],
+            blogannoncereservationsactive_count: [],
+            blogannoncereservationsunactive_count: [],
         };
         this.modules = {
             toolbar: [
@@ -69,7 +72,6 @@ class PremiumUserNewBlogannonceLocation extends Component {
     hasErrorFor(field) {
         return !!this.state.errors[field];
     }
-
     updateImage(e) {
         e.preventDefault();
         let reader = new FileReader();
@@ -100,7 +102,6 @@ class PremiumUserNewBlogannonceLocation extends Component {
         }
 
     }
-
     removeImage(e) {
         e.preventDefault();
         this.setState({ file: '', photo: '', showDefaultImage: true });
@@ -116,7 +117,8 @@ class PremiumUserNewBlogannonceLocation extends Component {
         }
     }
 
-    saveItem(e) {
+
+    updateItem(e) {
         e.preventDefault();
 
         let item = {
@@ -124,13 +126,14 @@ class PremiumUserNewBlogannonceLocation extends Component {
             photo: this.state.photo,
             red_time: this.state.red_time,
             description: this.state.description,
-            categoryannoncelocation_id: this.state.categoryannoncelocation_id,
+            categoryannoncereservation_id: this.state.categoryannoncereservation_id,
         };
-        dyaxios.post(route('blogannoncecategorylocationstore_site'), item)
+        let Itemdata = this.props.match.params.blogannoncereservation;
+        dyaxios.put(route('blogannoncecategoryreservationupdate_site', [Itemdata]), item)
             .then(() => {
                 $.notify({
                         //,
-                        message: 'Votre article de blogs a bien été crée'
+                        message: 'Votre article de blogs a bien été modifié'
                     },
                     {
                         allow_dismiss: false,
@@ -144,7 +147,6 @@ class PremiumUserNewBlogannonceLocation extends Component {
                             exit: "animated fadeOutDown"
                         },
                     });
-                this.props.history.push(`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/`);
             }).catch(error => {
             this.setState({
                 errors: error.response.data.errors
@@ -160,24 +162,190 @@ class PremiumUserNewBlogannonceLocation extends Component {
         })
     }
 
+
+    activeItem(id){
+        //Envoyer la requet au server
+        let url = route('blogannoncecategoryreservationactivated_site',[id]);
+        dyaxios.get(url).then(() => {
+
+            /** Alert notify bootstrapp **/
+            $.notify({
+                    //,
+                    message: 'Article de blogs activé avec succès'
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animated fadeInUp",
+                        exit: "animated fadeOutDown"
+                    },
+                });
+            /** End alert ***/
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animated bounceInDown',
+                    exit: 'animated bounceOutUp'
+                }
+            });
+        })
+
+    }
+
+    unactiveItem(id){
+        //Envoyer la requet au server
+        let url = route('blogannoncecategoryreservationunactivated_site',[id]);
+        dyaxios.get(url).then(() => {
+
+            /** Alert notify bootstrapp **/
+            $.notify({
+                    // title: 'Update FAQ',
+                    message: 'Article de blogs désactiver avec succès'
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animated fadeInUp",
+                        exit: "animated fadeOutDown"
+                    },
+                });
+            /** End alert ***/
+            this.loadItems();
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animated bounceInDown',
+                    exit: 'animated bounceOutUp'
+                }
+            });
+        })
+
+    }
+
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes-vous sûr de vouloir executer cette action",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                const url = route('blogannoncecategoryreservationdelete_site',id);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update',
+                            message: 'Article de blogs suprimée avec success'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'primary',
+                            placement: {
+                                from: 'bottom',
+                                align: 'right'
+                            },
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            },
+                        });
+                    /** End alert ***/
+                    this.props.history.goBack();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
+    }
+
+    loadItems() {
+        let itemuser = this.props.match.params.user;
+        let Itemdata = this.props.match.params.blogannoncereservation;
+
+        fetch(route('api.blogannoncereservations_premium_count',[itemuser])).then(res => res.json()).then((result) => {
+            this.setState({ blogannoncereservations_count: result }) });
+
+        fetch(route('api.blogannoncereservations_premiumactive_count',[itemuser])).then(res => res.json()).then((result) => {
+            this.setState({ blogannoncereservationsactive_count: result }) });
+
+        fetch(route('api.blogannoncereservations_premiumunactive_count',[itemuser])).then(res => res.json()).then((result) => {
+            this.setState({ blogannoncereservationsunactive_count: result }) });
+
+        let url = route('api.blogannonceblogcategorylocationslugin_site', [Itemdata]);
+        dyaxios.get(url).then(response =>
+            this.setState({
+                id: response.data.id,
+                title: response.data.title,
+                photo: response.data.photo,
+                status: response.data.status,
+                red_time: response.data.red_time,
+                categoryannoncereservation_id: response.data.categoryannoncereservation_id,
+                description: response.data.description,
+            }));
+    }
+
     // lifecycle method
     componentDidMount() {
-        let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.blogannoncelocations_premium_count',[itemuser])).then(response =>
-            this.setState({blogannoncelocations_count: response.data}));
-        fetch(route('api.categoryannoncelocation_site')).then(res => res.json()).then((result) => { this.setState({ categoryannoncelocations: result }) })
+        this.loadItems();
+        fetch(route('api.categoryannoncereservation_site')).then(res => res.json()).then((result) => { this.setState({ categoryannoncereservations: result }) })
     }
-    data_countFormatter(blogannoncelocations_count, precision) {
-        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocations_count)) / 3);
+
+    data_countFormatter(blogannoncereservations_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncereservations_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
         const suffix = abbrev[order];
-        return (blogannoncelocations_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+        return (blogannoncereservations_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+
+    dataactive_countFormatter(blogannoncereservationsactive_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncereservationsactive_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
+        const suffix = abbrev[order];
+        return (blogannoncereservationsactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+
+    dataunactive_countFormatter(blogannoncereservationsunactive_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncereservationsunactive_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
+        const suffix = abbrev[order];
+        return (blogannoncereservationsunactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
     render() {
-        const {categoryannoncelocations,photo,blogannoncelocations_count} = this.state;
+        const {categoryannoncereservations,photo,blogannoncereservations_count,blogannoncereservationsactive_count,blogannoncereservationsunactive_count} = this.state;
         return (
             <>
-
                 <Helmet title={`${this.state.title || "Dashboard " + $userIvemo.first_name} - ${$name_site}`} />
 
                 <PremiumVerticalNavUserSite {...this.props} />
@@ -189,7 +357,58 @@ class PremiumUserNewBlogannonceLocation extends Component {
                     <div className="content">
                         <div className="container-fluid">
 
-                         <NavPremiumUserBlogannonceLocation/>
+                            <div className="row">
+                                <div className="col-lg-4 col-md-4 col-sm-4">
+                                    <div className="card card-stats">
+                                        <div className="card-header card-header-primary card-header-icon">
+                                            <div className="card-icon">
+                                                <i className="material-icons">view_headline</i>
+                                            </div>
+                                            <p className="card-category"><b>Articles</b></p>
+                                            <h3 className="card-title"><b>{this.data_countFormatter(blogannoncereservations_count)}</b></h3>
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="stats">
+                                                <i className="material-icons">view_headline</i> Articles sur les
+                                                annonces reservations
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-4 col-sm-4">
+                                    <div className="card card-stats">
+                                        <div className="card-header card-header-success card-header-icon">
+                                            <div className="card-icon">
+                                                <i className="material-icons">done</i>
+                                            </div>
+                                            <p className="card-category"><b>Actives</b></p>
+                                            <h3 className="card-title"><b>{this.dataactive_countFormatter(blogannoncereservationsactive_count)}</b></h3>
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="stats">
+                                                <i className="material-icons">done</i> Articles actives
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-4 col-sm-4">
+                                    <div className="card card-stats">
+                                        <div className="card-header card-header-danger card-header-icon">
+                                            <div className="card-icon">
+                                                <i className="material-icons">remove</i>
+                                            </div>
+                                            <p className="card-category"><b>Desactivés</b></p>
+                                            <h3 className="card-title"><b>{this.dataunactive_countFormatter(blogannoncereservationsunactive_count)}</b></h3>
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="stats">
+                                                <i className="material-icons">remove</i> Articles désactivés
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
 
                             <div className="row">
                                 <div className="col-md-12 expo">
@@ -199,16 +418,16 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                                 <i className="material-icons">view_headline</i>
                                             </div>
                                             <p className="card-category">
-                                                <b>Articles sur les annonces locations</b>
+                                                <b>Articles sur les annonces reservations</b>
                                             </p>
                                             <h3 className="card-title" style={{ color: "red" }}>
-                                                <b>{this.data_countFormatter(blogannoncelocations_count)}</b>
+                                                <b>{this.data_countFormatter(blogannoncereservations_count)}</b>
                                             </h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
                                                 <i className="material-icons">view_headline</i>
-                                                <b>Articles sur les annonces locations</b>
+                                                <b>Articles sur les annonces reservations</b>
                                             </div>
                                         </div>
                                     </div>
@@ -223,9 +442,9 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                             <div className="row">
                                                 <div className="col-md-6">
                                                     <h4 className="card-title">
-                                                        <b>Articles sur les annonces locations</b>
+                                                        <b>Articles sur les annonces reservations</b>
                                                     </h4>
-                                                    <p className="card-title">Articles sur les annonces locations</p>
+                                                    <p className="card-title">Articles sur les annonces reservations</p>
                                                 </div>
                                                 <div className="col-md-6 text-right">
                                                 <span>
@@ -237,15 +456,41 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                         <div className="card-body">
                                             <div className="toolbar">
                                                 <div className="text-right ml-auto">
-                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/`}
+                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_reservations/`}
                                                           className="btn btn-secondary btn-just-icon btn-sm" title="Retour a vos articles">
                                                         <i className="material-icons">arrow_back</i>
                                                     </Link>
+                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_reservations/create/`}
+                                                          className="btn btn-primary btn-just-icon btn-sm" title="Poster un votre article sur la reservation">
+                                                        <i className="material-icons">add</i>
+                                                    </Link>
+                                                    {this.state.status ?
+                                                        <>
+                                                            <button type="button" rel="tooltip" onClick={() => this.unactiveItem(this.state.id)}
+                                                                    className="btn btn-success btn-just-icon btn-sm" title="Desactiver" >
+                                                                <i className="material-icons">done</i>
+                                                            </button>
+                                                        </>
+                                                        :
+                                                        <>
+                                                            <button type="button" onClick={() => this.activeItem(this.state.id)}
+                                                                    className="btn btn-rose btn-just-icon btn-sm" title="Activer" >
+                                                                <i className="material-icons">remove</i>
+                                                            </button>
+                                                        </>
+
+                                                    }
+
+                                                    <Button
+                                                        className="btn btn-danger btn-sm btn-just-icon" onClick={() => this.deleteItem(this.state.id)} title="Supprimer cette article">
+                                                        <i className="material-icons">delete_forever</i>
+                                                    </Button>{" "}
                                                 </div>
 
                                             </div>
 
-                                            <form role="form" onSubmit={this.saveItem} acceptCharset="UTF-8">
+                                            <Form role="form" onSubmit={this.updateItem} acceptCharset="UTF-8">
+
 
                                                 <CardBody>
 
@@ -294,16 +539,15 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                                             <label htmlFor="title">Selectionez la categorie</label>
                                                             <FormGroup>
 
-                                                                <select name={'categoryannoncelocation_id'} value={this.state.categoryannoncelocation_id}
-                                                                        className={`form-control ${this.hasErrorFor('categoryannoncelocation_id') ? 'is-invalid' : ''}`}
-                                                                        id="categoryannoncelocation_id" onChange={this.handleFieldChange} required>
+                                                                <select name={'categoryannoncereservation_id'} value={this.state.categoryannoncereservation_id}
+                                                                        className={`form-control ${this.hasErrorFor('categoryannoncereservation_id') ? 'is-invalid' : ''}`}
+                                                                        id="categoryannoncereservation_id" onChange={this.handleFieldChange} required>
                                                                     <option value="" disabled>Selectioner une category</option>
-                                                                    {categoryannoncelocations.map((item) => (
+                                                                    {categoryannoncereservations.map((item) => (
                                                                         <option key={item.id} value={item.id}>{item.name}</option>
                                                                     ))}
                                                                 </select>
-                                                                <br/>
-                                                                {this.renderErrorFor('categoryannoncelocation_id')}
+                                                                {this.renderErrorFor('categoryannoncereservation_id')}
                                                             </FormGroup>
                                                         </div>
                                                     </Row>
@@ -346,14 +590,14 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                                 </CardBody>
 
                                                 <div className="submit text-center">
-                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/`} className="btn btn-secondary">
+                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_reservations/`} className="btn btn-secondary">
                                                         <i className="now-ui-icons ui-1_simple-delete"/> Annuler
                                                     </Link>
                                                     <button className="btn btn-primary" type="submit">
                                                         <b>Mettre à jour l'article de blog</b>
                                                     </button>
                                                 </div>
-                                            </form>
+                                            </Form>
 
 
                                         </div>
@@ -373,4 +617,4 @@ class PremiumUserNewBlogannonceLocation extends Component {
     }
 }
 
-export default PremiumUserNewBlogannonceLocation;
+export default PremiumUserEditBlogannonceReservation;

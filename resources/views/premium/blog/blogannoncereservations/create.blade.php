@@ -1,13 +1,13 @@
 @extends('inc.premium.main')
 <?php $item = htmlspecialchars(config('app.name'));?>
-@section('title', $categoryannoncereservation->title.' - '.$item)
+@section('title', 'Dashboard '.$user->first_name.' - '.$item)
 
 @section('style')
 
 @endsection
 
 @section('content')
-    <router-view></router-view>
+    <div id="premium_app_ivemo"></div>
 @endsection
 
 @section('script')

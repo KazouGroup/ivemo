@@ -7,13 +7,13 @@ import PremiumHorizontalNavUserSite from "../../../inc/PremiumHorizontalNavUserS
 import FooterPremiumUser from "../../../inc/FooterPremiumUser";
 import {Button, CardBody, FormGroup, Input, InputGroup, Row} from "reactstrap";
 import ReactQuill from "react-quill";
-import NavPremiumUserBlogannonceLocation from "../NavPremiumUserBlogannonceLocation";
+import NavPremiumUserBlogannonceReservation from "../NavPremiumUserBlogannonceReservation";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
 
 
-class PremiumUserNewBlogannonceLocation extends Component {
+class PremiumUserNewBlogannonceReservation extends Component {
     constructor(props) {
         super(props);
 
@@ -29,11 +29,11 @@ class PremiumUserNewBlogannonceLocation extends Component {
             photo: '',
             description: '',
             red_time: '',
-            categoryannoncelocation_id: '',
+            categoryannoncereservation_id: '',
             showDefaultImage: true,
             errors: [],
-            categoryannoncelocations: [],
-            blogannoncelocations_count: [],
+            categoryannoncereservations: [],
+            blogannoncereservations_count: [],
         };
         this.modules = {
             toolbar: [
@@ -124,9 +124,9 @@ class PremiumUserNewBlogannonceLocation extends Component {
             photo: this.state.photo,
             red_time: this.state.red_time,
             description: this.state.description,
-            categoryannoncelocation_id: this.state.categoryannoncelocation_id,
+            categoryannoncereservation_id: this.state.categoryannoncereservation_id,
         };
-        dyaxios.post(route('blogannoncecategorylocationstore_site'), item)
+        dyaxios.post(route('blogannoncecategoryreservationstore_site'), item)
             .then(() => {
                 $.notify({
                         //,
@@ -144,7 +144,7 @@ class PremiumUserNewBlogannonceLocation extends Component {
                             exit: "animated fadeOutDown"
                         },
                     });
-                this.props.history.push(`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/`);
+                this.props.history.push(`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_reservations/`);
             }).catch(error => {
             this.setState({
                 errors: error.response.data.errors
@@ -163,18 +163,20 @@ class PremiumUserNewBlogannonceLocation extends Component {
     // lifecycle method
     componentDidMount() {
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.blogannoncelocations_premium_count',[itemuser])).then(response =>
-            this.setState({blogannoncelocations_count: response.data}));
-        fetch(route('api.categoryannoncelocation_site')).then(res => res.json()).then((result) => { this.setState({ categoryannoncelocations: result }) })
+
+        fetch(route('api.blogannoncereservations_premium_count',[itemuser])).then(res => res.json()).then((result) => {
+            this.setState({ blogannoncereservations_count: result }) });
+
+        fetch(route('api.categoryannoncereservation_site')).then(res => res.json()).then((result) => { this.setState({ categoryannoncereservations: result }) })
     }
-    data_countFormatter(blogannoncelocations_count, precision) {
-        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocations_count)) / 3);
+    data_countFormatter(blogannoncereservations_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncereservations_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
         const suffix = abbrev[order];
-        return (blogannoncelocations_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+        return (blogannoncereservations_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
     render() {
-        const {categoryannoncelocations,photo,blogannoncelocations_count} = this.state;
+        const {categoryannoncereservations,photo,blogannoncereservations_count} = this.state;
         return (
             <>
 
@@ -189,7 +191,7 @@ class PremiumUserNewBlogannonceLocation extends Component {
                     <div className="content">
                         <div className="container-fluid">
 
-                         <NavPremiumUserBlogannonceLocation/>
+                         <NavPremiumUserBlogannonceReservation/>
 
                             <div className="row">
                                 <div className="col-md-12 expo">
@@ -199,16 +201,16 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                                 <i className="material-icons">view_headline</i>
                                             </div>
                                             <p className="card-category">
-                                                <b>Articles sur les annonces locations</b>
+                                                <b>Articles sur les annonces reservations</b>
                                             </p>
                                             <h3 className="card-title" style={{ color: "red" }}>
-                                                <b>{this.data_countFormatter(blogannoncelocations_count)}</b>
+                                                <b>{this.data_countFormatter(blogannoncereservations_count)}</b>
                                             </h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
                                                 <i className="material-icons">view_headline</i>
-                                                <b>Articles sur les annonces locations</b>
+                                                <b>Articles sur les annonces reservations</b>
                                             </div>
                                         </div>
                                     </div>
@@ -225,7 +227,7 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                                     <h4 className="card-title">
                                                         <b>Articles sur les annonces locations</b>
                                                     </h4>
-                                                    <p className="card-title">Articles sur les annonces locations</p>
+                                                    <p className="card-title">Articles sur les annonces reservations</p>
                                                 </div>
                                                 <div className="col-md-6 text-right">
                                                 <span>
@@ -237,7 +239,7 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                         <div className="card-body">
                                             <div className="toolbar">
                                                 <div className="text-right ml-auto">
-                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/`}
+                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_reservations/`}
                                                           className="btn btn-secondary btn-just-icon btn-sm" title="Retour a vos articles">
                                                         <i className="material-icons">arrow_back</i>
                                                     </Link>
@@ -294,16 +296,16 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                                             <label htmlFor="title">Selectionez la categorie</label>
                                                             <FormGroup>
 
-                                                                <select name={'categoryannoncelocation_id'} value={this.state.categoryannoncelocation_id}
-                                                                        className={`form-control ${this.hasErrorFor('categoryannoncelocation_id') ? 'is-invalid' : ''}`}
-                                                                        id="categoryannoncelocation_id" onChange={this.handleFieldChange} required>
+                                                                <select name={'categoryannoncereservation_id'} value={this.state.categoryannoncereservation_id}
+                                                                        className={`form-control ${this.hasErrorFor('categoryannoncereservation_id') ? 'is-invalid' : ''}`}
+                                                                        id="categoryannoncereservation_id" onChange={this.handleFieldChange} required>
                                                                     <option value="" disabled>Selectioner une category</option>
-                                                                    {categoryannoncelocations.map((item) => (
+                                                                    {categoryannoncereservations.map((item) => (
                                                                         <option key={item.id} value={item.id}>{item.name}</option>
                                                                     ))}
                                                                 </select>
                                                                 <br/>
-                                                                {this.renderErrorFor('categoryannoncelocation_id')}
+                                                                {this.renderErrorFor('categoryannoncereservation_id')}
                                                             </FormGroup>
                                                         </div>
                                                     </Row>
@@ -346,7 +348,7 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                                 </CardBody>
 
                                                 <div className="submit text-center">
-                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/`} className="btn btn-secondary">
+                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_reservations/`} className="btn btn-secondary">
                                                         <i className="now-ui-icons ui-1_simple-delete"/> Annuler
                                                     </Link>
                                                     <button className="btn btn-primary" type="submit">
@@ -373,4 +375,4 @@ class PremiumUserNewBlogannonceLocation extends Component {
     }
 }
 
-export default PremiumUserNewBlogannonceLocation;
+export default PremiumUserNewBlogannonceReservation;
