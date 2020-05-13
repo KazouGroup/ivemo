@@ -57,89 +57,56 @@ class NavPremiumUserTeams extends Component {
         return (
 
             <div className="row">
-                <div className="col-lg-4 mx-auto">
+                <div className="col-lg-4 col-md-4 col-sm-4">
                     <div className="card card-stats">
-                        <div className="card-body ">
-                            <div className="statistics statistics-horizontal">
-                                <div className="info info-horizontal">
-                                    <div className="row">
-                                        <div className="col-5">
-                                            <div className="icon icon-primary icon-circle">
-                                                <i className="now-ui-icons text_align-center"></i>
-                                            </div>
-                                        </div>
-                                        <div className="col-7 text-right">
-                                            <h3 className="info-title">{this.data_countFormatter(teams_count)}</h3>
-                                            <h6 className="stats-title">Membres</h6>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div className="card-header card-header-primary card-header-icon">
+                            <div className="card-icon">
+                                <i className="material-icons">people_alt</i>
+                            </div>
+                            <p className="card-category"><b>Membres</b></p>
+                            <h3 className="card-title"><b>{this.data_countFormatter(teams_count)}</b></h3>
+                        </div>
+                        <div className="card-footer">
+                            <div className="stats">
+                                <i className="material-icons">people_alt</i>
+                                Membres de votre équipe
                             </div>
                         </div>
-                        <hr/>
-                        <div className="card-footer ">
+                    </div>
+                </div>
+                <div className="col-lg-4 col-md-4 col-sm-4">
+                    <div className="card card-stats">
+                        <div className="card-header card-header-success card-header-icon">
+                            <div className="card-icon">
+                                <i className="material-icons">done</i>
+                            </div>
+                            <p className="card-category"><b>Actives</b></p>
+                            <h3 className="card-title"><b>{this.dataactive_countFormatter(teamsactive_count)}</b></h3>
+                        </div>
+                        <div className="card-footer">
                             <div className="stats">
-                                <i className="now-ui-icons text_align-center"></i> Membres créer
+                                <i className="material-icons">done</i>  Actives
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-lg-4 col-md-4 col-sm-4">
+                    <div className="card card-stats">
+                        <div className="card-header card-header-danger card-header-icon">
+                            <div className="card-icon">
+                                <i className="material-icons">remove</i>
+                            </div>
+                            <p className="card-category"><b>Desactivés</b></p>
+                            <h3 className="card-title"><b>{this.dataunactive_countFormatter(teamsunactive_count)}</b></h3>
+                        </div>
+                        <div className="card-footer">
+                            <div className="stats">
+                                <i className="material-icons">remove</i> Désactivés
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="col-lg-4 mx-auto">
-                    <div className="card card-stats">
-                        <div className="card-body ">
-                            <div className="statistics statistics-horizontal">
-                                <div className="info info-horizontal">
-                                    <div className="row">
-                                        <div className="col-5">
-                                            <div className="icon icon-success icon-circle">
-                                                <i className="now-ui-icons ui-1_check"></i>
-                                            </div>
-                                        </div>
-                                        <div className="col-7 text-right">
-                                            <h3 className="info-title">{this.dataactive_countFormatter(teamsactive_count)}</h3>
-                                            <h6 className="stats-title">Actives</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr/>
-                        <div className="card-footer ">
-                            <div className="stats">
-                                <i className="now-ui-icons ui-1_check"/> Membres actives
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="col-lg-4 mx-auto">
-                    <div className="card card-stats">
-                        <div className="card-body ">
-                            <div className="statistics statistics-horizontal">
-                                <div className="info info-horizontal">
-                                    <div className="row">
-                                        <div className="col-5">
-                                            <div className="icon icon-danger icon-circle">
-                                                <i className="now-ui-icons ui-1_simple-delete"></i>
-                                            </div>
-                                        </div>
-                                        <div className="col-7 text-right">
-                                            <h3 className="info-title">{this.dataunactive_countFormatter(teamsunactive_count)}</h3>
-                                            <h6 className="stats-title">Desactivés</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr/>
-                        <div className="card-footer ">
-                            <div className="stats">
-                                <i className="now-ui-icons ui-1_simple-delete"/> Membres désactivés
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
         )

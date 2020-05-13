@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import PremiumVerticalNavUserSite from "../../../inc/PremiumVerticalNavUserSite";
 import PremiumHorizontalNavUserSite from "../../../inc/PremiumHorizontalNavUserSite";
 import FooterPremiumUser from "../../../inc/FooterPremiumUser";
-import {Button, CardBody, Col, Form, Input, InputGroup, Row, UncontrolledTooltip} from "reactstrap";
+import {Button, CardBody, Col, Form, FormGroup, Input, InputGroup, Row, UncontrolledTooltip} from "reactstrap";
 import ReactQuill from "react-quill";
 import NavPremiumUserTeams from "../NavPremiumUserTeams";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
@@ -36,6 +36,7 @@ class PremiumUserNewTeam extends Component {
             description: '',
             userProfile: {profile:[]},
             errors: [],
+            teams_count: [],
             showDefaultImage: true,
 
         };
@@ -144,59 +145,101 @@ class PremiumUserNewTeam extends Component {
 
     // lifecycle method
     componentDidMount() {
-        //
+        let itemuser = this.props.match.params.user;
+        dyaxios.get(route('api.teams_premium_count',[itemuser])).then(response =>
+            this.setState({teams_count: response.data}));
     }
 
 
+    data_countFormatter(teams_count, precision) {
+        const abbrev = ['', 'k', 'M', 'B', 'T'];
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(teams_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (teams_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     render() {
-        const {photo} = this.state;
+        const {photo,teams_count} = this.state;
         return (
             <>
                 <Helmet title={`Dashboard ${$userIvemo.first_name || ""} - Ivemo`} />
 
+                <PremiumVerticalNavUserSite {...this.props} />
 
-                <div className="wrapper ">
+                <div className="main-panel">
 
-                    <PremiumVerticalNavUserSite {...this.props}/>
+                    <PremiumHorizontalNavUserSite />
 
-                    <div className="main-panel" id="main-panel">
+                    <div className="content">
+                        <div className="container-fluid">
 
-                        <PremiumHorizontalNavUserSite/>
+                            <NavPremiumUserTeams/>
 
-                        <div className="panel-header">
-                            <div className="header text-center">
-                                <h3 className="title">Teams vos membre</h3>
-                                <p className="text-white">{this.state.full_name}</p>
+                            <div className="row">
+                                <div className="col-md-12 expo">
+                                    <div className="card card-stats">
+                                        <div className="card-header card-header-icon card-header-primary">
+                                            <div className="card-icon">
+                                                <i className="material-icons">people_alt</i>
+                                            </div>
+                                            <p className="card-category">
+                                                <b>Membres de votre équipe</b>
+                                            </p>
+                                            <h3 className="card-title" style={{ color: "red" }}>
+                                                <b>{this.data_countFormatter(teams_count)}</b>
+                                            </h3>
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="stats">
+                                                <i className="material-icons">people_alt</i>
+                                                <b>Membres de votre équipe</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="content">
-
-                            <NavPremiumUserTeams {...this.props}/>
 
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="card">
+                                        <div className="card-header card-header-primary">
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <h4 className="card-title">
+                                                        <b>Membres de votre équipe</b>
+                                                    </h4>
+                                                    <p className="card-title">Membres de votre équipe</p>
+                                                </div>
+                                                <div className="col-md-6 text-right">
+                                                <span>
+                                                    <i id="tooltipSize" className="material-icons">people_alt</i>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div className="card-body">
                                             <div className="toolbar">
+                                                <div className="text-right ml-auto">
+                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/teams/`}
+                                                          className="btn btn-secondary btn-just-icon btn-sm" title="Retour aux membres de votre équipe">
+                                                        <i className="material-icons">arrow_back</i>
+                                                    </Link>
+                                                </div>
 
                                             </div>
 
+                                            <form role="form" onSubmit={this.saveItem} acceptCharset="UTF-8">
 
-                                            <Form  onSubmit={this.saveItem} acceptCharset="UTF-8">
                                                 <CardBody>
 
                                                     <Row>
-                                                        <Col md={6}>
+                                                        <div className="col-md-6">
                                                             <label className="labels">
                                                                 Non complet
                                                                 <span className="text-danger">*</span>
                                                             </label>
-                                                            <InputGroup>
-                                                                <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons users_circle-08"/></span>
-                                                                </div>
+                                                            <FormGroup>
                                                                 <Input id='full_name'
                                                                        type='text'
                                                                        className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
@@ -208,20 +251,14 @@ class PremiumUserNewTeam extends Component {
                                                                        onChange={this.handleFieldChange}
                                                                 />
                                                                 {this.renderErrorFor('full_name')}
-                                                            </InputGroup>
-                                                        </Col>
-
-
-                                                        <Col md={6}>
+                                                            </FormGroup>
+                                                        </div>
+                                                        <div className="col-md-6">
                                                             <label className="labels">
                                                                 Role ou occupation
                                                                 <span className="text-danger">*</span>
                                                             </label>
-                                                            <InputGroup>
-                                                                <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons text_caps-small"/></span>
-                                                                </div>
+                                                            <FormGroup>
                                                                 <Input id='role'
                                                                        type='text'
                                                                        className={`form-control ${this.hasErrorFor('role') ? 'is-invalid' : ''}`}
@@ -233,17 +270,15 @@ class PremiumUserNewTeam extends Component {
                                                                        onChange={this.handleFieldChange}
                                                                 />
                                                                 {this.renderErrorFor('role')}
-                                                            </InputGroup>
-                                                        </Col>
-
-
+                                                            </FormGroup>
+                                                        </div>
                                                     </Row>
-
+                                                    <b/>
                                                     <Row>
-                                                        <div className="col-md-4 mx-auto">
+                                                        <div className="col-md-6 mx-auto">
                                                             <div className="profile text-center">
-                                                                <img src={this.state.showDefaultImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : photo} alt={'name'} />
-                                                                <input id="photo" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('photo') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="photo" />
+                                                                <img src={this.state.showDefaultImage ? `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg` : photo} alt={'name'} />
+                                                                <input id="photo" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('photo') ? 'is-invalid' : ''}`} style={{display: "none"}} name="photo" />
                                                                 {this.renderErrorFor('photo')}
                                                                 <div className="text-center">
                                                                     <label htmlFor="photo" className="btn btn-primary">
@@ -256,47 +291,48 @@ class PremiumUserNewTeam extends Component {
                                                             </div>
                                                         </div>
                                                     </Row>
-
                                                     <Row>
                                                         <div className="col-md-12">
-                                                            <div className="form-group">
+                                                            <FormGroup>
                                                                 <label className="labels">
-                                                                    Description de votre annonce
+                                                                    Décrivez votre article
                                                                     <span className="text-danger">*</span>
                                                                 </label>
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                             formats={this.formats}
+                                                                            placeholder="Laisser votre description..."
                                                                             className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                             value={this.state.description || ''}
-                                                                            onChange={this.handleChangeBody}/>
+                                                                            onChange={this.handleChangeBody} />
                                                                 {this.renderErrorFor('description')}
-                                                            </div>
+                                                            </FormGroup>
                                                         </div>
                                                     </Row>
 
-                                                    <div className="submit text-center">
-                                                        <Link to={`/dashboard/premium/${$userIvemo.slug}/teams/`} className="btn btn-secondary">
-                                                            <i className="now-ui-icons ui-1_simple-delete"/> Annuler
-                                                        </Link>
-                                                        <Button className="btn btn-primary" type="submit">
-                                                            <i className="now-ui-icons ui-1_check"/> Sauvegarder
-                                                        </Button>
-                                                    </div>
                                                 </CardBody>
 
+                                                <div className="submit text-center">
+                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_ventes/`} className="btn btn-secondary">
+                                                        <i className="now-ui-icons ui-1_simple-delete"/> Annuler
+                                                    </Link>
+                                                    <button className="btn btn-primary" type="submit">
+                                                        <b>Sauvegarder</b>
+                                                    </button>
+                                                </div>
+                                            </form>
 
-                                            </Form>
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
-
-                        <FooterPremiumUser/>
-
                     </div>
+
+                    <FooterPremiumUser />
+
                 </div>
             </>
 

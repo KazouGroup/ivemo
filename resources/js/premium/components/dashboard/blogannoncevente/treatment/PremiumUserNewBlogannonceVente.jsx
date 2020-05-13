@@ -235,10 +235,11 @@ class PremiumUserNewBlogannonceVente extends Component {
                                         </div>
                                         <div className="card-body">
                                             <div className="toolbar">
-                                                <div className="text-center">
-                                                    <div className="text-right ml-auto">
-
-                                                    </div>
+                                                <div className="text-right ml-auto">
+                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_ventes/`}
+                                                          className="btn btn-secondary btn-just-icon btn-sm" title="Retour a vos articles">
+                                                        <i className="material-icons">arrow_back</i>
+                                                    </Link>
                                                 </div>
 
                                             </div>

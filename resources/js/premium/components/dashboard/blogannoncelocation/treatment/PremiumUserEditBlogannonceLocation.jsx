@@ -455,34 +455,36 @@ class PremiumUserEditBlogannonceLocation extends Component {
                                         </div>
                                         <div className="card-body">
                                             <div className="toolbar">
-                                                <div className="text-center">
-                                                    <div className="text-right ml-auto">
-                                                        <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/create/`}
-                                                              className="btn btn-primary btn-just-icon btn-sm" title="Poster un votre article sur la location">
-                                                            <i className="material-icons">add</i>
-                                                        </Link>
-                                                        {this.state.status ?
-                                                            <>
-                                                                <button type="button" rel="tooltip" onClick={() => this.unactiveItem(this.state.id)}
-                                                                        className="btn btn-success btn-just-icon btn-sm" title="Desactiver" >
-                                                                    <i className="material-icons">done</i>
-                                                                </button>
-                                                            </>
-                                                            :
-                                                            <>
-                                                                <button type="button" onClick={() => this.activeItem(this.state.id)}
-                                                                        className="btn btn-rose btn-just-icon btn-sm" title="Activer" >
-                                                                    <i className="material-icons">remove</i>
-                                                                </button>
-                                                            </>
+                                                <div className="text-right ml-auto">
+                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/`}
+                                                          className="btn btn-secondary btn-just-icon btn-sm" title="Retour a vos articles">
+                                                        <i className="material-icons">arrow_back</i>
+                                                    </Link>
+                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/create/`}
+                                                          className="btn btn-primary btn-just-icon btn-sm" title="Poster un votre article sur la location">
+                                                        <i className="material-icons">add</i>
+                                                    </Link>
+                                                    {this.state.status ?
+                                                        <>
+                                                            <button type="button" rel="tooltip" onClick={() => this.unactiveItem(this.state.id)}
+                                                                    className="btn btn-success btn-just-icon btn-sm" title="Desactiver" >
+                                                                <i className="material-icons">done</i>
+                                                            </button>
+                                                        </>
+                                                        :
+                                                        <>
+                                                            <button type="button" onClick={() => this.activeItem(this.state.id)}
+                                                                    className="btn btn-rose btn-just-icon btn-sm" title="Activer" >
+                                                                <i className="material-icons">remove</i>
+                                                            </button>
+                                                        </>
 
-                                                        }
+                                                    }
 
-                                                        <Button
-                                                            className="btn btn-danger btn-sm btn-just-icon" onClick={() => this.deleteItem(this.state.id)} title="Supprimer cette article">
-                                                            <i className="material-icons">delete_forever</i>
-                                                        </Button>{" "}
-                                                    </div>
+                                                    <Button
+                                                        className="btn btn-danger btn-sm btn-just-icon" onClick={() => this.deleteItem(this.state.id)} title="Supprimer cette article">
+                                                        <i className="material-icons">delete_forever</i>
+                                                    </Button>{" "}
                                                 </div>
 
                                             </div>

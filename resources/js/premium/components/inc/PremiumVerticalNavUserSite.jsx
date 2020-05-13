@@ -4,7 +4,7 @@ import {Link, NavLink, withRouter} from 'react-router-dom';
 class PremiumVerticalNavUserSite extends PureComponent {
     constructor(props) {
         super(props);
-        this.state = {userData:[]};
+        this.state = {userData:{profile:{profile:[]}}};
         this.navLogout = this.navLogout.bind(this);
     }
 
@@ -173,6 +173,12 @@ class PremiumVerticalNavUserSite extends PureComponent {
                                         </li>
                                     </ul>
                                 </div>
+                            </li>
+                            <li className="nav-item ">
+                                <NavLink to={`/dashboard/premium/${userData.slug}/teams/`} className="nav-link">
+                                    <i className="material-icons">people_alt</i>
+                                    <p> Notre Team </p>
+                                </NavLink>
                             </li>
                         </ul>
                     </div>

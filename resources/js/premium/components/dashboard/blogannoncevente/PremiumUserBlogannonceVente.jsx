@@ -7,7 +7,7 @@ import PremiumHorizontalNavUserSite from "../../inc/PremiumHorizontalNavUserSite
 import FooterPremiumUser from "../../inc/FooterPremiumUser";
 import {Button} from "reactstrap";
 import PremiumUserBlogannonceVenteList from "./PremiumUserBlogannonceVenteList";
-import TablePremiumUserSkeleton from "../../inc/TablePremiumUserSkeleton";
+import TablePremiumUserBlogSkeleton from "../../inc/Skeleton/TablePremiumUserBlogSkeleton";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -265,7 +265,7 @@ class PremiumUserBlogannonceVente extends Component {
                     <PremiumUserBlogannonceVenteList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>                )
             })
         ):(
-            <TablePremiumUserSkeleton/>
+            <TablePremiumUserBlogSkeleton/>
         );
         return (
             <>

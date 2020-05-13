@@ -4,7 +4,7 @@ import {Button} from "reactstrap";
 import Skeleton from "react-loading-skeleton";
 
 
-function TablePremiumUserSkeleton(props) {
+function TablePremiumUserBlogSkeleton(props) {
 
     return(
 
@@ -66,4 +66,4 @@ function TablePremiumUserSkeleton(props) {
         </Fragment>
     )
 }
-export default TablePremiumUserSkeleton;
+export default TablePremiumUserBlogSkeleton;
