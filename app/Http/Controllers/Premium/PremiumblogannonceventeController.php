@@ -32,7 +32,7 @@ class PremiumblogannonceventeController extends Controller
 
     public function create(user $user)
     {
-        return view('premium.blog.blogannonceventes.index',compact('user'));
+        return view('premium.blog.blogannonceventes.create',compact('user'));
     }
 
     public function category(user $user,categoryannoncevente $categoryannoncevente)

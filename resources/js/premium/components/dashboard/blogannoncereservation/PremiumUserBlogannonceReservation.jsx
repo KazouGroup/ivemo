@@ -1,25 +1,25 @@
-import React, { Component,Fragment } from "react";
+import React, { Component, Fragment } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Swal from "sweetalert2";
 import PremiumVerticalNavUserSite from "../../inc/PremiumVerticalNavUserSite";
 import PremiumHorizontalNavUserSite from "../../inc/PremiumHorizontalNavUserSite";
 import FooterPremiumUser from "../../inc/FooterPremiumUser";
-import {Button} from "reactstrap";
+import { Button } from "reactstrap";
 import PremiumUserBlogannonceList from "./PremiumUserBlogannonceList";
 import TablePremiumUserBlogSkeleton from "../../inc/Skeleton/TablePremiumUserBlogSkeleton";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
 
-class PremiumUserBlogannonceLocationbyCategory extends Component {
+class PremiumUserBlogannonceReservation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            blogannoncelocations_count: [],
-            blogannoncelocationsactive_count: [],
-            blogannoncelocationsunactive_count: [],
-            userblogannonce:[],
+            blogannoncereservations_count: [],
+            blogannoncereservationsactive_count: [],
+            blogannoncereservationsunactive_count: [],
+            userblogannonce: {user:[],categoryannoncereservation:[]},
 
         };
 
@@ -28,7 +28,7 @@ class PremiumUserBlogannonceLocationbyCategory extends Component {
         this.unactiveItem = this.unactiveItem.bind(this);
     }
 
-    activeItem(id){
+    activeItem(id) {
         Swal.fire({
             title: 'Afficher cette article?',
             text: "êtes vous sure de vouloir confirmer cette action?",
@@ -44,13 +44,13 @@ class PremiumUserBlogannonceLocationbyCategory extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('blogannoncecategorylocationactive_site.site',id);
+                let url = route('blogannoncecategoryreservationactivated_site', id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette articles est visible aux utilisateurs",
-                        },
+                        message: "Cette articles est visible aux utilisateurs",
+                    },
                         {
                             allow_dismiss: false,
                             type: 'info',
@@ -80,7 +80,7 @@ class PremiumUserBlogannonceLocationbyCategory extends Component {
 
     }
 
-    unactiveItem(id){
+    unactiveItem(id) {
         Swal.fire({
             title: 'Masquer cette article?',
             text: "êtes vous sure de vouloir confirmer cette action?",
@@ -96,13 +96,13 @@ class PremiumUserBlogannonceLocationbyCategory extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('blogannoncecategorylocationunactive_site.site',id);
+                let url = route('blogannoncecategoryreservationunactivated_site', id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette article a été masquée aux utilisateurs",
-                        },
+                        message: "Cette article a été masquée aux utilisateurs",
+                    },
                         {
                             allow_dismiss: false,
                             type: 'info',
@@ -150,17 +150,17 @@ class PremiumUserBlogannonceLocationbyCategory extends Component {
                 // remove from local state
                 let isNotId = item => item.id !== id;
                 let updatedItems = this.state.userblogannonce.filter(isNotId);
-                this.setState({userblogannonce: updatedItems});
+                this.setState({ userblogannonce: updatedItems });
 
-                const url = route('blogannoncecategorylocationdelete_site',[id]);
+                const url = route('blogannoncecategoryreservationdelete_site', [id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            // title: 'Update',
-                            message: 'Articles suprimée avec success'
-                        },
+                        // title: 'Update',
+                        message: 'Articles suprimée avec success'
+                    },
                         {
                             allow_dismiss: false,
                             type: 'primary',
@@ -174,7 +174,7 @@ class PremiumUserBlogannonceLocationbyCategory extends Component {
                             },
                         });
                     /** End alert ***/
-                    window.location.reload();
+                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -190,43 +190,43 @@ class PremiumUserBlogannonceLocationbyCategory extends Component {
         });
     }
 
-   mydatatables(){
-       $(function() {
-           $('#datatable').DataTable({
-               "pagingType": "full_numbers",
-               "lengthMenu": [
-                   [10, 25, 50, -1],
-                   [10, 25, 50, "All"]
-               ],
-               responsive: true,
-               retrieve:true,
-               destroy: true,
-               colReorder: true,
-               language: {
-                   search: "<i class='material-icons'>search</i>",
-                   searchPlaceholder: "Search Record"
-               },
-               sPaginationType: "full_numbers"
+    mydatatables() {
+        $(function () {
+            $('#datatables').DataTable({
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+                responsive: true,
+                retrieve:true,
+                destroy: true,
+                colReorder: true,
+                language: {
+                    search: "<i class='material-icons'>search</i>",
+                    searchPlaceholder: "Search Record"
+                },
+                sPaginationType: "full_numbers"
 
-           });
-       });
-   }
+            });
+        });
+    }
 
-    loadItems(){
+    loadItems() {
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.blogannoncelocations_premium_count',[itemuser])).then(response =>
-            this.setState({blogannoncelocations_count: response.data}));
+        fetch(route('api.blogannoncereservations_premium_count',[itemuser])).then(res => res.json()).then((result) => {
+            this.setState({ blogannoncereservations_count: result }) });
 
-        dyaxios.get(route('api.blogannoncelocations_premiumactive_count',[itemuser])).then(response => {
-            this.setState({blogannoncelocationsactive_count: response.data})});
+        fetch(route('api.blogannoncereservations_premiumactive_count',[itemuser])).then(res => res.json()).then((result) => {
+            this.setState({ blogannoncereservationsactive_count: result }) });
 
-        dyaxios.get(route('api.blogannoncelocations_premiumunactive_count',[itemuser])).then(response =>
-            this.setState({blogannoncelocationsunactive_count: response.data}));
+        fetch(route('api.blogannoncereservations_premiumunactive_count',[itemuser])).then(res => res.json()).then((result) => {
+            this.setState({ blogannoncereservationsunactive_count: result }) });
 
-        fetch(route('api.blogannoncelocations_premium',[itemuser])).then(res => res.json())
+        fetch(route('api.blogannoncereservations_premium', [itemuser])).then(res => res.json())
             .then((result) => {
                 this.mydatatables();
-                this.setState({userblogannonce: result});
+                this.setState({ userblogannonce: result });
 
             })
     }
@@ -236,41 +236,39 @@ class PremiumUserBlogannonceLocationbyCategory extends Component {
         this.loadItems();
     }
 
-    data_countFormatter(blogannoncelocations_count, precision) {
-        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocations_count)) / 3);
+    data_countFormatter(blogannoncereservations_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncereservations_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
         const suffix = abbrev[order];
-        return (blogannoncelocations_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+        return (blogannoncereservations_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
 
-    dataactive_countFormatter(blogannoncelocationsactive_count, precision) {
-        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocationsactive_count)) / 3);
+    dataactive_countFormatter(blogannoncereservationsactive_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncereservationsactive_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
         const suffix = abbrev[order];
-        return (blogannoncelocationsactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+        return (blogannoncereservationsactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
 
-    dataunactive_countFormatter(blogannoncelocationsunactive_count, precision) {
-        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocationsunactive_count)) / 3);
+    dataunactive_countFormatter(blogannoncereservationsunactive_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncereservationsunactive_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
         const suffix = abbrev[order];
-        return (blogannoncelocationsunactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+        return (blogannoncereservationsunactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
-
-
     render() {
-        const {userblogannonce,blogannoncelocations_count,blogannoncelocationsactive_count,blogannoncelocationsunactive_count} = this.state;
-        const mapBlogannoncelocations = userblogannonce.length ? (
+        const { userblogannonce, blogannoncereservations_count,blogannoncereservationsactive_count,blogannoncereservationsunactive_count } = this.state;
+        const mapBlogannoncereservations = userblogannonce.length >= 0 ? (
             userblogannonce.map(item => {
-                return(
-                    <PremiumUserBlogannonceList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>                )
+                return (
+                    <PremiumUserBlogannonceList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem} />)
             })
-        ):(
-            <TablePremiumUserBlogSkeleton/>
-        );
+        ) : (
+                <TablePremiumUserBlogSkeleton/>
+            );
         return (
             <>
-                <Helmet title={`Dashboard ${$userIvemo.first_name || ""} article de blog locations - ${$name_site}`} />
+                <Helmet title={`Dashboard ${$userIvemo.first_name || ""} article de blog reservations - ${$name_site}`} />
 
                 <PremiumVerticalNavUserSite {...this.props} />
 
@@ -289,12 +287,12 @@ class PremiumUserBlogannonceLocationbyCategory extends Component {
                                                 <i className="material-icons">view_headline</i>
                                             </div>
                                             <p className="card-category"><b>Articles</b></p>
-                                            <h3 className="card-title"><b>{this.data_countFormatter(blogannoncelocations_count)}</b></h3>
+                                            <h3 className="card-title"><b>{this.data_countFormatter(blogannoncereservations_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
                                                 <i className="material-icons">view_headline</i> Articles sur les
-                                                annonces locations category
+                                                annonces reservations
                                             </div>
                                         </div>
                                     </div>
@@ -306,7 +304,7 @@ class PremiumUserBlogannonceLocationbyCategory extends Component {
                                                 <i className="material-icons">done</i>
                                             </div>
                                             <p className="card-category"><b>Actives</b></p>
-                                            <h3 className="card-title"><b>{this.dataactive_countFormatter(blogannoncelocationsactive_count)}</b></h3>
+                                            <h3 className="card-title"><b>{this.dataactive_countFormatter(blogannoncereservationsactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
@@ -322,7 +320,7 @@ class PremiumUserBlogannonceLocationbyCategory extends Component {
                                                 <i className="material-icons">remove</i>
                                             </div>
                                             <p className="card-category"><b>Desactivés</b></p>
-                                            <h3 className="card-title"><b>{this.dataunactive_countFormatter(blogannoncelocationsunactive_count)}</b></h3>
+                                            <h3 className="card-title"><b>{this.dataunactive_countFormatter(blogannoncereservationsunactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
@@ -342,16 +340,16 @@ class PremiumUserBlogannonceLocationbyCategory extends Component {
                                                 <i className="material-icons">view_headline</i>
                                             </div>
                                             <p className="card-category">
-                                                <b>Articles sur les annonces locations</b>
+                                                <b>Articles sur les annonces reservations</b>
                                             </p>
                                             <h3 className="card-title" style={{ color: "red" }}>
-                                                <b>{this.data_countFormatter(blogannoncelocations_count)}</b>
+                                                <b>{this.data_countFormatter(blogannoncereservations_count)}</b>
                                             </h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
                                                 <i className="material-icons">view_headline</i>
-                                                <b>Articles sur les annonces locations</b>
+                                                <b>Articles sur les annonces reservations</b>
                                             </div>
                                         </div>
                                     </div>
@@ -363,71 +361,77 @@ class PremiumUserBlogannonceLocationbyCategory extends Component {
                                 <div className="col-md-12">
                                     <div className="card">
                                         <div className="card-header card-header-primary">
-                                            <div className="row">
-                                                <div className="col-md-6">
-                                                    <h4 className="card-title">
-                                                        <b>Articles sur les annonces locations</b>
-                                                    </h4>
-                                                    <p className="card-title">Articles sur les annonces locations</p>
-                                                </div>
-                                                <div className="col-md-6 text-right">
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <h4 className="card-title">
+                                                    <b>Articles sur les annonces reservations</b>
+                                                </h4>
+                                                <p className="card-title">Articles sur les annonces reservations</p>
+                                            </div>
+                                            <div className="col-md-6 text-right">
                                                 <span>
                                                     <i id="tooltipSize" className="material-icons">view_headline</i>
                                                 </span>
-                                                </div>
                                             </div>
                                         </div>
-                                        <div className="card-body">
-                                            <div className="toolbar">
-                                                <div className="text-center">
-
+                                    </div>
+                                    <div className="card-body">
+                                        <div className="toolbar">
+                                            <div className="text-center">
+                                                <div className="submit text-center">
+                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_reservations/create/`}
+                                                          className="btn btn-primary btn-raised ">
+                                                        <i className="material-icons">add</i>
+                                                        <b className="title_hover">Poster un votre article sur la reservation</b>
+                                                    </Link>
                                                 </div>
-
                                             </div>
-                                            <div className="material-datatables">
-                                                <table id="datatables" className="table table-striped table-no-bordered table-hover" cellSpacing={0} width="100%" style={{width:"100%"}}>
-                                                    <thead>
+
+                                        </div>
+                                        <div className="material-datatables">
+                                            <table id="datatables" className="table table-striped table-no-bordered table-hover" cellSpacing={0} width="100%" style={{width:"100%"}}>
+                                                <thead>
                                                     <tr>
                                                         <th><b>Image</b></th>
                                                         <th><b>Titre</b></th>
                                                         <th><b>Categorie</b></th>
-                                                        <th><b>Status</b></th>
                                                         <th><b>Vue</b></th>
+                                                        <th><b>Status</b></th>
                                                         <th><b>Date</b></th>
                                                         <th className="disabled-sorting text-right"><b>Actions</b></th>
                                                     </tr>
-                                                    </thead>
-                                                    <tfoot>
+                                                </thead>
+                                                <tfoot>
                                                     <tr>
                                                         <th>Image</th>
                                                         <th>Titre</th>
                                                         <th>Categorie</th>
-                                                        <th>Status</th>
                                                         <th>Vue</th>
+                                                        <th>Status</th>
                                                         <th>Date</th>
                                                         <th className="text-right">Actions</th>
                                                     </tr>
-                                                    </tfoot>
-                                                    <tbody>
-                                                    {mapBlogannoncelocations}
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                </tfoot>
+                                                <tbody>
+                                                    {mapBlogannoncereservations}
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+
                     </div>
-
-                    <FooterPremiumUser />
-
                 </div>
+
+                <FooterPremiumUser />
+
+            </div>
             </>
 
         )
     }
 }
 
-export default PremiumUserBlogannonceLocationbyCategory;
+export default PremiumUserBlogannonceReservation;

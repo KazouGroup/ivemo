@@ -23,12 +23,12 @@ class PremiumUserBlogannonceList extends Component {
         //
     }
 
-    data_countFormatter(blogannoncelocations_count, precision) {
+    data_countFormatter(blogannoncereservations_count, precision) {
         const abbrev = ['', 'k', 'M', 'B', 'T'];
-        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocations_count)) / 3);
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncereservations_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
         const suffix = abbrev[order];
-        return (blogannoncelocations_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+        return (blogannoncereservations_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
     render() {
         return (
@@ -37,15 +37,15 @@ class PremiumUserBlogannonceList extends Component {
 
                 <tr>
                     <td>
-                        <a target="_blank" href={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
+                        <a target="_blank" href={`/blogs/annonce_reservations/${this.props.categoryannoncereservation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
                             <img src={this.props.photo} alt={this.props.user.first_name} style={photo_style}/>
                         </a>
                     </td>
 
                     <td>{ (this.props.title.length > 30 ? this.props.title.substring(0,30)+ "..." : this.props.title) }</td>
                     <td>
-                        {this.props.categoryannoncelocation_id ?
-                            <b>{ (this.props.categoryannoncelocation.name.length > 30 ? this.props.categoryannoncelocation.name.substring(0,30)+ "..." : this.props.categoryannoncelocation.name) }</b>
+                        {this.props.categoryannoncereservation_id ?
+                            <b>{ (this.props.categoryannoncereservation.name.length > 30 ? this.props.categoryannoncereservation.name.substring(0,30)+ "..." : this.props.categoryannoncereservation.name) }</b>
                             :
                             <b v-else>user don't exist</b>
                         }
@@ -92,10 +92,10 @@ class PremiumUserBlogannonceList extends Component {
                             </Fragment>
 
                         }
-                        <a target="_blank" href={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="btn btn-warning btn-sm btn-just-icon">
+                        <a target="_blank" href={`/blogs/annonce_reservations/${this.props.categoryannoncereservation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="btn btn-warning btn-sm btn-just-icon">
                             <i className="material-icons">visibility</i>
                         </a>
-                        <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/${this.props.slugin}/edit/`} className="btn btn-info btn-sm btn-just-icon" data-toggle="tooltip" data-placement="bottom" title={`Éditer cette ${this.props.title}`}>
+                        <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_reservations/${this.props.slugin}/edit/`} className="btn btn-info btn-sm btn-just-icon" data-toggle="tooltip" data-placement="bottom" title={`Éditer cette ${this.props.title}`}>
                             <i className="material-icons">edit</i>
                         </Link>
                         <Button onClick={() => this.props.deleteItem(this.props.id)}

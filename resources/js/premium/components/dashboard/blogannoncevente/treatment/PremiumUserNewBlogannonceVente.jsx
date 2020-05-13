@@ -177,7 +177,7 @@ class PremiumUserNewBlogannonceVente extends Component {
         const {categoryannonceventes,photo,blogannonceventes_count} = this.state;
         return (
             <>
-                <Helmet title={`${this.state.title || "Dashboard"} - ${$name_site}`} />
+                <Helmet title={`${this.state.title || "Dashboard " + $userIvemo.first_name} - ${$name_site}`} />
 
                 <PremiumVerticalNavUserSite {...this.props} />
 
