@@ -32,6 +32,7 @@ class PremiumUserNewBlogannonceVente extends Component {
             showDefaultImage: true,
             errors: [],
             categoryannonceventes: [],
+            blogannonceventes_count: [],
         };
         this.modules = {
             toolbar: [
@@ -72,10 +73,31 @@ class PremiumUserNewBlogannonceVente extends Component {
         e.preventDefault();
         let reader = new FileReader();
         let file = e.target.files[0];
-        reader.onloadend = (file) => {
-            this.setState({ file: file, photo: reader.result, showDefaultImage: false });
-        };
-        reader.readAsDataURL(file)
+        if(file['size'] < 15111775){
+            reader.onloadend = (file) => {
+                this.setState({ file: file, photo: reader.result, showDefaultImage: false });
+            };
+            reader.readAsDataURL(file)
+        }else{
+            $.notify({
+                    //,
+                    message: 'La fichier ne peut pas être supérieure à 15 MB'
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'danger',
+                    placement: {
+                        from: 'top',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animated fadeInDownBig",
+                        exit: "animated fadeOutUp"
+                    },
+                });
+
+        }
+
     }
     removeImage(e) {
         e.preventDefault();
@@ -138,48 +160,88 @@ class PremiumUserNewBlogannonceVente extends Component {
 
     // lifecycle method
     componentDidMount() {
+        let itemuser = this.props.match.params.user;
+        dyaxios.get(route('api.blogannonceventes_premium_count',[itemuser])).then(response =>
+            this.setState({blogannonceventes_count: response.data}));
         fetch(route('api.categoryannoncevente_site')).then(res => res.json()).then((result) => { this.setState({ categoryannonceventes: result }) })
     }
 
+    data_countFormatter(blogannonceventes_count, precision) {
+        const abbrev = ['', 'k', 'M', 'B', 'T'];
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannonceventes_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (blogannonceventes_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     render() {
-        const {categoryannonceventes,photo} = this.state;
+        const {categoryannonceventes,photo,blogannonceventes_count} = this.state;
         return (
             <>
-                <Helmet title={`Dashboard ${$userIvemo.first_name || ""} article de blog ventes - Ivemo`} />
+                <Helmet title={`${this.state.title || "Dashboard"} - ${$name_site}`} />
 
+                <PremiumVerticalNavUserSite {...this.props} />
 
-                <div className="wrapper ">
+                <div className="main-panel">
 
-                    <PremiumVerticalNavUserSite {...this.props}/>
+                    <PremiumHorizontalNavUserSite />
 
-                    <div className="main-panel" id="main-panel">
+                    <div className="content">
+                        <div className="container-fluid">
 
-                        <PremiumHorizontalNavUserSite/>
+                            <NavPremiumUserBlogannonceVente/>
 
-                        <div className="panel-header">
-                            <div className="header text-center">
-                                <h3 className="title">Articles annonces ventes</h3>
-                                <p className="text-white">{this.state.title}</p>
-                                <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_ventes/`} className="text-white">
-                                    <i className="fa fa-chevron-circle-left"></i> Retour aux annonces
-                                </Link>
+                            <div className="row">
+                                <div className="col-md-12 expo">
+                                    <div className="card card-stats">
+                                        <div className="card-header card-header-icon card-header-primary">
+                                            <div className="card-icon">
+                                                <i className="material-icons">view_headline</i>
+                                            </div>
+                                            <p className="card-category">
+                                                <b>Articles sur les annonces locations</b>
+                                            </p>
+                                            <h3 className="card-title" style={{ color: "red" }}>
+                                                <b>{this.data_countFormatter(blogannonceventes_count)}</b>
+                                            </h3>
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="stats">
+                                                <i className="material-icons">view_headline</i>
+                                                <b>Articles sur les annonces locations</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="content">
-
-                         <NavPremiumUserBlogannonceVente/>
 
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="card">
+                                        <div className="card-header card-header-primary">
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <h4 className="card-title">
+                                                        <b>Articles sur les annonces ventes</b>
+                                                    </h4>
+                                                    <p className="card-title">Articles sur les annonces ventes</p>
+                                                </div>
+                                                <div className="col-md-6 text-right">
+                                                <span>
+                                                    <i id="tooltipSize" className="material-icons">view_headline</i>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div className="card-body">
-
                                             <div className="toolbar">
+                                                <div className="text-center">
+                                                    <div className="text-right ml-auto">
 
+                                                    </div>
+                                                </div>
 
                                             </div>
-
 
                                             <form role="form" onSubmit={this.saveItem} acceptCharset="UTF-8">
 
@@ -188,10 +250,7 @@ class PremiumUserNewBlogannonceVente extends Component {
                                                     <Row>
                                                         <div className="col-md-12">
                                                             <label htmlFor="title">Donner un titre à cet article</label>
-                                                            <InputGroup>
-                                                                <div className="input-group-prepend">
-                                                                    <span className="input-group-text"><i className="now-ui-icons users_circle-08"/></span>
-                                                                </div>
+                                                            <FormGroup>
                                                                 <Input id='title'
                                                                        type='text'
                                                                        className={`form-control ${this.hasErrorFor('title') ? 'is-invalid' : ''}`}
@@ -201,21 +260,18 @@ class PremiumUserNewBlogannonceVente extends Component {
                                                                        placeholder="Titre de l'article"
                                                                        aria-label="Titre de l'article"
                                                                        value={this.state.title || ''}
-
+                                                                       required
                                                                        onChange={this.handleFieldChange}
                                                                 />
                                                                 {this.renderErrorFor('title')}
-                                                            </InputGroup>
+                                                            </FormGroup>
                                                         </div>
                                                     </Row>
 
                                                     <Row>
                                                         <div className="col-md-6">
                                                             <label htmlFor="title">Estimer en temp <b>{this.state.red_time} min lecture</b></label>
-                                                            <InputGroup>
-                                                                <div className="input-group-prepend">
-                                                                    <span className="input-group-text"><i className="now-ui-icons tech_watch-time"/></span>
-                                                                </div>
+                                                            <FormGroup>
                                                                 <Input id='red_time'
                                                                        type='number'
                                                                        className={`form-control ${this.hasErrorFor('red_time') ? 'is-invalid' : ''}`}
@@ -229,13 +285,15 @@ class PremiumUserNewBlogannonceVente extends Component {
                                                                        onChange={this.handleFieldChange}
                                                                 />
                                                                 {this.renderErrorFor('red_time')}
-                                                            </InputGroup>
+                                                            </FormGroup>
                                                         </div>
+
                                                         <div className="col-md-6">
                                                             <label htmlFor="title">Selectionez la categorie</label>
                                                             <FormGroup>
+
                                                                 <select name={'categoryannoncevente_id'} value={this.state.categoryannoncevente_id}
-                                                                        className={`form-control`}
+                                                                        className={`form-control ${this.hasErrorFor('categoryannoncevente_id') ? 'is-invalid' : ''}`}
                                                                         id="categoryannoncevente_id" onChange={this.handleFieldChange}>
                                                                     <option value="" disabled>Selectioner une category</option>
                                                                     {categoryannonceventes.map((item) => (
@@ -243,14 +301,16 @@ class PremiumUserNewBlogannonceVente extends Component {
                                                                     ))}
                                                                 </select>
                                                                 {this.renderErrorFor('categoryannoncevente_id')}
+                                                                <br/>
+                                                                {this.renderErrorFor('categoryannoncelocation_id')}
                                                             </FormGroup>
                                                         </div>
                                                     </Row>
                                                     <Row>
-                                                        <div className="col-md-4 mx-auto">
-                                                            <div className="text-center">
-                                                                <img src={this.state.showDefaultImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : photo} alt={'name'} />
-                                                                <input id="photo" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('photo') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="photo" />
+                                                        <div className="col-md-6 mx-auto">
+                                                            <div className="profile text-center">
+                                                                <img src={this.state.showDefaultImage ? `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg` : photo} alt={'name'} />
+                                                                <input id="photo" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('photo') ? 'is-invalid' : ''}`} style={{display: "none"}} name="photo" />
                                                                 {this.renderErrorFor('photo')}
                                                                 <div className="text-center">
                                                                     <label htmlFor="photo" className="btn btn-primary">
@@ -273,6 +333,7 @@ class PremiumUserNewBlogannonceVente extends Component {
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                             formats={this.formats}
+                                                                            placeholder="Laisser votre description..."
                                                                             className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                             value={this.state.description || ''}
                                                                             onChange={this.handleChangeBody} />
@@ -288,7 +349,7 @@ class PremiumUserNewBlogannonceVente extends Component {
                                                         <i className="now-ui-icons ui-1_simple-delete"/> Annuler
                                                     </Link>
                                                     <button className="btn btn-primary" type="submit">
-                                                        <b>Sauvegarder l'article de blog</b>
+                                                        <b>Mettre à jour l'article de blog</b>
                                                     </button>
                                                 </div>
                                             </form>
@@ -298,11 +359,12 @@ class PremiumUserNewBlogannonceVente extends Component {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
-
-                        <FooterPremiumUser/>
-
                     </div>
+
+                    <FooterPremiumUser />
+
                 </div>
             </>
 

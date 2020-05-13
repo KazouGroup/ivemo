@@ -74,11 +74,33 @@ class PremiumUserNewBlogannonceLocation extends Component {
         e.preventDefault();
         let reader = new FileReader();
         let file = e.target.files[0];
-        reader.onloadend = (file) => {
-            this.setState({ file: file, photo: reader.result, showDefaultImage: false });
-        };
-        reader.readAsDataURL(file)
+        if(file['size'] < 15111775){
+            reader.onloadend = (file) => {
+                this.setState({ file: file, photo: reader.result, showDefaultImage: false });
+            };
+            reader.readAsDataURL(file)
+        }else{
+            $.notify({
+                    //,
+                    message: 'La fichier ne peut pas être supérieure à 15 MB'
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'danger',
+                    placement: {
+                        from: 'top',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animated fadeInDownBig",
+                        exit: "animated fadeOutUp"
+                    },
+                });
+
+        }
+
     }
+
     removeImage(e) {
         e.preventDefault();
         this.setState({ file: '', photo: '', showDefaultImage: true });
@@ -311,6 +333,7 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                             formats={this.formats}
+                                                                            placeholder="Laisser votre description..."
                                                                             className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                             value={this.state.description || ''}
                                                                             onChange={this.handleChangeBody} />

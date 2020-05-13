@@ -497,6 +497,7 @@ class BlogannoncereservationEdit extends Component {
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                     formats={this.formats}
+                                                                    placeholder="Laisser votre description..."
                                                                     className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                     value={this.state.description || ''}
                                                                     onChange={this.handleChangeBody} />

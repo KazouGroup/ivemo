@@ -5,9 +5,10 @@ import Swal from "sweetalert2";
 import PremiumVerticalNavUserSite from "../../../inc/PremiumVerticalNavUserSite";
 import PremiumHorizontalNavUserSite from "../../../inc/PremiumHorizontalNavUserSite";
 import FooterPremiumUser from "../../../inc/FooterPremiumUser";
-import {Button, CardBody, FormGroup, Input, InputGroup, Row} from "reactstrap";
+import {Button, CardBody, Form, FormGroup, Input, InputGroup, Row} from "reactstrap";
 import NavPremiumUserBlogannonceVente from "../NavPremiumUserBlogannonceVente";
 import ReactQuill from "react-quill";
+const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
 
@@ -17,6 +18,9 @@ class PremiumUserEditBlogannonceVente extends Component {
         super(props);
 
         this.updateItem = this.updateItem.bind(this);
+        this.activeItem = this.activeItem.bind(this);
+        this.unactiveItem = this.unactiveItem.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
         this.updateImage = this.updateImage.bind(this);
         this.removeImage = this.removeImage.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -32,6 +36,9 @@ class PremiumUserEditBlogannonceVente extends Component {
             showDefaultImage: false,
             errors: [],
             categoryannonceventes: [],
+            blogannonceventes_count: [],
+            blogannonceventesactive_count: [],
+            blogannonceventesunactive_count: [],
         };
         this.modules = {
             toolbar: [
@@ -72,10 +79,31 @@ class PremiumUserEditBlogannonceVente extends Component {
         e.preventDefault();
         let reader = new FileReader();
         let file = e.target.files[0];
-        reader.onloadend = (file) => {
-            this.setState({ file: file, photo: reader.result, showDefaultImage: false });
-        };
-        reader.readAsDataURL(file)
+        if(file['size'] < 15111775){
+            reader.onloadend = (file) => {
+                this.setState({ file: file, photo: reader.result, showDefaultImage: false });
+            };
+            reader.readAsDataURL(file)
+        }else{
+            $.notify({
+                    //,
+                    message: 'La fichier ne peut pas être supérieure à 15 MB'
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'danger',
+                    placement: {
+                        from: 'top',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animated fadeInDownBig",
+                        exit: "animated fadeOutUp"
+                    },
+                });
+
+        }
+
     }
     removeImage(e) {
         e.preventDefault();
@@ -91,6 +119,7 @@ class PremiumUserEditBlogannonceVente extends Component {
             )
         }
     }
+
 
 
     updateItem(e) {
@@ -138,8 +167,144 @@ class PremiumUserEditBlogannonceVente extends Component {
         })
     }
 
+    activeItem(id){
+        //Envoyer la requet au server
+        let url = route('blogannoncecategoryventeactivated_site',[id]);
+        dyaxios.get(url).then(() => {
+
+            /** Alert notify bootstrapp **/
+            $.notify({
+                    //,
+                    message: 'Article de blogs activé avec succès'
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animated fadeInUp",
+                        exit: "animated fadeOutDown"
+                    },
+                });
+            /** End alert ***/
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animated bounceInDown',
+                    exit: 'animated bounceOutUp'
+                }
+            });
+        })
+
+    }
+
+    unactiveItem(id){
+        //Envoyer la requet au server
+        let url = route('blogannoncecategoryventeunactivated_site',[id]);
+        dyaxios.get(url).then(() => {
+
+            /** Alert notify bootstrapp **/
+            $.notify({
+                    // title: 'Update FAQ',
+                    message: 'Article de blogs désactiver avec succès'
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animated fadeInUp",
+                        exit: "animated fadeOutDown"
+                    },
+                });
+            /** End alert ***/
+            this.loadItems();
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animated bounceInDown',
+                    exit: 'animated bounceOutUp'
+                }
+            });
+        })
+
+    }
+
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes-vous sûr de vouloir executer cette action",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                const url = route('blogannoncecategoryventedelete_site',id);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update',
+                            message: 'Article de blogs suprimée avec success'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'primary',
+                            placement: {
+                                from: 'bottom',
+                                align: 'right'
+                            },
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            },
+                        });
+                    /** End alert ***/
+                    this.props.history.goBack();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
+    }
+
     loadItems() {
+        let itemuser = this.props.match.params.user;
         let Itemdata = this.props.match.params.blogannoncevente;
+        dyaxios.get(route('api.blogannonceventes_premium_count',[itemuser])).then(response =>
+            this.setState({blogannonceventes_count: response.data}));
+
+        dyaxios.get(route('api.blogannonceventes_premiumactive_count',[itemuser])).then(response => {
+            this.setState({blogannonceventesactive_count: response.data})});
+
+        dyaxios.get(route('api.blogannonceventes_premiumunactive_count',[itemuser])).then(response =>
+            this.setState({blogannonceventesunactive_count: response.data}));
         let url = route('api.blogannonceblogcategoryventeslugin_site', [Itemdata]);
         dyaxios.get(url).then(response =>
             this.setState({
@@ -159,57 +324,181 @@ class PremiumUserEditBlogannonceVente extends Component {
         fetch(route('api.categoryannoncevente_site')).then(res => res.json()).then((result) => { this.setState({ categoryannonceventes: result }) })
     }
 
+    data_countFormatter(blogannonceventes_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannonceventes_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (blogannonceventes_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+
+    dataactive_countFormatter(blogannonceventesactive_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannonceventesactive_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (blogannonceventesactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+
+    dataunactive_countFormatter(blogannonceventesunactive_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannonceventesunactive_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (blogannonceventesunactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+
     render() {
-        const {categoryannonceventes,photo} = this.state;
+        const {categoryannonceventes,photo,blogannonceventes_count,blogannonceventesactive_count,blogannonceventesunactive_count} = this.state;
         return (
             <>
-                <Helmet title={`${this.state.title || $name_site} - Ivemo`} />
+                <Helmet title={`${this.state.title || $name_site} - ${$name_site}`} />
 
+                <PremiumVerticalNavUserSite {...this.props} />
 
-                <div className="wrapper ">
+                <div className="main-panel">
 
-                    <PremiumVerticalNavUserSite {...this.props}/>
+                    <PremiumHorizontalNavUserSite />
 
-                    <div className="main-panel" id="main-panel">
+                    <div className="content">
+                        <div className="container-fluid">
 
-                        <PremiumHorizontalNavUserSite/>
+                            <div className="row">
+                                <div className="col-lg-4 col-md-4 col-sm-4">
+                                    <div className="card card-stats">
+                                        <div className="card-header card-header-primary card-header-icon">
+                                            <div className="card-icon">
+                                                <i className="material-icons">view_headline</i>
+                                            </div>
+                                            <p className="card-category"><b>Articles</b></p>
+                                            <h3 className="card-title"><b>{this.data_countFormatter(blogannonceventes_count)}</b></h3>
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="stats">
+                                                <i className="material-icons">view_headline</i> Articles sur les
+                                                annonces ventes
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-4 col-sm-4">
+                                    <div className="card card-stats">
+                                        <div className="card-header card-header-success card-header-icon">
+                                            <div className="card-icon">
+                                                <i className="material-icons">done</i>
+                                            </div>
+                                            <p className="card-category"><b>Actives</b></p>
+                                            <h3 className="card-title"><b>{this.dataactive_countFormatter(blogannonceventesactive_count)}</b></h3>
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="stats">
+                                                <i className="material-icons">done</i> Articles actives
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-4 col-sm-4">
+                                    <div className="card card-stats">
+                                        <div className="card-header card-header-danger card-header-icon">
+                                            <div className="card-icon">
+                                                <i className="material-icons">remove</i>
+                                            </div>
+                                            <p className="card-category"><b>Desactivés</b></p>
+                                            <h3 className="card-title"><b>{this.dataunactive_countFormatter(blogannonceventesunactive_count)}</b></h3>
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="stats">
+                                                <i className="material-icons">remove</i> Articles désactivés
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                        <div className="panel-header">
-                            <div className="header text-center">
-                                <h3 className="title">Articles annonces ventes</h3>
-                                <p className="text-white">{this.state.title}</p>
-                                <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_ventes/`} className="text-white">
-                                    <i className="fa fa-chevron-circle-left"></i> Retour aux annonces
-                                </Link>
                             </div>
-                        </div>
 
-                        <div className="content">
+                            <div className="row">
+                                <div className="col-md-12 expo">
+                                    <div className="card card-stats">
+                                        <div className="card-header card-header-icon card-header-primary">
+                                            <div className="card-icon">
+                                                <i className="material-icons">view_headline</i>
+                                            </div>
+                                            <p className="card-category">
+                                                <b>Articles sur les annonces ventes</b>
+                                            </p>
+                                            <h3 className="card-title" style={{ color: "red" }}>
+                                                <b>{this.data_countFormatter(blogannonceventes_count)}</b>
+                                            </h3>
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="stats">
+                                                <i className="material-icons">view_headline</i>
+                                                <b>Articles sur les annonces ventes</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                         <NavPremiumUserBlogannonceVente/>
 
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="card">
+                                        <div className="card-header card-header-primary">
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <h4 className="card-title">
+                                                        <b>Articles sur les annonces ventes</b>
+                                                    </h4>
+                                                    <p className="card-title">Articles sur les annonces ventes</p>
+                                                </div>
+                                                <div className="col-md-6 text-right">
+                                                <span>
+                                                    <i id="tooltipSize" className="material-icons">view_headline</i>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div className="card-body">
-
                                             <div className="toolbar">
+                                                <div className="text-center">
+                                                    <div className="text-right ml-auto">
+                                                        <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_ventes/create/`}
+                                                              className="btn btn-primary btn-just-icon btn-sm" title="Poster un votre article sur la location">
+                                                            <i className="material-icons">add</i>
+                                                        </Link>
+                                                        {this.state.status ?
+                                                            <>
+                                                                <button type="button" rel="tooltip" onClick={() => this.unactiveItem(this.state.id)}
+                                                                        className="btn btn-success btn-just-icon btn-sm" title="Desactiver" >
+                                                                    <i className="material-icons">done</i>
+                                                                </button>
+                                                            </>
+                                                            :
+                                                            <>
+                                                                <button type="button" onClick={() => this.activeItem(this.state.id)}
+                                                                        className="btn btn-rose btn-just-icon btn-sm" title="Activer" >
+                                                                    <i className="material-icons">remove</i>
+                                                                </button>
+                                                            </>
 
+                                                        }
+
+                                                        <Button
+                                                            className="btn btn-danger btn-sm btn-just-icon" onClick={() => this.deleteItem(this.state.id)} title="Supprimer cette article">
+                                                            <i className="material-icons">delete_forever</i>
+                                                        </Button>{" "}
+                                                    </div>
+                                                </div>
 
                                             </div>
 
+                                            <Form role="form" onSubmit={this.updateItem} acceptCharset="UTF-8">
 
-                                            <form role="form" onSubmit={this.updateItem} acceptCharset="UTF-8">
 
                                                 <CardBody>
 
                                                     <Row>
                                                         <div className="col-md-12">
                                                             <label htmlFor="title">Donner un titre à cet article</label>
-                                                            <InputGroup>
-                                                                <div className="input-group-prepend">
-                                                                    <span className="input-group-text"><i className="now-ui-icons users_circle-08"/></span>
-                                                                </div>
+                                                            <FormGroup>
                                                                 <Input id='title'
                                                                        type='text'
                                                                        className={`form-control ${this.hasErrorFor('title') ? 'is-invalid' : ''}`}
@@ -219,21 +508,18 @@ class PremiumUserEditBlogannonceVente extends Component {
                                                                        placeholder="Titre de l'article"
                                                                        aria-label="Titre de l'article"
                                                                        value={this.state.title || ''}
-
+                                                                       required
                                                                        onChange={this.handleFieldChange}
                                                                 />
                                                                 {this.renderErrorFor('title')}
-                                                            </InputGroup>
+                                                            </FormGroup>
                                                         </div>
                                                     </Row>
 
                                                     <Row>
                                                         <div className="col-md-6">
                                                             <label htmlFor="title">Estimer en temp <b>{this.state.red_time} min lecture</b></label>
-                                                            <InputGroup>
-                                                                <div className="input-group-prepend">
-                                                                    <span className="input-group-text"><i className="now-ui-icons tech_watch-time"/></span>
-                                                                </div>
+                                                            <FormGroup>
                                                                 <Input id='red_time'
                                                                        type='number'
                                                                        className={`form-control ${this.hasErrorFor('red_time') ? 'is-invalid' : ''}`}
@@ -247,13 +533,15 @@ class PremiumUserEditBlogannonceVente extends Component {
                                                                        onChange={this.handleFieldChange}
                                                                 />
                                                                 {this.renderErrorFor('red_time')}
-                                                            </InputGroup>
+                                                            </FormGroup>
                                                         </div>
+
                                                         <div className="col-md-6">
                                                             <label htmlFor="title">Selectionez la categorie</label>
                                                             <FormGroup>
+
                                                                 <select name={'categoryannoncevente_id'} value={this.state.categoryannoncevente_id}
-                                                                        className={`form-control`}
+                                                                        className={`form-control ${this.hasErrorFor('categoryannoncevente_id') ? 'is-invalid' : ''}`}
                                                                         id="categoryannoncevente_id" onChange={this.handleFieldChange}>
                                                                     <option value="" disabled>Selectioner une category</option>
                                                                     {categoryannonceventes.map((item) => (
@@ -261,14 +549,16 @@ class PremiumUserEditBlogannonceVente extends Component {
                                                                     ))}
                                                                 </select>
                                                                 {this.renderErrorFor('categoryannoncevente_id')}
+                                                                <br/>
+                                                                {this.renderErrorFor('categoryannoncelocation_id')}
                                                             </FormGroup>
                                                         </div>
                                                     </Row>
                                                     <Row>
-                                                        <div className="col-md-4 mx-auto">
-                                                            <div className="text-center">
-                                                                <img src={this.state.showDefaultImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : photo} alt={'name'} />
-                                                                <input id="photo" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('photo') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="photo" />
+                                                        <div className="col-md-6 mx-auto">
+                                                            <div className="profile text-center">
+                                                                <img src={this.state.showDefaultImage ? `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg` : photo} alt={'name'} />
+                                                                <input id="photo" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('photo') ? 'is-invalid' : ''}`} style={{display: "none"}} name="photo" />
                                                                 {this.renderErrorFor('photo')}
                                                                 <div className="text-center">
                                                                     <label htmlFor="photo" className="btn btn-primary">
@@ -291,6 +581,7 @@ class PremiumUserEditBlogannonceVente extends Component {
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                             formats={this.formats}
+                                                                            placeholder="Laisser votre description..."
                                                                             className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                             value={this.state.description || ''}
                                                                             onChange={this.handleChangeBody} />
@@ -309,18 +600,19 @@ class PremiumUserEditBlogannonceVente extends Component {
                                                         <b>Mettre à jour l'article de blog</b>
                                                     </button>
                                                 </div>
-                                            </form>
+                                            </Form>
 
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
-
-                        <FooterPremiumUser/>
-
                     </div>
+
+                    <FooterPremiumUser />
+
                 </div>
             </>
 
