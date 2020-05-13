@@ -39,7 +39,7 @@ class NavUserSite extends PureComponent {
                                 <b>Acceuil</b>
                             </NavLink>
                         </li>
->= 0
+                        
                         {!$guest &&(
                             <li className="nav-item">
                                 <a href={`/dashboard/premium/${$userIvemo.slug}/`} className="nav-link">
