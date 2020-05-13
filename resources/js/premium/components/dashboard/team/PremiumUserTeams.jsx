@@ -7,6 +7,7 @@ import PremiumHorizontalNavUserSite from "../../inc/PremiumHorizontalNavUserSite
 import FooterPremiumUser from "../../inc/FooterPremiumUser";
 import {Button, UncontrolledTooltip} from "reactstrap";
 import moment from "moment";
+import TablePremiumUserTeamSkeleton from "../../inc/Skeleton/TablePremiumUserTeamSkeleton";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -27,7 +28,7 @@ class PremiumUserTeams extends Component {
             teams_count: [],
             teamsactive_count: [],
             teamsunactive_count: [],
-            teams:[],
+            teams:{user:[]},
 
         };
 
@@ -199,7 +200,7 @@ class PremiumUserTeams extends Component {
 
    mydatatables(){
        $(function() {
-           $('#datatable').DataTable({
+           $('#datatables').DataTable({
                "pagingType": "full_numbers",
                "lengthMenu": [
                    [10, 25, 50, -1],
@@ -208,12 +209,12 @@ class PremiumUserTeams extends Component {
                responsive: true,
                retrieve:true,
                destroy: true,
-               autoFill: true,
                colReorder: true,
                language: {
-                   search: "_INPUT_",
-                   searchPlaceholder: "Search records",
-               }
+                   search: "<i class='material-icons'>search</i>",
+                   searchPlaceholder: "Search Record"
+               },
+               sPaginationType: "full_numbers"
 
            });
        });
@@ -265,7 +266,7 @@ class PremiumUserTeams extends Component {
     }
     render() {
         const {teams,teams_count,teamsactive_count,teamsunactive_count} = this.state;
-        const mapTeamsusers = teams.length ? (
+        const mapTeamsusers = teams.length >= 0 ? (
             teams.map(item => {
                 return(
                     <tr key={item.id}>
@@ -276,12 +277,12 @@ class PremiumUserTeams extends Component {
                         </td>
                         <td>{item.full_name}</td>
                         <td>{item.role}</td>
-                        <td className="text-center">
+                        <td>
                             <div className="timeline-heading">
                                 {item.status ?
                                     <span className="badge badge-success"><b>Visible</b></span>
                                     :
-                                    <span className="badge badge-primary"><b>Desactivé</b></span>
+                                    <span className="badge badge-rose"><b>Desactivé</b></span>
                                 }
                             </div>
                         </td>
@@ -290,196 +291,194 @@ class PremiumUserTeams extends Component {
                             {item.status ?
                                 <>
                                     <Button onClick={() => this.unactiveItem(item)}
-                                            className="btn btn-success btn-icon btn-sm btn-round" title={`Desactiver ${item.full_name}`} >
-                                        <i className="now-ui-icons ui-1_check"/>
+                                            className="btn btn-success btn-just-icon btn-sm" title={`Desactiver ${item.full_name}`} >
+                                        <i className="material-icons">done</i>
                                     </Button>
                                 </>
                                 :
                                 <>
                                     <Button onClick={() => this.activeItem(item)}
-                                            className="btn btn-primary btn-icon btn-sm btn-round" title={`Activer ${item.full_name}`} >
-                                        <i className="now-ui-icons ui-1_simple-delete"/>
+                                            className="btn btn-rose btn-just-icon btn-sm" title={`Activer ${item.full_name}`} >
+                                        <i className="material-icons">remove</i>
                                     </Button>
                                 </>
 
                             }
-                            <Link to={`/dashboard/premium/${item.user.slug}/teams/${item.id}/edit/`} className="btn btn-info btn-icon btn-sm btn-info btn-round" title={`Éditer cette ${item.full_name}`}>
-                                <i className="now-ui-icons ui-2_settings-90"/>
+
+                            <Link to={`/dashboard/premium/${item.user.slug}/teams/${item.id}/edit/`} className="btn btn-info btn-sm btn-just-icon" data-toggle="tooltip" data-placement="bottom" title={`Éditer cette ${item.full_name}`}>
+                                <i className="material-icons">edit</i>
                             </Link>
 
-                            <button type="button" title={'Supprimer'} onClick={() => this.deleteItem(item.id)}
-                                    className="btn btn-danger btn-icon btn-sm btn-danger btn-round">
-                                <i className="far fa-trash-alt"/>
-                            </button>
+                            <Button onClick={() => this.deleteItem(this.props.id)}
+                                    className="btn btn-danger btn-sm btn-just-icon" title="Supprimer">
+                                <i className="material-icons">delete_forever</i>
+                            </Button>
                         </td>
                     </tr>
                 )
             })
         ):(
-            <></>
+            <TablePremiumUserTeamSkeleton/>
         );
         return (
             <>
                 <Helmet title={`Dashboard ${$userIvemo.first_name || ""} - Ivemo`} />
 
+                <PremiumVerticalNavUserSite {...this.props}/>
 
-                <div className="wrapper ">
+                <div className="main-panel">
 
-                    <PremiumVerticalNavUserSite {...this.props}/>
+                    <PremiumHorizontalNavUserSite/>
 
-                    <div className="main-panel" id="main-panel">
-
-                        <PremiumHorizontalNavUserSite/>
-
-                        <div className="panel-header">
-                            <div className="header text-center">
-                                <h3 className="title">Teams vos membre</h3>
-                                <p className="text-white">Votre teams ou utilisateurs</p>
-                            </div>
-                        </div>
-
-                        <div className="content">
+                    <div className="content">
+                        <div className="container-fluid">
 
                             <div className="row">
-                                <div className="col-lg-4 mx-auto">
+                                <div className="col-lg-4 col-md-4 col-sm-4">
                                     <div className="card card-stats">
-                                        <div className="card-body ">
-                                            <div className="statistics statistics-horizontal">
-                                                <div className="info info-horizontal">
-                                                    <div className="row">
-                                                        <div className="col-5">
-                                                            <div className="icon icon-primary icon-circle">
-                                                                <i className="now-ui-icons text_align-center"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-7 text-right">
-                                                            <h3 className="info-title">{this.data_countFormatter(teams_count)}</h3>
-                                                            <h6 className="stats-title">Membres</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        <div className="card-header card-header-primary card-header-icon">
+                                            <div className="card-icon">
+                                                <i className="material-icons">people_alt</i>
+                                            </div>
+                                            <p className="card-category"><b>Membres</b></p>
+                                            <h3 className="card-title"><b>{this.data_countFormatter(teams_count)}</b></h3>
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="stats">
+                                                <i className="material-icons">people_alt</i>
+                                                Membres de votre équipe
                                             </div>
                                         </div>
-                                        <hr/>
-                                        <div className="card-footer ">
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-4 col-sm-4">
+                                    <div className="card card-stats">
+                                        <div className="card-header card-header-success card-header-icon">
+                                            <div className="card-icon">
+                                                <i className="material-icons">done</i>
+                                            </div>
+                                            <p className="card-category"><b>Actives</b></p>
+                                            <h3 className="card-title"><b>{this.dataactive_countFormatter(teamsactive_count)}</b></h3>
+                                        </div>
+                                        <div className="card-footer">
                                             <div className="stats">
-                                                <i className="now-ui-icons text_align-center"></i> Membres créer
+                                                <i className="material-icons">done</i>  Actives
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-4 col-sm-4">
+                                    <div className="card card-stats">
+                                        <div className="card-header card-header-danger card-header-icon">
+                                            <div className="card-icon">
+                                                <i className="material-icons">remove</i>
+                                            </div>
+                                            <p className="card-category"><b>Desactivés</b></p>
+                                            <h3 className="card-title"><b>{this.dataunactive_countFormatter(teamsunactive_count)}</b></h3>
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="stats">
+                                                <i className="material-icons">remove</i> Désactivés
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="col-lg-4 mx-auto">
-                                    <div className="card card-stats">
-                                        <div className="card-body ">
-                                            <div className="statistics statistics-horizontal">
-                                                <div className="info info-horizontal">
-                                                    <div className="row">
-                                                        <div className="col-5">
-                                                            <div className="icon icon-success icon-circle">
-                                                                <i className="now-ui-icons ui-1_check"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-7 text-right">
-                                                            <h3 className="info-title">{this.dataactive_countFormatter(teamsactive_count)}</h3>
-                                                            <h6 className="stats-title">Actives</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr/>
-                                        <div className="card-footer ">
-                                            <div className="stats">
-                                                <i className="now-ui-icons ui-1_check"/> Membres actives
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            </div>
 
-                                <div className="col-lg-4 mx-auto">
+                            <div className="row">
+                                <div className="col-md-12 expo">
                                     <div className="card card-stats">
-                                        <div className="card-body ">
-                                            <div className="statistics statistics-horizontal">
-                                                <div className="info info-horizontal">
-                                                    <div className="row">
-                                                        <div className="col-5">
-                                                            <div className="icon icon-danger icon-circle">
-                                                                <i className="now-ui-icons ui-1_simple-delete"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-7 text-right">
-                                                            <h3 className="info-title">{this.dataunactive_countFormatter(teamsunactive_count)}</h3>
-                                                            <h6 className="stats-title">Desactivés</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        <div className="card-header card-header-icon card-header-primary">
+                                            <div className="card-icon">
+                                                <i className="material-icons">people_alt</i>
                                             </div>
+                                            <p className="card-category">
+                                                <b>Tous les membres de votre équipe</b>
+                                            </p>
+                                            <h3 className="card-title" style={{color: "red"}}>
+                                                <b>{this.data_countFormatter(teams_count)}</b>
+                                            </h3>
                                         </div>
-                                        <hr/>
-                                        <div className="card-footer ">
+                                        <div className="card-footer">
                                             <div className="stats">
-                                                <i className="now-ui-icons ui-1_simple-delete"/> Membres désactivés
+                                                <i className="material-icons">people_alt</i>
+                                                <b>Tous les membres de votre équipe</b>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
 
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="card">
+                                        <div className="card-header card-header-primary">
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <h4 className="card-title">
+                                                        <b>Membres de votre équipe</b>
+                                                    </h4>
+                                                    <p className="card-title">Membres de votre équipe</p>
+                                                </div>
+                                                <div className="col-md-6 text-right">
+                                                <span>
+                                                    <i id="tooltipSize" className="material-icons">people_alt</i>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div className="card-body">
                                             <div className="toolbar">
-
-                                                <div className="submit text-center">
-                                                    <Link to={`/dashboard/premium/${$userIvemo.slug}/teams/create/`}
-                                                          className="btn btn-primary btn-raised btn-round">
-                                                           <span className="btn-label">
-                                                            <i className="now-ui-icons ui-1_simple-add"></i>
-                                                          </span>
-                                                        <b className="title_hover">Ajouter un nouveau menbre</b>
-                                                    </Link>
+                                                <div className="text-center">
+                                                    <div className="submit text-center">
+                                                        <Link to={`/dashboard/premium/${$userIvemo.slug}/teams/create/`}
+                                                              className="btn btn-primary btn-raised ">
+                                                            <i className="material-icons">add</i>
+                                                            <b className="title_hover">Ajouter un nouveau à votre equipe</b>
+                                                        </Link>
+                                                    </div>
                                                 </div>
 
                                             </div>
-                                            <table id="datatable" className="table table-striped table-bordered" cellSpacing="0" width="100%">
-                                                <thead>
-                                                <tr>
-                                                    <th><b>Profile</b></th>
-                                                    <th><b>Nom complet</b></th>
-                                                    <th><b>Position Job</b></th>
-                                                    <th className="text-center"><b>Status</b></th>
-                                                    <th><b>Crée</b></th>
-                                                    <th className="disabled-sorting text-right"><b>Actions</b></th>
-                                                </tr>
-                                                </thead>
-                                                <tfoot>
-                                                <tr>
-                                                    <th>Profile</th>
-                                                    <th>Nom complet</th>
-                                                    <th>Position Job</th>
-                                                    <th className="text-center">Status</th>
-                                                    <th>Crée</th>
-                                                    <th className="disabled-sorting text-right">Actions</th>
-                                                </tr>
-                                                </tfoot>
-                                                <tbody>
-
-                                                {mapTeamsusers}
-
-
-                                                </tbody>
-                                            </table>
+                                            <div className="material-datatables">
+                                                <table id="datatables" className="table table-striped table-no-bordered table-hover" cellSpacing={0} width="100%" style={{width:"100%"}}>
+                                                    <thead>
+                                                    <tr>
+                                                        <th><b>Profile</b></th>
+                                                        <th><b>Nom</b></th>
+                                                        <th><b>Role</b></th>
+                                                        <th><b>Status</b></th>
+                                                        <th><b>Date</b></th>
+                                                        <th className="disabled-sorting text-right"><b>Actions</b></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                    <tr>
+                                                        <th>Profile</th>
+                                                        <th>Nom</th>
+                                                        <th>Role</th>
+                                                        <th>Status</th>
+                                                        <th>Date</th>
+                                                        <th className="text-right">Actions</th>
+                                                    </tr>
+                                                    </tfoot>
+                                                    <tbody>
+                                                    {mapTeamsusers}
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
-
-                        <FooterPremiumUser/>
-
                     </div>
+
+                    <FooterPremiumUser/>
+
                 </div>
             </>
 

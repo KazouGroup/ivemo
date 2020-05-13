@@ -67,7 +67,7 @@ class PremiumUserBlogannonceVenteList extends Component {
                                 </>
                                 :
                                 <>
-                                    <span className="badge badge-primary"><b>Deactivé</b></span>
+                                    <span className="badge badge-rose"><b>Deactivé</b></span>
                                     {!this.props.status_admin && (
                                         <a href="#">
                                             <span className="badge badge-danger"><b>Masquer par le moderateur</b></span>
@@ -99,7 +99,7 @@ class PremiumUserBlogannonceVenteList extends Component {
                         <a target="_blank" href={`/blogs/annonce_ventes/${this.props.categoryannoncevente.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="btn btn-warning btn-sm btn-just-icon">
                             <i className="material-icons">visibility</i>
                         </a>
-                        <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_ventes/${this.props.slugin}/edit/`} className="btn btn-info btn-sm btn-just-icon" data-toggle="tooltip" data-placement="bottom" title={`Éditer cette ${this.props.full_name}`}>
+                        <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_ventes/${this.props.slugin}/edit/`} className="btn btn-info btn-sm btn-just-icon" data-toggle="tooltip" data-placement="bottom" title={`Éditer cette ${this.props.title}`}>
                             <i className="material-icons">edit</i>
                         </Link>
                         <Button onClick={() => this.props.deleteItem(this.props.id)}
