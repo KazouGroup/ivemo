@@ -100,10 +100,10 @@ class PremiumUserBlogannonceList extends Component {
                         <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/${this.props.slugin}/edit/`} className="btn btn-info btn-sm btn-just-icon" data-toggle="tooltip" data-placement="bottom" title={`Éditer cette ${this.props.full_name}`}>
                             <i className="material-icons">edit</i>
                         </Link>
-                        <button type="button" onClick={() => this.props.deleteItem(this.props.id)}
-                                className="btn btn-danger btn-sm btn-just-icon">
+                        <Button onClick={() => this.props.deleteItem(this.props.id)}
+                                className="btn btn-danger btn-sm btn-just-icon" title="Supprimer cette article">
                             <i className="material-icons">delete_forever</i>
-                        </button>
+                        </Button>
                     </td>
                 </tr>
             </Fragment>

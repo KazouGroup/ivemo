@@ -73,15 +73,35 @@ class PremiumUserEditBlogannonceLocation extends Component {
     hasErrorFor(field) {
         return !!this.state.errors[field];
     }
-
     updateImage(e) {
         e.preventDefault();
         let reader = new FileReader();
         let file = e.target.files[0];
-        reader.onloadend = (file) => {
-            this.setState({ file: file, photo: reader.result, showDefaultImage: false });
-        };
-        reader.readAsDataURL(file)
+        if(file['size'] < 15111775){
+            reader.onloadend = (file) => {
+                this.setState({ file: file, photo: reader.result, showDefaultImage: false });
+            };
+            reader.readAsDataURL(file)
+        }else{
+            $.notify({
+                    //,
+                    message: 'La fichier ne peut pas être supérieure à 15 MB'
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'danger',
+                    placement: {
+                        from: 'top',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animated fadeInDownBig",
+                        exit: "animated fadeOutUp"
+                    },
+                });
+
+        }
+
     }
     removeImage(e) {
         e.preventDefault();
@@ -459,7 +479,7 @@ class PremiumUserEditBlogannonceLocation extends Component {
                                                         }
 
                                                         <Button
-                                                            className="btn btn-danger btn-sm btn-just-icon" onClick={() => this.deleteItem(this.state.id)} >
+                                                            className="btn btn-danger btn-sm btn-just-icon" onClick={() => this.deleteItem(this.state.id)} title="Supprimer cette article">
                                                             <i className="material-icons">delete_forever</i>
                                                         </Button>{" "}
                                                     </div>
@@ -556,6 +576,7 @@ class PremiumUserEditBlogannonceLocation extends Component {
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                             formats={this.formats}
+                                                                            placeholder="Laisser votre description..."
                                                                             className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                             value={this.state.description || ''}
                                                                             onChange={this.handleChangeBody} />

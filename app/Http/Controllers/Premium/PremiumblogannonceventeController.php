@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Premium;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BlogannoncelocationResource;
+use App\Http\Resources\BlogannonceventeResource;
 use App\Model\blogannoncelocation;
 use App\Model\blogannoncevente;
 use App\Model\categoryannoncelocation;
@@ -53,10 +54,11 @@ class PremiumblogannonceventeController extends Controller
 
     public function data(user $user)
     {
-        $blogannonceventes =  blogannoncevente::with('user','categoryannoncevente','member')
+
+        $blogannonceventes = BlogannonceventeResource::collection(blogannoncevente::with('user','categoryannoncevente','member')
             ->whereIn('user_id',[$user->id])
             ->orderBy('created_at','DESC')
-            ->distinct()->get()->toArray();
+            ->distinct()->get());
 
         return response()->json($blogannonceventes,200);
     }
