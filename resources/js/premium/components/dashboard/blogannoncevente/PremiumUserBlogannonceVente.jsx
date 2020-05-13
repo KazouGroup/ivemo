@@ -259,7 +259,7 @@ class PremiumUserBlogannonceVente extends Component {
     }
     render() {
         const {userblogannonce,blogannonceventes_count,blogannonceventesactive_count,blogannonceventesunactive_count} = this.state;
-        const mapBlogannonceventes = userblogannonce.length ? (
+        const mapBlogannonceventes = userblogannonce.length >= 0 ? (
             userblogannonce.map(item => {
                 return(
                     <PremiumUserBlogannonceVenteList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>                )
