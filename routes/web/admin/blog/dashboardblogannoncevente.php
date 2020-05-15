@@ -1,30 +1,49 @@
 <?php
 
 
-Route::get(
-    'api/dashboardblogannonceventes',
-    'DashboardblogannonceventeController@api'
-)->name('api.blogannonceventes_dashboard');
+Route::group(['prefix' => 'api'], function () {
 
-Route::get(
-    'api/dashboardblogannonceventes_count',
-    'DashboardblogannonceventeController@blogannonceventescount'
-)->name('api.blogannonceventes_dashboard_count');
+    Route::get(
+        'dashboardblogannonceventes',
+        'DashboardblogannonceventeController@api'
+    )->name('api.blogannonceventes_dashboard');
 
-Route::get(
-    'api/dashboardblogannonceventesactive_count',
-    'DashboardblogannonceventeController@blogannonceventesactivecount'
-)->name('api.blogannonceventes_dashboardactive_count');
+    Route::get(
+        'api/dashboardblogannonceventes_count',
+        'DashboardblogannonceventeController@blogannonceventescount'
+    )->name('api.blogannonceventes_dashboard_count');
 
-Route::get(
-    'api/dashboardblogannonceventesunactive_count',
-    'DashboardblogannonceventeController@blogannonceventesunactivecount'
-)->name('api.blogannonceventes_dashboardunactive_count');
+    Route::get(
+        'api/dashboardblogannonceventes_count/{categoryannoncevente:slug}',
+        'DashboardblogannonceventeController@blogannonceventesbycategorycount'
+    )->name('api.blogannonceventesbycategory_dashboard_count');
 
-Route::get(
-    'api/dashboardblogannonceventes/{categoryannoncevente:slug}',
-    'DashboardblogannonceventeController@categoryannoncevente'
-)->name('api.blogannonceventes_dashboard_show');
+    Route::get(
+        'dashboardblogannonceventesactive_count',
+        'DashboardblogannonceventeController@blogannonceventesactivecount'
+    )->name('api.blogannonceventes_dashboardactive_count');
+
+    Route::get(
+        'dashboardblogannonceventesactive_count/{categoryannoncevente:slug}',
+        'DashboardblogannonceventeController@blogannonceventesactivebycategorycount'
+    )->name('api.blogannonceventesbycategory_dashboardactive_count');
+
+    Route::get(
+        'dashboardblogannonceventesunactive_count',
+        'DashboardblogannonceventeController@blogannonceventesunactivecount'
+    )->name('api.blogannonceventes_dashboardunactive_count');
+
+    Route::get(
+        'dashboardblogannonceventesunactive_count/{categoryannoncevente:slug}',
+        'DashboardblogannonceventeController@blogannonceventesunactivebycategorycount'
+    )->name('api.blogannonceventesbycategory_dashboardunactive_count');
+
+    Route::get(
+        'dashboardblogannonceventes/{categoryannoncevente:slug}',
+        'DashboardblogannonceventeController@categoryannoncevente'
+    )->name('api.blogannonceventes_dashboard_show');
+});
+
 
 Route::get(
     'dashboard/blogannonceventes',

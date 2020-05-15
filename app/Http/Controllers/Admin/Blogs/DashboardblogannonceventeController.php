@@ -25,10 +25,16 @@ class DashboardblogannonceventeController extends Controller
         $this->middleware('auth');
     }
 
+    public static function Blogannonce()
+    {
+        return blogannoncevente::with('user','member','categoryannoncevente');
+
+    }
+
     public function api()
     {
-        $blogannonceventes = BlogannonceventeResource::collection(blogannoncevente::with('user','member','categoryannoncevente')
-            ->distinct()->paginate(10));
+        $blogannonceventes = BlogannonceventeResource::collection(self::Blogannonce()
+        ->orderBy('created_at','DESC')->distinct()->paginate(10));
 
         return response()->json($blogannonceventes,200);
     }
@@ -55,6 +61,15 @@ class DashboardblogannonceventeController extends Controller
         return response()->json($blogannonceventes,200);
     }
 
+    public function blogannonceventesbycategorycount(categoryannoncevente $categoryannoncevente)
+    {
+        $blogannonceventes = blogannoncevente::where(['status' => 1])
+            ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+            ->get()->count();
+
+        return response()->json($blogannonceventes,200);
+    }
+
     public function blogannonceventesactivecount()
     {
         $blogannonceventes = blogannoncevente::where(['status' => 1,'status_admin' => 1])->get()->count();
@@ -62,9 +77,27 @@ class DashboardblogannonceventeController extends Controller
         return response()->json($blogannonceventes,200);
     }
 
+    public function blogannonceventesactivebycategorycount(categoryannoncevente $categoryannoncevente)
+    {
+        $blogannonceventes = blogannoncevente::where(['status' => 1])
+            ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+            ->get()->count();
+
+        return response()->json($blogannonceventes,200);
+    }
+
     public function blogannonceventesunactivecount()
     {
         $blogannonceventes = blogannoncevente::where('status',0)->get()->count();
+
+        return response()->json($blogannonceventes,200);
+    }
+
+    public function blogannonceventesunactivebycategorycount(categoryannoncevente $categoryannoncevente)
+    {
+        $blogannonceventes = blogannoncevente::where(['status' => 1])
+            ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+            ->get()->count();
 
         return response()->json($blogannonceventes,200);
     }

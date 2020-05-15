@@ -26,7 +26,7 @@ class DashboardblogannoncereservationController extends Controller
     public function api()
     {
         $blogannoncereservations = BlogannoncereservationResource::collection(blogannoncereservation::with('user','member','categoryannoncereservation')
-            ->distinct()->paginate(10));
+        ->orderBy('created_at','DESC')->distinct()->paginate(10));
 
         return response()->json($blogannoncereservations,200);
     }
@@ -54,9 +54,25 @@ class DashboardblogannoncereservationController extends Controller
         return response()->json($blogannoncereservations,200);
     }
 
+    public function blogannoncebycategorycount(categoryannoncereservation $categoryannoncereservation)
+    {
+        $blogannoncereservation = blogannoncereservation::whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])->get()->count();
+
+        return response()->json($blogannoncereservation,200);
+    }
+
     public function blogannonceactivecount()
     {
-        $blogannoncereservation = blogannoncereservation::where(['status' => 1,'status_admin' => 1])->get()->count();
+        $blogannoncereservation = blogannoncereservation::where(['status' => 1])->get()->count();
+
+        return response()->json($blogannoncereservation,200);
+    }
+
+    public function blogannonceactivebycategorycount(categoryannoncereservation $categoryannoncereservation)
+    {
+        $blogannoncereservation = blogannoncereservation::where(['status' => 1])
+            ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
+            ->get()->count();
 
         return response()->json($blogannoncereservation,200);
     }
@@ -64,6 +80,15 @@ class DashboardblogannoncereservationController extends Controller
     public function blogannonceunactivecount()
     {
         $blogannoncereservations = blogannoncereservation::where('status',0)->get()->count();
+
+        return response()->json($blogannoncereservations,200);
+    }
+
+    public function blogannonceunactivebycategorycount(categoryannoncereservation $categoryannoncereservation)
+    {
+        $blogannoncereservations = blogannoncereservation::where('status',0)
+            ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
+            ->get()->count();
 
         return response()->json($blogannoncereservations,200);
     }

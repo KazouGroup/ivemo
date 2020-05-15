@@ -1,31 +1,50 @@
 <?php
 
 
+Route::group(['prefix' => 'api'], function () {
 
-Route::get(
-    'api/dashboardblogannoncereservations',
-    'DashboardblogannoncereservationController@api'
-)->name('api.blogannoncereservations_dashboard');
 
-Route::get(
-    'api/dashboardblogannoncereservations_count',
-    'DashboardblogannoncereservationController@blogannoncecount'
-)->name('api.blogannoncereservations_dashboard_count');
+    Route::get(
+        'dashboardblogannoncereservations',
+        'DashboardblogannoncereservationController@api'
+    )->name('api.blogannoncereservations_dashboard');
 
-Route::get(
-    'api/dashboardblogannoncereservationsactive_count',
-    'DashboardblogannoncereservationController@blogannonceactivecount'
-)->name('api.blogannoncereservations_dashboardactive_count');
+    Route::get(
+        'dashboardblogannoncereservations_count',
+        'DashboardblogannoncereservationController@blogannoncecount'
+    )->name('api.blogannoncereservations_dashboard_count');
 
-Route::get(
-    'api/dashboardblogannoncereservationsunactive_count',
-    'DashboardblogannoncereservationController@blogannonceunactivecount'
-)->name('api.blogannoncereservations_dashboardunactive_count');
+    Route::get(
+        'dashboardblogannoncereservations_count/{categoryannoncereservation:slug}',
+        'DashboardblogannoncereservationController@blogannoncebycategorycount'
+    )->name('api.blogannoncereservationsbycategory_dashboard_count');
 
-Route::get(
-    'api/dashboardblogannoncereservations/{categoryannoncereservation:slug}',
-    'DashboardblogannoncereservationController@categoryannoncereservation'
-)->name('api.blogannoncereservations_dashboard_show');
+    Route::get(
+        'dashboardblogannoncereservationsactive_count',
+        'DashboardblogannoncereservationController@blogannonceactivecount'
+    )->name('api.blogannoncereservations_dashboardactive_count');
+
+    Route::get(
+        'dashboardblogannoncereservationsactive_count/{categoryannoncereservation:slug}',
+        'DashboardblogannoncereservationController@blogannonceactivebycategorycount'
+    )->name('api.blogannoncereservationsbycategory_dashboardactive_count');
+
+    Route::get(
+        'dashboardblogannoncereservationsactive_count',
+        'DashboardblogannoncereservationController@blogannonceactivecount'
+    )->name('api.blogannoncereservations_dashboardactive_count');
+
+    Route::get(
+        'dashboardblogannoncereservationsunactive_count',
+        'DashboardblogannoncereservationController@blogannonceunactivebycategorycount'
+    )->name('api.blogannoncereservationsbycategory_dashboardunactive_count');
+
+    Route::get(
+        'dashboardblogannoncereservations/{categoryannoncereservation:slug}',
+        'DashboardblogannoncereservationController@categoryannoncereservation'
+    )->name('api.blogannoncereservations_dashboard_show');
+});
+
 
 Route::get(
     'dashboard/blogannoncereservations',
