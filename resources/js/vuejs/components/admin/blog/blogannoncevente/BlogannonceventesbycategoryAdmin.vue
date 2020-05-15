@@ -403,7 +403,7 @@
 
                 dyaxios.get(route('api.blogannonceventesbycategory_dashboardunactive_count',[Itemslug])).then(response => {
                     this.blogannonceventesunactive_count = response.data;});
-                dyaxios.get(route('api.blogannonceventesbycategory_dashboard_show',[Itemslug]))
+                dyaxios.get(route('api.blogannonceventes_dashboard_show',[Itemslug]))
                     .then(response => {
                         this.loaded = true;
                         this.categoryannoncevente = response.data;
