@@ -48,7 +48,7 @@ class PremiumVerticalNavUserSite extends PureComponent {
                             <div className="user-info">
                                 <a data-toggle="collapse" href="#collapseProfile" className="username">
                                   <span>
-                                    {userData.first_name}
+                                    {$userIvemo.first_name}
                                     <b className="caret"></b>
                                   </span>
                                 </a>
@@ -78,95 +78,43 @@ class PremiumVerticalNavUserSite extends PureComponent {
                         </div>
                         <ul className="nav">
                             <li className="nav-item ">
-                                <NavLink to={`/dashboard/premium/${userData.slug}/`} className="nav-link">
+                                {$userIvemo.status_user && (
+                                <a className="nav-link" href="/dashboard/">
+                                    <i className="material-icons">vertical_split</i>
+                                    <p> Dashboard {$name_site}</p>
+                                </a>
+                                )}
+                            </li>
+                            <li className="nav-item ">
+                                <NavLink to={`/dashboard/premium/${$userIvemo.slug}/`} className="nav-link">
                                     <i className="material-icons">dashboard</i>
                                     <p> Dashboard </p>
                                 </NavLink>
                             </li>
-                            <li className="nav-item ">
-                                <a className="nav-link" data-toggle="collapse" href="#pagesExamples">
-                                    <i className="material-icons">image</i>
-                                    <p> Pages
-                                        <b className="caret"></b>
-                                    </p>
-                                </a>
-                                <div className="collapse" id="pagesExamples">
-                                    <ul className="nav">
-                                        <li className="nav-item ">
-                                            <a className="nav-link" href="../../examples/pages/pricing.html">
-                                                <span className="sidebar-mini"> P </span>
-                                                <span className="sidebar-normal"> Pricing </span>
-                                            </a>
-                                        </li>
-                                        <li className="nav-item ">
-                                            <a className="nav-link" href="../../examples/pages/rtl.html">
-                                                <span className="sidebar-mini"> RS </span>
-                                                <span className="sidebar-normal"> RTL Support </span>
-                                            </a>
-                                        </li>
-                                        <li className="nav-item ">
-                                            <a className="nav-link" href="../../examples/pages/timeline.html">
-                                                <span className="sidebar-mini"> T </span>
-                                                <span className="sidebar-normal"> Timeline </span>
-                                            </a>
-                                        </li>
-                                        <li className="nav-item ">
-                                            <a className="nav-link" href="../../examples/pages/login.html">
-                                                <span className="sidebar-mini"> LP </span>
-                                                <span className="sidebar-normal"> Login Page </span>
-                                            </a>
-                                        </li>
-                                        <li className="nav-item ">
-                                            <a className="nav-link" href="../../examples/pages/register.html">
-                                                <span className="sidebar-mini"> RP </span>
-                                                <span className="sidebar-normal"> Register Page </span>
-                                            </a>
-                                        </li>
-                                        <li className="nav-item ">
-                                            <a className="nav-link" href="../../examples/pages/lock.html">
-                                                <span className="sidebar-mini"> LSP </span>
-                                                <span className="sidebar-normal"> Lock Screen Page </span>
-                                            </a>
-                                        </li>
-                                        <li className="nav-item ">
-                                            <a className="nav-link" href="../../examples/pages/user.html">
-                                                <span className="sidebar-mini"> UP </span>
-                                                <span className="sidebar-normal"> User Profile </span>
-                                            </a>
-                                        </li>
-                                        <li className="nav-item ">
-                                            <a className="nav-link" href="../../examples/pages/error.html">
-                                                <span className="sidebar-mini"> E </span>
-                                                <span className="sidebar-normal"> Error Page </span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
 
                             <li className="nav-item ">
-                                <a className="nav-link" data-toggle="collapse" href="#mapsExamples">
+                                <a className="nav-link" data-toggle="collapse" href="#mapsBlogs">
                                     <i className="material-icons">view_headline</i>
                                     <p> Blogs & Articles
                                         <b className="caret"></b>
                                     </p>
                                 </a>
-                                <div className="collapse" id="mapsExamples">
+                                <div className="collapse" id="mapsBlogs">
                                     <ul className="nav">
                                         <li className="nav-item ">
-                                            <NavLink className="nav-link" to={`/dashboard/premium/${userData.slug}/blogs/annonce_locations/`}>
+                                            <NavLink className="nav-link" to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/`}>
                                                 <span className="sidebar-mini"> ALS </span>
                                                 <span className="sidebar-normal"> Articles blogs locations </span>
                                             </NavLink>
                                         </li>
                                         <li className="nav-item ">
-                                            <NavLink className="nav-link" to={`/dashboard/premium/${userData.slug}/blogs/annonce_reservations/`}>
+                                            <NavLink className="nav-link" to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_reservations/`}>
                                                 <span className="sidebar-mini"> ABR </span>
                                                 <span className="sidebar-normal"> Articles blogs reservations </span>
                                             </NavLink>
                                         </li>
                                         <li className="nav-item ">
-                                            <NavLink className="nav-link" to={`/dashboard/premium/${userData.slug}/blogs/annonce_ventes/`}>
+                                            <NavLink className="nav-link" to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_ventes/`}>
                                                 <span className="sidebar-mini"> ABV </span>
                                                 <span className="sidebar-normal"> Articles blogs ventes </span>
                                             </NavLink>
@@ -175,7 +123,7 @@ class PremiumVerticalNavUserSite extends PureComponent {
                                 </div>
                             </li>
                             <li className="nav-item ">
-                                <NavLink to={`/dashboard/premium/${userData.slug}/teams/`} className="nav-link">
+                                <NavLink to={`/dashboard/premium/${$userIvemo.slug}/teams/`} className="nav-link">
                                     <i className="material-icons">people_alt</i>
                                     <p> Notre Team </p>
                                 </NavLink>

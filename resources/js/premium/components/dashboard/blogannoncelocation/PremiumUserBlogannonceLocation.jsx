@@ -224,12 +224,8 @@ class PremiumUserBlogannonceLocation extends Component {
         dyaxios.get(route('api.blogannoncelocations_premiumunactive_count', [itemuser])).then(response =>
             this.setState({ blogannoncelocationsunactive_count: response.data }));
 
-        fetch(route('api.blogannoncelocations_premium', [itemuser])).then(res => res.json())
-            .then((result) => {
-                this.mydatatables();
-                this.setState({ userblogannonce: result });
-
-            })
+        dyaxios.get(route('api.blogannoncelocations_premium', [itemuser])).then(response =>
+            this.setState({ userblogannonce: response.data }));
     }
 
     // lifecycle method
@@ -382,7 +378,9 @@ class PremiumUserBlogannonceLocation extends Component {
                                                 <div className="submit text-center">
                                                     <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/create/`}
                                                           className="btn btn-primary btn-raised ">
-                                                        <i className="material-icons">add</i>
+                                                         <span className="btn-label">
+                                                           <i className="material-icons">add</i>
+                                                       </span>
                                                         <b className="title_hover">Poster un votre article sur la location</b>
                                                     </Link>
                                                 </div>

@@ -435,7 +435,9 @@ class PremiumUserTeams extends Component {
                                                     <div className="submit text-center">
                                                         <Link to={`/dashboard/premium/${$userIvemo.slug}/teams/create/`}
                                                               className="btn btn-primary btn-raised ">
-                                                            <i className="material-icons">add</i>
+                                                             <span className="btn-label">
+                                                               <i className="material-icons">add</i>
+                                                             </span>
                                                             <b className="title_hover">Ajouter un nouveau à votre equipe</b>
                                                         </Link>
                                                     </div>

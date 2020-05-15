@@ -27,7 +27,7 @@ class PremiumHorizontalNavUserSite extends PureComponent {
                                 <i className="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
                             </button>
                         </div>
-                        <a className="navbar-brand" href="#pablo"><b>Dashboard {$userIvemo.first_name}</b></a>
+                        <NavLink className="navbar-brand" to={`/dashboard/premium/${$userIvemo.slug}/`}><b>Dashboard {$userIvemo.first_name}</b></NavLink>
                     </div>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="sr-only">Toggle navigation</span>
@@ -39,14 +39,16 @@ class PremiumHorizontalNavUserSite extends PureComponent {
 
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <a className="nav-link" href="#pablo">
+                                <NavLink className="nav-link" to={`/dashboard/premium/${$userIvemo.slug}/`}>
                                     <i className="material-icons">dashboard</i>
                                     <p className="d-lg-none d-md-block">
                                         Stats
                                     </p>
-                                </a>
+                                </NavLink>
                             </li>
-                            <li className="nav-item dropdown">
+
+                            {/*
+                             <li className="nav-item dropdown">
                                 <a className="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i className="material-icons">notifications</i>
                                     <span className="notification">5</span>
@@ -62,6 +64,8 @@ class PremiumHorizontalNavUserSite extends PureComponent {
                                     <a className="dropdown-item" href="#">Another One</a>
                                 </div>
                             </li>
+                            */}
+
                             <li className="nav-item dropdown">
                                 <a className="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i className="material-icons">person</i>

@@ -23,11 +23,15 @@ class PremiumblogannoncereservationController extends Controller
 
     public function index(user $user)
     {
+        $this->authorize('update',$user);
+
         return view('premium.blog.blogannoncereservations.index',compact('user'));
     }
 
     public function create(user $user)
     {
+        $this->authorize('update',$user);
+
         return view('premium.blog.blogannoncereservations.create',compact('user'));
     }
 
@@ -40,6 +44,8 @@ class PremiumblogannoncereservationController extends Controller
 
     public function edit(user $user,$blogannoncereservation)
     {
+        $this->authorize('update',$user);
+
         $blogannoncereservation = blogannoncereservation::whereSlugin($blogannoncereservation)->first();
 
         return view('premium.blog.blogannoncelocations.edit',[
@@ -50,6 +56,8 @@ class PremiumblogannoncereservationController extends Controller
 
     public function data(user $user)
     {
+        $this->authorize('update',$user);
+
         $blogannoncereservations = BlogannoncereservationResource::collection(blogannoncereservation::with('user','categoryannoncereservation','member')
             ->whereIn('user_id',[$user->id])
             ->orderBy('created_at','DESC')
@@ -60,6 +68,8 @@ class PremiumblogannoncereservationController extends Controller
 
     public function datacount(user $user)
     {
+        $this->authorize('update',$user);
+
         $blogannoncereservations = DB::table('blogannoncereservations')
             ->where(['status_admin' => 1])
            ->whereIn('user_id',[$user->id])->count();
@@ -69,6 +79,7 @@ class PremiumblogannoncereservationController extends Controller
 
     public function dataactivecount(user $user)
     {
+        $this->authorize('update',$user);
 
         $blogannoncereservations =  DB::table('blogannoncereservations')
             ->whereIn('user_id',[$user->id])
@@ -80,6 +91,8 @@ class PremiumblogannoncereservationController extends Controller
 
     public function dataunactivecount(user $user)
     {
+        $this->authorize('update',$user);
+
         $blogannoncereservations =  DB::table('blogannoncereservations')
             ->whereIn('user_id',[$user->id])
             ->where(['status' => 0,'status_admin' => 1])
@@ -90,6 +103,8 @@ class PremiumblogannoncereservationController extends Controller
 
     public function datacategorycount(user $user, categoryannoncereservation $categoryannoncereservation)
     {
+        $this->authorize('update',$user);
+
         $blogannoncereservations = DB::table('blogannoncereservations')
             ->where(['status_admin' => 1])
             ->whereIn('user_id',[$user->id])
@@ -100,6 +115,8 @@ class PremiumblogannoncereservationController extends Controller
 
     public function datacategoryactivecount(user $user, categoryannoncereservation $categoryannoncereservation)
     {
+        $this->authorize('update',$user);
+
         $blogannoncereservations =  DB::table('blogannoncereservations')
             ->whereIn('user_id',[$user->id])
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
@@ -112,6 +129,8 @@ class PremiumblogannoncereservationController extends Controller
 
     public function datacategoryunactivecount(user $user, categoryannoncereservation $categoryannoncereservation)
     {
+        $this->authorize('update',$user);
+
         $blogannoncereservations =  DB::table('blogannoncelocations')
             ->whereIn('user_id',[$user->id])
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])

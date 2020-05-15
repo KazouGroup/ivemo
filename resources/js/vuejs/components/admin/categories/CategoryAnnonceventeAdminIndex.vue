@@ -1,117 +1,171 @@
 <template>
-    <div class="main-panel" id="main-panel">
-        <vue-progress-bar/>
-        <navsmall-admin></navsmall-admin>
 
-        <div class="panel-header">
-            <div class="header text-center">
-                <h2 class="title">Categories annonces ventes</h2>
-                <p class="text-white">Toutes les Categories pour l'annonce vente créé est de
-                    <a href="#"><b>{{ categoryannonceventes.length }}</b></a></p>
-            </div>
-        </div>
+    <div class="main-panel">
+        <vue-progress-bar />
+
+        <admin-horizontalenavusersite/>
 
         <div class="content">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="toolbar">
-                                <div class="submit text-center">
-                                    <button v-if="$auth.can('manage-categories')" class="btn btn-primary btn-round btn-raised " @click="newModal">
-                                           <span class="btn-label">
-                                        <i class="now-ui-icons ui-1_simple-add"></i>
-                                      </span>
-                                        <b class="title_hover">New Category annonce vente</b>
-                                    </button>
+            <div class="container-fluid">
+
+
+                <div v-if="loaded" class="row">
+                    <div class="col-md-12 expo">
+                        <div class="card card-stats">
+                            <div :class="getColorCardUser()">
+                                <div class="card-icon">
+                                    <i class="material-icons">closed_caption</i>
+                                </div>
+                                <p class="card-category">
+                                    <b>Categories annonces ventes</b>
+                                </p>
+                                <h3 class="card-title" style="color:red;">
+                                    <b>{{categoryannonceventes.length}}</b>
+                                </h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons">closed_caption</i>
+                                    <b>Categories annonces ventes</b>
                                 </div>
                             </div>
-                            <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                <thead>
-                                <tr>
-                                    <th><b>Image</b></th>
-                                    <th><b>Name</b></th>
-                                    <th><b>Status</b></th>
-                                    <th><b>Annonces</b></th>
-                                    <th><b>Blogs article</b></th>
-                                    <th v-if="$auth.can('manage-categories')" class="disabled-sorting text-right">Actions</th>
-                                </tr>
-                                </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>Image</th>
-                                    <th>Name</th>
-                                    <th>Status</th>
-                                    <th>Annonces</th>
-                                    <th>Blogs article</th>
-                                    <th v-if="$auth.can('manage-categories')" class="disabled-sorting text-right">Actions</th>
-                                </tr>
-                                </tfoot>
-                                <tbody>
-                                <tr v-for="item in categoryannonceventes" :key="item.id">
-                                    <td><img :src="item.photo" style="height: 50px; width: 80px;border-radius: 4px"></td>
-                                    <td><b>{{ item.name }}</b></td>
-                                    <td>
-                                        <div class="timeline-heading">
-                                            <span v-if="item.status" class="badge badge-success"><b>Active</b></span>
-                                            <span v-else-if="!item.status"  class="badge badge-danger"><b>Deactive</b></span>
-                                        </div>
-                                    </td>
-                                    <td>{{ item.annonceventes_count }}</td>
-                                    <td>{{ item.blogannonceventes_count }}</td>
-                                    <td v-if="$auth.can('manage-categories')" class="text-right">
-                                        <template>
-                                            <button  v-if="item.status" @click="disableItem(item.id)" class="btn btn-success btn-icon btn-round btn-sm" title="Disable">
-                                                <i class="now-ui-icons ui-1_check"/>
-                                            </button>
-                                            <button  v-else-if="!item.status" @click="activeItem(item.id)" class="btn btn-danger btn-icon btn-round btn-sm " title="Activate">
-                                                <i class="now-ui-icons ui-1_simple-delete"/>
-                                            </button>
-                                        </template>
-                                        <button @click="editItem(item)"
-                                                class="btn btn-info btn-icon btn-round btn-sm" title="Edit">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button @click="deleteItem(item.id)"  class="btn btn-danger btn-icon btn-round btn-sm remove">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
                         </div>
+                    </div>
+                </div>
 
-                        <!-- Modal création/édition color -->
-                        <div class="modal fade" id="addNew" tabindex="-1" role="dialog" aria-labelledby="addNewLabel"
-                             aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h6 v-show="!editmode" class="modal-title" id="addNewLabel"><b>Add Category annonces location</b></h6>
-                                        <h6 v-show="editmode" class="modal-title" id="updateNewLabel"><b>{{this.form.name}}</b></h6>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
+                <div v-if="!loaded" class="submit">
+                    <LoaderLdsDefault />
+                </div>
+
+                <div v-if="loaded" class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div :class="getColorHeaderUser()">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4 class="card-title">
+                                            <b>Categories FAQS</b>
+                                        </h4>
+                                        <p class="card-title">Categories annonces ventes</p>
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                      <span>
+                                        <i id="tooltipSize" class="material-icons">closed_caption</i>
+                                      </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="toolbar">
+                                    <div class="submit text-center">
+                                        <button v-if="$auth.can('manage-categories')" class="btn btn-primary btn-raised " @click="newModal">
+                                           <span class="btn-label">
+                                               <i class="material-icons">add</i>
+                                           </span>
+                                            <b class="title_hover">New Categories annonces ventes</b>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
-                                        <form id="RegisterValidation" @submit.prevent="editmode ? updateItem() : storeItem()" role="form" method="POST" action="" accept-charset="UTF-8" @keydown="form.onKeydown($event)">
-                                            <div class="form-group">
-                                                <label class="bmd-label-floating"></label>
-                                                <input v-model="form.name" type="text" name="name" minlength="2" maxlength="100" placeholder="Name..." class="form-control" :class="{ 'is-invalid': form.errors.has('name') }" />
-                                                <has-error :form="form" field="name"/>
+
+                                </div>
+                                <div class="material-datatables">
+                                    <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                        <thead>
+                                        <tr>
+                                            <th><b>Image</b></th>
+                                            <th><b>Name</b></th>
+                                            <th><b>Status</b></th>
+                                            <th><b>Annonces</b></th>
+                                            <th><b>Blogs article</b></th>
+                                            <th><b>Date</b></th>
+                                            <th v-if="$auth.can('manage-categories')" class="disabled-sorting text-right"><b>Actions</b></th>
+                                        </tr>
+                                        </thead>
+                                        <tfoot>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Name</th>
+                                            <th>Status</th>
+                                            <th>Annonces</th>
+                                            <th>Blogs article</th>
+                                            <th>Date</th>
+                                            <th v-if="$auth.can('manage-categories')" class="text-right">Actions</th>
+                                        </tr>
+                                        </tfoot>
+                                        <tbody>
+                                        <tr v-for="item in categoryannonceventes" :key="item.id">
+                                            <td><img :src="item.photo" style="height: 50px; width: 80px;border-radius: 4px"></td>
+                                            <td><b>{{ item.name }}</b></td>
+                                            <td>
+                                                <div class="timeline-heading">
+                                                    <span v-if="item.status" class="badge badge-success"><b>Active</b></span>
+                                                    <span v-else-if="!item.status"  class="badge badge-rose"><b>Deactive</b></span>
+                                                </div>
+                                            </td>
+                                            <td><b>{{ item.annonceventes_count }}</b></td>
+                                            <td><b>{{ item.blogannonceventes_count }}</b></td>
+                                            <td><b>{{ item.created_at | dateAgo }}</b></td>
+                                            <td v-if="$auth.can('manage-categories')" class="text-right">
+                                                <template>
+                                                    <button @click="disableItem(item.id)" v-if="item.status" type="button"
+                                                            class="btn btn-success btn-just-icon btn-sm"
+                                                            title="Desactiver">
+                                                        <i class="material-icons">done</i>
+                                                    </button>
+                                                    <button @click="activeItem(item.id)" v-else type="button"
+                                                            class="btn btn-rose btn-just-icon btn-sm"
+                                                            title="Activer">
+                                                        <i class="material-icons">remove</i>
+                                                    </button>
+                                                </template>
+                                                <button @click="editItem(item)"
+                                                        class="btn btn-info btn-sm btn-just-icon"
+                                                        title="Editer"
+                                                >
+                                                    <i class="material-icons">edit</i>
+                                                </button>
+                                                <button v-if="$auth.can('manage-categories')" @click="deleteItem(item)"
+                                                        class="btn btn-danger btn-sm btn-just-icon"
+                                                        title="Delete"
+                                                >
+                                                    <i class="material-icons">delete_forever</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="modal fade" id="addNew" tabindex="-1" role="dialog" aria-labelledby="addNewLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 v-show="!editmode" class="modal-title" id="addNewLabel"><b>{{this.form.name || "Add Category annonces vente"}}</b></h6>
+                                                <h6 v-show="editmode" class="modal-title" id="updateNewLabel"><b>{{this.form.name}}</b></h6>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-8 ml-auto mr-auto">
-                                                    <div class="profile text-center">
-                                                        <br>
-                                                        <div class="fileinput fileinput-new text-center"
-                                                             data-provides="fileinput">
-                                                            <div class="fileinput-new thumbnail">
-                                                                <img :src="getImagesave()" :alt="form.slug">
-                                                            </div>
-                                                            <div
-                                                                class="fileinput-preview fileinput-exists thumbnail"></div>
-                                                            <div>
+                                            <div class="modal-body">
+                                                <form id="RegisterValidation" @submit.prevent="editmode ? updateItem() : storeItem()" role="form" method="POST" action="" accept-charset="UTF-8" @keydown="form.onKeydown($event)">
+                                                    <div class="form-group">
+                                                        <label class="bmd-label-floating"></label>
+                                                        <input v-model="form.name" type="text" name="name" minlength="2" maxlength="100" placeholder="Name..." class="form-control" :class="{ 'is-invalid': form.errors.has('name') }" />
+                                                        <has-error :form="form" field="name"/>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-8 ml-auto mr-auto">
+                                                            <div class="profile text-center">
+                                                                <br>
+                                                                <div class="fileinput fileinput-new text-center"
+                                                                     data-provides="fileinput">
+                                                                    <div class="fileinput-new thumbnail">
+                                                                        <img :src="getImagesave()" :alt="form.slug">
+                                                                    </div>
+                                                                    <div
+                                                                        class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                                    <div>
                                                                <span
                                                                    class="btn btn-raised btn-success btn-file">
                                                                  <span
@@ -130,61 +184,63 @@
                                                                           class="form-control"
                                                                           name="photo"/>
                                                                </span>
-                                                                <a href="#pablo"
-                                                                   class="btn btn-danger fileinput-exists"
-                                                                   data-dismiss="fileinput">
-                                                                    <b>Remove</b>
-                                                                </a>
+                                                                        <a href="#pablo"
+                                                                           class="btn btn-danger fileinput-exists"
+                                                                           data-dismiss="fileinput">
+                                                                            <b>Remove</b>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <has-error :form="form" field="photo"/>
                                                             </div>
                                                         </div>
-                                                        <has-error :form="form" field="photo"/>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="text-center">
-                                                <button type="button" class="btn btn-round btn-danger" data-dismiss="modal">
+                                                    <div class="text-center">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">
                                                         <span class="btn-label">
                                                             <b>Close</b>
                                                         </span>
-                                                </button>
-                                                <button :disabled="form.busy" v-show="!editmode" type="submit" class="btn btn-round btn-success btn-raised">
+                                                        </button>
+                                                        <button :disabled="form.busy" v-show="!editmode" type="submit" class="btn btn-success btn-raised">
                                                         <span class="btn-label">
                                                             <b>Yes, Save</b>
                                                         </span>
-                                                </button>
-                                                <button :disabled="form.busy" v-show="editmode" type="submit" class="btn btn-round btn-success btn-raised">
+                                                        </button>
+                                                        <button :disabled="form.busy" v-show="editmode" type="submit" class="btn btn-success btn-raised">
                                                         <span class="btn-label">
                                                             <b>Yes, Update</b>
                                                         </span>
-                                                </button>
+                                                        </button>
+                                                    </div>
+                                                </form>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
 
+        <footer-admin/>
 
-        <footer-admin></footer-admin>
     </div>
 </template>
 
 <script>
 
+    import LoaderLdsDefault from "../../../dashboard_user/components/inc/annimation/LoaderLdsDefault";
     export default {
+        components: {LoaderLdsDefault},
         data() {
-            document.title = `Dashboard Categories annonces ventes - Ivemo`;
+            document.title = `Dashboard Categories annonces ventes ${this.user.first_name || this.name_site} - ${this.name_site}`;
             return {
-                categoryannonceventes: {},
                 editmode: false,
+                loaded: false,
+                categoryannonceventes: {},
                 form: new Form({
                     id: '',
                     name: '',
@@ -194,26 +250,31 @@
         },
 
         methods:{
-            mydatatables(){
-                $( function () {
-                    $('#datatable').DataTable({
-                        "pagingType": "full_numbers",
-                        "lengthMenu": [
+            mydatatables() {
+                $(function() {
+                    $("#datatables").DataTable({
+                        pagingType: "full_numbers",
+                        lengthMenu: [
                             [10, 25, 50, -1],
                             [10, 25, 50, "All"]
                         ],
                         responsive: true,
-                        destroy: true,
                         retrieve:true,
-                        autoFill: true,
+                        destroy: true,
                         colReorder: true,
                         language: {
-                            search: "_INPUT_",
-                            searchPlaceholder: "Search Record",
+                            search: "<i class='material-icons'>search</i>",
+                            searchPlaceholder: "Search Record"
                         },
-
+                        sPaginationType: "full_numbers"
                     });
                 });
+            },
+            getColorCardUser() {
+                return "card-header card-header-icon card-header-" + this.user.color_name;
+            },
+            getColorHeaderUser() {
+                return "card-header card-header-" + this.user.color_name;
             },
 
             getImagesave() {

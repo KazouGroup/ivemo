@@ -5,7 +5,7 @@
 
 @yield('style')
 </head>
-<body class=" sidebar-mini ">
+<body class="sidebar-mini">
 
 @section('content')
 

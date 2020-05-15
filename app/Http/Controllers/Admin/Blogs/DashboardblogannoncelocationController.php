@@ -26,7 +26,7 @@ class DashboardblogannoncelocationController extends Controller
     public function api()
     {
         $blogannoncelocations = BlogannoncelocationResource::collection(blogannoncelocation::with('user','member','categoryannoncelocation')
-            ->distinct()->paginate(10));
+            ->orderBy('created_at','DESC')->distinct()->paginate(10));
 
         return response()->json($blogannoncelocations,200);
     }
@@ -41,7 +41,7 @@ class DashboardblogannoncelocationController extends Controller
                 $q->with('user','categoryannoncelocation')
                     ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
                     ->orderBy('created_at','DESC')->distinct()->get();},
-            ])->first();;
+            ])->first();
 
         return response()->json($blogannoncelocations, 200);
     }
@@ -53,16 +53,40 @@ class DashboardblogannoncelocationController extends Controller
         return response()->json($blogannoncelocations,200);
     }
 
-    public function blogannonceactivecount()
+    public function blogannoncebycategorycount(categoryannoncelocation $categoryannoncelocation)
     {
-        $blogannoncelocations = blogannoncelocation::where(['status' => 1,'status_admin' => 1])->get()->count();
+        $blogannoncelocations = blogannoncelocation::whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])->get()->count();
 
         return response()->json($blogannoncelocations,200);
     }
 
-    public function blogannonceunactivecount()
+    public function blogannonceactivecount()
     {
-        $blogannoncelocations = blogannoncelocation::where('status',0)->get()->count();
+        $blogannoncelocations = blogannoncelocation::where(['status' => 1])->get()->count();
+
+        return response()->json($blogannoncelocations,200);
+    }
+
+    public function blogannonceactivebycategorycount(categoryannoncelocation $categoryannoncelocation)
+    {
+        $blogannoncelocations = blogannoncelocation::whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
+            ->where(['status' => 1])->get()->count();
+
+        return response()->json($blogannoncelocations,200);
+    }
+
+    public function  blogannonceunactivecount()
+    {
+        $blogannoncelocations = blogannoncelocation::where(['status' => 0])->get()->count();
+
+        return response()->json($blogannoncelocations,200);
+    }
+
+    public function blogannonceunactivebycategorycount(categoryannoncelocation $categoryannoncelocation)
+    {
+        $blogannoncelocations = blogannoncelocation::where(['status' => 0])
+            ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
+            ->get()->count();
 
         return response()->json($blogannoncelocations,200);
     }

@@ -23,17 +23,23 @@ class PremiumteamuserController extends Controller
 
     public function index(user $user)
     {
+        $this->authorize('update',$user);
+
         return view('premium.team.index',compact('user'));
     }
 
     public function create(user $user)
     {
+        $this->authorize('update',$user);
+
         return view('premium.team.index',compact('user'));
     }
 
 
     public function edit($user , teamuser $teamuser)
     {
+        $this->authorize('update',$teamuser);
+
         return view('premium.team.show',[
             'teamuser'=> $teamuser,
         ]);
@@ -41,6 +47,8 @@ class PremiumteamuserController extends Controller
 
     public function data(user $user)
     {
+        $this->authorize('update',$user);
+
         $teamusers =  teamuser::with('user')
             ->whereIn('user_id',[$user->id])
             ->orderBy('created_at','DESC')
@@ -51,6 +59,8 @@ class PremiumteamuserController extends Controller
 
     public function datacount(user $user)
     {
+        $this->authorize('update',$user);
+
         $teamusers =  DB::table('teamusers')
             ->whereIn('user_id',[$user->id])
             ->count();
@@ -60,6 +70,7 @@ class PremiumteamuserController extends Controller
 
     public function dataactivecount(user $user)
     {
+        $this->authorize('update',$user);
 
         $teamusers =  DB::table('teamusers')
             ->whereIn('user_id',[$user->id])
@@ -71,6 +82,8 @@ class PremiumteamuserController extends Controller
 
     public function dataunactivecount(user $user)
     {
+        $this->authorize('update',$user);
+
         $teamusers =  DB::table('teamusers')
             ->whereIn('user_id',[$user->id])
             ->where(['status' => 0])

@@ -27,16 +27,22 @@ class PremiumblogannonceventeController extends Controller
 
     public function index(user $user)
     {
+        $this->authorize('update',$user);
+
         return view('premium.blog.blogannonceventes.index',compact('user'));
     }
 
     public function create(user $user)
     {
+        $this->authorize('update',$user);
+
         return view('premium.blog.blogannonceventes.create',compact('user'));
     }
 
     public function category(user $user,categoryannoncevente $categoryannoncevente)
     {
+        $this->authorize('update',$user);
+
         return view('premium.blog.blogannonceventes.show',[
             'categoryannoncevente' => $categoryannoncevente,
         ]);
@@ -44,6 +50,8 @@ class PremiumblogannonceventeController extends Controller
 
     public function edit(user $user,$blogannoncevente)
     {
+        $this->authorize('update',$user);
+
         $blogannoncevente = blogannoncevente::whereSlugin($blogannoncevente)->first();
 
         return view('premium.blog.blogannonceventes.edit',[
@@ -54,6 +62,7 @@ class PremiumblogannonceventeController extends Controller
 
     public function data(user $user)
     {
+        $this->authorize('update',$user);
 
         $blogannonceventes = BlogannonceventeResource::collection(blogannoncevente::with('user','categoryannoncevente','member')
             ->whereIn('user_id',[$user->id])
@@ -65,6 +74,8 @@ class PremiumblogannonceventeController extends Controller
 
     public function datacount(user $user)
     {
+        $this->authorize('update',$user);
+
         $blogannonceventes = DB::table('blogannonceventes')
             ->where(['status_admin' => 1])
            ->whereIn('user_id',[$user->id])->count();
@@ -74,6 +85,7 @@ class PremiumblogannonceventeController extends Controller
 
     public function dataactivecount(user $user)
     {
+        $this->authorize('update',$user);
 
         $blogannonceventes =  DB::table('blogannonceventes')
             ->whereIn('user_id',[$user->id])
@@ -85,6 +97,8 @@ class PremiumblogannonceventeController extends Controller
 
     public function dataunactivecount(user $user)
     {
+        $this->authorize('update',$user);
+
         $blogannonceventes =  DB::table('blogannonceventes')
             ->whereIn('user_id',[$user->id])
             ->where(['status' => 0,'status_admin' => 1])
@@ -95,6 +109,8 @@ class PremiumblogannonceventeController extends Controller
 
     public function datacategorycount(user $user, categoryannoncevente $categoryannoncevente)
     {
+        $this->authorize('update',$user);
+
         $blogannonceventes = DB::table('blogannonceventes')
             ->where(['status_admin' => 1])
             ->whereIn('user_id',[$user->id])
@@ -105,6 +121,8 @@ class PremiumblogannonceventeController extends Controller
 
     public function datacategoryactivecount(user $user, categoryannoncevente $categoryannoncevente)
     {
+        $this->authorize('update',$user);
+
         $blogannonceventes =  DB::table('blogannonceventes')
             ->whereIn('user_id',[$user->id])
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
@@ -117,6 +135,8 @@ class PremiumblogannonceventeController extends Controller
 
     public function datacategoryunactivecount(user $user, categoryannoncevente $categoryannoncevente)
     {
+        $this->authorize('update',$user);
+
         $blogannonceventes =  DB::table('blogannonceventes')
             ->whereIn('user_id',[$user->id])
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
