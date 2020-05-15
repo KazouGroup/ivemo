@@ -21,7 +21,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">view_headline</i> Articles sur les annonces reservations
+                                        <i class="material-icons">view_headline</i> {{categoryannoncereservation.name || "Articles sur les annonces reservations"}}
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                         <i class="material-icons">view_headline</i>
                                     </div>
                                     <p class="card-category">
-                                        <b>Articles sur les annonces reservations</b>
+                                        <b>{{categoryannoncereservation.name || "Articles sur les annonces reservations"}}</b>
                                     </p>
                                     <h3 class="card-title" style="color:red;">
                                         <b>{{data_countFormatter(blogannoncereservations_count)}}</b>
@@ -78,7 +78,7 @@
                                 <div class="card-footer">
                                     <div class="stats">
                                         <i class="material-icons">view_headline</i>
-                                        <b>Articles sur les annonces reservations</b>
+                                        <b>{{categoryannoncereservation.name || "Articles sur les annonces reservations"}}</b>
                                     </div>
                                 </div>
                             </div>
@@ -92,9 +92,9 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <h4 class="card-title">
-                                                <b>Articles sur les annonces reservations</b>
+                                                <b>{{categoryannoncereservation.name || "Articles sur les annonces reservations"}}</b>
                                             </h4>
-                                            <p class="card-title">Articles sur les annonces reservations</p>
+                                            <p class="card-title">{{categoryannoncereservation.name || "Articles sur les annonces reservations"}}</p>
                                         </div>
                                         <div class="col-md-6 text-right">
                                       <span>
@@ -146,7 +146,7 @@
                                             </tr>
                                             </tfoot>
                                             <tbody>
-                                            <tr v-for="item in blogannoncereservations" :key="item.id">
+                                            <tr v-for="item in categoryannoncereservation.blogannoncereservations" :key="item.id">
                                                 <td>{{ (item.title.length > 15 ? item.title.substring(0,15)+ "..." : item.title) | upText }}</td>
                                                 <td>
                                                     <b v-if="item.user_id">{{ (item.user.first_name.length > 15 ? item.user.first_name.substring(0,15)+ "..." : item.user.first_name) | upText }}</b>
@@ -223,7 +223,7 @@
             document.title = `Dashboard Articles de blogs reservations ${this.user.first_name || this.name_site} - ${this.name_site}`;
             return {
                 page: 1,
-                blogannoncereservations: [],
+                categoryannoncereservation: [],
                 blogannoncereservations_count: [],
                 blogannoncereservationsactive_count: [],
                 blogannoncereservationsunactive_count: [],
@@ -408,7 +408,7 @@
                 dyaxios.get(route('api.blogannoncereservations_dashboard_show',[Itemslug]))
                     .then(response => {
                         this.loaded = true;
-                        this.blogannoncereservations = response.data;
+                        this.categoryannoncereservation = response.data;
                         this.mydatatables();
                     });
             }

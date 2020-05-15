@@ -21,7 +21,7 @@
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats">
-                                            <i class="material-icons">view_headline</i> Articles sur les annonces locations
+                                            <i class="material-icons">view_headline</i> {{categoryannoncelocation.name || "Articles sur les annonces locations"}}
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@
                                             <i class="material-icons">view_headline</i>
                                         </div>
                                         <p class="card-category">
-                                            <b>Articles sur les annonces locations</b>
+                                            <b>{{categoryannoncelocation.name || "Articles sur les annonces locations"}}</b>
                                         </p>
                                         <h3 class="card-title" style="color:red;">
                                             <b>{{data_countFormatter(blogannoncelocations_count)}}</b>
@@ -78,7 +78,7 @@
                                     <div class="card-footer">
                                         <div class="stats">
                                             <i class="material-icons">view_headline</i>
-                                            <b>Articles sur les annonces locations</b>
+                                            <b>{{categoryannoncelocation.name || "Articles sur les annonces locations"}}</b>
                                         </div>
                                     </div>
                                 </div>
@@ -92,9 +92,9 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <h4 class="card-title">
-                                                <b>Articles sur les annonces locations</b>
+                                                <b>{{categoryannoncelocation.name || "Articles sur les annonces locations"}}</b>
                                             </h4>
-                                            <p class="card-title">Articles sur les annonces locations</p>
+                                            <p class="card-title">{{categoryannoncelocation.name || "Articles sur les annonces locations"}}</p>
                                         </div>
                                         <div class="col-md-6 text-right">
                                       <span>
@@ -224,7 +224,6 @@
             document.title = `Dashboard Articles de blogs locations ${this.user.first_name || this.name_site} - ${this.name_site}`;
             return {
                 loaded: false,
-                page: 1,
                 categoryannoncelocation: [],
                 blogannoncelocations_count: [],
                 blogannoncelocationsactive_count: [],

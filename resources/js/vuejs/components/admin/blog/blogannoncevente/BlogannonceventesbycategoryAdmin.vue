@@ -21,7 +21,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">view_headline</i> Articles sur les annonces ventes
+                                        <i class="material-icons">view_headline</i> {{categoryannoncevente.name || "Articles sur les annonces ventes"}}
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                         <i class="material-icons">view_headline</i>
                                     </div>
                                     <p class="card-category">
-                                        <b>Articles sur les annonces ventes</b>
+                                        <b>{{categoryannoncevente.name || "Articles sur les annonces ventes"}}</b>
                                     </p>
                                     <h3 class="card-title" style="color:red;">
                                         <b>{{data_countFormatter(blogannonceventes_count)}}</b>
@@ -78,7 +78,7 @@
                                 <div class="card-footer">
                                     <div class="stats">
                                         <i class="material-icons">view_headline</i>
-                                        <b>Articles sur les annonces ventes</b>
+                                        <b>{{categoryannoncevente.name || "Articles sur les annonces ventes"}}</b>
                                     </div>
                                 </div>
                             </div>
@@ -92,9 +92,9 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <h4 class="card-title">
-                                                <b>Articles sur les annonces ventes</b>
+                                                <b>{{categoryannoncevente.name || "Articles sur les annonces ventes"}}</b>
                                             </h4>
-                                            <p class="card-title">Articles sur les annonces ventes</p>
+                                            <p class="card-title">{{categoryannoncevente.name || "Articles sur les annonces ventes"}}</p>
                                         </div>
                                         <div class="col-md-6 text-right">
                                       <span>
@@ -146,7 +146,7 @@
                                             </tr>
                                             </tfoot>
                                             <tbody>
-                                            <tr v-for="item in blogannonceventes" :key="item.id">
+                                            <tr v-for="item in categoryannoncevente.blogannonceventes" :key="item.id">
                                                 <td>{{ (item.title.length > 15 ? item.title.substring(0,15)+ "..." : item.title) | upText }}</td>
                                                 <td>
                                                     <b v-if="item.user_id">{{ (item.user.first_name.length > 15 ? item.user.first_name.substring(0,15)+ "..." : item.user.first_name) | upText }}</b>
@@ -224,7 +224,7 @@
             return {
                 loaded: false,
                 page: 1,
-                blogannonceventes: {},
+                categoryannoncevente: {},
                 blogannonceventes_count: [],
                 blogannonceventesactive_count: [],
                 blogannonceventesunactive_count: [],
@@ -406,7 +406,7 @@
                 dyaxios.get(route('api.blogannonceventesbycategory_dashboard_show',[Itemslug]))
                     .then(response => {
                         this.loaded = true;
-                        this.blogannonceventes = response.data;
+                        this.categoryannoncevente = response.data;
                         this.mydatatables();
                     });
             }
