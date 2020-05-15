@@ -223,12 +223,8 @@ class PremiumUserBlogannonceReservation extends Component {
         fetch(route('api.blogannoncereservations_premiumunactive_count',[itemuser])).then(res => res.json()).then((result) => {
             this.setState({ blogannoncereservationsunactive_count: result }) });
 
-        fetch(route('api.blogannoncereservations_premium', [itemuser])).then(res => res.json())
-            .then((result) => {
-                this.mydatatables();
-                this.setState({ userblogannonce: result });
-
-            })
+        dyaxios.get(route('api.blogannoncereservations_premium', [itemuser])).then(response =>
+            this.setState({ userblogannonce: response.data }));
     }
 
     // lifecycle method
@@ -381,7 +377,9 @@ class PremiumUserBlogannonceReservation extends Component {
                                                 <div className="submit text-center">
                                                     <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_reservations/create/`}
                                                           className="btn btn-primary btn-raised ">
-                                                        <i className="material-icons">add</i>
+                                                         <span className="btn-label">
+                                                           <i className="material-icons">add</i>
+                                                         </span>
                                                         <b className="title_hover">Poster un votre article sur la reservation</b>
                                                     </Link>
                                                 </div>

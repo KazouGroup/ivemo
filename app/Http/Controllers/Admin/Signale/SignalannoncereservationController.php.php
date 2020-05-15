@@ -74,7 +74,7 @@ class SignalannoncereservationController extends Controller
 
     public function unactivated($id)
     {
-        $annoncereservation = annoncevente::where('id', $id)->findOrFail($id);
+        $annoncereservation = annoncereservation::where('id', $id)->findOrFail($id);
 
         $annoncereservation->update([
             'status_admin' => 0,

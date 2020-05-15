@@ -1,48 +1,61 @@
 <template>
-    <div class="main-panel" id="main-panel">
-        <vue-progress-bar/>
-        <navsmall-admin></navsmall-admin>
+    <div class="main-panel">
+        <vue-progress-bar />
 
-        <div class="panel-header panel-header-sm">
-
-        </div>
+        <admin-horizontalenavusersite/>
 
         <div class="content">
+            <div class="container-fluid">
 
-            <NavContactusersfaqsAdmin/>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="toolbar">
+                <NavContactusersfaqsAdmin/>
 
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div :class="getColorHeaderUser()">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4 class="card-title">
+                                            <b>Messages Contact FAQS</b>
+                                        </h4>
+                                        <p class="card-title">Messages Contact FAQS</p>
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                      <span>
+                                        <i id="tooltipSize" class="material-icons">forum</i>
+                                      </span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead class="text-primary">
-                                        <th>
-                                            Full name
-                                        </th>
-                                        <th>
-                                            Email
-                                        </th>
-                                        <th>
-                                            Category user
-                                        </th>
-                                        <th>
-                                            Category object
-                                        </th>
-                                        <th>
-                                            Recu
-                                        </th>
-                                        <th class="text-right">
-                                            Actions
-                                        </th>
+                                <div class="toolbar">
+
+                                </div>
+                                <div class="material-datatables">
+                                    <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                        <thead>
+                                        <tr>
+                                            <th><b>Full name</b></th>
+                                            <th><b>Email</b></th>
+                                            <th><b>Category user</b></th>
+                                            <th><b>Category object</b></th>
+                                            <th><b>Date</b></th>
+                                            <th class="disabled-sorting text-right"><b>Actions</b></th>
+                                        </tr>
                                         </thead>
+                                        <tfoot>
+                                        <tr>
+                                            <th>Full name</th>
+                                            <th>Email</th>
+                                            <th>Category user</th>
+                                            <th>Category object</th>
+                                            <th>Date</th>
+                                            <th class="text-right">Actions</th>
+                                        </tr>
+                                        </tfoot>
                                         <tbody>
-                                        <tr v-for="(item,index)  in contactusersfaqs" :key="item.id">
+                                        <tr v-for="(item, index) in contactusersfaqs" :key="item.id">
                                             <td>{{ (item.full_name.length > 15 ? item.full_name.substring(0,15)+ "..." : item.full_name) | upText }}</td>
                                             <td>{{ (item.email.length > 25 ? item.email.substring(0,25)+ "..." : item.email) | upText }}</td>
                                             <td>
@@ -53,41 +66,50 @@
                                                 <b v-if="item.categoryobjet_id">{{ (item.categoryobjet.name.length > 15 ? item.categoryobjet.name.substring(0,15)+ "..." : item.categoryobjet.name) | upText }}</b>
                                                 <b v-else>categoryobjet deleted</b>
                                             </td>
-                                            <td>{{ item.updated_at | myDate }}</td>
+                                            <td><b>{{ item.created_at | dateAgo }}</b></td>
                                             <td class="text-right">
-                                                <a :href="`/`" target="_blank" class="btn btn-info btn-icon btn-round btn-sm ">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
-                                                <button @click="deleteItem(item)"  class="btn btn-danger btn-icon btn-round btn-sm remove">
-                                                    <i class="fas fa-trash-alt"></i>
+                                                <template>
+                                                    <button @click="disableItem(item.id)" v-if="item.status" type="button"
+                                                            class="btn btn-success btn-just-icon btn-sm"
+                                                            title="Desactiver">
+                                                        <i class="material-icons">done</i>
+                                                    </button>
+                                                    <button @click="activeItem(item.id)" v-else type="button"
+                                                            class="btn btn-rose btn-just-icon btn-sm"
+                                                            title="Activer">
+                                                        <i class="material-icons">remove</i>
+                                                    </button>
+                                                </template>
+                                                <button @click="deleteItem(item)"
+                                                        class="btn btn-danger btn-sm btn-just-icon"
+                                                        title="Delete"
+                                                >
+                                                    <i class="material-icons">delete_forever</i>
                                                 </button>
                                             </td>
                                         </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
 
-                            <div class="toolbar">
-                                <div class="submit text-center" >
-                                    <infinite-loading spinner="waveDots" @infinite="infiniteHandler">
-                                        <span slot="no-more">No more data</span>
-                                    </infinite-loading>
+                                <div class="toolbar">
+                                    <div class="submit text-center" >
+                                        <infinite-loading spinner="waveDots" @infinite="infiniteHandler">
+                                            <span slot="no-more">No more data</span>
+                                        </infinite-loading>
+                                    </div>
                                 </div>
+
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
 
+        <footer-admin/>
 
-        <footer-admin></footer-admin>
     </div>
 </template>
 
@@ -105,6 +127,12 @@
         },
 
         methods:{
+            getColorCardUser() {
+                return "card-header card-header-icon card-header-" + this.user.color_name;
+            },
+            getColorHeaderUser() {
+                return "card-header card-header-" + this.user.color_name;
+            },
             getDate(item){
                 return moment(item.created_at).format('YYYY-MM-DD')
             },

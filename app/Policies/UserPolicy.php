@@ -11,6 +11,6 @@ class UserPolicy
 
     public function update(user $user, user $model)
     {
-        return auth()->user() === $user;
+        return auth()->user()->id === $model->id;
     }
 }

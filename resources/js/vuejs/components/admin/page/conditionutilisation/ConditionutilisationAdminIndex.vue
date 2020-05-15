@@ -1,122 +1,180 @@
 <template>
-    <div class="main-panel" id="main-panel">
-        <vue-progress-bar/>
-        <navsmall-admin></navsmall-admin>
 
-        <div class="panel-header">
-            <div class="header text-center">
-                <h2 class="title">Policy privacy</h2>
-                <p class="text-white">Toutes les conditions utilisations créé est de
-                    <a href="#"><b>{{ conditionutilisations.length }}</b></a></p>
-            </div>
-        </div>
+    <div class="main-panel">
+        <vue-progress-bar />
+
+        <admin-horizontalenavusersite/>
 
         <div class="content">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="toolbar">
-                                <div class="submit text-center">
-                                    <router-link :to="{ name: 'conditionutilisations.create' }" class="btn btn-round btn-primary btn-raised">
-                                       <span class="btn-label">
-                                        <i class="now-ui-icons ui-1_simple-add"></i>
-                                      </span>
-                                        <b class="title_hover">New Condition utilisations</b>
-                                    </router-link>
+            <div class="container-fluid">
+
+
+                <div v-if="loaded" class="row">
+                    <div class="col-md-12 expo">
+                        <div class="card card-stats">
+                            <div :class="getColorCardUser()">
+                                <div class="card-icon">
+                                    <i class="material-icons">description</i>
+                                </div>
+                                <p class="card-category">
+                                    <b>Condition utilisations</b>
+                                </p>
+                                <h3 class="card-title" style="color:red;">
+                                    <b>{{conditionutilisations.length}}</b>
+                                </h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons">description</i>
+                                    <b>Condition utilisations</b>
                                 </div>
                             </div>
-                            <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Status</th>
-                                    <th>Created_at</th>
-                                    <th class="disabled-sorting text-right">Actions</th>
-                                </tr>
-                                </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Status</th>
-                                    <th>Created_at</th>
-                                    <th class="disabled-sorting text-right">Actions</th>
-                                </tr>
-                                </tfoot>
-                                <tbody>
-                                <tr v-for="item in conditionutilisations" :key="item.id">
-                                    <td>{{ (item.title.length || "" > 15 ? item.title.substring(0,15)+ "..." : item.title || "") | upText }}</td>
-                                    <td>
-                                        <div class="timeline-heading">
-                                            <span v-if="item.status" class="badge badge-success"><b>Active</b></span>
-                                            <span v-else-if="!item.status"  class="badge badge-danger"><b>Deactive</b></span>
-                                        </div>
-                                    </td>
-                                    <td><b>{{ item.updated_at | myDate }}</b></td>
-                                    <td class="text-right">
-                                        <template>
-                                            <button  v-if="item.status" @click="disableItem(item.id)" class="btn btn-success btn-round btn-icon btn-sm" title="Disable">
-                                                <i class="now-ui-icons ui-1_check"/>
-                                            </button>
-                                            <button  v-else-if="!item.status" @click="activeItem(item.id)" class="btn btn-danger btn-round btn-icon btn-sm " title="Activate">
-                                                <i class="now-ui-icons ui-1_simple-delete"/>
-                                            </button>
-                                        </template>
-                                        <router-link :to="{ name: 'conditionutilisations.edit', params: { id: item.id  } }" class="btn btn-info btn-round btn-icon btn-sm edit">
-                                            <i class="fas fa-edit"></i>
-                                        </router-link>
-                                        <button @click="deleteItem(item.id)"  class="btn btn-danger btn-round btn-icon btn-sm remove">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
                         </div>
-
                     </div>
-
                 </div>
 
-            </div>
+                <div v-if="!loaded" class="submit">
+                    <LoaderLdsDefault />
+                </div>
 
+                <div v-if="loaded" class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div :class="getColorHeaderUser()">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4 class="card-title">
+                                            <b>Condition utilisation</b>
+                                        </h4>
+                                        <p class="card-title">Condition utilisation</p>
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                      <span>
+                                        <i id="tooltipSize" class="material-icons">description</i>
+                                      </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="toolbar">
+                                    <div class="submit text-center">
+                                        <router-link :to="{ name: 'conditionutilisations.create' }" class="btn btn-primary btn-raised">
+                                      <span class="btn-label">
+                                               <i class="material-icons">add</i>
+                                           </span>
+                                            <b class="title_hover">New Condition utilisations</b>
+                                        </router-link>
+                                    </div>
+
+                                </div>
+                                <div class="material-datatables">
+                                    <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                        <thead>
+                                        <tr>
+                                            <th><b>Title</b></th>
+                                            <th><b>Status</b></th>
+                                            <th><b>Date</b></th>
+                                            <th class="disabled-sorting text-right"><b>Actions</b></th>
+                                        </tr>
+                                        </thead>
+                                        <tfoot>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Status</th>
+                                            <th>Date</th>
+                                            <th class="text-right">Actions</th>
+                                        </tr>
+                                        </tfoot>
+                                        <tbody>
+                                        <tr v-for="item in conditionutilisations" :key="item.id">
+                                            <td>{{ (item.title.length || "" > 15 ? item.title.substring(0,15)+ "..." : item.title || "") | upText }}</td>
+                                            <td>
+                                                <div class="timeline-heading">
+                                                    <span v-if="item.status" class="badge badge-success"><b>Active</b></span>
+                                                    <span v-else-if="!item.status"  class="badge badge-rose"><b>Deactive</b></span>
+                                                </div>
+                                            </td>
+                                            <td><b>{{ item.created_at | dateAgo }}</b></td>
+                                            <td class="text-right">
+                                                <template>
+                                                    <button @click="disableItem(item.id)" v-if="item.status" type="button"
+                                                            class="btn btn-success btn-just-icon btn-sm"
+                                                            title="Desactiver">
+                                                        <i class="material-icons">done</i>
+                                                    </button>
+                                                    <button @click="activeItem(item.id)" v-else type="button"
+                                                            class="btn btn-rose btn-just-icon btn-sm"
+                                                            title="Activer">
+                                                        <i class="material-icons">remove</i>
+                                                    </button>
+                                                </template>
+                                                <router-link :to="{ name: 'conditionutilisations.edit', params: { id: item.id  } }" title="Editer" class="btn btn-info btn-sm btn-just-icon">
+                                                    <i class="material-icons">edit</i>
+                                                </router-link>
+                                                <button @click="deleteItem(item)"
+                                                        class="btn btn-danger btn-sm btn-just-icon"
+                                                        title="Delete"
+                                                >
+                                                    <i class="material-icons">delete_forever</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
+        <footer-admin/>
 
-        <footer-admin></footer-admin>
     </div>
+
 </template>
 
 <script>
+    import LoaderLdsDefault from "../../../../dashboard_user/components/inc/annimation/LoaderLdsDefault";
     export default {
+        components: {LoaderLdsDefault},
         data() {
-            document.title = `Dashboard Policy privacy - Ivemo`;
+            document.title = `Dashboard Policy privacy ${this.user.first_name || this.name_site} - ${this.name_site}`;
             return {
+                loaded: false,
                 conditionutilisations: {},
             }
         },
 
         methods:{
-            mydatatables(){
-                $( function () {
-                    $('#datatable').DataTable({
-                        "pagingType": "full_numbers",
-                        "lengthMenu": [
+            mydatatables() {
+                $(function() {
+                    $("#datatables").DataTable({
+                        pagingType: "full_numbers",
+                        lengthMenu: [
                             [10, 25, 50, -1],
                             [10, 25, 50, "All"]
                         ],
                         responsive: true,
-                        destroy: true,
                         retrieve:true,
-                        autoFill: true,
+                        destroy: true,
                         colReorder: true,
                         language: {
-                            search: "_INPUT_",
-                            searchPlaceholder: "Search Record",
+                            search: "<i class='material-icons'>search</i>",
+                            searchPlaceholder: "Search Record"
                         },
-
+                        sPaginationType: "full_numbers"
                     });
                 });
+            },
+            getColorCardUser() {
+                return "card-header card-header-icon card-header-" + this.user.color_name;
+            },
+            getColorHeaderUser() {
+                return "card-header card-header-" + this.user.color_name;
             },
 
             /** Ici c'est l'activation de la couleur  **/

@@ -5,13 +5,13 @@
 
 @yield('style')
 </head>
-<body>
+<body class="sidebar-mini">
 
 <div  class="wrapper " id="app">
     @can('dashboard')
         @if(auth()->user()->status_user)
 
-            <navbig-admin></navbig-admin>
+            <admin-verticalnavusersite></admin-verticalnavusersite>
 
         @section('content')
 

@@ -7,7 +7,7 @@
 
 require('./bootstrap');
 
-require('../vuejs/axios');
+require('../axios');
 
 require('./include');
 
