@@ -235,7 +235,6 @@ class PremiumUserTeams extends Component {
             .then((result) => {
                 this.mydatatables();
                 this.setState({teams: result});
-
             })
     }
 
@@ -309,7 +308,7 @@ class PremiumUserTeams extends Component {
                                 <i className="material-icons">edit</i>
                             </Link>
 
-                            <Button onClick={() => this.deleteItem(this.props.id)}
+                            <Button onClick={() => this.deleteItem(item.id)}
                                     className="btn btn-danger btn-sm btn-just-icon" title="Supprimer">
                                 <i className="material-icons">delete_forever</i>
                             </Button>
