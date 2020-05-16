@@ -94,6 +94,8 @@ class BlogannoncereservationController extends Controller
 
     public function apiblogannoncesreservationsbyuser(user $user)
     {
+        $this->authorize('update',$user);
+
         if (auth()->user()->id === $user->id){
             $blogannoncereservations = BlogannoncereservationService::apiblogannoncesreservationsbyuser($user);
 
@@ -106,6 +108,8 @@ class BlogannoncereservationController extends Controller
 
     public function apiblogannoncesreservationscategoryannoncereservationbyuser(user $user,categoryannoncereservation $categoryannoncereservation)
     {
+        $this->authorize('update',$user);
+
         if (auth()->user()->id === $user->id){
             $blogannoncereservations = BlogannoncereservationService::apiblogannoncesreservationscategoryannoncereservationbyuser($user,$categoryannoncereservation);
 
@@ -118,6 +122,8 @@ class BlogannoncereservationController extends Controller
 
     public function blogannoncesreservationsbyuser(user $user)
     {
+        $this->authorize('update',$user);
+
         if (auth()->user()->id === $user->id){
             return view('user.blogs.blogannoncereservation.blogannoncesreservationsbyuser',[
                 'user' => auth()->user(),

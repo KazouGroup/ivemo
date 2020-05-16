@@ -72,7 +72,6 @@ class PremiumblogannoncelocationController extends Controller
         $this->authorize('update',$user);
 
         $blogannoncelocations = DB::table('blogannoncelocations')
-            ->where(['status_admin' => 1])
            ->whereIn('user_id',[$user->id])->count();
 
         return response()->json($blogannoncelocations,200);
@@ -84,7 +83,7 @@ class PremiumblogannoncelocationController extends Controller
 
         $blogannoncelocations =  DB::table('blogannoncelocations')
             ->whereIn('user_id',[$user->id])
-            ->where(['status' => 1,'status_admin' => 1])
+            ->where(['status' => 1])
             ->count();
 
         return response()->json($blogannoncelocations,200);
@@ -107,7 +106,6 @@ class PremiumblogannoncelocationController extends Controller
         $this->authorize('update',$user);
 
         $blogannoncelocations = DB::table('blogannoncelocations')
-            ->where(['status_admin' => 1])
             ->whereIn('user_id',[$user->id])
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])->count();
 
@@ -121,7 +119,7 @@ class PremiumblogannoncelocationController extends Controller
         $blogannoncelocations =  DB::table('blogannoncelocations')
             ->whereIn('user_id',[$user->id])
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
-            ->where(['status' => 1,'status_admin' => 1])
+            ->where(['status' => 1])
             ->count();
 
         return response()->json($blogannoncelocations,200);
@@ -135,7 +133,7 @@ class PremiumblogannoncelocationController extends Controller
         $blogannoncelocations =  DB::table('blogannoncelocations')
             ->whereIn('user_id',[$user->id])
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
-            ->where(['status' => 0,'status_admin' => 1])
+            ->where(['status' => 0])
             ->count();
 
         return response()->json($blogannoncelocations,200);
