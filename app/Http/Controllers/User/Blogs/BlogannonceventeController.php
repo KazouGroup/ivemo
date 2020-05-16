@@ -107,6 +107,8 @@ class BlogannonceventeController extends Controller
 
     public function apiblogannoncesventesbyuser(user $user)
     {
+        $this->authorize('update',$user);
+
         if (auth()->user()->id === $user->id){
 
             $blogannonceventes = BlogannonceventeService::apiblogannoncesventesbyuser($user);
@@ -118,9 +120,10 @@ class BlogannonceventeController extends Controller
 
     }
 
-
     public function blogannoncesventesbyuser(user $user)
     {
+        $this->authorize('update',$user);
+
         if (auth()->user()->id === $user->id){
 
             return view('user.blogs.blogannoncevente.blogannoncesreservationsbyuser',[
@@ -132,9 +135,10 @@ class BlogannonceventeController extends Controller
 
     }
 
-
     public function blogannoncesventescategoryannonceventebyuser(user $user,categoryannoncevente $categoryannoncevente)
     {
+        $this->authorize('update',$user);
+
         if (auth()->user()->id === $user->id){
 
             return view('user.blogs.blogannoncevente.blogannoncesventescategoryannonceventebyuser',[
@@ -146,32 +150,17 @@ class BlogannonceventeController extends Controller
         }
 
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('user.blogs.blogannoncevente.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreRequest $request)
     {
         $blogannoncevente= new blogannoncevente();
@@ -186,12 +175,6 @@ class BlogannonceventeController extends Controller
         return response('Created',Response::HTTP_CREATED);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function show($blogannoncevente)
     {
 
@@ -200,12 +183,6 @@ class BlogannonceventeController extends Controller
         return response()->json($blogannoncevente, 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($blogannoncevente)
     {
 
@@ -215,13 +192,6 @@ class BlogannonceventeController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function update(UpdateRequest $request, $blogannoncevente)
     {
         $blogannoncevente = blogannoncevente::whereSlugin($blogannoncevente)->firstOrFail();
@@ -269,12 +239,6 @@ class BlogannonceventeController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return array
-     */
     public function destroy($id)
     {
         $blogannoncevente = blogannoncevente::findOrFail($id);

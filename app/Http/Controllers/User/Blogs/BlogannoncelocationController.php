@@ -63,6 +63,8 @@ class BlogannoncelocationController extends Controller
 
     public function apiblogannonceslocationsbyuser(user $user)
     {
+        $this->authorize('update',$user);
+
         if (auth()->user()->id === $user->id){
             $blogannoncelocations = BlogannoncelocationService::apiblogannonceslocationsbyuser($user);
 
@@ -75,6 +77,8 @@ class BlogannoncelocationController extends Controller
 
     public function apiblogannonceslocationscategoryannoncelocationbyuser(user $user,categoryannoncelocation $categoryannoncelocation)
     {
+        $this->authorize('update',$user);
+
         if (auth()->user()->id === $user->id){
             $blogannoncelocations = BlogannoncelocationService::apiblogannonceslocationscategoryannoncelocationbyuser($user,$categoryannoncelocation);
 
@@ -87,6 +91,8 @@ class BlogannoncelocationController extends Controller
 
     public function blogannonceslocationsbyuser(user $user)
     {
+        $this->authorize('update',$user);
+
         if (auth()->user()->id === $user->id){
             return view('user.blogs.blogannoncelocation.blogannonceslocationsbyuser',[
                 'user' => auth()->user(),
