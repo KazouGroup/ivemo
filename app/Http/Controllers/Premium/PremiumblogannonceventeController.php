@@ -64,7 +64,7 @@ class PremiumblogannonceventeController extends Controller
     {
         $this->authorize('update',$user);
 
-        $blogannonceventes = BlogannonceventeResource::collection(blogannoncevente::with('user','categoryannoncevente','member')
+        $blogannonceventes = BlogannonceventeResource::collection(blogannoncevente::with('user','categoryannoncevente')
             ->whereIn('user_id',[$user->id])
             ->orderBy('created_at','DESC')
             ->distinct()->get());
