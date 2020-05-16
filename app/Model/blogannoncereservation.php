@@ -15,7 +15,7 @@ class blogannoncereservation extends Model implements Auditable
 
     protected $guarded = [];
 
-    protected static $logAttributes = ['title','red_time','ip','description','status','status_admin','member_id','categoryannoncereservaion_id'];
+    protected static $logAttributes = ['title','red_time','ip','status','status_admin','member_id'];
 
     protected  $table = 'blogannoncereservations';
 
