@@ -30,6 +30,14 @@ class CreateProfilesTable extends Migration
             $table->longText('description')->nullable();
             $table->timestamps();
 
+            $table->boolean('status_annonce_locations')->default(true);
+            $table->boolean('status_annonce_reservations')->default(true);
+            $table->boolean('status_annonce_ventes')->default(true);
+
+            $table->boolean('status_blog_locations')->default(true);
+            $table->boolean('status_blog_reservations')->default(true);
+            $table->boolean('status_blog_ventes')->default(true);
+
             $table->unsignedBigInteger('city_id')->nullable()->index();
             $table->unsignedBigInteger('categoryprofile_id')->nullable()->index();
 
