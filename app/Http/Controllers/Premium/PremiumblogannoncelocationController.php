@@ -61,7 +61,7 @@ class PremiumblogannoncelocationController extends Controller
     {
         $this->authorize('update',$user);
 
-        $blogannoncelocations = BlogannoncelocationResource::collection(blogannoncelocation::with('user','categoryannoncelocation','member')
+        $blogannoncelocations = BlogannoncelocationResource::collection(blogannoncelocation::with('user','categoryannoncelocation')
             ->whereIn('user_id',[$user->id])->orderBy('created_at','DESC')->distinct()->get());
 
         return response()->json($blogannoncelocations,200);

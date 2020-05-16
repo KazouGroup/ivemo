@@ -58,7 +58,7 @@ class PremiumblogannoncereservationController extends Controller
     {
         $this->authorize('update',$user);
 
-        $blogannoncereservations = BlogannoncereservationResource::collection(blogannoncereservation::with('user','categoryannoncereservation','member')
+        $blogannoncereservations = BlogannoncereservationResource::collection(blogannoncereservation::with('user','categoryannoncereservation')
             ->whereIn('user_id',[$user->id])
             ->orderBy('created_at','DESC')
             ->distinct()->get()->toArray());
