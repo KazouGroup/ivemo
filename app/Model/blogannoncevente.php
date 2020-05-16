@@ -15,8 +15,8 @@ class blogannoncevente extends Model implements Auditable
 
     protected $guarded = [];
 
-    protected static $logAttributes = ['title','red_time','ip','description','status','status_admin','member_id','categoryannoncevente_id'];
-
+    protected static $logAttributes = ['title','red_time','ip','status','status_admin','member_id'];
+    
     protected  $table = 'blogannonceventes';
 
     protected static function boot()
