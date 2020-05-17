@@ -23,6 +23,7 @@ class ProfileAccountUser extends Component {
             slug: '',
             avatar: '',
             avatarcover: '',
+            status_profile: '',
             email: '',
             phone: '',
             categoryprofile_id: '',
@@ -107,6 +108,7 @@ class ProfileAccountUser extends Component {
             username: this.state.username,
             first_name: this.state.first_name,
             last_name: this.state.last_name,
+            status_profile: this.state.status_profile,
             sex: this.state.sex,
             color_name: this.state.color_name,
             slug: this.state.slug,
@@ -135,7 +137,7 @@ class ProfileAccountUser extends Component {
                         },
                     });
                 setTimeout(() => {
-                    window.location.reload();
+                    window.location.reload(true);
                 }, 3000);
             }).catch(error => {
                 this.setState({
@@ -162,7 +164,7 @@ class ProfileAccountUser extends Component {
                 const url = route('profile_add_info_account_delete.site', id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
-                    window.location.reload()
+                    window.location.reload(true)
                 })
             }
         });
@@ -176,6 +178,7 @@ class ProfileAccountUser extends Component {
                 username: response.data.username,
                 first_name: response.data.first_name,
                 last_name: response.data.last_name,
+                status_profile: response.data.status_profile,
                 sex: response.data.sex,
                 slug: response.data.slug,
                 color_name: response.data.color_name,
@@ -207,7 +210,7 @@ class ProfileAccountUser extends Component {
                         <NavUserSite />
                     </nav>
 
-                
+
 
                     <div className="wrapper">
 
@@ -421,21 +424,21 @@ class ProfileAccountUser extends Component {
                                                     </div>
 
                                                     <div className="row">
-                                                        <div className="col-md-6 col-6">
-                                                            <label htmlFor="address"><b>Sex</b></label>
+                                                        <div className="col-md-4">
+                                                            <label htmlFor="address"><b>Votre status</b></label>
                                                             <div className="form-group">
 
-                                                                <select value={this.state.sex || ''} className={`form-control ${this.hasErrorFor('sex') ? 'is-invalid' : ''}`}
-                                                                        onChange={this.handleFieldChange} name="sex" required="required">
-                                                                    <option value="female"> Mme</option>
-                                                                    <option value="male"> Mr</option>
+                                                                <select value={this.state.status_profile || ''} className={`form-control ${this.hasErrorFor('status_profile') ? 'is-invalid' : ''}`}
+                                                                        onChange={this.handleFieldChange} name="status_profile" required="required">
+                                                                    <option value="0"> Particulier</option>
+                                                                    <option value="1"> Professionnel</option>
                                                                 </select>
 
-                                                                {this.renderErrorFor('sex')}
+                                                                {this.renderErrorFor('status_profile')}
                                                             </div>
                                                         </div>
 
-                                                        <div className="col-md-6 col-6">
+                                                        <div className="col-md-6">
                                                             <label htmlFor="phone"><b>Pourquoi êtes-vous sur Ivemo ?</b></label>
                                                             <div className="form-group">
 
@@ -448,6 +451,20 @@ class ProfileAccountUser extends Component {
                                                                 </select>
 
                                                                 {this.renderErrorFor('categoryprofile_id')}
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="col-md-2">
+                                                            <label htmlFor="address"><b>Sex</b></label>
+                                                            <div className="form-group">
+
+                                                                <select value={this.state.sex || ''} className={`form-control ${this.hasErrorFor('sex') ? 'is-invalid' : ''}`}
+                                                                        onChange={this.handleFieldChange} name="sex" required="required">
+                                                                    <option value="female"> Mme</option>
+                                                                    <option value="male"> Mr</option>
+                                                                </select>
+
+                                                                {this.renderErrorFor('sex')}
                                                             </div>
                                                         </div>
 
@@ -485,7 +502,7 @@ class ProfileAccountUser extends Component {
                         </div>
 
                         <FooterBigUserSite />
-                        
+
                     </div>
                 </div>
 

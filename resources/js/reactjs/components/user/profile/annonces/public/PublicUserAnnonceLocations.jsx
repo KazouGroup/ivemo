@@ -10,13 +10,14 @@ import NavLinkPublicAnnonceUser from "../NavLinkPublicAnnonceUser";
 import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";
 import NavLinkPublicBlogannoncesUser from "../../blogs/public/NavLinkPublicBlogannoncesUser";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
+import AnnoncesListSkeleton from "../../../../inc/user/annonce/AnnoncesListSkeleton";
 
 
 class PublicUserAnnonceLocations extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            useranoncelocationPublick:{annoncelocations: []},
+            useranoncelocationPublick:{annoncelocations: {categoryannoncelocation:[],city:[],user:[]}},
             visiable: 10,
         };
 
@@ -151,7 +152,7 @@ class PublicUserAnnonceLocations extends Component {
 
     render() {
         const {useranoncelocationPublick,visiable} = this.state;
-        const mapAnnoncelocations = useranoncelocationPublick.annoncelocations.length ? (
+        const mapAnnoncelocations = useranoncelocationPublick.annoncelocations.length >= 0 ? (
             useranoncelocationPublick.annoncelocations.slice(0, visiable).map(item => {
                 return(
 
@@ -159,7 +160,7 @@ class PublicUserAnnonceLocations extends Component {
                 )
             })
         ):(
-            <></>
+            <AnnoncesListSkeleton/>
         );
         return (
             <>
@@ -203,11 +204,20 @@ class PublicUserAnnonceLocations extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
-                                        <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster une location</b>
-                                            </NavLink>
-                                        </div>
+                                        {useranoncelocationPublick.status_profile === 1 && (
+                                            <div className="submit text-center">
+                                                {!$guest ?
+                                                    <NavLink className="btn btn-danger" to={`/annonce_location/locations/new/`}>
+                                                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre bien en location</b>
+                                                    </NavLink>
+                                                    :
+                                                    <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="btn btn-danger">
+                                                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre bien en location</b>
+                                                    </a>
+                                                }
+                                            </div>
+                                        )}
+
 
                                         <div className="card">
                                             <div className="card-body">
@@ -254,67 +264,90 @@ class PublicUserAnnonceLocations extends Component {
                                             </div>
                                         </div>
 
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
+                                        {useranoncelocationPublick.status_profile === 1 && (
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <div className="row">
+                                                        <div className="col-md-12">
 
-                                                        <div className="card-header text-center">
-                                                            <h4 className="card-title"><b>Contacter {useranoncelocationPublick.first_name}</b></h4>
+                                                            <div className="card-header text-center">
+                                                                <h4 className="card-title"><b>Contacter {useranoncelocationPublick.first_name}</b></h4>
+                                                            </div>
+
+                                                            <FormContactProfileAccountUser {...this.props}/>
+
                                                         </div>
-
-                                                        <FormContactProfileAccountUser {...this.props}/>
-
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div className="col-lg-8 col-md-12 mx-auto">
-
-                                        {mapAnnoncelocations}
-
-                                        {visiable < useranoncelocationPublick.annoncelocations.length && (
-                                            <div className="row">
-                                                <div className="col-md-4 ml-auto mr-auto text-center">
-                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
-                                                        <b>Voir plus </b>
-                                                    </button>
                                                 </div>
                                             </div>
                                         )}
 
-                                        <div className="card">
-                                            <div className="card-body">
-
-                                                <div className="card-header text-center">
-                                                    <h4 className="card-title"><b>Contacter {useranoncelocationPublick.first_name}</b></h4>
-                                                </div>
-
-                                                <FormContactProfileAccountUser {...this.props}/>
-
-                                            </div>
-                                        </div>
-
-                                        <div className="card card-raised card-form-horizontal">
-
-                                            <div className="card-body">
-
-                                                <div className="card-header text-center">
-                                                    <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
-                                                    <p className="card-title">
-                                                        Abonnez-vous à la newsletter de <b>{useranoncelocationPublick.first_name}</b> afin d'être notifié des mises à jour
-                                                    </p>
-                                                </div>
-
-                                                <FormNewletterSubcribeProfileAccountUser {...this.props} />
-
-                                            </div>
-                                        </div>
 
                                     </div>
+
+                                    {useranoncelocationPublick.status_profile === 0 ?
+
+                                        <div className="col-lg-8 col-md-12 mx-auto">
+                                            <div className="card">
+
+                                                <div className="card-body">
+
+                                                    <div className="card-header text-center">
+                                                        <h4 className="card-title"><b>Pour poster votre bien !</b></h4>
+                                                        <a href="#"
+                                                           className="btn btn-info btn-lg">
+                                                            <b>Devenez professionnel pour poster votre bien</b>
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        :
+                                        <div className="col-lg-8 col-md-12 mx-auto">
+
+                                            {mapAnnoncelocations}
+
+                                            {visiable < useranoncelocationPublick.annoncelocations.length && (
+                                                <div className="row">
+                                                    <div className="col-md-4 ml-auto mr-auto text-center">
+                                                        <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                                            <b>Voir plus </b>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            <div className="card">
+                                                <div className="card-body">
+
+                                                    <div className="card-header text-center">
+                                                        <h4 className="card-title"><b>Contacter {useranoncelocationPublick.first_name}</b></h4>
+                                                    </div>
+
+                                                    <FormContactProfileAccountUser {...this.props}/>
+
+                                                </div>
+                                            </div>
+
+                                            <div className="card card-raised card-form-horizontal">
+
+                                                <div className="card-body">
+
+                                                    <div className="card-header text-center">
+                                                        <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
+                                                        <p className="card-title">
+                                                            Abonnez-vous à la newsletter de <b>{useranoncelocationPublick.first_name}</b> afin d'être notifié des mises à jour
+                                                        </p>
+                                                    </div>
+
+                                                    <FormNewletterSubcribeProfileAccountUser {...this.props} />
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    }
 
                                 </div>
 

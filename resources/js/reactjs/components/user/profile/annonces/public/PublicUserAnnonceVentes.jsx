@@ -5,19 +5,19 @@ import { Button,UncontrolledTooltip } from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
-import AnnoncereservationList from "../../../annonces/annoncereservation/inc/AnnoncereservationList";
 import NavLinkPublicAnnonceUser from "../NavLinkPublicAnnonceUser";
 import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";
 import NavLinkPublicBlogannoncesUser from "../../blogs/public/NavLinkPublicBlogannoncesUser";
 import AnnonceventeList from "../../../annonces/annoncevente/inc/AnnonceventeList";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
+import AnnoncesListSkeleton from "../../../../inc/user/annonce/AnnoncesListSkeleton";
 
 
 class PublicUserAnnonceVentes extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userannonceventePublick:{annonceventes:[]},
+            userannonceventePublick:{annonceventes:{annoncetype:[],categoryannoncevente:[],city:[],user:[]}},
             visiable: 10,
         };
 
@@ -94,7 +94,7 @@ class PublicUserAnnonceVentes extends Component {
 
     render() {
         const {userannonceventePublick,visiable} = this.state;
-        const mapAnnonceventes = userannonceventePublick.annonceventes.length ? (
+        const mapAnnonceventes = userannonceventePublick.annonceventes.length >= 0 ? (
             userannonceventePublick.annonceventes.slice(0, visiable).map(item => {
                 return(
 
@@ -102,12 +102,12 @@ class PublicUserAnnonceVentes extends Component {
                 )
             })
         ):(
-            <></>
+            <AnnoncesListSkeleton/>
         );
         return (
             <>
                 <Helmet>
-                    <title>Annonces ventes {`${userannonceventePublick.first_name || 'Profile'}`} - Ivemo</title>
+                    <title>Annonces ventes {`${userannonceventePublick.first_name || 'Profile'}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
@@ -146,11 +146,19 @@ class PublicUserAnnonceVentes extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
-                                        <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster un article </b>
-                                            </NavLink>
-                                        </div>
+                                        {userannonceventePublick.status_profile === 1 && (
+                                            <div className="submit text-center">
+                                                {!$guest ?
+                                                    <NavLink className="btn btn-danger" to={`/annonce_vente/ventes/new/`}>
+                                                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre bien en vente</b>
+                                                    </NavLink>
+                                                    :
+                                                    <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="btn btn-danger">
+                                                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre bien en vente</b>
+                                                    </a>
+                                                }
+                                            </div>
+                                        )}
 
 
                                         <div className="card">
@@ -199,70 +207,92 @@ class PublicUserAnnonceVentes extends Component {
                                         </div>
 
 
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
+                                        {userannonceventePublick.status_profile === 1 && (
 
-                                                        <div className="card-header text-center">
-                                                            <h4 className="card-title"><b>Contacter {userannonceventePublick.first_name}</b></h4>
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <div className="row">
+                                                        <div className="col-md-12">
+
+                                                            <div className="card-header text-center">
+                                                                <h4 className="card-title"><b>Contacter {userannonceventePublick.first_name}</b></h4>
+                                                            </div>
+
+                                                            <FormContactProfileAccountUser {...this.props}/>
+
                                                         </div>
-
-                                                        <FormContactProfileAccountUser {...this.props}/>
-
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-
-                                    <div className="col-lg-8 col-md-12 mx-auto">
-
-                                        {mapAnnonceventes}
-
-                                        {visiable < userannonceventePublick.annonceventes.length && (
-                                            <div className="row">
-                                                <div className="col-md-4 ml-auto mr-auto text-center">
-                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
-                                                        <b>Voir plus </b>
-                                                    </button>
                                                 </div>
                                             </div>
                                         )}
 
-                                        <div className="card">
-                                            <div className="card-body">
 
-                                                <div className="card-header text-center">
-                                                    <h4 className="card-title"><b>Contacter {userannonceventePublick.first_name}</b></h4>
-                                                </div>
-
-                                                <FormContactProfileAccountUser {...this.props}/>
-
-                                            </div>
-                                        </div>
-
-                                        <div className="card card-raised card-form-horizontal">
-
-                                            <div className="card-body">
-
-                                                <div className="card-header text-center">
-                                                    <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
-                                                    <p className="card-title">
-                                                        Abonnez-vous à la newsletter de <b>{userannonceventePublick.first_name}</b> afin d'être notifié des mises à jour
-                                                    </p>
-                                                </div>
-
-                                                <FormNewletterSubcribeProfileAccountUser {...this.props} />
-
-                                            </div>
-                                        </div>
 
                                     </div>
 
+                                    {userannonceventePublick.status_profile === 0 ?
 
+                                        <div className="col-lg-8 col-md-12 mx-auto">
+                                            <div className="card">
+
+                                                <div className="card-body">
+
+                                                    <div className="card-header text-center">
+                                                        <h4 className="card-title"><b>Pour poster votre bien. </b></h4>
+                                                        <a href="#"
+                                                           className="btn btn-info btn-lg">
+                                                            <b>Devenez professionnel pour poster votre bien</b>
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        :
+                                        <div className="col-lg-8 col-md-12 mx-auto">
+
+                                            {mapAnnonceventes}
+
+                                            {visiable < userannonceventePublick.annonceventes.length && (
+                                                <div className="row">
+                                                    <div className="col-md-4 ml-auto mr-auto text-center">
+                                                        <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                                            <b>Voir plus </b>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            <div className="card">
+                                                <div className="card-body">
+
+                                                    <div className="card-header text-center">
+                                                        <h4 className="card-title"><b>Contacter {userannonceventePublick.first_name}</b></h4>
+                                                    </div>
+
+                                                    <FormContactProfileAccountUser {...this.props}/>
+
+                                                </div>
+                                            </div>
+
+                                            <div className="card card-raised card-form-horizontal">
+
+                                                <div className="card-body">
+
+                                                    <div className="card-header text-center">
+                                                        <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
+                                                        <p className="card-title">
+                                                            Abonnez-vous à la newsletter de <b>{userannonceventePublick.first_name}</b> afin d'être notifié des mises à jour
+                                                        </p>
+                                                    </div>
+
+                                                    <FormNewletterSubcribeProfileAccountUser {...this.props} />
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    }
 
                                 </div>
 

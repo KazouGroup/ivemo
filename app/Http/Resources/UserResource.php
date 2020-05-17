@@ -32,6 +32,7 @@ class UserResource extends JsonResource
             'body' => $this->body,
             'avatar' => $this->avatar,
             'avatarcover' => $this->avatarcover,
+            'status_profile' => $this->status_profile,
             'email_verified_at' => $this->email_verified_at,
             'statusOnline' => $this->isOnline(),
             'roles' => $this->roles()->pluck('name'),

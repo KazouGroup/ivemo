@@ -125,6 +125,13 @@ class ProfilepublicController extends Controller
         ]);
     }
 
+    public function userpublic_profile(user $user)
+    {
+        return view('user.profile.profile_account',[
+            'user' => $user,
+        ]);
+    }
+
     public function publicprofilannoncelocations(user $user)
     {
         return view('user.profile.annonces.publicprofilannoncelocations',[

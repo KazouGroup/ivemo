@@ -62,7 +62,7 @@ class ProfileAccountPublicUser extends Component {
                                 </div>
                                 :
                                 <div className="page-header-image" data-parallax="true"
-                                style={{ backgroundImage: "url(" + userPublick.avatarcover + ")" }}>
+                                style={{ backgroundImage: "url(" + userPublick.avatarcover  + ")" }}>
 
                                 </div>
                             }
@@ -151,6 +151,39 @@ class ProfileAccountPublicUser extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                            <div className="card card-plain">
+                                                                <div className="card-header" role="tab" id="headingFour">
+                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                                                        <b>Menu</b>
+                                                                    </a>
+                                                                </div>
+
+                                                                <div id="collapseFour" className="collapse show" role="tabpanel" aria-labelledby="headingFour">
+                                                                    <div className="card-body">
+                                                                        <table>
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <td> <Link to={`/`}>Acceuil</Link></td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         {!$guest && (
                                             <Fragment>
                                                 {$userIvemo.id === userPublick.id && (
@@ -164,68 +197,74 @@ class ProfileAccountPublicUser extends Component {
                                         )}
 
 
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
+                                        {userPublick.status_profile === 1 && (
 
-                                                        <div className="card-header text-center">
-                                                            <h4 className="card-title"><b>Contacter {userPublick.first_name}</b></h4>
-                                                        </div>
+                                            <Fragment>
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
 
-                                                        <FormContactProfileAccountUser {...this.props}/>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                            <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingOne">
-                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <b>Annonces {userPublick.first_name}</b>
-                                                                    </a>
+                                                                <div className="card-header text-center">
+                                                                    <h4 className="card-title"><b>Contacter {userPublick.first_name}</b></h4>
                                                                 </div>
 
-                                                                <NavLinkPublicAnnonceUser {...this.props} {...userPublick}/>
-
+                                                                <FormContactProfileAccountUser {...this.props}/>
 
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
 
-                                         <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                            <div className="card card-plain">
 
-                                                                <div className="card-header" role="tab" id="headingTwo">
-                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                        <b>Articles de {userPublick.first_name}</b>
-                                                                    </a>
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                                    <div className="card card-plain">
+                                                                        <div className="card-header" role="tab" id="headingOne">
+                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                                <b>Annonces {userPublick.first_name}</b>
+                                                                            </a>
+                                                                        </div>
+
+                                                                        <NavLinkPublicAnnonceUser {...this.props} {...userPublick}/>
+
+
+                                                                    </div>
+
                                                                 </div>
-
-                                                                <NavLinkPublicBlogannoncesUser {...this.props} {...userPublick}/>
-
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
+
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                                    <div className="card card-plain">
+
+                                                                        <div className="card-header" role="tab" id="headingTwo">
+                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                                <b>Articles de {userPublick.first_name}</b>
+                                                                            </a>
+                                                                        </div>
+
+                                                                        <NavLinkPublicBlogannoncesUser {...this.props} {...userPublick}/>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </Fragment>
+
+                                        )}
 
 
                                     </div>
@@ -255,45 +294,47 @@ class ProfileAccountPublicUser extends Component {
                                             </div>
                                         </div>
 
+                                        {userPublick.status_profile === 1 && (
+                                            <Fragment>
 
-                                        {!userPublick.profile.status_team_user ? <></> : <ProfileAccountTeamUser {...this.props}/>}
+                                                {!userPublick.profile.status_team_user ? <></> : <ProfileAccountTeamUser {...this.props}/>}
 
 
-                                        {!userPublick.profile.status_avis ? <></> :<ProfileAccountAvisUser {...this.props}/>}
+                                                {!userPublick.profile.status_avis ? <></> :<ProfileAccountAvisUser {...this.props}/>}
 
+                                                <div className="card"  id="contact">
+                                                    <div className="card-body">
 
-                                        <div className="card"  id="contact">
-                                            <div className="card-body">
+                                                        <div className="card-header text-center">
+                                                            <h4 className="card-title"><b>Contacter {userPublick.first_name}</b></h4>
+                                                        </div>
 
-                                                <div className="card-header text-center">
-                                                    <h4 className="card-title"><b>Contacter {userPublick.first_name}</b></h4>
+                                                        <FormContactProfileAccountUser {...this.props}/>
+
+                                                    </div>
                                                 </div>
 
-                                                <FormContactProfileAccountUser {...this.props}/>
-
-                                            </div>
-                                        </div>
 
 
+                                                <div className="card card-raised card-form-horizontal">
 
-                                        <div className="card card-raised card-form-horizontal">
+                                                    <div className="card-body">
 
-                                            <div className="card-body">
+                                                        <div className="card-header text-center">
+                                                            <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
+                                                            <p className="card-title">
+                                                                Abonnez-vous à la newsletter de <b>{userPublick.first_name}</b> afin d'être averti des mises à jour
+                                                            </p>
+                                                        </div>
 
-                                                <div className="card-header text-center">
-                                                    <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
-                                                    <p className="card-title">
-                                                        Abonnez-vous à la newsletter de <b>{userPublick.first_name}</b> afin d'être averti des mises à jour
-                                                    </p>
+                                                        <FormNewletterSubcribeProfileAccountUser {...this.props}/>
+
+                                                    </div>
+
                                                 </div>
 
-                                                <FormNewletterSubcribeProfileAccountUser {...this.props}/>
-
-                                            </div>
-
-                                        </div>
-
-
+                                            </Fragment>
+                                        )}
                                     </div>
 
                                 </div>

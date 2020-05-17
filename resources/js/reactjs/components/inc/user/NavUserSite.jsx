@@ -11,7 +11,7 @@ class NavUserSite extends PureComponent {
     navLogout(e) {
         axios.post('/logout')
             .then(() => {
-                window.location.reload();
+                window.location.reload(true);
             });
     }
 
@@ -39,7 +39,7 @@ class NavUserSite extends PureComponent {
                                 <b>Acceuil</b>
                             </NavLink>
                         </li>
-                        
+
                         {!$guest &&(
                             <li className="nav-item">
                                 <a href={`/dashboard/premium/${$userIvemo.slug}/`} className="nav-link">
@@ -55,15 +55,15 @@ class NavUserSite extends PureComponent {
                                 <p>Annonces</p>
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <Link to={`/annonces_locations/locations/`} className="dropdown-item" >
+                                <a href={`/annonces_locations/locations/`} className="dropdown-item">
                                     <i className="now-ui-icons files_paper"/> Locations
-                                </Link>
-                                <Link to={`/annonces_reservations/reservations/`} className="dropdown-item">
+                                </a>
+                                <a href={`/annonces_reservations/reservations/`} className="dropdown-item">
                                     <i className="now-ui-icons business_money-coins"/> Reservations
-                                </Link>
-                                <Link to={`/annonces_ventes/ventes/`} className="dropdown-item">
+                                </a>
+                                <a href={`/annonces_ventes/ventes/`} className="dropdown-item">
                                     <i className="now-ui-icons business_money-coins"/> Ventes
-                                </Link>
+                                </a>
                             </div>
                         </li>
                         <li className="nav-item dropdown">
@@ -72,15 +72,15 @@ class NavUserSite extends PureComponent {
                                 <p>Conseils</p>
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <Link to={`/blogs/annonce_locations/`} className="dropdown-item" >
+                                <a href={`/blogs/annonce_locations/`} className="dropdown-item">
                                     <i className="now-ui-icons files_paper"/> Locations
-                                </Link>
-                                <Link to={`/blogs/annonce_reservations/`} className="dropdown-item">
+                                </a>
+                                <a href={`/blogs/annonce_reservations/`} className="dropdown-item">
                                     <i className="now-ui-icons business_money-coins"/> Reservations
-                                </Link>
-                                <Link to={`/blogs/annonce_ventes/`} className="dropdown-item">
+                                </a>
+                                <a href={`/blogs/annonce_ventes/`} className="dropdown-item">
                                     <i className="now-ui-icons business_money-coins"/> Ventes
-                                </Link>
+                                </a>
                             </div>
                         </li>
                         {$guest ?
@@ -114,15 +114,23 @@ class NavUserSite extends PureComponent {
                                                 <i className="now-ui-icons business_bulb-63" /> Dashboard
                                             </a>
                                         )}
-                                        <Link className="dropdown-item" to={`/profile/account/`}>
+
+                                        <a href="/profile/account" className="dropdown-item">
                                             <i className="now-ui-icons users_circle-08"/> Editer mon profile
-                                        </Link>
-                                        <Link className="dropdown-item" to={`/pro/${$userIvemo.slug}/`}>
-                                            <i className="now-ui-icons users_single-02"/> Profile
-                                        </Link>
+                                        </a>
+                                        {$userIvemo.status_profile === 1 ?
+                                            <a href={`/pro/${$userIvemo.slug}/`} className="dropdown-item">
+                                                <i className="now-ui-icons users_single-02"/> Profile
+                                            </a>
+                                            :
+                                            <a href={`/user/${$userIvemo.slug}/`} className="dropdown-item">
+                                                <i className="now-ui-icons users_single-02"/> Profile
+                                            </a>
+                                        }
                                         <a style={{ cursor: "pointer" }} className="dropdown-item" onClick={() => this.navLogout()}>
                                             <i className="now-ui-icons ui-1_simple-remove" /> Déconnexion
-                                            </a>
+                                        </a>
+
                                     </div>
                                 </li>
 
@@ -131,24 +139,24 @@ class NavUserSite extends PureComponent {
                                         <i className="now-ui-icons business_chart-pie-36"/>
                                     </a>
                                     <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                        <Link to={'/profile/personal_reservations/'} className="dropdown-item">
+                                        <a href={`/profile/personal_reservations/`} className="dropdown-item">
                                             <i className="now-ui-icons shopping_tag-content"/>Mes reservations
-                                        </Link>
-                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/annonces_locations/`} className="dropdown-item">
+                                        </a>
+                                        <a href={`/profile/${$userIvemo.slug}/personal_settings/annonces_locations/`} className="dropdown-item">
                                             <i className="now-ui-icons text_align-left"/>Annonces
-                                        </Link>
-                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_ventes/`} className="dropdown-item">
+                                        </a>
+                                        <a href={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_ventes/`} className="dropdown-item">
                                             <i className="now-ui-icons text_align-center"/>Blog annonces
-                                        </Link>
-                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/teams/`} className="dropdown-item">
+                                        </a>
+                                        <a href={`/profile/${$userIvemo.slug}/personal_settings/teams/`} className="dropdown-item">
                                             <i className="now-ui-icons users_circle-08"/>Team
-                                        </Link>
-                                        <Link to={'/profile/annonces_reservations_booked/'} className="dropdown-item">
+                                        </a>
+                                        <a href={`/profile/annonces_reservations_booked/`} className="dropdown-item">
                                             <i className="now-ui-icons shopping_bag-16"/>Reservations
-                                        </Link>
-                                        <Link to={`/profile/${$userIvemo.slug}/personal_mails/contacts/`} className="dropdown-item">
+                                        </a>
+                                        <a href={`/profile/${$userIvemo.slug}/personal_mails/contacts/`} className="dropdown-item">
                                             <i className="now-ui-icons location_pin"/>Messages
-                                        </Link>
+                                        </a>
                                     </div>
                                 </li>
                             </>
