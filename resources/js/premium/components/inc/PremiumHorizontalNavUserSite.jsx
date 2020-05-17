@@ -11,7 +11,7 @@ class PremiumHorizontalNavUserSite extends PureComponent {
     navLogout(e) {
         axios.post('/logout')
             .then(() => {
-                window.location.reload();
+                window.location.assign($url_site);
             });
     }
 
@@ -77,7 +77,9 @@ class PremiumHorizontalNavUserSite extends PureComponent {
                                     <a className="dropdown-item" href="#">Profile</a>
                                     <a className="dropdown-item" href="#">Settings</a>
                                     <div className="dropdown-divider"></div>
-                                    <a className="dropdown-item" href="#">Log out</a>
+                                    <a style={{ cursor: "pointer" }} className="dropdown-item" onClick={() => this.navLogout()}>
+                                        <i className="now-ui-icons ui-1_simple-remove" /> Déconnexion
+                                    </a>
                                 </div>
                             </li>
                         </ul>

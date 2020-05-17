@@ -2,6 +2,11 @@
 
 
 Route::get(
+    'user/{user}',
+    'ProfilepublicController@userpublic_profile'
+)->name('userpublic_profile.site');
+
+Route::get(
     'pro/{user}',
     'ProfilepublicController@public_profile'
 )->name('public_profile.site');

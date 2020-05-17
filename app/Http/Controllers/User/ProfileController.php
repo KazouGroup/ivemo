@@ -286,6 +286,7 @@ class ProfileController extends Controller
         $user->update($request->only(
             'first_name',
             'last_name',
+            'status_profile',
             'email',
             'slug',
             'username',

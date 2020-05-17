@@ -54,7 +54,7 @@ class LoginModalUser extends Component {
             .then(() => {
                   //Masquer le modal après la connexion
                   $('#loginModal').modal('hide');
-                  window.location.reload();
+                  window.location.reload(true);
             }).catch(error => {
                 this.setState({
                     errors: error.response.data.errors
