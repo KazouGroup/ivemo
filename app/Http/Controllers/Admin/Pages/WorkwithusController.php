@@ -33,7 +33,9 @@ class WorkwithusController extends Controller
     public function apiwork_with_us()
     {
         $workwithuses = WorkwithusResource::collection(workwithus::with('user','categoryworkwithus','city')
-            ->where('status',1)->latest()->get());
+            ->where('status',1)
+            ->whereHas('categoryworkwithus', function ($q) {$q->where('status',1);})
+            ->latest()->get());
 
         return response()->json($workwithuses,200);
     }
@@ -42,6 +44,7 @@ class WorkwithusController extends Controller
     {
         $workwithuses = WorkwithusResource::collection(workwithus::with('user','categoryworkwithus','city')
             ->whereIn('categoryworkwithus_id',[$categoryworkwithus->id])
+            ->whereHas('categoryworkwithus', function ($q) {$q->where('status',1);})
             ->where('status',1)->latest()->get());
 
         return response()->json($workwithuses,200);

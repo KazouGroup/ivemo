@@ -324,11 +324,23 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="../examples/widgets.html">
-                        <i class="material-icons">widgets</i>
-                        <p> Widgets </p>
+                <li v-if="$auth.can('manage-rh')" class="nav-item ">
+                    <a class="nav-link" data-toggle="collapse" href="#workwithusExamples">
+                        <i class="material-icons">filter_hdr</i>
+                        <p> Manage work
+                            <b class="caret"></b>
+                        </p>
                     </a>
+                    <div class="collapse" id="workwithusExamples">
+                        <ul class="nav">
+                            <li class="nav-item ">
+                                <router-link class="nav-link" :to="{ name: 'categoryworkwithuses.index'}">
+                                    <span class="sidebar-mini"> CMW </span>
+                                    <span class="sidebar-normal"> Category Manage work </span>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </div>

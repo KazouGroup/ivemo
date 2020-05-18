@@ -233,7 +233,9 @@
 
 <script>
 
+    import LoaderLdsDefault from "../../../dashboard_user/components/inc/annimation/LoaderLdsDefault";
     export default {
+        components: {LoaderLdsDefault},
         data() {
             document.title = `Dashboard Categories annonces reservations ${this.user.first_name || this.name_site} - ${this.name_site}`;
             return {

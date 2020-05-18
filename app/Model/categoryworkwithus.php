@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class categoryworkwithus extends Model
@@ -10,8 +11,29 @@ class categoryworkwithus extends Model
 
     protected $table = 'categoryworkwithuses';
 
-    public function user()
+    use Sluggable;
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
     {
-        return $this->belongsTo(user::class,'user_id');
+        return [
+            'slug' => [
+                'source' => 'name',
+                'separator' => '+'
+            ]
+
+        ];
+    }
+
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
+    public function workwithuses()
+    {
+        return $this->hasMany(workwithus::class, 'categoryworkwithus_id');
     }
 }
