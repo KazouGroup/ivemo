@@ -24,11 +24,11 @@ class CreateCategoryworkwithusesTable extends Migration
         });
 
         $categoryworkwithuses = array(
-            array('name' => 'Technologie', 'label' => 'Technologie','slug' => str_slug('Technologie')),
-            array('name' => 'Ventes internes', 'label' => 'Ventes internes','slug' => str_slug('Ventes internes')),
-            array('name' => 'Marketing', 'label' => 'Marketing','slug' => str_slug('Marketing')),
-            array('name' => 'Administration', 'label' => 'Administration','slug' => str_slug('Administration')),
-            array('name' => 'Ventes', 'label' => 'Ventes','slug' => str_slug('ventes')),
+            array('name' => 'Technologie', 'label' => 'Technologie','slug' => str_slug('Technologie'),'status' => false),
+            array('name' => 'Ventes internes', 'label' => 'Ventes internes','slug' => str_slug('Ventes internes'),'status' => true),
+            array('name' => 'Marketing', 'label' => 'Marketing','slug' => str_slug('Marketing'),'status' => false),
+            array('name' => 'Administration', 'label' => 'Administration','slug' => str_slug('Administration'),'status' => true),
+            array('name' => 'Ventes', 'label' => 'Ventes','slug' => str_slug('ventes'),'status' => true),
 
         );
         DB::table('categoryworkwithuses')->insert($categoryworkwithuses);

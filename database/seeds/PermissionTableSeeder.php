@@ -30,6 +30,8 @@ class PermissionTableSeeder extends Seeder
         //Create permissions Dashboard
         Permission::create(['guard_name' => 'web' , 'name' => 'dashboard']);
 
+        Permission::create(['guard_name' => 'web' , 'name' => 'manage-rh']);
+
         Permission::create(['guard_name' => 'web' , 'name' => 'auditing']);
 
         Permission::create(['guard_name' => 'web' , 'name' => 'activity']);

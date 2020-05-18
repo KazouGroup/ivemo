@@ -13,19 +13,19 @@
                         <div class="card card-stats">
                             <div :class="getColorCardUser()">
                                 <div class="card-icon">
-                                    <i class="material-icons">closed_caption</i>
+                                    <i class="material-icons">filter_hdr</i>
                                 </div>
                                 <p class="card-category">
-                                    <b>Categories FAQS</b>
+                                    <b>Categories work with us</b>
                                 </p>
                                 <h3 class="card-title" style="color:red;">
-                                    <b>{{categories_faqs.length}}</b>
+                                    <b>{{categoryworkwithuses.length}}</b>
                                 </h3>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
-                                    <i class="material-icons">closed_caption</i>
-                                    <b>Categories FAQS</b>
+                                    <i class="material-icons">filter_hdr</i>
+                                    <b>Categories work with us</b>
                                 </div>
                             </div>
                         </div>
@@ -43,13 +43,13 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h4 class="card-title">
-                                            <b>Categories FAQS</b>
+                                            <b>Categories work with us</b>
                                         </h4>
-                                        <p class="card-title">Categories FAQS</p>
+                                        <p class="card-title">Categories work with us</p>
                                     </div>
                                     <div class="col-md-6 text-right">
                                       <span>
-                                        <i id="tooltipSize" class="material-icons">closed_caption</i>
+                                        <i id="tooltipSize" class="material-icons">filter_hdr</i>
                                       </span>
                                     </div>
                                 </div>
@@ -57,11 +57,11 @@
                             <div class="card-body">
                                 <div class="toolbar">
                                     <div class="submit text-center">
-                                        <button v-if="$auth.can('manage-categories')" class="btn btn-primary btn-raised " @click="newModal">
+                                        <button v-if="$auth.can('manage-rh')" class="btn btn-primary btn-raised " @click="newModal">
                                            <span class="btn-label">
                                                <i class="material-icons">add</i>
                                            </span>
-                                            <b class="title_hover">New Categories FAQS</b>
+                                            <b class="title_hover">New Categories work with us</b>
                                         </button>
                                     </div>
 
@@ -72,20 +72,20 @@
                                         <tr>
                                             <th><b>Name</b></th>
                                             <th><b>Status</b></th>
-                                            <th><b>Date</b></th>
-                                            <th v-if="$auth.can('manage-categories')" class="disabled-sorting text-right"><b>Actions</b></th>
+                                            <th><b>Work</b></th>
+                                            <th v-if="$auth.can('manage-rh')" class="disabled-sorting text-right"><b>Actions</b></th>
                                         </tr>
                                         </thead>
                                         <tfoot>
                                         <tr>
                                             <th>Name</th>
                                             <th>Status</th>
-                                            <th>Date</th>
-                                            <th v-if="$auth.can('manage-categories')" class="text-right">Actions</th>
+                                            <th>Work</th>
+                                            <th v-if="$auth.can('manage-rh')" class="text-right">Actions</th>
                                         </tr>
                                         </tfoot>
                                         <tbody>
-                                        <tr v-for="item in categories_faqs" :key="item.id">
+                                        <tr v-for="item in categoryworkwithuses" :key="item.id">
                                             <td><b>{{ item.name }}</b></td>
                                             <td>
                                                 <div class="timeline-heading">
@@ -93,8 +93,8 @@
                                                     <span v-else-if="!item.status"  class="badge badge-rose"><b>Deactive</b></span>
                                                 </div>
                                             </td>
-                                            <td><b>{{ item.created_at | dateAgo }}</b></td>
-                                            <td v-if="$auth.can('manage-categories')" class="text-right">
+                                            <td><b>{{ item.workwithuses_count }}</b></td>
+                                            <td v-if="$auth.can('manage-rh')" class="text-right">
                                                 <template>
                                                     <button @click="disableItem(item.id)" v-if="item.status" type="button"
                                                             class="btn btn-success btn-just-icon btn-sm"
@@ -113,7 +113,7 @@
                                                 >
                                                     <i class="material-icons">edit</i>
                                                 </button>
-                                                <button v-if="$auth.can('manage-categories')" @click="deleteItem(item)"
+                                                <button @click="deleteItem(item)"
                                                         class="btn btn-danger btn-sm btn-just-icon"
                                                         title="Delete"
                                                 >
@@ -131,7 +131,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h6 v-show="!editmode" class="modal-title" id="addNewLabel"><b>{{this.form.name || "Add Category FAQS"}}</b></h6>
+                                                <h6 v-show="!editmode" class="modal-title" id="addNewLabel"><b>{{this.form.name || "Add Category work with us"}}</b></h6>
                                                 <h6 v-show="editmode" class="modal-title" id="updateNewLabel"><b>{{this.form.name}}</b></h6>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -187,11 +187,11 @@
     export default {
         components: {LoaderLdsDefault},
         data() {
-            document.title = `Dashboard Categories FAQS ${this.user.first_name || this.name_site} - ${this.name_site}`;
+            document.title = `Dashboard Categories work with us  ${this.user.first_name || this.name_site} - ${this.name_site}`;
             return {
                 loaded: false,
                 editmode: false,
-                categories_faqs: {},
+                categoryworkwithuses: {},
                 form: new Form({
                     id: '',
                     name: '',
@@ -230,7 +230,7 @@
             storeItem() {
                 this.$Progress.start();
                 // Submit the form via a POST request
-                this.form.post(route('categories_faqs.store')).then(() => {
+                this.form.post(route('categoryworkwithuses.store')).then(() => {
 
                     //Masquer le modal après la création
                     $('#addNew').modal('hide');
@@ -290,7 +290,7 @@
             updateItem() {
                 //Start Progress bar
                 this.$Progress.start();
-                this.form.put(route('categories_faqs.update',this.form.id))
+                this.form.put(route('categoryworkwithuses.update',this.form.id))
                     .then(() => {
                         //Masquer le modal après la création
                         $('#addNew').modal('hide');
@@ -338,7 +338,7 @@
             activeItem(id) {
                 //Progress bar star
                 this.$Progress.start();
-                dyaxios.get(route('activated_categories_faqs',id)).then(() => {
+                dyaxios.get(route('activated_categoryworkwithuses',id)).then(() => {
                     /** Alert notify bootstrapp **/
                     $.notify(
                         {
@@ -376,7 +376,7 @@
             disableItem(id) {
                 //Start Progress bar
                 this.$Progress.start();
-                dyaxios.get(route('unactivated_categories_faqs',id)).then(() => {
+                dyaxios.get(route('unactivated_categoryworkwithuses',id)).then(() => {
                     /** Alert notify bootstrapp **/
                     $.notify(
                         {
@@ -430,7 +430,7 @@
                         //Start Progress bar
                         this.$Progress.start();
                         //Envoyer la requete au server
-                        let url = route('categories_faqs.destroy',id);
+                        let url = route('categoryworkwithuses.destroy',id);
                         dyaxios.delete(url).then(() => {
                             /** Alert notify bootstrapp **/
                             $.notify({
@@ -472,9 +472,9 @@
             loadItems() {
                 //Start Progress bar
                 this.$Progress.start();
-                dyaxios.get(route('api.categories_faqs')).then(response => {
+                dyaxios.get(route('api.categoryworkwithuses')).then(response => {
                     this.loaded = true;
-                    this.categories_faqs = response.data;
+                    this.categoryworkwithuses = response.data;
                     this.mydatatables();
                 });
                 //End Progress bar

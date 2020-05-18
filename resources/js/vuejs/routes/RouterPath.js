@@ -38,6 +38,7 @@ import ConditionutilisationAdminEdit from "../components/admin/page/conditionuti
 import LicencesiteAdminIndex from "../components/admin/page/licencesite/LicencesiteAdminIndex";
 import LicencesiteAdminCreate from "../components/admin/page/licencesite/LicencesiteAdminCreate";
 import LicencesiteAdminEdit from "../components/admin/page/licencesite/LicencesiteAdminEdit";
+import CategoryWorkwithusAdminIndex from "../components/admin/categories/CategoryWorkwithusAdminIndex";
 
 
 export const routes = [
@@ -69,6 +70,7 @@ export const routes = [
     {path: '/dashboard/categoryannoncelocations/', name: 'categoryannoncelocations.index', component: CategoryAnnoncelocationAdminIndex},
     {path: '/dashboard/categoryannoncereservations/', name: 'categoryannoncereservations.index', component: CategoryAnnoncereservationAdminIndex},
     {path: '/dashboard/categoryannonceventes/', name: 'categoryannonceventes.index', component: CategoryAnnonceventeAdminIndex},
+    {path: '/dashboard/categoryworkwithuses/', name: 'categoryworkwithuses.index', component: CategoryWorkwithusAdminIndex},
 
     {path: '/dashboard/signalannoncelocations/', name: 'signalannoncelocations.index', component: SignalannoncelocationsAdminIndex},
     {path: '/dashboard/signalannoncelocations/:annoncelocation/', name: 'signalannoncelocations.show', component: SignalannoncelocationsAdminShow},
