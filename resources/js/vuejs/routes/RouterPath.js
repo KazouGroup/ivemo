@@ -39,6 +39,9 @@ import LicencesiteAdminIndex from "../components/admin/page/licencesite/Licences
 import LicencesiteAdminCreate from "../components/admin/page/licencesite/LicencesiteAdminCreate";
 import LicencesiteAdminEdit from "../components/admin/page/licencesite/LicencesiteAdminEdit";
 import CategoryWorkwithusAdminIndex from "../components/admin/categories/CategoryWorkwithusAdminIndex";
+import WorkwithusAdminIndex from "../components/admin/page/workwithuses/WorkwithusAdminIndex";
+import WorkwithusbyCategoryAdminIndex from "../components/admin/page/workwithuses/WorkwithusbyCategoryAdminIndex";
+import WorkwithusShowAdminIndex from "../components/admin/page/workwithuses/WorkwithusShowAdminIndex";
 
 
 export const routes = [
@@ -47,6 +50,10 @@ export const routes = [
     {path: '/dashboard/faqs/', name: 'faqs.index', component: FaqAdminIndex},
     {path: '/dashboard/faqs/create/', name: 'faqs.create', component: FaqAdminCreate},
     {path: '/dashboard/faqs/:id/edit/', name: 'faqs.edit', component: FaqAdminEdit},
+
+    {path: '/dashboard/workwithuses/', name: 'workwithuses.index', component: WorkwithusAdminIndex},
+    {path: '/dashboard/workwithuses/c/:categoryworkwithus/', name: 'work_with_uscategoryworkwithus.dashboard', component: WorkwithusbyCategoryAdminIndex},
+    {path: '/dashboard/workwithuses/c/:categoryworkwithus/:workwithus/', name: 'work_with_usworkwithus.show', component: WorkwithusShowAdminIndex},
 
     {path: '/dashboard/cities/', name: 'cities.index', component: CityAdminIndex},
     {path: '/dashboard/roles/', name: 'roles.index', component: RoleAdminIndex},

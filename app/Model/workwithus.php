@@ -49,6 +49,11 @@ class workwithus extends Model
         return $this->belongsTo(categoryworkwithus::class,'categoryworkwithus_id');
     }
 
+    public function contactworkwithuses()
+    {
+        return $this->hasMany(contactworkwithus::class, 'workwithus_id');
+    }
+
     public function visits()
     {
         return visits($this);

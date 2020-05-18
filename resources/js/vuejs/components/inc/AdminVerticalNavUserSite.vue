@@ -324,7 +324,7 @@
                         </ul>
                     </div>
                 </li>
-                <li v-if="$auth.can('manage-rh')" class="nav-item ">
+                <li class="nav-item ">
                     <a class="nav-link" data-toggle="collapse" href="#workwithusExamples">
                         <i class="material-icons">filter_hdr</i>
                         <p> Manage work
@@ -337,6 +337,12 @@
                                 <router-link class="nav-link" :to="{ name: 'categoryworkwithuses.index'}">
                                     <span class="sidebar-mini"> CMW </span>
                                     <span class="sidebar-normal"> Category Manage work </span>
+                                </router-link>
+                            </li>
+                            <li class="nav-item ">
+                                <router-link class="nav-link" :to="{ name: 'workwithuses.index'}">
+                                    <span class="sidebar-mini"> MW </span>
+                                    <span class="sidebar-normal"> Manage work </span>
                                 </router-link>
                             </li>
                         </ul>

@@ -6,6 +6,16 @@ Route::get(
 )->name('api.workwithuses');
 
 Route::get(
+    'workwithuses/c/{categoryworkwithus:slug}',
+    'WorkwithusController@apiworkwithusescategoryworkwithus'
+)->name('api.work_with_uscategoryworkwithus_dashboard');
+
+Route::get(
+    'workwithuses/c/{categoryworkwithus:slug}/{workwithus}',
+    'WorkwithusController@apiworkwithusesworkwithusshow'
+)->name('api.work_with_usworkwithus.show');
+
+Route::get(
     'work_with_us',
     'WorkwithusController@apiwork_with_us'
 )->name('api.work_with_us_site');
