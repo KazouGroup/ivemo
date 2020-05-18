@@ -25,6 +25,8 @@ class WorkwithusResource extends JsonResource
             'city' => $this->city,
             'city_id' => $this->city_id,
             'status' => $this->status,
+            'contactworkwithuses' => $this->contactworkwithuses,
+            'contactworkwithuses_count' => $this->contactworkwithuses_count,
             'visits_count' => $this->visits()->count(),
             'visits_countries' => $this->visits()->countries(),
             'visits_languages' => $this->visits()->languages(),
