@@ -65,8 +65,8 @@ class PublicUserBlogannonceLocation extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/

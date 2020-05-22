@@ -65,8 +65,8 @@ class PublicUserAnnonceLocations extends Component {
                                 align: 'center'
                             },
                             animate: {
-                                enter: "animated fadeInUp",
-                                exit: "animated fadeOutDown"
+                                enter: "animate__animated animate__fadeInUp",
+                                exit: "animate__animated animate__fadeOutDown"
                             },
                         });
                     /** End alert ***/
@@ -77,8 +77,8 @@ class PublicUserAnnonceLocations extends Component {
                     $.notify("Ooop! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -119,8 +119,8 @@ class PublicUserAnnonceLocations extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -131,8 +131,8 @@ class PublicUserAnnonceLocations extends Component {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })

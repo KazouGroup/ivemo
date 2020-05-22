@@ -88,7 +88,7 @@
                                             <th>AL</th>
                                             <th>AR</th>
                                             <th>AR</th>
-                                            <td>EFS</td>
+                                            <th>EFS</th>
                                             <th v-if="$auth.can('manage-categories')" class="text-right">Actions</th>
                                         </tr>
                                         </tfoot>

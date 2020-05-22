@@ -99,8 +99,8 @@ class BlogannoncelocationCreate extends Component {
                         align: 'center'
                     },
                     animate: {
-                        enter: "animated fadeInDownBig",
-                        exit: "animated fadeOutUp"
+                        enter: "animate__animated animate__fadeInDownBig",
+                        exit: "animate__animated animate__fadeOutUp"
                     },
                 });
         }
@@ -144,8 +144,8 @@ class BlogannoncelocationCreate extends Component {
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInUp",
-                            exit: "animated fadeOutDown"
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
                         },
                     });
                 this.props.history.push(`/blogs/annonce_locations/`);
@@ -157,8 +157,8 @@ class BlogannoncelocationCreate extends Component {
                     allow_dismiss: false,
                     type: 'danger',
                     animate: {
-                        enter: 'animated bounceInDown',
-                        exit: 'animated bounceOutUp'
+                        enter: 'animate__animated animate__bounceInDown',
+                        exit: 'animate__animated animate__bounceOutUp'
                     }
                 });
             })
@@ -295,7 +295,7 @@ class BlogannoncelocationCreate extends Component {
                                                             <label htmlFor="title">Selectionez la categorie</label>
                                                             <FormGroup>
                                                                 <select name={'categoryannoncelocation_id'} value={this.state.categoryannoncelocation_id}
-                                                                    
+
                                                                     className={`form-control ${this.hasErrorFor('categoryannoncelocation_id') ? 'is-invalid' : ''}`}
                                                                     id="categoryannoncelocation_id" onChange={this.handleFieldChange}>
                                                                     <option value="" disabled>Selectioner une category</option>

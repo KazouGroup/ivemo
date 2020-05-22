@@ -63,8 +63,8 @@ class LoginModalUser extends Component {
                     allow_dismiss: false,
                     type: 'danger',
                     animate: {
-                        enter: 'animated bounceInDown',
-                        exit: 'animated bounceOutUp'
+                        enter: 'animate__animated animate__bounceInDown',
+                        exit: 'animate__animated animate__bounceOutUp'
                     }
                 });
             })
