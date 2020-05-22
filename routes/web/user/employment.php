@@ -13,16 +13,6 @@ Route::group(['prefix' => 'api'], function () {
         'EmploymentController@apicategoryemployments_by_user'
     )->name('api.categoryemployments_by_user_site');
 
-    Route::get(
-        'profile/{user}/personal_settings/employments/',
-        'EmploymentController@apiblogannoncesventesbyuser'
-    )->name('api.blogannoncesventesbyuser_site');
-
-    Route::get(
-        'profile/{user}/personal_settings/employments/{categoryannoncevente}',
-        'EmploymentController@apiblogannoncesventescategoryannonceventebyuser'
-    )->name('api.blogannoncesventescategoryannonceventebyuser_site');
-
 });
 
 Route::get(
