@@ -21,6 +21,6 @@ Route::get(
 )->name('api.blogannoncecategoryreservationslug_site');
 
 Route::get(
-    '@{user}/blogs_annonce_reservations',
+    'pro{user}/blogs_annonce_reservations',
     'BlogannoncereservationController@apiblogsannoncereservationspublique'
 )->name('api.blogs_annonce_reservationspublique');

@@ -20,5 +20,6 @@ $factory->define(contactuserslocation::class, function (Faker $faker) {
         'message' => $faker->realText(rand(1000, 4000)),
         'user_id' => user::inRandomOrder()->first()->id,
         'annoncelocation_id' => annoncelocation::inRandomOrder()->first()->id,
+        'created_at' => $faker->dateTime,
     ];
 });

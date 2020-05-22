@@ -43,7 +43,7 @@ class DashboardblogannonceventeController extends Controller
     {
         $blogannoncereseventes = categoryannoncevente::whereSlug($categoryannoncevente->slug)
             ->withCount(['blogannonceventes' => function ($q)  use ($categoryannoncevente){
-                $q->with('user','categoryannoncevente')
+                $q->with('user','categoryannoncevente','member')
                     ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id]);
             }])->with(['blogannonceventes' => function ($q) use ($categoryannoncevente){
                 $q->with('user','categoryannoncevente')

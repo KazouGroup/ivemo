@@ -85,7 +85,11 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div v-if="!loaded" class="submit">
+                        <LoaderLdsDefault />
+                    </div>
+
+                     <div v-if="loaded" class="row">
                         <div class="col-md-12">
                             <div class="card">
                                 <div :class="getColorHeaderUser()">
@@ -161,7 +165,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="timeline-heading">
-                                                        <span v-if="item.status_user" class="badge badge-success">
+                                                        <span v-if="item.status" class="badge badge-success">
                                                           <b>Activé</b>
                                                         </span>
                                                         <span v-else class="badge badge-rose">
@@ -218,7 +222,9 @@
 
 <script>
     import moment from 'moment'
+    import LoaderLdsDefault from "../../../../dashboard_user/components/inc/annimation/LoaderLdsDefault";
     export default {
+        components: {LoaderLdsDefault},
         data() {
             document.title = `Dashboard Articles de blogs ventes ${this.user.first_name || this.name_site} - ${this.name_site}`;
             return {

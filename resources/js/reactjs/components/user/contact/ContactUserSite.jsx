@@ -114,7 +114,7 @@ class ContactUserSite extends Component {
                             <br/>
                             <div className="container">
                                 <div className="row justify-content-center">
-                                    <div className="col-md-12 ml-auto mr-auto">
+                                    <div className="col-md-8 ml-auto mr-auto">
                                         {!$guest &&(
                                             <>
                                                 {!$userIvemo.email_verified_at &&(

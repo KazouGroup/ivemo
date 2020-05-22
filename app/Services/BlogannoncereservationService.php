@@ -22,7 +22,7 @@ class BlogannoncereservationService
     {
         $blogannoncereservations = user::whereSlug($user->slug)
             ->with(['blogannoncereservations' => function ($q) use ($user){
-                $q->with('user','categoryannoncereservation')
+                $q->with('user','categoryannoncereservation','member')
                     ->whereIn('user_id',[$user->id])
                     ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
                     ->orderBy('created_at','DESC')
@@ -60,7 +60,7 @@ class BlogannoncereservationService
 
         $blogannoncereservations = HelpersService::helpersannonblogceteambyusercount($user)
             ->with(['blogannoncereservations' => function ($q) use ($user,$categoryannoncereservation){
-                $q->with('user','categoryannoncereservation')
+                $q->with('user','categoryannoncereservation','member')
                     ->whereIn('user_id',[$user->id])
                     ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
                     ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})

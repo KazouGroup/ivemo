@@ -54,21 +54,23 @@ class PremiumUserBlogannonceVenteList extends Component {
                     <div className="timeline-heading">
                         {this.props.status ?
                             <>
-                                <span className="badge badge-success"><b>Visible</b></span>
-                                {!this.props.status_admin && (
+                                {!this.props.status_admin ?
                                     <a href="#">
                                         <span className="badge badge-danger"><b>Masquer par le moderateur</b></span>
                                     </a>
-                                )}
+                                    :
+                                    <span className="badge badge-success"><b>Visible</b></span>
+                                }
                             </>
                             :
                             <>
-                                <span className="badge badge-rose"><b>Deactivé</b></span>
-                                {!this.props.status_admin && (
+                                {!this.props.status_admin ?
                                     <a href="#">
                                         <span className="badge badge-danger"><b>Masquer par le moderateur</b></span>
                                     </a>
-                                )}
+                                    :
+                                    <span className="badge badge-rose"><b>Deactivé</b></span>
+                                }
                             </>
                         }
                     </div>
@@ -76,19 +78,15 @@ class PremiumUserBlogannonceVenteList extends Component {
                 <td><b>{moment(this.props.created_at).fromNow()}</b></td>
                 <td className="text-right">
                     {this.props.status ?
-                        <Fragment>
-                            <Button onClick={() => this.props.unactiveItem(this.props.id)}
-                                    className="btn btn-success btn-just-icon btn-sm" title="Desactiver" >
-                                <i className="material-icons">done</i>
-                            </Button>
-                        </Fragment>
+                        <Button onClick={() => this.props.unactiveItem(this.props.id)}
+                                className="btn btn-success btn-just-icon btn-sm" title="Desactiver" >
+                            <i className="material-icons">done</i>
+                        </Button>
                         :
-                        <Fragment>
-                            <Button onClick={() => this.props.activeItem(this.props.id)}
-                                    className="btn btn-rose btn-just-icon btn-sm" title="Activer" >
-                                <i className="material-icons">remove</i>
-                            </Button>
-                        </Fragment>
+                        <Button onClick={() => this.props.activeItem(this.props.id)}
+                                className="btn btn-rose btn-just-icon btn-sm" title="Activer" >
+                            <i className="material-icons">remove</i>
+                        </Button>
 
                     }
 

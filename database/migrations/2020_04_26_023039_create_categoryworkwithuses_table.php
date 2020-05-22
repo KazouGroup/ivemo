@@ -21,6 +21,8 @@ class CreateCategoryworkwithusesTable extends Migration
             $table->string('slug')->nullable();
             $table->boolean('status')->default(false);
             $table->timestamps();
+            
+            $table->unsignedBigInteger('user_id')->nullable()->index();
         });
 
         $categoryworkwithuses = array(

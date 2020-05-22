@@ -6,6 +6,8 @@ Route::group(['namespace' => 'Pages'], function(){
 
     require(__DIR__ . DIRECTORY_SEPARATOR . 'conditionutilisations.php');
 
+    require(__DIR__ . DIRECTORY_SEPARATOR . 'dashboardemployement.php');
+
     require(__DIR__ . DIRECTORY_SEPARATOR . 'policyprivacies.php');
 
     require(__DIR__ . DIRECTORY_SEPARATOR . 'licencesites.php');

@@ -291,7 +291,7 @@ class BlogannoncereservationCreate extends Component {
                                                             <label htmlFor="title">Selectionez la categorie</label>
                                                             <div className="form-group">
                                                                 <select name={'categoryannoncereservation_id'} value={this.state.categoryannoncereservation_id}
-                                                                        className={`form-control`}
+                                                                        className={`form-control ${this.hasErrorFor('categoryannoncereservation_id') ? 'is-invalid' : ''}`}
                                                                         id="categoryannoncereservation_id" onChange={this.handleFieldChange}>
                                                                     <option value="" disabled>Selectioner une category</option>
                                                                     {categoryannoncereservations.map((item) => (

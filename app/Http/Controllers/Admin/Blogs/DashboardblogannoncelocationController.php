@@ -35,10 +35,10 @@ class DashboardblogannoncelocationController extends Controller
     {
         $blogannoncelocations = categoryannoncelocation::whereSlug($categoryannoncelocation->slug)
             ->withCount(['blogannoncelocations' => function ($q)  use ($categoryannoncelocation){
-                $q->with('user','categoryannoncelocation')
+                $q->with('user','member','categoryannoncelocation')
                     ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id]);
             }])->with(['blogannoncelocations' => function ($q) use ($categoryannoncelocation){
-                $q->with('user','categoryannoncelocation')
+                $q->with('user','member','categoryannoncelocation')
                     ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
                     ->orderBy('created_at','DESC')->distinct()->get();},
             ])->first();

@@ -2,7 +2,7 @@ import React, { Component,Fragment } from "react";
 import {Link, NavLink} from 'react-router-dom';
 import NavUserSite from "../../../inc/user/NavUserSite";
 import {Helmet} from "react-helmet";
-import FooterUserSite from "../../../inc/user/FooterUserSite";
+import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import WorkwithusList from "./WorkwithusList";
 
 
@@ -113,7 +113,7 @@ class WorkwithusBycategorySite extends Component {
 
 
 
-                        <FooterUserSite />
+                        <FooterBigUserSite />
                     </div>
                 </div>
 

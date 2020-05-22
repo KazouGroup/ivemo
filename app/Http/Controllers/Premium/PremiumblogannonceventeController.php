@@ -64,7 +64,7 @@ class PremiumblogannonceventeController extends Controller
     {
         $this->authorize('update',$user);
 
-        $blogannonceventes = BlogannonceventeResource::collection(blogannoncevente::with('user','categoryannoncevente')
+        $blogannonceventes = BlogannonceventeResource::collection(blogannoncevente::with('user','categoryannoncevente','member')
             ->whereIn('user_id',[$user->id])
             ->orderBy('created_at','DESC')
             ->distinct()->get());
@@ -77,6 +77,7 @@ class PremiumblogannonceventeController extends Controller
         $this->authorize('update',$user);
 
         $blogannonceventes = DB::table('blogannonceventes')
+           ->where(['status_admin' => 1])
            ->whereIn('user_id',[$user->id])->count();
 
         return response()->json($blogannonceventes,200);
@@ -88,7 +89,7 @@ class PremiumblogannonceventeController extends Controller
 
         $blogannonceventes =  DB::table('blogannonceventes')
             ->whereIn('user_id',[$user->id])
-            ->where(['status' => 1])
+            ->where(['status' => 1,'status_admin' => 1])
             ->count();
 
         return response()->json($blogannonceventes,200);
@@ -100,7 +101,7 @@ class PremiumblogannonceventeController extends Controller
 
         $blogannonceventes =  DB::table('blogannonceventes')
             ->whereIn('user_id',[$user->id])
-            ->where(['status' => 0])
+            ->where(['status' => 0,'status_admin' => 1])
             ->count();
 
         return response()->json($blogannonceventes,200);
@@ -111,6 +112,7 @@ class PremiumblogannonceventeController extends Controller
         $this->authorize('update',$user);
 
         $blogannonceventes = DB::table('blogannonceventes')
+            ->where(['status_admin' => 1])
             ->whereIn('user_id',[$user->id])
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])->count();
 
@@ -124,7 +126,7 @@ class PremiumblogannonceventeController extends Controller
         $blogannonceventes =  DB::table('blogannonceventes')
             ->whereIn('user_id',[$user->id])
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
-            ->where(['status' => 1])
+            ->where(['status' => 1,'status_admin' => 1])
             ->count();
 
         return response()->json($blogannonceventes,200);
@@ -138,7 +140,7 @@ class PremiumblogannonceventeController extends Controller
         $blogannonceventes =  DB::table('blogannonceventes')
             ->whereIn('user_id',[$user->id])
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
-            ->where(['status' => 0])
+            ->where(['status' => 0,'status_admin' => 1])
             ->count();
 
         return response()->json($blogannonceventes,200);

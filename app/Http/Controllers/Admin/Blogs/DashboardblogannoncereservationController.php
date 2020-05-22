@@ -36,7 +36,7 @@ class DashboardblogannoncereservationController extends Controller
     {
         $blogannoncereservations = categoryannoncereservation::whereSlug($categoryannoncereservation->slug)
             ->withCount(['blogannoncereservations' => function ($q)  use ($categoryannoncereservation){
-                $q->with('user','categoryannoncereservation')
+                $q->with('user','categoryannoncereservation','member')
                     ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id]);
             }])->with(['blogannoncereservations' => function ($q) use ($categoryannoncereservation){
                 $q->with('user','categoryannoncereservation')

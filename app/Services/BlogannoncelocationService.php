@@ -20,14 +20,14 @@ class BlogannoncelocationService
             ->withCount(['blogannoncelocations' => function ($q) use ($categoryannoncelocation){
                 $q->where(['status' => 1,'status_admin' => 1])
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
-                    ->with('user','categoryannoncelocation')
+                    ->with('user','categoryannoncelocation','member')
                     ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id]);
             }])
             ->with([
                 'blogannoncelocations' => function ($q) use ($categoryannoncelocation){
                     $q->where(['status' => 1,'status_admin' => 1])
                         ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
-                        ->with('user','categoryannoncelocation')
+                        ->with('user','categoryannoncelocation','member')
                         ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
                         ->orderBy('created_at','DESC')->distinct()->get();},
             ])->first();
@@ -37,7 +37,7 @@ class BlogannoncelocationService
 
     public static function apiblogannoncelocationinteresse($categoryannoncelocation)
     {
-        $blogannoncelocation = $categoryannoncelocation->blogannoncelocations()->with('user','categoryannoncelocation')
+        $blogannoncelocation = $categoryannoncelocation->blogannoncelocations()->with('user','categoryannoncelocation','member')
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
             ->orderByRaw('RAND()')
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
@@ -51,7 +51,7 @@ class BlogannoncelocationService
     {
         $blogannoncelocations = HelpersService::helpersannonblogceteambyusercount($user)
             ->with(['blogannoncelocations' => function ($q) use ($user){
-                $q->with('user','categoryannoncelocation')
+                $q->with('user','categoryannoncelocation','member')
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id])
                     ->orderBy('created_at','DESC')
@@ -66,7 +66,7 @@ class BlogannoncelocationService
     {
         $blogannoncelocations = HelpersService::helpersannonblogceteambyusercount($user)
             ->with(['blogannoncelocations' => function ($q) use ($user,$categoryannoncelocation){
-                $q->with('user','categoryannoncelocation')
+                $q->with('user','categoryannoncelocation','member')
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id])
                     ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])

@@ -99,15 +99,6 @@ class ContactFromWorkwithusIndex extends Component {
         })
     }
 
-    loadItems(){
-        //
-    }
-
-    // lifecycle method
-    componentDidMount() {
-
-    }
-
     render() {
         return (
 
@@ -149,6 +140,9 @@ class ContactFromWorkwithusIndex extends Component {
                     />
                     {this.renderErrorFor('email')}
                 </div>
+                <FormText className="text-muted" color="default" id="emailHelp">
+                   <b>Veuillez entrer une adresse e-mail valide </b>
+                </FormText>
                 <div className="input-group">
                     <div className="input-group-prepend">
                         <span className="input-group-text"><i className="now-ui-icons tech_mobile"></i></span>
@@ -179,11 +173,11 @@ class ContactFromWorkwithusIndex extends Component {
                     />
                     {this.renderErrorFor('cv_file')}
                 </div>
-                */}
 
                 <FormText className="text-muted" color="default" id="emailHelp">
                     <b>Bien vouloir selectioner votre CV.</b>
                 </FormText>
+                */}
                 <div className="form-group">
                  <textarea name="message" value={this.state.message}
                            onChange={this.handleFieldChange}

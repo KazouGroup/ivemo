@@ -93,6 +93,24 @@ class PremiumVerticalNavUserSite extends PureComponent {
                             </li>
 
                             <li className="nav-item ">
+                                <a className="nav-link" data-toggle="collapse" href="#mapsServicesemploie">
+                                    <i className="material-icons">dialpad</i>
+                                    <p> Formation & emploi
+                                        <b className="caret"></b>
+                                    </p>
+                                </a>
+                                <div className="collapse" id="mapsServicesemploie">
+                                    <ul className="nav">
+                                        <li className="nav-item ">
+                                            <NavLink className="nav-link" to={`/dashboard/premium/${$userIvemo.slug}/employments/`}>
+                                                <span className="sidebar-mini"> ALS </span>
+                                                <span className="sidebar-normal"> Formation & emploi </span>
+                                            </NavLink>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li className="nav-item ">
                                 <a className="nav-link" data-toggle="collapse" href="#mapsBlogs">
                                     <i className="material-icons">view_headline</i>
                                     <p> Blogs & Articles

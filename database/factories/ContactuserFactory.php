@@ -21,6 +21,6 @@ $factory->define(contactuser::class, function (Faker $faker) {
         'subject' => $faker->text(50),
         'message' => $faker->realText(rand(1000, 4000)),
         'user_id' => user::inRandomOrder()->first()->id,
-        //'created_at' => $faker->dateTime,
+        'created_at' => $faker->dateTime,
     ];
 });

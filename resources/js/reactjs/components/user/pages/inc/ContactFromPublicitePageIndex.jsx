@@ -88,10 +88,6 @@ class ContactFromPublicitePageIndex extends Component {
             });
         })
     }
-    // lifecycle method
-    componentDidMount() {
-       //
-    }
 
     render() {
 
@@ -146,6 +142,9 @@ class ContactFromPublicitePageIndex extends Component {
                                         />
                                         {this.renderErrorFor('email')}
                                     </InputGroup>
+                                    <FormText className="text-muted" color="default" id="emailHelp">
+                                    <b>Veuillez entrer une adresse e-mail valide </b>
+                                    </FormText>
                                 </div>
                             </div>
 
