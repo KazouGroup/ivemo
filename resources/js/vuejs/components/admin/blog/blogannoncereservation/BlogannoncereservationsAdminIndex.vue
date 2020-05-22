@@ -154,7 +154,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="timeline-heading">
-                                                        <span v-if="item.status_user" class="badge badge-success">
+                                                        <span v-if="item.status" class="badge badge-success">
                                                           <b>Activé</b>
                                                         </span>
                                                         <span v-else class="badge badge-rose">

@@ -33,7 +33,7 @@ class BlogannoncelocationController extends Controller
 
     public function apiannoncebloglocation()
     {
-        $blogannoncelocations = blogannoncelocation::with('user','categoryannoncelocation')
+        $blogannoncelocations = blogannoncelocation::with('user','categoryannoncelocation','member')
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->where(['status' => 1,'status_admin' => 1])->orderBy('created_at','DESC')
             ->distinct()->paginate(40);

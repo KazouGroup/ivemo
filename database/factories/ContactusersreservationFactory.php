@@ -20,5 +20,6 @@ $factory->define(contactusersreservation::class, function (Faker $faker) {
         'message' => $faker->realText(rand(500, 1000)),
         'user_id' => user::inRandomOrder()->first()->id,
         'annoncereservation_id' => annoncereservation::inRandomOrder()->first()->id,
+        'created_at' => $faker->dateTime,
     ];
 });

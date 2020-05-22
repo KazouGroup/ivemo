@@ -85,8 +85,13 @@ class FooterBigUserSite extends Component {
                                                 </a>
                                             </li>
                                             <li>
-                                                <Link to={`/work_with_us/`} className="text-muted">
+                                                <Link to={`/employments/`} className="text-muted">
                                                     Offres d’emploi
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to={`/work_with_us/`} className="text-muted">
+                                                    Travaillez avec nous
                                                 </Link>
                                             </li>
                                             <li>

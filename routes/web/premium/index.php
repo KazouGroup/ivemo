@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth:web'], function(){
 
     });
 
+    require(__DIR__ . DIRECTORY_SEPARATOR . 'premiumemployement.php');
+
     require(__DIR__ . DIRECTORY_SEPARATOR . 'premiumteamuser.php');
 
     require(__DIR__ . DIRECTORY_SEPARATOR . 'blog'. DIRECTORY_SEPARATOR . 'index.php');

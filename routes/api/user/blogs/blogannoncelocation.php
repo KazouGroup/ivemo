@@ -21,6 +21,6 @@ Route::get(
 )->name('api.blogannonceblogcategorylocationslug_site');
 
 Route::get(
-    '@{user}/blogs_annonce_locations',
+    'pro{user}/blogs_annonce_locations',
     'BlogannoncelocationController@apiblogsannoncelocationspublique'
 )->name('api.blogs_annonce_locationspublique');

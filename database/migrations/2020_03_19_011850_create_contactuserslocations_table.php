@@ -16,12 +16,12 @@ class CreateContactuserslocationsTable extends Migration
         Schema::create('contactuserslocations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('full_name')->nullable();
-            $table->string('email')->nullable();
+            $table->string('email',200)->nullable();
             $table->string('slug')->nullable();
             $table->boolean('status_archvement')->default(false);
             $table->boolean('status_favorite')->default(false);
             $table->boolean('status_red')->default(true);
-            $table->string('phone')->nullable();
+            $table->string('phone',100)->nullable();
             $table->string('ip')->nullable();
             $table->boolean('confirm_send')->nullable();
             $table->mediumText('subject')->nullable();

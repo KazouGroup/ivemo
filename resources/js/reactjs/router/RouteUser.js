@@ -118,6 +118,13 @@ import ConditionutilisationIndexSite from "../components/user/pages/Conditionuti
 import LicencesiteIndexSite from "../components/user/pages/LicencesiteIndexSite";
 import AnnoncelocationCreate from "../components/user/annonces/annonceloaction/treatment/AnnoncelocationCreate";
 import AnnonceventeCreate from "../components/user/annonces/annoncevente/treatment/AnnonceventeCreate";
+import EmployementIndexSite from "../components/user/employment/EmployementIndexSite";
+import EmployementBycategoryemployement from "../components/user/employment/EmployementBycategoryemployement";
+import EmployementBycategoryemployementbycity
+    from "../components/user/employment/EmployementBycategoryemployementbycity";
+import EmployementShowUserSite from "../components/user/employment/EmployementShowUserSite";
+import EmploymentEdit from "../components/user/employment/treatement/EmploymentEdit";
+import EmploymentCreate from "../components/user/employment/treatement/EmploymentCreate";
 
 
 const RouteUser = props => (
@@ -231,6 +238,14 @@ const RouteUser = props => (
 
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_ventes/" component={PrivateUserBlogannonceVente}/>
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_ventes/:categoryannoncevente/" component={withRouter(PrivateUserBlogannonceVentebyCategoryannoncevente)}/>
+
+
+          <Route exact path="/employments/" component={EmployementIndexSite}/>
+          <Route exact path="/employment/ab/new/" component={EmploymentCreate}/>
+          <Route exact path="/employment/:employment/edit/" component={EmploymentEdit}/>
+          <Route exact path="/employments/:categoryemployment/" component={withRouter(EmployementBycategoryemployement)}/>
+          <Route exact path="/employments/:categoryemployment/:city/" component={withRouter(EmployementBycategoryemployementbycity)}/>
+          <Route exact path="/employments/:categoryemployment/:city/:employment/" component={withRouter(EmployementShowUserSite)}/>
 
 
           <Route exact path="/blogs/" component={BlogannonceIndexSite}/>

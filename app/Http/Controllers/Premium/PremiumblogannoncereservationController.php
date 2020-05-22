@@ -58,10 +58,10 @@ class PremiumblogannoncereservationController extends Controller
     {
         $this->authorize('update',$user);
 
-        $blogannoncereservations = BlogannoncereservationResource::collection(blogannoncereservation::with('user','categoryannoncereservation')
+        $blogannoncereservations = BlogannoncereservationResource::collection(blogannoncereservation::with('user','categoryannoncereservation','member')
             ->whereIn('user_id',[$user->id])
             ->orderBy('created_at','DESC')
-            ->distinct()->get()->toArray());
+            ->distinct()->get());
 
         return response()->json($blogannoncereservations,200);
     }
@@ -71,7 +71,8 @@ class PremiumblogannoncereservationController extends Controller
         $this->authorize('update',$user);
 
         $blogannoncereservations = DB::table('blogannoncereservations')
-           ->whereIn('user_id',[$user->id])->count();
+        ->where(['status_admin' => 1])
+        ->whereIn('user_id',[$user->id])->count();
 
         return response()->json($blogannoncereservations,200);
     }
@@ -82,7 +83,7 @@ class PremiumblogannoncereservationController extends Controller
 
         $blogannoncereservations =  DB::table('blogannoncereservations')
             ->whereIn('user_id',[$user->id])
-            ->where(['status' => 1])
+            ->where(['status' => 1,'status_admin' => 1])
             ->count();
 
         return response()->json($blogannoncereservations,200);
@@ -94,7 +95,7 @@ class PremiumblogannoncereservationController extends Controller
 
         $blogannoncereservations =  DB::table('blogannoncereservations')
             ->whereIn('user_id',[$user->id])
-            ->where(['status' => 0])
+            ->where(['status' => 0,'status_admin' => 1])
             ->count();
 
         return response()->json($blogannoncereservations,200);
@@ -118,7 +119,7 @@ class PremiumblogannoncereservationController extends Controller
         $blogannoncereservations =  DB::table('blogannoncereservations')
             ->whereIn('user_id',[$user->id])
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
-            ->where(['status' => 1])
+            ->where(['status' => 1,'status_admin' => 1])
             ->count();
 
         return response()->json($blogannoncereservations,200);
@@ -132,7 +133,7 @@ class PremiumblogannoncereservationController extends Controller
         $blogannoncereservations =  DB::table('blogannoncelocations')
             ->whereIn('user_id',[$user->id])
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
-            ->where(['status' => 0])
+            ->where(['status' => 0,'status_admin' => 1])
             ->count();
 
         return response()->json($blogannoncereservations,200);

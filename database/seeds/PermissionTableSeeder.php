@@ -50,6 +50,10 @@ class PermissionTableSeeder extends Seeder
 
         Permission::create(['guard_name' => 'web' , 'name' => 'manage-blogs']);
 
+        Permission::create(['guard_name' => 'web' , 'name' => 'manage-annonce-employements']);
+
+        Permission::create(['guard_name' => 'web' , 'name' => 'manage-annonces-locations-reservations-ventes']);
+
         //Create Permissions Faqs
         Permission::create(['guard_name' => 'web' , 'name' => 'manage-faq']);
 

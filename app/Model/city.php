@@ -64,4 +64,9 @@ class city extends Model
     {
         return $this->hasMany(annoncereservation::class, 'city_id');
     }
+
+    public function employments()
+    {
+        return $this->hasMany(employment::class, 'city_id');
+    }
 }

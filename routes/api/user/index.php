@@ -8,6 +8,8 @@ require(__DIR__ . DIRECTORY_SEPARATOR . 'annoncelocations.php');
 
 require(__DIR__ . DIRECTORY_SEPARATOR . 'avisuser.php');
 
+require(__DIR__ . DIRECTORY_SEPARATOR . 'employment.php');
+
 require(__DIR__ . DIRECTORY_SEPARATOR . 'annoncevente.php');
 
 require(__DIR__ . DIRECTORY_SEPARATOR . 'profile.php');

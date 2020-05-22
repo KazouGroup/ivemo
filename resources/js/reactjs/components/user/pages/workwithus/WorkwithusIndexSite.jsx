@@ -2,9 +2,8 @@ import React, { Component,Fragment } from "react";
 import {Link, NavLink} from 'react-router-dom';
 import NavUserSite from "../../../inc/user/NavUserSite";
 import {Helmet} from "react-helmet";
-import FooterUserSite from "../../../inc/user/FooterUserSite";
+import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import WorkwithusList from "./WorkwithusList";
-import BlogannoncelocationList from "../../blog/blogannoncelocation/inc/BlogannoncelocationList";
 
 
 class WorkwithusIndexSite extends Component {
@@ -114,7 +113,7 @@ class WorkwithusIndexSite extends Component {
 
 
 
-                        <FooterUserSite />
+                        <FooterBigUserSite />
                     </div>
                 </div>
 

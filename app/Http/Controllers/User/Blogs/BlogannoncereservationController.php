@@ -32,7 +32,7 @@ class BlogannoncereservationController extends Controller
 
     public function apiannonceblogreservation()
     {
-        $blogannoncereservations = blogannoncereservation::with('user','categoryannoncereservation')
+        $blogannoncereservations = blogannoncereservation::with('user','categoryannoncereservation','member')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')->distinct()->paginate(40);

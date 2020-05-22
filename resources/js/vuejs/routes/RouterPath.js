@@ -42,6 +42,9 @@ import CategoryWorkwithusAdminIndex from "../components/admin/categories/Categor
 import WorkwithusAdminIndex from "../components/admin/page/workwithuses/WorkwithusAdminIndex";
 import WorkwithusbyCategoryAdminIndex from "../components/admin/page/workwithuses/WorkwithusbyCategoryAdminIndex";
 import WorkwithusShowAdminIndex from "../components/admin/page/workwithuses/WorkwithusShowAdminIndex";
+import CategoryEmployementAdminIndex from "../components/admin/categories/CategoryEmployementAdminIndex";
+import EmployementsAdminIndex from "../components/admin/employement/EmployementsAdminIndex";
+import EmployementsbycategoryAdmin from "../components/admin/employement/EmployementsbycategoryAdmin";
 
 
 export const routes = [
@@ -78,6 +81,7 @@ export const routes = [
     {path: '/dashboard/categoryannoncereservations/', name: 'categoryannoncereservations.index', component: CategoryAnnoncereservationAdminIndex},
     {path: '/dashboard/categoryannonceventes/', name: 'categoryannonceventes.index', component: CategoryAnnonceventeAdminIndex},
     {path: '/dashboard/categoryworkwithuses/', name: 'categoryworkwithuses.index', component: CategoryWorkwithusAdminIndex},
+    {path: '/dashboard/categoryemployements/', name: 'categoryemployements.index', component: CategoryEmployementAdminIndex},
 
     {path: '/dashboard/signalannoncelocations/', name: 'signalannoncelocations.index', component: SignalannoncelocationsAdminIndex},
     {path: '/dashboard/signalannoncelocations/:annoncelocation/', name: 'signalannoncelocations.show', component: SignalannoncelocationsAdminShow},
@@ -88,6 +92,9 @@ export const routes = [
     {path: '/dashboard/signalannoncereservations/', name: 'signalannoncereservations.index', component: SignalannoncereservationAdminIndex},
     {path: '/dashboard/signalannoncereservations/:annoncereservation/', name: 'signalannoncereservations.show', component: SignalannoncelocationsAdminShow},
 
+
+    {path: '/dashboard/employments/', name: 'employments.dashboard', component: EmployementsAdminIndex},
+    {path: '/dashboard/employments/:categoryemployment/', name: 'employments_show.dashboard', component: EmployementsbycategoryAdmin},
 
     {path: '/dashboard/blogannoncelocations/', name: 'blogannoncelocations.dashboard', component: BlogannoncelocationsAdminIndex},
     {path: '/dashboard/blogannoncelocations/:categoryannoncelocation/', name: 'blogannoncelocations_show.dashboard', component: BlogannoncelocationsbycategoryAdmin},

@@ -31,7 +31,7 @@ class BlogannonceventeController extends Controller
 
     public function apiannonceblogresevente()
     {
-        $blogannoncereseventes = blogannoncevente::with('user','categoryannoncevente')
+        $blogannoncereseventes = blogannoncevente::with('user','categoryannoncevente','member')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')
@@ -62,7 +62,7 @@ class BlogannonceventeController extends Controller
     public function apiblogannonceventeinteresse(categoryannoncevente $categoryannoncevente)
     {
         $blogannoncereseventes = $categoryannoncevente->blogannonceventes()
-            ->with('user','categoryannoncevente')
+            ->with('user','categoryannoncevente','member')
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
             ->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])

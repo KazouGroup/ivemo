@@ -18,7 +18,7 @@ class BlogannonceController extends Controller
 
     public function apiblogs_annonces_one_locations()
     {
-        $categoryannoncelocations = blogannoncelocation::with('user','categoryannoncelocation')
+        $categoryannoncelocations = blogannoncelocation::with('user','categoryannoncelocation','member')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')->take(1)->distinct()->get();
@@ -28,7 +28,7 @@ class BlogannonceController extends Controller
 
     public function apiblogs_annonces_four_locations()
     {
-        $categoryannoncelocations = blogannoncelocation::with('user','categoryannoncelocation')
+        $categoryannoncelocations = blogannoncelocation::with('user','categoryannoncelocation','member')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')->take(4)->distinct()->get();
@@ -38,7 +38,7 @@ class BlogannonceController extends Controller
 
     public function apiblogs_annonces_one_reservations()
     {
-        $blogannoncereservations = blogannoncereservation::with('user','categoryannoncereservation')
+        $blogannoncereservations = blogannoncereservation::with('user','categoryannoncereservation','member')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')->take(1)->distinct()->get();
@@ -48,7 +48,7 @@ class BlogannonceController extends Controller
 
     public function apiblogs_annonces_four_reservations()
     {
-        $blogannoncereservations = blogannoncereservation::with('user','categoryannoncereservation')
+        $blogannoncereservations = blogannoncereservation::with('user','categoryannoncereservation','member')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')->take(4)->distinct()->get();
@@ -58,7 +58,7 @@ class BlogannonceController extends Controller
 
     public function apiblogs_annonces_one_ventes()
     {
-        $blogannoncereseventes = blogannoncevente::with('user','categoryannoncevente')
+        $blogannoncereseventes = blogannoncevente::with('user','categoryannoncevente','member')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')->take(1)->distinct()->get();
@@ -69,7 +69,7 @@ class BlogannonceController extends Controller
 
     public function apiblogs_annonces_four_ventes()
     {
-        $blogannoncereseventes = blogannoncevente::with('user','categoryannoncevente')
+        $blogannoncereseventes = blogannoncevente::with('user','categoryannoncevente','member')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')->take(4)->distinct()->get();

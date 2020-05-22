@@ -20,6 +20,7 @@ import PremiumUserNewBlogannonceReservation
     from "../components/dashboard/blogannoncereservation/treatment/PremiumUserNewBlogannonceReservation";
 import PremiumUserEditBlogannonceReservation
     from "../components/dashboard/blogannoncereservation/treatment/PremiumUserEditBlogannonceReservation";
+import PremiumUserEmployement from "../components/dashboard/employment/PremiumUserEmployement";
 
 
 
@@ -45,6 +46,7 @@ const RouterUserPremium = props => (
         <Route exact path="/dashboard/premium/:user/blogs/annonce_ventes/create/" component={PremiumUserNewBlogannonceVente}/>
         <Route exact path="/dashboard/premium/:user/blogs/annonce_ventes/:blogannoncevente/edit/" component={PremiumUserEditBlogannonceVente}/>
 
+        <Route exact path="/dashboard/premium/:user/employments/" component={PremiumUserEmployement}/>
     </Switch>
 
 );

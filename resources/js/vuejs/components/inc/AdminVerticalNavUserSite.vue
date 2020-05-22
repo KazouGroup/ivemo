@@ -222,6 +222,30 @@
                     </div>
                 </li>
                 <li class="nav-item ">
+                    <a class="nav-link" data-toggle="collapse" href="#employementExamples">
+                        <i class="material-icons">work</i>
+                        <p> Manage Emplois & Formations
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="employementExamples">
+                        <ul class="nav">
+                            <li class="nav-item ">
+                                <router-link class="nav-link" :to="{ name: 'categoryemployements.index'}">
+                                    <span class="sidebar-mini"> CEF </span>
+                                    <span class="sidebar-normal"> Category Emplois & Formations </span>
+                                </router-link>
+                            </li>
+                            <li class="nav-item ">
+                                <router-link class="nav-link" :to="{ name: 'employments.dashboard'}">
+                                    <span class="sidebar-mini"> EFS </span>
+                                    <span class="sidebar-normal"> Emplois & Formations </span>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item ">
                     <a class="nav-link" data-toggle="collapse" href="#adminExamples">
                         <i class="material-icons">settings</i>
                         <p> Config Dashboard

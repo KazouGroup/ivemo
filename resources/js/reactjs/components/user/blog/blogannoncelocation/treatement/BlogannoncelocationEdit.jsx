@@ -464,7 +464,7 @@ class BlogannoncelocationEdit extends Component {
                                                             <label htmlFor="title">Selectionez la categorie</label>
                                                             <FormGroup>
                                                                 <select name={'categoryannoncelocation_id'} value={this.state.categoryannoncelocation_id}
-                                                                    className={`form-control`}
+                                                                    className={`form-control ${this.hasErrorFor('categoryannoncelocation_id') ? 'is-invalid' : ''}`}
                                                                     id="categoryannoncelocation_id" onChange={this.handleFieldChange}>
                                                                     <option value="" disabled>Selectioner une category</option>
                                                                     {categoryannoncelocations.map((item) => (

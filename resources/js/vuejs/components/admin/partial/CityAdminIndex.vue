@@ -76,6 +76,7 @@
                                             <th><b>AL</b></th>
                                             <th><b>AR</b></th>
                                             <th><b>AR</b></th>
+                                            <th><b>EFS</b></th>
                                             <th v-if="$auth.can('manage-categories')" class="disabled-sorting text-right"><b>Actions</b></th>
                                         </tr>
                                         </thead>
@@ -87,6 +88,7 @@
                                             <th>AL</th>
                                             <th>AR</th>
                                             <th>AR</th>
+                                            <td>EFS</td>
                                             <th v-if="$auth.can('manage-categories')" class="text-right">Actions</th>
                                         </tr>
                                         </tfoot>
@@ -103,6 +105,7 @@
                                             <td><b>{{item.annoncelocations_count}}</b></td>
                                             <td><b>{{item.annoncereservations_count}}</b></td>
                                             <td><b>{{item.annonceventes_count}}</b></td>
+                                            <td><b>{{item.employments_count}}</b></td>
                                             <td v-if="$auth.can('manage-categories')" class="text-right">
                                                 <template>
                                                     <button @click="disableItem(item.id)" v-if="item.status" type="button"

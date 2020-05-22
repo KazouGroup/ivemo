@@ -24,12 +24,12 @@ class BlogannonceventeService
         $blogannoncereseventes = categoryannoncevente::whereSlug($categoryannoncevente->slug)->where(['status' => 1])
             ->withCount(['blogannonceventes' => function ($q)  use ($categoryannoncevente){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->with('user','categoryannoncevente')
+                    ->with('user','categoryannoncevente','member')
                     ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);});
             }])->with(['blogannonceventes' => function ($q) use ($categoryannoncevente){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->with('user','categoryannoncevente')
+                    ->with('user','categoryannoncevente','member')
                     ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->orderBy('created_at','DESC')->distinct()->paginate(40);},
@@ -43,7 +43,7 @@ class BlogannonceventeService
     {
         $blogannoncereseventes = user::whereSlug($user->slug)
             ->with(['blogannonceventes' => function ($q) use ($user){
-                $q->with('user','categoryannoncevente')
+                $q->with('user','categoryannoncevente','member')
                     ->whereIn('user_id',[$user->id])
                     ->where(['status' => 1,'status_admin' => 1])
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
@@ -83,7 +83,7 @@ class BlogannonceventeService
     {
         $blogannoncereseventes = HelpersService::helpersannonblogceteambyusercount($user)
             ->with(['blogannonceventes' => function ($q) use ($user){
-                $q->with('user','categoryannoncevente')
+                $q->with('user','categoryannoncevente','member')
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id])
                     ->orderBy('created_at','DESC')
@@ -98,7 +98,7 @@ class BlogannonceventeService
     {
         $blogannoncereseventes = HelpersService::helpersannonblogceteambyusercount($user)
             ->with(['blogannonceventes' => function ($q) use ($user,$categoryannoncevente){
-                $q->with('user','categoryannoncevente')
+                $q->with('user','categoryannoncevente','member')
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id])
                     ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])

@@ -17,8 +17,8 @@ class CreateContactusersadvertsTable extends Migration
             $table->id();
             $table->string('full_name')->nullable();
             $table->string('appointment_time')->nullable();
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
+            $table->string('email',200)->nullable();
+            $table->string('phone',100)->nullable();
             $table->string('ip')->nullable();
             $table->boolean('status')->nullable();
             $table->boolean('confirm_send')->nullable();
