@@ -132,8 +132,8 @@ class ProfileAccountUser extends Component {
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInUp",
-                            exit: "animated fadeOutDown"
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
                         },
                     });
                 setTimeout(() => {

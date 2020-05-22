@@ -102,8 +102,8 @@ class BlogannonceventesBycategoryvente extends Component {
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInDown",
-                            exit: "animated fadeOutUp"
+                            enter: "animate__animated animate__fadeInDown",
+                            exit: "animate__animated animate__fadeOutUp"
                         },
                     });
 
@@ -115,6 +115,14 @@ class BlogannonceventesBycategoryvente extends Component {
             }).catch(error => {
             this.setState({
                 errors: error.response.data.errors
+            });
+            $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
+                allow_dismiss: false,
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
             });
         })
     }
@@ -163,8 +171,8 @@ class BlogannonceventesBycategoryvente extends Component {
                     $.notify("Ooop! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -204,8 +212,8 @@ class BlogannonceventesBycategoryvente extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -216,8 +224,8 @@ class BlogannonceventesBycategoryvente extends Component {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })

@@ -111,8 +111,8 @@ class Annonceventebyannoncetypebycity extends Component {
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInDown",
-                            exit: "animated fadeOutUp"
+                            enter: "animate__animated animate__fadeInDown",
+                            exit: "animate__animated animate__fadeOutUp"
                         },
                     });
 
@@ -159,8 +159,8 @@ class Annonceventebyannoncetypebycity extends Component {
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInDown",
-                            exit: "animated fadeOutUp"
+                            enter: "animate__animated animate__fadeInDown",
+                            exit: "animate__animated animate__fadeOutUp"
                         },
                     });
 
@@ -230,8 +230,8 @@ class Annonceventebyannoncetypebycity extends Component {
                     $.notify("Ooop! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -272,8 +272,8 @@ class Annonceventebyannoncetypebycity extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -285,8 +285,8 @@ class Annonceventebyannoncetypebycity extends Component {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })

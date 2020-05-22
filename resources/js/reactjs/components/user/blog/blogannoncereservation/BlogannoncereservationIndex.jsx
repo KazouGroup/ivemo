@@ -103,8 +103,8 @@ class BlogannoncereservationIndex extends Component {
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInDown",
-                            exit: "animated fadeOutUp"
+                            enter: "animate__animated animate__fadeInDown",
+                            exit: "animate__animated animate__fadeOutUp"
                         },
                     });
 
@@ -116,6 +116,14 @@ class BlogannoncereservationIndex extends Component {
             }).catch(error => {
             this.setState({
                 errors: error.response.data.errors
+            });
+            $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
+                allow_dismiss: false,
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
             });
         })
     }
@@ -156,8 +164,8 @@ class BlogannoncereservationIndex extends Component {
                                 align: 'center'
                             },
                             animate: {
-                                enter: "animated fadeInUp",
-                                exit: "animated fadeOutDown"
+                                enter: "animate__animated animate__fadeInUp",
+                                exit: "animate__animated animate__fadeOutDown"
                             },
                         });
                     /** End alert ***/
@@ -166,8 +174,8 @@ class BlogannoncereservationIndex extends Component {
                     $.notify("Ooop! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -211,8 +219,8 @@ class BlogannoncereservationIndex extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -223,8 +231,8 @@ class BlogannoncereservationIndex extends Component {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
