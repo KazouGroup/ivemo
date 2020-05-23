@@ -15,10 +15,6 @@ class AnnonceventeInteresseList extends Component {
         }
     }
 
-    numberWithCommas() {
-        return this.props.price.toLocaleString();
-    }
-
     render() {
         return (
             <Fragment>
@@ -76,7 +72,7 @@ class AnnonceventeInteresseList extends Component {
                                             </div>
                                             <div className="text-right ml-auto">
                                                 <div className="col-md-12 col-12">
-                                                    <h5 className="text-success"><b>{this.numberWithCommas(this.props)} <small>FCFA/mois</small></b></h5>
+                                                    <h5 className="text-success"><b>{this.props.price.formatMoney(2,'.',',')} <small>FCFA/mois</small></b></h5>
                                                 </div>
 
                                             </div>

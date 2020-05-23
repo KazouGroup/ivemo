@@ -230,7 +230,7 @@ class Annoncelocationbycategorycityshow extends Component {
 
                                                 <div className="text-right ml-auto">
                                                     {annoncelocation.price ?
-                                                        <h5 className="text-success"><b>{annoncelocation.price} <small>FCFA/mois</small></b></h5>
+                                                        <h5 className="text-success"><b>{annoncelocation.price.formatMoney(2,'.',',')} <small>FCFA/mois</small></b></h5>
                                                         :
                                                         <h5 className="text-success"><b><Skeleton width={150} /></b></h5>
                                                     }

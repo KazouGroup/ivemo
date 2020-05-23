@@ -23,8 +23,20 @@ class EmployementShowUserSite extends Component {
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.phoneShow = this.phoneShow.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
+    }
+
+    phoneShow(employment){
+        Swal.fire({
+            title: `${employment.user.phone}`,
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-info",
+            confirmButtonText: 'Oui, Contacter',
+            reverseButtons: true,
+        })
+
     }
 
     signalerUser(id){
@@ -269,7 +281,7 @@ class EmployementShowUserSite extends Component {
                                                     <div className="text-right ml-auto">
 
                                                         {employment.price && (
-                                                            <h5 className="text-dark"><b>{employment.price} <small>FCFA</small></b></h5>
+                                                            <h5 className="text-dark"><b>{employment.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h5>
                                                         )}
 
                                                     </div>
@@ -313,11 +325,16 @@ class EmployementShowUserSite extends Component {
                                                     </div>
                                                     <div className="text-right ml-auto">
                                                         <UncontrolledTooltip placement="bottom" target="TooltipPhone">
-                                                            3425712192
+                                                            {employment.user.phone}
                                                         </UncontrolledTooltip>
-                                                        <Button className="btn btn-icon btn-sm btn-info" id="TooltipPhone">
+                                                        <Button className="btn btn-icon btn-sm btn-info" onClick={() => this.phoneShow(employment)} id="TooltipPhone">
                                                             <i className="now-ui-icons tech_mobile"/>
                                                         </Button>
+                                                        {employment.user.profile.site_internet && (
+                                                            <a href={`${employment.user.profile.site_internet}`} className="btn btn-icon btn-sm btn-primary" target="_banck">
+                                                                <i className="now-ui-icons objects_globe"/>
+                                                            </a>
+                                                        )}
                                                         <UncontrolledTooltip placement="bottom" target="TooltipSignale">
                                                             Signaler cette annonce
                                                         </UncontrolledTooltip>
@@ -325,11 +342,6 @@ class EmployementShowUserSite extends Component {
                                                                 className="btn btn-instagram btn-icon btn-sm">
                                                             <i className="far fa-flag"></i>
                                                         </Button>
-                                                        {employment.user.profile.site_internet && (
-                                                            <a href={`${employment.user.profile.site_internet}`} className="btn btn-icon btn-sm btn-primary" target="_banck">
-                                                                <i className="now-ui-icons objects_globe"/>
-                                                            </a>
-                                                        )}
 
                                                         {!$guest && (
                                                             <>
