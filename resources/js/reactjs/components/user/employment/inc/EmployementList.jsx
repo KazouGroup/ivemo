@@ -11,9 +11,6 @@ class EmployementList extends Component {
     getDescription() {
         return { __html: (this.props.description.length > 80 ? this.props.description.substring(0, 80) + "..." : this.props.description) };
     }
-    numberWithCommas() {
-        return this.props.price.toLocaleString();
-    }
     render() {
         return (
 
@@ -69,7 +66,7 @@ class EmployementList extends Component {
 
                                     <div className="text-right mx-auto">
                                         {this.props.price && (
-                                            <h5 className="text-dark"><b>{this.numberWithCommas()} <small>FCFA</small></b></h5>
+                                            <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h5>
                                         )}
 
                                         {/*
