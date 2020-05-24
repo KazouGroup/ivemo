@@ -125,6 +125,9 @@ import EmployementBycategoryemployementbycity
 import EmployementShowUserSite from "../components/user/employment/EmployementShowUserSite";
 import EmploymentEdit from "../components/user/employment/treatement/EmploymentEdit";
 import EmploymentCreate from "../components/user/employment/treatement/EmploymentCreate";
+import PrivateUserEmployments from "../components/user/profile/employments/private/PrivateUserEmployments";
+import PrivateUserEmploymentsByCategoryemployment
+    from "../components/user/profile/employments/private/PrivateUserEmploymentsByCategoryemployment";
 
 
 const RouteUser = props => (
@@ -216,6 +219,9 @@ const RouteUser = props => (
           <Route exact path="/profile/:user/personal_mails/contacts/" component={withRouter(PersonalmessagescontactUser)}/>
           <Route exact path="/profile/:user/personal_mails/contacts/:contactuser/" component={PersonalmessagescontactShowUser}/>
 
+
+          <Route exact path="/profile/:user/personal_settings/employments/" component={PrivateUserEmployments}/>
+          <Route exact path="/profile/:user/personal_settings/employments/:categoryemployment/" component={withRouter(PrivateUserEmploymentsByCategoryemployment)}/>
 
           <Route exact path="/profile/:user/personal_settings/subscriber_users/" component={SubscriberuserUserIndex}/>
 

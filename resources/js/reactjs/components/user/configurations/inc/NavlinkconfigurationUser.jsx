@@ -60,6 +60,30 @@ class NavlinkconfigurationUser extends Component {
                                 </div>
 
                                 <div className="card card-plain">
+                                    <div className="card-header" role="tab" id="headingAnnonceFRS">
+                                        <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseAnnonceFRS" aria-expanded="false" aria-controls="collapseAnnonceFRS">
+                                            <b>Toutes mes annonces Formations, services & recrutement</b>
+                                        </a>
+                                    </div>
+                                    <div id="collapseAnnonceFRS" className="collapse" role="tabpanel" aria-labelledby="headingAnnonceFRS">
+                                        <div className="card-body">
+                                            <table>
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <NavLink to={`/profile/${this.props.slug}/personal_settings/employments/`}>
+                                                            Formations service recrutement
+                                                        </NavLink>
+                                                    </td>
+                                                    <td className="text-right">{this.props.employments_count} {this.props.employments_count > 1 ? "annonces" : "annonce"}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="card card-plain">
                                     <div className="card-header" role="tab" id="headingArticle">
                                         <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseArticle" aria-expanded="false" aria-controls="collapseArticle">
                                             <b>Toutes mes articles</b>

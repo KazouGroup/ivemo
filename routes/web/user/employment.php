@@ -9,6 +9,16 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.employmentlugin_site');
 
     Route::get(
+        'profile/{user}/personal_settings/employments',
+        'EmploymentController@apiemploymentsbyuser'
+    )->name('api.employmentsbyuser_site');
+
+    Route::get(
+        'profile/{user}/personal_settings/employments/{categoryemployment}',
+        'EmploymentController@apiemploymentsbyusercategoryemployment'
+    )->name('api.employmentsbyuserbycategoryemployment_site');
+
+    Route::get(
         'categoryemployments_by_user',
         'EmploymentController@apicategoryemployments_by_user'
     )->name('api.categoryemployments_by_user_site');
@@ -25,6 +35,15 @@ Route::get(
     'EmploymentController@create'
 )->name('employmentabnew_site');
 
+Route::get(
+    'profile/{user}/personal_settings/employments',
+    'EmploymentController@employmentsbyuser'
+)->name('employmentsbyuser_site');
+
+Route::get(
+    'profile/{user}/personal_settings/employments/{categoryemployment}',
+    'EmploymentController@employmentsbyusercategoryemployment'
+)->name('employmentsbyuserbycategoryemployment_site');
 
 Route::post(
     'employment/save',

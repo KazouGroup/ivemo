@@ -133,6 +133,51 @@ class EmploymentService
         return $categoryemploymentsbycity;
     }
 
+    public static function apiemploymentsbyuser($user)
+    {
+        $employments = HelpersService::helpersannonceteamcount($user)
+            ->with(['employments' => function ($q) use ($user){
+                $q->with('user','city','categoryemployment','member')
+                    ->with(['user.profile' => function ($q){$q->distinct()->get();}])
+                    ->whereIn('user_id',[$user->id])
+                    ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
+                    ->whereHas('city', function ($q) {$q->where('status',1);})
+                    ->orderBy('created_at','DESC')
+                    ->distinct()->get();
+                },
+            ])->first();
+
+        return $employments;
+    }
+
+    public static function apiemploymentsbyusercategoryemployment($user,$categoryemployment)
+    {
+        $employments = HelpersService::helpersannonblogceteambyusercount($user)
+            ->with(['employments' => function ($q) use ($user,$categoryemployment){
+                $q->with('user','city','categoryemployment','member')
+                    ->with(['user.profile' => function ($q){$q->distinct()->get();}])
+                    ->whereIn('user_id',[$user->id])
+                    ->whereIn('categoryemployment_id',[$categoryemployment->id])
+                    ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
+                    ->whereHas('city', function ($q) {$q->where('status',1);})
+                    ->orderBy('created_at','DESC')
+                    ->distinct()->get();
+                },
+            ])->first();
+
+        return $employments;
+    }
+
+    public static function employmentsbyusersrcount($user)
+    {
+        $employments = employment::with('user','city','categoryemployment','member')
+            ->withCount('contactuseremployments')
+            ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->whereIn('user_id',[$user->id]);
+
+        return $employments;
+    }
 
     public static function storeUploadImage($request,$employment)
     {

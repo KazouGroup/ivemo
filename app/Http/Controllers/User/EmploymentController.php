@@ -10,6 +10,7 @@ use App\Http\Resources\EmploymentResource;
 use App\Model\categoryemployment;
 use App\Model\city;
 use App\Model\employment;
+use App\Model\user;
 use App\Services\EmploymentService;
 use Illuminate\Http\Request;
 use File;
@@ -25,7 +26,9 @@ class EmploymentController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','destroy','activated','unactivated'
+            'create','store','edit','update','destroy','activated','unactivated',
+            'apiemploymentsbyuser','employmentsbyuser','apiemploymentsbyusercategoryemployment',
+            'employmentsbyusercategoryemployment'
         ]]);
     }
     /**
@@ -57,6 +60,34 @@ class EmploymentController extends Controller
         return  view('user.employment.employmentshow',[
             'employment' => $employment
         ]);
+    }
+
+    public function employmentsbyuser(user $user)
+    {
+        $this->authorize('update',$user);
+
+        if (auth()->user()->id === $user->id){
+            return view('user.profile.employments.privateprofilemployments',[
+                'user' => auth()->user(),
+            ]);
+        }else{
+            abort(404);
+        }
+
+    }
+
+    public function employmentsbyusercategoryemployment(user $user)
+    {
+        $this->authorize('update',$user);
+
+        if (auth()->user()->id === $user->id){
+            return view('user.profile.employments.privateprofilemployments',[
+                'user' => auth()->user(),
+            ]);
+        }else{
+            abort(404);
+        }
+
     }
 
     /**
@@ -159,6 +190,32 @@ class EmploymentController extends Controller
         $categoryemploymentsbycity = EmploymentService::apiemploymentbycategorybycount($categoryemployment);
 
         return response()->json($categoryemploymentsbycity, 200);
+    }
+
+    public function apiemploymentsbyuser(user $user)
+    {
+        $this->authorize('update',$user);
+
+        if (auth()->user()->id === $user->id){
+
+            $data = EmploymentService::apiemploymentsbyuser($user);
+
+            return response()->json($data, 200);
+
+        }else{
+            return abort(404);
+        }
+
+    }
+
+    public function apiemploymentsbyusercategoryemployment(user $user,categoryemployment $categoryemployment)
+    {
+        $this->authorize('update',$user);
+
+        $employments = EmploymentService::apiemploymentsbyusercategoryemployment($user,$categoryemployment);
+
+        return response()->json($employments, 200);
+
     }
 
     public function apicategoryemployments_by_user()
