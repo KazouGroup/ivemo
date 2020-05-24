@@ -21,9 +21,10 @@ class Navemployements extends Component {
     }
 
     componentDidMount() {
-        setInterval(() => {
-            this.loadItems();
-        }, 10000);
+        this.loadItems();
+        //setInterval(() => {
+        //    this.loadItems();
+        //}, 10000);
     }
 
     getcountcategoryannonceString (employments_count) {
