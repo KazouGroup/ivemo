@@ -5,7 +5,7 @@ import moment from "moment";
 import LazyLoad from "react-lazyload";
 
 
-class PrivateUserBlogemployementList extends Component {
+class PrivateUserEmployementList extends Component {
 
 
     getDescription() {
@@ -42,7 +42,9 @@ class PrivateUserBlogemployementList extends Component {
                                 </div>
 
                                      <span className="title">
-                                         <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`} className="card-link"> {this.props.title} </a>
+                                         <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`} className="card-link">
+                                            {this.props.title.length > 90 ? this.props.title.substring(0, 90) + "..." : this.props.title} 
+                                          </a>
                                      </span>
                                     <br/>
                                     <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`}>
@@ -140,4 +142,4 @@ class PrivateUserBlogemployementList extends Component {
 
 }
 
-export default PrivateUserBlogemployementList;
+export default PrivateUserEmployementList;

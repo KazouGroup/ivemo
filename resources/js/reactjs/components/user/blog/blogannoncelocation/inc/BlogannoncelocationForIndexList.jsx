@@ -24,7 +24,7 @@ class BlogannoncelocationForIndexList extends Component {
                             <div className="col-md-8">
 
                                      <span className="title">
-                                         <a target="_blank" href={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="card-link"> {this.props.title} | </a>
+                                         <a target="_blank" href={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="card-link"> {this.props.title.length > 80 ? this.props.title.substring(0, 80) + "..." : this.props.title} | </a>
                                          <Link to={`/blogs/annonce_locations/${this.props.categoryannoncelocation.slug}/`}
                                                className={`btn btn-sm btn-${this.props.categoryannoncelocation.color_name}`}>
                                              {this.props.categoryannoncelocation.name}

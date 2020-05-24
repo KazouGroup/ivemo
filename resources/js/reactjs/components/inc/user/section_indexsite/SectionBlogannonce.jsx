@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link,NavLink } from 'react-router-dom';
+import {connect} from "react-redux";
 import LazyLoad from 'react-lazyload';
 import moment from "moment";
 
@@ -174,4 +175,12 @@ class SectionBlogannonce extends Component {
         )
     }
 }
-export default SectionBlogannonce;
+
+
+
+const mapStateToProps = state => {
+    return {
+        blogannoncereservations: state.blogannoncereservations
+    };
+};
+export default connect(mapStateToProps)(SectionBlogannonce);
