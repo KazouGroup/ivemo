@@ -5,13 +5,10 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StoreRequest;
 use App\Http\Resources\UserResource;
-use App\Model\blogannoncelocation;
-use App\Model\blogannoncereservation;
 use App\Model\contactuser;
 use App\Model\user;
-use App\Services\ContactuserService;
+use App\Services\Contactusers\ContactuserService;
 use App\Services\ProfileService;
-use Illuminate\Http\Request;
 
 class ProfilepublicController extends Controller
 {
@@ -100,6 +97,20 @@ class ProfilepublicController extends Controller
         $contactuser->user_id = $user->id;
 
         ContactuserService::newEmailToprofileUser($request,$user);
+
+        $contactuser->save();
+
+        return response()->json($contactuser,200);
+    }
+
+
+    public function public_profile_agences_send_message(StoreRequest $request)
+    {
+        $contactuser = new contactuser();
+
+        $slug = sha1(('YmdHis') . str_random(30));
+        $contactuser->fill($request->all());
+        $contactuser->slug = $slug;
 
         $contactuser->save();
 

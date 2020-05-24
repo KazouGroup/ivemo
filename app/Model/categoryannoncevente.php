@@ -22,11 +22,13 @@ class categoryannoncevente extends Model
         static::creating(function ($model){
             if (auth()->check()){
                 $model->user_id = auth()->id();
+                $model->slug = str_slug($model->name);
             }
         });
         static::updating(function($model){
             if (auth()->check()){
                 $model->user_id = auth()->id();
+                $model->slug = str_slug($model->name);
             }
         });
     }

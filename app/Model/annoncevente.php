@@ -54,6 +54,11 @@ class annoncevente extends Model
         return $this->belongsTo(annoncetype::class,'annoncetype_id');
     }
 
+    public function contactusersventes()
+    {
+        return $this->hasMany(contactusersvente::class, 'annoncevente_id');
+    }
+
     protected $casts = [
         'status' => 'boolean',
         'status_admin' => 'boolean',

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
+import NavannoncecategorySkeleton from "../../../../inc/user/NavannoncecategorySkeleton";
 
 
 class Categoriesannoncereservation extends Component {
@@ -29,6 +30,21 @@ class Categoriesannoncereservation extends Component {
 
     render() {
         const {categoryannoncereservations} = this.state;
+        const mapCategoryannoncereservations = categoryannoncereservations.length ? (
+            categoryannoncereservations.map(item => {
+                return(
+                    <tr key={item.id}>
+                        <td>
+                            <NavLink to={`/annonces_reservations/reservations/${item.slug}/`}>
+                                Reserver un(e) <b style={{ textTransform: "lowercase" }}>{item.name}</b>
+                            </NavLink>
+                        </td>
+                        <td className="text-right"> {this.getcountcategoryannonceString(item.annoncereservations_count)} annonces</td>
+                    </tr>               )
+            })
+        ):(
+            <NavannoncecategorySkeleton/>
+        );
         return (
 
 
@@ -44,16 +60,7 @@ class Categoriesannoncereservation extends Component {
                         <table>
                             <tbody>
 
-                            {categoryannoncereservations.map((item) => (
-                                <tr key={item.id}>
-                                    <td>
-                                        <NavLink to={`/annonces_reservations/reservations/${item.slug}/`}>
-                                            Reserver un(e) <strong>{item.name}</strong>
-                                        </NavLink>
-                                    </td>
-                                    <td className="text-right"> {this.getcountcategoryannonceString(item.annoncereservations_count)} annonces</td>
-                                </tr>
-                            ))}
+                            {mapCategoryannoncereservations}
 
                             </tbody>
                         </table>

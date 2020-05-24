@@ -117,6 +117,44 @@
                     </div>
                 </li>
                 <li>
+                    <a data-toggle="collapse" href="#pagesCategories">
+                        <i class="now-ui-icons text_bold"></i>
+                        <p>
+                            Categories
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse " id="pagesCategories">
+                        <ul class="nav">
+                            <li>
+                                <router-link :to="{ name: 'categories_faqs.index'}">
+                                    <span class="sidebar-mini-icon">CF</span>
+                                    <span class="sidebar-normal"> Category FAQS </span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{ name: 'categoryannoncelocations.index'}">
+                                    <span class="sidebar-mini-icon">CAL</span>
+                                    <span class="sidebar-normal"> category annonce locations </span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{ name: 'categoryannoncereservations.index'}">
+                                    <span class="sidebar-mini-icon">CAR</span>
+                                    <span class="sidebar-normal"> category annonce reservations </span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{name: 'categoryannonceventes.index'}">
+                                    <span class="sidebar-mini-icon">CAV</span>
+                                    <span class="sidebar-normal"> category annonce ventes </span>
+                                </router-link>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li>
                     <a href="../examples/widgets.html">
                         <i class="now-ui-icons objects_diamond"></i>
                         <p>Widgets</p>

@@ -11,6 +11,11 @@ Route::get(
 )->name('annonceventebyannoncetypes_site');
 
 Route::get(
+    'annonce_ventes/{annoncetype}/{city}',
+    'AnnonceventeController@annonceventesbyannoncetypebycity'
+)->name('annonceventesbyannoncetypebycity_site');
+
+Route::get(
     'annonces_ventes_active/{id}',
     'AnnonceventeController@activated'
 )->name('annonces_ventes_active.site');
@@ -41,12 +46,7 @@ Route::get(
 )->name('annoncesventesbyuser_site');
 
 Route::get(
-    'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}/{date}/{slug}',
+    'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}/{annoncevente}',
     'AnnonceventeController@annonceventebycategoryannonceventeslug'
 )->name('annonceventebycategoryannonceventeslug_site');
-
-Route::post(
-    'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}/{date}/{annoncevente}/send_contact_message_user',
-    'AnnonceventeController@sendcontactmessageuser'
-)->name('annonceventesendcontactmessageuser_site');
 

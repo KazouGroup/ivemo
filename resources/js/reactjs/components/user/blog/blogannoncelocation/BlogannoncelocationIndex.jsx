@@ -9,6 +9,8 @@ import Swal from "sweetalert2";
 import Navblogannoncelocations from "./inc/Navblogannoncelocations";
 import BlogannoncelocationList from "./BlogannoncelocationList";
 import Navlinknewblogannoncelocation from "./treatement/Navlinknewblogannoncelocation";
+import BlogannonceListSkeleton from "../../../inc/user/blog/BlogannonceListSkeleton";
+import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -149,20 +151,19 @@ class BlogannoncelocationIndex extends Component {
         const mapAnnoncelocations = blogannoncelocations.length ? (
             blogannoncelocations.map(item => {
                 return(
+
                     <BlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
                 )
             })
         ):(
-            <></>
+            <BlogannonceListSkeleton/>
         );
         return (
             <>
-                <Helmet>
-                    <title>Conseils tout savoir sur les locations - Ivemo</title>
-                </Helmet>
+
+                <Helmet title="Conseils tout savoir sur les locations - Ivemo" />
 
                 <div className="landing-page sidebar-collapse">
-
 
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400" >
                         <NavUserSite />
@@ -194,6 +195,13 @@ class BlogannoncelocationIndex extends Component {
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
 
                                         {mapAnnoncelocations}
 

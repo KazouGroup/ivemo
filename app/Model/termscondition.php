@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class termscondition extends Model implements Auditable
+class termscondition extends Model
 {
-    use AuditableTrait;
+    //use AuditableTrait;
     protected $fillable = ['title','body','slug','status'];
 
     protected $table = 'terms_conditions';

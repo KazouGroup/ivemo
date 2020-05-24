@@ -11,10 +11,13 @@ use App\Model\contactuser;
 use App\model\profile;
 use App\Model\reservation;
 use App\Model\user;
+use App\Services\HelpersService;
 use App\Services\ProfileService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpFoundation\Response;
+use File;
 
 class ProfileController extends Controller
 {
@@ -40,11 +43,7 @@ class ProfileController extends Controller
 
     public function api_user_account(user $user)
     {
-       $user = user::whereSlug($user->slug)
-            ->withCount(['contactusers' => function ($q){
-                $q->where('status_red',1);
-            }])
-            ->first();
+       $user = HelpersService::helperscontactuserscount($user)->first();
 
         return response()->json($user, 200);
 
@@ -108,45 +107,6 @@ class ProfileController extends Controller
 
     }
 
-    public function apipersonalmessagescontacts(user $user)
-    {
-
-        if (auth()->user()->id === $user->id){
-
-            $contactusers = user::whereSlug($user->slug)
-                ->with(['contactusers' => function ($q) use ($user){
-                    $q->whereIn('user_id',[$user->id])
-                        ->distinct()->get()->toArray()
-                    ;},
-                ])
-                ->withCount(['contactusers' => function ($q){
-                    $q->where('status_red',1);
-                }])
-                ->first();
-
-            return response()->json($contactusers, 200);
-        }else{
-            return redirect()->back();
-        }
-
-    }
-
-    public function apipersonalmessagescontactsshow(user $user,contactuser $contactuser)
-    {
-        $this->authorize('update',$contactuser);
-
-        $contactusers = contactuser::with('user')->whereSlug($contactuser->slug)->first();
-
-
-        return response()->json($contactusers, 200);
-    }
-
-    public function apipersonalmessagesannonces_locations_show($user,contactuser $contactuser)
-    {
-        $contactusers = ProfileService::apipersonalmessagesannonces_locations_show($contactuser);
-
-        return response()->json($contactusers, 200);
-    }
 
     public function api_user_profile_account($user)
     {
@@ -176,19 +136,6 @@ class ProfileController extends Controller
             }])->first();
 
         return response()->json($user, 200);
-    }
-
-    public function apipersonalmessagesannonces_locations(user $user)
-    {
-        if (auth()->user()->id === $user->id){
-
-            $contactusers = ProfileService::apipersonalmessagesannonces_locations($user);
-
-            return response()->json($contactusers, 200);
-        }else{
-            abort(404);
-        }
-
     }
 
     public function apipersonalmessagesannonces_reservations()
@@ -249,12 +196,6 @@ class ProfileController extends Controller
            ]);
     }
 
-    public function personalmessagesannonces_locations(user $user)
-    {
-         return view('user.profile.contactuser.personal_mailannonces_locations',[
-             'user' => auth()->user()
-             ]);
-    }
 
      public function personalmessagesannonces_locations_show(contactuser $contactuser)
     {
@@ -264,41 +205,6 @@ class ProfileController extends Controller
              'user' => auth()->user(),
              'contactuser' => $contactuser
              ]);
-    }
-
-     public function personalmessagescontacts(user $user)
-    {
-        if (auth()->user()->id === $user->id){
-            return view('user.profile.contactuser.personal_mailcontacts',[
-                'user' => auth()->user()
-            ]);
-        }else{
-            return abort(404);
-        }
-
-    }
-
-     public function personalmessagescontactsshow($user,contactuser $contactuser)
-    {
-        $this->authorize('update',$contactuser);
-
-         return view('user.profile.contactuser.personal_mailcontacts_show',[
-             'user' => auth()->user(),
-             'contactuser' => $contactuser
-             ]);
-    }
-
-
-    public function personalmessagescontactsactive($id)
-    {
-         $contactuser = contactuser::where('id', $id)->findOrFail($id);
-
-        $this->authorize('update',$contactuser);
-
-         if(auth()->user()->id === $contactuser->user_id){
-          $contactuser->update([ 'status_red' => 0,]);
-          return response('read confirmed',Response::HTTP_ACCEPTED);
-         }
     }
 
     public function api_profile_add_info_account(profile $profile)
@@ -329,19 +235,69 @@ class ProfileController extends Controller
     public function profile_account_update(UpdateRequest $request)
     {
         $user = auth()->user();
+        /**
+         * Avatr image upload
+         */
+        $currentPhoto = $user->avatar;
+        if ($request->avatar != $currentPhoto){
 
-        $data = $user->update($request->only(
+            $namefile = sha1(date('YmdHis') . str_random(30));
+            $name = $namefile .'.' . explode('/',explode(':',substr($request->avatar,0,strpos
+                ($request->avatar,';')))[1])[1];
+
+            $dir = 'assets/img/avatars/user/';
+            if(!file_exists($dir)){
+                mkdir($dir, 0775, true);
+            }
+            Image::make($request->avatar)->fit(200,123)->save(public_path('assets/img/avatars/user/').$name);
+
+
+            $request->merge(['avatar' =>  "/assets/img/avatars/user/{$name}"]);
+
+            // Ici on suprimme l'image existant
+            $oldFilename = $currentPhoto;
+            File::delete(public_path($oldFilename));
+        }
+
+        /**
+         * Coverpage Uploade
+         */
+        $currentCoverPhoto = $user->avatarcover;
+        if ($request->avatarcover != $currentCoverPhoto){
+
+            $namefile = sha1(date('YmdHis') . str_random(30));
+            $name = $namefile .'.' . explode('/',explode(':',substr($request->avatarcover,0,strpos
+                ($request->avatarcover,';')))[1])[1];
+
+            $dir = 'assets/img/avatarcovers/user/';
+            if(!file_exists($dir)){
+                mkdir($dir, 0775, true);
+            }
+            Image::make($request->avatarcover)->fit(1400,400)->save(public_path('assets/img/avatarcovers/user/').$name);
+
+
+            $request->merge(['avatarcover' =>  "/assets/img/avatarcovers/user/{$name}"]);
+
+            // Ici on suprimme l'image existant
+            $oldCoverFilename = $currentCoverPhoto;
+            File::delete(public_path($oldCoverFilename));
+        }
+
+        $user->update($request->only(
             'first_name',
             'last_name',
             'email',
             'slug',
             'username',
+            'avatar',
+            'avatarcover',
             'phone',
             'categoryprofile_id',
             'sex',
             'color_name'
         ));
-        return response()->json($data,200);
+
+        return ['message' => 'profile has ben updated'];
 
     }
 
@@ -400,24 +356,21 @@ class ProfileController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array|\Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function profile_account_delete($id)
     {
-        //
+        $user = user::findOrFail($id);
+
+        if (auth()->user()->id === $user->id){
+            $oldFilename = $user->avatar;
+            File::delete(public_path($oldFilename));
+            $user->delete();
+            return ['message' => 'message deleted '];
+        }else{
+            abort(404);
+        }
+
     }
-
-    public function personalmessagesdelete(contactuser $contactuser,$id)
-     {
-         $contactuser = contactuser::findOrFail($id);
-         $this->authorize('update',$contactuser);
-         if (auth()->user()->id === $contactuser->user_id){
-             $contactuser->delete();
-             return ['message' => 'message deleted '];
-         }else{
-          abort(404);
-         }
-
-     }
 }
 

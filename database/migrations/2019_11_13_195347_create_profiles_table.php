@@ -20,6 +20,9 @@ class CreateProfilesTable extends Migration
             $table->string('instagram_link')->nullable();
             $table->string('site_internet')->nullable();
             $table->string('linkedin_link')->nullable();
+            $table->string('youtube_link')->nullable();
+            $table->boolean('status_avis')->default(true);
+            $table->boolean('status_team_user')->default(true);
             $table->unsignedBigInteger('birthdate')->nullable();
             $table->string('address')->nullable();
             $table->string('full_name')->nullable();
@@ -27,8 +30,11 @@ class CreateProfilesTable extends Migration
             $table->longText('description')->nullable();
             $table->timestamps();
 
-            $table->unsignedBigInteger('user_id')->index();
             $table->unsignedBigInteger('city_id')->nullable()->index();
+            $table->unsignedBigInteger('categoryprofile_id')->nullable()->index();
+
+            $table->unsignedBigInteger('user_id')->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

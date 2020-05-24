@@ -6,7 +6,9 @@ import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import AnnoncereservationList from "./inc/AnnoncereservationList";
 import PropTypes from "prop-types";
-import Navtabscategoryreservation from "./inc/Navtabscategoryreservation";
+import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
+import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
+import Categoriesannoncereservation from "./inc/Categoriesannoncereservation";
 
 
 class Annoncebycategoryannoncereservation extends Component {
@@ -15,14 +17,16 @@ class Annoncebycategoryannoncereservation extends Component {
         this.state = {
             annoncereservationbycategory: {annoncereservations:[]},
             citiesannoncesreservations: [],
+            isLoading: false,
         }
     }
 
     loadItem(){
+        this.setState({ isLoading: true });
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
         let url = route('api.annoncelocationbycategoryannoncereservations_site',[itemannoncetype,itemCategoryannoncereservation]);
-        dyaxios.get(url).then(response => this.setState({annoncereservationbycategory: response.data,}));
+        dyaxios.get(url).then(response => this.setState({annoncereservationbycategory: response.data,isLoading: false,}));
         fetch(route('api.annoncereservationbycategorycount_site',[itemCategoryannoncereservation])).then(res => res.json()).then((result) => {
             this.setState({
                 citiesannoncesreservations: [...result]
@@ -47,9 +51,18 @@ class Annoncebycategoryannoncereservation extends Component {
     }
 
     render() {
-        const {annoncereservationbycategory,citiesannoncesreservations} = this.state;
+        const {annoncereservationbycategory,citiesannoncesreservations,isLoading} = this.state;
         const allannoncereservationsbycategory = annoncereservationbycategory.annoncereservations;
         const annoncetype = this.props.match.params.annoncetype;
+        const mapAnnoncereservations = isLoading ? (
+            <AnnoncesListSkeleton/>
+        ):(
+            allannoncereservationsbycategory.map(item => {
+                return(
+                    <AnnoncereservationList key={item.id} {...item} />
+                )
+            })
+        );
         return (
             <>
                 <Helmet>
@@ -76,13 +89,13 @@ class Annoncebycategoryannoncereservation extends Component {
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
-
-                                       <Navtabscategoryreservation/>
+                                        <div className="submit text-left">
+                                            <Link to={`/annonces_reservations/reservations/`} >
+                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos annonces </b>
+                                            </Link>
+                                        </div>
                                         <br/>
-
-                                        {allannoncereservationsbycategory.map((item) => (
-                                            <AnnoncereservationList key={item.id} {...item} />
-                                        ))}
+                                        {mapAnnoncereservations}
 
                                     </div>
 
@@ -115,16 +128,18 @@ class Annoncebycategoryannoncereservation extends Component {
                                                                         <table>
                                                                             <tbody>
 
-                                                                            {citiesannoncesreservations.map((item) => (
-                                                                                <tr key={item.id}>
-                                                                                    <td>
-                                                                                        <NavLink to={`/annonces_reservations/${annoncetype}/${annoncereservationbycategory.slug}/${item.slug}/`}>
-                                                                                            Reserver un(e) <strong>{annoncereservationbycategory.name}</strong> à <strong> {item.name}</strong>
-                                                                                        </NavLink>
-                                                                                    </td>
-                                                                                    <td className="text-right"> {this.getcountcategoryannonceString(item.annoncereservations_count)} annonces</td>
-                                                                                </tr>
-                                                                            ))}
+                                                                            {citiesannoncesreservations.length ?
+                                                                                <>  {citiesannoncesreservations.map((item) => (
+                                                                                    <tr key={item.id}>
+                                                                                        <td>
+                                                                                            <NavLink to={`/annonces_reservations/${annoncetype}/${annoncereservationbycategory.slug}/${item.slug}/`}>
+                                                                                                Reserver un(e) <b style={{ textTransform: "lowercase" }}>{annoncereservationbycategory.name}</b> à <strong> {item.name}</strong>
+                                                                                            </NavLink>
+                                                                                        </td>
+                                                                                        <td className="text-right"> {this.getcountcategoryannonceString(item.annoncereservations_count)} annonces</td>
+                                                                                    </tr>
+                                                                                ))}
+                                                                                </>: <NavannoncecategorySkeleton/>}
 
                                                                             </tbody>
                                                                         </table>
@@ -132,6 +147,8 @@ class Annoncebycategoryannoncereservation extends Component {
                                                                 </div>
 
                                                             </div>
+
+                                                            <Categoriesannoncereservation/>
 
                                                         </div>
                                                     </div>

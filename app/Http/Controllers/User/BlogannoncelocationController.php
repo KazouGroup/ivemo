@@ -24,7 +24,8 @@ class BlogannoncelocationController extends Controller
     {
         $this->middleware('auth',['only' => [
             'create','store','edit','update','destroy','show','activated','unactivated',
-            'apiblogannonceslocationsbyuser', 'blogannonceslocationsbyuser'
+            'apiblogannonceslocationsbyuser', 'blogannonceslocationsbyuser',
+            'blogannonceslocationscategoryannoncelocationbyuser','apiblogannonceslocationscategoryannoncelocationbyuser'
         ]]);
     }
 
@@ -70,6 +71,18 @@ class BlogannoncelocationController extends Controller
 
     }
 
+    public function apiblogannonceslocationscategoryannoncelocationbyuser(user $user,categoryannoncelocation $categoryannoncelocation)
+    {
+        if (auth()->user()->id === $user->id){
+            $blogannoncelocations = BlogannoncelocationService::apiblogannonceslocationscategoryannoncelocationbyuser($user,$categoryannoncelocation);
+
+            return response()->json($blogannoncelocations, 200);
+        }else{
+            abort(404);
+        }
+
+    }
+
     public function blogannonceslocationsbyuser(user $user)
     {
         if (auth()->user()->id === $user->id){
@@ -90,7 +103,6 @@ class BlogannoncelocationController extends Controller
         return response()->json($blogannoncelocation, 200);
     }
 
-
     public function apiblogsannoncereservationspublique(user $user)
     {
         $blogannoncelocations = blogannoncelocation::whereIn('user_id',[$user->id])
@@ -104,6 +116,13 @@ class BlogannoncelocationController extends Controller
     }
 
     public function annonceblogcategorylocation(categoryannoncelocation $categoryannoncelocation)
+    {
+        return view('user.blogs.blogannoncelocation.category',[
+            'categoryannoncelocation' => $categoryannoncelocation,
+        ]);
+    }
+
+    public function blogannonceslocationscategoryannoncelocationbyuser(user $user,categoryannoncelocation $categoryannoncelocation)
     {
         return view('user.blogs.blogannoncelocation.category',[
             'categoryannoncelocation' => $categoryannoncelocation,

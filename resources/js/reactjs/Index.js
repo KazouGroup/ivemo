@@ -3,12 +3,12 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Route} from 'react-router-dom';
 import RouteUser from "./router/RouteUser";
-import {dyaxios} from "../vuejs/axios"
+import "../vuejs/axios"
 import 'animate.css/animate.css';
-import 'datatables.net-autofill-bs4';
 import {createStore} from "redux";
 import {Provider} from "react-redux";
 import rootReducers from "./reducers/rootReducers";
+import ScrollToTop from "./components/inc/user/ScrollToTop";
 
 const store = createStore(rootReducers);
 
@@ -17,6 +17,7 @@ class Index extends Component {
     render() {
         return (
             <BrowserRouter>
+                <ScrollToTop/>
                 <Route component={RouteUser} />
             </BrowserRouter>
         );

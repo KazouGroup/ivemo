@@ -6,6 +6,7 @@ import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import AnnonceventeList from "./inc/AnnonceventeList";
 import Categoriesannoncevente from "./inc/Categoriesannoncevente";
+import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 
 
 class AnnonceventeIndex extends Component {
@@ -29,6 +30,15 @@ class AnnonceventeIndex extends Component {
 
     render() {
         const {annonceventes} = this.state;
+        const mapAnnonceventes = annonceventes.length ? (
+            annonceventes.map(item => {
+                return(
+                    <AnnonceventeList key={item.id} {...item} />
+                )
+            })
+        ):(
+            <AnnoncesListSkeleton/>
+        );
         return (
             <>
                 <Helmet>
@@ -48,8 +58,13 @@ class AnnonceventeIndex extends Component {
                             </div>
                             <div className="content-center">
                                 <div className="row">
-                                    <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">Vendez un terrain, une maison, un appartement ou une boutique </h3>
+                                    <div className="col-md-10 ml-auto mr-auto">
+                                        <div className="text-center">
+                                            <h4 className="title">Vendre ou acheter des biens</h4>
+                                            <p className="description">
+                                                <b> Vendez un terrain, une maison, un appartement ou une boutique </b>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -68,9 +83,7 @@ class AnnonceventeIndex extends Component {
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
-                                        {annonceventes.map((item) => (
-                                            <AnnonceventeList key={item.id} {...item} />
-                                        ))}
+                                        {mapAnnonceventes}
 
                                     </div>
 

@@ -1,6 +1,6 @@
 @extends('inc.user.main')
 <?php $item = htmlspecialchars(config('app.name'));?>
-@section('title', $city->name.' - '.$item)
+@section('title', "Reservation ".$categoryannoncereservation->name." dans la ville de ".$city->name.' - '.$item)
 
 @section('style')
 @endsection

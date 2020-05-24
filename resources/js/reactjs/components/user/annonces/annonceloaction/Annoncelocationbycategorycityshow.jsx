@@ -7,10 +7,9 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import FormcontactuseronlocationShow from "./inc/FormcontactuseronlocationShow";
 import BlogannoncelocationIntesseAnnonseShow from "../../blog/blogannoncelocation/BlogannoncelocationIntesseAnnonseShow";
 import Swal from "sweetalert2";
-import moment from "moment";
 import AnnoncelocationInteresse from "./AnnoncelocationInteresse";
 import ProfileForallAnnonceShow from "../ProfileForallAnnonceShow";
-import BlogannoncelocationList from "../../blog/blogannoncelocation/BlogannoncelocationList";
+import Skeleton from "react-loading-skeleton";
 
 
 class Annoncelocationbycategorycityshow extends Component {
@@ -132,9 +131,8 @@ class Annoncelocationbycategorycityshow extends Component {
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let itemCity = this.props.match.params.city;
-        let itemdate = this.props.match.params.date;
         let itemannoncelocation = this.props.match.params.annoncelocation;
-        let url = route('api.annoncelocationbycategoryannoncelocationslug_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemdate,itemannoncelocation]);
+        let url = route('api.annoncelocationbycategoryannoncelocationslug_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemannoncelocation]);
         dyaxios.get(url).then(response => this.setState({annoncelocation: response.data,}));
     }
 
@@ -146,9 +144,7 @@ class Annoncelocationbycategorycityshow extends Component {
         const {annoncelocation} = this.state;
         return (
             <>
-                <Helmet>
-                    <title>{`${annoncelocation.title || "Ivemo"}`} - Ivemo</title>
-                </Helmet>
+                <Helmet title={`${annoncelocation.title || "Ivemo"} - Ivemo`}/>
 
                 <div className="landing-page sidebar-collapse">
 
@@ -203,14 +199,21 @@ class Annoncelocationbycategorycityshow extends Component {
                                             <br />
                                             <div className="d-flex align-items-center">
                                                 <div className="text-left pull-left">
-                                                    <h6 className={`text-${annoncelocation.categoryannoncelocation.color_name} ml-auto mr-auto`}>
-                                                        {annoncelocation.categoryannoncelocation.name}
-                                                    </h6>
+                                                    {annoncelocation.categoryannoncelocation.name ?
+                                                        <h6 className={`text-${annoncelocation.categoryannoncelocation.color_name} ml-auto mr-auto`}>
+                                                            {annoncelocation.categoryannoncelocation.name}
+                                                        </h6>
+                                                        :
+                                                        <h6 className={`ml-auto mr-auto`}>
+                                                            <Skeleton width={150} />
+                                                        </h6>
+                                                    }
                                                 </div>
 
                                                 <div className="text-center ml-auto">
                                                     <h6 className="text-dark">{annoncelocation.pieces} p . {annoncelocation.rooms && (<>{annoncelocation.rooms} ch</>)}. {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
                                                 </div>
+
 
                                                 {/*
                                                   <div className="text-center ml-auto">
@@ -222,7 +225,11 @@ class Annoncelocationbycategorycityshow extends Component {
 
 
                                                 <div className="text-right ml-auto">
-                                                    <h5 className="text-success"><b>{annoncelocation.price} <small>FCFA/mois</small></b></h5>
+                                                    {annoncelocation.price ?
+                                                        <h5 className="text-success"><b>{annoncelocation.price} <small>FCFA/mois</small></b></h5>
+                                                        :
+                                                        <h5 className="text-success"><b><Skeleton width={150} /></b></h5>
+                                                    }
                                                 </div>
                                             </div>
 
@@ -336,7 +343,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                             <hr />
                                                             <div className="card-header text-center">
                                                                 <div className="card-title">
-                                                                    Contacter <b>{annoncelocation.user.first_name} </b>
+                                                                    Contacter <b>{annoncelocation.user.first_name}</b> pour ce bien
                                                                 </div>
                                                             </div>
 
@@ -359,12 +366,7 @@ class Annoncelocationbycategorycityshow extends Component {
 
                             </div>
 
-
-
                         </div>
-
-
-
 
                         <FooterBigUserSite />
                     </div>

@@ -21,7 +21,6 @@ require(__DIR__ . DIRECTORY_SEPARATOR . 'web' . DIRECTORY_SEPARATOR . 'index.php
 
 /** Auth */
 Auth::routes(['verify' => true]);
-require(__DIR__ . DIRECTORY_SEPARATOR . 'web' .DIRECTORY_SEPARATOR . 'auth' . DIRECTORY_SEPARATOR . 'index.php');
 
 
 Route::get('/home', 'HomeController@index')->name('home');

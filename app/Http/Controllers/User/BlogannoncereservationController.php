@@ -24,7 +24,9 @@ class BlogannoncereservationController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','destroy','activated','unactivated','apiblogannoncesreservationsbyuser','blogannoncesreservationsbyuser'
+            'create','store','edit','update','destroy','activated',
+            'unactivated','apiblogannoncesreservationsbyuser','blogannoncesreservationsbyuser',
+            'apiblogannoncesreservationscategoryannoncereservationbyuser','blogannoncesreservationscategoryannoncereservationbyuser'
         ]]);
     }
 
@@ -100,6 +102,18 @@ class BlogannoncereservationController extends Controller
 
     }
 
+    public function apiblogannoncesreservationscategoryannoncereservationbyuser(user $user,categoryannoncereservation $categoryannoncereservation)
+    {
+        if (auth()->user()->id === $user->id){
+            $blogannoncereservations = BlogannoncereservationService::apiblogannoncesreservationscategoryannoncereservationbyuser($user,$categoryannoncereservation);
+
+            return response()->json($blogannoncereservations, 200);
+        }else{
+            abort(404);
+        }
+
+    }
+
     public function blogannoncesreservationsbyuser(user $user)
     {
         if (auth()->user()->id === $user->id){
@@ -119,6 +133,13 @@ class BlogannoncereservationController extends Controller
     }
 
     public function annonceblogcategoryreservation(categoryannoncereservation $categoryannoncereservation)
+    {
+       return view('user.blogs.blogannoncereservation.category',[
+             'categoryannoncereservation' => $categoryannoncereservation,
+        ]);
+    }
+
+    public function blogannoncesreservationscategoryannoncereservationbyuser(user $user,categoryannoncereservation $categoryannoncereservation)
     {
        return view('user.blogs.blogannoncereservation.category',[
              'categoryannoncereservation' => $categoryannoncereservation,

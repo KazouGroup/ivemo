@@ -2,17 +2,19 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import {Button, CardBody, Row} from "reactstrap";
+import {Button, CardBody, Row, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import './ProfileAccountUser.css';
 import NavProfileAccountPrivate from "./NavProfileAccountPrivate";
+import Swal from "sweetalert2";
 
 
 class ProfileAccountUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: '',
             username: '',
             first_name: '',
             last_name: '',
@@ -27,10 +29,14 @@ class ProfileAccountUser extends Component {
             categoryprofiles: [],
             errors: [],
             showDefaultImage: false,
+            showDefaultavatarcoverImage: false,
         };
         this.saveItem = this.saveItem.bind(this);
-        this.updateImage = this.updateImage.bind(this);
-        this.removeImage = this.removeImage.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
+        this.updateavatarImage = this.updateavatarImage.bind(this);
+        this.updateavatacoverImage = this.updateavatacoverImage.bind(this);
+        this.removeavatarImage = this.removeavatarImage.bind(this);
+        this.removeavatarcoverImage = this.removeavatarcoverImage.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
@@ -57,8 +63,9 @@ class ProfileAccountUser extends Component {
             )
         }
     }
+
     // Handle Upload Image
-    updateImage(e) {
+    updateavatarImage(e) {
         e.preventDefault();
         let reader = new FileReader();
         let file = e.target.files[0];
@@ -68,9 +75,28 @@ class ProfileAccountUser extends Component {
         };
         reader.readAsDataURL(file)
     }
-    removeImage(e) {
+
+    // Handle Upload Image
+    updateavatacoverImage(e) {
+        e.preventDefault();
+        let reader = new FileReader();
+        let file = e.target.files[0];
+        reader.onloadend = (file) => {
+            this.setState({ file: file, avatarcover: reader.result, showDefaultImage: false });
+            document.querySelector('.kazouImageCarousel-file-upload').classList.remove('is-invalid');
+        };
+        reader.readAsDataURL(file)
+    }
+
+    removeavatarImage(e) {
         e.preventDefault();
         this.setState({ file: '', avatar: '', showDefaultImage: true });
+        document.querySelector('.kazouImageCarousel-file-upload').classList.add('is-invalid');
+    }
+
+    removeavatarcoverImage(e) {
+        e.preventDefault();
+        this.setState({ file: '', avatarcover: '', showDefaultavatarcoverImage: true });
         document.querySelector('.kazouImageCarousel-file-upload').classList.add('is-invalid');
     }
 
@@ -118,10 +144,35 @@ class ProfileAccountUser extends Component {
             })
     }
 
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression de mon profile?',
+            text: "êtes-vous sûr de vouloir executer cette action",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                const url = route('profile_add_info_account_delete.site', id);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+                    window.location.reload()
+                })
+            }
+        });
+    }
+
     loadItem() {
         dyaxios.get(route('api.categoryprofiles')).then(response => this.setState({ categoryprofiles: response.data, }));
         dyaxios.get(route('api_profile_account.site')).then(response =>
             this.setState({
+                id: response.data.id,
                 username: response.data.username,
                 first_name: response.data.first_name,
                 last_name: response.data.last_name,
@@ -142,7 +193,7 @@ class ProfileAccountUser extends Component {
     }
 
     render() {
-        const { categoryprofiles,avatar } = this.state;
+        const { categoryprofiles,avatar,avatarcover} = this.state;
         return (
 
             <>
@@ -281,39 +332,41 @@ class ProfileAccountUser extends Component {
 
                                                     </div>
 
-                                                    {/*
-
                                                     <Row>
-                                                        <div className="col-md-8">
-                                                            <div className="profile text-center">
-                                                                <label><b>Couverture</b></label>
-                                                                <img src={this.state.showDefaultImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : avatar} alt={$userIvemo.first_name}/>
-                                                                <input id="avatar" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('avatar') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="avatar"/>
+                                                        <div className="col-md-6">
+                                                            <div className="text-center">
+                                                                <img src={this.state.showDefaultImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : avatar} alt={'avatar'} />
+                                                                <input id="avatar" type="file" onChange={this.updateavatarImage} className={`form-control ${this.hasErrorFor('avatar') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="avatar" />
                                                                 {this.renderErrorFor('avatar')}
-                                                                <label htmlFor="avatar" className="btn btn-primary">
-                                                                    <span className="btn-inner--text">Ajouter l'image</span>
-                                                                </label>
-                                                                <button hidden={this.state.showDefaultImage ? true : false} onClick={this.removeImage} className="btn btn-danger">
-                                                                    <span className="btn-inner--text">Remove</span>
-                                                                </button>
+                                                                <div className="text-center">
+                                                                    <label htmlFor="avatar" className="btn btn-primary">
+                                                                        <span className="btn-inner--text">Modifier le profile</span>
+                                                                    </label>
+                                                                    <label hidden={this.state.showDefaultImage ? true : false} onClick={this.removeavatarImage} className="btn btn-danger">
+                                                                        <span className="btn-inner--text">Enlever</span>
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-4">
-                                                            <div className="profile text-center">
-                                                                <label><b>Avavtar</b></label>
-                                                                <img src={this.state.showDefaultImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : avatar} alt={$userIvemo.first_name}/>
-                                                                <input id="avatar" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('avatar') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="avatar"/>
-                                                                {this.renderErrorFor('avatar')}
-                                                                <label htmlFor="avatar" className="btn btn-primary">
-                                                                    <span className="btn-inner--text">Ajouter l'image</span>
-                                                                </label>
-                                                                <button hidden={this.state.showDefaultImage ? true : false} onClick={this.removeImage} className="btn btn-danger">
-                                                                    <span className="btn-inner--text">Remove</span>
-                                                                </button>
+                                                        <div className="col-md-6">
+
+                                                            <div className="text-center">
+                                                                <img src={this.state.showDefaultavatarcoverImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : avatarcover} alt={'avatarcover'} />
+                                                                <input id="avatarcover" type="file" onChange={this.updateavatacoverImage} className={`form-control ${this.hasErrorFor('avatarcover') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="avatarcover" />
+                                                                {this.renderErrorFor('avatarcover')}
+                                                                <div className="text-center">
+                                                                    <label htmlFor="avatarcover" className="btn btn-primary">
+                                                                        <span className="btn-inner--text">Modifier la couverture</span>
+                                                                    </label>
+                                                                    <label hidden={this.state.showDefaultavatarcoverImage ? true : false} onClick={this.removeavatarcoverImage} className="btn btn-danger">
+                                                                        <span className="btn-inner--text">Enlever</span>
+                                                                    </label>
+                                                                </div>
                                                             </div>
+
                                                         </div>
                                                     </Row>
-                                                    */}
+
 
                                                     <div className="row">
                                                         <div className="col-md-6 col-6">
@@ -384,7 +437,7 @@ class ProfileAccountUser extends Component {
                                                             <label htmlFor="phone"><b>Pourquoi êtes-vous sur Ivemo ?</b></label>
                                                             <div className="form-group">
 
-                                                                <select value={this.state.categoryprofile_id} className={`form-control ${this.hasErrorFor('categoryprofile_id') ? 'is-invalid' : ''}`}
+                                                                <select value={this.state.categoryprofile_id || ''} className={`form-control ${this.hasErrorFor('categoryprofile_id') ? 'is-invalid' : ''}`}
                                                                         onChange={this.handleFieldChange} name="categoryprofile_id" required="required">
                                                                     <option value="" disabled>Pourquoi êtes-vous sur Ivemo</option>
                                                                     {categoryprofiles.map((item) => (
@@ -400,8 +453,7 @@ class ProfileAccountUser extends Component {
 
 
                                                     <div className="submit text-center">
-                                                        <button className="btn btn-primary btn-round" type="submit">
-                                                            <i className="now-ui-icons ui-1_check"/>
+                                                        <button className="btn btn-primary" type="submit">
                                                             <b>Enregistrer</b>
                                                         </button>
                                                     </div>
@@ -409,6 +461,12 @@ class ProfileAccountUser extends Component {
 
                                             </div>
 
+                                            <Button onClick={() => this.deleteItem(this.state.id)} className="btn btn-outline-danger pull-right"  id="TooltipDelete">
+                                                <i className="far fa-trash-alt"/> Supprimer le profile
+                                            </Button>{" "}
+                                            <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
+                                                Supprimer mon profile
+                                            </UncontrolledTooltip>
                                         </div>
 
 

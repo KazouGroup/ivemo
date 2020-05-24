@@ -24,7 +24,8 @@ class BlogannonceventeController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','destroy','activated','unactivated','apiblogannoncesventesbyuser','blogannoncesventesbyuser'
+            'create','store','edit','update','destroy','activated','unactivated','apiblogannoncesventesbyuser',
+            'apiblogannoncesventescategoryannonceventebyuser','blogannoncesventesbyuser','blogannoncesventescategoryannonceventebyuser'
         ]]);
     }
 
@@ -47,6 +48,13 @@ class BlogannonceventeController extends Controller
     public function apiannonceblogcategoryvente(categoryannoncevente $categoryannoncevente)
     {
         $blogannoncereseventes = BlogannonceventeService::apiannonceblogcategoryvente($categoryannoncevente);
+
+        return response()->json($blogannoncereseventes, 200);
+    }
+
+    public function apiblogannoncesventescategoryannonceventebyuser(user $user,categoryannoncevente $categoryannoncevente)
+    {
+        $blogannoncereseventes = BlogannonceventeService::apiblogannoncesventescategoryannonceventebyuser($user,$categoryannoncevente);
 
         return response()->json($blogannoncereseventes, 200);
     }
@@ -106,12 +114,28 @@ class BlogannonceventeController extends Controller
 
     }
 
+
     public function blogannoncesventesbyuser(user $user)
     {
         if (auth()->user()->id === $user->id){
 
             return view('user.blogs.blogannoncevente.blogannoncesreservationsbyuser',[
                 'user' => auth()->user(),
+            ]);
+        }else{
+            abort(404);
+        }
+
+    }
+
+
+    public function blogannoncesventescategoryannonceventebyuser(user $user,categoryannoncevente $categoryannoncevente)
+    {
+        if (auth()->user()->id === $user->id){
+
+            return view('user.blogs.blogannoncevente.blogannoncesventescategoryannonceventebyuser',[
+                'user' => auth()->user(),
+                'categoryannoncevente' => $categoryannoncevente,
             ]);
         }else{
             abort(404);

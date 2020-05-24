@@ -11,6 +11,11 @@ Route::get(
 )->name('annoncelocationbyannoncetypes_site');
 
 Route::get(
+    'annonce_locations/{annoncetype}/{city}',
+    'AnnoncelocationController@annoncelocationsbyannoncetypebycity'
+)->name('annoncelocationsbyannoncetypebycity_site');
+
+Route::get(
     'annonces_locations/{annoncetype}/{categoryannoncelocation}',
     'AnnoncelocationController@annoncelocationbycategoryannoncelocation'
 )->name('annoncelocationbycategoryannoncelocations_site');
@@ -31,14 +36,9 @@ Route::get(
 )->name('annoncelocationbycities_site');
 
 Route::get(
-    'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}/{date}/{annoncelocation}',
+    'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}/{annoncelocation}',
     'AnnoncelocationController@annoncelocationbycategoryannoncelocationslug'
 )->name('annoncelocationbycategoryannoncereservationslug_site');
-
-Route::post(
-    'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}/{date}/{annoncelocation}/send_contact_message_user',
-    'AnnoncelocationController@sendcontactmessageuser'
-)->name('annoncelocationsendcontactmessageuser_site');
 
 Route::get(
     'annonces_locations_active/{id}',

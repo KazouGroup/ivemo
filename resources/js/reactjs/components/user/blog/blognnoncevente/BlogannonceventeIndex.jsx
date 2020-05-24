@@ -9,6 +9,8 @@ import Swal from "sweetalert2";
 import Navblogannonceventes from "./inc/Navblogannonceventes";
 import BlogannonceventeList from "./BlogannonceventeList";
 import Navlinknewblogannoncevente from "./treatement/Navlinknewblogannoncevente";
+import BlogannonceListSkeleton from "../../../inc/user/blog/BlogannonceListSkeleton";
+import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -17,6 +19,7 @@ class BlogannonceventeIndex extends Component {
         super(props);
         this.state = {
             blogannonceventes:{categoryannoncevente:[],user:[]},
+            isLoading: false,
 
         };
 
@@ -138,14 +141,16 @@ class BlogannonceventeIndex extends Component {
     }
 
     componentDidMount() {
+        this.setState({ isLoading: true });
         dyaxios.get(route('api.blogannonceventes_site')).then(response =>
             this.setState({
                 blogannonceventes: [...response.data.data],
+                isLoading: false,
             }));
     }
 
     render() {
-        const {blogannonceventes} = this.state;
+        const {blogannonceventes,isLoading} = this.state;
         const mapBlogannonceventes = blogannonceventes.length ? (
             blogannonceventes.map(item => {
                 return(
@@ -153,7 +158,7 @@ class BlogannonceventeIndex extends Component {
                 )
             })
         ):(
-            <></>
+            <BlogannonceListSkeleton/>
         );
         return (
             <>
@@ -194,6 +199,13 @@ class BlogannonceventeIndex extends Component {
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
 
                                         {mapBlogannonceventes}
 

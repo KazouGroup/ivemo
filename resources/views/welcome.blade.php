@@ -1,6 +1,6 @@
 @extends('inc.user.main')
 <?php $item = htmlspecialchars(config('app.name'));?>
-@section('title', 'Creation montage - '.$item)
+@section('title', 'Location, reservation et vente de maisons, appartements, studio et bien d\'autre bien - '.$item)
 
 @section('style')
 @endsection

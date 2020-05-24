@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\avisuser;
 use App\Model\blogannoncelocation;
 use App\Model\blogannoncereservation;
 use App\Model\blogannoncevente;
@@ -17,5 +18,6 @@ class AnnonceblogSeeder extends Seeder
         factory(blogannoncereservation::class, 1000)->create();
         factory(blogannoncelocation::class, 1000)->create();
         factory(blogannoncevente::class, 1000)->create();
+        factory(avisuser::class, 1500)->create();
     }
 }

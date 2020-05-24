@@ -11,6 +11,11 @@ Route::post(
     'ProfilepublicController@public_profile_send_message'
 )->name('public_profile_send_message.site');
 
+Route::post(
+    '/agences_send_message',
+    'ProfilepublicController@public_profile_agences_send_message'
+)->name('public_profile_agences_send_message.site');
+
 Route::get(
     '@{user}/annonces_locations',
     'ProfilepublicController@publicprofilannoncelocations'

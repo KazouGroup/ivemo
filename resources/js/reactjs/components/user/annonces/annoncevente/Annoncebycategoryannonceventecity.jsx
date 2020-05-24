@@ -7,6 +7,7 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import AnnonceventeList from "./inc/AnnonceventeList";
 import Categoriesannoncevente from "./inc/Categoriesannoncevente";
+import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
 
 
 class Annoncebycategoryannonceventecity extends Component {
@@ -160,8 +161,16 @@ class Annoncebycategoryannonceventecity extends Component {
     }
     render() {
         const {annonceventebycity,cityannonceventes} = this.state;
-        const allannonceventebycity = annonceventebycity.annonceventes;
         let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
+        const mapAnnonceventes = annonceventebycity.annonceventes.length ? (
+            annonceventebycity.annonceventes.map(item => {
+                return(
+                    <AnnonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
+                )
+            })
+        ):(
+            <></>
+        );
         return (
             <>
                 <Helmet>
@@ -188,23 +197,13 @@ class Annoncebycategoryannonceventecity extends Component {
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="submit text-left">
-                                            <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
+                                            <NavLink to={`/annonces_ventes/ventes/${itemCategoryannoncevente}/`} className="btn btn-neutral btn-sm">
                                                 <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos annonces </b>
-                                            </button>
+                                            </NavLink>
                                         </div>
-
-
                                         <br/>
-                                        {allannonceventebycity.length >= 0 && (
-                                            <>
 
-                                                {allannonceventebycity.map((item) => (
-                                                    <AnnonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
-                                                ))}
-
-                                            </>
-                                        )}
-
+                                        {mapAnnonceventes}
 
                                     </div>
 
@@ -226,28 +225,30 @@ class Annoncebycategoryannonceventecity extends Component {
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
                                                             <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingThree">
-                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                                        <b>Ventes à {annonceventebycity.name} </b>
+                                                                <div className="card-header" role="tab" id="headingOne">
+                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                        <b>Achat à {annonceventebycity.name} </b>
                                                                         <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
-                                                                <div id="collapseThree" className="collapse show" role="tabpanel" aria-labelledby="headingThree">
+                                                                <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
                                                                     <div className="card-body">
                                                                         <table>
                                                                             <tbody>
 
-                                                                            {cityannonceventes.map((item) => (
-                                                                                <tr key={item.id}>
-                                                                                    <td>
-                                                                                        <NavLink to={`/annonces_ventes/ventes/${item.slug}/${annonceventebycity.slug}/`}>
-                                                                                            ventes <b>{item.name}</b> à <b>{annonceventebycity.name}</b>
-                                                                                        </NavLink>
-                                                                                    </td>
-                                                                                    <td className="text-right"> {this.getcountcategoryannonceString(item.annonceventes_count)} {item.annonceventes_count > 1 ? "annonces" : "annonce"}</td>
-                                                                                </tr>
-                                                                            ))}
-
+                                                                            {cityannonceventes.length ?
+                                                                                <>
+                                                                                    {cityannonceventes.map((item) => (
+                                                                                        <tr key={item.id}>
+                                                                                            <td>
+                                                                                                <NavLink to={`/annonces_ventes/ventes/${item.slug}/${annonceventebycity.slug}/`}>
+                                                                                                    achat <b style={{ textTransform: "lowercase" }}>{item.name}</b> à <b>{annonceventebycity.name}</b>
+                                                                                                </NavLink>
+                                                                                            </td>
+                                                                                            <td className="text-right"> {this.getcountcategoryannonceString(item.annonceventes_count)} {item.annonceventes_count > 1 ? "annonces" : "annonce"}</td>
+                                                                                        </tr>
+                                                                                    ))}
+                                                                                </>:<NavannoncecategorySkeleton/>}
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
@@ -256,6 +257,7 @@ class Annoncebycategoryannonceventecity extends Component {
 
                                                             <Categoriesannoncevente/>
 
+                                                            {/*
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingAutre">
                                                                     <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseAutre" aria-expanded="false" aria-controls="collapseAutre">
@@ -272,7 +274,7 @@ class Annoncebycategoryannonceventecity extends Component {
                                                                                 <td className="text-right"> 200 annonces</td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td> <a href="#pablo">Toutes les ventes de terrains Douala</a></td>
+                                                                                <td> <a href="#pablo">Toutes les locations de maison Douala</a></td>
                                                                                 <td className="text-right"> 1 300 annonces</td>
                                                                             </tr>
                                                                             <tr>
@@ -284,8 +286,7 @@ class Annoncebycategoryannonceventecity extends Component {
                                                                     </div>
                                                                 </div>
                                                             </div>
-
-
+                                                            */}
 
                                                         </div>
                                                     </div>
@@ -298,8 +299,6 @@ class Annoncebycategoryannonceventecity extends Component {
 
                                 </div>
                             </div>
-
-
 
                         </div>
 

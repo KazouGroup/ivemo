@@ -21,6 +21,7 @@ class BaseRequest extends Request
             $rules = [
                 'full_name' => 'required',
                 'message' => 'required',
+                'phone' => ['nullable', 'numeric'],
                 'email' => 'required',
                 'subject' => 'required',
             ];

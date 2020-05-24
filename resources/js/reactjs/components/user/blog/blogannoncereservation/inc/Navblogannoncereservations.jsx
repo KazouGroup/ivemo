@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {NavLink, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
+import NavannoncecategorySkeleton from "../../../../inc/user/NavannoncecategorySkeleton";
 
 
 class Navblogannoncereservations extends Component {
@@ -44,16 +45,23 @@ class Navblogannoncereservations extends Component {
                         <table>
                             <tbody>
 
-                            {categoryannoncereservations.map((item) => (
-                                <tr key={item.id}>
-                                    <td>
-                                        <NavLink to={`/blogs/annonce_reservations/${item.slug}/`}>
-                                             <strong>{item.name}</strong>
-                                        </NavLink>
-                                    </td>
-                                    <td className="text-right"> {this.getcountcategoryannonceString(item.blogannoncereservations_count)} articles</td>
-                                </tr>
-                            ))}
+                            {categoryannoncereservations.length > 0 ?
+                                <>
+                                    {categoryannoncereservations.map((item) => (
+                                        <tr key={item.id}>
+                                            <td>
+                                                <NavLink to={`/blogs/annonce_reservations/${item.slug}/`}>
+                                                    <strong>{item.name}</strong>
+                                                </NavLink>
+                                            </td>
+                                            <td className="text-right"> {this.getcountcategoryannonceString(item.blogannoncereservations_count)} articles</td>
+                                        </tr>
+                                    ))}
+                                </>
+                                :
+                                <NavannoncecategorySkeleton/>
+                            }
+
 
                             </tbody>
                         </table>

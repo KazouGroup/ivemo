@@ -69,7 +69,31 @@ class AnnonceventeService
         return $annonceventes;
     }
 
+    public static function apiannonceventesbyannoncetypebycity($annoncetype,$city)
+    {
+        $annonceventes = city::whereSlug($city->slug)->where('status',1)
+            ->withCount(['annonceventes' => function ($q) use ($annoncetype,$city){
+                $q->where(['status' => 1,'status_admin' => 1])
+                    ->with('user','categoryannoncevente','city','annoncetype')
+                    ->whereIn('annoncetype_id',[$annoncetype->id])
+                    ->whereIn('city_id',[$city->id])
+                    ->whereHas('city', function ($q) {$q->where('status',1);})
+                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);});
+            }])
+        ->with([
+            'annonceventes' => function ($q) use ($annoncetype,$city){
+                $q->where(['status' => 1,'status_admin' => 1])
+                    ->with('user','categoryannoncevente','city','annoncetype')
+                    ->whereIn('annoncetype_id',[$annoncetype->id])
+                    ->whereIn('city_id',[$city->id])
+                    ->whereHas('city', function ($q) {$q->where('status',1);})
+                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+                    ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();},
+        ])->first();
 
+
+        return $annonceventes;
+    }
 
     public static function apiannonceventebycategorycount($categoryannoncevente)
     {
@@ -77,6 +101,7 @@ class AnnonceventeService
             ->withCount(['annonceventes' => function ($q) use ($categoryannoncevente){
                 $q->where(['status' => 1,'status_admin' => 1])
                     ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);});
             }])->orderBy('annonceventes_count','desc')
             ->take(6)
@@ -91,39 +116,13 @@ class AnnonceventeService
             ->withCount(['annonceventes' => function ($q) use ($categoryannoncevente,$city){
                 $q->where(['status' => 1,'status_admin' => 1])
                     ->whereIn('city_id',[$city->id])
+                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);});
             }])->orderBy('annonceventes_count','desc')
             ->take(6)
             ->distinct()->get();
 
         return $annoncesbycities;
-    }
-
-    public static function apiannonceslocationsbyuser($user)
-    {
-        $annonceslocations = user::whereSlug($user->slug)
-            ->with(['annoncelocations' => function ($q) use ($user){
-                $q->with('user','categoryannoncelocation','city','annoncetype')
-                    ->whereIn('user_id',[$user->id])
-                    ->orderBy('created_at','DESC')
-                    ->distinct()->paginate(40)->toArray()
-                ;},
-            ])
-            ->withCount(['annoncelocations' => function ($q) use ($user){
-                $q->whereIn('user_id',[$user->id]);
-            }])->withCount(['annoncereservations' => function ($q) use ($user){
-                $q ->whereIn('user_id',[$user->id]);
-            }])->withCount(['annonceventes' => function ($q) use ($user){
-                $q ->whereIn('user_id',[$user->id]);
-            }])->withCount(['blogannoncelocations' => function ($q) use ($user){
-                $q->whereIn('user_id',[$user->id]);
-            }])->withCount(['blogannoncereservations' => function ($q) use ($user){
-                $q->whereIn('user_id',[$user->id]);
-            }])->withCount(['blogannonceventes' => function ($q) use ($user){
-                $q->whereIn('user_id',[$user->id]);
-            }])->first();;
-
-        return $annonceslocations;
     }
 
     public static function apiannoncelocationbycategoryannoncelocationslug($annoncetype,$categoryannoncelocation,$city,$date,$annoncelocation)
@@ -141,37 +140,29 @@ class AnnonceventeService
 
     public static function apiannoncesventesbyuser($user)
     {
-        $annoncelocations = user::whereSlug($user->slug)
+        $annoncelocations = HelpersService::helpersannonceteamcount($user)
             ->with(['annonceventes' => function ($q) use ($user){
                 $q->with('user','categoryannoncevente','city','annoncetype')
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id])
+                    ->withCount(['contactusersventes' => function ($q) use ($user){
+                        $q->whereIn('user_id',[$user->id])
+                            ->with('annoncevente','user')
+                            ->whereHas('annoncevente', function ($q) use ($user) {
+                                $q->whereIn('user_id',[$user->id]);
+                            });},
+                    ])
+                    ->with(['contactusersventes' => function ($q) use ($user){
+                        $q->whereIn('user_id',[$user->id])
+                            ->with('annoncevente','user')
+                            ->whereHas('annoncevente', function ($q) use ($user) {
+                                $q->whereIn('user_id',[$user->id]);
+                            })->distinct()->get()->toArray();},
+                    ])
                     ->orderBy('created_at','DESC')
                     ->distinct()->get()->toArray()
                 ;},
-            ])->withCount(['subscriberusers' => function ($q){
-                $q->whereIn('user_id',[auth()->user()->id]);
-            }])->withCount(['teamusers' => function ($q) use ($user){
-                $q->whereIn('user_id',[$user->id]);
-            }])->withCount(['annoncelocations' => function ($q) use ($user){
-                $q->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
-                    ->whereIn('user_id',[$user->id]);
-            }])->withCount(['annoncereservations' => function ($q) use ($user){
-                $q->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
-                    ->whereIn('user_id',[$user->id]);
-            }])->withCount(['annonceventes' => function ($q) use ($user){
-                $q->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-                    ->whereIn('user_id',[$user->id]);
-            }])->withCount(['blogannoncelocations' => function ($q) use ($user){
-                $q->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
-                    ->whereIn('user_id',[$user->id]);
-            }])->withCount(['blogannoncereservations' => function ($q) use ($user){
-                $q->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
-                    ->whereIn('user_id',[$user->id]);
-            }])->withCount(['blogannonceventes' => function ($q) use ($user){
-                $q->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-                    ->whereIn('user_id',[$user->id]);
-            }])->first();
+            ])->first();
 
         return $annoncelocations;
     }

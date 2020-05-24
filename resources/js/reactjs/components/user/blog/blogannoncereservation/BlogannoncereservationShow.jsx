@@ -3,13 +3,16 @@ import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
-import { Button } from "reactstrap";
+import {Button, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import { Remarkable } from "remarkable";
 import BlogannoncereservationInteresse from "./BlogannoncereservationInteresse";
 import AnnoncereservationInteresseforBlog from "./AnnoncereservationInteresseforBlog";
 import moment from "moment";
+import Swal from "sweetalert2";
+import Skeleton from "react-loading-skeleton";
+import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 
 
 class BlogannoncereservationShow extends Component {
@@ -19,7 +22,61 @@ class BlogannoncereservationShow extends Component {
             blogannoncereservation: {user:[],categoryannoncereservation:[]},
         };
 
+        this.deleteItem = this.deleteItem.bind(this);
     }
+
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes-vous sûr de vouloir executer cette action",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                const url = route('blogannoncecategoryreservationdelete_site',id);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update',
+                            message: 'Article de blogs suprimée avec success'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'primary',
+                            placement: {
+                                from: 'bottom',
+                                align: 'right'
+                            },
+                            animate: {
+                                enter: 'animated fadeInRight',
+                                exit: 'animated fadeOutRight'
+                            },
+                        });
+                    /** End alert ***/
+                    this.props.history.push(`/blogs/annonce_reservations/`);
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animated bounceInDown',
+                            exit: 'animated bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
+    }
+
 
     loadItems() {
         let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
@@ -68,35 +125,27 @@ class BlogannoncereservationShow extends Component {
                                             <div className="container">
                                                 <div className="row justify-content-center">
                                                     <div className="col-md-12 ml-auto mr-auto">
-
-                                                        <div className="carousel slide" data-ride="carousel">
-
-                                                            <div className="carousel-inner" role="listbox">
-                                                                <div className="carousel-item active">
-                                                                    <Zoom>
-                                                                        <img className="d-block"
-                                                                             src={blogannoncereservation.photo}
-                                                                             style={{ width: "1400px", height: "400px",borderRadius: "5px" }}
-                                                                             alt={blogannoncereservation.title} />
-                                                                    </Zoom>
-
-                                                                </div>
-
-                                                            </div>
-
-                                                        </div>
+                                                        {!$guest &&(
+                                                            <>
+                                                                {!$userIvemo.email_verified_at &&(
+                                                                    <LinkValicationEmail/>
+                                                                )}
+                                                            </>
+                                                        )}
 
                                                         <div className="card-header d-flex align-items-center">
                                                             <div className="d-flex align-items-center">
-                                                                <NavLink to={`/annonce/show/`}>
-                                                                    <img src={blogannoncereservation.user.avatar}
-                                                                         style={{ height: "40px", width: "80px",borderRadius: "5px" }}
-                                                                         alt={blogannoncereservation.user.first_name}
-                                                                         className="avatar" />
-                                                                </NavLink>
+                                                                {blogannoncereservation.user.avatar ?
+                                                                    <NavLink to={`/@${blogannoncereservation.user.slug}/blogs/annonce_reservations/`}>
+                                                                        <img src={blogannoncereservation.user.avatar}
+                                                                             style={{ height: "40px", width: "80px",borderRadius: "5px" }}
+                                                                             alt={blogannoncereservation.user.first_name}
+                                                                             className="avatar" />
+                                                                    </NavLink>
+                                                                    : <Skeleton circle={false} height={40} width={80} />}
                                                                 <div className="mx-3">
-                                                                    <NavLink to={`/annonce/show/`} className="text-dark font-weight-600 text-sm"><b>{blogannoncereservation.user.first_name}</b>
-                                                                        <small className="d-block text-muted">{moment(blogannoncereservation.created_at).calendar()}</small>
+                                                                    <NavLink to={`/@${blogannoncereservation.user.slug}/blogs/annonce_reservations/`} className="text-dark font-weight-600 text-sm"><b>{blogannoncereservation.user.first_name || <Skeleton width={35} />}</b>
+                                                                        <small className="d-block text-muted">{moment(blogannoncereservation.created_at).fromNow()}</small>
                                                                     </NavLink>
                                                                 </div>
                                                             </div>
@@ -105,12 +154,18 @@ class BlogannoncereservationShow extends Component {
                                                                     {$userIvemo.id === blogannoncereservation.user_id && (
                                                                         <>
                                                                             <div className="text-right ml-auto">
-                                                                                <NavLink to={`/annonces/`} className="btn btn-sm btn-success" rel="tooltip" title="Editer cette article de blog" data-placement="bottom">
-                                                                                    <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                                <UncontrolledTooltip placement="bottom" target="TooltipEdit">
+                                                                                    Editer cet article
+                                                                                </UncontrolledTooltip>
+                                                                                <NavLink to={`/blogs/annonce_reservations/${blogannoncereservation.slugin}/edit/`} className="btn btn-sm btn-outline-info" id="TooltipEdit">
+                                                                                    <i className="now-ui-icons ui-2_settings-90" /> editer
                                                                                 </NavLink>
+                                                                                <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
+                                                                                    Supprimer cette annonce
+                                                                                </UncontrolledTooltip>
                                                                                 <Button
-                                                                                    className="btn btn-sm btn-danger" rel="tooltip" title="Supprimer cette article de blog" data-placement="bottom">
-                                                                                    <i className="now-ui-icons ui-1_simple-remove"/>
+                                                                                    className="btn btn-outline-danger btn-sm" onClick={() => this.deleteItem(blogannoncereservation.id)} color="secondary" id="TooltipDelete">
+                                                                                    <i className="now-ui-icons ui-1_simple-remove" /> supprimer
                                                                                 </Button>{" "}
                                                                             </div>
                                                                         </>
@@ -119,6 +174,29 @@ class BlogannoncereservationShow extends Component {
                                                                 </>
                                                             )}
                                                         </div>
+
+                                                        <div className="carousel slide" data-ride="carousel">
+
+                                                            <div className="carousel-inner" role="listbox">
+                                                                <div className="carousel-item active">
+                                                                    <Zoom>
+                                                                        {blogannoncereservation.photo ?
+                                                                            <img className="d-block"
+                                                                                 src={blogannoncereservation.photo}
+                                                                                 style={{ width: "1400px", height: "600px",borderRadius: "5px" }}
+                                                                                 alt={blogannoncereservation.title} />
+                                                                            : <Skeleton height={600} width={1400} />}
+
+
+
+                                                                    </Zoom>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
 
                                                     </div>
                                                 </div>
@@ -129,9 +207,9 @@ class BlogannoncereservationShow extends Component {
                                                 <div className="row justify-content-center ">
                                                     <div className="col-lg-11 ml-auto mr-auto">
 
-                                                        <h2 className="title text-center">{blogannoncereservation.title}</h2>
+                                                        <h2 className="title text-center">{blogannoncereservation.title || <Skeleton width={300} />}</h2>
 
-                                                        <div className="title mb-2 text-justify" dangerouslySetInnerHTML={this.getDescription(blogannoncereservation)} />
+                                                        {blogannoncereservation.description ?  <div className="title mb-2 text-justify" dangerouslySetInnerHTML={this.getDescription(blogannoncereservation)} />: <Skeleton count={5}/>}
 
                                                     </div>
                                                 </div>

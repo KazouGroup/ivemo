@@ -1,11 +1,12 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Remarkable } from 'remarkable';
 import { Button,UncontrolledTooltip,Row,CardBody,CardFooter } from "reactstrap";
 import moment from "moment";
+import Skeleton from "react-loading-skeleton";
 
 
-class PublicUserBlogannoncereservationList extends Component {
+class PublicUserBlogannoncereservationList extends PureComponent {
 
     render() {
         return (
@@ -48,7 +49,7 @@ class PublicUserBlogannoncereservationList extends Component {
                             </div>
                         </Row>
                         <h6 className="card-title text-center">
-                            <a target="_blank" href={`/blogs/annonce_reservations/${this.props.categoryannoncereservation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="card-link"> {this.props.title}</a>
+                            <a target="_blank" href={`/blogs/annonce_reservations/${this.props.categoryannoncereservation.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="card-link"> {this.props.title || <Skeleton count={3}/>}</a>
                         </h6>
                         <p className="card-description">
                             <b dangerouslySetInnerHTML={{__html: (this.props.description.length > 48 ? this.props.description.substring(0, 48) + "..." : this.props.description)}}/>

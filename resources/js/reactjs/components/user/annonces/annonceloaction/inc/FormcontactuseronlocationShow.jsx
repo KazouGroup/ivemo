@@ -53,9 +53,8 @@ class FormcontactuseronlocationShow extends Component {
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let itemCity = this.props.match.params.city;
-        let itemdate = this.props.match.params.date;
         let itemannoncelocation = this.props.match.params.annoncelocation;
-        let url = route('annoncelocationsendcontactmessageuser_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemdate,itemannoncelocation]);
+        let url = route('annoncelocationsendcontactmessageuser_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemannoncelocation]);
         dyaxios.post(url, item)
             .then(() => {
 

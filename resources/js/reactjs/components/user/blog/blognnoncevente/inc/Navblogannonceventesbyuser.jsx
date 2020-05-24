@@ -46,7 +46,7 @@ class Navblogannonceventesbyuser extends Component {
                             {categoryannonceventes.map((item) => (
                                 <tr key={item.id}>
                                     <td>
-                                        <NavLink to={`/blogs/annonce_ventes/${item.slug}/`}>
+                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_ventes/${item.slug}/`}>
                                              <strong>{item.name}</strong>
                                         </NavLink>
                                     </td>

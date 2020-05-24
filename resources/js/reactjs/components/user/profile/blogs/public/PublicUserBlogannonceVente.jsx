@@ -11,6 +11,9 @@ import NavLinkPublicAnnonceUser from "../../annonces/NavLinkPublicAnnonceUser";
 import PublicUserBlogannonceventeList from "./inc/PublicUserBlogannonceventeList";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
 import Navlinknewblogannoncevente from "../../../blog/blognnoncevente/treatement/Navlinknewblogannoncevente";
+import Skeleton from "react-loading-skeleton";
+import BlogannoncePublicuserSkeleton from "../../../../inc/user/blog/BlogannoncePublicuserSkeleton";
+import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 
 
 class PublicUserBlogannonceVente extends Component {
@@ -18,7 +21,8 @@ class PublicUserBlogannonceVente extends Component {
         super(props);
         this.state = {
             userblogventePublick:{blogannonceventes: []},
-            visiable: 10,
+            isLoading: false,
+            visiable: 20,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -26,7 +30,7 @@ class PublicUserBlogannonceVente extends Component {
     }
     loadmoresItem(){
         this.setState((old) =>{
-            return {visiable: old.visiable + 10}
+            return {visiable: old.visiable + 20}
         })
     }
     deleteItem(id) {
@@ -83,8 +87,9 @@ class PublicUserBlogannonceVente extends Component {
     }
 
     loadItems(){
+        this.setState({ isLoading: true });
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.profilpublique_blogannonceventes',[itemuser])).then(response => this.setState({userblogventePublick: response.data,}));
+        dyaxios.get(route('api.profilpublique_blogannonceventes',[itemuser])).then(response => this.setState({userblogventePublick: response.data,isLoading: false,}));
     }
 
     // lifecycle method
@@ -93,16 +98,15 @@ class PublicUserBlogannonceVente extends Component {
     }
 
     render() {
-        const {userblogventePublick,visiable} = this.state;
-        const mapBlogannonceventes = userblogventePublick.blogannonceventes.length ? (
+        const {userblogventePublick,visiable,isLoading} = this.state;
+        const mapBlogannonceventes = isLoading ? (
+            <BlogannoncePublicuserSkeleton/>
+        ):(
             userblogventePublick.blogannonceventes.slice(0,visiable).map(item => {
                 return(
-
                     <PublicUserBlogannonceventeList key={item.id} {...item} deleteItem={this.deleteItem}/>
                 )
             })
-        ):(
-            <></>
         );
         return (
             <>
@@ -125,13 +129,17 @@ class PublicUserBlogannonceVente extends Component {
 
                                 <div className="card-body">
 
-                                    <h1 className="title">{userblogventePublick.first_name}</h1>
-                                    <Link to={`/@${userblogventePublick.slug}/`} className="text-white">
-                                        <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userblogventePublick.first_name}</b>
-                                    </Link>
-                                    {userblogventePublick.blogannonceventes_count > 0 &&(
+                                    <h1 className="title">{userblogventePublick.first_name || <Skeleton width={300} />}</h1>
+                                    {userblogventePublick.slug ?
+                                        <Link to={`/@${userblogventePublick.slug}/`} className="text-white">
+                                            <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userblogventePublick.first_name}</b>
+                                        </Link>
+                                        :
+                                        <Skeleton width={270}/>
+                                    }
+                                    {userblogventePublick.blogannonceventes_count >= 0 ?
                                         <h5><b>{userblogventePublick.blogannonceventes_count}</b> {userblogventePublick.blogannonceventes_count > 1 ? "articles" : "article"} posté par {userblogventePublick.first_name} sur la vente et l'achat</h5>
-                                    )}
+                                    :<h5> <Skeleton width={200}/></h5>}
 
                                 </div>
 
@@ -150,11 +158,12 @@ class PublicUserBlogannonceVente extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
-                                        <div className="submit text-center">
+                                        {/**<div className="submit text-center">
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
                                                 <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article</b>
                                             </NavLink>
-                                        </div>
+                                        </div> */}
+
 
                                         <div className="card">
                                             <div className="card-body">
@@ -221,6 +230,13 @@ class PublicUserBlogannonceVente extends Component {
                                     </div>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
 
                                         <Row>
 

@@ -55,6 +55,23 @@ class BlogannoncereservationService
         return $blogannoncereservations;
     }
 
+    public static function apiblogannoncesreservationscategoryannoncereservationbyuser($user,$categoryannoncereservation)
+    {
+
+        $blogannoncereservations = HelpersService::helpersannonblogceteambyusercount($user)
+            ->with(['blogannoncereservations' => function ($q) use ($user,$categoryannoncereservation){
+                $q->with('user','categoryannoncereservation')
+                    ->whereIn('user_id',[$user->id])
+                    ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
+                    ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
+                    ->orderBy('created_at','DESC')
+                    ->distinct()->get()->toArray()
+                ;},
+            ])->first();
+
+        return $blogannoncereservations;
+    }
+
     public static function storeUploadImage($request,$blogannoncereservation)
     {
 
@@ -67,7 +84,7 @@ class BlogannoncereservationService
                 mkdir($dir, 0775, true);
             }
             $destinationPath = public_path("assets/img/blogannoncereservation/{$name}");
-            Image::make($request->photo)->save($destinationPath);
+            Image::make($request->photo)->fit(1400,650)->save($destinationPath);
 
             $myfilename = "/assets/img/blogannoncereservation/{$name}";
             $blogannoncereservation->photo = $myfilename;
@@ -86,7 +103,7 @@ class BlogannoncereservationService
                 ($request->photo,';')))[1])[1];
             $dir = 'assets/img/blogannoncereservation/';
             if(!file_exists($dir)){mkdir($dir, 0775, true);}
-            Image::make($request->photo)->save(public_path('assets/img/blogannoncereservation/').$name);
+            Image::make($request->photo)->fit(1400,650)->save(public_path('assets/img/blogannoncereservation/').$name);
             $request->merge(['photo' =>  "/assets/img/blogannoncereservation/{$name}"]);
             $oldFilename = $currentPhoto;
             File::delete(public_path($oldFilename));

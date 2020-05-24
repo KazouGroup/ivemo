@@ -7,6 +7,7 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import Categoriesannoncereselocation from "./inc/Categoriesannoncereselocation";
 import AnnonceslocationList from "./inc/AnnonceslocationList";
 import Swal from "sweetalert2";
+import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 
 
 class AnnoncelocationIndex extends Component {
@@ -144,6 +145,7 @@ class AnnoncelocationIndex extends Component {
 
     // lifecycle method
     componentDidMount() {
+        window.scrollTo(0, 0);
         this.loadItems();
     }
 
@@ -156,16 +158,12 @@ class AnnoncelocationIndex extends Component {
                 )
             })
         ):(
-            <></>
+            <AnnoncesListSkeleton/>
         );
-
-
 
         return (
             <>
-                <Helmet>
-                    <title>Bon plan de location de chambre, studio un appartement, maison ou une villa - Ivemo</title>
-                </Helmet>
+                <Helmet title={`Bon plan de location de chambre, studio un appartement, maison ou une villa - Ivemo`}/>
 
                 <div className="landing-page sidebar-collapse">
 
@@ -178,10 +176,57 @@ class AnnoncelocationIndex extends Component {
                         <div className="page-header page-header-mini">
                             <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
                             </div>
+
                             <div className="content-center">
+                                <br/>
+                                <div className="row">
+                                    <div className="col-md-10 ml-auto mr-auto">
+                                        <div className="text-center">
+                                            <h4 className="title">Location des biens</h4>
+                                            <p className="description">
+                                               <b> Trouver une maison,un studio, une chambre ou un appartement et plien d'autre bien à louer</b>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div className="row">
                                     <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">Trouver une maison, une chambre ou un appartement à louer  </h3>
+                                        <div className="card card-raised card-form-horizontal">
+                                            <div className="card-body">
+                                                <form method="" action="">
+                                                    <div className="row">
+                                                        <div className="col-sm-6">
+                                                            <div className="input-group">
+                                                                <div className="input-group-prepend">
+                                                                    <span className="input-group-text">
+                                                                        <i className="now-ui-icons text_caps-small"/></span>
+                                                                </div>
+                                                                <input type="text" className="form-control"
+                                                                       placeholder="Que cherchez-vous ?"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="col-sm-6">
+                                                            <div className="input-group">
+                                                                <div className="input-group-prepend">
+                                                                    <span className="input-group-text">
+                                                                        <i className="now-ui-icons text_bold"/></span>
+                                                                </div>
+                                                                <input type="text" className="form-control"
+                                                                       placeholder="Ville, quartier"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br/>
+                                                    <div className="submit text-center">
+                                                        <button type="submit" className="btn btn-primary ">
+                                                            <b>Voir les annonces</b>
+                                                        </button>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

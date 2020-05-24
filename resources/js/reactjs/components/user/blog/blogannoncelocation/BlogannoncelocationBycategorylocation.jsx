@@ -7,6 +7,9 @@ import Swal from "sweetalert2";
 import BlogannoncelocationList from "./BlogannoncelocationList";
 import Navblogannoncelocations from "./inc/Navblogannoncelocations";
 import Navlinknewblogannoncelocation from "./treatement/Navlinknewblogannoncelocation";
+import Skeleton from "react-loading-skeleton";
+import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
+import BlogannonceListSkeleton from "../../../inc/user/blog/BlogannonceListSkeleton";
 
 
 class BlogannoncelocationBycategorylocation extends Component {
@@ -14,6 +17,7 @@ class BlogannoncelocationBycategorylocation extends Component {
         super(props);
         this.state = {
             blogannoncelocation: {blogannoncelocations:[]},
+            isLoading: false,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -127,9 +131,10 @@ class BlogannoncelocationBycategorylocation extends Component {
     }
 
     loadItems(){
+        this.setState({ isLoading: true });
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let url = route('api.blogannonceblogcategorylocations_site', [itemCategoryannoncelocation]);
-        dyaxios.get(url).then(response => this.setState({ blogannoncelocation: response.data, }));
+        dyaxios.get(url).then(response => this.setState({ blogannoncelocation: response.data, isLoading: false, }));
     }
 
     // lifecycle method
@@ -138,25 +143,22 @@ class BlogannoncelocationBycategorylocation extends Component {
     }
 
     render() {
-        const {blogannoncelocation} = this.state;
+        const {blogannoncelocation,isLoading} = this.state;
         const blogannoncelocationsbycategorylocations = blogannoncelocation.blogannoncelocations;
-        const mapAnnoncelocations = blogannoncelocationsbycategorylocations.length ? (
+        const mapAnnoncelocations = isLoading ? (
+            <BlogannonceListSkeleton/>
+        ):(
             blogannoncelocationsbycategorylocations.map(item => {
                 return(
                     <BlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
                 )
             })
-        ):(
-            <></>
         );
         return (
             <>
-                <Helmet>
-                    <title>Guides et conseils locations {`${blogannoncelocation.name || 'Annonce'}`} - Ivemo</title>
-                </Helmet>
+                <Helmet title={`Guides et conseils locations ${blogannoncelocation.name || 'Annonce'} - Ivemo`}/>
 
                 <div className="about-us sidebar-collapse">
-
 
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="500">
                         <NavUserSite />
@@ -168,13 +170,22 @@ class BlogannoncelocationBycategorylocation extends Component {
                             </div>
                             <div className="content-center">
 
-                                <h1 className="title">{blogannoncelocation.name}</h1>
-                                <Link to={`/blogs/annonce_locations/`} className="text-white">
-                                    <i className="fa fa-chevron-circle-left" /> <b>Retour aux articles</b>
-                                </Link>
-                                {blogannoncelocation.blogannoncelocations_count > 0 &&(
+                                <h1 className="title">{blogannoncelocation.name || <Skeleton width={300} />}</h1>
+
+                                {blogannoncelocation.name ?
+                                    <Link to={`/blogs/annonce_locations/`} className="text-white">
+                                        <i className="fa fa-chevron-circle-left" /> <b>Retour aux articles</b>
+                                    </Link>
+                                    :
+                                    <Skeleton width={270}/>
+                                }
+
+
+                                {blogannoncelocation.blogannoncelocations_count >= 0 ?
                                     <h5><b>{blogannoncelocation.blogannoncelocations_count}</b> {blogannoncelocation.blogannoncelocations_count > 1 ? "articles" : "article"} posté sur la location</h5>
-                                )}
+                                    :
+                                   <h5> <Skeleton width={200}/></h5>
+                                }
 
                             </div>
                         </div>
@@ -192,11 +203,18 @@ class BlogannoncelocationBycategorylocation extends Component {
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
-                                    <div className="submit text-left">
-                                                <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
-                                                    <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour aux annonces</b>
-                                                </button>
-                                            </div>
+                                        <div className="submit text-left">
+                                            <Link to={`/blogs/annonce_locations/`} className="btn btn-neutral btn-sm">
+                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour aux articles</b>
+                                            </Link>
+                                        </div>
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
 
                                         {mapAnnoncelocations}
 

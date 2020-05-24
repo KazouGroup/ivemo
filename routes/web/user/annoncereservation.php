@@ -12,6 +12,11 @@ Route::get(
 )->name('annoncereservationbyannoncetype_site');
 
 Route::get(
+    'annonce_reservations/{annoncetype}/{city}',
+    'AnnoncereservationController@annoncereservationsbyannoncetypebycity'
+)->name('annoncereservationsbyannoncetypebycity_site');
+
+Route::get(
     'api/profile/{user}/personal_settings/annonces_reservations',
     'AnnoncereservationController@apiannoncesreservationsbyuser'
 )->name('api.annoncesreservationsbyuser_site');

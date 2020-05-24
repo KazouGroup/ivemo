@@ -10,6 +10,7 @@ import NavLinkPublicAnnonceUser from "../NavLinkPublicAnnonceUser";
 import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";
 import NavLinkPublicBlogannoncesUser from "../../blogs/public/NavLinkPublicBlogannoncesUser";
 import AnnonceventeList from "../../../annonces/annoncevente/inc/AnnonceventeList";
+import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
 
 
 class PublicUserAnnonceVentes extends Component {
@@ -239,6 +240,22 @@ class PublicUserAnnonceVentes extends Component {
                                                 </div>
 
                                                 <FormContactProfileAccountUser {...this.props}/>
+
+                                            </div>
+                                        </div>
+
+                                        <div className="card card-raised card-form-horizontal">
+
+                                            <div className="card-body">
+
+                                                <div className="card-header text-center">
+                                                    <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
+                                                    <p className="card-title">
+                                                        Abonnez-vous à la newsletter de <b>{userannonceventePublick.first_name}</b> afin d'être notifié des mises à jour
+                                                    </p>
+                                                </div>
+
+                                                <FormNewletterSubcribeProfileAccountUser {...this.props} />
 
                                             </div>
                                         </div>

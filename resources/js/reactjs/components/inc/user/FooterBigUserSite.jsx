@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link,NavLink } from 'react-router-dom';
-import AnnoncereservationList from "../../user/annonces/annoncereservation/inc/AnnoncereservationList";
 import LoginModalUser from "../../user/auth/LoginModalUser";
 
 
@@ -8,25 +7,15 @@ class FooterBigUserSite extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            citiesannoncesreservations: [],
+          //
         }
     }
 
-    loadItems(){
-        let url = route('api.citiesannonces_reservations_site');
-        fetch(url).then(res => res.json()).then((result) => {
-                this.setState({
-                    citiesannoncesreservations: [...result]
-                });
-            });
-    }
-
     componentDidMount() {
-        this.loadItems();
+        //
     }
 
     render() {
-        const {citiesannoncesreservations} = this.state;
 
         return (
             <>
@@ -88,21 +77,21 @@ class FooterBigUserSite extends Component {
 
                                 <div className="col-md-2 col-6">
                                     <div className="column">
-                                        <h5>Locations d'appartements</h5>
+                                        <h5>À propos</h5>
                                         <ul className="links-vertical">
                                             <li>
                                                 <a href="#pablo" className="text-muted">
-                                                    Sales FAQ
+                                                    Qui sommes-nous
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="#pablo" className="text-muted">
-                                                    How to Register
+                                                    Ivemo/news
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="#pablo" className="text-muted">
-                                                    Sell Goods
+                                                    Offres d’emploi
                                                 </a>
                                             </li>
                                             <li>
@@ -119,6 +108,11 @@ class FooterBigUserSite extends Component {
                                                 <a href="#pablo" className="text-muted">
                                                     Affiliates Program
                                                 </a>
+                                            </li>
+                                            <li>
+                                                <Link to={`/agences_immobilies/`} className="text-muted">
+                                                    Agences immobiliés
+                                                </Link>
                                             </li>
                                         </ul>
                                     </div>
@@ -162,28 +156,85 @@ class FooterBigUserSite extends Component {
                                 </div>
 
                                 <div className="col-md-2 col-6">
-                                    <h5>Top villes pour vos reservations</h5>
+                                    <h5>Aide</h5>
                                     <ul className="links-vertical">
-
-                                        {citiesannoncesreservations.map((item) => (
-
-                                            <li key={item.id}>
-                                                <Link to={`/`} className="text-muted">
-                                                    {item.name}
-                                                </Link>
-                                            </li>
-                                        ))}
-
-
-
+                                        <li>
+                                            <Link to={`/faqs/`} className="text-muted">
+                                                Foire aux questions (FAQ)
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/contact/`} className="text-muted">
+                                                Contactez ivemo
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/cookies_site/`} className="text-muted">
+                                                Confidentialité
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/cookies_site/`} className="text-muted">
+                                                Cookies
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <a href="#pablo" className="text-muted">
+                                                Conditions générales
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
 
                             </div>
                         </div>
                         <hr />
+                        <div className="row">
+                            <div className="col-md-9">
+                                <div className="column">
+                                    <nav>
+                                        <ul>
+                                            <li className="d-inline-block">
+                                                <Link to={'/condition_utilisation/'} className="nav-link">
+                                                    Terms &amp; Conditions
+                                                </Link>
+                                            </li>
+                                            <li className="d-inline-block">
+                                                <Link to={'/politique_confidentialité/'} className="nav-link">
+                                                    Privacy Policy
+                                                </Link>
+                                            </li>
+                                            <li className="d-inline-block">
+                                                <Link to={'/licence_site/'} className="nav-link">
+                                                    Licence Site
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div className="col-md-3">
+                                <div className="dropdown">
+                                    Pays:
+                                    <div className="btn btn-link text-primary " href="#" role="button"
+                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i className="ni ni-chat-round"/>
+                                        <span>Cameroun</span>
+                                    </div>
+                                    <div className="dropdown-menu kazouTech-dropdown" x-placement="top-start">
+                                        <a href="#" className="dropdown-item active">
+                                            <span>Cameroun</span>
+                                        </a>
+                                        <a href="#" className="dropdown-item">
+                                            <span>Cote d'ivoire</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div className="copyright">
-                            Copyright © {new Date().getFullYear()}, Ivemo All Rights Reserved.
+                            Copyright © {new Date().getFullYear()}, Ivemo All Rights Reserved Realisé par
+                            <a href="/" className="pl-2 text-primary">KazouGroup Srl</a>.
                         </div>
                     </div>
                 </footer>

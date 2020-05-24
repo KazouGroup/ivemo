@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Button } from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-import PropTypes from "prop-types";
 import AnnonceslocationList from "./inc/AnnonceslocationList";
 import Categoriesannoncereselocation from "./inc/Categoriesannoncereselocation";
 import Swal from "sweetalert2";
-
+import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
+import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 
 class Annoncebycategoryannoncelocation extends Component {
     constructor(props) {
@@ -16,16 +15,18 @@ class Annoncebycategoryannoncelocation extends Component {
         this.state = {
             annoncelocationbycategory: {annoncelocations:[]},
             cityannoncelocations:[],
+            isLoading: false,
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
     }
 
     loadItems(){
+        this.setState({ isLoading: true });
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let url = route('api.annoncelocationbycategoryannoncelocations_site',[itemannoncetype,itemCategoryannoncelocation]);
-        dyaxios.get(url).then(response => this.setState({annoncelocationbycategory: response.data,}));
+        dyaxios.get(url).then(response => this.setState({annoncelocationbycategory: response.data, isLoading: false,}));
         let url1 = route('api.annoncelocationbycategorycitycount_site',[itemCategoryannoncelocation]);
         dyaxios.get(url1).then(response => this.setState({cityannoncelocations: response.data,}));
 
@@ -158,8 +159,17 @@ class Annoncebycategoryannoncelocation extends Component {
         return (annoncelocations_count/1000).toFixed(annoncelocations_count % 1000 !== 0)+'k';
     }
     render() {
-        const {annoncelocationbycategory,cityannoncelocations} = this.state;
+        const {annoncelocationbycategory,cityannoncelocations,isLoading} = this.state;
         const allannoncelocationsbycategory = annoncelocationbycategory.annoncelocations;
+        const mapAnnoncelocations = isLoading ? (
+            <AnnoncesListSkeleton/>
+        ):(
+            allannoncelocationsbycategory.map(item => {
+                return(
+                    <AnnonceslocationList key={item.id} {...item}  deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
+                )
+            })
+        );
         return (
             <>
                 <Helmet>
@@ -194,9 +204,7 @@ class Annoncebycategoryannoncelocation extends Component {
 
                                         <br/>
 
-                                        {allannoncelocationsbycategory.map((item) => (
-                                            <AnnonceslocationList key={item.id} {...item}  deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
-                                        ))}
+                                        {mapAnnoncelocations}
 
                                     </div>
 
@@ -220,7 +228,7 @@ class Annoncebycategoryannoncelocation extends Component {
 
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingThree">
-                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                                                                         <b>Locations {annoncelocationbycategory.name} </b>
                                                                         <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
@@ -231,16 +239,21 @@ class Annoncebycategoryannoncelocation extends Component {
                                                                         <table>
                                                                             <tbody>
 
-                                                                            {cityannoncelocations.map((item) => (
-                                                                                <tr key={item.id}>
-                                                                                    <td>
-                                                                                        <NavLink to={`/annonces_locations/locations/${annoncelocationbycategory.slug}/${item.slug}/`}>
-                                                                                            locations <b>{annoncelocationbycategory.name}</b> à <b>{item.name}</b>
-                                                                                        </NavLink>
-                                                                                    </td>
-                                                                                    <td className="text-right"> {this.getcountcategoryannonceString(item.annoncelocations_count)} annonces</td>
-                                                                                </tr>
-                                                                            ))}
+                                                                            {cityannoncelocations.length ?
+                                                                                <>
+                                                                                    {cityannoncelocations.map((item) => (
+                                                                                    <tr key={item.id}>
+                                                                                        <td>
+                                                                                            <NavLink to={`/annonces_locations/locations/${annoncelocationbycategory.slug}/${item.slug}/`}>
+                                                                                                locations <b style={{ textTransform: "lowercase" }}>{annoncelocationbycategory.name}</b> à <b>{item.name}</b>
+                                                                                            </NavLink>
+                                                                                        </td>
+                                                                                        <td className="text-right"> {this.getcountcategoryannonceString(item.annoncelocations_count)} annonces</td>
+                                                                                    </tr>
+                                                                                ))}
+                                                                                </>
+                                                                                :
+                                                                                <NavannoncecategorySkeleton/>}
 
                                                                             </tbody>
                                                                         </table>
@@ -260,13 +273,6 @@ class Annoncebycategoryannoncelocation extends Component {
 
 
                                     </div>
-
-
-
-
-
-
-
 
                                 </div>
                             </div>

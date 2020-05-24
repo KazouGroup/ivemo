@@ -75,6 +75,7 @@ class CompileTableSeeder extends Seeder
                 ['name' => 'Appartement','status' => true, 'slug' => str_slug('Appartement'),'color_name' => 'info','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
                 ['name' => 'Chambre','status' => true,'slug' => str_slug('Chambre'),'color_name' => 'success','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
                 ['name' => 'Stand d\'exposition','status' => true,'slug' => str_slug('Stand d\'exposition'),'color_name' => 'warning','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
+                ['name' => 'Locaux ou entrepôts','status' => true,'slug' => str_slug('Locaux ou entrepôts'),'color_name' => 'info','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
                 ['name' => 'Loft, atelier & surface','status' => true,'slug' => str_slug('Loft, atelier & surface'),'color_name' => 'warning','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
                 ['name' => 'Maison','status' => true,'slug' => str_slug('Maison'),'color_name' => 'danger','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
                 ['name' => 'Studio','status' => true,'slug' => str_slug('Studio'),'color_name' => 'primary','photo'=> $faker->imageUrl($width = 1400, $height = 800),'user_id'=> 1],
@@ -84,6 +85,10 @@ class CompileTableSeeder extends Seeder
             categoryannoncelocation::create($item);
 
             $categoryannonceventes = [
+                ['name' => 'Immobilier neuf','status' => true,'slug' => str_slug('Immobilier neuf'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'info','user_id'=> 1],
+                ['name' => 'Immeubles','status' => true,'slug' => str_slug('Immeubles'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'warning','user_id'=> 1],
+                ['name' => 'Bureaux','status' => true,'slug' => str_slug('Bureaux'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'info','user_id'=> 1],
+                ['name' => ' Locaux ou entrepôts','status' => true,'slug' => str_slug('Locaux ou entrepôts '),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'danger','user_id'=> 1],
                 ['name' => 'Appartement','status' => true,'slug' => str_slug('Appartement'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'info','user_id'=> 1],
                 ['name' => 'Maison','status' => true,'slug' => str_slug('Maison'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'success','user_id'=> 1],
                 ['name' => 'Terrain','status' => true,'slug' => str_slug('Terrain'),'photo'=> $faker->imageUrl($width = 1400, $height = 800),'color_name' => 'danger','user_id'=> 1],
@@ -133,7 +138,7 @@ class CompileTableSeeder extends Seeder
         $admin_user->syncRoles('super-admin');
 
 
-        factory(user::class, 3)->create();
+        factory(user::class, 500)->create();
         factory(categoryfaq::class, 5)->create();
         factory(faq::class, 100)->create();
         factory(contact::class, 200)->create();

@@ -20,6 +20,7 @@ class BlogannoncereservationResource extends JsonResource
             'photo' => $this->photo,
             'description' => $this->description,
             'slug' => $this->slug,
+            'slugin' => $this->slugin,
             'status' => $this->status,
             'status_admin' => $this->status_admin,
             'red_time' => $this->red_time,

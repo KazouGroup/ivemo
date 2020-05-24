@@ -14,7 +14,7 @@ class TeamsUserIndex extends Component {
         super(props);
         this.state = {
             userteamusers:{teamusers:[]},
-            visiable: 10,
+            visiable: 20,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -24,7 +24,7 @@ class TeamsUserIndex extends Component {
     }
     loadmoresItem(){
         this.setState((old) =>{
-            return {visiable: old.visiable + 10}
+            return {visiable: old.visiable + 20}
         })
     }
     deleteItem(id) {
@@ -319,7 +319,7 @@ class TeamsUserIndex extends Component {
 
                                                                             <button type="button" id={'TooltipDelete'} onClick={() => this.deleteItem(item.id)}
                                                                                     className="btn btn-danger btn-icon btn-sm btn-neutral">
-                                                                                <i className="now-ui-icons ui-1_simple-remove"/>
+                                                                                <i className="far fa-trash-alt"/>
                                                                             </button>
                                                                             <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
                                                                                 Supprimer

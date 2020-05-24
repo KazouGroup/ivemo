@@ -54,7 +54,7 @@ class CitiesTableSeeder extends Seeder
             array('photo' => $faker->imageUrl($width = 1000, $height = 900) ,'slug' => str_slug('koutaba'), 'status' => $faker->boolean, 'city_vip' => false, 'name' => 'Koutaba'),
             array('photo' => $faker->imageUrl($width = 1000, $height = 900) ,'slug' => str_slug('Kribi'), 'status' => true, 'city_vip' => true, 'name' => 'Kribi'),
             array('photo' => $faker->imageUrl($width = 1000, $height = 900) ,'slug' => str_slug('kumba'), 'status' => $faker->boolean, 'city_vip' => false, 'name' => 'Kumba'),
-            array('photo' => $faker->imageUrl($width = 1000, $height = 900) ,'slug' => str_slug('kumba'), 'status' => $faker->boolean, 'city_vip' => false, 'name' => 'Kumbo'),
+            array('photo' => $faker->imageUrl($width = 1000, $height = 900) ,'slug' => str_slug('kumbo'), 'status' => $faker->boolean, 'city_vip' => false, 'name' => 'Kumbo'),
             array('photo' => $faker->imageUrl($width = 1000, $height = 900) ,'slug' => str_slug('Limbé'), 'status' => true, 'city_vip' => true, 'name' => 'Limbé'),
             array('photo' => $faker->imageUrl($width = 1000, $height = 900) ,'slug' => str_slug('Loum'), 'status' => $faker->boolean, 'city_vip' => false, 'name' => 'Loum'),
             array('photo' => $faker->imageUrl($width = 1000, $height = 900) ,'slug' => str_slug('Magda'), 'status' => $faker->boolean, 'city_vip' => false, 'name' => 'Magda'),

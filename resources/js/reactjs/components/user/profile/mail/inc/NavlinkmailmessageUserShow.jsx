@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link, NavLink, withRouter } from 'react-router-dom';
+import NavlinkmailmessageUser from "./NavlinkmailmessageUser";
 
 
 class NavlinkmailmessageUserShow extends Component {
@@ -25,24 +26,7 @@ class NavlinkmailmessageUserShow extends Component {
         const {usersprofile} = this.state;
         return (
 
-            <div className="card-body">
-                <table>
-                    <tbody>
-
-                    <tr>
-                        <td> <NavLink to={`/profile/${usersprofile.slug}/personal_mails/contacts/`}>Mail contacts</NavLink></td>
-                        <td className="text-right"> {usersprofile.contactusers_count || " "} {usersprofile.contactusers_count < 1 ? "message" : "messages"}</td>
-                    </tr>
-
-                    <tr>
-                        <td> <NavLink to={`/profile/personal_mails/annonces_locations/`}>Mail annonces locations</NavLink></td>
-                        <td className="text-right"> {usersprofile.contactusers_count || " "} {usersprofile.contactusers_count < 1 ? "message" : "messages"}</td>
-
-                    </tr>
-
-                    </tbody>
-                </table>
-            </div>
+            <NavlinkmailmessageUser {...this.props} {...usersprofile}/>
 
 
         )

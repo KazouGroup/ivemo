@@ -10,14 +10,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
 use Laravel\Passport\HasApiTokens;
-use OwenIt\Auditing\Auditable as AuditableTrait;
-use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Str;
 
-class user extends Authenticatable implements MustVerifyEmail,Auditable
+class user extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable,HasApiTokens,HasRoles,AuditableTrait;
+    use Notifiable,HasApiTokens,HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -106,7 +104,6 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
         return $this->hasOne(profile::class,'user_id');
     }
 
-
     public function getDataBirthdayItAttribute()
     {
         return !empty($this->birthday)? $this->birthday->format('d/m/Y') : '';
@@ -160,6 +157,46 @@ class user extends Authenticatable implements MustVerifyEmail,Auditable
     public function contactusers()
     {
         return $this->hasMany(contactuser::class, 'user_id');
+    }
+
+    public function archvementcontactusers()
+    {
+        return $this->hasMany(contactuser::class, 'user_id');
+    }
+
+    public function favoritecontactusers()
+    {
+        return $this->hasMany(contactuser::class, 'user_id');
+    }
+
+    public function contactuserslocations()
+    {
+        return $this->hasMany(contactuserslocation::class, 'user_id');
+    }
+
+    public function favoritecontactuserslocations()
+    {
+        return $this->hasMany(contactuserslocation::class, 'user_id');
+    }
+
+    public function archvementcontactuserslocations()
+    {
+        return $this->hasMany(contactuserslocation::class, 'user_id');
+    }
+
+    public function contactusersventes()
+    {
+        return $this->hasMany(contactusersvente::class, 'user_id');
+    }
+
+    public function  archvementcontactusersventes()
+    {
+        return $this->hasMany(contactusersvente::class, 'user_id');
+    }
+
+    public function favoritecontactusersventes()
+    {
+        return $this->hasMany(contactusersvente::class, 'user_id');
     }
 
     public function subscriberusers()

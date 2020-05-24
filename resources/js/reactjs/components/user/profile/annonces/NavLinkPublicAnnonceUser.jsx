@@ -1,20 +1,9 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import NavNavigatePivateUser from "../NavNavigatePivateUser";
 
 
-class NavLinkPublicAnnonceUser extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-           //
-        };
-
-    }
-    // lifecycle method
-    componentDidMount() {
-        //
-    }
+class NavLinkPublicAnnonceUser extends PureComponent {
 
     render() {
         return (
@@ -29,9 +18,7 @@ class NavLinkPublicAnnonceUser extends Component {
                                         Annones <b>locations</b>
                                     </NavLink>
                                 </td>
-                                {this.props.annoncelocations_count && (
-                                    <td className="text-right"> {this.props.annoncelocations_count} annonces</td>
-                                )}
+                                <td className="text-right"> {this.props.annoncelocations_count} {this.props.annoncelocations_count > 1 ? "annonces" : "annonce"}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -39,9 +26,7 @@ class NavLinkPublicAnnonceUser extends Component {
                                         Annonces <b>reservations</b>
                                     </NavLink>
                                 </td>
-                                {this.props.annoncereservations_count && (
-                                    <td className="text-right"> {this.props.annoncereservations_count} annonces</td>
-                                )}
+                                <td className="text-right"> {this.props.annoncereservations_count} {this.props.annoncereservations_count > 1 ? "annonces" : "annonce"}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -49,9 +34,7 @@ class NavLinkPublicAnnonceUser extends Component {
                                         Annonces <b>ventes</b>
                                     </NavLink>
                                 </td>
-                                {this.props.annonceventes_count && (
-                                    <td className="text-right"> {this.props.annonceventes_count} annonces</td>
-                                )}
+                                <td className="text-right"> {this.props.annonceventes_count} {this.props.annonceventes_count > 1 ? "annonces" : "annonce"}</td>
                             </tr>
                             </tbody>
                         </table>

@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Row, Form, Input,InputGroup } from 'reactstrap';
 
-class FormContactProfileAccountUser extends Component {
+class FormContactProfileAccountUser extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -177,7 +177,7 @@ class FormContactProfileAccountUser extends Component {
                     </Row>
                     <Row>
                         <InputGroup>
-                               <textarea name="message" value={this.state.message}
+                               <Input type="textarea" name="message" value={this.state.message}
                                          onChange={this.handleFieldChange}
                                          placeholder={'Posez ici toutes vos questions !'}
                                          className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}

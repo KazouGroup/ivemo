@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,Fragment } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Zoom from 'react-medium-image-zoom'
@@ -11,6 +11,8 @@ import { Remarkable } from "remarkable";
 import moment from "moment";
 import AnnoncelocationInteresseforBlog from "./AnnoncelocationInteresseforBlog"
 import BlogannoncelocationInteresse from "./BlogannoncelocationInteresse";
+import Skeleton from "react-loading-skeleton";
+import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 
 
 class BlogannoncelocationShow extends Component {
@@ -22,6 +24,7 @@ class BlogannoncelocationShow extends Component {
             blogannoncelocation: { user: [], categoryannoncelocation: [] },
         };
 
+        this.deleteItem = this.deleteItem.bind(this);
     }
 
     deleteItem(id) {
@@ -45,7 +48,7 @@ class BlogannoncelocationShow extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Article de blogs suprimée avec success'
+                            message: 'Article de blogs supprimée avec success'
                         },
                         {
                             allow_dismiss: false,
@@ -60,7 +63,7 @@ class BlogannoncelocationShow extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.props.history.goBack();
+                    this.props.history.push(`/blogs/annonce_locations/`);
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -96,10 +99,9 @@ class BlogannoncelocationShow extends Component {
         const { blogannoncelocation } = this.state;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         return (
-            <>
-                <Helmet>
-                    <title>{`${blogannoncelocation.title || 'Annonce'}`} - Ivemo</title>
-                </Helmet>
+            <Fragment>
+
+                <Helmet title={`${blogannoncelocation.title || 'Ivemo'} - Ivemo`}/>
 
                 <div className="landing-page sidebar-collapse">
 
@@ -122,27 +124,36 @@ class BlogannoncelocationShow extends Component {
                                             <div className="container">
                                                 <div className="row justify-content-center">
                                                     <div className="col-md-12 ml-auto mr-auto">
-
+                                                        {!$guest &&(
+                                                            <>
+                                                                {!$userIvemo.email_verified_at &&(
+                                                                    <LinkValicationEmail/>
+                                                                )}
+                                                            </>
+                                                        )}
 
 
                                                         <div className="card-header d-flex align-items-center">
                                                             <div className="d-flex align-items-center">
-                                                                <NavLink to={`/annonce/show/`}>
-                                                                    <img src={blogannoncelocation.user.avatar}
-                                                                        style={{ height: "40px", width: "80px", borderRadius: "5px" }}
-                                                                        alt={blogannoncelocation.user.first_name}
-                                                                        className="avatar" />
-                                                                </NavLink>
+                                                                {blogannoncelocation.user.avatar ?
+                                                                    <NavLink to={`/@${blogannoncelocation.user.slug}/blogs/annonce_locations/`}>
+                                                                        <img src={blogannoncelocation.user.avatar}
+                                                                             style={{ height: "40px", width: "80px", borderRadius: "5px" }}
+                                                                             alt={blogannoncelocation.user.first_name}
+                                                                             className="avatar" />
+                                                                    </NavLink>
+                                                                    : <Skeleton circle={false} height={40} width={80} />}
+
                                                                 <div className="mx-3">
-                                                                    <NavLink to={`/annonce/show/`} className="text-dark font-weight-600 text-sm"><b>{blogannoncelocation.user.first_name}</b>
-                                                                        <small className="d-block text-muted">{moment(blogannoncelocation.created_at).calendar()}</small>
+                                                                    <NavLink to={`/@${blogannoncelocation.user.slug}/blogs/annonce_locations/`} className="text-dark font-weight-600 text-sm"><b>{blogannoncelocation.user.first_name || <Skeleton width={35} />}</b>
+                                                                        <small className="d-block text-muted">{moment(blogannoncelocation.created_at).fromNow()}</small>
                                                                     </NavLink>
                                                                 </div>
                                                             </div>
                                                             {!$guest && (
-                                                                <>
+                                                                <Fragment>
                                                                     {$userIvemo.id === blogannoncelocation.user_id && (
-                                                                        <>
+                                                                        <Fragment>
                                                                             <div className="text-right ml-auto">
                                                                                 <UncontrolledTooltip placement="bottom" target="TooltipEdit">
                                                                                     Editer cet article
@@ -158,10 +169,10 @@ class BlogannoncelocationShow extends Component {
                                                                                     <i className="now-ui-icons ui-1_simple-remove" />
                                                                                 </Button>{" "}
                                                                             </div>
-                                                                        </>
+                                                                        </Fragment>
                                                                     )}
 
-                                                                </>
+                                                                </Fragment>
                                                             )}
                                                         </div>
 
@@ -170,10 +181,16 @@ class BlogannoncelocationShow extends Component {
                                                             <div className="carousel-inner" role="listbox">
                                                                 <div className="carousel-item active">
                                                                     <Zoom>
-                                                                        <img className="d-block"
-                                                                            src={blogannoncelocation.photo}
-                                                                            style={{ width: "1400px", height: "400px", borderRadius: "5px" }}
-                                                                            alt={blogannoncelocation.title} />
+                                                                        <div>
+                                                                            {blogannoncelocation.photo ?
+                                                                                <img className="d-block"
+                                                                                     src={blogannoncelocation.photo}
+                                                                                     style={{ width: "1400px", height: "600px", borderRadius: "2px" }}
+                                                                                     alt={blogannoncelocation.title} />
+                                                                                     :<Skeleton circle={false} height={600} width={1400} />}
+
+                                                                        </div>
+
                                                                     </Zoom>
 
                                                                 </div>
@@ -192,9 +209,10 @@ class BlogannoncelocationShow extends Component {
                                                 <div className="row justify-content-center ">
                                                     <div className="col-lg-11 ml-auto mr-auto">
 
-                                                        <h2 className="title text-center">{blogannoncelocation.title}</h2>
+                                                        <h2 className="title text-center">{blogannoncelocation.title || <Skeleton width={300} />}</h2>
 
-                                                        <div className="title text-justify" dangerouslySetInnerHTML={this.getDescription(blogannoncelocation)} />
+                                                        {blogannoncelocation.description ? <div className="title text-justify" dangerouslySetInnerHTML={this.getDescription(blogannoncelocation)} />: <Skeleton count={5}/>}
+
 
 
                                                     </div>
@@ -237,7 +255,7 @@ class BlogannoncelocationShow extends Component {
                         <FooterBigUserSite />
                     </div>
                 </div>
-            </>
+            </Fragment>
 
 
 

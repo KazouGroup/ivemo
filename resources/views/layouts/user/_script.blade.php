@@ -38,5 +38,5 @@
 			return false;
 		});
   });
-  setTimeout(function() { window.location=window.location;},14400000);
+  setTimeout(function() { window.location=window.location;},10400000);
 </script>

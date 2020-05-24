@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Button,UncontrolledTooltip } from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
@@ -9,6 +8,7 @@ import AnnoncereservationList from "../../../annonces/annoncereservation/inc/Ann
 import NavLinkPublicAnnonceUser from "../NavLinkPublicAnnonceUser";
 import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";
 import NavLinkPublicBlogannoncesUser from "../../blogs/public/NavLinkPublicBlogannoncesUser";
+import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
 
 
 class PublicUserAnnonceReservations extends Component {
@@ -238,6 +238,22 @@ class PublicUserAnnonceReservations extends Component {
                                                 </div>
 
                                                 <FormContactProfileAccountUser {...this.props}/>
+
+                                            </div>
+                                        </div>
+
+                                        <div className="card card-raised card-form-horizontal">
+
+                                            <div className="card-body">
+
+                                                <div className="card-header text-center">
+                                                    <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
+                                                    <p className="card-title">
+                                                        Abonnez-vous à la newsletter de <b>{useranoncereservationPublick.first_name}</b> afin d'être notifié des mises à jour
+                                                    </p>
+                                                </div>
+
+                                                <FormNewletterSubcribeProfileAccountUser {...this.props} />
 
                                             </div>
                                         </div>

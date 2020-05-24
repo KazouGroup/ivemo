@@ -15,7 +15,6 @@ Route::get(
     'ProfileController@api_profile_add_info_account'
 )->name('api_profile_add_info_account.site');
 
-
 Route::get(
     'profile/account',
     'ProfileController@profile_account'
@@ -25,6 +24,11 @@ Route::put(
     'profile/account',
     'ProfileController@profile_account_update'
 )->name('profile_add_info_account_update.site');
+
+Route::delete(
+    'profile/account_delete/{id}',
+    'ProfileController@profile_account_delete'
+)->name('profile_add_info_account_delete.site');
 
 Route::get(
     'profile/{profile}/account',
@@ -79,8 +83,3 @@ Route::get(
 Route::put('profile/change_password/update_password',
     'ProfileController@updatePassword'
 )->name('update_password.site');
-
-Route::delete(
-    'profile/personal_mails/delete_mail/{id}',
-    'ProfileController@personalmessagesdelete'
-)->name('personal_mails_delete.site');

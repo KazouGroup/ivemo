@@ -6,9 +6,19 @@ Route::get(
 )->name('api.categoryannoncereservation_site');
 
 Route::get(
+    'categoryannoncereservations/{city}',
+    'AnnoncereservationController@apicategoryannoncereservationbycity'
+)->name('api.categoryannoncereservationbycity_site');
+
+Route::get(
+    'annonce_reservations/{annoncetype}/{city}',
+    'AnnoncereservationController@apiannoncereservationsbyannoncetypebycity'
+)->name('api.annoncereservationsbyannoncetypebycity_site');
+
+Route::get(
     'annonces_reservations_by_cities',
     'AnnoncereservationController@apicitiesannonces'
-)->name('api.citiesannonces_reservations_site');
+)->name('api.citiesannoncereservations_site');
 
 Route::get(
     'annonces_reservations_by_cities/{categoryannoncereservation}',
@@ -34,6 +44,11 @@ Route::get(
     'annonces_reservations/{annoncetype}',
     'AnnoncereservationController@apiannoncereservationbyannoncetype'
 )->name('api.annoncereservationbyannoncetype_site');
+
+Route::get(
+    'annonce_reservations/{annoncetype}/{city}',
+    'AnnoncereservationController@apiannoncereservationbyannoncetypebycity'
+)->name('api.annoncereservationsbyannoncetypebycity_site');
 
 Route::get(
     'annonces_reservations/{annoncetype}/{categoryannoncereservation}',

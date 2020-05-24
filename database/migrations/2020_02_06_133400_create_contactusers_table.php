@@ -18,7 +18,9 @@ class CreateContactusersTable extends Migration
             $table->string('full_name')->nullable();
             $table->string('email')->nullable();
             $table->string('slug')->nullable();
-            $table->boolean('status_red')->default(false);
+            $table->boolean('status_archvement')->default(false);
+            $table->boolean('status_favorite')->default(false);
+            $table->boolean('status_red')->default(true);
             $table->string('phone')->nullable();
             $table->string('ip')->nullable();
             $table->mediumText('subject')->nullable();
@@ -28,14 +30,6 @@ class CreateContactusersTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->unsignedBigInteger('annoncevente_id')->nullable()->index();
-            $table->foreign('annoncevente_id')->references('id')->on('annonceventes')->onDelete('cascade');
-
-            $table->unsignedBigInteger('annoncereservation_id')->nullable()->index();
-            $table->foreign('annoncereservation_id')->references('id')->on('annoncereservations')->onDelete('cascade');
-
-            $table->unsignedBigInteger('annoncelocation_id')->nullable()->index();
-            $table->foreign('annoncelocation_id')->references('id')->on('annoncelocations')->onDelete('cascade');
         });
     }
 

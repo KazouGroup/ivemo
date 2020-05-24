@@ -2,6 +2,22 @@
 
 return [
 
+    'description' => env('APP_DESCRIPTION', 'Fallback Description'),
+    'author'      => env('APP_AUTHOR', 'Fallback Author'),
+    'keywords'    => env('APP_KEYWORDS', 'laravel'),
+    'title'       => env('APP_TITLE', 'Title site'),
+    'country'     => env('APP_COUNTRY', 'Italy'),
+
+    'email'       => env('EMAIL_ADDRESS', 'temgua2013@yahoo.fr'),
+    /*
+    |-------------------------------------------------------------------------
+    | Link social net
+    |-------------------------------------------------------------------------
+    |
+    */
+    'facebook' => env('APP_FACEBOOK_GROUP', 'https://www.facebook.com/'),
+    'google'   => env('APP_GOOGLE_GROUP', 'https://plus.google.com/'),
+    'twitter'  => env('APP_TWITTER_GROUP', 'https://twitter.com/'),
     /*
     |--------------------------------------------------------------------------
     | Application Name

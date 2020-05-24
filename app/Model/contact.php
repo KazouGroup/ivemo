@@ -5,9 +5,9 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class contact extends Model implements Auditable
+class contact extends Model 
 {
-    use \OwenIt\Auditing\Auditable;
+    //use \OwenIt\Auditing\Auditable;
 
     protected $guarded = [];
 

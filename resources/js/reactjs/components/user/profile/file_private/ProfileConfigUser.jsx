@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import {Button, Form, Input, InputGroup, Row, CardBody, Col, CardTitle, FormGroup} from "reactstrap";
@@ -8,7 +7,6 @@ import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import './ProfileAccountUser.css';
 import NavProfileAccountPrivate from "./NavProfileAccountPrivate";
 import moment from "moment";
-import ReactQuill from "react-quill";
 
 
 class ProfileConfigUser extends Component {
@@ -16,6 +14,8 @@ class ProfileConfigUser extends Component {
         super(props);
 
         this.updateItem = this.updateItem.bind(this);
+        this.handleCheckClick = this.handleCheckClick.bind(this);
+        this.handleStatusTeamUser = this.handleStatusTeamUser.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
@@ -23,14 +23,19 @@ class ProfileConfigUser extends Component {
         this.state = {
             facebook_link: '',
             twitter_link: '',
+            youtube_link: '',
             address: '',
             instagram_link: '',
             city_id: '',
             linkedin_link: '',
             birthdate: '',
             site_internet: '',
+            status_avis: '',
+            status_team_user: '',
+            categoryprofile_id: '',
             description: '',
             cities: [],
+            categoryprofiles: [],
             errors: [],
         };
         this.modules = {
@@ -63,6 +68,15 @@ class ProfileConfigUser extends Component {
         });
         this.state.errors[event.target.name] = '';
     }
+
+    handleCheckClick(){
+        this.setState({ status_avis: !this.state.status_avis });
+    };
+
+    handleStatusTeamUser(){
+        this.setState({ status_team_user: !this.state.status_team_user });
+    };
+
     // Handle Errors
     hasErrorFor(field) {
         return !!this.state.errors[field];
@@ -84,11 +98,15 @@ class ProfileConfigUser extends Component {
         let item = {
             facebook_link: this.state.facebook_link,
             twitter_link: this.state.twitter_link,
+            youtube_link: this.state.youtube_link,
             instagram_link: this.state.instagram_link,
+            categoryprofile_id: this.state.categoryprofile_id,
             city_id: this.state.city_id,
             address: this.state.address,
             linkedin_link: this.state.linkedin_link,
             birthdate: this.state.birthdate,
+            status_avis: this.state.status_avis,
+            status_team_user: this.state.status_team_user,
             site_internet: this.state.site_internet,
             description: this.state.description,
         };
@@ -126,17 +144,22 @@ class ProfileConfigUser extends Component {
     }
 
     loadItem() {
+        dyaxios.get(route('api.categoryprofiles')).then(response => this.setState({ categoryprofiles: response.data, }));
         dyaxios.get(route('api.all_cities')).then(response => this.setState({ cities: response.data, }));
         const itemprofile = this.props.match.params.profile;
         dyaxios.get(route('api_profile_add_info_account.site',[itemprofile])).then(response =>
             this.setState({
                 facebook_link: response.data.facebook_link,
                 twitter_link: response.data.twitter_link,
+                youtube_link: response.data.youtube_link,
                 instagram_link: response.data.instagram_link,
+                categoryprofile_id: response.data.categoryprofile_id,
                 city_id: response.data.city_id,
                 linkedin_link: response.data.linkedin_link,
                 birthdate: response.data.birthdate,
                 address: response.data.address,
+                status_avis: response.data.status_avis,
+                status_team_user: response.data.status_team_user,
                 site_internet: response.data.site_internet,
                 description: response.data.description,
             }));
@@ -148,7 +171,7 @@ class ProfileConfigUser extends Component {
     }
 
     render() {
-        const {cities} = this.state;
+        const {categoryprofiles,cities} = this.state;
         return (
 
             <>
@@ -202,7 +225,7 @@ class ProfileConfigUser extends Component {
                                                                 <i className="now-ui-icons tech_mobile"/>
                                                             </Button>
                                                             {this.state.site_internet && (
-                                                                <a href={`${this.state.site_internet}`} className="btn btn-sm btn-primary" target="_banck">
+                                                                <a href={`${this.state.site_internet}`} className="btn btn-sm btn-secondary" target="_banck">
                                                                     <i className="now-ui-icons objects_globe"/>
                                                                 </a>
                                                             )}
@@ -238,7 +261,7 @@ class ProfileConfigUser extends Component {
 
                                                     <hr/>
                                                     <Row>
-                                                        <div className="col-md-12">
+                                                        <div className="col-md-6 col-6">
                                                             <label
                                                                 htmlFor="address"><b>Adresse de résidence</b></label>
                                                             <div className="input-group">
@@ -261,15 +284,38 @@ class ProfileConfigUser extends Component {
                                                                 {this.renderErrorFor('address')}
                                                             </div>
                                                         </div>
+                                                        <div className="col-md-6 col-6">
+                                                            <label htmlFor="url_site"><b>Site
+                                                                internet</b></label>
+                                                            <div className="input-group">
+                                                                <div
+                                                                    className="input-group-prepend">
+                                                                    <span className="input-group-text">
+                                                                        <i className="now-ui-icons objects_globe"/>
+                                                                    </span>
+                                                                </div>
+                                                                <input id='site_internet'
+                                                                       type='url'
+                                                                       className={`form-control ${this.hasErrorFor('site_internet') ? 'is-invalid' : ''}`}
+                                                                       name='site_internet'
+                                                                       placeholder="https://www.ivemo.com"
+                                                                       aria-label="https://www.ivemo.com"
+                                                                       autoComplete="site_internet"
+                                                                       value={this.state.site_internet || ''}
+                                                                       onChange={this.handleFieldChange}
+                                                                />
+                                                                {this.renderErrorFor('site_internet')}
+                                                            </div>
+                                                        </div>
                                                     </Row>
                                                     <Row>
-                                                        <div className="col-md-6">
-                                                            <label htmlFor="birthdate"><b>Votre année de naissance</b></label>
+                                                        <div className="col-md-4">
                                                             <div className="form-group">
 
                                                                 <select value={this.state.birthdate || ''} className={`form-control ${this.hasErrorFor('birthdate') ? 'is-invalid' : ''}`}
                                                                         onChange={this.handleFieldChange} name="birthdate" required="required">
                                                                     <option value="" disabled>Année de naissance</option>
+                                                                    <option value="2021"> 2021</option>
                                                                     <option value="2020"> 2020</option>
                                                                     <option value="2019"> 2019</option>
                                                                     <option value="2018"> 2018</option>
@@ -376,8 +422,7 @@ class ProfileConfigUser extends Component {
                                                             </div>
                                                         </div>
 
-                                                        <div className="col-md-6">
-                                                            <label htmlFor="city_id"><b>Votre ville</b></label>
+                                                        <div className="col-md-4">
                                                             <div className="form-group">
                                                                 <select value={this.state.city_id || ''} className={`form-control ${this.hasErrorFor('city_id') ? 'is-invalid' : ''}`}
                                                                         onChange={this.handleFieldChange} name="city_id" required="required">
@@ -390,147 +435,277 @@ class ProfileConfigUser extends Component {
                                                             </div>
                                                         </div>
 
+                                                        <div className="col-md-4">
+                                                            <div className="form-group">
+
+                                                                <select value={this.state.categoryprofile_id || ''} className={`form-control ${this.hasErrorFor('categoryprofile_id') ? 'is-invalid' : ''}`}
+                                                                        onChange={this.handleFieldChange} name="categoryprofile_id" required="required">
+                                                                    <option value="" disabled>Pourquoi êtes-vous sur Ivemo</option>
+                                                                    {categoryprofiles.map((item) => (
+                                                                        <option key={item.id} value={item.id}>{item.name}</option>
+                                                                    ))}
+                                                                </select>
+
+                                                                {this.renderErrorFor('categoryprofile_id')}
+                                                            </div>
+                                                        </div>
+
                                                     </Row>
 
-                                                    <div className="row">
-                                                        <div className="col-md-6 col-6">
-                                                            <label htmlFor="url_site"><b>Site
-                                                                internet</b></label>
-                                                            <div className="input-group">
-                                                                <div
-                                                                    className="input-group-prepend">
+                                                    <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                        <div className="card card-plain">
+                                                            <div className="card-header" role="tab" id="headingDue">
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseDue" aria-expanded="false" aria-controls="collapseDue">
+                                                                    <b>Site internet et reseaux sociaux</b>
+                                                                    <i className="now-ui-icons arrows-1_minimal-down"></i>
+                                                                </a>
+                                                            </div>
+                                                            <div id="collapseDue" className="collapse" role="tabpanel" aria-labelledby="headingDue">
+                                                                <div className="card-body">
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+
+                                                                                <div className="row">
+                                                                                    <div className="col-md-6 col-6">
+                                                                                        <label htmlFor="url_site"><b>Site
+                                                                                            internet</b></label>
+                                                                                        <div className="input-group">
+                                                                                            <div
+                                                                                                className="input-group-prepend">
                                                                     <span className="input-group-text">
                                                                         <i className="now-ui-icons objects_globe"/>
                                                                     </span>
-                                                                </div>
-                                                                <input id='site_internet'
-                                                                       type='url'
-                                                                       className={`form-control ${this.hasErrorFor('site_internet') ? 'is-invalid' : ''}`}
-                                                                       name='site_internet'
-                                                                       placeholder="https://www.ivemo.com"
-                                                                       aria-label="https://www.ivemo.com"
-                                                                       autoComplete="site_internet"
-                                                                       value={this.state.site_internet || ''}
-                                                                       onChange={this.handleFieldChange}
-                                                                />
-                                                                {this.renderErrorFor('site_internet')}
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-6 col-6">
+                                                                                            </div>
+                                                                                            <input id='site_internet'
+                                                                                                   type='url'
+                                                                                                   className={`form-control ${this.hasErrorFor('site_internet') ? 'is-invalid' : ''}`}
+                                                                                                   name='site_internet'
+                                                                                                   placeholder="https://www.ivemo.com"
+                                                                                                   aria-label="https://www.ivemo.com"
+                                                                                                   autoComplete="site_internet"
+                                                                                                   value={this.state.site_internet || ''}
+                                                                                                   onChange={this.handleFieldChange}
+                                                                                            />
+                                                                                            {this.renderErrorFor('site_internet')}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div className="col-md-6 col-6">
 
-                                                            <label htmlFor="url_site"><b>Twitter </b></label>
-                                                            <div className="input-group">
-                                                                <div
-                                                                    className="input-group-prepend">
+                                                                                        <label htmlFor="url_site"><b>Twitter </b></label>
+                                                                                        <div className="input-group">
+                                                                                            <div
+                                                                                                className="input-group-prepend">
                                                                     <span className="input-group-text">
                                                                         <i className="now-ui-icons objects_globe"/>
                                                                     </span>
-                                                                </div>
-                                                                <input id='twitter_link'
-                                                                       type='text'
-                                                                       className={`form-control ${this.hasErrorFor('twitter_link') ? 'is-invalid' : ''}`}
-                                                                       name='twitter_link'
-                                                                       placeholder="Lien de profile "
-                                                                       aria-label="Lien de profile "
-                                                                       autoComplete="Lien de profile twitter"
-                                                                       value={this.state.twitter_link || ''}
-                                                                       onChange={this.handleFieldChange}
-                                                                />
-                                                                {this.renderErrorFor('twitter_link')}
-                                                            </div>
-                                                        </div>
+                                                                                            </div>
+                                                                                            <input id='twitter_link'
+                                                                                                   type='text'
+                                                                                                   className={`form-control ${this.hasErrorFor('twitter_link') ? 'is-invalid' : ''}`}
+                                                                                                   name='twitter_link'
+                                                                                                   placeholder="Lien de profile "
+                                                                                                   aria-label="Lien de profile "
+                                                                                                   autoComplete="Lien de profile twitter"
+                                                                                                   value={this.state.twitter_link || ''}
+                                                                                                   onChange={this.handleFieldChange}
+                                                                                            />
+                                                                                            {this.renderErrorFor('twitter_link')}
+                                                                                        </div>
+                                                                                    </div>
 
-                                                    </div>
+                                                                                </div>
 
-                                                    <div className="row">
-                                                        <div className="col-md-4">
-                                                            <label htmlFor="url_site"><b>Linkedin</b></label>
-                                                            <div className="input-group">
-                                                                <div
-                                                                    className="input-group-prepend">
+                                                                                <div className="row">
+                                                                                    <div className="col-md-6">
+                                                                                        <label htmlFor="url_site"><b>Linkedin</b></label>
+                                                                                        <div className="input-group">
+                                                                                            <div
+                                                                                                className="input-group-prepend">
                                                                     <span className="input-group-text">
                                                                         <i className="now-ui-icons objects_globe"/>
                                                                     </span>
-                                                                </div>
-                                                                <input id='linkedin_link'
-                                                                       type='url'
-                                                                       className={`form-control ${this.hasErrorFor('linkedin_link') ? 'is-invalid' : ''}`}
-                                                                       name='linkedin_link'
-                                                                       placeholder="Linkedin profile"
-                                                                       aria-label="https://www.ivemo.com"
-                                                                       autoComplete="linkedin_link"
-                                                                       value={this.state.linkedin_link || ''}
-                                                                       onChange={this.handleFieldChange}
-                                                                />
-                                                                {this.renderErrorFor('linkedin_link')}
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-4">
+                                                                                            </div>
+                                                                                            <input id='linkedin_link'
+                                                                                                   type='url'
+                                                                                                   className={`form-control ${this.hasErrorFor('linkedin_link') ? 'is-invalid' : ''}`}
+                                                                                                   name='linkedin_link'
+                                                                                                   placeholder="Linkedin profile"
+                                                                                                   aria-label="https://www.ivemo.com"
+                                                                                                   autoComplete="linkedin_link"
+                                                                                                   value={this.state.linkedin_link || ''}
+                                                                                                   onChange={this.handleFieldChange}
+                                                                                            />
+                                                                                            {this.renderErrorFor('linkedin_link')}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div className="col-md-6">
 
-                                                            <label htmlFor="url_site"><b>Instagram</b></label>
-                                                            <div className="input-group">
-                                                                <div
-                                                                    className="input-group-prepend">
+                                                                                        <label htmlFor="url_site"><b>Instagram</b></label>
+                                                                                        <div className="input-group">
+                                                                                            <div
+                                                                                                className="input-group-prepend">
                                                                     <span className="input-group-text">
                                                                         <i className="now-ui-icons objects_globe"/>
                                                                     </span>
-                                                                </div>
-                                                                <input id='instagram_link'
-                                                                       type='text'
-                                                                       className={`form-control ${this.hasErrorFor('instagram_link') ? 'is-invalid' : ''}`}
-                                                                       name='instagram_link'
-                                                                       placeholder="Lien de profile "
-                                                                       aria-label="Lien de profile "
-                                                                       autoComplete="Lien de profile twitter"
-                                                                       value={this.state.instagram_link || ''}
-                                                                       onChange={this.handleFieldChange}
-                                                                />
-                                                                {this.renderErrorFor('instagram_link')}
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-4">
+                                                                                            </div>
+                                                                                            <input id='instagram_link'
+                                                                                                   type='text'
+                                                                                                   className={`form-control ${this.hasErrorFor('instagram_link') ? 'is-invalid' : ''}`}
+                                                                                                   name='instagram_link'
+                                                                                                   placeholder="Lien de profile "
+                                                                                                   aria-label="Lien de profile "
+                                                                                                   autoComplete="Lien de profile twitter"
+                                                                                                   value={this.state.instagram_link || ''}
+                                                                                                   onChange={this.handleFieldChange}
+                                                                                            />
+                                                                                            {this.renderErrorFor('instagram_link')}
+                                                                                        </div>
+                                                                                    </div>
 
-                                                            <label htmlFor="title"><b>Facebook</b></label>
-                                                            <div className="input-group">
-                                                                <div className="input-group-prepend">
+                                                                                </div>
+
+                                                                                <div className={`row`}>
+                                                                                    <div className="col-md-6">
+
+                                                                                        <label htmlFor="title"><b>Facebook</b></label>
+                                                                                        <div className="input-group">
+                                                                                            <div className="input-group-prepend">
                                                                     <span className="input-group-text">
                                                                          <i className="now-ui-icons objects_globe"/>
                                                                     </span>
-                                                                </div>
-                                                                <input id='facebook_link'
-                                                                       type='text'
-                                                                       className={`form-control ${this.hasErrorFor('facebook_link') ? 'is-invalid' : ''}`}
-                                                                       name='facebook_link'
-                                                                       placeholder="Lien profile facebook"
-                                                                       aria-label="facebook_link"
-                                                                       autoComplete="facebook_link"
-                                                                       value={this.state.facebook_link || ''}
-                                                                       onChange={this.handleFieldChange}
-                                                                />
-                                                                {this.renderErrorFor('facebook_link')}
-                                                            </div>
-                                                        </div>
+                                                                                            </div>
+                                                                                            <input id='facebook_link'
+                                                                                                   type='text'
+                                                                                                   className={`form-control ${this.hasErrorFor('facebook_link') ? 'is-invalid' : ''}`}
+                                                                                                   name='facebook_link'
+                                                                                                   placeholder="Lien profile facebook"
+                                                                                                   aria-label="facebook_link"
+                                                                                                   autoComplete="facebook_link"
+                                                                                                   value={this.state.facebook_link || ''}
+                                                                                                   onChange={this.handleFieldChange}
+                                                                                            />
+                                                                                            {this.renderErrorFor('facebook_link')}
+                                                                                        </div>
+                                                                                    </div>
 
-                                                    </div>
+                                                                                    <div className="col-md-6">
 
-                                                    <label htmlFor="url_site"><b>Description </b></label>
-                                                    <FormGroup>
-                                                        <label className="labels">
-                                                            Décrivez votre article
-                                                            <span className="text-danger">*</span>
-                                                        </label>
-                                                        <br />
-                                                        <ReactQuill theme="snow" modules={this.modules}
+                                                                                        <label htmlFor="title"><b>Youtube</b></label>
+                                                                                        <div className="input-group">
+                                                                                            <div className="input-group-prepend">
+                                                                    <span className="input-group-text">
+                                                                         <i className="now-ui-icons objects_globe"/>
+                                                                    </span>
+                                                                                            </div>
+                                                                                            <input id='youtube_link'
+                                                                                                   type='text'
+                                                                                                   className={`form-control ${this.hasErrorFor('youtube_link') ? 'is-invalid' : ''}`}
+                                                                                                   name='youtube_link'
+                                                                                                   placeholder="Lien compte youtube"
+                                                                                                   aria-label="youtube_link"
+                                                                                                   autoComplete="youtube_link"
+                                                                                                   value={this.state.youtube_link || ''}
+                                                                                                   onChange={this.handleFieldChange}
+                                                                                            />
+                                                                                            {this.renderErrorFor('youtube_link')}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <label htmlFor="description"><b>Description </b></label>
+                                                                                <FormGroup>
+                                                                                    <label className="labels">
+                                                                                        Décrivez votre article
+                                                                                        <span className="text-danger">*</span>
+                                                                                    </label>
+                                                                                    <br />
+                                                                                    <Input type="textarea" name="description" value={this.state.description || ""}
+                                                                                           onChange={this.handleFieldChange}
+                                                                                           placeholder={'Donner une description...'}
+                                                                                           className={`form-control ${this.hasErrorFor('description') ? 'is-invalid' : ''} form-control-alternative"`}
+                                                                                           id="description"
+                                                                                           rows="17" />
+                                                                                    {this.renderErrorFor('description')}
+                                                                                    {/*
+                                                         <ReactQuill theme="snow" modules={this.modules}
                                                                     formats={this.formats}
                                                                     className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                     value={this.state.description || ''}
                                                                     onChange={this.handleChangeBody} />
                                                         {this.renderErrorFor('description')}
-                                                    </FormGroup>
+                                                        */}
+
+                                                                                </FormGroup>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                        <div className="card card-plain">
+                                                            <div className="card-header" role="tab" id="headingTre">
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTre" aria-expanded="false" aria-controls="collapseTre">
+                                                                    <b>Notification et status</b>
+                                                                    <i className="now-ui-icons arrows-1_minimal-down"/>
+                                                                </a>
+                                                            </div>
+                                                            <div id="collapseTre" className="collapse" role="tabpanel" aria-labelledby="headingTre">
+                                                                <div className="card-body">
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+
+                                                                                <div className="row">
+
+                                                                                    <div className="col-md-12 mx-auto">
+                                                                                        <div className="form-check">
+                                                                                            <label
+                                                                                                className="form-check-label">
+                                                                                                <input className="form-check-input"
+                                                                                                    type="checkbox" name="status_avis" checked={this.state.status_avis} value={this.state.status_avis}  onChange={this.handleCheckClick}/>
+                                                                                                    <span className="form-check-sign"/>
+                                                                                                    <b>Afficher ou masques les avis des utilisateurs</b>
+                                                                                            </label>
+                                                                                        </div>
+
+                                                                                    </div>
+
+                                                                                </div>
+
+                                                                                <div className="row">
+
+                                                                                    <div className="col-md-12 mx-auto">
+                                                                                        <div className="form-check">
+                                                                                            <label
+                                                                                                className="form-check-label">
+                                                                                                <input className="form-check-input"
+                                                                                                    type="checkbox" name="status_team_user" checked={this.state.status_team_user} value={this.state.status_team_user}  onChange={this.handleStatusTeamUser}/>
+                                                                                                    <span className="form-check-sign"/>
+                                                                                                    <b>Afficher ou masques votre team</b>
+                                                                                            </label>
+                                                                                        </div>
+
+                                                                                    </div>
+
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
 
                                                     <div className="submit text-center">
-                                                        <button className="btn btn-primary btn-round" type="submit">
-                                                            <i className="now-ui-icons ui-1_check"/>
+                                                        <button className="btn btn-primary" type="submit">
                                                             <b>Enregistrer</b>
                                                         </button>
                                                     </div>

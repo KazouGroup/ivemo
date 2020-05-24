@@ -38,11 +38,11 @@ import Annoncebycategoryannonceventecity from "../components/user/annonces/annon
 import Annonceventebycategorycityshow from "../components/user/annonces/annoncevente/Annonceventebycategorycityshow";
 
 import PersonalmessagesannonceslocationsUser
-    from "../components/user/profile/mail/PersonalmessagesannonceslocationsUser";
-import PersonalmessagescontactUser from "../components/user/profile/mail/PersonalmessagescontactUser";
+    from "../components/user/profile/mail/contactuserslocation/PersonalmessagesannonceslocationsUser";
+import PersonalmessagescontactUser from "../components/user/profile/mail/contactusers/PersonalmessagescontactUser";
 import PersonalmessagesannonceslocationsShowUser
-    from "../components/user/profile/mail/PersonalmessagesannonceslocationsShowUser";
-import PersonalmessagescontactShowUser from "../components/user/profile/mail/PersonalmessagescontactShowUser";
+    from "../components/user/profile/mail/contactuserslocation/PersonalmessagesannonceslocationsShowUser";
+import PersonalmessagescontactShowUser from "../components/user/profile/mail/contactusers/PersonalmessagescontactShowUser";
 import TeamsUserIndex from "../components/user/configurations/teams/TeamsUserIndex";
 import PublicUserAnnonceLocations from "../components/user/profile/annonces/public/PublicUserAnnonceLocations";
 import PublicUserAnnonceReservations from "../components/user/profile/annonces/public/PublicUserAnnonceReservations";
@@ -53,14 +53,14 @@ import PublicUserBlogannonceReservation from "../components/user/profile/blogs/p
 import PrivateUserAnnonceLocations from "../components/user/profile/annonces/private/PrivateUserAnnonceLocations";
 import BlogannoncereservationIndex from "../components/user/blog/blogannoncereservation/BlogannoncereservationIndex";
 import BlogannoncelocationIndex from "../components/user/blog/blogannoncelocation/BlogannoncelocationIndex";
-import PrivateUserBlogannonceLocation from "../components/user/profile/blogs/private/PrivateUserBlogannonceLocation";
+import PrivateUserBlogannonceLocation from "../components/user/profile/blogs/private/blogannoncelocation/PrivateUserBlogannonceLocation";
 import PrivateUserBlogannonceReservation
-    from "../components/user/profile/blogs/private/PrivateUserBlogannonceReservation";
+    from "../components/user/profile/blogs/private/blogannoncereservation/PrivateUserBlogannonceReservation";
 import PrivateUserAnnonceReservations from "../components/user/profile/annonces/private/PrivateUserAnnonceReservations";
 import BlogannonceventeIndex from "../components/user/blog/blognnoncevente/BlogannonceventeIndex";
 import BlogannonceventesBycategoryvente from "../components/user/blog/blognnoncevente/BlogannonceventesBycategoryvente";
 import BlogannonceventeShow from "../components/user/blog/blognnoncevente/BlogannonceventeShow";
-import PrivateUserBlogannonceVente from "../components/user/profile/blogs/private/PrivateUserBlogannonceVente";
+import PrivateUserBlogannonceVente from "../components/user/profile/blogs/private/blogannoncevente/PrivateUserBlogannonceVente";
 import PublicUserBlogannonceVente from "../components/user/profile/blogs/public/PublicUserBlogannonceVente";
 import PrivateUserAnnonceVentes from "../components/user/profile/annonces/private/PrivateUserAnnonceVentes";
 import PublicUserAnnonceVentes from "../components/user/profile/annonces/public/PublicUserAnnonceVentes";
@@ -73,34 +73,73 @@ import BlogannoncereservationCreate
     from "../components/user/blog/blogannoncereservation/treatement/BlogannoncereservationCreate";
 import BlogannonceventeEdit from "../components/user/blog/blognnoncevente/treatement/BlogannonceventeEdit";
 import BlogannonceventeCreate from "../components/user/blog/blognnoncevente/treatement/BlogannonceventeCreate";
+import PersonalmessagesannoncesventesUser
+    from "../components/user/profile/mail/contactusersvente/PersonalmessagesannoncesventesUser";
+import PersonalmessagesannoncesventesShowUser
+    from "../components/user/profile/mail/contactusersvente/PersonalmessagesannoncesventesShowUser";
+import PrivateUserBlogannonceVentebyCategoryannoncevente
+    from "../components/user/profile/blogs/private/blogannoncevente/PrivateUserBlogannonceVentebyCategoryannoncevente";
+import PrivateUserBlogannonceLocationByCategorylocation
+    from "../components/user/profile/blogs/private/blogannoncelocation/PrivateUserBlogannonceLocationByCategorylocation";
+import PrivateUserBlogannonceReservationCategoryreservation
+    from "../components/user/profile/blogs/private/blogannoncereservation/PrivateUserBlogannonceReservationCategoryreservation";
+import PersonalmessagesachvmentcontactUser
+    from "../components/user/profile/mail/contactusers/PersonalmessagesachvmentcontactUser";
+import PersonalmessagesfavoritecontactUser
+    from "../components/user/profile/mail/contactusers/PersonalmessagesfavoritecontactUser";
+import PersonalmessagesachvmentannoncesventesUser
+    from "../components/user/profile/mail/contactusersvente/PersonalmessagesachvmentannoncesventesUser";
+import PersonalmessagesfavoriteannoncesventesUser
+    from "../components/user/profile/mail/contactusersvente/PersonalmessagesfavoriteannoncesventesUser";
+import PersonalmessagesachvmentannonceslocationsUser
+    from "../components/user/profile/mail/contactuserslocation/PersonalmessagesachvmentannonceslocationsUser";
+import PersonalmessagesfavoriteannonceslocationsUser
+    from "../components/user/profile/mail/contactuserslocation/PersonalmessagesfavoriteannonceslocationsUser";
+import Annoncelocationbyannoncetypebycity
+    from "../components/user/annonces/annonceloaction/Annoncelocationbyannoncetypebycity";
+import Annonceventebyannoncetypebycity from "../components/user/annonces/annoncevente/Annonceventebyannoncetypebycity";
+import Annoncereservationbyannoncetypebycity
+    from "../components/user/annonces/annoncereservation/Annoncereservationbyannoncetypebycity";
+import AgencesimmobilieIndex from "../components/user/agencesimmobilie/AgencesimmobilieIndex";
+import FaqsIndexSite from "../components/user/pages/FaqsIndexSite";
 
 
 const RouteUser = props => (
 
     <Switch>
+
           <Route exact path="/" component={IndexSite}/>
           <Route exact path="/login/" component={LoginUser}/>
           <Route exact path="/register/" component={RegisterUser}/>
           <Route exact path="/about/" component={AboutUserSite}/>
           <Route exact path="/contact/" component={ContactUserSite}/>
+          <Route exact path="/faqs/" component={FaqsIndexSite}/>
           <Route exact path="/annonce/" component={AnnonceUserSite}/>
           <Route exact path="/annonce/show/" component={AnnonceShowUserSite}/>
+
+          <Route exact path="/agences_immobilies/" component={AgencesimmobilieIndex}/>
+
           <Route exact path="/annonces_reservations/:annoncetype/" component={AnnoncereservationIndex}/>
+          <Route exact path="/annonce_reservations/:annoncetype/:city/" component={Annoncereservationbyannoncetypebycity}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/" component={withRouter(Annoncebycategoryannoncereservation)}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/" component={withRouter(Annoncebycategoryannoncereservationcity)}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/:annoncereservation/" component={withRouter(Annoncebycategoryannoncereservationcityshow)}/>
 
-          <Route exact path="/annonces_locations/:annoncetype/" component={withRouter(AnnoncelocationIndex)}/>
+
+          <Route exact path="/annonces_locations/:annoncetype/" component={AnnoncelocationIndex}/>
+          <Route exact path="/annonce_locations/:annoncetype/:city/" component={Annoncelocationbyannoncetypebycity}/>
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/" component={withRouter(Annoncebycategoryannoncelocation)}/>
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/" component={withRouter(Annoncelocationbycity)}/>
-          <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/:date/:annoncelocation/" component={withRouter(Annoncelocationbycategorycityshow)}/>
+          <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/:annoncelocation/" component={withRouter(Annoncelocationbycategorycityshow)}/>
+
           <Route exact path="/annonce/show/create/" component={AnnonceShowCreateUserSite}/>
           <Route exact path="/annonce/show/vendre/create/" component={AnnonceBienAvendreCreate}/>
 
-          <Route exact path="/annonces_ventes/:annoncetype/" component={withRouter(AnnonceventeIndex)}/>
+          <Route exact path="/annonces_ventes/:annoncetype/" component={AnnonceventeIndex}/>
+          <Route exact path="/annonce_ventes/:annoncetype/:city/" component={Annonceventebyannoncetypebycity}/>
           <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/" component={withRouter(Annoncebycategoryannoncevente)}/>
           <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/:city/" component={withRouter(Annoncebycategoryannonceventecity)}/>
-          <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/:city/:date/:annoncevente/" component={withRouter(Annonceventebycategorycityshow)}/>
+          <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/:city/:annoncevente/" component={withRouter(Annonceventebycategorycityshow)}/>
 
 
           <Route exact path="/profile/account/" component={ProfileAccountUser}/>
@@ -119,11 +158,22 @@ const RouteUser = props => (
           <Route exact path="/profile/change_password/" component={ProfileAccountChangePasswordUser}/>
           <Route exact path="/profile/:profile/account/" component={ProfileConfigUser}/>
 
+          <Route exact path="/profile/:user/personal_mails/favorite_annonces_locations/" component={PersonalmessagesfavoriteannonceslocationsUser}/>
+          <Route exact path="/profile/:user/personal_mails/archvement_annonces_locations/" component={PersonalmessagesachvmentannonceslocationsUser}/>
+          <Route exact path="/profile/:user/personal_mails/annonces_locations/" component={withRouter(PersonalmessagesannonceslocationsUser)}/>
+          <Route exact path="/profile/:user/personal_mails/annonces_locations/:contactuserslocation/" component={PersonalmessagesannonceslocationsShowUser}/>
 
-          <Route strict exact path="/profile/:user/personal_mails/annonces_locations/" component={PersonalmessagesannonceslocationsUser}/>
-          <Route exact path="/profile/:user/personal_mails/annonces_locations/:contactuser/" component={PersonalmessagesannonceslocationsShowUser}/>
+         {/*<Route strict exact path="/profile/:user/personal_mails/annonces_ventes_by_mail/" component={withRouter(PersonalmessagesprivateannoncesventesUser)}/>*/}
 
-          <Route strict exact path="/profile/:user/personal_mails/contacts/" component={PersonalmessagescontactUser}/>
+
+          <Route exact path="/profile/:user/personal_mails/annonces_ventes/" component={withRouter(PersonalmessagesannoncesventesUser)}/>
+          <Route exact path="/profile/:user/personal_mails/favorite_annonces_ventes/" component={PersonalmessagesfavoriteannoncesventesUser}/>
+          <Route exact path="/profile/:user/personal_mails/archvement_annonces_ventes/" component={PersonalmessagesachvmentannoncesventesUser}/>
+          <Route exact path="/profile/:user/personal_mails/annonces_ventes/:contactusersvente/" component={PersonalmessagesannoncesventesShowUser}/>
+
+          <Route exact path="/profile/:user/personal_mails/favorite_contacts/" component={PersonalmessagesfavoritecontactUser}/>
+          <Route exact path="/profile/:user/personal_mails/archvement_contacts/" component={PersonalmessagesachvmentcontactUser}/>
+          <Route exact path="/profile/:user/personal_mails/contacts/" component={withRouter(PersonalmessagescontactUser)}/>
           <Route exact path="/profile/:user/personal_mails/contacts/:contactuser/" component={PersonalmessagescontactShowUser}/>
 
 
@@ -135,31 +185,33 @@ const RouteUser = props => (
           <Route path="/profile/:user/personal_settings/teams/:id/edit/" component={TeamsUserEdite}/>
 
           <Route exact path="/profile/:user/personal_settings/annonces_locations/" component={PrivateUserAnnonceLocations}/>
-          <Route exact path="/profile/:user/personal_settings/annonces_reservations/" component={PrivateUserAnnonceReservations}/>
           <Route exact path="/profile/:user/personal_settings/annonces_ventes/" component={PrivateUserAnnonceVentes}/>
 
+          <Route exact path="/profile/:user/personal_settings/annonces_reservations/" component={PrivateUserAnnonceReservations}/>
+
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_locations/" component={PrivateUserBlogannonceLocation}/>
+          <Route exact path="/profile/:user/personal_settings/blogs/annonce_locations/:categoryannoncelocation/" component={withRouter(PrivateUserBlogannonceLocationByCategorylocation)}/>
+
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_reservations/" component={PrivateUserBlogannonceReservation}/>
+          <Route exact path="/profile/:user/personal_settings/blogs/annonce_reservations/:categoryannoncereservation" component={withRouter(PrivateUserBlogannonceReservationCategoryreservation)}/>
+
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_ventes/" component={PrivateUserBlogannonceVente}/>
+          <Route exact path="/profile/:user/personal_settings/blogs/annonce_ventes/:categoryannoncevente/" component={withRouter(PrivateUserBlogannonceVentebyCategoryannoncevente)}/>
 
+          <Route exact path="/blogs/annonce_locations/ab/new/" component={BlogannoncelocationCreate}/>
+          <Route exact path="/blogs/annonce_locations/:blogannoncelocation/edit/" component={BlogannoncelocationEdit}/>
+          <Route exact path="/blogs/annonce_locations/" component={BlogannoncelocationIndex}/>
+          <Route exact path="/blogs/annonce_locations/:categoryannoncelocation/" component={withRouter(BlogannoncelocationBycategorylocation)}/>
+          <Route exact path="/blogs/annonce_locations/:categoryannoncelocation/:date/:blogannoncelocation/" component={withRouter(BlogannoncelocationShow)}/>
 
+          <Route exact path="/blogs/annonce_reservations/ab/new/" component={BlogannoncereservationCreate}/>
+          <Route exact path="/blogs/annonce_reservations/:blogannoncereservation/edit/" component={BlogannoncereservationEdit}/>
           <Route exact path="/blogs/annonce_reservations/" component={BlogannoncereservationIndex}/>
           <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/" component={withRouter(BlogannoncereservationBycategoryreservation)}/>
           <Route exact path="/blogs/annonce_reservations/:categoryannoncereservation/:date/:blogannoncereservation/" component={withRouter(BlogannoncereservationShow)}/>
 
-          <Route exact path="/blogs/annonce_locations/" component={BlogannoncelocationIndex}/>
-          <Route exact path="/blogs/annonce_locations/:categoryannoncelocation/" component={withRouter(BlogannoncelocationBycategorylocation)}/>
-          <Route exact path="/blogs/annonce_locations/:categoryannoncelocation/:date/:blogannoncelocation/" component={withRouter(BlogannoncelocationShow)}/>
-          <Route exact path="/blogs/annonce_locations/ab/new/" component={BlogannoncelocationCreate}/>
-          <Route exact path="/blogs/annonce_locations/:blogannoncelocation/edit/" component={BlogannoncelocationEdit}/>
-
-          <Route exact path="/blogs/annonce_reservations/ab/new/" component={BlogannoncereservationCreate}/>
-          <Route exact path="/blogs/annonce_reservations/:blogannoncereservation/edit/" component={BlogannoncereservationEdit}/>
-
           <Route exact path="/blogs/annonce_ventes/ab/new/" component={BlogannonceventeCreate}/>
           <Route exact path="/blogs/annonce_ventes/:blogannoncevente/edit/" component={BlogannonceventeEdit}/>
-
-
           <Route exact path="/blogs/annonce_ventes/" component={BlogannonceventeIndex}/>
           <Route exact path="/blogs/annonce_ventes/:categoryannoncevente/" component={withRouter(BlogannonceventesBycategoryvente)}/>
           <Route exact path="/blogs/annonce_ventes/:categoryannoncevente/:date/:blogannoncevente/" component={withRouter(BlogannonceventeShow)}/>

@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import {Link, NavLink, withRouter} from 'react-router-dom';
 
-class NavUserSite extends Component {
+class NavUserSite extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {};
@@ -106,7 +106,10 @@ class NavUserSite extends Component {
                                             </a>
                                         )}
                                         <Link className="dropdown-item" to={`/profile/account/`}>
-                                            <i className="now-ui-icons users_single-02"/> Profile Page
+                                            <i className="now-ui-icons users_circle-08"/> Editer mon profile
+                                        </Link>
+                                        <Link className="dropdown-item" to={`/@${$userIvemo.slug}/`}>
+                                            <i className="now-ui-icons users_single-02"/> Profile
                                         </Link>
                                         <a style={{ cursor: "pointer" }} className="dropdown-item" onClick={() => this.navLogout()}>
                                             <i className="now-ui-icons ui-1_simple-remove" /> Déconnexion
@@ -118,14 +121,23 @@ class NavUserSite extends Component {
                                         <i className="now-ui-icons business_chart-pie-36"/>
                                     </a>
                                     <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                        <NavLink to={'/about/'} className="dropdown-item">
-                                            <i className="now-ui-icons business_bulb-63"/> About-us
-                                            </NavLink>
-                                        <a className="dropdown-item" href="../examples/blog-post.html">
-                                            <i className="now-ui-icons text_align-left"/> Blog Post
-                                        </a>
                                         <Link to={'/profile/personal_reservations/'} className="dropdown-item">
                                             <i className="now-ui-icons shopping_tag-content"/>Mes reservations
+                                        </Link>
+                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/annonces_locations/`} className="dropdown-item">
+                                            <i className="now-ui-icons text_align-left"/>Annonce locations
+                                        </Link>
+                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/annonces_reservations/`} className="dropdown-item">
+                                            <i className="now-ui-icons education_paper"/>Annonce reservations
+                                        </Link>
+                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_locations/`} className="dropdown-item">
+                                            <i className="now-ui-icons text_align-center"/>Blog annonces locations
+                                        </Link>
+                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_reservations/`} className="dropdown-item">
+                                            <i className="now-ui-icons text_align-center"/>Blog annonces reservations
+                                        </Link>
+                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_ventes/`} className="dropdown-item">
+                                            <i className="now-ui-icons text_align-center"/>Blog annonces ventes
                                         </Link>
                                         <Link to={`/profile/${$userIvemo.slug}/personal_settings/teams/`} className="dropdown-item">
                                             <i className="now-ui-icons users_circle-08"/>Team

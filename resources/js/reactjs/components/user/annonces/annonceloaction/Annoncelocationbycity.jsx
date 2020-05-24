@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import AnnonceslocationList from "./inc/AnnonceslocationList";
 import Categoriesannoncereselocation from "./inc/Categoriesannoncereselocation";
 import Swal from "sweetalert2";
+import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
 
 
 class Annoncelocationbycity extends Component {
@@ -194,8 +195,6 @@ class Annoncelocationbycity extends Component {
                                             </button>
                                         </div>
 
-
-                                        <br/>
                                         {allannoncelocationbycity.length >= 0 && (
                                             <>
 
@@ -228,7 +227,7 @@ class Annoncelocationbycity extends Component {
 
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingThree">
-                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                                                                         <b>Locations à {annoncelocationbycity.name} </b>
                                                                         <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
@@ -238,17 +237,19 @@ class Annoncelocationbycity extends Component {
                                                                         <table>
                                                                             <tbody>
 
-                                                                            {cityannoncelocations.map((item) => (
-                                                                                <tr key={item.id}>
-                                                                                    <td>
-                                                                                        <NavLink to={`/annonces_locations/locations/${item.slug}/${annoncelocationbycity.slug}/`}>
-                                                                                            locations <b>{item.name}</b> à <b>{annoncelocationbycity.name}</b>
-                                                                                        </NavLink>
-                                                                                    </td>
-                                                                                    <td className="text-right"> {this.getcountcategoryannonceString(item.annoncelocations_count)} {item.annoncelocations_count > 1 ? "annonces" : "annonce"}</td>
-                                                                                </tr>
-                                                                            ))}
-
+                                                                            {cityannoncelocations.length ?
+                                                                                <>
+                                                                                    {cityannoncelocations.map((item) => (
+                                                                                        <tr key={item.id}>
+                                                                                            <td>
+                                                                                                <NavLink to={`/annonces_locations/locations/${item.slug}/${annoncelocationbycity.slug}/`}>
+                                                                                                    locations <b style={{ textTransform: "lowercase" }}>{item.name}</b> à <b>{annoncelocationbycity.name}</b>
+                                                                                                </NavLink>
+                                                                                            </td>
+                                                                                            <td className="text-right"> {this.getcountcategoryannonceString(item.annoncelocations_count)} {item.annoncelocations_count > 1 ? "annonces" : "annonce"}</td>
+                                                                                        </tr>
+                                                                                    ))}
+                                                                                </>:<NavannoncecategorySkeleton/>}
                                                                             </tbody>
                                                                         </table>
                                                                     </div>

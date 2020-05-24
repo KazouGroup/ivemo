@@ -1,14 +1,13 @@
 @extends('inc.admin.main')
-<?php $item = htmlspecialchars($faq->title); ?>
-@section('title'," $item")
+<?php $item = htmlspecialchars(config('app.name'));?>
+@section('title', $faq->title.' - '.$item)
 
 @section('style')
 
 @endsection
 
-
 @section('content')
-    <div id="root"></div>
+    <router-view></router-view>
 @endsection
 
 @section('script')

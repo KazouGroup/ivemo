@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class link extends Model implements Auditable
+class link extends Model 
 {
-    use \OwenIt\Auditing\Auditable;
+    //use \OwenIt\Auditing\Auditable;
 
     protected $fillable = ['body','title','status'];
 

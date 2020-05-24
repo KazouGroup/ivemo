@@ -9,11 +9,20 @@ Route::get(
     'AnnoncelocationController@apiannoncelocations'
 )->name('api.annoncelocations_site');
 
+Route::get(
+    'annonce_locations/{annoncetype}/{city}',
+    'AnnoncelocationController@apiannoncelocationsbyannoncetypebycity'
+)->name('api.annoncelocationsbyannoncetypebycity_site');
 
 Route::get(
     'categoryannoncelocations',
     'AnnoncelocationController@apicategoryannoncelocation'
 )->name('api.categoryannoncelocation_site');
+
+Route::get(
+    'categoryannoncelocations/{city}',
+    'AnnoncelocationController@apicategoryannoncelocationbycity'
+)->name('api.categoryannoncelocationbycity_site');
 
 Route::get(
     'annonces_locations_by_city_count/{categoryannoncelocation}',
@@ -47,16 +56,16 @@ Route::get(
 )->name('api.annoncelocationbycities_site');
 
 Route::get(
-    'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}/{date}/{annoncelocation}',
+    'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}/{annoncelocation}',
     'AnnoncelocationController@apiannoncelocationbycategoryannoncelocationslug'
 )->name('api.annoncelocationbycategoryannoncelocationslug_site');
 
 Route::get(
     'annonces_locations_interesses/{annoncetype}/{categoryannoncelocation}/{city}',
-    'AnnoncelocationController@apiannoncelocationinteresse'
-)->name('api.annoncelocationinteresse_site');
+    'AnnoncelocationController@apiannoncelocationinteressebycity'
+)->name('api.annoncelocationinteresse_by_city_site');
 
 Route::get(
-    'annonces_locations_interesses/{categoryannoncelocation}',
-    'AnnoncelocationController@apiannoncelocationinteresseslug'
-)->name('api.annoncelocationinteressebycategory_site');
+    'annonces_locations_categoryannoncelocation_interesses/{categoryannoncelocation}',
+    'AnnoncelocationController@apiannoncelocationinteressebycategoryannoncelocation'
+)->name('api.annoncelocationinteresse_by_categoryannoncelocation_site');

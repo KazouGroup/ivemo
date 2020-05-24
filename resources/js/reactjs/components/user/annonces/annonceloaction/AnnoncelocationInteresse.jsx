@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Link, NavLink } from "react-router-dom";
 import moment from 'moment'
-import { Button } from "reactstrap";
-import { Remarkable } from "remarkable";
 import AnnoncelocationInteresseList from "./inc/AnnoncelocationInteresseList";
+import AnnoncesinteresseSkeleton from "../../../inc/user/annonce/AnnoncesinteresseSkeleton";
 
 require("moment/min/locales.min");
 moment.locale('fr');
@@ -13,6 +11,7 @@ class AnnoncelocationInteresse extends Component {
         super(props);
         this.state = {
             annoncelocationsinteresses: [],
+            isLoading: false,
             visiable: 2,
         };
 
@@ -26,17 +25,27 @@ class AnnoncelocationInteresse extends Component {
     }
 
     componentDidMount() {
+        this.setState({ isLoading: true });
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let itemCityannonce = this.props.match.params.city;
-        dyaxios.get(route('api.annoncelocationinteresse_site', [itemannoncetype, itemCategoryannoncelocation, itemCityannonce])).then(response =>
+        dyaxios.get(route('api.annoncelocationinteresse_by_city_site', [itemannoncetype, itemCategoryannoncelocation, itemCityannonce])).then(response =>
             this.setState({
                 annoncelocationsinteresses: [...response.data],
+                isLoading: false,
             }));
     }
 
     render() {
-        const { annoncelocationsinteresses,visiable } = this.state;
+        const { annoncelocationsinteresses,visiable,isLoading } = this.state;
+        const mapAnnoncelocationsinteresses = isLoading ? (
+            <AnnoncesinteresseSkeleton/>
+        ):(
+            annoncelocationsinteresses.slice(0,visiable).map(item => {
+                return(
+                    <AnnoncelocationInteresseList key={item.id} {...item}/>                )
+            })
+        );
         return (
             <>
 
@@ -49,11 +58,7 @@ class AnnoncelocationInteresse extends Component {
 
                 <div className="row">
 
-                    {annoncelocationsinteresses.slice(0,visiable).map((item) => (
-
-                        <AnnoncelocationInteresseList key={item.id} {...item}/>
-
-                    ))}
+                    {mapAnnoncelocationsinteresses}
 
                 </div>
 

@@ -6,6 +6,7 @@ import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import AnnoncereservationList from "./inc/AnnoncereservationList";
 import Categoriesannoncereservation from "./inc/Categoriesannoncereservation";
+import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 
 
 class AnnoncereservationIndex extends Component {
@@ -30,6 +31,16 @@ class AnnoncereservationIndex extends Component {
     render() {
         const {annoncereservationbytype} = this.state;
         const allannoncereservations = annoncereservationbytype.annoncereservations;
+        const mapAnnoncereservations = allannoncereservations.length ? (
+            allannoncereservations.map(item => {
+                return(
+                    <AnnoncereservationList key={item.id} {...item} />
+                )
+            })
+        ):(
+            <AnnoncesListSkeleton/>
+        );
+
         return (
             <>
                 <Helmet>
@@ -69,9 +80,7 @@ class AnnoncereservationIndex extends Component {
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
-                                        {allannoncereservations.map((item) => (
-                                            <AnnoncereservationList key={item.id} {...item} />
-                                        ))}
+                                        {mapAnnoncereservations}
 
                                     </div>
 

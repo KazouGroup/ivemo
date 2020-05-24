@@ -44,30 +44,37 @@ class AnnonceventeList extends Component {
 
                                     </div>
                                 </div>
-                                {!$guest && (
-                                    <>
-                                        {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
-                                            <div className="text-center">
-                                                {this.props.status ?
-                                                    <>
-                                                        <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}
-                                                                className="btn btn-success btn-icon btn-sm">
-                                                            <i className="now-ui-icons ui-1_check"/>
-                                                        </button>
-                                                    </>
-                                                    :
-                                                    <>
-                                                        <button type="button" onClick={() => this.props.activeItem(this.props.id)}
-                                                                className="btn btn-primary btn-icon btn-sm">
-                                                            <i className="now-ui-icons ui-1_simple-delete"/>
-                                                        </button>
-                                                    </>
-                                                }
-                                            </div>
-                                        )}
-                                    </>
 
-                                )}
+                                <div className="text-center">
+
+                                    {!$guest && (
+                                        <>
+                                            {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
+                                                <>
+                                                    {this.props.status ?
+                                                        <>
+                                                            <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}
+                                                                    className="btn btn-success btn-icon btn-sm">
+                                                                <i className="now-ui-icons ui-1_check"/>
+                                                            </button>
+                                                        </>
+                                                        :
+                                                        <>
+                                                            <button type="button" onClick={() => this.props.activeItem(this.props.id)}
+                                                                    className="btn btn-primary btn-icon btn-sm">
+                                                                <i className="now-ui-icons ui-1_simple-delete"/>
+                                                            </button>
+                                                        </>
+                                                    }
+                                                </>
+                                            )}
+                                        </>
+                                    )}
+
+
+                                </div>
+
+
 
 
                                 <br />
@@ -92,17 +99,15 @@ class AnnonceventeList extends Component {
                                 </div>
                             </div>
                             <div className="col-md-7">
-                                <div className="card-header d-flex align-items-center">
-                                    <div className="text-left pull-left">
-                                        <NavLink to={`/annonces_ventes/${this.props.annoncetype.slug}/${this.props.categoryannoncevente.slug}/`}>
-                                            <h6 className={`text-${this.props.categoryannoncevente.color_name} ml-auto mr-auto`}>
-                                                {this.props.categoryannoncevente.name}
-                                            </h6>
-                                        </NavLink>
-                                    </div>
-                                    <div className="text-right ml-auto">
-                                        <h5 className="text-success"><b>{this.numberWithCommas()} <small>FCFA</small></b></h5>
-                                    </div>
+                                <div className="text-left pull-left">
+                                    <NavLink to={`/annonces_ventes/${this.props.annoncetype.slug}/${this.props.categoryannoncevente.slug}/`}>
+                                        <h6 className={`text-${this.props.categoryannoncevente.color_name} ml-auto mr-auto`}>
+                                            {this.props.categoryannoncevente.name}
+                                        </h6>
+                                    </NavLink>
+                                </div>
+                                <div className="text-right ml-auto">
+                                    <h5 className="text-success"><b>{this.numberWithCommas()} <small>FCFA</small></b></h5>
                                 </div>
                                 <div className="row">
                                     <div className="col-md-5 col-6">
@@ -114,16 +119,16 @@ class AnnonceventeList extends Component {
                                                 <strong>{this.props.city.name} </strong>
                                             </span>
                                         </NavLink>
-                                        - {this.props.district}
+                                        - {this.props.district.length > 10 ? this.props.district.substring(0, 10) + "..." : this.props.district}
                                     </div>
 
                                 </div>
                                 <h6 className="card-title">
-                                    <Link to={`/annonces_ventes/${this.props.annoncetype.slug}/${this.props.categoryannoncevente.slug}/${this.props.city.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
+                                    <Link to={`/annonces_ventes/${this.props.annoncetype.slug}/${this.props.categoryannoncevente.slug}/${this.props.city.slug}/${this.props.slug}/`}>
                                         {this.props.title}
                                     </Link>
                                 </h6>
-                                <Link to={`/annonces_ventes/${this.props.annoncetype.slug}/${this.props.categoryannoncevente.slug}/${this.props.city.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
+                                <Link to={`/annonces_ventes/${this.props.annoncetype.slug}/${this.props.categoryannoncevente.slug}/${this.props.city.slug}/${this.props.slug}/`}>
                                     <span dangerouslySetInnerHTML={this.getDescription()}/>
                                 </Link>
                                 <div className="card-header d-flex align-items-center">
@@ -146,7 +151,7 @@ class AnnonceventeList extends Component {
                                         <Button className="btn btn-icon btn-sm btn-warning" id="TooltipPhone">
                                             <i className="now-ui-icons tech_mobile"/>
                                         </Button>
-                                        <NavLink to={`/annonces_ventes/${this.props.annoncetype.slug}/${this.props.categoryannoncevente.slug}/${this.props.city.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`} className="btn btn-icon btn-sm btn-primary">
+                                        <NavLink to={`/annonces_ventes/${this.props.annoncetype.slug}/${this.props.categoryannoncevente.slug}/${this.props.city.slug}/${this.props.slug}/`} className="btn btn-icon btn-sm btn-primary">
                                             <i className="now-ui-icons location_pin"/>
                                         </NavLink>
 
