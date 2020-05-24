@@ -34,7 +34,6 @@ Route::get(
     'AnnoncelocationController@apiannoncelocationcategorybycitycount'
 )->name('api.annoncelocationcategorybycitycount_site');
 
-
 Route::get(
     'annonces_locations_by_cities',
     'AnnoncelocationController@apicitiesannonces'
