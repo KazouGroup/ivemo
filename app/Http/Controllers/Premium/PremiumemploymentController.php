@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Premium;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EmploymentResource;
+use App\Services\EmploymentService;
 use Illuminate\Http\Request;
 use App\Model\employment;
 use App\Model\user;
@@ -50,9 +51,10 @@ class PremiumemploymentController extends Controller
     {
         $this->authorize('update',$user);
 
-       $employments =  EmploymentResource::collection(employment::with('user','city','categoryemployment')
+       $employments =  EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
            ->withCount('contactuseremployments')
            ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
+           ->whereHas('city', function ($q) {$q->where('status',1);})
            ->whereIn('user_id',[$user->id])
            ->orderBy('created_at','DESC')
            ->distinct()->get());
@@ -64,7 +66,7 @@ class PremiumemploymentController extends Controller
     {
         $this->authorize('update',$user);
 
-        $employments = DB::table('employments')
+        $employments = EmploymentService::employmentsbyusersrcount($user)
            ->where(['status_admin' => 1])
            ->whereIn('user_id',[$user->id])->count();
 
@@ -75,8 +77,7 @@ class PremiumemploymentController extends Controller
     {
         $this->authorize('update',$user);
 
-        $employments =  DB::table('employments')
-            ->whereIn('user_id',[$user->id])
+        $employments =  EmploymentService::employmentsbyusersrcount($user)
             ->where(['status' => 1,'status_admin' => 1])
             ->count();
 
@@ -87,8 +88,7 @@ class PremiumemploymentController extends Controller
     {
         $this->authorize('update',$user);
 
-        $employments =  DB::table('employments')
-            ->whereIn('user_id',[$user->id])
+        $employments =  EmploymentService::employmentsbyusersrcount($user)
             ->where(['status' => 0,'status_admin' => 1])
             ->count();
 
@@ -100,9 +100,8 @@ class PremiumemploymentController extends Controller
     {
         $this->authorize('update',$user);
 
-        $employments = DB::table('employments')
+        $employments = EmploymentService::employmentsbyusersrcount($user)
             ->where(['status_admin' => 1])
-            ->whereIn('user_id',[$user->id])
             ->whereIn('categoryemployment_id',[$categoryemployment->id])->count();
 
         return response()->json($employments,200);
@@ -112,8 +111,7 @@ class PremiumemploymentController extends Controller
     {
         $this->authorize('update',$user);
 
-        $employments =  DB::table('employments')
-            ->whereIn('user_id',[$user->id])
+        $employments =  EmploymentService::employmentsbyusersrcount($user)
             ->whereIn('categoryemployment_id',[$categoryemployment->id])
             ->where(['status' => 1,'status_admin' => 1])
             ->count();
@@ -126,8 +124,7 @@ class PremiumemploymentController extends Controller
     {
         $this->authorize('update',$user);
 
-        $employments =  DB::table('employments')
-            ->whereIn('user_id',[$user->id])
+        $employments =  EmploymentService::employmentsbyusersrcount($user)
             ->whereIn('categoryemployment_id',[$categoryemployment->id])
             ->where(['status' => 0,'status_admin' => 1])
             ->count();

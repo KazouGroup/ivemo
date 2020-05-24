@@ -45,3 +45,8 @@ Route::get(
     'pro/{user}/blogs/annonce_ventes',
     'ProfilepublicController@apiprofilblogannonceventes'
 )->name('api.profilpublique_blogannonceventes');
+
+Route::get(
+    'pro/{user}/employments',
+    'ProfilepublicController@apiprofilemployments'
+)->name('api.profilpublique_employments');
