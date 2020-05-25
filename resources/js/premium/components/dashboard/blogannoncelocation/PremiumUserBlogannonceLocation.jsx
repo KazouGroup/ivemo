@@ -7,7 +7,7 @@ import PremiumHorizontalNavUserSite from "../../inc/PremiumHorizontalNavUserSite
 import FooterPremiumUser from "../../inc/FooterPremiumUser";
 import { Button } from "reactstrap";
 import PremiumUserBlogannonceList from "./PremiumUserBlogannonceList";
-import TablePremiumUserBlogSkeleton from "../../inc/Skeleton/TablePremiumUserBlogSkeleton";
+import LoaderLdsDefaultPage from "../../inc/annimation/LoaderLdsDefaultPage";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -258,14 +258,6 @@ class PremiumUserBlogannonceLocation extends Component {
     }
     render() {
         const { userblogannonce, blogannoncelocations_count, blogannoncelocationsactive_count, blogannoncelocationsunactive_count } = this.state;
-        const mapBlogannoncelocations = userblogannonce.length >= 0 ? (
-            userblogannonce.map(item => {
-                return (
-                    <PremiumUserBlogannonceList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem} />)
-            })
-        ) : (
-                <TablePremiumUserBlogSkeleton/>
-            );
         return (
             <>
                 <Helmet title={`Dashboard ${$userIvemo.first_name || ""} article de blog locations - Ivemo`} />
@@ -390,9 +382,11 @@ class PremiumUserBlogannonceLocation extends Component {
                                             </div>
 
                                         </div>
-                                        <div className="material-datatables">
-                                            <table id="datatables" className="table table-striped table-no-bordered table-hover" cellSpacing={0} width="100%" style={{width:"100%"}}>
-                                                <thead>
+
+                                        {userblogannonce.length >= 0 ?
+                                            <div className="material-datatables">
+                                                <table id="datatables" className="table table-striped table-no-bordered table-hover" cellSpacing={0} width="100%" style={{width:"100%"}}>
+                                                    <thead>
                                                     <tr>
                                                         <th><b>Image</b></th>
                                                         <th><b>Titre</b></th>
@@ -402,8 +396,8 @@ class PremiumUserBlogannonceLocation extends Component {
                                                         <th><b>Date</b></th>
                                                         <th className="disabled-sorting text-right"><b>Actions</b></th>
                                                     </tr>
-                                                </thead>
-                                                <tfoot>
+                                                    </thead>
+                                                    <tfoot>
                                                     <tr>
                                                         <th>Image</th>
                                                         <th>Titre</th>
@@ -413,12 +407,18 @@ class PremiumUserBlogannonceLocation extends Component {
                                                         <th>Date</th>
                                                         <th className="text-right">Actions</th>
                                                     </tr>
-                                                </tfoot>
-                                                <tbody>
-                                                    {mapBlogannoncelocations}
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                    </tfoot>
+                                                    <tbody>
+                                                    {userblogannonce.map(item => (
+                                                      <PremiumUserBlogannonceList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem} />
+                                                    ))}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            :
+                                            <LoaderLdsDefaultPage/>
+                                        }
+
                                     </div>
                                 </div>
                             </div>

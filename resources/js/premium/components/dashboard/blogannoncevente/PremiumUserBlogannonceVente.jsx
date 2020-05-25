@@ -7,7 +7,7 @@ import PremiumHorizontalNavUserSite from "../../inc/PremiumHorizontalNavUserSite
 import FooterPremiumUser from "../../inc/FooterPremiumUser";
 import {Button} from "reactstrap";
 import PremiumUserBlogannonceVenteList from "./PremiumUserBlogannonceVenteList";
-import TablePremiumUserBlogSkeleton from "../../inc/Skeleton/TablePremiumUserBlogSkeleton";
+import LoaderLdsDefaultPage from "../../inc/annimation/LoaderLdsDefaultPage";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -258,14 +258,6 @@ class PremiumUserBlogannonceVente extends Component {
     }
     render() {
         const {userblogannonce,blogannonceventes_count,blogannonceventesactive_count,blogannonceventesunactive_count} = this.state;
-        const mapBlogannonceventes = userblogannonce.length >= 0 ? (
-            userblogannonce.map(item => {
-                return(
-                    <PremiumUserBlogannonceVenteList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>                )
-            })
-        ):(
-            <TablePremiumUserBlogSkeleton/>
-        );
         return (
             <>
                 <Helmet title={`Dashboard ${$userIvemo.first_name || ""} article de blog ventes - Ivemo`} />
@@ -390,35 +382,42 @@ class PremiumUserBlogannonceVente extends Component {
                                                 </div>
 
                                             </div>
-                                            <div className="material-datatables">
-                                                <table id="datatables" className="table table-striped table-no-bordered table-hover" cellSpacing={0} width="100%" style={{width:"100%"}}>
-                                                    <thead>
-                                                    <tr>
-                                                        <th><b>Image</b></th>
-                                                        <th><b>Titre</b></th>
-                                                        <th><b>Categorie</b></th>
-                                                        <th><b>Vue</b></th>
-                                                        <th><b>Status</b></th>
-                                                        <th><b>Date</b></th>
-                                                        <th className="disabled-sorting text-right"><b>Actions</b></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tfoot>
-                                                    <tr>
-                                                        <th>Image</th>
-                                                        <th>Titre</th>
-                                                        <th>Categorie</th>
-                                                        <th>Vue</th>
-                                                        <th>Status</th>
-                                                        <th>Date</th>
-                                                        <th className="text-right">Actions</th>
-                                                    </tr>
-                                                    </tfoot>
-                                                    <tbody>
-                                                    {mapBlogannonceventes}
-                                                    </tbody>
-                                                </table>
-                                            </div>
+
+                                            {userblogannonce.length >= 0 ?
+                                                <div className="material-datatables">
+                                                    <table id="datatables" className="table table-striped table-no-bordered table-hover" cellSpacing={0} width="100%" style={{width:"100%"}}>
+                                                        <thead>
+                                                        <tr>
+                                                            <th><b>Image</b></th>
+                                                            <th><b>Titre</b></th>
+                                                            <th><b>Categorie</b></th>
+                                                            <th><b>Vue</b></th>
+                                                            <th><b>Status</b></th>
+                                                            <th><b>Date</b></th>
+                                                            <th className="disabled-sorting text-right"><b>Actions</b></th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tfoot>
+                                                        <tr>
+                                                            <th>Image</th>
+                                                            <th>Titre</th>
+                                                            <th>Categorie</th>
+                                                            <th>Vue</th>
+                                                            <th>Status</th>
+                                                            <th>Date</th>
+                                                            <th className="text-right">Actions</th>
+                                                        </tr>
+                                                        </tfoot>
+                                                        <tbody>
+                                                        {userblogannonce.map(item => (
+                                                            <PremiumUserBlogannonceVenteList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>                )
+                                                        )}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                :
+                                                <LoaderLdsDefaultPage/>
+                                            }
                                         </div>
                                     </div>
                                 </div>

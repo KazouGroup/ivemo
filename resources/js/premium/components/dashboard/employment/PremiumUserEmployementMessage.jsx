@@ -8,11 +8,7 @@ import FooterPremiumUser from "../../inc/FooterPremiumUser";
 import {Button, CardBody, Form, FormGroup, Input, InputGroup, Row} from "reactstrap";
 import NavPremiumUserEmployement from "./NavPremiumUserEmployement";
 import PremiumUserEmployementMessageList from "./inc/PremiumUserEmployementMessageList";
-import TablePremiumUserEmployementMessageSkeleton from "../../inc/Skeleton/TablePremiumUserEmployementMessageSkeleton";
-import moment from "moment";
-import LazyLoad from "react-lazyload";
-import ReadMoreAndLess from "react-read-more-less";
-import PremiumUserEmployementList from "./inc/PremiumUserEmployementList";
+import LoaderLdsDefaultPage from "../../inc/annimation/LoaderLdsDefaultPage";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -170,16 +166,6 @@ class PremiumUserEmployementMessage extends Component {
 
     render() {
         const {employment} = this.state;
-        const mapContactuseremployments = employment.contactuseremployments.length >= 0 ? (
-            employment.contactuseremployments.map(item => {
-                return(
-
-                    <PremiumUserEmployementMessageList key={item.id} {...item} deleteItem={this.deleteItem} readItem={this.readItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
-
-                )})
-        ):(
-            <TablePremiumUserEmployementMessageSkeleton/>
-        );
         return (
             <>
                 <Helmet title={`${employment.title || "Dashboard " + $userIvemo.first_name} - ${$name_site}`} />
@@ -252,31 +238,44 @@ class PremiumUserEmployementMessage extends Component {
 
                                             </div>
 
-                                            <div className="material-datatables">
-                                                <table id="datatables" className="table table-striped table-no-bordered table-hover" cellSpacing={0} width="100%" style={{width:"100%"}}>
-                                                    <thead>
-                                                    <tr>
-                                                        <th><b>Nom</b></th>
-                                                        <th><b>Email</b></th>
-                                                        <th><b>Phone</b></th>
-                                                        <th><b>Date</b></th>
-                                                        <th className="disabled-sorting text-right"><b>Actions</b></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tfoot>
-                                                    <tr>
-                                                        <th>Nom</th>
-                                                        <th>Email</th>
-                                                        <th>Phone</th>
-                                                        <th>Date</th>
-                                                        <th className="text-right">Actions</th>
-                                                    </tr>
-                                                    </tfoot>
-                                                    <tbody>
-                                                    {mapContactuseremployments}
-                                                    </tbody>
-                                                </table>
-                                            </div>
+
+                                            {employment.contactuseremployments.length >= 0 ?
+
+                                                <div className="material-datatables">
+                                                    <table id="datatables" className="table table-striped table-no-bordered table-hover" cellSpacing={0} width="100%" style={{width:"100%"}}>
+                                                        <thead>
+                                                        <tr>
+                                                            <th><b>Nom</b></th>
+                                                            <th><b>Email</b></th>
+                                                            <th><b>Phone</b></th>
+                                                            <th><b>Date</b></th>
+                                                            <th className="disabled-sorting text-right"><b>Actions</b></th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tfoot>
+                                                        <tr>
+                                                            <th>Nom</th>
+                                                            <th>Email</th>
+                                                            <th>Phone</th>
+                                                            <th>Date</th>
+                                                            <th className="text-right">Actions</th>
+                                                        </tr>
+                                                        </tfoot>
+                                                        <tbody>
+
+                                                        {employment.contactuseremployments.map((item) => (
+                                                            <PremiumUserEmployementMessageList key={item.id} {...item} deleteItem={this.deleteItem} readItem={this.readItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
+                                                        ))}
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                :
+
+                                                <LoaderLdsDefaultPage/>
+                                            }
+
 
                                         </div>
                                     </div>
