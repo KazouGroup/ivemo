@@ -10,6 +10,7 @@ use App\Model\contactuseremployment;
 use App\Model\contactuserslocation;
 use App\Model\employment;
 use App\Model\user;
+use App\Services\Contactusers\ContactusersemploymentService;
 use App\Services\Contactusers\ContactuserslocationService;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -128,13 +129,13 @@ class ContactusersemploymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function apipersonalmessagesannonces_locations_show(user $user,contactuserslocation $contactuserslocation)
+    public function apipersonalmessagesemployments_show(user $user,contactuseremployment $contactuseremployment)
     {
-        $this->authorize('update',$contactuserslocation);
+        $this->authorize('update',$contactuseremployment);
 
-        $contactuserslocations = ContactuserslocationService::apipersonalmessagesannonces_locations_show($user,$contactuserslocation);
+        $contactuseremployment = ContactusersemploymentService::apipersonalmessagesemployments_show($user,$contactuseremployment);
 
-        return response()->json($contactuserslocations, 200);
+        return response()->json($contactuseremployment, 200);
     }
 
 
@@ -196,72 +197,73 @@ class ContactusersemploymentController extends Controller
 
     public function personalmessagescontactsactive($id)
     {
-        $contactuserslocation = contactuserslocation::where('id', $id)->findOrFail($id);
+        $contactuseremployment = contactuseremployment::where('id', $id)->findOrFail($id);
 
-        $this->authorize('update',$contactuserslocation);
+        $this->authorize('update',$contactuseremployment);
 
-        if(auth()->user()->id === $contactuserslocation->user_id){
-            $contactuserslocation->update([ 'status_red' => 1,]);
+        if(auth()->user()->id === $contactuseremployment->user_id){
+            $contactuseremployment->update([ 'status_red' => 1,]);
             return response('read confirmed',Response::HTTP_ACCEPTED);
         }
     }
 
     public function personalmessagescontactsunactive($id)
     {
-        $contactuserslocation = contactuserslocation::where('id', $id)->findOrFail($id);
 
-        $this->authorize('update',$contactuserslocation);
+        $contactuseremployment = contactuseremployment::where('id', $id)->findOrFail($id);
 
-        if(auth()->user()->id === $contactuserslocation->user_id){
-            $contactuserslocation->update([ 'status_red' => 0,]);
+        $this->authorize('update',$contactuseremployment);
+
+        if(auth()->user()->id === $contactuseremployment->user_id){
+            $contactuseremployment->update([ 'status_red' => 0,]);
             return response('read confirmed',Response::HTTP_ACCEPTED);
         }
     }
 
     public function personalmessagescontactsfavorite($id)
     {
-        $contactuserslocation = contactuserslocation::where('id', $id)->findOrFail($id);
+        $contactuseremployment = contactuseremployment::where('id', $id)->findOrFail($id);
 
-        $this->authorize('update',$contactuserslocation);
+        $this->authorize('update',$contactuseremployment);
 
-        if(auth()->user()->id === $contactuserslocation->user_id){
-            $contactuserslocation->update([ 'status_favorite' => 1,]);
+        if(auth()->user()->id === $contactuseremployment->user_id){
+            $contactuseremployment->update([ 'status_favorite' => 1,]);
             return response('success response',Response::HTTP_ACCEPTED);
         }
     }
 
     public function personalmessagescontactsunfavorite($id)
     {
-        $contactuserslocation = contactuserslocation::where('id', $id)->findOrFail($id);
+        $contactuseremployment = contactuseremployment::where('id', $id)->findOrFail($id);
 
-        $this->authorize('update',$contactuserslocation);
+        $this->authorize('update',$contactuseremployment);
 
-        if(auth()->user()->id === $contactuserslocation->user_id){
-            $contactuserslocation->update([ 'status_favorite' => 0,]);
+        if(auth()->user()->id === $contactuseremployment->user_id){
+            $contactuseremployment->update([ 'status_favorite' => 0,]);
             return response('success response',Response::HTTP_ACCEPTED);
         }
     }
 
     public function personalmessagescontactsunarchvement($id)
     {
-        $contactuserslocation = contactuserslocation::where('id', $id)->findOrFail($id);
+        $contactuseremployment = contactuseremployment::where('id', $id)->findOrFail($id);
 
-        $this->authorize('update',$contactuserslocation);
+        $this->authorize('update',$contactuseremployment);
 
-        if(auth()->user()->id === $contactuserslocation->user_id){
-            $contactuserslocation->update([ 'status_archvement' => 0,]);
+        if(auth()->user()->id === $contactuseremployment->user_id){
+            $contactuseremployment->update([ 'status_archvement' => 0,]);
             return response('success response',Response::HTTP_ACCEPTED);
         }
     }
 
     public function personalmessagescontactsarchvement($id)
     {
-        $contactuserslocation = contactuserslocation::where('id', $id)->findOrFail($id);
+        $contactuseremployment = contactuseremployment::where('id', $id)->findOrFail($id);
 
-        $this->authorize('update',$contactuserslocation);
+        $this->authorize('update',$contactuseremployment);
 
-        if(auth()->user()->id === $contactuserslocation->user_id){
-            $contactuserslocation->update([ 'status_archvement' => 1,]);
+        if(auth()->user()->id === $contactuseremployment->user_id){
+            $contactuseremployment->update([ 'status_archvement' => 1,]);
             return response('success response',Response::HTTP_ACCEPTED);
         }
     }
@@ -271,14 +273,14 @@ class ContactusersemploymentController extends Controller
      * @param  int  $id
      * @return array|\Illuminate\Http\Response
      */
-    public function personalmessagesdelete(contactuserslocation $contactuserslocation,$id)
+    public function personalmessagesdelete(contactuseremployment $contactuseremployment,$id)
     {
-        $contactuserslocation = contactuserslocation::findOrFail($id);
+        $contactuseremployment = contactuseremployment::findOrFail($id);
 
-        $this->authorize('update',$contactuserslocation);
+        $this->authorize('update',$contactuseremployment);
 
-        if (auth()->user()->id === $contactuserslocation->user_id){
-            $contactuserslocation->delete();
+        if (auth()->user()->id === $contactuseremployment->user_id){
+            $contactuseremployment->delete();
             return ['message' => 'message deleted '];
         }else{
             abort(404);

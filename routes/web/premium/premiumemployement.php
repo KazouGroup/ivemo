@@ -23,6 +23,16 @@ Route::group(['prefix' => 'dashboard/premium'], function () {
         'PremiumemploymentController@category'
     )->name('employments_premium_categoryemployment.dashboard');
 
+    Route::get(
+        '{user:slug}/employments/message/{employment}',
+        'PremiumemploymentController@datamessage'
+    )->name('employments_premium_message');
+
+    Route::get(
+        '{user:slug}/employments/show/{contactuseremployment}',
+        'PremiumemploymentController@datamessageshow'
+    )->name('employments_premium_message_show');
+
 });
 
 
@@ -34,6 +44,11 @@ Route::group(['prefix' => 'api'], function () {
         '{user:slug}/premiumemployment',
         'PremiumemploymentController@data'
     )->name('api.employments_premium');
+
+    Route::get(
+        '{user:slug}/employments/message/{employment}',
+        'PremiumemploymentController@apidatamessage'
+    )->name('api.employments_premium_message');
 
     Route::get(
         '{user:slug}/premiumemployment_count',

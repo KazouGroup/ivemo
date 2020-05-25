@@ -6,7 +6,7 @@ import PremiumVerticalNavUserSite from "../../inc/PremiumVerticalNavUserSite";
 import PremiumHorizontalNavUserSite from "../../inc/PremiumHorizontalNavUserSite";
 import FooterPremiumUser from "../../inc/FooterPremiumUser";
 import {Button} from "reactstrap";
-import PremiumUserEmployementList from "./PremiumUserEmployementList";
+import PremiumUserEmployementList from "./inc/PremiumUserEmployementList";
 import TablePremiumUserEmployementSkeleton from "../../inc/Skeleton/TablePremiumUserEmployementSkeleton";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
@@ -293,7 +293,7 @@ class PremiumUserEmployement extends Component {
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">dialpad</i> Annonces sur les offres d'empoi,service et formation
+                                                <i className="material-icons">dialpad</i> Offres d'empoi,service et formations
                                             </div>
                                         </div>
                                     </div>
@@ -341,7 +341,7 @@ class PremiumUserEmployement extends Component {
                                                 <i className="material-icons">dialpad</i>
                                             </div>
                                             <p className="card-category">
-                                                <b>Annonces sur les offres d'empoi,service et formation</b>
+                                                <b>Offres d'empoi,service et formations</b>
                                             </p>
                                             <h3 className="card-title" style={{ color: "red" }}>
                                                 <b>{this.data_countFormatter(employments_count)}</b>
@@ -350,7 +350,7 @@ class PremiumUserEmployement extends Component {
                                         <div className="card-footer">
                                             <div className="stats">
                                                 <i className="material-icons">dialpad</i>
-                                                <b>Annonces sur les offres d'empoi,service et formation</b>
+                                                <b>Offres d'empoi,service et formations</b>
                                             </div>
                                         </div>
                                     </div>
@@ -363,13 +363,13 @@ class PremiumUserEmployement extends Component {
                                     <div className="card">
                                         <div className="card-header card-header-primary">
                                             <div className="row">
-                                                <div className="col-md-6">
+                                                <div className="col-md-8">
                                                     <h4 className="card-title">
                                                         <b>Annonces sur les offres d'empoi,service et formation</b>
                                                     </h4>
                                                     <p className="card-title">Annonces sur les offres d'empoi,service et formation</p>
                                                 </div>
-                                                <div className="col-md-6 text-right">
+                                                <div className="col-md-4 text-right">
                                                 <span>
                                                     <i id="tooltipSize" className="material-icons">dialpad</i>
                                                 </span>
@@ -399,7 +399,7 @@ class PremiumUserEmployement extends Component {
                                                         <th><b>Titre</b></th>
                                                         <th><b>Categorie</b></th>
                                                         <th><b>Vue</b></th>
-                                                        <th><b>Contact</b></th>
+                                                        <th><b>Messages</b></th>
                                                         <th><b>Price (FCFA)</b></th>
                                                         <th><b>Date</b></th>
                                                         <th className="disabled-sorting text-right"><b>Actions</b></th>
@@ -411,7 +411,7 @@ class PremiumUserEmployement extends Component {
                                                         <th>Titre</th>
                                                         <th>Categorie</th>
                                                         <th>Vue</th>
-                                                        <th>Contact</th>
+                                                        <th>Messages</th>
                                                         <th>Price (FCFA)</th>
                                                         <th>Date</th>
                                                         <th className="text-right">Actions</th>

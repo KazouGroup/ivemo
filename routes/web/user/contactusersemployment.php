@@ -13,92 +13,87 @@ Route::post(
 Route::group(['prefix' => 'api'], function () {
 
     Route::get(
-        '{user}/personal_mails/annonces_locations',
-        'ContactuserslocationController@apipersonalmessagesannonces_locations'
-    )->name('api.personal_mails_annonces_locations.site');
+        '{user}/personal_mails/employments',
+        'ContactusersemploymentController@apipersonalmessagesemployments'
+    )->name('api.personal_mails_employments.site');
 
     Route::get(
-        '{user}/personal_mails/archvement_annonces_locations',
-        'ContactuserslocationController@apipersonalmessagesarchvement_annonces_locations'
-    )->name('api.personal_mails_archvement_annonces_locations.site');
+        '{user}/personal_mails/archvement_employments',
+        'ContactusersemploymentController@apipersonalmessagesarchvement_employments'
+    )->name('api.personal_mails_archvement_employments.site');
 
     Route::get(
-        '{user}/personal_mails/favorite_annonces_locations',
-        'ContactuserslocationController@apipersonalmessagesfavorite_annonces_locations'
-    )->name('api.personal_mails_favorite_annonces_locations.site');
+        '{user}/personal_mails/favorite_employments',
+        'ContactusersemploymentController@apipersonalmessagesfavorite_employments'
+    )->name('api.personal_mails_favorite_employments.site');
 
     Route::get(
-        '{user}/personal_mails/annonces_ventes_by_annonces',
-        'ContactuserslocationController@apipersonalmessagesannonces_by_locations'
-    )->name('api.personal_mails_annonces_by_locations.site');
-
-    Route::get(
-        '{user}/personal_mails/annonces_locations/{contactuserslocation:slug}',
-        'ContactuserslocationController@apipersonalmessagesannonces_locations_show'
-    )->name('api.personal_mails_annonces_locations_show.site');
+        '{user}/personal_mails/employments/{contactuseremployment}',
+        'ContactusersemploymentController@apipersonalmessagesemployments_show'
+    )->name('api.personal_mails_employments_show.site');
 
 });
 
 Route::group(['prefix' => 'profile'], function () {
 
     Route::get(
-        'personal_mails/personal_contactuserslocation_unfavorite/{id}',
-        'ContactuserslocationController@personalmessagescontactsunfavorite'
-    )->name('personal_contactuserslocation_mails_unfavorite.site');
+        'personal_mails/personal_contactusersemployment_unfavorite/{id}',
+        'ContactusersemploymentController@personalmessagescontactsunfavorite'
+    )->name('personal_contactusersemployments_mails_unfavorite.site');
 
     Route::get(
-        'personal_mails/personal_contactuserslocation_favorite/{id}',
-        'ContactuserslocationController@personalmessagescontactsfavorite'
-    )->name('personal_contactuserslocation_mails_favorite.site');
+        'personal_mails/personal_contactusersemployment_favorite/{id}',
+        'ContactusersemploymentController@personalmessagescontactsfavorite'
+    )->name('personal_contactusersemployments_mails_favorite.site');
 
     Route::get(
-        'personal_mails/personal_contactuserslocation_unarchvement/{id}',
-        'ContactuserslocationController@personalmessagescontactsunarchvement'
-    )->name('personal_contactuserslocation_mails_unarchvement.site');
+        'personal_mails/personal_contactusersemployment_unarchvement/{id}',
+        'ContactusersemploymentController@personalmessagescontactsunarchvement'
+    )->name('personal_contactusersemployment_mails_unarchvement.site');
 
     Route::get(
-        'personal_mails/personal_contactuserslocation_archvement/{id}',
-        'ContactuserslocationController@personalmessagescontactsarchvement'
-    )->name('personal_contactuserslocation_mails_archvement.site');
+        'personal_mails/personal_contactusersemployment_archvement/{id}',
+        'ContactusersemploymentController@personalmessagescontactsarchvement'
+    )->name('personal_contactusersemployment_mails_archvement.site');
 
     Route::get(
-        'personal_mails/personal_contactuserslocation_active/{id}',
-        'ContactuserslocationController@personalmessagescontactsactive'
-    )->name('personal_contactuserslocation_mails_active.site');
+        'personal_mails/personal_contactusersemployment_active/{id}',
+        'ContactusersemploymentController@personalmessagescontactsactive'
+    )->name('personal_contactusersemployment_mails_active.site');
 
     Route::get(
-        'personal_mails/personal_contactuserslocation_unactive/{id}',
-        'ContactuserslocationController@personalmessagescontactsunactive'
-    )->name('personal_contactuserslocation_mails_unactive.site');
+        'personal_mails/personal_contactusersemployment_unactive/{id}',
+        'ContactusersemploymentController@personalmessagescontactsunactive'
+    )->name('personal_contactusersemployment_mails_unactive.site');
 
     Route::get(
-        '{user}/personal_mails/annonces_locations/',
-        'ContactuserslocationController@personalmessagesannonces_locations'
-    )->name('personal_mails_annonces_locations.site');
+        '{user}/personal_mails/employments/',
+        'ContactusersemploymentController@personalmessagesemployments'
+    )->name('personal_mails_employments.site');
 
     Route::get(
-        '{user}/personal_mails/archvement_annonces_locations/',
-        'ContactuserslocationController@personalmessagesarchvement_annonces_locations'
-    )->name('personal_mails_archvement_annonces_locations.site');
+        '{user}/personal_mails/archvement_employments/',
+        'ContactusersemploymentController@personalmessagesarchvement_employments'
+    )->name('personal_mails_archvement_employments.site');
 
     Route::get(
-        '{user}/personal_mails/favorite_annonces_locations/',
-        'ContactuserslocationController@personalmessagesfavorite_annonces_locations'
-    )->name('personal_mails_favorite_annonces_locations.site');
+        '{user}/personal_mails/favorite_employments/',
+        'ContactusersemploymentController@personalmessagesfavorite_employments'
+    )->name('personal_mails_favorite_employments.site');
 
     Route::get(
         '{user}/personal_mails/annonces_ventes_by_annonces/',
-        'ContactuserslocationController@personalmessagesannonces_by_locations'
-    )->name('personal_mails_annonces_by_locations.site');
+        'ContactusersemploymentController@personalmessages_by_employments'
+    )->name('personal_mails_annonces_by_employments.site');
 
     Route::get(
-        '{user}/personal_mails/annonces_locations/{contactuserslocation:slug}',
-        'ContactuserslocationController@personalmessagesannonces_locations_show'
-    )->name('personal_mails_annonces_locations_show.site');
+        '{user}/personal_mails/employments/{contactuseremployment:slug}',
+        'ContactusersemploymentController@personalmessagesemployments_show'
+    )->name('personal_mails_employments_show.site');
 
     Route::delete(
-        'personal_mails/annonces_locations_delete_mail/{id}',
-        'ContactuserslocationController@personalmessagesdelete'
-    )->name('personal_annonces_locations_mails_delete.site');
+        'personal_mails/employments_delete_mail/{id}',
+        'ContactusersemploymentController@personalmessagesdelete'
+    )->name('personal_employments_mails_delete.site');
 
 });

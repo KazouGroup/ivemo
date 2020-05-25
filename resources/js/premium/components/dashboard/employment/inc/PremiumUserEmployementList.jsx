@@ -45,8 +45,12 @@ class PremiumUserEmployementList extends Component {
                     }
 
                 </td>
-                <td><b>{this.data_countFormatter(this.props.visits_count)}</b></td>
-                <td><b>{ this.props.contactuseremployments_count }</b></td>
+                <td className="text-center"><b>{this.data_countFormatter(this.props.visits_count)}</b></td>
+                <td className="text-center">
+                    <Link to={`/dashboard/premium/${$userIvemo.slug}/employments/message/${this.props.slug}/`}>
+                        <b>{ this.props.contactuseremployments_count }</b>
+                    </Link>
+                </td>
                 <td><b> {this.props.price && (
                     this.props.price.formatMoney(2,'.',',')
                 )}</b></td>

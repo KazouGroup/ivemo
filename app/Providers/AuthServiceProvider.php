@@ -9,6 +9,7 @@ use App\Model\blogannoncelocation;
 use App\Model\blogannoncereservation;
 use App\Model\blogannoncevente;
 use App\Model\contactuser;
+use App\Model\contactuseremployment;
 use App\Model\contactuserslocation;
 use App\Model\contactusersvente;
 use App\Model\employment;
@@ -22,6 +23,7 @@ use App\Policies\BlogannoncelocationPolicy;
 use App\Policies\BlogannoncereservationPolicy;
 use App\Policies\BlogannonceventePolicy;
 use App\Policies\ContactuserPolicy;
+use App\Policies\ContactusersemploymentPolicy;
 use App\Policies\ContactuserslocationPolicy;
 use App\Policies\ContactusersventePolicy;
 use App\Policies\EmploymentPolicy;
@@ -51,6 +53,7 @@ class AuthServiceProvider extends ServiceProvider
         blogannoncevente::class => BlogannonceventePolicy::class,
         teamuser::class => TeamuserPolicy::class,
         employment::class => EmploymentPolicy::class,
+        contactuseremployment::class => ContactusersemploymentPolicy::class,
         user::class => UserPolicy::class,
     ];
 

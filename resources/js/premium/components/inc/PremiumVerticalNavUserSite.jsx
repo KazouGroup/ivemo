@@ -2,31 +2,8 @@ import React, { PureComponent } from "react";
 import {Link, NavLink, withRouter} from 'react-router-dom';
 
 class PremiumVerticalNavUserSite extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {userData:{profile:{profile:[]}}};
-        this.navLogout = this.navLogout.bind(this);
-    }
-
-    navLogout(e) {
-        axios.post('/logout')
-            .then(() => {
-                window.location.reload();
-            });
-    }
-
-    loadItems(){
-        let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.premium_user_index.site',[itemuser])).then(response =>
-            this.setState({userData: response.data}));
-    }
-
-    componentDidMount() {
-        this.loadItems();
-    }
 
     render() {
-        const {userData} = this.state;
         return (
             <>
                 <div className="sidebar" data-color="rose" data-background-color="black" data-image="/assets/img/sidebar-1.jpg">
@@ -43,7 +20,7 @@ class PremiumVerticalNavUserSite extends PureComponent {
                     <div className="sidebar-wrapper">
                         <div className="user">
                             <div className="photo">
-                                <img src={userData.avatar} />
+                                <img src={$userIvemo.avatar} />
                             </div>
                             <div className="user-info">
                                 <a data-toggle="collapse" href="#collapseProfile" className="username">
