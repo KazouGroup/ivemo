@@ -21,7 +21,32 @@
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="/assets/dashboard/assets/js/material-dashboard.js?v=2.1.0" type="text/javascript"></script>
 <script src="{{ mix('/js/premium/app.js') }}"></script>
-
+<script>
+    $(document).ready(function(){
+        $('body').append('<a id="toTop" class="btn btn-primary btn-sm" href="#" title="Go to Top Page"><i class="fa fa-arrow-up"></i></a>');
+        $(window).scroll(function () {
+            if ($(this).scrollTop() != 0) {
+                $('#toTop, #search-top').fadeIn();
+            } else {
+                $('#toTop, #search-top').fadeOut();
+            }
+        });
+        $('#toTop, #search-top').click(function(){
+            $("html, body").animate({ scrollTop: 0 }, 400);
+            return false;
+        });
+    });
+    Number.prototype.formatMoney = function(decPlaces, thouSeparator, decSeparator) {
+        var n = this,
+            decPlaces = isNaN(decPlaces = Math.abs(decPlaces)) ? 2 : decPlaces,
+            decSeparator = decSeparator == undefined ? "." : decSeparator,
+            thouSeparator = thouSeparator == undefined ? "," : thouSeparator,
+            sign = n < 0 ? "-" : "",
+            i = parseInt(n = Math.abs(+n || 0).toFixed(decPlaces)) + "",
+            j = (j = i.length) > 3 ? j % 3 : 0;
+        return sign + (j ? i.substr(0, j) + thouSeparator : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thouSeparator) + (decPlaces ? decSeparator + Math.abs(n - i).toFixed(decPlaces).slice(2) : "");
+    };
+</script>
 @section('script')
 
 @show

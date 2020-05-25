@@ -400,7 +400,7 @@ class PremiumUserEmployement extends Component {
                                                         <th><b>Categorie</b></th>
                                                         <th><b>Vue</b></th>
                                                         <th><b>Contact</b></th>
-                                                        <th><b>Status</b></th>
+                                                        <th><b>Price (FCFA)</b></th>
                                                         <th><b>Date</b></th>
                                                         <th className="disabled-sorting text-right"><b>Actions</b></th>
                                                     </tr>
@@ -412,7 +412,7 @@ class PremiumUserEmployement extends Component {
                                                         <th>Categorie</th>
                                                         <th>Vue</th>
                                                         <th>Contact</th>
-                                                        <th>Status</th>
+                                                        <th>Price (FCFA)</th>
                                                         <th>Date</th>
                                                         <th className="text-right">Actions</th>
                                                     </tr>
