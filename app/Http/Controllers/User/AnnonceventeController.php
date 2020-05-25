@@ -432,7 +432,7 @@ class AnnonceventeController extends Controller
 
 
         $annoncevente->description = clean($request->description);
-
+        $annoncevente->slug = null;
         $annoncevente->update($request->all());
 
         return response()->json($annoncevente,200);

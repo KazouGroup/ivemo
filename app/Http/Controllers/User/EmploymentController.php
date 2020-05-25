@@ -265,6 +265,7 @@ class EmploymentController extends Controller
         EmploymentService::updateUploadeImage($request,$employment);
 
         $employment->description = clean($request->description);
+        $employment->slug = null;
         $employment->update($request->all());
 
         return response()->json($employment,200);

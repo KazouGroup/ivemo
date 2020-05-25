@@ -281,6 +281,7 @@ class BlogannoncelocationController extends Controller
         BlogannoncelocationService::updateUploadeImage($request,$blogannoncelocation);
 
         $blogannoncelocation->description = clean($request->description);
+        $blogannoncelocation->slug = null;
         $blogannoncelocation->update($request->all());
 
         return response()->json($blogannoncelocation,200);

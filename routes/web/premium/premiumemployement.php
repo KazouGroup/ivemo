@@ -14,7 +14,7 @@ Route::group(['prefix' => 'dashboard/premium'], function () {
     )->name('employments_premium_create.dashboard');
 
     Route::get(
-        '{user:slug}/employments/{employment}/edit',
+        '{user:slug}/employments/{employment:slugin}/edit',
         'PremiumemploymentController@edit'
     )->name('employments_premium_edit.dashboard');
 

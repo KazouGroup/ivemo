@@ -38,7 +38,7 @@ class PremiumemploymentController extends Controller
         return view('premium.employment.index',compact('user'));
     }
 
-    public function edit($user , employment $employment)
+    public function edit(user $user,employment $employment)
     {
         $this->authorize('update',$employment);
 

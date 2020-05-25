@@ -8,23 +8,23 @@ class NavPremiumUserEmployement extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            blogannonceventes_count: [],
-            blogannonceventesactive_count: [],
-            blogannonceventesunactive_count: [],
+            employments_count: [],
+            employmentsactive_count: [],
+            employmentsunactive_count: [],
 
         };
     }
 
     loadItems(){
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.blogannonceventes_premium_count',[itemuser])).then(response =>
-            this.setState({blogannonceventes_count: response.data}));
+        dyaxios.get(route('api.employments_premium_count',[itemuser])).then(response =>
+            this.setState({employments_count: response.data}));
 
-        dyaxios.get(route('api.blogannonceventes_premiumactive_count',[itemuser])).then(response => {
-            this.setState({blogannonceventesactive_count: response.data})});
+        dyaxios.get(route('api.employments_premiumactive_count',[itemuser])).then(response => {
+            this.setState({employmentsactive_count: response.data})});
 
-        dyaxios.get(route('api.blogannonceventes_premiumunactive_count',[itemuser])).then(response =>
-            this.setState({blogannonceventesunactive_count: response.data}));
+        dyaxios.get(route('api.employments_premiumunactive_count',[itemuser])).then(response =>
+            this.setState({employmentsunactive_count: response.data}));
     }
 
     // lifecycle method
@@ -32,28 +32,29 @@ class NavPremiumUserEmployement extends Component {
         this.loadItems();
     }
 
-    data_countFormatter(blogannonceventes_count, precision) {
-        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannonceventes_count)) / 3);
+
+    data_countFormatter(employments_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(employments_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
         const suffix = abbrev[order];
-        return (blogannonceventes_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+        return (employments_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
 
-    dataactive_countFormatter(blogannonceventesactive_count, precision) {
-        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannonceventesactive_count)) / 3);
+    dataactive_countFormatter(employmentsactive_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(employmentsactive_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
         const suffix = abbrev[order];
-        return (blogannonceventesactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+        return (employmentsactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
 
-    dataunactive_countFormatter(blogannonceventesunactive_count, precision) {
-        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannonceventesunactive_count)) / 3);
+    dataunactive_countFormatter(employmentsunactive_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(employmentsunactive_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
         const suffix = abbrev[order];
-        return (blogannonceventesunactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+        return (employmentsunactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
     render() {
-        const {blogannonceventes_count,blogannonceventesactive_count,blogannonceventesunactive_count} = this.state;
+        const {employments_count,employmentsactive_count,employmentsunactive_count} = this.state;
         return (
 
             <div className="row">
@@ -61,15 +62,14 @@ class NavPremiumUserEmployement extends Component {
                     <div className="card card-stats">
                         <div className="card-header card-header-primary card-header-icon">
                             <div className="card-icon">
-                                <i className="material-icons">view_headline</i>
+                                <i className="material-icons">dialpad</i>
                             </div>
-                            <p className="card-category"><b>Articles</b></p>
-                            <h3 className="card-title"><b>{this.data_countFormatter(blogannonceventes_count)}</b></h3>
+                            <p className="card-category"><b>Annonces</b></p>
+                            <h3 className="card-title"><b>{this.data_countFormatter(employments_count)}</b></h3>
                         </div>
                         <div className="card-footer">
                             <div className="stats">
-                                <i className="material-icons">view_headline</i> Articles sur les
-                                annonces ventes
+                                <i className="material-icons">dialpad</i> Annonces sur les offres d'empoi,service et formation
                             </div>
                         </div>
                     </div>
@@ -81,11 +81,11 @@ class NavPremiumUserEmployement extends Component {
                                 <i className="material-icons">done</i>
                             </div>
                             <p className="card-category"><b>Actives</b></p>
-                            <h3 className="card-title"><b>{this.dataactive_countFormatter(blogannonceventesactive_count)}</b></h3>
+                            <h3 className="card-title"><b>{this.dataactive_countFormatter(employmentsactive_count)}</b></h3>
                         </div>
                         <div className="card-footer">
                             <div className="stats">
-                                <i className="material-icons">done</i> Articles actives
+                                <i className="material-icons">done</i> Annonces actives
                             </div>
                         </div>
                     </div>
@@ -97,11 +97,11 @@ class NavPremiumUserEmployement extends Component {
                                 <i className="material-icons">remove</i>
                             </div>
                             <p className="card-category"><b>Desactivés</b></p>
-                            <h3 className="card-title"><b>{this.dataunactive_countFormatter(blogannonceventesunactive_count)}</b></h3>
+                            <h3 className="card-title"><b>{this.dataunactive_countFormatter(employmentsunactive_count)}</b></h3>
                         </div>
                         <div className="card-footer">
                             <div className="stats">
-                                <i className="material-icons">remove</i> Articles désactivés
+                                <i className="material-icons">remove</i> Annonces désactivés
                             </div>
                         </div>
                     </div>
