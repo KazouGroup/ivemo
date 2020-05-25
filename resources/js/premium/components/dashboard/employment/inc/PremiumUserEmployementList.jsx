@@ -45,33 +45,15 @@ class PremiumUserEmployementList extends Component {
                     }
 
                 </td>
-                <td><b>{this.data_countFormatter(this.props.visits_count)}</b></td>
-                <td><b>{ this.props.contactuseremployments_count }</b></td>
-                <td>
-                    <div className="timeline-heading">
-                        {this.props.status ?
-                            <>
-                                {!this.props.status_admin ?
-                                    <a href="#">
-                                        <span className="badge badge-danger"><b>Masquer par le moderateur</b></span>
-                                    </a>
-                                    :
-                                    <span className="badge badge-success"><b>Visible</b></span>
-                                }
-                            </>
-                            :
-                            <>
-                                {!this.props.status_admin ?
-                                    <a href="#">
-                                        <span className="badge badge-danger"><b>Masquer par le moderateur</b></span>
-                                    </a>
-                                    :
-                                    <span className="badge badge-rose"><b>Deactivé</b></span>
-                                }
-                            </>
-                        }
-                    </div>
+                <td className="text-center"><b>{this.data_countFormatter(this.props.visits_count)}</b></td>
+                <td className="text-center">
+                    <Link to={`/dashboard/premium/${$userIvemo.slug}/employments/message/${this.props.slug}/`}>
+                        <b>{ this.props.contactuseremployments_count }</b>
+                    </Link>
                 </td>
+                <td><b> {this.props.price && (
+                    this.props.price.formatMoney(2,'.',',')
+                )}</b></td>
                 <td><b>{moment(this.props.created_at).fromNow()}</b></td>
                 <td className="text-right">
                     {this.props.status ?

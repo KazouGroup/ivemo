@@ -69,7 +69,7 @@ class NavPremiumUserEmployement extends Component {
                         </div>
                         <div className="card-footer">
                             <div className="stats">
-                                <i className="material-icons">dialpad</i> Annonces sur les offres d'empoi,service et formation
+                                <i className="material-icons">dialpad</i> Offres d'empoi,service et formations
                             </div>
                         </div>
                     </div>

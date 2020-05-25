@@ -23,6 +23,8 @@ import PremiumUserEditBlogannonceReservation
 import PremiumUserEmployement from "../components/dashboard/employment/PremiumUserEmployement";
 import PremiumUserEditEmployement from "../components/dashboard/employment/treatment/PremiumUserEditEmployement";
 import PremiumUserNewEmployement from "../components/dashboard/employment/treatment/PremiumUserNewEmployement";
+import PremiumUserEmployementMessage from "../components/dashboard/employment/PremiumUserEmployementMessage";
+import PremiumUserEmployementMessageShow from "../components/dashboard/employment/PremiumUserEmployementMessageShow";
 
 
 
@@ -49,6 +51,8 @@ const RouterUserPremium = props => (
         <Route exact path="/dashboard/premium/:user/blogs/annonce_ventes/:blogannoncevente/edit/" component={PremiumUserEditBlogannonceVente}/>
 
         <Route exact path="/dashboard/premium/:user/employments/" component={PremiumUserEmployement}/>
+        <Route exact path="/dashboard/premium/:user/employments/message/:employment/" component={PremiumUserEmployementMessage}/>
+        <Route exact path="/dashboard/premium/:user/employments/show/:contactuseremployment/" component={PremiumUserEmployementMessageShow}/>
         <Route exact path="/dashboard/premium/:user/employments/create/" component={PremiumUserNewEmployement}/>
         <Route exact path="/dashboard/premium/:user/employments/:employment/edit/" component={PremiumUserEditEmployement}/>
     </Switch>

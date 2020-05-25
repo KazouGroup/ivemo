@@ -21,6 +21,8 @@ class CreateContactuseremploymentsTable extends Migration
             $table->string('slug')->nullable();
             $table->string('ip')->nullable();
             $table->string('email')->nullable();
+            $table->boolean('status_archvement')->default(false);
+            $table->boolean('status_favorite')->default(false);
             $table->boolean('status_red')->default(false);
             $table->longText('message')->nullable();
             $table->timestamps();

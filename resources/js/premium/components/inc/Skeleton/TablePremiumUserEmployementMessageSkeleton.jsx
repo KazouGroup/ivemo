@@ -4,7 +4,7 @@ import {Button} from "reactstrap";
 import Skeleton from "react-loading-skeleton";
 
 
-function TablePremiumUserEmployementSkeleton(props) {
+function TablePremiumUserEmployementMessageSkeleton(props) {
 
     return(
 
@@ -15,9 +15,6 @@ function TablePremiumUserEmployementSkeleton(props) {
                 <td> <Skeleton width={120} /></td>
                 <td> <Skeleton width={120} /></td>
                 <td> <Skeleton width={120} /></td>
-                <td className="text-center"> <Skeleton width={15} /></td>
-                <td className="text-center"> <Skeleton width={15} /></td>
-                <td> <Skeleton width={50} /></td>
                 <td> <Skeleton width={100} /></td>
                 <td className="text-right">
                     <Skeleton width={110} />
@@ -29,9 +26,6 @@ function TablePremiumUserEmployementSkeleton(props) {
                 <td> <Skeleton width={120} /></td>
                 <td> <Skeleton width={120} /></td>
                 <td> <Skeleton width={120} /></td>
-                <td className="text-center"> <Skeleton width={15} /></td>
-                <td className="text-center"> <Skeleton width={15} /></td>
-                <td> <Skeleton width={50} /></td>
                 <td> <Skeleton width={100} /></td>
                 <td className="text-right">
                     <Skeleton width={110} />
@@ -43,9 +37,6 @@ function TablePremiumUserEmployementSkeleton(props) {
                 <td> <Skeleton width={120} /></td>
                 <td> <Skeleton width={120} /></td>
                 <td> <Skeleton width={120} /></td>
-                <td className="text-center"> <Skeleton width={15} /></td>
-                <td className="text-center"> <Skeleton width={15} /></td>
-                <td> <Skeleton width={50} /></td>
                 <td> <Skeleton width={100} /></td>
                 <td className="text-right">
                     <Skeleton width={110} />
@@ -57,9 +48,6 @@ function TablePremiumUserEmployementSkeleton(props) {
                 <td> <Skeleton width={120} /></td>
                 <td> <Skeleton width={120} /></td>
                 <td> <Skeleton width={120} /></td>
-                <td className="text-center"> <Skeleton width={15} /></td>
-                <td className="text-center"> <Skeleton width={15} /></td>
-                <td> <Skeleton width={50} /></td>
                 <td> <Skeleton width={100} /></td>
                 <td className="text-right">
                     <Skeleton width={110} />
@@ -70,4 +58,4 @@ function TablePremiumUserEmployementSkeleton(props) {
         </Fragment>
     )
 }
-export default TablePremiumUserEmployementSkeleton;
+export default TablePremiumUserEmployementMessageSkeleton;
