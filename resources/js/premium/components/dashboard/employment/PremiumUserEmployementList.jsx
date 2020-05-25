@@ -15,13 +15,8 @@ class PremiumUserEmployementList extends Component {
     constructor(props) {
         super(props);
         this.state = {};
-
-
     }
 
-    componentDidMount() {
-        //
-    }
 
     data_countFormatter(employments_count, precision) {
         const abbrev = ['', 'k', 'M', 'B', 'T'];
@@ -92,10 +87,10 @@ class PremiumUserEmployementList extends Component {
 
                     }
 
-                    <a target="_blank" href={`/dashboard/premium/${$userIvemo.slug}`} className="btn btn-warning btn-sm btn-just-icon">
+                    <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`} className="btn btn-warning btn-sm btn-just-icon">
                         <i className="material-icons">visibility</i>
                     </a>
-                    <Link to={`/dashboard/premium/${$userIvemo.slug}`} className="btn btn-info btn-sm btn-just-icon" data-toggle="tooltip" data-placement="bottom" title={`Éditer cette ${this.props.title}`}>
+                    <Link to={`/dashboard/premium/${$userIvemo.slug}/employments/${this.props.slugin}/edit/`} className="btn btn-info btn-sm btn-just-icon" data-toggle="tooltip" data-placement="bottom" title={`Éditer cette ${this.props.title}`}>
                         <i className="material-icons">edit</i>
                     </Link>
                     <Button onClick={() => this.props.deleteItem(this.props.id)}

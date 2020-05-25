@@ -361,7 +361,7 @@ class AnnoncelocationController extends Controller
 
 
         $annoncelocation->description = clean($request->description);
-
+        $annoncelocation->slug = null;
         $annoncelocation->update($request->all());
 
         return response()->json($annoncelocation,200);

@@ -201,6 +201,7 @@ class BlogannonceventeController extends Controller
         BlogannonceventeService::updateUploadeImage($request,$blogannoncevente);
 
         $blogannoncevente->description = clean($request->description);
+        $blogannoncevente->slug = null;
         $blogannoncevente->update($request->all());
 
         return response()->json($blogannoncevente,200);

@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -66,6 +67,23 @@ class employment extends Model
         'status' => 'boolean',
         'status_admin' => 'boolean',
     ];
+
+    use Sluggable;
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title',
+                'separator' => '+'
+            ]
+
+        ];
+    }
 
     public function contactuseremployments()
     {

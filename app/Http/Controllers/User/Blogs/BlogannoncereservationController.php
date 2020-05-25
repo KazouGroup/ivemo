@@ -278,6 +278,7 @@ class BlogannoncereservationController extends Controller
         BlogannoncereservationService::updateUploadeImage($request,$blogannoncereservation);
 
         $blogannoncereservation->description = clean($request->description);
+        $blogannoncereservation->slug = null;
         $blogannoncereservation->update($request->all());
 
         return response()->json($blogannoncereservation,200);
