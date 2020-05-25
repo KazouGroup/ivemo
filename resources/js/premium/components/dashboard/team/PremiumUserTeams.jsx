@@ -7,7 +7,7 @@ import PremiumHorizontalNavUserSite from "../../inc/PremiumHorizontalNavUserSite
 import FooterPremiumUser from "../../inc/FooterPremiumUser";
 import {Button, UncontrolledTooltip} from "reactstrap";
 import moment from "moment";
-import TablePremiumUserTeamSkeleton from "../../inc/Skeleton/TablePremiumUserTeamSkeleton";
+import LoaderLdsDefaultPage from "../../inc/annimation/LoaderLdsDefaultPage";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -265,60 +265,6 @@ class PremiumUserTeams extends Component {
     }
     render() {
         const {teams,teams_count,teamsactive_count,teamsunactive_count} = this.state;
-        const mapTeamsusers = teams.length >= 0 ? (
-            teams.map(item => {
-                return(
-                    <tr key={item.id}>
-                        <td>
-                            <Link to={'/dashboard/users/'}>
-                                <img src={item.photo} alt={item.full_name} style={avatar_style}/>
-                            </Link>
-                        </td>
-                        <td>{item.full_name}</td>
-                        <td>{item.role}</td>
-                        <td>
-                            <div className="timeline-heading">
-                                {item.status ?
-                                    <span className="badge badge-success"><b>Visible</b></span>
-                                    :
-                                    <span className="badge badge-rose"><b>Desactivé</b></span>
-                                }
-                            </div>
-                        </td>
-                        <td>{moment(item.created_at).fromNow()}</td>
-                        <td className="text-right">
-                            {item.status ?
-                                <>
-                                    <Button onClick={() => this.unactiveItem(item)}
-                                            className="btn btn-success btn-just-icon btn-sm" title={`Desactiver ${item.full_name}`} >
-                                        <i className="material-icons">done</i>
-                                    </Button>
-                                </>
-                                :
-                                <>
-                                    <Button onClick={() => this.activeItem(item)}
-                                            className="btn btn-rose btn-just-icon btn-sm" title={`Activer ${item.full_name}`} >
-                                        <i className="material-icons">remove</i>
-                                    </Button>
-                                </>
-
-                            }
-
-                            <Link to={`/dashboard/premium/${item.user.slug}/teams/${item.id}/edit/`} className="btn btn-info btn-sm btn-just-icon" data-toggle="tooltip" data-placement="bottom" title={`Éditer cette ${item.full_name}`}>
-                                <i className="material-icons">edit</i>
-                            </Link>
-
-                            <Button onClick={() => this.deleteItem(item.id)}
-                                    className="btn btn-danger btn-sm btn-just-icon" title="Supprimer">
-                                <i className="material-icons">delete_forever</i>
-                            </Button>
-                        </td>
-                    </tr>
-                )
-            })
-        ):(
-            <TablePremiumUserTeamSkeleton/>
-        );
         return (
             <>
                 <Helmet title={`Dashboard ${$userIvemo.first_name || ""} - Ivemo`} />
@@ -443,33 +389,85 @@ class PremiumUserTeams extends Component {
                                                 </div>
 
                                             </div>
-                                            <div className="material-datatables">
-                                                <table id="datatables" className="table table-striped table-no-bordered table-hover" cellSpacing={0} width="100%" style={{width:"100%"}}>
-                                                    <thead>
-                                                    <tr>
-                                                        <th><b>Profile</b></th>
-                                                        <th><b>Nom</b></th>
-                                                        <th><b>Role</b></th>
-                                                        <th><b>Status</b></th>
-                                                        <th><b>Date</b></th>
-                                                        <th className="disabled-sorting text-right"><b>Actions</b></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tfoot>
-                                                    <tr>
-                                                        <th>Profile</th>
-                                                        <th>Nom</th>
-                                                        <th>Role</th>
-                                                        <th>Status</th>
-                                                        <th>Date</th>
-                                                        <th className="text-right">Actions</th>
-                                                    </tr>
-                                                    </tfoot>
-                                                    <tbody>
-                                                    {mapTeamsusers}
-                                                    </tbody>
-                                                </table>
-                                            </div>
+
+                                            {teams.length >= 0 ?
+                                                <div className="material-datatables">
+                                                    <table id="datatables" className="table table-striped table-no-bordered table-hover" cellSpacing={0} width="100%" style={{width:"100%"}}>
+                                                        <thead>
+                                                        <tr>
+                                                            <th><b>Profile</b></th>
+                                                            <th><b>Nom</b></th>
+                                                            <th><b>Role</b></th>
+                                                            <th><b>Status</b></th>
+                                                            <th><b>Date</b></th>
+                                                            <th className="disabled-sorting text-right"><b>Actions</b></th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tfoot>
+                                                        <tr>
+                                                            <th>Profile</th>
+                                                            <th>Nom</th>
+                                                            <th>Role</th>
+                                                            <th>Status</th>
+                                                            <th>Date</th>
+                                                            <th className="text-right">Actions</th>
+                                                        </tr>
+                                                        </tfoot>
+                                                        <tbody>
+                                                        {teams.map((item) => (
+                                                            <tr key={item.id}>
+                                                                <td>
+                                                                    <Link to={'/dashboard/users/'}>
+                                                                        <img src={item.photo} alt={item.full_name} style={avatar_style}/>
+                                                                    </Link>
+                                                                </td>
+                                                                <td>{item.full_name}</td>
+                                                                <td>{item.role}</td>
+                                                                <td>
+                                                                    <div className="timeline-heading">
+                                                                        {item.status ?
+                                                                            <span className="badge badge-success"><b>Visible</b></span>
+                                                                            :
+                                                                            <span className="badge badge-rose"><b>Desactivé</b></span>
+                                                                        }
+                                                                    </div>
+                                                                </td>
+                                                                <td>{moment(item.created_at).fromNow()}</td>
+                                                                <td className="text-right">
+                                                                    {item.status ?
+                                                                        <>
+                                                                            <Button onClick={() => this.unactiveItem(item)}
+                                                                                    className="btn btn-success btn-just-icon btn-sm" title={`Desactiver ${item.full_name}`} >
+                                                                                <i className="material-icons">done</i>
+                                                                            </Button>
+                                                                        </>
+                                                                        :
+                                                                        <>
+                                                                            <Button onClick={() => this.activeItem(item)}
+                                                                                    className="btn btn-rose btn-just-icon btn-sm" title={`Activer ${item.full_name}`} >
+                                                                                <i className="material-icons">remove</i>
+                                                                            </Button>
+                                                                        </>
+
+                                                                    }
+
+                                                                    <Link to={`/dashboard/premium/${item.user.slug}/teams/${item.id}/edit/`} className="btn btn-info btn-sm btn-just-icon" data-toggle="tooltip" data-placement="bottom" title={`Éditer cette ${item.full_name}`}>
+                                                                        <i className="material-icons">edit</i>
+                                                                    </Link>
+
+                                                                    <Button onClick={() => this.deleteItem(item.id)}
+                                                                            className="btn btn-danger btn-sm btn-just-icon" title="Supprimer">
+                                                                        <i className="material-icons">delete_forever</i>
+                                                                    </Button>
+                                                                </td>
+                                                            </tr>
+                                                        ))}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                :
+                                                <LoaderLdsDefaultPage/>}
+
                                         </div>
                                     </div>
                                 </div>

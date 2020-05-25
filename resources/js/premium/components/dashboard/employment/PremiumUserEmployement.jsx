@@ -7,7 +7,7 @@ import PremiumHorizontalNavUserSite from "../../inc/PremiumHorizontalNavUserSite
 import FooterPremiumUser from "../../inc/FooterPremiumUser";
 import {Button} from "reactstrap";
 import PremiumUserEmployementList from "./inc/PremiumUserEmployementList";
-import TablePremiumUserEmployementSkeleton from "../../inc/Skeleton/TablePremiumUserEmployementSkeleton";
+import LoaderLdsDefaultPage from "../../inc/annimation/LoaderLdsDefaultPage";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -258,16 +258,6 @@ class PremiumUserEmployement extends Component {
     }
     render() {
         const {useremployment,employments_count,employmentsactive_count,employmentsunactive_count} = this.state;
-        const mapEmployments = useremployment.length >= 0 ? (
-            useremployment.map(item => {
-                return(
-
-                    <PremiumUserEmployementList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
-
-                    )})
-        ):(
-            <TablePremiumUserEmployementSkeleton/>
-        );
         return (
             <>
                 <Helmet title={`Dashboard ${$userIvemo.first_name || ""} Formations & emplois - ${$name_site}`} />
@@ -391,37 +381,47 @@ class PremiumUserEmployement extends Component {
                                                 </div>
 
                                             </div>
-                                            <div className="material-datatables">
-                                                <table id="datatables" className="table table-striped table-no-bordered table-hover" cellSpacing={0} width="100%" style={{width:"100%"}}>
-                                                    <thead>
-                                                    <tr>
-                                                        <th><b>Image</b></th>
-                                                        <th><b>Titre</b></th>
-                                                        <th><b>Categorie</b></th>
-                                                        <th><b>Vue</b></th>
-                                                        <th><b>Messages</b></th>
-                                                        <th><b>Price (FCFA)</b></th>
-                                                        <th><b>Date</b></th>
-                                                        <th className="disabled-sorting text-right"><b>Actions</b></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tfoot>
-                                                    <tr>
-                                                        <th>Image</th>
-                                                        <th>Titre</th>
-                                                        <th>Categorie</th>
-                                                        <th>Vue</th>
-                                                        <th>Messages</th>
-                                                        <th>Price (FCFA)</th>
-                                                        <th>Date</th>
-                                                        <th className="text-right">Actions</th>
-                                                    </tr>
-                                                    </tfoot>
-                                                    <tbody>
-                                                    {mapEmployments}
-                                                    </tbody>
-                                                </table>
-                                            </div>
+
+                                            {useremployment.length >= 0 ?
+
+                                                <div className="material-datatables">
+                                                    <table id="datatables" className="table table-striped table-no-bordered table-hover" cellSpacing={0} width="100%" style={{width:"100%"}}>
+                                                        <thead>
+                                                        <tr>
+                                                            <th><b>Image</b></th>
+                                                            <th><b>Titre</b></th>
+                                                            <th><b>Categorie</b></th>
+                                                            <th><b>Vue</b></th>
+                                                            <th><b>Messages</b></th>
+                                                            <th><b>Price (FCFA)</b></th>
+                                                            <th><b>Date</b></th>
+                                                            <th className="disabled-sorting text-right"><b>Actions</b></th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tfoot>
+                                                        <tr>
+                                                            <th>Image</th>
+                                                            <th>Titre</th>
+                                                            <th>Categorie</th>
+                                                            <th>Vue</th>
+                                                            <th>Messages</th>
+                                                            <th>Price (FCFA)</th>
+                                                            <th>Date</th>
+                                                            <th className="text-right">Actions</th>
+                                                        </tr>
+                                                        </tfoot>
+                                                        <tbody>
+
+                                                        {useremployment.map((item) => (
+                                                        <PremiumUserEmployementList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
+                                                        ))}
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                :
+                                                <LoaderLdsDefaultPage/>}
+
                                         </div>
                                     </div>
                                 </div>
