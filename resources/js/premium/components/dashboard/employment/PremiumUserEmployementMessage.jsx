@@ -152,11 +152,10 @@ class PremiumUserEmployementMessage extends Component {
         let itemuser = this.props.match.params.user;
         let itemEmployment = this.props.match.params.employment;
         let url = route('api.employments_premium_message',[itemuser,itemEmployment]);
-        fetch(url).then(res => res.json())
-            .then((result) => {
-                this.mydatatables();
-                this.setState({employment: result});
-            });
+        dyaxios.get(url).then(response => {
+            this.mydatatables();
+            this.setState({employment: response.data})
+        });
     }
 
     // lifecycle method

@@ -224,11 +224,10 @@ class PremiumUserEmployement extends Component {
         dyaxios.get(route('api.employments_premiumunactive_count',[itemuser])).then(response =>
             this.setState({employmentsunactive_count: response.data}));
 
-        fetch(route('api.employments_premium',[itemuser])).then(res => res.json())
-            .then((result) => {
-                this.mydatatables();
-                this.setState({useremployment: result});
-            });
+        dyaxios.get(route('api.employments_premium',[itemuser])).then(response => {
+            this.mydatatables();
+            this.setState({useremployment: response.data})
+        });
     }
 
     // lifecycle method

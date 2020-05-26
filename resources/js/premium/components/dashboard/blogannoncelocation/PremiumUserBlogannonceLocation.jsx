@@ -224,11 +224,11 @@ class PremiumUserBlogannonceLocation extends Component {
         dyaxios.get(route('api.blogannoncelocations_premiumunactive_count', [itemuser])).then(response =>
             this.setState({ blogannoncelocationsunactive_count: response.data }));
 
-        fetch(route('api.blogannoncelocations_premium',[itemuser])).then(res => res.json())
-            .then((result) => {
-                this.mydatatables();
-                this.setState({userblogannonce: result});
-            });
+        dyaxios.get(route('api.blogannoncelocations_premium',[itemuser])).then(response => {
+            this.mydatatables();
+            this.setState({userblogannonce: response.data})
+        });
+
     }
 
     // lifecycle method
