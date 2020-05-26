@@ -10,18 +10,7 @@ import SectionBlogannonce from "../inc/user/section_indexsite/SectionBlogannonce
 
 
 class IndexSite extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            //
-        }
-    }
-
-    // lifecycle method
-    componentDidMount() {
-      //
-    }
-
+ 
     render() {
         return (
             <>

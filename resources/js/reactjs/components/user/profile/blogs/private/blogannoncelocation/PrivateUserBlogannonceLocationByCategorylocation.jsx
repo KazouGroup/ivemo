@@ -196,12 +196,9 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
     loadItems(){
         let itemuser = this.props.match.params.user;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
-        fetch(route('api.blogannoncelocations_premium_category_count',[itemuser,itemCategoryannoncelocation])).then(res => res.json())
-            .then((result) => {this.setState({blogannoncelocations_count: result});});
-        fetch(route('api.blogannoncelocations_premiumactive_category_count',[itemuser,itemCategoryannoncelocation])).then(res => res.json())
-            .then((result) => {this.setState({blogannoncelocationsactive_count: result});});
-        fetch(route('api.blogannoncelocations_premiumunactive_category_count',[itemuser,itemCategoryannoncelocation])).then(res => res.json())
-            .then((result) => {this.setState({blogannoncelocationsunactive_count: result});});
+        dyaxios.get(route('api.blogannoncelocations_premium_category_count',[itemuser,itemCategoryannoncelocation])).then(response => this.setState({ blogannoncelocations_count: response.data, }));
+        dyaxios.get(route('api.blogannoncelocations_premiumactive_category_count',[itemuser,itemCategoryannoncelocation])).then(response => this.setState({ blogannoncelocationsactive_count: response.data, }));
+        dyaxios.get(route('api.blogannoncelocations_premiumunactive_category_count',[itemuser,itemCategoryannoncelocation])).then(response => this.setState({ blogannoncelocationsunactive_count: response.data, }));
 
         dyaxios.get(route('api.blogannonceslocationscategoryannoncelocationbyuser_site',[itemuser,itemCategoryannoncelocation])).then(response => this.setState({userblogannoncelocationsPrivate: response.data,}));
     }

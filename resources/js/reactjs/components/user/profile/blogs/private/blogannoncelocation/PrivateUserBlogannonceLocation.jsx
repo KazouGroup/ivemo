@@ -195,12 +195,9 @@ class PrivateUserBlogannonceLocation extends Component {
 
     loadItems(){
         let itemuser = this.props.match.params.user;
-        fetch(route('api.blogannoncelocations_premium_count',[itemuser])).then(res => res.json())
-            .then((result) => {this.setState({blogannoncelocations_count: result});});
-        fetch(route('api.blogannoncelocations_premiumactive_count',[itemuser])).then(res => res.json())
-            .then((result) => {this.setState({blogannoncelocationsactive_count: result});});
-        fetch(route('api.blogannoncelocations_premiumunactive_count',[itemuser])).then(res => res.json())
-            .then((result) => {this.setState({blogannoncelocationsunactive_count: result});});
+        dyaxios.get(route('api.blogannoncelocations_premium_count',[itemuser])).then(response => this.setState({ blogannoncelocations_count: response.data, }));
+        dyaxios.get(route('api.blogannoncelocations_premiumactive_count',[itemuser])).then(response => this.setState({ blogannoncelocationsactive_count: response.data, }));
+        dyaxios.get(route('api.blogannoncelocations_premiumunactive_count',[itemuser])).then(response => this.setState({ blogannoncelocationsunactive_count: response.data, }));
 
         dyaxios.get(route('api.blogannonceslocationsbyuser_site',[itemuser])).then(response => this.setState({userblogannoncelocationsPrivate: response.data,}));
     }
