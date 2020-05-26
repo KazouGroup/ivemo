@@ -195,12 +195,11 @@ class PrivateUserEmployments extends Component {
 
     loadItems(){
         let itemuser = this.props.match.params.user;
-        fetch(route('api.employments_premium_count',[itemuser])).then(res => res.json())
-            .then((result) => {this.setState({employments_count: result});});
-        fetch(route('api.employments_premiumactive_count',[itemuser])).then(res => res.json())
-            .then((result) => {this.setState({employmentsactive_count: result});});
-        fetch(route('api.employments_premiumunactive_count',[itemuser])).then(res => res.json())
-            .then((result) => {this.setState({employmentsunactive_count: result});});
+        dyaxios.get(route('api.employments_premium_count',[itemuser])).then(response => this.setState({ employments_count: response.data, }));
+
+        dyaxios.get(route('api.employments_premiumactive_count',[itemuser])).then(response => this.setState({ employmentsactive_count: response.data, }));
+
+        dyaxios.get(route('api.employments_premiumunactive_count',[itemuser])).then(response => this.setState({ employmentsunactive_count: response.data, }));
 
         dyaxios.get(route('api.employmentsbyuser_site',[itemuser])).then(response => this.setState({useremploymentsPrivate: response.data,}));
     }
