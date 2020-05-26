@@ -52,6 +52,7 @@ class PremiumUserEditTeam extends Component {
                 ['bold', 'italic', 'underline'],
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                 [{ 'align': [] }],
+                ['link'],
                 [{ 'color': [] }, { 'background': [] }],
             ]
         };
@@ -60,7 +61,8 @@ class PremiumUserEditTeam extends Component {
             'bold', 'italic', 'underline',
             'list', 'bullet',
             'align',
-            'color', 'background'
+            'link',
+            'color', 'background',
         ];
 
     }

@@ -42,6 +42,7 @@ class AnnoncelocationCreate extends Component {
                 ['bold', 'italic', 'underline'],
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                 [{ 'align': [] }],
+                ['link'],
                 [{ 'color': [] }, { 'background': [] }],
             ]
         };
@@ -50,6 +51,7 @@ class AnnoncelocationCreate extends Component {
             'bold', 'italic', 'underline',
             'list', 'bullet',
             'align',
+            'link',
             'color', 'background'
         ];
 

@@ -48,6 +48,7 @@ class BlogannoncelocationCreate extends Component {
                 ['bold', 'italic', 'underline'],
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                 [{ 'align': [] }],
+                ['link'],
                 [{ 'color': [] }, { 'background': [] }],
             ]
         };
@@ -56,6 +57,7 @@ class BlogannoncelocationCreate extends Component {
             'bold', 'italic', 'underline',
             'list', 'bullet',
             'align',
+            'link',
             'color', 'background'
         ];
 

@@ -52,6 +52,7 @@ class PremiumUserEditEmployement extends Component {
                 ['bold', 'italic', 'underline'],
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                 [{ 'align': [] }],
+                ['link'],
                 [{ 'color': [] }, { 'background': [] }],
             ]
         };
@@ -60,6 +61,7 @@ class PremiumUserEditEmployement extends Component {
             'bold', 'italic', 'underline',
             'list', 'bullet',
             'align',
+            'link',
             'color', 'background'
         ];
 
