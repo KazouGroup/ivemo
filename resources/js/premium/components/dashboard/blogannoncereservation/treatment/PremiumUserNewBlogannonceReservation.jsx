@@ -164,10 +164,13 @@ class PremiumUserNewBlogannonceReservation extends Component {
     componentDidMount() {
         let itemuser = this.props.match.params.user;
 
-        fetch(route('api.blogannoncereservations_premium_count',[itemuser])).then(res => res.json()).then((result) => {
-            this.setState({ blogannoncereservations_count: result }) });
+        dyaxios.get(route('api.blogannoncereservations_premium_count', [itemuser])).then(response => {
+            this.setState({ blogannoncereservations_count: response.data })
+        });
 
-        fetch(route('api.categoryannoncereservation_site')).then(res => res.json()).then((result) => { this.setState({ categoryannoncereservations: result }) })
+        dyaxios.get(route('api.categoryannoncereservation_site', [itemuser])).then(response => {
+            this.setState({ categoryannoncereservations: response.data })
+        });
     }
     data_countFormatter(blogannoncereservations_count, precision) {
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncereservations_count)) / 3);

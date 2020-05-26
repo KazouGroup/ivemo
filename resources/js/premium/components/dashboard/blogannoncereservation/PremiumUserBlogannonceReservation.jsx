@@ -214,14 +214,15 @@ class PremiumUserBlogannonceReservation extends Component {
 
     loadItems() {
         let itemuser = this.props.match.params.user;
-        fetch(route('api.blogannoncereservations_premium_count',[itemuser])).then(res => res.json()).then((result) => {
-            this.setState({ blogannoncereservations_count: result }) });
-
-        fetch(route('api.blogannoncereservations_premiumactive_count',[itemuser])).then(res => res.json()).then((result) => {
-            this.setState({ blogannoncereservationsactive_count: result }) });
-
-        fetch(route('api.blogannoncereservations_premiumunactive_count',[itemuser])).then(res => res.json()).then((result) => {
-            this.setState({ blogannoncereservationsunactive_count: result }) });
+        dyaxios.get(route('api.blogannoncereservations_premium_count', [itemuser])).then(response => {
+            this.setState({ blogannoncereservations_count: response.data })
+        });
+        dyaxios.get(route('api.blogannoncereservations_premiumactive_count', [itemuser])).then(response => {
+            this.setState({ blogannoncereservationsactive_count: response.data })
+        });
+        dyaxios.get(route('api.blogannoncereservations_premiumunactive_count', [itemuser])).then(response => {
+            this.setState({ blogannoncereservationsunactive_count: response.data })
+        });
 
         dyaxios.get(route('api.blogannoncereservations_premium',[itemuser])).then(response => {
             this.mydatatables();

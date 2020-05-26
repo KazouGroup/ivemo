@@ -12,17 +12,8 @@ const photo_style = {
 };
 
 class PremiumUserBlogannonceList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-
-
-    }
-
-    componentDidMount() {
-        //
-    }
-
+   
+    
     data_countFormatter(blogannoncereservations_count, precision) {
         const abbrev = ['', 'k', 'M', 'B', 'T'];
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncereservations_count)) / 3);
