@@ -231,11 +231,11 @@ class PremiumUserTeams extends Component {
         dyaxios.get(route('api.teams_premiumunactive_count',[itemuser])).then(response =>
             this.setState({teamsunactive_count: response.data}));
 
-        fetch(route('api.teams_premium',[itemuser])).then(res => res.json())
-            .then((result) => {
-                this.mydatatables();
-                this.setState({teams: result});
-            })
+        dyaxios.get(route('api.teams_premium',[itemuser])).then(response => {
+            this.mydatatables();
+            this.setState({teams: response.data})
+        });
+
     }
 
     // lifecycle method

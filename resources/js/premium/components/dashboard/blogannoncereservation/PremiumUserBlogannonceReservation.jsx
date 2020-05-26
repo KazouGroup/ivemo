@@ -223,11 +223,10 @@ class PremiumUserBlogannonceReservation extends Component {
         fetch(route('api.blogannoncereservations_premiumunactive_count',[itemuser])).then(res => res.json()).then((result) => {
             this.setState({ blogannoncereservationsunactive_count: result }) });
 
-        fetch(route('api.blogannoncereservations_premium',[itemuser])).then(res => res.json())
-            .then((result) => {
-                this.mydatatables();
-                this.setState({userblogannonce: result});
-            });
+        dyaxios.get(route('api.blogannoncereservations_premium',[itemuser])).then(response => {
+            this.mydatatables();
+            this.setState({userblogannonce: response.data})
+        });
     }
 
     // lifecycle method
