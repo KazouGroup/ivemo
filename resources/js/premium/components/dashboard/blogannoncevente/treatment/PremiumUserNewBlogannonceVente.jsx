@@ -40,6 +40,7 @@ class PremiumUserNewBlogannonceVente extends Component {
                 ['bold', 'italic', 'underline'],
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                 [{ 'align': [] }],
+                ['link'],
                 [{ 'color': [] }, { 'background': [] }],
             ]
         };
@@ -48,6 +49,7 @@ class PremiumUserNewBlogannonceVente extends Component {
             'bold', 'italic', 'underline',
             'list', 'bullet',
             'align',
+            'link',
             'color', 'background'
         ];
 

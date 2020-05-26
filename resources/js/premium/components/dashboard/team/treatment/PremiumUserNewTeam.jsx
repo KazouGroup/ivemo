@@ -6,9 +6,8 @@ import PremiumVerticalNavUserSite from "../../../inc/PremiumVerticalNavUserSite"
 import PremiumHorizontalNavUserSite from "../../../inc/PremiumHorizontalNavUserSite";
 import FooterPremiumUser from "../../../inc/FooterPremiumUser";
 import {Button, CardBody, Col, Form, FormGroup, Input, InputGroup, Row, UncontrolledTooltip} from "reactstrap";
-import ReactQuill from "react-quill";
+import ReactQuill , {Quill} from "react-quill";
 import NavPremiumUserTeams from "../NavPremiumUserTeams";
-const abbrev = ['', 'k', 'M', 'B', 'T'];
 const avatar_style = {
     width: "40px",
     height: "40px",
@@ -46,7 +45,9 @@ class PremiumUserNewTeam extends Component {
                 ['bold', 'italic', 'underline'],
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                 [{ 'align': [] }],
+                ['link'],
                 [{ 'color': [] }, { 'background': [] }],
+                ['clean'],
             ]
         };
         this.formats = [
@@ -54,6 +55,7 @@ class PremiumUserNewTeam extends Component {
             'bold', 'italic', 'underline',
             'list', 'bullet',
             'align',
+            'link',
             'color', 'background'
         ];
 
