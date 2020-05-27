@@ -242,7 +242,7 @@ class PublicUserAnnonceVentes extends Component {
                                                                 <h4 className="card-title"><b>Contacter {userannonceventePublick.first_name}</b></h4>
                                                             </div>
 
-                                                            <FormContactProfileAccountUser {...this.props}/>
+                                                            <FormContactProfileAccountUser {...this.props} {...userannonceventePublick}/>
 
                                                         </div>
                                                     </div>
@@ -295,7 +295,7 @@ class PublicUserAnnonceVentes extends Component {
                                                         <h4 className="card-title"><b>Contacter {userannonceventePublick.first_name}</b></h4>
                                                     </div>
 
-                                                    <FormContactProfileAccountUser {...this.props}/>
+                                                    <FormContactProfileAccountUser {...this.props} {...userannonceventePublick}/>
 
                                                 </div>
                                             </div>

@@ -252,7 +252,7 @@ class PublicUserBlogannonceLocation extends Component {
                                                                     <h4 className="card-title"><b>Contacter {userbloglocationPublick.first_name}</b></h4>
                                                                 </div>
 
-                                                                <FormContactProfileAccountUser {...this.props}/>
+                                                                <FormContactProfileAccountUser {...this.props} {...userbloglocationPublick}/>
 
                                                             </div>
                                                         </div>
@@ -295,7 +295,7 @@ class PublicUserBlogannonceLocation extends Component {
                                                     <h4 className="card-title"><b>Contacter {userbloglocationPublick.first_name}</b></h4>
                                                 </div>
 
-                                                <FormContactProfileAccountUser {...this.props}/>
+                                                <FormContactProfileAccountUser {...this.props} {...userbloglocationPublick}/>
 
                                             </div>
                                         </div>
@@ -312,7 +312,7 @@ class PublicUserBlogannonceLocation extends Component {
                                                     </p>
                                                 </div>
 
-                                                <FormNewletterSubcribeProfileAccountUser {...this.props}/>
+                                                <FormNewletterSubcribeProfileAccountUser {...this.props} />
 
                                             </div>
                                         </div>

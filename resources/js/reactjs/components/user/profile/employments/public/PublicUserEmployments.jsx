@@ -287,7 +287,7 @@ class PublicUserEmployments extends Component {
                                                                     <h4 className="card-title"><b>Contacter {useremploymentPublick.first_name}</b></h4>
                                                                 </div>
 
-                                                                <FormContactProfileAccountUser {...this.props}/>
+                                                                <FormContactProfileAccountUser {...this.props} {...useremploymentPublick}/>
 
                                                             </div>
                                                         </div>
@@ -339,7 +339,7 @@ class PublicUserEmployments extends Component {
                                                         <h4 className="card-title"><b>Contacter {useremploymentPublick.first_name}</b></h4>
                                                     </div>
 
-                                                    <FormContactProfileAccountUser {...this.props}/>
+                                                    <FormContactProfileAccountUser {...this.props} {...useremploymentPublick}/>
 
                                                 </div>
                                             </div>
