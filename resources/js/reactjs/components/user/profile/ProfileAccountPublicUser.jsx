@@ -207,7 +207,7 @@ class ProfileAccountPublicUser extends Component {
                                                                     <h4 className="card-title"><b>Contacter {userPublick.first_name}</b></h4>
                                                                 </div>
 
-                                                                <FormContactProfileAccountUser {...this.props}/>
+                                                                <FormContactProfileAccountUser {...this.props} {...userPublick}/>
 
                                                             </div>
                                                         </div>
@@ -307,7 +307,7 @@ class ProfileAccountPublicUser extends Component {
                                                             <h4 className="card-title"><b>Contacter {userPublick.first_name}</b></h4>
                                                         </div>
 
-                                                        <FormContactProfileAccountUser {...this.props}/>
+                                                        <FormContactProfileAccountUser {...this.props} {...userPublick}/>
 
                                                     </div>
                                                 </div>

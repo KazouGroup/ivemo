@@ -238,7 +238,7 @@ class PublicUserAnnonceReservations extends Component {
                                                                 <h4 className="card-title"><b>Contacter {useranoncereservationPublick.first_name}</b></h4>
                                                             </div>
 
-                                                            <FormContactProfileAccountUser {...this.props}/>
+                                                            <FormContactProfileAccountUser {...this.props} {...useranoncereservationPublick}/>
 
                                                         </div>
                                                     </div>
@@ -290,7 +290,7 @@ class PublicUserAnnonceReservations extends Component {
                                                         <h4 className="card-title"><b>Contacter {useranoncereservationPublick.first_name}</b></h4>
                                                     </div>
 
-                                                    <FormContactProfileAccountUser {...this.props}/>
+                                                    <FormContactProfileAccountUser {...this.props} {...useranoncereservationPublick}/>
 
                                                 </div>
                                             </div>

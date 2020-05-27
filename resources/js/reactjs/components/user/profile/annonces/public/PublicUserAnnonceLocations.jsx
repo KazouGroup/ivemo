@@ -220,7 +220,7 @@ class PublicUserAnnonceLocations extends Component {
                                         )}
 
 
-                                        {userbloglocationPublick.status_profile === 0 ?
+                                        {useranoncelocationPublick.status_profile === 0 ?
                                             <></>
                                         :
                                             <>
@@ -299,7 +299,7 @@ class PublicUserAnnonceLocations extends Component {
                                                                 <h4 className="card-title"><b>Contacter {useranoncelocationPublick.first_name}</b></h4>
                                                             </div>
 
-                                                            <FormContactProfileAccountUser {...this.props}/>
+                                                            <FormContactProfileAccountUser {...this.props} {...useranoncelocationPublick}/>
 
                                                         </div>
                                                     </div>
@@ -351,7 +351,7 @@ class PublicUserAnnonceLocations extends Component {
                                                         <h4 className="card-title"><b>Contacter {useranoncelocationPublick.first_name}</b></h4>
                                                     </div>
 
-                                                    <FormContactProfileAccountUser {...this.props}/>
+                                                    <FormContactProfileAccountUser {...this.props} {...useranoncelocationPublick}/>
 
                                                 </div>
                                             </div>

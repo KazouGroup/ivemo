@@ -247,7 +247,7 @@ class PublicUserBlogannonceVente extends Component {
                                                                     <h4 className="card-title"><b>Contacter {userblogventePublick.first_name}</b></h4>
                                                                 </div>
 
-                                                                <FormContactProfileAccountUser {...this.props}/>
+                                                                <FormContactProfileAccountUser {...this.props} {...userblogventePublick}/>
 
                                                             </div>
                                                         </div>
@@ -292,7 +292,7 @@ class PublicUserBlogannonceVente extends Component {
                                                     <h4 className="card-title"><b>Contacter {userblogventePublick.first_name}</b></h4>
                                                 </div>
 
-                                                <FormContactProfileAccountUser {...this.props}/>
+                                                <FormContactProfileAccountUser {...this.props} {...userblogventePublick}/>
 
                                             </div>
                                         </div>

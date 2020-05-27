@@ -52,7 +52,7 @@ class NavUserSite extends PureComponent {
                         <li className={`nav-item dropdown`}>
                             <a href="#" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                 <i className="now-ui-icons files_paper" aria-hidden="true"/>
-                                <p>Annonces</p>
+                                <b>Annonces</b>
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                 <a href={`/annonces_locations/locations/`} className="dropdown-item">
@@ -69,7 +69,7 @@ class NavUserSite extends PureComponent {
                         <li className="nav-item dropdown">
                             <a href="#" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                 <i className="now-ui-icons text_align-left" aria-hidden="true"/>
-                                <p>Conseils</p>
+                                <b>Conseils</b>
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                 <a href={`/blogs/annonce_locations/`} className="dropdown-item">
@@ -83,20 +83,26 @@ class NavUserSite extends PureComponent {
                                 </a>
                             </div>
                         </li>
+                        <li className="nav-item">
+                            <NavLink to={'/employments/'} className="nav-link">
+                                <i className="now-ui-icons business_briefcase-24"/>
+                                <b>Offres d'emplois</b>
+                            </NavLink>
+                        </li>
                         {$guest ?
 
                             <>
                                 <li className="nav-item">
                                     <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="nav-link">
                                         <i className="now-ui-icons users_circle-08"/>
-                                        <p>Login</p>
+                                        <b>Login</b>
                                     </a>
                                 </li>
 
                                 <li className="nav-item">
                                     <Link to={`/register/`} className="nav-link btn btn-primary text-left">
                                         <i className="now-ui-icons tech_mobile"/>
-                                        <p>Signup</p>
+                                        <b>Signup</b>
                                     </Link>
                                 </li>
                             </>
