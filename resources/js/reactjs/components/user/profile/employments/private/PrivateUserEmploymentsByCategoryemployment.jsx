@@ -284,11 +284,6 @@ class PrivateUserEmploymentsByCategoryemployment extends Component {
                                     </div>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
-                                        <div className="submit text-left">
-                                            <Link to={`/profile/${$userIvemo.slug}/personal_settings/employments/`} className="btn btn-neutral btn-sm">
-                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos annonces</b>
-                                            </Link>
-                                        </div>
 
                                         {!$guest &&(
                                             <>
@@ -322,6 +317,11 @@ class PrivateUserEmploymentsByCategoryemployment extends Component {
                                                     <h4 className="info-title"><b>{this.dataunactive_countFormatter(employmentsunactive_count)}</b></h4>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div className="submit text-left">
+                                            <Link to={`/profile/${$userIvemo.slug}/personal_settings/employments/`} className="btn btn-neutral btn-sm">
+                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos annonces</b>
+                                            </Link>
                                         </div>
 
                                         {mapEmployments}

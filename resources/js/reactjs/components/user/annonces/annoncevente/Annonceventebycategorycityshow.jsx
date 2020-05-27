@@ -224,7 +224,11 @@ class Annonceventebycategorycityshow extends Component {
                                                 */}
 
                                                 <div className="text-right ml-auto">
-                                                    <h5 className="text-success"><b>{annoncevente.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h5>
+                                                {annoncevente.price ?
+                                                        <h5 className="text-success"><b>{annoncevente.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h5>
+                                                        :
+                                                        null
+                                                    }
                                                 </div>
                                             </div>
 

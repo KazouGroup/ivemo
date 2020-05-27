@@ -67,9 +67,7 @@ class ProfileAccountPublicUser extends Component {
                                 </div>
                             }
 
-
-
-
+                            
                             <div className="container">
                                 <div className="mt-lg-5 text-left">
                                     <img src={userPublick.avatar} style={{ height: "50px", width: "90px" }} alt={userPublick.first_name}/>

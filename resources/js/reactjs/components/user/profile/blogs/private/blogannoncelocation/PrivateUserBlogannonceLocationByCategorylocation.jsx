@@ -289,11 +289,6 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
                                     </div>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
-                                        <div className="submit text-left">
-                                            <Link to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_locations/`} className="btn btn-neutral btn-sm">
-                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos articles</b>
-                                            </Link>
-                                        </div>
 
                                         {!$guest &&(
                                             <>
@@ -326,6 +321,11 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
                                                     <h4 className="info-title"><b>{this.blogannonceventesunactive_countFormatter(blogannoncelocationsunactive_count)}</b></h4>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div className="submit text-left">
+                                            <Link to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_locations/`} className="btn btn-neutral btn-sm">
+                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos articles</b>
+                                            </Link>
                                         </div>
 
                                         {mapBlogannoncelocations}

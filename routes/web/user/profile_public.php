@@ -50,3 +50,8 @@ Route::get(
     'pro/{user}/blogs/annonce_ventes/',
     'ProfilepublicController@profilblogannonceventes'
 )->name('public_profile_articlesventes.site');
+
+Route::get(
+    'pro/{user}/employments/',
+    'ProfilepublicController@profilemployments'
+)->name('public_profile_employments.site');

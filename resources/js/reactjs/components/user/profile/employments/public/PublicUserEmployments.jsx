@@ -6,19 +6,21 @@ import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import AnnonceslocationList from "../../../annonces/annonceloaction/inc/AnnonceslocationList";
 import Swal from "sweetalert2";
-import NavLinkPublicAnnonceUser from "../NavLinkPublicAnnonceUser";
 import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";
 import NavLinkPublicBlogannoncesUser from "../../blogs/public/NavLinkPublicBlogannoncesUser";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
-import AnnoncesListSkeleton from "../../../../inc/user/annonce/AnnoncesListSkeleton";
-import NavLinkPublicEmploymentUser from "../../employments/public/NavLinkPublicEmploymentUser";
+import NavLinkPublicEmploymentUser from "./NavLinkPublicEmploymentUser";
+import EmployementList from "../../../employment/inc/EmployementList";
+import EmploymentListSkeleton from "../../../../inc/user/employment/EmploymentListSkeleton";
+import Navlinknewemployment from "../../../employment/treatement/Navlinknewemployment";
+import NavLinkPublicAnnonceUser from "../../annonces/NavLinkPublicAnnonceUser";
 
 
-class PublicUserAnnonceLocations extends Component {
+class PublicUserEmployments extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            useranoncelocationPublick:{annoncelocations: {categoryannoncelocation:[],city:[],user:[]}},
+            useremploymentPublick:{employments:{categoryemployment:[],user:[],city:[]}},
             visiable: 10,
         };
 
@@ -47,16 +49,12 @@ class PublicUserAnnonceLocations extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('annonces_locations_unactivated.site',id);
+                let url = route('employmentsunactivated_site',id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            // title: 'Update FAQ',
-                            //message: 'Annonce désactiver avec succès',
-                            message: "Cette annonce a été masquée au utilisateur <a href=\"/profile/personal_settings/annonces_locations/\" target=\"_blank\">Modifier ici</a>",
-                            url: "/profile/personal_settings/annonces_locations/",
-                            target: "_blank"
+                            message: "Cette annonce a été masquée aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -103,7 +101,7 @@ class PublicUserAnnonceLocations extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('annonces_locations_delete.site',[id]);
+                const url = route('employmentsdelete_site.site',[id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
@@ -143,7 +141,7 @@ class PublicUserAnnonceLocations extends Component {
 
     loadItems(){
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.profilpublique_annoncelocations',[itemuser])).then(response => this.setState({useranoncelocationPublick: response.data,}));
+        dyaxios.get(route('api.profilpublique_employments',[itemuser])).then(response => this.setState({useremploymentPublick: response.data,}));
     }
 
     // lifecycle method
@@ -152,21 +150,21 @@ class PublicUserAnnonceLocations extends Component {
     }
 
     render() {
-        const {useranoncelocationPublick,visiable} = this.state;
-        const mapAnnoncelocations = useranoncelocationPublick.annoncelocations.length >= 0 ? (
-            useranoncelocationPublick.annoncelocations.slice(0, visiable).map(item => {
+        const {useremploymentPublick,visiable} = this.state;
+        const mapEmployments = useremploymentPublick.employments.length >= 0 ? (
+            useremploymentPublick.employments.slice(0, visiable).map(item => {
                 return(
 
-                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
+                    <EmployementList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
                 )
             })
         ):(
-            <AnnoncesListSkeleton/>
+            <EmploymentListSkeleton/>
         );
         return (
             <>
                 <Helmet>
-                    <title>Annonces locations {`${useranoncelocationPublick.first_name || 'Profile'}`} - Ivemo</title>
+                    <title>Emplois, Formation & Services {`${useremploymentPublick.first_name || 'Profile'}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
@@ -182,12 +180,12 @@ class PublicUserAnnonceLocations extends Component {
                             </div>
                             <div className="content-center">
 
-                                <h1 className="title">{useranoncelocationPublick.first_name}</h1>
-                                <Link to={`/pro/${useranoncelocationPublick.slug}/`} className="text-white">
-                                    <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useranoncelocationPublick.first_name}</b>
+                                <h1 className="title">{useremploymentPublick.first_name}</h1>
+                                <Link to={`/pro/${useremploymentPublick.slug}/`} className="text-white">
+                                    <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
                                 </Link>
-                                {useranoncelocationPublick.annoncelocations_count > 0 &&(
-                                    <h5><b>{useranoncelocationPublick.annoncelocations_count}</b> {useranoncelocationPublick.annoncelocations_count > 1 ? "annonces" : "annonce"} posté par {useranoncelocationPublick.first_name} sur la location</h5>
+                                {useremploymentPublick.employments_count > 0 &&(
+                                    <h5><b>{useremploymentPublick.employments_count}</b> {useremploymentPublick.employments_count > 1 ? "annonces" : "annonce"} posté par {useremploymentPublick.first_name} sur la location</h5>
                                 )}
 
                             </div>
@@ -205,113 +203,103 @@ class PublicUserAnnonceLocations extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
-                                        {useranoncelocationPublick.status_profile === 1 && (
-                                            <div className="submit text-center">
-                                                {!$guest ?
-                                                    <NavLink className="btn btn-danger" to={`/annonce_location/locations/new/`}>
-                                                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre bien en location</b>
-                                                    </NavLink>
-                                                    :
-                                                    <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="btn btn-danger">
-                                                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre bien en location</b>
-                                                    </a>
-                                                }
-                                            </div>
-                                        )}
+                                        <Navlinknewemployment/>
 
 
-                                        {userbloglocationPublick.status_profile === 0 ?
+                                        {useremploymentPublick.status_profile === 0 ?
                                             <></>
-                                        :
+                                            :
                                             <>
-                                            <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                            <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingOne">
-                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <b>Annonces de {useranoncelocationPublick.first_name}</b>
-                                                                    </a>
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                                    <div className="card card-plain">
+                                                                        <div className="card-header" role="tab" id="headingOne">
+                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                                <b>Annonces de {useremploymentPublick.first_name}</b>
+                                                                            </a>
+                                                                        </div>
+
+                                                                        <NavLinkPublicAnnonceUser {...this.props} {...useremploymentPublick}/>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                                    <div className="card card-plain">
+                                                                        <div className="card-header" role="tab" id="headingTree">
+                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
+                                                                                <b>Annonces de {useremploymentPublick.first_name}</b>
+                                                                            </a>
+                                                                        </div>
+
+                                                                        <NavLinkPublicEmploymentUser {...this.props} {...useremploymentPublick}/>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                                    <div className="card card-plain">
+                                                                        <div className="card-header" role="tab" id="headingTwo">
+                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                                <b>Articles de {useremploymentPublick.first_name}</b>
+                                                                            </a>
+                                                                        </div>
+
+                                                                        <NavLinkPublicBlogannoncesUser {...this.props} {...useremploymentPublick}/>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+
+                                                                <div className="card-header text-center">
+                                                                    <h4 className="card-title"><b>Contacter {useremploymentPublick.first_name}</b></h4>
                                                                 </div>
 
-                                                                <NavLinkPublicAnnonceUser {...this.props} {...useranoncelocationPublick}/>
+                                                                <FormContactProfileAccountUser {...this.props}/>
 
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                            <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingTree">
-                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
-                                                                        <b>Annonces de {useranoncelocationPublick.first_name}</b>
-                                                                    </a>
-                                                                </div>
-
-                                                                <NavLinkPublicEmploymentUser {...this.props} {...useranoncelocationPublick}/>
-
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                            <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingTwo">
-                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                        <b>Articles de {useranoncelocationPublick.first_name}</b>
-                                                                    </a>
-                                                                </div>
-
-                                                                <NavLinkPublicBlogannoncesUser {...this.props} {...useranoncelocationPublick}/>
-
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="card">
-                                                <div className="card-body">
-                                                    <div className="row">
-                                                        <div className="col-md-12">
-
-                                                            <div className="card-header text-center">
-                                                                <h4 className="card-title"><b>Contacter {useranoncelocationPublick.first_name}</b></h4>
-                                                            </div>
-
-                                                            <FormContactProfileAccountUser {...this.props}/>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             </>
+
                                         }
-                                        
 
                                     </div>
 
-                                    {useranoncelocationPublick.status_profile === 0 ?
+                                    {useremploymentPublick.status_profile === 0 ?
 
                                         <div className="col-lg-8 col-md-12 mx-auto">
                                             <div className="card">
@@ -332,9 +320,9 @@ class PublicUserAnnonceLocations extends Component {
                                         :
                                         <div className="col-lg-8 col-md-12 mx-auto">
 
-                                            {mapAnnoncelocations}
+                                            {mapEmployments}
 
-                                            {visiable < useranoncelocationPublick.annoncelocations.length && (
+                                            {visiable < useremploymentPublick.employments.length && (
                                                 <div className="row">
                                                     <div className="col-md-4 ml-auto mr-auto text-center">
                                                         <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
@@ -348,7 +336,7 @@ class PublicUserAnnonceLocations extends Component {
                                                 <div className="card-body">
 
                                                     <div className="card-header text-center">
-                                                        <h4 className="card-title"><b>Contacter {useranoncelocationPublick.first_name}</b></h4>
+                                                        <h4 className="card-title"><b>Contacter {useremploymentPublick.first_name}</b></h4>
                                                     </div>
 
                                                     <FormContactProfileAccountUser {...this.props}/>
@@ -363,7 +351,7 @@ class PublicUserAnnonceLocations extends Component {
                                                     <div className="card-header text-center">
                                                         <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
                                                         <p className="card-title">
-                                                            Abonnez-vous à la newsletter de <b>{useranoncelocationPublick.first_name}</b> afin d'être notifié des mises à jour
+                                                            Abonnez-vous à la newsletter de <b>{useremploymentPublick.first_name}</b> afin d'être notifié des mises à jour
                                                         </p>
                                                     </div>
 
@@ -391,4 +379,4 @@ class PublicUserAnnonceLocations extends Component {
     }
 }
 
-export default PublicUserAnnonceLocations;
+export default PublicUserEmployments;

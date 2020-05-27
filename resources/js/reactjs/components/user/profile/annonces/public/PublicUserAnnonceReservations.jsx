@@ -10,6 +10,7 @@ import FormContactProfileAccountUser from "../../form/FormContactProfileAccountU
 import NavLinkPublicBlogannoncesUser from "../../blogs/public/NavLinkPublicBlogannoncesUser";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
 import AnnoncesListSkeleton from "../../../../inc/user/annonce/AnnoncesListSkeleton";
+import NavLinkPublicEmploymentUser from "../../employments/public/NavLinkPublicEmploymentUser";
 
 
 class PublicUserAnnonceReservations extends Component {
@@ -174,6 +175,28 @@ class PublicUserAnnonceReservations extends Component {
 
                                                                 <NavLinkPublicAnnonceUser {...this.props} {...useranoncereservationPublick}/>
 
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                            <div className="card card-plain">
+                                                                <div className="card-header" role="tab" id="headingTree">
+                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
+                                                                        <b>Annonces de {useranoncereservationPublick.first_name}</b>
+                                                                    </a>
+                                                                </div>
+
+                                                                <NavLinkPublicEmploymentUser {...this.props} {...useranoncereservationPublick}/>
 
                                                             </div>
 

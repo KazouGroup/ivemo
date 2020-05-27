@@ -7,7 +7,7 @@ function Navlinknewemployment (props) {
         <div className="submit text-center">
             {!$guest ?
                 <>
-                {$userIvemo.email_verified_at ?
+                {$userIvemo.status_profile && $userIvemo.email_verified_at ?
                     <NavLink className="btn btn-danger" to={`/employment/ab/new/`}>
                         <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
                     </NavLink>
