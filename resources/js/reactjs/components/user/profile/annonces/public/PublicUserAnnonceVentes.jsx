@@ -11,6 +11,7 @@ import NavLinkPublicBlogannoncesUser from "../../blogs/public/NavLinkPublicBloga
 import AnnonceventeList from "../../../annonces/annoncevente/inc/AnnonceventeList";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
 import AnnoncesListSkeleton from "../../../../inc/user/annonce/AnnoncesListSkeleton";
+import NavLinkPublicEmploymentUser from "../../employments/public/NavLinkPublicEmploymentUser";
 
 
 class PublicUserAnnonceVentes extends Component {
@@ -160,8 +161,11 @@ class PublicUserAnnonceVentes extends Component {
                                             </div>
                                         )}
 
-
-                                        <div className="card">
+                                        {userannonceventePublick.status_profile === 0 ?
+                                            <></>
+                                        :
+                                            <>
+                                             <div className="card">
                                             <div className="card-body">
                                                 <div className="row">
                                                     <div className="col-md-12">
@@ -175,6 +179,28 @@ class PublicUserAnnonceVentes extends Component {
 
                                                                 <NavLinkPublicAnnonceUser {...this.props} {...userannonceventePublick}/>
 
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                            <div className="card card-plain">
+                                                                <div className="card-header" role="tab" id="headingTree">
+                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
+                                                                        <b>Annonces de {userannonceventePublick.first_name}</b>
+                                                                    </a>
+                                                                </div>
+
+                                                                <NavLinkPublicEmploymentUser {...this.props} {...userannonceventePublick}/>
 
                                                             </div>
 
@@ -207,9 +233,7 @@ class PublicUserAnnonceVentes extends Component {
                                         </div>
 
 
-                                        {userannonceventePublick.status_profile === 1 && (
-
-                                            <div className="card">
+                                        <div className="card">
                                                 <div className="card-body">
                                                     <div className="row">
                                                         <div className="col-md-12">
@@ -224,7 +248,8 @@ class PublicUserAnnonceVentes extends Component {
                                                     </div>
                                                 </div>
                                             </div>
-                                        )}
+                                            </>
+                                        }
 
 
 

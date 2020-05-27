@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import { Link, NavLink, withRouter } from 'react-router-dom';
-import NavNavigatePivateUser from "../NavNavigatePivateUser";
 
 
 class NavLinkPublicAnnonceUser extends PureComponent {

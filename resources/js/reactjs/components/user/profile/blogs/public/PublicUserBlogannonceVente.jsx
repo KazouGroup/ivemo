@@ -15,6 +15,7 @@ import Navlinknewblogannoncevente from "../../../blog/blognnoncevente/treatement
 import Skeleton from "react-loading-skeleton";
 import BlogannoncePublicuserSkeleton from "../../../../inc/user/blog/BlogannoncePublicuserSkeleton";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
+import NavLinkPublicEmploymentUser from "../../employments/public/NavLinkPublicEmploymentUser";
 
 
 class PublicUserBlogannonceVente extends Component {
@@ -165,68 +166,97 @@ class PublicUserBlogannonceVente extends Component {
                                             </NavLink>
                                         </div> */}
 
-
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                            <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingOne">
-                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <b>Annonces de {userblogventePublick.first_name}</b>
-                                                                    </a>
-                                                                </div>
-
-                                                                <NavLinkPublicAnnonceUser {...this.props} {...userblogventePublick}/>
-
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <Navlinknewblogannoncevente/>
 
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                            <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingTwo">
-                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                        <b>Articles de {userblogventePublick.first_name}</b>
-                                                                    </a>
+                                        {userblogventePublick.status_profile === 0 ?
+                                            <></>
+                                            :
+                                            <>
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                                    <div className="card card-plain">
+                                                                        <div className="card-header" role="tab" id="headingOne">
+                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                                <b>Annonces de {userblogventePublick.first_name}</b>
+                                                                            </a>
+                                                                        </div>
+
+                                                                        <NavLinkPublicAnnonceUser {...this.props} {...userblogventePublick}/>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                                    <div className="card card-plain">
+                                                                        <div className="card-header" role="tab" id="headingTree">
+                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
+                                                                                <b>Annonces de {userblogventePublick.first_name}</b>
+                                                                            </a>
+                                                                        </div>
+
+                                                                        <NavLinkPublicEmploymentUser {...this.props} {...userblogventePublick}/>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                                    <div className="card card-plain">
+                                                                        <div className="card-header" role="tab" id="headingTwo">
+                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                                <b>Articles de {userblogventePublick.first_name}</b>
+                                                                            </a>
+                                                                        </div>
+
+                                                                        <NavLinkPublicBlogannoncesUser {...this.props} {...userblogventePublick}/>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+
+                                                                <div className="card-header text-center">
+                                                                    <h4 className="card-title"><b>Contacter {userblogventePublick.first_name}</b></h4>
                                                                 </div>
 
-                                                                <NavLinkPublicBlogannoncesUser {...this.props} {...userblogventePublick}/>
+                                                                <FormContactProfileAccountUser {...this.props}/>
 
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                            </>
 
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
 
-                                                        <div className="card-header text-center">
-                                                            <h4 className="card-title"><b>Contacter {userblogventePublick.first_name}</b></h4>
-                                                        </div>
-
-                                                        <FormContactProfileAccountUser {...this.props}/>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        }
 
                                     </div>
 

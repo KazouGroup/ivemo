@@ -128,6 +128,7 @@ import EmploymentCreate from "../components/user/employment/treatement/Employmen
 import PrivateUserEmployments from "../components/user/profile/employments/private/PrivateUserEmployments";
 import PrivateUserEmploymentsByCategoryemployment
     from "../components/user/profile/employments/private/PrivateUserEmploymentsByCategoryemployment";
+import PublicUserEmployments from "../components/user/profile/employments/public/PublicUserEmployments";
 
 
 const RouteUser = props => (
@@ -191,6 +192,8 @@ const RouteUser = props => (
           <Route exact path="/pro/:user/annonces_locations/" component={PublicUserAnnonceLocations}/>
           <Route exact path="/pro/:user/annonces_reservations/" component={PublicUserAnnonceReservations}/>
           <Route exact path="/pro/:user/annonces_ventes/" component={PublicUserAnnonceVentes}/>
+
+          <Route exact path="/pro/:user/employments/" component={PublicUserEmployments}/>
 
           <Route exact path="/pro/:user/blogs/annonce_locations/" component={PublicUserBlogannonceLocation}/>
           <Route exact path="/pro/:user/blogs/annonce_reservations/" component={PublicUserBlogannonceReservation}/>

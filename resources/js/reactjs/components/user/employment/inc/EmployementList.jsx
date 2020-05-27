@@ -43,7 +43,7 @@ class EmployementList extends Component {
 
                                      <span className="title">
                                          <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`} className="card-link">
-                                              {this.props.title.length > 90 ? this.props.title.substring(0, 90) + "..." : this.props.title} 
+                                              {this.props.title.length > 90 ? this.props.title.substring(0, 90) + "..." : this.props.title}
                                          </a>
                                      </span>
                                     <br/>
@@ -56,11 +56,11 @@ class EmployementList extends Component {
 
 
                                     <div className="d-flex align-items-center">
-                                        <NavLink to={`/pro/${this.props.user.slug}/`}>
+                                        <NavLink to={`/pro/${this.props.user.slug}/employments/`}>
                                             <img src={this.props.user.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                         </NavLink>
                                         <div className="mx-3">
-                                            <NavLink to={`/pro/${this.props.user.slug}/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
+                                            <NavLink to={`/pro/${this.props.user.slug}/employments/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
                                                 <small className="d-block text-muted"><b><i className="now-ui-icons tech_watch-time"/> {moment(this.props.created_at).format('ll')}</b></small>
                                             </NavLink>
                                         </div>
