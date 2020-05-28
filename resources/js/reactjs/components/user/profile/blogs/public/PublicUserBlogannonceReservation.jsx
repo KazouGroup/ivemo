@@ -135,13 +135,17 @@ class PublicUserBlogannonceReservation extends Component {
                                 <div className="card-body">
 
                                     <h1 className="title">{userblogreservationPublick.first_name || ""}</h1>
-                                    {userblogreservationPublick.slug ?
-                                        <Link to={`/pro/${userblogreservationPublick.slug}/`} className="text-white">
+
+                                    {userblogreservationPublick.status_profile === 0 ? 
+                                        <Link to={`/user/${userblogreservationPublick.slug}/`} className="text-white">
                                             <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userblogreservationPublick.first_name}</b>
-                                        </Link>
-                                        :
-                                        <></>
+                                         </Link>
+                                    :
+                                    <Link to={`/pro/${userblogreservationPublick.slug}/`} className="text-white">
+                                        <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userblogreservationPublick.first_name}</b>
+                                     </Link>
                                     }
+                                    
                                     {userblogreservationPublick.blogannoncereservations_count >= 0 ?
                                         <h5><b>{userblogreservationPublick.blogannoncereservations_count}</b> {userblogreservationPublick.blogannoncereservations_count > 1 ? "articles" : "article"} posté par {userblogreservationPublick.first_name} sur la reservation</h5>
                                     : <></>}
@@ -172,7 +176,27 @@ class PublicUserBlogannonceReservation extends Component {
                                         <Navlinknewblogannoncereservation/>
 
                                         {userblogreservationPublick.status_profile === 0 ?
-                                            <></>
+                                           <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                            <div className="card card-plain">
+                                                                <div className="card-header" role="tab" id="headingTwo">
+                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                        <b>Articles de {userblogreservationPublick.first_name}</b>
+                                                                    </a>
+                                                                </div>
+
+                                                                <NavLinkPublicBlogannoncesUser {...this.props} {...userblogreservationPublick} />
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                             :
                                             <>
                                                 <div className="card">

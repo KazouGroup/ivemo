@@ -139,7 +139,7 @@ class EmploymentCreate extends Component {
             description: this.state.description,
             categoryemployment_id: this.state.categoryemployment_id,
         };
-        dyaxios.put(route('employmentstore_site'), item)
+        dyaxios.post(route('employmentstore_site'), item)
             .then(() => {
                 $.notify({
                     //,

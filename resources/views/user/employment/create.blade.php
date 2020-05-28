@@ -11,6 +11,17 @@
 
 @section('content')
 <div id="app_ivemo"></div>
+
+
+<!--
+<form method="POST" action="{{ route('employmentstore_site') }}">
+        @csrf
+
+    <input name="title" placeholder="title">
+    <input name="district" placeholder="ville">
+    <button type="submit">send le teste</button>
+</form>
+-->
 @endsection
 
 @section('script')

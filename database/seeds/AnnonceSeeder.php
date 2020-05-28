@@ -32,7 +32,7 @@ class AnnonceSeeder extends Seeder
         factory(contactusersreservation::class, 200)->create();
         factory(contactusersvente::class, 100)->create();
         factory(subscriber::class, 10)->create();
-        factory(subscriberuser::class, 10)->create();
+        factory(subscriberuser::class, 500)->create();
 
     }
 }
