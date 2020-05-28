@@ -134,17 +134,27 @@ class PublicUserBlogannonceLocation extends Component {
                                 <div className="card-body">
 
                                     <h1 className="title">{userbloglocationPublick.first_name || ""}</h1>
-                                    {userbloglocationPublick.slug ?
+
+                                    {userbloglocationPublick.status_profile === 0 ?
+                                        <Link to={`/user/${userbloglocationPublick.slug}/`} className="text-white">
+                                            <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userbloglocationPublick.first_name}</b>
+                                        </Link>
+                                    :
+                                     <>
+                                         {userbloglocationPublick.slug ?
                                         <Link to={`/pro/${userbloglocationPublick.slug}/`} className="text-white">
                                             <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userbloglocationPublick.first_name}</b>
                                         </Link>
                                         :
                                         <></>
-                                    }
+                                            }
+                                     </>
 
-                                    {userbloglocationPublick.blogannoncelocations_count >= 0 ?
+                                    }
+                                   {userbloglocationPublick.blogannoncelocations_count >= 0 ?
                                         <h5><b>{userbloglocationPublick.blogannoncelocations_count}</b> {userbloglocationPublick.blogannoncelocations_count > 1 ? "articles" : "article"} posté par {userbloglocationPublick.first_name} sur la location</h5>
                                     :  <></>}
+                                    
 
                                 </div>
 
@@ -174,7 +184,27 @@ class PublicUserBlogannonceLocation extends Component {
                                         <Navlinknewblogannoncelocation/>
 
                                         {userbloglocationPublick.status_profile === 0 ?
-                                            <></>
+                                              <div className="card">
+                                                 <div className="card-body">
+                                                     <div className="row">
+                                                         <div className="col-md-12">
+                                                             <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                                 <div className="card card-plain">
+                                                                     <div className="card-header" role="tab" id="headingTwo">
+                                                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                             <b>Articles de {userbloglocationPublick.first_name}</b>
+                                                                         </a>
+                                                                     </div>
+
+                                                                     <NavLinkPublicBlogannoncesUser {...this.props} {...userbloglocationPublick}/>
+
+                                                                 </div>
+
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
                                             :
                                             <>
                                                 <div className="card">
@@ -288,36 +318,38 @@ class PublicUserBlogannonceLocation extends Component {
                                             </div>
                                         )}
 
-                                        <div className="card">
-                                            <div className="card-body">
+                                        {userbloglocationPublick.status_profile === 1 && (
+                                            <>
+                                            <div className="card">
+                                                <div className="card-body">
 
-                                                <div className="card-header text-center">
-                                                    <h4 className="card-title"><b>Contacter {userbloglocationPublick.first_name}</b></h4>
+                                                    <div className="card-header text-center">
+                                                        <h4 className="card-title"><b>Contacter {userbloglocationPublick.first_name}</b></h4>
+                                                    </div>
+
+                                                    <FormContactProfileAccountUser {...this.props} {...userbloglocationPublick}/>
+
                                                 </div>
-
-                                                <FormContactProfileAccountUser {...this.props} {...userbloglocationPublick}/>
-
                                             </div>
-                                        </div>
 
 
-                                        <div className="card card-raised card-form-horizontal">
+                                            <div className="card card-raised card-form-horizontal">
 
-                                            <div className="card-body">
+                                                <div className="card-body">
 
-                                                <div className="card-header text-center">
-                                                    <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
-                                                    <p className="card-title">
-                                                        Abonnez-vous à la newsletter de <b>{userbloglocationPublick.first_name}</b> afin d'être notifié des mises à jour
-                                                    </p>
+                                                    <div className="card-header text-center">
+                                                        <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
+                                                        <p className="card-title">
+                                                            Abonnez-vous à la newsletter de <b>{userbloglocationPublick.first_name}</b> afin d'être notifié des mises à jour
+                                                        </p>
+                                                    </div>
+
+                                                    <FormNewletterSubcribeProfileAccountUser {...this.props} />
+
                                                 </div>
-
-                                                <FormNewletterSubcribeProfileAccountUser {...this.props} />
-
                                             </div>
-                                        </div>
-
-
+                                            </>
+                                        )}
                                     </div>
 
                                 </div>

@@ -131,11 +131,11 @@ class AnnonceslocationList extends Component {
                                     </Link>
                                     <div className="card-header d-flex align-items-center">
                                         <div className="d-flex align-items-center">
-                                            <NavLink to={`/pro/${this.props.user.slug}/`}>
+                                            <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`}>
                                                 <img src={this.props.user.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                             </NavLink>
                                             <div className="mx-3">
-                                                <NavLink to={`/pro/${this.props.user.slug}/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
+                                                <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
                                                     <small className="d-block text-muted"><b>{moment(this.props.created_at).format('LL')}</b></small>
                                                 </NavLink>
                                             </div>

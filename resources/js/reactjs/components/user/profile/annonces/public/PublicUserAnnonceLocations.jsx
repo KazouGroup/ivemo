@@ -54,9 +54,7 @@ class PublicUserAnnonceLocations extends Component {
                     $.notify({
                             // title: 'Update FAQ',
                             //message: 'Annonce désactiver avec succès',
-                            message: "Cette annonce a été masquée au utilisateur <a href=\"/profile/personal_settings/annonces_locations/\" target=\"_blank\">Modifier ici</a>",
-                            url: "/profile/personal_settings/annonces_locations/",
-                            target: "_blank"
+                            message: "Cette annonce a été masquée au utilisateur",
                         },
                         {
                             allow_dismiss: false,

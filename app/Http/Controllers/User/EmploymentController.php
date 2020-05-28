@@ -116,6 +116,8 @@ class EmploymentController extends Controller
 
         EmploymentService::storeUploadImage($request,$employment);
 
+        EmploymentService::sendMessageToUser($request);
+
         $employment->save();
 
         return response('Created',Response::HTTP_CREATED);
