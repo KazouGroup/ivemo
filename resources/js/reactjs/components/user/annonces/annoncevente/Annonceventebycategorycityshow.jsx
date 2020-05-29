@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import { Button } from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
@@ -11,6 +10,7 @@ import Skeleton from "react-loading-skeleton";
 import ProfileForallAnnonceventeShow from "./ProfileForallAnnonceventeShow";
 import Swal from "sweetalert2";
 import Navlinknewannoncevente from "./treatment/Navlinknewannoncevente";
+import HelmetSite from "../../../inc/user/HelmetSite";
 
 
 class Annonceventebycategorycityshow extends Component {
@@ -151,9 +151,7 @@ class Annonceventebycategorycityshow extends Component {
         const {annoncevente} = this.state;
         return (
             <>
-                <Helmet>
-                    <title>{`${annoncevente.title || $name_site}`} - {$name_site}</title>
-                </Helmet>
+                <HelmetSite title={`${annoncevente.title || $name_site} - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
 

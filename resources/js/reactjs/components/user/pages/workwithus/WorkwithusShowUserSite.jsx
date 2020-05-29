@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import {Button, FormText} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import Skeleton from "react-loading-skeleton";
@@ -8,6 +7,7 @@ import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import FooterUserSite from "../../../inc/user/FooterUserSite";
 import ContactFromWorkwithusIndex from "../inc/ContactFromWorkwithusIndex";
 import moment from "moment";
+import HelmetSite from "../../../inc/user/HelmetSite";
 
 
 class WorkwithusShowUserSite extends Component {
@@ -41,7 +41,7 @@ class WorkwithusShowUserSite extends Component {
         const {workwithuse} = this.state;
         return (
             <>
-                <Helmet title={`${workwithuse.title || $name_site} - ${$name_site}`}/>
+                <HelmetSite title={`${workwithuse.title || $name_site} - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
 

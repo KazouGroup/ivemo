@@ -1,6 +1,5 @@
 import React, { Component,Fragment } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import {Button, Form, Input} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
@@ -11,6 +10,7 @@ import Swal from "sweetalert2";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
 import Navlinknewannoncevente from "./treatment/Navlinknewannoncevente";
+import HelmetSite from "../../../inc/user/HelmetSite";
 
 
 class AnnonceventeIndex extends Component {
@@ -256,7 +256,7 @@ class AnnonceventeIndex extends Component {
         );
         return (
             <Fragment>
-                <Helmet title={`Vendez un terrain, une maison, un appartement ou une boutique et plusieurs autres de vos biens - ${$name_site}`}/>
+                <HelmetSite title={`Vendez un terrain, une maison, un appartement ou une boutique et plusieurs autres de vos biens - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 

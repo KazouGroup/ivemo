@@ -1,6 +1,5 @@
 import React, { Component,Fragment } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import {Button, Form, Input} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
@@ -12,6 +11,7 @@ import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
 import Navlinknewannoncevente from "./treatment/Navlinknewannoncevente";
+import HelmetSite from "../../../inc/user/HelmetSite";
 
 
 class Annoncebycategoryannoncevente extends Component {
@@ -325,7 +325,7 @@ class Annoncebycategoryannoncevente extends Component {
         );
         return (
             <Fragment>
-                <Helmet title={`Vente ${annonceventebycategory.name || $name_site} - ${$name_site}`}/>
+                <HelmetSite title={`Vente ${annonceventebycategory.name || $name_site} - ${$name_site}`}/>
 
 
 

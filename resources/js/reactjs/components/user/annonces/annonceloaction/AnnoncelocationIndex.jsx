@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import {Button, Form, Input} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
@@ -11,6 +10,7 @@ import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
 import Navlinknewannoncelocation from "./treatment/Navlinknewannoncelocation";
+import HelmetSite from "../../../inc/user/HelmetSite";
 
 
 class AnnoncelocationIndex extends Component {
@@ -315,7 +315,7 @@ class AnnoncelocationIndex extends Component {
 
         return (
             <>
-                <Helmet title={`Bon plan de location de chambre, studio un appartement, maison ou une villa - ${$name_site}`}/>
+                <HelmetSite title={`Bon plan de location de chambre, studio un appartement, maison ou une villa - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 

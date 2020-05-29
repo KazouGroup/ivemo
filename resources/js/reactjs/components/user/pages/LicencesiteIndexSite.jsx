@@ -2,11 +2,9 @@ import React, { Component,Fragment } from "react";
 import {Link, NavLink} from 'react-router-dom';
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
-import {Helmet} from "react-helmet";
 import LinkValicationEmail from "../../inc/user/LinkValicationEmail";
-import AnnonceslocationList from "../annonces/annonceloaction/inc/AnnonceslocationList";
-import AnnoncesListSkeleton from "../../inc/user/annonce/AnnoncesListSkeleton";
 import InfopageshowUserList from "./inc/InfopageshowUserList";
+import HelmetSite from "../../inc/user/HelmetSite";
 
 
 class LicencesiteIndexSite extends Component {
@@ -40,7 +38,7 @@ class LicencesiteIndexSite extends Component {
         return (
             <Fragment>
 
-                <Helmet title={`Licence site - ${$name_site}`}/>
+                <HelmetSite title={`Licence site - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
                     <nav className="navbar navbar-expand-lg bg-primary">

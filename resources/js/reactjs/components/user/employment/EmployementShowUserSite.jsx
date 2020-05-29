@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import {Button, Form, FormText, Input, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../inc/user/NavUserSite";
 import Skeleton from "react-loading-skeleton";
@@ -12,6 +11,7 @@ import SignalFromEmployementForShow from "./inc/SignalFromEmployementForShow";
 import Swal from "sweetalert2";
 import Navlinknewemployment from "./treatement/Navlinknewemployment";
 import EmployementInteresse from "./EmployementInteresse";
+import HelmetSite from "../../inc/user/HelmetSite";
 
 
 class EmployementShowUserSite extends Component {
@@ -232,7 +232,7 @@ class EmployementShowUserSite extends Component {
         const {employment} = this.state;
         return (
             <>
-                <Helmet title={`${employment.title || $name_site} - ${$name_site}`}/>
+                <HelmetSite title={`${employment.title || $name_site} - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
 
