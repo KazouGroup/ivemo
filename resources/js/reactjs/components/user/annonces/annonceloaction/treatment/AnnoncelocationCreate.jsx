@@ -1,12 +1,12 @@
 import React, { Component,Fragment } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import {Button, Form, FormGroup, Input} from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import ReactQuill from "react-quill";
 import Swal from "sweetalert2";
 import moment from "moment";
+import HelmetSite from "../../../../inc/user/HelmetSite";
 
 
 class AnnoncelocationCreate extends Component {
@@ -151,7 +151,7 @@ class AnnoncelocationCreate extends Component {
         const {categoryannoncelocations,cities} = this.state;
         return (
             <Fragment>
-                <Helmet title={`${this.state.title || "Nouvelle annonce"} - ${$name_site}`}/>
+                <HelmetSite title={`${this.state.title || "Nouvelle annonce"} - ${$name_site}`}/>
                 <div className="landing-page sidebar-collapse">
 
 

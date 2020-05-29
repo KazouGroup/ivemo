@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import {Button, Form, Input} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
@@ -11,6 +10,7 @@ import Categoriesannoncereseventecity from "./inc/Categoriesannoncereseventecity
 import AnnonceventeList from "./inc/AnnonceventeList";
 import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
 import Navlinknewannoncevente from "./treatment/Navlinknewannoncevente";
+import HelmetSite from "../../../inc/user/HelmetSite";
 
 
 class Annonceventebyannoncetypebycity extends Component {
@@ -313,7 +313,7 @@ class Annonceventebyannoncetypebycity extends Component {
         );
         return (
             <>
-                <Helmet title={`Ventes des maisons, villa, térrains et bien d'autres dans la ville de ${annonceventebycity.name || $name_site} - ${$name_site}`}/>
+                <HelmetSite title={`Ventes des maisons, villa, térrains et bien d'autres dans la ville de ${annonceventebycity.name || $name_site} - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
 

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import AnnonceslocationList from "./inc/AnnonceslocationList";
@@ -12,6 +11,7 @@ import {Form, Input} from "reactstrap";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
 import Navlinknewannoncelocation from "./treatment/Navlinknewannoncelocation";
+import HelmetSite from "../../../inc/user/HelmetSite";
 
 
 class Annoncebycategoryannoncelocation extends Component {
@@ -323,9 +323,7 @@ class Annoncebycategoryannoncelocation extends Component {
         );
         return (
             <>
-                <Helmet>
-                    <title>Locations {`${annoncelocationbycategory.name || $name_site} - `} {$name_site}</title>
-                </Helmet>
+                <HelmetSite title={`Locations ${annoncelocationbycategory.name || $name_site} - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
 

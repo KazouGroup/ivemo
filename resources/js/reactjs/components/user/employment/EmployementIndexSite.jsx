@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Link,NavLink } from "react-router-dom";
 import moment from 'moment'
-import {Helmet} from "react-helmet";
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import {Button, Form,Alert,Input} from "reactstrap";
@@ -12,6 +11,7 @@ import EmploymentListSkeleton from "../../inc/user/employment/EmploymentListSkel
 import Navlinknewemployment from "./treatement/Navlinknewemployment";
 import SignalFromEmployementForShow from "./inc/SignalFromEmployementForShow";
 import EmployementList from "./inc/EmployementList";
+import HelmetSite from "../../inc/user/HelmetSite";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -163,10 +163,7 @@ class EmployementIndexSite extends Component {
         );
         return (
             <>
-
-                <Helmet>
-                    <title>Emplois, Formation & Services - {$name_site}</title>
-                </Helmet>
+                <HelmetSite title={`Emplois, Formation & Services - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 

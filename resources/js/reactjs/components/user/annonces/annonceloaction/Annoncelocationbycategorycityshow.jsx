@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import {Button, Navbar, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
@@ -11,6 +10,7 @@ import AnnoncelocationInteresse from "./AnnoncelocationInteresse";
 import Skeleton from "react-loading-skeleton";
 import ProfileForallAnnoncelocationShow from "./inc/ProfileForallAnnoncelocationShow";
 import Navlinknewannoncelocation from "./treatment/Navlinknewannoncelocation";
+import HelmetSite from "../../../inc/user/HelmetSite";
 
 
 class Annoncelocationbycategorycityshow extends Component {
@@ -148,7 +148,7 @@ class Annoncelocationbycategorycityshow extends Component {
         const {annoncelocation} = this.state;
         return (
             <>
-                <Helmet title={`${annoncelocation.title || $name_site} - ${$name_site}`}/>
+                <HelmetSite title={`${annoncelocation.title || $name_site} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 

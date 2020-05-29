@@ -2,10 +2,9 @@ import React, { Component,Fragment } from "react";
 import { Link } from 'react-router-dom';
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
-import {Helmet} from "react-helmet";
 import ContactFromPublicitePageIndex from "./inc/ContactFromPublicitePageIndex";
-import ReadMoreAndLess from "react-read-more-less";
 import LinkValicationEmail from "../../inc/user/LinkValicationEmail";
+import HelmetSite from "../../inc/user/HelmetSite";
 
 
 class PubliciteIndexSite extends Component {
@@ -26,7 +25,7 @@ class PubliciteIndexSite extends Component {
         return (
             <Fragment>
 
-                <Helmet title={`Publicité sur la plate forme - ${$name_site}`}/>
+                <HelmetSite title={`Publicité sur la plate forme - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">

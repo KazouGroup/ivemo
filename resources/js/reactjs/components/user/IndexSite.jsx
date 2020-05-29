@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import NavUserSite from "../inc/user/NavUserSite";
 import FooterBigUserSite from "../inc/user/FooterBigUserSite";
 import SectionLocationbyCity from "../inc/user/section_indexsite/SectionLocationbyCity";
 import SectionReservationbyCity from "../inc/user/section_indexsite/SectionReservationbyCity";
 import SectionVentebyCity from "../inc/user/section_indexsite/SectionVentebyCity";
 import SectionBlogannonce from "../inc/user/section_indexsite/SectionBlogannonce";
+import HelmetSite from "../inc/user/HelmetSite";
 
 
 class IndexSite extends Component {
- 
+
     render() {
         return (
             <>
-                <Helmet title={`Location, reservation et vente de maisons, appartements, studio et bien d'autre bien - ${$name_site}`} />
+                <HelmetSite title={`Location, reservation et vente de maisons, appartements, studio et bien d'autre bien - ${$name_site}`}/>
 
                 <div className="pricing sidebar-collapse">
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">

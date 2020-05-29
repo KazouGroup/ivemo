@@ -2,10 +2,10 @@ import React, { Component,Fragment } from "react";
 import { Link } from 'react-router-dom';
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
-import {Helmet} from "react-helmet";
 import ContactFromFaqAndOderPageIndex from "./inc/ContactFromFaqAndOderPageIndex";
 import FaqUserList from "./inc/FaqUserList";
 import LinkValicationEmail from "../../inc/user/LinkValicationEmail";
+import HelmetSite from "../../inc/user/HelmetSite";
 
 
 class FaqsIndexSite extends Component {
@@ -30,7 +30,7 @@ class FaqsIndexSite extends Component {
         return (
             <Fragment>
 
-                <Helmet title={`Questions fréquentes posées aux particuliers (FAQ) - ${$name_site}`}/>
+                <HelmetSite title={`Questions fréquentes posées aux particuliers (FAQ)  - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">

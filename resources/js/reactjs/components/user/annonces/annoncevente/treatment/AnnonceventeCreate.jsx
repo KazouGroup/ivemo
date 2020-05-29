@@ -1,12 +1,12 @@
 import React, { Component,Fragment } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import {Button, Form, FormGroup, Input} from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import ReactQuill from "react-quill";
 import Swal from "sweetalert2";
 import moment from "moment";
+import HelmetSite from "../../../../inc/user/HelmetSite";
 
 
 class AnnonceventeCreate extends Component {
@@ -152,7 +152,7 @@ class AnnonceventeCreate extends Component {
         let itemannoncetype = this.props.match.params.annoncetype;
         return (
             <Fragment>
-                <Helmet title={`${this.state.title || "Nouvelle annonce"} - ${$name_site}`}/>
+                <HelmetSite title={`${this.state.title || "Nouvelle annonce"} - ${$name_site}`}/>
                 <div className="landing-page sidebar-collapse">
 
 

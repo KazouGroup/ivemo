@@ -1,9 +1,9 @@
 import React, { Component,Fragment } from "react";
 import {Link, NavLink} from 'react-router-dom';
 import NavUserSite from "../../../inc/user/NavUserSite";
-import {Helmet} from "react-helmet";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import WorkwithusList from "./WorkwithusList";
+import HelmetSite from "../../../inc/user/HelmetSite";
 
 
 class WorkwithusBycategorySite extends Component {
@@ -38,7 +38,7 @@ class WorkwithusBycategorySite extends Component {
         return (
             <Fragment>
 
-                <Helmet title={`Travailler avec nous - ${$name_site}`}/>
+                <HelmetSite title={`Travailler avec nous - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">

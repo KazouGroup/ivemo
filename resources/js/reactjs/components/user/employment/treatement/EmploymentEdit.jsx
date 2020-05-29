@@ -20,6 +20,7 @@ import moment from "moment";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import Navlinknewemployment from "./Navlinknewemployment";
 import Navemploymentsbyuser from "../inc/Navemploymentsbyuser";
+import HelmetSite from "../../../inc/user/HelmetSite";
 
 
 class EmploymentEdit extends Component {
@@ -328,268 +329,272 @@ class EmploymentEdit extends Component {
 
     render() {
         const { photo, categoryemployments,cities } = this.state;
-        const composantTitle = `${this.state.title || $name_site}`;
-        document.title = `${composantTitle} - ${$name_site}`;
         return (
-            <div className="about-us sidebar-collapse">
-                <nav className="navbar navbar-expand-lg bg-primary">
-                    <NavUserSite />
-                </nav>
-                <div className="wrapper">
+            <>
+                <HelmetSite title={`${this.state.title || 'Annonce'} - ${$name_site}`}/>
 
-                    <div className="main main-raised">
-                        <div className="container">
-                            <br />
+                <div className="about-us sidebar-collapse">
+                    <nav className="navbar navbar-expand-lg bg-primary">
+                        <NavUserSite />
+                    </nav>
+                    <div className="wrapper">
 
-                            <form role="form" onSubmit={this.updateItem} acceptCharset="UTF-8">
+                        <div className="main main-raised">
+                            <div className="container">
+                                <br />
 
-                                <div className="row">
+                                <form role="form" onSubmit={this.updateItem} acceptCharset="UTF-8">
 
-                                    <div className="col-lg-4 col-md-12 mx-auto">
+                                    <div className="row">
 
-                                        <Navlinknewemployment/>
+                                        <div className="col-lg-4 col-md-12 mx-auto">
 
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                            <Navlinknewemployment/>
 
-                                                            <Navemploymentsbyuser/>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div className="col-lg-8 col-md-12 mx-auto">
-                                        <div className="submit text-left">
-                                            <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
-                                                <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos annonces </b>
-                                            </button>
-                                        </div>
-                                        {!$guest &&(
-                                            <>
-                                                {!$userIvemo.email_verified_at &&(
-                                                    <LinkValicationEmail/>
-                                                )}
-                                            </>
-                                        )}
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="card-title">
-                                                    <b>{this.state.title}</b>
-                                                </div>
-
-                                                <div className="card-header d-flex align-items-center">
-                                                    <div className="d-flex align-items-center">
-                                                        <NavLink to={`/pro/${$userIvemo.slug}`}>
-                                                            <img src={$userIvemo.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
-                                                        </NavLink>
-                                                        <div className="mx-3">
-                                                            <NavLink to={`/pro/${$userIvemo.slug}`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
-                                                                <small className="d-block text-muted"><b>{moment($userIvemo.created_at).format('LL')}</b></small>
-                                                            </NavLink>
-                                                        </div>
-                                                    </div>
-                                                    <div className="text-right ml-auto">
-                                                        {this.state.status ?
-                                                            <>
-                                                                <button type="button" rel="tooltip" onClick={() => this.unactiveItem(this.state.id)}
-                                                                        className="btn btn-success btn-icon btn-sm" >
-                                                                    <i className="now-ui-icons ui-1_check"/>
-                                                                </button>
-                                                            </>
-                                                            :
-                                                            <>
-                                                                <button type="button" onClick={() => this.activeItem(this.state.id)}
-                                                                        className="btn btn-primary btn-icon btn-sm">
-                                                                    <i className="now-ui-icons ui-1_simple-delete"/>
-                                                                </button>
-                                                            </>
-
-                                                        }
-                                                        <Button
-                                                            className="btn btn-sm btn-icon btn-danger" onClick={() => this.deleteItem(this.state.id)} >
-                                                            <i className="now-ui-icons ui-1_simple-remove"/>
-                                                        </Button>{" "}
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <CardBody>
-
-                                                    <Row>
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <div className="row">
                                                         <div className="col-md-12">
-                                                            <label className="labels">
-                                                                Donner un titre à cet article
-                                                                <span className="text-danger">*</span>
-                                                            </label>
-                                                            <InputGroup>
-                                                                <div className="input-group-prepend">
-                                                                    <span className="input-group-text"><i className="now-ui-icons users_circle-08"/></span>
-                                                                </div>
-                                                                <Input id='title'
-                                                                       type='text'
-                                                                       className={`form-control ${this.hasErrorFor('title') ? 'is-invalid' : ''}`}
-                                                                       name='title'
-                                                                       maxLength="200"
-                                                                       minLength="4"
-                                                                       placeholder="Titre de l'article"
-                                                                       aria-label="Titre de l'article"
-                                                                       value={this.state.title || ''}
+                                                            <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                                       onChange={this.handleFieldChange}
-                                                                />
-                                                                {this.renderErrorFor('title')}
-                                                            </InputGroup>
-                                                        </div>
-                                                    </Row>
+                                                                <Navemploymentsbyuser/>
 
-                                                    <Row>
-                                                        <div className="col-md-6">
-                                                            <label className="labels">
-                                                                Quel est le montant de votre annonce
-                                                            </label>
-                                                            <InputGroup>
-                                                                <div className="input-group-prepend">
-                                                                    <span className="input-group-text"><i className="now-ui-icons business_money-coins"/></span>
-                                                                </div>
-                                                                <Input id='price'
-                                                                       type='number'
-                                                                       maxLength="13"
-                                                                       minLength="4"
-                                                                       className={`form-control ${this.hasErrorFor('price') ? 'is-invalid' : ''}`}
-                                                                       name='price'
-                                                                       placeholder="Montant de votre annonce"
-                                                                       aria-label="Montant de votre annonce"
-                                                                       autoComplete="price"
-                                                                       value={this.state.price || ""}
-                                                                       onChange={this.handleFieldChange}
-                                                                />
-                                                                {this.renderErrorFor('price')}
-                                                            </InputGroup>
-                                                        </div>
-                                                        <div className="col-md-6">
-                                                            <label className="labels">
-                                                                Quartier ou lieu?
-                                                                <span className="text-danger">*</span>
-                                                            </label>
-                                                            <InputGroup>
-                                                                <div className="input-group-prepend">
-                                                                    <span className="input-group-text"><i className="now-ui-icons users_circle-08"/></span>
-                                                                </div>
-                                                                <Input id='district'
-                                                                       type='text'
-                                                                       className={`form-control ${this.hasErrorFor('district') ? 'is-invalid' : ''}`}
-                                                                       name='district'
-                                                                       placeholder="Quartier"
-                                                                       aria-label="Quartier"
-                                                                       autoComplete="Quartier"
-                                                                       value={this.state.district || ""}
-                                                                       onChange={this.handleFieldChange}
-                                                                />
-                                                                {this.renderErrorFor('district')}
-                                                            </InputGroup>
-                                                        </div>
-                                                    </Row>
-
-                                                    <Row>
-                                                        <div className="col-md-6">
-                                                            <label className="labels">
-                                                                Selectionez la ville
-                                                                <span className="text-danger">*</span>
-                                                            </label>
-                                                            <FormGroup>
-                                                                <select name={'city_id'} value={this.state.city_id || ""}
-                                                                    className={`form-control ${this.hasErrorFor('city_id') ? 'is-invalid' : ''}`}
-                                                                    id="city_id" onChange={this.handleFieldChange}>
-                                                                    <option value="" disabled>Selectioner une ville</option>
-                                                                    {cities.map((item) => (
-                                                                        <option key={item.id} value={item.id}>{item.name}</option>
-                                                                    ))}
-                                                                </select>
-                                                                {this.renderErrorFor('city_id')}
-                                                            </FormGroup>
-                                                        </div>
-                                                        <div className="col-md-6">
-                                                            <label className="labels">
-                                                                Selectionez la categorie
-                                                                <span className="text-danger">*</span>
-                                                            </label>
-                                                            <FormGroup>
-                                                                <select name={'categoryemployment_id'} value={this.state.categoryemployment_id || ""}
-                                                                    className={`form-control ${this.hasErrorFor('categoryemployment_id') ? 'is-invalid' : ''}`}
-                                                                    id="categoryemployment_id" onChange={this.handleFieldChange}>
-                                                                    <option value="" disabled>Selectioner une category</option>
-                                                                    {categoryemployments.map((item) => (
-                                                                        <option key={item.id} value={item.id}>{item.name}</option>
-                                                                    ))}
-                                                                </select>
-                                                                {this.renderErrorFor('categoryemployment_id')}
-                                                            </FormGroup>
-                                                        </div>
-                                                    </Row>
-                                                    <Row>
-                                                        <div className="col-md-6 mx-auto">
-                                                            <div className="text-center">
-                                                                <img src={this.state.showDefaultImage ? `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg` : photo} alt={'name'} />
-                                                                <input id="photo" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('photo') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="photo" />
-                                                                {this.renderErrorFor('photo')}
-                                                                <div className="text-center">
-                                                                    <label htmlFor="photo" className="btn btn-primary">
-                                                                        <span className="btn-inner--text">Ajouter l'image</span>
-                                                                    </label>
-                                                                    <label hidden={this.state.showDefaultImage ? true : false} onClick={this.removeImage} className="btn btn-danger">
-                                                                        <span className="btn-inner--text">Remove</span>
-                                                                    </label>
-                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </Row>
-                                                    <Row>
-                                                        <div className="col-md-12">
-                                                            <FormGroup>
-                                                                <label className="labels">
-                                                                    Décrivez votre annonce
-                                                                        <span className="text-danger">*</span>
-                                                                </label>
-                                                                <br />
-                                                                <ReactQuill theme="snow" modules={this.modules}
-                                                                    formats={this.formats}
-                                                                    placeholder="Laisser votre description..."
-                                                                    className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
-                                                                    value={this.state.description || ''}
-                                                                    onChange={this.handleChangeBody} />
-                                                                {this.renderErrorFor('description')}
-                                                            </FormGroup>
-                                                        </div>
-                                                    </Row>
-
-                                                </CardBody>
-
-                                                <div className="submit text-center">
-                                                    <button className="btn btn-primary" type="submit">
-                                                        <b>Mettre à jour l'annonce</b>
-                                                    </button>
+                                                    </div>
                                                 </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div className="col-lg-8 col-md-12 mx-auto">
+                                            <div className="submit text-left">
+                                                <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
+                                                    <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos annonces </b>
+                                                </button>
+                                            </div>
+                                            {!$guest &&(
+                                                <>
+                                                    {!$userIvemo.email_verified_at &&(
+                                                        <LinkValicationEmail/>
+                                                    )}
+                                                </>
+                                            )}
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <div className="card-title">
+                                                        <b>{this.state.title}</b>
+                                                    </div>
+
+                                                    <div className="card-header d-flex align-items-center">
+                                                        <div className="d-flex align-items-center">
+                                                            <NavLink to={`/pro/${$userIvemo.slug}`}>
+                                                                <img src={$userIvemo.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
+                                                            </NavLink>
+                                                            <div className="mx-3">
+                                                                <NavLink to={`/pro/${$userIvemo.slug}`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
+                                                                    <small className="d-block text-muted"><b>{moment($userIvemo.created_at).format('LL')}</b></small>
+                                                                </NavLink>
+                                                            </div>
+                                                        </div>
+                                                        <div className="text-right ml-auto">
+                                                            {this.state.status ?
+                                                                <>
+                                                                    <button type="button" rel="tooltip" onClick={() => this.unactiveItem(this.state.id)}
+                                                                            className="btn btn-success btn-icon btn-sm" >
+                                                                        <i className="now-ui-icons ui-1_check"/>
+                                                                    </button>
+                                                                </>
+                                                                :
+                                                                <>
+                                                                    <button type="button" onClick={() => this.activeItem(this.state.id)}
+                                                                            className="btn btn-primary btn-icon btn-sm">
+                                                                        <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                    </button>
+                                                                </>
+
+                                                            }
+                                                            <Button
+                                                                className="btn btn-sm btn-icon btn-danger" onClick={() => this.deleteItem(this.state.id)} >
+                                                                <i className="now-ui-icons ui-1_simple-remove"/>
+                                                            </Button>{" "}
+                                                        </div>
+                                                    </div>
+                                                    <hr />
+                                                    <CardBody>
+
+                                                        <Row>
+                                                            <div className="col-md-12">
+                                                                <label className="labels">
+                                                                    Donner un titre à cet article
+                                                                    <span className="text-danger">*</span>
+                                                                </label>
+                                                                <InputGroup>
+                                                                    <div className="input-group-prepend">
+                                                                        <span className="input-group-text"><i className="now-ui-icons users_circle-08"/></span>
+                                                                    </div>
+                                                                    <Input id='title'
+                                                                           type='text'
+                                                                           className={`form-control ${this.hasErrorFor('title') ? 'is-invalid' : ''}`}
+                                                                           name='title'
+                                                                           maxLength="200"
+                                                                           minLength="4"
+                                                                           placeholder="Titre de l'article"
+                                                                           aria-label="Titre de l'article"
+                                                                           value={this.state.title || ''}
+
+                                                                           onChange={this.handleFieldChange}
+                                                                    />
+                                                                    {this.renderErrorFor('title')}
+                                                                </InputGroup>
+                                                            </div>
+                                                        </Row>
+
+                                                        <Row>
+                                                            <div className="col-md-6">
+                                                                <label className="labels">
+                                                                    Quel est le montant de votre annonce
+                                                                </label>
+                                                                <InputGroup>
+                                                                    <div className="input-group-prepend">
+                                                                        <span className="input-group-text"><i className="now-ui-icons business_money-coins"/></span>
+                                                                    </div>
+                                                                    <Input id='price'
+                                                                           type='number'
+                                                                           maxLength="13"
+                                                                           minLength="4"
+                                                                           className={`form-control ${this.hasErrorFor('price') ? 'is-invalid' : ''}`}
+                                                                           name='price'
+                                                                           placeholder="Montant de votre annonce"
+                                                                           aria-label="Montant de votre annonce"
+                                                                           autoComplete="price"
+                                                                           value={this.state.price || ""}
+                                                                           onChange={this.handleFieldChange}
+                                                                    />
+                                                                    {this.renderErrorFor('price')}
+                                                                </InputGroup>
+                                                            </div>
+                                                            <div className="col-md-6">
+                                                                <label className="labels">
+                                                                    Quartier ou lieu?
+                                                                    <span className="text-danger">*</span>
+                                                                </label>
+                                                                <InputGroup>
+                                                                    <div className="input-group-prepend">
+                                                                        <span className="input-group-text"><i className="now-ui-icons users_circle-08"/></span>
+                                                                    </div>
+                                                                    <Input id='district'
+                                                                           type='text'
+                                                                           className={`form-control ${this.hasErrorFor('district') ? 'is-invalid' : ''}`}
+                                                                           name='district'
+                                                                           placeholder="Quartier"
+                                                                           aria-label="Quartier"
+                                                                           autoComplete="Quartier"
+                                                                           value={this.state.district || ""}
+                                                                           onChange={this.handleFieldChange}
+                                                                    />
+                                                                    {this.renderErrorFor('district')}
+                                                                </InputGroup>
+                                                            </div>
+                                                        </Row>
+
+                                                        <Row>
+                                                            <div className="col-md-6">
+                                                                <label className="labels">
+                                                                    Selectionez la ville
+                                                                    <span className="text-danger">*</span>
+                                                                </label>
+                                                                <FormGroup>
+                                                                    <select name={'city_id'} value={this.state.city_id || ""}
+                                                                            className={`form-control ${this.hasErrorFor('city_id') ? 'is-invalid' : ''}`}
+                                                                            id="city_id" onChange={this.handleFieldChange}>
+                                                                        <option value="" disabled>Selectioner une ville</option>
+                                                                        {cities.map((item) => (
+                                                                            <option key={item.id} value={item.id}>{item.name}</option>
+                                                                        ))}
+                                                                    </select>
+                                                                    {this.renderErrorFor('city_id')}
+                                                                </FormGroup>
+                                                            </div>
+                                                            <div className="col-md-6">
+                                                                <label className="labels">
+                                                                    Selectionez la categorie
+                                                                    <span className="text-danger">*</span>
+                                                                </label>
+                                                                <FormGroup>
+                                                                    <select name={'categoryemployment_id'} value={this.state.categoryemployment_id || ""}
+                                                                            className={`form-control ${this.hasErrorFor('categoryemployment_id') ? 'is-invalid' : ''}`}
+                                                                            id="categoryemployment_id" onChange={this.handleFieldChange}>
+                                                                        <option value="" disabled>Selectioner une category</option>
+                                                                        {categoryemployments.map((item) => (
+                                                                            <option key={item.id} value={item.id}>{item.name}</option>
+                                                                        ))}
+                                                                    </select>
+                                                                    {this.renderErrorFor('categoryemployment_id')}
+                                                                </FormGroup>
+                                                            </div>
+                                                        </Row>
+                                                        <Row>
+                                                            <div className="col-md-6 mx-auto">
+                                                                <div className="text-center">
+                                                                    <img src={this.state.showDefaultImage ? `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg` : photo} alt={'name'} />
+                                                                    <input id="photo" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('photo') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="photo" />
+                                                                    {this.renderErrorFor('photo')}
+                                                                    <div className="text-center">
+                                                                        <label htmlFor="photo" className="btn btn-primary">
+                                                                            <span className="btn-inner--text">Ajouter l'image</span>
+                                                                        </label>
+                                                                        <label hidden={this.state.showDefaultImage ? true : false} onClick={this.removeImage} className="btn btn-danger">
+                                                                            <span className="btn-inner--text">Remove</span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </Row>
+                                                        <Row>
+                                                            <div className="col-md-12">
+                                                                <FormGroup>
+                                                                    <label className="labels">
+                                                                        Décrivez votre annonce
+                                                                        <span className="text-danger">*</span>
+                                                                    </label>
+                                                                    <br />
+                                                                    <ReactQuill theme="snow" modules={this.modules}
+                                                                                formats={this.formats}
+                                                                                placeholder="Laisser votre description..."
+                                                                                className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
+                                                                                value={this.state.description || ''}
+                                                                                onChange={this.handleChangeBody} />
+                                                                    {this.renderErrorFor('description')}
+                                                                </FormGroup>
+                                                            </div>
+                                                        </Row>
+
+                                                    </CardBody>
+
+                                                    <div className="submit text-center">
+                                                        <button className="btn btn-primary" type="submit">
+                                                            <b>Mettre à jour l'annonce</b>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
                                             </div>
 
                                         </div>
 
                                     </div>
 
-                                </div>
-
-                            </form>
+                                </form>
+                            </div>
                         </div>
-                    </div>
 
-                    <FooterBigUserSite />
+                        <FooterBigUserSite />
+                    </div>
                 </div>
-            </div>
+            </>
+
+
         )
     }
 }
