@@ -30,6 +30,7 @@ import CityAdminIndex from "../components/admin/partial/CityAdminIndex";
 import PermissionAdminIndex from "../components/admin/partial/PermissionAdminIndex";
 import RoleAdminIndex from "../components/admin/partial/RoleAdminIndex";
 import ContactusersfaqsAdminIndex from "../components/admin/contact/contactuserfaq/ContactusersfaqsAdminIndex";
+import ContactforadvertsAdminIndex from "../components/admin/contact/contactforadverts/ContactforadvertsAdminIndex";
 import ConditionutilisationAdminIndex
     from "../components/admin/page/conditionutilisation/ConditionutilisationAdminIndex";
 import ConditionutilisationAdminCreate
@@ -63,6 +64,7 @@ export const routes = [
     {path: '/dashboard/permissions/', name: 'permissions.index', component: PermissionAdminIndex},
 
     {path: '/dashboard/contactusersfaqs/', name: 'contactusersfaqs.index', component: ContactusersfaqsAdminIndex},
+    {path: '/dashboard/contactusersfaqs/', name: 'contactforadverts.index', component:ContactforadvertsAdminIndex},
 
     {path: '/dashboard/policyprivacies/', name: 'policyprivacies.index', component: PolicyprivacyAdminIndex},
     {path: '/dashboard/policyprivacies/create/', name: 'policyprivacies.create', component: PolicyprivacyAdminCreate},

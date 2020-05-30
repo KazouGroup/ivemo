@@ -14,6 +14,6 @@ $factory->define(signaluseremployment::class, function (Faker $faker) {
         'email' => $faker->freeEmail,
         'message' => $faker->realText(rand(50, 100)),
         'employment_id' => employment::inRandomOrder()->first()->id,
-        'created_at' => $faker->dateTime,
+        //'created_at' => $faker->dateTime,
     ];
 });

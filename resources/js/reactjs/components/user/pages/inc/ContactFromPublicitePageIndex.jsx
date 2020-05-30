@@ -1,6 +1,6 @@
 import React, { Component,Fragment } from "react";
 import { Link } from 'react-router-dom';
-import { Row, Form, Input,InputGroup,FormGroup } from 'reactstrap';
+import { Row,FormText,Input,InputGroup,FormGroup } from 'reactstrap';
 
 
 class ContactFromPublicitePageIndex extends Component {

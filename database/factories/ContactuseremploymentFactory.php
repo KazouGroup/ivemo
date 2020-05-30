@@ -20,6 +20,6 @@ $factory->define(contactuseremployment::class, function (Faker $faker) {
         'employment_id' => employment::inRandomOrder()->first()->id,
         'subject' => $faker->text(50),
         'message' => $faker->realText(rand(1000, 5000)),
-        'created_at' => $faker->dateTime,
+        //'created_at' => $faker->dateTime,
     ];
 });

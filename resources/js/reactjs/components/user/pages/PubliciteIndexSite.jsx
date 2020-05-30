@@ -163,12 +163,9 @@ class PubliciteIndexSite extends Component {
 
                             </div>
 
-
                             <ContactFromPublicitePageIndex/>
 
                         </div>
-
-
 
                         <FooterBigUserSite />
                     </div>

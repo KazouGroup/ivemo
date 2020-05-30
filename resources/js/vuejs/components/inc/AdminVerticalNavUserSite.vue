@@ -6,10 +6,10 @@
           Tip 2: you can also add an image using data-image tag
       -->
         <div class="logo">
-            <a href="/" class="simple-text logo-mini">
+            <a href="/" class="simple-text logo-mini" target="_blank">
                 IV
             </a>
-            <a href="/" class="simple-text logo-normal">
+            <a href="/" class="simple-text logo-normal" target="_blank">
                 {{name_site}}
             </a>
         </div>
@@ -312,6 +312,12 @@
                                 <router-link class="nav-link" :to="{ name: 'contactusersfaqs.index'}">
                                     <span class="sidebar-mini"> CF </span>
                                     <span class="sidebar-normal"> Contacts Faqs </span>
+                                </router-link>
+                            </li>
+                            <li class="nav-item ">
+                                <router-link class="nav-link" :to="{ name: 'contactusersfaqs.index'}">
+                                    <span class="sidebar-mini"> CFA </span>
+                                    <span class="sidebar-normal"> Contacts For Adverts</span>
                                 </router-link>
                             </li>
 
