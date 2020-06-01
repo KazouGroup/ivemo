@@ -125,13 +125,30 @@ class EmploymentService
         return $employments;
     }
 
-    public static function apicategoryemployment()
+    public static function apicategoryemploymentcount()
     {
         $categoryemployments = CategoryemployementResource::collection(categoryemployment::with('user')
             ->where('status',1)
             ->withCount(['employments' => function ($q){
                 $q->with('user','city','categoryemployment','member')
                     ->where(['status' => 1,'status_admin' => 1])
+                    ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
+                    ->whereHas('city', function ($q) {$q->where('status',1);});
+            }])
+            ->orderBy('employments_count','desc')
+            ->distinct()->get());
+
+        return $categoryemployments;
+    }
+
+    public static function apicategoryemploymentcitycount(city $city)
+    {
+        $categoryemployments = CategoryemployementResource::collection(categoryemployment::with('user')
+            ->where('status',1)
+            ->withCount(['employments' => function ($q) use ($city){
+                $q->with('user','city','categoryemployment','member')
+                    ->where(['status' => 1,'status_admin' => 1])
+                    ->whereIn('city_id',[$city->id])
                     ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);});
             }])
