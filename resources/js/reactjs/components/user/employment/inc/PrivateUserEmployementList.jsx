@@ -112,7 +112,7 @@ class PrivateUserEmployementList extends Component {
                                                                 </button>
                                                             </>
                                                         }
-                                                        <NavLink to={`/employment/${this.props.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" title=" Editer l'annonce">
+                                                        <NavLink to={`/employment/ab/${this.props.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" title=" Editer l'annonce">
                                                             <i className="now-ui-icons ui-2_settings-90"/>
                                                         </NavLink>
                                                         <Button

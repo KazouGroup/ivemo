@@ -31,7 +31,7 @@ class NavlinkconfigurationUser extends Component {
                                                 <tbody>
                                                 <tr>
                                                     <td>
-                                                        <NavLink to={`/profile/${this.props.slug}/personal_settings/annonces_locations/`}>
+                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/annonces_locations/`}>
                                                             annonces sur les locations
                                                         </NavLink>
                                                     </td>
@@ -39,7 +39,7 @@ class NavlinkconfigurationUser extends Component {
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <NavLink to={`/profile/${this.props.slug}/personal_settings/annonces_reservations/`}>
+                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/annonces_reservations/`}>
                                                             annonces sur les reservations
                                                         </NavLink>
                                                     </td>
@@ -47,7 +47,7 @@ class NavlinkconfigurationUser extends Component {
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <NavLink to={`/profile/${this.props.slug}/personal_settings/annonces_ventes/`}>
+                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/annonces_ventes/`}>
                                                             annonces sur les ventes
                                                         </NavLink>
                                                     </td>
@@ -71,7 +71,7 @@ class NavlinkconfigurationUser extends Component {
                                                 <tbody>
                                                 <tr>
                                                     <td>
-                                                        <NavLink to={`/profile/${this.props.slug}/personal_settings/employments/`}>
+                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/employments/`}>
                                                             Formations service recrutement
                                                         </NavLink>
                                                     </td>
@@ -95,7 +95,7 @@ class NavlinkconfigurationUser extends Component {
                                                 <tbody>
                                                 <tr>
                                                     <td>
-                                                        <NavLink to={`/profile/${this.props.slug}/personal_settings/blogs/annonce_locations/`}>
+                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_locations/`}>
                                                             articles sur la location
                                                         </NavLink>
                                                     </td>
@@ -103,7 +103,7 @@ class NavlinkconfigurationUser extends Component {
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <NavLink to={`/profile/${this.props.slug}/personal_settings/blogs/annonce_reservations/`}>
+                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_reservations/`}>
                                                             articles sur la reservation
                                                         </NavLink>
                                                     </td>
@@ -111,7 +111,7 @@ class NavlinkconfigurationUser extends Component {
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <NavLink to={`/profile/${this.props.slug}/personal_settings/blogs/annonce_ventes/`}>
+                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_ventes/`}>
                                                             article sur la vente
                                                         </NavLink>
                                                     </td>
@@ -135,7 +135,7 @@ class NavlinkconfigurationUser extends Component {
                                                 <tbody>
                                                 <tr>
                                                     <td>
-                                                        <NavLink to={`/profile/${this.props.slug}/personal_settings/teams/`}>
+                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/teams/`}>
                                                             Notre Teams
                                                         </NavLink>
                                                     </td>
@@ -143,7 +143,7 @@ class NavlinkconfigurationUser extends Component {
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <NavLink to={`/profile/${this.props.slug}/personal_settings/subscriber_users/`}>
+                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/subscriber_users/`}>
                                                             Email des abonnements
                                                         </NavLink>
                                                     </td>

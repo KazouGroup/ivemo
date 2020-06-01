@@ -31,7 +31,7 @@ class Navemploymentsbyuser extends Component {
 
     render() {
         const { categoryemployments } = this.state;
-        const mapCategoryemployments = categoryemployments.length ? (
+        const mapCategoryemployments = categoryemployments.length >= 0 ? (
             categoryemployments.map(item => {
                 return (
                     <tr key={item.id}>

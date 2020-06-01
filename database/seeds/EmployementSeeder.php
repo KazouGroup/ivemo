@@ -19,8 +19,8 @@ class EmployementSeeder extends Seeder
      */
     public function run()
     {
-        factory(employment::class, 200)->create();
-        factory(contactuseremployment::class, 3000)->create();
-        factory(signaluseremployment::class, 2000)->create();
+        factory(employment::class, 3000)->create();
+        factory(contactuseremployment::class, 300)->create();
+        factory(signaluseremployment::class, 200)->create();
     }
 }

@@ -12,15 +12,15 @@ import EmploymentListSkeleton from "../../inc/user/employment/EmploymentListSkel
 import Navlinknewemployment from "./treatement/Navlinknewemployment";
 import EmployementList from "./inc/EmployementList";
 import HelmetSite from "../../inc/user/HelmetSite";
+import Navemployementsbycity from "./inc/Navemployementsbycity";
 require("moment/min/locales.min");
 moment.locale('fr');
 
-class EmployementBycategoryemployement extends Component {
+class EmployementBycity extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            categoryemployment:{employments:{categoryemployment:[],user:[],city:[]},user:[]},
-            cities:{user:[]},
+            cityemployment:{employments:{categoryemployment:[],user:[],city:[]},user:[]},
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -135,10 +135,9 @@ class EmployementBycategoryemployement extends Component {
 
 
     loadItems(){
-        let itemCategoryemployment = this.props.match.params.categoryemployment;
-        let url = route('api.employmentscategory_site', [itemCategoryemployment]);
-        dyaxios.get(url).then(response => this.setState({ categoryemployment: response.data }));
-        dyaxios.get(route('api.employmentbycategorybycount_site', [itemCategoryemployment])).then(response => this.setState({ cities: response.data }));
+        let itemCity = this.props.match.params.city;
+        let url = route('api.employmentcity_site', [itemCity]);
+        dyaxios.get(url).then(response => this.setState({ cityemployment: response.data }));
     }
 
     componentDidMount() {
@@ -153,9 +152,9 @@ class EmployementBycategoryemployement extends Component {
         return (employments_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
     render() {
-        const {categoryemployment,cities} = this.state;
-        const mapEmployments = categoryemployment.employments.length >= 0 ? (
-            categoryemployment.employments.map(item => {
+        const {cityemployment} = this.state;
+        const mapEmployments = cityemployment.employments.length >= 0 ? (
+            cityemployment.employments.map(item => {
                 return(
 
                     <EmployementList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
@@ -166,7 +165,7 @@ class EmployementBycategoryemployement extends Component {
         );
         return (
             <>
-                <HelmetSite title={`${categoryemployment.name || 'Annonce'} - ${$name_site}`}/>
+                <HelmetSite title={`${cityemployment.name || 'Annonce'} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 
@@ -176,18 +175,18 @@ class EmployementBycategoryemployement extends Component {
 
                     <div className="wrapper">
                         <div className="page-header page-header-mini">
-                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url("  + categoryemployment.photo + ")" }}>
+                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url("  + cityemployment.photo + ")" }}>
                             </div>
                             <div className="content-center">
-                                {categoryemployment.name && (
+                                {cityemployment.name && (
                                     <>
-                                        <h1 className="title">{categoryemployment.name || ""}</h1>
+                                        <h1 className="title">{cityemployment.name || ""}</h1>
 
                                         <Link to={`/employments/`} className="text-white">
                                             <i className="fa fa-chevron-circle-left" /> <b>Retour aux annonces</b>
                                         </Link>
 
-                                        <h5><b>{categoryemployment.employments_count}</b> {categoryemployment.employments_count > 1 ? "annonces" : "annonce"} posté</h5>
+                                        <h5><b>{cityemployment.employments_count}</b> {cityemployment.employments_count > 1 ? "annonces" : "annonce"} posté à <b style={{ textTransform: "capitalize" }}>{cityemployment.name}</b></h5>
 
                                     </>
                                 )}
@@ -231,41 +230,7 @@ class EmployementBycategoryemployement extends Component {
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                            <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingTwo">
-                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                        <b>{categoryemployment.name || "Villes"} </b>
-                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
-                                                                    </a>
-                                                                </div>
-
-                                                                <div id="collapseTwo" className="collapse show" role="tabpanel" aria-labelledby="headingTwo">
-                                                                    <div className="card-body">
-                                                                        <table>
-                                                                            <tbody>
-
-                                                                            {cities.length >= 0 ?
-                                                                                <>
-                                                                                    {cities.map((item) => (
-                                                                                        <tr key={item.id}>
-                                                                                            <td>
-                                                                                                <NavLink to={`/employments/${categoryemployment.slug}/${item.slug}/`}>
-                                                                                                    <b style={{ textTransform: "lowercase" }}>{categoryemployment.name}</b> à <b>{item.name}</b>
-                                                                                                </NavLink>
-                                                                                            </td>
-                                                                                            <td className="text-right"> {this.getdataString(item.employments_count)}  {item.employments_count > 1 ? "annonces" : "annonce"}</td>
-                                                                                        </tr>
-                                                                                    ))}
-                                                                                </>
-                                                                                :
-                                                                                <NavannoncecategorySkeleton/>}
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
-
-
-                                                            </div>
+                                                            <Navemployementsbycity/>
 
                                                         </div>
                                                     </div>
@@ -308,4 +273,4 @@ class EmployementBycategoryemployement extends Component {
 
 }
 
-export default EmployementBycategoryemployement;
+export default EmployementBycity;

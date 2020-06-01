@@ -22,6 +22,23 @@ class Annoncelocationbycategorycityshow extends Component {
         this.deleteItem = this.deleteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
     }
+    copyToClipboard(){
+        navigator.clipboard.writeText(window.location.toString())
+        $.notify({
+            message: "Lien copié correctement avec succès",
+        },{
+            allow_dismiss: false,
+            type: 'info',
+            placement: {
+                from: 'top',
+                align: 'center'
+            },
+            animate: {
+                enter: "animate__animated animate__fadeInDown",
+                exit: "animate__animated animate__fadeOutUp"
+            },
+        });
+    }
 
     unactiveItem(id){
         Swal.fire({
@@ -256,7 +273,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                         <div className="card">
                                             <div className="card-body">
 
-                                              <ProfileForallAnnoncelocationShow {...annoncelocation} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
+                                              <ProfileForallAnnoncelocationShow {...annoncelocation} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} copyToClipboard={this.copyToClipboard}/>
 
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">

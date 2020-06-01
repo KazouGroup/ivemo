@@ -55,6 +55,13 @@ class EmploymentController extends Controller
         ]);
     }
 
+    public function employmentbycity(city $city)
+    {
+        return  view('user.employment.cityemployment',[
+            'city' => $city
+        ]);
+    }
+
     public function employmentslug($categoryemployment,$city,employment $employment)
     {
         return  view('user.employment.employmentshow',[
@@ -149,10 +156,16 @@ class EmploymentController extends Controller
         return response()->json($employments,200);
     }
 
-
     public function apiemploymentsbycategory(categoryemployment $categoryemployment)
     {
         $employments = EmploymentService::apiemploymentsbycategory($categoryemployment);
+
+        return response()->json($employments,200);
+    }
+
+    public function apiemploymentbycity(city $city)
+    {
+        $employments = EmploymentService::apiemploymentbycity($city);
 
         return response()->json($employments,200);
     }
@@ -185,6 +198,13 @@ class EmploymentController extends Controller
         $categoryemployments = EmploymentService::apicategoryemployment();
 
         return response()->json($categoryemployments, 200);
+    }
+
+    public function apicityemployment()
+    {
+        $cityemployments = EmploymentService::apicityemployment();
+
+        return response()->json($cityemployments, 200);
     }
 
     public function apiemploymentbycategorybycount(categoryemployment $categoryemployment)

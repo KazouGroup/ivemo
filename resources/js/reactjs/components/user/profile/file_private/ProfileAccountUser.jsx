@@ -236,7 +236,20 @@ class ProfileAccountUser extends Component {
 
                                             <div className="card">
                                                 <div className="card-body">
+                                                <div className="card-header d-flex align-items-center">
+                                                        <div className="d-flex align-items-center">
+                                                            <NavLink to={`/pro/${$userIvemo.slug}/`}>
+                                                                <img src={$userIvemo.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
+                                                            </NavLink>
+                                                            <div className="mx-3">
+                                                                <NavLink to={`/pro/${$userIvemo.slug}/`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
+                                                                    <small className="d-block text-muted">{moment($userIvemo.created_at).format('LL')}</small>
+                                                                </NavLink>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
+                                                    <hr/>
                                                     <Row>
                                                         <div className="col-md-6 col-6">
                                                             <label htmlFor="first_name"><b>Nom</b></label>
