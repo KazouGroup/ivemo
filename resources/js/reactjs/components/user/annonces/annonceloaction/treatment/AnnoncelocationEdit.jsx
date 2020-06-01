@@ -59,7 +59,6 @@ class AnnoncelocationEdit extends Component {
             'color', 'background'
         ];
 
-
     }
 
      // Handle Change
@@ -111,7 +110,7 @@ class AnnoncelocationEdit extends Component {
             .then(() => {
                 $.notify({
                         //,
-                        message: 'Votre annonce a bien été modifié'
+                        message: 'Votre annonce a bien été modifiée'
                     },
                     {
                         allow_dismiss: false,
@@ -161,7 +160,7 @@ class AnnoncelocationEdit extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Article de blogs suprimée avec success'
+                            message: 'Article de blogs suprimé avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -200,7 +199,7 @@ class AnnoncelocationEdit extends Component {
             /** Alert notify bootstrap **/
             $.notify({
                     //,
-                    message: 'Annonces activé avec succès'
+                    message: 'Annonce activé avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -237,7 +236,7 @@ class AnnoncelocationEdit extends Component {
             /** Alert notify bootstrapp **/
             $.notify({
                     // title: 'Update',
-                    message: 'Annonce désactiver avec succès'
+                    message: 'Annonce désactivé avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -304,11 +303,9 @@ class AnnoncelocationEdit extends Component {
                 <HelmetSite title={`${this.state.title || $name_site} - ${$name_site}`}/>
                 <div className="landing-page sidebar-collapse">
 
-
                     <nav className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
-
 
                     <div className="wrapper">
 
@@ -484,7 +481,7 @@ class AnnoncelocationEdit extends Component {
                                                                 <a data-toggle="collapse" data-parent="#accordion"
                                                                    href="#collapseOne" aria-expanded="true"
                                                                    aria-controls="collapseOne">
-                                                                    <b>Caracteristique du bien uniquement pour
+                                                                    <b>Caractéristique du bien uniquement pour
                                                                         (Appartement,Maison,Terrain)</b>
                                                                 </a>
                                                             </div>
@@ -710,7 +707,6 @@ class AnnoncelocationEdit extends Component {
                                 </Form>
 
                             </div>
-
 
                         </div>
 

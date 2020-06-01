@@ -77,13 +77,11 @@ class AnnoncereservationIndex extends Component {
                                 <br />
                                 <div className="row">
 
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
                                         {mapAnnoncereservations}
 
                                     </div>
-
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
@@ -92,7 +90,6 @@ class AnnoncereservationIndex extends Component {
                                                 <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
                                             </NavLink>
                                         </div>
-
 
                                         <div className="card">
                                             <div className="card-body">

@@ -105,7 +105,7 @@ class AnnonceventeCreate extends Component {
             .then(() => {
                 $.notify({
                         //,
-                        message: 'Votre annonce a bien été mise à jour'
+                        message: 'Votre annonce a bien été mit à jour'
                     },
                     {
                         allow_dismiss: false,
@@ -159,7 +159,6 @@ class AnnonceventeCreate extends Component {
                     <nav className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
-
 
                     <div className="wrapper">
 
@@ -311,7 +310,7 @@ class AnnonceventeCreate extends Component {
                                                                 <a data-toggle="collapse" data-parent="#accordion"
                                                                    href="#collapseOne" aria-expanded="true"
                                                                    aria-controls="collapseOne">
-                                                                    <b>Caracteristique du bien uniquement pour
+                                                                    <b>Caractéristique du bien uniquement pour
                                                                         (Appartement,Maison,Terrain)</b>
                                                                 </a>
                                                             </div>
@@ -387,7 +386,7 @@ class AnnonceventeCreate extends Component {
                                                                                     </div>
                                                                                     <small>*optionnel: les champs ne sont
                                                                                         pas obligatoires vous avez le choix
-                                                                                        de le remplire ou pas</small>
+                                                                                        de les remplire ou pas</small>
                                                                                 </div>
 
                                                                             </div>

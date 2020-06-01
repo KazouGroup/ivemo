@@ -89,7 +89,7 @@ class Annoncereservationbyannoncetypebycity extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            text: "êtes-vous sûr de vouloir executer cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -160,7 +160,7 @@ class Annoncereservationbyannoncetypebycity extends Component {
         );
         return (
             <>
-                <Helmet title={`Locations d'appartements, villa, chambres et bien d'autres dans la ville de ${annoncereservationbycity.name || $name_site} - ${$name_site}`}/>
+                <Helmet title={`Locations d'appartements, villas, chambres et bien d'autres dans la ville de ${annoncereservationbycity.name || $name_site} - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
 
@@ -191,7 +191,6 @@ class Annoncereservationbyannoncetypebycity extends Component {
 
                                     </div>
 
-
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
@@ -199,8 +198,6 @@ class Annoncereservationbyannoncetypebycity extends Component {
                                                 <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
                                             </NavLink>
                                         </div>
-
-
 
                                         <div className="card">
                                             <div className="card-body">
@@ -248,13 +245,10 @@ class Annoncereservationbyannoncetypebycity extends Component {
                                             </div>
                                         </div>
 
-
                                     </div>
 
                                 </div>
                             </div>
-
-
 
                         </div>
 

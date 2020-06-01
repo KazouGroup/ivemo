@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import {Button, Form, Input} from "reactstrap";
+import { Button, Form, Input } from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import PropTypes from "prop-types";
@@ -23,8 +23,8 @@ class Annonceventebyannoncetypebycity extends Component {
             subject: '',
             object: 'Annonce double',
             errors: [],
-            annonceItem: {user:[]},
-            annonceventebycity: {annonceventes:{annoncetype:[],categoryannoncevente:[],city:[],user:[]}},
+            annonceItem: { user: [] },
+            annonceventebycity: { annonceventes: { annoncetype: [], categoryannoncevente: [], city: [], user: [] } },
 
         };
         this.deleteItem = this.deleteItem.bind(this);
@@ -46,7 +46,7 @@ class Annonceventebyannoncetypebycity extends Component {
         this.state.errors[event.target.name] = '';
     }
 
-    handleCheckClick(event){
+    handleCheckClick(event) {
         this.setState({
             object: event.target.value
         });
@@ -101,8 +101,8 @@ class Annonceventebyannoncetypebycity extends Component {
                 $('#contactNew').modal('hide');
 
                 $.notify({
-                        message: `Votre message a été bien envoyé à cette utilisateur`
-                    },
+                    message: `Votre message a bien été envoyé à cette utilisateur`
+                },
                     {
                         allow_dismiss: false,
                         type: 'info',
@@ -124,12 +124,11 @@ class Annonceventebyannoncetypebycity extends Component {
                     message: "",
                 });
             }).catch(error => {
-            this.setState({
-                errors: error.response.data.errors
-            });
-        })
+                this.setState({
+                    errors: error.response.data.errors
+                });
+            })
     }
-
 
     signalemessageItem(e) {
         e.preventDefault();
@@ -149,8 +148,8 @@ class Annonceventebyannoncetypebycity extends Component {
                 $('#addNew').modal('hide');
 
                 $.notify({
-                        message: `Cette annonce a été signalé avec succès`
-                    },
+                    message: `Cette annonce a été signalé avec succès`
+                },
                     {
                         allow_dismiss: false,
                         type: 'info',
@@ -170,21 +169,21 @@ class Annonceventebyannoncetypebycity extends Component {
                     message: "",
                 });
             }).catch(error => {
-            this.setState({
-                errors: error.response.data.errors
-            });
-        })
+                this.setState({
+                    errors: error.response.data.errors
+                });
+            })
     }
 
-    loadItems(){
+    loadItems() {
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCity = this.props.match.params.city;
-        let url = route('api.annonceventesbyannoncetypebycity_site',[itemannoncetype,itemCity]);
-        dyaxios.get(url).then(response => this.setState({annonceventebycity: response.data}));
+        let url = route('api.annonceventesbyannoncetypebycity_site', [itemannoncetype, itemCity]);
+        dyaxios.get(url).then(response => this.setState({ annonceventebycity: response.data }));
 
 
     }
-    unactiveItem(id){
+    unactiveItem(id) {
         Swal.fire({
             title: 'Désactiver l\'annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
@@ -200,17 +199,17 @@ class Annonceventebyannoncetypebycity extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('annonces_locations_unactivated.site',id);
+                let url = route('annonces_locations_unactivated.site', id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            // title: 'Update FAQ',
-                            //message: 'Annonce désactiver avec succès',
-                            message: "Cette annonce a été masquée aux utilisateurs",
-                            //url: "/profile/personal_settings/annonces_locations/",
-                            //target: "_blank"
-                        },
+                        // title: 'Update FAQ',
+                        //message: 'Annonce désactiver avec succès',
+                        message: "Cette annonce a été masquée aux utilisateurs",
+                        //url: "/profile/personal_settings/annonces_locations/",
+                        //target: "_blank"
+                    },
                         {
                             allow_dismiss: false,
                             type: 'info',
@@ -243,7 +242,7 @@ class Annonceventebyannoncetypebycity extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            text: "êtes-vous sûr de vouloir executer cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -255,15 +254,15 @@ class Annonceventebyannoncetypebycity extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('annonces_ventes_delete.site',[id]);
+                const url = route('annonces_ventes_delete.site', [id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            // title: 'Update',
-                            message: 'Annonce suprimée avec success'
-                        },
+                        // title: 'Update',
+                        message: 'Annonce suprimée avec succès'
+                    },
                         {
                             allow_dismiss: false,
                             type: 'primary',
@@ -294,26 +293,25 @@ class Annonceventebyannoncetypebycity extends Component {
         });
     }
 
-
     // lifecycle method
     componentDidMount() {
         this.loadItems();
     }
 
     render() {
-        const {annonceventebycity,annonceItem} = this.state;
+        const { annonceventebycity, annonceItem } = this.state;
         const mapAnnonceventes = annonceventebycity.annonceventes.length >= 0 ? (
             annonceventebycity.annonceventes.map(item => {
-                return(
-                    <AnnonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser}/>
+                return (
+                    <AnnonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser} />
                 )
             })
-        ):(
-            <AnnoncesListSkeleton/>
-        );
+        ) : (
+                <AnnoncesListSkeleton />
+            );
         return (
             <>
-                <HelmetSite title={`Ventes des maisons, villa, térrains et bien d'autres dans la ville de ${annonceventebycity.name || $name_site} - ${$name_site}`}/>
+                <HelmetSite title={`Ventes des maisons, villa, térrains et bien d'autres dans la ville de ${annonceventebycity.name || $name_site} - ${$name_site}`} />
 
                 <div className="about-us sidebar-collapse">
 
@@ -336,7 +334,7 @@ class Annonceventebyannoncetypebycity extends Component {
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="submit text-left">
                                             <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
-                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos résultats </b>
+                                                <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos résultats </b>
                                             </button>
                                         </div>
 
@@ -344,14 +342,11 @@ class Annonceventebyannoncetypebycity extends Component {
 
                                     </div>
 
-
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
-                                            <Navlinknewannoncevente {...this.props}/>
+                                            <Navlinknewannoncevente {...this.props} />
                                         </div>
-
-
 
                                         <div className="card">
                                             <div className="card-body">
@@ -359,7 +354,7 @@ class Annonceventebyannoncetypebycity extends Component {
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                            <Categoriesannoncereseventecity {...this.props} {...annonceventebycity}/>
+                                                            <Categoriesannoncereseventecity {...this.props} {...annonceventebycity} />
 
                                                             {/*
                                                               <div className="card card-plain">
@@ -392,29 +387,27 @@ class Annonceventebyannoncetypebycity extends Component {
                                                             </div>
                                                             */}
 
-
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
-
                                     </div>
 
                                     <div className="modal fade" id="addNew" tabIndex="-1" role="dialog" aria-labelledby="addNewLabel"
-                                         aria-hidden="true">
+                                        aria-hidden="true">
                                         <div className="modal-dialog modal-lg">
                                             <div className="modal-content">
                                                 <div className="modal-header">
                                                     <h5 className="modal-title"><b>Signaler des erreurs publicitaires</b></h5>
                                                     <button type="button" className="close" data-dismiss="modal"
-                                                            aria-label="Close">
+                                                        aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
 
-                                                <Form role="form"  onSubmit={this.signalemessageItem}  acceptCharset="UTF-8">
+                                                <Form role="form" onSubmit={this.signalemessageItem} acceptCharset="UTF-8">
 
                                                     <div className="modal-body">
 
@@ -433,8 +426,8 @@ class Annonceventebyannoncetypebycity extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Annonce double" onChange={this.handleCheckClick} checked={this.state.object === "Annonce double"}/>
+                                                                                name="object" id="object"
+                                                                                value="Annonce double" onChange={this.handleCheckClick} checked={this.state.object === "Annonce double"} />
                                                                             <span className="form-check-sign"></span>
                                                                             Annonce double
                                                                         </label>
@@ -442,8 +435,8 @@ class Annonceventebyannoncetypebycity extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Mauvaise catégorie" onChange={this.handleCheckClick} checked={this.state.object === "Mauvaise catégorie"}/>
+                                                                                name="object" id="object"
+                                                                                value="Mauvaise catégorie" onChange={this.handleCheckClick} checked={this.state.object === "Mauvaise catégorie"} />
                                                                             <span className="form-check-sign"></span>
                                                                             Mauvaise catégorie
                                                                         </label>
@@ -451,8 +444,8 @@ class Annonceventebyannoncetypebycity extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Mauvaise ville" onChange={this.handleCheckClick} checked={this.state.object === "Mauvaise ville"}/>
+                                                                                name="object" id="object"
+                                                                                value="Mauvaise ville" onChange={this.handleCheckClick} checked={this.state.object === "Mauvaise ville"} />
                                                                             <span className="form-check-sign"></span>
                                                                             Mauvaise ville
                                                                         </label>
@@ -460,8 +453,8 @@ class Annonceventebyannoncetypebycity extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Téléphone / e-mail incorrect" onChange={this.handleCheckClick} checked={this.state.object === "Téléphone / e-mail incorrect"}/>
+                                                                                name="object" id="object"
+                                                                                value="Téléphone / e-mail incorrect" onChange={this.handleCheckClick} checked={this.state.object === "Téléphone / e-mail incorrect"} />
                                                                             <span className="form-check-sign"></span>
                                                                             Téléphone / e-mail incorrect
                                                                         </label>
@@ -472,8 +465,8 @@ class Annonceventebyannoncetypebycity extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Erreur d'adresse / de carte" onChange={this.handleCheckClick} checked={this.state.object === "Erreur d'adresse / de carte"}/>
+                                                                                name="object" id="object"
+                                                                                value="Erreur d'adresse / de carte" onChange={this.handleCheckClick} checked={this.state.object === "Erreur d'adresse / de carte"} />
                                                                             <span className="form-check-sign"></span>
                                                                             Erreur d'adresse / de carte
                                                                         </label>
@@ -482,8 +475,8 @@ class Annonceventebyannoncetypebycity extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Propriété inexistante" onChange={this.handleCheckClick} checked={this.state.object === "Propriété inexistante"}/>
+                                                                                name="object" id="object"
+                                                                                value="Propriété inexistante" onChange={this.handleCheckClick} checked={this.state.object === "Propriété inexistante"} />
                                                                             <span className="form-check-sign"></span>
                                                                             Propriété inexistante
                                                                         </label>
@@ -491,8 +484,8 @@ class Annonceventebyannoncetypebycity extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Arnaque possible" onChange={this.handleCheckClick} checked={this.state.object === "Arnaque possible"}/>
+                                                                                name="object" id="object"
+                                                                                value="Arnaque possible" onChange={this.handleCheckClick} checked={this.state.object === "Arnaque possible"} />
                                                                             <span className="form-check-sign"></span>
                                                                             Arnaque possible
                                                                         </label>
@@ -500,8 +493,8 @@ class Annonceventebyannoncetypebycity extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Autre (précisez dans le commentaire)" onChange={this.handleCheckClick} checked={this.state.object === "Autre (précisez dans le commentaire)"}/>
+                                                                                name="object" id="object"
+                                                                                value="Autre (précisez dans le commentaire)" onChange={this.handleCheckClick} checked={this.state.object === "Autre (précisez dans le commentaire)"} />
                                                                             <span className="form-check-sign"></span>
                                                                             Autre (précisez dans le commentaire)
                                                                         </label>
@@ -514,19 +507,19 @@ class Annonceventebyannoncetypebycity extends Component {
                                                                 <div className="col-md-6">
                                                                     <div className="input-group">
                                                                         <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons users_circle-08"/></span>
+                                                                            <span className="input-group-text">
+                                                                                <i className="now-ui-icons users_circle-08" /></span>
                                                                         </div>
                                                                         <input id='full_name'
-                                                                               type='text'
-                                                                               required="required"
-                                                                               className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
-                                                                               name='full_name'
-                                                                               placeholder="Nom complet"
-                                                                               aria-label="Nom complet"
-                                                                               autoComplete="full_name"
-                                                                               value={this.state.full_name}
-                                                                               onChange={this.handleFieldChange}
+                                                                            type='text'
+                                                                            required="required"
+                                                                            className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
+                                                                            name='full_name'
+                                                                            placeholder="Nom complet"
+                                                                            aria-label="Nom complet"
+                                                                            autoComplete="full_name"
+                                                                            value={this.state.full_name}
+                                                                            onChange={this.handleFieldChange}
                                                                         />
                                                                         {this.renderErrorFor('full_name')}
                                                                     </div>
@@ -534,19 +527,19 @@ class Annonceventebyannoncetypebycity extends Component {
                                                                 <div className="col-md-6">
                                                                     <div className="input-group">
                                                                         <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons ui-1_email-85"/></span>
+                                                                            <span className="input-group-text">
+                                                                                <i className="now-ui-icons ui-1_email-85" /></span>
                                                                         </div>
                                                                         <input id='email'
-                                                                               type='email'
-                                                                               required="required"
-                                                                               className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                                                               name='email'
-                                                                               placeholder="Email"
-                                                                               aria-label="Email"
-                                                                               autoComplete="email"
-                                                                               value={this.state.email}
-                                                                               onChange={this.handleFieldChange}
+                                                                            type='email'
+                                                                            required="required"
+                                                                            className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
+                                                                            name='email'
+                                                                            placeholder="Email"
+                                                                            aria-label="Email"
+                                                                            autoComplete="email"
+                                                                            value={this.state.email}
+                                                                            onChange={this.handleFieldChange}
                                                                         />
                                                                         {this.renderErrorFor('email')}
                                                                     </div>
@@ -557,13 +550,13 @@ class Annonceventebyannoncetypebycity extends Component {
                                                             <div className="row">
 
                                                                 <div className="input-group">
-                                                       <textarea name="message" value={this.state.message}
-                                                                 onChange={this.handleFieldChange}
-                                                                 placeholder={'Pourquoi signalez-vous cette article?'}
-                                                                 className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                 id="message"
-                                                                 required="required"
-                                                                 rows="10" />
+                                                                    <textarea name="message" value={this.state.message}
+                                                                        onChange={this.handleFieldChange}
+                                                                        placeholder={'Pourquoi signalez-vous cette article?'}
+                                                                        className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
+                                                                        id="message"
+                                                                        required="required"
+                                                                        rows="10" />
                                                                     {this.renderErrorFor('message')}
                                                                 </div>
                                                             </div>
@@ -588,10 +581,10 @@ class Annonceventebyannoncetypebycity extends Component {
 
 
                                     <FormModalContactannonceUser {...this.props} {...annonceItem}
-                                                                 renderErrorFor={this.renderErrorFor}
-                                                                 handleFieldChange={this.handleFieldChange}
-                                                                 hasErrorFor={this.hasErrorFor}
-                                                                 sendmessageItem={this.sendmessageItem}/>
+                                        renderErrorFor={this.renderErrorFor}
+                                        handleFieldChange={this.handleFieldChange}
+                                        hasErrorFor={this.hasErrorFor}
+                                        sendmessageItem={this.sendmessageItem} />
 
                                 </div>
                             </div>

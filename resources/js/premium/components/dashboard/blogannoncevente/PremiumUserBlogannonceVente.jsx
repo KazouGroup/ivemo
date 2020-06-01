@@ -49,7 +49,7 @@ class PremiumUserBlogannonceVente extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette articles est visible aux utilisateurs",
+                            message: "Cette articles est désormais visible aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -101,7 +101,7 @@ class PremiumUserBlogannonceVente extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette article a été masquée aux utilisateurs",
+                            message: "Cette article a été masqué aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -135,7 +135,7 @@ class PremiumUserBlogannonceVente extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            text: "êtes-vous sûr de vouloir executer cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -159,7 +159,7 @@ class PremiumUserBlogannonceVente extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Articles suprimée avec success'
+                            message: 'Article suprimé avec succès'
                         },
                         {
                             allow_dismiss: false,

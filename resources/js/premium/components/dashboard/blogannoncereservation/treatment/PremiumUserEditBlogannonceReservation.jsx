@@ -86,7 +86,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
         }else{
             $.notify({
                     //,
-                    message: 'La fichier ne peut pas être supérieure à 15 MB'
+                    message: 'Le fichier ne peut pas être supérieure à 15 MB'
                 },
                 {
                     allow_dismiss: false,
@@ -243,7 +243,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            text: "êtes-vous sûr de vouloir executer cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -261,7 +261,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Article de blogs suprimée avec success'
+                            message: 'Article de blogs suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -384,12 +384,12 @@ class PremiumUserEditBlogannonceReservation extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">done</i>
                                             </div>
-                                            <p className="card-category"><b>Actives</b></p>
+                                            <p className="card-category"><b>Activés</b></p>
                                             <h3 className="card-title"><b>{this.dataactive_countFormatter(blogannoncereservationsactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">done</i> Articles actives
+                                                <i className="material-icons">done</i> Articles activés
                                             </div>
                                         </div>
                                     </div>
@@ -400,7 +400,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">remove</i>
                                             </div>
-                                            <p className="card-category"><b>Desactivés</b></p>
+                                            <p className="card-category"><b>Désactivés</b></p>
                                             <h3 className="card-title"><b>{this.dataunactive_countFormatter(blogannoncereservationsunactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
@@ -539,13 +539,13 @@ class PremiumUserEditBlogannonceReservation extends Component {
                                                         </div>
 
                                                         <div className="col-md-6">
-                                                            <label htmlFor="title">Selectionez la categorie</label>
+                                                            <label htmlFor="title">Selectionez la catégorie</label>
                                                             <FormGroup>
 
                                                                 <select name={'categoryannoncereservation_id'} value={this.state.categoryannoncereservation_id}
                                                                         className={`form-control ${this.hasErrorFor('categoryannoncereservation_id') ? 'is-invalid' : ''}`}
                                                                         id="categoryannoncereservation_id" onChange={this.handleFieldChange} required>
-                                                                    <option value="" disabled>Selectioner une category</option>
+                                                                    <option value="" disabled>Selectioner une catégorie</option>
                                                                     {categoryannoncereservations.map((item) => (
                                                                         <option key={item.id} value={item.id}>{item.name}</option>
                                                                     ))}
@@ -581,7 +581,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                             formats={this.formats}
-                                                                            placeholder="Laisser votre description..."
+                                                                            placeholder="Laisser votre déscription..."
                                                                             className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                             value={this.state.description || ''}
                                                                             onChange={this.handleChangeBody} />
@@ -601,8 +601,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
                                                     </button>
                                                 </div>
                                             </Form>
-
-
+                                            
                                         </div>
                                     </div>
                                 </div>

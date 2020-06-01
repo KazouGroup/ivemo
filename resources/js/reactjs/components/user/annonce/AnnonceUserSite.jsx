@@ -28,7 +28,6 @@ class AnnonceUserSite extends Component {
 
                 <div className="about-us sidebar-collapse">
 
-
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
                         <NavUserSite />
                     </nav>
@@ -413,15 +412,15 @@ class AnnonceUserSite extends Component {
                                                                         <table>
                                                                             <tbody>
                                                                                 <tr>
-                                                                                    <td> <a href="#pablo">Locations studio à Douala</a></td>
+                                                                                    <td> <a href="#pablo">Locations studios à Douala</a></td>
                                                                                     <td className="text-right"> 200 annonces</td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td> <a href="#pablo">Locations chambre à Douala</a></td>
+                                                                                    <td> <a href="#pablo">Locations chambres à Douala</a></td>
                                                                                     <td className="text-right"> 1 300 annonces</td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td> <a href="#pablo">Locations appartement 2 pièces à Douala</a></td>
+                                                                                    <td> <a href="#pablo">Locations appartements 2 pièces à Douala</a></td>
                                                                                     <td className="text-right"> 380 annonces</td>
                                                                                 </tr>
                                                                                 <tr>
@@ -441,7 +440,6 @@ class AnnonceUserSite extends Component {
                                                                     </div>
                                                                 </div>
                                                             </div>
-
 
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingThree">
@@ -479,17 +477,8 @@ class AnnonceUserSite extends Component {
                                         </div>
                                     </div>
 
-
-
-
-
-
-
-
                                 </div>
                             </div>
-
-
 
                         </div>
 

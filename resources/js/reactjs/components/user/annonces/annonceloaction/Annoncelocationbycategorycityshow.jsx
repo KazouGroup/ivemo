@@ -78,7 +78,7 @@ class Annoncelocationbycategorycityshow extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            text: "êtes-vous sûr de vouloir executer cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -97,7 +97,7 @@ class Annoncelocationbycategorycityshow extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec success'
+                            message: 'Annonce suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -237,8 +237,6 @@ class Annoncelocationbycategorycityshow extends Component {
                                                 </div>
                                             </div>
 
-
-
                                         </div>
 
                                         <div className="card">
@@ -252,12 +250,10 @@ class Annoncelocationbycategorycityshow extends Component {
                                             </div>
                                         </div>
 
-
                                         <div className="card">
                                             <div className="card-body">
 
                                               <ProfileForallAnnoncelocationShow {...annoncelocation} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
-
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">

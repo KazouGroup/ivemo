@@ -293,13 +293,13 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                                         </div>
 
                                                         <div className="col-md-6">
-                                                            <label htmlFor="title">Selectionez la categorie</label>
+                                                            <label htmlFor="title">Selectionez la catégorie</label>
                                                             <FormGroup>
 
                                                                 <select name={'categoryannoncelocation_id'} value={this.state.categoryannoncelocation_id}
                                                                         className={`form-control ${this.hasErrorFor('categoryannoncelocation_id') ? 'is-invalid' : ''}`}
                                                                         id="categoryannoncelocation_id" onChange={this.handleFieldChange} required>
-                                                                    <option value="" disabled>Selectioner une category</option>
+                                                                    <option value="" disabled>Selectioner une catégorie</option>
                                                                     {categoryannoncelocations.map((item) => (
                                                                         <option key={item.id} value={item.id}>{item.name}</option>
                                                                     ))}
@@ -352,7 +352,7 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                                         <i className="now-ui-icons ui-1_simple-delete"/> Annuler
                                                     </Link>
                                                     <button className="btn btn-primary" type="submit">
-                                                        <b>Mettre à jour l'article de blog</b>
+                                                        <b>Poster un article de blog</b>
                                                     </button>
                                                 </div>
                                             </form>

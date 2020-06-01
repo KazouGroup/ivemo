@@ -44,7 +44,7 @@ class ProfileForallAnnonceShow extends Component {
                                 {($userIvemo.id === this.props.user.id || $userIvemo.id === this.props.user_id) && (
                                     <>
                                         <UncontrolledTooltip placement="bottom" target="TooltipEditer">
-                                            Desactiver cette annonce
+                                            Désactiver cette annonce
                                         </UncontrolledTooltip>
 
                                         <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}
@@ -83,7 +83,7 @@ class ProfileForallAnnonceShow extends Component {
                         <div className="row">
                             <div className="col-md-6 col-6">
                                 <UncontrolledTooltip placement="bottom" target="TooltipShowprofile">
-                                    Profile de {this.props.user.first_name}
+                                    Profil de {this.props.user.first_name}
                                 </UncontrolledTooltip>
                                 <Link to={`/pro/${this.props.user.slug}/`} title="Profil agence" id="TooltipShowprofile">
                                     <small><b>Consulter le profil de l'utilisateur</b></small>
@@ -109,8 +109,7 @@ class ProfileForallAnnonceShow extends Component {
                     </>
                 )}
             </>
-
-
+            
         )
     }
 

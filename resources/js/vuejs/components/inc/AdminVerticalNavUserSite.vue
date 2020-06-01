@@ -315,7 +315,7 @@
                                 </router-link>
                             </li>
                             <li class="nav-item ">
-                                <router-link class="nav-link" :to="{ name: 'contactusersfaqs.index'}">
+                                <router-link class="nav-link" :to="{ name: 'contactusersforadverts.index'}">
                                     <span class="sidebar-mini"> CFA </span>
                                     <span class="sidebar-normal"> Contacts For Adverts</span>
                                 </router-link>

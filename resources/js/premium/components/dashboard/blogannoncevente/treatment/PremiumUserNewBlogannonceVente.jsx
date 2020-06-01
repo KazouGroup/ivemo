@@ -83,7 +83,7 @@ class PremiumUserNewBlogannonceVente extends Component {
         }else{
             $.notify({
                     //,
-                    message: 'La fichier ne peut pas être supérieure à 15 MB'
+                    message: 'Le fichier ne peut pas être supérieure à 15 MB'
                 },
                 {
                     allow_dismiss: false,
@@ -200,7 +200,7 @@ class PremiumUserNewBlogannonceVente extends Component {
                                                 <i className="material-icons">view_headline</i>
                                             </div>
                                             <p className="card-category">
-                                                <b>Articles sur les annonces locations</b>
+                                                <b>Articles sur les annonces vents</b>
                                             </p>
                                             <h3 className="card-title" style={{ color: "red" }}>
                                                 <b>{this.data_countFormatter(blogannonceventes_count)}</b>
@@ -209,7 +209,7 @@ class PremiumUserNewBlogannonceVente extends Component {
                                         <div className="card-footer">
                                             <div className="stats">
                                                 <i className="material-icons">view_headline</i>
-                                                <b>Articles sur les annonces locations</b>
+                                                <b>Articles sur les annonces vents</b>
                                             </div>
                                         </div>
                                     </div>
@@ -292,13 +292,13 @@ class PremiumUserNewBlogannonceVente extends Component {
                                                         </div>
 
                                                         <div className="col-md-6">
-                                                            <label htmlFor="title">Selectionez la categorie</label>
+                                                            <label htmlFor="title">Selectionez la catégorie</label>
                                                             <FormGroup>
 
                                                                 <select name={'categoryannoncevente_id'} value={this.state.categoryannoncevente_id}
                                                                         className={`form-control ${this.hasErrorFor('categoryannoncevente_id') ? 'is-invalid' : ''}`}
                                                                         id="categoryannoncevente_id" onChange={this.handleFieldChange}>
-                                                                    <option value="" disabled>Selectioner une category</option>
+                                                                    <option value="" disabled>Selectioner une catégorie</option>
                                                                     {categoryannonceventes.map((item) => (
                                                                         <option key={item.id} value={item.id}>{item.name}</option>
                                                                     ))}
@@ -352,7 +352,7 @@ class PremiumUserNewBlogannonceVente extends Component {
                                                         <i className="now-ui-icons ui-1_simple-delete"/> Annuler
                                                     </Link>
                                                     <button className="btn btn-primary" type="submit">
-                                                        <b>Mettre à jour l'article de blog</b>
+                                                        <b>Poster l'article de blog</b>
                                                     </button>
                                                 </div>
                                             </form>
