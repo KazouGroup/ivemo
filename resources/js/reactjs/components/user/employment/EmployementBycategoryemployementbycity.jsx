@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, Fragment} from "react";
 import {Link,NavLink } from "react-router-dom";
 import moment from 'moment';
 import NavUserSite from "../../inc/user/NavUserSite";
@@ -12,6 +12,7 @@ import EmploymentListSkeleton from "../../inc/user/employment/EmploymentListSkel
 import Navlinknewemployment from "./treatement/Navlinknewemployment";
 import EmployementList from "./inc/EmployementList";
 import HelmetSite from "../../inc/user/HelmetSite";
+import Navemployementsbycategoryemployment from "./inc/Navemployementsbycategoryemployment";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -280,19 +281,8 @@ class EmployementBycategoryemployementbycity extends Component {
                                             </div>
                                         </div>
 
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                        <Navemployementsbycategoryemployment {...this.props} {...annoncebycity}/>
 
-                                                            <Navemployements/>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
 
 

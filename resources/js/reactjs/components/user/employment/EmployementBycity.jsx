@@ -13,6 +13,7 @@ import Navlinknewemployment from "./treatement/Navlinknewemployment";
 import EmployementList from "./inc/EmployementList";
 import HelmetSite from "../../inc/user/HelmetSite";
 import Navemployementsbycity from "./inc/Navemployementsbycity";
+import Navemployementsbycategoryemployment from "./inc/Navemployementsbycategoryemployment";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -21,7 +22,6 @@ class EmployementBycity extends Component {
         super(props);
         this.state = {
             cityemployment:{employments:{categoryemployment:[],user:[],city:[]},user:[]},
-            categoryemployments:{user:[]}
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -138,22 +138,14 @@ class EmployementBycity extends Component {
     loadItems(){
         let itemCity = this.props.match.params.city;
         dyaxios.get(route('api.employmentcity_site', [itemCity])).then(response => this.setState({ cityemployment: response.data }));
-        dyaxios.get(route('api.categoryemploymentcitycount_site', [itemCity])).then(response => this.setState({ categoryemployments: response.data }));
     }
 
     componentDidMount() {
         this.loadItems();
     }
 
-    getdataString(employments_count, precision) {
-        const abbrev = ['', 'k', 'M', 'B', 'T'];
-        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(employments_count)) / 3);
-        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
-        const suffix = abbrev[order];
-        return (employments_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
-    }
     render() {
-        const {categoryemployments,cityemployment} = this.state;
+        const {cityemployment} = this.state;
         const mapEmployments = cityemployment.employments.length >= 0 ? (
             cityemployment.employments.map(item => {
                 return(
@@ -239,57 +231,8 @@ class EmployementBycity extends Component {
                                             </div>
                                         </div>
 
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                        <Navemployementsbycategoryemployment {...this.props} {...cityemployment}/>
 
-
-                                                            <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingOne">
-                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <b>Rubriques connexes à {cityemployment.name || ""}</b>
-                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
-                                                                    </a>
-                                                                </div>
-                                                                <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                                                                    <div className="card-body">
-                                                                        <table>
-                                                                            <tbody>
-
-                                                                            {categoryemployments.length > 0 ?
-
-                                                                                <Fragment>
-                                                                                    {categoryemployments.map((item) => (
-                                                                                        <tr key={item.id}>
-                                                                                            <td>
-                                                                                                <NavLink to={`/employments/${item.slug}/${cityemployment.slug}/`}>
-                                                                                                    <strong>{item.name || <Skeleton width={80} />}</strong>
-                                                                                                </NavLink>
-                                                                                            </td>
-                                                                                            <td className="text-right"> {this.getdataString(item.employments_count)} {item.employments_count > 1 ? "annonces" : "annonce"}</td>
-                                                                                        </tr>
-                                                                                    ))}
-                                                                                </Fragment>
-                                                                                :
-
-                                                                                <NavannoncecategorySkeleton/>
-                                                                            }
-
-
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
 
 
