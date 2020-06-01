@@ -52,7 +52,8 @@ class LoginUser extends Component {
         };
         dyaxios.post(route('login'), item)
             .then(() => {
-                window.location.replace(`/`);
+                this.props.history.push(`/`);
+                window.location.reload(true);
             }).catch(error => {
                 this.setState({
                     errors: error.response.data.errors

@@ -51,9 +51,9 @@ class WorkwithusIndexSite extends Component {
                             <div className="content-center">
                                 <div className="row">
                                     <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">
+                                        <h2 className="title">
                                             L'immobilier change. Changeons-le ensemble.
-                                        </h3>
+                                        </h2>
                                     </div>
                                 </div>
                             </div>

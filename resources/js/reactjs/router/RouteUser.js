@@ -129,6 +129,7 @@ import PrivateUserEmployments from "../components/user/profile/employments/priva
 import PrivateUserEmploymentsByCategoryemployment
     from "../components/user/profile/employments/private/PrivateUserEmploymentsByCategoryemployment";
 import PublicUserEmployments from "../components/user/profile/employments/public/PublicUserEmployments";
+import EmployementBycity from "../components/user/employment/EmployementBycity";
 
 
 const RouteUser = props => (
@@ -251,7 +252,8 @@ const RouteUser = props => (
 
           <Route exact path="/employments/" component={EmployementIndexSite}/>
           <Route exact path="/employment/ab/new/" component={EmploymentCreate}/>
-          <Route exact path="/employment/:employment/edit/" component={EmploymentEdit}/>
+          <Route exact path="/employment/ab/:employment/edit/" component={EmploymentEdit}/>
+          <Route exact path="/employment/:city/" component={withRouter(EmployementBycity)}/>
           <Route exact path="/employments/:categoryemployment/" component={withRouter(EmployementBycategoryemployement)}/>
           <Route exact path="/employments/:categoryemployment/:city/" component={withRouter(EmployementBycategoryemployementbycity)}/>
           <Route exact path="/employments/:categoryemployment/:city/:employment/" component={withRouter(EmployementShowUserSite)}/>

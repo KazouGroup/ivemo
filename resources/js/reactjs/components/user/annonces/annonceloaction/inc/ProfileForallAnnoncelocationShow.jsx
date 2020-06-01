@@ -34,6 +34,12 @@ class ProfileForallAnnoncelocationShow extends Component {
                         </div>
                     </div>
                     <div className="text-right ml-auto">
+                        <UncontrolledTooltip placement="bottom" target="TooltipCopie">
+                        Copier le lien
+                        </UncontrolledTooltip>
+                        <Button className="btn btn-icon btn-sm btn-primary" id="TooltipCopie" onClick={() => this.props.copyToClipboard()}>
+                            <i className="now-ui-icons arrows-1_share-66"/>
+                        </Button>
                         <UncontrolledTooltip placement="bottom" target="TooltipPhone">
                             3425712192
                         </UncontrolledTooltip>
@@ -48,7 +54,7 @@ class ProfileForallAnnoncelocationShow extends Component {
 
                         {!$guest && (
                             <>
-                                {($userIvemo.id === this.props.user.id || $userIvemo.id === this.props.user_id) && (
+                                {($userIvemo.id === this.props.user.id && $userIvemo.id === this.props.user_id) && (
                                     <>
                                         <a href={`#${this.props.visits_count}`}
                                            className="btn btn-sm btn-secondary">

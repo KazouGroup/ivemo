@@ -239,14 +239,14 @@ class EmployementBycategoryemployementbycity extends Component {
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
                                                             <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingOne">
-                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <b>{categoryemployment.name} </b>
+                                                                <div className="card-header" role="tab" id="headingTwo">
+                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                        <b>{categoryemployment.name || "Villes"} </b>
                                                                         <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
 
-                                                                <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                                                <div id="collapseTwo" className="collapse show" role="tabpanel" aria-labelledby="headingTwo">
                                                                     <div className="card-body">
                                                                         <table>
                                                                             <tbody>
@@ -257,7 +257,7 @@ class EmployementBycategoryemployementbycity extends Component {
                                                                                         <tr key={item.id}>
                                                                                             <td>
                                                                                                 <NavLink to={`/employments/${categoryemployment.slug}/${item.slug}/`}>
-                                                                                                     <b style={{ textTransform: "lowercase" }}>{categoryemployment.name}</b> à <b>{item.name}</b>
+                                                                                                    <b style={{ textTransform: "lowercase" }}>{categoryemployment.name}</b> à <b>{item.name}</b>
                                                                                                 </NavLink>
                                                                                             </td>
                                                                                             <td className="text-right"> {this.getdataString(item.employments_count)}  {item.employments_count > 1 ? "annonces" : "annonce"}</td>
@@ -273,6 +273,18 @@ class EmployementBycategoryemployementbycity extends Component {
 
 
                                                             </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
                                                             <Navemployements/>
 

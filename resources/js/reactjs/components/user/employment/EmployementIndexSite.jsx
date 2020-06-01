@@ -12,6 +12,7 @@ import Navlinknewemployment from "./treatement/Navlinknewemployment";
 import SignalFromEmployementForShow from "./inc/SignalFromEmployementForShow";
 import EmployementList from "./inc/EmployementList";
 import HelmetSite from "../../inc/user/HelmetSite";
+import Navemployementsbycity from "./inc/Navemployementsbycity";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -222,6 +223,20 @@ class EmployementIndexSite extends Component {
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
                                                             <Navemployements/>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+
+                                                            <Navemployementsbycity/>
 
                                                         </div>
                                                     </div>
