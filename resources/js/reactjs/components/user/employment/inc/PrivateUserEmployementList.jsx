@@ -47,9 +47,13 @@ class PrivateUserEmployementList extends Component {
                                           </a>
                                      </span>
                                     <br/>
+                                    {/**
+                                     * 
+                                     
                                     <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`}>
                                         <span dangerouslySetInnerHTML={this.getDescription()}/>
                                     </a>
+                                     */}
 
                                 <br/>
                                 <div className="card-header d-flex align-items-center">
