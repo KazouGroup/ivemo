@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import {Button, Form, Input} from "reactstrap";
+import { Button, Form, Input } from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import Categoriesannoncereselocation from "./inc/Categoriesannoncereselocation";
@@ -23,8 +23,8 @@ class AnnoncelocationIndex extends Component {
             subject: '',
             object: 'Annonce double',
             errors: [],
-            annonceItem: {user:[]},
-            annoncelocations: {categoryannoncelocation:[],city:[],user:[]},
+            annonceItem: { user: [] },
+            annoncelocations: { categoryannoncelocation: [], city: [], user: [] },
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -46,7 +46,7 @@ class AnnoncelocationIndex extends Component {
         this.state.errors[event.target.name] = '';
     }
 
-    handleCheckClick(event){
+    handleCheckClick(event) {
         this.setState({
             object: event.target.value
         });
@@ -101,8 +101,8 @@ class AnnoncelocationIndex extends Component {
                 $('#contactNew').modal('hide');
 
                 $.notify({
-                        message: `Votre message a été bien envoyé à cette utilisateur`
-                    },
+                    message: `Votre message a bien été envoyé à cette utilisateur`
+                },
                     {
                         allow_dismiss: false,
                         type: 'info',
@@ -124,10 +124,10 @@ class AnnoncelocationIndex extends Component {
                     message: "",
                 });
             }).catch(error => {
-            this.setState({
-                errors: error.response.data.errors
-            });
-        })
+                this.setState({
+                    errors: error.response.data.errors
+                });
+            })
     }
 
 
@@ -149,8 +149,8 @@ class AnnoncelocationIndex extends Component {
                 $('#addNew').modal('hide');
 
                 $.notify({
-                        message: `Cette annonce a été signalé avec succès`
-                    },
+                    message: `Cette annonce a été signalé avec succès`
+                },
                     {
                         allow_dismiss: false,
                         type: 'info',
@@ -170,13 +170,13 @@ class AnnoncelocationIndex extends Component {
                     message: "",
                 });
             }).catch(error => {
-            this.setState({
-                errors: error.response.data.errors
-            });
-        })
+                this.setState({
+                    errors: error.response.data.errors
+                });
+            })
     }
 
-    unactiveItem(id){
+    unactiveItem(id) {
         Swal.fire({
             title: 'Désactiver l\'annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
@@ -192,19 +192,19 @@ class AnnoncelocationIndex extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('annonces_locations_unactivated.site',id);
+                let url = route('annonces_locations_unactivated.site', id);
                 dyaxios.get(url).then(() => {
 
                     let isNotId = item => item.id !== id;
                     let updatedItems = this.state.annoncelocations.filter(isNotId);
-                    this.setState({annoncelocations: updatedItems});
+                    this.setState({ annoncelocations: updatedItems });
 
                     /** Alert notify bootstrapp **/
                     $.notify({
 
-                            //message: 'Annonce désactiver avec succès',
-                            message: "Cette annonce a été masquée au utilisateur",
-                        },
+                        //message: 'Annonce désactiver avec succès',
+                        message: "Cette annonce a été masquée au utilisateur",
+                    },
                         {
                             allow_dismiss: false,
                             type: 'info',
@@ -236,7 +236,7 @@ class AnnoncelocationIndex extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            text: "êtes-vous sûr de vouloir executer cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -248,20 +248,20 @@ class AnnoncelocationIndex extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('annonces_locations_delete.site',[id]);
+                const url = route('annonces_locations_delete.site', [id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
 
                     let isNotId = item => item.id !== id;
                     let updatedItems = this.state.annoncelocations.filter(isNotId);
-                    this.setState({annoncelocations: updatedItems});
+                    this.setState({ annoncelocations: updatedItems });
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            // title: 'Update',
-                            message: 'Annonce suprimée avec success'
-                        },
+                        // title: 'Update',
+                        message: 'Annonce suprimée avec succès'
+                    },
                         {
                             allow_dismiss: false,
                             type: 'primary',
@@ -290,10 +290,10 @@ class AnnoncelocationIndex extends Component {
         });
     }
 
-    loadItems(){
+    loadItems() {
         let itemannoncetype = this.props.match.params.annoncetype;
         let url = route('api.annoncelocationbyannoncetype_site', itemannoncetype);
-        dyaxios.get(url).then(response => this.setState({annoncelocations: response.data.data,}));
+        dyaxios.get(url).then(response => this.setState({ annoncelocations: response.data.data, }));
     }
 
     // lifecycle method
@@ -302,20 +302,20 @@ class AnnoncelocationIndex extends Component {
     }
 
     render() {
-        const {annoncelocations,annonceItem} = this.state;
+        const { annoncelocations, annonceItem } = this.state;
         const mapAnnoncelocations = annoncelocations.length >= 0 ? (
             annoncelocations.map(item => {
-                return(
-                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser}/>
+                return (
+                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser} />
                 )
             })
-        ):(
-            <AnnoncesListSkeleton/>
-        );
+        ) : (
+                <AnnoncesListSkeleton />
+            );
 
         return (
             <>
-                <HelmetSite title={`Bon plan de location de chambre, studio un appartement, maison ou une villa - ${$name_site}`}/>
+                <HelmetSite title={`Bon plan de location de chambre, studio un appartement, maison ou une villa - ${$name_site}`} />
 
                 <div className="landing-page sidebar-collapse">
 
@@ -330,13 +330,13 @@ class AnnoncelocationIndex extends Component {
                             </div>
 
                             <div className="content-center">
-                                <br/>
+                                <br />
                                 <div className="row">
                                     <div className="col-md-10 ml-auto mr-auto">
                                         <div className="text-center">
                                             <h4 className="title">Location des biens</h4>
                                             <p className="description">
-                                               <b> Trouver une maison,un studio, une chambre ou un appartement et plien d'autre bien à louer</b>
+                                                <b> Trouver une maison,un studio, une chambre ou un appartement et plien d'autre bien à louer</b>
                                             </p>
                                         </div>
                                     </div>
@@ -352,10 +352,10 @@ class AnnoncelocationIndex extends Component {
                                                             <div className="input-group">
                                                                 <div className="input-group-prepend">
                                                                     <span className="input-group-text">
-                                                                        <i className="now-ui-icons text_caps-small"/></span>
+                                                                        <i className="now-ui-icons text_caps-small" /></span>
                                                                 </div>
                                                                 <input type="text" className="form-control"
-                                                                       placeholder="Que cherchez-vous ?"/>
+                                                                    placeholder="Que cherchez-vous ?" />
                                                             </div>
                                                         </div>
 
@@ -363,12 +363,18 @@ class AnnoncelocationIndex extends Component {
                                                             <div className="input-group">
                                                                 <div className="input-group-prepend">
                                                                     <span className="input-group-text">
-                                                                        <i className="now-ui-icons text_bold"/></span>
+                                                                        <i className="now-ui-icons text_bold" /></span>
                                                                 </div>
                                                                 <input type="text" className="form-control"
-                                                                       placeholder="Ville, quartier"/>
+                                                                    placeholder="Ville, quartier" />
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                    <br />
+                                                    <div className="submit text-center">
+                                                        <button type="submit" className="btn btn-primary ">
+                                                            <b>Voir les annonces</b>
+                                                        </button>
                                                         <div className="col-sm-4">
                                                             <div className="input-group">
                                                             <div className="submit text-center">
@@ -378,7 +384,6 @@ class AnnoncelocationIndex extends Component {
                                                             </div>
                                                             </div>
                                                         </div>
-
                                                        
                                                     </div>
 
@@ -401,13 +406,12 @@ class AnnoncelocationIndex extends Component {
                                 <br />
                                 <div className="row">
 
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
-                                        {!$guest &&(
+                                        {!$guest && (
                                             <>
-                                                {!$userIvemo.email_verified_at &&(
-                                                    <LinkValicationEmail/>
+                                                {!$userIvemo.email_verified_at && (
+                                                    <LinkValicationEmail />
                                                 )}
                                             </>
                                         )}
@@ -415,7 +419,6 @@ class AnnoncelocationIndex extends Component {
                                         {mapAnnoncelocations}
 
                                     </div>
-
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
@@ -429,7 +432,7 @@ class AnnoncelocationIndex extends Component {
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                            <Categoriesannoncereselocation/>
+                                                            <Categoriesannoncereselocation />
 
                                                         </div>
                                                     </div>
@@ -439,18 +442,18 @@ class AnnoncelocationIndex extends Component {
                                     </div>
 
                                     <div className="modal fade" id="addNew" tabIndex="-1" role="dialog" aria-labelledby="addNewLabel"
-                                         aria-hidden="true">
+                                        aria-hidden="true">
                                         <div className="modal-dialog modal-lg">
                                             <div className="modal-content">
                                                 <div className="modal-header">
                                                     <h5 className="modal-title"><b>Signaler des erreurs publicitaires</b></h5>
                                                     <button type="button" className="close" data-dismiss="modal"
-                                                            aria-label="Close">
+                                                        aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
 
-                                                <Form role="form"  onSubmit={this.signalemessageItem}  acceptCharset="UTF-8">
+                                                <Form role="form" onSubmit={this.signalemessageItem} acceptCharset="UTF-8">
 
                                                     <div className="modal-body">
 
@@ -469,8 +472,8 @@ class AnnoncelocationIndex extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Annonce double" onChange={this.handleCheckClick} checked={this.state.object === "Annonce double"}/>
+                                                                                name="object" id="object"
+                                                                                value="Annonce double" onChange={this.handleCheckClick} checked={this.state.object === "Annonce double"} />
                                                                             <span className="form-check-sign"></span>
                                                                             Annonce double
                                                                         </label>
@@ -478,8 +481,8 @@ class AnnoncelocationIndex extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Mauvaise catégorie" onChange={this.handleCheckClick} checked={this.state.object === "Mauvaise catégorie"}/>
+                                                                                name="object" id="object"
+                                                                                value="Mauvaise catégorie" onChange={this.handleCheckClick} checked={this.state.object === "Mauvaise catégorie"} />
                                                                             <span className="form-check-sign"></span>
                                                                             Mauvaise catégorie
                                                                         </label>
@@ -487,8 +490,8 @@ class AnnoncelocationIndex extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Mauvaise ville" onChange={this.handleCheckClick} checked={this.state.object === "Mauvaise ville"}/>
+                                                                                name="object" id="object"
+                                                                                value="Mauvaise ville" onChange={this.handleCheckClick} checked={this.state.object === "Mauvaise ville"} />
                                                                             <span className="form-check-sign"></span>
                                                                             Mauvaise ville
                                                                         </label>
@@ -496,8 +499,8 @@ class AnnoncelocationIndex extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Téléphone / e-mail incorrect" onChange={this.handleCheckClick} checked={this.state.object === "Téléphone / e-mail incorrect"}/>
+                                                                                name="object" id="object"
+                                                                                value="Téléphone / e-mail incorrect" onChange={this.handleCheckClick} checked={this.state.object === "Téléphone / e-mail incorrect"} />
                                                                             <span className="form-check-sign"></span>
                                                                             Téléphone / e-mail incorrect
                                                                         </label>
@@ -508,8 +511,8 @@ class AnnoncelocationIndex extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Erreur d'adresse / de carte" onChange={this.handleCheckClick} checked={this.state.object === "Erreur d'adresse / de carte"}/>
+                                                                                name="object" id="object"
+                                                                                value="Erreur d'adresse / de carte" onChange={this.handleCheckClick} checked={this.state.object === "Erreur d'adresse / de carte"} />
                                                                             <span className="form-check-sign"></span>
                                                                             Erreur d'adresse / de carte
                                                                         </label>
@@ -518,8 +521,8 @@ class AnnoncelocationIndex extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Propriété inexistante" onChange={this.handleCheckClick} checked={this.state.object === "Propriété inexistante"}/>
+                                                                                name="object" id="object"
+                                                                                value="Propriété inexistante" onChange={this.handleCheckClick} checked={this.state.object === "Propriété inexistante"} />
                                                                             <span className="form-check-sign"></span>
                                                                             Propriété inexistante
                                                                         </label>
@@ -527,8 +530,8 @@ class AnnoncelocationIndex extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Arnaque possible" onChange={this.handleCheckClick} checked={this.state.object === "Arnaque possible"}/>
+                                                                                name="object" id="object"
+                                                                                value="Arnaque possible" onChange={this.handleCheckClick} checked={this.state.object === "Arnaque possible"} />
                                                                             <span className="form-check-sign"></span>
                                                                             Arnaque possible
                                                                         </label>
@@ -536,8 +539,8 @@ class AnnoncelocationIndex extends Component {
                                                                     <div className="form-check form-check-radio">
                                                                         <label className="form-check-label">
                                                                             <Input className="form-check-input" type="radio"
-                                                                                   name="object" id="object"
-                                                                                   value="Autre (précisez dans le commentaire)" onChange={this.handleCheckClick} checked={this.state.object === "Autre (précisez dans le commentaire)"}/>
+                                                                                name="object" id="object"
+                                                                                value="Autre (précisez dans le commentaire)" onChange={this.handleCheckClick} checked={this.state.object === "Autre (précisez dans le commentaire)"} />
                                                                             <span className="form-check-sign"></span>
                                                                             Autre (précisez dans le commentaire)
                                                                         </label>
@@ -550,19 +553,19 @@ class AnnoncelocationIndex extends Component {
                                                                 <div className="col-md-6">
                                                                     <div className="input-group">
                                                                         <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons users_circle-08"/></span>
+                                                                            <span className="input-group-text">
+                                                                                <i className="now-ui-icons users_circle-08" /></span>
                                                                         </div>
                                                                         <input id='full_name'
-                                                                               type='text'
-                                                                               required="required"
-                                                                               className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
-                                                                               name='full_name'
-                                                                               placeholder="Nom complet"
-                                                                               aria-label="Nom complet"
-                                                                               autoComplete="full_name"
-                                                                               value={this.state.full_name}
-                                                                               onChange={this.handleFieldChange}
+                                                                            type='text'
+                                                                            required="required"
+                                                                            className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
+                                                                            name='full_name'
+                                                                            placeholder="Nom complet"
+                                                                            aria-label="Nom complet"
+                                                                            autoComplete="full_name"
+                                                                            value={this.state.full_name}
+                                                                            onChange={this.handleFieldChange}
                                                                         />
                                                                         {this.renderErrorFor('full_name')}
                                                                     </div>
@@ -570,19 +573,19 @@ class AnnoncelocationIndex extends Component {
                                                                 <div className="col-md-6">
                                                                     <div className="input-group">
                                                                         <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons ui-1_email-85"/></span>
+                                                                            <span className="input-group-text">
+                                                                                <i className="now-ui-icons ui-1_email-85" /></span>
                                                                         </div>
                                                                         <input id='email'
-                                                                               type='email'
-                                                                               required="required"
-                                                                               className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                                                               name='email'
-                                                                               placeholder="Email"
-                                                                               aria-label="Email"
-                                                                               autoComplete="email"
-                                                                               value={this.state.email}
-                                                                               onChange={this.handleFieldChange}
+                                                                            type='email'
+                                                                            required="required"
+                                                                            className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
+                                                                            name='email'
+                                                                            placeholder="Email"
+                                                                            aria-label="Email"
+                                                                            autoComplete="email"
+                                                                            value={this.state.email}
+                                                                            onChange={this.handleFieldChange}
                                                                         />
                                                                         {this.renderErrorFor('email')}
                                                                     </div>
@@ -593,13 +596,13 @@ class AnnoncelocationIndex extends Component {
                                                             <div className="row">
 
                                                                 <div className="input-group">
-                                                       <textarea name="message" value={this.state.message}
-                                                                 onChange={this.handleFieldChange}
-                                                                 placeholder={'Pourquoi signalez-vous cette article?'}
-                                                                 className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                 id="message"
-                                                                 required="required"
-                                                                 rows="10" />
+                                                                    <textarea name="message" value={this.state.message}
+                                                                        onChange={this.handleFieldChange}
+                                                                        placeholder={'Pourquoi signalez-vous cette article?'}
+                                                                        className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
+                                                                        id="message"
+                                                                        required="required"
+                                                                        rows="10" />
                                                                     {this.renderErrorFor('message')}
                                                                 </div>
                                                             </div>
@@ -622,17 +625,14 @@ class AnnoncelocationIndex extends Component {
                                         </div>
                                     </div>
 
-
                                     <FormModalContactannonceUser {...this.props} {...annonceItem}
-                                     renderErrorFor={this.renderErrorFor}
-                                     handleFieldChange={this.handleFieldChange}
-                                     hasErrorFor={this.hasErrorFor}
-                                     sendmessageItem={this.sendmessageItem}/>
+                                        renderErrorFor={this.renderErrorFor}
+                                        handleFieldChange={this.handleFieldChange}
+                                        hasErrorFor={this.hasErrorFor}
+                                        sendmessageItem={this.sendmessageItem} />
 
                                 </div>
                             </div>
-
-
 
                         </div>
 

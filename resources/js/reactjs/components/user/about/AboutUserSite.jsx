@@ -42,11 +42,9 @@ class AboutUserSite extends Component {
                           </div>
                       </div>
 
-
                       <div className="main main-raised">
 
                           <div className="container">
-
 
                               <div className="row">
 
@@ -111,9 +109,7 @@ class AboutUserSite extends Component {
 
                           </div>
 
-
                       </div>
-
 
                       <FooterBigUserSite/>
                   </div>

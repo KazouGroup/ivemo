@@ -244,7 +244,7 @@ class PremiumUserEditBlogannonceLocation extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            text: "êtes-vous sûr de vouloir executer cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -262,7 +262,7 @@ class PremiumUserEditBlogannonceLocation extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Article de blogs suprimée avec success'
+                            message: 'Article de blogs suprimé avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -383,12 +383,12 @@ class PremiumUserEditBlogannonceLocation extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">done</i>
                                             </div>
-                                            <p className="card-category"><b>Actives</b></p>
+                                            <p className="card-category"><b>Activés</b></p>
                                             <h3 className="card-title"><b>{this.dataactive_countFormatter(blogannoncelocationsactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">done</i> Articles actives
+                                                <i className="material-icons">done</i> Articles activés
                                             </div>
                                         </div>
                                     </div>
@@ -399,7 +399,7 @@ class PremiumUserEditBlogannonceLocation extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">remove</i>
                                             </div>
-                                            <p className="card-category"><b>Desactivés</b></p>
+                                            <p className="card-category"><b>Désactivés</b></p>
                                             <h3 className="card-title"><b>{this.dataunactive_countFormatter(blogannoncelocationsunactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
@@ -538,7 +538,7 @@ class PremiumUserEditBlogannonceLocation extends Component {
                                                         </div>
 
                                                         <div className="col-md-6">
-                                                            <label htmlFor="title">Selectionez la categorie</label>
+                                                            <label htmlFor="title">Selectionez la catégorie</label>
                                                             <FormGroup>
 
                                                                 <select name={'categoryannoncelocation_id'} value={this.state.categoryannoncelocation_id}

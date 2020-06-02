@@ -49,7 +49,7 @@ class PremiumUserBlogannonceReservation extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                        message: "Cette articles est visible aux utilisateurs",
+                        message: "Cette articles est desormais visible aux utilisateurs",
                     },
                         {
                             allow_dismiss: false,
@@ -135,7 +135,7 @@ class PremiumUserBlogannonceReservation extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            text: "êtes-vous sûr de vouloir executer cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -159,7 +159,7 @@ class PremiumUserBlogannonceReservation extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                         // title: 'Update',
-                        message: 'Articles suprimée avec success'
+                        message: 'Article suprimée avec succès'
                     },
                         {
                             allow_dismiss: false,
@@ -294,12 +294,12 @@ class PremiumUserBlogannonceReservation extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">done</i>
                                             </div>
-                                            <p className="card-category"><b>Actives</b></p>
+                                            <p className="card-category"><b>Activés</b></p>
                                             <h3 className="card-title"><b>{this.dataactive_countFormatter(blogannoncereservationsactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">done</i> Articles actives
+                                                <i className="material-icons">done</i> Articles activés
                                             </div>
                                         </div>
                                     </div>
@@ -310,7 +310,7 @@ class PremiumUserBlogannonceReservation extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">remove</i>
                                             </div>
-                                            <p className="card-category"><b>Desactivés</b></p>
+                                            <p className="card-category"><b>Désactivés</b></p>
                                             <h3 className="card-title"><b>{this.dataunactive_countFormatter(blogannoncereservationsunactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">

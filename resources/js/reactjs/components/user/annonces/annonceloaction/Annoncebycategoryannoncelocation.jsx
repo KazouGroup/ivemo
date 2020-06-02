@@ -102,7 +102,7 @@ class Annoncebycategoryannoncelocation extends Component {
                 $('#contactNew').modal('hide');
 
                 $.notify({
-                        message: `Votre message a été bien envoyé à cette utilisateur`
+                        message: `Votre message a bien été envoyé à cette utilisateur`
                     },
                     {
                         allow_dismiss: false,
@@ -149,7 +149,7 @@ class Annoncebycategoryannoncelocation extends Component {
                 $('#addNew').modal('hide');
 
                 $.notify({
-                        message: `Cette annonce a été signalé avec succès`
+                        message: `Cette annonce a été signalée avec succès`
                     },
                     {
                         allow_dismiss: false,
@@ -189,7 +189,7 @@ class Annoncebycategoryannoncelocation extends Component {
 
     unactiveItem(id){
         Swal.fire({
-            title: 'Désactiver l\'annonce?',
+            title: 'Désactivé l\'annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -264,7 +264,7 @@ class Annoncebycategoryannoncelocation extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec success'
+                            message: 'Annonce suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -371,14 +371,11 @@ class Annoncebycategoryannoncelocation extends Component {
                                             <Navlinknewannoncelocation {...this.props} />
                                         </div>
 
-
-
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="row">
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-
 
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingThree">
@@ -414,7 +411,6 @@ class Annoncebycategoryannoncelocation extends Component {
                                                                     </div>
                                                                 </div>
 
-
                                                             </div>
 
                                                             <Categoriesannoncereselocation/>
@@ -424,7 +420,6 @@ class Annoncebycategoryannoncelocation extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
 
                                     </div>
 
@@ -452,7 +447,7 @@ class Annoncebycategoryannoncelocation extends Component {
                                                                 </div>
                                                             </div>
 
-                                                            <p className="category">Spécifie le type d'erreur</p>
+                                                            <p className="category">Spécifier le type d'erreur</p>
 
                                                             <div className="row">
                                                                 <div className="col-md-6">
@@ -585,7 +580,7 @@ class Annoncebycategoryannoncelocation extends Component {
                                                                 <div className="input-group">
                                                        <textarea name="message" value={this.state.message}
                                                                  onChange={this.handleFieldChange}
-                                                                 placeholder={'Pourquoi signalez-vous cette article?'}
+                                                                 placeholder={'Pourquoi signalez-vous cette annonce?'}
                                                                  className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
                                                                  id="message"
                                                                  required="required"
@@ -600,13 +595,11 @@ class Annoncebycategoryannoncelocation extends Component {
                                                                 </button>
                                                             </div>
 
-
                                                         </div>
 
                                                     </div>
 
                                                 </Form>
-
 
                                             </div>
                                         </div>
@@ -620,8 +613,6 @@ class Annoncebycategoryannoncelocation extends Component {
 
                                 </div>
                             </div>
-
-
 
                         </div>
 

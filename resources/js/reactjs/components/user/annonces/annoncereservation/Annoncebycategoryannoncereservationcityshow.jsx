@@ -119,7 +119,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                         <div className="card">
                                             <div className="card-body">
                                                 <h6 className="card-title">
-                                                    Description
+                                                    Déscription
                                                 </h6>
                                                 <span>Eres' daring 'Grigri Fortune' swimsuit has
                                                     the fit and coverage of a bikini in a one-piece silhouette.
@@ -129,7 +129,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                 </span>
                                                 <hr />
                                                 <h6 className="card-title">
-                                                    A L'interieur
+                                                    A L'intérieur
                                                 </h6>
                                                 <span>Eres' daring 'Grigri Fortune' swimsuit has
                                                     the fit and coverage of a bikini in a one-piece silhouette.
@@ -163,9 +163,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                                     <div className="col-md-12">
                                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-
                                                                         <FormContactAnnoncereservationUser {...this.props}/>
-
 
                                                                         </div>
                                                                     </div>
@@ -244,19 +242,12 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
 
                             </div>
 
-
-
                         </div>
-
-
-
 
                         <FooterBigUserSite />
                     </div>
                 </div>
             </>
-
-
 
         )
     }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import {Button, Form,Input, UncontrolledTooltip} from "reactstrap";
+import { Button, Form, Input, UncontrolledTooltip } from "reactstrap";
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import AgencesimmobilieList from "./inc/AgencesimmobilieList";
@@ -58,7 +58,7 @@ class AgencesimmobilieIndex extends Component {
         this.state.errors[event.target.name] = '';
     }
 
-    handleCheckClick(){
+    handleCheckClick() {
         this.setState({ status_confirm: this.state.status_confirm });
     };
     // Handle Errors
@@ -102,8 +102,8 @@ class AgencesimmobilieIndex extends Component {
                 $('#addNew').modal('hide');
 
                 $.notify({
-                        message: `Votre message a été bien envoyé à cette utilisateur`
-                    },
+                    message: `Votre message a bien été envoyé à cette utilisateur`
+                },
                     {
                         allow_dismiss: false,
                         type: 'info',
@@ -125,24 +125,24 @@ class AgencesimmobilieIndex extends Component {
                     message: "",
                 });
             }).catch(error => {
-            this.setState({
-                errors: error.response.data.errors
-            });
-        })
+                this.setState({
+                    errors: error.response.data.errors
+                });
+            })
     }
 
 
 
-    loadItems(){
+    loadItems() {
         let url = route('api.agencesimmobilie.site');
         dyaxios.get(url).then(response => {
-                this.setState({
-                    agencesimmobilies: response.data.data,
-                    activePage: response.data.current_page,
-                    itemsCountPerPage: response.data.per_page,
-                    totalItemsCount: response.data.total,
-                });
+            this.setState({
+                agencesimmobilies: response.data.data,
+                activePage: response.data.current_page,
+                itemsCountPerPage: response.data.per_page,
+                totalItemsCount: response.data.total,
             });
+        });
     }
 
     // lifecycle method
@@ -151,22 +151,21 @@ class AgencesimmobilieIndex extends Component {
     }
 
     render() {
-        const {agencesimmobilies,Itemagenceimmobilie} = this.state;
+        const { agencesimmobilies, Itemagenceimmobilie } = this.state;
         const mapAgenceimmobilies = agencesimmobilies.length >= 0 ? (
             agencesimmobilies.map(item => {
-                return(
-                    <AgencesimmobilieList key={item.id} {...item} contactUser={this.contactUser}/>
+                return (
+                    <AgencesimmobilieList key={item.id} {...item} contactUser={this.contactUser} />
                 )
             })
-        ):(
-            <AgenceimmobilieListSkeleton/>
-        );
+        ) : (
+                <AgenceimmobilieListSkeleton />
+            );
         return (
             <>
-                <Helmet title={`Agences immobilières - ${$name_site}`}/>
+                <Helmet title={`Agences immobilières - ${$name_site}`} />
 
                 <div className="about-us sidebar-collapse">
-
 
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
                         <NavUserSite />
@@ -195,13 +194,12 @@ class AgencesimmobilieIndex extends Component {
                                 <br />
                                 <div className="row">
 
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
-                                        {!$guest &&(
+                                        {!$guest && (
                                             <>
-                                                {!$userIvemo.email_verified_at &&(
-                                                    <LinkValicationEmail/>
+                                                {!$userIvemo.email_verified_at && (
+                                                    <LinkValicationEmail />
                                                 )}
                                             </>
                                         )}
@@ -223,7 +221,6 @@ class AgencesimmobilieIndex extends Component {
                                             linkClass="page-link"
                                         />
                                     </div>
-
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
@@ -249,36 +246,35 @@ class AgencesimmobilieIndex extends Component {
                                                                     <div className="card-body">
                                                                         <table>
                                                                             <tbody>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Locations studio à Douala</a></td>
-                                                                                <td className="text-right"> 200 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Locations chambre à Douala</a></td>
-                                                                                <td className="text-right"> 1 300 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Locations appartement 2 pièces à Douala</a></td>
-                                                                                <td className="text-right"> 380 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Locations appartement 3 pièces à Douala</a></td>
-                                                                                <td className="text-right"> 9 200 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Locations appartement 4 pièces à Douala</a></td>
-                                                                                <td className="text-right"> 5 200 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Locations appartement 5 pièces à Douala</a></td>
-                                                                                <td className="text-right"> 1 200 annonces</td>
-                                                                            </tr>
+                                                                                <tr>
+                                                                                    <td> <a href="#pablo">Locations studios à Douala</a></td>
+                                                                                    <td className="text-right"> 200 annonces</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> <a href="#pablo">Locations chambres à Douala</a></td>
+                                                                                    <td className="text-right"> 1 300 annonces</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> <a href="#pablo">Locations appartements 2 pièces à Douala</a></td>
+                                                                                    <td className="text-right"> 380 annonces</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> <a href="#pablo">Locations appartement 3 pièces à Douala</a></td>
+                                                                                    <td className="text-right"> 9 200 annonces</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> <a href="#pablo">Locations appartements 4 pièces à Douala</a></td>
+                                                                                    <td className="text-right"> 5 200 annonces</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> <a href="#pablo">Locations appartements 5 pièces à Douala</a></td>
+                                                                                    <td className="text-right"> 1 200 annonces</td>
+                                                                                </tr>
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
                                                                 </div>
                                                             </div>
-
 
                                                         </div>
                                                     </div>
@@ -287,21 +283,19 @@ class AgencesimmobilieIndex extends Component {
                                         </div>
                                     </div>
 
-
-
                                     <div className="modal fade" id="addNew" tabIndex="-1" role="dialog" aria-labelledby="addNewLabel"
-                                         aria-hidden="true">
+                                        aria-hidden="true">
                                         <div className="modal-dialog ">
                                             <div className="modal-content">
                                                 <div className="modal-header">
                                                     <h5 className="modal-title"><b>Contacter {Itemagenceimmobilie.first_name}</b></h5>
                                                     <button type="button" className="close" data-dismiss="modal"
-                                                            aria-label="Close">
+                                                        aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
 
-                                                <Form role="form"  onSubmit={this.sendmessageItem}  acceptCharset="UTF-8">
+                                                <Form role="form" onSubmit={this.sendmessageItem} acceptCharset="UTF-8">
 
                                                     <div className="modal-body">
 
@@ -310,18 +304,18 @@ class AgencesimmobilieIndex extends Component {
                                                             <div className="row">
                                                                 <div className="input-group">
                                                                     <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons users_circle-08"/></span>
+                                                                        <span className="input-group-text">
+                                                                            <i className="now-ui-icons users_circle-08" /></span>
                                                                     </div>
                                                                     <input id='full_name'
-                                                                           type='text'
-                                                                           className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
-                                                                           name='full_name'
-                                                                           placeholder="Nom complet"
-                                                                           aria-label="Nom complet"
-                                                                           autoComplete="full_name"
-                                                                           value={this.state.full_name}
-                                                                           onChange={this.handleFieldChange}
+                                                                        type='text'
+                                                                        className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
+                                                                        name='full_name'
+                                                                        placeholder="Nom complet"
+                                                                        aria-label="Nom complet"
+                                                                        autoComplete="full_name"
+                                                                        value={this.state.full_name}
+                                                                        onChange={this.handleFieldChange}
                                                                     />
                                                                     {this.renderErrorFor('full_name')}
                                                                 </div>
@@ -330,18 +324,18 @@ class AgencesimmobilieIndex extends Component {
                                                             <div className="row">
                                                                 <div className="input-group">
                                                                     <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons ui-1_email-85"/></span>
+                                                                        <span className="input-group-text">
+                                                                            <i className="now-ui-icons ui-1_email-85" /></span>
                                                                     </div>
                                                                     <input id='email'
-                                                                           type='email'
-                                                                           className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                                                           name='email'
-                                                                           placeholder="Email"
-                                                                           aria-label="Email"
-                                                                           autoComplete="email"
-                                                                           value={this.state.email}
-                                                                           onChange={this.handleFieldChange}
+                                                                        type='email'
+                                                                        className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
+                                                                        name='email'
+                                                                        placeholder="Email"
+                                                                        aria-label="Email"
+                                                                        autoComplete="email"
+                                                                        value={this.state.email}
+                                                                        onChange={this.handleFieldChange}
                                                                     />
                                                                     {this.renderErrorFor('email')}
                                                                 </div>
@@ -351,17 +345,17 @@ class AgencesimmobilieIndex extends Component {
 
                                                                 <div className="input-group">
                                                                     <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons tech_mobile"/></span>
+                                                                        <span className="input-group-text">
+                                                                            <i className="now-ui-icons tech_mobile" /></span>
                                                                     </div>
                                                                     <input id='phone'
-                                                                           type='text'
-                                                                           className={`form-control ${this.hasErrorFor('phone') ? 'is-invalid' : ''}`}
-                                                                           name='phone'
-                                                                           placeholder="Téléphone"
-                                                                           aria-label="Téléphone"
-                                                                           value={this.state.phone}
-                                                                           onChange={this.handleFieldChange}
+                                                                        type='text'
+                                                                        className={`form-control ${this.hasErrorFor('phone') ? 'is-invalid' : ''}`}
+                                                                        name='phone'
+                                                                        placeholder="Téléphone"
+                                                                        aria-label="Téléphone"
+                                                                        value={this.state.phone}
+                                                                        onChange={this.handleFieldChange}
                                                                     />
                                                                     {this.renderErrorFor('phone')}
                                                                 </div>
@@ -372,18 +366,18 @@ class AgencesimmobilieIndex extends Component {
 
                                                                 <div className="input-group">
                                                                     <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons users_circle-08"/></span>
+                                                                        <span className="input-group-text">
+                                                                            <i className="now-ui-icons users_circle-08" /></span>
                                                                     </div>
                                                                     <input id='subject'
-                                                                           type='text'
-                                                                           className={`form-control ${this.hasErrorFor('subject') ? 'is-invalid' : ''}`}
-                                                                           name='subject'
-                                                                           placeholder="Object..."
-                                                                           aria-label="Object"
-                                                                           autoComplete="subject"
-                                                                           value={this.state.subject}
-                                                                           onChange={this.handleFieldChange}
+                                                                        type='text'
+                                                                        className={`form-control ${this.hasErrorFor('subject') ? 'is-invalid' : ''}`}
+                                                                        name='subject'
+                                                                        placeholder="Object..."
+                                                                        aria-label="Object"
+                                                                        autoComplete="subject"
+                                                                        value={this.state.subject}
+                                                                        onChange={this.handleFieldChange}
                                                                     />
                                                                     {this.renderErrorFor('subject')}
                                                                 </div>
@@ -391,29 +385,28 @@ class AgencesimmobilieIndex extends Component {
                                                             <div className="row">
 
                                                                 <div className="input-group">
-                                                       <textarea name="message" value={this.state.message}
-                                                                 onChange={this.handleFieldChange}
-                                                                 placeholder={'Posez ici toutes vos questions !'}
-                                                                 className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                 id="message"
-                                                                 rows="10" />
+                                                                    <textarea name="message" value={this.state.message}
+                                                                        onChange={this.handleFieldChange}
+                                                                        placeholder={'Posez ici toutes vos questions !'}
+                                                                        className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
+                                                                        id="message"
+                                                                        rows="10" />
                                                                     {this.renderErrorFor('message')}
                                                                 </div>
                                                             </div>
 
                                                             <div className="form-check text-left">
                                                                 <label className="form-check-label">
-                                                                    <input type="checkbox" className="form-check-input" id="status_confirm" checked={this.state.status_confirm} value={this.state.status_confirm}  onChange={this.handleCheckClick} name="status_confirm" />
-                                                                    <span className="form-check-sign"/>
+                                                                    <input type="checkbox" className="form-check-input" id="status_confirm" checked={this.state.status_confirm} value={this.state.status_confirm} onChange={this.handleCheckClick} name="status_confirm" />
+                                                                    <span className="form-check-sign" />
                                                                     <span>Accepter <a href="/">politique de confidentialité</a></span>
                                                                 </label>
                                                             </div>
                                                             <div className="submit text-center">
                                                                 <button className="btn btn-primary btn-lg btn-block" type="submit">
-                                                                     <b>Contacter</b>
+                                                                    <b>Contacter</b>
                                                                 </button>
                                                             </div>
-
 
                                                         </div>
 
@@ -421,16 +414,12 @@ class AgencesimmobilieIndex extends Component {
 
                                                 </Form>
 
-
                                             </div>
                                         </div>
                                     </div>
 
-
                                 </div>
                             </div>
-
-
 
                         </div>
 

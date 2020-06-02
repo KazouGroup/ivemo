@@ -110,7 +110,7 @@ class AnnonceventeEdit extends Component {
             .then(() => {
                 $.notify({
                         //,
-                        message: 'Votre annonce a bien été mise à jour'
+                        message: 'Votre annonce a bien été mit à jour'
                     },
                     {
                         allow_dismiss: false,
@@ -238,7 +238,7 @@ class AnnonceventeEdit extends Component {
             /** Alert notify bootstrapp **/
             $.notify({
                     // title: 'Update',
-                    message: 'Annonce désactiver avec succès'
+                    message: 'Annonce désactivé avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -306,11 +306,9 @@ class AnnonceventeEdit extends Component {
                 <HelmetSite title={`${this.state.title || $name_site} - ${$name_site}`}/>
                 <div className="landing-page sidebar-collapse">
 
-
                     <nav className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
-
 
                     <div className="wrapper">
 
@@ -560,7 +558,7 @@ class AnnonceventeEdit extends Component {
                                                                                     </div>
                                                                                     <small>*optionnel: les champs ne sont
                                                                                         pas obligatoires vous avez le choix
-                                                                                        de le remplire ou pas</small>
+                                                                                        de les remplire ou pas</small>
                                                                                 </div>
 
                                                                             </div>
@@ -648,7 +646,7 @@ class AnnonceventeEdit extends Component {
                                                                         </div>
                                                                     )}
                                                                     <div className="card-title">
-                                                                        <b>Quel est le montant de votre bien ?</b>
+                                                                        <b>Quel est le montant de votre bien?</b>
                                                                     </div>
                                                                 </div>
 

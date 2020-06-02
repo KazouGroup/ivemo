@@ -46,7 +46,7 @@ class PremiumUserBlogannonceList extends Component {
                             <>
                                 {!this.props.status_admin ?
                                     <a href="#">
-                                        <span className="badge badge-danger"><b>Masquer par le moderateur</b></span>
+                                        <span className="badge badge-danger"><b>Masquer par le modérateur</b></span>
                                     </a>
                                     :
                                     <span className="badge badge-success"><b>Visible</b></span>
@@ -56,10 +56,10 @@ class PremiumUserBlogannonceList extends Component {
                             <>
                                 {!this.props.status_admin ?
                                     <a href="#">
-                                        <span className="badge badge-danger"><b>Masquer par le moderateur</b></span>
+                                        <span className="badge badge-danger"><b>Masquer par le modérateur</b></span>
                                     </a>
                                     :
-                                    <span className="badge badge-rose"><b>Deactivé</b></span>
+                                    <span className="badge badge-rose"><b>Déactivé</b></span>
                                 }
                             </>
                         }

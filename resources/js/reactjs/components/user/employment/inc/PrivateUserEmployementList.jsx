@@ -72,7 +72,7 @@ class PrivateUserEmployementList extends Component {
 
                                     <div className="text-right mx-auto">
                                         {this.props.price && (
-                                            <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h5>
+                                            <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',') || "0"} <small>FCFA</small></b></h5>
                                         )}
 
                                         {/*

@@ -84,7 +84,7 @@ class PremiumUserNewBlogannonceReservation extends Component {
         }else{
             $.notify({
                     //,
-                    message: 'La fichier ne peut pas être supérieure à 15 MB'
+                    message: 'Le fichier ne peut pas être supérieure à 15 MB'
                 },
                 {
                     allow_dismiss: false,
@@ -298,13 +298,13 @@ class PremiumUserNewBlogannonceReservation extends Component {
                                                         </div>
 
                                                         <div className="col-md-6">
-                                                            <label htmlFor="title">Selectionez la categorie</label>
+                                                            <label htmlFor="title">Selectionez la catégorie</label>
                                                             <FormGroup>
 
                                                                 <select name={'categoryannoncereservation_id'} value={this.state.categoryannoncereservation_id}
                                                                         className={`form-control ${this.hasErrorFor('categoryannoncereservation_id') ? 'is-invalid' : ''}`}
                                                                         id="categoryannoncereservation_id" onChange={this.handleFieldChange} required>
-                                                                    <option value="" disabled>Selectioner une category</option>
+                                                                    <option value="" disabled>Selectioner une catégorie</option>
                                                                     {categoryannoncereservations.map((item) => (
                                                                         <option key={item.id} value={item.id}>{item.name}</option>
                                                                     ))}
@@ -341,7 +341,7 @@ class PremiumUserNewBlogannonceReservation extends Component {
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                             formats={this.formats}
-                                                                            placeholder="Laisser votre description..."
+                                                                            placeholder="Laisser votre déscription..."
                                                                             className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                             value={this.state.description || ''}
                                                                             onChange={this.handleChangeBody} />
@@ -357,7 +357,7 @@ class PremiumUserNewBlogannonceReservation extends Component {
                                                         <i className="now-ui-icons ui-1_simple-delete"/> Annuler
                                                     </Link>
                                                     <button className="btn btn-primary" type="submit">
-                                                        <b>Mettre à jour l'article de blog</b>
+                                                        <b>Poster l'article de blog</b>
                                                     </button>
                                                 </div>
                                             </form>

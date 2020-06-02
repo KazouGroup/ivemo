@@ -82,7 +82,7 @@ class Annonceventebycategorycityshow extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            text: "êtes-vous sûr de vouloir executer cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -101,7 +101,7 @@ class Annonceventebycategorycityshow extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec success'
+                            message: 'Annonce suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -230,7 +230,6 @@ class Annonceventebycategorycityshow extends Component {
                                                 </div>
                                             </div>
 
-
                                         </div>
 
                                         <div className="card">
@@ -243,7 +242,6 @@ class Annonceventebycategorycityshow extends Component {
 
                                             </div>
                                         </div>
-
 
                                         <div className="card">
                                             <div className="card-body">

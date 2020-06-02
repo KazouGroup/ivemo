@@ -113,7 +113,7 @@ class AnnonceShowCreateUserSite extends Component {
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="card-title">
-                                                    <b>Contact de votre agence</b>
+                                                    <b>Contacte de votre agence</b>
                                                 </div>
 
                                                 <div className="card-header d-flex align-items-center">
@@ -236,7 +236,7 @@ class AnnonceShowCreateUserSite extends Component {
                                                     <div className="card card-plain">
                                                         <div className="card-header" role="tab" id="headingOne">
                                                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                <b>Caracteristique du bien </b>
+                                                                <b>Caractéristique du bien </b>
                                                                 <i className="now-ui-icons arrows-1_minimal-down"></i>
                                                             </a>
                                                         </div>
