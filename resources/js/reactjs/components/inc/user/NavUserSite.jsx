@@ -41,12 +41,18 @@ class NavUserSite extends PureComponent {
                         </li>
 
                         {!$guest &&(
-                            <li className="nav-item">
-                                <a href={`/dashboard/premium/${$userIvemo.slug}/`} className="nav-link">
-                                    <i className="now-ui-icons design_app"/>
-                                    <b>Premium dashboard</b>
-                                </a>
-                            </li>
+                            <>
+                                {$userIvemo.status_profile === 1 && (
+                                    <li className="nav-item">
+                                        <a href={`/dashboard/premium/${$userIvemo.slug}/`} className="nav-link">
+                                            <i className="now-ui-icons design_app"/>
+                                            <b>Premium dashboard</b>
+                                        </a>
+                                    </li>
+                                )}
+                                
+                            </>
+                            
                         )}
 
                         <li className={`nav-item dropdown`}>
