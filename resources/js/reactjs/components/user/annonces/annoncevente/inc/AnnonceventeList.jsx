@@ -122,7 +122,7 @@ class AnnonceventeList extends Component {
                                 </div>
                                 <h6 className="card-title">
                                     <Link to={`/annonces_ventes/${this.props.annoncetype.slug}/${this.props.categoryannoncevente.slug}/${this.props.city.slug}/${this.props.slug}/`}>
-                                        {this.props.title}
+                                        {this.props.title.length > 90 ? this.props.title.substring(0, 90) + "..." : this.props.title}
                                     </Link>
                                 </h6>
                                 <Link to={`/annonces_ventes/${this.props.annoncetype.slug}/${this.props.categoryannoncevente.slug}/${this.props.city.slug}/${this.props.slug}/`}>

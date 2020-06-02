@@ -47,9 +47,14 @@ class EmployementList extends Component {
                                          </a>
                                      </span>
                                     <br/>
+                                    {/**
+                                     * 
+                                     
                                     <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`}>
                                         <span dangerouslySetInnerHTML={this.getDescription()}/>
                                     </a>
+
+                                     */}
 
                                 <br/>
                                 <div className="card-header d-flex align-items-center">
@@ -68,7 +73,7 @@ class EmployementList extends Component {
 
                                     <div className="text-right mx-auto">
                                         {this.props.price && (
-                                            <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h5>
+                                            <h5 className="text-success"><b>{this.props.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h5>
                                         )}
 
                                         {/*
@@ -112,7 +117,7 @@ class EmployementList extends Component {
                                                                 </button>
                                                             </>
                                                         }
-                                                        <NavLink to={`/employment/${this.props.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" title=" Editer l'annonce">
+                                                        <NavLink to={`/employment/ab/${this.props.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" title=" Editer l'annonce">
                                                             <i className="now-ui-icons ui-2_settings-90"/>
                                                         </NavLink>
                                                         <Button

@@ -71,7 +71,7 @@ class PrivateUserAnnonceslocationList extends Component {
                                     </div>
                                     <h6 className="card-title">
                                         <Link to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.slug}/`}>
-                                            {this.props.title}
+                                            {this.props.title.length > 90 ? this.props.title.substring(0, 90) + "..." : this.props.title}
                                         </Link>
                                     </h6>
                                     <Link to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.slug}/`}>

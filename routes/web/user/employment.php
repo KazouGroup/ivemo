@@ -4,7 +4,7 @@
 Route::group(['prefix' => 'api'], function () {
 
     Route::get(
-        'employment/{employment}',
+        'employment/ab/{employment}',
         'EmploymentController@show'
     )->name('api.employmentlugin_site');
 
@@ -56,6 +56,11 @@ Route::get(
 )->name('employmentcategory_site');
 
 Route::get(
+    'employment/{city}',
+    'EmploymentController@employmentbycity'
+)->name('employmentcity_site');
+
+Route::get(
     'employments/{categoryemployment}/{city}',
     'EmploymentController@employmentbycategorybycity'
 )->name('employmentbycategorybycity_site');
@@ -66,7 +71,7 @@ Route::get(
 )->name('employmentslug_site');
 
 Route::get(
-    'employment/{employment}/edit',
+    'employment/ab/{employment}/edit',
     'EmploymentController@edit'
 )->name('employmentsedit_site');
 

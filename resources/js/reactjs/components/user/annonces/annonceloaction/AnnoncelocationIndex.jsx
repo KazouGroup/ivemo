@@ -348,7 +348,7 @@ class AnnoncelocationIndex extends Component {
                                             <div className="card-body">
                                                 <form method="" action="">
                                                     <div className="row">
-                                                        <div className="col-sm-6">
+                                                        <div className="col-sm-4">
                                                             <div className="input-group">
                                                                 <div className="input-group-prepend">
                                                                     <span className="input-group-text">
@@ -359,7 +359,7 @@ class AnnoncelocationIndex extends Component {
                                                             </div>
                                                         </div>
 
-                                                        <div className="col-sm-6">
+                                                        <div className="col-sm-4">
                                                             <div className="input-group">
                                                                 <div className="input-group-prepend">
                                                                     <span className="input-group-text">
@@ -375,6 +375,16 @@ class AnnoncelocationIndex extends Component {
                                                         <button type="submit" className="btn btn-primary ">
                                                             <b>Voir les annonces</b>
                                                         </button>
+                                                        <div className="col-sm-4">
+                                                            <div className="input-group">
+                                                            <div className="submit text-center">
+                                                                <button type="submit" className="btn btn-primary ">
+                                                                 <b>Rechercher</b>
+                                                                </button>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                       
                                                     </div>
 
                                                 </form>
@@ -615,7 +625,6 @@ class AnnoncelocationIndex extends Component {
                                         </div>
                                     </div>
 
-
                                     <FormModalContactannonceUser {...this.props} {...annonceItem}
                                         renderErrorFor={this.renderErrorFor}
                                         handleFieldChange={this.handleFieldChange}
@@ -624,8 +633,6 @@ class AnnoncelocationIndex extends Component {
 
                                 </div>
                             </div>
-
-
 
                         </div>
 

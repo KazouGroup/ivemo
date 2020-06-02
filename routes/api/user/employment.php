@@ -2,8 +2,18 @@
 
 Route::get(
     'categoryemployments',
-    'EmploymentController@apicategoryemployment'
+    'EmploymentController@apicategoryemploymentcount'
 )->name('api.categoryemployment_site');
+
+Route::get(
+    'categoryemploymentsbycity/{city}',
+    'EmploymentController@apicategoryemploymentcitycount'
+)->name('api.categoryemploymentcitycount_site');
+
+Route::get(
+    'cityemployments',
+    'EmploymentController@apicityemployment'
+)->name('api.cityemployment_site');
 
 Route::get(
     'categoryemployments/{categoryemployment}',
@@ -19,6 +29,11 @@ Route::get(
     'employments/{categoryemployment}',
     'EmploymentController@apiemploymentsbycategory'
 )->name('api.employmentscategory_site');
+
+Route::get(
+    'employment/{city}',
+    'EmploymentController@apiemploymentbycity'
+)->name('api.employmentcity_site');
 
 Route::get(
     'employments/{categoryemployment}/{city}',

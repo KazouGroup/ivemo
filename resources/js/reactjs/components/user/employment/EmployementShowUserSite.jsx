@@ -27,7 +27,23 @@ class EmployementShowUserSite extends Component {
         this.unactiveItem = this.unactiveItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
     }
-
+    copyToClipboard(){
+        navigator.clipboard.writeText(window.location.toString())
+        $.notify({
+            message: "Lien copié correctement avec succès",
+        },{
+            allow_dismiss: false,
+            type: 'info',
+            placement: {
+                from: 'top',
+                align: 'center'
+            },
+            animate: {
+                enter: "animate__animated animate__fadeInDown",
+                exit: "animate__animated animate__fadeOutUp"
+            },
+        });
+    }
     phoneShow(employment){
         Swal.fire({
             title: `${employment.user.phone}`,
@@ -174,7 +190,7 @@ class EmployementShowUserSite extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec success'
+                            message: 'Annonce suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -281,7 +297,7 @@ class EmployementShowUserSite extends Component {
                                                     <div className="text-right ml-auto">
 
                                                         {employment.price && (
-                                                            <h5 className="text-dark"><b>{employment.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h5>
+                                                            <h5 className="text-success"><b>{employment.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h5>
                                                         )}
 
                                                     </div>
@@ -324,6 +340,12 @@ class EmployementShowUserSite extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="text-right ml-auto">
+                                                        <UncontrolledTooltip placement="bottom" target="TooltipCopie">
+                                                            Copier le lien
+                                                        </UncontrolledTooltip>
+                                                        <Button className="btn btn-icon btn-sm btn-primary" id="TooltipCopie" onClick={() => this.copyToClipboard()}>
+                                                         <i className="now-ui-icons arrows-1_share-66"/>
+                                                        </Button>
                                                         <UncontrolledTooltip placement="bottom" target="TooltipPhone">
                                                             {employment.user.phone}
                                                         </UncontrolledTooltip>
@@ -345,7 +367,7 @@ class EmployementShowUserSite extends Component {
 
                                                         {!$guest && (
                                                             <>
-                                                                {($userIvemo.id === employment.user.id || $userIvemo.id === employment.user_id) && (
+                                                                {($userIvemo.id === employment.user.id && $userIvemo.id === employment.user_id) && (
                                                                     <>
                                                                         <a href={`#${employment.visits_count}`}
                                                                            className="btn btn-sm btn-secondary">
@@ -364,7 +386,7 @@ class EmployementShowUserSite extends Component {
                                                                             Editer cette annonce
                                                                         </UncontrolledTooltip>
 
-                                                                        <NavLink to={`/employment/${employment.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" id="TooltipEditer">
+                                                                        <NavLink to={`/employment/ab/${employment.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" id="TooltipEditer">
                                                                             <i className="now-ui-icons ui-2_settings-90"/>
                                                                         </NavLink>
 
