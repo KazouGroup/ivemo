@@ -336,7 +336,7 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                             formats={this.formats}
-                                                                            placeholder="Laisser votre description..."
+                                                                            placeholder="Laisser votre déscription..."
                                                                             className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                             value={this.state.description || ''}
                                                                             onChange={this.handleChangeBody} />

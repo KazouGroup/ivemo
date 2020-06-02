@@ -14,14 +14,14 @@
                             <div class="card card-stats">
                                 <div class="card-header card-header-warning card-header-icon">
                                     <div class="card-icon">
-                                        <i class="material-icons">view_headline</i>
+                                        <i class="material-icons">forum</i>
                                     </div>
                                     <p class="card-category"><b>Messages</b></p>
                                     <h3 class="card-title"><b>{{data_countFormatter(contactforadverts_count)}}</b></h3>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">view_headline</i> Contacts from users for adverts
+                                        <i class="material-icons">forum</i> Contacts from users for adverts
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                             <div class="card card-stats">
                                 <div :class="getColorCardUser()">
                                     <div class="card-icon">
-                                        <i class="material-icons">view_headline</i>
+                                        <i class="material-icons">forum</i>
                                     </div>
                                     <p class="card-category">
                                         <b>Contacts from users for adverts</b>
@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">view_headline</i>
+                                        <i class="material-icons">forum</i>
                                         <b>Contacts from users for adverts</b>
                                     </div>
                                 </div>
@@ -98,7 +98,7 @@
                                         </div>
                                         <div class="col-md-6 text-right">
                                       <span>
-                                        <i id="tooltipSize" class="material-icons">view_headline</i>
+                                        <i id="tooltipSize" class="material-icons">forum</i>
                                       </span>
                                         </div>
                                     </div>
@@ -111,7 +111,6 @@
                                                 <th><b>Full name</b></th>
                                                 <th><b>Email</b></th>
                                                 <th><b>Phone</b></th>
-                                                <th><b>Status</b></th>
                                                 <th><b>Time</b></th>
                                                 <th><b>Message</b></th>
                                                 <th class="disabled-sorting text-right"><b>Actions</b></th>
@@ -122,52 +121,44 @@
                                                 <th><b>Full name</b></th>
                                                 <th><b>Email</b></th>
                                                 <th><b>Phone</b></th>
-                                                <th><b>Status</b></th>
                                                 <th><b>Time</b></th>
                                                 <th><b>Message</b></th>
                                                 <th class="disabled-sorting text-right"><b>Actions</b></th>
                                             </tr>
                                             </tfoot>
                                             <tbody>
-                                            <tr v-for="item in contactusersadvert" :key="item.id">
-                                                <td>{{ (item.full_name.length > 15 ? item.title.substring(0,15)+ "..." : item.full_name) | upText }}</td>
+                                            <tr v-for="item in contactusersadverts" :key="item.id">
+                                                <td>
+                                                    <template v-if="$auth.can('manage-blogs')">
+                                                        <button @click="disableItem(item.id)" v-if="item.status_admin" type="button"
+                                                                className="btn btn-link btn-secondary btn-just-icon btn-sm" title="Message lu">
+                                                             <i className="material-icons">fiber_manual_record</i>
+                                                        </button>
+                                                        <button @click="activeItem(item.id)" v-else type="button"
+                                                                className="btn btn-link btn-info btn-just-icon btn-sm" title="Nouveau message">
+                                                             <i className="material-icons">fiber_manual_record</i>
+                                                        </button>
+                                                    </template>
+                                                </td>
                                                 <td>
                                                     {{ (item.email.length > 15 ? item.title.substring(0,15)+ "..." : item.email) | upText }}
                                                 </td>
                                                 <td> <b>{{item.phone}} </b> </td>
-                                                <td>
-                                                    <div class="timeline-heading">
-                                                        <span v-if="item.status" class="badge badge-success">
-                                                          <b>Red</b>
-                                                        </span>
-                                                            <span v-else class="badge badge-rose">
-                                                        <b>Unred</b>
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                                <td>  <b>{{item.time }} </b></td>
+                                                <td> <b>{{item.time }} </b></td>
                                                 <td><b>{{item.message}}</b></td>
                                                 <td class="text-right">
-                                                    <template v-if="$auth.can('manage-blogs')">
-                                                        <button @click="disableItem(item.id)" v-if="item.status_admin" type="button"
-                                                                class="btn btn-success btn-just-icon btn-sm"
-                                                                title="Desactiver">
-                                                            <i class="material-icons">remove</i>
-                                                        </button>
-                                                        <button @click="activeItem(item.id)" v-else type="button"
-                                                                class="btn btn-rose btn-just-icon btn-sm"
-                                                                title="Activer">
-                                                            <i class="material-icons">done</i>
-                                                        </button>
-                                                    </template>
-                                                    <a :href="`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${getDate(item)}/${item.slug}/`" target="_blank"
+                                                    <router-link :href="`/dashboard/contactuserforadverts/${item.slug}/view/`" target="_blank"
                                                        class="btn btn-warning btn-sm btn-just-icon"
-                                                       title="Delete">
+                                                       title="View">
                                                         <i class="material-icons">visibility</i>
-                                                    </a>
+                                                    </router-link>
+                                                    <button @click="deleteItem(item)"
+                                                        class="btn btn-danger btn-sm btn-just-icon"
+                                                        title="Delete">
+                                                    <i class="material-icons">delete_forever</i>
+                                                </button>
                                                 </td>
                                             </tr>
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -198,7 +189,7 @@
             document.title = `Dashboard Contacts from users for adverts ${this.user.first_name || this.name_site} - ${this.name_site}`;
             return {
                 page: 1,
-                contactusersadvert: [],
+                contactusersadverts: [],
                 contactforadverts_count: [],
                 contactforadvertsred_count: [],
                 contactforadvertsunred_count: [],
@@ -236,113 +227,40 @@
                 return ( contactforadvertsunred_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
             },
 
-            /** Ici c'est l'activation  **/
+                    /** Ici c'est l'activation  **/
             activeItem(id){
-                Swal.fire({
-                    title: 'Show or activated this article?',
-                    text: "Are you sure to confirm this article?",
-                    buttonsStyling: false,
-                    confirmButtonClass: "btn btn-success",
-                    cancelButtonClass: 'btn btn-danger',
-                    confirmButtonText: 'Yes, confirm',
-                    cancelButtonText: 'No, cancel',
-                    showCancelButton: true,
-                    reverseButtons: true,
-                }).then((result) => {
-                    if (result.value) {
 
-                        this.$Progress.start();
-                        //Envoyer la requet au server
-                        let url = route('activated_blogannoncelocations.dashboard',id);
-                        dyaxios.get(url).then(() => {
-
-                            /** Alert notify bootstrapp **/
-                            $.notify({
-                                    message: "This article has been activated for users",
-                                },
-                                {
-                                    allow_dismiss: false,
-                                    type: 'info',
-                                    placement: {
-                                        from: 'bottom',
-                                        align: 'center'
-                                    },
-                                    animate: {
-                                        enter: "animated fadeInUp",
-                                        exit: "animated fadeOutDown"
-                                    },
-                                });
-                            /** End alert ***/
-                            window.location.reload();
-                            //End Progress bar
-                            this.$Progress.finish();
-                        }).catch(() => {
-                            //Failled message
-                            $.notify("Ooop! Something wrong. Try later", {
-                                type: 'danger',
-                                animate: {
-                                    enter: 'animated bounceInDown',
-                                    exit: 'animated bounceOutUp'
-                                }
-                            });
-                        })
-                    }
+                let url = route('personal_contactusersemployment_mails_active.site',id);
+                dyaxios.get(url).then(() => {
+                    this.loadItems();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
+                        }
+                    });
                 })
             },
-            
-            /** Ici c'est la désactivation **/
-            disableItem(id){
-                Swal.fire({
-                    title: 'Mask or unactivated this article?',
-                    text: "Are you sure to confirm this article?",
-                    buttonsStyling: false,
-                    confirmButtonClass: "btn btn-success",
-                    cancelButtonClass: 'btn btn-danger',
-                    confirmButtonText: 'Yes, confirm',
-                    cancelButtonText: 'No, cancel',
-                    showCancelButton: true,
-                    reverseButtons: true,
-                }).then((result) => {
-                    if (result.value) {
 
-                        this.$Progress.start();
-                        //Envoyer la requet au server
-                        let url = route('unactivated_blogannoncelocations.dashboard',id);
-                        dyaxios.get(url).then(() => {
+            unactiveItem(id){
 
-                            /** Alert notify bootstrapp **/
-                            $.notify({
-                                    message: "This article has been masked for users",
-                                },
-                                {
-                                    allow_dismiss: false,
-                                    type: 'info',
-                                    placement: {
-                                        from: 'bottom',
-                                        align: 'center'
-                                    },
-                                    animate: {
-                                        enter: "animated fadeInUp",
-                                        exit: "animated fadeOutDown"
-                                    },
-                                });
-                            /** End alert ***/
-                            window.location.reload();
-                            //End Progress bar
-                            this.$Progress.finish();
-                        }).catch(() => {
-                            //Failled message
-                            $.notify("Ooop! Something wrong. Try later", {
-                                type: 'danger',
-                                animate: {
-                                    enter: 'animated bounceInDown',
-                                    exit: 'animated bounceOutUp'
-                                }
-                            });
-                        })
-                    }
+                //Envoyer la requet au server
+                let url = route('personal_contactusersemployment_mails_unactive.site',id);
+                dyaxios.get(url).then(() => {
+                    this.loadItems();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
+                        }
+                    });
                 })
-
             },
 
             infiniteHandler($state) {
@@ -353,7 +271,7 @@
                 }).then(response => {
                     if (response.data.length) {
                         this.page += 1;
-                        this.blogannoncelocations.push(...response.data);
+                        this.contactusersadverts.push(...response.data);
                         $state.loaded();
                     } else {
                         $state.complete();

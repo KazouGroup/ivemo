@@ -55,7 +55,7 @@ class PremiumUserBlogannonceList extends Component {
                             <>
                                 {!this.props.status_admin ?
                                     <a href="#">
-                                        <span className="badge badge-danger"><b>Masquer par le moderateur</b></span>
+                                        <span className="badge badge-danger"><b>Masquer par le modérateur</b></span>
                                     </a>
                                     :
                                     <span className="badge badge-success"><b>Visible</b></span>
@@ -65,10 +65,10 @@ class PremiumUserBlogannonceList extends Component {
                             <>
                                 {!this.props.status_admin ?
                                     <a href="#">
-                                        <span className="badge badge-danger"><b>Masquer par le moderateur</b></span>
+                                        <span className="badge badge-danger"><b>Masquer par le modérateur</b></span>
                                     </a>
                                     :
-                                    <span className="badge badge-rose"><b>Deactivé</b></span>
+                                    <span className="badge badge-rose"><b>Déactivé</b></span>
                                 }
                             </>
                         }
@@ -78,7 +78,7 @@ class PremiumUserBlogannonceList extends Component {
                 <td className="text-right">
                     {this.props.status ?
                         <Button onClick={() => this.props.unactiveItem(this.props.id)}
-                                className="btn btn-success btn-just-icon btn-sm" title="Desactiver" >
+                                className="btn btn-success btn-just-icon btn-sm" title="Déactiver" >
                             <i className="material-icons">done</i>
                         </Button>
                         :

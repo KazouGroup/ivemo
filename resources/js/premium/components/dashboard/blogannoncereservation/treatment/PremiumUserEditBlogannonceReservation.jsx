@@ -243,7 +243,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action?",
+            text: "êtes-vous sûr de vouloir exècuter cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -400,12 +400,12 @@ class PremiumUserEditBlogannonceReservation extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">remove</i>
                                             </div>
-                                            <p className="card-category"><b>Désactivés</b></p>
+                                            <p className="card-category"><b>Déactivés</b></p>
                                             <h3 className="card-title"><b>{this.dataunactive_countFormatter(blogannoncereservationsunactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">remove</i> Articles désactivés
+                                                <i className="material-icons">remove</i> Articles déactivés
                                             </div>
                                         </div>
                                     </div>
@@ -460,17 +460,17 @@ class PremiumUserEditBlogannonceReservation extends Component {
                                             <div className="toolbar">
                                                 <div className="text-right ml-auto">
                                                     <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_reservations/`}
-                                                          className="btn btn-secondary btn-just-icon btn-sm" title="Retour a vos articles">
+                                                          className="btn btn-secondary btn-just-icon btn-sm" title="Retour à vos articles">
                                                         <i className="material-icons">arrow_back</i>
                                                     </Link>
                                                     <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_reservations/create/`}
-                                                          className="btn btn-primary btn-just-icon btn-sm" title="Poster un votre article sur la reservation">
+                                                          className="btn btn-primary btn-just-icon btn-sm" title="Poster votre article sur la reservation">
                                                         <i className="material-icons">add</i>
                                                     </Link>
                                                     {this.state.status ?
                                                         <>
                                                             <button type="button" rel="tooltip" onClick={() => this.unactiveItem(this.state.id)}
-                                                                    className="btn btn-success btn-just-icon btn-sm" title="Desactiver" >
+                                                                    className="btn btn-success btn-just-icon btn-sm" title="Déactiver" >
                                                                 <i className="material-icons">done</i>
                                                             </button>
                                                         </>
@@ -520,7 +520,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
 
                                                     <Row>
                                                         <div className="col-md-6">
-                                                            <label htmlFor="title">Estimer en temp <b>{this.state.red_time} min lecture</b></label>
+                                                            <label htmlFor="title">Estimer un temp <b>{this.state.red_time} min lecture</b></label>
                                                             <FormGroup>
                                                                 <Input id='red_time'
                                                                        type='number'

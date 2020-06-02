@@ -135,7 +135,7 @@ class PremiumUserBlogannonceLocation extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action?",
+            text: "êtes-vous sûr de vouloir exècuter cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -429,6 +429,7 @@ class PremiumUserBlogannonceLocation extends Component {
                 <FooterPremiumUser />
 
             </div>
+
             </>
 
         )

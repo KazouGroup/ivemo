@@ -453,15 +453,15 @@ class AnnonceUserSite extends Component {
                                                                         <table>
                                                                             <tbody>
                                                                                 <tr>
-                                                                                    <td> <a href="#pablo">Toutes les ventes de maison Douala</a></td>
+                                                                                    <td> <a href="#pablo">Toutes les ventes de maison à Douala</a></td>
                                                                                     <td className="text-right"> 200 annonces</td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td> <a href="#pablo">Toutes les ventes de terrains Douala</a></td>
+                                                                                    <td> <a href="#pablo">Toutes les ventes de terrains à Douala</a></td>
                                                                                     <td className="text-right"> 1 300 annonces</td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td> <a href="#pablo">Tous les achats de maison de prestige Douala</a></td>
+                                                                                    <td> <a href="#pablo">Tous les achats de maison de prestige à Douala</a></td>
                                                                                     <td className="text-right"> 380 annonces</td>
                                                                                 </tr>
                                                                             </tbody>

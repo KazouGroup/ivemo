@@ -40,7 +40,7 @@ class PremiumUserTeams extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes vous sure de vouloir executer cette action",
+            text: "êtes vous sure de vouloir executer cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -59,7 +59,7 @@ class PremiumUserTeams extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Donné suprimée avec success'
+                            message: 'Donné suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -166,7 +166,7 @@ class PremiumUserTeams extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update FAQ',
-                            message: 'Utilisateur désactiver avec succès'
+                            message: 'Utilisateur désactivé avec succès'
                         },
                         {
                             allow_dismiss: false,

@@ -69,7 +69,7 @@ class NavPremiumUserEmployement extends Component {
                         </div>
                         <div className="card-footer">
                             <div className="stats">
-                                <i className="material-icons">dialpad</i> Offres d'empoi,service et formations
+                                <i className="material-icons">dialpad</i> Offres d'emploi, services et formations
                             </div>
                         </div>
                     </div>
@@ -80,12 +80,12 @@ class NavPremiumUserEmployement extends Component {
                             <div className="card-icon">
                                 <i className="material-icons">done</i>
                             </div>
-                            <p className="card-category"><b>Actives</b></p>
+                            <p className="card-category"><b>Activées</b></p>
                             <h3 className="card-title"><b>{this.dataactive_countFormatter(employmentsactive_count)}</b></h3>
                         </div>
                         <div className="card-footer">
                             <div className="stats">
-                                <i className="material-icons">done</i> Annonces actives
+                                <i className="material-icons">done</i> Annonces activées
                             </div>
                         </div>
                     </div>
@@ -96,12 +96,12 @@ class NavPremiumUserEmployement extends Component {
                             <div className="card-icon">
                                 <i className="material-icons">remove</i>
                             </div>
-                            <p className="card-category"><b>Desactivés</b></p>
+                            <p className="card-category"><b>Déactivées</b></p>
                             <h3 className="card-title"><b>{this.dataunactive_countFormatter(employmentsunactive_count)}</b></h3>
                         </div>
                         <div className="card-footer">
                             <div className="stats">
-                                <i className="material-icons">remove</i> Annonces désactivés
+                                <i className="material-icons">remove</i> Annonces déactivées
                             </div>
                         </div>
                     </div>

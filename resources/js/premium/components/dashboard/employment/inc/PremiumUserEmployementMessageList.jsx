@@ -14,7 +14,7 @@ class PremiumUserEmployementMessageList extends Component {
                 <td>
                     {this.props.status_red ?
                         <Button onClick={() => this.props.unactiveItem(this.props.id)}
-                                className="btn btn-link btn-secondary btn-just-icon btn-sm" title="Message lue">
+                                className="btn btn-link btn-secondary btn-just-icon btn-sm" title="Message lu">
                             <i className="material-icons">fiber_manual_record</i>
                         </Button>
                         :

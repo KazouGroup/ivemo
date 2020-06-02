@@ -76,7 +76,7 @@ class PremiumUserEmployementMessage extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            text: "êtes-vous sûr de vouloir exècuter cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -95,7 +95,7 @@ class PremiumUserEmployementMessage extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Message suprimée avec success'
+                            message: 'Message suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,

@@ -135,7 +135,7 @@ class PremiumUserBlogannonceVente extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action?",
+            text: "êtes-vous sûr de vouloir exècuter cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -310,12 +310,12 @@ class PremiumUserBlogannonceVente extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">remove</i>
                                             </div>
-                                            <p className="card-category"><b>Desactivés</b></p>
+                                            <p className="card-category"><b>Déactivés</b></p>
                                             <h3 className="card-title"><b>{this.dataunactive_countFormatter(blogannonceventesunactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">remove</i> Articles désactivés
+                                                <i className="material-icons">remove</i> Articles déactivés
                                             </div>
                                         </div>
                                     </div>
@@ -375,7 +375,7 @@ class PremiumUserBlogannonceVente extends Component {
                                                              <span className="btn-label">
                                                                <i className="material-icons">add</i>
                                                              </span>
-                                                            <b className="title_hover">Poster un votre article sur la vente</b>
+                                                            <b className="title_hover">Poster votre article sur la vente</b>
                                                         </Link>
                                                     </div>
                                                 </div>

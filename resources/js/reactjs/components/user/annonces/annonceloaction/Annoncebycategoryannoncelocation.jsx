@@ -189,7 +189,7 @@ class Annoncebycategoryannoncelocation extends Component {
 
     unactiveItem(id){
         Swal.fire({
-            title: 'Désactivé l\'annonce?',
+            title: 'Déactivé l\'annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -245,7 +245,7 @@ class Annoncebycategoryannoncelocation extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            text: "êtes-vous sûr de vouloir executer cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -342,8 +342,6 @@ class Annoncebycategoryannoncelocation extends Component {
                             <div className="container">
                                 <br />
                                 <div className="row">
-
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="submit text-left">
                                             <Link to={`/annonces_locations/locations/`} >

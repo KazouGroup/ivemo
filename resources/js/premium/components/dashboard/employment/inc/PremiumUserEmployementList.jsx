@@ -58,7 +58,7 @@ class PremiumUserEmployementList extends Component {
                 <td className="text-right">
                     {this.props.status ?
                         <Button onClick={() => this.props.unactiveItem(this.props.id)}
-                                className="btn btn-success btn-just-icon btn-sm" title="Desactiver" >
+                                className="btn btn-success btn-just-icon btn-sm" title="Déactiver" >
                             <i className="material-icons">done</i>
                         </Button>
                         :

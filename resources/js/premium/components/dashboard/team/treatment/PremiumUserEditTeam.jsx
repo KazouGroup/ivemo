@@ -96,7 +96,7 @@ class PremiumUserEditTeam extends Component {
         }else{
             $.notify({
                     //,
-                    message: 'La fichier ne peut pas être supérieure à 15 MB'
+                    message: 'Le fichier ne peut pas être supérieure à 15 MB'
                 },
                 {
                     allow_dismiss: false,
@@ -132,7 +132,7 @@ class PremiumUserEditTeam extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes vous sure de vouloir executer cette action",
+            text: "êtes vous sure de vouloir exècuter cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -151,7 +151,7 @@ class PremiumUserEditTeam extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Donné suprimée avec success'
+                            message: 'Donné suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -258,7 +258,7 @@ class PremiumUserEditTeam extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
 
-                            message: 'Utilisateur désactiver avec succès'
+                            message: 'Utilisateur déactivé avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -305,7 +305,7 @@ class PremiumUserEditTeam extends Component {
             .then(() => {
 
                 $.notify({
-                        message: 'Informations mise à jour avec success...'
+                        message: 'Informations mit à jour avec succès...'
                     },
                     {
                         allow_dismiss: false,
@@ -424,12 +424,12 @@ class PremiumUserEditTeam extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">done</i>
                                             </div>
-                                            <p className="card-category"><b>Actives</b></p>
+                                            <p className="card-category"><b>Activés</b></p>
                                             <h3 className="card-title"><b>{this.dataactive_countFormatter(teamsactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">done</i>  Actives
+                                                <i className="material-icons">done</i>  Activés
                                             </div>
                                         </div>
                                     </div>
@@ -440,12 +440,12 @@ class PremiumUserEditTeam extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">remove</i>
                                             </div>
-                                            <p className="card-category"><b>Desactivés</b></p>
+                                            <p className="card-category"><b>Déactivés</b></p>
                                             <h3 className="card-title"><b>{this.dataunactive_countFormatter(teamsunactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">remove</i> Désactivés
+                                                <i className="material-icons">remove</i> Déactivés
                                             </div>
                                         </div>
                                     </div>
@@ -539,7 +539,7 @@ class PremiumUserEditTeam extends Component {
                                                     <Row>
                                                         <div className="col-md-6">
                                                             <label className="labels">
-                                                                Non complet
+                                                                Nom complet
                                                                 <span className="text-danger">*</span>
                                                             </label>
                                                             <FormGroup>
@@ -604,7 +604,7 @@ class PremiumUserEditTeam extends Component {
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                             formats={this.formats}
-                                                                            placeholder="Laisser votre description..."
+                                                                            placeholder="Laisser votre déscription..."
                                                                             className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                             value={this.state.description || ''}
                                                                             onChange={this.handleChangeBody} />
@@ -624,7 +624,6 @@ class PremiumUserEditTeam extends Component {
                                                     </button>
                                                 </div>
                                             </form>
-
 
                                         </div>
                                     </div>

@@ -123,7 +123,6 @@
                                                 <b class="title_hover">New article de blog location</b>
                                             </a>
                                         </div>
-
                                     </div>
                                     <div class="material-datatables">
                                         <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
@@ -168,7 +167,7 @@
                                                           <b>Activé</b>
                                                         </span>
                                                         <span v-else class="badge badge-rose">
-                                                        <b>Deactivé</b>
+                                                        <b>Déactivé</b>
                                                         </span>
                                                     </div>
                                                 </td>
@@ -178,7 +177,7 @@
                                                           <b>Activé</b>
                                                         </span>
                                                         <span v-else class="badge badge-rose">
-                                                        <b>Deactivé</b>
+                                                        <b>Déactivé</b>
                                                         </span>
                                                     </div>
                                                 </td>

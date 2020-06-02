@@ -61,7 +61,7 @@ class ProfileForallAnnoncelocationShow extends Component {
                                             <i className="far fa-eye"></i> <b>{this.data_countFormatter(this.props.visits_count)}</b>
                                         </a>
                                         <UncontrolledTooltip placement="bottom" target="TooltipStatus">
-                                            Desactiver cette annonce
+                                            Déactiver cette annonce
                                         </UncontrolledTooltip>
 
                                         <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}
@@ -130,7 +130,6 @@ class ProfileForallAnnoncelocationShow extends Component {
                     </>
                 )}
             </>
-
 
         )
     }

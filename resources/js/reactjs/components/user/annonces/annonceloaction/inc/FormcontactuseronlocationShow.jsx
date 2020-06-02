@@ -54,13 +54,13 @@ class FormcontactuseronlocationShow extends Component {
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let itemCity = this.props.match.params.city;
         let itemannoncelocation = this.props.match.params.annoncelocation;
-        let url = route('annoncelocationsendcontactmessageuser_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemannoncelocation]);
+        let url = route('annoncelocationsendcontactmessageuser_site', [itemannoncetype, itemCategoryannoncelocation, itemCity, itemannoncelocation]);
         dyaxios.post(url, item)
             .then(() => {
 
                 $.notify({
-                        message: `Votre message a été bien envoyé à cette utilisateur`
-                    },
+                    message: `Votre message a bien été envoyé à cette utilisateur`
+                },
                     {
                         allow_dismiss: false,
                         type: 'info',
@@ -82,10 +82,10 @@ class FormcontactuseronlocationShow extends Component {
                     message: "",
                 });
             }).catch(error => {
-            this.setState({
-                errors: error.response.data.errors
-            });
-        })
+                this.setState({
+                    errors: error.response.data.errors
+                });
+            })
     }
 
     // lifecycle method
@@ -104,19 +104,19 @@ class FormcontactuseronlocationShow extends Component {
                     <div className="row">
                         <div className="input-group">
                             <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons users_circle-08"/></span>
+                                <span className="input-group-text">
+                                    <i className="now-ui-icons users_circle-08" /></span>
                             </div>
                             <input id='full_name'
-                                   type='text'
-                                   className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
-                                   name='full_name'
-                                   minLength="5"
-                                   placeholder="Nom complet"
-                                   aria-label="Nom complet"
-                                   autoComplete="full_name"
-                                   value={this.state.full_name}
-                                   onChange={this.handleFieldChange}
+                                type='text'
+                                className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
+                                name='full_name'
+                                minLength="5"
+                                placeholder="Nom complet"
+                                aria-label="Nom complet"
+                                autoComplete="full_name"
+                                value={this.state.full_name}
+                                onChange={this.handleFieldChange}
                             />
                             {this.renderErrorFor('full_name')}
                         </div>
@@ -125,19 +125,19 @@ class FormcontactuseronlocationShow extends Component {
                     <div className="row">
                         <div className="input-group">
                             <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons ui-1_email-85"/></span>
+                                <span className="input-group-text">
+                                    <i className="now-ui-icons ui-1_email-85" /></span>
                             </div>
                             <input id='email'
-                                   type='email'
-                                   className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                   name='email'
-                                   minLength="3"
-                                   placeholder="Email"
-                                   aria-label="Email"
-                                   autoComplete="email"
-                                   value={this.state.email}
-                                   onChange={this.handleFieldChange}
+                                type='email'
+                                className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
+                                name='email'
+                                minLength="3"
+                                placeholder="Email"
+                                aria-label="Email"
+                                autoComplete="email"
+                                value={this.state.email}
+                                onChange={this.handleFieldChange}
                             />
                             {this.renderErrorFor('email')}
                         </div>
@@ -145,65 +145,60 @@ class FormcontactuseronlocationShow extends Component {
                     <div className="row">
                         <div className="input-group">
                             <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons tech_mobile"/></span>
+                                <span className="input-group-text">
+                                    <i className="now-ui-icons tech_mobile" /></span>
                             </div>
                             <input id='phone'
-                                   type='text'
-                                   className={`form-control ${this.hasErrorFor('phone') ? 'is-invalid' : ''}`}
-                                   name='phone'
-                                   placeholder="Téléphone"
-                                   aria-label="Téléphone"
-                                   value={this.state.phone}
-                                   onChange={this.handleFieldChange}
+                                type='text'
+                                className={`form-control ${this.hasErrorFor('phone') ? 'is-invalid' : ''}`}
+                                name='phone'
+                                placeholder="Téléphone"
+                                aria-label="Téléphone"
+                                value={this.state.phone}
+                                onChange={this.handleFieldChange}
                             />
                             {this.renderErrorFor('phone')}
                         </div>
-
-
                     </div>
                     <div className="row">
 
                         <div className="input-group">
                             <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons users_circle-08"/></span>
+                                <span className="input-group-text">
+                                    <i className="now-ui-icons users_circle-08" /></span>
                             </div>
                             <input id='subject'
-                                   type='text'
-                                   minLength="5"
-                                   className={`form-control ${this.hasErrorFor('subject') ? 'is-invalid' : ''}`}
-                                   name='subject'
-                                   placeholder="Object..."
-                                   aria-label="Object"
-                                   autoComplete="subject"
-                                   value={this.state.subject}
-                                   onChange={this.handleFieldChange}
+                                type='text'
+                                minLength="5"
+                                className={`form-control ${this.hasErrorFor('subject') ? 'is-invalid' : ''}`}
+                                name='subject'
+                                placeholder="Object..."
+                                aria-label="Object"
+                                autoComplete="subject"
+                                value={this.state.subject}
+                                onChange={this.handleFieldChange}
                             />
                             {this.renderErrorFor('subject')}
                         </div>
                     </div>
                     <div className="row">
-
                         <div className="input-group">
-                                                       <textarea name="message" value={this.state.message}
-                                                                 onChange={this.handleFieldChange}
-                                                                 placeholder={'Posez ici toutes vos questions !'}
-                                                                 minLength="5"
-                                                                 className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                 id="message"
-                                                                 rows="10" />
+                            <textarea name="message" value={this.state.message}
+                                onChange={this.handleFieldChange}
+                                placeholder={'Posez ici toutes vos questions !'}
+                                minLength="5"
+                                className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
+                                id="message"
+                                rows="10" />
                             {this.renderErrorFor('message')}
                         </div>
                     </div>
                     <div className="submit text-center">
                         <button className="btn btn-primary btn-lg" type="submit">
-                            <i className="now-ui-icons ui-1_email-85"/> Contacter
+                            <i className="now-ui-icons ui-1_email-85" /> Contacter
                         </button>
                     </div>
                 </div>
-
-
             </form>
 
         )

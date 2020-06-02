@@ -273,7 +273,7 @@ class PremiumUserNewBlogannonceVente extends Component {
 
                                                     <Row>
                                                         <div className="col-md-6">
-                                                            <label htmlFor="title">Estimer en temp <b>{this.state.red_time} min lecture</b></label>
+                                                            <label htmlFor="title">Estimer un temp <b>{this.state.red_time} min lecture</b></label>
                                                             <FormGroup>
                                                                 <Input id='red_time'
                                                                        type='number'
@@ -336,7 +336,7 @@ class PremiumUserNewBlogannonceVente extends Component {
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                             formats={this.formats}
-                                                                            placeholder="Laisser votre description..."
+                                                                            placeholder="Laisser votre déscription..."
                                                                             className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                             value={this.state.description || ''}
                                                                             onChange={this.handleChangeBody} />

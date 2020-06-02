@@ -90,7 +90,7 @@ class PremiumUserNewTeam extends Component {
         }else{
             $.notify({
                     //,
-                    message: 'La fichier ne peut pas être supérieure à 15 MB'
+                    message: 'Le fichier ne peut pas être supérieure à 15 MB'
                 },
                 {
                     allow_dismiss: false,
@@ -136,7 +136,7 @@ class PremiumUserNewTeam extends Component {
             .then(() => {
 
                 $.notify({
-                        message: 'Informations sauvegardé avec success...'
+                        message: 'Informations sauvegardé avec succès...'
                     },
                     {
                         allow_dismiss: false,
@@ -259,7 +259,7 @@ class PremiumUserNewTeam extends Component {
                                                     <Row>
                                                         <div className="col-md-6">
                                                             <label className="labels">
-                                                                Non complet
+                                                                Nom complet
                                                                 <span className="text-danger">*</span>
                                                             </label>
                                                             <FormGroup>
@@ -324,7 +324,7 @@ class PremiumUserNewTeam extends Component {
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                             formats={this.formats}
-                                                                            placeholder="Laisser votre description..."
+                                                                            placeholder="Laisser votre déscription..."
                                                                             className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                             value={this.state.description || ''}
                                                                             onChange={this.handleChangeBody} />
@@ -344,7 +344,6 @@ class PremiumUserNewTeam extends Component {
                                                     </button>
                                                 </div>
                                             </form>
-
 
                                         </div>
                                     </div>

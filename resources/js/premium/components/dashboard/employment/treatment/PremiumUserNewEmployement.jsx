@@ -89,7 +89,7 @@ class PremiumUserNewEmployement extends Component {
         }else{
             $.notify({
                     //,
-                    message: 'La fichier ne peut pas être supérieure à 15 MB'
+                    message: 'Le fichier ne peut pas être supérieure à 15 MB'
                 },
                 {
                     allow_dismiss: false,
@@ -208,7 +208,7 @@ class PremiumUserNewEmployement extends Component {
                                                 <i className="material-icons">dialpad</i>
                                             </div>
                                             <p className="card-category">
-                                                <b>{this.state.title || "Annonces sur les offres d'empoi,service et formation"}</b>
+                                                <b>{this.state.title || "Annonces sur les offres d'emplois, services et formations"}</b>
                                             </p>
                                             <h3 className="card-title" style={{ color: "red" }}>
                                                 <b>{this.data_countFormatter(employments_count)}</b>
@@ -217,7 +217,7 @@ class PremiumUserNewEmployement extends Component {
                                         <div className="card-footer">
                                             <div className="stats">
                                                 <i className="material-icons">dialpad</i>
-                                                <b>{this.state.title || "Annonces sur les offres d'empoi,service et formation"}</b>
+                                                <b>{this.state.title || "Annonces sur les offres d'emplois, services et formations"}</b>
                                             </div>
                                         </div>
                                     </div>
@@ -232,9 +232,9 @@ class PremiumUserNewEmployement extends Component {
                                             <div className="row">
                                                 <div className="col-md-6">
                                                     <h4 className="card-title">
-                                                        <b>{this.state.title || "Annonces sur les offres d'empoi,service et formation"}</b>
+                                                        <b>{this.state.title || "Annonces sur les offres d'emplois, services et formations"}</b>
                                                     </h4>
-                                                    <p className="card-title">{this.state.title || "Annonces sur les offres d'empoi,service et formation"}</p>
+                                                    <p className="card-title">{this.state.title || "Annonces sur les offres d'emplois, services et formations"}</p>
                                                 </div>
                                                 <div className="col-md-6 text-right">
                                                 <span>
@@ -296,8 +296,8 @@ class PremiumUserNewEmployement extends Component {
                                                                        minLength="4"
                                                                        className={`form-control ${this.hasErrorFor('price') ? 'is-invalid' : ''}`}
                                                                        name='price'
-                                                                       placeholder="Montant de votre annonce"
-                                                                       aria-label="Montant de votre annonce"
+                                                                       placeholder="Montant de votre offre"
+                                                                       aria-label="Montant de votre offre"
                                                                        autoComplete="price"
                                                                        value={this.state.price || ""}
                                                                        onChange={this.handleFieldChange}
@@ -348,7 +348,7 @@ class PremiumUserNewEmployement extends Component {
 
                                                         <div className="col-md-6">
                                                             <label className="labels">
-                                                                Selectionez la categorie
+                                                                Selectionez la catégorie
                                                                 <span className="text-danger">*</span>
                                                             </label>
                                                             <FormGroup>
@@ -356,7 +356,7 @@ class PremiumUserNewEmployement extends Component {
                                                                 <select name={'categoryemployment_id'} value={this.state.categoryemployment_id || ""}
                                                                         className={`form-control ${this.hasErrorFor('categoryemployment_id') ? 'is-invalid' : ''}`}
                                                                         id="categoryemployment_id" onChange={this.handleFieldChange}>
-                                                                    <option value="" disabled>Selectioner une category</option>
+                                                                    <option value="" disabled>Selectioner une catégorie</option>
                                                                     {categoryemployments.map((item) => (
                                                                         <option key={item.id} value={item.id}>{item.name}</option>
                                                                     ))}
@@ -394,7 +394,7 @@ class PremiumUserNewEmployement extends Component {
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                             formats={this.formats}
-                                                                            placeholder="Laisser votre description..."
+                                                                            placeholder="Laisser votre déscription..."
                                                                             className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                             value={this.state.description || ''}
                                                                             onChange={this.handleChangeBody} />
@@ -410,11 +410,10 @@ class PremiumUserNewEmployement extends Component {
                                                         <i className="now-ui-icons ui-1_simple-delete"/> Annuler
                                                     </Link>
                                                     <button className="btn btn-primary" type="submit">
-                                                        <b>Mettre à jour l'annonce</b>
+                                                        <b>Poster l'annonce</b>
                                                     </button>
                                                 </div>
                                             </Form>
-
 
                                         </div>
                                     </div>

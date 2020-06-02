@@ -95,7 +95,7 @@ class PremiumUserEditEmployement extends Component {
         }else{
             $.notify({
                     //,
-                    message: 'La fichier ne peut pas être supérieure à 15 MB'
+                    message: 'Le fichier ne peut pas être supérieure à 15 MB'
                 },
                 {
                     allow_dismiss: false,
@@ -137,7 +137,7 @@ class PremiumUserEditEmployement extends Component {
             /** Alert notify bootstrapp **/
             $.notify({
                     //,
-                    message: 'Annonce activé avec succès'
+                    message: 'Annonce activée avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -175,7 +175,7 @@ class PremiumUserEditEmployement extends Component {
             /** Alert notify bootstrapp **/
             $.notify({
                     // title: 'Update FAQ',
-                    message: 'Annonce désactiver avec succès'
+                    message: 'Annonce déactivée avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -207,7 +207,7 @@ class PremiumUserEditEmployement extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            text: "êtes-vous sûr de vouloir executer cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -225,7 +225,7 @@ class PremiumUserEditEmployement extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Article de blogs suprimée avec success'
+                            message: 'Annonce suprimée avec success'
                         },
                         {
                             allow_dismiss: false,
@@ -273,7 +273,7 @@ class PremiumUserEditEmployement extends Component {
             .then(() => {
                 $.notify({
                         //,
-                        message: 'Votre annonce a bien été modifié'
+                        message: 'Votre annonce a bien été modifiée'
                     },
                     {
                         allow_dismiss: false,
@@ -384,7 +384,7 @@ class PremiumUserEditEmployement extends Component {
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">dialpad</i> Annonces sur les offres d'empoi,service et formation
+                                                <i className="material-icons">dialpad</i> Annonces sur les offres d'emplois, services et formations
                                             </div>
                                         </div>
                                     </div>
@@ -395,12 +395,12 @@ class PremiumUserEditEmployement extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">done</i>
                                             </div>
-                                            <p className="card-category"><b>Actives</b></p>
+                                            <p className="card-category"><b>Activées</b></p>
                                             <h3 className="card-title"><b>{this.dataactive_countFormatter(employmentsactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">done</i> Annonces actives
+                                                <i className="material-icons">done</i> Annonces activées
                                             </div>
                                         </div>
                                     </div>
@@ -411,12 +411,12 @@ class PremiumUserEditEmployement extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">remove</i>
                                             </div>
-                                            <p className="card-category"><b>Desactivés</b></p>
+                                            <p className="card-category"><b>Déactivés</b></p>
                                             <h3 className="card-title"><b>{this.dataunactive_countFormatter(employmentsunactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">remove</i> Annonces désactivés
+                                                <i className="material-icons">remove</i> Annonces déactivés
                                             </div>
                                         </div>
                                     </div>
@@ -432,7 +432,7 @@ class PremiumUserEditEmployement extends Component {
                                                 <i className="material-icons">dialpad</i>
                                             </div>
                                             <p className="card-category">
-                                                <b>{this.state.title || "Annonces sur les offres d'empoi,service et formation"}</b>
+                                                <b>{this.state.title || "Annonces sur les offres d'emploi, services et formations"}</b>
                                             </p>
                                             <h3 className="card-title" style={{ color: "red" }}>
                                                 <b>{this.data_countFormatter(employments_count)}</b>
@@ -441,7 +441,7 @@ class PremiumUserEditEmployement extends Component {
                                         <div className="card-footer">
                                             <div className="stats">
                                                 <i className="material-icons">dialpad</i>
-                                                <b>{this.state.title || "Annonces sur les offres d'empoi,service et formation"}</b>
+                                                <b>{this.state.title || "Annonces sur les offres d'emplois, services et formations"}</b>
                                             </div>
                                         </div>
                                     </div>
@@ -456,9 +456,9 @@ class PremiumUserEditEmployement extends Component {
                                             <div className="row">
                                                 <div className="col-md-6">
                                                     <h4 className="card-title">
-                                                        <b>{this.state.title || "Annonces sur les offres d'empoi,service et formation"}</b>
+                                                        <b>{this.state.title || "Annonces sur les offres d'emplois, services et formations"}</b>
                                                     </h4>
-                                                    <p className="card-title">{this.state.title || "Annonces sur les offres d'empoi,service et formation"}</p>
+                                                    <p className="card-title">{this.state.title || "Annonces sur les offres d'emplois, services et formations"}</p>
                                                 </div>
                                                 <div className="col-md-6 text-right">
                                                 <span>
@@ -475,13 +475,13 @@ class PremiumUserEditEmployement extends Component {
                                                         <i className="material-icons">arrow_back</i>
                                                     </Link>
                                                     <Link to={`/dashboard/premium/${$userIvemo.slug}/employments/create/`}
-                                                          className="btn btn-primary btn-just-icon btn-sm" title="Poster un votre article sur la location">
+                                                          className="btn btn-primary btn-just-icon btn-sm" title="Poster votre article sur la location">
                                                         <i className="material-icons">add</i>
                                                     </Link>
                                                     {this.state.status ?
                                                         <>
                                                             <button type="button" rel="tooltip" onClick={() => this.unactiveItem(this.state.id)}
-                                                                    className="btn btn-success btn-just-icon btn-sm" title="Desactiver" >
+                                                                    className="btn btn-success btn-just-icon btn-sm" title="Déactiver" >
                                                                 <i className="material-icons">done</i>
                                                             </button>
                                                         </>
@@ -504,7 +504,6 @@ class PremiumUserEditEmployement extends Component {
                                             </div>
 
                                             <Form role="form" onSubmit={this.updateItem} acceptCharset="UTF-8">
-
 
                                                 <CardBody>
 
@@ -545,8 +544,8 @@ class PremiumUserEditEmployement extends Component {
                                                                        minLength="4"
                                                                        className={`form-control ${this.hasErrorFor('price') ? 'is-invalid' : ''}`}
                                                                        name='price'
-                                                                       placeholder="Montant de votre annonce"
-                                                                       aria-label="Montant de votre annonce"
+                                                                       placeholder="Montant de votre offre"
+                                                                       aria-label="Montant de votre offre"
                                                                        autoComplete="price"
                                                                        value={this.state.price || ""}
                                                                        onChange={this.handleFieldChange}
@@ -597,7 +596,7 @@ class PremiumUserEditEmployement extends Component {
 
                                                         <div className="col-md-6">
                                                             <label className="labels">
-                                                                Selectionez la categorie
+                                                                Selectionez la catégorie
                                                                 <span className="text-danger">*</span>
                                                             </label>
                                                             <FormGroup>
@@ -605,7 +604,7 @@ class PremiumUserEditEmployement extends Component {
                                                                 <select name={'categoryemployment_id'} value={this.state.categoryemployment_id || ""}
                                                                         className={`form-control ${this.hasErrorFor('categoryemployment_id') ? 'is-invalid' : ''}`}
                                                                         id="categoryemployment_id" onChange={this.handleFieldChange}>
-                                                                    <option value="" disabled>Selectioner une category</option>
+                                                                    <option value="" disabled>Selectioner une catégorie</option>
                                                                     {categoryemployments.map((item) => (
                                                                         <option key={item.id} value={item.id}>{item.name}</option>
                                                                     ))}
@@ -643,7 +642,7 @@ class PremiumUserEditEmployement extends Component {
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                             formats={this.formats}
-                                                                            placeholder="Laisser votre description..."
+                                                                            placeholder="Laisser votre déscription..."
                                                                             className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                             value={this.state.description || ''}
                                                                             onChange={this.handleChangeBody} />

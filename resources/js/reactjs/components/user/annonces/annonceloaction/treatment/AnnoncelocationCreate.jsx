@@ -296,7 +296,6 @@ class AnnoncelocationCreate extends Component {
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -313,7 +312,7 @@ class AnnoncelocationCreate extends Component {
                                                                 <a data-toggle="collapse" data-parent="#accordion"
                                                                    href="#collapseOne" aria-expanded="true"
                                                                    aria-controls="collapseOne">
-                                                                    <b>Caracteristique du bien uniquement pour
+                                                                    <b>Caractéristique du bien uniquement pour
                                                                         (Appartement,Maison,Terrain)</b>
                                                                 </a>
                                                             </div>
@@ -386,7 +385,7 @@ class AnnoncelocationCreate extends Component {
                                                                                     </div>
                                                                                     <small>*optionnel: les champs ne sont
                                                                                         pas obligatoires vous avez le choix
-                                                                                        de le remplire ou pas</small>
+                                                                                        de les remplire ou pas</small>
                                                                                 </div>
 
                                                                             </div>
@@ -405,7 +404,7 @@ class AnnoncelocationCreate extends Component {
                                                                 <a data-toggle="collapse" data-parent="#accordion"
                                                                    href="#collapseDescription" aria-expanded="true"
                                                                    aria-controls="collapseDescription">
-                                                                    <b>Description de l'annonce </b>
+                                                                    <b>Déscription de l'annonce </b>
                                                                 </a>
                                                             </div>
                                                             <div id="collapseDescription" className="collapse show"
@@ -542,7 +541,6 @@ class AnnoncelocationCreate extends Component {
                                 </Form>
 
                             </div>
-
 
                         </div>
 

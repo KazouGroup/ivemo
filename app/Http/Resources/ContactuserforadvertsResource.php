@@ -20,6 +20,7 @@ class ContactuserforadvertsResource extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'ip' => $this->ip,
+            'slug' => $this->slug,
             'full_name' => $this->full_name,
             'appointment_time' => $this->appointment_time,
             'status' => $this->status,

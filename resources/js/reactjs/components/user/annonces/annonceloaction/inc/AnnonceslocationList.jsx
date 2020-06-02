@@ -21,7 +21,6 @@ class AnnonceslocationList extends Component {
                         <div className="card card-plain card-blog">
                             <div className="row">
                                 <div className="col-md-5">
-
                                     <div className="card-image">
                                         <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
                                             <ol className="carousel-indicators">
@@ -70,10 +69,7 @@ class AnnonceslocationList extends Component {
                                             </>
                                         )}
 
-
                                     </div>
-
-
 
                                     <br />
                                     <div className="card-header d-flex align-items-center">
@@ -119,7 +115,6 @@ class AnnonceslocationList extends Component {
                                             </NavLink>
                                             - {this.props.district.length > 10 ? this.props.district.substring(0, 10) + "..." : this.props.district}
                                         </div>
-
                                     </div>
                                     <h6 className="card-title">
                                         <Link to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.slug}/`}>
@@ -173,14 +168,13 @@ class AnnonceslocationList extends Component {
                                                 </>
                                             )}
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                         {!this.props.status_admin &&(
                             <div className="alert alert-danger text-center" role="alert">
-                                <span>Cette annonce à éte momentanément désactivée car elle ne respecte pas nos régle et nos principe <a href="#pablo">Clique sur ce lien</a> pour en savoir plus</span>
+                                <span>Cette annonce à éte momentanément déactivée car elle ne respecte pas nos régle et nos principe <a href="#pablo">Clique sur ce lien</a> pour en savoir plus</span>
                             </div>
                         )}
                     </div>

@@ -381,7 +381,7 @@ class AnnonceBienAvendreCreate extends Component {
                                                             <a data-toggle="collapse" data-parent="#accordion"
                                                                 href="#collapseDescription" aria-expanded="true"
                                                                 aria-controls="collapseDescription">
-                                                                <b>Description de l'annonce </b>
+                                                                <b>Déscription de l'annonce </b>
                                                                 <i className="now-ui-icons arrows-1_minimal-down"></i>
                                                             </a>
                                                         </div>
@@ -404,14 +404,12 @@ class AnnonceBienAvendreCreate extends Component {
                                                                                     rows="10" />
                                                                                 {this.renderErrorFor('message')}
                                                                             </div>
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
 
                                                 <div className="submit text-center">
@@ -421,9 +419,7 @@ class AnnonceBienAvendreCreate extends Component {
                                                     </button>
                                                 </div>
                                             </div>
-
                                         </div>
-
                                     </div>
 
                                     <div className="col-lg-4 col-md-12 mx-auto">

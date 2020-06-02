@@ -613,13 +613,11 @@ class AnnoncelocationIndex extends Component {
                                                                 </button>
                                                             </div>
 
-
                                                         </div>
 
                                                     </div>
 
                                                 </Form>
-
 
                                             </div>
                                         </div>

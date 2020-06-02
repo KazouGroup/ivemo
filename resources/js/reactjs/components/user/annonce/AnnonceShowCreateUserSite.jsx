@@ -92,30 +92,21 @@ class AnnonceShowCreateUserSite extends Component {
     render() {
         return (
             <div className="about-us sidebar-collapse">
-
                 <nav className="navbar navbar-expand-lg bg-primary">
                     <NavUserSite />
                 </nav>
-
                 <div className="wrapper">
-
                     <div className="main main-raised">
-
                         <div className="container">
                             <br />
-
                             <form role="form" id="contact-form" onSubmit={this.createItem} acceptCharset="UTF-8">
-
                                 <div className="row">
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
-
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="card-title">
                                                     <b>Contacte de votre agence</b>
                                                 </div>
-
                                                 <div className="card-header d-flex align-items-center">
                                                     <div className="d-flex align-items-center">
                                                         <NavLink to={`/annonce/show/`}>
@@ -155,7 +146,6 @@ class AnnonceShowCreateUserSite extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
-
 
                                                 <hr />
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
@@ -201,7 +191,6 @@ class AnnonceShowCreateUserSite extends Component {
                                                                                             <option value="">Chambre</option>
                                                                                             <option value="">Studio</option>
                                                                                             <option value="">Maison</option>
-
                                                                                         </select>
                                                                                         {this.renderErrorFor('categorie')}
                                                                                     </div>
@@ -217,7 +206,6 @@ class AnnonceShowCreateUserSite extends Component {
                                                                                             <option value="">Yaounde</option>
                                                                                             <option value="">Bafoussam</option>
                                                                                             <option value="">Bertoua</option>
-
                                                                                         </select>
                                                                                         {this.renderErrorFor('city')}
                                                                                     </div>
@@ -229,7 +217,6 @@ class AnnonceShowCreateUserSite extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
@@ -245,7 +232,6 @@ class AnnonceShowCreateUserSite extends Component {
                                                                 <div className="row">
                                                                     <div className="col-md-12">
                                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-
                                                                             <div className="row">
                                                                                 <div className="col-md-4 col-4">
                                                                                     <label htmlFor="Chambres">Surface</label>
@@ -296,16 +282,13 @@ class AnnonceShowCreateUserSite extends Component {
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
-
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">
@@ -335,21 +318,19 @@ class AnnonceShowCreateUserSite extends Component {
                                                                                 />
                                                                                 {this.renderErrorFor('last_name')}
                                                                             </div>
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">
                                                         <div className="card-header" role="tab" id="headingDescription">
                                                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseDescription" aria-expanded="true" aria-controls="collapseDescription">
-                                                                <b>Description de l'annonce </b>
+                                                                <b>Déscription de l'annonce </b>
                                                                 <i className="now-ui-icons arrows-1_minimal-down"></i>
                                                             </a>
                                                         </div>
@@ -375,7 +356,6 @@ class AnnonceShowCreateUserSite extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
 
                                                 <div className="submit text-center">
@@ -384,9 +364,7 @@ class AnnonceShowCreateUserSite extends Component {
                                                     </button>
                                                 </div>
                                             </div>
-
                                         </div>
-
                                     </div>
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
@@ -472,31 +450,17 @@ class AnnonceShowCreateUserSite extends Component {
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
                                                             </div>
-
-
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
-
                                 </div>
-
                             </form>
-
-
                         </div>
-
-
-
                     </div>
-
-
-
 
                     <FooterBigUserSite />
                 </div>

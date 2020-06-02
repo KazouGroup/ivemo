@@ -42,7 +42,7 @@ class Annoncelocationbycategorycityshow extends Component {
 
     unactiveItem(id){
         Swal.fire({
-            title: 'Désactiver l\'annonce?',
+            title: 'Déactiver l\'annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -259,7 +259,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                         <div className="card">
                                             <div className="card-body">
                                                 <h6 className="card-title">
-                                                    Description
+                                                    Déscription
                                             </h6>
 
                                                 {annoncelocation.description ? <span className="title text-justify" dangerouslySetInnerHTML={this.getDescription(annoncelocation)} />: <Skeleton count={3}/>}
@@ -361,8 +361,6 @@ class Annoncelocationbycategorycityshow extends Component {
 
                                 <BlogannoncelocationIntesseAnnonseShow {...this.props} />
 
-
-
                             </div>
 
                         </div>
@@ -371,8 +369,6 @@ class Annoncelocationbycategorycityshow extends Component {
                     </div>
                 </div>
             </>
-
-
 
         )
     }

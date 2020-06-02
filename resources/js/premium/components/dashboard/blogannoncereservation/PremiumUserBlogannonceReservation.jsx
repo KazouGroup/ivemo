@@ -135,7 +135,7 @@ class PremiumUserBlogannonceReservation extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action?",
+            text: "êtes-vous sûr de vouloir exècuter cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -375,7 +375,7 @@ class PremiumUserBlogannonceReservation extends Component {
                                                          <span className="btn-label">
                                                            <i className="material-icons">add</i>
                                                          </span>
-                                                        <b className="title_hover">Poster un votre article sur la reservation</b>
+                                                        <b className="title_hover">Poster votre article sur la reservation</b>
                                                     </Link>
                                                 </div>
                                             </div>
@@ -389,7 +389,7 @@ class PremiumUserBlogannonceReservation extends Component {
                                                     <tr>
                                                         <th><b>Image</b></th>
                                                         <th><b>Titre</b></th>
-                                                        <th><b>Categorie</b></th>
+                                                        <th><b>Catégorie</b></th>
                                                         <th><b>Vue</b></th>
                                                         <th><b>Status</b></th>
                                                         <th><b>Date</b></th>
@@ -400,7 +400,7 @@ class PremiumUserBlogannonceReservation extends Component {
                                                     <tr>
                                                         <th>Image</th>
                                                         <th>Titre</th>
-                                                        <th>Categorie</th>
+                                                        <th>Catégorie</th>
                                                         <th>Vue</th>
                                                         <th>Status</th>
                                                         <th>Date</th>
@@ -429,6 +429,7 @@ class PremiumUserBlogannonceReservation extends Component {
                 <FooterPremiumUser />
 
             </div>
+
             </>
 
         )

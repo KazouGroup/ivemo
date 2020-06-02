@@ -66,7 +66,7 @@ class PremiumUserEmployementMessageShow extends Component {
     deleteItem(contactuseremployment) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            text: "êtes-vous sûr de vouloir exècuter cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -85,7 +85,7 @@ class PremiumUserEmployementMessageShow extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Message suprimée avec success'
+                            message: 'Message suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -146,8 +146,6 @@ class PremiumUserEmployementMessageShow extends Component {
 
                             <NavPremiumUserEmployement/>
 
-
-
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="card">
@@ -175,7 +173,7 @@ class PremiumUserEmployementMessageShow extends Component {
                                                     </Link>
                                                     {contactuseremployment.status_red ?
                                                         <Button onClick={() => this.unactiveItem(contactuseremployment.id)}
-                                                                className="btn btn-success btn-link btn-just-icon btn-sm" title="Desactiver" >
+                                                                className="btn btn-success btn-link btn-just-icon btn-sm" title="Déactiver" >
                                                             <i className="material-icons">done</i>
                                                         </Button>
                                                         :
@@ -183,7 +181,6 @@ class PremiumUserEmployementMessageShow extends Component {
                                                                 className="btn btn-rose btn-link btn-just-icon btn-sm" title="Activer" >
                                                             <i className="material-icons">remove</i>
                                                         </Button>
-
                                                     }
                                                     <Button onClick={() => this.deleteItem(contactuseremployment)}
                                                             className="btn btn-danger btn-link btn-just-icon btn-sm" title="Supprimer ce message">
@@ -192,7 +189,6 @@ class PremiumUserEmployementMessageShow extends Component {
                                                 </div>
 
                                             </div>
-
 
                                             <CardBody>
 
@@ -239,7 +235,6 @@ class PremiumUserEmployementMessageShow extends Component {
                                                             >
                                                                 {contactuseremployment.message}
                                                             </ReadMoreAndLess>: <Skeleton count={2}/>}
-
                                                     </div>
                                                 </Row>
 

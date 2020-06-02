@@ -142,7 +142,7 @@ class AnnoncelocationEdit extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            text: "êtes-vous sûr de vouloir executer cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -236,7 +236,7 @@ class AnnoncelocationEdit extends Component {
             /** Alert notify bootstrapp **/
             $.notify({
                     // title: 'Update',
-                    message: 'Annonce désactivé avec succès'
+                    message: 'Annonce déactivé avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -354,7 +354,7 @@ class AnnoncelocationEdit extends Component {
                                                                     :
                                                                     <>
                                                                         <Button onClick={() => this.unactiveItem(this.state.id)}
-                                                                                className="btn btn-success btn-icon btn-sm" title="Annonce desactivé">
+                                                                                className="btn btn-success btn-icon btn-sm" title="Annonce déactivé">
                                                                             <i className="now-ui-icons ui-1_check"/>
                                                                         </Button>
                                                                     </>
@@ -554,16 +554,14 @@ class AnnoncelocationEdit extends Component {
                                                                                     </div>
                                                                                     <small>*optionnel: les champs ne sont
                                                                                         pas obligatoires vous avez le choix
-                                                                                        de le remplire ou pas</small>
+                                                                                        de les remplire ou pas</small>
                                                                                 </div>
-
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
 
                                                     <div id="accordion" role="tablist" aria-multiselectable="true"

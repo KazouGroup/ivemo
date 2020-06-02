@@ -152,7 +152,7 @@ class Annoncelocationbycity extends Component {
                 $('#addNew').modal('hide');
 
                 $.notify({
-                    message: `Cette annonce a été signalé avec succès`
+                    message: `Cette annonce a été signalée avec succès`
                 },
                     {
                         allow_dismiss: false,
@@ -193,7 +193,7 @@ class Annoncelocationbycity extends Component {
     }
     unactiveItem(id) {
         Swal.fire({
-            title: 'Désactiver l\'annonce?',
+            title: 'Déactiver l\'annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -269,7 +269,7 @@ class Annoncelocationbycity extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                         // title: 'Update',
-                        message: 'Annonce suprimée avec success'
+                        message: 'Annonce suprimée avec succès'
                     },
                         {
                             allow_dismiss: false,
@@ -444,13 +444,11 @@ class Annoncelocationbycity extends Component {
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
 
                                     <div className="modal fade" id="addNew" tabIndex="-1" role="dialog" aria-labelledby="addNewLabel"

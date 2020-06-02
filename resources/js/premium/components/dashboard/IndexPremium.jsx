@@ -26,7 +26,6 @@ class IndexPremium extends Component {
         this.loadItems();
     }
 
-
     render() {
         const {userannoncelocations} = this.state;
         return (
@@ -66,12 +65,12 @@ class IndexPremium extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">done</i>
                                             </div>
-                                            <p className="card-category"><b>Actives</b></p>
+                                            <p className="card-category"><b>Activés</b></p>
                                             <h3 className="card-title"><b>18</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">done</i> Articles actives
+                                                <i className="material-icons">done</i> Articles activés
                                             </div>
                                         </div>
                                     </div>
@@ -82,12 +81,12 @@ class IndexPremium extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">remove</i>
                                             </div>
-                                            <p className="card-category"><b>Desactivés</b></p>
+                                            <p className="card-category"><b>Déactivés</b></p>
                                             <h3 className="card-title"><b>15</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">remove</i> Articles désactivés
+                                                <i className="material-icons">remove</i> Articles déactivés
                                             </div>
                                         </div>
                                     </div>
