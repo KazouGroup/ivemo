@@ -1,8 +1,8 @@
 <?php
 
-Route::group(['middleware' => 'auth:web'], function(){
+Route::group(['middleware' => 'verified'], function(){
 
-    Route::group(['middleware' => 'verified'],function (){
+    Route::group(['middleware' => 'verified_status_user'],function (){
 
         Route::get(
             'api/dashboard/premium/{user:slug}',
@@ -25,11 +25,15 @@ Route::group(['middleware' => 'auth:web'], function(){
             'UserpremiumController@premiumannonceventes'
         )->name('premium_user_annonce_ventes.site');
 
+
+
+
+        require(__DIR__ . DIRECTORY_SEPARATOR . 'premiumemployement.php');
+
+        require(__DIR__ . DIRECTORY_SEPARATOR . 'premiumteamuser.php');
+    
+        require(__DIR__ . DIRECTORY_SEPARATOR . 'blog'. DIRECTORY_SEPARATOR . 'index.php');
+
     });
 
-    require(__DIR__ . DIRECTORY_SEPARATOR . 'premiumemployement.php');
-
-    require(__DIR__ . DIRECTORY_SEPARATOR . 'premiumteamuser.php');
-
-    require(__DIR__ . DIRECTORY_SEPARATOR . 'blog'. DIRECTORY_SEPARATOR . 'index.php');
 });

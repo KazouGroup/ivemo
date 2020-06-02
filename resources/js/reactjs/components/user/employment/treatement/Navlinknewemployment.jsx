@@ -23,7 +23,6 @@ class Navlinknewemployment extends Component  {
             reverseButtons: true,
         }).then((result) => {
             if (result.value) {
-                
                 window.location = "/profile/account";
             }
         });
