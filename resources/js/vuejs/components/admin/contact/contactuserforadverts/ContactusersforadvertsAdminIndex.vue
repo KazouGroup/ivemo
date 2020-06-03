@@ -219,7 +219,7 @@
                 return (contactforadvertsred_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
             },
 
-            dataunactive_countFormatter( contactforadvertsunred_count, precision) {
+            dataunactive_countFormatter(contactforadvertsunred_count, precision) {
                 const abbrev = ['', 'k', 'M', 'B', 'T'];
                 const unrangifiedOrder = Math.floor(Math.log10(Math.abs( contactforadvertsunred_count)) / 3);
                 const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
@@ -264,7 +264,7 @@
             },
 
             infiniteHandler($state) {
-                dyaxios.get(route('api.blogannoncelocations_dashboard'), {
+                dyaxios.get(route('api.contactusersforadverts_dashboard'), {
                     params: {
                         page: this.page,
                     },

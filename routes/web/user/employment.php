@@ -31,34 +31,9 @@ Route::get(
 )->name('employments_site');
 
 Route::get(
-    'employment/ab/new',
-    'EmploymentController@create'
-)->name('employmentabnew_site');
-
-Route::get(
-    'profile/{user}/personal_settings/employments',
-    'EmploymentController@employmentsbyuser'
-)->name('employmentsbyuser_site');
-
-Route::get(
-    'profile/{user}/personal_settings/employments/{categoryemployment}',
-    'EmploymentController@employmentsbyusercategoryemployment'
-)->name('employmentsbyuserbycategoryemployment_site');
-
-Route::post(
-    'employment/save',
-    'EmploymentController@store'
-)->name('employmentstore_site');
-
-Route::get(
     'employments/{categoryemployment}',
     'EmploymentController@employmentbycategory'
 )->name('employmentcategory_site');
-
-Route::get(
-    'employment/{city}',
-    'EmploymentController@employmentbycity'
-)->name('employmentcity_site');
 
 Route::get(
     'employments/{categoryemployment}/{city}',
@@ -71,27 +46,60 @@ Route::get(
 )->name('employmentslug_site');
 
 Route::get(
-    'employment/ab/{employment}/edit',
-    'EmploymentController@edit'
-)->name('employmentsedit_site');
+    'employment/{city}',
+    'EmploymentController@employmentbycity'
+)->name('employmentcity_site');
 
-Route::put(
-    'employment/{employment}',
-    'EmploymentController@update'
-)->name('employmentsupdate_site');
+Route::group(['middleware' => 'verified'], function(){
 
-Route::get(
-    'employments_activated/{employment}',
-    'EmploymentController@activated'
-)->name('employmentsactivated_site');
+    Route::group(['middleware' => 'verified_status_user'],function (){
 
-Route::get(
-    'employments_unactivated/{employment}',
-    'EmploymentController@unactivated'
-)->name('employmentsunactivated_site');
+        Route::get(
+            'profile/{user}/personal_settings/employments',
+            'EmploymentController@employmentsbyuser'
+        )->name('employmentsbyuser_site');
 
-Route::delete(
-    'employments_delete/{id}',
-    'EmploymentController@destroy'
-)->name('employmentsdelete_site');
+        Route::get(
+            'profile/{user}/personal_settings/employments/{categoryemployment}',
+            'EmploymentController@employmentsbyusercategoryemployment'
+        )->name('employmentsbyuserbycategoryemployment_site');
+
+        Route::get(
+            'employment/ab/new',
+            'EmploymentController@create'
+        )->name('employmentabnew_site');
+        
+        Route::post(
+            'employment/save',
+            'EmploymentController@store'
+        )->name('employmentstore_site');
+        
+        Route::get(
+            'employment/ab/{employment}/edit',
+            'EmploymentController@edit'
+        )->name('employmentsedit_site');
+        
+        Route::put(
+            'employment/{employment}',
+            'EmploymentController@update'
+        )->name('employmentsupdate_site');
+        
+        Route::get(
+            'employments_activated/{employment}',
+            'EmploymentController@activated'
+        )->name('employmentsactivated_site');
+        
+        Route::get(
+            'employments_unactivated/{employment}',
+            'EmploymentController@unactivated'
+        )->name('employmentsunactivated_site');
+        
+        Route::delete(
+            'employments_delete/{id}',
+            'EmploymentController@destroy'
+        )->name('employmentsdelete_site');
+
+    });
+
+});
 
