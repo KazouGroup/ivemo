@@ -103,8 +103,8 @@ class PrivateUserFavoritEmployementList extends Component {
                                             <>
                                                 <div className="text-center">
                                                     <button type="button"
-                                                        className="btn btn-facebook btn-icon btn-sm" onClick={() => this.props.unfavoriteItem(this.props.employment.id)} title="Supprimer cette annonce">
-                                                        <i className="fas fa-bookmark"></i>
+                                                        className="btn btn-danger btn-icon btn-sm" onClick={() => this.props.unfavoriteItem(this.props.employment.id)} title="Supprimer cette annonce">
+                                                        <i className="fas fa-heart"></i>
                                                     </button>
                                                 </div>
 

@@ -249,7 +249,7 @@ class EmployementBycity extends Component {
                             <div className="content-center">
                                 {cityemployment.name && (
                                     <>
-                                        <h1 className="title">{cityemployment.name || ""}</h1>
+                                        <h2 className="title">{cityemployment.name || ""}</h2>
 
                                         <Link to={`/employments/`} className="text-white">
                                             <i className="fa fa-chevron-circle-left" /> <b>Retour aux annonces</b>

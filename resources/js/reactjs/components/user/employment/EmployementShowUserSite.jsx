@@ -385,23 +385,31 @@ class EmployementShowUserSite extends Component {
                                                                  className="img-fluid rounded" />
                                                             : null}
                                                         <div className="text-center">
-                                                            {employment.bookmarked ?
-
-                                                                <>
-                                                                    <Button onClick={() => this.unfavoriteItem(employment.id)}
-                                                                            className="btn btn-danger btn-sm btn-round" title="Retirer de vos favoris">
-                                                                        <i className="fas fa-heart"></i> <b>Sauvegardé</b>
-                                                                    </Button>
-                                                                </>
-
+                                                            {$guest ?
+                                                                <Button data-toggle="modal" data-target="#loginModal"
+                                                                        className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
+                                                                    <i className="far fa-heart"></i> <b>Sauvegarder</b>
+                                                                </Button>
                                                                 :
                                                                 <>
-                                                                    <Button onClick={() => this.favoriteItem(employment.id)}
-                                                                            className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
-                                                                        <i className="far fa-heart"></i> <b>Sauvegarder</b>
-                                                                    </Button>
-                                                                </>
-                                                            }
+                                                                    {employment.bookmarked ?
+
+                                                                        <>
+                                                                            <Button onClick={() => this.unfavoriteItem(employment.id)}
+                                                                                    className="btn btn-danger btn-sm btn-round" title="Retirer de vos favoris">
+                                                                                <i className="fas fa-heart"></i> <b>Sauvegardé</b>
+                                                                            </Button>
+                                                                        </>
+
+                                                                        :
+                                                                        <>
+                                                                            <Button onClick={() => this.favoriteItem(employment.id)}
+                                                                                    className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
+                                                                                <i className="far fa-heart"></i> <b>Sauvegarder</b>
+                                                                            </Button>
+                                                                        </>
+                                                                    }
+                                                                </>}
                                                         </div>
                                                     </>
                                                 )}
@@ -426,22 +434,31 @@ class EmployementShowUserSite extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="text-right ml-auto">
-                                                        {employment.bookmarked ?
-
-                                                            <>
-                                                                <Button onClick={() => this.unfavoriteItem(employment.id)}
-                                                                        className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
-                                                                    <i className="fas fa-heart"></i>
-                                                                </Button>
-                                                            </>
-
+                                                        {$guest ?
+                                                            <Button  data-toggle="modal" data-target="#loginModal"
+                                                                     className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                                <i className="far fa-heart"></i>
+                                                            </Button>
                                                             :
-                                                            <>
-                                                                <Button onClick={() => this.favoriteItem(employment.id)}
-                                                                        className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
-                                                                    <i className="far fa-heart"></i>
-                                                                </Button>
-                                                            </>
+                                                           <>
+                                                               {employment.bookmarked ?
+
+                                                                   <>
+                                                                       <Button onClick={() => this.unfavoriteItem(employment.id)}
+                                                                               className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
+                                                                           <i className="fas fa-heart"></i>
+                                                                       </Button>
+                                                                   </>
+
+                                                                   :
+                                                                   <>
+                                                                       <Button onClick={() => this.favoriteItem(employment.id)}
+                                                                               className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                                           <i className="far fa-heart"></i>
+                                                                       </Button>
+                                                                   </>
+                                                               }
+                                                           </>
                                                         }
                                                         <Button className="btn btn-icon btn-sm btn-facebook" title="Copier le lien" onClick={() => this.copyToClipboard()}>
                                                             <i className="fas fa-copy"></i>
