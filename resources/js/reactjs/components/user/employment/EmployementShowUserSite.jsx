@@ -389,16 +389,16 @@ class EmployementShowUserSite extends Component {
 
                                                                 <>
                                                                     <Button onClick={() => this.unfavoriteItem(employment.id)}
-                                                                            className="btn btn-facebook btn-sm" title="Retirer de vos favoris">
-                                                                        <i className="fas fa-bookmark"></i> <b>Sauvegarder</b>
+                                                                            className="btn btn-danger btn-sm btn-round" title="Retirer de vos favoris">
+                                                                        <i className="fas fa-heart"></i> <b>Sauvegardé</b>
                                                                     </Button>
                                                                 </>
 
                                                                 :
                                                                 <>
                                                                     <Button onClick={() => this.favoriteItem(employment.id)}
-                                                                            className="btn btn-facebook btn-sm btn-neutral" title="Ajouter à vos favoris">
-                                                                        <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
+                                                                            className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
+                                                                        <i className="far fa-heart"></i> <b>Sauvegarder</b>
                                                                     </Button>
                                                                 </>
                                                             }
@@ -430,8 +430,8 @@ class EmployementShowUserSite extends Component {
 
                                                             <>
                                                                 <Button onClick={() => this.unfavoriteItem(employment.id)}
-                                                                        className="btn btn-facebook btn-icon btn-sm" title="Retirer de vos favoris">
-                                                                    <i className="fas fa-bookmark"></i>
+                                                                        className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
+                                                                    <i className="fas fa-heart"></i>
                                                                 </Button>
                                                             </>
 
@@ -439,11 +439,11 @@ class EmployementShowUserSite extends Component {
                                                             <>
                                                                 <Button onClick={() => this.favoriteItem(employment.id)}
                                                                         className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
-                                                                    <i className="far fa-bookmark"></i>
+                                                                    <i className="far fa-heart"></i>
                                                                 </Button>
                                                             </>
                                                         }
-                                                        <Button className="btn btn-icon btn-sm btn-primary " title="Copier le lien" onClick={() => this.copyToClipboard()}>
+                                                        <Button className="btn btn-icon btn-sm btn-facebook" title="Copier le lien" onClick={() => this.copyToClipboard()}>
                                                             <i className="fas fa-copy"></i>
                                                         </Button>
                                                         <Button className="btn btn-icon btn-sm btn-info" onClick={() => this.phoneShow(employment)} id={employment.user.phone}>
@@ -454,10 +454,7 @@ class EmployementShowUserSite extends Component {
                                                                 <i className="now-ui-icons objects_globe"/>
                                                             </a>
                                                         )}
-                                                        <UncontrolledTooltip placement="bottom" target="TooltipSignale">
-                                                            Signaler cette annonce
-                                                        </UncontrolledTooltip>
-                                                        <Button  id="TooltipSignale" onClick={() => this.signalerUser(employment.id)}
+                                                        <Button  title="Signaler cette annonce" onClick={() => this.signalerUser(employment.id)}
                                                                 className="btn btn-instagram btn-icon btn-sm">
                                                             <i className="fas fa-flag"></i>
                                                         </Button>

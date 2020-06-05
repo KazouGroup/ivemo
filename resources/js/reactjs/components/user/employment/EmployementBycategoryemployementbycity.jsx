@@ -213,9 +213,9 @@ class EmployementBycategoryemployementbycity extends Component {
     loadItems(){
         let itemCategoryemployment = this.props.match.params.categoryemployment;
         let itemCity = this.props.match.params.city;
-        dyaxios.get(route('api.employmentscategory_site', [itemCategoryemployment])).then(response => this.setState({ employments: response.data }));
+        dyaxios.get(route('api.employmentscategorybycity_site', [itemCategoryemployment,itemCity])).then(response => this.setState({ employments: response.data }));
+        dyaxios.get(route('api.employmentscategorybycitycount_site', [itemCategoryemployment,itemCity])).then(response => this.setState({ annoncebycity: response.data }));
         dyaxios.get(route('api.employmentscategorycount_site', [itemCategoryemployment])).then(response => this.setState({ categoryemployment: response.data }));
-        dyaxios.get(route('api.employmentscategorybycity_site', [itemCategoryemployment,itemCity])).then(response => this.setState({ annoncebycity: response.data }));
         dyaxios.get(route('api.employmentbycategorybycount_site', [itemCategoryemployment])).then(response => this.setState({ cities: response.data }));
     }
 
@@ -245,9 +245,9 @@ class EmployementBycategoryemployementbycity extends Component {
         return (
             <>
 
-                <HelmetSite title={`${categoryemployment.name || 'Annonce'} ${annoncebycity.name || ""} - ${$name_site}`}/>
+                <HelmetSite title={`${categoryemployment.name || 'Annonce'} à ${annoncebycity.name || ""} - ${$name_site}`}/>
 
-                <div className="landing-page sidebar-collapse">
+                <div className="about-us sidebar-collapse">
 
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400" >
                         <NavUserSite />

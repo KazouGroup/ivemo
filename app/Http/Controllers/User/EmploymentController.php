@@ -198,6 +198,13 @@ class EmploymentController extends Controller
         return response()->json($employments,200);
     }
 
+    public function apiemploymentsbycategorybycitycount(categoryemployment $categoryemployment,city $city)
+    {
+        $employments = EmploymentService::apiemploymentsbycategorybycitycount($categoryemployment,$city);
+
+        return response()->json($employments,200);
+    }
+
     public function apiemploymentsbycategoryslug(categoryemployment $categoryemployment,city $city,employment $employment)
     {
         visits($employment)->seconds(60)->increment();

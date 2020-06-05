@@ -242,7 +242,7 @@ class EmployementBycategoryemployement extends Component {
             <>
                 <HelmetSite title={`${categoryemployment.name || 'Annonce'} - ${$name_site}`}/>
 
-                <div className="landing-page sidebar-collapse">
+                <div className="about-us sidebar-collapse">
 
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400" >
                         <NavUserSite />
@@ -255,7 +255,7 @@ class EmployementBycategoryemployement extends Component {
                             <div className="content-center">
                                 {categoryemployment.name && (
                                     <>
-                                        <h1 className="title">{categoryemployment.name || ""}</h1>
+                                        <h2 className="title">{categoryemployment.name || ""}</h2>
 
                                         <Link to={`/employments/`} className="text-white">
                                             <i className="fa fa-chevron-circle-left" /> <b>Retour aux annonces</b>
