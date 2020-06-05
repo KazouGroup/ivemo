@@ -163,6 +163,20 @@ class EmploymentController extends Controller
         return response()->json($employments,200);
     }
 
+    public function apiemploymentsbycategorycount(categoryemployment $categoryemployment)
+    {
+        $employments = EmploymentService::apiemploymentsbycategorycount($categoryemployment);
+
+        return response()->json($employments,200);
+    }
+
+    public function apiemploymentbycitycount(city $city)
+    {
+        $employments = EmploymentService::apiemploymentbycitycount($city);
+
+        return response()->json($employments,200);
+    }
+
     public function apiemploymentbycity(city $city)
     {
         $employments = EmploymentService::apiemploymentbycity($city);

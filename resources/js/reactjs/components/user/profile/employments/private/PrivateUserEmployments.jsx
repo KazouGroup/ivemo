@@ -297,7 +297,7 @@ class PrivateUserEmployments extends Component {
                                             <div className="col-md-4 col-4">
                                                 <div className="info info-hover">
                                                     <div className="icon icon-warning icon-circle">
-                                                        <i className="now-ui-icons text_align-center"></i>                                                    </div>
+                                                        <i className="now-ui-icons business_briefcase-24"></i>                                                    </div>
                                                     <h4 className="info-title"><b>{this.data_countFormatter(employments_count)}</b></h4>
                                                 </div>
                                             </div>
@@ -318,7 +318,7 @@ class PrivateUserEmployments extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
 
                                         {mapEmployments}
 

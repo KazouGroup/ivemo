@@ -17,9 +17,10 @@ class UserStatusProfileVerified
      */
     public function handle($request, Closure $next, $redirectToRoute = null)
     {
-        
-        if (! $request->user() || ( $request->user()->status_profile === 0 )) {
-            
+        $user = $request->user();
+
+        if (!$user || ( $user->status_profile === 0 )) {
+
             return $request->expectsJson()
                 ? abort(403, 'Your status is not professional')
                 : Redirect::route($redirectToRoute ?: 'profile_add_info_account.site');

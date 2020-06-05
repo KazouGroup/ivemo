@@ -2,8 +2,10 @@
 
 namespace App\Model;
 
+use App\Model\favorite\favoritemployment;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class employment extends Model
@@ -85,8 +87,16 @@ class employment extends Model
         ];
     }
 
+
     public function contactuseremployments()
     {
         return $this->hasMany(contactuseremployment::class, 'employment_id');
+    }
+
+    public function bookmarked()
+    {
+        return (bool) favoritemployment::where('user_id', Auth::id())
+            ->where('employment_id', $this->id)
+            ->first();
     }
 }

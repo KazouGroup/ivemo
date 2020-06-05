@@ -19,12 +19,79 @@ class EmployementBycategoryemployement extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            categoryemployment:{employments:{categoryemployment:[],user:[],city:[]},user:[]},
+            employments:{categoryemployment:[],user:[],city:[]},user:[],
+            categoryemployment:[],
             cities:{user:[]},
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
+    }
+
+    favoriteItem(id) {
+        const url = route('employments_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Cette annonce a été ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('employments_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Cette annonce a été retiré de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
     }
 
     unactiveItem(id){
@@ -46,6 +113,10 @@ class EmployementBycategoryemployement extends Component {
                 let url = route('employmentsunactivated_site',id);
                 dyaxios.get(url).then(() => {
 
+                    // remove from local state
+                    let isNotId = item => item.id !== id;
+                    let updatedItems = this.state.employments.filter(isNotId);
+                    this.setState({employments: updatedItems});
                     /** Alert notify bootstrapp **/
                     $.notify({
                             message: "Cette annonce a été masquée aux utilisateurs",
@@ -63,7 +134,6 @@ class EmployementBycategoryemployement extends Component {
                             },
                         });
                     /** End alert ***/
-                        // remove from local state
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
@@ -94,6 +164,11 @@ class EmployementBycategoryemployement extends Component {
             reverseButtons: true,
         }).then((result) => {
             if (result.value) {
+
+                // remove from local state
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.employments.filter(isNotId);
+                this.setState({employments: updatedItems});
 
                 const url = route('employmentsdelete_site',[id]);
                 //Envoyer la requet au server
@@ -133,11 +208,10 @@ class EmployementBycategoryemployement extends Component {
         });
     }
 
-
     loadItems(){
         let itemCategoryemployment = this.props.match.params.categoryemployment;
-        let url = route('api.employmentscategory_site', [itemCategoryemployment]);
-        dyaxios.get(url).then(response => this.setState({ categoryemployment: response.data }));
+        dyaxios.get(route('api.employmentscategory_site', [itemCategoryemployment])).then(response => this.setState({ employments: response.data }));
+        dyaxios.get(route('api.employmentscategorycount_site', [itemCategoryemployment])).then(response => this.setState({ categoryemployment: response.data }));
         dyaxios.get(route('api.employmentbycategorybycount_site', [itemCategoryemployment])).then(response => this.setState({ cities: response.data }));
     }
 
@@ -153,12 +227,12 @@ class EmployementBycategoryemployement extends Component {
         return (employments_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
     render() {
-        const {categoryemployment,cities} = this.state;
-        const mapEmployments = categoryemployment.employments.length >= 0 ? (
-            categoryemployment.employments.map(item => {
+        const {employments,categoryemployment,cities} = this.state;
+        const mapEmployments = employments.length >= 0 ? (
+            employments.map(item => {
                 return(
 
-                    <EmployementList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
+                    <EmployementList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
                 )
             })
         ):(
