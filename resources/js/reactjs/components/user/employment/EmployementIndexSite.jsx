@@ -235,7 +235,7 @@ class EmployementIndexSite extends Component {
             <>
                 <HelmetSite title={`Emplois, Formation & Services - ${$name_site}`}/>
 
-                <div className="about-us sidebar-collapse">
+                <div className="landing-page sidebar-collapse">
 
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400" >
                         <NavUserSite />
@@ -324,9 +324,10 @@ class EmployementIndexSite extends Component {
 
                         </div>
 
-                        <FooterBigUserSite />
+
                     </div>
                 </div>
+                <FooterBigUserSite />
 
             </>
         )

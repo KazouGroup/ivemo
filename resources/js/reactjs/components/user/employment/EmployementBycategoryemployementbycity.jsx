@@ -247,7 +247,7 @@ class EmployementBycategoryemployementbycity extends Component {
 
                 <HelmetSite title={`${categoryemployment.name || 'Annonce'} à ${annoncebycity.name || ""} - ${$name_site}`}/>
 
-                <div className="about-us sidebar-collapse">
+                <div className="landing-page sidebar-collapse">
 
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400" >
                         <NavUserSite />
