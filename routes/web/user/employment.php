@@ -24,6 +24,11 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.employmentscategorybycity_site');
 
     Route::get(
+        'employmentscount/{categoryemployment}/{city}',
+        'EmploymentController@apiemploymentsbycategorybycitycount'
+    )->name('api.employmentscategorybycitycount_site');
+
+    Route::get(
         'employmentcount/{city}',
         'EmploymentController@apiemploymentbycitycount'
     )->name('api.employmentcitycount_site');
@@ -32,11 +37,6 @@ Route::group(['prefix' => 'api'], function () {
         'employment/{city}',
         'EmploymentController@apiemploymentbycity'
     )->name('api.employmentcity_site');
-
-    Route::get(
-        'employmentscount/{categoryemployment}/{city}',
-        'EmploymentController@apiemploymentsbycategorybycitycount'
-    )->name('api.employmentscategorybycitycount_site');
 
     Route::get(
         'employments_interesses/{categoryemployment}',

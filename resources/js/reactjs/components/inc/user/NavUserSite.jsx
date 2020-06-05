@@ -161,7 +161,7 @@ class NavUserSite extends PureComponent {
                                             <i className="now-ui-icons text_align-left"/>Services
                                         </a>
                                         <a href={`/profile/${$userIvemo.slug}/personal_settings/favorite_employments/`} className="dropdown-item">
-                                            <i className="now-ui-icons location_bookmark"/>Favoris
+                                            <i className="now-ui-icons ui-2_favourite-28"/>Mes favoris
                                         </a>
                                         <a href={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_ventes/`} className="dropdown-item">
                                             <i className="now-ui-icons text_align-center"/>Blog annonces
