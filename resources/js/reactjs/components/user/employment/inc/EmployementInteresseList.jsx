@@ -65,7 +65,7 @@ class EmployementInteresseList extends Component {
 
                                         <div className="text-right mx-auto">
                                             {this.props.price && (
-                                                <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h5>
+                                                <h5 className="text-success"><b>{this.props.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h5>
                                             )}
 
                                             {/*
@@ -84,11 +84,64 @@ class EmployementInteresseList extends Component {
                                     <div className="card-image">
                                         <NavLink to={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`}>
                                             <LazyLoad>
-                                                <img className="img img-raised rounded"
+                                                <img className="img rounded"
                                                      src={this.props.photo} alt={this.props.title}/>
                                             </LazyLoad>
                                         </NavLink>
                                     </div>
+
+                                    <div className="text-center">
+
+
+                                        {$guest  ?
+
+                                            <Button  data-toggle="modal" data-target="#loginModal"
+                                                className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                <i className="far fa-heart"></i>
+                                            </Button>
+                                            :
+                                            <>
+                                                {this.props.bookmarked ?
+
+                                                    <>
+                                                        <Button onClick={() => this.props.unfavoriteItem(this.props.id)}
+                                                                className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
+                                                            <i className="fas fa-heart"></i>
+                                                        </Button>
+                                                    </>
+
+                                                    :
+                                                    <>
+                                                        <Button onClick={() => this.props.favoriteItem(this.props.id)}
+                                                                className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                            <i className="far fa-heart"></i>
+                                                        </Button>
+                                                    </>
+                                                }
+
+
+                                                {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
+                                                    <>
+                                                        {this.props.status ?
+                                                            <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}
+                                                                    className="btn btn-success btn-icon btn-sm" title="Desactiver l'annonce">
+                                                                <i className="now-ui-icons ui-1_check"/>
+                                                            </button>
+                                                            :null}
+                                                        <NavLink to={`/employment/ab/${this.props.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" title=" Editer l'annonce">
+                                                            <i className="now-ui-icons ui-2_settings-90"/>
+                                                        </NavLink>
+                                                        <Button
+                                                            className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} title="Supprimer cette annonce">
+                                                            <i className="now-ui-icons ui-1_simple-remove"/>
+                                                        </Button>{" "}
+                                                    </>
+                                                )}
+                                            </>
+
+                                        }
+                                    </div>
+
 
                                 </div>
                             </div>

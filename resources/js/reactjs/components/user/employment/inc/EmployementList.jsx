@@ -47,14 +47,13 @@ class EmployementList extends Component {
                                          </a>
                                      </span>
                                     <br/>
-                                    {/**
-                                     *
+
 
                                     <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`}>
                                         <span dangerouslySetInnerHTML={this.getDescription()}/>
                                     </a>
 
-                                     */}
+
 
                                 <br/>
                                 <div className="card-header d-flex align-items-center">
@@ -92,7 +91,7 @@ class EmployementList extends Component {
                                 <div className="card-image">
                                     <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`}>
                                         <LazyLoad>
-                                            <img className="img img-raised rounded"
+                                            <img className="img  rounded"
                                                  src={this.props.photo} alt={this.props.title}/>
                                         </LazyLoad>
                                     </a>
@@ -101,8 +100,30 @@ class EmployementList extends Component {
                                 <div className="text-center">
 
 
-                                    {!$guest &&(
+                                    {$guest ?
+                                        <Button  data-toggle="modal" data-target="#loginModal"
+                                                 className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                            <i className="far fa-heart"></i>
+                                        </Button>
+                                        :
                                         <>
+                                            {this.props.bookmarked ?
+
+                                                <>
+                                                    <Button onClick={() => this.props.unfavoriteItem(this.props.id)}
+                                                            className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
+                                                        <i className="fas fa-heart"></i>
+                                                    </Button>
+                                                </>
+
+                                                :
+                                                <>
+                                                    <Button onClick={() => this.props.favoriteItem(this.props.id)}
+                                                            className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                        <i className="far fa-heart"></i>
+                                                    </Button>
+                                                </>
+                                            }
                                             {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
                                                 <>
                                                     {this.props.status ?
@@ -131,7 +152,7 @@ class EmployementList extends Component {
                                             )}
 
                                         </>
-                                    )}
+                                    }
                                 </div>
 
                             </div>

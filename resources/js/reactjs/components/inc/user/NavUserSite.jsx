@@ -40,21 +40,6 @@ class NavUserSite extends PureComponent {
                             </NavLink>
                         </li>
 
-                        {!$guest &&(
-                            <>
-                                {$userIvemo.status_profile === 1 && (
-                                    <li className="nav-item">
-                                        <a href={`/dashboard/premium/${$userIvemo.slug}/`} className="nav-link">
-                                            <i className="now-ui-icons design_app"/>
-                                            <b>Premium dashboard</b>
-                                        </a>
-                                    </li>
-                                )}
-                                
-                            </>
-                            
-                        )}
-
                         <li className={`nav-item dropdown`}>
                             <a href="#" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                 <i className="now-ui-icons files_paper" aria-hidden="true"/>
@@ -126,7 +111,12 @@ class NavUserSite extends PureComponent {
                                                 <i className="now-ui-icons business_bulb-63" /> Dashboard
                                             </a>
                                         )}
-
+                                        {$userIvemo.status_profile === 1 && (
+                                            <a href={`/dashboard/premium/${$userIvemo.slug}/`} className="dropdown-item">
+                                                <i className="now-ui-icons design_app"/>
+                                                <b>Premium dashboard</b>
+                                            </a>
+                                        )}
                                         <a href="/profile/account" className="dropdown-item">
                                             <i className="now-ui-icons users_circle-08"/> Editer mon profile
                                         </a>
@@ -159,6 +149,9 @@ class NavUserSite extends PureComponent {
                                         </a>
                                         <a href={`/profile/${$userIvemo.slug}/personal_settings/employments/`} className="dropdown-item">
                                             <i className="now-ui-icons text_align-left"/>Services
+                                        </a>
+                                        <a href={`/profile/${$userIvemo.slug}/personal_settings/favorite_employments/`} className="dropdown-item">
+                                            <i className="now-ui-icons ui-2_favourite-28"/>Mes favoris
                                         </a>
                                         <a href={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_ventes/`} className="dropdown-item">
                                             <i className="now-ui-icons text_align-center"/>Blog annonces

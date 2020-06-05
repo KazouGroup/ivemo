@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Notifications\VerifyEmailUsers;
 use Carbon\Carbon;
+use App\Model\favorite\favoritemployment;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -208,5 +209,16 @@ class user extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(subscriberuser::class, 'user_id');
     }
+
+    public function favoritemployments()
+    {
+        return $this->hasMany(favoritemployment::class, 'user_id');
+    }
+
+    public function bookmarksfavoritemployments()
+    {
+        return $this->belongsToMany(employment::class, 'favoritemployments', 'user_id', 'employment_id')->withTimeStamps();
+    }
+
 
 }

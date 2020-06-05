@@ -16,6 +16,8 @@ class EmploymentResource extends JsonResource
     {
         return [
             'id' => $this->id,
+
+            'bookmarked' => $this->bookmarked(),
             'title' => $this->title,
             'description' => $this->description,
             'slug' => $this->slug,

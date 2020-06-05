@@ -81,6 +81,7 @@ class BlogannoncelocationService
     public static function apiannonceblogcategorylocationslug($categoryannoncelocation, $date,$blogannoncelocation)
     {
         $blogannoncelocation = new BlogannoncelocationResource(blogannoncelocation::whereDate('created_at',$date)
+            ->with('user','categoryannoncelocation','member')
             ->whereSlug($blogannoncelocation->slug)
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->where(['status' => 1,'status_admin' => 1])->first());

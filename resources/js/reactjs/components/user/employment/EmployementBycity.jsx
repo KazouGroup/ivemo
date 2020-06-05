@@ -21,11 +21,78 @@ class EmployementBycity extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cityemployment:{employments:{categoryemployment:[],user:[],city:[]},user:[]},
+            employments:{categoryemployment:[],user:[],city:[]},
+            cityemployment:[],
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
+    }
+
+    favoriteItem(id) {
+        const url = route('employments_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Cette annonce a été ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('employments_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Cette annonce a été retiré de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
     }
 
     unactiveItem(id){
@@ -47,6 +114,10 @@ class EmployementBycity extends Component {
                 let url = route('employmentsunactivated_site',id);
                 dyaxios.get(url).then(() => {
 
+                    // remove from local state
+                    let isNotId = item => item.id !== id;
+                    let updatedItems = this.state.employments.filter(isNotId);
+                    this.setState({employments: updatedItems});
                     /** Alert notify bootstrapp **/
                     $.notify({
                             message: "Cette offre a été masquée aux utilisateurs",
@@ -64,7 +135,6 @@ class EmployementBycity extends Component {
                             },
                         });
                     /** End alert ***/
-                        // remove from local state
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
@@ -95,6 +165,11 @@ class EmployementBycity extends Component {
             reverseButtons: true,
         }).then((result) => {
             if (result.value) {
+
+                // remove from local state
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.employments.filter(isNotId);
+                this.setState({employments: updatedItems});
 
                 const url = route('employmentsdelete_site',[id]);
                 //Envoyer la requet au server
@@ -137,7 +212,8 @@ class EmployementBycity extends Component {
 
     loadItems(){
         let itemCity = this.props.match.params.city;
-        dyaxios.get(route('api.employmentcity_site', [itemCity])).then(response => this.setState({ cityemployment: response.data }));
+        dyaxios.get(route('api.employmentcity_site', [itemCity])).then(response => this.setState({ employments: response.data }));
+        dyaxios.get(route('api.employmentcitycount_site', [itemCity])).then(response => this.setState({ cityemployment: response.data }));
     }
 
     componentDidMount() {
@@ -145,12 +221,12 @@ class EmployementBycity extends Component {
     }
 
     render() {
-        const {cityemployment} = this.state;
-        const mapEmployments = cityemployment.employments.length >= 0 ? (
-            cityemployment.employments.map(item => {
+        const {employments,cityemployment} = this.state;
+        const mapEmployments = employments.length >= 0 ? (
+            employments.map(item => {
                 return(
 
-                    <EmployementList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
+                    <EmployementList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
                 )
             })
         ):(
@@ -173,7 +249,7 @@ class EmployementBycity extends Component {
                             <div className="content-center">
                                 {cityemployment.name && (
                                     <>
-                                        <h1 className="title">{cityemployment.name || ""}</h1>
+                                        <h2 className="title">{cityemployment.name || ""}</h2>
 
                                         <Link to={`/employments/`} className="text-white">
                                             <i className="fa fa-chevron-circle-left" /> <b>Retour aux offres</b>
