@@ -27,7 +27,7 @@ class PubliciteIndexSite extends Component {
 
                 <HelmetSite title={`Publicité sur la plate forme - ${$name_site}`}/>
 
-                <div className="about-us sidebar-collapse">
+                <div className="landing-page sidebar-collapse">
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
                         <NavUserSite />
                     </nav>
@@ -38,10 +38,8 @@ class PubliciteIndexSite extends Component {
                             </div>
                             <div className="content-center">
                                 <div className="row">
-                                    <div className="col-md-8 ml-auto mr-auto">
-                                        <h4 className="title">Vos clients recherchent de l'immobilier?
-                                            Avec nous, vous frappez la marque</h4>
-                                    </div>
+                                    <h2 className="title">Vos clients recherchent de l'immobilier?
+                                        Avec nous, vous frappez la marque</h2>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +80,7 @@ class PubliciteIndexSite extends Component {
 
                                 <div className="row">
                                     <div className="col-md-10 mx-auto">
-                                        <h1 className="text-center title">{$name_site}<small><sub>{$country_sigle}</sub></small></h1>
+                                        <h3 className="text-center title">{$name_site}<small><sub>{$country_sigle}</sub></small></h3>
                                         <h5 className="text-center description">
                                            <b> Nous soutenons votre campagne de communication auprès de clients potentiels avec des campagnes de bannières, des positions exclusives sur une base géographique, le marketing par e-mail, en fournissant également un soutien pour le développement graphique</b>
                                         </h5>
@@ -167,8 +165,10 @@ class PubliciteIndexSite extends Component {
 
                         </div>
 
-                        <FooterBigUserSite />
+
                     </div>
+
+                    <FooterBigUserSite />
                 </div>
 
             </Fragment>

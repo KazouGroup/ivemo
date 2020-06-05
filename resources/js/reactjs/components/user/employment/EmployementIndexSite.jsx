@@ -209,11 +209,10 @@ class EmployementIndexSite extends Component {
     }
 
     loadItems(){
-        fetch(route('api.employments_site')).then(res => res.json()).then((result) => {
+        dyaxios.get(route('api.employments_site')).then(response =>
             this.setState({
-                employments: [...result]
-            });
-        });
+                employments: [...response.data],
+            }));
     }
 
     componentDidMount() {

@@ -40,21 +40,6 @@ class NavUserSite extends PureComponent {
                             </NavLink>
                         </li>
 
-                        {!$guest &&(
-                            <>
-                                {$userIvemo.status_profile === 1 && (
-                                    <li className="nav-item">
-                                        <a href={`/dashboard/premium/${$userIvemo.slug}/`} className="nav-link">
-                                            <i className="now-ui-icons design_app"/>
-                                            <b>Premium dashboard</b>
-                                        </a>
-                                    </li>
-                                )}
-
-                            </>
-
-                        )}
-
                         <li className={`nav-item dropdown`}>
                             <a href="#" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                 <i className="now-ui-icons files_paper" aria-hidden="true"/>
@@ -126,7 +111,14 @@ class NavUserSite extends PureComponent {
                                                 <i className="now-ui-icons business_bulb-63" /> Dashboard
                                             </a>
                                         )}
-
+                                        {$userIvemo.status_profile === 1 && (
+                                            <li className="nav-item">
+                                                <a href={`/dashboard/premium/${$userIvemo.slug}/`} className="nav-link">
+                                                    <i className="now-ui-icons design_app"/>
+                                                    <b>Premium dashboard</b>
+                                                </a>
+                                            </li>
+                                        )}
                                         <a href="/profile/account" className="dropdown-item">
                                             <i className="now-ui-icons users_circle-08"/> Editer mon profile
                                         </a>
