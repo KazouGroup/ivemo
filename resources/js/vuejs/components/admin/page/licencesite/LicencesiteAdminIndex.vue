@@ -7,8 +7,6 @@
 
         <div class="content">
             <div class="container-fluid">
-
-
                 <div v-if="loaded" class="row">
                     <div class="col-md-12 expo">
                         <div class="card card-stats">
@@ -65,7 +63,6 @@
                                             <b class="title_hover">New Licence site</b>
                                         </router-link>
                                     </div>
-
                                 </div>
                                 <div class="material-datatables">
                                     <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
@@ -123,7 +120,6 @@
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -223,7 +219,7 @@
                     /** Alert notify bootstrapp **/
                     $.notify(
                         {
-                            message: `Data desactivated successfully`,
+                            message: `Data disactivated successfully`,
                         },
                         {
                             allow_dismiss: false,

@@ -22,7 +22,7 @@
             </nav>
             <div class="copyright" id="copyright">
                 &copy;  {{ new Date().getFullYear() }}, Designed by
-                <a href="https://www.invisionapp.com" target="_blank">Invimo</a>. Coded by
+                <a href="https://www.invisionapp.com" target="_blank">Ivemo</a>. Coded by
                 <a href="https://www.creative-tim.com" target="_blank">KazouGroup</a>.
             </div>
         </div>

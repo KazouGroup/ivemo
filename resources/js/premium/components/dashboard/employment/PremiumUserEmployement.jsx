@@ -30,7 +30,7 @@ class PremiumUserEmployement extends Component {
 
     activeItem(id){
         Swal.fire({
-            title: 'Afficher cette annonce?',
+            title: 'Afficher cette offre?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -49,7 +49,7 @@ class PremiumUserEmployement extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette annonce est désormais visible aux utilisateurs",
+                            message: "Cette offre est désormais visible aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -82,7 +82,7 @@ class PremiumUserEmployement extends Component {
 
     unactiveItem(id){
         Swal.fire({
-            title: 'Masquer cette annonce?',
+            title: 'Masquer cette Offre?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -101,7 +101,7 @@ class PremiumUserEmployement extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette annonce a été masquée aux utilisateurs",
+                            message: "Cette Offre a été masquée aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -159,7 +159,7 @@ class PremiumUserEmployement extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec succès'
+                            message: 'Offre suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -277,7 +277,7 @@ class PremiumUserEmployement extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">dialpad</i>
                                             </div>
-                                            <p className="card-category"><b>Annonces</b></p>
+                                            <p className="card-category"><b>Offres d'emplois</b></p>
                                             <h3 className="card-title"><b>{this.data_countFormatter(employments_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
@@ -298,7 +298,7 @@ class PremiumUserEmployement extends Component {
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">done</i> Annonces activées
+                                                <i className="material-icons">done</i> Offres activées
                                             </div>
                                         </div>
                                     </div>
@@ -309,12 +309,12 @@ class PremiumUserEmployement extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">remove</i>
                                             </div>
-                                            <p className="card-category"><b>Désactivées</b></p>
+                                            <p className="card-category"><b>Déactivées</b></p>
                                             <h3 className="card-title"><b>{this.dataunactive_countFormatter(employmentsunactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">remove</i> Annonces désactivées
+                                                <i className="material-icons">remove</i> Offres déactivées
                                             </div>
                                         </div>
                                     </div>
@@ -374,7 +374,7 @@ class PremiumUserEmployement extends Component {
                                                              <span className="btn-label">
                                                                <i className="material-icons">add</i>
                                                              </span>
-                                                            <b className="title_hover">Poster votre annonce</b>
+                                                            <b className="title_hover">Poster votre offre</b>
                                                         </Link>
                                                     </div>
                                                 </div>

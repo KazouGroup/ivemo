@@ -8,8 +8,6 @@
 
         <div class="content">
             <div class="container-fluid">
-
-
                 <div v-if="loaded" class="row">
                     <div class="col-md-12 expo">
                         <div class="card card-stats">
@@ -18,7 +16,7 @@
                                     <i class="material-icons">filter_hdr</i>
                                 </div>
                                 <p class="card-category">
-                                    <b>Work with</b>
+                                    <b>Work with us</b>
                                 </p>
                                 <h3 class="card-title" style="color:red;">
                                     <b>{{workwithuses.length}}</b>
@@ -27,7 +25,7 @@
                             <div class="card-footer">
                                 <div class="stats">
                                     <i class="material-icons">filter_hdr</i>
-                                    <b>Work with</b>
+                                    <b>Work with us</b>
                                 </div>
                             </div>
                         </div>
@@ -45,9 +43,9 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h4 class="card-title">
-                                            <b>Work with</b>
+                                            <b>Work with us</b>
                                         </h4>
-                                        <p class="card-title">Work with</p>
+                                        <p class="card-title">Work with us</p>
                                     </div>
                                     <div class="col-md-6 text-right">
                                       <span>
@@ -63,7 +61,7 @@
                                       <span class="btn-label">
                                                <i class="material-icons">add</i>
                                            </span>
-                                            <b class="title_hover">New Work with</b>
+                                            <b class="title_hover">New offer</b>
                                         </router-link>
                                     </div>
 
@@ -73,7 +71,7 @@
                                         <thead>
                                         <tr>
                                             <th><b>Title</b></th>
-                                            <th><b>Category Work with</b></th>
+                                            <th><b>Category of Work</b></th>
                                             <th><b>City</b></th>
                                             <th><b>Status</b></th>
                                             <th><b>Postulant</b></th>
@@ -84,7 +82,7 @@
                                         <tfoot>
                                         <tr>
                                             <th>Title</th>
-                                            <th>Category Work with</th>
+                                            <th>Category of Work</th>
                                             <th>City</th>
                                             <th>Status</th>
                                             <th>Postulant</th>
@@ -241,7 +239,7 @@
                     /** Alert notify bootstrapp **/
                     $.notify(
                         {
-                            message: `Data desactivated successfully`,
+                            message: `Data disactivated successfully`,
                         },
                         {
                             allow_dismiss: false,

@@ -168,7 +168,7 @@ class PremiumUserEmployementMessageShow extends Component {
                                             <div className="toolbar">
                                                 <div className="text-right ml-auto">
                                                     <Link to={`/dashboard/premium/${$userIvemo.slug}/employments/message/${contactuseremployment.employment.slug}/`}
-                                                          className="btn btn-secondary btn-just-icon btn-sm" title="Retour a vos annonces">
+                                                          className="btn btn-secondary btn-just-icon btn-sm" title="Retour a vos offres">
                                                         <i className="material-icons">arrow_back</i>
                                                     </Link>
                                                     {contactuseremployment.status_red ?
@@ -183,11 +183,10 @@ class PremiumUserEmployementMessageShow extends Component {
                                                         </Button>
                                                     }
                                                     <Button onClick={() => this.deleteItem(contactuseremployment)}
-                                                            className="btn btn-danger btn-link btn-just-icon btn-sm" title="Supprimer ce message">
+                                                            className="btn btn-danger btn-link btn-just-icon btn-sm" title="Supprimer cette offre">
                                                         <i className="material-icons">delete_forever</i>
                                                     </Button>
                                                 </div>
-
                                             </div>
 
                                             <CardBody>
@@ -244,7 +243,6 @@ class PremiumUserEmployementMessageShow extends Component {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 

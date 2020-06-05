@@ -380,7 +380,7 @@
                     /** Alert notify bootstrapp **/
                     $.notify(
                         {
-                            message: `Data desactivated successfully`,
+                            message: `Data disactivated successfully`,
                         },
                         {
                             allow_dismiss: false,

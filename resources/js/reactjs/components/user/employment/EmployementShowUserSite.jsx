@@ -57,7 +57,7 @@ class EmployementShowUserSite extends Component {
 
     signalerUser(id){
         Swal.fire({
-            title: 'Masquer cette annonce?',
+            title: 'Masquer cette offre?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -76,7 +76,7 @@ class EmployementShowUserSite extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette annonce a été masquée aux utilisateurs",
+                            message: "Cette offre a été masquée aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -117,7 +117,7 @@ class EmployementShowUserSite extends Component {
 
     unactiveItem(id){
         Swal.fire({
-            title: 'Masquer cette annonce?',
+            title: 'Masquer cette offre?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -136,7 +136,7 @@ class EmployementShowUserSite extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette annonce a été masquée aux utilisateurs",
+                            message: "Cette offre a été masquée aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -190,7 +190,7 @@ class EmployementShowUserSite extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec succès'
+                            message: 'Offre suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -257,13 +257,10 @@ class EmployementShowUserSite extends Component {
                     </nav>
 
                     <div className="wrapper">
-
                         <div className="main main-raised">
-
                             <div className="container">
                                 <br />
                                 <div className="row">
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="submit text-left">
 
@@ -282,7 +279,6 @@ class EmployementShowUserSite extends Component {
 
                                         <div className="card">
                                             <div className="card-body">
-
                                                 <div className="card-header d-flex align-items-center">
                                                     <div className="d-flex align-items-center">
                                                         <NavLink to={`/pro/${employment.user.slug}/employments/`}>
@@ -324,10 +320,8 @@ class EmployementShowUserSite extends Component {
                                             </div>
                                         </div>
 
-
                                         <div className="card">
                                             <div className="card-body">
-
                                                 <div className="card-header d-flex align-items-center">
                                                     <div className="d-flex align-items-center">
                                                         <NavLink to={`/pro/${employment.user.slug}/employments/`}>
@@ -358,7 +352,7 @@ class EmployementShowUserSite extends Component {
                                                             </a>
                                                         )}
                                                         <UncontrolledTooltip placement="bottom" target="TooltipSignale">
-                                                            Signaler cette annonce
+                                                            Signaler cette offre
                                                         </UncontrolledTooltip>
                                                         <Button  id="TooltipSignale" onClick={() => this.signalerUser(employment.id)}
                                                                 className="btn btn-instagram btn-icon btn-sm">
@@ -374,7 +368,7 @@ class EmployementShowUserSite extends Component {
                                                                             <i className="far fa-eye"></i> <b>{this.data_countFormatter(employment.visits_count)}</b>
                                                                         </a>
                                                                         <UncontrolledTooltip placement="bottom" target="TooltipStatus">
-                                                                            Desactiver cette annonce
+                                                                            Déactiver cette offre
                                                                         </UncontrolledTooltip>
 
                                                                         <button type="button" rel="tooltip" onClick={() => this.unactiveItem(employment.id)}
@@ -383,7 +377,7 @@ class EmployementShowUserSite extends Component {
                                                                         </button>
 
                                                                         <UncontrolledTooltip placement="bottom" target="TooltipEditer">
-                                                                            Editer cette annonce
+                                                                            Editer cette offre
                                                                         </UncontrolledTooltip>
 
                                                                         <NavLink to={`/employment/ab/${employment.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" id="TooltipEditer">
@@ -391,7 +385,7 @@ class EmployementShowUserSite extends Component {
                                                                         </NavLink>
 
                                                                         <UncontrolledTooltip placement="bottom" target="TooltipDelete">
-                                                                            Supprimer cette annonce
+                                                                            Supprimer cette offre
                                                                         </UncontrolledTooltip>
                                                                         <Button onClick={() => this.deleteItem(employment.id)}
                                                                                 className="btn btn-icon btn-sm btn-danger" id="TooltipDelete">

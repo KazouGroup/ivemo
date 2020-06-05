@@ -30,7 +30,7 @@ class EmployementBycity extends Component {
 
     unactiveItem(id){
         Swal.fire({
-            title: 'Masquer cette annonce?',
+            title: 'Masquer cette offre?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -49,7 +49,7 @@ class EmployementBycity extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette annonce a été masquée aux utilisateurs",
+                            message: "Cette offre a été masquée aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -103,7 +103,7 @@ class EmployementBycity extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec success'
+                            message: 'Offre suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -176,10 +176,10 @@ class EmployementBycity extends Component {
                                         <h1 className="title">{cityemployment.name || ""}</h1>
 
                                         <Link to={`/employments/`} className="text-white">
-                                            <i className="fa fa-chevron-circle-left" /> <b>Retour aux annonces</b>
+                                            <i className="fa fa-chevron-circle-left" /> <b>Retour aux offres</b>
                                         </Link>
 
-                                        <h5><b>{cityemployment.employments_count}</b> {cityemployment.employments_count > 1 ? "annonces" : "annonce"} posté à <b style={{ textTransform: "capitalize" }}>{cityemployment.name}</b></h5>
+                                        <h5><b>{cityemployment.employments_count}</b> {cityemployment.employments_count > 1 ? "offres" : "offre"} posté à <b style={{ textTransform: "capitalize" }}>{cityemployment.name}</b></h5>
 
                                     </>
                                 )}

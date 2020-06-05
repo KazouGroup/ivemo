@@ -6,7 +6,6 @@
 
         <div class="content">
             <div class="container-fluid">
-
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
@@ -14,9 +13,9 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h4 class="card-title">
-                                            <b>Annonces reservations signaler</b>
+                                            <b>Signaled reservations posts</b>
                                         </h4>
-                                        <p class="card-title">Annonces reservations signaler</p>
+                                        <p class="card-title">Signaled reservations posts</p>
                                     </div>
                                     <div class="col-md-6 text-right">
                                       <span>
@@ -33,7 +32,7 @@
                                 <div class="material-datatables">
                                     <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                         <thead>
-                                        <tr>
+                                        <tr class="text-primary">
                                             <th><b>Title annonce</b></th>
                                             <th><b>User</b></th>
                                             <th><b>Signals</b></th>
@@ -164,7 +163,7 @@
                     /** Alert notify bootstrapp **/
                     $.notify(
                         {
-                            message: `Data desactivated successfully`,
+                            message: `Data disactivated successfully`,
                         },
                         {
                             allow_dismiss: false,

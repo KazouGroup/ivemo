@@ -6,7 +6,7 @@
 
         <div class="panel-header">
             <div class="header text-center">
-                <h2 class="title">Edition Condition utilisation</h2>
+                <h2 class="title">Edit conditions</h2>
                 <p class="title">{{this.form.title}}</p>
             </div>
         </div>
@@ -17,16 +17,6 @@
                     <div class="card">
 
                         <div class="card-body">
-                            <div class="toolbar">
-                                <div class="submit text-center">
-                                    <router-link :to="{ name: 'conditionutilisations.create' }" class="btn btn-round btn-primary btn-raised">
-                                       <span class="btn-label">
-                                        <i class="now-ui-icons ui-1_simple-add"></i>
-                                      </span>
-                                        <b class="title_hover">New Condition utilisation</b>
-                                    </router-link>
-                                </div>
-                            </div>
 
                             <form id="RegisterValidation" @submit.prevent="updateItem()" role="form"
                                   method="POST" action="" accept-charset="UTF-8" @keydown="form.onKeydown($event)">
@@ -65,26 +55,19 @@
                                 <div class="submit">
                                     <div class="text-center">
                                         <router-link :to="{ name: 'conditionutilisations.index' }" class="btn btn-round btn-danger">
-                                            <b class="title_hover">Annuler</b>
+                                            <b class="title_hover">Cancel</b>
                                         </router-link>
                                         <button  :disabled="form.busy" type="submit" class="btn btn-success btn-round btn-raised">
-                                            <b class="title_hover">Sauvegarder</b>
+                                            <b class="title_hover">Save</b>
                                         </button>
                                     </div>
                                 </div>
                             </form>
-
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
 
         <footer-admin></footer-admin>
     </div>
@@ -130,7 +113,7 @@
 
                         $.notify(
                             {
-                                message: `Toutes les informations ont été mise à jour`,
+                                message: `Informations updated successfully`,
                             },
                             {
                                 allow_dismiss: false,

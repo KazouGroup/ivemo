@@ -5,7 +5,7 @@
 
         <div class="panel-header">
             <div class="header text-center">
-                <h2 class="title">New Condition utilisation</h2>
+                <h2 class="title">New condition for users</h2>
                 <p class="title">{{this.form.title}}</p>
             </div>
         </div>
@@ -14,9 +14,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-
                         <div class="card-body">
-
                             <form id="RegisterValidation" @submit.prevent="createItem()" role="form"
                                   method="POST" action="" accept-charset="UTF-8" @keydown="form.onKeydown($event)">
                                 <div class="row">
@@ -54,26 +52,19 @@
                                 <div class="submit">
                                     <div class="text-center">
                                         <router-link :to="{ name: 'conditionutilisations.index' }" class="btn btn-round btn-danger">
-                                            <b class="title_hover">Annuler</b>
+                                            <b class="title_hover">Cancel</b>
                                         </router-link>
                                         <button v-if="$auth.can('manage-faq')" :disabled="form.busy" type="submit" class="btn btn-round btn-success btn-raised">
-                                            <b class="title_hover">Sauvegarder</b>
+                                            <b class="title_hover">Save</b>
                                         </button>
                                     </div>
                                 </div>
                             </form>
-
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
 
         <footer-admin></footer-admin>
     </div>
@@ -121,7 +112,7 @@
 
                         $.notify(
                             {
-                                message: `Toutes les informations bien enregisté`,
+                                message: `Informations saved successfully`,
                             },
                             {
                                 allow_dismiss: false,

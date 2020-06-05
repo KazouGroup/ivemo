@@ -171,20 +171,20 @@
                             </li>
                             <li class="nav-item ">
                                 <router-link class="nav-link" :to="{ name: 'categoryannoncelocations.index'}">
-                                    <span class="sidebar-mini"> CAL </span>
-                                    <span class="sidebar-normal"> Category annonce locations </span>
+                                    <span class="sidebar-mini"> AOR </span>
+                                    <span class="sidebar-normal"> Announces on rentings </span>
                                 </router-link>
                             </li>
                             <li class="nav-item ">
                                 <router-link class="nav-link" :to="{ name: 'categoryannoncereservations.index'}">
-                                    <span class="sidebar-mini">CAR</span>
-                                    <span class="sidebar-normal"> category annonce reservations </span>
+                                    <span class="sidebar-mini">AR</span>
+                                    <span class="sidebar-normal"> Announces on reservations </span>
                                 </router-link>
                             </li>
                             <li class="nav-item ">
                                 <router-link class="nav-link" :to="{name: 'categoryannonceventes.index'}">
-                                    <span class="sidebar-mini">CAV</span>
-                                    <span class="sidebar-normal"> category annonce ventes </span>
+                                    <span class="sidebar-mini">AS</span>
+                                    <span class="sidebar-normal"> Announces on sales </span>
                                 </router-link>
                             </li>
                         </ul>
@@ -202,20 +202,20 @@
                         <ul class="nav">
                             <li class="nav-item ">
                                 <router-link class="nav-link" :to="{ name: 'blogannoncelocations.dashboard'}">
-                                    <span class="sidebar-mini"> ALS </span>
-                                    <span class="sidebar-normal"> Articles blogs locations </span>
+                                    <span class="sidebar-mini"> RBA </span>
+                                    <span class="sidebar-normal"> Rentings blog articles</span>
                                 </router-link>
                             </li>
                             <li class="nav-item ">
                                 <router-link class="nav-link" :to="{ name: 'blogannoncereservations.dashboard'}">
-                                    <span class="sidebar-mini"> ABR </span>
-                                    <span class="sidebar-normal"> Articles blogs reservations </span>
+                                    <span class="sidebar-mini">RBA</span>
+                                    <span class="sidebar-normal"> Reservations blog articles </span>
                                 </router-link>
                             </li>
                             <li class="nav-item ">
                                 <router-link class="nav-link" :to="{ name: 'blogannonceventes.dashboard'}">
-                                    <span class="sidebar-mini"> ABV </span>
-                                    <span class="sidebar-normal"> Articles blogs ventes </span>
+                                    <span class="sidebar-mini"> SBA </span>
+                                    <span class="sidebar-normal"> Sales blog articles </span>
                                 </router-link>
                             </li>
                         </ul>
@@ -224,7 +224,7 @@
                 <li class="nav-item ">
                     <a class="nav-link" data-toggle="collapse" href="#employementExamples">
                         <i class="material-icons">work</i>
-                        <p> Manage Emplois & Formations
+                        <p> Employments & Trainings
                             <b class="caret"></b>
                         </p>
                     </a>
@@ -232,14 +232,14 @@
                         <ul class="nav">
                             <li class="nav-item ">
                                 <router-link class="nav-link" :to="{ name: 'categoryemployements.index'}">
-                                    <span class="sidebar-mini"> CEF </span>
-                                    <span class="sidebar-normal"> Category Emplois & Formations </span>
+                                    <span class="sidebar-mini"> JOC </span>
+                                    <span class="sidebar-normal"> Job offering categories </span>
                                 </router-link>
                             </li>
                             <li class="nav-item ">
                                 <router-link class="nav-link" :to="{ name: 'employments.dashboard'}">
                                     <span class="sidebar-mini"> EFS </span>
-                                    <span class="sidebar-normal"> Emplois & Formations </span>
+                                    <span class="sidebar-normal"> Employments & trainings </span>
                                 </router-link>
                             </li>
                         </ul>
@@ -272,7 +272,7 @@
                 <li v-if="$auth.can('manage-signal')" class="nav-item ">
                     <a class="nav-link" data-toggle="collapse" href="#signalExamples">
                         <i class="material-icons">announcement</i>
-                        <p> Signal blogs,annonces...
+                        <p> Signaled blogs, announces...
                             <b class="caret"></b>
                         </p>
                     </a>
@@ -280,20 +280,20 @@
                         <ul class="nav">
                             <li class="nav-item ">
                                 <router-link class="nav-link" :to="{ name: 'signalannoncelocations.index'}">
-                                    <span class="sidebar-mini"> ALS </span>
-                                    <span class="sidebar-normal"> Annonces locations signalées </span>
+                                    <span class="sidebar-mini"> SRP </span>
+                                    <span class="sidebar-normal"> Signaled renting posts </span>
                                 </router-link>
                             </li>
                             <li class="nav-item ">
                                 <router-link class="nav-link" :to="{ name: 'signalannoncereservations.index'}">
-                                    <span class="sidebar-mini"> ARS </span>
-                                    <span class="sidebar-normal"> Annonces reservations signalées </span>
+                                    <span class="sidebar-mini"> SRP </span>
+                                    <span class="sidebar-normal"> Signaled reservations posts </span>
                                 </router-link>
                             </li>
                             <li class="nav-item ">
                                 <router-link class="nav-link" :to="{ name: 'signalannonceventes.index'}">
-                                    <span class="sidebar-mini"> AVS </span>
-                                    <span class="sidebar-normal"> Annonces ventes signalées </span>
+                                    <span class="sidebar-mini"> SSP </span>
+                                    <span class="sidebar-normal"> Signaled sales posts </span>
                                 </router-link>
                             </li>
                         </ul>

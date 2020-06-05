@@ -224,7 +224,6 @@ class PremiumUserNewEmployement extends Component {
                                 </div>
                             </div>
 
-
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="card">
@@ -251,18 +250,16 @@ class PremiumUserNewEmployement extends Component {
                                                         <i className="material-icons">arrow_back</i>
                                                     </Link>
                                                 </div>
-
                                             </div>
 
                                             <Form role="form" onSubmit={this.saveItem} acceptCharset="UTF-8">
-
 
                                                 <CardBody>
 
                                                     <Row>
                                                         <div className="col-md-12">
                                                             <label className="labels">
-                                                                Donner un titre à cet article
+                                                                Donner un titre à cet offre
                                                                 <span className="text-danger">*</span>
                                                             </label>
                                                             <FormGroup>
@@ -286,7 +283,7 @@ class PremiumUserNewEmployement extends Component {
                                                     <Row>
                                                         <div className="col-md-6">
                                                             <label className="labels">
-                                                                Quel est le montant de votre annonce
+                                                                Quel est le montant de votre offre
                                                                 <span className="text-danger">*</span>
                                                             </label>
                                                             <FormGroup>
@@ -410,7 +407,7 @@ class PremiumUserNewEmployement extends Component {
                                                         <i className="now-ui-icons ui-1_simple-delete"/> Annuler
                                                     </Link>
                                                     <button className="btn btn-primary" type="submit">
-                                                        <b>Poster l'annonce</b>
+                                                        <b>Poster l'offre</b>
                                                     </button>
                                                 </div>
                                             </Form>

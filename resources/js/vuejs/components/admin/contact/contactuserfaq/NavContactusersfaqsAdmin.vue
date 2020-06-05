@@ -12,7 +12,7 @@
                 </div>
                 <div class="card-footer">
                     <div class="stats">
-                        <i class="material-icons">forum</i> Messages Contact FAQS
+                        <i class="material-icons">forum</i> Contact FAQS Messages
                     </div>
                 </div>
             </div>
@@ -49,7 +49,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
 </template>

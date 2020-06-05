@@ -64,12 +64,12 @@ class NavPremiumUserEmployement extends Component {
                             <div className="card-icon">
                                 <i className="material-icons">dialpad</i>
                             </div>
-                            <p className="card-category"><b>Annonces</b></p>
+                            <p className="card-category"><b>Offres d'emplois</b></p>
                             <h3 className="card-title"><b>{this.data_countFormatter(employments_count)}</b></h3>
                         </div>
                         <div className="card-footer">
                             <div className="stats">
-                                <i className="material-icons">dialpad</i> Offres d'emploi, services et formations
+                                <i className="material-icons">dialpad</i> Offres d'emploid, services et formations
                             </div>
                         </div>
                     </div>
@@ -85,7 +85,7 @@ class NavPremiumUserEmployement extends Component {
                         </div>
                         <div className="card-footer">
                             <div className="stats">
-                                <i className="material-icons">done</i> Annonces activées
+                                <i className="material-icons">done</i> Offres activées
                             </div>
                         </div>
                     </div>
@@ -101,7 +101,7 @@ class NavPremiumUserEmployement extends Component {
                         </div>
                         <div className="card-footer">
                             <div className="stats">
-                                <i className="material-icons">remove</i> Annonces déactivées
+                                <i className="material-icons">remove</i> Offres déactivées
                             </div>
                         </div>
                     </div>

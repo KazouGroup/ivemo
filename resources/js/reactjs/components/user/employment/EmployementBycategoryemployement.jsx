@@ -48,7 +48,7 @@ class EmployementBycategoryemployement extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette annonce a été masquée aux utilisateurs",
+                            message: "Cette offre a été masquée aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -102,7 +102,7 @@ class EmployementBycategoryemployement extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec success'
+                            message: 'Offre suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -184,10 +184,10 @@ class EmployementBycategoryemployement extends Component {
                                         <h1 className="title">{categoryemployment.name || ""}</h1>
 
                                         <Link to={`/employments/`} className="text-white">
-                                            <i className="fa fa-chevron-circle-left" /> <b>Retour aux annonces</b>
+                                            <i className="fa fa-chevron-circle-left" /> <b>Retour aux offres</b>
                                         </Link>
 
-                                        <h5><b>{categoryemployment.employments_count}</b> {categoryemployment.employments_count > 1 ? "annonces" : "annonce"} posté</h5>
+                                        <h5><b>{categoryemployment.employments_count}</b> {categoryemployment.employments_count > 1 ? "offres" : "offre"} posté</h5>
 
                                     </>
                                 )}
@@ -253,7 +253,7 @@ class EmployementBycategoryemployement extends Component {
                                                                                                     <b style={{ textTransform: "lowercase" }}>{categoryemployment.name}</b> à <b>{item.name}</b>
                                                                                                 </NavLink>
                                                                                             </td>
-                                                                                            <td className="text-right"> {this.getdataString(item.employments_count)}  {item.employments_count > 1 ? "annonces" : "annonce"}</td>
+                                                                                            <td className="text-right"> {this.getdataString(item.employments_count)}  {item.employments_count > 1 ? "offres" : "offre"}</td>
                                                                                         </tr>
                                                                                     ))}
                                                                                 </>

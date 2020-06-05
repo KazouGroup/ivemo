@@ -36,7 +36,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label class="labels">
-                                                Title policy
+                                                Title 
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div class="form-group">
@@ -72,10 +72,10 @@
                                     <div class="submit">
                                         <div class="text-center">
                                             <router-link :to="{ name: 'licencesites.index' }" class="btn btn-danger">
-                                                <b class="title_hover">Annuler</b>
+                                                <b class="title_hover">Cancel</b>
                                             </router-link>
                                             <button  :disabled="form.busy" type="submit" class="btn btn-success btn-raised">
-                                                <b class="title_hover">Sauvegarder</b>
+                                                <b class="title_hover">Save</b>
                                             </button>
                                         </div>
                                     </div>
@@ -132,7 +132,7 @@
 
                         $.notify(
                             {
-                                message: `Toutes les informations bien enregisté`,
+                                message: `Informations saved successfully`,
                             },
                             {
                                 allow_dismiss: false,

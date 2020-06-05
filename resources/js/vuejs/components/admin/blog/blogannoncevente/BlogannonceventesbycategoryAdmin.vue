@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">done</i> Articles actives
+                                        <i class="material-icons">done</i> Activated articles
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">remove</i> Articles désactivés
+                                        <i class="material-icons">remove</i> Disactivated arrticles
                                     </div>
                                 </div>
                             </div>
@@ -114,13 +114,13 @@
                                                <span class="btn-label">
                                                 <i class="material-icons">keyboard_backspace</i>
                                               </span>
-                                                <b class="title_hover">Retour</b>
+                                                <b class="title_hover">Back</b>
                                             </router-link>
                                             <a href="/blogs/annonce_ventes/ab/new/" class="btn btn-primary btn-raised">
                                                    <span class="btn-label">
                                                        <i class="material-icons">add</i>
                                                   </span>
-                                                <b class="title_hover">New article de blog vente</b>
+                                                <b class="title_hover">New article on sales</b>
                                             </a>
                                         </div>
 
@@ -129,7 +129,7 @@
                                         <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                             <thead>
                                             <tr>
-                                                <th><b>Title annonce</b></th>
+                                                <th><b>Title</b></th>
                                                 <th><b>User</b></th>
                                                 <th><b>Category</b></th>
                                                 <th><b>Status user</b></th>
@@ -140,7 +140,7 @@
                                             </thead>
                                             <tfoot>
                                             <tr>
-                                                <th>Title annonce</th>
+                                                <th>Title</th>
                                                 <th>User</th>
                                                 <th>Category</th>
                                                 <th>Status user</th>
@@ -166,20 +166,20 @@
                                                 <td>
                                                     <div class="timeline-heading">
                                                         <span v-if="item.status" class="badge badge-success">
-                                                          <b>Activé</b>
+                                                          <b>Active</b>
                                                         </span>
                                                         <span v-else class="badge badge-rose">
-                                                        <b>Deactivé</b>
+                                                        <b>Disactive</b>
                                                         </span>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="timeline-heading">
                                                         <span v-if="item.status_admin" class="badge badge-success">
-                                                          <b>Activé</b>
+                                                          <b>Active</b>
                                                         </span>
                                                         <span v-else class="badge badge-rose">
-                                                        <b>Deactivé</b>
+                                                        <b>Disactive</b>
                                                         </span>
                                                     </div>
                                                 </td>

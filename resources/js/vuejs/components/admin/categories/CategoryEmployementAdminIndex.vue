@@ -7,8 +7,6 @@
 
         <div class="content">
             <div class="container-fluid">
-
-
                 <div v-if="loaded" class="row">
                     <div class="col-md-12 expo">
                         <div class="card card-stats">
@@ -17,7 +15,7 @@
                                     <i class="material-icons">work</i>
                                 </div>
                                 <p class="card-category">
-                                    <b>Categories Emplois & Formations</b>
+                                    <b>Categories for Employments & Trainings</b>
                                 </p>
                                 <h3 class="card-title" style="color:red;">
                                     <b>{{categoryemployements.length}}</b>
@@ -26,7 +24,7 @@
                             <div class="card-footer">
                                 <div class="stats">
                                     <i class="material-icons">work</i>
-                                    <b>Categories Emplois & Formations</b>
+                                    <b>Categories for Employments & Trainings</b>
                                 </div>
                             </div>
                         </div>
@@ -44,9 +42,9 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h4 class="card-title">
-                                            <b>Categories Emplois & Formations</b>
+                                            <b>Categories for Employments & Trainings</b>
                                         </h4>
-                                        <p class="card-title">Categories Emplois & Formations</p>
+                                        <p class="card-title">Categories for Employments & Trainings</p>
                                     </div>
                                     <div class="col-md-6 text-right">
                                       <span>
@@ -62,7 +60,7 @@
                                            <span class="btn-label">
                                                <i class="material-icons">add</i>
                                            </span>
-                                            <b class="title_hover">New Categories Emplois & Formations</b>
+                                            <b class="title_hover">New Category for Employments & Trainings</b>
                                         </button>
                                     </div>
 
@@ -446,7 +444,7 @@
                     /** Alert notify bootstrapp **/
                     $.notify(
                         {
-                            message: `Data desactivated successfully`,
+                            message: `Data disactivated successfully`,
                         },
                         {
                             allow_dismiss: false,

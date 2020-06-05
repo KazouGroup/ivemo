@@ -204,7 +204,6 @@ class PremiumUserEmployementMessage extends Component {
                                 </div>
                             </div>
 
-
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="card">
@@ -234,7 +233,6 @@ class PremiumUserEmployementMessage extends Component {
                                                         <i className="material-icons">visibility</i>
                                                     </a>
                                                 </div>
-
                                             </div>
 
 
@@ -280,7 +278,6 @@ class PremiumUserEmployementMessage extends Component {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 

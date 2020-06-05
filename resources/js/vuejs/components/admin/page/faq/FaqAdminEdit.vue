@@ -26,17 +26,8 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="card-body">
-                                <div class="toolbar">
-                                    <div class="submit text-center">
-                                        <router-link :to="{ name: 'faqs.create' }" class="btn btn-primary btn-raised">
-                                      <span class="btn-label">
-                                               <i class="material-icons">add</i>
-                                           </span>
-                                            <b class="title_hover">New FAQS</b>
-                                        </router-link>
-                                    </div>
-                                </div>
 
                                 <form @submit.prevent="updateItem()" role="form"
                                       method="POST" action="" accept-charset="UTF-8" @keydown="form.onKeydown($event)">
@@ -99,15 +90,14 @@
                                     <div class="submit">
                                         <div class="text-center">
                                             <router-link :to="{ name: 'faqs.index' }" class="btn btn-danger">
-                                                <b class="title_hover">Annuler</b>
+                                                <b class="title_hover">cancel</b>
                                             </router-link>
                                             <button  :disabled="form.busy" type="submit" class="btn btn-success btn-raised">
-                                                <b class="title_hover">Sauvegarder</b>
+                                                <b class="title_hover">Save</b>
                                             </button>
                                         </div>
                                     </div>
                                 </form>
-
 
                             </div>
                         </div>
@@ -164,7 +154,7 @@
 
                         $.notify(
                             {
-                                message: `Informations mise à jour avec succès`,
+                                message: `Informations updated successfully`,
                             },
                             {
                                 allow_dismiss: false,

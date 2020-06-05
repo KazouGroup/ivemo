@@ -31,7 +31,7 @@ class EmployementBycategoryemployementbycity extends Component {
 
     unactiveItem(id){
         Swal.fire({
-            title: 'Masquer cette annonce?',
+            title: 'Masquer cette offre?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -50,7 +50,7 @@ class EmployementBycategoryemployementbycity extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette annonce a été masquée aux utilisateurs",
+                            message: "Cette offre a été masquée aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -103,7 +103,7 @@ class EmployementBycategoryemployementbycity extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec success'
+                            message: 'Offre suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -121,7 +121,7 @@ class EmployementBycategoryemployementbycity extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -193,7 +193,7 @@ class EmployementBycategoryemployementbycity extends Component {
                                             <i className="fa fa-chevron-circle-left" /> <b>Retour aux annonces</b>
                                         </Link>
 
-                                        <h5><b>{annoncebycity.employments_count}</b> {annoncebycity.employments_count > 1 ? "annonces" : "annonce"} posté</h5>
+                                        <h5><b>{annoncebycity.employments_count}</b> {annoncebycity.employments_count > 1 ? "offres" : "offre"} posté</h5>
 
                                     </>
                                 )}
@@ -212,7 +212,6 @@ class EmployementBycategoryemployementbycity extends Component {
                             <div className="container">
                                 <br />
                                 <div className="row">
-
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         {!$guest &&(
@@ -261,7 +260,7 @@ class EmployementBycategoryemployementbycity extends Component {
                                                                                                     <b style={{ textTransform: "lowercase" }}>{categoryemployment.name}</b> à <b>{item.name}</b>
                                                                                                 </NavLink>
                                                                                             </td>
-                                                                                            <td className="text-right"> {this.getdataString(item.employments_count)}  {item.employments_count > 1 ? "annonces" : "annonce"}</td>
+                                                                                            <td className="text-right"> {this.getdataString(item.employments_count)}  {item.employments_count > 1 ? "offres" : "offre"}</td>
                                                                                         </tr>
                                                                                     ))}
                                                                                 </>

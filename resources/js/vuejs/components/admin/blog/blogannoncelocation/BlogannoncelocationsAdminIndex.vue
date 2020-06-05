@@ -7,8 +7,6 @@
         <div class="content">
             <div class="content">
                 <div class="container-fluid">
-
-
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-4">
                             <div class="card card-stats">
@@ -21,7 +19,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">view_headline</i> Articles sur les annonces locations
+                                        <i class="material-icons">view_headline</i>Blog articles on rentings
                                     </div>
                                 </div>
                             </div>
@@ -37,7 +35,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">done</i> Articles actives
+                                        <i class="material-icons">done</i> Activated articles
                                     </div>
                                 </div>
                             </div>
@@ -48,12 +46,12 @@
                                     <div class="card-icon">
                                         <i class="material-icons">remove</i>
                                     </div>
-                                    <p class="card-category"><b v-if="blogannoncelocationsunactive_count >= 1">Desactivés</b><b v-else>Desactivé</b></p>
+                                    <p class="card-category"><b v-if="blogannoncelocationsunactive_count >= 1">Disactives</b><b v-else>Disactive</b></p>
                                     <h3 class="card-title"><b>{{dataunactive_countFormatter(blogannoncelocationsunactive_count)}}</b></h3>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">remove</i> Articles désactivés
+                                        <i class="material-icons">remove</i> Disactivated articles
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +67,7 @@
                                         <i class="material-icons">view_headline</i>
                                     </div>
                                     <p class="card-category">
-                                        <b>Articles sur les annonces locations</b>
+                                        <b>Blog articles on rentings</b>
                                     </p>
                                     <h3 class="card-title" style="color:red;">
                                         <b>{{data_countFormatter(blogannoncelocations_count)}}</b>
@@ -78,7 +76,7 @@
                                 <div class="card-footer">
                                     <div class="stats">
                                         <i class="material-icons">view_headline</i>
-                                        <b>Articles sur les annonces locations</b>
+                                        <b>Blog articles on rentings</b>
                                     </div>
                                 </div>
                             </div>
@@ -92,9 +90,9 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <h4 class="card-title">
-                                                <b>Articles sur les annonces locations</b>
+                                                <b>Blog articles on rentings</b>
                                             </h4>
-                                            <p class="card-title">Articles sur les annonces locations</p>
+                                            <p class="card-title">Blog articles on rentings</p>
                                         </div>
                                         <div class="col-md-6 text-right">
                                       <span>
@@ -110,7 +108,7 @@
                                                    <span class="btn-label">
                                                        <i class="material-icons">add</i>
                                                   </span>
-                                                <b class="title_hover">New article de blog location</b>
+                                                <b class="title_hover">New article on rentings</b>
                                             </a>
                                         </div>
 
@@ -155,20 +153,20 @@
                                                 <td>
                                                     <div class="timeline-heading">
                                                         <span v-if="item.status" class="badge badge-success">
-                                                          <b>Activé</b>
+                                                          <b>Active</b>
                                                         </span>
                                                             <span v-else class="badge badge-rose">
-                                                        <b>Deactivé</b>
+                                                        <b>Disactive</b>
                                                         </span>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="timeline-heading">
                                                         <span v-if="item.status_admin" class="badge badge-success">
-                                                          <b>Activé</b>
+                                                          <b>Active</b>
                                                         </span>
                                                             <span v-else class="badge badge-rose">
-                                                        <b>Deactivé</b>
+                                                        <b>Disactive</b>
                                                         </span>
                                                     </div>
                                                 </td>
@@ -268,7 +266,7 @@
             /** Ici c'est l'activation  **/
             activeItem(id){
                 Swal.fire({
-                    title: 'Show or activated this article?',
+                    title: 'Show or activate this article?',
                     text: "Are you sure to confirm this article?",
                     buttonsStyling: false,
                     confirmButtonClass: "btn btn-success",
@@ -322,7 +320,7 @@
             /** Ici c'est la désactivation **/
             disableItem(id){
                 Swal.fire({
-                    title: 'Mask or unactivated this article?',
+                    title: 'Mask or unactivate this article?',
                     text: "Are you sure to confirm this article?",
                     buttonsStyling: false,
                     confirmButtonClass: "btn btn-success",

@@ -101,7 +101,7 @@ class EmploymentEdit extends Component {
         }else{
             $.notify({
                 //,
-                message: 'La fichier ne peut pas être supérieure à 15 MB'
+                message: 'Le fichier ne peut pas être supérieure à 15 MB'
             },
                 {
                     allow_dismiss: false,
@@ -139,7 +139,7 @@ class EmploymentEdit extends Component {
             /** Alert notify bootstrapp **/
             $.notify({
                     //,
-                    message: 'Annonce activé avec succès'
+                    message: 'Offre activé avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -177,7 +177,7 @@ class EmploymentEdit extends Component {
             /** Alert notify bootstrapp **/
             $.notify({
                     // title: 'Update FAQ',
-                    message: 'Annonce désactiver avec succès'
+                    message: 'Offre déactiver avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -227,7 +227,7 @@ class EmploymentEdit extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Article de blogs suprimée avec success'
+                            message: 'Offre suprimée avec sucèss'
                         },
                         {
                             allow_dismiss: false,
@@ -275,7 +275,7 @@ class EmploymentEdit extends Component {
             .then(() => {
                 $.notify({
                     //,
-                    message: 'Votre annonce a bien été modifié'
+                    message: 'Votre offre a bien été modifié'
                 },
                     {
                         allow_dismiss: false,
@@ -370,7 +370,7 @@ class EmploymentEdit extends Component {
                                         <div className="col-lg-8 col-md-12 mx-auto">
                                             <div className="submit text-left">
                                                 <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
-                                                    <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos annonces </b>
+                                                    <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos offres </b>
                                                 </button>
                                             </div>
                                             {!$guest &&(
@@ -453,7 +453,7 @@ class EmploymentEdit extends Component {
                                                         <Row>
                                                             <div className="col-md-6">
                                                                 <label className="labels">
-                                                                    Quel est le montant de votre annonce
+                                                                    Quel est le montant de votre offre
                                                                 </label>
                                                                 <InputGroup>
                                                                     <div className="input-group-prepend">
@@ -465,7 +465,7 @@ class EmploymentEdit extends Component {
                                                                            minLength="4"
                                                                            className={`form-control ${this.hasErrorFor('price') ? 'is-invalid' : ''}`}
                                                                            name='price'
-                                                                           placeholder="Montant de votre annonce"
+                                                                           placeholder="Montant de votre offre"
                                                                            aria-label="Montant de votre annonce"
                                                                            autoComplete="price"
                                                                            value={this.state.price || ""}
@@ -555,7 +555,7 @@ class EmploymentEdit extends Component {
                                                             <div className="col-md-12">
                                                                 <FormGroup>
                                                                     <label className="labels">
-                                                                        Décrivez votre annonce
+                                                                        Décrivez votre offre
                                                                         <span className="text-danger">*</span>
                                                                     </label>
                                                                     <br />
@@ -574,7 +574,7 @@ class EmploymentEdit extends Component {
 
                                                     <div className="submit text-center">
                                                         <button className="btn btn-primary" type="submit">
-                                                            <b>Mettre à jour l'annonce</b>
+                                                            <b>Mettre à jour l'offre</b>
                                                         </button>
                                                     </div>
                                                 </div>

@@ -27,28 +27,18 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="toolbar">
-                                    <div class="submit text-center">
-                                        <router-link :to="{ name: 'licencesites.create' }" class="btn btn-primary btn-raised">
-                                      <span class="btn-label">
-                                               <i class="material-icons">add</i>
-                                           </span>
-                                            <b class="title_hover">New Licence site</b>
-                                        </router-link>
-                                    </div>
-                                </div>
 
                                 <form id="RegisterValidation" @submit.prevent="updateItem()" role="form"
                                       method="POST" action="" accept-charset="UTF-8" @keydown="form.onKeydown($event)">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label class="labels">
-                                                Title policy
+                                                Title
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div class="form-group">
                                                 <label class="bmd-label-floating"></label>
-                                                <input v-model="form.title" type="text" minlength="5" maxlength="255" name="title" placeholder="Title policy" class="form-control" :class="{ 'is-invalid': form.errors.has('title') }"/>
+                                                <input v-model="form.title" type="text" minlength="5" maxlength="255" name="title" placeholder="Title licence" class="form-control" :class="{ 'is-invalid': form.errors.has('title') }"/>
                                                 <has-error :form="form" field="title"></has-error>
                                             </div>
                                         </div>
@@ -79,10 +69,10 @@
                                     <div class="submit">
                                         <div class="text-center">
                                             <router-link :to="{ name: 'licencesites.index' }" class="btn btn-danger">
-                                                <b class="title_hover">Annuler</b>
+                                                <b class="title_hover">Cancel</b>
                                             </router-link>
                                             <button  :disabled="form.busy" type="submit" class="btn btn-success btn-raised">
-                                                <b class="title_hover">Sauvegarder</b>
+                                                <b class="title_hover">Save</b>
                                             </button>
                                         </div>
                                     </div>
@@ -140,7 +130,7 @@
 
                         $.notify(
                             {
-                                message: `Toutes les informations ont été mise à jour`,
+                                message: `Informations updated successfully`,
                             },
                             {
                                 allow_dismiss: false,

@@ -137,7 +137,7 @@ class PremiumUserEditEmployement extends Component {
             /** Alert notify bootstrapp **/
             $.notify({
                     //,
-                    message: 'Annonce activée avec succès'
+                    message: 'Offre activée avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -175,7 +175,7 @@ class PremiumUserEditEmployement extends Component {
             /** Alert notify bootstrapp **/
             $.notify({
                     // title: 'Update FAQ',
-                    message: 'Annonce déactivée avec succès'
+                    message: 'Offre déactivée avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -225,7 +225,7 @@ class PremiumUserEditEmployement extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec success'
+                            message: 'Offre suprimée avec success'
                         },
                         {
                             allow_dismiss: false,
@@ -243,7 +243,7 @@ class PremiumUserEditEmployement extends Component {
                     this.props.history.goBack();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -273,7 +273,7 @@ class PremiumUserEditEmployement extends Component {
             .then(() => {
                 $.notify({
                         //,
-                        message: 'Votre annonce a bien été modifiée'
+                        message: 'Votre offre a bien été modifiée'
                     },
                     {
                         allow_dismiss: false,
@@ -291,7 +291,7 @@ class PremiumUserEditEmployement extends Component {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
+            $.notify("Ooops! Quelque chose ne va pas. Essayer plus tard...", {
                 allow_dismiss: false,
                 type: 'danger',
                 animate: {
@@ -371,7 +371,6 @@ class PremiumUserEditEmployement extends Component {
 
                     <div className="content">
                         <div className="container-fluid">
-
                             <div className="row">
                                 <div className="col-lg-4 col-md-4 col-sm-4">
                                     <div className="card card-stats">
@@ -379,12 +378,12 @@ class PremiumUserEditEmployement extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">dialpad</i>
                                             </div>
-                                            <p className="card-category"><b>Annonces</b></p>
+                                            <p className="card-category"><b>Offres d'emplois</b></p>
                                             <h3 className="card-title"><b>{this.data_countFormatter(employments_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">dialpad</i> Annonces sur les offres d'emplois, services et formations
+                                                <i className="material-icons">dialpad</i> Posts sur les offres d'emplois, services et formations
                                             </div>
                                         </div>
                                     </div>
@@ -400,7 +399,7 @@ class PremiumUserEditEmployement extends Component {
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">done</i> Annonces activées
+                                                <i className="material-icons">done</i> Offres activées
                                             </div>
                                         </div>
                                     </div>
@@ -416,12 +415,11 @@ class PremiumUserEditEmployement extends Component {
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">remove</i> Annonces déactivés
+                                                <i className="material-icons">remove</i> Offres déactivées
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div className="row">
@@ -447,7 +445,6 @@ class PremiumUserEditEmployement extends Component {
                                     </div>
                                 </div>
                             </div>
-
 
                             <div className="row">
                                 <div className="col-md-12">
@@ -534,7 +531,7 @@ class PremiumUserEditEmployement extends Component {
                                                     <Row>
                                                         <div className="col-md-6">
                                                             <label className="labels">
-                                                                Quel est le montant de votre annonce
+                                                                Quel est le montant de votre offre
                                                                 <span className="text-danger">*</span>
                                                             </label>
                                                             <FormGroup>
@@ -658,7 +655,7 @@ class PremiumUserEditEmployement extends Component {
                                                         <i className="now-ui-icons ui-1_simple-delete"/> Annuler
                                                     </Link>
                                                     <button className="btn btn-primary" type="submit">
-                                                        <b>Mettre à jour l'annonce</b>
+                                                        <b>Mettre à jour l'offre</b>
                                                     </button>
                                                 </div>
                                             </Form>
