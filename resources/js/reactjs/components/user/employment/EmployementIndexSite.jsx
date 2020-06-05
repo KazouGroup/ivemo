@@ -13,7 +13,6 @@ import SignalFromEmployementForShow from "./inc/SignalFromEmployementForShow";
 import EmployementList from "./inc/EmployementList";
 import HelmetSite from "../../inc/user/HelmetSite";
 import Navemployementsbycity from "./inc/Navemployementsbycity";
-import FooterUserSite from "../../inc/user/FooterUserSite";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -325,9 +324,7 @@ class EmployementIndexSite extends Component {
 
                         </div>
 
-
-                        {/**<FooterBigUserSite />*/}
-                        <FooterUserSite />
+                        <FooterBigUserSite />
                     </div>
                 </div>
 

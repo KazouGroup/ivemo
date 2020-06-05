@@ -20,7 +20,7 @@ class FooterBigUserSite extends Component {
         return (
             <>
                 <LoginModalUser/>
-                <footer className="footer footer-big" data-background-color="black">
+                <footer className="footer" data-background-color="black">
                     <div className="container">
                         <div className="content">
                             <div className="row">
