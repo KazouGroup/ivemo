@@ -77,6 +77,7 @@ class BlogannonceventeController extends Controller
 
         $blogannonceresevente = new BlogannonceventeResource(blogannoncevente::whereDate('created_at',$date)
             ->whereSlug($blogannoncevente->slug)
+            ->with('user','categoryannoncevente','member')
             ->where(['status' => 1,'status_admin' => 1])->first());
         return response()->json($blogannonceresevente, 200);
     }

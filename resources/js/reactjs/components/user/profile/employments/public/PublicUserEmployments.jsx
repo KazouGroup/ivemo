@@ -4,16 +4,15 @@ import { Helmet } from 'react-helmet';
 import { Button } from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
-import AnnonceslocationList from "../../../annonces/annonceloaction/inc/AnnonceslocationList";
 import Swal from "sweetalert2";
 import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";
 import NavLinkPublicBlogannoncesUser from "../../blogs/public/NavLinkPublicBlogannoncesUser";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
 import NavLinkPublicEmploymentUser from "./NavLinkPublicEmploymentUser";
-import EmployementList from "../../../employment/inc/EmployementList";
 import EmploymentListSkeleton from "../../../../inc/user/employment/EmploymentListSkeleton";
 import Navlinknewemployment from "../../../employment/treatement/Navlinknewemployment";
 import NavLinkPublicAnnonceUser from "../../annonces/NavLinkPublicAnnonceUser";
+import PrivateUserEmployementList from "../../../employment/inc/PrivateUserEmployementList";
 
 
 class PublicUserEmployments extends Component {
@@ -155,7 +154,7 @@ class PublicUserEmployments extends Component {
             useremploymentPublick.employments.slice(0, visiable).map(item => {
                 return(
 
-                    <EmployementList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
+                    <PrivateUserEmployementList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
                 )
             })
         ):(
@@ -182,11 +181,11 @@ class PublicUserEmployments extends Component {
 
                                 <h1 className="title">{useremploymentPublick.first_name}</h1>
                                 {useremploymentPublick.status_profile === 0 ?
-                                
+
                                     <Link to={`/user/${useremploymentPublick.slug}/`} className="text-white">
                                         <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
                                     </Link>
-                            
+
                                 :
                                 <>
                                     <Link to={`/pro/${useremploymentPublick.slug}/`} className="text-white">
@@ -197,7 +196,7 @@ class PublicUserEmployments extends Component {
                                     )}
                                 </>
                                 }
-                                
+
 
                             </div>
                         </div>

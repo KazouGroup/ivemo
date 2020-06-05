@@ -4,6 +4,46 @@
 Route::group(['prefix' => 'api'], function () {
 
     Route::get(
+        'employments',
+        'EmploymentController@apiemployments'
+    )->name('api.employments_site');
+
+    Route::get(
+        'employments/{categoryemployment}',
+        'EmploymentController@apiemploymentsbycategory'
+    )->name('api.employmentscategory_site');
+
+    Route::get(
+        'employmentscount/{categoryemployment}',
+        'EmploymentController@apiemploymentsbycategorycount'
+    )->name('api.employmentscategorycount_site');
+
+    Route::get(
+        'employments/{categoryemployment}/{city}',
+        'EmploymentController@apiemploymentsbycategorybycity'
+    )->name('api.employmentscategorybycity_site');
+
+    Route::get(
+        'employmentcount/{city}',
+        'EmploymentController@apiemploymentbycitycount'
+    )->name('api.employmentcitycount_site');
+
+    Route::get(
+        'employment/{city}',
+        'EmploymentController@apiemploymentbycity'
+    )->name('api.employmentcity_site');
+
+    Route::get(
+        'employmentscount/{categoryemployment}/{city}',
+        'EmploymentController@apiemploymentsbycategorybycitycount'
+    )->name('api.employmentscategorybycitycount_site');
+
+    Route::get(
+        'employments_interesses/{categoryemployment}',
+        'EmploymentController@apiemploymentsinteresse'
+    )->name('api.employmentsinteresse_site');
+
+    Route::get(
         'employment/ab/{employment}',
         'EmploymentController@show'
     )->name('api.employmentlugin_site');
@@ -17,6 +57,11 @@ Route::group(['prefix' => 'api'], function () {
         'profile/{user}/personal_settings/employments/{categoryemployment}',
         'EmploymentController@apiemploymentsbyusercategoryemployment'
     )->name('api.employmentsbyuserbycategoryemployment_site');
+
+    Route::get(
+        'employments/{categoryemployment}/{city}/{employment}',
+        'EmploymentController@apiemploymentsbycategoryslug'
+    )->name('api.employmentsbycategorybycityslug_site');
 
     Route::get(
         'categoryemployments_by_user',
@@ -68,32 +113,32 @@ Route::group(['middleware' => 'verified'], function(){
             'employment/ab/new',
             'EmploymentController@create'
         )->name('employmentabnew_site');
-        
+
         Route::post(
             'employment/save',
             'EmploymentController@store'
         )->name('employmentstore_site');
-        
+
         Route::get(
             'employment/ab/{employment}/edit',
             'EmploymentController@edit'
         )->name('employmentsedit_site');
-        
+
         Route::put(
             'employment/{employment}',
             'EmploymentController@update'
         )->name('employmentsupdate_site');
-        
+
         Route::get(
             'employments_activated/{employment}',
             'EmploymentController@activated'
         )->name('employmentsactivated_site');
-        
+
         Route::get(
             'employments_unactivated/{employment}',
             'EmploymentController@unactivated'
         )->name('employmentsunactivated_site');
-        
+
         Route::delete(
             'employments_delete/{id}',
             'EmploymentController@destroy'

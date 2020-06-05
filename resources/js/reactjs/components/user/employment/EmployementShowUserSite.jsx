@@ -23,12 +23,79 @@ class EmployementShowUserSite extends Component {
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.phoneShow = this.phoneShow.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
     }
+
+    favoriteItem(id) {
+        const url = route('employments_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Cette annonce a été ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('employments_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Cette annonce a été retiré de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
     copyToClipboard(){
-        navigator.clipboard.writeText(window.location.toString())
+        navigator.clipboard.writeText(window.location.toString());
         $.notify({
             message: "Lien copié correctement avec succès",
         },{
@@ -317,6 +384,25 @@ class EmployementShowUserSite extends Component {
                                                             <img alt={employment.title} src={employment.photo}
                                                                  className="img-fluid rounded" />
                                                             : null}
+                                                        <div className="text-center">
+                                                            {employment.bookmarked ?
+
+                                                                <>
+                                                                    <Button onClick={() => this.unfavoriteItem(employment.id)}
+                                                                            className="btn btn-facebook btn-sm" title="Retirer de vos favoris">
+                                                                        <i className="fas fa-bookmark"></i> <b>Sauvegarder</b>
+                                                                    </Button>
+                                                                </>
+
+                                                                :
+                                                                <>
+                                                                    <Button onClick={() => this.favoriteItem(employment.id)}
+                                                                            className="btn btn-facebook btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                                        <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
+                                                                    </Button>
+                                                                </>
+                                                            }
+                                                        </div>
                                                     </>
                                                 )}
 
@@ -340,17 +426,28 @@ class EmployementShowUserSite extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="text-right ml-auto">
-                                                        <UncontrolledTooltip placement="bottom" target="TooltipCopie">
-                                                            Copier le lien
-                                                        </UncontrolledTooltip>
-                                                        <Button className="btn btn-icon btn-sm btn-primary" id="TooltipCopie" onClick={() => this.copyToClipboard()}>
-                                                         <i className="now-ui-icons arrows-1_share-66"/>
+                                                        {employment.bookmarked ?
+
+                                                            <>
+                                                                <Button onClick={() => this.unfavoriteItem(employment.id)}
+                                                                        className="btn btn-facebook btn-icon btn-sm" title="Retirer de vos favoris">
+                                                                    <i className="fas fa-bookmark"></i>
+                                                                </Button>
+                                                            </>
+
+                                                            :
+                                                            <>
+                                                                <Button onClick={() => this.favoriteItem(employment.id)}
+                                                                        className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                                    <i className="far fa-bookmark"></i>
+                                                                </Button>
+                                                            </>
+                                                        }
+                                                        <Button className="btn btn-icon btn-sm btn-primary " title="Copier le lien" onClick={() => this.copyToClipboard()}>
+                                                            <i className="fas fa-copy"></i>
                                                         </Button>
-                                                        <UncontrolledTooltip placement="bottom" target="TooltipPhone">
-                                                            {employment.user.phone}
-                                                        </UncontrolledTooltip>
-                                                        <Button className="btn btn-icon btn-sm btn-info" onClick={() => this.phoneShow(employment)} id="TooltipPhone">
-                                                            <i className="now-ui-icons tech_mobile"/>
+                                                        <Button className="btn btn-icon btn-sm btn-info" onClick={() => this.phoneShow(employment)} id={employment.user.phone}>
+                                                             <i className="fas fa-mobile"></i>
                                                         </Button>
                                                         {employment.user.profile.site_internet && (
                                                             <a href={`${employment.user.profile.site_internet}`} className="btn btn-icon btn-sm btn-primary" target="_banck">
@@ -362,7 +459,7 @@ class EmployementShowUserSite extends Component {
                                                         </UncontrolledTooltip>
                                                         <Button  id="TooltipSignale" onClick={() => this.signalerUser(employment.id)}
                                                                 className="btn btn-instagram btn-icon btn-sm">
-                                                            <i className="far fa-flag"></i>
+                                                            <i className="fas fa-flag"></i>
                                                         </Button>
 
                                                         {!$guest && (
@@ -373,28 +470,15 @@ class EmployementShowUserSite extends Component {
                                                                            className="btn btn-sm btn-secondary">
                                                                             <i className="far fa-eye"></i> <b>{this.data_countFormatter(employment.visits_count)}</b>
                                                                         </a>
-                                                                        <UncontrolledTooltip placement="bottom" target="TooltipStatus">
-                                                                            Desactiver cette annonce
-                                                                        </UncontrolledTooltip>
-
                                                                         <button type="button" rel="tooltip" onClick={() => this.unactiveItem(employment.id)}
-                                                                                className="btn btn-success btn-icon btn-sm" id="TooltipStatus">
+                                                                                className="btn btn-success btn-icon btn-sm" title=" Desactiver cette annonce">
                                                                             <i className="now-ui-icons ui-1_check"/>
                                                                         </button>
-
-                                                                        <UncontrolledTooltip placement="bottom" target="TooltipEditer">
-                                                                            Editer cette annonce
-                                                                        </UncontrolledTooltip>
-
-                                                                        <NavLink to={`/employment/ab/${employment.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" id="TooltipEditer">
+                                                                        <NavLink to={`/employment/ab/${employment.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer cette annonce">
                                                                             <i className="now-ui-icons ui-2_settings-90"/>
                                                                         </NavLink>
-
-                                                                        <UncontrolledTooltip placement="bottom" target="TooltipDelete">
-                                                                            Supprimer cette annonce
-                                                                        </UncontrolledTooltip>
                                                                         <Button onClick={() => this.deleteItem(employment.id)}
-                                                                                className="btn btn-icon btn-sm btn-danger" id="TooltipDelete">
+                                                                                className="btn btn-icon btn-sm btn-danger" title="Supprimer cette annonce">
                                                                             <i className="now-ui-icons ui-1_simple-remove"/>
                                                                         </Button>{" "}
                                                                     </>

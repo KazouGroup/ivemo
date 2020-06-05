@@ -11,6 +11,8 @@ use App\Model\categoryemployment;
 use App\Model\city;
 use App\Model\employment;
 use App\Model\subscriberuser;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 use File;
 
@@ -26,6 +28,19 @@ class EmploymentService
 
     public static function apiemploymentsbycategory($categoryemployment)
     {
+        $employments = EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
+            ->where(['status' => 1,'status_admin' => 1])
+            ->whereIn('categoryemployment_id',[$categoryemployment->id])
+            ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->orderBy('created_at','DESC')
+            ->distinct()->paginate(40));
+
+        return $employments;
+    }
+
+    public static function apiemploymentsbycategorycount($categoryemployment)
+    {
         $employments = categoryemployment::whereSlug($categoryemployment->slug)
             ->where(['status' => 1])
             ->withCount(['employments' => function ($q) use ($categoryemployment){
@@ -34,21 +49,25 @@ class EmploymentService
                     ->whereHas('city', function ($q) {$q->where('status',1);})
                     ->with('user','city','categoryemployment','member')
                     ->whereIn('categoryemployment_id',[$categoryemployment->id]);
-            }])
-            ->with([
-                'employments' => function ($q) use ($categoryemployment){
-                    $q->where(['status' => 1,'status_admin' => 1])
-                        ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
-                        ->whereHas('city', function ($q) {$q->where('status',1);})
-                        ->with('user','city','categoryemployment','member')
-                        ->whereIn('categoryemployment_id',[$categoryemployment->id])
-                        ->orderBy('created_at','DESC')->distinct()->paginate(40);},
-            ])->first();
+            }])->first();
 
         return $employments;
     }
 
     public static function apiemploymentbycity($city)
+    {
+        $employments = EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
+            ->where(['status' => 1,'status_admin' => 1])
+            ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->with('user','city','categoryemployment','member')
+            ->whereIn('city_id',[$city->id])
+            ->orderBy('created_at','DESC')->distinct()->paginate(40));
+
+        return $employments;
+    }
+
+    public static function apiemploymentbycitycount($city)
     {
         $employments = city::whereSlug($city->slug)
             ->where(['status' => 1])
@@ -58,21 +77,26 @@ class EmploymentService
                     ->whereHas('city', function ($q) {$q->where('status',1);})
                     ->with('user','city','categoryemployment','member')
                     ->whereIn('city_id',[$city->id]);
-            }])
-            ->with([
-                'employments' => function ($q) use ($city){
-                    $q->where(['status' => 1,'status_admin' => 1])
-                        ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
-                        ->whereHas('city', function ($q) {$q->where('status',1);})
-                        ->with('user','city','categoryemployment','member')
-                        ->whereIn('city_id',[$city->id])
-                        ->orderBy('created_at','DESC')->distinct()->paginate(40);},
-            ])->first();
+            }])->first();
 
         return $employments;
     }
 
     public static function apiemploymentsbycategorybycity($categoryemployment,$city)
+    {
+        $employments = EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
+            ->where(['status' => 1,'status_admin' => 1])
+            ->whereIn('city_id',[$city->id])
+            ->whereIn('categoryemployment_id',[$categoryemployment->id])
+            ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->orderBy('created_at','DESC')
+            ->distinct()->paginate(40));
+
+        return $employments;
+    }
+
+    public static function apiemploymentsbycategorybycitycount($categoryemployment,$city)
     {
         $employments = city::whereSlug($city->slug)
             ->where(['status' => 1])
@@ -83,17 +107,7 @@ class EmploymentService
                     ->with('user','city','categoryemployment','member')
                     ->whereIn('city_id',[$city->id])
                     ->whereIn('categoryemployment_id',[$categoryemployment->id]);
-            }])
-            ->with([
-                'employments' => function ($q) use ($categoryemployment,$city){
-                    $q->where(['status' => 1,'status_admin' => 1])
-                        ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
-                        ->whereHas('city', function ($q) {$q->where('status',1);})
-                        ->with('user','city','categoryemployment','member')
-                        ->whereIn('city_id',[$city->id])
-                        ->whereIn('categoryemployment_id',[$categoryemployment->id])
-                        ->orderBy('created_at','DESC')->distinct()->get();},
-            ])->first();
+            }])->first();
 
         return $employments;
     }
@@ -102,6 +116,7 @@ class EmploymentService
     public static function apiemploymentsbycategoryslug($categoryemployment,$city,$employment)
     {
         $employment = new EmploymentResource(employment::whereSlug($employment->slug)
+            ->with('user','city','categoryemployment','member')
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->whereIn('city_id',[$city->id])
@@ -114,13 +129,13 @@ class EmploymentService
 
     public static function apiemploymentsinteresse($categoryemployment)
     {
-        $employments = $categoryemployment->employments()->with('user','city','categoryemployment','member')
+        $employments = EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
+            ->where(['status' => 1,'status_admin' => 1])
             ->whereIn('categoryemployment_id',[$categoryemployment->id])
-            ->orderByRaw('RAND()')
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
-            ->where(['status' => 1,'status_admin' => 1])
-            ->take(10)->distinct()->get();
+            ->orderBy('created_at','DESC')
+            ->take(10)->distinct()->get());
 
         return $employments;
     }

@@ -50,9 +50,9 @@ class NavUserSite extends PureComponent {
                                         </a>
                                     </li>
                                 )}
-                                
+
                             </>
-                            
+
                         )}
 
                         <li className={`nav-item dropdown`}>
@@ -159,6 +159,9 @@ class NavUserSite extends PureComponent {
                                         </a>
                                         <a href={`/profile/${$userIvemo.slug}/personal_settings/employments/`} className="dropdown-item">
                                             <i className="now-ui-icons text_align-left"/>Services
+                                        </a>
+                                        <a href={`/profile/${$userIvemo.slug}/personal_settings/favorite_employments/`} className="dropdown-item">
+                                            <i className="now-ui-icons location_bookmark"/>Favoris
                                         </a>
                                         <a href={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_ventes/`} className="dropdown-item">
                                             <i className="now-ui-icons text_align-center"/>Blog annonces

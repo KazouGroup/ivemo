@@ -369,12 +369,7 @@ class AnnoncelocationIndex extends Component {
                                                                     placeholder="Ville, quartier" />
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <br />
-                                                    <div className="submit text-center">
-                                                        <button type="submit" className="btn btn-primary ">
-                                                            <b>Voir les annonces</b>
-                                                        </button>
+
                                                         <div className="col-sm-4">
                                                             <div className="input-group">
                                                             <div className="submit text-center">
@@ -384,9 +379,9 @@ class AnnoncelocationIndex extends Component {
                                                             </div>
                                                             </div>
                                                         </div>
-                                                       
+                                                        
                                                     </div>
-
+                                                    
                                                 </form>
                                             </div>
                                         </div>
