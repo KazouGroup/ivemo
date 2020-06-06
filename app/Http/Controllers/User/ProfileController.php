@@ -49,6 +49,18 @@ class ProfileController extends Controller
 
     }
 
+    /* Ici je compte tous les favoris des utilisateurs */
+
+    public function apiuserfavorites(user $user)
+    {
+        $this->authorize('update',$user);
+
+        $user = HelpersService::helpersfavoritescount($user)->first();
+
+        return response()->json($user, 200);
+    }
+
+
 
     public function apipersonalreservations()
     {

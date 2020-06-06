@@ -1,8 +1,5 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
-import {Link, NavLink} from "react-router-dom";
-import moment from "moment";
-import {Button, UncontrolledTooltip} from "reactstrap";
 
 
 function AnnoncesinteresseSkeleton(props) {

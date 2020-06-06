@@ -41,40 +41,25 @@ class FavoritemploymentController extends Controller
         return response()->json($favoritemployments, 200);
     }
 
-     public function apifavoritemployment(user $user)
+     public function apiuserdatafavoritemployment(user $user)
     {
         $this->authorize('update',$user);
 
-        $favoritemployments = user::whereSlug($user->slug)
-        ->with(['profile' => function ($q) use ($user){
-            $q->whereIn('user_id',[auth()->user()->id])
-                ->distinct()->get()->toArray()
-            ;},
-        ])
-        ->withCount(['favoritemployments' => function ($q) use ($user){
-            $q->with('user','employment')
-            ->whereIn('user_id',[$user->id])
-            ->whereHas('employment', function ($q) {$q->where(['status' => 1,'status_admin' => 1]);})
-            ->whereHas('employment.city', function ($q) {$q->where('status',1);})
-            ->whereHas('employment.categoryemployment', function ($q) {$q->where('status',1);});
-        }])
-        ->with(['favoritemployments' => function ($q) use ($user){
-            $q->with('user','employment')
+        $favoritemployments = favoritemployment::with('user','employment')
             ->whereIn('user_id',[$user->id])
             ->with(['employment.categoryemployment' => function ($q){
                 $q->distinct()->get();},
-            'employment.city' => function ($q){
-                $q->distinct()->get();},
-            'employment.member' => function ($q){
+                'employment.city' => function ($q){
                     $q->distinct()->get();},
-            'employment.user' => function ($q){
-                $q->distinct()->get();}
+                'employment.member' => function ($q){
+                    $q->distinct()->get();},
+                'employment.user' => function ($q){
+                    $q->distinct()->get();}
             ])
             ->whereHas('employment', function ($q) {$q->where(['status' => 1,'status_admin' => 1]);})
             ->whereHas('employment.city', function ($q) {$q->where('status',1);})
             ->whereHas('employment.categoryemployment', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')->distinct()->get();
-        }])->first();
 
         return response()->json($favoritemployments, 200);
     }

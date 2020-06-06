@@ -47,6 +47,22 @@ class HelpersService
     }
 
 
+    public static function helpersfavoritescount($user)
+    {
+        $data = user::whereSlug($user->slug)
+            ->withCount(['favoritemployments' => function ($q) use ($user){
+                $q->with('user','employment')
+                    ->whereIn('user_id',[$user->id])
+                    ->whereHas('employment', function ($q) {$q->where(['status' => 1,'status_admin' => 1]);})
+                    ->whereHas('employment.city', function ($q) {$q->where('status',1);})
+                    ->whereHas('employment.categoryemployment', function ($q) {$q->where('status',1);});
+            }]);
+
+        return $data;
+
+    }
+
+
     public static function helperscontactuserscount($user)
     {
         $data = user::whereSlug($user->slug)
