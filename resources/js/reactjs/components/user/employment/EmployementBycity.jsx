@@ -120,7 +120,7 @@ class EmployementBycity extends Component {
                     this.setState({employments: updatedItems});
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette annonce a été masquée aux utilisateurs",
+                            message: "Annonce masquée aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
