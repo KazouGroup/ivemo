@@ -96,19 +96,11 @@ class EmployementShowUserSite extends Component {
 
     copyToClipboard(){
         navigator.clipboard.writeText(window.location.toString());
-        $.notify({
-            message: "Lien copié correctement avec succès",
-        },{
-            allow_dismiss: false,
-            type: 'info',
-            placement: {
-                from: 'top',
-                align: 'center'
-            },
-            animate: {
-                enter: "animate__animated animate__fadeInDown",
-                exit: "animate__animated animate__fadeOutUp"
-            },
+        Swal.fire({
+            title: `Lien copié correctement avec succès`,
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 1500,
         });
     }
     phoneShow(employment){
