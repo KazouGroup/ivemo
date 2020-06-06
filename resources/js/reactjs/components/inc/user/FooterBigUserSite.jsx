@@ -19,6 +19,7 @@ class FooterBigUserSite extends Component {
 
         return (
             <>
+
                 <LoginModalUser/>
                 <footer className="footer" data-background-color="black">
                     <div className="container">

@@ -397,7 +397,7 @@ class EmployementShowUserSite extends Component {
                                                                         <>
                                                                             <Button onClick={() => this.unfavoriteItem(employment.id)}
                                                                                     className="btn btn-danger btn-sm btn-round" title="Retirer de vos favoris">
-                                                                                <i className="fas fa-heart"></i> <b>Sauvegardé</b>
+                                                                                <i className="fas fa-bookmark"></i> <b>Sauvegardé</b>
                                                                             </Button>
                                                                         </>
 
@@ -405,7 +405,7 @@ class EmployementShowUserSite extends Component {
                                                                         <>
                                                                             <Button onClick={() => this.favoriteItem(employment.id)}
                                                                                     className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
-                                                                                <i className="far fa-heart"></i> <b>Sauvegarder</b>
+                                                                                <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
                                                                             </Button>
                                                                         </>
                                                                     }
@@ -437,7 +437,7 @@ class EmployementShowUserSite extends Component {
                                                         {$guest ?
                                                             <Button  data-toggle="modal" data-target="#loginModal"
                                                                      className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
-                                                                <i className="far fa-heart"></i>
+                                                                <i className="far fa-bookmark"></i>
                                                             </Button>
                                                             :
                                                            <>
@@ -446,7 +446,7 @@ class EmployementShowUserSite extends Component {
                                                                    <>
                                                                        <Button onClick={() => this.unfavoriteItem(employment.id)}
                                                                                className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
-                                                                           <i className="fas fa-heart"></i>
+                                                                           <i className="fas fa-bookmark"></i>
                                                                        </Button>
                                                                    </>
 
@@ -454,7 +454,7 @@ class EmployementShowUserSite extends Component {
                                                                    <>
                                                                        <Button onClick={() => this.favoriteItem(employment.id)}
                                                                                className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
-                                                                           <i className="far fa-heart"></i>
+                                                                           <i className="far fa-bookmark"></i>
                                                                        </Button>
                                                                    </>
                                                                }
