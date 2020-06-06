@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import moment from 'moment'
 import EmployementInteresseList from "./inc/EmployementInteresseList";
-import EmployementList from "./inc/EmployementList";
 import Swal from "sweetalert2";
+import EmploymentInteressListSkeleton from "../../inc/user/employment/EmploymentInteressListSkeleton";
 
 require("moment/min/locales.min");
 moment.locale('fr');
@@ -227,7 +227,7 @@ class EmployementInteresse extends Component {
                     <EmployementInteresseList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>                )
             })
         ):(
-            <></>
+            <EmploymentInteressListSkeleton/>
         );
         return (
             <>
