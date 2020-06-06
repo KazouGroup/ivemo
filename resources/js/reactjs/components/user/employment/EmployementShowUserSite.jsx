@@ -34,7 +34,7 @@ class EmployementShowUserSite extends Component {
         const url = route('employments_favorite.favorite', [id]);
         dyaxios.get(url).then(() => {
             $.notify({
-                    message: "Cette annonce a été ajoutée à vos favoris",
+                    message: "Annonce ajoutée à vos favoris",
                 },
                 {
                     allow_dismiss: false,
@@ -66,7 +66,7 @@ class EmployementShowUserSite extends Component {
         const url = route('employments_unfavorite.unfavorite', [id]);
         dyaxios.get(url).then(() => {
             $.notify({
-                    message: "Cette annonce a été retiré de vos favoris",
+                    message: "Annonce retirée de vos favoris",
                 },
                 {
                     allow_dismiss: false,
@@ -203,7 +203,7 @@ class EmployementShowUserSite extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette annonce a été masquée aux utilisateurs",
+                            message: "Annonce masquée aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -388,7 +388,7 @@ class EmployementShowUserSite extends Component {
                                                             {$guest ?
                                                                 <Button data-toggle="modal" data-target="#loginModal"
                                                                         className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
-                                                                    <i className="far fa-heart"></i> <b>Sauvegarder</b>
+                                                                    <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
                                                                 </Button>
                                                                 :
                                                                 <>
