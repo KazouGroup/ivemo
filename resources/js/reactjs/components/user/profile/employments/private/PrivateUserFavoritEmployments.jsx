@@ -53,7 +53,7 @@ class PrivateUserFavoritEmployments extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette annonce a été retiré de vos favoris",
+                            message: "Annonce retirée de vos favoris",
                         },
                         {
                             allow_dismiss: false,
@@ -135,23 +135,25 @@ class PrivateUserFavoritEmployments extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
-                                        <Navlinknewemployment/>
+                                        {/**
+                                         <Navlinknewemployment/>
 
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                         <div className="card">
+                                         <div className="card-body">
+                                         <div className="row">
+                                         <div className="col-md-12">
+                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                            <Navemploymentsbyuser/>
+                                         <Navemploymentsbyuser/>
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                         </div>
+                                         </div>
+                                         </div>
+                                         </div>
+                                         </div>
 
-                                        <NavlinkconfigurationUser {...useremploymentsPrivate} />
+                                         <NavlinkconfigurationUser {...useremploymentsPrivate} />
+                                         */}
 
                                     </div>
 

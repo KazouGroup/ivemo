@@ -36,7 +36,7 @@ class EmployementBycategoryemployementbycity extends Component {
         const url = route('employments_favorite.favorite', [id]);
         dyaxios.get(url).then(() => {
             $.notify({
-                    message: "Cette annonce a été ajoutée à vos favoris",
+                    message: "Annonce ajoutée à vos favoris",
                 },
                 {
                     allow_dismiss: false,
@@ -68,7 +68,7 @@ class EmployementBycategoryemployementbycity extends Component {
         const url = route('employments_unfavorite.unfavorite', [id]);
         dyaxios.get(url).then(() => {
             $.notify({
-                    message: "Cette annonce a été retiré de vos favoris",
+                    message: "Annonce retirée de vos favoris",
                 },
                 {
                     allow_dismiss: false,
