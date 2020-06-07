@@ -40,6 +40,4 @@ Route::group(['namespace' => 'Blogs'], function(){
     });
 
 
-    require(__DIR__ . DIRECTORY_SEPARATOR . 'blogannoncereservation.php');
-
 });

@@ -131,6 +131,8 @@ import PrivateUserEmploymentsByCategoryemployment
     from "../components/user/profile/employments/private/PrivateUserEmploymentsByCategoryemployment";
 import PublicUserEmployments from "../components/user/profile/employments/public/PublicUserEmployments";
 import EmployementBycity from "../components/user/employment/EmployementBycity";
+import PrivateUserFavoriteblogannoncereservations
+    from "../components/user/profile/favorites/PrivateUserFavoriteblogannoncereservations";
 
 
 const RouteUser = props => (
@@ -229,6 +231,7 @@ const RouteUser = props => (
           <Route exact path="/profile/:user/personal_settings/employments/:categoryemployment/" component={withRouter(PrivateUserEmploymentsByCategoryemployment)}/>
 
           <Route exact path="/profile/:user/personal_settings/favorite_employments/" component={PrivateUserFavoritEmployments}/>
+          <Route exact path="/profile/:user/personal_settings/favorite_blogannoncereservations/" component={PrivateUserFavoriteblogannoncereservations}/>
 
           <Route exact path="/profile/:user/personal_settings/subscriber_users/" component={SubscriberuserUserIndex}/>
 

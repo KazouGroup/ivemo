@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { Button,UncontrolledTooltip } from "reactstrap";
 import moment from "moment";
 import LazyLoad from "react-lazyload";
+import Skeleton from "react-loading-skeleton";
 
 
 class EmployementList extends Component {
@@ -60,9 +61,14 @@ class EmployementList extends Component {
 
 
                                     <div className="d-flex align-items-center">
-                                        <NavLink to={`/pro/${this.props.user.slug}/employments/`}>
-                                            <img src={this.props.user.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
-                                        </NavLink>
+                                        {this.props.user.avatar ?
+                                            <NavLink to={`/pro/${this.props.user.slug}/employments/`}>
+                                                <img src={this.props.user.avatar}
+                                                     style={{ height: "40px", width: "80px" }}
+                                                     alt={this.props.user.first_name}
+                                                     className="avatar" />
+                                            </NavLink>
+                                            : <Skeleton circle={false} height={40} width={80} />}
                                         <div className="mx-3">
                                             <NavLink to={`/pro/${this.props.user.slug}/employments/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
                                                 <small className="d-block text-muted"><b><i className="now-ui-icons tech_watch-time"/> {moment(this.props.created_at).format('ll')}</b></small>

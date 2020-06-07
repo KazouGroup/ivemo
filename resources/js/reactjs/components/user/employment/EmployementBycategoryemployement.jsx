@@ -282,6 +282,11 @@ class EmployementBycategoryemployement extends Component {
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+                                        <div className="submit text-left">
+                                            <Link to={`/employments/`} className="btn btn-neutral btn-sm">
+                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour aux annonces</b>
+                                            </Link>
+                                        </div>
                                         {!$guest &&(
                                             <>
                                                 {!$userIvemo.email_verified_at &&(
