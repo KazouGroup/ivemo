@@ -21,7 +21,8 @@ class BlogannonceventeService
 
     public static function apiannonceblogcategoryvente($categoryannoncevente)
     {
-        $blogannoncereseventes = BlogannonceventeResource::collection(blogannoncevente::with('user','categoryannoncevente','member')
+        $blogannoncereseventes = BlogannonceventeResource::collection($categoryannoncevente->blogannonceventes()
+            ->with('user','categoryannoncevente','member')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
             ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})

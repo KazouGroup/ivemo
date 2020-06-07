@@ -1,9 +1,28 @@
 <?php
 
-Route::get(
-    'api/categoryannoncelocations_by_user',
-    'AnnoncelocationController@apicategoryannoncelocations_by_user'
-)->name('api.categoryannoncelocations_by_user_site');
+Route::group(['prefix' => 'api'], function () {
+
+    Route::get(
+        'annonces_locations/{annoncetype}',
+        'AnnoncelocationController@apiannoncelocationbyannoncetype'
+    )->name('api.annoncelocationbyannoncetype_site');
+
+    Route::get(
+        'categoryannoncelocations_by_user',
+        'AnnoncelocationController@apicategoryannoncelocations_by_user'
+    )->name('api.categoryannoncelocations_by_user_site');
+
+    Route::get(
+        'profile/{user}/personal_settings/annonces_locations',
+        'AnnoncelocationController@apiannonceslocationsbyuser'
+    )->name('api.annonceslocationsbyuser_site');
+
+    Route::get(
+        'annonce_location/{annoncetype}/{annoncelocation:slugin}',
+        'AnnoncelocationController@apiannoncelocationsbyannoncetypebyannoncelocation'
+    )->name('api.annoncelocationsbyannoncetypebyannoncelocation_site');
+
+});
 
 Route::get(
     'annonces_locations/{annoncetype}',
@@ -19,11 +38,6 @@ Route::get(
     'annonces_locations/{annoncetype}/{categoryannoncelocation}',
     'AnnoncelocationController@annoncelocationbycategoryannoncelocation'
 )->name('annoncelocationbycategoryannoncelocations_site');
-
-Route::get(
-    'api/profile/{user}/personal_settings/annonces_locations',
-    'AnnoncelocationController@apiannonceslocationsbyuser'
-)->name('api.annonceslocationsbyuser_site');
 
 Route::get(
     'profile/{user}/personal_settings/annonces_locations',
@@ -65,11 +79,6 @@ Route::delete(
     'AnnoncelocationController@destroy'
 )->name('annonces_locations_delete.site');
 
-
-Route::get(
-    'api/annonce_location/{annoncetype}/{annoncelocation:slugin}',
-    'AnnoncelocationController@apiannoncelocationsbyannoncetypebyannoncelocation'
-)->name('api.annoncelocationsbyannoncetypebyannoncelocation_site');
 
 Route::get(
     'annonce_location/{annoncetype}/{annoncelocation:slugin}/edit',

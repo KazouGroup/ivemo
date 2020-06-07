@@ -293,7 +293,7 @@ class AnnoncelocationIndex extends Component {
     loadItems() {
         let itemannoncetype = this.props.match.params.annoncetype;
         let url = route('api.annoncelocationbyannoncetype_site', itemannoncetype);
-        dyaxios.get(url).then(response => this.setState({ annoncelocations: response.data.data, }));
+        dyaxios.get(url).then(response => this.setState({ annoncelocations: response.data, }));
     }
 
     // lifecycle method
@@ -325,7 +325,7 @@ class AnnoncelocationIndex extends Component {
                     </nav>
 
                     <div className="wrapper">
-                        <div className="page-header page-header-mini">
+                        <div className="page-header page-header-small">
                             <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
                             </div>
 
@@ -379,9 +379,9 @@ class AnnoncelocationIndex extends Component {
                                                             </div>
                                                             </div>
                                                         </div>
-                                                        
+
                                                     </div>
-                                                    
+
                                                 </form>
                                             </div>
                                         </div>

@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { Remarkable } from 'remarkable';
 import { Button,UncontrolledTooltip } from "reactstrap";
 import moment from "moment";
+import Skeleton from "react-loading-skeleton";
 
 
 class AnnonceslocationList extends Component {
@@ -65,6 +66,14 @@ class AnnonceslocationList extends Component {
                                                                 </button>
                                                             </>
                                                         }
+
+                                                        <NavLink to={`/annonce_location/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
+                                                            <i className="now-ui-icons ui-2_settings-90"/>
+                                                        </NavLink>
+                                                        <Button
+                                                            className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} title="Supprimer cette annonce">
+                                                            <i className="now-ui-icons ui-1_simple-remove"/>
+                                                        </Button>{" "}
                                                     </>
                                                 )}
                                             </>
@@ -131,9 +140,14 @@ class AnnonceslocationList extends Component {
                                     </Link>
                                     <div className="card-header d-flex align-items-center">
                                         <div className="d-flex align-items-center">
-                                            <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`}>
-                                                <img src={this.props.user.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
-                                            </NavLink>
+                                            {this.props.user.avatar ?
+                                                <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`}>
+                                                    <img src={this.props.user.avatar}
+                                                         style={{ height: "40px", width: "80px" }}
+                                                         alt={this.props.user.first_name}
+                                                         className="avatar" />
+                                                </NavLink>
+                                                : <Skeleton circle={false} height={40} width={80} />}
                                             <div className="mx-3">
                                                 <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
                                                     <small className="d-block text-muted"><b>{moment(this.props.created_at).format('LL')}</b></small>
@@ -155,23 +169,6 @@ class AnnonceslocationList extends Component {
                                                 <i className="now-ui-icons location_pin"/>
                                             </NavLink>
                                             */}
-                                            {!$guest && (
-                                                <>
-                                                    {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
-                                                        <>
-
-                                                            <NavLink to={`/annonce_location/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
-                                                                <i className="now-ui-icons ui-2_settings-90"/>
-                                                            </NavLink>
-                                                            <Button
-                                                                className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} title="Supprimer cette annonce">
-                                                                <i className="now-ui-icons ui-1_simple-remove"/>
-                                                            </Button>{" "}
-                                                        </>
-                                                    )}
-
-                                                </>
-                                            )}
                                         </div>
 
                                     </div>

@@ -28,7 +28,7 @@ class EmploymentService
 
     public static function apiemploymentsbycategory($categoryemployment)
     {
-        $employments = EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
+        $employments = EmploymentResource::collection($categoryemployment->employments()->with('user','city','categoryemployment','member')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereIn('categoryemployment_id',[$categoryemployment->id])
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
@@ -56,7 +56,7 @@ class EmploymentService
 
     public static function apiemploymentbycity($city)
     {
-        $employments = EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
+        $employments = EmploymentResource::collection($city->employments()->with('user','city','categoryemployment','member')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
