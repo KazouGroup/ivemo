@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('color_name')->default('primary');
             $table->boolean('status_user')->default(false);
             $table->integer('status_profile')->default('0');
-            $table->string('avatar')->nullable()->default('https://www.kazoucoin.com/assets/img/default-avatar.png');
+            $table->string('avatar')->nullable();
             $table->string('avatarcover')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->unique();

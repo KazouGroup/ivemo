@@ -125,7 +125,7 @@ import EmployementBycategoryemployementbycity
 import EmployementShowUserSite from "../components/user/employment/EmployementShowUserSite";
 import EmploymentEdit from "../components/user/employment/treatement/EmploymentEdit";
 import EmploymentCreate from "../components/user/employment/treatement/EmploymentCreate";
-import PrivateUserFavoritEmployments from "../components/user/profile/employments/private/PrivateUserFavoritEmployments";
+import PrivateUserFavoritEmployments from "../components/user/profile/favorites/PrivateUserFavoritEmployments";
 import PrivateUserEmployments from "../components/user/profile/employments/private/PrivateUserEmployments";
 import PrivateUserEmploymentsByCategoryemployment
     from "../components/user/profile/employments/private/PrivateUserEmploymentsByCategoryemployment";

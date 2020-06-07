@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User\Favorites;
 
 use App\Http\Controllers\Controller;
+use App\Model\blogannoncelocation;
 use App\Model\employment;
 use App\Model\user;
 use App\Model\favorite\favoritemployment;
@@ -10,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class FavoritemploymentController extends Controller
+class FavoriteblogannoncelocationController extends Controller
 {
 
       /**
@@ -66,18 +67,18 @@ class FavoritemploymentController extends Controller
 
     public function favorite(Request $request,$id)
     {
-        $employment = employment::whereId($id)->firstOrFail();
+        $blogannoncelocation = blogannoncelocation::whereId($id)->firstOrFail();
 
-        Auth::user()->bookmarksfavoritemployments()->attach($employment->id);
+        Auth::user()->bookmarksfavoriteblogannoncelocations()->attach($blogannoncelocation->id);
 
 		return response('favorite confirmed',Response::HTTP_ACCEPTED);
 	}
 
     public function unfavorite(Request $request,$id)
     {
-        $employment = employment::whereId($id)->firstOrFail();
+        $blogannoncelocation = blogannoncelocation::whereId($id)->firstOrFail();
 
-        Auth::user()->bookmarksfavoritemployments()->detach($employment->id);
+        Auth::user()->bookmarksfavoriteblogannoncelocations()->detach($blogannoncelocation->id);
 
 		return response('unfavorite confirmed',Response::HTTP_ACCEPTED);
 	}

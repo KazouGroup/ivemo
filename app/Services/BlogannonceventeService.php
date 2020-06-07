@@ -21,19 +21,25 @@ class BlogannonceventeService
 
     public static function apiannonceblogcategoryvente($categoryannoncevente)
     {
+        $blogannoncereseventes = BlogannonceventeResource::collection(blogannoncevente::with('user','categoryannoncevente','member')
+            ->where(['status' => 1,'status_admin' => 1])
+            ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+            ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+            ->orderBy('created_at','DESC')
+            ->distinct()->paginate(40));
+
+        return $blogannoncereseventes;
+    }
+
+    public static function apiannonceblogcategoryventecount($categoryannoncevente)
+    {
         $blogannoncereseventes = categoryannoncevente::whereSlug($categoryannoncevente->slug)->where(['status' => 1])
             ->withCount(['blogannonceventes' => function ($q)  use ($categoryannoncevente){
                 $q->where(['status' => 1,'status_admin' => 1])
                     ->with('user','categoryannoncevente','member')
                     ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);});
-            }])->with(['blogannonceventes' => function ($q) use ($categoryannoncevente){
-                $q->where(['status' => 1,'status_admin' => 1])
-                    ->with('user','categoryannoncevente','member')
-                    ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
-                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-                    ->orderBy('created_at','DESC')->distinct()->paginate(40);},
-            ])->first();
+            }])->first();
 
         return $blogannoncereseventes;
     }

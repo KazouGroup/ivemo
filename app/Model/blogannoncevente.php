@@ -2,8 +2,10 @@
 
 namespace App\Model;
 
+use App\Model\favorite\favoriteblogannoncevente;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -16,7 +18,7 @@ class blogannoncevente extends Model implements Auditable
     protected $guarded = [];
 
     protected static $logAttributes = ['title','red_time','ip','status','status_admin','member_id'];
-    
+
     protected  $table = 'blogannonceventes';
 
     protected static function boot()
@@ -82,5 +84,12 @@ class blogannoncevente extends Model implements Auditable
             ]
 
         ];
+    }
+
+    public function bookmarked()
+    {
+        return (bool) favoriteblogannoncevente::where('user_id', Auth::guard('web')->id())
+            ->where('blogannoncevente_id', $this->id)
+            ->first();
     }
 }

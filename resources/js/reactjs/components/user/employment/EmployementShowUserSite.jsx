@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 import Navlinknewemployment from "./treatement/Navlinknewemployment";
 import EmployementInteresse from "./EmployementInteresse";
 import HelmetSite from "../../inc/user/HelmetSite";
+import ButonFavoris from "../../inc/vendor/ButonFavoris";
 
 
 class EmployementShowUserSite extends Component {
@@ -388,7 +389,7 @@ class EmployementShowUserSite extends Component {
 
                                                                         <>
                                                                             <Button onClick={() => this.unfavoriteItem(employment.id)}
-                                                                                    className="btn btn-danger btn-sm btn-round" title="Retirer de vos favoris">
+                                                                                    className="btn btn-danger btn-sm" title="Retirer de vos favoris">
                                                                                 <i className="fas fa-bookmark"></i> <b>Sauvegardé</b>
                                                                             </Button>
                                                                         </>
@@ -396,12 +397,13 @@ class EmployementShowUserSite extends Component {
                                                                         :
                                                                         <>
                                                                             <Button onClick={() => this.favoriteItem(employment.id)}
-                                                                                    className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
+                                                                                    className="btn btn-facebook btn-sm btn-neutral" title="Ajouter à vos favoris">
                                                                                 <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
                                                                             </Button>
                                                                         </>
                                                                     }
-                                                                </>}
+                                                                </>
+                                                            }
                                                         </div>
                                                     </>
                                                 )}
@@ -432,25 +434,7 @@ class EmployementShowUserSite extends Component {
                                                                 <i className="far fa-bookmark"></i>
                                                             </Button>
                                                             :
-                                                           <>
-                                                               {employment.bookmarked ?
-
-                                                                   <>
-                                                                       <Button onClick={() => this.unfavoriteItem(employment.id)}
-                                                                               className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
-                                                                           <i className="fas fa-bookmark"></i>
-                                                                       </Button>
-                                                                   </>
-
-                                                                   :
-                                                                   <>
-                                                                       <Button onClick={() => this.favoriteItem(employment.id)}
-                                                                               className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
-                                                                           <i className="far fa-bookmark"></i>
-                                                                       </Button>
-                                                                   </>
-                                                               }
-                                                           </>
+                                                            <ButonFavoris favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} {...employment} />
                                                         }
                                                         <Button className="btn btn-icon btn-sm btn-facebook" title="Copier le lien" onClick={() => this.copyToClipboard()}>
                                                             <i className="fas fa-copy"></i>

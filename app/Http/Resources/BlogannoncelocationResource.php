@@ -16,6 +16,7 @@ class BlogannoncelocationResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'bookmarked' => $this->bookmarked(),
             'title' => $this->title,
             'photo' => $this->photo,
             'description' => $this->description,

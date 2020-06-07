@@ -3,12 +3,6 @@ import { Link, NavLink, withRouter } from 'react-router-dom';
 
 
 class NavlinkconfigurationUser extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            //
-        }
-    }
 
     render() {
         return (

@@ -6,8 +6,6 @@ import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import {Button, Form,Alert,Input} from "reactstrap";
 import Swal from "sweetalert2";
 import LinkValicationEmail from "../../inc/user/LinkValicationEmail";
-import Navemployements from "./inc/Navemployements";
-import NavannoncecategorySkeleton from "../../inc/user/NavannoncecategorySkeleton";
 import EmploymentListSkeleton from "../../inc/user/employment/EmploymentListSkeleton";
 import Navlinknewemployment from "./treatement/Navlinknewemployment";
 import EmployementList from "./inc/EmployementList";

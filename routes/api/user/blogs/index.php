@@ -41,7 +41,5 @@ Route::group(['namespace' => 'Blogs'], function(){
 
 
     require(__DIR__ . DIRECTORY_SEPARATOR . 'blogannoncereservation.php');
-    require(__DIR__ . DIRECTORY_SEPARATOR . 'blogannoncelocation.php');
-    require(__DIR__ . DIRECTORY_SEPARATOR . 'blogannoncevente.php');
 
 });

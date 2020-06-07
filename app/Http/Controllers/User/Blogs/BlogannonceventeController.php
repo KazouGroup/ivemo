@@ -31,11 +31,11 @@ class BlogannonceventeController extends Controller
 
     public function apiannonceblogresevente()
     {
-        $blogannoncereseventes = blogannoncevente::with('user','categoryannoncevente','member')
+        $blogannoncereseventes = BlogannonceventeResource::collection(blogannoncevente::with('user','categoryannoncevente','member')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')
-            ->distinct()->paginate(40);
+            ->distinct()->paginate(40));
 
         return response()->json($blogannoncereseventes, 200);
     }
@@ -48,6 +48,13 @@ class BlogannonceventeController extends Controller
     public function apiannonceblogcategoryvente(categoryannoncevente $categoryannoncevente)
     {
         $blogannoncereseventes = BlogannonceventeService::apiannonceblogcategoryvente($categoryannoncevente);
+
+        return response()->json($blogannoncereseventes, 200);
+    }
+
+    public function apiannonceblogcategoryventecount(categoryannoncevente $categoryannoncevente)
+    {
+        $blogannoncereseventes = BlogannonceventeService::apiannonceblogcategoryventecount($categoryannoncevente);
 
         return response()->json($blogannoncereseventes, 200);
     }

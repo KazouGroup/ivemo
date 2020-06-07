@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-use App\Model\favorite\favoritebloglocation;
+use App\Model\favorite\favoriteblogannoncelocation;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -18,7 +18,7 @@ class blogannoncelocation extends Model implements Auditable
     protected $guarded = [];
 
     protected static $logAttributes = ['title','red_time','ip','status','status_admin','member_id'];
-    
+
     protected  $table = 'blogannoncelocations';
 
     protected static function boot()
@@ -84,6 +84,13 @@ class blogannoncelocation extends Model implements Auditable
             ]
 
         ];
+    }
+
+    public function bookmarked()
+    {
+        return (bool) favoriteblogannoncelocation::where('user_id', Auth::guard('web')->id())
+            ->where('blogannoncelocation_id', $this->id)
+            ->first();
     }
 
 }

@@ -3,6 +3,7 @@ import { Link,NavLink } from 'react-router-dom';
 import {connect} from "react-redux";
 import LazyLoad from 'react-lazyload';
 import moment from "moment";
+import BlogannoncePublicuserSkeleton from "../blog/BlogannoncePublicuserSkeleton";
 
 class SectionBlogannonce extends Component {
     constructor(props) {
@@ -70,7 +71,7 @@ class SectionBlogannonce extends Component {
                 )
             })
         ):(
-            <></>
+            <BlogannoncePublicuserSkeleton/>
         );
 
         const mapBlogannoncereservations = blogannoncereservations.length >= 0 ? (
@@ -107,7 +108,7 @@ class SectionBlogannonce extends Component {
                 )
             })
         ):(
-            <></>
+            <BlogannoncePublicuserSkeleton/>
         );
 
         const mapBlogannonceventes = blogannonceventes.length >= 0 ? (
@@ -143,7 +144,7 @@ class SectionBlogannonce extends Component {
                 )
             })
         ):(
-            <></>
+            <BlogannoncePublicuserSkeleton/>
         );
 
         return (
