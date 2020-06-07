@@ -97,12 +97,28 @@ class EmployementShowUserSite extends Component {
 
     copyToClipboard(){
         navigator.clipboard.writeText(window.location.toString());
-        Swal.fire({
-            title: `Lien copié correctement avec succès`,
-            icon: 'success',
-            showConfirmButton: false,
-            timer: 1500,
-        });
+        //Swal.fire({
+        //    title: `Lien copié correctement avec succès`,
+        //    icon: 'success',
+        //    showConfirmButton: false,
+        //    timer: 1500,
+        //});
+
+        $.notify({
+                message: "Lien copié correctement avec succès",
+            },
+            {
+                allow_dismiss: false,
+                type: 'info',
+                placement: {
+                    from: 'bottom',
+                    align: 'center'
+                },
+                animate: {
+                    enter: "animate__animated animate__fadeInUp",
+                    exit: "animate__animated animate__fadeOutDown"
+                },
+            });
     }
     phoneShow(employment){
         Swal.fire({
@@ -345,9 +361,14 @@ class EmployementShowUserSite extends Component {
 
                                                 <div className="card-header d-flex align-items-center">
                                                     <div className="d-flex align-items-center">
-                                                        <NavLink to={`/pro/${employment.user.slug}/employments/`}>
-                                                            <img src={employment.user.avatar} style={{ height: "40px", width: "80px" }} alt={employment.user.first_name} className="avatar" />
-                                                        </NavLink>
+                                                        {employment.user.avatar ?
+                                                            <NavLink to={`/pro/${employment.user.slug}/employments/`}>
+                                                                <img src={employment.user.avatar}
+                                                                     style={{ height: "40px", width: "80px" }}
+                                                                     alt={employment.user.first_name}
+                                                                     className="avatar" />
+                                                            </NavLink>
+                                                            : <Skeleton circle={false} height={40} width={80} />}
                                                         <div className="mx-3">
                                                             <NavLink to={`/pro/${employment.user.slug}/employments/`} className="text-dark font-weight-600 text-sm"><b>{employment.user.first_name}</b>
                                                                 <small className="d-block text-muted"><i className="now-ui-icons tech_watch-time"/> {moment(employment.created_at).format('LL')}</small>
@@ -418,9 +439,14 @@ class EmployementShowUserSite extends Component {
 
                                                 <div className="card-header d-flex align-items-center">
                                                     <div className="d-flex align-items-center">
-                                                        <NavLink to={`/pro/${employment.user.slug}/employments/`}>
-                                                            <img src={employment.user.avatar} style={{ height: "40px", width: "80px" }} alt={employment.user.first_name} className="avatar" />
-                                                        </NavLink>
+                                                        {employment.user.avatar ?
+                                                            <NavLink to={`/pro/${employment.user.slug}/employments/`}>
+                                                                <img src={employment.user.avatar}
+                                                                     style={{ height: "40px", width: "80px" }}
+                                                                     alt={employment.user.first_name}
+                                                                     className="avatar" />
+                                                            </NavLink>
+                                                            : <Skeleton circle={false} height={40} width={80} />}
                                                         <div className="mx-3">
                                                             <NavLink to={`/pro/${employment.user.slug}/employments/`} className="text-dark font-weight-600 text-sm"><b>{employment.user.first_name}</b>
                                                                 <small className="d-block text-muted"><i className="now-ui-icons tech_watch-time"/> {moment(employment.user.created_at).format('LL')}</small>

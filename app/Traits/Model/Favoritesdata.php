@@ -3,9 +3,11 @@
 namespace App\Traits\Model;
 
 use App\Model\blogannoncelocation;
+use App\Model\blogannoncereservation;
 use App\Model\blogannoncevente;
 use App\Model\employment;
 use App\Model\favorite\favoriteblogannoncelocation;
+use App\Model\favorite\favoriteblogannoncereservation;
 use App\Model\favorite\favoriteblogannoncevente;
 use App\Model\favorite\favoritemployment;
 
@@ -43,5 +45,15 @@ trait Favoritesdata
     public function bookmarksfavoriteblogannonceventes()
     {
         return $this->belongsToMany(blogannoncevente::class, 'favoriteblogannonceventes', 'user_id', 'blogannoncevente_id')->withTimeStamps();
+    }
+
+    public function favoriteblogannoncereservations()
+    {
+        return $this->hasMany(favoriteblogannoncereservation::class, 'user_id');
+    }
+
+    public function bookmarksfavoriteblogannoncereservations()
+    {
+        return $this->belongsToMany(blogannoncereservation::class, 'favoriteblogannoncereservation', 'user_id', 'blogannoncereservation_id')->withTimeStamps();
     }
 }

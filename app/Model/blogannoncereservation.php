@@ -2,7 +2,9 @@
 
 namespace App\Model;
 
+use App\Model\favorite\favoriteblogannoncereservation;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Auditable as AuditableTrait;
@@ -84,4 +86,10 @@ class blogannoncereservation extends Model implements Auditable
         ];
     }
 
+    public function bookmarked()
+    {
+        return (bool) favoriteblogannoncereservation::where('user_id', Auth::guard('web')->id())
+            ->where('blogannoncereservation_id', $this->id)
+            ->first();
+    }
 }
