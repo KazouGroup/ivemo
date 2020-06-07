@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Annonces\Annoncevente\StoreRequest;
+use App\Http\Requests\Annonces\Annoncevente\UpdateRequest;
 use App\Http\Resources\AnnonceventeResource;
 use App\Http\Resources\CategoryannonceventeResource;
 use App\Http\Resources\CityResource;
@@ -20,8 +22,10 @@ class AnnonceventeController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['only' => [
-            'create', 'store', 'edit', 'update', 'destroy','apiannoncesventesbyuser','annoncesventesbyuser',
-            'activated', 'unactivated'
+            'create', 'store', 'edit', 'update', 'destroy','adminunactivated','adminactivated',
+            'apiannoncesventesbyuser','annoncesventesbyuser','annoncesventesbyusercategory',
+            'apiannoncesventesbyusercategoryannoncevente', 'activated',
+            'unactivated','apiannonceventesbyannoncetypebyannoncevente',
         ]]);
     }
 
@@ -78,6 +82,7 @@ class AnnonceventeController extends Controller
     {
         $annoncesventes = $annoncetype->annonceventes()->whereIn('annoncetype_id',[$annoncetype->id])
             ->with('user','categoryannoncevente','city','annoncetype')
+            ->with(['user.profile' => function ($q){$q->distinct()->get();}])
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')
@@ -138,6 +143,13 @@ class AnnonceventeController extends Controller
         return response()->json($annoncelocations, 200);
     }
 
+    public function apiannonceventesbyannoncetypebyannoncevente(annoncetype $annoncetype,$annoncevente)
+    {
+        $data = AnnonceventeService::apiannonceventesbyannoncetypebyannoncevente($annoncetype,$annoncevente);
+
+        return response()->json($data, 200);
+    }
+
     /**
      * @param annoncetype $annoncetype
      * @param categoryannoncevente $categoryannoncevente
@@ -147,14 +159,16 @@ class AnnonceventeController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function apiannonceventebycategoryannonceventeslug(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,$annoncevente)
+    public function apiannonceventebycategoryannonceventeslug(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,annoncevente $annoncevente)
     {
+        visits($annoncevente)->seconds(60)->increment();
+
         $annoncevente = new AnnonceventeResource(annoncevente::whereIn('annoncetype_id',[$annoncetype->id])
         ->whereIn('city_id',[$city->id])
         ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
         ->where(['status' => 1,'status_admin' => 1])
         ->with(['user.profile' => function ($q){$q->distinct()->get();},])
-         ->whereSlug($annoncevente)->firstOrFail());
+         ->whereSlug($annoncevente->slug)->firstOrFail());
 
         return response()->json($annoncevente, 200);
     }
@@ -197,6 +211,8 @@ class AnnonceventeController extends Controller
 
     public function annonceventebycategoryannonceventeslug(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,annoncevente $annoncevente)
     {
+        visits($annoncevente)->seconds(60)->increment();
+
         return view('user.annoncevente.annonces_show',[
             'categoryannoncevente' => $categoryannoncevente,
             'annoncevente' => $annoncevente,
@@ -252,10 +268,22 @@ class AnnonceventeController extends Controller
                     ->whereIn('user_id',[auth()->user()->id]);
             }])->withCount(['blogannonceventes' => function ($q){
                 $q->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-                    ->whereIn('user_id',[auth()->user()->id]);}])
+                    ->whereIn('user_id',[auth()->user()->id])
+                    ->where('status_admin',1);}])
             ->orderBy('annonceventes_count','desc')->distinct()->get());
 
         return response()->json($categoryannonceventes, 200);
+    }
+
+    public function apiannoncesventesbyusercategoryannoncevente(user $user,categoryannoncevente $categoryannoncevente)
+    {
+        if (auth()->user()->id === $user->id){
+            $annonceventes = AnnonceventeService::apiannoncesventesbyusercategoryannoncevente($user,$categoryannoncevente);
+
+            return response()->json($annonceventes, 200);
+        }else{
+            abort(404);
+        }
     }
 
     public function apiannoncesventesbyuser(user $user)
@@ -281,6 +309,13 @@ class AnnonceventeController extends Controller
 
     }
 
+    public function annoncesventesbyusercategory(user $user,categoryannoncevente $categoryannoncevente)
+    {
+        return view('user.profile.annonces.privateprofilannonceventescategory',[
+            'categoryannoncevente' => $categoryannoncevente,
+        ]);
+    }
+
     public function activated($id)
     {
         $annoncevente = annoncevente::where('id', $id)->findOrFail($id);
@@ -300,6 +335,7 @@ class AnnonceventeController extends Controller
     public function unactivated($id)
     {
         $annoncevente = annoncevente::where('id', $id)->findOrFail($id);
+
         $this->authorize('update',$annoncevente);
 
         if(auth()->user()->id === $annoncevente->user_id){
@@ -311,15 +347,36 @@ class AnnonceventeController extends Controller
         }
     }
 
+    public function adminactivated($id)
+    {
+        $annoncevente = annoncevente::where('id', $id)->findOrFail($id);
+
+        $annoncevente->update(['status_admin' => 1,'member_id' => auth()->user()->id]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+    }
+
+    public function adminunactivated($id)
+    {
+        $annoncevente = annoncevente::where('id', $id)->findOrFail($id);
+
+        $annoncevente->update(['status_admin' => 0,'member_id' => auth()->user()->id]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+
+    }
+
     /**
      * Show the form for creating a new resource
      * .
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(annoncetype $annoncetype)
     {
-        //
+        return view('user.annoncevente.create',[
+            'annoncetype' => $annoncetype,
+        ]);
     }
 
     /**
@@ -328,9 +385,18 @@ class AnnonceventeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request,annoncetype $annoncetype)
     {
-        //
+        $annoncevente= new annoncevente();
+
+        $annoncevente->fill($request->all());
+
+        $annoncevente->annoncetype_id = $annoncetype->id;
+        $annoncevente->description = clean($request->description);
+
+        $annoncevente->save();
+
+        return response('Created',Response::HTTP_CREATED);
     }
 
     /**
@@ -344,27 +410,33 @@ class AnnonceventeController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(annoncetype $annoncetype,annoncevente $annoncevente)
     {
-        //
+        return view('user.annoncevente.edit',[
+            'annoncevente' => $annoncevente,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  string  $blogannoncevente
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request,annoncetype $annoncetype, $annoncevente)
     {
-        //
+        $annoncevente = annoncevente::whereSlugin($annoncevente)->firstOrFail();
+
+        $this->authorize('update',$annoncevente);
+
+
+        $annoncevente->description = clean($request->description);
+        $annoncevente->slug = null;
+        $annoncevente->update($request->all());
+
+        return response()->json($annoncevente,200);
+
     }
 
     /**

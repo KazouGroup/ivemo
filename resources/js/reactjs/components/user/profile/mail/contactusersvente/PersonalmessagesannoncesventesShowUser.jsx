@@ -114,8 +114,8 @@ class PersonalmessagesannoncesventesShowUser extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -127,8 +127,8 @@ class PersonalmessagesannoncesventesShowUser extends Component {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -149,7 +149,7 @@ class PersonalmessagesannoncesventesShowUser extends Component {
 
             <>
                 <Helmet>
-                    <title>{`${contactuser.subject || 'Messages contact annonces ventes'}`} {`${$userIvemo.first_name}`} - Ivemo</title>
+                    <title>{`${contactuser.subject || 'Messages contact annonces ventes'}`} {`${$userIvemo.first_name}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
@@ -288,11 +288,11 @@ class PersonalmessagesannoncesventesShowUser extends Component {
                                                                         </h6>
                                                                         <div className="card-header d-flex align-items-center">
                                                                             <div className="d-flex align-items-center">
-                                                                                <NavLink to={`/@${contactuser.annoncevente.user.slug}/`}>
+                                                                                <NavLink to={`/po/${contactuser.annoncevente.user.slug}/`}>
                                                                                     <img src={contactuser.annoncevente.user.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                                                                 </NavLink>
                                                                                 <div className="mx-3">
-                                                                                    <NavLink to={`/@${contactuser.annoncevente.user.slug}/`} className="text-dark font-weight-600 text-sm">{contactuser.annoncevente.user.first_name}
+                                                                                    <NavLink to={`/po/${contactuser.annoncevente.user.slug}/`} className="text-dark font-weight-600 text-sm">{contactuser.annoncevente.user.first_name}
                                                                                         <small className="d-block text-muted"><b>{moment(contactuser.annoncevente.created_at).format('LL')}</b></small>
                                                                                     </NavLink>
                                                                                 </div>

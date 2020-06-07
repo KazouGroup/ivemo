@@ -5,16 +5,22 @@ import NavUserSite from "../../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../../../../configurations/inc/NavlinkconfigurationUser";
-import BlogannoncelocationList from "../../../../blog/blogannoncelocation/BlogannoncelocationList";
 import Navblogannoncelocationsbyuser from "../../../../blog/blogannoncelocation/inc/Navblogannoncelocationsbyuser";
 import LinkValicationEmail from "../../../../../inc/user/LinkValicationEmail";
+import BlogannonceListSkeleton from "../../../../../inc/user/blog/BlogannonceListSkeleton";
+import PrivateUserBlogannoncelocationList
+    from "../../../../blog/blogannoncelocation/inc/PrivateUserBlogannoncelocationList";
+const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
 class PrivateUserBlogannonceLocation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userblogannoncelocationsPrivate:{blogannoncelocations:[]},
+            blogannoncelocations_count: [],
+            blogannoncelocationsactive_count: [],
+            blogannoncelocationsunactive_count: [],
+            userblogannoncelocationsPrivate:{blogannoncelocations:{categoryannoncelocation:[],user:[]}},
             visiable: 20,
 
         };
@@ -61,8 +67,8 @@ class PrivateUserBlogannonceLocation extends Component {
                                 align: 'center'
                             },
                             animate: {
-                                enter: "animated fadeInUp",
-                                exit: "animated fadeOutDown"
+                                enter: "animate__animated animate__fadeInUp",
+                                exit: "animate__animated animate__fadeOutDown"
                             },
                         });
                     /** End alert ***/
@@ -72,8 +78,8 @@ class PrivateUserBlogannonceLocation extends Component {
                     $.notify("Ooop! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -113,8 +119,8 @@ class PrivateUserBlogannonceLocation extends Component {
                                 align: 'center'
                             },
                             animate: {
-                                enter: "animated fadeInUp",
-                                exit: "animated fadeOutDown"
+                                enter: "animate__animated animate__fadeInUp",
+                                exit: "animate__animated animate__fadeOutDown"
                             },
                         });
                     /** End alert ***/
@@ -166,8 +172,8 @@ class PrivateUserBlogannonceLocation extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -178,8 +184,8 @@ class PrivateUserBlogannonceLocation extends Component {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -189,6 +195,10 @@ class PrivateUserBlogannonceLocation extends Component {
 
     loadItems(){
         let itemuser = this.props.match.params.user;
+        dyaxios.get(route('api.blogannoncelocations_premium_count',[itemuser])).then(response => this.setState({ blogannoncelocations_count: response.data, }));
+        dyaxios.get(route('api.blogannoncelocations_premiumactive_count',[itemuser])).then(response => this.setState({ blogannoncelocationsactive_count: response.data, }));
+        dyaxios.get(route('api.blogannoncelocations_premiumunactive_count',[itemuser])).then(response => this.setState({ blogannoncelocationsunactive_count: response.data, }));
+
         dyaxios.get(route('api.blogannonceslocationsbyuser_site',[itemuser])).then(response => this.setState({userblogannoncelocationsPrivate: response.data,}));
     }
 
@@ -197,21 +207,42 @@ class PrivateUserBlogannonceLocation extends Component {
         this.loadItems();
     }
 
+    blogannonceventes_countFormatter(blogannoncelocations_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocations_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (blogannoncelocations_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+
+    blogannonceventesactive_countFormatter(blogannoncelocationsactive_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocationsactive_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (blogannoncelocationsactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+
+    blogannonceventesunactive_countFormatter(blogannoncelocationsunactive_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(blogannoncelocationsunactive_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (blogannoncelocationsunactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+
     render() {
-        const {userblogannoncelocationsPrivate,visiable} = this.state;
-        const mapBlogannoncelocations = userblogannoncelocationsPrivate.blogannoncelocations.length ? (
+        const {userblogannoncelocationsPrivate,visiable,blogannoncelocations_count,blogannoncelocationsunactive_count,blogannoncelocationsactive_count} = this.state;
+        const mapBlogannoncelocations = userblogannoncelocationsPrivate.blogannoncelocations.length >= 0 ? (
             userblogannoncelocationsPrivate.blogannoncelocations.slice(0,visiable).map(item => {
                 return(
-                    <BlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
+                    <PrivateUserBlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
                 )
             })
         ):(
-            <></>
+            <BlogannonceListSkeleton/>
         );
         return (
             <>
                 <Helmet>
-                    <title>Articles sur la locations {`${$userIvemo.first_name || 'Profile'}`} - Ivemo</title>
+                    <title>Articles sur la locations {`${$userIvemo.first_name || 'Profile'}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
@@ -264,6 +295,32 @@ class PrivateUserBlogannonceLocation extends Component {
                                                 )}
                                             </>
                                         )}
+
+                                        <div className="row">
+                                            <div className="col-md-4 col-4">
+                                                <div className="info info-hover">
+                                                    <div className="icon icon-warning icon-circle">
+                                                        <i className="now-ui-icons text_align-center"></i>                                                    </div>
+                                                    <h4 className="info-title"><b>{this.blogannonceventes_countFormatter(blogannoncelocations_count)}</b></h4>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-4 col-4">
+                                                <div className="info info-hover">
+                                                    <div className="icon icon-success icon-circle">
+                                                        <i className="now-ui-icons ui-1_check"></i>
+                                                    </div>
+                                                    <h4 className="info-title"><b>{this.blogannonceventesactive_countFormatter(blogannoncelocationsactive_count)}</b></h4>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-4 col-4">
+                                                <div className="info info-hover">
+                                                    <div className="icon icon-primary icon-circle">
+                                                        <i className="now-ui-icons ui-1_simple-delete"></i>
+                                                    </div>
+                                                    <h4 className="info-title"><b>{this.blogannonceventesunactive_countFormatter(blogannoncelocationsunactive_count)}</b></h4>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         {mapBlogannoncelocations}
 

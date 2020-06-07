@@ -47,7 +47,7 @@ class SectionReservationbyCity extends Component {
                                     <div className="card card-plain">
                                         <div className="card-header" role="tab" id="headingOne">
                                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                <b>Reservation</b>
+                                                <b>Réservations</b>
                                             </a>
                                         </div>
                                         <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">

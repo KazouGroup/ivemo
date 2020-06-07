@@ -37,7 +37,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
         return (
             <>
                 <Helmet>
-                    <title>{`${annoncereservation.title || "Ivemo"}`} - Ivemo</title>
+                    <title>{`${annoncereservation.title || $name_site}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
@@ -119,7 +119,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                         <div className="card">
                                             <div className="card-body">
                                                 <h6 className="card-title">
-                                                    Description
+                                                    Déscription
                                                 </h6>
                                                 <span>Eres' daring 'Grigri Fortune' swimsuit has
                                                     the fit and coverage of a bikini in a one-piece silhouette.
@@ -129,7 +129,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                 </span>
                                                 <hr />
                                                 <h6 className="card-title">
-                                                    A L'interieur
+                                                    A L'intérieur
                                                 </h6>
                                                 <span>Eres' daring 'Grigri Fortune' swimsuit has
                                                     the fit and coverage of a bikini in a one-piece silhouette.
@@ -163,9 +163,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                                     <div className="col-md-12">
                                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-
                                                                         <FormContactAnnoncereservationUser {...this.props}/>
-
 
                                                                         </div>
                                                                     </div>
@@ -197,11 +195,11 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                             <div className="card-header d-flex align-items-center">
                                                                 <div className="d-flex align-items-center">
-                                                                    <NavLink to={`/@${annoncereservation.user.slug}/`}>
+                                                                    <NavLink to={`/pro/${annoncereservation.user.slug}/`}>
                                                                         <img src={annoncereservation.user.avatar} style={{ height: "40px", width: "80px" }} alt={annoncereservation.user.first_name} className="avatar" />
                                                                     </NavLink>
                                                                     <div className="mx-3">
-                                                                        <NavLink to={`/@${annoncereservation.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{annoncereservation.user.first_name}</b>
+                                                                        <NavLink to={`/pro/${annoncereservation.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{annoncereservation.user.first_name}</b>
                                                                             <small className="d-block text-muted">12 janv 2019</small>
                                                                         </NavLink>
                                                                     </div>
@@ -244,19 +242,12 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
 
                             </div>
 
-
-
                         </div>
-
-
-
 
                         <FooterBigUserSite />
                     </div>
                 </div>
             </>
-
-
 
         )
     }

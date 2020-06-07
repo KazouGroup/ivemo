@@ -14,7 +14,7 @@ class Annoncebycategoryannoncereservationcity extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncereservationbycity: { annoncereservations: [] },
+            annoncereservationbycity: { annoncereservations: {annoncetype:[],categoryannoncereservation:[],user:{profile:[]},imagereservations:[]} },
             categoryannoncereservations: [],
             citiesannoncesreservations: [],
             annoncereservationbycategory: [],
@@ -64,7 +64,7 @@ class Annoncebycategoryannoncereservationcity extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Reservation {`${SlugCategoryannoncereservation || "Ivemo"}`} dans la ville de {`${annoncereservationbycity.name || ""}`} - Ivemo</title>
+                    <title>Reservation {`${SlugCategoryannoncereservation || $name_site}`} dans la ville de {`${annoncereservationbycity.name || ""}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
@@ -85,7 +85,6 @@ class Annoncebycategoryannoncereservationcity extends Component {
                                 <br />
                                 <div className="row">
 
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
                                         <div className="submit text-left">
@@ -101,7 +100,6 @@ class Annoncebycategoryannoncereservationcity extends Component {
                                                 ))}
                                             </>
                                         )}
-
 
                                     </div>
 
@@ -130,7 +128,7 @@ class Annoncebycategoryannoncereservationcity extends Component {
                                                                         <table>
                                                                             <tbody>
 
-                                                                            {categoryannoncereservations.length ?
+                                                                            {categoryannoncereservations.length >= 0 ?
                                                                                 <>{categoryannoncereservations.map((item) => (
                                                                                     <tr key={item.id}>
                                                                                         <td>

@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class annoncelocation extends Model
 {
@@ -16,14 +17,16 @@ class annoncelocation extends Model
         parent::boot();
 
         static::creating(function ($model){
+            $myslug = Str::uuid();
             if (auth()->check()){
                 $model->user_id = auth()->id();
+                $model->slugin = $myslug;
+                $model->ip = request()->ip();
             }
         });
+
         static::updating(function($model){
-            if (auth()->check()){
-                $model->user_id = auth()->id();
-            }
+            $model->ip = request()->ip();
         });
     }
 
@@ -34,7 +37,12 @@ class annoncelocation extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(user::class,'user_id');
+    }
+
+    public function member()
+    {
+        return $this->belongsTo(user::class,'member_id');
     }
 
     public function categoryannoncelocation()
@@ -50,6 +58,16 @@ class annoncelocation extends Model
     public function annoncetype()
     {
         return $this->belongsTo(annoncetype::class,'annoncetype_id');
+    }
+
+    public function signalannoncelocations()
+    {
+        return $this->hasMany(signalannoncelocation::class, 'annoncelocation_id');
+    }
+
+    public function visits()
+    {
+        return visits($this);
     }
 
     protected $casts = [

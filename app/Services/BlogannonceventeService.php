@@ -21,19 +21,25 @@ class BlogannonceventeService
 
     public static function apiannonceblogcategoryvente($categoryannoncevente)
     {
+        $blogannoncereseventes = BlogannonceventeResource::collection(blogannoncevente::with('user','categoryannoncevente','member')
+            ->where(['status' => 1,'status_admin' => 1])
+            ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+            ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+            ->orderBy('created_at','DESC')
+            ->distinct()->paginate(40));
+
+        return $blogannoncereseventes;
+    }
+
+    public static function apiannonceblogcategoryventecount($categoryannoncevente)
+    {
         $blogannoncereseventes = categoryannoncevente::whereSlug($categoryannoncevente->slug)->where(['status' => 1])
             ->withCount(['blogannonceventes' => function ($q)  use ($categoryannoncevente){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->with('user','categoryannoncevente')
+                    ->with('user','categoryannoncevente','member')
                     ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);});
-            }])->with(['blogannonceventes' => function ($q) use ($categoryannoncevente){
-                $q->where(['status' => 1,'status_admin' => 1])
-                    ->with('user','categoryannoncevente')
-                    ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
-                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-                    ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();},
-            ])->first();
+            }])->first();
 
         return $blogannoncereseventes;
     }
@@ -43,7 +49,7 @@ class BlogannonceventeService
     {
         $blogannoncereseventes = user::whereSlug($user->slug)
             ->with(['blogannonceventes' => function ($q) use ($user){
-                $q->with('user','categoryannoncevente')
+                $q->with('user','categoryannoncevente','member')
                     ->whereIn('user_id',[$user->id])
                     ->where(['status' => 1,'status_admin' => 1])
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
@@ -83,7 +89,7 @@ class BlogannonceventeService
     {
         $blogannoncereseventes = HelpersService::helpersannonblogceteambyusercount($user)
             ->with(['blogannonceventes' => function ($q) use ($user){
-                $q->with('user','categoryannoncevente')
+                $q->with('user','categoryannoncevente','member')
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id])
                     ->orderBy('created_at','DESC')
@@ -96,14 +102,14 @@ class BlogannonceventeService
 
     public static function apiblogannoncesventescategoryannonceventebyuser($user,$categoryannoncevente)
     {
-        $blogannoncereseventes = HelpersService::helpersannonblogceteambyusercount($user,$categoryannoncevente)
+        $blogannoncereseventes = HelpersService::helpersannonblogceteambyusercount($user)
             ->with(['blogannonceventes' => function ($q) use ($user,$categoryannoncevente){
-                $q->with('user','categoryannoncevente')
+                $q->with('user','categoryannoncevente','member')
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id])
                     ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
                     ->orderBy('created_at','DESC')
-                    ->distinct()->get()->toArray()
+                    ->distinct()->get()
                 ;},
             ])->first();
 
@@ -122,7 +128,7 @@ class BlogannonceventeService
                 mkdir($dir, 0775, true);
             }
             $destinationPath = public_path("assets/img/blogannonceresevente/{$name}");
-            Image::make($request->photo)->fit(1400,650)->save($destinationPath);
+            Image::make($request->photo)->fit(1200,650)->save($destinationPath);
 
             $myfilename = "/assets/img/blogannonceresevente/{$name}";
             $blogannonceresevente->photo = $myfilename;
@@ -140,7 +146,7 @@ class BlogannonceventeService
                 ($request->photo,';')))[1])[1];
             $dir = 'assets/img/blogannonceresevente/';
             if(!file_exists($dir)){mkdir($dir, 0775, true);}
-            Image::make($request->photo)->fit(1400,650)->save(public_path('assets/img/blogannonceresevente/').$name);
+            Image::make($request->photo)->fit(1200,650)->save(public_path('assets/img/blogannonceresevente/').$name);
             $request->merge(['photo' =>  "/assets/img/blogannonceresevente/{$name}"]);
             $oldFilename = $currentPhoto;
             File::delete(public_path($oldFilename));

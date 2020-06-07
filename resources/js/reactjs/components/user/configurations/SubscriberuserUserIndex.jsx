@@ -43,7 +43,7 @@ class SubscriberuserUserIndex extends Component {
 
             <>
                 <Helmet>
-                    <title>Email Abonnement {`${$userIvemo.first_name}`} - Ivemo</title>
+                    <title>Email Abonnement {`${$userIvemo.first_name}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">

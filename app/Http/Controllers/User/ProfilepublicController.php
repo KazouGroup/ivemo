@@ -86,6 +86,13 @@ class ProfilepublicController extends Controller
         return response()->json($personnalblogannonces, 200);
     }
 
+    public function apiprofilemployments(user $user)
+    {
+        $employments = ProfileService::apiprofilemployments($user);
+
+        return response()->json($employments, 200);
+    }
+
 
     public function public_profile_send_message(StoreRequest $request, user $user)
     {
@@ -119,6 +126,13 @@ class ProfilepublicController extends Controller
 
 
     public function public_profile(user $user)
+    {
+        return view('user.profile.profile_account',[
+            'user' => $user,
+        ]);
+    }
+
+    public function userpublic_profile(user $user)
     {
         return view('user.profile.profile_account',[
             'user' => $user,
@@ -163,6 +177,13 @@ class ProfilepublicController extends Controller
     public function profilblogannonceventes(user $user)
     {
         return view('user.profile.blogs.publicprofilblogannonceventes',[
+            'user' => $user,
+        ]);
+    }
+
+    public function profilemployments(user $user)
+    {
+        return view('user.profile.employments.privateprofilemployments',[
             'user' => $user,
         ]);
     }

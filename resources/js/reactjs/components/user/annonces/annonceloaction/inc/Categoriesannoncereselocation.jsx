@@ -1,14 +1,14 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import {NavLink, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
 import NavannoncecategorySkeleton from "../../../../inc/user/NavannoncecategorySkeleton";
 
 
-class Categoriesannoncereselocation extends Component {
+class Categoriesannoncereselocation extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            categoryannoncelocations : [],
+            categoryannoncelocations : {user:[]},
         }
     }
 
@@ -30,7 +30,7 @@ class Categoriesannoncereselocation extends Component {
 
     render() {
         const {categoryannoncelocations} = this.state;
-        const mapCategoryannoncelocations = categoryannoncelocations.length ? (
+        const mapCategoryannoncelocations = categoryannoncelocations.length >= 0 ? (
             categoryannoncelocations.map(item => {
                 return(
                     <tr key={item.id}>

@@ -153,7 +153,7 @@ class AnnonceShowUserSite extends Component {
 
                                                 <div className="text-center ml-auto">
                                                     <a href="#pablo" className="btn btn-primary btn-round">
-                                                        <i className="now-ui-icons ui-2_favourite-28"></i> Dejà sauvegarder
+                                                        <i className="now-ui-icons ui-2_favourite-28"></i> Déjà sauvegarder
                                                 </a>
                                                 </div>
                                                 <div className="text-right ml-auto">
@@ -167,7 +167,7 @@ class AnnonceShowUserSite extends Component {
                                         <div className="card">
                                             <div className="card-body">
                                                 <h6 className="card-title">
-                                                    Description
+                                                    Déscription
                                             </h6>
                                                 <span>Eres' daring 'Grigri Fortune' swimsuit has
                                                     the fit and coverage of a bikini in a one-piece silhouette.
@@ -177,7 +177,7 @@ class AnnonceShowUserSite extends Component {
                                                 </span>
                                                 <hr />
                                                 <h6 className="card-title">
-                                                    A L'interieur
+                                                    A L'intérieur
                                             </h6>
                                                 <span>Eres' daring 'Grigri Fortune' swimsuit has
                                                     the fit and coverage of a bikini in a one-piece silhouette.
@@ -344,7 +344,6 @@ class AnnonceShowUserSite extends Component {
                                                                                 </div>
                                                                             </form>
 
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -476,7 +475,6 @@ class AnnonceShowUserSite extends Component {
                                                                 </div>
                                                             </form>
 
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -494,7 +492,6 @@ class AnnonceShowUserSite extends Component {
                                     <div className="card-body">
 
                                         <div className="row">
-
 
                                             <div className="col-md-6 col-lg-4">
                                                 <div className="card card-blog card-plain">
@@ -571,15 +568,12 @@ class AnnonceShowUserSite extends Component {
                                     </div>
                                 </div>
 
-
-
                                 <div className="card-body">
 
                                     <div className="text-center">
                                         <h4 className="title">Annonces similaires</h4>
                                     </div>
                                     <div className="row">
-
 
                                         <div className="col-md-6 col-lg-4">
                                             <div className="card card-blog">
@@ -662,19 +656,12 @@ class AnnonceShowUserSite extends Component {
 
                             </div>
 
-
-
                         </div>
-
-
-
 
                         <FooterBigUserSite />
                     </div>
                 </div>
             </>
-
-
 
         )
     }

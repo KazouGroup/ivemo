@@ -1,6 +1,5 @@
-@extends('layouts.app')
+<!--
 
-@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -25,4 +24,24 @@
         </div>
     </div>
 </div>
+
+    -->
+
+@extends('inc.user.main')
+<?php $item = htmlspecialchars(config('app.name'));?>
+@section('title', 'Vérifiez votre adresse e-mail - '.$item)
+
+@section('style')
+@endsection
+
+@section('init')
+    <!-- Site wrapper -->
+@endsection
+
+@section('content')
+    <div id="app_ivemo"></div>
+@endsection
+
+@section('script')
+
 @endsection

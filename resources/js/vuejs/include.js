@@ -23,6 +23,8 @@ Vue.component(AlertSuccess.name, AlertSuccess);
 import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
+import {Swal} from "sweetalert2";
+
 import {routes} from './routes/RouterPath';
 import 'animate.css/animate.css';
 
@@ -150,6 +152,8 @@ window.Fire = new Vue();
 Vue.component('navsmall-admin', require('./components/inc/NavsmallAdmin').default);
 Vue.component('footer-admin', require('./components/inc/FooterAdmin').default);
 Vue.component('navbig-admin', require('./components/inc/NavbigAdmin').default);
+Vue.component('admin-horizontalenavusersite', require('./components/inc/AdminHorizontalNavUserSite').default);
+Vue.component('admin-verticalnavusersite', require('./components/inc/AdminVerticalNavUserSite').default);
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 

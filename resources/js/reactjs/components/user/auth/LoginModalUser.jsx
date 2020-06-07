@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom'
-import NavUserSite from "../../inc/user/NavUserSite";
-import FooterUserSite from "../../inc/user/FooterUserSite";
 
 
 class LoginModalUser extends Component {
@@ -57,7 +54,7 @@ class LoginModalUser extends Component {
             .then(() => {
                   //Masquer le modal après la connexion
                   $('#loginModal').modal('hide');
-                  window.location.reload();
+                  window.location.reload(true);
             }).catch(error => {
                 this.setState({
                     errors: error.response.data.errors
@@ -66,8 +63,8 @@ class LoginModalUser extends Component {
                     allow_dismiss: false,
                     type: 'danger',
                     animate: {
-                        enter: 'animated bounceInDown',
-                        exit: 'animated bounceOutUp'
+                        enter: 'animate__animated animate__bounceInDown',
+                        exit: 'animate__animated animate__bounceOutUp'
                     }
                 });
             })
@@ -92,8 +89,11 @@ class LoginModalUser extends Component {
                                 <div className="header header-primary text-center">
                                     <b>Se connecter avec</b>
                                     <div className="modal-footer text-center">
-                                        <a href={route('social.oauth','facebook')} className="btn btn-facebook btn-block">
+                                        <a href={route('social.oauth','facebook')} className="btn btn-facebook btn-block btn-round">
                                             Facebook
+                                        </a>
+                                        <a href={route('social.oauth','google')} className="btn btn-google btn-block btn-round">
+                                            Google
                                         </a>
                                     </div>
                                     <b>Ou</b>

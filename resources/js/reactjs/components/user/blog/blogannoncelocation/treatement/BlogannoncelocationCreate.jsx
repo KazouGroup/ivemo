@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Link, NavLink, withRouter} from 'react-router-dom';
+import { Link, NavLink, withRouter } from 'react-router-dom';
 import {
     Button,
     Form,
@@ -48,6 +48,7 @@ class BlogannoncelocationCreate extends Component {
                 ['bold', 'italic', 'underline'],
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                 [{ 'align': [] }],
+                ['link'],
                 [{ 'color': [] }, { 'background': [] }],
             ]
         };
@@ -56,6 +57,7 @@ class BlogannoncelocationCreate extends Component {
             'bold', 'italic', 'underline',
             'list', 'bullet',
             'align',
+            'link',
             'color', 'background'
         ];
 
@@ -81,10 +83,29 @@ class BlogannoncelocationCreate extends Component {
         e.preventDefault();
         let reader = new FileReader();
         let file = e.target.files[0];
-        reader.onloadend = (file) => {
-            this.setState({ file: file, photo: reader.result, showDefaultImage: false });
-        };
-        reader.readAsDataURL(file)
+        if (file['size'] < 6000775) {
+            reader.onloadend = (file) => {
+                this.setState({ file: file, photo: reader.result, showDefaultImage: false });
+            };
+            reader.readAsDataURL(file);
+        } else {
+            $.notify({
+                //,
+                message: 'La fichier ne peut pas être supérieure à 15 MB'
+            },
+                {
+                    allow_dismiss: false,
+                    type: 'danger',
+                    placement: {
+                        from: 'top',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInDownBig",
+                        exit: "animate__animated animate__fadeOutUp"
+                    },
+                });
+        }
     }
     removeImage(e) {
         e.preventDefault();
@@ -125,8 +146,8 @@ class BlogannoncelocationCreate extends Component {
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInUp",
-                            exit: "animated fadeOutDown"
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
                         },
                     });
                 this.props.history.push(`/blogs/annonce_locations/`);
@@ -134,12 +155,12 @@ class BlogannoncelocationCreate extends Component {
                 this.setState({
                     errors: error.response.data.errors
                 });
-                $.notify("Ooop! Something wrong. Try later...", {
+                $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
                     allow_dismiss: false,
                     type: 'danger',
                     animate: {
-                        enter: 'animated bounceInDown',
-                        exit: 'animated bounceOutUp'
+                        enter: 'animate__animated animate__bounceInDown',
+                        exit: 'animate__animated animate__bounceOutUp'
                     }
                 });
             })
@@ -152,7 +173,7 @@ class BlogannoncelocationCreate extends Component {
     render() {
         const { photo, categoryannoncelocations } = this.state;
         const composantTitle = `${this.state.title || 'Article'}`;
-        document.title = `${composantTitle} - Ivemo`;
+        document.title = `${composantTitle} - ${$name_site}`;
         return (
             <div className="about-us sidebar-collapse">
                 <nav className="navbar navbar-expand-lg bg-primary">
@@ -172,7 +193,7 @@ class BlogannoncelocationCreate extends Component {
 
                                         <div className="submit text-center">
                                             <NavLink className="btn btn-primary" to={`/blogs/annonce_locations/ab/new/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre article</b>
+                                                <i className="now-ui-icons ui-1_simple-add" /> <b>Poster votre article</b>
                                             </NavLink>
                                         </div>
 
@@ -182,7 +203,7 @@ class BlogannoncelocationCreate extends Component {
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                           <Navblogannoncelocationsbyuser/>
+                                                            <Navblogannoncelocationsbyuser />
 
                                                         </div>
                                                     </div>
@@ -198,10 +219,10 @@ class BlogannoncelocationCreate extends Component {
                                                 <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos blogs </b>
                                             </button>
                                         </div>
-                                        {!$guest &&(
+                                        {!$guest && (
                                             <>
-                                                {!$userIvemo.email_verified_at &&(
-                                                    <LinkValicationEmail/>
+                                                {!$userIvemo.email_verified_at && (
+                                                    <LinkValicationEmail />
                                                 )}
                                             </>
                                         )}
@@ -213,11 +234,11 @@ class BlogannoncelocationCreate extends Component {
 
                                                 <div className="card-header d-flex align-items-center">
                                                     <div className="d-flex align-items-center">
-                                                        <NavLink to={`/@${$userIvemo.slug}`}>
+                                                        <NavLink to={`/pro/${$userIvemo.slug}`}>
                                                             <img src={$userIvemo.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                                         </NavLink>
                                                         <div className="mx-3">
-                                                            <NavLink to={`/@${$userIvemo.slug}`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
+                                                            <NavLink to={`/pro/${$userIvemo.slug}`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
                                                                 <small className="d-block text-muted"><b>{moment($userIvemo.created_at).format('LL')}</b></small>
                                                             </NavLink>
                                                         </div>
@@ -231,19 +252,19 @@ class BlogannoncelocationCreate extends Component {
                                                             <label htmlFor="title">Donner un titre à cet article</label>
                                                             <InputGroup>
                                                                 <div className="input-group-prepend">
-                                                                    <span className="input-group-text"><i className="now-ui-icons users_circle-08"/></span>
+                                                                    <span className="input-group-text"><i className="now-ui-icons users_circle-08" /></span>
                                                                 </div>
                                                                 <Input id='title'
-                                                                       type='text'
-                                                                       className={`form-control ${this.hasErrorFor('title') ? 'is-invalid' : ''}`}
-                                                                       name='title'
-                                                                       maxLength="200"
-                                                                       minLength="4"
-                                                                       placeholder="Titre de l'article"
-                                                                       aria-label="Titre de l'article"
-                                                                       value={this.state.title || ''}
+                                                                    type='text'
+                                                                    className={`form-control ${this.hasErrorFor('title') ? 'is-invalid' : ''}`}
+                                                                    name='title'
+                                                                    maxLength="200"
+                                                                    minLength="4"
+                                                                    placeholder="Titre de l'article"
+                                                                    aria-label="Titre de l'article"
+                                                                    value={this.state.title || ''}
 
-                                                                       onChange={this.handleFieldChange}
+                                                                    onChange={this.handleFieldChange}
                                                                 />
                                                                 {this.renderErrorFor('title')}
                                                             </InputGroup>
@@ -255,19 +276,19 @@ class BlogannoncelocationCreate extends Component {
                                                             <label htmlFor="title">Estimer en temp <b>{this.state.red_time} min lecture</b></label>
                                                             <InputGroup>
                                                                 <div className="input-group-prepend">
-                                                                    <span className="input-group-text"><i className="now-ui-icons tech_watch-time"/></span>
+                                                                    <span className="input-group-text"><i className="now-ui-icons tech_watch-time" /></span>
                                                                 </div>
                                                                 <Input id='red_time'
-                                                                       type='number'
-                                                                       className={`form-control ${this.hasErrorFor('red_time') ? 'is-invalid' : ''}`}
-                                                                       name='red_time'
-                                                                       maxLength="20"
-                                                                       minLength="1"
-                                                                       placeholder="Estimer un temp de lecture en min"
-                                                                       aria-label="Estimer un temp de lecture "
-                                                                       value={this.state.red_time || ''}
-                                                                       required
-                                                                       onChange={this.handleFieldChange}
+                                                                    type='number'
+                                                                    className={`form-control ${this.hasErrorFor('red_time') ? 'is-invalid' : ''}`}
+                                                                    name='red_time'
+                                                                    maxLength="20"
+                                                                    minLength="1"
+                                                                    placeholder="Estimer un temp de lecture en min"
+                                                                    aria-label="Estimer un temp de lecture "
+                                                                    value={this.state.red_time || ''}
+                                                                    required
+                                                                    onChange={this.handleFieldChange}
                                                                 />
                                                                 {this.renderErrorFor('red_time')}
                                                             </InputGroup>
@@ -276,7 +297,8 @@ class BlogannoncelocationCreate extends Component {
                                                             <label htmlFor="title">Selectionez la categorie</label>
                                                             <FormGroup>
                                                                 <select name={'categoryannoncelocation_id'} value={this.state.categoryannoncelocation_id}
-                                                                    className={`form-control`}
+
+                                                                    className={`form-control ${this.hasErrorFor('categoryannoncelocation_id') ? 'is-invalid' : ''}`}
                                                                     id="categoryannoncelocation_id" onChange={this.handleFieldChange}>
                                                                     <option value="" disabled>Selectioner une category</option>
                                                                     {categoryannoncelocations.map((item) => (
@@ -290,7 +312,7 @@ class BlogannoncelocationCreate extends Component {
                                                     <Row>
                                                         <div className="col-md-6 mx-auto">
                                                             <div className="text-center">
-                                                                <img src={this.state.showDefaultImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : photo} alt={'name'} />
+                                                                <img src={this.state.showDefaultImage ? `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg`: photo} alt={'name'} />
                                                                 <input id="photo" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('photo') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="photo" />
                                                                 {this.renderErrorFor('photo')}
                                                                 <div className="text-center">
@@ -314,6 +336,7 @@ class BlogannoncelocationCreate extends Component {
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                     formats={this.formats}
+                                                                    placeholder="Laisser votre description..."
                                                                     className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                     value={this.state.description || ''}
                                                                     onChange={this.handleChangeBody} />

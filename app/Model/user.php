@@ -2,8 +2,9 @@
 
 namespace App\Model;
 
+
 use App\Notifications\VerifyEmailUsers;
-use Carbon\Carbon;
+use App\Traits\Model\Favoritesdata;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,7 +16,7 @@ use Illuminate\Support\Str;
 
 class user extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable,HasApiTokens,HasRoles;
+    use Notifiable,HasApiTokens,HasRoles,Favoritesdata;
 
     /**
      * The attributes that are mass assignable.
@@ -150,6 +151,11 @@ class user extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(annoncevente::class, 'user_id');
     }
 
+    public function employments()
+    {
+        return $this->hasMany(employment::class, 'user_id');
+    }
+
     public function teamusers()
     {
         return $this->hasMany(teamuser::class, 'user_id');
@@ -203,5 +209,6 @@ class user extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(subscriberuser::class, 'user_id');
     }
+
 
 }

@@ -119,8 +119,8 @@ class PersonalmessagesfavoriteannonceslocationsUser extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -131,8 +131,8 @@ class PersonalmessagesfavoriteannonceslocationsUser extends Component {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -170,7 +170,7 @@ class PersonalmessagesfavoriteannonceslocationsUser extends Component {
         return (
 
             <>
-                <Helmet title={`Messages contact annonces locations ${$userIvemo.first_name} - Ivemo`}/>
+                <Helmet title={`Messages contact annonces locations ${$userIvemo.first_name} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 

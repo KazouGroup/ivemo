@@ -13,12 +13,12 @@ class avisuser extends Model
 
     public function from()
     {
-        return $this->belongsTo(User::class, 'from_id');
+        return $this->belongsTo(user::class, 'from_id');
     }
 
     public function to()
     {
-        return $this->belongsTo(User::class, 'to_id');
+        return $this->belongsTo(user::class, 'to_id');
     }
 
     protected $casts = [

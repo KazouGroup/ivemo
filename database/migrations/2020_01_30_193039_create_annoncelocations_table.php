@@ -18,6 +18,8 @@ class CreateAnnoncelocationsTable extends Migration
             $table->string('title')->nullable();
             $table->longText('description')->nullable();
             $table->string('slug')->nullable();
+            $table->string('ip')->nullable();
+            $table->string('slugin')->nullable();
             $table->string('district')->nullable();
             $table->integer('surface')->nullable();
             $table->integer('rooms')->nullable();
@@ -26,9 +28,10 @@ class CreateAnnoncelocationsTable extends Migration
             $table->unsignedBigInteger('award_price')->nullable();
             $table->date('disponible_date')->nullable();
             $table->boolean('status')->default(true);
-            $table->boolean('status_admin')->default(false);
+            $table->boolean('status_admin')->default(true);
             $table->timestamps();
             $table->unsignedBigInteger('photo_id')->nullable()->index();
+            $table->unsignedBigInteger('member_id')->nullable()->index();
             $table->unsignedBigInteger('city_id')->nullable()->index();
             $table->unsignedBigInteger('user_id')->nullable()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

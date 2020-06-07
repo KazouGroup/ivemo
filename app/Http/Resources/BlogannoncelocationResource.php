@@ -16,6 +16,7 @@ class BlogannoncelocationResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'bookmarked' => $this->bookmarked(),
             'title' => $this->title,
             'photo' => $this->photo,
             'description' => $this->description,
@@ -26,6 +27,10 @@ class BlogannoncelocationResource extends JsonResource
             'red_time' => $this->red_time,
             'user_id' => $this->user_id,
             'user' => $this->user,
+            'visits_count' => $this->visits()->count(),
+            'visits_countries' => $this->visits()->countries(),
+            'visits_languages' => $this->visits()->languages(),
+            'visits_operatingSystems' => $this->visits()->operatingSystems(),
             'categoryannoncelocation' => $this->categoryannoncelocation,
             'categoryannoncelocation_id' => $this->categoryannoncelocation_id,
             'created_at' => (string) $this->created_at,

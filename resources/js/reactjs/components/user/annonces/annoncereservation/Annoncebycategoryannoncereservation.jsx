@@ -15,18 +15,16 @@ class Annoncebycategoryannoncereservation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncereservationbycategory: {annoncereservations:[]},
+            annoncereservationbycategory: {annoncereservations:{annoncetype:[],categoryannoncereservation:[],user:{profile:[]},imagereservations:[]}},
             citiesannoncesreservations: [],
-            isLoading: false,
         }
     }
 
     loadItem(){
-        this.setState({ isLoading: true });
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
         let url = route('api.annoncelocationbycategoryannoncereservations_site',[itemannoncetype,itemCategoryannoncereservation]);
-        dyaxios.get(url).then(response => this.setState({annoncereservationbycategory: response.data,isLoading: false,}));
+        dyaxios.get(url).then(response => this.setState({annoncereservationbycategory: response.data}));
         fetch(route('api.annoncereservationbycategorycount_site',[itemCategoryannoncereservation])).then(res => res.json()).then((result) => {
             this.setState({
                 citiesannoncesreservations: [...result]
@@ -51,22 +49,22 @@ class Annoncebycategoryannoncereservation extends Component {
     }
 
     render() {
-        const {annoncereservationbycategory,citiesannoncesreservations,isLoading} = this.state;
+        const {annoncereservationbycategory,citiesannoncesreservations} = this.state;
         const allannoncereservationsbycategory = annoncereservationbycategory.annoncereservations;
         const annoncetype = this.props.match.params.annoncetype;
-        const mapAnnoncereservations = isLoading ? (
-            <AnnoncesListSkeleton/>
-        ):(
+        const mapAnnoncereservations = allannoncereservationsbycategory.length >= 0 ? (
             allannoncereservationsbycategory.map(item => {
                 return(
                     <AnnoncereservationList key={item.id} {...item} />
                 )
             })
+        ):(
+            <AnnoncesListSkeleton/>
         );
         return (
             <>
                 <Helmet>
-                    <title>{`${annoncereservationbycategory.name || 'Ivemo'} - `} Ivemo</title>
+                    <title>{`${annoncereservationbycategory.name || $name_site} - `} {$name_site}</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
@@ -87,7 +85,6 @@ class Annoncebycategoryannoncereservation extends Component {
                                 <br />
                                 <div className="row">
 
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="submit text-left">
                                             <Link to={`/annonces_reservations/reservations/`} >
@@ -107,8 +104,6 @@ class Annoncebycategoryannoncereservation extends Component {
                                                 <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
                                             </NavLink>
                                         </div>
-
-
 
                                         <div className="card">
                                             <div className="card-body">

@@ -8,7 +8,7 @@ class Categoriesannoncevente extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            categoryannonceventes : [],
+            categoryannonceventes : {user:[]},
         }
     }
 
@@ -30,7 +30,7 @@ class Categoriesannoncevente extends Component {
 
     render() {
         const {categoryannonceventes} = this.state;
-        const mapCategoryannonceventes = categoryannonceventes.length ? (
+        const mapCategoryannonceventes = categoryannonceventes.length >= 0 ? (
             categoryannonceventes.map(item => {
                 return(
                     <tr key={item.id}>

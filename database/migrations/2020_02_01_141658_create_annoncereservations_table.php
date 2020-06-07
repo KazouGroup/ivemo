@@ -17,6 +17,8 @@ class CreateAnnoncereservationsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
+            $table->string('ip')->nullable();
+            $table->string('slugin')->nullable();
             $table->string('district')->nullable();
             $table->boolean('status')->default(true);
             $table->boolean('status_admin')->default(true);
@@ -26,6 +28,7 @@ class CreateAnnoncereservationsTable extends Migration
             $table->timestamps();
 
             $table->unsignedBigInteger('city_id')->nullable()->index();
+            $table->unsignedBigInteger('member_id')->nullable()->index();
 
             $table->unsignedBigInteger('user_id')->nullable()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

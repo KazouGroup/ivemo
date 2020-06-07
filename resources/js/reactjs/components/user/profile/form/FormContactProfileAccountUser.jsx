@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Row, Form, Input,InputGroup } from 'reactstrap';
+import { Button,Row, Form, Input, InputGroup,UncontrolledTooltip } from 'reactstrap';
 
 class FormContactProfileAccountUser extends PureComponent {
     constructor(props) {
@@ -51,13 +51,13 @@ class FormContactProfileAccountUser extends PureComponent {
             message: this.state.message,
         };
         let itemuser = this.props.match.params.user;
-        let url = route('public_profile_send_message.site',[itemuser]);
+        let url = route('public_profile_send_message.site', [itemuser]);
         dyaxios.post(url, item)
             .then(() => {
 
                 $.notify({
-                        message: `Votre message a été bien envoyé à cette utilisateur`
-                    },
+                    message: `Votre message a été bien envoyé à cette utilisateur`
+                },
                     {
                         allow_dismiss: false,
                         type: 'info',
@@ -66,8 +66,8 @@ class FormContactProfileAccountUser extends PureComponent {
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInUp",
-                            exit: "animated fadeOutDown"
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
                         },
                     });
 
@@ -79,10 +79,10 @@ class FormContactProfileAccountUser extends PureComponent {
                     message: "",
                 });
             }).catch(error => {
-            this.setState({
-                errors: error.response.data.errors
-            });
-        })
+                this.setState({
+                    errors: error.response.data.errors
+                });
+            })
     }
 
     // lifecycle method
@@ -98,21 +98,47 @@ class FormContactProfileAccountUser extends PureComponent {
 
                 <div className="card-body">
 
+                    <div className="row">
+                        <div className="d-flex align-items-center">
+                            <a href={`/@${this.props.slug}/`}>
+                                <img src={this.props.avatar} style={{ height: "40px", width: "80px" }} alt={this.props.first_name} className="avatar" />
+                            </a>
+                            <div className="mx-3">
+                                <a href={`/@${this.props.slug}/`} className="text-dark font-weight-600 text-sm"><b>{this.props.first_name}</b>
+                                    <small className="d-block text-muted">{moment(this.props.created_at).format('LL')}</small>
+                                </a>
+                            </div>
+                        </div>
+                        <div className="text-right ml-auto">
+                            {this.props.phone && (
+                                <>
+                                    <UncontrolledTooltip placement="bottom" target="TooltipPhone">
+                                        {this.props.phone}
+                                    </UncontrolledTooltip>
+                                    <Button className="btn btn-icon btn-sm btn-info" id="TooltipPhone">
+                                        <i className="now-ui-icons tech_mobile" />
+                                    </Button>
+                                </>
+                            )}
+
+                        </div>
+                    </div>
+                    <br/>
                     <Row>
                         <InputGroup>
                             <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons users_circle-08"/></span>
+                                <span className="input-group-text">
+                                    <i className="now-ui-icons users_circle-08" /></span>
                             </div>
                             <Input id='full_name'
-                                   type='text'
-                                   className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
-                                   name='full_name'
-                                   placeholder="Nom complet"
-                                   aria-label="Nom complet"
-                                   autoComplete="full_name"
-                                   value={this.state.full_name}
-                                   onChange={this.handleFieldChange}
+                                type='text'
+                                className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
+                                name='full_name'
+                                placeholder="Nom complet"
+                                aria-label="Nom complet"
+                                autoComplete="full_name"
+                                value={this.state.full_name}
+                                onChange={this.handleFieldChange}
                             />
                             {this.renderErrorFor('full_name')}
                         </InputGroup>
@@ -122,18 +148,18 @@ class FormContactProfileAccountUser extends PureComponent {
                     <Row>
                         <InputGroup>
                             <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons ui-1_email-85"/></span>
+                                <span className="input-group-text">
+                                    <i className="now-ui-icons ui-1_email-85" /></span>
                             </div>
                             <Input id='email'
-                                   type='email'
-                                   className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                   name='email'
-                                   placeholder="Email"
-                                   aria-label="Email"
-                                   autoComplete="email"
-                                   value={this.state.email}
-                                   onChange={this.handleFieldChange}
+                                type='email'
+                                className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
+                                name='email'
+                                placeholder="Email"
+                                aria-label="Email"
+                                autoComplete="email"
+                                value={this.state.email}
+                                onChange={this.handleFieldChange}
                             />
                             {this.renderErrorFor('email')}
                         </InputGroup>
@@ -141,17 +167,17 @@ class FormContactProfileAccountUser extends PureComponent {
                     <Row>
                         <InputGroup>
                             <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons tech_mobile"/></span>
+                                <span className="input-group-text">
+                                    <i className="now-ui-icons tech_mobile" /></span>
                             </div>
                             <Input id='phone'
-                                   type='number'
-                                   className={`form-control ${this.hasErrorFor('phone') ? 'is-invalid' : ''}`}
-                                   name='phone'
-                                   placeholder="Téléphone"
-                                   aria-label="Téléphone"
-                                   value={this.state.phone}
-                                   onChange={this.handleFieldChange}
+                                type='number'
+                                className={`form-control ${this.hasErrorFor('phone') ? 'is-invalid' : ''}`}
+                                name='phone'
+                                placeholder="Téléphone"
+                                aria-label="Téléphone"
+                                value={this.state.phone}
+                                onChange={this.handleFieldChange}
                             />
                             {this.renderErrorFor('phone')}
                         </InputGroup>
@@ -159,36 +185,36 @@ class FormContactProfileAccountUser extends PureComponent {
                     <Row>
                         <InputGroup>
                             <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons text_caps-small"/></span>
+                                <span className="input-group-text">
+                                    <i className="now-ui-icons text_caps-small" /></span>
                             </div>
                             <Input id='subject'
-                                   type='text'
-                                   className={`form-control ${this.hasErrorFor('subject') ? 'is-invalid' : ''}`}
-                                   name='subject'
-                                   placeholder="Object..."
-                                   aria-label="Object"
-                                   autoComplete="subject"
-                                   value={this.state.subject}
-                                   onChange={this.handleFieldChange}
+                                type='text'
+                                className={`form-control ${this.hasErrorFor('subject') ? 'is-invalid' : ''}`}
+                                name='subject'
+                                placeholder="Object..."
+                                aria-label="Object"
+                                autoComplete="subject"
+                                value={this.state.subject}
+                                onChange={this.handleFieldChange}
                             />
                             {this.renderErrorFor('subject')}
                         </InputGroup>
                     </Row>
                     <Row>
                         <InputGroup>
-                               <Input type="textarea" name="message" value={this.state.message}
-                                         onChange={this.handleFieldChange}
-                                         placeholder={'Posez ici toutes vos questions !'}
-                                         className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                                         id="message"
-                                         rows="15" />
+                            <Input type="textarea" name="message" value={this.state.message}
+                                onChange={this.handleFieldChange}
+                                placeholder={'Posez ici toutes vos questions !'}
+                                className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
+                                id="message"
+                                rows="15" />
                             {this.renderErrorFor('message')}
                         </InputGroup>
                     </Row>
                     <div className="submit text-center">
                         <button className="btn btn-primary btn-lg" type="submit">
-                            <i className="now-ui-icons ui-1_email-85"/> Contacter
+                            <i className="now-ui-icons ui-1_email-85" /> Contacter
                         </button>
                     </div>
                 </div>

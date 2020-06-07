@@ -1,34 +1,20 @@
 ## KazouGroup 
 
-- **[KazouTech](http://kazoutech.com)**
-- **[KazouCoin](http://kazoucoin.com)**
+- **[Kazoutech](http://kazoutech.com)**
+- **[Kazoucoin](http://kazoucoin.com)**
 ## Configuration
 
-1- Clonez le projet en http ou ssh
+Cloner le fichier puis faire un ``` composer install ``` si vous ete sur window faite ``` composer install --ignore-platform-reqs ```
 
-2- Positionnez vous dans le fichier (ex: cd nom_fichier)
+Ensuite faite un ``` npm i ``` et ``` npm run watch ```
 
-<<<<<<< HEAD
-3- Tapez ensuite  ``` composer update ``` si vous êtes sur window faites ``` composer install --ignore-platform-reqs ```
-=======
 Configurer votre fichier ``` .env``` en duplicant celle de ``` .env.example ```
->>>>>>> master
 
-4- Créez une base de donnée sur votre local (ex sur MySql: create database nom_base_donnee)
+Faite ensuite  ``` php artisan key:generate ``` et faire  ``` php artisan serve ```
 
-5- Configurez votre fichier ``` .env``` (dupliquez celui de ``` .env.example ```) avec les identifiants de la base de donnée (database, username, password)
+Vous aurrez ce lien **[http://127.0.0.1:8000](http://127.0.0.1:8000)** 
 
-6- Faites ensuite  ``` php artisan key:generate ``` 
-
-7- Migrez les tables dans la base de donnée en faisant  ``` php artisan migrate:fresh --seed```
-
-8- Ensuite faites un <code>npm i</code> et <code>npm run watch</code>
-
-9- Ouvrez une autre fenêtre de commande et faites ``` php artisan serve ```
-
-10- Vous auriez ce lien **[http://127.0.0.1:8000](http://127.0.0.1:8000)** (port 8000 par default)
-
-
+Apres la configuration de la base de donner  ``` php artisan migrate:fresh --seed```
 
 ## Configuration base de donner
 

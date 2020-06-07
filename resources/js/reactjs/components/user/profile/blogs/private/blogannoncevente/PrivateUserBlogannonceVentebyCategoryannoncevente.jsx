@@ -5,16 +5,17 @@ import NavUserSite from "../../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../../../../configurations/inc/NavlinkconfigurationUser";
-import BlogannonceventeList from "../../../../blog/blognnoncevente/BlogannonceventeList";
 import Navblogannonceventesbyuser from "../../../../blog/blognnoncevente/inc/Navblogannonceventesbyuser";
 import LinkValicationEmail from "../../../../../inc/user/LinkValicationEmail";
+import BlogannonceListSkeleton from "../../../../../inc/user/blog/BlogannonceListSkeleton";
+import PrivateUserBlogannonceventeList from "../../../../blog/blognnoncevente/inc/PrivateUserBlogannonceventeList";
 
 
 class PrivateUserBlogannonceVentebyCategoryannoncevente extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userblogannonceventesPrivate:{blogannonceventes:[]},
+            userblogannonceventesPrivate:{blogannonceventes:{categoryannoncevente:[],user:[]}},
             visiable: 20,
         };
 
@@ -61,8 +62,8 @@ class PrivateUserBlogannonceVentebyCategoryannoncevente extends Component {
                                 align: 'center'
                             },
                             animate: {
-                                enter: "animated fadeInUp",
-                                exit: "animated fadeOutDown"
+                                enter: "animate__animated animate__fadeInUp",
+                                exit: "animate__animated animate__fadeOutDown"
                             },
                         });
                     /** End alert ***/
@@ -72,8 +73,8 @@ class PrivateUserBlogannonceVentebyCategoryannoncevente extends Component {
                     $.notify("Ooop! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -113,8 +114,8 @@ class PrivateUserBlogannonceVentebyCategoryannoncevente extends Component {
                                 align: 'center'
                             },
                             animate: {
-                                enter: "animated fadeInUp",
-                                exit: "animated fadeOutDown"
+                                enter: "animate__animated animate__fadeInUp",
+                                exit: "animate__animated animate__fadeOutDown"
                             },
                         });
                     /** End alert ***/
@@ -124,8 +125,8 @@ class PrivateUserBlogannonceVentebyCategoryannoncevente extends Component {
                     $.notify("Ooop! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -166,8 +167,8 @@ class PrivateUserBlogannonceVentebyCategoryannoncevente extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -178,8 +179,8 @@ class PrivateUserBlogannonceVentebyCategoryannoncevente extends Component {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -200,19 +201,19 @@ class PrivateUserBlogannonceVentebyCategoryannoncevente extends Component {
 
     render() {
         const {userblogannonceventesPrivate,visiable} = this.state;
-        const mapBlogannoncereservations = userblogannonceventesPrivate.blogannonceventes.length ? (
+        const mapBlogannoncereservations = userblogannonceventesPrivate.blogannonceventes.length >= 0 ? (
             userblogannonceventesPrivate.blogannonceventes.slice(0,visiable).map(item => {
                 return(
-                    <BlogannonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
+                    <PrivateUserBlogannonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
                 )
             })
         ):(
-            <></>
+            <BlogannonceListSkeleton/>
         );
         return (
             <>
                 <Helmet>
-                    <title>Articles sur la locations {`${$userIvemo.first_name || 'Profile'}`} - Ivemo</title>
+                    <title>Articles sur la locations {`${$userIvemo.first_name || 'Profile'}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
@@ -259,11 +260,7 @@ class PrivateUserBlogannonceVentebyCategoryannoncevente extends Component {
                                     </div>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
-                                        <div className="submit text-left">
-                                            <Link to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_ventes/`} className="btn btn-neutral btn-sm">
-                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos articles</b>
-                                            </Link>
-                                        </div>
+                                        
                                         {!$guest &&(
                                             <>
                                                 {!$userIvemo.email_verified_at &&(
@@ -272,6 +269,11 @@ class PrivateUserBlogannonceVentebyCategoryannoncevente extends Component {
                                             </>
                                         )}
 
+                                        <div className="submit text-left">
+                                            <Link to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_ventes/`} className="btn btn-neutral btn-sm">
+                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos articles</b>
+                                            </Link>
+                                        </div>
                                         {mapBlogannoncereservations}
 
                                         {visiable < userblogannonceventesPrivate.blogannonceventes.length && (

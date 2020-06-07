@@ -7,6 +7,7 @@ import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import Navblogannoncereservationsbyuser from "../inc/Navblogannoncereservationsbyuser";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
+import moment from "moment";
 
 
 class BlogannoncereservationEdit extends Component {
@@ -41,6 +42,7 @@ class BlogannoncereservationEdit extends Component {
                 ['bold', 'italic', 'underline'],
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                 [{ 'align': [] }],
+                ['link'],
                 [{ 'color': [] }, { 'background': [] }],
             ]
         };
@@ -49,6 +51,7 @@ class BlogannoncereservationEdit extends Component {
             'bold', 'italic', 'underline',
             'list', 'bullet',
             'align',
+            'link',
             'color', 'background'
         ];
 
@@ -87,8 +90,8 @@ class BlogannoncereservationEdit extends Component {
                         align: 'center'
                     },
                     animate: {
-                        enter: "animated fadeInUp",
-                        exit: "animated fadeOutDown"
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
                     },
                 });
             /** End alert ***/
@@ -99,8 +102,8 @@ class BlogannoncereservationEdit extends Component {
             $.notify("Ooop! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
-                    enter: 'animated bounceInDown',
-                    exit: 'animated bounceOutUp'
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
                 }
             });
         })
@@ -125,8 +128,8 @@ class BlogannoncereservationEdit extends Component {
                         align: 'center'
                     },
                     animate: {
-                        enter: "animated fadeInUp",
-                        exit: "animated fadeOutDown"
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
                     },
                 });
             /** End alert ***/
@@ -136,8 +139,8 @@ class BlogannoncereservationEdit extends Component {
             $.notify("Ooop! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
-                    enter: 'animated bounceInDown',
-                    exit: 'animated bounceOutUp'
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
                 }
             });
         })
@@ -175,8 +178,8 @@ class BlogannoncereservationEdit extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -187,8 +190,8 @@ class BlogannoncereservationEdit extends Component {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -218,8 +221,8 @@ class BlogannoncereservationEdit extends Component {
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInDownBig",
-                            exit: "animated fadeOutUp"
+                            enter: "animate__animated animate__fadeInDownBig",
+                            exit: "animate__animated animate__fadeOutUp"
                         },
                     });
 
@@ -275,6 +278,14 @@ class BlogannoncereservationEdit extends Component {
                 this.setState({
                     errors: error.response.data.errors
                 });
+                $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
+                    allow_dismiss: false,
+                    type: 'danger',
+                    animate: {
+                        enter: 'animated bounceInDown',
+                        exit: 'animated bounceOutUp'
+                    }
+                });
             })
     }
 
@@ -301,7 +312,7 @@ class BlogannoncereservationEdit extends Component {
     render() {
         const { photo, categoryannoncereservations } = this.state;
         const composantTitle = `${this.state.title || 'Ivemo'}`;
-        document.title = `${composantTitle} - Ivemo`;
+        document.title = `${composantTitle} - ${$name_site}`;
         return (
             <div className="about-us sidebar-collapse">
                 <nav className="navbar navbar-expand-lg bg-primary">
@@ -362,12 +373,12 @@ class BlogannoncereservationEdit extends Component {
 
                                                 <div className="card-header d-flex align-items-center">
                                                     <div className="d-flex align-items-center">
-                                                        <NavLink to={`/@${$userIvemo.slug}`}>
+                                                        <NavLink to={`/pro/${$userIvemo.slug}`}>
                                                             <img src={$userIvemo.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                                         </NavLink>
                                                         <div className="mx-3">
-                                                            <NavLink to={`/@${$userIvemo.slug}`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
-                                                                <small className="d-block text-muted">12 janv 2019</small>
+                                                            <NavLink to={`/pro/${$userIvemo.slug}`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
+                                                                <small className="d-block text-muted"><b>{moment($userIvemo.created_at).format('LL')}</b></small>
                                                             </NavLink>
                                                         </div>
                                                     </div>
@@ -450,7 +461,7 @@ class BlogannoncereservationEdit extends Component {
                                                             <label htmlFor="title">Selectionez la categorie</label>
                                                             <div className="form-group">
                                                                 <select name={'categoryannoncereservation_id'} value={this.state.categoryannoncereservation_id}
-                                                                        className={`form-control`}
+                                                                        className={`form-control ${this.hasErrorFor('categoryannoncereservation_id') ? 'is-invalid' : ''}`}
                                                                         id="categoryannoncereservation_id" onChange={this.handleFieldChange}>
                                                                     <option value="" disabled>Selectioner une category</option>
                                                                     {categoryannoncereservations.map((item) => (
@@ -464,7 +475,7 @@ class BlogannoncereservationEdit extends Component {
                                                     <Row>
                                                         <div className="col-md-6 mx-auto">
                                                             <div className="text-center">
-                                                                <img src={this.state.showDefaultImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : photo} alt={'name'} />
+                                                                <img src={this.state.showDefaultImage ? `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg` : photo} alt={'name'} />
                                                                 <input id="photo" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('photo') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="photo" />
                                                                 {this.renderErrorFor('photo')}
                                                                 <div className="text-center">
@@ -488,6 +499,7 @@ class BlogannoncereservationEdit extends Component {
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                     formats={this.formats}
+                                                                    placeholder="Laisser votre description..."
                                                                     className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                     value={this.state.description || ''}
                                                                     onChange={this.handleChangeBody} />

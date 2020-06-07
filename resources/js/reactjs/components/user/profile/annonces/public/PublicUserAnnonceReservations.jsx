@@ -9,13 +9,15 @@ import NavLinkPublicAnnonceUser from "../NavLinkPublicAnnonceUser";
 import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";
 import NavLinkPublicBlogannoncesUser from "../../blogs/public/NavLinkPublicBlogannoncesUser";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
+import AnnoncesListSkeleton from "../../../../inc/user/annonce/AnnoncesListSkeleton";
+import NavLinkPublicEmploymentUser from "../../employments/public/NavLinkPublicEmploymentUser";
 
 
 class PublicUserAnnonceReservations extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            useranoncereservationPublick:{annoncereservations:[]},
+            useranoncereservationPublick:{annoncereservations:{annoncetype:[],categoryannoncereservation:[],user:{profile:[]},imagereservations:[]}},
             visiable: 10,
         };
 
@@ -59,8 +61,8 @@ class PublicUserAnnonceReservations extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -71,8 +73,8 @@ class PublicUserAnnonceReservations extends Component {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -92,7 +94,7 @@ class PublicUserAnnonceReservations extends Component {
 
     render() {
         const {useranoncereservationPublick,visiable} = this.state;
-        const mapAnnoncereservations = useranoncereservationPublick.annoncereservations.length ? (
+        const mapAnnoncereservations = useranoncereservationPublick.annoncereservations.length >= 0? (
             useranoncereservationPublick.annoncereservations.slice(0, visiable).map(item => {
                 return(
 
@@ -100,7 +102,7 @@ class PublicUserAnnonceReservations extends Component {
                 )
             })
         ):(
-            <></>
+            <AnnoncesListSkeleton/>
         );
         return (
             <>
@@ -122,7 +124,7 @@ class PublicUserAnnonceReservations extends Component {
                             <div className="content-center">
 
                                 <h1 className="title">{useranoncereservationPublick.first_name}</h1>
-                                <Link to={`/@${useranoncereservationPublick.slug}/`} className="text-white">
+                                <Link to={`/pro/${useranoncereservationPublick.slug}/`} className="text-white">
                                     <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useranoncereservationPublick.first_name}</b>
                                 </Link>
                                 {useranoncereservationPublick.annoncereservations_count > 0 &&(
@@ -144,11 +146,19 @@ class PublicUserAnnonceReservations extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
-                                        <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster une reservation</b>
-                                            </NavLink>
-                                        </div>
+                                        {useranoncereservationPublick.status_profile === 1 && (
+                                            <div className="submit text-center">
+                                                {!$guest ?
+                                                    <NavLink className="btn btn-danger" to={`/annonce_reservation/reservations/new/`}>
+                                                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre bien en reservation</b>
+                                                    </NavLink>
+                                                    :
+                                                    <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="btn btn-danger">
+                                                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre bien en reservation</b>
+                                                    </a>
+                                                }
+                                            </div>
+                                        )}
 
 
                                         <div className="card">
@@ -180,6 +190,28 @@ class PublicUserAnnonceReservations extends Component {
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                             <div className="card card-plain">
+                                                                <div className="card-header" role="tab" id="headingTree">
+                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
+                                                                        <b>Annonces de {useranoncereservationPublick.first_name}</b>
+                                                                    </a>
+                                                                </div>
+
+                                                                <NavLinkPublicEmploymentUser {...this.props} {...useranoncereservationPublick}/>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                            <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingTwo">
                                                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                                                                         <b>Articles de {useranoncereservationPublick.first_name}</b>
@@ -196,69 +228,91 @@ class PublicUserAnnonceReservations extends Component {
                                             </div>
                                         </div>
 
+                                        {useranoncereservationPublick.status_profile === 1 && (
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <div className="row">
+                                                        <div className="col-md-12">
 
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
+                                                            <div className="card-header text-center">
+                                                                <h4 className="card-title"><b>Contacter {useranoncereservationPublick.first_name}</b></h4>
+                                                            </div>
 
-                                                        <div className="card-header text-center">
-                                                            <h4 className="card-title"><b>Contacter {useranoncereservationPublick.first_name}</b></h4>
+                                                            <FormContactProfileAccountUser {...this.props} {...useranoncereservationPublick}/>
+
                                                         </div>
-
-                                                        <FormContactProfileAccountUser {...this.props}/>
-
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-
-                                    <div className="col-lg-8 col-md-12 mx-auto">
-
-                                        {mapAnnoncereservations}
-
-                                        {visiable < useranoncereservationPublick.annoncereservations.length && (
-                                            <div className="row">
-                                                <div className="col-md-4 ml-auto mr-auto text-center">
-                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
-                                                        <b>Voir plus </b>
-                                                    </button>
                                                 </div>
                                             </div>
                                         )}
 
-                                        <div className="card">
-                                            <div className="card-body">
-
-                                                <div className="card-header text-center">
-                                                    <h4 className="card-title"><b>Contacter {useranoncereservationPublick.first_name}</b></h4>
-                                                </div>
-
-                                                <FormContactProfileAccountUser {...this.props}/>
-
-                                            </div>
-                                        </div>
-
-                                        <div className="card card-raised card-form-horizontal">
-
-                                            <div className="card-body">
-
-                                                <div className="card-header text-center">
-                                                    <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
-                                                    <p className="card-title">
-                                                        Abonnez-vous à la newsletter de <b>{useranoncereservationPublick.first_name}</b> afin d'être notifié des mises à jour
-                                                    </p>
-                                                </div>
-
-                                                <FormNewletterSubcribeProfileAccountUser {...this.props} />
-
-                                            </div>
-                                        </div>
 
                                     </div>
+
+
+                                    {useranoncereservationPublick.status_profile === 0 ?
+
+                                        <div className="col-lg-8 col-md-12 mx-auto">
+                                            <div className="card">
+
+                                                <div className="card-body">
+
+                                                    <div className="card-header text-center">
+                                                        <h4 className="card-title"><b>Pour poster votre bien </b></h4>
+                                                        <a href="#"
+                                                           className="btn btn-info btn-lg">
+                                                            <b>Devenez professionnel pour poster votre bien</b>
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        :
+                                        <div className="col-lg-8 col-md-12 mx-auto">
+
+                                            {mapAnnoncereservations}
+
+                                            {visiable < useranoncereservationPublick.annoncereservations.length && (
+                                                <div className="row">
+                                                    <div className="col-md-4 ml-auto mr-auto text-center">
+                                                        <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                                            <b>Voir plus </b>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            <div className="card">
+                                                <div className="card-body">
+
+                                                    <div className="card-header text-center">
+                                                        <h4 className="card-title"><b>Contacter {useranoncereservationPublick.first_name}</b></h4>
+                                                    </div>
+
+                                                    <FormContactProfileAccountUser {...this.props} {...useranoncereservationPublick}/>
+
+                                                </div>
+                                            </div>
+
+                                            <div className="card card-raised card-form-horizontal">
+
+                                                <div className="card-body">
+
+                                                    <div className="card-header text-center">
+                                                        <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
+                                                        <p className="card-title">
+                                                            Abonnez-vous à la newsletter de <b>{useranoncereservationPublick.first_name}</b> afin d'être notifié des mises à jour
+                                                        </p>
+                                                    </div>
+
+                                                    <FormNewletterSubcribeProfileAccountUser {...this.props} />
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    }
 
 
 

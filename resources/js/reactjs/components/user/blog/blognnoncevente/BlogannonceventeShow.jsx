@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import AnnoncelocationVenteforBlog from "./AnnoncelocationVenteforBlog";
+import ButonFavoris from "../../../inc/vendor/ButonFavoris";
 
 
 class BlogannonceventeShow extends Component {
@@ -22,6 +23,72 @@ class BlogannonceventeShow extends Component {
             blogannoncevente: {user:[],categoryannoncevente:[]},
         };
         this.deleteItem = this.deleteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
+    }
+
+    favoriteItem(id) {
+        const url = route('favoriteblogannonceventes_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Article ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('favoriteblogannonceventes_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Article retirée de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
     }
 
     deleteItem(id) {
@@ -55,8 +122,8 @@ class BlogannonceventeShow extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -67,8 +134,8 @@ class BlogannonceventeShow extends Component {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -92,13 +159,20 @@ class BlogannonceventeShow extends Component {
     getDescription(blogannoncevente) {
         return { __html: (blogannoncevente.description) };
     }
+    data_countFormatter(visits_count, precision) {
+        const abbrev = ['', 'k', 'M', 'B', 'T'];
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(visits_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (visits_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     render() {
         const { blogannoncevente } = this.state;
         let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
         return (
             <Fragment>
                 <Helmet>
-                    <title>{`${blogannoncevente.title || 'Annonce'}`} - Ivemo</title>
+                    <title>{`${blogannoncevente.title || 'Annonce'}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
@@ -134,60 +208,77 @@ class BlogannonceventeShow extends Component {
                                                         <div className="card-header d-flex align-items-center">
                                                             <div className="d-flex align-items-center">
                                                                 {blogannoncevente.user.avatar ?
-                                                                    <NavLink to={`/@${blogannoncevente.user.slug}/blogs/annonce_ventes/`}>
+                                                                    <NavLink to={`/pro/${blogannoncevente.user.slug}/blogs/annonce_ventes/`}>
                                                                         <img src={blogannoncevente.user.avatar}
                                                                              style={{ height: "40px", width: "80px", borderRadius: "5px" }}
                                                                              alt={blogannoncevente.user.first_name}
                                                                              className="avatar" />
                                                                     </NavLink>
-                                                                    : <Skeleton circle={false} height={40} width={80} />}
+                                                                    : <Skeleton height={40} width={80} />}
                                                                 <div className="mx-3">
-                                                                    <NavLink to={`/@${blogannoncevente.user.slug}/blogs/annonce_ventes/`} className="text-dark font-weight-600 text-sm"><b>{blogannoncevente.user.first_name || <Skeleton width={35} />}</b>
+                                                                    <NavLink to={`/pro/${blogannoncevente.user.slug}/blogs/annonce_ventes/`} className="text-dark font-weight-600 text-sm"><b>{blogannoncevente.user.first_name || <Skeleton width={35} />}</b>
                                                                         <small className="d-block text-muted">{moment(blogannoncevente.created_at).fromNow()}</small>
                                                                     </NavLink>
                                                                 </div>
                                                             </div>
-                                                            {!$guest && (
-                                                                <Fragment>
-                                                                    {$userIvemo.id === blogannoncevente.user_id && (
-                                                                        <Fragment>
-                                                                            <div className="text-right ml-auto">
 
-                                                                                <UncontrolledTooltip placement="bottom" target="TooltipEdit">
+                                                            <div className="text-right ml-auto">
+                                                                {$guest ?
+                                                                    <Button  data-toggle="modal" data-target="#loginModal"
+                                                                             className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                                        <i className="far fa-bookmark"></i>
+                                                                    </Button>
+                                                                    :
+                                                                    <>
+                                                                        <ButonFavoris favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} {...blogannoncevente} />
+
+                                                                        {$userIvemo.id === blogannoncevente.user_id && (
+                                                                            <Fragment> <a
+                                                                                href={`#${blogannoncevente.visits_count}`}
+                                                                                className="btn btn-sm btn-secondary">
+                                                                                <i className="far fa-eye"></i>
+                                                                                <b>{this.data_countFormatter(blogannoncevente.visits_count)}</b>
+                                                                            </a>
+                                                                                <UncontrolledTooltip placement="bottom"
+                                                                                                     target="TooltipEdit">
                                                                                     Editer cet article
                                                                                 </UncontrolledTooltip>
-                                                                                <NavLink to={`/blogs/annonce_ventes/${blogannoncevente.slugin}/edit/`} className="btn btn-outline-info btn-sm" id="TooltipEdit">
-                                                                                    <i className="now-ui-icons ui-2_settings-90" /> editer
+                                                                                <NavLink
+                                                                                    to={`/blogs/annonce_ventes/${blogannoncevente.slugin}/edit/`}
+                                                                                    className="btn btn-sm btn-icon btn-info"
+                                                                                    id="TooltipEdit">
+                                                                                    <i className="now-ui-icons ui-2_settings-90"/>
                                                                                 </NavLink>
-                                                                                <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
+                                                                                <UncontrolledTooltip placement="bottom"
+                                                                                                     target="TooltipDelete"
+                                                                                                     delay={0}>
                                                                                     Supprimer cette annonce
                                                                                 </UncontrolledTooltip>
                                                                                 <Button
-                                                                                    className="btn btn-outline-danger btn-sm" onClick={() => this.deleteItem(blogannoncevente.id)} color="secondary" id="TooltipDelete">
-                                                                                    <i className="now-ui-icons ui-1_simple-remove" /> supprimer
-                                                                                </Button>{" "}
-                                                                            </div>
-                                                                        </Fragment>
-                                                                    )}
+                                                                                    className="btn btn-sm btn-icon btn-danger"
+                                                                                    onClick={() => this.deleteItem(blogannoncevente.id)}
+                                                                                    color="secondary" id="TooltipDelete">
+                                                                                    <i className="now-ui-icons ui-1_simple-remove"/>
+                                                                                </Button>
+                                                                            </Fragment>
+                                                                        )}
 
-                                                                </Fragment>
-                                                            )}
+                                                                    </>
+                                                                }
+                                                            </div>
+
                                                         </div>
 
-                                                        <div className="carousel slide" data-ride="carousel">
-
-                                                            <div className="carousel-inner" role="listbox">
-                                                                <div className="carousel-item active">
-                                                                    <Zoom>
-                                                                        {blogannoncevente.photo ?
-                                                                            <img className="d-block"
-                                                                                 src={blogannoncevente.photo}
-                                                                                 style={{ width: "1400px", height: "600px",borderRadius: "5px" }}
-                                                                                 alt={blogannoncevente.title} />
-                                                                            : <Skeleton height={600} width={1400} />}
-                                                                    </Zoom>
-
-                                                                </div>
+                                                        <div className="carousel-inner">
+                                                            <div className="carousel-item active">
+                                                                <Zoom>
+                                                                    {blogannoncevente.photo ?
+                                                                        <img className="d-block"
+                                                                             src={blogannoncevente.photo}
+                                                                             style={{ width: "1400px", height: "600px",borderRadius: "5px" }}
+                                                                             alt={blogannoncevente.title} />
+                                                                        : <Skeleton height={600} width={1400} />}
+                                                                </Zoom>
 
                                                             </div>
 
@@ -222,9 +313,9 @@ class BlogannonceventeShow extends Component {
                                 <BlogannonceventeInteresse  {...this.props} />
 
                                 <div className="text-center">
-                                    <Link to={`/blogs/annonce_ventes/${itemCategoryannoncevente}/`}
+                                    <a href={`/blogs/annonce_ventes/${itemCategoryannoncevente}/`}
                                         className="btn btn-outline-info">Voir plus d'articles ici
-                                    </Link>
+                                    </a>
                                 </div>
 
 

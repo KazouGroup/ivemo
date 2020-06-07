@@ -12,4 +12,4 @@ Route::get('/dashboard/users/p/datatables', 'UserController@datatablesusers');
 Route::get('/dashboard/administrators/p/datatables', 'UserController@datatablesadministrators');
 
 Route::get('/dashboard/administrators', 'UserController@administrator');
-Route::get('/account/users/{user}', 'UserController@show')->name('users.show');
+Route::get('/account/users/{user}', 'UserController@show')->name('account_users.show');

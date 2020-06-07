@@ -124,8 +124,8 @@ class ProfileConfigUser extends Component {
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInUp",
-                            exit: "animated fadeOutDown"
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
                         },
                     });
             }).catch(error => {
@@ -136,8 +136,8 @@ class ProfileConfigUser extends Component {
                 allow_dismiss: false,
                 type: 'danger',
                 animate: {
-                    enter: 'animated bounceInDown',
-                    exit: 'animated bounceOutUp'
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
                 }
             });
         });
@@ -176,7 +176,7 @@ class ProfileConfigUser extends Component {
 
             <>
                 <Helmet>
-                    <title> {`${$userIvemo.first_name || "Profile"}`} - Ivemo</title>
+                    <title> {`${$userIvemo.first_name || "Profile"}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
@@ -211,11 +211,11 @@ class ProfileConfigUser extends Component {
 
                                                     <div className="card-header d-flex align-items-center">
                                                         <div className="d-flex align-items-center">
-                                                            <NavLink to={`/@${$userIvemo.slug}/`}>
+                                                            <NavLink to={`/pro/${$userIvemo.slug}/`}>
                                                                 <img src={$userIvemo.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                                             </NavLink>
                                                             <div className="mx-3">
-                                                                <NavLink to={`/@${$userIvemo.slug}/`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
+                                                                <NavLink to={`/pro/${$userIvemo.slug}/`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
                                                                     <small className="d-block text-muted">{moment($userIvemo.created_at).format('LL')}</small>
                                                                 </NavLink>
                                                             </div>
@@ -243,7 +243,7 @@ class ProfileConfigUser extends Component {
                                                         <div className="container">
                                                             <div className="row">
                                                                 <div className="col-md-6 col-6">
-                                                                    <Link to={`/@${$userIvemo.slug}/`} title="Profil agence">
+                                                                    <Link to={`/pro/${$userIvemo.slug}/`} title="Profil agence">
                                                                         <small><b>Consulter le profil de votre agence</b></small>
                                                                     </Link>
                                                                 </div>

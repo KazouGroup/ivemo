@@ -17,6 +17,7 @@ class CreateBlogannoncereservationsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title')->nullable();
             $table->string('photo')->nullable();
+            $table->string('ip')->nullable();
             $table->integer('red_time')->nullable();
             $table->longText('description')->nullable();
             $table->string('slug')->nullable();
@@ -24,6 +25,8 @@ class CreateBlogannoncereservationsTable extends Migration
             $table->boolean('status')->default(true);
             $table->boolean('status_admin')->default(true);
             $table->timestamps();
+
+            $table->unsignedBigInteger('member_id')->nullable()->index();
 
             $table->unsignedBigInteger('user_id')->nullable()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

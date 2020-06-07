@@ -13,6 +13,7 @@ import moment from "moment";
 import Swal from "sweetalert2";
 import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
+import ButonFavoris from "../../../inc/vendor/ButonFavoris";
 
 
 class BlogannoncereservationShow extends Component {
@@ -23,6 +24,72 @@ class BlogannoncereservationShow extends Component {
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
+    }
+
+    favoriteItem(id) {
+        const url = route('favoriteblogannoncereservations_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Article ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('favoriteblogannoncereservations_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Article retirée de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
     }
 
     deleteItem(id) {
@@ -56,8 +123,8 @@ class BlogannoncereservationShow extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -68,8 +135,8 @@ class BlogannoncereservationShow extends Component {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -95,13 +162,20 @@ class BlogannoncereservationShow extends Component {
         const md = new Remarkable();
         return { __html: md.render(blogannoncereservation.description) };
     }
+    data_countFormatter(visits_count, precision) {
+        const abbrev = ['', 'k', 'M', 'B', 'T'];
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(visits_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (visits_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     render() {
         const { blogannoncereservation } = this.state;
         let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
         return (
             <>
                 <Helmet>
-                    <title>{`${blogannoncereservation.title || 'Annonce'}`} - Ivemo</title>
+                    <title>{`${blogannoncereservation.title || 'Annonce'}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
@@ -136,7 +210,7 @@ class BlogannoncereservationShow extends Component {
                                                         <div className="card-header d-flex align-items-center">
                                                             <div className="d-flex align-items-center">
                                                                 {blogannoncereservation.user.avatar ?
-                                                                    <NavLink to={`/@${blogannoncereservation.user.slug}/blogs/annonce_reservations/`}>
+                                                                    <NavLink to={`/pro/${blogannoncereservation.user.slug}/blogs/annonce_reservations/`}>
                                                                         <img src={blogannoncereservation.user.avatar}
                                                                              style={{ height: "40px", width: "80px",borderRadius: "5px" }}
                                                                              alt={blogannoncereservation.user.first_name}
@@ -144,59 +218,62 @@ class BlogannoncereservationShow extends Component {
                                                                     </NavLink>
                                                                     : <Skeleton circle={false} height={40} width={80} />}
                                                                 <div className="mx-3">
-                                                                    <NavLink to={`/@${blogannoncereservation.user.slug}/blogs/annonce_reservations/`} className="text-dark font-weight-600 text-sm"><b>{blogannoncereservation.user.first_name || <Skeleton width={35} />}</b>
+                                                                    <NavLink to={`/pro/${blogannoncereservation.user.slug}/blogs/annonce_reservations/`} className="text-dark font-weight-600 text-sm"><b>{blogannoncereservation.user.first_name || <Skeleton width={35} />}</b>
                                                                         <small className="d-block text-muted">{moment(blogannoncereservation.created_at).fromNow()}</small>
                                                                     </NavLink>
                                                                 </div>
                                                             </div>
-                                                            {!$guest && (
-                                                                <>
-                                                                    {$userIvemo.id === blogannoncereservation.user_id && (
-                                                                        <>
-                                                                            <div className="text-right ml-auto">
-                                                                                <UncontrolledTooltip placement="bottom" target="TooltipEdit">
-                                                                                    Editer cet article
-                                                                                </UncontrolledTooltip>
-                                                                                <NavLink to={`/blogs/annonce_reservations/${blogannoncereservation.slugin}/edit/`} className="btn btn-sm btn-outline-info" id="TooltipEdit">
-                                                                                    <i className="now-ui-icons ui-2_settings-90" /> editer
-                                                                                </NavLink>
-                                                                                <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
-                                                                                    Supprimer cette annonce
-                                                                                </UncontrolledTooltip>
-                                                                                <Button
-                                                                                    className="btn btn-outline-danger btn-sm" onClick={() => this.deleteItem(blogannoncereservation.id)} color="secondary" id="TooltipDelete">
-                                                                                    <i className="now-ui-icons ui-1_simple-remove" /> supprimer
-                                                                                </Button>{" "}
-                                                                            </div>
-                                                                        </>
-                                                                    )}
 
-                                                                </>
-                                                            )}
-                                                        </div>
+                                                            <div className="text-right ml-auto">
+                                                                {$guest ?
+                                                                    <Button  data-toggle="modal" data-target="#loginModal"
+                                                                             className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                                        <i className="far fa-bookmark"></i>
+                                                                    </Button>
+                                                                    :
+                                                                    <>
+                                                                        <ButonFavoris favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} {...blogannoncereservation} />
 
-                                                        <div className="carousel slide" data-ride="carousel">
+                                                                        {$userIvemo.id === blogannoncereservation.user_id && (
+                                                                            <>
+                                                                                <div className="text-right ml-auto">
+                                                                                    <a href={`#${blogannoncereservation.visits_count}`} className="btn btn-sm btn-secondary">
+                                                                                        <i class="far fa-eye"></i> <b>{this.data_countFormatter(blogannoncereservation.visits_count)}</b>
+                                                                                    </a>
+                                                                                    <NavLink to={`/blogs/annonce_reservations/${blogannoncereservation.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" title="Editer cet article">
+                                                                                        <i className="now-ui-icons ui-2_settings-90" />
+                                                                                    </NavLink>
+                                                                                    <Button
+                                                                                        className="btn btn-danger btn-icon btn-sm" onClick={() => this.deleteItem(blogannoncereservation.id)} color="secondary" title="Supprimer cette annonce">
+                                                                                        <i className="now-ui-icons ui-1_simple-remove" />
+                                                                                    </Button>{" "}
+                                                                                </div>
+                                                                            </>
+                                                                        )}
 
-                                                            <div className="carousel-inner" role="listbox">
-                                                                <div className="carousel-item active">
-                                                                    <Zoom>
-                                                                        {blogannoncereservation.photo ?
-                                                                            <img className="d-block"
-                                                                                 src={blogannoncereservation.photo}
-                                                                                 style={{ width: "1400px", height: "600px",borderRadius: "5px" }}
-                                                                                 alt={blogannoncereservation.title} />
-                                                                            : <Skeleton height={600} width={1400} />}
-
-
-
-                                                                    </Zoom>
-
-                                                                </div>
-
+                                                                    </>
+                                                                }
                                                             </div>
 
                                                         </div>
 
+                                                        <div className="carousel-inner">
+                                                            <div className="carousel-item active">
+                                                                <Zoom>
+                                                                    {blogannoncereservation.photo ?
+                                                                        <img className="d-block"
+                                                                             src={blogannoncereservation.photo}
+                                                                             style={{ width: "1400px", height: "600px",borderRadius: "5px" }}
+                                                                             alt={blogannoncereservation.title} />
+                                                                        : <Skeleton height={600} width={1400} />}
+
+
+
+                                                                </Zoom>
+
+                                                            </div>
+
+                                                        </div>
 
                                                     </div>
                                                 </div>
@@ -226,9 +303,9 @@ class BlogannoncereservationShow extends Component {
                                 <BlogannoncereservationInteresse  {...this.props} />
 
                                 <div className="text-center">
-                                    <Link to={`/blogs/annonce_reservations/${itemCategoryannoncereservation}/`}
+                                    <a href={`/blogs/annonce_reservations/${itemCategoryannoncereservation}/`}
                                         className="btn btn-outline-info">Voir plus d'articles ici
-                                    </Link>
+                                    </a>
                                 </div>
 
 

@@ -25,7 +25,7 @@ class ContactuserslocationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth',['except' => ['sendcontactmessageuser',]]);
+        $this->middleware('auth',['except' => ['sendcontactmessageuser','contactuserslocaction']]);
     }
     /**
      * Display a listing of the resource.
@@ -179,6 +179,19 @@ class ContactuserslocationController extends Controller
         $contactuserslocation->annoncelocation_id = $annoncelocation->id;
 
         ContactuserslocationService::newEmailToannoncelocationpageShow($request,$annoncelocation);
+
+        $contactuserslocation->save();
+
+        return response()->json($contactuserslocation,200);
+    }
+
+    public function contactuserslocaction(StorecontactRequest $request)
+    {
+        $contactuserslocation = new contactuserslocation();
+
+        $slug = sha1(('YmdHis') . str_random(30));
+        $contactuserslocation->fill($request->all());
+        $contactuserslocation->slug = $slug;
 
         $contactuserslocation->save();
 

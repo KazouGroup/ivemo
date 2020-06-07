@@ -33,7 +33,7 @@ class PermissionController extends Controller
 
     public function api()
     {
-        $permissions = PermissionResource::collection(Permission::latest()->get());
+        $permissions = PermissionResource::collection(Permission::orderBy('created_at','DESC')->distinct()->get());
         return response()->json($permissions,200);
     }
 

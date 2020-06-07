@@ -7,10 +7,10 @@ import "../vuejs/axios"
 import 'animate.css/animate.css';
 import {createStore} from "redux";
 import {Provider} from "react-redux";
-import rootReducers from "./reducers/rootReducers";
+import rootReducer from "./reducers/rootReducer";
 import ScrollToTop from "./components/inc/user/ScrollToTop";
 
-const store = createStore(rootReducers);
+const store = createStore(rootReducer);
 
 
 class Index extends Component {

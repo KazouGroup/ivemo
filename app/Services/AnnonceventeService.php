@@ -5,14 +5,22 @@ namespace App\Services;
 
 
 use App\Http\Resources\AnnoncelocationResource;
+use App\Http\Resources\AnnonceventeResource;
 use App\Model\annoncelocation;
+use App\Model\annoncetype;
+use App\Model\annoncevente;
 use App\Model\categoryannoncevente;
 use App\Model\city;
-use App\Model\user;
 
 class AnnonceventeService
 {
 
+    public static function apiannonceventesbyannoncetypebyannoncevente(annoncetype $annoncetype,$annoncevente)
+    {
+        $data = new AnnonceventeResource(annoncevente::whereSlugin($annoncevente)->first());
+
+        return $data;
+    }
 
 
     public static function apiannonceventebycategoryannoncevente($annoncetype,$categoryannoncevente)
@@ -125,17 +133,22 @@ class AnnonceventeService
         return $annoncesbycities;
     }
 
-    public static function apiannoncelocationbycategoryannoncelocationslug($annoncetype,$categoryannoncelocation,$city,$date,$annoncelocation)
-    {
-        $annoncelocation = new AnnoncelocationResource(annoncelocation::whereIn('annoncetype_id',[$annoncetype->id])
-            ->whereIn('city_id',[$city->id])
-            ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
-            ->where(['status' => 1,'status_admin' => 1])
-            ->with(['user.profile' => function ($q){$q->distinct()->get();},])
-            ->whereDate('created_at',$date)
-            ->whereSlug($annoncelocation)->firstOrFail());
 
-        return $annoncelocation;
+    public static function apiannoncesventesbyusercategoryannoncevente($user,$categoryannoncevente)
+    {
+        $blogannoncereseventes = HelpersService::helpersannonceteamcount($user)
+            ->with(['annonceventes' => function ($q) use ($user,$categoryannoncevente){
+                $q->with('user','categoryannoncevente','city','annoncetype')
+                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+                    ->whereHas('city', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[$user->id])
+                    ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+                    ->orderBy('created_at','DESC')
+                    ->distinct()->get()
+                ;},
+            ])->first();
+
+        return $blogannoncereseventes;
     }
 
     public static function apiannoncesventesbyuser($user)

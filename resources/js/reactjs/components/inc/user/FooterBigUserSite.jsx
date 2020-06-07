@@ -19,15 +19,16 @@ class FooterBigUserSite extends Component {
 
         return (
             <>
+
                 <LoginModalUser/>
-                <footer className="footer footer-big" data-background-color="black">
+                <footer className="footer" data-background-color="black">
                     <div className="container">
                         <div className="content">
                             <div className="row">
-                                <div className="col-md-4">
+                                <div className="col-md-5">
                                     <div className="column">
                                         <Link to={'/'}>
-                                            <img src=".." className="logo" alt="Ivemo" />
+                                            <img src=".." className="logo" alt={$name_site} />
                                         </Link>
                                     </div>
                                     <div className="btn-wrapper profile text-left mt-3">
@@ -47,23 +48,23 @@ class FooterBigUserSite extends Component {
                                     </div>
                                 </div>
 
-                                <div className="col-md-2 col-6">
+                                <div className="col-md-3 col-4">
                                     <div className="column">
                                         <h5>Company</h5>
                                         <ul className="links-vertical">
                                             <li>
-                                                <Link to={`/blog/`} className="text-muted">
-                                                    Blog
+                                                <Link to={`/about/`} className="text-muted">
+                                                    Qui sommes-nous
                                                 </Link>
-                                            </li>
-                                            <li>
-                                                <NavLink to={`/about/`} className="text-muted">
-                                                    About
-                                                </NavLink>
                                             </li>
                                             <li>
                                                 <NavLink to={`/annonces_reservations/reservations/`} className="text-muted">
                                                     Presentation
+                                                </NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink to={`/advertisement/`} className="text-muted">
+                                                    Faire la publicité sur le site
                                                 </NavLink>
                                             </li>
                                             <li>
@@ -75,24 +76,24 @@ class FooterBigUserSite extends Component {
                                     </div>
                                 </div>
 
-                                <div className="col-md-2 col-6">
+                                <div className="col-md-2 col-4">
                                     <div className="column">
                                         <h5>À propos</h5>
                                         <ul className="links-vertical">
-                                            <li>
-                                                <a href="#pablo" className="text-muted">
-                                                    Qui sommes-nous
-                                                </a>
-                                            </li>
                                             <li>
                                                 <a href="#pablo" className="text-muted">
                                                     Ivemo/news
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#pablo" className="text-muted">
+                                                <Link to={`/employments/`} className="text-muted">
                                                     Offres d’emploi
-                                                </a>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to={`/work_with_us/`} className="text-muted">
+                                                    Travaillez avec nous
+                                                </Link>
                                             </li>
                                             <li>
                                                 <a href="#pablo" className="text-muted">
@@ -119,43 +120,7 @@ class FooterBigUserSite extends Component {
 
                                 </div>
 
-                                <div className="col-md-2 col-6">
-                                    <h5>Reservation Hotel</h5>
-                                    <ul className="links-vertical">
-                                        <li>
-                                            <a href="#pablo" className="text-muted">
-                                                Akwa palace
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#pablo" className="text-muted">
-                                                How to Register
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#pablo" className="text-muted">
-                                                Sell Goods
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#pablo" className="text-muted">
-                                                Receive Payment
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#pablo" className="text-muted">
-                                                Transactions Issues
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#pablo" className="text-muted">
-                                                Affiliates
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div className="col-md-2 col-6">
+                                <div className="col-md-2 col-4">
                                     <h5>Aide</h5>
                                     <ul className="links-vertical">
                                         <li>
@@ -189,6 +154,7 @@ class FooterBigUserSite extends Component {
                             </div>
                         </div>
                         <hr />
+
                         <div className="row">
                             <div className="col-md-9">
                                 <div className="column">
@@ -200,7 +166,7 @@ class FooterBigUserSite extends Component {
                                                 </Link>
                                             </li>
                                             <li className="d-inline-block">
-                                                <Link to={'/politique_confidentialité/'} className="nav-link">
+                                                <Link to={'/policy_privacy/'} className="nav-link">
                                                     Privacy Policy
                                                 </Link>
                                             </li>
@@ -216,24 +182,24 @@ class FooterBigUserSite extends Component {
                             <div className="col-md-3">
                                 <div className="dropdown">
                                     Pays:
-                                    <div className="btn btn-link text-primary " href="#" role="button"
+                                    <div className="btn btn-link text-primary " role="button"
                                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i className="ni ni-chat-round"/>
-                                        <span>Cameroun</span>
+                                        <span>{$country}</span>
                                     </div>
-                                    <div className="dropdown-menu kazouTech-dropdown" x-placement="top-start">
-                                        <a href="#" className="dropdown-item active">
+                                    <div className="dropdown-menu" x-placement="top-start">
+                                        <a href="#" className="dropdown-item">
                                             <span>Cameroun</span>
                                         </a>
                                         <a href="#" className="dropdown-item">
-                                            <span>Cote d'ivoire</span>
+                                            <span>Cote d'ivoir</span>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="copyright">
-                            Copyright © {new Date().getFullYear()}, Ivemo All Rights Reserved Realisé par
+                            Copyright © {new Date().getFullYear()}, {$name_site} All Rights Reserved Realisé par
                             <a href="/" className="pl-2 text-primary">KazouGroup Srl</a>.
                         </div>
                     </div>

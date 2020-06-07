@@ -30,11 +30,15 @@ class PermissionTableSeeder extends Seeder
         //Create permissions Dashboard
         Permission::create(['guard_name' => 'web' , 'name' => 'dashboard']);
 
+        Permission::create(['guard_name' => 'web' , 'name' => 'manage-rh']);
+
         Permission::create(['guard_name' => 'web' , 'name' => 'auditing']);
 
         Permission::create(['guard_name' => 'web' , 'name' => 'activity']);
 
         Permission::create(['guard_name' => 'web' , 'name' => 'administration']);
+
+        Permission::create(['guard_name' => 'web' , 'name' => 'manage-signal']);
 
         Permission::create(['guard_name' => 'web' , 'name' => 'setting-task']);
 
@@ -43,6 +47,12 @@ class PermissionTableSeeder extends Seeder
 
 
         Permission::create(['guard_name' => 'web' , 'name' => 'manage-categories']);
+
+        Permission::create(['guard_name' => 'web' , 'name' => 'manage-blogs']);
+
+        Permission::create(['guard_name' => 'web' , 'name' => 'manage-annonce-employements']);
+
+        Permission::create(['guard_name' => 'web' , 'name' => 'manage-annonces-locations-reservations-ventes']);
 
         //Create Permissions Faqs
         Permission::create(['guard_name' => 'web' , 'name' => 'manage-faq']);

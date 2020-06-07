@@ -19,7 +19,7 @@ class city extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(user::class, 'user_id');
     }
 
     protected static function boot()
@@ -63,5 +63,10 @@ class city extends Model
     public function annoncereservations()
     {
         return $this->hasMany(annoncereservation::class, 'city_id');
+    }
+
+    public function employments()
+    {
+        return $this->hasMany(employment::class, 'city_id');
     }
 }

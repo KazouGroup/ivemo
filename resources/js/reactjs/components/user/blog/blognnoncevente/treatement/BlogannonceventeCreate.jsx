@@ -35,6 +35,7 @@ class BlogannonceventeCreate extends Component {
                 ['bold', 'italic', 'underline'],
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                 [{ 'align': [] }],
+                ['link'],
                 [{ 'color': [] }, { 'background': [] }],
             ]
         };
@@ -43,6 +44,7 @@ class BlogannonceventeCreate extends Component {
             'bold', 'italic', 'underline',
             'list', 'bullet',
             'align',
+            'link',
             'color', 'background'
         ];
 
@@ -86,8 +88,8 @@ class BlogannonceventeCreate extends Component {
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInDownBig",
-                            exit: "animated fadeOutUp"
+                            enter: "animate__animated animate__fadeInDownBig",
+                            exit: "animate__animated animate__fadeOutUp"
                         },
                     });
 
@@ -133,14 +135,22 @@ class BlogannonceventeCreate extends Component {
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInUp",
-                            exit: "animated fadeOutDown"
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
                         },
                     });
                 this.props.history.push(`/blogs/annonce_ventes/`);
             }).catch(error => {
                 this.setState({
                     errors: error.response.data.errors
+                });
+                $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
+                    allow_dismiss: false,
+                    type: 'danger',
+                    animate: {
+                        enter: 'animate__animated animate__bounceInDown',
+                        exit: 'animate__animated animate__bounceOutUp'
+                    }
                 });
             })
     }
@@ -151,7 +161,7 @@ class BlogannonceventeCreate extends Component {
     render() {
         const { photo, categoryannonceventes } = this.state;
         const composantTitle = `${this.state.title || 'Article'}`;
-        document.title = `${composantTitle} - Ivemo`;
+        document.title = `${composantTitle} - ${$name_site}`;
         return (
             <div className="about-us sidebar-collapse">
                 <nav className="navbar navbar-expand-lg bg-primary">
@@ -212,12 +222,12 @@ class BlogannonceventeCreate extends Component {
 
                                                 <div className="card-header d-flex align-items-center">
                                                     <div className="d-flex align-items-center">
-                                                        <NavLink to={`/@${$userIvemo.slug}`}>
+                                                        <NavLink to={`/pro/${$userIvemo.slug}`}>
                                                             <img src={$userIvemo.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                                         </NavLink>
                                                         <div className="mx-3">
-                                                            <NavLink to={`/@${$userIvemo.slug}`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
-                                                                <small className="d-block text-muted">12 janv 2019</small>
+                                                            <NavLink to={`/pro/${$userIvemo.slug}`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
+                                                                <small className="d-block text-muted"><b>{moment($userIvemo.created_at).format('LL')}</b></small>
                                                             </NavLink>
                                                         </div>
                                                     </div>
@@ -281,7 +291,7 @@ class BlogannonceventeCreate extends Component {
                                                             <label htmlFor="title">Selectionez la categorie</label>
                                                             <div className="form-group">
                                                                 <select name={'categoryannoncevente_id'} value={this.state.categoryannoncevente_id}
-                                                                        className={`form-control`}
+                                                                        className={`form-control ${this.hasErrorFor('categoryannoncevente_id') ? 'is-invalid' : ''}`}
                                                                         id="categoryannoncevente_id" onChange={this.handleFieldChange}>
                                                                     <option value="" disabled>Selectioner une category</option>
                                                                     {categoryannonceventes.map((item) => (
@@ -295,7 +305,7 @@ class BlogannonceventeCreate extends Component {
                                                     <Row>
                                                         <div className="col-md-6 mx-auto">
                                                             <div className="text-center">
-                                                                <img src={this.state.showDefaultImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : photo} alt={'name'} />
+                                                                <img src={this.state.showDefaultImage ? `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg` : photo} alt={'name'} />
                                                                 <input id="photo" type="file" onChange={this.updateImage} className={`form-control ${this.hasErrorFor('photo') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="photo" />
                                                                 {this.renderErrorFor('photo')}
                                                                 <div className="text-center">
@@ -319,6 +329,7 @@ class BlogannonceventeCreate extends Component {
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                     formats={this.formats}
+                                                                    placeholder="Laisser votre description..."
                                                                     className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                     value={this.state.description || ''}
                                                                     onChange={this.handleChangeBody} />

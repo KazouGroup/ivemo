@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component} from "react";
 import PropTypes from "prop-types";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
@@ -23,6 +23,7 @@ class ProfileAccountUser extends Component {
             slug: '',
             avatar: '',
             avatarcover: '',
+            status_profile: '',
             email: '',
             phone: '',
             categoryprofile_id: '',
@@ -107,6 +108,7 @@ class ProfileAccountUser extends Component {
             username: this.state.username,
             first_name: this.state.first_name,
             last_name: this.state.last_name,
+            status_profile: this.state.status_profile,
             sex: this.state.sex,
             color_name: this.state.color_name,
             slug: this.state.slug,
@@ -130,12 +132,12 @@ class ProfileAccountUser extends Component {
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInUp",
-                            exit: "animated fadeOutDown"
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
                         },
                     });
                 setTimeout(() => {
-                    window.location.reload();
+                    window.location.reload(true);
                 }, 3000);
             }).catch(error => {
                 this.setState({
@@ -162,7 +164,7 @@ class ProfileAccountUser extends Component {
                 const url = route('profile_add_info_account_delete.site', id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
-                    window.location.reload()
+                    window.location.reload(true)
                 })
             }
         });
@@ -176,6 +178,7 @@ class ProfileAccountUser extends Component {
                 username: response.data.username,
                 first_name: response.data.first_name,
                 last_name: response.data.last_name,
+                status_profile: response.data.status_profile,
                 sex: response.data.sex,
                 slug: response.data.slug,
                 color_name: response.data.color_name,
@@ -198,7 +201,7 @@ class ProfileAccountUser extends Component {
 
             <>
                 <Helmet>
-                    <title> {`${$userIvemo.first_name || "Profile"}`} - Ivemo</title>
+                    <title> {`${$userIvemo.first_name || "Profile"}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
@@ -208,7 +211,9 @@ class ProfileAccountUser extends Component {
                     </nav>
 
 
+
                     <div className="wrapper">
+
 
                         <div className="main main-raised">
 
@@ -231,7 +236,20 @@ class ProfileAccountUser extends Component {
 
                                             <div className="card">
                                                 <div className="card-body">
+                                                <div className="card-header d-flex align-items-center">
+                                                        <div className="d-flex align-items-center">
+                                                            <NavLink to={`/pro/${$userIvemo.slug}/`}>
+                                                                <img src={$userIvemo.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
+                                                            </NavLink>
+                                                            <div className="mx-3">
+                                                                <NavLink to={`/pro/${$userIvemo.slug}/`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
+                                                                    <small className="d-block text-muted">{moment($userIvemo.created_at).format('LL')}</small>
+                                                                </NavLink>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
+                                                    <hr/>
                                                     <Row>
                                                         <div className="col-md-6 col-6">
                                                             <label htmlFor="first_name"><b>Nom</b></label>
@@ -335,7 +353,7 @@ class ProfileAccountUser extends Component {
                                                     <Row>
                                                         <div className="col-md-6">
                                                             <div className="text-center">
-                                                                <img src={this.state.showDefaultImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : avatar} alt={'avatar'} />
+                                                                <img src={this.state.showDefaultImage ? `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg` : avatar || `${$url_site}/assets/vendor/assets/img/placeholder.jpg`} alt={'avatar'} />
                                                                 <input id="avatar" type="file" onChange={this.updateavatarImage} className={`form-control ${this.hasErrorFor('avatar') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="avatar" />
                                                                 {this.renderErrorFor('avatar')}
                                                                 <div className="text-center">
@@ -351,7 +369,7 @@ class ProfileAccountUser extends Component {
                                                         <div className="col-md-6">
 
                                                             <div className="text-center">
-                                                                <img src={this.state.showDefaultavatarcoverImage ? "https://www.kazoucoin.com/assets/img/photo.jpg" : avatarcover} alt={'avatarcover'} />
+                                                                <img src={this.state.showDefaultavatarcoverImage ? `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg` : avatarcover || `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg`} alt={'avatarcover'} />
                                                                 <input id="avatarcover" type="file" onChange={this.updateavatacoverImage} className={`form-control ${this.hasErrorFor('avatarcover') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="avatarcover" />
                                                                 {this.renderErrorFor('avatarcover')}
                                                                 <div className="text-center">
@@ -419,21 +437,21 @@ class ProfileAccountUser extends Component {
                                                     </div>
 
                                                     <div className="row">
-                                                        <div className="col-md-6 col-6">
-                                                            <label htmlFor="address"><b>Sex</b></label>
+                                                        <div className="col-md-4">
+                                                            <label htmlFor="address"><b>Votre status</b></label>
                                                             <div className="form-group">
 
-                                                                <select value={this.state.sex || ''} className={`form-control ${this.hasErrorFor('sex') ? 'is-invalid' : ''}`}
-                                                                        onChange={this.handleFieldChange} name="sex" required="required">
-                                                                    <option value="female"> Mme</option>
-                                                                    <option value="male"> Mr</option>
+                                                                <select value={this.state.status_profile || ''} className={`form-control ${this.hasErrorFor('status_profile') ? 'is-invalid' : ''}`}
+                                                                        onChange={this.handleFieldChange} name="status_profile" required="required">
+                                                                    <option value="0"> Particulier</option>
+                                                                    <option value="1"> Professionnel</option>
                                                                 </select>
 
-                                                                {this.renderErrorFor('sex')}
+                                                                {this.renderErrorFor('status_profile')}
                                                             </div>
                                                         </div>
 
-                                                        <div className="col-md-6 col-6">
+                                                        <div className="col-md-6">
                                                             <label htmlFor="phone"><b>Pourquoi êtes-vous sur Ivemo ?</b></label>
                                                             <div className="form-group">
 
@@ -446,6 +464,20 @@ class ProfileAccountUser extends Component {
                                                                 </select>
 
                                                                 {this.renderErrorFor('categoryprofile_id')}
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="col-md-2">
+                                                            <label htmlFor="address"><b>Sex</b></label>
+                                                            <div className="form-group">
+
+                                                                <select value={this.state.sex || ''} className={`form-control ${this.hasErrorFor('sex') ? 'is-invalid' : ''}`}
+                                                                        onChange={this.handleFieldChange} name="sex" required="required">
+                                                                    <option value="female"> Mme</option>
+                                                                    <option value="male"> Mr</option>
+                                                                </select>
+
+                                                                {this.renderErrorFor('sex')}
                                                             </div>
                                                         </div>
 
@@ -482,10 +514,8 @@ class ProfileAccountUser extends Component {
 
                         </div>
 
-
-
-
                         <FooterBigUserSite />
+
                     </div>
                 </div>
 

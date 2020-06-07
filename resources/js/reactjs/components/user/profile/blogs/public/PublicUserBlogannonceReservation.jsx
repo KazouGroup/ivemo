@@ -15,6 +15,7 @@ import Navlinknewblogannoncereservation
     from "../../../blog/blogannoncereservation/treatement/Navlinknewblogannoncereservation";
 import BlogannoncePublicuserSkeleton from "../../../../inc/user/blog/BlogannoncePublicuserSkeleton";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
+import NavLinkPublicEmploymentUser from "../../employments/public/NavLinkPublicEmploymentUser";
 
 
 class PublicUserBlogannonceReservation extends Component {
@@ -66,8 +67,8 @@ class PublicUserBlogannonceReservation extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -78,8 +79,8 @@ class PublicUserBlogannonceReservation extends Component {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -115,7 +116,7 @@ class PublicUserBlogannonceReservation extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Articles sur la reservations {`${userblogreservationPublick.first_name || 'Profile'}`} - Ivemo</title>
+                    <title>Articles sur la reservations {`${userblogreservationPublick.first_name || 'Profile'}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
@@ -133,17 +134,21 @@ class PublicUserBlogannonceReservation extends Component {
 
                                 <div className="card-body">
 
-                                    <h1 className="title">{userblogreservationPublick.first_name || <Skeleton width={300} />}</h1>
-                                    {userblogreservationPublick.slug ?
-                                        <Link to={`/@${userblogreservationPublick.slug}/`} className="text-white">
+                                    <h1 className="title">{userblogreservationPublick.first_name || ""}</h1>
+
+                                    {userblogreservationPublick.status_profile === 0 ? 
+                                        <Link to={`/user/${userblogreservationPublick.slug}/`} className="text-white">
                                             <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userblogreservationPublick.first_name}</b>
-                                        </Link>
-                                        :
-                                        <Skeleton width={270}/>
+                                         </Link>
+                                    :
+                                    <Link to={`/pro/${userblogreservationPublick.slug}/`} className="text-white">
+                                        <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userblogreservationPublick.first_name}</b>
+                                     </Link>
                                     }
+                                    
                                     {userblogreservationPublick.blogannoncereservations_count >= 0 ?
                                         <h5><b>{userblogreservationPublick.blogannoncereservations_count}</b> {userblogreservationPublick.blogannoncereservations_count > 1 ? "articles" : "article"} posté par {userblogreservationPublick.first_name} sur la reservation</h5>
-                                    :<h5> <Skeleton width={200}/></h5>}
+                                    : <></>}
 
                                 </div>
 
@@ -168,32 +173,10 @@ class PublicUserBlogannonceReservation extends Component {
                                             </NavLink>
                                         </div>*/}
 
-
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                            <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingOne">
-                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <b>Annonces de {userblogreservationPublick.first_name}</b>
-                                                                    </a>
-                                                                </div>
-
-                                                                <NavLinkPublicAnnonceUser {...this.props} {...userblogreservationPublick} />
-
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <Navlinknewblogannoncereservation/>
 
-                                        <div className="card">
+                                        {userblogreservationPublick.status_profile === 0 ?
+                                           <div className="card">
                                             <div className="card-body">
                                                 <div className="row">
                                                     <div className="col-md-12">
@@ -214,22 +197,91 @@ class PublicUserBlogannonceReservation extends Component {
                                                 </div>
                                             </div>
                                         </div>
+                                            :
+                                            <>
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                                    <div className="card card-plain">
+                                                                        <div className="card-header" role="tab" id="headingOne">
+                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                                <b>Annonces de {userblogreservationPublick.first_name}</b>
+                                                                            </a>
+                                                                        </div>
 
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
+                                                                        <NavLinkPublicAnnonceUser {...this.props} {...userblogreservationPublick} />
 
-                                                        <div className="card-header text-center">
-                                                            <h4 className="card-title"><b>Contacter {userblogreservationPublick.first_name}</b></h4>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
                                                         </div>
-
-                                                        <FormContactProfileAccountUser {...this.props} />
-
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
+
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                                    <div className="card card-plain">
+                                                                        <div className="card-header" role="tab" id="headingTree">
+                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
+                                                                                <b>Annonces de {userblogreservationPublick.first_name}</b>
+                                                                            </a>
+                                                                        </div>
+
+                                                                        <NavLinkPublicEmploymentUser {...this.props} {...userblogreservationPublick}/>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                                    <div className="card card-plain">
+                                                                        <div className="card-header" role="tab" id="headingTwo">
+                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                                <b>Articles de {userblogreservationPublick.first_name}</b>
+                                                                            </a>
+                                                                        </div>
+
+                                                                        <NavLinkPublicBlogannoncesUser {...this.props} {...userblogreservationPublick} />
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+
+                                                                <div className="card-header text-center">
+                                                                    <h4 className="card-title"><b>Contacter {userblogreservationPublick.first_name}</b></h4>
+                                                                </div>
+
+                                                                <FormContactProfileAccountUser {...this.props} {...userblogreservationPublick}/>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </>
+                                        }
 
                                     </div>
 
@@ -265,7 +317,7 @@ class PublicUserBlogannonceReservation extends Component {
                                                     <h4 className="card-title"><b>Contacter {userblogreservationPublick.first_name}</b></h4>
                                                 </div>
 
-                                                <FormContactProfileAccountUser {...this.props} />
+                                                <FormContactProfileAccountUser {...this.props} {...userblogreservationPublick}/>
 
                                             </div>
                                         </div>

@@ -52,7 +52,8 @@ class LoginUser extends Component {
         };
         dyaxios.post(route('login'), item)
             .then(() => {
-                window.location.replace(`/`);
+                this.props.history.push(`/`);
+                window.location.reload(true);
             }).catch(error => {
                 this.setState({
                     errors: error.response.data.errors
@@ -61,8 +62,8 @@ class LoginUser extends Component {
                     allow_dismiss: false,
                     type: 'danger',
                     animate: {
-                        enter: 'animated bounceInDown',
-                        exit: 'animated bounceOutUp'
+                        enter: 'animate__animated animate__bounceInDown',
+                        exit: 'animate__animated animate__bounceOutUp'
                     }
                 });
             })
@@ -70,7 +71,7 @@ class LoginUser extends Component {
 
     // lifecycle method
     componentDidMount() {
-        const composantTitle = 'Connexion - Ivemo';
+        const composantTitle = `Connexion - ${$name_site}`;
         document.title = `${composantTitle}`;
     }
     render() {
@@ -138,12 +139,12 @@ class LoginUser extends Component {
                                         </div>
                                         <div className="pull-left">
                                             <h6>
-                                                <a href="/register/" className="link footer-link">Inscription</a>
+                                                <Link to={`/register/`} className="link footer-link">Inscription</Link>
                                             </h6>
                                         </div>
                                         <div className="pull-right">
                                             <h6>
-                                                <a href="/password/reset/" className="link footer-link">Mot de passe oublié?</a>
+                                                <Link to={`/password/reset/`} className="link footer-link">Mot de passe oublié?</Link>
                                             </h6>
                                         </div>
                                     </form>

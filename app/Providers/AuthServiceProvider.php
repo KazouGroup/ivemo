@@ -9,8 +9,10 @@ use App\Model\blogannoncelocation;
 use App\Model\blogannoncereservation;
 use App\Model\blogannoncevente;
 use App\Model\contactuser;
+use App\Model\contactuseremployment;
 use App\Model\contactuserslocation;
 use App\Model\contactusersvente;
+use App\Model\employment;
 use App\model\profile;
 use App\Model\teamuser;
 use App\Model\user;
@@ -21,8 +23,10 @@ use App\Policies\BlogannoncelocationPolicy;
 use App\Policies\BlogannoncereservationPolicy;
 use App\Policies\BlogannonceventePolicy;
 use App\Policies\ContactuserPolicy;
+use App\Policies\ContactusersemploymentPolicy;
 use App\Policies\ContactuserslocationPolicy;
 use App\Policies\ContactusersventePolicy;
+use App\Policies\EmploymentPolicy;
 use App\Policies\ProfilePolicy;
 use App\Policies\TeamuserPolicy;
 use App\Policies\UserPolicy;
@@ -48,6 +52,8 @@ class AuthServiceProvider extends ServiceProvider
         blogannoncelocation::class => BlogannoncelocationPolicy::class,
         blogannoncevente::class => BlogannonceventePolicy::class,
         teamuser::class => TeamuserPolicy::class,
+        employment::class => EmploymentPolicy::class,
+        contactuseremployment::class => ContactusersemploymentPolicy::class,
         user::class => UserPolicy::class,
     ];
 
@@ -61,5 +67,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Passport::routes();
+        Passport::tokensExpireIn(now()->addDays(15));
+        Passport::refreshTokensExpireIn(now()->addDays(30));
     }
 }

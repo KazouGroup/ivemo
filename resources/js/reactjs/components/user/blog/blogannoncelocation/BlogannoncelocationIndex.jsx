@@ -1,16 +1,16 @@
 import React, {Component} from "react";
 import {Link,NavLink } from "react-router-dom";
 import moment from 'moment'
-import {Helmet} from "react-helmet";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-import {Button} from "reactstrap";
+import {Button, Form,Alert,Input} from "reactstrap";
 import Swal from "sweetalert2";
 import Navblogannoncelocations from "./inc/Navblogannoncelocations";
-import BlogannoncelocationList from "./BlogannoncelocationList";
+import BlogannoncelocationList from "./inc/BlogannoncelocationList";
 import Navlinknewblogannoncelocation from "./treatement/Navlinknewblogannoncelocation";
 import BlogannonceListSkeleton from "../../../inc/user/blog/BlogannonceListSkeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
+import HelmetSite from "../../../inc/user/HelmetSite";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -18,13 +18,177 @@ class BlogannoncelocationIndex extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            email: '',
+            full_name: '',
+            message: '',
+            subject: 'Mauvaise catégorie',
+            errors: [],
+            blogannonceItem: [],
             blogannoncelocations:{categoryannoncelocation:[],user:[]},
+
+            progress: false,
+            completed: false,
 
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
+        this.signalerUser = this.signalerUser.bind(this);
+        this.handleCheckClick = this.handleCheckClick.bind(this);
+        this.signalemessageItem = this.signalemessageItem.bind(this);
+        this.handleFieldChange = this.handleFieldChange.bind(this);
+        this.hasErrorFor = this.hasErrorFor.bind(this);
+        this.renderErrorFor = this.renderErrorFor.bind(this);
+
     }
+
+    handleFieldChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value,
+        });
+        this.state.errors[event.target.name] = '';
+    }
+
+    handleCheckClick(event){
+        this.setState({
+            subject: event.target.value
+        });
+
+    };
+    // Handle Errors
+    hasErrorFor(field) {
+        return !!this.state.errors[field];
+    }
+
+    renderErrorFor(field) {
+        if (this.hasErrorFor(field)) {
+            return (
+                <span className='invalid-feedback'>
+                    <strong>{this.state.errors[field][0]}</strong>
+                </span>
+            )
+        }
+    }
+
+    signalerUser(item) {
+        $('#addNew').modal('show');
+        this.setState({
+            blogannonceItem: item
+        });
+    }
+
+    favoriteItem(id) {
+        const url = route('favoriteblogannoncelocations_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Article ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('favoriteblogannoncelocations_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Article retirée de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    signalemessageItem(e) {
+        e.preventDefault();
+
+        let item = {
+            email: this.state.email,
+            blogannoncelocation_id: this.state.blogannonceItem.id,
+            full_name: this.state.full_name,
+            subject: this.state.subject,
+            message: this.state.message,
+        };
+        let url = route('signalblogannoncelocations.site');
+        dyaxios.post(url, item)
+            .then(() => {
+
+                //Masquer le modal après la création
+                $('#addNew').modal('hide');
+
+                $.notify({
+                        message: `Article signalée avec succès`
+                    },
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'top',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInDown",
+                            exit: "animate__animated animate__fadeOutUp"
+                        },
+                    });
+
+                this.setState({
+                    email: "",
+                    full_name: "",
+                    message: "",
+                });
+            }).catch(error => {
+            this.setState({
+                errors: error.response.data.errors
+            });
+        })
+    }
+
+
 
     unactiveItem(id){
         Swal.fire({
@@ -41,19 +205,18 @@ class BlogannoncelocationIndex extends Component {
         }).then((result) => {
             if (result.value) {
 
+
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.blogannoncelocations.filter(isNotId);
+                this.setState({blogannoncelocations: updatedItems});
+
                 //Envoyer la requet au server
                 let url = route('blogannoncecategorylocationunactive_site.site',id);
                 dyaxios.get(url).then(() => {
 
-                    let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.blogannoncelocations.filter(isNotId);
-                    this.setState({blogannoncelocations: updatedItems});
-
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette annonce a été masquée <a href=\"/profile/"+$userIvemo.slug+"/personal_settings/blogs/annonce_locations/\" target=\"_blank\" class=\"btn btn-info btn-sm\">Modifier ici</a>",
-                            url: "/profile/"+$userIvemo.slug+"/personal_settings/blogs/annonce_locations/",
-                            target: "_blank"
+                            message: "Article masquée aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -63,8 +226,8 @@ class BlogannoncelocationIndex extends Component {
                                 align: 'center'
                             },
                             animate: {
-                                enter: "animated fadeInUp",
-                                exit: "animated fadeOutDown"
+                                enter: "animate__animated animate__fadeInUp",
+                                exit: "animate__animated animate__fadeOutDown"
                             },
                         });
                     /** End alert ***/
@@ -73,8 +236,8 @@ class BlogannoncelocationIndex extends Component {
                     $.notify("Ooop! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -98,13 +261,14 @@ class BlogannoncelocationIndex extends Component {
         }).then((result) => {
             if (result.value) {
 
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.blogannoncelocations.filter(isNotId);
+                this.setState({blogannoncelocations: updatedItems});
+
                 const url = route('blogannoncecategorylocationdelete_site',id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
-                    let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.blogannoncelocations.filter(isNotId);
-                    this.setState({blogannoncelocations: updatedItems});
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
@@ -118,8 +282,8 @@ class BlogannoncelocationIndex extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -130,8 +294,8 @@ class BlogannoncelocationIndex extends Component {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -140,19 +304,24 @@ class BlogannoncelocationIndex extends Component {
     }
 
     componentDidMount() {
+        this.loadItems();
+    }
+
+    loadItems(){
+
         dyaxios.get(route('api.blogannoncelocations_site')).then(response =>
             this.setState({
-                blogannoncelocations: [...response.data.data],
-            }));
+                blogannoncelocations: [...response.data]
+            }))
     }
 
     render() {
-        const {blogannoncelocations} = this.state;
-        const mapAnnoncelocations = blogannoncelocations.length ? (
+        const {blogannoncelocations,blogannonceItem} = this.state;
+        const mapAnnoncelocations = blogannoncelocations.length >= 0 ? (
             blogannoncelocations.map(item => {
                 return(
 
-                    <BlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
+                    <BlogannoncelocationList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser}/>
                 )
             })
         ):(
@@ -161,7 +330,7 @@ class BlogannoncelocationIndex extends Component {
         return (
             <>
 
-                <Helmet title="Conseils tout savoir sur les locations - Ivemo" />
+                <HelmetSite title={`Conseils tout savoir sur les locations - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 
@@ -287,6 +456,151 @@ class BlogannoncelocationIndex extends Component {
                                         </div>
                                     </div>
 
+
+                                    <div className="modal fade" id="addNew" tabIndex="-1" role="dialog" aria-labelledby="addNewLabel"
+                                         aria-hidden="true">
+                                        <div className="modal-dialog">
+                                            <div className="modal-content">
+                                                <div className="modal-header">
+                                                    <h5 className="modal-title"><b>Signaler des erreurs publicitaires</b></h5>
+                                                    <button type="button" className="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <Form role="form"  onSubmit={this.signalemessageItem}  acceptCharset="UTF-8">
+
+                                                    <div className="modal-body">
+
+                                                        <div className="card-body">
+
+                                                            <div className="alert alert-danger text-center" role="alert">
+                                                                <div className="container">
+                                                                    {blogannonceItem.title}
+                                                                </div>
+                                                            </div>
+
+                                                            <p className="category">Spécifie le type d'erreur</p>
+
+                                                            <div className="row">
+                                                                <div className="col-md-6">
+                                                                    <div className="form-check form-check-radio">
+                                                                        <label className="form-check-label">
+                                                                            <input className="form-check-input" type="radio"
+                                                                                   name="subject" id="subject"
+                                                                                   value="Mauvaise catégorie" onChange={this.handleCheckClick} checked={this.state.subject === "Mauvaise catégorie"}/>
+                                                                            <span className="form-check-sign"></span>
+                                                                            Mauvaise catégorie
+                                                                        </label>
+                                                                    </div>
+                                                                    <div className="form-check form-check-radio">
+                                                                        <label className="form-check-label">
+                                                                            <Input className="form-check-input" type="radio"
+                                                                                   name="subject" id="subject"
+                                                                                   value="Information incomplète" onChange={this.handleCheckClick} checked={this.state.subject === "Information incomplète"}/>
+                                                                            <span className="form-check-sign"></span>
+                                                                            Information incomplète
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div className="col-md-6">
+
+                                                                    <div className="form-check form-check-radio">
+                                                                        <label className="form-check-label">
+                                                                            <Input className="form-check-input" type="radio"
+                                                                                   name="subject" id="subject"
+                                                                                   value="Mauvaise redaction" onChange={this.handleCheckClick} checked={this.state.subject === "Mauvaise redaction"}/>
+                                                                            <span className="form-check-sign"></span>
+                                                                            Mauvaise redaction
+                                                                        </label>
+                                                                    </div>
+                                                                    <div className="form-check form-check-radio">
+                                                                        <label className="form-check-label">
+                                                                            <Input className="form-check-input" type="radio"
+                                                                                   name="subject" id="subject"
+                                                                                   value="Autre (précisez dans le commentaire)" onChange={this.handleCheckClick} checked={this.state.subject === "Autre (précisez dans le commentaire)"}/>
+                                                                            <span className="form-check-sign"></span>
+                                                                            Autre (précisez dans le commentaire)
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div className="row">
+                                                                <div className="input-group">
+                                                                    <div className="input-group-prepend">
+                                                        <span className="input-group-text">
+                                                            <i className="now-ui-icons users_circle-08"/></span>
+                                                                    </div>
+                                                                    <input id='full_name'
+                                                                           type='text'
+                                                                           required="required"
+                                                                           className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
+                                                                           name='full_name'
+                                                                           placeholder="Nom complet"
+                                                                           aria-label="Nom complet"
+                                                                           autoComplete="full_name"
+                                                                           value={this.state.full_name}
+                                                                           onChange={this.handleFieldChange}
+                                                                    />
+                                                                    {this.renderErrorFor('full_name')}
+                                                                </div>
+                                                            </div>
+
+                                                            <div className="row">
+                                                                <div className="input-group">
+                                                                    <div className="input-group-prepend">
+                                                        <span className="input-group-text">
+                                                            <i className="now-ui-icons ui-1_email-85"/></span>
+                                                                    </div>
+                                                                    <input id='email'
+                                                                           type='email'
+                                                                           required="required"
+                                                                           className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
+                                                                           name='email'
+                                                                           placeholder="Email"
+                                                                           aria-label="Email"
+                                                                           autoComplete="email"
+                                                                           value={this.state.email}
+                                                                           onChange={this.handleFieldChange}
+                                                                    />
+                                                                    {this.renderErrorFor('email')}
+                                                                </div>
+                                                            </div>
+                                                            <div className="row">
+
+                                                                <div className="input-group">
+                                                       <textarea name="message" value={this.state.message}
+                                                                 onChange={this.handleFieldChange}
+                                                                 placeholder={'Pourquoi signalez-vous cette article?'}
+                                                                 className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
+                                                                 id="message"
+                                                                 required="required"
+                                                                 rows="10" />
+                                                                    {this.renderErrorFor('message')}
+                                                                </div>
+                                                            </div>
+
+                                                            <div className="submit text-center">
+                                                                <button className="btn btn-primary btn-lg btn-block" type="submit">
+                                                                    <b>Signaler</b>
+                                                                </button>
+                                                            </div>
+
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </Form>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>

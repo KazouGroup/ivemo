@@ -113,8 +113,8 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -126,8 +126,8 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -148,7 +148,7 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
 
             <>
                 <Helmet>
-                    <title>{`${contactuser.subject || 'Messages contact annonces locations'}`} {`${$userIvemo.first_name}`} - Ivemo</title>
+                    <title>{`${contactuser.subject || 'Messages contact annonces locations'}`} {`${$userIvemo.first_name}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
@@ -286,11 +286,11 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
                                                                         </h6>
                                                                         <div className="card-header d-flex align-items-center">
                                                                             <div className="d-flex align-items-center">
-                                                                                <NavLink to={`/@${contactuser.annoncelocation.user.slug}/`}>
+                                                                                <NavLink to={`/po/${contactuser.annoncelocation.user.slug}/`}>
                                                                                     <img src={contactuser.annoncelocation.user.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                                                                 </NavLink>
                                                                                 <div className="mx-3">
-                                                                                    <NavLink to={`/@${contactuser.annoncelocation.user.slug}/`} className="text-dark font-weight-600 text-sm">{contactuser.annoncelocation.user.first_name}
+                                                                                    <NavLink to={`/po/${contactuser.annoncelocation.user.slug}/`} className="text-dark font-weight-600 text-sm">{contactuser.annoncelocation.user.first_name}
                                                                                         <small className="d-block text-muted"><b>{moment(contactuser.annoncelocation.created_at).format('LL')}</b></small>
                                                                                     </NavLink>
                                                                                 </div>
@@ -299,7 +299,7 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
                                                                             <div className="text-right mx-auto">
 
                                                                                 <UncontrolledTooltip placement="bottom" target="TooltipPhone">
-                                                                                    3426712192
+                                                                                    phone
                                                                                 </UncontrolledTooltip>
                                                                                 <Button className="btn btn-icon btn-sm btn-warning" id="TooltipPhone">
                                                                                     <i className="now-ui-icons tech_mobile"/>

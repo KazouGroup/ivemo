@@ -32,6 +32,10 @@
     'guest' => auth()->guest(),
     'authcheck' => auth()->check(),
      'url_site' => htmlspecialchars(config('app.url')),
+     'country' => htmlspecialchars(config('app.country')),
+     'country_sigle' => htmlspecialchars(config('app.country_sigle')),
+     'name_site' => htmlspecialchars(config('app.name')),
+     'phone_number' => htmlspecialchars(config('app.phone')),
     ]) !!}
 </script>
 
@@ -43,8 +47,8 @@
   <!-- CSS Files -->
   <link href="/assets/vendor/assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="/assets/vendor/assets/css/now-ui-kit.css?v=1.3.1" rel="stylesheet" />
-
-
+  <!-- Ivemo SCSS Files -->
+  <link href="/assets/user/assets/scss/ivemo.css" rel="stylesheet" />
 
 @section('style')
 @show

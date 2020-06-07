@@ -38,6 +38,6 @@ class ContactuserMail extends Mailable
     public function build()
     {
         return $this->to($this->emailTo)->from($this->emailFrom)
-            ->subject($this->emailSubject)->view('emails.test');
+            ->subject($this->emailSubject)->view('emails.mail_personal');
     }
 }

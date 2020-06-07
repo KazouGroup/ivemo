@@ -14,6 +14,7 @@ import Navlinknewblogannoncelocation from "../../../blog/blogannoncelocation/tre
 import Skeleton from "react-loading-skeleton";
 import BlogannoncePublicuserSkeleton from "../../../../inc/user/blog/BlogannoncePublicuserSkeleton";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
+import NavLinkPublicEmploymentUser from "../../employments/public/NavLinkPublicEmploymentUser";
 
 
 class PublicUserBlogannonceLocation extends Component {
@@ -65,8 +66,8 @@ class PublicUserBlogannonceLocation extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -114,7 +115,7 @@ class PublicUserBlogannonceLocation extends Component {
         return (
             <>
                 <Helmet>
-                    <title>Articles sur la locations {`${userbloglocationPublick.first_name || 'Profile'}`} - Ivemo</title>
+                    <title>Articles sur la locations {`${userbloglocationPublick.first_name || 'Profile'}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
@@ -132,18 +133,28 @@ class PublicUserBlogannonceLocation extends Component {
 
                                 <div className="card-body">
 
-                                    <h1 className="title">{userbloglocationPublick.first_name || <Skeleton width={300} />}</h1>
-                                    {userbloglocationPublick.slug ?
-                                        <Link to={`/@${userbloglocationPublick.slug}/`} className="text-white">
+                                    <h1 className="title">{userbloglocationPublick.first_name || ""}</h1>
+
+                                    {userbloglocationPublick.status_profile === 0 ?
+                                        <Link to={`/user/${userbloglocationPublick.slug}/`} className="text-white">
+                                            <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userbloglocationPublick.first_name}</b>
+                                        </Link>
+                                    :
+                                     <>
+                                         {userbloglocationPublick.slug ?
+                                        <Link to={`/pro/${userbloglocationPublick.slug}/`} className="text-white">
                                             <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userbloglocationPublick.first_name}</b>
                                         </Link>
                                         :
-                                        <Skeleton width={270}/>
-                                    }
+                                        <></>
+                                            }
+                                     </>
 
-                                    {userbloglocationPublick.blogannoncelocations_count >= 0 ?
+                                    }
+                                   {userbloglocationPublick.blogannoncelocations_count >= 0 ?
                                         <h5><b>{userbloglocationPublick.blogannoncelocations_count}</b> {userbloglocationPublick.blogannoncelocations_count > 1 ? "articles" : "article"} posté par {userbloglocationPublick.first_name} sur la location</h5>
-                                    : <h5> <Skeleton width={200}/></h5>}
+                                    :  <></>}
+                                    
 
                                 </div>
 
@@ -169,69 +180,116 @@ class PublicUserBlogannonceLocation extends Component {
                                             </NavLink>
                                         </div> */}
 
-
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                            <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingOne">
-                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <b>Annonces de {userbloglocationPublick.first_name}</b>
-                                                                    </a>
-                                                                </div>
-
-                                                                <NavLinkPublicAnnonceUser {...this.props} {...userbloglocationPublick}/>
-
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         {/* Ici c'est le component la creation*/}
                                         <Navlinknewblogannoncelocation/>
 
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                            <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingTwo">
-                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                        <b>Articles de {userbloglocationPublick.first_name}</b>
-                                                                    </a>
+                                        {userbloglocationPublick.status_profile === 0 ?
+                                              <div className="card">
+                                                 <div className="card-body">
+                                                     <div className="row">
+                                                         <div className="col-md-12">
+                                                             <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                                 <div className="card card-plain">
+                                                                     <div className="card-header" role="tab" id="headingTwo">
+                                                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                             <b>Articles de {userbloglocationPublick.first_name}</b>
+                                                                         </a>
+                                                                     </div>
+
+                                                                     <NavLinkPublicBlogannoncesUser {...this.props} {...userbloglocationPublick}/>
+
+                                                                 </div>
+
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                            :
+                                            <>
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                                    <div className="card card-plain">
+                                                                        <div className="card-header" role="tab" id="headingOne">
+                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                                <b>Annonces de {userbloglocationPublick.first_name}</b>
+                                                                            </a>
+                                                                        </div>
+
+                                                                        <NavLinkPublicAnnonceUser {...this.props} {...userbloglocationPublick}/>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                                    <div className="card card-plain">
+                                                                        <div className="card-header" role="tab" id="headingTree">
+                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
+                                                                                <b>Annonces de {userbloglocationPublick.first_name}</b>
+                                                                            </a>
+                                                                        </div>
+
+                                                                        <NavLinkPublicEmploymentUser {...this.props} {...userbloglocationPublick}/>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                                    <div className="card card-plain">
+                                                                        <div className="card-header" role="tab" id="headingTwo">
+                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                                <b>Articles de {userbloglocationPublick.first_name}</b>
+                                                                            </a>
+                                                                        </div>
+
+                                                                        <NavLinkPublicBlogannoncesUser {...this.props} {...userbloglocationPublick}/>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+
+                                                                <div className="card-header text-center">
+                                                                    <h4 className="card-title"><b>Contacter {userbloglocationPublick.first_name}</b></h4>
                                                                 </div>
 
-                                                                <NavLinkPublicBlogannoncesUser {...this.props} {...userbloglocationPublick}/>
+                                                                <FormContactProfileAccountUser {...this.props} {...userbloglocationPublick}/>
 
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-
-                                                        <div className="card-header text-center">
-                                                            <h4 className="card-title"><b>Contacter {userbloglocationPublick.first_name}</b></h4>
-                                                        </div>
-
-                                                        <FormContactProfileAccountUser {...this.props}/>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            </>
+                                        }
 
                                     </div>
 
@@ -260,36 +318,38 @@ class PublicUserBlogannonceLocation extends Component {
                                             </div>
                                         )}
 
-                                        <div className="card">
-                                            <div className="card-body">
+                                        {userbloglocationPublick.status_profile === 1 && (
+                                            <>
+                                            <div className="card">
+                                                <div className="card-body">
 
-                                                <div className="card-header text-center">
-                                                    <h4 className="card-title"><b>Contacter {userbloglocationPublick.first_name}</b></h4>
+                                                    <div className="card-header text-center">
+                                                        <h4 className="card-title"><b>Contacter {userbloglocationPublick.first_name}</b></h4>
+                                                    </div>
+
+                                                    <FormContactProfileAccountUser {...this.props} {...userbloglocationPublick}/>
+
                                                 </div>
-
-                                                <FormContactProfileAccountUser {...this.props}/>
-
                                             </div>
-                                        </div>
 
 
-                                        <div className="card card-raised card-form-horizontal">
+                                            <div className="card card-raised card-form-horizontal">
 
-                                            <div className="card-body">
+                                                <div className="card-body">
 
-                                                <div className="card-header text-center">
-                                                    <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
-                                                    <p className="card-title">
-                                                        Abonnez-vous à la newsletter de <b>{userbloglocationPublick.first_name}</b> afin d'être notifié des mises à jour
-                                                    </p>
+                                                    <div className="card-header text-center">
+                                                        <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
+                                                        <p className="card-title">
+                                                            Abonnez-vous à la newsletter de <b>{userbloglocationPublick.first_name}</b> afin d'être notifié des mises à jour
+                                                        </p>
+                                                    </div>
+
+                                                    <FormNewletterSubcribeProfileAccountUser {...this.props} />
+
                                                 </div>
-
-                                                <FormNewletterSubcribeProfileAccountUser {...this.props}/>
-
                                             </div>
-                                        </div>
-
-
+                                            </>
+                                        )}
                                     </div>
 
                                 </div>

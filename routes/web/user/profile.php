@@ -1,19 +1,43 @@
 <?php
 
-Route::get(
-    'api/profile_account',
-    'ProfileController@api_profile_account'
-)->name('api_profile_account.site');
+Route::group(['prefix' => 'api'], function () {
 
-Route::get(
-    'api/user/{profile}',
-    'ProfileController@api_user_profile_account'
-)->name('api_user_profile_data.site');
+    Route::get(
+        'profile_account',
+        'ProfileController@api_profile_account'
+    )->name('api_profile_account.site');
 
-Route::get(
-    'api/profile/{profile}/account',
-    'ProfileController@api_profile_add_info_account'
-)->name('api_profile_add_info_account.site');
+    Route::get(
+        'user/{profile}',
+        'ProfileController@api_user_profile_account'
+    )->name('api_user_profile_data.site');
+
+    Route::get(
+        'profile/{profile}/account',
+        'ProfileController@api_profile_add_info_account'
+    )->name('api_profile_add_info_account.site');
+
+    Route::get(
+        'personal_reservations',
+        'ProfileController@apipersonalreservations'
+    )->name('api.profile_personal_reservations.site');
+
+    Route::get(
+        'annonces_reservations_booked',
+        'ProfileController@apiannoncereservationbookeds'
+    )->name('api.annonces_bookeds.site');
+
+    Route::get(
+        'profile/{user}/personal_settings/user_favorites',
+        'ProfileController@apiuserfavorites'
+    )->name('api.userfavorites');
+
+    Route::get(
+        'user_profile/{user}',
+        'ProfileController@api_user_account'
+    )->name('api_user_profile_account.site');
+
+});
 
 Route::get(
     'profile/account',
@@ -33,22 +57,13 @@ Route::delete(
 Route::get(
     'profile/{profile}/account',
     'ProfileController@profile_add_info_account'
-)->name('profile_add_info_account.site');
+)->name('profile_profile_account_account.site');
 
 Route::put(
     'profile/{profile}',
     'ProfileController@profile_add_info_account_update'
 )->name('profile_add_info_account.update');
 
-Route::get(
-    'api/personal_reservations',
-    'ProfileController@apipersonalreservations'
-)->name('api.profile_personal_reservations.site');
-
-Route::get(
-    'api/annonces_reservations_booked',
-    'ProfileController@apiannoncereservationbookeds'
-)->name('api.annonces_bookeds.site');
 
 Route::get(
     'profile/personal_reservations',
@@ -59,11 +74,6 @@ Route::get(
     'profile/annonces_reservations_booked',
     'ProfileController@annonces_reservations_booked'
 )->name('annonces_reservations_booked.site');
-
-Route::get(
-    'api/user_profile/{user}',
-    'ProfileController@api_user_account'
-)->name('api_user_profile_account.site');
 
 Route::get(
     'profile/annonces_reservations_booked/confirmed/{id}',

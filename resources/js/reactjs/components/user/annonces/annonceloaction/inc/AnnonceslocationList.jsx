@@ -9,11 +9,8 @@ class AnnonceslocationList extends Component {
 
 
     getDescription() {
-        const md = new Remarkable();
-        return { __html: md.render(this.props.description.length > 80 ? this.props.description.substring(0, 80) + "..." : this.props.description) };
-    }
-    numberWithCommas() {
-        return this.props.price.toLocaleString();
+
+        return { __html: (this.props.description.length > 80 ? this.props.description.substring(0, 80) + "..." : this.props.description) };
     }
     render() {
         return (
@@ -24,6 +21,7 @@ class AnnonceslocationList extends Component {
                         <div className="card card-plain card-blog">
                             <div className="row">
                                 <div className="col-md-5">
+
                                     <div className="card-image">
                                         <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
                                             <ol className="carousel-indicators">
@@ -45,7 +43,9 @@ class AnnonceslocationList extends Component {
 
                                         </div>
                                     </div>
+
                                     <div className="text-center">
+
                                         {!$guest && (
                                             <>
                                                 {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
@@ -70,10 +70,7 @@ class AnnonceslocationList extends Component {
                                             </>
                                         )}
 
-                                        <button type="button" rel="tooltip"
-                                                className="btn btn-primary btn-icon btn-sm">
-                                            <i className="now-ui-icons ui-2_chat-round"/>
-                                        </button>
+
                                     </div>
 
 
@@ -108,11 +105,11 @@ class AnnonceslocationList extends Component {
                                         </NavLink>
                                     </div>
                                     <div className="text-right ml-auto">
-                                        <h5 className="text-success"><b>{this.numberWithCommas()} <small>FCFA/mois</small></b></h5>
+                                        <h5 className="text-success"><b>{this.props.price.formatMoney(2,'.',',') || "0"} <small>FCFA/mois</small></b></h5>
                                     </div>
                                     <div className="row">
                                         <div className="col-md-5 col-6">
-                                            <h6 className="text-dark">{this.props.pieces} p . {this.props.rooms && (<>{this.props.rooms} ch</>)}. {this.props.surface && (<>{this.props.surface} m<sup>2</sup></>)}</h6>
+                                            <h6 className="text-dark">{this.props.pieces > 0 ?<>{this.props.pieces} p.</>:null } {this.props.rooms > 0 ? <>{this.props.rooms} ch.</>:null} {this.props.surface > 0 ? <>{this.props.surface} m<sup>2</sup></>:null}</h6>
                                         </div>
                                         <div className="col-md-7 col-6">
                                             <NavLink to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/`}>
@@ -126,7 +123,7 @@ class AnnonceslocationList extends Component {
                                     </div>
                                     <h6 className="card-title">
                                         <Link to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.slug}/`}>
-                                            {this.props.title}
+                                            {this.props.title.length > 90 ? this.props.title.substring(0, 90) + "..." : this.props.title}
                                         </Link>
                                     </h6>
                                     <Link to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.slug}/`}>
@@ -134,11 +131,11 @@ class AnnonceslocationList extends Component {
                                     </Link>
                                     <div className="card-header d-flex align-items-center">
                                         <div className="d-flex align-items-center">
-                                            <NavLink to={`/@${this.props.user.slug}/`}>
+                                            <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`}>
                                                 <img src={this.props.user.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                             </NavLink>
                                             <div className="mx-3">
-                                                <NavLink to={`/@${this.props.user.slug}/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
+                                                <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
                                                     <small className="d-block text-muted"><b>{moment(this.props.created_at).format('LL')}</b></small>
                                                 </NavLink>
                                             </div>
@@ -146,28 +143,28 @@ class AnnonceslocationList extends Component {
 
                                         <div className="text-right mx-auto">
 
-                                            <UncontrolledTooltip placement="bottom" target="TooltipPhone">
-                                                3426712192
-                                            </UncontrolledTooltip>
-                                            <Button className="btn btn-icon btn-sm btn-warning" id="TooltipPhone">
-                                                <i className="now-ui-icons tech_mobile"/>
+                                            <Button className="btn btn-icon btn-sm btn-warning" onClick={() => this.props.contactUser(this.props)} title={`Contacter ${this.props.user.first_name}`}>
+                                                <i className="far fa-envelope"/>
                                             </Button>
+                                            <button type="button" title="Signaler" onClick={() => this.props.signalerUser(this.props)}
+                                                className="btn btn-instagram btn-icon btn-sm">
+                                                <i className="far fa-flag"></i>
+                                            </button>
+                                            {/*
                                             <NavLink to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.slug}/`} className="btn btn-icon btn-sm btn-primary">
                                                 <i className="now-ui-icons location_pin"/>
                                             </NavLink>
-
+                                            */}
                                             {!$guest && (
                                                 <>
                                                     {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
                                                         <>
-                                                            <NavLink to={`/annonces/`} className="btn btn-sm btn-info btn-icon btn-sm" rel="tooltip" title="Editer" data-placement="bottom">
+
+                                                            <NavLink to={`/annonce_location/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
                                                                 <i className="now-ui-icons ui-2_settings-90"/>
                                                             </NavLink>
-                                                            <UncontrolledTooltip placement="bottom" target="TooltipDelete">
-                                                                Supprimer cette annonce
-                                                            </UncontrolledTooltip>
                                                             <Button
-                                                                className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} id="TooltipDelete">
+                                                                className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} title="Supprimer cette annonce">
                                                                 <i className="now-ui-icons ui-1_simple-remove"/>
                                                             </Button>{" "}
                                                         </>

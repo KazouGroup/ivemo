@@ -5,17 +5,19 @@ import NavUserSite from "../../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../../../../configurations/inc/NavlinkconfigurationUser";
-import BlogannoncereservationList from "../../../../blog/blogannoncereservation/BlogannoncereservationList";
 import Navblogannoncereservationsbyuser
     from "../../../../blog/blogannoncereservation/inc/Navblogannoncereservationsbyuser";
 import LinkValicationEmail from "../../../../../inc/user/LinkValicationEmail";
+import BlogannonceListSkeleton from "../../../../../inc/user/blog/BlogannonceListSkeleton";
+import PrivateUserBlogannoncereservationList
+    from "../../../../blog/blogannoncereservation/inc/PrivateUserBlogannoncereservationList";
 
 
 class PrivateUserBlogannonceReservationCategoryreservation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userblogannoncereservationsPrivate:{blogannoncereservations:[]},
+            userblogannoncereservationsPrivate:{blogannoncereservations:{categoryannoncereservation:[],user:[]}},
             visiable: 20,
         };
 
@@ -62,8 +64,8 @@ class PrivateUserBlogannonceReservationCategoryreservation extends Component {
                                 align: 'center'
                             },
                             animate: {
-                                enter: "animated fadeInUp",
-                                exit: "animated fadeOutDown"
+                                enter: "animate__animated animate__fadeInUp",
+                                exit: "animate__animated animate__fadeOutDown"
                             },
                         });
                     /** End alert ***/
@@ -73,8 +75,8 @@ class PrivateUserBlogannonceReservationCategoryreservation extends Component {
                     $.notify("Ooop! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -114,8 +116,8 @@ class PrivateUserBlogannonceReservationCategoryreservation extends Component {
                                 align: 'center'
                             },
                             animate: {
-                                enter: "animated fadeInUp",
-                                exit: "animated fadeOutDown"
+                                enter: "animate__animated animate__fadeInUp",
+                                exit: "animate__animated animate__fadeOutDown"
                             },
                         });
                     /** End alert ***/
@@ -125,8 +127,8 @@ class PrivateUserBlogannonceReservationCategoryreservation extends Component {
                     $.notify("Ooop! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -167,8 +169,8 @@ class PrivateUserBlogannonceReservationCategoryreservation extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -179,8 +181,8 @@ class PrivateUserBlogannonceReservationCategoryreservation extends Component {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -201,19 +203,19 @@ class PrivateUserBlogannonceReservationCategoryreservation extends Component {
 
     render() {
         const {userblogannoncereservationsPrivate,visiable} = this.state;
-        const mapBlogannoncereservations = userblogannoncereservationsPrivate.blogannoncereservations.length ? (
+        const mapBlogannoncereservations = userblogannoncereservationsPrivate.blogannoncereservations.length >= 0 ? (
             userblogannoncereservationsPrivate.blogannoncereservations.slice(0,visiable).map(item => {
                 return(
-                    <BlogannoncereservationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
+                    <PrivateUserBlogannoncereservationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
                 )
             })
         ):(
-            <></>
+            <BlogannonceListSkeleton/>
         );
         return (
             <>
                 <Helmet>
-                    <title>Articles sur la locations {`${$userIvemo.first_name || 'Profile'}`} - Ivemo</title>
+                    <title>Articles sur la locations {`${$userIvemo.first_name || 'Profile'}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
@@ -261,11 +263,7 @@ class PrivateUserBlogannonceReservationCategoryreservation extends Component {
                                     </div>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
-                                        <div className="submit text-left">
-                                            <Link to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_reservations/`} className="btn btn-neutral btn-sm">
-                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos articles</b>
-                                            </Link>
-                                        </div>
+                                       
                                         {!$guest &&(
                                             <>
                                                 {!$userIvemo.email_verified_at &&(
@@ -273,6 +271,12 @@ class PrivateUserBlogannonceReservationCategoryreservation extends Component {
                                                 )}
                                             </>
                                         )}
+
+                                        <div className="submit text-left">
+                                            <Link to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_reservations/`} className="btn btn-neutral btn-sm">
+                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos articles</b>
+                                            </Link>
+                                        </div>
 
                                         {mapBlogannoncereservations}
 

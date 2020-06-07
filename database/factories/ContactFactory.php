@@ -22,6 +22,6 @@ $factory->define(contact::class, function (Faker $faker) {
         'email' => $faker->email,
         'subject' => $faker->text(50),
         'message' => $faker->paragraph,
-        'created_at' => $faker->dateTime,
+        //'created_at' => $faker->dateTime,
     ];
 });

@@ -1,6 +1,6 @@
-import React, {Component} from "react";
-import {Link, NavLink} from 'react-router-dom';
-import {Button} from "reactstrap";
+import React, { Component } from "react";
+import { Link, NavLink } from 'react-router-dom';
+import { Button } from "reactstrap";
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 
@@ -93,8 +93,8 @@ class AnnonceBienAvendreCreate extends Component {
         return (
             <div className="about-us sidebar-collapse">
 
-                <nav className="navbar ivemoNarbarCustomisation navbar-expand-lg bg-primary">
-                    <NavUserSite/>
+                <nav className="navbar navbar-expand-lg bg-primary">
+                    <NavUserSite />
                 </nav>
 
                 <div className="wrapper">
@@ -102,7 +102,7 @@ class AnnonceBienAvendreCreate extends Component {
                     <div className="main main-raised">
 
                         <div className="container">
-                            <br/>
+                            <br />
 
                             <form role="form" id="contact-form" onSubmit={this.createItem} acceptCharset="UTF-8">
 
@@ -113,14 +113,14 @@ class AnnonceBienAvendreCreate extends Component {
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="card-title">
-                                                    <b>Contact de votre agence</b>
+                                                    <b>Contacte de votre agence</b>
                                                 </div>
                                                 <div className="card-header d-flex align-items-center">
                                                     <div className="d-flex align-items-center">
                                                         <NavLink to={`/annonce/show/`}>
                                                             <img src="/assets/vendor/assets/img/bg1.jpg"
-                                                                 style={{height: "40px", width: "80px"}} alt=""
-                                                                 className="avatar"/>
+                                                                 style={{ height: "40px", width: "80px" }} alt=""
+                                                                 className="avatar" />
                                                         </NavLink>
                                                         <div className="mx-3">
                                                             <NavLink to={`/annonce/show/`}
@@ -145,7 +145,7 @@ class AnnonceBienAvendreCreate extends Component {
                                                 <div className="card-title">
                                                     <i className="now-ui-icons location_pin"></i> <b>91 RUE DU FAUBOURG
                                                     SAINT HONORE 75008 PARIS 8EME</b>
-                                                    <br/>
+                                                    <br />
                                                     <div className="container">
                                                         <div className="row">
                                                             <div className="col-md-6 col-6">
@@ -165,7 +165,7 @@ class AnnonceBienAvendreCreate extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <hr/>
+                                                <hr />
                                                 <div id="accordion" role="tablist" aria-multiselectable="true"
                                                      className="card-collapse">
                                                     <div className="card card-plain">
@@ -206,7 +206,7 @@ class AnnonceBienAvendreCreate extends Component {
                                                                                 />
                                                                                 {this.renderErrorFor('last_name')}
                                                                             </div>
-                                                                            <label htmlFor="title">Quelle est le type de
+                                                                            <label htmlFor="title">Quel est le type de
                                                                                 bien ?</label>
                                                                             <div className="form-group">
                                                                                 <select name={'city_id'}
@@ -216,13 +216,13 @@ class AnnonceBienAvendreCreate extends Component {
                                                                                         onChange={this.handleFieldChange}>
                                                                                     <option value=""
                                                                                             disabled>Selectionez votre
-                                                                                        votre type be bien
+                                                                                        type be bien
                                                                                     </option>
                                                                                     <option value="">Appartement
                                                                                     </option>
                                                                                     <option value="">Maison</option>
                                                                                     <option value="">Terrain</option>
-                                                                                    <option value="">Voituve</option>
+                                                                                    <option value="">Voiture</option>
 
                                                                                 </select>
                                                                                 {this.renderErrorFor('email')}
@@ -244,7 +244,7 @@ class AnnonceBienAvendreCreate extends Component {
                                                             <a data-toggle="collapse" data-parent="#accordion"
                                                                href="#collapseOne" aria-expanded="true"
                                                                aria-controls="collapseOne">
-                                                                <b>Caracteristique du bien uniquement pour
+                                                                <b>Caractéristique du bien uniquement pour
                                                                     (Appartement,Maison,Terrain)</b>
                                                                 <i className="now-ui-icons arrows-1_minimal-down"></i>
                                                             </a>
@@ -315,7 +315,7 @@ class AnnonceBienAvendreCreate extends Component {
                                                                                 </div>
                                                                                 <small>*optionnel: les champs ne sont
                                                                                     pas obligatoires vous avez le choix
-                                                                                    de le remplire ou pas</small>
+                                                                                    de les remplire ou pas</small>
                                                                             </div>
 
                                                                         </div>
@@ -401,7 +401,7 @@ class AnnonceBienAvendreCreate extends Component {
                                                                                           placeholder={'Ex: Ensoleillé toute la journée, profitez d\'un emplacement idéal proche du marché, convivial et animé. Le salon vous ravira par ses volumes accueillants...'}
                                                                                           className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
                                                                                           id="message"
-                                                                                          rows="10"/>
+                                                                                          rows="10" />
                                                                                 {this.renderErrorFor('message')}
                                                                             </div>
 
@@ -500,11 +500,9 @@ class AnnonceBienAvendreCreate extends Component {
 
                         </div>
 
-
                     </div>
 
-
-                    <FooterBigUserSite/>
+                    <FooterBigUserSite />
                 </div>
             </div>
         )

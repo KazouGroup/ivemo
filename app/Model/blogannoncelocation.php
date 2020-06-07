@@ -2,13 +2,22 @@
 
 namespace App\Model;
 
+use App\Model\favorite\favoriteblogannoncelocation;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\Activitylog\Traits\LogsActivity;
 
-class blogannoncelocation extends Model
+class blogannoncelocation extends Model implements Auditable
 {
+    use AuditableTrait,LogsActivity;
+
     protected $guarded = [];
+
+    protected static $logAttributes = ['title','red_time','ip','status','status_admin','member_id'];
 
     protected  $table = 'blogannoncelocations';
 
@@ -23,10 +32,9 @@ class blogannoncelocation extends Model
                 $model->slugin = $myslug;
             }
         });
+
         static::updating(function($model){
-            if (auth()->check()){
-                $model->user_id = auth()->id();
-            }
+            $model->ip = request()->ip();
         });
     }
 
@@ -37,7 +45,12 @@ class blogannoncelocation extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(user::class,'user_id');
+    }
+
+    public function member()
+    {
+        return $this->belongsTo(user::class,'member_id');
     }
 
     public function categoryannoncelocation()
@@ -45,7 +58,10 @@ class blogannoncelocation extends Model
         return $this->belongsTo(categoryannoncelocation::class,'categoryannoncelocation_id');
     }
 
-
+    public function visits()
+    {
+        return visits($this);
+    }
 
     protected $casts = [
         'status' => 'boolean',
@@ -69,4 +85,12 @@ class blogannoncelocation extends Model
 
         ];
     }
+
+    public function bookmarked()
+    {
+        return (bool) favoriteblogannoncelocation::where('user_id', Auth::guard('web')->id())
+            ->where('blogannoncelocation_id', $this->id)
+            ->first();
+    }
+
 }

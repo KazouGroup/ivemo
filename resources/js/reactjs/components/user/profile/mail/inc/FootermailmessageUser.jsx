@@ -15,7 +15,7 @@ class FootermailmessageUser extends Component {
         return (
             <>
                 <div className="copyright text-center">
-                    Copyright © 2020 - {new Date().getFullYear()}, Ivemo All Rights Reserved.
+                    Copyright © 2020 - {new Date().getFullYear()}, {$name_site} All Rights Reserved.
                 </div>
             </>
 

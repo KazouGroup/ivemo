@@ -5,16 +5,17 @@ import NavUserSite from "../../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../../../../configurations/inc/NavlinkconfigurationUser";
-import BlogannonceventeList from "../../../../blog/blognnoncevente/BlogannonceventeList";
 import Navblogannonceventesbyuser from "../../../../blog/blognnoncevente/inc/Navblogannonceventesbyuser";
 import LinkValicationEmail from "../../../../../inc/user/LinkValicationEmail";
+import BlogannonceListSkeleton from "../../../../../inc/user/blog/BlogannonceListSkeleton";
+import PrivateUserBlogannonceventeList from "../../../../blog/blognnoncevente/inc/PrivateUserBlogannonceventeList";
 
 
 class PrivateUserBlogannonceVente extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userblogannonceventesPrivate:{blogannonceventes:[]},
+            userblogannonceventesPrivate:{blogannonceventes:{categoryannoncevente:[],user:[]}},
             visiable: 20,
         };
 
@@ -51,7 +52,7 @@ class PrivateUserBlogannonceVente extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette articles est desormais visible aux utilisateurs",
+                            message: "Cette articles est visible aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -61,8 +62,8 @@ class PrivateUserBlogannonceVente extends Component {
                                 align: 'center'
                             },
                             animate: {
-                                enter: "animated fadeInUp",
-                                exit: "animated fadeOutDown"
+                                enter: "animate__animated animate__fadeInUp",
+                                exit: "animate__animated animate__fadeOutDown"
                             },
                         });
                     /** End alert ***/
@@ -72,8 +73,8 @@ class PrivateUserBlogannonceVente extends Component {
                     $.notify("Ooop! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -113,8 +114,8 @@ class PrivateUserBlogannonceVente extends Component {
                                 align: 'center'
                             },
                             animate: {
-                                enter: "animated fadeInUp",
-                                exit: "animated fadeOutDown"
+                                enter: "animate__animated animate__fadeInUp",
+                                exit: "animate__animated animate__fadeOutDown"
                             },
                         });
                     /** End alert ***/
@@ -124,8 +125,8 @@ class PrivateUserBlogannonceVente extends Component {
                     $.notify("Ooop! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -166,8 +167,8 @@ class PrivateUserBlogannonceVente extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -178,8 +179,8 @@ class PrivateUserBlogannonceVente extends Component {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -199,19 +200,19 @@ class PrivateUserBlogannonceVente extends Component {
 
     render() {
         const {userblogannonceventesPrivate,visiable} = this.state;
-        const mapBlogannoncereservations = userblogannonceventesPrivate.blogannonceventes.length ? (
+        const mapBlogannoncereservations = userblogannonceventesPrivate.blogannonceventes.length >= 0 ? (
             userblogannonceventesPrivate.blogannonceventes.slice(0,visiable).map(item => {
                 return(
-                    <BlogannonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
+                    <PrivateUserBlogannonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
                 )
             })
         ):(
-            <></>
+            <BlogannonceListSkeleton/>
         );
         return (
             <>
                 <Helmet>
-                    <title>Articles sur la locations {`${$userIvemo.first_name || 'Profile'}`} - Ivemo</title>
+                    <title>Articles sur la locations {`${$userIvemo.first_name || 'Profile'}`} - {$name_site}</title>
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">

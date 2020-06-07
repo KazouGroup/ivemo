@@ -38,7 +38,17 @@ Route::get(
 Route::get(
     'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}/{annoncelocation}',
     'AnnoncelocationController@annoncelocationbycategoryannoncelocationslug'
-)->name('annoncelocationbycategoryannoncereservationslug_site');
+)->name('annoncelocationbycategoryannoncereservationslug.site');
+
+Route::get(
+    'annonces_locations_admin_active/{id}',
+    'AnnoncelocationController@adminactivated'
+)->name('annonces_locations_admin_active.dashboard');
+
+Route::get(
+    'annonces_locations_admin_unactive/{id}',
+    'AnnoncelocationController@adminunactivated'
+)->name('annonces_locations_admin_unactivated.dashboard');
 
 Route::get(
     'annonces_locations_active/{id}',
@@ -54,3 +64,29 @@ Route::delete(
     'annonces_locations_delete/{id}',
     'AnnoncelocationController@destroy'
 )->name('annonces_locations_delete.site');
+
+
+Route::get(
+    'api/annonce_location/{annoncetype}/{annoncelocation:slugin}',
+    'AnnoncelocationController@apiannoncelocationsbyannoncetypebyannoncelocation'
+)->name('api.annoncelocationsbyannoncetypebyannoncelocation_site');
+
+Route::get(
+    'annonce_location/{annoncetype}/{annoncelocation:slugin}/edit',
+    'AnnoncelocationController@edit'
+)->name('annoncelocationsedit_site');
+
+Route::put(
+    'annonce_location/{annoncetype}/{annoncelocation:slugin}',
+    'AnnoncelocationController@update'
+)->name('annoncelocationsupdate_site');
+
+Route::get(
+    'annonce_location/{annoncetype}/new',
+    'AnnoncelocationController@create'
+)->name('annoncelocationsnew_site');
+
+Route::post(
+    'annonce_location/{annoncetype}/new',
+    'AnnoncelocationController@store'
+)->name('annoncelocationsstore_site');

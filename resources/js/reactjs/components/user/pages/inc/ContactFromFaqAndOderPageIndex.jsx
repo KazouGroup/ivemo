@@ -61,7 +61,7 @@ class ContactFromFaqAndOderPageIndex extends Component {
             .then(() => {
 
                 $.notify({
-                        message: `Votre message a été bien envoyé chez Ivemo`
+                        message: `Votre message a été bien envoyé chez ${$name_site}`
                     },
                     {
                         allow_dismiss: false,
@@ -117,7 +117,7 @@ class ContactFromFaqAndOderPageIndex extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-8 mr-auto ml-auto">
-                        <h3 className="text-center title">Vous n'avez trouvé ce que vous cherchier?</h3>
+                        <h3 className="text-center title">Vous n'avez trouvé ce que vous cherchez?</h3>
                         <h6 className="text-center description">Laissez nous un message pour avoir une reponse dans les brefs delais</h6>
                         <form className="contact-form" onSubmit={this.sendmessageItem} acceptCharset="UTF-8">
                             <div className="row">

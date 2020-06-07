@@ -11,16 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 
 /** Dashboard */
 require(__DIR__ . DIRECTORY_SEPARATOR . 'web' . DIRECTORY_SEPARATOR . 'index.php');
 
 /** Auth */
+Route::mixin(new \Laravel\Ui\AuthRouteMethods());
 Auth::routes(['verify' => true]);
 
 
+Route::get('/', 'HomeController@welcome')->name('welcome');
 Route::get('/home', 'HomeController@index')->name('home');

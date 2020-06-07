@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import {Button, Navbar, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
@@ -8,8 +7,10 @@ import FormcontactuseronlocationShow from "./inc/FormcontactuseronlocationShow";
 import BlogannoncelocationIntesseAnnonseShow from "../../blog/blogannoncelocation/BlogannoncelocationIntesseAnnonseShow";
 import Swal from "sweetalert2";
 import AnnoncelocationInteresse from "./AnnoncelocationInteresse";
-import ProfileForallAnnonceShow from "../ProfileForallAnnonceShow";
 import Skeleton from "react-loading-skeleton";
+import ProfileForallAnnoncelocationShow from "./inc/ProfileForallAnnoncelocationShow";
+import Navlinknewannoncelocation from "./treatment/Navlinknewannoncelocation";
+import HelmetSite from "../../../inc/user/HelmetSite";
 
 
 class Annoncelocationbycategorycityshow extends Component {
@@ -20,6 +21,23 @@ class Annoncelocationbycategorycityshow extends Component {
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
+    }
+    copyToClipboard(){
+        navigator.clipboard.writeText(window.location.toString())
+        $.notify({
+            message: "Lien copié correctement avec succès",
+        },{
+            allow_dismiss: false,
+            type: 'info',
+            placement: {
+                from: 'top',
+                align: 'center'
+            },
+            animate: {
+                enter: "animate__animated animate__fadeInDown",
+                exit: "animate__animated animate__fadeOutUp"
+            },
+        });
     }
 
     unactiveItem(id){
@@ -53,19 +71,19 @@ class Annoncelocationbycategorycityshow extends Component {
                                 align: 'center'
                             },
                             animate: {
-                                enter: "animated fadeInUp",
-                                exit: "animated fadeOutDown"
+                                enter: "animate__animated animate__fadeInUp",
+                                exit: "animate__animated animate__fadeOutDown"
                             },
                         });
                     /** End alert ***/
-                    this.props.history.push("/profile/"+ $userIvemo.slug +"/personal_settings/annonces_locations/");
+                    this.props.history.push("/annonces_locations/"+ this.props.match.params.annoncetype +"/");
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -77,7 +95,7 @@ class Annoncelocationbycategorycityshow extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            text: "êtes-vous sûr de vouloir executer cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -96,7 +114,7 @@ class Annoncelocationbycategorycityshow extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec success'
+                            message: 'Annonce suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -106,8 +124,8 @@ class Annoncelocationbycategorycityshow extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -118,8 +136,8 @@ class Annoncelocationbycategorycityshow extends Component {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -140,11 +158,14 @@ class Annoncelocationbycategorycityshow extends Component {
     componentDidMount() {
         this.loadItems();
     }
+    getDescription(annoncelocation) {
+        return { __html: (annoncelocation.description) };
+    }
     render() {
         const {annoncelocation} = this.state;
         return (
             <>
-                <Helmet title={`${annoncelocation.title || "Ivemo"} - Ivemo`}/>
+                <HelmetSite title={`${annoncelocation.title || $name_site} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 
@@ -226,50 +247,30 @@ class Annoncelocationbycategorycityshow extends Component {
 
                                                 <div className="text-right ml-auto">
                                                     {annoncelocation.price ?
-                                                        <h5 className="text-success"><b>{annoncelocation.price} <small>FCFA/mois</small></b></h5>
+                                                        <h5 className="text-success"><b>{annoncelocation.price.formatMoney(2,'.',',')} <small>FCFA/mois</small></b></h5>
                                                         :
                                                         <h5 className="text-success"><b><Skeleton width={150} /></b></h5>
                                                     }
                                                 </div>
                                             </div>
 
-
-
                                         </div>
 
                                         <div className="card">
                                             <div className="card-body">
                                                 <h6 className="card-title">
-                                                    Description interieur
+                                                    Description
                                             </h6>
-                                                <span>Eres' daring 'Grigri Fortune' swimsuit has
-                                                    the fit and coverage of a bikini in a one-piece silhouette.
-                                                    This fuchsia style is crafted from the label's sculpting peau
-                                                    douce fabric and has flattering
-                                                    cutouts through the torso and back. Wear yours with mirrored sunglasses on vacation.
-                                                </span>
-                                                <hr />
-                                                <h6 className="card-title">
-                                                    Exterieur
-                                            </h6>
-                                                <span>Eres' daring 'Grigri Fortune' swimsuit has
-                                                    the fit and coverage of a bikini in a one-piece silhouette.
-                                                    This fuchsia style is crafted from the label's sculpting peau
-                                                    douce fabric and has flattering
-                                                    cutouts through the torso and back. Wear yours with mirrored sunglasses on vacation.
-                                                </span>
 
-
+                                                {annoncelocation.description ? <span className="title text-justify" dangerouslySetInnerHTML={this.getDescription(annoncelocation)} />: <Skeleton count={3}/>}
 
                                             </div>
                                         </div>
 
-
                                         <div className="card">
                                             <div className="card-body">
 
-                                              <ProfileForallAnnonceShow {...annoncelocation} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
-
+                                              <ProfileForallAnnoncelocationShow {...annoncelocation} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} copyToClipboard={this.copyToClipboard}/>
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">
@@ -305,9 +306,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
-                                            </NavLink>
+                                            <Navlinknewannoncelocation {...this.props} />
                                         </div>
 
                                         <div className="card">
@@ -317,11 +316,11 @@ class Annoncelocationbycategorycityshow extends Component {
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                             <div className="card-header d-flex align-items-center">
                                                                 <div className="d-flex align-items-center">
-                                                                    <NavLink to={`/@${annoncelocation.user.slug}/annonces_locations/`}>
+                                                                    <NavLink to={`/pro/${annoncelocation.user.slug}/annonces_locations/`}>
                                                                         <img src={annoncelocation.user.avatar} style={{ height: "40px", width: "80px" }} alt={annoncelocation.user.first_name} className="avatar" />
                                                                     </NavLink>
                                                                     <div className="mx-3">
-                                                                        <NavLink to={`/@${annoncelocation.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{annoncelocation.user.first_name}</b>
+                                                                        <NavLink to={`/pro/${annoncelocation.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{annoncelocation.user.first_name}</b>
                                                                             <small className="d-block text-muted">12 janv 2019</small>
                                                                         </NavLink>
                                                                     </div>

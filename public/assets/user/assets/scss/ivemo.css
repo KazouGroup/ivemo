@@ -1,0 +1,7 @@
+.card-plain .card-body table {
+    width: 100%;
+}
+
+.card-plain .card-body table tbody tr td {
+    padding: 5px 0;
+}

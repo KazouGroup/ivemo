@@ -28,8 +28,7 @@ class AnnonceUserSite extends Component {
 
                 <div className="about-us sidebar-collapse">
 
-
-                    <nav className="navbar ivemoNarbarCustomisation navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
+                    <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
                         <NavUserSite />
                     </nav>
 
@@ -144,7 +143,7 @@ class AnnonceUserSite extends Component {
                                                             <p>
                                                                 Warner Music Group announced today it’s
                                                                 acquiring the selected .
-                                                        </p>
+                                                            </p>
                                                             <div className="card-header d-flex align-items-center">
                                                                 <div className="d-flex align-items-center">
                                                                     <NavLink to={`/annonce/show/`}>
@@ -152,7 +151,7 @@ class AnnonceUserSite extends Component {
                                                                     </NavLink>
                                                                     <div className="mx-3">
                                                                         <NavLink to={`/annonce/show/`} className="text-dark font-weight-600 text-sm">Boclair Temgoua
-                                                                    <small className="d-block text-muted">12 janv 2019</small>
+                                                                            <small className="d-block text-muted">12 janv 2019</small>
                                                                         </NavLink>
                                                                     </div>
                                                                 </div>
@@ -253,7 +252,7 @@ class AnnonceUserSite extends Component {
                                                             <p>
                                                                 Warner Music Group announced today it’s
                                                                 acquiring the selected .
-                                                        </p>
+                                                            </p>
                                                             <div className="card-header d-flex align-items-center">
                                                                 <div className="d-flex align-items-center">
                                                                     <NavLink to={`/annonce/show/`}>
@@ -261,7 +260,7 @@ class AnnonceUserSite extends Component {
                                                                     </NavLink>
                                                                     <div className="mx-3">
                                                                         <NavLink to={`/annonce/show/`} className="text-dark font-weight-600 text-sm">Boclair Temgoua
-                                                                    <small className="d-block text-muted">12 janv 2019</small>
+                                                                            <small className="d-block text-muted">12 janv 2019</small>
                                                                         </NavLink>
                                                                     </div>
                                                                 </div>
@@ -354,7 +353,7 @@ class AnnonceUserSite extends Component {
                                                             <p>
                                                                 Warner Music Group announced today it’s
                                                                 acquiring the selected .
-                                                        </p>
+                                                            </p>
                                                             <div className="card-header d-flex align-items-center">
                                                                 <div className="d-flex align-items-center">
                                                                     <NavLink to={`/charbonneur/`}>
@@ -362,7 +361,7 @@ class AnnonceUserSite extends Component {
                                                                     </NavLink>
                                                                     <div className="mx-3">
                                                                         <NavLink to={`/charbonneur/`} className="text-dark font-weight-600 text-sm">Boclair Temgoua
-                                                                    <small className="d-block text-muted">12 janv 2019</small>
+                                                                            <small className="d-block text-muted">12 janv 2019</small>
                                                                         </NavLink>
                                                                     </div>
                                                                 </div>
@@ -412,36 +411,35 @@ class AnnonceUserSite extends Component {
                                                                     <div className="card-body">
                                                                         <table>
                                                                             <tbody>
-                                                                                <tr>
-                                                                                    <td> <a href="#pablo">Locations studio à Douala</a></td>
-                                                                                    <td className="text-right"> 200 annonces</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td> <a href="#pablo">Locations chambre à Douala</a></td>
-                                                                                    <td className="text-right"> 1 300 annonces</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td> <a href="#pablo">Locations appartement 2 pièces à Douala</a></td>
-                                                                                    <td className="text-right"> 380 annonces</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td> <a href="#pablo">Locations appartement 3 pièces à Douala</a></td>
-                                                                                    <td className="text-right"> 9 200 annonces</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td> <a href="#pablo">Locations appartement 4 pièces à Douala</a></td>
-                                                                                    <td className="text-right"> 5 200 annonces</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td> <a href="#pablo">Locations appartement 5 pièces à Douala</a></td>
-                                                                                    <td className="text-right"> 1 200 annonces</td>
-                                                                                </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Locations studios à Douala</a></td>
+                                                                                <td className="text-right"> 200 annonces</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Locations chambres à Douala</a></td>
+                                                                                <td className="text-right"> 1 300 annonces</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Locations appartements 2 pièces à Douala</a></td>
+                                                                                <td className="text-right"> 380 annonces</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Locations appartement 3 pièces à Douala</a></td>
+                                                                                <td className="text-right"> 9 200 annonces</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Locations appartement 4 pièces à Douala</a></td>
+                                                                                <td className="text-right"> 5 200 annonces</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Locations appartement 5 pièces à Douala</a></td>
+                                                                                <td className="text-right"> 1 200 annonces</td>
+                                                                            </tr>
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
                                                                 </div>
                                                             </div>
-
 
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingThree">
@@ -454,18 +452,18 @@ class AnnonceUserSite extends Component {
                                                                     <div className="card-body">
                                                                         <table>
                                                                             <tbody>
-                                                                                <tr>
-                                                                                    <td> <a href="#pablo">Toutes les ventes de maison Douala</a></td>
-                                                                                    <td className="text-right"> 200 annonces</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td> <a href="#pablo">Toutes les ventes de terrains Douala</a></td>
-                                                                                    <td className="text-right"> 1 300 annonces</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td> <a href="#pablo">Tous les achats de maison de prestige Douala</a></td>
-                                                                                    <td className="text-right"> 380 annonces</td>
-                                                                                </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Toutes les ventes de maison Douala</a></td>
+                                                                                <td className="text-right"> 200 annonces</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Toutes les ventes de terrains Douala</a></td>
+                                                                                <td className="text-right"> 1 300 annonces</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> <a href="#pablo">Tous les achats de maison de prestige Douala</a></td>
+                                                                                <td className="text-right"> 380 annonces</td>
+                                                                            </tr>
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
@@ -479,17 +477,8 @@ class AnnonceUserSite extends Component {
                                         </div>
                                     </div>
 
-
-
-
-
-
-
-
                                 </div>
                             </div>
-
-
 
                         </div>
 

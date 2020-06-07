@@ -3,10 +3,8 @@ namespace App\Services\Contactusers;
 
 
 
-use App\Jobs\ContactuserJob;
-use App\Model\contactuserslocation;
+use App\Jobs\ContactuserventeJob;
 use App\Model\contactusersvente;
-use App\Model\user;
 use App\Services\HelpersService;
 
 class ContactusersventeService
@@ -153,7 +151,7 @@ class ContactusersventeService
 
         $from = ['address' => $request->get('email') , 'name' => $request->get('full_name')];
 
-        $emailToUser = (new ContactuserJob($full_name,$phone,$email,$subject,$message,$to,$from));
+        $emailToUser = (new ContactuserventeJob($full_name,$phone,$email,$subject,$message,$to,$from));
 
 
         dispatch($emailToUser);

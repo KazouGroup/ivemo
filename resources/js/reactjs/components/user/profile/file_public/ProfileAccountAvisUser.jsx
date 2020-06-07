@@ -126,19 +126,20 @@ class ProfileAccountAvisUser extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
+                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -165,7 +166,9 @@ class ProfileAccountAvisUser extends Component {
                 let url = route('profile_avis_users_unactivated.site', [id]);
                 dyaxios.get(url).then(() => {
 
-                    this.loadItems();
+                    let isNotId = item => item.id !== id;
+                    let updatedItems = this.state.avisusers.filter(isNotId);
+                    this.setState({avisusers: updatedItems});
                     /** Alert notify bootstrapp **/
                     $.notify({
                         //,
@@ -179,18 +182,19 @@ class ProfileAccountAvisUser extends Component {
                                 align: 'center'
                             },
                             animate: {
-                                enter: "animated fadeInUp",
-                                exit: "animated fadeOutDown"
+                                enter: "animate__animated animate__fadeInUp",
+                                exit: "animate__animated animate__fadeOutDown"
                             },
                         });
                     /** End alert ***/
+                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -222,8 +226,8 @@ class ProfileAccountAvisUser extends Component {
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInUp",
-                            exit: "animated fadeOutDown"
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
                         },
                     });
 
@@ -266,8 +270,8 @@ class ProfileAccountAvisUser extends Component {
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInUp",
-                            exit: "animated fadeOutDown"
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
                         },
                     });
 
@@ -306,8 +310,8 @@ class ProfileAccountAvisUser extends Component {
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInUp",
-                            exit: "animated fadeOutDown"
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
                         },
                     });
 
@@ -343,7 +347,7 @@ class ProfileAccountAvisUser extends Component {
 
     handlePageChange(pageNumber) {
         let itemuser = this.props.match.params.user;
-        dyaxios.get(`/api/@${itemuser}/avis_users?page=` + pageNumber)
+        dyaxios.get(`/api/pro/${itemuser}/avis_users?page=` + pageNumber)
             .then(response => {
                 this.setState({
                     avisusers: response.data.data,
@@ -517,9 +521,10 @@ class ProfileAccountAvisUser extends Component {
 
                                             <div className="media media-post">
                                                 <div className="avatar">
-                                                    <img className="media-object img-raised"
+                                                    <img className="media-object img-raised rounded"
                                                          alt={$userIvemo.first_name} src={$userIvemo.avatar} />
                                                 </div>
+
                                                 <div className="media-body">
                                                         <textarea name="description" value={this.state.description || ""}
                                                                   onChange={this.handleFieldChange}

@@ -15,34 +15,37 @@ class BlogannoncelocationService
 
     public static function apiannonceblogcategorylocations($categoryannoncelocation)
     {
+        $blogannoncelocations = BlogannoncelocationResource::collection(blogannoncelocation::with('user','categoryannoncelocation','member')
+            ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+            ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
+            ->where(['status' => 1,'status_admin' => 1])
+            ->orderBy('created_at','DESC')->distinct()->get());
+
+        return $blogannoncelocations;
+    }
+
+    public static function apiannonceblogcategorylocationscount($categoryannoncelocation)
+    {
         $blogannoncelocations = categoryannoncelocation::whereSlug($categoryannoncelocation->slug)
             ->where(['status' => 1])
             ->withCount(['blogannoncelocations' => function ($q) use ($categoryannoncelocation){
                 $q->where(['status' => 1,'status_admin' => 1])
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
-                    ->with('user','categoryannoncelocation')
+                    ->with('user','categoryannoncelocation','member')
                     ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id]);
-            }])
-            ->with([
-                'blogannoncelocations' => function ($q) use ($categoryannoncelocation){
-                    $q->where(['status' => 1,'status_admin' => 1])
-                        ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
-                        ->with('user','categoryannoncelocation')
-                        ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
-                        ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();},
-            ])->first();
+            }])->first();
 
         return $blogannoncelocations;
     }
 
     public static function apiblogannoncelocationinteresse($categoryannoncelocation)
     {
-        $blogannoncelocation = $categoryannoncelocation->blogannoncelocations()->with('user','categoryannoncelocation')
+        $blogannoncelocation = $categoryannoncelocation->blogannoncelocations()->with('user','categoryannoncelocation','member')
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
             ->orderByRaw('RAND()')
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->where(['status' => 1,'status_admin' => 1])
-            ->take(3)->distinct()->get()->toArray();;
+            ->take(3)->distinct()->get();
 
         return $blogannoncelocation;
     }
@@ -51,11 +54,11 @@ class BlogannoncelocationService
     {
         $blogannoncelocations = HelpersService::helpersannonblogceteambyusercount($user)
             ->with(['blogannoncelocations' => function ($q) use ($user){
-                $q->with('user','categoryannoncelocation')
+                $q->with('user','categoryannoncelocation','member')
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id])
                     ->orderBy('created_at','DESC')
-                    ->distinct()->get()->toArray()
+                    ->distinct()->get()
                 ;},
             ])->first();
 
@@ -66,12 +69,12 @@ class BlogannoncelocationService
     {
         $blogannoncelocations = HelpersService::helpersannonblogceteambyusercount($user)
             ->with(['blogannoncelocations' => function ($q) use ($user,$categoryannoncelocation){
-                $q->with('user','categoryannoncelocation')
+                $q->with('user','categoryannoncelocation','member')
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id])
                     ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
                     ->orderBy('created_at','DESC')
-                    ->distinct()->get()->toArray()
+                    ->distinct()->get()
                 ;},
             ])->first();
 
@@ -81,7 +84,8 @@ class BlogannoncelocationService
     public static function apiannonceblogcategorylocationslug($categoryannoncelocation, $date,$blogannoncelocation)
     {
         $blogannoncelocation = new BlogannoncelocationResource(blogannoncelocation::whereDate('created_at',$date)
-            ->whereSlug($blogannoncelocation)
+            ->with('user','categoryannoncelocation','member')
+            ->whereSlug($blogannoncelocation->slug)
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->where(['status' => 1,'status_admin' => 1])->first());
 
@@ -107,7 +111,7 @@ class BlogannoncelocationService
                 mkdir($dir, 0775, true);
             }
             $destinationPath = public_path("assets/img/blogannoncelocation/{$name}");
-            Image::make($request->photo)->fit(1400,650)->save($destinationPath);
+            Image::make($request->photo)->fit(1200,650)->save($destinationPath);
 
             $myfilename = "/assets/img/blogannoncelocation/{$name}";
             $blogannoncelocation->photo = $myfilename;
@@ -125,7 +129,7 @@ class BlogannoncelocationService
                 ($request->photo,';')))[1])[1];
             $dir = 'assets/img/blogannoncelocation/';
             if(!file_exists($dir)){mkdir($dir, 0775, true);}
-            Image::make($request->photo)->fit(1400,650)->save(public_path('assets/img/blogannoncelocation/').$name);
+            Image::make($request->photo)->fit(1200,650)->save(public_path('assets/img/blogannoncelocation/').$name);
             $request->merge(['photo' =>  "/assets/img/blogannoncelocation/{$name}"]);
             $oldFilename = $currentPhoto;
             File::delete(public_path($oldFilename));

@@ -11,17 +11,19 @@ class NavUserSite extends PureComponent {
     navLogout(e) {
         axios.post('/logout')
             .then(() => {
-                window.location.reload();
+                window.location.reload(true);
             });
     }
 
     render() {
         return (
+
             <div className="container">
+
                 <div className="navbar-translate">
                     <Link to={'/'} className="navbar-brand" >
                         <img src=".." />
-                        Ivemo
+                        {$name_site}
                     </Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-bar top-bar"></span>
@@ -29,66 +31,69 @@ class NavUserSite extends PureComponent {
                         <span className="navbar-toggler-bar bottom-bar"></span>
                     </button>
                 </div>
-                <div className="collapse navbar-collapse" data-nav-image="../assets/img//blurred-image-1.jpg" data-color="orange">
+                <div className="collapse navbar-collapse" data-nav-image="../assets/img/blurred-image-1.jpg" data-color="orange">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <Link to={'/'} className="nav-link">
+                            <NavLink to={'/'} className="nav-link">
                                 <i className="now-ui-icons shopping_shop"/>
-                                <p>Acceuil</p>
-                            </Link>
+                                <b>Acceuil</b>
+                            </NavLink>
                         </li>
+
                         <li className={`nav-item dropdown`}>
                             <a href="#" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
-                                <i className="now-ui-icons design_bullet-list-67" aria-hidden="true"/>
-                                <p>Nos Services</p>
+                                <i className="now-ui-icons files_paper" aria-hidden="true"/>
+                                <b>Annonces</b>
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <Link to={`/annonces_locations/locations/`} className="dropdown-item" >
+                                <a href={`/annonces_locations/locations/`} className="dropdown-item">
                                     <i className="now-ui-icons files_paper"/> Locations
-                                </Link>
-                                <Link to={`/annonces_reservations/reservations/`} className="dropdown-item">
+                                </a>
+                                <a href={`/annonces_reservations/reservations/`} className="dropdown-item">
                                     <i className="now-ui-icons business_money-coins"/> Reservations
-                                </Link>
-                                <Link to={`/annonces_ventes/ventes/`} className="dropdown-item">
+                                </a>
+                                <a href={`/annonces_ventes/ventes/`} className="dropdown-item">
                                     <i className="now-ui-icons business_money-coins"/> Ventes
-                                </Link>
+                                </a>
                             </div>
                         </li>
                         <li className="nav-item dropdown">
                             <a href="#" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                 <i className="now-ui-icons text_align-left" aria-hidden="true"/>
-                                <p>Nos Conseils</p>
+                                <b>Conseils</b>
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <Link to={`/blogs/annonce_locations/`} className="dropdown-item" >
+                                <a href={`/blogs/annonce_locations/`} className="dropdown-item">
                                     <i className="now-ui-icons files_paper"/> Locations
-                                </Link>
-                                <Link to={`/blogs/annonce_reservations/`} className="dropdown-item">
+                                </a>
+                                <a href={`/blogs/annonce_reservations/`} className="dropdown-item">
                                     <i className="now-ui-icons business_money-coins"/> Reservations
-                                </Link>
-                                <Link to={`/blogs/annonce_ventes/`} className="dropdown-item">
+                                </a>
+                                <a href={`/blogs/annonce_ventes/`} className="dropdown-item">
                                     <i className="now-ui-icons business_money-coins"/> Ventes
-                                </Link>
+                                </a>
                             </div>
                         </li>
                         <li className="nav-item">
-                            <Link to={'/contact/'} className="nav-link">
-                                <i className="now-ui-icons location_pin"/>
-                                <p>Nous Contactez</p>
-                            </Link>
+                            <a href={'/employments/'} className="nav-link">
+                                <i className="now-ui-icons business_briefcase-24"/>
+                                <b>Offres d'emplois</b>
+                            </a>
                         </li>
                         {$guest ?
+
                             <>
                                 <li className="nav-item">
                                     <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="nav-link">
                                         <i className="now-ui-icons users_circle-08"/>
-                                        <p>Login</p>
+                                        <b>Login</b>
                                     </a>
                                 </li>
+
                                 <li className="nav-item">
                                     <Link to={`/register/`} className="nav-link btn btn-primary text-left">
                                         <i className="now-ui-icons tech_mobile"/>
-                                        <p className="ivemoSignup">Signup</p>
+                                        <b>Signup</b>
                                     </Link>
                                 </li>
                             </>
@@ -100,61 +105,78 @@ class NavUserSite extends PureComponent {
                                         <b>{$userIvemo.first_name}</b>
                                     </a>
                                     <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+
                                         {$userIvemo.status_user && (
                                             <a href="/dashboard" className="dropdown-item">
                                                 <i className="now-ui-icons business_bulb-63" /> Dashboard
                                             </a>
                                         )}
-                                        <Link className="dropdown-item" to={`/profile/account/`}>
+                                        {$userIvemo.status_profile === 1 && (
+                                            <a href={`/dashboard/premium/${$userIvemo.slug}/`} className="dropdown-item">
+                                                <i className="now-ui-icons design_app"/>
+                                                <b>Premium dashboard</b>
+                                            </a>
+                                        )}
+                                        <a href="/profile/account" className="dropdown-item">
                                             <i className="now-ui-icons users_circle-08"/> Editer mon profile
-                                        </Link>
-                                        <Link className="dropdown-item" to={`/@${$userIvemo.slug}/`}>
-                                            <i className="now-ui-icons users_single-02"/> Profile
-                                        </Link>
+                                        </a>
+                                        {$userIvemo.status_profile === 1 ?
+                                            <a href={`/pro/${$userIvemo.slug}/`} className="dropdown-item">
+                                                <i className="now-ui-icons users_single-02"/> Profile
+                                            </a>
+                                            :
+                                            <a href={`/user/${$userIvemo.slug}/`} className="dropdown-item">
+                                                <i className="now-ui-icons users_single-02"/> Profile
+                                            </a>
+                                        }
                                         <a style={{ cursor: "pointer" }} className="dropdown-item" onClick={() => this.navLogout()}>
                                             <i className="now-ui-icons ui-1_simple-remove" /> Déconnexion
                                         </a>
+
                                     </div>
                                 </li>
+
                                 <li className="nav-item dropdown">
                                     <a href="#" className="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                         <i className="now-ui-icons business_chart-pie-36"/>
                                     </a>
                                     <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                        <Link to={'/profile/personal_reservations/'} className="dropdown-item">
+                                        <a href={`/profile/personal_reservations/`} className="dropdown-item">
                                             <i className="now-ui-icons shopping_tag-content"/>Mes reservations
-                                        </Link>
-                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/annonces_locations/`} className="dropdown-item">
-                                            <i className="now-ui-icons text_align-left"/>Annonce locations
-                                        </Link>
-                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/annonces_reservations/`} className="dropdown-item">
-                                            <i className="now-ui-icons education_paper"/>Annonce reservations
-                                        </Link>
-                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_locations/`} className="dropdown-item">
-                                            <i className="now-ui-icons text_align-center"/>Blog annonces locations
-                                        </Link>
-                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_reservations/`} className="dropdown-item">
-                                            <i className="now-ui-icons text_align-center"/>Blog annonces reservations
-                                        </Link>
-                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_ventes/`} className="dropdown-item">
-                                            <i className="now-ui-icons text_align-center"/>Blog annonces ventes
-                                        </Link>
-                                        <Link to={`/profile/${$userIvemo.slug}/personal_settings/teams/`} className="dropdown-item">
+                                        </a>
+                                        <a href={`/profile/${$userIvemo.slug}/personal_settings/annonces_locations/`} className="dropdown-item">
+                                            <i className="now-ui-icons text_align-left"/>Annonces
+                                        </a>
+                                        <a href={`/profile/${$userIvemo.slug}/personal_settings/employments/`} className="dropdown-item">
+                                            <i className="now-ui-icons text_align-left"/>Services
+                                        </a>
+                                        <a href={`/profile/${$userIvemo.slug}/personal_settings/favorite_employments/`} className="dropdown-item">
+                                            <i className="now-ui-icons location_bookmark"/>Mes favoris
+                                        </a>
+                                        <a href={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_ventes/`} className="dropdown-item">
+                                            <i className="now-ui-icons text_align-center"/>Blog annonces
+                                        </a>
+                                        <a href={`/profile/${$userIvemo.slug}/personal_settings/teams/`} className="dropdown-item">
                                             <i className="now-ui-icons users_circle-08"/>Team
-                                        </Link>
-                                        <Link to={'/profile/annonces_reservations_booked/'} className="dropdown-item">
+                                        </a>
+                                        <a href={`/profile/annonces_reservations_booked/`} className="dropdown-item">
                                             <i className="now-ui-icons shopping_bag-16"/>Reservations
-                                        </Link>
-                                        <Link to={`/profile/${$userIvemo.slug}/personal_mails/contacts/`} className="dropdown-item">
+                                        </a>
+                                        <a href={`/profile/${$userIvemo.slug}/personal_mails/contacts/`} className="dropdown-item">
                                             <i className="now-ui-icons location_pin"/>Messages
-                                        </Link>
+                                        </a>
                                     </div>
                                 </li>
                             </>
+
                         }
+
                     </ul>
                 </div>
             </div>
+
+
+
         )
     }
 }

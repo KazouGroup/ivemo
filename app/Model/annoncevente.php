@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Str;
 
 
 class annoncevente extends Model
@@ -17,14 +18,16 @@ class annoncevente extends Model
         parent::boot();
 
         static::creating(function ($model){
+            $myslug = Str::uuid();
             if (auth()->check()){
                 $model->user_id = auth()->id();
+                $model->slugin = $myslug;
+                $model->ip = request()->ip();
             }
         });
+
         static::updating(function($model){
-            if (auth()->check()){
-                $model->user_id = auth()->id();
-            }
+            $model->ip = request()->ip();
         });
     }
 
@@ -36,7 +39,12 @@ class annoncevente extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(user::class, 'user_id');
+    }
+
+    public function member()
+    {
+        return $this->belongsTo(user::class,'member_id');
     }
 
     public function categoryannoncevente()
@@ -57,6 +65,16 @@ class annoncevente extends Model
     public function contactusersventes()
     {
         return $this->hasMany(contactusersvente::class, 'annoncevente_id');
+    }
+
+    public function signalannonceventes()
+    {
+        return $this->hasMany(signalannoncevente::class, 'annoncevente_id');
+    }
+
+    public function visits()
+    {
+        return visits($this);
     }
 
     protected $casts = [

@@ -3,7 +3,7 @@ namespace App\Services\Contactusers;
 
 
 
-use App\Jobs\ContactuserJob;
+use App\Jobs\ContactuserlocationJob;
 use App\Model\contactuserslocation;
 use App\Model\user;
 use App\Services\HelpersService;
@@ -121,7 +121,7 @@ class ContactuserslocationService
 
         $from = ['address' => $request->get('email') , 'name' => $request->get('full_name')];
 
-        $emailToUser = (new ContactuserJob($full_name,$phone,$email,$subject,$message,$to,$from));
+        $emailToUser = (new ContactuserlocationJob($full_name,$phone,$email,$subject,$message,$to,$from));
 
 
         dispatch($emailToUser);

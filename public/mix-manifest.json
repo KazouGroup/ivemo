@@ -2,5 +2,6 @@
     "/js/premium/app.js": "/js/premium/app.js",
     "/js/reactjs/app.js": "/js/reactjs/app.js",
     "/js/reactjs/axios.js": "/js/reactjs/axios.js",
-    "/js/vuejs/app.js": "/js/vuejs/app.js"
+    "/js/vuejs/app.js": "/js/vuejs/app.js",
+    "/css/app.css": "/css/app.css"
 }

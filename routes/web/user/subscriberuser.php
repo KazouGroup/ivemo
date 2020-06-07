@@ -11,7 +11,7 @@ Route::get(
 )->name('subscriberusers.site');
 
 Route::post(
-    '@{user}/subscriberuser_public_mail',
+    'pro/{user}/subscriberuser_public_mail',
     'SubscriberuserController@subscriberuser_public_mail'
 )->name('subscriberuser_public_mail.site');
 

@@ -68,6 +68,7 @@ class AnnoncereservationController extends Controller
 
     public function annoncelocationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
     {
+        visits($annoncereservation)->seconds(60)->increment();
 
         return view('user.annoncereservation.annonces_show',[
                    'annoncetype' => $annoncetype,
@@ -122,7 +123,8 @@ class AnnoncereservationController extends Controller
                   ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);});
            }])->withCount(['blogannoncereservations' => function ($q){
                $q->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
-                   ->whereIn('user_id',[auth()->user()->id]);}])
+                   ->whereIn('user_id',[auth()->user()->id])
+                   ->where('status_admin',1);}])
          ->orderBy('annoncereservations_count','desc')->distinct()->get());
 
         return response()->json($categoryannoncereservations, 200);
@@ -144,6 +146,7 @@ class AnnoncereservationController extends Controller
                     $q->where(['status' => 1,'status_admin' => 1])
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
+                        ->with(['user.profile' => function ($q){$q->distinct()->get();}])
                         ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
                         ->whereHas('city', function ($q) {$q->where('status',1);})
                         ->orderBy('created_at','DESC')->distinct()->paginate(30)->toArray();
@@ -170,6 +173,7 @@ class AnnoncereservationController extends Controller
                     $q->where(['status' => 1,'status_admin' => 1])
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
+                        ->with(['user.profile' => function ($q){$q->distinct()->get();}])
                         ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
                         ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
                         ->whereHas('city', function ($q) {$q->where('status',1);})
@@ -182,6 +186,7 @@ class AnnoncereservationController extends Controller
     {
         $annoncereservation = $categoryannoncereservation->annoncereservations()->whereIn('annoncetype_id',[$annoncetype->id])
             ->with('user','city','annoncetype','categoryannoncereservation','imagereservations')
+            ->with(['user.profile' => function ($q){$q->distinct()->get();}])
             ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
@@ -254,14 +259,16 @@ class AnnoncereservationController extends Controller
         return response()->json($annoncereservations, 200);
     }
 
-    public function apiannoncelocationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,$annoncereservation)
+    public function apiannoncelocationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
     {
+        visits($annoncereservation)->seconds(60)->increment();
+
         $annoncereservation = new AnnoncereservationResource(annoncereservation::whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('city_id',[$city->id])
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->where(['status' => 1,'status_admin' => 1])
             ->with(['user.profile' => function ($q){$q->distinct()->get();},])
-            ->whereSlug($annoncereservation)->firstOrFail());
+            ->whereSlug($annoncereservation->slug)->firstOrFail());
 
         return response()->json($annoncereservation, 200);
     }

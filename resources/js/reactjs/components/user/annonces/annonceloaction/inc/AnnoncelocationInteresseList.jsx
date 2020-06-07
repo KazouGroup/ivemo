@@ -15,10 +15,6 @@ class AnnoncelocationInteresseList extends Component {
         }
     }
 
-    numberWithCommas() {
-        return this.props.price.toLocaleString();
-    }
-
     render() {
         return (
             <Fragment>
@@ -76,7 +72,7 @@ class AnnoncelocationInteresseList extends Component {
                                             </div>
                                             <div className="text-right ml-auto">
                                                 <div className="col-md-12 col-12">
-                                                    <h5 className="text-success"><b>{this.numberWithCommas(this.props)} <small>FCFA/mois</small></b></h5>
+                                                    <h5 className="text-success"><b>{this.props.price.formatMoney(2,'.',',')} <small>FCFA/mois</small></b></h5>
                                                 </div>
 
                                             </div>
@@ -102,11 +98,11 @@ class AnnoncelocationInteresseList extends Component {
 
                                         <div className="card-header d-flex align-items-center">
                                             <div className="d-flex align-items-center">
-                                                <NavLink to={`/@${this.props.user.slug}/annonces_locations/`}>
+                                                <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`}>
                                                     <img src={this.props.user.avatar} style={{ height: "20px", width: "50px" }} alt={this.props.user.first_name} className="avatar" />
                                                 </NavLink>
                                                 <div className="mx-3">
-                                                    <NavLink to={`/@${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
+                                                    <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
                                                         <small className="d-block text-muted">{moment(this.props.created_at).format('LL')}</small>
                                                     </NavLink>
                                                 </div>

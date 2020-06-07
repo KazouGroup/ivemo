@@ -117,8 +117,8 @@ class PersonalmessagesfavoritecontactUser extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
@@ -129,8 +129,8 @@ class PersonalmessagesfavoritecontactUser extends Component {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -164,7 +164,7 @@ class PersonalmessagesfavoritecontactUser extends Component {
         return (
 
             <>
-                <Helmet title={`Messages suivis ${$userIvemo.first_name} - Ivemo`}/>
+                <Helmet title={`Messages suivis ${$userIvemo.first_name} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 
