@@ -25,10 +25,13 @@ class BlogannonceventesBycategoryvente extends Component {
             subject: 'Mauvaise catégorie',
             errors: [],
             blogannonceItem: [],
-            blogannonceventes: {blogannonceventes:{categoryannoncevente:[],user:[]}},
+            blogannonceventesData: [],
+            blogannonceventes:{categoryannoncevente:[],user:[]},
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
         this.handleCheckClick = this.handleCheckClick.bind(this);
@@ -71,6 +74,70 @@ class BlogannonceventesBycategoryvente extends Component {
         this.setState({
             blogannonceItem: item
         });
+    }
+
+    favoriteItem(id) {
+        const url = route('favoriteblogannonceventes_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Article ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('favoriteblogannonceventes_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Article retirée de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
     }
 
     signalemessageItem(e) {
@@ -142,6 +209,10 @@ class BlogannonceventesBycategoryvente extends Component {
         }).then((result) => {
             if (result.value) {
 
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.blogannonceventes.filter(isNotId);
+                this.setState({blogannonceventes: updatedItems});
+
                 //Envoyer la requet au server
                 let url = route('blogannoncecategoryventeunactivated_site',id);
                 dyaxios.get(url).then(() => {
@@ -196,6 +267,10 @@ class BlogannonceventesBycategoryvente extends Component {
         }).then((result) => {
             if (result.value) {
 
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.blogannonceventes.filter(isNotId);
+                this.setState({blogannonceventes: updatedItems});
+
                 const url = route('blogannoncecategoryventedelete_site',id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
@@ -235,8 +310,8 @@ class BlogannonceventesBycategoryvente extends Component {
 
     loadItems(){
         let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
-        let url = route('api.blogannoncecategoryventes_site', [itemCategoryannoncevente]);
-        dyaxios.get(url).then(response => this.setState({ blogannonceventes: response.data }));
+        dyaxios.get(route('api.blogannoncecategoryventes_site', [itemCategoryannoncevente])).then(response => this.setState({ blogannonceventes: response.data }));
+        dyaxios.get(route('api.blogannoncecategoryventescount_site', [itemCategoryannoncevente])).then(response => this.setState({ blogannonceventesData: response.data }));
     }
 
     // lifecycle method
@@ -245,11 +320,11 @@ class BlogannonceventesBycategoryvente extends Component {
     }
 
     render() {
-        const {blogannonceventes,blogannonceItem} = this.state;
-        const mapBlogannonceventes = blogannonceventes.blogannonceventes.length >= 0 ? (
-            blogannonceventes.blogannonceventes.map(item => {
+        const {blogannonceventesData,blogannonceventes,blogannonceItem} = this.state;
+        const mapBlogannonceventes = blogannonceventes.length >= 0 ? (
+            blogannonceventes.map(item => {
                 return(
-                    <BlogannonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser}/>
+                    <BlogannonceventeList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser}/>
                 )
             })
         ):(
@@ -257,7 +332,7 @@ class BlogannonceventesBycategoryvente extends Component {
         );
         return (
             <>
-                <Helmet title={`Guides et conseils ventes ${blogannonceventes.name || 'Annonce'} - ${$name_site}`}/>
+                <Helmet title={`Guides et conseils ventes ${blogannonceventesData.name || 'Annonce'} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 
@@ -272,9 +347,9 @@ class BlogannonceventesBycategoryvente extends Component {
                             </div>
                             <div className="content-center">
 
-                                <h1 className="title">{blogannonceventes.name || ""}</h1>
+                                <h1 className="title">{blogannonceventesData.name || ""}</h1>
 
-                                {blogannonceventes.name ?
+                                {blogannonceventesData.name ?
                                     <Link to={`/blogs/annonce_ventes/`} className="text-white">
                                         <i className="fa fa-chevron-circle-left" /> <b>Retour aux articles</b>
                                     </Link>
@@ -282,8 +357,8 @@ class BlogannonceventesBycategoryvente extends Component {
                                     <></>
                                 }
 
-                                {blogannonceventes.blogannonceventes_count >= 0 ?
-                                    <h5><b>{blogannonceventes.blogannonceventes_count}</b> {blogannonceventes.blogannonceventes_count > 1 ? "articles" : "article"} posté sur la vente et achat</h5>
+                                {blogannonceventesData.blogannonceventes_count >= 0 ?
+                                    <h5><b>{blogannonceventesData.blogannonceventes_count}</b> {blogannonceventesData.blogannonceventes_count > 1 ? "articles" : "article"} posté sur la vente et achat</h5>
                                     :
                                     <></>
                                 }

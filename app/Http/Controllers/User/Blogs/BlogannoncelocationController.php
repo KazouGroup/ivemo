@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User\Blogs;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Blog\Blogannoncelocation\StoreRequest;
 use App\Http\Requests\Blog\Blogannoncelocation\UpdateRequest;
+use App\Http\Resources\BlogannoncelocationResource;
 use App\Http\Resources\CategoryannoncelocationResource;
 use App\Model\blogannoncelocation;
 use App\Model\categoryannoncelocation;
@@ -33,10 +34,10 @@ class BlogannoncelocationController extends Controller
 
     public function apiannoncebloglocation()
     {
-        $blogannoncelocations = blogannoncelocation::with('user','categoryannoncelocation','member')
+        $blogannoncelocations = BlogannoncelocationResource::collection(blogannoncelocation::with('user','categoryannoncelocation','member')
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->where(['status' => 1,'status_admin' => 1])->orderBy('created_at','DESC')
-            ->distinct()->paginate(40);
+            ->distinct()->paginate(40));
 
         return response()->json($blogannoncelocations, 200);
     }
@@ -49,6 +50,13 @@ class BlogannoncelocationController extends Controller
     public function apiannonceblogcategorylocations(categoryannoncelocation $categoryannoncelocation)
     {
         $blogannoncelocations = BlogannoncelocationService::apiannonceblogcategorylocations($categoryannoncelocation);
+
+        return response()->json($blogannoncelocations, 200);
+    }
+
+    public function apiannonceblogcategorylocationscount(categoryannoncelocation $categoryannoncelocation)
+    {
+        $blogannoncelocations = BlogannoncelocationService::apiannonceblogcategorylocationscount($categoryannoncelocation);
 
         return response()->json($blogannoncelocations, 200);
     }

@@ -6,7 +6,6 @@ import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import {Button, Form,Alert,Input} from "reactstrap";
 import Swal from "sweetalert2";
 import LinkValicationEmail from "../../inc/user/LinkValicationEmail";
-import Navemployements from "./inc/Navemployements";
 import NavannoncecategorySkeleton from "../../inc/user/NavannoncecategorySkeleton";
 import EmploymentListSkeleton from "../../inc/user/employment/EmploymentListSkeleton";
 import Navlinknewemployment from "./treatement/Navlinknewemployment";
@@ -111,14 +110,15 @@ class EmployementBycategoryemployementbycity extends Component {
         }).then((result) => {
             if (result.value) {
 
+                // remove from local state
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.employments.filter(isNotId);
+                this.setState({employments: updatedItems});
+
                 //Envoyer la requet au server
                 let url = route('employmentsunactivated_site',id);
                 dyaxios.get(url).then(() => {
 
-                    // remove from local state
-                    let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.employments.filter(isNotId);
-                    this.setState({employments: updatedItems});
                     /** Alert notify bootstrapp **/
                     $.notify({
                             message: "Annonce masquée aux utilisateurs",

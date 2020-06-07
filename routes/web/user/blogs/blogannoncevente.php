@@ -18,6 +18,31 @@ Route::group(['middleware' => 'auth','prefix' => 'profile'], function () {
 Route::group(['prefix' => 'api'], function () {
 
     Route::get(
+        'blogs/annonce_ventes/',
+        'BlogannonceventeController@apiannonceblogresevente'
+    )->name('api.blogannonceventes_site');
+
+    Route::get(
+        'blogs/annonce_ventes/{categoryannoncevente}',
+        'BlogannonceventeController@apiannonceblogcategoryvente'
+    )->name('api.blogannoncecategoryventes_site');
+
+    Route::get(
+        'blogs/annonce_ventescount/{categoryannoncevente}',
+        'BlogannonceventeController@apiannonceblogcategoryventecount'
+    )->name('api.blogannoncecategoryventescount_site');
+
+    Route::get(
+        'blogs/annonce_ventes_interesses/{categoryannoncevente}',
+        'BlogannonceventeController@apiblogannonceventeinteresse'
+    )->name('api.blogannonceventeinteresse_site');
+
+    Route::get(
+        'blogs/annonce_ventes/{categoryannoncevente}/{date}/{blogannoncevente}',
+        'BlogannonceventeController@apiannonceblogcategoryventeslug'
+    )->name('api.blogannoncecategoryventeslug_site');
+
+    Route::get(
         'blogs/annonce_vente/{blogannoncevente}',
         'BlogannonceventeController@show'
     )->name('api.blogannonceblogcategoryventeslugin_site');

@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import BlogannoncelocationList from "./inc/BlogannoncelocationList";
 import Navblogannoncelocations from "./inc/Navblogannoncelocations";
 import Navlinknewblogannoncelocation from "./treatement/Navlinknewblogannoncelocation";
-import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import BlogannonceListSkeleton from "../../../inc/user/blog/BlogannonceListSkeleton";
 import {Form, Input} from "reactstrap";
+import HelmetSite from "../../../inc/user/HelmetSite";
 
 
 class BlogannoncelocationBycategorylocation extends Component {
@@ -23,11 +22,14 @@ class BlogannoncelocationBycategorylocation extends Component {
             subject: 'Mauvaise catégorie',
             errors: [],
             blogannonceItem: [],
-            blogannoncelocationsData: {blogannoncelocations:{categoryannoncelocation:[],user:[]}},
+            blogannoncelocationsData: [],
+            blogannoncelocations:{categoryannoncelocation:[],user:[]},
             visiable: 20,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
         this.handleCheckClick = this.handleCheckClick.bind(this);
@@ -77,6 +79,70 @@ class BlogannoncelocationBycategorylocation extends Component {
         this.setState({
             blogannonceItem: item
         });
+    }
+
+    favoriteItem(id) {
+        const url = route('favoriteblogannoncelocations_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Article ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('favoriteblogannoncelocations_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Article retirée de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
     }
 
     signalemessageItem(e) {
@@ -132,8 +198,6 @@ class BlogannoncelocationBycategorylocation extends Component {
         })
     }
 
-
-
     unactiveItem(id){
         Swal.fire({
             title: 'Masquer cette article?',
@@ -148,6 +212,10 @@ class BlogannoncelocationBycategorylocation extends Component {
             reverseButtons: true,
         }).then((result) => {
             if (result.value) {
+
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.blogannoncelocations.filter(isNotId);
+                this.setState({blogannoncelocations: updatedItems});
 
                 //Envoyer la requet au server
                 let url = route('blogannoncecategorylocationunactive_site.site',id);
@@ -201,6 +269,10 @@ class BlogannoncelocationBycategorylocation extends Component {
         }).then((result) => {
             if (result.value) {
 
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.blogannoncelocations.filter(isNotId);
+                this.setState({blogannoncelocations: updatedItems});
+
                 const url = route('blogannoncecategorylocationdelete_site',id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
@@ -240,8 +312,8 @@ class BlogannoncelocationBycategorylocation extends Component {
 
     loadItems(){
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
-        let url = route('api.blogannonceblogcategorylocations_site', [itemCategoryannoncelocation]);
-        dyaxios.get(url).then(response => this.setState({ blogannoncelocationsData: response.data }));
+        dyaxios.get(route('api.blogannonceblogcategorylocations_site', [itemCategoryannoncelocation])).then(response => this.setState({ blogannoncelocations: response.data }));
+        dyaxios.get(route('api.blogannonceblogcategorylocationscount_site', [itemCategoryannoncelocation])).then(response => this.setState({ blogannoncelocationsData: response.data }));
     }
 
     // lifecycle method
@@ -250,13 +322,12 @@ class BlogannoncelocationBycategorylocation extends Component {
     }
 
     render() {
-        const {blogannoncelocationsData,blogannonceItem,visiable} = this.state;
-        const blogannoncelocationsbycategorylocations = blogannoncelocationsData.blogannoncelocations;
-        const mapBlogannoncelocations = blogannoncelocationsbycategorylocations.length >= 0 ? (
-            blogannoncelocationsbycategorylocations.slice(0,visiable).map(item => {
+        const {blogannoncelocations,blogannoncelocationsData,blogannonceItem,visiable} = this.state;
+        const mapBlogannoncelocations = blogannoncelocations.length >= 0 ? (
+            blogannoncelocations.slice(0,visiable).map(item => {
                 return(
 
-                    <BlogannoncelocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser}/>
+                    <BlogannoncelocationList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser}/>
                 )
             })
         ):(
@@ -264,7 +335,7 @@ class BlogannoncelocationBycategorylocation extends Component {
         );
         return (
             <>
-                <Helmet title={`Guides et conseils locations ${blogannoncelocationsData.name || 'Annonce'} - ${$name_site}`}/>
+                <HelmetSite title={`Guides et conseils locations ${blogannoncelocationsData.name || 'Annonce'} - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
 
@@ -278,7 +349,7 @@ class BlogannoncelocationBycategorylocation extends Component {
                             </div>
                             <div className="content-center">
 
-                                <h1 className="title">{blogannoncelocationsData.name || ""}</h1>
+                                <h2 className="title">{blogannoncelocationsData.name || ""}</h2>
 
                                 {blogannoncelocationsData.name ?
                                     <Link to={`/blogs/annonce_locations/`} className="text-white">
@@ -326,7 +397,7 @@ class BlogannoncelocationBycategorylocation extends Component {
 
                                         {mapBlogannoncelocations}
 
-                                        {visiable < blogannoncelocationsbycategorylocations.length && (
+                                        {visiable < blogannoncelocations.length && (
                                             <div className="col-md-4 ml-auto mr-auto text-center">
                                                 <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
                                                     <b>Voir plus </b>

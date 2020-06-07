@@ -26,6 +26,7 @@ class BlogannonceventeResource extends JsonResource
             'red_time' => $this->red_time,
             'user_id' => $this->user_id,
             'user' => $this->user,
+            'bookmarked' => $this->bookmarked(),
             'visits_count' => $this->visits()->count(),
             'visits_countries' => $this->visits()->countries(),
             'visits_languages' => $this->visits()->languages(),
