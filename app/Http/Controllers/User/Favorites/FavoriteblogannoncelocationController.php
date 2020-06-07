@@ -31,17 +31,6 @@ class FavoriteblogannoncelocationController extends Controller
         ]);
     }
 
-    public function apifavoritemployment_count(user $user)
-    {
-        $favoritemployments = favoritemployment::with('user','employment')
-            ->whereIn('user_id',[$user->id])
-            ->whereHas('employment', function ($q) {$q->where(['status' => 1,'status_admin' => 1]);})
-            ->whereHas('employment.city', function ($q) {$q->where('status',1);})
-            ->whereHas('employment.categoryemployment', function ($q) {$q->where('status',1);})->count();
-
-        return response()->json($favoritemployments, 200);
-    }
-
      public function apiuserdatafavoritemployment(user $user)
     {
         $this->authorize('update',$user);

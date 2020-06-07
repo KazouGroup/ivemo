@@ -157,6 +157,34 @@ class AnnonceslocationList extends Component {
 
                                         <div className="text-right mx-auto">
 
+                                            {$guest ?
+
+                                                <Button  data-toggle="modal" data-target="#loginModal"
+                                                         className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                    <i className="far fa-bookmark"></i>
+                                                </Button>
+                                                :
+                                                <>
+                                                    {this.props.bookmarked ?
+
+                                                        <>
+                                                            <Button onClick={() => this.props.unfavoriteItem(this.props.id)}
+                                                                    className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
+                                                                <i className="fas fa-bookmark"></i>
+                                                            </Button>
+                                                        </>
+
+                                                        :
+                                                        <>
+                                                            <Button onClick={() => this.props.favoriteItem(this.props.id)}
+                                                                    className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                                <i className="far fa-bookmark"></i>
+                                                            </Button>
+                                                        </>
+                                                    }
+                                                </>
+                                            }
+
                                             <Button className="btn btn-icon btn-sm btn-warning" onClick={() => this.props.contactUser(this.props)} title={`Contacter ${this.props.user.first_name}`}>
                                                 <i className="far fa-envelope"/>
                                             </Button>

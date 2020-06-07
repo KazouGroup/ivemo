@@ -35,7 +35,7 @@ class FavoriteblogannoncereservationController extends Controller
     {
         $this->authorize('update',$user);
 
-        $favoriteblogannoncereservations = favoriteblogannoncereservation::with('user','blogannoncereservation')
+        $favoriteblogannoncereservations = $user->favoriteblogannoncereservations()->with('user','blogannoncereservation')
             ->whereIn('user_id',[$user->id])
             ->with(['blogannoncereservation.categoryannoncereservation' => function ($q){
                 $q->distinct()->get();},

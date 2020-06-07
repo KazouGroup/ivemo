@@ -163,14 +163,14 @@ const RouteUser = props => (
           <Route exact path="/agences_immobilies/" component={AgencesimmobilieIndex}/>
 
           <Route exact path="/annonces_reservations/:annoncetype/" component={AnnoncereservationIndex}/>
-          <Route exact path="/annonce_reservations/:annoncetype/:city/" component={Annoncereservationbyannoncetypebycity}/>
+          <Route exact path="/annonce_reservations/:annoncetype/:city/" component={withRouter(Annoncereservationbyannoncetypebycity)}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/" component={withRouter(Annoncebycategoryannoncereservation)}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/" component={withRouter(Annoncebycategoryannoncereservationcity)}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/:annoncereservation/" component={withRouter(Annoncebycategoryannoncereservationcityshow)}/>
 
 
           <Route exact path="/annonces_locations/:annoncetype/" component={AnnoncelocationIndex}/>
-          <Route exact path="/annonce_locations/:annoncetype/:city/" component={Annoncelocationbyannoncetypebycity}/>
+          <Route exact path="/annonce_locations/:annoncetype/:city/" component={withRouter(Annoncelocationbyannoncetypebycity)}/>
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/" component={withRouter(Annoncebycategoryannoncelocation)}/>
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/" component={withRouter(Annoncelocationbycity)}/>
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/:annoncelocation/" component={withRouter(Annoncelocationbycategorycityshow)}/>
@@ -181,7 +181,7 @@ const RouteUser = props => (
           <Route exact path="/annonce/show/vendre/create/" component={AnnonceBienAvendreCreate}/>
 
           <Route exact path="/annonces_ventes/:annoncetype/" component={AnnonceventeIndex}/>
-          <Route exact path="/annonce_ventes/:annoncetype/:city/" component={Annonceventebyannoncetypebycity}/>
+          <Route exact path="/annonce_ventes/:annoncetype/:city/" component={withRouter(Annonceventebyannoncetypebycity)}/>
           <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/" component={withRouter(Annoncebycategoryannoncevente)}/>
           <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/:city/" component={withRouter(Annoncebycategoryannonceventecity)}/>
           <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/:city/:annoncevente/" component={withRouter(Annonceventebycategorycityshow)}/>
