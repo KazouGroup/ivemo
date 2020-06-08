@@ -26,6 +26,8 @@ class BlogannoncereservationResource extends JsonResource
             'red_time' => $this->red_time,
             'user_id' => $this->user_id,
             'user' => $this->user,
+            'likeked' => $this->likeked(),
+            'countlikes' => $this->countlikes()->get()->count(),
             'bookmarked' => $this->bookmarked(),
             'visits_count' => $this->visits()->count(),
             'visits_countries' => $this->visits()->countries(),
