@@ -11,6 +11,7 @@ import Skeleton from "react-loading-skeleton";
 import ProfileForallAnnoncelocationShow from "./inc/ProfileForallAnnoncelocationShow";
 import Navlinknewannoncelocation from "./treatment/Navlinknewannoncelocation";
 import HelmetSite from "../../../inc/user/HelmetSite";
+import ButonFavoris from "../../../inc/vendor/ButonFavoris";
 
 
 class Annoncelocationbycategorycityshow extends Component {
@@ -20,10 +21,77 @@ class Annoncelocationbycategorycityshow extends Component {
             annoncelocation:{categoryannoncelocation:[],user:{profile:[]},city:[]},
         };
         this.deleteItem = this.deleteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
     }
+
+    favoriteItem(id) {
+        const url = route('favoriteannoncelocations_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('favoriteannoncelocations_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce retirée de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
     copyToClipboard(){
-        navigator.clipboard.writeText(window.location.toString())
+        navigator.clipboard.writeText(window.location.toString());
         $.notify({
             message: "Lien copié correctement avec succès",
         },{
@@ -235,16 +303,6 @@ class Annoncelocationbycategorycityshow extends Component {
                                                     <h6 className="text-dark">{annoncelocation.pieces} p . {annoncelocation.rooms && (<>{annoncelocation.rooms} ch</>)}. {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
                                                 </div>
 
-
-                                                {/*
-                                                  <div className="text-center ml-auto">
-                                                    <a href="#pablo" className="btn btn-primary btn-round">
-                                                        <i className="now-ui-icons ui-2_favourite-28"></i> Dejà sauvegarder
-                                                </a>
-                                                </div>
-                                                */}
-
-
                                                 <div className="text-right ml-auto">
                                                     {annoncelocation.price ?
                                                         <h5 className="text-success"><b>{annoncelocation.price.formatMoney(2,'.',',')} <small>FCFA/mois</small></b></h5>
@@ -254,13 +312,42 @@ class Annoncelocationbycategorycityshow extends Component {
                                                 </div>
                                             </div>
 
+                                            <div className="text-center">
+                                                {$guest ?
+                                                    <Button data-toggle="modal" data-target="#loginModal"
+                                                            className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
+                                                        <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
+                                                    </Button>
+                                                    :
+                                                    <>
+                                                        {annoncelocation.bookmarked ?
+
+                                                            <>
+                                                                <Button onClick={() => this.unfavoriteItem(annoncelocation.id)}
+                                                                        className="btn btn-danger btn-sm" title="Retirer de vos favoris">
+                                                                    <i className="fas fa-bookmark"></i> <b>Sauvegardé</b>
+                                                                </Button>
+                                                            </>
+
+                                                            :
+                                                            <>
+                                                                <Button onClick={() => this.favoriteItem(annoncelocation.id)}
+                                                                        className="btn btn-facebook btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                                    <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
+                                                                </Button>
+                                                            </>
+                                                        }
+                                                    </>
+                                                }
+                                            </div>
+
                                         </div>
 
                                         <div className="card">
                                             <div className="card-body">
-                                                <h6 className="card-title">
-                                                    Description
-                                            </h6>
+                                                <h5 className="card-title">
+                                                    À propos de ce <b>{annoncelocation.categoryannoncelocation.name} {annoncelocation.pieces} pièces à {annoncelocation.district}</b>
+                                                </h5>
 
                                                 {annoncelocation.description ? <span className="title text-justify" dangerouslySetInnerHTML={this.getDescription(annoncelocation)} />: <Skeleton count={3}/>}
 
@@ -268,9 +355,33 @@ class Annoncelocationbycategorycityshow extends Component {
                                         </div>
 
                                         <div className="card">
+                                            <div className="social-line social-line-big-icons">
+                                                <div className="container">
+                                                    <div className="row">
+                                                        <div className="col-md-6">
+                                                            <h5 className="info-title"><b>Le loyer mensuel est de</b></h5>
+                                                            {annoncelocation.price ?
+                                                                <h3 className="text-success"><b>{annoncelocation.price.formatMoney(2,'.',',')} <small>FCFA/mois</small></b></h3>
+                                                                :
+                                                                <h5 className="text-success"><b><Skeleton width={150} /></b></h5>
+                                                            }
+                                                        </div>
+                                                        <div className="col-md-6">
+                                                            <h5 className="info-title"><b>Informations suplementaires</b></h5>
+                                                            <p>
+                                                                <b>Dépôt de garantie :</b>
+                                                                <span className="title text-dark"><b> {annoncelocation.award_price ? <>{annoncelocation.award_price.formatMoney(2,'.',',')} <small>FCFA</small></>:null} </b></span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="card">
                                             <div className="card-body">
 
-                                              <ProfileForallAnnoncelocationShow {...annoncelocation} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} copyToClipboard={this.copyToClipboard}/>
+                                              <ProfileForallAnnoncelocationShow {...annoncelocation} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} copyToClipboard={this.copyToClipboard}/>
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">
@@ -316,9 +427,14 @@ class Annoncelocationbycategorycityshow extends Component {
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                             <div className="card-header d-flex align-items-center">
                                                                 <div className="d-flex align-items-center">
-                                                                    <NavLink to={`/pro/${annoncelocation.user.slug}/annonces_locations/`}>
-                                                                        <img src={annoncelocation.user.avatar} style={{ height: "40px", width: "80px" }} alt={annoncelocation.user.first_name} className="avatar" />
-                                                                    </NavLink>
+                                                                    {annoncelocation.user.avatar ?
+                                                                        <NavLink to={`/pro/${annoncelocation.user.slug}/annonces_locations/`}>
+                                                                            <img src={annoncelocation.user.avatar}
+                                                                                 style={{ height: "40px", width: "80px" }}
+                                                                                 alt={annoncelocation.user.first_name}
+                                                                                 className="avatar" />
+                                                                        </NavLink>
+                                                                        : <Skeleton circle={false} height={40} width={80} />}
                                                                     <div className="mx-3">
                                                                         <NavLink to={`/pro/${annoncelocation.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{annoncelocation.user.first_name}</b>
                                                                             <small className="d-block text-muted">12 janv 2019</small>
