@@ -68,4 +68,23 @@ class FavoriteblogannoncereservationController extends Controller
 
 		return response('unfavorite confirmed',Response::HTTP_ACCEPTED);
 	}
+
+
+    public function likedata(Request $request,$id){
+
+        $blogannoncereservation = blogannoncereservation::whereId($id)->firstOrFail();
+
+        $response = auth()->user()->putlikedblogannoncereservations()->attach($blogannoncereservation->id);
+
+        return response()->json(['success'=>$response]);
+    }
+
+    public function unlikedata(Request $request,$id){
+
+        $blogannoncereservation = blogannoncereservation::whereId($id)->firstOrFail();
+
+        $response = auth()->user()->putlikedblogannoncereservations()->detach($blogannoncereservation->id);
+
+        return response()->json(['success'=>$response]);
+    }
 }

@@ -7,7 +7,7 @@ class ButonFavoris extends Component {
            <>
                {this.props.bookmarked ?
                    <Button onClick={() => this.props.unfavoriteItem(this.props.id)}
-                           className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
+                           className="btn btn-info btn-icon btn-sm" title="Retirer de vos favoris">
                        <i className="fas fa-bookmark"></i>
                    </Button>
 
