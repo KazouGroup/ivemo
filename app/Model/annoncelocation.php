@@ -2,8 +2,11 @@
 
 namespace App\Model;
 
+use App\Model\favorite\favoriteannonce;
+use App\Model\favorite\favoriteannoncelocation;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class annoncelocation extends Model
@@ -92,4 +95,10 @@ class annoncelocation extends Model
         ];
     }
 
+    public function bookmarked()
+    {
+        return (bool) favoriteannoncelocation::where('user_id', Auth::guard('web')->id())
+            ->where('annoncelocation_id', $this->id)
+            ->first();
+    }
 }

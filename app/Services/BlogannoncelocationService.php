@@ -15,7 +15,8 @@ class BlogannoncelocationService
 
     public static function apiannonceblogcategorylocations($categoryannoncelocation)
     {
-        $blogannoncelocations = BlogannoncelocationResource::collection(blogannoncelocation::with('user','categoryannoncelocation','member')
+        $blogannoncelocations = BlogannoncelocationResource::collection($categoryannoncelocation->blogannoncelocations()
+            ->with('user','categoryannoncelocation','member')
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
             ->where(['status' => 1,'status_admin' => 1])

@@ -2,8 +2,10 @@
 
 namespace App\Model;
 
+use App\Model\favorite\favoriteannoncevente;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 
@@ -99,4 +101,10 @@ class annoncevente extends Model
         ];
     }
 
+    public function bookmarked()
+    {
+        return (bool) favoriteannoncevente::where('user_id', Auth::guard('web')->id())
+            ->where('annoncevente_id', $this->id)
+            ->first();
+    }
 }
