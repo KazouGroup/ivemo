@@ -23,3 +23,13 @@ Route::get(
     '/favoriteblogannonceventes_unfavorite/{id}',
     'FavoriteblogannonceventeController@unfavorite'
 )->name('favoriteblogannonceventes_unfavorite.unfavorite');
+
+Route::get(
+    '/likedatablogannonceventes_likedata/{id}',
+    'FavoriteblogannonceventeController@likedata'
+)->name('likeblogannonceventes_likedata.likedata');
+
+Route::get(
+    '/likedatablogannonceventes_unlikedata/{id}',
+    'FavoriteblogannonceventeController@unlikedata'
+)->name('likeblogannonceventes_unlikedata.unlikedata');

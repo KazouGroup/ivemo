@@ -14,6 +14,7 @@ import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import AnnoncelocationVenteforBlog from "./AnnoncelocationVenteforBlog";
 import ButonFavoris from "../../../inc/vendor/ButonFavoris";
+import ButonLiked from "../../../inc/vendor/ButonLiked";
 
 
 class BlogannonceventeShow extends Component {
@@ -23,8 +24,46 @@ class BlogannonceventeShow extends Component {
             blogannoncevente: {user:[],categoryannoncevente:[]},
         };
         this.deleteItem = this.deleteItem.bind(this);
+        this.likeItem = this.likeItem.bind(this);
+        this.unlikeItem = this.unlikeItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
         this.unfavoriteItem = this.unfavoriteItem.bind(this);
+    }
+
+    likeItem(id) {
+        const url = route('likeblogannonceventes_likedata.likedata', [id]);
+        dyaxios.get(url).then(() => {
+
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unlikeItem(id) {
+        const url = route('likeblogannonceventes_unlikedata.unlikedata', [id]);
+        dyaxios.get(url).then(() => {
+
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
     }
 
     favoriteItem(id) {
@@ -166,6 +205,13 @@ class BlogannonceventeShow extends Component {
         const suffix = abbrev[order];
         return (visits_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
+
+    data_countlikeFormatter(countlikes, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countlikes)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (countlikes / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     render() {
         const { blogannoncevente } = this.state;
         let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
@@ -224,12 +270,21 @@ class BlogannonceventeShow extends Component {
 
                                                             <div className="text-right ml-auto">
                                                                 {$guest ?
-                                                                    <Button  data-toggle="modal" data-target="#loginModal"
-                                                                             className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
-                                                                        <i className="far fa-bookmark"></i>
-                                                                    </Button>
+                                                                    <>
+                                                                        <Button  data-toggle="modal" data-target="#loginModal"
+                                                                                 className="btn btn-facebook btn-sm btn-neutral" title="J'aime cette article">
+                                                                            <i className="far fa-heart"></i> <b>{this.data_countlikeFormatter(blogannoncereservation.countlikes || "0")}</b>
+                                                                        </Button>
+
+                                                                        <Button  data-toggle="modal" data-target="#loginModal"
+                                                                                 className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                                            <i className="far fa-bookmark"></i>
+                                                                        </Button>
+                                                                    </>
                                                                     :
                                                                     <>
+                                                                        <ButonLiked likeItem={this.likeItem} unlikeItem={this.unlikeItem} {...blogannoncevente} />
+
                                                                         <ButonFavoris favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} {...blogannoncevente} />
 
                                                                         {$userIvemo.id === blogannoncevente.user_id && (

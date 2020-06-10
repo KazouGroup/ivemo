@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Model\favorite\favoriteblogannoncelocation;
+use App\Model\like\likedblogannoncelocation;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -91,6 +92,19 @@ class blogannoncelocation extends Model implements Auditable
         return (bool) favoriteblogannoncelocation::where('user_id', Auth::guard('web')->id())
             ->where('blogannoncelocation_id', $this->id)
             ->first();
+    }
+
+
+    public function likeked()
+    {
+        return (bool) likedblogannoncelocation::where('user_id', Auth::guard('web')->id())
+            ->where('blogannoncelocation_id', $this->id)
+            ->first();
+    }
+
+    public function countlikes()
+    {
+        return $this->hasMany(likedblogannoncelocation::class, 'blogannoncelocation_id');
     }
 
 }

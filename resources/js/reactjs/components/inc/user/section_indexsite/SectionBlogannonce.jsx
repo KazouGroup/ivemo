@@ -152,7 +152,7 @@ class SectionBlogannonce extends Component {
             <>
                 <div className="row d-flex align-items-end">
                     <div className="col-md-12 mx-auto">
-                        <h5 className="title">News depuis le blog </h5>
+                        <h5 className="title">Nos dernières nouveautés</h5>
                     </div>
                 </div>
                 <div className="row">

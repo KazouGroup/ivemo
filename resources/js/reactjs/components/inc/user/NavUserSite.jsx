@@ -24,7 +24,7 @@ class NavUserSite extends PureComponent {
                     <Link to={'/'} className="navbar-brand" >
                         <img src=".." />
                         {$name_site}
-                        </Link>
+                    </Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-bar top-bar"></span>
                         <span className="navbar-toggler-bar middle-bar"></span>
