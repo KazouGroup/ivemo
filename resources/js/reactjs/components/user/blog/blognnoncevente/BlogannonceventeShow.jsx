@@ -273,7 +273,7 @@ class BlogannonceventeShow extends Component {
                                                                     <>
                                                                         <Button  data-toggle="modal" data-target="#loginModal"
                                                                                  className="btn btn-facebook btn-sm btn-neutral" title="J'aime cette article">
-                                                                            <i className="far fa-heart"></i> <b>{this.data_countlikeFormatter(blogannoncereservation.countlikes || "0")}</b>
+                                                                            <i className="far fa-heart"></i> <b>{this.data_countlikeFormatter(blogannoncevente.countlikes || "0")}</b>
                                                                         </Button>
 
                                                                         <Button  data-toggle="modal" data-target="#loginModal"
