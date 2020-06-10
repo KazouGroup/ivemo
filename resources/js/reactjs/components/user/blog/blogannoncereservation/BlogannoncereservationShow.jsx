@@ -14,7 +14,8 @@ import Swal from "sweetalert2";
 import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import ButonFavoris from "../../../inc/vendor/ButonFavoris";
-
+import ButonLiked from "../../../inc/vendor/ButonLiked";
+const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 class BlogannoncereservationShow extends Component {
     constructor(props) {
@@ -24,8 +25,46 @@ class BlogannoncereservationShow extends Component {
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.likeItem = this.likeItem.bind(this);
+        this.unlikeItem = this.unlikeItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
         this.unfavoriteItem = this.unfavoriteItem.bind(this);
+    }
+
+    likeItem(id) {
+        const url = route('likeblogannoncereservations_likedata.likedata', [id]);
+        dyaxios.get(url).then(() => {
+
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unlikeItem(id) {
+        const url = route('likeblogannoncereservations_unlikedata.unlikedata', [id]);
+        dyaxios.get(url).then(() => {
+
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
     }
 
     favoriteItem(id) {
@@ -163,11 +202,16 @@ class BlogannoncereservationShow extends Component {
         return { __html: md.render(blogannoncereservation.description) };
     }
     data_countFormatter(visits_count, precision) {
-        const abbrev = ['', 'k', 'M', 'B', 'T'];
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(visits_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
         const suffix = abbrev[order];
         return (visits_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+    data_countlikeFormatter(countlikes, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countlikes)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (countlikes / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
     render() {
         const { blogannoncereservation } = this.state;
@@ -226,28 +270,37 @@ class BlogannoncereservationShow extends Component {
 
                                                             <div className="text-right ml-auto">
                                                                 {$guest ?
-                                                                    <Button  data-toggle="modal" data-target="#loginModal"
-                                                                             className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
-                                                                        <i className="far fa-bookmark"></i>
-                                                                    </Button>
+                                                                    <>
+                                                                        <Button  data-toggle="modal" data-target="#loginModal"
+                                                                                 className="btn btn-facebook btn-sm btn-neutral" title="J'aime cette article">
+                                                                             <i className="far fa-heart"></i> <b>{this.data_countlikeFormatter(blogannoncereservation.countlikes || "0")}</b>
+                                                                        </Button>
+
+                                                                        <Button  data-toggle="modal" data-target="#loginModal"
+                                                                                 className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                                            <i className="far fa-bookmark"></i>
+                                                                        </Button>
+                                                                    </>
+
                                                                     :
                                                                     <>
+
+                                                                        <ButonLiked likeItem={this.likeItem} unlikeItem={this.unlikeItem} {...blogannoncereservation} />
+
                                                                         <ButonFavoris favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} {...blogannoncereservation} />
 
                                                                         {$userIvemo.id === blogannoncereservation.user_id && (
                                                                             <>
-                                                                                <div className="text-right ml-auto">
-                                                                                    <a href={`#${blogannoncereservation.visits_count}`} className="btn btn-sm btn-secondary">
-                                                                                        <i class="far fa-eye"></i> <b>{this.data_countFormatter(blogannoncereservation.visits_count)}</b>
-                                                                                    </a>
-                                                                                    <NavLink to={`/blogs/annonce_reservations/${blogannoncereservation.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" title="Editer cet article">
-                                                                                        <i className="now-ui-icons ui-2_settings-90" />
-                                                                                    </NavLink>
-                                                                                    <Button
-                                                                                        className="btn btn-danger btn-icon btn-sm" onClick={() => this.deleteItem(blogannoncereservation.id)} color="secondary" title="Supprimer cette annonce">
-                                                                                        <i className="now-ui-icons ui-1_simple-remove" />
-                                                                                    </Button>{" "}
-                                                                                </div>
+                                                                                <a href={`#${blogannoncereservation.visits_count}`} className="btn btn-sm btn-secondary">
+                                                                                    <i className="far fa-eye"></i> <b>{this.data_countFormatter(blogannoncereservation.visits_count)}</b>
+                                                                                </a>
+                                                                                <NavLink to={`/blogs/annonce_reservations/${blogannoncereservation.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" title="Editer cet article">
+                                                                                    <i className="now-ui-icons ui-2_settings-90" />
+                                                                                </NavLink>
+                                                                                <Button
+                                                                                    className="btn btn-danger btn-icon btn-sm" onClick={() => this.deleteItem(blogannoncereservation.id)} color="secondary" title="Supprimer cette annonce">
+                                                                                    <i className="now-ui-icons ui-1_simple-remove" />
+                                                                                </Button>{" "}
                                                                             </>
                                                                         )}
 

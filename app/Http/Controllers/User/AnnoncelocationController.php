@@ -190,15 +190,23 @@ class AnnoncelocationController extends Controller
 
     public function apiannoncelocationbyannoncetype(annoncetype $annoncetype)
     {
-       $annonceslocations = $annoncetype->annoncelocations()->whereIn('annoncetype_id',[$annoncetype->id])
-           ->with('user','categoryannoncelocation','city','annoncetype')
-           ->with(['user.profile' => function ($q){$q->distinct()->get();}])
-           ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
-           ->whereHas('city', function ($q) {$q->where('status',1);})
-           ->where(['status' => 1,'status_admin' => 1])
-           ->orderBy('created_at','desc')->paginate(30);
+        $annonceslocations = AnnoncelocationResource::collection($annoncetype->annoncelocations()
+            ->whereIn('annoncetype_id',[$annoncetype->id])
+            ->with('user','categoryannoncelocation','city','annoncetype')
+            ->with(['user.profile' => function ($q){$q->distinct()->get();}])
+            ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->where(['status' => 1,'status_admin' => 1])
+            ->orderBy('created_at','desc')->paginate(40));
 
         return response()->json($annonceslocations, 200);
+    }
+
+    public function apiannoncelocationbycategoryannoncelocationcount(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation)
+    {
+        $annoncelocation = AnnoncelocationService::apiannoncelocationbycategoryannoncelocationcount($annoncetype,$categoryannoncelocation);
+
+        return response()->json($annoncelocation, 200);
     }
 
     public function apiannoncelocationbycategoryannoncelocation(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation)
@@ -208,9 +216,23 @@ class AnnoncelocationController extends Controller
         return response()->json($annoncelocation, 200);
     }
 
+    public function apiannoncelocationbycitycount(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city)
+    {
+        $annoncelocations = AnnoncelocationService::apiannoncelocationbycitycount($annoncetype,$categoryannoncelocation,$city);
+
+        return response()->json($annoncelocations, 200);
+    }
+
     public function apiannoncelocationbycity(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city)
     {
         $annoncelocations = AnnoncelocationService::apiannoncelocationbycity($annoncetype,$categoryannoncelocation,$city);
+
+        return response()->json($annoncelocations, 200);
+    }
+
+    public function apiannoncelocationsbyannoncetypebycitycount(annoncetype $annoncetype,city $city)
+    {
+        $annoncelocations = AnnoncelocationService::apiannoncelocationsbyannoncetypebycitycount($annoncetype,$city);
 
         return response()->json($annoncelocations, 200);
     }

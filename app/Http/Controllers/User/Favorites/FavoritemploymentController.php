@@ -34,7 +34,7 @@ class FavoritemploymentController extends Controller
     {
         $this->authorize('update',$user);
 
-        $favoritemployments = favoritemployment::with('user','employment')
+        $favoritemployments = $user->favoritemployments()->with('user','employment')
             ->whereIn('user_id',[$user->id])
             ->with(['employment.categoryemployment' => function ($q){
                 $q->distinct()->get();},

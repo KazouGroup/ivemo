@@ -32,8 +32,8 @@ class BlogannoncelocationIntesseAnnonseShow extends Component {
         ):(
             blogsinteresse.map(item => {
                 return(
-                        <Fragment>
-                            <div key={item.id} className="col-md-4 mx-auto">
+                        <Fragment key={item.id}>
+                            <div className="col-md-4 mx-auto">
                                 <div className="card card-blog card-plain">
                                     <div className="card-image">
                                         <a target="_blank" href={`/blogs/annonce_locations/${item.categoryannoncelocation.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}>
@@ -78,8 +78,6 @@ class BlogannoncelocationIntesseAnnonseShow extends Component {
                                     {mapBlogsinteresses}
 
                                 </div>
-
-
 
                             </div>
                         </div>

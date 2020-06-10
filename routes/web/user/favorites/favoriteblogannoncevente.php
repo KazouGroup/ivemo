@@ -7,11 +7,6 @@ Route::group(['prefix' => 'api'], function () {
         'FavoriteblogannonceventeController@apiuserdatafavoritfavoriteblogannoncevente'
     )->name('api.userdatafavoritfavoriteblogannoncevente');
 
-    Route::get(
-        'profile/{user}/personal_settings/favorite_blogannonceventes_count',
-        'FavoriteblogannonceventeController@apifavoritfavoriteblogannoncevente_count'
-    )->name('api.userfavoritfavoriteblogannoncevente_count');
-
 });
 
 Route::get(
@@ -28,3 +23,13 @@ Route::get(
     '/favoriteblogannonceventes_unfavorite/{id}',
     'FavoriteblogannonceventeController@unfavorite'
 )->name('favoriteblogannonceventes_unfavorite.unfavorite');
+
+Route::get(
+    '/favoriteannonceventes_favorite/{id}',
+    'FavoriteannonceventeController@favorite'
+)->name('favoriteannonceventes_favorite.favorite');
+
+Route::get(
+    '/favoriteannonceventes_unfavorite/{id}',
+    'FavoriteannonceventeController@unfavorite'
+)->name('favoriteannonceventes_unfavorite.unfavorite');

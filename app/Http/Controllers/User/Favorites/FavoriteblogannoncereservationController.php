@@ -35,7 +35,7 @@ class FavoriteblogannoncereservationController extends Controller
     {
         $this->authorize('update',$user);
 
-        $favoriteblogannoncereservations = favoriteblogannoncereservation::with('user','blogannoncereservation')
+        $favoriteblogannoncereservations = $user->favoriteblogannoncereservations()->with('user','blogannoncereservation')
             ->whereIn('user_id',[$user->id])
             ->with(['blogannoncereservation.categoryannoncereservation' => function ($q){
                 $q->distinct()->get();},
@@ -68,4 +68,23 @@ class FavoriteblogannoncereservationController extends Controller
 
 		return response('unfavorite confirmed',Response::HTTP_ACCEPTED);
 	}
+
+
+    public function likedata(Request $request,$id){
+
+        $blogannoncereservation = blogannoncereservation::whereId($id)->firstOrFail();
+
+        $response = auth()->user()->putlikedblogannoncereservations()->attach($blogannoncereservation->id);
+
+        return response()->json(['success'=>$response]);
+    }
+
+    public function unlikedata(Request $request,$id){
+
+        $blogannoncereservation = blogannoncereservation::whereId($id)->firstOrFail();
+
+        $response = auth()->user()->putlikedblogannoncereservations()->detach($blogannoncereservation->id);
+
+        return response()->json(['success'=>$response]);
+    }
 }

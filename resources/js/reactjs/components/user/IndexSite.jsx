@@ -124,9 +124,19 @@ class IndexSite extends Component {
                             </div>
 
                             <div className="row">
-                                <SectionLocationbyCity/>
-                                <SectionReservationbyCity/>
-                                <SectionVentebyCity/>
+
+                                <div className="col-md-4">
+                                    <SectionLocationbyCity/>
+                                </div>
+
+                                <div className="col-md-4">
+                                    <SectionReservationbyCity/>
+                                </div>
+
+                                <div className="col-md-4">
+                                    <SectionVentebyCity/>
+                                </div>
+
                             </div>
                         </div>
                         <FooterBigUserSite />

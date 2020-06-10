@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Model\favorite\favoriteblogannoncereservation;
+use App\Model\like\likedblogannoncereservation;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -91,5 +92,17 @@ class blogannoncereservation extends Model implements Auditable
         return (bool) favoriteblogannoncereservation::where('user_id', Auth::guard('web')->id())
             ->where('blogannoncereservation_id', $this->id)
             ->first();
+    }
+
+    public function likeked()
+    {
+        return (bool) likedblogannoncereservation::where('user_id', Auth::guard('web')->id())
+            ->where('blogannoncereservation_id', $this->id)
+            ->first();
+    }
+
+    public function countlikes()
+    {
+        return $this->hasMany(likedblogannoncereservation::class, 'blogannoncereservation_id');
     }
 }

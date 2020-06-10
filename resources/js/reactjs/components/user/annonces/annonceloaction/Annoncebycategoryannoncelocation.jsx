@@ -25,10 +25,13 @@ class Annoncebycategoryannoncelocation extends Component {
             object: 'Annonce double',
             errors: [],
             annonceItem: {user:[]},
-            annoncelocationbycategory: {annoncelocations:{categoryannoncelocation:[],city:[],user:[]}},
+            annoncelocations:{categoryannoncelocation:[],city:[],user:[]},
+            annoncelocationbycategory: [],
             cityannoncelocations:{user:[]},
         };
         this.deleteItem = this.deleteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
         this.signalemessageItem = this.signalemessageItem.bind(this);
@@ -80,6 +83,70 @@ class Annoncebycategoryannoncelocation extends Component {
         this.setState({
             annonceItem: item
         });
+    }
+
+    favoriteItem(id) {
+        const url = route('favoriteannoncelocations_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('favoriteannoncelocations_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce retirée de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
     }
 
     sendmessageItem(e) {
@@ -177,16 +244,6 @@ class Annoncebycategoryannoncelocation extends Component {
     }
 
 
-    loadItems(){
-        let itemannoncetype = this.props.match.params.annoncetype;
-        let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
-        let url = route('api.annoncelocationbycategoryannoncelocations_site',[itemannoncetype,itemCategoryannoncelocation]);
-        dyaxios.get(url).then(response => this.setState({annoncelocationbycategory: response.data,}));
-        let url1 = route('api.annoncelocationbycategorycitycount_site',[itemCategoryannoncelocation]);
-        dyaxios.get(url1).then(response => this.setState({cityannoncelocations: response.data,}));
-
-    }
-
     unactiveItem(id){
         Swal.fire({
             title: 'Désactivé l\'annonce?',
@@ -201,6 +258,10 @@ class Annoncebycategoryannoncelocation extends Component {
             reverseButtons: true,
         }).then((result) => {
             if (result.value) {
+
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.annoncelocations.filter(isNotId);
+                this.setState({ annoncelocations: updatedItems });
 
                 //Envoyer la requet au server
                 let url = route('annonces_locations_unactivated.site',id);
@@ -257,6 +318,10 @@ class Annoncebycategoryannoncelocation extends Component {
         }).then((result) => {
             if (result.value) {
 
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.annoncelocations.filter(isNotId);
+                this.setState({ annoncelocations: updatedItems });
+
                 const url = route('annonces_locations_delete.site',id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
@@ -296,6 +361,14 @@ class Annoncebycategoryannoncelocation extends Component {
         });
     }
 
+    loadItems(){
+        let itemannoncetype = this.props.match.params.annoncetype;
+        let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
+        dyaxios.get(route('api.annoncelocationbycategoryannoncelocations_site',[itemannoncetype,itemCategoryannoncelocation])).then(response => this.setState({annoncelocations: response.data,}));
+        dyaxios.get(route('api.annoncelocationbycategoryannoncelocationscount_site',[itemannoncetype,itemCategoryannoncelocation])).then(response => this.setState({annoncelocationbycategory: response.data,}));
+        dyaxios.get(route('api.annoncelocationbycategorycitycount_site',[itemCategoryannoncelocation])).then(response => this.setState({cityannoncelocations: response.data,}));
+
+    }
 
     // lifecycle method
     componentDidMount() {
@@ -310,12 +383,11 @@ class Annoncebycategoryannoncelocation extends Component {
         return (annoncelocations_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
     render() {
-        const {annoncelocationbycategory,cityannoncelocations,annonceItem} = this.state;
-        const allannoncelocationsbycategory = annoncelocationbycategory.annoncelocations;
-        const mapAnnoncelocations = allannoncelocationsbycategory.length >= 0 ? (
-            allannoncelocationsbycategory.map(item => {
+        const {annoncelocations,annoncelocationbycategory,cityannoncelocations,annonceItem} = this.state;
+        const mapAnnoncelocations = annoncelocations.length >= 0 ? (
+            annoncelocations.map(item => {
                 return(
-                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser}/>
+                    <AnnonceslocationList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser}/>
                 )
             })
         ):(

@@ -7,11 +7,6 @@ Route::group(['prefix' => 'api'], function () {
         'FavoriteblogannoncelocationController@apiuserdatafavoritfavoriteblogannoncelocation'
     )->name('api.userdatafavoritfavoriteblogannoncelocation');
 
-    Route::get(
-        'profile/{user}/personal_settings/favorite_blogannoncelocations_count',
-        'FavoriteblogannoncelocationController@apifavoritfavoriteblogannoncelocation_count'
-    )->name('api.userfavoritfavoriteblogannoncelocation_count');
-
 });
 
 Route::get(
