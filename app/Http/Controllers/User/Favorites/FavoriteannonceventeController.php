@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User\Favorites;
 
 use App\Http\Controllers\Controller;
 use App\Model\annoncelocation;
+use App\Model\annoncevente;
 use App\Model\blogannoncelocation;
 use App\Model\user;
 use App\Model\favorite\favoritemployment;
@@ -56,7 +57,7 @@ class FavoriteannonceventeController extends Controller
 
     public function favorite(Request $request,$id)
     {
-        $annoncevente = annoncelocation::whereId($id)->firstOrFail();
+        $annoncevente = annoncevente::whereId($id)->firstOrFail();
 
         Auth::user()->bookmarksfavoriteannonceventes()->attach($annoncevente->id);
 
@@ -65,7 +66,7 @@ class FavoriteannonceventeController extends Controller
 
     public function unfavorite(Request $request,$id)
     {
-        $annoncevente = annoncelocation::whereId($id)->firstOrFail();
+        $annoncevente = annoncevente::whereId($id)->firstOrFail();
 
         Auth::user()->bookmarksfavoriteannonceventes()->detach($annoncevente->id);
 

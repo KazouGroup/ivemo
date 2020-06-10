@@ -80,14 +80,14 @@ class AnnonceventeController extends Controller
 
     public function apiannonceventebyannoncetype(annoncetype $annoncetype)
     {
-        $annoncesventes = $annoncetype->annonceventes()->whereIn('annoncetype_id',[$annoncetype->id])
+        $annoncesventes = AnnonceventeResource::collection($annoncetype->annonceventes()->whereIn('annoncetype_id',[$annoncetype->id])
             ->with('user','categoryannoncevente','city','annoncetype')
             ->with(['user.profile' => function ($q){$q->distinct()->get();}])
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')
             ->where(['status' => 1,'status_admin' => 1])
-            ->distinct()->paginate(40)->toArray();
+            ->distinct()->paginate(40));
 
         return response()->json($annoncesventes, 200);
     }
@@ -106,6 +106,13 @@ class AnnonceventeController extends Controller
         return response()->json($annoncevente, 200);
     }
 
+    public function apiannonceventebycategoryannonceventecount(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente)
+    {
+        $annoncevente = AnnonceventeService::apiannonceventebycategoryannonceventecount($annoncetype,$categoryannoncevente);
+
+        return response()->json($annoncevente, 200);
+    }
+
     /**
      * @param annoncetype $annoncetype
      * @param categoryannoncevente $categoryannoncevente
@@ -117,6 +124,20 @@ class AnnonceventeController extends Controller
     public function apiannonceventebycity(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city)
     {
         $annonceventecities = AnnonceventeService::apiannonceventebycity($annoncetype,$categoryannoncevente,$city);
+
+        return response()->json($annonceventecities, 200);
+    }
+
+    public function apiannonceventebycitycount(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city)
+    {
+        $annonceventecities = AnnonceventeService::apiannonceventebycitycount($annoncetype,$categoryannoncevente,$city);
+
+        return response()->json($annonceventecities, 200);
+    }
+
+    public function apiannonceventesbyannoncetypebycitycount(annoncetype $annoncetype,city $city)
+    {
+        $annonceventecities = AnnonceventeService::apiannonceventesbyannoncetypebycitycount($annoncetype,$city);
 
         return response()->json($annonceventecities, 200);
     }

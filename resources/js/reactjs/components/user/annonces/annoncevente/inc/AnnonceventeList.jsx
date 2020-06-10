@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { Remarkable } from 'remarkable';
 import {Button, UncontrolledTooltip} from "reactstrap";
 import moment from "moment";
+import Skeleton from "react-loading-skeleton";
 
 
 class AnnonceventeList extends Component {
@@ -63,6 +64,14 @@ class AnnonceventeList extends Component {
                                                             </button>
                                                         </>
                                                     }
+
+                                                    <NavLink to={`/annonce_vente/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
+                                                        <i className="now-ui-icons ui-2_settings-90"/>
+                                                    </NavLink>
+                                                    <Button
+                                                        className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} title="Supprimer cette annonce">
+                                                        <i className="now-ui-icons ui-1_simple-remove"/>
+                                                    </Button>
                                                 </>
                                             )}
                                         </>
@@ -130,9 +139,14 @@ class AnnonceventeList extends Component {
                                 </Link>
                                 <div className="card-header d-flex align-items-center">
                                     <div className="d-flex align-items-center">
-                                        <NavLink to={`/pro/${this.props.user.slug}/annonces_ventes/`}>
-                                            <img src={this.props.user.avatar} style={{ height: "40px", width: "80px" }} alt={`${this.props.user.first_name}`} className="avatar" />
-                                        </NavLink>
+                                        {this.props.user.avatar ?
+                                            <NavLink to={`/pro/${this.props.user.slug}/annonces_ventes/`}>
+                                                <img src={this.props.user.avatar}
+                                                     style={{ height: "40px", width: "80px" }}
+                                                     alt={this.props.user.first_name}
+                                                     className="avatar" />
+                                            </NavLink>
+                                            : <Skeleton circle={false} height={40} width={80} />}
                                         <div className="mx-3">
                                             <NavLink to={`/pro/${this.props.user.slug}/annonces_ventes/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
                                                 <small className="d-block text-muted"><b>{moment(this.props.created_at).format('LL')}</b></small>
@@ -142,36 +156,42 @@ class AnnonceventeList extends Component {
 
                                     <div className="text-right mx-auto">
 
+                                        {$guest ?
+
+                                            <Button  data-toggle="modal" data-target="#loginModal"
+                                                     className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                <i className="far fa-bookmark"></i>
+                                            </Button>
+                                            :
+                                            <>
+                                                {this.props.bookmarked ?
+
+                                                    <>
+                                                        <Button onClick={() => this.props.unfavoriteItem(this.props.id)}
+                                                                className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
+                                                            <i className="fas fa-bookmark"></i>
+                                                        </Button>
+                                                    </>
+
+                                                    :
+                                                    <>
+                                                        <Button onClick={() => this.props.favoriteItem(this.props.id)}
+                                                                className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                            <i className="far fa-bookmark"></i>
+                                                        </Button>
+                                                    </>
+                                                }
+                                            </>
+                                        }
+
                                         <Button className="btn btn-icon btn-sm btn-warning" onClick={() => this.props.contactUser(this.props)} title={`Contacter ${this.props.user.first_name}`}>
                                             <i className="far fa-envelope"/>
                                         </Button>
-                                        <button type="button" rel="tooltip" onClick={() => this.props.signalerUser(this.props)}
-                                            className="btn btn-instagram btn-icon btn-sm">
+                                        <button type="button" title="Signaler" onClick={() => this.props.signalerUser(this.props)}
+                                                className="btn btn-instagram btn-icon btn-sm">
                                             <i className="far fa-flag"></i>
                                         </button>
-                                        {/*
-                                           <NavLink to={`/annonces_ventes/${this.props.annoncetype.slug}/${this.props.categoryannoncevente.slug}/${this.props.city.slug}/${this.props.slug}/`} className="btn btn-icon btn-sm btn-primary">
-                                            <i className="now-ui-icons location_pin"/>
-                                        </NavLink>
-                                        */}
 
-
-                                        {!$guest && (
-                                            <>
-                                                {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
-                                                    <>
-                                                        <NavLink to={`/annonce_vente/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
-                                                            <i className="now-ui-icons ui-2_settings-90"/>
-                                                        </NavLink>
-                                                        <Button
-                                                            className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} title="Supprimer cette annonce">
-                                                            <i className="now-ui-icons ui-1_simple-remove"/>
-                                                        </Button>{" "}
-                                                    </>
-                                                )}
-
-                                            </>
-                                        )}
                                     </div>
 
                                 </div>
