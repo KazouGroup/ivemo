@@ -90,14 +90,22 @@
                                         <tbody>
                                         <tr v-for="item in categoryemployements" :key="item.id">
                                             <td><img :src="item.photo" style="height: 50px; width: 80px;border-radius: 4px"></td>
-                                            <td><b>{{ item.name }}</b></td>
+                                            <td>
+                                                <router-link :to="{ name: 'employments_show.dashboard', params: { categoryemployment: item.slug  } }">
+                                                    <b>{{ item.name }}</b>
+                                                </router-link>
+                                            </td>
                                             <td>
                                                 <div class="timeline-heading">
                                                     <span v-if="item.status" class="badge badge-success"><b>Active</b></span>
                                                     <span v-else-if="!item.status"  class="badge badge-rose"><b>Deactive</b></span>
                                                 </div>
                                             </td>
-                                            <td><b>{{ item.employments_count }}</b></td>
+                                            <td>
+                                                <router-link :to="{ name: 'employments_show.dashboard', params: { categoryemployment: item.slug  } }">
+                                                    <b>{{ item.employments_count }}</b>
+                                                </router-link>
+                                            </td>
                                             <td v-if="$auth.can('manage-annonce-employements')" class="text-right">
                                                 <template>
                                                     <button @click="disableItem(item.id)" v-if="item.status" type="button"

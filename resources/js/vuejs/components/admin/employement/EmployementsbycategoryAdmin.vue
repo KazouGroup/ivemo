@@ -113,12 +113,12 @@
                                 <div class="toolbar">
 
                                     <div  class="submit text-center">
-                                        <router-link  :to="{ name: 'employments.dashboard'}" class="btn btn-secondary btn-raised">
+                                        <button  @click="$router.go(-1)" class="btn btn-dark btn-raised">
                                                <span class="btn-label">
                                                 <i class="material-icons">keyboard_backspace</i>
                                               </span>
                                             <b class="title_hover">Retour</b>
-                                        </router-link>
+                                        </button>
                                     </div>
 
                                 </div>
