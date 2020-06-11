@@ -58,6 +58,10 @@ Route::group(['prefix' => 'api'], function () {
         'AnnonceventeController@apiannoncesventesbyusercategoryannoncevente'
     )->name('api.annoncesventesbyusercategoryannoncevente_site');
 
+    Route::get(
+        'annonces_ventes_interesses/{annoncetype}/{categoryannoncevente}/{city}',
+        'AnnonceventeController@apiannonceventeinteresse'
+    )->name('api.annonceventeinteresse_site');
 
     Route::get(
         'annonce_vente/{annoncetype}/{annoncevente:slugin}',

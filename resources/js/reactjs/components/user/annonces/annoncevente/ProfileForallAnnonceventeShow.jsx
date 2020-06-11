@@ -61,10 +61,9 @@ class ProfileForallAnnonceventeShow extends Component {
                                 }
                             </>
                         }
-                        <UncontrolledTooltip placement="bottom" target="TooltipPhone">
-                            3425712192
-                        </UncontrolledTooltip>
-                        <Button className="btn btn-icon btn-sm btn-info" id="TooltipPhone">
+                        <Button className="btn btn-icon btn-sm btn-info" data-container="body"
+                                data-original-title="Phone number" data-toggle="popover" data-placement="bottom"
+                                data-content={this.props.user.phone}>
                             <i className="now-ui-icons tech_mobile"/>
                         </Button>
                         {this.props.user.profile.site_internet && (

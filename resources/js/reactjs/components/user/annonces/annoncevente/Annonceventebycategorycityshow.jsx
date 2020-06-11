@@ -351,7 +351,7 @@ class Annonceventebycategorycityshow extends Component {
                                                             {annoncevente.price ?
                                                                 <h3 className="text-success"><b>{annoncevente.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h3>
                                                                 :
-                                                                <h5 className="text-success"><b><Skeleton width={150} /></b></h5>
+                                                                <h5 className="text-success"><b><Skeleton width={250} /></b></h5>
                                                             }
                                                         </div>
                                                         <div className="col-md-6">

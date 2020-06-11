@@ -256,26 +256,26 @@ class AnnonceventeController extends Controller
 
     public function apiannonceventeinteresse(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city)
     {
-        $annoncevente = $categoryannoncevente->annonceventes()->whereIn('annoncetype_id',[$annoncetype->id])
+        $annoncevente = AnnonceventeResource::collection($categoryannoncevente->annonceventes()->whereIn('annoncetype_id',[$annoncetype->id])
             ->with('user','city','annoncetype','categoryannoncevente')
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
             ->whereIn('city_id',[$city->id])
-            ->orderByRaw('RAND()')
+            ->orderBy('created_at','desc')
             ->where(['status' => 1,'status_admin' => 1])
-            ->take(10)->distinct()->get()->toArray();
+            ->take(10)->distinct()->get());
         return response()->json($annoncevente, 200);
     }
 
     public function apiannonceventeinteresseslug(categoryannoncevente $categoryannoncevente)
     {
-        $annoncevente = $categoryannoncevente->annonceventes()
+        $annoncevente = AnnonceventeResource::collection($categoryannoncevente->annonceventes()
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
             ->with('user','city','annoncetype','categoryannoncevente')
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
             ->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
-            ->take(3)->distinct()->get()->toArray();
+            ->take(3)->distinct()->get());
         return response()->json($annoncevente, 200);
     }
 
