@@ -290,7 +290,7 @@ class BlogannonceventeShow extends Component {
                                                                         {$userIvemo.id === blogannoncevente.user_id && (
                                                                             <Fragment> <a
                                                                                 href={`#${blogannoncevente.visits_count}`}
-                                                                                className="btn btn-sm btn-secondary">
+                                                                                className="btn btn-sm btn-secondary" title={`${blogannoncevente.visits_count} ${blogannoncevente.visits_count > 1 ? "vues" : "vue"}`}>
                                                                                 <i className="far fa-eye"></i>
                                                                                 <b>{this.data_countFormatter(blogannoncevente.visits_count)}</b>
                                                                             </a>

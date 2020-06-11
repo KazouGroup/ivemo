@@ -291,7 +291,7 @@ class BlogannoncereservationShow extends Component {
 
                                                                         {$userIvemo.id === blogannoncereservation.user_id && (
                                                                             <>
-                                                                                <a href={`#${blogannoncereservation.visits_count}`} className="btn btn-sm btn-secondary">
+                                                                                <a href={`#${blogannoncereservation.visits_count}`} className="btn btn-sm btn-secondary" title={`${blogannoncereservation.visits_count} ${blogannoncereservation.visits_count > 1 ? "vues" : "vue"}`}>
                                                                                     <i className="far fa-eye"></i> <b>{this.data_countFormatter(blogannoncereservation.visits_count)}</b>
                                                                                 </a>
                                                                                 <NavLink to={`/blogs/annonce_reservations/${blogannoncereservation.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" title="Editer cet article">

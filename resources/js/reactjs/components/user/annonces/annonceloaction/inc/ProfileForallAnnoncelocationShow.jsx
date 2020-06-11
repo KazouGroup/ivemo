@@ -78,7 +78,7 @@ class ProfileForallAnnoncelocationShow extends Component {
                                 {($userIvemo.id === this.props.user.id && $userIvemo.id === this.props.user_id) && (
                                     <>
                                         <a href={`#${this.props.visits_count}`}
-                                           className="btn btn-sm btn-secondary">
+                                           className="btn btn-sm btn-secondary" title={`${this.props.visits_count} ${this.props.visits_count > 1 ? "vues" : "vue"}`}>
                                             <i className="far fa-eye"></i> <b>{this.data_countFormatter(this.props.visits_count)}</b>
                                         </a>
                                         <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}

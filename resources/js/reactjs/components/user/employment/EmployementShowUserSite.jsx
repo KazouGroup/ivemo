@@ -483,7 +483,7 @@ class EmployementShowUserSite extends Component {
                                                                 {($userIvemo.id === employment.user.id && $userIvemo.id === employment.user_id) && (
                                                                     <>
                                                                         <a href={`#${employment.visits_count}`}
-                                                                           className="btn btn-sm btn-secondary">
+                                                                           className="btn btn-sm btn-secondary" title={`${employment.visits_count} ${employment.visits_count > 1 ? "vues" : "vue"}`}>
                                                                             <i className="far fa-eye"></i> <b>{this.data_countFormatter(employment.visits_count)}</b>
                                                                         </a>
                                                                         <button type="button" rel="tooltip" onClick={() => this.unactiveItem(employment.id)}

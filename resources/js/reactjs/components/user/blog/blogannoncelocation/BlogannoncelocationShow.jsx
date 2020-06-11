@@ -295,7 +295,7 @@ class BlogannoncelocationShow extends Component {
                                                                         {$userIvemo.id === blogannoncelocation.user_id && (
                                                                             <Fragment>
                                                                                 <a href={`#${blogannoncelocation.visits_count}`}
-                                                                                   className="btn btn-sm btn-secondary">
+                                                                                   className="btn btn-sm btn-secondary" title={`${blogannoncelocation.visits_count} ${blogannoncelocation.visits_count > 1 ? "vues" : "vue"}`}>
                                                                                     <i className="far fa-eye"></i> <b>{this.data_countFormatter(blogannoncelocation.visits_count)}</b>
                                                                                 </a>
                                                                                 <NavLink

@@ -17,12 +17,6 @@ Route::get(
 )->name('api.citiesannonceventes_site');
 
 Route::get(
-    'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}/{annoncevente}',
-    'AnnonceventeController@apiannonceventebycategoryannonceventeslug'
-)->name('api.annonceventebycategoryannonceventeslug_site');
-
-
-Route::get(
     'annonces_ventes_by_city_count/{categoryannoncevente}',
     'AnnonceventeController@apiannonceventebycategorycount'
 )->name('api.annonceventebycategorycitycount_site');
