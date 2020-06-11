@@ -24,31 +24,33 @@ class FavoriteannoncelocationController extends Controller
         $this->middleware('auth');
     }
 
-    public function favoritemployment(user $user)
+    public function favoriteannoncelocation(user $user)
     {
-        return view ('user.profile.employments.privatefavoritemployments',[
+        return view ('user.profile.annonces.privatefavoriteannonces',[
             'user' => $user,
         ]);
     }
 
-     public function apiuserdatafavoritemployment(user $user)
+     public function apiuserdatafavoriteannoncelocation(user $user)
     {
         $this->authorize('update',$user);
 
-        $favoriteannoncelocations = $user->favoriteannoncelocations()->with('user','employment')
+        $favoriteannoncelocations = $user->favoriteannoncelocations()->with('user','annoncelocation')
             ->whereIn('user_id',[$user->id])
-            ->with(['employment.categoryemployment' => function ($q){
+            ->with(['annoncelocation.categoryannoncelocation' => function ($q){
                 $q->distinct()->get();},
-                'employment.city' => function ($q){
+                'annoncelocation.city' => function ($q){
                     $q->distinct()->get();},
-                'employment.member' => function ($q){
+                'annoncelocation.annoncetype' => function ($q){
                     $q->distinct()->get();},
-                'employment.user' => function ($q){
+                'annoncelocation.member' => function ($q){
+                    $q->distinct()->get();},
+                'annoncelocation.user' => function ($q){
                     $q->distinct()->get();}
             ])
-            ->whereHas('employment', function ($q) {$q->where(['status' => 1,'status_admin' => 1]);})
-            ->whereHas('employment.city', function ($q) {$q->where('status',1);})
-            ->whereHas('employment.categoryemployment', function ($q) {$q->where('status',1);})
+            ->whereHas('annoncelocation', function ($q) {$q->where(['status' => 1,'status_admin' => 1]);})
+            ->whereHas('annoncelocation.city', function ($q) {$q->where('status',1);})
+            ->whereHas('annoncelocation.categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')->distinct()->get();
 
         return response()->json($favoriteannoncelocations, 200);

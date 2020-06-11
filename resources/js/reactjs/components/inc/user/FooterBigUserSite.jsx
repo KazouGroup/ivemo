@@ -198,7 +198,7 @@ class FooterBigUserSite extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="text-center" id="copyright">
+                        <div className="copyright" id="copyright">
                             Copyright © {new Date().getFullYear()}, {$name_site} All Rights Reserved Realisé par
                             <a href="/" className="pl-2 text-primary">KazouGroup Srl</a>.
                         </div>

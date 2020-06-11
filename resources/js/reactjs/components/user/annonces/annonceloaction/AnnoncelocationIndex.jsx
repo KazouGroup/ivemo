@@ -25,7 +25,7 @@ class AnnoncelocationIndex extends Component {
             object: 'Annonce double',
             errors: [],
             annonceItem: { user: [] },
-            annoncelocations: { categoryannoncelocation: [], city: [], user: [] },
+            annoncelocations: {annoncetype: [], categoryannoncelocation: [], city: [], user: [] },
         };
 
         this.deleteItem = this.deleteItem.bind(this);

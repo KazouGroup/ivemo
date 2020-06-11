@@ -3,20 +3,15 @@
 Route::group(['prefix' => 'api'], function () {
 
     Route::get(
-        'profile/{user}/personal_settings/favorite_annonceventes',
-        'FavoriteannonceventeController@apiuserdatafavoritfavoriteannoncevente'
-    )->name('api.userdatafavoritfavoriteannoncevente');
-
-    Route::get(
-        'profile/{user}/personal_settings/favorite_annonceventes_count',
-        'FavoriteannonceventeController@apifavoritfavoriteannoncevente_count'
-    )->name('api.userfavoritfavoriteannoncevente_count');
+        'profile/{user}/personal_settings/favorite_annonces_ventes',
+        'FavoriteannonceventeController@apiuserdatafavoriteannoncevente'
+    )->name('api.userdatafavoriteannoncevente');
 
 });
 
 Route::get(
-    'profile/{user}/personal_settings/favorite_annonceventes',
-    'FavoriteannonceventeController@favoritfavoriteannoncevente'
+    'profile/{user}/personal_settings/favorite_annonces_ventes',
+    'FavoriteannonceventeController@favoriteannoncevente'
 )->name('userfavoritfavoritegannoncevente_site');
 
 Route::get(

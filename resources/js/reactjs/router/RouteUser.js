@@ -133,6 +133,9 @@ import PublicUserEmployments from "../components/user/profile/employments/public
 import EmployementBycity from "../components/user/employment/EmployementBycity";
 import PrivateUserFavoriteblogannoncereservations
     from "../components/user/profile/favorites/PrivateUserFavoriteblogannoncereservations";
+import PrivateUserFavoriteannonceventes from "../components/user/profile/favorites/PrivateUserFavoriteannonceventes";
+import PrivateUserFavoriteannoncelocations
+    from "../components/user/profile/favorites/PrivateUserFavoriteannoncelocations";
 
 
 const RouteUser = props => (
@@ -230,6 +233,8 @@ const RouteUser = props => (
           <Route exact path="/profile/:user/personal_settings/employments/" component={PrivateUserEmployments}/>
           <Route exact path="/profile/:user/personal_settings/employments/:categoryemployment/" component={withRouter(PrivateUserEmploymentsByCategoryemployment)}/>
 
+          <Route exact path="/profile/:user/personal_settings/favorite_annonces_locations/" component={PrivateUserFavoriteannoncelocations}/>
+          <Route exact path="/profile/:user/personal_settings/favorite_annonces_ventes/" component={PrivateUserFavoriteannonceventes}/>
           <Route exact path="/profile/:user/personal_settings/favorite_employments/" component={PrivateUserFavoritEmployments}/>
           <Route exact path="/profile/:user/personal_settings/favorite_blogannoncereservations/" component={PrivateUserFavoriteblogannoncereservations}/>
 

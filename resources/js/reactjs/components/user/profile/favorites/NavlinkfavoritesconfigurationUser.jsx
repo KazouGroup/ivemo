@@ -27,11 +27,11 @@ class NavlinkfavoritesconfigurationUser extends Component {
                                                 <tbody>
                                                 <tr>
                                                     <td>
-                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/annonces_locations/`}>
+                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/favorite_annonces_locations/`}>
                                                             annonces sur les locations
                                                         </NavLink>
                                                     </td>
-                                                    <td className="text-right"> {this.props.annoncelocations_count} {this.props.annoncelocations_count > 1 ? "annonces" : "annonce"}</td>
+                                                    <td className="text-right"> <b>{this.props.favoriteannoncelocations_count || "0"}</b> {this.props.favoriteannoncelocations_count > 1 ? "annonces" : "annonce"}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -39,15 +39,15 @@ class NavlinkfavoritesconfigurationUser extends Component {
                                                             annonces sur les reservations
                                                         </NavLink>
                                                     </td>
-                                                    <td className="text-right"> {this.props.annoncereservations_count} {this.props.annoncereservations_count > 1 ? "annonces" : "annonce"}</td>
+                                                    <td className="text-right"> {this.props.annoncereservations_count || "0"} {this.props.annoncereservations_count > 1 ? "annonces" : "annonce"}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/annonces_ventes/`}>
+                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/favorite_annonces_ventes/`}>
                                                             annonces sur les ventes
                                                         </NavLink>
                                                     </td>
-                                                    <td className="text-right"> {this.props.annonceventes_count} {this.props.annonceventes_count > 1 ? "annonces" : "annonce"}</td>
+                                                    <td className="text-right"> <b>{this.props.favoriteannonceventes_count || "0"}</b> {this.props.favoriteannonceventes_count > 1 ? "annonces" : "annonce"}</td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -71,7 +71,7 @@ class NavlinkfavoritesconfigurationUser extends Component {
                                                             Formations service recrutement
                                                         </NavLink>
                                                     </td>
-                                                    <td className="text-right"><b>{this.props.favoritemployments_count}</b> {this.props.favoritemployments_count > 1 ? "annonces" : "annonce"}</td>
+                                                    <td className="text-right"><b>{this.props.favoritemployments_count || "0"}</b> {this.props.favoritemployments_count > 1 ? "annonces" : "annonce"}</td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -95,7 +95,7 @@ class NavlinkfavoritesconfigurationUser extends Component {
                                                             articles sur la location
                                                         </NavLink>
                                                     </td>
-                                                    <td className="text-right"><b>{this.props.favoriteblogannoncelocations_count}</b> {this.props.favoriteblogannoncelocations_count > 1 ? "articles" : "article"}</td>
+                                                    <td className="text-right"><b>{this.props.favoriteblogannoncelocations_count || "0"}</b> {this.props.favoriteblogannoncelocations_count > 1 ? "articles" : "article"}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -103,7 +103,7 @@ class NavlinkfavoritesconfigurationUser extends Component {
                                                             articles sur la reservation
                                                         </NavLink>
                                                     </td>
-                                                    <td className="text-right"> <b>{this.props.favoriteblogannoncereservations_count}</b> {this.props.favoriteblogannoncereservations_count > 1 ? "articles" : "article"}</td>
+                                                    <td className="text-right"> <b>{this.props.favoriteblogannoncereservations_count || "0"}</b> {this.props.favoriteblogannoncereservations_count > 1 ? "articles" : "article"}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -111,7 +111,7 @@ class NavlinkfavoritesconfigurationUser extends Component {
                                                             article sur la vente
                                                         </NavLink>
                                                     </td>
-                                                    <td className="text-right"> <b>{this.props.favoriteblogannonceventes_count}</b> {this.props.favoriteblogannonceventes_count > 1 ? "articles" : "article"}</td>
+                                                    <td className="text-right"> <b>{this.props.favoriteblogannonceventes_count || "0"}</b> {this.props.favoriteblogannonceventes_count > 1 ? "articles" : "article"}</td>
                                                 </tr>
                                                 </tbody>
                                             </table>
