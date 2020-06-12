@@ -4,14 +4,14 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::get(
         'profile/{user}/personal_settings/favorite_blogannoncelocations',
-        'FavoriteblogannoncelocationController@apiuserdatafavoritfavoriteblogannoncelocation'
-    )->name('api.userdatafavoritfavoriteblogannoncelocation');
+        'FavoriteblogannoncelocationController@apiuserdatafavoriteblogannoncelocation'
+    )->name('api.userdatafavoriteblogannoncelocation');
 
 });
 
 Route::get(
     'profile/{user}/personal_settings/favorite_blogannoncelocations',
-    'FavoriteblogannoncelocationController@favoritfavoriteblogannoncelocation'
+    'FavoriteblogannoncelocationController@favoriteblogannoncelocation'
 )->name('userfavoritfavoriteblogannoncelocation_site');
 
 Route::get(

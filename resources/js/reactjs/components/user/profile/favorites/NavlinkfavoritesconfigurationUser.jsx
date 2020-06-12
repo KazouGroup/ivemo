@@ -91,7 +91,7 @@ class NavlinkfavoritesconfigurationUser extends Component {
                                                 <tbody>
                                                 <tr>
                                                     <td>
-                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_locations/`}>
+                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/favorite_blogannoncelocations/`}>
                                                             articles sur la location
                                                         </NavLink>
                                                     </td>

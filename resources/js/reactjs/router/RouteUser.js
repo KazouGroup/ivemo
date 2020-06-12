@@ -136,6 +136,10 @@ import PrivateUserFavoriteblogannoncereservations
 import PrivateUserFavoriteannonceventes from "../components/user/profile/favorites/PrivateUserFavoriteannonceventes";
 import PrivateUserFavoriteannoncelocations
     from "../components/user/profile/favorites/PrivateUserFavoriteannoncelocations";
+import PrivateUserFavoriteblogannoncelocations
+    from "../components/user/profile/favorites/PrivateUserFavoriteblogannoncelocations";
+import PrivateUserFavoriteblogannonceventes
+    from "../components/user/profile/favorites/PrivateUserFavoriteblogannonceventes";
 
 
 const RouteUser = props => (
@@ -236,6 +240,8 @@ const RouteUser = props => (
           <Route exact path="/profile/:user/personal_settings/favorite_annonces_locations/" component={PrivateUserFavoriteannoncelocations}/>
           <Route exact path="/profile/:user/personal_settings/favorite_annonces_ventes/" component={PrivateUserFavoriteannonceventes}/>
           <Route exact path="/profile/:user/personal_settings/favorite_employments/" component={PrivateUserFavoritEmployments}/>
+          <Route exact path="/profile/:user/personal_settings/favorite_blogannoncelocations/" component={PrivateUserFavoriteblogannoncelocations}/>
+          <Route exact path="/profile/:user/personal_settings/favorite_blogannonceventes/" component={PrivateUserFavoriteblogannonceventes}/>
           <Route exact path="/profile/:user/personal_settings/favorite_blogannoncereservations/" component={PrivateUserFavoriteblogannoncereservations}/>
 
           <Route exact path="/profile/:user/personal_settings/subscriber_users/" component={SubscriberuserUserIndex}/>

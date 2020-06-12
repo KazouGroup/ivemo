@@ -24,9 +24,9 @@ class FavoriteblogannoncereservationController extends Controller
         $this->middleware('auth');
     }
 
-    public function favoritfavoriteblogannoncereservation(user $user)
+    public function favoriteblogannoncereservation(user $user)
     {
-        return view ('user.profile.employments.favoritfavoriteblogannoncereservation',[
+        return view ('user.profile.blogs.favoritfavoriteblogannoncereservation',[
             'user' => $user,
         ]);
     }

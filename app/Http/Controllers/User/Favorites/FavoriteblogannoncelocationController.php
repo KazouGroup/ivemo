@@ -24,31 +24,28 @@ class FavoriteblogannoncelocationController extends Controller
         $this->middleware('auth');
     }
 
-    public function favoritemployment(user $user)
+    public function favoriteblogannoncelocation(user $user)
     {
-        return view ('user.profile.employments.privatefavoritemployments',[
+        return view ('user.profile.blogs.favoritfavoriteblogannoncelocation',[
             'user' => $user,
         ]);
     }
 
-     public function apiuserdatafavoritemployment(user $user)
+     public function apiuserdatafavoriteblogannoncelocation(user $user)
     {
         $this->authorize('update',$user);
 
-        $favoritemployments = favoritemployment::with('user','employment')
+        $favoritemployments =  $user->favoriteblogannoncelocations()->with('user','blogannoncelocation')
             ->whereIn('user_id',[$user->id])
-            ->with(['employment.categoryemployment' => function ($q){
+            ->with(['blogannoncelocation.categoryannoncelocation' => function ($q){
                 $q->distinct()->get();},
-                'employment.city' => function ($q){
+                'blogannoncelocation.member' => function ($q){
                     $q->distinct()->get();},
-                'employment.member' => function ($q){
-                    $q->distinct()->get();},
-                'employment.user' => function ($q){
+                'blogannoncelocation.user' => function ($q){
                     $q->distinct()->get();}
             ])
-            ->whereHas('employment', function ($q) {$q->where(['status' => 1,'status_admin' => 1]);})
-            ->whereHas('employment.city', function ($q) {$q->where('status',1);})
-            ->whereHas('employment.categoryemployment', function ($q) {$q->where('status',1);})
+            ->whereHas('blogannoncelocation', function ($q) {$q->where(['status' => 1,'status_admin' => 1]);})
+            ->whereHas('blogannoncelocation.categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')->distinct()->get();
 
         return response()->json($favoritemployments, 200);
