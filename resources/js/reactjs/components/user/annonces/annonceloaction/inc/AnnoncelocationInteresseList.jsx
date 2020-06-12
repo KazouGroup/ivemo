@@ -3,6 +3,7 @@ import {Link,NavLink } from "react-router-dom";
 import moment from 'moment'
 import {Button} from "reactstrap";
 import {Remarkable} from "remarkable";
+import Skeleton from "react-loading-skeleton";
 
 require("moment/min/locales.min");
 moment.locale('fr');
@@ -98,15 +99,50 @@ class AnnoncelocationInteresseList extends Component {
 
                                         <div className="card-header d-flex align-items-center">
                                             <div className="d-flex align-items-center">
-                                                <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`}>
-                                                    <img src={this.props.user.avatar} style={{ height: "20px", width: "50px" }} alt={this.props.user.first_name} className="avatar" />
-                                                </NavLink>
+                                                {this.props.user.avatar ?
+                                                    <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`}>
+                                                        <img src={this.props.user.avatar}
+                                                             style={{ height: "20px", width: "50px" }}
+                                                             alt={this.props.user.first_name}
+                                                             className="avatar" />
+                                                    </NavLink>
+                                                    : <Skeleton circle={false} height={20} width={50} />}
                                                 <div className="mx-3">
                                                     <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
                                                         <small className="d-block text-muted">{moment(this.props.created_at).format('LL')}</small>
                                                     </NavLink>
                                                 </div>
 
+                                            </div>
+
+                                            <div className="text-right mx-auto">
+                                                {$guest ?
+
+                                                    <Button  data-toggle="modal" data-target="#loginModal"
+                                                             className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                        <i className="far fa-bookmark"></i>
+                                                    </Button>
+                                                    :
+                                                    <>
+                                                        {this.props.bookmarked ?
+
+                                                            <>
+                                                                <Button onClick={() => this.props.unfavoriteItem(this.props.id)}
+                                                                        className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
+                                                                    <i className="fas fa-bookmark"></i>
+                                                                </Button>
+                                                            </>
+
+                                                            :
+                                                            <>
+                                                                <Button onClick={() => this.props.favoriteItem(this.props.id)}
+                                                                        className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                                    <i className="far fa-bookmark"></i>
+                                                                </Button>
+                                                            </>
+                                                        }
+                                                    </>
+                                                }
                                             </div>
 
                                         </div>

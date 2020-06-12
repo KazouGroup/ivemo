@@ -91,7 +91,6 @@ class AnnonceventeInteresse extends Component {
     }
 
     loadItems(){
-        this.setState({ isLoading: true });
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
         let itemCityannonce = this.props.match.params.city;

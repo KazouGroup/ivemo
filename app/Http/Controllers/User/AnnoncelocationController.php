@@ -283,7 +283,7 @@ class AnnoncelocationController extends Controller
 
     public function apiannoncelocationinteressebycity(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city)
     {
-        $annoncelocation = $categoryannoncelocation->annoncelocations()
+        $annoncelocation = AnnoncelocationResource::collection($categoryannoncelocation->annoncelocations()
             ->with('user','city','annoncetype','categoryannoncelocation')
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
@@ -292,7 +292,7 @@ class AnnoncelocationController extends Controller
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
-            ->take(10)->distinct()->get()->toArray();
+            ->take(10)->distinct()->get());
 
         return response()->json($annoncelocation, 200);
     }

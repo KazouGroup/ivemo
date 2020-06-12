@@ -59,33 +59,6 @@ class AnnonceventeInteresseList extends Component {
                                             <NavLink to={`/annonces_ventes/${this.props.annoncetype.slug}/${this.props.categoryannoncevente.slug}/${this.props.city.slug}/${this.props.slug}/`} className="btn btn-sm btn-icon btn-primary">
                                                 <i className="now-ui-icons location_pin" />
                                             </NavLink>
-                                            {$guest ?
-
-                                                <Button  data-toggle="modal" data-target="#loginModal"
-                                                         className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
-                                                    <i className="far fa-bookmark"></i>
-                                                </Button>
-                                                :
-                                                <>
-                                                    {this.props.bookmarked ?
-
-                                                        <>
-                                                            <Button onClick={() => this.props.unfavoriteItem(this.props.id)}
-                                                                    className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
-                                                                <i className="fas fa-bookmark"></i>
-                                                            </Button>
-                                                        </>
-
-                                                        :
-                                                        <>
-                                                            <Button onClick={() => this.props.favoriteItem(this.props.id)}
-                                                                    className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
-                                                                <i className="far fa-bookmark"></i>
-                                                            </Button>
-                                                        </>
-                                                    }
-                                                </>
-                                            }
 
                                         </div>
                                     </div>
@@ -142,6 +115,36 @@ class AnnonceventeInteresseList extends Component {
                                                     </NavLink>
                                                 </div>
 
+                                            </div>
+
+                                            <div className="text-right mx-auto">
+                                                {$guest ?
+
+                                                    <Button  data-toggle="modal" data-target="#loginModal"
+                                                             className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                        <i className="far fa-bookmark"></i>
+                                                    </Button>
+                                                    :
+                                                    <>
+                                                        {this.props.bookmarked ?
+
+                                                            <>
+                                                                <Button onClick={() => this.props.unfavoriteItem(this.props.id)}
+                                                                        className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
+                                                                    <i className="fas fa-bookmark"></i>
+                                                                </Button>
+                                                            </>
+
+                                                            :
+                                                            <>
+                                                                <Button onClick={() => this.props.favoriteItem(this.props.id)}
+                                                                        className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                                    <i className="far fa-bookmark"></i>
+                                                                </Button>
+                                                            </>
+                                                        }
+                                                    </>
+                                                }
                                             </div>
 
                                         </div>
