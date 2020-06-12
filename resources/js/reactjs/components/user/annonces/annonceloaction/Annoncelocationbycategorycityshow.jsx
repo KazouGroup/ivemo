@@ -96,7 +96,7 @@ class Annoncelocationbycategorycityshow extends Component {
             message: "Lien copié correctement avec succès",
         },{
             allow_dismiss: false,
-            type: 'info',
+            type: 'success',
             placement: {
                 from: 'top',
                 align: 'center'

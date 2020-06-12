@@ -91,6 +91,24 @@ class Annonceventebycategorycityshow extends Component {
         })
     }
 
+    copyToClipboard(){
+        navigator.clipboard.writeText(window.location.toString());
+        $.notify({
+            message: "Lien copié correctement avec succès",
+        },{
+            allow_dismiss: false,
+            type: 'success',
+            placement: {
+                from: 'top',
+                align: 'center'
+            },
+            animate: {
+                enter: "animate__animated animate__fadeInDown",
+                exit: "animate__animated animate__fadeOutUp"
+            },
+        });
+    }
+
     unactiveItem(id){
         Swal.fire({
             title: 'Désactiver l\'annonce?',
@@ -369,7 +387,7 @@ class Annonceventebycategorycityshow extends Component {
                                         <div className="card">
                                             <div className="card-body">
 
-                                                <ProfileForallAnnonceventeShow {...annoncevente} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} unactiveItem={this.unactiveItem}/>
+                                                <ProfileForallAnnonceventeShow {...annoncevente} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} unactiveItem={this.unactiveItem} copyToClipboard={this.copyToClipboard}/>
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">

@@ -15,7 +15,6 @@ import BlogannoncelocationInteresse from "./BlogannoncelocationInteresse";
 import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import ButonFavoris from "../../../inc/vendor/ButonFavoris";
-import BlogannoncelocationList from "./inc/BlogannoncelocationList";
 import ButonLiked from "../../../inc/vendor/ButonLiked";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 

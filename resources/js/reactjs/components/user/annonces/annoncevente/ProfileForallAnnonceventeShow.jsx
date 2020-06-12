@@ -61,6 +61,10 @@ class ProfileForallAnnonceventeShow extends Component {
                                 }
                             </>
                         }
+
+                        <Button className="btn btn-icon btn-sm btn-facebook" title="Copier le lien" onClick={() => this.props.copyToClipboard()}>
+                            <i className="fas fa-copy"></i>
+                        </Button>
                         <Button className="btn btn-icon btn-sm btn-info" data-container="body"
                                 data-original-title="Phone number" data-toggle="popover" data-placement="bottom"
                                 data-content={this.props.user.phone}>
@@ -113,16 +117,13 @@ class ProfileForallAnnonceventeShow extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-6 col-6">
-                                <UncontrolledTooltip placement="bottom" target="TooltipShowprofile">
-                                    Profile de {this.props.user.first_name}
-                                </UncontrolledTooltip>
-                                <Link to={`/pro/${this.props.user.slug}/`} title="Profil agence" id="TooltipShowprofile">
+                                <Link to={`/pro/${this.props.user.slug}/`} title={`Profile de ${this.props.user.first_name}`}>
                                     <small><b>Consulter le profil de l'utilisateur</b></small>
                                 </Link>
                             </div>
                             {this.props.user.profile.site_internet && (
                                 <div className="col-md-6 col-6">
-                                    <a href={`${this.props.user.profile.site_internet}`} target="_blank" title="Site internet de agence">
+                                    <a href={`${this.props.user.profile.site_internet}`} target="_blank" title={this.props.user.profile.site_internet}>
                                         <small><b>Consulter le site de l'utilisateur</b></small>
                                     </a>
                                 </div>

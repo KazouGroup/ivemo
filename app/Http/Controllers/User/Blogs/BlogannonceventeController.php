@@ -68,13 +68,13 @@ class BlogannonceventeController extends Controller
 
     public function apiblogannonceventeinteresse(categoryannoncevente $categoryannoncevente)
     {
-        $blogannoncereseventes = $categoryannoncevente->blogannonceventes()
+        $blogannoncereseventes = BlogannonceventeResource::collection($categoryannoncevente->blogannonceventes()
             ->with('user','categoryannoncevente','member')
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
-            ->orderByRaw('RAND()')
+            ->orderBy('created_at','DESC')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-            ->take(3)->distinct()->get();
+            ->take(3)->distinct()->get());
         return response()->json($blogannoncereseventes, 200);
     }
 

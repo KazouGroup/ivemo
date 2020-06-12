@@ -64,7 +64,9 @@ class ProfileForallAnnoncelocationShow extends Component {
                         <Button className="btn btn-icon btn-sm btn-facebook" title="Copier le lien" onClick={() => this.props.copyToClipboard()}>
                             <i className="fas fa-copy"></i>
                         </Button>
-                        <Button className="btn btn-icon btn-sm btn-info" title={this.props.user.phone}>
+                        <Button className="btn btn-icon btn-sm btn-info" data-container="body"
+                                data-original-title="Phone number" data-toggle="popover" data-placement="bottom"
+                                data-content={this.props.user.phone}>
                             <i className="now-ui-icons tech_mobile"/>
                         </Button>
                         {this.props.user.profile.site_internet && (
@@ -117,7 +119,7 @@ class ProfileForallAnnoncelocationShow extends Component {
                             </div>
                             {this.props.user.profile.site_internet && (
                                 <div className="col-md-6 col-6">
-                                    <a href={`${this.props.user.profile.site_internet}`} target="_blank" title="Site internet de agence">
+                                    <a href={`${this.props.user.profile.site_internet}`} target="_blank" title={this.props.user.profile.site_internet}>
                                         <small><b>Consulter le site de l'utilisateur</b></small>
                                     </a>
                                 </div>

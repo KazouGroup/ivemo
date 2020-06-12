@@ -15,6 +15,7 @@ import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import AnnoncelocationVenteforBlog from "./AnnoncelocationVenteforBlog";
 import ButonFavoris from "../../../inc/vendor/ButonFavoris";
 import ButonLiked from "../../../inc/vendor/ButonLiked";
+const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
 class BlogannonceventeShow extends Component {
@@ -199,7 +200,6 @@ class BlogannonceventeShow extends Component {
         return { __html: (blogannoncevente.description) };
     }
     data_countFormatter(visits_count, precision) {
-        const abbrev = ['', 'k', 'M', 'B', 'T'];
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(visits_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
         const suffix = abbrev[order];

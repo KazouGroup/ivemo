@@ -41,12 +41,12 @@ class BlogannoncelocationService
 
     public static function apiblogannoncelocationinteresse($categoryannoncelocation)
     {
-        $blogannoncelocation = $categoryannoncelocation->blogannoncelocations()->with('user','categoryannoncelocation','member')
+        $blogannoncelocation = BlogannoncelocationResource::collection($categoryannoncelocation->blogannoncelocations()->with('user','categoryannoncelocation','member')
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
-            ->orderByRaw('RAND()')
+            ->orderBy('created_at','DESC')
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->where(['status' => 1,'status_admin' => 1])
-            ->take(3)->distinct()->get();
+            ->take(3)->distinct()->get());
 
         return $blogannoncelocation;
     }
