@@ -549,6 +549,16 @@ class ProfilePublicAccountAvisUser extends Component {
                                                                        </Button>
                                                                    )}
 
+                                                                   <>
+                                                                       {!this.state.editavis && (
+                                                                           <button type="button" onClick={() => this.responseavisFromItem(item)}
+                                                                                   className="btn btn-primary btn-neutral pull-right">
+                                                                               <i className="now-ui-icons ui-1_simple-add"/> Repondre
+                                                                           </button>
+                                                                       )}
+                                                                   </>
+
+                                                                   {/*
                                                                    {$userIvemo.id === item.to.id && (
                                                                        <>
                                                                            {!this.state.editavis && (
@@ -559,6 +569,7 @@ class ProfilePublicAccountAvisUser extends Component {
                                                                            )}
                                                                        </>
                                                                    )}
+                                                                   */}
 
                                                                    {$userIvemo.id === item.from.id && (
                                                                        <>

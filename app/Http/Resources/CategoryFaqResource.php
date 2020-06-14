@@ -17,6 +17,7 @@ class CategoryFaqResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'label' => $this->label,
             'slug' => $this->slug,
             'status' => $this->status,
             'statusOnline' => $this->user->isOnline(),

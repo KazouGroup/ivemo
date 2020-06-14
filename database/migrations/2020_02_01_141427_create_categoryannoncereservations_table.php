@@ -16,6 +16,7 @@ class CreateCategoryannoncereservationsTable extends Migration
         Schema::create('categoryannoncereservations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable();
+            $table->string('label')->nullable();
             $table->string('color_name')->nullable();
             $table->string('photo')->nullable();
             $table->boolean('status')->default(false);

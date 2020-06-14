@@ -62,6 +62,7 @@ class CategoryannoncereservationController extends Controller
     {
         $this->validate($request,[
             'name'=>'required|string|min:2|max:100|unique:categoryannoncereservations',
+            'label'=>'required|string|min:2|max:100',
         ]);
 
         $categoryannoncereservation = new categoryannoncereservation();
@@ -120,6 +121,7 @@ class CategoryannoncereservationController extends Controller
     {
         $this->validate($request,[
             'name'=> "required|string|min:2|max:100|unique:categoryannoncereservations,name,{$id}",
+            'label'=>'required|string|min:2|max:100',
         ]);
 
         $categoryannoncereservation = categoryannoncereservation::findOrFail($id);

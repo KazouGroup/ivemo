@@ -58,6 +58,7 @@ class CategoryWorkwithusController extends Controller
     {
         $this->validate($request,[
             'name'=>'required|string|min:2|max:100|unique:categoryworkwithuses',
+            'label'=>'required|string|min:2|max:100',
         ]);
 
         $categoryworkwithus = new categoryworkwithus;
@@ -101,6 +102,7 @@ class CategoryWorkwithusController extends Controller
     {
         $this->validate($request,[
             'name'=> "required|string|min:2|max:100|unique:categoryworkwithuses,name,{$id}",
+            'label'=>'required|string|min:2|max:100',
         ]);
 
         $categoryworkwithus = categoryworkwithus::findOrFail($id);

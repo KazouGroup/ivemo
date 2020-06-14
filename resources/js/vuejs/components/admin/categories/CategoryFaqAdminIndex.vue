@@ -70,6 +70,7 @@
                                     <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                         <thead>
                                         <tr>
+                                            <th><b>Label</b></th>
                                             <th><b>Name</b></th>
                                             <th><b>Status</b></th>
                                             <th><b>Date</b></th>
@@ -78,6 +79,7 @@
                                         </thead>
                                         <tfoot>
                                         <tr>
+                                            <th>Label</th>
                                             <th>Name</th>
                                             <th>Status</th>
                                             <th>Date</th>
@@ -86,6 +88,7 @@
                                         </tfoot>
                                         <tbody>
                                         <tr v-for="item in categories_faqs" :key="item.id">
+                                            <td><b>{{ item.label }}</b></td>
                                             <td><b>{{ item.name }}</b></td>
                                             <td>
                                                 <div class="timeline-heading">
@@ -139,10 +142,21 @@
                                             </div>
                                             <div class="modal-body">
                                                 <form id="RegisterValidation" @submit.prevent="editmode ? updateItem() : storeItem()" role="form" method="POST" action="" accept-charset="UTF-8" @keydown="form.onKeydown($event)">
-                                                    <div class="form-group">
-                                                        <label class="bmd-label-floating"></label>
-                                                        <input v-model="form.name" type="text" name="name" minlength="2" maxlength="100" placeholder="Name..." class="form-control" :class="{ 'is-invalid': form.errors.has('name') }" >
-                                                        <has-error :form="form" field="name"></has-error>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="bmd-label-floating"></label>
+                                                                <input v-model="form.name" type="text" name="name" minlength="2" maxlength="100" placeholder="Name..." class="form-control" :class="{ 'is-invalid': form.errors.has('name') }" />
+                                                                <has-error :form="form" field="name"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="bmd-label-floating"></label>
+                                                                <input v-model="form.label" type="text" name="label" minlength="2" maxlength="100" placeholder="Label..." class="form-control" :class="{ 'is-invalid': form.errors.has('label') }" />
+                                                                <has-error :form="form" field="label"/>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <div class="text-center">
@@ -195,6 +209,7 @@
                 form: new Form({
                     id: '',
                     name: '',
+                    label: '',
                 })
             }
         },

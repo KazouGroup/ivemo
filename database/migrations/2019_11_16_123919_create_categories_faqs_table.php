@@ -16,6 +16,7 @@ class CreateCategoriesFaqsTable extends Migration
         Schema::create('categories_faqs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable();
+            $table->string('label')->nullable();
             $table->string('slug')->nullable();
             $table->boolean('status')->default(false);
             $table->timestamps();

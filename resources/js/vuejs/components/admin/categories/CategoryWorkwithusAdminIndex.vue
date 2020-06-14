@@ -71,6 +71,7 @@
                                         <thead>
                                         <tr>
                                             <th><b>Name</b></th>
+                                            <th><b>Label</b></th>
                                             <th><b>Status</b></th>
                                             <th><b>Work</b></th>
                                             <th v-if="$auth.can('manage-rh')" class="disabled-sorting text-right"><b>Actions</b></th>
@@ -79,6 +80,7 @@
                                         <tfoot>
                                         <tr>
                                             <th>Name</th>
+                                            <th>Label</th>
                                             <th>Status</th>
                                             <th>Work</th>
                                             <th v-if="$auth.can('manage-rh')" class="text-right">Actions</th>
@@ -87,6 +89,7 @@
                                         <tbody>
                                         <tr v-for="item in categoryworkwithuses" :key="item.id">
                                             <td><b>{{ item.name }}</b></td>
+                                            <td><b>{{ item.label }}</b></td>
                                             <td>
                                                 <div class="timeline-heading">
                                                     <span v-if="item.status" class="badge badge-success"><b>Active</b></span>
@@ -139,10 +142,21 @@
                                             </div>
                                             <div class="modal-body">
                                                 <form id="RegisterValidation" @submit.prevent="editmode ? updateItem() : storeItem()" role="form" method="POST" action="" accept-charset="UTF-8" @keydown="form.onKeydown($event)">
-                                                    <div class="form-group">
-                                                        <label class="bmd-label-floating"></label>
-                                                        <input v-model="form.name" type="text" name="name" minlength="2" maxlength="100" placeholder="Name..." class="form-control" :class="{ 'is-invalid': form.errors.has('name') }" >
-                                                        <has-error :form="form" field="name"></has-error>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="bmd-label-floating"></label>
+                                                                <input v-model="form.name" type="text" name="name" minlength="2" maxlength="100" placeholder="Name..." class="form-control" :class="{ 'is-invalid': form.errors.has('name') }" />
+                                                                <has-error :form="form" field="name"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="bmd-label-floating"></label>
+                                                                <input v-model="form.label" type="text" name="label" minlength="2" maxlength="100" placeholder="Label..." class="form-control" :class="{ 'is-invalid': form.errors.has('label') }" />
+                                                                <has-error :form="form" field="label"/>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <div class="text-center">
@@ -195,6 +209,7 @@
                 form: new Form({
                     id: '',
                     name: '',
+                    label: '',
                 })
             }
         },

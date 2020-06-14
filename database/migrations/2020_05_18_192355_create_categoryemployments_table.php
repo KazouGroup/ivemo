@@ -17,6 +17,7 @@ class CreateCategoryemploymentsTable extends Migration
         Schema::create('categoryemployments', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->string('label')->nullable();
             $table->string('slug')->nullable();
             $table->string('photo')->nullable();
             $table->boolean('status')->default(false);
@@ -26,9 +27,9 @@ class CreateCategoryemploymentsTable extends Migration
         });
 
         $categoryemployments = array(
-            array('name' => 'Formations & Cours','slug' => str_slug('Formations & Cours'),'status' => true,'user_id' => 1,'photo' => "https://dummyimage.com/wsvga/00bb66/0088ff&text=ipsum"),
-            array('name' => 'Services & Prestations','slug' => str_slug('Services & Prestations'),'status' => true,'user_id' => 1,'photo' => "https://dummyimage.com/wsvga/00bb66/0088ff&text=ipsum"),
-            array('name' => 'Emplois & Job','slug' => str_slug('Emplois & Job'),'status' => true,'user_id' => 1,'photo' => "https://dummyimage.com/wsvga/00bb66/0088ff&text=ipsum"),
+            array('name' => 'Formations & Cours','label' => 'cette Formations & Cours','slug' => str_slug('Formations & Cours'),'status' => true,'user_id' => 1,'photo' => "https://dummyimage.com/wsvga/00bb66/0088ff&text=ipsum"),
+            array('name' => 'Services & Prestations','label' => 'ce Services & Prestations','slug' => str_slug('Services & Prestations'),'status' => true,'user_id' => 1,'photo' => "https://dummyimage.com/wsvga/00bb66/0088ff&text=ipsum"),
+            array('name' => 'Emplois & Job','label' => 'cette Emplois & Job','slug' => str_slug('Emplois & Job'),'status' => true,'user_id' => 1,'photo' => "https://dummyimage.com/wsvga/00bb66/0088ff&text=ipsum"),
 
         );
         DB::table('categoryemployments')->insert($categoryemployments);

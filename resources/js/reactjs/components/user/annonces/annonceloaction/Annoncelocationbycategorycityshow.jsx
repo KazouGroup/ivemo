@@ -346,7 +346,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                         <div className="card">
                                             <div className="card-body">
                                                 <h5 className="card-title">
-                                                    À propos de ce <b>{annoncelocation.categoryannoncelocation.name} {annoncelocation.pieces} pièces à {annoncelocation.district}</b>
+                                                    À propos de <b>{annoncelocation.categoryannoncelocation.label} {annoncelocation.pieces} pièces à {annoncelocation.district}</b>
                                                 </h5>
 
                                                 {annoncelocation.description ? <span className="title text-justify" dangerouslySetInnerHTML={this.getDescription(annoncelocation)} />: <Skeleton count={3}/>}
