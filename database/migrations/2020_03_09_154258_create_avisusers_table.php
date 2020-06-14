@@ -16,7 +16,6 @@ class CreateAvisusersTable extends Migration
         Schema::create('avisusers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->longText('description')->nullable();
-            $table->longText('response_description')->nullable();
             $table->string('slug')->nullable();
             $table->string('ip')->nullable();
             $table->boolean('status')->default(true);

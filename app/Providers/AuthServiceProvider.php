@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Model\annoncelocation;
 use App\Model\annoncereservation;
 use App\Model\annoncevente;
+use App\Model\avisuser;
 use App\Model\blogannoncelocation;
 use App\Model\blogannoncereservation;
 use App\Model\blogannoncevente;
@@ -14,11 +15,13 @@ use App\Model\contactuserslocation;
 use App\Model\contactusersvente;
 use App\Model\employment;
 use App\model\profile;
+use App\Model\responseavisuser;
 use App\Model\teamuser;
 use App\Model\user;
 use App\Policies\AnnoncelocationPolicy;
 use App\Policies\AnnoncereservationPolicy;
 use App\Policies\AnnonceventePolicy;
+use App\Policies\AvisuserPolicy;
 use App\Policies\BlogannoncelocationPolicy;
 use App\Policies\BlogannoncereservationPolicy;
 use App\Policies\BlogannonceventePolicy;
@@ -28,6 +31,7 @@ use App\Policies\ContactuserslocationPolicy;
 use App\Policies\ContactusersventePolicy;
 use App\Policies\EmploymentPolicy;
 use App\Policies\ProfilePolicy;
+use App\Policies\ResponseavisuserPolicy;
 use App\Policies\TeamuserPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -53,6 +57,8 @@ class AuthServiceProvider extends ServiceProvider
         blogannoncevente::class => BlogannonceventePolicy::class,
         teamuser::class => TeamuserPolicy::class,
         employment::class => EmploymentPolicy::class,
+        avisuser::class => AvisuserPolicy::class,
+        responseavisuser::class => ResponseavisuserPolicy::class,
         contactuseremployment::class => ContactusersemploymentPolicy::class,
         user::class => UserPolicy::class,
     ];

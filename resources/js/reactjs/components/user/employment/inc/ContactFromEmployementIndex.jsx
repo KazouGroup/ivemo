@@ -1,6 +1,7 @@
 import React, { Component,Fragment } from "react";
 import { Link } from 'react-router-dom';
 import {Row, Form, Input, InputGroup, FormGroup, FormText} from 'reactstrap';
+import FieldInput from "../../../inc/vendor/FieldInput";
 
 
 class ContactFromEmployementIndex extends Component {
@@ -109,37 +110,19 @@ class ContactFromEmployementIndex extends Component {
                     <div className="input-group-prepend">
                         <span className="input-group-text"><i className="now-ui-icons users_circle-08"></i></span>
                     </div>
-                    <input id='full_name'
-                           type='text'
-                           minLength="3"
-                           maxLength="200"
-                           className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
-                           name='full_name'
-                           placeholder="Nom"
-                           aria-label="Nom complete"
-                           autoComplete="full_name"
-                           value={this.state.full_name}
-                           onChange={this.handleFieldChange}
-                    />
-                    {this.renderErrorFor('full_name')}
+                    <FieldInput name="full_name" type='text' minLength="3" maxLength="50" placeholder="Nom complete" value={this.state.full_name}
+                                handleFieldChange={this.handleFieldChange}
+                                hasErrorFor={this.hasErrorFor}
+                                renderErrorFor={this.renderErrorFor}/>
                 </div>
                 <div className="input-group">
                     <div className="input-group-prepend">
                         <span className="input-group-text"><i className="now-ui-icons ui-1_email-85"></i></span>
                     </div>
-                    <input id='email'
-                           type='email'
-                           minLength="3"
-                           maxLength="200"
-                           className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                           name='email'
-                           placeholder="Email"
-                           aria-label="Email"
-                           autoComplete="email"
-                           value={this.state.email}
-                           onChange={this.handleFieldChange}
-                    />
-                    {this.renderErrorFor('email')}
+                    <FieldInput name="email" type='email' minLength="3" maxLength="50" placeholder="Email" value={this.state.email}
+                                handleFieldChange={this.handleFieldChange}
+                                hasErrorFor={this.hasErrorFor}
+                                renderErrorFor={this.renderErrorFor}/>
                 </div>
                 <FormText className="text-muted" color="default" id="emailHelp">
                    <b>Veuillez entrer une adresse e-mail et un numero de téléphone valide </b>
@@ -148,16 +131,10 @@ class ContactFromEmployementIndex extends Component {
                     <div className="input-group-prepend">
                         <span className="input-group-text"><i className="now-ui-icons tech_mobile"></i></span>
                     </div>
-                    <Input id='phone'
-                           type='number'
-                           className={`form-control ${this.hasErrorFor('phone') ? 'is-invalid' : ''}`}
-                           name='phone'
-                           placeholder="Téléphone"
-                           aria-label="Téléphone"
-                           value={this.state.phone}
-                           onChange={this.handleFieldChange}
-                    />
-                    {this.renderErrorFor('phone')}
+                    <FieldInput name="phone" type='number' minLength="3" maxLength="15" placeholder="Téléphone" value={this.state.phone}
+                                handleFieldChange={this.handleFieldChange}
+                                hasErrorFor={this.hasErrorFor}
+                                renderErrorFor={this.renderErrorFor}/>
                 </div>
                 {/*
                 <div className="input-group">
@@ -180,15 +157,10 @@ class ContactFromEmployementIndex extends Component {
                 </FormText>
                 */}
                 <div className="form-group">
-                 <textarea name="message" value={this.state.message}
-                           onChange={this.handleFieldChange}
-                           placeholder={'Message'}
-                           minLength="5"
-                           maxLength="5000"
-                           className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                           id="message"
-                           rows="10" />
-                    {this.renderErrorFor('message')}
+                    <FieldInput name="message" type='textarea' minLength="5" maxLength="5000" placeholder="Message" value={this.state.message}
+                                handleFieldChange={this.handleFieldChange}
+                                hasErrorFor={this.hasErrorFor}
+                                renderErrorFor={this.renderErrorFor} rows="10"/>
                 </div>
                 {/*
                  <div

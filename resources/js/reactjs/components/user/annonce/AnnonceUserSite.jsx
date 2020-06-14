@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import { Button } from "reactstrap";
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
+import FieldInput from "../../inc/vendor/FieldInput";
 
 
 class AnnonceUserSite extends Component {
@@ -31,6 +32,8 @@ class AnnonceUserSite extends Component {
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
                         <NavUserSite />
                     </nav>
+
+
 
                     <div className="wrapper">
                         <div className="page-header page-header-mini">

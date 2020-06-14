@@ -198,8 +198,7 @@ class BlogannoncereservationShow extends Component {
         this.loadItems();
     }
     getDescription(blogannoncereservation) {
-        const md = new Remarkable();
-        return { __html: md.render(blogannoncereservation.description) };
+        return { __html: (blogannoncereservation.description) };
     }
     data_countFormatter(visits_count, precision) {
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(visits_count)) / 3);

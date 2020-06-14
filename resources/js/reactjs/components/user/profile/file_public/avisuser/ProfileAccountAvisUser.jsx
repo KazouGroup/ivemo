@@ -401,7 +401,7 @@ class ProfileAccountAvisUser extends Component {
                                                     </div>
 
                                                     {!$guest && (
-                                                        <Fragment>
+                                                        <>
 
                                                             <div className="media-footer">
                                                                 {$userIvemo.status_user && (
@@ -412,18 +412,18 @@ class ProfileAccountAvisUser extends Component {
                                                                 )}
 
                                                                 {$userIvemo.id === item.to.id && (
-                                                                    <Fragment>
+                                                                    <>
                                                                         {item.response_description === null &&(
                                                                             <button type="button" onClick={() => this.responseFromItem(item) }
                                                                                     className="btn btn-primary btn-neutral pull-right">
                                                                                 <i className="now-ui-icons ui-1_send" /> Repondre
                                                                             </button>
                                                                         )}
-                                                                    </Fragment>
+                                                                    </>
                                                                 )}
 
                                                                 {$userIvemo.id === item.from.id && (
-                                                                    <Fragment>
+                                                                    <>
                                                                         <Button onClick={() => this.deleteItem(item.id)}
                                                                                 className="btn btn-danger btn-neutral pull-right">
                                                                             <i className="far fa-trash-alt"></i> Supprimer
@@ -433,12 +433,12 @@ class ProfileAccountAvisUser extends Component {
                                                                                 className="btn btn-info btn-neutral pull-right">
                                                                             <i className="far fa-edit"/> Editer
                                                                         </button>
-                                                                    </Fragment>
+                                                                    </>
                                                                 )}
 
                                                             </div>
 
-                                                        </Fragment>
+                                                        </>
                                                     )}
 
                                                     {item.response_description !== null && (

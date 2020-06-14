@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Model\avisuser;
+use App\Model\responseavisuser;
 use App\Model\user;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,10 +26,17 @@ class AvisuserController extends Controller
 
     public function apiavisuserpublique(user $user)
     {
-        $avisusers = avisuser::with('from','to')
+        $avisusers = avisuser::with('from','to','responseavisusers')
             ->whereIn('to_id',[$user->id])
+            ->with(['responseavisusers' => function ($q) use ($user){
+                $q->where('status',1)->with('user')
+                    ->orderBy('created_at','DESC')
+                    ->distinct()->get()
+                ;},
+            ])
             ->orderBy('created_at','DESC')
-            ->where('status',1)->distinct()->paginate(5)->toArray();
+            ->where('status',1)->distinct()->get();
+            //->where('status',1)->distinct()->paginate(5)->toArray();
         return response()->json($avisusers, 200);
     }
 
@@ -74,6 +82,8 @@ class AvisuserController extends Controller
 
         $avisuser = avisuser::where('id', $id)->findOrFail($id);
 
+        $this->authorize('updateFrom',$avisuser);
+
         $avisuser->update([ 'description' => $validatedData['description'],]);
 
         return response('Confirmed',Response::HTTP_ACCEPTED);
@@ -102,23 +112,73 @@ class AvisuserController extends Controller
         return response('Confirmed',Response::HTTP_ACCEPTED);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return array|\Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $avisuser = avisuser::findOrFail($id);
 
-        if (auth()->user()->id === $avisuser->from_id){
-            $avisuser->delete();
+        $avisuser->delete();
 
-            return ['message' => 'message deleted '];
-        }else{
-            abort(404);
-        }
+        return ['message' => 'message deleted '];
+
+    }
+
+    /*
+     * Ici je fais le traitement de reponses des avis
+     */
+
+    public function avisuserresponse_public_save(Request $request,$user,$id)
+    {
+        $validatedData = $request->validate(['description' => 'required|min:2|max:10000']);
+
+        $responseavisuser = responseavisuser::create([
+            'description' => $validatedData['description'],
+            'avisuser_id' => $id,
+        ]);
+
+        return $responseavisuser->toJson();
+    }
+
+    public function avisuserresponse_public_update(Request $request,user $user,$id)
+    {
+        $validatedData = $request->validate(['description' => 'required|min:5|max:10000']);
+
+        $responseavisuser = responseavisuser::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$responseavisuser);
+
+        $responseavisuser->update([ 'description' => $validatedData['description'],]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+    }
+
+    public function responseactivated($id)
+    {
+        $responseavisuser = responseavisuser::where('id', $id)->findOrFail($id);
+
+        $responseavisuser->update(['status' => 1,]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+    }
+
+    public function responseunactivated($id)
+    {
+        $responseavisuser = responseavisuser::where('id', $id)->findOrFail($id);
+
+
+        $responseavisuser->update(['status' => 0,]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+    }
+
+    public function responsedestroy($id)
+    {
+        $responseavisuser = responseavisuser::findOrFail($id);
+
+        $this->authorize('update',$responseavisuser);
+
+        $responseavisuser->delete();
+
+        return ['message' => 'data deleted '];
 
     }
 }
