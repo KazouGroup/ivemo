@@ -188,8 +188,6 @@ class BlogannoncelocationIndex extends Component {
         })
     }
 
-
-
     unactiveItem(id){
         Swal.fire({
             title: 'Masquer cette article?',

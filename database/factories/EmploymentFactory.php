@@ -23,11 +23,11 @@ $factory->define(employment::class, function (Faker $faker) {
         'district' => $faker->streetName,
         'price' => $faker->randomNumber(7),
         'photo' => "https://dummyimage.com/wsvga/" . $backgroundColor . "/". $foregroundColor ."&text=" . $faker->word,
-        'description' => $faker->realText(rand(1000, 2000)),
+        'description' => "<p>".$faker->realText(rand(1000, 2000))."</p>",
         //'categoryemployment_id' => mt_rand(1, 2),
         'categoryemployment_id' => categoryemployment::inRandomOrder()->first()->id,
         'city_id' => city::inRandomOrder()->first()->id,
         'user_id' => user::inRandomOrder()->first()->id,
-        //'created_at' => $faker->dateTime,
+        'created_at' => $faker->dateTime,
     ];
 });

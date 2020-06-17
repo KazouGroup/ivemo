@@ -21,7 +21,7 @@ $factory->define(blogannoncereservation::class, function (Faker $faker) {
         'status' => true,
         //'status_admin' => $faker->boolean,
         'red_time' => $faker->randomDigitNot(5),
-        'description' => $faker->realText(rand(10000, 40000)),
+        'description' => "<p>".$faker->realText(rand(10000, 20000))."</p>",
         'categoryannoncereservation_id' => categoryannoncereservation::inRandomOrder()->first()->id,
         'user_id' => user::inRandomOrder()->first()->id,
         'created_at' => $faker->dateTime,
