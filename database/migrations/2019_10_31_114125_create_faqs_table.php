@@ -21,6 +21,7 @@ class CreateFaqsTable extends Migration
             $table->boolean('status')->default(false);
             $table->longText('body')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
 
             $table->unsignedBigInteger('user_id')->nullable()->index();

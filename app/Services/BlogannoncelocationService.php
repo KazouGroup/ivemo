@@ -93,6 +93,17 @@ class BlogannoncelocationService
         return $blogannoncelocation;
     }
 
+    public static function apistatistique($user,$blogannoncelocation)
+    {
+        $data = new BlogannoncelocationResource(blogannoncelocation::with('user','categoryannoncelocation','member')
+            ->whereIn('user_id',[$user->id])
+            ->whereSlugin($blogannoncelocation)
+            ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+            ->first());
+
+        return $data;
+    }
+
     public static function show($blogannoncelocation)
     {
         $blogannoncelocation = new BlogannoncelocationResource(blogannoncelocation::whereSlugin($blogannoncelocation)->first());

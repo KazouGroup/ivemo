@@ -140,6 +140,10 @@ import PrivateUserFavoriteblogannoncelocations
     from "../components/user/profile/favorites/PrivateUserFavoriteblogannoncelocations";
 import PrivateUserFavoriteblogannonceventes
     from "../components/user/profile/favorites/PrivateUserFavoriteblogannonceventes";
+import PrivateUserBlogannonceLocationStatistiqueShow
+    from "../components/user/profile/blogs/private/blogannoncelocation/PrivateUserBlogannonceLocationStatistiqueShow";
+import PrivateUserEmploymentsByStatistique
+    from "../components/user/profile/employments/private/PrivateUserEmploymentsByStatistique";
 
 
 const RouteUser = props => (
@@ -236,6 +240,7 @@ const RouteUser = props => (
 
           <Route exact path="/profile/:user/personal_settings/employments/" component={PrivateUserEmployments}/>
           <Route exact path="/profile/:user/personal_settings/employments/:categoryemployment/" component={withRouter(PrivateUserEmploymentsByCategoryemployment)}/>
+          <Route exact path="/profile/:user/personal_settings/employment/:employment/" component={PrivateUserEmploymentsByStatistique}/>
 
           <Route exact path="/profile/:user/personal_settings/favorite_annonces_locations/" component={PrivateUserFavoriteannoncelocations}/>
           <Route exact path="/profile/:user/personal_settings/favorite_annonces_ventes/" component={PrivateUserFavoriteannonceventes}/>
@@ -259,6 +264,7 @@ const RouteUser = props => (
 
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_locations/" component={PrivateUserBlogannonceLocation}/>
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_locations/:categoryannoncelocation/" component={withRouter(PrivateUserBlogannonceLocationByCategorylocation)}/>
+          <Route exact path="/profile/:user/personal_settings/blogs/annonce_location/statistique/:blogannoncelocation/" component={PrivateUserBlogannonceLocationStatistiqueShow}/>
 
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_reservations/" component={PrivateUserBlogannonceReservation}/>
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_reservations/:categoryannoncereservation" component={withRouter(PrivateUserBlogannonceReservationCategoryreservation)}/>

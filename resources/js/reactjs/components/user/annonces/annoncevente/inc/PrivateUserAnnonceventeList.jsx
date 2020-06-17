@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Remarkable } from 'remarkable';
 import {Button, UncontrolledTooltip} from "reactstrap";
 import moment from "moment";
 
 
-class PrivateUserAnnonceventeList extends Component {
+class PrivateUserAnnonceventeList extends PureComponent {
 
 
     getDescription() {

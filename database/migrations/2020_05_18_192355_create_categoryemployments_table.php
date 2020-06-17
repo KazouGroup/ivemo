@@ -22,6 +22,7 @@ class CreateCategoryemploymentsTable extends Migration
             $table->string('photo')->nullable();
             $table->boolean('status')->default(false);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unsignedBigInteger('user_id')->nullable()->index();
         });

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Remarkable } from 'remarkable';
 import { Button,UncontrolledTooltip } from "reactstrap";
@@ -6,7 +6,7 @@ import moment from "moment";
 import LazyLoad from "react-lazyload";
 
 
-class PrivateFavoriteBlogannoncereservationList extends Component {
+class PrivateFavoriteBlogannoncereservationList extends PureComponent {
 
 
     getDescription() {

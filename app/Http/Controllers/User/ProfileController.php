@@ -61,6 +61,16 @@ class ProfileController extends Controller
     }
 
 
+    public function apiuserblogsannonces(user $user)
+    {
+        $this->authorize('update',$user);
+
+        $user = HelpersService::helpersannonblogceteambyusercount($user)->first();
+
+        return response()->json($user, 200);
+    }
+
+
 
     public function apipersonalreservations()
     {

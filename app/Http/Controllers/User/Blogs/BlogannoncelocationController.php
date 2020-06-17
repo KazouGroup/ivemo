@@ -28,7 +28,7 @@ class BlogannoncelocationController extends Controller
         $this->middleware('auth',['only' => [
             'create','store','edit','update','destroy','show','activated','unactivated',
             'apiblogannonceslocationsbyuser', 'blogannonceslocationsbyuser',
-            'blogannonceslocationscategoryannoncelocationbyuser','apiblogannonceslocationscategoryannoncelocationbyuser'
+            'blogannonceslocationscategoryannoncelocationbyuser','apiblogannonceslocationscategoryannoncelocationbyuser','apistatistique','statistique'
         ]]);
     }
 
@@ -121,6 +121,15 @@ class BlogannoncelocationController extends Controller
         return response()->json($blogannoncelocation, 200);
     }
 
+    public function apistatistique(user $user,$blogannoncelocation)
+    {
+        $this->authorize('update',$user);
+
+        $blogannoncelocation = BlogannoncelocationService::apistatistique($user, $blogannoncelocation);
+
+        return response()->json($blogannoncelocation, 200);
+    }
+
     public function apiblogsannoncereservationspublique(user $user)
     {
         $blogannoncelocations = blogannoncelocation::whereIn('user_id',[$user->id])
@@ -154,6 +163,13 @@ class BlogannoncelocationController extends Controller
 
         return view('user.blogs.blogannoncelocation.show',[
             'blogannoncelocation' => $blogannoncelocation,
+        ]);
+    }
+
+    public function statistique(user $user,$blogannoncelocation)
+    {
+        return view('user.blogs.blogannoncelocation.show_statistique',[
+            'user' => $user,
         ]);
     }
 

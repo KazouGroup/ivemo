@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Button,UncontrolledTooltip } from "reactstrap";
 import moment from "moment";
 import LazyLoad from "react-lazyload";
 
 
-class BlogannonceventeList extends Component {
+class BlogannonceventeList extends PureComponent {
 
 
     getDescription() {

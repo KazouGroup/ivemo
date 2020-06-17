@@ -25,6 +25,7 @@ class CreateBlogannonceventesTable extends Migration
             $table->boolean('status')->default(true);
             $table->boolean('status_admin')->default(true);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unsignedBigInteger('member_id')->nullable()->index();
 

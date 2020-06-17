@@ -1,11 +1,12 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Button,UncontrolledTooltip } from "reactstrap";
 import moment from "moment";
 import LazyLoad from "react-lazyload";
+import Skeleton from "react-loading-skeleton";
 
 
-class PrivateUserEmployementList extends Component {
+class PrivateUserEmployementList extends PureComponent {
 
 
     getDescription() {
@@ -43,26 +44,29 @@ class PrivateUserEmployementList extends Component {
 
                                      <span className="title">
                                          <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`} className="card-link">
-                                            {this.props.title.length > 90 ? this.props.title.substring(0, 90) + "..." : this.props.title} 
+                                            {this.props.title.length > 90 ? this.props.title.substring(0, 90) + "..." : this.props.title}
                                           </a>
                                      </span>
                                     <br/>
-                                    {/**
-                                     * 
-                                     
+
                                     <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`}>
                                         <span dangerouslySetInnerHTML={this.getDescription()}/>
                                     </a>
-                                     */}
+
 
                                 <br/>
                                 <div className="card-header d-flex align-items-center">
 
 
                                     <div className="d-flex align-items-center">
-                                        <NavLink to={`/pro/${this.props.user.slug}/`}>
-                                            <img src={this.props.user.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
-                                        </NavLink>
+                                        {this.props.user.avatar ?
+                                            <NavLink to={`/pro/${this.props.user.slug}/employments/`}>
+                                                <img src={this.props.user.avatar}
+                                                     style={{ height: "40px", width: "80px" }}
+                                                     alt={this.props.user.first_name}
+                                                     className="avatar" />
+                                            </NavLink>
+                                            : <Skeleton circle={false} height={40} width={80} />}
                                         <div className="mx-3">
                                             <NavLink to={`/pro/${this.props.user.slug}/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
                                                 <small className="d-block text-muted"><b><i className="now-ui-icons tech_watch-time"/> {moment(this.props.created_at).format('ll')}</b></small>
@@ -101,6 +105,9 @@ class PrivateUserEmployementList extends Component {
                                             <>
                                                 {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
                                                     <div className="text-center">
+                                                        <NavLink to={`/profile/${this.props.user.slug}/personal_settings/employment/${this.props.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistique l'article">
+                                                            <i className="now-ui-icons business_chart-bar-32"/>
+                                                        </NavLink>
                                                         {this.props.status ?
                                                             <>
                                                                 <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}

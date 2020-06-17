@@ -26,6 +26,7 @@ class CreateAnnoncereservationsTable extends Migration
             $table->unsignedBigInteger('price')->nullable();
             $table->date('disponible_date')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unsignedBigInteger('city_id')->nullable()->index();
             $table->unsignedBigInteger('member_id')->nullable()->index();

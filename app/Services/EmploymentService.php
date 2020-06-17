@@ -127,6 +127,31 @@ class EmploymentService
         return $employment;
     }
 
+    public static function apistatistique($user,$employment)
+    {
+
+        $employment = new EmploymentResource(employment::whereSlugin($employment)
+            ->withCount(['contactuseremployments' => function ($q) use ($user){
+                $q->with('employment','user')->whereIn('user_id',[$user->id]);},])
+            ->whereIn('user_id',[$user->id])
+            ->with(['contactuseremployments' => function ($q) use ($user){
+                $q->with('employment','user')
+                    ->whereIn('user_id',[$user->id])
+                    ->with(['employment.user' => function ($q){$q->distinct()->get();}])
+                    ->with(['employment.city' => function ($q){$q->distinct()->get();}])
+                    ->with(['employment.categoryemployment' => function ($q){$q->distinct()->get();}])
+                    ->orderBy('created_at','DESC')
+                    ->distinct()->get()
+                ;},
+            ])
+            ->with('user','city','categoryemployment','member')
+            ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->with(['user.profile' => function ($q){$q->distinct()->get();},])->first());
+
+        return $employment;
+    }
+
     public static function apiemploymentsinteresse($categoryemployment)
     {
         $employments = EmploymentResource::collection(employment::with('user','city','categoryemployment','member')

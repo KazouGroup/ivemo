@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Button,UncontrolledTooltip } from "reactstrap";
 import moment from "moment";
@@ -6,7 +6,7 @@ import LazyLoad from "react-lazyload";
 import Skeleton from "react-loading-skeleton";
 
 
-class PrivateUserFavoritEmployementList extends Component {
+class PrivateUserFavoritEmployementList extends PureComponent {
 
     getDescription() {
         return { __html: (this.props.employment.description.length > 80 ? this.props.employment.description.substring(0, 80) + "..." : this.props.employment.description) };

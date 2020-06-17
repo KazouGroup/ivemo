@@ -19,6 +19,7 @@ class CreateColorsTable extends Migration
             $table->string('slug')->nullable();
             $table->boolean('status')->default(false);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unsignedBigInteger('user_id')->nullable()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

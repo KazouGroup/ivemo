@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Remarkable } from 'remarkable';
 import {Alert, Button, UncontrolledTooltip} from "reactstrap";
@@ -6,7 +6,7 @@ import LazyLoad from 'react-lazyload';
 import moment from "moment";
 
 
-class PrivateUserBlogannoncelocationList extends Component {
+class PrivateUserBlogannoncelocationList extends PureComponent {
 
 
     getDescription() {
@@ -71,6 +71,9 @@ class PrivateUserBlogannoncelocationList extends Component {
                                     <>
                                         {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
                                             <div className="text-center">
+                                                <NavLink to={`/profile/${this.props.user.slug}/personal_settings/blogs/annonce_location/statistique/${this.props.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistique l'article">
+                                                    <i className="now-ui-icons business_chart-bar-32"/>
+                                                </NavLink>
                                                 {this.props.status ?
                                                     <>
                                                         <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}

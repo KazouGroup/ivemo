@@ -28,7 +28,7 @@ class EmploymentController extends Controller
         $this->middleware('auth',['only' => [
             'create','store','edit','update','destroy','activated','unactivated',
             'apiemploymentsbyuser','employmentsbyuser','apiemploymentsbyusercategoryemployment',
-            'employmentsbyusercategoryemployment'
+            'employmentsbyusercategoryemployment','apistatistique','statistique'
         ]]);
     }
     /**
@@ -84,6 +84,20 @@ class EmploymentController extends Controller
     }
 
     public function employmentsbyusercategoryemployment(user $user)
+    {
+        $this->authorize('update',$user);
+
+        if (auth()->user()->id === $user->id){
+            return view('user.profile.employments.privateprofilemployments',[
+                'user' => auth()->user(),
+            ]);
+        }else{
+            abort(404);
+        }
+
+    }
+
+    public function statistique(user $user)
     {
         $this->authorize('update',$user);
 
@@ -210,6 +224,15 @@ class EmploymentController extends Controller
         visits($employment)->seconds(60)->increment();
 
         $employments = EmploymentService::apiemploymentsbycategoryslug($categoryemployment,$city,$employment);
+
+        return response()->json($employments,200);
+    }
+
+    public function apistatistique(user $user,$employment)
+    {
+        $this->authorize('update',$user);
+
+        $employments = EmploymentService::apistatistique($user,$employment);
 
         return response()->json($employments,200);
     }

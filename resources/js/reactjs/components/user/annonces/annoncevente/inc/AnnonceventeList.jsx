@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Remarkable } from 'remarkable';
 import {Button, UncontrolledTooltip} from "reactstrap";
@@ -6,7 +6,7 @@ import moment from "moment";
 import Skeleton from "react-loading-skeleton";
 
 
-class AnnonceventeList extends Component {
+class AnnonceventeList extends PureComponent {
 
 
     getDescription() {

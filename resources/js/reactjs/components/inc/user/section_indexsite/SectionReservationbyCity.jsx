@@ -13,11 +13,10 @@ class SectionReservationbyCity extends Component {
 
     loadItems(){
         let url = route('api.citiesannoncereservations_site');
-        fetch(url).then(res => res.json()).then((result) => {
+        dyaxios.get(url).then(response =>
             this.setState({
-                annoncesbycities: [...result]
-            });
-        });
+                annoncesbycities: [...response.data]
+            }));
     }
 
     componentDidMount() {

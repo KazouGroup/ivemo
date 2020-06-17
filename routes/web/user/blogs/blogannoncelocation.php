@@ -12,6 +12,11 @@ Route::group(['middleware' => 'auth','prefix' => 'profile'], function () {
         'BlogannoncelocationController@blogannonceslocationscategoryannoncelocationbyuser'
     )->name('blogannonceslocationscategoryannoncelocationbyuser_site');
 
+    Route::get(
+        '{user}/personal_settings/blogs/annonce_location/statistique/{blogannoncelocation}',
+        'BlogannoncelocationController@statistique'
+    )->name('blogannonceslocationsstatistiquebyuser_site');
+
 });
 
 Route::group(['prefix' => 'api'], function () {
@@ -60,6 +65,11 @@ Route::group(['prefix' => 'api'], function () {
         '{user}/personal_settings/blogs/annonce_locations/{categoryannoncelocation}',
         'BlogannoncelocationController@apiblogannonceslocationscategoryannoncelocationbyuser'
     )->name('api.blogannonceslocationscategoryannoncelocationbyuser_site');
+
+    Route::get(
+        '{user}/personal_settings/blogs/annonce_location/statistique/{blogannoncelocation}',
+        'BlogannoncelocationController@apistatistique'
+    )->name('api.blogannonceslocationsstatistiquebyuser_site');
 
 });
 
