@@ -529,6 +529,58 @@ class ProfilePublicAccountAvisUser extends Component {
                             <div className="col-md-12 ml-auto mr-auto">
 
                                     <div className="media-area">
+
+
+                                    {!$guest && !this.state.editavis && !this.state.editavisresponse && (
+
+                                        <>
+                                            <h4 className="text-center">
+                                                <small className="text-muted">- Laisser votre avis -</small>
+                                            </h4>
+
+                                            <Form role="form" onSubmit={this.sendavisItem} acceptCharset="UTF-8">
+
+                                                <div className="media media-post">
+                                                    <div className="avatar">
+                                                        {$userIvemo.avatar ?
+                                                            <img src={$userIvemo.avatar}
+                                                                style={{ height: "40px", width: "80px" }}
+                                                                alt={$userIvemo.first_name}
+                                                                className="media-object img-raised rounded" />
+                                                            : <Skeleton circle={false} height={40} width={80} />}
+                                                    </div>
+
+                                                    <div className="media-body">
+
+                                                        <FieldInput name="description" type='textarea' minLength="3" maxLength="5000" placeholder=" Laiser votre avis... !" value={this.state.description}
+                                                                    handleFieldChange={this.handleFieldChange}
+                                                                    hasErrorFor={this.hasErrorFor}
+                                                                    renderErrorFor={this.renderErrorFor} rows="10"/>
+
+                                                        <div className="media-footer">
+
+                                                            <Button type="submit" disabled={!this.state.description}
+                                                                    className="btn btn-primary pull-right">
+                                                                <i className="now-ui-icons ui-1_send" /> Poster
+                                                            </Button>
+                                                            {this.state.description.length >= 1 && (
+                                                                <Button onClick={this.cancelCourse}
+                                                                    className="btn btn-secondary pull-right">
+                                                                    <i className="now-ui-icons ui-1_simple-remove" /> Annuller
+                                                                </Button>
+                                                            )}
+                                                            
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </Form>
+
+                                        </>
+
+                                        )}
+
                                         {avisusers.length > 0 && (
                                         <>
                                            {avisusers.slice(0, visiableavis).map((item) => (
@@ -819,53 +871,6 @@ class ProfilePublicAccountAvisUser extends Component {
                                         )}
 
 
-                                        {!$guest && (
-
-                                            <>
-                                                <h4 className="text-center">
-                                                    <small className="text-muted">- Laisser votre avis -</small>
-                                                </h4>
-
-                                                <Form role="form" onSubmit={this.sendavisItem} acceptCharset="UTF-8">
-
-                                                    <div className="media media-post">
-                                                        <div className="avatar">
-                                                            {$userIvemo.avatar ?
-                                                                <img src={$userIvemo.avatar}
-                                                                     style={{ height: "40px", width: "80px" }}
-                                                                     alt={$userIvemo.first_name}
-                                                                     className="media-object img-raised rounded" />
-                                                                : <Skeleton circle={false} height={40} width={80} />}
-                                                        </div>
-
-                                                        <div className="media-body">
-
-                                                            <FieldInput name="description" type='textarea' minLength="3" maxLength="5000" placeholder=" Laiser votre avis... !" value={this.state.description}
-                                                                        handleFieldChange={this.handleFieldChange}
-                                                                        hasErrorFor={this.hasErrorFor}
-                                                                        renderErrorFor={this.renderErrorFor} rows="10"/>
-
-                                                            <div className="media-footer">
-
-                                                                <Button type="submit"
-                                                                        className="btn btn-primary pull-right">
-                                                                    <i className="now-ui-icons ui-1_send" /> Poster
-                                                                </Button>
-
-                                                                <Button onClick={this.cancelCourse}
-                                                                        className="btn btn-secondary pull-right">
-                                                                    <i className="now-ui-icons ui-1_simple-remove" /> Annuller
-                                                                </Button>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </Form>
-
-                                            </>
-
-                                        )}
 
                                     </div>
 
