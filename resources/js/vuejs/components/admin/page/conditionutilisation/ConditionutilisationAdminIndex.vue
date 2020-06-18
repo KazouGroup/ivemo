@@ -138,7 +138,7 @@
 </template>
 
 <script>
-    import LoaderLdsDefault from "../../../../dashboard_user/components/inc/annimation/LoaderLdsDefault";
+    import LoaderLdsDefault from "../../user/dashboard_user/components/inc/annimation/LoaderLdsDefault";
     export default {
         components: {LoaderLdsDefault},
         data() {

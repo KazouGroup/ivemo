@@ -29,7 +29,7 @@ Route::group(['middleware' => 'auth:web'], function(){
 
         require(__DIR__ . DIRECTORY_SEPARATOR .'signal'. DIRECTORY_SEPARATOR . 'signalannoncevente.php');
 
-        require(__DIR__ . DIRECTORY_SEPARATOR . 'users.php');
+        require(__DIR__ . DIRECTORY_SEPARATOR .'user'. DIRECTORY_SEPARATOR . 'index.php');
 
         require(__DIR__ . DIRECTORY_SEPARATOR . 'profiles.php');
 

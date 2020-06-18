@@ -7,7 +7,7 @@
 
 require('./bootstrap');
 
-require('../axios');
+require('../../../../axios');
 
 require('./include');
 

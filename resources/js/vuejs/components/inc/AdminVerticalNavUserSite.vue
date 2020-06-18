@@ -254,6 +254,12 @@
                     </a>
                     <div class="collapse" id="adminExamples">
                         <ul class="nav">
+                            <li v-if="$auth.can('manage-user')" class="nav-item ">
+                                <router-link class="nav-link" :to="{ name: 'users.index'}">
+                                    <span class="sidebar-mini"> USR </span>
+                                    <span class="sidebar-normal"> Users </span>
+                                </router-link>
+                            </li>
                             <li v-if="$auth.can('manage-permission')" class="nav-item ">
                                 <router-link class="nav-link" :to="{ name: 'permissions.index'}">
                                     <span class="sidebar-mini"> PS </span>
