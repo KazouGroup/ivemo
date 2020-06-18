@@ -14,7 +14,7 @@
                    </div>
                    <div class="card-footer">
                        <div class="stats">
-                           <i class="material-icons">person_add</i> Users
+                           <i class="material-icons">person_add</i> <router-link :to="{ name: 'users.index'}"> Users</router-link>
                        </div>
                    </div>
                </div>

@@ -68,6 +68,7 @@
                                         <tr>
                                             <th><b>Profile</b></th>
                                             <th><b>Name</b></th>
+                                            <th><b>Email</b></th>
                                             <th><b>Phone</b></th>
                                             <th><b>Role</b></th>
                                             <th class="disabled-sorting text-right"><b>Actions</b></th>
@@ -77,6 +78,7 @@
                                         <tr>
                                             <th><b>Profile</b></th>
                                             <th><b>Name</b></th>
+                                            <th><b>Email</b></th>
                                             <th><b>Phone</b></th>
                                             <th><b>Role</b></th>
                                             <th class="text-right"><b>Actions</b></th>
@@ -94,9 +96,14 @@
                                                     {{ (item.first_name.length > 15 ? item.first_name.substring(0,15)+ "..." : item.first_name) | upText }}
                                                 </router-link>
                                             </td>
+                                            <td><b>{{item.email}}</b></td>
                                             <td><b>{{item.phone}}</b></td>
                                             <td>
-                                                admin
+                                                <h6>
+                                                            <span v-for="role in item.roles" :class="getRoleName(role)">
+                                                            <b>{{role}}</b>
+                                                            </span>
+                                                </h6>
                                             </td>
                                             <td class="td-actions text-right">
                                                 <!--<a href="javascript:void(0)" @click="getUser(item)" class="btn btn-link btn-warning btn-round btn-just-icon" title="View">
@@ -148,6 +155,35 @@
         },
 
         methods:{
+            getColorCardUser() {
+                return "card-header card-header-icon card-header-" + this.user.color_name;
+            },
+            getColorHeaderUser() {
+                return "card-header card-header-" + this.user.color_name;
+            },
+            getRoleName(role) {
+                if (role === 'super-admin') {
+                    return 'badge badge-info';
+                }
+                if (role === 'admin') {
+                    return 'badge badge-success';
+                }
+                if (role === 'visitor') {
+                    return 'badge badge-secondary';
+                }
+                if (role === 'user') {
+                    return 'badge badge-secondary';
+                }
+                if (role === 'editor') {
+                    return 'badge badge-warning';
+                }
+                if (role === 'advertiser') {
+                    return 'badge badge-danger';
+                }
+                if (role === 'moderator') {
+                    return 'badge badge-primary';
+                }
+            },
 
             datamod_countFormatter(users_modcount, precision) {
                 const abbrev = ['', 'k', 'M', 'B', 'T'];
@@ -167,9 +203,8 @@
                         ],
                         order: [[ 0, 'asc' ], [ 3, 'desc' ]],
                         responsive: true,
-                        destroy: true,
                         retrieve:true,
-                        autoFill: true,
+                        destroy: true,
                         colReorder: true,
                         language: {
                             search: "<i class='material-icons'>search</i>",
@@ -180,13 +215,6 @@
                     });
                 });
             },
-            getColorCardUser() {
-                return "card-header card-header-icon card-header-" + this.user.color_name;
-            },
-            getColorHeaderUser() {
-                return "card-header card-header-" + this.user.color_name;
-            },
-
 
             loadItems() {
                 //Start Progress bar

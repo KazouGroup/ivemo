@@ -82,6 +82,7 @@ class UserController extends Controller
     public function api()
     {
         $users = UserResource::collection(user::where('status_user',0)
+            ->with('roles','profile')
             ->latest()->paginate(30));
         return response()->json($users,200);
     }
@@ -89,6 +90,7 @@ class UserController extends Controller
     public function apiuserpro()
     {
         $users = UserResource::collection(user::where(['status_user' => 0,'status_profile' => 1])
+            ->with('roles','profile')
             ->latest()->paginate(30));
         return response()->json($users,200);
     }
@@ -96,6 +98,7 @@ class UserController extends Controller
     public function apiuserpar()
     {
         $users = UserResource::collection(user::where(['status_user' => 0,'status_profile' => 0])
+            ->with('roles','profile')
             ->latest()->paginate(30));
         return response()->json($users,200);
     }
@@ -103,6 +106,7 @@ class UserController extends Controller
     public function apicount()
     {
         $users = user::where('status_user',0)
+            ->with('roles','profile')
             ->get()->count();
         return response()->json($users,200);
     }
@@ -110,6 +114,7 @@ class UserController extends Controller
     public function apiprocount()
     {
         $users = user::where(['status_user' => 0,'status_profile' => 1])
+            ->with('roles','profile')
             ->get()->count();
         return response()->json($users,200);
     }
@@ -117,6 +122,7 @@ class UserController extends Controller
     public function apiparcount()
     {
         $users = user::where(['status_user' => 0,'status_profile' => 0])
+            ->with('roles','profile')
             ->get()->count();
         return response()->json($users,200);
     }
@@ -130,13 +136,15 @@ class UserController extends Controller
     public function apiusermod()
     {
         $users = UserResource::collection(user::where('status_user',1)
+            ->with('roles','profile')
             ->latest()->get());
         return response()->json($users,200);
     }
 
     public function apimodcount()
     {
-        $users = user::where('status_user',1)->get()->count();
+        $users = user::where('status_user',1)
+            ->with('roles','profile')->get()->count();
         return response()->json($users,200);
     }
 
