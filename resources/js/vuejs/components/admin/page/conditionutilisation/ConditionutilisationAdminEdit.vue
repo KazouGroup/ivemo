@@ -64,10 +64,10 @@
                                 <hr>
                                 <div class="submit">
                                     <div class="text-center">
-                                        <router-link :to="{ name: 'conditionutilisations.index' }" class="btn btn-round btn-danger">
+                                        <router-link :to="{ name: 'conditionutilisations.index' }" class="btn btn-secondary btn-raised">
                                             <b class="title_hover">Annuler</b>
                                         </router-link>
-                                        <button  :disabled="form.busy" type="submit" class="btn btn-success btn-round btn-raised">
+                                        <button  :disabled="form.busy" type="submit" class="btn btn-success btn-raised">
                                             <b class="title_hover">Sauvegarder</b>
                                         </button>
                                     </div>

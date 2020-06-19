@@ -160,7 +160,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <div class="text-center">
-                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                                            <button type="button" class="btn btn-secondary btn-raised" data-dismiss="modal">
                                                         <span class="btn-label">
                                                             <b>Close</b>
                                                         </span>

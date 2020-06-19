@@ -98,7 +98,7 @@
                                     <hr>
                                     <div class="submit">
                                         <div class="text-center">
-                                            <router-link :to="{ name: 'faqs.index' }" class="btn btn-danger">
+                                            <router-link :to="{ name: 'faqs.index' }" class="btn btn-secondary btn-raised">
                                                 <b class="title_hover">Annuler</b>
                                             </router-link>
                                             <button  :disabled="form.busy" type="submit" class="btn btn-success btn-raised">
