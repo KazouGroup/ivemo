@@ -66,20 +66,33 @@ Route::group(['prefix' => 'api'], function () {
 
 });
 
-Route::get(
-    '/dashboard/users/professionnels',
-    'UserController@userspro'
-)->name('users.userspro');
+Route::group(['prefix' => 'dashboard'], function () {
 
-Route::get(
-    '/dashboard/users/particuliers',
-    'UserController@userspar'
-)->name('users.userspar');
+    Route::get(
+        'users/',
+        'UserController@index'
+    )->name('users.index');
 
-Route::get(
-    '/dashboard/users/moderators',
-    'UserController@usersmod'
-)->name('users.usersmod');
+    Route::get(
+        'users/professionnels',
+        'UserController@userspro'
+    )->name('users.userspro');
+
+    Route::get(
+        'users/particuliers',
+        'UserController@userspar'
+    )->name('users.userspar');
+
+    Route::get(
+        'users/moderators',
+        'UserController@usersmod'
+    )->name('users.usersmod');
+
+    Route::delete(
+        'users/delete/{id}',
+        'UserController@destroy'
+    )->name('users.destroy');
+});
 
 Route::get('/account/user', 'UserController@user')->name('users.user');
 
@@ -87,11 +100,5 @@ Route::get('dashboard/profile/','UserController@admin_profile');
 Route::put('/profile/users','UserController@updateUser');
 Route::get('dashboard/profile/edit','UserController@admin_profile_edit')->name('admin_profile_edit');
 
-
-
-Route::resource('/dashboard/users', 'UserController');
-Route::get('/dashboard/users/p/datatables', 'UserController@datatablesusers');
-Route::get('/dashboard/administrators/p/datatables', 'UserController@datatablesadministrators');
-
-Route::get('/dashboard/administrators', 'UserController@administrator');
+//Route::resource('/dashboard/users', 'UserController');
 Route::get('/account/users/{user}', 'UserController@show')->name('account_users.show');

@@ -255,7 +255,7 @@
             },
 
 
-            deleteItem(id){
+            deleteItem(item){
                 Swal.fire({
                     title: 'Delete Data',
                     text: "Are you sure you want to delete this Data?",
@@ -270,8 +270,12 @@
                     if (result.value) {
                         //Start Progress bar
                         this.$Progress.start();
+
+                        let index = this.policyprivacies.indexOf(item);
+                        this.policyprivacies.splice(index, 1);
+
                         //Envoyer la requete au server
-                        let url = route('policyprivacies.destroy',id);
+                        let url = route('policyprivacies.destroy',item.id);
                         dyaxios.delete(url).then(() => {
                             /** Alert notify bootstrapp **/
                             $.notify({

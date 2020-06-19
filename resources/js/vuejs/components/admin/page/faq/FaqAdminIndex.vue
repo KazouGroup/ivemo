@@ -258,7 +258,7 @@
                 })
             },
 
-            deleteItem(id){
+            deleteItem(item){
                 Swal.fire({
                     title: 'Delete FAQS',
                     text: "Are you sure you want to delete this FAQ?",
@@ -275,8 +275,12 @@
                     if (result.value) {
                         //Start Progress bar
                         this.$Progress.start();
+
+                        let index = this.faqs.indexOf(item);
+                        this.faqs.splice(index, 1);
+
                         //Envoyer la requete au server
-                        let url = route('faqs.destroy',id);
+                        let url = route('faqs.destroy',item.id);
                         dyaxios.delete(url).then(() => {
                             /** Alert notify bootstrapp **/
                             $.notify({

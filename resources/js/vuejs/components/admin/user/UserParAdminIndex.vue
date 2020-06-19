@@ -59,7 +59,7 @@
 
 
                                 <div class="row">
-                                    <div v-for="(item,index) in users" :key="index" class="col-md-4 col-sm-4">
+                                    <div v-for="(item,index) in users" :key="index" class="col-sm-4 mx-auto">
                                         <div class="card card-profile">
 
                                             <div class="stats text-center">

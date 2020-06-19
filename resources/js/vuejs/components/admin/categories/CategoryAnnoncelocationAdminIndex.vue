@@ -126,7 +126,7 @@
                                                 >
                                                     <i class="material-icons">edit</i>
                                                 </button>
-                                                <button v-if="$auth.can('manage-categories')" @click="deleteItem(item)"
+                                                <button v-if="$auth.can('manage-categories')" @click="deleteItem(item.id)"
                                                         class="btn btn-danger btn-sm btn-just-icon"
                                                         title="Delete"
                                                 >

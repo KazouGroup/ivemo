@@ -101,7 +101,7 @@
                                             <td>
                                                 <h6>
                                                             <span v-for="role in item.roles" :class="getRoleName(role)">
-                                                            <b>{{role}}</b>
+                                                                <b>{{role}}</b>
                                                             </span>
                                                 </h6>
                                             </td>
@@ -110,17 +110,13 @@
                                                     <i class="material-icons">visibility</i>
                                                 </a>-->
                                                 <button
-                                                        class="btn btn-link btn-warning btn-round btn-just-icon"
+                                                        class="btn btn-warning btn-sm btn-just-icon"
                                                         title="View">
                                                     <i class="material-icons">visibility</i>
                                                 </button>
-                                                <a href="#" class="btn btn-link  btn-success btn-round btn-just-icon" title="Edit">
+                                                <a href="#" class="btn btn-success btn-sm btn-just-icon" title="Edit">
                                                     <i class="material-icons">edit</i>
                                                 </a>
-                                                <button
-                                                        class="btn btn-link btn-danger btn-round btn-just-icon" title="Delete">
-                                                    <i class="material-icons">delete_forever</i>
-                                                </button>
                                             </td>
                                         </tr>
                                         </tbody>

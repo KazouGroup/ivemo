@@ -116,7 +116,7 @@
                                                 >
                                                     <i class="material-icons">edit</i>
                                                 </button>
-                                                <button @click="deleteItem(item)"
+                                                <button @click="deleteItem(item.id)"
                                                         class="btn btn-danger btn-sm btn-just-icon"
                                                         title="Delete"
                                                 >

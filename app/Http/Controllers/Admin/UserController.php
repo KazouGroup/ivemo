@@ -8,6 +8,7 @@ use App\Model\user;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
@@ -52,27 +53,6 @@ class UserController extends Controller
     }
 
     public function usersmod()
-    {
-        $user = Auth::user();
-
-        return view('admin.user.index',compact('user'));
-    }
-
-    public function datatablesusers()
-    {
-        $user = Auth::user();
-
-        return view('admin.user.index',compact('user'));
-    }
-
-    public function datatablesadministrators()
-    {
-        $user = Auth::user();
-
-        return view('admin.user.index',compact('user'));
-    }
-
-    public function administrator()
     {
         $user = Auth::user();
 
@@ -309,10 +289,13 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array|\Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $user = user::findOrFail($id);;
+        $user->delete();
+
+        return ['message' => 'Deleted successfully '];
     }
 }
