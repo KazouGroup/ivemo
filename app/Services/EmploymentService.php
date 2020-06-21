@@ -7,6 +7,7 @@ use App\Http\Resources\CategoryemployementResource;
 use App\Http\Resources\CityResource;
 use App\Http\Resources\EmploymentResource;
 use App\Jobs\ContactuserfornewemploymentJob;
+use App\Model\abonne\subscribemployment;
 use App\Model\categoryemployment;
 use App\Model\city;
 use App\Model\employment;
@@ -299,16 +300,19 @@ class EmploymentService
     public static function sendMessageToUser($request)
     {
         $user = auth()->user();
-
-        $emilSubscribers = subscriberuser::with('user')
-            ->whereIn('user_id',[$user->id])
+        $emailsubscribemployment = subscribemployment::with('user','member')
+            ->whereIn('member_id',[$user->id])
             ->distinct()->get();
+
+        //$emilSubscribers = subscriberuser::with('user')
+        //    ->whereIn('user_id',[$user->id])
+        //    ->distinct()->get();
 
         $subject = (config("app.name"))." New post de ".$user->first_name;
         $message = $user->first_name.' a posté un nouveau article <a href="'.route('public_profile_employments.site', $user->slug).'" class="btn btn-xs btn-primary"> Voir plus</a>';
 
-        foreach ($emilSubscribers as $item) {
-                $to[] = $item->user_email;continue;
+        foreach ($emailsubscribemployment as $item) {
+                $to[] = $item->user->email;continue;
         }
 
         $from = ['address' => $user->email , 'name' => $user->first_name];

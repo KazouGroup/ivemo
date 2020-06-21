@@ -564,12 +564,12 @@ class ProfilePublicAccountAvisUser extends Component {
                                                                 <i className="now-ui-icons ui-1_send" /> Poster
                                                             </Button>
                                                             {this.state.description.length >= 1 && (
-                                                                <Button onClick={this.cancelCourse}
+                                                                <button onClick={this.cancelCourse}
                                                                     className="btn btn-secondary pull-right">
                                                                     <i className="now-ui-icons ui-1_simple-remove" /> Annuller
-                                                                </Button>
+                                                                </button>
                                                             )}
-                                                            
+
 
                                                         </div>
                                                     </div>

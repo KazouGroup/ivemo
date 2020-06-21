@@ -22,3 +22,4 @@ require(__DIR__ . DIRECTORY_SEPARATOR . 'workwithus.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'categories'. DIRECTORY_SEPARATOR . 'categoryannoncelocation.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'blogs'. DIRECTORY_SEPARATOR . 'index.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'favorites'. DIRECTORY_SEPARATOR . 'index.php');
+require(__DIR__ . DIRECTORY_SEPARATOR . 'subscribes'. DIRECTORY_SEPARATOR . 'index.php');

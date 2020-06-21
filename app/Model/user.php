@@ -6,6 +6,7 @@ namespace App\Model;
 use App\Notifications\VerifyEmailUsers;
 use App\Traits\Model\Favoritesdata;
 use App\Traits\Model\Likesdata;
+use App\Traits\Model\Subscribedata;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -17,7 +18,7 @@ use Illuminate\Support\Str;
 
 class user extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable,HasApiTokens,HasRoles,Favoritesdata,Likesdata;
+    use Notifiable,HasApiTokens,HasRoles,Favoritesdata,Likesdata,Subscribedata;
 
     /**
      * The attributes that are mass assignable.

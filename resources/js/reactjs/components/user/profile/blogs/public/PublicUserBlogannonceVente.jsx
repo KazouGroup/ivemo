@@ -16,25 +16,94 @@ import Skeleton from "react-loading-skeleton";
 import BlogannoncePublicuserSkeleton from "../../../../inc/user/blog/BlogannoncePublicuserSkeleton";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 import NavLinkPublicEmploymentUser from "../../employments/public/NavLinkPublicEmploymentUser";
+import HelmetSite from "../../../../inc/user/HelmetSite";
+import ButonSubscribedBlogannonce from "../../../../inc/vendor/ButonSubscribedBlogannonce";
 
 
 class PublicUserBlogannonceVente extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userblogventePublick:{blogannonceventes: []},
-            isLoading: false,
+            userblogventePublick:{profile:[]},
+            blogannonceventes:{categoryannoncevente:[],user:[]},
             visiable: 20,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
+        this.subscribeItem = this.subscribeItem.bind(this);
+        this.unsubscribedItem = this.unsubscribedItem.bind(this);
     }
     loadmoresItem(){
         this.setState((old) =>{
             return {visiable: old.visiable + 20}
         })
     }
+
+    subscribeItem(id) {
+        const url = route('blogannonces_subscribe.subscribe', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Notifications activé",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unsubscribedItem(id) {
+        const url = route('blogannonces_unsubscribe.unsubscribe', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Notifications desactivé",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
@@ -89,9 +158,9 @@ class PublicUserBlogannonceVente extends Component {
     }
 
     loadItems(){
-        this.setState({ isLoading: true });
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.profilpublique_blogannonceventes',[itemuser])).then(response => this.setState({userblogventePublick: response.data,isLoading: false,}));
+        dyaxios.get(route('api.profilpublique_blogannonceventes',[itemuser])).then(response => this.setState({blogannonceventes: response.data}));
+        dyaxios.get(route('api.profilpublique',[itemuser])).then(response => this.setState({userblogventePublick: response.data}));
     }
 
     // lifecycle method
@@ -100,21 +169,19 @@ class PublicUserBlogannonceVente extends Component {
     }
 
     render() {
-        const {userblogventePublick,visiable,isLoading} = this.state;
-        const mapBlogannonceventes = isLoading ? (
-            <BlogannoncePublicuserSkeleton/>
-        ):(
-            userblogventePublick.blogannonceventes.slice(0,visiable).map(item => {
+        const {userblogventePublick,visiable,blogannonceventes} = this.state;
+        const mapBlogannonceventes = blogannonceventes.length >= 0  ? (
+            blogannonceventes.slice(0,visiable).map(item => {
                 return(
                     <PublicUserBlogannonceventeList key={item.id} {...item} deleteItem={this.deleteItem}/>
                 )
             })
+        ):(
+            <BlogannoncePublicuserSkeleton/>
         );
         return (
             <>
-                <Helmet>
-                    <title>Articles sur la locations {`${userblogventePublick.first_name || 'Profile'}`} - {$name_site}</title>
-                </Helmet>
+                <HelmetSite title={`Articles sur la locations ${userblogventePublick.first_name || 'Profile'} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 
@@ -127,34 +194,48 @@ class PublicUserBlogannonceVente extends Component {
                         <div className="page-header page-header-mini">
                             <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
                             </div>
-                            <div className="content-center">
 
-                                <div className="card-body">
+                            {userblogventePublick.first_name && (
+                                <div className="content-center">
 
-                                    <h1 className="title">{userblogventePublick.first_name || ""}</h1>
+                                    <div className="card-body">
 
-                                    {userblogventePublick.status_profile === 0 ?
-                                
-                                    <Link to={`/user/${userblogventePublick.slug}/`} className="text-white">
-                                        <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userblogventePublick.first_name}</b>
-                                    </Link>
-                        
-                                    :
-                                 <>
-                                    {userblogventePublick.slug ?
-                                        <Link to={`/pro/${userblogventePublick.slug}/`} className="text-white">
-                                            <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userblogventePublick.first_name}</b>
-                                        </Link>
-                                        : <></>}
-                                 </>
-                                }
-                                    {userblogventePublick.blogannonceventes_count >= 0 ?
-                                        <h5><b>{userblogventePublick.blogannonceventes_count}</b> {userblogventePublick.blogannonceventes_count > 1 ? "articles" : "article"} posté par {userblogventePublick.first_name} sur la vente et l'achat</h5>
-                                    : <></>} 
+                                        <h1 className="title">{userblogventePublick.first_name || ""}</h1>
+
+                                        {userblogventePublick.status_profile === 0 ?
+
+                                            <Link to={`/user/${userblogventePublick.slug}/`} className="text-white">
+                                                <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userblogventePublick.first_name}</b>
+                                            </Link>
+
+                                            :
+                                            <>
+                                                {userblogventePublick.slug ?
+                                                    <Link to={`/pro/${userblogventePublick.slug}/`} className="text-white">
+                                                        <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userblogventePublick.first_name}</b>
+                                                    </Link>
+                                                    : <></>}
+                                            </>
+                                        }
+
+                                        {userblogventePublick.blogannonceventes_count >= 0 ?
+                                            <h5><b>{userblogventePublick.blogannonceventes_count}</b> {userblogventePublick.blogannonceventes_count > 1 ? "articles" : "article"} posté par {userblogventePublick.first_name} sur la vente et l'achat</h5>
+                                            : <></>}
+
+                                        <div className="text-center">
+                                            <ButonSubscribedBlogannonce namesubscribed={`Recevoir toutes les notifications`} nameunsubscribed={`Ne plus recevoir les notifications`}
+                                                                       titleToltipeSubscribed={`Abonnez vous pour recevoir tous notifications des articles postées par`}
+                                                                       titleToltipeUnsubscribed={`Ne plus etre notifier des articles par`}
+                                                                       subscribeItem={this.subscribeItem}
+                                                                       unsubscribedItem={this.unsubscribedItem}
+                                                                       {...userblogventePublick}/>
+                                        </div>
+
+                                    </div>
 
                                 </div>
+                            )}
 
-                            </div>
                         </div>
 
                         <div className="main main-raised">
@@ -304,15 +385,26 @@ class PublicUserBlogannonceVente extends Component {
 
                                         </Row>
 
-                                        {visiable < userblogventePublick.blogannonceventes.length && (
-                                            <div className="row">
-                                                <div className="col-md-4 ml-auto mr-auto text-center">
-                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
-                                                        <b>Voir plus </b>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        )}
+                                        <div className="text-center">
+                                            {visiable < blogannonceventes.length ?
+                                                <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                                    <b>Voir plus </b>
+                                                </button>
+                                                :
+                                                <>
+                                                {blogannonceventes.length > 0 && (
+                                                     <ButonSubscribedBlogannonce namesubscribed={`Recevoir toutes les notifications`} nameunsubscribed={`Ne plus recevoir les notifications`}
+                                                     titleToltipeSubscribed={`Abonnez vous pour recevoir tous notifications des articles postées par`}
+                                                     titleToltipeUnsubscribed={`Ne plus etre notifier des articles par`}
+                                                     subscribeItem={this.subscribeItem}
+                                                     unsubscribedItem={this.unsubscribedItem}
+                                                     {...userblogventePublick}/>
+                                                )}
+                                                </>
+                                               
+                                            }
+                                        </div>
+
 
                                         {userblogventePublick.status_profile === 1 &&(
 
@@ -347,7 +439,7 @@ class PublicUserBlogannonceVente extends Component {
 
                                             </>
                                         )}
-                                       
+
                                     </div>
 
                                 </div>

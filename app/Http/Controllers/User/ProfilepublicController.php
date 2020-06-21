@@ -15,28 +15,9 @@ class ProfilepublicController extends Controller
 
 
 
-    public function apiprofilepublique($user)
+    public function apiprofilepublique(user $user)
     {
-        $user = new UserResource(user::whereSlug($user)
-            ->withCount(['annoncelocations' => function ($q){
-                $q->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
-                    ->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['annoncereservations' => function ($q){
-                $q->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
-                    ->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['annonceventes' => function ($q){
-                $q->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-                    ->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['blogannoncelocations' => function ($q){
-                $q->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
-                    ->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['blogannoncereservations' => function ($q){
-                $q->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
-                    ->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['blogannonceventes' => function ($q){
-                $q->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-                    ->where(['status' => 1,'status_admin' => 1]);
-            }])->first());
+        $user = new UserResource(ProfileService::apiprofilepublique($user));
 
         return response()->json($user, 200);
     }

@@ -12,7 +12,5 @@ require(__DIR__ . DIRECTORY_SEPARATOR . 'employment.php');
 
 require(__DIR__ . DIRECTORY_SEPARATOR . 'annoncevente.php');
 
-require(__DIR__ . DIRECTORY_SEPARATOR . 'profile.php');
-
 require(__DIR__ . DIRECTORY_SEPARATOR . 'teamuser.php');
 
