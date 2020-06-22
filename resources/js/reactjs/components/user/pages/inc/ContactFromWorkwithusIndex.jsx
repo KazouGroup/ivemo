@@ -72,8 +72,8 @@ class ContactFromWorkwithusIndex extends Component {
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInDown",
-                            exit: "animated fadeOutUp"
+                            enter: "animate__animated animate__fadeInDown",
+                            exit: "animate__animated animate__fadeOutUp"
                         },
                     });
 
@@ -92,8 +92,8 @@ class ContactFromWorkwithusIndex extends Component {
                 allow_dismiss: false,
                 type: 'danger',
                 animate: {
-                    enter: 'animated bounceInDown',
-                    exit: 'animated bounceOutUp'
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
                 }
             });
         })

@@ -134,28 +134,29 @@ class FooterBigUserSite extends Component {
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to={`/cookies_site/`} className="text-muted">
-                                                Confidentialité
+                                            <Link to={'/condition_utilisation/'} className="text-muted">
+                                                Terms &amp; Conditions
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to={`/cookies_site/`} className="text-muted">
-                                                Cookies
+                                            <Link to={'/policy_privacy/'} className="text-muted">
+                                                Privacy Policy
                                             </Link>
                                         </li>
                                         <li>
-                                            <a href="#pablo" className="text-muted">
-                                                Conditions générales
-                                            </a>
+                                            <Link to={'/licence_site/'} className="text-muted">
+                                                Licence Site
+                                            </Link>
                                         </li>
+
                                     </ul>
                                 </div>
 
                             </div>
                         </div>
                         <hr />
-
-                        <div className="row">
+                        {/*
+                            <div className="row">
                             <div className="col-md-9">
                                 <div className="column">
                                     <nav>
@@ -198,9 +199,13 @@ class FooterBigUserSite extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="copyright" id="copyright">
-                            Copyright © {new Date().getFullYear()}, {$name_site} All Rights Reserved Realisé par
-                            <a href="/" className="pl-2 text-primary">KazouGroup Srl</a>.
+
+                        */}
+
+
+                        <div className="text-center">
+                            Copyright © 2020 - {new Date().getFullYear()}, <b>{$name_site}</b> All Rights Reserved Realisé par
+                            <a href="/" className="pl-2 text-primary"><b>KazouGroup Srl</b></a>.
                         </div>
                     </div>
                 </footer>
