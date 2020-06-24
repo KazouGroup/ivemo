@@ -37,7 +37,7 @@ class Categoriesannonceresereservationcity extends Component {
                     <tr key={item.id}>
                         <td>
                             <NavLink to={`/annonces_reservations/reservations/${item.slug}/${this.props.slug}/`}>
-                                reservation <b style={{ textTransform: "lowercase" }}>{item.name}</b> à <b>{this.props.name}</b>
+                                 <b style={{ textTransform: "lowercase" }}>{item.name}</b> à <b>{this.props.name}</b>
                             </NavLink>
                         </td>
                         <td className="text-right"> {this.getcountcategoryannonceString(item.annoncereservations_count)} {item.annoncereservations_count > 1 ? "annonces" : "annonce"}</td>

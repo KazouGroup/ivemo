@@ -26,7 +26,7 @@ $factory->define(employment::class, function (Faker $faker) {
         'description' => "<p>".$faker->realText(rand(1000, 2000))."</p>",
         //'categoryemployment_id' => mt_rand(1, 2),
         'categoryemployment_id' => categoryemployment::inRandomOrder()->first()->id,
-        'city_id' => city::inRandomOrder()->first()->id,
+        'city_id' => city::where(['status' => 1])->inRandomOrder()->first()->id,
         'user_id' => user::inRandomOrder()->first()->id,
         'created_at' => $faker->dateTime,
     ];

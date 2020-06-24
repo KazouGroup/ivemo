@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../../../configurations/inc/NavlinkconfigurationUser";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 import PrivateUserEmployementList from "../../../employment/inc/PrivateUserEmployementList";
-import EmploymentListSkeleton from "../../../../inc/user/employment/EmploymentListSkeleton";
 import Navemploymentsbyuser from "../../../employment/inc/Navemploymentsbyuser";
 import Navlinknewemployment from "../../../employment/treatement/Navlinknewemployment";
 import HelmetSite from "../../../../inc/user/HelmetSite";
@@ -21,12 +19,20 @@ class PrivateUserEmploymentsByStatistique extends Component {
         this.state = {
             useremploymentsPrivate: [],
             employment:{categoryemployment:[],user:[],city:[]},
+            visiable: 20,
 
         };
 
         this.deleteItem = this.deleteItem.bind(this);
         this.activeItem = this.activeItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
+        this.loadmoresItem = this.loadmoresItem.bind(this);
+    }
+
+    loadmoresItem(){
+        this.setState((old) =>{
+            return {visiable: old.visiable + 20}
+        })
     }
 
     activeItem(id){
@@ -202,7 +208,7 @@ class PrivateUserEmploymentsByStatistique extends Component {
     }
 
     render() {
-        const {useremploymentsPrivate,employment} = this.state;
+        const {useremploymentsPrivate,employment,visiable} = this.state;
 
         return (
             <>
@@ -282,6 +288,77 @@ class PrivateUserEmploymentsByStatistique extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
+
+                                                <div className="card">
+
+                                                    <div className="card-body">
+                                                        <div className="table-responsive">
+
+                                                            <table className="table">
+                                                                <thead className="">
+                                                                <tr>
+                                                                    <th>
+                                                                        <b>Nom</b>
+                                                                    </th>
+                                                                    <th>
+                                                                        <b>Email</b>
+                                                                    </th>
+                                                                    <th className="text-center">
+                                                                        <b>Telephone</b>
+                                                                    </th>
+                                                                    <th className="text-right">
+                                                                        <b>Actions</b>
+                                                                    </th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                {employment.contactuseremployments.slice(0,visiable).map(item => (
+                                                                    <tr key={item.id}>
+                                                                        <td>
+                                                                            <b>{item.full_name}</b>
+                                                                        </td>
+                                                                        <td>
+                                                                            <b>{item.email}</b>
+                                                                        </td>
+                                                                        <td className="text-center">
+                                                                            <b>{item.phone}</b>
+                                                                        </td>
+                                                                        <td className="text-right">
+                                                                            <button type="button" rel="tooltip"
+                                                                                    className="btn btn-info btn-icon btn-sm "
+                                                                                    data-original-title="" title="">
+                                                                                <i className="now-ui-icons users_single-02"></i>
+                                                                            </button>
+                                                                            <button type="button" rel="tooltip"
+                                                                                    className="btn btn-success btn-icon btn-sm "
+                                                                                    data-original-title="" title="">
+                                                                                <i className="now-ui-icons ui-2_settings-90"></i>
+                                                                            </button>
+                                                                            <button type="button" rel="tooltip"
+                                                                                    className="btn btn-danger btn-icon btn-sm "
+                                                                                    data-original-title="" title="">
+                                                                                <i className="now-ui-icons ui-1_simple-remove"></i>
+                                                                            </button>
+                                                                        </td>
+                                                                    </tr>
+                                                                ))}
+
+                                                                </tbody>
+                                                            </table>
+
+                                                            {visiable < employment.contactuseremployments.length && (
+                                                                <div className="row">
+                                                                    <div className="col-md-4 ml-auto mr-auto text-center">
+                                                                        <a style={{cursor:"pointer"}} onClick={this.loadmoresItem} className="text-info">
+                                                                            <b>Voir plus</b>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
                                             </>

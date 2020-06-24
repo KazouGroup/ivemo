@@ -454,14 +454,9 @@ class EmployementShowUserSite extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="text-right ml-auto">
-                                                        {$guest ?
-                                                            <Button  data-toggle="modal" data-target="#loginModal"
-                                                                     className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
-                                                                <i className="far fa-bookmark"></i>
-                                                            </Button>
-                                                            :
-                                                            <ButonFavoris favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} {...employment} />
-                                                        }
+
+                                                        <ButonFavoris favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} {...employment} />
+
                                                         <Button className="btn btn-icon btn-sm btn-facebook" title="Copier le lien" onClick={() => this.copyToClipboard()}>
                                                             <i className="fas fa-copy"></i>
                                                         </Button>

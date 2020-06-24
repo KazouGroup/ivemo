@@ -1,33 +1,219 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import { Button } from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import AnnoncereservationList from "./inc/AnnoncereservationList";
 import PropTypes from "prop-types";
+import Swal from "sweetalert2";
 import Categoriesannoncereservation from "./inc/Categoriesannoncereservation";
 import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
+import HelmetSite from "../../../inc/user/HelmetSite";
+import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 
 
 class Annoncebycategoryannoncereservationcity extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncereservationbycity: { annoncereservations: {annoncetype:[],categoryannoncereservation:[],user:{profile:[]},imagereservations:[]} },
-            categoryannoncereservations: [],
+            annoncereservations: {annoncetype:[],categoryannoncereservation:[],user:{profile:[]},imagereservations:[]},
+            annoncereservationbycity: [] ,
+            categoryannoncereservations: {user:[]},
             citiesannoncesreservations: [],
             annoncereservationbycategory: [],
-        }
+        };
+        this.deleteItem = this.deleteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
+        this.unactiveItem = this.unactiveItem.bind(this);
     }
 
-    loadItem() {
+    favoriteItem(id) {
+        const url = route('favoriteannoncereservations_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('favoriteannoncereservations_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce retirée de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unactiveItem(id) {
+        Swal.fire({
+            title: 'Désactiver l\'annonce?',
+            text: "êtes vous sure de vouloir confirmer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.annoncereservations.filter(isNotId);
+                this.setState({ annoncereservations: updatedItems });
+
+                //Envoyer la requet au server
+                let url = route('annonces_reservations_unactivated.site', id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+
+                            //message: 'Annonce désactiver avec succès',
+                            message: "Annonce masquée aux utilisateurs",
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'bottom',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animate__animated animate__fadeInUp",
+                                exit: "animate__animated animate__fadeOutDown"
+                            },
+                        });
+                    /** End alert ***/
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
+
+    }
+
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes-vous sûr de vouloir executer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.annoncereservations.filter(isNotId);
+                this.setState({ annoncereservations: updatedItems });
+
+                const url = route('annonces_locations_delete.site', [id]);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update',
+                            message: 'Annonce suprimée avec succès'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'primary',
+                            placement: {
+                                from: 'bottom',
+                                align: 'right'
+                            },
+                            animate: {
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
+                            },
+                        });
+                    /** End alert ***/
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
+    }
+
+
+    loadItems() {
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
         let itemcityannonce = this.props.match.params.city;
         /*Ici c'est pour recuperer les annonce par villes*/
-        let url = route('api.annoncereservationbycities_site', [itemannoncetype, itemCategoryannoncereservation, itemcityannonce]);
-        dyaxios.get(url).then(response => this.setState({ annoncereservationbycity: response.data, }));
+        dyaxios.get(route('api.annoncereservationbycities_site', [itemannoncetype, itemCategoryannoncereservation, itemcityannonce])).then(response => this.setState({ annoncereservations: response.data, }));
+        dyaxios.get(route('api.annoncereservationbycitiescount_site', [itemannoncetype, itemCategoryannoncereservation, itemcityannonce])).then(response => this.setState({ annoncereservationbycity: response.data, }));
         /* Ici c'est le lien pour recuperer les annonces par categorie */
         let lien = route('api.annoncelocationbycategoryannoncereservations_site', [itemannoncetype, itemCategoryannoncereservation]);
         dyaxios.get(lien).then(response => this.setState({ annoncereservationbycategory: response.data, }));
@@ -38,12 +224,16 @@ class Annoncebycategoryannoncereservationcity extends Component {
             this.setState({
                 citiesannoncesreservations: [...result]
             });
+        }).catch(error => {
+            this.setState({
+                error: true
+            });
         })
     }
 
     // lifecycle method
     componentDidMount() {
-        this.loadItem();
+        this.loadItems();
     }
 
     getcountcategoryannonceString(annoncereservations_count) {
@@ -58,14 +248,21 @@ class Annoncebycategoryannoncereservationcity extends Component {
     }
 
     render() {
-        const { annoncereservationbycity, categoryannoncereservations, citiesannoncesreservations, annoncereservationbycategory } = this.state;
+        const {annoncereservations, annoncereservationbycity, categoryannoncereservations } = this.state;
         let SlugCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
-        let allannoncereservationbycity = annoncereservationbycity.annoncereservations;
+
+        const mapAnnoncereservations = annoncereservations.length >= 0 ? (
+            annoncereservations.map(item => {
+                return(
+                    <AnnoncereservationList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
+                )
+            })
+        ):(
+            <AnnoncesListSkeleton/>
+        );
         return (
             <>
-                <Helmet>
-                    <title>Reservation {`${SlugCategoryannoncereservation || $name_site}`} dans la ville de {`${annoncereservationbycity.name || ""}`} - {$name_site}</title>
-                </Helmet>
+                <HelmetSite title={`Reservations ${SlugCategoryannoncereservation || $name_site} dans la ville de ${annoncereservationbycity.name || ""} - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
 
@@ -93,13 +290,7 @@ class Annoncebycategoryannoncereservationcity extends Component {
                                             </button>
                                         </div>
 
-                                        {allannoncereservationbycity.length >= 0 && (
-                                            <>
-                                                {allannoncereservationbycity.map((item) => (
-                                                    <AnnoncereservationList key={item.id} {...item} />
-                                                ))}
-                                            </>
-                                        )}
+                                        {mapAnnoncereservations}
 
                                     </div>
 

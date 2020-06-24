@@ -1,6 +1,62 @@
 <?php
 
 
+Route::group(['prefix' => 'api'], function () {
+
+    Route::get(
+        'annonces_reservations/{annoncetype}',
+        'AnnoncereservationController@apiannoncereservationbyannoncetype'
+    )->name('api.annoncereservationbyannoncetype_site');
+
+    Route::get(
+        'annonces_reservations/{annoncetype}/{categoryannoncereservation}',
+        'AnnoncereservationController@apiannoncelocationbycategoryannoncereservation'
+    )->name('api.annoncelocationbycategoryannoncereservations_site');
+
+    Route::get(
+        'annonces_reservationscount/{annoncetype}/{categoryannoncereservation}',
+        'AnnoncereservationController@apiannoncelocationbycategoryannoncereservationcount'
+    )->name('api.annoncelocationbycategoryannoncereservationscount_site');
+
+    Route::get(
+        'annonces_reservations/{annoncetype}/{categoryannoncereservation}/{city}',
+        'AnnoncereservationController@apiannoncereservationbycity'
+    )->name('api.annoncereservationbycities_site');
+
+    Route::get(
+        'annonces_reservationscount/{annoncetype}/{categoryannoncereservation}/{city}',
+        'AnnoncereservationController@apiannoncereservationbycitycount'
+    )->name('api.annoncereservationbycitiescount_site');
+
+    Route::get(
+        'annonces_reservations/{annoncetype}/{categoryannoncereservation}/{city}/{annoncereservation}',
+        'AnnoncereservationController@apiannoncelocationbycategoryannoncereservationslug'
+    )->name('api.annoncelocationbycategoryannoncereservationslug_site');
+
+    Route::get(
+        'annonce_reservations/{annoncetype}/{city}',
+        'AnnoncereservationController@apiannoncereservationbyannoncetypebycity'
+    )->name('api.annoncereservationsbyannoncetypebycity_site');
+
+    Route::get(
+        'annonce_reservationscount/{annoncetype}/{city}',
+        'AnnoncereservationController@apiannoncereservationbyannoncetypebycitycount'
+    )->name('api.annoncereservationsbyannoncetypebycitycount_site');
+
+    Route::get(
+        'annonces_interesses/{annoncetype}/{categoryannoncereservation}/{city}',
+        'AnnoncereservationController@apiannoncereservationinteresse'
+    )->name('api.annoncereservationintersse_site');
+
+    Route::get(
+        'profile/{user}/personal_settings/annonces_reservations',
+        'AnnoncereservationController@apiannoncesreservationsbyuser'
+    )->name('api.annoncesreservationsbyuser_site');
+
+
+});
+
+
 Route::get(
     'api/categoryannoncereservations_by_user',
     'AnnoncereservationController@apicategoryannoncereservations_by_user'
@@ -15,11 +71,6 @@ Route::get(
     'annonce_reservations/{annoncetype}/{city}',
     'AnnoncereservationController@annoncereservationsbyannoncetypebycity'
 )->name('annoncereservationsbyannoncetypebycity_site');
-
-Route::get(
-    'api/profile/{user}/personal_settings/annonces_reservations',
-    'AnnoncereservationController@apiannoncesreservationsbyuser'
-)->name('api.annoncesreservationsbyuser_site');
 
 Route::get(
     'profile/{user}/personal_settings/annonces_reservations',

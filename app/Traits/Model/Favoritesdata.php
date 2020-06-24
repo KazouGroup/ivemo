@@ -3,12 +3,14 @@
 namespace App\Traits\Model;
 
 use App\Model\annoncelocation;
+use App\Model\annoncereservation;
 use App\Model\annoncevente;
 use App\Model\blogannoncelocation;
 use App\Model\blogannoncereservation;
 use App\Model\blogannoncevente;
 use App\Model\employment;
 use App\Model\favorite\favoriteannoncelocation;
+use App\Model\favorite\favoriteannoncereservation;
 use App\Model\favorite\favoriteannoncevente;
 use App\Model\favorite\favoriteblogannoncelocation;
 use App\Model\favorite\favoriteblogannoncereservation;
@@ -91,6 +93,20 @@ trait Favoritesdata
             'favoriteannonceventes',
             'user_id',
             'annoncevente_id')->withTimeStamps();
+    }
+
+    public function favoriteannoncereservations()
+    {
+        return $this->hasMany(favoriteannoncereservation::class, 'user_id');
+    }
+
+    public function bookmarksfavoriteannoncereservations()
+    {
+        return $this->belongsToMany(
+            annoncereservation::class,
+            'favoriteannoncereservations',
+            'user_id',
+            'annoncereservation_id')->withTimeStamps();
     }
 
 }

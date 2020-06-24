@@ -9,28 +9,89 @@ import Swal from "sweetalert2";
 import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 import AnnoncereservationList from "./inc/AnnoncereservationList";
 import Categoriesannonceresereservationcity from "./inc/Categoriesannonceresereservationcity";
+import SectionReservationbyCity from "../../../inc/user/section_indexsite/SectionReservationbyCity";
 
 
 class Annoncereservationbyannoncetypebycity extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncereservationbycity: {annoncereservations:{annoncetype:[],categoryannoncereservation:[],user:{profile:[]},imagereservations:[]}},
+            annoncereservations:{annoncetype:[],categoryannoncereservation:[],user:{profile:[]},imagereservations:[]},
+            annoncereservationbycity: [],
 
         };
+
         this.deleteItem = this.deleteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
     }
 
-    loadItems(){
-        let itemannoncetype = this.props.match.params.annoncetype;
-        let itemCity = this.props.match.params.city;
-        let url = route('api.annoncereservationsbyannoncetypebycity_site',[itemannoncetype,itemCity]);
-        dyaxios.get(url).then(response => this.setState({annoncereservationbycity: response.data}));
+    favoriteItem(id) {
+        const url = route('favoriteannoncereservations_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
 
-
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
     }
-    unactiveItem(id){
+
+    unfavoriteItem(id) {
+        const url = route('favoriteannoncereservations_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce retirée de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unactiveItem(id) {
         Swal.fire({
             title: 'Désactiver l\'annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
@@ -45,17 +106,19 @@ class Annoncereservationbyannoncetypebycity extends Component {
         }).then((result) => {
             if (result.value) {
 
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.annoncereservations.filter(isNotId);
+                this.setState({ annoncereservations: updatedItems });
+
                 //Envoyer la requet au server
-                let url = route('annonces_reservations_unactivated.site',id);
+                let url = route('annonces_reservations_unactivated.site', id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            // title: 'Update FAQ',
+
                             //message: 'Annonce désactiver avec succès',
-                            message: "Cette annonce a été masquée au utilisateur <a href=\"/profile/personal_settings/annonces_locations/\" target=\"_blank\">Modifier ici</a>",
-                            url: "/profile/personal_settings/annonces_locations/",
-                            target: "_blank"
+                            message: "Annonce masquée aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -65,19 +128,18 @@ class Annoncereservationbyannoncetypebycity extends Component {
                                 align: 'center'
                             },
                             animate: {
-                                enter: "animated fadeInUp",
-                                exit: "animated fadeOutDown"
+                                enter: "animate__animated animate__fadeInUp",
+                                exit: "animate__animated animate__fadeOutDown"
                             },
                         });
                     /** End alert ***/
-                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -101,14 +163,19 @@ class Annoncereservationbyannoncetypebycity extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('annonces_locations_delete.site',[id]);
+
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.annoncereservations.filter(isNotId);
+                this.setState({ annoncereservations: updatedItems });
+
+                const url = route('annonces_locations_delete.site', [id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec success'
+                            message: 'Annonce suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -118,21 +185,19 @@ class Annoncereservationbyannoncetypebycity extends Component {
                                 align: 'right'
                             },
                             animate: {
-                                enter: 'animated fadeInRight',
-                                exit: 'animated fadeOutRight'
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
                             },
                         });
                     /** End alert ***/
-                    this.loadItems();
-
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -140,19 +205,25 @@ class Annoncereservationbyannoncetypebycity extends Component {
         });
     }
 
+    loadItems(){
+        let itemannoncetype = this.props.match.params.annoncetype;
+        let itemCity = this.props.match.params.city;
+        dyaxios.get(route('api.annoncereservationsbyannoncetypebycity_site',[itemannoncetype,itemCity])).then(response => this.setState({annoncereservations: response.data}));
+        dyaxios.get(route('api.annoncereservationsbyannoncetypebycitycount_site',[itemannoncetype,itemCity])).then(response => this.setState({annoncereservationbycity: response.data}));
 
+
+    }
     // lifecycle method
     componentDidMount() {
         this.loadItems();
     }
 
     render() {
-        const {annoncereservationbycity} = this.state;
-        const allannoncereservationbycity = annoncereservationbycity.annoncereservations;
-        const mapAnnoncereservations = allannoncereservationbycity.length >= 0 ? (
-            allannoncereservationbycity.map(item => {
+        const {annoncereservations,annoncereservationbycity} = this.state;
+        const mapAnnoncereservations = annoncereservations.length >= 0 ? (
+            annoncereservations.map(item => {
                 return(
-                    <AnnoncereservationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
+                    <AnnoncereservationList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
                 )
             })
         ):(
@@ -160,7 +231,7 @@ class Annoncereservationbyannoncetypebycity extends Component {
         );
         return (
             <>
-                <Helmet title={`Locations d'appartements, villas, chambres et bien d'autres dans la ville de ${annoncereservationbycity.name || $name_site} - ${$name_site}`}/>
+                <Helmet title={`Reservations d'appartements, villas, chambres et bien d'autres dans la ville de ${annoncereservationbycity.name || $name_site} - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
 
@@ -207,43 +278,13 @@ class Annoncereservationbyannoncetypebycity extends Component {
 
                                                             <Categoriesannonceresereservationcity {...this.props} {...annoncereservationbycity}/>
 
-                                                            {/*
-                                                              <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingAutre">
-                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseAutre" aria-expanded="false" aria-controls="collapseAutre">
-                                                                        <b>Autres transactions </b>
-                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
-                                                                    </a>
-                                                                </div>
-                                                                <div id="collapseAutre" className="collapse" role="tabpanel" aria-labelledby="headingAutre">
-                                                                    <div className="card-body">
-                                                                        <table>
-                                                                            <tbody>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Toutes les ventes de maison Douala</a></td>
-                                                                                <td className="text-right"> 200 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Toutes les ventes de terrains Douala</a></td>
-                                                                                <td className="text-right"> 1 300 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Tous les achats de maison de prestige Douala</a></td>
-                                                                                <td className="text-right"> 380 annonces</td>
-                                                                            </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            */}
-
-
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <SectionReservationbyCity/>
 
                                     </div>
 

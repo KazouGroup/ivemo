@@ -2,8 +2,10 @@
 
 namespace App\Model;
 
+use App\Model\favorite\favoriteannoncereservation;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class annoncereservation extends Model
@@ -68,6 +70,10 @@ class annoncereservation extends Model
     protected $casts = [
         'status' => 'boolean',
         'status_admin' => 'boolean',
+        'status_wifi' => 'boolean',
+        'status_parking' => 'boolean',
+        'status_lunch' => 'boolean',
+        'status_consiegerie' => 'boolean',
     ];
 
     use Sluggable;
@@ -100,5 +106,12 @@ class annoncereservation extends Model
     public function signalannoncereservations()
     {
         return $this->hasMany(signalannoncereservation::class, 'annoncereservation_id');
+    }
+
+    public function bookmarked()
+    {
+        return (bool) favoriteannoncereservation::where('user_id', Auth::guard('web')->id())
+            ->where('annoncereservation_id', $this->id)
+            ->first();
     }
 }
