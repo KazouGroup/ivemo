@@ -17,7 +17,7 @@ function ScrollToTop() {
 
 
      useEffect(() => {
-        console.log(pathname)
+        //console.log(pathname)
     });
     return null;
 }
