@@ -26,7 +26,7 @@ $factory->define(annoncereservation::class, function (Faker $faker) {
         'status_parking' => $faker->boolean,
         'status_lunch' => $faker->boolean,
         'status_consiegerie' => $faker->boolean,
-        'dry_cleaning' => $faker->dry_cleaning,
+        'dry_cleaning' => $faker->boolean,
         //'status_admin' => $faker->boolean,
         'description' => "<p>".$faker->realText(rand(1000, 2000))."</p>",
         'promo_price' => $faker->randomNumber(6),
