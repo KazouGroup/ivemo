@@ -183,7 +183,7 @@ class AnnoncereservationList extends PureComponent {
                                 {this.props.dry_cleaning && (
                                     <Button
                                         className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Pressing">
-                                        <i className="fas fa-dashcube"></i>
+                                        <i className="fas fa-tshirt"></i>
                                     </Button>
                                 )}
 
