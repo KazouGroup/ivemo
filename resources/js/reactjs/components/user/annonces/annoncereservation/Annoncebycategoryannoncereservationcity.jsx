@@ -292,6 +292,12 @@ class Annoncebycategoryannoncereservationcity extends Component {
 
                                         {mapAnnoncereservations}
 
+                                        <div className="text-center">
+                                            <button type="button"  className="btn btn-outline-info">
+                                                <b>Afficher plus </b>
+                                            </button>
+                                        </div>
+
                                     </div>
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
@@ -362,15 +368,4 @@ class Annoncebycategoryannoncereservationcity extends Component {
         )
     }
 }
-Annoncebycategoryannoncereservationcity.defaultProps = {
-    backgroundColor: "black",
-};
-
-Annoncebycategoryannoncereservationcity.propTypes = {
-    // background color for the component
-    backgroundColor: PropTypes.oneOf([
-        "black",
-        "orange",
-    ]),
-};
 export default Annoncebycategoryannoncereservationcity;

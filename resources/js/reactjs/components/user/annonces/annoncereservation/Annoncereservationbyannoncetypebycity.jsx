@@ -260,6 +260,12 @@ class Annoncereservationbyannoncetypebycity extends Component {
 
                                         {mapAnnoncereservations}
 
+                                        <div className="text-center">
+                                            <button type="button"  className="btn btn-outline-info">
+                                                <b>Afficher plus </b>
+                                            </button>
+                                        </div>
+
                                     </div>
 
                                     <div className="col-lg-4 col-md-12 mx-auto">

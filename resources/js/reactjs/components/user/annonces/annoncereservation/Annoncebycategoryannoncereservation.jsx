@@ -6,6 +6,7 @@ import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import AnnoncereservationList from "./inc/AnnoncereservationList";
 import PropTypes from "prop-types";
+import Swal from "sweetalert2";
 import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
 import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 import Categoriesannoncereservation from "./inc/Categoriesannoncereservation";
@@ -206,7 +207,7 @@ class Annoncebycategoryannoncereservation extends Component {
     }
 
 
-    loadItem(){
+    loadItems(){
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
         dyaxios.get(route('api.annoncelocationbycategoryannoncereservations_site',[itemannoncetype,itemCategoryannoncereservation])).then(response => this.setState({annoncereservations: response.data}));
@@ -220,7 +221,7 @@ class Annoncebycategoryannoncereservation extends Component {
 
     // lifecycle method
     componentDidMount() {
-        this.loadItem();
+        this.loadItems();
     }
 
     getcountcategoryannonceString (annoncereservations_count) {
@@ -294,6 +295,12 @@ class Annoncebycategoryannoncereservation extends Component {
                                         <br/>
 
                                         {mapAnnoncereservations}
+
+                                        <div className="text-center">
+                                            <button type="button"  className="btn btn-outline-info">
+                                                <b>Afficher plus </b>
+                                            </button>
+                                        </div>
 
                                     </div>
 
