@@ -39,6 +39,7 @@ class AnnoncereservationResource extends JsonResource
             'status_wifi' => $this->status_wifi,
             'status_parking' => $this->status_parking,
             'status_lunch' => $this->status_lunch,
+            'boolean' => $this->boolean,
             'status_consiegerie' => $this->status_consiegerie,
             'bookmarked' => $this->bookmarked(),
             'visits_count' => $this->visits()->count(),

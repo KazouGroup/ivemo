@@ -73,6 +73,8 @@ class annoncereservation extends Model
         'status_wifi' => 'boolean',
         'status_parking' => 'boolean',
         'status_lunch' => 'boolean',
+        'status_car_sharing' => 'boolean',
+        'dry_cleaning' => 'boolean',
         'status_consiegerie' => 'boolean',
     ];
 

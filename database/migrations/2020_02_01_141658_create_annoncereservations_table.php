@@ -27,6 +27,8 @@ class CreateAnnoncereservationsTable extends Migration
             $table->boolean('status_admin')->default(true);
             $table->boolean('status_wifi')->default(false);
             $table->boolean('status_parking')->default(false);
+            $table->boolean('status_car_sharing')->default(false);
+            $table->boolean('dry_cleaning')->default(false);
             $table->boolean('status_lunch')->default(false);
             $table->boolean('status_consiegerie')->default(false);
             $table->longText('description')->nullable();

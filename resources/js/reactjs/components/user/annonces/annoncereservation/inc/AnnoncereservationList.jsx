@@ -170,9 +170,20 @@ class AnnoncereservationList extends PureComponent {
                                         <i className="fas fa-coffee"></i>
                                     </Button>
                                 )}
+                                {this.props.status_car_sharing && (
+                                    <Button className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Service voiturié">
+                                        <i className="fas fa-car"></i>
+                                    </Button>
+                                )}
                                 {this.props.status_parking && (
                                     <Button className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Parking compris">
                                         <i className="fas fa-parking"></i>
+                                    </Button>
+                                )}
+                                {this.props.dry_cleaning && (
+                                    <Button
+                                        className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Pressing">
+                                        <i className="fas fa-dashcube"></i>
                                     </Button>
                                 )}
 
