@@ -5,6 +5,7 @@
 use App\Model;
 use App\Model\annoncereservation;
 use App\Model\categoryannoncereservation;
+use App\Model\periodeannonce;
 use App\Model\city;
 use App\Model\user;
 use Faker\Generator as Faker;
@@ -36,6 +37,7 @@ $factory->define(annoncereservation::class, function (Faker $faker) {
         'slugin' => Str::uuid(),
 
         'categoryannoncereservation_id' => categoryannoncereservation::inRandomOrder()->first()->id,
+        'periodeannonce_id' => periodeannonce::inRandomOrder()->first()->id,
         'city_id' => city::where(['status' => 1])->inRandomOrder()->first()->id,
         'user_id' => user::inRandomOrder()->first()->id,
         'created_at' => $faker->dateTime,

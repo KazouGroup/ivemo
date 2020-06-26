@@ -17,7 +17,7 @@ class Annoncebycategoryannoncereservation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncereservations:{annoncetype:[],categoryannoncereservation:[],user:{profile:[]},imagereservations:[]},
+            annoncereservations:{annoncetype:[],categoryannoncereservation:[],periodeannonce:[],user:{profile:[]},imagereservations:[]},
             annoncereservationbycategory: [],
             citiesannoncesreservations: [],
         };

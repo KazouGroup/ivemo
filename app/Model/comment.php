@@ -14,6 +14,8 @@ class comment extends Model
 
     protected $table = 'comments';
 
+    protected $with = ['user'];
+
 
 
     public function user()

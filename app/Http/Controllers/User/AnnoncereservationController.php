@@ -132,7 +132,7 @@ class AnnoncereservationController extends Controller
 
     public function apiannoncereservations()
     {
-        $annoncereservations = AnnoncereservationResource::collection(annoncereservation::with('user','categoryannoncereservation','city','annoncetype')
+        $annoncereservations = AnnoncereservationResource::collection(annoncereservation::with('user','categoryannoncereservation','city','annoncetype','periodeannonce','imagereservations')
             ->where('status',1)->latest()->get());
 
         return response()->json($annoncereservations, 200);
@@ -224,7 +224,7 @@ class AnnoncereservationController extends Controller
             ->where('status',1)
             ->withCount(['annoncereservations' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->with('user','categoryannoncereservation','city','annoncetype')
+                    ->with('user','categoryannoncereservation','city','annoncetype','periodeannonce','imagereservations')
                     ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);});
             }])
@@ -309,11 +309,12 @@ class AnnoncereservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(annoncetype $annoncetype)
     {
-        //
+        return view('user.annoncereservation.create',[
+            'annoncetype' => $annoncetype,
+        ]);
     }
-
     /**
      * Store a newly created resource in storage.
      *

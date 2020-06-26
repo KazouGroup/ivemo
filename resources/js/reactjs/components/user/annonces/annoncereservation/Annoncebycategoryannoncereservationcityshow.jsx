@@ -20,7 +20,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncereservation:{annoncetype:[],categoryannoncereservation:[],user:{profile:[]},imagereservations:[]},
+            annoncereservation:{annoncetype:[],categoryannoncereservation:[],periodeannonce:[],user:{profile:[]},imagereservations:[]},
         };
 
         this.deleteItem = this.deleteItem.bind(this);
@@ -330,7 +330,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
 
                                                 <div className="text-right ml-auto">
                                                     {annoncereservation.price ?
-                                                        <h5 className="text-dark"><b>{annoncereservation.price.formatMoney(2,'.',',') || "0"} <small><b>FCFA - la nuit</b></small></b></h5>
+                                                        <h5 className="text-dark"><b>{annoncereservation.price.formatMoney(2,'.',',') || "0"} <small><b>FCFA - {annoncereservation.periodeannonce.name}</b></small></b></h5>
                                                         :
                                                         null
                                                     }

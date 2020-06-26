@@ -39,6 +39,7 @@ class CreateAnnoncereservationsTable extends Migration
             $table->softDeletes();
 
             $table->unsignedBigInteger('city_id')->nullable()->index();
+            $table->unsignedBigInteger('periodeannonce_id')->nullable()->index();
             $table->unsignedBigInteger('member_id')->nullable()->index();
 
             $table->unsignedBigInteger('user_id')->nullable()->index();

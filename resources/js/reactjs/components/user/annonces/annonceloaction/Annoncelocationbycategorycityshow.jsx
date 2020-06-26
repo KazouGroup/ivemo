@@ -361,7 +361,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                         <div className="col-md-6">
                                                             <h5 className="info-title"><b>Le loyer mensuel est de</b></h5>
                                                             {annoncelocation.price ?
-                                                                <h3 className="text-success"><b>{annoncelocation.price.formatMoney(2,'.',',')} <small>FCFA/mois</small></b></h3>
+                                                                <h3 className="text-dark"><b>{annoncelocation.price.formatMoney(2,'.',',')} <small>FCFA - le mois</small></b></h3>
                                                                 :
                                                                 <h5 className="text-success"><b><Skeleton width={150} /></b></h5>
                                                             }

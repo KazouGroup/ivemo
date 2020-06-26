@@ -26,6 +26,8 @@ class AnnoncereservationResource extends JsonResource
             'price' => $this->price,
             'promo_price' => $this->promo_price,
             'city_id' => $this->city_id,
+            'periodeannonce_id' => $this->periodeannonce_id,
+            'periodeannonce' => $this->periodeannonce,
             'city' => $this->city,
             'user_id' => $this->user_id,
             'user' => $this->user,

@@ -19,7 +19,7 @@ class AnnoncereservationService
        $annonces = AnnoncereservationResource::collection($annoncetype->annoncereservations()
            ->where(['status' => 1,'status_admin' => 1])
            ->whereIn('annoncetype_id',[$annoncetype->id])
-           ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
+           ->with('user','categoryannoncereservation','city','annoncetype','periodeannonce','imagereservations')
            ->with(['user.profile' => function ($q){$q->distinct()->get();}])
            ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
            ->whereHas('city', function ($q) {$q->where('status',1);})
@@ -33,7 +33,7 @@ class AnnoncereservationService
             ->where(['status' => 1,'status_admin' => 1])
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
-            ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
+            ->with('user','categoryannoncereservation','city','annoncetype','periodeannonce','imagereservations')
             ->with(['user.profile' => function ($q){$q->distinct()->get();}])
             ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
@@ -50,7 +50,7 @@ class AnnoncereservationService
                     $q->where(['status' => 1,'status_admin' => 1])
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
-                        ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
+                        ->with('user','categoryannoncereservation','city','annoncetype','periodeannonce','imagereservations')
                         ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
                         ->whereHas('city', function ($q) {$q->where('status',1);});
                 }])->first();
@@ -61,7 +61,7 @@ class AnnoncereservationService
     public static function apiannoncereservationinteresse($annoncetype,$categoryannoncereservation,$city)
     {
         $annonces = AnnoncereservationResource::collection($categoryannoncereservation->annoncereservations()->whereIn('annoncetype_id',[$annoncetype->id])
-            ->with('user','city','annoncetype','categoryannoncereservation','imagereservations')
+            ->with('user','categoryannoncereservation','city','annoncetype','periodeannonce','imagereservations')
             ->with(['user.profile' => function ($q){$q->distinct()->get();}])
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->whereIn('city_id',[$city->id])
@@ -111,7 +111,7 @@ class AnnoncereservationService
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
             ->whereIn('city_id',[$city->id])
-            ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
+            ->with('user','categoryannoncereservation','city','annoncetype','periodeannonce','imagereservations')
             ->with(['user.profile' => function ($q){$q->distinct()->get();}])
             ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
@@ -127,7 +127,7 @@ class AnnoncereservationService
             ->withCount([
                 'annoncereservations' => function ($q) use ($annoncetype,$categoryannoncereservation,$city){
                     $q->where(['status' => 1,'status_admin' => 1])
-                        ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
+                        ->with('user','categoryannoncereservation','city','annoncetype','periodeannonce','imagereservations')
                         ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
                         ->whereIn('city_id',[$city->id])
                         ->whereIn('annoncetype_id',[$annoncetype->id])
@@ -146,7 +146,7 @@ class AnnoncereservationService
             ->where(['status' => 1,'status_admin' => 1])
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('city_id',[$city->id])
-            ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
+            ->with('user','categoryannoncereservation','city','annoncetype','periodeannonce','imagereservations')
             ->with(['user.profile' => function ($q){$q->distinct()->get();}])
             ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
@@ -164,7 +164,7 @@ class AnnoncereservationService
             ->withCount([
                 'annoncereservations' => function ($q) use ($annoncetype,$city){
                     $q->where(['status' => 1,'status_admin' => 1])
-                        ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
+                        ->with('user','categoryannoncereservation','city','annoncetype','periodeannonce','imagereservations')
                         ->whereIn('annoncetype_id',[$annoncetype->id])
                         ->whereIn('city_id',[$city->id])
                         ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
@@ -178,7 +178,7 @@ class AnnoncereservationService
     {
         $annoncesreservations = HelpersService::helpersannonceteamcount($user)
             ->with(['annoncereservations' => function ($q) use ($user){
-                $q->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
+                $q->with('user','categoryannoncereservation','city','annoncetype','periodeannonce','imagereservations')
                     ->whereIn('user_id',[$user->id])
                     ->orderBy('created_at','DESC')
                     ->whereHas('city', function ($q) {$q->where('status',1);})

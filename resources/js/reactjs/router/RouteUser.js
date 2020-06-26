@@ -144,6 +144,8 @@ import PrivateUserBlogannonceLocationStatistiqueShow
     from "../components/user/profile/blogs/private/blogannoncelocation/PrivateUserBlogannonceLocationStatistiqueShow";
 import PrivateUserEmploymentsByStatistique
     from "../components/user/profile/employments/private/PrivateUserEmploymentsByStatistique";
+import AnnoncereservationCreate
+    from "../components/user/annonces/annoncereservation/treatment/AnnoncereservationCreate";
 
 
 const RouteUser = props => (
@@ -178,6 +180,7 @@ const RouteUser = props => (
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/" component={withRouter(Annoncebycategoryannoncereservation)}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/" component={withRouter(Annoncebycategoryannoncereservationcity)}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/:annoncereservation/" component={withRouter(Annoncebycategoryannoncereservationcityshow)}/>
+          <Route exact path="/annonce_reservation/:annoncetype/new/" component={AnnoncereservationCreate}/>
 
 
           <Route exact path="/annonces_locations/:annoncetype/" component={AnnoncelocationIndex}/>

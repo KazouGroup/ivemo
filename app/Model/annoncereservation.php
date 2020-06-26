@@ -57,6 +57,11 @@ class annoncereservation extends Model
         return $this->belongsTo(city::class,'city_id');
     }
 
+    public function periodeannonce()
+    {
+        return $this->belongsTo(periodeannonce::class,'periodeannonce_id');
+    }
+
     public function annoncetype()
     {
         return $this->belongsTo(annoncetype::class,'annoncetype_id');
@@ -94,6 +99,11 @@ class annoncereservation extends Model
 
         ];
     }
+
+    //public function comments()
+    //{
+    //    return $this->morphMany(comment::class ,'commentable');
+    //}
 
     public function reservations()
     {
