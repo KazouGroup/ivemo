@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use App\Model\favorite\favoriteblogannoncelocation;
-use App\Model\like\likedblogannoncelocation;
 use App\Traits\Likesdata;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Facades\Auth;
