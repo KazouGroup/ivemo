@@ -70,20 +70,20 @@ class FavoriteblogannonceventeController extends Controller
 		return response('unfavorite confirmed',Response::HTTP_ACCEPTED);
 	}
 
-    public function likedata(Request $request,$id){
-
+    public function likedata(Request $request,$id)
+    {
         $blogannoncevente = blogannoncevente::whereId($id)->firstOrFail();
 
-        $response = auth()->user()->putlikedblogannonceventes()->attach($blogannoncevente->id);
+        $response = $blogannoncevente->likes()->create($request->all());
 
         return response()->json(['success'=>$response]);
     }
 
-    public function unlikedata(Request $request,$id){
-
+    public function unlikedata(Request $request,$id)
+    {
         $blogannoncevente = blogannoncevente::whereId($id)->firstOrFail();
 
-        $response = auth()->user()->putlikedblogannonceventes()->detach($blogannoncevente->id);
+        $response = auth()->user()->removelikes()->detach($blogannoncevente->id);
 
         return response()->json(['success'=>$response]);
     }

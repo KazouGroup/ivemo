@@ -46,7 +46,7 @@ function UploadMultipleFile(props) {
                 multiple={false}
                 maxSize={800000000}
             >
-                {({ getRootProps, getInputProps }) => (
+                {({ getRootProps, getInputProps, isDragActive }) => (
                     <div style={{
                         width: '300px', height: '240px', border: '1px solid lightgray',
                         display: 'flex', alignItems: 'center', justifyContent: 'center'
@@ -56,6 +56,7 @@ function UploadMultipleFile(props) {
                         {console.log('getRootProps', { ...getRootProps() })}
                         {console.log('getInputProps', { ...getInputProps() })}
                         <input {...getInputProps()} />
+                        {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
 
 
                     </div>

@@ -5,7 +5,6 @@ namespace App\Model;
 
 use App\Notifications\VerifyEmailUsers;
 use App\Traits\Model\Favoritesdata;
-use App\Traits\Model\Likesdata;
 use App\Traits\Model\Subscribedata;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -18,7 +17,7 @@ use Illuminate\Support\Str;
 
 class user extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable,HasApiTokens,HasRoles,Favoritesdata,Likesdata,Subscribedata;
+    use Notifiable,HasApiTokens,HasRoles,Favoritesdata,Subscribedata;
 
     /**
      * The attributes that are mass assignable.
@@ -212,5 +211,15 @@ class user extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(subscriberuser::class, 'user_id');
     }
 
+
+    public function removelikes()
+    {
+        return $this->belongsToMany(
+            like::class,
+            'likes',
+            'user_id',
+            'likeable_id')
+            ->withTimeStamps();
+    }
 
 }

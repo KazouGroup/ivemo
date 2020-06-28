@@ -19,7 +19,7 @@ class AvisuserList extends Component {
                     <ReadMoreAndLess
                         className="read-more-content"
                         charLimit={250}
-                        readMoreText="(Plus)"
+                        readMoreText="lire plus"
                         readLessText=""
                     >
                         {this.props.description || <Skeleton count={5}/>}

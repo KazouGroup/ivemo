@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Model\favorite\favoriteblogannoncelocation;
 use App\Model\like\likedblogannoncelocation;
+use App\Traits\Likesdata;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -14,7 +15,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class blogannoncelocation extends Model implements Auditable
 {
-    use AuditableTrait,LogsActivity;
+    use AuditableTrait,LogsActivity,Likesdata;
 
     protected $guarded = [];
 
@@ -92,19 +93,6 @@ class blogannoncelocation extends Model implements Auditable
         return (bool) favoriteblogannoncelocation::where('user_id', Auth::guard('web')->id())
             ->where('blogannoncelocation_id', $this->id)
             ->first();
-    }
-
-
-    public function likeked()
-    {
-        return (bool) likedblogannoncelocation::where('user_id', Auth::guard('web')->id())
-            ->where('blogannoncelocation_id', $this->id)
-            ->first();
-    }
-
-    public function countlikes()
-    {
-        return $this->hasMany(likedblogannoncelocation::class, 'blogannoncelocation_id');
     }
 
 }

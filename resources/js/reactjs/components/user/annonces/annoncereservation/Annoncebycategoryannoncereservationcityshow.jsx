@@ -12,8 +12,7 @@ import FormcontactuseronreservationShow from "./inc/Formcontactuseronreservation
 import ProfileForallAnnonceShow from "../ProfileForallAnnonceShow";
 import HelmetSite from "../../../inc/user/HelmetSite";
 import Swal from "sweetalert2";
-import AnnoncereservationList from "./inc/AnnoncereservationList";
-import Skeleton from "react-loading-skeleton";
+import AnnoncereservationcommentIndex from "./AnnoncereservationcommentIndex";
 
 
 class Annoncebycategoryannoncereservationcityshow extends Component {
@@ -430,6 +429,10 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                             </div>
 
                                         </div>
+
+
+                                        <AnnoncereservationcommentIndex {...this.props} {...annoncereservation} />
+
 
                                     </div>
 

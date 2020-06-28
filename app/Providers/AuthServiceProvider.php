@@ -9,6 +9,7 @@ use App\Model\avisuser;
 use App\Model\blogannoncelocation;
 use App\Model\blogannoncereservation;
 use App\Model\blogannoncevente;
+use App\model\comment;
 use App\Model\contactuser;
 use App\Model\contactuseremployment;
 use App\Model\contactuserslocation;
@@ -25,6 +26,7 @@ use App\Policies\AvisuserPolicy;
 use App\Policies\BlogannoncelocationPolicy;
 use App\Policies\BlogannoncereservationPolicy;
 use App\Policies\BlogannonceventePolicy;
+use App\Policies\CommentPolicy;
 use App\Policies\ContactuserPolicy;
 use App\Policies\ContactusersemploymentPolicy;
 use App\Policies\ContactuserslocationPolicy;
@@ -60,6 +62,7 @@ class AuthServiceProvider extends ServiceProvider
         avisuser::class => AvisuserPolicy::class,
         responseavisuser::class => ResponseavisuserPolicy::class,
         contactuseremployment::class => ContactusersemploymentPolicy::class,
+        comment::class => CommentPolicy::class,
         user::class => UserPolicy::class,
     ];
 

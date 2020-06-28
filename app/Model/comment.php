@@ -2,13 +2,13 @@
 
 namespace App\model;
 
+use App\Traits\Likesdata;
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\Contracts\Auditable;
-use OwenIt\Auditing\Auditable as AuditableTrait;
 
-class comment extends Model 
+class comment extends Model
 {
     //use AuditableTrait;
+    use Likesdata;
 
     protected $guarded = [];
 
@@ -17,6 +17,9 @@ class comment extends Model
     protected $with = ['user'];
 
 
+    protected $casts = [
+        'status' => 'boolean',
+    ];
 
     public function user()
     {
@@ -45,4 +48,10 @@ class comment extends Model
     {
         return $this->morphTo();
     }
+
+    public function responsecomments()
+    {
+        return $this->hasMany(responsecomment::class, 'comment_id');
+    }
+
 }

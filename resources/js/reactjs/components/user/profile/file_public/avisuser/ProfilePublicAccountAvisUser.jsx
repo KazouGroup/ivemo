@@ -755,7 +755,7 @@ class ProfilePublicAccountAvisUser extends Component {
                                                                    <ReadMoreAndLess
                                                                        className="read-more-content"
                                                                        charLimit={250}
-                                                                       readMoreText="(Plus)"
+                                                                       readMoreText="lire plus"
                                                                        readLessText=""
                                                                    >
                                                                        {lk.description || ""}

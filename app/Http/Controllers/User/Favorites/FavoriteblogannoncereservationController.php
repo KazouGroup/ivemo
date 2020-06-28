@@ -70,11 +70,11 @@ class FavoriteblogannoncereservationController extends Controller
 	}
 
 
-    public function likedata(Request $request,$id){
-
+    public function likedata(Request $request,$id)
+    {
         $blogannoncereservation = blogannoncereservation::whereId($id)->firstOrFail();
 
-        $response = auth()->user()->putlikedblogannoncereservations()->attach($blogannoncereservation->id);
+        $response = $blogannoncereservation->likes()->create($request->all());
 
         return response()->json(['success'=>$response]);
     }
@@ -83,7 +83,7 @@ class FavoriteblogannoncereservationController extends Controller
 
         $blogannoncereservation = blogannoncereservation::whereId($id)->firstOrFail();
 
-        $response = auth()->user()->putlikedblogannoncereservations()->detach($blogannoncereservation->id);
+        $response = auth()->user()->removelikes()->detach($blogannoncereservation->id);
 
         return response()->json(['success'=>$response]);
     }

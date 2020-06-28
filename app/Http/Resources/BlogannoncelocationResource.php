@@ -28,7 +28,7 @@ class BlogannoncelocationResource extends JsonResource
             'user_id' => $this->user_id,
             'user' => $this->user,
             'likeked' => $this->likeked(),
-            'countlikes' => $this->countlikes()->get()->count(),
+            'countlikes' => $this->likes()->count(),
             'visits_count' => $this->visits()->count(),
             'visits_countries' => $this->visits()->countries(),
             'visits_languages' => $this->visits()->languages(),

@@ -5,19 +5,15 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Annonces\Annoncelocation\StoreRequest;
 use App\Http\Requests\Annonces\Annoncelocation\UpdateRequest;
-use App\Http\Requests\Contactuser\StorecontactRequest;
 use App\Http\Resources\AnnoncelocationResource;
-use App\Http\Resources\AnnoncetypeResource;
 use App\Http\Resources\CategoryannoncelocationResource;
 use App\Http\Resources\CityResource;
 use App\Model\annoncelocation;
 use App\Model\annoncetype;
 use App\Model\categoryannoncelocation;
 use App\Model\city;
-use App\Model\contactuser;
 use App\Model\user;
 use App\Services\AnnoncelocationService;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AnnoncelocationController extends Controller

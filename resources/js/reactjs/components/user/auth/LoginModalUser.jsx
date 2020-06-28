@@ -70,10 +70,6 @@ class LoginModalUser extends Component {
             })
     }
 
-    // lifecycle method
-    componentDidMount() {
-      //
-    }
     render() {
         return (
 

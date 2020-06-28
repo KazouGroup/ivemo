@@ -4,17 +4,24 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class like extends Model
+class responsecomment extends Model
 {
-
     protected $guarded = [];
 
-    protected $table = 'likes';
-
+    protected $table = 'responsecomments';
 
     public function user()
     {
-        return $this->belongsTo(user::class);
+        return $this->belongsTo(user::class,'user_id');
+    }
+
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
+    public function comment()
+    {
+        return $this->belongsTo(comment::class,'comment_id');
     }
 
     protected static function boot()
@@ -25,17 +32,7 @@ class like extends Model
             if (auth()->check()){
                 $model->user_id = auth()->id();
             }
+            $model->ip = request()->ip();
         });
-
-        static::updating(function($model){
-            if (auth()->check()){
-                $model->user_id = auth()->id();
-            }
-        });
-    }
-
-    public function likeable()
-    {
-        return $this->morphTo();
     }
 }

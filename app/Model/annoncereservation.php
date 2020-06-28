@@ -100,10 +100,10 @@ class annoncereservation extends Model
         ];
     }
 
-    //public function comments()
-    //{
-    //    return $this->morphMany(comment::class ,'commentable');
-    //}
+    public function comments()
+    {
+        return $this->morphMany(comment::class ,'commentable');
+    }
 
     public function reservations()
     {

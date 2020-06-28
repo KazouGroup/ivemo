@@ -18,6 +18,8 @@ require(__DIR__ . DIRECTORY_SEPARATOR . 'signalemployment.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'profile_public.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'subscriberuser.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'teamuser.php');
+require(__DIR__ . DIRECTORY_SEPARATOR . 'comments.php');
+require(__DIR__ . DIRECTORY_SEPARATOR . 'likes.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'workwithus.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'categories'. DIRECTORY_SEPARATOR . 'categoryannoncelocation.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'blogs'. DIRECTORY_SEPARATOR . 'index.php');
