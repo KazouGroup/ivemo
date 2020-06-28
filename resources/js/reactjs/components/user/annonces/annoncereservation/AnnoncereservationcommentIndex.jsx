@@ -573,7 +573,7 @@ class AnnoncereservationcommentIndex extends Component {
 
 
                         <h5 className="title text-center">
-                            <b>{comments.length || ""} Comments</b>
+                            <b>{comments.length > 1 ? `${comments.length || ""} Commentaires` : `${comments.length || ""} Commentaire`}</b>
                         </h5>
 
 
