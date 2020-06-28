@@ -9,7 +9,7 @@ use App\Model\avisuser;
 use App\Model\blogannoncelocation;
 use App\Model\blogannoncereservation;
 use App\Model\blogannoncevente;
-use App\model\comment;
+use App\Model\comment;
 use App\Model\contactuser;
 use App\Model\contactuseremployment;
 use App\Model\contactuserslocation;

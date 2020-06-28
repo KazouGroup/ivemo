@@ -119,7 +119,6 @@ class CommentController extends Controller
 
     public function destroyresponse(responsecomment $responsecomment)
     {
-
         $responsecomment->delete();
 
         return ['message' => 'Deleted successfully '];

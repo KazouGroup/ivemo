@@ -2,8 +2,7 @@
 
 namespace App\Policies;
 
-use App\Model\avisuser;
-use App\model\comment;
+use App\Model\comment;
 use App\Model\user;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
