@@ -8,7 +8,7 @@ use App\Model\annoncereservation;
 use App\Model\annoncetype;
 use App\Model\categoryannoncereservation;
 use App\Model\city;
-use App\model\comment;
+use App\Model\comment;
 use App\Model\responsecomment;
 use Illuminate\Http\Request;
 
