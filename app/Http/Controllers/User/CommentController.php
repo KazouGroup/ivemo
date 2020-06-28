@@ -31,14 +31,14 @@ class CommentController extends Controller
     public function annoncereservationgetcomment(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
     {
        $comments = CommentResource::collection($annoncereservation->comments()
-           ->where('status',1)
            ->with('user','commentable','responsecomments')
            ->whereIn('commentable_id',[$annoncereservation->id])
+           ->where('status',1)
            ->with(['responsecomments' => function ($q){
-               $q->where('status',1)->with('user')->orderBy('created_at','desc')
+               $q->where('status',1)->with('user')->orderByDesc('created_at')
                    ->distinct()->get()
                ;},
-           ])->orderBy('created_at','desc')->distinct()->get());
+           ])->orderByDesc('created_at')->distinct()->get());
 
        return response()->json($comments,200);
     }
