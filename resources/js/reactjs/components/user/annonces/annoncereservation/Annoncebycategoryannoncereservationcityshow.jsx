@@ -12,7 +12,7 @@ import FormcontactuseronreservationShow from "./inc/Formcontactuseronreservation
 import ProfileForallAnnonceShow from "../ProfileForallAnnonceShow";
 import HelmetSite from "../../../inc/user/HelmetSite";
 import Swal from "sweetalert2";
-import AnnoncereservationcommentIndex from "./AnnoncereservationcommentIndex";
+import AnnoncereservationcommentIndex from "../../comments/AnnoncereservationcommentIndex";
 
 
 class Annoncebycategoryannoncereservationcityshow extends Component {

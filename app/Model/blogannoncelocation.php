@@ -87,6 +87,11 @@ class blogannoncelocation extends Model implements Auditable
         ];
     }
 
+    public function comments()
+    {
+        return $this->morphMany(comment::class ,'commentable');
+    }
+
     public function bookmarked()
     {
         return (bool) favoriteblogannoncelocation::where('user_id', Auth::guard('web')->id())

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\User\Comments;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CommentResource;
@@ -12,9 +12,8 @@ use App\Model\comment;
 use App\Model\responsecomment;
 use Illuminate\Http\Request;
 
-class CommentController extends Controller
+class CommentannoncereservationController extends Controller
 {
-
     /**
      * Create a new controller instance.
      *
@@ -30,17 +29,17 @@ class CommentController extends Controller
 
     public function annoncereservationgetcomment(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
     {
-       $comments = CommentResource::collection($annoncereservation->comments()
-           ->with('user','commentable','responsecomments')
-           ->whereIn('commentable_id',[$annoncereservation->id])
-           ->where('status',1)
-           ->with(['responsecomments' => function ($q){
-               $q->where('status',1)->with('user')->orderByDesc('created_at')
-                   ->distinct()->get()
-               ;},
-           ])->orderByDesc('created_at')->distinct()->get());
+        $comments = CommentResource::collection($annoncereservation->comments()
+            ->with('user','commentable','responsecomments')
+            ->whereIn('commentable_id',[$annoncereservation->id])
+            ->where('status',1)
+            ->with(['responsecomments' => function ($q){
+                $q->where('status',1)->with('user')->orderByDesc('created_at')
+                    ->distinct()->get()
+                ;},
+            ])->orderByDesc('created_at')->distinct()->get());
 
-       return response()->json($comments,200);
+        return response()->json($comments,200);
     }
 
     public function annoncereservationsendcomment(Request $request,annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)

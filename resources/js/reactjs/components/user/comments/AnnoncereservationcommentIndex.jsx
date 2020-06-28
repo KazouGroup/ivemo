@@ -1,11 +1,12 @@
 import React, { Component,Fragment } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import {Button, Form} from "reactstrap";
-import FieldInput from "../../../inc/vendor/FieldInput";
+import FieldInput from "../../inc/vendor/FieldInput";
 import ReadMoreAndLess from "react-read-more-less";
 import Swal from "sweetalert2";
 import moment from "moment";
-import FormComment from "../../../inc/vendor/FormComment";
+import FormComment from "../../inc/vendor/comment/FormComment";
+import ProfileUserComment from "../../inc/vendor/comment/ProfileUserComment";
 
 
 class AnnoncereservationcommentIndex extends Component {
@@ -604,12 +605,7 @@ class AnnoncereservationcommentIndex extends Component {
 
                                            <div className="media">
 
-                                               <a className="pull-left" href="#pablo">
-                                                   <div className="author">
-                                                       <img className="avatar img-raised" alt={item.user.first_name}
-                                                            src={item.user.avatar}/>
-                                                   </div>
-                                               </a>
+                                               <ProfileUserComment {...this.props} {...item} />
 
                                                <div className="media-body">
 
@@ -712,14 +708,11 @@ class AnnoncereservationcommentIndex extends Component {
                                                    {item.responsecomments.slice(0, visiableresponsecomment).map((lk) =>
 
                                                        <Fragment key={lk.id} >
+
                                                            <div className="media">
 
-                                                               <a className="pull-left" href="#pablo">
-                                                                   <div className="author">
-                                                                       <img className="avatar img-raised" alt={lk.user.first_name}
-                                                                            src={lk.user.avatar}/>
-                                                                   </div>
-                                                               </a>
+                                                               <ProfileUserComment {...this.props} {...lk} />
+
                                                                <div className="media-body">
                                                                    <h6 className="media-heading">{lk.user.first_name}
                                                                        <small className="text-muted">· {moment(lk.created_at).format('LL')}</small>
@@ -824,20 +817,24 @@ class AnnoncereservationcommentIndex extends Component {
 
                             <br/>
 
-                            {!$guest && !editcomment && !responsecomment ?
+                            {$guest ?
 
-                                <Form onSubmit={this.sendcommentItem} acceptCharset="UTF-8">
-
-                                    <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
-                                                 renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                 handleFieldChange={this.handleFieldChange} namesubmit={`Poster mon commentaire`}/>
-
-                                </Form>
-                                :
                                 <h6 className="title text-center">S'il vous plaît
                                     <a href="/" className="text-primary" data-toggle="modal" data-target="#loginModal"> Connectez vous </a> ou
                                     <a href={route('register')} className="text-primary"> Inscrivez vous </a> pour laisser un commentaire
                                 </h6>
+                                :
+                                <>
+                                    {!editcomment && !responsecomment && !editresponsecomment && (
+                                        <Form onSubmit={this.sendcommentItem} acceptCharset="UTF-8">
+
+                                            <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
+                                                         renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
+                                                         handleFieldChange={this.handleFieldChange} namesubmit={`Poster mon commentaire`}/>
+
+                                        </Form>
+                                    )}
+                                </>
                             }
 
                         </div>

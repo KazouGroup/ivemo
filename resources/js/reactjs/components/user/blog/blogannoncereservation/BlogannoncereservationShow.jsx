@@ -15,6 +15,7 @@ import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import ButonFavoris from "../../../inc/vendor/ButonFavoris";
 import ButonLiked from "../../../inc/vendor/ButonLiked";
+import BlogannoncereservationcommentIndex from "../../comments/BlogannoncereservationcommentIndex";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 class BlogannoncereservationShow extends Component {
@@ -343,6 +344,9 @@ class BlogannoncereservationShow extends Component {
                                                     </div>
                                                 </div>
                                             </div>
+
+
+                                            <BlogannoncereservationcommentIndex {...this.props} />
 
                                         </div>
 

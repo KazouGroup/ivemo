@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import {Button, Form, FormText, Input} from "reactstrap";
-import FieldInput from "./FieldInput";
+import FieldInput from "../FieldInput";
 
 class FormComment extends Component {
 
@@ -9,10 +9,21 @@ class FormComment extends Component {
         const {namesubmit,value,cancelresponseCourse,renderErrorFor,hasErrorFor,handleFieldChange} = this.props;
         return (
            <>
+               {/* <a className="pull-left author" href="#pablo">
+                           <div className="author">
+                               <img className="avatar" alt="Ton profile"
+                                    src="https://dummyimage.com/wsvga/0055ff/0044cc&text=non"/>
+                           </div>
+                       </a>*/}
                <div className="media media-post">
-                   <a className="pull-left author" href="#pablo">
+                   <a className="pull-left" href={$userIvemo.status_profile ?
+
+                       `${route('public_profile.site',[$userIvemo.slug])}`
+                       :
+                       `${route('userpublic_profile.site',[$userIvemo.slug])}`}
+                   >
                        <div className="author">
-                           <img className="avatar img-raised" alt={$userIvemo.first_name}
+                           <img className="avatar" alt={$userIvemo.first_name}
                                 src={$userIvemo.avatar}/>
                        </div>
                    </a>
