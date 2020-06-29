@@ -41,10 +41,15 @@ trait Subscribedata
             ->first();
     }
 
+
+
+
+
     public function subscribemployments()
     {
         return $this->hasMany(subscribemployment::class, 'user_id');
     }
+
 
     public function putsubscribemployments()
     {

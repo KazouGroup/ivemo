@@ -34,95 +34,71 @@ class ContactuserslocationController extends Controller
      */
     public function personalmessagesannonces_locations(user $user)
     {
-        if (auth()->user()->id === $user->id){
+        $this->authorize('update',$user);
 
-            return view('user.profile.contactuserlocation.personal_mailannonces_locations',[
-                'user' => auth()->user()
-            ]);
-
-        }else{
-            abort(404);
-        }
+        return view('user.profile.contactuserlocation.personal_mailannonces_locations',[
+            'user' => auth()->user()
+        ]);
 
     }
 
     public function personalmessagesarchvement_annonces_locations(user $user)
     {
-        if (auth()->user()->id === $user->id){
+        $this->authorize('update',$user);
 
-            return view('user.profile.contactuserlocation.personal_mailannonces_locations',[
-                'user' => auth()->user()
-            ]);
-
-        }else{
-            abort(404);
-        }
+        return view('user.profile.contactuserlocation.personal_mailannonces_locations',[
+            'user' => auth()->user()
+        ]);
 
     }
 
     public function personalmessagesfavorite_annonces_locations(user $user)
     {
-        if (auth()->user()->id === $user->id){
+        $this->authorize('update',$user);
 
-            return view('user.profile.contactuserlocation.personal_mailannonces_locations',[
-                'user' => auth()->user()
-            ]);
-
-        }else{
-            abort(404);
-        }
+        return view('user.profile.contactuserlocation.personal_mailannonces_locations',[
+            'user' => auth()->user()
+        ]);
 
     }
 
     public function apipersonalmessagesannonces_locations(user $user)
     {
-        if (auth()->user()->id === $user->id){
+        $this->authorize('update',$user);
 
-            $contactusers = ContactuserslocationService::apipersonalmessagesannonces_locations($user);
+        $contactusers = ContactuserslocationService::apipersonalmessagesannonces_locations($user);
 
-            return response()->json($contactusers, 200);
-        }else{
-            abort(404);
-        }
+        return response()->json($contactusers, 200);
 
     }
 
     public function apipersonalmessagesarchvement_annonces_locations(user $user)
     {
-        if (auth()->user()->id === $user->id){
+        $this->authorize('update',$user);
 
-            $contactusers = ContactuserslocationService::apipersonalmessagesarchvement_annonces_locations($user);
+        $contactusers = ContactuserslocationService::apipersonalmessagesarchvement_annonces_locations($user);
 
-            return response()->json($contactusers, 200);
-        }else{
-            abort(404);
-        }
+        return response()->json($contactusers, 200);
 
     }
 
     public function apipersonalmessagesfavorite_annonces_locations(user $user)
     {
-        if (auth()->user()->id === $user->id){
+        $this->authorize('update',$user);
 
-            $contactusers = ContactuserslocationService::apipersonalmessagesfavorite_annonces_locations($user);
+        $contactusers = ContactuserslocationService::apipersonalmessagesfavorite_annonces_locations($user);
 
-            return response()->json($contactusers, 200);
-        }else{
-            abort(404);
-        }
+        return response()->json($contactusers, 200);
 
     }
 
     public function apipersonalmessagesannonces_by_locations(user $user)
     {
-        if (auth()->user()->id === $user->id){
+        $this->authorize('update',$user);
 
-            $contactusers = ContactuserslocationService::apipersonalmessagesannonces_locations($user);
+        $contactusers = ContactuserslocationService::apipersonalmessagesannonces_locations($user);
 
-            return response()->json($contactusers, 200);
-        }else{
-            abort(404);
-        }
+        return response()->json($contactusers, 200);
 
     }
 

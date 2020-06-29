@@ -54,18 +54,13 @@ class ContactuserService
 
     public static function newEmailToprofileUser($request,$user)
     {
-        $full_name = $request->get('full_name');
-        $phone = $request->get('phone');
-        $email = $request->get('email');
-        $subject = $request->get('subject');
-        $message = $request->get('message');
-        $to = $user->email;
+        $fromFullnameUser = $request->get('full_name');
+        $fromEmailUser = $request->get('email');
+        $fromSubjectUser = $request->get('subject');
+        $fromMessageUser = $request->get('message');
 
 
-        $from = ['address' => $request->get('email') , 'name' => $request->get('full_name')];
-
-        $emailToUser = (new ContactuserJob($full_name,$phone,$email,$subject,$message,$to,$from));
-
+        $emailToUser = (new ContactuserJob($fromFullnameUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$user));
 
         dispatch($emailToUser);
     }

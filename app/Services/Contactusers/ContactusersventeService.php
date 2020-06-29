@@ -141,17 +141,14 @@ class ContactusersventeService
 
     public static function newEmailToannoncelocationpageShow($request,$annoncevente)
     {
-        $full_name = $request->get('full_name');
-        $phone = $request->get('phone');
-        $email = $request->get('email');
-        $subject = $request->get('subject');
-        $message = $request->get('message');
-        $to = $annoncevente->user->email;
+        $fromFullnameUser = $request->get('full_name');
+        $fromPhoneUser = $request->get('phone');
+        $fromEmailUser = $request->get('email');
+        $fromSubjectUser = $request->get('subject');
+        $fromMessageUser = $request->get('message');
 
 
-        $from = ['address' => $request->get('email') , 'name' => $request->get('full_name')];
-
-        $emailToUser = (new ContactuserventeJob($full_name,$phone,$email,$subject,$message,$to,$from));
+        $emailToUser = (new ContactuserventeJob($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$annoncevente));
 
 
         dispatch($emailToUser);

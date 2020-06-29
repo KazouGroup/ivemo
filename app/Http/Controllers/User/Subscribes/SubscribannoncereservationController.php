@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\abonne\subscribeblogannonce;
 use App\Model\abonne\subscribemployment;
 use App\Model\annoncelocation;
+use App\Model\annoncereservation;
 use App\Model\blogannoncelocation;
 use App\Model\user;
 use App\Model\favorite\favoritemployment;
@@ -13,7 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class SubscribemploymentController extends Controller
+class SubscribannoncereservationController extends Controller
 {
 
       /**
@@ -66,22 +67,24 @@ class SubscribemploymentController extends Controller
         return response()->json($subscribeblogannonces, 200);
     }
 
+
     public function subscribe(Request $request,$id)
     {
+
         $user = user::whereId($id)->firstOrFail();
 
-        auth()->user()->putsubscribemployments()->toggle($user->id);
+        $response = $user->subscribannonces()->create($request->all());
 
-
-		return response('Subscribe confirmed',Response::HTTP_ACCEPTED);
-	}
+        return response()->json(['success'=>$response]);
+    }
 
     public function unsubscribe(Request $request,$id)
     {
+
         $user = user::whereId($id)->firstOrFail();
 
-        auth()->user()->putsubscribemployments()->toggle($user->id);
+        $response = auth()->user()->removesubscribannonces()->detach($user->id);
 
-        return response('Unsubscribe confirmed',Response::HTTP_ACCEPTED);
-	}
+        return response()->json(['success'=>$response]);
+    }
 }

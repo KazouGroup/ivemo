@@ -24,78 +24,60 @@ class ContactusersController extends Controller
 
     public function personalmessagescontacts(user $user)
     {
-        if (auth()->user()->id === $user->id){
-            return view('user.profile.contactuser.personal_mailcontacts',[
-                'user' => auth()->user()
-            ]);
-        }else{
-            return abort(404);
-        }
+        $this->authorize('update',$user);
+
+        return view('user.profile.contactuser.personal_mailcontacts',[
+            'user' => auth()->user()
+        ]);
     }
 
     public function personalmessagesarchvementcontacts(user $user)
     {
-        if (auth()->user()->id === $user->id){
-            return view('user.profile.contactuser.personal_mailcontacts',[
-                'user' => auth()->user()
-            ]);
-        }else{
-            return abort(404);
-        }
+        $this->authorize('update',$user);
+
+        return view('user.profile.contactuser.personal_mailcontacts',[
+            'user' => auth()->user()
+        ]);
 
     }
 
     public function personalmessagesfavoritecontacts(user $user)
     {
-        if (auth()->user()->id === $user->id){
-            return view('user.profile.contactuser.personal_mailcontacts',[
-                'user' => auth()->user()
-            ]);
-        }else{
-            return abort(404);
-        }
+        $this->authorize('update',$user);
+
+        return view('user.profile.contactuser.personal_mailcontacts',[
+            'user' => auth()->user()
+        ]);
 
     }
 
 
     public function apipersonalmessagescontacts(user $user)
     {
+        $this->authorize('update',$user);
 
-        if (auth()->user()->id === $user->id){
+        $contactusers = ContactuserService::apipersonalmessagescontacts($user);
 
-            $contactusers = ContactuserService::apipersonalmessagescontacts($user);
-
-            return response()->json($contactusers, 200);
-        }else{
-            return redirect()->back();
-        }
+        return response()->json($contactusers, 200);
 
     }
     public function apipersonalmessagesarchvementcontacts(user $user)
     {
+        $this->authorize('update',$user);
 
-        if (auth()->user()->id === $user->id){
+        $contactusers = ContactuserService::apipersonalmessagesarchvementcontacts($user);
 
-            $contactusers = ContactuserService::apipersonalmessagesarchvementcontacts($user);
-
-            return response()->json($contactusers, 200);
-        }else{
-            return redirect()->back();
-        }
+        return response()->json($contactusers, 200);
 
     }
 
     public function apipersonalmessagesfavoritecontacts(user $user)
     {
+        $this->authorize('update',$user);
 
-        if (auth()->user()->id === $user->id){
+        $contactusers = ContactuserService::apipersonalmessagesfavoritecontacts($user);
 
-            $contactusers = ContactuserService::apipersonalmessagesfavoritecontacts($user);
-
-            return response()->json($contactusers, 200);
-        }else{
-            return redirect()->back();
-        }
+        return response()->json($contactusers, 200);
 
     }
 

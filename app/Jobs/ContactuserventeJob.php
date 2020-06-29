@@ -2,8 +2,8 @@
 
 namespace App\Jobs;
 
-use App\Mail\ContactuserMail;
 use App\Mail\ContactuserventeMail;
+use App\Notifications\ContactuserventeNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -12,34 +12,31 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 
 class ContactuserventeJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $full_name;
-    protected $phone;
-    protected $email;
-    protected $subject;
-    protected $message;
-    protected $emailTo;
-    protected $emailFrom;
-    protected $cc;
+    protected $fromFullnameUser;
+    protected $fromPhoneUser;
+    protected $fromEmailUser;
+    protected $fromSubjectUser;
+    protected $fromMessageUser;
+    protected $annoncevente;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($full_name,$phone,$email,$subject,$message,$to=[],$from=[])
+    public function __construct($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$annoncevente)
     {
-        $this->full_name = $full_name;
-        $this->phone = $phone;
-        $this->emailuserFrom = $email;
-        $this->subject = $subject;
-        $this->message = $message;
-        $this->emailTo = $to !== null? Arr::wrap($to) : [];
-        $this->emailFrom = $from !== null? Arr::wrap($from) : [];
-
+        $this->fromFullnameUser = $fromFullnameUser;
+        $this->fromPhoneUser = $fromPhoneUser;
+        $this->fromEmailUser = $fromEmailUser;
+        $this->fromSubjectUser = $fromSubjectUser;
+        $this->fromMessageUser = $fromMessageUser;
+        $this->annoncevente = $annoncevente;
 
     }
 
@@ -53,17 +50,14 @@ class ContactuserventeJob implements ShouldQueue
         try {
 
 
-            foreach ($this->emailTo as $email){
-
-                $emailData = new ContactuserventeMail(
-                    $this->full_name,
-                    $this->subject,
-                    $this->message,
-                    $email,
-                    $this->emailFrom
-                );
-                Mail::send($emailData);
-            }
+            Notification::route('mail',   $this->annoncevente->user->email)
+                ->notify(new ContactuserventeNotification(
+                    $this->fromFullnameUser,
+                    $this->fromPhoneUser,
+                    $this->fromEmailUser,
+                    $this->fromSubjectUser,
+                    $this->fromMessageUser,
+                    $this->annoncevente));
 
 
         }catch (\Exception $e){

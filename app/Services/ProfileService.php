@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Http\Resources\AnnoncereservationResource;
 use App\Http\Resources\BlogannoncelocationResource;
 use App\Http\Resources\BlogannoncereservationResource;
 use App\Http\Resources\BlogannonceventeResource;
@@ -129,14 +130,14 @@ class ProfileService
 
     public static function apiprofilannoncereservations($user)
     {
-        $personnalreservations = HelpersService::helpersdatabyuseractive($user)
-            ->with(['annoncereservations' => function ($q) use ($user){
-                $q->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
-                    ->whereIn('annoncetype_id',[3])
-                    ->whereIn('user_id',[$user->id])
-                    ->where(['status' => 1,'status_admin' => 1])->distinct()->get()->toArray()
-                ;},
-            ])->first();
+        $personnalreservations = AnnoncereservationResource::collection($user->annoncereservations()
+            ->whereIn('user_id',[$user->id])
+            ->where(['status' => 1,'status_admin' => 1])
+            ->whereIn('annoncetype_id',[3])
+            ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
+            ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->distinct()->paginate(10));
 
         return $personnalreservations;
     }

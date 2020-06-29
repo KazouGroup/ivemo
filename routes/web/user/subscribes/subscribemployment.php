@@ -27,11 +27,11 @@ Route::group(['prefix' => 'api'], function () {
 
 
 Route::get(
-    '/employments_subscribe/{id}',
+    '/employments_subscribe/{user:id}/subscribe',
     'SubscribemploymentController@subscribe'
 )->name('employments_subscribe.subscribe');
 
 Route::get(
-    '/employments_unsubscribe/{id}',
+    '/employments_unsubscribe/{user:id}/unsubscribe',
     'SubscribemploymentController@unsubscribe'
 )->name('employments_unsubscribe.unsubscribe');
