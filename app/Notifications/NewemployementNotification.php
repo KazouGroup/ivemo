@@ -45,7 +45,7 @@ class NewemployementNotification extends Notification implements ShouldQueue
         return (new MailMessage)
                     ->success()
                     ->greeting('Salut')
-                    ->subject('Nouvelle annonce de '.$this->fromUser->first_name)
+                    ->subject('Nouvelle annonce de '.$this->fromUser->first_name.' - '.config('app.name'))
                     ->salutation('Cordiale')
                     ->from($this->fromUser->email)
                     ->line($this->fromUser->first_name.' à poster une annonce sur les emploies service et prestation.')

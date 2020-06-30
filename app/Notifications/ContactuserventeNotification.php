@@ -53,7 +53,7 @@ class ContactuserventeNotification extends Notification
     {
         return (new MailMessage)
             ->greeting('Salut '.$this->annoncevente->user->first_name)
-            ->subject($this->fromSubjectUser)
+            ->subject($this->fromSubjectUser.' - '.config('app.name'))
             ->salutation('Cordiale')
             ->from($this->fromEmailUser,$this->fromFullnameUser)
             ->line($this->fromFullnameUser.' vous a contacter sur un de vos bien mise en vente sur la platforme - '.config('app.name'))

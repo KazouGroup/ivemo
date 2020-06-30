@@ -52,7 +52,7 @@ class ContactuserNotification extends Notification
         return (new MailMessage)
             ->success()
             ->greeting('Salut '.$this->user->first_name)
-            ->subject($this->fromSubjectUser)
+            ->subject($this->fromSubjectUser.' - '.config('app.name'))
             ->salutation('Cordiale')
             ->from($this->fromEmailUser,$this->fromFullnameUser)
             ->line($this->fromFullnameUser.' vous a envoyer un message')
