@@ -6,25 +6,212 @@ import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import AnnoncereservationList from "./inc/AnnoncereservationList";
 import PropTypes from "prop-types";
+import Swal from "sweetalert2";
 import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
 import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 import Categoriesannoncereservation from "./inc/Categoriesannoncereservation";
+import HelmetSite from "../../../inc/user/HelmetSite";
 
 
 class Annoncebycategoryannoncereservation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncereservationbycategory: {annoncereservations:{annoncetype:[],categoryannoncereservation:[],user:{profile:[]},imagereservations:[]}},
+            annoncereservations:{annoncetype:[],categoryannoncereservation:[],periodeannonce:[],user:{profile:[]},imagereservations:[]},
+            annoncereservationbycategory: [],
             citiesannoncesreservations: [],
-        }
+        };
+
+        this.deleteItem = this.deleteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
+        this.unactiveItem = this.unactiveItem.bind(this);
     }
 
-    loadItem(){
+    favoriteItem(id) {
+        const url = route('favoriteannoncereservations_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('favoriteannoncereservations_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce retirée de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unactiveItem(id) {
+        Swal.fire({
+            title: 'Désactiver l\'annonce?',
+            text: "êtes vous sure de vouloir confirmer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.annoncereservations.filter(isNotId);
+                this.setState({ annoncereservations: updatedItems });
+
+                //Envoyer la requet au server
+                let url = route('annonces_reservations_unactivated.site', id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+
+                            //message: 'Annonce désactiver avec succès',
+                            message: "Annonce masquée aux utilisateurs",
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'bottom',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animate__animated animate__fadeInUp",
+                                exit: "animate__animated animate__fadeOutDown"
+                            },
+                        });
+                    /** End alert ***/
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
+
+    }
+
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes-vous sûr de vouloir executer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.annoncereservations.filter(isNotId);
+                this.setState({ annoncereservations: updatedItems });
+
+                const url = route('annonces_locations_delete.site', [id]);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update',
+                            message: 'Annonce suprimée avec succès'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'primary',
+                            placement: {
+                                from: 'bottom',
+                                align: 'right'
+                            },
+                            animate: {
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
+                            },
+                        });
+                    /** End alert ***/
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
+    }
+
+
+    loadItems(){
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
-        let url = route('api.annoncelocationbycategoryannoncereservations_site',[itemannoncetype,itemCategoryannoncereservation]);
-        dyaxios.get(url).then(response => this.setState({annoncereservationbycategory: response.data}));
+        dyaxios.get(route('api.annoncelocationbycategoryannoncereservations_site',[itemannoncetype,itemCategoryannoncereservation])).then(response => this.setState({annoncereservations: response.data}));
+        dyaxios.get(route('api.annoncelocationbycategoryannoncereservationscount_site',[itemannoncetype,itemCategoryannoncereservation])).then(response => this.setState({annoncereservationbycategory: response.data}));
         fetch(route('api.annoncereservationbycategorycount_site',[itemCategoryannoncereservation])).then(res => res.json()).then((result) => {
             this.setState({
                 citiesannoncesreservations: [...result]
@@ -34,7 +221,7 @@ class Annoncebycategoryannoncereservation extends Component {
 
     // lifecycle method
     componentDidMount() {
-        this.loadItem();
+        this.loadItems();
     }
 
     getcountcategoryannonceString (annoncereservations_count) {
@@ -49,27 +236,41 @@ class Annoncebycategoryannoncereservation extends Component {
     }
 
     render() {
-        const {annoncereservationbycategory,citiesannoncesreservations} = this.state;
-        const allannoncereservationsbycategory = annoncereservationbycategory.annoncereservations;
+        const {annoncereservations,annoncereservationbycategory,citiesannoncesreservations} = this.state;
         const annoncetype = this.props.match.params.annoncetype;
-        const mapAnnoncereservations = allannoncereservationsbycategory.length >= 0 ? (
-            allannoncereservationsbycategory.map(item => {
+        const mapAnnoncereservations = annoncereservations.length >= 0 ? (
+            annoncereservations.map(item => {
                 return(
-                    <AnnoncereservationList key={item.id} {...item} />
+                    <AnnoncereservationList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
                 )
             })
         ):(
             <AnnoncesListSkeleton/>
         );
+
+        const mapCitiesannoncesreservations = citiesannoncesreservations.length ? (
+            citiesannoncesreservations.map(item => {
+                return(
+                    <tr key={item.id}>
+                        <td>
+                            <NavLink to={`/annonces_reservations/${annoncetype}/${annoncereservationbycategory.slug}/${item.slug}/`}>
+                                <b style={{ textTransform: "lowercase" }}>{annoncereservationbycategory.name}</b> à <strong> {item.name}</strong>
+                            </NavLink>
+                        </td>
+                        <td className="text-right"> {this.getcountcategoryannonceString(item.annoncereservations_count)} annonces</td>
+                    </tr>
+                )
+            })
+        ):(
+            <NavannoncecategorySkeleton/>
+        );
         return (
             <>
-                <Helmet>
-                    <title>{`${annoncereservationbycategory.name || $name_site} - `} {$name_site}</title>
-                </Helmet>
+                <HelmetSite title={`Reservations ${annoncereservationbycategory.name || $name_site} -  ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
 
-                    <nav className="navbar navbar-expand-lg bg-primary">
+                    <nav className="navbar ivemoNarbarCustomisation navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
 
@@ -92,7 +293,14 @@ class Annoncebycategoryannoncereservation extends Component {
                                             </Link>
                                         </div>
                                         <br/>
+
                                         {mapAnnoncereservations}
+
+                                        <div className="text-center">
+                                            <button type="button"  className="btn btn-outline-info">
+                                                <b>Afficher plus </b>
+                                            </button>
+                                        </div>
 
                                     </div>
 
@@ -113,7 +321,7 @@ class Annoncebycategoryannoncereservation extends Component {
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingOne">
                                                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <b>Reservater un(e) {annoncereservationbycategory.name}</b>
+                                                                        <b>Reservater un(e) {annoncereservationbycategory.name || "bien"}</b>
                                                                         <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                     </a>
                                                                 </div>
@@ -123,18 +331,7 @@ class Annoncebycategoryannoncereservation extends Component {
                                                                         <table>
                                                                             <tbody>
 
-                                                                            {citiesannoncesreservations.length ?
-                                                                                <>  {citiesannoncesreservations.map((item) => (
-                                                                                    <tr key={item.id}>
-                                                                                        <td>
-                                                                                            <NavLink to={`/annonces_reservations/${annoncetype}/${annoncereservationbycategory.slug}/${item.slug}/`}>
-                                                                                                Reserver un(e) <b style={{ textTransform: "lowercase" }}>{annoncereservationbycategory.name}</b> à <strong> {item.name}</strong>
-                                                                                            </NavLink>
-                                                                                        </td>
-                                                                                        <td className="text-right"> {this.getcountcategoryannonceString(item.annoncereservations_count)} annonces</td>
-                                                                                    </tr>
-                                                                                ))}
-                                                                                </>: <NavannoncecategorySkeleton/>}
+                                                                            {mapCitiesannoncesreservations}
 
                                                                             </tbody>
                                                                         </table>

@@ -1,11 +1,12 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Button,UncontrolledTooltip } from "reactstrap";
 import moment from "moment";
 import LazyLoad from "react-lazyload";
+import Skeleton from "react-loading-skeleton";
 
 
-class PrivateUserFavoritEmployementList extends Component {
+class PrivateUserFavoritEmployementList extends PureComponent {
 
     getDescription() {
         return { __html: (this.props.employment.description.length > 80 ? this.props.employment.description.substring(0, 80) + "..." : this.props.employment.description) };
@@ -61,9 +62,14 @@ class PrivateUserFavoritEmployementList extends Component {
 
 
                                     <div className="d-flex align-items-center">
-                                        <NavLink to={`/pro/${this.props.employment.user.slug}/`}>
-                                            <img src={this.props.employment.user.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
-                                        </NavLink>
+                                        {this.props.employment.user.avatar ?
+                                            <NavLink to={`/pro/${this.props.employment.user.slug}/employments/`}>
+                                                <img src={this.props.employment.user.avatar}
+                                                     style={{ height: "40px", width: "80px" }}
+                                                     alt={this.props.employment.user.first_name}
+                                                     className="avatar" />
+                                            </NavLink>
+                                            : <Skeleton circle={false} height={40} width={80} />}
                                         <div className="mx-3">
                                             <NavLink to={`/pro/${this.props.employment.user.slug}/`} className="text-dark font-weight-600 text-sm">{this.props.employment.user.first_name}
                                                 <small className="d-block text-muted"><b><i className="now-ui-icons tech_watch-time"/> {moment(this.props.employment.created_at).format('ll')}</b></small>
@@ -104,7 +110,7 @@ class PrivateUserFavoritEmployementList extends Component {
                                                 <div className="text-center">
                                                     <button type="button"
                                                         className="btn btn-danger btn-icon btn-sm" onClick={() => this.props.unfavoriteItem(this.props.employment.id)} title="Supprimer cette annonce">
-                                                        <i className="fas fa-heart"></i>
+                                                        <i className="fas fa-bookmark"></i>
                                                     </button>
                                                 </div>
 

@@ -2,9 +2,11 @@
 
 namespace App\Model;
 
+
 use App\Notifications\VerifyEmailUsers;
-use Carbon\Carbon;
-use App\Model\favorite\favoritemployment;
+use App\Traits\Model\Favoritesdata;
+use App\Traits\Model\Subscribedata;
+use App\Traits\Subscribuserdata;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -16,7 +18,7 @@ use Illuminate\Support\Str;
 
 class user extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable,HasApiTokens,HasRoles;
+    use Notifiable,HasApiTokens,HasRoles,Favoritesdata,Subscribedata,Subscribuserdata;
 
     /**
      * The attributes that are mass assignable.
@@ -210,15 +212,25 @@ class user extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(subscriberuser::class, 'user_id');
     }
 
-    public function favoritemployments()
+
+    public function removelikes()
     {
-        return $this->hasMany(favoritemployment::class, 'user_id');
+        return $this->belongsToMany(
+            like::class,
+            'likes',
+            'user_id',
+            'likeable_id')
+            ->withTimeStamps();
     }
 
-    public function bookmarksfavoritemployments()
+    public function removesubscribannonces()
     {
-        return $this->belongsToMany(employment::class, 'favoritemployments', 'user_id', 'employment_id')->withTimeStamps();
+        return $this->belongsToMany(
+            subscribannonce::class,
+            'subscribannonces',
+            'user_id',
+            'subscribannonceable_id')
+            ->withTimeStamps();
     }
-
 
 }

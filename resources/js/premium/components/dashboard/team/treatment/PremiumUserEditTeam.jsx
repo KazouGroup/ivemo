@@ -151,7 +151,7 @@ class PremiumUserEditTeam extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Donné suprimée avec succès'
+                            message: 'Donnée supprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -170,7 +170,7 @@ class PremiumUserEditTeam extends Component {
 
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooopss! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -223,7 +223,7 @@ class PremiumUserEditTeam extends Component {
 
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -238,7 +238,7 @@ class PremiumUserEditTeam extends Component {
 
     unactiveItem(id){
         Swal.fire({
-            title: 'Désactiver l\'utilisateur?',
+            title: 'Déactiver l\'utilisateur?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -277,7 +277,7 @@ class PremiumUserEditTeam extends Component {
 
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -324,7 +324,7 @@ class PremiumUserEditTeam extends Component {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Something wrong. Try later...", {
+            $.notify("Ooops! Something wrong. Try later...", {
                 allow_dismiss: false,
                 type: 'danger',
                 animate: {
@@ -399,7 +399,6 @@ class PremiumUserEditTeam extends Component {
 
                     <div className="content">
                         <div className="container-fluid">
-
                             <div className="row">
                                 <div className="col-lg-4 col-md-4 col-sm-4">
                                     <div className="card card-stats">
@@ -450,7 +449,6 @@ class PremiumUserEditTeam extends Component {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div className="row">
@@ -476,7 +474,6 @@ class PremiumUserEditTeam extends Component {
                                     </div>
                                 </div>
                             </div>
-
 
                             <div className="row">
                                 <div className="col-md-12">
@@ -529,7 +526,6 @@ class PremiumUserEditTeam extends Component {
                                                         <i className="material-icons">delete_forever</i>
                                                     </Button>{" "}
                                                 </div>
-
                                             </div>
 
                                             <form role="form" onSubmit={this.updateItem} acceptCharset="UTF-8">
@@ -629,7 +625,6 @@ class PremiumUserEditTeam extends Component {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 

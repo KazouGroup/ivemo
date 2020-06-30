@@ -39,6 +39,14 @@ class UserResource extends JsonResource
             'profile' => $this->profile,
             'status_avis' => $this->status_avis,
             //'provider' => $this->provider,
+            'subscribedblog' => $this->subscribedblog(),
+            'subscribedemployment' => $this->subscribedemployment(),
+
+
+            'subscribannonced' => $this->subscribannonced(),
+            'subscribannonces' => $this->subscribannonces()->count(),
+
+            'employments_count' => $this->employments_count,
             'annoncelocations_count' => $this->annoncelocations_count,
             'blogannoncelocations_count' => $this->blogannoncelocations_count,
             'annoncereservations_count' => $this->annoncereservations_count,

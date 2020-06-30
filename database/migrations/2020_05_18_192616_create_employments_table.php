@@ -26,6 +26,7 @@ class CreateEmploymentsTable extends Migration
             $table->boolean('status_admin')->default(true);
             $table->longText('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unsignedBigInteger('city_id')->nullable()->index();
             $table->unsignedBigInteger('member_id')->nullable()->index();

@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Link,NavLink } from "react-router-dom";
 import moment from 'moment'
-import {Helmet} from "react-helmet";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import {Button, Form, Input} from "reactstrap";
@@ -11,6 +10,7 @@ import BlogannonceventeList from "./inc/BlogannonceventeList";
 import Navlinknewblogannoncevente from "./treatement/Navlinknewblogannoncevente";
 import BlogannonceListSkeleton from "../../../inc/user/blog/BlogannonceListSkeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
+import HelmetSite from "../../../inc/user/HelmetSite";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -25,11 +25,12 @@ class BlogannonceventeIndex extends Component {
             errors: [],
             blogannonceItem: [],
             blogannonceventes:{categoryannoncevente:[],user:[]},
-            isLoading: false,
 
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
         this.handleCheckClick = this.handleCheckClick.bind(this);
@@ -72,6 +73,70 @@ class BlogannonceventeIndex extends Component {
         this.setState({
             blogannonceItem: item
         });
+    }
+
+    favoriteItem(id) {
+        const url = route('favoriteblogannonceventes_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Article ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('favoriteblogannonceventes_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Article retirée de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
     }
 
     signalemessageItem(e) {
@@ -127,7 +192,6 @@ class BlogannonceventeIndex extends Component {
         })
     }
 
-
     unactiveItem(id){
         Swal.fire({
             title: 'Masquer cette article?',
@@ -143,13 +207,13 @@ class BlogannonceventeIndex extends Component {
         }).then((result) => {
             if (result.value) {
 
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.blogannonceventes.filter(isNotId);
+                this.setState({blogannonceventes: updatedItems});
+
                 //Envoyer la requet au server
                 let url = route('blogannoncecategoryventeunactivated_site',id);
                 dyaxios.get(url).then(() => {
-
-                    let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.blogannonceventes.filter(isNotId);
-                    this.setState({blogannonceventes: updatedItems});
 
                     /** Alert notify bootstrapp **/
                     $.notify({
@@ -198,13 +262,14 @@ class BlogannonceventeIndex extends Component {
         }).then((result) => {
             if (result.value) {
 
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.blogannonceventes.filter(isNotId);
+                this.setState({blogannonceventes: updatedItems});
+
                 const url = route('blogannoncecategoryventedelete_site',id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
-                    let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.blogannonceventes.filter(isNotId);
-                    this.setState({blogannonceventes: updatedItems});
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
@@ -239,21 +304,23 @@ class BlogannonceventeIndex extends Component {
         });
     }
 
-    componentDidMount() {
-        this.setState({ isLoading: true });
+    loadItems(){
         dyaxios.get(route('api.blogannonceventes_site')).then(response =>
             this.setState({
-                blogannonceventes: [...response.data.data],
-                isLoading: false,
+                blogannonceventes: [...response.data],
             }));
     }
 
+    componentDidMount() {
+       this.loadItems();
+    }
+
     render() {
-        const {blogannonceventes,blogannonceItem,isLoading} = this.state;
+        const {blogannonceventes,blogannonceItem} = this.state;
         const mapBlogannonceventes = blogannonceventes.length >= 0 ? (
             blogannonceventes.map(item => {
                 return(
-                    <BlogannonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser}/>
+                    <BlogannonceventeList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser}/>
                 )
             })
         ):(
@@ -261,9 +328,7 @@ class BlogannonceventeIndex extends Component {
         );
         return (
             <>
-                <Helmet>
-                    <title>Conseils tout savoir sur les achat et vente de vos biens - {$name_site}</title>
-                </Helmet>
+                <HelmetSite title={`Conseils tout savoir sur les achat et vente de vos biens - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 

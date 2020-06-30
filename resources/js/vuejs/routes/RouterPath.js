@@ -30,7 +30,7 @@ import CityAdminIndex from "../components/admin/partial/CityAdminIndex";
 import PermissionAdminIndex from "../components/admin/partial/PermissionAdminIndex";
 import RoleAdminIndex from "../components/admin/partial/RoleAdminIndex";
 import ContactusersfaqsAdminIndex from "../components/admin/contact/contactuserfaq/ContactusersfaqsAdminIndex";
-import ContactusersforadvertsAdminIndex 
+import ContactusersforadvertsAdminIndex
     from "../components/admin/contact/contactuserforadverts/ContactusersforadvertsAdminIndex";
 import ConditionutilisationAdminIndex
     from "../components/admin/page/conditionutilisation/ConditionutilisationAdminIndex";
@@ -47,6 +47,10 @@ import WorkwithusShowAdminIndex from "../components/admin/page/workwithuses/Work
 import CategoryEmployementAdminIndex from "../components/admin/categories/CategoryEmployementAdminIndex";
 import EmployementsAdminIndex from "../components/admin/employement/EmployementsAdminIndex";
 import EmployementsbycategoryAdmin from "../components/admin/employement/EmployementsbycategoryAdmin";
+import UserAdminIndex from "../components/admin/user/UserAdminIndex";
+import UserProAdminIndex from "../components/admin/user/UserProAdminIndex";
+import UserParAdminIndex from "../components/admin/user/UserParAdminIndex";
+import UserModeratorsAdmin from "../components/admin/user/UserModeratorsAdmin";
 
 
 export const routes = [
@@ -63,6 +67,10 @@ export const routes = [
     {path: '/dashboard/cities/', name: 'cities.index', component: CityAdminIndex},
     {path: '/dashboard/roles/', name: 'roles.index', component: RoleAdminIndex},
     {path: '/dashboard/permissions/', name: 'permissions.index', component: PermissionAdminIndex},
+    {path: '/dashboard/users/', name: 'users.index', component: UserAdminIndex},
+    {path: '/dashboard/users/professionnels/', name: 'users.userspro', component: UserProAdminIndex},
+    {path: '/dashboard/users/particuliers/', name: 'users.userspar', component: UserParAdminIndex},
+    {path: '/dashboard/users/moderators/', name: 'users.usersmod', component: UserModeratorsAdmin},
 
     {path: '/dashboard/contactusersfaqs/', name: 'contactusersfaqs.index', component: ContactusersfaqsAdminIndex},
     {path: '/dashboard/contactusersforadverts/', name: 'contactusersforadverts.index', component:ContactusersforadvertsAdminIndex},

@@ -28,6 +28,7 @@ class CreateReservationsTable extends Migration
             $table->unsignedBigInteger('children_number')->nullable();
             $table->longText('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
             $table->unsignedBigInteger('user_id')->nullable()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 

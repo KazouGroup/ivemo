@@ -60,6 +60,8 @@ class PermissionTableSeeder extends Seeder
         //Create permissions roles
         Permission::create(['guard_name' => 'web' , 'name' => 'manage-role']);
 
+        Permission::create(['guard_name' => 'web' , 'name' => 'manage-user']);
+
         //Create permissions permissions
         Permission::create(['guard_name' => 'web' , 'name' => 'manage-permission']);
 

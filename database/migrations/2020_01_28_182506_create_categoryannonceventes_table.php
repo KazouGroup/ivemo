@@ -16,6 +16,7 @@ class CreateCategoryannonceventesTable extends Migration
         Schema::create('categoryannonceventes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable();
+            $table->string('label')->nullable();
             $table->string('color_name')->nullable();
             $table->string('photo')->nullable();
             $table->string('slug')->nullable();

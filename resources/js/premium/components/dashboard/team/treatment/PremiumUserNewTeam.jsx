@@ -222,7 +222,6 @@ class PremiumUserNewTeam extends Component {
                                 </div>
                             </div>
 
-
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="card">
@@ -249,7 +248,6 @@ class PremiumUserNewTeam extends Component {
                                                         <i className="material-icons">arrow_back</i>
                                                     </Link>
                                                 </div>
-
                                             </div>
 
                                             <form role="form" onSubmit={this.saveItem} acceptCharset="UTF-8">
@@ -349,7 +347,6 @@ class PremiumUserNewTeam extends Component {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 

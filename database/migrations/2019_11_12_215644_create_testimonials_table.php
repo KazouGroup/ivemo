@@ -21,6 +21,7 @@ class CreateTestimonialsTable extends Migration
             $table->string('ip')->nullable();
             $table->longText('body')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unsignedBigInteger('user_id')->nullable()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

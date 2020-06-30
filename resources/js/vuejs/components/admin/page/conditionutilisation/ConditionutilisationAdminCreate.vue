@@ -51,11 +51,11 @@
                                 <hr>
                                 <div class="submit">
                                     <div class="text-center">
-                                        <router-link :to="{ name: 'conditionutilisations.index' }" class="btn btn-round btn-danger">
-                                            <b class="title_hover">Cancel</b>
+                                        <router-link :to="{ name: 'conditionutilisations.index' }" class="btn btn-secondary btn-raised">
+                                            <b class="title_hover">Annuler</b>
                                         </router-link>
-                                        <button v-if="$auth.can('manage-faq')" :disabled="form.busy" type="submit" class="btn btn-round btn-success btn-raised">
-                                            <b class="title_hover">Save</b>
+                                        <button v-if="$auth.can('manage-faq')" :disabled="form.busy" type="submit" class="btn btn-success btn-raised">
+                                            <b class="title_hover">Sauvegarder</b>
                                         </button>
                                     </div>
                                 </div>

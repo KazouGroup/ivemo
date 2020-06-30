@@ -18,12 +18,12 @@ $factory->define(blogannoncereservation::class, function (Faker $faker) {
         'photo' => "https://dummyimage.com/wsvga/" . $backgroundColor . "/". $foregroundColor ."&text=" . $faker->word,
         'slug' => str_slug($title),
         'slugin' => $myslug,
-        'status' => $faker->boolean,
-        'status_admin' => $faker->boolean,
+        'status' => true,
+        //'status_admin' => $faker->boolean,
         'red_time' => $faker->randomDigitNot(5),
-        'description' => $faker->realText(rand(10000, 40000)),
+        'description' => "<p>".$faker->realText(rand(10000, 20000))."</p>",
         'categoryannoncereservation_id' => categoryannoncereservation::inRandomOrder()->first()->id,
         'user_id' => user::inRandomOrder()->first()->id,
-        //'created_at' => $faker->dateTime,
+        'created_at' => $faker->dateTime,
     ];
 });

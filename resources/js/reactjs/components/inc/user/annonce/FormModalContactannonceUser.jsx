@@ -1,10 +1,11 @@
-import React, { Component,Fragment } from "react";
+import React, {PureComponent, Fragment} from "react";
 import {Button, Form, Input, UncontrolledTooltip} from "reactstrap";
 import {NavLink} from "react-router-dom";
 import moment from "moment";
+import FieldInput from "../../vendor/FieldInput";
 
 
-class FormModalContactannonceUser extends Component {
+class FormModalContactannonceUser extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -13,10 +14,6 @@ class FormModalContactannonceUser extends Component {
 
     }
 
-    // lifecycle method
-    componentDidMount() {
-
-    }
 
     render() {
         return (
@@ -41,11 +38,11 @@ class FormModalContactannonceUser extends Component {
 
                                     <div className="row">
                                         <div className="d-flex align-items-center">
-                                            <a href={`/@${this.props.user.slug}/annonces_locations/`}>
+                                            <a href={`/pro/${this.props.user.slug}/annonces_locations/`}>
                                                 <img src={this.props.user.avatar} style={{ height: "40px", width: "80px" }} alt={this.props.user.first_name} className="avatar" />
                                             </a>
                                             <div className="mx-3">
-                                                <a href={`/@${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{this.props.user.first_name}</b>
+                                                <a href={`/pro/${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{this.props.user.first_name}</b>
                                                     <small className="d-block text-muted">{moment(this.props.user.created_at).format('LL')}</small>
                                                 </a>
                                             </div>
@@ -72,18 +69,10 @@ class FormModalContactannonceUser extends Component {
                                                         <span className="input-group-text">
                                                             <i className="now-ui-icons users_circle-08"/></span>
                                             </div>
-                                            <input id='full_name'
-                                                   type='text'
-                                                   className={`form-control ${this.props.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
-                                                   name='full_name'
-                                                   minLength="5"
-                                                   placeholder="Nom complet"
-                                                   aria-label="Nom complet"
-                                                   autoComplete="full_name"
-                                                   value={this.state.full_name}
-                                                   onChange={this.props.handleFieldChange}
-                                            />
-                                            {this.props.renderErrorFor('full_name')}
+                                            <FieldInput name="full_name" type='text' minLength="3" maxLength="50" placeholder="Nom complete" value={this.state.full_name}
+                                                        handleFieldChange={this.props.handleFieldChange}
+                                                        hasErrorFor={this.props.hasErrorFor}
+                                                        renderErrorFor={this.props.renderErrorFor}/>
                                         </div>
                                     </div>
 
@@ -93,18 +82,10 @@ class FormModalContactannonceUser extends Component {
                                                         <span className="input-group-text">
                                                             <i className="now-ui-icons ui-1_email-85"/></span>
                                             </div>
-                                            <input id='email'
-                                                   type='email'
-                                                   className={`form-control ${this.props.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                                   name='email'
-                                                   minLength="3"
-                                                   placeholder="Email"
-                                                   aria-label="Email"
-                                                   autoComplete="email"
-                                                   value={this.state.email}
-                                                   onChange={this.props.handleFieldChange}
-                                            />
-                                            {this.props.renderErrorFor('email')}
+                                            <FieldInput name="email" type='email' minLength="3" maxLength="50" placeholder="Email" value={this.state.email}
+                                                        handleFieldChange={this.props.handleFieldChange}
+                                                        hasErrorFor={this.props.hasErrorFor}
+                                                        renderErrorFor={this.props.renderErrorFor}/>
                                         </div>
                                     </div>
                                     <div className="row">
@@ -113,16 +94,10 @@ class FormModalContactannonceUser extends Component {
                                                         <span className="input-group-text">
                                                             <i className="now-ui-icons tech_mobile"/></span>
                                             </div>
-                                            <input id='phone'
-                                                   type='text'
-                                                   className={`form-control ${this.props.hasErrorFor('phone') ? 'is-invalid' : ''}`}
-                                                   name='phone'
-                                                   placeholder="Téléphone"
-                                                   aria-label="Téléphone"
-                                                   value={this.state.phone}
-                                                   onChange={this.props.handleFieldChange}
-                                            />
-                                            {this.props.renderErrorFor('phone')}
+                                            <FieldInput name="phone" type='number' minLength="3" maxLength="15" placeholder="Téléphone" value={this.state.phone}
+                                                        handleFieldChange={this.props.handleFieldChange}
+                                                        hasErrorFor={this.props.hasErrorFor}
+                                                        renderErrorFor={this.props.renderErrorFor}/>
                                         </div>
 
 
@@ -134,31 +109,19 @@ class FormModalContactannonceUser extends Component {
                                                         <span className="input-group-text">
                                                             <i className="now-ui-icons users_circle-08"/></span>
                                             </div>
-                                            <input id='subject'
-                                                   type='text'
-                                                   minLength="5"
-                                                   className={`form-control ${this.props.hasErrorFor('subject') ? 'is-invalid' : ''}`}
-                                                   name='subject'
-                                                   placeholder="Object..."
-                                                   aria-label="Object"
-                                                   autoComplete="subject"
-                                                   value={this.state.subject}
-                                                   onChange={this.props.handleFieldChange}
-                                            />
-                                            {this.props.renderErrorFor('subject')}
+                                            <FieldInput name="subject" type='text' minLength="3" maxLength="50" placeholder="Object" value={this.state.subject}
+                                                        handleFieldChange={this.props.handleFieldChange}
+                                                        hasErrorFor={this.props.hasErrorFor}
+                                                        renderErrorFor={this.props.renderErrorFor}/>
                                         </div>
                                     </div>
                                     <div className="row">
 
                                         <div className="input-group">
-                                                       <textarea name="message" value={this.state.message}
-                                                                 onChange={this.props.handleFieldChange}
-                                                                 placeholder={'Posez ici toutes vos questions !'}
-                                                                 minLength="5"
-                                                                 className={`form-control ${this.props.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                 id="message"
-                                                                 rows="10" />
-                                            {this.props.renderErrorFor('message')}
+                                            <FieldInput name="message" type='textarea' minLength="5" maxLength="5000" placeholder="Message" value={this.state.message}
+                                                        handleFieldChange={this.props.handleFieldChange}
+                                                        hasErrorFor={this.props.hasErrorFor}
+                                                        renderErrorFor={this.props.renderErrorFor} rows="10"/>
                                         </div>
                                     </div>
                                     <div className="form-check text-left">

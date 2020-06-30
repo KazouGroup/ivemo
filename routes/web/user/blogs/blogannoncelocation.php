@@ -12,9 +12,44 @@ Route::group(['middleware' => 'auth','prefix' => 'profile'], function () {
         'BlogannoncelocationController@blogannonceslocationscategoryannoncelocationbyuser'
     )->name('blogannonceslocationscategoryannoncelocationbyuser_site');
 
+    Route::get(
+        '{user}/personal_settings/blogs/annonce_location/statistique/{blogannoncelocation}',
+        'BlogannoncelocationController@statistique'
+    )->name('blogannonceslocationsstatistiquebyuser_site');
+
 });
 
 Route::group(['prefix' => 'api'], function () {
+
+    Route::get(
+        'blogs/annonce_locations',
+        'BlogannoncelocationController@apiannoncebloglocation'
+    )->name('api.blogannoncelocations_site');
+
+    Route::get(
+        'blogs/annonce_locations/{categoryannoncelocation}',
+        'BlogannoncelocationController@apiannonceblogcategorylocations'
+    )->name('api.blogannonceblogcategorylocations_site');
+
+    Route::get(
+        'blogs/annonce_locationscount/{categoryannoncelocation}',
+        'BlogannoncelocationController@apiannonceblogcategorylocationscount'
+    )->name('api.blogannonceblogcategorylocationscount_site');
+
+    Route::get(
+        'blogs/annonce_locations_interesses/{categoryannoncelocation}',
+        'BlogannoncelocationController@apiblogannoncelocationinteresse'
+    )->name('api.blogannoncelocationinteresse_site');
+
+    Route::get(
+        'blogs/annonce_locations/{categoryannoncelocation}/{date}/{blogannoncelocation}',
+        'BlogannoncelocationController@apiannonceblogcategorylocationslug'
+    )->name('api.blogannonceblogcategorylocationslug_site');
+
+    Route::get(
+        'pro{user}/blogs_annonce_locations',
+        'BlogannoncelocationController@apiblogsannoncelocationspublique'
+    )->name('api.blogs_annonce_locationspublique');
 
     Route::get(
         'blogs/annonce_location/{blogannoncelocation}',
@@ -30,6 +65,11 @@ Route::group(['prefix' => 'api'], function () {
         '{user}/personal_settings/blogs/annonce_locations/{categoryannoncelocation}',
         'BlogannoncelocationController@apiblogannonceslocationscategoryannoncelocationbyuser'
     )->name('api.blogannonceslocationscategoryannoncelocationbyuser_site');
+
+    Route::get(
+        '{user}/personal_settings/blogs/annonce_location/statistique/{blogannoncelocation}',
+        'BlogannoncelocationController@apistatistique'
+    )->name('api.blogannonceslocationsstatistiquebyuser_site');
 
 });
 

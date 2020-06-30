@@ -3,16 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Profile\UpdateRequest;
-use App\Http\Resources\FollowerResource;
 use App\Http\Resources\UserResource;
-use App\Model\follower;
 use App\Model\user;
-use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
+use File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
@@ -27,7 +23,7 @@ class UserController extends Controller
     private $auth;
 
     public function __construct(Guard $auth){
-        $this->middleware('auth',['except' => ['api','apiadministrator','show','apidatatables','apifollowers','dataLastMonth','dataCurrentMonth']]);
+        $this->middleware('auth');
         $this->auth = $auth;
     }
     /**
@@ -37,35 +33,78 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.user.index');
+        $user = Auth::user();
+
+        return view('admin.user.index',compact('user'));
     }
 
-    public function datatablesusers()
+    public function userspro()
     {
-        return view('admin.user.index');
+        $user = Auth::user();
+
+        return view('admin.user.index',compact('user'));
     }
 
-    public function datatablesadministrators()
+    public function userspar()
     {
-        return view('admin.user.index');
+        $user = Auth::user();
+
+        return view('admin.user.index',compact('user'));
     }
 
-    public function administrator()
+    public function usersmod()
     {
-        return view('admin.user.index');
+        $user = Auth::user();
+
+        return view('admin.user.index',compact('user'));
     }
 
     public function api()
     {
         $users = UserResource::collection(user::where('status_user',0)
-            ->latest()->paginate(12));
+            ->with('roles','profile')
+            ->latest()->paginate(30));
         return response()->json($users,200);
     }
 
-    public function apifollowers()
+    public function apiuserpro()
     {
-        $followers = FollowerResource::collection(follower::all());
-        return response()->json($followers,200);
+        $users = UserResource::collection(user::where(['status_user' => 0,'status_profile' => 1])
+            ->with('roles','profile')
+            ->latest()->paginate(30));
+        return response()->json($users,200);
+    }
+
+    public function apiuserpar()
+    {
+        $users = UserResource::collection(user::where(['status_user' => 0,'status_profile' => 0])
+            ->with('roles','profile')
+            ->latest()->paginate(30));
+        return response()->json($users,200);
+    }
+
+    public function apicount()
+    {
+        $users = user::where('status_user',0)
+            ->with('roles','profile')
+            ->get()->count();
+        return response()->json($users,200);
+    }
+
+    public function apiprocount()
+    {
+        $users = user::where(['status_user' => 0,'status_profile' => 1])
+            ->with('roles','profile')
+            ->get()->count();
+        return response()->json($users,200);
+    }
+
+    public function apiparcount()
+    {
+        $users = user::where(['status_user' => 0,'status_profile' => 0])
+            ->with('roles','profile')
+            ->get()->count();
+        return response()->json($users,200);
     }
 
     public function apidatatables()
@@ -74,10 +113,18 @@ class UserController extends Controller
         return response()->json($users,200);
     }
 
-    public function apiadministrator()
+    public function apiusermod()
     {
         $users = UserResource::collection(user::where('status_user',1)
+            ->with('roles','profile')
             ->latest()->get());
+        return response()->json($users,200);
+    }
+
+    public function apimodcount()
+    {
+        $users = user::where('status_user',1)
+            ->with('roles','profile')->get()->count();
         return response()->json($users,200);
     }
 
@@ -242,10 +289,13 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array|\Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $user = user::findOrFail($id);;
+        $user->delete();
+
+        return ['message' => 'Deleted successfully '];
     }
 }

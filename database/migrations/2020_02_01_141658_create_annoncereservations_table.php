@@ -20,14 +20,26 @@ class CreateAnnoncereservationsTable extends Migration
             $table->string('ip')->nullable();
             $table->string('slugin')->nullable();
             $table->string('district')->nullable();
+            $table->integer('surface')->nullable();
+            $table->integer('rooms')->nullable();
+            $table->integer('pieces')->nullable();
             $table->boolean('status')->default(true);
             $table->boolean('status_admin')->default(true);
+            $table->boolean('status_wifi')->default(false);
+            $table->boolean('status_parking')->default(false);
+            $table->boolean('status_car_sharing')->default(false);
+            $table->boolean('dry_cleaning')->default(false);
+            $table->boolean('status_lunch')->default(false);
+            $table->boolean('status_consiegerie')->default(false);
             $table->longText('description')->nullable();
             $table->unsignedBigInteger('price')->nullable();
+            $table->unsignedBigInteger('promo_price')->nullable();
             $table->date('disponible_date')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unsignedBigInteger('city_id')->nullable()->index();
+            $table->unsignedBigInteger('periodeannonce_id')->nullable()->index();
             $table->unsignedBigInteger('member_id')->nullable()->index();
 
             $table->unsignedBigInteger('user_id')->nullable()->index();

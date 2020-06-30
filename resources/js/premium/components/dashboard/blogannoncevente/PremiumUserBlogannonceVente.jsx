@@ -49,7 +49,7 @@ class PremiumUserBlogannonceVente extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette articles est désormais visible aux utilisateurs",
+                            message: "Cette article est désormais visible aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -67,7 +67,7 @@ class PremiumUserBlogannonceVente extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -119,7 +119,7 @@ class PremiumUserBlogannonceVente extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -159,7 +159,7 @@ class PremiumUserBlogannonceVente extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Article suprimé avec succès'
+                            message: 'Article supprimé avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -178,7 +178,7 @@ class PremiumUserBlogannonceVente extends Component {
 
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -269,7 +269,6 @@ class PremiumUserBlogannonceVente extends Component {
 
                     <div className="content">
                         <div className="container-fluid">
-
                             <div className="row">
                                 <div className="col-lg-4 col-md-4 col-sm-4">
                                     <div className="card card-stats">
@@ -320,7 +319,6 @@ class PremiumUserBlogannonceVente extends Component {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div className="row">
@@ -346,7 +344,6 @@ class PremiumUserBlogannonceVente extends Component {
                                     </div>
                                 </div>
                             </div>
-
 
                             <div className="row">
                                 <div className="col-md-12">
@@ -379,7 +376,6 @@ class PremiumUserBlogannonceVente extends Component {
                                                         </Link>
                                                     </div>
                                                 </div>
-
                                             </div>
 
                                             {userblogannonce.length >= 0 ?
@@ -421,7 +417,6 @@ class PremiumUserBlogannonceVente extends Component {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 

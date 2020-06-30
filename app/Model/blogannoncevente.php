@@ -2,8 +2,11 @@
 
 namespace App\Model;
 
+use App\Model\favorite\favoriteblogannoncevente;
+use App\Traits\Likesdata;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -11,12 +14,12 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class blogannoncevente extends Model implements Auditable
 {
-    use AuditableTrait,LogsActivity;
+    use AuditableTrait,LogsActivity,Likesdata;
 
     protected $guarded = [];
 
     protected static $logAttributes = ['title','red_time','ip','status','status_admin','member_id'];
-    
+
     protected  $table = 'blogannonceventes';
 
     protected static function boot()
@@ -82,5 +85,17 @@ class blogannoncevente extends Model implements Auditable
             ]
 
         ];
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(comment::class ,'commentable');
+    }
+
+    public function bookmarked()
+    {
+        return (bool) favoriteblogannoncevente::where('user_id', Auth::guard('web')->id())
+            ->where('blogannoncevente_id', $this->id)
+            ->first();
     }
 }

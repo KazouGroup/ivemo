@@ -18,7 +18,7 @@ class CreateCommentsTable extends Migration
             $table->string('commentable_type')->nullable();
             $table->unsignedBigInteger('commentable_id')->nullable();
             $table->string('ip')->nullable();
-            $table->text('body')->nullable();
+            $table->longText('body')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
 

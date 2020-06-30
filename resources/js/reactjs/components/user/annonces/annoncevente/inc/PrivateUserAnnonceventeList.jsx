@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Remarkable } from 'remarkable';
 import {Button, UncontrolledTooltip} from "reactstrap";
 import moment from "moment";
 
 
-class PrivateUserAnnonceventeList extends Component {
+class PrivateUserAnnonceventeList extends PureComponent {
 
 
     getDescription() {
@@ -51,7 +51,7 @@ class PrivateUserAnnonceventeList extends Component {
                                     </NavLink>
                                 </div>
                                 <div className="text-right ml-auto">
-                                    <h5 className="text-success"><b>{this.props.price.formatMoney(2,'.',',') || "0"} <small>FCFA</small></b></h5>
+                                    <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',') || "0"} <small><b>FCFA</b></small></b></h5>
                                 </div>
                                 <div className="row">
                                     <div className="col-md-5 col-6">

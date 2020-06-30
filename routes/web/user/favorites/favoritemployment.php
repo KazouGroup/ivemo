@@ -5,13 +5,8 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::get(
         'profile/{user}/personal_settings/favorite_employments',
-        'FavoritemploymentController@apifavoritemployment'
-    )->name('api.userfavoritemployment');
-
-    Route::get(
-        'profile/{user}/personal_settings/favorite_employments_count',
-        'FavoritemploymentController@apifavoritemployment_count'
-    )->name('api.userfavoritemployment_count');
+        'FavoritemploymentController@apiuserdatafavoritemployment'
+    )->name('api.userdatafavoritemployment');
 
 });
 

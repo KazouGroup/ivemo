@@ -10,19 +10,205 @@ import AnnonceservationInteresse from "./AnnonceservationInteresse";
 import FormContactAnnoncereservationUser from "./inc/FormContactAnnoncereservationUser";
 import FormcontactuseronreservationShow from "./inc/FormcontactuseronreservationShow";
 import ProfileForallAnnonceShow from "../ProfileForallAnnonceShow";
+import HelmetSite from "../../../inc/user/HelmetSite";
+import Swal from "sweetalert2";
+import AnnoncereservationcommentIndex from "../../comments/AnnoncereservationcommentIndex";
 
 
 class Annoncebycategoryannoncereservationcityshow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncereservation:{annoncetype:[],categoryannoncereservation:[],user:{profile:[]},imagereservations:[]},
+            annoncereservation:{annoncetype:[],categoryannoncereservation:[],periodeannonce:[],user:{profile:[]},imagereservations:[]},
         };
+
+        this.deleteItem = this.deleteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
+        this.unactiveItem = this.unactiveItem.bind(this);
 
     }
 
-    // lifecycle method
-    componentDidMount() {
+    favoriteItem(id) {
+        const url = route('favoriteannoncereservations_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('favoriteannoncereservations_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce retirée de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unactiveItem(id) {
+        Swal.fire({
+            title: 'Désactiver l\'annonce?',
+            text: "êtes vous sure de vouloir confirmer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.annoncereservations.filter(isNotId);
+                this.setState({ annoncereservations: updatedItems });
+
+                //Envoyer la requet au server
+                let url = route('annonces_reservations_unactivated.site', id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+
+                            //message: 'Annonce désactiver avec succès',
+                            message: "Annonce masquée aux utilisateurs",
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            placement: {
+                                from: 'bottom',
+                                align: 'center'
+                            },
+                            animate: {
+                                enter: "animate__animated animate__fadeInUp",
+                                exit: "animate__animated animate__fadeOutDown"
+                            },
+                        });
+                    /** End alert ***/
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
+
+    }
+
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes-vous sûr de vouloir executer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.annoncereservations.filter(isNotId);
+                this.setState({ annoncereservations: updatedItems });
+
+                const url = route('annonces_locations_delete.site', [id]);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update',
+                            message: 'Annonce suprimée avec succès'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'primary',
+                            placement: {
+                                from: 'bottom',
+                                align: 'right'
+                            },
+                            animate: {
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
+                            },
+                        });
+                    /** End alert ***/
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
+    }
+
+
+    loadItems(){
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
         let itemcityannonce = this.props.match.params.city;
@@ -32,17 +218,20 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
         dyaxios.get(url).then(response => this.setState({annoncereservation: response.data,}));
     }
 
+    // lifecycle method
+    componentDidMount() {
+        this.loadItems();
+    }
+
     render() {
         const {annoncereservation} = this.state;
         return (
             <>
-                <Helmet>
-                    <title>{`${annoncereservation.title || $name_site}`} - {$name_site}</title>
-                </Helmet>
+                <HelmetSite title={`${annoncereservation.title || $name_site} - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
 
-                    <nav className="navbar navbar-expand-lg bg-primary">
+                    <nav className="navbar ivemoNarbarCustomisation navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
 
@@ -63,7 +252,8 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                 </button>
                                             </div>
 
-                                            <div className="card-image">
+                                            {/*
+                                              <div className="card-image">
 
                                                 <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
                                                     <ol className="carousel-indicators">
@@ -90,29 +280,91 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                     </a>
                                                 </div>
                                             </div>
+                                            */}
+
+
+                                            <div className="card-image">
+
+                                                <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
+                                                    <ol className="carousel-indicators">
+                                                        <li data-target="#carouselAnnonceIndicators" data-slide-to="0" className=""></li>
+                                                        <li data-target="#carouselAnnonceIndicators" data-slide-to="1" className=""></li>
+                                                        <li data-target="#carouselAnnonceIndicators" data-slide-to="2" className="active"></li>
+                                                    </ol>
+                                                    <div className="carousel-inner" role="listbox">
+                                                        <div className="carousel-item">
+                                                            <img className="d-block" src="/assets/vendor/assets/img/bg1.jpg" alt="First slide" />
+                                                        </div>
+                                                        <div className="carousel-item">
+                                                            <img className="d-block" src="/assets/vendor/assets/img/bg3.jpg" alt="Second slide" />
+                                                        </div>
+                                                        <div className="carousel-item active">
+                                                            <img className="d-block" src="/assets/vendor/assets/img/bg4.jpg" alt="Third slide" />
+                                                        </div>
+                                                    </div>
+                                                    <a className="carousel-control-prev" href="#carouselAnnonceIndicators" role="button" data-slide="prev">
+                                                        <i className="now-ui-icons arrows-1_minimal-left"></i>
+                                                    </a>
+                                                    <a className="carousel-control-next" href="#carouselAnnonceIndicators" role="button" data-slide="next">
+                                                        <i className="now-ui-icons arrows-1_minimal-right"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
                                             <br />
+
                                             <div className="d-flex align-items-center">
                                                 <div className="text-left pull-left">
-                                                    <NavLink to={`/annonces_reservations/${annoncereservation.annoncetype.slug}/${annoncereservation.categoryannoncereservation.slug}/`}>
+                                                    {annoncereservation.categoryannoncereservation.name ?
                                                         <h6 className={`text-${annoncereservation.categoryannoncereservation.color_name} ml-auto mr-auto`}>
                                                             {annoncereservation.categoryannoncereservation.name}
                                                         </h6>
-                                                    </NavLink>
+                                                        :
+                                                        null
+                                                    }
                                                 </div>
 
-                                                {/*
                                                 <div className="text-center ml-auto">
-                                                    <a href="#pablo" className="btn btn-primary btn-round">
-                                                        <i className="now-ui-icons ui-2_favourite-28"/> Dejà sauvegarder
-                                                    </a>
+                                                    <h6 className="text-dark">{annoncereservation.pieces > 0 ?<>{annoncereservation.pieces} p.</>:null } {annoncereservation.rooms > 0 ? <>{annoncereservation.rooms} ch.</>:null} {annoncereservation.surface > 0 ? <>{annoncereservation.surface} m<sup>2</sup></>:null}</h6>
                                                 </div>
-                                                */}
 
                                                 <div className="text-right ml-auto">
-                                                    <h5 className="text-success"><b>{(annoncereservation.price)} <small>FCFA</small></b></h5>
+                                                    {annoncereservation.price ?
+                                                        <h5 className="text-dark"><b>{annoncereservation.price.formatMoney(2,'.',',') || "0"} <small><b>FCFA - {annoncereservation.periodeannonce.name}</b></small></b></h5>
+                                                        :
+                                                        null
+                                                    }
                                                 </div>
                                             </div>
 
+
+                                            <div className="text-center">
+                                                {$guest ?
+                                                    <Button data-toggle="modal" data-target="#loginModal"
+                                                            className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
+                                                        <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
+                                                    </Button>
+                                                    :
+                                                    <>
+                                                        {annoncereservation.bookmarked ?
+
+                                                            <>
+                                                                <Button onClick={() => this.unfavoriteItem(annoncereservation.id)}
+                                                                        className="btn btn-danger btn-sm" title="Retirer de vos favoris">
+                                                                    <i className="fas fa-bookmark"></i> <b>Sauvegardé</b>
+                                                                </Button>
+                                                            </>
+
+                                                            :
+                                                            <>
+                                                                <Button onClick={() => this.favoriteItem(annoncereservation.id)}
+                                                                        className="btn btn-facebook btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                                    <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
+                                                                </Button>
+                                                            </>
+                                                        }
+                                                    </>
+                                                }
+                                            </div>
 
                                         </div>
 
@@ -147,7 +399,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                         <div className="card">
                                             <div className="card-body">
 
-                                                <ProfileForallAnnonceShow {...annoncereservation}/>
+                                                <ProfileForallAnnonceShow {...annoncereservation} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">
@@ -177,6 +429,10 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                             </div>
 
                                         </div>
+
+
+                                        <AnnoncereservationcommentIndex {...this.props} {...annoncereservation} />
+
 
                                     </div>
 

@@ -79,6 +79,7 @@ class CategoryFaqController extends Controller
     {
         $this->validate($request,[
             'name'=>'required|string|min:2|max:100|unique:cities',
+            'label'=>'required|string|min:2|max:100',
         ]);
 
         $categoryfaq = new categoryfaq;
@@ -129,6 +130,7 @@ class CategoryFaqController extends Controller
     {
         $this->validate($request,[
             'name'=> "required|string|min:2|max:100|unique:cities,name,{$id}",
+            'label'=>'required|string|min:2|max:100',
         ]);
 
         $categoryfaq = categoryfaq::findOrFail($id);

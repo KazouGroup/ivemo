@@ -124,7 +124,7 @@
                                                         <has-error :form="form" field="name"/>
                                                     </div>
                                                     <div class="text-center">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                                        <button type="button" class="btn btn-secondary btn-raised" data-dismiss="modal">
                                                         <span class="btn-label">
                                                             <b>Close</b>
                                                         </span>
@@ -160,7 +160,7 @@
 
 <script>
 
-    import LoaderLdsDefault from "../../../dashboard_user/components/inc/annimation/LoaderLdsDefault";
+    import LoaderLdsDefault from "../user/dashboard_user/components/inc/annimation/LoaderLdsDefault";
     export default {
         components: {LoaderLdsDefault},
         data() {

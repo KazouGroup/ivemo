@@ -256,7 +256,7 @@ class FormContactAnnoncereservationUser extends Component {
                             :
                             <h6 className="title text-center">S'il vous plaît
                                 <a href="/" className="text-primary" data-toggle="modal" data-target="#loginModal"> Connectez vous </a> ou
-                                <a href="/register/" className="text-primary"> Inscrivez vous </a> reserver cette annonce
+                                <a href={route('register')} className="text-primary"> Inscrivez vous </a> reserver cette annonce
                             </h6>
                         }
                     </div>

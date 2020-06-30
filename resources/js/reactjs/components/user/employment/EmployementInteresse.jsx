@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import moment from 'moment'
 import EmployementInteresseList from "./inc/EmployementInteresseList";
-import EmployementList from "./inc/EmployementList";
 import Swal from "sweetalert2";
+import EmploymentInteressListSkeleton from "../../inc/user/employment/EmploymentInteressListSkeleton";
 
 require("moment/min/locales.min");
 moment.locale('fr');
@@ -26,7 +26,7 @@ class EmployementInteresse extends Component {
         const url = route('employments_favorite.favorite', [id]);
         dyaxios.get(url).then(() => {
             $.notify({
-                    message: "Cette annonce a été ajoutée à vos favoris",
+                    message: "Annonce ajoutée à vos favoris",
                 },
                 {
                     allow_dismiss: false,
@@ -58,7 +58,7 @@ class EmployementInteresse extends Component {
         const url = route('employments_unfavorite.unfavorite', [id]);
         dyaxios.get(url).then(() => {
             $.notify({
-                    message: "Cette annonce a été retiré de vos favoris",
+                    message: "Annonce retiré de vos favoris",
                 },
                 {
                     allow_dismiss: false,
@@ -107,7 +107,7 @@ class EmployementInteresse extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette annonce a été masquée aux utilisateurs",
+                            message: "Annonce masquée aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -227,7 +227,7 @@ class EmployementInteresse extends Component {
                     <EmployementInteresseList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>                )
             })
         ):(
-            <></>
+            <EmploymentInteressListSkeleton/>
         );
         return (
             <>

@@ -1,5 +1,8 @@
 import React, { PureComponent } from "react";
 import { Button,Row, Form, Input, InputGroup,UncontrolledTooltip } from 'reactstrap';
+import FieldInput from "../../../inc/vendor/FieldInput";
+import {NavLink} from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
 
 class FormContactProfileAccountUser extends PureComponent {
     constructor(props) {
@@ -100,11 +103,16 @@ class FormContactProfileAccountUser extends PureComponent {
 
                     <div className="row">
                         <div className="d-flex align-items-center">
-                            <a href={`/@${this.props.slug}/`}>
-                                <img src={this.props.avatar} style={{ height: "40px", width: "80px" }} alt={this.props.first_name} className="avatar" />
-                            </a>
+                            {this.props.avatar ?
+                                <NavLink to={`/pro/${this.props.slug}/`}>
+                                    <img src={this.props.avatar}
+                                         style={{ height: "40px", width: "80px" }}
+                                         alt={this.props.first_name}
+                                         className="avatar" />
+                                </NavLink>
+                                : <Skeleton circle={false} height={40} width={80} />}
                             <div className="mx-3">
-                                <a href={`/@${this.props.slug}/`} className="text-dark font-weight-600 text-sm"><b>{this.props.first_name}</b>
+                                <a href={`/pro/${this.props.slug}/`} className="text-dark font-weight-600 text-sm"><b>{this.props.first_name}</b>
                                     <small className="d-block text-muted">{moment(this.props.created_at).format('LL')}</small>
                                 </a>
                             </div>
@@ -130,17 +138,10 @@ class FormContactProfileAccountUser extends PureComponent {
                                 <span className="input-group-text">
                                     <i className="now-ui-icons users_circle-08" /></span>
                             </div>
-                            <Input id='full_name'
-                                type='text'
-                                className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
-                                name='full_name'
-                                placeholder="Nom complet"
-                                aria-label="Nom complet"
-                                autoComplete="full_name"
-                                value={this.state.full_name}
-                                onChange={this.handleFieldChange}
-                            />
-                            {this.renderErrorFor('full_name')}
+                            <FieldInput name="full_name" type='text' minLength="4" maxLength="50" placeholder="Nom complete" value={this.state.full_name}
+                                        handleFieldChange={this.handleFieldChange}
+                                        hasErrorFor={this.hasErrorFor}
+                                        renderErrorFor={this.renderErrorFor}/>
                         </InputGroup>
 
                     </Row>
@@ -151,17 +152,10 @@ class FormContactProfileAccountUser extends PureComponent {
                                 <span className="input-group-text">
                                     <i className="now-ui-icons ui-1_email-85" /></span>
                             </div>
-                            <Input id='email'
-                                type='email'
-                                className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                name='email'
-                                placeholder="Email"
-                                aria-label="Email"
-                                autoComplete="email"
-                                value={this.state.email}
-                                onChange={this.handleFieldChange}
-                            />
-                            {this.renderErrorFor('email')}
+                            <FieldInput name="email" type='email' minLength="3" maxLength="50" placeholder="Email" value={this.state.email}
+                                        handleFieldChange={this.handleFieldChange}
+                                        hasErrorFor={this.hasErrorFor}
+                                        renderErrorFor={this.renderErrorFor}/>
                         </InputGroup>
                     </Row>
                     <Row>
@@ -170,16 +164,12 @@ class FormContactProfileAccountUser extends PureComponent {
                                 <span className="input-group-text">
                                     <i className="now-ui-icons tech_mobile" /></span>
                             </div>
-                            <Input id='phone'
-                                type='number'
-                                className={`form-control ${this.hasErrorFor('phone') ? 'is-invalid' : ''}`}
-                                name='phone'
-                                placeholder="Téléphone"
-                                aria-label="Téléphone"
-                                value={this.state.phone}
-                                onChange={this.handleFieldChange}
-                            />
-                            {this.renderErrorFor('phone')}
+
+                            <FieldInput name="phone" type='number' minLength="3" maxLength="15" placeholder="Téléphone" value={this.state.phone}
+                                        handleFieldChange={this.handleFieldChange}
+                                        hasErrorFor={this.hasErrorFor}
+                                        renderErrorFor={this.renderErrorFor}/>
+
                         </InputGroup>
                     </Row>
                     <Row>
@@ -188,21 +178,17 @@ class FormContactProfileAccountUser extends PureComponent {
                                 <span className="input-group-text">
                                     <i className="now-ui-icons text_caps-small" /></span>
                             </div>
-                            <Input id='subject'
-                                type='text'
-                                className={`form-control ${this.hasErrorFor('subject') ? 'is-invalid' : ''}`}
-                                name='subject'
-                                placeholder="Object..."
-                                aria-label="Object"
-                                autoComplete="subject"
-                                value={this.state.subject}
-                                onChange={this.handleFieldChange}
-                            />
-                            {this.renderErrorFor('subject')}
+
+                            <FieldInput name="subject" type='text' minLength="3" maxLength="200" placeholder="Object" value={this.state.subject}
+                                        handleFieldChange={this.handleFieldChange}
+                                        hasErrorFor={this.hasErrorFor}
+                                        renderErrorFor={this.renderErrorFor}/>
+
                         </InputGroup>
                     </Row>
                     <Row>
                         <InputGroup>
+
                             <Input type="textarea" name="message" value={this.state.message}
                                 onChange={this.handleFieldChange}
                                 placeholder={'Posez ici toutes vos questions !'}

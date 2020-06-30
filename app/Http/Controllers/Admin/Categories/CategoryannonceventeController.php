@@ -64,6 +64,7 @@ class CategoryannonceventeController extends Controller
     {
         $this->validate($request,[
             'name'=>'required|string|min:2|max:100|unique:categoryannonceventes',
+            'label'=>'required|string|min:2|max:100',
         ]);
 
         $categoryannoncevente = new categoryannoncevente();
@@ -122,6 +123,7 @@ class CategoryannonceventeController extends Controller
     {
         $this->validate($request,[
             'name'=> "required|string|min:2|max:100|unique:categoryannonceventes,name,{$id}",
+            'label'=>'required|string|min:2|max:100',
         ]);
 
         $categoryannoncevente = categoryannoncevente::findOrFail($id);

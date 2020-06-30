@@ -61,6 +61,7 @@ class CategoryemployementController extends Controller
     {
         $this->validate($request,[
             'name'=>'required|string|min:2|max:100|unique:categoryemployments',
+            'label'=>'required|string|min:2|max:100',
             'photo'=> "required",
         ]);
 
@@ -120,6 +121,7 @@ class CategoryemployementController extends Controller
     {
         $this->validate($request,[
             'name'=> "required|string|min:2|max:100|unique:categoryemployments,name,{$id}",
+            'label'=>'required|string|min:2|max:100',
             'photo'=> "required",
         ]);
 

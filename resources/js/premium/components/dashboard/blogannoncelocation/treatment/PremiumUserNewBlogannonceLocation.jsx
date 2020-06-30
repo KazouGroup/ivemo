@@ -84,7 +84,7 @@ class PremiumUserNewBlogannonceLocation extends Component {
         }else{
             $.notify({
                     //,
-                    message: 'La fichier ne peut pas être supérieure à 15 MB'
+                    message: 'Le fichier ne peut pas être supérieure à 15 MB'
                 },
                 {
                     allow_dismiss: false,
@@ -132,7 +132,7 @@ class PremiumUserNewBlogannonceLocation extends Component {
             .then(() => {
                 $.notify({
                         //,
-                        message: 'Votre article de blogs a bien été crée'
+                        message: 'Votre article de blog a bien été crée'
                     },
                     {
                         allow_dismiss: false,
@@ -151,7 +151,7 @@ class PremiumUserNewBlogannonceLocation extends Component {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Something wrong. Try later...", {
+            $.notify("Ooops! Something wrong. Try later...", {
                 allow_dismiss: false,
                 type: 'danger',
                 animate: {
@@ -217,7 +217,6 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                 </div>
                             </div>
 
-
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="card">
@@ -274,7 +273,7 @@ class PremiumUserNewBlogannonceLocation extends Component {
 
                                                     <Row>
                                                         <div className="col-md-6">
-                                                            <label htmlFor="title">Estimer en temp <b>{this.state.red_time} min lecture</b></label>
+                                                            <label htmlFor="title">Estimer en temps <b>{this.state.red_time} min lecture</b></label>
                                                             <FormGroup>
                                                                 <Input id='red_time'
                                                                        type='number'
@@ -282,7 +281,7 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                                                        name='red_time'
                                                                        maxLength="20"
                                                                        minLength="1"
-                                                                       placeholder="Estimer un temp de lecture en min"
+                                                                       placeholder="Estimer un temps de lecture en min"
                                                                        aria-label="Estimer un temp de lecture "
                                                                        value={this.state.red_time || ''}
                                                                        required
@@ -356,13 +355,10 @@ class PremiumUserNewBlogannonceLocation extends Component {
                                                     </button>
                                                 </div>
                                             </form>
-
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 

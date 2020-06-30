@@ -55,7 +55,7 @@ class Navemployements extends Component {
                         <table>
                             <tbody>
 
-                            {categoryemployments.length > 0 ?
+                            {categoryemployments.length >= 0 ?
 
                                     <Fragment>
                                         {categoryemployments.map((item) => (

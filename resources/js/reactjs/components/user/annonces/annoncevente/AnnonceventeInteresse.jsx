@@ -12,11 +12,76 @@ class AnnonceventeInteresse extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annonceventesinteresses: [],
-            isLoading: false,
+            annonceventesinteresses: { annoncetype: [], categoryannoncevente: [], city: [], user: [] },
             visiable: 2,
         };
         this.loadmoresItem = this.loadmoresItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
+    }
+
+    favoriteItem(id) {
+        const url = route('favoriteannonceventes_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('favoriteannonceventes_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce retirée de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
     }
 
     loadmoresItem(){
@@ -25,28 +90,29 @@ class AnnonceventeInteresse extends Component {
         })
     }
 
-    componentDidMount() {
-        this.setState({ isLoading: true });
+    loadItems(){
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
         let itemCityannonce = this.props.match.params.city;
         dyaxios.get(route('api.annonceventeinteresse_site', [itemannoncetype, itemCategoryannoncevente, itemCityannonce])).then(response =>
             this.setState({
                 annonceventesinteresses: [...response.data],
-                isLoading: false,
             }));
+    }
+    componentDidMount() {
+       this.loadItems();
     }
 
     render() {
-        const { annonceventesinteresses,visiable,isLoading } = this.state;
-        const mapAnnonceventesinteresses = isLoading ? (
-            <AnnoncesinteresseSkeleton/>
-        ):(
+        const { annonceventesinteresses,visiable } = this.state;
+        const mapAnnonceventesinteresses = annonceventesinteresses.length >= 0 ? (
             annonceventesinteresses.slice(0,visiable).map(item => {
                 return(
-                    <AnnonceventeInteresseList key={item.id} {...item}/>
+                    <AnnonceventeInteresseList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem}/>
                 )
             })
+        ) : (
+            <AnnoncesinteresseSkeleton />
         );
         return (
             <>

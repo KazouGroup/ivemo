@@ -34,7 +34,7 @@ class EmployementIndexSite extends Component {
         const url = route('employments_favorite.favorite', [id]);
         dyaxios.get(url).then(() => {
             $.notify({
-                    message: "Cette annonce a été ajoutée à vos favoris",
+                    message: "Annonce ajoutée à vos favoris",
                 },
                 {
                     allow_dismiss: false,
@@ -66,7 +66,7 @@ class EmployementIndexSite extends Component {
         const url = route('employments_unfavorite.unfavorite', [id]);
         dyaxios.get(url).then(() => {
             $.notify({
-                    message: "Cette annonce a été retiré de vos favoris",
+                    message: "Annonce retirée de vos favoris",
                 },
                 {
                     allow_dismiss: false,
@@ -109,6 +109,11 @@ class EmployementIndexSite extends Component {
         }).then((result) => {
             if (result.value) {
 
+                // remove from local state
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.employments.filter(isNotId);
+                this.setState({employments: updatedItems});
+
                 //Envoyer la requet au server
                 let url = route('employmentsunactivated_site',id);
                 dyaxios.get(url).then(() => {
@@ -130,10 +135,6 @@ class EmployementIndexSite extends Component {
                             },
                         });
                     /** End alert ***/
-                        // remove from local state
-                    let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.employments.filter(isNotId);
-                    this.setState({employments: updatedItems});
 
                 }).catch(() => {
                     //Failled message

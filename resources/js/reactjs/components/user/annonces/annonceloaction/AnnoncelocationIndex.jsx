@@ -24,10 +24,12 @@ class AnnoncelocationIndex extends Component {
             object: 'Annonce double',
             errors: [],
             annonceItem: { user: [] },
-            annoncelocations: { categoryannoncelocation: [], city: [], user: [] },
+            annoncelocations: {annoncetype: [], categoryannoncelocation: [], city: [], user: [] },
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
         this.signalemessageItem = this.signalemessageItem.bind(this);
@@ -81,6 +83,70 @@ class AnnoncelocationIndex extends Component {
         });
     }
 
+    favoriteItem(id) {
+        const url = route('favoriteannoncelocations_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('favoriteannoncelocations_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce retirée de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
     sendmessageItem(e) {
         e.preventDefault();
 
@@ -101,7 +167,7 @@ class AnnoncelocationIndex extends Component {
                 $('#contactNew').modal('hide');
 
                 $.notify({
-                    message: `Votre message a bien été envoyé à cette utilisateur`
+                    message: `Message bien envoyé à cette utilisateur`
                 },
                     {
                         allow_dismiss: false,
@@ -149,7 +215,7 @@ class AnnoncelocationIndex extends Component {
                 $('#addNew').modal('hide');
 
                 $.notify({
-                    message: `Cette annonce a été signalé avec succès`
+                    message: `Annonce signalé avec succès`
                 },
                     {
                         allow_dismiss: false,
@@ -191,19 +257,19 @@ class AnnoncelocationIndex extends Component {
         }).then((result) => {
             if (result.value) {
 
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.annoncelocations.filter(isNotId);
+                this.setState({ annoncelocations: updatedItems });
+
                 //Envoyer la requet au server
                 let url = route('annonces_locations_unactivated.site', id);
                 dyaxios.get(url).then(() => {
-
-                    let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.annoncelocations.filter(isNotId);
-                    this.setState({ annoncelocations: updatedItems });
 
                     /** Alert notify bootstrapp **/
                     $.notify({
 
                         //message: 'Annonce désactiver avec succès',
-                        message: "Cette annonce a été masquée au utilisateur",
+                        message: "Annonce masquée aux utilisateurs",
                     },
                         {
                             allow_dismiss: false,
@@ -248,14 +314,14 @@ class AnnoncelocationIndex extends Component {
         }).then((result) => {
             if (result.value) {
 
+
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.annoncelocations.filter(isNotId);
+                this.setState({ annoncelocations: updatedItems });
+
                 const url = route('annonces_locations_delete.site', [id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
-
-
-                    let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.annoncelocations.filter(isNotId);
-                    this.setState({ annoncelocations: updatedItems });
 
                     /** Alert notify bootstrapp **/
                     $.notify({
@@ -293,7 +359,7 @@ class AnnoncelocationIndex extends Component {
     loadItems() {
         let itemannoncetype = this.props.match.params.annoncetype;
         let url = route('api.annoncelocationbyannoncetype_site', itemannoncetype);
-        dyaxios.get(url).then(response => this.setState({ annoncelocations: response.data.data, }));
+        dyaxios.get(url).then(response => this.setState({ annoncelocations: response.data, }));
     }
 
     // lifecycle method
@@ -306,7 +372,7 @@ class AnnoncelocationIndex extends Component {
         const mapAnnoncelocations = annoncelocations.length >= 0 ? (
             annoncelocations.map(item => {
                 return (
-                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser} />
+                    <AnnonceslocationList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser} />
                 )
             })
         ) : (
@@ -325,7 +391,7 @@ class AnnoncelocationIndex extends Component {
                     </nav>
 
                     <div className="wrapper">
-                        <div className="page-header page-header-mini">
+                        <div className="page-header page-header-small">
                             <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
                             </div>
 
@@ -379,9 +445,9 @@ class AnnoncelocationIndex extends Component {
                                                             </div>
                                                             </div>
                                                         </div>
-                                                        
+
                                                     </div>
-                                                    
+
                                                 </form>
                                             </div>
                                         </div>

@@ -8,7 +8,7 @@ class Categoriesannoncereservation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            categoryannoncereservations : [],
+            categoryannoncereservations : {user:[]},
         }
     }
 
@@ -36,7 +36,7 @@ class Categoriesannoncereservation extends Component {
                     <tr key={item.id}>
                         <td>
                             <NavLink to={`/annonces_reservations/reservations/${item.slug}/`}>
-                                Reserver un(e) <b style={{ textTransform: "lowercase" }}>{item.name}</b>
+                                <b style={{ textTransform: "lowercase" }}>{item.name}</b>
                             </NavLink>
                         </td>
                         <td className="text-right"> {this.getcountcategoryannonceString(item.annoncereservations_count)} annonces</td>

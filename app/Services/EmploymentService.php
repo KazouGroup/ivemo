@@ -7,12 +7,16 @@ use App\Http\Resources\CategoryemployementResource;
 use App\Http\Resources\CityResource;
 use App\Http\Resources\EmploymentResource;
 use App\Jobs\ContactuserfornewemploymentJob;
+use App\Jobs\NewemployementJob;
+use App\Model\abonne\subscribemployment;
 use App\Model\categoryemployment;
 use App\Model\city;
 use App\Model\employment;
 use App\Model\subscriberuser;
+use App\Notifications\NewemployementNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use Intervention\Image\Facades\Image;
 use File;
 
@@ -28,7 +32,7 @@ class EmploymentService
 
     public static function apiemploymentsbycategory($categoryemployment)
     {
-        $employments = EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
+        $employments = EmploymentResource::collection($categoryemployment->employments()->with('user','city','categoryemployment','member')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereIn('categoryemployment_id',[$categoryemployment->id])
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
@@ -56,7 +60,7 @@ class EmploymentService
 
     public static function apiemploymentbycity($city)
     {
-        $employments = EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
+        $employments = EmploymentResource::collection($city->employments()->with('user','city','categoryemployment','member')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
@@ -123,6 +127,31 @@ class EmploymentService
             ->whereIn('categoryemployment_id',[$categoryemployment->id])
             ->with(['user.profile' => function ($q){$q->distinct()->get();},])
             ->where(['status' => 1,'status_admin' => 1])->first());
+
+        return $employment;
+    }
+
+    public static function apistatistique($user,$employment)
+    {
+
+        $employment = new EmploymentResource(employment::whereSlugin($employment)
+            ->withCount(['contactuseremployments' => function ($q) use ($user){
+                $q->with('employment','user')->whereIn('user_id',[$user->id]);},])
+            ->whereIn('user_id',[$user->id])
+            ->with(['contactuseremployments' => function ($q) use ($user){
+                $q->with('employment','user')
+                    ->whereIn('user_id',[$user->id])
+                    ->with(['employment.user' => function ($q){$q->distinct()->get();}])
+                    ->with(['employment.city' => function ($q){$q->distinct()->get();}])
+                    ->with(['employment.categoryemployment' => function ($q){$q->distinct()->get();}])
+                    ->orderBy('created_at','DESC')
+                    ->distinct()->get()
+                ;},
+            ])
+            ->with('user','city','categoryemployment','member')
+            ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->with(['user.profile' => function ($q){$q->distinct()->get();},])->first());
 
         return $employment;
     }
@@ -273,24 +302,16 @@ class EmploymentService
 
     public static function sendMessageToUser($request)
     {
-        $user = auth()->user();
+        $fromUser = auth()->user();
 
-        $emilSubscribers = subscriberuser::with('user')
-            ->whereIn('user_id',[$user->id])
+        $emailsubscribemployment = subscribemployment::with('user','member')
+            ->whereIn('member_id',[$fromUser->id])
             ->distinct()->get();
 
-        $subject = (config("app.name"))." New post de ".$user->first_name;
-        $message = $user->first_name.' a posté un nouveau article <a href="'.route('public_profile_employments.site', $user->slug).'" class="btn btn-xs btn-primary"> Voir plus</a>';
 
-        foreach ($emilSubscribers as $item) {
-                $to[] = $item->user_email;continue;
-        }
+        $emailuserJob = (new NewemployementJob($emailsubscribemployment,$fromUser));
 
-        $from = ['address' => $user->email , 'name' => $user->first_name];
-
-        $emailToUser = (new ContactuserfornewemploymentJob($subject,$message,$to,$from));
-
-        dispatch($emailToUser);
+        dispatch($emailuserJob);
 
     }
 

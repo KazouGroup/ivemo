@@ -6,7 +6,6 @@ import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import {Button, Form,Alert,Input} from "reactstrap";
 import Swal from "sweetalert2";
 import LinkValicationEmail from "../../inc/user/LinkValicationEmail";
-import Navemployements from "./inc/Navemployements";
 import NavannoncecategorySkeleton from "../../inc/user/NavannoncecategorySkeleton";
 import EmploymentListSkeleton from "../../inc/user/employment/EmploymentListSkeleton";
 import Navlinknewemployment from "./treatement/Navlinknewemployment";
@@ -36,7 +35,7 @@ class EmployementBycategoryemployementbycity extends Component {
         const url = route('employments_favorite.favorite', [id]);
         dyaxios.get(url).then(() => {
             $.notify({
-                    message: "Cette annonce a été ajoutée à vos favoris",
+                    message: "Annonce ajoutée à vos favoris",
                 },
                 {
                     allow_dismiss: false,
@@ -68,7 +67,7 @@ class EmployementBycategoryemployementbycity extends Component {
         const url = route('employments_unfavorite.unfavorite', [id]);
         dyaxios.get(url).then(() => {
             $.notify({
-                    message: "Cette annonce a été retiré de vos favoris",
+                    message: "Annonce retirée de vos favoris",
                 },
                 {
                     allow_dismiss: false,
@@ -111,14 +110,15 @@ class EmployementBycategoryemployementbycity extends Component {
         }).then((result) => {
             if (result.value) {
 
+                // remove from local state
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.employments.filter(isNotId);
+                this.setState({employments: updatedItems});
+
                 //Envoyer la requet au server
                 let url = route('employmentsunactivated_site',id);
                 dyaxios.get(url).then(() => {
 
-                    // remove from local state
-                    let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.employments.filter(isNotId);
-                    this.setState({employments: updatedItems});
                     /** Alert notify bootstrapp **/
                     $.notify({
                             message: "Cette offre a été masquée aux utilisateurs",
@@ -288,6 +288,11 @@ class EmployementBycategoryemployementbycity extends Component {
                                 <div className="row">
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
+                                        <div className="submit text-left">
+                                            <Link to={`/employments/`} className="btn btn-neutral btn-sm">
+                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour aux annonces</b>
+                                            </Link>
+                                        </div>
                                         {!$guest &&(
                                             <>
                                                 {!$userIvemo.email_verified_at &&(

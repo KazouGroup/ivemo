@@ -111,18 +111,14 @@ class ContactuserslocationService
 
     public static function newEmailToannoncelocationpageShow($request,$annoncelocation)
     {
-        $full_name = $request->get('full_name');
-        $phone = $request->get('phone');
-        $email = $request->get('email');
-        $subject = $request->get('subject');
-        $message = $request->get('message');
-        $to = $annoncelocation->user->email;
+        $fromFullnameUser = $request->get('full_name');
+        $fromPhoneUser = $request->get('phone');
+        $fromEmailUser = $request->get('email');
+        $fromSubjectUser = $request->get('subject');
+        $fromMessageUser = $request->get('message');
 
 
-        $from = ['address' => $request->get('email') , 'name' => $request->get('full_name')];
-
-        $emailToUser = (new ContactuserlocationJob($full_name,$phone,$email,$subject,$message,$to,$from));
-
+        $emailToUser = (new ContactuserlocationJob($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$annoncelocation));
 
         dispatch($emailToUser);
     }

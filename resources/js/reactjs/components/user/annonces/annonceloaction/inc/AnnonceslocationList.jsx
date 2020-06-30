@@ -1,11 +1,12 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Remarkable } from 'remarkable';
 import { Button,UncontrolledTooltip } from "reactstrap";
 import moment from "moment";
+import Skeleton from "react-loading-skeleton";
 
 
-class AnnonceslocationList extends Component {
+class AnnonceslocationList extends PureComponent {
 
 
     getDescription() {
@@ -64,6 +65,14 @@ class AnnonceslocationList extends Component {
                                                                 </button>
                                                             </>
                                                         }
+
+                                                        <NavLink to={`/annonce_location/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
+                                                            <i className="now-ui-icons ui-2_settings-90"/>
+                                                        </NavLink>
+                                                        <Button
+                                                            className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} title="Supprimer cette annonce">
+                                                            <i className="now-ui-icons ui-1_simple-remove"/>
+                                                        </Button>{" "}
                                                     </>
                                                 )}
                                             </>
@@ -101,7 +110,7 @@ class AnnonceslocationList extends Component {
                                         </NavLink>
                                     </div>
                                     <div className="text-right ml-auto">
-                                        <h5 className="text-success"><b>{this.props.price.formatMoney(2,'.',',') || "0"} <small>FCFA/mois</small></b></h5>
+                                        <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',') || "0"} <small><b>FCFA - le mois</b></small></b></h5>
                                     </div>
                                     <div className="row">
                                         <div className="col-md-5 col-6">
@@ -126,9 +135,14 @@ class AnnonceslocationList extends Component {
                                     </Link>
                                     <div className="card-header d-flex align-items-center">
                                         <div className="d-flex align-items-center">
-                                            <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`}>
-                                                <img src={this.props.user.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
-                                            </NavLink>
+                                            {this.props.user.avatar ?
+                                                <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`}>
+                                                    <img src={this.props.user.avatar}
+                                                         style={{ height: "40px", width: "80px" }}
+                                                         alt={this.props.user.first_name}
+                                                         className="avatar" />
+                                                </NavLink>
+                                                : <Skeleton circle={false} height={40} width={80} />}
                                             <div className="mx-3">
                                                 <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
                                                     <small className="d-block text-muted"><b>{moment(this.props.created_at).format('LL')}</b></small>
@@ -137,6 +151,34 @@ class AnnonceslocationList extends Component {
                                         </div>
 
                                         <div className="text-right mx-auto">
+
+                                            {$guest ?
+
+                                                <Button  data-toggle="modal" data-target="#loginModal"
+                                                         className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                    <i className="far fa-bookmark"></i>
+                                                </Button>
+                                                :
+                                                <>
+                                                    {this.props.bookmarked ?
+
+                                                        <>
+                                                            <Button onClick={() => this.props.unfavoriteItem(this.props.id)}
+                                                                    className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
+                                                                <i className="fas fa-bookmark"></i>
+                                                            </Button>
+                                                        </>
+
+                                                        :
+                                                        <>
+                                                            <Button onClick={() => this.props.favoriteItem(this.props.id)}
+                                                                    className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                                <i className="far fa-bookmark"></i>
+                                                            </Button>
+                                                        </>
+                                                    }
+                                                </>
+                                            }
 
                                             <Button className="btn btn-icon btn-sm btn-warning" onClick={() => this.props.contactUser(this.props)} title={`Contacter ${this.props.user.first_name}`}>
                                                 <i className="far fa-envelope"/>
@@ -150,23 +192,6 @@ class AnnonceslocationList extends Component {
                                                 <i className="now-ui-icons location_pin"/>
                                             </NavLink>
                                             */}
-                                            {!$guest && (
-                                                <>
-                                                    {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
-                                                        <>
-
-                                                            <NavLink to={`/annonce_location/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
-                                                                <i className="now-ui-icons ui-2_settings-90"/>
-                                                            </NavLink>
-                                                            <Button
-                                                                className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} title="Supprimer cette annonce">
-                                                                <i className="now-ui-icons ui-1_simple-remove"/>
-                                                            </Button>{" "}
-                                                        </>
-                                                    )}
-
-                                                </>
-                                            )}
                                         </div>
                                     </div>
                                 </div>

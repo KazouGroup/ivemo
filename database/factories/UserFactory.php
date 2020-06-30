@@ -28,6 +28,7 @@ $factory->define(user::class, function (Faker $faker) {
         'birthday' => now(),
         'email' => $faker->unique()->freeEmail,
         'status_user' => $faker->boolean,
+        'status_profile' => mt_rand(0, 1),
         'color_name' => color::inRandomOrder()->first()->name,
         'email_verified_at' => $faker->dateTime,
         'avatar' => $faker->imageUrl($width = 200, $height = 123),

@@ -5,6 +5,7 @@
 use App\Model;
 use App\Model\annoncereservation;
 use App\Model\categoryannoncereservation;
+use App\Model\periodeannonce;
 use App\Model\city;
 use App\Model\user;
 use Faker\Generator as Faker;
@@ -16,18 +17,29 @@ $factory->define(annoncereservation::class, function (Faker $faker) {
     return [
         'title' => $title,
         'district' => $faker->city,
-        'status' => $faker->boolean,
-        'status_admin' => $faker->boolean,
-        'description' => $faker->realText(rand(100, 200)),
-        'price' => $faker->randomNumber(7),
+        'status' => true,
+        'price' => $faker->randomNumber(5),
+        'surface' => $faker->randomNumber(2),
+        'rooms' => $faker->randomDigitNot(3),
+        'pieces' => $faker->randomDigitNot(3),
+        'status_wifi' => $faker->boolean,
+        'status_car_sharing' => $faker->boolean,
+        'status_parking' => $faker->boolean,
+        'status_lunch' => $faker->boolean,
+        'status_consiegerie' => $faker->boolean,
+        'dry_cleaning' => $faker->boolean,
+        //'status_admin' => $faker->boolean,
+        'description' => "<p>".$faker->realText(rand(1000, 2000))."</p>",
+        'promo_price' => $faker->randomNumber(6),
         'disponible_date' => $disponible_date,
         'annoncetype_id' => 3,
         'slug' => str_slug($title),
         'slugin' => Str::uuid(),
 
         'categoryannoncereservation_id' => categoryannoncereservation::inRandomOrder()->first()->id,
-        'city_id' => city::inRandomOrder()->first()->id,
+        'periodeannonce_id' => periodeannonce::inRandomOrder()->first()->id,
+        'city_id' => city::where(['status' => 1])->inRandomOrder()->first()->id,
         'user_id' => user::inRandomOrder()->first()->id,
-        //'created_at' => $faker->dateTime,
+        'created_at' => $faker->dateTime,
     ];
 });

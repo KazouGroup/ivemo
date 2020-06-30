@@ -11,6 +11,7 @@ import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
 import Navlinknewannoncevente from "./treatment/Navlinknewannoncevente";
 import HelmetSite from "../../../inc/user/HelmetSite";
+import AnnonceslocationList from "../annonceloaction/inc/AnnonceslocationList";
 
 
 class AnnonceventeIndex extends Component {
@@ -27,6 +28,9 @@ class AnnonceventeIndex extends Component {
             annonceventes: { annoncetype: [], categoryannoncevente: [], city: [], user: [] },
         };
 
+
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
         this.signalemessageItem = this.signalemessageItem.bind(this);
@@ -65,6 +69,70 @@ class AnnonceventeIndex extends Component {
                 </span>
             )
         }
+    }
+
+    favoriteItem(id) {
+        const url = route('favoriteannonceventes_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('favoriteannonceventes_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce retirée de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
     }
 
     signalerUser(item) {
@@ -192,13 +260,14 @@ class AnnonceventeIndex extends Component {
         }).then((result) => {
             if (result.value) {
 
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.annonceventes.filter(isNotId);
+                this.setState({ annonceventes: updatedItems });
+
                 //Envoyer la requet au server
                 let url = route('annonces_ventes_unactivated.site', id);
                 dyaxios.get(url).then(() => {
 
-                    let isNotId = item => item.id !== id;
-                    let updatedItems = this.state.annonceventes.filter(isNotId);
-                    this.setState({ annonceventes: updatedItems });
                     /** Alert notify bootstrapp **/
                     $.notify({
 
@@ -236,7 +305,7 @@ class AnnonceventeIndex extends Component {
     loadItems() {
         let itemAnnoncevente = this.props.match.params.annoncetype;
         let url = route('api.annonceventebyannoncetype_site', itemAnnoncevente);
-        dyaxios.get(url).then(response => this.setState({ annonceventes: response.data.data }));
+        dyaxios.get(url).then(response => this.setState({ annonceventes: response.data }));
     }
     // lifecycle method
     componentDidMount() {
@@ -248,7 +317,7 @@ class AnnonceventeIndex extends Component {
         const mapAnnonceventes = annonceventes.length >= 0 ? (
             annonceventes.map(item => {
                 return (
-                    <AnnonceventeList key={item.id} {...item} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser} />
+                    <AnnonceventeList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser} />
                 )
             })
         ) : (

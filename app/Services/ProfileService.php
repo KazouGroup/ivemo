@@ -4,10 +4,19 @@
 namespace App\Services;
 
 
+use App\Http\Resources\AnnoncereservationResource;
+use App\Http\Resources\BlogannoncelocationResource;
+use App\Http\Resources\BlogannoncereservationResource;
+use App\Http\Resources\BlogannonceventeResource;
+use App\Http\Resources\EmploymentResource;
 use App\Http\Resources\FaqResource;
 use App\Jobs\ConfirmreservationJob;
+use App\Model\blogannoncelocation;
+use App\Model\blogannoncereservation;
+use App\Model\blogannoncevente;
 use App\Model\categoryfaq;
 use App\Model\contactuser;
+use App\Model\employment;
 use App\Model\faq;
 use App\Model\reservation;
 use App\Model\user;
@@ -30,6 +39,53 @@ class ProfileService
 
     }
 
+
+    public static function apiprofilepublique($user)
+    {
+        $user =  user::whereSlug($user->slug)
+            ->withCount(['annoncelocations' => function ($q) use ($user){
+                $q ->where(['status_admin' => 1])
+                    ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+                    ->whereHas('city', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[$user->id]);
+            }])
+            ->withCount(['annoncereservations' => function ($q) use ($user){
+                $q ->where(['status_admin' => 1])
+                    ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
+                    ->whereHas('city', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[$user->id]);
+            }])
+            ->withCount(['annonceventes' => function ($q) use ($user){
+                $q ->where(['status_admin' => 1])
+                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+                    ->whereHas('city', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[$user->id]);
+            }])
+            ->withCount(['employments' => function ($q) use ($user){
+                $q->where(['status_admin' => 1])
+                    ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
+                    ->whereHas('city', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[$user->id]);
+            }])
+            ->withCount(['blogannoncelocations' => function ($q) use ($user){
+                $q ->where(['status_admin' => 1])
+                    ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[$user->id]);
+            }])
+            ->withCount(['blogannoncereservations' => function ($q) use ($user){
+                $q ->where(['status_admin' => 1])
+                    ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[$user->id]);
+            }])
+            ->withCount(['blogannonceventes' => function ($q) use ($user){
+                $q ->where(['status_admin' => 1])
+                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[$user->id]);
+            }])
+            ->first();
+
+        return $user;
+    }
 
     public static function apipersonalmessagesannonces_reservations()
     {
@@ -74,46 +130,36 @@ class ProfileService
 
     public static function apiprofilannoncereservations($user)
     {
-        $personnalreservations = HelpersService::helpersdatabyuseractive($user)
-            ->with(['annoncereservations' => function ($q) use ($user){
-                $q->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
-                    ->whereIn('annoncetype_id',[3])
-                    ->whereIn('user_id',[$user->id])
-                    ->where(['status' => 1,'status_admin' => 1])->distinct()->get()->toArray()
-                ;},
-            ])->first();
+        $personnalreservations = AnnoncereservationResource::collection($user->annoncereservations()
+            ->whereIn('user_id',[$user->id])
+            ->where(['status' => 1,'status_admin' => 1])
+            ->whereIn('annoncetype_id',[3])
+            ->with('user','categoryannoncereservation','city','annoncetype','imagereservations')
+            ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->distinct()->paginate(10));
 
         return $personnalreservations;
     }
 
     public static function apiprofilblogannoncereservations($user)
     {
-        $personnalblogannonces = HelpersService::helpersdatabyuseractive($user)
-            ->with(['blogannoncereservations' => function ($q) use ($user){
-                $q->with('user','categoryannoncereservation')
-                    ->whereIn('user_id',[$user->id])
-                    ->where(['status' => 1,'status_admin' => 1])
-                    ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
-                    ->distinct()->get()->toArray()
-                ;},
-            ])
-            ->first();
+        $personnalblogannonces = BlogannoncereservationResource::collection(blogannoncereservation::with('user','categoryannoncereservation')
+            ->whereIn('user_id',[$user->id])
+            ->where(['status' => 1,'status_admin' => 1])
+            ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
+            ->distinct()->get());
 
         return $personnalblogannonces;
     }
 
     public static function apiprofilblogannonceventes($user)
     {
-        $personnalblogannonces = HelpersService::helpersdatabyuseractive($user)
-            ->with(['blogannonceventes' => function ($q) use ($user){
-                $q->with('user','categoryannoncevente')
-                    ->whereIn('user_id',[$user->id])
-                    ->where(['status' => 1,'status_admin' => 1])
-                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-                    ->distinct()->get()->toArray()
-                ;},
-            ])
-            ->first();
+        $personnalblogannonces = BlogannonceventeResource::collection(blogannoncevente::with('user','categoryannoncevente')
+            ->whereIn('user_id',[$user->id])
+            ->where(['status' => 1,'status_admin' => 1])
+            ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+            ->distinct()->get());
 
         return $personnalblogannonces;
     }
@@ -121,15 +167,10 @@ class ProfileService
 
     public static function apiprofilblogannoncelocations($user)
     {
-        $personnalblogannonces = HelpersService::helpersdatabyuseractive($user)
-            ->with(['blogannoncelocations' => function ($q) use ($user){
-                $q->with('user','categoryannoncelocation')
-                    ->whereIn('user_id',[$user->id])
-                    ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
-                    ->where(['status' => 1,'status_admin' => 1])->distinct()->get()->toArray()
-                ;},
-            ])
-            ->first();
+        $personnalblogannonces = BlogannoncelocationResource::collection(blogannoncelocation::with('user','categoryannoncelocation')
+            ->whereIn('user_id',[$user->id])
+            ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+            ->where(['status' => 1,'status_admin' => 1])->distinct()->get());
 
         return $personnalblogannonces;
     }
@@ -170,16 +211,11 @@ class ProfileService
 
     public static function apiprofilemployments($user)
     {
-        $employments = HelpersService::helpersdatabyuseractive($user)
-            ->with(['employments' => function ($q) use ($user){
-                $q->with('user','city','categoryemployment','member')
+        $employments = EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
                     ->whereIn('user_id',[$user->id])
                     ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);})
-                    ->where(['status' => 1,'status_admin' => 1])->distinct()->get()->toArray()
-                ;},
-            ])
-            ->first();
+                    ->where(['status' => 1,'status_admin' => 1])->distinct()->get());
 
         return $employments;
     }

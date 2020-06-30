@@ -22,6 +22,7 @@ class CreateLicencesitesTable extends Migration
             $table->longText('body')->nullable();
             $table->string('ip')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unsignedBigInteger('user_id')->index();
         });

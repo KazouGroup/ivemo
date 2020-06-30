@@ -25,10 +25,13 @@ class Annoncebycategoryannoncevente extends Component {
             object: 'Annonce double',
             errors: [],
             annonceItem: { user: [] },
-            annonceventebycategory: { annonceventes: { annoncetype: [], categoryannoncevente: [], city: [], user: [] } },
+            annonceventebycategory: [] ,
             cityannonceventes: { user: [] },
+            annonceventes: { annoncetype: [], categoryannoncevente: [], city: [], user: [] }
         };
         this.deleteItem = this.deleteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
         this.signalemessageItem = this.signalemessageItem.bind(this);
@@ -66,6 +69,70 @@ class Annoncebycategoryannoncevente extends Component {
                 </span>
             )
         }
+    }
+
+    favoriteItem(id) {
+        const url = route('favoriteannonceventes_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('favoriteannonceventes_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce retirée de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
     }
 
     signalerUser(item) {
@@ -177,15 +244,6 @@ class Annoncebycategoryannoncevente extends Component {
             })
     }
 
-    loadItems() {
-        let itemannoncetype = this.props.match.params.annoncetype;
-        let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
-        let url = route('api.annonceventebycategoryannonceventes_site', [itemannoncetype, itemCategoryannoncevente]);
-        dyaxios.get(url).then(response => this.setState({ annonceventebycategory: response.data }));
-        let url1 = route('api.annonceventebycategorycitycount_site', [itemCategoryannoncevente]);
-        dyaxios.get(url1).then(response => this.setState({ cityannonceventes: response.data, }));
-
-    }
     unactiveItem(id) {
         Swal.fire({
             title: 'Désactiver l\'annonce?',
@@ -200,6 +258,10 @@ class Annoncebycategoryannoncevente extends Component {
             reverseButtons: true,
         }).then((result) => {
             if (result.value) {
+
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.annonceventes.filter(isNotId);
+                this.setState({ annonceventes: updatedItems });
 
                 //Envoyer la requet au server
                 let url = route('annonces_ventes_unactivated.site', id);
@@ -254,6 +316,10 @@ class Annoncebycategoryannoncevente extends Component {
         }).then((result) => {
             if (result.value) {
 
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.annonceventes.filter(isNotId);
+                this.setState({ annonceventes: updatedItems });
+
                 const url = route('annonces_ventes_delete.site', id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
@@ -293,6 +359,17 @@ class Annoncebycategoryannoncevente extends Component {
         });
     }
 
+
+    loadItems() {
+        let itemannoncetype = this.props.match.params.annoncetype;
+        let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
+        dyaxios.get(route('api.annonceventebycategoryannonceventes_site', [itemannoncetype, itemCategoryannoncevente])).then(response => this.setState({ annonceventes: response.data }));
+        dyaxios.get(route('api.annonceventebycategoryannonceventescount_site', [itemannoncetype, itemCategoryannoncevente])).then(response => this.setState({ annonceventebycategory: response.data }));
+        let url1 = route('api.annonceventebycategorycitycount_site', [itemCategoryannoncevente]);
+        dyaxios.get(url1).then(response => this.setState({ cityannonceventes: response.data, }));
+
+    }
+
     // lifecycle method
     componentDidMount() {
         this.loadItems();
@@ -309,11 +386,11 @@ class Annoncebycategoryannoncevente extends Component {
         return (annonceventes_count / 1000).toFixed(annonceventes_count % 1000 !== 0) + 'k';
     }
     render() {
-        const { annonceventebycategory, cityannonceventes, annonceItem } = this.state;
-        const mapAnnonceventes = annonceventebycategory.annonceventes.length >= 0 ? (
-            annonceventebycategory.annonceventes.map(item => {
+        const { annonceventes,annonceventebycategory, cityannonceventes, annonceItem } = this.state;
+        const mapAnnonceventes = annonceventes.length >= 0 ? (
+            annonceventes.map(item => {
                 return (
-                    <AnnonceventeList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser} />
+                    <AnnonceventeList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser} />
                 )
             })
         ) : (

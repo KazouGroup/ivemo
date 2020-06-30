@@ -21,8 +21,92 @@ class Annonceventebycategorycityshow extends Component {
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
 
+    }
+
+    favoriteItem(id) {
+        const url = route('favoriteannonceventes_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('favoriteannonceventes_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce retirée de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    copyToClipboard(){
+        navigator.clipboard.writeText(window.location.toString());
+        $.notify({
+            message: "Lien copié correctement avec succès",
+        },{
+            allow_dismiss: false,
+            type: 'success',
+            placement: {
+                from: 'top',
+                align: 'center'
+            },
+            animate: {
+                enter: "animate__animated animate__fadeInDown",
+                exit: "animate__animated animate__fadeOutUp"
+            },
+        });
     }
 
     unactiveItem(id){
@@ -133,8 +217,7 @@ class Annonceventebycategorycityshow extends Component {
         });
     }
 
-    // lifecycle method
-    componentDidMount() {
+    loadItems(){
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
         let itemcityannonce = this.props.match.params.city;
@@ -142,6 +225,11 @@ class Annonceventebycategorycityshow extends Component {
         /*Ici c'est pour recuperer les annonce par villes*/
         let url = route('api.annonceventebycategoryannonceventeslug_site',[itemannoncetype,itemCategoryannoncevente,itemcityannonce,itemannoncevente]);
         dyaxios.get(url).then(response => this.setState({annoncevente: response.data,}));
+    }
+
+    // lifecycle method
+    componentDidMount() {
+        this.loadItems();
     }
 
     getDescription(annoncevente) {
@@ -223,11 +311,40 @@ class Annonceventebycategorycityshow extends Component {
 
                                                 <div className="text-right ml-auto">
                                                 {annoncevente.price ?
-                                                        <h5 className="text-success"><b>{annoncevente.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h5>
+                                                        <h5 className="text-dark"><b>{annoncevente.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h5>
                                                         :
                                                         null
                                                     }
                                                 </div>
+                                            </div>
+
+                                            <div className="text-center">
+                                                {$guest ?
+                                                    <Button data-toggle="modal" data-target="#loginModal"
+                                                            className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
+                                                        <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
+                                                    </Button>
+                                                    :
+                                                    <>
+                                                        {annoncevente.bookmarked ?
+
+                                                            <>
+                                                                <Button onClick={() => this.unfavoriteItem(annoncevente.id)}
+                                                                        className="btn btn-danger btn-sm" title="Retirer de vos favoris">
+                                                                    <i className="fas fa-bookmark"></i> <b>Sauvegardé</b>
+                                                                </Button>
+                                                            </>
+
+                                                            :
+                                                            <>
+                                                                <Button onClick={() => this.favoriteItem(annoncevente.id)}
+                                                                        className="btn btn-facebook btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                                    <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
+                                                                </Button>
+                                                            </>
+                                                        }
+                                                    </>
+                                                }
                                             </div>
 
                                         </div>
@@ -244,9 +361,33 @@ class Annonceventebycategorycityshow extends Component {
                                         </div>
 
                                         <div className="card">
+                                            <div className="social-line social-line-big-icons">
+                                                <div className="container">
+                                                    <div className="row">
+                                                        <div className="col-md-6">
+                                                            <h5 className="info-title"><b>Ce bien est au prix de</b></h5>
+                                                            {annoncevente.price ?
+                                                                <h3 className="text-success"><b>{annoncevente.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h3>
+                                                                :
+                                                                <h5 className="text-success"><b><Skeleton width={250} /></b></h5>
+                                                            }
+                                                        </div>
+                                                        <div className="col-md-6">
+                                                            <h5 className="info-title"><b>Informations suplementaires</b></h5>
+                                                            <p>
+                                                                <b>Ce bien revient a :</b>
+                                                                <span className="title text-dark"><b> {annoncevente.award_price ? <>{annoncevente.award_price.formatMoney(2,'.',',')} <small>FCFA/m<sup>2</sup></small></>:null} </b></span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="card">
                                             <div className="card-body">
 
-                                                <ProfileForallAnnonceventeShow {...annoncevente} unactiveItem={this.unactiveItem}/>
+                                                <ProfileForallAnnonceventeShow {...annoncevente} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} unactiveItem={this.unactiveItem} copyToClipboard={this.copyToClipboard}/>
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">

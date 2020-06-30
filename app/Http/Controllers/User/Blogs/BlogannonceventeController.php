@@ -31,11 +31,11 @@ class BlogannonceventeController extends Controller
 
     public function apiannonceblogresevente()
     {
-        $blogannoncereseventes = blogannoncevente::with('user','categoryannoncevente','member')
+        $blogannoncereseventes = BlogannonceventeResource::collection(blogannoncevente::with('user','categoryannoncevente','member')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')
-            ->distinct()->paginate(40);
+            ->distinct()->paginate(40));
 
         return response()->json($blogannoncereseventes, 200);
     }
@@ -52,6 +52,13 @@ class BlogannonceventeController extends Controller
         return response()->json($blogannoncereseventes, 200);
     }
 
+    public function apiannonceblogcategoryventecount(categoryannoncevente $categoryannoncevente)
+    {
+        $blogannoncereseventes = BlogannonceventeService::apiannonceblogcategoryventecount($categoryannoncevente);
+
+        return response()->json($blogannoncereseventes, 200);
+    }
+
     public function apiblogannoncesventescategoryannonceventebyuser(user $user,categoryannoncevente $categoryannoncevente)
     {
         $blogannoncereseventes = BlogannonceventeService::apiblogannoncesventescategoryannonceventebyuser($user,$categoryannoncevente);
@@ -61,13 +68,13 @@ class BlogannonceventeController extends Controller
 
     public function apiblogannonceventeinteresse(categoryannoncevente $categoryannoncevente)
     {
-        $blogannoncereseventes = $categoryannoncevente->blogannonceventes()
+        $blogannoncereseventes = BlogannonceventeResource::collection($categoryannoncevente->blogannonceventes()
             ->with('user','categoryannoncevente','member')
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
-            ->orderByRaw('RAND()')
+            ->orderBy('created_at','DESC')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-            ->take(3)->distinct()->get();
+            ->take(3)->distinct()->get());
         return response()->json($blogannoncereseventes, 200);
     }
 

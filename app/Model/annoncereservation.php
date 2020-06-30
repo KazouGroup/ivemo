@@ -2,8 +2,10 @@
 
 namespace App\Model;
 
+use App\Model\favorite\favoriteannoncereservation;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class annoncereservation extends Model
@@ -55,6 +57,11 @@ class annoncereservation extends Model
         return $this->belongsTo(city::class,'city_id');
     }
 
+    public function periodeannonce()
+    {
+        return $this->belongsTo(periodeannonce::class,'periodeannonce_id');
+    }
+
     public function annoncetype()
     {
         return $this->belongsTo(annoncetype::class,'annoncetype_id');
@@ -68,6 +75,12 @@ class annoncereservation extends Model
     protected $casts = [
         'status' => 'boolean',
         'status_admin' => 'boolean',
+        'status_wifi' => 'boolean',
+        'status_parking' => 'boolean',
+        'status_lunch' => 'boolean',
+        'status_car_sharing' => 'boolean',
+        'dry_cleaning' => 'boolean',
+        'status_consiegerie' => 'boolean',
     ];
 
     use Sluggable;
@@ -87,6 +100,11 @@ class annoncereservation extends Model
         ];
     }
 
+    public function comments()
+    {
+        return $this->morphMany(comment::class ,'commentable');
+    }
+
     public function reservations()
     {
         return $this->hasMany(reservation::class, 'annoncereservation_id');
@@ -100,5 +118,12 @@ class annoncereservation extends Model
     public function signalannoncereservations()
     {
         return $this->hasMany(signalannoncereservation::class, 'annoncereservation_id');
+    }
+
+    public function bookmarked()
+    {
+        return (bool) favoriteannoncereservation::where('user_id', Auth::guard('web')->id())
+            ->where('annoncereservation_id', $this->id)
+            ->first();
     }
 }

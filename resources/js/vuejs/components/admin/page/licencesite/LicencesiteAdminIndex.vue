@@ -134,7 +134,7 @@
 </template>
 
 <script>
-    import LoaderLdsDefault from "../../../../dashboard_user/components/inc/annimation/LoaderLdsDefault";
+    import LoaderLdsDefault from "../../user/dashboard_user/components/inc/annimation/LoaderLdsDefault";
     export default {
         components: {LoaderLdsDefault},
         data() {
@@ -252,7 +252,7 @@
             },
 
 
-            deleteItem(id){
+            deleteItem(item){
                 Swal.fire({
                     title: 'Delete Data',
                     text: "Are you sure you want to delete this Data?",
@@ -267,8 +267,12 @@
                     if (result.value) {
                         //Start Progress bar
                         this.$Progress.start();
+
+                        let index = this.licencesites.indexOf(item);
+                        this.licencesites.splice(index, 1);
+
                         //Envoyer la requete au server
-                        let url = route('licencesites.destroy',id);
+                        let url = route('licencesites.destroy',item.id);
                         dyaxios.delete(url).then(() => {
                             /** Alert notify bootstrapp **/
                             $.notify({

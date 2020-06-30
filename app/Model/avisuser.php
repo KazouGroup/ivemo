@@ -41,4 +41,9 @@ class avisuser extends Model
             }
         });
     }
+
+    public function responseavisusers()
+    {
+        return $this->hasMany(responseavisuser::class, 'avisuser_id');
+    }
 }

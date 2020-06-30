@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Button,UncontrolledTooltip } from "reactstrap";
 import moment from "moment";
 import LazyLoad from "react-lazyload";
 
 
-class BlogannonceventeList extends Component {
+class BlogannonceventeList extends PureComponent {
 
 
     getDescription() {
@@ -58,48 +58,72 @@ class BlogannonceventeList extends Component {
                                 <div className="card-image">
                                     <a target="_blank" href={`/blogs/annonce_ventes/${this.props.categoryannoncevente.slug}/${moment(this.props.created_at).format('YYYY-MM-DD')}/${this.props.slug}/`}>
                                         <LazyLoad>
-                                            <img className="img img-raised rounded"
+                                            <img className="img rounded"
                                                  src={this.props.photo} alt={this.props.title}/>
                                         </LazyLoad>
                                     </a>
                                 </div>
-                                <div className="text-right">
-                                    <a style={{ cursor: "pointer" }} onClick={() => this.props.signalerUser(this.props)} className="nav-item">
-                                        <i className="far fa-flag"></i>
-                                    </a>
+                                <div className="text-center">
+
+                                    {$guest ?
+                                        <Button  data-toggle="modal" data-target="#loginModal"
+                                                 className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                            <i className="far fa-bookmark"></i>
+                                        </Button>
+                                        :
+                                        <>
+                                            {this.props.bookmarked ?
+
+                                                <>
+                                                    <Button onClick={() => this.props.unfavoriteItem(this.props.id)}
+                                                            className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
+                                                        <i className="fas fa-bookmark"></i>
+                                                    </Button>
+                                                </>
+
+                                                :
+                                                <>
+                                                    <Button onClick={() => this.props.favoriteItem(this.props.id)}
+                                                            className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                        <i className="far fa-bookmark"></i>
+                                                    </Button>
+                                                </>
+                                            }
+
+                                            {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
+                                                <>
+                                                    {this.props.status ?
+                                                        <>
+                                                            <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}
+                                                                    className="btn btn-success btn-icon btn-sm" title="Desactiver l'article">
+                                                                <i className="now-ui-icons ui-1_check"/>
+                                                            </button>
+                                                        </>
+                                                        :
+                                                        <>
+                                                            <button type="button" onClick={() => this.props.activeItem(this.props.id)}
+                                                                    className="btn btn-primary btn-icon btn-sm" title="Activer l'article">
+                                                                <i className="now-ui-icons ui-1_simple-delete"/>
+                                                            </button>
+                                                        </>
+                                                    }
+                                                    <NavLink to={`/blogs/annonce_ventes/${this.props.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" title=" Editer l'article">
+                                                        <i className="now-ui-icons ui-2_settings-90"/>
+                                                    </NavLink>
+                                                    <Button
+                                                        className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} title="Supprimer cette article">
+                                                        <i className="now-ui-icons ui-1_simple-remove"/>
+                                                    </Button>{" "}
+                                                </>
+                                            )}
+
+                                        </>
+                                    }
+                                    <Button  title="Signaler cette article" onClick={() => this.props.signalerUser(this.props)}
+                                             className="btn btn-instagram btn-icon btn-sm">
+                                        <i className="fas fa-flag"></i>
+                                    </Button>
                                 </div>
-                                {!$guest &&(
-                                    <>
-                                        {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
-                                            <div className="text-center">
-                                                {this.props.status ?
-                                                    <>
-                                                        <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}
-                                                                className="btn btn-success btn-icon btn-sm" title="Desactiver l'article">
-                                                            <i className="now-ui-icons ui-1_check"/>
-                                                        </button>
-                                                    </>
-                                                    :
-                                                    <>
-                                                        <button type="button" onClick={() => this.props.activeItem(this.props.id)}
-                                                                className="btn btn-primary btn-icon btn-sm" title="Activer l'article">
-                                                            <i className="now-ui-icons ui-1_simple-delete"/>
-                                                        </button>
-                                                    </>
-                                                }
-                                                <NavLink to={`/blogs/annonce_ventes/${this.props.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" title=" Editer l'article">
-                                                    <i className="now-ui-icons ui-2_settings-90"/>
-                                                </NavLink>
-                                                <Button
-                                                    className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} title="Supprimer cette article">
-                                                    <i className="now-ui-icons ui-1_simple-remove"/>
-                                                </Button>{" "}
-                                            </div>
-                                        )}
-
-                                    </>
-                                )}
-
                             </div>
                         </div>
                     </div>

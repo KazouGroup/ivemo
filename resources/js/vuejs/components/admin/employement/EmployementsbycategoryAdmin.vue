@@ -109,12 +109,12 @@
                                 <div class="toolbar">
 
                                     <div  class="submit text-center">
-                                        <router-link  :to="{ name: 'employments.dashboard'}" class="btn btn-secondary btn-raised">
+                                        <button  @click="$router.go(-1)" class="btn btn-dark btn-raised">
                                                <span class="btn-label">
                                                 <i class="material-icons">keyboard_backspace</i>
                                               </span>
-                                            <b class="title_hover">Back</b>
-                                        </router-link>
+                                            <b class="title_hover">Retour</b>
+                                        </button>
                                     </div>
 
                                 </div>
@@ -143,7 +143,7 @@
                                         </tr>
                                         </tfoot>
                                         <tbody>
-                                        <tr v-for="(item,index) in categoryemployment.employments" :key="item.id">
+                                        <tr v-for="(item) in categoryemployment.employments" :key="item.id">
                                             <td>
                                                 {{ (item.title.length > 15 ? item.title.substring(0,15)+ "..." : item.title) | upText }}
                                             </td>
@@ -217,7 +217,7 @@
 </template>
 
 <script>
-    import LoaderLdsDefault from "../../../dashboard_user/components/inc/annimation/LoaderLdsDefault";
+    import LoaderLdsDefault from "../user/dashboard_user/components/inc/annimation/LoaderLdsDefault";
     export default {
         components: {LoaderLdsDefault},
         data() {

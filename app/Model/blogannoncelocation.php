@@ -2,7 +2,8 @@
 
 namespace App\Model;
 
-use App\Model\favorite\favoritebloglocation;
+use App\Model\favorite\favoriteblogannoncelocation;
+use App\Traits\Likesdata;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -13,12 +14,12 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class blogannoncelocation extends Model implements Auditable
 {
-    use AuditableTrait,LogsActivity;
+    use AuditableTrait,LogsActivity,Likesdata;
 
     protected $guarded = [];
 
     protected static $logAttributes = ['title','red_time','ip','status','status_admin','member_id'];
-    
+
     protected  $table = 'blogannoncelocations';
 
     protected static function boot()
@@ -84,6 +85,18 @@ class blogannoncelocation extends Model implements Auditable
             ]
 
         ];
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(comment::class ,'commentable');
+    }
+
+    public function bookmarked()
+    {
+        return (bool) favoriteblogannoncelocation::where('user_id', Auth::guard('web')->id())
+            ->where('blogannoncelocation_id', $this->id)
+            ->first();
     }
 
 }

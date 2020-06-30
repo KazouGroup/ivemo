@@ -22,6 +22,13 @@ class profile extends Model
     protected $casts = [
         'status_avis' => 'boolean',
         'status_team_user' => 'boolean',
+        'status_employments' => 'boolean',
+        'status_annonce_ventes' => 'boolean',
+        'status_annonce_locations' => 'boolean',
+        'status_annonce_reservations' => 'boolean',
+        'status_blog_locations' => 'boolean',
+        'status_blog_reservations' => 'boolean',
+        'status_blog_ventes' => 'boolean',
     ];
 
     public function user()

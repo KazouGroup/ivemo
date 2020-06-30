@@ -30,6 +30,7 @@ class CreateAnnonceventesTable extends Migration
             $table->boolean('status')->default(true);
             $table->boolean('status_admin')->default(true);
             $table->timestamps();
+            $table->softDeletes();
             $table->unsignedBigInteger('photo_id')->nullable()->index();
             $table->unsignedBigInteger('member_id')->nullable()->index();
             $table->unsignedBigInteger('city_id')->nullable()->index();

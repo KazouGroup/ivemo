@@ -25,6 +25,20 @@ class AnnonceventeService
 
     public static function apiannonceventebycategoryannoncevente($annoncetype,$categoryannoncevente)
     {
+        $annonceventes = AnnonceventeResource::collection($categoryannoncevente->annonceventes()
+            ->where(['status' => 1,'status_admin' => 1])
+            ->with('user','categoryannoncevente','city','annoncetype')
+            ->whereIn('annoncetype_id',[$annoncetype->id])
+            ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+            ->orderBy('created_at','DESC')->distinct()->paginate(40));
+
+        return $annonceventes;
+    }
+
+    public static function apiannonceventebycategoryannonceventecount($annoncetype,$categoryannoncevente)
+    {
         $annonceventes = categoryannoncevente::whereSlug($categoryannoncevente->slug)->where(['status' => 1])
             ->withCount(['annonceventes' => function ($q) use ($annoncetype,$categoryannoncevente){
                 $q->where(['status' => 1,'status_admin' => 1])
@@ -33,23 +47,29 @@ class AnnonceventeService
                     ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
                     ->whereHas('city', function ($q) {$q->where('status',1);})
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);});
-            }])
-            ->with([
-                'annonceventes' => function ($q) use ($annoncetype,$categoryannoncevente){
-                    $q->where(['status' => 1,'status_admin' => 1])
-                        ->with('user','categoryannoncevente','city','annoncetype')
-                        ->whereIn('annoncetype_id',[$annoncetype->id])
-                        ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
-                        ->whereHas('city', function ($q) {$q->where('status',1);})
-                        ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-                        ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();},
-            ])->first();
+            }])->first();
 
 
         return $annonceventes;
     }
 
     public static function apiannonceventebycity($annoncetype,$categoryannoncevente,$city)
+    {
+        $annonceventes = AnnonceventeResource::collection($city->annonceventes()
+            ->where(['status' => 1,'status_admin' => 1])
+            ->with('user','categoryannoncevente','city','annoncetype')
+            ->whereIn('annoncetype_id',[$annoncetype->id])
+            ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+            ->whereIn('city_id',[$city->id])
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+            ->orderBy('created_at','DESC')->distinct()->paginate(40));
+
+
+        return $annonceventes;
+    }
+
+    public static function apiannonceventebycitycount($annoncetype,$categoryannoncevente,$city)
     {
         $annonceventes = city::whereSlug($city->slug)->where('status',1)
             ->withCount(['annonceventes' => function ($q) use ($annoncetype,$categoryannoncevente,$city){
@@ -60,24 +80,13 @@ class AnnonceventeService
                     ->whereIn('city_id',[$city->id])
                     ->whereHas('city', function ($q) {$q->where('status',1);})
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);});
-            }])
-        ->with([
-            'annonceventes' => function ($q) use ($annoncetype,$categoryannoncevente,$city){
-                $q->where(['status' => 1,'status_admin' => 1])
-                    ->with('user','categoryannoncevente','city','annoncetype')
-                    ->whereIn('annoncetype_id',[$annoncetype->id])
-                    ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
-                    ->whereIn('city_id',[$city->id])
-                    ->whereHas('city', function ($q) {$q->where('status',1);})
-                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-                    ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();},
-        ])->first();
+            }])->first();
 
 
         return $annonceventes;
     }
 
-    public static function apiannonceventesbyannoncetypebycity($annoncetype,$city)
+    public static function apiannonceventesbyannoncetypebycitycount($annoncetype,$city)
     {
         $annonceventes = city::whereSlug($city->slug)->where('status',1)
             ->withCount(['annonceventes' => function ($q) use ($annoncetype,$city){
@@ -87,18 +96,22 @@ class AnnonceventeService
                     ->whereIn('city_id',[$city->id])
                     ->whereHas('city', function ($q) {$q->where('status',1);})
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);});
-            }])
-        ->with([
-            'annonceventes' => function ($q) use ($annoncetype,$city){
-                $q->where(['status' => 1,'status_admin' => 1])
-                    ->with('user','categoryannoncevente','city','annoncetype')
-                    ->whereIn('annoncetype_id',[$annoncetype->id])
-                    ->whereIn('city_id',[$city->id])
-                    ->whereHas('city', function ($q) {$q->where('status',1);})
-                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-                    ->orderBy('created_at','DESC')->distinct()->paginate(40)->toArray();},
-        ])->first();
+            }])->first();
 
+
+        return $annonceventes;
+    }
+
+    public static function apiannonceventesbyannoncetypebycity($annoncetype,$city)
+    {
+        $annonceventes = AnnonceventeResource::collection($city->annonceventes()
+            ->where(['status' => 1,'status_admin' => 1])
+            ->with('user','categoryannoncevente','city','annoncetype')
+            ->whereIn('annoncetype_id',[$annoncetype->id])
+            ->whereIn('city_id',[$city->id])
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+            ->orderBy('created_at','DESC')->distinct()->paginate(40));
 
         return $annonceventes;
     }

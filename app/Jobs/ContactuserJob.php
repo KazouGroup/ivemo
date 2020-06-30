@@ -2,44 +2,36 @@
 
 namespace App\Jobs;
 
-use App\Mail\ContactuserMail;
+use App\Notifications\ContactuserNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 
 class ContactuserJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $full_name;
-    protected $phone;
-    protected $emailuserFrom;
-    protected $subject;
-    protected $message;
-    protected $emailTo;
-    protected $emailFrom;
-
+    protected $fromFullnameUser;
+    protected $fromEmailUser;
+    protected $fromSubjectUser;
+    protected $fromMessageUser;
+    protected $user;
     /**
-     * Create a new job instance.
+     * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($full_name,$phone,$email,$subject,$message,$to=[],$from=[])
+    public function __construct($fromFullnameUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$user)
     {
-        $this->full_name = $full_name;
-        $this->phone = $phone;
-        $this->emailuserFrom = $email;
-        $this->subject = $subject;
-        $this->message = $message;
-        $this->emailTo = $to !== null? Arr::wrap($to) : [];
-        $this->emailFrom = $from !== null? Arr::wrap($from) : [];
-
-
+        $this->fromFullnameUser = $fromFullnameUser;
+        $this->fromEmailUser = $fromEmailUser;
+        $this->fromSubjectUser = $fromSubjectUser;
+        $this->fromMessageUser = $fromMessageUser;
+        $this->user = $user;
     }
 
     /**
@@ -51,19 +43,13 @@ class ContactuserJob implements ShouldQueue
     {
         try {
 
-
-            foreach ($this->emailTo as $email){
-
-                $emailData = new ContactuserMail(
-                    $this->full_name,
-                    $this->subject,
-                    $this->message,
-                    $email,
-                    $this->emailFrom
-                );
-                Mail::send($emailData);
-            }
-
+            Notification::route('mail',   $this->user->email)
+                ->notify(new ContactuserNotification(
+                    $this->fromFullnameUser,
+                    $this->fromEmailUser,
+                    $this->fromSubjectUser,
+                    $this->fromMessageUser,
+                    $this->user));
 
         }catch (\Exception $e){
             Log::error($e->getMessage());

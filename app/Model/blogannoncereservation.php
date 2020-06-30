@@ -2,7 +2,10 @@
 
 namespace App\Model;
 
+use App\Model\favorite\favoriteblogannoncereservation;
+use App\Traits\Likesdata;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Auditable as AuditableTrait;
@@ -11,7 +14,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class blogannoncereservation extends Model implements Auditable
 {
-    use AuditableTrait,LogsActivity;
+    use AuditableTrait,LogsActivity,Likesdata;
 
     protected $guarded = [];
 
@@ -84,4 +87,15 @@ class blogannoncereservation extends Model implements Auditable
         ];
     }
 
+    public function comments()
+    {
+        return $this->morphMany(comment::class ,'commentable');
+    }
+
+    public function bookmarked()
+    {
+        return (bool) favoriteblogannoncereservation::where('user_id', Auth::guard('web')->id())
+            ->where('blogannoncereservation_id', $this->id)
+            ->first();
+    }
 }

@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 import Navlinknewemployment from "./treatement/Navlinknewemployment";
 import EmployementInteresse from "./EmployementInteresse";
 import HelmetSite from "../../inc/user/HelmetSite";
+import ButonFavoris from "../../inc/vendor/ButonFavoris";
 
 
 class EmployementShowUserSite extends Component {
@@ -34,7 +35,7 @@ class EmployementShowUserSite extends Component {
         const url = route('employments_favorite.favorite', [id]);
         dyaxios.get(url).then(() => {
             $.notify({
-                    message: "Cette annonce a été ajoutée à vos favoris",
+                    message: "Annonce ajoutée à vos favoris",
                 },
                 {
                     allow_dismiss: false,
@@ -66,7 +67,7 @@ class EmployementShowUserSite extends Component {
         const url = route('employments_unfavorite.unfavorite', [id]);
         dyaxios.get(url).then(() => {
             $.notify({
-                    message: "Cette annonce a été retiré de vos favoris",
+                    message: "Annonce retirée de vos favoris",
                 },
                 {
                     allow_dismiss: false,
@@ -96,20 +97,28 @@ class EmployementShowUserSite extends Component {
 
     copyToClipboard(){
         navigator.clipboard.writeText(window.location.toString());
+        //Swal.fire({
+        //    title: `Lien copié correctement avec succès`,
+        //    icon: 'success',
+        //    showConfirmButton: false,
+        //    timer: 1500,
+        //});
+
         $.notify({
-            message: "Lien copié correctement avec succès",
-        },{
-            allow_dismiss: false,
-            type: 'info',
-            placement: {
-                from: 'top',
-                align: 'center'
+                message: "Lien copié correctement avec succès",
             },
-            animate: {
-                enter: "animate__animated animate__fadeInDown",
-                exit: "animate__animated animate__fadeOutUp"
-            },
-        });
+            {
+                allow_dismiss: false,
+                type: 'info',
+                placement: {
+                    from: 'bottom',
+                    align: 'center'
+                },
+                animate: {
+                    enter: "animate__animated animate__fadeInUp",
+                    exit: "animate__animated animate__fadeOutDown"
+                },
+            });
     }
     phoneShow(employment){
         Swal.fire({
@@ -348,9 +357,14 @@ class EmployementShowUserSite extends Component {
                                             <div className="card-body">
                                                 <div className="card-header d-flex align-items-center">
                                                     <div className="d-flex align-items-center">
-                                                        <NavLink to={`/pro/${employment.user.slug}/employments/`}>
-                                                            <img src={employment.user.avatar} style={{ height: "40px", width: "80px" }} alt={employment.user.first_name} className="avatar" />
-                                                        </NavLink>
+                                                        {employment.user.avatar ?
+                                                            <NavLink to={`/pro/${employment.user.slug}/employments/`}>
+                                                                <img src={employment.user.avatar}
+                                                                     style={{ height: "40px", width: "80px" }}
+                                                                     alt={employment.user.first_name}
+                                                                     className="avatar" />
+                                                            </NavLink>
+                                                            : <Skeleton circle={false} height={40} width={80} />}
                                                         <div className="mx-3">
                                                             <NavLink to={`/pro/${employment.user.slug}/employments/`} className="text-dark font-weight-600 text-sm"><b>{employment.user.first_name}</b>
                                                                 <small className="d-block text-muted"><i className="now-ui-icons tech_watch-time"/> {moment(employment.created_at).format('LL')}</small>
@@ -360,7 +374,7 @@ class EmployementShowUserSite extends Component {
                                                     <div className="text-right ml-auto">
 
                                                         {employment.price && (
-                                                            <h5 className="text-success"><b>{employment.price.formatMoney(2,'.',',') || "0"} <small>FCFA</small></b></h5>
+                                                            <h5 className="text-dark"><b>{employment.price.formatMoney(2,'.',',') || "0"} <small>FCFA</small></b></h5>
                                                         )}
 
                                                     </div>
@@ -384,7 +398,7 @@ class EmployementShowUserSite extends Component {
                                                             {$guest ?
                                                                 <Button data-toggle="modal" data-target="#loginModal"
                                                                         className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
-                                                                    <i className="far fa-heart"></i> <b>Sauvegarder</b>
+                                                                    <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
                                                                 </Button>
                                                                 :
                                                                 <>
@@ -392,20 +406,21 @@ class EmployementShowUserSite extends Component {
 
                                                                         <>
                                                                             <Button onClick={() => this.unfavoriteItem(employment.id)}
-                                                                                    className="btn btn-danger btn-sm btn-round" title="Retirer de vos favoris">
-                                                                                <i className="fas fa-heart"></i> <b>Sauvegardé</b>
+                                                                                    className="btn btn-danger btn-sm" title="Retirer de vos favoris">
+                                                                                <i className="fas fa-bookmark"></i> <b>Sauvegardé</b>
                                                                             </Button>
                                                                         </>
 
                                                                         :
                                                                         <>
                                                                             <Button onClick={() => this.favoriteItem(employment.id)}
-                                                                                    className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
-                                                                                <i className="far fa-heart"></i> <b>Sauvegarder</b>
+                                                                                    className="btn btn-facebook btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                                                <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
                                                                             </Button>
                                                                         </>
                                                                     }
-                                                                </>}
+                                                                </>
+                                                            }
                                                         </div>
                                                     </>
                                                 )}
@@ -418,9 +433,14 @@ class EmployementShowUserSite extends Component {
                                             <div className="card-body">
                                                 <div className="card-header d-flex align-items-center">
                                                     <div className="d-flex align-items-center">
-                                                        <NavLink to={`/pro/${employment.user.slug}/employments/`}>
-                                                            <img src={employment.user.avatar} style={{ height: "40px", width: "80px" }} alt={employment.user.first_name} className="avatar" />
-                                                        </NavLink>
+                                                        {employment.user.avatar ?
+                                                            <NavLink to={`/pro/${employment.user.slug}/employments/`}>
+                                                                <img src={employment.user.avatar}
+                                                                     style={{ height: "40px", width: "80px" }}
+                                                                     alt={employment.user.first_name}
+                                                                     className="avatar" />
+                                                            </NavLink>
+                                                            : <Skeleton circle={false} height={40} width={80} />}
                                                         <div className="mx-3">
                                                             <NavLink to={`/pro/${employment.user.slug}/employments/`} className="text-dark font-weight-600 text-sm"><b>{employment.user.first_name}</b>
                                                                 <small className="d-block text-muted"><i className="now-ui-icons tech_watch-time"/> {moment(employment.user.created_at).format('LL')}</small>
@@ -428,32 +448,9 @@ class EmployementShowUserSite extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="text-right ml-auto">
-                                                        {$guest ?
-                                                            <Button  data-toggle="modal" data-target="#loginModal"
-                                                                     className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
-                                                                <i className="far fa-heart"></i>
-                                                            </Button>
-                                                            :
-                                                           <>
-                                                               {employment.bookmarked ?
 
-                                                                   <>
-                                                                       <Button onClick={() => this.unfavoriteItem(employment.id)}
-                                                                               className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
-                                                                           <i className="fas fa-heart"></i>
-                                                                       </Button>
-                                                                   </>
+                                                        <ButonFavoris favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} {...employment} />
 
-                                                                   :
-                                                                   <>
-                                                                       <Button onClick={() => this.favoriteItem(employment.id)}
-                                                                               className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
-                                                                           <i className="far fa-heart"></i>
-                                                                       </Button>
-                                                                   </>
-                                                               }
-                                                           </>
-                                                        }
                                                         <Button className="btn btn-icon btn-sm btn-facebook" title="Copier le lien" onClick={() => this.copyToClipboard()}>
                                                             <i className="fas fa-copy"></i>
                                                         </Button>
@@ -478,7 +475,7 @@ class EmployementShowUserSite extends Component {
                                                                 {($userIvemo.id === employment.user.id && $userIvemo.id === employment.user_id) && (
                                                                     <>
                                                                         <a href={`#${employment.visits_count}`}
-                                                                           className="btn btn-sm btn-secondary">
+                                                                           className="btn btn-sm btn-secondary" title={`${employment.visits_count} ${employment.visits_count > 1 ? "vues" : "vue"}`}>
                                                                             <i className="far fa-eye"></i> <b>{this.data_countFormatter(employment.visits_count)}</b>
                                                                         </a>
                                                                         <UncontrolledTooltip placement="bottom" target="TooltipStatus">

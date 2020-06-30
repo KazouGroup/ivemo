@@ -11,9 +11,10 @@ import NavLinkPublicAnnonceUser from "./annonces/NavLinkPublicAnnonceUser";
 import NavNavigatePivateUser from "./NavNavigatePivateUser";
 import NavLinkPublicBlogannoncesUser from "./blogs/public/NavLinkPublicBlogannoncesUser";
 import FormNewletterSubcribeProfileAccountUser from "./form/FormNewletterSubcribeProfileAccountUser";
-import ProfileAccountAvisUser from "./file_public/ProfileAccountAvisUser";
+import ProfileAccountAvisUser from "./file_public/avisuser/ProfileAccountAvisUser";
 import Skeleton from "react-loading-skeleton";
 import ReadMoreAndLess from "react-read-more-less";
+import ProfilePublicAccountAvisUser from "./file_public/avisuser/ProfilePublicAccountAvisUser";
 
 
 class ProfileAccountPublicUser extends Component {
@@ -67,7 +68,7 @@ class ProfileAccountPublicUser extends Component {
                                 </div>
                             }
 
-                            
+
                             <div className="container">
                                 <div className="mt-lg-5 text-left">
                                     <img src={userPublick.avatar} style={{ height: "50px", width: "90px" }} alt={userPublick.first_name}/>
@@ -298,7 +299,7 @@ class ProfileAccountPublicUser extends Component {
                                                 {!userPublick.profile.status_team_user ? <></> : <ProfileAccountTeamUser {...this.props}/>}
 
 
-                                                {!userPublick.profile.status_avis ? <></> :<ProfileAccountAvisUser {...this.props}/>}
+                                                {!userPublick.profile.status_avis ? <></> :<ProfilePublicAccountAvisUser {...this.props}/>}
 
                                                 <div className="card"  id="contact">
                                                     <div className="card-body">

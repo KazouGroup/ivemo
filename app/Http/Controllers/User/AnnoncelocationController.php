@@ -5,19 +5,15 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Annonces\Annoncelocation\StoreRequest;
 use App\Http\Requests\Annonces\Annoncelocation\UpdateRequest;
-use App\Http\Requests\Contactuser\StorecontactRequest;
 use App\Http\Resources\AnnoncelocationResource;
-use App\Http\Resources\AnnoncetypeResource;
 use App\Http\Resources\CategoryannoncelocationResource;
 use App\Http\Resources\CityResource;
 use App\Model\annoncelocation;
 use App\Model\annoncetype;
 use App\Model\categoryannoncelocation;
 use App\Model\city;
-use App\Model\contactuser;
 use App\Model\user;
 use App\Services\AnnoncelocationService;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AnnoncelocationController extends Controller
@@ -190,15 +186,23 @@ class AnnoncelocationController extends Controller
 
     public function apiannoncelocationbyannoncetype(annoncetype $annoncetype)
     {
-       $annonceslocations = $annoncetype->annoncelocations()->whereIn('annoncetype_id',[$annoncetype->id])
-           ->with('user','categoryannoncelocation','city','annoncetype')
-           ->with(['user.profile' => function ($q){$q->distinct()->get();}])
-           ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
-           ->whereHas('city', function ($q) {$q->where('status',1);})
-           ->where(['status' => 1,'status_admin' => 1])
-           ->orderBy('created_at','desc')->paginate(30);
+        $annonceslocations = AnnoncelocationResource::collection($annoncetype->annoncelocations()
+            ->whereIn('annoncetype_id',[$annoncetype->id])
+            ->with('user','categoryannoncelocation','city','annoncetype')
+            ->with(['user.profile' => function ($q){$q->distinct()->get();}])
+            ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->where(['status' => 1,'status_admin' => 1])
+            ->orderBy('created_at','desc')->paginate(40));
 
         return response()->json($annonceslocations, 200);
+    }
+
+    public function apiannoncelocationbycategoryannoncelocationcount(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation)
+    {
+        $annoncelocation = AnnoncelocationService::apiannoncelocationbycategoryannoncelocationcount($annoncetype,$categoryannoncelocation);
+
+        return response()->json($annoncelocation, 200);
     }
 
     public function apiannoncelocationbycategoryannoncelocation(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation)
@@ -208,9 +212,23 @@ class AnnoncelocationController extends Controller
         return response()->json($annoncelocation, 200);
     }
 
+    public function apiannoncelocationbycitycount(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city)
+    {
+        $annoncelocations = AnnoncelocationService::apiannoncelocationbycitycount($annoncetype,$categoryannoncelocation,$city);
+
+        return response()->json($annoncelocations, 200);
+    }
+
     public function apiannoncelocationbycity(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city)
     {
         $annoncelocations = AnnoncelocationService::apiannoncelocationbycity($annoncetype,$categoryannoncelocation,$city);
+
+        return response()->json($annoncelocations, 200);
+    }
+
+    public function apiannoncelocationsbyannoncetypebycitycount(annoncetype $annoncetype,city $city)
+    {
+        $annoncelocations = AnnoncelocationService::apiannoncelocationsbyannoncetypebycitycount($annoncetype,$city);
 
         return response()->json($annoncelocations, 200);
     }
@@ -261,7 +279,7 @@ class AnnoncelocationController extends Controller
 
     public function apiannoncelocationinteressebycity(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city)
     {
-        $annoncelocation = $categoryannoncelocation->annoncelocations()
+        $annoncelocation = AnnoncelocationResource::collection($categoryannoncelocation->annoncelocations()
             ->with('user','city','annoncetype','categoryannoncelocation')
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
@@ -270,7 +288,7 @@ class AnnoncelocationController extends Controller
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
-            ->take(10)->distinct()->get()->toArray();
+            ->take(10)->distinct()->get());
 
         return response()->json($annoncelocation, 200);
     }

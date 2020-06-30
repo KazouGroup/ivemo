@@ -47,7 +47,7 @@ class Navemployementsbycity extends Component {
                         <table>
                             <tbody>
 
-                            {cityemployments.length > 0 ?
+                            {cityemployments.length >= 0 ?
 
                                     <Fragment>
                                         {cityemployments.map((item) => (

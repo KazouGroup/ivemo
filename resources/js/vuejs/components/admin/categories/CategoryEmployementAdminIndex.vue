@@ -71,6 +71,7 @@
                                         <tr>
                                             <th><b>Image</b></th>
                                             <th><b>Name</b></th>
+                                            <th><b>Label</b></th>
                                             <th><b>Status</b></th>
                                             <th><b>Employements</b></th>
                                             <th v-if="$auth.can('manage-annonce-employements')" class="disabled-sorting text-right"><b>Actions</b></th>
@@ -80,6 +81,7 @@
                                         <tr>
                                             <th>Image</th>
                                             <th>Name</th>
+                                            <th>Label</th>
                                             <th>Status</th>
                                             <th>Employements</th>
                                             <th v-if="$auth.can('manage-annonce-employements')" class="text-right">Actions</th>
@@ -88,14 +90,25 @@
                                         <tbody>
                                         <tr v-for="item in categoryemployements" :key="item.id">
                                             <td><img :src="item.photo" style="height: 50px; width: 80px;border-radius: 4px"></td>
-                                            <td><b>{{ item.name }}</b></td>
+                                            <td>
+                                                <router-link :to="{ name: 'employments_show.dashboard', params: { categoryemployment: item.slug  } }">
+                                                    <b>{{ item.name }}</b>
+                                                </router-link>
+                                            </td>
+                                            <td>
+                                                <b>{{ item.label }}</b>
+                                            </td>
                                             <td>
                                                 <div class="timeline-heading">
                                                     <span v-if="item.status" class="badge badge-success"><b>Active</b></span>
                                                     <span v-else-if="!item.status"  class="badge badge-rose"><b>Deactive</b></span>
                                                 </div>
                                             </td>
-                                            <td><b>{{ item.employments_count }}</b></td>
+                                            <td>
+                                                <router-link :to="{ name: 'employments_show.dashboard', params: { categoryemployment: item.slug  } }">
+                                                    <b>{{ item.employments_count }}</b>
+                                                </router-link>
+                                            </td>
                                             <td v-if="$auth.can('manage-annonce-employements')" class="text-right">
                                                 <template>
                                                     <button @click="disableItem(item.id)" v-if="item.status" type="button"
@@ -115,7 +128,7 @@
                                                 >
                                                     <i class="material-icons">edit</i>
                                                 </button>
-                                                <button @click="deleteItem(item)"
+                                                <button @click="deleteItem(item.id)"
                                                         class="btn btn-danger btn-sm btn-just-icon"
                                                         title="Delete"
                                                 >
@@ -141,10 +154,21 @@
                                             </div>
                                             <div class="modal-body">
                                                 <form id="RegisterValidation" @submit.prevent="editmode ? updateItem() : storeItem()" role="form" method="POST" action="" accept-charset="UTF-8" @keydown="form.onKeydown($event)">
-                                                    <div class="form-group">
-                                                        <label class="bmd-label-floating"></label>
-                                                        <input v-model="form.name" type="text" name="name" minlength="2" maxlength="100" placeholder="Name..." class="form-control" :class="{ 'is-invalid': form.errors.has('name') }" />
-                                                        <has-error :form="form" field="name"/>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="bmd-label-floating"></label>
+                                                                <input v-model="form.name" type="text" name="name" minlength="2" maxlength="100" placeholder="Name..." class="form-control" :class="{ 'is-invalid': form.errors.has('name') }" />
+                                                                <has-error :form="form" field="name"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="bmd-label-floating"></label>
+                                                                <input v-model="form.label" type="text" name="label" minlength="2" maxlength="100" placeholder="Label..." class="form-control" :class="{ 'is-invalid': form.errors.has('label') }" />
+                                                                <has-error :form="form" field="label"/>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-8 ml-auto mr-auto">
@@ -188,7 +212,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="text-center">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                                        <button type="button" class="btn btn-secondary btn-raised" data-dismiss="modal">
                                                         <span class="btn-label">
                                                             <b>Close</b>
                                                         </span>
@@ -224,7 +248,7 @@
 
 <script>
 
-    import LoaderLdsDefault from "../../../dashboard_user/components/inc/annimation/LoaderLdsDefault";
+    import LoaderLdsDefault from "../user/dashboard_user/components/inc/annimation/LoaderLdsDefault";
     export default {
         components: {LoaderLdsDefault},
         data() {
@@ -236,6 +260,7 @@
                 form: new Form({
                     id: '',
                     name: '',
+                    label: '',
                     photo: '',
                 })
             }

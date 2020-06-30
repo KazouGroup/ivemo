@@ -1,12 +1,13 @@
 @extends('inc.admin.main')
-@section('title', '| Dashboard Users')
+<?php $item = htmlspecialchars(config('app.name'));?>
+@section('title', 'Dashboard users'.$user->first_name.' - '.$item)
 
 @section('style')
 
 @endsection
 
 @section('content')
-<div id="root"></div>
+    <router-view></router-view>
 @endsection
 
 @section('script')

@@ -92,7 +92,7 @@ class AnnonceShowCreateUserSite extends Component {
     render() {
         return (
             <div className="about-us sidebar-collapse">
-                <nav className="navbar navbar-expand-lg bg-primary">
+                <nav className="navbar ivemoNarbarCustomisation navbar-expand-lg bg-primary">
                     <NavUserSite />
                 </nav>
                 <div className="wrapper">

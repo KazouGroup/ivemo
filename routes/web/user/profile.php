@@ -28,6 +28,16 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.annonces_bookeds.site');
 
     Route::get(
+        'profile/{user}/personal_settings/user_favorites',
+        'ProfileController@apiuserfavorites'
+    )->name('api.userfavorites');
+
+    Route::get(
+        'profile/{user}/personal_settings/user_blogs_and_annonces',
+        'ProfileController@apiuserblogsannonces'
+    )->name('api.userblogs_and_annonces');
+
+    Route::get(
         'user_profile/{user}',
         'ProfileController@api_user_account'
     )->name('api_user_profile_account.site');

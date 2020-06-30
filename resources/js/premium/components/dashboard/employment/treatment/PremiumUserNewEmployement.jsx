@@ -138,7 +138,7 @@ class PremiumUserNewEmployement extends Component {
             .then(() => {
                 $.notify({
                         //,
-                        message: 'Votre article de blogs a bien été crée'
+                        message: 'Votre article de blog a bien été crée'
                     },
                     {
                         allow_dismiss: false,
@@ -157,7 +157,7 @@ class PremiumUserNewEmployement extends Component {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Something wrong. Try later...", {
+            $.notify("Ooops! Something wrong. Try later...", {
                 allow_dismiss: false,
                 type: 'danger',
                 animate: {

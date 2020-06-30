@@ -78,10 +78,10 @@ class ContactUserSite extends Component {
                     message: "",
                 });
             }).catch(error => {
-                this.setState({
-                    errors: error.response.data.errors
-                });
-            })
+            this.setState({
+                errors: error.response.data.errors
+            });
+        })
     }
     // lifecycle method
     componentDidMount() {

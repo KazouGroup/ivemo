@@ -1,20 +1,14 @@
-import React, { Component,Fragment } from "react";
+import React, { PureComponent,Fragment } from "react";
 import {Button, Form, Input, UncontrolledTooltip} from "reactstrap";
-import {NavLink} from "react-router-dom";
-import moment from "moment";
+import FieldInput from "../../vendor/FieldInput";
 
 
-class FormModalSignalannonceUser extends Component {
+class FormModalSignalannonceUser extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
             //
         };
-
-    }
-
-    // lifecycle method
-    componentDidMount() {
 
     }
 
@@ -136,18 +130,10 @@ class FormModalSignalannonceUser extends Component {
                                                         <span className="input-group-text">
                                                             <i className="now-ui-icons users_circle-08"/></span>
                                                 </div>
-                                                <input id='full_name'
-                                                       type='text'
-                                                       required="required"
-                                                       className={`form-control ${this.props.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
-                                                       name='full_name'
-                                                       placeholder="Nom complet"
-                                                       aria-label="Nom complet"
-                                                       autoComplete="full_name"
-                                                       value={this.state.full_name}
-                                                       onChange={this.props.handleFieldChange}
-                                                />
-                                                {this.props.renderErrorFor('full_name')}
+                                                <FieldInput name="full_name" type='text' minLength="3" maxLength="50" placeholder="Nom complete" value={this.state.full_name}
+                                                            handleFieldChange={this.props.handleFieldChange}
+                                                            hasErrorFor={this.props.hasErrorFor}
+                                                            renderErrorFor={this.props.renderErrorFor}/>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
@@ -156,18 +142,10 @@ class FormModalSignalannonceUser extends Component {
                                                         <span className="input-group-text">
                                                             <i className="now-ui-icons ui-1_email-85"/></span>
                                                 </div>
-                                                <input id='email'
-                                                       type='email'
-                                                       required="required"
-                                                       className={`form-control ${this.props.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                                       name='email'
-                                                       placeholder="Email"
-                                                       aria-label="Email"
-                                                       autoComplete="email"
-                                                       value={this.state.email}
-                                                       onChange={this.props.handleFieldChange}
-                                                />
-                                                {this.props.renderErrorFor('email')}
+                                                <FieldInput name="email" type='email' minLength="3" maxLength="50" placeholder="Email" value={this.state.email}
+                                                            handleFieldChange={this.props.handleFieldChange}
+                                                            hasErrorFor={this.props.hasErrorFor}
+                                                            renderErrorFor={this.props.renderErrorFor}/>
                                             </div>
                                         </div>
 
@@ -176,14 +154,10 @@ class FormModalSignalannonceUser extends Component {
                                     <div className="row">
 
                                         <div className="input-group">
-                                                       <textarea name="message" value={this.state.message}
-                                                                 onChange={this.props.handleFieldChange}
-                                                                 placeholder={'Pourquoi signalez-vous cette article?'}
-                                                                 className={`form-control ${this.props.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                 id="message"
-                                                                 required="required"
-                                                                 rows="10" />
-                                            {this.props.renderErrorFor('message')}
+                                            <FieldInput name="message" type='textarea' minLength="5" maxLength="5000" placeholder="Pourquoi signalez-vous cette annonce?" value={this.state.message}
+                                                        handleFieldChange={this.props.handleFieldChange}
+                                                        hasErrorFor={this.props.hasErrorFor}
+                                                        renderErrorFor={this.props.renderErrorFor} rows="10"/>
                                         </div>
                                     </div>
 

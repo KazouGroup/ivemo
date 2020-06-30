@@ -15,9 +15,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-
                         <div class="card-body">
-
                             <form id="RegisterValidation" @submit.prevent="updateItem()" role="form"
                                   method="POST" action="" accept-charset="UTF-8" @keydown="form.onKeydown($event)">
                                 <div class="row">
@@ -54,11 +52,11 @@
                                 <hr>
                                 <div class="submit">
                                     <div class="text-center">
-                                        <router-link :to="{ name: 'conditionutilisations.index' }" class="btn btn-round btn-danger">
-                                            <b class="title_hover">Cancel</b>
+                                        <router-link :to="{ name: 'conditionutilisations.index' }" class="btn btn-secondary btn-raised">
+                                            <b class="title_hover">Annuler</b>
                                         </router-link>
-                                        <button  :disabled="form.busy" type="submit" class="btn btn-success btn-round btn-raised">
-                                            <b class="title_hover">Save</b>
+                                        <button  :disabled="form.busy" type="submit" class="btn btn-success btn-raised">
+                                            <b class="title_hover">Sauvegarder</b>
                                         </button>
                                     </div>
                                 </div>

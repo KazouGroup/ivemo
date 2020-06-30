@@ -34,101 +34,80 @@ class ContactusersventeController extends Controller
      */
     public function personalmessagesannonces_ventes(user $user)
     {
-        if (auth()->user()->id === $user->id){
-            return view('user.profile.contactuservente.personal_mailannonces_ventes',[
-                'user' => auth()->user()
-            ]);
-        }else{
-            abort(404);
-        }
+        $this->authorize('update',$user);
+
+        return view('user.profile.contactuservente.personal_mailannonces_ventes',[
+            'user' => auth()->user()
+        ]);
 
     }
 
     public function personalmessagesannonces_ventes_by_mail(user $user)
     {
-        if (auth()->user()->id === $user->id){
-            return view('user.profile.contactuservente.personal_mailannonces_ventes',[
-                'user' => auth()->user()
-            ]);
-        }else{
-            abort(404);
-        }
+        $this->authorize('update',$user);
+
+        return view('user.profile.contactuservente.personal_mailannonces_ventes',[
+            'user' => auth()->user()
+        ]);
 
     }
 
     public function personalmessagesarchvement_annonces_ventes(user $user)
     {
-        if (auth()->user()->id === $user->id){
-            return view('user.profile.contactuservente.personal_mailannonces_ventes',[
-                'user' => auth()->user()
-            ]);
-        }else{
-            abort(404);
-        }
+        $this->authorize('update',$user);
+
+        return view('user.profile.contactuservente.personal_mailannonces_ventes',[
+            'user' => auth()->user()
+        ]);
 
     }
 
     public function personalmessagesfavannonces_ventes(user $user)
     {
-        if (auth()->user()->id === $user->id){
-            return view('user.profile.contactuservente.personal_mailannonces_ventes',[
-                'user' => auth()->user()
-            ]);
-        }else{
-            abort(404);
-        }
+        $this->authorize('update',$user);
+
+        return view('user.profile.contactuservente.personal_mailannonces_ventes',[
+            'user' => auth()->user()
+        ]);
 
     }
 
     public function apipersonalmailsannoncesventes(user $user)
     {
-        if (auth()->user()->id === $user->id){
+        $this->authorize('update',$user);
 
-            $contactusersventes = ContactusersventeService::apipersonalmessagesannonces($user);
+        $contactusersventes = ContactusersventeService::apipersonalmessagesannonces($user);
 
-            return response()->json($contactusersventes, 200);
-        }else{
-            abort(404);
-        }
-
+        return response()->json($contactusersventes, 200);
     }
 
     public function apipersonalmailsarchvementannoncesventes(user $user)
     {
-        if (auth()->user()->id === $user->id){
+        $this->authorize('update',$user);
 
-            $contactusersventes = ContactusersventeService::apipersonalmailsarchvementannoncesventes($user);
+        $contactusersventes = ContactusersventeService::apipersonalmailsarchvementannoncesventes($user);
 
-            return response()->json($contactusersventes, 200);
-        }else{
-            abort(404);
-        }
+        return response()->json($contactusersventes, 200);
 
     }
 
     public function apipersonalmailsfavoriteannoncesventes(user $user)
     {
-        if (auth()->user()->id === $user->id){
+        $this->authorize('update',$user);
 
-            $contactusersventes = ContactusersventeService::apipersonalmailsfavoriteannoncesventes($user);
+        $contactusersventes = ContactusersventeService::apipersonalmailsfavoriteannoncesventes($user);
 
-            return response()->json($contactusersventes, 200);
-        }else{
-            abort(404);
-        }
+        return response()->json($contactusersventes, 200);
 
     }
 
     public function apipersonalmailsannoncesventesbyannonce(user $user)
     {
-        if (auth()->user()->id === $user->id){
+        $this->authorize('update',$user);
 
-            $contactusersventes = ContactusersventeService::apipersonalmailsannoncesventesbyannonce($user);
+        $contactusersventes = ContactusersventeService::apipersonalmailsannoncesventesbyannonce($user);
 
-            return response()->json($contactusersventes, 200);
-        }else{
-            abort(404);
-        }
+        return response()->json($contactusersventes, 200);
 
     }
 

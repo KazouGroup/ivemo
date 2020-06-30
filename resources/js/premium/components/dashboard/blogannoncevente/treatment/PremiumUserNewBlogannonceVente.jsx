@@ -130,7 +130,7 @@ class PremiumUserNewBlogannonceVente extends Component {
             .then(() => {
                 $.notify({
                         //,
-                        message: 'Votre article de blogs a bien été crée'
+                        message: 'Votre article de blog a bien été crée'
                     },
                     {
                         allow_dismiss: false,
@@ -149,7 +149,7 @@ class PremiumUserNewBlogannonceVente extends Component {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Something wrong. Try later...", {
+            $.notify("Ooops! Something wrong. Try later...", {
                 allow_dismiss: false,
                 type: 'danger',
                 animate: {
@@ -243,7 +243,6 @@ class PremiumUserNewBlogannonceVente extends Component {
                                                         <i className="material-icons">arrow_back</i>
                                                     </Link>
                                                 </div>
-
                                             </div>
 
                                             <form role="form" onSubmit={this.saveItem} acceptCharset="UTF-8">
@@ -273,7 +272,7 @@ class PremiumUserNewBlogannonceVente extends Component {
 
                                                     <Row>
                                                         <div className="col-md-6">
-                                                            <label htmlFor="title">Estimer un temp <b>{this.state.red_time} min lecture</b></label>
+                                                            <label htmlFor="title">Estimer un temps <b>{this.state.red_time} min lecture</b></label>
                                                             <FormGroup>
                                                                 <Input id='red_time'
                                                                        type='number'
@@ -281,7 +280,7 @@ class PremiumUserNewBlogannonceVente extends Component {
                                                                        name='red_time'
                                                                        maxLength="20"
                                                                        minLength="1"
-                                                                       placeholder="Estimer un temp de lecture en min"
+                                                                       placeholder="Estimer un temps de lecture en min"
                                                                        aria-label="Estimer un temp de lecture "
                                                                        value={this.state.red_time || ''}
                                                                        required
@@ -356,13 +355,10 @@ class PremiumUserNewBlogannonceVente extends Component {
                                                     </button>
                                                 </div>
                                             </form>
-
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 

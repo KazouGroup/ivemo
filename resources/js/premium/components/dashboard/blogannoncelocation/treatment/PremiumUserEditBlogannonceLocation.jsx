@@ -87,7 +87,7 @@ class PremiumUserEditBlogannonceLocation extends Component {
         }else{
             $.notify({
                     //,
-                    message: 'La fichier ne peut pas être supérieure à 15 MB'
+                    message: 'Le fichier ne peut pas être supérieure à 15 MB'
                 },
                 {
                     allow_dismiss: false,
@@ -136,7 +136,7 @@ class PremiumUserEditBlogannonceLocation extends Component {
             .then(() => {
                 $.notify({
                         //,
-                        message: 'Votre article de blogs a bien été modifié'
+                        message: 'Votre article de blog a bien été modifié'
                     },
                     {
                         allow_dismiss: false,
@@ -154,7 +154,7 @@ class PremiumUserEditBlogannonceLocation extends Component {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Something wrong. Try later...", {
+            $.notify("Ooops! Something wrong. Try later...", {
                 allow_dismiss: false,
                 type: 'danger',
                 animate: {
@@ -174,7 +174,7 @@ class PremiumUserEditBlogannonceLocation extends Component {
             /** Alert notify bootstrapp **/
             $.notify({
                     //,
-                    message: 'Article de blogs activé avec succès'
+                    message: 'Article de blog activé avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -193,7 +193,7 @@ class PremiumUserEditBlogannonceLocation extends Component {
 
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -212,7 +212,7 @@ class PremiumUserEditBlogannonceLocation extends Component {
             /** Alert notify bootstrapp **/
             $.notify({
                     // title: 'Update FAQ',
-                    message: 'Article de blogs désactiver avec succès'
+                    message: 'Article de blog déactivé avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -230,7 +230,7 @@ class PremiumUserEditBlogannonceLocation extends Component {
             this.loadItems();
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -262,7 +262,7 @@ class PremiumUserEditBlogannonceLocation extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Article de blogs suprimé avec succès'
+                            message: 'Article de blog supprimé avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -280,7 +280,7 @@ class PremiumUserEditBlogannonceLocation extends Component {
                     this.props.history.goBack();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -358,7 +358,6 @@ class PremiumUserEditBlogannonceLocation extends Component {
 
                     <div className="content">
                         <div className="container-fluid">
-
                             <div className="row">
                                 <div className="col-lg-4 col-md-4 col-sm-4">
                                     <div className="card card-stats">
@@ -399,12 +398,12 @@ class PremiumUserEditBlogannonceLocation extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">remove</i>
                                             </div>
-                                            <p className="card-category"><b>Désactivés</b></p>
+                                            <p className="card-category"><b>Déactivés</b></p>
                                             <h3 className="card-title"><b>{this.dataunactive_countFormatter(blogannoncelocationsunactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">remove</i> Articles désactivés
+                                                <i className="material-icons">remove</i> Articles déactivés
                                             </div>
                                         </div>
                                     </div>
@@ -463,13 +462,13 @@ class PremiumUserEditBlogannonceLocation extends Component {
                                                         <i className="material-icons">arrow_back</i>
                                                     </Link>
                                                     <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/create/`}
-                                                          className="btn btn-primary btn-just-icon btn-sm" title="Poster un votre article sur la location">
+                                                          className="btn btn-primary btn-just-icon btn-sm" title="Postez  votre article sur la location">
                                                         <i className="material-icons">add</i>
                                                     </Link>
                                                     {this.state.status ?
                                                         <>
                                                             <button type="button" rel="tooltip" onClick={() => this.unactiveItem(this.state.id)}
-                                                                    className="btn btn-success btn-just-icon btn-sm" title="Desactiver" >
+                                                                    className="btn btn-success btn-just-icon btn-sm" title="Déactiver" >
                                                                 <i className="material-icons">done</i>
                                                             </button>
                                                         </>
@@ -519,7 +518,7 @@ class PremiumUserEditBlogannonceLocation extends Component {
 
                                                     <Row>
                                                         <div className="col-md-6">
-                                                            <label htmlFor="title">Estimer en temp <b>{this.state.red_time} min lecture</b></label>
+                                                            <label htmlFor="title">Estimer en temps <b>{this.state.red_time} min lecture</b></label>
                                                             <FormGroup>
                                                                 <Input id='red_time'
                                                                        type='number'
@@ -527,7 +526,7 @@ class PremiumUserEditBlogannonceLocation extends Component {
                                                                        name='red_time'
                                                                        maxLength="20"
                                                                        minLength="1"
-                                                                       placeholder="Estimer un temp de lecture en min"
+                                                                       placeholder="Estimer un temps de lecture en min"
                                                                        aria-label="Estimer un temp de lecture "
                                                                        value={this.state.red_time || ''}
                                                                        required

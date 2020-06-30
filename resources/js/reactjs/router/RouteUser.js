@@ -125,12 +125,27 @@ import EmployementBycategoryemployementbycity
 import EmployementShowUserSite from "../components/user/employment/EmployementShowUserSite";
 import EmploymentEdit from "../components/user/employment/treatement/EmploymentEdit";
 import EmploymentCreate from "../components/user/employment/treatement/EmploymentCreate";
-import PrivateUserFavoritEmployments from "../components/user/profile/employments/private/PrivateUserFavoritEmployments";
+import PrivateUserFavoritEmployments from "../components/user/profile/favorites/PrivateUserFavoritEmployments";
 import PrivateUserEmployments from "../components/user/profile/employments/private/PrivateUserEmployments";
 import PrivateUserEmploymentsByCategoryemployment
     from "../components/user/profile/employments/private/PrivateUserEmploymentsByCategoryemployment";
 import PublicUserEmployments from "../components/user/profile/employments/public/PublicUserEmployments";
 import EmployementBycity from "../components/user/employment/EmployementBycity";
+import PrivateUserFavoriteblogannoncereservations
+    from "../components/user/profile/favorites/PrivateUserFavoriteblogannoncereservations";
+import PrivateUserFavoriteannonceventes from "../components/user/profile/favorites/PrivateUserFavoriteannonceventes";
+import PrivateUserFavoriteannoncelocations
+    from "../components/user/profile/favorites/PrivateUserFavoriteannoncelocations";
+import PrivateUserFavoriteblogannoncelocations
+    from "../components/user/profile/favorites/PrivateUserFavoriteblogannoncelocations";
+import PrivateUserFavoriteblogannonceventes
+    from "../components/user/profile/favorites/PrivateUserFavoriteblogannonceventes";
+import PrivateUserBlogannonceLocationStatistiqueShow
+    from "../components/user/profile/blogs/private/blogannoncelocation/PrivateUserBlogannonceLocationStatistiqueShow";
+import PrivateUserEmploymentsByStatistique
+    from "../components/user/profile/employments/private/PrivateUserEmploymentsByStatistique";
+import AnnoncereservationCreate
+    from "../components/user/annonces/annoncereservation/treatment/AnnoncereservationCreate";
 
 
 const RouteUser = props => (
@@ -161,14 +176,15 @@ const RouteUser = props => (
           <Route exact path="/agences_immobilies/" component={AgencesimmobilieIndex}/>
 
           <Route exact path="/annonces_reservations/:annoncetype/" component={AnnoncereservationIndex}/>
-          <Route exact path="/annonce_reservations/:annoncetype/:city/" component={Annoncereservationbyannoncetypebycity}/>
+          <Route exact path="/annonce_reservations/:annoncetype/:city/" component={withRouter(Annoncereservationbyannoncetypebycity)}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/" component={withRouter(Annoncebycategoryannoncereservation)}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/" component={withRouter(Annoncebycategoryannoncereservationcity)}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/:annoncereservation/" component={withRouter(Annoncebycategoryannoncereservationcityshow)}/>
+          <Route exact path="/annonce_reservation/:annoncetype/new/" component={AnnoncereservationCreate}/>
 
 
           <Route exact path="/annonces_locations/:annoncetype/" component={AnnoncelocationIndex}/>
-          <Route exact path="/annonce_locations/:annoncetype/:city/" component={Annoncelocationbyannoncetypebycity}/>
+          <Route exact path="/annonce_locations/:annoncetype/:city/" component={withRouter(Annoncelocationbyannoncetypebycity)}/>
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/" component={withRouter(Annoncebycategoryannoncelocation)}/>
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/" component={withRouter(Annoncelocationbycity)}/>
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/:annoncelocation/" component={withRouter(Annoncelocationbycategorycityshow)}/>
@@ -179,7 +195,7 @@ const RouteUser = props => (
           <Route exact path="/annonce/show/vendre/create/" component={AnnonceBienAvendreCreate}/>
 
           <Route exact path="/annonces_ventes/:annoncetype/" component={AnnonceventeIndex}/>
-          <Route exact path="/annonce_ventes/:annoncetype/:city/" component={Annonceventebyannoncetypebycity}/>
+          <Route exact path="/annonce_ventes/:annoncetype/:city/" component={withRouter(Annonceventebyannoncetypebycity)}/>
           <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/" component={withRouter(Annoncebycategoryannoncevente)}/>
           <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/:city/" component={withRouter(Annoncebycategoryannonceventecity)}/>
           <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/:city/:annoncevente/" component={withRouter(Annonceventebycategorycityshow)}/>
@@ -227,8 +243,14 @@ const RouteUser = props => (
 
           <Route exact path="/profile/:user/personal_settings/employments/" component={PrivateUserEmployments}/>
           <Route exact path="/profile/:user/personal_settings/employments/:categoryemployment/" component={withRouter(PrivateUserEmploymentsByCategoryemployment)}/>
+          <Route exact path="/profile/:user/personal_settings/employment/:employment/" component={PrivateUserEmploymentsByStatistique}/>
 
+          <Route exact path="/profile/:user/personal_settings/favorite_annonces_locations/" component={PrivateUserFavoriteannoncelocations}/>
+          <Route exact path="/profile/:user/personal_settings/favorite_annonces_ventes/" component={PrivateUserFavoriteannonceventes}/>
           <Route exact path="/profile/:user/personal_settings/favorite_employments/" component={PrivateUserFavoritEmployments}/>
+          <Route exact path="/profile/:user/personal_settings/favorite_blogannoncelocations/" component={PrivateUserFavoriteblogannoncelocations}/>
+          <Route exact path="/profile/:user/personal_settings/favorite_blogannonceventes/" component={PrivateUserFavoriteblogannonceventes}/>
+          <Route exact path="/profile/:user/personal_settings/favorite_blogannoncereservations/" component={PrivateUserFavoriteblogannoncereservations}/>
 
           <Route exact path="/profile/:user/personal_settings/subscriber_users/" component={SubscriberuserUserIndex}/>
 
@@ -245,6 +267,7 @@ const RouteUser = props => (
 
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_locations/" component={PrivateUserBlogannonceLocation}/>
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_locations/:categoryannoncelocation/" component={withRouter(PrivateUserBlogannonceLocationByCategorylocation)}/>
+          <Route exact path="/profile/:user/personal_settings/blogs/annonce_location/statistique/:blogannoncelocation/" component={PrivateUserBlogannonceLocationStatistiqueShow}/>
 
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_reservations/" component={PrivateUserBlogannonceReservation}/>
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_reservations/:categoryannoncereservation" component={withRouter(PrivateUserBlogannonceReservationCategoryreservation)}/>

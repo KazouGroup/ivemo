@@ -225,7 +225,7 @@ class PremiumUserEditEmployement extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Offre suprimée avec success'
+                            message: 'Offre supprimée avec success'
                         },
                         {
                             allow_dismiss: false,
@@ -659,13 +659,10 @@ class PremiumUserEditEmployement extends Component {
                                                     </button>
                                                 </div>
                                             </Form>
-
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 

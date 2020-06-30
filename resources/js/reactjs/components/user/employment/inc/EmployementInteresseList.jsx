@@ -1,11 +1,12 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Button,UncontrolledTooltip } from "reactstrap";
 import moment from "moment";
 import LazyLoad from "react-lazyload";
+import Skeleton from "react-loading-skeleton";
 
 
-class EmployementInteresseList extends Component {
+class EmployementInteresseList extends PureComponent {
 
 
     getDescription() {
@@ -53,9 +54,14 @@ class EmployementInteresseList extends Component {
 
 
                                         <div className="d-flex align-items-center">
-                                            <NavLink to={`/pro/${this.props.user.slug}/`}>
-                                                <img src={this.props.user.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
-                                            </NavLink>
+                                            {this.props.user.avatar ?
+                                                <NavLink to={`/pro/${this.props.user.slug}/employments/`}>
+                                                    <img src={this.props.user.avatar}
+                                                         style={{ height: "40px", width: "80px" }}
+                                                         alt={this.props.user.first_name}
+                                                         className="avatar" />
+                                                </NavLink>
+                                                : <Skeleton circle={false} height={40} width={80} />}
                                             <div className="mx-3">
                                                 <NavLink to={`/pro/${this.props.user.slug}/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name.length > 9 ? this.props.user.first_name.substring(0, 9) + "..." : this.props.user.first_name}
                                                     <small className="d-block text-muted"><b><i className="now-ui-icons tech_watch-time"/> {moment(this.props.created_at).format('ll')}</b></small>
@@ -65,7 +71,7 @@ class EmployementInteresseList extends Component {
 
                                         <div className="text-right mx-auto">
                                             {this.props.price && (
-                                                <h5 className="text-success"><b>{this.props.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h5>
+                                                <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h5>
                                             )}
 
                                             {/*
@@ -97,7 +103,7 @@ class EmployementInteresseList extends Component {
 
                                             <Button  data-toggle="modal" data-target="#loginModal"
                                                 className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
-                                                <i className="far fa-heart"></i>
+                                                <i className="far fa-bookmark"></i>
                                             </Button>
                                             :
                                             <>
@@ -106,7 +112,7 @@ class EmployementInteresseList extends Component {
                                                     <>
                                                         <Button onClick={() => this.props.unfavoriteItem(this.props.id)}
                                                                 className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
-                                                            <i className="fas fa-heart"></i>
+                                                            <i className="fas fa-bookmark"></i>
                                                         </Button>
                                                     </>
 
@@ -114,7 +120,7 @@ class EmployementInteresseList extends Component {
                                                     <>
                                                         <Button onClick={() => this.props.favoriteItem(this.props.id)}
                                                                 className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
-                                                            <i className="far fa-heart"></i>
+                                                            <i className="far fa-bookmark"></i>
                                                         </Button>
                                                     </>
                                                 }

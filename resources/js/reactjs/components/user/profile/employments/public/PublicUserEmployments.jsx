@@ -13,25 +13,162 @@ import EmploymentListSkeleton from "../../../../inc/user/employment/EmploymentLi
 import Navlinknewemployment from "../../../employment/treatement/Navlinknewemployment";
 import NavLinkPublicAnnonceUser from "../../annonces/NavLinkPublicAnnonceUser";
 import PrivateUserEmployementList from "../../../employment/inc/PrivateUserEmployementList";
+import ButonSubscribedEmployment from "../../../../inc/vendor/ButonSubscribedEmployment";
+import HelmetSite from "../../../../inc/user/HelmetSite";
+import EmployementList from "../../../employment/inc/EmployementList";
 
 
 class PublicUserEmployments extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            useremploymentPublick:{employments:{categoryemployment:[],user:[],city:[]}},
-            visiable: 10,
+            useremploymentPublick:{profile:[]},
+            employments:{categoryemployment:[],user:[],city:[]},
+            visiable: 30,
         };
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
+        this.subscribeItem = this.subscribeItem.bind(this);
+        this.unsubscribedItem = this.unsubscribedItem.bind(this);
     }
     loadmoresItem() {
         this.setState((old) => {
-            return { visiable: old.visiable + 10 }
+            return { visiable: old.visiable + 30 }
         })
     }
+
+    favoriteItem(id) {
+        const url = route('employments_favorite.favorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce ajoutée à vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(id) {
+        const url = route('employments_unfavorite.unfavorite', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Annonce retirée de vos favoris",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    subscribeItem(id) {
+        const url = route('employments_subscribe.subscribe', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Notifications activé",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unsubscribedItem(id) {
+        const url = route('employments_unsubscribe.unsubscribe', [id]);
+        dyaxios.get(url).then(() => {
+            $.notify({
+                    message: "Notifications desactivé",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
     unactiveItem(id){
         Swal.fire({
             title: 'Désactiver l\'annonce?',
@@ -46,6 +183,10 @@ class PublicUserEmployments extends Component {
             reverseButtons: true,
         }).then((result) => {
             if (result.value) {
+
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.employments.filter(isNotId);
+                this.setState({employments: updatedItems});
 
                 //Envoyer la requet au server
                 let url = route('employmentsunactivated_site',id);
@@ -68,7 +209,6 @@ class PublicUserEmployments extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.loadItems();
 
                 }).catch(() => {
                     //Failled message
@@ -100,6 +240,10 @@ class PublicUserEmployments extends Component {
         }).then((result) => {
             if (result.value) {
 
+                let isNotId = item => item.id !== id;
+                let updatedItems = this.state.employments.filter(isNotId);
+                this.setState({employments: updatedItems});
+
                 const url = route('employmentsdelete_site.site',[id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
@@ -122,7 +266,6 @@ class PublicUserEmployments extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -140,7 +283,8 @@ class PublicUserEmployments extends Component {
 
     loadItems(){
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.profilpublique_employments',[itemuser])).then(response => this.setState({useremploymentPublick: response.data,}));
+        dyaxios.get(route('api.profilpublique_employments',[itemuser])).then(response => this.setState({employments: response.data,}));
+        dyaxios.get(route('api.profilpublique',[itemuser])).then(response => this.setState({useremploymentPublick: response.data,}));
     }
 
     // lifecycle method
@@ -149,12 +293,12 @@ class PublicUserEmployments extends Component {
     }
 
     render() {
-        const {useremploymentPublick,visiable} = this.state;
-        const mapEmployments = useremploymentPublick.employments.length >= 0 ? (
-            useremploymentPublick.employments.slice(0, visiable).map(item => {
+        const {employments,useremploymentPublick,visiable} = this.state;
+        const mapEmployments = employments.length >= 0 ? (
+            employments.slice(0, visiable).map(item => {
                 return(
 
-                    <PrivateUserEmployementList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
+                    <EmployementList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
                 )
             })
         ):(
@@ -162,9 +306,7 @@ class PublicUserEmployments extends Component {
         );
         return (
             <>
-                <Helmet>
-                    <title>Emplois, Formation & Services {`${useremploymentPublick.first_name || 'Profile'}`} - {$name_site}</title>
-                </Helmet>
+                <HelmetSite title={`Emplois, Formation & Services ${useremploymentPublick.first_name || 'Profile'} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 
@@ -175,30 +317,44 @@ class PublicUserEmployments extends Component {
 
                     <div className="wrapper">
                         <div className="page-header page-header-mini">
-                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
-                            </div>
-                            <div className="content-center">
+                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}/>
 
-                                <h1 className="title">{useremploymentPublick.first_name}</h1>
-                                {useremploymentPublick.status_profile === 0 ?
+                            {useremploymentPublick.first_name && (
 
-                                    <Link to={`/user/${useremploymentPublick.slug}/`} className="text-white">
-                                        <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
-                                    </Link>
+                                <div className="content-center">
 
-                                :
-                                <>
-                                    <Link to={`/pro/${useremploymentPublick.slug}/`} className="text-white">
-                                        <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
-                                    </Link>
-                                    {useremploymentPublick.employments_count > 0 &&(
-                                        <h5><b>{useremploymentPublick.employments_count}</b> {useremploymentPublick.employments_count > 1 ? "annonces" : "annonce"} posté par {useremploymentPublick.first_name} sur la location</h5>
-                                    )}
-                                </>
-                                }
+                                    <h1 className="title">{useremploymentPublick.first_name}</h1>
+                                    {useremploymentPublick.status_profile === 0 ?
 
+                                        <Link to={`/user/${useremploymentPublick.slug}/`} className="text-white">
+                                            <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
+                                        </Link>
 
-                            </div>
+                                        :
+                                        <>
+                                            <Link to={`/pro/${useremploymentPublick.slug}/`} className="text-white">
+                                                <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
+                                            </Link>
+
+                                            {useremploymentPublick.employments_count > 0 &&(
+                                                <h5><b>{useremploymentPublick.employments_count}</b> {useremploymentPublick.employments_count > 1 ? "annonces" : "annonce"} posté par {useremploymentPublick.first_name} sur les emploies et services</h5>
+                                            )}
+
+                                            <div className="text-center">
+                                                <ButonSubscribedEmployment namesubscribed={`Recevoir toutes les notifications`} nameunsubscribed={`Ne plus recevoir les notifications`}
+                                                                           titleToltipeSubscribed={`Abonnez vous pour recevoir tous annonces des emploies et services postées par`}
+                                                                           titleToltipeUnsubscribed={`Ne plus etre notifier des annonces des emploies et services postées par`}
+                                                                           subscribeItem={this.subscribeItem}
+                                                                           unsubscribedItem={this.unsubscribedItem}
+                                                                           {...useremploymentPublick}/>
+                                            </div>
+                                        </>
+                                    }
+
+                                </div>
+
+                            )}
+
                         </div>
 
                         <div className="main main-raised">
@@ -332,15 +488,21 @@ class PublicUserEmployments extends Component {
 
                                             {mapEmployments}
 
-                                            {visiable < useremploymentPublick.employments.length && (
-                                                <div className="row">
-                                                    <div className="col-md-4 ml-auto mr-auto text-center">
-                                                        <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
-                                                            <b>Voir plus </b>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            )}
+                                            <div className="text-center">
+                                                {visiable < employments.length ?
+                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                                        <b>Voir plus </b>
+                                                    </button>
+                                                    :
+                                                    <ButonSubscribedEmployment namesubscribed={`Recevoir toutes les notifications`} nameunsubscribed={`Ne plus recevoir les notifications`}
+                                                                               titleToltipeSubscribed={`Abonnez vous pour recevoir tous annonces des emploies et services postées par`}
+                                                                               titleToltipeUnsubscribed={`Ne plus etre notifier des annonces des emploies et services postées par`}
+                                                                               subscribeItem={this.subscribeItem}
+                                                                               unsubscribedItem={this.unsubscribedItem}
+                                                                               {...useremploymentPublick}/>
+
+                                                }
+                                            </div>
 
                                             <div className="card">
                                                 <div className="card-body">
