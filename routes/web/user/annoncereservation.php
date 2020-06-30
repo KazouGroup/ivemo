@@ -10,12 +10,12 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::get(
         'annonces_reservations/{annoncetype}/{categoryannoncereservation}',
-        'AnnoncereservationController@apiannoncelocationbycategoryannoncereservation'
+        'AnnoncereservationController@apiannoncereservationbycategoryannoncereservation'
     )->name('api.annoncelocationbycategoryannoncereservations_site');
 
     Route::get(
         'annonces_reservationscount/{annoncetype}/{categoryannoncereservation}',
-        'AnnoncereservationController@apiannoncelocationbycategoryannoncereservationcount'
+        'AnnoncereservationController@apiannoncereservationbycategoryannoncereservationcount'
     )->name('api.annoncelocationbycategoryannoncereservationscount_site');
 
     Route::get(
@@ -30,7 +30,7 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::get(
         'annonces_reservations/{annoncetype}/{categoryannoncereservation}/{city}/{annoncereservation}',
-        'AnnoncereservationController@apiannoncelocationbycategoryannoncereservationslug'
+        'AnnoncereservationController@apiannoncereservationbycategoryannoncereservationslug'
     )->name('api.annoncelocationbycategoryannoncereservationslug_site');
 
     Route::get(
