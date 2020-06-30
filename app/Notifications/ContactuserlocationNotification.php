@@ -17,10 +17,15 @@ class ContactuserlocationNotification extends Notification implements ShouldQueu
     protected $fromSubjectUser;
     protected $fromMessageUser;
     protected $annoncelocation;
+
     /**
-     * Create a new message instance.
-     *
-     * @return void
+     * ContactuserlocationNotification constructor.
+     * @param $fromFullnameUser
+     * @param $fromPhoneUser
+     * @param $fromEmailUser
+     * @param $fromSubjectUser
+     * @param $fromMessageUser
+     * @param $annoncelocation
      */
     public function __construct($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$annoncelocation)
     {
@@ -33,23 +38,17 @@ class ContactuserlocationNotification extends Notification implements ShouldQueu
     }
 
     /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
         return (new MailMessage)
             ->greeting('Salut '.$this->annoncelocation->user->first_name)
@@ -64,15 +63,15 @@ class ContactuserlocationNotification extends Notification implements ShouldQueu
     }
 
     /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray()
     {
         return [
-            //
+            'annoncelocationID' => $this->annoncelocation->id,
+            'annoncelocationTitle' => $this->annoncelocation->title,
+            'fromMessage' => $this->fromMessageUser,
+            'fromFullnameUser' => $this->fromFullnameUser,
         ];
     }
 }

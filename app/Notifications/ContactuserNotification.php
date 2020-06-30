@@ -16,10 +16,14 @@ class ContactuserNotification extends Notification implements ShouldQueue
     protected $fromSubjectUser;
     protected $fromMessageUser;
     protected $user;
+
     /**
-     * Create a new message instance.
-     *
-     * @return void
+     * ContactuserNotification constructor.
+     * @param $fromFullnameUser
+     * @param $fromEmailUser
+     * @param $fromSubjectUser
+     * @param $fromMessageUser
+     * @param $user
      */
     public function __construct($fromFullnameUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$user)
     {
@@ -31,23 +35,17 @@ class ContactuserNotification extends Notification implements ShouldQueue
     }
 
     /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
         return ['mail'];
     }
 
     /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
         return (new MailMessage)
             ->success()
@@ -62,12 +60,9 @@ class ContactuserNotification extends Notification implements ShouldQueue
     }
 
     /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray()
     {
         return [
             //

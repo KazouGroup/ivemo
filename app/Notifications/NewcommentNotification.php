@@ -14,10 +14,12 @@ class NewcommentNotification extends Notification implements ShouldQueue
     protected $fromBodyUser;
     protected $annoncereservation;
     protected $userFrom;
+
     /**
-     * Create a new job instance.
-     *
-     * @return void
+     * NewcommentNotification constructor.
+     * @param $fromBodyUser
+     * @param $annoncereservation
+     * @param $userFrom
      */
     public function __construct($fromBodyUser,$annoncereservation,$userFrom)
     {
@@ -27,23 +29,17 @@ class NewcommentNotification extends Notification implements ShouldQueue
     }
 
     /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
         return (new MailMessage)
                     ->greeting($this->userFrom->first_name.' à poster commentaire sur cette annonce ci-dessous')
@@ -63,15 +59,14 @@ class NewcommentNotification extends Notification implements ShouldQueue
     }
 
     /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray()
     {
         return [
-            //
+            'annoncereservationID' => $this->annoncereservation->id,
+            'annoncereservationTitle' => $this->annoncereservation->title,
+            'userFromName' => $this->userFrom->first_name
         ];
     }
 }

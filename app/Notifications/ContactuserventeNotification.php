@@ -17,10 +17,15 @@ class ContactuserventeNotification extends Notification implements ShouldQueue
     protected $fromSubjectUser;
     protected $fromMessageUser;
     protected $annoncevente;
+
     /**
-     * Create a new message instance.
-     *
-     * @return void
+     * ContactuserventeNotification constructor.
+     * @param $fromFullnameUser
+     * @param $fromPhoneUser
+     * @param $fromEmailUser
+     * @param $fromSubjectUser
+     * @param $fromMessageUser
+     * @param $annoncevente
      */
     public function __construct($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$annoncevente)
     {
@@ -33,23 +38,17 @@ class ContactuserventeNotification extends Notification implements ShouldQueue
     }
 
     /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
         return (new MailMessage)
             ->greeting('Salut '.$this->annoncevente->user->first_name)
@@ -64,15 +63,15 @@ class ContactuserventeNotification extends Notification implements ShouldQueue
     }
 
     /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray()
     {
         return [
-            //
+            'annonceventeID' => $this->annoncevente->id,
+            'annonceventeTitle' => $this->annoncevente->title,
+            'fromMessage' => $this->fromMessageUser,
+            'fromFullnameUser' => $this->fromFullnameUser,
         ];
     }
 }

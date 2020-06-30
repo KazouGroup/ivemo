@@ -43,8 +43,8 @@ class ContactuserJob implements ShouldQueue
     {
         try {
 
-            Notification::route('mail',   $this->user->email)
-                ->notify(new ContactuserNotification(
+                $this->user
+                    ->notify(new ContactuserNotification(
                     $this->fromFullnameUser,
                     $this->fromEmailUser,
                     $this->fromSubjectUser,

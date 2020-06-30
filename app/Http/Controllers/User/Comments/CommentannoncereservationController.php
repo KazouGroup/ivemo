@@ -10,6 +10,7 @@ use App\Model\categoryannoncereservation;
 use App\Model\city;
 use App\Model\comment;
 use App\Model\responsecomment;
+use App\Notifications\NewcommentNotification;
 use App\Services\CommentAndResponseService;
 use Illuminate\Http\Request;
 

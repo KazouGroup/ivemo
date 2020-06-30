@@ -2,17 +2,12 @@
 
 namespace App\Jobs;
 
-use App\Mail\ContactuserventeMail;
 use App\Notifications\ContactuserventeNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Notification;
 
 class ContactuserventeJob implements ShouldQueue
 {
@@ -47,22 +42,13 @@ class ContactuserventeJob implements ShouldQueue
      */
     public function handle()
     {
-        try {
-
-
-            Notification::route('mail',   $this->annoncevente->user->email)
-                ->notify(new ContactuserventeNotification(
-                    $this->fromFullnameUser,
-                    $this->fromPhoneUser,
-                    $this->fromEmailUser,
-                    $this->fromSubjectUser,
-                    $this->fromMessageUser,
-                    $this->annoncevente));
-
-
-        }catch (\Exception $e){
-            Log::error($e->getMessage());
-        }
-
+        $this->annoncevente->user
+            ->notify(new ContactuserventeNotification(
+                $this->fromFullnameUser,
+                $this->fromPhoneUser,
+                $this->fromEmailUser,
+                $this->fromSubjectUser,
+                $this->fromMessageUser,
+                $this->annoncevente));
     }
 }

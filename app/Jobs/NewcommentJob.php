@@ -8,8 +8,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Notification;
 
 class NewcommentJob implements ShouldQueue
 {
@@ -37,20 +35,16 @@ class NewcommentJob implements ShouldQueue
      */
     public function handle()
     {
-        try {
+        // Bon à savoir l'email de l'utilisateur est directement capture ici automatiquement
+        // "$this->annoncereservation->user" qui pouvais etre ecrite ainsi
+        // "Notification::route('mail',   $this->annoncereservation->user->email)" cette partie ce code ne
+        // m'envoie pas les notification dans la base donner
 
-
-            Notification::route('mail',$this->annoncereservation->user->email)
-                ->notify(new NewcommentNotification(
-                    $this->fromBodyUser,
-                    $this->annoncereservation,
-                    $this->userFrom));
-
-
-        }catch (\Exception $e){
-            Log::error($e->getMessage());
-        }
-
-
+        $this->annoncereservation->user
+            ->notify(new NewcommentNotification(
+                $this->fromBodyUser,
+                $this->annoncereservation,
+                $this->userFrom
+            ));
     }
 }
