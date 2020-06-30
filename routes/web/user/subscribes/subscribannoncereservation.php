@@ -6,22 +6,22 @@ Route::group(['prefix' => 'api'], function () {
     Route::get(
         'subscribes/annoncereservations',
         'SubscribannoncereservationController@apiusersubscribes'
-    )->name('api.usersubscribes');
+    )->name('api.annoncereservationsusersubscribes');
 
     Route::get(
         'subscribed/annoncereservations',
         'SubscribannoncereservationController@apiusersubscribed'
-    )->name('api.usersubscribed');
+    )->name('api.annoncereservationsusersubscribed');
 
     Route::get(
         'subscribes_count/annoncereservations',
         'SubscribannoncereservationController@apiusersubscribes_count'
-    )->name('api.usersubscribes_count');
+    )->name('api.annoncereservationsusersubscribes_count');
 
     Route::get(
         'subscribed_count/annoncereservations',
         'SubscribannoncereservationController@apiusersubscribed_count'
-    )->name('api.usersubscribed_count');
+    )->name('api.annoncereservationsusersubscribed_count');
 
 });
 
