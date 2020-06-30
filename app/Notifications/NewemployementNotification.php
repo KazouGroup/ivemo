@@ -6,7 +6,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Arr;
 
 class NewemployementNotification extends Notification implements ShouldQueue
 {
@@ -35,12 +34,9 @@ class NewemployementNotification extends Notification implements ShouldQueue
     }
 
     /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
         return (new MailMessage)
                     ->success()

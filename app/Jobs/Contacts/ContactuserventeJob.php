@@ -1,19 +1,15 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\Contacts;
 
-use App\Notifications\ContactuserlocationNotification;
+use App\Notifications\Contacts\ContactuserventeNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Notification;
 
-class ContactuserlocationJob implements ShouldQueue
+class ContactuserventeJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -22,20 +18,20 @@ class ContactuserlocationJob implements ShouldQueue
     protected $fromEmailUser;
     protected $fromSubjectUser;
     protected $fromMessageUser;
-    protected $annoncelocation;
+    protected $annoncevente;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$annoncelocation)
+    public function __construct($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$annoncevente)
     {
         $this->fromFullnameUser = $fromFullnameUser;
         $this->fromPhoneUser = $fromPhoneUser;
         $this->fromEmailUser = $fromEmailUser;
         $this->fromSubjectUser = $fromSubjectUser;
         $this->fromMessageUser = $fromMessageUser;
-        $this->annoncelocation = $annoncelocation;
+        $this->annoncevente = $annoncevente;
 
     }
 
@@ -46,13 +42,13 @@ class ContactuserlocationJob implements ShouldQueue
      */
     public function handle()
     {
-        $this->annoncelocation->user
-            ->notify(new ContactuserlocationNotification(
+        $this->annoncevente->user
+            ->notify(new ContactuserventeNotification(
                 $this->fromFullnameUser,
                 $this->fromPhoneUser,
                 $this->fromEmailUser,
                 $this->fromSubjectUser,
                 $this->fromMessageUser,
-                $this->annoncelocation));
+                $this->annoncevente));
     }
 }

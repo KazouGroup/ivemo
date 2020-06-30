@@ -3,7 +3,7 @@ namespace App\Services\Contactusers;
 
 
 
-use App\Jobs\ContactuserventeJob;
+use App\Jobs\Contacts\ContactuserventeJob;
 use App\Model\contactusersvente;
 use App\Services\HelpersService;
 
@@ -134,7 +134,8 @@ class ContactusersventeService
                 $q->select('id','name','slug');},
             'annoncevente.user' => function ($q){
                 $q->distinct()->get()->toArray();},
-        ])->whereSlug($contactusersvente->slug)->first();;
+        ])
+            ->whereSlug($contactusersvente->slug)->first();;
 
         return $contactusersvente;
     }
@@ -149,7 +150,6 @@ class ContactusersventeService
 
 
         $emailToUser = (new ContactuserventeJob($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$annoncevente));
-
 
         dispatch($emailToUser);
     }

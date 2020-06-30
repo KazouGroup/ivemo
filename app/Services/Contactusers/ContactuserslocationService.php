@@ -3,9 +3,8 @@ namespace App\Services\Contactusers;
 
 
 
-use App\Jobs\ContactuserlocationJob;
+use App\Jobs\Contacts\ContactuserlocationJob;
 use App\Model\contactuserslocation;
-use App\Model\user;
 use App\Services\HelpersService;
 
 class ContactuserslocationService
