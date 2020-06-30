@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ContactuserNotification extends Notification
+class ContactuserNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -16,10 +16,14 @@ class ContactuserNotification extends Notification
     protected $fromSubjectUser;
     protected $fromMessageUser;
     protected $user;
+
     /**
-     * Create a new message instance.
-     *
-     * @return void
+     * ContactuserNotification constructor.
+     * @param $fromFullnameUser
+     * @param $fromEmailUser
+     * @param $fromSubjectUser
+     * @param $fromMessageUser
+     * @param $user
      */
     public function __construct($fromFullnameUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$user)
     {
@@ -31,30 +35,24 @@ class ContactuserNotification extends Notification
     }
 
     /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
         return ['mail'];
     }
 
     /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
         return (new MailMessage)
             ->success()
             ->greeting('Salut '.$this->user->first_name)
             ->subject($this->fromSubjectUser)
             ->salutation('Cordiale')
-            ->from($this->fromEmailUser,$this->fromFullnameUser)
+            ->from($this->fromEmailUser,config('app.name'))
             ->line($this->fromFullnameUser.' vous a envoyer un message')
             ->line($this->fromMessageUser)
             ->action('lire la suite', url(route('personal_mails_contacts.site',[$this->user->slug])))
@@ -62,12 +60,9 @@ class ContactuserNotification extends Notification
     }
 
     /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray()
     {
         return [
             //

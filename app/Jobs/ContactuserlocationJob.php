@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Mail\ContactuserlocationMail;
 use App\Notifications\ContactuserlocationNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -47,21 +46,13 @@ class ContactuserlocationJob implements ShouldQueue
      */
     public function handle()
     {
-        try {
-
-            Notification::route('mail',   $this->annoncelocation->user->email)
-                ->notify(new ContactuserlocationNotification(
-                    $this->fromFullnameUser,
-                    $this->fromPhoneUser,
-                    $this->fromEmailUser,
-                    $this->fromSubjectUser,
-                    $this->fromMessageUser,
-                    $this->annoncelocation));
-
-
-        }catch (\Exception $e){
-            Log::error($e->getMessage());
-        }
-
+        $this->annoncelocation->user
+            ->notify(new ContactuserlocationNotification(
+                $this->fromFullnameUser,
+                $this->fromPhoneUser,
+                $this->fromEmailUser,
+                $this->fromSubjectUser,
+                $this->fromMessageUser,
+                $this->annoncelocation));
     }
 }

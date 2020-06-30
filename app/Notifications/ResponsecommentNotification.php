@@ -6,21 +6,26 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Arr;
 
-class NewemployementNotification extends Notification implements ShouldQueue
+class ResponsecommentNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    protected $fromUser;
+    protected $fromBodyUser;
+    protected $annoncereservation;
+    protected $comment;
+    protected $userFrom;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($fromUser)
+    public function __construct($fromBodyUser,$annoncereservation,$comment,$userFrom)
     {
-        $this->fromUser = $fromUser;
+        $this->fromBodyUser = $fromBodyUser;
+        $this->annoncereservation = $annoncereservation;
+        $this->comment = $comment;
+        $this->userFrom = $userFrom;
     }
 
     /**
@@ -43,14 +48,11 @@ class NewemployementNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->success()
-                    ->greeting('Salut')
-                    ->subject('Nouvelle annonce de '.$this->fromUser->first_name)
-                    ->salutation('Cordiale')
-                    ->from($this->fromUser->email,config('app.name'))
-                    ->line($this->fromUser->first_name.' à poster une annonce sur les emploies service et prestation.')
-                    ->action('En savoir plus', url(route('public_profile_employments.site',[$this->fromUser->slug])))
-                    ->line('Thank you for using our application!');
+                    ->greeting('Réponse de '.$this->userFrom->first_name.' à votre commentaire')
+                    ->subject('Réponse du commentaire')
+                    ->salutation('Visite le site pour en savoir plus')
+                    ->from($this->userFrom->email,config('app.name'))
+                    ->line($this->fromBodyUser);
     }
 
     /**

@@ -145,16 +145,16 @@ class AnnoncereservationController extends Controller
         return response()->json($annonces, 200);
     }
 
-    public function apiannoncelocationbycategoryannoncereservation(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation)
+    public function apiannoncereservationbycategoryannoncereservation(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation)
     {
-        $annoncereservation = AnnoncereservationService::apiannoncelocationbycategoryannoncereservation($annoncetype,$categoryannoncereservation);
+        $annoncereservation = AnnoncereservationService::apiannoncereservationbycategoryannoncereservation($annoncetype,$categoryannoncereservation);
 
         return response()->json($annoncereservation, 200);
     }
 
-    public function apiannoncelocationbycategoryannoncereservationcount(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation)
+    public function apiannoncereservationbycategoryannoncereservationcount(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation)
     {
-        $annoncereservation = AnnoncereservationService::apiannoncelocationbycategoryannoncereservationcount($annoncetype,$categoryannoncereservation);
+        $annoncereservation = AnnoncereservationService::apiannoncereservationbycategoryannoncereservationcount($annoncetype,$categoryannoncereservation);
         return response()->json($annoncereservation, 200);
     }
 
@@ -233,7 +233,7 @@ class AnnoncereservationController extends Controller
         return response()->json($annoncereservations, 200);
     }
 
-    public function apiannoncelocationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
+    public function apiannoncereservationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
     {
         visits($annoncereservation)->seconds(60)->increment();
 

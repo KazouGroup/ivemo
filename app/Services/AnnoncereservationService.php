@@ -27,7 +27,7 @@ class AnnoncereservationService
         return $annonces;
     }
 
-    public static function apiannoncelocationbycategoryannoncereservation($annoncetype,$categoryannoncereservation)
+    public static function apiannoncereservationbycategoryannoncereservation($annoncetype,$categoryannoncereservation)
     {
         $annonces = AnnoncereservationResource::collection($categoryannoncereservation->annoncereservations()
             ->where(['status' => 1,'status_admin' => 1])
@@ -42,7 +42,7 @@ class AnnoncereservationService
         return $annonces;
     }
 
-    public static function apiannoncelocationbycategoryannoncereservationcount($annoncetype,$categoryannoncereservation)
+    public static function apiannoncereservationbycategoryannoncereservationcount($annoncetype,$categoryannoncereservation)
     {
         $annonces = categoryannoncereservation::whereSlug($categoryannoncereservation->slug)
             ->withCount([

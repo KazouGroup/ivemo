@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ContactuserlocationNotification extends Notification
+class ContactuserlocationNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -17,10 +17,15 @@ class ContactuserlocationNotification extends Notification
     protected $fromSubjectUser;
     protected $fromMessageUser;
     protected $annoncelocation;
+
     /**
-     * Create a new message instance.
-     *
-     * @return void
+     * ContactuserlocationNotification constructor.
+     * @param $fromFullnameUser
+     * @param $fromPhoneUser
+     * @param $fromEmailUser
+     * @param $fromSubjectUser
+     * @param $fromMessageUser
+     * @param $annoncelocation
      */
     public function __construct($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$annoncelocation)
     {
@@ -33,29 +38,23 @@ class ContactuserlocationNotification extends Notification
     }
 
     /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
         return (new MailMessage)
             ->greeting('Salut '.$this->annoncelocation->user->first_name)
             ->subject($this->fromSubjectUser)
             ->salutation('Cordiale')
-            ->from($this->fromEmailUser,$this->fromFullnameUser)
+            ->from($this->fromEmailUser,config('app.name'))
             ->line($this->fromFullnameUser.' vous a contacter sur un de vos bien mise en location sur la platforme - '.config('app.name'))
             ->line('ID: '.$this->annoncelocation->id.' | Titre de l\'annonce: '.$this->annoncelocation->title.' | Prix: '.$this->annoncelocation->price.' | Ville: '.$this->annoncelocation->city->name.' | Categorie: '.$this->annoncelocation->categoryannoncelocation->name)
             ->line($this->fromMessageUser)
@@ -64,15 +63,15 @@ class ContactuserlocationNotification extends Notification
     }
 
     /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray()
     {
         return [
-            //
+            'annoncelocationID' => $this->annoncelocation->id,
+            'annoncelocationTitle' => $this->annoncelocation->title,
+            'fromMessage' => $this->fromMessageUser,
+            'fromFullnameUser' => $this->fromFullnameUser,
         ];
     }
 }

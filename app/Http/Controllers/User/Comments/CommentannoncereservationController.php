@@ -10,6 +10,8 @@ use App\Model\categoryannoncereservation;
 use App\Model\city;
 use App\Model\comment;
 use App\Model\responsecomment;
+use App\Notifications\NewcommentNotification;
+use App\Services\CommentAndResponseService;
 use Illuminate\Http\Request;
 
 class CommentannoncereservationController extends Controller
@@ -50,6 +52,8 @@ class CommentannoncereservationController extends Controller
 
         $comment = $annoncereservation->comments()->create($request->all());
 
+        CommentAndResponseService::newEmailTonewcommentpageShow($request,$annoncereservation);
+
         return response()->json($comment,200);
     }
 
@@ -75,6 +79,8 @@ class CommentannoncereservationController extends Controller
             'body' => $validatedData['body'],
             'comment_id' => $comment->id,
         ]);
+
+        CommentAndResponseService::newEmailToresponsecommentpageShow($request,$annoncereservation,$comment);
 
         return $responsecomment->toJson();
     }
