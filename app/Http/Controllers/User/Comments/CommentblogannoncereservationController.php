@@ -7,6 +7,7 @@ use App\Http\Resources\CommentResource;
 use App\Model\blogannoncereservation;
 use App\Model\comment;
 use App\Model\responsecomment;
+use App\Services\CommentAndResponseService;
 use Illuminate\Http\Request;
 
 class CommentblogannoncereservationController extends Controller
@@ -47,6 +48,8 @@ class CommentblogannoncereservationController extends Controller
 
         $comment = $blogannoncereservation->comments()->create($request->all());
 
+        CommentAndResponseService::newEmailTonewcommentblogannoncereservationpageShow($request,$blogannoncereservation);
+
         return response()->json($comment,200);
     }
 
@@ -72,6 +75,8 @@ class CommentblogannoncereservationController extends Controller
             'body' => $validatedData['body'],
             'comment_id' => $comment->id,
         ]);
+
+        CommentAndResponseService::newEmailToresponsecommentpageShow($request,$comment);
 
         return $responsecomment->toJson();
     }

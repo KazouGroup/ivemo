@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\Comments;
 
-use App\Notifications\NewcommentNotification;
+use App\Notifications\Comments\CommentAnnoncereservationNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class NewcommentJob implements ShouldQueue
+class CommentAnnoncereservationJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -41,7 +41,7 @@ class NewcommentJob implements ShouldQueue
         // m'envoie pas les notification dans la base donner
 
         $this->annoncereservation->user
-            ->notify(new NewcommentNotification(
+            ->notify(new CommentAnnoncereservationNotification(
                 $this->fromBodyUser,
                 $this->annoncereservation,
                 $this->userFrom

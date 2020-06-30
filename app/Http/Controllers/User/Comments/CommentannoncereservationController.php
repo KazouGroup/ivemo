@@ -52,7 +52,7 @@ class CommentannoncereservationController extends Controller
 
         $comment = $annoncereservation->comments()->create($request->all());
 
-        CommentAndResponseService::newEmailTonewcommentpageShow($request,$annoncereservation);
+        CommentAndResponseService::newEmailTonewcommentannoncereservationpageShow($request,$annoncereservation);
 
         return response()->json($comment,200);
     }
@@ -80,7 +80,7 @@ class CommentannoncereservationController extends Controller
             'comment_id' => $comment->id,
         ]);
 
-        CommentAndResponseService::newEmailToresponsecommentpageShow($request,$annoncereservation,$comment);
+        CommentAndResponseService::newEmailToresponsecommentpageShow($request,$comment);
 
         return $responsecomment->toJson();
     }

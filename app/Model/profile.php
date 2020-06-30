@@ -23,6 +23,8 @@ class profile extends Model
         'status_avis' => 'boolean',
         'status_team_user' => 'boolean',
         'status_employments' => 'boolean',
+        'status_responsecomments' => 'boolean',
+        'status_comments' => 'boolean',
         'status_annonce_ventes' => 'boolean',
         'status_annonce_locations' => 'boolean',
         'status_annonce_reservations' => 'boolean',

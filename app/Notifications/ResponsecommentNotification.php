@@ -12,56 +12,48 @@ class ResponsecommentNotification extends Notification implements ShouldQueue
     use Queueable;
 
     protected $fromBodyUser;
-    protected $annoncereservation;
     protected $comment;
     protected $userFrom;
+
     /**
-     * Create a new job instance.
-     *
-     * @return void
+     * ResponsecommentNotification constructor.
+     * @param $fromBodyUser
+     * @param $comment
+     * @param $userFrom
      */
-    public function __construct($fromBodyUser,$annoncereservation,$comment,$userFrom)
+    public function __construct($fromBodyUser,$comment,$userFrom)
     {
         $this->fromBodyUser = $fromBodyUser;
-        $this->annoncereservation = $annoncereservation;
         $this->comment = $comment;
         $this->userFrom = $userFrom;
     }
 
     /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
         return ['mail'];
     }
 
     /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
         return (new MailMessage)
                     ->greeting('Réponse de '.$this->userFrom->first_name.' à votre commentaire')
                     ->subject('Réponse du commentaire')
+                    ->line('ID: '.$this->comment->id.' | Commentaire: '.$this->comment->body.' | Commentaire posté le: '.$this->comment->created_at->format('m/d/Y H:i:s'))
                     ->salutation('Visite le site pour en savoir plus')
                     ->from($this->userFrom->email,config('app.name'))
                     ->line($this->fromBodyUser);
     }
 
     /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray()
     {
         return [
             //
