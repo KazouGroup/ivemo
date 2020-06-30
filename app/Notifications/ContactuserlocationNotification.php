@@ -53,9 +53,9 @@ class ContactuserlocationNotification extends Notification
     {
         return (new MailMessage)
             ->greeting('Salut '.$this->annoncelocation->user->first_name)
-            ->subject($this->fromSubjectUser.' - '.config('app.name'))
+            ->subject($this->fromSubjectUser)
             ->salutation('Cordiale')
-            ->from($this->fromEmailUser,$this->fromFullnameUser)
+            ->from($this->fromEmailUser,config('app.name'))
             ->line($this->fromFullnameUser.' vous a contacter sur un de vos bien mise en location sur la platforme - '.config('app.name'))
             ->line('ID: '.$this->annoncelocation->id.' | Titre de l\'annonce: '.$this->annoncelocation->title.' | Prix: '.$this->annoncelocation->price.' | Ville: '.$this->annoncelocation->city->name.' | Categorie: '.$this->annoncelocation->categoryannoncelocation->name)
             ->line($this->fromMessageUser)

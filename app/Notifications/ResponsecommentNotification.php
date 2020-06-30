@@ -49,9 +49,9 @@ class ResponsecommentNotification extends Notification
     {
         return (new MailMessage)
                     ->greeting('Réponse de '.$this->userFrom->first_name.' à votre commentaire')
-                    ->subject('Réponse du commentaire'.' - '.config('app.name'))
+                    ->subject('Réponse du commentaire')
                     ->salutation('Visite le site pour en savoir plus')
-                    ->from($this->userFrom->email,$this->userFrom->first_name)
+                    ->from($this->userFrom->email,config('app.name'))
                     ->line($this->fromBodyUser);
     }
 

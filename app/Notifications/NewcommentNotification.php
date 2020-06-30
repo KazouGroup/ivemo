@@ -47,9 +47,9 @@ class NewcommentNotification extends Notification
     {
         return (new MailMessage)
                     ->greeting($this->userFrom->first_name.' à poster commentaire sur cette annonce ci-dessous')
-                    ->subject('Nouveau commentaire'.' - '.config('app.name'))
+                    ->subject('Nouveau commentaire')
                     ->line('ID: '.$this->annoncereservation->id.' | Titre de l\'annonce: '.$this->annoncereservation->title.' | Prix: '.$this->annoncereservation->price.' | Ville: '.$this->annoncereservation->city->name.' | Categorie: '.$this->annoncereservation->categoryannoncereservation->name)
-                    ->from($this->userFrom->email,$this->userFrom->first_name)
+                    ->from($this->userFrom->email,config('app.name'))
                     ->line($this->fromBodyUser)
                     ->action('Visiter l\'annonce', url(route('annoncelocationbycategoryannoncereservationslug_site',
                         [
