@@ -18,8 +18,8 @@ class BlogannoncereservationcommentIndex extends Component {
             editcomment: false,
             responsecomment: false,
             editresponsecomment: false,
-            visiablecomment: 10,
-            visiableresponsecomment: 2,
+            visiablecomment: 6,
+            visiableresponsecomment: 1,
             comments:{user:[],responsecomments:[]},
             itemData:[],
             errors: [],
@@ -107,13 +107,13 @@ class BlogannoncereservationcommentIndex extends Component {
 
     loadmoresItem() {
         this.setState((old) => {
-            return { visiablecomment: old.visiablecomment + 10 }
+            return { visiablecomment: old.visiablecomment + 6 }
         })
     }
 
     loadmoresresponseItem() {
         this.setState((old) => {
-            return { visiableresponsecomment: old.visiableresponsecomment + 6 }
+            return { visiableresponsecomment: old.visiableresponsecomment + 4 }
         })
     }
 

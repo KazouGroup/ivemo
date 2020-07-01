@@ -9,7 +9,7 @@ import FormComment from "../../inc/vendor/comment/FormComment";
 import ProfileUserComment from "../../inc/vendor/comment/ProfileUserComment";
 
 
-class AnnoncereservationcommentIndex extends Component {
+class BlogannonceventecommentIndex extends Component {
     constructor(props) {
         super(props);
         //itemData correspont a une variable aleatoire donner pour faire le traitement
@@ -154,12 +154,11 @@ class AnnoncereservationcommentIndex extends Component {
             body: this.state.body,
         };
 
-        let itemannoncetype = this.props.match.params.annoncetype;
-        let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
-        let itemcityannonce = this.props.match.params.city;
-        let itemannoncereservation = this.props.match.params.annoncereservation;
+        let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
+        let itemdate = this.props.match.params.date;
+        let itemblogannonvente = this.props.match.params.blogannoncevente;
         let Id = this.state.itemData.id;
-        let url = route('annoncesreservationssendresponsecomment_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemannoncereservation,Id]);
+        let url = route('blogannoncesventessendresponsecomment_site',[itemCategoryannoncevente,itemdate,itemblogannonvente,Id]);
         dyaxios.post(url, item)
             .then(() => {
 
@@ -204,11 +203,12 @@ class AnnoncereservationcommentIndex extends Component {
         let item = {
             body: this.state.body,
         };
-        let itemannoncetype = this.props.match.params.annoncetype;
-        let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
-        let itemcityannonce = this.props.match.params.city;
-        let itemannoncereservation = this.props.match.params.annoncereservation;
-        let url = route('annoncereservationsendcomment_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemannoncereservation]);
+
+        let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
+        let itemdate = this.props.match.params.date;
+        let itemblogannonvente = this.props.match.params.blogannoncevente;
+
+        let url = route('blogannoncesventesendcomment_site',[itemCategoryannoncevente,itemdate,itemblogannonvente]);
         dyaxios.post(url, item)
             .then(() => {
 
@@ -254,12 +254,11 @@ class AnnoncereservationcommentIndex extends Component {
         let item = {
             body: this.state.body,
         };
-        let itemannoncetype = this.props.match.params.annoncetype;
-        let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
-        let itemcityannonce = this.props.match.params.city;
-        let itemannoncereservation = this.props.match.params.annoncereservation;
+        let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
+        let itemdate = this.props.match.params.date;
+        let itemblogannonvente = this.props.match.params.blogannoncevente;
         let Id = this.state.itemData.id;
-        let url = route('annoncereservationupdatecomment_site', [itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemannoncereservation,Id]);
+        let url = route('blogannoncesventeupdatecomment_site', [itemCategoryannoncevente,itemdate,itemblogannonvente,Id]);
         dyaxios.put(url, item)
             .then(response => {
 
@@ -549,12 +548,11 @@ class AnnoncereservationcommentIndex extends Component {
     }
 
     loadItems(){
-        let itemannoncetype = this.props.match.params.annoncetype;
-        let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
-        let itemcityannonce = this.props.match.params.city;
-        let itemannoncereservation = this.props.match.params.annoncereservation;
+        let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
+        let itemdate = this.props.match.params.date;
+        let itemblogannonvente = this.props.match.params.blogannoncevente;
         /*Ici c'est pour recuperer les annonce par villes*/
-        let url = route('api.annoncereservationgetcomment_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemannoncereservation]);
+        let url = route('api.blogannoncesventegetcomment_site',[itemCategoryannoncevente,itemdate,itemblogannonvente]);
         dyaxios.get(url).then(response =>
             this.setState({
                 comments: [...response.data]
@@ -569,8 +567,8 @@ class AnnoncereservationcommentIndex extends Component {
         const {comments,visiablecomment,visiableresponsecomment,itemData,editcomment,editresponsecomment,responsecomment} = this.state;
         return (
             <>
-                <div className="card">
-                    <div className="card-body">
+                <div className="row">
+                    <div className="col-md-10 mx-auto">
 
 
                         <h5 className="title text-center">
@@ -825,15 +823,15 @@ class AnnoncereservationcommentIndex extends Component {
                                 </h6>
                                 :
                                 <>
-                                    {!editcomment && !responsecomment && !editresponsecomment && (
-                                        <Form onSubmit={this.sendcommentItem} acceptCharset="UTF-8">
+                                {!editcomment && !responsecomment && !editresponsecomment && (
+                                    <Form onSubmit={this.sendcommentItem} acceptCharset="UTF-8">
 
-                                            <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
-                                                         renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                         handleFieldChange={this.handleFieldChange} namesubmit={`Poster mon commentaire`}/>
+                                        <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
+                                                     renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
+                                                     handleFieldChange={this.handleFieldChange} namesubmit={`Poster mon commentaire`}/>
 
-                                        </Form>
-                                    )}
+                                    </Form>
+                                )}
                                 </>
                             }
 
@@ -847,4 +845,4 @@ class AnnoncereservationcommentIndex extends Component {
     }
 }
 
-export default AnnoncereservationcommentIndex;
+export default BlogannonceventecommentIndex;

@@ -17,7 +17,7 @@ class CommentAnnoncereservationNotification extends Notification implements Shou
     protected $userFrom;
 
     /**
-     * NewcommentNotification constructor.
+     * CommentAnnoncereservationNotification constructor.
      * @param $fromBodyUser
      * @param $annoncereservation
      * @param $userFrom

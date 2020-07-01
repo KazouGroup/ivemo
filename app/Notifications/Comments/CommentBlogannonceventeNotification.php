@@ -7,24 +7,24 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class CommentBlogannoncereservationNotification extends Notification implements ShouldQueue
+class CommentBlogannonceventeNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
     protected $fromBodyUser;
-    protected $blogannoncereservation;
+    protected $blogannoncevente;
     protected $userFrom;
 
     /**
-     * CommentBlogannoncereservationNotification constructor.
+     * CommentBlogannonceventeNotification constructor.
      * @param $fromBodyUser
-     * @param $blogannoncereservation
+     * @param $blogannoncevente
      * @param $userFrom
      */
-    public function __construct($fromBodyUser,$blogannoncereservation,$userFrom)
+    public function __construct($fromBodyUser,$blogannoncevente,$userFrom)
     {
         $this->fromBodyUser = $fromBodyUser;
-        $this->blogannoncereservation = $blogannoncereservation;
+        $this->blogannoncevente = $blogannoncevente;
         $this->userFrom = $userFrom;
     }
 
@@ -44,14 +44,14 @@ class CommentBlogannoncereservationNotification extends Notification implements 
         return (new MailMessage)
             ->greeting($this->userFrom->first_name.' à poster commentaire sur cette annonce ci-dessous')
             ->subject('Nouveau commentaire')
-            ->line('ID: '.$this->blogannoncereservation->id.' | Titre de l\'article: '.$this->blogannoncereservation->title.' | Categorie: '.$this->blogannoncereservation->categoryannoncereservation->name)
+            ->line('ID: '.$this->blogannoncevente->id.' | Titre de l\'article: '.$this->blogannoncevente->title.' | Categorie: '.$this->blogannoncevente->categoryannoncevente->name)
             ->from($this->userFrom->email,config('app.name'))
             ->line($this->fromBodyUser)
-            ->action('Visiter l\'annonce', url(route('blogannoncecategoryreservationslug_site',
+            ->action('Visiter l\'annonce', url(route('blogannoncecategoryventeslug_site',
                 [
-                    $this->blogannoncereservation->categoryannoncereservation->slug,
-                    $this->blogannoncereservation->created_at->format('Y-m-d'),
-                    $this->blogannoncereservation->slug,
+                    $this->blogannoncevente->categoryannoncevente->slug,
+                    $this->blogannoncevente->created_at->format('Y-m-d'),
+                    $this->blogannoncevente->slug,
                 ])))
             ->salutation('Visiter le site pour en savoir plus');
 
@@ -63,9 +63,9 @@ class CommentBlogannoncereservationNotification extends Notification implements 
     public function toArray()
     {
         return [
-            'blogannoncereservationID' => $this->blogannoncereservation->id,
-            'blogannoncereservationTitle' => $this->blogannoncereservation->title,
-            'blogannoncereservationCategory' => $this->blogannoncereservation->categoryannoncereservation->name,
+            'blogannonceventeID' => $this->blogannoncevente->id,
+            'blogannonceventeTitle' => $this->blogannoncevente->title,
+            'blogannonceventeCategory' => $this->blogannoncevente->categoryannoncevente->name,
             'userFromName' => $this->userFrom->first_name
         ];
     }
