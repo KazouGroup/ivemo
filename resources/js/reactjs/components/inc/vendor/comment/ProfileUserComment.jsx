@@ -10,8 +10,13 @@ class ProfileUserComment extends Component {
                    `${route('userpublic_profile.site',[this.props.user.slug])}`}
             >
                 <div className="author">
-                    <img className="avatar" alt={this.props.user.first_name}
-                         src={this.props.user.avatar}/>
+                    {this.props.user.avatar === null ?
+                        <img className="avatar" alt={this.props.user.first_name}
+                             src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>
+                        :
+                        <img className="avatar" alt={this.props.user.first_name}
+                             src={this.props.user.avatar}/>
+                    }
                 </div>
             </a>
         );

@@ -16,6 +16,7 @@ $factory->define(annoncevente::class, function (Faker $faker) {
         'price' => $faker->randomNumber(8),
         'surface' => $faker->randomNumber(4),
         'status' => true,
+        'status_comments' => $faker->boolean,
         //'status_admin' => $faker->boolean,
         'district' => $faker->streetName,
         'rooms' => $faker->randomDigitNot(5),

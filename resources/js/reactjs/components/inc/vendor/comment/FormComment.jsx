@@ -23,8 +23,13 @@ class FormComment extends Component {
                        `${route('userpublic_profile.site',[$userIvemo.slug])}`}
                    >
                        <div className="author">
-                           <img className="avatar" alt={$userIvemo.first_name}
-                                src={$userIvemo.avatar}/>
+                           {$userIvemo.avatar === null ?
+                               <img className="avatar" alt={$userIvemo.first_name}
+                                    src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>
+                               :
+                               <img className="avatar" alt={$userIvemo.first_name}
+                                    src={$userIvemo.avatar}/>
+                           }
                        </div>
                    </a>
                    <div className="media-body">

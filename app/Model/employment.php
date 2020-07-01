@@ -67,6 +67,7 @@ class employment extends Model
 
     protected $casts = [
         'status' => 'boolean',
+        'status_comments' => 'boolean',
         'status_admin' => 'boolean',
     ];
 
@@ -86,7 +87,6 @@ class employment extends Model
 
         ];
     }
-
 
     public function contactuseremployments()
     {

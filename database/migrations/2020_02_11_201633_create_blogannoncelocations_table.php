@@ -23,6 +23,7 @@ class CreateBlogannoncelocationsTable extends Migration
             $table->string('slug')->nullable();
             $table->string('slugin')->nullable();
             $table->boolean('status')->default(true);
+            $table->boolean('status_comments')->default(false);
             $table->boolean('status_admin')->default(true);
             $table->timestamps();
             $table->softDeletes();

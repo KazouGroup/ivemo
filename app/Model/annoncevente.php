@@ -81,6 +81,7 @@ class annoncevente extends Model
 
     protected $casts = [
         'status' => 'boolean',
+        'status_comments' => 'boolean',
         'status_admin' => 'boolean',
     ];
 

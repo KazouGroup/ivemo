@@ -39,8 +39,13 @@ class BlogannoncelocationList extends PureComponent {
                                 <div className="card-footer">
                                     <div className="author">
                                         <Link to={`/pro/${this.props.user.slug}/blogs/annonce_locations/`}>
-                                            <img src={this.props.user.avatar} alt={this.props.user.first_name}
-                                                 className="avatar img-raised"/>
+                                            {this.props.user.avatar === null ?
+                                                <img className="avatar img-raised" alt={this.props.user.first_name}
+                                                     src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>
+                                                :
+                                                <img className="avatar img-raised" alt={this.props.user.first_name}
+                                                     src={this.props.user.avatar}/>
+                                            }
                                             <b>{this.props.user.first_name}</b>
                                         </Link>
                                     </div>

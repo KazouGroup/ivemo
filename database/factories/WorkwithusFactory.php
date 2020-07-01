@@ -16,6 +16,7 @@ $factory->define(workwithus::class, function (Faker $faker) {
         'title' => $title,
         'slug' => str_slug($title),
         'status' => $faker->boolean,
+        'status_comments' => $faker->boolean,
         'photo' => "https://dummyimage.com/wsvga/" . $backgroundColor . "/". $foregroundColor ."&text=" . $faker->word,
         'description' => $faker->realText(rand(1000, 2000)),
         'categoryworkwithus_id' => categoryworkwithus::inRandomOrder()->first()->id,

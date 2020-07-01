@@ -74,6 +74,7 @@ class annoncereservation extends Model
 
     protected $casts = [
         'status' => 'boolean',
+        'status_comments' => 'boolean',
         'status_admin' => 'boolean',
         'status_wifi' => 'boolean',
         'status_parking' => 'boolean',

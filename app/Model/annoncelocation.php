@@ -2,7 +2,6 @@
 
 namespace App\Model;
 
-use App\Model\favorite\favoriteannonce;
 use App\Model\favorite\favoriteannoncelocation;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
@@ -75,6 +74,7 @@ class annoncelocation extends Model
 
     protected $casts = [
         'status' => 'boolean',
+        'status_comments' => 'boolean',
         'status_admin' => 'boolean',
     ];
 
