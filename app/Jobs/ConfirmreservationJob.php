@@ -47,7 +47,6 @@ class ConfirmreservationJob implements ShouldQueue
                 Mail::send($emailData);
             }
 
-
         }catch (\Exception $e){
             Log::error($e->getMessage());
         }

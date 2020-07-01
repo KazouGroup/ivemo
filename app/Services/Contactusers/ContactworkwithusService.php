@@ -3,22 +3,22 @@ namespace App\Services\Contactusers;
 
 
 
-use App\Jobs\ContactuserJob;
-use App\Jobs\ContactworkwithusJob;
+use App\Jobs\Contacts\ContactworkwithusJob;
 use App\Model\user;
-use App\Services\HelpersService;
 
 class ContactworkwithusService
 {
 
-    public static function newEmailTocontactworkwithus($request)
+    public static function newEmailTocontactworkwithus($request,$workwithus)
     {
 
-        $to = $request->get('email');
+        $fromFullnameUser = $request->get('full_name');
+        $fromPhoneUser = $request->get('phone');
+        $fromEmailUser = $request->get('email');
 
-        $from = ['address' => config('app.email') , 'name' => config('app.name')];
+        $toAdminUser = user::where('status_user',1)->get();
 
-        $emailToUser = (new ContactworkwithusJob($to,$from));
+        $emailToUser = (new ContactworkwithusJob($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$toAdminUser,$workwithus));
 
         dispatch($emailToUser);
     }

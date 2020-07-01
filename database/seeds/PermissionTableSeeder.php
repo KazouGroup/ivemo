@@ -18,12 +18,12 @@ class PermissionTableSeeder extends Seeder
 
         // Create roles (Please don't delete this it's verry important !)
 
-        Role::create(['guard_name' => 'web', 'name' => 'user']);
-        Role::create(['guard_name' => 'web', 'name' => 'visitor']);
-        Role::create(['guard_name' => 'web', 'name' => 'editor']);
+        Role::create(['guard_name' => 'web', 'name' => 'admin']);
         Role::create(['guard_name' => 'web', 'name' => 'advertiser']);
         Role::create(['guard_name' => 'web', 'name' => 'moderator']);
-        Role::create(['guard_name' => 'web', 'name' => 'admin']);
+        Role::create(['guard_name' => 'web', 'name' => 'visitor']);
+        Role::create(['guard_name' => 'web', 'name' => 'user']);
+
 
 
 
