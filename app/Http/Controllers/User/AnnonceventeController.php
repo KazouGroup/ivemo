@@ -22,10 +22,10 @@ class AnnonceventeController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['only' => [
-            'create', 'store', 'edit', 'update', 'destroy','adminunactivated','adminactivated',
+            'create', 'store', 'edit', 'update', 'destroy','adminstatusitem',
             'apiannoncesventesbyuser','annoncesventesbyuser','annoncesventesbyusercategory',
-            'apiannoncesventesbyusercategoryannoncevente', 'activated',
-            'unactivated','apiannonceventesbyannoncetypebyannoncevente',
+            'apiannoncesventesbyusercategoryannoncevente', 'statusitem','statuscomments',
+            'apiannonceventesbyannoncetypebyannoncevente',
         ]]);
     }
 
@@ -337,54 +337,35 @@ class AnnonceventeController extends Controller
         ]);
     }
 
-    public function activated($id)
+    public function statusitem($id)
     {
         $annoncevente = annoncevente::where('id', $id)->findOrFail($id);
 
         $this->authorize('update',$annoncevente);
 
-        if(auth()->user()->id === $annoncevente->user_id){
+        $annoncevente->update(['status' => !$annoncevente->status,]);
 
-            $annoncevente->update(['status' => 1,]);
-
-            return response('Confirmed',Response::HTTP_ACCEPTED);
-        }else{
-            abort(404);
-        }
+        return response('Confirmed',Response::HTTP_ACCEPTED);
     }
 
-    public function unactivated($id)
+    public function statuscomments($id)
     {
         $annoncevente = annoncevente::where('id', $id)->findOrFail($id);
 
         $this->authorize('update',$annoncevente);
 
-        if(auth()->user()->id === $annoncevente->user_id){
-            $annoncevente->update(['status' => 0,]);
-
-            return response('Confirmed',Response::HTTP_ACCEPTED);
-        }else{
-            abort(404);
-        }
-    }
-
-    public function adminactivated($id)
-    {
-        $annoncevente = annoncevente::where('id', $id)->findOrFail($id);
-
-        $annoncevente->update(['status_admin' => 1,'member_id' => auth()->user()->id]);
+        $annoncevente->update(['status_comments' => !$annoncevente->status_comments]);
 
         return response('Confirmed',Response::HTTP_ACCEPTED);
     }
 
-    public function adminunactivated($id)
+    public function adminstatusitem($id)
     {
         $annoncevente = annoncevente::where('id', $id)->findOrFail($id);
 
-        $annoncevente->update(['status_admin' => 0,'member_id' => auth()->user()->id]);
+        $annoncevente->update(['status_admin' => !$annoncevente->status_admin,'member_id' => auth()->user()->id]);
 
         return response('Confirmed',Response::HTTP_ACCEPTED);
-
     }
 
     /**

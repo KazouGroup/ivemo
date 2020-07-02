@@ -32,6 +32,7 @@ class AnnonceventeResource extends JsonResource
             'city_id' => $this->city_id,
             'annoncetype' => $this->annoncetype,
             'status' => $this->status,
+            'status_comments' => $this->status_comments,
             'status_admin' => $this->status_admin,
             'bookmarked' => $this->bookmarked(),
             'visits_count' => $this->visits()->count(),

@@ -48,13 +48,13 @@ class ProfileForallAnnonceventeShow extends Component {
                             :
                             <>
                                 {this.props.bookmarked ?
-                                    <Button onClick={() => this.props.unfavoriteItem(this.props.id)}
+                                    <Button onClick={() => this.props.favoriteItem(this.props)}
                                             className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
                                         <i className="fas fa-bookmark"></i>
                                     </Button>
 
                                     :
-                                    <Button onClick={() => this.props.favoriteItem(this.props.id)}
+                                    <Button onClick={() => this.props.favoriteItem(this.props)}
                                             className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
                                         <i className="far fa-bookmark"></i>
                                     </Button>
@@ -85,10 +85,23 @@ class ProfileForallAnnonceventeShow extends Component {
                                             <i className="far fa-eye"></i> <b>{this.data_countFormatter(this.props.visits_count)}</b>
                                         </a>
 
-                                        <Button onClick={() => this.props.unactiveItem(this.props.id)}
+                                        <Button onClick={() => this.props.statusItem(this.props)}
                                                 className="btn btn-success btn-icon btn-sm" title="Désactiver cette annonce">
                                             <i className="now-ui-icons ui-1_check"/>
                                         </Button>
+
+                                        {this.props.status_comments ?
+                                            <Button onClick={() => this.props.statuscommentItem(this.props)}
+                                                    className="btn btn-primary btn-icon btn-sm" title="Commentaire activé">
+                                                <i className="fas fa-comments"/>
+                                            </Button>
+                                            :
+                                            <Button onClick={() => this.props.statuscommentItem(this.props)}
+                                                    className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Commentaire désactivé">
+                                                <i className="far fa-comments"/>
+                                            </Button>
+
+                                        }
 
                                         <NavLink to={`/annonce_vente/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer cette annonce">
                                             <i className="now-ui-icons ui-2_settings-90"/>

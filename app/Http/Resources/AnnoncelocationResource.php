@@ -33,6 +33,7 @@ class AnnoncelocationResource extends JsonResource
             'annoncetype' => $this->annoncetype,
             'annoncetype_id' => $this->annoncetype_id,
             'status' => $this->status,
+            'status_comments' => $this->status_comments,
             'status_admin' => $this->status_admin,
             'bookmarked' => $this->bookmarked(),
             'visits_count' => $this->visits()->count(),

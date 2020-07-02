@@ -106,7 +106,7 @@ class PrivateUserFavoritEmployments extends Component {
         );
         return (
             <>
-                <HelmetSite title={`Mes favoris Emplois, Formation & Services ${$userIvemo.first_name || 'Profile'} - {$name_site}`}/>
+                <HelmetSite title={`Mes favoris Emplois, Formation & Services ${$userIvemo.first_name || 'Profile'} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 

@@ -21,6 +21,7 @@ class AnnoncereservationResource extends JsonResource
             'slugin' => $this->slugin,
             'district' => $this->district,
             'status' => $this->status,
+            'status_comments' => $this->status_comments,
             'status_admin' => $this->status_admin,
             'description' => $this->description,
             'price' => $this->price,

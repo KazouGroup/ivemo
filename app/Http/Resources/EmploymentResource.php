@@ -32,6 +32,7 @@ class EmploymentResource extends JsonResource
             'photo' => $this->photo,
             'city_id' => $this->city_id,
             'status' => $this->status,
+            'status_comments' => $this->status_comments,
             'status_admin' => $this->status_admin,
             'contactuseremployments' => $this->contactuseremployments,
             'contactuseremployments_count' => $this->contactuseremployments_count,

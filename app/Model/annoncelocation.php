@@ -95,6 +95,11 @@ class annoncelocation extends Model
         ];
     }
 
+    public function comments()
+    {
+        return $this->morphMany(comment::class ,'commentable');
+    }
+
     public function bookmarked()
     {
         return (bool) favoriteannoncelocation::where('user_id', Auth::guard('web')->id())

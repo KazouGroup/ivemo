@@ -25,7 +25,8 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
         this.deleteItem = this.deleteItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
         this.unfavoriteItem = this.unfavoriteItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
+        this.statusItem = this.statusItem.bind(this);
+        this.statuscommentItem = this.statuscommentItem.bind(this);
 
     }
 
@@ -93,7 +94,79 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
         })
     }
 
-    unactiveItem(id) {
+    statuscommentItem(item){
+        Swal.fire({
+            text: "êtes vous sure de vouloir changer le status des commentaires de cette annonce?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                //Envoyer la requet au server
+                let url = route('annonces_reservations_status_comments.site',item.id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    if(item.status_comments){
+                        $.notify({
+
+                                message: "Commentaire desactivé sur cette annonce",
+                            },
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }else {
+                        $.notify({
+
+                                message: "Commentaire activés sur cette annonce",
+                            },
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }
+
+                    /** End alert ***/
+                    this.loadItems();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
+
+    }
+
+    statusItem(item) {
         Swal.fire({
             title: 'Désactiver l\'annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
@@ -108,32 +181,54 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
         }).then((result) => {
             if (result.value) {
 
-                let isNotId = item => item.id !== id;
+                let isNotId = data => data.id !== item.id;
                 let updatedItems = this.state.annoncereservations.filter(isNotId);
                 this.setState({ annoncereservations: updatedItems });
 
                 //Envoyer la requet au server
-                let url = route('annonces_reservations_unactivated.site', id);
+                let url = route('annonces_reservations_status.site', item.id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
-                    $.notify({
 
-                            //message: 'Annonce désactiver avec succès',
-                            message: "Annonce masquée aux utilisateurs",
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
+                    if(item.status){
+                        $.notify({
+
+                                //message: 'Annonce désactiver avec succès',
+                                message: "Annonce masquée aux utilisateurs",
                             },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }else {
+                        $.notify({
+
+                                //message: 'Annonce désactiver avec succès',
+                                message: "Annonce masquée visible aux utilisateurs",
                             },
-                        });
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }
+
                     /** End alert ***/
                 }).catch(() => {
                     //Failled message
@@ -399,7 +494,8 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                         <div className="card">
                                             <div className="card-body">
 
-                                                <ProfileForallAnnonceShow {...annoncereservation} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
+                                                <ProfileForallAnnonceShow {...annoncereservation} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem}
+                                                                          deleteItem={this.deleteItem} statusItem={this.statusItem} statuscommentItem={this.statuscommentItem}/>
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">
@@ -431,7 +527,23 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                         </div>
 
 
-                                        <AnnoncereservationcommentIndex {...this.props} {...annoncereservation} />
+                                        {annoncereservation.status_comments ?
+
+                                            <AnnoncereservationcommentIndex {...this.props} {...annoncereservation} />
+                                            :
+                                            <>
+                                                {!$guest && (
+                                                    <>
+                                                        {($userIvemo.id === annoncereservation.user.id || $userIvemo.id === annoncereservation.user_id)  && (
+
+                                                            <AnnoncereservationcommentIndex {...this.props} {...annoncereservation} />
+
+                                                        )}
+                                                    </>
+                                                )}
+                                            </>
+
+                                        }
 
 
                                     </div>

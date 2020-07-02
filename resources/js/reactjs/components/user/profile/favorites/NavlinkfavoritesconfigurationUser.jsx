@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link, NavLink, withRouter } from 'react-router-dom';
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
-class NavlinkfavoritesconfigurationUser extends Component {
+class NavlinkfavoritesconfigurationUser extends PureComponent {
 
 
     render() {

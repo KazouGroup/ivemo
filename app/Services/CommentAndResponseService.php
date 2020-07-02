@@ -4,6 +4,7 @@ namespace App\Services;
 
 
 use App\Jobs\Comments\CommentAnnoncereservationJob;
+use App\Jobs\Comments\CommentAnnonceventeJob;
 use App\Jobs\Comments\CommentBlogannoncereservationJob;
 use App\Jobs\Comments\CommentBlogannonceventeJob;
 use App\Jobs\ResponsecommentJob;
@@ -34,6 +35,20 @@ class CommentAndResponseService
         if ($annoncereservation->user->profile->status_comments){
 
             $emailToUser = (new CommentAnnoncereservationJob($fromBodyUser,$annoncereservation,$userFrom));
+
+            dispatch($emailToUser);
+        }
+
+    }
+
+    public static function newEmailTonewcommentannonceventepageShow($request,$annoncevente)
+    {
+        $userFrom = auth()->user();
+        $fromBodyUser = $request->get('body');
+
+        if ($annoncevente->user->profile->status_comments){
+
+            $emailToUser = (new CommentAnnonceventeJob($fromBodyUser,$annoncevente,$userFrom));
 
             dispatch($emailToUser);
         }

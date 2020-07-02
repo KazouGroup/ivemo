@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import moment from "moment";
 import FormComment from "../../inc/vendor/comment/FormComment";
 import ProfileUserComment from "../../inc/vendor/comment/ProfileUserComment";
+import CommentViewList from "./inc/CommentViewList";
 
 
 class BlogannonceventecommentIndex extends Component {
@@ -563,6 +564,16 @@ class BlogannonceventecommentIndex extends Component {
         this.loadItems()
     }
 
+    getcountlikeString (likeked_count) {
+        likeked_count = likeked_count +'';
+        if (likeked_count < 1000) {
+            return likeked_count;
+        }
+        if (likeked_count < 10000) {
+            return likeked_count.charAt(0) + ',' + likeked_count.substring(1);
+        }
+        return (likeked_count/1000).toFixed(likeked_count % 1000 !== 0)+'k';
+    }
     render() {
         const {comments,visiablecomment,visiableresponsecomment,itemData,editcomment,editresponsecomment,responsecomment} = this.state;
         return (
@@ -607,82 +618,9 @@ class BlogannonceventecommentIndex extends Component {
 
                                                <div className="media-body">
 
-                                                   <>
-                                                       <h6 className="media-heading">{item.user.first_name}
-                                                           <small className="text-muted">· {moment(item.created_at).format('LL')}</small>
-                                                       </h6>
-                                                       <ReadMoreAndLess
-                                                           className="read-more-content"
-                                                           charLimit={250}
-                                                           readMoreText="lire plus"
-                                                           readLessText=""
-                                                       >
-                                                           {item.body || ""}
-                                                       </ReadMoreAndLess>
-
-                                                       <div className="media-footer">
-
-                                                           {$guest ?
-
-                                                               <Button data-toggle="modal" data-target="#loginModal"
-                                                                       className="btn btn-default btn-neutral pull-right" title="J'aime ce commentaire">
-                                                                   <i className="now-ui-icons ui-2_favourite-28"></i> {item.likeked_count}
-                                                               </Button>
-                                                               :
-
-                                                               <>
-                                                                   <button type="button" onClick={() => this.responsecommentFromItem(item)}
-                                                                           className="btn btn-default btn-neutral pull-right" title="Repondre a ce commentaire">
-                                                                       <i className="now-ui-icons files_single-copy-04"></i> Repondre
-                                                                   </button>
-
-                                                                   {item.likeked ?
-
-                                                                       <>
-                                                                           <Button onClick={() => this.unlikeItem(item.id)}
-                                                                                   className="btn btn-danger btn-neutral pull-right" title="J'aime plus ce commentaire">
-                                                                               <i className="now-ui-icons ui-2_favourite-28"></i> {item.likeked_count}
-                                                                           </Button>
-                                                                       </>
-
-                                                                       :
-                                                                       <>
-                                                                           <Button onClick={() => this.likeItem(item.id)}
-                                                                                   className="btn btn-default btn-neutral pull-right" title="J'aime ce commentaire">
-                                                                               <i className="now-ui-icons ui-2_favourite-28"></i> {item.likeked_count}
-                                                                           </Button>
-                                                                       </>
-                                                                   }
-
-                                                                   {$userIvemo.id === item.user.id && (
-                                                                       <>
-                                                                           <button onClick={() => this.deleteItem(item.id) }
-                                                                                   className="btn btn-danger btn-neutral pull-right">
-                                                                               <i className="now-ui-icons ui-1_simple-remove"></i> Suprimer
-                                                                           </button>
-
-                                                                           <Button onClick={() => this.editcommentFromItem(item)}
-                                                                                   className="btn btn-info btn-neutral pull-right">
-                                                                               <i className="now-ui-icons ui-2_settings-90"></i> Editer
-                                                                           </Button>
-
-                                                                       </>
-                                                                   )}
-
-                                                                   {/* Ce button donne l'autorisation a l'utilisateur de l'annonce de la masquer */}
-                                                                   {$userIvemo.id === item.commentable.user_id && (
-                                                                       <button onClick={() => this.unactiveItem(item.id) }
-                                                                               className="btn btn-success btn-neutral pull-right" title="Masquer ce commentaire">
-                                                                           <i className="now-ui-icons ui-1_check"></i> Masquer
-                                                                       </button>
-                                                                   )}
-
-
-                                                               </>
-                                                           }
-
-                                                       </div>
-                                                   </>
+                                                   <CommentViewList {...item} responsecommentFromItem={this.responsecommentFromItem}
+                                                                    unlikeItem={this.unlikeItem} likeItem={this.likeItem} deleteItem={this.deleteItem}
+                                                                    editcommentFromItem={this.editcommentFromItem} unactiveItem={this.unactiveItem}/>
 
 
                                                    {(item.id === itemData.id) && (

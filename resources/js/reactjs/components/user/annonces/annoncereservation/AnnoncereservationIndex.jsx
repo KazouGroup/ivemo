@@ -21,7 +21,7 @@ class AnnoncereservationIndex extends Component {
         this.deleteItem = this.deleteItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
         this.unfavoriteItem = this.unfavoriteItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
+        this.statusItem = this.statusItem.bind(this);
     }
 
     favoriteItem(id) {
@@ -88,7 +88,7 @@ class AnnoncereservationIndex extends Component {
         })
     }
 
-    unactiveItem(id) {
+    statusItem(item) {
         Swal.fire({
             title: 'Désactiver l\'annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
@@ -103,32 +103,54 @@ class AnnoncereservationIndex extends Component {
         }).then((result) => {
             if (result.value) {
 
-                let isNotId = item => item.id !== id;
+                let isNotId = data => data.id !== item.id;
                 let updatedItems = this.state.annoncereservations.filter(isNotId);
                 this.setState({ annoncereservations: updatedItems });
 
                 //Envoyer la requet au server
-                let url = route('annonces_reservations_unactivated.site', id);
+                let url = route('annonces_reservations_status.site', item.id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
-                    $.notify({
 
-                            //message: 'Annonce désactiver avec succès',
-                            message: "Annonce masquée aux utilisateurs",
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
+                    if(item.status){
+                        $.notify({
+
+                                //message: 'Annonce désactiver avec succès',
+                                message: "Annonce masquée aux utilisateurs",
                             },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }else {
+                        $.notify({
+
+                                //message: 'Annonce désactiver avec succès',
+                                message: "Annonce masquée visible aux utilisateurs",
                             },
-                        });
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }
+
                     /** End alert ***/
                 }).catch(() => {
                     //Failled message
@@ -219,7 +241,7 @@ class AnnoncereservationIndex extends Component {
         const mapAnnoncereservations = annoncereservations.length >= 0 ? (
             annoncereservations.map(item => {
                 return(
-                    <AnnoncereservationList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
+                    <AnnoncereservationList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} statusItem={this.statusItem} />
                 )
             })
         ):(

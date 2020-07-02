@@ -11,6 +11,7 @@ import ProfileForallAnnonceventeShow from "./ProfileForallAnnonceventeShow";
 import Swal from "sweetalert2";
 import Navlinknewannoncevente from "./treatment/Navlinknewannoncevente";
 import HelmetSite from "../../../inc/user/HelmetSite";
+import AnnoncereseventecommentIndex from "../../comments/AnnoncereseventecommentIndex";
 
 
 class Annonceventebycategorycityshow extends Component {
@@ -22,61 +23,48 @@ class Annonceventebycategorycityshow extends Component {
 
         this.deleteItem = this.deleteItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
-        this.unfavoriteItem = this.unfavoriteItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
+        this.statusItem = this.statusItem.bind(this);
+        this.statuscommentItem = this.statuscommentItem.bind(this);
 
     }
 
-    favoriteItem(id) {
-        const url = route('favoriteannonceventes_favorite.favorite', [id]);
+    favoriteItem(annoncevente) {
+        const url = route('favoriteannonceventes_favorite.favorite', [annoncevente.id]);
         dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Annonce ajoutée à vos favoris",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
-                    },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
-                    },
-                });
-            this.loadItems();
 
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    unfavoriteItem(id) {
-        const url = route('favoriteannonceventes_unfavorite.unfavorite', [id]);
-        dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Annonce retirée de vos favoris",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
+            if(annoncevente.bookmarked){
+                $.notify({
+                        message: "Annonce ajoutée à vos favoris",
                     },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+            }else {
+                $.notify({
+                        message: "Annonce retirée de vos favoris",
                     },
-                });
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+            }
             this.loadItems();
 
         }).catch(() => {
@@ -109,7 +97,79 @@ class Annonceventebycategorycityshow extends Component {
         });
     }
 
-    unactiveItem(id){
+    statuscommentItem(annoncevente){
+        Swal.fire({
+            text: "êtes vous sure de vouloir changer le status des commentaires de cette annonce?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                //Envoyer la requet au server
+                let url = route('annonces_ventes_status_comments.site',annoncevente.id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    if(annoncevente.status_comments){
+                        $.notify({
+
+                                message: "Commentaire desactivé sur cette annonce",
+                            },
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }else {
+                        $.notify({
+
+                                message: "Commentaire activés sur cette annonce",
+                            },
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }
+
+                    /** End alert ***/
+                    this.loadItems();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
+
+    }
+
+    statusItem(annoncevente){
         Swal.fire({
             title: 'Désactiver l\'annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
@@ -125,7 +185,7 @@ class Annonceventebycategorycityshow extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('annonces_ventes_unactivated.site',id);
+                let url = route('annonces_ventes_status.site',annoncevente.id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
@@ -329,7 +389,7 @@ class Annonceventebycategorycityshow extends Component {
                                                         {annoncevente.bookmarked ?
 
                                                             <>
-                                                                <Button onClick={() => this.unfavoriteItem(annoncevente.id)}
+                                                                <Button onClick={() => this.favoriteItem(annoncevente)}
                                                                         className="btn btn-danger btn-sm" title="Retirer de vos favoris">
                                                                     <i className="fas fa-bookmark"></i> <b>Sauvegardé</b>
                                                                 </Button>
@@ -337,7 +397,7 @@ class Annonceventebycategorycityshow extends Component {
 
                                                             :
                                                             <>
-                                                                <Button onClick={() => this.favoriteItem(annoncevente.id)}
+                                                                <Button onClick={() => this.favoriteItem(annoncevente)}
                                                                         className="btn btn-facebook btn-sm btn-neutral" title="Ajouter à vos favoris">
                                                                     <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
                                                                 </Button>
@@ -367,9 +427,9 @@ class Annonceventebycategorycityshow extends Component {
                                                         <div className="col-md-6">
                                                             <h5 className="info-title"><b>Ce bien est au prix de</b></h5>
                                                             {annoncevente.price ?
-                                                                <h3 className="text-success"><b>{annoncevente.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h3>
+                                                                <h3 className="text-dark"><b>{annoncevente.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h3>
                                                                 :
-                                                                <h5 className="text-success"><b><Skeleton width={250} /></b></h5>
+                                                                <h5 className="text-dark"><b><Skeleton width={250} /></b></h5>
                                                             }
                                                         </div>
                                                         <div className="col-md-6">
@@ -387,7 +447,9 @@ class Annonceventebycategorycityshow extends Component {
                                         <div className="card">
                                             <div className="card-body">
 
-                                                <ProfileForallAnnonceventeShow {...annoncevente} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} unactiveItem={this.unactiveItem} copyToClipboard={this.copyToClipboard}/>
+                                                <ProfileForallAnnonceventeShow {...annoncevente} favoriteItem={this.favoriteItem}
+                                                                                statusItem={this.statusItem}
+                                                                               statuscommentItem={this.statuscommentItem} copyToClipboard={this.copyToClipboard}/>
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">
@@ -418,6 +480,28 @@ class Annonceventebycategorycityshow extends Component {
                                             </div>
 
                                         </div>
+
+                                        {/* Ici l'utilisateur peux masquer le commentaire*/}
+
+                                        {annoncevente.status_comments ?
+
+                                            <AnnoncereseventecommentIndex {...this.props} {...annoncevente} />
+                                            :
+                                            <>
+                                                {!$guest && (
+                                                   <>
+                                                       {($userIvemo.id === annoncevente.user.id || $userIvemo.id === annoncevente.user_id)  && (
+
+                                                           <AnnoncereseventecommentIndex {...this.props} {...annoncevente} />
+
+                                                       )}
+                                                   </>
+                                                )}
+                                            </>
+
+                                        }
+
+
 
                                     </div>
 

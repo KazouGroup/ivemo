@@ -6,14 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CommentResource;
 use App\Model\annoncereservation;
 use App\Model\annoncetype;
+use App\Model\annoncevente;
 use App\Model\categoryannoncereservation;
+use App\Model\categoryannoncevente;
 use App\Model\city;
 use App\Model\comment;
 use App\Model\responsecomment;
 use App\Services\CommentAndResponseService;
 use Illuminate\Http\Request;
 
-class CommentannoncereservationController extends Controller
+class CommentannonceventeController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -28,11 +30,11 @@ class CommentannoncereservationController extends Controller
     }
 
 
-    public function getcomment(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
+    public function getcomment(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,annoncevente $annoncevente)
     {
-        $comments = CommentResource::collection($annoncereservation->comments()
+        $comments = CommentResource::collection($annoncevente->comments()
             ->with('user','commentable','responsecomments')
-            ->whereIn('commentable_id',[$annoncereservation->id])
+            ->whereIn('commentable_id',[$annoncevente->id])
             ->where('status',1)
             ->with(['responsecomments' => function ($q){
                 $q->where('status',1)->with('user','comment')->orderByDesc('created_at')
@@ -43,22 +45,22 @@ class CommentannoncereservationController extends Controller
         return response()->json($comments,200);
     }
 
-    public function sendcomment(Request $request,annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
+    public function sendcomment(Request $request,annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,annoncevente $annoncevente)
     {
         $this->validate($request,[
             'body'=>'required|max:5000',
         ]);
 
-        $comment = $annoncereservation->comments()->create($request->all());
+        $comment = $annoncevente->comments()->create($request->all());
 
-        CommentAndResponseService::newEmailTonewcommentannoncereservationpageShow($request,$annoncereservation);
+        CommentAndResponseService::newEmailTonewcommentannonceventepageShow($request,$annoncevente);
 
         return response()->json($comment,200);
     }
 
 
 
-    public function updatecomment(Request $request,annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation,comment $comment)
+    public function updatecomment(Request $request,annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,annoncevente $annoncevente,comment $comment)
     {
 
         $this->authorize('updateComment',$comment);
@@ -71,7 +73,7 @@ class CommentannoncereservationController extends Controller
     }
 
 
-    public function sendresponsecomment(Request $request,annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation,comment $comment)
+    public function sendresponsecomment(Request $request,annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,annoncevente $annoncevente,comment $comment)
     {
         $validatedData = $request->validate(['body' => 'required|min:2|max:5000']);
 

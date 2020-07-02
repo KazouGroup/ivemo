@@ -83,10 +83,22 @@ class ProfileForallAnnonceShow extends Component {
                                            className="btn btn-sm btn-secondary" title={`${this.props.visits_count} ${this.props.visits_count > 1 ? "vues" : "vue"}`}>
                                             <i className="far fa-eye"></i> <b>{this.data_countFormatter(this.props.visits_count)}</b>
                                         </a>
-                                        <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}
+                                        <button type="button" rel="tooltip" onClick={() => this.props.statusItem(this.props)}
                                                 className="btn btn-success btn-icon btn-sm" title="Desactiver cette annonce">
                                             <i className="now-ui-icons ui-1_check"/>
                                         </button>
+                                        {this.props.status_comments ?
+                                            <Button onClick={() => this.props.statuscommentItem(this.props)}
+                                                    className="btn btn-primary btn-icon btn-sm" title="Commentaire activé">
+                                                <i className="fas fa-comments"/>
+                                            </Button>
+                                            :
+                                            <Button onClick={() => this.props.statuscommentItem(this.props)}
+                                                    className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Commentaire désactivé">
+                                                <i className="far fa-comments"/>
+                                            </Button>
+
+                                        }
                                         <NavLink to={`/annonce_reservation/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer cette annonce">
                                             <i className="now-ui-icons ui-2_settings-90"/>
                                         </NavLink>

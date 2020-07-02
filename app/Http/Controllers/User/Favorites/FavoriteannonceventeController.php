@@ -61,17 +61,9 @@ class FavoriteannonceventeController extends Controller
     {
         $annoncevente = annoncevente::whereId($id)->firstOrFail();
 
-        Auth::user()->bookmarksfavoriteannonceventes()->attach($annoncevente->id);
+        $response = auth()->user()->bookmarksfavoriteannonceventes()->toggle($annoncevente->id);
 
-		return response('favorite confirmed',Response::HTTP_ACCEPTED);
+        return response()->json(['success'=>$response]);
 	}
 
-    public function unfavorite(Request $request,$id)
-    {
-        $annoncevente = annoncevente::whereId($id)->firstOrFail();
-
-        Auth::user()->bookmarksfavoriteannonceventes()->detach($annoncevente->id);
-
-		return response('unfavorite confirmed',Response::HTTP_ACCEPTED);
-	}
 }

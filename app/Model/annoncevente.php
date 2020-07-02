@@ -102,6 +102,11 @@ class annoncevente extends Model
         ];
     }
 
+    public function comments()
+    {
+        return $this->morphMany(comment::class ,'commentable');
+    }
+
     public function bookmarked()
     {
         return (bool) favoriteannoncevente::where('user_id', Auth::guard('web')->id())
