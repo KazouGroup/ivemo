@@ -34,6 +34,7 @@ class BlogannonceventeResource extends JsonResource
             'visits_countries' => $this->visits()->countries(),
             'visits_languages' => $this->visits()->languages(),
             'visits_operatingSystems' => $this->visits()->operatingSystems(),
+            'statusOnline' => $this->isOnline(),
             'categoryannoncevente' => $this->categoryannoncevente,
             'categoryannoncevente_id' => $this->categoryannoncevente_id,
             'created_at' => (string) $this->created_at,

@@ -400,7 +400,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                         {annoncelocation.bookmarked ?
 
                                                             <>
-                                                                <Button onClick={() => this.unfavoriteItem(annoncelocation.id)}
+                                                                <Button onClick={() => this.favoriteItem(annoncelocation)}
                                                                         className="btn btn-danger btn-sm" title="Retirer de vos favoris">
                                                                     <i className="fas fa-bookmark"></i> <b>Sauvegardé</b>
                                                                 </Button>
@@ -408,7 +408,7 @@ class Annoncelocationbycategorycityshow extends Component {
 
                                                             :
                                                             <>
-                                                                <Button onClick={() => this.favoriteItem(annoncelocation.id)}
+                                                                <Button onClick={() => this.favoriteItem(annoncelocation)}
                                                                         className="btn btn-facebook btn-sm btn-neutral" title="Ajouter à vos favoris">
                                                                     <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
                                                                 </Button>

@@ -6,6 +6,7 @@ use App\Model\favorite\favoritemployment;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class employment extends Model
@@ -58,6 +59,11 @@ class employment extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function isOnline()
+    {
+        return (bool) Cache::has('user-is-online-' . $this->user->id);
     }
 
     public function visits()

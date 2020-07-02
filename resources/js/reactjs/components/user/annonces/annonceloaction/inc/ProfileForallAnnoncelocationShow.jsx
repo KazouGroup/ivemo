@@ -34,8 +34,8 @@ class ProfileForallAnnoncelocationShow extends Component {
                             </NavLink>
                             : <Skeleton circle={false} height={40} width={80} />}
                         <div className="mx-3">
-                            <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{this.props.user.first_name}</b>
-                                <small className="d-block text-muted">{moment(this.props.user.created_at).format('LL')}</small>
+                            <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{this.props.user.first_name} </b>
+                                <small className="d-block text-muted">{this.props.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(this.props.user.created_at).format('LL')}</small>
                             </NavLink>
                         </div>
                     </div>
@@ -48,13 +48,13 @@ class ProfileForallAnnoncelocationShow extends Component {
                             :
                             <>
                                 {this.props.bookmarked ?
-                                    <Button onClick={() => this.props.unfavoriteItem(this.props.id)}
+                                    <Button onClick={() => this.props.favoriteItem(this.props)}
                                             className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
                                         <i className="fas fa-bookmark"></i>
                                     </Button>
 
                                     :
-                                    <Button onClick={() => this.props.favoriteItem(this.props.id)}
+                                    <Button onClick={() => this.props.favoriteItem(this.props)}
                                             className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
                                         <i className="far fa-bookmark"></i>
                                     </Button>

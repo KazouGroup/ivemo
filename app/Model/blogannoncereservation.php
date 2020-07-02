@@ -6,6 +6,7 @@ use App\Model\favorite\favoriteblogannoncereservation;
 use App\Traits\Likesdata;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Auditable as AuditableTrait;
@@ -42,6 +43,11 @@ class blogannoncereservation extends Model implements Auditable
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function isOnline()
+    {
+        return (bool) Cache::has('user-is-online-' . $this->user->id);
     }
 
     public function user()

@@ -34,6 +34,7 @@ class BlogannoncereservationResource extends JsonResource
             'visits_countries' => $this->visits()->countries(),
             'visits_languages' => $this->visits()->languages(),
             'visits_operatingSystems' => $this->visits()->operatingSystems(),
+            'statusOnline' => $this->isOnline(),
             'categoryannoncereservation' => $this->categoryannoncereservation,
             'categoryannoncereservation_id' => $this->categoryannoncereservation_id,
             'created_at' => (string) $this->created_at,

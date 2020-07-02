@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Traits\Likesdata;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class comment extends Model
 {
@@ -24,6 +25,11 @@ class comment extends Model
     public function user()
     {
         return $this->belongsTo(user::class);
+    }
+
+    public function isOnline()
+    {
+        return (bool) Cache::has('user-is-online-' . $this->user->id);
     }
 
     protected static function boot()

@@ -13,6 +13,7 @@ import ProfileForallAnnonceShow from "../ProfileForallAnnonceShow";
 import HelmetSite from "../../../inc/user/HelmetSite";
 import Swal from "sweetalert2";
 import AnnoncereservationcommentIndex from "../../comments/AnnoncereservationcommentIndex";
+import moment from "moment";
 
 
 class Annoncebycategoryannoncereservationcityshow extends Component {
@@ -568,7 +569,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                                     </NavLink>
                                                                     <div className="mx-3">
                                                                         <NavLink to={`/pro/${annoncereservation.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{annoncereservation.user.first_name}</b>
-                                                                            <small className="d-block text-muted">12 janv 2019</small>
+                                                                            <small className="d-block text-muted">{annoncereservation.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(annoncereservation.user.created_at).format('LL')}</small>
                                                                         </NavLink>
                                                                     </div>
                                                                 </div>

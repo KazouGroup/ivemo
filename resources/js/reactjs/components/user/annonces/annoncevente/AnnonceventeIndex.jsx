@@ -11,7 +11,6 @@ import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
 import Navlinknewannoncevente from "./treatment/Navlinknewannoncevente";
 import HelmetSite from "../../../inc/user/HelmetSite";
-import AnnonceslocationList from "../annonceloaction/inc/AnnonceslocationList";
 
 
 class AnnonceventeIndex extends Component {

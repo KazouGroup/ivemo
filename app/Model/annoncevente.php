@@ -6,6 +6,7 @@ use App\Model\favorite\favoriteannoncevente;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 
@@ -37,6 +38,11 @@ class annoncevente extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function isOnline()
+    {
+        return (bool) Cache::has('user-is-online-' . $this->user->id);
     }
 
     public function user()

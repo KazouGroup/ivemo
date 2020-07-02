@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class responsecomment extends Model
 {
@@ -22,6 +23,11 @@ class responsecomment extends Model
     public function comment()
     {
         return $this->belongsTo(comment::class,'comment_id');
+    }
+
+    public function isOnline()
+    {
+        return (bool) Cache::has('user-is-online-' . $this->user->id);
     }
 
     protected static function boot()

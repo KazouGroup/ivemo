@@ -150,7 +150,7 @@ class AnnonceslocationList extends PureComponent {
                                                 : <Skeleton circle={false} height={40} width={80} />}
                                             <div className="mx-3">
                                                 <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
-                                                    <small className="d-block text-muted"><b>{moment(this.props.created_at).format('LL')}</b></small>
+                                                    <small className="d-block text-muted"><b>{this.props.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(this.props.created_at).format('LL')}</b></small>
                                                 </NavLink>
                                             </div>
                                         </div>

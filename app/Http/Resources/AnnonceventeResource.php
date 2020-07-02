@@ -39,6 +39,7 @@ class AnnonceventeResource extends JsonResource
             'visits_countries' => $this->visits()->countries(),
             'visits_languages' => $this->visits()->languages(),
             'visits_operatingSystems' => $this->visits()->operatingSystems(),
+            'statusOnline' => $this->isOnline(),
             'categoryannoncevente' => $this->categoryannoncevente,
             'signalannonceventes_count' => $this->signalannonceventes_count,
             'categoryannoncevente_id' => $this->categoryannoncevente_id,

@@ -35,7 +35,7 @@ class ProfileForallAnnonceventeShow extends Component {
                             : <Skeleton circle={false} height={40} width={80} />}
                         <div className="mx-3">
                             <NavLink to={`/pro/${this.props.user.slug}/annonces_ventes/`} className="text-dark font-weight-600 text-sm"><b>{this.props.user.first_name}</b>
-                                <small className="d-block text-muted">{moment(this.props.user.created_at).format('LL')}</small>
+                                <small className="d-block text-muted">{this.props.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(this.props.user.created_at).format('LL')}</small>
                             </NavLink>
                         </div>
                     </div>

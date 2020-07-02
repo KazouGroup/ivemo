@@ -50,6 +50,7 @@ class AnnoncereservationResource extends JsonResource
             'visits_countries' => $this->visits()->countries(),
             'visits_languages' => $this->visits()->languages(),
             'visits_operatingSystems' => $this->visits()->operatingSystems(),
+            'statusOnline' => $this->isOnline(),
             'categoryannoncereservation_id' => $this->categoryannoncereservation_id,
             'categoryannoncereservation' => $this->categoryannoncereservation,
             'signalannoncereservations_count' => $this->signalannoncereservations_count,
