@@ -47,7 +47,7 @@ class PrivateUserFavoriteannoncelocations extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('favoriteannoncelocations_unfavorite.unfavorite',id);
+                let url = route('favoriteannoncelocations_favorite.favorite',id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/

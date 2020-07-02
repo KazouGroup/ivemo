@@ -95,30 +95,24 @@ Route::get(
 )->name('annoncelocationbycategoryannoncereservationslug.site');
 
 Route::get(
-    'annonces_locations_admin_active/{id}',
-    'AnnoncelocationController@adminactivated'
-)->name('annonces_locations_admin_active.dashboard');
+    'annonces_locations_status/{id}',
+    'AnnoncelocationController@statusitem'
+)->name('annonces_locations_status.site');
 
 Route::get(
-    'annonces_locations_admin_unactive/{id}',
-    'AnnoncelocationController@adminunactivated'
-)->name('annonces_locations_admin_unactivated.dashboard');
+    'annonces_locations_status_comments/{id}',
+    'AnnoncelocationController@statuscomments'
+)->name('annonces_locations_status_comments.site');
 
 Route::get(
-    'annonces_locations_active/{id}',
-    'AnnoncelocationController@activated'
-)->name('annonces_locations_active.site');
-
-Route::get(
-    'annonces_locations_unactive/{id}',
-    'AnnoncelocationController@unactivated'
-)->name('annonces_locations_unactivated.site');
+    'annonces_locations_admin_status/{id}',
+    'AnnoncelocationController@adminstatusitem'
+)->name('annonces_locations_admin_status.dashboard');
 
 Route::delete(
     'annonces_locations_delete/{id}',
     'AnnoncelocationController@destroy'
 )->name('annonces_locations_delete.site');
-
 
 Route::get(
     'annonce_location/{annoncetype}/{annoncelocation:slugin}/edit',

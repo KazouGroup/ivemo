@@ -564,16 +564,6 @@ class BlogannoncereservationcommentIndex extends Component {
         this.loadItems()
     }
 
-    getcountlikeString (likeked_count) {
-        likeked_count = likeked_count +'';
-        if (likeked_count < 1000) {
-            return likeked_count;
-        }
-        if (likeked_count < 10000) {
-            return likeked_count.charAt(0) + ',' + likeked_count.substring(1);
-        }
-        return (likeked_count/1000).toFixed(likeked_count % 1000 !== 0)+'k';
-    }
     render() {
         const {comments,visiablecomment,visiableresponsecomment,itemData,editcomment,editresponsecomment,responsecomment} = this.state;
         return (

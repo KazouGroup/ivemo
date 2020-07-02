@@ -26,7 +26,11 @@ class AnnoncelocationController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','destroy','apiannonceslocationsbyuser','annonceslocationsbyuser','apicategoryannoncelocations_by_user','activated','unactivated','apiannoncelocationsbyannoncetypebyannoncelocation'
+            'create','store','edit','update','destroy',
+            'apiannonceslocationsbyuser','annonceslocationsbyuser',
+            'apicategoryannoncelocations_by_user',
+            'statusitem','adminstatusitem','statuscomments',
+            'apiannoncelocationsbyannoncetypebyannoncelocation'
         ]]);
     }
     /**
@@ -385,56 +389,37 @@ class AnnoncelocationController extends Controller
         return response()->json($annoncelocation,200);
     }
 
-
-    public function activated($id)
+    public function statuscomments($id)
     {
         $annoncelocation = annoncelocation::where('id', $id)->findOrFail($id);
 
         $this->authorize('update',$annoncelocation);
 
-        if(auth()->user()->id === $annoncelocation->user_id){
+        $annoncelocation->update(['status_comments' => !$annoncelocation->status_comments,]);
 
-            $annoncelocation->update(['status' => 1,]);
-
-            return response('Confirmed',Response::HTTP_ACCEPTED);
-        }else{
-            abort(404);
-        }
+        return response('Confirmed',Response::HTTP_ACCEPTED);
     }
 
-    public function unactivated($id)
+    public function statusitem($id)
     {
         $annoncelocation = annoncelocation::where('id', $id)->findOrFail($id);
 
         $this->authorize('update',$annoncelocation);
 
-        if(auth()->user()->id === $annoncelocation->user_id){
-            $annoncelocation->update(['status' => 0,]);
+        $annoncelocation->update(['status' => !$annoncelocation->status,]);
 
-            return response('Confirmed',Response::HTTP_ACCEPTED);
-        }else{
-            abort(404);
-        }
+        return response('Confirmed',Response::HTTP_ACCEPTED);
     }
 
     public function adminactivated($id)
     {
         $annoncelocation = annoncelocation::where('id', $id)->findOrFail($id);
 
-        $annoncelocation->update(['status_admin' => 1,'member_id' => auth()->user()->id]);
+        $annoncelocation->update(['status_admin' => !$annoncelocation->status_admin,'member_id' => auth()->user()->id]);
 
         return response('Confirmed',Response::HTTP_ACCEPTED);
     }
 
-    public function adminunactivated($id)
-    {
-        $annoncelocation = annoncelocation::where('id', $id)->findOrFail($id);
-
-        $annoncelocation->update(['status_admin' => 0,'member_id' => auth()->user()->id]);
-
-        return response('Confirmed',Response::HTTP_ACCEPTED);
-
-    }
 
     /**
      * Remove the specified resource from storage.

@@ -171,7 +171,7 @@ class Annonceventebycategorycityshow extends Component {
 
     statusItem(annoncevente){
         Swal.fire({
-            title: 'Désactiver l\'annonce?',
+            title: 'Changer le status l\'annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,

@@ -3,6 +3,7 @@ namespace App\Services;
 
 
 
+use App\Jobs\Comments\CommentAnnoncelocationJob;
 use App\Jobs\Comments\CommentAnnoncereservationJob;
 use App\Jobs\Comments\CommentAnnonceventeJob;
 use App\Jobs\Comments\CommentBlogannoncereservationJob;
@@ -35,6 +36,20 @@ class CommentAndResponseService
         if ($annoncereservation->user->profile->status_comments){
 
             $emailToUser = (new CommentAnnoncereservationJob($fromBodyUser,$annoncereservation,$userFrom));
+
+            dispatch($emailToUser);
+        }
+
+    }
+
+    public static function newEmailTonewcommentannoncelocationpageShow($request,$annoncelocation)
+    {
+        $userFrom = auth()->user();
+        $fromBodyUser = $request->get('body');
+
+        if ($annoncelocation->user->profile->status_comments){
+
+            $emailToUser = (new CommentAnnoncelocationJob($fromBodyUser,$annoncelocation,$userFrom));
 
             dispatch($emailToUser);
         }
