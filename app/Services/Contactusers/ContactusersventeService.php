@@ -3,6 +3,7 @@ namespace App\Services\Contactusers;
 
 
 
+use App\Jobs\Adminaction\AdminactionAnnonceventeJob;
 use App\Jobs\Contacts\ContactuserventeJob;
 use App\Model\contactusersvente;
 use App\Services\HelpersService;
@@ -140,6 +141,7 @@ class ContactusersventeService
         return $contactusersvente;
     }
 
+
     public static function newEmailToannoncelocationpageShow($request,$annoncevente)
     {
         $fromFullnameUser = $request->get('full_name');
@@ -150,6 +152,14 @@ class ContactusersventeService
 
 
         $emailToUser = (new ContactuserventeJob($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$annoncevente));
+
+        dispatch($emailToUser);
+    }
+
+    public static function adminsendMessageToUser($annoncevente)
+    {
+
+        $emailToUser = (new AdminactionAnnonceventeJob($annoncevente));
 
         dispatch($emailToUser);
     }

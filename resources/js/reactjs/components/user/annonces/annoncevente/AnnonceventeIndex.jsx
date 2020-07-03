@@ -231,7 +231,7 @@ class AnnonceventeIndex extends Component {
 
     statusItem(item) {
         Swal.fire({
-            title: 'Désactiver l\'annonce?',
+            title: 'Changer le status de l\'annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,

@@ -14,6 +14,7 @@ use App\Model\categoryannoncevente;
 use App\Model\city;
 use App\Model\user;
 use App\Services\AnnonceventeService;
+use App\Services\Contactusers\ContactusersventeService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -364,6 +365,8 @@ class AnnonceventeController extends Controller
         $annoncevente = annoncevente::where('id', $id)->findOrFail($id);
 
         $annoncevente->update(['status_admin' => !$annoncevente->status_admin,'member_id' => auth()->user()->id]);
+
+        ContactusersventeService::adminsendMessageToUser($annoncevente);
 
         return response('Confirmed',Response::HTTP_ACCEPTED);
     }

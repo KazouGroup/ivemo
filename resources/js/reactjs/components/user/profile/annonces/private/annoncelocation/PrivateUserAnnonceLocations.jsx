@@ -9,6 +9,8 @@ import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../../../../configurations/inc/NavlinkconfigurationUser";
 import LinkValicationEmail from "../../../../../inc/user/LinkValicationEmail";
 import Navannoncelocationsbyuser from "../../../../annonces/annonceloaction/inc/Navannoncelocationsbyuser";
+import HelmetSite from "../../../../../inc/user/HelmetSite";
+import AnnoncesListSkeleton from "../../../../../inc/user/annonce/AnnoncesListSkeleton";
 
 
 class PrivateUserAnnonceLocations extends Component {
@@ -21,7 +23,6 @@ class PrivateUserAnnonceLocations extends Component {
 
         this.deleteItem = this.deleteItem.bind(this);
         this.statusItem = this.statusItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
     }
 
@@ -47,7 +48,7 @@ class PrivateUserAnnonceLocations extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('annonces_locations_status.site',id);
+                let url = route('annonces_locations_status.site',item.id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
@@ -168,7 +169,7 @@ class PrivateUserAnnonceLocations extends Component {
 
     render() {
         const { userannoncelocations, visiable } = this.state;
-        const mapAnnoncelocations = userannoncelocations.annoncelocations.length ? (
+        const mapAnnoncelocations = userannoncelocations.annoncelocations.length >= 0 ? (
             userannoncelocations.annoncelocations.slice(0, visiable).map(item => {
                 return (
 
@@ -176,13 +177,11 @@ class PrivateUserAnnonceLocations extends Component {
                 )
             })
         ) : (
-                <></>
+            <AnnoncesListSkeleton />
             );
         return (
             <>
-                <Helmet>
-                    <title>Annonces locations {`${$userIvemo.first_name}`} - {$name_site}</title>
-                </Helmet>
+                <HelmetSite title={`Annonces locations ${$userIvemo.first_name} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 

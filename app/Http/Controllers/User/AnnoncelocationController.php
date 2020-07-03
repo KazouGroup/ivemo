@@ -14,6 +14,7 @@ use App\Model\categoryannoncelocation;
 use App\Model\city;
 use App\Model\user;
 use App\Services\AnnoncelocationService;
+use App\Services\Contactusers\ContactuserslocationService;
 use Symfony\Component\HttpFoundation\Response;
 
 class AnnoncelocationController extends Controller
@@ -259,7 +260,13 @@ class AnnoncelocationController extends Controller
         return response()->json($annoncelocations, 200);
     }
 
-
+    /**
+     * @param annoncetype $annoncetype
+     * @param categoryannoncelocation $categoryannoncelocation
+     * @param city $city
+     * @param annoncelocation $annoncelocation
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function apiannoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,annoncelocation $annoncelocation)
     {
         visits($annoncelocation)->seconds(60)->increment();
@@ -269,6 +276,10 @@ class AnnoncelocationController extends Controller
         return response()->json($annoncelocation, 200);
     }
 
+    /**
+     * @param categoryannoncelocation $categoryannoncelocation
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function apiannoncelocationinteressebycategoryannoncelocation(categoryannoncelocation $categoryannoncelocation)
     {
         $annoncelocations = annoncelocation::with('user','city','annoncetype','categoryannoncelocation')
@@ -281,6 +292,12 @@ class AnnoncelocationController extends Controller
         return response()->json($annoncelocations, 200);
     }
 
+    /**
+     * @param annoncetype $annoncetype
+     * @param categoryannoncelocation $categoryannoncelocation
+     * @param city $city
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function apiannoncelocationinteressebycity(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city)
     {
         $annoncelocation = AnnoncelocationResource::collection($categoryannoncelocation->annoncelocations()
@@ -369,11 +386,11 @@ class AnnoncelocationController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateRequest $request
+     * @param annoncetype $annoncetype
+     * @param $annoncelocation
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(UpdateRequest $request,annoncetype $annoncetype,$annoncelocation)
     {
@@ -411,21 +428,24 @@ class AnnoncelocationController extends Controller
         return response('Confirmed',Response::HTTP_ACCEPTED);
     }
 
+
     public function adminactivated($id)
     {
         $annoncelocation = annoncelocation::where('id', $id)->findOrFail($id);
 
         $annoncelocation->update(['status_admin' => !$annoncelocation->status_admin,'member_id' => auth()->user()->id]);
 
+        ContactuserslocationService::adminsendMessageToUser($annoncelocation);
+
         return response('Confirmed',Response::HTTP_ACCEPTED);
     }
 
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return array|\Illuminate\Http\Response
+     * @param annoncetype $annoncetype
+     * @param $id
+     * @return array
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy(annoncetype $annoncetype,$id)
     {

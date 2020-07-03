@@ -3,6 +3,7 @@ namespace App\Services\Contactusers;
 
 
 
+use App\Jobs\Adminaction\AdminactionAnnoncelocationJob;
 use App\Jobs\Contacts\ContactuserlocationJob;
 use App\Model\contactuserslocation;
 use App\Services\HelpersService;
@@ -118,6 +119,13 @@ class ContactuserslocationService
 
 
         $emailToUser = (new ContactuserlocationJob($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$annoncelocation));
+
+        dispatch($emailToUser);
+    }
+
+    public static function adminsendMessageToUser($annoncelocation)
+    {
+        $emailToUser = (new AdminactionAnnoncelocationJob($annoncelocation));
 
         dispatch($emailToUser);
     }
