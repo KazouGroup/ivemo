@@ -76,7 +76,7 @@ class Annonceventebyannoncetypebycity extends Component {
 
             if(item.bookmarked){
                 $.notify({
-                        message: "Annonce ajoutée à vos favoris",
+                        message: "Annonce retirée de vos favoris",
                     },
                     {
                         allow_dismiss: false,
@@ -92,7 +92,7 @@ class Annonceventebyannoncetypebycity extends Component {
                     });
             }else {
                 $.notify({
-                        message: "Annonce retirée de vos favoris",
+                        message: "Annonce ajoutée à vos favoris",
                     },
                     {
                         allow_dismiss: false,
@@ -381,7 +381,7 @@ class Annonceventebyannoncetypebycity extends Component {
         const mapAnnonceventes = annonceventes.length >= 0 ? (
             annonceventes.map(item => {
                 return (
-                    <AnnonceventeList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} statusItem={this.statusItem} signalerUser={this.signalerUser} contactUser={this.contactUser} />
+                    <AnnonceventeList key={item.id} {...item} favoriteItem={this.favoriteItem} deleteItem={this.deleteItem} statusItem={this.statusItem} signalerUser={this.signalerUser} contactUser={this.contactUser} />
                 )
             })
         ) : (

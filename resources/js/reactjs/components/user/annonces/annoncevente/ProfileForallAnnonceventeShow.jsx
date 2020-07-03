@@ -107,7 +107,7 @@ class ProfileForallAnnonceventeShow extends Component {
                                             <i className="now-ui-icons ui-2_settings-90"/>
                                         </NavLink>
 
-                                        <Button onClick={() => this.deleteItem(this.props.id)}
+                                        <Button onClick={() => this.props.deleteItem(this.props.id)}
                                                 className="btn btn-icon btn-sm btn-danger" title=" Supprimer cette annonce">
                                             <i className="now-ui-icons ui-1_simple-remove"/>
                                         </Button>{" "}
@@ -117,6 +117,10 @@ class ProfileForallAnnonceventeShow extends Component {
                             </>
                         )}
 
+                        <button type="button" title="Signaler" onClick={() => this.props.signalerUser(this.props)}
+                                className="btn btn-instagram btn-icon btn-sm">
+                            <i className="far fa-flag"></i>
+                        </button>
                     </div>
                 </div>
                 <div className="card-title">

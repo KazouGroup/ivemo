@@ -605,7 +605,7 @@ class AnnoncereseventecommentIndex extends Component {
 
                                                                 <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
                                                                              renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                                             handleFieldChange={this.handleFieldChange} namesubmit={`Mette à jour`}/>
+                                                                             handleFieldChange={this.handleFieldChange} namesubmit={`METTRE À JOUR`}/>
 
                                                             </Form>
 
@@ -633,7 +633,7 @@ class AnnoncereseventecommentIndex extends Component {
 
                                                                         <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
                                                                                      renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                                                     handleFieldChange={this.handleFieldChange} namesubmit={`Poster votre reponse`}/>
+                                                                                     handleFieldChange={this.handleFieldChange} namesubmit={`POSTER UNE RÉPONSE`}/>
 
                                                                     </Form>
 
@@ -674,8 +674,8 @@ class AnnoncereseventecommentIndex extends Component {
 
                                                                                     {lk.user.id !== $userIvemo.id &&(
                                                                                         <button type="button" onClick={() => this.responsecommentFromItem(item)}
-                                                                                                className="btn btn-default btn-neutral pull-right" title="Repondre a ce commentaire">
-                                                                                            <i className="now-ui-icons files_single-copy-04"></i> Repondre
+                                                                                                className="btn btn-default btn-neutral pull-right" title="Répondre a ce commentaire">
+                                                                                            <i className="now-ui-icons files_single-copy-04"></i> Répondre
                                                                                         </button>
                                                                                     )}
 
@@ -683,7 +683,7 @@ class AnnoncereseventecommentIndex extends Component {
                                                                                         <>
                                                                                             <button onClick={() => this.deleteresponseItem(lk.id) }
                                                                                                     className="btn btn-danger btn-neutral pull-right">
-                                                                                                <i className="now-ui-icons ui-1_simple-remove"></i> Suprimer
+                                                                                                <i className="now-ui-icons ui-1_simple-remove"></i> Supprimer
                                                                                             </button>
 
                                                                                             <Button onClick={() => this.editresponsecommentFromItem(lk)}
@@ -716,7 +716,7 @@ class AnnoncereseventecommentIndex extends Component {
 
                                                                         <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
                                                                                      renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                                                     handleFieldChange={this.handleFieldChange} namesubmit={` Mettre à jour votre reponse`}/>
+                                                                                     handleFieldChange={this.handleFieldChange} namesubmit={`METTRE À JOUR`}/>
 
                                                                     </Form>
 
@@ -729,7 +729,7 @@ class AnnoncereseventecommentIndex extends Component {
                                                         {visiableresponsecomment < item.responsecomments.length && (
                                                             <div className="col-md-8 ml-auto mr-auto text-center">
                                                                 <a style={{cursor:"pointer"}} onClick={this.loadmoresresponseItem} className="text-info">
-                                                                    <b>{item.responsecomments.length} Afficher plus de reponses</b>
+                                                                    <b>{item.responsecomments.length} Afficher plus de réponses</b>
                                                                 </a>
                                                             </div>
                                                         )}
@@ -767,7 +767,7 @@ class AnnoncereseventecommentIndex extends Component {
 
                                                     <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
                                                                  renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                                 handleFieldChange={this.handleFieldChange} namesubmit={`Poster mon commentaire`}/>
+                                                                 handleFieldChange={this.handleFieldChange} namesubmit={`POSTER MON COMMENTAIRE`}/>
 
                                                 </Form>
                                             )}
@@ -784,6 +784,7 @@ class AnnoncereseventecommentIndex extends Component {
 
                     </div>
                 </div>
+
             </>
 
         )

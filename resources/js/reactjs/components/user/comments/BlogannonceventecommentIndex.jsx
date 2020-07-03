@@ -439,7 +439,7 @@ class BlogannonceventecommentIndex extends Component {
 
     deleteItem(id) {
         Swal.fire({
-            title: 'Confirmer la supression?',
+            title: 'Confirmer la suppression?',
             text: "êtes-vous sûr de vouloir executer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -464,7 +464,7 @@ class BlogannonceventecommentIndex extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Commentaire suprimée avec succès'
+                            message: 'Commentaire supprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -496,7 +496,7 @@ class BlogannonceventecommentIndex extends Component {
 
     deleteresponseItem(id) {
         Swal.fire({
-            title: 'Confirmer la supression?',
+            title: 'Confirmer la suppression?',
             text: "êtes-vous sûr de vouloir executer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -516,7 +516,7 @@ class BlogannonceventecommentIndex extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Commentaire suprimée avec succès'
+                            message: 'Commentaire supprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -593,7 +593,7 @@ class BlogannonceventecommentIndex extends Component {
 
                                                            <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
                                                                         renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                                        handleFieldChange={this.handleFieldChange} namesubmit={`Mette à jour`}/>
+                                                                        handleFieldChange={this.handleFieldChange} namesubmit={`METTRE À JOUR`}/>
 
                                                        </Form>
 
@@ -621,7 +621,7 @@ class BlogannonceventecommentIndex extends Component {
 
                                                                    <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
                                                                                 renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                                                handleFieldChange={this.handleFieldChange} namesubmit={`Poster votre reponse`}/>
+                                                                                handleFieldChange={this.handleFieldChange} namesubmit={`POSTER UNE RÉPONSE`}/>
 
                                                                </Form>
 
@@ -671,7 +671,7 @@ class BlogannonceventecommentIndex extends Component {
                                                                                    <>
                                                                                        <button onClick={() => this.deleteresponseItem(lk.id) }
                                                                                                className="btn btn-danger btn-neutral pull-right">
-                                                                                           <i className="now-ui-icons ui-1_simple-remove"></i> Suprimer
+                                                                                           <i className="now-ui-icons ui-1_simple-remove"></i> Supprimer
                                                                                        </button>
 
                                                                                        <Button onClick={() => this.editresponsecommentFromItem(lk)}
@@ -704,7 +704,7 @@ class BlogannonceventecommentIndex extends Component {
 
                                                                    <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
                                                                                 renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                                                handleFieldChange={this.handleFieldChange} namesubmit={` Mettre à jour votre reponse`}/>
+                                                                                handleFieldChange={this.handleFieldChange} namesubmit={`METTRE À JOUR`}/>
 
                                                                </Form>
 
@@ -756,7 +756,7 @@ class BlogannonceventecommentIndex extends Component {
 
                                         <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
                                                      renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                     handleFieldChange={this.handleFieldChange} namesubmit={`Poster mon commentaire`}/>
+                                                     handleFieldChange={this.handleFieldChange} namesubmit={`POSTER MON COMMENTAIRE`}/>
 
                                     </Form>
                                 )}

@@ -18,8 +18,3 @@ Route::get(
     '/favoriteannoncereservations_favorite/{id}',
     'FavoriteannoncereservationController@favorite'
 )->name('favoriteannoncereservations_favorite.favorite');
-
-Route::get(
-    '/favoriteannoncereservations_unfavorite/{id}',
-    'FavoriteannoncereservationController@unfavorite'
-)->name('favoriteannoncereservations_unfavorite.unfavorite');

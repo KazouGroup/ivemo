@@ -73,10 +73,9 @@ class Annoncebycategoryannoncevente extends Component {
     favoriteItem(item) {
         const url = route('favoriteannonceventes_favorite.favorite', [item.id]);
         dyaxios.get(url).then(() => {
-
             if(item.bookmarked){
                 $.notify({
-                        message: "Annonce ajoutée à vos favoris",
+                        message: "Annonce retirée de vos favoris",
                     },
                     {
                         allow_dismiss: false,
@@ -92,7 +91,7 @@ class Annoncebycategoryannoncevente extends Component {
                     });
             }else {
                 $.notify({
-                        message: "Annonce retirée de vos favoris",
+                        message: "Annonce ajoutée à vos favoris",
                     },
                     {
                         allow_dismiss: false,

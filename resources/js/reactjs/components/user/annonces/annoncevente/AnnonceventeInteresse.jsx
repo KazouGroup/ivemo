@@ -25,7 +25,7 @@ class AnnonceventeInteresse extends Component {
 
             if(item.bookmarked){
                 $.notify({
-                        message: "Annonce ajoutée à vos favoris",
+                        message: "Annonce retirée de vos favoris",
                     },
                     {
                         allow_dismiss: false,
@@ -41,7 +41,7 @@ class AnnonceventeInteresse extends Component {
                     });
             }else {
                 $.notify({
-                        message: "Annonce retirée de vos favoris",
+                        message: "Annonce ajoutée à vos favoris",
                     },
                     {
                         allow_dismiss: false,

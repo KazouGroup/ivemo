@@ -34,7 +34,7 @@ class FormComment extends Component {
                    </a>
                    <div className="media-body">
 
-                       <FieldInput name="body" type='textarea' maxLength="5000" placeholder="Laiser votre avis sur ce bien..."  value={value}
+                       <FieldInput name="body" type='textarea' maxLength="5000" placeholder="Laiser votre avis ou commentaire sur ce bien..."  value={value}
                                    handleFieldChange={handleFieldChange}
                                    hasErrorFor={hasErrorFor}
                                    renderErrorFor={renderErrorFor} rows="4"/>
@@ -42,11 +42,11 @@ class FormComment extends Component {
                        <div className="media-footer">
                            <Button type="submit"
                                    className="btn btn-primary pull-right btn-sm">
-                               {namesubmit}
+                               <b>{namesubmit}</b>
                            </Button>
 
                            <button type="button" onClick={cancelresponseCourse}
-                                   className="btn btn-default pull-right btn-sm"> Annuler
+                                   className="btn btn-default pull-right btn-sm"> <b>ANNULER</b>
                            </button>
                        </div>
                    </div>
