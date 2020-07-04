@@ -410,12 +410,12 @@ class PremiumUserEditEmployement extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">remove</i>
                                             </div>
-                                            <p className="card-category"><b>Déactivés</b></p>
+                                            <p className="card-category"><b>Désactives</b></p>
                                             <h3 className="card-title"><b>{this.dataunactive_countFormatter(employmentsunactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">remove</i> Offres déactivées
+                                                <i className="material-icons">remove</i> Offres désactivées
                                             </div>
                                         </div>
                                     </div>

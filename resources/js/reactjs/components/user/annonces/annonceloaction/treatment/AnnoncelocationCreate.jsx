@@ -153,24 +153,15 @@ class AnnoncelocationCreate extends Component {
             <Fragment>
                 <HelmetSite title={`${this.state.title || "Nouvelle annonce"} - ${$name_site}`}/>
                 <div className="landing-page sidebar-collapse">
-
-
                     <nav className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
-
-
                     <div className="wrapper">
-
                         <div className="main main-raised">
-
                             <div className="container">
                                 <br/>
-
                                 <Form role="form" id="contact-form" onSubmit={this.saveItem} acceptCharset="UTF-8">
-
                                     <div className="row">
-
                                         <div className="col-lg-8 col-md-12 mx-auto">
                                             <div className="submit text-left">
                                                 <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
@@ -196,7 +187,6 @@ class AnnoncelocationCreate extends Component {
                                                                 </NavLink>
                                                             </div>
                                                         </div>
-
                                                     </div>
                                                     <hr/>
                                                     <div id="accordion" role="tablist" aria-multiselectable="true"
@@ -250,7 +240,7 @@ class AnnoncelocationCreate extends Component {
                                                                                             <select name={'categoryannoncelocation_id'} value={this.state.categoryannoncelocation_id}
                                                                                                     className={`form-control ${this.hasErrorFor('categoryannoncelocation_id') ? 'is-invalid' : ''}`}
                                                                                                     id="categoryannoncelocation_id" onChange={this.handleFieldChange}>
-                                                                                                <option value="" disabled>Selectioner une category</option>
+                                                                                                <option value="" disabled>Selectioner une catégorie</option>
                                                                                                 {categoryannoncelocations.map((item) => (
                                                                                                     <option key={item.id} value={item.id}>{item.name}</option>
                                                                                                 ))}
@@ -302,7 +292,6 @@ class AnnoncelocationCreate extends Component {
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
 
                                                     <div id="accordion" role="tablist" aria-multiselectable="true"
@@ -324,7 +313,6 @@ class AnnoncelocationCreate extends Component {
                                                                             <div id="accordion" role="tablist"
                                                                                  aria-multiselectable="true"
                                                                                  className="card-collapse">
-
                                                                                 <div className="row">
                                                                                     <div
                                                                                         className="col-md-4 ml-auto mr-auto">
@@ -387,14 +375,12 @@ class AnnoncelocationCreate extends Component {
                                                                                         pas obligatoires vous avez le choix
                                                                                         de les remplire ou pas</small>
                                                                                 </div>
-
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
 
                                                     <div id="accordion" role="tablist" aria-multiselectable="true"
@@ -430,14 +416,12 @@ class AnnoncelocationCreate extends Component {
                                                                                                 onChange={this.handleChangeBody} />
                                                                                     {this.renderErrorFor('description')}
                                                                                 </div>
-
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
 
                                                     <div className="submit text-center">
@@ -449,13 +433,10 @@ class AnnoncelocationCreate extends Component {
                                                         </button>
                                                     </div>
                                                 </div>
-
                                             </div>
-
                                         </div>
 
                                         <div className="col-lg-4 col-md-12 mx-auto">
-
                                             <div className="submit text-center">
                                               <button className="btn btn-secondary" type="button" onClick={this.props.history.goBack} title="Ne pas mettre à jour l'annonce">
                                                    <b>Annuler</b>
@@ -502,7 +483,6 @@ class AnnoncelocationCreate extends Component {
                                                                 </div>
                                                                 <div id="accordion" role="tablist"
                                                                      aria-multiselectable="true" className="card-collapse">
-
                                                                     <div className="card card-plain">
                                                                         <div className="card-header" role="tab"
                                                                              id="headingAsavoir1">
@@ -525,23 +505,18 @@ class AnnoncelocationCreate extends Component {
                                                                             </div>
                                                                         </div>
                                                                     </div>
-
                                                                 </div>
-
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
-
                                     </div>
 
                                 </Form>
 
                             </div>
-
                         </div>
 
                         <FooterBigUserSite />

@@ -211,7 +211,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
             /** Alert notify bootstrapp **/
             $.notify({
                     // title: 'Update FAQ',
-                    message: 'Article de blog déactiver avec succès'
+                    message: 'Article de blog désactiver avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -409,7 +409,6 @@ class PremiumUserEditBlogannonceReservation extends Component {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div className="row">

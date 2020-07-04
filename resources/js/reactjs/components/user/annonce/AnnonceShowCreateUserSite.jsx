@@ -146,7 +146,6 @@ class AnnonceShowCreateUserSite extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 <hr />
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">
@@ -161,7 +160,6 @@ class AnnonceShowCreateUserSite extends Component {
                                                                 <div className="row">
                                                                     <div className="col-md-12">
                                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-
                                                                             <label htmlFor="title">Donner un titre a ce bien</label>
                                                                             <div className="input-group">
                                                                                 <div className="input-group-prepend">

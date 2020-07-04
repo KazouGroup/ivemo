@@ -20,7 +20,7 @@ class PrivateUserFavoriteannonceventes extends Component {
 
         };
 
-        this.unfavoriteItem = this.unfavoriteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
     }
 
@@ -30,7 +30,8 @@ class PrivateUserFavoriteannonceventes extends Component {
         })
     }
 
-    unfavoriteItem(id){
+
+    favoriteItem(item){
         Swal.fire({
             title: 'Retirer cette annonce?',
             text: "êtes vous sure de vouloir retirer cette annonce de vos favoris?",
@@ -46,7 +47,7 @@ class PrivateUserFavoriteannonceventes extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('favoriteannonceventes_unfavorite.unfavorite',id);
+                let url = route('favoriteannonceventes_favorite.favorite', [item.id]);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
@@ -98,7 +99,7 @@ class PrivateUserFavoriteannonceventes extends Component {
         const mapEmployments = favoritesdata.length >= 0 ? (
             favoritesdata.slice(0,visiable).map(item => {
                 return(
-                    <PrivateUserFavoriteAnnonceventeList key={item.id} {...item} unfavoriteItem={this.unfavoriteItem}/>
+                    <PrivateUserFavoriteAnnonceventeList key={item.id} {...item} favoriteItem={this.favoriteItem}/>
                 )
             })
         ):(
@@ -106,7 +107,7 @@ class PrivateUserFavoriteannonceventes extends Component {
         );
         return (
             <>
-                <HelmetSite title={`Mes favoris de tous annonces ${$userIvemo.first_name || 'Profile'} - {$name_site}`}/>
+                <HelmetSite title={`Mes favoris de tous annonces ${$userIvemo.first_name || 'Profile'} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 

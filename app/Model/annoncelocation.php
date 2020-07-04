@@ -2,11 +2,11 @@
 
 namespace App\Model;
 
-use App\Model\favorite\favoriteannonce;
 use App\Model\favorite\favoriteannoncelocation;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class annoncelocation extends Model
@@ -36,6 +36,10 @@ class annoncelocation extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+    public function isOnline()
+    {
+        return (bool) Cache::has('user-is-online-' . $this->user->id);
     }
 
     public function user()
@@ -75,6 +79,7 @@ class annoncelocation extends Model
 
     protected $casts = [
         'status' => 'boolean',
+        'status_comments' => 'boolean',
         'status_admin' => 'boolean',
     ];
 
@@ -93,6 +98,11 @@ class annoncelocation extends Model
             ]
 
         ];
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(comment::class ,'commentable');
     }
 
     public function bookmarked()

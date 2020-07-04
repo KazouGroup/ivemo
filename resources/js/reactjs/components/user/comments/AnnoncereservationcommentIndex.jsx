@@ -7,6 +7,9 @@ import Swal from "sweetalert2";
 import moment from "moment";
 import FormComment from "../../inc/vendor/comment/FormComment";
 import ProfileUserComment from "../../inc/vendor/comment/ProfileUserComment";
+import CommentViewList from "./inc/CommentViewList";
+import StatusComment from "./inc/StatusComment";
+import CommentListSkeleton from "../../inc/user/comment/CommentListSkeleton";
 
 
 class AnnoncereservationcommentIndex extends Component {
@@ -18,8 +21,8 @@ class AnnoncereservationcommentIndex extends Component {
             editcomment: false,
             responsecomment: false,
             editresponsecomment: false,
-            visiablecomment: 10,
-            visiableresponsecomment: 2,
+            visiablecomment: 6,
+            visiableresponsecomment: 1,
             comments:{user:[],responsecomments:[]},
             itemData:[],
             errors: [],
@@ -107,13 +110,13 @@ class AnnoncereservationcommentIndex extends Component {
 
     loadmoresItem() {
         this.setState((old) => {
-            return { visiablecomment: old.visiablecomment + 10 }
+            return { visiablecomment: old.visiablecomment + 6 }
         })
     }
 
     loadmoresresponseItem() {
         this.setState((old) => {
-            return { visiableresponsecomment: old.visiableresponsecomment + 6 }
+            return { visiableresponsecomment: old.visiableresponsecomment + 4 }
         })
     }
 
@@ -572,272 +575,212 @@ class AnnoncereservationcommentIndex extends Component {
                 <div className="card">
                     <div className="card-body">
 
+                        {comments.length >= 0 ?
 
-                        <h5 className="title text-center">
-                            <b>{comments.length > 1 ? `${comments.length || ""} Commentaires` : `${comments.length || ""} Commentaire`}</b>
-                        </h5>
+                            <>
+                                {!this.props.status_comments && (
 
-
-                        <div className="media-area">
+                                    <StatusComment/>
 
-                            {comments.length >= 0 ?
-                                <>
-                                    {comments.slice(0, visiablecomment).map((item) => (
+                                )}
 
-                                       <Fragment key={item.id}>
 
-                                           {item.id === itemData.id && (
-                                               <>
-                                                   {editcomment && (
+                                <h5 className="title text-center">
+                                    <b>{comments.length > 1 ? `${comments.length || ""} Commentaires` : `${comments.length || ""} Commentaire`}</b>
+                                </h5>
 
-                                                       <Form onSubmit={this.updatecommentItem} acceptCharset="UTF-8">
 
-                                                           <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
-                                                                        renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                                        handleFieldChange={this.handleFieldChange} namesubmit={`Mette à jour`}/>
+                                <div className="media-area">
 
-                                                       </Form>
+                                    <>
+                                        {comments.slice(0, visiablecomment).map((item) => (
 
-                                                   )}
+                                            <Fragment key={item.id}>
 
-                                               </>
-                                           )}
+                                                {item.id === itemData.id && (
+                                                    <>
+                                                        {editcomment && (
 
-                                           <div className="media">
+                                                            <Form onSubmit={this.updatecommentItem} acceptCharset="UTF-8">
 
-                                               <ProfileUserComment {...this.props} {...item} />
+                                                                <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
+                                                                             renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
+                                                                             handleFieldChange={this.handleFieldChange} namesubmit={`METTRE À JOUR`}/>
 
-                                               <div className="media-body">
+                                                            </Form>
 
-                                                   <>
-                                                       <h6 className="media-heading">{item.user.first_name}
-                                                           <small className="text-muted">· {moment(item.created_at).format('LL')}</small>
-                                                       </h6>
-                                                       <ReadMoreAndLess
-                                                           className="read-more-content"
-                                                           charLimit={250}
-                                                           readMoreText="lire plus"
-                                                           readLessText=""
-                                                       >
-                                                           {item.body || ""}
-                                                       </ReadMoreAndLess>
+                                                        )}
 
-                                                       <div className="media-footer">
+                                                    </>
+                                                )}
 
-                                                           {$guest ?
+                                                <div className="media">
 
-                                                               <Button data-toggle="modal" data-target="#loginModal"
-                                                                       className="btn btn-default btn-neutral pull-right" title="J'aime ce commentaire">
-                                                                   <i className="now-ui-icons ui-2_favourite-28"></i> {item.likeked_count}
-                                                               </Button>
-                                                               :
+                                                    <ProfileUserComment {...this.props} {...item} />
 
-                                                               <>
-                                                                   <button type="button" onClick={() => this.responsecommentFromItem(item)}
-                                                                           className="btn btn-default btn-neutral pull-right" title="Repondre a ce commentaire">
-                                                                       <i className="now-ui-icons files_single-copy-04"></i> Repondre
-                                                                   </button>
+                                                    <div className="media-body">
 
-                                                                   {item.likeked ?
+                                                        <CommentViewList {...item} responsecommentFromItem={this.responsecommentFromItem}
+                                                                         unlikeItem={this.unlikeItem} likeItem={this.likeItem} deleteItem={this.deleteItem}
+                                                                         editcommentFromItem={this.editcommentFromItem} unactiveItem={this.unactiveItem}/>
 
-                                                                       <>
-                                                                           <Button onClick={() => this.unlikeItem(item.id)}
-                                                                                   className="btn btn-danger btn-neutral pull-right" title="J'aime plus ce commentaire">
-                                                                               <i className="now-ui-icons ui-2_favourite-28"></i> {item.likeked_count}
-                                                                           </Button>
-                                                                       </>
 
-                                                                       :
-                                                                       <>
-                                                                           <Button onClick={() => this.likeItem(item.id)}
-                                                                                   className="btn btn-default btn-neutral pull-right" title="J'aime ce commentaire">
-                                                                               <i className="now-ui-icons ui-2_favourite-28"></i> {item.likeked_count}
-                                                                           </Button>
-                                                                       </>
-                                                                   }
+                                                        {(item.id === itemData.id) && (
+                                                            <>
+                                                                {responsecomment && (
 
-                                                                   {$userIvemo.id === item.user.id && (
-                                                                       <>
-                                                                           <button onClick={() => this.deleteItem(item.id) }
-                                                                                   className="btn btn-danger btn-neutral pull-right">
-                                                                               <i className="now-ui-icons ui-1_simple-remove"></i> Suprimer
-                                                                           </button>
-
-                                                                           <Button onClick={() => this.editcommentFromItem(item)}
-                                                                                   className="btn btn-info btn-neutral pull-right">
-                                                                               <i className="now-ui-icons ui-2_settings-90"></i> Editer
-                                                                           </Button>
-
-                                                                       </>
-                                                                   )}
+                                                                    <Form onSubmit={this.sendresponsecommentItem} acceptCharset="UTF-8">
 
-                                                                   {/* Ce button donne l'autorisation a l'utilisateur de l'annonce de la masquer */}
-                                                                   {$userIvemo.id === item.commentable.user_id && (
-                                                                       <button onClick={() => this.unactiveItem(item.id) }
-                                                                               className="btn btn-success btn-neutral pull-right" title="Masquer ce commentaire">
-                                                                           <i className="now-ui-icons ui-1_check"></i> Masquer
-                                                                       </button>
-                                                                   )}
+                                                                        <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
+                                                                                     renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
+                                                                                     handleFieldChange={this.handleFieldChange} namesubmit={`POSTER UNE RÉPONSE`}/>
 
+                                                                    </Form>
 
-                                                               </>
-                                                           }
+                                                                )}
 
-                                                       </div>
-                                                   </>
+                                                            </>
+                                                        )}
 
 
-                                                   {(item.id === itemData.id) && (
-                                                       <>
-                                                           {responsecomment && (
+                                                        {item.responsecomments.slice(0, visiableresponsecomment).map((lk) =>
 
-                                                               <Form onSubmit={this.sendresponsecommentItem} acceptCharset="UTF-8">
+                                                            <Fragment key={lk.id} >
 
-                                                                   <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
-                                                                                renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                                                handleFieldChange={this.handleFieldChange} namesubmit={`Poster votre reponse`}/>
+                                                                <div className="media">
 
-                                                               </Form>
+                                                                    <ProfileUserComment {...this.props} {...lk} />
 
-                                                           )}
+                                                                    <div className="media-body">
+                                                                        <h6 className="media-heading">{lk.user.first_name}
+                                                                            <small className="text-muted">· {moment(lk.created_at).format('LL')}</small>
+                                                                        </h6>
+                                                                        <ReadMoreAndLess
+                                                                            className="read-more-content"
+                                                                            charLimit={250}
+                                                                            readMoreText="lire plus"
+                                                                            readLessText=""
+                                                                        >
+                                                                            {lk.body || ""}
+                                                                        </ReadMoreAndLess>
+                                                                        <div className="media-footer">
+                                                                            {$guest ?
+                                                                                <Button data-toggle="modal" data-target="#loginModal"
+                                                                                        className="btn btn-default btn-neutral pull-right">
+                                                                                    <i className="now-ui-icons travel_info"></i>
+                                                                                </Button>
+                                                                                :
+                                                                                <>
 
-                                                       </>
-                                                   )}
+                                                                                    {lk.user.id !== $userIvemo.id &&(
+                                                                                        <button type="button" onClick={() => this.responsecommentFromItem(item)}
+                                                                                                className="btn btn-default btn-neutral pull-right" title="Répondre a ce commentaire">
+                                                                                            <i className="now-ui-icons files_single-copy-04"></i> Répondre
+                                                                                        </button>
+                                                                                    )}
 
+                                                                                    {$userIvemo.id === lk.user.id && (
+                                                                                        <>
+                                                                                            <button onClick={() => this.deleteresponseItem(lk.id) }
+                                                                                                    className="btn btn-danger btn-neutral pull-right">
+                                                                                                <i className="now-ui-icons ui-1_simple-remove"></i> Supprimer
+                                                                                            </button>
 
-                                                   {item.responsecomments.slice(0, visiableresponsecomment).map((lk) =>
+                                                                                            <Button onClick={() => this.editresponsecommentFromItem(lk)}
+                                                                                                    className="btn btn-info btn-neutral pull-right">
+                                                                                                <i className="now-ui-icons ui-2_settings-90"></i> Editer
+                                                                                            </Button>
 
-                                                       <Fragment key={lk.id} >
+                                                                                        </>
+                                                                                    )}
 
-                                                           <div className="media">
+                                                                                    {/* Ce button donne l'autorisation a l'utilisateur de l'annonce de la masquer */}
+                                                                                    {$userIvemo.id === item.commentable.user_id && (
+                                                                                        <button onClick={() => this.unactiveresponseItem(lk.id) }
+                                                                                                className="btn btn-success btn-neutral pull-right" title="Masquer ce commentaire">
+                                                                                            <i className="now-ui-icons ui-1_check"></i> Masquer
+                                                                                        </button>
+                                                                                    )}
+                                                                                </>
+                                                                            }
 
-                                                               <ProfileUserComment {...this.props} {...lk} />
+                                                                        </div>
 
-                                                               <div className="media-body">
-                                                                   <h6 className="media-heading">{lk.user.first_name}
-                                                                       <small className="text-muted">· {moment(lk.created_at).format('LL')}</small>
-                                                                   </h6>
-                                                                   <ReadMoreAndLess
-                                                                       className="read-more-content"
-                                                                       charLimit={250}
-                                                                       readMoreText="lire plus"
-                                                                       readLessText=""
-                                                                   >
-                                                                       {lk.body || ""}
-                                                                   </ReadMoreAndLess>
-                                                                   <div className="media-footer">
-                                                                       {$guest ?
-                                                                           <Button data-toggle="modal" data-target="#loginModal"
-                                                                                   className="btn btn-default btn-neutral pull-right">
-                                                                               <i className="now-ui-icons travel_info"></i>
-                                                                           </Button>
-                                                                           :
-                                                                           <>
+                                                                    </div>
 
-                                                                               {lk.user.id !== $userIvemo.id &&(
-                                                                                   <button type="button" onClick={() => this.responsecommentFromItem(item)}
-                                                                                           className="btn btn-default btn-neutral pull-right" title="Repondre a ce commentaire">
-                                                                                       <i className="now-ui-icons files_single-copy-04"></i> Repondre
-                                                                                   </button>
-                                                                               )}
+                                                                </div>
 
-                                                                               {$userIvemo.id === lk.user.id && (
-                                                                                   <>
-                                                                                       <button onClick={() => this.deleteresponseItem(lk.id) }
-                                                                                               className="btn btn-danger btn-neutral pull-right">
-                                                                                           <i className="now-ui-icons ui-1_simple-remove"></i> Suprimer
-                                                                                       </button>
+                                                                {(lk.id === itemData.id && editresponsecomment) && (
 
-                                                                                       <Button onClick={() => this.editresponsecommentFromItem(lk)}
-                                                                                               className="btn btn-info btn-neutral pull-right">
-                                                                                           <i className="now-ui-icons ui-2_settings-90"></i> Editer
-                                                                                       </Button>
+                                                                    <Form onSubmit={this.updateresponsecommentItem} acceptCharset="UTF-8">
 
-                                                                                   </>
-                                                                               )}
+                                                                        <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
+                                                                                     renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
+                                                                                     handleFieldChange={this.handleFieldChange} namesubmit={`METTRE À JOUR`}/>
 
-                                                                               {/* Ce button donne l'autorisation a l'utilisateur de l'annonce de la masquer */}
-                                                                               {$userIvemo.id === item.commentable.user_id && (
-                                                                                   <button onClick={() => this.unactiveresponseItem(lk.id) }
-                                                                                           className="btn btn-success btn-neutral pull-right" title="Masquer ce commentaire">
-                                                                                       <i className="now-ui-icons ui-1_check"></i> Masquer
-                                                                                   </button>
-                                                                               )}
-                                                                           </>
-                                                                       }
+                                                                    </Form>
 
-                                                                   </div>
+                                                                )}
 
-                                                               </div>
+                                                            </Fragment>
 
-                                                           </div>
+                                                        )}
 
-                                                           {(lk.id === itemData.id && editresponsecomment) && (
+                                                        {visiableresponsecomment < item.responsecomments.length && (
+                                                            <div className="col-md-8 ml-auto mr-auto text-center">
+                                                                <a style={{cursor:"pointer"}} onClick={this.loadmoresresponseItem} className="text-info">
+                                                                    <b>{item.responsecomments.length} Afficher plus de réponses</b>
+                                                                </a>
+                                                            </div>
+                                                        )}
 
-                                                               <Form onSubmit={this.updateresponsecommentItem} acceptCharset="UTF-8">
 
-                                                                   <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
-                                                                                renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                                                handleFieldChange={this.handleFieldChange} namesubmit={` Mettre à jour votre reponse`}/>
+                                                    </div>
+                                                </div>
 
-                                                               </Form>
+                                            </Fragment>
 
-                                                           )}
+                                        ))}
+                                    </>
 
-                                                       </Fragment>
 
-                                                   )}
-
-                                                   {visiableresponsecomment < item.responsecomments.length && (
-                                                       <div className="col-md-8 ml-auto mr-auto text-center">
-                                                           <a style={{cursor:"pointer"}} onClick={this.loadmoresresponseItem} className="text-info">
-                                                               <b>{item.responsecomments.length} Afficher plus de reponses</b>
-                                                           </a>
-                                                       </div>
-                                                   )}
-
-
-                                               </div>
-                                           </div>
-
-                                       </Fragment>
-
-                                    ))}
-                                </>
-                                :null}
-
-
-                            {visiablecomment < comments.length && (
-                                <div className="col-md-8 ml-auto mr-auto text-center">
-                                    <a style={{cursor:"pointer"}} onClick={this.loadmoresItem} className="text-info">
-                                        <b>Afficher plus de commentaires</b>
-                                    </a>
-                                </div>
-                            )}
-
-                            <br/>
-
-                            {$guest ?
-
-                                <h6 className="title text-center">S'il vous plaît
-                                    <a href="/" className="text-primary" data-toggle="modal" data-target="#loginModal"> Connectez vous </a> ou
-                                    <a href={route('register')} className="text-primary"> Inscrivez vous </a> pour laisser un commentaire
-                                </h6>
-                                :
-                                <>
-                                    {!editcomment && !responsecomment && !editresponsecomment && (
-                                        <Form onSubmit={this.sendcommentItem} acceptCharset="UTF-8">
-
-                                            <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
-                                                         renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                         handleFieldChange={this.handleFieldChange} namesubmit={`Poster mon commentaire`}/>
-
-                                        </Form>
+                                    {visiablecomment < comments.length && (
+                                        <div className="col-md-8 ml-auto mr-auto text-center">
+                                            <a style={{cursor:"pointer"}} onClick={this.loadmoresItem} className="text-info">
+                                                <b>Afficher plus de commentaires</b>
+                                            </a>
+                                        </div>
                                     )}
-                                </>
-                            }
 
-                        </div>
+                                    <br/>
+
+                                    {$guest ?
+
+                                        <h6 className="title text-center">S'il vous plaît
+                                            <a href="/" className="text-primary" data-toggle="modal" data-target="#loginModal"> Connectez vous </a> ou
+                                            <a href={route('register')} className="text-primary"> Inscrivez vous </a> pour laisser un commentaire
+                                        </h6>
+                                        :
+                                        <>
+                                            {!editcomment && !responsecomment && !editresponsecomment && (
+                                                <Form onSubmit={this.sendcommentItem} acceptCharset="UTF-8">
+
+                                                    <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
+                                                                 renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
+                                                                 handleFieldChange={this.handleFieldChange} namesubmit={`POSTER MON COMMENTAIRE`}/>
+
+                                                </Form>
+                                            )}
+                                        </>
+                                    }
+
+                                </div>
+                            </>
+
+                            :
+
+                            <CommentListSkeleton />
+                        }
 
                     </div>
                 </div>

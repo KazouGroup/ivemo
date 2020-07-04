@@ -14,6 +14,7 @@ use App\Model\categoryannoncelocation;
 use App\Model\city;
 use App\Model\user;
 use App\Services\AnnoncelocationService;
+use App\Services\Contactusers\ContactuserslocationService;
 use Symfony\Component\HttpFoundation\Response;
 
 class AnnoncelocationController extends Controller
@@ -26,7 +27,11 @@ class AnnoncelocationController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','destroy','apiannonceslocationsbyuser','annonceslocationsbyuser','apicategoryannoncelocations_by_user','activated','unactivated','apiannoncelocationsbyannoncetypebyannoncelocation'
+            'create','store','edit','update','destroy',
+            'apiannonceslocationsbyuser','annonceslocationsbyuser',
+            'apicategoryannoncelocations_by_user',
+            'statusitem','adminstatusitem','statuscomments',
+            'apiannoncelocationsbyannoncetypebyannoncelocation'
         ]]);
     }
     /**
@@ -255,7 +260,13 @@ class AnnoncelocationController extends Controller
         return response()->json($annoncelocations, 200);
     }
 
-
+    /**
+     * @param annoncetype $annoncetype
+     * @param categoryannoncelocation $categoryannoncelocation
+     * @param city $city
+     * @param annoncelocation $annoncelocation
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function apiannoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,annoncelocation $annoncelocation)
     {
         visits($annoncelocation)->seconds(60)->increment();
@@ -265,6 +276,10 @@ class AnnoncelocationController extends Controller
         return response()->json($annoncelocation, 200);
     }
 
+    /**
+     * @param categoryannoncelocation $categoryannoncelocation
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function apiannoncelocationinteressebycategoryannoncelocation(categoryannoncelocation $categoryannoncelocation)
     {
         $annoncelocations = annoncelocation::with('user','city','annoncetype','categoryannoncelocation')
@@ -277,6 +292,12 @@ class AnnoncelocationController extends Controller
         return response()->json($annoncelocations, 200);
     }
 
+    /**
+     * @param annoncetype $annoncetype
+     * @param categoryannoncelocation $categoryannoncelocation
+     * @param city $city
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function apiannoncelocationinteressebycity(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city)
     {
         $annoncelocation = AnnoncelocationResource::collection($categoryannoncelocation->annoncelocations()
@@ -365,11 +386,11 @@ class AnnoncelocationController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateRequest $request
+     * @param annoncetype $annoncetype
+     * @param $annoncelocation
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(UpdateRequest $request,annoncetype $annoncetype,$annoncelocation)
     {
@@ -385,62 +406,46 @@ class AnnoncelocationController extends Controller
         return response()->json($annoncelocation,200);
     }
 
-
-    public function activated($id)
+    public function statuscomments($id)
     {
         $annoncelocation = annoncelocation::where('id', $id)->findOrFail($id);
 
         $this->authorize('update',$annoncelocation);
 
-        if(auth()->user()->id === $annoncelocation->user_id){
+        $annoncelocation->update(['status_comments' => !$annoncelocation->status_comments,]);
 
-            $annoncelocation->update(['status' => 1,]);
-
-            return response('Confirmed',Response::HTTP_ACCEPTED);
-        }else{
-            abort(404);
-        }
+        return response('Confirmed',Response::HTTP_ACCEPTED);
     }
 
-    public function unactivated($id)
+    public function statusitem($id)
     {
         $annoncelocation = annoncelocation::where('id', $id)->findOrFail($id);
 
         $this->authorize('update',$annoncelocation);
 
-        if(auth()->user()->id === $annoncelocation->user_id){
-            $annoncelocation->update(['status' => 0,]);
+        $annoncelocation->update(['status' => !$annoncelocation->status,]);
 
-            return response('Confirmed',Response::HTTP_ACCEPTED);
-        }else{
-            abort(404);
-        }
+        return response('Confirmed',Response::HTTP_ACCEPTED);
     }
+
 
     public function adminactivated($id)
     {
         $annoncelocation = annoncelocation::where('id', $id)->findOrFail($id);
 
-        $annoncelocation->update(['status_admin' => 1,'member_id' => auth()->user()->id]);
+        $annoncelocation->update(['status_admin' => !$annoncelocation->status_admin,'member_id' => auth()->user()->id]);
+
+        ContactuserslocationService::adminsendMessageToUser($annoncelocation);
 
         return response('Confirmed',Response::HTTP_ACCEPTED);
     }
 
-    public function adminunactivated($id)
-    {
-        $annoncelocation = annoncelocation::where('id', $id)->findOrFail($id);
-
-        $annoncelocation->update(['status_admin' => 0,'member_id' => auth()->user()->id]);
-
-        return response('Confirmed',Response::HTTP_ACCEPTED);
-
-    }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return array|\Illuminate\Http\Response
+     * @param annoncetype $annoncetype
+     * @param $id
+     * @return array
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy(annoncetype $annoncetype,$id)
     {

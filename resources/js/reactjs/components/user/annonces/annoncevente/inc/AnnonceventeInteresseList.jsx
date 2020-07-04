@@ -9,18 +9,12 @@ require("moment/min/locales.min");
 moment.locale('fr');
 
 class AnnonceventeInteresseList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            //
-        }
-    }
 
     render() {
         return (
-            <Fragment>
+            <Fragment  key={this.props.id}>
 
-                <div key={this.props.id} className="col-md-6 mx-auto">
+                <div className="col-md-6 mx-auto">
                     <div className="card">
                         <div className="card-body">
                             <div className="card card-plain card-blog">
@@ -73,7 +67,7 @@ class AnnonceventeInteresseList extends Component {
                                             </div>
                                             <div className="text-right ml-auto">
                                                 <div className="col-md-12 col-12">
-                                                    <h5 className="text-success"><b>{this.props.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h5>
+                                                    <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h5>
                                                 </div>
 
                                             </div>
@@ -127,17 +121,15 @@ class AnnonceventeInteresseList extends Component {
                                                     :
                                                     <>
                                                         {this.props.bookmarked ?
-
                                                             <>
-                                                                <Button onClick={() => this.props.unfavoriteItem(this.props.id)}
+                                                                <Button onClick={() => this.props.favoriteItem(this.props)}
                                                                         className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
                                                                     <i className="fas fa-bookmark"></i>
                                                                 </Button>
                                                             </>
-
                                                             :
                                                             <>
-                                                                <Button onClick={() => this.props.favoriteItem(this.props.id)}
+                                                                <Button onClick={() => this.props.favoriteItem(this.props)}
                                                                         className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
                                                                     <i className="far fa-bookmark"></i>
                                                                 </Button>

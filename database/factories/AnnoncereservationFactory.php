@@ -18,6 +18,7 @@ $factory->define(annoncereservation::class, function (Faker $faker) {
         'title' => $title,
         'district' => $faker->city,
         'status' => true,
+        'status_comments' => $faker->boolean,
         'price' => $faker->randomNumber(5),
         'surface' => $faker->randomNumber(2),
         'rooms' => $faker->randomDigitNot(3),

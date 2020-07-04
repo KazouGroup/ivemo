@@ -258,7 +258,7 @@ class PremiumUserEditTeam extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
 
-                            message: 'Utilisateur déactivé avec succès'
+                            message: 'Utilisateur désactivé avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -439,12 +439,12 @@ class PremiumUserEditTeam extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">remove</i>
                                             </div>
-                                            <p className="card-category"><b>Déactivés</b></p>
+                                            <p className="card-category"><b>Désactivés</b></p>
                                             <h3 className="card-title"><b>{this.dataunactive_countFormatter(teamsunactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">remove</i> Déactivés
+                                                <i className="material-icons">remove</i> Désactivés
                                             </div>
                                         </div>
                                     </div>

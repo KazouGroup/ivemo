@@ -35,7 +35,7 @@ class PremiumUserEmployementMessageShow extends Component {
             this.loadItems();
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -53,7 +53,7 @@ class PremiumUserEmployementMessageShow extends Component {
             this.loadItems();
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -85,7 +85,7 @@ class PremiumUserEmployementMessageShow extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Message suprimée avec succès'
+                            message: 'Offre supprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -103,7 +103,7 @@ class PremiumUserEmployementMessageShow extends Component {
                     this.props.history.push(`/dashboard/premium/${$userIvemo.slug}/employments/message/${contactuseremployment.employment.slug}/`);
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {

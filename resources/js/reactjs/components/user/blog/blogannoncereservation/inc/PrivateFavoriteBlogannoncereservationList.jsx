@@ -38,8 +38,13 @@ class PrivateFavoriteBlogannoncereservationList extends PureComponent {
                                 <div className="card-footer">
                                     <div className="author">
                                         <Link to={`/pro/${this.props.blogannoncereservation.user.slug}/`}>
-                                            <img src={this.props.blogannoncereservation.user.avatar} alt={this.props.blogannoncereservation.user.first_name}
-                                                 className="avatar img-raised"/>
+                                            {this.props.blogannoncereservation.user.avatar === null ?
+                                                <img className="avatar img-raised" alt={this.props.blogannoncereservation.user.first_name}
+                                                     src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>
+                                                :
+                                                <img className="avatar img-raised" alt={this.props.blogannoncereservation.user.first_name}
+                                                     src={this.props.blogannoncereservation.user.avatar}/>
+                                            }
                                             <b>{this.props.blogannoncereservation.user.first_name}</b>
                                         </Link>
                                     </div>

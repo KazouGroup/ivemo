@@ -6,6 +6,7 @@ use App\Model\favorite\favoritemployment;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class employment extends Model
@@ -60,6 +61,11 @@ class employment extends Model
         return 'slug';
     }
 
+    public function isOnline()
+    {
+        return (bool) Cache::has('user-is-online-' . $this->user->id);
+    }
+
     public function visits()
     {
         return visits($this);
@@ -67,6 +73,7 @@ class employment extends Model
 
     protected $casts = [
         'status' => 'boolean',
+        'status_comments' => 'boolean',
         'status_admin' => 'boolean',
     ];
 
@@ -86,7 +93,6 @@ class employment extends Model
 
         ];
     }
-
 
     public function contactuseremployments()
     {

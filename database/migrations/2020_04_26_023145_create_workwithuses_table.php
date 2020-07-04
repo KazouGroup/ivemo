@@ -19,6 +19,7 @@ class CreateWorkwithusesTable extends Migration
             $table->string('slug')->nullable();
             $table->string('photo')->nullable();
             $table->boolean('status')->default(false);
+            $table->boolean('status_comments')->default(false);
             $table->string('ip')->nullable();
             $table->longText('description')->nullable();
             $table->timestamps();

@@ -28,6 +28,7 @@ class CreateAnnonceventesTable extends Migration
             $table->unsignedBigInteger('award_price')->nullable();
             $table->date('disponible_date')->nullable();
             $table->boolean('status')->default(true);
+            $table->boolean('status_comments')->default(true);
             $table->boolean('status_admin')->default(true);
             $table->timestamps();
             $table->softDeletes();

@@ -23,7 +23,7 @@ class PublicUserAnnonceLocations extends Component {
         };
 
         this.deleteItem = this.deleteItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
+        this.statusItem = this.statusItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
     }
     loadmoresItem() {
@@ -31,9 +31,9 @@ class PublicUserAnnonceLocations extends Component {
             return { visiable: old.visiable + 10 }
         })
     }
-    unactiveItem(id){
+    statusItem(item){
         Swal.fire({
-            title: 'Désactiver l\'annonce?',
+            title: 'Changer le status l\'annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -46,13 +46,17 @@ class PublicUserAnnonceLocations extends Component {
         }).then((result) => {
             if (result.value) {
 
+                let isNotId = data => data.id !== item.id;
+                let updatedItems = this.state.annoncelocations.filter(isNotId);
+                this.setState({ annoncelocations: updatedItems });
+
                 //Envoyer la requet au server
-                let url = route('annonces_locations_unactivated.site',id);
+                let url = route('annonces_locations_status.site',item.id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            // title: 'Update FAQ',
+
                             //message: 'Annonce désactiver avec succès',
                             message: "Cette annonce a été masquée au utilisateur",
                         },
@@ -69,8 +73,6 @@ class PublicUserAnnonceLocations extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.loadItems();
-
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Something wrong. Try later", {
@@ -155,7 +157,7 @@ class PublicUserAnnonceLocations extends Component {
             useranoncelocationPublick.annoncelocations.slice(0, visiable).map(item => {
                 return(
 
-                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
+                    <AnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} statusItem={this.statusItem}/>
                 )
             })
         ):(
@@ -305,7 +307,7 @@ class PublicUserAnnonceLocations extends Component {
                                             </div>
                                             </>
                                         }
-                                        
+
 
                                     </div>
 

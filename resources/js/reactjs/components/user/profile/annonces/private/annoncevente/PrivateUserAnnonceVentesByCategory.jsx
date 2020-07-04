@@ -19,8 +19,7 @@ class PrivateUserAnnonceVentesByCategory extends Component {
         };
 
         this.deleteItem = this.deleteItem.bind(this);
-        this.activeItem = this.activeItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
+        this.statusItem = this.statusItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
     }
 
@@ -30,9 +29,9 @@ class PrivateUserAnnonceVentesByCategory extends Component {
         })
     }
 
-    activeItem(id) {
+    statusItem(item) {
         Swal.fire({
-            title: 'Activer l\'annonce?',
+            title: 'Changer le status de l\'annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -46,80 +45,47 @@ class PrivateUserAnnonceVentesByCategory extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('annonces_ventes_active.site', id);
+                let url = route('annonces_ventes_status.site', item.id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
-                    $.notify({
-                        //,
-                        message: 'Annonce activé avec succès'
-                    },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
+                    if(item.status){
+                        $.notify({
+
+                                //message: 'Annonce désactiver avec succès',
+                                message: "Annonce masquée aux utilisateurs",
                             },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }else {
+                        $.notify({
+
+                                //message: 'Annonce désactiver avec succès',
+                                message: "Annonce masquée visible aux utilisateurs",
                             },
-                        });
-                    /** End alert ***/
-                    this.loadItems();
-
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        })
-
-    }
-
-    unactiveItem(id) {
-        Swal.fire({
-            title: 'Désactiver l\'annonce?',
-            text: "êtes vous sure de vouloir confirmer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                //Envoyer la requet au server
-                let url = route('annonces_ventes_unactivated.site', id);
-                dyaxios.get(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                        // title: 'Update FAQ',
-                        message: 'Annonce désactiver avec succès'
-                    },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
-                            },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
-                            },
-                        });
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }
                     /** End alert ***/
                     this.loadItems();
 
@@ -210,7 +176,7 @@ class PrivateUserAnnonceVentesByCategory extends Component {
             userannonceventes.annonceventes.slice(0, visiable).map(item => {
                 return (
 
-                    <PrivateUserAnnonceventeList key={item.id} {...item} deleteItem={this.deleteItem} activeItem={this.activeItem} unactiveItem={this.unactiveItem} />
+                    <PrivateUserAnnonceventeList key={item.id} {...item} deleteItem={this.deleteItem} statusItem={this.statusItem} />
                 )
             })
         ) : (

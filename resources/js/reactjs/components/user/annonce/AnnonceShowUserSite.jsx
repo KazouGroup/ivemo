@@ -97,25 +97,17 @@ class AnnonceShowUserSite extends Component {
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
-
                     <nav className="navbar ivemoNarbarCustomisation navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
-
                     <div className="wrapper">
-
                         <div className="main main-raised">
-
                             <div className="container">
                                 <br />
                                 <div className="row">
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
-
                                         <div className="card-body">
-
                                             <div className="card-image">
-
                                                 <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
                                                     <ol className="carousel-indicators">
                                                         <li data-target="#carouselAnnonceIndicators" data-slide-to="0" className=""></li>
@@ -160,8 +152,6 @@ class AnnonceShowUserSite extends Component {
                                                     <strong className="title text-dark"><b>50 000 FCFA/mois</b></strong>
                                                 </div>
                                             </div>
-
-
                                         </div>
 
                                         <div className="card">
@@ -185,12 +175,8 @@ class AnnonceShowUserSite extends Component {
                                                     douce fabric and has flattering
                                                     cutouts through the torso and back. Wear yours with mirrored sunglasses on vacation.
                                                 </span>
-
-
-
                                             </div>
                                         </div>
-
 
                                         <div className="card">
                                             <div className="card-body">
@@ -270,10 +256,7 @@ class AnnonceShowUserSite extends Component {
                                                                 <div className="row">
                                                                     <div className="col-md-12">
                                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-
-
                                                                             <form role="form" id="contact-form" onSubmit={this.createItem} acceptCharset="UTF-8">
-
                                                                                 <div className="input-group">
                                                                                     <div className="input-group-prepend">
                                                                                         <span className="input-group-text"><i className="now-ui-icons users_circle-08"></i></span>
@@ -343,30 +326,23 @@ class AnnonceShowUserSite extends Component {
                                                                             </button>
                                                                                 </div>
                                                                             </form>
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
-
                                             </div>
-
                                         </div>
-
                                     </div>
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
-
                                         <div className="submit text-center">
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
                                                 <i className="now-ui-icons ui-1_simple-add"></i> <b>Poster votre annonce</b>
                                             </NavLink>
                                         </div>
-
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="row">

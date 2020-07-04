@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import HelmetSite from "../../../inc/user/HelmetSite";
 import NavlinkfavoritesconfigurationUser from "./NavlinkfavoritesconfigurationUser";
-import PrivateUserFavoriteAnnonceventeList from "../../annonces/annoncevente/inc/PrivateUserFavoriteAnnonceventeList";
 import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 import PrivateUserFavoriteAnnonceslocationList
     from "../../annonces/annonceloaction/inc/PrivateUserFavoriteAnnonceslocationList";
@@ -48,7 +47,7 @@ class PrivateUserFavoriteannoncelocations extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('favoriteannoncelocations_unfavorite.unfavorite',id);
+                let url = route('favoriteannoncelocations_favorite.favorite',id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
@@ -108,7 +107,7 @@ class PrivateUserFavoriteannoncelocations extends Component {
         );
         return (
             <>
-                <HelmetSite title={`Mes favoris de tous annonces ${$userIvemo.first_name || 'Profile'} - {$name_site}`}/>
+                <HelmetSite title={`Mes favoris de tous annonces ${$userIvemo.first_name || 'Profile'} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 

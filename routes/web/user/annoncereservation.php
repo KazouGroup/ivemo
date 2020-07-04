@@ -103,14 +103,14 @@ Route::post(
 )->name('annoncereservationsendcontactmessageuser_site');
 
 Route::get(
-    'annonces_reservations_active/{id}',
-    'AnnoncereservationController@activated'
-)->name('annonces_reservations_active.site');
+    'annonces_reservations_status/{id}',
+    'AnnoncereservationController@statusitem'
+)->name('annonces_reservations_status.site');
 
 Route::get(
-    'annonces_reservations_unactive/{id}',
-    'AnnoncereservationController@unactivated'
-)->name('annonces_reservations_unactivated.site');
+    'annonces_reservations_status_comments/{id}',
+    'AnnoncereservationController@statuscomments'
+)->name('annonces_reservations_status_comments.site');
 
 Route::delete(
     'annonces_reservations_delete/{id}',

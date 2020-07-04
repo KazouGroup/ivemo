@@ -166,7 +166,7 @@ class PremiumUserTeams extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update FAQ',
-                            message: 'Utilisateur déactivé avec succès'
+                            message: 'Utilisateur désactivé avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -306,7 +306,7 @@ class PremiumUserTeams extends Component {
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">done</i>  Actives
+                                                <i className="material-icons">done</i>  Activés
                                             </div>
                                         </div>
                                     </div>
@@ -317,12 +317,12 @@ class PremiumUserTeams extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">remove</i>
                                             </div>
-                                            <p className="card-category"><b>Déactivés</b></p>
+                                            <p className="card-category"><b>Désactives</b></p>
                                             <h3 className="card-title"><b>{this.dataunactive_countFormatter(teamsunactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">remove</i> Déactivés
+                                                <i className="material-icons">remove</i> Désactivés
                                             </div>
                                         </div>
                                     </div>
@@ -427,7 +427,7 @@ class PremiumUserTeams extends Component {
                                                                         {item.status ?
                                                                             <span className="badge badge-success"><b>Visible</b></span>
                                                                             :
-                                                                            <span className="badge badge-rose"><b>Déactivé</b></span>
+                                                                            <span className="badge badge-rose"><b>Désactivé</b></span>
                                                                         }
                                                                     </div>
                                                                 </td>

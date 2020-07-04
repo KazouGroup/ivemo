@@ -96,14 +96,13 @@ class FormcontactuseronlocationShow extends Component {
             <form role="form" id="contact-form" onSubmit={this.sendmessageItem} acceptCharset="UTF-8">
 
                 <div className="card-body">
-
                     <div className="row">
                         <div className="input-group">
                             <div className="input-group-prepend">
                                 <span className="input-group-text">
                                     <i className="now-ui-icons users_circle-08" /></span>
                             </div>
-                            <FieldInput name="full_name" type='text' minLength="4" maxLength="50" placeholder="Nom complete" value={this.state.full_name}
+                            <FieldInput name="full_name" type='text' minLength="4" maxLength="50" placeholder="Nom complet" value={this.state.full_name}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
                                         renderErrorFor={this.renderErrorFor}/>
@@ -122,6 +121,7 @@ class FormcontactuseronlocationShow extends Component {
                                         renderErrorFor={this.renderErrorFor}/>
                         </div>
                     </div>
+
                     <div className="row">
                         <div className="input-group">
                             <div className="input-group-prepend">
@@ -134,8 +134,8 @@ class FormcontactuseronlocationShow extends Component {
                                         renderErrorFor={this.renderErrorFor}/>
                         </div>
                     </div>
-                    <div className="row">
 
+                    <div className="row">
                         <div className="input-group">
                             <div className="input-group-prepend">
                                 <span className="input-group-text">

@@ -11,7 +11,7 @@ import Skeleton from "react-loading-skeleton";
 import ProfileForallAnnoncelocationShow from "./inc/ProfileForallAnnoncelocationShow";
 import Navlinknewannoncelocation from "./treatment/Navlinknewannoncelocation";
 import HelmetSite from "../../../inc/user/HelmetSite";
-import ButonFavoris from "../../../inc/vendor/ButonFavoris";
+import AnnoncelocationcommentIndex from "../../comments/AnnoncelocationcommentIndex";
 
 
 class Annoncelocationbycategorycityshow extends Component {
@@ -22,28 +22,47 @@ class Annoncelocationbycategorycityshow extends Component {
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
-        this.unfavoriteItem = this.unfavoriteItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
+        this.statusItem = this.statusItem.bind(this);
+        this.statuscommentItem = this.statuscommentItem.bind(this);
     }
 
-    favoriteItem(id) {
-        const url = route('favoriteannoncelocations_favorite.favorite', [id]);
+    favoriteItem(annoncelocation) {
+        const url = route('favoriteannoncelocations_favorite.favorite', [annoncelocation.id]);
         dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Annonce ajoutée à vos favoris",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
+
+            if(annoncelocation.bookmarked){
+                $.notify({
+                        message: "Annonce ajoutée à vos favoris",
                     },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+            }else {
+                $.notify({
+                        message: "Annonce retirée de vos favoris",
                     },
-                });
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+            }
             this.loadItems();
 
         }).catch(() => {
@@ -58,36 +77,76 @@ class Annoncelocationbycategorycityshow extends Component {
         })
     }
 
-    unfavoriteItem(id) {
-        const url = route('favoriteannoncelocations_unfavorite.unfavorite', [id]);
-        dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Annonce retirée de vos favoris",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
-                    },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
-                    },
-                });
-            this.loadItems();
+    statuscommentItem(annoncelocation){
+        Swal.fire({
+            text: "êtes vous sure de vouloir changer le status des commentaires de cette annonce?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
 
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
+                //Envoyer la requet au server
+                let url = route('annonces_locations_status_comments.site',annoncelocation.id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    if(annoncelocation.status_comments){
+                        $.notify({
+
+                                message: "Commentaire desactivé sur cette annonce",
+                            },
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }else {
+                        $.notify({
+
+                                message: "Commentaire activés sur cette annonce",
+                            },
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }
+
+                    /** End alert ***/
+                    this.loadItems();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
+                        }
+                    });
+                })
+            }
         })
+
     }
 
     copyToClipboard(){
@@ -108,9 +167,9 @@ class Annoncelocationbycategorycityshow extends Component {
         });
     }
 
-    unactiveItem(id){
+    statusItem(annoncelocation){
         Swal.fire({
-            title: 'Déactiver l\'annonce?',
+            title: 'Changer le status de l\'annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -124,30 +183,48 @@ class Annoncelocationbycategorycityshow extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('annonces_locations_unactivated.site',id);
+                let url = route('annonces_locations_status.site',id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
-                    $.notify({
-                            message: "Cette annonce a été masquée au utilisateur",
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
+                    if(annoncelocation.status){
+                        $.notify({
+                                message: "Annonce masquée aux utilisateurs",
                             },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }else {
+                        $.notify({
+                                message: "Annonce activée avec succès",
                             },
-                        });
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }
                     /** End alert ***/
                     this.props.history.push("/annonces_locations/"+ this.props.match.params.annoncetype +"/");
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -182,7 +259,7 @@ class Annoncelocationbycategorycityshow extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec succès'
+                            message: 'Annonce supprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -200,7 +277,7 @@ class Annoncelocationbycategorycityshow extends Component {
                     this.props.history.push('/annonces_locations/locations/');
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -236,21 +313,16 @@ class Annoncelocationbycategorycityshow extends Component {
                 <HelmetSite title={`${annoncelocation.title || $name_site} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
-
                     <Navbar className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </Navbar>
 
                     <div className="wrapper">
-
                         <div className="main main-raised">
-
                             <div className="container">
                                 <br />
                                 <div className="row">
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
-
                                         <div className="card-body">
                                             <div className="submit text-left">
                                                 <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
@@ -259,7 +331,6 @@ class Annoncelocationbycategorycityshow extends Component {
                                             </div>
 
                                             <div className="card-image">
-
                                                 <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
                                                     <ol className="carousel-indicators">
                                                         <li data-target="#carouselAnnonceIndicators" data-slide-to="0" className=""></li>
@@ -305,9 +376,9 @@ class Annoncelocationbycategorycityshow extends Component {
 
                                                 <div className="text-right ml-auto">
                                                     {annoncelocation.price ?
-                                                        <h5 className="text-success"><b>{annoncelocation.price.formatMoney(2,'.',',')} <small>FCFA/mois</small></b></h5>
+                                                        <h5 className="text-dark"><b>{annoncelocation.price.formatMoney(2,'.',',')} <small><b>FCFA - le mois</b></small></b></h5>
                                                         :
-                                                        <h5 className="text-success"><b><Skeleton width={150} /></b></h5>
+                                                        <h5 className="text-dark"><b><Skeleton width={150} /></b></h5>
                                                     }
                                                 </div>
                                             </div>
@@ -323,15 +394,14 @@ class Annoncelocationbycategorycityshow extends Component {
                                                         {annoncelocation.bookmarked ?
 
                                                             <>
-                                                                <Button onClick={() => this.unfavoriteItem(annoncelocation.id)}
+                                                                <Button onClick={() => this.favoriteItem(annoncelocation)}
                                                                         className="btn btn-danger btn-sm" title="Retirer de vos favoris">
-                                                                    <i className="fas fa-bookmark"></i> <b>Sauvegardé</b>
+                                                                    <i className="fas fa-bookmark"></i> <b>Sauvegarder</b>
                                                                 </Button>
                                                             </>
-
                                                             :
                                                             <>
-                                                                <Button onClick={() => this.favoriteItem(annoncelocation.id)}
+                                                                <Button onClick={() => this.favoriteItem(annoncelocation)}
                                                                         className="btn btn-facebook btn-sm btn-neutral" title="Ajouter à vos favoris">
                                                                     <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
                                                                 </Button>
@@ -339,8 +409,8 @@ class Annoncelocationbycategorycityshow extends Component {
                                                         }
                                                     </>
                                                 }
-                                            </div>
 
+                                            </div>
                                         </div>
 
                                         <div className="card">
@@ -349,7 +419,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                     À propos de <b>{annoncelocation.categoryannoncelocation.label} {annoncelocation.pieces} pièces à {annoncelocation.district}</b>
                                                 </h5>
 
-                                                {annoncelocation.description ? <span className="title text-justify" dangerouslySetInnerHTML={this.getDescription(annoncelocation)} />: <Skeleton count={3}/>}
+                                                {annoncelocation.description ? <span className="title text-justify" dangerouslySetInnerHTML={this.getDescription(annoncelocation)} /> : <Skeleton count={3}/>}
 
                                             </div>
                                         </div>
@@ -381,7 +451,8 @@ class Annoncelocationbycategorycityshow extends Component {
                                         <div className="card">
                                             <div className="card-body">
 
-                                              <ProfileForallAnnoncelocationShow {...annoncelocation} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} copyToClipboard={this.copyToClipboard}/>
+                                              <ProfileForallAnnoncelocationShow {...annoncelocation} favoriteItem={this.favoriteItem}
+                                                                                statuscommentItem={this.statuscommentItem}  statusItem={this.statusItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} copyToClipboard={this.copyToClipboard}/>
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">
@@ -405,12 +476,27 @@ class Annoncelocationbycategorycityshow extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
-
                                             </div>
-
                                         </div>
+
+                                        {annoncelocation.status_comments ?
+
+                                            <AnnoncelocationcommentIndex {...this.props} {...annoncelocation} />
+                                            :
+                                            <>
+                                                {!$guest && (
+                                                    <>
+                                                        {($userIvemo.id === annoncelocation.user.id || $userIvemo.id === annoncelocation.user_id)  && (
+
+                                                            <AnnoncelocationcommentIndex {...this.props} {...annoncelocation} />
+
+                                                        )}
+                                                    </>
+                                                )}
+                                            </>
+
+                                        }
 
                                     </div>
 
@@ -469,7 +555,6 @@ class Annoncelocationbycategorycityshow extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
 
@@ -478,7 +563,6 @@ class Annoncelocationbycategorycityshow extends Component {
                                 <BlogannoncelocationIntesseAnnonseShow {...this.props} />
 
                             </div>
-
                         </div>
 
                         <FooterBigUserSite />

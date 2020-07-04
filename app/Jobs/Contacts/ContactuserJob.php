@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\Contacts;
 
-use App\Notifications\ContactuserNotification;
+use App\Notifications\Contacts\ContactuserNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Notification;
 
 class ContactuserJob implements ShouldQueue
 {

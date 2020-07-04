@@ -16,6 +16,7 @@ class CommentResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'statusOnline' => $this->isOnline(),
             'likeked' => $this->likeked(),
             'likeked_count' => $this->likes()->count(),
             'user' => $this->user,

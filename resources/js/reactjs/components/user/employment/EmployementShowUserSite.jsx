@@ -367,7 +367,7 @@ class EmployementShowUserSite extends Component {
                                                             : <Skeleton circle={false} height={40} width={80} />}
                                                         <div className="mx-3">
                                                             <NavLink to={`/pro/${employment.user.slug}/employments/`} className="text-dark font-weight-600 text-sm"><b>{employment.user.first_name}</b>
-                                                                <small className="d-block text-muted"><i className="now-ui-icons tech_watch-time"/> {moment(employment.created_at).format('LL')}</small>
+                                                                <small className="d-block text-muted">{employment.statusOnline &&(<i className="fas fa-circle text-success"></i>)} <i className="now-ui-icons tech_watch-time"/> {moment(employment.created_at).format('LL')}</small>
                                                             </NavLink>
                                                         </div>
                                                     </div>
@@ -443,7 +443,7 @@ class EmployementShowUserSite extends Component {
                                                             : <Skeleton circle={false} height={40} width={80} />}
                                                         <div className="mx-3">
                                                             <NavLink to={`/pro/${employment.user.slug}/employments/`} className="text-dark font-weight-600 text-sm"><b>{employment.user.first_name}</b>
-                                                                <small className="d-block text-muted"><i className="now-ui-icons tech_watch-time"/> {moment(employment.user.created_at).format('LL')}</small>
+                                                                <small className="d-block text-muted">{employment.statusOnline &&(<i className="fas fa-circle text-success"></i>)} <i className="now-ui-icons tech_watch-time"/> {moment(employment.user.created_at).format('LL')}</small>
                                                             </NavLink>
                                                         </div>
                                                     </div>

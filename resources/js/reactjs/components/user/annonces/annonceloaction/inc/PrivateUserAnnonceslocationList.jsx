@@ -20,7 +20,6 @@ class PrivateUserAnnonceslocationList extends PureComponent {
                         <div className="card card-plain card-blog">
                             <div className="row">
                                 <div className="col-md-5">
-
                                     <div className="card-image">
                                         <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
                                             <ol className="carousel-indicators">
@@ -39,10 +38,8 @@ class PrivateUserAnnonceslocationList extends PureComponent {
                                                     <img className="d-block" src="/assets/vendor/assets/img/bg4.jpg" alt="Third slide" />
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
-
                                 </div>
                                 <div className="col-md-7">
                                     <div className="text-left pull-left">
@@ -98,14 +95,14 @@ class PrivateUserAnnonceslocationList extends PureComponent {
 
                                                             {this.props.status ?
                                                                 <>
-                                                                    <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}
+                                                                    <button type="button" rel="tooltip" onClick={() => this.props.statusItem(this.props)}
                                                                             className="btn btn-success btn-icon btn-sm">
                                                                         <i className="now-ui-icons ui-1_check"/>
                                                                     </button>
                                                                 </>
                                                                 :
                                                                 <>
-                                                                    <button type="button" onClick={() => this.props.activeItem(this.props.id)}
+                                                                    <button type="button" onClick={() => this.props.statusItem(this.props)}
                                                                             className="btn btn-primary btn-icon btn-sm">
                                                                         <i className="now-ui-icons ui-1_simple-delete"/>
                                                                     </button>
@@ -124,15 +121,15 @@ class PrivateUserAnnonceslocationList extends PureComponent {
 
                                                 </>
                                             )}
+                                            
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                         {!this.props.status_admin &&(
                             <div className="alert alert-danger text-center" role="alert">
-                                <span>Cette annonce à éte momentanément déactivée car elle ne respecte pas nos régle et nos principe <a href="#pablo">Clique sur ce lien</a> pour en savoir plus</span>
+                                <span>Cette annonce à éte momentanément désactivée car elle ne respecte pas nos régle et nos principe <a href="#pablo">Cliquez sur ce lien</a> pour en savoir plus</span>
                             </div>
                         )}
                     </div>

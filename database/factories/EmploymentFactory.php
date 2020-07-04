@@ -19,6 +19,7 @@ $factory->define(employment::class, function (Faker $faker) {
         'slug' => str_slug($title),
         'slugin' => $myslug,
         'status' => true,
+        'status_comments' => $faker->boolean,
         //'status_admin' => $faker->boolean,
         'district' => $faker->streetName,
         'price' => $faker->randomNumber(7),

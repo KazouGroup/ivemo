@@ -69,7 +69,7 @@ class PremiumUserBlogannonceVenteList extends Component {
                                         <span className="badge badge-danger"><b>Masquer par le modérateur</b></span>
                                     </a>
                                     :
-                                    <span className="badge badge-rose"><b>Déactivé</b></span>
+                                    <span className="badge badge-rose"><b>Désactivé</b></span>
                                 }
                             </>
                         }

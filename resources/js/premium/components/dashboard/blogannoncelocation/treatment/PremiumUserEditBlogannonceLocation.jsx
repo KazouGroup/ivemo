@@ -212,7 +212,7 @@ class PremiumUserEditBlogannonceLocation extends Component {
             /** Alert notify bootstrapp **/
             $.notify({
                     // title: 'Update FAQ',
-                    message: 'Article de blog déactivé avec succès'
+                    message: 'Article de blog désactivé avec succès'
                 },
                 {
                     allow_dismiss: false,

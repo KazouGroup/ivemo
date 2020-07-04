@@ -34,8 +34,8 @@ class ProfileForallAnnoncelocationShow extends Component {
                             </NavLink>
                             : <Skeleton circle={false} height={40} width={80} />}
                         <div className="mx-3">
-                            <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{this.props.user.first_name}</b>
-                                <small className="d-block text-muted">{moment(this.props.user.created_at).format('LL')}</small>
+                            <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{this.props.user.first_name} </b>
+                                <small className="d-block text-muted">{this.props.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(this.props.user.created_at).format('LL')}</small>
                             </NavLink>
                         </div>
                     </div>
@@ -48,13 +48,13 @@ class ProfileForallAnnoncelocationShow extends Component {
                             :
                             <>
                                 {this.props.bookmarked ?
-                                    <Button onClick={() => this.props.unfavoriteItem(this.props.id)}
+                                    <Button onClick={() => this.props.favoriteItem(this.props)}
                                             className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
                                         <i className="fas fa-bookmark"></i>
                                     </Button>
 
                                     :
-                                    <Button onClick={() => this.props.favoriteItem(this.props.id)}
+                                    <Button onClick={() => this.props.favoriteItem(this.props)}
                                             className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
                                         <i className="far fa-bookmark"></i>
                                     </Button>
@@ -83,10 +83,22 @@ class ProfileForallAnnoncelocationShow extends Component {
                                            className="btn btn-sm btn-secondary" title={`${this.props.visits_count} ${this.props.visits_count > 1 ? "vues" : "vue"}`}>
                                             <i className="far fa-eye"></i> <b>{this.data_countFormatter(this.props.visits_count)}</b>
                                         </a>
-                                        <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}
-                                                className="btn btn-success btn-icon btn-sm" title="Desactiver cette annonce">
+                                        <button type="button" rel="tooltip" onClick={() => this.props.statusItem(this.props)}
+                                                className="btn btn-success btn-icon btn-sm" title="Désactiver cette annonce">
                                             <i className="now-ui-icons ui-1_check"/>
                                         </button>
+                                        {this.props.status_comments ?
+                                            <Button onClick={() => this.props.statuscommentItem(this.props)}
+                                                    className="btn btn-primary btn-icon btn-sm" title="Commentaire activé">
+                                                <i className="fas fa-comments"/>
+                                            </Button>
+                                            :
+                                            <Button onClick={() => this.props.statuscommentItem(this.props)}
+                                                    className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Commentaire désactivé">
+                                                <i className="far fa-comments"/>
+                                            </Button>
+
+                                        }
                                         <NavLink to={`/annonce_location/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer cette annonce">
                                             <i className="now-ui-icons ui-2_settings-90"/>
                                         </NavLink>
@@ -120,7 +132,7 @@ class ProfileForallAnnoncelocationShow extends Component {
                             {this.props.user.profile.site_internet && (
                                 <div className="col-md-6 col-6">
                                     <a href={`${this.props.user.profile.site_internet}`} target="_blank" title={this.props.user.profile.site_internet}>
-                                        <small><b>Consulter le site de l'utilisateur</b></small>
+                                        <small><b>Consulter le site web de l'utilisateur</b></small>
                                     </a>
                                 </div>
                             )}

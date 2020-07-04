@@ -275,7 +275,7 @@ class PremiumUserNewBlogannonceReservation extends Component {
 
                                                     <Row>
                                                         <div className="col-md-6">
-                                                            <label htmlFor="title">Estimer en temps <b>{this.state.red_time} min lecture</b></label>
+                                                            <label htmlFor="title">Estimer  <b>{this.state.red_time} min lecture</b></label>
                                                             <FormGroup>
                                                                 <Input id='red_time'
                                                                        type='number'

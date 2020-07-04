@@ -28,13 +28,9 @@ class AnnonceUserSite extends Component {
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
-
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
                         <NavUserSite />
                     </nav>
-
-
-
                     <div className="wrapper">
                         <div className="page-header page-header-mini">
                             <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
@@ -42,7 +38,7 @@ class AnnonceUserSite extends Component {
                             <div className="content-center">
                                 <div className="row">
                                     <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">Annonce</h3>
+                                        <h3 className="title">Annonces</h3>
                                     </div>
                                 </div>
                             </div>
@@ -53,16 +49,10 @@ class AnnonceUserSite extends Component {
                                 <div className="row">
                                 </div>
                             </div>
-
                             <div className="container">
                                 <br />
                                 <div className="row">
-
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
-
-
-
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="card card-plain card-blog">
@@ -105,7 +95,7 @@ class AnnonceUserSite extends Component {
                                                                 <div className="text-left pull-left">
                                                                     <NavLink to={`/annonce/show/`}>
                                                                         <h6 className="text-info ml-auto mr-auto">
-                                                                            Yaounde
+                                                                            Yaoundé
                                                                         </h6>
                                                                     </NavLink>
                                                                 </div>
@@ -214,7 +204,7 @@ class AnnonceUserSite extends Component {
                                                                 <div className="text-left pull-left">
                                                                     <NavLink to={`/annonce/show/`}>
                                                                         <h6 className="text-info ml-auto mr-auto">
-                                                                            Yaounde
+                                                                            Yaoundé
                                                                         </h6>
                                                                     </NavLink>
                                                                 </div>
@@ -315,7 +305,7 @@ class AnnonceUserSite extends Component {
                                                                 <div className="text-left pull-left">
                                                                     <NavLink to={`/charbonneur/`}>
                                                                         <h6 className="text-info ml-auto mr-auto">
-                                                                            Yaounde
+                                                                            Yaoundé
                                                                         </h6>
                                                                     </NavLink>
                                                                 </div>
@@ -389,9 +379,7 @@ class AnnonceUserSite extends Component {
                                         </div>
                                     </div>
 
-
                                     <div className="col-lg-4 col-md-12 mx-auto">
-
                                         <div className="submit text-center">
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
                                                 <i className="now-ui-icons ui-1_simple-add"></i> <b>Poster votre annonce</b>
@@ -472,17 +460,14 @@ class AnnonceUserSite extends Component {
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
 
                         <FooterBigUserSite />

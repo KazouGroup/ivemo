@@ -166,7 +166,6 @@ class AgencesimmobilieIndex extends Component {
                 <Helmet title={`Agences immobilières - ${$name_site}`} />
 
                 <div className="about-us sidebar-collapse">
-
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
                         <NavUserSite />
                     </nav>
@@ -189,7 +188,6 @@ class AgencesimmobilieIndex extends Component {
                                 <div className="row">
                                 </div>
                             </div>
-
                             <div className="container">
                                 <br />
                                 <div className="row">
@@ -275,7 +273,6 @@ class AgencesimmobilieIndex extends Component {
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -298,9 +295,7 @@ class AgencesimmobilieIndex extends Component {
                                                 <Form role="form" onSubmit={this.sendmessageItem} acceptCharset="UTF-8">
 
                                                     <div className="modal-body">
-
                                                         <div className="card-body">
-
                                                             <div className="row">
                                                                 <div className="input-group">
                                                                     <div className="input-group-prepend">
@@ -342,7 +337,6 @@ class AgencesimmobilieIndex extends Component {
                                                             </div>
 
                                                             <div className="row">
-
                                                                 <div className="input-group">
                                                                     <div className="input-group-prepend">
                                                                         <span className="input-group-text">
@@ -359,11 +353,9 @@ class AgencesimmobilieIndex extends Component {
                                                                     />
                                                                     {this.renderErrorFor('phone')}
                                                                 </div>
-
-
                                                             </div>
-                                                            <div className="row">
 
+                                                            <div className="row">
                                                                 <div className="input-group">
                                                                     <div className="input-group-prepend">
                                                                         <span className="input-group-text">
@@ -382,8 +374,8 @@ class AgencesimmobilieIndex extends Component {
                                                                     {this.renderErrorFor('subject')}
                                                                 </div>
                                                             </div>
-                                                            <div className="row">
 
+                                                            <div className="row">
                                                                 <div className="input-group">
                                                                     <textarea name="message" value={this.state.message}
                                                                         onChange={this.handleFieldChange}
@@ -407,9 +399,7 @@ class AgencesimmobilieIndex extends Component {
                                                                     <b>Contacter</b>
                                                                 </button>
                                                             </div>
-
                                                         </div>
-
                                                     </div>
 
                                                 </Form>
@@ -417,10 +407,8 @@ class AgencesimmobilieIndex extends Component {
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
 
                         <FooterBigUserSite />

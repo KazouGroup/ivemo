@@ -20,7 +20,6 @@ class PrivateUserFavoriteAnnonceslocationList extends PureComponent {
                         <div className="card card-plain card-blog">
                             <div className="row">
                                 <div className="col-md-5">
-
                                     <div className="card-image">
                                         <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
                                             <ol className="carousel-indicators">
@@ -39,7 +38,6 @@ class PrivateUserFavoriteAnnonceslocationList extends PureComponent {
                                                     <img className="d-block" src="/assets/vendor/assets/img/bg4.jpg" alt="Third slide" />
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -66,7 +64,6 @@ class PrivateUserFavoriteAnnonceslocationList extends PureComponent {
                                             </NavLink>
                                             - {this.props.annoncelocation.district.length > 10 ? this.props.annoncelocation.district.substring(0, 10) + "..." : this.props.annoncelocation.district}
                                         </div>
-
                                     </div>
                                     <h6 className="card-title">
                                         <Link to={`/annonces_locations/locations/${this.props.annoncelocation.categoryannoncelocation.slug}/${this.props.annoncelocation.city.slug}/${this.props.annoncelocation.slug}/`}>
@@ -85,7 +82,8 @@ class PrivateUserFavoriteAnnonceslocationList extends PureComponent {
                                                          alt={this.props.annoncelocation.user.first_name}
                                                          className="avatar" />
                                                 </NavLink>
-                                                : <Skeleton circle={false} height={40} width={80} />}
+                                                : 
+                                                <Skeleton circle={false} height={40} width={80} />}
                                             <div className="mx-3">
                                                 <NavLink to={`/pro/${this.props.annoncelocation.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm">{this.props.annoncelocation.user.first_name}
                                                     <small className="d-block text-muted"><b>{moment(this.props.annoncelocation.created_at).format('LL')}</b></small>
@@ -94,19 +92,15 @@ class PrivateUserFavoriteAnnonceslocationList extends PureComponent {
                                         </div>
 
                                         <div className="text-right mx-auto">
-
                                             <Button onClick={() => this.props.unfavoriteItem(this.props.annoncelocation.id)}
                                                     className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
                                                 <i className="fas fa-bookmark"></i>
                                             </Button>
-
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 

@@ -211,7 +211,7 @@ class PremiumUserEditBlogannonceVente extends Component {
             /** Alert notify bootstrapp **/
             $.notify({
                     // title: 'Update FAQ',
-                    message: 'Article de blog déactivé avec succès'
+                    message: 'Article de blog désactivé avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -397,12 +397,12 @@ class PremiumUserEditBlogannonceVente extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">remove</i>
                                             </div>
-                                            <p className="card-category"><b>Déactivés</b></p>
+                                            <p className="card-category"><b>Désactivés</b></p>
                                             <h3 className="card-title"><b>{this.dataunactive_countFormatter(blogannonceventesunactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">remove</i> Articles déactivés
+                                                <i className="material-icons">remove</i> Articles désactivés
                                             </div>
                                         </div>
                                     </div>
@@ -513,7 +513,7 @@ class PremiumUserEditBlogannonceVente extends Component {
 
                                                     <Row>
                                                         <div className="col-md-6">
-                                                            <label htmlFor="title">Estimer un temps <b>{this.state.red_time} min lecture</b></label>
+                                                            <label htmlFor="title">Estimer <b>{this.state.red_time} min lecture</b></label>
                                                             <FormGroup>
                                                                 <Input id='red_time'
                                                                        type='number'

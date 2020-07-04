@@ -128,7 +128,7 @@ class AnnoncelocationEdit extends Component {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
+            $.notify("Ooops! Quelque chose ne va pas. Essayer plus tard...", {
                 allow_dismiss: false,
                 type: 'danger',
                 animate: {
@@ -160,7 +160,7 @@ class AnnoncelocationEdit extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Article de blogs suprimé avec succès'
+                            message: 'Article de blog supprimé avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -178,7 +178,7 @@ class AnnoncelocationEdit extends Component {
                     this.props.history.goBack();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -199,7 +199,7 @@ class AnnoncelocationEdit extends Component {
             /** Alert notify bootstrap **/
             $.notify({
                     //,
-                    message: 'Annonce activé avec succès'
+                    message: 'Annonce activée avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -217,7 +217,7 @@ class AnnoncelocationEdit extends Component {
             this.loadItems();
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -236,7 +236,7 @@ class AnnoncelocationEdit extends Component {
             /** Alert notify bootstrapp **/
             $.notify({
                     // title: 'Update',
-                    message: 'Annonce déactivé avec succès'
+                    message: 'Annonce désactivée avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -254,7 +254,7 @@ class AnnoncelocationEdit extends Component {
             this.loadItems();
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -302,22 +302,15 @@ class AnnoncelocationEdit extends Component {
             <Fragment>
                 <HelmetSite title={`${this.state.title || $name_site} - ${$name_site}`}/>
                 <div className="landing-page sidebar-collapse">
-
                     <nav className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
-
                     <div className="wrapper">
-
                         <div className="main main-raised">
-
                             <div className="container">
                                 <br/>
-
                                 <Form role="form" id="contact-form" onSubmit={this.updateItem} acceptCharset="UTF-8">
-
                                     <div className="row">
-
                                         <div className="col-lg-8 col-md-12 mx-auto">
                                             <div className="submit text-left">
                                                 <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
@@ -446,7 +439,7 @@ class AnnoncelocationEdit extends Component {
                                                                                     <div
                                                                                         className="col-md-4">
                                                                                         <label className="labels">
-                                                                                            Quartier du bien?
+                                                                                            Localisation du bien?
                                                                                             <span className="text-danger">*</span>
                                                                                         </label>
                                                                                         <div className="form-group">
@@ -464,14 +457,12 @@ class AnnoncelocationEdit extends Component {
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
 
                                                     <div id="accordion" role="tablist" aria-multiselectable="true"
@@ -596,14 +587,12 @@ class AnnoncelocationEdit extends Component {
                                                                                                 onChange={this.handleChangeBody} />
                                                                                     {this.renderErrorFor('description')}
                                                                                 </div>
-
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
 
                                                     <div className="submit text-center">
@@ -615,13 +604,10 @@ class AnnoncelocationEdit extends Component {
                                                         </button>
                                                     </div>
                                                 </div>
-
                                             </div>
-
                                         </div>
 
                                         <div className="col-lg-4 col-md-12 mx-auto">
-
                                             <div className="submit text-center">
                                                 <Navlinknewannoncelocation {...this.props} />
                                             </div>
@@ -632,7 +618,6 @@ class AnnoncelocationEdit extends Component {
                                                         <div className="col-md-12">
                                                             <div id="accordion" role="tablist" aria-multiselectable="true"
                                                                  className="card-collapse">
-
                                                                 <div className="card-header text-center">
                                                                     {this.state.price && (
                                                                         <div className="ml-auto">
@@ -689,23 +674,18 @@ class AnnoncelocationEdit extends Component {
                                                                             </div>
                                                                         </div>
                                                                     </div>
-
                                                                 </div>
-
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
-
                                     </div>
 
                                 </Form>
 
                             </div>
-
                         </div>
 
                         <FooterBigUserSite />
