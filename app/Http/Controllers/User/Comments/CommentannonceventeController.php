@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User\Comments;
 
+use App\Events\CommentAnnonceventEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CommentResource;
 use App\Model\annoncereservation;
@@ -52,6 +53,8 @@ class CommentannonceventeController extends Controller
         ]);
 
         $comment = $annoncevente->comments()->create($request->all());
+
+        //broadcast(new CommentAnnonceventEvent($comment))->toOthers();
 
         CommentAndResponseService::newEmailTonewcommentannonceventepageShow($request,$annoncevente);
 

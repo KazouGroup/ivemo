@@ -187,14 +187,6 @@ class BlogannoncereservationcommentIndex extends Component {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
-                allow_dismiss: false,
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
         })
     }
 
@@ -236,14 +228,6 @@ class BlogannoncereservationcommentIndex extends Component {
             }).catch(error => {
             this.setState({
                 errors: error.response.data.errors
-            });
-            $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
-                allow_dismiss: false,
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
             });
         })
     }
