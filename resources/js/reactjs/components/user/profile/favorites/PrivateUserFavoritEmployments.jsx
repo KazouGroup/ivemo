@@ -20,7 +20,7 @@ class PrivateUserFavoritEmployments extends Component {
 
         };
 
-        this.unfavoriteItem = this.unfavoriteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
     }
 
@@ -30,7 +30,7 @@ class PrivateUserFavoritEmployments extends Component {
         })
     }
 
-    unfavoriteItem(id){
+    favoriteItem(item){
         Swal.fire({
             title: 'Retirer cette annonce?',
             text: "êtes vous sure de vouloir retirer cette annonce de vos favoris?",
@@ -46,7 +46,7 @@ class PrivateUserFavoritEmployments extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('employments_unfavorite.unfavorite',id);
+                let url = route('employments_unfavorite.unfavorite',item.id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
@@ -98,7 +98,7 @@ class PrivateUserFavoritEmployments extends Component {
         const mapEmployments = favoritesdata.length >= 0 ? (
             favoritesdata.slice(0,visiable).map(item => {
                 return(
-                    <PrivateUserFavoritEmployementList key={item.id} {...item} unfavoriteItem={this.unfavoriteItem}/>
+                    <PrivateUserFavoritEmployementList key={item.id} {...item} favoriteItem={this.favoriteItem}/>
                 )
             })
         ):(

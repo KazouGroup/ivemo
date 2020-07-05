@@ -109,7 +109,7 @@ class PrivateUserFavoritEmployementList extends PureComponent {
                                             <>
                                                 <div className="text-center">
                                                     <button type="button"
-                                                        className="btn btn-danger btn-icon btn-sm" onClick={() => this.props.unfavoriteItem(this.props.employment.id)} title="Supprimer cette annonce">
+                                                        className="btn btn-danger btn-icon btn-sm" onClick={() => this.props.favoriteItem(this.props.employment)} title="Supprimer cette annonce">
                                                         <i className="fas fa-bookmark"></i>
                                                     </button>
                                                 </div>
