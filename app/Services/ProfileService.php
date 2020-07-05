@@ -212,10 +212,12 @@ class ProfileService
     public static function apiprofilemployments($user)
     {
         $employments = EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
+                    ->where(['status' => 1,'status_admin' => 1])
                     ->whereIn('user_id',[$user->id])
                     ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);})
-                    ->where(['status' => 1,'status_admin' => 1])->distinct()->get());
+                    ->distinct()->paginate(40));
+                    //->distinct()->get());
 
         return $employments;
     }
