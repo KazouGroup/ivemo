@@ -13,6 +13,7 @@ import Navlinknewannoncelocation from "./treatment/Navlinknewannoncelocation";
 import HelmetSite from "../../../inc/user/HelmetSite";
 import AnnoncelocationcommentIndex from "../../comments/AnnoncelocationcommentIndex";
 import FieldInput from "../../../inc/vendor/FieldInput";
+import moment from "moment";
 
 
 class Annoncelocationbycategorycityshow extends Component {
@@ -534,18 +535,19 @@ class Annoncelocationbycategorycityshow extends Component {
                                                     <div className="row">
                                                         <div className="col-md-6">
                                                             <h5 className="info-title"><b>Le loyer mensuel est de</b></h5>
-                                                            {annoncelocation.price ?
+                                                            {annoncelocation.price && (
+
                                                                 <h3 className="text-dark"><b>{annoncelocation.price.formatMoney(2,'.',',')} <small>FCFA - le mois</small></b></h3>
-                                                                :
-                                                                <h5 className="text-success"><b><Skeleton width={150} /></b></h5>
-                                                            }
+                                                            )}
                                                         </div>
                                                         <div className="col-md-6">
                                                             <h5 className="info-title"><b>Informations suplementaires</b></h5>
-                                                            <p>
-                                                                <b>Dépôt de garantie :</b>
-                                                                <span className="title text-dark"><b> {annoncelocation.award_price ? <>{annoncelocation.award_price.formatMoney(2,'.',',')} <small>FCFA</small></>:null} </b></span>
-                                                            </p>
+                                                            {annoncelocation.award_price && (
+                                                                <p>
+                                                                    <b>Dépôt de garantie :</b>
+                                                                    <span className="title text-dark"><b> {annoncelocation.award_price ? <>{annoncelocation.award_price.formatMoney(2,'.',',')} <small>FCFA</small></>:null} </b></span>
+                                                                </p>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -631,7 +633,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                         : <Skeleton circle={false} height={40} width={80} />}
                                                                     <div className="mx-3">
                                                                         <NavLink to={`/pro/${annoncelocation.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{annoncelocation.user.first_name}</b>
-                                                                            <small className="d-block text-muted">12 janv 2019</small>
+                                                                            <small className="d-block text-muted">{annoncelocation.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(annoncelocation.created_at).format('LL')}</small>
                                                                         </NavLink>
                                                                     </div>
                                                                 </div>

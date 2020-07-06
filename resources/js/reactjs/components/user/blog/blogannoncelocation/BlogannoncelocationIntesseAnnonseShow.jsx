@@ -162,7 +162,7 @@ class BlogannoncelocationIntesseAnnonseShow extends Component {
                                                 <img className="avatar" alt={item.user.first_name}
                                                      src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>
                                                 :
-                                                <img className="avatar img-raised" alt={item.user.first_name}
+                                                <img className="avatar" alt={item.user.first_name}
                                                      src={item.user.avatar}/>
                                             }
                                             <b>{(item.user.first_name.length > 15 ? item.user.first_name.substring(0, 15) + "..." : item.user.first_name)}</b>

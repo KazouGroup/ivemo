@@ -21,7 +21,6 @@ $factory->define(annoncevente::class, function (Faker $faker) {
         'district' => $faker->streetName,
         'rooms' => $faker->randomDigitNot(5),
         'pieces' => $faker->randomDigitNot(5),
-        'award_price' => $faker->randomNumber(4),
         'annoncetype_id' => 2,
         'slug' => str_slug($title),
         'slugin' => Str::uuid(),
