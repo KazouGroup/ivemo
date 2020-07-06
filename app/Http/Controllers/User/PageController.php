@@ -7,6 +7,7 @@ use App\Http\Requests\Contactuser\StorecontactuseradvertRequest;
 use App\Http\Requests\Contactuser\StorecontactuserfaqRequest;
 use App\Model\contactusersadvert;
 use App\Model\contactusersfaq;
+use App\Services\Contactusers\ContactuserService;
 
 class PageController extends Controller
 {
@@ -70,7 +71,7 @@ class PageController extends Controller
 
         $contactusersadvert->fill($request->all());
 
-        //ContactuserService::newEmailToprofileUser($request);
+        ContactuserService::newEmailcontactusersadvertsUser($request);
 
         $contactusersadvert->save();
 

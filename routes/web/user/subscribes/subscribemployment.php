@@ -30,8 +30,3 @@ Route::get(
     '/employments_subscribe/{user:id}/subscribe',
     'SubscribemploymentController@subscribe'
 )->name('employments_subscribe.subscribe');
-
-Route::get(
-    '/employments_unsubscribe/{user:id}/unsubscribe',
-    'SubscribemploymentController@unsubscribe'
-)->name('employments_unsubscribe.unsubscribe');

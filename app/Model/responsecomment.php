@@ -2,11 +2,14 @@
 
 namespace App\Model;
 
+use App\Traits\Likesdata;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 
 class responsecomment extends Model
 {
+    use Likesdata;
+
     protected $guarded = [];
 
     protected $table = 'responsecomments';

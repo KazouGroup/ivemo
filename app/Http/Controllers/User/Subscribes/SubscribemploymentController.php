@@ -73,15 +73,6 @@ class SubscribemploymentController extends Controller
         auth()->user()->putsubscribemployments()->toggle($user->id);
 
 
-		return response('Subscribe confirmed',Response::HTTP_ACCEPTED);
-	}
-
-    public function unsubscribe(Request $request,$id)
-    {
-        $user = user::whereId($id)->firstOrFail();
-
-        auth()->user()->putsubscribemployments()->toggle($user->id);
-
-        return response('Unsubscribe confirmed',Response::HTTP_ACCEPTED);
+		return response('Success ',Response::HTTP_ACCEPTED);
 	}
 }
