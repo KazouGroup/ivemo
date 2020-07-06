@@ -4,6 +4,8 @@ namespace App\Services\Contactusers;
 
 
 use App\Jobs\Contacts\ContactuserJob;
+use App\Jobs\Contacts\ContactusersadvertsJob;
+use App\Model\user;
 use App\Services\HelpersService;
 
 class ContactuserService
@@ -60,6 +62,21 @@ class ContactuserService
 
 
         $emailToUser = (new ContactuserJob($fromFullnameUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$user));
+
+        dispatch($emailToUser);
+    }
+
+    public static function newEmailcontactusersadvertsUser($request)
+    {
+        $fromFullnameUser = $request->get('full_name');
+        $fromEmailUser = $request->get('email');
+        $fromPhoneUser = $request->get('phone');
+        $fromMessageUser = $request->get('message');
+
+
+        $toAdminUser = user::where('status_user',1)->get();
+
+        $emailToUser = (new ContactusersadvertsJob($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromMessageUser,$toAdminUser));
 
         dispatch($emailToUser);
     }

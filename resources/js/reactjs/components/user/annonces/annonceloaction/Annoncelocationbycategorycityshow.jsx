@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import {Button, Navbar, UncontrolledTooltip} from "reactstrap";
+import {Button, Form, Input, Navbar, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import FormcontactuseronlocationShow from "./inc/FormcontactuseronlocationShow";
@@ -12,19 +12,116 @@ import ProfileForallAnnoncelocationShow from "./inc/ProfileForallAnnoncelocation
 import Navlinknewannoncelocation from "./treatment/Navlinknewannoncelocation";
 import HelmetSite from "../../../inc/user/HelmetSite";
 import AnnoncelocationcommentIndex from "../../comments/AnnoncelocationcommentIndex";
+import FieldInput from "../../../inc/vendor/FieldInput";
 
 
 class Annoncelocationbycategorycityshow extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            email: '',
+            full_name: '',
+            message: '',
+            subject: '',
+            object: 'Annonce double',
+            errors: [],
+            annonceItem: { user: [] },
             annoncelocation:{categoryannoncelocation:[],user:{profile:[]},city:[]},
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
         this.statusItem = this.statusItem.bind(this);
         this.statuscommentItem = this.statuscommentItem.bind(this);
+        this.signalerUser = this.signalerUser.bind(this);
+
+
+        this.handleFieldChange = this.handleFieldChange.bind(this);
+        this.handleCheckClick = this.handleCheckClick.bind(this);
+        this.hasErrorFor = this.hasErrorFor.bind(this);
+        this.renderErrorFor = this.renderErrorFor.bind(this);
+        this.signalemessageItem = this.signalemessageItem.bind(this);
     }
+
+    handleFieldChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value,
+        });
+        this.state.errors[event.target.name] = '';
+    }
+
+    handleCheckClick(event) {
+        this.setState({
+            object: event.target.value
+        });
+
+    };
+    // Handle Errors
+    hasErrorFor(field) {
+        return !!this.state.errors[field];
+    }
+
+    renderErrorFor(field) {
+        if (this.hasErrorFor(field)) {
+            return (
+                <span className='invalid-feedback'>
+                    <strong>{this.state.errors[field][0]}</strong>
+                </span>
+            )
+        }
+    }
+
+    signalerUser(item) {
+        $('#addNew').modal('show');
+        this.setState({
+            annonceItem: item
+        });
+    }
+
+    signalemessageItem(e) {
+        e.preventDefault();
+
+        let item = {
+            email: this.state.email,
+            annoncelocation_id: this.state.annonceItem.id,
+            full_name: this.state.full_name,
+            object: this.state.object,
+            message: this.state.message,
+        };
+        let url = route('signalannoncelocations.site');
+        dyaxios.post(url, item)
+            .then(() => {
+
+                //Masquer le modal après la création
+                $('#addNew').modal('hide');
+
+                $.notify({
+                        message: `Annonce signalé avec succès`
+                    },
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'top',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInDown",
+                            exit: "animate__animated animate__fadeOutUp"
+                        },
+                    });
+
+                this.setState({
+                    email: "",
+                    full_name: "",
+                    message: "",
+                });
+            }).catch(error => {
+            this.setState({
+                errors: error.response.data.errors
+            });
+        })
+    }
+
 
     favoriteItem(annoncelocation) {
         const url = route('favoriteannoncelocations_favorite.favorite', [annoncelocation.id]);
@@ -307,7 +404,7 @@ class Annoncelocationbycategorycityshow extends Component {
         return { __html: (annoncelocation.description) };
     }
     render() {
-        const {annoncelocation} = this.state;
+        const {annoncelocation,annonceItem} = this.state;
         return (
             <>
                 <HelmetSite title={`${annoncelocation.title || $name_site} - ${$name_site}`}/>
@@ -459,7 +556,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                             <div className="card-body">
 
                                               <ProfileForallAnnoncelocationShow {...annoncelocation} favoriteItem={this.favoriteItem}
-                                                                                statuscommentItem={this.statuscommentItem}  statusItem={this.statusItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} copyToClipboard={this.copyToClipboard}/>
+                                                                                statuscommentItem={this.statuscommentItem}  statusItem={this.statusItem} deleteItem={this.deleteItem} signalerUser={this.signalerUser} copyToClipboard={this.copyToClipboard}/>
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">
@@ -567,6 +664,173 @@ class Annoncelocationbycategorycityshow extends Component {
                                             </div>
                                         </div>
 
+                                    </div>
+                                </div>
+
+                                <div className="modal fade" id="addNew" tabIndex="-1" role="dialog" aria-labelledby="addNewLabel"
+                                     aria-hidden="true">
+                                    <div className="modal-dialog modal-lg">
+                                        <div className="modal-content">
+                                            <div className="modal-header">
+                                                <h5 className="modal-title"><b>Signaler des erreurs publicitaires</b></h5>
+                                                <button type="button" className="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+
+                                            <Form role="form" onSubmit={this.signalemessageItem} acceptCharset="UTF-8">
+
+                                                <div className="modal-body">
+
+                                                    <div className="card-body">
+
+                                                        <div className="alert alert-danger text-center" role="alert">
+                                                            <div className="container">
+                                                                {annonceItem.title}
+                                                            </div>
+                                                        </div>
+
+                                                        <p className="category">Spécifie le type d'erreur</p>
+
+                                                        <div className="row">
+                                                            <div className="col-md-6">
+                                                                <div className="form-check form-check-radio">
+                                                                    <label className="form-check-label">
+                                                                        <Input className="form-check-input" type="radio"
+                                                                               name="object" id="object"
+                                                                               value="Annonce double" onChange={this.handleCheckClick} checked={this.state.object === "Annonce double"} />
+                                                                        <span className="form-check-sign"></span>
+                                                                        Annonce double
+                                                                    </label>
+                                                                </div>
+                                                                <div className="form-check form-check-radio">
+                                                                    <label className="form-check-label">
+                                                                        <input className="form-check-input" type="radio"
+                                                                               name="object" id="object"
+                                                                               value="Mauvaise catégorie" onChange={this.handleCheckClick} checked={this.state.object === "Mauvaise catégorie"} />
+                                                                        <span className="form-check-sign"></span>
+                                                                        Mauvaise catégorie
+                                                                    </label>
+                                                                </div>
+                                                                <div className="form-check form-check-radio">
+                                                                    <label className="form-check-label">
+                                                                        <input className="form-check-input" type="radio"
+                                                                               name="object" id="object"
+                                                                               value="Mauvaise ville" onChange={this.handleCheckClick} checked={this.state.object === "Mauvaise ville"} />
+                                                                        <span className="form-check-sign"></span>
+                                                                        Mauvaise ville
+                                                                    </label>
+                                                                </div>
+                                                                <div className="form-check form-check-radio">
+                                                                    <label className="form-check-label">
+                                                                        <Input className="form-check-input" type="radio"
+                                                                               name="object" id="object"
+                                                                               value="Téléphone / e-mail incorrect" onChange={this.handleCheckClick} checked={this.state.object === "Téléphone / e-mail incorrect"} />
+                                                                        <span className="form-check-sign"></span>
+                                                                        Téléphone / e-mail incorrect
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
+                                                            <div className="col-md-6">
+                                                                <div className="form-check form-check-radio">
+                                                                    <label className="form-check-label">
+                                                                        <Input className="form-check-input" type="radio"
+                                                                               name="object" id="object"
+                                                                               value="Erreur d'adresse / de carte" onChange={this.handleCheckClick} checked={this.state.object === "Erreur d'adresse / de carte"} />
+                                                                        <span className="form-check-sign"></span>
+                                                                        Erreur d'adresse / de carte
+                                                                    </label>
+                                                                </div>
+
+                                                                <div className="form-check form-check-radio">
+                                                                    <label className="form-check-label">
+                                                                        <Input className="form-check-input" type="radio"
+                                                                               name="object" id="object"
+                                                                               value="Propriété inexistante" onChange={this.handleCheckClick} checked={this.state.object === "Propriété inexistante"} />
+                                                                        <span className="form-check-sign"></span>
+                                                                        Propriété inexistante
+                                                                    </label>
+                                                                </div>
+                                                                <div className="form-check form-check-radio">
+                                                                    <label className="form-check-label">
+                                                                        <Input className="form-check-input" type="radio"
+                                                                               name="object" id="object"
+                                                                               value="Arnaque possible" onChange={this.handleCheckClick} checked={this.state.object === "Arnaque possible"} />
+                                                                        <span className="form-check-sign"></span>
+                                                                        Arnaque possible
+                                                                    </label>
+                                                                </div>
+                                                                <div className="form-check form-check-radio">
+                                                                    <label className="form-check-label">
+                                                                        <Input className="form-check-input" type="radio"
+                                                                               name="object" id="object"
+                                                                               value="Autre (précisez dans le commentaire)" onChange={this.handleCheckClick} checked={this.state.object === "Autre (précisez dans le commentaire)"} />
+                                                                        <span className="form-check-sign"></span>
+                                                                        Autre (précisez dans le commentaire)
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div className="row">
+                                                            <div className="col-md-6">
+                                                                <div className="input-group">
+                                                                    <div className="input-group-prepend">
+                                                                            <span className="input-group-text">
+                                                                                <i className="now-ui-icons users_circle-08" /></span>
+                                                                    </div>
+                                                                    <FieldInput name="full_name" type='text' minLength="4" maxLength="50" placeholder="Nom complete" value={this.state.full_name}
+                                                                                handleFieldChange={this.handleFieldChange}
+                                                                                hasErrorFor={this.hasErrorFor}
+                                                                                required="required"
+                                                                                renderErrorFor={this.renderErrorFor}/>
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-md-6">
+                                                                <div className="input-group">
+                                                                    <div className="input-group-prepend">
+                                                                            <span className="input-group-text">
+                                                                                <i className="now-ui-icons ui-1_email-85" /></span>
+                                                                    </div>
+                                                                    <FieldInput name="email" type='email' minLength="3" maxLength="50" placeholder="Email" value={this.state.email}
+                                                                                handleFieldChange={this.handleFieldChange}
+                                                                                hasErrorFor={this.hasErrorFor}
+                                                                                required="required"
+                                                                                renderErrorFor={this.renderErrorFor}/>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div className="row">
+
+                                                            <div className="input-group">
+                                                                <FieldInput name="message" type='textarea' minLength="5" maxLength="5000" placeholder="Pourquoi signalez-vous cette article ?" value={this.state.message}
+                                                                            handleFieldChange={this.handleFieldChange}
+                                                                            hasErrorFor={this.hasErrorFor}
+                                                                            required="required"
+                                                                            renderErrorFor={this.renderErrorFor} rows="17"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="submit text-center">
+                                                            <button className="btn btn-primary btn-lg btn-block" type="submit">
+                                                                <b>Signaler</b>
+                                                            </button>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                </div>
+
+                                            </Form>
+
+
+                                        </div>
                                     </div>
                                 </div>
 
