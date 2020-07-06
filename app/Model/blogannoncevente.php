@@ -7,6 +7,7 @@ use App\Traits\Likesdata;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -44,6 +45,11 @@ class blogannoncevente extends Model implements Auditable
         return 'slug';
     }
 
+    public function isOnline()
+    {
+        return (bool) Cache::has('user-is-online-' . $this->user->id);
+    }
+
     public function user()
     {
         return $this->belongsTo(user::class,'user_id');
@@ -66,6 +72,7 @@ class blogannoncevente extends Model implements Auditable
 
     protected $casts = [
         'status' => 'boolean',
+        'status_comments' => 'boolean',
         'status_admin' => 'boolean',
     ];
 

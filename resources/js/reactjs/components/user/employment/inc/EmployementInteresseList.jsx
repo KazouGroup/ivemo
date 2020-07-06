@@ -110,7 +110,7 @@ class EmployementInteresseList extends PureComponent {
                                                 {this.props.bookmarked ?
 
                                                     <>
-                                                        <Button onClick={() => this.props.unfavoriteItem(this.props.id)}
+                                                        <Button onClick={() => this.props.favoriteItem(this.props)}
                                                                 className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
                                                             <i className="fas fa-bookmark"></i>
                                                         </Button>
@@ -118,7 +118,7 @@ class EmployementInteresseList extends PureComponent {
 
                                                     :
                                                     <>
-                                                        <Button onClick={() => this.props.favoriteItem(this.props.id)}
+                                                        <Button onClick={() => this.props.favoriteItem(this.props)}
                                                                 className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
                                                             <i className="far fa-bookmark"></i>
                                                         </Button>

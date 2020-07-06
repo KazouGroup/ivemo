@@ -94,7 +94,7 @@ class PrivateUserFavoriteAnnonceventeList extends PureComponent {
 
                                     <div className="text-right mx-auto">
 
-                                        <Button onClick={() => this.props.unfavoriteItem(this.props.annoncevente.id)}
+                                        <Button onClick={() => this.props.favoriteItem(this.props.annoncevente)}
                                                 className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
                                             <i className="fas fa-bookmark"></i>
                                         </Button>

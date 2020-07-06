@@ -53,14 +53,14 @@ class AnnonceslocationList extends PureComponent {
                                                     <>
                                                         {this.props.status ?
                                                             <>
-                                                                <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}
+                                                                <button type="button" rel="tooltip" onClick={() => this.props.statusItem(this.props)}
                                                                         className="btn btn-success btn-icon btn-sm">
                                                                     <i className="now-ui-icons ui-1_check"/>
                                                                 </button>
                                                             </>
                                                             :
                                                             <>
-                                                                <button type="button" onClick={() => this.props.activeItem(this.props.id)}
+                                                                <button type="button" onClick={() => this.props.statusItem(this.props)}
                                                                         className="btn btn-primary btn-icon btn-sm">
                                                                     <i className="now-ui-icons ui-1_simple-delete"/>
                                                                 </button>
@@ -150,7 +150,7 @@ class AnnonceslocationList extends PureComponent {
                                                 : <Skeleton circle={false} height={40} width={80} />}
                                             <div className="mx-3">
                                                 <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
-                                                    <small className="d-block text-muted"><b>{moment(this.props.created_at).format('LL')}</b></small>
+                                                    <small className="d-block text-muted"><b>{this.props.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(this.props.created_at).format('LL')}</b></small>
                                                 </NavLink>
                                             </div>
                                         </div>
@@ -168,7 +168,7 @@ class AnnonceslocationList extends PureComponent {
                                                     {this.props.bookmarked ?
 
                                                         <>
-                                                            <Button onClick={() => this.props.unfavoriteItem(this.props.id)}
+                                                            <Button onClick={() => this.props.favoriteItem(this.props)}
                                                                     className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
                                                                 <i className="fas fa-bookmark"></i>
                                                             </Button>
@@ -176,7 +176,7 @@ class AnnonceslocationList extends PureComponent {
 
                                                         :
                                                         <>
-                                                            <Button onClick={() => this.props.favoriteItem(this.props.id)}
+                                                            <Button onClick={() => this.props.favoriteItem(this.props)}
                                                                     className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
                                                                 <i className="far fa-bookmark"></i>
                                                             </Button>

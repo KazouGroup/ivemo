@@ -172,15 +172,17 @@ class BlogannonceventeIntesseAnnonseShow extends Component {
                                                         <a target="_blank" href={`/blogs/annonce_ventes/${item.categoryannoncevente.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`} className="card-link"> {item.title}</a>
                                                     </h6>
                                                 </div>
-                                                <p className="card-description">
-                                                    <b dangerouslySetInnerHTML={{__html: (item.description.length > 80 ? item.description.substring(0, 80) + "..." : item.description)}}/>
-                                                    <a target="_blank" href={`/blogs/annonce_ventes/${item.categoryannoncevente.slug}/${moment(item.created_at).format('YYYY-MM-DD')}/${item.slug}/`}> <b>lire la suite</b> </a>
-                                                </p>
+                                                <span dangerouslySetInnerHTML={{ __html: (item.description.length > 96 ? item.description.substring(0, 96) + "<a class='text-dark' target=\"_blank\" href=\"/blogs/annonce_ventes/"+item.categoryannoncevente.slug+"/"+moment(item.created_at).format('YYYY-MM-DD')+"/"+item.slug+"/\">...<b>lire plus</b></a>" : item.description) }}/>
 
                                                 <div className="card-footer">
                                                     <div className="author">
-                                                        <img src={item.user.avatar} alt={item.user.first_name}
-                                                             className="avatar img-raised"/>
+                                                        {item.user.avatar === null ?
+                                                            <img className="avatar" alt={item.user.first_name}
+                                                                 src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>
+                                                            :
+                                                            <img className="avatar img-raised" alt={item.user.first_name}
+                                                                 src={item.user.avatar}/>
+                                                        }
                                                         <b>{(item.user.first_name.length > 15 ? item.user.first_name.substring(0, 15) + "..." : item.user.first_name)}</b>
                                                     </div>
                                                     <div className="stats stats-right">

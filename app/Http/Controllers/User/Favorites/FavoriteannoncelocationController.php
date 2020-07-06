@@ -60,17 +60,7 @@ class FavoriteannoncelocationController extends Controller
     {
         $annoncelocation = annoncelocation::whereId($id)->firstOrFail();
 
-        Auth::user()->bookmarksfavoriteannoncelocations()->attach($annoncelocation->id);
+        $response = auth()->user()->bookmarksfavoriteannoncelocations()->toggle($annoncelocation->id);
 
-		return response('favorite confirmed',Response::HTTP_ACCEPTED);
-	}
-
-    public function unfavorite(Request $request,$id)
-    {
-        $annoncelocation = annoncelocation::whereId($id)->firstOrFail();
-
-        Auth::user()->bookmarksfavoriteannoncelocations()->detach($annoncelocation->id);
-
-		return response('unfavorite confirmed',Response::HTTP_ACCEPTED);
-	}
+        return response()->json(['success'=>$response]);	}
 }

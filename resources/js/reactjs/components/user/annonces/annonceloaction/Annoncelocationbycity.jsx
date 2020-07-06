@@ -33,8 +33,7 @@ class Annoncelocationbycity extends Component {
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
-        this.unfavoriteItem = this.unfavoriteItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
+        this.statusItem = this.statusItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
         this.signalemessageItem = this.signalemessageItem.bind(this);
         this.contactUser = this.contactUser.bind(this);
@@ -74,56 +73,43 @@ class Annoncelocationbycity extends Component {
         }
     }
 
-    favoriteItem(id) {
-        const url = route('favoriteannoncelocations_favorite.favorite', [id]);
+    favoriteItem(item) {
+        const url = route('favoriteannoncelocations_favorite.favorite', [item.id]);
         dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Annonce ajoutée à vos favoris",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
-                    },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
-                    },
-                });
-            this.loadItems();
 
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    unfavoriteItem(id) {
-        const url = route('favoriteannoncelocations_unfavorite.unfavorite', [id]);
-        dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Annonce retirée de vos favoris",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
+            if(item.bookmarked){
+                $.notify({
+                        message: "Annonce ajoutée à vos favoris",
                     },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+            }else {
+                $.notify({
+                        message: "Annonce retirée de vos favoris",
                     },
-                });
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+            }
             this.loadItems();
 
         }).catch(() => {
@@ -259,9 +245,10 @@ class Annoncelocationbycity extends Component {
         dyaxios.get(url1).then(response => this.setState({ cityannoncelocations: response.data, }));
 
     }
-    unactiveItem(id) {
+
+    statusItem(item){
         Swal.fire({
-            title: 'Désactiver l\'annonce?',
+            title: 'Changer le status l\'annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -274,18 +261,20 @@ class Annoncelocationbycity extends Component {
         }).then((result) => {
             if (result.value) {
 
+                let isNotId = data => data.id !== item.id;
+                let updatedItems = this.state.annoncelocations.filter(isNotId);
+                this.setState({ annoncelocations: updatedItems });
+
                 //Envoyer la requet au server
-                let url = route('annonces_locations_unactivated.site', id);
+                let url = route('annonces_locations_status.site',item.id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                        // title: 'Update FAQ',
-                        //message: 'Annonce désactiver avec succès',
-                        message: "Cette annonce a été masquée au utilisateur <a href=\"/profile/personal_settings/annonces_locations/\" target=\"_blank\">Modifier ici</a>",
-                        url: "/profile/personal_settings/annonces_locations/",
-                        target: "_blank"
-                    },
+
+                            //message: 'Annonce désactiver avec succès',
+                            message: "Cette annonce a été masquée au utilisateur",
+                        },
                         {
                             allow_dismiss: false,
                             type: 'info',
@@ -294,19 +283,18 @@ class Annoncelocationbycity extends Component {
                                 align: 'center'
                             },
                             animate: {
-                                enter: "animated fadeInUp",
-                                exit: "animated fadeOutDown"
+                                enter: "animate__animated animate__fadeInUp",
+                                exit: "animate__animated animate__fadeOutDown"
                             },
                         });
                     /** End alert ***/
-                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         }
                     });
                 })
@@ -391,7 +379,7 @@ class Annoncelocationbycity extends Component {
         const mapAnnoncelocations = annoncelocations.length >= 0 ? (
             annoncelocations.map(item => {
                 return (
-                    <AnnonceslocationList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser} />
+                    <AnnonceslocationList key={item.id} {...item} favoriteItem={this.favoriteItem} deleteItem={this.deleteItem} statusItem={this.statusItem} signalerUser={this.signalerUser} contactUser={this.contactUser} />
                 )
             })
         ) : (

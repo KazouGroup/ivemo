@@ -6,17 +6,11 @@ namespace App\Services;
 use App\Http\Resources\CategoryemployementResource;
 use App\Http\Resources\CityResource;
 use App\Http\Resources\EmploymentResource;
-use App\Jobs\ContactuserfornewemploymentJob;
 use App\Jobs\NewemployementJob;
 use App\Model\abonne\subscribemployment;
 use App\Model\categoryemployment;
 use App\Model\city;
 use App\Model\employment;
-use App\Model\subscriberuser;
-use App\Notifications\NewemployementNotification;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Notification;
 use Intervention\Image\Facades\Image;
 use File;
 
@@ -35,6 +29,7 @@ class EmploymentService
         $employments = EmploymentResource::collection($categoryemployment->employments()->with('user','city','categoryemployment','member')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereIn('categoryemployment_id',[$categoryemployment->id])
+            ->with(['user' => function ($q){$q->select('id','avatar','first_name','slug');},])
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')
@@ -62,6 +57,7 @@ class EmploymentService
     {
         $employments = EmploymentResource::collection($city->employments()->with('user','city','categoryemployment','member')
             ->where(['status' => 1,'status_admin' => 1])
+            ->with(['user' => function ($q){$q->select('id','avatar','first_name','slug');},])
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->with('user','city','categoryemployment','member')
@@ -91,6 +87,7 @@ class EmploymentService
         $employments = EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
             ->where(['status' => 1,'status_admin' => 1])
             ->whereIn('city_id',[$city->id])
+            ->with(['user' => function ($q){$q->select('id','avatar','first_name','slug');},])
             ->whereIn('categoryemployment_id',[$categoryemployment->id])
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
@@ -121,11 +118,13 @@ class EmploymentService
     {
         $employment = new EmploymentResource(employment::whereSlug($employment->slug)
             ->with('user','city','categoryemployment','member')
+            ->with(['user' => function ($q){$q
+                ->with(['profile' => function ($q){$q->distinct()->get();},])
+                ->select('id','phone','avatar','first_name','slug');},])
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->whereIn('city_id',[$city->id])
             ->whereIn('categoryemployment_id',[$categoryemployment->id])
-            ->with(['user.profile' => function ($q){$q->distinct()->get();},])
             ->where(['status' => 1,'status_admin' => 1])->first());
 
         return $employment;
@@ -160,6 +159,7 @@ class EmploymentService
     {
         $employments = EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
             ->where(['status' => 1,'status_admin' => 1])
+            ->with(['user' => function ($q){$q->select('id','avatar','first_name','slug');},])
             ->whereIn('categoryemployment_id',[$categoryemployment->id])
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
@@ -307,7 +307,6 @@ class EmploymentService
         $emailsubscribemployment = subscribemployment::with('user','member')
             ->whereIn('member_id',[$fromUser->id])
             ->distinct()->get();
-
 
         $emailuserJob = (new NewemployementJob($emailsubscribemployment,$fromUser));
 

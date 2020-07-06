@@ -23,6 +23,7 @@ class CreateEmploymentsTable extends Migration
             $table->unsignedBigInteger('price')->nullable();
             $table->string('ip')->nullable();
             $table->boolean('status')->default(true);
+            $table->boolean('status_comments')->default(false);
             $table->boolean('status_admin')->default(true);
             $table->longText('description')->nullable();
             $table->timestamps();

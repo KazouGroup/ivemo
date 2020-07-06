@@ -61,17 +61,8 @@ class FavoriteannoncereservationController extends Controller
     {
         $annoncereservation = annoncereservation::whereId($id)->firstOrFail();
 
-        Auth::user()->bookmarksfavoriteannoncereservations()->attach($annoncereservation->id);
+        $response = auth()->user()->bookmarksfavoriteannoncereservations()->toggle($annoncereservation->id);
 
-		return response('favorite confirmed',Response::HTTP_ACCEPTED);
-	}
-
-    public function unfavorite(Request $request,$id)
-    {
-        $annoncereservation = annoncereservation::whereId($id)->firstOrFail();
-
-        Auth::user()->bookmarksfavoriteannoncereservations()->detach($annoncereservation->id);
-
-		return response('unfavorite confirmed',Response::HTTP_ACCEPTED);
+        return response()->json(['success'=>$response]);
 	}
 }

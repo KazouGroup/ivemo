@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\Contacts;
 
-use App\Notifications\ContactuserventeNotification;
+use App\Notifications\Contacts\ContactuserlocationNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class ContactuserventeJob implements ShouldQueue
+class ContactuserlocationJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -18,20 +18,20 @@ class ContactuserventeJob implements ShouldQueue
     protected $fromEmailUser;
     protected $fromSubjectUser;
     protected $fromMessageUser;
-    protected $annoncevente;
+    protected $annoncelocation;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$annoncevente)
+    public function __construct($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$annoncelocation)
     {
         $this->fromFullnameUser = $fromFullnameUser;
         $this->fromPhoneUser = $fromPhoneUser;
         $this->fromEmailUser = $fromEmailUser;
         $this->fromSubjectUser = $fromSubjectUser;
         $this->fromMessageUser = $fromMessageUser;
-        $this->annoncevente = $annoncevente;
+        $this->annoncelocation = $annoncelocation;
 
     }
 
@@ -42,13 +42,13 @@ class ContactuserventeJob implements ShouldQueue
      */
     public function handle()
     {
-        $this->annoncevente->user
-            ->notify(new ContactuserventeNotification(
+        $this->annoncelocation->user
+            ->notify(new ContactuserlocationNotification(
                 $this->fromFullnameUser,
                 $this->fromPhoneUser,
                 $this->fromEmailUser,
                 $this->fromSubjectUser,
                 $this->fromMessageUser,
-                $this->annoncevente));
+                $this->annoncelocation));
     }
 }

@@ -13,6 +13,7 @@ import ProfileForallAnnonceShow from "../ProfileForallAnnonceShow";
 import HelmetSite from "../../../inc/user/HelmetSite";
 import Swal from "sweetalert2";
 import AnnoncereservationcommentIndex from "../../comments/AnnoncereservationcommentIndex";
+import moment from "moment";
 
 
 class Annoncebycategoryannoncereservationcityshow extends Component {
@@ -24,29 +25,48 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
 
         this.deleteItem = this.deleteItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
-        this.unfavoriteItem = this.unfavoriteItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
+        this.statusItem = this.statusItem.bind(this);
+        this.statuscommentItem = this.statuscommentItem.bind(this);
 
     }
 
-    favoriteItem(id) {
-        const url = route('favoriteannoncereservations_favorite.favorite', [id]);
+    favoriteItem(annoncereservation) {
+        const url = route('favoriteannoncereservations_favorite.favorite', [annoncereservation.id]);
         dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Annonce ajoutée à vos favoris",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
+
+            if(annoncereservation.bookmarked){
+                $.notify({
+                        message: "Annonce ajoutée à vos favoris",
                     },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+            }else {
+                $.notify({
+                        message: "Annonce retirée de vos favoris",
                     },
-                });
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+            }
             this.loadItems();
 
         }).catch(() => {
@@ -61,39 +81,79 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
         })
     }
 
-    unfavoriteItem(id) {
-        const url = route('favoriteannoncereservations_unfavorite.unfavorite', [id]);
-        dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Annonce retirée de vos favoris",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
-                    },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
-                    },
-                });
-            this.loadItems();
+    statuscommentItem(annoncereservation){
+        Swal.fire({
+            text: "êtes vous sure de vouloir changer le status des commentaires de cette annonce?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
 
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
+                //Envoyer la requet au server
+                let url = route('annonces_reservations_status_comments.site',annoncereservation.id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    if(annoncereservation.status_comments){
+                        $.notify({
+
+                                message: "Commentaire desactivé sur cette annonce",
+                            },
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }else {
+                        $.notify({
+
+                                message: "Commentaire activés sur cette annonce",
+                            },
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }
+
+                    /** End alert ***/
+                    this.loadItems();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
+                        }
+                    });
+                })
+            }
         })
+
     }
 
-    unactiveItem(id) {
+    statusItem(annoncereservation) {
         Swal.fire({
             title: 'Désactiver l\'annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
@@ -108,32 +168,54 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
         }).then((result) => {
             if (result.value) {
 
-                let isNotId = item => item.id !== id;
+                let isNotId = data => data.id !== annoncereservation.id;
                 let updatedItems = this.state.annoncereservations.filter(isNotId);
                 this.setState({ annoncereservations: updatedItems });
 
                 //Envoyer la requet au server
-                let url = route('annonces_reservations_unactivated.site', id);
+                let url = route('annonces_reservations_status.site', item.id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
-                    $.notify({
 
-                            //message: 'Annonce désactiver avec succès',
-                            message: "Annonce masquée aux utilisateurs",
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
+                    if(item.status){
+                        $.notify({
+
+                                //message: 'Annonce désactiver avec succès',
+                                message: "Annonce masquée aux utilisateurs",
                             },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }else {
+                        $.notify({
+
+                                //message: 'Annonce désactiver avec succès',
+                                message: "Annonce masquée visible aux utilisateurs",
                             },
-                        });
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }
+
                     /** End alert ***/
                 }).catch(() => {
                     //Failled message
@@ -348,7 +430,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                         {annoncereservation.bookmarked ?
 
                                                             <>
-                                                                <Button onClick={() => this.unfavoriteItem(annoncereservation.id)}
+                                                                <Button onClick={() => this.favoriteItem(annoncereservation)}
                                                                         className="btn btn-danger btn-sm" title="Retirer de vos favoris">
                                                                     <i className="fas fa-bookmark"></i> <b>Sauvegardé</b>
                                                                 </Button>
@@ -356,7 +438,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
 
                                                             :
                                                             <>
-                                                                <Button onClick={() => this.favoriteItem(annoncereservation.id)}
+                                                                <Button onClick={() => this.favoriteItem(annoncereservation)}
                                                                         className="btn btn-facebook btn-sm btn-neutral" title="Ajouter à vos favoris">
                                                                     <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
                                                                 </Button>
@@ -399,7 +481,8 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                         <div className="card">
                                             <div className="card-body">
 
-                                                <ProfileForallAnnonceShow {...annoncereservation} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem}/>
+                                                <ProfileForallAnnonceShow {...annoncereservation} favoriteItem={this.favoriteItem}
+                                                                          deleteItem={this.deleteItem} statusItem={this.statusItem} statuscommentItem={this.statuscommentItem}/>
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">
@@ -431,7 +514,23 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                         </div>
 
 
-                                        <AnnoncereservationcommentIndex {...this.props} {...annoncereservation} />
+                                        {annoncereservation.status_comments ?
+
+                                            <AnnoncereservationcommentIndex {...this.props} {...annoncereservation} />
+                                            :
+                                            <>
+                                                {!$guest && (
+                                                    <>
+                                                        {($userIvemo.id === annoncereservation.user.id || $userIvemo.id === annoncereservation.user_id)  && (
+
+                                                            <AnnoncereservationcommentIndex {...this.props} {...annoncereservation} />
+
+                                                        )}
+                                                    </>
+                                                )}
+                                            </>
+
+                                        }
 
 
                                     </div>
@@ -456,7 +555,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                                     </NavLink>
                                                                     <div className="mx-3">
                                                                         <NavLink to={`/pro/${annoncereservation.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{annoncereservation.user.first_name}</b>
-                                                                            <small className="d-block text-muted">12 janv 2019</small>
+                                                                            <small className="d-block text-muted">{annoncereservation.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(annoncereservation.user.created_at).format('LL')}</small>
                                                                         </NavLink>
                                                                     </div>
                                                                 </div>

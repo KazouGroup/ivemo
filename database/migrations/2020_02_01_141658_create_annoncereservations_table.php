@@ -24,6 +24,7 @@ class CreateAnnoncereservationsTable extends Migration
             $table->integer('rooms')->nullable();
             $table->integer('pieces')->nullable();
             $table->boolean('status')->default(true);
+            $table->boolean('status_comments')->default(true);
             $table->boolean('status_admin')->default(true);
             $table->boolean('status_wifi')->default(false);
             $table->boolean('status_parking')->default(false);

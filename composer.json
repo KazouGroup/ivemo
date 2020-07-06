@@ -20,7 +20,7 @@
         "intervention/image": "^2.5",
         "laravel/framework": "^7.0",
         "laravel/helpers": "^1.1",
-        "laravel/passport": "^8.0",
+        "laravel/passport": "^9.3",
         "laravel/socialite": "^4.3",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
@@ -29,6 +29,7 @@
         "mews/purifier": "^3.2",
         "owen-it/laravel-auditing": "^10.0",
         "predis/predis": "^1.1",
+        "pusher/pusher-php-server": "~3.0",
         "spatie/laravel-activitylog": "^3.14",
         "spatie/laravel-analytics": "^3.9",
         "spatie/laravel-backup": "^6.11",
@@ -40,7 +41,6 @@
         "waavi/sanitizer": "^1.0"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.2",
         "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.9.1",
         "laravel/telescope": "^3.5",

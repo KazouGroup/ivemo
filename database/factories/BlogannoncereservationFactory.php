@@ -19,6 +19,7 @@ $factory->define(blogannoncereservation::class, function (Faker $faker) {
         'slug' => str_slug($title),
         'slugin' => $myslug,
         'status' => true,
+        'status_comments' => $faker->boolean,
         //'status_admin' => $faker->boolean,
         'red_time' => $faker->randomDigitNot(5),
         'description' => "<p>".$faker->realText(rand(10000, 20000))."</p>",

@@ -25,62 +25,48 @@ class EmployementShowUserSite extends Component {
 
         this.deleteItem = this.deleteItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
-        this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.phoneShow = this.phoneShow.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
     }
 
-    favoriteItem(id) {
-        const url = route('employments_favorite.favorite', [id]);
+    favoriteItem(employment) {
+        const url = route('employments_favorite.favorite', [employment.id]);
         dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Annonce ajoutée à vos favoris",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
-                    },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
-                    },
-                });
-            this.loadItems();
 
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    unfavoriteItem(id) {
-        const url = route('employments_unfavorite.unfavorite', [id]);
-        dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Annonce retirée de vos favoris",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
+            if(employment.bookmarked){
+                $.notify({
+                        message: "Annonce retirée de vos favoris",
                     },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+            }else {
+                $.notify({
+                        message: "Annonce ajoutée à vos favoris",
                     },
-                });
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+            }
             this.loadItems();
 
         }).catch(() => {
@@ -371,7 +357,7 @@ class EmployementShowUserSite extends Component {
                                                             : <Skeleton circle={false} height={40} width={80} />}
                                                         <div className="mx-3">
                                                             <NavLink to={`/pro/${employment.user.slug}/employments/`} className="text-dark font-weight-600 text-sm"><b>{employment.user.first_name}</b>
-                                                                <small className="d-block text-muted"><i className="now-ui-icons tech_watch-time"/> {moment(employment.created_at).format('LL')}</small>
+                                                                <small className="d-block text-muted">{employment.statusOnline &&(<i className="fas fa-circle text-success"></i>)} <i className="now-ui-icons tech_watch-time"/> {moment(employment.created_at).format('LL')}</small>
                                                             </NavLink>
                                                         </div>
                                                     </div>
@@ -409,7 +395,7 @@ class EmployementShowUserSite extends Component {
                                                                     {employment.bookmarked ?
 
                                                                         <>
-                                                                            <Button onClick={() => this.unfavoriteItem(employment.id)}
+                                                                            <Button onClick={() => this.favoriteItem(employment)}
                                                                                     className="btn btn-danger btn-sm" title="Retirer de vos favoris">
                                                                                 <i className="fas fa-bookmark"></i> <b>Sauvegardé</b>
                                                                             </Button>
@@ -417,7 +403,7 @@ class EmployementShowUserSite extends Component {
 
                                                                         :
                                                                         <>
-                                                                            <Button onClick={() => this.favoriteItem(employment.id)}
+                                                                            <Button onClick={() => this.favoriteItem(employment)}
                                                                                     className="btn btn-facebook btn-sm btn-neutral" title="Ajouter à vos favoris">
                                                                                 <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
                                                                             </Button>
@@ -449,13 +435,13 @@ class EmployementShowUserSite extends Component {
                                                             : <Skeleton circle={false} height={40} width={80} />}
                                                         <div className="mx-3">
                                                             <NavLink to={`/pro/${employment.user.slug}/employments/`} className="text-dark font-weight-600 text-sm"><b>{employment.user.first_name}</b>
-                                                                <small className="d-block text-muted"><i className="now-ui-icons tech_watch-time"/> {moment(employment.user.created_at).format('LL')}</small>
+                                                                <small className="d-block text-muted">{employment.statusOnline &&(<i className="fas fa-circle text-success"></i>)} <i className="now-ui-icons tech_watch-time"/> {moment(employment.user.created_at).format('LL')}</small>
                                                             </NavLink>
                                                         </div>
                                                     </div>
                                                     <div className="text-right ml-auto">
 
-                                                        <ButonFavoris favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} {...employment} />
+                                                        <ButonFavoris favoriteItem={this.favoriteItem} {...employment} />
 
                                                         <Button className="btn btn-icon btn-sm btn-facebook" title="Copier le lien" onClick={() => this.copyToClipboard()}>
                                                             <i className="fas fa-copy"></i>

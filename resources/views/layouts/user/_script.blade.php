@@ -21,10 +21,6 @@
   <script src="/assets/vendor/assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
   <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
   <script src="/assets/vendor/assets/js/plugins/moment.min.js"></script>
-  <!--  Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
-  <script src="/assets/vendor/assets/js/plugins/bootstrap-tagsinput.js"></script>
-  <!--  Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-  <script src="/assets/vendor/assets/js/plugins/bootstrap-selectpicker.js" type="text/javascript"></script>
   <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
   <script src="/assets/vendor/assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
   <script src="/assets/vendor/assets/js/plugins/jquery.dataTables.min.js" type="text/javascript"></script>

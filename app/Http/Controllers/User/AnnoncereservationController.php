@@ -26,7 +26,7 @@ class AnnoncereservationController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','destroy','sendannoncereservation','annoncesreservationsbyuser','apiannoncesreservationsbyuser'
+            'create','store','edit','update','statusitem','destroy','statuscomments','sendannoncereservation','annoncesreservationsbyuser','apiannoncesreservationsbyuser'
         ]]);
     }
     /**
@@ -360,34 +360,26 @@ class AnnoncereservationController extends Controller
         //
     }
 
-    public function activated($id)
+    public function statusitem($id)
     {
         $annoncereservation = annoncereservation::where('id', $id)->findOrFail($id);
 
         $this->authorize('update',$annoncereservation);
 
-        if(auth()->user()->id === $annoncereservation->user_id){
+        $annoncereservation->update(['status' => !$annoncereservation->status_comments]);
 
-            $annoncereservation->update(['status' => 1,]);
-
-            return response('Confirmed',Response::HTTP_ACCEPTED);
-        }else{
-            abort(404);
-        }
+        return response('Confirmed',Response::HTTP_ACCEPTED);
     }
 
-    public function unactivated($id)
+    public function statuscomments($id)
     {
         $annoncereservation = annoncereservation::where('id', $id)->findOrFail($id);
+
         $this->authorize('update',$annoncereservation);
 
-        if(auth()->user()->id === $annoncereservation->user_id){
-            $annoncereservation->update(['status' => 0,]);
+        $annoncereservation->update(['status_comments' => !$annoncereservation->status_comments]);
 
-            return response('Confirmed',Response::HTTP_ACCEPTED);
-        }else{
-            abort(404);
-        }
+        return response('Confirmed',Response::HTTP_ACCEPTED);
     }
     /**
      * Remove the specified resource from storage.

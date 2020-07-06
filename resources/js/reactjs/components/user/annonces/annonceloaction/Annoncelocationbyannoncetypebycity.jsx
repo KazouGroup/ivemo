@@ -5,7 +5,6 @@ import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import PropTypes from "prop-types";
 import AnnonceslocationList from "./inc/AnnonceslocationList";
-import Categoriesannoncereselocation from "./inc/Categoriesannoncereselocation";
 import Swal from "sweetalert2";
 import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 import Categoriesannoncereselocationcity from "./inc/Categoriesannoncereselocationcity";
@@ -13,7 +12,6 @@ import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
 import Navlinknewannoncelocation from "./treatment/Navlinknewannoncelocation";
 import HelmetSite from "../../../inc/user/HelmetSite";
-import SectionVentebyCity from "../../../inc/user/section_indexsite/SectionVentebyCity";
 import SectionLocationbyCity from "../../../inc/user/section_indexsite/SectionLocationbyCity";
 
 
@@ -34,8 +32,7 @@ class Annoncelocationbyannoncetypebycity extends Component {
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
-        this.unfavoriteItem = this.unfavoriteItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
+        this.statusItem = this.statusItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
         this.signalemessageItem = this.signalemessageItem.bind(this);
         this.contactUser = this.contactUser.bind(this);
@@ -88,56 +85,43 @@ class Annoncelocationbyannoncetypebycity extends Component {
         });
     }
 
-    favoriteItem(id) {
-        const url = route('favoriteannoncelocations_favorite.favorite', [id]);
+    favoriteItem(item) {
+        const url = route('favoriteannoncelocations_favorite.favorite', [item.id]);
         dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Annonce ajoutée à vos favoris",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
-                    },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
-                    },
-                });
-            this.loadItems();
 
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    unfavoriteItem(id) {
-        const url = route('favoriteannoncelocations_unfavorite.unfavorite', [id]);
-        dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Annonce retirée de vos favoris",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
+            if(item.bookmarked){
+                $.notify({
+                        message: "Annonce ajoutée à vos favoris",
                     },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+            }else {
+                $.notify({
+                        message: "Annonce retirée de vos favoris",
                     },
-                });
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+            }
             this.loadItems();
 
         }).catch(() => {
@@ -246,9 +230,9 @@ class Annoncelocationbyannoncetypebycity extends Component {
             })
     }
 
-    unactiveItem(id) {
+    statusItem(item){
         Swal.fire({
-            title: 'Désactiver l\'annonce?',
+            title: 'Changer le status l\'annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -261,21 +245,19 @@ class Annoncelocationbyannoncetypebycity extends Component {
         }).then((result) => {
             if (result.value) {
 
-                let isNotId = item => item.id !== id;
+                let isNotId = data => data.id !== item.id;
                 let updatedItems = this.state.annoncelocations.filter(isNotId);
                 this.setState({ annoncelocations: updatedItems });
 
                 //Envoyer la requet au server
-                let url = route('annonces_locations_unactivated.site', id);
+                let url = route('annonces_locations_status.site',item.id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            // title: 'Update FAQ',
+
                             //message: 'Annonce désactiver avec succès',
-                            message: "Annonce masquée aux utilisateurs",
-                            //url: "/profile/personal_settings/annonces_locations/",
-                            //target: "_blank"
+                            message: "Cette annonce a été masquée au utilisateur",
                         },
                         {
                             allow_dismiss: false,
@@ -290,7 +272,6 @@ class Annoncelocationbyannoncetypebycity extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Something wrong. Try later", {
@@ -381,7 +362,7 @@ class Annoncelocationbyannoncetypebycity extends Component {
         const mapAnnoncelocations = annoncelocations.length >= 0 ? (
             annoncelocations.map(item => {
                 return (
-                    <AnnonceslocationList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} signalerUser={this.signalerUser} contactUser={this.contactUser} />
+                    <AnnonceslocationList key={item.id} {...item} favoriteItem={this.favoriteItem} deleteItem={this.deleteItem} statusItem={this.statusItem} signalerUser={this.signalerUser} contactUser={this.contactUser} />
                 )
             })
         ) : (

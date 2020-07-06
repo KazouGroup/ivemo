@@ -26,60 +26,46 @@ class EmployementBycategoryemployement extends Component {
 
         this.deleteItem = this.deleteItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
-        this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
     }
 
-    favoriteItem(id) {
-        const url = route('employments_favorite.favorite', [id]);
+    favoriteItem(item) {
+        const url = route('employments_favorite.favorite', [item.id]);
         dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Annonce ajoutée à vos favoris",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
-                    },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
-                    },
-                });
-            this.loadItems();
 
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    unfavoriteItem(id) {
-        const url = route('employments_unfavorite.unfavorite', [id]);
-        dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Annonce retirée de vos favoris",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
+            if(item.bookmarked){
+                $.notify({
+                        message: "Annonce retirée de vos favoris",
                     },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+            }else {
+                $.notify({
+                        message: "Annonce ajoutée à vos favoris",
                     },
-                });
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+            }
             this.loadItems();
 
         }).catch(() => {
@@ -233,7 +219,7 @@ class EmployementBycategoryemployement extends Component {
             employments.map(item => {
                 return(
 
-                    <EmployementList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
+                    <EmployementList key={item.id} {...item} favoriteItem={this.favoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
                 )
             })
         ):(

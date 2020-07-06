@@ -63,7 +63,7 @@ class SectionBlogannonce extends Component {
                                         <b>{item.title.length > 70 ? item.title.substring(0, 70) + "..." : item.title}</b>
                                     </a>
                                 </h5>
-                                <span dangerouslySetInnerHTML={{ __html: (item.description.length > 150 ? item.description.substring(0, 150) + "<a class='text-dark' target=\"_blank\" href=\"/blogs/annonce_locations/"+item.categoryannoncelocation.slug+"/"+moment(item.created_at).format('YYYY-MM-DD')+"/"+item.slug+"/\">...<b>Lire plus</b></a>" : item.description) }}/>
+                                <span dangerouslySetInnerHTML={{ __html: (item.description.length > 146 ? item.description.substring(0, 146) + "<a class='text-dark' target=\"_blank\" href=\"/blogs/annonce_locations/"+item.categoryannoncelocation.slug+"/"+moment(item.created_at).format('YYYY-MM-DD')+"/"+item.slug+"/\">...<b>lire plus</b></a>" : item.description) }}/>
                                 <p></p>
                             </div>
                         </div>
@@ -100,7 +100,7 @@ class SectionBlogannonce extends Component {
                                         <b>{item.title.length > 70 ? item.title.substring(0, 70) + "..." : item.title}</b>
                                     </a>
                                 </h5>
-                                <span dangerouslySetInnerHTML={{ __html: (item.description.length > 150 ? item.description.substring(0, 150) + "<a class='text-dark' target=\"_blank\" href=\"/blogs/annonce_reservations/"+item.categoryannoncereservation.slug+"/"+moment(item.created_at).format('YYYY-MM-DD')+"/"+item.slug+"/\">...<b>Lire plus</b></a>" : item.description) }}/>
+                                <span dangerouslySetInnerHTML={{ __html: (item.description.length > 146 ? item.description.substring(0, 146) + "<a class='text-dark' target=\"_blank\" href=\"/blogs/annonce_reservations/"+item.categoryannoncereservation.slug+"/"+moment(item.created_at).format('YYYY-MM-DD')+"/"+item.slug+"/\">...<b>lire plus</b></a>" : item.description) }}/>
                                 <p></p>
                             </div>
                         </div>
@@ -136,7 +136,7 @@ class SectionBlogannonce extends Component {
                                         <b>{item.title.length > 70 ? item.title.substring(0, 70) + "..." : item.title}</b>
                                     </a>
                                 </h5>
-                                <span dangerouslySetInnerHTML={{ __html: (item.description.length > 150 ? item.description.substring(0, 150) + "<a class='text-dark' target=\"_blank\" href=\"/blogs/annonce_ventes/"+item.categoryannoncevente.slug+"/"+moment(item.created_at).format('YYYY-MM-DD')+"/"+item.slug+"/\">...<b>Lire plus</b></a>" : item.description) }}/>
+                                <span dangerouslySetInnerHTML={{ __html: (item.description.length > 146 ? item.description.substring(0, 146) + "<a class='text-dark' target=\"_blank\" href=\"/blogs/annonce_ventes/"+item.categoryannoncevente.slug+"/"+moment(item.created_at).format('YYYY-MM-DD')+"/"+item.slug+"/\">...<b>lire plus</b></a>" : item.description) }}/>
                                 <p></p>
                             </div>
                         </div>

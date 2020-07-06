@@ -57,17 +57,8 @@ class FavoritemploymentController extends Controller
     {
         $employment = employment::whereId($id)->firstOrFail();
 
-        Auth::user()->bookmarksfavoritemployments()->attach($employment->id);
+        $response = auth()->user()->bookmarksfavoritemployments()->toggle($employment->id);
 
-		return response('favorite confirmed',Response::HTTP_ACCEPTED);
-	}
-
-    public function unfavorite(Request $request,$id)
-    {
-        $employment = employment::whereId($id)->firstOrFail();
-
-        Auth::user()->bookmarksfavoritemployments()->detach($employment->id);
-
-		return response('unfavorite confirmed',Response::HTTP_ACCEPTED);
+        return response()->json(['success'=>$response]);
 	}
 }

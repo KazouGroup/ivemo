@@ -83,24 +83,19 @@ Route::get(
 )->name('annonceventesbyannoncetypebycity_site');
 
 Route::get(
-    'annonces_ventes_active/{id}',
-    'AnnonceventeController@activated'
-)->name('annonces_ventes_active.site');
+    'annonces_ventes_status/{id}',
+    'AnnonceventeController@statusitem'
+)->name('annonces_ventes_status.site');
 
 Route::get(
-    'annonces_ventes_unactive/{id}',
-    'AnnonceventeController@unactivated'
-)->name('annonces_ventes_unactivated.site');
+    'annonces_ventes_status_comments/{id}',
+    'AnnonceventeController@statuscomments'
+)->name('annonces_ventes_status_comments.site');
 
 Route::get(
-    'annonces_ventes_admin_active/{id}',
-    'AnnonceventeController@adminactivated'
-)->name('annonces_ventes_admin_active.dashboard');
-
-Route::get(
-    'annonces_ventes_admin_unactive/{id}',
-    'AnnonceventeController@adminunactivated'
-)->name('annonces_ventes_admin_unactivated.dashboard');
+    'annonces_ventes_admin_status/{id}',
+    'AnnonceventeController@adminstatusitem'
+)->name('annonces_ventes_admin_status.dashboard');
 
 Route::get(
     'annonces_ventes/{annoncetype}/{categoryannoncevente}',

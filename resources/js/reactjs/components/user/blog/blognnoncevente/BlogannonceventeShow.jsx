@@ -15,6 +15,7 @@ import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import AnnoncelocationVenteforBlog from "./AnnoncelocationVenteforBlog";
 import ButonFavoris from "../../../inc/vendor/ButonFavoris";
 import ButonLiked from "../../../inc/vendor/ButonLiked";
+import BlogannonceventecommentIndex from "../../comments/BlogannonceventecommentIndex";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -355,6 +356,9 @@ class BlogannonceventeShow extends Component {
                                                     </div>
                                                 </div>
                                             </div>
+
+
+                                            <BlogannonceventecommentIndex {...this.props} />
 
                                         </div>
 

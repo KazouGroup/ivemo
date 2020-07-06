@@ -71,7 +71,7 @@ class EmployementList extends PureComponent {
                                             : <Skeleton circle={false} height={40} width={80} />}
                                         <div className="mx-3">
                                             <NavLink to={`/pro/${this.props.user.slug}/employments/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
-                                                <small className="d-block text-muted"><b><i className="now-ui-icons tech_watch-time"/> {moment(this.props.created_at).format('ll')}</b></small>
+                                                <small className="d-block text-muted"><b>{this.props.statusOnline &&(<i className="fas fa-circle text-success"></i>)} <i className="now-ui-icons tech_watch-time"/> {moment(this.props.created_at).format('ll')}</b></small>
                                             </NavLink>
                                         </div>
                                     </div>
@@ -116,7 +116,7 @@ class EmployementList extends PureComponent {
                                             {this.props.bookmarked ?
 
                                                 <>
-                                                    <Button onClick={() => this.props.unfavoriteItem(this.props.id)}
+                                                    <Button onClick={() => this.props.favoriteItem(this.props)}
                                                             className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
                                                         <i className="fas fa-bookmark"></i>
                                                     </Button>
@@ -124,7 +124,7 @@ class EmployementList extends PureComponent {
 
                                                 :
                                                 <>
-                                                    <Button onClick={() => this.props.favoriteItem(this.props.id)}
+                                                    <Button onClick={() => this.props.favoriteItem(this.props)}
                                                             className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
                                                         <i className="far fa-bookmark"></i>
                                                     </Button>

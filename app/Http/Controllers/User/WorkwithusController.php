@@ -50,7 +50,7 @@ class WorkwithusController extends Controller
         //    $contactworkwithus->cv_file = $file_cv_file_name;
         //}
 
-        ContactworkwithusService::newEmailTocontactworkwithus($request);
+        ContactworkwithusService::newEmailTocontactworkwithus($request,$workwithus);
 
         $contactworkwithus->save();
 

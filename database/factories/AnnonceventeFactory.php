@@ -16,6 +16,7 @@ $factory->define(annoncevente::class, function (Faker $faker) {
         'price' => $faker->randomNumber(8),
         'surface' => $faker->randomNumber(4),
         'status' => true,
+        'status_comments' => $faker->boolean,
         //'status_admin' => $faker->boolean,
         'district' => $faker->streetName,
         'rooms' => $faker->randomDigitNot(5),
@@ -28,6 +29,6 @@ $factory->define(annoncevente::class, function (Faker $faker) {
         'categoryannoncevente_id' => categoryannoncevente::inRandomOrder()->first()->id,
         'city_id' => city::where(['status' => 1])->inRandomOrder()->first()->id,
         'user_id' => user::inRandomOrder()->first()->id,
-        //'created_at' => $faker->dateTime,
+        'created_at' => $faker->dateTime,
     ];
 });

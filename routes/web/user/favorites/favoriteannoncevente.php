@@ -19,7 +19,3 @@ Route::get(
     'FavoriteannonceventeController@favorite'
 )->name('favoriteannonceventes_favorite.favorite');
 
-Route::get(
-    '/favoriteannonceventes_unfavorite/{id}',
-    'FavoriteannonceventeController@unfavorite'
-)->name('favoriteannonceventes_unfavorite.unfavorite');

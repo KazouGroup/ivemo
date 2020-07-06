@@ -16,7 +16,6 @@ class ResponsecommentJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $fromBodyUser;
-    protected $annoncereservation;
     protected $comment;
     protected $userFrom;
     /**
@@ -24,10 +23,9 @@ class ResponsecommentJob implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($fromBodyUser,$annoncereservation,$comment,$userFrom)
+    public function __construct($fromBodyUser,$comment,$userFrom)
     {
         $this->fromBodyUser = $fromBodyUser;
-        $this->annoncereservation = $annoncereservation;
         $this->comment = $comment;
         $this->userFrom = $userFrom;
     }
@@ -41,11 +39,9 @@ class ResponsecommentJob implements ShouldQueue
     {
         try {
 
-
-            Notification::route('mail',   $this->comment->user->email)
-                ->notify(new ResponsecommentNotification(
+             $this->comment->user
+                 ->notify(new ResponsecommentNotification(
                     $this->fromBodyUser,
-                    $this->annoncereservation,
                     $this->comment,
                     $this->userFrom));
 
