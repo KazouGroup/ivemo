@@ -1,4 +1,4 @@
-import React, { Component,Fragment } from "react";
+import React, { useState,useEffect,Fragment } from "react";
 import {Link, NavLink} from 'react-router-dom';
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
@@ -7,108 +7,96 @@ import InfopageshowUserList from "./inc/InfopageshowUserList";
 import HelmetSite from "../../inc/user/HelmetSite";
 
 
-class LicencesiteIndexSite extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            licencesites:{user:[]},
-        };
-    }
-
-    // lifecycle method
-    componentDidMount() {
-        fetch(route('api.sites_licencesites')).then(res => res.json()).then((result) => {
-            this.setState({
-                licencesites: [...result]
-            });
-        });
-    }
-
-    render() {
-        const {licencesites} = this.state;
-        const mapLicencesites = licencesites.length >= 0 ? (
-            licencesites.map(item => {
-                return(
-                    <InfopageshowUserList key={item.id} {...item} />
-                )
+const LicencesiteIndexSite = () => {
+    const [licencesites, setLicencesites] = useState([]);
+    useEffect(() => {
+        dyaxios.get(route('api.sites_licencesites'))
+            .then(response => {
+                setLicencesites(response.data)
             })
-        ):(
-            <></>
-        );
-        return (
-            <Fragment>
+            .catch(error => console.error(error));
+    }, []);
+    const mapLicencesites = licencesites.length >= 0 ? (
+        licencesites.map(item => {
+            return(
+                <InfopageshowUserList key={item.id} {...item} />
+            )
+        })
+    ):(
+        <></>
+    );
+    return (
+        <Fragment>
 
-                <HelmetSite title={`Licence site - ${$name_site}`}/>
+            <HelmetSite title={`Licence site - ${$name_site}`}/>
 
-                <div className="about-us sidebar-collapse">
-                    <nav className="navbar navbar-expand-lg bg-primary">
-                        <NavUserSite />
-                    </nav>
+            <div className="about-us sidebar-collapse">
+                <nav className="navbar navbar-expand-lg bg-primary">
+                    <NavUserSite />
+                </nav>
 
 
-                    <div className="wrapper">
+                <div className="wrapper">
 
-                        <div className="main main-raised">
+                    <div className="main main-raised">
 
-                            <div className="container">
-                                <br />
+                        <div className="container">
+                            <br />
 
-                                <div className="card">
-                                    <div className="card-body">
+                            <div className="card">
+                                <div className="card-body">
 
-                                        <div className="card card-plain ">
+                                    <div className="card card-plain ">
 
-                                            <div className="container">
-                                                <div className="row justify-content-center">
-                                                    <div className="col-md-12 ml-auto mr-auto">
-                                                        {!$guest &&(
-                                                            <>
-                                                                {!$userIvemo.email_verified_at &&(
-                                                                    <LinkValicationEmail/>
-                                                                )}
-                                                            </>
-                                                        )}
+                                        <div className="container">
+                                            <div className="row justify-content-center">
+                                                <div className="col-md-12 ml-auto mr-auto">
+                                                    {!$guest &&(
+                                                        <>
+                                                            {!$userIvemo.email_verified_at &&(
+                                                                <LinkValicationEmail/>
+                                                            )}
+                                                        </>
+                                                    )}
 
-                                                    </div>
                                                 </div>
                                             </div>
+                                        </div>
 
 
-                                            <div className="container">
-                                                <div className="row justify-content-center ">
-                                                    <div className="col-lg-10 ml-auto mr-auto">
+                                        <div className="container">
+                                            <div className="row justify-content-center ">
+                                                <div className="col-lg-10 ml-auto mr-auto">
 
-                                                        {mapLicencesites}
-
-                                                    </div>
-
+                                                    {mapLicencesites}
 
                                                 </div>
+
 
                                             </div>
 
                                         </div>
 
-
                                     </div>
+
+
                                 </div>
-
-
                             </div>
+
+
                         </div>
-
-
-
-
-                        <FooterBigUserSite />
                     </div>
 
+
+
+
+                    <FooterBigUserSite />
                 </div>
 
-            </Fragment>
+            </div>
 
-        )
-    }
-}
+        </Fragment>
+    );
+};
 
 export default LicencesiteIndexSite;
