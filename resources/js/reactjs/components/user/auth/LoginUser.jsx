@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom'
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterUserSite from "../../inc/user/FooterUserSite";
+import FieldInput from "../../inc/vendor/FieldInput";
 
 
 class LoginUser extends Component {
@@ -109,14 +110,12 @@ class LoginUser extends Component {
                                                         <i className="now-ui-icons users_circle-08"/>
                                                     </span>
                                                 </div>
-                                                <input type="text" placeholder="Votre Pseudo ou E-mail" aria-label="Votre Pseudo ou E-mail"
-                                                    required="required"
-                                                    id="username"
-                                                    className={`form-control ${this.hasErrorFor('username') ? 'is-invalid' : ''}`}
-                                                    name='username'
-                                                    value={this.state.username}
-                                                    onChange={this.handleFieldChange} autoComplete="username" autoFocus />
-                                                {this.renderErrorFor('username')}
+
+                                                <FieldInput name="username" type='text' placeholder="Votre Pseudo ou E-mail" value={this.state.username}
+                                                            handleFieldChange={this.handleFieldChange}
+                                                            hasErrorFor={this.hasErrorFor}
+                                                            required="required"
+                                                            renderErrorFor={this.renderErrorFor}/>
                                             </div>
                                             <div className="input-group no-border input-lg mb-4">
                                                 <div className="input-group-prepend">
@@ -124,15 +123,11 @@ class LoginUser extends Component {
                                                         <i className="now-ui-icons ui-1_lock-circle-open"></i>
                                                     </span>
                                                 </div>
-                                                <input type={this.state.passwordType} placeholder="Votre Mot de Passe" aria-label="Votre Mot de Passe"
-                                                    required="required"
-                                                    id="password"
-                                                    className={`form-control ${this.hasErrorFor('password') ? 'is-invalid' : ''}`}
-                                                    name='password'
-                                                    value={this.state.password}
-                                                    onChange={this.handleFieldChange}
-                                                    autoComplete="password" autoFocus />
-                                                {this.renderErrorFor('password')}
+                                                <FieldInput name="password" type={this.state.passwordType} minLength="8" placeholder="Votre Mot de Passe" value={this.state.password}
+                                                            handleFieldChange={this.handleFieldChange}
+                                                            hasErrorFor={this.hasErrorFor}
+                                                            required="required"
+                                                            renderErrorFor={this.renderErrorFor}/>
                                             </div>
                                             <div className="ivemoShowRidePasswordTop ivemoShowRidePassword" onClick={this.handleHideShowPassword}>
                                                 <i className={`fa fa-${this.state.passwordType === "password" ? "lock" : "unlock"}`}></i>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterUserSite from "../../inc/user/FooterUserSite";
 import {FormGroup, Input, Row} from "reactstrap";
+import FieldInput from "../../inc/vendor/FieldInput";
 
 
 class RegisterUser extends Component {
@@ -165,14 +166,11 @@ class RegisterUser extends Component {
                                                         <i className="now-ui-icons users_circle-08"/>
                                                     </span>
                                                         </div>
-                                                        <input type="text" placeholder="Votre Pseudo" aria-label="Votre Pseudo"
-                                                               required="required"
-                                                               id="username"
-                                                               className={`form-control ${this.hasErrorFor('username') ? 'is-invalid' : ''}`}
-                                                               name='username'
-                                                               value={this.state.username}
-                                                               onChange={this.handleFieldChange} autoComplete="username" autoFocus />
-                                                        {this.renderErrorFor('username')}
+                                                        <FieldInput name="username" type='text' placeholder="Votre Pseudo" value={this.state.username}
+                                                                    handleFieldChange={this.handleFieldChange}
+                                                                    hasErrorFor={this.hasErrorFor}
+                                                                    required="required"
+                                                                    renderErrorFor={this.renderErrorFor}/>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-6">
@@ -182,14 +180,11 @@ class RegisterUser extends Component {
                                                         <i className="now-ui-icons users_circle-08"/>
                                                     </span>
                                                         </div>
-                                                        <input type="text" placeholder="Votre Nom Complet" aria-label="Votre Nom Complet"
-                                                               required="required"
-                                                               id="first_name"
-                                                               className={`form-control ${this.hasErrorFor('first_name') ? 'is-invalid' : ''}`}
-                                                               name='first_name'
-                                                               value={this.state.first_name}
-                                                               onChange={this.handleFieldChange} autoComplete="first_name" autoFocus />
-                                                        {this.renderErrorFor('first_name')}
+                                                        <FieldInput name="first_name" type='text' placeholder="Votre Nom Complet" value={this.state.first_name}
+                                                                    handleFieldChange={this.handleFieldChange}
+                                                                    hasErrorFor={this.hasErrorFor}
+                                                                    required="required"
+                                                                    renderErrorFor={this.renderErrorFor} autoFocus/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -201,14 +196,11 @@ class RegisterUser extends Component {
                                                             <i className="now-ui-icons ui-1_email-85"/>
                                                         </span>
                                                         </div>
-                                                        <input type="email" placeholder="Votre Adresse E-mail" aria-label="Votre Adresse E-mail"
-                                                               required="required"
-                                                               id="email"
-                                                               className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                                               name='email'
-                                                               value={this.state.email}
-                                                               onChange={this.handleFieldChange}/>
-                                                        {this.renderErrorFor('email')}
+                                                        <FieldInput name="email" type='email' placeholder="Votre Adresse E-mail" value={this.state.email}
+                                                                    handleFieldChange={this.handleFieldChange}
+                                                                    hasErrorFor={this.hasErrorFor}
+                                                                    required="required"
+                                                                    renderErrorFor={this.renderErrorFor}/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -246,15 +238,11 @@ class RegisterUser extends Component {
                                                                 <i className="now-ui-icons ui-1_lock-circle-open"/>
                                                             </span>
                                                         </div>
-                                                        <input type={this.state.passwordType} placeholder="Votre Mot de Passe" aria-label="Votre Mot de Passe"
-                                                               required="required"
-                                                               id="password"
-                                                               className={`form-control ${this.hasErrorFor('password') ? 'is-invalid' : ''}`}
-                                                               name='password'
-                                                               value={this.state.password}
-                                                               onChange={this.handleFieldChange}
-                                                               autoComplete="password" autoFocus />
-                                                        {this.renderErrorFor('password')}
+                                                        <FieldInput name="password" minLength="8" type={this.state.passwordType} placeholder="Votre Mot de Passe" value={this.state.password}
+                                                                    handleFieldChange={this.handleFieldChange}
+                                                                    hasErrorFor={this.hasErrorFor}
+                                                                    required="required"
+                                                                    renderErrorFor={this.renderErrorFor}/>
                                                     </div>
                                                     <div className="ivemoShowRidePassword" onClick={this.handleHideShowPassword}>
                                                         <i className={`fa fa-${this.state.passwordType === "password" ? "lock" : "unlock"}`}></i>
@@ -267,15 +255,14 @@ class RegisterUser extends Component {
                                                             <i className="now-ui-icons ui-1_lock-circle-open"/>
                                                         </span>
                                                         </div>
-                                                        <input type={this.state.password_confirmationType} placeholder="Confirmez votre Mot de Passe" aria-label="Confirmez votre Mot de Passe"
-                                                               required="required"
-                                                               id="password_confirmation"
-                                                               className={`form-control ${this.hasErrorFor('password_confirmation') ? 'is-invalid' : ''}`}
-                                                               name='password_confirmation'
-                                                               value={this.state.password_confirmation}
-                                                               onChange={this.handleFieldChange}
-                                                               autoComplete="password_confirmation" autoFocus />
-                                                        {this.renderErrorFor('password_confirmation')}
+
+                                                        <FieldInput name="password_confirmation" minLength="8" type={this.state.password_confirmationType}
+                                                                    placeholder="Confirmez votre Mot de Passe" value={this.state.password_confirmation}
+                                                                    handleFieldChange={this.handleFieldChange}
+                                                                    hasErrorFor={this.hasErrorFor}
+                                                                    required="required"
+                                                                    renderErrorFor={this.renderErrorFor} autoFocus/>
+
                                                     </div>
                                                     <div className="ivemoShowRidePassword" onClick={this.handleHideShowPasswordConfirmation}>
                                                         <i className={`fa fa-${this.state.password_confirmationType === "password" ? "lock" : "unlock"}`}></i>
