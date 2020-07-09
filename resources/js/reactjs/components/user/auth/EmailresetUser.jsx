@@ -19,7 +19,6 @@ class EmailresetUser extends Component {
             email: '',
             errors: [],
         }
-
     }
 
     handleFieldChange(event) {
@@ -28,10 +27,12 @@ class EmailresetUser extends Component {
         });
         this.state.errors[event.target.name] = '';
     }
+
     // Handle Errors
     hasErrorFor(field) {
         return !!this.state.errors[field];
     }
+
     renderErrorFor(field) {
         if (this.hasErrorFor(field)) {
             return (
@@ -67,7 +68,7 @@ class EmailresetUser extends Component {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
+            $.notify("Ooop! Quelque chose ne va pas. Essayez plus tard ...", {
                 allow_dismiss: false,
                 type: 'danger',
                 animate: {
@@ -100,39 +101,34 @@ class EmailresetUser extends Component {
                             <div className="col-md-7 ml-auto mr-auto">
                                 <div className="card">
                                     <div className="card-body">
-
+                                        <h4 className="text-dark"><b>Vous avez oublié votre mot de passe ?</b></h4>
+                                        <p className="text-dark">Saisissez l'adresse e-mail que vous nous avez indiquée lors de votre inscription, afin de recevoir un lien de réinitialisation de votre mot de passe.</p>
                                         {$guest && (
                                             <Fragment>
-                                                <h4 className="text-dark"><b>Se connecter</b></h4>
+                                                <h4 className="ivemoColorOrange">Se Connecter avec</h4>
                                                 <div className="social text-center">
                                                     <a href={route('social.oauth', 'facebook')} className="btn btn-facebook btn-round">
-                                                        <i className="fab fa-facebook"/> Se connecter avec Facebook
+                                                        <i className="fab fa-facebook"/> Facebook
                                                     </a>
                                                     <a href={route('social.oauth', 'google')} className="btn btn-google btn-round">
-                                                        <i className="fab fa-google"/> Se connecter avec Google
+                                                        <i className="fab fa-google"/> Google
                                                     </a>
                                                 </div>
                                             </Fragment>
                                         )}
-
-                                        <br/>
-                                        <h5 className="text-dark">
-                                            <b>Ajouter votre email pour réinitialiser votre mot de passe</b>
-                                        </h5>
+                                        <h4 className="ivemoColorOrange">Ou</h4>
                                         <form role="form" id="contact-form" onSubmit={this.saveItem} acceptCharset="UTF-8">
-
-
                                             <InputGroup>
                                                 <div className="input-group-prepend">
-                                                            <span className="input-group-text">
-                                                                <i className="now-ui-icons ui-1_email-85"></i>
-                                                            </span>
+                                                    <span className="input-group-text">
+                                                        <i className="now-ui-icons ui-1_email-85"></i>
+                                                    </span>
                                                 </div>
                                                 <input id='email'
                                                        type='email'
                                                        className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
                                                        name='email'
-                                                       placeholder="Email"
+                                                       placeholder="Saisissez votre adresse e-mail "
                                                        aria-label="Email"
                                                        required
                                                        autoComplete="email"
@@ -142,12 +138,13 @@ class EmailresetUser extends Component {
                                                 />
                                                 {this.renderErrorFor('email')}
                                             </InputGroup>
-
                                             <div className="submit text-center">
-                                                <button className="btn btn-primary btn-round" type="submit">
-                                                    Envoyer le lien de réinitialisation du mot de passe
+                                                <button className="btn btn-primary btn-round btn-lg" type="submit">
+                                                    Envoyer
                                                 </button>
                                             </div>
+                                            <hr />
+                                            <h5 className="card-description">Vous vous souveniez de votre mot de passe ? <Link to="/login" className="ivemoColorOrange">Connectez-vous</Link></h5>
                                         </form>
                                     </div>
                                 </div>

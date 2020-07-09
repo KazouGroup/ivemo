@@ -14,19 +14,36 @@ class RegisterUser extends Component {
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
         this.handleCheckClick = this.handleCheckClick.bind(this);
+        this.handleHideShowPassword = this.handleHideShowPassword.bind(this);
+        this.handleHideShowPasswordConfirmation = this.handleHideShowPasswordConfirmation.bind(this);
         this.state = {
             username: '',
             first_name: '',
             email: '',
             password: '',
+            passwordType: 'password',
             status_profile: '0',
             password_confirmation: '',
+            password_confirmationType: 'password',
             categoryprofile_id: '',
             errors: [],
         }
 
     }
 
+    handleHideShowPassword() {
+        this.setState({
+            passwordType:
+                this.state.passwordType === "password" ? "text" : "password",
+        });
+    }
+
+    handleHideShowPasswordConfirmation() {
+        this.setState({
+            password_confirmationType:
+                this.state.password_confirmationType === "password" ? "text" : "password",
+        });
+    }
 
     handleCheckClick(event){
         this.setState({
@@ -73,7 +90,7 @@ class RegisterUser extends Component {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
+            $.notify("Ooop! Quelque chose ne va pas. Essayez plus tard ...", {
                 allow_dismiss: false,
                 type: 'danger',
                 animate: {
@@ -104,44 +121,43 @@ class RegisterUser extends Component {
                             <div className="col-md-7 ml-auto mr-auto">
                                 <div className="card">
                                     <div className="card-body">
-                                        <h4 className="card-description text-center"><b>S'inscrire</b></h4>
+                                        <h4 className="card-description text-center"><b>S'inscrire avec</b></h4>
                                         <div className="social text-center">
                                             <a href={route('social.oauth', 'facebook')} className="btn btn-facebook btn-round">
-                                                <i className="fab fa-facebook"/> Se connecter avec Facebook
+                                                <i className="fab fa-facebook"/> Facebook
                                             </a>
                                             <a href={route('social.oauth', 'google')} className="btn btn-google btn-round">
-                                                <i className="fab fa-google"/> Se connecter avec Google
+                                                <i className="fab fa-google"/> Google
                                             </a>
-                                            <h5 className="card-description"> ou</h5>
+                                            <h4 className="card-description">Ou</h4>
                                         </div>
                                         <form className="form" method="POST" onSubmit={this.saveItem}>
-                                            <div className="row">
-                                                <div className="col-md-6">
+                                            <div className="row mb-4">
+                                                <div className="col-md-6 text-left">
                                                     <div className="form-check form-check-radio text-dark">
                                                         <label className="form-check-label">
                                                             <Input className={`form-check-input ${this.hasErrorFor('status_profile') ? 'is-invalid' : ''}`} type="radio"
                                                                    name="status_profile" id="status_profile"
                                                                    value="0" onChange={this.handleCheckClick} checked={this.state.status_profile === "0"}/>
                                                             <span className="form-check-sign"></span>
-                                                            Particulier
+                                                            Je suis un Particulier
                                                         </label>
                                                     </div>
                                                 </div>
 
-                                                <div className="col-md-6">
+                                                <div className="col-md-6 text-left">
                                                     <div className="form-check form-check-radio text-dark">
                                                         <label className="form-check-label">
                                                             <input className={`form-check-input ${this.hasErrorFor('status_profile') ? 'is-invalid' : ''}`} type="radio"
                                                                    name="status_profile" id="status_profile"
                                                                    value="1" onChange={this.handleCheckClick} checked={this.state.status_profile === "1"}/>
                                                             <span className="form-check-sign"></span>
-                                                            Professionnel
+                                                            Je suis un Professionnel
                                                         </label>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <br/>
-                                            <div className="row">
+                                            <div className="row mb-2">
                                                 <div className="col-md-6">
                                                     <div className="input-group">
                                                         <div className="input-group-prepend">
@@ -149,7 +165,7 @@ class RegisterUser extends Component {
                                                         <i className="now-ui-icons users_circle-08"/>
                                                     </span>
                                                         </div>
-                                                        <input type="text" placeholder="Pseudo" aria-label="Pseudo"
+                                                        <input type="text" placeholder="Votre Pseudo" aria-label="Votre Pseudo"
                                                                required="required"
                                                                id="username"
                                                                className={`form-control ${this.hasErrorFor('username') ? 'is-invalid' : ''}`}
@@ -166,7 +182,7 @@ class RegisterUser extends Component {
                                                         <i className="now-ui-icons users_circle-08"/>
                                                     </span>
                                                         </div>
-                                                        <input type="text" placeholder="Nom complete" aria-label="Nom complete"
+                                                        <input type="text" placeholder="Votre Nom Complet" aria-label="Votre Nom Complet"
                                                                required="required"
                                                                id="first_name"
                                                                className={`form-control ${this.hasErrorFor('first_name') ? 'is-invalid' : ''}`}
@@ -176,10 +192,8 @@ class RegisterUser extends Component {
                                                         {this.renderErrorFor('first_name')}
                                                     </div>
                                                 </div>
-
                                             </div>
-
-                                            <div className="row">
+                                            <div className="row mb-2">
                                                 <div className="col-md-12">
                                                     <div className="input-group">
                                                         <div className="input-group-prepend">
@@ -187,7 +201,7 @@ class RegisterUser extends Component {
                                                             <i className="now-ui-icons ui-1_email-85"/>
                                                         </span>
                                                         </div>
-                                                        <input type="email" placeholder="Votre E-mail ..." aria-label="Votre E-mail ..."
+                                                        <input type="email" placeholder="Votre Adresse E-mail" aria-label="Votre Adresse E-mail"
                                                                required="required"
                                                                id="email"
                                                                className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
@@ -224,18 +238,15 @@ class RegisterUser extends Component {
 
                                             </div>
                                             */}
-
-
-
                                             <div className="row">
                                                 <div className="col-md-6">
                                                     <div className="input-group">
                                                         <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons ui-1_lock-circle-open"/>
-                                                        </span>
+                                                            <span className="input-group-text">
+                                                                <i className="now-ui-icons ui-1_lock-circle-open"/>
+                                                            </span>
                                                         </div>
-                                                        <input type="password" placeholder="Mot de pass" aria-label="Mot de passe"
+                                                        <input type={this.state.passwordType} placeholder="Votre Mot de Passe" aria-label="Votre Mot de Passe"
                                                                required="required"
                                                                id="password"
                                                                className={`form-control ${this.hasErrorFor('password') ? 'is-invalid' : ''}`}
@@ -245,6 +256,9 @@ class RegisterUser extends Component {
                                                                autoComplete="password" autoFocus />
                                                         {this.renderErrorFor('password')}
                                                     </div>
+                                                    <div className="ivemoShowRidePassword" onClick={this.handleHideShowPassword}>
+                                                        <i className={`fa fa-${this.state.passwordType === "password" ? "lock" : "unlock"}`}></i>
+                                                    </div>
                                                 </div>
                                                 <div className="col-md-6">
                                                     <div className="input-group">
@@ -253,7 +267,7 @@ class RegisterUser extends Component {
                                                             <i className="now-ui-icons ui-1_lock-circle-open"/>
                                                         </span>
                                                         </div>
-                                                        <input type="password" placeholder="Confirmer le mot de passe" aria-label="Confirmer le mot de passe"
+                                                        <input type={this.state.password_confirmationType} placeholder="Confirmez votre Mot de Passe" aria-label="Confirmez votre Mot de Passe"
                                                                required="required"
                                                                id="password_confirmation"
                                                                className={`form-control ${this.hasErrorFor('password_confirmation') ? 'is-invalid' : ''}`}
@@ -263,22 +277,22 @@ class RegisterUser extends Component {
                                                                autoComplete="password_confirmation" autoFocus />
                                                         {this.renderErrorFor('password_confirmation')}
                                                     </div>
+                                                    <div className="ivemoShowRidePassword" onClick={this.handleHideShowPasswordConfirmation}>
+                                                        <i className={`fa fa-${this.state.password_confirmationType === "password" ? "lock" : "unlock"}`}></i>
+                                                    </div>
                                                 </div>
                                             </div>
-
-
-                                            <div className="card-footer text-center">
-                                                <input type="submit" value="Se connecter" className="btn btn-primary btn-round"/>
+                                            <div className="card-footer text-center mb-4">
+                                                <input type="submit" value="S' Enregistrer" className="btn btn-primary btn-round btn-lg"/>
                                             </div>
-
+                                            <hr/>
+                                            <h5 className="card-description">Vous avez déjà un compte sur Ivemo? <Link to="/login" className="ivemoColorOrange">Connectez-vous</Link></h5>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
                     <FooterUserSite/>
                 </div>
             </div>
