@@ -67,13 +67,15 @@ class BlogannoncereservationController extends Controller
 
     public function apiblogannoncereservationinteresse(categoryannoncereservation $categoryannoncereservation)
     {
-        $blogannoncereservation = $categoryannoncereservation->blogannoncereservations()
+        $blogannoncereservation = BlogannoncereservationResource::collection($categoryannoncereservation->blogannoncereservations()
             ->with('user','categoryannoncereservation')
             ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
-            ->orderByRaw('RAND()')
+            //->orderByRaw('RAND()')
+            ->orderBy('created_at','DESC')
             ->where(['status' => 1,'status_admin' => 1])
-            ->take(3)->distinct()->get();
+            ->take(3)->distinct()->get());
+
         return response()->json($blogannoncereservation, 200);
     }
 
