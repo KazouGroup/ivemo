@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers\User\Comments;
 
-use App\Events\CommentAnnonceventEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CommentResource;
-use App\Model\annoncereservation;
 use App\Model\annoncetype;
 use App\Model\annoncevente;
-use App\Model\categoryannoncereservation;
 use App\Model\categoryannoncevente;
 use App\Model\city;
 use App\Model\comment;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits\Model;
+namespace App\Traits;
 
 use App\Model\abonne\subscribeblogannonce;
 use App\Model\abonne\subscribemployment;
@@ -28,11 +28,8 @@ trait Subscribedata
             subscribeblogannonce::class,
             'subscribeblogannonces',
             'user_id',
-            'member_id')
-            ->withTimeStamps();
+            'member_id')->withTimeStamps();
     }
-
-
 
     public function subscribedemployment()
     {
@@ -40,9 +37,6 @@ trait Subscribedata
             ->where('member_id', $this->id)
             ->first();
     }
-
-
-
 
 
     public function subscribemployments()

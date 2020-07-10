@@ -4,8 +4,8 @@ namespace App\Model;
 
 
 use App\Notifications\VerifyEmailUsers;
-use App\Traits\Model\Favoritesdata;
-use App\Traits\Model\Subscribedata;
+use App\Traits\Favoritesdata;
+use App\Traits\Subscribedata;
 use App\Traits\Subscribuserdata;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;

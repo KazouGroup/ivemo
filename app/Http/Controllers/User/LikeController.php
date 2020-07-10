@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Model\comment;
 use App\Model\responsecomment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {

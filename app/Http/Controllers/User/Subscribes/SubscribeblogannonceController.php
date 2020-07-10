@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\User\Subscribes;
 
 use App\Http\Controllers\Controller;
-use App\Model\annoncelocation;
-use App\Model\blogannoncelocation;
 use App\Model\user;
-use App\Model\favorite\favoritemployment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User\Comments;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CommentResource;
-use App\Model\blogannoncereservation;
 use App\Model\blogannoncevente;
 use App\Model\comment;
 use App\Model\responsecomment;
