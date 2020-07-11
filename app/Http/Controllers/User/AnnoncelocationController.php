@@ -285,7 +285,8 @@ class AnnoncelocationController extends Controller
         $annoncelocations = annoncelocation::with('user','city','annoncetype','categoryannoncelocation')
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
             ->WhereHas('city', function ($q) {$q->where('status',1);})
-            ->orderByRaw('RAND()')
+            ->orderBy('created_at','desc')
+            //->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
             ->take(10)->distinct()->get()->toArray();
 
@@ -307,7 +308,8 @@ class AnnoncelocationController extends Controller
             ->whereIn('city_id',[$city->id])
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
-            ->orderByRaw('RAND()')
+            ->orderBy('created_at','desc')
+            //->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
             ->take(10)->distinct()->get());
 

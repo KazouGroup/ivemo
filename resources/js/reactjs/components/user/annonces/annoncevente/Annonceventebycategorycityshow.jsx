@@ -475,7 +475,7 @@ class Annonceventebycategorycityshow extends Component {
 
                                                 <div className="text-right ml-auto">
                                                 {annoncevente.price ?
-                                                        <h5 className="text-dark"><b>{annoncevente.price.formatMoney(2,'.',',')} <small>{$money_country}</small></b></h5>
+                                                    <h5 className="text-dark"><b>{annoncevente.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country}</b></small> : <>{$money_country}</>}</b></h5>
                                                         :
                                                         null
                                                     }
@@ -531,7 +531,7 @@ class Annonceventebycategorycityshow extends Component {
                                                         <div className="col-md-6">
                                                             <h5 className="info-title"><b>Ce bien est au prix de</b></h5>
                                                             {annoncevente.price && (
-                                                                <h3 className="text-dark"><b>{annoncevente.price.formatMoney(2,'.',',')} <small>{$money_country}</small></b></h3>
+                                                                <h3 className="text-dark"><b>{annoncevente.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country}</b></small> : <>{$money_country}</>}</b></h3>
                                                             )}
                                                         </div>
                                                         <div className="col-md-6">
@@ -539,7 +539,7 @@ class Annonceventebycategorycityshow extends Component {
                                                             {annoncevente.award_price && (
                                                                 <p>
                                                                     <b>Ce bien revient a :</b>
-                                                                    <span className="title text-dark"><b> {annoncevente.award_price ? <>{annoncevente.award_price.formatMoney(2,'.',',')} <small>{$money_country} - le m<sup>2</sup></small></>:null} </b></span>
+                                                                    <span className="title text-dark"><b> {annoncevente.award_price ? <>{annoncevente.award_price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} - le m<sup>2</sup></b></small> : <>{$money_country}<small><b> - le m<sup>2</sup></b></small></>}</>:null} </b></span>
                                                                 </p>
                                                             )}
 
