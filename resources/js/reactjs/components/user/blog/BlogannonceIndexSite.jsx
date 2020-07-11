@@ -11,6 +11,7 @@ import BlogannonceListSkeleton from "../../inc/user/blog/BlogannonceListSkeleton
 import BlogannoncelocationForIndexList from "./blogannoncelocation/inc/BlogannoncelocationForIndexList";
 import BlogannonceventeForIndexList from "./blognnoncevente/inc/BlogannonceventeForIndexList";
 import BlogannoncereservationForIndexList from "./blogannoncereservation/inc/BlogannoncereservationForIndexList";
+import HelmetSite from "../../inc/user/HelmetSite";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -77,9 +78,7 @@ class BlogannonceIndexSite extends Component {
         return (
             <>
 
-                <Helmet>
-                    <title>Conseils tout savoir sur l'imobilier - {$name_site}</title>
-                </Helmet>
+                <HelmetSite title={`Conseils tout savoir sur l'imobilier - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 

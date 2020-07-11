@@ -177,7 +177,7 @@ class ContactFromEmployementIndex extends Component {
                 */}
                 <div className="submit text-center">
                     <button className="btn btn-primary btn-lg" type="submit">
-                        <b>Envoyer</b>
+                        <b>Postuler</b>
                     </button>
                 </div>
             </form>
