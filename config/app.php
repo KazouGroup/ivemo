@@ -9,6 +9,7 @@ return [
     'title'       => env('APP_TITLE', 'Title site'),
     'country'     => env('APP_COUNTRY', 'Italy'),
     'country_sigle'     => env('APP_COUNTRY_SIGLE', 'IT'),
+    'money_country'     => env('APP_MONEY_COUNTRY', 'FCFA'),
 
     'email'       => env('EMAIL_ADDRESS', 'temgua2013@yahoo.fr'),
     /*

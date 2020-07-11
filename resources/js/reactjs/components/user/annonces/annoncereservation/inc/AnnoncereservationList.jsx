@@ -136,7 +136,7 @@ class AnnoncereservationList extends PureComponent {
                                     </NavLink>
                                 </div>
                                 <div className="text-right ml-auto">
-                                    <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',') || "0"} <small><b>FCFA - {this.props.periodeannonce.name}</b></small></b></h5>
+                                    <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',') || "0"} <small><b>{$money_country} - {this.props.periodeannonce.name}</b></small></b></h5>
                                 </div>
                                 <div className="row">
                                     <div className="col-md-5 col-6">

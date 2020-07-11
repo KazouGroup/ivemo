@@ -480,7 +480,7 @@ class Annoncelocationbycategorycityshow extends Component {
 
                                                 <div className="text-right ml-auto">
                                                     {annoncelocation.price ?
-                                                        <h5 className="text-dark"><b>{annoncelocation.price.formatMoney(2,'.',',')} <small><b>FCFA - le mois</b></small></b></h5>
+                                                        <h5 className="text-dark"><b>{annoncelocation.price.formatMoney(2,'.',',')} <small><b>{$money_country} - le mois</b></small></b></h5>
                                                         :
                                                         <h5 className="text-dark"><b><Skeleton width={150} /></b></h5>
                                                     }
@@ -537,7 +537,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                             <h5 className="info-title"><b>Le loyer mensuel est de</b></h5>
                                                             {annoncelocation.price && (
 
-                                                                <h3 className="text-dark"><b>{annoncelocation.price.formatMoney(2,'.',',')} <small>FCFA - le mois</small></b></h3>
+                                                                <h3 className="text-dark"><b>{annoncelocation.price.formatMoney(2,'.',',')} <small>{$money_country} - le mois</small></b></h3>
                                                             )}
                                                         </div>
                                                         <div className="col-md-6">
@@ -545,7 +545,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                             {annoncelocation.award_price && (
                                                                 <p>
                                                                     <b>Dépôt de garantie :</b>
-                                                                    <span className="title text-dark"><b> {annoncelocation.award_price ? <>{annoncelocation.award_price.formatMoney(2,'.',',')} <small>FCFA</small></>:null} </b></span>
+                                                                    <span className="title text-dark"><b> {annoncelocation.award_price ? <>{annoncelocation.award_price.formatMoney(2,'.',',')} <small>{$money_country}</small></>:null} </b></span>
                                                                 </p>
                                                             )}
                                                         </div>

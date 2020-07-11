@@ -26,6 +26,7 @@ window.$userIvemo =  window.userIvemo.user;
 window.$guest = window.userIvemo.guest;
 window.$url_site = window.userIvemo.url_site;
 window.$country = window.userIvemo.country;
+window.$money_country = window.userIvemo.money_country;
 window.$country_sigle = window.userIvemo.country_sigle;
 window.$name_site = window.userIvemo.name_site;
 window.$phone_number = window.userIvemo.phone_number;

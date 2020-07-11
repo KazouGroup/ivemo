@@ -67,7 +67,7 @@ class AnnonceventeInteresseList extends Component {
                                             </div>
                                             <div className="text-right ml-auto">
                                                 <div className="col-md-12 col-12">
-                                                    <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h5>
+                                                    <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',')} <small>{$money_country}</small></b></h5>
                                                 </div>
 
                                             </div>

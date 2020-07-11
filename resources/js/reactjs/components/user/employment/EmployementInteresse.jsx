@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {PureComponent} from "react";
 import moment from 'moment'
 import EmployementInteresseList from "./inc/EmployementInteresseList";
 import Swal from "sweetalert2";
@@ -7,7 +7,7 @@ import EmploymentInteressListSkeleton from "../../inc/user/employment/Employment
 require("moment/min/locales.min");
 moment.locale('fr');
 
-class EmployementInteresse extends Component {
+class EmployementInteresse extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {

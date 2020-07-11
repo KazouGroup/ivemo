@@ -28,11 +28,12 @@
 <script>window.Ivemo = { csrfToken: '{{ csrf_token() }}' }; </script>
 <script>
     window.userIvemo = {!! json_encode([
-    'user' => auth()->user(),
-    'guest' => auth()->guest(),
-    'authcheck' => auth()->check(),
+     'user' => auth()->user(),
+     'guest' => auth()->guest(),
+     'authcheck' => auth()->check(),
      'url_site' => htmlspecialchars(config('app.url')),
      'country' => htmlspecialchars(config('app.country')),
+     'money_country' => htmlspecialchars(config('app.money_country')),
      'country_sigle' => htmlspecialchars(config('app.country_sigle')),
      'name_site' => htmlspecialchars(config('app.name')),
      'phone_number' => htmlspecialchars(config('app.phone')),

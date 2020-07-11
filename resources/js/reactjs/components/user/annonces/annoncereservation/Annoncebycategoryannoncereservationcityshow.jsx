@@ -411,7 +411,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
 
                                                 <div className="text-right ml-auto">
                                                     {annoncereservation.price ?
-                                                        <h5 className="text-dark"><b>{annoncereservation.price.formatMoney(2,'.',',') || "0"} <small><b>FCFA - {annoncereservation.periodeannonce.name}</b></small></b></h5>
+                                                        <h5 className="text-dark"><b>{annoncereservation.price.formatMoney(2,'.',',') || "0"} <small><b>{$money_country} - {annoncereservation.periodeannonce.name}</b></small></b></h5>
                                                         :
                                                         null
                                                     }

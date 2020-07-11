@@ -364,7 +364,7 @@ class EmployementShowUserSite extends Component {
                                                     <div className="text-right ml-auto">
 
                                                         {employment.price && (
-                                                            <h5 className="text-dark"><b>{employment.price.formatMoney(2,'.',',') || "0"} <small>FCFA</small></b></h5>
+                                                            <h5 className="text-dark"><b>{employment.price.formatMoney(2,'.',',') || "0"} <small>{$money_country}</small></b></h5>
                                                         )}
 
                                                     </div>
