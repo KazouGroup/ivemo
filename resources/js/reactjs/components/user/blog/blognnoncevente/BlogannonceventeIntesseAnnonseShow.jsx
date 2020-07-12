@@ -4,8 +4,6 @@ import moment from 'moment'
 import BlogannonceinteresseSkeleton from "../../../inc/user/blog/BlogannonceinteresseSkeleton";
 import {Button} from "reactstrap";
 import ButonFavorisLikedForInteressBlog from "../../../inc/vendor/ButonFavorisLikedForInteressBlog";
-import ButonFavoris from "../../../inc/vendor/ButonFavoris";
-import ButonLiked from "../../../inc/vendor/ButonLiked";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -153,7 +151,7 @@ class BlogannonceventeIntesseAnnonseShow extends Component {
 
                         <div className="row">
 
-                            {blogsinteresse.length ?
+                            {blogsinteresse.length >= 0 ?
                                 <>
                                     {blogsinteresse.map((item) => (
                                     <div key={item.id} className="col-md-4 mx-auto">

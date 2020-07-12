@@ -166,13 +166,14 @@ class AnnoncereservationController extends Controller
 
     public function apiannoncereservationinteresseslugin(categoryannoncereservation $categoryannoncereservation)
     {
-        $annoncereservation = $categoryannoncereservation->annoncereservations()->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
-            ->with('user','city','annoncetype','categoryannoncereservation','imagereservations')
+        $annoncereservation = AnnoncereservationResource::collection($categoryannoncereservation->annoncereservations()->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
+            ->with('user','city','annoncetype','periodeannonce','categoryannoncereservation','imagereservations')
             ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
-            ->orderByRaw('RAND()')
+            ->orderBy('created_at','desc')
+            //->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
-            ->take(4)->distinct()->get()->toArray();
+            ->take(4)->distinct()->get());
         return response()->json($annoncereservation, 200);
     }
 

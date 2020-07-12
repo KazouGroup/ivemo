@@ -81,6 +81,16 @@ Route::group(['prefix' => 'blogs'], function () {
     )->name('blogannoncelocation_site');
 
     Route::get(
+        'annonce_locations/{categoryannoncelocation}',
+        'BlogannoncelocationController@annonceblogcategorylocation'
+    )->name('blogannoncecategorylocation_site');
+
+    Route::get(
+        'annonce_locations/{categoryannoncelocation}/{date}/{blogannoncelocation}',
+        'BlogannoncelocationController@annonceblogcategorylocationslug'
+    )->name('blogannoncecategorylocationslug_site');
+
+    Route::get(
         'annonce_locations/ab/new',
         'BlogannoncelocationController@create'
     )->name('blogannoncelocationabnew_site');
@@ -91,11 +101,6 @@ Route::group(['prefix' => 'blogs'], function () {
     )->name('blogannoncecategorylocationstore_site');
 
     Route::get(
-        'annonce_locations/{categoryannoncelocation}',
-        'BlogannoncelocationController@annonceblogcategorylocation'
-    )->name('blogannoncecategorylocation_site');
-
-    Route::get(
         'annonce_locations/{blogannoncelocation}/edit',
         'BlogannoncelocationController@edit'
     )->name('blogannoncecategorylocationedit_site');
@@ -104,11 +109,6 @@ Route::group(['prefix' => 'blogs'], function () {
         'annonce_locations/{blogannoncelocation}',
         'BlogannoncelocationController@update'
     )->name('blogannoncecategorylocationupdate_site');
-
-    Route::get(
-        'annonce_locations/{categoryannoncelocation}/{date}/{blogannoncelocation}',
-        'BlogannoncelocationController@annonceblogcategorylocationslug'
-    )->name('blogannoncecategorylocationslug_site');
 
     Route::get(
         'annonce_locations_active/{id}',
