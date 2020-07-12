@@ -129,7 +129,7 @@ class AnnoncereservationList extends PureComponent {
 
                             <div className="col-md-7">
                                 <div className="text-left pull-left">
-                                    <NavLink to={`/annonce_reservations/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/`}>
+                                    <NavLink to={`/annonces_reservations/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/`}>
                                         <h6 className={`text-${this.props.categoryannoncereservation.color_name}`}>
                                             {this.props.categoryannoncereservation.name}
                                         </h6>
@@ -144,7 +144,7 @@ class AnnoncereservationList extends PureComponent {
                                     </div>
 
                                     <div className="col-md-7 col-6">
-                                        <NavLink to={`/annonce_reservations/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/`}>
+                                        <NavLink to={`/annonces_reservations/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/`}>
                                             <span className="ml-auto mr-auto">
                                                 <strong>{this.props.city.name} </strong>
                                             </span>
