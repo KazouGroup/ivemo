@@ -20,7 +20,7 @@ class CommentViewList extends PureComponent {
         return (
             <>
                 <h6 className="media-heading">{this.props.user.first_name}
-                    <small className="text-muted">· {moment(this.props.created_at).format('LL')}</small>
+                    <small className="text-muted">· {moment(this.props.created_at).fromNow()}</small>
                 </h6>
                 <ReadMoreAndLess
                     className="read-more-content"

@@ -90,7 +90,7 @@ class ContactFromEmployementIndex extends Component {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
+            $.notify("Ooop! Quelque chose ne va pas. Essayez plus tard ...", {
                 allow_dismiss: false,
                 type: 'danger',
                 animate: {
@@ -177,7 +177,7 @@ class ContactFromEmployementIndex extends Component {
                 */}
                 <div className="submit text-center">
                     <button className="btn btn-primary btn-lg" type="submit">
-                        <b>Envoyer</b>
+                        <b>Postuler</b>
                     </button>
                 </div>
             </form>

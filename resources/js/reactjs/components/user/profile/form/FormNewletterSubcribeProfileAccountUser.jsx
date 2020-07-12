@@ -49,7 +49,7 @@ class FormNewletterSubcribeProfileAccountUser extends PureComponent {
             .then(() => {
 
                 $.notify({
-                        message: `Merci de vous être abonné à notre newsletter`
+                        message: `Merci de vous être abonné à ma newsletter`
                     },
                     {
                         allow_dismiss: false,
@@ -118,8 +118,6 @@ class FormNewletterSubcribeProfileAccountUser extends PureComponent {
                         </button>
                     </div>
                 </Row>
-
-
             </Form>
 
         )

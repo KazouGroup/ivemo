@@ -32,7 +32,7 @@ class NavProfileAccountPrivate extends Component {
                                     <div className="card card-plain">
                                         <div className="card-header" role="tab" id="headingOne">
                                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                <b>Configuration du profile</b>
+                                                <b>Configuration du profil</b>
                                             </a>
                                         </div>
 
@@ -41,10 +41,10 @@ class NavProfileAccountPrivate extends Component {
                                                 <table>
                                                     <tbody>
                                                     <tr>
-                                                        <td> <Link to={`/profile/account/`}>Profile</Link></td>
+                                                        <td> <Link to={`/profile/account/`}>Profil</Link></td>
                                                     </tr>
                                                     <tr>
-                                                        <td> <Link to={`/profile/${userData.profile.slug}/account/`}>Ajouter les information au profile</Link></td>
+                                                        <td> <Link to={`/profile/${userData.profile.slug}/account/`}>Ajouter des informations au profil</Link></td>
                                                     </tr>
                                                     <tr>
                                                         <td> <NavLink to={`/profile/change_password/`} >Changer le mot de passe</NavLink></td>
@@ -53,10 +53,7 @@ class NavProfileAccountPrivate extends Component {
                                                 </table>
                                             </div>
                                         </div>
-
-
                                     </div>
-
                                 </div>
                             </div>
                         </div>

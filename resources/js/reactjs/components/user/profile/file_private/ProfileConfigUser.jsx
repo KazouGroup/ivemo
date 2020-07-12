@@ -114,7 +114,7 @@ class ProfileConfigUser extends Component {
             .then(() => {
                 $.notify({
                         // title: 'Update FAQ',
-                        message: 'Votre profile a été mise à jour avec succès'
+                        message: 'Votre profil a été mis à jour avec succès'
                     },
                     {
                         allow_dismiss: false,
@@ -132,7 +132,7 @@ class ProfileConfigUser extends Component {
                 this.setState({
                     errors: error.response.data.errors
                 });
-            $.notify("Ooop! Something wrong. Try later...", {
+            $.notify("Ooopss! Something wrong. Try later...", {
                 allow_dismiss: false,
                 type: 'danger',
                 animate: {
@@ -180,35 +180,24 @@ class ProfileConfigUser extends Component {
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
-
                     <nav className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
-
-
                     <div className="wrapper">
-
                         <div className="main main-raised">
-
                             <div className="container">
                                 <br />
-
                                 <Form role="form" id="contact-form" onSubmit={this.updateItem} acceptCharset="UTF-8">
-
                                     <div className="row">
-
                                         <div className="col-lg-4 col-md-12 mx-auto">
 
                                             <NavProfileAccountPrivate />
 
                                         </div>
-
-
                                         <div className="col-lg-8 col-md-12 mx-auto">
-
                                             <div className="card">
-                                                <CardBody>
 
+                                                <CardBody>
                                                     <div className="card-header d-flex align-items-center">
                                                         <div className="d-flex align-items-center">
                                                             <NavLink to={`/pro/${$userIvemo.slug}/`}>
@@ -250,7 +239,7 @@ class ProfileConfigUser extends Component {
                                                                 {this.state.site_internet && (
                                                                     <div className="col-md-6 col-6">
                                                                         <a href={`${this.state.site_internet}`} target="_blank" title="Site internet de agence">
-                                                                            <small><b>Consulter le site de votre agence</b></small>
+                                                                            <small><b>Consulter le site web de votre agence</b></small>
                                                                         </a>
                                                                     </div>
                                                                 )}
@@ -473,9 +462,9 @@ class ProfileConfigUser extends Component {
                                                                                         <div className="input-group">
                                                                                             <div
                                                                                                 className="input-group-prepend">
-                                                                    <span className="input-group-text">
-                                                                        <i className="now-ui-icons objects_globe"/>
-                                                                    </span>
+                                                                                            <span className="input-group-text">
+                                                                                                <i className="now-ui-icons objects_globe"/>
+                                                                                            </span>
                                                                                             </div>
                                                                                             <input id='site_internet'
                                                                                                    type='url'
@@ -491,20 +480,19 @@ class ProfileConfigUser extends Component {
                                                                                         </div>
                                                                                     </div>
                                                                                     <div className="col-md-6 col-6">
-
                                                                                         <label htmlFor="url_site"><b>Twitter </b></label>
                                                                                         <div className="input-group">
                                                                                             <div
                                                                                                 className="input-group-prepend">
-                                                                    <span className="input-group-text">
-                                                                        <i className="now-ui-icons objects_globe"/>
-                                                                    </span>
+                                                                                                <span className="input-group-text">
+                                                                                                    <i className="now-ui-icons objects_globe"/>
+                                                                                                </span>
                                                                                             </div>
                                                                                             <input id='twitter_link'
                                                                                                    type='text'
                                                                                                    className={`form-control ${this.hasErrorFor('twitter_link') ? 'is-invalid' : ''}`}
                                                                                                    name='twitter_link'
-                                                                                                   placeholder="Lien de profile "
+                                                                                                   placeholder="Lien de profil "
                                                                                                    aria-label="Lien de profile "
                                                                                                    autoComplete="Lien de profile twitter"
                                                                                                    value={this.state.twitter_link || ''}
@@ -513,7 +501,6 @@ class ProfileConfigUser extends Component {
                                                                                             {this.renderErrorFor('twitter_link')}
                                                                                         </div>
                                                                                     </div>
-
                                                                                 </div>
 
                                                                                 <div className="row">
@@ -522,9 +509,9 @@ class ProfileConfigUser extends Component {
                                                                                         <div className="input-group">
                                                                                             <div
                                                                                                 className="input-group-prepend">
-                                                                    <span className="input-group-text">
-                                                                        <i className="now-ui-icons objects_globe"/>
-                                                                    </span>
+                                                                                                    <span className="input-group-text">
+                                                                                                        <i className="now-ui-icons objects_globe"/>
+                                                                                                    </span>
                                                                                             </div>
                                                                                             <input id='linkedin_link'
                                                                                                    type='url'
@@ -545,9 +532,9 @@ class ProfileConfigUser extends Component {
                                                                                         <div className="input-group">
                                                                                             <div
                                                                                                 className="input-group-prepend">
-                                                                    <span className="input-group-text">
-                                                                        <i className="now-ui-icons objects_globe"/>
-                                                                    </span>
+                                                                                                <span className="input-group-text">
+                                                                                                    <i className="now-ui-icons objects_globe"/>
+                                                                                                </span>
                                                                                             </div>
                                                                                             <input id='instagram_link'
                                                                                                    type='text'
@@ -562,7 +549,6 @@ class ProfileConfigUser extends Component {
                                                                                             {this.renderErrorFor('instagram_link')}
                                                                                         </div>
                                                                                     </div>
-
                                                                                 </div>
 
                                                                                 <div className={`row`}>
@@ -571,9 +557,9 @@ class ProfileConfigUser extends Component {
                                                                                         <label htmlFor="title"><b>Facebook</b></label>
                                                                                         <div className="input-group">
                                                                                             <div className="input-group-prepend">
-                                                                    <span className="input-group-text">
-                                                                         <i className="now-ui-icons objects_globe"/>
-                                                                    </span>
+                                                                                                <span className="input-group-text">
+                                                                                                    <i className="now-ui-icons objects_globe"/>
+                                                                                                </span>
                                                                                             </div>
                                                                                             <input id='facebook_link'
                                                                                                    type='text'
@@ -590,13 +576,12 @@ class ProfileConfigUser extends Component {
                                                                                     </div>
 
                                                                                     <div className="col-md-6">
-
                                                                                         <label htmlFor="title"><b>Youtube</b></label>
                                                                                         <div className="input-group">
                                                                                             <div className="input-group-prepend">
-                                                                    <span className="input-group-text">
-                                                                         <i className="now-ui-icons objects_globe"/>
-                                                                    </span>
+                                                                                                <span className="input-group-text">
+                                                                                                    <i className="now-ui-icons objects_globe"/>
+                                                                                                </span>
                                                                                             </div>
                                                                                             <input id='youtube_link'
                                                                                                    type='text'
@@ -644,7 +629,6 @@ class ProfileConfigUser extends Component {
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
 
                                                     <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
@@ -660,9 +644,7 @@ class ProfileConfigUser extends Component {
                                                                     <div className="row">
                                                                         <div className="col-md-12">
                                                                             <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-
                                                                                 <div className="row">
-
                                                                                     <div className="col-md-12 mx-auto">
                                                                                         <div className="form-check">
                                                                                             <label
@@ -670,16 +652,13 @@ class ProfileConfigUser extends Component {
                                                                                                 <input className="form-check-input"
                                                                                                     type="checkbox" name="status_avis" checked={this.state.status_avis} value={this.state.status_avis}  onChange={this.handleCheckClick}/>
                                                                                                     <span className="form-check-sign"/>
-                                                                                                    <b>Afficher ou masques les avis des utilisateurs</b>
+                                                                                                    <b>Affichez ou masquez les avis des utilisateurs</b>
                                                                                             </label>
                                                                                         </div>
-
                                                                                     </div>
-
                                                                                 </div>
 
                                                                                 <div className="row">
-
                                                                                     <div className="col-md-12 mx-auto">
                                                                                         <div className="form-check">
                                                                                             <label
@@ -687,21 +666,17 @@ class ProfileConfigUser extends Component {
                                                                                                 <input className="form-check-input"
                                                                                                     type="checkbox" name="status_team_user" checked={this.state.status_team_user} value={this.state.status_team_user}  onChange={this.handleStatusTeamUser}/>
                                                                                                     <span className="form-check-sign"/>
-                                                                                                    <b>Afficher ou masques votre team</b>
+                                                                                                    <b>Affichez ou masquez votre team</b>
                                                                                             </label>
                                                                                         </div>
-
                                                                                     </div>
-
                                                                                 </div>
-
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
 
                                                     <div className="submit text-center">
@@ -712,29 +687,16 @@ class ProfileConfigUser extends Component {
                                                 </CardBody>
 
                                             </div>
-
                                         </div>
-
-
-
-
                                     </div>
 
                                 </Form>
 
                             </div>
-
-
-
                         </div>
-
-
-
-
                         <FooterBigUserSite />
                     </div>
                 </div>
-
 
             </>
 

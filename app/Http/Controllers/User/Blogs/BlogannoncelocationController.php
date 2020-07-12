@@ -11,8 +11,6 @@ use App\Model\blogannoncelocation;
 use App\Model\categoryannoncelocation;
 use App\Model\user;
 use App\Services\BlogannoncelocationService;
-use Illuminate\Support\Facades\Auth;
-use Mews\Purifier\Facades\Purifier;
 use Symfony\Component\HttpFoundation\Response;
 use File;
 

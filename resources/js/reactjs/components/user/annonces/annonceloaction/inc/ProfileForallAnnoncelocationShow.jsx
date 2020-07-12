@@ -35,7 +35,7 @@ class ProfileForallAnnoncelocationShow extends Component {
                             : <Skeleton circle={false} height={40} width={80} />}
                         <div className="mx-3">
                             <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{this.props.user.first_name} </b>
-                                <small className="d-block text-muted">{this.props.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(this.props.user.created_at).format('LL')}</small>
+                                <small className="d-block text-muted">{this.props.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(this.props.created_at).format('LL')}</small>
                             </NavLink>
                         </div>
                     </div>
@@ -105,13 +105,17 @@ class ProfileForallAnnoncelocationShow extends Component {
                                         <Button onClick={() => this.deleteItem(this.props.id)}
                                                 className="btn btn-icon btn-sm btn-danger" title="Supprimer cette annonce">
                                             <i className="now-ui-icons ui-1_simple-remove"/>
-                                        </Button>{" "}
+                                        </Button>
                                     </>
                                 )}
 
                             </>
                         )}
 
+                        <button type="button" title="Signaler" onClick={() => this.props.signalerUser(this.props)}
+                                className="btn btn-instagram btn-icon btn-sm">
+                            <i className="far fa-flag"></i>
+                        </button>
                     </div>
                 </div>
                 <div className="card-title">

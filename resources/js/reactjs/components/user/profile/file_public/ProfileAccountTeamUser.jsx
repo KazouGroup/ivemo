@@ -48,7 +48,7 @@ class ProfileAccountTeamUser extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Donné suprimée avec success'
+                            message: 'Donné suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -66,7 +66,7 @@ class ProfileAccountTeamUser extends Component {
 
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {

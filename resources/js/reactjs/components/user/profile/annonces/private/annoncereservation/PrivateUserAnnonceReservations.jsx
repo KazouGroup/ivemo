@@ -71,7 +71,7 @@ class PrivateUserAnnonceReservations extends Component {
 
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -106,7 +106,7 @@ class PrivateUserAnnonceReservations extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                         // title: 'Update FAQ',
-                        message: 'Annonce désactiver avec succès'
+                        message: 'Annonce désactivée avec succès'
                     },
                         {
                             allow_dismiss: false,
@@ -125,7 +125,7 @@ class PrivateUserAnnonceReservations extends Component {
 
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -160,7 +160,7 @@ class PrivateUserAnnonceReservations extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                         // title: 'Update',
-                        message: 'Annonce suprimée avec success'
+                        message: 'Annonce supprimée avec succès'
 
                     },
                         {
@@ -179,7 +179,7 @@ class PrivateUserAnnonceReservations extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -222,22 +222,15 @@ class PrivateUserAnnonceReservations extends Component {
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
-
                     <nav className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
-
                     <div className="wrapper">
-
                         <div className="main main-raised">
-
                             <div className="container">
                                 <br />
-
                                 <div className="row">
-
                                     <div className="col-lg-4 col-md-12 mx-auto">
-
                                         <div className="submit text-center">
                                             <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
                                                 <i className="now-ui-icons ui-1_simple-add"/> <b>Ajouter une nouvelle annonce sur la reservation</b>
@@ -263,19 +256,9 @@ class PrivateUserAnnonceReservations extends Component {
                                         )}
 
                                     </div>
-
-
                                 </div>
-
-
-
                             </div>
-
-
-
                         </div>
-
-
                         <FooterBigUserSite />
                     </div>
                 </div>

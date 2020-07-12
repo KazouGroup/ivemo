@@ -26,6 +26,7 @@ window.$userIvemo =  window.userIvemo.user;
 window.$guest = window.userIvemo.guest;
 window.$url_site = window.userIvemo.url_site;
 window.$country = window.userIvemo.country;
+window.$money_country = window.userIvemo.money_country;
 window.$country_sigle = window.userIvemo.country_sigle;
 window.$name_site = window.userIvemo.name_site;
 window.$phone_number = window.userIvemo.phone_number;
@@ -48,16 +49,18 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
-// import Echo from 'laravel-echo';
-//
-//  window.Pusher = require('pusher-js');
-//
-//  window.Echo = new Echo({
+//import Echo from 'laravel-echo';
+
+//window.Pusher = require('pusher-js');
+
+//window.Echo = new Echo({
 //     broadcaster: 'pusher',
-//      key: process.env.MIX_PUSHER_APP_KEY,
-//      encrypted: true,
-//      wsHost: window.location.hostname,
-//      wsPort: 6001,
-//      disableStats: true,
-//
-//   });
+//     key: 'd9e3bf7c67f6c22c7f0f',
+//     cluster: 'eu',
+     //key: process.env.MIX_PUSHER_APP_KEY,
+     //encrypted: true,
+     //broadcaster: 'socket.io',
+//     wsHost: window.location.hostname,
+//     wsPort: 6001,
+//     disableStats: true,
+// });

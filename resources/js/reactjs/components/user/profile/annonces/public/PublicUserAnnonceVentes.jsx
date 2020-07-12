@@ -73,7 +73,7 @@ class PublicUserAnnonceVentes extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -108,7 +108,7 @@ class PublicUserAnnonceVentes extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec success'
+                            message: 'Annonce supprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -126,7 +126,7 @@ class PublicUserAnnonceVentes extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -168,18 +168,14 @@ class PublicUserAnnonceVentes extends Component {
                 </Helmet>
 
                 <div className="landing-page sidebar-collapse">
-
-
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
                         <NavUserSite />
                     </nav>
-
                     <div className="wrapper">
                         <div className="page-header page-header-mini">
                             <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
                             </div>
                             <div className="content-center">
-
                                 <h1 className="title">{userannonceventePublick.first_name}</h1>
                                 <Link to={`/pro/${userannonceventePublick.slug}/`} className="text-white">
                                     <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userannonceventePublick.first_name}</b>
@@ -235,9 +231,7 @@ class PublicUserAnnonceVentes extends Component {
 
                                                                 <NavLinkPublicAnnonceUser {...this.props} {...userannonceventePublick}/>
 
-
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -259,7 +253,6 @@ class PublicUserAnnonceVentes extends Component {
                                                                 <NavLinkPublicEmploymentUser {...this.props} {...userannonceventePublick}/>
 
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -281,13 +274,11 @@ class PublicUserAnnonceVentes extends Component {
                                                                 <NavLinkPublicBlogannoncesUser {...this.props} {...userannonceventePublick}/>
 
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
 
                                         <div className="card">
                                                 <div className="card-body">
@@ -307,17 +298,13 @@ class PublicUserAnnonceVentes extends Component {
                                             </>
                                         }
 
-
-
                                     </div>
 
                                     {userannonceventePublick.status_profile === 0 ?
 
                                         <div className="col-lg-8 col-md-12 mx-auto">
                                             <div className="card">
-
                                                 <div className="card-body">
-
                                                     <div className="card-header text-center">
                                                         <h4 className="card-title"><b>Pour poster votre bien. </b></h4>
                                                         <a href="#"
@@ -325,7 +312,6 @@ class PublicUserAnnonceVentes extends Component {
                                                             <b>Devenez professionnel pour poster votre bien</b>
                                                         </a>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -346,7 +332,6 @@ class PublicUserAnnonceVentes extends Component {
 
                                             <div className="card">
                                                 <div className="card-body">
-
                                                     <div className="card-header text-center">
                                                         <h4 className="card-title"><b>Contacter {userannonceventePublick.first_name}</b></h4>
                                                     </div>
@@ -357,9 +342,7 @@ class PublicUserAnnonceVentes extends Component {
                                             </div>
 
                                             <div className="card card-raised card-form-horizontal">
-
                                                 <div className="card-body">
-
                                                     <div className="card-header text-center">
                                                         <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
                                                         <p className="card-title">
@@ -371,14 +354,11 @@ class PublicUserAnnonceVentes extends Component {
 
                                                 </div>
                                             </div>
-
                                         </div>
                                     }
 
                                 </div>
-
                             </div>
-
                         </div>
 
                         <FooterBigUserSite />

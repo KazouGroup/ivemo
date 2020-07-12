@@ -20,7 +20,7 @@ class PrivateUserFavoritEmployments extends Component {
 
         };
 
-        this.unfavoriteItem = this.unfavoriteItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
     }
 
@@ -30,7 +30,7 @@ class PrivateUserFavoritEmployments extends Component {
         })
     }
 
-    unfavoriteItem(id){
+    favoriteItem(item){
         Swal.fire({
             title: 'Retirer cette annonce?',
             text: "êtes vous sure de vouloir retirer cette annonce de vos favoris?",
@@ -46,7 +46,7 @@ class PrivateUserFavoritEmployments extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('employments_unfavorite.unfavorite',id);
+                let url = route('employments_unfavorite.unfavorite',item.id);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
@@ -69,7 +69,7 @@ class PrivateUserFavoritEmployments extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooopss! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animated bounceInDown',
@@ -98,7 +98,7 @@ class PrivateUserFavoritEmployments extends Component {
         const mapEmployments = favoritesdata.length >= 0 ? (
             favoritesdata.slice(0,visiable).map(item => {
                 return(
-                    <PrivateUserFavoritEmployementList key={item.id} {...item} unfavoriteItem={this.unfavoriteItem}/>
+                    <PrivateUserFavoritEmployementList key={item.id} {...item} favoriteItem={this.favoriteItem}/>
                 )
             })
         ):(
@@ -109,21 +109,14 @@ class PrivateUserFavoritEmployments extends Component {
                 <HelmetSite title={`Mes favoris Emplois, Formation & Services ${$userIvemo.first_name || 'Profile'} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
-
                     <nav className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
-
-
                     <div className="wrapper">
-
                         <div className="main main-raised">
-
                             <div className="container">
                                 <br />
-
                                 <div className="row">
-
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <NavlinkfavoritesconfigurationUser {...userfavorites} />
@@ -152,13 +145,8 @@ class PrivateUserFavoritEmployments extends Component {
                                         )}
 
                                     </div>
-
-
                                 </div>
-
-
                             </div>
-
                         </div>
 
                         <FooterBigUserSite />

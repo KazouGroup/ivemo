@@ -29,11 +29,9 @@ class PublicUserEmployments extends Component {
 
         this.deleteItem = this.deleteItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
-        this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
         this.subscribeItem = this.subscribeItem.bind(this);
-        this.unsubscribedItem = this.unsubscribedItem.bind(this);
     }
     loadmoresItem() {
         this.setState((old) => {
@@ -41,24 +39,43 @@ class PublicUserEmployments extends Component {
         })
     }
 
-    favoriteItem(id) {
-        const url = route('employments_favorite.favorite', [id]);
+    favoriteItem(item) {
+        const url = route('employments_favorite.favorite', [item.id]);
         dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Annonce ajoutée à vos favoris",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
+
+            if(item.bookmarked){
+                $.notify({
+                        message: "Annonce retirée de vos favoris",
                     },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+            }else {
+                $.notify({
+                        message: "Annonce ajoutée à vos favoris",
                     },
-                });
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+            }
             this.loadItems();
 
         }).catch(() => {
@@ -73,88 +90,44 @@ class PublicUserEmployments extends Component {
         })
     }
 
-    unfavoriteItem(id) {
-        const url = route('employments_unfavorite.unfavorite', [id]);
+    subscribeItem(item) {
+        const url = route('employments_subscribe.subscribe', [item.id]);
         dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Annonce retirée de vos favoris",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
-                    },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
-                    },
-                });
-            this.loadItems();
 
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
+            if(item.subscribedemployment){
+                $.notify({
+                        message: "Notifications desactivé",
+                    },
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+            }else {
+                $.notify({
+                        message: "Notifications activé",
+                    },
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+            }
 
-    subscribeItem(id) {
-        const url = route('employments_subscribe.subscribe', [id]);
-        dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Notifications activé",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
-                    },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
-                    },
-                });
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    unsubscribedItem(id) {
-        const url = route('employments_unsubscribe.unsubscribe', [id]);
-        dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Notifications desactivé",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
-                    },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
-                    },
-                });
             this.loadItems();
 
         }).catch(() => {
@@ -298,7 +271,7 @@ class PublicUserEmployments extends Component {
             employments.slice(0, visiable).map(item => {
                 return(
 
-                    <EmployementList key={item.id} {...item} favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
+                    <EmployementList key={item.id} {...item} favoriteItem={this.favoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
                 )
             })
         ):(
@@ -345,7 +318,6 @@ class PublicUserEmployments extends Component {
                                                                            titleToltipeSubscribed={`Abonnez vous pour recevoir tous annonces des emploies et services postées par`}
                                                                            titleToltipeUnsubscribed={`Ne plus etre notifier des annonces des emploies et services postées par`}
                                                                            subscribeItem={this.subscribeItem}
-                                                                           unsubscribedItem={this.unsubscribedItem}
                                                                            {...useremploymentPublick}/>
                                             </div>
                                         </>

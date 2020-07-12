@@ -14,6 +14,8 @@ class AnnonceventeResource extends JsonResource
      */
     public function toArray($request)
     {
+        $award_price = (int) ($this->price/$this->surface);
+
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -25,7 +27,7 @@ class AnnonceventeResource extends JsonResource
             'pieces' => $this->pieces,
             'price' => $this->price,
             'district' => $this->district,
-            'award_price' => $this->award_price,
+            'award_price' => $award_price,
             'user' => $this->user,
             'user_id' => $this->user_id,
             'city' => $this->city,

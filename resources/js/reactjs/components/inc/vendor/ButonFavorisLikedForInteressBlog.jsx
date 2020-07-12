@@ -13,52 +13,68 @@ class ButonFavorisLikedForInteressBlog extends Component {
     }
     render() {
         return (
-           <>
 
-               {$guest ?
-                   <>
-                       <a style={{cursor:"pointer"}} data-toggle="modal" data-target="#loginModal"
-                          className="nav-item">
-                           <i className="now-ui-icons ui-2_favourite-28"></i>
-                           <b>{this.data_countlikeFormatter(this.props.countlikes)}</b> ·
-                       </a>
-                       <a style={{cursor:"pointer"}} data-toggle="modal" data-target="#loginModal"
-                          className="nav-item">
-                           <i className="now-ui-icons location_bookmark"/>
-                       </a>
-                   </>
+            <div className="card-footer">
+                <div className="author">
+                    {this.props.user.avatar === null ?
+                        <img className="avatar" alt={this.props.user.first_name}
+                             src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>
+                        :
+                        <img className="avatar" alt={this.props.user.first_name}
+                             src={this.props.user.avatar}/>
+                    }
+                    <b>{(this.props.user.first_name.length > 15 ? this.props.user.first_name.substring(0, 15) + "..." : this.props.user.first_name)}</b>
+                </div>
+                <div className="stats stats-right">
 
-                   :
-                   <>
-                       {this.props.likeked ?
+                    {$guest ?
+                        <>
+                            <a style={{cursor:"pointer"}} data-toggle="modal" data-target="#loginModal"
+                               className="nav-item">
+                                <i className="now-ui-icons ui-2_favourite-28"></i>
+                                <b>{this.data_countlikeFormatter(this.props.countlikes)}</b> ·
+                            </a>
+                            <a style={{cursor:"pointer"}} data-toggle="modal" data-target="#loginModal"
+                               className="nav-item">
+                                <i className="now-ui-icons location_bookmark"/>
+                            </a>
+                        </>
 
-                           <a style={{cursor:"pointer"}} onClick={() => this.props.unlikeItem(this.props.id)}
-                              className="nav-item" title="Je n'aime plus cette article">
-                               <i className="now-ui-icons ui-2_favourite-28 text-danger"></i>
-                               <b>{this.data_countlikeFormatter(this.props.countlikes)}</b> ·
-                           </a>
-                           :
-                           <a style={{cursor:"pointer"}} onClick={() => this.props.likeItem(this.props.id)}
-                              className="nav-item" title="J'aime cette article">
-                               <i className="now-ui-icons ui-2_favourite-28"></i>
-                               <b>{this.data_countlikeFormatter(this.props.countlikes)}</b> ·
-                           </a>
-                       }
+                        :
+                        <>
+                            {this.props.likeked ?
 
-                       {this.props.bookmarked ?
-                           <a style={{cursor:"pointer"}} onClick={() => this.props.unfavoriteItem(this.props.id)}
-                              className="nav-item" title="Retirer de vos favoris">
-                               <i className="now-ui-icons location_bookmark text-danger"></i>
-                           </a>
-                           :
-                           <a style={{cursor:"pointer"}} onClick={() => this.props.favoriteItem(this.props.id)}
-                              className="nav-item" title="Ajouter à vos favoris">
-                               <i className="now-ui-icons location_bookmark"></i>
-                           </a>
-                       }
-                   </>
-               }
-           </>
+                                <a style={{cursor:"pointer"}} onClick={() => this.props.unlikeItem(this.props.id)}
+                                   className="nav-item" title="Je n'aime plus cette article">
+                                    <i className="now-ui-icons ui-2_favourite-28 text-danger"></i>
+                                    <b>{this.data_countlikeFormatter(this.props.countlikes)}</b> ·
+                                </a>
+                                :
+                                <a style={{cursor:"pointer"}} onClick={() => this.props.likeItem(this.props.id)}
+                                   className="nav-item" title="J'aime cette article">
+                                    <i className="now-ui-icons ui-2_favourite-28"></i>
+                                    <b>{this.data_countlikeFormatter(this.props.countlikes)}</b> ·
+                                </a>
+                            }
+
+                            {this.props.bookmarked ?
+                                <a style={{cursor:"pointer"}} onClick={() => this.props.unfavoriteItem(this.props.id)}
+                                   className="nav-item" title="Retirer de vos favoris">
+                                    <i className="now-ui-icons location_bookmark text-danger"></i>
+                                </a>
+                                :
+                                <a style={{cursor:"pointer"}} onClick={() => this.props.favoriteItem(this.props.id)}
+                                   className="nav-item" title="Ajouter à vos favoris">
+                                    <i className="now-ui-icons location_bookmark"></i>
+                                </a>
+                            }
+                        </>
+                    }
+
+                </div>
+
+            </div>
+
         );
     }
 }

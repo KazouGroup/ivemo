@@ -9,6 +9,7 @@ return [
     'title'       => env('APP_TITLE', 'Title site'),
     'country'     => env('APP_COUNTRY', 'Italy'),
     'country_sigle'     => env('APP_COUNTRY_SIGLE', 'IT'),
+    'money_country'     => env('APP_MONEY_COUNTRY', 'FCFA'),
 
     'email'       => env('EMAIL_ADDRESS', 'temgua2013@yahoo.fr'),
     /*
@@ -189,8 +190,9 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\HorizonServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
 

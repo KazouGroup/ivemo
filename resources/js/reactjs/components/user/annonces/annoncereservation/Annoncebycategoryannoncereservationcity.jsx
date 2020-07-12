@@ -27,13 +27,14 @@ class Annoncebycategoryannoncereservationcity extends Component {
         this.statusItem = this.statusItem.bind(this);
     }
 
+
     favoriteItem(item) {
         const url = route('favoriteannoncereservations_favorite.favorite', [item.id]);
         dyaxios.get(url).then(() => {
 
             if(item.bookmarked){
                 $.notify({
-                        message: "Annonce ajoutée à vos favoris",
+                        message: "Annonce retirée de vos favoris",
                     },
                     {
                         allow_dismiss: false,
@@ -49,7 +50,7 @@ class Annoncebycategoryannoncereservationcity extends Component {
                     });
             }else {
                 $.notify({
-                        message: "Annonce retirée de vos favoris",
+                        message: "Annonce ajoutée à vos favoris",
                     },
                     {
                         allow_dismiss: false,

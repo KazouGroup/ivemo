@@ -66,8 +66,8 @@ class AnnonceservationInteresse extends Component {
                 {visiable < annoncereservationsinteresse.length && (
                     <Row>
                         <div className="col-md-4 ml-auto mr-auto text-center">
-                            <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
-                                <b>Voir plus d'annonces</b>
+                            <button type="button" onClick={this.loadmoresItem} className="btn btn-primary">
+                                <b>Afficher plus d'annonces</b>
                             </button>
                         </div>
                     </Row>

@@ -1,4 +1,4 @@
-import React, { Component,Fragment } from "react";
+import React, { PureComponent,Fragment } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import {Button, Form} from "reactstrap";
 import FieldInput from "../../inc/vendor/FieldInput";
@@ -12,7 +12,7 @@ import StatusComment from "./inc/StatusComment";
 import CommentListSkeleton from "../../inc/user/comment/CommentListSkeleton";
 
 
-class AnnoncereservationcommentIndex extends Component {
+class AnnoncereservationcommentIndex extends PureComponent {
     constructor(props) {
         super(props);
         //itemData correspont a une variable aleatoire donner pour faire le traitement
@@ -190,14 +190,6 @@ class AnnoncereservationcommentIndex extends Component {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
-                allow_dismiss: false,
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
         })
     }
 
@@ -238,14 +230,6 @@ class AnnoncereservationcommentIndex extends Component {
             }).catch(error => {
             this.setState({
                 errors: error.response.data.errors
-            });
-            $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
-                allow_dismiss: false,
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
             });
         })
     }
@@ -591,7 +575,20 @@ class AnnoncereservationcommentIndex extends Component {
 
 
                                 <div className="media-area">
+                                    <br/>
+                                    {!$guest && (
+                                        <>
+                                            {!editcomment && !responsecomment && !editresponsecomment && (
+                                                <Form onSubmit={this.sendcommentItem} acceptCharset="UTF-8">
 
+                                                    <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
+                                                                 renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
+                                                                 handleFieldChange={this.handleFieldChange} namesubmit={`POSTER MON COMMENTAIRE`}/>
+
+                                                </Form>
+                                            )}
+                                        </>
+                                    )}
                                     <>
                                         {comments.slice(0, visiablecomment).map((item) => (
 
@@ -653,7 +650,7 @@ class AnnoncereservationcommentIndex extends Component {
 
                                                                     <div className="media-body">
                                                                         <h6 className="media-heading">{lk.user.first_name}
-                                                                            <small className="text-muted">· {moment(lk.created_at).format('LL')}</small>
+                                                                            <small className="text-muted">· {moment(lk.created_at).fromNow()}</small>
                                                                         </h6>
                                                                         <ReadMoreAndLess
                                                                             className="read-more-content"
@@ -752,27 +749,6 @@ class AnnoncereservationcommentIndex extends Component {
                                         </div>
                                     )}
 
-                                    <br/>
-
-                                    {$guest ?
-
-                                        <h6 className="title text-center">S'il vous plaît
-                                            <a href="/" className="text-primary" data-toggle="modal" data-target="#loginModal"> Connectez vous </a> ou
-                                            <a href={route('register')} className="text-primary"> Inscrivez vous </a> pour laisser un commentaire
-                                        </h6>
-                                        :
-                                        <>
-                                            {!editcomment && !responsecomment && !editresponsecomment && (
-                                                <Form onSubmit={this.sendcommentItem} acceptCharset="UTF-8">
-
-                                                    <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
-                                                                 renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                                 handleFieldChange={this.handleFieldChange} namesubmit={`POSTER MON COMMENTAIRE`}/>
-
-                                                </Form>
-                                            )}
-                                        </>
-                                    }
 
                                 </div>
                             </>

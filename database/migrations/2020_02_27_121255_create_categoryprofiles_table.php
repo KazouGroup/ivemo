@@ -51,7 +51,8 @@ class CreateCategoryprofilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categoryprofiles');
         Schema::dropIfExists('users');
+        Schema::dropIfExists('categoryprofiles');
+
     }
 }

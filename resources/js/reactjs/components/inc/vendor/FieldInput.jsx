@@ -19,6 +19,7 @@ class FieldInput extends Component {
                        value={value}
                        rows={rows}
                        onChange={handleFieldChange}
+                       autoComplete={name}
                 />
                 {renderErrorFor(name)}
             </>

@@ -12,6 +12,8 @@ import Swal from "sweetalert2";
 import Navlinknewannoncevente from "./treatment/Navlinknewannoncevente";
 import HelmetSite from "../../../inc/user/HelmetSite";
 import AnnoncereseventecommentIndex from "../../comments/AnnoncereseventecommentIndex";
+import FieldInput from "../../../inc/vendor/FieldInput";
+import moment from "moment";
 
 
 class Annonceventebycategorycityshow extends Component {
@@ -467,9 +469,13 @@ class Annonceventebycategorycityshow extends Component {
                                                 </div>
                                                 */}
 
+                                                <div className="text-center ml-auto">
+                                                    <h6 className="text-dark">{annoncevente.pieces} p . {annoncevente.rooms && (<>{annoncevente.rooms} ch</>)}. {annoncevente.surface && (<>{annoncevente.surface} m<sup>2</sup></>)}</h6>
+                                                </div>
+
                                                 <div className="text-right ml-auto">
                                                 {annoncevente.price ?
-                                                        <h5 className="text-dark"><b>{annoncevente.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h5>
+                                                    <h5 className="text-dark"><b>{annoncevente.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country}</b></small> : <>{$money_country}</>}</b></h5>
                                                         :
                                                         null
                                                     }
@@ -524,18 +530,19 @@ class Annonceventebycategorycityshow extends Component {
                                                     <div className="row">
                                                         <div className="col-md-6">
                                                             <h5 className="info-title"><b>Ce bien est au prix de</b></h5>
-                                                            {annoncevente.price ?
-                                                                <h3 className="text-dark"><b>{annoncevente.price.formatMoney(2,'.',',')} <small>FCFA</small></b></h3>
-                                                                :
-                                                                <h5 className="text-dark"><b><Skeleton width={250} /></b></h5>
-                                                            }
+                                                            {annoncevente.price && (
+                                                                <h3 className="text-dark"><b>{annoncevente.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country}</b></small> : <>{$money_country}</>}</b></h3>
+                                                            )}
                                                         </div>
                                                         <div className="col-md-6">
                                                             <h5 className="info-title"><b>Informations suplementaires</b></h5>
-                                                            <p>
-                                                                <b>Ce bien revient a :</b>
-                                                                <span className="title text-dark"><b> {annoncevente.award_price ? <>{annoncevente.award_price.formatMoney(2,'.',',')} <small>FCFA - le m<sup>2</sup></small></>:null} </b></span>
-                                                            </p>
+                                                            {annoncevente.award_price && (
+                                                                <p>
+                                                                    <b>Ce bien revient a :</b>
+                                                                    <span className="title text-dark"><b> {annoncevente.award_price ? <>{annoncevente.award_price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} - le m<sup>2</sup></b></small> : <>{$money_country}<small><b> - le m<sup>2</sup></b></small></>}</>:null} </b></span>
+                                                                </p>
+                                                            )}
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -616,14 +623,19 @@ class Annonceventebycategorycityshow extends Component {
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                             <div className="card-header d-flex align-items-center">
                                                                 <div className="d-flex align-items-center">
-                                                                    <NavLink to={`/pro/${annoncevente.user.slug}/`}>
-                                                                        <img src={annoncevente.user.avatar} style={{ height: "40px", width: "80px" }} alt={annoncevente.user.first_name} className="avatar" />
-                                                                    </NavLink>
-                                                                    <div className="mx-3">
-                                                                        <NavLink to={`/pro/${annoncevente.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{annoncevente.user.first_name}</b>
-                                                                            <small className="d-block text-muted">12 janv 2019</small>
+                                                                    {annoncevente.user.avatar ?
+                                                                        <NavLink to={`/pro/${annoncevente.user.slug}/annonces_ventes/`}>
+                                                                            <img src={annoncevente.user.avatar}
+                                                                                 style={{ height: "40px", width: "80px" }}
+                                                                                 alt={annoncevente.user.first_name}
+                                                                                 className="avatar" />
                                                                         </NavLink>
-                                                                    </div>
+                                                                        : <Skeleton circle={false} height={40} width={80} />}
+                                                                        <div className="mx-3">
+                                                                            <NavLink to={`/pro/${annoncevente.user.slug}/annonces_ventes/`} className="text-dark font-weight-600 text-sm"><b>{annoncevente.user.first_name}</b>
+                                                                                <small className="d-block text-muted">{annoncevente.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(annoncevente.user.created_at).format('LL')}</small>
+                                                                            </NavLink>
+                                                                        </div>
                                                                 </div>
                                                                 <Button className="btn btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
                                                                     <i className="now-ui-icons tech_mobile"/>
@@ -776,18 +788,11 @@ class Annonceventebycategorycityshow extends Component {
                                                                             <span className="input-group-text">
                                                                                 <i className="now-ui-icons users_circle-08" /></span>
                                                                     </div>
-                                                                    <input id='full_name'
-                                                                           type='text'
-                                                                           required="required"
-                                                                           className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
-                                                                           name='full_name'
-                                                                           placeholder="Nom complet"
-                                                                           aria-label="Nom complet"
-                                                                           autoComplete="full_name"
-                                                                           value={this.state.full_name}
-                                                                           onChange={this.handleFieldChange}
-                                                                    />
-                                                                    {this.renderErrorFor('full_name')}
+                                                                    <FieldInput name="full_name" type='text' minLength="4" maxLength="50" placeholder="Nom complete" value={this.state.full_name}
+                                                                                handleFieldChange={this.handleFieldChange}
+                                                                                hasErrorFor={this.hasErrorFor}
+                                                                                required="required"
+                                                                                renderErrorFor={this.renderErrorFor}/>
                                                                 </div>
                                                             </div>
                                                             <div className="col-md-6">
@@ -796,18 +801,11 @@ class Annonceventebycategorycityshow extends Component {
                                                                             <span className="input-group-text">
                                                                                 <i className="now-ui-icons ui-1_email-85" /></span>
                                                                     </div>
-                                                                    <input id='email'
-                                                                           type='email'
-                                                                           required="required"
-                                                                           className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                                                           name='email'
-                                                                           placeholder="Email"
-                                                                           aria-label="Email"
-                                                                           autoComplete="email"
-                                                                           value={this.state.email}
-                                                                           onChange={this.handleFieldChange}
-                                                                    />
-                                                                    {this.renderErrorFor('email')}
+                                                                    <FieldInput name="email" type='email' minLength="3" maxLength="50" placeholder="Email" value={this.state.email}
+                                                                                handleFieldChange={this.handleFieldChange}
+                                                                                hasErrorFor={this.hasErrorFor}
+                                                                                required="required"
+                                                                                renderErrorFor={this.renderErrorFor}/>
                                                                 </div>
                                                             </div>
 
@@ -816,16 +814,14 @@ class Annonceventebycategorycityshow extends Component {
                                                         <div className="row">
 
                                                             <div className="input-group">
-                                                                    <textarea name="message" value={this.state.message}
-                                                                              onChange={this.handleFieldChange}
-                                                                              placeholder={'Pourquoi signalez-vous cette article?'}
-                                                                              className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                              id="message"
-                                                                              required="required"
-                                                                              rows="10" />
-                                                                {this.renderErrorFor('message')}
+                                                                <FieldInput name="message" type='textarea' minLength="5" maxLength="5000" placeholder="Pourquoi signalez-vous cette article ?" value={this.state.message}
+                                                                            handleFieldChange={this.handleFieldChange}
+                                                                            hasErrorFor={this.hasErrorFor}
+                                                                            required="required"
+                                                                            renderErrorFor={this.renderErrorFor} rows="17"/>
                                                             </div>
                                                         </div>
+
 
                                                         <div className="submit text-center">
                                                             <button className="btn btn-primary btn-lg btn-block" type="submit">

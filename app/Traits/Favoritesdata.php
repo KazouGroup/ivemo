@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits\Model;
+namespace App\Traits;
 
 use App\Model\annoncelocation;
 use App\Model\annoncereservation;

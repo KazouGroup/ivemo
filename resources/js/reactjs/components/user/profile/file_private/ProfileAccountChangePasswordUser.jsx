@@ -112,24 +112,17 @@ class ProfileAccountChangePasswordUser extends Component {
 
 
                     <div className="wrapper">
-
                         <div className="main main-raised">
-
                             <div className="container">
                                 <br />
-
                                 <form role="form" id="contact-form" onSubmit={this.updateItem} acceptCharset="UTF-8">
-
                                     <div className="row">
-
                                         <div className="col-lg-4 col-md-12 mx-auto">
 
                                             <NavProfileAccountPrivate/>
 
                                         </div>
-
                                         <div className="col-lg-8 col-md-12 mx-auto">
-
                                             <div className="card">
                                                 <div className="card-body">
                                                     <div className="card-header d-flex align-items-center">
@@ -144,24 +137,21 @@ class ProfileAccountChangePasswordUser extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                     <hr/>
                                                     <div className="row">
                                                         <div className="col-md-12">
                                                             <div id="accordion" role="tablist"
                                                                  aria-multiselectable="true"
                                                                  className="card-collapse">
-
-
                                                                 <label htmlFor="address">
-                                                                    <b>Mot de passe actuelle</b>
+                                                                    <b>Mot de passe actuel</b>
                                                                 </label>
                                                                 <div className="input-group">
                                                                     <div
                                                                         className="input-group-prepend">
-                                                                                        <span className="input-group-text">
-                                                                                            <i className="now-ui-icons ui-1_lock-circle-open"/>
-                                                                                        </span>
+                                                                         <span className="input-group-text">
+                                                                            <i className="now-ui-icons ui-1_lock-circle-open"/>
+                                                                         </span>
                                                                     </div>
                                                                     <input id='old_password'
                                                                            type='password'
@@ -181,9 +171,9 @@ class ProfileAccountChangePasswordUser extends Component {
                                                                 <div className="input-group">
                                                                     <div
                                                                         className="input-group-prepend">
-                                                                                        <span className="input-group-text">
-                                                                                            <i className="now-ui-icons ui-1_lock-circle-open"/>
-                                                                                        </span>
+                                                                        <span className="input-group-text">
+                                                                            <i className="now-ui-icons ui-1_lock-circle-open"/>
+                                                                        </span>
                                                                     </div>
                                                                     <input id='password'
                                                                            type='password'
@@ -203,10 +193,10 @@ class ProfileAccountChangePasswordUser extends Component {
                                                                 <div className="input-group">
                                                                     <div
                                                                         className="input-group-prepend">
-                                                                                        <span
-                                                                                            className="input-group-text">
-                                                                                            <i className="now-ui-icons ui-1_lock-circle-open"/>
-                                                                                        </span>
+                                                                        <span
+                                                                              className="input-group-text">
+                                                                              <i className="now-ui-icons ui-1_lock-circle-open"/>
+                                                                         </span>
                                                                     </div>
                                                                     <input id='password_confirmation'
                                                                            type='password'
@@ -228,34 +218,16 @@ class ProfileAccountChangePasswordUser extends Component {
                                                                         <b>Enregistrer</b>
                                                                     </button>
                                                                 </div>
-
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
-
                                             </div>
-
                                         </div>
-
-
-
-
-
                                     </div>
-
                                 </form>
-
                             </div>
-
-
-
                         </div>
-
-
-
-
                         <FooterBigUserSite />
                     </div>
                 </div>

@@ -4,10 +4,8 @@ namespace App\Http\Controllers\User\Comments;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CommentResource;
-use App\Model\annoncereservation;
 use App\Model\annoncetype;
 use App\Model\annoncevente;
-use App\Model\categoryannoncereservation;
 use App\Model\categoryannoncevente;
 use App\Model\city;
 use App\Model\comment;
@@ -52,6 +50,8 @@ class CommentannonceventeController extends Controller
         ]);
 
         $comment = $annoncevente->comments()->create($request->all());
+
+        //broadcast(new CommentAnnonceventEvent($comment))->toOthers();
 
         CommentAndResponseService::newEmailTonewcommentannonceventepageShow($request,$annoncevente);
 

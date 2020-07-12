@@ -8,12 +8,6 @@ require("moment/min/locales.min");
 moment.locale('fr');
 
 class AnnoncereservationInteresseList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            //
-        }
-    }
 
     getDescription() {
         const md = new Remarkable();
@@ -80,7 +74,7 @@ class AnnoncereservationInteresseList extends Component {
                                             </div>
                                             <div className="text-right ml-auto">
                                                 <div className="col-md-12 col-12">
-                                                    <h5 className="text-success"><b>{this.numberWithCommas(this.props)} <small>FCFA</small></b></h5>
+                                                    <h5 className="text-dark"><b>{this.numberWithCommas(this.props)} {$money_country.length > 2 ? <small><b>{$money_country} - {this.props.periodeannonce.name}</b></small> : <>{$money_country}<small><b> - {this.props.periodeannonce.name}</b></small></>}</b></h5>
                                                 </div>
 
                                             </div>

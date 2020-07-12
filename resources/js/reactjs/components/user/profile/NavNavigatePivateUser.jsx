@@ -26,7 +26,7 @@ class NavNavigatePivateUser extends Component {
                                 <div className="card card-plain">
                                     <div className="card-header" role="tab" id="headingFour">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                                            <b>Configuration et edition</b>
+                                            <b>Configuration et édition</b>
                                             <i className="now-ui-icons arrows-1_minimal-down"/>
                                         </a>
                                     </div>
@@ -36,7 +36,7 @@ class NavNavigatePivateUser extends Component {
                                             <table>
                                                 <tbody>
                                                 <tr>
-                                                    <td> <Link to={`/profile/account/`}>Profile</Link></td>
+                                                    <td> <Link to={`/profile/account/`}>Profil</Link></td>
                                                 </tr>
                                                 <tr>
                                                     <td> <Link to={`/articles_reservations/`}>Annonces</Link></td>
@@ -48,7 +48,7 @@ class NavNavigatePivateUser extends Component {
                                                     <td> <Link to={`/profile/personal_mails/contacts/`}>Contacts et messages</Link></td>
                                                 </tr>
                                                 <tr>
-                                                    <td> <Link to={`/profile/personal_reservations/`}>Reservations personnele</Link></td>
+                                                    <td> <Link to={`/profile/personal_reservations/`}>Reservations personnelles</Link></td>
                                                 </tr>
                                                 <tr>
                                                     <td> <Link to={`/profile/annonces_reservations_booked/`}>Reservations des utilisateurs</Link></td>
@@ -57,10 +57,7 @@ class NavNavigatePivateUser extends Component {
                                             </table>
                                         </div>
                                     </div>
-
-
                                 </div>
-
                             </div>
                         </div>
                     </div>

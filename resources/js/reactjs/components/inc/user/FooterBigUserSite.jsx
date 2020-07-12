@@ -25,7 +25,7 @@ class FooterBigUserSite extends Component {
                     <div className="container">
                         <div className="content">
                             <div className="row">
-                                <div className="col-md-5">
+                                <div className="col-md-4">
                                     <div className="column">
                                         <Link to={'/'}>
                                             <img src=".." className="logo" alt={$name_site} />
@@ -48,7 +48,7 @@ class FooterBigUserSite extends Component {
                                     </div>
                                 </div>
 
-                                <div className="col-md-3 col-4">
+                                <div className="col-md-2 col-3">
                                     <div className="column">
                                         <h5>Company</h5>
                                         <ul className="links-vertical">
@@ -76,7 +76,7 @@ class FooterBigUserSite extends Component {
                                     </div>
                                 </div>
 
-                                <div className="col-md-2 col-4">
+                                <div className="col-md-2 col-3">
                                     <div className="column">
                                         <h5>À propos</h5>
                                         <ul className="links-vertical">
@@ -120,7 +120,7 @@ class FooterBigUserSite extends Component {
 
                                 </div>
 
-                                <div className="col-md-2 col-4">
+                                <div className="col-md-2 col-3">
                                     <h5>Aide</h5>
                                     <ul className="links-vertical">
                                         <li>
@@ -147,6 +147,42 @@ class FooterBigUserSite extends Component {
                                             <Link to={'/licence_site/'} className="text-muted">
                                                 Licence Site
                                             </Link>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+                                <div className="col-md-2 col-3">
+                                    <h5>{$name_site} </h5>
+                                    <ul className="links-vertical">
+                                        <li>
+                                            <a href="/" className="text-muted">
+                                                Cameroun
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/" className="text-muted">
+                                                Congo
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="http://ivemogabon.test/" className="text-muted">
+                                                Gabon
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/" className="text-muted">
+                                                Cote d'ivoir
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/" className="text-muted">
+                                                Senegal
+                                            </a>
                                         </li>
 
                                     </ul>

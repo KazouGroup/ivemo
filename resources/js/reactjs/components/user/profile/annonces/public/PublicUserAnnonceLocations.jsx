@@ -202,7 +202,6 @@ class PublicUserAnnonceLocations extends Component {
                             <div className="container">
                                 <br />
                                 <div className="row">
-
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         {useranoncelocationPublick.status_profile === 1 && (
@@ -239,7 +238,6 @@ class PublicUserAnnonceLocations extends Component {
                                                                 <NavLinkPublicAnnonceUser {...this.props} {...useranoncelocationPublick}/>
 
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -261,7 +259,6 @@ class PublicUserAnnonceLocations extends Component {
                                                                 <NavLinkPublicEmploymentUser {...this.props} {...useranoncelocationPublick}/>
 
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -283,7 +280,6 @@ class PublicUserAnnonceLocations extends Component {
                                                                 <NavLinkPublicBlogannoncesUser {...this.props} {...useranoncelocationPublick}/>
 
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -315,9 +311,7 @@ class PublicUserAnnonceLocations extends Component {
 
                                         <div className="col-lg-8 col-md-12 mx-auto">
                                             <div className="card">
-
                                                 <div className="card-body">
-
                                                     <div className="card-header text-center">
                                                         <h4 className="card-title"><b>Pour poster votre bien !</b></h4>
                                                         <a href="#"
@@ -325,7 +319,6 @@ class PublicUserAnnonceLocations extends Component {
                                                             <b>Devenez professionnel pour poster votre bien</b>
                                                         </a>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -346,7 +339,6 @@ class PublicUserAnnonceLocations extends Component {
 
                                             <div className="card">
                                                 <div className="card-body">
-
                                                     <div className="card-header text-center">
                                                         <h4 className="card-title"><b>Contacter {useranoncelocationPublick.first_name}</b></h4>
                                                     </div>
@@ -357,9 +349,7 @@ class PublicUserAnnonceLocations extends Component {
                                             </div>
 
                                             <div className="card card-raised card-form-horizontal">
-
                                                 <div className="card-body">
-
                                                     <div className="card-header text-center">
                                                         <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
                                                         <p className="card-title">
@@ -371,14 +361,11 @@ class PublicUserAnnonceLocations extends Component {
 
                                                 </div>
                                             </div>
-
                                         </div>
                                     }
 
                                 </div>
-
                             </div>
-
                         </div>
 
                         <FooterBigUserSite />

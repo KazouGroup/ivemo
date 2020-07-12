@@ -1,4 +1,4 @@
-import React, { Component,Fragment } from "react";
+import React, { PureComponent,Fragment } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import {Button, Form} from "reactstrap";
 import FieldInput from "../../inc/vendor/FieldInput";
@@ -10,7 +10,7 @@ import ProfileUserComment from "../../inc/vendor/comment/ProfileUserComment";
 import CommentViewList from "./inc/CommentViewList";
 
 
-class BlogannoncereservationcommentIndex extends Component {
+class BlogannoncereservationcommentIndex extends PureComponent {
     constructor(props) {
         super(props);
         //itemData correspont a une variable aleatoire donner pour faire le traitement
@@ -187,14 +187,6 @@ class BlogannoncereservationcommentIndex extends Component {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
-                allow_dismiss: false,
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
         })
     }
 
@@ -236,14 +228,6 @@ class BlogannoncereservationcommentIndex extends Component {
             }).catch(error => {
             this.setState({
                 errors: error.response.data.errors
-            });
-            $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
-                allow_dismiss: false,
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
             });
         })
     }

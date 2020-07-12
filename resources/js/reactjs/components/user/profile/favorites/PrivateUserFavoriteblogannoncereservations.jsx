@@ -52,7 +52,7 @@ class PrivateUserFavoriteblogannoncereservations extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Article retirée de vos favoris",
+                            message: "Article retiré de vos favoris",
                         },
                         {
                             allow_dismiss: false,
@@ -70,7 +70,7 @@ class PrivateUserFavoriteblogannoncereservations extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animated bounceInDown',
@@ -110,21 +110,14 @@ class PrivateUserFavoriteblogannoncereservations extends Component {
                 <HelmetSite title={`Mes favoris Conseils tout savoir sur les reservations ${$userIvemo.first_name || 'Profile'} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
-
                     <nav className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
-
-
                     <div className="wrapper">
-
                         <div className="main main-raised">
-
                             <div className="container">
                                 <br />
-
                                 <div className="row">
-
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <NavlinkfavoritesconfigurationUser {...userfavorites} />
@@ -153,13 +146,8 @@ class PrivateUserFavoriteblogannoncereservations extends Component {
                                         )}
 
                                     </div>
-
-
                                 </div>
-
-
                             </div>
-
                         </div>
 
                         <FooterBigUserSite />

@@ -18,14 +18,14 @@ class ButonSubscribedEmployment extends Component {
                            <>
                                {this.props.subscribedemployment ?
                                    <>
-                                       <Button onClick={() => this.props.unsubscribedItem(this.props.id)}
+                                       <Button onClick={() => this.props.subscribeItem(this.props)}
                                                className="btn btn-info btn-raised" title={`${titleToltipeUnsubscribed} ${this.props.first_name}`}>
                                            <i className="fas fa-bell-slash"></i> <b>{nameunsubscribed}</b>
                                        </Button>
                                    </>
                                    :
                                    <>
-                                       <Button onClick={() => this.props.subscribeItem(this.props.id)}
+                                       <Button onClick={() => this.props.subscribeItem(this.props)}
                                                className="btn btn-danger btn-raised" title={`${titleToltipeSubscribed} ${this.props.first_name}`}>
                                            <i className="far fa-bell"></i> <b>{namesubscribed}</b>
                                        </Button>

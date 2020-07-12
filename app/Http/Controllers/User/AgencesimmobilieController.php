@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
 use App\Model\user;
-use Illuminate\Http\Request;
 
 class AgencesimmobilieController extends Controller
 {

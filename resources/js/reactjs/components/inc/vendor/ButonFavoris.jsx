@@ -3,7 +3,7 @@ import {Button} from "reactstrap";
 
 class ButonFavoris extends Component {
     render() {
-        const {bookmarked,favoriteItem,unfavoriteItem} = this.props;
+        const {bookmarked,favoriteItem} = this.props;
         return (
            <>
                {$guest ?
@@ -14,13 +14,13 @@ class ButonFavoris extends Component {
                    :
                    <>
                        {bookmarked ?
-                           <Button onClick={() => unfavoriteItem(this.props.id)}
+                           <Button onClick={() => favoriteItem(this.props)}
                                    className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
                                <i className="fas fa-bookmark"></i>
                            </Button>
 
                            :
-                           <Button onClick={() => favoriteItem(this.props.id)}
+                           <Button onClick={() => favoriteItem(this.props)}
                                    className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
                                <i className="far fa-bookmark"></i>
                            </Button>

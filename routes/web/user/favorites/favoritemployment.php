@@ -19,8 +19,3 @@ Route::get(
     '/employments_favorite/{id}',
      'FavoritemploymentController@favorite'
 )->name('employments_favorite.favorite');
-
-Route::get(
-    '/employments_unfavorite/{id}',
-     'FavoritemploymentController@unfavorite'
-)->name('employments_unfavorite.unfavorite');

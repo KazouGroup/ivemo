@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom'
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterUserSite from "../../inc/user/FooterUserSite";
+import FieldInput from "../../inc/vendor/FieldInput";
 
 
 class LoginUser extends Component {
@@ -12,14 +13,23 @@ class LoginUser extends Component {
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
+        this.handleHideShowPassword = this.handleHideShowPassword.bind(this);
         this.state = {
             username: '',
             email: '',
             password: '',
+            passwordType: 'password',
             remember: true,
             errors: [],
         }
 
+    }
+
+    handleHideShowPassword() {
+        this.setState({
+            passwordType:
+                this.state.passwordType === "password" ? "text" : "password",
+        });
     }
 
     handleFieldChange(event) {
@@ -58,7 +68,7 @@ class LoginUser extends Component {
                 this.setState({
                     errors: error.response.data.errors
                 });
-                $.notify("Ooop! Quelque chose ne va pas. Essayer plus tard...", {
+                $.notify("Ooop! Quelque chose ne va pas. Essayez plus tard ...", {
                     allow_dismiss: false,
                     type: 'danger',
                     animate: {
@@ -94,36 +104,33 @@ class LoginUser extends Component {
                                             </div>
                                         </div>
                                         <div className="card-body">
-                                            <div className="input-group no-border input-lg">
+                                            <div className="input-group no-border input-lg mb-4">
                                                 <div className="input-group-prepend">
                                                     <span className="input-group-text">
                                                         <i className="now-ui-icons users_circle-08"/>
                                                     </span>
                                                 </div>
-                                                <input type="text" placeholder="Pseudo, email" aria-label="Pseudo, email"
-                                                    required="required"
-                                                    id="username"
-                                                    className={`form-control ${this.hasErrorFor('username') ? 'is-invalid' : ''}`}
-                                                    name='username'
-                                                    value={this.state.username}
-                                                    onChange={this.handleFieldChange} autoComplete="username" autoFocus />
-                                                {this.renderErrorFor('username')}
+
+                                                <FieldInput name="username" type='text' placeholder="Votre Pseudo ou E-mail" value={this.state.username}
+                                                            handleFieldChange={this.handleFieldChange}
+                                                            hasErrorFor={this.hasErrorFor}
+                                                            required="required"
+                                                            renderErrorFor={this.renderErrorFor}/>
                                             </div>
-                                            <div className="input-group no-border input-lg">
+                                            <div className="input-group no-border input-lg mb-4">
                                                 <div className="input-group-prepend">
                                                     <span className="input-group-text">
                                                         <i className="now-ui-icons ui-1_lock-circle-open"></i>
                                                     </span>
                                                 </div>
-                                                <input type="password" placeholder="Mot de pass" aria-label="Mot de passe"
-                                                    required="required"
-                                                    id="password"
-                                                    className={`form-control ${this.hasErrorFor('password') ? 'is-invalid' : ''}`}
-                                                    name='password'
-                                                    value={this.state.password}
-                                                    onChange={this.handleFieldChange}
-                                                    autoComplete="password" autoFocus />
-                                                {this.renderErrorFor('password')}
+                                                <FieldInput name="password" type={this.state.passwordType} minLength="8" placeholder="Votre Mot de Passe" value={this.state.password}
+                                                            handleFieldChange={this.handleFieldChange}
+                                                            hasErrorFor={this.hasErrorFor}
+                                                            required="required"
+                                                            renderErrorFor={this.renderErrorFor}/>
+                                            </div>
+                                            <div className="ivemoShowRidePasswordTop ivemoShowRidePassword" onClick={this.handleHideShowPassword}>
+                                                <i className={`fa fa-${this.state.passwordType === "password" ? "lock" : "unlock"}`}></i>
                                             </div>
                                             <div className="form-check text-left">
                                                 <label className="form-check-label">
@@ -134,17 +141,17 @@ class LoginUser extends Component {
                                             </div>
                                         </div>
 
-                                        <div className="card-footer text-center">
+                                        <div className="card-footer text-center mb-4">
                                             <button type="submit" className="btn btn-primary btn-round btn-lg btn-block">Se connecter</button>
                                         </div>
                                         <div className="pull-left">
                                             <h6>
-                                                <Link to={`/register/`} className="link footer-link">Inscription</Link>
+                                                <Link to={`/register/`} className="link footer-link">Nouveau client ?</Link>
                                             </h6>
                                         </div>
                                         <div className="pull-right">
                                             <h6>
-                                                <Link to={`/password/reset/`} className="link footer-link">Mot de passe oublié?</Link>
+                                                <Link to={`/password/reset/`} className="link footer-link">Mot de Passe oublié ?</Link>
                                             </h6>
                                         </div>
                                     </form>

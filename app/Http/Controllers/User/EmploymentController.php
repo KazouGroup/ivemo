@@ -162,6 +162,7 @@ class EmploymentController extends Controller
         $employments =  EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
             ->where(['status' => 1,'status_admin' => 1])
             ->withCount('contactuseremployments')
+            ->with(['user' => function ($q){$q->select('id','avatar','first_name','slug');},])
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')
