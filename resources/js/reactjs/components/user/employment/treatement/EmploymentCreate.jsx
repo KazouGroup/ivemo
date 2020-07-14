@@ -158,7 +158,7 @@ class EmploymentCreate extends Component {
             .then(() => {
                 $.notify({
                     //,
-                    message: 'Votre annonce a bien été sauvegardé'
+                    message: 'Votre offre a bien été sauvegardé'
                 },
                     {
                         allow_dismiss: false,
@@ -204,15 +204,12 @@ class EmploymentCreate extends Component {
                         <NavUserSite />
                     </nav>
                     <div className="wrapper">
-
                         <div className="main main-raised">
                             <div className="container">
                                 <br />
 
                                 <form role="form" onSubmit={this.saveItem} acceptCharset="UTF-8">
-
                                     <div className="row">
-
                                         <div className="col-lg-4 col-md-12 mx-auto">
 
                                             <Navlinknewemployment/>
@@ -230,13 +227,12 @@ class EmploymentCreate extends Component {
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
 
                                         <div className="col-lg-8 col-md-12 mx-auto">
                                             <div className="submit text-left">
                                                 <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
-                                                    <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos annonces </b>
+                                                    <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos offres </b>
                                                 </button>
                                             </div>
                                             {!$guest &&(
@@ -290,7 +286,7 @@ class EmploymentCreate extends Component {
                                                         <Row>
                                                             <div className="col-md-6">
                                                                 <label className="labels">
-                                                                    Quel est le montant de votre annonce
+                                                                    Quel est le montant de votre offre
                                                                 </label>
                                                                 <InputGroup>
                                                                     <div className="input-group-prepend">
@@ -377,7 +373,7 @@ class EmploymentCreate extends Component {
                                                             <div className="col-md-12">
                                                                 <FormGroup>
                                                                     <label className="labels">
-                                                                        Décrivez votre annonce
+                                                                        Décrivez votre offre
                                                                         <span className="text-danger">*</span>
                                                                     </label>
                                                                     <br />
@@ -437,7 +433,7 @@ class EmploymentCreate extends Component {
 
                                                     <div className="submit text-center">
                                                         <button className="btn btn-primary" type="submit">
-                                                            <b>Sauvegarder votre annonce</b>
+                                                            <b>Sauvegarder votre offre</b>
                                                         </button>
                                                     </div>
                                                 </div>

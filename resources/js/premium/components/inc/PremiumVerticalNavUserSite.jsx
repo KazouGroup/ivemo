@@ -99,19 +99,19 @@ class PremiumVerticalNavUserSite extends PureComponent {
                                         <li className="nav-item ">
                                             <NavLink className="nav-link" to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_locations/`}>
                                                 <span className="sidebar-mini"> ALS </span>
-                                                <span className="sidebar-normal"> Articles blogs locations </span>
+                                                <span className="sidebar-normal"> Articles blog locations </span>
                                             </NavLink>
                                         </li>
                                         <li className="nav-item ">
                                             <NavLink className="nav-link" to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_reservations/`}>
                                                 <span className="sidebar-mini"> ABR </span>
-                                                <span className="sidebar-normal"> Articles blogs reservations </span>
+                                                <span className="sidebar-normal"> Articles blog reservations </span>
                                             </NavLink>
                                         </li>
                                         <li className="nav-item ">
                                             <NavLink className="nav-link" to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_ventes/`}>
                                                 <span className="sidebar-mini"> ABV </span>
-                                                <span className="sidebar-normal"> Articles blogs ventes </span>
+                                                <span className="sidebar-normal"> Articles blog ventes </span>
                                             </NavLink>
                                         </li>
                                     </ul>
@@ -125,14 +125,9 @@ class PremiumVerticalNavUserSite extends PureComponent {
                             </li>
                         </ul>
                     </div>
-
                 </div>
 
             </>
-
-
-
-
 
         )
     }

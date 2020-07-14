@@ -18,7 +18,7 @@ class NavlinkfavoritesconfigurationUser extends PureComponent {
                                 <div className="card card-plain">
                                     <div className="card-header" role="tab" id="headingAnnonce">
                                         <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseAnnonce" aria-expanded="false" aria-controls="collapseAnnonce">
-                                            <b>Toutes mes annonces</b>
+                                            <b>Tous mes annonces</b>
                                         </a>
                                     </div>
                                     <div id="collapseAnnonce" className="collapse show" role="tabpanel" aria-labelledby="headingAnnonce">
@@ -58,7 +58,7 @@ class NavlinkfavoritesconfigurationUser extends PureComponent {
                                 <div className="card card-plain">
                                     <div className="card-header" role="tab" id="headingAnnonceFRS">
                                         <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseAnnonceFRS" aria-expanded="false" aria-controls="collapseAnnonceFRS">
-                                            <b>Toutes mes annonces Formations, services & recrutement</b>
+                                            <b>Tous mes annonces Formations, services & recrutement</b>
                                         </a>
                                     </div>
                                     <div id="collapseAnnonceFRS" className="collapse show" role="tabpanel" aria-labelledby="headingAnnonceFRS">
@@ -68,7 +68,7 @@ class NavlinkfavoritesconfigurationUser extends PureComponent {
                                                 <tr>
                                                     <td>
                                                         <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/favorite_employments/`}>
-                                                            Formations service recrutement
+                                                            Formations, services, recrutements
                                                         </NavLink>
                                                     </td>
                                                     <td className="text-right"><b>{this.props.favoritemployments_count || "0"}</b> {this.props.favoritemployments_count > 1 ? "annonces" : "annonce"}</td>
@@ -82,7 +82,7 @@ class NavlinkfavoritesconfigurationUser extends PureComponent {
                                 <div className="card card-plain">
                                     <div className="card-header" role="tab" id="headingArticle">
                                         <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseArticle" aria-expanded="false" aria-controls="collapseArticle">
-                                            <b>Toutes mes articles</b>
+                                            <b>Tous mes articles</b>
                                         </a>
                                     </div>
                                     <div id="collapseArticle" className="collapse show" role="tabpanel" aria-labelledby="headingArticle">
@@ -118,7 +118,6 @@ class NavlinkfavoritesconfigurationUser extends PureComponent {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>

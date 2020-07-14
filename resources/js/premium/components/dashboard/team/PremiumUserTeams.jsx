@@ -40,7 +40,7 @@ class PremiumUserTeams extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes vous sure de vouloir executer cette action",
+            text: "êtes vous sure de vouloir executer cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -59,7 +59,7 @@ class PremiumUserTeams extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Donné suprimée avec success'
+                            message: 'Donnée supprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -78,7 +78,7 @@ class PremiumUserTeams extends Component {
 
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -131,7 +131,7 @@ class PremiumUserTeams extends Component {
 
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -146,7 +146,7 @@ class PremiumUserTeams extends Component {
 
     unactiveItem(item){
         Swal.fire({
-            title: 'Désactiver l\'utilisateur?',
+            title: 'Déactiver l\'utilisateur?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -166,7 +166,7 @@ class PremiumUserTeams extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update FAQ',
-                            message: 'Utilisateur désactiver avec succès'
+                            message: 'Utilisateur désactivé avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -185,7 +185,7 @@ class PremiumUserTeams extends Component {
 
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -277,7 +277,6 @@ class PremiumUserTeams extends Component {
 
                     <div className="content">
                         <div className="container-fluid">
-
                             <div className="row">
                                 <div className="col-lg-4 col-md-4 col-sm-4">
                                     <div className="card card-stats">
@@ -307,7 +306,7 @@ class PremiumUserTeams extends Component {
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">done</i>  Actives
+                                                <i className="material-icons">done</i>  Activés
                                             </div>
                                         </div>
                                     </div>
@@ -318,7 +317,7 @@ class PremiumUserTeams extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">remove</i>
                                             </div>
-                                            <p className="card-category"><b>Desactivés</b></p>
+                                            <p className="card-category"><b>Désactives</b></p>
                                             <h3 className="card-title"><b>{this.dataunactive_countFormatter(teamsunactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
@@ -383,7 +382,7 @@ class PremiumUserTeams extends Component {
                                                              <span className="btn-label">
                                                                <i className="material-icons">add</i>
                                                              </span>
-                                                            <b className="title_hover">Ajouter un nouveau à votre equipe</b>
+                                                            <b className="title_hover">Ajouter un nouveau membre à votre equipe</b>
                                                         </Link>
                                                     </div>
                                                 </div>
@@ -428,7 +427,7 @@ class PremiumUserTeams extends Component {
                                                                         {item.status ?
                                                                             <span className="badge badge-success"><b>Visible</b></span>
                                                                             :
-                                                                            <span className="badge badge-rose"><b>Desactivé</b></span>
+                                                                            <span className="badge badge-rose"><b>Désactivé</b></span>
                                                                         }
                                                                     </div>
                                                                 </td>

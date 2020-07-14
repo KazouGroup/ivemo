@@ -114,7 +114,7 @@ class Annoncelocationbycity extends Component {
 
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -205,7 +205,7 @@ class Annoncelocationbycity extends Component {
                 $('#addNew').modal('hide');
 
                 $.notify({
-                    message: `Cette annonce a été signalé avec succès`
+                    message: `Cette annonce a été signalée avec succès`
                 },
                     {
                         allow_dismiss: false,
@@ -290,7 +290,7 @@ class Annoncelocationbycity extends Component {
                     /** End alert ***/
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -325,7 +325,7 @@ class Annoncelocationbycity extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                         // title: 'Update',
-                        message: 'Annonce suprimée avec success'
+                        message: 'Annonce supprimée avec succès'
                     },
                         {
                             allow_dismiss: false,
@@ -344,7 +344,7 @@ class Annoncelocationbycity extends Component {
 
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -390,23 +390,19 @@ class Annoncelocationbycity extends Component {
                 <HelmetSite title={`Locations ${itemCategoryannoncelocation || $name_site} dans la ville de ${annoncelocationbycity.name || ""} - ${$name_site}`} />
 
                 <div className="about-us sidebar-collapse">
-
                     <nav className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
 
                     <div className="wrapper">
-
                         <div className="main main-raised">
                             <div className="container">
                                 <div className="row">
                                 </div>
                             </div>
-
                             <div className="container">
                                 <br />
                                 <div className="row">
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="submit text-left">
                                             <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
@@ -423,21 +419,17 @@ class Annoncelocationbycity extends Component {
 
                                         {mapAnnoncelocations}
 
-
                                     </div>
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
-
                                         <div className="submit text-center">
                                             <Navlinknewannoncelocation {...this.props} />
                                         </div>
-
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="row">
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingThree">
                                                                     <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
@@ -499,13 +491,11 @@ class Annoncelocationbycity extends Component {
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
 
                                     <div className="modal fade" id="addNew" tabIndex="-1" role="dialog" aria-labelledby="addNewLabel"
@@ -523,9 +513,7 @@ class Annoncelocationbycity extends Component {
                                                 <Form role="form" onSubmit={this.signalemessageItem} acceptCharset="UTF-8">
 
                                                     <div className="modal-body">
-
                                                         <div className="card-body">
-
                                                             <div className="alert alert-danger text-center" role="alert">
                                                                 <div className="container">
                                                                     {annonceItem.title}
@@ -613,7 +601,6 @@ class Annoncelocationbycity extends Component {
                                                                         </label>
                                                                     </div>
                                                                 </div>
-
                                                             </div>
 
                                                             <div className="row">
@@ -657,7 +644,6 @@ class Annoncelocationbycity extends Component {
                                                                         {this.renderErrorFor('email')}
                                                                     </div>
                                                                 </div>
-
                                                             </div>
 
                                                             <div className="row">
@@ -681,7 +667,6 @@ class Annoncelocationbycity extends Component {
                                                             </div>
 
                                                         </div>
-
                                                     </div>
 
                                                 </Form>
@@ -698,7 +683,6 @@ class Annoncelocationbycity extends Component {
 
                                 </div>
                             </div>
-
                         </div>
 
                         <FooterBigUserSite />

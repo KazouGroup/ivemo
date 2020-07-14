@@ -36,7 +36,7 @@ class NavUserSite extends PureComponent {
                         <li className="nav-item">
                             <NavLink to={'/'} className="nav-link">
                                 <i className="now-ui-icons shopping_shop"/>
-                                <b>Acceuil</b>
+                                <b>Accueil</b>
                             </NavLink>
                         </li>
 

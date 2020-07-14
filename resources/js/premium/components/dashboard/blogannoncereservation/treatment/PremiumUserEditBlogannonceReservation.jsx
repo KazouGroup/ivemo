@@ -135,7 +135,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
             .then(() => {
                 $.notify({
                         //,
-                        message: 'Votre article de blogs a bien été modifié'
+                        message: 'Votre article de blog a bien été modifié'
                     },
                     {
                         allow_dismiss: false,
@@ -153,7 +153,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Something wrong. Try later...", {
+            $.notify("Ooops! Something wrong. Try later...", {
                 allow_dismiss: false,
                 type: 'danger',
                 animate: {
@@ -173,7 +173,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
             /** Alert notify bootstrapp **/
             $.notify({
                     //,
-                    message: 'Article de blogs activé avec succès'
+                    message: 'Article de blog activé avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -192,7 +192,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
 
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -211,7 +211,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
             /** Alert notify bootstrapp **/
             $.notify({
                     // title: 'Update FAQ',
-                    message: 'Article de blogs désactiver avec succès'
+                    message: 'Article de blog désactiver avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -229,7 +229,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
             this.loadItems();
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -243,7 +243,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action?",
+            text: "êtes-vous sûr de vouloir exècuter cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -261,7 +261,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Article de blogs suprimée avec succès'
+                            message: 'Article de blog supprimé avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -279,7 +279,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
                     this.props.history.goBack();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -359,7 +359,6 @@ class PremiumUserEditBlogannonceReservation extends Component {
 
                     <div className="content">
                         <div className="container-fluid">
-
                             <div className="row">
                                 <div className="col-lg-4 col-md-4 col-sm-4">
                                     <div className="card card-stats">
@@ -400,17 +399,16 @@ class PremiumUserEditBlogannonceReservation extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">remove</i>
                                             </div>
-                                            <p className="card-category"><b>Désactivés</b></p>
+                                            <p className="card-category"><b>Déactivés</b></p>
                                             <h3 className="card-title"><b>{this.dataunactive_countFormatter(blogannoncereservationsunactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">remove</i> Articles désactivés
+                                                <i className="material-icons">remove</i> Articles déactivés
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div className="row">
@@ -437,7 +435,6 @@ class PremiumUserEditBlogannonceReservation extends Component {
                                 </div>
                             </div>
 
-
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="card">
@@ -460,17 +457,17 @@ class PremiumUserEditBlogannonceReservation extends Component {
                                             <div className="toolbar">
                                                 <div className="text-right ml-auto">
                                                     <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_reservations/`}
-                                                          className="btn btn-secondary btn-just-icon btn-sm" title="Retour a vos articles">
+                                                          className="btn btn-secondary btn-just-icon btn-sm" title="Retour à vos articles">
                                                         <i className="material-icons">arrow_back</i>
                                                     </Link>
                                                     <Link to={`/dashboard/premium/${$userIvemo.slug}/blogs/annonce_reservations/create/`}
-                                                          className="btn btn-primary btn-just-icon btn-sm" title="Poster un votre article sur la reservation">
+                                                          className="btn btn-primary btn-just-icon btn-sm" title="Poster votre article sur la reservation">
                                                         <i className="material-icons">add</i>
                                                     </Link>
                                                     {this.state.status ?
                                                         <>
                                                             <button type="button" rel="tooltip" onClick={() => this.unactiveItem(this.state.id)}
-                                                                    className="btn btn-success btn-just-icon btn-sm" title="Desactiver" >
+                                                                    className="btn btn-success btn-just-icon btn-sm" title="Déactiver" >
                                                                 <i className="material-icons">done</i>
                                                             </button>
                                                         </>
@@ -493,7 +490,6 @@ class PremiumUserEditBlogannonceReservation extends Component {
                                             </div>
 
                                             <Form role="form" onSubmit={this.updateItem} acceptCharset="UTF-8">
-
 
                                                 <CardBody>
 
@@ -520,7 +516,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
 
                                                     <Row>
                                                         <div className="col-md-6">
-                                                            <label htmlFor="title">Estimer en temp <b>{this.state.red_time} min lecture</b></label>
+                                                            <label htmlFor="title">Estimer un temps <b>{this.state.red_time} min lecture</b></label>
                                                             <FormGroup>
                                                                 <Input id='red_time'
                                                                        type='number'
@@ -528,7 +524,7 @@ class PremiumUserEditBlogannonceReservation extends Component {
                                                                        name='red_time'
                                                                        maxLength="20"
                                                                        minLength="1"
-                                                                       placeholder="Estimer un temp de lecture en min"
+                                                                       placeholder="Estimer un temps de lecture en min"
                                                                        aria-label="Estimer un temp de lecture "
                                                                        value={this.state.red_time || ''}
                                                                        required

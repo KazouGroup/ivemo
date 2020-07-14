@@ -45,7 +45,7 @@ class PremiumUserEmployementMessage extends Component {
             this.loadItems();
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -63,7 +63,7 @@ class PremiumUserEmployementMessage extends Component {
             this.loadItems();
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -76,7 +76,7 @@ class PremiumUserEmployementMessage extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            text: "êtes-vous sûr de vouloir exècuter cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -95,7 +95,7 @@ class PremiumUserEmployementMessage extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Message suprimée avec success'
+                            message: 'Offre supprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -204,7 +204,6 @@ class PremiumUserEmployementMessage extends Component {
                                 </div>
                             </div>
 
-
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="card">
@@ -234,7 +233,6 @@ class PremiumUserEmployementMessage extends Component {
                                                         <i className="material-icons">visibility</i>
                                                     </a>
                                                 </div>
-
                                             </div>
 
 
@@ -280,7 +278,6 @@ class PremiumUserEmployementMessage extends Component {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 

@@ -7,7 +7,6 @@
         <div class="content">
             <div class="container-fluid">
 
-
                 <NavContactusersfaqsAdmin/>
 
                 <div class="row">
@@ -55,7 +54,7 @@
                                         </tr>
                                         </tfoot>
                                         <tbody>
-                                        <tr v-for="(item, index) in contactusersfaqs" :key="item.id">
+                                        <tr v-for="item in contactusersfaqs" :key="item.id">
                                             <td>{{ (item.full_name.length > 15 ? item.full_name.substring(0,15)+ "..." : item.full_name) | upText }}</td>
                                             <td>{{ (item.email.length > 25 ? item.email.substring(0,25)+ "..." : item.email) | upText }}</td>
                                             <td>
@@ -140,7 +139,7 @@
             /** Ici c'est l'activation  **/
             activeItem(id){
                 Swal.fire({
-                    title: 'Show or activated this article?',
+                    title: 'Show or activate this article?',
                     text: "Are you sure to confirm this article?",
                     buttonsStyling: false,
                     confirmButtonClass: "btn btn-success",
@@ -194,7 +193,7 @@
             /** Ici c'est la désactivation **/
             disableItem(id){
                 Swal.fire({
-                    title: 'Mask or unactivated this article?',
+                    title: 'Mask or unactivate this article?',
                     text: "Are you sure to confirm this article?",
                     buttonsStyling: false,
                     confirmButtonClass: "btn btn-success",

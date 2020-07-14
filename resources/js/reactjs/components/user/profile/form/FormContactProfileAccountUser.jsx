@@ -59,7 +59,7 @@ class FormContactProfileAccountUser extends PureComponent {
             .then(() => {
 
                 $.notify({
-                    message: `Votre message a été bien envoyé à cette utilisateur`
+                    message: `Votre message a bien été  envoyé à cet utilisateur`
                 },
                     {
                         allow_dismiss: false,
@@ -100,7 +100,6 @@ class FormContactProfileAccountUser extends PureComponent {
             <Form role="form" id="contact-form" onSubmit={this.sendmessageItem} acceptCharset="UTF-8">
 
                 <div className="card-body">
-
                     <div className="row">
                         <div className="d-flex align-items-center">
                             {this.props.avatar ?
@@ -138,12 +137,11 @@ class FormContactProfileAccountUser extends PureComponent {
                                 <span className="input-group-text">
                                     <i className="now-ui-icons users_circle-08" /></span>
                             </div>
-                            <FieldInput name="full_name" type='text' minLength="4" maxLength="50" placeholder="Nom complete" value={this.state.full_name}
+                            <FieldInput name="full_name" type='text' minLength="4" maxLength="50" placeholder="Nom complet" value={this.state.full_name}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
                                         renderErrorFor={this.renderErrorFor}/>
                         </InputGroup>
-
                     </Row>
 
                     <Row>
@@ -204,8 +202,6 @@ class FormContactProfileAccountUser extends PureComponent {
                         </button>
                     </div>
                 </div>
-
-
             </Form>
 
         )

@@ -123,7 +123,7 @@ class AnnoncelocationIndex extends Component {
 
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -201,7 +201,7 @@ class AnnoncelocationIndex extends Component {
                 $('#addNew').modal('hide');
 
                 $.notify({
-                    message: `Annonce signalé avec succès`
+                    message: `Annonce signalée avec succès`
                 },
                     {
                         allow_dismiss: false,
@@ -272,7 +272,7 @@ class AnnoncelocationIndex extends Component {
                     /** End alert ***/
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -312,7 +312,7 @@ class AnnoncelocationIndex extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                         // title: 'Update',
-                        message: 'Annonce suprimée avec succès'
+                        message: 'Annonce supprimée avec succès'
                     },
                         {
                             allow_dismiss: false,
@@ -329,7 +329,7 @@ class AnnoncelocationIndex extends Component {
                     /** End alert ***/
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -370,8 +370,6 @@ class AnnoncelocationIndex extends Component {
                 <HelmetSite title={`Bon plan de location de chambre, studio un appartement, maison ou une villa - ${$name_site}`} />
 
                 <div className="landing-page sidebar-collapse">
-
-
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
                         <NavUserSite />
                     </nav>
@@ -380,7 +378,6 @@ class AnnoncelocationIndex extends Component {
                         <div className="page-header page-header-small">
                             <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
                             </div>
-
                             <div className="content-center">
                                 <br />
                                 <div className="row">
@@ -388,14 +385,13 @@ class AnnoncelocationIndex extends Component {
                                         <div className="text-center">
                                             <h3 className="title">Location des biens</h3>
                                             <p className="description">
-                                                <b> Trouver une maison,un studio, une chambre ou un appartement et plien d'autre bien à louer</b>
+                                                <b> Trouver une maison, un studio, une chambre ou un appartement et plien d'autre bien à louer</b>
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="col-md-8 ml-auto mr-auto">
-
                                         <div className="card card-raised card-form-horizontal">
                                             <div className="card-body">
                                                 <form method="" action="">
@@ -431,7 +427,6 @@ class AnnoncelocationIndex extends Component {
                                                             </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
 
                                                 </form>
@@ -448,11 +443,9 @@ class AnnoncelocationIndex extends Component {
 
                                 </div>
                             </div>
-
                             <div className="container">
                                 <br />
                                 <div className="row">
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
                                         {!$guest && (
@@ -468,11 +461,9 @@ class AnnoncelocationIndex extends Component {
                                     </div>
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
-
                                         <div className="submit text-center">
                                             <Navlinknewannoncelocation {...this.props} />
                                         </div>
-
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="row">
@@ -503,9 +494,7 @@ class AnnoncelocationIndex extends Component {
                                                 <Form role="form" onSubmit={this.signalemessageItem} acceptCharset="UTF-8">
 
                                                     <div className="modal-body">
-
                                                         <div className="card-body">
-
                                                             <div className="alert alert-danger text-center" role="alert">
                                                                 <div className="container">
                                                                     {annonceItem.title}
@@ -593,7 +582,6 @@ class AnnoncelocationIndex extends Component {
                                                                         </label>
                                                                     </div>
                                                                 </div>
-
                                                             </div>
 
                                                             <div className="row">
@@ -637,11 +625,9 @@ class AnnoncelocationIndex extends Component {
                                                                         {this.renderErrorFor('email')}
                                                                     </div>
                                                                 </div>
-
                                                             </div>
 
                                                             <div className="row">
-
                                                                 <div className="input-group">
                                                                     <textarea name="message" value={this.state.message}
                                                                         onChange={this.handleFieldChange}
@@ -660,13 +646,10 @@ class AnnoncelocationIndex extends Component {
                                                                 </button>
                                                             </div>
 
-
                                                         </div>
-
                                                     </div>
 
                                                 </Form>
-
 
                                             </div>
                                         </div>
@@ -680,7 +663,6 @@ class AnnoncelocationIndex extends Component {
 
                                 </div>
                             </div>
-
                         </div>
 
                         <FooterBigUserSite />

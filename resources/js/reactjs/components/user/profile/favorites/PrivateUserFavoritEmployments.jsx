@@ -69,7 +69,7 @@ class PrivateUserFavoritEmployments extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooopss! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animated bounceInDown',
@@ -109,21 +109,14 @@ class PrivateUserFavoritEmployments extends Component {
                 <HelmetSite title={`Mes favoris Emplois, Formation & Services ${$userIvemo.first_name || 'Profile'} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
-
                     <nav className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
-
-
                     <div className="wrapper">
-
                         <div className="main main-raised">
-
                             <div className="container">
                                 <br />
-
                                 <div className="row">
-
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <NavlinkfavoritesconfigurationUser {...userfavorites} />
@@ -152,13 +145,8 @@ class PrivateUserFavoritEmployments extends Component {
                                         )}
 
                                     </div>
-
-
                                 </div>
-
-
                             </div>
-
                         </div>
 
                         <FooterBigUserSite />

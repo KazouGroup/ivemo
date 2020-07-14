@@ -7,8 +7,6 @@
 
         <div class="content">
             <div class="container-fluid">
-
-
                 <div v-if="loaded" class="row">
                     <div class="col-md-12 expo">
                         <div class="card card-stats">
@@ -17,7 +15,7 @@
                                     <i class="material-icons">closed_caption</i>
                                 </div>
                                 <p class="card-category">
-                                    <b>Categories annonces locations</b>
+                                    <b>Categories announces rentings</b>
                                 </p>
                                 <h3 class="card-title" style="color:red;">
                                     <b>{{categoryannoncelocations.length}}</b>
@@ -26,7 +24,7 @@
                             <div class="card-footer">
                                 <div class="stats">
                                     <i class="material-icons">closed_caption</i>
-                                    <b>Categories annonces locations</b>
+                                    <b>Categories announces rentings</b>
                                 </div>
                             </div>
                         </div>
@@ -46,7 +44,7 @@
                                         <h4 class="card-title">
                                             <b>Categories FAQS</b>
                                         </h4>
-                                        <p class="card-title">Categories annonces locations</p>
+                                        <p class="card-title">Categories announces rentings</p>
                                     </div>
                                     <div class="col-md-6 text-right">
                                       <span>
@@ -62,7 +60,7 @@
                                            <span class="btn-label">
                                                <i class="material-icons">add</i>
                                            </span>
-                                            <b class="title_hover">New Categories annonces locations</b>
+                                            <b class="title_hover">New Category on rentings</b>
                                         </button>
                                     </div>
 
@@ -350,7 +348,7 @@
                     //Failled message
                     this.$Progress.fail();
                     //Alert error
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animated bounceInDown',
@@ -467,7 +465,7 @@
                     /** Alert notify bootstrapp **/
                     $.notify(
                         {
-                            message: `Data desactivated successfully`,
+                            message: `Data disactivated successfully`,
                         },
                         {
                             allow_dismiss: false,

@@ -11,8 +11,6 @@ import NavPremiumUserBlogannonceReservation from "../NavPremiumUserBlogannonceRe
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
-
-
 class PremiumUserNewBlogannonceReservation extends Component {
     constructor(props) {
         super(props);
@@ -132,7 +130,7 @@ class PremiumUserNewBlogannonceReservation extends Component {
             .then(() => {
                 $.notify({
                         //,
-                        message: 'Votre article de blogs a bien été crée'
+                        message: 'Votre article de blog a bien été crée'
                     },
                     {
                         allow_dismiss: false,
@@ -151,7 +149,7 @@ class PremiumUserNewBlogannonceReservation extends Component {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Something wrong. Try later...", {
+            $.notify("Ooops! Something wrong. Try later...", {
                 allow_dismiss: false,
                 type: 'danger',
                 animate: {
@@ -222,7 +220,6 @@ class PremiumUserNewBlogannonceReservation extends Component {
                                 </div>
                             </div>
 
-
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="card">
@@ -249,7 +246,6 @@ class PremiumUserNewBlogannonceReservation extends Component {
                                                         <i className="material-icons">arrow_back</i>
                                                     </Link>
                                                 </div>
-
                                             </div>
 
                                             <form role="form" onSubmit={this.saveItem} acceptCharset="UTF-8">
@@ -279,7 +275,7 @@ class PremiumUserNewBlogannonceReservation extends Component {
 
                                                     <Row>
                                                         <div className="col-md-6">
-                                                            <label htmlFor="title">Estimer en temp <b>{this.state.red_time} min lecture</b></label>
+                                                            <label htmlFor="title">Estimer  <b>{this.state.red_time} min lecture</b></label>
                                                             <FormGroup>
                                                                 <Input id='red_time'
                                                                        type='number'
@@ -287,7 +283,7 @@ class PremiumUserNewBlogannonceReservation extends Component {
                                                                        name='red_time'
                                                                        maxLength="20"
                                                                        minLength="1"
-                                                                       placeholder="Estimer un temp de lecture en min"
+                                                                       placeholder="Estimer un temps de lecture en min"
                                                                        aria-label="Estimer un temp de lecture "
                                                                        value={this.state.red_time || ''}
                                                                        required
@@ -361,13 +357,10 @@ class PremiumUserNewBlogannonceReservation extends Component {
                                                     </button>
                                                 </div>
                                             </form>
-
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 

@@ -35,7 +35,7 @@ class PremiumUserEmployementMessageShow extends Component {
             this.loadItems();
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -53,7 +53,7 @@ class PremiumUserEmployementMessageShow extends Component {
             this.loadItems();
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -66,7 +66,7 @@ class PremiumUserEmployementMessageShow extends Component {
     deleteItem(contactuseremployment) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            text: "êtes-vous sûr de vouloir exècuter cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -85,7 +85,7 @@ class PremiumUserEmployementMessageShow extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Message suprimée avec success'
+                            message: 'Offre supprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -103,7 +103,7 @@ class PremiumUserEmployementMessageShow extends Component {
                     this.props.history.push(`/dashboard/premium/${$userIvemo.slug}/employments/message/${contactuseremployment.employment.slug}/`);
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -146,8 +146,6 @@ class PremiumUserEmployementMessageShow extends Component {
 
                             <NavPremiumUserEmployement/>
 
-
-
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="card">
@@ -170,12 +168,12 @@ class PremiumUserEmployementMessageShow extends Component {
                                             <div className="toolbar">
                                                 <div className="text-right ml-auto">
                                                     <Link to={`/dashboard/premium/${$userIvemo.slug}/employments/message/${contactuseremployment.employment.slug}/`}
-                                                          className="btn btn-secondary btn-just-icon btn-sm" title="Retour a vos annonces">
+                                                          className="btn btn-secondary btn-just-icon btn-sm" title="Retour a vos offres">
                                                         <i className="material-icons">arrow_back</i>
                                                     </Link>
                                                     {contactuseremployment.status_red ?
                                                         <Button onClick={() => this.unactiveItem(contactuseremployment.id)}
-                                                                className="btn btn-success btn-link btn-just-icon btn-sm" title="Desactiver" >
+                                                                className="btn btn-success btn-link btn-just-icon btn-sm" title="Déactiver" >
                                                             <i className="material-icons">done</i>
                                                         </Button>
                                                         :
@@ -183,16 +181,13 @@ class PremiumUserEmployementMessageShow extends Component {
                                                                 className="btn btn-rose btn-link btn-just-icon btn-sm" title="Activer" >
                                                             <i className="material-icons">remove</i>
                                                         </Button>
-
                                                     }
                                                     <Button onClick={() => this.deleteItem(contactuseremployment)}
-                                                            className="btn btn-danger btn-link btn-just-icon btn-sm" title="Supprimer ce message">
+                                                            className="btn btn-danger btn-link btn-just-icon btn-sm" title="Supprimer cette offre">
                                                         <i className="material-icons">delete_forever</i>
                                                     </Button>
                                                 </div>
-
                                             </div>
-
 
                                             <CardBody>
 
@@ -239,7 +234,6 @@ class PremiumUserEmployementMessageShow extends Component {
                                                             >
                                                                 {contactuseremployment.message}
                                                             </ReadMoreAndLess>: <Skeleton count={2}/>}
-
                                                     </div>
                                                 </Row>
 
@@ -249,7 +243,6 @@ class PremiumUserEmployementMessageShow extends Component {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 

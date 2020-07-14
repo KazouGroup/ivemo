@@ -8,10 +8,8 @@ function EmploymentListSkeleton(props) {
        <>
            <div className="card">
                <div className="card-body">
-
                    <div className="card card-plain card-blog">
                        <div className="row">
-
                            <div className="col-md-8">
 
                             <span className="title">
@@ -29,22 +27,16 @@ function EmploymentListSkeleton(props) {
                                <div className="card-image">
                                    <Skeleton circle={false} height={123} width={186} />
                                </div>
-
                            </div>
-
                        </div>
                    </div>
-
                </div>
            </div>
            <div className="card">
                <div className="card-body">
-
                    <div className="card card-plain card-blog">
                        <div className="row">
-
                            <div className="col-md-8">
-
                             <span className="title">
                                 <Skeleton width={250} />   <Skeleton width={80} /> <Skeleton width={60} />
                             </span>
@@ -60,20 +52,15 @@ function EmploymentListSkeleton(props) {
                                <div className="card-image">
                                    <Skeleton circle={false} height={123} width={186} />
                                </div>
-
                            </div>
-
                        </div>
                    </div>
-
                </div>
            </div>
            <div className="card">
                <div className="card-body">
-
                    <div className="card card-plain card-blog">
                        <div className="row">
-
                            <div className="col-md-8">
 
                             <span className="title">
@@ -91,12 +78,9 @@ function EmploymentListSkeleton(props) {
                                <div className="card-image">
                                    <Skeleton circle={false} height={123} width={186} />
                                </div>
-
                            </div>
-
                        </div>
                    </div>
-
                </div>
            </div>
 

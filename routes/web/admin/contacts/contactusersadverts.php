@@ -22,4 +22,13 @@ Route::get(
 )->name('api.contactforadverts_dashboardunred_count');
 
 Route::get('/dashboard/contactusersforadverts','ContactusersadvertController@index')->name('contactusersadverts.index');
+
+Route::get('dashboard/active_contactusersforadverts/{id}',
+    'ContactusersadvertControllerController@activated'
+)->name('activated_contactusersforadverts.dashboard');
+
+Route::get('dashboard/unactive_contactusersforadverts/{id}',
+    'ContactusersadvertController@unactivated'
+)->name('unactivated_contactusersforadverts.dashboard');
+
 Route::delete('dashboard/contactusersforadverts/{id}','ContactusersadvertController@destroy')->name('contactusersadverts.destroy');

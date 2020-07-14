@@ -55,13 +55,13 @@ class FormcontactuseronlocationShow extends Component {
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let itemCity = this.props.match.params.city;
         let itemannoncelocation = this.props.match.params.annoncelocation;
-        let url = route('annoncelocationsendcontactmessageuser_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemannoncelocation]);
+        let url = route('annoncelocationsendcontactmessageuser_site', [itemannoncetype, itemCategoryannoncelocation, itemCity, itemannoncelocation]);
         dyaxios.post(url, item)
             .then(() => {
 
                 $.notify({
-                        message: `Votre message a été bien envoyé à cette utilisateur`
-                    },
+                    message: `Votre message a bien été envoyé à cette utilisateur`
+                },
                     {
                         allow_dismiss: false,
                         type: 'info',
@@ -83,10 +83,10 @@ class FormcontactuseronlocationShow extends Component {
                     message: "",
                 });
             }).catch(error => {
-            this.setState({
-                errors: error.response.data.errors
-            });
-        })
+                this.setState({
+                    errors: error.response.data.errors
+                });
+            })
     }
 
     render() {
@@ -96,14 +96,13 @@ class FormcontactuseronlocationShow extends Component {
             <form role="form" id="contact-form" onSubmit={this.sendmessageItem} acceptCharset="UTF-8">
 
                 <div className="card-body">
-
                     <div className="row">
                         <div className="input-group">
                             <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons users_circle-08"/></span>
+                                <span className="input-group-text">
+                                    <i className="now-ui-icons users_circle-08" /></span>
                             </div>
-                            <FieldInput name="full_name" type='text' minLength="4" maxLength="50" placeholder="Nom complete" value={this.state.full_name}
+                            <FieldInput name="full_name" type='text' minLength="4" maxLength="50" placeholder="Nom complet" value={this.state.full_name}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
                                         renderErrorFor={this.renderErrorFor}/>
@@ -113,8 +112,8 @@ class FormcontactuseronlocationShow extends Component {
                     <div className="row">
                         <div className="input-group">
                             <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons ui-1_email-85"/></span>
+                                <span className="input-group-text">
+                                    <i className="now-ui-icons ui-1_email-85" /></span>
                             </div>
                             <FieldInput name="email" type='email' minLength="3" maxLength="50" placeholder="Email" value={this.state.email}
                                         handleFieldChange={this.handleFieldChange}
@@ -122,26 +121,25 @@ class FormcontactuseronlocationShow extends Component {
                                         renderErrorFor={this.renderErrorFor}/>
                         </div>
                     </div>
+
                     <div className="row">
                         <div className="input-group">
                             <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons tech_mobile"/></span>
+                                <span className="input-group-text">
+                                    <i className="now-ui-icons tech_mobile" /></span>
                             </div>
                             <FieldInput name="phone" type='number' minLength="3" maxLength="15" placeholder="Téléphone" value={this.state.phone}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
                                         renderErrorFor={this.renderErrorFor}/>
                         </div>
-
-
                     </div>
-                    <div className="row">
 
+                    <div className="row">
                         <div className="input-group">
                             <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons users_circle-08"/></span>
+                                <span className="input-group-text">
+                                    <i className="now-ui-icons users_circle-08" /></span>
                             </div>
                             <FieldInput name="subject" type='text' minLength="3" maxLength="200" placeholder="Object" value={this.state.subject}
                                         handleFieldChange={this.handleFieldChange}
@@ -160,12 +158,10 @@ class FormcontactuseronlocationShow extends Component {
                     </div>
                     <div className="submit text-center">
                         <button className="btn btn-primary btn-lg" type="submit">
-                            <i className="now-ui-icons ui-1_email-85"/> Contacter
+                            <i className="now-ui-icons ui-1_email-85" /> Contacter
                         </button>
                     </div>
                 </div>
-
-
             </form>
 
         )

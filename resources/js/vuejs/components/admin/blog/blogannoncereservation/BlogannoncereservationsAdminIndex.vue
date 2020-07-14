@@ -21,7 +21,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">view_headline</i> Articles sur les annonces reservations
+                                        <i class="material-icons">view_headline</i> Blog articles on reservations
                                     </div>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">done</i> Articles actives
+                                        <i class="material-icons">done</i> Activated articles
                                     </div>
                                 </div>
                             </div>
@@ -48,12 +48,12 @@
                                     <div class="card-icon">
                                         <i class="material-icons">remove</i>
                                     </div>
-                                    <p class="card-category"><b v-if="blogannoncereservationsunactive_count >= 1">Desactivés</b><b v-else>Desactivé</b></p>
+                                    <p class="card-category"><b v-if="blogannoncereservationsunactive_count >= 1">Disactives</b><b v-else>Disactive</b></p>
                                     <h3 class="card-title"><b>{{dataunactive_countFormatter(blogannoncereservationsunactive_count)}}</b></h3>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">remove</i> Articles désactivés
+                                        <i class="material-icons">remove</i> Disactivated articles
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                         <i class="material-icons">view_headline</i>
                                     </div>
                                     <p class="card-category">
-                                        <b>Articles sur les annonces reservations</b>
+                                        <b>Articles on reservations</b>
                                     </p>
                                     <h3 class="card-title" style="color:red;">
                                         <b>{{data_countFormatter(blogannoncereservations_count)}}</b>
@@ -78,7 +78,7 @@
                                 <div class="card-footer">
                                     <div class="stats">
                                         <i class="material-icons">view_headline</i>
-                                        <b>Articles sur les annonces reservations</b>
+                                        <b>Articles on reservations</b>
                                     </div>
                                 </div>
                             </div>
@@ -92,9 +92,9 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <h4 class="card-title">
-                                                <b>Articles sur les annonces locations</b>
+                                                <b>Articles on reservations</b>
                                             </h4>
-                                            <p class="card-title">Articles sur les annonces locations</p>
+                                            <p class="card-title">Blog articles on reservations</p>
                                         </div>
                                         <div class="col-md-6 text-right">
                                       <span>
@@ -110,7 +110,7 @@
                                                    <span class="btn-label">
                                                        <i class="material-icons">add</i>
                                                   </span>
-                                                <b class="title_hover">New article de blog reservation</b>
+                                                <b class="title_hover">New article on reservation</b>
                                             </a>
                                         </div>
 
@@ -119,7 +119,7 @@
                                         <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                             <thead>
                                             <tr>
-                                                <th><b>Title annonce</b></th>
+                                                <th><b>Title</b></th>
                                                 <th><b>User</b></th>
                                                 <th><b>Category</b></th>
                                                 <th><b>Status user</b></th>
@@ -130,7 +130,7 @@
                                             </thead>
                                             <tfoot>
                                             <tr>
-                                                <th>Title annonce</th>
+                                                <th>Title</th>
                                                 <th>User</th>
                                                 <th>Category</th>
                                                 <th>Status user</th>
@@ -155,20 +155,20 @@
                                                 <td>
                                                     <div class="timeline-heading">
                                                         <span v-if="item.status" class="badge badge-success">
-                                                          <b>Activé</b>
+                                                          <b>Active</b>
                                                         </span>
                                                         <span v-else class="badge badge-rose">
-                                                        <b>Deactivé</b>
+                                                        <b>Disactive</b>
                                                         </span>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="timeline-heading">
                                                         <span v-if="item.status_admin" class="badge badge-success">
-                                                          <b>Activé</b>
+                                                          <b>Active</b>
                                                         </span>
                                                         <span v-else class="badge badge-rose">
-                                                        <b>Deactivé</b>
+                                                        <b>Disactive</b>
                                                         </span>
                                                     </div>
                                                 </td>
@@ -268,7 +268,7 @@
             /** Ici c'est l'activation  **/
             activeItem(id){
                 Swal.fire({
-                    title: 'Show or activated this article?',
+                    title: 'Show or activate this article?',
                     text: "Are you sure to confirm this article?",
                     buttonsStyling: false,
                     confirmButtonClass: "btn btn-success",
@@ -322,7 +322,7 @@
             /** Ici c'est la désactivation **/
             disableItem(id){
                 Swal.fire({
-                    title: 'Mask or unactivated this article?',
+                    title: 'Mask or unactivate this article?',
                     text: "Are you sure to confirm this article?",
                     buttonsStyling: false,
                     confirmButtonClass: "btn btn-success",

@@ -122,7 +122,7 @@ class ProfileAccountUser extends Component {
             .then(() => {
 
                 $.notify({
-                        message: 'Votre profile a été mise à jour avec succès'
+                        message: 'Votre profil a été mis à jour avec succès'
                     },
                     {
                         allow_dismiss: false,
@@ -148,7 +148,7 @@ class ProfileAccountUser extends Component {
 
     deleteItem(id) {
         Swal.fire({
-            title: 'Confirmer la supression de mon profile?',
+            title: 'Confirmer la supression de mon profil?',
             text: "êtes-vous sûr de vouloir executer cette action",
             type: 'warning',
             buttonsStyling: false,
@@ -205,35 +205,21 @@ class ProfileAccountUser extends Component {
                 </Helmet>
 
                 <div className="about-us sidebar-collapse">
-
                     <nav className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
-
-
-
                     <div className="wrapper">
-
-
                         <div className="main main-raised">
-
                             <div className="container">
                                 <br />
-
                                 <form role="form" id="contact-form" onSubmit={this.saveItem} acceptCharset="UTF-8">
-
                                     <div className="row">
-
                                         <div className="col-lg-4 col-md-12 mx-auto">
-
 
                                             <NavProfileAccountPrivate />
 
                                         </div>
-
-
                                         <div className="col-lg-8 col-md-12 mx-auto">
-
                                             <div className="card">
                                                 <div className="card-body">
                                                 <div className="card-header d-flex align-items-center">
@@ -248,7 +234,6 @@ class ProfileAccountUser extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                     <hr/>
                                                     <Row>
                                                         <div className="col-md-6 col-6">
@@ -325,7 +310,7 @@ class ProfileAccountUser extends Component {
                                                         </div>
 
                                                         <div className="col-md-6 col-6">
-                                                            <label htmlFor="title"><b>Pseudo profile</b></label>
+                                                            <label htmlFor="title"><b>Pseudo profil</b></label>
                                                             <div className="input-group">
                                                                 <div className="input-group-prepend">
                                                                     <span className="input-group-text">
@@ -358,7 +343,7 @@ class ProfileAccountUser extends Component {
                                                                 {this.renderErrorFor('avatar')}
                                                                 <div className="text-center">
                                                                     <label htmlFor="avatar" className="btn btn-primary">
-                                                                        <span className="btn-inner--text">Modifier le profile</span>
+                                                                        <span className="btn-inner--text">Modifier le profil</span>
                                                                     </label>
                                                                     <label hidden={this.state.showDefaultImage ? true : false} onClick={this.removeavatarImage} className="btn btn-danger">
                                                                         <span className="btn-inner--text">Enlever</span>
@@ -381,10 +366,8 @@ class ProfileAccountUser extends Component {
                                                                     </label>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </Row>
-
 
                                                     <div className="row">
                                                         <div className="col-md-6 col-6">
@@ -412,7 +395,7 @@ class ProfileAccountUser extends Component {
                                                         </div>
 
                                                         <div className="col-md-6 col-6">
-                                                            <label htmlFor="phone"><b>Teléphone</b></label>
+                                                            <label htmlFor="phone"><b>Téléphone</b></label>
                                                             <div className="input-group">
                                                                 <div className="input-group-prepend">
                                                                     <span className="input-group-text">
@@ -433,7 +416,6 @@ class ProfileAccountUser extends Component {
                                                                 {this.renderErrorFor('phone')}
                                                             </div>
                                                         </div>
-
                                                     </div>
 
                                                     <div className="row">
@@ -482,36 +464,24 @@ class ProfileAccountUser extends Component {
                                                         </div>
 
                                                     </div>
-
-
                                                     <div className="submit text-center">
                                                         <button className="btn btn-primary" type="submit">
                                                             <b>Enregistrer</b>
                                                         </button>
                                                     </div>
                                                 </div>
-
                                             </div>
 
                                             <Button onClick={() => this.deleteItem(this.state.id)} className="btn btn-outline-danger pull-right"  id="TooltipDelete">
-                                                <i className="far fa-trash-alt"/> Supprimer le profile
+                                                <i className="far fa-trash-alt"/> Supprimer le profil
                                             </Button>{" "}
                                             <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
-                                                Supprimer mon profile
+                                                Supprimer mon profil
                                             </UncontrolledTooltip>
                                         </div>
-
-
-
-
                                     </div>
-
                                 </form>
-
                             </div>
-
-
-
                         </div>
 
                         <FooterBigUserSite />

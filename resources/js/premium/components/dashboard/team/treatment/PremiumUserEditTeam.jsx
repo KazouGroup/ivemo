@@ -96,7 +96,7 @@ class PremiumUserEditTeam extends Component {
         }else{
             $.notify({
                     //,
-                    message: 'La fichier ne peut pas être supérieure à 15 MB'
+                    message: 'Le fichier ne peut pas être supérieure à 15 MB'
                 },
                 {
                     allow_dismiss: false,
@@ -132,7 +132,7 @@ class PremiumUserEditTeam extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes vous sure de vouloir executer cette action",
+            text: "êtes vous sure de vouloir exècuter cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -151,7 +151,7 @@ class PremiumUserEditTeam extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Donné suprimée avec success'
+                            message: 'Donnée supprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -170,7 +170,7 @@ class PremiumUserEditTeam extends Component {
 
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooopss! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -223,7 +223,7 @@ class PremiumUserEditTeam extends Component {
 
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -238,7 +238,7 @@ class PremiumUserEditTeam extends Component {
 
     unactiveItem(id){
         Swal.fire({
-            title: 'Désactiver l\'utilisateur?',
+            title: 'Déactiver l\'utilisateur?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -258,7 +258,7 @@ class PremiumUserEditTeam extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
 
-                            message: 'Utilisateur désactiver avec succès'
+                            message: 'Utilisateur désactivé avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -277,7 +277,7 @@ class PremiumUserEditTeam extends Component {
 
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -305,7 +305,7 @@ class PremiumUserEditTeam extends Component {
             .then(() => {
 
                 $.notify({
-                        message: 'Informations mise à jour avec success...'
+                        message: 'Informations mit à jour avec succès...'
                     },
                     {
                         allow_dismiss: false,
@@ -324,7 +324,7 @@ class PremiumUserEditTeam extends Component {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Something wrong. Try later...", {
+            $.notify("Ooops! Something wrong. Try later...", {
                 allow_dismiss: false,
                 type: 'danger',
                 animate: {
@@ -399,7 +399,6 @@ class PremiumUserEditTeam extends Component {
 
                     <div className="content">
                         <div className="container-fluid">
-
                             <div className="row">
                                 <div className="col-lg-4 col-md-4 col-sm-4">
                                     <div className="card card-stats">
@@ -424,12 +423,12 @@ class PremiumUserEditTeam extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">done</i>
                                             </div>
-                                            <p className="card-category"><b>Actives</b></p>
+                                            <p className="card-category"><b>Activés</b></p>
                                             <h3 className="card-title"><b>{this.dataactive_countFormatter(teamsactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">done</i>  Actives
+                                                <i className="material-icons">done</i>  Activés
                                             </div>
                                         </div>
                                     </div>
@@ -440,7 +439,7 @@ class PremiumUserEditTeam extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">remove</i>
                                             </div>
-                                            <p className="card-category"><b>Desactivés</b></p>
+                                            <p className="card-category"><b>Désactivés</b></p>
                                             <h3 className="card-title"><b>{this.dataunactive_countFormatter(teamsunactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
@@ -450,7 +449,6 @@ class PremiumUserEditTeam extends Component {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div className="row">
@@ -476,7 +474,6 @@ class PremiumUserEditTeam extends Component {
                                     </div>
                                 </div>
                             </div>
-
 
                             <div className="row">
                                 <div className="col-md-12">
@@ -529,7 +526,6 @@ class PremiumUserEditTeam extends Component {
                                                         <i className="material-icons">delete_forever</i>
                                                     </Button>{" "}
                                                 </div>
-
                                             </div>
 
                                             <form role="form" onSubmit={this.updateItem} acceptCharset="UTF-8">
@@ -539,7 +535,7 @@ class PremiumUserEditTeam extends Component {
                                                     <Row>
                                                         <div className="col-md-6">
                                                             <label className="labels">
-                                                                Non complet
+                                                                Nom complet
                                                                 <span className="text-danger">*</span>
                                                             </label>
                                                             <FormGroup>
@@ -604,7 +600,7 @@ class PremiumUserEditTeam extends Component {
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                             formats={this.formats}
-                                                                            placeholder="Laisser votre description..."
+                                                                            placeholder="Laisser votre déscription..."
                                                                             className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                             value={this.state.description || ''}
                                                                             onChange={this.handleChangeBody} />
@@ -625,12 +621,10 @@ class PremiumUserEditTeam extends Component {
                                                 </div>
                                             </form>
 
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 

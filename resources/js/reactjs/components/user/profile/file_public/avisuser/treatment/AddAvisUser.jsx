@@ -22,13 +22,13 @@ class AddAvisUser extends Component {
                         </div>
 
                         <div className="media-body">
-                                                        <textarea name="description" value={this.props.state.description || ""}
-                                                                  onChange={this.props.handleFieldChange}
-                                                                  maxLength="10000"
-                                                                  placeholder={' Laiser votre avis... !'}
-                                                                  className={`form-control ${this.props.hasErrorFor('description') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                  id="description"
-                                                                  rows="15" />
+                          <textarea name="description" value={this.props.state.description || ""}
+                            onChange={this.props.handleFieldChange}
+                            maxLength="10000"
+                            placeholder={' Laiser votre avis... !'}
+                            className={`form-control ${this.props.hasErrorFor('description') ? 'is-invalid' : ''} form-control-alternative"`}
+                            id="description"
+                            rows="15" />
 
                             {this.props.renderErrorFor('description')}
                             <div className="media-footer">

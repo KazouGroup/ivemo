@@ -68,4 +68,22 @@ class ContactusersadvertController extends Controller
 
         return ['message' => 'Deleted successfully '];
     }
+
+    public function activated($id)
+    {
+        $contactusersadvert = contactusersadvert::where('id', $id)->findOrFail($id);
+
+        $contactusersadvert->update(['status' => 1,]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+    }
+
+    public function unactivated($id)
+    {
+        $contactusersadvert = contactusersadvert::where('id', $id)->findOrFail($id);
+
+        $contactusersadvert->update(['status' => 0,]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+    }
 }

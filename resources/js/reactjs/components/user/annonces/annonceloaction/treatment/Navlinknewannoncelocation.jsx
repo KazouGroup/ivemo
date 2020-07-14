@@ -19,9 +19,6 @@ class Navlinknewannoncelocation extends PureComponent {
 
             </>
 
-
-
-
         )
     }
 }

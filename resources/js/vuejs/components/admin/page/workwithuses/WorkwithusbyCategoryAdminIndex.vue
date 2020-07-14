@@ -8,8 +8,6 @@
 
         <div class="content">
             <div class="container-fluid">
-
-
                 <div v-if="loaded" class="row">
                     <div class="col-md-12 expo">
                         <div class="card card-stats">
@@ -70,7 +68,7 @@
                                       <span class="btn-label">
                                                <i class="material-icons">add</i>
                                            </span>
-                                            <b class="title_hover">New Work with</b>
+                                            <b class="title_hover">New offer</b>
                                         </router-link>
                                     </div>
 
@@ -80,7 +78,7 @@
                                         <thead>
                                         <tr>
                                             <th><b>Title</b></th>
-                                            <th><b>Category Work with</b></th>
+                                            <th><b>Category Work</b></th>
                                             <th><b>City</b></th>
                                             <th><b>Status</b></th>
                                             <th><b>Postulant</b></th>
@@ -91,7 +89,7 @@
                                         <tfoot>
                                         <tr>
                                             <th>Title</th>
-                                            <th>Category Work with</th>
+                                            <th>Category Work</th>
                                             <th>City</th>
                                             <th>Status</th>
                                             <th>Postulant</th>
@@ -111,7 +109,7 @@
                                             <td>
                                                 <div class="timeline-heading">
                                                     <span v-if="item.status" class="badge badge-success"><b>Active</b></span>
-                                                    <span v-else-if="!item.status"  class="badge badge-rose"><b>Deactive</b></span>
+                                                    <span v-else-if="!item.status"  class="badge badge-rose"><b>Disactive</b></span>
                                                 </div>
                                             </td>
                                             <td><b>{{item.contactworkwithuses_count}}</b></td>
@@ -144,7 +142,6 @@
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -243,7 +240,7 @@
                     /** Alert notify bootstrapp **/
                     $.notify(
                         {
-                            message: `Data desactivated successfully`,
+                            message: `Data disactivated successfully`,
                         },
                         {
                             allow_dismiss: false,
@@ -264,7 +261,7 @@
                     Fire.$emit('ItemGetter');
                 }).catch(() => {
                     //Alert error
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animated bounceInDown',
@@ -313,7 +310,7 @@
                         }).catch(() => {
                             this.$Progress.fail();
                             //Alert error
-                            $.notify("Ooop! Something wrong. Try later", {
+                            $.notify("Ooops! Something wrong. Try later", {
                                 type: 'danger',
                                 animate: {
                                     enter: 'animated bounceInDown',

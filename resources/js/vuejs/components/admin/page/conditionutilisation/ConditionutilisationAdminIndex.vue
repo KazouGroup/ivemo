@@ -7,8 +7,6 @@
 
         <div class="content">
             <div class="container-fluid">
-
-
                 <div v-if="loaded" class="row">
                     <div class="col-md-12 expo">
                         <div class="card card-stats">
@@ -17,7 +15,7 @@
                                     <i class="material-icons">description</i>
                                 </div>
                                 <p class="card-category">
-                                    <b>Condition utilisations</b>
+                                    <b>General conditions for users</b>
                                 </p>
                                 <h3 class="card-title" style="color:red;">
                                     <b>{{conditionutilisations.length}}</b>
@@ -26,7 +24,7 @@
                             <div class="card-footer">
                                 <div class="stats">
                                     <i class="material-icons">description</i>
-                                    <b>Condition utilisations</b>
+                                    <b>Usability conditions</b>
                                 </div>
                             </div>
                         </div>

@@ -13,7 +13,7 @@ class Navlinknewemployment extends Component  {
     infoItem() {
         Swal.fire({
             title: 'Bon à savoir',
-            text: "Pour poster une annonce passer au status professionel",
+            text: "Pour poster une offre, passer au status professionel",
             buttonsStyling: false,
             confirmButtonClass: "btn btn-info",
             cancelButtonClass: 'btn btn-danger',
@@ -37,24 +37,24 @@ class Navlinknewemployment extends Component  {
                      <>
                      {$userIvemo.status_profile ? 
                        <NavLink className="btn btn-danger" to={`/employment/ab/new/`}>
-                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
+                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre Offre</b>
                        </NavLink>
                      : 
                      <Button
                           className="btn btn-danger" onClick={() => this.infoItem()}>
-                         <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
+                         <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre Offre</b>
                       </Button>
                      }
                      </>
                     :
                     <NavLink className="btn btn-danger" to={`/email/verify/`}>
-                         <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
+                         <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre Offre</b>
                     </NavLink>
                 }
                 </>
                 :
                 <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="btn btn-danger">
-                    <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
+                    <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre Offre</b>
                 </a>
             }
         </div>

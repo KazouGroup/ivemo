@@ -8,7 +8,6 @@
         <div class="content">
             <div class="content">
                 <div class="container-fluid">
-
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-4">
                                 <div class="card card-stats">
@@ -37,7 +36,7 @@
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats">
-                                            <i class="material-icons">done</i> Articles actives
+                                            <i class="material-icons">done</i> Articles activated
                                         </div>
                                     </div>
                                 </div>
@@ -48,12 +47,12 @@
                                         <div class="card-icon">
                                             <i class="material-icons">remove</i>
                                         </div>
-                                        <p class="card-category"><b v-if="blogannoncelocationsunactive_count >= 1">Desactivés</b><b v-else>Desactivé</b></p>
+                                        <p class="card-category"><b v-if="blogannoncelocationsunactive_count >= 1">Disactives</b><b v-else>Disactive</b></p>
                                         <h3 class="card-title"><b>{{dataunactive_countFormatter(blogannoncelocationsunactive_count)}}</b></h3>
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats">
-                                            <i class="material-icons">remove</i> Articles désactivés
+                                            <i class="material-icons">remove</i> Articles disactivated
                                         </div>
                                     </div>
                                 </div>
@@ -114,22 +113,21 @@
                                                <span class="btn-label">
                                                 <i class="material-icons">keyboard_backspace</i>
                                               </span>
-                                                <b class="title_hover">Retour</b>
+                                                <b class="title_hover">Back</b>
                                             </router-link>
                                             <a href="/blogs/annonce_locations/ab/new/" class="btn btn-primary btn-raised">
                                                    <span class="btn-label">
                                                        <i class="material-icons">add</i>
                                                   </span>
-                                                <b class="title_hover">New article de blog location</b>
+                                                <b class="title_hover">New category on renting</b>
                                             </a>
                                         </div>
-
                                     </div>
                                     <div class="material-datatables">
                                         <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                             <thead>
                                             <tr>
-                                                <th><b>Title annonce</b></th>
+                                                <th><b>Title</b></th>
                                                 <th><b>User</b></th>
                                                 <th><b>Category</b></th>
                                                 <th><b>Status user</b></th>
@@ -140,7 +138,7 @@
                                             </thead>
                                             <tfoot>
                                             <tr>
-                                                <th>Title annonce</th>
+                                                <th>Title</th>
                                                 <th>User</th>
                                                 <th>Category</th>
                                                 <th>Status user</th>
@@ -165,20 +163,20 @@
                                                 <td>
                                                     <div class="timeline-heading">
                                                         <span v-if="item.status" class="badge badge-success">
-                                                          <b>Activé</b>
+                                                          <b>Active</b>
                                                         </span>
                                                         <span v-else class="badge badge-rose">
-                                                        <b>Deactivé</b>
+                                                        <b>Disactive</b>
                                                         </span>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="timeline-heading">
                                                         <span v-if="item.status_admin" class="badge badge-success">
-                                                          <b>Activé</b>
+                                                          <b>Active</b>
                                                         </span>
                                                         <span v-else class="badge badge-rose">
-                                                        <b>Deactivé</b>
+                                                        <b>Disactive</b>
                                                         </span>
                                                     </div>
                                                 </td>
@@ -294,7 +292,7 @@
             /** Ici c'est l'activation  **/
             activeItem(id){
                 Swal.fire({
-                    title: 'Show or activated this article?',
+                    title: 'Show or activate this article?',
                     text: "Are you sure to confirm this article?",
                     buttonsStyling: false,
                     confirmButtonClass: "btn btn-success",
@@ -348,7 +346,7 @@
             /** Ici c'est la désactivation **/
             disableItem(id){
                 Swal.fire({
-                    title: 'Mask or unactivated this article?',
+                    title: 'Mask or unactivate this article?',
                     text: "Are you sure to confirm this article?",
                     buttonsStyling: false,
                     confirmButtonClass: "btn btn-success",

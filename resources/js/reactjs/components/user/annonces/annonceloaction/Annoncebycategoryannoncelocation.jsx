@@ -125,7 +125,7 @@ class Annoncebycategoryannoncelocation extends Component {
 
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -273,7 +273,7 @@ class Annoncebycategoryannoncelocation extends Component {
                     /** End alert ***/
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -289,7 +289,7 @@ class Annoncebycategoryannoncelocation extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            text: "êtes-vous sûr de vouloir executer cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -312,7 +312,7 @@ class Annoncebycategoryannoncelocation extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec succès'
+                            message: 'Annonce supprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -331,7 +331,7 @@ class Annoncebycategoryannoncelocation extends Component {
                 }).catch(() => {
 
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -381,24 +381,19 @@ class Annoncebycategoryannoncelocation extends Component {
                 <HelmetSite title={`Locations ${annoncelocationbycategory.name || $name_site} - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
-
                     <nav className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
 
                     <div className="wrapper">
-
                         <div className="main main-raised">
                             <div className="container">
                                 <div className="row">
                                 </div>
                             </div>
-
                             <div className="container">
                                 <br />
                                 <div className="row">
-
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="submit text-left">
                                             <Link to={`/annonces_locations/locations/`} >
@@ -419,19 +414,15 @@ class Annoncebycategoryannoncelocation extends Component {
 
                                     </div>
 
-
                                     <div className="col-lg-4 col-md-12 mx-auto">
-
                                         <div className="submit text-center">
                                             <Navlinknewannoncelocation {...this.props} />
                                         </div>
-
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="row">
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingThree">
                                                                     <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
@@ -465,7 +456,6 @@ class Annoncebycategoryannoncelocation extends Component {
                                                                         </table>
                                                                     </div>
                                                                 </div>
-
                                                             </div>
 
                                                             <Categoriesannoncereselocation/>
@@ -475,7 +465,6 @@ class Annoncebycategoryannoncelocation extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
 
                                     <div className="modal fade" id="addNew" tabIndex="-1" role="dialog" aria-labelledby="addNewLabel"
@@ -493,9 +482,7 @@ class Annoncebycategoryannoncelocation extends Component {
                                                 <Form role="form"  onSubmit={this.signalemessageItem}  acceptCharset="UTF-8">
 
                                                     <div className="modal-body">
-
                                                         <div className="card-body">
-
                                                             <div className="alert alert-danger text-center" role="alert">
                                                                 <div className="container">
                                                                     {annonceItem.title}
@@ -583,15 +570,14 @@ class Annoncebycategoryannoncelocation extends Component {
                                                                         </label>
                                                                     </div>
                                                                 </div>
-
                                                             </div>
 
                                                             <div className="row">
                                                                 <div className="col-md-6">
                                                                     <div className="input-group">
                                                                         <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons users_circle-08"/></span>
+                                                                            <span className="input-group-text">
+                                                                                <i className="now-ui-icons users_circle-08"/></span>
                                                                         </div>
                                                                         <input id='full_name'
                                                                                type='text'
@@ -610,8 +596,8 @@ class Annoncebycategoryannoncelocation extends Component {
                                                                 <div className="col-md-6">
                                                                     <div className="input-group">
                                                                         <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons ui-1_email-85"/></span>
+                                                                            <span className="input-group-text">
+                                                                                <i className="now-ui-icons ui-1_email-85"/></span>
                                                                         </div>
                                                                         <input id='email'
                                                                                type='email'
@@ -627,7 +613,6 @@ class Annoncebycategoryannoncelocation extends Component {
                                                                         {this.renderErrorFor('email')}
                                                                     </div>
                                                                 </div>
-
                                                             </div>
 
                                                             <div className="row">
@@ -649,9 +634,7 @@ class Annoncebycategoryannoncelocation extends Component {
                                                                     <b>Signaler</b>
                                                                 </button>
                                                             </div>
-
                                                         </div>
-
                                                     </div>
 
                                                 </Form>
@@ -668,7 +651,6 @@ class Annoncebycategoryannoncelocation extends Component {
 
                                 </div>
                             </div>
-
                         </div>
 
                         <FooterBigUserSite />

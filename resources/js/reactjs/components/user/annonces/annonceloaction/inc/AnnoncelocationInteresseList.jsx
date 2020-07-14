@@ -126,7 +126,6 @@ class AnnoncelocationInteresseList extends Component {
                                                                     <i className="fas fa-bookmark"></i>
                                                                 </Button>
                                                             </>
-
                                                             :
                                                             <>
                                                                 <Button onClick={() => this.props.favoriteItem(this.props)}
@@ -138,9 +137,7 @@ class AnnoncelocationInteresseList extends Component {
                                                     </>
                                                 }
                                             </div>
-
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

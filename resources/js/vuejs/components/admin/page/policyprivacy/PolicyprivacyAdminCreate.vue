@@ -7,7 +7,6 @@
 
         <div class="content">
             <div class="container-fluid">
-
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
@@ -75,7 +74,7 @@
                                                 <b class="title_hover">Annuler</b>
                                             </router-link>
                                             <button  :disabled="form.busy" type="submit" class="btn btn-success btn-raised">
-                                                <b class="title_hover">Sauvegarder</b>
+                                                <b class="title_hover">Save</b>
                                             </button>
                                         </div>
                                     </div>
@@ -131,7 +130,7 @@
 
                         $.notify(
                             {
-                                message: `Toutes les informations bien enregisté`,
+                                message: `Informations saved successfully`,
                             },
                             {
                                 allow_dismiss: false,

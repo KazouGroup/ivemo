@@ -8,8 +8,6 @@
 
         <div class="content">
             <div class="container-fluid">
-
-
                 <div v-if="loaded" class="row">
                     <div class="col-md-12 expo">
                         <div class="card card-stats">
@@ -58,7 +56,6 @@
                             </div>
                             <div class="card-body">
                                 <div class="toolbar">
-
                                     <div class="submit text-center">
                                         <router-link  :to="{ name: 'workwithuses.index'}" class="btn btn-secondary btn-raised">
                                                <span class="btn-label">
@@ -67,9 +64,7 @@
                                             <b class="title_hover">Back</b>
                                         </router-link>
                                     </div>
-
                                 </div>
-
                             </div>
                         </div>
 

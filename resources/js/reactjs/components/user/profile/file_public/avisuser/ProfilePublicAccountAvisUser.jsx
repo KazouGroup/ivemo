@@ -113,7 +113,7 @@ class ProfilePublicAccountAvisUser extends Component {
 
     unactiveresponseItem(id) {
         Swal.fire({
-            title: 'Confirmer masquer?',
+            title: 'Confirmer la désactivation?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -151,7 +151,7 @@ class ProfilePublicAccountAvisUser extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -166,7 +166,7 @@ class ProfilePublicAccountAvisUser extends Component {
 
     unactiveItem(id) {
         Swal.fire({
-            title: 'Confirmer masquer?',
+            title: 'Confirmer la désactivation?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -190,7 +190,7 @@ class ProfilePublicAccountAvisUser extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             //,
-                            message: 'L\'avis à été desactivé avec succès'
+                            message: 'L\'avis à été désactivé avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -207,7 +207,7 @@ class ProfilePublicAccountAvisUser extends Component {
                     /** End alert ***/
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -233,7 +233,7 @@ class ProfilePublicAccountAvisUser extends Component {
             .then(() => {
 
                 $.notify({
-                        message: `Votre avis a été bien sauvegardé`
+                        message: `Votre avis a bien été sauvegardé`
                     },
                     {
                         allow_dismiss: false,
@@ -274,7 +274,7 @@ class ProfilePublicAccountAvisUser extends Component {
                 this.setState({description: "",responseavis: false,});
 
                 $.notify({
-                        message: `Votre avis a été bien sauvegardé`
+                        message: `Votre avis a bien été  sauvegardé`
                     },
                     {
                         allow_dismiss: false,
@@ -335,7 +335,7 @@ class ProfilePublicAccountAvisUser extends Component {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -407,7 +407,7 @@ class ProfilePublicAccountAvisUser extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Votre avis à été supprimée avec success '
+                            message: 'Votre avis à été supprimé avec succès '
                         },
                         {
                             allow_dismiss: false,
@@ -425,7 +425,7 @@ class ProfilePublicAccountAvisUser extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -464,7 +464,7 @@ class ProfilePublicAccountAvisUser extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Votre avis à été supprimée avec success '
+                            message: 'Votre avis à été supprimé avec succès '
                         },
                         {
                             allow_dismiss: false,
@@ -482,7 +482,7 @@ class ProfilePublicAccountAvisUser extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -520,16 +520,12 @@ class ProfilePublicAccountAvisUser extends Component {
             <Fragment>
                 <div className="card">
                     <div className="card-body">
-
                         <div className="card-header text-center">
                             <h4 className="card-title"><b>Avis</b></h4>
                         </div>
-
                         <div className="row">
                             <div className="col-md-12 ml-auto mr-auto">
-
-                                    <div className="media-area">
-
+                                <div className="media-area">
 
                                     {!$guest && !this.state.editavis && !this.state.editavisresponse && (
 
@@ -547,7 +543,8 @@ class ProfilePublicAccountAvisUser extends Component {
                                                                 style={{ height: "40px", width: "80px" }}
                                                                 alt={$userIvemo.first_name}
                                                                 className="media-object img-raised rounded" />
-                                                            : <Skeleton circle={false} height={40} width={80} />}
+                                                            :
+                                                             <Skeleton circle={false} height={40} width={80} />}
                                                     </div>
 
                                                     <div className="media-body">
@@ -673,7 +670,7 @@ class ProfilePublicAccountAvisUser extends Component {
 
                                                                                    <Button type="submit"
                                                                                            className="btn btn-primary pull-right btn-sm">
-                                                                                       <i className="now-ui-icons ui-1_simple-add"/> Repondre
+                                                                                       <i className="now-ui-icons ui-1_simple-add"/> Répondre
                                                                                    </Button>
 
                                                                                    <Button onClick={this.cancelresponseCourse}
@@ -747,7 +744,8 @@ class ProfilePublicAccountAvisUser extends Component {
                                                                             style={{ height: "40px", width: "80px" }}
                                                                             alt={lk.user.first_name}
                                                                             className="media-object img-raised rounded" />
-                                                                       : <Skeleton circle={false} height={40} width={80} />}
+                                                                       : 
+                                                                       <Skeleton circle={false} height={40} width={80} />}
                                                                </div>
                                                                <div className="media-body">
 
@@ -870,21 +868,14 @@ class ProfilePublicAccountAvisUser extends Component {
                                             </div>
                                         )}
 
-
-
                                     </div>
-
 
                             </div>
                         </div>
-
-
                     </div>
                 </div>
 
             </Fragment>
-
-
 
         )
     }

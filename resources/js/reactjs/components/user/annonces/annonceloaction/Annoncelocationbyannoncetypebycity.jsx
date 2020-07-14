@@ -126,7 +126,7 @@ class Annoncelocationbyannoncetypebycity extends Component {
 
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -274,7 +274,7 @@ class Annoncelocationbyannoncetypebycity extends Component {
                     /** End alert ***/
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -313,7 +313,7 @@ class Annoncelocationbyannoncetypebycity extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec success'
+                            message: 'Annonce supprimée avec success'
                         },
                         {
                             allow_dismiss: false,
@@ -332,7 +332,7 @@ class Annoncelocationbyannoncetypebycity extends Component {
 
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -373,23 +373,19 @@ class Annoncelocationbyannoncetypebycity extends Component {
                 <HelmetSite title={`Locations d'appartements, villa, chambres et bien d'autres dans la ville de ${annoncelocationbycity.name || $name_site} - ${$name_site}`} />
 
                 <div className="about-us sidebar-collapse">
-
                     <nav className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
 
                     <div className="wrapper">
-
                         <div className="main main-raised">
                             <div className="container">
                                 <div className="row">
                                 </div>
                             </div>
-
                             <div className="container">
                                 <br />
                                 <div className="row">
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="submit text-left">
                                             <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
@@ -409,11 +405,9 @@ class Annoncelocationbyannoncetypebycity extends Component {
                                     </div>
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
-
                                         <div className="submit text-center">
                                             <Navlinknewannoncelocation {...this.props} />
                                         </div>
-
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="row">
@@ -476,11 +470,8 @@ class Annoncelocationbyannoncetypebycity extends Component {
                                                 </div>
 
                                                 <Form role="form" onSubmit={this.signalemessageItem} acceptCharset="UTF-8">
-
                                                     <div className="modal-body">
-
                                                         <div className="card-body">
-
                                                             <div className="alert alert-danger text-center" role="alert">
                                                                 <div className="container">
                                                                     {annonceItem.title}
@@ -568,7 +559,6 @@ class Annoncelocationbyannoncetypebycity extends Component {
                                                                         </label>
                                                                     </div>
                                                                 </div>
-
                                                             </div>
 
                                                             <div className="row">
@@ -612,7 +602,6 @@ class Annoncelocationbyannoncetypebycity extends Component {
                                                                         {this.renderErrorFor('email')}
                                                                     </div>
                                                                 </div>
-
                                                             </div>
 
                                                             <div className="row">
@@ -634,19 +623,14 @@ class Annoncelocationbyannoncetypebycity extends Component {
                                                                     <b>Signaler</b>
                                                                 </button>
                                                             </div>
-
-
                                                         </div>
-
                                                     </div>
 
                                                 </Form>
 
-
                                             </div>
                                         </div>
                                     </div>
-
 
                                     <FormModalContactannonceUser {...this.props} {...annonceItem}
                                         renderErrorFor={this.renderErrorFor}
@@ -656,7 +640,6 @@ class Annoncelocationbyannoncetypebycity extends Component {
 
                                 </div>
                             </div>
-
                         </div>
 
                         <FooterBigUserSite />

@@ -67,7 +67,7 @@ class PremiumUserBlogannonceLocation extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -101,7 +101,7 @@ class PremiumUserBlogannonceLocation extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                        message: "Cette article a été masquée aux utilisateurs",
+                        message: "Cette article a été masqué aux utilisateurs",
                     },
                         {
                             allow_dismiss: false,
@@ -119,7 +119,7 @@ class PremiumUserBlogannonceLocation extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -135,7 +135,7 @@ class PremiumUserBlogannonceLocation extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action?",
+            text: "êtes-vous sûr de vouloir exècuter cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -159,7 +159,7 @@ class PremiumUserBlogannonceLocation extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                         // title: 'Update',
-                        message: 'Article suprimée avec succès'
+                        message: 'Article supprimée avec succès'
                     },
                         {
                             allow_dismiss: false,
@@ -177,7 +177,7 @@ class PremiumUserBlogannonceLocation extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -316,7 +316,7 @@ class PremiumUserBlogannonceLocation extends Component {
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">remove</i> Articles désactivés
+                                                <i className="material-icons">remove</i> Articles déactivés
                                             </div>
                                         </div>
                                     </div>
@@ -429,6 +429,7 @@ class PremiumUserBlogannonceLocation extends Component {
                 <FooterPremiumUser />
 
             </div>
+
             </>
 
         )

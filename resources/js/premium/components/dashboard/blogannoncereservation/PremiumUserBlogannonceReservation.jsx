@@ -67,7 +67,7 @@ class PremiumUserBlogannonceReservation extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -119,7 +119,7 @@ class PremiumUserBlogannonceReservation extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -135,7 +135,7 @@ class PremiumUserBlogannonceReservation extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action?",
+            text: "êtes-vous sûr de vouloir exècuter cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -159,7 +159,7 @@ class PremiumUserBlogannonceReservation extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                         // title: 'Update',
-                        message: 'Article suprimée avec succès'
+                        message: 'Article supprimée avec succès'
                     },
                         {
                             allow_dismiss: false,
@@ -177,7 +177,7 @@ class PremiumUserBlogannonceReservation extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -269,7 +269,6 @@ class PremiumUserBlogannonceReservation extends Component {
 
                     <div className="content">
                         <div className="container-fluid">
-
                             <div className="row">
                                 <div className="col-lg-4 col-md-4 col-sm-4">
                                     <div className="card card-stats">
@@ -310,17 +309,16 @@ class PremiumUserBlogannonceReservation extends Component {
                                             <div className="card-icon">
                                                 <i className="material-icons">remove</i>
                                             </div>
-                                            <p className="card-category"><b>Désactivés</b></p>
+                                            <p className="card-category"><b>Déactivés</b></p>
                                             <h3 className="card-title"><b>{this.dataunactive_countFormatter(blogannoncereservationsunactive_count)}</b></h3>
                                         </div>
                                         <div className="card-footer">
                                             <div className="stats">
-                                                <i className="material-icons">remove</i> Articles désactivés
+                                                <i className="material-icons">remove</i> Articles déactivés
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div className="row">
@@ -346,7 +344,6 @@ class PremiumUserBlogannonceReservation extends Component {
                                     </div>
                                 </div>
                             </div>
-
 
                             <div className="row">
                                 <div className="col-md-12">
@@ -375,11 +372,10 @@ class PremiumUserBlogannonceReservation extends Component {
                                                          <span className="btn-label">
                                                            <i className="material-icons">add</i>
                                                          </span>
-                                                        <b className="title_hover">Poster un votre article sur la reservation</b>
+                                                        <b className="title_hover">Poster votre article sur la reservation</b>
                                                     </Link>
                                                 </div>
                                             </div>
-
                                         </div>
 
                                         {userblogannonce.length >= 0 ?
@@ -389,7 +385,7 @@ class PremiumUserBlogannonceReservation extends Component {
                                                     <tr>
                                                         <th><b>Image</b></th>
                                                         <th><b>Titre</b></th>
-                                                        <th><b>Categorie</b></th>
+                                                        <th><b>Catégorie</b></th>
                                                         <th><b>Vue</b></th>
                                                         <th><b>Status</b></th>
                                                         <th><b>Date</b></th>
@@ -400,7 +396,7 @@ class PremiumUserBlogannonceReservation extends Component {
                                                     <tr>
                                                         <th>Image</th>
                                                         <th>Titre</th>
-                                                        <th>Categorie</th>
+                                                        <th>Catégorie</th>
                                                         <th>Vue</th>
                                                         <th>Status</th>
                                                         <th>Date</th>
@@ -422,13 +418,13 @@ class PremiumUserBlogannonceReservation extends Component {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
                 <FooterPremiumUser />
 
             </div>
+
             </>
 
         )

@@ -93,7 +93,7 @@ class ProfileAccountAvisUser extends Component {
 
     deleteItem(id) {
         Swal.fire({
-            title: 'Confirmer la supression?',
+            title: 'Confirmer la suppression?',
             text: "êtes-vous sûr de vouloir executer cette action",
             type: 'warning',
             buttonsStyling: false,
@@ -116,7 +116,7 @@ class ProfileAccountAvisUser extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Votre avis à été supprimée avec success '
+                            message: 'Votre avis à été supprimé avec succès '
                         },
                         {
                             allow_dismiss: false,
@@ -134,7 +134,7 @@ class ProfileAccountAvisUser extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -149,7 +149,7 @@ class ProfileAccountAvisUser extends Component {
 
     unactiveItem(id) {
         Swal.fire({
-            title: 'Confirmer masquer?',
+            title: 'Confirmer la désactivation?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -172,7 +172,7 @@ class ProfileAccountAvisUser extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                         //,
-                        message: 'L\'avis à été desactivé avec succès'
+                        message: 'L\'avis à été désactivé avec succès'
                     },
                         {
                             allow_dismiss: false,
@@ -190,7 +190,7 @@ class ProfileAccountAvisUser extends Component {
                     this.loadItems();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -216,7 +216,7 @@ class ProfileAccountAvisUser extends Component {
             .then(response => {
 
                 $.notify({
-                    message: `Votre avis a été bien sauvegardé`
+                    message: `Votre avis a bien été sauvegardé`
                 },
                     {
                         allow_dismiss: false,
@@ -300,7 +300,7 @@ class ProfileAccountAvisUser extends Component {
                 $('#addNew').modal('hide');
 
                 $.notify({
-                    message: `Reponse bien sauvegardé`
+                    message: `Réponse bien sauvegardé`
                 },
                     {
                         allow_dismiss: false,
@@ -368,16 +368,13 @@ class ProfileAccountAvisUser extends Component {
             <Fragment>
                 <div className="card">
                     <div className="card-body">
-
                         <div className="card-header text-center">
                             <h4 className="card-title"><b>Avis</b></h4>
                         </div>
-
                         <div className="row">
                             <div className="col-md-12 ml-auto mr-auto">
 
                                 {avisusers.length > 0 && (
-
                                     <div className="media-area">
 
                                         {avisusers.map((item) => (
@@ -478,7 +475,6 @@ class ProfileAccountAvisUser extends Component {
                                                                     </>
                                                                 )}
 
-
                                                             </div>
                                                         </div>
                                                     )}
@@ -568,7 +564,7 @@ class ProfileAccountAvisUser extends Component {
                             <div className="modal-dialog modal-lg">
                                 <div className="modal-content">
                                     <div className="modal-header">
-                                        <h5 className="modal-title">Repondre à cette avis</h5>
+                                        <h5 className="modal-title">Repondre à cet avis</h5>
                                         <button type="button" className="close" data-dismiss="modal"
                                                 aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
@@ -622,7 +618,7 @@ class ProfileAccountAvisUser extends Component {
                             <div className="modal-dialog modal-lg">
                                 <div className="modal-content">
                                     <div className="modal-header">
-                                        <h5 className="modal-title">Repondre à cette avis</h5>
+                                        <h5 className="modal-title">Repondre à cet avis</h5>
                                         <button type="button" className="close" data-dismiss="modal"
                                                 aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
@@ -663,20 +659,15 @@ class ProfileAccountAvisUser extends Component {
 
                                         </div>
 
-
                                     </Form>
-
 
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
             </Fragment>
-
-
 
         )
     }

@@ -84,7 +84,7 @@ class ProfileForallAnnoncelocationShow extends Component {
                                             <i className="far fa-eye"></i> <b>{this.data_countFormatter(this.props.visits_count)}</b>
                                         </a>
                                         <button type="button" rel="tooltip" onClick={() => this.props.statusItem(this.props)}
-                                                className="btn btn-success btn-icon btn-sm" title="Desactiver cette annonce">
+                                                className="btn btn-success btn-icon btn-sm" title="Désactiver cette annonce">
                                             <i className="now-ui-icons ui-1_check"/>
                                         </button>
                                         {this.props.status_comments ?
@@ -136,7 +136,7 @@ class ProfileForallAnnoncelocationShow extends Component {
                             {this.props.user.profile.site_internet && (
                                 <div className="col-md-6 col-6">
                                     <a href={`${this.props.user.profile.site_internet}`} target="_blank" title={this.props.user.profile.site_internet}>
-                                        <small><b>Consulter le site de l'utilisateur</b></small>
+                                        <small><b>Consulter le site web de l'utilisateur</b></small>
                                     </a>
                                 </div>
                             )}
@@ -153,7 +153,6 @@ class ProfileForallAnnoncelocationShow extends Component {
                     </>
                 )}
             </>
-
 
         )
     }

@@ -8,8 +8,6 @@
 
         <div class="content">
             <div class="container-fluid">
-
-
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-4">
                         <div class="card card-stats">
@@ -17,12 +15,12 @@
                                 <div class="card-icon">
                                     <i class="material-icons">work</i>
                                 </div>
-                                <p class="card-category"><b v-if="employments_count >= 1">Annonces</b><b v-else>Annonce</b></p>
+                                <p class="card-category"><b v-if="employments_count >= 1">Posts</b><b v-else>Post</b></p>
                                 <h3 class="card-title"><b>{{data_countFormatter(employments_count)}}</b></h3>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
-                                    <i class="material-icons">work</i> Emplois & Formations
+                                    <i class="material-icons">work</i> Employments & Trainings
                                 </div>
                             </div>
                         </div>
@@ -33,12 +31,12 @@
                                 <div class="card-icon">
                                     <i class="material-icons">done</i>
                                 </div>
-                                <p class="card-category"><b v-if="employmentsactive_count >= 1">Annonces</b><b v-else>Annonce</b></p>
+                                <p class="card-category"><b v-if="employmentsactive_count >= 1">Posts</b><b v-else>Post</b></p>
                                 <h3 class="card-title"><b>{{dataactive_countFormatter(employmentsactive_count)}}</b></h3>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
-                                    <i class="material-icons">done</i> Annonces actives
+                                    <i class="material-icons">done</i> Activated posts
                                 </div>
                             </div>
                         </div>
@@ -49,19 +47,17 @@
                                 <div class="card-icon">
                                     <i class="material-icons">remove</i>
                                 </div>
-                                <p class="card-category"><b v-if="employmentsunactive_count >= 1">Desactivés</b><b v-else>Desactivé</b></p>
+                                <p class="card-category"><b v-if="employmentsunactive_count >= 1">Disactives</b><b v-else>Disactive</b></p>
                                 <h3 class="card-title"><b>{{dataunactive_countFormatter(employmentsunactive_count)}}</b></h3>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
-                                    <i class="material-icons">remove</i> Annonces désactivés
+                                    <i class="material-icons">remove</i> Disactivated posts
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-
 
                 <div class="row">
                     <div class="col-md-12 expo">
@@ -71,7 +67,7 @@
                                     <i class="material-icons">work</i>
                                 </div>
                                 <p class="card-category">
-                                    <b>Emplois & Formations</b>
+                                    <b>Employments & Trainings</b>
                                 </p>
                                 <h3 class="card-title" style="color:red;">
                                     <b>{{data_countFormatter(employments_count)}}</b>
@@ -80,7 +76,7 @@
                             <div class="card-footer">
                                 <div class="stats">
                                     <i class="material-icons">work</i>
-                                    <b>Emplois & Formations</b>
+                                    <b>Employments & Trainings</b>
                                 </div>
                             </div>
                         </div>
@@ -94,9 +90,9 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h4 class="card-title">
-                                            <b>Emplois & Formations</b>
+                                            <b>Employments & Trainings</b>
                                         </h4>
-                                        <p class="card-title">Emplois & Formations</p>
+                                        <p class="card-title">Employments & Trainings</p>
                                     </div>
                                     <div class="col-md-6 text-right">
                                       <span>
@@ -107,15 +103,13 @@
                             </div>
                             <div class="card-body">
                                 <div class="toolbar">
-
-
                                 </div>
                                 <div class="material-datatables">
                                     <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                         <thead>
                                         <tr>
                                             <th><b>Title</b></th>
-                                            <th><b>Category Work with</b></th>
+                                            <th><b>Category Work</b></th>
                                             <th><b>City</b></th>
                                             <th>Status user</th>
                                             <th>Status admin</th>
@@ -126,7 +120,7 @@
                                         <tfoot>
                                         <tr>
                                             <th>Title</th>
-                                            <th>Category Work with</th>
+                                            <th>Category Work</th>
                                             <th>City</th>
                                             <th>Status user</th>
                                             <th>Status admin</th>
@@ -154,20 +148,20 @@
                                             <td>
                                                 <div class="timeline-heading">
                                                         <span v-if="item.status" class="badge badge-success">
-                                                          <b>Activé</b>
+                                                          <b>Active</b>
                                                         </span>
                                                     <span v-else class="badge badge-rose">
-                                                        <b>Deactivé</b>
+                                                        <b>Disactive</b>
                                                         </span>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="timeline-heading">
                                                         <span v-if="item.status_admin" class="badge badge-success">
-                                                          <b>Activé</b>
+                                                          <b>Active</b>
                                                         </span>
                                                     <span v-else class="badge badge-rose">
-                                                        <b>Deactivé</b>
+                                                        <b>Disactive</b>
                                                         </span>
                                                 </div>
                                             </td>
@@ -267,7 +261,7 @@
             /** Ici c'est l'activation  **/
             activeItem(id){
                 Swal.fire({
-                    title: 'Show or activated this article?',
+                    title: 'Show or activate this article?',
                     text: "Are you sure to confirm this article?",
                     buttonsStyling: false,
                     confirmButtonClass: "btn btn-success",
@@ -321,7 +315,7 @@
             /** Ici c'est la désactivation **/
             disableItem(id){
                 Swal.fire({
-                    title: 'Mask or unactivated this article?',
+                    title: 'Mask or unactivate this article?',
                     text: "Are you sure to confirm this article?",
                     buttonsStyling: false,
                     confirmButtonClass: "btn btn-success",

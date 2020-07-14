@@ -303,7 +303,7 @@ class Annoncelocationbycategorycityshow extends Component {
                             });
                     }else {
                         $.notify({
-                                message: "Annonce activé avec succès",
+                                message: "Annonce activée avec succès",
                             },
                             {
                                 allow_dismiss: false,
@@ -322,7 +322,7 @@ class Annoncelocationbycategorycityshow extends Component {
                     this.props.history.push("/annonces_locations/"+ this.props.match.params.annoncetype +"/");
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -357,7 +357,7 @@ class Annoncelocationbycategorycityshow extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec succès'
+                            message: 'Annonce supprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -375,7 +375,7 @@ class Annoncelocationbycategorycityshow extends Component {
                     this.props.history.push('/annonces_locations/locations/');
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -411,21 +411,16 @@ class Annoncelocationbycategorycityshow extends Component {
                 <HelmetSite title={`${annoncelocation.title || $name_site} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
-
                     <Navbar className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </Navbar>
 
                     <div className="wrapper">
-
                         <div className="main main-raised">
-
                             <div className="container">
                                 <br />
                                 <div className="row">
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
-
                                         <div className="card-body">
                                             <div className="submit text-left">
                                                 <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
@@ -434,7 +429,6 @@ class Annoncelocationbycategorycityshow extends Component {
                                             </div>
 
                                             <div className="card-image">
-
                                                 <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
                                                     <ol className="carousel-indicators">
                                                         <li data-target="#carouselAnnonceIndicators" data-slide-to="0" className=""></li>
@@ -500,10 +494,9 @@ class Annoncelocationbycategorycityshow extends Component {
                                                             <>
                                                                 <Button onClick={() => this.favoriteItem(annoncelocation)}
                                                                         className="btn btn-danger btn-sm" title="Retirer de vos favoris">
-                                                                    <i className="fas fa-bookmark"></i> <b>Sauvegardé</b>
+                                                                    <i className="fas fa-bookmark"></i> <b>Sauvegarder</b>
                                                                 </Button>
                                                             </>
-
                                                             :
                                                             <>
                                                                 <Button onClick={() => this.favoriteItem(annoncelocation)}
@@ -514,8 +507,8 @@ class Annoncelocationbycategorycityshow extends Component {
                                                         }
                                                     </>
                                                 }
-                                            </div>
 
+                                            </div>
                                         </div>
 
                                         <div className="card">
@@ -524,7 +517,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                     À propos de <b>{annoncelocation.categoryannoncelocation.label} {annoncelocation.pieces} pièces à {annoncelocation.district}</b>
                                                 </h5>
 
-                                                {annoncelocation.description ? <span className="title text-justify" dangerouslySetInnerHTML={this.getDescription(annoncelocation)} />: <Skeleton count={3}/>}
+                                                {annoncelocation.description ? <span className="title text-justify" dangerouslySetInnerHTML={this.getDescription(annoncelocation)} /> : <Skeleton count={3}/>}
 
                                             </div>
                                         </div>
@@ -582,13 +575,9 @@ class Annoncelocationbycategorycityshow extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
-
                                             </div>
-
                                         </div>
-
 
                                         {annoncelocation.status_comments ?
 
@@ -665,7 +654,6 @@ class Annoncelocationbycategorycityshow extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
 
@@ -840,18 +828,13 @@ class Annoncelocationbycategorycityshow extends Component {
 
                                 <BlogannoncelocationIntesseAnnonseShow {...this.props} />
 
-
-
                             </div>
-
                         </div>
 
                         <FooterBigUserSite />
                     </div>
                 </div>
             </>
-
-
 
         )
     }

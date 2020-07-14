@@ -11,8 +11,6 @@ import ReactQuill from "react-quill";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
-
-
 class PremiumUserEditBlogannonceVente extends Component {
     constructor(props) {
         super(props);
@@ -138,7 +136,7 @@ class PremiumUserEditBlogannonceVente extends Component {
             .then(() => {
                 $.notify({
                         //,
-                        message: 'Votre article de blogs a bien été modifié'
+                        message: 'Votre article de blog a bien été modifié'
                     },
                     {
                         allow_dismiss: false,
@@ -156,7 +154,7 @@ class PremiumUserEditBlogannonceVente extends Component {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Something wrong. Try later...", {
+            $.notify("Ooops! Something wrong. Try later...", {
                 allow_dismiss: false,
                 type: 'danger',
                 animate: {
@@ -175,7 +173,7 @@ class PremiumUserEditBlogannonceVente extends Component {
             /** Alert notify bootstrapp **/
             $.notify({
                     //,
-                    message: 'Article de blogs activé avec succès'
+                    message: 'Article de blog activé avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -194,7 +192,7 @@ class PremiumUserEditBlogannonceVente extends Component {
 
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -213,7 +211,7 @@ class PremiumUserEditBlogannonceVente extends Component {
             /** Alert notify bootstrapp **/
             $.notify({
                     // title: 'Update FAQ',
-                    message: 'Article de blogs désactivé avec succès'
+                    message: 'Article de blog désactivé avec succès'
                 },
                 {
                     allow_dismiss: false,
@@ -231,7 +229,7 @@ class PremiumUserEditBlogannonceVente extends Component {
             this.loadItems();
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -245,7 +243,7 @@ class PremiumUserEditBlogannonceVente extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action?",
+            text: "êtes-vous sûr de vouloir exècuter cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -263,7 +261,7 @@ class PremiumUserEditBlogannonceVente extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Article de blogs suprimée avec succès'
+                            message: 'Article de blog supprimé avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -281,7 +279,7 @@ class PremiumUserEditBlogannonceVente extends Component {
                     this.props.history.goBack();
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -359,7 +357,6 @@ class PremiumUserEditBlogannonceVente extends Component {
 
                     <div className="content">
                         <div className="container-fluid">
-
                             <div className="row">
                                 <div className="col-lg-4 col-md-4 col-sm-4">
                                     <div className="card card-stats">
@@ -410,7 +407,6 @@ class PremiumUserEditBlogannonceVente extends Component {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div className="row">
@@ -436,7 +432,6 @@ class PremiumUserEditBlogannonceVente extends Component {
                                     </div>
                                 </div>
                             </div>
-
 
                             <div className="row">
                                 <div className="col-md-12">
@@ -470,7 +465,7 @@ class PremiumUserEditBlogannonceVente extends Component {
                                                     {this.state.status ?
                                                         <>
                                                             <button type="button" rel="tooltip" onClick={() => this.unactiveItem(this.state.id)}
-                                                                    className="btn btn-success btn-just-icon btn-sm" title="Desactiver" >
+                                                                    className="btn btn-success btn-just-icon btn-sm" title="Déactiver" >
                                                                 <i className="material-icons">done</i>
                                                             </button>
                                                         </>
@@ -489,11 +484,9 @@ class PremiumUserEditBlogannonceVente extends Component {
                                                         <i className="material-icons">delete_forever</i>
                                                     </Button>{" "}
                                                 </div>
-
                                             </div>
 
                                             <Form role="form" onSubmit={this.updateItem} acceptCharset="UTF-8">
-
 
                                                 <CardBody>
 
@@ -520,7 +513,7 @@ class PremiumUserEditBlogannonceVente extends Component {
 
                                                     <Row>
                                                         <div className="col-md-6">
-                                                            <label htmlFor="title">Estimer en temp <b>{this.state.red_time} min lecture</b></label>
+                                                            <label htmlFor="title">Estimer <b>{this.state.red_time} min lecture</b></label>
                                                             <FormGroup>
                                                                 <Input id='red_time'
                                                                        type='number'
@@ -528,7 +521,7 @@ class PremiumUserEditBlogannonceVente extends Component {
                                                                        name='red_time'
                                                                        maxLength="20"
                                                                        minLength="1"
-                                                                       placeholder="Estimer un temp de lecture en min"
+                                                                       placeholder="Estimer un temps de lecture en min"
                                                                        aria-label="Estimer un temp de lecture "
                                                                        value={this.state.red_time || ''}
                                                                        required
@@ -583,7 +576,7 @@ class PremiumUserEditBlogannonceVente extends Component {
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                             formats={this.formats}
-                                                                            placeholder="Laisser votre description..."
+                                                                            placeholder="Laisser votre déscription..."
                                                                             className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                             value={this.state.description || ''}
                                                                             onChange={this.handleChangeBody} />
@@ -604,12 +597,10 @@ class PremiumUserEditBlogannonceVente extends Component {
                                                 </div>
                                             </Form>
 
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 

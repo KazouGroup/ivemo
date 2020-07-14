@@ -221,7 +221,7 @@ class EmployementInteresse extends PureComponent {
                 {employmentsinteresses.length >= 0 && (
 
                     <div className="text-center">
-                        <h4 className="title">Annonces similaires</h4>
+                        <h4 className="title">Offres similaires</h4>
                     </div>
                 )}
 
@@ -235,7 +235,7 @@ class EmployementInteresse extends PureComponent {
                     <div className="row">
                         <div className="col-md-4 ml-auto mr-auto text-center">
                             <button type="button" onClick={this.loadmoresItem} className="btn btn-primary">
-                                <b>Voir plus d'annonces</b>
+                                <b>Voir plus d'offres</b>
                             </button>
                         </div>
                     </div>

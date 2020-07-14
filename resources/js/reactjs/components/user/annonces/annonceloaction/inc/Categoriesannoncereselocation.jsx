@@ -51,7 +51,7 @@ class Categoriesannoncereselocation extends PureComponent {
             <div className="card card-plain">
                 <div className="card-header" role="tab" id="headingIni">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseIni" aria-expanded="true" aria-controls="collapseIni">
-                        <b>Quesque vous aviez besoin ?</b>
+                        <b>De quoi avez vous bésoin?</b>
                         <i className="now-ui-icons arrows-1_minimal-down"/>
                     </a>
                 </div>

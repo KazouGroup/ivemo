@@ -59,7 +59,7 @@ class PublicUserAnnonceReservations extends Component {
 
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -91,7 +91,7 @@ class PublicUserAnnonceReservations extends Component {
 
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -105,7 +105,7 @@ class PublicUserAnnonceReservations extends Component {
         const url = route('annoncereservations_subscribe.subscribe', [id]);
         dyaxios.post(url).then(() => {
             $.notify({
-                    message: "Notifications activé",
+                    message: "Notifications activée",
                 },
                 {
                     allow_dismiss: false,
@@ -123,7 +123,7 @@ class PublicUserAnnonceReservations extends Component {
 
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -137,7 +137,7 @@ class PublicUserAnnonceReservations extends Component {
         const url = route('annoncereservations_unsubscribe.unsubscribe', [id]);
         dyaxios.post(url).then(() => {
             $.notify({
-                    message: "Notifications desactivé",
+                    message: "Notifications désactivée",
                 },
                 {
                     allow_dismiss: false,
@@ -155,7 +155,7 @@ class PublicUserAnnonceReservations extends Component {
 
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -209,7 +209,7 @@ class PublicUserAnnonceReservations extends Component {
                     /** End alert ***/
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
+                    $.notify("Ooops! Something wrong. Try later", {
                         type: 'danger',
                         animate: {
                             enter: 'animate__animated animate__bounceInDown',
@@ -249,7 +249,7 @@ class PublicUserAnnonceReservations extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec succès'
+                            message: 'Annonce supprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -266,7 +266,7 @@ class PublicUserAnnonceReservations extends Component {
                     /** End alert ***/
                 }).catch(() => {
                     //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
+                    $.notify("Ooops! Une erreur est survenue", {
                         allow_dismiss: false,
                         type: 'danger',
                         animate: {
@@ -309,12 +309,9 @@ class PublicUserAnnonceReservations extends Component {
                 <HelmetSite title={`Annonces reservations ${useranoncereservationPublick.first_name || 'Profile'} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
-
-
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
                         <NavUserSite />
                     </nav>
-
                     <div className="wrapper">
                         <div className="page-header page-header-mini">
                             <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}/>
@@ -368,7 +365,6 @@ class PublicUserAnnonceReservations extends Component {
                             <div className="container">
                                 <br />
                                 <div className="row">
-
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         {useranoncereservationPublick.status_profile === 1 && (
@@ -385,7 +381,6 @@ class PublicUserAnnonceReservations extends Component {
                                             </div>
                                         )}
 
-
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="row">
@@ -400,9 +395,7 @@ class PublicUserAnnonceReservations extends Component {
 
                                                                 <NavLinkPublicAnnonceUser {...this.props} {...useranoncereservationPublick}/>
 
-
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -424,7 +417,6 @@ class PublicUserAnnonceReservations extends Component {
                                                                 <NavLinkPublicEmploymentUser {...this.props} {...useranoncereservationPublick}/>
 
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -446,7 +438,6 @@ class PublicUserAnnonceReservations extends Component {
                                                                 <NavLinkPublicBlogannoncesUser {...this.props} {...useranoncereservationPublick}/>
 
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -458,7 +449,6 @@ class PublicUserAnnonceReservations extends Component {
                                                 <div className="card-body">
                                                     <div className="row">
                                                         <div className="col-md-12">
-
                                                             <div className="card-header text-center">
                                                                 <h4 className="card-title"><b>Contacter {useranoncereservationPublick.first_name}</b></h4>
                                                             </div>
@@ -471,7 +461,6 @@ class PublicUserAnnonceReservations extends Component {
                                             </div>
                                         )}
 
-
                                     </div>
 
 
@@ -479,9 +468,7 @@ class PublicUserAnnonceReservations extends Component {
 
                                         <div className="col-lg-8 col-md-12 mx-auto">
                                             <div className="card">
-
                                                 <div className="card-body">
-
                                                     <div className="card-header text-center">
                                                         <h4 className="card-title"><b>Pour poster votre bien </b></h4>
                                                         <a href="#"
@@ -535,16 +522,11 @@ class PublicUserAnnonceReservations extends Component {
 
                                                 </div>
                                             </div>
-
                                         </div>
                                     }
 
-
-
                                 </div>
-
                             </div>
-
                         </div>
 
                         <FooterBigUserSite />

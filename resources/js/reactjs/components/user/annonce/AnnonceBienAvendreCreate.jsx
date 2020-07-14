@@ -92,24 +92,16 @@ class AnnonceBienAvendreCreate extends Component {
     render() {
         return (
             <div className="about-us sidebar-collapse">
-
                 <nav className="navbar navbar-expand-lg bg-primary">
                     <NavUserSite />
                 </nav>
-
                 <div className="wrapper">
-
                     <div className="main main-raised">
-
                         <div className="container">
                             <br />
-
                             <form role="form" id="contact-form" onSubmit={this.createItem} acceptCharset="UTF-8">
-
                                 <div className="row">
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
-
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="card-title">
@@ -227,14 +219,12 @@ class AnnonceBienAvendreCreate extends Component {
                                                                                 </select>
                                                                                 {this.renderErrorFor('email')}
                                                                             </div>
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true"
@@ -257,7 +247,6 @@ class AnnonceBienAvendreCreate extends Component {
                                                                         <div id="accordion" role="tablist"
                                                                              aria-multiselectable="true"
                                                                              className="card-collapse">
-
                                                                             <div className="row">
                                                                                 <div
                                                                                     className="col-md-4 ml-auto mr-auto">
@@ -317,16 +306,13 @@ class AnnonceBienAvendreCreate extends Component {
                                                                                     pas obligatoires vous avez le choix
                                                                                     de les remplire ou pas</small>
                                                                             </div>
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
-
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true"
                                                      className="card-collapse">
@@ -364,14 +350,12 @@ class AnnonceBienAvendreCreate extends Component {
                                                                                 />
                                                                                 {this.renderErrorFor('last_name')}
                                                                             </div>
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true"
@@ -404,14 +388,12 @@ class AnnonceBienAvendreCreate extends Component {
                                                                                           rows="10" />
                                                                                 {this.renderErrorFor('message')}
                                                                             </div>
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
 
                                                 <div className="submit text-center">
@@ -421,9 +403,7 @@ class AnnonceBienAvendreCreate extends Component {
                                                     </button>
                                                 </div>
                                             </div>
-
                                         </div>
-
                                     </div>
 
                                     <div className="col-lg-4 col-md-12 mx-auto">

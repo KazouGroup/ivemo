@@ -90,7 +90,7 @@ class PremiumUserNewTeam extends Component {
         }else{
             $.notify({
                     //,
-                    message: 'La fichier ne peut pas être supérieure à 15 MB'
+                    message: 'Le fichier ne peut pas être supérieure à 15 MB'
                 },
                 {
                     allow_dismiss: false,
@@ -136,7 +136,7 @@ class PremiumUserNewTeam extends Component {
             .then(() => {
 
                 $.notify({
-                        message: 'Informations sauvegardé avec success...'
+                        message: 'Informations sauvegardé avec succès...'
                     },
                     {
                         allow_dismiss: false,
@@ -155,7 +155,7 @@ class PremiumUserNewTeam extends Component {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Something wrong. Try later...", {
+            $.notify("Ooops! Something wrong. Try later...", {
                 allow_dismiss: false,
                 type: 'danger',
                 animate: {
@@ -222,7 +222,6 @@ class PremiumUserNewTeam extends Component {
                                 </div>
                             </div>
 
-
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="card">
@@ -249,7 +248,6 @@ class PremiumUserNewTeam extends Component {
                                                         <i className="material-icons">arrow_back</i>
                                                     </Link>
                                                 </div>
-
                                             </div>
 
                                             <form role="form" onSubmit={this.saveItem} acceptCharset="UTF-8">
@@ -259,7 +257,7 @@ class PremiumUserNewTeam extends Component {
                                                     <Row>
                                                         <div className="col-md-6">
                                                             <label className="labels">
-                                                                Non complet
+                                                                Nom complet
                                                                 <span className="text-danger">*</span>
                                                             </label>
                                                             <FormGroup>
@@ -324,7 +322,7 @@ class PremiumUserNewTeam extends Component {
                                                                 <br />
                                                                 <ReactQuill theme="snow" modules={this.modules}
                                                                             formats={this.formats}
-                                                                            placeholder="Laisser votre description..."
+                                                                            placeholder="Laisser votre déscription..."
                                                                             className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                                                             value={this.state.description || ''}
                                                                             onChange={this.handleChangeBody} />
@@ -345,12 +343,10 @@ class PremiumUserNewTeam extends Component {
                                                 </div>
                                             </form>
 
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 

@@ -82,7 +82,7 @@ class EmployementIndexSite extends Component {
 
     unactiveItem(id){
         Swal.fire({
-            title: 'Masquer cette annonce?',
+            title: 'Masquer cette offre?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -106,7 +106,7 @@ class EmployementIndexSite extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Annonce masquée aux utilisateurs",
+                            message: "Cette offre a été masquée aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -164,7 +164,7 @@ class EmployementIndexSite extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec success'
+                            message: 'Offre suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,

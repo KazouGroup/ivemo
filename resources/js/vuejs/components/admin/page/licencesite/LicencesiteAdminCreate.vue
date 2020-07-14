@@ -36,7 +36,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label class="labels">
-                                                Title policy
+                                                Title 
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div class="form-group">
@@ -75,7 +75,7 @@
                                                 <b class="title_hover">Annuler</b>
                                             </router-link>
                                             <button  :disabled="form.busy" type="submit" class="btn btn-success btn-raised">
-                                                <b class="title_hover">Sauvegarder</b>
+                                                <b class="title_hover">Save</b>
                                             </button>
                                         </div>
                                     </div>
@@ -132,7 +132,7 @@
 
                         $.notify(
                             {
-                                message: `Toutes les informations bien enregisté`,
+                                message: `Informations saved successfully`,
                             },
                             {
                                 allow_dismiss: false,

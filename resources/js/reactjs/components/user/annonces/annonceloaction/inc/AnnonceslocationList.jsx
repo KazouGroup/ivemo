@@ -22,7 +22,6 @@ class AnnonceslocationList extends PureComponent {
                         <div className="card card-plain card-blog">
                             <div className="row">
                                 <div className="col-md-5">
-
                                     <div className="card-image">
                                         <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
                                             <ol className="carousel-indicators">
@@ -41,7 +40,6 @@ class AnnonceslocationList extends PureComponent {
                                                     <img className="d-block" src="/assets/vendor/assets/img/bg4.jpg" alt="Third slide" />
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
 
@@ -79,10 +77,7 @@ class AnnonceslocationList extends PureComponent {
                                             </>
                                         )}
 
-
                                     </div>
-
-
 
                                     <br />
                                     <div className="card-header d-flex align-items-center">
@@ -128,7 +123,6 @@ class AnnonceslocationList extends PureComponent {
                                             </NavLink>
                                             - {this.props.district.length > 10 ? this.props.district.substring(0, 10) + "..." : this.props.district}
                                         </div>
-
                                     </div>
                                     <h6 className="card-title">
                                         <Link to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.slug}/`}>
@@ -173,7 +167,6 @@ class AnnonceslocationList extends PureComponent {
                                                                 <i className="fas fa-bookmark"></i>
                                                             </Button>
                                                         </>
-
                                                         :
                                                         <>
                                                             <Button onClick={() => this.props.favoriteItem(this.props)}
@@ -198,7 +191,6 @@ class AnnonceslocationList extends PureComponent {
                                             </NavLink>
                                             */}
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

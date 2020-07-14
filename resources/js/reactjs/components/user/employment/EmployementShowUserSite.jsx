@@ -214,7 +214,7 @@ class EmployementShowUserSite extends Component {
 
     signalerUser(id){
         Swal.fire({
-            title: 'Masquer cette annonce?',
+            title: 'Masquer cette offre?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -233,7 +233,7 @@ class EmployementShowUserSite extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette annonce a été masquée aux utilisateurs",
+                            message: "Cette offre a été masquée aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -346,7 +346,7 @@ class EmployementShowUserSite extends Component {
 
     statusItem(id){
         Swal.fire({
-            title: 'Masquer cette annonce?',
+            title: 'Masquer cette offre?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -365,7 +365,7 @@ class EmployementShowUserSite extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Annonce masquée aux utilisateurs",
+                            message: "Cette offre a été masquée aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -419,7 +419,7 @@ class EmployementShowUserSite extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec succès'
+                            message: 'Offre suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -486,13 +486,10 @@ class EmployementShowUserSite extends Component {
                     </nav>
 
                     <div className="wrapper">
-
                         <div className="main main-raised">
-
                             <div className="container">
                                 <br />
                                 <div className="row">
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="submit text-left">
 
@@ -511,7 +508,6 @@ class EmployementShowUserSite extends Component {
 
                                         <div className="card">
                                             <div className="card-body">
-
                                                 <div className="card-header d-flex align-items-center">
                                                     <div className="d-flex align-items-center">
                                                         {employment.user.avatar ?
@@ -585,7 +581,6 @@ class EmployementShowUserSite extends Component {
                                                 {employment.description ? <div className="title text-justify" dangerouslySetInnerHTML={this.getDescription(employment)} />: <Skeleton count={5}/>}
                                             </div>
                                         </div>
-
 
                                         <div className="card">
                                             <div className="card-body">
