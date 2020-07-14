@@ -9,12 +9,6 @@ class FormComment extends Component {
         const {namesubmit,value,cancelresponseCourse,renderErrorFor,hasErrorFor,handleFieldChange} = this.props;
         return (
            <>
-               {/* <a className="pull-left author" href="#pablo">
-                           <div className="author">
-                               <img className="avatar" alt="Ton profile"
-                                    src="https://dummyimage.com/wsvga/0055ff/0044cc&text=non"/>
-                           </div>
-                       </a>*/}
                <div className="media media-post">
                    <a className="pull-left" href={$userIvemo.status_profile ?
 
@@ -34,7 +28,7 @@ class FormComment extends Component {
                    </a>
                    <div className="media-body">
 
-                       <FieldInput name="body" type='textarea' maxLength="5000" placeholder="Laiser votre avis ou commentaire sur ce bien..."  value={value}
+                       <FieldInput name="body" type='textarea' maxLength="5000" placeholder="Laiser votre avis ou commentaire sur cette annonce..."  value={value}
                                    handleFieldChange={handleFieldChange}
                                    hasErrorFor={hasErrorFor}
                                    renderErrorFor={renderErrorFor} rows="4"/>

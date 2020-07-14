@@ -31,7 +31,9 @@ class CreateContactworkwithusesTable extends Migration
             $table->foreign('workwithus_id')->references('id')->on('workwithuses')->onDelete('cascade');
 
             $table->unsignedBigInteger('user_id')->nullable()->index();
+            $table->unsignedBigInteger('from_id')->nullable()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('from_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

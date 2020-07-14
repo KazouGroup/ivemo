@@ -16,8 +16,6 @@ class EmploymentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-
-            'bookmarked' => $this->bookmarked(),
             'title' => $this->title,
             'description' => $this->description,
             'slug' => $this->slug,
@@ -30,12 +28,16 @@ class EmploymentResource extends JsonResource
             'user_id' => $this->user_id,
             'city' => $this->city,
             'photo' => $this->photo,
+            'link_contact' => $this->link_contact,
             'city_id' => $this->city_id,
             'status' => $this->status,
             'status_comments' => $this->status_comments,
             'status_admin' => $this->status_admin,
+            'status_link_contact' => $this->status_link_contact,
             'contactuseremployments' => $this->contactuseremployments,
             'contactuseremployments_count' => $this->contactuseremployments_count,
+            'bookmarked' => $this->bookmarked(),
+            'iscontactuseremployment' => $this->iscontactuseremployment(),
             'visits_count' => $this->visits()->count(),
             'visits_countries' => $this->visits()->countries(),
             'visits_languages' => $this->visits()->languages(),

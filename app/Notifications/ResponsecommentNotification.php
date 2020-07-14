@@ -44,7 +44,7 @@ class ResponsecommentNotification extends Notification implements ShouldQueue
         return (new MailMessage)
                     ->greeting($this->userFrom->first_name.' a répondu à votre commentaire')
                     ->subject('Réponse du commentaire')
-                    ->line('Commentaire: '.$this->comment->body.' | Commentaire posté le: '.$this->comment->created_at->format('m/d/Y H:i:s'))
+                    ->line('Commentaire: '.$this->comment->body.' | Commentaire posté le: '.$this->comment->created_at->format('m/d/Y').' à '.$this->comment->created_at->format('H:i:s'))
                     ->salutation('Visite le site pour en savoir plus')
                     ->from($this->userFrom->email,config('app.name'))
                     ->line($this->fromBodyUser);

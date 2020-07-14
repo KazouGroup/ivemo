@@ -20,6 +20,7 @@ class BaseRequest extends Request
         $rules = [
             'title' => 'required|string|min:3|max:250',
             'district' => 'required|string|min:3|max:200',
+            'link_contact' => 'nullable|url|min:3|max:5000',
             'photo' => 'required',
             'description' => 'required|max:50000',
             'price' => 'nullable|numeric|digits_between:2,13',

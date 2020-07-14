@@ -17,6 +17,7 @@ $factory->define(contactuseremployment::class, function (Faker $faker) {
         'status_archvement' => $faker->boolean,
         'status_favorite' => $faker->boolean,
         'user_id' => user::inRandomOrder()->first()->id,
+        'from_id' => user::inRandomOrder()->first()->id,
         'employment_id' => employment::inRandomOrder()->first()->id,
         'subject' => $faker->text(50),
         'message' => $faker->realText(rand(1000, 5000)),

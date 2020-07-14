@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->date('birthday')->nullable();
             $table->string('provider_id')->nullable();
             $table->string('provider')->nullable();
+            $table->text('social_token')->nullable();
             $table->string('color_name')->default('primary');
             $table->boolean('status_user')->default(false);
             $table->integer('status_profile')->default('0');

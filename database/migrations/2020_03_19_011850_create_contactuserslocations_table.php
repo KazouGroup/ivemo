@@ -29,7 +29,9 @@ class CreateContactuserslocationsTable extends Migration
             $table->timestamps();
 
             $table->unsignedBigInteger('user_id')->nullable()->index();
+            $table->unsignedBigInteger('from_id')->nullable()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('from_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->unsignedBigInteger('annoncelocation_id')->nullable()->index();
             $table->foreign('annoncelocation_id')->references('id')->on('annoncelocations')->onDelete('cascade');

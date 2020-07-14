@@ -31,7 +31,9 @@ class CreateContactuseremploymentsTable extends Migration
             $table->foreign('employment_id')->references('id')->on('employments')->onDelete('cascade');
 
             $table->unsignedBigInteger('user_id')->nullable()->index();
+            $table->unsignedBigInteger('from_id')->nullable()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('from_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

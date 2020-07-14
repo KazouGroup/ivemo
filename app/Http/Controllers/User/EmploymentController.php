@@ -345,6 +345,18 @@ class EmploymentController extends Controller
         return response()->json($employment,200);
     }
 
+    public function statuscomments($id)
+    {
+        $employment = employment::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$employment);
+
+        $employment->update(['status_comments' => !$employment->status_comments,]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+    }
+
+
     public function activated($employment)
     {
         $employment = employment::where('id', $employment)->findOrFail($employment);

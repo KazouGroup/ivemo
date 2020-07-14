@@ -20,6 +20,8 @@ class CreateEmploymentsTable extends Migration
             $table->string('slugin')->nullable();
             $table->string('district')->nullable();
             $table->string('photo')->nullable();
+            $table->text('link_contact')->nullable();
+            $table->boolean('status_link_contact')->default(true);
             $table->unsignedBigInteger('price')->nullable();
             $table->string('ip')->nullable();
             $table->boolean('status')->default(true);

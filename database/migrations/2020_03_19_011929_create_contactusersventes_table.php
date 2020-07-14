@@ -29,7 +29,9 @@ class CreateContactusersventesTable extends Migration
             $table->timestamps();
 
             $table->unsignedBigInteger('user_id')->nullable()->index();
+            $table->unsignedBigInteger('from_id')->nullable()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('from_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->unsignedBigInteger('annoncevente_id')->nullable()->index();
             $table->foreign('annoncevente_id')->references('id')->on('annonceventes')->onDelete('cascade');

@@ -6,28 +6,123 @@ import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../inc/user/LinkValicationEmail";
 import FooterUserSite from "../../inc/user/FooterUserSite";
 import moment from "moment";
-import ContactFromEmployementIndex from "./inc/ContactFromEmployementIndex";
 import SignalFromEmployementForShow from "./inc/SignalFromEmployementForShow";
 import Swal from "sweetalert2";
 import Navlinknewemployment from "./treatement/Navlinknewemployment";
 import EmployementInteresse from "./EmployementInteresse";
 import HelmetSite from "../../inc/user/HelmetSite";
-import ButonFavoris from "../../inc/vendor/ButonFavoris";
+import EmployementcommentIndex from "../comments/EmployementcommentIndex";
+import ProfileForallEmploymentShow from "./inc/ProfileForallEmploymentShow";
+import FieldInput from "../../inc/vendor/FieldInput";
 
 
 class EmployementShowUserSite extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            full_name: '',
+            subject: '',
+            email: '',
+            phone: '',
+            message: '',
+            errors: [],
             employment:{categoryemployment:[],user:{profile:[]},city:[]},
             employmentItem:[],
         };
 
+        this.sendmessageItem = this.sendmessageItem.bind(this);
+        this.handleFieldChange = this.handleFieldChange.bind(this);
+        this.hasErrorFor = this.hasErrorFor.bind(this);
+        this.renderErrorFor = this.renderErrorFor.bind(this);
+
         this.deleteItem = this.deleteItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
         this.phoneShow = this.phoneShow.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
+        this.statusItem = this.statusItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
+        this.statuscommentItem = this.statuscommentItem.bind(this);
+    }
+
+
+    handleFieldChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value,
+        });
+        this.state.errors[event.target.name] = '';
+    }
+
+    // Handle Errors
+    hasErrorFor(field) {
+        return !!this.state.errors[field];
+    }
+
+    renderErrorFor(field) {
+        if (this.hasErrorFor(field)) {
+            return (
+                <span className='invalid-feedback'>
+                    <strong>{this.state.errors[field][0]}</strong>
+                </span>
+            )
+        }
+    }
+
+    sendmessageItem(e) {
+        e.preventDefault();
+
+        let item = {
+            email: this.state.email,
+            full_name: this.state.full_name,
+            subject: this.state.subject,
+            phone: this.state.phone,
+            message: this.state.message,
+        };
+        let itemEmployment = this.props.match.params.employment;
+        let itemCategoryemployment = this.props.match.params.categoryemployment;
+        let itemCity = this.props.match.params.city;
+        let url = route('employmentsendcontactmessageuser_site',[itemCategoryemployment,itemCity,itemEmployment]);
+        dyaxios.post(url, item)
+            .then(() => {
+
+                $.notify({
+                        message: `Message bien envoyé à cette utilisateur`
+                    },
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'top',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInDown",
+                            exit: "animate__animated animate__fadeOutUp"
+                        },
+                    });
+
+                this.setState({
+                    full_name: '',
+                    subject: '',
+                    email: '',
+                    phone: '',
+                    confirm_send: "",
+                    message: '',
+                });
+
+                this.loadItems();
+
+            }).catch(error => {
+            this.setState({
+                errors: error.response.data.errors
+            });
+            $.notify("Ooop! Quelque chose ne va pas. Essayez plus tard ...", {
+                allow_dismiss: false,
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
     }
 
     favoriteItem(employment) {
@@ -177,7 +272,79 @@ class EmployementShowUserSite extends Component {
         });
     }
 
-    unactiveItem(id){
+    statuscommentItem(employment){
+        Swal.fire({
+            text: "êtes vous sure de vouloir changer le status des commentaires de cette annonce?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                //Envoyer la requet au server
+                let url = route('employments_status_comments_site',employment.id);
+                dyaxios.get(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    if(employment.status_comments){
+                        $.notify({
+
+                                message: "Commentaire desactivé sur cette annonce",
+                            },
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }else {
+                        $.notify({
+
+                                message: "Commentaire activés sur cette annonce",
+                            },
+                            {
+                                allow_dismiss: false,
+                                type: 'info',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: "animate__animated animate__fadeInUp",
+                                    exit: "animate__animated animate__fadeOutDown"
+                                },
+                            });
+                    }
+
+                    /** End alert ***/
+                    this.loadItems();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Something wrong. Try later", {
+                        type: 'danger',
+                        animate: {
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
+                        }
+                    });
+                })
+            }
+        })
+
+    }
+
+    statusItem(id){
         Swal.fire({
             title: 'Masquer cette annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
@@ -284,9 +451,9 @@ class EmployementShowUserSite extends Component {
     }
 
     loadItems(){
-        let itemEmployment = this.props.match.params.employment;
-        let itemCity = this.props.match.params.city;
         let itemCategoryemployment = this.props.match.params.categoryemployment;
+        let itemCity = this.props.match.params.city;
+        let itemEmployment = this.props.match.params.employment;
         let url = route('api.employmentsbycategorybycityslug_site',[itemCategoryemployment,itemCity,itemEmployment]);
         dyaxios.get(url).then(response => this.setState({ employment: response.data, }));
     }
@@ -377,7 +544,7 @@ class EmployementShowUserSite extends Component {
                                                         </h5>
 
                                                         <span className="card-title">
-                                                            <Link to={`/employments/${employment.categoryemployment.slug}/`}><b>{employment.categoryemployment.name}</b></Link> - <Link to={`/employments/${employment.categoryemployment.slug}/${employment.city.slug}/`}><b>{employment.city.name}</b></Link> - <i className="now-ui-icons tech_watch-time"/> {moment(employment.created_at).format('ll')} {!$guest &&(<>{employment.status_user &&(<>- <i className="far fa-eye"></i> {this.data_countFormatter(employment.visits_count)}</>)}</>)}
+                                                            <Link to={`/employments/${employment.categoryemployment.slug}/`}><b>{employment.categoryemployment.name}</b></Link> - <Link to={`/employments/${employment.categoryemployment.slug}/${employment.city.slug}/`}><b>{employment.city.name}</b> - {employment.district}</Link> <i className="now-ui-icons tech_watch-time"/> {moment(employment.created_at).format('ll')} {!$guest &&(<>{employment.status_user &&(<>- <i className="far fa-eye"></i> {this.data_countFormatter(employment.visits_count)}</>)}</>)}
                                                         </span>
 
                                                         {employment.photo !== null ?
@@ -423,97 +590,141 @@ class EmployementShowUserSite extends Component {
                                         <div className="card">
                                             <div className="card-body">
 
-                                                <div className="card-header d-flex align-items-center">
-                                                    <div className="d-flex align-items-center">
-                                                        {employment.user.avatar ?
-                                                            <NavLink to={`/pro/${employment.user.slug}/employments/`}>
-                                                                <img src={employment.user.avatar}
-                                                                     style={{ height: "40px", width: "80px" }}
-                                                                     alt={employment.user.first_name}
-                                                                     className="avatar" />
-                                                            </NavLink>
-                                                            : <Skeleton circle={false} height={40} width={80} />}
-                                                        <div className="mx-3">
-                                                            <NavLink to={`/pro/${employment.user.slug}/employments/`} className="text-dark font-weight-600 text-sm"><b>{employment.user.first_name}</b>
-                                                                <small className="d-block text-muted">{employment.statusOnline &&(<i className="fas fa-circle text-success"></i>)} <i className="now-ui-icons tech_watch-time"/> {moment(employment.user.created_at).format('LL')}</small>
-                                                            </NavLink>
-                                                        </div>
-                                                    </div>
-                                                    <div className="text-right ml-auto">
+                                                <ProfileForallEmploymentShow {...employment} favoriteItem={this.favoriteItem} statuscommentItem={this.statuscommentItem}
+                                                                             statusItem={this.statusItem} deleteItem={this.deleteItem}
+                                                                             signalerUser={this.signalerUser} copyToClipboard={this.copyToClipboard}/>
 
-                                                        <ButonFavoris favoriteItem={this.favoriteItem} {...employment} />
+                                                {employment.status_link_contact ?
+                                                    <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                        <div className="card card-plain">
+                                                            <div className="card-header" role="tab" id="headingOne">
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <b>Envoyez vos contacts</b>
+                                                                </a>
+                                                            </div>
+                                                            <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                                                <div className="card-body">
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                        <Button className="btn btn-icon btn-sm btn-facebook" title="Copier le lien" onClick={() => this.copyToClipboard()}>
-                                                            <i className="fas fa-copy"></i>
-                                                        </Button>
-                                                        <Button className="btn btn-icon btn-sm btn-info" onClick={() => this.phoneShow(employment)} id={employment.user.phone}>
-                                                             <i className="fas fa-mobile"></i>
-                                                        </Button>
-                                                        {employment.user.profile.site_internet && (
-                                                            <a href={`${employment.user.profile.site_internet}`} className="btn btn-icon btn-sm btn-primary" target="_banck">
-                                                                <i className="now-ui-icons objects_globe"/>
-                                                            </a>
-                                                        )}
-                                                        <Button  title="Signaler cette annonce" onClick={() => this.signalerUser(employment.id)}
-                                                                className="btn btn-instagram btn-icon btn-sm">
-                                                            <i className="fas fa-flag"></i>
-                                                        </Button>
+                                                                                <Form role="form" id="contact-form" onSubmit={this.sendmessageItem} acceptCharset="UTF-8">
 
-                                                        {!$guest && (
-                                                            <>
-                                                                {($userIvemo.id === employment.user.id && $userIvemo.id === employment.user_id) && (
-                                                                    <>
-                                                                        <a href={`#${employment.visits_count}`}
-                                                                           className="btn btn-sm btn-secondary" title={`${employment.visits_count} ${employment.visits_count > 1 ? "vues" : "vue"}`}>
-                                                                            <i className="far fa-eye"></i> <b>{this.data_countFormatter(employment.visits_count)}</b>
-                                                                        </a>
-                                                                        <button type="button" rel="tooltip" onClick={() => this.unactiveItem(employment.id)}
-                                                                                className="btn btn-success btn-icon btn-sm" title=" Desactiver cette annonce">
-                                                                            <i className="now-ui-icons ui-1_check"/>
-                                                                        </button>
-                                                                        <NavLink to={`/employment/ab/${employment.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer cette annonce">
-                                                                            <i className="now-ui-icons ui-2_settings-90"/>
-                                                                        </NavLink>
-                                                                        <Button onClick={() => this.deleteItem(employment.id)}
-                                                                                className="btn btn-icon btn-sm btn-danger" title="Supprimer cette annonce">
-                                                                            <i className="now-ui-icons ui-1_simple-remove"/>
-                                                                        </Button>{" "}
-                                                                    </>
-                                                                )}
+                                                                                    <div className="input-group">
+                                                                                        <div className="input-group-prepend">
+                                                                                            <span className="input-group-text"><i className="now-ui-icons users_circle-08"></i></span>
+                                                                                        </div>
+                                                                                        <FieldInput name="full_name" type='text' minLength="3" maxLength="50" placeholder="Nom complete" value={this.state.full_name}
+                                                                                                    handleFieldChange={this.handleFieldChange}
+                                                                                                    hasErrorFor={this.hasErrorFor}
+                                                                                                    renderErrorFor={this.renderErrorFor}/>
+                                                                                    </div>
+                                                                                    <div className="input-group">
+                                                                                        <div className="input-group-prepend">
+                                                                                            <span className="input-group-text"><i className="now-ui-icons ui-1_email-85"></i></span>
+                                                                                        </div>
+                                                                                        <FieldInput name="email" type='email' minLength="3" maxLength="50" placeholder="Email" value={this.state.email}
+                                                                                                    handleFieldChange={this.handleFieldChange}
+                                                                                                    hasErrorFor={this.hasErrorFor}
+                                                                                                    renderErrorFor={this.renderErrorFor}/>
+                                                                                    </div>
+                                                                                    <FormText className="text-muted" color="default" id="emailHelp">
+                                                                                        <b>Veuillez entrer une adresse e-mail et un numero de téléphone valide </b>
+                                                                                    </FormText>
+                                                                                    <div className="input-group">
+                                                                                        <div className="input-group-prepend">
+                                                                                            <span className="input-group-text"><i className="now-ui-icons tech_mobile"></i></span>
+                                                                                        </div>
+                                                                                        <FieldInput name="phone" type='number' minLength="3" maxLength="15" placeholder="Téléphone" value={this.state.phone}
+                                                                                                    handleFieldChange={this.handleFieldChange}
+                                                                                                    hasErrorFor={this.hasErrorFor}
+                                                                                                    renderErrorFor={this.renderErrorFor}/>
+                                                                                    </div>
+                                                                                    <div className="form-group">
+                                                                                        <FieldInput name="message" type='textarea' minLength="5" maxLength="5000" placeholder="Message" value={this.state.message}
+                                                                                                    handleFieldChange={this.handleFieldChange}
+                                                                                                    hasErrorFor={this.hasErrorFor}
+                                                                                                    renderErrorFor={this.renderErrorFor} rows="10"/>
+                                                                                    </div>
+                                                                                    {/*
+                 <div
+                    className="custom-control custom-checkbox mb-3">
+                    <input name="confirm_send" className={`custom-control-input ${this.hasErrorFor('confirm_send') ? 'is-invalid' : ''}`}
+                           id="confirm_send" value="1" type="checkbox" onChange={this.handleFieldChange} checked={this.state.confirm_send}/>
+                    <label className="custom-control-label"
+                           htmlFor="confirm_send">
+                      <span>Je suis majeur, j'ai lu et accepté
+                          <a className="text-primary" data-action="open-privacy-disclamer"> Informations de confidentialité</a>
+                      </span>
+                    </label>
+                </div>
+                */}
+                                                                                    <div className="submit text-center">
+                                                                                        {!$guest ?
+                                                                                            <>
+                                                                                                {employment.iscontactuseremployment ?
+                                                                                                    <a style={{cursor: "pointer"}} className="btn btn-outline-primary btn-lg">
+                                                                                                        <b>Vous avez déjà contacté</b>
+                                                                                                    </a>
+                                                                                                    :
+                                                                                                    <button className="btn btn-primary btn-lg" type="submit">
+                                                                                                        <b>Postuler</b>
+                                                                                                    </button>
+                                                                                                }
+                                                                                            </>
+                                                                                            :
+                                                                                            <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="btn btn-primary btn-lg">
+                                                                                                <b>Postuler</b>
+                                                                                            </a>
+                                                                                        }
+                                                                                    </div>
+                                                                                </Form>
 
-                                                            </>
-                                                        )}
-
-                                                    </div>
-                                                </div>
-
-                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                    <div className="card card-plain">
-                                                        <div className="card-header" role="tab" id="headingOne">
-                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                <b>Envoyez vos contacts</b>
-                                                            </a>
-                                                        </div>
-                                                        <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                                                            <div className="card-body">
-                                                                <div className="row">
-                                                                    <div className="col-md-12">
-                                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-
-                                                                            <ContactFromEmployementIndex {...this.props} />
-
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                    </div>
+                                                    :
+
+                                                    <div className="submit text-center">
+                                                        {employment.link_contact === null ?
+                                                            <a href={route('employments_site')}  target="_blank" className="btn btn-primary btn-lg">
+                                                                <b>Postuler</b>
+                                                            </a>
+                                                            :
+                                                            <a href={`${employment.link_contact}`}  target="_blank" className="btn btn-primary btn-lg">
+                                                                <b>Postuler</b>
+                                                            </a>
+                                                        }
                                                     </div>
 
-                                                </div>
+                                                }
 
                                             </div>
 
                                         </div>
+
+                                        {employment.status_comments ?
+
+                                            <EmployementcommentIndex {...this.props} {...employment} />
+                                            :
+                                            <>
+                                                {!$guest && (
+                                                    <>
+                                                        {($userIvemo.id === employment.user.id || $userIvemo.id === employment.user_id)  && (
+
+                                                            <EmployementcommentIndex {...this.props} {...employment} />
+
+                                                        )}
+                                                    </>
+                                                )}
+                                            </>
+
+                                        }
 
                                     </div>
 
@@ -525,16 +736,106 @@ class EmployementShowUserSite extends Component {
                                             <div className="card-body">
                                                 <div className="row">
                                                     <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                            <div className="card-header text-center">
-                                                                <div className="card-title">
-                                                                    <b>Envoyez vos contacts</b>
+
+                                                        {employment.status_link_contact ?
+                                                            <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                                <div className="card-header text-center">
+                                                                    <div className="card-title">
+                                                                        <b>Envoyez vos contacts</b>
+                                                                    </div>
                                                                 </div>
+
+
+                                                                <Form role="form" id="contact-form" onSubmit={this.sendmessageItem} acceptCharset="UTF-8">
+
+                                                                    <div className="input-group">
+                                                                        <div className="input-group-prepend">
+                                                                            <span className="input-group-text"><i className="now-ui-icons users_circle-08"></i></span>
+                                                                        </div>
+                                                                        <FieldInput name="full_name" type='text' minLength="3" maxLength="50" placeholder="Nom complete" value={this.state.full_name}
+                                                                                    handleFieldChange={this.handleFieldChange}
+                                                                                    hasErrorFor={this.hasErrorFor}
+                                                                                    renderErrorFor={this.renderErrorFor}/>
+                                                                    </div>
+                                                                    <div className="input-group">
+                                                                        <div className="input-group-prepend">
+                                                                            <span className="input-group-text"><i className="now-ui-icons ui-1_email-85"></i></span>
+                                                                        </div>
+                                                                        <FieldInput name="email" type='email' minLength="3" maxLength="50" placeholder="Email" value={this.state.email}
+                                                                                    handleFieldChange={this.handleFieldChange}
+                                                                                    hasErrorFor={this.hasErrorFor}
+                                                                                    renderErrorFor={this.renderErrorFor}/>
+                                                                    </div>
+                                                                    <FormText className="text-muted" color="default" id="emailHelp">
+                                                                        <b>Veuillez entrer une adresse e-mail et un numero de téléphone valide </b>
+                                                                    </FormText>
+                                                                    <div className="input-group">
+                                                                        <div className="input-group-prepend">
+                                                                            <span className="input-group-text"><i className="now-ui-icons tech_mobile"></i></span>
+                                                                        </div>
+                                                                        <FieldInput name="phone" type='number' minLength="3" maxLength="15" placeholder="Téléphone" value={this.state.phone}
+                                                                                    handleFieldChange={this.handleFieldChange}
+                                                                                    hasErrorFor={this.hasErrorFor}
+                                                                                    renderErrorFor={this.renderErrorFor}/>
+                                                                    </div>
+                                                                    <div className="form-group">
+                                                                        <FieldInput name="message" type='textarea' minLength="5" maxLength="5000" placeholder="Message" value={this.state.message}
+                                                                                    handleFieldChange={this.handleFieldChange}
+                                                                                    hasErrorFor={this.hasErrorFor}
+                                                                                    renderErrorFor={this.renderErrorFor} rows="10"/>
+                                                                    </div>
+                                                                    {/*
+                 <div
+                    className="custom-control custom-checkbox mb-3">
+                    <input name="confirm_send" className={`custom-control-input ${this.hasErrorFor('confirm_send') ? 'is-invalid' : ''}`}
+                           id="confirm_send" value="1" type="checkbox" onChange={this.handleFieldChange} checked={this.state.confirm_send}/>
+                    <label className="custom-control-label"
+                           htmlFor="confirm_send">
+                      <span>Je suis majeur, j'ai lu et accepté
+                          <a className="text-primary" data-action="open-privacy-disclamer"> Informations de confidentialité</a>
+                      </span>
+                    </label>
+                </div>
+                */}
+                                                                    <div className="submit text-center">
+                                                                        {!$guest ?
+                                                                            <>
+                                                                                {employment.iscontactuseremployment ?
+                                                                                    <a style={{cursor: "pointer"}} className="btn btn-outline-primary btn-lg">
+                                                                                        <b>Vous avez déjà contacté</b>
+                                                                                    </a>
+                                                                                    :
+                                                                                    <button className="btn btn-primary btn-lg" type="submit">
+                                                                                        <b>Postuler</b>
+                                                                                    </button>
+                                                                                }
+                                                                            </>
+                                                                            :
+                                                                            <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="btn btn-primary btn-lg">
+                                                                                <b>Postuler</b>
+                                                                            </a>
+                                                                        }
+                                                                    </div>
+                                                                </Form>
+
+
                                                             </div>
 
-                                                            <ContactFromEmployementIndex {...this.props} />
+                                                            :
 
-                                                        </div>
+                                                            <div className="submit text-center">
+                                                                {employment.link_contact === null ?
+                                                                    <a href={route('employments_site')}  target="_blank" className="btn btn-primary btn-lg">
+                                                                        <b>Postuler</b>
+                                                                    </a>
+                                                                    :
+                                                                    <a href={`${employment.link_contact}`}  target="_blank" className="btn btn-primary btn-lg">
+                                                                        <b>Postuler</b>
+                                                                    </a>
+                                                                }
+                                                            </div>
+                                                        }
+
                                                     </div>
                                                 </div>
                                             </div>

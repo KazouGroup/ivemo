@@ -21,6 +21,8 @@ import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import Navlinknewemployment from "./Navlinknewemployment";
 import Navemploymentsbyuser from "../inc/Navemploymentsbyuser";
 import HelmetSite from "../../../inc/user/HelmetSite";
+import FieldInput from "../../../inc/vendor/FieldInput";
+import Skeleton from "react-loading-skeleton";
 
 
 class EmploymentCreate extends Component {
@@ -34,6 +36,8 @@ class EmploymentCreate extends Component {
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
         this.handleChangeBody = this.handleChangeBody.bind(this);
+        this.handleCheckClick = this.handleCheckClick.bind(this);
+
         this.state = {
             id: '',
             title: '',
@@ -42,8 +46,10 @@ class EmploymentCreate extends Component {
             status: '',
             district: '',
             description: '',
+            link_contact: '',
             city_id: '',
             categoryemployment_id: '',
+            status_link_contact: true,
             showDefaultImage: true,
             errors: [],
             cities: [],
@@ -85,6 +91,12 @@ class EmploymentCreate extends Component {
     hasErrorFor(field) {
         return !!this.state.errors[field];
     }
+
+    handleCheckClick(event){
+        this.setState({
+            status_link_contact: !this.state.status_link_contact
+        });
+    };
 
     updateImage(e) {
         e.preventDefault();
@@ -138,6 +150,8 @@ class EmploymentCreate extends Component {
             price: this.state.price,
             city_id: this.state.city_id,
             description: this.state.description,
+            link_contact: this.state.link_contact,
+            status_link_contact: this.state.status_link_contact,
             categoryemployment_id: this.state.categoryemployment_id,
         };
         dyaxios.post(route('employmentstore_site'), item)
@@ -240,9 +254,11 @@ class EmploymentCreate extends Component {
 
                                                     <div className="card-header d-flex align-items-center">
                                                         <div className="d-flex align-items-center">
-                                                            <NavLink to={`/pro/${$userIvemo.slug}`}>
-                                                                <img src={$userIvemo.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
-                                                            </NavLink>
+                                                            {$userIvemo.avatar ?
+                                                                <NavLink to={`/pro/${$userIvemo.slug}`}>
+                                                                    <img src={$userIvemo.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
+                                                                </NavLink>
+                                                                :<Skeleton circle={false} height={40} width={80} />}
                                                             <div className="mx-3">
                                                                 <NavLink to={`/pro/${$userIvemo.slug}`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
                                                                     <small className="d-block text-muted"><b>{moment($userIvemo.created_at).format('LL')}</b></small>
@@ -263,19 +279,10 @@ class EmploymentCreate extends Component {
                                                                     <div className="input-group-prepend">
                                                                         <span className="input-group-text"><i className="now-ui-icons users_circle-08"/></span>
                                                                     </div>
-                                                                    <Input id='title'
-                                                                           type='text'
-                                                                           className={`form-control ${this.hasErrorFor('title') ? 'is-invalid' : ''}`}
-                                                                           name='title'
-                                                                           maxLength="200"
-                                                                           minLength="4"
-                                                                           placeholder="Titre de l'article"
-                                                                           aria-label="Titre de l'article"
-                                                                           value={this.state.title || ''}
-
-                                                                           onChange={this.handleFieldChange}
-                                                                    />
-                                                                    {this.renderErrorFor('title')}
+                                                                    <FieldInput name="title" type='text' minLength="4" maxLength="200" placeholder="Titre de l'article" value={this.state.title || ""}
+                                                                                handleFieldChange={this.handleFieldChange}
+                                                                                hasErrorFor={this.hasErrorFor}
+                                                                                renderErrorFor={this.renderErrorFor}/>
                                                                 </InputGroup>
                                                             </div>
                                                         </Row>
@@ -289,19 +296,10 @@ class EmploymentCreate extends Component {
                                                                     <div className="input-group-prepend">
                                                                         <span className="input-group-text"><i className="now-ui-icons business_money-coins"/></span>
                                                                     </div>
-                                                                    <Input id='price'
-                                                                           type='number'
-                                                                           maxLength="13"
-                                                                           minLength="4"
-                                                                           className={`form-control ${this.hasErrorFor('price') ? 'is-invalid' : ''}`}
-                                                                           name='price'
-                                                                           placeholder="Montant de votre annonce"
-                                                                           aria-label="Montant de votre annonce"
-                                                                           autoComplete="price"
-                                                                           value={this.state.price || ""}
-                                                                           onChange={this.handleFieldChange}
-                                                                    />
-                                                                    {this.renderErrorFor('price')}
+                                                                    <FieldInput name="price" type='number' minLength="4" maxLength="13" placeholder="Montant de votre annonce" value={this.state.price || ""}
+                                                                                handleFieldChange={this.handleFieldChange}
+                                                                                hasErrorFor={this.hasErrorFor}
+                                                                                renderErrorFor={this.renderErrorFor}/>
                                                                 </InputGroup>
                                                             </div>
                                                             <div className="col-md-6">
@@ -313,17 +311,11 @@ class EmploymentCreate extends Component {
                                                                     <div className="input-group-prepend">
                                                                         <span className="input-group-text"><i className="now-ui-icons users_circle-08"/></span>
                                                                     </div>
-                                                                    <Input id='district'
-                                                                           type='text'
-                                                                           className={`form-control ${this.hasErrorFor('district') ? 'is-invalid' : ''}`}
-                                                                           name='district'
-                                                                           placeholder="Quartier"
-                                                                           aria-label="Quartier"
-                                                                           autoComplete="Quartier"
-                                                                           value={this.state.district || ""}
-                                                                           onChange={this.handleFieldChange}
-                                                                    />
-                                                                    {this.renderErrorFor('district')}
+                                                                    <FieldInput name="district" type='text' minLength="4" maxLength="13" placeholder="Quartier ou lieu" value={this.state.district || ""}
+                                                                                handleFieldChange={this.handleFieldChange}
+                                                                                hasErrorFor={this.hasErrorFor}
+                                                                                renderErrorFor={this.renderErrorFor}/>
+
                                                                 </InputGroup>
                                                             </div>
                                                         </Row>
@@ -399,6 +391,47 @@ class EmploymentCreate extends Component {
                                                                 </FormGroup>
                                                             </div>
                                                         </Row>
+
+                                                        <Row>
+                                                            <div className="col-md-12">
+                                                                <div className="form-check text-left">
+                                                                    <label className="form-check-label">
+                                                                        <Input className="form-check-input" id="status_link_contact" type="checkbox"  checked={this.state.status_link_contact}
+                                                                               onChange={this.handleCheckClick} value={this.state.status_link_contact} name="status_link_contact" />
+                                                                        <span className="form-check-sign"></span>
+                                                                        {!this.state.status_link_contact ?
+                                                                            <span><b>Cliquer ici</b> si vous <b>voulez</b> être contacté depuis <b>{$name_site}</b> !</span>
+                                                                            :
+                                                                            <span><b>Cliquer ici</b> si vous <b>ne voulez pas</b> être contacté depuis <b>{$name_site}</b> !</span>
+                                                                        }
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
+                                                        </Row>
+                                                        {!this.state.status_link_contact && (
+                                                            <>
+                                                                <br/>
+                                                                <Row>
+                                                                    <div className="col-md-12">
+                                                                        <label className="labels">
+                                                                            Lien de votre site internet
+                                                                            <span className="text-danger">*</span>
+                                                                        </label>
+                                                                        <InputGroup>
+                                                                            <div className="input-group-prepend">
+                                                                                <span className="input-group-text"><i className="now-ui-icons objects_globe"/></span>
+                                                                            </div>
+
+                                                                            <FieldInput name="link_contact" type='text' minLength="3" placeholder="http://monsiteinternet.com" value={this.state.link_contact || ""}
+                                                                                        handleFieldChange={this.handleFieldChange}
+                                                                                        hasErrorFor={this.hasErrorFor}
+                                                                                        renderErrorFor={this.renderErrorFor}/>
+                                                                        </InputGroup>
+                                                                    </div>
+                                                                </Row>
+                                                            </>
+                                                        )}
 
                                                     </CardBody>
 

@@ -140,6 +140,11 @@ Route::group(['middleware' => 'verified'], function(){
         )->name('employmentsupdate_site');
 
         Route::get(
+            'employments_status_comments/{id}',
+            'EmploymentController@statuscomments'
+        )->name('employments_status_comments_site');
+
+        Route::get(
             'employments_activated/{employment}',
             'EmploymentController@activated'
         )->name('employmentsactivated_site');

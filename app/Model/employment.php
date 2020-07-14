@@ -75,6 +75,7 @@ class employment extends Model
         'status' => 'boolean',
         'status_comments' => 'boolean',
         'status_admin' => 'boolean',
+        'status_link_contact' => 'boolean',
     ];
 
     use Sluggable;
@@ -99,9 +100,21 @@ class employment extends Model
         return $this->hasMany(contactuseremployment::class, 'employment_id');
     }
 
+    public function comments()
+    {
+        return $this->morphMany(comment::class ,'commentable');
+    }
+
     public function bookmarked()
     {
         return (bool) favoritemployment::where('user_id', Auth::id())
+            ->where('employment_id', $this->id)
+            ->first();
+    }
+
+    public function iscontactuseremployment()
+    {
+        return (bool) contactuseremployment::where('from_id', Auth::id())
             ->where('employment_id', $this->id)
             ->first();
     }

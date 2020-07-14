@@ -105,7 +105,6 @@ class EmployementList extends PureComponent {
 
                                 <div className="text-center">
 
-
                                     {$guest ?
                                         <Button  data-toggle="modal" data-target="#loginModal"
                                                  className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
@@ -159,6 +158,12 @@ class EmployementList extends PureComponent {
 
                                         </>
                                     }
+
+                                    {this.props.iscontactuseremployment && (
+                                        <Button className="btn btn-info btn-sm" title="Vous avez déjà postulé à cette annonce">
+                                            <b>Postulé</b>
+                                        </Button>
+                                    )}
                                 </div>
 
                             </div>

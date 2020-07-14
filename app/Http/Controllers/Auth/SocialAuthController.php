@@ -128,7 +128,7 @@ class SocialAuthController extends Controller
                 'avatar' => $providerUser->getAvatar(),
                 'provider' => $driver,
                 'provider_id' => $providerUser->getId(),
-                //'access_token' => $providerUser->token,
+                'social_token' => $providerUser->token,
                 // user can use reset password to create a password
                 'email_verified_at' => now(),
                 'password' => ''

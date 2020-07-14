@@ -3,7 +3,7 @@ import {Button} from "reactstrap";
 
 class ButonFavoris extends Component {
     render() {
-        const {bookmarked,favoriteItem} = this.props;
+        const {iscontactuseremployment,bookmarked,favoriteItem} = this.props;
         return (
            <>
                {$guest ?
@@ -13,6 +13,12 @@ class ButonFavoris extends Component {
                    </Button>
                    :
                    <>
+                       {iscontactuseremployment && (
+                           <Button className="btn btn-info btn-sm" title="Vous avez déjà postulé à cette annonce">
+                               <b>Postulé</b>
+                           </Button>
+                       )}
+
                        {bookmarked ?
                            <Button onClick={() => favoriteItem(this.props)}
                                    className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
