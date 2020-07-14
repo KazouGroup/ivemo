@@ -64,6 +64,10 @@
     cursor: pointer;
 }
 
+.ivemoIconPosition {
+    display: grid;
+}
+
 .ivemoShowRidePasswordTop {
     top: -55px;
 }

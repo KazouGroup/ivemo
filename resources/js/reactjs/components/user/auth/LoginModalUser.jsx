@@ -10,14 +10,22 @@ class LoginModalUser extends Component {
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
+        this.handleHideShowPassword = this.handleHideShowPassword.bind(this);
         this.state = {
             username: '',
             email: '',
             password: '',
+            passwordType: 'password',
             remember: true,
             errors: [],
         }
 
+    }
+    handleHideShowPassword() {
+        this.setState({
+            passwordType:
+                this.state.passwordType === "password" ? "text" : "password",
+        });
     }
     handleCheckClick(){
         this.setState({ remember: !this.state.remember });
@@ -86,10 +94,10 @@ class LoginModalUser extends Component {
                                     <b>Se connecter avec</b>
                                     <div className="modal-footer text-center">
                                         <a href={route('social.oauth','facebook')} className="btn btn-facebook btn-block btn-round">
-                                            Facebook
+                                            <i className="fab fa-facebook"/> Facebook
                                         </a>
-                                        <a href={route('social.oauth','google')} className="btn btn-google btn-block btn-round">
-                                            Google
+                                        <a href={route('social.oauth','google')} className="btn btn-google btn-block btn-round ivemoIconPosition">
+                                            <i className="fab fa-google"/> Google
                                         </a>
                                     </div>
                                     <b>Ou</b>
@@ -99,7 +107,7 @@ class LoginModalUser extends Component {
                             <form className="form" method="POST" onSubmit={this.saveItem}>
                                 <div className="modal-body">
                                     <div className="card-body">
-                                        <div className="input-group no-border input-lg">
+                                        <div className="input-group no-border input-lg mb-4">
                                             <div className="input-group-prepend">
                                                 <span className="input-group-text">
                                                     <i className="now-ui-icons users_circle-08"/></span>
@@ -113,12 +121,12 @@ class LoginModalUser extends Component {
                                                    onChange={this.handleFieldChange} autoComplete="username" autoFocus />
                                             {this.renderErrorFor('username')}
                                         </div>
-                                        <div className="input-group no-border input-lg">
+                                        <div className="input-group no-border input-lg mb-4">
                                             <div className="input-group-prepend">
                                                 <span className="input-group-text">
                                                     <i className="now-ui-icons ui-1_lock-circle-open"/></span>
                                             </div>
-                                            <input type="password" placeholder="Mot de pass" aria-label="Mot de passe"
+                                            <input type={this.state.passwordType} placeholder="Mot de pass" aria-label="Mot de passe"
                                                    required="required"
                                                    id="password"
                                                    className={`form-control ${this.hasErrorFor('password') ? 'is-invalid' : ''}`}
@@ -127,6 +135,9 @@ class LoginModalUser extends Component {
                                                    onChange={this.handleFieldChange}
                                                    autoComplete="password" autoFocus />
                                             {this.renderErrorFor('password')}
+                                        </div>
+                                        <div className="ivemoShowRidePasswordTop ivemoShowRidePassword" onClick={this.handleHideShowPassword}>
+                                            <i className={`fa fa-${this.state.passwordType === "password" ? "lock" : "unlock"}`}></i>
                                         </div>
                                         <div className="form-check text-left">
                                             <label className="form-check-label">
@@ -147,7 +158,7 @@ class LoginModalUser extends Component {
                                 <div className="modal-footer text-center">
                                     <div className="pull-left">
                                         <span>
-                                            <a href="/register/" className="link footer-link">Inscription</a>
+                                            <a href="/register/" className="link footer-link">Nouveau client?</a>
                                         </span>
                                     </div>
                                     <div className="pull-right">
