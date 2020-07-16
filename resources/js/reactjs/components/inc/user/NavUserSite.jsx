@@ -120,6 +120,9 @@ class NavUserSite extends PureComponent {
                                         <a href="/profile/account" className="dropdown-item">
                                             <i className="now-ui-icons users_circle-08"/> Editer mon profile
                                         </a>
+                                        <a href={`/profile/${$userIvemo.slug}/personal_settings/forums/`} className="dropdown-item">
+                                            <i className="now-ui-icons travel_info"/> Post forums
+                                        </a>
                                         {$userIvemo.status_profile === 1 ?
                                             <a href={`/pro/${$userIvemo.slug}/`} className="dropdown-item">
                                                 <i className="now-ui-icons users_single-02"/> Profile

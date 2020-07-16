@@ -12,6 +12,18 @@ use Illuminate\Support\Facades\Auth;
 class ForumService
 {
 
+    public static function getcategoryforum($categoryforum)
+    {
+        return 
+        $categoryforum->forums()->where(['status' => 1,'status_admin' => 1])
+            ->with('user','categoryforum')
+            ->whereIn('categoryforum_id',[$categoryforum->id])
+            ->with(['user' => function ($q) {
+                $q->select('id','first_name','sex','slug','created_at','avatar');}])
+            ->whereHas('categoryforum', function ($q) {$q->where('status',1);})
+            ->orderByDesc('created_at');
+    }
+
     public static function apicategoryforumcount()
     {
         $data = categoryforum::where('status',1)
@@ -44,7 +56,7 @@ class ForumService
         $data = ForumResource::collection(forum::where(['status' => 1,'status_admin' => 1])
             ->with('user','categoryforum')
             ->with(['user' => function ($q) {
-                $q->select('id','first_name','sex','created_at','avatar');}])
+                $q->select('id','first_name','sex','slug','created_at','avatar');}])
             ->whereHas('categoryforum', function ($q) {$q->where('status',1);})
             ->orderByDesc('created_at')
             ->distinct()->paginate(40));
@@ -55,11 +67,26 @@ class ForumService
     public static function apiforumscategory($categoryforum)
     {
 
-        $data = ForumResource::collection($categoryforum->forums()->where(['status' => 1,'status_admin' => 1])
-            ->with('user','categoryforum')
-            ->whereIn('categoryforum_id',[$categoryforum->id])
-            ->with(['user' => function ($q) {
-                $q->select('id','first_name','sex','created_at','avatar');}])
+        $data = ForumResource::collection(self::getcategoryforum($categoryforum)
+            ->distinct()->paginate(40));
+
+        return $data;
+    }
+
+    public static function apiforumscategoryinteresse($categoryforum)
+    {
+
+        $data = ForumResource::collection(self::getcategoryforum($categoryforum)
+        ->take(6)
+        ->distinct()->get());
+
+        return $data;
+    }
+
+    public static function apiforumsbyuser($user)
+    {
+        $data = ForumResource::collection(forum::with('user','categoryforum')
+            ->whereIn('user_id', [$user->id])
             ->whereHas('categoryforum', function ($q) {$q->where('status',1);})
             ->orderByDesc('created_at')
             ->distinct()->paginate(40));

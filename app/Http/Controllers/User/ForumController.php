@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Forum\StoreRequest;
 use App\Http\Requests\Forum\UpdateRequest;
 use App\Model\categoryforum;
+use App\Model\user;
 use App\Model\forum;
 use App\Services\ForumService;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class ForumController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','statuscomments','destroy','apiforumslugin','edit','update',
+            'create','statuscomments','destroy','apiforumslugin','edit','update', 'forumsbyuser','apiforumsbyuser'
         ]]);
     }
 
@@ -31,7 +32,12 @@ class ForumController extends Controller
         return view ('user.forum.index');
     }
 
+    public function forumsbyuser(user $user)
+    {
+        $this->authorize('update',$user);
 
+        return view('user.forum.forumsetting', compact ('user'));
+    }
 
     public function apicategoryforumcount()
     {
@@ -60,6 +66,15 @@ class ForumController extends Controller
 
         return response()->json($forums,200);
     }
+
+    public function apiforumscategoryinteresse(categoryforum $categoryforum)
+    {
+        $forums = ForumService::apiforumscategoryinteresse($categoryforum);
+
+        return response()->json($forums,200);
+    }
+
+
     public function apiforumscategorycount(categoryforum $categoryforum)
     {
         $forums = ForumService::apiforumscategorycount($categoryforum);
@@ -88,6 +103,15 @@ class ForumController extends Controller
         visits($forum)->seconds(5)->increment();
 
         return view ('user.forum.show',compact('forum'));
+    }
+
+    public function apiforumsbyuser(user $user)
+    {
+        $this->authorize('update',$user);
+
+        $forums = ForumService::apiforumsbyuser($user);
+
+        return response()->json($forums,200);
     }
 
 

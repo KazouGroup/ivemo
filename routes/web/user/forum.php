@@ -37,6 +37,15 @@ Route::group(['prefix' => 'api'], function () {
         'ForumController@apiforumscategoryslugin'
     )->name('api.forumscategoryslugin_site');
 
+    Route::get(
+        'forums_interesse/{categoryforum:slug}',
+        'ForumController@apiforumscategoryinteresse'
+    )->name('api.forumscategoryinteresse_site');
+
+    Route::get(
+        'profile/{user:slug}/personal_settings/forums',
+        'ForumController@apiforumsbyuser'
+    )->name('api.forumbyuser_site');
 
 });
 
@@ -86,4 +95,8 @@ Route::delete(
     'ForumController@destroy'
 )->name('forumsdelete_site');
 
+Route::get(
+    'profile/{user:slug}/personal_settings/forums',
+    'ForumController@forumsbyuser'
+)->name('forumbyuser_site');
 

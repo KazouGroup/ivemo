@@ -151,6 +151,7 @@ import ForumShow from "../components/user/forum/ForumShow";
 import ForumcategoryforumSite from "../components/user/forum/ForumcategoryforumSite";
 import ForumCreate from "../components/user/forum/treatement/ForumCreate";
 import ForumEdit from "../components/user/forum/treatement/ForumEdit";
+import PrivateUserForum from "../components/user/profile/forum/private/PrivateUserForum";
 
 
 const RouteUser = props => (
@@ -285,6 +286,8 @@ const RouteUser = props => (
 
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_ventes/" component={PrivateUserBlogannonceVente}/>
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_ventes/:categoryannoncevente/" component={withRouter(PrivateUserBlogannonceVentebyCategoryannoncevente)}/>
+
+          <Route exact path="/profile/:user/personal_settings/forums/" component={PrivateUserForum}/>
 
 
           <Route exact path="/employments/" component={EmployementIndexSite}/>

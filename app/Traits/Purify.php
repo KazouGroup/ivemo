@@ -2,20 +2,6 @@
 
 namespace App\Traits;
 
-use App\Model\annoncelocation;
-use App\Model\annoncereservation;
-use App\Model\annoncevente;
-use App\Model\blogannoncelocation;
-use App\Model\blogannoncereservation;
-use App\Model\blogannoncevente;
-use App\Model\employment;
-use App\Model\favorite\favoriteannoncelocation;
-use App\Model\favorite\favoriteannoncereservation;
-use App\Model\favorite\favoriteannoncevente;
-use App\Model\favorite\favoriteblogannoncelocation;
-use App\Model\favorite\favoriteblogannoncereservation;
-use App\Model\favorite\favoriteblogannoncevente;
-use App\Model\favorite\favoritemployment;
 use HTMLPurifier;
 use HTMLPurifier_Config;
 
