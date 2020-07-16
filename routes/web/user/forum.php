@@ -59,7 +59,7 @@ Route::post(
 Route::get(
     'forums/ab/{forum:slugin}/edit',
     'ForumController@edit'
-)->name('forums_site.update');
+)->name('forums_site.edit');
 
 Route::put(
     'forums/ab/{forum:slugin}',
