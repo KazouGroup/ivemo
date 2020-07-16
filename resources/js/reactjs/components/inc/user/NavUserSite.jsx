@@ -77,7 +77,7 @@ class NavUserSite extends PureComponent {
                         <li className="nav-item">
                             <a href={'/employments/'} className="nav-link">
                                 <i className="now-ui-icons business_briefcase-24"/>
-                                <b>Offres d'emplois</b>
+                                <b>Emplois & Services</b>
                             </a>
                         </li>
                         {$guest ?

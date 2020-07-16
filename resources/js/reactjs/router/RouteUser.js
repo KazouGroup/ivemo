@@ -113,6 +113,7 @@ import EmailresetUser from "../components/user/auth/EmailresetUser";
 import WorkwithusIndexSite from "../components/user/pages/workwithus/WorkwithusIndexSite";
 import WorkwithusBycategorySite from "../components/user/pages/workwithus/WorkwithusBycategorySite";
 import WorkwithusShowUserSite from "../components/user/pages/workwithus/WorkwithusShowUserSite";
+import ForumIndexSite from "../components/user/forum/ForumIndexSite";
 import VerifyEmailUser from "../components/user/auth/VerifyEmailUser";
 import ConditionutilisationIndexSite from "../components/user/pages/ConditionutilisationIndexSite";
 import LicencesiteIndexSite from "../components/user/pages/LicencesiteIndexSite";
@@ -146,6 +147,10 @@ import PrivateUserEmploymentsByStatistique
     from "../components/user/profile/employments/private/PrivateUserEmploymentsByStatistique";
 import AnnoncereservationCreate
     from "../components/user/annonces/annoncereservation/treatment/AnnoncereservationCreate";
+import ForumShow from "../components/user/forum/ForumShow";
+import ForumcategoryforumSite from "../components/user/forum/ForumcategoryforumSite";
+import ForumCreate from "../components/user/forum/treatement/ForumCreate";
+import ForumEdit from "../components/user/forum/treatement/ForumEdit";
 
 
 const RouteUser = props => (
@@ -174,6 +179,12 @@ const RouteUser = props => (
           <Route exact path="/work_with_us/:categoryworkwithus/:workwithus/" component={WorkwithusShowUserSite}/>
 
           <Route exact path="/agences_immobilies/" component={AgencesimmobilieIndex}/>
+
+          <Route exact path="/forums/" component={ForumIndexSite}/>
+          <Route exact path="/forums/ab/new" component={ForumCreate}/>
+          <Route exact path="/forums/ab/:forum/edit/" component={ForumEdit}/>
+          <Route exact path="/forums/:categoryforum/" component={withRouter(ForumcategoryforumSite)}/>
+          <Route exact path="/forums/:categoryforum/:forum/" component={ForumShow}/>
 
           <Route exact path="/annonces_reservations/:annoncetype/" component={AnnoncereservationIndex}/>
           <Route exact path="/annonce_reservations/:annoncetype/:city/" component={withRouter(Annoncereservationbyannoncetypebycity)}/>

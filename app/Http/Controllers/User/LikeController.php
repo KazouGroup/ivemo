@@ -4,8 +4,10 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Model\comment;
+use App\Model\forum;
 use App\Model\responsecomment;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class LikeController extends Controller
 {
@@ -20,6 +22,11 @@ class LikeController extends Controller
     }
 
 
+    /**
+     * @param Request $request
+     * @param comment $comment
+     * @return \Illuminate\Http\JsonResponse
+     */
 
     public function likecomment(Request $request,comment $comment)
     {
@@ -36,6 +43,30 @@ class LikeController extends Controller
         return response()->json($like,200);
     }
 
+    /**
+     * @param Request $request
+     * @param forum $forum
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function likeforum(Request $request,forum $forum)
+    {
+        $forum->likes()->create($request->all());
+
+        return response('Like',Response::HTTP_ACCEPTED);
+    }
+
+    public function unlikeforum(Request $request,forum $forum)
+    {
+        auth()->user()->removelikes()->detach($forum->id);
+
+        return response('Unlike',Response::HTTP_ACCEPTED);
+    }
+
+    /**
+     * @param Request $request
+     * @param responsecomment $responsecomment
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function likeresponsecomment(Request $request,responsecomment $responsecomment)
     {
 

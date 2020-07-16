@@ -15,6 +15,7 @@ use App\Model\contactuseremployment;
 use App\Model\contactuserslocation;
 use App\Model\contactusersvente;
 use App\Model\employment;
+use App\Model\forum;
 use App\model\profile;
 use App\Model\responseavisuser;
 use App\Model\teamuser;
@@ -32,6 +33,7 @@ use App\Policies\ContactusersemploymentPolicy;
 use App\Policies\ContactuserslocationPolicy;
 use App\Policies\ContactusersventePolicy;
 use App\Policies\EmploymentPolicy;
+use App\Policies\ForumPolicy;
 use App\Policies\ProfilePolicy;
 use App\Policies\ResponseavisuserPolicy;
 use App\Policies\TeamuserPolicy;
@@ -59,6 +61,7 @@ class AuthServiceProvider extends ServiceProvider
         blogannoncevente::class => BlogannonceventePolicy::class,
         teamuser::class => TeamuserPolicy::class,
         employment::class => EmploymentPolicy::class,
+        forum::class => ForumPolicy::class,
         avisuser::class => AvisuserPolicy::class,
         responseavisuser::class => ResponseavisuserPolicy::class,
         contactuseremployment::class => ContactusersemploymentPolicy::class,

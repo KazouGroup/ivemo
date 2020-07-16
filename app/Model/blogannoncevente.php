@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Model\favorite\favoriteblogannoncevente;
 use App\Traits\Likesdata;
+use App\Traits\Purify;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class blogannoncevente extends Model implements Auditable
 {
-    use AuditableTrait,LogsActivity,Likesdata;
+    use Purify, AuditableTrait,LogsActivity,Likesdata;
 
     protected $guarded = [];
 

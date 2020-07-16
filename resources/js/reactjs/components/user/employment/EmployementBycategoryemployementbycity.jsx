@@ -325,7 +325,7 @@ class EmployementBycategoryemployementbycity extends Component {
                                                                                                     <b style={{ textTransform: "lowercase" }}>{categoryemployment.name}</b> à <b>{item.name}</b>
                                                                                                 </NavLink>
                                                                                             </td>
-                                                                                            <td className="text-right"> {this.getdataString(item.employments_count)}  {item.employments_count > 1 ? "offres" : "offre"}</td>
+                                                                                            <td className="text-right"> {this.getdataString(item.employments_count)}  {item.employments_count > 1 ? "annonces" : "annonce"}</td>
                                                                                         </tr>
                                                                                     ))}
                                                                                 </>

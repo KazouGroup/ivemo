@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Model\favorite\favoriteannoncereservation;
+use App\Traits\Purify;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,8 @@ use Illuminate\Support\Str;
 
 class annoncereservation extends Model
 {
+    use Purify;
+
     protected $guarded = [];
 
     protected  $table = 'annoncereservations';

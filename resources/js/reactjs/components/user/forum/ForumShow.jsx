@@ -1,0 +1,416 @@
+import React, { Component } from "react";
+import { Link, NavLink } from 'react-router-dom';
+import {Button, Form, FormText, Input, UncontrolledTooltip} from "reactstrap";
+import NavUserSite from "../../inc/user/NavUserSite";
+import LinkValicationEmail from "../../inc/user/LinkValicationEmail";
+import moment from "moment";
+import Swal from "sweetalert2";
+import HelmetSite from "../../inc/user/HelmetSite";
+import ForumcommentIndex from "../comments/ForumcommentIndex";
+import ForumShowSkeleton from "../../inc/user/forum/ForumShowSkeleton";
+import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
+import Navlinknewforum from "./treatement/Navlinknewforum";
+const abbrev = ['', 'k', 'M', 'B', 'T'];
+
+
+class ForumShow extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            forum:{user:[],categoryforum:[]}
+        };
+
+        this.likeItem = this.likeItem.bind(this);
+        this.unlikeItem = this.unlikeItem.bind(this);
+        this.favoriteItem = this.favoriteItem.bind(this);
+        this.unfavoriteItem = this.unfavoriteItem.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
+    }
+
+    likeItem(forum) {
+        //console.log(item)
+        const url = route('forums_likes.active', [forum.id]);
+        dyaxios.get(url).then(() => {
+
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unlikeItem(forum) {
+        //console.log(item)
+        const url = route('forums_likes.unactive', [forum.id]);
+        dyaxios.get(url).then(() => {
+
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    favoriteItem(forum) {
+        //console.log(item)
+        const url = route('forums_favorites.active', [forum.id]);
+        dyaxios.get(url).then(() => {
+
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unfavoriteItem(forum) {
+        //console.log(item)
+        const url = route('forums_favorites.unactive', [forum.id]);
+        dyaxios.get(url).then(() => {
+
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooop! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+
+    deleteItem(forum) {
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes-vous sûr de vouloir executer cette action",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                const url = route('forumsdelete_site',forum.id);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update',
+                            message: 'Post suprimée avec success'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'primary',
+                            placement: {
+                                from: 'bottom',
+                                align: 'right'
+                            },
+                            animate: {
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
+                            },
+                        });
+                    /** End alert ***/
+                    this.props.history.push(`/forums/ab/new/`);
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
+    }
+
+
+    loadItems() {
+        let itemCategoryforum = this.props.match.params.categoryforum;
+        let itemForum = this.props.match.params.forum;
+        let url = route('api.forumscategoryslugin_site', [itemCategoryforum, itemForum]);
+        dyaxios.get(url).then(response => this.setState({ forum: response.data, }));
+    }
+
+    // lifecycle method
+    componentDidMount() {
+        this.loadItems();
+    }
+    getDescription(forum) {
+        return { __html: forum.description};
+    }
+
+    data_countFormatter(visits_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(visits_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (visits_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+    data_countlikeFormatter(countlikes, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countlikes)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (countlikes / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+
+    render() {
+        const {forum} = this.state;
+        return (
+            <>
+                <HelmetSite title={`${forum.title || $name_site} - ${$name_site}`}/>
+
+                <div className="about-us sidebar-collapse">
+
+                    <nav className="navbar navbar-expand-lg bg-primary">
+                        <NavUserSite />
+                    </nav>
+
+                    <div className="wrapper">
+                        <div className="main main-raised">
+                            <div className="container">
+                                <br />
+                                <div className="row">
+
+                                    <div className="col-lg-8 col-md-12 mx-auto">
+                                        <br/>
+                                        {!$guest &&(
+                                            <>
+                                                {!$userIvemo.email_verified_at &&(
+                                                    <LinkValicationEmail/>
+                                                )}
+                                            </>
+                                        )}
+                                        <div className="submit text-left">
+                                            <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
+                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour</b>
+                                            </button>
+                                        </div>
+
+                                        {forum.title ?
+
+                                            <div className="card">
+                                                <div className="card-body">
+
+                                                    <div className="card-header d-flex align-items-center">
+                                                        <div className="d-flex align-items-center">
+
+                                                            {forum.user.avatar === null ?
+                                                                <img className="avatar" alt={forum.user.first_name}
+                                                                     style={{ height: "35px", width: "35px", borderRadius:'35px' }}
+                                                                     src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>
+                                                                :
+                                                                <img className="avatar"
+                                                                     style={{ height: "35px", width: "35px", borderRadius:'35px' }}
+                                                                     alt={forum.user.first_name}
+                                                                     src={forum.user.avatar}/>
+                                                            }
+                                                            <div className="mx-3">
+                                                                <NavLink to={`/pro/${forum.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{forum.user.first_name}</b>
+                                                                    <small className="d-block text-muted">{forum.statusOnline &&(<i className="fas fa-circle text-success"></i>)}  <i className="now-ui-icons tech_watch-time"/> {moment(forum.created_at).format('LL')}</small>
+                                                                </NavLink>
+                                                            </div>
+                                                        </div>
+                                                        <div className="text-right ml-auto">
+                                                    <span className="card-title">
+                                                        <Link to={`/forums/${forum.categoryforum.slug}/`}><b>{forum.categoryforum.name}</b></Link> - <Link to={`/employments/`}> </Link> <i className="now-ui-icons tech_watch-time"/> {moment(forum.created_at).fromNow()}
+                                                    </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    {forum.title && (
+                                                        <>
+                                                            <h5 className="card-title">
+                                                                <b>{forum.title}</b>
+                                                            </h5>
+                                                        </>
+                                                    )}
+
+                                                    <div className="title text-justify" dangerouslySetInnerHTML={this.getDescription(forum)} />
+
+                                                    <div className="card-header d-flex align-items-center">
+                                                        <div className="d-flex align-items-center">
+                                                            <Button className="btn btn-default btn-icon btn-sm btn-neutral" title={`${forum.visits_count} ${forum.countlikes > 1 ? "Commentaires" : "Commentaire"}`}>
+                                                                <i className="far fa-eye"></i>
+                                                            </Button> {this.data_countFormatter(forum.visits_count)}
+
+                                                            {$guest ?
+                                                                <>
+                                                                    <Button data-toggle="modal" data-target="#loginModal"
+                                                                            className="btn btn-default btn-icon btn-sm btn-neutral" title={`${forum.countlikes} ${forum.countlikes > 1 ? "Likes" : "Like"}`}>
+                                                                        <i className="far fa-heart"></i>
+                                                                    </Button> {this.data_countlikeFormatter(forum.countlikes)}
+
+                                                                    <Button data-toggle="modal" data-target="#loginModal"
+                                                                            className="btn btn-default btn-icon btn-sm btn-neutral" title="Sauvegarder">
+                                                                        <i className="far fa-bookmark"></i>
+                                                                    </Button>
+                                                                </>
+
+                                                                :
+                                                                <>
+
+                                                                    {forum.likeked ?
+                                                                        <>
+                                                                            <Button onClick={() => this.unlikeItem(forum)}
+                                                                                    className="btn btn-info btn-icon btn-sm btn-neutral" title={`${forum.countlikes} ${forum.countlikes > 1 ? "Likes" : "Like"}`}>
+                                                                                <i className="fas fa-heart"></i>
+                                                                            </Button> {this.data_countlikeFormatter(forum.countlikes)}
+                                                                        </>
+
+                                                                        :
+                                                                        <>
+                                                                            <Button onClick={() => this.likeItem(forum)}
+                                                                                    className="btn btn-default btn-icon btn-sm btn-neutral" title={`${forum.countlikes} ${forum.countlikes > 1 ? "Likes" : "Like"}`}>
+                                                                                <i className="far fa-heart"></i>
+                                                                            </Button> {this.data_countlikeFormatter(forum.countlikes)}
+                                                                        </>
+                                                                    }
+
+                                                                    {forum.favoriteted ?
+                                                                        <>
+                                                                            <Button onClick={() => this.unfavoriteItem(forum)}
+                                                                                    className="btn btn-info btn-icon btn-sm btn-neutral" title="Sauvegarder">
+                                                                                <i className="fas fa-bookmark"></i>
+                                                                            </Button>
+                                                                        </>
+
+                                                                        :
+                                                                        <>
+                                                                            <Button onClick={() => this.favoriteItem(forum)}
+                                                                                    className="btn btn-default btn-icon btn-sm btn-neutral" title="Sauvegarder">
+                                                                                <i className="far fa-bookmark"></i>
+                                                                            </Button>
+                                                                        </>
+                                                                    }
+
+
+                                                                </>
+                                                            }
+
+                                                        </div>
+
+                                                        <div className="text-right ml-auto">
+
+
+                                                            {!$guest && (
+                                                                <>
+                                                                    {($userIvemo.id === forum.user_id && $userIvemo.id === forum.user.id) && (
+                                                                        <>
+
+                                                                            <NavLink to={`/forums/ab/${forum.slugin}/edit/`} className="btn btn-info btn-neutral" title="Editer ce post">
+                                                                                <i className="now-ui-icons ui-2_settings-90"/> Editer
+                                                                            </NavLink>
+
+                                                                            <button className="btn btn-danger btn-neutral" onClick={() => this.deleteItem(forum)} title="Supprimer ce post">
+                                                                                <i className="now-ui-icons ui-1_simple-remove"></i> Supprimer
+                                                                            </button>
+                                                                        </>
+                                                                    )}
+                                                                </>
+                                                            )}
+
+                                                            <Button className="btn btn-default btn-icon btn-sm btn-neutral" title="Signaler ce post">
+                                                                <i className="far fa-flag"></i>
+                                                            </Button>
+                                                        </div>
+                                                    </div>
+
+                                                    <ForumcommentIndex {...this.props} />
+
+                                                </div>
+                                            </div>
+                                            :
+                                            <ForumShowSkeleton/>
+                                        }
+
+
+
+
+                                    </div>
+
+                                    <div className="col-lg-4 col-md-12 mx-auto">
+
+                                        <Navlinknewforum/>
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div className="card card-plain">
+                                                            <b>Categories populaires</b>
+
+                                                            <div className="card-body">
+                                                                <table>
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td> <a href="#pablo">Formations & Cours </a></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td> <a href="#pablo">Vante</a></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td> <a href="#pablo">service</a></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td> <a href="#pablo">Information </a></td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <FooterBigUserSite />
+                    </div>
+                </div>
+            </>
+
+
+
+        )
+    }
+}
+
+export default ForumShow;
