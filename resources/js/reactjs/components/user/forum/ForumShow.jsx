@@ -368,7 +368,7 @@ class ForumShow extends Component {
                                                                             className="btn btn-default btn-icon btn-sm btn-neutral"
                                                                             title="Signaler ce post ">
                                                                         <i className="far fa-flag"></i> 
-                                                                    </Button> {$userIvemo.status_profile === 1 && (<>{forum.countsignals}</>)}
+                                                                    </Button>
                                                                 </>
                                                                 :
                                                                 <>

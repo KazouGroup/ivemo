@@ -116,7 +116,7 @@ class ForumService
             ->with('user','categoryforum')
             ->whereIn('categoryforum_id',[$categoryforum->id])
             ->with(['user' => function ($q) {$q->with('profile')
-                ->select('id','first_name','sex','created_at','avatar');}])
+                ->select('id','first_name','sex','created_at','avatar','slug');}])
             ->whereHas('categoryforum', function ($q) {$q->where('status',1);})
             ->distinct()->firstOrFail());
 
