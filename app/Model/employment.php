@@ -105,6 +105,11 @@ class employment extends Model
         return $this->morphMany(comment::class ,'commentable');
     }
 
+    public function signals()
+    {
+        return $this->morphMany(signal::class ,'signalable');
+    }
+
     public function bookmarked()
     {
         return (bool) favoritemployment::where('user_id', Auth::id())

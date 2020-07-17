@@ -446,7 +446,6 @@ class BlogannoncelocationIndex extends Component {
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -472,7 +471,6 @@ class BlogannoncelocationIndex extends Component {
                                                     <div className="modal-body">
 
                                                         <div className="card-body">
-
                                                             <div className="alert alert-danger text-center" role="alert">
                                                                 <div className="container">
                                                                     {blogannonceItem.title}

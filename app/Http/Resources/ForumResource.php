@@ -24,6 +24,7 @@ class ForumResource extends JsonResource
             'user_id' => $this->user_id,
             'likeked' => $this->likeked(),
             'countlikes' => $this->likes()->count(),
+            'countsignals' => $this->signals()->count(),
             'countcomments' => $this->comments()->count(),
             'status_comments' => $this->status_comments,
             'status_admin' => $this->status_admin,

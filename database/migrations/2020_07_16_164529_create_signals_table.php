@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSignaluseremploymentsTable extends Migration
+class CreateSignalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,17 @@ class CreateSignaluseremploymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('signaluseremployments', function (Blueprint $table) {
+        Schema::create('signals', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name')->nullable();
+            $table->string('signalable_type')->nullable();
+            $table->unsignedBigInteger('signalable_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable()->index();
             $table->string('subject')->nullable();
-            $table->string('email')->nullable();
             $table->string('ip')->nullable();
             $table->boolean('confirm_send')->nullable();
             $table->longText('message')->nullable();
-            $table->timestamps();
-
-            $table->unsignedBigInteger('employment_id')->nullable()->index();
-            $table->foreign('employment_id')->references('id')->on('employments')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();        
         });
     }
 
@@ -35,6 +34,6 @@ class CreateSignaluseremploymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('signaluseremployments');
+        Schema::dropIfExists('signals');
     }
 }

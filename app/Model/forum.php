@@ -84,4 +84,9 @@ class forum extends Model
     {
         return $this->morphMany(comment::class ,'commentable');
     }
+
+    public function signals()
+    {
+        return $this->morphMany(signal::class ,'signalable');
+    }
 }

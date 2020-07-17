@@ -335,10 +335,7 @@ class EmployementBycategoryemployementbycity extends Component {
                                                                         </table>
                                                                     </div>
                                                                 </div>
-
-
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -348,15 +345,8 @@ class EmployementBycategoryemployementbycity extends Component {
                                         <Navemployementsbycategoryemployment {...this.props} {...annoncebycity}/>
 
                                     </div>
-
-
-
-
                                 </div>
                             </div>
-
-
-
                         </div>
 
                         <FooterBigUserSite />

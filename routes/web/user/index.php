@@ -15,6 +15,7 @@ require(__DIR__ . DIRECTORY_SEPARATOR . 'profile.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'signalannonce.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'signalblogannonce.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'forum.php');
+require(__DIR__ . DIRECTORY_SEPARATOR . 'signals.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'signalemployment.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'profile_public.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'subscriberuser.php');

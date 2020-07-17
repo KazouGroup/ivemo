@@ -66,6 +66,13 @@ class EmployementShowUserSite extends Component {
         }
     }
 
+    signalerUser(item) {
+        $('#addNew').modal('show');
+        //this.setState({
+        //    employmentItem: item
+        //});
+    }
+    
     sendmessageItem(e) {
         e.preventDefault();
 
@@ -211,66 +218,7 @@ class EmployementShowUserSite extends Component {
         })
 
     }
-
-    signalerUser(id){
-        Swal.fire({
-            title: 'Masquer cette offre?',
-            text: "êtes vous sure de vouloir confirmer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                //Envoyer la requet au server
-                let url = route('employmentsunactivated_site',id);
-                dyaxios.get(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            message: "Cette offre a été masquée aux utilisateurs",
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
-                            },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
-                            },
-                        });
-                    /** End alert ***/
-                    // remove from local state
-                    this.props.history.push('/employments/');
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        })
-
-    }
-
-    signalerUser(item) {
-        $('#addNew').modal('show');
-        this.setState({
-            employmentItem: item
-        });
-    }
+    
 
     statuscommentItem(employment){
         Swal.fire({
@@ -346,7 +294,7 @@ class EmployementShowUserSite extends Component {
 
     statusItem(id){
         Swal.fire({
-            title: 'Masquer cette offre?',
+            title: 'Masquer cette annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -365,7 +313,7 @@ class EmployementShowUserSite extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Cette offre a été masquée aux utilisateurs",
+                            message: "Annonce masquée aux utilisateurs",
                         },
                         {
                             allow_dismiss: false,
@@ -419,7 +367,7 @@ class EmployementShowUserSite extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Offre suprimée avec succès'
+                            message: 'Annonce suprimée avec succès'
                         },
                         {
                             allow_dismiss: false,
@@ -835,11 +783,9 @@ class EmployementShowUserSite extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </div>
 
-                                    <SignalFromEmployementForShow {...this.props} />
+                                    <SignalFromEmployementForShow {...this.props} {...employment} />
 
                                 </div>
 

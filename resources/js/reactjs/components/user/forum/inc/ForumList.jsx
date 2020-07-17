@@ -160,12 +160,20 @@ class ForumList extends Component {
                                                 </button>
                                             </>
                                         )}
+
+                                    
+                                        {$userIvemo.status_profile === 1 && (
+                                            <>
+                                            <Button className="btn btn-default btn-icon btn-sm btn-neutral" 
+                                                title="Signaler ce post ">
+                                                <i className="far fa-flag"></i>
+                                            </Button> {this.props.countsignals}
+                                            </>
+                                        )}
+                                        
                                     </>
                                 )}
 
-                                <Button className="btn btn-default btn-icon btn-sm btn-neutral" title="Signaler ce post">
-                                    <i className="far fa-flag"></i>
-                                </Button>
                             </div>
                         </div>
 

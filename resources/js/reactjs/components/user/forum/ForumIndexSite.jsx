@@ -17,7 +17,7 @@ class ForumIndexSite extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            forums:{user:[],categoryforum:[]}
+            forums:{user:[],categoryforum:[]},
         };
 
         this.likeItem = this.likeItem.bind(this);
@@ -238,6 +238,9 @@ class ForumIndexSite extends Component {
                                         </div>
 
                                     </div>
+
+
+
                                 </div>
                             </div>
                         </div>

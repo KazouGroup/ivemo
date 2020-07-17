@@ -235,7 +235,7 @@ class EmployementIndexSite extends Component {
                             <div className="content-center">
                                 <div className="row">
                                     <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">Gerer tous vos evenements et recrutements facillement </h3>
+                                        <h3 className="title">Gerer tous vos evenements et recrutements facilement </h3>
                                     </div>
                                 </div>
                             </div>

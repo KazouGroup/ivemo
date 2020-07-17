@@ -7,17 +7,19 @@ class SignalFromEmployementForShow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            full_name: '',
-            confirm_send: '',
-            email: '',
+            subject: 'Mauvaise catégorie',
             message: '',
             errors: [],
+            employmentItem: [],
+
         };
 
 
         this.signalemessageItem = this.signalemessageItem.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
+        this.handleCheckClick = this.handleCheckClick.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
+        this.handleFieldChange = this.handleFieldChange.bind(this);        
         this.renderErrorFor = this.renderErrorFor.bind(this);
     }
 
@@ -34,6 +36,20 @@ class SignalFromEmployementForShow extends Component {
         return !!this.state.errors[field];
     }
 
+    handleCheckClick(event){
+        this.setState({
+            subject: event.target.value
+        });
+
+    };
+
+    handleFieldChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value,
+        });
+        this.state.errors[event.target.name] = '';
+    }
+
     renderErrorFor(field) {
         if (this.hasErrorFor(field)) {
             return (
@@ -48,22 +64,20 @@ class SignalFromEmployementForShow extends Component {
         e.preventDefault();
 
         let item = {
-            email: this.state.email,
-            confirm_send: this.state.confirm_send,
-            full_name: this.state.full_name,
+            subject: this.state.subject,
             message: this.state.message,
         };
         let itemEmployment = this.props.match.params.employment;
         let itemCategoryemployment = this.props.match.params.categoryemployment;
         let itemCity = this.props.match.params.city;
-        let url = route('signalemploymentbyslug_site',[itemCategoryemployment,itemCity,itemEmployment]);
+        let url = route('employmentsendsignal_site',[itemCategoryemployment,itemCity,itemEmployment]);
         dyaxios.post(url, item)
             .then(() => {
 
                 $('#addNew').modal('hide');
 
                 $.notify({
-                        message: `Cette annonce a été signalé avec succès`
+                        message: `Cette annonce a été signalée avec succès`
                     },
                     {
                         allow_dismiss: false,
@@ -79,17 +93,13 @@ class SignalFromEmployementForShow extends Component {
                     });
 
                 this.setState({
-                    email: "",
-                    full_name: "",
-                    phone: "",
-                    confirm_send: "",
                     message: "",
                 });
             }).catch(error => {
             this.setState({
                 errors: error.response.data.errors
             });
-            $.notify("Ooop! Quelque chose ne va pas. Essayez plus tard ...", {
+            $.notify("Ooops! Quelque chose ne va pas. Essayez plus tard ...", {
                 allow_dismiss: false,
                 type: 'danger',
                 animate: {
@@ -102,112 +112,118 @@ class SignalFromEmployementForShow extends Component {
 
     render() {
         return (
-
             <div className="modal fade" id="addNew" tabIndex="-1" role="dialog" aria-labelledby="addNewLabel"
-                 aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title"><b>Signaler des erreurs sur cette annonce</b></h5>
-                            <button type="button" className="close" data-dismiss="modal"
-                                    aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+            aria-hidden="true">
+           <div className="modal-dialog">
+               <div className="modal-content">
+                   <div className="modal-header">
+                       <h5 className="modal-title"><b>Signaler des erreurs de post</b></h5>
+                       <button type="button" className="close" data-dismiss="modal"
+                               aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                       </button>
+                   </div>
 
-                        <Form role="form"  onSubmit={this.signalemessageItem}  acceptCharset="UTF-8">
+                   <Form role="form"  onSubmit={this.signalemessageItem}  acceptCharset="UTF-8">
 
-                            <div className="modal-body">
+                       <div className="modal-body">
+                           <div className="card-body">
+                               <div className="alert alert-danger text-center" role="alert">
+                                   <div className="container">
+                                       {this.props.title}
+                                   </div>
+                               </div>
 
-                                <div className="card-body">
+                               <p className="category">Spécifier le type d'erreur</p>
 
-                                    <p className="title text-center"><b>Spécifie le type d'erreur</b></p>
+                               <div className="row">
+                                   <div className="col-md-6">
+                                       <div className="form-check form-check-radio">
+                                           <label className="form-check-label">
+                                               <input className="form-check-input" type="radio"
+                                                      name="subject" id="subject"
+                                                      value="Mauvaise catégorie" onChange={this.handleCheckClick} checked={this.state.subject === "Mauvaise catégorie"}/>
+                                               <span className="form-check-sign"></span>
+                                               Mauvaise catégorie
+                                           </label>
+                                       </div>
+                                       <div className="form-check form-check-radio">
+                                           <label className="form-check-label">
+                                               <Input className="form-check-input" type="radio"
+                                                      name="subject" id="subject"
+                                                      value="Information incomplète" onChange={this.handleCheckClick} checked={this.state.subject === "Information incomplète"}/>
+                                               <span className="form-check-sign"></span>
+                                               Informations incomplète
+                                           </label>
+                                       </div>
+                                       <div className="form-check form-check-radio">
+                                           <label className="form-check-label">
+                                               <input className="form-check-input" type="radio"
+                                                      name="subject" id="subject"
+                                                      value="Erreur d'adresse / de carte" onChange={this.handleCheckClick} checked={this.state.subject === "Erreur d'adresse / de carte"}/>
+                                               <span className="form-check-sign"></span>
+                                               Erreur d'adresse / de carte
+                                           </label>
+                                       </div>
+                                   </div>
 
-                                    <div className="row">
-                                        <div className="input-group">
-                                            <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons users_circle-08"/></span>
-                                            </div>
-                                            <input id='full_name'
-                                                   type='text'
-                                                   required="required"
-                                                   className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
-                                                   name='full_name'
-                                                   placeholder="Nom complet"
-                                                   aria-label="Nom complet"
-                                                   autoComplete="full_name"
-                                                   value={this.state.full_name}
-                                                   onChange={this.handleFieldChange}
-                                            />
-                                            {this.renderErrorFor('full_name')}
-                                        </div>
-                                    </div>
+                                   <div className="col-md-6">
+                                       <div className="form-check form-check-radio">
+                                           <label className="form-check-label">
+                                               <Input className="form-check-input" type="radio"
+                                                      name="subject" id="subject"
+                                                      value="Mauvaise redaction" onChange={this.handleCheckClick} checked={this.state.subject === "Mauvaise redaction"}/>
+                                               <span className="form-check-sign"></span>
+                                               Mauvaise redaction
+                                           </label>
+                                       </div>
+                                       <div className="form-check form-check-radio">
+                                           <label className="form-check-label">
+                                               <Input className="form-check-input" type="radio"
+                                                      name="subject" id="subject"
+                                                      value="Arnaque possible" onChange={this.handleCheckClick} checked={this.state.subject === "Arnaque possible"}/>
+                                               <span className="form-check-sign"></span>
+                                               Arnaque possible
+                                           </label>
+                                       </div>
+                                       <div className="form-check form-check-radio">
+                                           <label className="form-check-label">
+                                               <Input className="form-check-input" type="radio"
+                                                      name="subject" id="subject"
+                                                      value="Autre (précisez dans le commentaire)" onChange={this.handleCheckClick} checked={this.state.subject === "Autre (précisez dans le commentaire)"}/>
+                                               <span className="form-check-sign"></span>
+                                               Autre (précisez dans le commentaire)
+                                           </label>
+                                       </div>
+                                   </div>
+                               </div>
 
-                                    <div className="row">
-                                        <div className="input-group">
-                                            <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons ui-1_email-85"/></span>
-                                            </div>
-                                            <input id='email'
-                                                   type='email'
-                                                   required="required"
-                                                   className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                                   name='email'
-                                                   placeholder="Email"
-                                                   aria-label="Email"
-                                                   autoComplete="email"
-                                                   value={this.state.email}
-                                                   onChange={this.handleFieldChange}
-                                            />
-                                            {this.renderErrorFor('email')}
-                                        </div>
-                                    </div>
-                                    <div className="row">
+                               <div className="row">
+                                   <div className="input-group">
+                                   <textarea name="message" value={this.state.message}
+                                    onChange={this.handleFieldChange}
+                                    placeholder={'Pourquoi signalez-vous cette article?'}
+                                    className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
+                                    id="message"
+                                    required="required"
+                                    rows="10" />
+                                       {this.renderErrorFor('message')}
+                                   </div>
+                               </div>
 
-                                        <div className="input-group">
-                                                       <textarea name="message" value={this.state.message}
-                                                                 onChange={this.handleFieldChange}
-                                                                 placeholder={'Pourquoi signalez-vous cette article?'}
-                                                                 className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                 id="message"
-                                                                 required="required"
-                                                                 rows="10" />
-                                            {this.renderErrorFor('message')}
-                                        </div>
+                               <div className="submit text-center">
+                                   <button className="btn btn-primary btn-lg btn-block" type="submit">
+                                       <b>Signaler</b>
+                                   </button>
+                               </div>
+                           </div>
+                       </div>
 
-                                        <div
-                                            className="custom-control custom-checkbox mb-3">
-                                            <input name="confirm_send" className={`custom-control-input ${this.hasErrorFor('confirm_send') ? 'is-invalid' : ''}`}
-                                                   id="confirm_send" value="1" type="checkbox" onChange={this.handleFieldChange} checked={this.state.confirm_send}/>
-                                            <label className="custom-control-label"
-                                                   htmlFor="confirm_send">
-                                            <span>Je suis majeur, j'ai lu et accepté
-                                                <a className="text-primary" data-action="open-privacy-disclamer"> Informations de confidentialité</a>
-                                            </span>
-                                            </label>
-                                        </div>
-                                    </div>
+                   </Form>
 
-                                    <div className="submit text-center">
-                                        <button className="btn btn-primary btn-lg btn-block" type="submit">
-                                            <b>Signaler</b>
-                                        </button>
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-
-                        </Form>
-
-
-                    </div>
-                </div>
-            </div>
-
+               </div>
+           </div>
+       </div>
 
         )
     }

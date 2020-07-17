@@ -10,6 +10,7 @@ import ForumcommentIndex from "../comments/ForumcommentIndex";
 import ForumShowSkeleton from "../../inc/user/forum/ForumShowSkeleton";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import Navlinknewforum from "./treatement/Navlinknewforum";
+import SignalFromForumForShow from "./inc/SignalFromForumForShow";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -23,8 +24,44 @@ class ForumShow extends Component {
         this.likeItem = this.likeItem.bind(this);
         this.unlikeItem = this.unlikeItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
+        this.signalerUser = this.signalerUser.bind(this);
+        this.handleCheckClick = this.handleCheckClick.bind(this);
+        this.hasErrorFor = this.hasErrorFor.bind(this);
+        this.handleFieldChange = this.handleFieldChange.bind(this);
         this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
+    }
+
+    handleCheckClick(event){
+        this.setState({
+            subject: event.target.value
+        });
+
+    };
+
+    handleFieldChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value,
+        });
+        this.state.errors[event.target.name] = '';
+    }
+
+     signalerUser() {
+        $('#addNew').modal('show');
+    }
+
+    hasErrorFor(field) {
+        return !!this.state.errors[field];
+    }
+
+    renderErrorFor(field) {
+        if (this.hasErrorFor(field)) {
+            return (
+                <span className='invalid-feedback'>
+                    <strong>{this.state.errors[field][0]}</strong>
+                </span>
+            )
+        }
     }
 
     likeItem(forum) {
@@ -36,7 +73,7 @@ class ForumShow extends Component {
 
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -55,7 +92,7 @@ class ForumShow extends Component {
 
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -74,7 +111,7 @@ class ForumShow extends Component {
 
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -93,7 +130,7 @@ class ForumShow extends Component {
 
         }).catch(() => {
             //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -102,7 +139,6 @@ class ForumShow extends Component {
             });
         })
     }
-
 
     deleteItem(forum) {
         Swal.fire({
@@ -326,7 +362,15 @@ class ForumShow extends Component {
                                                         <div className="text-right ml-auto">
 
 
-                                                            {!$guest && (
+                                                            {$guest ?
+                                                                <>
+                                                                    <Button data-toggle="modal" data-target="#loginModal"
+                                                                            className="btn btn-default btn-icon btn-sm btn-neutral"
+                                                                            title="Signaler ce post ">
+                                                                        <i className="far fa-flag"></i> 
+                                                                    </Button> {$userIvemo.status_profile === 1 && (<>{forum.countsignals}</>)}
+                                                                </>
+                                                                :
                                                                 <>
                                                                     {($userIvemo.id === forum.user_id && $userIvemo.id === forum.user.id) && (
                                                                         <>
@@ -340,12 +384,14 @@ class ForumShow extends Component {
                                                                             </button>
                                                                         </>
                                                                     )}
-                                                                </>
-                                                            )}
 
-                                                            <Button className="btn btn-default btn-icon btn-sm btn-neutral" title="Signaler ce post">
-                                                                <i className="far fa-flag"></i>
-                                                            </Button>
+                                                                    <Button className="btn btn-default btn-icon btn-sm btn-neutral" onClick={() => this.signalerUser()}
+                                                                            title="Signaler ce post ">
+                                                                        <i className="far fa-flag"></i>
+                                                                    </Button> {$userIvemo.status_profile === 1 && (<>{forum.countsignals}</>)}
+                                                                </>
+                                                            }
+
                                                         </div>
                                                     </div>
 
@@ -396,6 +442,9 @@ class ForumShow extends Component {
                                                 </div>
                                             </div>
                                         </div>
+
+
+                                        <SignalFromForumForShow {...this.props} {...forum} />
 
                                     </div>
                                 </div>

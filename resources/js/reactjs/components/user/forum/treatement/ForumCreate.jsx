@@ -19,6 +19,7 @@ import NavUserSite from "../../../inc/user/NavUserSite";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import Navforumbyuser from "../inc/Navforumbyuser";
 import FieldInput from "../../../inc/vendor/FieldInput";
+import Navlinknewforum from "./Navlinknewforum";
 
 
 class ForumCreate extends Component {
@@ -260,11 +261,7 @@ class ForumCreate extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
-                                        <div className="submit text-center">
-                                            <NavLink className="btn btn-primary" to={`/forums/ab/new/`}>
-                                                <i className="now-ui-icons ui-1_simple-add" /> <b>Poser votre question</b>
-                                            </NavLink>
-                                        </div>
+                                        <Navlinknewforum/>
 
                                         <div className="card">
                                             <div className="card-body">
