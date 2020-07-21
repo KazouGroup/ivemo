@@ -12,6 +12,6 @@ class ForumSeeder extends Seeder
      */
     public function run()
     {
-        factory(forum::class, 1500)->create();
+        factory(forum::class, 500)->create();
     }
 }
