@@ -3,7 +3,7 @@ import {Route, Switch,withRouter} from 'react-router-dom';
 import IndexSite from "../components/user/IndexSite";
 import LoginUser from "../components/user/auth/LoginUser";
 import AboutUserSite from "../components/user/about/AboutUserSite";
-import ContactUserSite from "../components/user/contact/ContactUserSite";
+import ContactUserSite from "../components/user/pages/ContactUserSite";
 import AnnonceUserSite from "../components/user/annonce/AnnonceUserSite";
 import AnnonceShowUserSite from "../components/user/annonce/AnnonceShowUserSite";
 import AnnonceShowCreateUserSite from "../components/user/annonce/AnnonceShowCreateUserSite";

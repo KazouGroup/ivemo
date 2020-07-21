@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom'
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
-import styles from "./ContactUserSite.module.css";
+import styles from "./inc/ContactUserSite.module.css";
 import LinkValicationEmail from "../../inc/user/LinkValicationEmail";
 import FieldInput from "../../inc/vendor/FieldInput";
+import HelmetSite from "../../inc/user/HelmetSite";
 
 
 
@@ -61,19 +62,22 @@ class ContactUserSite extends Component {
         };
         dyaxios.post(route('contactadmins_save.store'), item)
             .then(() => {
-                $.notify('<strong>Merçi pour votre message ...</strong>', {
-                    allow_dismiss: false,
-                    type: 'success',
-                    placement: {
-                        from: 'bottom',
-                        align: 'right'
-                    },
-                    animate: {
-                        enter: 'animated fadeInRight',
-                        exit: 'animated fadeOutRight'
-                    },
-                });
 
+                $.notify({
+                        message: "Merçi pour votre message",
+                    },
+                    {
+                        allow_dismiss: false,
+                        type: 'success',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
                 this.setState({
                     email: "",
                     first_name: "",
@@ -88,15 +92,12 @@ class ContactUserSite extends Component {
             });
         })
     }
-    // lifecycle method
-    componentDidMount() {
-        const composantTitle = `Contactez Nous - ${$name_site}`;
-        document.title = `${composantTitle}`;
-    }
 
     render() {
         return (
             <>
+                <HelmetSite title={`Contactez Nous - ${$name_site}`}/>
+
                 <div className="about-us sidebar-collapse">
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
                         <NavUserSite />
@@ -215,7 +216,7 @@ class ContactUserSite extends Component {
                                                 </div>
                                                 <div className="submit text-center">
                                                     <button className="btn btn-primary" type="submit">
-                                                        <i className="now-ui-icons ui-1_send"></i> Envoyer mon message
+                                                        <b>Envoyer mon message</b>
                                                     </button>
                                                 </div>
                                             </form>

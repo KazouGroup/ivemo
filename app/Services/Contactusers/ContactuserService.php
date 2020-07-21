@@ -3,6 +3,7 @@ namespace App\Services\Contactusers;
 
 
 
+use App\Jobs\Contacts\ContactadminsJob;
 use App\Jobs\Contacts\ContactuserJob;
 use App\Jobs\Contacts\ContactusersadvertsJob;
 use App\Jobs\Contacts\ContactadminsfaqsJob;
@@ -65,7 +66,7 @@ class ContactuserService
 
         dispatch($emailToUser);
     }
-    
+
     public static function newEmailcontactusersadvertsUser($request)
     {
         $fromFullnameUser = $request->get('full_name');
@@ -74,7 +75,7 @@ class ContactuserService
         $fromMessageUser = $request->get('message');
 
 
-        $toAdminUser = user::where('status_user',1)->get();
+        $toAdminUser = user::all();
 
         $emailToUser = (new ContactusersadvertsJob($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromMessageUser,$toAdminUser));
 
@@ -87,7 +88,7 @@ class ContactuserService
         $fromEmailUser = $request->get('email');
         $fromMessageUser = $request->get('message');
 
-        $toAdminUser = user::where('status_user',1)->get();
+        $toAdminUser = user::all();
 
         $emailToUser = (new ContactadminsfaqsJob($fromFullnameUser,$fromEmailUser,$fromMessageUser,$toAdminUser));
 
@@ -103,7 +104,7 @@ class ContactuserService
         $fromMessageUser = $request->get('message');
 
 
-        $toAdminUser = user::where('status_user',1)->get();
+        $toAdminUser = user::all();
 
         $emailToUser = (new ContactadminsJob($fromFirstnameUser,$fromLastnameUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$toAdminUser));
 

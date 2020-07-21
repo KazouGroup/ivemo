@@ -95,11 +95,6 @@ class employment extends Model
         ];
     }
 
-    public function contactuseremployments()
-    {
-        return $this->hasMany(contactuseremployment::class, 'employment_id');
-    }
-
     public function comments()
     {
         return $this->morphMany(comment::class ,'commentable');
@@ -125,7 +120,7 @@ class employment extends Model
     public function iscontactservice()
     {
         return (bool) contactservice::where('from_id', Auth::id())
-            ->where(['contactserviceable_type' => 'App\Model\employment', 
+            ->where(['contactserviceable_type' => 'App\Model\employment',
             'contactserviceable_id' => $this->id ])
             ->first();
     }

@@ -8,6 +8,7 @@ use App\Notifications\Contacts\ContactadminsfaqsNotification;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class Contactadminsfaqsjob implements ShouldQueue
 {
@@ -64,5 +65,5 @@ class Contactadminsfaqsjob implements ShouldQueue
         }catch (\Exception $e){
             Log::error($e->getMessage());
         }
-    } 
+    }
 }

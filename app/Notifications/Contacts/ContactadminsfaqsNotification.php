@@ -51,7 +51,6 @@ class ContactadminsfaqsNotification extends Notification
                     ->from($this->fromEmailUser,config('app.name'))
                     ->line($this->fromFullnameUser.' vous a envoyé un message de la page FAQs - '.config('app.name'))
                     ->line($this->fromMessageUser)
-                    //->action('En savoir plus', url(route('personal_mails_annonces_ventes.site',[$this->user->slug])))
                     ->salutation('Merçi');
     }
 

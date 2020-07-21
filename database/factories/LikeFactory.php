@@ -4,6 +4,7 @@
 
 
 use App\Model\comment;
+use App\Model\like;
 use App\Model\user;
 use Faker\Generator as Faker;
 /*
@@ -17,7 +18,7 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(comment::class, function (Faker $faker) {
+$factory->define(like::class, function (Faker $faker) {
 
     $servicemodel = collect([
         ['name' => 'App\Model\employment'],
@@ -27,14 +28,14 @@ $factory->define(comment::class, function (Faker $faker) {
         ['name' => 'App\Model\annoncelocation'],
         ['name' => 'App\Model\annoncereservation'],
         ['name' => 'App\Model\annoncevente'],
-        ['name' => 'App\Model\forum']
+        ['name' => 'App\Model\forum'],
+        ['name' => 'App\Model\comment']
     ]);
 
     return [
         'user_id' => user::inRandomOrder()->first()->id,
-        'commentable_id' => mt_rand(1, 500),
-        'commentable_type' => $servicemodel->shuffle()->first()['name'],
-        'body' => $faker->realText(rand(10, 200)),
+        'likeable_id' => mt_rand(1, 500),
+        'likeable_type' => $servicemodel->shuffle()->first()['name'],
         'created_at' => $faker->dateTime,
     ];
 });

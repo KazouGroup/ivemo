@@ -10,6 +10,7 @@ use App\Model\contactusersadvert;
 use App\Model\contactusersfaq;
 use App\Model\contact;
 use App\Services\Contactusers\ContactuserService;
+use Symfony\Component\HttpFoundation\Response;
 
 class PageController extends Controller
 {
@@ -63,8 +64,7 @@ class PageController extends Controller
 
         $contactusersfaq->save();
 
-        return response()->json($contactusersfaq,200);
-
+        return response('Success',Response::HTTP_ACCEPTED);
     }
 
     public function contactusersadverts(StorecontactuseradvertRequest $request)
@@ -77,7 +77,7 @@ class PageController extends Controller
 
         $contactusersadvert->save();
 
-        return response()->json($contactusersadvert,200);
+        return response('Success',Response::HTTP_ACCEPTED);
 
     }
 
@@ -91,7 +91,7 @@ class PageController extends Controller
 
         $contactadmins->save();
 
-        return response()->json($contactadmins,200);
+        return response('Success',Response::HTTP_ACCEPTED);
 
     }
 

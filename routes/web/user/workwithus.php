@@ -17,5 +17,5 @@ Route::get(
 
 Route::post(
     'work_with_us/{categoryworkwithus:slug}/{workwithus}/save',
-    'WorkwithusController@work_with_us_store'
+    'WorkwithusController@sendcontactservice'
 )->name('work_with_us_store.site');

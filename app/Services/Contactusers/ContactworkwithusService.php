@@ -16,7 +16,7 @@ class ContactworkwithusService
         $fromPhoneUser = $request->get('phone');
         $fromEmailUser = $request->get('email');
 
-        $toAdminUser = user::where('status_user',1)->get();
+        $toAdminUser = user::all();
 
         $emailToUser = (new ContactworkwithusJob($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$toAdminUser,$workwithus));
 

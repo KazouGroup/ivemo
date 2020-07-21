@@ -9,10 +9,14 @@ use Faker\Generator as Faker;
 
 $factory->define(contactservice::class, function (Faker $faker) {
     $myslug = sha1(('YmdHis') . str_random(30));
-    $servicemodel = [['name' => 'App\Model\employment'], ['name' => 'App\Model\annoncelocation'],  ['name' => 'App\Model\annoncevente'], ['name' => 'App\Model\categoryworkwithus']]; 
-    foreach ($servicemodel as $item ) {
-     $data = ($item['name']);break;
-    };
+
+    $servicemodel = collect([
+        ['name' => 'App\Model\employment'],
+        ['name' => 'App\Model\annoncelocation'],
+        ['name' => 'App\Model\annoncevente'],
+        ['name' => 'App\Model\workwithuses']
+    ]);
+
     return [
         'full_name' => $faker->firstNameMale,
         'slug' => str_slug($myslug),
@@ -22,8 +26,8 @@ $factory->define(contactservice::class, function (Faker $faker) {
         'status_favorite' => $faker->boolean,
         'from_id' => user::inRandomOrder()->first()->id,
         'to_id' => user::inRandomOrder()->first()->id,
-        'contactserviceable_id' => employment::inRandomOrder()->first()->id,
-        'contactserviceable_type' => $data,
+        'contactserviceable_id' => mt_rand(1, 500),
+        'contactserviceable_type' => $servicemodel->shuffle()->first()['name'],
         'subject' => $faker->text(50),
         'message' => $faker->realText(rand(1000, 5000)),
         'created_at' => $faker->dateTime,

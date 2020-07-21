@@ -55,7 +55,6 @@ class ContactadminsNotification extends Notification
                     ->from($this->fromEmailUser,config('app.name'))
                     ->line($this->fromFirstnameUser.' '.$this->fromLastnameUser.' vous a laissez un message - '.config('app.name'))
                     ->line($this->fromMessageUser)
-                    //->action('En savoir plus', url(route('personal_mails_annonces_ventes.site',[$this->user->slug])))
                     ->salutation('Merçi');
     }
 
