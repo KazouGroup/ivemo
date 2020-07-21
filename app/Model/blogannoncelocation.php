@@ -16,7 +16,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class blogannoncelocation extends Model implements Auditable
 {
-    use Purify, AuditableTrait,LogsActivity,Likesdata;
+    use Purify, AuditableTrait,LogsActivity;
 
     protected $guarded = [];
 
@@ -107,4 +107,16 @@ class blogannoncelocation extends Model implements Auditable
             ->first();
     }
 
+    public function likes()
+    {
+        return $this->morphMany(like::class ,'likeable');
+    }
+
+    public function likeked()
+    {
+        return (bool) like::where('user_id', Auth::guard('web')->id())
+            ->where(['likeable_type' => 'App\Model\blogannoncelocation', 
+            'likeable_id' => $this->id ])
+            ->first();
+    }
 }

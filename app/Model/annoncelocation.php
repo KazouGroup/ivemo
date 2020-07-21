@@ -108,6 +108,11 @@ class annoncelocation extends Model
         return $this->morphMany(comment::class ,'commentable');
     }
 
+    public function signals()
+    {
+        return $this->morphMany(signal::class ,'signalable');
+    }
+
     public function bookmarked()
     {
         return (bool) favoriteannoncelocation::where('user_id', Auth::guard('web')->id())

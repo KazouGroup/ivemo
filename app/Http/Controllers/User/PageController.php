@@ -5,8 +5,10 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StorecontactuseradvertRequest;
 use App\Http\Requests\Contactuser\StorecontactuserfaqRequest;
+use App\Http\Requests\Contactuser\StorecontactadminsRequest;
 use App\Model\contactusersadvert;
 use App\Model\contactusersfaq;
+use App\Model\contact;
 use App\Services\Contactusers\ContactuserService;
 
 class PageController extends Controller
@@ -57,7 +59,7 @@ class PageController extends Controller
 
         $contactusersfaq->fill($request->all());
 
-        //ContactuserService::newEmailToprofileUser($request);
+        ContactuserService::newEmailcontactadminsfaqs($request);
 
         $contactusersfaq->save();
 
@@ -78,6 +80,21 @@ class PageController extends Controller
         return response()->json($contactusersadvert,200);
 
     }
+
+    public function contactadmins(StorecontactadminsRequest $request)
+    {
+        $contactadmins = new contact();
+
+        $contactadmins->fill($request->all());
+
+        ContactuserService::newEmailcontactadmins($request);
+
+        $contactadmins->save();
+
+        return response()->json($contactadmins,200);
+
+    }
+
 
     public function annonceshow()
     {

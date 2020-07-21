@@ -126,6 +126,9 @@ import EmployementBycategoryemployementbycity
 import EmployementShowUserSite from "../components/user/employment/EmployementShowUserSite";
 import EmploymentEdit from "../components/user/employment/treatement/EmploymentEdit";
 import EmploymentCreate from "../components/user/employment/treatement/EmploymentCreate";
+import ContactserviceEmploymentIndex from "../components/user/profile/contactservices/employment/ContactserviceEmploymentIndex";
+import ContactserviceEmploymentShow from "../components/user/profile/contactservices/employment/ContactserviceEmploymentShow";
+import ContactserviceEmploymentContactShow from "../components/user/profile/contactservices/employment/ContactserviceEmploymentContactShow";
 import PrivateUserFavoritEmployments from "../components/user/profile/favorites/PrivateUserFavoritEmployments";
 import PrivateUserEmployments from "../components/user/profile/employments/private/PrivateUserEmployments";
 import PrivateUserEmploymentsByCategoryemployment
@@ -252,6 +255,10 @@ const RouteUser = props => (
           <Route exact path="/profile/:user/personal_mails/contacts/" component={withRouter(PersonalmessagescontactUser)}/>
           <Route exact path="/profile/:user/personal_mails/contacts/:contactuser/" component={PersonalmessagescontactShowUser}/>
 
+
+          <Route exact path="/profile/:user/personal_mails/employments/" component={ContactserviceEmploymentIndex}/>
+          <Route exact path="/profile/:user/personal_mails/employments/:employment/" component={ContactserviceEmploymentShow}/>
+          <Route exact path="/profile/:user/personal_mails/employments/:employment/:contactservice/" component={ContactserviceEmploymentContactShow}/>
 
           <Route exact path="/profile/:user/personal_settings/employments/" component={PrivateUserEmployments}/>
           <Route exact path="/profile/:user/personal_settings/employments/:categoryemployment/" component={withRouter(PrivateUserEmploymentsByCategoryemployment)}/>

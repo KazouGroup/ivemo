@@ -112,7 +112,7 @@ class ProfileForallAnnoncelocationShow extends Component {
                             </>
                         )}
 
-                        <button type="button" title="Signaler" onClick={() => this.props.signalerUser(this.props)}
+                        <button type="button" title="Signaler l'annonce" onClick={() => this.props.signalerUser(this.props)}
                                 className="btn btn-instagram btn-icon btn-sm">
                             <i className="far fa-flag"></i>
                         </button>

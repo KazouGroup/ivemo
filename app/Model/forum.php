@@ -9,12 +9,13 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class forum extends Model
 {
 
-    use Purify, LogsActivity,Likesdata,Favoritesdata;
+    use Purify, LogsActivity,Favoritesdata;
 
     protected $guarded = [];
 
@@ -88,5 +89,18 @@ class forum extends Model
     public function signals()
     {
         return $this->morphMany(signal::class ,'signalable');
+    }
+
+    public function likes()
+    {
+        return $this->morphMany(like::class ,'likeable');
+    }
+
+    public function likeked()
+    {
+        return (bool) like::where('user_id', Auth::guard('web')->id())
+            ->where(['likeable_type' => 'App\Model\forum', 
+            'likeable_id' => $this->id ])
+            ->first();
     }
 }

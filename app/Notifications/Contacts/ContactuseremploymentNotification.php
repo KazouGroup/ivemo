@@ -49,10 +49,10 @@ class ContactuseremploymentNotification extends Notification
     {
         return (new MailMessage)
             ->greeting('Salut '.$this->employment->user->first_name)
-            ->subject("Contact emploie, prestation & service")
+            ->subject("Contact emplois, prestations & services")
             ->salutation('Cordiale')
             ->from($this->fromEmailUser,config('app.name'))
-            ->line($this->fromFullnameUser.' vous a contacté sur cette annonce ci-dessous posté sur la platforme - '.config('app.name'))
+            ->line($this->fromFullnameUser.' vous a contacté sur cette annonce ci-dessous posté sur la plateforme - '.config('app.name'))
             ->line('ID: '.$this->employment->id.' | Titre de l\'annonce: '.$this->employment->title.' | Prix: '.$this->employment->price.' | Ville: '.$this->employment->city->name.' | Categorie: '.$this->employment->categoryemployment->name)
             ->line($this->fromMessageUser)
             ->line('Thank you for using our application!');

@@ -76,15 +76,8 @@ class PrivateUserEmployementList extends PureComponent {
 
                                     <div className="text-right mx-auto">
                                         {this.props.price && (
-                                            <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',') || "0"} <small>FCFA</small></b></h5>
+                                            <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',') || "0"} <small>{$money_country}</small></b></h5>
                                         )}
-
-                                        {/*
-                                         <a href="#" className="nav-item">
-                                            <i className="now-ui-icons location_bookmark"/>
-                                        </a>
-                                        <i className="now-ui-icons tech_watch-time"/> {moment(this.props.created_at).format('ll')}
-                                        */}
 
                                     </div>
 
@@ -92,10 +85,11 @@ class PrivateUserEmployementList extends PureComponent {
                             </div>
                             <div className="col-md-4">
 
+                               
                                 <div className="card-image">
                                     <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`}>
                                         <LazyLoad>
-                                            <img className="img img-raised rounded"
+                                            <img className="img rounded"
                                                  src={this.props.photo} alt={this.props.title}/>
                                         </LazyLoad>
                                     </a>
@@ -105,7 +99,11 @@ class PrivateUserEmployementList extends PureComponent {
                                             <>
                                                 {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
                                                     <div className="text-center">
-                                                        <NavLink to={`/profile/${this.props.user.slug}/personal_settings/employment/${this.props.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistique l'article">
+                                                        <NavLink to={`/profile/${this.props.user.slug}/personal_mails/employments/${this.props.slugin}/`} 
+                                                            className="btn btn-sm btn-primary" title={`${this.props.contactservices_count} ${this.props.contactservices_count > 1 ? "messages non lus" : "message non lu"} `}>
+                                                            <i className="now-ui-icons ui-1_bell-53"/>  <b>{this.props.contactservices_count}</b>
+                                                        </NavLink>
+                                                        <NavLink to={`/profile/${this.props.user.slug}/personal_mails/employments/${this.props.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
                                                             <i className="now-ui-icons business_chart-bar-32"/>
                                                         </NavLink>
                                                         {this.props.status ?

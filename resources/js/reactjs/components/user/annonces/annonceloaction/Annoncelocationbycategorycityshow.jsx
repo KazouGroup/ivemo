@@ -662,7 +662,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                     <div className="modal-dialog modal-lg">
                                         <div className="modal-content">
                                             <div className="modal-header">
-                                                <h5 className="modal-title"><b>Signaler des erreurs publicitaires</b></h5>
+                                                <h5 className="modal-title"><b>Signaler des erreurs sur l'annonce</b></h5>
                                                 <button type="button" className="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -681,7 +681,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                             </div>
                                                         </div>
 
-                                                        <p className="category">Spécifie le type d'erreur</p>
+                                                        <p className="category">Spécifier le type d'erreur</p>
 
                                                         <div className="row">
                                                             <div className="col-md-6">
@@ -718,7 +718,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                                name="object" id="object"
                                                                                value="Téléphone / e-mail incorrect" onChange={this.handleCheckClick} checked={this.state.object === "Téléphone / e-mail incorrect"} />
                                                                         <span className="form-check-sign"></span>
-                                                                        Téléphone / e-mail incorrect
+                                                                        Téléfone / e-mail incorrect
                                                                     </label>
                                                                 </div>
                                                             </div>

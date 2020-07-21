@@ -4,13 +4,12 @@ namespace App\Model;
 
 use App\Traits\Likesdata;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class comment extends Model
 {
     //use AuditableTrait;
-    use Likesdata;
-
     protected $guarded = [];
 
     protected $table = 'comments';
@@ -58,6 +57,19 @@ class comment extends Model
     public function responsecomments()
     {
         return $this->hasMany(responsecomment::class, 'comment_id');
+    }
+
+    public function likes()
+    {
+        return $this->morphMany(like::class ,'likeable');
+    }
+
+    public function likeked()
+    {
+        return (bool) like::where('user_id', Auth::guard('web')->id())
+            ->where(['likeable_type' => 'App\Model\comment', 
+            'likeable_id' => $this->id ])
+            ->first();
     }
 
 }

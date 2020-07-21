@@ -4,6 +4,8 @@ import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import styles from "./ContactUserSite.module.css";
 import LinkValicationEmail from "../../inc/user/LinkValicationEmail";
+import FieldInput from "../../inc/vendor/FieldInput";
+
 
 
 class ContactUserSite extends Component {
@@ -13,6 +15,7 @@ class ContactUserSite extends Component {
             email: '',
             first_name: '',
             last_name: '',
+            phone: '',
             subject: '',
             message: '',
             errors: [],
@@ -52,10 +55,11 @@ class ContactUserSite extends Component {
             email: this.state.email,
             first_name: this.state.first_name,
             last_name: this.state.last_name,
+            phone: this.state.phone,
             subject: this.state.subject,
             message: this.state.message,
         };
-        dyaxios.post(route('contact.save'), item)
+        dyaxios.post(route('contactadmins_save.store'), item)
             .then(() => {
                 $.notify('<strong>Merçi pour votre message ...</strong>', {
                     allow_dismiss: false,
@@ -75,6 +79,7 @@ class ContactUserSite extends Component {
                     first_name: "",
                     last_name: "",
                     subject: "",
+                    phone: "",
                     message: "",
                 });
             }).catch(error => {
@@ -144,17 +149,10 @@ class ContactUserSite extends Component {
                                                             <div className="input-group-prepend">
                                                                 <span className="input-group-text"><i className="now-ui-icons users_circle-08"></i></span>
                                                             </div>
-                                                            <input id='last_name'
-                                                                   type='text'
-                                                                   className={`form-control ${this.hasErrorFor('last_name') ? 'is-invalid' : ''}`}
-                                                                   name='last_name'
-                                                                   placeholder="Nom ..."
-                                                                   aria-label="Last Name ..."
-                                                                   autoComplete="last_name"
-                                                                   value={this.state.last_name}
-                                                                   onChange={this.handleFieldChange}
-                                                            />
-                                                            {this.renderErrorFor('last_name')}
+                                                            <FieldInput name="last_name" type='text' minLength="3" maxLength="250" placeholder="Nom" value={this.state.last_name}
+                                                                                                    handleFieldChange={this.handleFieldChange}
+                                                                                                    hasErrorFor={this.hasErrorFor}
+                                                                                                    renderErrorFor={this.renderErrorFor}/>
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6">
@@ -163,16 +161,10 @@ class ContactUserSite extends Component {
                                                             <div className="input-group-prepend">
                                                                 <span className="input-group-text"><i className="now-ui-icons users_circle-08"></i></span>
                                                             </div>
-                                                            <input id='first_name'
-                                                                   type='text'
-                                                                   className={`form-control ${this.hasErrorFor('first_name') ? 'is-invalid' : ''}`}
-                                                                   name='first_name'
-                                                                   placeholder="Prénom ..."
-                                                                   autoComplete="first_name"
-                                                                   value={this.state.first_name}
-                                                                   onChange={this.handleFieldChange}
-                                                            />
-                                                            {this.renderErrorFor('first_name')}
+                                                            <FieldInput name="first_name" type='text' minLength="3" maxLength="250" placeholder="Prénom" value={this.state.first_name}
+                                                                                                    handleFieldChange={this.handleFieldChange}
+                                                                                                    hasErrorFor={this.hasErrorFor}
+                                                                                                    renderErrorFor={this.renderErrorFor}/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -183,17 +175,10 @@ class ContactUserSite extends Component {
                                                             <div className="input-group-prepend">
                                                                 <span className="input-group-text"><i className="now-ui-icons ui-1_email-85"></i></span>
                                                             </div>
-                                                            <input id='email'
-                                                                   type='email'
-                                                                   className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                                                   name='email'
-                                                                   placeholder="Email ..."
-                                                                   aria-label="Email ..."
-                                                                   autoComplete="email"
-                                                                   value={this.state.email}
-                                                                   onChange={this.handleFieldChange}
-                                                            />
-                                                            {this.renderErrorFor('email')}
+                                                            <FieldInput name="email" type='email' minLength="3" maxLength="250" placeholder="Email" value={this.state.email}
+                                                                                                    handleFieldChange={this.handleFieldChange}
+                                                                                                    hasErrorFor={this.hasErrorFor}
+                                                                                                    renderErrorFor={this.renderErrorFor}/>
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6">
@@ -202,7 +187,10 @@ class ContactUserSite extends Component {
                                                             <div className="input-group-prepend">
                                                                 <span className="input-group-text"><i className="now-ui-icons tech_mobile"></i></span>
                                                             </div>
-                                                            <input type="text" className="form-control" placeholder="Number Here..." autoComplete="number" />
+                                                            <FieldInput name="phone" type='number' minLength="3" maxLength="30" placeholder="Numéro de tel" value={this.state.phone}
+                                                                                                    handleFieldChange={this.handleFieldChange}
+                                                                                                    hasErrorFor={this.hasErrorFor}
+                                                                                                    renderErrorFor={this.renderErrorFor}/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -212,26 +200,18 @@ class ContactUserSite extends Component {
                                                     <div className="input-group-prepend">
                                                         <span className="input-group-text"><i className="now-ui-icons text_caps-small"></i></span>
                                                     </div>
-                                                    <input id='subject'
-                                                           type='text'
-                                                           className={`form-control ${this.hasErrorFor('subject') ? 'is-invalid' : ''}`}
-                                                           name='subject'
-                                                           placeholder="Object ..."
-                                                           aria-label="Object ..."
-                                                           value={this.state.subject}
-                                                           onChange={this.handleFieldChange}
-                                                    />
-                                                    {this.renderErrorFor('subject')}
+                                                    <FieldInput name="subject" type='text' minLength="3" maxLength="30" placeholder="Object... " value={this.state.subject}
+                                                                                                    handleFieldChange={this.handleFieldChange}
+                                                                                                    hasErrorFor={this.hasErrorFor}
+                                                                                                    renderErrorFor={this.renderErrorFor}/>
                                                 </div>
                                                 <div className="form-group">
                                                     <label>Votre message</label>
-                                                    <textarea name="message" value={this.state.message}
-                                                              onChange={this.handleFieldChange}
-                                                              placeholder={'Message ...'}
-                                                              className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                              id="message"
-                                                              rows="10" />
-                                                    {this.renderErrorFor('message')}
+                                                    <FieldInput name="message" type='textarea' minLength="6" maxLength="5000" placeholder="Message... " value={this.state.message}
+                                                                                                    handleFieldChange={this.handleFieldChange}
+                                                                                                    hasErrorFor={this.hasErrorFor}
+                                                                                                    renderErrorFor={this.renderErrorFor}
+                                                                                                    rows="10"/>
                                                 </div>
                                                 <div className="submit text-center">
                                                     <button className="btn btn-primary" type="submit">

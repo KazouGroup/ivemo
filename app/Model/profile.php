@@ -31,6 +31,7 @@ class profile extends Model
         'status_blog_locations' => 'boolean',
         'status_blog_reservations' => 'boolean',
         'status_blog_ventes' => 'boolean',
+        'status_contactservice' => 'boolean',
     ];
 
     public function user()

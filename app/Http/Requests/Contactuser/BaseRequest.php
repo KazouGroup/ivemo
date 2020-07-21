@@ -35,7 +35,7 @@ class BaseRequest extends Request
         }elseif($group === 'contactusersfaqs') {
             $rules = [
                 'full_name' => ['required', 'string','min:3', 'max:255'],
-                'message' => 'required',
+                'message' => 'required|min:5|max:5000',
                 'email' => ['required', 'string', 'email', 'min:2', 'max:255'],
                 'phone' => ['nullable', 'numeric'],
                 'categoryuser_id' => ['required', 'numeric'],
@@ -64,6 +64,15 @@ class BaseRequest extends Request
                 //'cv_file' => ['required'],
                 //'confirm_send' => ['required'],
                 'phone' => ['required', 'numeric'],
+            ];
+        }elseif($group === 'contactadmins') {
+            $rules = [
+                'first_name' => ['required', 'string','min:3','max:255'],
+                'last_name' => ['required', 'string','min:3','max:255'],
+                'email' => ['required', 'string', 'email','min:2','max:255'],
+                'phone' => ['nullable', 'string','max:30'],
+                'subject' => ['required','string','min:2','max:255'],
+                'message' => 'required|min:5|max:5000',
             ];
         }
         else { // 'edit'

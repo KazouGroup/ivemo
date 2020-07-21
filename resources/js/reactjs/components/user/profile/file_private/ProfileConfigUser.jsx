@@ -16,6 +16,13 @@ class ProfileConfigUser extends Component {
         this.updateItem = this.updateItem.bind(this);
         this.handleCheckClick = this.handleCheckClick.bind(this);
         this.handleStatusTeamUser = this.handleStatusTeamUser.bind(this);
+        this.handleStatusAnnonceLocation = this.handleStatusAnnonceLocation.bind(this);
+        this.handleStatusAnnonceReservation = this.handleStatusAnnonceReservation.bind(this);
+        this.handleStatusAnnonceVente = this.handleStatusAnnonceVente.bind(this);
+        this.handleStatusEmployments = this.handleStatusEmployments.bind(this);
+        this.handleStatusComments = this.handleStatusComments.bind(this);
+        this.handleStatusResponseComments = this.handleStatusResponseComments.bind(this);
+        this.handleStatusContactService = this.handleStatusContactService.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
@@ -32,6 +39,13 @@ class ProfileConfigUser extends Component {
             site_internet: '',
             status_avis: '',
             status_team_user: '',
+            status_annonce_locations: '',
+            status_annonce_reservations: '',
+            status_annonce_ventes: '',
+            status_employments: '',
+            status_comments: '',
+            status_responsecomments: '',
+            handleStatusContactService:'',
             categoryprofile_id: '',
             description: '',
             cities: [],
@@ -77,6 +91,34 @@ class ProfileConfigUser extends Component {
         this.setState({ status_team_user: !this.state.status_team_user });
     };
 
+    handleStatusAnnonceLocation(){
+        this.setState({ status_annonce_locations: !this.state.status_annonce_locations });
+    };
+
+    handleStatusAnnonceReservation(){
+        this.setState({ status_annonce_reservations: !this.state.status_annonce_reservations });
+    };
+
+    handleStatusAnnonceVente(){
+        this.setState({ status_annonce_ventes: !this.state.status_annonce_ventes });
+    };
+
+    handleStatusEmployments(){
+        this.setState({ status_employments: !this.state.status_employments });
+    };
+
+    handleStatusComments(){
+        this.setState({ status_comments: !this.state.status_comments });
+    };
+
+    handleStatusResponseComments(){
+        this.setState({ status_responsecomments: !this.state.status_responsecomments });
+    };
+
+    handleStatusContactService(){
+        this.setState({ status_contactservice: !this.state.status_contactservice });
+    };
+
     // Handle Errors
     hasErrorFor(field) {
         return !!this.state.errors[field];
@@ -107,6 +149,13 @@ class ProfileConfigUser extends Component {
             birthdate: this.state.birthdate,
             status_avis: this.state.status_avis,
             status_team_user: this.state.status_team_user,
+            status_annonce_locations: this.state.status_annonce_locations,
+            status_annonce_reservations: this.state.status_annonce_reservations,
+            status_annonce_ventes: this.state.status_annonce_ventes,
+            status_employments: this.state.status_employments,
+            status_comments: this.state.status_comments,
+            status_responsecomments: this.state.status_responsecomments,
+            status_contactservice: this.state.status_contactservice,
             site_internet: this.state.site_internet,
             description: this.state.description,
         };
@@ -160,6 +209,13 @@ class ProfileConfigUser extends Component {
                 address: response.data.address,
                 status_avis: response.data.status_avis,
                 status_team_user: response.data.status_team_user,
+                status_annonce_locations: response.data.status_annonce_locations,
+                status_annonce_reservations: response.data.status_annonce_reservation,
+                status_annonce_ventes: response.data.status_annonce_ventes,
+                status_employments: response.data.status_employments,
+                status_comments: response.data.status_comments,
+                status_responsecomments: response.data.status_responsecomments,    
+                status_contactservice: response.data.status_contactservice,
                 site_internet: response.data.site_internet,
                 description: response.data.description,
             }));
@@ -502,7 +558,6 @@ class ProfileConfigUser extends Component {
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-
                                                                                 <div className="row">
                                                                                     <div className="col-md-6">
                                                                                         <label htmlFor="url_site"><b>Linkedin</b></label>
@@ -635,7 +690,7 @@ class ProfileConfigUser extends Component {
                                                         <div className="card card-plain">
                                                             <div className="card-header" role="tab" id="headingTre">
                                                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseTre" aria-expanded="false" aria-controls="collapseTre">
-                                                                    <b>Notification et status</b>
+                                                                    <b>Notifications et status</b>
                                                                     <i className="now-ui-icons arrows-1_minimal-down"/>
                                                                 </a>
                                                             </div>
@@ -645,28 +700,110 @@ class ProfileConfigUser extends Component {
                                                                         <div className="col-md-12">
                                                                             <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                                                 <div className="row">
-                                                                                    <div className="col-md-12 mx-auto">
+                                                                                    <div className="col-md-6 mx-auto">
                                                                                         <div className="form-check">
                                                                                             <label
                                                                                                 className="form-check-label">
-                                                                                                <input className="form-check-input"
+                                                                                                <Input className="form-check-input"
                                                                                                     type="checkbox" name="status_avis" checked={this.state.status_avis} value={this.state.status_avis}  onChange={this.handleCheckClick}/>
                                                                                                     <span className="form-check-sign"/>
                                                                                                     <b>Affichez ou masquez les avis des utilisateurs</b>
                                                                                             </label>
                                                                                         </div>
                                                                                     </div>
-                                                                                </div>
-
-                                                                                <div className="row">
-                                                                                    <div className="col-md-12 mx-auto">
+                                                                                    <div className="col-md-6 mx-auto">
                                                                                         <div className="form-check">
                                                                                             <label
                                                                                                 className="form-check-label">
-                                                                                                <input className="form-check-input"
+                                                                                                <Input className="form-check-input"
                                                                                                     type="checkbox" name="status_team_user" checked={this.state.status_team_user} value={this.state.status_team_user}  onChange={this.handleStatusTeamUser}/>
                                                                                                     <span className="form-check-sign"/>
                                                                                                     <b>Affichez ou masquez votre team</b>
+                                                                                            </label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="row">
+                                                                                    <div className="col-md-6 mx-auto">
+                                                                                        <div className="form-check">
+                                                                                            <label
+                                                                                                className="form-check-label">
+                                                                                                <Input className="form-check-input"
+                                                                                                    type="checkbox" name="status_annonce_locations" checked={this.state.status_annonce_locations} value={this.state.status_annonce_locations}  onChange={this.handleStatusAnnonceLocation}/>
+                                                                                                    <span className="form-check-sign"/>
+                                                                                                    <b>Affichez ou masquez vos annonces en locations</b>
+                                                                                            </label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div className="col-md-6 mx-auto">
+                                                                                        <div className="form-check">
+                                                                                            <label
+                                                                                                className="form-check-label">
+                                                                                                <Input className="form-check-input"
+                                                                                                    type="checkbox" name="status_annonce_reservations" checked={this.state.status_annonce_reservations} value={this.state.status_annonce_reservations}  onChange={this.handleStatusAnnonceReservation}/>
+                                                                                                    <span className="form-check-sign"/>
+                                                                                                    <b>Affichez ou masquez vos annonces en reservations</b>
+                                                                                            </label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="row">
+                                                                                    <div className="col-md-6 mx-auto">
+                                                                                        <div className="form-check">
+                                                                                            <label
+                                                                                                className="form-check-label">
+                                                                                                <Input className="form-check-input"
+                                                                                                    type="checkbox" name="status_annonce_ventes" checked={this.state.status_annonce_ventes} value={this.state.status_annonce_ventes}  onChange={this.handleStatusAnnonceVente}/>
+                                                                                                    <span className="form-check-sign"/>
+                                                                                                    <b>Affichez ou masquez vos annonces de ventes</b>
+                                                                                            </label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div className="col-md-6 mx-auto">
+                                                                                        <div className="form-check">
+                                                                                            <label
+                                                                                                className="form-check-label">
+                                                                                                <Input className="form-check-input"
+                                                                                                    type="checkbox" name="status_employments" checked={this.state.status_employments} value={this.state.status_employments}  onChange={this.handleStatusEmployments}/>
+                                                                                                    <span className="form-check-sign"/>
+                                                                                                    <b>Affichez ou masquez vos offres d'emplois</b>
+                                                                                            </label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="row">
+                                                                                    <div className="col-md-6 mx-auto">
+                                                                                        <div className="form-check">
+                                                                                            <label
+                                                                                                className="form-check-label">
+                                                                                                <Input className="form-check-input"
+                                                                                                    type="checkbox" name="status_comments" checked={this.state.status_comments} value={this.state.status_comments}  onChange={this.handleStatusComments}/>
+                                                                                                    <span className="form-check-sign"/>
+                                                                                                    <b>Notifications des commentaires {this.state.status_comments ? "activés" : "désactivés"} </b>
+                                                                                            </label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div className="col-md-6 mx-auto">
+                                                                                        <div className="form-check">
+                                                                                            <label
+                                                                                                className="form-check-label">
+                                                                                                <Input className="form-check-input"
+                                                                                                    type="checkbox" name="status_responsecomments" checked={this.state.status_responsecomments} value={this.state.status_responsecomments}  onChange={this.handleStatusResponseComments}/>
+                                                                                                    <span className="form-check-sign"/>
+                                                                                                    <b>Notifications sur les réponses de vos commentaires {this.state.status_responsecomments ? "activés" : "désactivés"}</b>
+                                                                                            </label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="row">
+                                                                                    <div className="col-md-6 mx-auto">
+                                                                                        <div className="form-check">
+                                                                                            <label
+                                                                                                className="form-check-label">
+                                                                                                <Input className="form-check-input"
+                                                                                                    type="checkbox" name="status_contactservice" checked={this.state.status_contactservice} value={this.state.status_contactservice}  onChange={this.handleStatusContactService}/>
+                                                                                                    <span className="form-check-sign"/>
+                                                                                                    <b>Notifications sur vos offres d'emplois {this.state.status_contactservice ? "activés" : "désactivés"} </b>
                                                                                             </label>
                                                                                         </div>
                                                                                     </div>

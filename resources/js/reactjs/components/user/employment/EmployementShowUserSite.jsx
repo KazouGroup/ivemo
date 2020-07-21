@@ -83,10 +83,11 @@ class EmployementShowUserSite extends Component {
             phone: this.state.phone,
             message: this.state.message,
         };
-        let itemEmployment = this.props.match.params.employment;
+
         let itemCategoryemployment = this.props.match.params.categoryemployment;
         let itemCity = this.props.match.params.city;
-        let url = route('employmentsendcontactmessageuser_site',[itemCategoryemployment,itemCity,itemEmployment]);
+        let itemEmployment = this.props.match.params.employment;
+        let url = route('employmentsendcontactservice_site',[itemCategoryemployment,itemCity,itemEmployment]);
         dyaxios.post(url, item)
             .then(() => {
 
@@ -605,7 +606,7 @@ class EmployementShowUserSite extends Component {
                                                                                     <div className="submit text-center">
                                                                                         {!$guest ?
                                                                                             <>
-                                                                                                {employment.iscontactuseremployment ?
+                                                                                                {employment.iscontactservice ?
                                                                                                     <a style={{cursor: "pointer"}} className="btn btn-outline-primary btn-lg">
                                                                                                         <b>Vous avez déjà contacté</b>
                                                                                                     </a>
@@ -743,7 +744,7 @@ class EmployementShowUserSite extends Component {
                                                                     <div className="submit text-center">
                                                                         {!$guest ?
                                                                             <>
-                                                                                {employment.iscontactuseremployment ?
+                                                                                {employment.iscontactservice ?
                                                                                     <a style={{cursor: "pointer"}} className="btn btn-outline-primary btn-lg">
                                                                                         <b>Vous avez déjà contacté</b>
                                                                                     </a>
