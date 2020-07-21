@@ -253,7 +253,7 @@ class EmployementBycategoryemployementbycity extends Component {
                                             <i className="fa fa-chevron-circle-left" /> <b>Retour aux annonces</b>
                                         </Link>
 
-                                        <h5><b>{annoncebycity.employments_count}</b> {annoncebycity.employments_count > 1 ? "offres" : "offre"} posté</h5>
+                                        <h5><b>{annoncebycity.employments_count}</b> {annoncebycity.employments_count > 1 ? "annonces" : "annonce"} posté</h5>
 
                                     </>
                                 )}

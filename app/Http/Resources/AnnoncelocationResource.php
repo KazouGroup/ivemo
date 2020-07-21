@@ -36,6 +36,7 @@ class AnnoncelocationResource extends JsonResource
             'status_comments' => $this->status_comments,
             'status_admin' => $this->status_admin,
             'bookmarked' => $this->bookmarked(),
+            'countsignals' => $this->signals()->count(),
             'visits_count' => $this->visits()->count(),
             'visits_countries' => $this->visits()->countries(),
             'visits_languages' => $this->visits()->languages(),

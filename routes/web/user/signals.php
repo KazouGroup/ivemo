@@ -10,6 +10,19 @@ Route::post(
     'SignalController@sendemploymentsignal'
 )->name('employmentsendsignal_site');
 
+Route::post(
+        'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}/{annoncelocation}',
+        'SignalController@annoncelocationsignal'
+)->name('annoncelocationsignal_site');
+
+Route::post(
+    'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}/{annoncevente}',
+    'SignalController@annonceventesignal'
+)->name('annonceventesignal_site');    
+
+    
+    
+
 
 
 

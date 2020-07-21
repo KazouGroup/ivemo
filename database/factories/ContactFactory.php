@@ -15,9 +15,10 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(contact::class, function (Faker $faker) {
-    $myslug = now();
+    $myslug = sha1(('YmdHis') . str_random(30));
     return [
-        'full_name' => $faker->firstNameMale,
+        'first_name' => $faker->firstNameMale,
+        'last_name' => $faker->firstNameMale,
         'slug' => str_slug($myslug),
         'email' => $faker->email,
         'subject' => $faker->text(50),

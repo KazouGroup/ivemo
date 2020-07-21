@@ -245,10 +245,10 @@ class EmployementBycategoryemployement extends Component {
                                         <h2 className="title">{categoryemployment.name || ""}</h2>
 
                                         <Link to={`/employments/`} className="text-white">
-                                            <i className="fa fa-chevron-circle-left" /> <b>Retour aux offres</b>
+                                            <i className="fa fa-chevron-circle-left" /> <b>Retour aux annonces</b>
                                         </Link>
 
-                                        <h5><b>{categoryemployment.employments_count}</b> {categoryemployment.employments_count > 1 ? "offres" : "offre"} posté</h5>
+                                        <h5><b>{categoryemployment.employments_count}</b> {categoryemployment.employments_count > 1 ? "annonces" : "annonce"} posté</h5>
 
                                     </>
                                 )}

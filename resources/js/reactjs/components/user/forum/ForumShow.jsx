@@ -388,7 +388,7 @@ class ForumShow extends Component {
                                                                     <Button className="btn btn-default btn-icon btn-sm btn-neutral" onClick={() => this.signalerUser()}
                                                                             title="Signaler ce post ">
                                                                         <i className="far fa-flag"></i>
-                                                                    </Button> {$userIvemo.status_profile === 1 && (<>{forum.countsignals}</>)}
+                                                                    </Button> {$userIvemoIsadmin.status_user && (<>{forum.countsignals}</>)}
                                                                 </>
                                                             }
 

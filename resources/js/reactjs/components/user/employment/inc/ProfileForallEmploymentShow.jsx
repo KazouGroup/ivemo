@@ -121,8 +121,8 @@ class ProfileForallEmploymentShow extends Component {
                                 )}
 
                                 <button type="button" title="Signaler" onClick={() => this.props.signalerUser(this.props)}
-                                        className="btn btn-instagram btn-icon btn-sm">
-                                    <i className="far fa-flag"></i>
+                                        className="btn btn-instagram btn-sm">
+                                    <i className="far fa-flag"></i> <b>{$userIvemoIsadmin.status_user && (<>{this.props.countsignals}</>)}</b>
                                 </button>
 
                             </>

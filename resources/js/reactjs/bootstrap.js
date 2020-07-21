@@ -16,13 +16,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * allows your team to easily build robust real-time web applications.
  */
 
-//import Auth from './api/auth'
+import Auth from './api/auth'
 
-//window.$auth = new Auth(window.dataIvemo.use);
-
-//console.log($auth);
+/** Ici je recupere toutes les permissions sur le site */
+window.$auth = new Auth(window.userIvemo.user);
 
 window.$userIvemo =  window.userIvemo.user;
+window.$userIvemoIsadmin =  window.userIvemo.status_profile;
 window.$guest = window.userIvemo.guest;
 window.$url_site = window.userIvemo.url_site;
 window.$country = window.userIvemo.country;
@@ -33,8 +33,6 @@ window.$phone_number = window.userIvemo.phone_number;
 window.$authcheck = window.userIvemo.authcheck;
 
 
-
-//console.log(window.bus);
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
  * all outgoing HTTP requests automatically have it attached. This is just

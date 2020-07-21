@@ -46,7 +46,6 @@ class CompileTableSeeder extends Seeder
             'username' =>'bokino12',
             'first_name' =>'Boclair Temgoua',
             'slug' => 'boclair_temgoua',
-            'status_user' => 1,
             'status_profile' => 1,
             //'birthday' => now(),
             'email' => "temgoua2012@gmail.com",
@@ -55,8 +54,24 @@ class CompileTableSeeder extends Seeder
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ]);
-        $god->syncRoles('super-admin');
+         $god->profileadmin()->create([ 'status_user' => true]);
+         $god->syncRoles('super-admin');
 
+
+        $admin = User::create([
+            'username' =>'patrick96',
+            'first_name' =>'Patrick',
+            'slug' => 'Tafeng',
+            'status_profile' => 1,
+            //'birthday' => now(),
+            'email' => "darrytafeng@gmail.com",
+            'color_name' => "secondary",
+            "password" => bcrypt('tafeng30'),
+            'email_verified_at' => now(),
+            'remember_token' => Str::random(10),
+        ]);
+        $admin->profileadmin()->create([ 'status_user' => true]);
+        $admin->syncRoles('super-admin');
 
         $colors = [
             ['name' => 'danger','user_id' => 1],
@@ -130,13 +145,13 @@ class CompileTableSeeder extends Seeder
             'slug' => str_slug('Nzeukang'),
             'color_name' => "info",
             //'birthday' => now(),
-            'status_user' => 1,
             'status_profile' => 1,
             'email' => "nzeukangrandrin@gmail.com",
             "password" => bcrypt('123456789'),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ]);
+        $admin_user->profileadmin()->create([ 'status_user' => true]);
         $admin_user->syncRoles('super-admin');
 
 

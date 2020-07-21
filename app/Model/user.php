@@ -63,6 +63,9 @@ class user extends Authenticatable implements MustVerifyEmail
                 'full_name' => $user->first_name,
                 'slug' => $myslug,
             ]);
+            //$user->profileadmin()->create([
+            //    'status_user' => false
+            //]);
             if (auth()->check()){
                 $user->user_id = auth()->id();
             }
@@ -105,6 +108,11 @@ class user extends Authenticatable implements MustVerifyEmail
     public function profile()
     {
         return $this->hasOne(profile::class,'user_id');
+    }
+
+    public function profileadmin()
+    {
+        return $this->hasOne(profileadmin::class,'user_id');
     }
 
     public function getDataBirthdayItAttribute()

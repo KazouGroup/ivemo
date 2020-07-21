@@ -106,7 +106,7 @@ class NavUserSite extends PureComponent {
                                     </a>
                                     <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
 
-                                        {$userIvemo.status_user && (
+                                        {$userIvemoIsadmin.status_user && (
                                             <a href="/dashboard" className="dropdown-item">
                                                 <i className="now-ui-icons business_bulb-63" /> Dashboard
                                             </a>
