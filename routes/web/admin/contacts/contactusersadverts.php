@@ -24,7 +24,7 @@ Route::get(
 Route::get('/dashboard/contactusersforadverts','ContactusersadvertController@index')->name('contactusersadverts.index');
 
 Route::get('dashboard/active_contactusersforadverts/{id}',
-    'ContactusersadvertControllerController@activated'
+    'ContactusersadvertController@activated'
 )->name('activated_contactusersforadverts.dashboard');
 
 Route::get('dashboard/unactive_contactusersforadverts/{id}',

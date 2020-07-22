@@ -10,7 +10,7 @@ class StorecontactworkwithusRequest extends BaseRequest
      */
     public function rules()
     {
-        return $this->getRules('work_with_us_store');
+        return $this->getRules('sendcontactservice');
     }
 
 } // class

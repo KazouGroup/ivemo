@@ -25,7 +25,6 @@ class CreateUsersTable extends Migration
             $table->string('provider')->nullable();
             $table->text('social_token')->nullable();
             $table->string('color_name')->default('primary');
-            $table->boolean('status_user')->default(false);
             $table->integer('status_profile')->default('0');
             $table->string('avatar')->nullable();
             $table->string('avatarcover')->nullable();

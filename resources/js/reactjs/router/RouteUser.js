@@ -3,7 +3,7 @@ import {Route, Switch,withRouter} from 'react-router-dom';
 import IndexSite from "../components/user/IndexSite";
 import LoginUser from "../components/user/auth/LoginUser";
 import AboutUserSite from "../components/user/about/AboutUserSite";
-import ContactUserSite from "../components/user/contact/ContactUserSite";
+import ContactUserSite from "../components/user/pages/ContactUserSite";
 import AnnonceUserSite from "../components/user/annonce/AnnonceUserSite";
 import AnnonceShowUserSite from "../components/user/annonce/AnnonceShowUserSite";
 import AnnonceShowCreateUserSite from "../components/user/annonce/AnnonceShowCreateUserSite";
@@ -113,6 +113,7 @@ import EmailresetUser from "../components/user/auth/EmailresetUser";
 import WorkwithusIndexSite from "../components/user/pages/workwithus/WorkwithusIndexSite";
 import WorkwithusBycategorySite from "../components/user/pages/workwithus/WorkwithusBycategorySite";
 import WorkwithusShowUserSite from "../components/user/pages/workwithus/WorkwithusShowUserSite";
+import ForumIndexSite from "../components/user/forum/ForumIndexSite";
 import VerifyEmailUser from "../components/user/auth/VerifyEmailUser";
 import ConditionutilisationIndexSite from "../components/user/pages/ConditionutilisationIndexSite";
 import LicencesiteIndexSite from "../components/user/pages/LicencesiteIndexSite";
@@ -125,6 +126,9 @@ import EmployementBycategoryemployementbycity
 import EmployementShowUserSite from "../components/user/employment/EmployementShowUserSite";
 import EmploymentEdit from "../components/user/employment/treatement/EmploymentEdit";
 import EmploymentCreate from "../components/user/employment/treatement/EmploymentCreate";
+import ContactserviceEmploymentIndex from "../components/user/profile/contactservices/employment/ContactserviceEmploymentIndex";
+import ContactserviceEmploymentShow from "../components/user/profile/contactservices/employment/ContactserviceEmploymentShow";
+import ContactserviceEmploymentContactShow from "../components/user/profile/contactservices/employment/ContactserviceEmploymentContactShow";
 import PrivateUserFavoritEmployments from "../components/user/profile/favorites/PrivateUserFavoritEmployments";
 import PrivateUserEmployments from "../components/user/profile/employments/private/PrivateUserEmployments";
 import PrivateUserEmploymentsByCategoryemployment
@@ -146,6 +150,11 @@ import PrivateUserEmploymentsByStatistique
     from "../components/user/profile/employments/private/PrivateUserEmploymentsByStatistique";
 import AnnoncereservationCreate
     from "../components/user/annonces/annoncereservation/treatment/AnnoncereservationCreate";
+import ForumShow from "../components/user/forum/ForumShow";
+import ForumcategoryforumSite from "../components/user/forum/ForumcategoryforumSite";
+import ForumCreate from "../components/user/forum/treatement/ForumCreate";
+import ForumEdit from "../components/user/forum/treatement/ForumEdit";
+import PrivateUserForum from "../components/user/profile/forum/private/PrivateUserForum";
 
 
 const RouteUser = props => (
@@ -174,6 +183,12 @@ const RouteUser = props => (
           <Route exact path="/work_with_us/:categoryworkwithus/:workwithus/" component={WorkwithusShowUserSite}/>
 
           <Route exact path="/agences_immobilies/" component={AgencesimmobilieIndex}/>
+
+          <Route exact path="/forums/" component={ForumIndexSite}/>
+          <Route exact path="/forums/ab/new" component={ForumCreate}/>
+          <Route exact path="/forums/ab/:forum/edit/" component={ForumEdit}/>
+          <Route exact path="/forums/:categoryforum/" component={withRouter(ForumcategoryforumSite)}/>
+          <Route exact path="/forums/:categoryforum/:forum/" component={ForumShow}/>
 
           <Route exact path="/annonces_reservations/:annoncetype/" component={AnnoncereservationIndex}/>
           <Route exact path="/annonce_reservations/:annoncetype/:city/" component={withRouter(Annoncereservationbyannoncetypebycity)}/>
@@ -241,6 +256,10 @@ const RouteUser = props => (
           <Route exact path="/profile/:user/personal_mails/contacts/:contactuser/" component={PersonalmessagescontactShowUser}/>
 
 
+          <Route exact path="/profile/:user/personal_mails/employments/" component={ContactserviceEmploymentIndex}/>
+          <Route exact path="/profile/:user/personal_mails/employments/:employment/" component={ContactserviceEmploymentShow}/>
+          <Route exact path="/profile/:user/personal_mails/employments/:employment/:contactservice/" component={ContactserviceEmploymentContactShow}/>
+
           <Route exact path="/profile/:user/personal_settings/employments/" component={PrivateUserEmployments}/>
           <Route exact path="/profile/:user/personal_settings/employments/:categoryemployment/" component={withRouter(PrivateUserEmploymentsByCategoryemployment)}/>
           <Route exact path="/profile/:user/personal_settings/employment/:employment/" component={PrivateUserEmploymentsByStatistique}/>
@@ -274,6 +293,8 @@ const RouteUser = props => (
 
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_ventes/" component={PrivateUserBlogannonceVente}/>
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_ventes/:categoryannoncevente/" component={withRouter(PrivateUserBlogannonceVentebyCategoryannoncevente)}/>
+
+          <Route exact path="/profile/:user/personal_settings/forums/" component={PrivateUserForum}/>
 
 
           <Route exact path="/employments/" component={EmployementIndexSite}/>

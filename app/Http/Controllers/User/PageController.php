@@ -5,9 +5,12 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StorecontactuseradvertRequest;
 use App\Http\Requests\Contactuser\StorecontactuserfaqRequest;
+use App\Http\Requests\Contactuser\StorecontactadminsRequest;
 use App\Model\contactusersadvert;
 use App\Model\contactusersfaq;
+use App\Model\contact;
 use App\Services\Contactusers\ContactuserService;
+use Symfony\Component\HttpFoundation\Response;
 
 class PageController extends Controller
 {
@@ -57,12 +60,11 @@ class PageController extends Controller
 
         $contactusersfaq->fill($request->all());
 
-        //ContactuserService::newEmailToprofileUser($request);
+        ContactuserService::newEmailcontactadminsfaqs($request);
 
         $contactusersfaq->save();
 
-        return response()->json($contactusersfaq,200);
-
+        return response('Success',Response::HTTP_ACCEPTED);
     }
 
     public function contactusersadverts(StorecontactuseradvertRequest $request)
@@ -75,9 +77,24 @@ class PageController extends Controller
 
         $contactusersadvert->save();
 
-        return response()->json($contactusersadvert,200);
+        return response('Success',Response::HTTP_ACCEPTED);
 
     }
+
+    public function contactadmins(StorecontactadminsRequest $request)
+    {
+        $contactadmins = new contact();
+
+        $contactadmins->fill($request->all());
+
+        ContactuserService::newEmailcontactadmins($request);
+
+        $contactadmins->save();
+
+        return response('Success',Response::HTTP_ACCEPTED);
+
+    }
+
 
     public function annonceshow()
     {

@@ -49,9 +49,9 @@ class workwithus extends Model
         return $this->belongsTo(categoryworkwithus::class,'categoryworkwithus_id');
     }
 
-    public function contactworkwithuses()
+    public function contactservices()
     {
-        return $this->hasMany(contactworkwithus::class, 'workwithus_id');
+        return $this->morphMany(contactservice::class ,'contactserviceable');
     }
 
     public function visits()

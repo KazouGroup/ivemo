@@ -147,7 +147,7 @@ class EmployementInteresseList extends PureComponent {
 
                                         }
 
-                                        {this.props.iscontactuseremployment && (
+                                        {this.props.iscontactservice && (
                                             <Button className="btn btn-info btn-sm" title="Vous avez déjà postulé à cette annonce">
                                                 <b>Postulé</b>
                                             </Button>

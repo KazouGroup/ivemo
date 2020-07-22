@@ -5,10 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StorecontactworkwithusRequest;
 use App\Model\categoryworkwithus;
-use App\Model\contactworkwithus;
 use App\Model\workwithus;
 use App\Services\Contactusers\ContactworkwithusService;
-use App\Services\WorkwithusService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -28,32 +26,30 @@ class WorkwithusController extends Controller
 
     public function work_with_us_show($categoryworkwithus,workwithus $workwithus)
     {
-        visits($workwithus)->seconds(60)->increment();
+        visits($workwithus)->seconds(5)->increment();
 
         return view('user.page.work_with_us.show',[
             'workwithus' => $workwithus
         ]);
     }
 
-    public function work_with_us_store(StorecontactworkwithusRequest $request,categoryworkwithus $categoryworkwithus,workwithus $workwithus)
+    public function sendcontactservice(StorecontactworkwithusRequest $request,categoryworkwithus $categoryworkwithus,workwithus $workwithus)
     {
-        $inputs = $request->all();
 
-        $contactworkwithus = new contactworkwithus();
+        $workwithus->contactservices()->create([
+            'full_name' => $request->full_name,
+            'to_id' => $workwithus->user_id,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'from_id' => auth()->id(),
+            'slug' => sha1(('YmdHis') . str_random(30)),
+            'ip' => request()->ip(),
+            'message' => $request->message,
+        ]);
 
-        $contactworkwithus->fill($inputs);
-        $contactworkwithus->user_id = $workwithus->user->id;
-        $contactworkwithus->workwithus_id = $workwithus->id;
-
-        //if(isset($inputs['cv_file'])) {
-        //    $file_cv_file_name = WorkwithusService::uploadCvfile($contactworkwithus->getUploadPath(), $inputs['cv_file'], $contactworkwithus->cv_file);
-        //    $contactworkwithus->cv_file = $file_cv_file_name;
-        //}
 
         ContactworkwithusService::newEmailTocontactworkwithus($request,$workwithus);
 
-        $contactworkwithus->save();
-
-        return response('Created',Response::HTTP_CREATED);
+        return response('Success',Response::HTTP_ACCEPTED);
     }
 }

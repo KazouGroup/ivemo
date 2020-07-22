@@ -9,6 +9,7 @@ use App\Jobs\Comments\CommentAnnonceventeJob;
 use App\Jobs\Comments\CommentBlogannoncereservationJob;
 use App\Jobs\Comments\CommentBlogannonceventeJob;
 use App\Jobs\Comments\CommentEmploymentJob;
+use App\Jobs\Comments\CommentForumJob;
 use App\Jobs\ResponsecommentJob;
 
 class CommentAndResponseService
@@ -107,6 +108,20 @@ class CommentAndResponseService
         if ($employment->user->profile->status_comments){
 
             $emailToUser = (new CommentEmploymentJob($fromBodyUser,$employment,$userFrom));
+
+            dispatch($emailToUser);
+        }
+
+    }
+
+    public static function newEmailTonewcommentforumpageShow($request,$forum)
+    {
+        $userFrom = auth()->user();
+        $fromBodyUser = $request->get('body');
+
+        if ($forum->user->profile->status_comments){
+
+            $emailToUser = (new CommentForumJob($fromBodyUser,$forum,$userFrom));
 
             dispatch($emailToUser);
         }

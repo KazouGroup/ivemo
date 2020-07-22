@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Model\favorite\favoriteblogannoncereservation;
 use App\Traits\Likesdata;
+use App\Traits\Purify;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -15,7 +16,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class blogannoncereservation extends Model implements Auditable
 {
-    use AuditableTrait,LogsActivity,Likesdata;
+    use Purify, AuditableTrait,LogsActivity;
 
     protected $guarded = [];
 
@@ -103,6 +104,19 @@ class blogannoncereservation extends Model implements Auditable
     {
         return (bool) favoriteblogannoncereservation::where('user_id', Auth::guard('web')->id())
             ->where('blogannoncereservation_id', $this->id)
+            ->first();
+    }
+
+    public function likes()
+    {
+        return $this->morphMany(like::class ,'likeable');
+    }
+
+    public function likeked()
+    {
+        return (bool) like::where('user_id', Auth::guard('web')->id())
+            ->where(['likeable_type' => 'App\Model\blogannoncereservation', 
+            'likeable_id' => $this->id ])
             ->first();
     }
 }

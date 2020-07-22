@@ -10,7 +10,7 @@ class StorecontactuseremploymentRequest extends BaseRequest
      */
     public function rules()
     {
-        return $this->getRules('contactuseremployment');
+        return $this->getRules('sendcontactservice');
     }
 
 } // class

@@ -44,22 +44,26 @@ class ContactuseremploymentJob implements ShouldQueue
     {
         /* Ici on envoie l'email a l'utilisateur qui a poster l'annonce */
 
-        $this->employment->user
+        if($this->employment->user->profile->status_contactservice){
+
+            $this->employment->user
             ->notify(new ContactuseremploymentNotification(
                 $this->fromFullnameUser,
                 $this->fromPhoneUser,
                 $this->fromEmailUser,
                 $this->fromMessageUser,
                 $this->employment));
+        }
 
-        /* Ici on envoie l'email a l'utilisateur que a envoyer la demande */
+           /* Ici on envoie l'email a l'utilisateur que a envoyer la demande */
 
-        Notification::route('mail',$this->fromEmailUser)
-            ->notify(new ContactuseremploymentToUserNotification(
-                $this->fromFullnameUser,
-                $this->fromPhoneUser,
-                $this->fromEmailUser,
-                $this->fromMessageUser,
-                $this->employment));
+           Notification::route('mail',$this->fromEmailUser)
+           ->notify(new ContactuseremploymentToUserNotification(
+               $this->fromFullnameUser,
+               $this->fromPhoneUser,
+               $this->fromEmailUser,
+               $this->fromMessageUser,
+               $this->employment));
+       
     }
 }

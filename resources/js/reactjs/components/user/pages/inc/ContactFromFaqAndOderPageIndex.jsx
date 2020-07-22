@@ -71,8 +71,8 @@ class ContactFromFaqAndOderPageIndex extends Component {
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInDown",
-                            exit: "animated fadeOutUp"
+                            enter: "animate__animated animate__fadeInDown",
+                            exit: "animate__animated animate__fadeOutUp"
                         },
                     });
 
@@ -124,8 +124,8 @@ class ContactFromFaqAndOderPageIndex extends Component {
                                 <div className="col-md-6">
                                     <InputGroup>
                                         <div className="input-group-prepend">
-                                                            <span className="input-group-text">
-                                                                <i className="now-ui-icons users_circle-08"/></span>
+                                            <span className="input-group-text">
+                                                <i className="now-ui-icons users_circle-08"/></span>
                                         </div>
                                         <Input id='full_name'
                                                type='text'
@@ -146,8 +146,8 @@ class ContactFromFaqAndOderPageIndex extends Component {
                                 <div className="col-md-6">
                                     <InputGroup>
                                         <div className="input-group-prepend">
-                                                            <span className="input-group-text">
-                                                                <i className="now-ui-icons ui-1_email-85"/></span>
+                                            <span className="input-group-text">
+                                                <i className="now-ui-icons ui-1_email-85"/></span>
                                         </div>
                                         <Input id='email'
                                                type='email'
@@ -171,8 +171,8 @@ class ContactFromFaqAndOderPageIndex extends Component {
                                 <div className="col-md-4">
                                     <InputGroup>
                                         <div className="input-group-prepend">
-                                                            <span className="input-group-text">
-                                                                <i className="now-ui-icons tech_mobile"/></span>
+                                            <span className="input-group-text">
+                                                <i className="now-ui-icons tech_mobile"/></span>
                                         </div>
                                         <Input id='phone'
                                                type='number'
@@ -190,7 +190,7 @@ class ContactFromFaqAndOderPageIndex extends Component {
                                     <FormGroup>
                                         <select id="categoryuser_id" value={this.state.categoryuser_id || ''} className={`form-control ${this.hasErrorFor('categoryuser_id') ? 'is-invalid' : ''}`}
                                                 onChange={this.handleFieldChange} name="categoryuser_id" required="required">
-                                            <option value="" disabled="">Tu es un ...</option>
+                                            <option value="" disabled="">Vous etes un ...</option>
                                             {categoryusers.map((item) => (
                                                 <option key={item.id} value={item.id}>{item.name}</option>
                                             ))}
@@ -202,7 +202,7 @@ class ContactFromFaqAndOderPageIndex extends Component {
                                     <FormGroup>
                                         <select id="categoryobjet_id"  value={this.state.categoryobjet_id || ''} className={`form-control ${this.hasErrorFor('categoryobjet_id') ? 'is-invalid' : ''}`}
                                                 onChange={this.handleFieldChange} name="categoryobjet_id" required="required">
-                                            <option value="" disabled="">Sélectionnez un sujet</option>
+                                            <option value="" disabled="">Sélèctionnez un sujet</option>
                                             {categoryobjets.map((item) => (
                                                 <option key={item.id} value={item.id}>{item.name}</option>
                                             ))}

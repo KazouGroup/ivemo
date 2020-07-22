@@ -253,7 +253,7 @@ class EmployementBycategoryemployementbycity extends Component {
                                             <i className="fa fa-chevron-circle-left" /> <b>Retour aux annonces</b>
                                         </Link>
 
-                                        <h5><b>{annoncebycity.employments_count}</b> {annoncebycity.employments_count > 1 ? "offres" : "offre"} posté</h5>
+                                        <h5><b>{annoncebycity.employments_count}</b> {annoncebycity.employments_count > 1 ? "annonces" : "annonce"} posté</h5>
 
                                     </>
                                 )}
@@ -325,7 +325,7 @@ class EmployementBycategoryemployementbycity extends Component {
                                                                                                     <b style={{ textTransform: "lowercase" }}>{categoryemployment.name}</b> à <b>{item.name}</b>
                                                                                                 </NavLink>
                                                                                             </td>
-                                                                                            <td className="text-right"> {this.getdataString(item.employments_count)}  {item.employments_count > 1 ? "offres" : "offre"}</td>
+                                                                                            <td className="text-right"> {this.getdataString(item.employments_count)}  {item.employments_count > 1 ? "annonces" : "annonce"}</td>
                                                                                         </tr>
                                                                                     ))}
                                                                                 </>
@@ -335,10 +335,7 @@ class EmployementBycategoryemployementbycity extends Component {
                                                                         </table>
                                                                     </div>
                                                                 </div>
-
-
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -348,15 +345,8 @@ class EmployementBycategoryemployementbycity extends Component {
                                         <Navemployementsbycategoryemployment {...this.props} {...annoncebycity}/>
 
                                     </div>
-
-
-
-
                                 </div>
                             </div>
-
-
-
                         </div>
 
                         <FooterBigUserSite />

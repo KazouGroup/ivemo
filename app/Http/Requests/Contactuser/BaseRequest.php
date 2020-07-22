@@ -35,7 +35,7 @@ class BaseRequest extends Request
         }elseif($group === 'contactusersfaqs') {
             $rules = [
                 'full_name' => ['required', 'string','min:3', 'max:255'],
-                'message' => 'required',
+                'message' => 'required|min:5|max:5000',
                 'email' => ['required', 'string', 'email', 'min:2', 'max:255'],
                 'phone' => ['nullable', 'numeric'],
                 'categoryuser_id' => ['required', 'numeric'],
@@ -49,21 +49,20 @@ class BaseRequest extends Request
                 'confirm_send' => ['required'],
                 'phone' => ['nullable', 'numeric'],
             ];
-        }elseif($group === 'contactuseremployment') {
+        }elseif($group === 'sendcontactservice') {
             $rules = [
                 'full_name' => ['required', 'string','min:3','max:255'],
                 'email' => ['required', 'string', 'email','min:2','max:255'],
-                //'cv_file' => ['required'],
-                //'confirm_send' => ['required'],
                 'phone' => ['required', 'numeric'],
             ];
-        }elseif($group === 'work_with_us_store') {
+        }elseif($group === 'contactadmins') {
             $rules = [
-                'full_name' => ['required', 'string','min:3','max:255'],
+                'first_name' => ['required', 'string','min:3','max:255'],
+                'last_name' => ['required', 'string','min:3','max:255'],
                 'email' => ['required', 'string', 'email','min:2','max:255'],
-                //'cv_file' => ['required'],
-                //'confirm_send' => ['required'],
-                'phone' => ['required', 'numeric'],
+                'phone' => ['nullable', 'string','max:30'],
+                'subject' => ['required','string','min:2','max:255'],
+                'message' => 'required|min:5|max:5000',
             ];
         }
         else { // 'edit'

@@ -35,26 +35,26 @@ class Navlinknewemployment extends Component  {
                 <>
                 {$userIvemo.email_verified_at ?
                      <>
-                     {$userIvemo.status_profile ? 
+                     {$userIvemo.status_profile ?
                        <NavLink className="btn btn-danger" to={`/employment/ab/new/`}>
-                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre Offre</b>
+                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
                        </NavLink>
-                     : 
+                     :
                      <Button
                           className="btn btn-danger" onClick={() => this.infoItem()}>
-                         <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre Offre</b>
+                         <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
                       </Button>
                      }
                      </>
                     :
                     <NavLink className="btn btn-danger" to={`/email/verify/`}>
-                         <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre Offre</b>
+                         <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
                     </NavLink>
                 }
                 </>
                 :
                 <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="btn btn-danger">
-                    <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre Offre</b>
+                    <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
                 </a>
             }
         </div>

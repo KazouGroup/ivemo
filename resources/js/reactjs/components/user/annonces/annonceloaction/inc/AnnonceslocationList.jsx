@@ -181,10 +181,6 @@ class AnnonceslocationList extends PureComponent {
                                             <Button className="btn btn-icon btn-sm btn-warning" onClick={() => this.props.contactUser(this.props)} title={`Contacter ${this.props.user.first_name}`}>
                                                 <i className="far fa-envelope"/>
                                             </Button>
-                                            <button type="button" title="Signaler" onClick={() => this.props.signalerUser(this.props)}
-                                                className="btn btn-instagram btn-icon btn-sm">
-                                                <i className="far fa-flag"></i>
-                                            </button>
                                             {/*
                                             <NavLink to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.slug}/`} className="btn btn-icon btn-sm btn-primary">
                                                 <i className="now-ui-icons location_pin"/>

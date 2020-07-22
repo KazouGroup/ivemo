@@ -41,7 +41,6 @@ class AnnonceventeList extends PureComponent {
 
                                     </div>
                                 </div>
-
                                 <div className="text-center">
 
 
@@ -79,10 +78,6 @@ class AnnonceventeList extends PureComponent {
 
 
                                 </div>
-
-
-
-
                                 <br />
                                 <div className="card-header d-flex align-items-center">
                                     {/*
@@ -172,7 +167,6 @@ class AnnonceventeList extends PureComponent {
                                                             <i className="fas fa-bookmark"></i>
                                                         </Button>
                                                     </>
-
                                                     :
                                                     <>
                                                         <Button onClick={() => this.props.favoriteItem(this.props)}
@@ -187,13 +181,7 @@ class AnnonceventeList extends PureComponent {
                                         <Button className="btn btn-icon btn-sm btn-warning" onClick={() => this.props.contactUser(this.props)} title={`Contacter ${this.props.user.first_name}`}>
                                             <i className="far fa-envelope"/>
                                         </Button>
-                                        <button type="button" title="Signaler" onClick={() => this.props.signalerUser(this.props)}
-                                                className="btn btn-instagram btn-icon btn-sm">
-                                            <i className="far fa-flag"></i>
-                                        </button>
-
                                     </div>
-
                                 </div>
                             </div>
                         </div>

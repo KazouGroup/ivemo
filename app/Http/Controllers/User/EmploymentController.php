@@ -64,6 +64,8 @@ class EmploymentController extends Controller
 
     public function employmentslug($categoryemployment,$city,employment $employment)
     {
+        visits($employment)->seconds(5)->increment();
+
         return  view('user.employment.employmentshow',[
             'employment' => $employment
         ]);
@@ -161,12 +163,11 @@ class EmploymentController extends Controller
     {
         $employments =  EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
             ->where(['status' => 1,'status_admin' => 1])
-            ->withCount('contactuseremployments')
             ->with(['user' => function ($q){$q->select('id','avatar','first_name','slug');},])
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')
-            ->distinct()->paginate(30));
+            ->distinct()->paginate(40));
 
         return response()->json($employments,200);
     }
@@ -222,18 +223,9 @@ class EmploymentController extends Controller
 
     public function apiemploymentsbycategoryslug(categoryemployment $categoryemployment,city $city,employment $employment)
     {
-        visits($employment)->seconds(60)->increment();
+        visits($employment)->seconds(5)->increment();
 
         $employments = EmploymentService::apiemploymentsbycategoryslug($categoryemployment,$city,$employment);
-
-        return response()->json($employments,200);
-    }
-
-    public function apistatistique(user $user,$employment)
-    {
-        $this->authorize('update',$user);
-
-        $employments = EmploymentService::apistatistique($user,$employment);
 
         return response()->json($employments,200);
     }

@@ -39,7 +39,7 @@ class Navemployementsbycategoryemployment extends Component {
                                 <div className="card card-plain">
                                     <div className="card-header" role="tab" id="headingOne">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            <b>Rubriques connexes à {this.props.name || "Ivemo"}</b>
+                                            <b>Rubriques connexes à {this.props.name || $name_site}</b>
                                             <i className="now-ui-icons arrows-1_minimal-down"/>
                                         </a>
                                     </div>

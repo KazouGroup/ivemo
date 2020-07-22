@@ -12,7 +12,7 @@ class StatusComment extends PureComponent {
                 <div className="alert alert-danger" role="alert">
                     <div className="container">
                         <div className="text-center">
-                            <b>Les commentaires sont desctivés de cette annonce vous êtes à présent la seule personne à voir et à commenter</b>
+                            <b>Les commentaires sont désactivés de cette annonce vous êtes à présent la seule personne à voir et à commenter</b>
                         </div>
                     </div>
                 </div>

@@ -12,6 +12,7 @@
         "awssat/laravel-visits": "^2.2",
         "beyondcode/laravel-websockets": "^1.4",
         "cviebrock/eloquent-sluggable": "^7.0",
+        "ezyang/htmlpurifier": "^4.13",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "geoip2/geoip2": "~2.10",

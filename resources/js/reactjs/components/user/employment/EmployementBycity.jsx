@@ -236,10 +236,10 @@ class EmployementBycity extends Component {
                                         <h2 className="title">{cityemployment.name || ""}</h2>
 
                                         <Link to={`/employments/`} className="text-white">
-                                            <i className="fa fa-chevron-circle-left" /> <b>Retour aux offres</b>
+                                            <i className="fa fa-chevron-circle-left" /> <b>Retour aux annonces</b>
                                         </Link>
 
-                                        <h5><b>{cityemployment.employments_count}</b> {cityemployment.employments_count > 1 ? "offres" : "offre"} posté à <b style={{ textTransform: "capitalize" }}>{cityemployment.name}</b></h5>
+                                        <h5><b>{cityemployment.employments_count}</b> {cityemployment.employments_count > 1 ? "annonces" : "annonce"} posté à <b style={{ textTransform: "capitalize" }}>{cityemployment.name}</b></h5>
 
                                     </>
                                 )}

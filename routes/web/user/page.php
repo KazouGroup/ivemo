@@ -3,7 +3,12 @@
 Route::get('about','PageController@about')->name('about.site');
 Route::get('faqs','PageController@faqs')->name('faqs.site');
 Route::post('contactusersfaq_site','PageController@contactusersfaqs')->name('contactusersfaq_site');
+
+//Route contact
 Route::get('contact','PageController@contact')->name('contact_us.site');
+Route::post('contact/send','PageController@contactadmins')->name('contactadmins_save.store');
+
+
 Route::get('advertisement','PageController@fairelapublicite')->name('faire_la_publicite.site');
 Route::post('contactusersadverts_save','PageController@contactusersadverts')->name('contactusersadverts_save.store');
 Route::get('policy_privacy','PageController@policyprivacy')->name('policyprivacy.site');

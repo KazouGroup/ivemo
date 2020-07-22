@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Model\favorite\favoriteblogannoncevente;
 use App\Traits\Likesdata;
+use App\Traits\Purify;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class blogannoncevente extends Model implements Auditable
 {
-    use AuditableTrait,LogsActivity,Likesdata;
+    use Purify, AuditableTrait,LogsActivity;
 
     protected $guarded = [];
 
@@ -103,6 +104,19 @@ class blogannoncevente extends Model implements Auditable
     {
         return (bool) favoriteblogannoncevente::where('user_id', Auth::guard('web')->id())
             ->where('blogannoncevente_id', $this->id)
+            ->first();
+    }
+
+    public function likes()
+    {
+        return $this->morphMany(like::class ,'likeable');
+    }
+
+    public function likeked()
+    {
+        return (bool) like::where('user_id', Auth::guard('web')->id())
+            ->where(['likeable_type' => 'App\Model\blogannoncevente', 
+            'likeable_id' => $this->id ])
             ->first();
     }
 }

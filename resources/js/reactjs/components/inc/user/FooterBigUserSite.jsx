@@ -3,195 +3,170 @@ import { Link,NavLink } from 'react-router-dom';
 import LoginModalUser from "../../user/auth/LoginModalUser";
 
 
-class FooterBigUserSite extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          //
-        }
-    }
 
-    componentDidMount() {
-        //
-    }
+const FooterBigUserSite = () =>  {
 
-    render() {
+    return (
+        <>
 
-        return (
-            <>
-
-                <LoginModalUser/>
-                <footer className="footer" data-background-color="black">
-                    <div className="container">
-                        <div className="content">
-                            <div className="row">
-                                <div className="col-md-4">
-                                    <div className="column">
-                                        <Link to={'/'}>
-                                            <img src=".." className="logo" alt={$name_site} />
-                                        </Link>
-                                    </div>
-                                    <div className="btn-wrapper profile text-left mt-3">
-                                        <a target="_blank" href="https://twitter.com/creativetim" className="btn btn-sm"
-                                           data-toggle="tooltip" data-original-title="Follow us">
-                                            <i className="fab fa-twitter" />
-                                        </a>
-
-                                        <a target="_blank" href="https://www.facebook.com/creativetim"
-                                           className="btn btn-sm" data-toggle="tooltip" data-original-title="Like us">
-                                            <i className="fab fa-facebook-square" />
-                                        </a>
-                                        <a target="_blank" href="https://dribbble.com/creativetim"
-                                           className="btn btn-sm" data-toggle="tooltip" data-original-title="Follow us">
-                                            <i className="fab fa-instagram"/>
-                                        </a>
-                                    </div>
+            <LoginModalUser/>
+            <footer className="footer" data-background-color="black">
+                <div className="container">
+                    <div className="content">
+                        <div className="row">
+                            <div className="col-md-4">
+                                <div className="column">
+                                    <Link to={'/'}>
+                                        <img src=".." className="logo" alt={$name_site} />
+                                    </Link>
                                 </div>
+                                <div className="btn-wrapper profile text-left mt-3">
+                                    <a target="_blank" href="https://twitter.com/creativetim" className="btn btn-sm"
+                                       data-toggle="tooltip" data-original-title="Follow us">
+                                        <i className="fab fa-twitter" />
+                                    </a>
 
-                                <div className="col-md-2 col-3">
-                                    <div className="column">
-                                        <h5>Company</h5>
-                                        <ul className="links-vertical">
-                                            <li>
-                                                <Link to={`/about/`} className="text-muted">
-                                                    Qui sommes-nous
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <NavLink to={`/annonces_reservations/reservations/`} className="text-muted">
-                                                    Presentation
-                                                </NavLink>
-                                            </li>
-                                            <li>
-                                                <NavLink to={`/advertisement/`} className="text-muted">
-                                                    Faire la publicité sur le site
-                                                </NavLink>
-                                            </li>
-                                            <li>
-                                                <NavLink to={`/contact/`} className="text-muted">
-                                                    Contact
-                                                </NavLink>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    <a target="_blank" href="https://www.facebook.com/creativetim"
+                                       className="btn btn-sm" data-toggle="tooltip" data-original-title="Like us">
+                                        <i className="fab fa-facebook-square" />
+                                    </a>
+                                    <a target="_blank" href="https://dribbble.com/creativetim"
+                                       className="btn btn-sm" data-toggle="tooltip" data-original-title="Follow us">
+                                        <i className="fab fa-instagram"/>
+                                    </a>
                                 </div>
+                            </div>
 
-                                <div className="col-md-2 col-3">
-                                    <div className="column">
-                                        <h5>À propos</h5>
-                                        <ul className="links-vertical">
-                                            <li>
-                                                <a href="#pablo" className="text-muted">
-                                                    Ivemo/news
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <Link to={`/employments/`} className="text-muted">
-                                                    Offres d’emploi
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link to={`/work_with_us/`} className="text-muted">
-                                                    Travaillez avec nous
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <a href="#pablo" className="text-muted">
-                                                    Receive Payment
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#pablo" className="text-muted">
-                                                    Transactions Issues
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#pablo" className="text-muted">
-                                                    Affiliates Program
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <Link to={`/agences_immobilies/`} className="text-muted">
-                                                    Agences immobiliés
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-
-                                <div className="col-md-2 col-3">
-                                    <h5>Aide</h5>
+                            <div className="col-md-2 col-3">
+                                <div className="column">
+                                    <h5>Company</h5>
                                     <ul className="links-vertical">
                                         <li>
-                                            <Link to={`/faqs/`} className="text-muted">
-                                                Foire aux questions (FAQ)
+                                            <Link to={`/about/`} className="text-muted">
+                                                Qui sommes-nous
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to={`/contact/`} className="text-muted">
-                                                Contactez ivemo
-                                            </Link>
+                                            <NavLink to={`/annonces_reservations/reservations/`} className="text-muted">
+                                                Presentation
+                                            </NavLink>
                                         </li>
                                         <li>
-                                            <Link to={'/condition_utilisation/'} className="text-muted">
-                                                Terms &amp; Conditions
-                                            </Link>
+                                            <NavLink to={`/advertisement/`} className="text-muted">
+                                                Faire la publicité
+                                            </NavLink>
                                         </li>
                                         <li>
-                                            <Link to={'/policy_privacy/'} className="text-muted">
-                                                Privacy Policy
-                                            </Link>
+                                            <NavLink to={`/contact/`} className="text-muted">
+                                                Contact
+                                            </NavLink>
                                         </li>
-                                        <li>
-                                            <Link to={'/licence_site/'} className="text-muted">
-                                                Licence Site
-                                            </Link>
-                                        </li>
-
                                     </ul>
                                 </div>
+                            </div>
 
-                                <div className="col-md-2 col-3">
-                                    <h5>{$name_site} </h5>
+                            <div className="col-md-2 col-3">
+                                <div className="column">
+                                    <h5>À propos</h5>
                                     <ul className="links-vertical">
                                         <li>
-                                            <a href="/" className="text-muted">
-                                                Cameroun
+                                            <a href="#pablo" className="text-muted">
+                                                Ivemo/news
                                             </a>
                                         </li>
-
                                         <li>
-                                            <a href="/" className="text-muted">
-                                                Congo
-                                            </a>
+                                            <Link to={`/employments/`} className="text-muted">
+                                                Emplois & Services
+                                            </Link>
                                         </li>
-
                                         <li>
-                                            <a href="http://ivemogabon.test/" className="text-muted">
-                                                Gabon
-                                            </a>
+                                            <Link to={`/work_with_us/`} className="text-muted">
+                                                Travailler avec nous
+                                            </Link>
                                         </li>
-
                                         <li>
-                                            <a href="/" className="text-muted">
-                                                Cote d'ivoir
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="/" className="text-muted">
-                                                Senegal
-                                            </a>
+                                            <Link to={`/agences_immobilies/`} className="text-muted">
+                                                Agences immobilières
+                                            </Link>
                                         </li>
 
                                     </ul>
                                 </div>
 
                             </div>
+
+                            <div className="col-md-2 col-3">
+                                <h5>Aide</h5>
+                                <ul className="links-vertical">
+                                    <li>
+                                        <Link to={`/faqs/`} className="text-muted">
+                                            Foire aux questions
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to={`/forums/`} className="text-muted">
+                                            Forum
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to={'/condition_utilisation/'} className="text-muted">
+                                            Terms &amp; Conditions
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to={'/policy_privacy/'} className="text-muted">
+                                            Privacy Policy
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to={'/licence_site/'} className="text-muted">
+                                            Licence Site
+                                        </Link>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <div className="col-md-2 col-3">
+                                <h5>{$name_site} </h5>
+                                <ul className="links-vertical">
+                                    <li>
+                                        <a href="/" className="text-muted">
+                                            Cameroun
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="/" className="text-muted">
+                                            Congo
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="http://ivemogabon.test/" className="text-muted">
+                                            Gabon
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="/" className="text-muted">
+                                            Cote d'ivoir
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="/" className="text-muted">
+                                            Senegal
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+
                         </div>
-                        <hr />
-                        {/*
+                    </div>
+                    <hr />
+                    {/*
                             <div className="row">
                             <div className="col-md-9">
                                 <div className="column">
@@ -239,15 +214,14 @@ class FooterBigUserSite extends Component {
                         */}
 
 
-                        <div className="text-center">
-                            Copyright © 2020 - {new Date().getFullYear()}, <b>{$name_site}</b> All Rights Reserved Realisé par
-                            <a href="/" className="pl-2 text-primary"><b>KazouGroup Srl</b></a>.
-                        </div>
+                    <div className="text-center">
+                        Copyright © 2020 - {new Date().getFullYear()}, <b>{$name_site}</b> All Rights Reserved Realisé par
+                        <a href="/" className="pl-2 text-primary"><b>KazouGroup Srl</b></a>.
                     </div>
-                </footer>
-            </>
+                </div>
+            </footer>
+        </>
 
-        )
-    }
-}
+    )
+};
 export default FooterBigUserSite;

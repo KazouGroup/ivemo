@@ -1,10 +1,11 @@
 <?php
 
-use App\Model\categoryfaq;
-use App\model\comment;
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+
+
+use App\Model\comment;
 use App\Model\user;
 use Faker\Generator as Faker;
-
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -17,9 +18,23 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(comment::class, function (Faker $faker) {
+
+    $servicemodel = collect([
+        ['name' => 'App\Model\employment'],
+        ['name' => 'App\Model\blogannoncelocation'],
+        ['name' => 'App\Model\blogannoncereservation'],
+        ['name' => 'App\Model\blogannoncevente'],
+        ['name' => 'App\Model\annoncelocation'],
+        ['name' => 'App\Model\annoncereservation'],
+        ['name' => 'App\Model\annoncevente'],
+        ['name' => 'App\Model\forum']
+    ]);
+
     return [
-        'body' => $faker->title,
-        'status' => $faker->boolean,
-        'user_id' => User::inRandomOrder()->first()->id
+        'user_id' => user::inRandomOrder()->first()->id,
+        'commentable_id' => mt_rand(1, 500),
+        'commentable_type' => $servicemodel->shuffle()->first()['name'],
+        'body' => $faker->realText(rand(10, 200)),
+        'created_at' => $faker->dateTime,
     ];
 });

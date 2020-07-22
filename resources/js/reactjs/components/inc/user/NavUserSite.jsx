@@ -77,7 +77,7 @@ class NavUserSite extends PureComponent {
                         <li className="nav-item">
                             <a href={'/employments/'} className="nav-link">
                                 <i className="now-ui-icons business_briefcase-24"/>
-                                <b>Offres d'emplois</b>
+                                <b>Emplois & Services</b>
                             </a>
                         </li>
                         {$guest ?
@@ -106,7 +106,7 @@ class NavUserSite extends PureComponent {
                                     </a>
                                     <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
 
-                                        {$userIvemo.status_user && (
+                                        {$userIvemoIsadmin.status_user && (
                                             <a href="/dashboard" className="dropdown-item">
                                                 <i className="now-ui-icons business_bulb-63" /> Dashboard
                                             </a>
@@ -119,6 +119,9 @@ class NavUserSite extends PureComponent {
                                         )}
                                         <a href="/profile/account" className="dropdown-item">
                                             <i className="now-ui-icons users_circle-08"/> Editer mon profile
+                                        </a>
+                                        <a href={`/profile/${$userIvemo.slug}/personal_settings/forums/`} className="dropdown-item">
+                                            <i className="now-ui-icons travel_info"/> Post forums
                                         </a>
                                         {$userIvemo.status_profile === 1 ?
                                             <a href={`/pro/${$userIvemo.slug}/`} className="dropdown-item">

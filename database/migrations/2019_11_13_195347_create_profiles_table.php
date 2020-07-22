@@ -36,6 +36,7 @@ class CreateProfilesTable extends Migration
             $table->boolean('status_employments')->default(true);
             $table->boolean('status_comments')->default(true);
             $table->boolean('status_responsecomments')->default(true);
+            $table->boolean('status_contactservice')->default(true);
 
             $table->boolean('status_blog_locations')->default(true);
             $table->boolean('status_blog_reservations')->default(true);

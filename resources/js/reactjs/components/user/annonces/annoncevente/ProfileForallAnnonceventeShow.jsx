@@ -76,7 +76,13 @@ class ProfileForallAnnonceventeShow extends Component {
                             </a>
                         )}
 
-                        {!$guest && (
+                        {$guest ?
+
+                             <button type="button" data-toggle="modal" data-target="#loginModal" title="Signaler"
+                                    className="btn btn-instagram btn-icon btn-sm">
+                                    <i className="far fa-flag"></i>
+                             </button>
+                             :
                             <>
                                 {($userIvemo.id === this.props.user.id || $userIvemo.id === this.props.user_id) && (
                                     <>
@@ -113,14 +119,13 @@ class ProfileForallAnnonceventeShow extends Component {
                                         </Button>{" "}
                                     </>
                                 )}
-
+                                <button type="button" title="Signaler l'annonce" onClick={() => this.props.signalerUser(this.props)}
+                                    className="btn btn-instagram btn-sm" title={`Signaler`}>
+                                    <i className="far fa-flag"></i> <b>{$userIvemoIsadmin.status_user && (<>{this.props.countsignals}</>)}</b>
+                                </button>
                             </>
-                        )}
+                        }
 
-                        <button type="button" title="Signaler" onClick={() => this.props.signalerUser(this.props)}
-                                className="btn btn-instagram btn-icon btn-sm">
-                            <i className="far fa-flag"></i>
-                        </button>
                     </div>
                 </div>
                 <div className="card-title">

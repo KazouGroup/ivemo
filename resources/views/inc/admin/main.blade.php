@@ -9,16 +9,12 @@
 
 <div  class="wrapper " id="app">
     @can('dashboard')
-        @if(auth()->user()->status_user)
-
-            <admin-verticalnavusersite></admin-verticalnavusersite>
+        <admin-verticalnavusersite></admin-verticalnavusersite>
 
         @section('content')
 
 
         @show
-
-        @endif
     @endcan
 </div>
 
