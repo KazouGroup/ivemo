@@ -44,6 +44,14 @@ class ContactserviceController extends Controller
         return response('Success',Response::HTTP_ACCEPTED);
     }
 
+    public function statuscontactsisadmin(contactservice $contactservice)
+    {
+       
+        $contactservice->update(['status_red' => !$contactservice->status_red,]);
+
+        return response('Success',Response::HTTP_ACCEPTED);
+    }
+
 
     public function contactred(contactservice $contactservice)
     {

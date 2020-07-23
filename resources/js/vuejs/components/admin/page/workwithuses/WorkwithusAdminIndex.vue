@@ -91,7 +91,7 @@
                                         </tr>
                                         </tfoot>
                                         <tbody>
-                                        <tr v-for="(item,index) in workwithuses" :key="item.id">
+                                        <tr v-for="item in workwithuses" :key="item.id">
                                             <td>
                                                 <router-link :to="{ path: `/dashboard/workwithuses/c/${item.categoryworkwithus.slug}/${item.slug}/`  }">
                                                     {{ (item.title.length > 15 ? item.title.substring(0,15)+ "..." : item.title) | upText }}
@@ -110,7 +110,7 @@
                                                     <span v-else-if="!item.status"  class="badge badge-rose"><b>Deactive</b></span>
                                                 </div>
                                             </td>
-                                            <td><b>{{item.contactworkwithuses_count}}</b></td>
+                                            <td><b>{{item.contactservices_count}}</b></td>
                                             <td><b>{{ item.created_at | dateAgo }}</b></td>
                                             <td v-if="$auth.can('manage-rh')" class="text-right">
                                                 <template>

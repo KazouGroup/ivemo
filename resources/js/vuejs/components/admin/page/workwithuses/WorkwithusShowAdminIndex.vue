@@ -19,7 +19,7 @@
                                     <b>{{workwithusesbyc.title}}</b>
                                 </p>
                                 <h3 class="card-title" style="color:red;">
-                                    <b>{{workwithusesbyc.contactworkwithuses_count}}</b>
+                                    <b>{{workwithusesbyc.contactservices_count}}</b>
                                 </h3>
                             </div>
                             <div class="card-footer">
@@ -68,19 +68,19 @@
                             </div>
                         </div>
 
-                        <h3 v-if="workwithusesbyc.contactworkwithuses_count >= 1" class="text-center">Message postulant</h3>
+                        <h3 v-if="workwithusesbyc.contactservices_count >= 1" class="text-center">Message postulant</h3>
                         <h3 v-else class="text-center">Pas de postulant</h3>
 
                         <div class="row">
 
-                            <div v-for="(item,index) in workwithusesbyc.contactworkwithuses" :key="item.id" class="col-md-4 mx-auto">
+                            <div v-for="item in workwithusesbyc.contactservices" :key="item.id" class="col-md-4 mx-auto">
                                 <div class="card card-product">
                                     <div class="card-body">
                                         <h4 class="card-title">
                                             <b> {{item.full_name}}</b>
                                         </h4>
                                         <h6 class="card-title">
-                                            <b> {{item.workwithus.city.name}}</b>
+                                            <b> {{item.contactserviceable.city.name}}</b>
                                         </h6>
                                         <div class="submit text-center">
                                             <router-link  :to="{ name: 'workwithuses.index'}" class="btn btn-secondary btn-raised">
@@ -136,7 +136,7 @@
             document.title = `Dashboard Work with ${this.user.first_name || this.name_site} - ${this.name_site}`;
             return {
                 loaded: false,
-                workwithusesbyc: {contactworkwithuses:[]},
+                workwithusesbyc: {contactservices:[]},
             }
         },
 
@@ -165,8 +165,8 @@
 
                         this.$Progress.start();
                         //Envoyer la requet au server
-                        let url = route('activated_contactworkwithus',id);
-                        dyaxios.get(url).then(() => {
+                        let url = route('contactservice_dashstatusred',id);
+                        dyaxios.post(url).then(() => {
                             this.$Progress.finish();
                             Fire.$emit('ItemGetter');
                         }).catch(() => {
@@ -200,8 +200,8 @@
 
                         this.$Progress.start();
                         //Envoyer la requet au server
-                        let url = route('unactivated_contactworkwithus',id);
-                        dyaxios.get(url).then(() => {
+                        let url = route('contactservice_dashstatusred',id);
+                        dyaxios.post(url).then(() => {
                             //End Progress bar
                             this.$Progress.finish();
                             Fire.$emit('ItemGetter');

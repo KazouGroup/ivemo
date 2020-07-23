@@ -17,7 +17,7 @@
                                         <i class="material-icons">forum</i>
                                     </div>
                                     <p class="card-category"><b>Messages</b></p>
-                                    <h3 class="card-title"><b>{{data_countFormatter(contactforadverts_count)}}</b></h3>
+                                    <h3 class="card-title"><b>{{data_countFormatter(contacts_count)}}</b></h3>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
@@ -33,7 +33,7 @@
                                         <i class="material-icons">done</i>
                                     </div>
                                     <p class="card-category"><b>Red</b></p>
-                                    <h3 class="card-title"><b>{{dataactive_countFormatter(contactforadvertsred_count)}}</b></h3>
+                                    <h3 class="card-title"><b>{{dataactive_countFormatter(contactsred_count)}}</b></h3>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
@@ -49,7 +49,7 @@
                                         <i class="material-icons">remove</i>
                                     </div>
                                     <p class="card-category"><b>Unred</b></p>
-                                    <h3 class="card-title"><b>{{dataunactive_countFormatter(contactforadvertsunred_count)}}</b></h3>
+                                    <h3 class="card-title"><b>{{dataunactive_countFormatter(contactsunred_count)}}</b></h3>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
@@ -72,7 +72,7 @@
                                         <b>Contacts from users for adverts</b>
                                     </p>
                                     <h3 class="card-title" style="color:red;">
-                                        <b>{{data_countFormatter(contactforadverts_count)}}</b>
+                                        <b>{{data_countFormatter(contacts_count)}}</b>
                                     </h3>
                                 </div>
                                 <div class="card-footer">
@@ -108,32 +108,40 @@
                                         <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                             <thead>
                                             <tr>
-                                                <th><b>Full name</b></th>
-                                                <th><b>Email</b></th>
+                                                <th><b>Fist name</b></th>
+                                                <th><b>Last name</b></th>
+                                                 <th><b>Email</b></th>
                                                 <th><b>Phone</b></th>
-                                                <th><b>Time</b></th>
                                                 <th><b>Message</b></th>
                                                 <th class="disabled-sorting text-right"><b>Actions</b></th>
                                             </tr>
                                             </thead>
                                             <tfoot>
                                             <tr>
-                                                <th><b>Full name</b></th>
-                                                <th><b>Email</b></th>
+                                                 <th><b>Fist name</b></th>
+                                                <th><b>Last name</b></th>
+                                                 <th><b>Email</b></th>
                                                 <th><b>Phone</b></th>
-                                                <th><b>Time</b></th>
                                                 <th><b>Message</b></th>
                                                 <th class="disabled-sorting text-right"><b>Actions</b></th>
                                             </tr>
                                             </tfoot>
                                             <tbody>
-                                            <tr v-for="item in contactusersadverts" :key="item.id">
-                                                <td> <b>{{item.full_name}} </b> </td>
+                                            <tr v-for="item in contacts" :key="item.id">
+                                                <td>
+                                                    <b>
+                                                    {{ (item.first_name.length > 15 ? item.first_name.substring(0,15)+ "..." : item.first_name) | upText }}
+                                                    </b>
+                                                </td>
+                                                <td>
+                                                    <b>
+                                                    {{ (item.last_name.length > 15 ? item.last_name.substring(0,15)+ "..." : item.last_name) | upText }}
+                                                    </b>
+                                                </td>
                                                 <td>
                                                     {{ (item.email.length > 15 ? item.email.substring(0,15)+ "..." : item.email) | upText }}
                                                 </td>
                                                 <td> <b>{{item.phone}} </b> </td>
-                                                <td> <b>{{item.appointment_time }} </b></td>
                                                 <td><b>{{ (item.message.length > 30 ? item.message.substring(0,30)+ "..." : item.message) }}</b></td>
                                                 <td class="text-right">
                                                     <a :href="`/dashboard/contactuserforadverts/${item.slug}/view/`" target="_blank"
@@ -172,16 +180,15 @@
 </template>
 
 <script>
-    import moment from 'moment'
     export default {
         data() {
-            document.title = `Dashboard Contacts from users for adverts ${this.user.first_name || this.name_site} - ${this.name_site}`;
+            document.title = `Dashboard Contacts ${this.user.first_name || this.name_site} - ${this.name_site}`;
             return {
                 page: 1,
-                contactusersadverts: [],
-                contactforadverts_count: [],
-                contactforadvertsred_count: [],
-                contactforadvertsunred_count: [],
+                contacts: [],
+                contacts_count: [],
+                contactsred_count: [],
+                contactsunred_count: [],
             }
         },
 
@@ -192,28 +199,28 @@
             getColorHeaderUser() {
                 return "card-header card-header-" + this.user.color_name;
             },
-            data_countFormatter( contactforadverts_count, precision) {
+            data_countFormatter( contacts_count, precision) {
                 const abbrev = ['', 'k', 'M', 'B', 'T'];
-                const unrangifiedOrder = Math.floor(Math.log10(Math.abs( contactforadverts_count)) / 3);
+                const unrangifiedOrder = Math.floor(Math.log10(Math.abs( contacts_count)) / 3);
                 const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
                 const suffix = abbrev[order];
-                return ( contactforadverts_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+                return ( contacts_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
             },
 
-            dataactive_countFormatter(contactforadvertsred_count, precision) {
+            dataactive_countFormatter(contactsred_count, precision) {
                 const abbrev = ['', 'k', 'M', 'B', 'T'];
-                const unrangifiedOrder = Math.floor(Math.log10(Math.abs(contactforadvertsred_count)) / 3);
+                const unrangifiedOrder = Math.floor(Math.log10(Math.abs(contactsred_count)) / 3);
                 const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
                 const suffix = abbrev[order];
-                return (contactforadvertsred_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+                return (contactsred_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
             },
 
-            dataunactive_countFormatter(contactforadvertsunred_count, precision) {
+            dataunactive_countFormatter(contactsunred_count, precision) {
                 const abbrev = ['', 'k', 'M', 'B', 'T'];
-                const unrangifiedOrder = Math.floor(Math.log10(Math.abs( contactforadvertsunred_count)) / 3);
+                const unrangifiedOrder = Math.floor(Math.log10(Math.abs( contactsunred_count)) / 3);
                 const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
                 const suffix = abbrev[order];
-                return ( contactforadvertsunred_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+                return ( contactsunred_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
             },
 
                     /** Ici c'est l'activation  **/
@@ -253,14 +260,14 @@
             },
 
             infiniteHandler($state) {
-                dyaxios.get(route('api.contactusersforadverts_dashboard'), {
+                dyaxios.get(route('api.contacts_dashboard'), {
                     params: {
                         page: this.page,
                     },
                 }).then(response => {
                     if (response.data.length) {
                         this.page += 1;
-                        this.contactusersadverts.push(...response.data);
+                        this.contacts.push(...response.data);
                         $state.loaded();
                     } else {
                         $state.complete();
@@ -269,14 +276,14 @@
             },
 
             loadItems(){
-                dyaxios.get(route('api.contactforadverts_dashboard_count')).then(response => {
-                    this.contactforadverts_count = response.data;});
+                dyaxios.get(route('api.contacts_dashboard_count')).then(response => {
+                    this.contacts_count = response.data;});
 
-                dyaxios.get(route('api.contactforadverts_dashboardred_count')).then(response => {
-                    this.contactforadvertsred_count = response.data;});
+                dyaxios.get(route('api.contacts_dashboardred_count')).then(response => {
+                    this.contactsred_count = response.data;});
 
-                dyaxios.get(route('api.contactforadverts_dashboardunred_count')).then(response => {
-                    this.contactforadvertsunred_count = response.data;});
+                dyaxios.get(route('api.contacts_dashboardunred_count')).then(response => {
+                    this.contactsunred_count = response.data;});
             },
 
             intervalFetchData: function () {

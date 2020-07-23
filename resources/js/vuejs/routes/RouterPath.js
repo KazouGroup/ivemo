@@ -51,6 +51,7 @@ import UserAdminIndex from "../components/admin/user/UserAdminIndex";
 import UserProAdminIndex from "../components/admin/user/UserProAdminIndex";
 import UserParAdminIndex from "../components/admin/user/UserParAdminIndex";
 import UserModeratorsAdmin from "../components/admin/user/UserModeratorsAdmin";
+import ContactAdminIndex from "../components/admin/contact/contactadmin/ContactAdminIndex";
 
 
 export const routes = [
@@ -72,7 +73,10 @@ export const routes = [
     {path: '/dashboard/users/particuliers/', name: 'users.userspar', component: UserParAdminIndex},
     {path: '/dashboard/users/moderators/', name: 'users.usersmod', component: UserModeratorsAdmin},
 
+    {path: '/dashboard/contacts/', name: 'contacts.dashboard', component: ContactAdminIndex},
+
     {path: '/dashboard/contactusersfaqs/', name: 'contactusersfaqs.index', component: ContactusersfaqsAdminIndex},
+
     {path: '/dashboard/contactusersforadverts/', name: 'contactusersforadverts.index', component:ContactusersforadvertsAdminIndex},
 
     {path: '/dashboard/policyprivacies/', name: 'policyprivacies.index', component: PolicyprivacyAdminIndex},

@@ -72,8 +72,8 @@ class ForumcommentIndex extends PureComponent {
         }
     }
 
-    likeItem(id) {
-        const url = route('comments_likes.active', [id]);
+    likeItem(item) {
+        const url = route('comments_likes.active', [item.id]);
         dyaxios.get(url).then(() => {
 
             this.loadItems();
@@ -90,8 +90,8 @@ class ForumcommentIndex extends PureComponent {
         })
     }
 
-    unlikeItem(id) {
-        const url = route('comments_likes.unactive', [id]);
+    unlikeItem(item) {
+        const url = route('comments_likes.unactive', [item.id]);
         dyaxios.get(url).then(() => {
 
             this.loadItems();
@@ -529,16 +529,18 @@ class ForumcommentIndex extends PureComponent {
         });
     }
 
-    loadItems(){
+
+    loadItems() {
+
         let itemCategoryforum = this.props.match.params.categoryforum;
         let itemForum = this.props.match.params.forum;
         /*Ici c'est pour recuperer les annonce par villes*/
         let url = route('api.forumgetcomment_site',[itemCategoryforum,itemForum]);
-         dyaxios.get(url).then(response =>
-            this.setState({
-                comments: [...response.data]
-            }));
-    }
+         dyaxios.get(url).then(response => {
+            this.setState({ comments: [...response.data] });
+            
+          });
+      }
 
     componentDidMount() {
       this.loadItems()

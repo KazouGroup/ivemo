@@ -36,7 +36,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
-            /* *** Info add *** */
+            /* *** added by me *** */
             \App\Http\Middleware\LogLastUserActivity::class,
             \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
         ],
@@ -66,6 +66,9 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+
+
+        /*** added by me ***/
         'auth.jwt' => 'Tymon\JWTAuth\Middleware\GetUserFromToken',
         'verified_status_user' => \App\Http\Middleware\UserStatusProfileVerified::class,
         'verified_status_admin' => \App\Http\Middleware\UserStatusProfileAdminVerified::class,

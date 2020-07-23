@@ -23,7 +23,7 @@ class ContactusersadvertController extends Controller
 
     public function api()
     {
-        $contactusersforadverts =  ContactuserforadvertsResource::collection(contactusersadvert::all());
+        $contactusersforadverts =  ContactuserforadvertsResource::collection(contactusersadvert::orderByDesc('created_at')->paginate(40));
 
         return response()->json($contactusersforadverts,200);
     }
@@ -37,14 +37,14 @@ class ContactusersadvertController extends Controller
 
     public function contactforadvertsredcount()
     {
-        $contactusersforadverts = contactusersadvert::where(['status' => 1])->get()->count();
+        $contactusersforadverts = contactusersadvert::where(['status_red' => 1])->get()->count();
 
         return response()->json($contactusersforadverts,200);
     }
 
     public function contactforadvertsunredcount()
     {
-        $contactusersforadverts = contactusersadvert::where(['status' => 0])->get()->count();
+        $contactusersforadverts = contactusersadvert::where(['status_red' => 0])->get()->count();
 
         return response()->json($contactusersforadverts,200);
     }
@@ -73,17 +73,9 @@ class ContactusersadvertController extends Controller
     {
         $contactusersadvert = contactusersadvert::where('id', $id)->findOrFail($id);
 
-        $contactusersadvert->update(['status' => 1,]);
+        $contactusersadvert->update(['status_red' => !$contactusersadvert->status_red,]);
 
         return response('Confirmed',Response::HTTP_ACCEPTED);
     }
-
-    public function unactivated($id)
-    {
-        $contactusersadvert = contactusersadvert::where('id', $id)->findOrFail($id);
-
-        $contactusersadvert->update(['status' => 0,]);
-
-        return response('Confirmed',Response::HTTP_ACCEPTED);
-    }
+    
 }

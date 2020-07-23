@@ -22,7 +22,7 @@ class ContactusersfaqResource extends JsonResource
             'ip' => $this->ip,
             'full_name' => $this->full_name,
             'subject' => $this->subject,
-            'status' => $this->status,
+            'status_red' => $this->status_red,
             'message' => $this->message,
             'categoryuser_id' => $this->categoryuser_id,
             'categoryuser' => $this->categoryuser,

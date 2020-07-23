@@ -326,7 +326,12 @@
                                     <span class="sidebar-normal"> Contacts For Adverts</span>
                                 </router-link>
                             </li>
-
+                             <li class="nav-item ">
+                                <router-link class="nav-link" :to="{ name: 'contacts.dashboard'}">
+                                    <span class="sidebar-mini"> CU</span>
+                                    <span class="sidebar-normal"> Contacts Users</span>
+                                </router-link>
+                            </li>
                         </ul>
                     </div>
                 </li>

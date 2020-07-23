@@ -11,6 +11,11 @@ Route::post(
 )->name('contactservice_statusred');
 
 Route::post(
+    'contactservices/{contactservice:id}/dashstatusred',
+    'ContactserviceController@statuscontactsisadmin'
+)->name('contactservice_dashstatusred');
+
+Route::post(
     'contactservices/{contactservice:id}/statusfavorite',
     'ContactserviceController@statusfavorite'
 )->name('contactservice_statusfavorite');

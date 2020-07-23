@@ -29,7 +29,7 @@ class ContactusersfaqController extends Controller
 
     public function api()
     {
-        $contactusersfaqs =  ContactusersfaqResource::collection(contactusersfaq::with('categoryuser','categoryobjet')->latest()->paginate(20));
+        $contactusersfaqs =  ContactusersfaqResource::collection(contactusersfaq::with('categoryuser','categoryobjet')->latest()->paginate(40));
 
         return response()->json($contactusersfaqs,200);
     }
@@ -44,7 +44,7 @@ class ContactusersfaqController extends Controller
 
     public function dataactivecount()
     {
-        $contactusersfaqs = contactusersfaq::where(['status' => 1])->get()->count();
+        $contactusersfaqs = contactusersfaq::where(['status_red' => 1])->get()->count();
 
         return response()->json($contactusersfaqs,200);
 
@@ -52,7 +52,7 @@ class ContactusersfaqController extends Controller
 
     public function dataunactivecount()
     {
-        $contactusersfaqs = contactusersfaq::where(['status' => 0])->get()->count();
+        $contactusersfaqs = contactusersfaq::where(['status_red' => 0])->get()->count();
 
         return response()->json($contactusersfaqs,200);
     }

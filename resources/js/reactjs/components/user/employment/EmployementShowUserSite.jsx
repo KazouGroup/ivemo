@@ -4,7 +4,7 @@ import {Button, Form, FormText, Input, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../inc/user/NavUserSite";
 import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../inc/user/LinkValicationEmail";
-import FooterUserSite from "../../inc/user/FooterUserSite";
+import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import moment from "moment";
 import SignalFromEmployementForShow from "./inc/SignalFromEmployementForShow";
 import Swal from "sweetalert2";
@@ -797,7 +797,7 @@ class EmployementShowUserSite extends Component {
 
                         </div>
 
-                        <FooterUserSite />
+                        <FooterBigUserSite />
                     </div>
                 </div>
             </>

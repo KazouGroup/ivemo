@@ -30,8 +30,4 @@ Route::group(['namespace' => 'Signale'], function(){
         'SignalannoncelocationController@activated')
         ->name('activated_signalannoncelocations');
 
-    Route::get('dashboard/unactive_signalannoncelocations/{id}',
-        'SignalannoncelocationController@unactivated')
-        ->name('unactivated_signalannoncelocations');
-
 });

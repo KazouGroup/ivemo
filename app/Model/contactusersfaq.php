@@ -38,6 +38,6 @@ class contactusersfaq extends Model
     }
 
     protected $casts = [
-        'status' => 'boolean',
+        'status_red' => 'boolean',
     ];
 }

@@ -72,8 +72,8 @@ class AnnoncereservationcommentIndex extends PureComponent {
         }
     }
 
-    likeItem(id) {
-        const url = route('comments_likes.active', [id]);
+    likeItem(item) {
+        const url = route('comments_likes.active', [item.id]);
         dyaxios.get(url).then(() => {
 
             this.loadItems();
@@ -90,8 +90,8 @@ class AnnoncereservationcommentIndex extends PureComponent {
         })
     }
 
-    unlikeItem(id) {
-        const url = route('comments_likes.unactive', [id]);
+    unlikeItem(item) {
+        const url = route('comments_likes.unactive', [item.id]);
         dyaxios.get(url).then(() => {
 
             this.loadItems();

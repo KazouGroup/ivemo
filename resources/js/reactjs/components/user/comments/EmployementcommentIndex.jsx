@@ -72,10 +72,11 @@ class EmployementcommentIndex extends PureComponent {
         }
     }
 
-    likeItem(id) {
-        const url = route('comments_likes.active', [id]);
-        dyaxios.get(url).then(() => {
+    likeItem(item) {
+        const url = route('comments_likes.active', [item.id]);
+        dyaxios.get(url).then((response) => {
 
+        
             this.loadItems();
 
         }).catch(() => {
@@ -90,12 +91,12 @@ class EmployementcommentIndex extends PureComponent {
         })
     }
 
-    unlikeItem(id) {
-        const url = route('comments_likes.unactive', [id]);
-        dyaxios.get(url).then(() => {
+    unlikeItem(item) {
+        const url = route('comments_likes.unactive', [item.id]);
+        dyaxios.get(url).then((response) => {
 
             this.loadItems();
-
+            
         }).catch(() => {
             //Failled message
             $.notify("Ooop! Something wrong. Try later", {
@@ -192,18 +193,18 @@ class EmployementcommentIndex extends PureComponent {
         })
     }
 
-    sendcommentItem(e) {
+    sendcommentItem(e,) {
         e.preventDefault();
 
-        let item = {
+        let itemData = {
             body: this.state.body,
         };
         let itemCategoryemployment = this.props.match.params.categoryemployment;
         let itemCity = this.props.match.params.city;
         let itemEmployment = this.props.match.params.employment;
         let url = route('employmentsendcomment_site',[itemCategoryemployment,itemCity,itemEmployment]);
-        dyaxios.post(url, item)
-            .then(() => {
+        dyaxios.post(url, itemData)
+            .then(response => {
 
                 $.notify({
                         message: `Commentaire sauvegarder`
@@ -221,9 +222,16 @@ class EmployementcommentIndex extends PureComponent {
                         },
                     });
 
-                this.setState({body: "",});
+                    //this.setState({ 
+                    //    comments: [...this.state.comments, response.data],body: ""
+                    //});
+                    this.setState({
+                        comments: [...this.state.comments],body: "",
+                    });
+                    // then clear the value of textarea
+                    
 
-                this.loadItems();
+                   this.loadItems();
 
             }).catch(error => {
             this.setState({

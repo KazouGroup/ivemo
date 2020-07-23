@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StorecontactworkwithusRequest;
 use App\Http\Resources\WorkwithusResource;
 use App\Model\categoryworkwithus;
-use App\Model\contactworkwithus;
+use App\Model\contactservice;
 use App\Model\workwithus;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,7 +48,7 @@ class WorkwithusController extends Controller
     public function api()
     {
         $workwithuses = WorkwithusResource::collection(workwithus::with('user','categoryworkwithus','city')
-            ->withCount('contactworkwithuses')->latest()->get());
+            ->withCount('contactservices')->latest()->get());
 
         return response()->json($workwithuses,200);
     }
@@ -68,7 +68,7 @@ class WorkwithusController extends Controller
         $workwithuses = categoryworkwithus::whereSlug($categoryworkwithus->slug)
             ->with(['workwithuses' => function ($q) use ($categoryworkwithus){
                 $q->with('user','categoryworkwithus','city')
-                    ->withCount('contactworkwithuses')
+                    ->withCount('contactservices')
                     ->whereIn('categoryworkwithus_id',[$categoryworkwithus->id])
                     ->orderBy('created_at','DESC')->distinct()->get();},
             ])->first();;
@@ -89,7 +89,7 @@ class WorkwithusController extends Controller
     public function apiwork_with_us_show(categoryworkwithus $categoryworkwithus,workwithus $workwithus)
     {
 
-        visits($workwithus)->seconds(60)->increment();
+        visits($workwithus)->seconds(5)->increment();
 
         $workwithuses = new WorkwithusResource(workwithus::whereSlug($workwithus->slug)
             ->where(['status' => 1])->first());
@@ -99,12 +99,11 @@ class WorkwithusController extends Controller
 
     public function apiworkwithusesworkwithusshow(categoryworkwithus $categoryworkwithus,workwithus $workwithus)
     {
-
         $workwithuses = new WorkwithusResource(workwithus::whereSlug($workwithus->slug)
-            ->withCount('contactworkwithuses')
-            ->with(['contactworkwithuses' => function ($q) use ($categoryworkwithus,$workwithus){
-                $q->with('workwithus')
-                    ->with(['workwithus.city' => function ($q){
+            ->withCount('contactservices')
+            ->with(['contactservices' => function ($q) use ($categoryworkwithus,$workwithus){
+                $q->with('contactserviceable','from','to')
+                    ->with(['contactserviceable.city' => function ($q){
                             $q->distinct()->get();}])
                     ->orderBy('created_at','DESC')
                     ->distinct()->get()
@@ -184,24 +183,6 @@ class WorkwithusController extends Controller
         $workwithus = workwithus::where('id', $id)->findOrFail($id);
 
         $workwithus->update(['status' => 0,]);
-
-        return response('Confirmed',Response::HTTP_ACCEPTED);
-    }
-
-    public function activatedcontactworkwithus($id)
-    {
-        $contactworkwithus = contactworkwithus::where('id', $id)->findOrFail($id);
-
-        $contactworkwithus->update(['status_red' => 1,]);
-
-        return response('Confirmed',Response::HTTP_ACCEPTED);
-    }
-
-    public function unactivatedcontactworkwithus($id)
-    {
-        $contactworkwithus = contactworkwithus::where('id', $id)->findOrFail($id);
-
-        $contactworkwithus->update(['status_red' => 0,]);
 
         return response('Confirmed',Response::HTTP_ACCEPTED);
     }

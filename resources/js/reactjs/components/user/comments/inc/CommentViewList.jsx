@@ -50,7 +50,7 @@ class CommentViewList extends PureComponent {
                             {this.props.likeked ?
 
                                 <>
-                                    <Button onClick={() => this.props.unlikeItem(this.props.id)}
+                                    <Button onClick={() => this.props.unlikeItem(this.props)}
                                             className="btn btn-danger btn-neutral pull-right" title="J'aime plus ce commentaire">
                                         <i className="now-ui-icons ui-2_favourite-28"></i> {this.getcountlikeString(this.props.likeked_count)}
                                     </Button>
@@ -58,7 +58,7 @@ class CommentViewList extends PureComponent {
 
                                 :
                                 <>
-                                    <Button onClick={() => this.props.likeItem(this.props.id)}
+                                    <Button onClick={() => this.props.likeItem(this.props)}
                                             className="btn btn-default btn-neutral pull-right" title="J'aime ce commentaire">
                                         <i className="now-ui-icons ui-2_favourite-28"></i> {this.getcountlikeString(this.props.likeked_count)}
                                     </Button>

@@ -21,7 +21,7 @@ class CreateContactusersfaqsTable extends Migration
             $table->string('ip')->nullable();
             $table->boolean('confirm_send')->nullable();
             $table->string('full_name')->nullable();
-            $table->boolean('status')->default(false);
+            $table->boolean('status_red')->nullable()->default(false);
             $table->longText('message')->nullable();
             $table->timestamps();
 
