@@ -76,7 +76,7 @@ class EmployementcommentIndex extends PureComponent {
         const url = route('comments_likes.active', [item.id]);
         dyaxios.get(url).then((response) => {
 
-        
+
             this.loadItems();
 
         }).catch(() => {
@@ -96,7 +96,7 @@ class EmployementcommentIndex extends PureComponent {
         dyaxios.get(url).then((response) => {
 
             this.loadItems();
-            
+
         }).catch(() => {
             //Failled message
             $.notify("Ooop! Something wrong. Try later", {
@@ -222,14 +222,14 @@ class EmployementcommentIndex extends PureComponent {
                         },
                     });
 
-                    //this.setState({ 
+                    //this.setState({
                     //    comments: [...this.state.comments, response.data],body: ""
                     //});
                     this.setState({
                         comments: [...this.state.comments],body: "",
                     });
                     // then clear the value of textarea
-                    
+
 
                    this.loadItems();
 
@@ -655,7 +655,7 @@ class EmployementcommentIndex extends PureComponent {
 
                                                                     <div className="media-body">
                                                                         <h6 className="media-heading">{lk.user.first_name}
-                                                                            <small className="text-muted">· {moment(lk.created_at).fromNow()}</small>
+                                                                            <small className="text-muted">· {moment(lk.updated_at).fromNow()} {lk.created_at !== lk.updated_at && ("(Modifié)")}</small>
                                                                         </h6>
                                                                         <ReadMoreAndLess
                                                                             className="read-more-content"

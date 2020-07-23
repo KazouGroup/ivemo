@@ -538,7 +538,7 @@ class ForumcommentIndex extends PureComponent {
         let url = route('api.forumgetcomment_site',[itemCategoryforum,itemForum]);
          dyaxios.get(url).then(response => {
             this.setState({ comments: [...response.data] });
-            
+
           });
       }
 
@@ -636,7 +636,7 @@ class ForumcommentIndex extends PureComponent {
 
                                                             <div className="media-body">
                                                                 <h6 className="media-heading">{lk.user.first_name}
-                                                                    <small className="text-muted">· {moment(lk.created_at).fromNow()}</small>
+                                                                    <small className="text-muted">· {moment(lk.updated_at).fromNow()} {lk.created_at !== lk.updated_at && ("(Modifié)")}</small>
                                                                 </h6>
                                                                 <ReadMoreAndLess
                                                                     className="read-more-content"
