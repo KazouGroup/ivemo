@@ -126,7 +126,7 @@ class ForumCreate extends Component {
                 });
             })
     }
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         fetch(route('api.categoryforum_site')).then(res => res.json()).then((result) => { this.setState({ categoryforums: result }) })
     }

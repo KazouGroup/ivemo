@@ -196,7 +196,7 @@ class PrivateUserBlogannonceReservationCategoryreservation extends Component {
         dyaxios.get(route('api.blogannoncesreservationscategoryannoncereservationbyuser_site',[itemuser,itemCategoryannoncereservation])).then(response => this.setState({userblogannoncereservationsPrivate: response.data,}));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

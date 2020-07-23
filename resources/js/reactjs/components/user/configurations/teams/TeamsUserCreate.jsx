@@ -137,7 +137,7 @@ class TeamsUserCreate extends Component {
         let itemuser = this.props.match.params.user;
         dyaxios.get(route('api_user_profile_data.site', [itemuser])).then(response => this.setState({ userProfile: response.data, }));
     }
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
 

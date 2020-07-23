@@ -193,7 +193,7 @@ class PrivateUserBlogannonceVente extends Component {
         dyaxios.get(route('api.blogannoncesventesbyuser_site',[itemuser])).then(response => this.setState({userblogannonceventesPrivate: response.data,}));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

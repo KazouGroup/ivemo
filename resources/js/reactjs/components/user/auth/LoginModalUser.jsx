@@ -62,7 +62,15 @@ class LoginModalUser extends Component {
             .then(() => {
                   //Masquer le modal après la connexion
                   $('#loginModal').modal('hide');
-                  window.location.reload(true);
+                $.notify(`Bienvenue ${this.state.username} sur Ivemo.`, {
+                    allow_dismiss: false,
+                    type: 'success',
+                    animate: {
+                        enter: 'animate__animated animate__bounceInDown',
+                        exit: 'animate__animated animate__bounceOutUp'
+                    }
+                });
+                window.location.reload(true);
             }).catch(error => {
                 this.setState({
                     errors: error.response.data.errors

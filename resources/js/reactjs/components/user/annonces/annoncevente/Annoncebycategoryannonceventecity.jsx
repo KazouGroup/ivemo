@@ -321,7 +321,7 @@ class Annoncebycategoryannonceventecity extends Component {
         dyaxios.get(url1).then(response => this.setState({ cityannonceventes: response.data, }));
 
     }
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

@@ -316,7 +316,7 @@ class BlogannoncelocationBycategorylocation extends Component {
         dyaxios.get(route('api.blogannonceblogcategorylocationscount_site', [itemCategoryannoncelocation])).then(response => this.setState({ blogannoncelocationsData: response.data }));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

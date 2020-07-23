@@ -88,7 +88,7 @@ class PrivateUserFavoriteblogannonceventes extends Component {
         dyaxios.get(route('api.userfavorites',[itemuser])).then(response => this.setState({userfavorites: response.data,}));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

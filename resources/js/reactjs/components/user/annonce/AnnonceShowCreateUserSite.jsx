@@ -83,7 +83,7 @@ class AnnonceShowCreateUserSite extends Component {
             })
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         const composantTitle = 'Annonce show - Ivemo';
         document.title = `${composantTitle}`;

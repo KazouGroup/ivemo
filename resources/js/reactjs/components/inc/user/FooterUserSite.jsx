@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import LoginModalUser from "../../user/auth/LoginModalUser";
+import LogoutModalUser from "../../user/auth/LogoutModalUser";
 
 
 class FooterUserSite extends Component {
@@ -10,6 +11,7 @@ class FooterUserSite extends Component {
         return (
             <>
                 <LoginModalUser/>
+                <LogoutModalUser />
 
                 <footer className="footer">
                     <div className=" container ">

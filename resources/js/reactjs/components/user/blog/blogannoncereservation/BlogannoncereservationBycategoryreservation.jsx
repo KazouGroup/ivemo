@@ -312,7 +312,7 @@ class BlogannoncereservationBycategoryreservation extends Component {
         dyaxios.get(route('api.blogannoncecategoryreservationscount_site', [itemCategoryannoncereservation])).then(response => this.setState({ blogannoncereservationData: response.data, }));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

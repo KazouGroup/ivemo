@@ -201,7 +201,7 @@ class ForumShow extends Component {
         dyaxios.get(url).then(response => this.setState({ forum: response.data, }));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

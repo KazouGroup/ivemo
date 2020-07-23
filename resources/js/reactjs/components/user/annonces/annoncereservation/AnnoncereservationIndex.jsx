@@ -217,7 +217,7 @@ class AnnoncereservationIndex extends Component {
         dyaxios.get(url).then(response => this.setState({annoncereservations: response.data,}));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

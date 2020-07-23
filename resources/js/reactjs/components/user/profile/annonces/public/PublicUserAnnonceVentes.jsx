@@ -144,7 +144,7 @@ class PublicUserAnnonceVentes extends Component {
         fetch(route('api.profilpublique_annonceventes',[itemuser])).then(res => res.json()).then((result) => {this.setState({userannonceventePublick: result})})
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

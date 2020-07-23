@@ -19,7 +19,7 @@ class WorkwithusShowUserSite extends Component {
     }
 
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         let itemWorkwithus = this.props.match.params.workwithus;
         let itemCategoryworkwithus = this.props.match.params.categoryworkwithus;

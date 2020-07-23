@@ -194,7 +194,7 @@ class ForumEdit extends Component {
                 description: response.data.description,
             }));
     }
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
         fetch(route('api.categoryforum_site')).then(res => res.json()).then((result) => { this.setState({ categoryforums: result }) })

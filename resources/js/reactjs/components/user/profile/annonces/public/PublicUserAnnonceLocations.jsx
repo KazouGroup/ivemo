@@ -146,7 +146,7 @@ class PublicUserAnnonceLocations extends Component {
         dyaxios.get(route('api.profilpublique_annoncelocations',[itemuser])).then(response => this.setState({useranoncelocationPublick: response.data,}));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

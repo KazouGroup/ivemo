@@ -1,16 +1,15 @@
-import React, { Component} from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import {Button, CardBody, Row, UncontrolledTooltip} from "reactstrap";
+import { Button, Row, UncontrolledTooltip } from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import './ProfileAccountUser.css';
 import NavProfileAccountPrivate from "./NavProfileAccountPrivate";
 import Swal from "sweetalert2";
+import HeaderProfileAccountPrivate from "./HeaderProfileAccountPrivate";
 
-
-class ProfileAccountUser extends Component {
+class ProfileAccountUser extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -30,14 +29,14 @@ class ProfileAccountUser extends Component {
             categoryprofiles: [],
             errors: [],
             showDefaultImage: false,
-            showDefaultavatarcoverImage: false,
+            showDefaultAvatarCoverImage: false,
         };
         this.saveItem = this.saveItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
-        this.updateavatarImage = this.updateavatarImage.bind(this);
-        this.updateavatacoverImage = this.updateavatacoverImage.bind(this);
-        this.removeavatarImage = this.removeavatarImage.bind(this);
-        this.removeavatarcoverImage = this.removeavatarcoverImage.bind(this);
+        this.updateAvatarImage = this.updateAvatarImage.bind(this);
+        this.updateAvatarCoverImage = this.updateAvatarCoverImage.bind(this);
+        this.removeAvatarImage = this.removeAvatarImage.bind(this);
+        this.removeAvatarCoverImage = this.removeAvatarCoverImage.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
@@ -66,39 +65,39 @@ class ProfileAccountUser extends Component {
     }
 
     // Handle Upload Image
-    updateavatarImage(e) {
+    updateAvatarImage(e) {
         e.preventDefault();
         let reader = new FileReader();
         let file = e.target.files[0];
         reader.onloadend = (file) => {
-            this.setState({ file: file, avatar: reader.result, showDefaultImage: false });
-            document.querySelector('.kazouImageCarousel-file-upload').classList.remove('is-invalid');
+            this.setState({file: file, avatar: reader.result, showDefaultImage: true});
+            //document.querySelector('.kazouImageCarousel-file-upload').classList.remove('is-invalid');
         };
         reader.readAsDataURL(file)
     }
 
     // Handle Upload Image
-    updateavatacoverImage(e) {
+    updateAvatarCoverImage(e) {
         e.preventDefault();
         let reader = new FileReader();
         let file = e.target.files[0];
         reader.onloadend = (file) => {
-            this.setState({ file: file, avatarcover: reader.result, showDefaultImage: false });
-            document.querySelector('.kazouImageCarousel-file-upload').classList.remove('is-invalid');
+            this.setState({file: file, avatarcover: reader.result, showDefaultAvatarCoverImage: true});
+            //document.querySelector('.kazouImageCarousel-file-upload').classList.remove('is-invalid');
         };
         reader.readAsDataURL(file)
     }
 
-    removeavatarImage(e) {
+    removeAvatarImage(e) {
         e.preventDefault();
-        this.setState({ file: '', avatar: '', showDefaultImage: true });
-        document.querySelector('.kazouImageCarousel-file-upload').classList.add('is-invalid');
+        this.setState({file: '', avatar: '', showDefaultImage: false});
+        //document.querySelector('.kazouImageCarousel-file-upload').classList.add('is-invalid');
     }
 
-    removeavatarcoverImage(e) {
+    removeAvatarCoverImage(e) {
         e.preventDefault();
-        this.setState({ file: '', avatarcover: '', showDefaultavatarcoverImage: true });
-        document.querySelector('.kazouImageCarousel-file-upload').classList.add('is-invalid');
+        this.setState({file: '', avatarcover: '', showDefaultAvatarCoverImage: false});
+        //document.querySelector('.kazouImageCarousel-file-upload').classList.add('is-invalid');
     }
 
     saveItem(e) {
@@ -120,16 +119,15 @@ class ProfileAccountUser extends Component {
         };
         dyaxios.put(route('profile_add_info_account_update.site'), item)
             .then(() => {
-
                 $.notify({
-                        message: 'Votre profil a été mis à jour avec succès'
+                        message: 'Votre profil a été mis à jour avec succès.'
                     },
                     {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
-                            from: 'bottom',
-                            align: 'center'
+                            from: 'top',
+                            align: 'right'
                         },
                         animate: {
                             enter: "animate__animated animate__fadeInUp",
@@ -140,10 +138,10 @@ class ProfileAccountUser extends Component {
                     window.location.reload(true);
                 }, 3000);
             }).catch(error => {
-                this.setState({
-                    errors: error.response.data.errors
-                });
-            })
+            this.setState({
+                errors: error.response.data.errors
+            });
+        })
     }
 
     deleteItem(id) {
@@ -160,7 +158,6 @@ class ProfileAccountUser extends Component {
             reverseButtons: true,
         }).then((result) => {
             if (result.value) {
-
                 const url = route('profile_add_info_account_delete.site', id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
@@ -171,7 +168,7 @@ class ProfileAccountUser extends Component {
     }
 
     loadItem() {
-        dyaxios.get(route('api.categoryprofiles')).then(response => this.setState({ categoryprofiles: response.data, }));
+        dyaxios.get(route('api.categoryprofiles')).then(response => this.setState({categoryprofiles: response.data,}));
         dyaxios.get(route('api_profile_account.site')).then(response =>
             this.setState({
                 id: response.data.id,
@@ -189,16 +186,15 @@ class ProfileAccountUser extends Component {
                 phone: response.data.phone,
             }));
     }
-    // lifecycle method
+
+    // Lifecycle Component Method
     componentDidMount() {
         this.loadItem();
-
     }
 
     render() {
-        const { categoryprofiles,avatar,avatarcover} = this.state;
+        const {categoryprofiles, avatar, avatarcover, showDefaultImage, showDefaultAvatarCoverImage} = this.state;
         return (
-
             <>
                 <Helmet>
                     <title> {`${$userIvemo.first_name || "Profile"}`} - {$name_site}</title>
@@ -206,37 +202,37 @@ class ProfileAccountUser extends Component {
 
                 <div className="about-us sidebar-collapse">
                     <nav className="navbar navbar-expand-lg bg-primary">
-                        <NavUserSite />
+                        <NavUserSite/>
                     </nav>
                     <div className="wrapper">
                         <div className="main main-raised">
                             <div className="container">
-                                <br />
+                                <br/>
                                 <form role="form" id="contact-form" onSubmit={this.saveItem} acceptCharset="UTF-8">
                                     <div className="row">
                                         <div className="col-lg-4 col-md-12 mx-auto">
-
-                                            <NavProfileAccountPrivate />
-
+                                            <NavProfileAccountPrivate/>
                                         </div>
                                         <div className="col-lg-8 col-md-12 mx-auto">
                                             <div className="card">
                                                 <div className="card-body">
-                                                <div className="card-header d-flex align-items-center">
-                                                        <div className="d-flex align-items-center">
-                                                            <NavLink to={`/pro/${$userIvemo.slug}/`}>
-                                                                <img src={$userIvemo.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
-                                                            </NavLink>
-                                                            <div className="mx-3">
-                                                                <NavLink to={`/pro/${$userIvemo.slug}/`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
-                                                                    <small className="d-block text-muted">{moment($userIvemo.created_at).format('LL')}</small>
-                                                                </NavLink>
+                                                    <HeaderProfileAccountPrivate />
+                                                    <hr/>
+                                                    <Row className="my-2">
+                                                        <div className="col-md-2">
+                                                            <label htmlFor="address"><b>Sex</b></label>
+                                                            <div className="form-group">
+                                                                <select value={this.state.sex || ''}
+                                                                        className={`form-control ${this.hasErrorFor('sex') ? 'is-invalid' : ''}`}
+                                                                        onChange={this.handleFieldChange} name="sex"
+                                                                        required="required">
+                                                                    <option value="female"> Mme</option>
+                                                                    <option value="male"> Mr</option>
+                                                                </select>
+                                                                {this.renderErrorFor('sex')}
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <hr/>
-                                                    <Row>
-                                                        <div className="col-md-6 col-6">
+                                                        <div className="col-md-5 col-5">
                                                             <label htmlFor="first_name"><b>Nom</b></label>
                                                             <div className="input-group">
                                                                 <div className="input-group-prepend">
@@ -259,7 +255,7 @@ class ProfileAccountUser extends Component {
                                                                 {this.renderErrorFor('first_name')}
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-6 col-6">
+                                                        <div className="col-md-5 col-5">
                                                             <label htmlFor="last_name"><b>Prénom</b></label>
                                                             <div className="input-group">
                                                                 <div className="input-group-prepend">
@@ -282,9 +278,7 @@ class ProfileAccountUser extends Component {
                                                             </div>
                                                         </div>
                                                     </Row>
-
-                                                    <div className="row">
-
+                                                    <Row className="my-2">
                                                         <div className="col-md-6 col-6">
                                                             <label htmlFor="address"><b>Pseudo</b></label>
                                                             <div className="input-group">
@@ -308,7 +302,6 @@ class ProfileAccountUser extends Component {
                                                                 {this.renderErrorFor('username')}
                                                             </div>
                                                         </div>
-
                                                         <div className="col-md-6 col-6">
                                                             <label htmlFor="title"><b>Pseudo profil</b></label>
                                                             <div className="input-group">
@@ -332,44 +325,8 @@ class ProfileAccountUser extends Component {
                                                                 {this.renderErrorFor('slug')}
                                                             </div>
                                                         </div>
-
-                                                    </div>
-
-                                                    <Row>
-                                                        <div className="col-md-6">
-                                                            <div className="text-center">
-                                                                <img src={this.state.showDefaultImage ? `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg` : avatar || `${$url_site}/assets/vendor/assets/img/placeholder.jpg`} alt={'avatar'} />
-                                                                <input id="avatar" type="file" onChange={this.updateavatarImage} className={`form-control ${this.hasErrorFor('avatar') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="avatar" />
-                                                                {this.renderErrorFor('avatar')}
-                                                                <div className="text-center">
-                                                                    <label htmlFor="avatar" className="btn btn-primary">
-                                                                        <span className="btn-inner--text">Modifier le profil</span>
-                                                                    </label>
-                                                                    <label hidden={this.state.showDefaultImage ? true : false} onClick={this.removeavatarImage} className="btn btn-danger">
-                                                                        <span className="btn-inner--text">Enlever</span>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-6">
-
-                                                            <div className="text-center">
-                                                                <img src={this.state.showDefaultavatarcoverImage ? `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg` : avatarcover || `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg`} alt={'avatarcover'} />
-                                                                <input id="avatarcover" type="file" onChange={this.updateavatacoverImage} className={`form-control ${this.hasErrorFor('avatarcover') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="avatarcover" />
-                                                                {this.renderErrorFor('avatarcover')}
-                                                                <div className="text-center">
-                                                                    <label htmlFor="avatarcover" className="btn btn-primary">
-                                                                        <span className="btn-inner--text">Modifier la couverture</span>
-                                                                    </label>
-                                                                    <label hidden={this.state.showDefaultavatarcoverImage ? true : false} onClick={this.removeavatarcoverImage} className="btn btn-danger">
-                                                                        <span className="btn-inner--text">Enlever</span>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                     </Row>
-
-                                                    <div className="row">
+                                                    <Row className="my-2">
                                                         <div className="col-md-6 col-6">
                                                             <label htmlFor="address"><b>Email</b></label>
                                                             <div className="input-group">
@@ -393,7 +350,6 @@ class ProfileAccountUser extends Component {
                                                                 {this.renderErrorFor('email')}
                                                             </div>
                                                         </div>
-
                                                         <div className="col-md-6 col-6">
                                                             <label htmlFor="phone"><b>Téléphone</b></label>
                                                             <div className="input-group">
@@ -416,63 +372,102 @@ class ProfileAccountUser extends Component {
                                                                 {this.renderErrorFor('phone')}
                                                             </div>
                                                         </div>
-                                                    </div>
-
-                                                    <div className="row">
-                                                        <div className="col-md-4">
+                                                    </Row>
+                                                    <Row className="my-2">
+                                                        <div className="col-md-6">
                                                             <label htmlFor="address"><b>Votre status</b></label>
                                                             <div className="form-group">
-
-                                                                <select value={this.state.status_profile || ''} className={`form-control ${this.hasErrorFor('status_profile') ? 'is-invalid' : ''}`}
-                                                                        onChange={this.handleFieldChange} name="status_profile" required="required">
+                                                                <select value={this.state.status_profile || ''}
+                                                                        className={`form-control ${this.hasErrorFor('status_profile') ? 'is-invalid' : ''}`}
+                                                                        onChange={this.handleFieldChange}
+                                                                        name="status_profile" required="required">
                                                                     <option value="0"> Particulier</option>
                                                                     <option value="1"> Professionnel</option>
                                                                 </select>
-
                                                                 {this.renderErrorFor('status_profile')}
                                                             </div>
                                                         </div>
-
                                                         <div className="col-md-6">
                                                             <label htmlFor="phone"><b>Pourquoi êtes-vous sur Ivemo ?</b></label>
                                                             <div className="form-group">
-
-                                                                <select value={this.state.categoryprofile_id || ''} className={`form-control ${this.hasErrorFor('categoryprofile_id') ? 'is-invalid' : ''}`}
-                                                                        onChange={this.handleFieldChange} name="categoryprofile_id" required="required">
+                                                                <select value={this.state.categoryprofile_id || ''}
+                                                                        className={`form-control ${this.hasErrorFor('categoryprofile_id') ? 'is-invalid' : ''}`}
+                                                                        onChange={this.handleFieldChange}
+                                                                        name="categoryprofile_id" required="required">
                                                                     <option value="" disabled>Pourquoi êtes-vous sur Ivemo</option>
                                                                     {categoryprofiles.map((item) => (
-                                                                        <option key={item.id} value={item.id}>{item.name}</option>
+                                                                        <option key={item.id}
+                                                                                value={item.id}>{item.name}</option>
                                                                     ))}
                                                                 </select>
-
                                                                 {this.renderErrorFor('categoryprofile_id')}
                                                             </div>
                                                         </div>
-
-                                                        <div className="col-md-2">
-                                                            <label htmlFor="address"><b>Sex</b></label>
-                                                            <div className="form-group">
-
-                                                                <select value={this.state.sex || ''} className={`form-control ${this.hasErrorFor('sex') ? 'is-invalid' : ''}`}
-                                                                        onChange={this.handleFieldChange} name="sex" required="required">
-                                                                    <option value="female"> Mme</option>
-                                                                    <option value="male"> Mr</option>
-                                                                </select>
-
-                                                                {this.renderErrorFor('sex')}
+                                                    </Row>
+                                                    <hr/>
+                                                    <Row className="my-4">
+                                                        <div className="col-md-6">
+                                                            <div className="text-center">
+                                                                <label className="d-block mb-4"><b>Ma Photo de Profil</b></label>
+                                                                <img className="ivemoAvatar"
+                                                                    // src={showDefaultImage ? `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg` : avatar || `${$url_site}/assets/vendor/assets/img/placeholder.jpg`}
+                                                                    src={avatar === '' ? `${$userIvemo.avatar}` : avatar}
+                                                                    alt={'avatar'}/>
+                                                                <input id="avatar" type="file"
+                                                                       onChange={this.updateAvatarImage}
+                                                                       className={`form-control ${this.hasErrorFor('avatar') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`}
+                                                                       name="avatar"/>
+                                                                {this.renderErrorFor('avatar')}
+                                                                <div className="text-center mt-4">
+                                                                    <label htmlFor="avatar" className="btn btn-primary">
+                                                                        <span className="btn-inner--text"><i className="now-ui-icons media-1_album "/> Choisir une image</span>
+                                                                    </label>
+                                                                    <label
+                                                                        hidden={!showDefaultImage}
+                                                                        onClick={this.removeAvatarImage}
+                                                                        className="btn btn-danger">
+                                                                        <span className="btn-inner--text"><i className="now-ui-icons ui-1_simple-remove "/> Effacer</span>
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </div>
-
-                                                    </div>
+                                                        <div className="col-md-6">
+                                                            <div className="text-center">
+                                                                <label className="mb-4"><b>Ma Photo de Couverture</b></label>
+                                                                <img className="fileinput-new thumbnail img-raised"
+                                                                    //src={showDefaultAvatarCoverImage ? `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg` : avatarcover || `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg`}
+                                                                     src={avatarcover === '' ? `${$userIvemo.avatarcover}` : avatarcover}
+                                                                     alt={'avatarcover'}/>
+                                                                <input id="avatarcover" type="file"
+                                                                       onChange={this.updateAvatarCoverImage}
+                                                                       className={`form-control ${this.hasErrorFor('avatarcover') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`}
+                                                                       name="avatarcover"/>
+                                                                {this.renderErrorFor('avatarcover')}
+                                                                <div className="text-center mt-4">
+                                                                    <label htmlFor="avatarcover"
+                                                                           className="btn btn-primary">
+                                                                        <span className="btn-inner--text"><i className="now-ui-icons media-1_album "/> Choisir une image</span>
+                                                                    </label>
+                                                                    <label
+                                                                        hidden={!showDefaultAvatarCoverImage}
+                                                                        onClick={this.removeAvatarCoverImage}
+                                                                        className="btn btn-danger">
+                                                                        <span className="btn-inner--text"><i className="now-ui-icons ui-1_simple-remove "/> Effacer</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </Row>
+                                                    <hr/>
                                                     <div className="submit text-center">
-                                                        <button className="btn btn-primary" type="submit">
-                                                            <b>Enregistrer</b>
+                                                        <button type="submit" className="btn btn-primary btn-round btn-lg">
+                                                            <b><i className="now-ui-icons ui-1_check "/> Enregistrer</b>
                                                         </button>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <Button onClick={() => this.deleteItem(this.state.id)} className="btn btn-outline-danger pull-right"  id="TooltipDelete">
+                                            <Button onClick={() => this.deleteItem(this.state.id)}
+                                                    className="btn btn-outline-danger pull-right" id="TooltipDelete">
                                                 <i className="far fa-trash-alt"/> Supprimer le profil
                                             </Button>{" "}
                                             <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
@@ -483,18 +478,14 @@ class ProfileAccountUser extends Component {
                                 </form>
                             </div>
                         </div>
-
-                        <FooterBigUserSite />
-
+                        <FooterBigUserSite/>
                     </div>
                 </div>
-
-
             </>
-
         )
     }
 }
+
 ProfileAccountUser.defaultProps = {
     backgroundColor: "black",
 };

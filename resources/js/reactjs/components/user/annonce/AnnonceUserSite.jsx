@@ -15,7 +15,7 @@ class AnnonceUserSite extends Component {
         }
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
 
     }

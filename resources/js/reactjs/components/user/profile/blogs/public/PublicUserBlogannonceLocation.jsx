@@ -162,7 +162,7 @@ class PublicUserBlogannonceLocation extends Component {
         dyaxios.get(route('api.profilpublique',[itemuser])).then(response => this.setState({userbloglocationPublick: response.data,}));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

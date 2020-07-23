@@ -285,7 +285,7 @@ class AnnoncelocationEdit extends Component {
                 categoryannoncelocation_id: response.data.categoryannoncelocation_id,
             }));
     }
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
         fetch(route('api.categoryannoncelocation_site')).then(res => res.json()).then((result) => { this.setState({ categoryannoncelocations: result }) });

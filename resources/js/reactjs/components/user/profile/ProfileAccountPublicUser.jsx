@@ -31,7 +31,7 @@ class ProfileAccountPublicUser extends Component {
         dyaxios.get(url).then(response => this.setState({userPublick: response.data,}));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

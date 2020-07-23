@@ -32,7 +32,7 @@ class SubscriberuserUserIndex extends Component {
     reload(){
         this.loadItems()
     }
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
 

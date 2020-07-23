@@ -160,7 +160,7 @@ class PremiumUserNewBlogannonceVente extends Component {
         })
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         let itemuser = this.props.match.params.user;
         dyaxios.get(route('api.blogannonceventes_premium_count',[itemuser])).then(response =>

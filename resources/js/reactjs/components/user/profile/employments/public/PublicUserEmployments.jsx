@@ -260,7 +260,7 @@ class PublicUserEmployments extends Component {
         dyaxios.get(route('api.profilpublique',[itemuser])).then(response => this.setState({useremploymentPublick: response.data,}));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

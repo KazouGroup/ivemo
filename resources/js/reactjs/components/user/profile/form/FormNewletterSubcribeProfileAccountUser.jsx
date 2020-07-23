@@ -74,7 +74,7 @@ class FormNewletterSubcribeProfileAccountUser extends PureComponent {
         })
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         //
     }

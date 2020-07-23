@@ -1,21 +1,20 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import NavNavigatePivateUser from "../NavNavigatePivateUser";
 
-
-class NavProfileAccountPrivate extends Component {
+class NavProfileAccountPrivate extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
             userData:{profile:[]},
         }
-
     }
 
     loadItems() {
         dyaxios.get(route('api_profile_account.site')).then(response => this.setState({userData: response.data,}));
     }
-    // lifecycle method
+
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
 
@@ -32,7 +31,7 @@ class NavProfileAccountPrivate extends Component {
                                     <div className="card card-plain">
                                         <div className="card-header" role="tab" id="headingOne">
                                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                <b>Configuration du profil</b>
+                                                <b>Mon Profil</b>
                                             </a>
                                         </div>
 
@@ -41,13 +40,13 @@ class NavProfileAccountPrivate extends Component {
                                                 <table>
                                                     <tbody>
                                                     <tr>
-                                                        <td> <Link to={`/profile/account/`}>Profil</Link></td>
+                                                        <td><Link to={`/profile/account/`}><i className="now-ui-icons users_single-02 ivemoIconForm"/> Mes Informations Personnelles</Link></td>
                                                     </tr>
                                                     <tr>
-                                                        <td> <Link to={`/profile/${userData.profile.slug}/account/`}>Ajouter des informations au profil</Link></td>
+                                                        <td> <Link to={`/profile/${userData.profile.slug}/account/`}><i className="now-ui-icons business_badge ivemoIconForm"/> Mes Coordonnées</Link></td>
                                                     </tr>
                                                     <tr>
-                                                        <td> <NavLink to={`/profile/change_password/`} >Changer le mot de passe</NavLink></td>
+                                                        <td> <NavLink to={`/profile/change_password/`} ><i className="now-ui-icons objects_key-25 ivemoIconForm"/> Changer mon Mot de Passe</NavLink></td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -59,10 +58,7 @@ class NavProfileAccountPrivate extends Component {
                         </div>
                     </div>
                 </div>
-
             </>
-
-
         )
     }
 }

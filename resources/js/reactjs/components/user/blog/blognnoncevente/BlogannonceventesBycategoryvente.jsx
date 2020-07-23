@@ -314,7 +314,7 @@ class BlogannonceventesBycategoryvente extends Component {
         dyaxios.get(route('api.blogannoncecategoryventescount_site', [itemCategoryannoncevente])).then(response => this.setState({ blogannonceventesData: response.data }));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }
