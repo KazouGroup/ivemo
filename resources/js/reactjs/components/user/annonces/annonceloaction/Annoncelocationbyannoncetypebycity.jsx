@@ -297,7 +297,7 @@ class Annoncelocationbyannoncetypebycity extends Component {
         dyaxios.get(route('api.annoncelocationsbyannoncetypebycitycount_site', [itemannoncetype, itemCity])).then(response => this.setState({ annoncelocationbycity: response.data }));
 
     }
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

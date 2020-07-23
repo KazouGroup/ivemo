@@ -16,7 +16,7 @@ class NavlinkmailmessagecontactonnoceventeUserShow extends Component {
         let itemuser = this.props.match.params.user;
         dyaxios.get(route('api_user_profile_account.site', [itemuser])).then(response => this.setState({ usersprofile: response.data, }));
     }
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
 

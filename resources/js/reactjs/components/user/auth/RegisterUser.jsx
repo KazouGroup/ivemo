@@ -102,7 +102,7 @@ class RegisterUser extends Component {
         })
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         const composantTitle = `Inscription - ${$name_site}`;
         document.title = `${composantTitle}`;

@@ -29,7 +29,7 @@ class NavPremiumUserBlogannonceReservation extends Component {
 
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

@@ -63,6 +63,14 @@ class LoginUser extends Component {
         dyaxios.post(route('login'), item)
             .then(() => {
                 this.props.history.push(`/`);
+                $.notify(`Bienvenue ${this.state.username} sur Ivemo.`, {
+                    allow_dismiss: false,
+                    type: 'success',
+                    animate: {
+                        enter: 'animate__animated animate__bounceInDown',
+                        exit: 'animate__animated animate__bounceOutUp'
+                    }
+                });
                 window.location.reload(true);
             }).catch(error => {
                 this.setState({
@@ -79,7 +87,7 @@ class LoginUser extends Component {
             })
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         const composantTitle = `Connexion - ${$name_site}`;
         document.title = `${composantTitle}`;

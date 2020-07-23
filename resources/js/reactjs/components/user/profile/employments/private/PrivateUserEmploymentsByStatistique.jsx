@@ -200,7 +200,7 @@ class PrivateUserEmploymentsByStatistique extends Component {
         dyaxios.get(route('api.userblogs_and_annonces',[itemuser])).then(response => this.setState({useremploymentsPrivate: response.data,}));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         setInterval(() => {
             this.loadItems();

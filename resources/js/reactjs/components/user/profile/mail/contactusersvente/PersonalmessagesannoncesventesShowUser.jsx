@@ -137,7 +137,7 @@ class PersonalmessagesannoncesventesShowUser extends Component {
     }
 
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         window.scrollTo(0, 0);
         this.loadItem();

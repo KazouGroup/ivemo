@@ -88,7 +88,7 @@ class FormContactProfileAccountUser extends PureComponent {
             })
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         //
     }

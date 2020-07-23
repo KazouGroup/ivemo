@@ -17,7 +17,7 @@ class IndexSite extends Component {
         }
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         //
     }

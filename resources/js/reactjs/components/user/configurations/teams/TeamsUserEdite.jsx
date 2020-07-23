@@ -147,7 +147,7 @@ class TeamsUserEdite extends Component {
             }));
         dyaxios.get(route('api_user_profile_data.site', [itemuser])).then(response => this.setState({ userProfile: response.data, }));
     }
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
 

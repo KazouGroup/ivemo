@@ -194,7 +194,7 @@ class BlogannoncereservationShow extends Component {
     }
 
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

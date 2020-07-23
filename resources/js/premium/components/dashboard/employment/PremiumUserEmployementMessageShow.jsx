@@ -124,7 +124,7 @@ class PremiumUserEmployementMessageShow extends Component {
             this.setState({contactuseremployment: response.data}));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

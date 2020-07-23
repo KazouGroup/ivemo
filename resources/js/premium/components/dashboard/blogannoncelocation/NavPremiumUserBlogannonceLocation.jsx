@@ -27,7 +27,7 @@ class NavPremiumUserBlogannonceLocation extends Component {
             this.setState({blogannoncelocationsunactive_count: response.data}));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

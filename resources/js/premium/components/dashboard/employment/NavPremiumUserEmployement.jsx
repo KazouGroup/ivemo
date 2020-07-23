@@ -27,7 +27,7 @@ class NavPremiumUserEmployement extends Component {
             this.setState({employmentsunactive_count: response.data}));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

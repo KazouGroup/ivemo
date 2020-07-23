@@ -15,7 +15,7 @@ class ConditionutilisationIndexSite extends Component {
         };
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         fetch(route('api.sites_conditionutilisations')).then(res => res.json()).then((result) => {
             this.setState({

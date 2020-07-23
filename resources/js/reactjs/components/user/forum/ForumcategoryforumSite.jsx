@@ -170,7 +170,7 @@ class ForumcategoryforumSite extends Component {
         dyaxios.get(route('api.forumscategorycount_site',[itemCategoryforum])).then(response => this.setState({ categoryforum: response.data, }));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

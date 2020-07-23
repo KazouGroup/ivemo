@@ -292,7 +292,7 @@ class AnnoncelocationIndex extends Component {
         dyaxios.get(url).then(response => this.setState({ annoncelocations: response.data, }));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

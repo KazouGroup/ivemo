@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import {Link, NavLink, withRouter} from 'react-router-dom';
+import { Button } from "reactstrap";
 
 class NavUserSite extends PureComponent {
     constructor(props) {
@@ -132,10 +133,12 @@ class NavUserSite extends PureComponent {
                                                 <i className="now-ui-icons users_single-02"/> Profile
                                             </a>
                                         }
-                                        <a style={{ cursor: "pointer" }} className="dropdown-item" onClick={() => this.navLogout()}>
+                                        {/*<a style={{ cursor: "pointer" }} className="dropdown-item" onClick={() => this.navLogout()}>
                                             <i className="now-ui-icons ui-1_simple-remove" /> Déconnexion
+                                        </a>*/}
+                                        <a style={{ cursor: "pointer" }} className="dropdown-item" data-toggle="modal" data-target="#logoutModal">
+                                            <i className="now-ui-icons media-1_button-power" /> Déconnexion
                                         </a>
-
                                     </div>
                                 </li>
 

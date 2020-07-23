@@ -15,7 +15,7 @@ import {loadItemshow} from "../../../../redux/actions/workwithuseActions";
 
 class WorkwithusShowUserSite extends Component {
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.props.loadItemshow(this.props);
     }

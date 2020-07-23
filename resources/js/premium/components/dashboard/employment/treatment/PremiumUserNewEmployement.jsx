@@ -168,7 +168,7 @@ class PremiumUserNewEmployement extends Component {
         })
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         let itemuser = this.props.match.params.user;
         dyaxios.get(route('api.employments_premium_count',[itemuser])).then(response =>

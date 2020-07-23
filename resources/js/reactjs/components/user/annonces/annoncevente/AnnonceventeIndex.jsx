@@ -255,7 +255,7 @@ class AnnonceventeIndex extends Component {
         let url = route('api.annonceventebyannoncetype_site', itemAnnoncevente);
         dyaxios.get(url).then(response => this.setState({ annonceventes: response.data }));
     }
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

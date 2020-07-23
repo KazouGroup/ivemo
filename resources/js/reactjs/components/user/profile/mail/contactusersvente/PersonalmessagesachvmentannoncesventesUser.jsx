@@ -136,7 +136,7 @@ class PersonalmessagesachvmentannoncesventesUser extends Component {
         dyaxios.get(route('api.personal_mails_archvement_annonces_ventes.site', [itemuser])).then(response => this.setState({ contactusersventes: response.data, }));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
 

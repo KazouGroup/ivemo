@@ -300,7 +300,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
         dyaxios.get(url).then(response => this.setState({annoncereservation: response.data,}));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

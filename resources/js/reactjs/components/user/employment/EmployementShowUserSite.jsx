@@ -447,7 +447,7 @@ class EmployementShowUserSite extends Component {
         dyaxios.get(url).then(response => this.setState({ employment: response.data, }));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

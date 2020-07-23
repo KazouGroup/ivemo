@@ -163,7 +163,7 @@ class PublicUserBlogannonceReservation extends Component {
         dyaxios.get(route('api.profilpublique', [itemuser])).then(response => this.setState({userblogreservationPublick: response.data,}));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

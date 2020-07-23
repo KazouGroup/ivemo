@@ -137,7 +137,7 @@ class AnnonceventeCreate extends Component {
     }
 
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         fetch(route('api.categoryannoncevente_site')).then(res => res.json()).then((result) => { this.setState({ categoryannonceventes: result }) })
         fetch(route('api.all_cities')).then(res => res.json()).then((result) => { this.setState({ cities: result }) })

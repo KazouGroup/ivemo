@@ -204,7 +204,7 @@ class PrivateUserEmployments extends Component {
         dyaxios.get(route('api.employmentsbyuser_site',[itemuser])).then(response => this.setState({useremploymentsPrivate: response.data,}));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

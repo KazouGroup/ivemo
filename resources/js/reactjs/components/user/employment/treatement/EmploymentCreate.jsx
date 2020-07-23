@@ -187,7 +187,7 @@ class EmploymentCreate extends Component {
                 });
             })
     }
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         fetch(route('api.categoryemployment_site')).then(res => res.json()).then((result) => { this.setState({ categoryemployments: result }) });
         fetch(route('api.all_cities')).then(res => res.json()).then((result) => { this.setState({ cities: result }) });

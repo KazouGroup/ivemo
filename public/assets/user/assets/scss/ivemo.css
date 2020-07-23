@@ -1,7 +1,27 @@
+.ivemoAvatar {
+    height: 80px;
+    width: 80px;
+    box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+}
+
+.ivemoIconForm {
+    border: 1px solid;
+    padding: 10px;
+    background: #f96332 !important;
+    color: white;
+    border-radius: 21px;
+}
+
 .card-plain .card-body table {
     width: 100%;
 }
 
 .card-plain .card-body table tbody tr td {
     padding: 5px 0;
+}
+
+.navbar .navbar-nav .nav-link:not(.btn) i.now-ui-icons,
+.btn:not(.btn-icon) .now-ui-icons, .navbar .navbar-nav>a.btn:not(.btn-icon) .now-ui-icons {
+    right: 5px;
 }

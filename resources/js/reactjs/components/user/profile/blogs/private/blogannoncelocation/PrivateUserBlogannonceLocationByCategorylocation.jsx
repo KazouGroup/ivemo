@@ -203,7 +203,7 @@ class PrivateUserBlogannonceLocationByCategorylocation extends Component {
         dyaxios.get(route('api.blogannonceslocationscategoryannoncelocationbyuser_site',[itemuser,itemCategoryannoncelocation])).then(response => this.setState({userblogannoncelocationsPrivate: response.data,}));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

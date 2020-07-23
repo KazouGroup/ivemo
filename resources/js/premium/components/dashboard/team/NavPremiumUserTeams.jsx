@@ -27,7 +27,7 @@ class NavPremiumUserTeams extends Component {
             this.setState({teamsunactive_count: response.data}));
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }

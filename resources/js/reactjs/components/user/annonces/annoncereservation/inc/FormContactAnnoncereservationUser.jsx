@@ -93,7 +93,7 @@ class FormContactAnnoncereservationUser extends Component {
         })
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         //
     }

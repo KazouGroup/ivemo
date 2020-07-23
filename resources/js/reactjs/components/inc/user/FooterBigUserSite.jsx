@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link,NavLink } from 'react-router-dom';
 import LoginModalUser from "../../user/auth/LoginModalUser";
-
+import LogoutModalUser from "../../user/auth/LogoutModalUser";
 
 
 const FooterBigUserSite = () =>  {
@@ -10,6 +10,7 @@ const FooterBigUserSite = () =>  {
         <>
 
             <LoginModalUser/>
+            <LogoutModalUser />
             <footer className="footer" data-background-color="black">
                 <div className="container">
                     <div className="content">

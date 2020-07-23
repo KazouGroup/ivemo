@@ -29,7 +29,7 @@ class PersonalannoncereservationsUser extends Component {
         })
     }
 
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItem();
 

@@ -288,7 +288,7 @@ class AnnonceventeEdit extends Component {
                 categoryannoncevente_id: response.data.categoryannoncevente_id,
             }));
     }
-    // lifecycle method
+   // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
         fetch(route('api.categoryannoncevente_site')).then(res => res.json()).then((result) => { this.setState({ categoryannonceventes: result }) })
