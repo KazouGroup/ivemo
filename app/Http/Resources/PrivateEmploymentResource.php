@@ -36,6 +36,8 @@ class PrivateEmploymentResource extends JsonResource
             'status_link_contact' => $this->status_link_contact,
             'contactservices' => $this->contactservices,
             'contactservices_count' => $this->contactservices_count,
+            'likeked' => $this->likeked(),
+            'countlikes' => $this->likes()->count(),
             'bookmarked' => $this->bookmarked(),
             'iscontactservice' => $this->iscontactservice(),
             'visits_count' => $this->visits()->count(),

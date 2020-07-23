@@ -124,4 +124,18 @@ class employment extends Model
             'contactserviceable_id' => $this->id ])
             ->first();
     }
+
+
+    public function likes()
+    {
+        return $this->morphMany(like::class ,'likeable');
+    }
+
+    public function likeked()
+    {
+        return (bool) like::where('user_id', Auth::guard('web')->id())
+            ->where(['likeable_type' => 'App\Model\employment',
+                'likeable_id' => $this->id ])
+            ->first();
+    }
 }

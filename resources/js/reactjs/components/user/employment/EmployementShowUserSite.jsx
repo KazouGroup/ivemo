@@ -36,6 +36,8 @@ class EmployementShowUserSite extends Component {
         this.renderErrorFor = this.renderErrorFor.bind(this);
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.likeItem = this.likeItem.bind(this);
+        this.unlikeItem = this.unlikeItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
         this.phoneShow = this.phoneShow.bind(this);
         this.statusItem = this.statusItem.bind(this);
@@ -72,7 +74,7 @@ class EmployementShowUserSite extends Component {
         //    employmentItem: item
         //});
     }
-    
+
     sendmessageItem(e) {
         e.preventDefault();
 
@@ -124,6 +126,44 @@ class EmployementShowUserSite extends Component {
             });
             $.notify("Ooop! Quelque chose ne va pas. Essayez plus tard ...", {
                 allow_dismiss: false,
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    likeItem(employment) {
+        //console.log(item)
+        const url = route('employments_likes.active', [employment.id]);
+        dyaxios.get(url).then(() => {
+
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooops! Something wrong. Try later", {
+                type: 'danger',
+                animate: {
+                    enter: 'animate__animated animate__bounceInDown',
+                    exit: 'animate__animated animate__bounceOutUp'
+                }
+            });
+        })
+    }
+
+    unlikeItem(employment) {
+        //console.log(item)
+        const url = route('employments_likes.unactive', [employment.id]);
+        dyaxios.get(url).then(() => {
+
+            this.loadItems();
+
+        }).catch(() => {
+            //Failled message
+            $.notify("Ooops! Something wrong. Try later", {
                 type: 'danger',
                 animate: {
                     enter: 'animate__animated animate__bounceInDown',
@@ -219,7 +259,7 @@ class EmployementShowUserSite extends Component {
         })
 
     }
-    
+
 
     statuscommentItem(employment){
         Swal.fire({
@@ -504,6 +544,24 @@ class EmployementShowUserSite extends Component {
                                                                 </Button>
                                                                 :
                                                                 <>
+
+                                                                    {employment.likeked ?
+                                                                        <>
+                                                                            <Button onClick={() => this.unlikeItem(employment)}
+                                                                                    className="btn btn-info btn-sm" title="Je n'aime plus">
+                                                                                <i className="fas fa-heart"></i> <b>J'aime</b>
+                                                                            </Button>
+                                                                        </>
+
+                                                                        :
+                                                                        <>
+                                                                            <Button onClick={() => this.likeItem(employment)}
+                                                                                    className="btn btn-facebook btn-sm btn-neutral" title="J'aime">
+                                                                                <i className="far fa-heart"></i> <b>J'aime</b>
+                                                                            </Button>
+                                                                        </>
+                                                                    }
+
                                                                     {employment.bookmarked ?
 
                                                                         <>

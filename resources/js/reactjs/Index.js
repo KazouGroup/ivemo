@@ -1,16 +1,17 @@
-
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Route} from 'react-router-dom';
 import RouteUser from "./router/RouteUser";
 import "../vuejs/axios"
 import 'animate.css/animate.css';
-import {createStore} from "redux";
-import {Provider} from "react-redux";
-import rootReducer from "./reducers/rootReducer";
 import ScrollToTop from "./components/inc/user/ScrollToTop";
 
-const store = createStore(rootReducer);
+{/*Redux import*/}
+import {Provider} from "react-redux";
+import store from "./redux/store";
+{/*On n'oublie pas d'importer les provider qui entoure ici toute notre application*/}
+
+{/*End*/}
 
 
 class Index extends Component {

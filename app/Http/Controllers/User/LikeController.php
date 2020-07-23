@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Model\comment;
+use App\Model\employment;
 use App\Model\forum;
 use App\Model\responsecomment;
 use Illuminate\Http\Request;
@@ -58,6 +59,25 @@ class LikeController extends Controller
     public function unlikeforum(Request $request,forum $forum)
     {
         auth()->user()->removelikes()->detach($forum->id);
+
+        return response('Unlike',Response::HTTP_ACCEPTED);
+    }
+
+    /**
+     * @param Request $request
+     * @param employment $employment
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function likemployment(Request $request,employment $employment)
+    {
+        $employment->likes()->create($request->all());
+
+        return response('Like',Response::HTTP_ACCEPTED);
+    }
+
+    public function unlikemployment(Request $request,employment $employment)
+    {
+        auth()->user()->removelikes()->detach($employment->id);
 
         return response('Unlike',Response::HTTP_ACCEPTED);
     }

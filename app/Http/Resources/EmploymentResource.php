@@ -36,6 +36,8 @@ class EmploymentResource extends JsonResource
             'status_link_contact' => $this->status_link_contact,
             'bookmarked' => $this->bookmarked(),
             'iscontactservice' => $this->iscontactservice(),
+            'likeked' => $this->likeked(),
+            'countlikes' => $this->likes()->count(),
             'countsignals' => $this->signals()->count(),
             'visits_count' => $this->visits()->count(),
             'visits_countries' => $this->visits()->countries(),

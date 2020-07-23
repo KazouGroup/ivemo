@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import {Button, FormText} from "reactstrap";
+import PropTypes from "prop-types";
+import {connect} from 'react-redux';
 import NavUserSite from "../../../inc/user/NavUserSite";
 import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
@@ -8,30 +10,21 @@ import FooterUserSite from "../../../inc/user/FooterUserSite";
 import ContactFromWorkwithusIndex from "../inc/ContactFromWorkwithusIndex";
 import moment from "moment";
 import HelmetSite from "../../../inc/user/HelmetSite";
+import {loadItemshow} from "../../../../redux/actions/workwithuseActions";
 
 
 class WorkwithusShowUserSite extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            workwithuse: {categoryworkwithus:[],city:[]},
-        };
-    }
-
 
     // lifecycle method
     componentDidMount() {
-        let itemWorkwithus = this.props.match.params.workwithus;
-        let itemCategoryworkwithus = this.props.match.params.categoryworkwithus;
-        let url = route('api.work_with_us_show_site',[itemCategoryworkwithus,itemWorkwithus]);
-        dyaxios.get(url).then(response => this.setState({ workwithuse: response.data, }));
+        this.props.loadItemshow(this.props);
     }
 
     getDescription(workwithuse) {
         return { __html: workwithuse.description};
     }
     render() {
-        const {workwithuse} = this.state;
+        const {workwithuse} = this.props;
         return (
             <>
                 <HelmetSite title={`${workwithuse.title || $name_site} - ${$name_site}`}/>
@@ -161,4 +154,10 @@ class WorkwithusShowUserSite extends Component {
     }
 }
 
-export default WorkwithusShowUserSite;
+const mapStateToProps = state => ({
+    
+    workwithuse: state.workwithuses.item
+
+});
+
+export default connect(mapStateToProps, {loadItemshow})(WorkwithusShowUserSite);
