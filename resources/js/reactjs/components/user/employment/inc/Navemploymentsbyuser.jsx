@@ -1,21 +1,17 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
+import {connect} from "react-redux";
+import {loadCategoryemploymentsbyuser} from "../../../../redux/actions/employment/employmentActions";
 
 
 
-class Navemploymentsbyuser extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            categoryemployments: {user:[]},
-        }
-    }
+class Navemploymentsbyuser extends PureComponent {
+
 
     componentDidMount() {
-        let url = route('api.categoryemployments_by_user_site');
-        dyaxios.get(url).then(response => this.setState({ categoryemployments: response.data, }));
+        this.props.loadCategoryemploymentsbyuser();
     }
 
     getcountcategoryannonceString(employments_count) {
@@ -30,8 +26,8 @@ class Navemploymentsbyuser extends Component {
     }
 
     render() {
-        const { categoryemployments } = this.state;
-        const mapCategoryemployments = categoryemployments.length >= 0 ? (
+        const { categoryemployments } = this.props;
+        const mapCategoryemployments = categoryemployments.length ? (
             categoryemployments.map(item => {
                 return (
                     <tr key={item.id}>
@@ -73,4 +69,15 @@ class Navemploymentsbyuser extends Component {
     }
 
 }
-export default withRouter(Navemploymentsbyuser);
+
+
+Navemploymentsbyuser.propTypes = {
+    loadCategoryemploymentsbyuser: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+    categoryemployments: state.employments.catgoryitems
+
+});
+
+export default connect(mapStateToProps, {loadCategoryemploymentsbyuser})(withRouter(Navemploymentsbyuser));

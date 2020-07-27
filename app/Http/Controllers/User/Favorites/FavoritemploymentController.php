@@ -50,12 +50,4 @@ class FavoritemploymentController extends Controller
         return response()->json($favoritemployments, 200);
     }
 
-    public function favorite(Request $request,$id)
-    {
-        $employment = employment::whereId($id)->firstOrFail();
-
-        $response = auth()->user()->bookmarksfavoritemployments()->toggle($employment->id);
-
-        return response()->json(['success'=>$response]);
-	}
 }

@@ -110,12 +110,6 @@ class employment extends Model
         return $this->morphMany(contactservice::class ,'contactserviceable');
     }
 
-    public function bookmarked()
-    {
-        return (bool) favoritemployment::where('user_id', Auth::id())
-            ->where('employment_id', $this->id)
-            ->first();
-    }
 
     public function iscontactservice()
     {
@@ -136,6 +130,19 @@ class employment extends Model
         return (bool) like::where('user_id', Auth::guard('web')->id())
             ->where(['likeable_type' => 'App\Model\employment',
                 'likeable_id' => $this->id ])
+            ->first();
+    }
+
+    public function favorites()
+    {
+        return $this->morphMany(favorite::class ,'favoriteable');
+    }
+
+    public function favoriteted()
+    {
+        return (bool) favorite::where('user_id', Auth::guard('web')->id())
+            ->where(['favoriteable_type' => 'App\Model\employment',
+                'favoriteable_id' => $this->id ])
             ->first();
     }
 }

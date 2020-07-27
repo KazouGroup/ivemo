@@ -11,6 +11,14 @@ import ForumShowSkeleton from "../../inc/user/forum/ForumShowSkeleton";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import Navlinknewforum from "./treatement/Navlinknewforum";
 import SignalFromForumForShow from "./inc/SignalFromForumForShow";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {
+    favoriteItem,
+    likeItem,
+    loadforumshow,
+     unfavoriteItem, unlikeItem
+} from "../../../redux/actions/forum/forumshowActions";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -18,17 +26,13 @@ class ForumShow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            forum:{user:[],categoryforum:[]}
+           //
         };
 
-        this.likeItem = this.likeItem.bind(this);
-        this.unlikeItem = this.unlikeItem.bind(this);
-        this.favoriteItem = this.favoriteItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
         this.handleCheckClick = this.handleCheckClick.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
-        this.unfavoriteItem = this.unfavoriteItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
     }
 
@@ -62,82 +66,6 @@ class ForumShow extends Component {
                 </span>
             )
         }
-    }
-
-    likeItem(forum) {
-        //console.log(item)
-        const url = route('forums_likes.active', [forum.id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooops! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    unlikeItem(forum) {
-        //console.log(item)
-        const url = route('forums_likes.unactive', [forum.id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooops! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    favoriteItem(forum) {
-        //console.log(item)
-        const url = route('forums_favorites.active', [forum.id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooops! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    unfavoriteItem(forum) {
-        //console.log(item)
-        const url = route('forums_favorites.unactive', [forum.id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooops! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
     }
 
     deleteItem(forum) {
@@ -195,10 +123,7 @@ class ForumShow extends Component {
 
 
     loadItems() {
-        let itemCategoryforum = this.props.match.params.categoryforum;
-        let itemForum = this.props.match.params.forum;
-        let url = route('api.forumscategoryslugin_site', [itemCategoryforum, itemForum]);
-        dyaxios.get(url).then(response => this.setState({ forum: response.data, }));
+        this.props.loadforumshow(this.props)
     }
 
    // Lifecycle Component Method
@@ -223,7 +148,7 @@ class ForumShow extends Component {
     }
 
     render() {
-        const {forum} = this.state;
+        const {forum} = this.props;
         return (
             <>
                 <HelmetSite title={`${forum.title || $name_site} - ${$name_site}`}/>
@@ -321,15 +246,15 @@ class ForumShow extends Component {
 
                                                                     {forum.likeked ?
                                                                         <>
-                                                                            <Button onClick={() => this.unlikeItem(forum)}
-                                                                                    className="btn btn-info btn-icon btn-sm btn-neutral" title={`${forum.countlikes} ${forum.countlikes > 1 ? "Likes" : "Like"}`}>
+                                                                            <Button onClick={() => this.props.unlikeItem(forum)}
+                                                                                    className="btn btn-danger btn-icon btn-sm btn-neutral" title={`${forum.countlikes} ${forum.countlikes > 1 ? "Likes" : "Like"}`}>
                                                                                 <i className="fas fa-heart"></i>
                                                                             </Button> {this.data_countlikeFormatter(forum.countlikes)}
                                                                         </>
 
                                                                         :
                                                                         <>
-                                                                            <Button onClick={() => this.likeItem(forum)}
+                                                                            <Button onClick={() => this.props.likeItem(forum)}
                                                                                     className="btn btn-default btn-icon btn-sm btn-neutral" title={`${forum.countlikes} ${forum.countlikes > 1 ? "Likes" : "Like"}`}>
                                                                                 <i className="far fa-heart"></i>
                                                                             </Button> {this.data_countlikeFormatter(forum.countlikes)}
@@ -338,15 +263,15 @@ class ForumShow extends Component {
 
                                                                     {forum.favoriteted ?
                                                                         <>
-                                                                            <Button onClick={() => this.unfavoriteItem(forum)}
-                                                                                    className="btn btn-info btn-icon btn-sm btn-neutral" title="Sauvegarder">
+                                                                            <Button onClick={() => this.props.unfavoriteItem(forum)}
+                                                                                    className="btn btn-danger btn-icon btn-sm btn-neutral" title="Sauvegarder">
                                                                                 <i className="fas fa-bookmark"></i>
                                                                             </Button>
                                                                         </>
 
                                                                         :
                                                                         <>
-                                                                            <Button onClick={() => this.favoriteItem(forum)}
+                                                                            <Button onClick={() => this.props.favoriteItem(forum)}
                                                                                     className="btn btn-default btn-icon btn-sm btn-neutral" title="Sauvegarder">
                                                                                 <i className="far fa-bookmark"></i>
                                                                             </Button>
@@ -367,7 +292,7 @@ class ForumShow extends Component {
                                                                     <Button data-toggle="modal" data-target="#loginModal"
                                                                             className="btn btn-default btn-icon btn-sm btn-neutral"
                                                                             title="Signaler ce post ">
-                                                                        <i className="far fa-flag"></i> 
+                                                                        <i className="far fa-flag"></i>
                                                                     </Button>
                                                                 </>
                                                                 :
@@ -462,4 +387,19 @@ class ForumShow extends Component {
     }
 }
 
-export default ForumShow;
+
+ForumShow.propTypes = {
+    loadforumshow: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+    forum: state.forumshow.item
+});
+
+export default connect(mapStateToProps, {
+    loadforumshow,
+    likeItem,unlikeItem,
+    favoriteItem,unfavoriteItem,
+})(ForumShow);
+
+

@@ -26,13 +26,22 @@ class ContactserviceController extends Controller
         return response('Success',Response::HTTP_ACCEPTED);
     }
 
-    public function statusfavorite(contactservice $contactservice)
+    public function favorite(contactservice $contactservice)
     {
         $this->authorize('update',$contactservice);
 
-        $contactservice->update(['status_favorite' => !$contactservice->status_favorite,]);
+        $contactservice->update(['status_favorite' => 1]);
 
-        return response('Success',Response::HTTP_ACCEPTED);
+        return response('Favorite',Response::HTTP_ACCEPTED);
+    }
+
+    public function unfavorite(contactservice $contactservice)
+    {
+        $this->authorize('update',$contactservice);
+
+        $contactservice->update(['status_favorite' => 0,]);
+
+        return response('Unfavorite',Response::HTTP_ACCEPTED);
     }
 
     public function statuscontacts(contactservice $contactservice)

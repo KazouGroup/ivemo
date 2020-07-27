@@ -68,7 +68,7 @@ Route::group(['prefix' => 'api'], function () {
         'EmploymentController@apicategoryemployments_by_user'
     )->name('api.categoryemployments_by_user_site');
 
-   
+
 });
 
 Route::get(
@@ -132,22 +132,27 @@ Route::group(['middleware' => 'verified'], function(){
         )->name('employmentsupdate_site');
 
         Route::get(
-            'employments_status_comments/{id}',
-            'EmploymentController@statuscomments'
-        )->name('employments_status_comments_site');
+            'employments_active_comments/{employment:id}/active',
+            'EmploymentController@activecomments'
+        )->name('employments_active_comments_site');
 
         Route::get(
-            'employments_activated/{employment}',
+            'employments_active_comments/{employment:id}/desactive',
+            'EmploymentController@desactivecomments'
+        )->name('employments_desactive_comments_site');
+
+        Route::get(
+            'employments_activated/{employment:id}/activated',
             'EmploymentController@activated'
         )->name('employmentsactivated_site');
 
         Route::get(
-            'employments_unactivated/{employment}',
+            'employments_unactivated/{employment:id}/unactivated',
             'EmploymentController@unactivated'
         )->name('employmentsunactivated_site');
 
         Route::delete(
-            'employments_delete/{id}',
+            'employments_delete/{id}/destroy',
             'EmploymentController@destroy'
         )->name('employmentsdelete_site');
 

@@ -1,30 +1,15 @@
-import React, { Component,Fragment } from "react";
+import React, { PureComponent,Fragment } from "react";
 import {NavLink, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
 import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
+import {connect} from "react-redux";
+import {loadCategoryemployments} from "../../../../redux/actions/employment/employmentActions";
 
 
-class Navemployements extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            categoryemployments : {user:[]},
-        }
-    }
-
-    loadItems(){
-        let url = route('api.categoryemployment_site');
-        fetch(url).then(res => res.json()).then((result) => {this.setState({
-                categoryemployments: [...result]
-            });
-        });
-    }
+class Navemployements extends PureComponent {
 
     componentDidMount() {
-        this.loadItems();
-        //setInterval(() => {
-        //    this.loadItems();
-        //}, 10000);
+        this.props.loadCategoryemployments();
     }
 
     getcountcategoryannonceString (employments_count) {
@@ -39,7 +24,7 @@ class Navemployements extends Component {
     }
 
     render() {
-        const {categoryemployments} = this.state;
+        const {categoryemployments} = this.props;
         return (
 
 
@@ -55,7 +40,7 @@ class Navemployements extends Component {
                         <table>
                             <tbody>
 
-                            {categoryemployments.length >= 0 ?
+                            {categoryemployments.length ?
 
                                     <Fragment>
                                         {categoryemployments.map((item) => (
@@ -85,4 +70,14 @@ class Navemployements extends Component {
     }
 
 }
-export default Navemployements;
+
+Navemployements.propTypes = {
+    loadCategoryemployments: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+    categoryemployments: state.employments.catgoryitems
+
+});
+export default connect(mapStateToProps, {loadCategoryemployments})(Navemployements);
+

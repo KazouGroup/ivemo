@@ -34,7 +34,7 @@ class EmploymentResource extends JsonResource
             'status_comments' => $this->status_comments,
             'status_admin' => $this->status_admin,
             'status_link_contact' => $this->status_link_contact,
-            'bookmarked' => $this->bookmarked(),
+            'favoriteted' => $this->favoriteted(),
             'iscontactservice' => $this->iscontactservice(),
             'likeked' => $this->likeked(),
             'countlikes' => $this->likes()->count(),

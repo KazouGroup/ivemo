@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Model\comment;
+use App\Model\employment;
 use App\Model\forum;
 use App\Model\responsecomment;
 use Illuminate\Http\Request;
@@ -38,6 +39,31 @@ class FavoriteController extends Controller
         auth()->user()->removefavorites()->detach($forum->id);
 
         return response('Unlike',Response::HTTP_ACCEPTED);
+    }
+
+    /**
+     * @param Request $request
+     * @param employment $employment
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function favoritemployment(Request $request,employment $employment)
+    {
+        dd($employment);
+        $employment = employment::whereId($employment)->firstOrFail();
+
+        $employment->favorites()->create($request->all());
+
+        return response('Favorite',Response::HTTP_ACCEPTED);
+    }
+
+    public function unfavoritemployment(Request $request,employment $employment)
+    {
+        dd($employment);
+        $employment = employment::whereId($employment)->firstOrFail();
+
+        auth()->user()->removefavorites()->detach($employment);
+
+        return response('Favorite move',Response::HTTP_ACCEPTED);
     }
 
 }

@@ -8,6 +8,9 @@ import rootReducer from './reducers';
 Ici on initilise le store et
 le state pour l'utiliser plus tard */
 }
+
+
+//console.log(history);
 const initialState = {};
 
 const middleware = [thunk];

@@ -15,7 +15,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class forum extends Model
 {
 
-    use Purify, LogsActivity,Favoritesdata;
+    use Purify, LogsActivity;
 
     protected $guarded = [];
 
@@ -99,8 +99,22 @@ class forum extends Model
     public function likeked()
     {
         return (bool) like::where('user_id', Auth::guard('web')->id())
-            ->where(['likeable_type' => 'App\Model\forum', 
+            ->where(['likeable_type' => 'App\Model\forum',
             'likeable_id' => $this->id ])
             ->first();
     }
+
+    public function favorites()
+    {
+        return $this->morphMany(favorite::class ,'favoriteable');
+    }
+
+    public function favoriteted()
+    {
+        return (bool) favorite::where('user_id', Auth::guard('web')->id())
+            ->where(['favoriteable_type' => 'App\Model\forum',
+                'favoriteable_id' => $this->id ])
+            ->first();
+    }
+
 }

@@ -23,7 +23,6 @@ export const loadItemsbycategories = (props) => dispatch => {
 
 export const loadItemshow = (props) => dispatch => {
 
-    console.log(props.match.params.workwithus);
     let itemWorkwithus = props.match.params.workwithus;
     let itemCategoryworkwithus = props.match.params.categoryworkwithus;
     let url = route('api.work_with_us_show_site',[itemCategoryworkwithus,itemWorkwithus]);

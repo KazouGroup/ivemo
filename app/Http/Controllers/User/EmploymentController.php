@@ -28,7 +28,7 @@ class EmploymentController extends Controller
         $this->middleware('auth',['only' => [
             'create','store','edit','update','destroy','activated','unactivated',
             'apiemploymentsbyuser','employmentsbyuser','apiemploymentsbyusercategoryemployment',
-            'employmentsbyusercategoryemployment','apistatistique','statistique'
+            'employmentsbyusercategoryemployment','apistatistique','statistique','activecomments','desactivecomments'
         ]]);
     }
     /**
@@ -337,13 +337,24 @@ class EmploymentController extends Controller
         return response()->json($employment,200);
     }
 
-    public function statuscomments($id)
+    public function activecomments($employment)
     {
-        $employment = employment::where('id', $id)->findOrFail($id);
+        $employment = employment::where('id', $employment)->findOrFail($employment);
 
         $this->authorize('update',$employment);
 
-        $employment->update(['status_comments' => !$employment->status_comments,]);
+        $employment->update(['status_comments' => 1,]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+    }
+
+    public function desactivecomments($employment)
+    {
+        $employment = employment::where('id', $employment)->findOrFail($employment);
+
+        $this->authorize('update',$employment);
+
+        $employment->update(['status_comments' => 0,]);
 
         return response('Confirmed',Response::HTTP_ACCEPTED);
     }

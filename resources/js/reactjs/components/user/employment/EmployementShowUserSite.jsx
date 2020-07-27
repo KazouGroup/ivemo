@@ -14,6 +14,15 @@ import HelmetSite from "../../inc/user/HelmetSite";
 import EmployementcommentIndex from "../comments/EmployementcommentIndex";
 import ProfileForallEmploymentShow from "./inc/ProfileForallEmploymentShow";
 import FieldInput from "../../inc/vendor/FieldInput";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {
+    loademploymentshowusersite,
+    statuscommentremoveItem,
+    statuscommentaddItem,
+    likeItem,unlikeItem,
+    favoriteItem,unfavoriteItem,
+} from "../../../redux/actions/employment/employmentshowActions";
 
 
 class EmployementShowUserSite extends Component {
@@ -26,7 +35,6 @@ class EmployementShowUserSite extends Component {
             phone: '',
             message: '',
             errors: [],
-            employment:{categoryemployment:[],user:{profile:[]},city:[]},
             employmentItem:[],
         };
 
@@ -36,13 +44,9 @@ class EmployementShowUserSite extends Component {
         this.renderErrorFor = this.renderErrorFor.bind(this);
 
         this.deleteItem = this.deleteItem.bind(this);
-        this.likeItem = this.likeItem.bind(this);
-        this.unlikeItem = this.unlikeItem.bind(this);
-        this.favoriteItem = this.favoriteItem.bind(this);
         this.phoneShow = this.phoneShow.bind(this);
         this.statusItem = this.statusItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
-        this.statuscommentItem = this.statuscommentItem.bind(this);
     }
 
 
@@ -135,95 +139,6 @@ class EmployementShowUserSite extends Component {
         })
     }
 
-    likeItem(employment) {
-        //console.log(item)
-        const url = route('employments_likes.active', [employment.id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooops! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    unlikeItem(employment) {
-        //console.log(item)
-        const url = route('employments_likes.unactive', [employment.id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooops! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    favoriteItem(employment) {
-        const url = route('employments_favorite.favorite', [employment.id]);
-        dyaxios.get(url).then(() => {
-
-            if(employment.bookmarked){
-                $.notify({
-                        message: "Annonce retirée de vos favoris",
-                    },
-                    {
-                        allow_dismiss: false,
-                        type: 'info',
-                        placement: {
-                            from: 'bottom',
-                            align: 'center'
-                        },
-                        animate: {
-                            enter: "animate__animated animate__fadeInUp",
-                            exit: "animate__animated animate__fadeOutDown"
-                        },
-                    });
-            }else {
-                $.notify({
-                        message: "Annonce ajoutée à vos favoris",
-                    },
-                    {
-                        allow_dismiss: false,
-                        type: 'info',
-                        placement: {
-                            from: 'bottom',
-                            align: 'center'
-                        },
-                        animate: {
-                            enter: "animate__animated animate__fadeInUp",
-                            exit: "animate__animated animate__fadeOutDown"
-                        },
-                    });
-            }
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
     copyToClipboard(){
         navigator.clipboard.writeText(window.location.toString());
         //Swal.fire({
@@ -261,77 +176,6 @@ class EmployementShowUserSite extends Component {
     }
 
 
-    statuscommentItem(employment){
-        Swal.fire({
-            text: "êtes vous sure de vouloir changer le status des commentaires de cette annonce?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                //Envoyer la requet au server
-                let url = route('employments_status_comments_site',employment.id);
-                dyaxios.get(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    if(employment.status_comments){
-                        $.notify({
-
-                                message: "Commentaire desactivé sur cette annonce",
-                            },
-                            {
-                                allow_dismiss: false,
-                                type: 'info',
-                                placement: {
-                                    from: 'bottom',
-                                    align: 'center'
-                                },
-                                animate: {
-                                    enter: "animate__animated animate__fadeInUp",
-                                    exit: "animate__animated animate__fadeOutDown"
-                                },
-                            });
-                    }else {
-                        $.notify({
-
-                                message: "Commentaire activés sur cette annonce",
-                            },
-                            {
-                                allow_dismiss: false,
-                                type: 'info',
-                                placement: {
-                                    from: 'bottom',
-                                    align: 'center'
-                                },
-                                animate: {
-                                    enter: "animate__animated animate__fadeInUp",
-                                    exit: "animate__animated animate__fadeOutDown"
-                                },
-                            });
-                    }
-
-                    /** End alert ***/
-                    this.loadItems();
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        })
-
-    }
 
     statusItem(id){
         Swal.fire({
@@ -440,11 +284,7 @@ class EmployementShowUserSite extends Component {
     }
 
     loadItems(){
-        let itemCategoryemployment = this.props.match.params.categoryemployment;
-        let itemCity = this.props.match.params.city;
-        let itemEmployment = this.props.match.params.employment;
-        let url = route('api.employmentsbycategorybycityslug_site',[itemCategoryemployment,itemCity,itemEmployment]);
-        dyaxios.get(url).then(response => this.setState({ employment: response.data, }));
+        this.props.loademploymentshowusersite(this.props)
     }
 
    // Lifecycle Component Method
@@ -463,7 +303,7 @@ class EmployementShowUserSite extends Component {
         return (visits_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
     render() {
-        const {employment} = this.state;
+        const {employment} = this.props;
         return (
             <>
                 <HelmetSite title={`${employment.title || $name_site} - ${$name_site}`}/>
@@ -538,16 +378,22 @@ class EmployementShowUserSite extends Component {
                                                             : null}
                                                         <div className="text-center">
                                                             {$guest ?
-                                                                <Button data-toggle="modal" data-target="#loginModal"
-                                                                        className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
-                                                                    <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
-                                                                </Button>
+                                                                <>
+                                                                    <Button data-toggle="modal" data-target="#loginModal"
+                                                                            className="btn btn-facebook btn-sm btn-neutral" title="J'aime">
+                                                                        <i className="far fa-heart"></i> <b>J'aime</b>
+                                                                    </Button>
+                                                                    <Button data-toggle="modal" data-target="#loginModal"
+                                                                            className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
+                                                                        <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
+                                                                    </Button>
+                                                                </>
                                                                 :
                                                                 <>
 
                                                                     {employment.likeked ?
                                                                         <>
-                                                                            <Button onClick={() => this.unlikeItem(employment)}
+                                                                            <Button onClick={() => this.props.unlikeItem(employment)}
                                                                                     className="btn btn-info btn-sm" title="Je n'aime plus">
                                                                                 <i className="fas fa-heart"></i> <b>J'aime</b>
                                                                             </Button>
@@ -555,17 +401,17 @@ class EmployementShowUserSite extends Component {
 
                                                                         :
                                                                         <>
-                                                                            <Button onClick={() => this.likeItem(employment)}
+                                                                            <Button onClick={() => this.props.likeItem(employment)}
                                                                                     className="btn btn-facebook btn-sm btn-neutral" title="J'aime">
                                                                                 <i className="far fa-heart"></i> <b>J'aime</b>
                                                                             </Button>
                                                                         </>
                                                                     }
 
-                                                                    {employment.bookmarked ?
+                                                                    {employment.favoriteted ?
 
                                                                         <>
-                                                                            <Button onClick={() => this.favoriteItem(employment)}
+                                                                            <Button onClick={() => this.props.unfavoriteItem(employment)}
                                                                                     className="btn btn-danger btn-sm" title="Retirer de vos favoris">
                                                                                 <i className="fas fa-bookmark"></i> <b>Sauvegardé</b>
                                                                             </Button>
@@ -573,7 +419,7 @@ class EmployementShowUserSite extends Component {
 
                                                                         :
                                                                         <>
-                                                                            <Button onClick={() => this.favoriteItem(employment)}
+                                                                            <Button onClick={() => this.props.favoriteItem(employment)}
                                                                                     className="btn btn-facebook btn-sm btn-neutral" title="Ajouter à vos favoris">
                                                                                 <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
                                                                             </Button>
@@ -592,7 +438,10 @@ class EmployementShowUserSite extends Component {
                                         <div className="card">
                                             <div className="card-body">
 
-                                                <ProfileForallEmploymentShow {...employment} favoriteItem={this.favoriteItem} statuscommentItem={this.statuscommentItem}
+                                                <ProfileForallEmploymentShow {...employment} favoriteItem={this.props.favoriteItem}
+                                                                             unfavoriteItem={this.props.unfavoriteItem}
+                                                                             statuscommentremoveItem={this.props.statuscommentremoveItem}
+                                                                             statuscommentaddItem={this.props.statuscommentaddItem}
                                                                              statusItem={this.statusItem} deleteItem={this.deleteItem}
                                                                              signalerUser={this.signalerUser} copyToClipboard={this.copyToClipboard}/>
 
@@ -866,4 +715,18 @@ class EmployementShowUserSite extends Component {
     }
 }
 
-export default EmployementShowUserSite;
+EmployementShowUserSite.propTypes = {
+    loademploymentshowusersite: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+    employment: state.employmentshow.item
+});
+
+export default connect(mapStateToProps, {
+    loademploymentshowusersite,
+    statuscommentremoveItem,
+    statuscommentaddItem,
+    likeItem,unlikeItem,
+    favoriteItem,unfavoriteItem,
+})(EmployementShowUserSite);

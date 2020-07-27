@@ -159,7 +159,9 @@ class EmploymentService
     {
         $employments = EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
             ->where(['status' => 1,'status_admin' => 1])
-            ->with(['user' => function ($q){$q->select('id','avatar','first_name','slug');},])
+            ->with(['user' => function ($q){$q
+                ->with(['profile' => function ($q){$q->distinct()->get();},])
+                ->select('id','phone','avatar','first_name','slug');},])
             ->whereIn('categoryemployment_id',[$categoryemployment->id])
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})

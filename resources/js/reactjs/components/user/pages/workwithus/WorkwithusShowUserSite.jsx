@@ -154,8 +154,12 @@ class WorkwithusShowUserSite extends Component {
     }
 }
 
+WorkwithusShowUserSite.propTypes = {
+    loadItemshow: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = state => ({
-    
+
     workwithuse: state.workwithuses.item
 
 });

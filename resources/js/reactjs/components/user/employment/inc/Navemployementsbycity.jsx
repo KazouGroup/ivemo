@@ -1,10 +1,10 @@
-import React, { Component,Fragment } from "react";
+import React, { PureComponent,Fragment } from "react";
 import {NavLink, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
 import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
 
 
-class Navemployementsbycity extends Component {
+class Navemployementsbycity extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {

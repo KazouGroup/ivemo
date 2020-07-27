@@ -11,3 +11,12 @@ Route::get(
     'FavoriteController@unfavoriteforum'
 )->name('forums_favorites.unactive');
 
+Route::post(
+    '/employments_favorite/{employment:id}/favorite',
+    'FavoriteController@favoritemployment'
+)->name('employments_favorites.favorite');
+
+Route::post(
+    'employments_unfavorites/{employment:id}/unfavorites',
+    'FavoriteController@unfavoritemployment'
+)->name('employments_favorites.unactive');

@@ -20,12 +20,12 @@ Route::get(
     'LikeController@unlikeforum'
 )->name('forums_likes.unactive');
 
-Route::get(
+Route::post(
     'employments_likes/{employment:id}/like',
     'LikeController@likemployment'
 )->name('employments_likes.active');
 
-Route::get(
+Route::post(
     'employments_unlikes/{employment:id}/unlikes',
     'LikeController@unlikemployment'
 )->name('employments_likes.unactive');

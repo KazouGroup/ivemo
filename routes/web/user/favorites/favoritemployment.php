@@ -14,8 +14,3 @@ Route::get(
     'profile/{user}/personal_settings/favorite_employments',
     'FavoritemploymentController@favoritemployment'
 )->name('userfavoritemployment_site');
-
-Route::get(
-    '/employments_favorite/{id}',
-     'FavoritemploymentController@favorite'
-)->name('employments_favorite.favorite');

@@ -15,48 +15,31 @@ import EmploymentListOnSkeleton from "../../../../inc/user/employment/Employment
 import Buttonctionshowmailcontactservice from "../inc/Buttonctionshowmailcontactservice";
 import Navlinknewemployment from "../../../employment/treatement/Navlinknewemployment";
 import Navemploymentsbyuser from "../../../employment/inc/Navemploymentsbyuser";
-const abbrev = ['', 'k', 'M', 'B', 'T'];
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {loadContactserviceemploymentsredmessage,
+    favoriteaddItem,favoriteremoveItem,
+    archvementaddItem,archvementremoveItem,
+    activecontactaddItem,activecontactremoveItem,
+    activeItem,unactiveItem,
+} from "../../../../../redux/actions/contactserviceActions";
+import contactservicemploymentcontactshowReducer
+    from "../../../../../redux/reducers/contactservice/employment/contactservicemploymentcontactshowReducer";
 
 
 class ContactserviceEmploymentContactShow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            contactservice:{contactserviceable:{categoryemployment:[],user:{profile:[]},city:[]},from:[]},
+            //
         };
 
-
-        this.favoritecontactItem = this.favoritecontactItem.bind(this);
-        this.activecontactItem = this.activecontactItem.bind(this);
-        this.archvementcontactItem = this.archvementcontactItem.bind(this);
         this.deletecontactItem = this.deletecontactItem.bind(this);
 
         this.deleteItem = this.deleteItem.bind(this);
-        this.activeItem = this.activeItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
 
     }
 
-    favoritecontactItem(id){
-        const url = route('contactservice_statusfavorite', [id]);
-        dyaxios.post(url).then(() => {
-            this.loadItems();
-        })
-    }
-
-    activecontactItem(id){
-        const url = route('contactservice_statusred', [id]);
-        dyaxios.post(url).then(() => {
-            this.loadItems();
-        })
-    }
-
-    archvementcontactItem(id){
-        const url = route('contactservice_statusarchvement', [id]);
-        dyaxios.post(url).then(() => {
-            this.loadItems();
-        })
-    }
 
     deletecontactItem(id){
         Swal.fire({
@@ -111,180 +94,69 @@ class ContactserviceEmploymentContactShow extends Component {
         });
     }
 
+   deleteItem(id) {
+       Swal.fire({
+           title: 'Confirmer la supression?',
+           text: "êtes-vous sûr de vouloir executer cette action",
+           type: 'warning',
+           buttonsStyling: false,
+           confirmButtonClass: "btn btn-success",
+           cancelButtonClass: 'btn btn-danger',
+           confirmButtonText: 'Oui, confirmer',
+           cancelButtonText: 'Non, annuller',
+           showCancelButton: true,
+           reverseButtons: true,
+       }).then((result) => {
+           if (result.value) {
 
-    activeItem(id){
-        Swal.fire({
-            title: 'Afficher cette annonce?',
-            text: "êtes vous sure de vouloir confirmer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
+               const url = route('employmentsdelete_site',[id]);
+               //Envoyer la requet au server
+               dyaxios.delete(url).then(() => {
 
-                //Envoyer la requet au server
-                let url = route('employmentsactivated_site',id);
-                dyaxios.get(url).then(() => {
+                   /** Alert notify bootstrapp **/
+                   $.notify({
+                           // title: 'Update',
+                           message: 'Annonce suprimée avec success'
+                       },
+                       {
+                           allow_dismiss: false,
+                           type: 'primary',
+                           placement: {
+                               from: 'bottom',
+                               align: 'right'
+                           },
+                           animate: {
+                               enter: 'animate__animated animate__fadeInRight',
+                               exit: 'animate__animated animate__fadeOutRight'
+                           },
+                       });
+                   /** End alert ***/
+                   this.props.history.push(`/profile/${$userIvemo.slug}/personal_settings/employments/`);
+               }).catch(() => {
+                   //Failled message
+                   $.notify("Ooop! Une erreur est survenue", {
+                       allow_dismiss: false,
+                       type: 'danger',
+                       animate: {
+                           enter: 'animate__animated animate__bounceInDown',
+                           exit: 'animate__animated animate__bounceOutUp'
+                       }
+                   });
+               })
+           }
+       });
+   }
 
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            message: "Cette annonce est desormais visible aux utilisateurs",
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
-                            },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
-                            },
-                        });
-                    /** End alert ***/
-                    this.loadItems();
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        })
-
-    }
-
-    unactiveItem(id){
-        Swal.fire({
-            title: 'Masquer cette annonce?',
-            text: "êtes vous sure de vouloir confirmer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                //Envoyer la requet au server
-                let url = route('employmentsunactivated_site',id);
-                dyaxios.get(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            message: "Cette annonce a été masquée aux utilisateurs",
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
-                            },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
-                            },
-                        });
-                    /** End alert ***/
-                    this.loadItems();
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
-                        }
-                    });
-                })
-            }
-        })
-
-    }
-
-    deleteItem(id) {
-        Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                const url = route('employmentsdelete_site',[id]);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            // title: 'Update',
-                            message: 'Annonce suprimée avec success'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animate__animated animate__fadeInRight',
-                                exit: 'animate__animated animate__fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-                    this.props.history.push(`/profile/${$userIvemo.slug}/personal_settings/employments/`);
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
-
-
-    loadItems(){
-
-        let itemUser = this.props.match.params.user;
-        let itemEmployment = this.props.match.params.employment;
-        let itemContactservice = this.props.match.params.contactservice;
-        let url = route('api.contactservice_employmentsbyuserbystatistiqueshow_site',[itemUser,itemEmployment,itemContactservice]);
-        dyaxios.get(url).then(response => this.setState({ contactservice: response.data, }));
-    }
+   loadItems(){
+    this.props.loadContactserviceemploymentsredmessage(this.props);
+   }
 
     componentDidMount() {
-        this.loadItems()
+        this.loadItems();
     }
 
     render() {
-        const {contactservice} = this.state;
+        const {contactservice} = this.props;
         return (
             <>
                 <HelmetSite title={`${contactservice.contactserviceable.title || $name_site} - ${$name_site}`}/>
@@ -369,9 +241,13 @@ class ContactserviceEmploymentContactShow extends Component {
                                                                 <strong>{moment(contactservice.created_at).format('DD/MM/YYYY')}</strong>
 
                                                                 <Buttonctionshowmailcontactservice {...contactservice} deletecontactItem={this.deletecontactItem}
-                                                                                                   favoritecontactItem={this.favoritecontactItem}
-                                                                                                   archvementcontactItem={this.archvementcontactItem}
-                                                                                                   activecontactItem={this.activecontactItem}/>
+                                                                                                   favoriteaddItem={this.props.favoriteaddItem}
+                                                                                                   favoriteremoveItem={this.props.favoriteremoveItem}
+                                                                                                   archvementaddItem={this.props.archvementaddItem}
+                                                                                                   archvementremoveItem={this.props.archvementremoveItem}
+                                                                                                   activecontactaddItem={this.props.activecontactaddItem}
+                                                                                                   activecontactremoveItem={this.props.activecontactremoveItem}
+                                                                />
                                                             </h6>
 
                                                         </div>
@@ -379,7 +255,7 @@ class ContactserviceEmploymentContactShow extends Component {
 
                                                     {contactservice.contactserviceable.title ?
 
-                                                        <PrivateUserEmployementList {...this.props} {...contactservice.contactserviceable} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
+                                                        <PrivateUserEmployementList {...this.props} {...contactservice.contactserviceable} deleteItem={this.deleteItem} unactiveItem={this.props.unactiveItem} activeItem={this.props.activeItem}/>
                                                         :
                                                         <EmploymentListOnSkeleton />
 
@@ -422,8 +298,8 @@ class ContactserviceEmploymentContactShow extends Component {
                                                                 </ReadMoreAndLess>
                                                             </div>
                                                         </>
-                                                    :
-                                                    <Skeleton count={2}/>
+                                                        :
+                                                        <Skeleton count={2}/>
                                                     }
                                                     <hr />
                                                     <div className="media-footer">
@@ -474,4 +350,20 @@ class ContactserviceEmploymentContactShow extends Component {
     }
 }
 
-export default ContactserviceEmploymentContactShow;
+ContactserviceEmploymentContactShow.propTypes = {
+    loadContactserviceemploymentsredmessage: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+
+    contactservice: state.contactservicemploymentcontactshow.item
+
+});
+
+export default connect(mapStateToProps, {
+    loadContactserviceemploymentsredmessage,
+    favoriteaddItem,favoriteremoveItem,
+    archvementaddItem,archvementremoveItem,
+    activecontactaddItem,activecontactremoveItem,
+    activeItem,unactiveItem,
+})(ContactserviceEmploymentContactShow);
