@@ -94,6 +94,9 @@ class ProfileForallEmploymentShow extends Component {
                                            className="btn btn-sm btn-secondary" title={`${this.props.visits_count} ${this.props.visits_count > 1 ? "vues" : "vue"}`}>
                                             <i className="far fa-eye"></i> <b>{this.data_countFormatter(this.props.visits_count)}</b>
                                         </a>
+                                        <NavLink to={`/profile/${this.props.user.slug}/personal_mails/employments/${this.props.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
+                                            <i className="now-ui-icons business_chart-bar-32"/>
+                                        </NavLink>
                                         <button type="button" rel="tooltip" onClick={() => this.props.statusItem(this.props)}
                                                 className="btn btn-success btn-icon btn-sm" title="Desactiver cette annonce">
                                             <i className="now-ui-icons ui-1_check"/>

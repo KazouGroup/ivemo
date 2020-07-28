@@ -33,7 +33,7 @@ Route::group(['prefix' => 'api'], function () {
         'EmploymentController@apiemploymentbycitycount'
     )->name('api.employmentcitycount_site');
 
-    Route::get(
+    Route::post(
         'employment/{city}',
         'EmploymentController@apiemploymentbycity'
     )->name('api.employmentcity_site');

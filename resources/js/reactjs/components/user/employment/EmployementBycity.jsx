@@ -12,6 +12,7 @@ import EmployementList from "./inc/EmployementList";
 import HelmetSite from "../../inc/user/HelmetSite";
 import Navemployementsbycity from "./inc/Navemployementsbycity";
 import Navemployementsbycategoryemployment from "./inc/Navemployementsbycategoryemployment";
+import EmploymentLoader from "../../inc/user/annimation/EmploymentLoader";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -21,7 +22,11 @@ class EmployementBycity extends Component {
         this.state = {
             employments:{categoryemployment:[],user:[],city:[]},
             cityemployment:[],
+            progress:false,
+            completed:false,
         };
+
+        this.infiniteScroll = this.infiniteScroll.bind(this);
 
         this.deleteItem = this.deleteItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
@@ -81,7 +86,7 @@ class EmployementBycity extends Component {
 
     unactiveItem(id){
         Swal.fire({
-            title: 'Masquer cette offre?',
+            title: 'Masquer cette annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -196,12 +201,45 @@ class EmployementBycity extends Component {
 
     loadItems(){
         let itemCity = this.props.match.params.city;
-        dyaxios.get(route('api.employmentcity_site', [itemCity])).then(response => this.setState({ employments: response.data }));
+        dyaxios.post(route('api.employmentcity_site',[itemCity]),{
+            'offset':this.state.employments.length
+        }).then((response)=>{
+            this.setState(()=>({
+                employments:response.data,
+                progress:false,
+                completed:!response.data.length
+            }));
+        }).catch((error)=>{
+            console.log(error);
+        });
+
         dyaxios.get(route('api.employmentcitycount_site', [itemCity])).then(response => this.setState({ cityemployment: response.data }));
+    }
+
+    infiniteScroll(){
+        if(!this.state.completed && !this.state.progress){
+            this.setState(()=>({
+                progress:true,
+            }));
+
+            let itemCity = this.props.match.params.city;
+            dyaxios.post(route('api.employmentcity_site', [itemCity]),{
+                'offset':this.state.employments.length
+            }).then((response)=>{
+                this.setState((prevState)=>({
+                    employments:prevState.employments.concat(response.data),
+                    progress:false,
+                    completed:!response.data.length
+                }));
+            }).catch((error)=>{
+                console.log(error);
+            });
+        }
     }
 
     componentDidMount() {
         this.loadItems();
+        window.addEventListener('scroll',this.infiniteScroll);
     }
 
     render() {
@@ -268,6 +306,8 @@ class EmployementBycity extends Component {
                                         )}
 
                                         {mapEmployments}
+
+                                        <EmploymentLoader progress={this.state.progress} completed={this.state.completed}/>
 
                                     </div>
 

@@ -53,7 +53,7 @@ class EmploymentService
         return $employments;
     }
 
-    public static function apiemploymentbycity($city)
+    public static function apiemploymentbycity($request,$city)
     {
         $employments = EmploymentResource::collection($city->employments()->with('user','city','categoryemployment','member')
             ->where(['status' => 1,'status_admin' => 1])
@@ -62,7 +62,7 @@ class EmploymentService
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->with('user','city','categoryemployment','member')
             ->whereIn('city_id',[$city->id])
-            ->orderBy('created_at','DESC')->distinct()->paginate(40));
+            ->orderBy('created_at','DESC')->distinct()->limit(30)->offset($request->offset)->get());
 
         return $employments;
     }

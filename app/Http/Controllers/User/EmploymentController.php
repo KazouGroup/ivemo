@@ -193,9 +193,9 @@ class EmploymentController extends Controller
         return response()->json($employments,200);
     }
 
-    public function apiemploymentbycity(city $city)
+    public function apiemploymentbycity(Request $request,city $city)
     {
-        $employments = EmploymentService::apiemploymentbycity($city);
+        $employments = EmploymentService::apiemploymentbycity($request,$city);
 
         return response()->json($employments,200);
     }

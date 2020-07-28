@@ -86,7 +86,7 @@ class EmployementIndexSite extends Component {
 
     unactiveItem(id){
         Swal.fire({
-            title: 'Masquer cette offre?',
+            title: 'Masquer cette annonce?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -243,7 +243,7 @@ class EmployementIndexSite extends Component {
         window.addEventListener('scroll',this.infiniteScroll);
     }
 
-    
+
 
     render() {
         const {employments} = this.state;
