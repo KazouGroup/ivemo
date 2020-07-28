@@ -13,6 +13,7 @@ import SignalFromEmployementForShow from "./inc/SignalFromEmployementForShow";
 import EmployementList from "./inc/EmployementList";
 import HelmetSite from "../../inc/user/HelmetSite";
 import Navemployementsbycity from "./inc/Navemployementsbycity";
+import DataLoader from "../../inc/user/annimation/DataLoader";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -21,8 +22,11 @@ class EmployementIndexSite extends Component {
         super(props);
         this.state = {
             employments:{categoryemployment:[],user:[],city:[]},
+            progress:false,
+            completed:false,
         };
 
+        this.infiniteScroll = this.infiniteScroll.bind(this);
 
         this.deleteItem = this.deleteItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
@@ -195,15 +199,48 @@ class EmployementIndexSite extends Component {
         });
     }
 
+
+
     loadItems(){
-        dyaxios.get(route('api.employments_site')).then(response =>
-            this.setState({
-                employments: [...response.data],
+        this.setState(()=>({
+            progress:true,
+        }));
+        dyaxios.post(route('api.employments_site'),{
+            'offset':this.state.employments.length
+        }).then((response)=>{
+            this.setState(()=>({
+                employments:response.data,
+                progress:false,
+                completed:response.data.length?false:true
             }));
+        }).catch((error)=>{
+            console.log(error);
+        });
+    }
+
+    infiniteScroll(){
+        if(!this.state.completed && !this.state.progress){
+            this.setState(()=>({
+                progress:true,
+            }));
+
+        dyaxios.post(route('api.employments_site'),{
+                'offset':this.state.employments.length
+            }).then((response)=>{
+                this.setState((prevState)=>({
+                    employments:prevState.employments.concat(response.data),
+                    progress:false,
+                    completed:response.data.length?false:true
+                }));
+            }).catch((error)=>{
+                console.log(error);
+            });
+        }
     }
 
     componentDidMount() {
         this.loadItems();
+        window.addEventListener('scroll',this.infiniteScroll);
     }
 
     render() {
@@ -263,6 +300,8 @@ class EmployementIndexSite extends Component {
                                         )}
 
                                         {mapEmployments}
+
+                                        <DataLoader progress={this.state.progress} completed={this.state.completed}/>
 
                                     </div>
 

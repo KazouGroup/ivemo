@@ -3,7 +3,7 @@
 
 Route::group(['prefix' => 'api'], function () {
 
-    Route::get(
+    Route::post(
         'employments',
         'EmploymentController@apiemployments'
     )->name('api.employments_site');

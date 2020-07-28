@@ -159,7 +159,7 @@ class EmploymentController extends Controller
         return response()->json($employment, 200);
     }
 
-    public function apiemployments()
+    public function apiemployments(Request $request)
     {
         $employments =  EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
             ->where(['status' => 1,'status_admin' => 1])
@@ -167,7 +167,7 @@ class EmploymentController extends Controller
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')
-            ->distinct()->paginate(40));
+            ->distinct()->limit(40)->offset($request->offset)->get());
 
         return response()->json($employments,200);
     }
