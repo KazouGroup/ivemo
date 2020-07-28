@@ -104,14 +104,14 @@ class PrivateUserAnnonceLocations extends Component {
 
     deleteItem(id) {
         Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            title: 'Confirmation?',
+            text: "êtes-vous sûr de vouloir exécuter cette action",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
             cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
+            confirmButtonText: 'Oui, Confirmer',
+            cancelButtonText: 'Non, Annuller',
             showCancelButton: true,
             reverseButtons: true,
         }).then((result) => {
