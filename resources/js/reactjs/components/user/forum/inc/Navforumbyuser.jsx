@@ -2,22 +2,14 @@ import React, { Component,Fragment } from "react";
 import {NavLink, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
 import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
+import {connect} from "react-redux";
+import {loadCategoryforumsbyuser} from "../../../../redux/actions/forum/forumActions";
 
 
 class Navforumbyuser extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            categoryforums : {},
-        }
-    }
 
     loadItems(){
-        let url = route('api.categoryforum_byuser_site');
-        fetch(url).then(res => res.json()).then((result) => {this.setState({
-                categoryforums: [...result]
-            });
-        });
+       this.props.loadCategoryforumsbyuser();
     }
 
     componentDidMount() {
@@ -36,7 +28,7 @@ class Navforumbyuser extends Component {
     }
 
     render() {
-        const {categoryforums} = this.state;
+        const {categoryforums} = this.props;
         return (
 
 
@@ -76,4 +68,14 @@ class Navforumbyuser extends Component {
     }
 
 }
-export default Navforumbyuser;
+Navforumbyuser.propTypes = {
+    loadCategoryforumsbyuser: PropTypes.func.isRequired,
+};
+
+const mapStoreToProps = store => ({
+    categoryforums: store.forums.categoryforums
+});
+
+export default connect(mapStoreToProps, {
+    loadCategoryforumsbyuser,
+})(Navforumbyuser);

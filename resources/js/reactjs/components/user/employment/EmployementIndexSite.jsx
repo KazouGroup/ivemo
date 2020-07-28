@@ -243,6 +243,8 @@ class EmployementIndexSite extends Component {
         window.addEventListener('scroll',this.infiniteScroll);
     }
 
+    
+
     render() {
         const {employments} = this.state;
         const mapEmployments = employments.length >= 0 ? (

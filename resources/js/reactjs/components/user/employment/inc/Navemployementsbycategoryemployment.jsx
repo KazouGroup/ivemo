@@ -3,13 +3,13 @@ import {NavLink, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
 import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
 import {connect} from "react-redux";
-import {loadCategoryemploymentsbycity} from "../../../../redux/actions/employment/employmentActions";
+import {loadCategoryemploymentsbycategory} from "../../../../redux/actions/employment/employmentActions";
 
 
 class Navemployementsbycategoryemployment extends PureComponent {
 
     componentDidMount() {
-        this.props.loadCategoryemploymentsbycity(this.props);
+        this.props.loadCategoryemploymentsbycategory(this.props);
     }
 
     getdataString(employments_count, precision) {
@@ -82,11 +82,11 @@ class Navemployementsbycategoryemployment extends PureComponent {
 }
 
 Navemployementsbycategoryemployment.propTypes = {
-    loadCategoryemploymentsbycity: PropTypes.func.isRequired,
+    loadCategoryemploymentsbycategory: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
     categoryemployments: state.employments.catgoryitems
 
 });
-export default connect(mapStateToProps, {loadCategoryemploymentsbycity})(Navemployementsbycategoryemployment);
+export default connect(mapStateToProps, {loadCategoryemploymentsbycategory})(Navemployementsbycategoryemployment);

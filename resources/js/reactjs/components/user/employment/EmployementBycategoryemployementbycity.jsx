@@ -12,6 +12,7 @@ import Navlinknewemployment from "./treatement/Navlinknewemployment";
 import EmployementList from "./inc/EmployementList";
 import HelmetSite from "../../inc/user/HelmetSite";
 import Navemployementsbycategoryemployment from "./inc/Navemployementsbycategoryemployment";
+import EmploymentLoader from "../../inc/user/annimation/EmploymentLoader";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -23,7 +24,11 @@ class EmployementBycategoryemployementbycity extends Component {
             annoncebycity:[],
             categoryemployment:[],
             cities:{user:[]},
+            progress:false,
+            completed:false,
         };
+
+        this.infiniteScroll = this.infiniteScroll.bind(this);
 
         this.deleteItem = this.deleteItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
@@ -199,14 +204,48 @@ class EmployementBycategoryemployementbycity extends Component {
     loadItems(){
         let itemCategoryemployment = this.props.match.params.categoryemployment;
         let itemCity = this.props.match.params.city;
-        dyaxios.get(route('api.employmentscategorybycity_site', [itemCategoryemployment,itemCity])).then(response => this.setState({ employments: response.data }));
+        dyaxios.post(route('api.employmentscategorybycity_site',[itemCategoryemployment,itemCity]),{
+            'offset':this.state.employments.length
+        }).then((response)=>{
+            this.setState(()=>({
+                employments:response.data,
+                progress:false,
+                completed:!response.data.length
+            }));
+        }).catch((error)=>{
+            console.log(error);
+        });
         dyaxios.get(route('api.employmentscategorybycitycount_site', [itemCategoryemployment,itemCity])).then(response => this.setState({ annoncebycity: response.data }));
         dyaxios.get(route('api.employmentscategorycount_site', [itemCategoryemployment])).then(response => this.setState({ categoryemployment: response.data }));
         dyaxios.get(route('api.employmentbycategorybycount_site', [itemCategoryemployment])).then(response => this.setState({ cities: response.data }));
     }
 
+    infiniteScroll(){
+        if(!this.state.completed && !this.state.progress){
+            this.setState(()=>({
+                progress:true,
+            }));
+
+            let itemCategoryemployment = this.props.match.params.categoryemployment;
+            let itemCity = this.props.match.params.city;
+            dyaxios.post(route('api.employmentscategorybycity_site',[itemCategoryemployment,itemCity]),{
+                'offset':this.state.employments.length
+            }).then((response)=>{
+                this.setState((prevState)=>({
+                    employments:prevState.employments.concat(response.data),
+                    progress:false,
+                    completed:!response.data.length
+                }));
+            }).catch((error)=>{
+                console.log(error);
+            });
+        }
+    }
+
     componentDidMount() {
         this.loadItems();
+        window.addEventListener('scroll',this.infiniteScroll);
+
     }
 
     getdataString(employments_count, precision) {
@@ -288,6 +327,8 @@ class EmployementBycategoryemployementbycity extends Component {
                                         )}
 
                                         {mapEmployments}
+
+                                        <EmploymentLoader progress={this.state.progress} completed={this.state.completed}/>
 
                                     </div>
 

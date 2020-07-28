@@ -8,7 +8,7 @@ Route::group(['prefix' => 'api'], function () {
         'EmploymentController@apiemployments'
     )->name('api.employments_site');
 
-    Route::get(
+    Route::post(
         'employments/{categoryemployment}',
         'EmploymentController@apiemploymentsbycategory'
     )->name('api.employmentscategory_site');
@@ -18,7 +18,7 @@ Route::group(['prefix' => 'api'], function () {
         'EmploymentController@apiemploymentsbycategorycount'
     )->name('api.employmentscategorycount_site');
 
-    Route::get(
+    Route::post(
         'employments/{categoryemployment}/{city}',
         'EmploymentController@apiemploymentsbycategorybycity'
     )->name('api.employmentscategorybycity_site');

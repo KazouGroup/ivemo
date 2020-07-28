@@ -247,7 +247,7 @@ class ForumShow extends Component {
                                                                     {forum.likeked ?
                                                                         <>
                                                                             <Button onClick={() => this.props.unlikeItem(forum)}
-                                                                                    className="btn btn-danger btn-icon btn-sm btn-neutral" title={`${forum.countlikes} ${forum.countlikes > 1 ? "Likes" : "Like"}`}>
+                                                                                    className="btn btn-info btn-icon btn-sm btn-neutral" title={`${forum.countlikes} ${forum.countlikes > 1 ? "Likes" : "Like"}`}>
                                                                                 <i className="fas fa-heart"></i>
                                                                             </Button> {this.data_countlikeFormatter(forum.countlikes)}
                                                                         </>

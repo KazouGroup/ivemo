@@ -15,7 +15,7 @@ export default produce((draft, action = {}) => {
                 draft.catgoryitems = action.payload;
                 return;
 
-            case 'GET_CATEGORYEMPLOYMENTS_BY_CITY':
+            case 'GET_CATEGORYEMPLOYMENTS_BY_CATEGORY':
                 draft.catgoryitems = action.payload;
                 return;
 

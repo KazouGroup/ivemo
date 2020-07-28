@@ -24,7 +24,7 @@ class EmploymentService
         return $employment;
     }
 
-    public static function apiemploymentsbycategory($categoryemployment)
+    public static function apiemploymentsbycategory($request,$categoryemployment)
     {
         $employments = EmploymentResource::collection($categoryemployment->employments()->with('user','city','categoryemployment','member')
             ->where(['status' => 1,'status_admin' => 1])
@@ -33,7 +33,7 @@ class EmploymentService
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')
-            ->distinct()->paginate(40));
+            ->distinct()->limit(30)->offset($request->offset)->get());
 
         return $employments;
     }
@@ -82,7 +82,7 @@ class EmploymentService
         return $employments;
     }
 
-    public static function apiemploymentsbycategorybycity($categoryemployment,$city)
+    public static function apiemploymentsbycategorybycity($request,$categoryemployment,$city)
     {
         $employments = EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
             ->where(['status' => 1,'status_admin' => 1])
@@ -92,7 +92,7 @@ class EmploymentService
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')
-            ->distinct()->paginate(40));
+            ->distinct()->limit(30)->offset($request->offset)->get());
 
         return $employments;
     }

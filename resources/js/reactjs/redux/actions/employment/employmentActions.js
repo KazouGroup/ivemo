@@ -2,7 +2,7 @@ import {
     FAVORITE_EMPLOYEMENT_ADD,
     FAVORITE_EMPLOYEMENT_REMOVE,
     GET_CATEGORYEMPLOYMENTS,
-    GET_CATEGORYEMPLOYMENTS_BY_CITY,
+    GET_CATEGORYEMPLOYMENTS_BY_CATEGORY,
     GET_CATEGORYEMPLOYMENTS_BY_USER,
     GET_EMPLOYEMENT_INTERESSE,
     UNACTIVE_EMPLOYEMENT,
@@ -21,12 +21,12 @@ export const loadCategoryemployments = () => dispatch => {
         ).catch(error => console.error(error));
 };
 
-export const loadCategoryemploymentsbycity = props => dispatch => {
+export const loadCategoryemploymentsbycategory = props => dispatch => {
 
     let itemCity = props.match.params.city;
     dyaxios.get(route('api.categoryemploymentcitycount_site', [itemCity]))
         .then(response => dispatch({
-                type: GET_CATEGORYEMPLOYMENTS_BY_CITY,
+                type: GET_CATEGORYEMPLOYMENTS_BY_CATEGORY,
                 payload: response.data
             })
         ).catch(error => console.error(error));
