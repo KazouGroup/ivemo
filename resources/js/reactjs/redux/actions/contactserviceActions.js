@@ -9,6 +9,7 @@ import {
     ACTIVE_CONTACTSERVICE_REMOVE,
     UNACTIVE_ANNONCE_EMPLOYMENT,
     ACTIVE_ANNONCE_EMPLOYMENT,
+    DELETE_CONTACTSERVICE,
 } from "./types";
 import Swal from "sweetalert2";
 import {history} from "../utils/history"
@@ -208,6 +209,66 @@ export const unactiveItem = id => dispatch => {
             })
         }
     });
+};
+
+export const deletecontactItem = id => dispatch => {
+
+    Swal.fire({
+        title: 'Confirmer la supression?',
+        text: "êtes-vous sûr de vouloir executer cette action",
+        type: 'warning',
+        buttonsStyling: false,
+        confirmButtonClass: "btn btn-success",
+        cancelButtonClass: 'btn btn-danger',
+        confirmButtonText: 'Oui, confirmer',
+        cancelButtonText: 'Non, annuller',
+        showCancelButton: true,
+        reverseButtons: true,
+    }).then((result) => {
+        if (result.value) {
+
+            const url = route('contactservicedelete', [id]);
+            //Envoyer la requet au server
+            dyaxios.delete(url).then(() => {
+
+                dispatch({
+                    type: DELETE_CONTACTSERVICE,
+                    payload: id
+                });
+
+                /** Alert notify bootstrapp **/
+                $.notify({
+                        // title: 'Update',
+                        message: 'Annonce suprimée avec success'
+                    },
+                    {
+                        allow_dismiss: false,
+                        type: 'primary',
+                        placement: {
+                            from: 'bottom',
+                            align: 'right'
+                        },
+                        animate: {
+                            enter: 'animate__animated animate__fadeInRight',
+                            exit: 'animate__animated animate__fadeOutRight'
+                        },
+                    });
+                /** End alert ***/
+
+            }).catch(() => {
+                //Failled message
+                $.notify("Ooop! Une erreur est survenue", {
+                    allow_dismiss: false,
+                    type: 'danger',
+                    animate: {
+                        enter: 'animate__animated animate__bounceInDown',
+                        exit: 'animate__animated animate__bounceOutUp'
+                    }
+                });
+            })
+        }
+    });
+
 };
 
 export const loadContactserviceemploymentsredmessage = props => dispatch => {

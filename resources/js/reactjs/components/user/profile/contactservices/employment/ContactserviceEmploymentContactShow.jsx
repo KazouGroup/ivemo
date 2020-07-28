@@ -23,8 +23,6 @@ import {loadContactserviceemploymentsredmessage,
     activecontactaddItem,activecontactremoveItem,
     activeItem,unactiveItem,
 } from "../../../../../redux/actions/contactserviceActions";
-import contactservicemploymentcontactshowReducer
-    from "../../../../../redux/reducers/contactservice/employment/contactservicemploymentcontactshowReducer";
 
 
 class ContactserviceEmploymentContactShow extends Component {
@@ -35,7 +33,6 @@ class ContactserviceEmploymentContactShow extends Component {
         };
 
         this.deletecontactItem = this.deletecontactItem.bind(this);
-
         this.deleteItem = this.deleteItem.bind(this);
 
     }

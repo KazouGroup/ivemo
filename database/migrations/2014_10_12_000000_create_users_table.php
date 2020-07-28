@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->text('social_token')->nullable();
             $table->string('color_name')->default('primary');
             $table->integer('status_profile')->default('0');
-            $table->string('avatar')->default('/assets/vendor/assets/img/default-avatar.png');
+            $table->string('avatar')->nullable();
             $table->string('avatarcover')->default('/assets/vendor/assets/img/image_placeholder.jpg');
             $table->string('phone')->nullable();
             $table->string('email')->unique();

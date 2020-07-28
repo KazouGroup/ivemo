@@ -11,20 +11,24 @@ export default produce((draft, action = {}) => {
             case 'GET_RED_CONTACTSERVICEMPLOYMENT':
                 draft.employment = action.payload;
                 return;
+
             case 'FAVORITE_CONTACTSERVICE_ADD':
                 draft.employment.contactservices[
                     draft.employment.contactservices.findIndex(i => i.id === action.payload)
                     ].status_favorite = action.payload;
                 return draft;
+
             case 'FAVORITE_CONTACTSERVICE_REMOVE':
                 draft.employment.contactservices[
                     draft.employment.contactservices.findIndex(i => i.id === action.payload)
                     ].status_favorite = !action.payload;
                 return draft;
+
             case 'ARCHVEMENT_CONTACTSERVICE_ADD':
                 let datadd = draft.employment.contactservices.findIndex(i => i.id === action.payload);
                 draft.employment.contactservices[datadd].status_archvement = action.payload;
                 return draft;
+
             case 'ARCHVEMENT_CONTACTSERVICE_REMOVE':
                 let dataremove = draft.employment.contactservices.findIndex(i => i.id === action.payload);
                 draft.employment.contactservices[dataremove].status_archvement = !action.payload;
@@ -34,14 +38,22 @@ export default produce((draft, action = {}) => {
                     draft.employment.contactservices.findIndex(i => i.id === action.payload)
                     ].status_red = action.payload;
                 return draft;
+
             case 'ACTIVE_CONTACTSERVICE_REMOVE':
                 draft.employment.contactservices[
                     draft.employment.contactservices.findIndex(i => i.id === action.payload)
                     ].status_red = !action.payload;
                 return draft;
+
+            case 'DELETE_CONTACTSERVICE':
+                let datadelete =  draft.employment.contactservices.findIndex(i => i.id === action.payload);
+                if (datadelete !== -1)  draft.employment.contactservices.splice(datadelete, 1);
+                return draft;
+
             case 'ACTIVE_ANNONCE_EMPLOYMENT':
                 draft.employment.status = action.payload;
                 return draft;
+
             case 'UNACTIVE_ANNONCE_EMPLOYMENT':
                 draft.employment.status = !action.payload;
                 return draft;

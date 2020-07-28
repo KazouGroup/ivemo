@@ -18,7 +18,7 @@ import {
     activecontactaddItem, activecontactremoveItem, activeItem,
     archvementaddItem, archvementremoveItem,
     favoriteaddItem, favoriteremoveItem,
-    loadContactserviceemploymentshow, unactiveItem
+    loadContactserviceemploymentshow,unactiveItem,deletecontactItem
 } from "../../../../../redux/actions/contactserviceActions";
 import PropTypes from "prop-types";
 import Buttonctionshowmailcontactservice from "../inc/Buttonctionshowmailcontactservice";
@@ -35,60 +35,6 @@ class ContactserviceEmploymentShow extends Component {
 
         this.deleteItem = this.deleteItem.bind(this);
         this.reloadItem = this.reloadItem.bind(this);
-    }
-
-
-    deletecontactItem(id) {
-        Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                const url = route('contactservicedelete', [id]);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                        // title: 'Update',
-                        message: 'Annonce suprimée avec success'
-                    },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animate__animated animate__fadeInRight',
-                                exit: 'animate__animated animate__fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-                    this.loadItems();
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
     }
 
     readItem(item) {
@@ -204,11 +150,6 @@ class ContactserviceEmploymentShow extends Component {
                                             </div>
                                         </div>
 
-
-
-
-
-
                                     </div>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
@@ -278,7 +219,7 @@ class ContactserviceEmploymentShow extends Component {
                                                                                                 archvementremoveItem={this.props.archvementremoveItem}
                                                                                                 activecontactaddItem={this.props.activecontactaddItem}
                                                                                                 activecontactremoveItem={this.props.activecontactremoveItem}
-                                                                            readItem={this.readItem} deletecontactItem={this.deletecontactItem} />
+                                                                            readItem={this.readItem} deletecontactItem={this.props.deletecontactItem} />
                                                                     ))}
 
 
@@ -333,5 +274,5 @@ export default connect(mapStateToProps, {
     favoriteaddItem,favoriteremoveItem,
     archvementaddItem,archvementremoveItem,
     activecontactaddItem,activecontactremoveItem,
-    activeItem,unactiveItem,
+    activeItem,unactiveItem,deletecontactItem
 })(ContactserviceEmploymentShow);
