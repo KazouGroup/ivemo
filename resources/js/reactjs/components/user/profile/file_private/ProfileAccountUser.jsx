@@ -466,12 +466,26 @@ class ProfileAccountUser extends PureComponent {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <Button onClick={() => this.deleteItem(this.state.id)}
-                                                    className="btn btn-outline-danger pull-right" id="TooltipDelete">
-                                                <i className="far fa-trash-alt"/> Supprimer le profil
-                                            </Button>{" "}
+                                            <nav className="navbar navbar-expand-lg bg-danger">
+                                                <div className="container">
+                                                    <div className="navbar-translate">
+                                                        <div className="row">
+                                                            <div className="col-md-8 my-2">
+                                                                <span className="text-white">Une fois que vous supprimez votre profil, il n'y a plus de retour en arrière. Soyez certain.</span>
+                                                            </div>
+                                                            <div className="col-md-4">
+                                                                <Button onClick={() => this.deleteItem(this.state.id)}
+                                                                        className="btn pull-right" id="TooltipDelete">
+                                                                    <i className="far fa-trash-alt"/> Supprimer Mon Profil ?
+                                                                </Button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </nav>
+
                                             <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
-                                                Supprimer mon profil
+                                                Supprimer Mon Profil
                                             </UncontrolledTooltip>
                                         </div>
                                     </div>

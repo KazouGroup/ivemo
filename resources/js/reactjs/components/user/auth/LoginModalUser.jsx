@@ -134,7 +134,7 @@ class LoginModalUser extends Component {
                                                 <span className="input-group-text">
                                                     <i className="now-ui-icons ui-1_lock-circle-open"/></span>
                                             </div>
-                                            <input type={this.state.passwordType} placeholder="Mot de pass" aria-label="Mot de passe"
+                                            <input type={this.state.passwordType} placeholder="Mot de Passe" aria-label="Mot de Passe"
                                                    required="required"
                                                    id="password"
                                                    className={`form-control ${this.hasErrorFor('password') ? 'is-invalid' : ''}`}
