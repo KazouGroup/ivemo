@@ -13,7 +13,7 @@ import SignalFromEmployementForShow from "./inc/SignalFromEmployementForShow";
 import EmployementList from "./inc/EmployementList";
 import HelmetSite from "../../inc/user/HelmetSite";
 import Navemployementsbycity from "./inc/Navemployementsbycity";
-import DataLoader from "../../inc/user/annimation/DataLoader";
+import EmploymentLoader from "../../inc/user/annimation/EmploymentLoader";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -301,7 +301,7 @@ class EmployementIndexSite extends Component {
 
                                         {mapEmployments}
 
-                                        <DataLoader progress={this.state.progress} completed={this.state.completed}/>
+                                        <EmploymentLoader progress={this.state.progress} completed={this.state.completed}/>
 
                                     </div>
 
