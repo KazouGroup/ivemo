@@ -89,12 +89,12 @@ EmployementInteresse.propTypes = {
     loademploymentinteresse: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-    employmentsinteresses: state.employments.items
+const mapStoreToProps = store => ({
+    employmentsinteresses: store.employments.items
 
 });
 
-export default connect(mapStateToProps,
+export default connect(mapStoreToProps,
     {
         loademploymentinteresse,
         favoriteItem,unfavoriteItem,

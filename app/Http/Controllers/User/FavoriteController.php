@@ -46,9 +46,8 @@ class FavoriteController extends Controller
      * @param employment $employment
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function favoritemployment(Request $request,employment $employment)
+    public function favoritemployment(Request $request,$employment)
     {
-        dd($employment);
         $employment = employment::whereId($employment)->firstOrFail();
 
         $employment->favorites()->create($request->all());
@@ -56,9 +55,8 @@ class FavoriteController extends Controller
         return response('Favorite',Response::HTTP_ACCEPTED);
     }
 
-    public function unfavoritemployment(Request $request,employment $employment)
+    public function unfavoritemployment(Request $request,$employment)
     {
-        dd($employment);
         $employment = employment::whereId($employment)->firstOrFail();
 
         auth()->user()->removefavorites()->detach($employment);

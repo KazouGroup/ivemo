@@ -719,11 +719,11 @@ EmployementShowUserSite.propTypes = {
     loademploymentshowusersite: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-    employment: state.employmentshow.item
+const mapStoreToProps = store => ({
+    employment: store.employmentshow.item
 });
 
-export default connect(mapStateToProps, {
+export default connect(mapStoreToProps, {
     loademploymentshowusersite,
     statuscommentremoveItem,
     statuscommentaddItem,
