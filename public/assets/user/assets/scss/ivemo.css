@@ -25,3 +25,20 @@
 .btn:not(.btn-icon) .now-ui-icons, .navbar .navbar-nav>a.btn:not(.btn-icon) .now-ui-icons {
     right: 5px;
 }
+
+.form-control-date {
+    padding: 9px 18px !important;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
