@@ -2,19 +2,14 @@ import React, { Component } from "react";
 import {NavLink, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
 import NavannoncecategorySkeleton from "../../../../inc/user/NavannoncecategorySkeleton";
+import {connect} from "react-redux";
+import {loadCategoryannonces} from "../../../../../redux/actions/annoncevente/annonceventeActions";
 
 
 class Categoriesannoncevente extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            categoryannonceventes : {user:[]},
-        }
-    }
 
     componentDidMount() {
-        let url = route('api.categoryannoncevente_site');
-        dyaxios.get(url).then(response => this.setState({categoryannonceventes: response.data,}));
+       this.props.loadCategoryannonces();
     }
 
     getcountcategoryannonceString (annonceventes_count) {
@@ -29,7 +24,7 @@ class Categoriesannoncevente extends Component {
     }
 
     render() {
-        const {categoryannonceventes} = this.state;
+        const {categoryannonceventes} = this.props;
         const mapCategoryannonceventes = categoryannonceventes.length >= 0 ? (
             categoryannonceventes.map(item => {
                 return(
@@ -72,4 +67,14 @@ class Categoriesannoncevente extends Component {
     }
 
 }
-export default withRouter(Categoriesannoncevente);
+
+
+Categoriesannoncevente.propTypes = {
+    loadCategoryannonces: PropTypes.func.isRequired,
+};
+
+const mapStoreToProps = store => ({
+    categoryannonceventes: store.annonceventes.catgoryannonceventes
+
+});
+export default connect(mapStoreToProps, {loadCategoryannonces})(Categoriesannoncevente);

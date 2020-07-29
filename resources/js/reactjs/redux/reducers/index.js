@@ -6,6 +6,8 @@ import contactservicemploymentshowReducer from "./contactservice/employment/cont
 import employmentshowReducer from "./employment/employmentshowReducer";
 import forumshowReducer from "./forum/forumshowReducer";
 import forumReducer from "./forum/forumReducer";
+import annonceventeReducer from "./annoncevente/annonceventeReducer";
+import annoncelocationReducer from "./annoncelocation/annoncelocationReducer";
 
 
 export default combineReducers({
@@ -14,6 +16,8 @@ export default combineReducers({
     employmentshow: employmentshowReducer,
     forums: forumReducer,
     forumshow: forumshowReducer,
+    annonceventes: annonceventeReducer,
+    annoncelocations: annoncelocationReducer,
     contactservicemploymentcontactshow: contactservicemploymentcontactshowReducer,
     contactservicemploymentshow: contactservicemploymentshowReducer,
 })
