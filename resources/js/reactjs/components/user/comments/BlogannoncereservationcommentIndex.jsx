@@ -8,6 +8,9 @@ import moment from "moment";
 import FormComment from "../../inc/vendor/comment/FormComment";
 import ProfileUserComment from "../../inc/vendor/comment/ProfileUserComment";
 import CommentViewList from "./inc/CommentViewList";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {loadCommentsBlogannoncereservations,unactiveItem,deleteItem} from "../../../redux/actions/commentsActions";
 
 
 class BlogannoncereservationcommentIndex extends PureComponent {
@@ -21,7 +24,6 @@ class BlogannoncereservationcommentIndex extends PureComponent {
             editresponsecomment: false,
             visiablecomment: 6,
             visiableresponsecomment: 1,
-            comments:{user:[],responsecomments:[]},
             itemData:[],
             errors: [],
         };
@@ -37,11 +39,9 @@ class BlogannoncereservationcommentIndex extends PureComponent {
         this.loadmoresresponseItem = this.loadmoresresponseItem.bind(this);
         this.cancelresponseCourse = this.cancelresponseCourse.bind(this);
 
-        this.deleteItem = this.deleteItem.bind(this);
         this.likeItem = this.likeItem.bind(this);
         this.unlikeItem = this.unlikeItem.bind(this);
         this.deleteresponseItem = this.deleteresponseItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
         this.unactiveresponseItem = this.unactiveresponseItem.bind(this);
         this.editcommentFromItem = this.editcommentFromItem.bind(this);
         this.responsecommentFromItem = this.responsecommentFromItem.bind(this);
@@ -364,120 +364,6 @@ class BlogannoncereservationcommentIndex extends PureComponent {
         });
     }
 
-    unactiveItem(id) {
-        Swal.fire({
-            title: 'Confirmer masquer?',
-            text: "êtes-vous sûr de vouloir executer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-
-                let isNotId = item => item.id !== id;
-                let updatedItems = this.state.comments.filter(isNotId);
-                this.setState({ comments: updatedItems });
-
-                const url = route('comments.unactive', [id]);
-                //Envoyer la requet au server
-                dyaxios.get(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            //,
-                            message: 'Le commenaire à été desactivé avec succès'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
-                            },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
-                            },
-                        });
-                    /** End alert ***/
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
-
-    deleteItem(id) {
-        Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-
-                let isNotId = item => item.id !== id;
-                let updatedItems = this.state.comments.filter(isNotId);
-                this.setState({ comments: updatedItems });
-
-                const url = route('comments.destroy', [id]);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            // title: 'Update',
-                            message: 'Commentaire suprimée avec succès'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animate__animated animate__fadeInRight',
-                                exit: 'animate__animated animate__fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
-
     deleteresponseItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
@@ -533,15 +419,7 @@ class BlogannoncereservationcommentIndex extends PureComponent {
     }
 
     loadItems(){
-        let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
-        let itemdate = this.props.match.params.date;
-        let itemblogannoncereservation = this.props.match.params.blogannoncereservation;
-        /*Ici c'est pour recuperer les annonce par villes*/
-        let url = route('api.blogannoncereservationgetcomment_site',[itemCategoryannoncereservation,itemdate,itemblogannoncereservation]);
-        dyaxios.get(url).then(response =>
-            this.setState({
-                comments: [...response.data]
-            }));
+        this.props.loadCommentsBlogannoncereservations(this.props);
     }
 
     componentDidMount() {
@@ -549,7 +427,8 @@ class BlogannoncereservationcommentIndex extends PureComponent {
     }
 
     render() {
-        const {comments,visiablecomment,visiableresponsecomment,itemData,editcomment,editresponsecomment,responsecomment} = this.state;
+        const {comments} = this.props;
+        const {visiablecomment,visiableresponsecomment,itemData,editcomment,editresponsecomment,responsecomment} = this.state;
         return (
             <>
                 <div className="row">
@@ -593,8 +472,8 @@ class BlogannoncereservationcommentIndex extends PureComponent {
                                                 <div className="media-body">
 
                                                     <CommentViewList {...item} responsecommentFromItem={this.responsecommentFromItem}
-                                                                     unlikeItem={this.unlikeItem} likeItem={this.likeItem} deleteItem={this.deleteItem}
-                                                                     editcommentFromItem={this.editcommentFromItem} unactiveItem={this.unactiveItem}/>
+                                                                     unlikeItem={this.unlikeItem} likeItem={this.likeItem} deleteItem={this.props.deleteItem}
+                                                                     editcommentFromItem={this.editcommentFromItem} unactiveItem={this.props.unactiveItem}/>
 
 
                                                     {(item.id === itemData.id) && (
@@ -756,5 +635,14 @@ class BlogannoncereservationcommentIndex extends PureComponent {
         )
     }
 }
+BlogannoncereservationcommentIndex.propTypes = {
+    loadCommentsBlogannoncereservations: PropTypes.func.isRequired,
+};
 
-export default BlogannoncereservationcommentIndex;
+const mapStoreToProps = store => ({
+    comments: store.commentsites.comments
+
+});
+export default connect(mapStoreToProps, {
+    loadCommentsBlogannoncereservations,unactiveItem,deleteItem
+})(BlogannoncereservationcommentIndex);

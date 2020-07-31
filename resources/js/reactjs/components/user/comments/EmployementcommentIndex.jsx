@@ -10,6 +10,9 @@ import ProfileUserComment from "../../inc/vendor/comment/ProfileUserComment";
 import CommentViewList from "./inc/CommentViewList";
 import StatusComment from "./inc/StatusComment";
 import CommentListSkeleton from "../../inc/user/comment/CommentListSkeleton";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {loadCommentsEmployments,unactiveItem,deleteItem} from "../../../redux/actions/commentsActions";
 
 
 class EmployementcommentIndex extends PureComponent {
@@ -23,7 +26,6 @@ class EmployementcommentIndex extends PureComponent {
             editresponsecomment: false,
             visiablecomment: 6,
             visiableresponsecomment: 1,
-            comments:{user:[],responsecomments:[]},
             itemData:[],
             errors: [],
         };
@@ -39,11 +41,9 @@ class EmployementcommentIndex extends PureComponent {
         this.loadmoresresponseItem = this.loadmoresresponseItem.bind(this);
         this.cancelresponseCourse = this.cancelresponseCourse.bind(this);
 
-        this.deleteItem = this.deleteItem.bind(this);
         this.likeItem = this.likeItem.bind(this);
         this.unlikeItem = this.unlikeItem.bind(this);
         this.deleteresponseItem = this.deleteresponseItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
         this.unactiveresponseItem = this.unactiveresponseItem.bind(this);
         this.editcommentFromItem = this.editcommentFromItem.bind(this);
         this.responsecommentFromItem = this.responsecommentFromItem.bind(this);
@@ -204,7 +204,7 @@ class EmployementcommentIndex extends PureComponent {
         let itemEmployment = this.props.match.params.employment;
         let url = route('employmentsendcomment_site',[itemCategoryemployment,itemCity,itemEmployment]);
         dyaxios.post(url, itemData)
-            .then(response => {
+            .then(() => {
 
                 $.notify({
                         message: `Commentaire sauvegarder`
@@ -222,16 +222,9 @@ class EmployementcommentIndex extends PureComponent {
                         },
                     });
 
-                    //this.setState({
-                    //    comments: [...this.state.comments, response.data],body: ""
-                    //});
-                    this.setState({
-                        comments: [...this.state.comments],body: "",
-                    });
-                    // then clear the value of textarea
+                this.setState({body: "",});
 
-
-                   this.loadItems();
+                this.loadItems();
 
             }).catch(error => {
             this.setState({
@@ -372,119 +365,6 @@ class EmployementcommentIndex extends PureComponent {
         });
     }
 
-    unactiveItem(id) {
-        Swal.fire({
-            title: 'Confirmer masquer?',
-            text: "êtes-vous sûr de vouloir executer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-
-                let isNotId = item => item.id !== id;
-                let updatedItems = this.state.comments.filter(isNotId);
-                this.setState({ comments: updatedItems });
-
-                const url = route('comments.unactive', [id]);
-                //Envoyer la requet au server
-                dyaxios.get(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            //,
-                            message: 'Le commenaire à été desactivé avec succès'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
-                            },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
-                            },
-                        });
-                    /** End alert ***/
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
-
-    deleteItem(id) {
-        Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-
-                let isNotId = item => item.id !== id;
-                let updatedItems = this.state.comments.filter(isNotId);
-                this.setState({ comments: updatedItems });
-
-                const url = route('comments.destroy', [id]);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            // title: 'Update',
-                            message: 'Commentaire suprimée avec succès'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animate__animated animate__fadeInRight',
-                                exit: 'animate__animated animate__fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
 
     deleteresponseItem(id) {
         Swal.fire({
@@ -541,15 +421,7 @@ class EmployementcommentIndex extends PureComponent {
     }
 
     loadItems(){
-        let itemCategoryemployment = this.props.match.params.categoryemployment;
-        let itemCity = this.props.match.params.city;
-        let itemEmployment = this.props.match.params.employment;
-        /*Ici c'est pour recuperer les annonce par villes*/
-        let url = route('api.employmentgetcomment_site',[itemCategoryemployment,itemCity,itemEmployment]);
-         dyaxios.get(url).then(response =>
-            this.setState({
-                comments: [...response.data]
-            }));
+        this.props.loadCommentsEmployments(this.props);
     }
 
     componentDidMount() {
@@ -557,7 +429,8 @@ class EmployementcommentIndex extends PureComponent {
     }
 
     render() {
-        const {comments,visiablecomment,visiableresponsecomment,itemData,editcomment,editresponsecomment,responsecomment} = this.state;
+        const {comments} = this.props;
+        const {visiablecomment,visiableresponsecomment,itemData,editcomment,editresponsecomment,responsecomment} = this.state;
         return (
             <>
                 <div className="card">
@@ -623,8 +496,8 @@ class EmployementcommentIndex extends PureComponent {
                                                     <div className="media-body">
 
                                                         <CommentViewList {...item} responsecommentFromItem={this.responsecommentFromItem}
-                                                                         unlikeItem={this.unlikeItem} likeItem={this.likeItem} deleteItem={this.deleteItem}
-                                                                         editcommentFromItem={this.editcommentFromItem} unactiveItem={this.unactiveItem}/>
+                                                                         unlikeItem={this.unlikeItem} likeItem={this.likeItem} deleteItem={this.props.deleteItem}
+                                                                         editcommentFromItem={this.editcommentFromItem} unactiveItem={this.props.unactiveItem}/>
 
 
                                                         {(item.id === itemData.id) && (
@@ -772,5 +645,14 @@ class EmployementcommentIndex extends PureComponent {
         )
     }
 }
+EmployementcommentIndex.propTypes = {
+    loadCommentsEmployments: PropTypes.func.isRequired,
+};
 
-export default EmployementcommentIndex;
+const mapStoreToProps = store => ({
+    comments: store.commentsites.comments
+
+});
+export default connect(mapStoreToProps, {
+    loadCommentsEmployments,unactiveItem,deleteItem
+})(EmployementcommentIndex);

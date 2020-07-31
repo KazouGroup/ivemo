@@ -8,6 +8,7 @@ import forumshowReducer from "./forum/forumshowReducer";
 import forumReducer from "./forum/forumReducer";
 import annonceventeReducer from "./annoncevente/annonceventeReducer";
 import annoncelocationReducer from "./annoncelocation/annoncelocationReducer";
+import commentsReducer from "./commentsReducer";
 
 
 export default combineReducers({
@@ -18,6 +19,7 @@ export default combineReducers({
     forumshow: forumshowReducer,
     annonceventes: annonceventeReducer,
     annoncelocations: annoncelocationReducer,
+    commentsites: commentsReducer,
     contactservicemploymentcontactshow: contactservicemploymentcontactshowReducer,
     contactservicemploymentshow: contactservicemploymentshowReducer,
 })

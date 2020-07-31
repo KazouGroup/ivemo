@@ -12,7 +12,7 @@ class AnnoncelocationInteresse extends Component {
         super(props);
         this.state = {
             annoncelocationsinteresses: {annoncetype: [], categoryannoncelocation: [], city: [], user: []},
-            visiable: 2,
+            visiable: 4,
         };
 
         this.loadmoresItem = this.loadmoresItem.bind(this);
