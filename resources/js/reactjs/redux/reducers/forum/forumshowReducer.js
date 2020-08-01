@@ -24,10 +24,12 @@ export default produce((draft, action = {}) => {
 
             case 'LIKE_FORUM_ADD':
                 draft.item.likeked = action.payload;
+                draft.item.countlikes ++;
                 return draft;
 
             case 'LIKE_FORUM_REMOVE':
                 draft.item.likeked = !action.payload;
+                draft.item.countlikes --;
                 return draft;
         }
     },

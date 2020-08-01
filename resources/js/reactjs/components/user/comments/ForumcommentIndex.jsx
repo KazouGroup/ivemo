@@ -12,7 +12,7 @@ import StatusComment from "./inc/StatusComment";
 import CommentListSkeleton from "../../inc/user/comment/CommentListSkeleton";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {loadCommentsForums,likeItem,unlikeItem,unactiveItem,likeItem,deleteItem} from "../../../redux/actions/commentsActions";
+import {loadCommentsForums,likeItem,unlikeItem,unactiveItem,deleteItem} from "../../../redux/actions/commentsActions";
 
 
 class ForumcommentIndex extends PureComponent {
