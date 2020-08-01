@@ -10,7 +10,7 @@ import ProfileUserComment from "../../inc/vendor/comment/ProfileUserComment";
 import CommentViewList from "./inc/CommentViewList";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {loadCommentsBlogannonceventes,unactiveItem,deleteItem} from "../../../redux/actions/commentsActions";
+import {loadCommentsBlogannonceventes,likeItem,unlikeItem,unactiveItem,deleteItem} from "../../../redux/actions/commentsActions";
 
 
 class BlogannonceventecommentIndex extends Component {
@@ -39,8 +39,6 @@ class BlogannonceventecommentIndex extends Component {
         this.loadmoresresponseItem = this.loadmoresresponseItem.bind(this);
         this.cancelresponseCourse = this.cancelresponseCourse.bind(this);
 
-        this.likeItem = this.likeItem.bind(this);
-        this.unlikeItem = this.unlikeItem.bind(this);
         this.deleteresponseItem = this.deleteresponseItem.bind(this);
         this.unactiveresponseItem = this.unactiveresponseItem.bind(this);
         this.editcommentFromItem = this.editcommentFromItem.bind(this);
@@ -68,42 +66,6 @@ class BlogannonceventecommentIndex extends Component {
                 </span>
             )
         }
-    }
-
-    likeItem(item) {
-        const url = route('comments_likes.active', [item.id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    unlikeItem(item) {
-        const url = route('comments_likes.unactive', [item.id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
     }
 
     loadmoresItem() {
@@ -473,7 +435,7 @@ class BlogannonceventecommentIndex extends Component {
                                                <div className="media-body">
 
                                                    <CommentViewList {...item} responsecommentFromItem={this.responsecommentFromItem}
-                                                                    unlikeItem={this.unlikeItem} likeItem={this.likeItem} deleteItem={this.props.deleteItem}
+                                                                    unlikeItem={this.props.unlikeItem} likeItem={this.props.likeItem} deleteItem={this.props.deleteItem}
                                                                     editcommentFromItem={this.editcommentFromItem} unactiveItem={this.props.unactiveItem}/>
 
 
@@ -645,5 +607,5 @@ const mapStoreToProps = store => ({
 
 });
 export default connect(mapStoreToProps, {
-    loadCommentsBlogannonceventes,unactiveItem,deleteItem
+    loadCommentsBlogannonceventes,likeItem,unlikeItem,unactiveItem,deleteItem
 })(BlogannonceventecommentIndex);

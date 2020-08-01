@@ -30,9 +30,14 @@ export default produce((draft, action = {}) => {
             draft.comments = action.payload;
             return;
         case 'LIKE_COMMENT_ADD':
-            const { payload } = action;
-            let datalike = draft.comments.findIndex(i => i.id === payload);
-            draft.comments[datalike].likeked = payload;
+            let datalike = draft.comments.findIndex(i => i.id === action.payload);
+            draft.comments[datalike].likeked = action.payload;
+            draft.comments[datalike].likeked_count ++;
+            return draft;
+        case 'LIKE_COMMENT_REMOVE':
+            let dataunlike = draft.comments.findIndex(i => i.id === action.payload);
+            draft.comments[dataunlike].likeked = !action.payload;
+            draft.comments[dataunlike].likeked_count --;
             return draft;
         case 'UNACTIVE_COMMENTS':
             let dataunactive = draft.comments.findIndex(i => i.id === action.payload);

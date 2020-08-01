@@ -12,7 +12,7 @@ import StatusComment from "./inc/StatusComment";
 import CommentListSkeleton from "../../inc/user/comment/CommentListSkeleton";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {loadCommentsForums,unactiveItem,likeItem,deleteItem} from "../../../redux/actions/commentsActions";
+import {loadCommentsForums,likeItem,unlikeItem,unactiveItem,likeItem,deleteItem} from "../../../redux/actions/commentsActions";
 
 
 class ForumcommentIndex extends PureComponent {
@@ -41,8 +41,6 @@ class ForumcommentIndex extends PureComponent {
         this.loadmoresresponseItem = this.loadmoresresponseItem.bind(this);
         this.cancelresponseCourse = this.cancelresponseCourse.bind(this);
 
-        //this.likeItem = this.likeItem.bind(this);
-        this.unlikeItem = this.unlikeItem.bind(this);
         this.deleteresponseItem = this.deleteresponseItem.bind(this);
         this.unactiveresponseItem = this.unactiveresponseItem.bind(this);
         this.editcommentFromItem = this.editcommentFromItem.bind(this);
@@ -70,24 +68,6 @@ class ForumcommentIndex extends PureComponent {
                 </span>
             )
         }
-    }
-
-    unlikeItem(item) {
-        const url = route('comments_likes.unactive', [item.id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
     }
 
     loadmoresItem() {
@@ -465,7 +445,7 @@ class ForumcommentIndex extends PureComponent {
                                             <div className="media-body">
 
                                                 <CommentViewList {...item} responsecommentFromItem={this.responsecommentFromItem}
-                                                                 unlikeItem={this.unlikeItem} likeItem={this.props.likeItem} deleteItem={this.props.deleteItem}
+                                                                 unlikeItem={this.props.unlikeItem} likeItem={this.props.likeItem} deleteItem={this.props.deleteItem}
                                                                  editcommentFromItem={this.editcommentFromItem} unactiveItem={this.props.unactiveItem}/>
 
 
@@ -622,5 +602,5 @@ const mapStoreToProps = store => ({
 
 });
 export default connect(mapStoreToProps, {
-    loadCommentsForums,unactiveItem,likeItem,deleteItem
+    loadCommentsForums,likeItem,unlikeItem,unactiveItem,deleteItem
 })(ForumcommentIndex);

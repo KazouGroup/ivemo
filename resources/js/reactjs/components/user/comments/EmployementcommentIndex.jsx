@@ -12,7 +12,7 @@ import StatusComment from "./inc/StatusComment";
 import CommentListSkeleton from "../../inc/user/comment/CommentListSkeleton";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {loadCommentsEmployments,unactiveItem,deleteItem} from "../../../redux/actions/commentsActions";
+import {loadCommentsEmployments,likeItem,unlikeItem,unactiveItem,deleteItem} from "../../../redux/actions/commentsActions";
 
 
 class EmployementcommentIndex extends PureComponent {
@@ -41,8 +41,6 @@ class EmployementcommentIndex extends PureComponent {
         this.loadmoresresponseItem = this.loadmoresresponseItem.bind(this);
         this.cancelresponseCourse = this.cancelresponseCourse.bind(this);
 
-        this.likeItem = this.likeItem.bind(this);
-        this.unlikeItem = this.unlikeItem.bind(this);
         this.deleteresponseItem = this.deleteresponseItem.bind(this);
         this.unactiveresponseItem = this.unactiveresponseItem.bind(this);
         this.editcommentFromItem = this.editcommentFromItem.bind(this);
@@ -70,43 +68,6 @@ class EmployementcommentIndex extends PureComponent {
                 </span>
             )
         }
-    }
-
-    likeItem(item) {
-        const url = route('comments_likes.active', [item.id]);
-        dyaxios.get(url).then((response) => {
-
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    unlikeItem(item) {
-        const url = route('comments_likes.unactive', [item.id]);
-        dyaxios.get(url).then((response) => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
     }
 
     loadmoresItem() {
@@ -496,7 +457,7 @@ class EmployementcommentIndex extends PureComponent {
                                                     <div className="media-body">
 
                                                         <CommentViewList {...item} responsecommentFromItem={this.responsecommentFromItem}
-                                                                         unlikeItem={this.unlikeItem} likeItem={this.likeItem} deleteItem={this.props.deleteItem}
+                                                                         unlikeItem={this.props.unlikeItem} likeItem={this.props.likeItem} deleteItem={this.props.deleteItem}
                                                                          editcommentFromItem={this.editcommentFromItem} unactiveItem={this.props.unactiveItem}/>
 
 
@@ -654,5 +615,5 @@ const mapStoreToProps = store => ({
 
 });
 export default connect(mapStoreToProps, {
-    loadCommentsEmployments,unactiveItem,deleteItem
+    loadCommentsEmployments,likeItem,unlikeItem,unactiveItem,deleteItem
 })(EmployementcommentIndex);

@@ -7,6 +7,7 @@ import {
     GET_COMMENTS_EMPLOYMENTS,
     GET_COMMENTS_FORUMS,
     LIKE_COMMENT_ADD,
+    LIKE_COMMENT_REMOVE,
     UNACTIVE_COMMENTS,
     DELETE_COMMENTS,
 } from "./types";
@@ -128,6 +129,20 @@ export const likeItem = (props) => dispatch => {
 
             dispatch({
                 type: LIKE_COMMENT_ADD,
+                payload: props.id,
+            })
+        ).catch(error => console.error(error));
+};
+
+export const unlikeItem = (props) => dispatch => {
+
+
+    let url = route('comments_likes.unactive', [props.id]);
+    dyaxios.get(url)
+        .then(() =>
+
+            dispatch({
+                type: LIKE_COMMENT_REMOVE,
                 payload: props.id,
             })
         ).catch(error => console.error(error));
