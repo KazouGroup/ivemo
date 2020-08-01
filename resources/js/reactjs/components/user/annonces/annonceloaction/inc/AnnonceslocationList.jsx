@@ -159,7 +159,7 @@ class AnnonceslocationList extends PureComponent {
                                                 </Button>
                                                 :
                                                 <>
-                                                    {this.props.bookmarked ?
+                                                    {this.props.favoriteted ?
 
                                                         <>
                                                             <Button onClick={() => this.props.favoriteItem(this.props)}

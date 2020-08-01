@@ -30,7 +30,7 @@ class AnnoncelocationController extends Controller
             'create','store','edit','update','destroy',
             'apiannonceslocationsbyuser','annonceslocationsbyuser',
             'apicategoryannoncelocations_by_user',
-            'statusitem','adminstatusitem','statuscomments',
+            'statusitem','adminstatusitem','activecomments','desactivecomments',
             'apiannoncelocationsbyannoncetypebyannoncelocation'
         ]]);
     }
@@ -301,7 +301,7 @@ class AnnoncelocationController extends Controller
      */
     public function apiannoncelocationinteressebycity(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city)
     {
-        $annoncelocation = AnnoncelocationResource::collection($categoryannoncelocation->annoncelocations()
+        $annoncelocations = AnnoncelocationResource::collection($categoryannoncelocation->annoncelocations()
             ->with('user','city','annoncetype','categoryannoncelocation')
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
@@ -313,7 +313,7 @@ class AnnoncelocationController extends Controller
             ->where(['status' => 1,'status_admin' => 1])
             ->take(10)->distinct()->get());
 
-        return response()->json($annoncelocation, 200);
+        return response()->json($annoncelocations, 200);
     }
 
     public function apiannoncelocationinteresseslug(categoryannoncelocation $categoryannoncelocation)
@@ -408,13 +408,24 @@ class AnnoncelocationController extends Controller
         return response()->json($annoncelocation,200);
     }
 
-    public function statuscomments($id)
+    public function activecomments($annoncelocation)
     {
-        $annoncelocation = annoncelocation::where('id', $id)->findOrFail($id);
+        $annoncelocation = annoncelocation::where('id', $annoncelocation)->findOrFail($annoncelocation);
 
         $this->authorize('update',$annoncelocation);
 
-        $annoncelocation->update(['status_comments' => !$annoncelocation->status_comments,]);
+        $annoncelocation->update(['status_comments' => 1,]);
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+    }
+
+    public function desactivecomments($annoncelocation)
+    {
+        $annoncelocation = annoncelocation::where('id', $annoncelocation)->findOrFail($annoncelocation);
+
+        $this->authorize('update',$annoncelocation);
+
+        $annoncelocation->update(['status_comments' => 0,]);
 
         return response('Confirmed',Response::HTTP_ACCEPTED);
     }

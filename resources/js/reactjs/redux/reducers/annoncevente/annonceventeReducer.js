@@ -12,13 +12,9 @@ export default produce((draft, action = {}) => {
             case 'GET_CATEGORYANNONCEVENTES':
                 draft.catgoryannonceventes = action.payload;
                 return;
-        }
-        switch (action.type) {
             case 'GET_CITYANNONCEVENTES':
                 draft.cityannonceventes = action.payload;
                 return;
-        }
-        switch (action.type) {
             case 'GET_CATEGORYANNONCEVENTES_BY_CITY':
                 draft.catgoryannonceventes = action.payload;
                 return;
