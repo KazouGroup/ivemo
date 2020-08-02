@@ -23,7 +23,7 @@ import {
     likeItem,unlikeItem,
     favoriteItem,unfavoriteItem,
 } from "../../../redux/actions/employment/employmentshowActions";
-
+const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 class EmployementShowUserSite extends Component {
     constructor(props) {
@@ -296,11 +296,16 @@ class EmployementShowUserSite extends Component {
         return { __html: employment.description};
     }
     data_countFormatter(visits_count, precision) {
-        const abbrev = ['', 'k', 'M', 'B', 'T'];
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(visits_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
         const suffix = abbrev[order];
         return (visits_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+    data_countlikeFormatter(countlikes, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countlikes)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (countlikes / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
     render() {
         const {employment} = this.props;
@@ -380,8 +385,8 @@ class EmployementShowUserSite extends Component {
                                                             {$guest ?
                                                                 <>
                                                                     <Button data-toggle="modal" data-target="#loginModal"
-                                                                            className="btn btn-facebook btn-sm btn-neutral" title="J'aime">
-                                                                        <i className="far fa-heart"></i> <b>J'aime</b>
+                                                                            className="btn btn-facebook btn-sm btn-neutral" title={`${employment.countlikes} J\'aime`}>
+                                                                        <i className="far fa-heart"></i> <b>{this.data_countlikeFormatter(employment.countlikes || "0")} J'aime</b>
                                                                     </Button>
                                                                     <Button data-toggle="modal" data-target="#loginModal"
                                                                             className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
@@ -394,16 +399,16 @@ class EmployementShowUserSite extends Component {
                                                                     {employment.likeked ?
                                                                         <>
                                                                             <Button onClick={() => this.props.unlikeItem(employment)}
-                                                                                    className="btn btn-info btn-sm" title="Je n'aime plus">
-                                                                                <i className="fas fa-heart"></i> <b>J'aime</b>
+                                                                                    className="btn btn-info btn-sm" title={`${employment.countlikes} J\'aime`}>
+                                                                                <i className="fas fa-heart"></i> <b>{this.data_countlikeFormatter(employment.countlikes || "0")} J'aime</b>
                                                                             </Button>
                                                                         </>
 
                                                                         :
                                                                         <>
                                                                             <Button onClick={() => this.props.likeItem(employment)}
-                                                                                    className="btn btn-facebook btn-sm btn-neutral" title="J'aime">
-                                                                                <i className="far fa-heart"></i> <b>J'aime</b>
+                                                                                    className="btn btn-facebook btn-sm btn-neutral" title={`${employment.countlikes} J\'aime`}>
+                                                                                <i className="far fa-heart"></i> <b>{this.data_countlikeFormatter(employment.countlikes || "0")} J'aime</b>
                                                                             </Button>
                                                                         </>
                                                                     }

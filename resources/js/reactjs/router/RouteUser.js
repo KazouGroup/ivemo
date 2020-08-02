@@ -256,9 +256,9 @@ const RouteUser = props => (
           <Route exact path="/profile/:user/personal_mails/contacts/:contactuser/" component={PersonalmessagescontactShowUser}/>
 
 
-          <Route exact path="/profile/:user/personal_mails/employments/" component={ContactserviceEmploymentIndex}/>
-          <Route exact path="/profile/:user/personal_mails/employments/:employment/" component={ContactserviceEmploymentShow}/>
-          <Route exact path="/profile/:user/personal_mails/employments/:employment/:contactservice/" component={withRouter(ContactserviceEmploymentContactShow)}/>
+          <Route exact path="/profile/:user/statistics/employments/" component={ContactserviceEmploymentIndex}/>
+          <Route exact path="/profile/:user/statistics/employments/:employment/" component={ContactserviceEmploymentShow}/>
+          <Route exact path="/profile/:user/statistics/employments/:employment/:contactservice/" component={withRouter(ContactserviceEmploymentContactShow)}/>
 
           <Route exact path="/profile/:user/personal_settings/employments/" component={PrivateUserEmployments}/>
           <Route exact path="/profile/:user/personal_settings/employments/:categoryemployment/" component={withRouter(PrivateUserEmploymentsByCategoryemployment)}/>

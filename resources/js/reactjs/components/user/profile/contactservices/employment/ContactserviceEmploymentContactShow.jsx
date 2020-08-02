@@ -75,7 +75,7 @@ class ContactserviceEmploymentContactShow extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.props.history.push(`/profile/${$userIvemo.slug}/personal_mails/employments/${this.state.contactservice.contactserviceable.slugin}/`);
+                    this.props.history.push(`/profile/${$userIvemo.slug}/statistics/employments/${this.props.match.params.employment}/`);
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
