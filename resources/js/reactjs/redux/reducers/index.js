@@ -11,6 +11,7 @@ import annoncelocationReducer from "./annoncelocation/annoncelocationReducer";
 import commentsReducer from "./commentsReducer";
 import annoncelocationshowReducer from "./annoncelocation/annoncelocationshowReducer";
 import blogannoncelocationReducer from "./blogannoncelocation/blogannoncelocationReducer";
+import avisuserReducer from "./avisuserReducer";
 
 
 export default combineReducers({
@@ -24,6 +25,7 @@ export default combineReducers({
     annoncelocationshow: annoncelocationshowReducer,
     blogannoncelocations: blogannoncelocationReducer,
     commentsites: commentsReducer,
+    avisusers: avisuserReducer,
     contactservicemploymentcontactshow: contactservicemploymentcontactshowReducer,
     contactservicemploymentshow: contactservicemploymentshowReducer,
 })

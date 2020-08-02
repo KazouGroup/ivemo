@@ -207,7 +207,7 @@ class ForumShow extends Component {
                                                                      src={forum.user.avatar}/>
                                                             }
                                                             <div className="mx-3">
-                                                                <NavLink to={`/pro/${forum.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{forum.user.first_name}</b>
+                                                                <NavLink to={forum.user.status_profile ? `/pro/${forum.user.slug}/` : `/user/${forum.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{forum.user.first_name}</b>
                                                                     <small className="d-block text-muted">{forum.statusOnline &&(<i className="fas fa-circle text-success"></i>)}  <i className="now-ui-icons tech_watch-time"/> {moment(forum.created_at).format('LL')}</small>
                                                                 </NavLink>
                                                             </div>

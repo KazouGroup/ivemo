@@ -19,7 +19,7 @@ class ForumService
             ->with('user','categoryforum')
             ->whereIn('categoryforum_id',[$categoryforum->id])
             ->with(['user' => function ($q) {
-                $q->select('id','first_name','sex','slug','created_at','avatar');}])
+                $q->select('id','first_name','status_profile','sex','slug','created_at','avatar');}])
             ->whereHas('categoryforum', function ($q) {$q->where('status',1);})
             ->orderByDesc('created_at');
     }
@@ -56,7 +56,7 @@ class ForumService
         $data = ForumResource::collection(forum::where(['status' => 1,'status_admin' => 1])
             ->with('user','categoryforum')
             ->with(['user' => function ($q) {
-                $q->select('id','first_name','sex','slug','created_at','avatar');}])
+                $q->select('id','first_name','status_profile','sex','slug','created_at','avatar');}])
             ->whereHas('categoryforum', function ($q) {$q->where('status',1);})
             ->orderByDesc('created_at')
             ->distinct()->paginate(40));
@@ -116,7 +116,7 @@ class ForumService
             ->with('user','categoryforum')
             ->whereIn('categoryforum_id',[$categoryforum->id])
             ->with(['user' => function ($q) {$q->with('profile')
-                ->select('id','first_name','sex','created_at','avatar','slug');}])
+                ->select('id','first_name','status_profile','sex','created_at','avatar','slug');}])
             ->whereHas('categoryforum', function ($q) {$q->where('status',1);})
             ->distinct()->firstOrFail());
 

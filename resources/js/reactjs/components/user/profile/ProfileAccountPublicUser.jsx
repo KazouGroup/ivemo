@@ -11,10 +11,9 @@ import NavLinkPublicAnnonceUser from "./annonces/NavLinkPublicAnnonceUser";
 import NavNavigatePivateUser from "./NavNavigatePivateUser";
 import NavLinkPublicBlogannoncesUser from "./blogs/public/NavLinkPublicBlogannoncesUser";
 import FormNewletterSubcribeProfileAccountUser from "./form/FormNewletterSubcribeProfileAccountUser";
-import ProfileAccountAvisUser from "./file_public/avisuser/ProfileAccountAvisUser";
 import Skeleton from "react-loading-skeleton";
 import ReadMoreAndLess from "react-read-more-less";
-import ProfilePublicAccountAvisUser from "./file_public/avisuser/ProfilePublicAccountAvisUser";
+import ProfileAccountAvisUser from "./file_public/ProfileAccountAvisUser";
 
 
 class ProfileAccountPublicUser extends Component {
@@ -299,7 +298,7 @@ class ProfileAccountPublicUser extends Component {
                                                 {!userPublick.profile.status_team_user ? <></> : <ProfileAccountTeamUser {...this.props}/>}
 
 
-                                                {!userPublick.profile.status_avis ? <></> :<ProfilePublicAccountAvisUser {...this.props}/>}
+                                                {!userPublick.profile.status_avis ? <></> :<ProfileAccountAvisUser {...this.props}/>}
 
                                                 <div className="card"  id="contact">
                                                     <div className="card-body">
