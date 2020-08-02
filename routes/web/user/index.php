@@ -18,6 +18,7 @@ require(__DIR__ . DIRECTORY_SEPARATOR . 'profile_public.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'subscriberuser.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'teamuser.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'favorites.php');
+require(__DIR__ . DIRECTORY_SEPARATOR . 'followerusers.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'likes.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'workwithus.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'categories'. DIRECTORY_SEPARATOR . 'categoryannoncelocation.php');

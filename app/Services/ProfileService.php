@@ -211,13 +211,23 @@ class ProfileService
 
     public static function apiprofilemployments($user)
     {
-        $employments = EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
-                    ->where(['status' => 1,'status_admin' => 1])
-                    ->whereIn('user_id',[$user->id])
-                    ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
-                    ->whereHas('city', function ($q) {$q->where('status',1);})
-                    ->distinct()->paginate(40));
-                    //->distinct()->get());
+        //$employments = EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
+        //            ->where(['status' => 1,'status_admin' => 1])
+        //            ->whereIn('user_id',[$user->id])
+        //            ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
+        //            ->whereHas('city', function ($q) {$q->where('status',1);})
+        //            //->distinct()->paginate(40));
+        //            ->distinct()->get());
+
+
+        $employments = EmploymentResource::collection($user->employments()
+            ->with('user','city','categoryemployment','member')
+            ->where(['status' => 1,'status_admin' => 1])
+            ->whereIn('user_id',[$user->id])
+            ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->distinct()->paginate(40));
+            //->distinct()->get());
 
         return $employments;
     }

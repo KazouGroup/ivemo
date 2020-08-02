@@ -12,252 +12,40 @@ import NavLinkPublicEmploymentUser from "./NavLinkPublicEmploymentUser";
 import EmploymentListSkeleton from "../../../../inc/user/employment/EmploymentListSkeleton";
 import Navlinknewemployment from "../../../employment/treatement/Navlinknewemployment";
 import NavLinkPublicAnnonceUser from "../../annonces/NavLinkPublicAnnonceUser";
-import PrivateUserEmployementList from "../../../employment/inc/PrivateUserEmployementList";
 import ButonSubscribedEmployment from "../../../../inc/vendor/ButonSubscribedEmployment";
 import HelmetSite from "../../../../inc/user/HelmetSite";
 import EmployementList from "../../../employment/inc/EmployementList";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {
+    subscribeItem,
+    unsubscribeItem,
+    deleteItem,
+    favoriteItem,
+    loademploymentbyuserpublic,loadProfileusersforpublic, unactiveItem,
+    unfavoriteItem
+} from "../../../../../redux/actions/employment/employmentActions";
 
 
 class PublicUserEmployments extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            useremploymentPublick:{profile:[]},
-            employments:{categoryemployment:[],user:[],city:[]},
-            visiable: 30,
+            visiable: 20,
         };
 
-        this.deleteItem = this.deleteItem.bind(this);
-        this.favoriteItem = this.favoriteItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
-        this.subscribeItem = this.subscribeItem.bind(this);
     }
+
     loadmoresItem() {
         this.setState((old) => {
-            return { visiable: old.visiable + 30 }
+            return { visiable: old.visiable + 10 }
         })
-    }
-
-    favoriteItem(item) {
-        const url = route('employments_favorite.favorite', [item.id]);
-        dyaxios.get(url).then(() => {
-
-            if(item.bookmarked){
-                $.notify({
-                        message: "Annonce retirée de vos favoris",
-                    },
-                    {
-                        allow_dismiss: false,
-                        type: 'info',
-                        placement: {
-                            from: 'bottom',
-                            align: 'center'
-                        },
-                        animate: {
-                            enter: "animate__animated animate__fadeInUp",
-                            exit: "animate__animated animate__fadeOutDown"
-                        },
-                    });
-            }else {
-                $.notify({
-                        message: "Annonce ajoutée à vos favoris",
-                    },
-                    {
-                        allow_dismiss: false,
-                        type: 'info',
-                        placement: {
-                            from: 'bottom',
-                            align: 'center'
-                        },
-                        animate: {
-                            enter: "animate__animated animate__fadeInUp",
-                            exit: "animate__animated animate__fadeOutDown"
-                        },
-                    });
-            }
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    subscribeItem(item) {
-        const url = route('employments_subscribe.subscribe', [item.id]);
-        dyaxios.get(url).then(() => {
-
-            if(item.subscribedemployment){
-                $.notify({
-                        message: "Notifications desactivé",
-                    },
-                    {
-                        allow_dismiss: false,
-                        type: 'info',
-                        placement: {
-                            from: 'bottom',
-                            align: 'center'
-                        },
-                        animate: {
-                            enter: "animate__animated animate__fadeInUp",
-                            exit: "animate__animated animate__fadeOutDown"
-                        },
-                    });
-            }else {
-                $.notify({
-                        message: "Notifications activé",
-                    },
-                    {
-                        allow_dismiss: false,
-                        type: 'info',
-                        placement: {
-                            from: 'bottom',
-                            align: 'center'
-                        },
-                        animate: {
-                            enter: "animate__animated animate__fadeInUp",
-                            exit: "animate__animated animate__fadeOutDown"
-                        },
-                    });
-            }
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    unactiveItem(id){
-        Swal.fire({
-            title: 'Désactiver l\'annonce?',
-            text: "êtes vous sure de vouloir confirmer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                let isNotId = item => item.id !== id;
-                let updatedItems = this.state.employments.filter(isNotId);
-                this.setState({employments: updatedItems});
-
-                //Envoyer la requet au server
-                let url = route('employmentsunactivated_site',id);
-                dyaxios.get(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            message: "Cette annonce a été masquée aux utilisateurs",
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
-                            },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
-                            },
-                        });
-                    /** End alert ***/
-
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        })
-
-    }
-
-    deleteItem(id) {
-        Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                let isNotId = item => item.id !== id;
-                let updatedItems = this.state.employments.filter(isNotId);
-                this.setState({employments: updatedItems});
-
-                const url = route('employmentsdelete_site.site',[id]);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            // title: 'Update',
-                            message: 'Annonce suprimée avec success'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animate__animated animate__fadeInRight',
-                                exit: 'animate__animated animate__fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
     }
 
     loadItems(){
-        let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.profilpublique_employments',[itemuser])).then(response => this.setState({employments: response.data,}));
-        dyaxios.get(route('api.profilpublique',[itemuser])).then(response => this.setState({useremploymentPublick: response.data,}));
+        this.props.loademploymentbyuserpublic(this.props);
+        this.props.loadProfileusersforpublic(this.props);
     }
 
    // Lifecycle Component Method
@@ -266,12 +54,17 @@ class PublicUserEmployments extends Component {
     }
 
     render() {
-        const {employments,useremploymentPublick,visiable} = this.state;
+        const {employments,useremploymentPublick} = this.props;
+        const {visiable} = this.state;
         const mapEmployments = employments.length >= 0 ? (
             employments.slice(0, visiable).map(item => {
                 return(
 
-                    <EmployementList key={item.id} {...item} favoriteItem={this.favoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
+                    <EmployementList key={item.id} {...item}
+                                     favoriteItem={this.props.favoriteItem}
+                                     unfavoriteItem={this.props.unfavoriteItem}
+                                     deleteItem={this.props.deleteItem}
+                                     unactiveItem={this.props.unactiveItem} />
                 )
             })
         ):(
@@ -317,7 +110,7 @@ class PublicUserEmployments extends Component {
                                                 <ButonSubscribedEmployment namesubscribed={`Recevoir toutes les notifications`} nameunsubscribed={`Ne plus recevoir les notifications`}
                                                                            titleToltipeSubscribed={`Abonnez vous pour recevoir tous annonces des emploies et services postées par`}
                                                                            titleToltipeUnsubscribed={`Ne plus etre notifier des annonces des emploies et services postées par`}
-                                                                           subscribeItem={this.subscribeItem}
+                                                                           subscribeItem={this.props.subscribeItem} unsubscribeItem={this.props.unsubscribeItem}
                                                                            {...useremploymentPublick}/>
                                             </div>
                                         </>
@@ -469,8 +262,7 @@ class PublicUserEmployments extends Component {
                                                     <ButonSubscribedEmployment namesubscribed={`Recevoir toutes les notifications`} nameunsubscribed={`Ne plus recevoir les notifications`}
                                                                                titleToltipeSubscribed={`Abonnez vous pour recevoir tous annonces des emploies et services postées par`}
                                                                                titleToltipeUnsubscribed={`Ne plus etre notifier des annonces des emploies et services postées par`}
-                                                                               subscribeItem={this.subscribeItem}
-                                                                               unsubscribedItem={this.unsubscribedItem}
+                                                                               subscribeItem={this.props.subscribeItem} unsubscribeItem={this.props.unsubscribeItem}
                                                                                {...useremploymentPublick}/>
 
                                                 }
@@ -522,5 +314,23 @@ class PublicUserEmployments extends Component {
         )
     }
 }
+PublicUserEmployments.propTypes = {
+    loademploymentbyuserpublic: PropTypes.func.isRequired,
+    loadProfileusersforpublic: PropTypes.func.isRequired,
+};
 
-export default PublicUserEmployments;
+const mapStoreToProps = store => ({
+    employments: store.employments.items,
+    useremploymentPublick: store.profile.profiluser
+
+});
+
+export default connect(mapStoreToProps,
+    {
+        loademploymentbyuserpublic,
+        loadProfileusersforpublic,
+        favoriteItem,unfavoriteItem,
+        subscribeItem,unsubscribeItem,
+        deleteItem,unactiveItem,
+    }
+)(PublicUserEmployments);

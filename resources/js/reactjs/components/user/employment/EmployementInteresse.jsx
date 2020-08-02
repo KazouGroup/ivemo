@@ -100,4 +100,4 @@ export default connect(mapStoreToProps,
         favoriteItem,unfavoriteItem,
         deleteItem,unactiveItem,
     }
-    )(EmployementInteresse);
+)(EmployementInteresse);

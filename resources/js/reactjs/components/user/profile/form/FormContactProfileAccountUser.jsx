@@ -3,6 +3,7 @@ import { Button,Row, Form, Input, InputGroup,UncontrolledTooltip } from 'reactst
 import FieldInput from "../../../inc/vendor/FieldInput";
 import {NavLink} from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
+import ButonFollowerUser from "../../../inc/vendor/ButonFollowerUser";
 
 class FormContactProfileAccountUser extends PureComponent {
     constructor(props) {
@@ -117,6 +118,7 @@ class FormContactProfileAccountUser extends PureComponent {
                             </div>
                         </div>
                         <div className="text-right ml-auto">
+
                             {this.props.phone && (
                                 <>
                                     <UncontrolledTooltip placement="bottom" target="TooltipPhone">
@@ -127,6 +129,14 @@ class FormContactProfileAccountUser extends PureComponent {
                                     </Button>
                                 </>
                             )}
+
+
+
+                            <ButonFollowerUser {...this.props}
+                                               unfollowerItem={this.props.unfollowerItem}
+                                               followerItem={this.props.followerItem}
+                                               nameunfollower={`Suivre`}
+                                               nameununfollower={`Abonné`}/>
 
                         </div>
                     </div>

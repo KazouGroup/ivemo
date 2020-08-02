@@ -10,8 +10,8 @@ import AvisuserList from "./inc/AvisuserList";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {
-    loadAvisusersforpublic,deleteItem,unactiveItem
-} from "../../../../redux/actions/avisuserActions";
+    loadAvisusersforpublic,deleteavisItem,unactiveavisItem
+} from "../../../../redux/actions/profileActions";
 
 class ProfileAccountAvisUser extends Component {
     constructor(props) {
@@ -476,7 +476,7 @@ class ProfileAccountAvisUser extends Component {
 
                                                                <div className="media-footer">
                                                                    {$userIvemo.id === item.to.id && (
-                                                                       <Button onClick={() => this.props.unactiveItem(item.id)}
+                                                                       <Button onClick={() => this.props.unactiveavisItem(item.id)}
                                                                                className="btn btn-success btn-neutral pull-right">
                                                                            <i className="now-ui-icons ui-1_check" /> Masquer
                                                                        </Button>
@@ -506,7 +506,7 @@ class ProfileAccountAvisUser extends Component {
 
                                                                    {$userIvemo.id === item.from.id && (
                                                                        <>
-                                                                           <Button onClick={() => this.props.deleteItem(item.id)}
+                                                                           <Button onClick={() => this.props.deleteavisItem(item.id)}
                                                                                    className="btn btn-danger btn-neutral pull-right">
                                                                                <i className="far fa-trash-alt"></i> Supprimer
                                                                            </Button>
@@ -771,9 +771,9 @@ ProfileAccountAvisUser.propTypes = {
 };
 
 const mapStoreToProps = store => ({
-    avisusers: store.avisusers.avisusers
+    avisusers: store.profile.avisusers
 });
 
 export default connect(mapStoreToProps, {
-    loadAvisusersforpublic,deleteItem,unactiveItem
+    loadAvisusersforpublic,deleteavisItem,unactiveavisItem
 })(ProfileAccountAvisUser);

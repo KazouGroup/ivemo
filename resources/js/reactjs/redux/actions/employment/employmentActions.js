@@ -1,15 +1,31 @@
 import {
+    SUBSCRIBE_USER_FOR_EMPLOYEMENT_ADD,
+    SUBSCRIBE_USER_FOR_EMPLOYEMENT_REMOVE,
     FAVORITE_EMPLOYEMENT_ADD,
     FAVORITE_EMPLOYEMENT_REMOVE,
     GET_CATEGORYEMPLOYMENTS,
     GET_CATEGORYEMPLOYMENTS_BY_CATEGORY,
     GET_CATEGORYEMPLOYMENTS_BY_USER,
+    GET_EMPLOYEMENT_BY_USER_PUBLIC,
     GET_EMPLOYEMENT_INTERESSE,
     UNACTIVE_EMPLOYEMENT,
     DELETE_EMPLOYEMENT,
+    GET_PROFILE_USER_FOR_PUBLIC,
 } from "../types";
 
 import Swal from "sweetalert2";
+
+export const loadProfileusersforpublic = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let url = route('api.profilpublique',[itemuser]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_PROFILE_USER_FOR_PUBLIC,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
 
 export const loadCategoryemployments = () => dispatch => {
 
@@ -52,6 +68,44 @@ export const loademploymentinteresse = (props) => dispatch => {
                 payload: response.data
             })
         ).catch(error => console.error(error));
+};
+
+export const loademploymentbyuserpublic = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let url = route('api.profilpublique_employments', [itemuser]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_EMPLOYEMENT_BY_USER_PUBLIC,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const   subscribeItem = props => dispatch => {
+
+    const url = route('employments_subscribe.subscribe', [props.id]);
+    dyaxios.post(url).then(() => {
+
+            dispatch({
+                type: SUBSCRIBE_USER_FOR_EMPLOYEMENT_ADD,
+                payload: props.id
+            });
+        }
+    ).catch(error => console.error(error));
+};
+
+export const  unsubscribeItem = props => dispatch => {
+
+    const url = route('employments_subscribe.subscribe', [props.id]);
+    dyaxios.post(url).then(() => {
+
+            dispatch({
+                type: SUBSCRIBE_USER_FOR_EMPLOYEMENT_REMOVE,
+                payload: props.id
+            });
+        }
+    ).catch(error => console.error(error));
 };
 
 export const favoriteItem = props => dispatch => {

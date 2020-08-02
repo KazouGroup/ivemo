@@ -1,10 +1,25 @@
 import {
+    GET_PROFILE_USER_FOR_PUBLIC,
     GET_AVISUSER_FOR_PUBLIC,
     UNACTIVE_AVISUSER,
+    FOLLOWERUSER_ADD,
+    FOLLOWERUSER_REMOVE,
     DELETE_AVISUSER,
 } from "./types";
 
 import Swal from "sweetalert2";
+
+export const loadProfileusersforpublic = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let url = route('api.profilpublique',[itemuser]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_PROFILE_USER_FOR_PUBLIC,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
 
 export const loadAvisusersforpublic = (props) => dispatch => {
 
@@ -18,8 +33,31 @@ export const loadAvisusersforpublic = (props) => dispatch => {
         ).catch(error => console.error(error));
 };
 
+export const followerItem = (props) => dispatch => {
 
-export const deleteItem = (id) => dispatch => {
+
+    let url = route('users_followeuser.follow',[props.id]);
+    dyaxios.post(url)
+        .then(() => dispatch({
+                type: FOLLOWERUSER_ADD,
+                payload: props.id
+            })
+        ).catch(error => console.error(error));
+};
+
+export const unfollowerItem = (props) => dispatch => {
+
+    let url = route('users_followeuser.follow',[props.id]);
+    dyaxios.post(url)
+        .then(() => dispatch({
+                type: FOLLOWERUSER_REMOVE,
+                payload: props.id
+            })
+        ).catch(error => console.error(error));
+};
+
+
+export const deleteavisItem = (id) => dispatch => {
 
     Swal.fire({
         title: 'Confirmer la supression?',
@@ -78,7 +116,7 @@ export const deleteItem = (id) => dispatch => {
     });
 };
 
-export const unactiveItem = (id) => dispatch => {
+export const unactiveavisItem = (id) => dispatch => {
 
     Swal.fire({
         title: 'Confirmer masquer?',
