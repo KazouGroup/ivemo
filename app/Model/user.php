@@ -63,9 +63,9 @@ class user extends Authenticatable implements MustVerifyEmail
                 'full_name' => $user->first_name,
                 'slug' => $myslug,
             ]);
-            //$user->profileadmin()->create([
-            //    'status_user' => false
-            //]);
+            $user->profileadmin()->create([
+                'status_user' => false
+            ]);
             if (auth()->check()){
                 $user->user_id = auth()->id();
             }

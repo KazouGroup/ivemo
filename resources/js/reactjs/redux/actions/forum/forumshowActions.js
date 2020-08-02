@@ -2,8 +2,8 @@ import {
     GET_FORUM_SHOW_USER_SITE,
     FAVORITE_FORUM_SHOW_ADD,
     FAVORITE_FORUM_SHOW_REMOVE,
-    LIKE_FORUM_ADD,
-    LIKE_FORUM_REMOVE,
+    LIKE_FORUM_SHOW_ADD,
+    LIKE_FORUM_SHOW_REMOVE,
 } from "../types";
 import Swal from "sweetalert2";
 
@@ -29,7 +29,7 @@ export const likeItem = props => dispatch => {
     dyaxios.get(url).then(() => {
 
         dispatch({
-            type: LIKE_FORUM_ADD,
+            type: LIKE_FORUM_SHOW_ADD,
             payload: props.id
         });
 
@@ -42,7 +42,7 @@ export const unlikeItem = props => dispatch => {
     dyaxios.get(url).then(() => {
 
         dispatch({
-            type: LIKE_FORUM_REMOVE,
+            type: LIKE_FORUM_SHOW_REMOVE,
             payload: props.id
         });
 

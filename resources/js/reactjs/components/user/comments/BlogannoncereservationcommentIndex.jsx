@@ -568,25 +568,17 @@ class BlogannoncereservationcommentIndex extends PureComponent {
 
                             <br/>
 
-                            {$guest ?
+                            <>
+                                {!editcomment && !responsecomment && !editresponsecomment && (
+                                    <Form onSubmit={this.sendcommentItem} acceptCharset="UTF-8">
 
-                                <h6 className="title text-center">S'il vous plaît
-                                    <a href="/" className="text-primary" data-toggle="modal" data-target="#loginModal"> Connectez vous </a> ou
-                                    <a href={route('register')} className="text-primary"> Inscrivez vous </a> pour laisser un commentaire
-                                </h6>
-                                :
-                                <>
-                                    {!editcomment && !responsecomment && !editresponsecomment && (
-                                        <Form onSubmit={this.sendcommentItem} acceptCharset="UTF-8">
+                                        <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
+                                                     renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
+                                                     handleFieldChange={this.handleFieldChange} namesubmit={`POSTER MON COMMENTAIRE`}/>
 
-                                            <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
-                                                         renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                         handleFieldChange={this.handleFieldChange} namesubmit={`POSTER MON COMMENTAIRE`}/>
-
-                                        </Form>
-                                    )}
-                                </>
-                            }
+                                    </Form>
+                                )}
+                            </>
 
                         </div>
 

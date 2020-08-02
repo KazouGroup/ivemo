@@ -173,21 +173,11 @@ class ForumController extends Controller
 
     public function destroy(forum $forum)
     {
-        $forum = forum::findOrFail($forum->id);
-
         $this->authorize('update',$forum);
 
-        if(auth()->user()->id === $forum->user_id){
+        $forum->delete();
 
-            //$oldFilename = $forum->photo;
-            //File::delete(public_path($oldFilename));
-
-            $forum->delete();
-
-            return ['message' => 'Deleted successfully'];
-        }else{
-            abort(404);
-        }
+        return ['message' => 'Deleted successfully'];
     }
 
 }

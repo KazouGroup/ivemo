@@ -416,19 +416,17 @@ class AnnoncelocationcommentIndex extends PureComponent {
 
                                 <div className="media-area">
                                     <br/>
-                                    {!$guest && (
-                                        <>
-                                            {!editcomment && !responsecomment && !editresponsecomment && (
-                                                <Form onSubmit={this.sendcommentItem} acceptCharset="UTF-8">
+                                    <>
+                                        {!editcomment && !responsecomment && !editresponsecomment && (
+                                            <Form onSubmit={this.sendcommentItem} acceptCharset="UTF-8">
 
-                                                    <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
-                                                                 renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                                 handleFieldChange={this.handleFieldChange} namesubmit={`POSTER MON COMMENTAIRE`}/>
+                                                <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
+                                                             renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
+                                                             handleFieldChange={this.handleFieldChange} namesubmit={`POSTER MON COMMENTAIRE`}/>
 
-                                                </Form>
-                                            )}
-                                        </>
-                                    )}
+                                            </Form>
+                                        )}
+                                    </>
 
                                     <>
                                         {comments.slice(0, visiablecomment).map((item) => (

@@ -14,7 +14,7 @@ class ForumService
 
     public static function getcategoryforum($categoryforum)
     {
-        return 
+        return
         $categoryforum->forums()->where(['status' => 1,'status_admin' => 1])
             ->with('user','categoryforum')
             ->whereIn('categoryforum_id',[$categoryforum->id])
@@ -77,7 +77,7 @@ class ForumService
     {
 
         $data = ForumResource::collection(self::getcategoryforum($categoryforum)
-        ->take(6)
+        ->take(18)
         ->distinct()->get());
 
         return $data;

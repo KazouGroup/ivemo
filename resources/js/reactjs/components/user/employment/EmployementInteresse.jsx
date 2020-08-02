@@ -59,7 +59,7 @@ class EmployementInteresse extends PureComponent {
                 {employmentsinteresses.length >= 0 && (
 
                     <div className="text-center">
-                        <h4 className="title">Offres similaires</h4>
+                        <h4 className="title">Annonces similaires</h4>
                     </div>
                 )}
 

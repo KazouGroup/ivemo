@@ -569,14 +569,7 @@ class BlogannonceventecommentIndex extends Component {
 
                             <br/>
 
-                            {$guest ?
-
-                                <h6 className="title text-center">S'il vous plaît
-                                    <a href="/" className="text-primary" data-toggle="modal" data-target="#loginModal"> Connectez vous </a> ou
-                                    <a href={route('register')} className="text-primary"> Inscrivez vous </a> pour laisser un commentaire
-                                </h6>
-                                :
-                                <>
+                            <>
                                 {!editcomment && !responsecomment && !editresponsecomment && (
                                     <Form onSubmit={this.sendcommentItem} acceptCharset="UTF-8">
 
@@ -586,8 +579,7 @@ class BlogannonceventecommentIndex extends Component {
 
                                     </Form>
                                 )}
-                                </>
-                            }
+                            </>
 
                         </div>
 
