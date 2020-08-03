@@ -19,11 +19,14 @@ import {
     likeItem,
      unfavoriteItem, unlikeItem,
     unfollowerItem,followerItem,
+
+    unsubscribeItem,subscribeItem,
     loadProfileusersforpublic,
 } from "../../../redux/actions/forum/forumshowActions";
 import Navforums from "./inc/Navforums";
 import ForumInteresse from "./ForumInteresse";
 import ButonFollowerUser from "../../inc/vendor/ButonFollowerUser";
+import ButonMiniSubscribedForum from "../../inc/vendor/ButonMiniSubscribedForum";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -152,6 +155,12 @@ class ForumShow extends Component {
         const suffix = abbrev[order];
         return (countfavorites / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
+    data_countfollowFormatter(countfollowerusers, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countfollowerusers)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (countfollowerusers / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     data_countlikeFormatter(countlikes, precision) {
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countlikes)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
@@ -212,9 +221,15 @@ class ForumShow extends Component {
                                                             }
                                                             <div className="mx-3">
                                                                 <NavLink to={forum.user.status_profile ? `/pro/${forum.user.slug}/` : `/user/${forum.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{forum.user.first_name}</b>
-                                                                    <small className="d-block text-muted">{forum.statusOnline &&(<i className="fas fa-circle text-success"></i>)}  <i className="now-ui-icons tech_watch-time"/> {moment(forum.created_at).format('LL')}</small>
+                                                                    <small className="d-block text-muted">{forum.statusOnline &&(<i className="fas fa-circle text-success"></i>)}  <i className="now-ui-icons tech_watch-time"/> {moment(forum.created_at).format('LL')}</small> {this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}
                                                                 </NavLink>
                                                             </div>
+
+                                                            {profileUser.followeruser &&(
+                                                                <ButonMiniSubscribedForum {...this.props} {...profileUser}
+                                                                                               unsubscribeItem={this.props.unsubscribeItem}
+                                                                                               subscribeItem={this.props.subscribeItem}/>
+                                                            )}
 
                                                             <ButonFollowerUser {...this.props}{...profileUser}
                                                                                unfollowerItem={this.props.unfollowerItem}
@@ -409,6 +424,8 @@ export default connect(mapStateToProps, {
     likeItem,unlikeItem,
     favoriteItem,unfavoriteItem,
     unfollowerItem,followerItem,
+
+    unsubscribeItem,subscribeItem,
     loadProfileusersforpublic,
 })(ForumShow);
 

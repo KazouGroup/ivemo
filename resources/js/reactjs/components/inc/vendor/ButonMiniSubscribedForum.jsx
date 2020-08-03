@@ -1,0 +1,33 @@
+import React,{Component} from "react";
+import {Button, FormText} from "reactstrap";
+
+class ButonMiniSubscribedForum extends Component {
+    render() {
+
+        return (
+           <>
+               {this.props.id !== $userIvemo.id && (
+                   <>
+                       {this.props.subscribedforum ?
+                           <>
+                               <Button onClick={() => this.props.unsubscribeItem(this.props)}
+                                       className="btn btn-info btn-sm btn-icon btn-round btn-raised">
+                                   <i className="fas fa-bell-slash"></i>
+                               </Button>
+                           </>
+                           :
+                           <>
+                               <Button onClick={() => this.props.subscribeItem(this.props)}
+                                       className="btn btn-outline-info btn-icon btn-round btn-sm btn-raised">
+                                   <i className="far fa-bell"></i>
+                               </Button>
+                           </>
+
+                       }
+                   </>
+               )}
+           </>
+        );
+    }
+}
+export default ButonMiniSubscribedForum;

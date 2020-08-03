@@ -27,7 +27,7 @@ class CommentemploymentController extends Controller
     }
 
 
-    public function getcomment(categoryemployment $categoryemployment,city $city,employment $employment)
+    public function getcomment(categoryemployment $categoryemployment,city $city,$user,employment $employment)
     {
         $comments = CommentResource::collection($employment->comments()
             ->with('user','commentable','responsecomments')
@@ -42,7 +42,7 @@ class CommentemploymentController extends Controller
         return response()->json($comments,200);
     }
 
-    public function sendcomment(Request $request,categoryemployment $categoryemployment,city $city,employment $employment)
+    public function sendcomment(Request $request,categoryemployment $categoryemployment,city $city,$user,employment $employment)
     {
         $this->validate($request,[
             'body'=>'required|max:5000',
@@ -57,7 +57,7 @@ class CommentemploymentController extends Controller
 
 
 
-    public function updatecomment(Request $request,categoryemployment $categoryemployment,city $city,employment $employment,comment $comment)
+    public function updatecomment(Request $request,categoryemployment $categoryemployment,city $city,$user,employment $employment,comment $comment)
     {
 
         $this->authorize('updateComment',$comment);
@@ -70,7 +70,7 @@ class CommentemploymentController extends Controller
     }
 
 
-    public function sendresponsecomment(Request $request,categoryemployment $categoryemployment,city $city,employment $employment,comment $comment)
+    public function sendresponsecomment(Request $request,categoryemployment $categoryemployment,city $city,$user,employment $employment,comment $comment)
     {
         $validatedData = $request->validate(['body' => 'required|min:2|max:5000']);
 

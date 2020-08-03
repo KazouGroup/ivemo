@@ -43,13 +43,13 @@ class PrivateUserEmployementList extends PureComponent {
                                 </div>
 
                                      <span className="title">
-                                         <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`} className="card-link">
+                                         <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`} className="card-link">
                                             {this.props.title.length > 90 ? this.props.title.substring(0, 90) + "..." : this.props.title}
                                           </a>
                                      </span>
                                     <br/>
 
-                                    <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`}>
+                                    <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`}>
                                         <span dangerouslySetInnerHTML={this.getDescription()}/>
                                     </a>
 
@@ -87,7 +87,7 @@ class PrivateUserEmployementList extends PureComponent {
 
 
                                 <div className="card-image">
-                                    <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`}>
+                                    <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`}>
                                         <LazyLoad>
                                             <img className="img rounded"
                                                  src={this.props.photo} alt={this.props.title}/>

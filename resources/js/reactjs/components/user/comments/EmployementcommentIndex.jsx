@@ -121,9 +121,10 @@ class EmployementcommentIndex extends PureComponent {
 
         let itemCategoryemployment = this.props.match.params.categoryemployment;
         let itemCity = this.props.match.params.city;
+        let itemuser = this.props.match.params.user;
         let itemEmployment = this.props.match.params.employment;
         let Id = this.state.itemData.id;
-        let url = route('employmentssendresponsecomment_site',[itemCategoryemployment,itemCity,itemEmployment,Id]);
+        let url = route('employmentssendresponsecomment_site',[itemCategoryemployment,itemCity,itemuser,itemEmployment,Id]);
         dyaxios.post(url, item)
             .then(() => {
 
@@ -162,8 +163,9 @@ class EmployementcommentIndex extends PureComponent {
         };
         let itemCategoryemployment = this.props.match.params.categoryemployment;
         let itemCity = this.props.match.params.city;
+        let itemuser = this.props.match.params.user;
         let itemEmployment = this.props.match.params.employment;
-        let url = route('employmentsendcomment_site',[itemCategoryemployment,itemCity,itemEmployment]);
+        let url = route('employmentsendcomment_site',[itemCategoryemployment,itemCity,itemuser,itemEmployment]);
         dyaxios.post(url, itemData)
             .then(() => {
 
@@ -203,9 +205,10 @@ class EmployementcommentIndex extends PureComponent {
         };
         let itemCategoryemployment = this.props.match.params.categoryemployment;
         let itemCity = this.props.match.params.city;
+        let itemuser = this.props.match.params.user;
         let itemEmployment = this.props.match.params.employment;
         let Id = this.state.itemData.id;
-        let url = route('employmentupdatecomment_site', [itemCategoryemployment,itemCity,itemEmployment,Id]);
+        let url = route('employmentupdatecomment_site', [itemCategoryemployment,itemCity,itemuser,itemEmployment,Id]);
         dyaxios.put(url, item)
             .then(response => {
 

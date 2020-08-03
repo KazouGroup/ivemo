@@ -37,6 +37,14 @@ export default produce((draft, action = {}) => {
                 draft.profiluser.subscribedemployment = !action.payload;
                 return;
 
+            case 'SUBSCRIBE_USER_FOR_FORUM_ADD':
+                draft.profiluser.subscribedforum = action.payload;
+                return;
+
+            case 'SUBSCRIBE_USER_FOR_FORUM_REMOVE':
+                draft.profiluser.subscribedforum = !action.payload;
+                return;
+
             case 'UNACTIVE_AVISUSER':
                 let dataunac = draft.avisusers.findIndex(i => i.id === action.payload);
                 if (dataunac !== -1) draft.avisusers.splice(dataunac, 1);

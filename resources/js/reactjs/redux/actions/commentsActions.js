@@ -95,8 +95,9 @@ export const loadCommentsEmployments = (props) => dispatch => {
 
     let itemCategoryemployment = props.match.params.categoryemployment;
     let itemCity = props.match.params.city;
+    let itemuser = props.match.params.user;
     let itemEmployment = props.match.params.employment;
-    let url = route('api.employmentgetcomment_site',[itemCategoryemployment,itemCity,itemEmployment]);
+    let url = route('api.employmentgetcomment_site',[itemCategoryemployment,itemCity,itemuser,itemEmployment]);
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_COMMENTS_EMPLOYMENTS,

@@ -3,7 +3,12 @@ import {
     FAVORITE_FORUM_SHOW_ADD,
     FAVORITE_FORUM_SHOW_REMOVE,
     LIKE_FORUM_SHOW_ADD,
-    LIKE_FORUM_SHOW_REMOVE, GET_PROFILE_USER_FOR_PUBLIC, FOLLOWERUSER_ADD, FOLLOWERUSER_REMOVE,
+    LIKE_FORUM_SHOW_REMOVE,
+    GET_PROFILE_USER_FOR_PUBLIC,
+    FOLLOWERUSER_ADD,
+    FOLLOWERUSER_REMOVE,
+    SUBSCRIBE_USER_FOR_FORUM_ADD,
+    SUBSCRIBE_USER_FOR_FORUM_REMOVE,
 } from "../types";
 import Swal from "sweetalert2";
 
@@ -33,15 +38,57 @@ export const followerItem = (props) => dispatch => {
         ).catch(error => console.error(error));
 };
 
+
 export const unfollowerItem = (props) => dispatch => {
 
-    let url = route('users_followeuser.follow',[props.id]);
-    dyaxios.post(url)
-        .then(() => dispatch({
-                type: FOLLOWERUSER_REMOVE,
+    Swal.fire({
+        title:  "Se désabonner de "+props.first_name+" ?",
+        text:  "En vous desabonnant vous ne pourriez plus recevoir les notifications des postes poster par "+props.first_name,
+        buttonsStyling: false,
+        confirmButtonClass: "btn btn-success",
+        cancelButtonClass: 'btn btn-danger',
+        confirmButtonText: 'Oui, confirmer',
+        cancelButtonText: 'Non, annuller',
+        showCancelButton: true,
+        reverseButtons: true,
+    }).then((result) => {
+        if (result.value) {
+
+            let url = route('users_followeuser.follow',[props.id]);
+            dyaxios.post(url)
+                .then(() => dispatch({
+                        type: FOLLOWERUSER_REMOVE,
+                        payload: props.id
+                    })
+                ).catch(error => console.error(error));
+        }
+    })
+};
+
+export const   subscribeItem = props => dispatch => {
+
+    const url = route('forums_subscribe.subscribe', [props.id]);
+    dyaxios.post(url).then(() => {
+
+            dispatch({
+                type: SUBSCRIBE_USER_FOR_FORUM_ADD,
                 payload: props.id
-            })
-        ).catch(error => console.error(error));
+            });
+        }
+    ).catch(error => console.error(error));
+};
+
+export const  unsubscribeItem = props => dispatch => {
+
+    const url = route('forums_subscribe.subscribe', [props.id]);
+    dyaxios.post(url).then(() => {
+
+            dispatch({
+                type: SUBSCRIBE_USER_FOR_FORUM_REMOVE,
+                payload: props.id
+            });
+        }
+    ).catch(error => console.error(error));
 };
 
 

@@ -114,7 +114,7 @@ class EmploymentService
     }
 
 
-    public static function apiemploymentsbycategoryslug($categoryemployment,$city,$employment)
+    public static function apiemploymentsbycategoryslug($categoryemployment,$city,$user,$employment)
     {
         $employment = new EmploymentResource(employment::whereSlug($employment->slug)
             ->with('user','city','categoryemployment','member')

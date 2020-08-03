@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Model\abonne\subscribeblogannonce;
+use App\Model\abonne\subscribeforum;
 use App\Model\abonne\subscribemployment;
 use App\Model\followeruser;
 use Illuminate\Support\Facades\Auth;
@@ -51,6 +52,30 @@ trait Subscribedata
         return $this->belongsToMany(
             subscribemployment::class,
             'subscribemployments',
+            'user_id',
+            'member_id')
+            ->withTimeStamps();
+    }
+
+    public function subscribeforum()
+    {
+        return (bool) subscribeforum::where('user_id', Auth::guard('web')->id())
+            ->where('member_id', $this->id)
+            ->first();
+    }
+
+
+    public function subscribeforums()
+    {
+        return $this->hasMany(subscribeforum::class, 'user_id');
+    }
+
+
+    public function putsubscribeforums()
+    {
+        return $this->belongsToMany(
+            subscribeforum::class,
+            'subscribeforums',
             'user_id',
             'member_id')
             ->withTimeStamps();

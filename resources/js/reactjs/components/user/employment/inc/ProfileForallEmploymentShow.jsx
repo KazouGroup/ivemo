@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Remarkable } from 'remarkable';
-import { Button,UncontrolledTooltip } from "reactstrap";
+import { Button } from "reactstrap";
 import moment from "moment";
 import Skeleton from "react-loading-skeleton";
 
@@ -9,7 +9,7 @@ import Skeleton from "react-loading-skeleton";
 class ProfileForallEmploymentShow extends Component {
 
 
-    data_countFormatter(visits_count, precision) {
+    data_countvisiteFormatter(visits_count, precision) {
         const abbrev = ['', 'k', 'M', 'B', 'T'];
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(visits_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
@@ -92,7 +92,7 @@ class ProfileForallEmploymentShow extends Component {
                                     <>
                                         <a href={`#${this.props.visits_count}`}
                                            className="btn btn-sm btn-secondary" title={`${this.props.visits_count} ${this.props.visits_count > 1 ? "vues" : "vue"}`}>
-                                            <i className="far fa-eye"></i> <b>{this.data_countFormatter(this.props.visits_count)}</b>
+                                            <i className="far fa-eye"></i> <b>{this.data_countvisiteFormatter(this.props.visits_count)}</b>
                                         </a>
                                         <NavLink to={`/profile/${this.props.user.slug}/statistics/employments/${this.props.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
                                             <i className="now-ui-icons business_chart-bar-32"/>

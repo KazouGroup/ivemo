@@ -303,7 +303,7 @@ const RouteUser = props => (
           <Route exact path="/employment/:city/" component={withRouter(EmployementBycity)}/>
           <Route exact path="/employments/:categoryemployment/" component={withRouter(EmployementBycategoryemployement)}/>
           <Route exact path="/employments/:categoryemployment/:city/" component={withRouter(EmployementBycategoryemployementbycity)}/>
-          <Route exact path="/employments/:categoryemployment/:city/:employment/" component={withRouter(EmployementShowUserSite)}/>
+          <Route exact path="/employments/:categoryemployment/:city/:user/:employment/" component={withRouter(EmployementShowUserSite)}/>
 
 
           <Route exact path="/blogs/" component={BlogannonceIndexSite}/>
