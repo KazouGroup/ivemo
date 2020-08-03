@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
-import { Button,Row, Form, Input, InputGroup,UncontrolledTooltip } from 'reactstrap';
+import { Button, Form, Input, InputGroup, Row, UncontrolledTooltip } from 'reactstrap';
 import FieldInput from "../../../inc/vendor/FieldInput";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 
 class FormContactProfileAccountUser extends PureComponent {
@@ -57,16 +57,15 @@ class FormContactProfileAccountUser extends PureComponent {
         let url = route('public_profile_send_message.site', [itemuser]);
         dyaxios.post(url, item)
             .then(() => {
-
                 $.notify({
-                    message: `Votre message a bien été  envoyé à cet utilisateur`
-                },
+                        message: `Votre message a été bien envoyé à cet utilisateur`
+                    },
                     {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
-                            from: 'bottom',
-                            align: 'center'
+                            from: 'top',
+                            align: 'right'
                         },
                         animate: {
                             enter: "animate__animated animate__fadeInUp",
@@ -82,37 +81,36 @@ class FormContactProfileAccountUser extends PureComponent {
                     message: "",
                 });
             }).catch(error => {
-                this.setState({
-                    errors: error.response.data.errors
-                });
-            })
+            this.setState({
+                errors: error.response.data.errors
+            });
+        })
     }
 
-   // Lifecycle Component Method
+    // Lifecycle Component Method
     componentDidMount() {
         //
     }
 
     render() {
         return (
-
-
             <Form role="form" id="contact-form" onSubmit={this.sendmessageItem} acceptCharset="UTF-8">
-
                 <div className="card-body">
                     <div className="row">
                         <div className="d-flex align-items-center">
                             {this.props.avatar ?
                                 <NavLink to={`/pro/${this.props.slug}/`}>
                                     <img src={this.props.avatar}
-                                         style={{ height: "40px", width: "80px" }}
+                                         style={{height: "40px", width: "80px"}}
                                          alt={this.props.first_name}
-                                         className="avatar" />
+                                         className="avatar"/>
                                 </NavLink>
-                                : <Skeleton circle={false} height={40} width={80} />}
+                                : <Skeleton circle={false} height={40} width={80}/>}
                             <div className="mx-3">
-                                <a href={`/pro/${this.props.slug}/`} className="text-dark font-weight-600 text-sm"><b>{this.props.first_name}</b>
-                                    <small className="d-block text-muted">{moment(this.props.created_at).format('LL')}</small>
+                                <a href={`/pro/${this.props.slug}/`}
+                                   className="text-dark font-weight-600 text-sm"><b>{this.props.first_name}</b>
+                                    <small
+                                        className="d-block text-muted">Membre depuis {moment(this.props.created_at).format('LL')}</small>
                                 </a>
                             </div>
                         </div>
@@ -123,11 +121,10 @@ class FormContactProfileAccountUser extends PureComponent {
                                         {this.props.phone}
                                     </UncontrolledTooltip>
                                     <Button className="btn btn-icon btn-sm btn-info" id="TooltipPhone">
-                                        <i className="now-ui-icons tech_mobile" />
+                                        <i className="now-ui-icons tech_mobile"/>
                                     </Button>
                                 </>
                             )}
-
                         </div>
                     </div>
                     <br/>
@@ -135,9 +132,10 @@ class FormContactProfileAccountUser extends PureComponent {
                         <InputGroup>
                             <div className="input-group-prepend">
                                 <span className="input-group-text">
-                                    <i className="now-ui-icons users_circle-08" /></span>
+                                    <i className="now-ui-icons users_circle-08"/></span>
                             </div>
-                            <FieldInput name="full_name" type='text' minLength="4" maxLength="50" placeholder="Nom complet" value={this.state.full_name}
+                            <FieldInput name="full_name" type='text' minLength="4" maxLength="50"
+                                        placeholder="Nom complet" value={this.state.full_name}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
                                         renderErrorFor={this.renderErrorFor}/>
@@ -148,9 +146,10 @@ class FormContactProfileAccountUser extends PureComponent {
                         <InputGroup>
                             <div className="input-group-prepend">
                                 <span className="input-group-text">
-                                    <i className="now-ui-icons ui-1_email-85" /></span>
+                                    <i className="now-ui-icons ui-1_email-85"/></span>
                             </div>
-                            <FieldInput name="email" type='email' minLength="3" maxLength="50" placeholder="Email" value={this.state.email}
+                            <FieldInput name="email" type='email' minLength="3" maxLength="50" placeholder="Email"
+                                        value={this.state.email}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
                                         renderErrorFor={this.renderErrorFor}/>
@@ -160,24 +159,24 @@ class FormContactProfileAccountUser extends PureComponent {
                         <InputGroup>
                             <div className="input-group-prepend">
                                 <span className="input-group-text">
-                                    <i className="now-ui-icons tech_mobile" /></span>
+                                    <i className="now-ui-icons tech_mobile"/></span>
                             </div>
 
-                            <FieldInput name="phone" type='number' minLength="3" maxLength="15" placeholder="Téléphone" value={this.state.phone}
+                            <FieldInput name="phone" type='number' minLength="3" maxLength="15" placeholder="Téléphone"
+                                        value={this.state.phone}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
                                         renderErrorFor={this.renderErrorFor}/>
-
                         </InputGroup>
                     </Row>
                     <Row>
                         <InputGroup>
                             <div className="input-group-prepend">
                                 <span className="input-group-text">
-                                    <i className="now-ui-icons text_caps-small" /></span>
+                                    <i className="now-ui-icons text_caps-small"/></span>
                             </div>
-
-                            <FieldInput name="subject" type='text' minLength="3" maxLength="200" placeholder="Object" value={this.state.subject}
+                            <FieldInput name="subject" type='text' minLength="3" maxLength="200" placeholder="Object"
+                                        value={this.state.subject}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
                                         renderErrorFor={this.renderErrorFor}/>
@@ -186,24 +185,22 @@ class FormContactProfileAccountUser extends PureComponent {
                     </Row>
                     <Row>
                         <InputGroup>
-
                             <Input type="textarea" name="message" value={this.state.message}
-                                onChange={this.handleFieldChange}
-                                placeholder={'Posez ici toutes vos questions !'}
-                                className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                                id="message"
-                                rows="15" />
+                                   onChange={this.handleFieldChange}
+                                   placeholder={'Posez ici toutes vos questions !'}
+                                   className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
+                                   id="message"
+                                   rows="15"/>
                             {this.renderErrorFor('message')}
                         </InputGroup>
                     </Row>
                     <div className="submit text-center">
                         <button className="btn btn-primary btn-lg" type="submit">
-                            <i className="now-ui-icons ui-1_email-85" /> Contacter
+                            <i className="now-ui-icons ui-1_email-85"/> Contactez
                         </button>
                     </div>
                 </div>
             </Form>
-
         )
     }
 

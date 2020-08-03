@@ -42,3 +42,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     top: 0;
     width: auto;
 }
+
+.ivemoAvisAvatar {
+    margin-right: 15px;
+}

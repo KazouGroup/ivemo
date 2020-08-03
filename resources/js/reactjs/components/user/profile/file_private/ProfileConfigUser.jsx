@@ -323,7 +323,9 @@ class ProfileConfigUser extends PureComponent {
                                                                         className={`form-control ${this.hasErrorFor('city_id') ? 'is-invalid' : ''}`}
                                                                         onChange={this.handleFieldChange} name="city_id"
                                                                         required="required">
-                                                                    <option disabled hidden selected value="">Votre ville</option>
+                                                                    <option disabled hidden selected value="">Votre
+                                                                        ville
+                                                                    </option>
                                                                     {cities.map((item) => (
                                                                         <option key={item.id}
                                                                                 value={item.id}>{item.name}</option>
@@ -333,13 +335,15 @@ class ProfileConfigUser extends PureComponent {
                                                             </div>
                                                         </div>
                                                         <div className="col-md-5">
-                                                            <label htmlFor="categoryprofile_id"><b>Pourquoi êtes-vous sur Ivemo ?</b></label>
+                                                            <label htmlFor="categoryprofile_id"><b>Pourquoi êtes-vous
+                                                                sur Ivemo ?</b></label>
                                                             <div className="form-group">
                                                                 <select value={this.state.categoryprofile_id || ''}
                                                                         className={`form-control ${this.hasErrorFor('categoryprofile_id') ? 'is-invalid' : ''}`}
                                                                         onChange={this.handleFieldChange}
                                                                         name="categoryprofile_id" required="required">
-                                                                    <option disabled hidden selected value="">Pourquoi êtes-vous sur
+                                                                    <option disabled hidden selected value="">Pourquoi
+                                                                        êtes-vous sur
                                                                         Ivemo
                                                                     </option>
                                                                     {categoryprofiles.map((item) => (
@@ -349,6 +353,36 @@ class ProfileConfigUser extends PureComponent {
                                                                 </select>
                                                                 {this.renderErrorFor('categoryprofile_id')}
                                                             </div>
+                                                        </div>
+                                                    </Row>
+                                                    <Row className="my-4">
+                                                        <div className="col-md-12">
+                                                            <label
+                                                                htmlFor="description"><b>Description </b></label>
+                                                            <FormGroup>
+                                                                <label className="labels">Décrivez
+                                                                    votre article <span
+                                                                        className="text-danger">*</span>
+                                                                </label>
+                                                                <br/>
+                                                                <Input type="textarea"
+                                                                       name="description"
+                                                                       value={this.state.description || ""}
+                                                                       onChange={this.handleFieldChange}
+                                                                       placeholder={'Donner une description...'}
+                                                                       className={`form-control ${this.hasErrorFor('description') ? 'is-invalid' : ''} form-control-alternative"`}
+                                                                       id="description"
+                                                                       rows="17"/>
+                                                                {this.renderErrorFor('description')}
+                                                                {/*
+                                                                                         <ReactQuill theme="snow" modules={this.modules}
+                                                                                                    formats={this.formats}
+                                                                                                    className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
+                                                                                                    value={this.state.description || ''}
+                                                                                                    onChange={this.handleChangeBody} />
+                                                                                        {this.renderErrorFor('description')}
+                                                                                    */}
+                                                            </FormGroup>
                                                         </div>
                                                     </Row>
 
@@ -519,36 +553,6 @@ class ProfileConfigUser extends PureComponent {
                                                                                             />
                                                                                             {this.renderErrorFor('youtube_link')}
                                                                                         </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div className="row mb-4">
-                                                                                    <div className="col-md-12">
-                                                                                        <label
-                                                                                            htmlFor="description"><b>Description </b></label>
-                                                                                        <FormGroup>
-                                                                                            <label className="labels">Décrivez
-                                                                                                votre article <span
-                                                                                                    className="text-danger">*</span>
-                                                                                            </label>
-                                                                                            <br/>
-                                                                                            <Input type="textarea"
-                                                                                                   name="description"
-                                                                                                   value={this.state.description || ""}
-                                                                                                   onChange={this.handleFieldChange}
-                                                                                                   placeholder={'Donner une description...'}
-                                                                                                   className={`form-control ${this.hasErrorFor('description') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                                                   id="description"
-                                                                                                   rows="17"/>
-                                                                                            {this.renderErrorFor('description')}
-                                                                                            {/*
-                                                                                         <ReactQuill theme="snow" modules={this.modules}
-                                                                                                    formats={this.formats}
-                                                                                                    className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
-                                                                                                    value={this.state.description || ''}
-                                                                                                    onChange={this.handleChangeBody} />
-                                                                                        {this.renderErrorFor('description')}
-                                                                                    */}
-                                                                                        </FormGroup>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

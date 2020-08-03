@@ -70,7 +70,7 @@ class LoginModalUser extends Component {
                         exit: 'animate__animated animate__bounceOutUp'
                     }
                 });
-                window.location.reload(true);
+                setTimeout(() => {window.location.reload(true);}, 1000);
             }).catch(error => {
                 this.setState({
                     errors: error.response.data.errors

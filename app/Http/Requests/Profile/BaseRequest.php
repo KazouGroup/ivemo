@@ -26,7 +26,7 @@ class BaseRequest extends Request
             $rules = [
                 'site_internet' => ['required','url','string', 'max:255'],
                 'city_id' => ['required'],
-                'birthdate' => 'required|numeric|digits_between:4,4',
+                'birthdate' => 'required',
                 'address' => ['nullable','string', 'max:255'],
                 'facebook_link' => ['nullable','url','string', 'max:255'],
                 'twitter_link' => ['nullable','url','string', 'max:255'],

@@ -14,6 +14,7 @@ use App\Model\user;
 use App\Services\HelpersService;
 use App\Services\ProfileService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpFoundation\Response;
@@ -328,6 +329,8 @@ class ProfileController extends Controller
     {
         $user = auth()->user()->update(['password' => Hash::make($request->get('password'))]);
 
+        Auth::logout();
+        // TODO: Redirect the user in the login page
         return response()->json($user,200);
     }
     /**

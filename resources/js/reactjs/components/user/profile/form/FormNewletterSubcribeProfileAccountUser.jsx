@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Row, Form, Input,InputGroup,FormText} from 'reactstrap';
+import { Form, FormText, Input, InputGroup, Row } from 'reactstrap';
 
 
 class FormNewletterSubcribeProfileAccountUser extends PureComponent {
@@ -44,10 +44,9 @@ class FormNewletterSubcribeProfileAccountUser extends PureComponent {
             user_email: this.state.user_email,
         };
         let itemuser = this.props.match.params.user;
-        let url = route('subscriberuser_public_mail.site',[itemuser]);
+        let url = route('subscriberuser_public_mail.site', [itemuser]);
         dyaxios.post(url, item)
             .then(() => {
-
                 $.notify({
                         message: `Merci de vous être abonné à ma newsletter`
                     },
@@ -55,8 +54,8 @@ class FormNewletterSubcribeProfileAccountUser extends PureComponent {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
-                            from: 'bottom',
-                            align: 'center'
+                            from: 'top',
+                            align: 'right'
                         },
                         animate: {
                             enter: "animate__animated animate__fadeInUp",
@@ -67,24 +66,22 @@ class FormNewletterSubcribeProfileAccountUser extends PureComponent {
                 this.setState({
                     user_email: "",
                 });
-            }).catch(error => {
+            })
+            .catch(error => {
             this.setState({
                 errors: error.response.data.errors
             });
         })
     }
 
-   // Lifecycle Component Method
+    // Lifecycle Component Method
     componentDidMount() {
         //
     }
 
     render() {
         return (
-
-
             <Form role="form" id="contact-form" onSubmit={this.sendmessageItem} acceptCharset="UTF-8">
-
                 <Row>
                     <div className="col-sm-8">
                         <InputGroup>
@@ -97,8 +94,8 @@ class FormNewletterSubcribeProfileAccountUser extends PureComponent {
                                    type='email'
                                    className={`form-control ${this.hasErrorFor('user_email') ? 'is-invalid' : ''}`}
                                    name='user_email'
-                                   placeholder="Entrez votre adresse email"
-                                   aria-label="Entrez votre adresse email"
+                                   placeholder="Entrez votre Adresse E-mail"
+                                   aria-label="Entrez votre Adresse E-mail"
                                    autoComplete="user_email"
                                    required={'required'}
                                    maxLength="200"
@@ -108,8 +105,8 @@ class FormNewletterSubcribeProfileAccountUser extends PureComponent {
                             </Input>
                             {this.renderErrorFor('user_email')}
                         </InputGroup>
-                        <FormText className="text-muted" color="default" id="emailHelp">
-                            <b>Nous ne partagerons jamais votre e-mail avec quelqu'un d'autre.</b>
+                        <FormText className="text-muted mt-2" color="default" id="emailHelp">
+                            <b>Nous ne partagerons pas vos informations avec une tier personne.</b>
                         </FormText>
                     </div>
                     <div className="col-sm-4">
@@ -119,10 +116,8 @@ class FormNewletterSubcribeProfileAccountUser extends PureComponent {
                     </div>
                 </Row>
             </Form>
-
         )
     }
-
 }
 
 export default FormNewletterSubcribeProfileAccountUser;
