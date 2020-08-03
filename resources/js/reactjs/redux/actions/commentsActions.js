@@ -82,7 +82,6 @@ export const loadCommentsBlogannonceventes = (props) => dispatch => {
     let itemCategoryannoncevente = props.match.params.categoryannoncevente;
     let itemdate = props.match.params.date;
     let itemblogannonvente = props.match.params.blogannoncevente;
-    /*Ici c'est pour recuperer les annonce par villes*/
     let url = route('api.blogannoncesventegetcomment_site',[itemCategoryannoncevente,itemdate,itemblogannonvente]);
     dyaxios.get(url)
         .then(response => dispatch({
@@ -97,7 +96,6 @@ export const loadCommentsEmployments = (props) => dispatch => {
     let itemCategoryemployment = props.match.params.categoryemployment;
     let itemCity = props.match.params.city;
     let itemEmployment = props.match.params.employment;
-    /*Ici c'est pour recuperer les annonce par villes*/
     let url = route('api.employmentgetcomment_site',[itemCategoryemployment,itemCity,itemEmployment]);
     dyaxios.get(url)
         .then(response => dispatch({
@@ -110,8 +108,9 @@ export const loadCommentsEmployments = (props) => dispatch => {
 export const loadCommentsForums = (props) => dispatch => {
 
     let itemCategoryforum = props.match.params.categoryforum;
+    let itemuser = props.match.params.user;
     let itemForum = props.match.params.forum;
-    let url = route('api.forumgetcomment_site', [itemCategoryforum, itemForum]);
+    let url = route('api.forumgetcomment_site', [itemCategoryforum,itemuser, itemForum]);
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_COMMENTS_FORUMS,

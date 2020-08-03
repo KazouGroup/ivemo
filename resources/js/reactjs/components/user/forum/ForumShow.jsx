@@ -17,10 +17,13 @@ import {
     loadforumshow,
     favoriteItem,
     likeItem,
-     unfavoriteItem, unlikeItem
+     unfavoriteItem, unlikeItem,
+    unfollowerItem,followerItem,
+    loadProfileusersforpublic,
 } from "../../../redux/actions/forum/forumshowActions";
 import Navforums from "./inc/Navforums";
 import ForumInteresse from "./ForumInteresse";
+import ButonFollowerUser from "../../inc/vendor/ButonFollowerUser";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -125,7 +128,8 @@ class ForumShow extends Component {
 
 
     loadItems() {
-        this.props.loadforumshow(this.props)
+        this.props.loadforumshow(this.props);
+        this.props.loadProfileusersforpublic(this.props)
     }
 
    // Lifecycle Component Method
@@ -156,7 +160,7 @@ class ForumShow extends Component {
     }
 
     render() {
-        const {forum} = this.props;
+        const {forum,profileUser} = this.props;
         return (
             <>
                 <HelmetSite title={`${forum.title || $name_site} - ${$name_site}`}/>
@@ -211,11 +215,17 @@ class ForumShow extends Component {
                                                                     <small className="d-block text-muted">{forum.statusOnline &&(<i className="fas fa-circle text-success"></i>)}  <i className="now-ui-icons tech_watch-time"/> {moment(forum.created_at).format('LL')}</small>
                                                                 </NavLink>
                                                             </div>
+
+                                                            <ButonFollowerUser {...this.props}{...profileUser}
+                                                                               unfollowerItem={this.props.unfollowerItem}
+                                                                               followerItem={this.props.followerItem}
+                                                                               nameunfollower={`Suivre`}
+                                                                               nameununfollower={`Abonné`}/>
                                                         </div>
                                                         <div className="text-right ml-auto">
-                                                    <span className="card-title">
-                                                        <Link to={`/forums/${forum.categoryforum.slug}/`}><b>{forum.categoryforum.name}</b></Link> - <Link to={`/employments/`}> </Link> <i className="now-ui-icons tech_watch-time"/> {moment(forum.created_at).fromNow()}
-                                                    </span>
+                                                            <span className="card-title">
+                                                                <Link to={`/forums/${forum.categoryforum.slug}/`}><b>{forum.categoryforum.name}</b></Link> - <Link to={`/employments/`}> </Link> <i className="now-ui-icons tech_watch-time"/> {moment(forum.created_at).fromNow()}
+                                                            </span>
                                                         </div>
                                                     </div>
 
@@ -390,13 +400,16 @@ ForumShow.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    forum: state.forumshow.item
+    forum: state.forumshow.item,
+    profileUser: state.profile.profiluser
 });
 
 export default connect(mapStateToProps, {
     loadforumshow,
     likeItem,unlikeItem,
     favoriteItem,unfavoriteItem,
+    unfollowerItem,followerItem,
+    loadProfileusersforpublic,
 })(ForumShow);
 
 

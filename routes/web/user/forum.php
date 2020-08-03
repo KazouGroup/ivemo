@@ -33,7 +33,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.forumscategorycount_site');
 
     Route::get(
-        'forums/{categoryforum:slug}/{forum:slugin}',
+        'forums/{categoryforum:slug}/{user:slug}/{forum:slugin}',
         'ForumController@apiforumscategoryslugin'
     )->name('api.forumscategoryslugin_site');
 
@@ -81,7 +81,7 @@ Route::get(
 )->name('forumscategory_site');
 
 Route::get(
-    'forums/{categoryforum:slug}/{forum:slugin}',
+    'forums/{categoryforum:slug}/{user:slug}/{forum:slugin}',
     'ForumController@forumscategoryslugin'
 )->name('forumscategoryslugin_site');
 

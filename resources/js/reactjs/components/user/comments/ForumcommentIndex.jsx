@@ -120,9 +120,10 @@ class ForumcommentIndex extends PureComponent {
         };
 
         let itemCategoryforum = this.props.match.params.categoryforum;
+        let itemuser = this.props.match.params.user;
         let itemForum = this.props.match.params.forum;
         let Id = this.state.itemData.id;
-        let url = route('forumssendresponsecomment_site',[itemCategoryforum,itemForum,Id]);
+        let url = route('forumssendresponsecomment_site',[itemCategoryforum,itemuser,itemForum,Id]);
         dyaxios.post(url, item)
             .then(() => {
 
@@ -160,8 +161,9 @@ class ForumcommentIndex extends PureComponent {
             body: this.state.body,
         };
         let itemCategoryforum = this.props.match.params.categoryforum;
+        let itemuser = this.props.match.params.user;
         let itemForum = this.props.match.params.forum;
-        let url = route('forumsendcomment_site',[itemCategoryforum,itemForum]);
+        let url = route('forumsendcomment_site',[itemCategoryforum,itemuser,itemForum]);
         dyaxios.post(url, item)
             .then(() => {
 
@@ -200,9 +202,10 @@ class ForumcommentIndex extends PureComponent {
             body: this.state.body,
         };
         let itemCategoryforum = this.props.match.params.categoryforum;
+        let itemuser = this.props.match.params.user;
         let itemForum = this.props.match.params.forum;
         let Id = this.state.itemData.id;
-        let url = route('forumupdatecomment_site', [itemCategoryforum,itemForum,Id]);
+        let url = route('forumupdatecomment_site', [itemCategoryforum,itemuser,itemForum,Id]);
         dyaxios.put(url, item)
             .then(response => {
 

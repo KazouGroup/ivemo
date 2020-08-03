@@ -3,18 +3,55 @@ import {
     FAVORITE_FORUM_SHOW_ADD,
     FAVORITE_FORUM_SHOW_REMOVE,
     LIKE_FORUM_SHOW_ADD,
-    LIKE_FORUM_SHOW_REMOVE,
+    LIKE_FORUM_SHOW_REMOVE, GET_PROFILE_USER_FOR_PUBLIC, FOLLOWERUSER_ADD, FOLLOWERUSER_REMOVE,
 } from "../types";
 import Swal from "sweetalert2";
 
+
+
+export const loadProfileusersforpublic = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let url = route('api.profilpublique',[itemuser]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_PROFILE_USER_FOR_PUBLIC,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const followerItem = (props) => dispatch => {
+
+
+    let url = route('users_followeuser.follow',[props.id]);
+    dyaxios.post(url)
+        .then(() => dispatch({
+                type: FOLLOWERUSER_ADD,
+                payload: props.id
+            })
+        ).catch(error => console.error(error));
+};
+
+export const unfollowerItem = (props) => dispatch => {
+
+    let url = route('users_followeuser.follow',[props.id]);
+    dyaxios.post(url)
+        .then(() => dispatch({
+                type: FOLLOWERUSER_REMOVE,
+                payload: props.id
+            })
+        ).catch(error => console.error(error));
+};
 
 
 
 export const loadforumshow = (props) => dispatch => {
 
     let itemCategoryforum = props.match.params.categoryforum;
+    let itemuser = props.match.params.user;
     let itemForum = props.match.params.forum;
-    let url = route('api.forumscategoryslugin_site', [itemCategoryforum, itemForum]);
+    let url = route('api.forumscategoryslugin_site', [itemCategoryforum,itemuser, itemForum]);
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_FORUM_SHOW_USER_SITE,

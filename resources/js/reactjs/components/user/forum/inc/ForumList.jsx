@@ -68,7 +68,7 @@ class ForumList extends Component {
 
                         <>
                             <h5 className="card-title">
-                               <Link to={`/forums/${this.props.categoryforum.slug}/${this.props.slugin}/`}>
+                               <Link to={`/forums/${this.props.categoryforum.slug}/${this.props.user.slug}/${this.props.slugin}/`}>
                                    <b>{this.props.title}</b>
                                </Link>
                             </h5>

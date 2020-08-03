@@ -188,7 +188,7 @@ const RouteUser = props => (
           <Route exact path="/forums/ab/new" component={ForumCreate}/>
           <Route exact path="/forums/ab/:forum/edit/" component={ForumEdit}/>
           <Route exact path="/forums/:categoryforum/" component={withRouter(ForumcategoryforumSite)}/>
-          <Route exact path="/forums/:categoryforum/:forum/" component={withRouter(ForumShow)}/>
+          <Route exact path="/forums/:categoryforum/:user/:forum/" component={withRouter(ForumShow)}/>
 
           <Route exact path="/annonces_reservations/:annoncetype/" component={AnnoncereservationIndex}/>
           <Route exact path="/annonce_reservations/:annoncetype/:city/" component={withRouter(Annoncereservationbyannoncetypebycity)}/>

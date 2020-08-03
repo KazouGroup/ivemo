@@ -25,7 +25,7 @@ class CommentforumController extends Controller
     }
 
 
-    public function getcomment($categoryforum,forum $forum)
+    public function getcomment($categoryforum,$user,forum $forum)
     {
         $comments = CommentResource::collection($forum->comments()
             ->with('user','commentable','responsecomments')
@@ -40,7 +40,7 @@ class CommentforumController extends Controller
         return response()->json($comments,200);
     }
 
-    public function sendcomment(Request $request,$categoryforum,forum $forum)
+    public function sendcomment(Request $request,$categoryforum,$user,forum $forum)
     {
         $this->validate($request,[
             'body'=>'required|max:5000',
@@ -55,7 +55,7 @@ class CommentforumController extends Controller
 
 
 
-    public function updatecomment(Request $request,$categoryforum,forum $forum,comment $comment)
+    public function updatecomment(Request $request,$categoryforum,$user,forum $forum,comment $comment)
     {
 
         $this->authorize('updateComment',$comment);
@@ -67,7 +67,7 @@ class CommentforumController extends Controller
         return response()->json($forum,200);
     }
 
-    public function sendresponsecomment(Request $request,$categoryforum,forum $forum,comment $comment)
+    public function sendresponsecomment(Request $request,$categoryforum,$user,forum $forum,comment $comment)
     {
         $validatedData = $request->validate(['body' => 'required|min:2|max:5000']);
 

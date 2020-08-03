@@ -89,7 +89,7 @@ class ForumController extends Controller
         return view ('user.forum.categoryforum',compact('categoryforum'));
     }
 
-    public function apiforumscategoryslugin(categoryforum $categoryforum,forum $forum)
+    public function apiforumscategoryslugin(categoryforum $categoryforum,$user,forum $forum)
     {
         visits($forum)->seconds(5)->increment();
 
@@ -98,7 +98,7 @@ class ForumController extends Controller
         return response()->json($forums,200);
     }
 
-    public function forumscategoryslugin(categoryforum $categoryforum,forum $forum)
+    public function forumscategoryslugin(categoryforum $categoryforum,$user,forum $forum)
     {
         visits($forum)->seconds(5)->increment();
 
