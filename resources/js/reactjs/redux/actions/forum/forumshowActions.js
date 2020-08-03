@@ -42,12 +42,11 @@ export const followerItem = (props) => dispatch => {
 export const unfollowerItem = (props) => dispatch => {
 
     Swal.fire({
-        title:  "Se désabonner de "+props.first_name+" ?",
-        text:  "En vous desabonnant vous ne pourriez plus recevoir les notifications des postes poster par "+props.first_name,
+        text:  "Se désabonner de "+props.first_name+" ?",
         buttonsStyling: false,
-        confirmButtonClass: "btn btn-success",
+        confirmButtonClass: "btn btn-info",
         cancelButtonClass: 'btn btn-danger',
-        confirmButtonText: 'Oui, confirmer',
+        confirmButtonText: 'Oui, se désabonner',
         cancelButtonText: 'Non, annuller',
         showCancelButton: true,
         reverseButtons: true,
