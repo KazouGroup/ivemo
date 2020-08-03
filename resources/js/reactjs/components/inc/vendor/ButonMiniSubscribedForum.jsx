@@ -12,7 +12,7 @@ class ButonMiniSubscribedForum extends Component {
                            <>
                                <Button onClick={() => this.props.unsubscribeItem(this.props)}
                                        className="btn btn-info btn-sm btn-icon btn-round btn-raised">
-                                   <i className="fas fa-bell-slash"></i>
+                                   <i className="fas fa-bell"></i>
                                </Button>
                            </>
                            :
