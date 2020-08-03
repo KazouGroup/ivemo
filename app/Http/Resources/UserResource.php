@@ -47,8 +47,7 @@ class UserResource extends JsonResource
             'countfollowerusers' => $this->followerusers()->count(),
             'followeruser' => $this->followeruser(),
 
-            'subscribannonced' => $this->subscribannonced(),
-            'subscribannonces' => $this->subscribannonces()->count(),
+            'subscribedannonce' => $this->subscribeannonce(),
 
             'employments_count' => $this->employments_count,
             'annoncelocations_count' => $this->annoncelocations_count,

@@ -22,6 +22,7 @@ import {
     statuscommentaddItem,
     likeItem,unlikeItem,
     favoriteItem,unfavoriteItem,
+
     loadProfileusersforpublic,
     unsubscribeItem,subscribeItem,
     unfollowerItem,followerItem,
@@ -756,6 +757,7 @@ class EmployementShowUserSite extends Component {
 
 EmployementShowUserSite.propTypes = {
     loademploymentshowusersite: PropTypes.func.isRequired,
+    loadProfileusersforpublic: PropTypes.func.isRequired,
 };
 
 const mapStoreToProps = store => ({
@@ -768,9 +770,10 @@ export default connect(mapStoreToProps, {
     statuscommentremoveItem,
     statuscommentaddItem,
     likeItem,unlikeItem,
-    loadProfileusersforpublic,
     favoriteItem,unfavoriteItem,
 
+
+    loadProfileusersforpublic,
     unsubscribeItem,subscribeItem,
     unfollowerItem,followerItem,
 })(EmployementShowUserSite);

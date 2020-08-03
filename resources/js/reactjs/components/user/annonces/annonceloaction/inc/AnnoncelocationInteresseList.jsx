@@ -86,7 +86,7 @@ class AnnoncelocationInteresseList extends Component {
                                             </div>
                                         </div>
                                         <h6 className="card-title">
-                                            <NavLink to={`/annonces_locations/${this.props.annoncetype.slug}/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.slug}/`}>
+                                            <NavLink to={`/annonces_locations/${this.props.annoncetype.slug}/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`}>
                                                 {this.props.title.length > 40 ? this.props.title.substring(0, 40) + "..." : this.props.title}
                                             </NavLink>
                                         </h6>

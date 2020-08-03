@@ -122,9 +122,10 @@ class AnnoncelocationcommentIndex extends PureComponent {
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let itemCity = this.props.match.params.city;
+        let itemuser = this.props.match.params.user;
         let itemannoncelocation = this.props.match.params.annoncelocation;
         let Id = this.state.itemData.id;
-        let url = route('annoncelocationssendresponsecomment_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemannoncelocation,Id]);
+        let url = route('annoncelocationssendresponsecomment_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemuser,itemannoncelocation,Id]);
         dyaxios.post(url, item)
             .then(() => {
 
@@ -164,8 +165,9 @@ class AnnoncelocationcommentIndex extends PureComponent {
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let itemCity = this.props.match.params.city;
+        let itemuser = this.props.match.params.user;
         let itemannoncelocation = this.props.match.params.annoncelocation;
-        let url = route('annoncelocationsendcomment_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemannoncelocation]);
+        let url = route('annoncelocationsendcomment_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemuser,itemannoncelocation]);
         dyaxios.post(url, item)
             .then(() => {
 
@@ -206,9 +208,10 @@ class AnnoncelocationcommentIndex extends PureComponent {
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let itemCity = this.props.match.params.city;
+        let itemuser = this.props.match.params.user;
         let itemannoncelocation = this.props.match.params.annoncelocation;
         let Id = this.state.itemData.id;
-        let url = route('annoncelocationupdatecomment_site', [itemannoncetype,itemCategoryannoncelocation,itemCity,itemannoncelocation,Id]);
+        let url = route('annoncelocationupdatecomment_site', [itemannoncetype,itemCategoryannoncelocation,itemCity,itemuser,itemannoncelocation,Id]);
         dyaxios.put(url, item)
             .then(response => {
 

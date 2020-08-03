@@ -19,9 +19,9 @@ export const loadCommentsAnnoncelocationcomments = (props) => dispatch => {
     let itemannoncetype = props.match.params.annoncetype;
     let itemCategoryannoncelocation = props.match.params.categoryannoncelocation;
     let itemCity = props.match.params.city;
+    let itemuser = props.match.params.user;
     let itemannoncelocation = props.match.params.annoncelocation;
-    /*Ici c'est pour recuperer les annonce par villes*/
-    let url = route('api.annoncelocationgetcomment_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemannoncelocation]);
+    let url = route('api.annoncelocationgetcomment_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemuser,itemannoncelocation]);
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_COMMENTS_ANNONCESLOCATIONS,
@@ -36,7 +36,6 @@ export const loadCommentsAnnoncereservationcomments = (props) => dispatch => {
     let itemCategoryannoncereservation = props.match.params.categoryannoncereservation;
     let itemcityannonce = props.match.params.city;
     let itemannoncereservation = props.match.params.annoncereservation;
-    /*Ici c'est pour recuperer les annonce par villes*/
     let url = route('api.annoncereservationgetcomment_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemannoncereservation]);
     dyaxios.get(url)
         .then(response => dispatch({
@@ -52,7 +51,6 @@ export const loadCommentsAnnonceventes = (props) => dispatch => {
     let itemCategoryannoncevente = props.match.params.categoryannoncevente;
     let itemcityannonce = props.match.params.city;
     let itemannoncevente = props.match.params.annoncevente;
-    /*Ici c'est pour recuperer les annonce par villes*/
     let url = route('api.annonceventegetcomment_site',[itemannoncetype,itemCategoryannoncevente,itemcityannonce,itemannoncevente]);
     dyaxios.get(url)
         .then(response => dispatch({
@@ -67,7 +65,6 @@ export const loadCommentsBlogannoncereservations = (props) => dispatch => {
     let itemCategoryannoncereservation = props.match.params.categoryannoncereservation;
     let itemdate = props.match.params.date;
     let itemblogannoncereservation = props.match.params.blogannoncereservation;
-    /*Ici c'est pour recuperer les annonce par villes*/
     let url = route('api.blogannoncereservationgetcomment_site',[itemCategoryannoncereservation,itemdate,itemblogannoncereservation]);
     dyaxios.get(url)
         .then(response => dispatch({

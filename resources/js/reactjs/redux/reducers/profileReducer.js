@@ -29,6 +29,14 @@ export default produce((draft, action = {}) => {
                 draft.profiluser.countfollowerusers --;
                 return;
 
+            case 'SUBSCRIBE_USER_FOR_ANNONCELOCATION_ADD':
+                draft.profiluser.subscribedannonce = action.payload;
+                return;
+
+            case 'SUBSCRIBE_USER_FOR_ANNONCELOCATION_REMOVE':
+                draft.profiluser.subscribedannonce = !action.payload;
+                return;
+
             case 'SUBSCRIBE_USER_FOR_EMPLOYEMENT_ADD':
                 draft.profiluser.subscribedemployment = action.payload;
                 return;

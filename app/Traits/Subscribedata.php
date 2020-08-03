@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Model\abonne\subscribeannonce;
 use App\Model\abonne\subscribeblogannonce;
 use App\Model\abonne\subscribeforum;
 use App\Model\abonne\subscribemployment;
@@ -80,6 +81,33 @@ trait Subscribedata
             'member_id')
             ->withTimeStamps();
     }
+
+
+
+    public function subscribeannonce()
+    {
+        return (bool) subscribeannonce::where('user_id', Auth::guard('web')->id())
+            ->where('member_id', $this->id)
+            ->first();
+    }
+
+
+    public function subscribeannonces()
+    {
+        return $this->hasMany(subscribeannonce::class, 'user_id');
+    }
+
+
+    public function putsubscribannonces()
+    {
+        return $this->belongsToMany(
+            subscribeannonce::class,
+            'subscribeannonces',
+            'user_id',
+            'member_id')
+            ->withTimeStamps();
+    }
+
 
     public function followerusers()
     {

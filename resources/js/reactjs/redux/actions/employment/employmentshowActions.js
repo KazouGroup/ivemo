@@ -42,6 +42,7 @@ export const followerItem = (props) => dispatch => {
             })
         ).catch(error => console.error(error));
 };
+
 export const unfollowerItem = (props) => dispatch => {
 
     Swal.fire({

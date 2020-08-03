@@ -72,7 +72,7 @@ class AnnoncelocationController extends Controller
         ]);
     }
 
-    public function annoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,annoncelocation $annoncelocation)
+    public function annoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$user,annoncelocation $annoncelocation)
     {
         visits($annoncelocation)->seconds(60)->increment();
 
@@ -267,11 +267,11 @@ class AnnoncelocationController extends Controller
      * @param annoncelocation $annoncelocation
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiannoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,annoncelocation $annoncelocation)
+    public function apiannoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$user,annoncelocation $annoncelocation)
     {
         visits($annoncelocation)->seconds(60)->increment();
 
-        $annoncelocation = AnnoncelocationService::apiannoncelocationbycategoryannoncelocationslug($annoncetype,$categoryannoncelocation,$city,$annoncelocation);
+        $annoncelocation = AnnoncelocationService::apiannoncelocationbycategoryannoncelocationslug($annoncetype,$categoryannoncelocation,$city,$user,$annoncelocation);
 
         return response()->json($annoncelocation, 200);
     }

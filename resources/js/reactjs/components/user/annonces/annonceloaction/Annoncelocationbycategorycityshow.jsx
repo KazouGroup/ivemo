@@ -13,7 +13,6 @@ import SignalFromAnnoncelocationShow from "./inc/SignalFromAnnoncelocationShow";
 import Navlinknewannoncelocation from "./treatment/Navlinknewannoncelocation";
 import HelmetSite from "../../../inc/user/HelmetSite";
 import AnnoncelocationcommentIndex from "../../comments/AnnoncelocationcommentIndex";
-import FieldInput from "../../../inc/vendor/FieldInput";
 import moment from "moment";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
@@ -21,57 +20,27 @@ import {
     favoriteItem,
     likeItem,
     loadannoncelocationshowusersite, statuscommentaddItem,
-    statuscommentremoveItem, unfavoriteItem, unlikeItem
+    statuscommentremoveItem, unfavoriteItem, unlikeItem,
+
+    loadProfileusersforpublic,
+    unsubscribeItem,subscribeItem,
+    unfollowerItem,followerItem,
 } from "../../../../redux/actions/annoncelocation/annoncelocationshowActions";
+import ButonFollowerUser from "../../../inc/vendor/ButonFollowerUser";
+import ButonMiniSubscribedAllAnnonce from "../../../inc/vendor/ButonMiniSubscribedAllAnnonce";
+const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
 class Annoncelocationbycategorycityshow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            full_name: '',
-            message: '',
-            subject: '',
-            errors: [],
+            //
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.statusItem = this.statusItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
 
-
-        this.handleFieldChange = this.handleFieldChange.bind(this);
-        this.handleCheckClick = this.handleCheckClick.bind(this);
-        this.hasErrorFor = this.hasErrorFor.bind(this);
-        this.renderErrorFor = this.renderErrorFor.bind(this);
-    }
-
-    handleFieldChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value,
-        });
-        this.state.errors[event.target.name] = '';
-    }
-
-    handleCheckClick(event) {
-        this.setState({
-            subject: event.target.value
-        });
-
-    };
-    // Handle Errors
-    hasErrorFor(field) {
-        return !!this.state.errors[field];
-    }
-
-    renderErrorFor(field) {
-        if (this.hasErrorFor(field)) {
-            return (
-                <span className='invalid-feedback'>
-                    <strong>{this.state.errors[field][0]}</strong>
-                </span>
-            )
-        }
     }
 
     signalerUser(item) {
@@ -224,17 +193,24 @@ class Annoncelocationbycategorycityshow extends Component {
 
     loadItems(){
         this.props.loadannoncelocationshowusersite(this.props);
+        this.props.loadProfileusersforpublic(this.props);
     }
 
    // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }
+    data_countfollowFormatter(countfollowerusers, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countfollowerusers)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (countfollowerusers / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     getDescription(annoncelocation) {
         return { __html: (annoncelocation.description) };
     }
     render() {
-        const {annoncelocation} = this.props;
+        const {annoncelocation,profileUser} = this.props;
         return (
             <>
                 <HelmetSite title={`${annoncelocation.title || $name_site} - ${$name_site}`}/>
@@ -478,18 +454,32 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                                  className="avatar" />
                                                                         </NavLink>
                                                                         : <Skeleton circle={false} height={40} width={80} />}
-                                                                    <div className="mx-3">
-                                                                        <NavLink to={`/pro/${annoncelocation.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{annoncelocation.user.first_name}</b>
-                                                                            <small className="d-block text-muted">{annoncelocation.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(annoncelocation.created_at).format('LL')}</small>
-                                                                        </NavLink>
-                                                                    </div>
+
+                                                                    {annoncelocation.title && (
+                                                                        <>
+                                                                        <div className="mx-3">
+                                                                            <NavLink to={`/pro/${annoncelocation.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{annoncelocation.user.first_name}</b>
+                                                                                <small className="d-block text-muted">{annoncelocation.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(annoncelocation.created_at).format('LL')}</small> {this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}
+                                                                            </NavLink>
+                                                                        </div>
+
+                                                                            {profileUser.followeruser &&(
+                                                                                <ButonMiniSubscribedAllAnnonce {...this.props} {...profileUser}
+                                                                                                               unsubscribeItem={this.props.unsubscribeItem}
+                                                                                                               subscribeItem={this.props.subscribeItem}/>
+                                                                            )}
+
+                                                                            <ButonFollowerUser {...this.props} {...profileUser}
+                                                                                               unfollowerItem={this.props.unfollowerItem}
+                                                                                               followerItem={this.props.followerItem}
+                                                                                               nameunfollower={`Suivre`}
+                                                                                               nameununfollower={`Abonné`}/>
+                                                                        </>
+                                                                    )}
                                                                 </div>
-                                                                <Button className="btn btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
-                                                                    <i className="now-ui-icons tech_mobile"/>
-                                                                </Button>
-                                                                <a href="https://www.kazoutech.com" className="btn btn-sm btn-success" target="_banck">
-                                                                    <i className="now-ui-icons ui-2_chat-round"/>
-                                                                </a>
+
+
+
                                                             </div>
                                                             <div className="card-header text-center">
                                                                 <div className="card-title">
@@ -535,10 +525,12 @@ class Annoncelocationbycategorycityshow extends Component {
 
 Annoncelocationbycategorycityshow.propTypes = {
     loadannoncelocationshowusersite: PropTypes.func.isRequired,
+    loadProfileusersforpublic: PropTypes.func.isRequired,
 };
 
 const mapStoreToProps = store => ({
-    annoncelocation: store.annoncelocationshow.item
+    annoncelocation: store.annoncelocationshow.item,
+    profileUser: store.profile.profiluser
 });
 
 export default connect(mapStoreToProps, {
@@ -547,4 +539,8 @@ export default connect(mapStoreToProps, {
     statuscommentaddItem,
     likeItem,unlikeItem,
     favoriteItem,unfavoriteItem,
+
+    loadProfileusersforpublic,
+    unsubscribeItem,subscribeItem,
+    unfollowerItem,followerItem,
 })(Annoncelocationbycategorycityshow);

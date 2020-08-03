@@ -6,17 +6,112 @@ import {
     LIKE_ANNONCELOCATION_REMOVE,
     FAVORITE_ANNONCELOCATION_SHOW_ADD,
     FAVORITE_ANNONCELOCATION_SHOW_REMOVE,
+    GET_PROFILE_USER_FOR_PUBLIC,
+    FOLLOWERUSER_ADD,
+    FOLLOWERUSER_REMOVE,
+    SUBSCRIBE_USER_FOR_ANNONCELOCATION_ADD,
+    SUBSCRIBE_USER_FOR_ANNONCELOCATION_REMOVE,
 } from "../types";
+
 import Swal from "sweetalert2";
 
 
+
+/**
+ * Ce code c'est pour les abbonement de l'utilisateur
+ * @param props
+ * @returns {function(...[*]=)}
+ */
+export const loadProfileusersforpublic = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let url = route('api.profilpublique',[itemuser]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_PROFILE_USER_FOR_PUBLIC,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const followerItem = (props) => dispatch => {
+
+
+    let url = route('users_followeuser.follow',[props.id]);
+    dyaxios.post(url)
+        .then(() => dispatch({
+                type: FOLLOWERUSER_ADD,
+                payload: props.id
+            })
+        ).catch(error => console.error(error));
+};
+
+export const unfollowerItem = (props) => dispatch => {
+
+    Swal.fire({
+        text:  "Se désabonner de "+props.first_name+" ?",
+        buttonsStyling: false,
+        confirmButtonClass: "btn btn-info",
+        cancelButtonClass: 'btn btn-danger',
+        confirmButtonText: 'Oui, se désabonner',
+        cancelButtonText: 'Non, annuller',
+        showCancelButton: true,
+        reverseButtons: true,
+    }).then((result) => {
+        if (result.value) {
+
+            let url = route('users_followeuser.follow',[props.id]);
+            dyaxios.post(url)
+                .then(() => dispatch({
+                        type: FOLLOWERUSER_REMOVE,
+                        payload: props.id
+                    })
+                ).catch(error => console.error(error));
+        }
+    })
+};
+
+
+export const   subscribeItem = props => dispatch => {
+
+    const url = route('annonces_subscribe.subscribe', [props.id]);
+    dyaxios.post(url).then(() => {
+
+            dispatch({
+                type: SUBSCRIBE_USER_FOR_ANNONCELOCATION_ADD,
+                payload: props.id
+            });
+        }
+    ).catch(error => console.error(error));
+};
+
+export const  unsubscribeItem = props => dispatch => {
+
+    const url = route('annonces_subscribe.subscribe', [props.id]);
+    dyaxios.post(url).then(() => {
+
+            dispatch({
+                type: SUBSCRIBE_USER_FOR_ANNONCELOCATION_REMOVE,
+                payload: props.id
+            });
+        }
+    ).catch(error => console.error(error));
+};
+
+
+/**
+ *
+ * @param props
+ * @returns {function(...[*]=)}
+ */
 export const loadannoncelocationshowusersite = (props) => dispatch => {
 
     let itemannoncetype = props.match.params.annoncetype;
     let itemCategoryannoncelocation = props.match.params.categoryannoncelocation;
     let itemCity = props.match.params.city;
+    let itemuser = props.match.params.user;
     let itemannoncelocation = props.match.params.annoncelocation;
-    let url = route('api.annoncelocationbycategoryannoncelocationslug_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemannoncelocation]);
+    let url = route('api.annoncelocationbycategoryannoncelocationslug_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemuser,itemannoncelocation]);
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_ANNONCELOCATION_SHOW_USER_SITE,
