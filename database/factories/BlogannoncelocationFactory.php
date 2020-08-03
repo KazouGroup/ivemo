@@ -24,7 +24,8 @@ $factory->define(blogannoncelocation::class, function (Faker $faker) {
         'red_time' => $faker->randomDigitNot(5),
         'description' => "<p>".$faker->realText(rand(10000, 20000))."</p>",
         'categoryannoncelocation_id' => categoryannoncelocation::inRandomOrder()->first()->id,
-        'user_id' => user::inRandomOrder()->first()->id,
+        'user_id' => mt_rand(1, 5),
+        //'user_id' => user::inRandomOrder()->first()->id,
         //'created_at' => $faker->dateTime,
     ];
 });
