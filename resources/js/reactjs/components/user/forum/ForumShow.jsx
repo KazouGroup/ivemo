@@ -225,17 +225,23 @@ class ForumShow extends Component {
                                                                 </NavLink>
                                                             </div>
 
-                                                            {profileUser.followeruser &&(
-                                                                <ButonMiniSubscribedForum {...this.props} {...profileUser}
-                                                                                               unsubscribeItem={this.props.unsubscribeItem}
-                                                                                               subscribeItem={this.props.subscribeItem}/>
+                                                            {forum.title && (
+                                                                <>
+
+                                                                    {profileUser.followeruser &&(
+                                                                        <ButonMiniSubscribedForum {...this.props} {...profileUser}
+                                                                                                  unsubscribeItem={this.props.unsubscribeItem}
+                                                                                                  subscribeItem={this.props.subscribeItem}/>
+                                                                    )}
+
+                                                                    <ButonFollowerUser {...this.props}{...profileUser}
+                                                                                       unfollowerItem={this.props.unfollowerItem}
+                                                                                       followerItem={this.props.followerItem}
+                                                                                       nameunfollower={`Suivre`}
+                                                                                       nameununfollower={`Abonné`}/>
+                                                                </>
                                                             )}
 
-                                                            <ButonFollowerUser {...this.props}{...profileUser}
-                                                                               unfollowerItem={this.props.unfollowerItem}
-                                                                               followerItem={this.props.followerItem}
-                                                                               nameunfollower={`Suivre`}
-                                                                               nameununfollower={`Abonné`}/>
                                                         </div>
                                                         <div className="text-right ml-auto">
                                                             <span className="card-title">
