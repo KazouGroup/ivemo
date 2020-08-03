@@ -4,6 +4,8 @@ namespace App\Services;
 
 
 use App\Http\Resources\ForumResource;
+use App\Jobs\NewforumJob;
+use App\Model\abonne\subscribeforum;
 use App\Model\categoryforum;
 use App\Model\forum;
 use Illuminate\Support\Facades\Auth;
@@ -136,5 +138,20 @@ class ForumService
         return $data;
     }
 
+
+    public static function sendMessageToUser($request)
+    {
+        $fromUser = auth()->user();
+        $fromTitleUser = $request->get('title');
+
+        $emailsubscribeforum = subscribeforum::with('user','member')
+            ->whereIn('member_id',[$fromUser->id])
+            ->distinct()->get();
+
+        $emailuserJob = (new NewforumJob($emailsubscribeforum,$fromTitleUser,$fromUser));
+
+        dispatch($emailuserJob);
+
+    }
 
 }

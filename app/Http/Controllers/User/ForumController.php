@@ -22,7 +22,7 @@ class ForumController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','statuscomments','destroy','apiforumslugin','edit','update', 'forumsbyuser','apiforumsbyuser'
+            'create','store','statuscomments','destroy','apiforumslugin','edit','update', 'forumsbyuser','apiforumsbyuser'
         ]]);
     }
 
@@ -84,7 +84,7 @@ class ForumController extends Controller
 
     public function forumscategory(categoryforum $categoryforum)
     {
-        $forums = ForumService::apiforumscategory($categoryforum);
+        ForumService::apiforumscategory($categoryforum);
 
         return view ('user.forum.categoryforum',compact('categoryforum'));
     }
@@ -137,6 +137,8 @@ class ForumController extends Controller
 
         $forum->fill($request->all());
         $forum->description = clean($request->description);
+
+        ForumService::sendMessageToUser($request);
 
         $forum->save();
 
