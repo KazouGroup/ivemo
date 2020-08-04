@@ -4,6 +4,8 @@ namespace App\Services;
 
 
 use App\Http\Resources\ForumResource;
+use App\Jobs\NewforumJob;
+use App\Model\abonne\subscribeforum;
 use App\Model\categoryforum;
 use App\Model\forum;
 use Illuminate\Support\Facades\Auth;
@@ -14,12 +16,12 @@ class ForumService
 
     public static function getcategoryforum($categoryforum)
     {
-        return 
+        return
         $categoryforum->forums()->where(['status' => 1,'status_admin' => 1])
             ->with('user','categoryforum')
             ->whereIn('categoryforum_id',[$categoryforum->id])
             ->with(['user' => function ($q) {
-                $q->select('id','first_name','sex','slug','created_at','avatar');}])
+                $q->select('id','first_name','status_profile','sex','slug','created_at','avatar');}])
             ->whereHas('categoryforum', function ($q) {$q->where('status',1);})
             ->orderByDesc('created_at');
     }
@@ -56,7 +58,7 @@ class ForumService
         $data = ForumResource::collection(forum::where(['status' => 1,'status_admin' => 1])
             ->with('user','categoryforum')
             ->with(['user' => function ($q) {
-                $q->select('id','first_name','sex','slug','created_at','avatar');}])
+                $q->select('id','first_name','status_profile','sex','slug','created_at','avatar');}])
             ->whereHas('categoryforum', function ($q) {$q->where('status',1);})
             ->orderByDesc('created_at')
             ->distinct()->paginate(40));
@@ -77,7 +79,7 @@ class ForumService
     {
 
         $data = ForumResource::collection(self::getcategoryforum($categoryforum)
-        ->take(6)
+        ->take(18)
         ->distinct()->get());
 
         return $data;
@@ -116,7 +118,7 @@ class ForumService
             ->with('user','categoryforum')
             ->whereIn('categoryforum_id',[$categoryforum->id])
             ->with(['user' => function ($q) {$q->with('profile')
-                ->select('id','first_name','sex','created_at','avatar','slug');}])
+                ->select('id','first_name','status_profile','sex','created_at','avatar','slug');}])
             ->whereHas('categoryforum', function ($q) {$q->where('status',1);})
             ->distinct()->firstOrFail());
 
@@ -136,5 +138,20 @@ class ForumService
         return $data;
     }
 
+
+    public static function sendMessageToUser($request)
+    {
+        $fromUser = auth()->user();
+        $fromTitleUser = $request->get('title');
+
+        $emailsubscribeforum = subscribeforum::with('user','member')
+            ->whereIn('member_id',[$fromUser->id])
+            ->distinct()->get();
+
+        $emailuserJob = (new NewforumJob($emailsubscribeforum,$fromTitleUser,$fromUser));
+
+        dispatch($emailuserJob);
+
+    }
 
 }

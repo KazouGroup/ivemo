@@ -100,13 +100,18 @@ class blogannoncelocation extends Model implements Auditable
         return $this->morphMany(comment::class ,'commentable');
     }
 
-    public function bookmarked()
+    public function favorites()
     {
-        return (bool) favoriteblogannoncelocation::where('user_id', Auth::guard('web')->id())
-            ->where('blogannoncelocation_id', $this->id)
-            ->first();
+        return $this->morphMany(favorite::class ,'favoriteable');
     }
 
+    public function favoriteted()
+    {
+        return (bool) favorite::where('user_id', Auth::guard('web')->id())
+            ->where(['favoriteable_type' => 'App\Model\blogannoncelocation',
+                'favoriteable_id' => $this->id ])
+            ->first();
+    }
     public function likes()
     {
         return $this->morphMany(like::class ,'likeable');
@@ -115,7 +120,7 @@ class blogannoncelocation extends Model implements Auditable
     public function likeked()
     {
         return (bool) like::where('user_id', Auth::guard('web')->id())
-            ->where(['likeable_type' => 'App\Model\blogannoncelocation', 
+            ->where(['likeable_type' => 'App\Model\blogannoncelocation',
             'likeable_id' => $this->id ])
             ->first();
     }

@@ -21,7 +21,6 @@ import {
     loadContactserviceemploymentshow,unactiveItem,deletecontactItem
 } from "../../../../../redux/actions/contactserviceActions";
 import PropTypes from "prop-types";
-import Buttonctionshowmailcontactservice from "../inc/Buttonctionshowmailcontactservice";
 
 
 class ContactserviceEmploymentShow extends Component {
@@ -40,7 +39,7 @@ class ContactserviceEmploymentShow extends Component {
     readItem(item) {
         const url = route('contactservice_red', [item.id]);
         dyaxios.get(url).then(() => {
-            this.props.history.push(`/profile/${$userIvemo.slug}/personal_mails/employments/${this.props.match.params.employment}/${item.slug}/`);
+            this.props.history.push(`/profile/${$userIvemo.slug}/statistics/employments/${this.props.match.params.employment}/${item.slug}/`);
         })
 
     }
@@ -163,7 +162,7 @@ class ContactserviceEmploymentShow extends Component {
                                         )}
 
                                         <div className="submit text-left">
-                                            <Link to={`/profile/${$userIvemo.slug}/personal_mails/employments/`} className="btn btn-neutral btn-sm">
+                                            <Link to={`/profile/${$userIvemo.slug}/statistics/employments/`} className="btn btn-neutral btn-sm">
                                                 <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos annonces</b>
                                             </Link>
 
@@ -183,15 +182,19 @@ class ContactserviceEmploymentShow extends Component {
                                                         <div className="container">
                                                             <div className="row">
                                                                 <div className="col-md-4">
-                                                                    <h5 className="info-title"><b>{employment.countcomments > 1 ? "Total commentaires" : "Total commentaire"}</b></h5>
+                                                                    <h5 className="info-title"><b>{employment.countcomments > 1 ? "Commentaires" : "Commentaire"}</b></h5>
                                                                     {employment.countcomments}
                                                                 </div>
-                                                                <div className="col-md-3">
-                                                                    <h5 className="info-title"><b>Total vues</b></h5>
+                                                                <div className="col-md-2">
+                                                                    <h5 className="info-title"><b> {employment.visits_count > 1 ? "Vues" : "Vue"}</b></h5>
                                                                     {employment.visits_count}
                                                                 </div>
-                                                                <div className="col-md-5">
-                                                                    <h5 className="info-title"><b>  {employment.contactservices_count > 1 ? "Total messages non lus" : "Total message non lu"}</b></h5>
+                                                                <div className="col-md-2">
+                                                                    <h5 className="info-title"><b> {employment.countlikes > 1 ? "Likes" : "Like"}</b></h5>
+                                                                    {employment.countlikes}
+                                                                </div>
+                                                                <div className="col-md-4">
+                                                                    <h5 className="info-title"><b>  {employment.contactservices_count > 1 ? "Messages non lus" : "Message non lu"}</b></h5>
                                                                     {employment.contactservices_count}
                                                                 </div>
                                                             </div>

@@ -2,6 +2,14 @@ import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import moment from 'moment'
 import AnnoncelocationInteresseList from "../../annonces/annonceloaction/inc/AnnoncelocationInteresseList";
+import AnnoncesinteresseSkeleton from "../../../inc/user/annonce/AnnoncesinteresseSkeleton";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {
+    favoriteItem,
+    loadAnnoncelocationsinteressesbycategories,
+    unfavoriteItem
+} from "../../../../redux/actions/annoncelocation/annoncelocationActions";
 
 require("moment/min/locales.min");
 moment.locale('fr');
@@ -11,7 +19,6 @@ class AnnoncelocationInteresseforBlog extends Component {
         super(props);
         this.loadmoresItem = this.loadmoresItem.bind(this);
         this.state = {
-            annoncelocationsinteresses: [],
             visiable: 4,
             //
         }
@@ -24,15 +31,22 @@ class AnnoncelocationInteresseforBlog extends Component {
     }
 
     componentDidMount() {
-        let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
-        dyaxios.get(route('api.annoncelocationinteresse_by_categoryannoncelocation_site', [ itemCategoryannoncelocation])).then(response =>
-            this.setState({
-                annoncelocationsinteresses: [...response.data],
-            }));
+        this.props.loadAnnoncelocationsinteressesbycategories(this.props);
     }
 
     render() {
-        const { annoncelocationsinteresses,visiable } = this.state;
+        const { annoncelocationsinteresses } = this.props;
+        const { visiable } = this.state;
+        const mapAnnoncelocationsinteresses = annoncelocationsinteresses.length >= 0 ? (
+            annoncelocationsinteresses.slice(0,visiable).map(item => {
+                return(
+                    <AnnoncelocationInteresseList key={item.id} {...item}
+                                                  unfavoriteItem={this.props.unfavoriteItem}
+                                                  favoriteItem={this.props.favoriteItem}/>
+                )})
+        ):(
+            <AnnoncesinteresseSkeleton/>
+        );
         return (
             <>
 
@@ -45,9 +59,7 @@ class AnnoncelocationInteresseforBlog extends Component {
 
                 <div className="row">
 
-                    {annoncelocationsinteresses.slice(0,visiable).map((item) => (
-                       <AnnoncelocationInteresseList key={item.id} {...item}/>
-                    ))}
+                    {mapAnnoncelocationsinteresses}
 
                 </div>
 
@@ -67,4 +79,14 @@ class AnnoncelocationInteresseforBlog extends Component {
 
 }
 
-export default AnnoncelocationInteresseforBlog;
+AnnoncelocationInteresseforBlog.propTypes = {
+    loadAnnoncelocationsinteressesbycategories: PropTypes.func.isRequired,
+};
+
+const mapStoreToProps = store => ({
+    annoncelocationsinteresses: store.annoncelocations.annoncelocations
+
+});
+export default connect(mapStoreToProps, {
+    loadAnnoncelocationsinteressesbycategories,unfavoriteItem,favoriteItem
+})(AnnoncelocationInteresseforBlog);

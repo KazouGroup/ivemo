@@ -13,12 +13,12 @@ Route::get(
 )->name('comments.responsecomment_unactive');
 
 Route::get(
-    'comments_unactive/{comment}',
+    'comments_unactive/{comment}/unactive',
     'CommentAndResponsecommentController@unactive'
 )->name('comments.unactive');
 
 Route::delete(
-    'comments/{comment}',
+    'comments/{comment}/delete',
     'CommentAndResponsecommentController@destroy'
 )->name('comments.destroy');
 

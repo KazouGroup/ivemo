@@ -1,22 +1,15 @@
 import React, { Component } from "react";
 import { Link,NavLink } from 'react-router-dom';
 import NavannoncecategorySkeleton from "../NavannoncecategorySkeleton";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {loadCityannonces} from "../../../../redux/actions/annoncevente/annonceventeActions";
 
 
 class SectionVentebyCity extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            annoncesbycities: {user:[]},
-        }
-    }
 
     loadItems(){
-        let url = route('api.citiesannonceventes_site');
-        dyaxios.get(url).then(response =>
-            this.setState({
-                annoncesbycities: [...response.data]
-            }));
+        this.props.loadCityannonces();
     }
 
     componentDidMount() {
@@ -34,7 +27,7 @@ class SectionVentebyCity extends Component {
         return (annonceventes_count/1000).toFixed(annonceventes_count % 1000 !== 0)+'k';
     }
     render() {
-        const {annoncesbycities} = this.state;
+        const {annoncesbycities} = this.props;
         const mapAnnoncesbycities = annoncesbycities.length >= 0 ? (
             annoncesbycities.map(item => {
                 return(
@@ -85,4 +78,13 @@ class SectionVentebyCity extends Component {
         )
     }
 }
-export default SectionVentebyCity;
+
+SectionVentebyCity.propTypes = {
+    loadCityannonces: PropTypes.func.isRequired,
+};
+
+const mapStoreToProps = store => ({
+    annoncesbycities: store.annonceventes.cityannonceventes
+
+});
+export default connect(mapStoreToProps, {loadCityannonces})(SectionVentebyCity);

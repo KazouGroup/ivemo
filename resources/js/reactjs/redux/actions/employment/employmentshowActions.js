@@ -6,18 +6,107 @@ import {
     LIKE_EMPLOYEMENT_REMOVE,
     FAVORITE_EMPLOYEMENT_SHOW_ADD,
     FAVORITE_EMPLOYEMENT_SHOW_REMOVE,
-    FAVORITE_EMPLOYEMENT_ADD,
-    FAVORITE_EMPLOYEMENT_REMOVE,
+    GET_PROFILE_USER_FOR_PUBLIC,
+    FOLLOWERUSER_ADD,
+    FOLLOWERUSER_REMOVE,
+    SUBSCRIBE_USER_FOR_EMPLOYEMENT_ADD, SUBSCRIBE_USER_FOR_EMPLOYEMENT_REMOVE,
 } from "../types";
 import Swal from "sweetalert2";
 
 
+/**
+ * Ce code c'est pour les abbnent de l'utilisateur
+ * @param props
+ * @returns {function(...[*]=)}
+ */
+export const loadProfileusersforpublic = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let url = route('api.profilpublique',[itemuser]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_PROFILE_USER_FOR_PUBLIC,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const followerItem = (props) => dispatch => {
+
+
+    let url = route('users_followeuser.follow',[props.id]);
+    dyaxios.post(url)
+        .then(() => dispatch({
+                type: FOLLOWERUSER_ADD,
+                payload: props.id
+            })
+        ).catch(error => console.error(error));
+};
+
+export const unfollowerItem = (props) => dispatch => {
+
+    Swal.fire({
+        text:  "Se désabonner de "+props.first_name+" ?",
+        buttonsStyling: false,
+        confirmButtonClass: "btn btn-info",
+        cancelButtonClass: 'btn btn-danger',
+        confirmButtonText: 'Oui, se désabonner',
+        cancelButtonText: 'Non, annuller',
+        showCancelButton: true,
+        reverseButtons: true,
+    }).then((result) => {
+        if (result.value) {
+
+            let url = route('users_followeuser.follow',[props.id]);
+            dyaxios.post(url)
+                .then(() => dispatch({
+                        type: FOLLOWERUSER_REMOVE,
+                        payload: props.id
+                    })
+                ).catch(error => console.error(error));
+        }
+    })
+};
+
+
+export const   subscribeItem = props => dispatch => {
+
+    const url = route('employments_subscribe.subscribe', [props.id]);
+    dyaxios.post(url).then(() => {
+
+            dispatch({
+                type: SUBSCRIBE_USER_FOR_EMPLOYEMENT_ADD,
+                payload: props.id
+            });
+        }
+    ).catch(error => console.error(error));
+};
+
+export const  unsubscribeItem = props => dispatch => {
+
+    const url = route('employments_subscribe.subscribe', [props.id]);
+    dyaxios.post(url).then(() => {
+
+            dispatch({
+                type: SUBSCRIBE_USER_FOR_EMPLOYEMENT_REMOVE,
+                payload: props.id
+            });
+        }
+    ).catch(error => console.error(error));
+};
+
+/**
+ * tout ce code ci bas c'est uniquement pour employment
+ * @param props
+ * @returns {function(...[*]=)}
+ */
 export const loademploymentshowusersite = (props) => dispatch => {
 
     let itemCategoryemployment = props.match.params.categoryemployment;
     let itemCity = props.match.params.city;
+    let itemuser = props.match.params.user;
     let itemEmployment = props.match.params.employment;
-    let url = route('api.employmentsbycategorybycityslug_site', [itemCategoryemployment, itemCity, itemEmployment]);
+    let url = route('api.employmentsbycategorybycityslug_site', [itemCategoryemployment, itemCity,itemuser, itemEmployment]);
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_EMPLOYEMENT_SHOW_USER_SITE,

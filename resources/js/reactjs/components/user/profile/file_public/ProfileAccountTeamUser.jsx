@@ -87,6 +87,7 @@ class ProfileAccountTeamUser extends Component {
                 teamusers: [...response.data],
             }));
     }
+
     getDescription(item) {
         return { __html: item.description };
     }

@@ -12,7 +12,11 @@ import NavLinkPublicBlogannoncesUser from "./blogs/public/NavLinkPublicBlogannon
 import FormNewletterSubcribeProfileAccountUser from "./form/FormNewletterSubcribeProfileAccountUser";
 import Skeleton from "react-loading-skeleton";
 import ReadMoreAndLess from "react-read-more-less";
-import ProfilePublicAccountAvisUser from "./file_public/avisuser/ProfilePublicAccountAvisUser";
+import ProfileAccountAvisUser from "./file_public/ProfileAccountAvisUser";
+import HelmetSite from "../../inc/user/HelmetSite";
+import {connect} from "react-redux";
+import { loadProfileusersforpublic,unfollowerItem,followerItem} from "../../../redux/actions/profileActions";
+import ButonFollowerUser from "../../inc/vendor/ButonFollowerUser";
 
 
 class ProfileAccountPublicUser extends PureComponent {
@@ -30,7 +34,7 @@ class ProfileAccountPublicUser extends PureComponent {
     }
 
     // Lifecycle Component Method
-    componentDidMount() {
+    componentDidMount(){
         this.loadItems();
     }
 
@@ -39,12 +43,10 @@ class ProfileAccountPublicUser extends PureComponent {
     }
 
     render() {
-        const {userPublick} = this.state;
+        const {userPublick} = this.props;
         return (
             <>
-                <Helmet>
-                    <title>{`${userPublick.first_name || 'Profile'}`} - {$name_site}</title>
-                </Helmet>
+                <HelmetSite title={`${userPublick.first_name || 'Profile'}` - $name_site}/>
 
                 <div className="profile-page sidebar-collapse">
 
@@ -127,6 +129,15 @@ class ProfileAccountPublicUser extends PureComponent {
                                                 </Button>
                                             )}
 
+                                            <ButonFollowerUser {...userPublick}
+                                                               unfollowerItem={this.props.unfollowerItem}
+                                                               followerItem={this.props.followerItem}
+                                                               nameunfollower={`Suivre`}
+                                                               nameununfollower={`Abonné`}/>
+
+                                            <Button className="btn btn-sm btn-primary" rel="tooltip" title="3426712192" data-placement="bottom">
+                                                <i className="now-ui-icons tech_mobile"/>
+                                            </Button>
                                             <a href="#contact" className="btn btn-sm btn-success">
                                                 <i className="now-ui-icons ui-2_chat-round"/>
                                             </a>
@@ -140,7 +151,6 @@ class ProfileAccountPublicUser extends PureComponent {
                                                     )}
                                                 </Fragment>
                                             )}
-
                                         </div>
                                     </div>
                                 </div>
@@ -317,7 +327,6 @@ class ProfileAccountPublicUser extends PureComponent {
                                                 {!userPublick.profile.status_team_user ? <></> :
                                                     <ProfileAccountTeamUser {...this.props}/>}
 
-
                                                 {!userPublick.profile.status_avis ? <></> :
                                                     <ProfilePublicAccountAvisUser {...this.props}/>}
 
@@ -357,4 +366,16 @@ class ProfileAccountPublicUser extends PureComponent {
     }
 }
 
-export default ProfileAccountPublicUser;
+
+ProfileAccountPublicUser.propTypes = {
+    loadProfileusersforpublic: PropTypes.func.isRequired,
+};
+
+const mapStoreToProps = store => ({
+    userPublick: store.profile.profiluser
+});
+
+export default connect(mapStoreToProps, {
+    loadProfileusersforpublic,unfollowerItem,followerItem
+})(ProfileAccountPublicUser);
+

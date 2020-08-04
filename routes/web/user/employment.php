@@ -59,7 +59,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.employmentsbyuserbycategoryemployment_site');
 
     Route::get(
-        'employments/{categoryemployment}/{city}/{employment}',
+        'employments/{categoryemployment}/{city}/{user:slug}/{employment}',
         'EmploymentController@apiemploymentsbycategoryslug'
     )->name('api.employmentsbycategorybycityslug_site');
 
@@ -87,7 +87,7 @@ Route::get(
 )->name('employmentbycategorybycity_site');
 
 Route::get(
-    'employments/{categoryemployment}/{city}/{employment}',
+    'employments/{categoryemployment}/{city}/{user:slug}/{employment}',
     'EmploymentController@employmentslug'
 )->name('employmentslug_site');
 

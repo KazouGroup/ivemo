@@ -22,8 +22,14 @@ import {
     statuscommentaddItem,
     likeItem,unlikeItem,
     favoriteItem,unfavoriteItem,
-} from "../../../redux/actions/employment/employmentshowActions";
 
+    loadProfileusersforpublic,
+    unsubscribeItem,subscribeItem,
+    unfollowerItem,followerItem,
+} from "../../../redux/actions/employment/employmentshowActions";
+import ButonFollowerUser from "../../inc/vendor/ButonFollowerUser";
+import ButonMiniSubscribedEmployment from "../../inc/vendor/ButonMiniSubscribedEmployment";
+const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 class EmployementShowUserSite extends Component {
     constructor(props) {
@@ -284,7 +290,8 @@ class EmployementShowUserSite extends Component {
     }
 
     loadItems(){
-        this.props.loademploymentshowusersite(this.props)
+        this.props.loademploymentshowusersite(this.props);
+        this.props.loadProfileusersforpublic(this.props)
     }
 
    // Lifecycle Component Method
@@ -296,14 +303,25 @@ class EmployementShowUserSite extends Component {
         return { __html: employment.description};
     }
     data_countFormatter(visits_count, precision) {
-        const abbrev = ['', 'k', 'M', 'B', 'T'];
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(visits_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
         const suffix = abbrev[order];
         return (visits_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
+    data_countfollowFormatter(countfollowerusers, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countfollowerusers)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (countfollowerusers / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+    data_countlikeFormatter(countlikes, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countlikes)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (countlikes / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     render() {
-        const {employment} = this.props;
+        const {employment,profileUser} = this.props;
         return (
             <>
                 <HelmetSite title={`${employment.title || $name_site} - ${$name_site}`}/>
@@ -340,18 +358,38 @@ class EmployementShowUserSite extends Component {
                                                 <div className="card-header d-flex align-items-center">
                                                     <div className="d-flex align-items-center">
                                                         {employment.user.avatar ?
-                                                            <NavLink to={`/pro/${employment.user.slug}/employments/`}>
-                                                                <img src={employment.user.avatar}
-                                                                     style={{ height: "40px", width: "80px" }}
-                                                                     alt={employment.user.first_name}
-                                                                     className="avatar" />
-                                                            </NavLink>
+                                                           <>
+                                                               <NavLink to={`/pro/${employment.user.slug}/employments/`}>
+                                                                   <img src={employment.user.avatar}
+                                                                        style={{ height: "40px", width: "80px" }}
+                                                                        alt={employment.user.first_name}
+                                                                        className="avatar" />
+                                                               </NavLink>
+                                                           </>
                                                             : <Skeleton circle={false} height={40} width={80} />}
-                                                        <div className="mx-3">
-                                                            <NavLink to={`/pro/${employment.user.slug}/employments/`} className="text-dark font-weight-600 text-sm"><b>{employment.user.first_name}</b>
-                                                                <small className="d-block text-muted">{employment.statusOnline &&(<i className="fas fa-circle text-success"></i>)} <i className="now-ui-icons tech_watch-time"/> {moment(employment.created_at).format('LL')}</small>
-                                                            </NavLink>
-                                                        </div>
+
+                                                         {employment.title && (
+                                                            <>
+                                                                <div className="mx-3">
+                                                                    <NavLink to={`/pro/${employment.user.slug}/employments/`} className="text-dark font-weight-600 text-sm"><b>{employment.user.first_name}</b>
+                                                                        <small className="d-block text-muted">{employment.statusOnline &&(<i className="fas fa-circle text-success"></i>)}
+                                                                            <i className="now-ui-icons tech_watch-time"/> {moment(employment.created_at).format('LL')}</small> {this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}
+                                                                    </NavLink>
+                                                                </div>
+
+                                                                {profileUser.followeruser &&(
+                                                                    <ButonMiniSubscribedEmployment {...this.props} {...profileUser}
+                                                                                                   unsubscribeItem={this.props.unsubscribeItem}
+                                                                                                   subscribeItem={this.props.subscribeItem}/>
+                                                                )}
+
+                                                                <ButonFollowerUser {...this.props} {...profileUser}
+                                                                                   unfollowerItem={this.props.unfollowerItem}
+                                                                                   followerItem={this.props.followerItem}
+                                                                                   nameunfollower={`Suivre`}
+                                                                                   nameununfollower={`Abonné`}/>
+                                                            </>
+                                                        )}
                                                     </div>
                                                     <div className="text-right ml-auto">
 
@@ -380,8 +418,8 @@ class EmployementShowUserSite extends Component {
                                                             {$guest ?
                                                                 <>
                                                                     <Button data-toggle="modal" data-target="#loginModal"
-                                                                            className="btn btn-facebook btn-sm btn-neutral" title="J'aime">
-                                                                        <i className="far fa-heart"></i> <b>J'aime</b>
+                                                                            className="btn btn-facebook btn-sm btn-neutral" title={`${employment.countlikes} J\'aime`}>
+                                                                        <i className="far fa-heart"></i> <b>{this.data_countlikeFormatter(employment.countlikes || "0")} J'aime</b>
                                                                     </Button>
                                                                     <Button data-toggle="modal" data-target="#loginModal"
                                                                             className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
@@ -394,16 +432,16 @@ class EmployementShowUserSite extends Component {
                                                                     {employment.likeked ?
                                                                         <>
                                                                             <Button onClick={() => this.props.unlikeItem(employment)}
-                                                                                    className="btn btn-info btn-sm" title="Je n'aime plus">
-                                                                                <i className="fas fa-heart"></i> <b>J'aime</b>
+                                                                                    className="btn btn-info btn-sm" title={`${employment.countlikes} J\'aime`}>
+                                                                                <i className="fas fa-heart"></i> <b>{this.data_countlikeFormatter(employment.countlikes || "0")} J'aime</b>
                                                                             </Button>
                                                                         </>
 
                                                                         :
                                                                         <>
                                                                             <Button onClick={() => this.props.likeItem(employment)}
-                                                                                    className="btn btn-facebook btn-sm btn-neutral" title="J'aime">
-                                                                                <i className="far fa-heart"></i> <b>J'aime</b>
+                                                                                    className="btn btn-facebook btn-sm btn-neutral" title={`${employment.countlikes} J\'aime`}>
+                                                                                <i className="far fa-heart"></i> <b>{this.data_countlikeFormatter(employment.countlikes || "0")} J'aime</b>
                                                                             </Button>
                                                                         </>
                                                                     }
@@ -438,12 +476,14 @@ class EmployementShowUserSite extends Component {
                                         <div className="card">
                                             <div className="card-body">
 
+
                                                 <ProfileForallEmploymentShow {...employment} favoriteItem={this.props.favoriteItem}
                                                                              unfavoriteItem={this.props.unfavoriteItem}
                                                                              statuscommentremoveItem={this.props.statuscommentremoveItem}
                                                                              statuscommentaddItem={this.props.statuscommentaddItem}
                                                                              statusItem={this.statusItem} deleteItem={this.deleteItem}
                                                                              signalerUser={this.signalerUser} copyToClipboard={this.copyToClipboard}/>
+
 
                                                 {employment.status_link_contact ?
                                                     <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
@@ -717,10 +757,12 @@ class EmployementShowUserSite extends Component {
 
 EmployementShowUserSite.propTypes = {
     loademploymentshowusersite: PropTypes.func.isRequired,
+    loadProfileusersforpublic: PropTypes.func.isRequired,
 };
 
 const mapStoreToProps = store => ({
-    employment: store.employmentshow.item
+    employment: store.employmentshow.item,
+    profileUser: store.profile.profiluser
 });
 
 export default connect(mapStoreToProps, {
@@ -729,4 +771,9 @@ export default connect(mapStoreToProps, {
     statuscommentaddItem,
     likeItem,unlikeItem,
     favoriteItem,unfavoriteItem,
+
+
+    loadProfileusersforpublic,
+    unsubscribeItem,subscribeItem,
+    unfollowerItem,followerItem,
 })(EmployementShowUserSite);

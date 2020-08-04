@@ -62,7 +62,7 @@ class EmploymentController extends Controller
         ]);
     }
 
-    public function employmentslug($categoryemployment,$city,employment $employment)
+    public function employmentslug($categoryemployment,$city,$user,employment $employment)
     {
         visits($employment)->seconds(5)->increment();
 
@@ -221,11 +221,11 @@ class EmploymentController extends Controller
         return response()->json($employments,200);
     }
 
-    public function apiemploymentsbycategoryslug(categoryemployment $categoryemployment,city $city,employment $employment)
+    public function apiemploymentsbycategoryslug(categoryemployment $categoryemployment,city $city,$user,employment $employment)
     {
         visits($employment)->seconds(5)->increment();
 
-        $employments = EmploymentService::apiemploymentsbycategoryslug($categoryemployment,$city,$employment);
+        $employments = EmploymentService::apiemploymentsbycategoryslug($categoryemployment,$city,$user,$employment);
 
         return response()->json($employments,200);
     }

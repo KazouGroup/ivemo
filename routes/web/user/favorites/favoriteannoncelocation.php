@@ -14,7 +14,3 @@ Route::get(
     'FavoriteannoncelocationController@favoriteannoncelocation'
 )->name('userfavoritegannoncelocation_site');
 
-Route::get(
-    '/favoriteannoncelocations_favorite/{id}',
-    'FavoriteannoncelocationController@favorite'
-)->name('favoriteannoncelocations_favorite.favorite');

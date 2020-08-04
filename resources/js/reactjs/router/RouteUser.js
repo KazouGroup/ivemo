@@ -188,7 +188,7 @@ const RouteUser = props => (
           <Route exact path="/forums/ab/new" component={ForumCreate}/>
           <Route exact path="/forums/ab/:forum/edit/" component={ForumEdit}/>
           <Route exact path="/forums/:categoryforum/" component={withRouter(ForumcategoryforumSite)}/>
-          <Route exact path="/forums/:categoryforum/:forum/" component={ForumShow}/>
+          <Route exact path="/forums/:categoryforum/:user/:forum/" component={withRouter(ForumShow)}/>
 
           <Route exact path="/annonces_reservations/:annoncetype/" component={AnnoncereservationIndex}/>
           <Route exact path="/annonce_reservations/:annoncetype/:city/" component={withRouter(Annoncereservationbyannoncetypebycity)}/>
@@ -202,7 +202,7 @@ const RouteUser = props => (
           <Route exact path="/annonce_locations/:annoncetype/:city/" component={withRouter(Annoncelocationbyannoncetypebycity)}/>
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/" component={withRouter(Annoncebycategoryannoncelocation)}/>
           <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/" component={withRouter(Annoncelocationbycity)}/>
-          <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/:annoncelocation/" component={withRouter(Annoncelocationbycategorycityshow)}/>
+          <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/:user/:annoncelocation/" component={withRouter(Annoncelocationbycategorycityshow)}/>
           <Route exact path="/annonce_location/:annoncetype/new/" component={AnnoncelocationCreate}/>
           <Route exact path="/annonce_location/:annoncetype/:annoncelocation/edit/" component={AnnoncelocationEdit}/>
 
@@ -256,9 +256,9 @@ const RouteUser = props => (
           <Route exact path="/profile/:user/personal_mails/contacts/:contactuser/" component={PersonalmessagescontactShowUser}/>
 
 
-          <Route exact path="/profile/:user/personal_mails/employments/" component={ContactserviceEmploymentIndex}/>
-          <Route exact path="/profile/:user/personal_mails/employments/:employment/" component={ContactserviceEmploymentShow}/>
-          <Route exact path="/profile/:user/personal_mails/employments/:employment/:contactservice/" component={withRouter(ContactserviceEmploymentContactShow)}/>
+          <Route exact path="/profile/:user/statistics/employments/" component={ContactserviceEmploymentIndex}/>
+          <Route exact path="/profile/:user/statistics/employments/:employment/" component={ContactserviceEmploymentShow}/>
+          <Route exact path="/profile/:user/statistics/employments/:employment/:contactservice/" component={withRouter(ContactserviceEmploymentContactShow)}/>
 
           <Route exact path="/profile/:user/personal_settings/employments/" component={PrivateUserEmployments}/>
           <Route exact path="/profile/:user/personal_settings/employments/:categoryemployment/" component={withRouter(PrivateUserEmploymentsByCategoryemployment)}/>
@@ -303,7 +303,7 @@ const RouteUser = props => (
           <Route exact path="/employment/:city/" component={withRouter(EmployementBycity)}/>
           <Route exact path="/employments/:categoryemployment/" component={withRouter(EmployementBycategoryemployement)}/>
           <Route exact path="/employments/:categoryemployment/:city/" component={withRouter(EmployementBycategoryemployementbycity)}/>
-          <Route exact path="/employments/:categoryemployment/:city/:employment/" component={withRouter(EmployementShowUserSite)}/>
+          <Route exact path="/employments/:categoryemployment/:city/:user/:employment/" component={withRouter(EmployementShowUserSite)}/>
 
 
           <Route exact path="/blogs/" component={BlogannonceIndexSite}/>

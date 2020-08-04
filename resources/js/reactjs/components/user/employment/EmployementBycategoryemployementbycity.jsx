@@ -72,7 +72,7 @@ class EmployementBycategoryemployementbycity extends Component {
                         },
                     });
             }
-            this.loadItems();
+        
 
         }).catch(() => {
             //Failled message
@@ -127,7 +127,7 @@ class EmployementBycategoryemployementbycity extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.loadItems();
+
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Something wrong. Try later", {
@@ -185,7 +185,7 @@ class EmployementBycategoryemployementbycity extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.loadItems();
+                    
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooops! Une erreur est survenue", {

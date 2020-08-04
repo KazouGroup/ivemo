@@ -22,7 +22,7 @@ class ForumController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','statuscomments','destroy','apiforumslugin','edit','update', 'forumsbyuser','apiforumsbyuser'
+            'create','store','statuscomments','destroy','apiforumslugin','edit','update', 'forumsbyuser','apiforumsbyuser'
         ]]);
     }
 
@@ -84,12 +84,12 @@ class ForumController extends Controller
 
     public function forumscategory(categoryforum $categoryforum)
     {
-        $forums = ForumService::apiforumscategory($categoryforum);
+        ForumService::apiforumscategory($categoryforum);
 
         return view ('user.forum.categoryforum',compact('categoryforum'));
     }
 
-    public function apiforumscategoryslugin(categoryforum $categoryforum,forum $forum)
+    public function apiforumscategoryslugin(categoryforum $categoryforum,$user,forum $forum)
     {
         visits($forum)->seconds(5)->increment();
 
@@ -98,7 +98,7 @@ class ForumController extends Controller
         return response()->json($forums,200);
     }
 
-    public function forumscategoryslugin(categoryforum $categoryforum,forum $forum)
+    public function forumscategoryslugin(categoryforum $categoryforum,$user,forum $forum)
     {
         visits($forum)->seconds(5)->increment();
 
@@ -138,6 +138,8 @@ class ForumController extends Controller
         $forum->fill($request->all());
         $forum->description = clean($request->description);
 
+        ForumService::sendMessageToUser($request);
+
         $forum->save();
 
         return response('Created',Response::HTTP_CREATED);
@@ -173,21 +175,11 @@ class ForumController extends Controller
 
     public function destroy(forum $forum)
     {
-        $forum = forum::findOrFail($forum->id);
-
         $this->authorize('update',$forum);
 
-        if(auth()->user()->id === $forum->user_id){
+        $forum->delete();
 
-            //$oldFilename = $forum->photo;
-            //File::delete(public_path($oldFilename));
-
-            $forum->delete();
-
-            return ['message' => 'Deleted successfully'];
-        }else{
-            abort(404);
-        }
+        return ['message' => 'Deleted successfully'];
     }
 
 }

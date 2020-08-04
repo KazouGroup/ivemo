@@ -1,14 +1,16 @@
-import React, { Fragment, PureComponent } from "react";
+import React, { Component, Fragment } from "react";
 import { Remarkable } from "remarkable";
-import { Link } from "react-router-dom";
 import { Button, Form } from "reactstrap";
 import Swal from "sweetalert2";
 import Skeleton from "react-loading-skeleton";
 import ReadMoreAndLess from 'react-read-more-less';
-import FieldInput from "../../../../inc/vendor/FieldInput";
+import FieldInput from "../../../inc/vendor/FieldInput";
 import AvisuserList from "./inc/AvisuserList";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { deleteavisItem, loadAvisusersforpublic, unactiveavisItem } from "../../../../redux/actions/profileActions";
 
-class ProfilePublicAccountAvisUser extends PureComponent {
+class ProfileAccountAvisUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,13 +21,10 @@ class ProfilePublicAccountAvisUser extends PureComponent {
             responseavis: false,
             itemData: [],
             errors: [],
-            avisusers: {to: [], from: [], responseavisusers: {user: []}},
             visiableavis: 5,
             responsevisiableavis: 5,
         };
 
-        this.deleteItem = this.deleteItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
         this.unactiveresponseItem = this.unactiveresponseItem.bind(this);
         this.deleteresponseItem = this.deleteresponseItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
@@ -114,58 +113,7 @@ class ProfilePublicAccountAvisUser extends PureComponent {
 
     unactiveresponseItem(id) {
         Swal.fire({
-            title: 'Confirmation',
-            text: "Êtes-vous sure de vouloir confirmer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-                //Envoyer la requet au server
-                let url = route('profile_avis_users_responseunactivated.site', [id]);
-                dyaxios.get(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            message: 'L\'avis à été desactivé avec succès'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'top',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
-                            },
-                        });
-                    /** End alert ***/
-                    this.loadItems();
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooops! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        })
-
-    }
-
-    unactiveItem(id) {
-        Swal.fire({
-            title: 'Confirmation',
+            title: 'Confirmer la désactivation?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -178,24 +126,21 @@ class ProfilePublicAccountAvisUser extends PureComponent {
         }).then((result) => {
             if (result.value) {
 
-                let isNotId = item => item.id !== id;
-                let updatedItems = this.state.avisusers.filter(isNotId);
-                this.setState({avisusers: updatedItems});
-
                 //Envoyer la requet au server
-                let url = route('profile_avis_users_unactivated.site', [id]);
+                let url = route('profile_avis_users_responseunactivated.site', [id]);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: 'L\'avis à été désactivé avec succès'
+                            //,
+                            message: 'L\'avis à été desactivé avec succès'
                         },
                         {
                             allow_dismiss: false,
                             type: 'info',
                             placement: {
-                                from: 'top',
-                                align: 'right'
+                                from: 'bottom',
+                                align: 'center'
                             },
                             animate: {
                                 enter: "animate__animated animate__fadeInUp",
@@ -203,6 +148,7 @@ class ProfilePublicAccountAvisUser extends PureComponent {
                             },
                         });
                     /** End alert ***/
+                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooops! Something wrong. Try later", {
@@ -237,8 +183,8 @@ class ProfilePublicAccountAvisUser extends PureComponent {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
-                            from: 'top',
-                            align: 'right'
+                            from: 'bottom',
+                            align: 'center'
                         },
                         animate: {
                             enter: "animate__animated animate__fadeInUp",
@@ -278,8 +224,8 @@ class ProfilePublicAccountAvisUser extends PureComponent {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
-                            from: 'top',
-                            align: 'right'
+                            from: 'bottom',
+                            align: 'center'
                         },
                         animate: {
                             enter: "animate__animated animate__fadeInUp",
@@ -320,8 +266,8 @@ class ProfilePublicAccountAvisUser extends PureComponent {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
-                            from: 'top',
-                            align: 'right'
+                            from: 'bottom',
+                            align: 'center'
                         },
                         animate: {
                             enter: "animate__animated animate__fadeInUp",
@@ -366,8 +312,8 @@ class ProfilePublicAccountAvisUser extends PureComponent {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
-                            from: 'top',
-                            align: 'right'
+                            from: 'bottom',
+                            align: 'center'
                         },
                         animate: {
                             enter: "animate__animated animate__fadeInUp",
@@ -384,8 +330,8 @@ class ProfilePublicAccountAvisUser extends PureComponent {
 
     deleteresponseItem(id) {
         Swal.fire({
-            title: 'Confirmation',
-            text: "Êtes-vous sûr de vouloir executer cette action?",
+            title: 'Confirmer la supression?',
+            text: "êtes-vous sûr de vouloir executer cette action",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -411,64 +357,7 @@ class ProfilePublicAccountAvisUser extends PureComponent {
                             allow_dismiss: false,
                             type: 'primary',
                             placement: {
-                                from: 'top',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animate__animated animate__fadeInRight',
-                                exit: 'animate__animated animate__fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-                    this.loadItems();
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooops! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
-
-    deleteItem(id) {
-        Swal.fire({
-            title: 'Confirmation',
-            text: "Êtes-vous sûr de vouloir executer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                let isNotId = item => item.id !== id;
-                let updatedItems = this.state.avisusers.filter(isNotId);
-                this.setState({avisusers: updatedItems});
-
-                const url = route('profile_avis_users_destroy.site', id);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            // title: 'Update',
-                            message: 'Votre avis à été supprimé avec succès '
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'top',
+                                from: 'bottom',
                                 align: 'right'
                             },
                             animate: {
@@ -494,13 +383,7 @@ class ProfilePublicAccountAvisUser extends PureComponent {
     }
 
     loadItems() {
-        let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.avisuserpublique', [itemuser]))
-            .then(response => {
-                this.setState({
-                    avisusers: response.data
-                });
-            });
+        this.props.loadAvisusersforpublic(this.props);
     }
 
     // Lifecycle Component Method
@@ -515,24 +398,28 @@ class ProfilePublicAccountAvisUser extends PureComponent {
     }
 
     render() {
-        const {avisusers, visiableavis, responsevisiableavis, itemData} = this.state;
+        const {avisusers} = this.props;
+        const {visiableavis, responsevisiableavis, itemData} = this.state;
         return (
             <Fragment>
                 <div className="card">
                     <div className="card-body">
                         <div className="card-header text-center">
-                            <h4 className="card-title mb-5"><b>Mes Avis</b></h4>
+                            <h4 className="card-title"><b>Avis</b></h4>
                         </div>
                         <div className="row">
                             <div className="col-md-12 ml-auto mr-auto">
                                 <div className="media-area">
-                                    {/* Show the form avis only for visitors */}
-                                    {$guest && (
+
+                                    {!$guest && (
+
                                         <>
                                             <h4 className="text-center">
-                                                <small className="text-muted">- Laissez votre avis -</small>
+                                                <small className="text-muted">- Laisser votre avis -</small>
                                             </h4>
+
                                             <Form role="form" onSubmit={this.sendavisItem} acceptCharset="UTF-8">
+
                                                 <div className="media media-post">
                                                     <div className="avatar">
                                                         {$userIvemo.avatar ?
@@ -543,7 +430,9 @@ class ProfilePublicAccountAvisUser extends PureComponent {
                                                             :
                                                             <Skeleton circle={false} height={40} width={80}/>}
                                                     </div>
+
                                                     <div className="media-body">
+
                                                         <FieldInput name="description" type='textarea' minLength="3"
                                                                     maxLength="5000"
                                                                     placeholder=" Laiser votre avis... !"
@@ -551,7 +440,9 @@ class ProfilePublicAccountAvisUser extends PureComponent {
                                                                     handleFieldChange={this.handleFieldChange}
                                                                     hasErrorFor={this.hasErrorFor}
                                                                     renderErrorFor={this.renderErrorFor} rows="10"/>
+
                                                         <div className="media-footer">
+
                                                             <Button type="submit" disabled={!this.state.description}
                                                                     className="btn btn-primary pull-right">
                                                                 <i className="now-ui-icons ui-1_send"/> Poster
@@ -562,11 +453,16 @@ class ProfilePublicAccountAvisUser extends PureComponent {
                                                                     <i className="now-ui-icons ui-1_simple-remove"/> Annuller
                                                                 </button>
                                                             )}
+
+
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </Form>
+
                                         </>
+
                                     )}
 
                                     {avisusers.length > 0 && (
@@ -583,7 +479,7 @@ class ProfilePublicAccountAvisUser extends PureComponent {
                                                                  }}
                                                                  alt={item.from.first_name}
                                                                  className="media-object img-raised rounded"/>
-                                                             :
+                                                            :
                                                             <Skeleton circle={false}
                                                                       height={40}
                                                                       width={80}/>
@@ -597,10 +493,11 @@ class ProfilePublicAccountAvisUser extends PureComponent {
 
                                                             {!$guest && (
                                                                 <>
+
                                                                     <div className="media-footer">
                                                                         {$userIvemo.id === item.to.id && (
                                                                             <Button
-                                                                                onClick={() => this.unactiveItem(item.id)}
+                                                                                onClick={() => this.props.unactiveavisItem(item.id)}
                                                                                 className="btn btn-success btn-neutral pull-right">
                                                                                 <i className="now-ui-icons ui-1_check"/> Masquer
                                                                             </Button>
@@ -611,7 +508,7 @@ class ProfilePublicAccountAvisUser extends PureComponent {
                                                                                 <button type="button"
                                                                                         onClick={() => this.responseavisFromItem(item)}
                                                                                         className="btn btn-primary btn-neutral pull-right">
-                                                                                    <i className="now-ui-icons ui-1_send"/> Repondre
+                                                                                    <i className="now-ui-icons ui-1_simple-add"/> Repondre
                                                                                 </button>
                                                                             )}
                                                                         </>
@@ -632,7 +529,7 @@ class ProfilePublicAccountAvisUser extends PureComponent {
                                                                         {$userIvemo.id === item.from.id && (
                                                                             <>
                                                                                 <Button
-                                                                                    onClick={() => this.deleteItem(item.id)}
+                                                                                    onClick={() => this.props.deleteavisItem(item.id)}
                                                                                     className="btn btn-danger btn-neutral pull-right">
                                                                                     <i className="far fa-trash-alt"></i> Supprimer
                                                                                 </Button>
@@ -672,10 +569,9 @@ class ProfilePublicAccountAvisUser extends PureComponent {
                                                                                              }}
                                                                                              alt={$userIvemo.first_name}
                                                                                              className="media-object img-raised rounded"/>
-                                                                                        :
-                                                                                        <Skeleton circle={false}
-                                                                                                  height={40}
-                                                                                                  width={80}/>}
+                                                                                        : <Skeleton circle={false}
+                                                                                                    height={40}
+                                                                                                    width={80}/>}
                                                                                 </div>
 
                                                                                 <div className="media-body">
@@ -703,10 +599,13 @@ class ProfilePublicAccountAvisUser extends PureComponent {
                                                                                             className="btn btn-secondary pull-right btn-sm">
                                                                                             <i className="now-ui-icons ui-1_simple-remove"/> Annuller
                                                                                         </Button>
+
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
+
                                                                         </Form>
+
                                                                     )}
 
                                                                     {this.state.editavis && (
@@ -725,10 +624,9 @@ class ProfilePublicAccountAvisUser extends PureComponent {
                                                                                              }}
                                                                                              alt={$userIvemo.first_name}
                                                                                              className="media-object img-raised rounded"/>
-                                                                                        :
-                                                                                        <Skeleton circle={false}
-                                                                                                  height={40}
-                                                                                                  width={80}/>}
+                                                                                        : <Skeleton circle={false}
+                                                                                                    height={40}
+                                                                                                    width={80}/>}
                                                                                 </div>
 
                                                                                 <div className="media-body">
@@ -790,7 +688,7 @@ class ProfilePublicAccountAvisUser extends PureComponent {
                                                                     <div className="media-body">
 
                                                                         <h5 className="media-heading">
-                                                                            {lk.user.first_name ||
+                                                                            <b> Reponse</b> {lk.user.first_name ||
                                                                         <Skeleton width={80}/>}</h5>
                                                                         <ReadMoreAndLess
                                                                             className="read-more-content"
@@ -891,13 +789,19 @@ class ProfilePublicAccountAvisUser extends PureComponent {
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
+
                                                                                         </Form>
+
                                                                                     </>
                                                                                 )}
+
                                                                             </>
                                                                         )}
+
+
                                                                     </div>
                                                                 </div>
+
                                                             ))}
 
                                                             {responsevisiableavis < item.responseavisusers.length && (
@@ -932,14 +836,29 @@ class ProfilePublicAccountAvisUser extends PureComponent {
                                             </div>
                                         </div>
                                     )}
+
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
+
             </Fragment>
+
         )
     }
+
 }
 
-export default ProfilePublicAccountAvisUser;
+ProfileAccountAvisUser.propTypes = {
+    loadAvisusersforpublic: PropTypes.func.isRequired,
+};
+
+const mapStoreToProps = store => ({
+    avisusers: store.profile.avisusers
+});
+
+export default connect(mapStoreToProps, {
+    loadAvisusersforpublic, deleteavisItem, unactiveavisItem
+})(ProfileAccountAvisUser);

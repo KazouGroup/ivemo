@@ -31,7 +31,7 @@ class Annonceventebyannoncetypebycity extends Component {
         this.deleteItem = this.deleteItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
         this.statusItem = this.statusItem.bind(this);
-        this.signalemessageItem = this.signalemessageItem.bind(this);
+        //this.signalemessageItem = this.signalemessageItem.bind(this);
         this.contactUser = this.contactUser.bind(this);
         this.sendmessageItem = this.sendmessageItem.bind(this);
         this.handleCheckClick = this.handleCheckClick.bind(this);
