@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Model\annoncelocation;
+use App\Model\blogannoncelocation;
 use App\Model\comment;
 use App\Model\employment;
 use App\Model\forum;
@@ -60,6 +62,52 @@ class FavoriteController extends Controller
         $employment = employment::whereId($employment)->firstOrFail();
 
         auth()->user()->removefavorites()->detach($employment);
+
+        return response('Favorite move',Response::HTTP_ACCEPTED);
+    }
+
+    /**
+     * @param Request $request
+     * @param annoncelocation $annoncelocations
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function favoritannoncelocation(Request $request,$annoncelocation)
+    {
+        $annoncelocation = annoncelocation::whereId($annoncelocation)->firstOrFail();
+
+        $annoncelocation->favorites()->create($request->all());
+
+        return response('Favorite',Response::HTTP_ACCEPTED);
+    }
+
+    public function unfavoritannoncelocation(Request $request,$annoncelocation)
+    {
+        $annoncelocation = annoncelocation::whereId($annoncelocation)->firstOrFail();
+
+        auth()->user()->removefavorites()->detach($annoncelocation);
+
+        return response('Favorite move',Response::HTTP_ACCEPTED);
+    }
+
+    /**
+     * @param Request $request
+     * @param blogannoncelocation $blogannoncelocation
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function favoritblogannoncelocation(Request $request,$blogannoncelocation)
+    {
+        $blogannoncelocation = blogannoncelocation::whereId($blogannoncelocation)->firstOrFail();
+
+        $blogannoncelocation->favorites()->create($request->all());
+
+        return response('Favorite',Response::HTTP_ACCEPTED);
+    }
+
+    public function unfavoritblogannoncelocation(Request $request,$blogannoncelocation)
+    {
+        $blogannoncelocation = blogannoncelocation::whereId($blogannoncelocation)->firstOrFail();
+
+        auth()->user()->removefavorites()->detach($blogannoncelocation);
 
         return response('Favorite move',Response::HTTP_ACCEPTED);
     }

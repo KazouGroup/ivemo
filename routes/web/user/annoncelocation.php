@@ -38,7 +38,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.annoncelocationsbyannoncetypebycity_site');
 
     Route::get(
-        'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}/{annoncelocation}',
+        'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}/{user:slug}/{annoncelocation}',
         'AnnoncelocationController@apiannoncelocationbycategoryannoncelocationslug'
     )->name('api.annoncelocationbycategoryannoncelocationslug_site');
 
@@ -90,7 +90,7 @@ Route::get(
 )->name('annoncelocationbycities_site');
 
 Route::get(
-    'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}/{annoncelocation}',
+    'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}/{user:slug}/{annoncelocation}',
     'AnnoncelocationController@annoncelocationbycategoryannoncelocationslug'
 )->name('annoncelocationbycategoryannoncereservationslug.site');
 
@@ -100,9 +100,14 @@ Route::get(
 )->name('annonces_locations_status.site');
 
 Route::get(
-    'annonces_locations_status_comments/{id}',
-    'AnnoncelocationController@statuscomments'
-)->name('annonces_locations_status_comments.site');
+    'annoncelocations_active_comments/{annoncelocation:id}/active',
+    'AnnoncelocationController@activecomments'
+)->name('annoncelocations_active_comments_site');
+
+Route::get(
+    'annoncelocations_active_comments/{annoncelocation:id}/desactive',
+    'AnnoncelocationController@desactivecomments'
+)->name('annoncelocations_desactive_comments_site');
 
 Route::get(
     'annonces_locations_admin_status/{id}',

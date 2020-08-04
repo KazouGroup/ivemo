@@ -16,6 +16,14 @@ import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import ButonFavoris from "../../../inc/vendor/ButonFavoris";
 import ButonLiked from "../../../inc/vendor/ButonLiked";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {
+    favoriteItem,
+    loadBlogannoncelocationshow,
+    unfavoriteItem,
+    likeItem,unlikeItem
+} from "../../../../redux/actions/blogannoncelocation/blogannoncelocationshowActions";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -23,118 +31,12 @@ class BlogannoncelocationShow extends Component {
     constructor(props) {
         super(props);
 
-        this.deleteItem = this.deleteItem.bind(this);
         this.state = {
-            blogannoncelocation: { user: [], categoryannoncelocation: [] },
+            //
         };
 
         this.deleteItem = this.deleteItem.bind(this);
-        this.likeItem = this.likeItem.bind(this);
-        this.unlikeItem = this.unlikeItem.bind(this);
-        this.favoriteItem = this.favoriteItem.bind(this);
-        this.unfavoriteItem = this.unfavoriteItem.bind(this);
     }
-
-    likeItem(id) {
-        const url = route('likeblogannoncelocations_likedata.likedata', [id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    unlikeItem(id) {
-        const url = route('likeblogannoncelocations_unlikedata.unlikedata', [id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    favoriteItem(id) {
-        const url = route('favoriteblogannoncelocations_favorite.favorite', [id]);
-        dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Article ajoutée à vos favoris",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
-                    },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
-                    },
-                });
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    unfavoriteItem(id) {
-        const url = route('favoriteblogannoncelocations_unfavorite.unfavorite', [id]);
-        dyaxios.get(url).then(() => {
-            $.notify({
-                    message: "Article retirée de vos favoris",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
-                    },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
-                    },
-                });
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
 
     deleteItem(id) {
         Swal.fire({
@@ -189,11 +91,7 @@ class BlogannoncelocationShow extends Component {
     }
 
     loadItems() {
-        let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
-        let itemdate = this.props.match.params.date;
-        let itemblogannoncelocation = this.props.match.params.blogannoncelocation;
-        let url = route('api.blogannonceblogcategorylocationslug_site', [itemCategoryannoncelocation, itemdate, itemblogannoncelocation]);
-        dyaxios.get(url).then(response => this.setState({ blogannoncelocation: response.data, }));
+      this.props.loadBlogannoncelocationshow(this.props);
     }
 
 
@@ -217,7 +115,7 @@ class BlogannoncelocationShow extends Component {
         return (countlikes / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
     render() {
-        const { blogannoncelocation } = this.state;
+        const { blogannoncelocation } = this.props;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         return (
             <Fragment>
@@ -287,9 +185,9 @@ class BlogannoncelocationShow extends Component {
                                                                     </>
                                                                     :
                                                                     <>
-                                                                        <ButonLiked likeItem={this.likeItem} unlikeItem={this.unlikeItem} {...blogannoncelocation} />
+                                                                        <ButonLiked likeItem={this.props.likeItem} unlikeItem={this.props.unlikeItem} {...blogannoncelocation} />
 
-                                                                        <ButonFavoris favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem} {...blogannoncelocation} />
+                                                                        <ButonFavoris favoriteItem={this.props.favoriteItem} unfavoriteItem={this.props.unfavoriteItem} {...blogannoncelocation} />
 
                                                                         {$userIvemo.id === blogannoncelocation.user_id && (
                                                                             <Fragment>
@@ -402,4 +300,16 @@ class BlogannoncelocationShow extends Component {
     }
 }
 
-export default BlogannoncelocationShow;
+BlogannoncelocationShow.propTypes = {
+    loadBlogannoncelocationshow: PropTypes.func.isRequired,
+};
+
+const mapStoreToProps = store => ({
+    blogannoncelocation: store.blogannoncelocations.blogannoncelocation
+
+});
+export default connect(mapStoreToProps, {
+    loadBlogannoncelocationshow,
+    unfavoriteItem, favoriteItem,
+    likeItem,unlikeItem
+})(BlogannoncelocationShow);

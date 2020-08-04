@@ -47,8 +47,8 @@ class ProfileForallAnnoncelocationShow extends Component {
                             </Button>
                             :
                             <>
-                                {this.props.bookmarked ?
-                                    <Button onClick={() => this.props.favoriteItem(this.props)}
+                                {this.props.favoriteted ?
+                                    <Button onClick={() => this.props.unfavoriteItem(this.props)}
                                         className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
                                         <i className="fas fa-bookmark"></i>
                                     </Button>
@@ -94,12 +94,12 @@ class ProfileForallAnnoncelocationShow extends Component {
                                             <i className="now-ui-icons ui-1_check" />
                                         </button>
                                         {this.props.status_comments ?
-                                            <Button onClick={() => this.props.statuscommentItem(this.props)}
+                                            <Button onClick={() => this.props.statuscommentremoveItem(this.props)}
                                                 className="btn btn-primary btn-icon btn-sm" title="Commentaire activé">
                                                 <i className="fas fa-comments" />
                                             </Button>
                                             :
-                                            <Button onClick={() => this.props.statuscommentItem(this.props)}
+                                            <Button onClick={() => this.props.statuscommentaddItem(this.props)}
                                                 className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Commentaire désactivé">
                                                 <i className="far fa-comments" />
                                             </Button>

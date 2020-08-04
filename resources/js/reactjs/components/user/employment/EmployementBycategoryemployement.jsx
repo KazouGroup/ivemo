@@ -71,7 +71,6 @@ class EmployementBycategoryemployement extends Component {
                         },
                     });
             }
-            this.loadItems();
 
         }).catch(() => {
             //Failled message
@@ -126,7 +125,6 @@ class EmployementBycategoryemployement extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Something wrong. Try later", {
@@ -184,7 +182,6 @@ class EmployementBycategoryemployement extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.loadItems();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {

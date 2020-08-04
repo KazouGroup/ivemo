@@ -30,6 +30,26 @@ Route::post(
     'LikeController@unlikemployment'
 )->name('employments_likes.unactive');
 
+Route::post(
+    'annoncelocations_likes/{annoncelocation:id}/like',
+    'LikeController@likannoncelocation'
+)->name('annoncelocations_likes.active');
+
+Route::post(
+    'annoncelocations_unlikes/{annoncelocation:id}/unlikes',
+    'LikeController@unlikannoncelocation'
+)->name('annoncelocations_likes.unactive');
+
+Route::get(
+    'blogannoncelocations_likedata/{id}/like',
+    'LikeController@likblogannoncelocation'
+)->name('likeblogannoncelocations_likedata.likedata');
+
+Route::get(
+    'blogannoncelocations_unlikedata/{id}/unlike',
+    'LikeController@unlikablognnoncelocation'
+)->name('likeblogannoncelocations_unlikedata.unlikedata');
+
 Route::get(
     'responsecomments_likes/{responsecomment}/like',
     'LikeController@likeresponsecomment'

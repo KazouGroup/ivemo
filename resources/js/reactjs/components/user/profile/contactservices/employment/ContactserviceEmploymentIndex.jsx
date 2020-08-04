@@ -26,7 +26,7 @@ class ContactserviceEmploymentIndex extends Component {
     }
 
 
- 
+
     activeItem(id){
         Swal.fire({
             title: 'Afficher cette annonce?',
@@ -264,7 +264,7 @@ class ContactserviceEmploymentIndex extends Component {
                                         )}
 
                                         <div className="submit text-left">
-                                            <Link to={`/profile/${$userIvemo.slug}/personal_mails/employments/`} className="btn btn-neutral btn-sm">
+                                            <Link to={`/profile/${$userIvemo.slug}/statistics/employments/`} className="btn btn-neutral btn-sm">
                                                 <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos annonces</b>
                                             </Link>
                                         </div>

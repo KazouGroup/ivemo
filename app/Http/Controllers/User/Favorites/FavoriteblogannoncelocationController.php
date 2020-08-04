@@ -67,23 +67,4 @@ class FavoriteblogannoncelocationController extends Controller
 		return response('unfavorite confirmed',Response::HTTP_ACCEPTED);
 	}
 
-    public function likedata(Request $request,$id)
-    {
-
-        $blogannoncelocation = blogannoncelocation::whereId($id)->firstOrFail();
-
-        $response = $blogannoncelocation->likes()->create($request->all());
-
-        return response()->json(['success'=>$response]);
-    }
-
-    public function unlikedata(Request $request,$id)
-    {
-
-        $blogannoncelocation = blogannoncelocation::whereId($id)->firstOrFail();
-
-        $response = auth()->user()->removelikes()->detach($blogannoncelocation->id);
-
-        return response()->json(['success'=>$response]);
-    }
 }

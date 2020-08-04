@@ -9,6 +9,9 @@ import ProfileUserComment from "../../inc/vendor/comment/ProfileUserComment";
 import CommentViewList from "./inc/CommentViewList";
 import StatusComment from "./inc/StatusComment";
 import CommentListSkeleton from "../../inc/user/comment/CommentListSkeleton";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {loadCommentsAnnoncelocationcomments,likeItem,unlikeItem,unactiveItem,deleteItem} from "../../../redux/actions/commentsActions";
 
 
 class AnnoncelocationcommentIndex extends PureComponent {
@@ -22,7 +25,6 @@ class AnnoncelocationcommentIndex extends PureComponent {
             editresponsecomment: false,
             visiablecomment: 6,
             visiableresponsecomment: 1,
-            comments:{user:[],responsecomments:[]},
             itemData:[],
             errors: [],
         };
@@ -38,11 +40,8 @@ class AnnoncelocationcommentIndex extends PureComponent {
         this.loadmoresresponseItem = this.loadmoresresponseItem.bind(this);
         this.cancelresponseCourse = this.cancelresponseCourse.bind(this);
 
-        this.deleteItem = this.deleteItem.bind(this);
-        this.likeItem = this.likeItem.bind(this);
-        this.unlikeItem = this.unlikeItem.bind(this);
+
         this.deleteresponseItem = this.deleteresponseItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
         this.unactiveresponseItem = this.unactiveresponseItem.bind(this);
         this.editcommentFromItem = this.editcommentFromItem.bind(this);
         this.responsecommentFromItem = this.responsecommentFromItem.bind(this);
@@ -69,42 +68,6 @@ class AnnoncelocationcommentIndex extends PureComponent {
                 </span>
             )
         }
-    }
-
-    likeItem(item) {
-        const url = route('comments_likes.active', [item.id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    unlikeItem(item) {
-        const url = route('comments_likes.unactive', [item.id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
     }
 
     loadmoresItem() {
@@ -159,9 +122,10 @@ class AnnoncelocationcommentIndex extends PureComponent {
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let itemCity = this.props.match.params.city;
+        let itemuser = this.props.match.params.user;
         let itemannoncelocation = this.props.match.params.annoncelocation;
         let Id = this.state.itemData.id;
-        let url = route('annoncelocationssendresponsecomment_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemannoncelocation,Id]);
+        let url = route('annoncelocationssendresponsecomment_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemuser,itemannoncelocation,Id]);
         dyaxios.post(url, item)
             .then(() => {
 
@@ -201,8 +165,9 @@ class AnnoncelocationcommentIndex extends PureComponent {
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let itemCity = this.props.match.params.city;
+        let itemuser = this.props.match.params.user;
         let itemannoncelocation = this.props.match.params.annoncelocation;
-        let url = route('annoncelocationsendcomment_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemannoncelocation]);
+        let url = route('annoncelocationsendcomment_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemuser,itemannoncelocation]);
         dyaxios.post(url, item)
             .then(() => {
 
@@ -243,9 +208,10 @@ class AnnoncelocationcommentIndex extends PureComponent {
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let itemCity = this.props.match.params.city;
+        let itemuser = this.props.match.params.user;
         let itemannoncelocation = this.props.match.params.annoncelocation;
         let Id = this.state.itemData.id;
-        let url = route('annoncelocationupdatecomment_site', [itemannoncetype,itemCategoryannoncelocation,itemCity,itemannoncelocation,Id]);
+        let url = route('annoncelocationupdatecomment_site', [itemannoncetype,itemCategoryannoncelocation,itemCity,itemuser,itemannoncelocation,Id]);
         dyaxios.put(url, item)
             .then(response => {
 
@@ -366,120 +332,6 @@ class AnnoncelocationcommentIndex extends PureComponent {
         });
     }
 
-    unactiveItem(id) {
-        Swal.fire({
-            title: 'Confirmer masquer?',
-            text: "êtes-vous sûr de vouloir executer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-
-                let isNotId = item => item.id !== id;
-                let updatedItems = this.state.comments.filter(isNotId);
-                this.setState({ comments: updatedItems });
-
-                const url = route('comments.unactive', [id]);
-                //Envoyer la requet au server
-                dyaxios.get(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            //,
-                            message: 'Le commenaire à été desactivé avec succès'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
-                            },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
-                            },
-                        });
-                    /** End alert ***/
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
-
-    deleteItem(id) {
-        Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-
-                let isNotId = item => item.id !== id;
-                let updatedItems = this.state.comments.filter(isNotId);
-                this.setState({ comments: updatedItems });
-
-                const url = route('comments.destroy', [id]);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            // title: 'Update',
-                            message: 'Commentaire suprimée avec succès'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animate__animated animate__fadeInRight',
-                                exit: 'animate__animated animate__fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
-
     deleteresponseItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
@@ -535,16 +387,7 @@ class AnnoncelocationcommentIndex extends PureComponent {
     }
 
     loadItems(){
-        let itemannoncetype = this.props.match.params.annoncetype;
-        let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
-        let itemCity = this.props.match.params.city;
-        let itemannoncelocation = this.props.match.params.annoncelocation;
-        /*Ici c'est pour recuperer les annonce par villes*/
-        let url = route('api.annoncelocationgetcomment_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemannoncelocation]);
-        dyaxios.get(url).then(response =>
-            this.setState({
-                comments: [...response.data]
-            }));
+        this.props.loadCommentsAnnoncelocationcomments(this.props);
     }
 
     componentDidMount() {
@@ -552,7 +395,8 @@ class AnnoncelocationcommentIndex extends PureComponent {
     }
 
     render() {
-        const {comments,visiablecomment,visiableresponsecomment,itemData,editcomment,editresponsecomment,responsecomment} = this.state;
+        const {comments} = this.props;
+        const {visiablecomment,visiableresponsecomment,itemData,editcomment,editresponsecomment,responsecomment} = this.state;
         return (
             <>
                 <div className="card">
@@ -575,19 +419,17 @@ class AnnoncelocationcommentIndex extends PureComponent {
 
                                 <div className="media-area">
                                     <br/>
-                                    {!$guest && (
-                                        <>
-                                            {!editcomment && !responsecomment && !editresponsecomment && (
-                                                <Form onSubmit={this.sendcommentItem} acceptCharset="UTF-8">
+                                    <>
+                                        {!editcomment && !responsecomment && !editresponsecomment && (
+                                            <Form onSubmit={this.sendcommentItem} acceptCharset="UTF-8">
 
-                                                    <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
-                                                                 renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                                 handleFieldChange={this.handleFieldChange} namesubmit={`POSTER MON COMMENTAIRE`}/>
+                                                <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
+                                                             renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
+                                                             handleFieldChange={this.handleFieldChange} namesubmit={`POSTER MON COMMENTAIRE`}/>
 
-                                                </Form>
-                                            )}
-                                        </>
-                                    )}
+                                            </Form>
+                                        )}
+                                    </>
 
                                     <>
                                         {comments.slice(0, visiablecomment).map((item) => (
@@ -618,8 +460,8 @@ class AnnoncelocationcommentIndex extends PureComponent {
                                                     <div className="media-body">
 
                                                         <CommentViewList {...item} responsecommentFromItem={this.responsecommentFromItem}
-                                                                         unlikeItem={this.unlikeItem} likeItem={this.likeItem} deleteItem={this.deleteItem}
-                                                                         editcommentFromItem={this.editcommentFromItem} unactiveItem={this.unactiveItem}/>
+                                                                         unlikeItem={this.props.unlikeItem} likeItem={this.props.likeItem} deleteItem={this.props.deleteItem}
+                                                                         editcommentFromItem={this.editcommentFromItem} unactiveItem={this.props.unactiveItem}/>
 
 
                                                         {(item.id === itemData.id) && (
@@ -764,5 +606,14 @@ class AnnoncelocationcommentIndex extends PureComponent {
         )
     }
 }
+AnnoncelocationcommentIndex.propTypes = {
+    loadCommentsAnnoncelocationcomments: PropTypes.func.isRequired,
+};
 
-export default AnnoncelocationcommentIndex;
+const mapStoreToProps = store => ({
+    comments: store.commentsites.comments
+
+});
+export default connect(mapStoreToProps, {
+    loadCommentsAnnoncelocationcomments,likeItem,unlikeItem,unactiveItem,deleteItem
+})(AnnoncelocationcommentIndex);

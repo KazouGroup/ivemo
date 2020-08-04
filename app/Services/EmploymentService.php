@@ -114,7 +114,7 @@ class EmploymentService
     }
 
 
-    public static function apiemploymentsbycategoryslug($categoryemployment,$city,$employment)
+    public static function apiemploymentsbycategoryslug($categoryemployment,$city,$user,$employment)
     {
         $employment = new EmploymentResource(employment::whereSlug($employment->slug)
             ->with('user','city','categoryemployment','member')
@@ -166,7 +166,7 @@ class EmploymentService
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')
-            ->take(10)->distinct()->get());
+            ->take(12)->distinct()->get());
 
         return $employments;
     }

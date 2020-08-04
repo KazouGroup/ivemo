@@ -70,10 +70,6 @@ class annoncelocation extends Model
         return $this->belongsTo(annoncetype::class,'annoncetype_id');
     }
 
-    public function signalannoncelocations()
-    {
-        return $this->hasMany(signalannoncelocation::class, 'annoncelocation_id');
-    }
 
     public function visits()
     {
@@ -113,10 +109,29 @@ class annoncelocation extends Model
         return $this->morphMany(signal::class ,'signalable');
     }
 
-    public function bookmarked()
+    public function likes()
     {
-        return (bool) favoriteannoncelocation::where('user_id', Auth::guard('web')->id())
-            ->where('annoncelocation_id', $this->id)
+        return $this->morphMany(like::class ,'likeable');
+    }
+
+    public function likeked()
+    {
+        return (bool) like::where('user_id', Auth::guard('web')->id())
+            ->where(['likeable_type' => 'App\Model\annoncelocation',
+                'likeable_id' => $this->id ])
+            ->first();
+    }
+
+    public function favorites()
+    {
+        return $this->morphMany(favorite::class ,'favoriteable');
+    }
+
+    public function favoriteted()
+    {
+        return (bool) favorite::where('user_id', Auth::guard('web')->id())
+            ->where(['favoriteable_type' => 'App\Model\annoncelocation',
+                'favoriteable_id' => $this->id ])
             ->first();
     }
 }

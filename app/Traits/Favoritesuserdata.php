@@ -21,16 +21,6 @@ trait Favoritesuserdata
 {
 
 
-    public function favoriteblogannoncelocations()
-    {
-        return $this->hasMany(favoriteblogannoncelocation::class, 'user_id');
-    }
-
-    public function bookmarksfavoriteblogannoncelocations()
-    {
-        return $this->belongsToMany(blogannoncelocation::class, 'favoriteblogannoncelocations', 'user_id', 'blogannoncelocation_id')->withTimeStamps();
-    }
-
 
     public function favoriteblogannonceventes()
     {

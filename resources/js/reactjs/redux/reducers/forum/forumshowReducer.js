@@ -16,18 +16,22 @@ export default produce((draft, action = {}) => {
 
             case 'FAVORITE_FORUM_SHOW_ADD':
                 draft.item.favoriteted = action.payload;
+                draft.item.countfavorites ++;
                 return draft;
 
             case 'FAVORITE_FORUM_SHOW_REMOVE':
                 draft.item.favoriteted = !action.payload;
+                draft.item.countfavorites --;
                 return draft;
 
-            case 'LIKE_FORUM_ADD':
+            case 'LIKE_FORUM_SHOW_ADD':
                 draft.item.likeked = action.payload;
+                draft.item.countlikes ++;
                 return draft;
 
-            case 'LIKE_FORUM_REMOVE':
+            case 'LIKE_FORUM_SHOW_REMOVE':
                 draft.item.likeked = !action.payload;
+                draft.item.countlikes --;
                 return draft;
         }
     },

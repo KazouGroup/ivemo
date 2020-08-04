@@ -28,7 +28,7 @@ class CommentannoncelocationController extends Controller
     }
 
 
-    public function getcomment(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,annoncelocation $annoncelocation)
+    public function getcomment(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$user,annoncelocation $annoncelocation)
     {
         $comments = CommentResource::collection($annoncelocation->comments()
             ->with('user','commentable','responsecomments')
@@ -43,7 +43,7 @@ class CommentannoncelocationController extends Controller
         return response()->json($comments,200);
     }
 
-    public function sendcomment(Request $request,annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,annoncelocation $annoncelocation)
+    public function sendcomment(Request $request,annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$user,annoncelocation $annoncelocation)
     {
         $this->validate($request,[
             'body'=>'required|max:5000',
@@ -58,7 +58,7 @@ class CommentannoncelocationController extends Controller
 
 
 
-    public function updatecomment(Request $request,annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,annoncelocation $annoncelocation,comment $comment)
+    public function updatecomment(Request $request,annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$user,annoncelocation $annoncelocation,comment $comment)
     {
 
         $this->authorize('updateComment',$comment);
@@ -71,7 +71,7 @@ class CommentannoncelocationController extends Controller
     }
 
 
-    public function sendresponsecomment(Request $request,annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,annoncelocation $annoncelocation,comment $comment)
+    public function sendresponsecomment(Request $request,annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$user,annoncelocation $annoncelocation,comment $comment)
     {
         $validatedData = $request->validate(['body' => 'required|min:2|max:5000']);
 

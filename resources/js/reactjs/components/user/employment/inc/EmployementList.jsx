@@ -43,14 +43,14 @@ class EmployementList extends PureComponent {
                                 </div>
 
                                      <span className="title">
-                                         <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`} className="card-link">
+                                         <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`} className="card-link">
                                               {this.props.title.length > 90 ? this.props.title.substring(0, 90) + "..." : this.props.title}
                                          </a>
                                      </span>
                                     <br/>
 
 
-                                    <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`}>
+                                    <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`}>
                                         <span dangerouslySetInnerHTML={this.getDescription()}/>
                                     </a>
 
@@ -95,7 +95,7 @@ class EmployementList extends PureComponent {
                             <div className="col-md-4">
 
                                 <div className="card-image">
-                                    <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`}>
+                                    <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`}>
                                         <LazyLoad>
                                             <img className="img  rounded"
                                                  src={this.props.photo} alt={this.props.title}/>
@@ -112,11 +112,11 @@ class EmployementList extends PureComponent {
                                         </Button>
                                         :
                                         <>
-                                            {/*
-                                            {this.props.bookmarked ?
+
+                                            {this.props.favoriteted ?
 
                                                 <>
-                                                    <Button onClick={() => this.props.favoriteItem(this.props)}
+                                                    <Button onClick={() => this.props.unfavoriteItem(this.props)}
                                                             className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
                                                         <i className="fas fa-bookmark"></i>
                                                     </Button>
@@ -130,23 +130,23 @@ class EmployementList extends PureComponent {
                                                     </Button>
                                                 </>
                                             }
-                                            */}
+
 
                                             {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
                                                 <>
-                                                    <NavLink to={`/profile/${this.props.user.slug}/personal_mails/employments/${this.props.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
+                                                    <NavLink to={`/profile/${this.props.user.slug}/statistics/employments/${this.props.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
                                                         <i className="now-ui-icons business_chart-bar-32"/>
                                                     </NavLink>
                                                     {this.props.status ?
                                                         <>
-                                                            <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}
+                                                            <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props)}
                                                                     className="btn btn-success btn-icon btn-sm" title="Desactiver l'annonce">
                                                                 <i className="now-ui-icons ui-1_check"/>
                                                             </button>
                                                         </>
                                                         :
                                                         <>
-                                                            <button type="button" onClick={() => this.props.activeItem(this.props.id)}
+                                                            <button type="button" onClick={() => this.props.activeItem(this.props)}
                                                                     className="btn btn-primary btn-icon btn-sm" title="Activer l'annonce">
                                                                 <i className="now-ui-icons ui-1_simple-delete"/>
                                                             </button>
@@ -156,7 +156,7 @@ class EmployementList extends PureComponent {
                                                         <i className="now-ui-icons ui-2_settings-90"/>
                                                     </NavLink>
                                                     <Button
-                                                        className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} title="Supprimer cette annonce">
+                                                        className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props)} title="Supprimer cette annonce">
                                                         <i className="now-ui-icons ui-1_simple-remove"/>
                                                     </Button>{" "}
                                                 </>

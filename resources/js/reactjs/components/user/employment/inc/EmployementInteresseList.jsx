@@ -44,7 +44,7 @@ class EmployementInteresseList extends PureComponent {
                                     </div>
 
                                     <span className="title">
-                                         <NavLink to={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`} className="card-link">
+                                         <NavLink to={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`} className="card-link">
                                             {this.props.title.length > 50 ? this.props.title.substring(0, 50) + "..." : this.props.title}
                                          </NavLink>
                                      </span>
@@ -88,7 +88,7 @@ class EmployementInteresseList extends PureComponent {
                                 <div className="col-md-4">
 
                                     <div className="card-image">
-                                        <NavLink to={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.slug}/`}>
+                                        <NavLink to={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`}>
                                             <LazyLoad>
                                                 <img className="img rounded"
                                                      src={this.props.photo} alt={this.props.title}/>

@@ -13,60 +13,34 @@ import SignalFromAnnoncelocationShow from "./inc/SignalFromAnnoncelocationShow";
 import Navlinknewannoncelocation from "./treatment/Navlinknewannoncelocation";
 import HelmetSite from "../../../inc/user/HelmetSite";
 import AnnoncelocationcommentIndex from "../../comments/AnnoncelocationcommentIndex";
-import FieldInput from "../../../inc/vendor/FieldInput";
 import moment from "moment";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {
+    favoriteItem,
+    likeItem,
+    loadannoncelocationshowusersite, statuscommentaddItem,
+    statuscommentremoveItem, unfavoriteItem, unlikeItem,
+
+    loadProfileusersforpublic,
+    unsubscribeItem,subscribeItem,
+    unfollowerItem,followerItem,
+} from "../../../../redux/actions/annoncelocation/annoncelocationshowActions";
+import ButonFollowerUser from "../../../inc/vendor/ButonFollowerUser";
+import ButonMiniSubscribedAllAnnonce from "../../../inc/vendor/ButonMiniSubscribedAllAnnonce";
+const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
 class Annoncelocationbycategorycityshow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            full_name: '',
-            message: '',
-            subject: '',
-            errors: [],
-            annoncelocation:{categoryannoncelocation:[],user:{profile:[]},city:[]},
+            //
         };
         this.deleteItem = this.deleteItem.bind(this);
-        this.favoriteItem = this.favoriteItem.bind(this);
         this.statusItem = this.statusItem.bind(this);
-        this.statuscommentItem = this.statuscommentItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
 
-
-        this.handleFieldChange = this.handleFieldChange.bind(this);
-        this.handleCheckClick = this.handleCheckClick.bind(this);
-        this.hasErrorFor = this.hasErrorFor.bind(this);
-        this.renderErrorFor = this.renderErrorFor.bind(this);
-    }
-
-    handleFieldChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value,
-        });
-        this.state.errors[event.target.name] = '';
-    }
-
-    handleCheckClick(event) {
-        this.setState({
-            subject: event.target.value
-        });
-
-    };
-    // Handle Errors
-    hasErrorFor(field) {
-        return !!this.state.errors[field];
-    }
-
-    renderErrorFor(field) {
-        if (this.hasErrorFor(field)) {
-            return (
-                <span className='invalid-feedback'>
-                    <strong>{this.state.errors[field][0]}</strong>
-                </span>
-            )
-        }
     }
 
     signalerUser(item) {
@@ -74,129 +48,6 @@ class Annoncelocationbycategorycityshow extends Component {
         //this.setState({
           //  annonceItem: item
         //});
-    }
-
-    favoriteItem(annoncelocation) {
-        const url = route('favoriteannoncelocations_favorite.favorite', [annoncelocation.id]);
-        dyaxios.get(url).then(() => {
-
-            if(annoncelocation.bookmarked){
-                $.notify({
-                        message: "Annonce ajoutée à vos favoris",
-                    },
-                    {
-                        allow_dismiss: false,
-                        type: 'info',
-                        placement: {
-                            from: 'bottom',
-                            align: 'center'
-                        },
-                        animate: {
-                            enter: "animate__animated animate__fadeInUp",
-                            exit: "animate__animated animate__fadeOutDown"
-                        },
-                    });
-            }else {
-                $.notify({
-                        message: "Annonce retirée de vos favoris",
-                    },
-                    {
-                        allow_dismiss: false,
-                        type: 'info',
-                        placement: {
-                            from: 'bottom',
-                            align: 'center'
-                        },
-                        animate: {
-                            enter: "animate__animated animate__fadeInUp",
-                            exit: "animate__animated animate__fadeOutDown"
-                        },
-                    });
-            }
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    statuscommentItem(annoncelocation){
-        Swal.fire({
-            text: "êtes vous sure de vouloir changer le status des commentaires de cette annonce?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                //Envoyer la requet au server
-                let url = route('annonces_locations_status_comments.site',annoncelocation.id);
-                dyaxios.get(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    if(annoncelocation.status_comments){
-                        $.notify({
-
-                                message: "Commentaire desactivé sur cette annonce",
-                            },
-                            {
-                                allow_dismiss: false,
-                                type: 'info',
-                                placement: {
-                                    from: 'bottom',
-                                    align: 'center'
-                                },
-                                animate: {
-                                    enter: "animate__animated animate__fadeInUp",
-                                    exit: "animate__animated animate__fadeOutDown"
-                                },
-                            });
-                    }else {
-                        $.notify({
-
-                                message: "Commentaire activés sur cette annonce",
-                            },
-                            {
-                                allow_dismiss: false,
-                                type: 'info',
-                                placement: {
-                                    from: 'bottom',
-                                    align: 'center'
-                                },
-                                animate: {
-                                    enter: "animate__animated animate__fadeInUp",
-                                    exit: "animate__animated animate__fadeOutDown"
-                                },
-                            });
-                    }
-
-                    /** End alert ***/
-                    this.loadItems();
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        })
-
     }
 
     copyToClipboard(){
@@ -219,7 +70,7 @@ class Annoncelocationbycategorycityshow extends Component {
 
     statusItem(annoncelocation){
         Swal.fire({
-            title: 'Changer le status de l\'annonce?',
+            title: 'Masquer cette annonce ?',
             text: "êtes vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
@@ -341,23 +192,25 @@ class Annoncelocationbycategorycityshow extends Component {
     }
 
     loadItems(){
-        let itemannoncetype = this.props.match.params.annoncetype;
-        let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
-        let itemCity = this.props.match.params.city;
-        let itemannoncelocation = this.props.match.params.annoncelocation;
-        let url = route('api.annoncelocationbycategoryannoncelocationslug_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemannoncelocation]);
-        dyaxios.get(url).then(response => this.setState({annoncelocation: response.data,}));
+        this.props.loadannoncelocationshowusersite(this.props);
+        this.props.loadProfileusersforpublic(this.props);
     }
 
    // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }
+    data_countfollowFormatter(countfollowerusers, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countfollowerusers)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (countfollowerusers / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     getDescription(annoncelocation) {
         return { __html: (annoncelocation.description) };
     }
     render() {
-        const {annoncelocation} = this.state;
+        const {annoncelocation,profileUser} = this.props;
         return (
             <>
                 <HelmetSite title={`${annoncelocation.title || $name_site} - ${$name_site}`}/>
@@ -435,23 +288,46 @@ class Annoncelocationbycategorycityshow extends Component {
 
                                             <div className="text-center">
                                                 {$guest ?
-                                                    <Button data-toggle="modal" data-target="#loginModal"
-                                                            className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
-                                                        <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
-                                                    </Button>
+                                                    <>
+                                                        <Button data-toggle="modal" data-target="#loginModal"
+                                                                className="btn btn-facebook btn-sm btn-neutral" title="J'aime">
+                                                            <i className="far fa-heart"></i> <b>J'aime</b>
+                                                        </Button>
+                                                        <Button data-toggle="modal" data-target="#loginModal"
+                                                                className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
+                                                            <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
+                                                        </Button>
+                                                    </>
                                                     :
                                                     <>
-                                                        {annoncelocation.bookmarked ?
+                                                        {annoncelocation.likeked ?
+                                                            <>
+                                                                <Button onClick={() => this.props.unlikeItem(annoncelocation)}
+                                                                        className="btn btn-info btn-sm" title="Je n'aime plus">
+                                                                    <i className="fas fa-heart"></i> <b>J'aime</b>
+                                                                </Button>
+                                                            </>
+
+                                                            :
+                                                            <>
+                                                                <Button onClick={() => this.props.likeItem(annoncelocation)}
+                                                                        className="btn btn-facebook btn-sm btn-neutral" title="J'aime">
+                                                                    <i className="far fa-heart"></i> <b>J'aime</b>
+                                                                </Button>
+                                                            </>
+                                                        }
+
+                                                        {annoncelocation.favoriteted ?
 
                                                             <>
-                                                                <Button onClick={() => this.favoriteItem(annoncelocation)}
+                                                                <Button onClick={() => this.props.unfavoriteItem(annoncelocation)}
                                                                         className="btn btn-danger btn-sm" title="Retirer de vos favoris">
                                                                     <i className="fas fa-bookmark"></i> <b>Sauvegarder</b>
                                                                 </Button>
                                                             </>
                                                             :
                                                             <>
-                                                                <Button onClick={() => this.favoriteItem(annoncelocation)}
+                                                                <Button onClick={() => this.props.favoriteItem(annoncelocation)}
                                                                         className="btn btn-facebook btn-sm btn-neutral" title="Ajouter à vos favoris">
                                                                     <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
                                                                 </Button>
@@ -502,8 +378,14 @@ class Annoncelocationbycategorycityshow extends Component {
                                         <div className="card">
                                             <div className="card-body">
 
-                                              <ProfileForallAnnoncelocationShow {...annoncelocation} favoriteItem={this.favoriteItem}
-                                                                                statuscommentItem={this.statuscommentItem}  statusItem={this.statusItem} deleteItem={this.deleteItem} signalerUser={this.signalerUser} copyToClipboard={this.copyToClipboard}/>
+                                              <ProfileForallAnnoncelocationShow {...annoncelocation}
+                                                                                unfavoriteItem={this.props.unfavoriteItem}
+                                                                                favoriteItem={this.props.favoriteItem}
+                                                                                statuscommentremoveItem={this.props.statuscommentremoveItem}
+                                                                                statuscommentaddItem={this.props.statuscommentaddItem}
+                                                                                statusItem={this.statusItem}
+                                                                                deleteItem={this.deleteItem}
+                                                                                signalerUser={this.signalerUser} copyToClipboard={this.copyToClipboard}/>
 
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">
@@ -572,18 +454,32 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                                  className="avatar" />
                                                                         </NavLink>
                                                                         : <Skeleton circle={false} height={40} width={80} />}
-                                                                    <div className="mx-3">
-                                                                        <NavLink to={`/pro/${annoncelocation.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{annoncelocation.user.first_name}</b>
-                                                                            <small className="d-block text-muted">{annoncelocation.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(annoncelocation.created_at).format('LL')}</small>
-                                                                        </NavLink>
-                                                                    </div>
+
+                                                                    {annoncelocation.title && (
+                                                                        <>
+                                                                        <div className="mx-3">
+                                                                            <NavLink to={`/pro/${annoncelocation.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{annoncelocation.user.first_name}</b>
+                                                                                <small className="d-block text-muted">{annoncelocation.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(annoncelocation.created_at).format('LL')}</small> {this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}
+                                                                            </NavLink>
+                                                                        </div>
+
+                                                                            {profileUser.followeruser &&(
+                                                                                <ButonMiniSubscribedAllAnnonce {...this.props} {...profileUser}
+                                                                                                               unsubscribeItem={this.props.unsubscribeItem}
+                                                                                                               subscribeItem={this.props.subscribeItem}/>
+                                                                            )}
+
+                                                                            <ButonFollowerUser {...this.props} {...profileUser}
+                                                                                               unfollowerItem={this.props.unfollowerItem}
+                                                                                               followerItem={this.props.followerItem}
+                                                                                               nameunfollower={`Suivre`}
+                                                                                               nameununfollower={`Abonné`}/>
+                                                                        </>
+                                                                    )}
                                                                 </div>
-                                                                <Button className="btn btn-sm btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
-                                                                    <i className="now-ui-icons tech_mobile"/>
-                                                                </Button>
-                                                                <a href="https://www.kazoutech.com" className="btn btn-sm btn-success" target="_banck">
-                                                                    <i className="now-ui-icons ui-2_chat-round"/>
-                                                                </a>
+
+
+
                                                             </div>
                                                             <div className="card-header text-center">
                                                                 <div className="card-title">
@@ -627,4 +523,24 @@ class Annoncelocationbycategorycityshow extends Component {
     }
 }
 
-export default Annoncelocationbycategorycityshow;
+Annoncelocationbycategorycityshow.propTypes = {
+    loadannoncelocationshowusersite: PropTypes.func.isRequired,
+    loadProfileusersforpublic: PropTypes.func.isRequired,
+};
+
+const mapStoreToProps = store => ({
+    annoncelocation: store.annoncelocationshow.item,
+    profileUser: store.profile.profiluser
+});
+
+export default connect(mapStoreToProps, {
+    loadannoncelocationshowusersite,
+    statuscommentremoveItem,
+    statuscommentaddItem,
+    likeItem,unlikeItem,
+    favoriteItem,unfavoriteItem,
+
+    loadProfileusersforpublic,
+    unsubscribeItem,subscribeItem,
+    unfollowerItem,followerItem,
+})(Annoncelocationbycategorycityshow);

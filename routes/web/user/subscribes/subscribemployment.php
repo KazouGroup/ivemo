@@ -26,7 +26,7 @@ Route::group(['prefix' => 'api'], function () {
 });
 
 
-Route::get(
+Route::post(
     '/employments_subscribe/{user:id}/subscribe',
     'SubscribemploymentController@subscribe'
 )->name('employments_subscribe.subscribe');

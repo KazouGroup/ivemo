@@ -13,7 +13,7 @@ class AnnonceventeInteresse extends Component {
         super(props);
         this.state = {
             annonceventesinteresses: { annoncetype: [], categoryannoncevente: [], city: [], user: [] },
-            visiable: 2,
+            visiable: 4,
         };
         this.loadmoresItem = this.loadmoresItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);

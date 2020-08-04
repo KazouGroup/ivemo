@@ -32,10 +32,12 @@ export default produce((draft, action = {}) => {
 
             case 'LIKE_EMPLOYEMENT_ADD':
                 draft.item.likeked = action.payload;
+                draft.item.countlikes ++;
                 return draft;
 
             case 'LIKE_EMPLOYEMENT_REMOVE':
                 draft.item.likeked = !action.payload;
+                draft.item.countlikes --;
                 return draft;
         }
     },

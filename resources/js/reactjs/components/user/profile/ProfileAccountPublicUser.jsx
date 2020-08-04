@@ -12,21 +12,24 @@ import NavLinkPublicBlogannoncesUser from "./blogs/public/NavLinkPublicBlogannon
 import FormNewletterSubcribeProfileAccountUser from "./form/FormNewletterSubcribeProfileAccountUser";
 import Skeleton from "react-loading-skeleton";
 import ReadMoreAndLess from "react-read-more-less";
-import ProfilePublicAccountAvisUser from "./file_public/avisuser/ProfilePublicAccountAvisUser";
+import ProfileAccountAvisUser from "./file_public/ProfileAccountAvisUser";
+import HelmetSite from "../../inc/user/HelmetSite";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import { loadProfileusersforpublic,unfollowerItem,followerItem} from "../../../redux/actions/profileActions";
+import ButonFollowerUser from "../../inc/vendor/ButonFollowerUser";
 
 
 class ProfileAccountPublicUser extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            userPublick: {profile: []},
+            //
         };
     }
 
-    loadItems() {
-        let itemuser = this.props.match.params.user;
-        let url = route('api.profilpublique', [itemuser]);
-        dyaxios.get(url).then(response => this.setState({userPublick: response.data,}));
+    loadItems(){
+        this.props.loadProfileusersforpublic(this.props);
     }
 
     // Lifecycle Component Method
@@ -39,12 +42,10 @@ class ProfileAccountPublicUser extends PureComponent {
     }
 
     render() {
-        const {userPublick} = this.state;
+        const {userPublick} = this.props;
         return (
             <>
-                <Helmet>
-                    <title>{`${userPublick.first_name || 'Profile'}`} - {$name_site}</title>
-                </Helmet>
+                <HelmetSite title={`${userPublick.first_name || 'Profile'}` - $name_site}/>
 
                 <div className="profile-page sidebar-collapse">
 
@@ -120,13 +121,16 @@ class ProfileAccountPublicUser extends PureComponent {
                                                 </a>
                                             )}
 
-                                            {userPublick.phone && (
-                                                <Button className="btn btn-sm btn-primary" rel="tooltip"
-                                                        title={userPublick.phone} data-placement="bottom">
-                                                    <i className="now-ui-icons tech_mobile"/>
-                                                </Button>
-                                            )}
 
+                                            <ButonFollowerUser {...userPublick}
+                                                               unfollowerItem={this.props.unfollowerItem}
+                                                               followerItem={this.props.followerItem}
+                                                               nameunfollower={`Suivre`}
+                                                               nameununfollower={`Abonné`}/>
+
+                                            <Button className="btn btn-sm btn-primary" rel="tooltip" title="3426712192" data-placement="bottom">
+                                                <i className="now-ui-icons tech_mobile"/>
+                                            </Button>
                                             <a href="#contact" className="btn btn-sm btn-success">
                                                 <i className="now-ui-icons ui-2_chat-round"/>
                                             </a>
@@ -318,14 +322,13 @@ class ProfileAccountPublicUser extends PureComponent {
                                                     <ProfileAccountTeamUser {...this.props}/>}
 
 
-                                                {!userPublick.profile.status_avis ? <></> :
-                                                    <ProfilePublicAccountAvisUser {...this.props}/>}
+                                                {!userPublick.profile.status_avis ? <></> :<ProfileAccountAvisUser {...this.props} {...userPublick}/>}
 
                                                 <div className="card" id="contact">
                                                     <div className="card-body">
                                                         <div className="card-header text-center">
-                                                            <h4 className="card-title">
-                                                                <b>Contactez {userPublick.first_name}</b></h4>
+
+                                                            <h4 className="card-title"><b>Contacter {userPublick.first_name}</b></h4>
                                                         </div>
                                                         <FormContactProfileAccountUser {...this.props} {...userPublick}/>
                                                     </div>
@@ -357,4 +360,14 @@ class ProfileAccountPublicUser extends PureComponent {
     }
 }
 
-export default ProfileAccountPublicUser;
+ProfileAccountPublicUser.propTypes = {
+    loadProfileusersforpublic: PropTypes.func.isRequired,
+};
+
+const mapStoreToProps = store => ({
+    userPublick: store.profile.profiluser
+});
+
+export default connect(mapStoreToProps, {
+    loadProfileusersforpublic,unfollowerItem,followerItem
+})(ProfileAccountPublicUser);

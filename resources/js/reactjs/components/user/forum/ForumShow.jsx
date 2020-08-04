@@ -14,11 +14,19 @@ import SignalFromForumForShow from "./inc/SignalFromForumForShow";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {
+    loadforumshow,
     favoriteItem,
     likeItem,
-    loadforumshow,
-     unfavoriteItem, unlikeItem
+     unfavoriteItem, unlikeItem,
+    unfollowerItem,followerItem,
+
+    unsubscribeItem,subscribeItem,
+    loadProfileusersforpublic,
 } from "../../../redux/actions/forum/forumshowActions";
+import Navforums from "./inc/Navforums";
+import ForumInteresse from "./ForumInteresse";
+import ButonFollowerUser from "../../inc/vendor/ButonFollowerUser";
+import ButonMiniSubscribedForum from "../../inc/vendor/ButonMiniSubscribedForum";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -123,7 +131,8 @@ class ForumShow extends Component {
 
 
     loadItems() {
-        this.props.loadforumshow(this.props)
+        this.props.loadforumshow(this.props);
+        this.props.loadProfileusersforpublic(this.props)
     }
 
    // Lifecycle Component Method
@@ -140,6 +149,18 @@ class ForumShow extends Component {
         const suffix = abbrev[order];
         return (visits_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
+    data_countfavoriteFormatter(countfavorites, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countfavorites)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (countfavorites / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+    data_countfollowFormatter(countfollowerusers, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countfollowerusers)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (countfollowerusers / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     data_countlikeFormatter(countlikes, precision) {
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countlikes)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
@@ -148,7 +169,7 @@ class ForumShow extends Component {
     }
 
     render() {
-        const {forum} = this.props;
+        const {forum,profileUser} = this.props;
         return (
             <>
                 <HelmetSite title={`${forum.title || $name_site} - ${$name_site}`}/>
@@ -199,15 +220,28 @@ class ForumShow extends Component {
                                                                      src={forum.user.avatar}/>
                                                             }
                                                             <div className="mx-3">
-                                                                <NavLink to={`/pro/${forum.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{forum.user.first_name}</b>
-                                                                    <small className="d-block text-muted">{forum.statusOnline &&(<i className="fas fa-circle text-success"></i>)}  <i className="now-ui-icons tech_watch-time"/> {moment(forum.created_at).format('LL')}</small>
+                                                                <NavLink to={forum.user.status_profile ? `/pro/${forum.user.slug}/` : `/user/${forum.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{forum.user.first_name}</b>
+                                                                    <small className="d-block text-muted">{forum.statusOnline &&(<i className="fas fa-circle text-success"></i>)}  <i className="now-ui-icons tech_watch-time"/> {moment(forum.created_at).format('LL')}</small> {this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}
                                                                 </NavLink>
                                                             </div>
+
+                                                            {profileUser.followeruser &&(
+                                                                <ButonMiniSubscribedForum {...this.props} {...profileUser}
+                                                                                          unsubscribeItem={this.props.unsubscribeItem}
+                                                                                          subscribeItem={this.props.subscribeItem}/>
+                                                            )}
+
+                                                            <ButonFollowerUser {...this.props}{...profileUser}
+                                                                               unfollowerItem={this.props.unfollowerItem}
+                                                                               followerItem={this.props.followerItem}
+                                                                               nameunfollower={`Suivre`}
+                                                                               nameununfollower={`Abonné`}/>
+
                                                         </div>
                                                         <div className="text-right ml-auto">
-                                                    <span className="card-title">
-                                                        <Link to={`/forums/${forum.categoryforum.slug}/`}><b>{forum.categoryforum.name}</b></Link> - <Link to={`/employments/`}> </Link> <i className="now-ui-icons tech_watch-time"/> {moment(forum.created_at).fromNow()}
-                                                    </span>
+                                                            <span className="card-title">
+                                                                <Link to={`/forums/${forum.categoryforum.slug}/`}><b>{forum.categoryforum.name}</b></Link> - <Link to={`/employments/`}> </Link> <i className="now-ui-icons tech_watch-time"/> {moment(forum.created_at).fromNow()}
+                                                            </span>
                                                         </div>
                                                     </div>
 
@@ -224,20 +258,20 @@ class ForumShow extends Component {
 
                                                     <div className="card-header d-flex align-items-center">
                                                         <div className="d-flex align-items-center">
-                                                            <Button className="btn btn-default btn-icon btn-sm btn-neutral" title={`${forum.visits_count} ${forum.countlikes > 1 ? "Commentaires" : "Commentaire"}`}>
-                                                                <i className="far fa-eye"></i>
-                                                            </Button> {this.data_countFormatter(forum.visits_count)}
+                                                            <Button className="btn btn-default btn-sm btn-neutral" title={`${forum.visits_count} ${forum.countlikes > 1 ? "Commentaires" : "Commentaire"}`}>
+                                                                <i className="far fa-eye"></i> <b>{this.data_countFormatter(forum.visits_count)} {forum.visits_count > 1 ? "Vues" : "Vue"}</b>
+                                                            </Button>
 
                                                             {$guest ?
                                                                 <>
                                                                     <Button data-toggle="modal" data-target="#loginModal"
-                                                                            className="btn btn-default btn-icon btn-sm btn-neutral" title={`${forum.countlikes} ${forum.countlikes > 1 ? "Likes" : "Like"}`}>
-                                                                        <i className="far fa-heart"></i>
-                                                                    </Button> {this.data_countlikeFormatter(forum.countlikes)}
+                                                                            className="btn btn-default btn-sm btn-neutral" title={`${forum.countlikes} ${forum.countlikes > 1 ? "Likes" : "Like"}`}>
+                                                                        <i className="far fa-heart"></i> <b>{this.data_countlikeFormatter(forum.countlikes)} J'aime</b>
+                                                                    </Button>
 
                                                                     <Button data-toggle="modal" data-target="#loginModal"
-                                                                            className="btn btn-default btn-icon btn-sm btn-neutral" title="Sauvegarder">
-                                                                        <i className="far fa-bookmark"></i>
+                                                                            className="btn btn-default btn-sm btn-neutral" title="Sauvegarder">
+                                                                        <i className="far fa-bookmark"></i> <b>{this.data_countfavoriteFormatter(forum.countfavorites)} Enregistrer</b>
                                                                     </Button>
                                                                 </>
 
@@ -247,33 +281,33 @@ class ForumShow extends Component {
                                                                     {forum.likeked ?
                                                                         <>
                                                                             <Button onClick={() => this.props.unlikeItem(forum)}
-                                                                                    className="btn btn-info btn-icon btn-sm btn-neutral" title={`${forum.countlikes} ${forum.countlikes > 1 ? "Likes" : "Like"}`}>
-                                                                                <i className="fas fa-heart"></i>
-                                                                            </Button> {this.data_countlikeFormatter(forum.countlikes)}
+                                                                                    className="btn btn-danger btn-sm btn-neutral" title={`${forum.countlikes} ${forum.countlikes > 1 ? "Likes" : "Like"}`}>
+                                                                                <i className="fas fa-heart"></i> <b>{this.data_countlikeFormatter(forum.countlikes)} J'aime</b>
+                                                                            </Button>
                                                                         </>
 
                                                                         :
                                                                         <>
                                                                             <Button onClick={() => this.props.likeItem(forum)}
-                                                                                    className="btn btn-default btn-icon btn-sm btn-neutral" title={`${forum.countlikes} ${forum.countlikes > 1 ? "Likes" : "Like"}`}>
-                                                                                <i className="far fa-heart"></i>
-                                                                            </Button> {this.data_countlikeFormatter(forum.countlikes)}
+                                                                                    className="btn btn-default btn-sm btn-neutral" title={`${forum.countlikes} ${forum.countlikes > 1 ? "Likes" : "Like"}`}>
+                                                                                <i className="far fa-heart"></i> <b>{this.data_countlikeFormatter(forum.countlikes)} J'aime</b>
+                                                                            </Button>
                                                                         </>
                                                                     }
 
                                                                     {forum.favoriteted ?
                                                                         <>
                                                                             <Button onClick={() => this.props.unfavoriteItem(forum)}
-                                                                                    className="btn btn-danger btn-icon btn-sm btn-neutral" title="Sauvegarder">
-                                                                                <i className="fas fa-bookmark"></i>
+                                                                                    className="btn btn-info btn-sm btn-neutral" title="Sauvegarder">
+                                                                                <i className="fas fa-bookmark"></i> <b>{this.data_countfavoriteFormatter(forum.countfavorites)} Sauvegarder</b>
                                                                             </Button>
                                                                         </>
 
                                                                         :
                                                                         <>
                                                                             <Button onClick={() => this.props.favoriteItem(forum)}
-                                                                                    className="btn btn-default btn-icon btn-sm btn-neutral" title="Sauvegarder">
-                                                                                <i className="far fa-bookmark"></i>
+                                                                                    className="btn btn-default btn-sm btn-neutral" title="Sauvegarder">
+                                                                                <i className="far fa-bookmark"></i> <b>{this.data_countfavoriteFormatter(forum.countfavorites)} Sauvegarder</b>
                                                                             </Button>
                                                                         </>
                                                                     }
@@ -310,10 +344,10 @@ class ForumShow extends Component {
                                                                         </>
                                                                     )}
 
-                                                                    <Button className="btn btn-default btn-icon btn-sm btn-neutral" onClick={() => this.signalerUser()}
+                                                                    <Button className="btn btn-default btn-sm btn-neutral" onClick={() => this.signalerUser()}
                                                                             title="Signaler ce post ">
-                                                                        <i className="far fa-flag"></i>
-                                                                    </Button> {$userIvemoIsadmin.status_user && (<>{forum.countsignals}</>)}
+                                                                        <i className="far fa-flag"></i> <b>{$userIvemoIsadmin.status_user && (<>{forum.countsignals}</>)} Signaler</b>
+                                                                    </Button>
                                                                 </>
                                                             }
 
@@ -333,6 +367,8 @@ class ForumShow extends Component {
 
                                     </div>
 
+
+
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <Navlinknewforum/>
@@ -341,28 +377,10 @@ class ForumShow extends Component {
                                             <div className="card-body">
                                                 <div className="row">
                                                     <div className="col-md-12">
-                                                        <div className="card card-plain">
-                                                            <b>Categories populaires</b>
 
-                                                            <div className="card-body">
-                                                                <table>
-                                                                    <tbody>
-                                                                    <tr>
-                                                                        <td> <a href="#pablo">Formations & Cours </a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td> <a href="#pablo">Vante</a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td> <a href="#pablo">service</a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td> <a href="#pablo">Information </a></td>
-                                                                    </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
+                                                        <Navforums/>
+
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -372,7 +390,12 @@ class ForumShow extends Component {
                                         <SignalFromForumForShow {...this.props} {...forum} />
 
                                     </div>
+
                                 </div>
+
+
+                                <ForumInteresse {...this.props} />
+
                             </div>
                         </div>
 
@@ -393,13 +416,18 @@ ForumShow.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    forum: state.forumshow.item
+    forum: state.forumshow.item,
+    profileUser: state.profile.profiluser
 });
 
 export default connect(mapStateToProps, {
     loadforumshow,
     likeItem,unlikeItem,
     favoriteItem,unfavoriteItem,
+    unfollowerItem,followerItem,
+
+    unsubscribeItem,subscribeItem,
+    loadProfileusersforpublic,
 })(ForumShow);
 
 
