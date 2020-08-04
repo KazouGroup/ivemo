@@ -40,6 +40,7 @@ class EmployementShowUserSite extends Component {
             email: '',
             phone: '',
             message: '',
+            showPhonenumber: false,
             errors: [],
             employmentItem:[],
         };
@@ -53,8 +54,13 @@ class EmployementShowUserSite extends Component {
         this.phoneShow = this.phoneShow.bind(this);
         this.statusItem = this.statusItem.bind(this);
         this.signalerUser = this.signalerUser.bind(this);
+        this.showPhonenumberItem = this.showPhonenumberItem.bind(this);
+
     }
 
+    showPhonenumberItem() {
+        this.setState({showPhonenumber: true});
+    }
 
     handleFieldChange(event) {
         this.setState({
@@ -481,6 +487,8 @@ class EmployementShowUserSite extends Component {
                                                                              unfavoriteItem={this.props.unfavoriteItem}
                                                                              statuscommentremoveItem={this.props.statuscommentremoveItem}
                                                                              statuscommentaddItem={this.props.statuscommentaddItem}
+                                                                             showPhonenumberItem={this.showPhonenumberItem}
+                                                                             showPhonenumber={this.state.showPhonenumber}
                                                                              statusItem={this.statusItem} deleteItem={this.deleteItem}
                                                                              signalerUser={this.signalerUser} copyToClipboard={this.copyToClipboard}/>
 

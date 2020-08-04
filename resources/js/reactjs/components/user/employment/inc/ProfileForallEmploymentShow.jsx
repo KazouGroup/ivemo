@@ -69,11 +69,15 @@ class ProfileForallEmploymentShow extends Component {
                         <Button className="btn btn-icon btn-sm btn-facebook" title="Copier le lien" onClick={() => this.props.copyToClipboard()}>
                             <i className="fas fa-copy"></i>
                         </Button>
-                        <Button className="btn btn-icon btn-sm btn-info" data-container="body"
-                                data-original-title="Phone number" data-toggle="popover" data-placement="bottom"
-                                data-content={this.props.user.phone}>
-                            <i className="now-ui-icons tech_mobile"/>
-                        </Button>
+                        {this.props.showPhonenumber ?
+                            <button type="button" className="btn btn-sm btn-outline-info">
+                                <i className="now-ui-icons tech_mobile"/><b>{this.props.user.phone !== null ? this.props.user.phone : <>absent</>}</b>
+                            </button>
+                            :
+                            <button type="button" onClick={() => this.props.showPhonenumberItem()} className="btn btn-icon btn-sm btn-info">
+                                <i className="now-ui-icons tech_mobile"/>
+                            </button>
+                        }
                         {this.props.user.profile.site_internet && (
                             <a href={`${this.props.user.profile.site_internet}`} className="btn btn-icon btn-sm btn-primary" target="_banck">
                                 <i className="now-ui-icons objects_globe"/>

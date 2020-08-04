@@ -21,7 +21,7 @@ class ProfileForallAnnoncelocationShow extends Component {
 
             <>
                 <div className="card-title">
-                    <b>Contacter l'agence</b>
+                    <b>Contacter d l'agence</b>
                 </div>
                 <div className="card-header d-flex align-items-center">
                     <div className="d-flex align-items-center">
