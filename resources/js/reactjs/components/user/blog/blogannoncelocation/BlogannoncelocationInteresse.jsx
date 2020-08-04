@@ -8,7 +8,7 @@ import {
     favoriteItem,unfavoriteItem,
     loadBlogannoncelocationsinteresses,
     unlikeItem,likeItem,
-    deleteItem
+    unactiveItem,deleteItem
 } from "../../../../redux/actions/blogannoncelocation/blogannoncelocationActions";
 import BlogannonceinteresseSkeleton from "../../../inc/user/blog/BlogannonceinteresseSkeleton";
 import BlogannoncelocationInteresseList from "./inc/BlogannoncelocationInteresseList";
@@ -35,6 +35,7 @@ class BlogannoncelocationInteresse extends Component {
                     <BlogannoncelocationInteresseList key={item.id} {...item}
                                                       likeItem={this.props.likeItem}
                                                       unlikeItem={this.props.unlikeItem}
+                                                      unactiveItem={this.props.unactiveItem}
                                                       deleteItem={this.props.deleteItem}
                                                       unfavoriteItem={this.props.unfavoriteItem}
                                                       favoriteItem={this.props.favoriteItem}/>
@@ -80,5 +81,5 @@ const mapStoreToProps = store => ({
 
 });
 export default connect(mapStoreToProps, {
-    loadBlogannoncelocationsinteresses, unfavoriteItem, favoriteItem, unlikeItem,likeItem, deleteItem
+    loadBlogannoncelocationsinteresses, unfavoriteItem, favoriteItem, unlikeItem,likeItem,unactiveItem, deleteItem
 })(BlogannoncelocationInteresse);

@@ -47,6 +47,27 @@ class AnnoncelocationInteresseList extends Component {
                                             </div>
                                         </div>
                                         <div className="text-center">
+
+                                            {!$guest && (
+                                                <>
+                                                    {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
+                                                        <>
+                                                            {this.props.status && (
+                                                                <>
+                                                                    <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props)}
+                                                                            className="btn btn-success btn-icon btn-sm">
+                                                                        <i className="now-ui-icons ui-1_check"/>
+                                                                    </button>
+                                                                </>
+                                                            )}
+
+                                                            <NavLink to={`/annonce_location/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
+                                                                <i className="now-ui-icons ui-2_settings-90"/>
+                                                            </NavLink>
+                                                        </>
+                                                    )}
+                                                </>
+                                            )}
                                             <Button className="btn btn-sm btn-icon btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
                                                 <i className="now-ui-icons tech_mobile" />
                                             </Button>

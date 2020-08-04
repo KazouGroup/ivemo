@@ -66,6 +66,11 @@ export default produce((draft, action = {}) => {
                 if (dataremove !== -1) dataremoveget.countfavorites --;
                 return draft;
 
+            case 'UNACTIVE_BLOGANNONCELOCATION':
+                let dataunactive = draft.blogannoncelocations.findIndex(i => i.id === action.payload);
+                if (dataunactive !== -1) draft.blogannoncelocations.splice(dataunactive, 1);
+                return draft;
+
             case 'DELETE_BLOGANNONCELOCATION':
                 let datadelete = draft.blogannoncelocations.findIndex(i => i.id === action.payload);
                 if (datadelete !== -1) draft.blogannoncelocations.splice(datadelete, 1);

@@ -7,6 +7,7 @@ import {
     favoriteItem,unfavoriteItem,
     loadBlogannoncelocationsinteresses,
     likeItem,unlikeItem,
+    unactiveItem,
     deleteItem
 } from "../../../../redux/actions/blogannoncelocation/blogannoncelocationActions";
 import BlogannoncelocationInteresseList from "./inc/BlogannoncelocationInteresseList";
@@ -30,6 +31,7 @@ class BlogannoncelocationIntesseAnnonseShow extends PureComponent {
                                                       unlikeItem={this.props.unlikeItem}
                                                       deleteItem={this.props.deleteItem}
                                                       unfavoriteItem={this.props.unfavoriteItem}
+                                                      unactiveItem={this.props.unactiveItem}
                                                       favoriteItem={this.props.favoriteItem}/>
 
                 )
@@ -75,5 +77,6 @@ export default connect(mapStoreToProps, {
     favoriteItem,unfavoriteItem,
     loadBlogannoncelocationsinteresses,
     likeItem,unlikeItem,
+    unactiveItem,
     deleteItem
 })(BlogannoncelocationIntesseAnnonseShow);

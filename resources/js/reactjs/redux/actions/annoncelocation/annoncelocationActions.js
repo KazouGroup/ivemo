@@ -5,6 +5,7 @@ import {
     GET_ANNONCELOCATION_INTERESSE_BY_CITY,
     FAVORITE_ANNONCELOCATION_ADD,
     FAVORITE_ANNONCELOCATION_REMOVE,
+    UNACTIVE_ANNONCELOCATION,
 } from "../types";
 
 import Swal from "sweetalert2";
@@ -79,5 +80,64 @@ export const unfavoriteItem = props => dispatch => {
             });
 
         }).catch(error => console.error(error));
+};
+
+export const unactiveItem = props => dispatch => {
+
+    Swal.fire({
+        title: 'Masquer cette article?',
+        text: "êtes-vous sûr de vouloir executer cette action",
+        type: 'warning',
+        buttonsStyling: false,
+        confirmButtonClass: "btn btn-success",
+        cancelButtonClass: 'btn btn-danger',
+        confirmButtonText: 'Oui, confirmer',
+        cancelButtonText: 'Non, annuller',
+        showCancelButton: true,
+        reverseButtons: true,
+    }).then((result) => {
+        if (result.value) {
+
+            const url = route('annonces_locations_status.site',[props.id]);
+            //Envoyer la requet au server
+            dyaxios.get(url).then(() => {
+
+                dispatch({
+                    type: UNACTIVE_ANNONCELOCATION,
+                    payload: props.id
+                });
+
+                /** Alert notify bootstrapp **/
+                $.notify({
+                        message: 'Annonce masquée aux utilisateurs'
+                    },
+                    {
+                        allow_dismiss: false,
+                        type: 'primary',
+                        placement: {
+                            from: 'bottom',
+                            align: 'right'
+                        },
+                        animate: {
+                            enter: 'animate__animated animate__fadeInRight',
+                            exit: 'animate__animated animate__fadeOutRight'
+                        },
+                    });
+                /** End alert ***/
+
+            }).catch(() => {
+                //Failled message
+                $.notify("Ooop! Une erreur est survenue", {
+                    allow_dismiss: false,
+                    type: 'danger',
+                    animate: {
+                        enter: 'animate__animated animate__bounceInDown',
+                        exit: 'animate__animated animate__bounceOutUp'
+                    }
+                });
+            })
+        }
+    });
+
 };
 

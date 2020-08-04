@@ -33,6 +33,21 @@ class BlogannoncelocationInteresseList extends PureComponent {
                                         {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
                                             <div className="row">
                                                 <div className="mx-auto">
+                                                    {this.props.status ?
+                                                        <>
+                                                            <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props)}
+                                                                    className="btn btn-success btn-icon btn-sm">
+                                                                <i className="now-ui-icons ui-1_check"/>
+                                                            </button>
+                                                        </>
+                                                        :
+                                                        <>
+                                                            <button type="button" onClick={() => this.props.activeItem(this.props)}
+                                                                    className="btn btn-primary btn-icon btn-sm">
+                                                                <i className="now-ui-icons ui-1_simple-delete"/>
+                                                            </button>
+                                                        </>
+                                                    }
                                                     <NavLink
                                                         to={`/blogs/annonce_locations/${this.props.slugin}/edit/`}
                                                         className="btn btn-sm btn-icon btn-info"

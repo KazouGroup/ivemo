@@ -111,17 +111,17 @@ Route::group(['prefix' => 'blogs'], function () {
     )->name('blogannoncecategorylocationupdate_site');
 
     Route::get(
-        'annonce_locations_active/{id}',
+        'annonce_locations_active/{blogannoncelocation:id}/active',
         'BlogannoncelocationController@activated'
     )->name('blogannoncecategorylocationactive_site.site');
 
     Route::get(
-        'annonce_locations_unactive/{id}',
+        'annonce_locations_unactive/{blogannoncelocation:id}/unactive',
         'BlogannoncelocationController@unactivated'
     )->name('blogannoncecategorylocationunactive_site.site');
 
     Route::delete(
-        'annonce_locations_delete/{id}',
+        'annonce_locations_delete/{blogannoncelocation:id}/delete',
         'BlogannoncelocationController@destroy'
     )->name('blogannoncecategorylocationdelete_site');
 

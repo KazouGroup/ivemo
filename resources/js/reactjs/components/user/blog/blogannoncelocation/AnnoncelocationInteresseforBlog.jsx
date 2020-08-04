@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {
     favoriteItem,
+    unactiveItem,
     loadAnnoncelocationsinteressesbycategories,
     unfavoriteItem
 } from "../../../../redux/actions/annoncelocation/annoncelocationActions";
@@ -41,6 +42,7 @@ class AnnoncelocationInteresseforBlog extends Component {
             annoncelocationsinteresses.slice(0,visiable).map(item => {
                 return(
                     <AnnoncelocationInteresseList key={item.id} {...item}
+                                                  unactiveItem={this.props.unactiveItem}
                                                   unfavoriteItem={this.props.unfavoriteItem}
                                                   favoriteItem={this.props.favoriteItem}/>
                 )})
@@ -88,5 +90,5 @@ const mapStoreToProps = store => ({
 
 });
 export default connect(mapStoreToProps, {
-    loadAnnoncelocationsinteressesbycategories,unfavoriteItem,favoriteItem
+    loadAnnoncelocationsinteressesbycategories,unactiveItem,unfavoriteItem,favoriteItem
 })(AnnoncelocationInteresseforBlog);
