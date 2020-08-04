@@ -4,6 +4,7 @@ import FieldInput from "../../../inc/vendor/FieldInput";
 import { NavLink } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import ButonFollowerUser from "../../../inc/vendor/ButonFollowerUser";
+import moment from "moment";
 
 class FormContactProfileAccountUser extends PureComponent {
     constructor(props) {
@@ -46,7 +47,6 @@ class FormContactProfileAccountUser extends PureComponent {
 
     sendmessageItem(e) {
         e.preventDefault();
-
         let item = {
             email: this.state.email,
             full_name: this.state.full_name,
@@ -59,7 +59,7 @@ class FormContactProfileAccountUser extends PureComponent {
         dyaxios.post(url, item)
             .then(() => {
                 $.notify({
-                        message: `Votre message a été bien envoyé à cet utilisateur`
+                        message: `Votre message a été bien envoyé à cet utilisateur.`
                     },
                     {
                         allow_dismiss: false,
@@ -111,12 +111,12 @@ class FormContactProfileAccountUser extends PureComponent {
                                 <a href={`/pro/${this.props.slug}/`}
                                    className="text-dark font-weight-600 text-sm"><b>{this.props.first_name}</b>
                                     <small
-                                        className="d-block text-muted">Membre depuis {moment(this.props.created_at).format('LL')}</small>
+                                        className="d-block text-muted">Membre
+                                        depuis {moment(this.props.created_at).format('LL')}</small>
                                 </a>
                             </div>
                         </div>
                         <div className="text-right ml-auto">
-
                             {this.props.phone && (
                                 <>
                                     <UncontrolledTooltip placement="bottom" target="TooltipPhone">
@@ -127,6 +127,7 @@ class FormContactProfileAccountUser extends PureComponent {
                                     </Button>
                                 </>
                             )}
+
                             <ButonFollowerUser {...this.props}
                                                unfollowerItem={this.props.unfollowerItem}
                                                followerItem={this.props.followerItem}
@@ -149,7 +150,6 @@ class FormContactProfileAccountUser extends PureComponent {
                                         renderErrorFor={this.renderErrorFor}/>
                         </InputGroup>
                     </Row>
-
                     <Row>
                         <InputGroup>
                             <div className="input-group-prepend">
@@ -204,14 +204,13 @@ class FormContactProfileAccountUser extends PureComponent {
                     </Row>
                     <div className="submit text-center">
                         <button className="btn btn-primary btn-lg" type="submit">
-                            <i className="now-ui-icons ui-1_email-85"/> Contactez
+                            <i className="now-ui-icons ui-1_email-85"/> Envoyez
                         </button>
                     </div>
                 </div>
             </Form>
         )
     }
-
 }
 
 export default FormContactProfileAccountUser;

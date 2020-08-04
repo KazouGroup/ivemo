@@ -1,7 +1,8 @@
-import React,{Component} from "react";
-import {Button, FormText} from "reactstrap";
+import React, { PureComponent } from "react";
+import { Button, UncontrolledTooltip } from "reactstrap";
+import { FaUserFriends, FaUsers } from "react-icons/fa";
 
-class ButonFollowerUser extends Component {
+class ButonFollowerUser extends PureComponent {
 
     data_countFormatter(visits_count, precision) {
         const abbrev = ['', 'k', 'M', 'B', 'T'];
@@ -10,43 +11,56 @@ class ButonFollowerUser extends Component {
         const suffix = abbrev[order];
         return (visits_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
+
     render() {
-        const {nameununfollower,nameunfollower,countfollowerusers,followeruser} = this.props;
+        const {nameununfollower, nameunfollower, countfollowerusers, followeruser} = this.props;
         return (
-           <>
-               {$guest ?
-
-                   <button type="button" data-toggle="modal" data-target="#loginModal"
-                      className="btn btn-danger btn-sm" title="Suivre">
-                       <b> {nameunfollower}</b>
-                   </button>
-                   :
-                   <>
-                       {this.props.id !== $userIvemo.id && (
-                           <>
-                               {followeruser ?
-                                   <>
-                                       <Button onClick={() => this.props.unfollowerItem(this.props)}
-                                               className="btn btn-info btn-sm" title="Abonné">
-                                           <b> {nameununfollower}</b>
-                                       </Button>
-                                   </>
-                                   :
-                                   <>
-                                       <Button onClick={() => this.props.followerItem(this.props)}
-                                               className="btn btn-danger btn-sm" title="Suivre">
-                                           <b> {nameunfollower}</b>
-                                       </Button>
-                                   </>
-
-                               }
-                           </>
-                       )}
-
-                   </>
-               }
-           </>
+            <>
+                {$guest ? (
+                        <>
+                            <UncontrolledTooltip placement="bottom" target="unfollowerUser">
+                                Me Suivre
+                            </UncontrolledTooltip>
+                            <button type="button" data-toggle="modal" data-target="#loginModal" id={'unfollowerUser'}
+                                    className="btn btn-danger btn-sm">
+                                <FaUsers/>
+                            </button>
+                        </>
+                    )
+                    :
+                    <>
+                        {this.props.id !== $userIvemo.id && (
+                            <>
+                                {followeruser ?
+                                    <>
+                                        <UncontrolledTooltip placement="bottom" target="followerUser">
+                                            Vous me suivez déjà
+                                        </UncontrolledTooltip>
+                                        <Button onClick={() => this.props.unfollowerItem(this.props)}
+                                                id={'followerUser'}
+                                                className="btn btn-info btn-sm">
+                                            <FaUserFriends/>
+                                        </Button>
+                                    </>
+                                    :
+                                    <>
+                                        <UncontrolledTooltip placement="bottom" target="unfollowerUser">
+                                            Me Suivre
+                                        </UncontrolledTooltip>
+                                        <Button onClick={() => this.props.followerItem(this.props)}
+                                                id={'unfollowerUser'}
+                                                className="btn btn-danger btn-sm">
+                                            <FaUsers/>
+                                        </Button>
+                                    </>
+                                }
+                            </>
+                        )}
+                    </>
+                }
+            </>
         );
     }
 }
+
 export default ButonFollowerUser;

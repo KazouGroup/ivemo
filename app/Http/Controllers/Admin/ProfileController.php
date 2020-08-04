@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\Profile\UpdateRequest;
 use App\Http\Resources\ProfileResource;
-use App\model\profile;
+use App\Model\profile;
 use App\Model\user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;

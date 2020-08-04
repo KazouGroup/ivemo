@@ -1,6 +1,7 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment, PureComponent } from "react";
+import { FaRegEdit, FaRegEyeSlash, FaReply, FaTrashAlt } from "react-icons/fa";
 import { Remarkable } from "remarkable";
-import { Button, Form } from "reactstrap";
+import { Button, Form, UncontrolledTooltip } from "reactstrap";
 import Swal from "sweetalert2";
 import Skeleton from "react-loading-skeleton";
 import ReadMoreAndLess from 'react-read-more-less';
@@ -9,8 +10,9 @@ import AvisuserList from "./inc/AvisuserList";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteavisItem, loadAvisusersforpublic, unactiveavisItem } from "../../../../redux/actions/profileActions";
+import { data } from "jquery";
 
-class ProfileAccountAvisUser extends Component {
+class ProfileAccountAvisUser extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -113,8 +115,8 @@ class ProfileAccountAvisUser extends Component {
 
     unactiveresponseItem(id) {
         Swal.fire({
-            title: 'Confirmer la désactivation?',
-            text: "êtes vous sure de vouloir confirmer cette action?",
+            title: 'Confirmation',
+            text: "Etes-vous sure de vouloir confirmer cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -133,14 +135,14 @@ class ProfileAccountAvisUser extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             //,
-                            message: 'L\'avis à été desactivé avec succès'
+                            message: 'Votre avis a été désactivé avec succès.'
                         },
                         {
                             allow_dismiss: false,
                             type: 'info',
                             placement: {
-                                from: 'bottom',
-                                align: 'center'
+                                from: 'top',
+                                align: 'right'
                             },
                             animate: {
                                 enter: "animate__animated animate__fadeInUp",
@@ -177,14 +179,14 @@ class ProfileAccountAvisUser extends Component {
             .then(() => {
 
                 $.notify({
-                        message: `Votre avis a bien été sauvegardé`
+                        message: `Votre avis a été sauvegardé avec succés.`
                     },
                     {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
-                            from: 'bottom',
-                            align: 'center'
+                            from: 'top',
+                            align: 'right'
                         },
                         animate: {
                             enter: "animate__animated animate__fadeInUp",
@@ -218,14 +220,14 @@ class ProfileAccountAvisUser extends Component {
                 this.setState({description: "", responseavis: false,});
 
                 $.notify({
-                        message: `Votre avis a bien été  sauvegardé`
+                        message: `Votre avis a été sauvegardé avec succés.`
                     },
                     {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
-                            from: 'bottom',
-                            align: 'center'
+                            from: 'top',
+                            align: 'right'
                         },
                         animate: {
                             enter: "animate__animated animate__fadeInUp",
@@ -260,14 +262,14 @@ class ProfileAccountAvisUser extends Component {
                 this.loadItems();
 
                 $.notify({
-                        message: `Mise à jour bien sauvegardé`
+                        message: `Votre avis a été mis à jour avec succés.`
                     },
                     {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
-                            from: 'bottom',
-                            align: 'center'
+                            from: 'top',
+                            align: 'right'
                         },
                         animate: {
                             enter: "animate__animated animate__fadeInUp",
@@ -306,14 +308,14 @@ class ProfileAccountAvisUser extends Component {
                 this.loadItems();
 
                 $.notify({
-                        message: `Mise à jour bien sauvegardé`
+                        message: `Votre avis a été mis à jour avec succés.`
                     },
                     {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
-                            from: 'bottom',
-                            align: 'center'
+                            from: 'top',
+                            align: 'right'
                         },
                         animate: {
                             enter: "animate__animated animate__fadeInUp",
@@ -330,8 +332,8 @@ class ProfileAccountAvisUser extends Component {
 
     deleteresponseItem(id) {
         Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            title: 'Confirmation',
+            text: "Etes-vous sûr de vouloir executer cette action?",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -342,8 +344,6 @@ class ProfileAccountAvisUser extends Component {
             reverseButtons: true,
         }).then((result) => {
             if (result.value) {
-
-
                 const url = route('profile_avis_users_responsedestroy.site', id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
@@ -351,13 +351,13 @@ class ProfileAccountAvisUser extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Votre avis à été supprimé avec succès '
+                            message: 'Votre avis a été supprimé avec succès.'
                         },
                         {
                             allow_dismiss: false,
                             type: 'primary',
                             placement: {
-                                from: 'bottom',
+                                from: 'top',
                                 align: 'right'
                             },
                             animate: {
@@ -405,111 +405,112 @@ class ProfileAccountAvisUser extends Component {
                 <div className="card">
                     <div className="card-body">
                         <div className="card-header text-center">
-                            <h4 className="card-title"><b>Avis</b></h4>
+                            <h4 className="card-title"><b>Mes Avis</b></h4>
                         </div>
                         <div className="row">
                             <div className="col-md-12 ml-auto mr-auto">
                                 <div className="media-area">
 
-                                    {!$guest && (
+                                    {!$guest && !this.state.editavis && !this.state.editavisresponse && (
 
                                         <>
-                                            <h4 className="text-center">
-                                                <small className="text-muted">- Laisser votre avis -</small>
-                                            </h4>
+                                            {($userIvemo.id !== this.props.id) && (
+                                                <>
+                                                    <h4 className="text-center">
+                                                        <small className="text-muted">- Laissez votre avis -</small>
+                                                    </h4>
+                                                    <Form role="form" onSubmit={this.sendavisItem}
+                                                          acceptCharset="UTF-8">
+                                                        <div className="media media-post mt-4">
+                                                            <div className="avatar">
+                                                                {$userIvemo.avatar ?
+                                                                    <img src={$userIvemo.avatar}
+                                                                         style={{height: "40px", width: "80px"}}
+                                                                         alt={$userIvemo.first_name}
+                                                                         className="media-object img-raised rounded"/>
+                                                                    :
+                                                                    <Skeleton circle={false} height={40} width={80}/>}
+                                                            </div>
+                                                            <div className="media-body">
+                                                                <FieldInput name="description" type='textarea'
+                                                                            minLength="3" maxLength="5000"
+                                                                            placeholder=" Laiser votre avis... !"
+                                                                            value={this.state.description}
+                                                                            handleFieldChange={this.handleFieldChange}
+                                                                            hasErrorFor={this.hasErrorFor}
+                                                                            renderErrorFor={this.renderErrorFor}
+                                                                            rows="10"/>
+                                                                <div className="media-footer">
+                                                                    <Button type="submit"
+                                                                            disabled={!this.state.description}
+                                                                            className="btn btn-primary pull-right">
+                                                                        <i className="now-ui-icons ui-1_send"/> Poster
+                                                                    </Button>
+                                                                    {this.state.description.length >= 1 && (
+                                                                        <button onClick={this.cancelCourse}
+                                                                                className="btn btn-secondary pull-right">
+                                                                            <i className="now-ui-icons ui-1_simple-remove"/> Annuller
+                                                                        </button>
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </Form>
+                                                </>
+                                            )}
+                                        </>
+                                    )}
 
-                                            <Form role="form" onSubmit={this.sendavisItem} acceptCharset="UTF-8">
-
-                                                <div className="media media-post">
+                                    {avisusers.length > 0 && (
+                                        <>
+                                            {avisusers.slice(0, visiableavis).map((item) => (
+                                                <div key={item.id} className="media mt-4">
                                                     <div className="avatar">
-                                                        {$userIvemo.avatar ?
-                                                            <img src={$userIvemo.avatar}
+                                                        {item.from.avatar ?
+                                                            <img src={item.from.avatar}
                                                                  style={{height: "40px", width: "80px"}}
-                                                                 alt={$userIvemo.first_name}
+                                                                 alt={item.from.first_name}
                                                                  className="media-object img-raised rounded"/>
                                                             :
                                                             <Skeleton circle={false} height={40} width={80}/>}
                                                     </div>
 
                                                     <div className="media-body">
-
-                                                        <FieldInput name="description" type='textarea' minLength="3"
-                                                                    maxLength="5000"
-                                                                    placeholder=" Laiser votre avis... !"
-                                                                    value={this.state.description}
-                                                                    handleFieldChange={this.handleFieldChange}
-                                                                    hasErrorFor={this.hasErrorFor}
-                                                                    renderErrorFor={this.renderErrorFor} rows="10"/>
-
-                                                        <div className="media-footer">
-
-                                                            <Button type="submit" disabled={!this.state.description}
-                                                                    className="btn btn-primary pull-right">
-                                                                <i className="now-ui-icons ui-1_send"/> Poster
-                                                            </Button>
-                                                            {this.state.description.length >= 1 && (
-                                                                <button onClick={this.cancelCourse}
-                                                                        className="btn btn-secondary pull-right">
-                                                                    <i className="now-ui-icons ui-1_simple-remove"/> Annuller
-                                                                </button>
-                                                            )}
-
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </Form>
-
-                                        </>
-
-                                    )}
-
-                                    {avisusers.length > 0 && (
-                                        <>
-                                            {avisusers.slice(0, visiableavis).map((item) => (
-                                                <>
-                                                    <div className="pull-left ivemoAvisAvatar">
-                                                        {item.from.avatar
-                                                            ?
-                                                            <img src={item.from.avatar}
-                                                                 style={{
-                                                                     height: "40px",
-                                                                     width: "80px"
-                                                                 }}
-                                                                 alt={item.from.first_name}
-                                                                 className="media-object img-raised rounded"/>
-                                                            :
-                                                            <Skeleton circle={false}
-                                                                      height={40}
-                                                                      width={80}/>
-                                                        }
-                                                    </div>
-
-                                                    <div key={item.id} className="media">
-                                                        <div className="media-body">
-
+                                                        <div className="ivemoAvisUserContainer">
                                                             <AvisuserList {...item} />
 
                                                             {!$guest && (
                                                                 <>
-
-                                                                    <div className="media-footer">
+                                                                    <div className="media-footer ivemoAvisUserActions">
                                                                         {$userIvemo.id === item.to.id && (
-                                                                            <Button
-                                                                                onClick={() => this.props.unactiveavisItem(item.id)}
-                                                                                className="btn btn-success btn-neutral pull-right">
-                                                                                <i className="now-ui-icons ui-1_check"/> Masquer
-                                                                            </Button>
+                                                                            <>
+                                                                                <UncontrolledTooltip
+                                                                                    placement="bottom"
+                                                                                    target="userAvisHide">
+                                                                                    Masquer
+                                                                                </UncontrolledTooltip>
+                                                                                <Button id={"userAvisHide"}
+                                                                                        onClick={() => this.props.unactiveavisItem(item.id)}
+                                                                                        className="btn btn-success btn-neutral pull-right">
+                                                                                    <FaRegEyeSlash/>
+                                                                                </Button>
+                                                                            </>
                                                                         )}
-
                                                                         <>
                                                                             {!this.state.editavis && (
-                                                                                <button type="button"
-                                                                                        onClick={() => this.responseavisFromItem(item)}
-                                                                                        className="btn btn-primary btn-neutral pull-right">
-                                                                                    <i className="now-ui-icons ui-1_simple-add"/> Repondre
-                                                                                </button>
+                                                                                <>
+                                                                                    <UncontrolledTooltip
+                                                                                        placement="bottom"
+                                                                                        target="userAvisReply">
+                                                                                        Répondre
+                                                                                    </UncontrolledTooltip>
+                                                                                    <button type="button"
+                                                                                            id={'userAvisReply'}
+                                                                                            onClick={() => this.responseavisFromItem(item)}
+                                                                                            className="btn btn-primary btn-neutral pull-right">
+                                                                                        <FaReply/>
+                                                                                    </button>
+                                                                                </>
                                                                             )}
                                                                         </>
 
@@ -528,217 +529,226 @@ class ProfileAccountAvisUser extends Component {
 
                                                                         {$userIvemo.id === item.from.id && (
                                                                             <>
-                                                                                <Button
-                                                                                    onClick={() => this.props.deleteavisItem(item.id)}
-                                                                                    className="btn btn-danger btn-neutral pull-right">
-                                                                                    <i className="far fa-trash-alt"></i> Supprimer
-                                                                                </Button>
+                                                                                <>
+                                                                                    <UncontrolledTooltip
+                                                                                        placement="bottom"
+                                                                                        target="userAvisDelete">
+                                                                                        Supprimer
+                                                                                    </UncontrolledTooltip>
+                                                                                    <Button id={"userAvisDelete"}
+                                                                                            onClick={() => this.props.deleteavisItem(item.id)}
+                                                                                            className="btn btn-danger btn-neutral pull-right">
+                                                                                        <FaTrashAlt/>
+                                                                                    </Button>
+                                                                                </>
 
                                                                                 {!this.state.editavis && (
-                                                                                    <Button
-                                                                                        onClick={() => this.editavisFromItem(item)}
-                                                                                        className="btn btn-info btn-neutral pull-right">
-                                                                                        <i className="far fa-edit"/> Editer
-                                                                                    </Button>
+                                                                                    <>
+                                                                                        <UncontrolledTooltip
+                                                                                            placement="bottom"
+                                                                                            target="userAvisEdit">
+                                                                                            Editer
+                                                                                        </UncontrolledTooltip>
+                                                                                        <Button id={"userAvisEdit"}
+                                                                                                onClick={() => this.editavisFromItem(item)}
+                                                                                                className="btn btn-info btn-neutral pull-right">
+                                                                                            <FaRegEdit/>
+                                                                                        </Button>
+                                                                                    </>
                                                                                 )}
                                                                             </>
                                                                         )}
-
                                                                     </div>
-
                                                                 </>
                                                             )}
-
-
-                                                            {item.id === itemData.id && (
-
-                                                                <>
-                                                                    {this.state.responseavis && (
-
-                                                                        <Form role="form"
-                                                                              onSubmit={this.sendresponseavisItem}
-                                                                              acceptCharset="UTF-8">
-
-                                                                            <div className="media media-post">
-                                                                                <div className="avatar">
-                                                                                    {$userIvemo.avatar ?
-                                                                                        <img src={$userIvemo.avatar}
-                                                                                             style={{
-                                                                                                 height: "40px",
-                                                                                                 width: "80px"
-                                                                                             }}
-                                                                                             alt={$userIvemo.first_name}
-                                                                                             className="media-object img-raised rounded"/>
-                                                                                        : <Skeleton circle={false}
-                                                                                                    height={40}
-                                                                                                    width={80}/>}
-                                                                                </div>
-
-                                                                                <div className="media-body">
-
-                                                                                    <FieldInput name="description"
-                                                                                                type='textarea'
-                                                                                                minLength="3"
-                                                                                                maxLength="5000"
-                                                                                                placeholder=" Laiser votre avis... !"
-                                                                                                value={this.state.description}
-                                                                                                handleFieldChange={this.handleFieldChange}
-                                                                                                hasErrorFor={this.hasErrorFor}
-                                                                                                renderErrorFor={this.renderErrorFor}
-                                                                                                rows="10"/>
-
-                                                                                    <div className="media-footer">
-
-                                                                                        <Button type="submit"
-                                                                                                className="btn btn-primary pull-right btn-sm">
-                                                                                            <i className="now-ui-icons ui-1_simple-add"/> Répondre
-                                                                                        </Button>
-
-                                                                                        <Button
-                                                                                            onClick={this.cancelresponseCourse}
-                                                                                            className="btn btn-secondary pull-right btn-sm">
-                                                                                            <i className="now-ui-icons ui-1_simple-remove"/> Annuller
-                                                                                        </Button>
-
-                                                                                    </div>
+                                                        </div>
+                                                        {item.id === itemData.id && (
+                                                            <>
+                                                                {this.state.responseavis && (
+                                                                    <Form role="form"
+                                                                          onSubmit={this.sendresponseavisItem}
+                                                                          acceptCharset="UTF-8">
+                                                                        <div className="media media-post mt-4">
+                                                                            <div className="avatar">
+                                                                                {$userIvemo.avatar ?
+                                                                                    <img src={$userIvemo.avatar}
+                                                                                         style={{
+                                                                                             height: "40px",
+                                                                                             width: "80px"
+                                                                                         }}
+                                                                                         alt={$userIvemo.first_name}
+                                                                                         className="media-object img-raised rounded"/>
+                                                                                    :
+                                                                                    <Skeleton circle={false} height={40}
+                                                                                              width={80}/>}
+                                                                            </div>
+                                                                            <div className="media-body">
+                                                                                <FieldInput name="description"
+                                                                                            type='textarea'
+                                                                                            minLength="3"
+                                                                                            maxLength="5000"
+                                                                                            placeholder=" Laiser votre avis... !"
+                                                                                            value={this.state.description}
+                                                                                            handleFieldChange={this.handleFieldChange}
+                                                                                            hasErrorFor={this.hasErrorFor}
+                                                                                            renderErrorFor={this.renderErrorFor}
+                                                                                            rows="10"/>
+                                                                                <div className="media-footer">
+                                                                                    <Button type="submit"
+                                                                                            className="btn btn-primary pull-right btn-sm">
+                                                                                        <i className="now-ui-icons ui-1_simple-add"/> Répondre
+                                                                                    </Button>
+                                                                                    <Button
+                                                                                        onClick={this.cancelresponseCourse}
+                                                                                        className="btn btn-secondary pull-right btn-sm">
+                                                                                        <i className="now-ui-icons ui-1_simple-remove"/> Annuller
+                                                                                    </Button>
                                                                                 </div>
                                                                             </div>
+                                                                        </div>
+                                                                    </Form>
+                                                                )}
 
-                                                                        </Form>
-
-                                                                    )}
-
-                                                                    {this.state.editavis && (
-
-                                                                        <Form role="form"
-                                                                              onSubmit={this.updatedavisItem}
-                                                                              acceptCharset="UTF-8">
-
-                                                                            <div className="media media-post">
-                                                                                <div className="avatar">
-                                                                                    {$userIvemo.avatar ?
-                                                                                        <img src={$userIvemo.avatar}
-                                                                                             style={{
-                                                                                                 height: "40px",
-                                                                                                 width: "80px"
-                                                                                             }}
-                                                                                             alt={$userIvemo.first_name}
-                                                                                             className="media-object img-raised rounded"/>
-                                                                                        : <Skeleton circle={false}
-                                                                                                    height={40}
-                                                                                                    width={80}/>}
-                                                                                </div>
-
-                                                                                <div className="media-body">
-
-                                                                                    <FieldInput name="description"
-                                                                                                type='textarea'
-                                                                                                minLength="3"
-                                                                                                maxLength="5000"
-                                                                                                placeholder=" Laiser votre avis... !"
-                                                                                                value={this.state.description}
-                                                                                                handleFieldChange={this.handleFieldChange}
-                                                                                                hasErrorFor={this.hasErrorFor}
-                                                                                                renderErrorFor={this.renderErrorFor}
-                                                                                                rows="10"/>
-
-                                                                                    <div className="media-footer">
-
-                                                                                        <Button type="submit"
-                                                                                                className="btn btn-info pull-right btn-sm">
-                                                                                            <i className="now-ui-icons ui-1_check"/> Mettre
-                                                                                            à jour
-                                                                                        </Button>
-
-                                                                                        <Button
-                                                                                            onClick={this.cancelresponseCourse}
-                                                                                            className="btn btn-secondary pull-right btn-sm">
-                                                                                            <i className="now-ui-icons ui-1_simple-remove"/> Annuller
-                                                                                        </Button>
-
-                                                                                    </div>
-                                                                                </div>
+                                                                {this.state.editavis && (
+                                                                    <Form role="form" onSubmit={this.updatedavisItem}
+                                                                          acceptCharset="UTF-8">
+                                                                        <div className="media media-post mt-4">
+                                                                            <div className="avatar">
+                                                                                {$userIvemo.avatar ?
+                                                                                    <img src={$userIvemo.avatar}
+                                                                                         style={{
+                                                                                             height: "40px",
+                                                                                             width: "80px"
+                                                                                         }}
+                                                                                         alt={$userIvemo.first_name}
+                                                                                         className="media-object img-raised rounded"/>
+                                                                                    :
+                                                                                    <Skeleton circle={false} height={40}
+                                                                                              width={80}/>}
                                                                             </div>
 
-                                                                        </Form>
+                                                                            <div className="media-body">
+                                                                                <FieldInput name="description"
+                                                                                            type='textarea'
+                                                                                            minLength="3"
+                                                                                            maxLength="5000"
+                                                                                            placeholder=" Laiser votre avis... !"
+                                                                                            value={this.state.description}
+                                                                                            handleFieldChange={this.handleFieldChange}
+                                                                                            hasErrorFor={this.hasErrorFor}
+                                                                                            renderErrorFor={this.renderErrorFor}
+                                                                                            rows="10"/>
 
-                                                                    )}
+                                                                                <div className="media-footer">
+                                                                                    <Button type="submit"
+                                                                                            className="btn btn-info pull-right btn-sm">
+                                                                                        <i className="now-ui-icons ui-1_check"/> Mettre
+                                                                                        à jour
+                                                                                    </Button>
+                                                                                    <Button
+                                                                                        onClick={this.cancelresponseCourse}
+                                                                                        className="btn btn-secondary pull-right btn-sm">
+                                                                                        <i className="now-ui-icons ui-1_simple-remove"/> Annuller
+                                                                                    </Button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Form>
+                                                                )}
+                                                            </>
+                                                        )}
 
+                                                        {/* Ici c'est del début de la récuperation des reponses */}
 
-                                                                </>
-
-                                                            )}
-
-
-                                                            {/* Ici c'est del debut de la recuperation des reponses*/}
-
-                                                            {item.responseavisusers.slice(0, responsevisiableavis).map((lk) => (
-
-                                                                <div key={lk.id} className="media">
-                                                                    <div className="avatar">
-                                                                        {lk.user.avatar ?
-                                                                            <img src={lk.user.avatar}
-                                                                                 style={{height: "40px", width: "80px"}}
-                                                                                 alt={lk.user.first_name}
-                                                                                 className="media-object img-raised rounded"/>
-                                                                            :
-                                                                            <Skeleton circle={false} height={40}
-                                                                                      width={80}/>}
-                                                                    </div>
-                                                                    <div className="media-body">
-
-                                                                        <h5 className="media-heading">
-                                                                            <b> Reponse</b> {lk.user.first_name ||
-                                                                        <Skeleton width={80}/>}</h5>
-                                                                        <ReadMoreAndLess
-                                                                            className="read-more-content"
-                                                                            charLimit={250}
-                                                                            readMoreText="lire plus"
-                                                                            readLessText=""
-                                                                        >
-                                                                            {lk.description || ""}
-                                                                        </ReadMoreAndLess>
-
+                                                        {item.responseavisusers.slice(0, responsevisiableavis).map((lk) => (
+                                                            <div key={lk.id} className="media mt-4">
+                                                                <div className="avatar">
+                                                                    {lk.user.avatar ?
+                                                                        <img src={lk.user.avatar}
+                                                                             style={{height: "40px", width: "80px"}}
+                                                                             alt={lk.user.first_name}
+                                                                             className="media-object img-raised rounded"/>
+                                                                        :
+                                                                        <Skeleton circle={false} height={40}
+                                                                                  width={80}/>}
+                                                                </div>
+                                                                <div className="media-body">
+                                                                    <div className="ivemoAvisUserContainer">
+                                                                        <div className="ivemoAvisUserComment">
+                                                                            <h5 className="media-heading">
+                                                                                {lk.user.first_name ||
+                                                                                <Skeleton width={80}/>}</h5>
+                                                                            <ReadMoreAndLess
+                                                                                className="read-more-content"
+                                                                                charLimit={250}
+                                                                                readMoreText="lire plus"
+                                                                                readLessText=""
+                                                                            >
+                                                                                {lk.description || ""}
+                                                                            </ReadMoreAndLess>
+                                                                        </div>
+                                                                        <small
+                                                                            className="text-muted mt-1">&middot; {moment(lk.user.created_at).format('ll')}</small>
                                                                         {!$guest && (
                                                                             <>
-                                                                                {$userIvemo.id === item.to.id && (
-                                                                                    <Button
-                                                                                        onClick={() => this.unactiveresponseItem(lk.id)}
-                                                                                        className="btn btn-success btn-neutral pull-right">
-                                                                                        <i className="now-ui-icons ui-1_check"/> Masquer
-                                                                                    </Button>
-                                                                                )}
-
-
                                                                                 {$userIvemo.id === lk.user.id && (
                                                                                     <>
-                                                                                        <div className="media-footer">
-                                                                                            <Button
-                                                                                                onClick={() => this.deleteresponseItem(lk.id)}
-                                                                                                className="btn btn-danger btn-neutral pull-right">
-                                                                                                <i className="far fa-trash-alt"></i> Supprimer
-                                                                                            </Button>
+                                                                                        <div className="media-footer ivemoAvisUserActions">
+                                                                                            {$userIvemo.id === item.to.id && (
+                                                                                                <>
+                                                                                                    <UncontrolledTooltip
+                                                                                                        placement="bottom"
+                                                                                                        target="userReplyAvisHide">
+                                                                                                        Masquer
+                                                                                                    </UncontrolledTooltip>
+                                                                                                    <Button
+                                                                                                        id={"userReplyAvisHide"}
+                                                                                                        onClick={() => this.unactiveresponseItem(lk.id)}
+                                                                                                        className="btn btn-success btn-neutral pull-right">
+                                                                                                        <FaRegEyeSlash/>
+                                                                                                    </Button>
+                                                                                                </>
+                                                                                            )}
+                                                                                            <>
+                                                                                                <UncontrolledTooltip
+                                                                                                    placement="bottom"
+                                                                                                    target="userReplyAvisDelete">
+                                                                                                    Supprimer
+                                                                                                </UncontrolledTooltip>
+                                                                                                <Button
+                                                                                                    id={"userReplyAvisDelete"}
+                                                                                                    onClick={() => this.deleteresponseItem(lk.id)}
+                                                                                                    className="btn btn-danger btn-neutral pull-right">
+                                                                                                    <FaTrashAlt/>
+                                                                                                </Button>
+                                                                                            </>
 
                                                                                             {!this.state.editavisresponse && (
-                                                                                                <button
-                                                                                                    onClick={() => this.editavisresponseFromItem(lk)}
-                                                                                                    className="btn btn-info btn-neutral pull-right">
-                                                                                                    <i className="far fa-edit"/> Editer
-                                                                                                </button>
+                                                                                                <>
+                                                                                                    <UncontrolledTooltip
+                                                                                                        placement="bottom"
+                                                                                                        target="userReplyAvisEdit">
+                                                                                                        Editer
+                                                                                                    </UncontrolledTooltip>
+                                                                                                    <button
+                                                                                                        id={'userReplyAvisEdit'}
+                                                                                                        onClick={() => this.editavisresponseFromItem(lk)}
+                                                                                                        className="btn btn-info btn-neutral pull-right">
+                                                                                                        <FaRegEdit/>
+                                                                                                    </button>
+                                                                                                </>
                                                                                             )}
                                                                                         </div>
                                                                                     </>
                                                                                 )}
 
-                                                                                <br/>
                                                                                 {(lk.id === itemData.id && this.state.editavisresponse) && (
                                                                                     <>
                                                                                         <Form role="form"
                                                                                               onSubmit={this.updatedavisresponseItem}
                                                                                               acceptCharset="UTF-8">
-
                                                                                             <div
-                                                                                                className="media media-post">
+                                                                                                className="media media-post mt-4">
                                                                                                 <div className="avatar">
                                                                                                     {$userIvemo.avatar ?
                                                                                                         <img
@@ -757,7 +767,6 @@ class ProfileAccountAvisUser extends Component {
 
                                                                                                 <div
                                                                                                     className="media-body">
-
                                                                                                     <FieldInput
                                                                                                         name="description"
                                                                                                         type='textarea'
@@ -769,59 +778,46 @@ class ProfileAccountAvisUser extends Component {
                                                                                                         hasErrorFor={this.hasErrorFor}
                                                                                                         renderErrorFor={this.renderErrorFor}
                                                                                                         rows="10"/>
-
                                                                                                     <div
                                                                                                         className="media-footer">
-
                                                                                                         <Button
                                                                                                             type="submit"
                                                                                                             className="btn btn-info pull-right btn-sm">
                                                                                                             <i className="now-ui-icons ui-1_check"/> Mettre
                                                                                                             à jour
                                                                                                         </Button>
-
                                                                                                         <Button
                                                                                                             onClick={this.cancelresponseCourse}
                                                                                                             className="btn btn-secondary pull-right btn-sm">
                                                                                                             <i className="now-ui-icons ui-1_simple-remove"/> Annuller
                                                                                                         </Button>
-
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
-
                                                                                         </Form>
-
                                                                                     </>
                                                                                 )}
-
                                                                             </>
                                                                         )}
-
-
                                                                     </div>
                                                                 </div>
+                                                            </div>
+                                                        ))}
 
-                                                            ))}
-
-                                                            {responsevisiableavis < item.responseavisusers.length && (
-                                                                <div className="row">
-                                                                    <div
-                                                                        className="col-md-4 ml-auto mr-auto text-center">
-                                                                        <a style={{cursor: "pointer"}}
-                                                                           onClick={this.loadmoresresponseItem}
-                                                                           className="text-info">
-                                                                            <b>Voir plus de reponses</b>
-                                                                        </a>
-                                                                    </div>
+                                                        {responsevisiableavis < item.responseavisusers.length && (
+                                                            <div className="row">
+                                                                <div className="col-md-4 ml-auto mr-auto text-center">
+                                                                    <a style={{cursor: "pointer"}}
+                                                                       onClick={this.loadmoresresponseItem}
+                                                                       className="text-info">
+                                                                        <b>Voir plus de reponses</b>
+                                                                    </a>
                                                                 </div>
-                                                            )}
-
-                                                            {/* Fin */}
-
-                                                        </div>
+                                                            </div>
+                                                        )}
+                                                        {/* Fin */}
                                                     </div>
-                                                </>
+                                                </div>
                                             ))}
                                         </>
                                     )}
@@ -836,19 +832,14 @@ class ProfileAccountAvisUser extends Component {
                                             </div>
                                         </div>
                                     )}
-
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
-
             </Fragment>
-
         )
     }
-
 }
 
 ProfileAccountAvisUser.propTypes = {

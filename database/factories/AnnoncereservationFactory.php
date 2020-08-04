@@ -40,7 +40,8 @@ $factory->define(annoncereservation::class, function (Faker $faker) {
         'categoryannoncereservation_id' => categoryannoncereservation::inRandomOrder()->first()->id,
         'periodeannonce_id' => periodeannonce::inRandomOrder()->first()->id,
         'city_id' => city::where(['status' => 1])->inRandomOrder()->first()->id,
-        'user_id' => user::inRandomOrder()->first()->id,
+        //'user_id' => user::inRandomOrder()->first()->id,
+        'user_id' => mt_rand(1, 5),
         'created_at' => $faker->dateTime,
     ];
 });

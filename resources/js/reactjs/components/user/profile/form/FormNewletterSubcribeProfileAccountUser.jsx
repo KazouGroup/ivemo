@@ -48,7 +48,7 @@ class FormNewletterSubcribeProfileAccountUser extends PureComponent {
         dyaxios.post(url, item)
             .then(() => {
                 $.notify({
-                        message: `Merci de vous être abonné à ma newsletter`
+                        message: `Merci de vous être abonné à ma newsletter.`
                     },
                     {
                         allow_dismiss: false,

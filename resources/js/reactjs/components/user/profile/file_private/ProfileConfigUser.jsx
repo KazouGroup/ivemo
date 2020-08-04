@@ -306,7 +306,7 @@ class ProfileConfigUser extends PureComponent {
                                                                 </div>
                                                                 <input id='birthdate'
                                                                        type='date'
-                                                                       value={this.state.birthdate}
+                                                                       value={this.state.birthdate || ''}
                                                                        className={`form-control form-control-date ${this.hasErrorFor('birthdate') ? 'is-invalid' : ''}`}
                                                                        onChange={this.handleFieldChange}
                                                                        placeholder="Date de Naissance"
@@ -323,7 +323,7 @@ class ProfileConfigUser extends PureComponent {
                                                                         className={`form-control ${this.hasErrorFor('city_id') ? 'is-invalid' : ''}`}
                                                                         onChange={this.handleFieldChange} name="city_id"
                                                                         required="required">
-                                                                    <option disabled hidden selected value="">Votre
+                                                                    <option disabled hidden defaultValue value="">Votre
                                                                         ville
                                                                     </option>
                                                                     {cities.map((item) => (
@@ -342,7 +342,7 @@ class ProfileConfigUser extends PureComponent {
                                                                         className={`form-control ${this.hasErrorFor('categoryprofile_id') ? 'is-invalid' : ''}`}
                                                                         onChange={this.handleFieldChange}
                                                                         name="categoryprofile_id" required="required">
-                                                                    <option disabled hidden selected value="">Pourquoi
+                                                                    <option disabled hidden defaultValue value="">Pourquoi
                                                                         êtes-vous sur
                                                                         Ivemo
                                                                     </option>

@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Link, NavLink, withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
 
 class NavLinkPublicAnnonceUser extends PureComponent {
@@ -14,7 +14,7 @@ class NavLinkPublicAnnonceUser extends PureComponent {
                             <tr>
                                 <td>
                                     <NavLink to={`/pro/${this.props.slug}/annonces_locations/`}>
-                                        Annones <b>locations</b>
+                                        Annonces <b>locations</b>
                                     </NavLink>
                                 </td>
                                 <td className="text-right"> {this.props.annoncelocations_count} {this.props.annoncelocations_count > 1 ? "annonces" : "annonce"}</td>
@@ -22,7 +22,7 @@ class NavLinkPublicAnnonceUser extends PureComponent {
                             <tr>
                                 <td>
                                     <NavLink to={`/pro/${this.props.slug}/annonces_reservations/`}>
-                                        Annonces <b>reservations</b>
+                                        Annonces <b>réservations</b>
                                     </NavLink>
                                 </td>
                                 <td className="text-right"> {this.props.annoncereservations_count} {this.props.annoncereservations_count > 1 ? "annonces" : "annonce"}</td>
@@ -39,13 +39,9 @@ class NavLinkPublicAnnonceUser extends PureComponent {
                         </table>
                     </div>
                 </div>
-
             </>
-
-
-
-
         )
     }
 }
+
 export default withRouter(NavLinkPublicAnnonceUser);
