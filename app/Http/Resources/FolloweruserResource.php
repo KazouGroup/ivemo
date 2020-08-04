@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FollowerResource extends JsonResource
+class FolloweruserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,8 +16,12 @@ class FollowerResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'leader_id' => $this->leader_id,
-            'follower_id' => $this->follower_id,
+            'user_id' => $this->user_id,
+            'member_id' => $this->member_id,
+            'user' => $this->user,
+            'member' => $this->member,
+            'statusOnline' => $this->isOnline(),
+            'followeruser' => $this->user->followeruser(),
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
         ];

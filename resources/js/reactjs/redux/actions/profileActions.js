@@ -4,6 +4,8 @@ import {
     UNACTIVE_AVISUSER,
     FOLLOWERUSER_ADD,
     FOLLOWERUSER_REMOVE,
+    GET_FOLLOWINGSUSERS,
+    GET_FOLLOWERSUSERS,
     DELETE_AVISUSER,
 } from "./types";
 
@@ -16,6 +18,30 @@ export const loadProfileusersforpublic = (props) => dispatch => {
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_PROFILE_USER_FOR_PUBLIC,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loadFollowersusers = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let url = route('api.public_profile_followers_site',[itemuser]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_FOLLOWERSUSERS,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loadFollowingsusers = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let url = route('api.public_profile_following_user',[itemuser]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_FOLLOWINGSUSERS,
                 payload: response.data
             })
         ).catch(error => console.error(error));

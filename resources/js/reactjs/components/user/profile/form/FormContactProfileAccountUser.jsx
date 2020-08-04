@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {Button, Form, Input, InputGroup, Row, UncontrolledTooltip} from 'reactstrap';
 import FieldInput from "../../../inc/vendor/FieldInput";
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import ButonFollowerUser from "../../../inc/vendor/ButonFollowerUser";
 import moment from "moment";
@@ -130,7 +130,7 @@ class FormContactProfileAccountUser extends PureComponent {
                                     <small
                                         className="d-block text-muted">Membre
                                         depuis {moment(this.props.created_at).format('LL')}</small>
-                                    <a href={`/pro/${this.props.slug}/`}><b>{this.data_countfollowFormatter(this.props.countfollowerusers || "")} {this.props.countfollowerusers > 1 ? "abonnés" : "abonné"}</b></a> | <a href="#"><b>{this.data_countfollowingFormatter(this.props.countfollowingusers || "")} {this.props.countfollowingusers > 1 ? "abonnements" : "abonnement"}</b></a>
+                                    <Link to={this.props.status_profile ? `/pro/${this.props.slug}/followers/`:`/user/${this.props.slug}/followers/`}><b>{this.data_countfollowFormatter(this.props.countfollowerusers || "")} {this.props.countfollowerusers > 1 ? "abonnés" : "abonné"}</b></Link> | <Link to={this.props.status_profile ? `/pro/${this.props.slug}/following/`:`/user/${this.props.slug}/following/`} ><b>{this.data_countfollowingFormatter(this.props.countfollowingusers || "")} {this.props.countfollowingusers > 1 ? "abonnements" : "abonnement"}</b></Link>
                                 </span>
                             </div>
                         </div>

@@ -1,0 +1,178 @@
+import React, { Component } from "react";
+import { Link, NavLink } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import { Button } from "reactstrap";
+import NavUserSite from "../../../inc/user/NavUserSite";
+import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
+import Swal from "sweetalert2";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {
+    loadProfileusersforpublic,
+    loadFollowingsusers,
+    unfollowerItem,followerItem,
+} from "../../../../redux/actions/profileActions";
+import ButonFollowerUser from "../../../inc/vendor/ButonFollowerUser";
+import HelmetSite from "../../../inc/user/HelmetSite";
+import UserFollowList from "./inc/UserFollowList";
+import UserFollowSkeleton from "../../../inc/user/UserFollowSkeleton";
+const abbrev = ['', 'k', 'M', 'B', 'T'];
+
+class PublicUserFollowings extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            visiable: 20,
+        };
+
+        this.loadmoresItem = this.loadmoresItem.bind(this);
+    }
+
+    loadmoresItem() {
+        this.setState((old) => {
+            return { visiable: old.visiable + 10 }
+        })
+    }
+
+    loadItems(){
+        this.props.loadProfileusersforpublic(this.props);
+        this.props.loadFollowingsusers(this.props);
+    }
+
+   // Lifecycle Component Method
+    componentDidMount() {
+        this.loadItems();
+    }
+
+
+    data_countfollowFormatter(countfollowerusers, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countfollowerusers)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
+        const suffix = abbrev[order];
+        return (countfollowerusers / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+
+    data_countfollowingFormatter(countfollowingusers, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countfollowingusers)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
+        const suffix = abbrev[order];
+        return (countfollowingusers / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+
+
+    render() {
+        const {users,useremploymentPublick} = this.props;
+        const mapUsers = users.length >= 0 ? (
+            users.map(item => {
+                return(
+
+                    <UserFollowList key={item.id} {...item} />
+                )
+            })
+        ):(
+            <UserFollowSkeleton />
+        );
+        return (
+            <>
+                <HelmetSite title={`Personnes suivies par ${useremploymentPublick.first_name || 'Profile'} - ${$name_site}`}/>
+
+                <div className="about-us sidebar-collapse">
+
+
+                    <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
+                        <NavUserSite />
+                    </nav>
+
+                    <div className="wrapper">
+                        <div className="page-header page-header-mini">
+                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}/>
+
+                            {useremploymentPublick.first_name && (
+
+                                <div className="content-center">
+
+                                    <h2 className="title">{useremploymentPublick.first_name}</h2>
+
+                                    <div className="text-center">
+
+                                        <ButonFollowerUser {...this.props} {...useremploymentPublick}
+                                                           unfollowerItem={this.props.unfollowerItem}
+                                                           followerItem={this.props.followerItem}
+                                                           nameunfollower={`Suivre`}
+                                                           nameununfollower={`Abonné`}/>
+                                    </div>
+                                    <Link to={useremploymentPublick.status_profile ? `/pro/${useremploymentPublick.slug}/followers/`:`/user/${useremploymentPublick.slug}/followers/`} className="text-white"><b>{this.data_countfollowFormatter(useremploymentPublick.countfollowerusers || "")} {useremploymentPublick.countfollowerusers > 1 ? "Abonnés" : "Abonné"}</b></Link> | <Link to={useremploymentPublick.status_profile ? `/pro/${useremploymentPublick.slug}/following/`:`/user/${useremploymentPublick.slug}/following/`} className="text-white"><b>{this.data_countfollowingFormatter(useremploymentPublick.countfollowingusers || "")} {useremploymentPublick.countfollowingusers > 1 ? "Abonnements" : "Abonnement"}</b></Link>
+                                    <br/>
+                                    {useremploymentPublick.status_profile === 0 ?
+                                        <>
+                                            <Link to={`/user/${useremploymentPublick.slug}/`} className="text-white">
+                                                <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
+                                            </Link>
+                                        </>
+
+                                        :
+                                        <>
+                                            <Link to={`/pro/${useremploymentPublick.slug}/`} className="text-white">
+                                                <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
+                                            </Link>
+                                        </>
+                                    }
+
+                                </div>
+
+                            )}
+
+                        </div>
+
+                        <div className="main main-raised">
+                            <div className="container">
+                                <div className="row">
+                                </div>
+                            </div>
+
+                            <div className="container">
+                                <br />
+                                <div className="row">
+
+                                    <div className="col-lg-8 col-md-12 mx-auto">
+
+
+                                        {mapUsers}
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <FooterBigUserSite />
+
+                    </div>
+                </div>
+            </>
+
+        )
+    }
+}
+PublicUserFollowings.propTypes = {
+    loadProfileusersforpublic: PropTypes.func.isRequired,
+    loadFollowingsusers: PropTypes.func.isRequired,
+};
+
+const mapStoreToProps = store => ({
+    useremploymentPublick: store.profile.profiluser,
+    users: store.profile.userfollowers
+
+
+});
+
+export default connect(mapStoreToProps,
+    {
+        loadProfileusersforpublic,
+        loadFollowingsusers,
+        unfollowerItem,followerItem,
+    }
+)(PublicUserFollowings);

@@ -4,6 +4,7 @@ import produce from "immer"
 
 
 const initialState = {
+    userfollowers: {user:[],member:[]},
     profiluser: {profile:[]},
     avisusers: {to:[],from:[],responseavisusers:{user:[]}},
 };
@@ -11,6 +12,14 @@ const initialState = {
 
 export default produce((draft, action = {}) => {
         switch (action.type) {
+            case 'GET_FOLLOWERSUSERS':
+                draft.userfollowers = action.payload;
+                return;
+
+            case 'GET_FOLLOWINGSUSERS':
+                draft.userfollowers = action.payload;
+                return;
+
             case 'GET_PROFILE_USER_FOR_PUBLIC':
                 draft.profiluser = action.payload;
                 return;

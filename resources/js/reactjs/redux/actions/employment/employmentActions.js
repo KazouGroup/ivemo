@@ -10,7 +10,7 @@ import {
     GET_EMPLOYEMENT_INTERESSE,
     UNACTIVE_EMPLOYEMENT,
     DELETE_EMPLOYEMENT,
-    GET_PROFILE_USER_FOR_PUBLIC,
+    GET_PROFILE_USER_FOR_PUBLIC, FOLLOWERUSER_ADD, FOLLOWERUSER_REMOVE,
 } from "../types";
 
 import Swal from "sweetalert2";
@@ -82,6 +82,9 @@ export const loademploymentbyuserpublic = (props) => dispatch => {
         ).catch(error => console.error(error));
 };
 
+/*
+Ici je fais des abonnement a le section dans de cas c'est employment
+*/
 export const   subscribeItem = props => dispatch => {
 
     const url = route('employments_subscribe.subscribe', [props.id]);
@@ -107,6 +110,53 @@ export const  unsubscribeItem = props => dispatch => {
         }
     ).catch(error => console.error(error));
 };
+/*
+End
+*/
+
+/*
+Avec le code ci dessous je recupere m'abonne à l'utilisateur
+*/
+export const followerItem = (props) => dispatch => {
+
+
+    let url = route('users_followeuser.follow',[props.id]);
+    dyaxios.post(url)
+        .then(() => dispatch({
+                type: FOLLOWERUSER_ADD,
+                payload: props.id
+            })
+        ).catch(error => console.error(error));
+};
+
+export const unfollowerItem = (props) => dispatch => {
+
+    Swal.fire({
+        text:  "Se désabonner de "+props.first_name+" ?",
+        buttonsStyling: false,
+        confirmButtonClass: "btn btn-info",
+        cancelButtonClass: 'btn btn-danger',
+        confirmButtonText: 'Oui, se désabonner',
+        cancelButtonText: 'Non, annuller',
+        showCancelButton: true,
+        reverseButtons: true,
+    }).then((result) => {
+        if (result.value) {
+
+            let url = route('users_followeuser.follow',[props.id]);
+            dyaxios.post(url)
+                .then(() => dispatch({
+                        type: FOLLOWERUSER_REMOVE,
+                        payload: props.id
+                    })
+                ).catch(error => console.error(error));
+        }
+    })
+};
+/*
+End
+*/
+
 
 export const favoriteItem = props => dispatch => {
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\FolloweruserResource;
+use App\Http\Resources\UserResource;
 use App\Model\abonne\subscribemployment;
 use App\Model\user;
 use Illuminate\Http\Request;
@@ -18,7 +20,52 @@ class FolloweruserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['only' => ['followeruser']]);
+    }
+
+
+    public function apifilfollowers(user $user)
+    {
+        $users =  FolloweruserResource::collection($user->followerusers()->with('user','member')
+            ->orderByDesc('created_at')->get());
+
+        return response()->json($users, 200);
+    }
+
+    public function apifilfollowing(user $user)
+    {
+        $users =  FolloweruserResource::collection($user->followingusers()->with('user','member')
+            ->orderByDesc('created_at')->get());
+
+        return response()->json($users, 200);
+    }
+
+	public function profilfollowers(user $user)
+    {
+        return view('user.followeruser.followers',[
+            'user' => $user,
+        ]);
+    }
+
+	public function userprofilfollowers(user $user)
+    {
+        return view('user.followeruser.followers',[
+            'user' => $user,
+        ]);
+    }
+
+	public function profilfollowing(user $user)
+    {
+        return view('user.followeruser.following',[
+            'user' => $user,
+        ]);
+    }
+
+	public function userprofilfollowing(user $user)
+    {
+        return view('user.followeruser.following',[
+            'user' => $user,
+        ]);
     }
 
 
@@ -28,7 +75,6 @@ class FolloweruserController extends Controller
 
         auth()->user()->putfollowerusers()->toggle($user->id);
 
-
-		return response('Success ',Response::HTTP_ACCEPTED);
-	}
+        return response('Success ',Response::HTTP_ACCEPTED);
+    }
 }

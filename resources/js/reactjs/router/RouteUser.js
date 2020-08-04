@@ -155,6 +155,8 @@ import ForumcategoryforumSite from "../components/user/forum/ForumcategoryforumS
 import ForumCreate from "../components/user/forum/treatement/ForumCreate";
 import ForumEdit from "../components/user/forum/treatement/ForumEdit";
 import PrivateUserForum from "../components/user/profile/forum/private/PrivateUserForum";
+import PublicUserFollowers from "../components/user/profile/followers/PublicUserFollowers";
+import PublicUserFollowings from "../components/user/profile/followers/PublicUserFollowings";
 
 
 const RouteUser = props => (
@@ -227,6 +229,13 @@ const RouteUser = props => (
           <Route exact path="/pro/:user/annonces_ventes/" component={PublicUserAnnonceVentes}/>
 
           <Route exact path="/pro/:user/employments/" component={PublicUserEmployments}/>
+
+
+          <Route exact path="/pro/:user/following/" component={PublicUserFollowings}/>
+          <Route exact path="/user/:user/following/" component={PublicUserFollowings}/>
+
+          <Route exact path="/pro/:user/followers/" component={PublicUserFollowers}/>
+          <Route exact path="/user/:user/followers/" component={PublicUserFollowers}/>
 
           <Route exact path="/pro/:user/blogs/annonce_locations/" component={PublicUserBlogannonceLocation}/>
           <Route exact path="/pro/:user/blogs/annonce_reservations/" component={PublicUserBlogannonceReservation}/>

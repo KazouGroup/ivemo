@@ -18,14 +18,16 @@ import EmployementList from "../../../employment/inc/EmployementList";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {
-    subscribeItem,
-    unsubscribeItem,
     deleteItem,
     favoriteItem,
     loademploymentbyuserpublic,loadProfileusersforpublic, unactiveItem,
-    unfavoriteItem
+    unfavoriteItem,
+    unsubscribeItem,subscribeItem,
+    unfollowerItem,followerItem,
 } from "../../../../../redux/actions/employment/employmentActions";
-
+import ButonMiniSubscribedEmployment from "../../../../inc/vendor/ButonMiniSubscribedEmployment";
+import ButonFollowerUser from "../../../../inc/vendor/ButonFollowerUser";
+const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 class PublicUserEmployments extends Component {
     constructor(props) {
@@ -52,6 +54,22 @@ class PublicUserEmployments extends Component {
     componentDidMount() {
         this.loadItems();
     }
+
+
+    data_countfollowFormatter(countfollowerusers, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countfollowerusers)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
+        const suffix = abbrev[order];
+        return (countfollowerusers / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+
+    data_countfollowingFormatter(countfollowingusers, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countfollowingusers)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
+        const suffix = abbrev[order];
+        return (countfollowingusers / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+
 
     render() {
         const {employments,useremploymentPublick} = this.props;
@@ -89,12 +107,31 @@ class PublicUserEmployments extends Component {
 
                                 <div className="content-center">
 
-                                    <h1 className="title">{useremploymentPublick.first_name}</h1>
-                                    {useremploymentPublick.status_profile === 0 ?
+                                    <h2 className="title">{useremploymentPublick.first_name}</h2>
 
-                                        <Link to={`/user/${useremploymentPublick.slug}/`} className="text-white">
-                                            <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
-                                        </Link>
+                                    <div className="text-center">
+
+
+                                        {useremploymentPublick.followeruser &&(
+                                            <ButonMiniSubscribedEmployment {...this.props} {...useremploymentPublick}
+                                                                           unsubscribeItem={this.props.unsubscribeItem}
+                                                                           subscribeItem={this.props.subscribeItem}/>
+                                        )}
+
+                                        <ButonFollowerUser {...this.props} {...useremploymentPublick}
+                                                           unfollowerItem={this.props.unfollowerItem}
+                                                           followerItem={this.props.followerItem}
+                                                           nameunfollower={`Suivre`}
+                                                           nameununfollower={`Abonné`}/>
+                                    </div>
+                                    <Link to={useremploymentPublick.status_profile ? `/pro/${useremploymentPublick.slug}/followers/`:`/user/${useremploymentPublick.slug}/followers/`} className="text-white"><b>{this.data_countfollowFormatter(useremploymentPublick.countfollowerusers || "")} {useremploymentPublick.countfollowerusers > 1 ? "Abonnés" : "Abonné"}</b></Link> | <Link to={useremploymentPublick.status_profile ? `/pro/${useremploymentPublick.slug}/following/`:`/user/${useremploymentPublick.slug}/following/`} className="text-white"><b>{this.data_countfollowingFormatter(useremploymentPublick.countfollowingusers || "")} {useremploymentPublick.countfollowingusers > 1 ? "Abonnements" : "Abonnement"}</b></Link>
+                                    <br/>
+                                    {useremploymentPublick.status_profile === 0 ?
+                                        <>
+                                            <Link to={`/user/${useremploymentPublick.slug}/`} className="text-white">
+                                                <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
+                                            </Link>
+                                        </>
 
                                         :
                                         <>
@@ -105,14 +142,6 @@ class PublicUserEmployments extends Component {
                                             {useremploymentPublick.employments_count > 0 &&(
                                                 <h5><b>{useremploymentPublick.employments_count}</b> {useremploymentPublick.employments_count > 1 ? "annonces" : "annonce"} posté par {useremploymentPublick.first_name} sur les emploies et services</h5>
                                             )}
-
-                                            <div className="text-center">
-                                                <ButonSubscribedEmployment namesubscribed={`Recevoir toutes les notifications`} nameunsubscribed={`Ne plus recevoir les notifications`}
-                                                                           titleToltipeSubscribed={`Abonnez vous pour recevoir tous annonces des emploies et services postées par`}
-                                                                           titleToltipeUnsubscribed={`Ne plus etre notifier des annonces des emploies et services postées par`}
-                                                                           subscribeItem={this.props.subscribeItem} unsubscribeItem={this.props.unsubscribeItem}
-                                                                           {...useremploymentPublick}/>
-                                            </div>
                                         </>
                                     }
 
@@ -330,7 +359,8 @@ export default connect(mapStoreToProps,
         loademploymentbyuserpublic,
         loadProfileusersforpublic,
         favoriteItem,unfavoriteItem,
-        subscribeItem,unsubscribeItem,
         deleteItem,unactiveItem,
+        unsubscribeItem,subscribeItem,
+        unfollowerItem,followerItem,
     }
 )(PublicUserEmployments);
