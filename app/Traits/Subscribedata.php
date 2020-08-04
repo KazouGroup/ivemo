@@ -114,6 +114,11 @@ trait Subscribedata
         return $this->hasMany(followeruser::class, 'member_id');
     }
 
+    public function followingusers()
+    {
+        return $this->hasMany(followeruser::class, 'user_id');
+    }
+
 
     public function putfollowerusers()
     {

@@ -6,7 +6,7 @@ class FormComment extends Component {
 
 
     render() {
-        const {namesubmit,value,cancelresponseCourse,renderErrorFor,hasErrorFor,handleFieldChange} = this.props;
+        const {namesubmit,value,disabled,cancelresponseCourse,renderErrorFor,hasErrorFor,handleFieldChange} = this.props;
         return (
            <>
                {$guest ?
@@ -71,7 +71,7 @@ class FormComment extends Component {
                                        renderErrorFor={renderErrorFor} rows="4"/>
 
                            <div className="media-footer">
-                               <Button type="submit"
+                               <Button type="submit" disabled={disabled}
                                        className="btn btn-primary pull-right btn-sm">
                                    <b>{namesubmit}</b>
                                </Button>

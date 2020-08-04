@@ -448,7 +448,7 @@ class ProfileAccountAvisUser extends Component {
                                                                 <i className="now-ui-icons ui-1_send" /> Poster
                                                             </Button>
                                                             {this.state.description.length >= 1 && (
-                                                                <button onClick={this.cancelCourse}
+                                                                <button type="button"
                                                                     className="btn btn-secondary pull-right">
                                                                     <i className="now-ui-icons ui-1_simple-remove" /> Annuller
                                                                 </button>
@@ -472,7 +472,7 @@ class ProfileAccountAvisUser extends Component {
                                            {avisusers.slice(0, visiableavis).map((item) => (
 
                                                <div key={item.id} className="media">
-                                                   
+
                                                    <div className="avatar">
                                                                    {item.from.avatar ?
                                                                        <img src={item.from.avatar}

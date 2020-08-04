@@ -60,7 +60,6 @@ class AnnoncelocationInteresseList extends Component {
                                                                     </button>
                                                                 </>
                                                             )}
-
                                                             <NavLink to={`/annonce_location/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
                                                                 <i className="now-ui-icons ui-2_settings-90"/>
                                                             </NavLink>
@@ -68,9 +67,6 @@ class AnnoncelocationInteresseList extends Component {
                                                     )}
                                                 </>
                                             )}
-                                            <Button className="btn btn-sm btn-icon btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
-                                                <i className="now-ui-icons tech_mobile" />
-                                            </Button>
                                             <NavLink to={`/annonces_locations/${this.props.annoncetype.slug}/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.slug}/`} className="btn btn-sm btn-icon btn-primary">
                                                 <i className="now-ui-icons location_pin" />
                                             </NavLink>

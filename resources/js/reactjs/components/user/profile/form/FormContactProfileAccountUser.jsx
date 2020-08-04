@@ -1,10 +1,12 @@
-import React, { PureComponent } from "react";
-import { Button, Form, Input, InputGroup, Row, UncontrolledTooltip } from 'reactstrap';
+import React, {PureComponent} from "react";
+import {Button, Form, Input, InputGroup, Row, UncontrolledTooltip} from 'reactstrap';
 import FieldInput from "../../../inc/vendor/FieldInput";
-import { NavLink } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import ButonFollowerUser from "../../../inc/vendor/ButonFollowerUser";
 import moment from "moment";
+
+const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 class FormContactProfileAccountUser extends PureComponent {
     constructor(props) {
@@ -94,6 +96,20 @@ class FormContactProfileAccountUser extends PureComponent {
         //
     }
 
+    data_countfollowFormatter(countfollowerusers, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countfollowerusers)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
+        const suffix = abbrev[order];
+        return (countfollowerusers / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+
+    data_countfollowingFormatter(countfollowingusers, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countfollowingusers)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
+        const suffix = abbrev[order];
+        return (countfollowingusers / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+
     render() {
         return (
             <Form role="form" id="contact-form" onSubmit={this.sendmessageItem} acceptCharset="UTF-8">
@@ -109,11 +125,13 @@ class FormContactProfileAccountUser extends PureComponent {
                                 </NavLink>
                                 : <Skeleton circle={false} height={40} width={80}/>}
                             <div className="mx-3">
-                                <a href={`/pro/${this.props.slug}/`}
+                                <span
                                    className="text-dark font-weight-600 text-sm"><b>{this.props.first_name}</b>
                                     <small
-                                        className="d-block text-muted">Membre depuis {moment(this.props.created_at).format('LL')}</small>
-                                </a>
+                                        className="d-block text-muted">Membre
+                                        depuis {moment(this.props.created_at).format('LL')}</small>
+                                    <a href={`/pro/${this.props.slug}/`}><b>{this.data_countfollowFormatter(this.props.countfollowerusers || "")} {this.props.countfollowerusers > 1 ? "abonnés" : "abonné"}</b></a> | <a href="#"><b>{this.data_countfollowingFormatter(this.props.countfollowingusers || "")} {this.props.countfollowingusers > 1 ? "abonnements" : "abonnement"}</b></a>
+                                </span>
                             </div>
                         </div>
                         <div className="text-right ml-auto">
@@ -128,7 +146,6 @@ class FormContactProfileAccountUser extends PureComponent {
                                     </Button>
                                 </>
                             )}
-
 
 
                             <ButonFollowerUser {...this.props}

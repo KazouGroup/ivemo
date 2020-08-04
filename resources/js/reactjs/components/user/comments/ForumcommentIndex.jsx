@@ -409,7 +409,7 @@ class ForumcommentIndex extends PureComponent {
                                 {!editcomment && !responsecomment && !editresponsecomment && (
                                     <Form onSubmit={this.sendcommentItem} acceptCharset="UTF-8">
 
-                                        <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
+                                        <FormComment value={this.state.body} disabled={!this.state.body} cancelresponseCourse={this.cancelresponseCourse}
                                                      renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
                                                      handleFieldChange={this.handleFieldChange} namesubmit={`POSTER MON COMMENTAIRE`}/>
 
@@ -428,7 +428,7 @@ class ForumcommentIndex extends PureComponent {
 
                                                     <Form onSubmit={this.updatecommentItem} acceptCharset="UTF-8">
 
-                                                        <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
+                                                        <FormComment value={this.state.body} disabled={!this.state.body} cancelresponseCourse={this.cancelresponseCourse}
                                                                      renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
                                                                      handleFieldChange={this.handleFieldChange} namesubmit={`METTRE À JOUR`}/>
 
@@ -456,7 +456,7 @@ class ForumcommentIndex extends PureComponent {
 
                                                             <Form onSubmit={this.sendresponsecommentItem} acceptCharset="UTF-8">
 
-                                                                <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
+                                                                <FormComment value={this.state.body} disabled={!this.state.body} cancelresponseCourse={this.cancelresponseCourse}
                                                                              renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
                                                                              handleFieldChange={this.handleFieldChange} namesubmit={`POSTER UNE RÉPONSE`}/>
 
@@ -540,7 +540,7 @@ class ForumcommentIndex extends PureComponent {
 
                                                             <Form onSubmit={this.updateresponsecommentItem} acceptCharset="UTF-8">
 
-                                                                <FormComment value={this.state.body} cancelresponseCourse={this.cancelresponseCourse}
+                                                                <FormComment value={this.state.body} disabled={!this.state.body} cancelresponseCourse={this.cancelresponseCourse}
                                                                              renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
                                                                              handleFieldChange={this.handleFieldChange} namesubmit={`METTRE À JOUR`}/>
 

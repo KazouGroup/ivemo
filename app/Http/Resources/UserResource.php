@@ -44,6 +44,7 @@ class UserResource extends JsonResource
 
             'subscribedforum' => $this->subscribeforum(),
 
+            'countfollowingusers' => $this->followingusers()->count(),
             'countfollowerusers' => $this->followerusers()->count(),
             'followeruser' => $this->followeruser(),
 
