@@ -17,6 +17,9 @@ import ButonFollowerUser from "../../../inc/vendor/follow/ButonFollowerUser";
 import HelmetSite from "../../../inc/user/HelmetSite";
 import UserFollowingsList from "./inc/UserFollowingsList";
 import UserFollowSkeleton from "../../../inc/user/UserFollowSkeleton";
+import ButonFollowingTableUser from "../../../inc/vendor/follow/ButonFollowingTableUser";
+import Skeleton from "react-loading-skeleton";
+import NavprofileFollowesusers from "./inc/NavprofileFollowesusers";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 class PublicUserFollowings extends Component {
@@ -82,54 +85,20 @@ class PublicUserFollowings extends Component {
                 <div className="about-us sidebar-collapse">
 
 
-                    <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
+                    <nav className="navbar navbar-expand-lg bg-primary">
                         <NavUserSite />
                     </nav>
 
                     <div className="wrapper">
-                        <div className="page-header page-header-mini">
-                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}/>
 
-                            {useremploymentPublick.first_name && (
-
-                                <div className="content-center">
-
-                                    <h2 className="title">{useremploymentPublick.first_name}</h2>
-
-                                    <div className="text-center">
-
-                                        <ButonFollowerUser {...this.props} {...useremploymentPublick}
-                                                           unfollowerItem={this.props.unfollowerItem}
-                                                           followerItem={this.props.followerItem}
-                                                           nameunfollower={`Suivre`}
-                                                           nameununfollower={`Abonné`}/>
-                                    </div>
-                                    <Link to={useremploymentPublick.status_profile ? `/pro/${useremploymentPublick.slug}/followers/`:`/user/${useremploymentPublick.slug}/followers/`} className="text-white"><b>{this.data_countfollowFormatter(useremploymentPublick.countfollowerusers || "")} {useremploymentPublick.countfollowerusers > 1 ? "Abonnés" : "Abonné"}</b></Link> | <Link to={useremploymentPublick.status_profile ? `/pro/${useremploymentPublick.slug}/following/`:`/user/${useremploymentPublick.slug}/following/`} className="text-white"><b>{this.data_countfollowingFormatter(useremploymentPublick.countfollowingusers || "")} {useremploymentPublick.countfollowingusers > 1 ? "Abonnements" : "Abonnement"}</b></Link>
-                                    <br/>
-                                    {useremploymentPublick.status_profile === 0 ?
-                                        <>
-                                            <Link to={`/user/${useremploymentPublick.slug}/`} className="text-white">
-                                                <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
-                                            </Link>
-                                        </>
-
-                                        :
-                                        <>
-                                            <Link to={`/pro/${useremploymentPublick.slug}/`} className="text-white">
-                                                <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
-                                            </Link>
-                                        </>
-                                    }
-
-                                </div>
-
-                            )}
-
-                        </div>
 
                         <div className="main main-raised">
+
                             <div className="container">
                                 <div className="row">
+
+                                    <NavprofileFollowesusers {...this.props} {...useremploymentPublick} />
+
                                 </div>
                             </div>
 

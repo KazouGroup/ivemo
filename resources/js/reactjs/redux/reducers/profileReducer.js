@@ -39,7 +39,7 @@ export default produce((draft, action = {}) => {
                 let dataflwrgremove = draft.userfollowers.findIndex(i => i.user_id === action.payload);
                 let dataflwrgremoveget = draft.userfollowers[dataflwrgremove];
                 if (dataflwrgremove !== -1) dataflwrgremoveget.followeruser = !action.payload;
-                if (dataflwrgremove !== -1) dataflwrgremoveget.countfollowerusers ++;
+                if (dataflwrgremove !== -1) dataflwrgremoveget.countfollowerusers --;
                 return draft;
 
             case 'FOLLOWERUSER_FOR_FOLLOWING_ADD':

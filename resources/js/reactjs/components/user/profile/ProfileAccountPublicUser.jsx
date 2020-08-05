@@ -127,7 +127,7 @@ class ProfileAccountPublicUser extends PureComponent {
                                             <ButonFollowerUser {...userPublick}
                                                                unfollowerItem={this.props.unfollowerItem}
                                                                followerItem={this.props.followerItem}
-                                                               nameunfollower={`Suivre`}
+                                                               nameunfollower={`Me suivre`}
                                                                nameununfollower={`Abonné`}/>
 
                                             {userPublick.phone && (

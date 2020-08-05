@@ -1,7 +1,9 @@
 import React, {PureComponent} from "react";
 import ButonFollowerTableUser from "../../../../inc/vendor/follow/ButonFollowerTableUser";
 import ButonFollowingTableUser from "../../../../inc/vendor/follow/ButonFollowingTableUser";
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import LazyLoad from 'react-lazyload';
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 class UserFollowingsList extends PureComponent {
@@ -29,13 +31,16 @@ class UserFollowingsList extends PureComponent {
                 <div className="card">
                     <div className="card-body">
                         <div className="media">
-                            <a className="pull-left"
-                               href="https://ivemo.test/pro/grayson-reinger">
-                                <img className="avatar"
-                                     style={{height: "40px", width: "80px"}}
-                                     alt="Grayson Reinger"
-                                     src={this.props.member.avatar}/>
-                            </a>
+                            {this.props.member.avatar ?
+                                <NavLink to={`/pro/${this.props.member.slug}/`}>
+                                    <LazyLoad>
+                                        <img src={this.props.member.avatar}
+                                             style={{height: "40px", width: "80px"}}
+                                             alt={this.props.member.first_name}
+                                             className="avatar"/>
+                                    </LazyLoad>
+                                </NavLink>
+                                : <Skeleton circle={false} height={60} width={110}/>}
                             <div className="media-body">
                                 <h6 className="media-heading">{this.props.member.first_name}</h6>
                                 <div>

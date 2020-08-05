@@ -148,7 +148,7 @@ class FormContactProfileAccountUser extends PureComponent {
                             <ButonFollowerUser {...this.props}
                                                unfollowerItem={this.props.unfollowerItem}
                                                followerItem={this.props.followerItem}
-                                               nameunfollower={`Suivre`}
+                                               nameunfollower={`Me suivre`}
                                                nameununfollower={`Abonné`}/>
 
                         </div>
