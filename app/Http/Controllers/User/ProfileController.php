@@ -240,7 +240,6 @@ class ProfileController extends Controller
 
     public function profile_add_info_account_update(UpdateprofileRequest $request ,profile $profile)
     {
-        $this->authorize('update',$profile);
 
         $profile = $profile->update($request->all());
 

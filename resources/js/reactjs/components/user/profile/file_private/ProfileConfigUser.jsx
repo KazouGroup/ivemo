@@ -1,11 +1,13 @@
 import React, { PureComponent } from "react";
 import { Helmet } from 'react-helmet';
-import { CardBody, Form, FormGroup, Input, Row } from "reactstrap";
+import {CardBody, Form, FormGroup, Input, InputGroup, Row} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import './ProfileAccountUser.css';
 import NavProfileAccountPrivate from "./NavProfileAccountPrivate";
 import HeaderProfileAccountPrivate from "./HeaderProfileAccountPrivate";
+import FieldInput from "../../../inc/vendor/FieldInput";
+import FieldInputCheck from "../../../inc/vendor/FieldInputCheck";
 
 
 class ProfileConfigUser extends PureComponent {
@@ -172,8 +174,8 @@ class ProfileConfigUser extends PureComponent {
                             align: 'right'
                         },
                         animate: {
-                            enter: "animate__animated animate__fadeInUp",
-                            exit: "animate__animated animate__fadeOutDown"
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         },
                     });
             }).catch(error => {
@@ -260,17 +262,11 @@ class ProfileConfigUser extends PureComponent {
                                                                         <i className="now-ui-icons users_circle-08"/>
                                                                     </span>
                                                                 </div>
-                                                                <input id='address'
-                                                                       type='text'
-                                                                       className={`form-control ${this.hasErrorFor('address') ? 'is-invalid' : ''}`}
-                                                                       name='address'
-                                                                       placeholder="Entrez votre adresse de résidence"
-                                                                       aria-label="Address"
-                                                                       autoComplete="address" maxLength="200"
-                                                                       value={this.state.address || ''}
-                                                                       onChange={this.handleFieldChange}
-                                                                />
-                                                                {this.renderErrorFor('address')}
+                                                                <FieldInput name="address" type='text' minLength="4" maxLength="200"
+                                                                            placeholder="Entrez votre adresse de résidence" value={this.state.address}
+                                                                            handleFieldChange={this.handleFieldChange}
+                                                                            hasErrorFor={this.hasErrorFor}
+                                                                            renderErrorFor={this.renderErrorFor}/>
                                                             </div>
                                                         </div>
                                                         <div className="col-md-6 col-6">
@@ -281,17 +277,11 @@ class ProfileConfigUser extends PureComponent {
                                                                         <i className="now-ui-icons objects_globe"/>
                                                                     </span>
                                                                 </div>
-                                                                <input id='site_internet'
-                                                                       type='url'
-                                                                       className={`form-control ${this.hasErrorFor('site_internet') ? 'is-invalid' : ''}`}
-                                                                       name='site_internet'
-                                                                       placeholder="https://www.ivemo.com"
-                                                                       aria-label="https://www.ivemo.com"
-                                                                       autoComplete="site_internet"
-                                                                       value={this.state.site_internet || ''}
-                                                                       onChange={this.handleFieldChange}
-                                                                />
-                                                                {this.renderErrorFor('site_internet')}
+                                                                <FieldInput name="site_internet" type='url' minLength="4" maxLength="200"
+                                                                            placeholder="https://www.ivemo.com" value={this.state.site_internet}
+                                                                            handleFieldChange={this.handleFieldChange}
+                                                                            hasErrorFor={this.hasErrorFor}
+                                                                            renderErrorFor={this.renderErrorFor}/>
                                                             </div>
                                                         </div>
                                                     </Row>
@@ -304,7 +294,8 @@ class ProfileConfigUser extends PureComponent {
                                                                         <i className="now-ui-icons objects_globe"/>
                                                                     </span>
                                                                 </div>
-                                                                <input id='birthdate'
+
+                                                                    <input id='birthdate'
                                                                        type='date'
                                                                        value={this.state.birthdate || ''}
                                                                        className={`form-control form-control-date ${this.hasErrorFor('birthdate') ? 'is-invalid' : ''}`}
@@ -314,6 +305,8 @@ class ProfileConfigUser extends PureComponent {
                                                                        required="required"
                                                                 />
                                                                 {this.renderErrorFor('birthdate')}
+
+
                                                             </div>
                                                         </div>
                                                         <div className="col-md-3">
@@ -358,30 +351,14 @@ class ProfileConfigUser extends PureComponent {
                                                     <Row className="my-4">
                                                         <div className="col-md-12">
                                                             <label
-                                                                htmlFor="description"><b>Description </b></label>
+                                                                htmlFor="description"><b>Description <span
+                                                                className="text-danger">*</span> </b></label>
                                                             <FormGroup>
-                                                                <label className="labels">Décrivez
-                                                                    votre article <span
-                                                                        className="text-danger">*</span>
-                                                                </label>
-                                                                <br/>
-                                                                <Input type="textarea"
-                                                                       name="description"
-                                                                       value={this.state.description || ""}
-                                                                       onChange={this.handleFieldChange}
-                                                                       placeholder={'Donner une description...'}
-                                                                       className={`form-control ${this.hasErrorFor('description') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                       id="description"
-                                                                       rows="17"/>
-                                                                {this.renderErrorFor('description')}
-                                                                {/*
-                                                                                         <ReactQuill theme="snow" modules={this.modules}
-                                                                                                    formats={this.formats}
-                                                                                                    className={`editor-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
-                                                                                                    value={this.state.description || ''}
-                                                                                                    onChange={this.handleChangeBody} />
-                                                                                        {this.renderErrorFor('description')}
-                                                                                    */}
+                                                                <FieldInput name="description" type='textarea' minLength="4" rows="17"
+                                                                            placeholder="Donner une description..." value={this.state.description}
+                                                                            handleFieldChange={this.handleFieldChange}
+                                                                            hasErrorFor={this.hasErrorFor}
+                                                                            renderErrorFor={this.renderErrorFor}/>
                                                             </FormGroup>
                                                         </div>
                                                     </Row>
@@ -417,17 +394,11 @@ class ProfileConfigUser extends PureComponent {
                                                                                                     <i className="now-ui-icons objects_globe"/>
                                                                                                 </span>
                                                                                             </div>
-                                                                                            <input id='site_internet'
-                                                                                                   type='url'
-                                                                                                   className={`form-control ${this.hasErrorFor('site_internet') ? 'is-invalid' : ''}`}
-                                                                                                   name='site_internet'
-                                                                                                   placeholder="https://www.ivemo.com"
-                                                                                                   aria-label="https://www.ivemo.com"
-                                                                                                   autoComplete="site_internet"
-                                                                                                   value={this.state.site_internet || ''}
-                                                                                                   onChange={this.handleFieldChange}
-                                                                                            />
-                                                                                            {this.renderErrorFor('site_internet')}
+                                                                                            <FieldInput name="site_internet" type='url' minLength="4" maxLength="200"
+                                                                                                        placeholder="https://www.ivemo.com" value={this.state.site_internet}
+                                                                                                        handleFieldChange={this.handleFieldChange}
+                                                                                                        hasErrorFor={this.hasErrorFor}
+                                                                                                        renderErrorFor={this.renderErrorFor}/>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div className="col-md-6 col-6">
@@ -441,17 +412,11 @@ class ProfileConfigUser extends PureComponent {
                                                                                                     <i className="now-ui-icons objects_globe"/>
                                                                                                 </span>
                                                                                             </div>
-                                                                                            <input id='twitter_link'
-                                                                                                   type='text'
-                                                                                                   className={`form-control ${this.hasErrorFor('twitter_link') ? 'is-invalid' : ''}`}
-                                                                                                   name='twitter_link'
-                                                                                                   placeholder="Lien de profil "
-                                                                                                   aria-label="Lien de profile "
-                                                                                                   autoComplete="Lien de profile twitter"
-                                                                                                   value={this.state.twitter_link || ''}
-                                                                                                   onChange={this.handleFieldChange}
-                                                                                            />
-                                                                                            {this.renderErrorFor('twitter_link')}
+                                                                                            <FieldInput name="twitter_link" type='text' minLength="4" maxLength="200"
+                                                                                                        placeholder="Lien de profil" value={this.state.twitter_link}
+                                                                                                        handleFieldChange={this.handleFieldChange}
+                                                                                                        hasErrorFor={this.hasErrorFor}
+                                                                                                        renderErrorFor={this.renderErrorFor}/>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -467,17 +432,11 @@ class ProfileConfigUser extends PureComponent {
                                                                                                     <i className="now-ui-icons objects_globe"/>
                                                                                                 </span>
                                                                                             </div>
-                                                                                            <input id='linkedin_link'
-                                                                                                   type='url'
-                                                                                                   className={`form-control ${this.hasErrorFor('linkedin_link') ? 'is-invalid' : ''}`}
-                                                                                                   name='linkedin_link'
-                                                                                                   placeholder="Linkedin profile"
-                                                                                                   aria-label="https://www.ivemo.com"
-                                                                                                   autoComplete="linkedin_link"
-                                                                                                   value={this.state.linkedin_link || ''}
-                                                                                                   onChange={this.handleFieldChange}
-                                                                                            />
-                                                                                            {this.renderErrorFor('linkedin_link')}
+                                                                                            <FieldInput name="linkedin_link" type='text' minLength="4" maxLength="200"
+                                                                                                        placeholder="Linkedin profil" value={this.state.linkedin_link}
+                                                                                                        handleFieldChange={this.handleFieldChange}
+                                                                                                        hasErrorFor={this.hasErrorFor}
+                                                                                                        renderErrorFor={this.renderErrorFor}/>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div className="col-md-6">
@@ -491,17 +450,11 @@ class ProfileConfigUser extends PureComponent {
                                                                                                     <i className="now-ui-icons objects_globe"/>
                                                                                                 </span>
                                                                                             </div>
-                                                                                            <input id='instagram_link'
-                                                                                                   type='text'
-                                                                                                   className={`form-control ${this.hasErrorFor('instagram_link') ? 'is-invalid' : ''}`}
-                                                                                                   name='instagram_link'
-                                                                                                   placeholder="Lien de profile "
-                                                                                                   aria-label="Lien de profile "
-                                                                                                   autoComplete="Lien de profile twitter"
-                                                                                                   value={this.state.instagram_link || ''}
-                                                                                                   onChange={this.handleFieldChange}
-                                                                                            />
-                                                                                            {this.renderErrorFor('instagram_link')}
+                                                                                            <FieldInput name="instagram_link" type='text' minLength="4" maxLength="200"
+                                                                                                        placeholder="Lien profil" value={this.state.instagram_link}
+                                                                                                        handleFieldChange={this.handleFieldChange}
+                                                                                                        hasErrorFor={this.hasErrorFor}
+                                                                                                        renderErrorFor={this.renderErrorFor}/>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -517,17 +470,11 @@ class ProfileConfigUser extends PureComponent {
                                                                                                     <i className="now-ui-icons objects_globe"/>
                                                                                                 </span>
                                                                                             </div>
-                                                                                            <input id='facebook_link'
-                                                                                                   type='text'
-                                                                                                   className={`form-control ${this.hasErrorFor('facebook_link') ? 'is-invalid' : ''}`}
-                                                                                                   name='facebook_link'
-                                                                                                   placeholder="Lien profile facebook"
-                                                                                                   aria-label="facebook_link"
-                                                                                                   autoComplete="facebook_link"
-                                                                                                   value={this.state.facebook_link || ''}
-                                                                                                   onChange={this.handleFieldChange}
-                                                                                            />
-                                                                                            {this.renderErrorFor('facebook_link')}
+                                                                                            <FieldInput name="facebook_link" type='text' minLength="4" maxLength="200"
+                                                                                                        placeholder="Lien profile ou page facebook" value={this.state.facebook_link}
+                                                                                                        handleFieldChange={this.handleFieldChange}
+                                                                                                        hasErrorFor={this.hasErrorFor}
+                                                                                                        renderErrorFor={this.renderErrorFor}/>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div className="col-md-6">
@@ -541,17 +488,12 @@ class ProfileConfigUser extends PureComponent {
                                                                                                     <i className="now-ui-icons objects_globe"/>
                                                                                                 </span>
                                                                                             </div>
-                                                                                            <input id='youtube_link'
-                                                                                                   type='text'
-                                                                                                   className={`form-control ${this.hasErrorFor('youtube_link') ? 'is-invalid' : ''}`}
-                                                                                                   name='youtube_link'
-                                                                                                   placeholder="Lien compte youtube"
-                                                                                                   aria-label="youtube_link"
-                                                                                                   autoComplete="youtube_link"
-                                                                                                   value={this.state.youtube_link || ''}
-                                                                                                   onChange={this.handleFieldChange}
-                                                                                            />
-                                                                                            {this.renderErrorFor('youtube_link')}
+
+                                                                                            <FieldInput name="youtube_link" type='text' minLength="4" maxLength="200"
+                                                                                                        placeholder="Lien chain youtube" value={this.state.youtube_link}
+                                                                                                        handleFieldChange={this.handleFieldChange}
+                                                                                                        hasErrorFor={this.hasErrorFor}
+                                                                                                        renderErrorFor={this.renderErrorFor}/>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -583,181 +525,98 @@ class ProfileConfigUser extends PureComponent {
                                                                                  className="card-collapse">
                                                                                 <div className="row">
                                                                                     <div className="col-md-6 mx-auto">
-                                                                                        <div className="form-check">
-                                                                                            <label
-                                                                                                className="form-check-label">
-                                                                                                <Input
-                                                                                                    className="form-check-input"
-                                                                                                    type="checkbox"
-                                                                                                    name="status_avis"
-                                                                                                    checked={this.state.status_avis || false}
-                                                                                                    value={this.state.status_avis}
-                                                                                                    onChange={this.handleCheckClick}/>
-                                                                                                <span
-                                                                                                    className="form-check-sign"/>
-                                                                                                <b>Affichez ou masquez
-                                                                                                    les avis des
-                                                                                                    utilisateurs</b>
-                                                                                            </label>
-                                                                                        </div>
+                                                                                        <FieldInputCheck name="status_avis"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck="Affichez ou masquez les avis des utilisateurs"
+                                                                                                         checked={this.state.status_avis || false}
+                                                                                                         value={this.state.status_avis}
+                                                                                                         onChange={this.handleCheckClick}/>
                                                                                     </div>
                                                                                     <div className="col-md-6 mx-auto">
-                                                                                        <div className="form-check">
-                                                                                            <label
-                                                                                                className="form-check-label">
-                                                                                                <Input
-                                                                                                    className="form-check-input"
-                                                                                                    type="checkbox"
-                                                                                                    name="status_team_user"
-                                                                                                    checked={this.state.status_team_user || false}
-                                                                                                    value={this.state.status_team_user}
-                                                                                                    onChange={this.handleStatusTeamUser}/>
-                                                                                                <span
-                                                                                                    className="form-check-sign"/>
-                                                                                                <b>Affichez ou masquez
-                                                                                                    votre team</b>
-                                                                                            </label>
-                                                                                        </div>
+
+                                                                                        <FieldInputCheck name="status_team_user"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck="Affichez ou masquez votre team"
+                                                                                                         checked={this.state.status_team_user || false}
+                                                                                                         value={this.state.status_team_user}
+                                                                                                         onChange={this.handleStatusTeamUser}/>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="row">
                                                                                     <div className="col-md-6 mx-auto">
-                                                                                        <div className="form-check">
-                                                                                            <label
-                                                                                                className="form-check-label">
-                                                                                                <Input
-                                                                                                    className="form-check-input"
-                                                                                                    type="checkbox"
-                                                                                                    name="status_annonce_locations"
-                                                                                                    checked={this.state.status_annonce_locations || false}
-                                                                                                    value={this.state.status_annonce_locations}
-                                                                                                    onChange={this.handleStatusAnnonceLocation}/>
-                                                                                                <span
-                                                                                                    className="form-check-sign"/>
-                                                                                                <b>Affichez ou masquez
-                                                                                                    vos annonces de
-                                                                                                    locations</b>
-                                                                                            </label>
-                                                                                        </div>
+
+                                                                                        <FieldInputCheck name="status_annonce_locations"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck="Affichez ou masquez vos annonces de locations"
+                                                                                                         checked={this.state.status_annonce_locations || false}
+                                                                                                         value={this.state.status_annonce_locations}
+                                                                                                         onChange={this.handleStatusAnnonceLocation}/>
                                                                                     </div>
                                                                                     <div className="col-md-6 mx-auto">
-                                                                                        <div className="form-check">
-                                                                                            <label
-                                                                                                className="form-check-label">
-                                                                                                <Input
-                                                                                                    className="form-check-input"
-                                                                                                    type="checkbox"
-                                                                                                    name="status_annonce_reservations"
-                                                                                                    checked={this.state.status_annonce_reservations || false}
-                                                                                                    value={this.state.status_annonce_reservations}
-                                                                                                    onChange={this.handleStatusAnnonceReservation}/>
-                                                                                                <span
-                                                                                                    className="form-check-sign"/>
-                                                                                                <b>Affichez ou masquez
-                                                                                                    vos annonces en
-                                                                                                    réservations</b>
-                                                                                            </label>
-                                                                                        </div>
+
+                                                                                        <FieldInputCheck name="status_annonce_reservations"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck="Affichez ou masquez vos annonces en réservations"
+                                                                                                         checked={this.state.status_annonce_reservations || false}
+                                                                                                         value={this.state.status_annonce_reservations}
+                                                                                                         onChange={this.handleStatusAnnonceReservation}/>
+
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="row">
                                                                                     <div className="col-md-6 mx-auto">
-                                                                                        <div className="form-check">
-                                                                                            <label
-                                                                                                className="form-check-label">
-                                                                                                <Input
-                                                                                                    className="form-check-input"
-                                                                                                    type="checkbox"
-                                                                                                    name="status_annonce_ventes"
-                                                                                                    checked={this.state.status_annonce_ventes || false}
-                                                                                                    value={this.state.status_annonce_ventes}
-                                                                                                    onChange={this.handleStatusAnnonceVente}/>
-                                                                                                <span
-                                                                                                    className="form-check-sign"/>
-                                                                                                <b>Affichez ou masquez
-                                                                                                    vos annonces de
-                                                                                                    ventes</b>
-                                                                                            </label>
-                                                                                        </div>
+
+                                                                                        <FieldInputCheck name="status_annonce_reservations"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck="Affichez ou masquez vos annonces de ventes"
+                                                                                                         checked={this.state.status_annonce_ventes || false}
+                                                                                                         value={this.state.status_annonce_ventes}
+                                                                                                         onChange={this.handleStatusAnnonceVente}/>
+
                                                                                     </div>
                                                                                     <div className="col-md-6 mx-auto">
-                                                                                        <div className="form-check">
-                                                                                            <label
-                                                                                                className="form-check-label">
-                                                                                                <Input
-                                                                                                    className="form-check-input"
-                                                                                                    type="checkbox"
-                                                                                                    name="status_employments"
-                                                                                                    checked={this.state.status_employments || false}
-                                                                                                    value={this.state.status_employments}
-                                                                                                    onChange={this.handleStatusEmployments}/>
-                                                                                                <span
-                                                                                                    className="form-check-sign"/>
-                                                                                                <b>Affichez ou masquez
-                                                                                                    vos offres
-                                                                                                    d'emplois</b>
-                                                                                            </label>
-                                                                                        </div>
+
+                                                                                        <FieldInputCheck name="status_employments"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck="Affichez ou masquez vos offres d'emplois"
+                                                                                                         checked={this.state.status_employments || false}
+                                                                                                         value={this.state.status_employments}
+                                                                                                         onChange={this.handleStatusEmployments}/>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="row">
                                                                                     <div className="col-md-6 mx-auto">
-                                                                                        <div className="form-check">
-                                                                                            <label
-                                                                                                className="form-check-label">
-                                                                                                <Input
-                                                                                                    className="form-check-input"
-                                                                                                    type="checkbox"
-                                                                                                    name="status_comments"
-                                                                                                    checked={this.state.status_comments || false}
-                                                                                                    value={this.state.status_comments}
-                                                                                                    onChange={this.handleStatusComments}/>
-                                                                                                <span
-                                                                                                    className="form-check-sign"/>
-                                                                                                <b>Notifications des
-                                                                                                    commentaires {this.state.status_comments ? "activés" : "désactivés"} </b>
-                                                                                            </label>
-                                                                                        </div>
+
+                                                                                        <FieldInputCheck name="status_comments"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck={`Notifications des commentaires ${this.state.status_comments ? "activés" : "désactivés"}`}
+                                                                                                         checked={this.state.status_comments || false}
+                                                                                                         value={this.state.status_comments}
+                                                                                                         onChange={this.handleStatusComments}/>
+
                                                                                     </div>
                                                                                     <div className="col-md-6 mx-auto">
-                                                                                        <div className="form-check">
-                                                                                            <label
-                                                                                                className="form-check-label">
-                                                                                                <Input
-                                                                                                    className="form-check-input"
-                                                                                                    type="checkbox"
-                                                                                                    name="status_responsecomments"
-                                                                                                    checked={this.state.status_responsecomments || false}
-                                                                                                    value={this.state.status_responsecomments}
-                                                                                                    onChange={this.handleStatusResponseComments}/>
-                                                                                                <span
-                                                                                                    className="form-check-sign"/>
-                                                                                                <b>Notifications sur les
-                                                                                                    réponses de vos
-                                                                                                    commentaires {this.state.status_responsecomments ? "activés" : "désactivés"}</b>
-                                                                                            </label>
-                                                                                        </div>
+
+                                                                                        <FieldInputCheck name="status_responsecomments"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck={`Notifications sur les réponses de vos commentaires
+                                                                                                         ${this.state.status_responsecomments ? "activés" : "désactivés"}`}
+                                                                                                         checked={this.state.status_responsecomments || false}
+                                                                                                         value={this.state.status_responsecomments}
+                                                                                                         onChange={this.handleStatusComments}/>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="row">
                                                                                     <div className="col-md-6">
-                                                                                        <div className="form-check">
-                                                                                            <label
-                                                                                                className="form-check-label">
-                                                                                                <Input
-                                                                                                    className="form-check-input"
-                                                                                                    type="checkbox"
-                                                                                                    name="status_contactservice"
-                                                                                                    checked={this.state.status_contactservice || false}
-                                                                                                    value={this.state.status_contactservice}
-                                                                                                    onChange={this.handleStatusContactService}/>
-                                                                                                <span
-                                                                                                    className="form-check-sign"/>
-                                                                                                <b>Notifications sur vos
-                                                                                                    offres
-                                                                                                    d'emplois {this.state.status_contactservice ? "activés" : "désactivés"} </b>
-                                                                                            </label>
-                                                                                        </div>
+
+                                                                                        <FieldInputCheck name="status_contactservice"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck={`Notifications sur vos offres
+                                                                                                    d'emplois ${this.state.status_contactservice ? "activés" : "désactivés"}`}
+                                                                                                         checked={this.state.status_contactservice || false}
+                                                                                                         value={this.state.status_contactservice}
+                                                                                                         onChange={this.handleStatusContactService}/>
+
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -769,7 +628,7 @@ class ProfileConfigUser extends PureComponent {
                                                     </div>
                                                     <hr/>
                                                     <div className="submit text-center">
-                                                        <button className="btn btn-primary btn-round btn-lg"
+                                                        <button className="btn btn-primary btn-lg"
                                                                 type="submit">
                                                             <b><i className="now-ui-icons ui-1_check "/> Enregistrer</b>
                                                         </button>

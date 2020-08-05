@@ -24,6 +24,6 @@ class ProfilePolicy
      */
     public function update(user $user, profile $profile)
     {
-        return auth()->user()->id === $profile->user_id;
+        return auth()->user()->id === $profile->user->id;
     }
 }

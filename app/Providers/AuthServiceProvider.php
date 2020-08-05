@@ -12,7 +12,6 @@ use App\Model\blogannoncevente;
 use App\Model\comment;
 use App\Model\contactservice;
 use App\Model\contactuser;
-use App\Model\contactuseremployment;
 use App\Model\contactuserslocation;
 use App\Model\contactusersvente;
 use App\Model\employment;
@@ -66,7 +65,6 @@ class AuthServiceProvider extends ServiceProvider
         forum::class => ForumPolicy::class,
         avisuser::class => AvisuserPolicy::class,
         responseavisuser::class => ResponseavisuserPolicy::class,
-        contactuseremployment::class => ContactusersemploymentPolicy::class,
         comment::class => CommentPolicy::class,
         contactservice::class => ContactservicePolicy::class,
         user::class => UserPolicy::class,
