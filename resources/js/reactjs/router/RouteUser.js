@@ -231,11 +231,11 @@ const RouteUser = props => (
           <Route exact path="/pro/:user/employments/" component={PublicUserEmployments}/>
 
 
-          <Route exact path="/pro/:user/following/" component={PublicUserFollowings}/>
-          <Route exact path="/user/:user/following/" component={PublicUserFollowings}/>
+          <Route exact path="/pro/:user/following/" component={withRouter(PublicUserFollowings)}/>
+          <Route exact path="/user/:user/following/" component={withRouter(PublicUserFollowings)}/>
 
-          <Route exact path="/pro/:user/followers/" component={PublicUserFollowers}/>
-          <Route exact path="/user/:user/followers/" component={PublicUserFollowers}/>
+          <Route exact path="/pro/:user/followers/" component={withRouter(PublicUserFollowers)}/>
+          <Route exact path="/user/:user/followers/" component={withRouter(PublicUserFollowers)}/>
 
           <Route exact path="/pro/:user/blogs/annonce_locations/" component={PublicUserBlogannonceLocation}/>
           <Route exact path="/pro/:user/blogs/annonce_reservations/" component={PublicUserBlogannonceReservation}/>

@@ -28,6 +28,34 @@ export default produce((draft, action = {}) => {
                 draft.avisusers = action.payload;
                 return;
 
+            case 'FOLLOWERUSER_FOR_FOLLOWERS_ADD':
+                let dataflwrgdd = draft.userfollowers.findIndex(i => i.user_id === action.payload);
+                let dataflwrgddget = draft.userfollowers[dataflwrgdd];
+                if (dataflwrgdd !== -1) dataflwrgddget.followeruser = action.payload;
+                if (dataflwrgdd !== -1) dataflwrgddget.countfollowerusers ++;
+                return draft;
+
+            case 'FOLLOWERUSER_FOR_FOLLOWERS_REMOVE':
+                let dataflwrgremove = draft.userfollowers.findIndex(i => i.user_id === action.payload);
+                let dataflwrgremoveget = draft.userfollowers[dataflwrgremove];
+                if (dataflwrgremove !== -1) dataflwrgremoveget.followeruser = !action.payload;
+                if (dataflwrgremove !== -1) dataflwrgremoveget.countfollowerusers ++;
+                return draft;
+
+            case 'FOLLOWERUSER_FOR_FOLLOWING_ADD':
+                let dataflingdd = draft.userfollowers.findIndex(i => i.member_id === action.payload);
+                let dataflingddget = draft.userfollowers[dataflingdd];
+                if (dataflingdd !== -1) dataflingddget.followinguser = action.payload;
+                if (dataflingdd !== -1) dataflingddget.countfollowinguser_followingusers ++;
+                return draft;
+
+            case 'FOLLOWERUSER_FOR_FOLLOWING_REMOVE':
+                let dataflingremove = draft.userfollowers.findIndex(i => i.member_id === action.payload);
+                let dataflingremoveget = draft.userfollowers[dataflingremove];
+                if (dataflingremove !== -1) dataflingremoveget.followinguser = !action.payload;
+                if (dataflingremove !== -1) dataflingremoveget.countfollowinguser_followingusers --;
+                return draft;
+
             case 'FOLLOWERUSER_ADD':
                 draft.profiluser.followeruser = action.payload;
                 draft.profiluser.countfollowerusers ++;

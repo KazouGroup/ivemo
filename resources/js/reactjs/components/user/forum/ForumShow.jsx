@@ -25,7 +25,7 @@ import {
 } from "../../../redux/actions/forum/forumshowActions";
 import Navforums from "./inc/Navforums";
 import ForumInteresse from "./ForumInteresse";
-import ButonFollowerUser from "../../inc/vendor/ButonFollowerUser";
+import ButonFollowerUser from "../../inc/vendor/follow/ButonFollowerUser";
 import ButonMiniSubscribedForum from "../../inc/vendor/ButonMiniSubscribedForum";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
@@ -221,8 +221,11 @@ class ForumShow extends Component {
                                                             }
                                                             <div className="mx-3">
                                                                 <NavLink to={forum.user.status_profile ? `/pro/${forum.user.slug}/` : `/user/${forum.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{forum.user.first_name}</b>
-                                                                    <small className="d-block text-muted">{forum.statusOnline &&(<i className="fas fa-circle text-success"></i>)}  <i className="now-ui-icons tech_watch-time"/> {moment(forum.created_at).format('LL')}</small> {this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}
+                                                                    <small className="d-block text-muted">{forum.statusOnline &&(<i className="fas fa-circle text-success"></i>)}  <i className="now-ui-icons tech_watch-time"/> {moment(forum.created_at).format('LL')}</small>
                                                                 </NavLink>
+
+                                                                <Link to={profileUser.status_profile ? `/pro/${profileUser.slug}/followers/` : `/user/${profileUser.slug}/followers/`}
+                                                                      className="text-white"><b>{this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}</b></Link>
                                                             </div>
 
                                                             {profileUser.followeruser &&(

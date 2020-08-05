@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from "react";
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Button, Navbar } from "reactstrap";
+import { Button, Navbar, UncontrolledTooltip } from "reactstrap";
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterUserSite from "../../inc/user/FooterUserSite";
 import FormContactProfileAccountUser from "./form/FormContactProfileAccountUser";
@@ -17,7 +17,7 @@ import HelmetSite from "../../inc/user/HelmetSite";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import { loadProfileusersforpublic,unfollowerItem,followerItem} from "../../../redux/actions/profileActions";
-import ButonFollowerUser from "../../inc/vendor/ButonFollowerUser";
+import ButonFollowerUser from "../../inc/vendor/follow/ButonFollowerUser";
 
 
 class ProfileAccountPublicUser extends PureComponent {
@@ -65,10 +65,8 @@ class ProfileAccountPublicUser extends PureComponent {
                                 :
                                 <div className="page-header-image" data-parallax="true"
                                      style={{backgroundImage: "url(" + userPublick.avatarcover + ")"}}>
-
                                 </div>
                             }
-
 
                             <div className="container">
                                 <div className="mt-lg-5 text-left">
@@ -79,35 +77,35 @@ class ProfileAccountPublicUser extends PureComponent {
                                         <h3><b>{userPublick.first_name || <Skeleton width={100}/>}</b></h3>
 
                                         {userPublick.profile.facebook_link && (
-                                            <a href={`${userPublick.profile.facebook_link}`} target="_banck"
+                                            <a href={`${userPublick.profile.facebook_link}`} target="_blank"
                                                className="btn btn-icon btn-sm btn-facebook">
                                                 <i className="fab fa-facebook-square"/>
                                             </a>
                                         )}
 
                                         {userPublick.profile.twitter_link && (
-                                            <a href={`${userPublick.profile.twitter_link}`} target="_banck"
+                                            <a href={`${userPublick.profile.twitter_link}`} target="_blank"
                                                className="btn btn-icon btn-sm btn-twitter">
                                                 <i className="fab fa-twitter"/>
                                             </a>
                                         )}
 
                                         {userPublick.profile.instagram_link && (
-                                            <a href={`${userPublick.profile.instagram_link}`} target="_banck"
+                                            <a href={`${userPublick.profile.instagram_link}`} target="_blank"
                                                className="btn btn-icon btn-sm btn-instagram">
                                                 <i className="fab fa-instagram"/>
                                             </a>
                                         )}
 
                                         {userPublick.profile.youtube_link && (
-                                            <a href={`${userPublick.profile.youtube_link}`} target="_banck"
+                                            <a href={`${userPublick.profile.youtube_link}`} target="_blank"
                                                className="btn btn-icon btn-sm btn-youtube">
                                                 <i className="fab fa-youtube"/>
                                             </a>
                                         )}
 
                                         {userPublick.profile.linkedin_link && (
-                                            <a href={`${userPublick.profile.linkedin_link}`} target="_banck"
+                                            <a href={`${userPublick.profile.linkedin_link}`} target="_blank"
                                                className="btn btn-icon btn-sm btn-linkedin">
                                                 <i className="fab fa-linkedin"/>
                                             </a>
@@ -115,12 +113,16 @@ class ProfileAccountPublicUser extends PureComponent {
 
                                         <div className="pull-right">
                                             {userPublick.profile.site_internet && (
-                                                <a href={`${userPublick.profile.site_internet}`}
-                                                   className="btn btn-sm btn-secondary" target="_banck">
-                                                    <i className="now-ui-icons business_globe"/>
-                                                </a>
+                                                <>
+                                                    <UncontrolledTooltip placement="bottom" target="userSiteInternet">
+                                                        Visitez mon Site Internet
+                                                    </UncontrolledTooltip>
+                                                    <a href={`${userPublick.profile.site_internet}`} id={'userSiteInternet'}
+                                                       className="btn btn-sm btn-secondary" target="_blank">
+                                                        <i className="now-ui-icons business_globe"/>
+                                                    </a>
+                                                </>
                                             )}
-
 
                                             <ButonFollowerUser {...userPublick}
                                                                unfollowerItem={this.props.unfollowerItem}
@@ -128,43 +130,53 @@ class ProfileAccountPublicUser extends PureComponent {
                                                                nameunfollower={`Suivre`}
                                                                nameununfollower={`Abonné`}/>
 
-                                            <Button className="btn btn-sm btn-primary" rel="tooltip" title="3426712192" data-placement="bottom">
-                                                <i className="now-ui-icons tech_mobile"/>
-                                            </Button>
-                                            <a href="#contact" className="btn btn-sm btn-success">
+                                            {userPublick.phone && (
+                                                <>
+                                                    <UncontrolledTooltip placement="bottom" target="userPhone">
+                                                        {userPublick.phone}
+                                                    </UncontrolledTooltip>
+                                                    <Button className="btn btn-sm btn-primary" id={'userPhone'}>
+                                                        <i className="now-ui-icons tech_mobile"/>
+                                                    </Button>
+                                                </>
+                                            )}
+                                            <UncontrolledTooltip placement="bottom" target="userContact">
+                                                Me Contacter
+                                            </UncontrolledTooltip>
+                                            <a href="#contact" className="btn btn-sm btn-success" id={'userContact'}>
                                                 <i className="now-ui-icons ui-2_chat-round"/>
                                             </a>
 
                                             {!$guest && (
                                                 <Fragment>
                                                     {$userIvemo.id === userPublick.id && (
-                                                        <Link to={`/profile/account/`} className="btn btn-sm btn-info">
-                                                            <i className="now-ui-icons ui-2_settings-90"/>
-                                                        </Link>
+                                                        <>
+                                                            <UncontrolledTooltip placement="bottom" target="userProfile">
+                                                                Mon Profil
+                                                            </UncontrolledTooltip>
+                                                            <Link to={`/profile/account/`} className="btn btn-sm btn-info" id={'userProfile'}>
+                                                                <i className="now-ui-icons users_single-02"/>
+                                                            </Link>
+                                                        </>
                                                     )}
                                                 </Fragment>
                                             )}
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-
                         <div className="main main-raised">
                             <div className="container">
                                 <div className="row">
-
                                 </div>
                             </div>
 
                             <div className="container">
                                 <br/>
                                 <div className="row">
-
                                     <div className="col-lg-4 col-md-12 mx-auto">
-
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="row">
@@ -177,7 +189,7 @@ class ProfileAccountPublicUser extends PureComponent {
                                                                     <a data-toggle="collapse" data-parent="#accordion"
                                                                        href="#collapseFour" aria-expanded="true"
                                                                        aria-controls="collapseFour">
-                                                                        <b>Menu</b>
+                                                                        <b>Menu Rapide</b>
                                                                     </a>
                                                                 </div>
 
@@ -193,10 +205,7 @@ class ProfileAccountPublicUser extends PureComponent {
                                                                         </table>
                                                                     </div>
                                                                 </div>
-
-
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -206,36 +215,26 @@ class ProfileAccountPublicUser extends PureComponent {
                                         {!$guest && (
                                             <Fragment>
                                                 {$userIvemo.id === userPublick.id && (
-
                                                     <NavNavigatePivateUser/>
-
                                                 )}
-
                                             </Fragment>
-
                                         )}
 
-
                                         {userPublick.status_profile === 1 && (
-
                                             <Fragment>
                                                 <div className="card">
                                                     <div className="card-body">
                                                         <div className="row">
                                                             <div className="col-md-12">
-
                                                                 <div className="card-header text-center">
                                                                     <h4 className="card-title">
-                                                                        <b>Contacter {userPublick.first_name}</b></h4>
+                                                                        <b>Contactez {userPublick.first_name}</b></h4>
                                                                 </div>
-
                                                                 <FormContactProfileAccountUser {...this.props} {...userPublick}/>
-
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
 
                                                 <div className="card">
                                                     <div className="card-body">
@@ -254,12 +253,8 @@ class ProfileAccountPublicUser extends PureComponent {
                                                                                 <b>Annonces {userPublick.first_name}</b>
                                                                             </a>
                                                                         </div>
-
                                                                         <NavLinkPublicAnnonceUser {...this.props} {...userPublick}/>
-
-
                                                                     </div>
-
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -274,7 +269,6 @@ class ProfileAccountPublicUser extends PureComponent {
                                                                      aria-multiselectable="true"
                                                                      className="card-collapse">
                                                                     <div className="card card-plain">
-
                                                                         <div className="card-header" role="tab"
                                                                              id="headingTwo">
                                                                             <a data-toggle="collapse"
@@ -321,14 +315,12 @@ class ProfileAccountPublicUser extends PureComponent {
                                                 {!userPublick.profile.status_team_user ? <></> :
                                                     <ProfileAccountTeamUser {...this.props}/>}
 
-
-                                                {!userPublick.profile.status_avis ? <></> :<ProfileAccountAvisUser {...this.props} {...userPublick}/>}
+                                                {!userPublick.profile.status_avis ? <></> : <ProfileAccountAvisUser {...this.props} {...userPublick}/>}
 
                                                 <div className="card" id="contact">
                                                     <div className="card-body">
                                                         <div className="card-header text-center">
-
-                                                            <h4 className="card-title"><b>Contacter {userPublick.first_name}</b></h4>
+                                                            <h4 className="card-title"><b>Contactez {userPublick.first_name}</b></h4>
                                                         </div>
                                                         <FormContactProfileAccountUser {...this.props} {...userPublick}/>
                                                     </div>

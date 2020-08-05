@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class followeruser extends Model
@@ -24,5 +25,19 @@ class followeruser extends Model
     public function isOnline()
     {
         return (bool) Cache::has('user-is-online-' . $this->user->id);
+    }
+
+    public function followeruser()
+    {
+        return (bool) followeruser::where('user_id', Auth::id())
+            ->where('member_id', $this->user->id)
+            ->first();
+    }
+
+    public function followinguser()
+    {
+        return (bool) followeruser::where('user_id', Auth::id())
+            ->where('member_id', $this->member->id)
+            ->first();
     }
 }

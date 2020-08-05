@@ -25,7 +25,7 @@ import {
     unsubscribeItem,subscribeItem,
     unfollowerItem,followerItem,
 } from "../../../../redux/actions/annoncelocation/annoncelocationshowActions";
-import ButonFollowerUser from "../../../inc/vendor/ButonFollowerUser";
+import ButonFollowerUser from "../../../inc/vendor/follow/ButonFollowerUser";
 import ButonMiniSubscribedAllAnnonce from "../../../inc/vendor/ButonMiniSubscribedAllAnnonce";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
@@ -625,8 +625,12 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                         <>
                                                                         <div className="mx-3">
                                                                             <NavLink to={`/pro/${annoncelocation.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{annoncelocation.user.first_name}</b>
-                                                                                <small className="d-block text-muted">{annoncelocation.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(annoncelocation.created_at).format('LL')}</small> {this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}
+                                                                                <small className="d-block text-muted">{annoncelocation.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(annoncelocation.created_at).format('LL')}</small>
                                                                             </NavLink>
+
+                                                                            <Link to={`/pro/${profileUser.slug}/followers/`}
+                                                                                  className="text-white"><b>{this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}</b></Link>
+
                                                                         </div>
 
                                                                             {profileUser.followeruser &&(

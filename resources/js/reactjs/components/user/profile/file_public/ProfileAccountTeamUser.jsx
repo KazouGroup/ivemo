@@ -1,15 +1,14 @@
-import React, { Component } from "react";
-import {Remarkable} from "remarkable";
-import {Button, UncontrolledTooltip} from "reactstrap";
-import {NavLink} from "react-router-dom";
+import React, { PureComponent } from "react";
+import { UncontrolledTooltip } from "reactstrap";
+import { NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
 
 
-class ProfileAccountTeamUser extends Component {
+class ProfileAccountTeamUser extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            teamusers:[],
+            teamusers: [],
             visiable: 6,
         };
 
@@ -17,8 +16,8 @@ class ProfileAccountTeamUser extends Component {
         this.loadmoresItem = this.loadmoresItem.bind(this);
     }
 
-    loadmoresItem(){
-        this.setState((old) =>{
+    loadmoresItem() {
+        this.setState((old) => {
             return {visiable: old.visiable + 6}
         })
     }
@@ -38,7 +37,7 @@ class ProfileAccountTeamUser extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('profile_team_users_destroy.site',id);
+                const url = route('profile_team_users_destroy.site', id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
@@ -79,20 +78,21 @@ class ProfileAccountTeamUser extends Component {
         });
     }
 
-   // Lifecycle Component Method
+    // Lifecycle Component Method
     componentDidMount() {
         let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.teamuserpublique',[itemuser])).then(response =>
+        dyaxios.get(route('api.teamuserpublique', [itemuser])).then(response =>
             this.setState({
                 teamusers: [...response.data],
             }));
     }
 
     getDescription(item) {
-        return { __html: item.description };
+        return {__html: item.description};
     }
+
     render() {
-        const {teamusers,visiable} = this.state;
+        const {teamusers, visiable} = this.state;
         return (
             <>
                 {teamusers.length > 0 && (
@@ -105,7 +105,7 @@ class ProfileAccountTeamUser extends Component {
 
                             <div className="row">
 
-                                {teamusers.slice(0,visiable).map((item) => (
+                                {teamusers.slice(0, visiable).map((item) => (
 
                                     <div key={item.id} className="col-md-4 mx-auto">
                                         <div className="card card-profile card-plain">
@@ -117,7 +117,8 @@ class ProfileAccountTeamUser extends Component {
                                                 <h6 className="category text-primary">
                                                     {item.role}
                                                 </h6>
-                                                <h6 className="category" dangerouslySetInnerHTML={this.getDescription(item)} />
+                                                <h6 className="category"
+                                                    dangerouslySetInnerHTML={this.getDescription(item)}/>
 
                                             </div>
 
@@ -126,17 +127,23 @@ class ProfileAccountTeamUser extends Component {
                                                 <>
                                                     {$userIvemo.id === item.user.id && (
                                                         <>
-                                                            <UncontrolledTooltip placement="bottom" target="TooltipEditer" delay={0}>
+                                                            <UncontrolledTooltip placement="bottom"
+                                                                                 target="TooltipEditer" delay={0}>
                                                                 Éditer cette utilisateur
                                                             </UncontrolledTooltip>
-                                                            <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/teams/${item.id}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" id="TooltipEditer">
+                                                            <NavLink
+                                                                to={`/profile/${$userIvemo.slug}/personal_settings/teams/${item.id}/edit/`}
+                                                                className="btn btn-sm btn-info btn-icon btn-sm"
+                                                                id="TooltipEditer">
                                                                 <i className="now-ui-icons ui-2_settings-90"/>
                                                             </NavLink>
-                                                            <button type="button" id={'TooltipDelete'} onClick={() => this.deleteItem(item.id)}
+                                                            <button type="button" id={'TooltipDelete'}
+                                                                    onClick={() => this.deleteItem(item.id)}
                                                                     className="btn btn-icon btn-sm btn-danger">
                                                                 <i className="now-ui-icons ui-1_simple-remove"/>
                                                             </button>
-                                                            <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
+                                                            <UncontrolledTooltip placement="bottom"
+                                                                                 target="TooltipDelete" delay={0}>
                                                                 Supprimer
                                                             </UncontrolledTooltip>
                                                         </>
@@ -154,8 +161,9 @@ class ProfileAccountTeamUser extends Component {
                             {visiable < teamusers.length && (
                                 <div className="row">
                                     <div className="col-md-4 ml-auto mr-auto text-center">
-                                        <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
-                                           <b>Voir plus </b>
+                                        <button type="button" onClick={this.loadmoresItem}
+                                                className="btn btn-primary btn-block">
+                                            <b>Voir plus </b>
                                         </button>
                                     </div>
                                 </div>
@@ -166,7 +174,6 @@ class ProfileAccountTeamUser extends Component {
                 )}
 
             </>
-
 
 
         )

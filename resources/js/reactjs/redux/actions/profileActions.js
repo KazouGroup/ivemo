@@ -4,9 +4,9 @@ import {
     UNACTIVE_AVISUSER,
     FOLLOWERUSER_ADD,
     FOLLOWERUSER_REMOVE,
-    GET_FOLLOWINGSUSERS,
-    GET_FOLLOWERSUSERS,
-    DELETE_AVISUSER,
+    DELETE_AVISUSER, GET_FOLLOWERSUSERS, GET_FOLLOWINGSUSERS,
+    FOLLOWERUSER_FOR_FOLLOWING_ADD, FOLLOWERUSER_FOR_FOLLOWING_REMOVE,
+    FOLLOWERUSER_FOR_FOLLOWERS_ADD, FOLLOWERUSER_FOR_FOLLOWERS_REMOVE,
 } from "./types";
 
 import Swal from "sweetalert2";
@@ -18,6 +18,18 @@ export const loadProfileusersforpublic = (props) => dispatch => {
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_PROFILE_USER_FOR_PUBLIC,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loadAvisusersforpublic = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let url = route('api.avisuserpublique',[itemuser]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_AVISUSER_FOR_PUBLIC,
                 payload: response.data
             })
         ).catch(error => console.error(error));
@@ -47,14 +59,48 @@ export const loadFollowingsusers = (props) => dispatch => {
         ).catch(error => console.error(error));
 };
 
-export const loadAvisusersforpublic = (props) => dispatch => {
+export const followerForTableItem = (props) => dispatch => {
 
-    let itemuser = props.match.params.user;
-    let url = route('api.avisuserpublique',[itemuser]);
-    dyaxios.get(url)
-        .then(response => dispatch({
-                type: GET_AVISUSER_FOR_PUBLIC,
-                payload: response.data
+
+    let url = route('users_followeuser.follow',[props.user_id]);
+    dyaxios.post(url)
+        .then(() => dispatch({
+                type: FOLLOWERUSER_FOR_FOLLOWERS_ADD,
+                payload: props.user_id
+            })
+        ).catch(error => console.error(error));
+};
+
+export const unfollowerForTableItem = (props) => dispatch => {
+
+    let url = route('users_followeuser.follow',[props.user_id]);
+    dyaxios.post(url)
+        .then(() => dispatch({
+                type: FOLLOWERUSER_FOR_FOLLOWERS_REMOVE,
+                payload: props.user_id
+            })
+        ).catch(error => console.error(error));
+};
+
+export const followeringForTableItem = (props) => dispatch => {
+
+
+    let url = route('users_followeuser.follow',[props.member_id]);
+    dyaxios.post(url)
+        .then(() => dispatch({
+                type: FOLLOWERUSER_FOR_FOLLOWING_ADD,
+                payload: props.member_id
+            })
+        ).catch(error => console.error(error));
+};
+
+export const unfolloweringForTableItem = (props) => dispatch => {
+
+    let url = route('users_followeuser.follow',[props.member_id]);
+    dyaxios.post(url)
+        .then(() => dispatch({
+                type: FOLLOWERUSER_FOR_FOLLOWING_REMOVE,
+                payload: props.member_id
             })
         ).catch(error => console.error(error));
 };

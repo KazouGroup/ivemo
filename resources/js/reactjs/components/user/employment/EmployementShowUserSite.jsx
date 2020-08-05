@@ -27,7 +27,7 @@ import {
     unsubscribeItem,subscribeItem,
     unfollowerItem,followerItem,
 } from "../../../redux/actions/employment/employmentshowActions";
-import ButonFollowerUser from "../../inc/vendor/ButonFollowerUser";
+import ButonFollowerUser from "../../inc/vendor/follow/ButonFollowerUser";
 import ButonMiniSubscribedEmployment from "../../inc/vendor/ButonMiniSubscribedEmployment";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
@@ -379,8 +379,10 @@ class EmployementShowUserSite extends Component {
                                                                 <div className="mx-3">
                                                                     <NavLink to={`/pro/${employment.user.slug}/employments/`} className="text-dark font-weight-600 text-sm"><b>{employment.user.first_name}</b>
                                                                         <small className="d-block text-muted">{employment.statusOnline &&(<i className="fas fa-circle text-success"></i>)}
-                                                                            <i className="now-ui-icons tech_watch-time"/> {moment(employment.created_at).format('LL')}</small> {this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}
+                                                                            <i className="now-ui-icons tech_watch-time"/> {moment(employment.created_at).format('LL')}</small>
                                                                     </NavLink>
+                                                                    <Link to={profileUser.status_profile ? `/pro/${profileUser.slug}/followers/` : `/user/${profileUser.slug}/followers/`}
+                                                                        className="text-white"><b>{this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}</b></Link>
                                                                 </div>
 
                                                                 {profileUser.followeruser &&(

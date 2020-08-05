@@ -20,8 +20,17 @@ class FolloweruserResource extends JsonResource
             'member_id' => $this->member_id,
             'user' => $this->user,
             'member' => $this->member,
-            'statusOnline' => $this->isOnline(),
-            'followeruser' => $this->user->followeruser(),
+            //'statusOnline' => $this->isOnline(),
+            'followeruser' => $this->followeruser(),
+            'followinguser' => $this->followinguser(),
+
+
+            'countfollowingusers' => $this->user->followingusers()->count(),
+            'countfollowerusers' => $this->user->followerusers()->count(),
+
+            'countfollowinguser_followingusers' => $this->member->followingusers()->count(),
+            'countfollowinguser_followerusers' => $this->member->followerusers()->count(),
+
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
         ];

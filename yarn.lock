@@ -10888,6 +10888,13 @@ react-hook-form@^6.1.2:
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-6.1.2.tgz#f7c670d6bdb6f164deea0d5ccda2cf83e9c05c0c"
   integrity sha512-olOI7LlC3zPEhEFOgRBRoeqAJ4+lguQ1K2kmt07eBfLyMzdMY32Rzjn8zsFovf369NHy3Bf87rBMWJ5ti+h8DQ==
 
+react-icons@^3.10.0:
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.10.0.tgz#6c217a2dde2e8fa8d293210023914b123f317297"
+  integrity sha512-WsQ5n1JToG9VixWilSo1bHv842Cj5aZqTGiS3Ud47myF6aK7S/IUY2+dHcBdmkQcCFRuHsJ9OMUI0kTDfjyZXQ==
+  dependencies:
+    camelcase "^5.0.0"
+
 react-infinite-scroller@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/react-infinite-scroller/-/react-infinite-scroller-1.2.4.tgz#f67eaec4940a4ce6417bebdd6e3433bfc38826e9"

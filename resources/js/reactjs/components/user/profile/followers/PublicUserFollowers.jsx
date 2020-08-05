@@ -11,11 +11,12 @@ import {
     loadProfileusersforpublic,
     loadFollowersusers,
     unfollowerItem, followerItem,
+    followerForTableItem, unfollowerForTableItem,
 } from "../../../../redux/actions/profileActions";
-import ButonFollowerUser from "../../../inc/vendor/ButonFollowerUser";
+import ButonFollowerUser from "../../../inc/vendor/follow/ButonFollowerUser";
 import HelmetSite from "../../../inc/user/HelmetSite";
-import UserFollowList from "./inc/UserFollowList";
 import UserFollowSkeleton from "../../../inc/user/UserFollowSkeleton";
+import UserFollowersList from "./inc/UserFollowersList";
 
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
@@ -67,7 +68,9 @@ class PublicUserFollowers extends Component {
             users.map(item => {
                 return(
 
-                    <UserFollowList key={item.id} {...item} />
+                    <UserFollowersList key={item.id} {...item}
+                                    unfollowerForTableItem={this.props.unfollowerForTableItem}
+                                    followerForTableItem={this.props.followerForTableItem}/>
                 )
             })
         ):(
@@ -185,5 +188,6 @@ export default connect(mapStoreToProps,
         loadProfileusersforpublic,
         loadFollowersusers,
         unfollowerItem, followerItem,
+        followerForTableItem,unfollowerForTableItem,
     }
 )(PublicUserFollowers);

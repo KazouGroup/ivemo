@@ -26,7 +26,7 @@ import {
     unfollowerItem,followerItem,
 } from "../../../../../redux/actions/employment/employmentActions";
 import ButonMiniSubscribedEmployment from "../../../../inc/vendor/ButonMiniSubscribedEmployment";
-import ButonFollowerUser from "../../../../inc/vendor/ButonFollowerUser";
+import ButonFollowerUser from "../../../../inc/vendor/follow/ButonFollowerUser";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 class PublicUserEmployments extends Component {

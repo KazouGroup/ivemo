@@ -46,3 +46,43 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .ivemoAvisAvatar {
     margin-right: 15px;
 }
+
+.ivemoAvisUserContainer {
+    display: inline-grid;
+}
+
+.ivemoAvisUserComment {
+    background-color: rgb(240, 242, 245);
+    border-radius: 18px;
+    padding: 5px 20px;
+    color: rgb(5, 5, 5);
+    display: inline-block;
+    font-size: 12px;
+    line-height: 16.0833px;
+}
+
+.ivemoAvisUserActions {
+    display: none;
+}
+
+.ivemoAvisUserActions .media .media-footer .btn {
+    margin-bottom: 0px !important;
+}
+
+.ivemoAvisUserContainer:hover .ivemoAvisUserActions {
+    display: block;
+    transition: ease 2s;
+    top: -25px;
+    position: relative;
+}
+
+#userAvisHide,
+#userAvisReply,
+#userAvisReply,
+#userReplyAvisEdit,
+#userReplyAvisDelete,
+#userReplyAvisHide {
+    padding: 0px !important;
+    margin-bottom: 0px !important;
+    margin: 10px 5px !important;
+}
