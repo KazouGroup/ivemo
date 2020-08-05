@@ -220,12 +220,15 @@ class ForumShow extends Component {
                                                                      src={forum.user.avatar}/>
                                                             }
                                                             <div className="mx-3">
-                                                                <NavLink to={forum.user.status_profile ? `/pro/${forum.user.slug}/` : `/user/${forum.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{forum.user.first_name}</b>
+                                                                <span className="text-dark font-weight-600 text-sm">
+                                                                    <Link to={forum.user.status_profile ? `/pro/${forum.user.slug}/` : `/user/${forum.user.slug}/`}>
+                                                                        <b>{forum.user.first_name}</b>
+                                                                    </Link>
                                                                     <small className="d-block text-muted">{forum.statusOnline &&(<i className="fas fa-circle text-success"></i>)}  <i className="now-ui-icons tech_watch-time"/> {moment(forum.created_at).format('LL')}</small>
-                                                                </NavLink>
+                                                                    <Link to={profileUser.status_profile ? `/pro/${profileUser.slug}/followers/` : `/user/${profileUser.slug}/followers/`}><b>{this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}</b></Link>
+                                                                </span>
 
-                                                                <Link to={profileUser.status_profile ? `/pro/${profileUser.slug}/followers/` : `/user/${profileUser.slug}/followers/`}
-                                                                      className="text-white"><b>{this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}</b></Link>
+
                                                             </div>
 
                                                             {profileUser.followeruser &&(
