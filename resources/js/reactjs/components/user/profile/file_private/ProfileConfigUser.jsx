@@ -263,7 +263,7 @@ class ProfileConfigUser extends PureComponent {
                                                                     </span>
                                                                 </div>
                                                                 <FieldInput name="address" type='text' minLength="4" maxLength="200"
-                                                                            placeholder="Entrez votre adresse de résidence" value={this.state.address}
+                                                                            placeholder="Entrez votre adresse de résidence" value={this.state.address || ""}
                                                                             handleFieldChange={this.handleFieldChange}
                                                                             hasErrorFor={this.hasErrorFor}
                                                                             renderErrorFor={this.renderErrorFor}/>
@@ -278,7 +278,7 @@ class ProfileConfigUser extends PureComponent {
                                                                     </span>
                                                                 </div>
                                                                 <FieldInput name="site_internet" type='url' minLength="4" maxLength="200"
-                                                                            placeholder="https://www.ivemo.com" value={this.state.site_internet}
+                                                                            placeholder="https://www.ivemo.com" value={this.state.site_internet || ""}
                                                                             handleFieldChange={this.handleFieldChange}
                                                                             hasErrorFor={this.hasErrorFor}
                                                                             renderErrorFor={this.renderErrorFor}/>
@@ -286,6 +286,8 @@ class ProfileConfigUser extends PureComponent {
                                                         </div>
                                                     </Row>
                                                     <Row className="my-4">
+                                                    {/*
+
                                                         <div className="col-md-4">
                                                             <label htmlFor="birthdate"><b>Date de Naissance</b></label>
                                                             <div className="input-group">
@@ -295,7 +297,8 @@ class ProfileConfigUser extends PureComponent {
                                                                     </span>
                                                                 </div>
 
-                                                                    <input id='birthdate'
+
+                                                                  <input id='birthdate'
                                                                        type='date'
                                                                        value={this.state.birthdate || ''}
                                                                        className={`form-control form-control-date ${this.hasErrorFor('birthdate') ? 'is-invalid' : ''}`}
@@ -306,9 +309,10 @@ class ProfileConfigUser extends PureComponent {
                                                                 />
                                                                 {this.renderErrorFor('birthdate')}
 
-
                                                             </div>
                                                         </div>
+                                                    */}
+
                                                         <div className="col-md-3">
                                                             <label htmlFor="city_id"><b>Votre Ville</b></label>
                                                             <div className="form-group">
@@ -355,7 +359,7 @@ class ProfileConfigUser extends PureComponent {
                                                                 className="text-danger">*</span> </b></label>
                                                             <FormGroup>
                                                                 <FieldInput name="description" type='textarea' minLength="4" rows="17"
-                                                                            placeholder="Donner une description..." value={this.state.description}
+                                                                            placeholder="Donner une description..." value={this.state.description || ""}
                                                                             handleFieldChange={this.handleFieldChange}
                                                                             hasErrorFor={this.hasErrorFor}
                                                                             renderErrorFor={this.renderErrorFor}/>
@@ -395,7 +399,7 @@ class ProfileConfigUser extends PureComponent {
                                                                                                 </span>
                                                                                             </div>
                                                                                             <FieldInput name="site_internet" type='url' minLength="4" maxLength="200"
-                                                                                                        placeholder="https://www.ivemo.com" value={this.state.site_internet}
+                                                                                                        placeholder="https://www.ivemo.com" value={this.state.site_internet || ""}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
                                                                                                         renderErrorFor={this.renderErrorFor}/>
@@ -413,7 +417,7 @@ class ProfileConfigUser extends PureComponent {
                                                                                                 </span>
                                                                                             </div>
                                                                                             <FieldInput name="twitter_link" type='text' minLength="4" maxLength="200"
-                                                                                                        placeholder="Lien de profil" value={this.state.twitter_link}
+                                                                                                        placeholder="Lien de profil" value={this.state.twitter_link || ""}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
                                                                                                         renderErrorFor={this.renderErrorFor}/>
@@ -433,7 +437,7 @@ class ProfileConfigUser extends PureComponent {
                                                                                                 </span>
                                                                                             </div>
                                                                                             <FieldInput name="linkedin_link" type='text' minLength="4" maxLength="200"
-                                                                                                        placeholder="Linkedin profil" value={this.state.linkedin_link}
+                                                                                                        placeholder="Linkedin profil" value={this.state.linkedin_link || ""}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
                                                                                                         renderErrorFor={this.renderErrorFor}/>
@@ -451,7 +455,7 @@ class ProfileConfigUser extends PureComponent {
                                                                                                 </span>
                                                                                             </div>
                                                                                             <FieldInput name="instagram_link" type='text' minLength="4" maxLength="200"
-                                                                                                        placeholder="Lien profil" value={this.state.instagram_link}
+                                                                                                        placeholder="Lien profil" value={this.state.instagram_link || ""}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
                                                                                                         renderErrorFor={this.renderErrorFor}/>
@@ -471,7 +475,7 @@ class ProfileConfigUser extends PureComponent {
                                                                                                 </span>
                                                                                             </div>
                                                                                             <FieldInput name="facebook_link" type='text' minLength="4" maxLength="200"
-                                                                                                        placeholder="Lien profile ou page facebook" value={this.state.facebook_link}
+                                                                                                        placeholder="Lien profile ou page facebook" value={this.state.facebook_link || ""}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
                                                                                                         renderErrorFor={this.renderErrorFor}/>
@@ -490,7 +494,7 @@ class ProfileConfigUser extends PureComponent {
                                                                                             </div>
 
                                                                                             <FieldInput name="youtube_link" type='text' minLength="4" maxLength="200"
-                                                                                                        placeholder="Lien chain youtube" value={this.state.youtube_link}
+                                                                                                        placeholder="Lien chain youtube" value={this.state.youtube_link || ""}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
                                                                                                         renderErrorFor={this.renderErrorFor}/>

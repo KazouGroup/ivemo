@@ -240,8 +240,9 @@ class ProfileController extends Controller
 
     public function profile_add_info_account_update(UpdateprofileRequest $request ,profile $profile)
     {
+        $inputs = $request->all();
 
-        $profile = $profile->update($request->all());
+        $profile = $profile->update($inputs);
 
         return response()->json($profile,200);
     }

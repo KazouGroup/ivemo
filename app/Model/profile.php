@@ -13,6 +13,10 @@ class profile extends Model
            'created_at','updated_at'
     ];
 
+    protected $dates = [
+        'birthdate',
+    ];
+
 
     public function getRouteKeyName()
     {

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Requests\Profile;
 
+use App\Helpers\FormatHelper;
 use App\Http\Requests\Request;
 use App\Model\user;
 use Illuminate\Validation\Rule;
@@ -10,6 +11,8 @@ class BaseRequest extends Request
 {
     // --------------------------------------------------------------------------
 
+
+
     /**
      * Return the array of validation rules for the given group.
      *
@@ -18,6 +21,7 @@ class BaseRequest extends Request
      */
     protected function getRules($group)
     {
+
         if ($group == 'store') {
             $rules = [
                //
@@ -26,7 +30,7 @@ class BaseRequest extends Request
             $rules = [
                 'site_internet' => ['required','url','string', 'max:255'],
                 'city_id' => ['required'],
-                //'birthdate' => 'required',
+                //'birthdate' => 'required|date_format:d/m/Y',
                 'address' => ['nullable','string', 'max:255'],
                 'facebook_link' => ['nullable','url','string', 'max:255'],
                 'twitter_link' => ['nullable','url','string', 'max:255'],
