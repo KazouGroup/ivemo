@@ -10,162 +10,27 @@ import HelmetSite from "../../../../inc/user/HelmetSite";
 import ForumListSkeleton from "../../../../inc/user/forum/ForumListSkeleton";
 import ForumList from "../../../forum/inc/ForumList";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {
+    loadforumsbyuserprivate,
+    favoriteItem,unfavoriteItem,
+    likeItem,unlikeItem,
+    deleteItem
+} from "../../../../../redux/actions/forum/forumActions";
 
 
 class PrivateUserForum extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            forums:{user:[],categoryforum:[]}
+            //
         };
 
-        this.likeItem = this.likeItem.bind(this);
-        this.unlikeItem = this.unlikeItem.bind(this);
-        this.favoriteItem = this.favoriteItem.bind(this);
-        this.unfavoriteItem = this.unfavoriteItem.bind(this);
-        this.deleteItem = this.deleteItem.bind(this);
     }
-
-    likeItem(item) {
-        //console.log(item)
-        const url = route('forums_likes.active', [item.id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    unlikeItem(item) {
-        //console.log(item)
-        const url = route('forums_likes.unactive', [item.id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    favoriteItem(item) {
-        //console.log(item)
-        const url = route('forums_favorites.active', [item.id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    unfavoriteItem(item) {
-        //console.log(item)
-        const url = route('forums_favorites.unactive', [item.id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-
-    deleteItem(item) {
-        Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-
-                let isNotId = data => data.id !== item.id;
-                let updatedItems = this.state.forums.filter(isNotId);
-                this.setState({forums: updatedItems});
-
-                const url = route('forumsdelete_site',item.id);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            // title: 'Update',
-                            message: 'Post supprimée avec success'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animate__animated animate__fadeInRight',
-                                exit: 'animate__animated animate__fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
-
 
     loadItems() {
-        let itemuser = this.props.match.params.user;
-        let url = route('api.forumbyuser_site',[itemuser]);
-        dyaxios.get(url).then(response => this.setState({ forums: response.data, }));
+       this.props.loadforumsbyuserprivate(this.props);
     }
 
    // Lifecycle Component Method
@@ -173,12 +38,13 @@ class PrivateUserForum extends Component {
         this.loadItems();
     }
     render() {
-        const {forums} = this.state;
+        const {forums} = this.props;
         const mapForums = forums.length >= 0 ? (
             forums.map(item => {
                 return (
-                    <ForumList key={item.id} {...item}  unlikeItem={this.unlikeItem} likeItem={this.likeItem}
-                               unfavoriteItem={this.unfavoriteItem} favoriteItem={this.favoriteItem} deleteItem={this.deleteItem}/>
+                    <ForumList key={item.id} {...item}  unlikeItem={this.props.unlikeItem} likeItem={this.props.likeItem}
+                               unfavoriteItem={this.props.unfavoriteItem} favoriteItem={this.props.favoriteItem}
+                               deleteItem={this.props.deleteItem}/>
                 )
             })
         ) : (
@@ -187,7 +53,7 @@ class PrivateUserForum extends Component {
 
         return (
             <>
-                <HelmetSite title={`Forum - ${$name_site}`}/>
+                <HelmetSite title={`Forum ${$userIvemo.first_name} - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
 
@@ -202,9 +68,13 @@ class PrivateUserForum extends Component {
                                 <div className="row">
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
-                                        <div className="submit text-left">
-                                            <input className="form-control" name="search" placeholder="Recherche + de 4000 questions posé chaque mois"/>
-                                        </div>
+                                        {/*
+                                            <div className="submit text-left">
+                                                <input className="form-control" name="search" placeholder="Recherche + de 4000 questions posé chaque mois"/>
+                                            </div>
+
+                                        */}
+
                                         <br/>
                                         {!$guest &&(
                                             <>
@@ -251,5 +121,17 @@ class PrivateUserForum extends Component {
         )
     }
 }
+PrivateUserForum.propTypes = {
+    loadforumsbyuserprivate: PropTypes.func.isRequired,
+};
 
-export default PrivateUserForum;
+const mapStateToProps = state => ({
+    forums: state.forums.forums,
+});
+
+export default connect(mapStateToProps, {
+    loadforumsbyuserprivate,
+    favoriteItem,unfavoriteItem,
+    likeItem,unlikeItem,
+    deleteItem
+})(PrivateUserForum);

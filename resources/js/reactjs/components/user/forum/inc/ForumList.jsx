@@ -106,7 +106,7 @@ class ForumList extends Component {
                                         {this.props.likeked ?
                                             <>
                                                 <Button onClick={() => this.props.unlikeItem(this.props)}
-                                                        className="btn btn-info btn-icon btn-sm btn-neutral" title={`${this.props.countlikes} ${this.props.countlikes > 1 ? "Likes" : "Like"}`}>
+                                                        className="btn btn-danger btn-icon btn-sm btn-neutral" title={`${this.props.countlikes} ${this.props.countlikes > 1 ? "Likes" : "Like"}`}>
                                                     <i className="fas fa-heart"></i>
                                                 </Button> {this.data_countlikeFormatter(this.props.countlikes)}
                                             </>

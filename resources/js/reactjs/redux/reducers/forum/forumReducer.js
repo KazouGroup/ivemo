@@ -17,6 +17,18 @@ export default produce((draft, action = {}) => {
                 draft.categoryforums = action.payload;
                 return;
 
+            case 'GET_FORUM_ALL_SITE':
+                draft.forums = action.payload;
+                return;
+
+            case 'GET_FORUM_BY_PRIVATE_USER':
+                draft.forums = action.payload;
+                return;
+
+            case 'GET_FORUM_BY_CATEGORY':
+                draft.forums = action.payload;
+                return;
+
             case 'GET_FORUM_INTERESSE':
                 draft.forums = action.payload;
                 return;

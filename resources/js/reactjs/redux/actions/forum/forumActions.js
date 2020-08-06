@@ -4,14 +4,15 @@ import {
     FAVORITE_FORUM_REMOVE,
     GET_CATEGORYFORUMS,
     GET_CATEGORYFORUMS_BY_USER,
+    GET_FORUM_BY_PRIVATE_USER,
+    GET_FORUM_BY_CATEGORY,
     GET_FORUM_INTERESSE,
+    GET_FORUM_ALL_SITE,
     LIKE_FORUM_ADD,
     LIKE_FORUM_REMOVE,
+
 } from "../types";
 import Swal from "sweetalert2";
-
-
-
 
 
 export const loadCategoryforums = () => dispatch => {
@@ -34,12 +35,45 @@ export const loadCategoryforumsbyuser = () => dispatch => {
         ).catch(error => console.error(error));
 };
 
+export const loadforums = () => dispatch => {
+
+    dyaxios.get(route('api.forums_site'))
+        .then(response => dispatch({
+                type: GET_FORUM_ALL_SITE,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
 export const loadforuminteresse = (props) => dispatch => {
 
     let itemCategoryforum = props.match.params.categoryforum;
-    dyaxios.get(route('api.forumscategoryinteresse_site',[itemCategoryforum]))
+    dyaxios.get(route('api.forumscategoryinteresse_site', [itemCategoryforum]))
         .then(response => dispatch({
                 type: GET_FORUM_INTERESSE,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loadforumsbycategory = (props) => dispatch => {
+
+    let itemCategoryforum = props.match.params.categoryforum;
+    dyaxios.get(route('api.forumscategory_site', [itemCategoryforum]))
+        .then(response => dispatch({
+                type: GET_FORUM_BY_CATEGORY,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loadforumsbyuserprivate = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let url = route('api.forumbyuser_site', [itemuser]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_FORUM_BY_PRIVATE_USER,
                 payload: response.data
             })
         ).catch(error => console.error(error));
@@ -81,6 +115,7 @@ export const favoriteItem = props => dispatch => {
                 payload: props.id
             });
 
+            {/*
             $.notify({
                     message: "Annonce ajoutée à vos favoris",
                 },
@@ -96,6 +131,8 @@ export const favoriteItem = props => dispatch => {
                         exit: "animate__animated animate__fadeOutDown"
                     },
                 });
+            */
+            }
         }
     ).catch(error => console.error(error));
 };
@@ -110,21 +147,26 @@ export const unfavoriteItem = props => dispatch => {
                 payload: props.id
             });
 
-            $.notify({
-                    message: "Annonce ajoutée à vos favoris",
-                },
-                {
-                    allow_dismiss: false,
-                    type: 'info',
-                    placement: {
-                        from: 'bottom',
-                        align: 'center'
+            {/*
+
+               $.notify({
+                        message: "Annonce ajoutée à vos favoris",
                     },
-                    animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
-                    },
-                });
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+            */
+            }
+
         }
     ).catch(error => console.error(error));
 };
@@ -144,7 +186,7 @@ export const deleteItem = props => dispatch => {
     }).then((result) => {
         if (result.value) {
 
-            const url = route('forumsdelete_site',[props.id]);
+            const url = route('forumsdelete_site', [props.id]);
             //Envoyer la requet au server
             dyaxios.delete(url).then(() => {
 
@@ -187,4 +229,3 @@ export const deleteItem = props => dispatch => {
     });
 
 };
-

@@ -112,26 +112,29 @@ class NavUserSite extends PureComponent {
                                                 <i className="now-ui-icons business_bulb-63" /> Dashboard
                                             </a>
                                         )}
-                                        {$userIvemo.status_profile === 1 && (
+                                        {/*
+                                         {$userIvemo.status_profile === 1 && (
                                             <a href={`/dashboard/premium/${$userIvemo.slug}/`} className="dropdown-item">
                                                 <i className="now-ui-icons design_app"/>
                                                 <b>Premium dashboard</b>
                                             </a>
                                         )}
-                                        <a href="/profile/account" className="dropdown-item">
+                                        */}
+
+                                        <NavLink to={`/profile/account/`}  className="dropdown-item">
                                             <i className="now-ui-icons users_circle-08"/> Editer mon profile
-                                        </a>
-                                        <a href={`/profile/${$userIvemo.slug}/personal_settings/forums/`} className="dropdown-item">
+                                        </NavLink>
+                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/forums/`} className="dropdown-item">
                                             <i className="now-ui-icons travel_info"/> Post forums
-                                        </a>
+                                        </NavLink>
                                         {$userIvemo.status_profile === 1 ?
-                                            <a href={`/pro/${$userIvemo.slug}/`} className="dropdown-item">
+                                            <NavLink to={`/pro/${$userIvemo.slug}/`} className="dropdown-item">
                                                 <i className="now-ui-icons users_single-02"/> Profile
-                                            </a>
+                                            </NavLink>
                                             :
-                                            <a href={`/user/${$userIvemo.slug}/`} className="dropdown-item">
+                                            <NavLink to={`/user/${$userIvemo.slug}/`} className="dropdown-item">
                                                 <i className="now-ui-icons users_single-02"/> Profile
-                                            </a>
+                                            </NavLink>
                                         }
                                         {/*<a style={{ cursor: "pointer" }} className="dropdown-item" onClick={() => this.navLogout()}>
                                             <i className="now-ui-icons ui-1_simple-remove" /> Déconnexion

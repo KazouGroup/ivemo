@@ -1,8 +1,12 @@
-import React, {PureComponent} from "react";
+import React, {Fragment, PureComponent} from "react";
 import ButonFollowerTableUser from "../../../../inc/vendor/follow/ButonFollowerTableUser";
 import {Link, NavLink} from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import ButonFollowerUser from "../../../../inc/vendor/follow/ButonFollowerUser";
+import moment from "moment";
+import {Button} from "reactstrap";
+import ButonLiked from "../../../../inc/vendor/ButonLiked";
+import ButonFavoris from "../../../../inc/vendor/ButonFavoris";
 
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
@@ -31,22 +35,28 @@ class NavprofileFollowesusers extends PureComponent {
                 <div className="col-lg-10 col-md-12 mx-auto">
                     <div className="card">
                         <div className="card-body">
-                            <div className="media">
-                                {this.props.avatar ?
-                                    <NavLink to={`/pro/${this.props.slug}/`}>
-                                        <img src={this.props.avatar}
-                                             style={{height: "60px", width: "110px"}}
-                                             alt={this.props.first_name}
-                                             className="avatar"/>
-                                    </NavLink>
-                                    : <Skeleton circle={false} height={60} width={110}/>}
+                            <div className="card-header d-flex align-items-center">
+                                <div className="d-flex align-items-center">
+                                    {this.props.avatar ?
+                                        <NavLink to={`/pro/${this.props.slug}/`}>
+                                            <img src={this.props.avatar}
+                                                 style={{height: "60px", width: "110px"}}
+                                                 alt={this.props.first_name}
+                                                 className="avatar"/>
+                                        </NavLink>
+                                        : <Skeleton circle={false} height={60} width={110}/>}
 
-                                <div className="media-body">
-                                    {this.props.first_name ?
-                                        <h6 className="media-heading">{this.props.first_name}</h6> :
-                                        <Skeleton width={200}/>}
-                                    <div>
-                                                         <span className="short-text">
+                                    <div className="mx-3">
+                                        <NavLink to={`/pro/${this.props.slug}/`} className="text-dark font-weight-600 text-sm"><b> {this.props.first_name ?
+                                            <>
+                                                <h6 className="media-heading">{this.props.first_name}</h6>
+                                                <small className="d-block text-muted">Membre
+                                                    depuis {moment(this.props.created_at).format('LL')}</small>
+                                            </> :
+                                            <Skeleton width={200}/>}</b>
+                                        </NavLink>
+
+                                        <span className="short-text">
                                                              {this.props.first_name ?
                                                                  <>
                                                                      <Link
@@ -82,21 +92,20 @@ class NavprofileFollowesusers extends PureComponent {
                                                              }
                                                          </span>
                                     </div>
+                                </div>
 
-                                    <div className="text-right">
-                                        {this.props.first_name ?
-                                            <ButonFollowerUser {...this.props}
-                                                               unfollowerItem={this.props.unfollowerItem}
-                                                               followerItem={this.props.followerItem}
-                                                               nameunfollower={`Suivre`}
-                                                               nameununfollower={`Abonné`}/>
-                                            : <Skeleton height={20} width={50}/>}
-
-                                    </div>
+                                <div className="text-right ml-auto">
+                                    {this.props.first_name ?
+                                        <ButonFollowerUser {...this.props}
+                                                           unfollowerItem={this.props.unfollowerItem}
+                                                           followerItem={this.props.followerItem}
+                                                           nameunfollower={`Suivre`}
+                                                           nameununfollower={`Abonné`}/>
+                                        : <Skeleton height={20} width={50}/>}
 
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>

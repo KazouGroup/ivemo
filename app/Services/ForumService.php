@@ -61,7 +61,7 @@ class ForumService
                 $q->select('id','first_name','status_profile','sex','slug','created_at','avatar');}])
             ->whereHas('categoryforum', function ($q) {$q->where('status',1);})
             ->orderByDesc('created_at')
-            ->distinct()->paginate(40));
+            ->distinct()->get());
 
         return $data;
     }
@@ -70,7 +70,7 @@ class ForumService
     {
 
         $data = ForumResource::collection(self::getcategoryforum($categoryforum)
-            ->distinct()->paginate(40));
+            ->distinct()->get());
 
         return $data;
     }

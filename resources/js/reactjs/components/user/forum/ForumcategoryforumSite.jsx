@@ -10,6 +10,16 @@ import ForumListSkeleton from "../../inc/user/forum/ForumListSkeleton";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import Navforums from "./inc/Navforums";
 import Navlinknewforum from "./treatement/Navlinknewforum";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {
+    deleteItem,
+    favoriteItem,
+    likeItem,
+    loadforumsbycategory,
+    unfavoriteItem,
+    unlikeItem
+} from "../../../redux/actions/forum/forumActions";
 
 
 class ForumcategoryforumSite extends Component {
@@ -17,157 +27,22 @@ class ForumcategoryforumSite extends Component {
         super(props);
         this.state = {
             categoryforum:[],
-            forums:{user:[],categoryforum:[]}
+            visiable: 30,
         };
 
-        this.likeItem = this.likeItem.bind(this);
-        this.unlikeItem = this.unlikeItem.bind(this);
-        this.favoriteItem = this.favoriteItem.bind(this);
-        this.unfavoriteItem = this.unfavoriteItem.bind(this);
-        this.deleteItem = this.deleteItem.bind(this);
+        this.loadmoresItem = this.loadmoresItem.bind(this);
+
     }
 
-    likeItem(item) {
-        //console.log(item)
-        const url = route('forums_likes.active', [item.id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
+    loadmoresItem() {
+        this.setState((old) => {
+            return { visiable: old.visiable + 20 }
         })
     }
-
-    unlikeItem(item) {
-        //console.log(item)
-        const url = route('forums_likes.unactive', [item.id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    favoriteItem(item) {
-        //console.log(item)
-        const url = route('forums_favorites.active', [item.id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-    unfavoriteItem(item) {
-        //console.log(item)
-        const url = route('forums_favorites.unactive', [item.id]);
-        dyaxios.get(url).then(() => {
-
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
-    }
-
-
-    deleteItem(item) {
-        Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-
-                let isNotId = data => data.id !== item.id;
-                let updatedItems = this.state.forums.filter(isNotId);
-                this.setState({forums: updatedItems});
-
-                const url = route('forumsdelete_site',item.id);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            // title: 'Update',
-                            message: 'Post suprimée avec success'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animate__animated animate__fadeInRight',
-                                exit: 'animate__animated animate__fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
-
 
     loadItems() {
-        let itemCategoryforum = this.props.match.params.categoryforum;
-        let url = route('api.forumscategory_site',[itemCategoryforum]);
-        dyaxios.get(url).then(response => this.setState({ forums: response.data, }));
-        dyaxios.get(route('api.forumscategorycount_site',[itemCategoryforum])).then(response => this.setState({ categoryforum: response.data, }));
+        this.props.loadforumsbycategory(this.props);
+        dyaxios.get(route('api.forumscategorycount_site',[this.props.match.params.categoryforum])).then(response => this.setState({ categoryforum: response.data, }));
     }
 
    // Lifecycle Component Method
@@ -175,12 +50,13 @@ class ForumcategoryforumSite extends Component {
         this.loadItems();
     }
     render() {
-        const {forums,categoryforum} = this.state;
+        const {forums} = this.props;
+        const {categoryforum,visiable} = this.state;
         const mapForums = forums.length >= 0 ? (
-            forums.map(item => {
+            forums.slice(0, visiable).map(item => {
                 return (
-                    <ForumList key={item.id} {...item}  unlikeItem={this.unlikeItem} likeItem={this.likeItem}
-                               unfavoriteItem={this.unfavoriteItem} favoriteItem={this.favoriteItem} deleteItem={this.deleteItem}/>
+                    <ForumList key={item.id} {...item}  unlikeItem={this.props.unlikeItem} likeItem={this.props.likeItem}
+                               unfavoriteItem={this.props.unfavoriteItem} favoriteItem={this.props.favoriteItem} deleteItem={this.props.deleteItem}/>
                 )
             })
         ) : (
@@ -204,9 +80,11 @@ class ForumcategoryforumSite extends Component {
                                 <div className="row">
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
-                                        <div className="submit text-left">
+                                        {/*
+                                         <div className="submit text-left">
                                             <input className="form-control" name="search" placeholder="Recherche + de 4000 questions posé chaque mois"/>
                                         </div>
+                                        */}
                                         <br/>
                                         {!$guest &&(
                                             <>
@@ -218,6 +96,14 @@ class ForumcategoryforumSite extends Component {
 
 
                                         {mapForums}
+
+                                        <div className="text-center">
+                                            {visiable < forums.length && (
+                                                <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                                    <b>Voir plus </b>
+                                                </button>
+                                            )}
+                                        </div>
 
 
                                     </div>
@@ -255,4 +141,17 @@ class ForumcategoryforumSite extends Component {
     }
 }
 
-export default ForumcategoryforumSite;
+ForumcategoryforumSite.propTypes = {
+    loadforumsbycategory: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+    forums: state.forums.forums,
+});
+
+export default connect(mapStateToProps, {
+    loadforumsbycategory,
+    favoriteItem,unfavoriteItem,
+    likeItem,unlikeItem,
+    deleteItem
+})(ForumcategoryforumSite);
