@@ -1,4 +1,4 @@
-import React, { PureComponent,Fragment } from "react";
+import React, {PureComponent, Fragment, Suspense} from "react";
 import { Link, NavLink } from 'react-router-dom';
 import {Button, Form} from "reactstrap";
 import FieldInput from "../../inc/vendor/FieldInput";
@@ -479,98 +479,105 @@ class EmployementcommentIndex extends PureComponent {
                                                             </>
                                                         )}
 
+                                                        <Suspense fallback={<p>loading...</p>}>
 
-                                                        {item.responsecomments.slice(0, visiableresponsecomment).map((lk) =>
+                                                            {item.responsecomments.slice(0, visiableresponsecomment).map((lk) =>
 
-                                                            <Fragment key={lk.id} >
+                                                                <Fragment key={lk.id} >
 
-                                                                <div className="media">
 
-                                                                    <ProfileUserComment {...this.props} {...lk} />
 
-                                                                    <div className="media-body">
-                                                                        <h6 className="media-heading">{lk.user.first_name}
-                                                                            <small className="text-muted">· {moment(lk.updated_at).fromNow()} {lk.created_at !== lk.updated_at && ("(Modifié)")}</small>
-                                                                        </h6>
-                                                                        <ReadMoreAndLess
-                                                                            className="read-more-content"
-                                                                            charLimit={250}
-                                                                            readMoreText="lire plus"
-                                                                            readLessText=""
-                                                                        >
-                                                                            {lk.body || ""}
-                                                                        </ReadMoreAndLess>
-                                                                        <div className="media-footer">
-                                                                            {$guest ?
-                                                                                <Button data-toggle="modal" data-target="#loginModal"
-                                                                                        className="btn btn-default btn-neutral pull-right">
-                                                                                    <i className="now-ui-icons travel_info"></i>
-                                                                                </Button>
-                                                                                :
-                                                                                <>
+                                                                    <div className="media">
 
-                                                                                    {lk.user.id !== $userIvemo.id &&(
-                                                                                        <button type="button" onClick={() => this.responsecommentFromItem(item)}
-                                                                                                className="btn btn-default btn-neutral pull-right" title="Répondre a ce commentaire">
-                                                                                            <i className="now-ui-icons files_single-copy-04"></i> Répondre
-                                                                                        </button>
-                                                                                    )}
+                                                                        <ProfileUserComment {...this.props} {...lk} />
 
-                                                                                    {$userIvemo.id === lk.user.id && (
-                                                                                        <>
-                                                                                            <button onClick={() => this.deleteresponseItem(lk.id) }
-                                                                                                    className="btn btn-danger btn-neutral pull-right">
-                                                                                                <i className="now-ui-icons ui-1_simple-remove"></i> Supprimer
+                                                                        <div className="media-body">
+                                                                            <h6 className="media-heading">{lk.user.first_name}
+                                                                                <small className="text-muted">· {moment(lk.updated_at).fromNow()} {lk.created_at !== lk.updated_at && ("(Modifié)")}</small>
+                                                                            </h6>
+                                                                            <ReadMoreAndLess
+                                                                                className="read-more-content"
+                                                                                charLimit={250}
+                                                                                readMoreText="lire plus"
+                                                                                readLessText=""
+                                                                            >
+                                                                                {lk.body || ""}
+                                                                            </ReadMoreAndLess>
+                                                                            <div className="media-footer">
+                                                                                {$guest ?
+                                                                                    <Button data-toggle="modal" data-target="#loginModal"
+                                                                                            className="btn btn-default btn-neutral pull-right">
+                                                                                        <i className="now-ui-icons travel_info"></i>
+                                                                                    </Button>
+                                                                                    :
+                                                                                    <>
+
+                                                                                        {lk.user.id !== $userIvemo.id &&(
+                                                                                            <button type="button" onClick={() => this.responsecommentFromItem(item)}
+                                                                                                    className="btn btn-default btn-neutral pull-right" title="Répondre a ce commentaire">
+                                                                                                <i className="now-ui-icons files_single-copy-04"></i> Répondre
                                                                                             </button>
+                                                                                        )}
 
-                                                                                            <Button onClick={() => this.editresponsecommentFromItem(lk)}
-                                                                                                    className="btn btn-info btn-neutral pull-right">
-                                                                                                <i className="now-ui-icons ui-2_settings-90"></i> Editer
-                                                                                            </Button>
+                                                                                        {$userIvemo.id === lk.user.id && (
+                                                                                            <>
+                                                                                                <button onClick={() => this.deleteresponseItem(lk.id) }
+                                                                                                        className="btn btn-danger btn-neutral pull-right">
+                                                                                                    <i className="now-ui-icons ui-1_simple-remove"></i> Supprimer
+                                                                                                </button>
 
-                                                                                        </>
-                                                                                    )}
+                                                                                                <Button onClick={() => this.editresponsecommentFromItem(lk)}
+                                                                                                        className="btn btn-info btn-neutral pull-right">
+                                                                                                    <i className="now-ui-icons ui-2_settings-90"></i> Editer
+                                                                                                </Button>
 
-                                                                                    {/* Ce button donne l'autorisation a l'utilisateur de l'annonce de la masquer */}
-                                                                                    {$userIvemo.id === item.commentable.user_id && (
-                                                                                        <button onClick={() => this.unactiveresponseItem(lk.id) }
-                                                                                                className="btn btn-success btn-neutral pull-right" title="Masquer ce commentaire">
-                                                                                            <i className="now-ui-icons ui-1_check"></i> Masquer
-                                                                                        </button>
-                                                                                    )}
-                                                                                </>
-                                                                            }
+                                                                                            </>
+                                                                                        )}
+
+                                                                                        {/* Ce button donne l'autorisation a l'utilisateur de l'annonce de la masquer */}
+                                                                                        {$userIvemo.id === item.commentable.user_id && (
+                                                                                            <button onClick={() => this.unactiveresponseItem(lk.id) }
+                                                                                                    className="btn btn-success btn-neutral pull-right" title="Masquer ce commentaire">
+                                                                                                <i className="now-ui-icons ui-1_check"></i> Masquer
+                                                                                            </button>
+                                                                                        )}
+                                                                                    </>
+                                                                                }
+
+                                                                            </div>
 
                                                                         </div>
 
                                                                     </div>
 
+                                                                    {(lk.id === itemData.id && editresponsecomment) && (
+
+                                                                        <Form onSubmit={this.updateresponsecommentItem} acceptCharset="UTF-8">
+
+                                                                            <FormComment value={this.state.body} disabled={!this.state.body} cancelresponseCourse={this.cancelresponseCourse}
+                                                                                         renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
+                                                                                         handleFieldChange={this.handleFieldChange} namesubmit={`METTRE À JOUR`}/>
+
+                                                                        </Form>
+
+                                                                    )}
+
+
+                                                                </Fragment>
+
+
+
+                                                            )}
+
+                                                            {visiableresponsecomment < item.responsecomments.length && (
+                                                                <div className="col-md-8 ml-auto mr-auto text-center">
+                                                                    <a style={{cursor:"pointer"}} onClick={this.loadmoresresponseItem} className="text-info">
+                                                                        <b>{item.responsecomments.length} Afficher plus de réponses</b>
+                                                                    </a>
                                                                 </div>
+                                                            )}
 
-                                                                {(lk.id === itemData.id && editresponsecomment) && (
-
-                                                                    <Form onSubmit={this.updateresponsecommentItem} acceptCharset="UTF-8">
-
-                                                                        <FormComment value={this.state.body} disabled={!this.state.body} cancelresponseCourse={this.cancelresponseCourse}
-                                                                                     renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                                                     handleFieldChange={this.handleFieldChange} namesubmit={`METTRE À JOUR`}/>
-
-                                                                    </Form>
-
-                                                                )}
-
-                                                            </Fragment>
-
-                                                        )}
-
-                                                        {visiableresponsecomment < item.responsecomments.length && (
-                                                            <div className="col-md-8 ml-auto mr-auto text-center">
-                                                                <a style={{cursor:"pointer"}} onClick={this.loadmoresresponseItem} className="text-info">
-                                                                    <b>{item.responsecomments.length} Afficher plus de réponses</b>
-                                                                </a>
-                                                            </div>
-                                                        )}
-
+                                                        </Suspense>
 
                                                     </div>
                                                 </div>

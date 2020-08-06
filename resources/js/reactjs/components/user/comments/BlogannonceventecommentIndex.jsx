@@ -1,4 +1,4 @@
-import React, { Component,Fragment } from "react";
+import React, {Component, Fragment, Suspense} from "react";
 import { Link, NavLink } from 'react-router-dom';
 import {Button, Form} from "reactstrap";
 import FieldInput from "../../inc/vendor/FieldInput";
@@ -456,6 +456,7 @@ class BlogannonceventecommentIndex extends Component {
                                                        </>
                                                    )}
 
+                                                   <Suspense fallback={<p>loading...</p>}>
 
                                                    {item.responsecomments.slice(0, visiableresponsecomment).map((lk) =>
 
@@ -547,6 +548,8 @@ class BlogannonceventecommentIndex extends Component {
                                                            </a>
                                                        </div>
                                                    )}
+
+                                                   </Suspense>
 
 
                                                </div>

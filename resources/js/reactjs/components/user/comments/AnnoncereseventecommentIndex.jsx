@@ -1,4 +1,4 @@
-import React, { PureComponent,Fragment } from "react";
+import React, {PureComponent, Fragment, Suspense} from "react";
 import { Link, NavLink } from 'react-router-dom';
 import {Button, Form} from "reactstrap";
 import FieldInput from "../../inc/vendor/FieldInput";
@@ -480,6 +480,8 @@ class AnnoncereseventecommentIndex extends PureComponent {
                                                         )}
 
 
+                                                        <Suspense fallback={<p>loading...</p>}>
+
                                                         {item.responsecomments.slice(0, visiableresponsecomment).map((lk) =>
 
                                                             <Fragment key={lk.id} >
@@ -571,6 +573,7 @@ class AnnoncereseventecommentIndex extends PureComponent {
                                                             </div>
                                                         )}
 
+                                                        </Suspense>
 
                                                     </div>
                                                 </div>
