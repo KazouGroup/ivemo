@@ -7,6 +7,7 @@ import {
     GET_FORUM_BY_PRIVATE_USER,
     GET_FORUM_BY_CATEGORY,
     GET_FORUM_INTERESSE,
+    GET_SLUG_CATEGORY_FORUM,
     GET_FORUM_ALL_SITE,
     LIKE_FORUM_ADD,
     LIKE_FORUM_REMOVE,
@@ -62,6 +63,17 @@ export const loadforumsbycategory = (props) => dispatch => {
     dyaxios.get(route('api.forumscategory_site', [itemCategoryforum]))
         .then(response => dispatch({
                 type: GET_FORUM_BY_CATEGORY,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loadslugcategoryforum = (props) => dispatch => {
+
+    let itemCategoryforum = props.match.params.categoryforum;
+    dyaxios.get(route('api.forumscategorycount_site', [itemCategoryforum]))
+        .then(response => dispatch({
+                type: GET_SLUG_CATEGORY_FORUM,
                 payload: response.data
             })
         ).catch(error => console.error(error));

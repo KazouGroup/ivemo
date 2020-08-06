@@ -17,6 +17,7 @@ import {
     favoriteItem,
     likeItem,
     loadforumsbycategory,
+    loadslugcategoryforum,
     unfavoriteItem,
     unlikeItem
 } from "../../../redux/actions/forum/forumActions";
@@ -26,7 +27,6 @@ class ForumcategoryforumSite extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            categoryforum:[],
             visiable: 30,
         };
 
@@ -42,7 +42,7 @@ class ForumcategoryforumSite extends Component {
 
     loadItems() {
         this.props.loadforumsbycategory(this.props);
-        dyaxios.get(route('api.forumscategorycount_site',[this.props.match.params.categoryforum])).then(response => this.setState({ categoryforum: response.data, }));
+        this.props.loadslugcategoryforum(this.props);
     }
 
    // Lifecycle Component Method
@@ -50,8 +50,8 @@ class ForumcategoryforumSite extends Component {
         this.loadItems();
     }
     render() {
-        const {forums} = this.props;
-        const {categoryforum,visiable} = this.state;
+        const {forums,categoryforum} = this.props;
+        const {visiable} = this.state;
         const mapForums = forums.length >= 0 ? (
             forums.slice(0, visiable).map(item => {
                 return (
@@ -147,10 +147,12 @@ ForumcategoryforumSite.propTypes = {
 
 const mapStateToProps = state => ({
     forums: state.forums.forums,
+    categoryforum: state.forums.categoryforum,
 });
 
 export default connect(mapStateToProps, {
     loadforumsbycategory,
+    loadslugcategoryforum,
     favoriteItem,unfavoriteItem,
     likeItem,unlikeItem,
     deleteItem

@@ -2,6 +2,7 @@ import produce from "immer"
 
 
 const initialState = {
+    categoryforum:[],
     forums: {user: [], categoryforum: []},
     categoryforums: {}
 };
@@ -27,6 +28,10 @@ export default produce((draft, action = {}) => {
 
             case 'GET_FORUM_BY_CATEGORY':
                 draft.forums = action.payload;
+                return;
+
+            case 'GET_SLUG_CATEGORY_FORUM':
+                draft.categoryforum = action.payload;
                 return;
 
             case 'GET_FORUM_INTERESSE':
