@@ -125,15 +125,34 @@ class annoncereservation extends Model
         return $this->hasMany(imagereservation::class, 'annoncereservation_id');
     }
 
-    public function signalannoncereservations()
+    public function signals()
     {
-        return $this->hasMany(signalannoncereservation::class, 'annoncereservation_id');
+        return $this->morphMany(signal::class ,'signalable');
     }
 
-    public function bookmarked()
+    public function likes()
     {
-        return (bool) favoriteannoncereservation::where('user_id', Auth::guard('web')->id())
-            ->where('annoncereservation_id', $this->id)
+        return $this->morphMany(like::class ,'likeable');
+    }
+
+    public function likeked()
+    {
+        return (bool) like::where('user_id', Auth::guard('web')->id())
+            ->where(['likeable_type' => 'App\Model\annoncereservation',
+                'likeable_id' => $this->id ])
+            ->first();
+    }
+
+    public function favorites()
+    {
+        return $this->morphMany(favorite::class ,'favoriteable');
+    }
+
+    public function favoriteted()
+    {
+        return (bool) favorite::where('user_id', Auth::guard('web')->id())
+            ->where(['favoriteable_type' => 'App\Model\annoncereservation',
+                'favoriteable_id' => $this->id ])
             ->first();
     }
 }

@@ -66,7 +66,7 @@ class AnnoncereservationController extends Controller
                 ]);
     }
 
-    public function annoncelocationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
+    public function annoncelocationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,$user,annoncereservation $annoncereservation)
     {
         visits($annoncereservation)->seconds(60)->increment();
 
@@ -158,9 +158,9 @@ class AnnoncereservationController extends Controller
         return response()->json($annoncereservation, 200);
     }
 
-    public function apiannoncereservationinteresse(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city)
+    public function apiannoncereservationinteresse(annoncetype $annoncetype,user $user)
     {
-        $annoncereservation = AnnoncereservationService::apiannoncereservationinteresse($annoncetype,$categoryannoncereservation,$city);
+        $annoncereservation = AnnoncereservationService::apiannoncereservationinteresse($annoncetype,$user);
         return response()->json($annoncereservation, 200);
     }
 
@@ -171,7 +171,6 @@ class AnnoncereservationController extends Controller
             ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','desc')
-            //->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
             ->take(4)->distinct()->get());
         return response()->json($annoncereservation, 200);
@@ -234,7 +233,7 @@ class AnnoncereservationController extends Controller
         return response()->json($annoncereservations, 200);
     }
 
-    public function apiannoncereservationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
+    public function apiannoncereservationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,$user,annoncereservation $annoncereservation)
     {
         visits($annoncereservation)->seconds(60)->increment();
 
@@ -249,7 +248,7 @@ class AnnoncereservationController extends Controller
     }
 
 
-    public function sendannoncereservation(StoreRequest $request, annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
+    public function sendannoncereservation(StoreRequest $request, annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,$user,annoncereservation $annoncereservation)
     {
         $user = auth()->user();
         $reservation = new reservation();
@@ -264,7 +263,7 @@ class AnnoncereservationController extends Controller
         return response()->json($reservation,200);
     }
 
-     public function sendcontactmessageuser(StorecontactRequest $request, annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
+     public function sendcontactmessageuser(StorecontactRequest $request, annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,$user,annoncereservation $annoncereservation)
     {
 
         $contactuser = new contactuser();
@@ -272,10 +271,10 @@ class AnnoncereservationController extends Controller
         $slug = sha1(('YmdHis') . str_random(30));
         $contactuser->fill($request->all());
         $contactuser->slug = $slug;
-        $contactuser->user_id = $annoncereservation->user->id;
-        $contactuser->annoncereservation_id = $annoncereservation->id;
+        //$contactuser->user_id = $annoncereservation->user->id;
+        //$contactuser->annoncereservation_id = $annoncereservation->id;
 
-        ContactuserService::newEmailToannoncereservationpageShow($request,$annoncereservation);
+        //ContactuserService::newEmailToannoncereservationpageShow($request,$annoncereservation);
 
         $contactuser->save();
 

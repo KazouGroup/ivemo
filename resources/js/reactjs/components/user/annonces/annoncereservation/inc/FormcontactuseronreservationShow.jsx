@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import FieldInput from "../../../../inc/vendor/FieldInput";
 
 
 class FormcontactuseronreservationShow extends Component {
@@ -53,8 +54,9 @@ class FormcontactuseronreservationShow extends Component {
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
         let itemcityannonce = this.props.match.params.city;
+        let itemuser = this.props.match.params.user;
         let itemannoncereservation = this.props.match.params.annoncereservation;
-        let url = route('annoncereservationsendcontactmessageuser_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemannoncereservation]);
+        let url = route('annoncereservationsendcontactmessageuser_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemuser,itemannoncereservation]);
         dyaxios.post(url, item)
             .then(() => {
 
@@ -88,11 +90,6 @@ class FormcontactuseronreservationShow extends Component {
         })
     }
 
-   // Lifecycle Component Method
-    componentDidMount() {
-        //
-    }
-
     render() {
         return (
 
@@ -107,17 +104,11 @@ class FormcontactuseronreservationShow extends Component {
                                                         <span className="input-group-text">
                                                             <i className="now-ui-icons users_circle-08"/></span>
                             </div>
-                            <input id='full_name'
-                                   type='text'
-                                   className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
-                                   name='full_name'
-                                   placeholder="Nom complet"
-                                   aria-label="Nom complet"
-                                   autoComplete="full_name"
-                                   value={this.state.full_name}
-                                   onChange={this.handleFieldChange}
-                            />
-                            {this.renderErrorFor('full_name')}
+
+                            <FieldInput name="full_name" type='text' minLength="3" maxLength="250" placeholder="Email " value={this.state.full_name}
+                                        handleFieldChange={this.handleFieldChange}
+                                        hasErrorFor={this.hasErrorFor}
+                                        renderErrorFor={this.renderErrorFor}/>
                         </div>
                     </div>
 
@@ -127,17 +118,10 @@ class FormcontactuseronreservationShow extends Component {
                                                         <span className="input-group-text">
                                                             <i className="now-ui-icons ui-1_email-85"/></span>
                             </div>
-                            <input id='email'
-                                   type='email'
-                                   className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                   name='email'
-                                   placeholder="Email"
-                                   aria-label="Email"
-                                   autoComplete="email"
-                                   value={this.state.email}
-                                   onChange={this.handleFieldChange}
-                            />
-                            {this.renderErrorFor('email')}
+                            <FieldInput name="email" type='email' minLength="3" maxLength="30" placeholder="Email " value={this.state.email}
+                                        handleFieldChange={this.handleFieldChange}
+                                        hasErrorFor={this.hasErrorFor}
+                                        renderErrorFor={this.renderErrorFor}/>
                         </div>
                     </div>
                     <div className="row">
@@ -146,16 +130,10 @@ class FormcontactuseronreservationShow extends Component {
                                                         <span className="input-group-text">
                                                             <i className="now-ui-icons tech_mobile"/></span>
                             </div>
-                            <input id='phone'
-                                   type='text'
-                                   className={`form-control ${this.hasErrorFor('phone') ? 'is-invalid' : ''}`}
-                                   name='phone'
-                                   placeholder="Téléphone"
-                                   aria-label="Téléphone"
-                                   value={this.state.phone}
-                                   onChange={this.handleFieldChange}
-                            />
-                            {this.renderErrorFor('phone')}
+                            <FieldInput name="phone" type='number' minLength="3" maxLength="30" placeholder="Téléphone " value={this.state.phone}
+                                        handleFieldChange={this.handleFieldChange}
+                                        hasErrorFor={this.hasErrorFor}
+                                        renderErrorFor={this.renderErrorFor}/>
                         </div>
 
 
@@ -167,29 +145,20 @@ class FormcontactuseronreservationShow extends Component {
                                                         <span className="input-group-text">
                                                             <i className="now-ui-icons users_circle-08"/></span>
                             </div>
-                            <input id='subject'
-                                   type='text'
-                                   className={`form-control ${this.hasErrorFor('subject') ? 'is-invalid' : ''}`}
-                                   name='subject'
-                                   placeholder="Object..."
-                                   aria-label="Object"
-                                   autoComplete="subject"
-                                   value={this.state.subject}
-                                   onChange={this.handleFieldChange}
-                            />
-                            {this.renderErrorFor('subject')}
+                            <FieldInput name="subject" type='text' minLength="3" maxLength="250" placeholder="Object " value={this.state.subject}
+                                        handleFieldChange={this.handleFieldChange}
+                                        hasErrorFor={this.hasErrorFor}
+                                        renderErrorFor={this.renderErrorFor}/>
                         </div>
                     </div>
                     <div className="row">
 
                         <div className="input-group">
-                                                       <textarea name="message" value={this.state.message}
-                                                                 onChange={this.handleFieldChange}
-                                                                 placeholder={'Posez ici toutes vos questions !'}
-                                                                 className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                                 id="message"
-                                                                 rows="10" />
-                            {this.renderErrorFor('message')}
+
+                            <FieldInput name="message" type='textarea' minLength="3" maxLength="5000" placeholder="Posez ici toutes vos questions " value={this.state.message}
+                                        handleFieldChange={this.handleFieldChange}
+                                        hasErrorFor={this.hasErrorFor}
+                                        renderErrorFor={this.renderErrorFor}/>
                         </div>
                     </div>
                     <div className="submit text-center">

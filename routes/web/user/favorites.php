@@ -42,6 +42,16 @@ Route::post(
 )->name('annonceventes_favorites.unactive');
 
 Route::post(
+    'annoncereservations_favorite/{annoncereservation:id}/favorite',
+    'FavoriteController@favoritannoncereservation'
+)->name('annoncereservations_favorites.favorite');
+
+Route::post(
+    'annoncereservations_unfavorites/{annoncereservation:id}/unfavorites',
+    'FavoriteController@unfavoritannoncereservation'
+)->name('annoncereservations_favorites.unactive');
+
+Route::post(
     'blogannoncelocations_favorite/{blogannoncelocation:id}/favorite',
     'FavoriteController@favoritblogannoncelocation'
 )->name('blogannoncelocations_favorites.favorite');
@@ -60,3 +70,13 @@ Route::post(
     'blogannonceventes_unfavorites/{blogannoncevente:id}/unfavorites',
     'FavoriteController@unfavoritblogannoncevente'
 )->name('blogannonceventes_favorites.unactive');
+
+Route::post(
+    'blogannoncereservations_favorite/{blogannoncereservation:id}/favorite',
+    'FavoriteController@favoritblogannoncereservation'
+)->name('blogannoncereservations_favorites.favorite');
+
+Route::post(
+    'blogannoncereservations_unfavorites/{blogannoncereservation:id}/unfavorites',
+    'FavoriteController@unfavoritblogannoncereservation'
+)->name('blogannoncereservations_favorites.unactive');

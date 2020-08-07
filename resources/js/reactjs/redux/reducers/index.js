@@ -14,6 +14,9 @@ import blogannoncelocationReducer from "./blogannoncelocation/blogannoncelocatio
 import profileReducer from "./profileReducer";
 import annonceventeshowReducer from "./annoncevente/annonceventeshowReducer";
 import blogannonceventeReducer from "./blogannoncevente/blogannonceventeReducer";
+import annoncereservationshowReducer from "./annoncereservation/annoncereservationshowReducer";
+import annoncereservationReducer from "./annoncereservation/annoncereservationReducer";
+import blogannoncereservationReducer from "./blogannoncereservation/blogannoncereservationReducer";
 
 
 export default combineReducers({
@@ -24,9 +27,12 @@ export default combineReducers({
     forumshow: forumshowReducer,
     annonceventes: annonceventeReducer,
     annoncelocations: annoncelocationReducer,
+    annoncereservationshow: annoncereservationshowReducer,
+    annoncereservations: annoncereservationReducer,
     annoncelocationshow: annoncelocationshowReducer,
     annonceventeshow: annonceventeshowReducer,
     blogannoncelocations: blogannoncelocationReducer,
+    blogannoncereservations: blogannoncereservationReducer,
     blogannonceventes: blogannonceventeReducer,
     commentsites: commentsReducer,
     profile: profileReducer,

@@ -35,8 +35,9 @@ export const loadCommentsAnnoncereservationcomments = (props) => dispatch => {
     let itemannoncetype = props.match.params.annoncetype;
     let itemCategoryannoncereservation = props.match.params.categoryannoncereservation;
     let itemcityannonce = props.match.params.city;
+    let itemuser = props.match.params.user;
     let itemannoncereservation = props.match.params.annoncereservation;
-    let url = route('api.annoncereservationgetcomment_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemannoncereservation]);
+    let url = route('api.annoncereservationgetcomment_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemuser,itemannoncereservation]);
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_COMMENTS_ANNONCESRESERVATIONS,

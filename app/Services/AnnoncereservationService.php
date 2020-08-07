@@ -4,8 +4,10 @@ namespace App\Services;
 
 
 use App\Http\Resources\AnnoncereservationResource;
+use App\Model\annoncereservation;
 use App\Model\categoryannoncereservation;
 use App\Model\city;
+use App\Model\user;
 use Illuminate\Support\Facades\Cache;
 
 class AnnoncereservationService
@@ -58,18 +60,17 @@ class AnnoncereservationService
         return $annonces;
     }
 
-    public static function apiannoncereservationinteresse($annoncetype,$categoryannoncereservation,$city)
+    public static function apiannoncereservationinteresse($annoncetype,$user)
     {
-        $annonces = AnnoncereservationResource::collection($categoryannoncereservation->annoncereservations()->whereIn('annoncetype_id',[$annoncetype->id])
+        $annonces = AnnoncereservationResource::collection($user->annoncereservations()->whereIn('annoncetype_id',[$annoncetype->id])
             ->with('user','categoryannoncereservation','city','annoncetype','periodeannonce','imagereservations')
             ->with(['user.profile' => function ($q){$q->distinct()->get();}])
-            ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
-            ->whereIn('city_id',[$city->id])
+            ->whereIn('user_id',[$user->id])
             ->orderByRaw('RAND()')
             ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->where(['status' => 1,'status_admin' => 1])
-            ->take(10)->distinct()->get());
+            ->take(20)->distinct()->get());
 
         return $annonces;
     }

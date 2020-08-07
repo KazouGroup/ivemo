@@ -28,7 +28,7 @@ class CommentannoncereservationController extends Controller
     }
 
 
-    public function getcomment(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
+    public function getcomment(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,$user,annoncereservation $annoncereservation)
     {
         $comments = CommentResource::collection($annoncereservation->comments()
             ->with('user','commentable','responsecomments')
@@ -43,7 +43,7 @@ class CommentannoncereservationController extends Controller
         return response()->json($comments,200);
     }
 
-    public function sendcomment(Request $request,annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation)
+    public function sendcomment(Request $request,annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,$user,annoncereservation $annoncereservation)
     {
         $this->validate($request,[
             'body'=>'required|max:5000',
@@ -58,7 +58,7 @@ class CommentannoncereservationController extends Controller
 
 
 
-    public function updatecomment(Request $request,annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation,comment $comment)
+    public function updatecomment(Request $request,annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,$user,annoncereservation $annoncereservation,comment $comment)
     {
 
         $this->authorize('updateComment',$comment);
@@ -71,7 +71,7 @@ class CommentannoncereservationController extends Controller
     }
 
 
-    public function sendresponsecomment(Request $request,annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,annoncereservation $annoncereservation,comment $comment)
+    public function sendresponsecomment(Request $request,annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,$user,annoncereservation $annoncereservation,comment $comment)
     {
         $validatedData = $request->validate(['body' => 'required|min:2|max:5000']);
 

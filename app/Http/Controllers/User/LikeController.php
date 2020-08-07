@@ -4,8 +4,10 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Model\annoncelocation;
+use App\Model\annoncereservation;
 use App\Model\annoncevente;
 use App\Model\blogannoncelocation;
+use App\Model\blogannoncereservation;
 use App\Model\blogannoncevente;
 use App\Model\comment;
 use App\Model\employment;
@@ -107,6 +109,25 @@ class LikeController extends Controller
 
     /**
      * @param Request $request
+     * @param annoncereservation $annoncereservation
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function likannoncereservation(Request $request,annoncereservation $annoncereservation)
+    {
+        $annoncereservation->likes()->create($request->all());
+
+        return response('Like',Response::HTTP_ACCEPTED);
+    }
+
+    public function unlikannoncereservation(Request $request,annoncereservation $annoncereservation)
+    {
+        auth()->user()->removelikes()->detach($annoncereservation->id);
+
+        return response('Unlike',Response::HTTP_ACCEPTED);
+    }
+
+    /**
+     * @param Request $request
      * @param annoncevente $annoncevente
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
@@ -186,12 +207,38 @@ class LikeController extends Controller
         return response()->json(['success'=>$response]);
     }
 
-    public function unlikablognnoncevente(Request $request,$id)
+    public function unlikblognnoncevente(Request $request,$id)
     {
 
         $blogannoncevente = blogannoncevente::whereId($id)->firstOrFail();
 
         $response = auth()->user()->removelikes()->detach($blogannoncevente->id);
+
+        return response()->json(['success'=>$response]);
+    }
+
+    /**
+     * @param Request $request
+     * @param blogannoncereservation $blogannoncereservation
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function likblogannoncereservation(Request $request,$id)
+    {
+
+        $blogannoncereservation = blogannoncereservation::whereId($id)->firstOrFail();
+
+
+        $response = $blogannoncereservation->likes()->create($request->all());
+
+        return response()->json(['success'=>$response]);
+    }
+
+    public function unlikblogannoncereservation(Request $request,$id)
+    {
+
+        $blogannoncereservation = blogannoncereservation::whereId($id)->firstOrFail();
+
+        $response = auth()->user()->removelikes()->detach($blogannoncereservation->id);
 
         return response()->json(['success'=>$response]);
     }

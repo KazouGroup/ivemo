@@ -4,8 +4,10 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Model\annoncelocation;
+use App\Model\annoncereservation;
 use App\Model\annoncevente;
 use App\Model\blogannoncelocation;
+use App\Model\blogannoncereservation;
 use App\Model\blogannoncevente;
 use App\Model\comment;
 use App\Model\employment;
@@ -116,6 +118,29 @@ class FavoriteController extends Controller
 
     /**
      * @param Request $request
+     * @param annoncereservation $annoncereservation
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function favoritannoncereservation(Request $request,$annoncereservation)
+    {
+        $annoncereservation = annoncereservation::whereId($annoncereservation)->firstOrFail();
+
+        $annoncereservation->favorites()->create($request->all());
+
+        return response('Favorite',Response::HTTP_ACCEPTED);
+    }
+
+    public function unfavoritannoncereservation(Request $request,$annoncereservation)
+    {
+        $annoncereservation = annoncevente::whereId($annoncereservation)->firstOrFail();
+
+        auth()->user()->removefavorites()->detach($annoncereservation);
+
+        return response('Favorite move',Response::HTTP_ACCEPTED);
+    }
+
+    /**
+     * @param Request $request
      * @param blogannoncelocation $blogannoncelocation
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
@@ -156,6 +181,29 @@ class FavoriteController extends Controller
         $blogannoncevente = blogannoncevente::whereId($blogannoncevente)->firstOrFail();
 
         $response = auth()->user()->removefavorites()->detach($blogannoncevente);
+
+        return response()->json(['success'=>$response]);
+    }
+
+    /**
+     * @param Request $request
+     * @param blogannoncereservation $blogannoncereservation
+     * @return
+     */
+    public function favoritblogannoncereservation(Request $request,$blogannoncereservation)
+    {
+        $blogannoncereservation = blogannoncereservation::whereId($blogannoncereservation)->firstOrFail();
+
+        $response = $blogannoncereservation->favorites()->create($request->all());
+
+        return response()->json(['success'=>$response]);
+    }
+
+    public function unfavoritblogannoncereservation(Request $request,$blogannoncereservation)
+    {
+        $blogannoncereservation = blogannoncereservation::whereId($blogannoncereservation)->firstOrFail();
+
+        $response = auth()->user()->removefavorites()->detach($blogannoncereservation);
 
         return response()->json(['success'=>$response]);
     }

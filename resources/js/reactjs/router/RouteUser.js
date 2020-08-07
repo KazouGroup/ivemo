@@ -196,7 +196,7 @@ const RouteUser = props => (
           <Route exact path="/annonce_reservations/:annoncetype/:city/" component={withRouter(Annoncereservationbyannoncetypebycity)}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/" component={withRouter(Annoncebycategoryannoncereservation)}/>
           <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/" component={withRouter(Annoncebycategoryannoncereservationcity)}/>
-          <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/:annoncereservation/" component={withRouter(Annoncebycategoryannoncereservationcityshow)}/>
+          <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/:user/:annoncereservation/" component={withRouter(Annoncebycategoryannoncereservationcityshow)}/>
           <Route exact path="/annonce_reservation/:annoncetype/new/" component={AnnoncereservationCreate}/>
 
 

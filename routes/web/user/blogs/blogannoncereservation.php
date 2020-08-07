@@ -35,7 +35,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.blogannoncecategoryreservationscount_site');
 
     Route::get(
-        'blogs/annonce_reservations_interesses/{categoryannoncereservation}',
+        'blogs/annonce_reservations_interesses/{categoryannoncereservation}/{user}',
         'BlogannoncereservationController@apiblogannoncereservationinteresse'
     )->name('api.blogannoncereservationinteresse_site');
 

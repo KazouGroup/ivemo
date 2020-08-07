@@ -4,8 +4,14 @@ import moment from 'moment'
 import {Button, Row} from "reactstrap";
 import {Remarkable} from "remarkable";
 import AnnoncereservationInteresseList from "./inc/AnnoncereservationInteresseList";
-import AnnoncereservationList from "./inc/AnnoncereservationList";
 import AnnoncesinteresseSkeleton from "../../../inc/user/annonce/AnnoncesinteresseSkeleton";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {
+    favoriteItem,
+    loadAnnoncereservationsinteressesbyuser,
+    unactiveItem, unfavoriteItem
+} from "../../../../redux/actions/annoncereservation/annoncereservationActions";
 
 require("moment/min/locales.min");
 moment.locale('fr');
@@ -14,7 +20,6 @@ class AnnonceservationInteresse extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncereservationsinteresse:[],
             visiable: 4,
         };
 
@@ -29,17 +34,12 @@ class AnnonceservationInteresse extends Component {
 
 
     componentDidMount() {
-        let itemannoncetype = this.props.match.params.annoncetype;
-        let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
-        let itemCityannonce = this.props.match.params.city;
-        dyaxios.get(route('api.annoncereservationintersse_site',[itemannoncetype,itemCategoryannoncereservation,itemCityannonce])).then(response =>
-            this.setState({
-                annoncereservationsinteresse: [...response.data],
-            }));
+       this.props.loadAnnoncereservationsinteressesbyuser(this.props);
     }
 
     render() {
-        const {annoncereservationsinteresse,visiable} = this.state;
+        const {annoncereservationsinteresse} = this.props;
+        const {visiable} = this.state;
         return (
             <>
 
@@ -56,7 +56,10 @@ class AnnonceservationInteresse extends Component {
                         <>
                             {annoncereservationsinteresse.slice(0,visiable).map((item) => (
 
-                                <AnnoncereservationInteresseList key={item.id} {...item}/>
+                                <AnnoncereservationInteresseList  key={item.id} {...item}
+                                                                  unactiveItem={this.props.unactiveItem}
+                                                                  unfavoriteItem={this.props.unfavoriteItem}
+                                                                  favoriteItem={this.props.favoriteItem}/>
                             ))}
                         </>:  <AnnoncesinteresseSkeleton/>}
 
@@ -78,5 +81,14 @@ class AnnonceservationInteresse extends Component {
     }
 
 }
+AnnonceservationInteresse.propTypes = {
+    loadAnnoncereservationsinteressesbyuser: PropTypes.func.isRequired,
+};
 
-export default AnnonceservationInteresse;
+const mapStoreToProps = store => ({
+    annoncereservationsinteresse: store.annoncereservations.annoncereservations
+
+});
+export default connect(mapStoreToProps, {
+    loadAnnoncereservationsinteressesbyuser,unactiveItem,unfavoriteItem,favoriteItem
+})(AnnonceservationInteresse);

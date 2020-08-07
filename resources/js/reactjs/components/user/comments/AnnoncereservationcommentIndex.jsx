@@ -123,9 +123,10 @@ class AnnoncereservationcommentIndex extends PureComponent {
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
         let itemcityannonce = this.props.match.params.city;
+        let itemuser = this.props.match.params.user;
         let itemannoncereservation = this.props.match.params.annoncereservation;
         let Id = this.state.itemData.id;
-        let url = route('annoncesreservationssendresponsecomment_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemannoncereservation,Id]);
+        let url = route('annoncesreservationssendresponsecomment_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemuser,itemannoncereservation,Id]);
         dyaxios.post(url, item)
             .then(() => {
 
@@ -165,8 +166,9 @@ class AnnoncereservationcommentIndex extends PureComponent {
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
         let itemcityannonce = this.props.match.params.city;
+        let itemuser = this.props.match.params.user;
         let itemannoncereservation = this.props.match.params.annoncereservation;
-        let url = route('annoncereservationsendcomment_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemannoncereservation]);
+        let url = route('annoncereservationsendcomment_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemuser,itemannoncereservation]);
         dyaxios.post(url, item)
             .then(() => {
 
@@ -207,9 +209,10 @@ class AnnoncereservationcommentIndex extends PureComponent {
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
         let itemcityannonce = this.props.match.params.city;
+        let itemuser = this.props.match.params.user;
         let itemannoncereservation = this.props.match.params.annoncereservation;
         let Id = this.state.itemData.id;
-        let url = route('annoncereservationupdatecomment_site', [itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemannoncereservation,Id]);
+        let url = route('annoncereservationupdatecomment_site', [itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemuser,itemannoncereservation,Id]);
         dyaxios.put(url, item)
             .then(response => {
 

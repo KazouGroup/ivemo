@@ -29,7 +29,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.annoncereservationbycitiescount_site');
 
     Route::get(
-        'annonces_reservations/{annoncetype}/{categoryannoncereservation}/{city}/{annoncereservation}',
+        'annonces_reservations/{annoncetype}/{categoryannoncereservation}/{city}/{user:slug}/{annoncereservation}',
         'AnnoncereservationController@apiannoncereservationbycategoryannoncereservationslug'
     )->name('api.annoncelocationbycategoryannoncereservationslug_site');
 
@@ -44,7 +44,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.annoncereservationsbyannoncetypebycitycount_site');
 
     Route::get(
-        'annonces_interesses/{annoncetype}/{categoryannoncereservation}/{city}',
+        'annonces_interesses/{annoncetype}/{user}',
         'AnnoncereservationController@apiannoncereservationinteresse'
     )->name('api.annoncereservationintersse_site');
 
@@ -88,7 +88,7 @@ Route::get(
 )->name('annoncereservationbycities_site');
 
 Route::get(
-    'annonces_reservations/{annoncetype}/{categoryannoncereservation}/{city}/{annoncereservation}',
+    'annonces_reservations/{annoncetype}/{categoryannoncereservation}/{city}/{user:slug}/{annoncereservation}',
     'AnnoncereservationController@annoncelocationbycategoryannoncereservationslug'
 )->name('annoncelocationbycategoryannoncereservationslug_site');
 
@@ -98,7 +98,7 @@ Route::post(
 )->name('sendannoncereservation_site');
 
 Route::post(
-    'annonces_reservations/{annoncetype}/{categoryannoncereservation}/{city}/{annoncereservation}/send_contact_message_user',
+    'annonces_reservations/{annoncetype}/{categoryannoncereservation}/{city}/{user}/{annoncereservation}/send_contact_message_user',
     'AnnoncereservationController@sendcontactmessageuser'
 )->name('annoncereservationsendcontactmessageuser_site');
 
