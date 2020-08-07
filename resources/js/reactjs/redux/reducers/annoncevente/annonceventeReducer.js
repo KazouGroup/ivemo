@@ -3,7 +3,8 @@ import produce from "immer"
 
 const initialState = {
     catgoryannonceventes: {user: []},
-    cityannonceventes: {user: []}
+    cityannonceventes: {user: []},
+    annonceventes: {annoncetype:[],categoryannoncevente:[],user:{profile:[]},imagereservations:[]},
 };
 
 
@@ -18,6 +19,29 @@ export default produce((draft, action = {}) => {
             case 'GET_CATEGORYANNONCEVENTES_BY_CITY':
                 draft.catgoryannonceventes = action.payload;
                 return;
+
+            case 'GET_ANNONCEVENTE_INTERESSE_BY_CITY':
+                draft.annonceventes = action.payload;
+                return;
+
+            case 'GET_ANNONCEVENTE_INTERESSE_BY_CATEGORY':
+                draft.annonceventes = action.payload;
+                return;
+
+            case 'FAVORITE_ANNONCEVENTE_ADD':
+                let datadd = draft.annonceventes.findIndex(i => i.id === action.payload);
+                if (datadd !== -1) draft.annonceventes[datadd].favoriteted = action.payload;
+                return draft;
+
+            case 'FAVORITE_ANNONCEVENTE_REMOVE':
+                let dataremove = draft.annonceventes.findIndex(i => i.id === action.payload);
+                if (dataremove !== -1) draft.annonceventes[dataremove].favoriteted = !action.payload;
+                return draft;
+
+            case 'UNACTIVE_ANNONCEVENTE':
+                let dataunactive = draft.annonceventes.findIndex(i => i.id === action.payload);
+                if (dataunactive !== -1) draft.annonceventes.splice(dataunactive, 1);
+                return draft;
         }
     },
     initialState

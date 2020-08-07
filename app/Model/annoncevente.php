@@ -122,10 +122,29 @@ class annoncevente extends Model
         return $this->morphMany(signal::class ,'signalable');
     }
 
-    public function bookmarked()
+    public function likes()
     {
-        return (bool) favoriteannoncevente::where('user_id', Auth::guard('web')->id())
-            ->where('annoncevente_id', $this->id)
+        return $this->morphMany(like::class ,'likeable');
+    }
+
+    public function likeked()
+    {
+        return (bool) like::where('user_id', Auth::guard('web')->id())
+            ->where(['likeable_type' => 'App\Model\annoncevente',
+                'likeable_id' => $this->id ])
+            ->first();
+    }
+
+    public function favorites()
+    {
+        return $this->morphMany(favorite::class ,'favoriteable');
+    }
+
+    public function favoriteted()
+    {
+        return (bool) favorite::where('user_id', Auth::guard('web')->id())
+            ->where(['favoriteable_type' => 'App\Model\annoncevente',
+                'favoriteable_id' => $this->id ])
             ->first();
     }
 }

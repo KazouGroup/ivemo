@@ -4,7 +4,9 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Model\annoncelocation;
+use App\Model\annoncevente;
 use App\Model\blogannoncelocation;
+use App\Model\blogannoncevente;
 use App\Model\comment;
 use App\Model\employment;
 use App\Model\forum;
@@ -91,6 +93,29 @@ class FavoriteController extends Controller
 
     /**
      * @param Request $request
+     * @param annoncevente $annoncevente
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function favoritannoncevente(Request $request,$annoncevente)
+    {
+        $annoncevente = annoncevente::whereId($annoncevente)->firstOrFail();
+
+        $annoncevente->favorites()->create($request->all());
+
+        return response('Favorite',Response::HTTP_ACCEPTED);
+    }
+
+    public function unfavoritannoncevente(Request $request,$annoncevente)
+    {
+        $annoncevente = annoncevente::whereId($annoncevente)->firstOrFail();
+
+        auth()->user()->removefavorites()->detach($annoncevente);
+
+        return response('Favorite move',Response::HTTP_ACCEPTED);
+    }
+
+    /**
+     * @param Request $request
      * @param blogannoncelocation $blogannoncelocation
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
@@ -107,9 +132,32 @@ class FavoriteController extends Controller
     {
         $blogannoncelocation = blogannoncelocation::whereId($blogannoncelocation)->firstOrFail();
 
-        auth()->user()->removefavorites()->detach($blogannoncelocation);
+        $response = auth()->user()->removefavorites()->detach($blogannoncelocation);
 
-        return response('Favorite move',Response::HTTP_ACCEPTED);
+        return response()->json(['success'=>$response]);
+    }
+
+    /**
+     * @param Request $request
+     * @param blogannoncevente $blogannoncevente
+     * @return
+     */
+    public function favoritblogannoncevente(Request $request,$blogannoncevente)
+    {
+        $blogannoncevente = blogannoncevente::whereId($blogannoncevente)->firstOrFail();
+
+        $response = $blogannoncevente->favorites()->create($request->all());
+
+        return response()->json(['success'=>$response]);
+    }
+
+    public function unfavoritblogannoncevente(Request $request,$blogannoncevente)
+    {
+        $blogannoncevente = blogannoncevente::whereId($blogannoncevente)->firstOrFail();
+
+        $response = auth()->user()->removefavorites()->detach($blogannoncevente);
+
+        return response()->json(['success'=>$response]);
     }
 
 }

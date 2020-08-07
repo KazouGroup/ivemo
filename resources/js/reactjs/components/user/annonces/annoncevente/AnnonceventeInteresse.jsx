@@ -4,6 +4,13 @@ import moment from 'moment'
 import { Button,Row } from "reactstrap";
 import AnnonceventeInteresseList from "./inc/AnnonceventeInteresseList";
 import AnnoncesinteresseSkeleton from "../../../inc/user/annonce/AnnoncesinteresseSkeleton";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {
+    favoriteItem,
+    loadAnnonceventesinteressesbycity,
+    unactiveItem, unfavoriteItem
+} from "../../../../redux/actions/annoncevente/annonceventeActions";
 
 require("moment/min/locales.min");
 moment.locale('fr');
@@ -12,62 +19,10 @@ class AnnonceventeInteresse extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annonceventesinteresses: { annoncetype: [], categoryannoncevente: [], city: [], user: [] },
             visiable: 4,
         };
+
         this.loadmoresItem = this.loadmoresItem.bind(this);
-        this.favoriteItem = this.favoriteItem.bind(this);
-    }
-
-    favoriteItem(item) {
-        const url = route('favoriteannonceventes_favorite.favorite', [item.id]);
-        dyaxios.get(url).then(() => {
-
-            if(item.bookmarked){
-                $.notify({
-                        message: "Annonce retirée de vos favoris",
-                    },
-                    {
-                        allow_dismiss: false,
-                        type: 'info',
-                        placement: {
-                            from: 'bottom',
-                            align: 'center'
-                        },
-                        animate: {
-                            enter: "animate__animated animate__fadeInUp",
-                            exit: "animate__animated animate__fadeOutDown"
-                        },
-                    });
-            }else {
-                $.notify({
-                        message: "Annonce ajoutée à vos favoris",
-                    },
-                    {
-                        allow_dismiss: false,
-                        type: 'info',
-                        placement: {
-                            from: 'bottom',
-                            align: 'center'
-                        },
-                        animate: {
-                            enter: "animate__animated animate__fadeInUp",
-                            exit: "animate__animated animate__fadeOutDown"
-                        },
-                    });
-            }
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
-        })
     }
 
     loadmoresItem(){
@@ -77,24 +32,22 @@ class AnnonceventeInteresse extends Component {
     }
 
     loadItems(){
-        let itemannoncetype = this.props.match.params.annoncetype;
-        let itemCategoryannoncevente = this.props.match.params.categoryannoncevente;
-        let itemCityannonce = this.props.match.params.city;
-        dyaxios.get(route('api.annonceventeinteresse_site', [itemannoncetype, itemCategoryannoncevente, itemCityannonce])).then(response =>
-            this.setState({
-                annonceventesinteresses: [...response.data],
-            }));
+        this.props.loadAnnonceventesinteressesbycity(this.props);
     }
     componentDidMount() {
        this.loadItems();
     }
 
     render() {
-        const { annonceventesinteresses,visiable } = this.state;
+        const { annonceventesinteresses } = this.props;
+        const { visiable } = this.state;
         const mapAnnonceventesinteresses = annonceventesinteresses.length >= 0 ? (
             annonceventesinteresses.slice(0,visiable).map(item => {
                 return(
-                    <AnnonceventeInteresseList key={item.id} {...item} favoriteItem={this.favoriteItem}/>
+                    <AnnonceventeInteresseList key={item.id} {...item}
+                                               unactiveItem={this.props.unactiveItem}
+                                               unfavoriteItem={this.props.unfavoriteItem}
+                                               favoriteItem={this.props.favoriteItem}/>
                 )
             })
         ) : (
@@ -132,4 +85,14 @@ class AnnonceventeInteresse extends Component {
 
 }
 
-export default AnnonceventeInteresse;
+AnnonceventeInteresse.propTypes = {
+    loadAnnonceventesinteressesbycity: PropTypes.func.isRequired,
+};
+
+const mapStoreToProps = store => ({
+    annonceventesinteresses: store.annonceventes.annonceventes
+
+});
+export default connect(mapStoreToProps, {
+    loadAnnonceventesinteressesbycity,unactiveItem,unfavoriteItem,favoriteItem
+})(AnnonceventeInteresse);

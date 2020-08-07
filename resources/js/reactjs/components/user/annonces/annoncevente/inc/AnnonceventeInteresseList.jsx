@@ -47,10 +47,26 @@ class AnnonceventeInteresseList extends Component {
                                             </div>
                                         </div>
                                         <div className="text-center">
-                                            <Button className="btn btn-sm btn-icon btn-info" rel="tooltip" title="3426712192" data-placement="bottom">
-                                                <i className="now-ui-icons tech_mobile" />
-                                            </Button>
-                                            <NavLink to={`/annonces_ventes/${this.props.annoncetype.slug}/${this.props.categoryannoncevente.slug}/${this.props.city.slug}/${this.props.slug}/`} className="btn btn-sm btn-icon btn-primary">
+                                            {!$guest && (
+                                                <>
+                                                    {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
+                                                        <>
+                                                            {this.props.status && (
+                                                                <>
+                                                                    <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props)}
+                                                                            className="btn btn-success btn-icon btn-sm">
+                                                                        <i className="now-ui-icons ui-1_check"/>
+                                                                    </button>
+                                                                </>
+                                                            )}
+                                                            <NavLink to={`/annonces_vente/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
+                                                                <i className="now-ui-icons ui-2_settings-90"/>
+                                                            </NavLink>
+                                                        </>
+                                                    )}
+                                                </>
+                                            )}
+                                            <NavLink to={`/annonces_ventes/${this.props.annoncetype.slug}/${this.props.categoryannoncevente.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`} className="btn btn-sm btn-icon btn-primary">
                                                 <i className="now-ui-icons location_pin" />
                                             </NavLink>
 
@@ -86,7 +102,7 @@ class AnnonceventeInteresseList extends Component {
                                             </div>
                                         </div>
                                         <h6 className="card-title">
-                                            <NavLink to={`/annonces_ventes/${this.props.annoncetype.slug}/${this.props.categoryannoncevente.slug}/${this.props.city.slug}/${this.props.slug}/`}>
+                                            <NavLink to={`/annonces_ventes/${this.props.annoncetype.slug}/${this.props.categoryannoncevente.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`}>
                                                 {this.props.title.length > 30 ? this.props.title.substring(0, 30) + "..." : this.props.title}
                                             </NavLink>
                                         </h6>
@@ -120,9 +136,9 @@ class AnnonceventeInteresseList extends Component {
                                                     </Button>
                                                     :
                                                     <>
-                                                        {this.props.bookmarked ?
+                                                        {this.props.favoriteted ?
                                                             <>
-                                                                <Button onClick={() => this.props.favoriteItem(this.props)}
+                                                                <Button onClick={() => this.props.unfavoriteItem(this.props)}
                                                                         className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
                                                                     <i className="fas fa-bookmark"></i>
                                                                 </Button>

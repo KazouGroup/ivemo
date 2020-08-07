@@ -181,7 +181,7 @@ class AnnonceventeController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function apiannonceventebycategoryannonceventeslug(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,annoncevente $annoncevente)
+    public function apiannonceventebycategoryannonceventeslug(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,$user,annoncevente $annoncevente)
     {
         visits($annoncevente)->seconds(60)->increment();
 
@@ -231,7 +231,7 @@ class AnnonceventeController extends Controller
         ]);
     }
 
-    public function annonceventebycategoryannonceventeslug(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,annoncevente $annoncevente)
+    public function annonceventebycategoryannonceventeslug(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,$user,annoncevente $annoncevente)
     {
         visits($annoncevente)->seconds(60)->increment();
 

@@ -50,8 +50,9 @@ export const loadCommentsAnnonceventes = (props) => dispatch => {
     let itemannoncetype = props.match.params.annoncetype;
     let itemCategoryannoncevente = props.match.params.categoryannoncevente;
     let itemcityannonce = props.match.params.city;
+    let itemuser = props.match.params.user;
     let itemannoncevente = props.match.params.annoncevente;
-    let url = route('api.annonceventegetcomment_site',[itemannoncetype,itemCategoryannoncevente,itemcityannonce,itemannoncevente]);
+    let url = route('api.annonceventegetcomment_site',[itemannoncetype,itemCategoryannoncevente,itemcityannonce,itemuser,itemannoncevente]);
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_COMMENTS_ANNONCESVENTES,

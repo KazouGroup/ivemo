@@ -61,7 +61,7 @@ class CompileTableSeeder extends Seeder
         $admin = User::create([
             'username' =>'patrick96',
             'first_name' =>'Patrick',
-            'slug' => 'Tafeng',
+            'slug' => 'tafeng',
             'status_profile' => 1,
             //'birthday' => now(),
             'email' => "darrytafeng@gmail.com",

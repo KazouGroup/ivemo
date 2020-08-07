@@ -28,7 +28,7 @@ class CommentannonceventeController extends Controller
     }
 
 
-    public function getcomment(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,annoncevente $annoncevente)
+    public function getcomment(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,$user,annoncevente $annoncevente)
     {
         $comments = CommentResource::collection($annoncevente->comments()
             ->with('user','commentable','responsecomments')
@@ -43,7 +43,7 @@ class CommentannonceventeController extends Controller
         return response()->json($comments,200);
     }
 
-    public function sendcomment(Request $request,annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,annoncevente $annoncevente)
+    public function sendcomment(Request $request,annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,$user,annoncevente $annoncevente)
     {
         $this->validate($request,[
             'body'=>'required|max:5000',
@@ -60,7 +60,7 @@ class CommentannonceventeController extends Controller
 
 
 
-    public function updatecomment(Request $request,annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,annoncevente $annoncevente,comment $comment)
+    public function updatecomment(Request $request,annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,$user,annoncevente $annoncevente,comment $comment)
     {
 
         $this->authorize('updateComment',$comment);
@@ -73,7 +73,7 @@ class CommentannonceventeController extends Controller
     }
 
 
-    public function sendresponsecomment(Request $request,annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,annoncevente $annoncevente,comment $comment)
+    public function sendresponsecomment(Request $request,annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,$user,annoncevente $annoncevente,comment $comment)
     {
         $validatedData = $request->validate(['body' => 'required|min:2|max:5000']);
 

@@ -39,7 +39,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.annonceventebycitiescount_site');
 
     Route::get(
-        'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}/{annoncevente}',
+        'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}/{user:slug}/{annoncevente}',
         'AnnonceventeController@apiannonceventebycategoryannonceventeslug'
     )->name('api.annonceventebycategoryannonceventeslug_site');
 
@@ -118,7 +118,7 @@ Route::get(
 )->name('annoncesventesbyusercategory_site');
 
 Route::get(
-    'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}/{annoncevente}',
+    'annonces_ventes/{annoncetype}/{categoryannoncevente}/{city}/{user:slug}/{annoncevente}',
     'AnnonceventeController@annonceventebycategoryannonceventeslug'
 )->name('annonceventebycategoryannonceventeslug_site');
 

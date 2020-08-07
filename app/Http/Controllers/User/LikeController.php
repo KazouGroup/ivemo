@@ -4,7 +4,9 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Model\annoncelocation;
+use App\Model\annoncevente;
 use App\Model\blogannoncelocation;
+use App\Model\blogannoncevente;
 use App\Model\comment;
 use App\Model\employment;
 use App\Model\forum;
@@ -105,6 +107,25 @@ class LikeController extends Controller
 
     /**
      * @param Request $request
+     * @param annoncevente $annoncevente
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function likannoncevente(Request $request,annoncevente $annoncevente)
+    {
+        $annoncevente->likes()->create($request->all());
+
+        return response('Like',Response::HTTP_ACCEPTED);
+    }
+
+    public function unlikannoncevente(Request $request,annoncevente $annoncevente)
+    {
+        auth()->user()->removelikes()->detach($annoncevente->id);
+
+        return response('Unlike',Response::HTTP_ACCEPTED);
+    }
+
+    /**
+     * @param Request $request
      * @param responsecomment $responsecomment
      * @return \Illuminate\Http\JsonResponse
      */
@@ -125,7 +146,7 @@ class LikeController extends Controller
 
     /**
      * @param Request $request
-     * @param responsecomment $responsecomment
+     * @param blogannoncelocation $blogannoncelocation
      * @return \Illuminate\Http\JsonResponse
      */
     public function likblogannoncelocation(Request $request,$id)
@@ -145,6 +166,32 @@ class LikeController extends Controller
         $blogannoncelocation = blogannoncelocation::whereId($id)->firstOrFail();
 
         $response = auth()->user()->removelikes()->detach($blogannoncelocation->id);
+
+        return response()->json(['success'=>$response]);
+    }
+
+    /**
+     * @param Request $request
+     * @param blogannoncevente $blogannoncevente
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function likblogannoncevente(Request $request,$id)
+    {
+
+        $blogannoncevente = blogannoncevente::whereId($id)->firstOrFail();
+
+
+        $response = $blogannoncevente->likes()->create($request->all());
+
+        return response()->json(['success'=>$response]);
+    }
+
+    public function unlikablognnoncevente(Request $request,$id)
+    {
+
+        $blogannoncevente = blogannoncevente::whereId($id)->firstOrFail();
+
+        $response = auth()->user()->removelikes()->detach($blogannoncevente->id);
 
         return response()->json(['success'=>$response]);
     }
