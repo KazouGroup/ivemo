@@ -407,9 +407,11 @@ class Annoncelocationbycategorycityshow extends Component {
                                                             {annoncelocation.title && (
                                                                 <>
                                                                     <div className="mx-3">
-                                                                        <NavLink to={`/pro/${annoncelocation.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{annoncelocation.user.first_name}</b>
-                                                                            <small className="d-block text-muted">{annoncelocation.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(annoncelocation.created_at).format('LL')}</small> {this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}
-                                                                        </NavLink>
+                                                                         <span className="text-dark font-weight-600 text-sm">
+                                                                                <Link to={`/pro/${annoncelocation.user.slug}/annonces_locations/`} ><b>{annoncelocation.user.first_name}</b></Link>
+                                                                                <small className="d-block text-muted">{annoncelocation.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(annoncelocation.created_at).format('LL')}</small>
+                                                                                <Link to={`/pro/${profileUser.slug}/followers/`}><b>{this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}</b></Link>
+                                                                         </span>
                                                                     </div>
 
                                                                     {profileUser.followeruser &&(

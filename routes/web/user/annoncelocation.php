@@ -58,9 +58,9 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.annoncelocationsbyannoncetypebyannoncelocation_site');
 
     Route::get(
-        'annonces_locations_interesses/{annoncetype}/{categoryannoncelocation}/{city}',
-        'AnnoncelocationController@apiannoncelocationinteressebycity'
-    )->name('api.annoncelocationinteresse_by_city_site');
+        'annonces_locations_interesses/{annoncetype}/{user}',
+        'AnnoncelocationController@apiannoncelocationinteressebyuser'
+    )->name('api.annoncelocationinteresse_by_user_site');
 
 });
 

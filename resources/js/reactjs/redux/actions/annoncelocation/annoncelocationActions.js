@@ -2,7 +2,7 @@ import {
     GET_CATEGORYANNONCELOCATIONS,
     GET_CITYANNONCELOCATIONS,
     GET_ANNONCELOCATION_INTERESSE_BY_CATEGORY,
-    GET_ANNONCELOCATION_INTERESSE_BY_CITY,
+    GET_ANNONCELOCATION_INTERESSE_BY_USER,
     FAVORITE_ANNONCELOCATION_ADD,
     FAVORITE_ANNONCELOCATION_REMOVE,
     UNACTIVE_ANNONCELOCATION,
@@ -42,15 +42,14 @@ export const loadAnnoncelocationsinteressesbycategories = (props) => dispatch =>
         ).catch(error => console.error(error));
 };
 
-export const loadAnnoncelocationsinteressesbycity = (props) => dispatch => {
+export const loadAnnoncelocationsinteressesbyuser = (props) => dispatch => {
 
     let itemannoncetype = props.match.params.annoncetype;
-    let itemCategoryannoncelocation = props.match.params.categoryannoncelocation;
-    let itemCityannonce = props.match.params.city;
-    let url = route('api.annoncelocationinteresse_by_city_site', [itemannoncetype, itemCategoryannoncelocation, itemCityannonce]);
+    let itemuser = props.match.params.user;
+    let url = route('api.annoncelocationinteresse_by_user_site', [itemannoncetype, itemuser]);
     dyaxios.get(url)
         .then(response => dispatch({
-                type: GET_ANNONCELOCATION_INTERESSE_BY_CITY,
+                type: GET_ANNONCELOCATION_INTERESSE_BY_USER,
                 payload: response.data
             })
         ).catch(error => console.error(error));

@@ -157,9 +157,17 @@ class FormcontactuseronlocationShow extends Component {
                         </div>
                     </div>
                     <div className="submit text-center">
-                        <button className="btn btn-primary btn-lg" type="submit">
-                            <i className="now-ui-icons ui-1_email-85" /> Contacter
-                        </button>
+                        {!$guest ?
+                            <>
+                                <button className="btn btn-primary btn-lg" type="submit">
+                                    <i className="now-ui-icons ui-1_email-85" /> Contacter
+                                </button>
+                            </>
+                            :
+                            <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="btn btn-primary btn-lg">
+                                <i className="now-ui-icons ui-1_email-85" /> Contacter
+                            </a>
+                        }
                     </div>
                 </div>
             </form>

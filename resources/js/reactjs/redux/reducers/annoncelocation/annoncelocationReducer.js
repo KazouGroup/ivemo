@@ -17,7 +17,7 @@ export default produce((draft, action = {}) => {
                 draft.cityannoncelocations = action.payload;
                 return;
 
-            case 'GET_ANNONCELOCATION_INTERESSE_BY_CITY':
+            case 'GET_ANNONCELOCATION_INTERESSE_BY_USER':
                 draft.annoncelocations = action.payload;
                 return;
 

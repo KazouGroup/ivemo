@@ -4,7 +4,7 @@ import AnnoncelocationInteresseList from "./inc/AnnoncelocationInteresseList";
 import AnnoncesinteresseSkeleton from "../../../inc/user/annonce/AnnoncesinteresseSkeleton";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {loadAnnoncelocationsinteressesbycity,unactiveItem,unfavoriteItem,favoriteItem} from "../../../../redux/actions/annoncelocation/annoncelocationActions";
+import {loadAnnoncelocationsinteressesbyuser,unactiveItem,unfavoriteItem,favoriteItem} from "../../../../redux/actions/annoncelocation/annoncelocationActions";
 
 require("moment/min/locales.min");
 moment.locale('fr');
@@ -26,7 +26,7 @@ class AnnoncelocationInteresse extends Component {
     }
 
     loadItems(){
-        this.props.loadAnnoncelocationsinteressesbycity(this.props);
+        this.props.loadAnnoncelocationsinteressesbyuser(this.props);
     }
 
     componentDidMount() {
@@ -79,7 +79,7 @@ class AnnoncelocationInteresse extends Component {
 
 }
 AnnoncelocationInteresse.propTypes = {
-    loadAnnoncelocationsinteressesbycity: PropTypes.func.isRequired,
+    loadAnnoncelocationsinteressesbyuser: PropTypes.func.isRequired,
 };
 
 const mapStoreToProps = store => ({
@@ -87,5 +87,5 @@ const mapStoreToProps = store => ({
 
 });
 export default connect(mapStoreToProps, {
-    loadAnnoncelocationsinteressesbycity,unactiveItem,unfavoriteItem,favoriteItem
+    loadAnnoncelocationsinteressesbyuser,unactiveItem,unfavoriteItem,favoriteItem
 })(AnnoncelocationInteresse);

@@ -296,22 +296,21 @@ class AnnoncelocationController extends Controller
     /**
      * @param annoncetype $annoncetype
      * @param categoryannoncelocation $categoryannoncelocation
-     * @param city $city
+     * @param user $user
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiannoncelocationinteressebycity(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city)
+    public function apiannoncelocationinteressebyuser(annoncetype $annoncetype,user $user)
     {
-        $annoncelocations = AnnoncelocationResource::collection($categoryannoncelocation->annoncelocations()
+        $annoncelocations = AnnoncelocationResource::collection($user->annoncelocations()
             ->with('user','city','annoncetype','categoryannoncelocation')
             ->whereIn('annoncetype_id',[$annoncetype->id])
-            ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
-            ->whereIn('city_id',[$city->id])
+            ->whereIn('user_id',[$user->id])
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','desc')
             //->orderByRaw('RAND()')
             ->where(['status' => 1,'status_admin' => 1])
-            ->take(10)->distinct()->get());
+            ->take(20)->distinct()->get());
 
         return response()->json($annoncelocations, 200);
     }
