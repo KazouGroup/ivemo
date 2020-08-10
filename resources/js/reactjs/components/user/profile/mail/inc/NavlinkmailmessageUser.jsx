@@ -22,16 +22,28 @@ class NavlinkmailmessageUser extends Component {
                         <tr>
                             <td>
                                 <NavLink to={`/profile/${this.props.slug}/personal_mails/contacts/`}>
-                                    Mail contacts
+                                    Contacts
                                 </NavLink>
                             </td>
                             <td className="text-right"> {this.props.contactusers_count} {this.props.contactusers_count > 1 ? "messages" : "message"}</td>
                         </tr>
 
+                        {/*
+
+                         <tr>
+                            <td>
+                                <NavLink to={`/profile/${this.props.slug}/personal_mails/annonces_locations/`}>
+                                    Emplois & services
+                                </NavLink>
+                            </td>
+                            <td className="text-right"> {this.props.contactuserslocations_count} {this.props.contactuserslocations_count > 1 ? "messages" : "message"}</td>
+
+                        </tr>
+
                         <tr>
                             <td>
                                 <NavLink to={`/profile/${this.props.slug}/personal_mails/annonces_locations/`}>
-                                    Mail annonces locations
+                                    Annonces locations
                                 </NavLink>
                             </td>
                             <td className="text-right"> {this.props.contactuserslocations_count} {this.props.contactuserslocations_count > 1 ? "messages" : "message"}</td>
@@ -43,6 +55,10 @@ class NavlinkmailmessageUser extends Component {
                             <td className="text-right"> {this.props.contactusersventes_count} {this.props.contactusersventes_count > 1 ? "messages" : "message"}</td>
 
                         </tr>
+
+                        */}
+
+
 
                         </tbody>
                     </table>

@@ -31,28 +31,28 @@ class PersonalmessagesfavoritecontactUser extends Component {
 
     unfavoriteItem(id){
         const url = route('personal_contactusers_mails_unfavorite.site', [id]);
-        dyaxios.get(url).then(() => {
+        dyaxios.post(url).then(() => {
             this.loadItems();
         })
     }
 
     favoriteItem(id){
         const url = route('personal_contactusers_mails_favorite.site', [id]);
-        dyaxios.get(url).then(() => {
+        dyaxios.post(url).then(() => {
             this.loadItems();
         })
     }
 
     activeItem(id) {
         const url = route('personal_contactusers_mails_active.site', [id]);
-        dyaxios.get(url).then(() => {
+        dyaxios.post(url).then(() => {
             this.loadItems();
         })
     }
 
     unactiveItem(id) {
         const url = route('personal_contactusers_mails_unactive.site', [id]);
-        dyaxios.get(url).then(() => {
+        dyaxios.post(url).then(() => {
             this.loadItems();
         })
     }
@@ -80,7 +80,7 @@ class PersonalmessagesfavoritecontactUser extends Component {
 
     archvementItem(id){
         const url = route('personal_contactusers_mails_unarchvement.site', [id]);
-        dyaxios.get(url).then(() => {
+        dyaxios.post(url).then(() => {
             this.loadItems();
         })
     }

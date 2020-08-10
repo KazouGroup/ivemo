@@ -21,12 +21,12 @@ use Illuminate\Support\Str;
 $factory->define(user::class, function (Faker $faker) {
     $first_name = $faker->firstName.' '.$faker->lastName;
     $users =  [
-        'username' => $faker->unique()->userName,
+        'username' => $faker->unique()->name,
         'first_name' => $first_name,
         'slug' => str_slug($first_name),
         'last_name' => $faker->lastName,
         'birthday' => now(),
-        'email' => $faker->unique()->freeEmail,
+        'email' => $faker->unique()->email,
         'status_profile' => mt_rand(0, 1),
         'color_name' => color::inRandomOrder()->first()->name,
         'email_verified_at' => $faker->dateTime,

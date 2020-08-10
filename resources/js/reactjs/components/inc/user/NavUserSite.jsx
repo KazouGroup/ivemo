@@ -171,9 +171,9 @@ class NavUserSite extends PureComponent {
                                         <a href={`/profile/annonces_reservations_booked/`} className="dropdown-item">
                                             <i className="now-ui-icons shopping_bag-16"/>Reservations
                                         </a>
-                                        <a href={`/profile/${$userIvemo.slug}/personal_mails/contacts/`} className="dropdown-item">
+                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_mails/contacts/`} className="dropdown-item">
                                             <i className="now-ui-icons location_pin"/>Messages
-                                        </a>
+                                        </NavLink>
                                     </div>
                                 </li>
                             </>

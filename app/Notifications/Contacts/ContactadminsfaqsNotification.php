@@ -46,7 +46,7 @@ class ContactadminsfaqsNotification extends Notification
     public function toMail()
     {
         return (new MailMessage)
-                    ->greeting('Salut '.$this->item->first_name)
+                    ->greeting('Salut '.$this->item->user->first_name)
                     ->subject('Contact de FAQs')
                     ->from($this->fromEmailUser,config('app.name'))
                     ->line($this->fromFullnameUser.' vous a envoyé un message de la page FAQs - '.config('app.name'))

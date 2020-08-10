@@ -17,6 +17,7 @@ import {history} from "../utils/history"
 
 {/* Bon ici on dois faire beaucoup attention*/
 }
+
 export const activecontactaddItem = id => dispatch => {
 
     const url = route('contactservice_statusred', [id]);

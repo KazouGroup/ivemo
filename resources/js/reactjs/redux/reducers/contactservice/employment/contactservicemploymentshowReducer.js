@@ -33,16 +33,17 @@ export default produce((draft, action = {}) => {
                 let dataremove = draft.employment.contactservices.findIndex(i => i.id === action.payload);
                 draft.employment.contactservices[dataremove].status_archvement = !action.payload;
                 return draft;
+
             case 'ACTIVE_CONTACTSERVICE_ADD':
-                draft.employment.contactservices[
-                    draft.employment.contactservices.findIndex(i => i.id === action.payload)
-                    ].status_red = action.payload;
+                let dataactive =  draft.employment.contactservices.findIndex(i => i.id === action.payload);
+                if (dataactive !== -1) draft.employment.contactservices[dataactive].status_red = action.payload;
+                if (dataactive !== -1) draft.employment.contactservices_count --;
                 return draft;
 
             case 'ACTIVE_CONTACTSERVICE_REMOVE':
-                draft.employment.contactservices[
-                    draft.employment.contactservices.findIndex(i => i.id === action.payload)
-                    ].status_red = !action.payload;
+                let dataremoveactive =  draft.employment.contactservices.findIndex(i => i.id === action.payload);
+                if (dataremoveactive !== -1) draft.employment.contactservices[dataremoveactive].status_red = !action.payload;
+                if (dataremoveactive !== -1) draft.employment.contactservices_count ++;
                 return draft;
 
             case 'DELETE_CONTACTSERVICE':

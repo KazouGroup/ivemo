@@ -32,9 +32,8 @@ export const loadCityannonces = () => dispatch => {
 export const loadAnnonceventesinteressesbycity = (props) => dispatch => {
 
     let itemannoncetype = props.match.params.annoncetype;
-    let itemCategoryannoncevente = props.match.params.categoryannoncevente;
-    let itemCityannonce = props.match.params.city;
-    let url = route('api.annonceventeinteresse_site', [itemannoncetype, itemCategoryannoncevente, itemCityannonce]);
+    let itemuser = props.match.params.user;
+    let url = route('api.annonceventeinteresse_site', [itemannoncetype, itemuser]);
 
     dyaxios.get(url)
         .then(response => dispatch({

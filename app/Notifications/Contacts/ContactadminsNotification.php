@@ -50,7 +50,7 @@ class ContactadminsNotification extends Notification
     public function toMail()
     {
         return (new MailMessage)
-                    ->greeting('Salut '.$this->item->first_name)
+                    ->greeting('Salut '.$this->item->user->first_name)
                     ->subject($this->fromSubjectUser)
                     ->from($this->fromEmailUser,config('app.name'))
                     ->line($this->fromFirstnameUser.' '.$this->fromLastnameUser.' vous a laissez un message - '.config('app.name'))

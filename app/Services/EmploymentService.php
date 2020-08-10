@@ -155,14 +155,14 @@ class EmploymentService
         return $employment;
     }
 
-    public static function apiemploymentsinteresse($categoryemployment)
+    public static function apiemploymentsinteresse($user)
     {
-        $employments = EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
+        $employments = EmploymentResource::collection($user->employments()->with('user','city','categoryemployment','member')
             ->where(['status' => 1,'status_admin' => 1])
             ->with(['user' => function ($q){$q
                 ->with(['profile' => function ($q){$q->distinct()->get();},])
                 ->select('id','phone','avatar','first_name','slug');},])
-            ->whereIn('categoryemployment_id',[$categoryemployment->id])
+            ->whereIn('user_id',[$user->id])
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')

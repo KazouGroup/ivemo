@@ -39,7 +39,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.employmentcity_site');
 
     Route::get(
-        'employments_interesses/{categoryemployment}',
+        'employments_interesses/{user}',
         'EmploymentController@apiemploymentsinteresse'
     )->name('api.employmentsinteresse_site');
 

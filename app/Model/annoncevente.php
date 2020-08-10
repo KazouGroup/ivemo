@@ -122,6 +122,19 @@ class annoncevente extends Model
         return $this->morphMany(signal::class ,'signalable');
     }
 
+    public function contactservices()
+    {
+        return $this->morphMany(contactservice::class ,'contactserviceable');
+    }
+    
+    public function iscontactservice()
+    {
+        return (bool) contactservice::where('from_id', Auth::id())
+            ->where(['contactserviceable_type' => 'App\Model\annoncevente',
+                'contactserviceable_id' => $this->id ])
+            ->first();
+    }
+
     public function likes()
     {
         return $this->morphMany(like::class ,'likeable');

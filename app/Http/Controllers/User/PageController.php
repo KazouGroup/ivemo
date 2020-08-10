@@ -60,9 +60,9 @@ class PageController extends Controller
 
         $contactusersfaq->fill($request->all());
 
-        ContactuserService::newEmailcontactadminsfaqs($request);
-
         $contactusersfaq->save();
+
+        ContactuserService::newEmailcontactadminsfaqs($request);
 
         return response('Success',Response::HTTP_ACCEPTED);
     }
@@ -73,9 +73,9 @@ class PageController extends Controller
 
         $contactusersadvert->fill($request->all());
 
-        ContactuserService::newEmailcontactusersadvertsUser($request);
-
         $contactusersadvert->save();
+
+        ContactuserService::newEmailcontactusersadvertsUser($request);
 
         return response('Success',Response::HTTP_ACCEPTED);
 
@@ -87,9 +87,9 @@ class PageController extends Controller
 
         $contactadmins->fill($request->all());
 
-        ContactuserService::newEmailcontactadmins($request);
-
         $contactadmins->save();
+
+        ContactuserService::newEmailcontactadmins($request);
 
         return response('Success',Response::HTTP_ACCEPTED);
 

@@ -7,6 +7,7 @@ use App\Jobs\Contacts\ContactadminsJob;
 use App\Jobs\Contacts\ContactuserJob;
 use App\Jobs\Contacts\ContactusersadvertsJob;
 use App\Jobs\Contacts\ContactadminsfaqsJob;
+use App\Model\profileadmin;
 use App\Model\user;
 use App\Services\HelpersService;
 
@@ -75,7 +76,8 @@ class ContactuserService
         $fromMessageUser = $request->get('message');
 
 
-        $toAdminUser = user::all();
+        $toAdminUser =  profileadmin::where(['status_user' => 1])
+            ->with('user')->get();
 
         $emailToUser = (new ContactusersadvertsJob($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromMessageUser,$toAdminUser));
 
@@ -88,7 +90,8 @@ class ContactuserService
         $fromEmailUser = $request->get('email');
         $fromMessageUser = $request->get('message');
 
-        $toAdminUser = user::all();
+        $toAdminUser = profileadmin::where(['status_user' => 1])
+            ->with('user')->get();
 
         $emailToUser = (new ContactadminsfaqsJob($fromFullnameUser,$fromEmailUser,$fromMessageUser,$toAdminUser));
 
@@ -104,7 +107,8 @@ class ContactuserService
         $fromMessageUser = $request->get('message');
 
 
-        $toAdminUser = user::all();
+        $toAdminUser = profileadmin::where(['status_user' => 1])
+            ->with('user')->get();
 
         $emailToUser = (new ContactadminsJob($fromFirstnameUser,$fromLastnameUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$toAdminUser));
 

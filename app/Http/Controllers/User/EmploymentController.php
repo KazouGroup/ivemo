@@ -230,9 +230,9 @@ class EmploymentController extends Controller
         return response()->json($employments,200);
     }
 
-    public function apiemploymentsinteresse(categoryemployment $categoryemployment)
+    public function apiemploymentsinteresse(user $user)
     {
-        $employments = EmploymentService::apiemploymentsinteresse($categoryemployment);
+        $employments = EmploymentService::apiemploymentsinteresse($user);
 
         return response()->json($employments,200);
     }

@@ -2,32 +2,31 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link, NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { Helmet } from 'react-helmet';
 import { Button } from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import NavlinkmailmessageUser from "../inc/NavlinkmailmessageUser";
 import HeadermailmessageUser from "../inc/HeadermailmessageUser";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
+import HelmetSite from "../../../../inc/user/HelmetSite";
+import {connect} from "react-redux";
+import {
+    activecontactaddItem, activecontactremoveItem,
+    archvementaddItem, archvementremoveItem, deletecontactItem,
+    favoriteaddItem,favoriteremoveItem,
+    loadContactusers,
+} from "../../../../../redux/actions/contactuserActions";
 
 
 class PersonalmessagescontactUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            contactusersprofile: {contactusers:[]},
-            isLoading: false,
             visiable: 20,
         };
-        this.deleteItem = this.deleteItem.bind(this);
+
         this.readItem = this.readItem.bind(this);
-        this.activeItem = this.activeItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
-        this.archvementItem = this.archvementItem.bind(this);
-        this.unarchvementItem = this.unarchvementItem.bind(this);
-        this.unfavoriteItem = this.unfavoriteItem.bind(this);
-        this.favoriteItem = this.favoriteItem.bind(this);
     }
 
     loadmoresItem() {
@@ -36,115 +35,20 @@ class PersonalmessagescontactUser extends Component {
         })
     }
 
-    unfavoriteItem(id){
-        const url = route('personal_contactusers_mails_unfavorite.site', [id]);
-        dyaxios.get(url).then(() => {
-            this.loadItems();
-        })
-    }
-
-    favoriteItem(id){
-        const url = route('personal_contactusers_mails_favorite.site', [id]);
-        dyaxios.get(url).then(() => {
-            this.loadItems();
-        })
-    }
-
     loadItems() {
-        this.setState({ isLoading: true });
-        let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.personal_mails_contacts.site', [itemuser])).then(response => this.setState({ contactusersprofile: response.data,isLoading: false, }));
+        this.props.loadContactusers(this.props);
     }
 
-    activeItem(id) {
-        const url = route('personal_contactusers_mails_active.site', [id]);
-        dyaxios.get(url).then(() => {
-            this.loadItems();
-        })
-    }
-
-    unactiveItem(id) {
-        const url = route('personal_contactusers_mails_unactive.site', [id]);
-        dyaxios.get(url).then(() => {
-            this.loadItems();
-        })
-    }
 
     readItem(item) {
 
         const url = route('personal_contactusers_mails_unactive.site', [item.id]);
-        dyaxios.get(url).then(() => {
+        dyaxios.post(url).then(() => {
             this.props.history.push(`/profile/${$userIvemo.slug}/personal_mails/contacts/${item.slug}/`);
         })
 
     }
 
-    unarchvementItem(id){
-        const url = route('personal_contactusers_mails_unarchvement.site', [id]);
-        dyaxios.get(url).then(() => {
-            this.loadItems();
-        })
-    }
-
-    archvementItem(id){
-        const url = route('personal_contactusers_mails_archvement.site', [id]);
-        dyaxios.get(url).then(() => {
-            this.loadItems();
-        })
-    }
-
-    deleteItem(id) {
-        Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                const url = route('personal_contactusers_mails_delete.site', id);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-
-                    this.loadItems();
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                        // title: 'Update',
-                        message: 'Message supprimé avec succès'
-                    },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animate__animated animate__fadeInRight',
-                                exit: 'animate__animated animate__fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
    // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
@@ -153,15 +57,16 @@ class PersonalmessagescontactUser extends Component {
 
 
     render() {
-        const { contactusersprofile, visiable } = this.state;
+        const { contactusersprofile } = this.props;
+        const {  visiable } = this.state;
         const mapContactusers = contactusersprofile.contactusers.length ? (
             contactusersprofile.contactusers.slice(0, visiable).map(item => {
                 return (
 
-                    <HeadermailmessageUser key={item.id} {...item} readItem={this.readItem} deleteItem={this.deleteItem}
-                        activeItem={this.activeItem} unactiveItem={this.unactiveItem}
-                        archvementItem={this.archvementItem} unarchvementItem={this.unarchvementItem}
-                        unfavoriteItem={this.unfavoriteItem} favoriteItem={this.favoriteItem} />
+                    <HeadermailmessageUser key={item.id} {...item} readItem={this.readItem} deletecontactItem={this.props.deletecontactItem}
+                        activecontactaddItem={this.props.activecontactaddItem} activecontactremoveItem={this.props.activecontactremoveItem}
+                        archvementaddItem={this.props.archvementaddItem} archvementremoveItem={this.props.archvementremoveItem}
+                        favoriteremoveItem={this.props.favoriteremoveItem} favoriteaddItem={this.props.favoriteaddItem} />
                 )
             })
         ) : (
@@ -171,9 +76,7 @@ class PersonalmessagescontactUser extends Component {
         return (
 
             <>
-                <Helmet>
-                    <title>Messages contact {`${$userIvemo.first_name}`} - {$name_site}</title>
-                </Helmet>
+                <HelmetSite title={`Messages contact ${$userIvemo.first_name} - ${$name_site}`} />
 
                 <div className="landing-page sidebar-collapse">
 
@@ -208,7 +111,8 @@ class PersonalmessagescontactUser extends Component {
                                             </div>
                                         </div>
 
-                                        <div className="card">
+                                        {/*
+                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="row">
                                                     <div className="col-md-12">
@@ -236,6 +140,8 @@ class PersonalmessagescontactUser extends Component {
                                             </div>
 
                                         </div>
+
+                                        */}
 
                                     </div>
 
@@ -304,4 +210,22 @@ class PersonalmessagescontactUser extends Component {
         )
     }
 }
-export default PersonalmessagescontactUser;
+
+PersonalmessagescontactUser.propTypes = {
+    loadContactusers: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+
+    contactusersprofile: state.contactusers.contactusers
+
+});
+
+export default connect(mapStateToProps, {
+    loadContactusers,
+    favoriteaddItem,favoriteremoveItem,
+    archvementaddItem,archvementremoveItem,
+    activecontactaddItem,activecontactremoveItem,
+    deletecontactItem
+})(PersonalmessagescontactUser);
+

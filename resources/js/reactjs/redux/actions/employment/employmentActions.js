@@ -60,8 +60,8 @@ export const loadCategoryemploymentsbyuser = () => dispatch => {
 
 export const loademploymentinteresse = (props) => dispatch => {
 
-    let itemCategoryemployment = props.match.params.categoryemployment;
-    let url = route('api.employmentsinteresse_site', [itemCategoryemployment]);
+    let itemuser = props.match.params.user;
+    let url = route('api.employmentsinteresse_site', [itemuser]);
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_EMPLOYEMENT_INTERESSE,

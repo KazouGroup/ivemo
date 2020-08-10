@@ -48,14 +48,14 @@ class ContactadminsJob implements ShouldQueue
             /* Ici on envoie l'email aux admin qui a poster l'annonce */
 
             foreach ($this->toAdminUser as $item){
-                $roleGet = $item->roles->pluck('name');
+                $roleGet = $item->user->roles->pluck('name');
 
                 if ($roleGet[0] === 'super-admin' ||
                     $roleGet[0] === 'admin' ||
                     $roleGet[0] === 'advertiser'
                 )
 
-                    $toEmailAdminUser = $item;
+                    $toEmailAdminUser = $item->user;
 
                 $toEmailAdminUser->notify(new ContactadminsNotification(
                     $this->fromFirstnameUser,

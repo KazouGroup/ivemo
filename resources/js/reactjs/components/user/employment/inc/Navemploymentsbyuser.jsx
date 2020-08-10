@@ -32,7 +32,7 @@ class Navemploymentsbyuser extends PureComponent {
                 return (
                     <tr key={item.id}>
                         <td>
-                            <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/employments/${item.slug}/`}>
+                            <NavLink to={`/employments/${item.slug}/`}>
                                 <strong>{item.name}</strong>
                             </NavLink>
                         </td>

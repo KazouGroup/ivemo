@@ -1,22 +1,21 @@
 import React, { Component } from "react";
 import { Link,NavLink } from 'react-router-dom';
 import NavannoncecategorySkeleton from "../NavannoncecategorySkeleton";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {loadCityannonces} from "../../../../redux/actions/annoncereservation/annoncereservationActions";
 
 
 class SectionReservationbyCity extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annoncesbycities: {user:[]},
+            //
         }
     }
 
     loadItems(){
-        let url = route('api.citiesannoncereservations_site');
-        dyaxios.get(url).then(response =>
-            this.setState({
-                annoncesbycities: [...response.data]
-            }));
+        this.props.loadCityannonces();
     }
 
     componentDidMount() {
@@ -34,7 +33,7 @@ class SectionReservationbyCity extends Component {
         return (annoncereservations_count/1000).toFixed(annoncereservations_count % 1000 !== 0)+'k';
     }
     render() {
-        const {annoncesbycities} = this.state;
+        const {annoncesbycities} = this.props;
         const mapAnnoncesbycities = annoncesbycities.length >= 0 ? (
             annoncesbycities.map(item => {
                 return(
@@ -83,4 +82,13 @@ class SectionReservationbyCity extends Component {
         )
     }
 }
-export default SectionReservationbyCity;
+
+SectionReservationbyCity.propTypes = {
+    loadCityannonces: PropTypes.func.isRequired,
+};
+
+const mapStoreToProps = store => ({
+    annoncesbycities: store.annoncereservations.cityannoncereservations
+
+});
+export default connect(mapStoreToProps, {loadCityannonces})(SectionReservationbyCity);

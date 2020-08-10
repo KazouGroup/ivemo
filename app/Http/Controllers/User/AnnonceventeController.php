@@ -255,12 +255,11 @@ class AnnonceventeController extends Controller
         return response()->json($data, 200);
     }
 
-    public function apiannonceventeinteresse(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city)
+    public function apiannonceventeinteresse(annoncetype $annoncetype,user $user)
     {
-        $annoncevente = AnnonceventeResource::collection($categoryannoncevente->annonceventes()->whereIn('annoncetype_id',[$annoncetype->id])
+        $annoncevente = AnnonceventeResource::collection($user->annonceventes()->whereIn('annoncetype_id',[$annoncetype->id])
             ->with('user','city','annoncetype','categoryannoncevente')
-            ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
-            ->whereIn('city_id',[$city->id])
+            ->whereIn('user_id',[$user->id])
             ->orderBy('created_at','desc')
             ->where(['status' => 1,'status_admin' => 1])
             ->take(10)->distinct()->get());

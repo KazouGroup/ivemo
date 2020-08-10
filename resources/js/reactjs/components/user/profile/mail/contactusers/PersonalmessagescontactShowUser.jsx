@@ -12,6 +12,7 @@ import Skeleton from "react-loading-skeleton";
 import ReadMoreAndLess from "react-read-more-less";
 import NavlinkmailmessagecontactUserShow from "../inc/NavlinkmailmessagecontactUserShow";
 import ButtonctionshowmailmessageUser from "../inc/ButtonctionshowmailmessageUser";
+import HelmetSite from "../../../../inc/user/HelmetSite";
 
 
 class PersonalmessagescontactShowUser extends Component {
@@ -32,42 +33,42 @@ class PersonalmessagescontactShowUser extends Component {
 
     unfavoriteItem(id){
         const url = route('personal_contactusers_mails_unfavorite.site', [id]);
-        dyaxios.get(url).then(() => {
+        dyaxios.post(url).then(() => {
             this.loadItem();
         })
     }
 
     favoriteItem(id){
         const url = route('personal_contactusers_mails_favorite.site', [id]);
-        dyaxios.get(url).then(() => {
+        dyaxios.post(url).then(() => {
             this.loadItem();
         })
     }
 
     activeItem(id) {
         const url = route('personal_contactusers_mails_active.site', [id]);
-        dyaxios.get(url).then(() => {
+        dyaxios.post(url).then(() => {
             this.loadItem();
         })
     }
 
     unactiveItem(id) {
         const url = route('personal_contactusers_mails_unactive.site', [id]);
-        dyaxios.get(url).then(() => {
+        dyaxios.post(url).then(() => {
             this.loadItem();
         })
     }
 
     unarchvementItem(id){
         const url = route('personal_contactusers_mails_unarchvement.site', [id]);
-        dyaxios.get(url).then(() => {
+        dyaxios.post(url).then(() => {
             this.loadItem();
         })
     }
 
     archvementItem(id){
         const url = route('personal_contactusers_mails_archvement.site', [id]);
-        dyaxios.get(url).then(() => {
+        dyaxios.post(url).then(() => {
             this.loadItem();
         })
     }
@@ -135,7 +136,7 @@ class PersonalmessagescontactShowUser extends Component {
 
    // Lifecycle Component Method
     componentDidMount() {
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0);
         this.loadItem();
 
     }
@@ -145,9 +146,7 @@ class PersonalmessagescontactShowUser extends Component {
         return (
 
             <>
-                <Helmet>
-                    <title>{`${contactuser.subject || 'Messages contact'}`} {`${$userIvemo.first_name}`} - {$name_site}</title>
-                </Helmet>
+                <HelmetSite title={`${contactuser.subject || 'Messages contact'} ${$userIvemo.first_name} - ${$name_site}`} />
 
                 <div className="landing-page sidebar-collapse">
 

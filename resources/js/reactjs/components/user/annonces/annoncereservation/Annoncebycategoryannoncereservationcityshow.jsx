@@ -204,7 +204,9 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
         const suffix = abbrev[order];
         return (visits_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
-
+    getDescription(annoncereservation) {
+        return { __html: annoncereservation.description};
+    }
     render() {
         const {annoncereservation,profileUser} = this.props;
         return (
@@ -379,22 +381,8 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                 <h6 className="card-title">
                                                     Déscription
                                                 </h6>
-                                                <span>Eres' daring 'Grigri Fortune' swimsuit has
-                                                    the fit and coverage of a bikini in a one-piece silhouette.
-                                                    This fuchsia style is crafted from the label's sculpting peau
-                                                    douce fabric and has flattering
-                                                    cutouts through the torso and back. Wear yours with mirrored sunglasses on vacation.
-                                                </span>
-                                                <hr />
-                                                <h6 className="card-title">
-                                                    A L'intérieur
-                                                </h6>
-                                                <span>Eres' daring 'Grigri Fortune' swimsuit has
-                                                    the fit and coverage of a bikini in a one-piece silhouette.
-                                                    This fuchsia style is crafted from the label's sculpting peau
-                                                    douce fabric and has flattering
-                                                    cutouts through the torso and back. Wear yours with mirrored sunglasses on vacation.
-                                                </span>
+                                                {annoncereservation.description ? <span className="title text-justify" dangerouslySetInnerHTML={this.getDescription(annoncereservation)} />: <Skeleton count={5}/>}
+
 
 
 

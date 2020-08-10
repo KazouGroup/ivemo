@@ -48,7 +48,7 @@ class ContactusersadvertsNotification extends Notification implements ShouldQueu
     public function toMail()
     {
         return (new MailMessage)
-                    ->greeting('Salut '.$this->item->first_name)
+                    ->greeting('Salut '.$this->item->user->first_name)
                     ->subject("Contact publicitaire")
                     ->from($this->fromEmailUser,config('app.name'))
                     ->line($this->fromFullnameUser.' vous a laissez un message - '.config('app.name'))
