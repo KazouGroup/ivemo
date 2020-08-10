@@ -74,6 +74,13 @@ class ProfilepublicController extends Controller
         return response()->json($employments, 200);
     }
 
+    public function apiprofilforums(user $user)
+    {
+        $forums = ProfileService::apiprofilforums($user);
+
+        return response()->json($forums, 200);
+    }
+
 
     public function public_profile_send_message(StoreRequest $request, user $user)
     {

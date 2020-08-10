@@ -10,6 +10,7 @@ use App\Http\Resources\BlogannoncereservationResource;
 use App\Http\Resources\BlogannonceventeResource;
 use App\Http\Resources\EmploymentResource;
 use App\Http\Resources\FaqResource;
+use App\Http\Resources\ForumResource;
 use App\Jobs\ConfirmreservationJob;
 use App\Model\blogannoncelocation;
 use App\Model\blogannoncereservation;
@@ -65,6 +66,11 @@ class ProfileService
                 $q->where(['status_admin' => 1])
                     ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);})
+                    ->whereIn('user_id',[$user->id]);
+            }])
+            ->withCount(['forums' => function ($q) use ($user){
+                $q->where(['status_admin' => 1])
+                    ->whereHas('categoryforum', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id]);
             }])
             ->withCount(['blogannoncelocations' => function ($q) use ($user){
@@ -226,10 +232,24 @@ class ProfileService
             ->whereIn('user_id',[$user->id])
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
-            ->distinct()->paginate(40));
-            //->distinct()->get());
+            //->distinct()->paginate(40));
+            ->distinct()->get());
 
         return $employments;
+    }
+
+    public static function apiprofilforums($user)
+    {
+
+        $forums = ForumResource::collection($user->forums()
+            ->with('user','categoryforum')
+            ->where(['status' => 1,'status_admin' => 1])
+            ->whereIn('user_id',[$user->id])
+            ->whereHas('categoryforum', function ($q) {$q->where('status',1);})
+           // ->distinct()->paginate(40));
+            ->distinct()->get());
+
+        return $forums;
     }
 
 }

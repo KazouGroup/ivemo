@@ -52,6 +52,11 @@ Route::group(['prefix' => 'api'], function () {
         'ProfilepublicController@apiprofilemployments'
     )->name('api.profilpublique_employments');
 
+    Route::get(
+        'pro/{user}/forums',
+        'ProfilepublicController@apiprofilforums'
+    )->name('api.profilpublique_forums');
+
 });
 
 

@@ -51,6 +51,7 @@ class UserResource extends JsonResource
             'subscribedannonce' => $this->subscribeannonce(),
 
             'employments_count' => $this->employments_count,
+            'forums_count' => $this->forums_count,
             'annoncelocations_count' => $this->annoncelocations_count,
             'blogannoncelocations_count' => $this->blogannoncelocations_count,
             'annoncereservations_count' => $this->annoncereservations_count,

@@ -13,13 +13,13 @@ class ButonFollowerUser extends PureComponent {
     }
 
     render() {
-        const {nameununfollower, nameunfollower, followeruser} = this.props;
+        const {nameununfollower, nameunfollower, followeruser,classNameDanger,classNameInfo} = this.props;
         return (
             <>
                 {$guest ? (
                         <>
                             <button type="button" title="Me Suivre" data-toggle="modal" data-target="#loginModal" id={'unfollowerUser'}
-                                    className="btn btn-danger btn-sm">
+                                    className={classNameDanger}>
                                  <b>{nameunfollower}</b>
                             </button>
                         </>
@@ -31,8 +31,7 @@ class ButonFollowerUser extends PureComponent {
                                 {followeruser ?
                                     <>
                                         <Button title="Vous me suivez déjà" onClick={() => this.props.unfollowerItem(this.props)}
-
-                                                className="btn btn-info btn-sm">
+                                                className={classNameInfo}>
                                             <b>{nameununfollower}</b>
                                         </Button>
                                     </>
@@ -40,8 +39,7 @@ class ButonFollowerUser extends PureComponent {
                                     <>
 
                                         <Button onClick={() => this.props.followerItem(this.props)}
-
-                                                className="btn btn-danger btn-sm">
+                                                className={classNameDanger}>
                                             <b>{nameunfollower}</b>
                                         </Button>
                                     </>

@@ -121,6 +121,8 @@ class PublicUserEmployments extends Component {
                                         <ButonFollowerUser {...this.props} {...useremploymentPublick}
                                                            unfollowerItem={this.props.unfollowerItem}
                                                            followerItem={this.props.followerItem}
+                                                           classNameDanger="btn btn-danger"
+                                                           classNameInfo="btn btn-info"
                                                            nameunfollower={`Suivre`}
                                                            nameununfollower={`Abonné`}/>
                                     </div>
@@ -170,7 +172,8 @@ class PublicUserEmployments extends Component {
                                             <>
                                                 <Navlinknewemployment/>
 
-                                                <div className="card">
+                                                {/*
+                                                  <div className="card">
                                                     <div className="card-body">
                                                         <div className="row">
                                                             <div className="col-md-12">
@@ -191,6 +194,8 @@ class PublicUserEmployments extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                */}
+
 
                                                 <div className="card">
                                                     <div className="card-body">
@@ -214,8 +219,8 @@ class PublicUserEmployments extends Component {
                                                     </div>
                                                 </div>
 
-
-                                                <div className="card">
+                                                {/**
+                                                 <div className="card">
                                                     <div className="card-body">
                                                         <div className="row">
                                                             <div className="col-md-12">
@@ -236,6 +241,7 @@ class PublicUserEmployments extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                 */}
 
 
                                                 <div className="card">

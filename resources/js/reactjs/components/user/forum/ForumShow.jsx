@@ -240,6 +240,8 @@ class ForumShow extends Component {
                                                             <ButonFollowerUser {...this.props}{...profileUser}
                                                                                unfollowerItem={this.props.unfollowerItem}
                                                                                followerItem={this.props.followerItem}
+                                                                               classNameDanger="btn btn-sm btn-danger"
+                                                                               classNameInfo="btn btn-sm btn-info"
                                                                                nameunfollower={`Suivre`}
                                                                                nameununfollower={`Abonné`}/>
 

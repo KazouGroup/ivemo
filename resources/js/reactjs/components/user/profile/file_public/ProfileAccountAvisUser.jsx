@@ -427,9 +427,9 @@ class ProfileAccountAvisUser extends PureComponent {
                                                                     <img src={$userIvemo.avatar}
                                                                          style={{height: "40px", width: "80px"}}
                                                                          alt={$userIvemo.first_name}
-                                                                         className="media-object img-raised rounded"/>
+                                                                         className="media-object rounded"/>
                                                                     :
-                                                                    <Skeleton circle={false} height={40} width={80}/>}
+                                                                    <Skeleton circle={false} height={40} width={60}/>}
                                                             </div>
                                                             <div className="media-body">
                                                                 <FieldInput name="description" type='textarea'
@@ -470,9 +470,9 @@ class ProfileAccountAvisUser extends PureComponent {
                                                             <img src={item.from.avatar}
                                                                  style={{height: "40px", width: "80px"}}
                                                                  alt={item.from.first_name}
-                                                                 className="media-object img-raised rounded"/>
+                                                                 className="media-object rounded"/>
                                                             :
-                                                            <Skeleton circle={false} height={40} width={80}/>}
+                                                            <Skeleton circle={false} height={40} width={60}/>}
                                                     </div>
 
                                                     <div className="media-body">
@@ -577,10 +577,10 @@ class ProfileAccountAvisUser extends PureComponent {
                                                                                              width: "80px"
                                                                                          }}
                                                                                          alt={$userIvemo.first_name}
-                                                                                         className="media-object img-raised rounded"/>
+                                                                                         className="media-object rounded"/>
                                                                                     :
                                                                                     <Skeleton circle={false} height={40}
-                                                                                              width={80}/>}
+                                                                                              width={60}/>}
                                                                             </div>
                                                                             <div className="media-body">
                                                                                 <FieldInput name="description"
@@ -621,10 +621,10 @@ class ProfileAccountAvisUser extends PureComponent {
                                                                                              width: "80px"
                                                                                          }}
                                                                                          alt={$userIvemo.first_name}
-                                                                                         className="media-object img-raised rounded"/>
+                                                                                         className="media-object rounded"/>
                                                                                     :
                                                                                     <Skeleton circle={false} height={40}
-                                                                                              width={80}/>}
+                                                                                              width={60}/>}
                                                                             </div>
 
                                                                             <div className="media-body">
@@ -667,10 +667,10 @@ class ProfileAccountAvisUser extends PureComponent {
                                                                         <img src={lk.user.avatar}
                                                                              style={{height: "40px", width: "80px"}}
                                                                              alt={lk.user.first_name}
-                                                                             className="media-object img-raised rounded"/>
+                                                                             className="media-object rounded"/>
                                                                         :
                                                                         <Skeleton circle={false} height={40}
-                                                                                  width={80}/>}
+                                                                                  width={60}/>}
                                                                 </div>
                                                                 <div className="media-body">
                                                                     <div className="ivemoAvisUserContainer">
@@ -758,11 +758,11 @@ class ProfileAccountAvisUser extends PureComponent {
                                                                                                                 width: "80px"
                                                                                                             }}
                                                                                                             alt={$userIvemo.first_name}
-                                                                                                            className="media-object img-raised rounded"/>
+                                                                                                            className="media-object rounded"/>
                                                                                                         : <Skeleton
                                                                                                             circle={false}
                                                                                                             height={40}
-                                                                                                            width={80}/>}
+                                                                                                            width={60}/>}
                                                                                                 </div>
 
                                                                                                 <div

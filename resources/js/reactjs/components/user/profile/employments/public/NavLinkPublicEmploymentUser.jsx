@@ -14,10 +14,18 @@ class NavLinkPublicEmploymentUser extends PureComponent {
                             <tr>
                                 <td>
                                     <NavLink to={`/pro/${this.props.slug}/employments/`}>
-                                        Annones <b>Emplois, Formation & Services</b>
+                                         <b>Emplois & Services</b>
                                     </NavLink>
                                 </td>
                                 <td className="text-right"> {this.props.employments_count} {this.props.employments_count > 1 ? "annonces" : "annonce"}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <NavLink to={`/pro/${this.props.slug}/forums/`}>
+                                         <b>Forums</b>
+                                    </NavLink>
+                                </td>
+                                <td className="text-right"> {this.props.forums_count} {this.props.forums_count > 1 ? "posts" : "post"}</td>
                             </tr>
                             </tbody>
                         </table>
