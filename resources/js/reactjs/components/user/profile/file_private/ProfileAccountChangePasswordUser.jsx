@@ -7,6 +7,7 @@ import './ProfileAccountUser.css';
 import NavProfileAccountPrivate from "./NavProfileAccountPrivate";
 import HeaderProfileAccountPrivate from "./HeaderProfileAccountPrivate";
 import Row from "reactstrap/es/Row";
+import FieldInput from "../../../inc/vendor/FieldInput";
 
 class ProfileAccountChangePasswordUser extends PureComponent {
     constructor(props) {
@@ -147,18 +148,15 @@ class ProfileAccountChangePasswordUser extends PureComponent {
                                                                             <i className="now-ui-icons ui-1_lock-circle-open"/>
                                                                          </span>
                                                                     </div>
-                                                                    <input id='old_password'
-                                                                           type={this.state.passwordType}
-                                                                           className={`form-control ${this.hasErrorFor('old_password') ? 'is-invalid' : ''}`}
-                                                                           name='old_password'
-                                                                           required={'required'}
-                                                                           placeholder="Mot de Passe Actuel"
-                                                                           aria-label="old_password"
-                                                                           autoComplete="old_password"
-                                                                           value={this.state.old_password || ''}
-                                                                           onChange={this.handleFieldChange}
-                                                                    />
-                                                                    {this.renderErrorFor('old_password')}
+
+                                                                    <FieldInput name="old_password" type={this.state.passwordType} minLength="8" maxLength="255"
+                                                                                placeholder="Mot de Passe Actuel"
+                                                                                value={this.state.old_password || ""}
+                                                                                required="required"
+                                                                                handleFieldChange={this.handleFieldChange}
+                                                                                hasErrorFor={this.hasErrorFor}
+                                                                                renderErrorFor={this.renderErrorFor}/>
+
                                                                 </div>
                                                                 <div className="ivemoShowRidePasswordTop ivemoShowRidePassword" onClick={this.handleHideShowPassword}>
                                                                     <i className={`fa fa-${this.state.passwordType === "password" ? "lock" : "unlock"}`}></i>
@@ -170,18 +168,15 @@ class ProfileAccountChangePasswordUser extends PureComponent {
                                                                             <i className="now-ui-icons ui-1_lock-circle-open"/>
                                                                         </span>
                                                                     </div>
-                                                                    <input id='password'
-                                                                           type={this.state.password_confirmationType}
-                                                                           className={`form-control ${this.hasErrorFor('password') ? 'is-invalid' : ''}`}
-                                                                           name='password'
-                                                                           required={'required'}
-                                                                           placeholder="Nouveau Mot de Passe"
-                                                                           aria-label="password"
-                                                                           autoComplete="password"
-                                                                           value={this.state.password || ''}
-                                                                           onChange={this.handleFieldChange}
-                                                                    />
-                                                                    {this.renderErrorFor('password')}
+
+                                                                    <FieldInput name="password" type={this.state.password_confirmationType} minLength="8" maxLength="255"
+                                                                                placeholder="Nouveau Mot de Passe"
+                                                                                value={this.state.password || ""}
+                                                                                required="required"
+                                                                                handleFieldChange={this.handleFieldChange}
+                                                                                hasErrorFor={this.hasErrorFor}
+                                                                                renderErrorFor={this.renderErrorFor}/>
+
                                                                 </div>
                                                                 <div className="ivemoShowRidePasswordTop ivemoShowRidePassword" onClick={this.handleHideShowPasswordConfirmation}>
                                                                     <i className={`fa fa-${this.state.password_confirmationType === "password" ? "lock" : "unlock"}`}></i>
@@ -193,25 +188,21 @@ class ProfileAccountChangePasswordUser extends PureComponent {
                                                                               <i className="now-ui-icons ui-1_lock-circle-open"/>
                                                                          </span>
                                                                     </div>
-                                                                    <input id='password_confirmation'
-                                                                           type={this.state.password_confirmationType}
-                                                                           className={`form-control ${this.hasErrorFor('password_confirmation') ? 'is-invalid' : ''}`}
-                                                                           name='password_confirmation'
-                                                                           required={'required'}
-                                                                           placeholder="Confirmation Mot de Passe"
-                                                                           aria-label="password_confirmation"
-                                                                           autoComplete="password_confirmation"
-                                                                           value={this.state.password_confirmation || ''}
-                                                                           onChange={this.handleFieldChange}
-                                                                    />
-                                                                    {this.renderErrorFor('password_confirmation')}
+
+                                                                    <FieldInput name="password_confirmation" type={this.state.password_confirmationType} minLength="8" maxLength="255"
+                                                                                placeholder="Confirmation Mot de Passe"
+                                                                                value={this.state.password_confirmation || ""}
+                                                                                required="required"
+                                                                                handleFieldChange={this.handleFieldChange}
+                                                                                hasErrorFor={this.hasErrorFor}
+                                                                                renderErrorFor={this.renderErrorFor}/>
                                                                 </div>
                                                                 <div className="ivemoShowRidePasswordTop ivemoShowRidePassword" onClick={this.handleHideShowPasswordConfirmation}>
                                                                     <i className={`fa fa-${this.state.password_confirmationType === "password" ? "lock" : "unlock"}`}></i>
                                                                 </div>
                                                                 <hr/>
                                                                 <div className="submit text-center">
-                                                                    <button className="btn btn-primary btn-round btn-lg" type="submit">
+                                                                    <button className="btn btn-primary" type="submit">
                                                                         <b><i className="now-ui-icons ui-1_check "/> Changer</b>
                                                                     </button>
                                                                 </div>

@@ -4,8 +4,9 @@ window.Vue = require('vue');
 Vue.use(require('vue-resource'));
 
 import 'es6-promise/auto';
-import Vuex from 'vuex';
-Vue.use(Vuex);
+
+//Import vuex
+import  store from './vuex/store';
 
 
 import {Form, HasError, AlertError, AlertSuccess} from 'vform'
@@ -165,6 +166,7 @@ Vue.component('admin-verticalnavusersite', require('./components/inc/AdminVertic
 if (document.getElementById('app') !== null){
     const app = new Vue({
         el: '#app',
-        router
+        router,
+        store
     });
 }
