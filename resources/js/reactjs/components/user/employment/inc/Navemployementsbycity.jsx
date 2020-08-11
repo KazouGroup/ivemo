@@ -2,21 +2,20 @@ import React, { PureComponent,Fragment } from "react";
 import {NavLink, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
 import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
+import {connect} from "react-redux";
+import {loadCityemployments} from "../../../../redux/actions/employment/employmentActions";
 
 
 class Navemployementsbycity extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            cityemployments : {user:[]},
+           //
         }
     }
 
     componentDidMount() {
-        let url = route('api.cityemployment_site');
-        fetch(url).then(res => res.json()).then((result) => {this.setState({
-            cityemployments: [...result]});
-        });
+        this.props.loadCityemployments(this.props);
     }
 
     getdataString (employments_count) {
@@ -31,7 +30,7 @@ class Navemployementsbycity extends PureComponent {
     }
 
     render() {
-        const {cityemployments} = this.state;
+        const {cityemployments} = this.props;
         return (
 
 
@@ -77,4 +76,14 @@ class Navemployementsbycity extends PureComponent {
     }
 
 }
-export default Navemployementsbycity;
+
+
+Navemployementsbycity.propTypes = {
+    loadCityemployments: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+    cityemployments: state.employments.cityemployments
+
+});
+export default connect(mapStateToProps, {loadCityemployments})(Navemployementsbycity);

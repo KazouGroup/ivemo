@@ -4,6 +4,7 @@ import {
     FAVORITE_EMPLOYEMENT_ADD,
     FAVORITE_EMPLOYEMENT_REMOVE,
     GET_CATEGORYEMPLOYMENTS,
+    GET_CITYEMPLOYMENTS,
     GET_CATEGORYEMPLOYMENTS_BY_CATEGORY,
     GET_CATEGORYEMPLOYMENTS_BY_USER,
     GET_EMPLOYEMENT_BY_USER_PUBLIC,
@@ -37,6 +38,16 @@ export const loadCategoryemployments = () => dispatch => {
     dyaxios.get(route('api.categoryemployment_site'))
         .then(response => dispatch({
                 type: GET_CATEGORYEMPLOYMENTS,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loadCityemployments = () => dispatch => {
+
+    dyaxios.get(route('api.cityemployment_site'))
+        .then(response => dispatch({
+                type: GET_CITYEMPLOYMENTS,
                 payload: response.data
             })
         ).catch(error => console.error(error));

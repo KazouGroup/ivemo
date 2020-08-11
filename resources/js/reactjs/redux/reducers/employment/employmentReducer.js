@@ -5,7 +5,8 @@ import produce from "immer"
 
 const initialState = {
     items:{categoryemployment:[],user:{profile:[]},city:[]},
-    catgoryitems: {user: []}
+    catgoryitems: {user: []},
+    cityemployments : {user:[]},
 };
 
 
@@ -13,6 +14,10 @@ export default produce((draft, action = {}) => {
         switch (action.type) {
             case 'GET_CATEGORYEMPLOYMENTS':
                 draft.catgoryitems = action.payload;
+                return;
+
+            case 'GET_CITYEMPLOYMENTS':
+                draft.cityemployments = action.payload;
                 return;
 
             case 'GET_CATEGORYEMPLOYMENTS_BY_CATEGORY':
