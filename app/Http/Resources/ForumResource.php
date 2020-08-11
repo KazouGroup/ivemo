@@ -34,7 +34,6 @@ class ForumResource extends JsonResource
             'visits_countries' => $this->visits()->countries(),
             'visits_languages' => $this->visits()->languages(),
             'visits_operatingSystems' => $this->visits()->operatingSystems(),
-            'statusOnline' => $this->isOnline(),
             'categoryforum' => $this->categoryforum,
             'categoryforum_id' => $this->categoryforum_id,
             'created_at' => (string) $this->created_at,

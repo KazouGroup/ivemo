@@ -381,7 +381,7 @@ class EmployementShowUserSite extends Component {
                                                                         <Link to={`/pro/${employment.user.slug}/employments/`} >
                                                                             <b>{employment.user.first_name}</b>
                                                                         </Link>
-                                                                        <small className="d-block text-muted">{employment.statusOnline &&(<i className="fas fa-circle text-success"></i>)}
+                                                                        <small className="d-block text-muted">{profileUser.statusOnline &&(<i className="fas fa-circle text-success"></i>)}
                                                                             <i className="now-ui-icons tech_watch-time"/> {moment(employment.created_at).format('LL')}</small>
                                                                         <Link to={profileUser.status_profile ? `/pro/${profileUser.slug}/followers/` : `/user/${profileUser.slug}/followers/`}
                                                                         ><b>{this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}</b></Link>
