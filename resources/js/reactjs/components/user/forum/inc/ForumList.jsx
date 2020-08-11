@@ -55,7 +55,7 @@ class ForumList extends Component {
                                 }
                                 <div className="mx-3">
                                     <NavLink to={this.props.user.status_profile ? `/pro/${this.props.user.slug}/` : `/user/${this.props.user.slug}/`} className="text-dark font-weight-600 text-sm"><b>{this.props.user.first_name}</b>
-                                        <small className="d-block text-muted">{this.props.statusOnline &&(<i className="fas fa-circle text-success"></i>)} <i className="now-ui-icons tech_watch-time"/> {moment(this.props.created_at).format('LL')}</small>
+                                        <small className="d-block text-muted"> <i className="now-ui-icons tech_watch-time"/> {moment(this.props.created_at).format('LL')}</small>
                                     </NavLink>
                                 </div>
                             </div>
