@@ -22,7 +22,7 @@ class ForumService
             ->whereIn('categoryforum_id',[$categoryforum->id])
             ->with(['user' => function ($q) {
                 $q->select('id','first_name','status_profile','sex','slug','created_at','avatar');}])
-            ->whereHas('categoryforum', function ($q) {$q->where('status',1);})
+            ->whereHas('categoryforum', function ($q) {$q->with('user')->where('status',1);})
             ->orderByDesc('created_at');
     }
 
@@ -31,7 +31,7 @@ class ForumService
         $data = categoryforum::where('status',1)
             ->withCount(['forums' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->whereHas('categoryforum', function ($q) {$q->where('status',1);});
+                    ->whereHas('categoryforum', function ($q) {$q->with('user')->where('status',1);});
             }])
             ->orderBy('forums_count','desc')
             ->distinct()->get();
@@ -45,7 +45,7 @@ class ForumService
             ->withCount(['forums' => function ($q){
                 $q->where(['status_admin' => 1])
                     ->whereHas('user', function ($q) {$q->whereIn('user_id',[Auth::id()]);})
-                    ->whereHas('categoryforum', function ($q) {$q->where('status',1);});
+                    ->whereHas('categoryforum', function ($q) {$q->with('user')->where('status',1);});
             }])
             ->orderBy('forums_count','desc')
             ->distinct()->get();
@@ -59,7 +59,7 @@ class ForumService
             ->with('user','categoryforum')
             ->with(['user' => function ($q) {
                 $q->select('id','first_name','status_profile','sex','slug','created_at','avatar');}])
-            ->whereHas('categoryforum', function ($q) {$q->where('status',1);})
+            ->whereHas('categoryforum', function ($q) {$q->with('user')->where('status',1);})
             ->orderByDesc('created_at')
             ->distinct()->get());
 
@@ -89,7 +89,7 @@ class ForumService
     {
         $data = ForumResource::collection(forum::with('user','categoryforum')
             ->whereIn('user_id', [$user->id])
-            ->whereHas('categoryforum', function ($q) {$q->where('status',1);})
+            ->whereHas('categoryforum', function ($q) {$q->with('user')->where('status',1);})
             ->orderByDesc('created_at')
             ->distinct()->paginate(40));
 
@@ -103,7 +103,7 @@ class ForumService
             ->where(['status' => 1])
             ->withCount(['forums' => function ($q) use ($categoryforum){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->whereHas('categoryforum', function ($q) {$q->where('status',1);});
+                    ->whereHas('categoryforum', function ($q) {$q->with('user')->where('status',1);});
             }])->orderBy('forums_count','desc')
             ->first();
 
@@ -119,7 +119,7 @@ class ForumService
             ->whereIn('categoryforum_id',[$categoryforum->id])
             ->with(['user' => function ($q) {$q->with('profile')
                 ->select('id','first_name','status_profile','sex','created_at','avatar','slug');}])
-            ->whereHas('categoryforum', function ($q) {$q->where('status',1);})
+            ->whereHas('categoryforum', function ($q) {$q->with('user')->where('status',1);})
             ->distinct()->firstOrFail());
 
         return $data;
@@ -132,7 +132,7 @@ class ForumService
             ->with('user','categoryforum')
             ->with(['user' => function ($q) {$q->with('profile')
                 ->distinct()->get();}])
-            ->whereHas('categoryforum', function ($q) {$q->where('status',1);})
+            ->whereHas('categoryforum', function ($q) {$q->with('user')->where('status',1);})
             ->distinct()->firstOrFail());
 
         return $data;
