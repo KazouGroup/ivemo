@@ -11,14 +11,16 @@ import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 import HelmetSite from "../../../../inc/user/HelmetSite";
 import {connect} from "react-redux";
 import {
-    activecontactaddItem, activecontactremoveItem,
-    archvementaddItem, archvementremoveItem, deletecontactItem,
+    loadAllcontactserviceemployments,
     favoriteaddItem,favoriteremoveItem,
-    loadContactusers,
-} from "../../../../../redux/actions/contactuserActions";
+    archvementaddItem,archvementremoveItem,
+    activecontactaddItem,activecontactremoveItem,
+    deletecontactItem
+} from "../../../../../redux/actions/employment/contactuseremploymentActions";
+import MailcontactserviceList from "../../contactservices/inc/MailcontactserviceList";
 
 
-class PersonalmessagescontactUser extends Component {
+class PersonalmessagesemploymentsUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -36,15 +38,14 @@ class PersonalmessagescontactUser extends Component {
     }
 
     loadItems() {
-        this.props.loadContactusers(this.props);
+        this.props.loadAllcontactserviceemployments(this.props);
     }
 
 
     readItem(item) {
-
-        const url = route('personal_contactusers_mails_unactive.site', [item.id]);
-        dyaxios.post(url).then(() => {
-            this.props.history.push(`/profile/${$userIvemo.slug}/personal_mails/contacts/${item.slug}/`);
+        const url = route('contactservice_red', [item.id]);
+        dyaxios.get(url).then(() => {
+            this.props.history.push(`/profile/${$userIvemo.slug}/statistics/employments_contactservice_show/${item.slug}/`);
         })
 
     }
@@ -59,14 +60,18 @@ class PersonalmessagescontactUser extends Component {
     render() {
         const { contactusersprofile } = this.props;
         const {  visiable } = this.state;
-        const mapContactusers = contactusersprofile.contactusers.length ? (
-            contactusersprofile.contactusers.slice(0, visiable).map(item => {
+        const mapContactusers = contactusersprofile.contactservicesemployments.length ? (
+            contactusersprofile.contactservicesemployments.slice(0, visiable).map(item => {
                 return (
 
-                    <HeadermailmessageUser key={item.id} {...item} readItem={this.readItem} deletecontactItem={this.props.deletecontactItem}
-                        activecontactaddItem={this.props.activecontactaddItem} activecontactremoveItem={this.props.activecontactremoveItem}
-                        archvementaddItem={this.props.archvementaddItem} archvementremoveItem={this.props.archvementremoveItem}
-                        favoriteremoveItem={this.props.favoriteremoveItem} favoriteaddItem={this.props.favoriteaddItem} />
+                    <MailcontactserviceList key={item.id} {...item}
+                                            favoriteaddItem={this.props.favoriteaddItem}
+                                            favoriteremoveItem={this.props.favoriteremoveItem}
+                                            archvementaddItem={this.props.archvementaddItem}
+                                            archvementremoveItem={this.props.archvementremoveItem}
+                                            activecontactaddItem={this.props.activecontactaddItem}
+                                            activecontactremoveItem={this.props.activecontactremoveItem}
+                                            readItem={this.readItem} deletecontactItem={this.props.deletecontactItem} />
                 )
             })
         ) : (
@@ -118,7 +123,7 @@ class PersonalmessagescontactUser extends Component {
 
                                         <div className="alert alert-info" role="alert">
                                             <div className="container text-center">
-                                                <strong>Boite de réception</strong>
+                                                <strong>Boite de réception des emplois & services</strong>
                                             </div>
                                         </div>
 
@@ -143,7 +148,7 @@ class PersonalmessagescontactUser extends Component {
                                             </div>
 
 
-                                        {visiable < contactusersprofile.contactusers.length && (
+                                        {visiable < contactusersprofile.contactservicesemployments.length && (
                                             <div className="row">
                                                 <div className="col-md-4 ml-auto mr-auto text-center">
                                                     <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
@@ -179,21 +184,21 @@ class PersonalmessagescontactUser extends Component {
     }
 }
 
-PersonalmessagescontactUser.propTypes = {
-    loadContactusers: PropTypes.func.isRequired,
+PersonalmessagesemploymentsUser.propTypes = {
+    loadAllcontactserviceemployments: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
 
-    contactusersprofile: state.contactusers.contactusers
+    contactusersprofile: state.contactuseremployments.contactservices
 
 });
 
 export default connect(mapStateToProps, {
-    loadContactusers,
+    loadAllcontactserviceemployments,
     favoriteaddItem,favoriteremoveItem,
     archvementaddItem,archvementremoveItem,
     activecontactaddItem,activecontactremoveItem,
     deletecontactItem
-})(PersonalmessagescontactUser);
+})(PersonalmessagesemploymentsUser);
 

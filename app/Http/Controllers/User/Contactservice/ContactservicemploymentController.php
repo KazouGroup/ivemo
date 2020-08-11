@@ -7,6 +7,8 @@ use App\Http\Resources\PrivateEmploymentResource;
 use App\Model\categoryemployment;
 use App\Model\city;
 use App\Model\user;
+use App\Services\HelpersService;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ContactserviceemploymentExport;
 use App\Http\Resources\ContactserviceResource;
@@ -33,12 +35,22 @@ class ContactservicemploymentController extends Controller
         return view('user.contactservice.employment.index', compact('user'));
     }
 
+    public function personalmessagesemployments(user $user)
+    {
+        return view('user.contactservice.employment.index', compact('user'));
+    }
+
     public function contactservice_statistique($user, employment $employment)
     {
         return view('user.contactservice.employment.show', compact('employment'));
     }
 
-    public function contactservice_statistiqueshow($user, $employment,contactservice $contactservice )
+    public function contactservice_statistiqueshow($user,contactservice $contactservice )
+    {
+        return view('user.contactservice.employment.showcontact', compact('contactservice'));
+    }
+
+    public function personalmessagesemployments_show($user,contactservice $contactservice )
     {
         return view('user.contactservice.employment.showcontact', compact('contactservice'));
     }
@@ -61,6 +73,23 @@ class ContactservicemploymentController extends Controller
         ContactusersemploymentService::newEmailToemploymentpageShow($request,$employment);
 
         return response()->json($contactservice,200);
+    }
+
+    public function apipersonalmessagesemployments(user $user)
+    {
+        $contactservices = HelpersService::helperscontactuserscount($user)
+            ->with(['contactservicesemployments' => function ($q) use ($user){
+                $q->with('to','from','contactserviceable')
+                    ->where('contactserviceable_type',employment::class)
+                    ->whereIn('to_id',[$user->id])
+                    ->whereHas('contactserviceable', function ($q) {
+                        $q->whereIn('user_id',[Auth::id()]);})
+                    ->latest()->distinct()->get()->toArray()
+                ;},
+            ])
+            ->first();
+
+        return response()->json($contactservices,200);
     }
 
     public function apicontactservice(user $user)
@@ -114,13 +143,13 @@ class ContactservicemploymentController extends Controller
     }
 
 
-    public function apicontactservice_statistiqueshow(user $user, employment $employment,contactservice $contactservice)
+    public function apicontactservice_statistiqueshow($user,contactservice $contactservice)
     {
         $contactservice = new ContactserviceResource(contactservice::whereSlug($contactservice->slug)
         ->with('to','from','contactserviceable')
-        ->whereIn('to_id',[$user->id])
-        ->with(['contactserviceable' => function ($q) use ($user){
-            $q->whereIn('user_id',[$user->id])
+        ->whereIn('to_id',[Auth::id()])
+        ->with(['contactserviceable' => function ($q){
+            $q->whereIn('user_id',[Auth::id()])
             ->with('user','city','categoryemployment','member')
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})

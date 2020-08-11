@@ -16,6 +16,16 @@ Route::group(['middleware' => 'verified'], function(){
 
 
         Route::get(
+            'profile/{user}/personal_mails/employments',
+            'ContactservicemploymentController@personalmessagesemployments'
+        )->name('personal_mails_employments.site');
+
+        Route::get(
+            'profile/{user}/personal_mails/employments/{contactservice:slug}',
+            'ContactservicemploymentController@personalmessagesemployments_show'
+        )->name('personal_mails_employments_show.site');
+
+        Route::get(
             'profile/{user}/statistics/employments',
             'ContactservicemploymentController@contactservice'
         )->name('contactservice_employments.site');
@@ -31,7 +41,7 @@ Route::group(['middleware' => 'verified'], function(){
         )->name('contactservice_employmentsbyuserbyexport_site');
 
         Route::get(
-            'profile/{user}/statistics/employments/{employment:slugin}/{contactservice:slug}',
+            'profile/{user}/statistics/employments_contactservice_show/{contactservice:slug}',
             'ContactservicemploymentController@contactservice_statistiqueshow'
         )->name('contactservice_employmentsbyuserbystatistiqueshow_site');
 
@@ -39,6 +49,12 @@ Route::group(['middleware' => 'verified'], function(){
 
 
         Route::group(['prefix' => 'api'], function () {
+
+
+            Route::get(
+                '{user}/personal_mails/employments',
+                'ContactservicemploymentController@apipersonalmessagesemployments'
+            )->name('api.personal_mails_employments_site');
 
             Route::get(
                 'profile/{user}/statistics/employments',
@@ -51,7 +67,7 @@ Route::group(['middleware' => 'verified'], function(){
             )->name('api.contactservice_employmentsbyuserbystatistique_site');
 
             Route::get(
-                'profile/{user}/statistics/employments/{employment:slugin}/{contactservice:slug}',
+                'profile/{user}/statistics/employments_contactservice_show/{contactservice:slug}',
                 'ContactservicemploymentController@apicontactservice_statistiqueshow'
             )->name('api.contactservice_employmentsbyuserbystatistiqueshow_site');
 

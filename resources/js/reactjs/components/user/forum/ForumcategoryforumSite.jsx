@@ -69,11 +69,30 @@ class ForumcategoryforumSite extends Component {
 
                 <div className="about-us sidebar-collapse">
 
-                    <nav className="navbar navbar-expand-lg bg-primary">
+                    <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
                         <NavUserSite />
                     </nav>
 
                     <div className="wrapper">
+                        <div className="page-header page-header-mini">
+                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + categoryforum.photo + ")" }}>
+                            </div>
+
+                            <div className="content-center">
+                                {categoryforum.name && (
+                                    <>
+                                        <h2 className="title">{categoryforum.name || ""}</h2>
+
+                                        <Link to={`/forums/`} className="text-white">
+                                            <i className="fa fa-chevron-circle-left" /> <b>Retour aux forums</b>
+                                        </Link>
+
+                                        <h5><b>{categoryforum.forums_count}</b> {categoryforum.forums_count > 1 ? "posts" : "post"} posté</h5>
+
+                                    </>
+                                )}
+                            </div>
+                        </div>
                         <div className="main main-raised">
                             <div className="container">
                                 <br />

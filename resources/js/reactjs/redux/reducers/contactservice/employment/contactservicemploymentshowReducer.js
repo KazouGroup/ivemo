@@ -3,6 +3,7 @@ import produce from "immer"
 
 const initialState = {
     employment: {categoryemployment: [], user: {profile: []}, city: [], contactservices: []},
+    contactservices: {contactservicesemployments: {to:[],from:[],contactserviceable:[]}},
 };
 
 

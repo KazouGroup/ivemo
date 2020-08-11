@@ -64,13 +64,28 @@ class ForumIndexSite extends Component {
             <>
                 <HelmetSite title={`Forums - ${$name_site}`}/>
 
-                <div className="about-us sidebar-collapse">
+                <div className="landing-page sidebar-collapse">
 
-                    <nav className="navbar navbar-expand-lg bg-primary">
+                    <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
                         <NavUserSite />
                     </nav>
 
                     <div className="wrapper">
+                        <div className="page-header page-header-mini">
+                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
+                            </div>
+                            <div className="content-center">
+                                <div className="row">
+                                    <div className="col-md-8 ml-auto mr-auto">
+                                        <h1 className="title">Forums </h1>
+                                        <h3 className="title">Toutes vos Questions touveront une solution </h3>
+                                    </div>
+                                </div>
+
+                                <Navlinknewforum/>
+
+                            </div>
+                        </div>
                         <div className="main main-raised">
                             <div className="container">
                                 <br />

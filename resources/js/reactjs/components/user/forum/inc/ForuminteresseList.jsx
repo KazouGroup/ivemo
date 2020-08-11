@@ -74,7 +74,7 @@ class ForuminteresseList extends Component {
                             </div>
 
                             <>
-                                <h5 className="card-title">
+                                <h5 className="card-title text-center">
                                     <Link to={`/forums/${this.props.categoryforum.slug}/${this.props.user.slug}/${this.props.slugin}/`}>
                                         <b>{this.props.title.length > 50 ? this.props.title.substring(0, 50) + "..." : this.props.title}</b>
                                     </Link>

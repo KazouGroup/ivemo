@@ -39,7 +39,7 @@ class ContactserviceEmploymentShow extends Component {
     readItem(item) {
         const url = route('contactservice_red', [item.id]);
         dyaxios.get(url).then(() => {
-            this.props.history.push(`/profile/${$userIvemo.slug}/statistics/employments/${this.props.match.params.employment}/${item.slug}/`);
+            this.props.history.push(`/profile/${$userIvemo.slug}/statistics/employments_contactservice_show/${item.slug}/`);
         })
 
     }

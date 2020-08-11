@@ -275,9 +275,8 @@ export const deletecontactItem = id => dispatch => {
 export const loadContactserviceemploymentsredmessage = props => dispatch => {
 
     let itemUser = props.match.params.user;
-    let itemEmployment = props.match.params.employment;
     let itemContactservice = props.match.params.contactservice;
-    let url = route('api.contactservice_employmentsbyuserbystatistiqueshow_site', [itemUser, itemEmployment, itemContactservice]);
+    let url = route('api.contactservice_employmentsbyuserbystatistiqueshow_site', [itemUser, itemContactservice]);
     dyaxios.get(url).then(response =>
         dispatch({
             type: GET_RED_CONTACTSERVICEMPLOYMENT_SHOW,
@@ -290,7 +289,7 @@ export const loadContactserviceemploymentshow = props => dispatch => {
 
     let itemUser = props.match.params.user;
     let itemEmployment = props.match.params.employment;
-    let url = route('api.contactservice_employmentsbyuserbystatistique_site', [itemUser, itemEmployment]);
+    let url = route('api.contactservice_employmentsbyuserbystatistique_site', [itemUser,itemEmployment]);
     dyaxios.get(url).then(response =>
         dispatch({
             type: GET_RED_CONTACTSERVICEMPLOYMENT,
