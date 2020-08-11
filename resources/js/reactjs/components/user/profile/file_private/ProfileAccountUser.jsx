@@ -8,6 +8,7 @@ import './ProfileAccountUser.css';
 import NavProfileAccountPrivate from "./NavProfileAccountPrivate";
 import Swal from "sweetalert2";
 import HeaderProfileAccountPrivate from "./HeaderProfileAccountPrivate";
+import FieldInput from "../../../inc/vendor/FieldInput";
 
 class ProfileAccountUser extends PureComponent {
     constructor(props) {
@@ -240,19 +241,14 @@ class ProfileAccountUser extends PureComponent {
                                                                         <i className="now-ui-icons users_circle-08"/>
                                                                     </span>
                                                                 </div>
-                                                                <input id='first_name'
-                                                                       type='text'
-                                                                       className={`form-control ${this.hasErrorFor('first_name') ? 'is-invalid' : ''}`}
-                                                                       name='first_name'
-                                                                       placeholder="Non de l'agence ou celle personnelle"
-                                                                       aria-label="first_name"
-                                                                       autoComplete="first_name"
-                                                                       required={'required'}
-                                                                       maxLength="250"
-                                                                       value={this.state.first_name || ''}
-                                                                       onChange={this.handleFieldChange}
-                                                                />
-                                                                {this.renderErrorFor('first_name')}
+
+                                                                <FieldInput name="first_name" type='text' minLength="2" maxLength="200"
+                                                                            required="required"
+                                                                            placeholder="Non de l'agence ou celle personnelle"
+                                                                            value={this.state.first_name || ""}
+                                                                            handleFieldChange={this.handleFieldChange}
+                                                                            hasErrorFor={this.hasErrorFor}
+                                                                            renderErrorFor={this.renderErrorFor}/>
                                                             </div>
                                                         </div>
                                                         <div className="col-md-5 col-5">
@@ -263,18 +259,14 @@ class ProfileAccountUser extends PureComponent {
                                                                         <i className="now-ui-icons users_circle-08"/>
                                                                     </span>
                                                                 </div>
-                                                                <input id='last_name'
-                                                                       type='text'
-                                                                       className={`form-control ${this.hasErrorFor('last_name') ? 'is-invalid' : ''}`}
-                                                                       name='last_name'
-                                                                       placeholder="Prenom "
-                                                                       aria-label="last_name"
-                                                                       autoComplete="last_name"
-                                                                       maxLength="250"
-                                                                       value={this.state.last_name || ''}
-                                                                       onChange={this.handleFieldChange}
-                                                                />
-                                                                {this.renderErrorFor('last_name')}
+
+
+                                                                <FieldInput name="last_name" type='text' minLength="2" maxLength="200"
+                                                                            placeholder="Prenom"
+                                                                            value={this.state.last_name || ""}
+                                                                            handleFieldChange={this.handleFieldChange}
+                                                                            hasErrorFor={this.hasErrorFor}
+                                                                            renderErrorFor={this.renderErrorFor}/>
                                                             </div>
                                                         </div>
                                                     </Row>
@@ -287,19 +279,15 @@ class ProfileAccountUser extends PureComponent {
                                                                         <i className="now-ui-icons users_circle-08"/>
                                                                     </span>
                                                                 </div>
-                                                                <input id='username'
-                                                                       type='text'
-                                                                       className={`form-control ${this.hasErrorFor('username') ? 'is-invalid' : ''}`}
-                                                                       name='username'
-                                                                       placeholder="Ajouter un pseudo"
-                                                                       aria-label="Address"
-                                                                       autoComplete="username"
-                                                                       required={'required'}
-                                                                       maxLength="100" minLength="2"
-                                                                       value={this.state.username || ''}
-                                                                       onChange={this.handleFieldChange}
-                                                                />
-                                                                {this.renderErrorFor('username')}
+
+
+                                                                <FieldInput name="username" type='text' minLength="2" maxLength="200"
+                                                                            required="required"
+                                                                            placeholder="Ajouter un pseudo"
+                                                                            value={this.state.username || ""}
+                                                                            handleFieldChange={this.handleFieldChange}
+                                                                            hasErrorFor={this.hasErrorFor}
+                                                                            renderErrorFor={this.renderErrorFor}/>
                                                             </div>
                                                         </div>
                                                         <div className="col-md-6 col-6">
@@ -310,19 +298,15 @@ class ProfileAccountUser extends PureComponent {
                                                                         <i className="now-ui-icons text_caps-small"/>
                                                                     </span>
                                                                 </div>
-                                                                <input id='slug'
-                                                                       type='text'
-                                                                       className={`form-control ${this.hasErrorFor('slug') ? 'is-invalid' : ''}`}
-                                                                       name='slug'
-                                                                       placeholder="@mypseudo_profile"
-                                                                       aria-label="slug"
-                                                                       autoComplete="slug"
-                                                                       required={'required'}
-                                                                       maxLength="250"
-                                                                       value={this.state.slug || ''}
-                                                                       onChange={this.handleFieldChange}
-                                                                />
-                                                                {this.renderErrorFor('slug')}
+
+                                                                <FieldInput name="slug" type='text' minLength="2" maxLength="200"
+                                                                            placeholder="mypseudo_profile"
+                                                                            value={this.state.slug || ""}
+                                                                            required="required"
+                                                                            handleFieldChange={this.handleFieldChange}
+                                                                            hasErrorFor={this.hasErrorFor}
+                                                                            renderErrorFor={this.renderErrorFor}/>
+
                                                             </div>
                                                         </div>
                                                     </Row>
@@ -335,19 +319,14 @@ class ProfileAccountUser extends PureComponent {
                                                                         <i className="now-ui-icons ui-1_email-85"/>
                                                                     </span>
                                                                 </div>
-                                                                <input id='email'
-                                                                       type='email'
-                                                                       className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                                                       name='email'
-                                                                       placeholder="Email de l'agence "
-                                                                       aria-label="email"
-                                                                       autoComplete="email"
-                                                                       required={'required'}
-                                                                       maxLength="100" minLength="2"
-                                                                       value={this.state.email || ''}
-                                                                       onChange={this.handleFieldChange}
-                                                                />
-                                                                {this.renderErrorFor('email')}
+
+                                                                <FieldInput name="email" type='email' minLength="2" maxLength="200"
+                                                                            placeholder="Email de l'agence"
+                                                                            value={this.state.email || ""}
+                                                                            required="required"
+                                                                            handleFieldChange={this.handleFieldChange}
+                                                                            hasErrorFor={this.hasErrorFor}
+                                                                            renderErrorFor={this.renderErrorFor}/>
                                                             </div>
                                                         </div>
                                                         <div className="col-md-6 col-6">
@@ -358,18 +337,14 @@ class ProfileAccountUser extends PureComponent {
                                                                         <i className="now-ui-icons tech_mobile"/>
                                                                     </span>
                                                                 </div>
-                                                                <input id='phone'
-                                                                       type='number'
-                                                                       className={`form-control ${this.hasErrorFor('phone') ? 'is-invalid' : ''}`}
-                                                                       name='phone'
-                                                                       placeholder="Teléphone"
-                                                                       aria-label="phone"
-                                                                       autoComplete="phone"
-                                                                       required={'required'}
-                                                                       value={this.state.phone || ''}
-                                                                       onChange={this.handleFieldChange}
-                                                                />
-                                                                {this.renderErrorFor('phone')}
+
+                                                                <FieldInput name="phone" type='number' minLength="2" maxLength="30"
+                                                                            placeholder="Teléphone"
+                                                                            value={this.state.phone || ""}
+                                                                            required="required"
+                                                                            handleFieldChange={this.handleFieldChange}
+                                                                            hasErrorFor={this.hasErrorFor}
+                                                                            renderErrorFor={this.renderErrorFor}/>
                                                             </div>
                                                         </div>
                                                     </Row>
@@ -419,13 +394,13 @@ class ProfileAccountUser extends PureComponent {
                                                                        name="avatar"/>
                                                                 {this.renderErrorFor('avatar')}
                                                                 <div className="text-center mt-4">
-                                                                    <label htmlFor="avatar" className="btn btn-primary">
+                                                                    <label htmlFor="avatar" className="btn btn-primary btn-sm">
                                                                         <span className="btn-inner--text"><i className="now-ui-icons media-1_album "/> Choisir une image</span>
                                                                     </label>
                                                                     <label
                                                                         hidden={!showDefaultImage}
                                                                         onClick={this.removeAvatarImage}
-                                                                        className="btn btn-danger">
+                                                                        className="btn btn-danger btn-sm">
                                                                         <span className="btn-inner--text"><i className="now-ui-icons ui-1_simple-remove "/> Effacer</span>
                                                                     </label>
                                                                 </div>
@@ -445,13 +420,13 @@ class ProfileAccountUser extends PureComponent {
                                                                 {this.renderErrorFor('avatarcover')}
                                                                 <div className="text-center mt-4">
                                                                     <label htmlFor="avatarcover"
-                                                                           className="btn btn-primary">
+                                                                           className="btn btn-primary btn-sm">
                                                                         <span className="btn-inner--text"><i className="now-ui-icons media-1_album "/> Choisir une image</span>
                                                                     </label>
                                                                     <label
                                                                         hidden={!showDefaultAvatarCoverImage}
                                                                         onClick={this.removeAvatarCoverImage}
-                                                                        className="btn btn-danger">
+                                                                        className="btn btn-danger btn-sm">
                                                                         <span className="btn-inner--text"><i className="now-ui-icons ui-1_simple-remove "/> Effacer</span>
                                                                     </label>
                                                                 </div>
@@ -460,7 +435,7 @@ class ProfileAccountUser extends PureComponent {
                                                     </Row>
                                                     <hr/>
                                                     <div className="submit text-center">
-                                                        <button type="submit" className="btn btn-primary btn-round btn-lg">
+                                                        <button type="submit" className="btn btn-primary">
                                                             <b><i className="now-ui-icons ui-1_check "/> Enregistrer</b>
                                                         </button>
                                                     </div>

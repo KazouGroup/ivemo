@@ -632,7 +632,7 @@ class ProfileConfigUser extends PureComponent {
                                                     </div>
                                                     <hr/>
                                                     <div className="submit text-center">
-                                                        <button className="btn btn-primary btn-lg"
+                                                        <button className="btn btn-primary"
                                                                 type="submit">
                                                             <b><i className="now-ui-icons ui-1_check "/> Enregistrer</b>
                                                         </button>
