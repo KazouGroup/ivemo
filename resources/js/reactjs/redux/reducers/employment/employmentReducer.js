@@ -27,13 +27,27 @@ export default produce((draft, action = {}) => {
                 draft.items = action.payload;
                 return;
 
+            case 'GET_ALL_EMPLOYMENTS_FOR_CONTACTSERVICE':
+                draft.items = action.payload;
+                return;
+
             case 'GET_EMPLOYEMENT_INTERESSE':
                 draft.items = action.payload;
                 return;
 
-            case 'UNACTIVE_EMPLOYEMENT':
+            case 'UNACTIVE_PRIVATE_EMPLOYEMENT':
+                let dataprivateunactive = draft.items.findIndex(i => i.id === action.payload);
+                if (dataprivateunactive !== -1) draft.items[dataprivateunactive].status = !action.payload;
+                return draft;
+
+            case 'ACTIVE_EMPLOYEMENT':
                 let dataactive = draft.items.findIndex(i => i.id === action.payload);
-                if (dataactive !== -1) draft.items.splice(dataactive, 1);
+                if (dataactive !== -1) draft.items[dataactive].status = action.payload;
+                return draft;
+
+            case 'UNACTIVE_EMPLOYEMENT':
+                let dataunactive = draft.items.findIndex(i => i.id === action.payload);
+                if (dataunactive !== -1) draft.items.splice(dataunactive, 1);
                 return draft;
 
             case 'FAVORITE_EMPLOYEMENT_ADD':

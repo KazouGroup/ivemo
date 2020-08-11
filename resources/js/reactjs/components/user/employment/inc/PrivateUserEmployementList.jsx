@@ -108,14 +108,14 @@ class PrivateUserEmployementList extends PureComponent {
                                                         </NavLink>
                                                         {this.props.status ?
                                                             <>
-                                                                <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props.id)}
+                                                                <button type="button" rel="tooltip" onClick={() => this.props.unactiveprivateItem(this.props)}
                                                                         className="btn btn-success btn-icon btn-sm" title="Desactiver l'annonce">
                                                                     <i className="now-ui-icons ui-1_check"/>
                                                                 </button>
                                                             </>
                                                             :
                                                             <>
-                                                                <button type="button" onClick={() => this.props.activeItem(this.props.id)}
+                                                                <button type="button" onClick={() => this.props.activeItem(this.props)}
                                                                         className="btn btn-primary btn-icon btn-sm" title="Activer l'annonce">
                                                                     <i className="now-ui-icons ui-1_simple-delete"/>
                                                                 </button>
@@ -125,7 +125,7 @@ class PrivateUserEmployementList extends PureComponent {
                                                             <i className="now-ui-icons ui-2_settings-90"/>
                                                         </NavLink>
                                                         <Button
-                                                            className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} title="Supprimer cette annonce">
+                                                            className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props)} title="Supprimer cette annonce">
                                                             <i className="now-ui-icons ui-1_simple-remove"/>
                                                         </Button>{" "}
                                                     </div>

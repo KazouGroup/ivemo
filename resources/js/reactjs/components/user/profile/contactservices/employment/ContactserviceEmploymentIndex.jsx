@@ -10,186 +10,33 @@ import Navemploymentsbyuser from "../../../employment/inc/Navemploymentsbyuser";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 import EmploymentListSkeleton from "../../../../inc/user/employment/EmploymentListSkeleton";
 import PrivateUserEmployementList from "../../../employment/inc/PrivateUserEmployementList";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {
+    loadContactserviceemployments,
+    activeItem,unactiveprivateItem,
+    deleteItem
+} from "../../../../../redux/actions/employment/employmentActions";
 
 
 class ContactserviceEmploymentIndex extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            employments:{categoryemployment:[],user:[],city:[]},
+            visiable: 20,
         };
 
-        this.deleteItem = this.deleteItem.bind(this);
-        this.activeItem = this.activeItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
-
+        this.loadmoresItem = this.loadmoresItem.bind(this);
     }
 
-
-
-    activeItem(id){
-        Swal.fire({
-            title: 'Afficher cette annonce?',
-            text: "êtes vous sure de vouloir confirmer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                //Envoyer la requet au server
-                let url = route('employmentsactivated_site',id);
-                dyaxios.get(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            message: "Cette annonce est desormais visible aux utilisateurs",
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
-                            },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
-                            },
-                        });
-                    /** End alert ***/
-                    this.loadItems();
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
+    loadmoresItem() {
+        this.setState((old) => {
+            return { visiable: old.visiable + 10 }
         })
-
     }
-
-    unactiveItem(id){
-        Swal.fire({
-            title: 'Masquer cette annonce?',
-            text: "êtes vous sure de vouloir confirmer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                //Envoyer la requet au server
-                let url = route('employmentsunactivated_site',id);
-                dyaxios.get(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            message: "Cette annonce a été masquée aux utilisateurs",
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
-                            },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
-                            },
-                        });
-                    /** End alert ***/
-                    this.loadItems();
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
-                        }
-                    });
-                })
-            }
-        })
-
-    }
-
-    deleteItem(id) {
-        Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                const url = route('employmentsdelete_site',[id]);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            // title: 'Update',
-                            message: 'Annonce suprimée avec success'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animate__animated animate__fadeInRight',
-                                exit: 'animate__animated animate__fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-                    this.props.history.push(`/profile/${$userIvemo.slug}/personal_settings/employments/`);
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
-
 
     loadItems(){
-
-        let itemUser = this.props.match.params.user;
-        let url = route('api.contactservice_employments_site',[itemUser]);
-        dyaxios.get(url).then(response => this.setState({ employments: response.data, }));
+        this.props.loadContactserviceemployments(this.props);
     }
 
     componentDidMount() {
@@ -197,12 +44,13 @@ class ContactserviceEmploymentIndex extends Component {
     }
 
     render() {
-        const {employments} = this.state;
+        const {employments} = this.props;
+        const {visiable} = this.state;
         const mapEmployments = employments.length >= 0 ? (
-            employments.map(item => {
+            employments.slice(0, visiable).map(item => {
                 return(
 
-                    <PrivateUserEmployementList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem} />
+                    <PrivateUserEmployementList key={item.id} {...item} deleteItem={this.props.deleteItem} unactiveprivateItem={this.props.unactiveprivateItem} activeItem={this.props.activeItem} />
                 )
             })
         ):(
@@ -274,6 +122,13 @@ class ContactserviceEmploymentIndex extends Component {
                                         {mapEmployments}
 
 
+                                        <div className="text-center">
+                                            {visiable < employments.length && (
+                                                <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                                    <b>Voir plus </b>
+                                                </button>
+                                            )}
+                                        </div>
 
                                     </div>
 
@@ -293,5 +148,18 @@ class ContactserviceEmploymentIndex extends Component {
         )
     }
 }
+ContactserviceEmploymentIndex.propTypes = {
+    loadContactserviceemployments: PropTypes.func.isRequired,
+};
 
-export default ContactserviceEmploymentIndex;
+const mapStateToProps = state => ({
+
+    employments: state.employments.items
+
+});
+
+export default connect(mapStateToProps, {
+    loadContactserviceemployments,
+    activeItem,unactiveprivateItem,
+    deleteItem,
+})(ContactserviceEmploymentIndex);

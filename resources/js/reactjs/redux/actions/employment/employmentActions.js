@@ -8,9 +8,14 @@ import {
     GET_CATEGORYEMPLOYMENTS_BY_USER,
     GET_EMPLOYEMENT_BY_USER_PUBLIC,
     GET_EMPLOYEMENT_INTERESSE,
+    GET_ALL_EMPLOYMENTS_FOR_CONTACTSERVICE,
+    UNACTIVE_PRIVATE_EMPLOYEMENT,
     UNACTIVE_EMPLOYEMENT,
+    ACTIVE_EMPLOYEMENT,
     DELETE_EMPLOYEMENT,
-    GET_PROFILE_USER_FOR_PUBLIC, FOLLOWERUSER_ADD, FOLLOWERUSER_REMOVE,
+    GET_PROFILE_USER_FOR_PUBLIC,
+    FOLLOWERUSER_ADD,
+    FOLLOWERUSER_REMOVE,
 } from "../types";
 
 import Swal from "sweetalert2";
@@ -158,6 +163,19 @@ End
 */
 
 
+export const loadContactserviceemployments = props => dispatch => {
+
+    let itemUser = props.match.params.user;
+    let url = route('api.contactservice_employments_site',[itemUser]);
+    dyaxios.get(url).then(response =>
+        dispatch({
+            type: GET_ALL_EMPLOYMENTS_FOR_CONTACTSERVICE,
+            payload: response.data
+        })
+    ).catch(error => console.error(error));
+};
+
+
 export const favoriteItem = props => dispatch => {
 
     const url = route('employments_favorites.favorite', [props.id]);
@@ -214,6 +232,124 @@ export const unfavoriteItem = props => dispatch => {
                 });
         }
     ).catch(error => console.error(error));
+};
+
+export const activeItem = props => dispatch => {
+
+    Swal.fire({
+        title: 'Afficher cette annonce?',
+        text: "êtes vous sure de vouloir confirmer cette action?",
+        type: 'warning',
+        buttonsStyling: false,
+        confirmButtonClass: "btn btn-success",
+        cancelButtonClass: 'btn btn-danger',
+        confirmButtonText: 'Oui, confirmer',
+        cancelButtonText: 'Non, annuller',
+        showCancelButton: true,
+        reverseButtons: true,
+    }).then((result) => {
+        if (result.value) {
+
+            const url = route('employmentsactivated_site',[props.id]);
+            //Envoyer la requet au server
+            dyaxios.get(url).then(() => {
+
+                dispatch({
+                    type: ACTIVE_EMPLOYEMENT,
+                    payload: props.id
+                });
+
+                /** Alert notify bootstrapp **/
+                $.notify({
+                        message: "Annonce masquée aux utilisateurs",
+                    },
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+                /** End alert ***/
+
+            }).catch(() => {
+                //Failled message
+                $.notify("Ooop! Une erreur est survenue", {
+                    allow_dismiss: false,
+                    type: 'danger',
+                    animate: {
+                        enter: 'animate__animated animate__bounceInDown',
+                        exit: 'animate__animated animate__bounceOutUp'
+                    }
+                });
+            })
+        }
+    });
+
+};
+
+export const unactiveprivateItem = props => dispatch => {
+
+    Swal.fire({
+        title: 'Masquer cette annonce?',
+        text: "êtes vous sure de vouloir confirmer cette action?",
+        type: 'warning',
+        buttonsStyling: false,
+        confirmButtonClass: "btn btn-success",
+        cancelButtonClass: 'btn btn-danger',
+        confirmButtonText: 'Oui, confirmer',
+        cancelButtonText: 'Non, annuller',
+        showCancelButton: true,
+        reverseButtons: true,
+    }).then((result) => {
+        if (result.value) {
+
+            const url = route('employmentsunactivated_site',[props.id]);
+            //Envoyer la requet au server
+            dyaxios.get(url).then(() => {
+
+                dispatch({
+                    type: UNACTIVE_PRIVATE_EMPLOYEMENT,
+                    payload: props.id
+                });
+
+                /** Alert notify bootstrapp **/
+                $.notify({
+                        message: "Annonce masquée aux utilisateurs",
+                    },
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+                /** End alert ***/
+
+            }).catch(() => {
+                //Failled message
+                $.notify("Ooop! Une erreur est survenue", {
+                    allow_dismiss: false,
+                    type: 'danger',
+                    animate: {
+                        enter: 'animate__animated animate__bounceInDown',
+                        exit: 'animate__animated animate__bounceOutUp'
+                    }
+                });
+            })
+        }
+    });
+
 };
 
 export const unactiveItem = props => dispatch => {

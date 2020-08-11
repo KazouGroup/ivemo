@@ -22,7 +22,7 @@ class NavlinkmailmessageUser extends Component {
                         <tr>
                             <td>
                                 <NavLink to={`/profile/${this.props.slug}/personal_mails/contacts/`}>
-                                    Contacts
+                                    <b>Contacts</b>
                                 </NavLink>
                             </td>
                             <td className="text-right"> {this.props.contactusers_count} {this.props.contactusers_count > 1 ? "messages" : "message"}</td>
@@ -31,7 +31,7 @@ class NavlinkmailmessageUser extends Component {
                         <tr>
                             <td>
                                 <NavLink to={`/profile/${this.props.slug}/personal_mails/employments/`}>
-                                    Contacts emplois & services
+                                    <b>Contacts emplois & services</b>
                                 </NavLink>
                             </td>
                             <td className="text-right"> {this.props.contactservicesemployments_count} {this.props.contactservicesemployments_count > 1 ? "messages" : "message"}</td>
