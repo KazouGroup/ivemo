@@ -18,6 +18,7 @@ import {
     deleteItem,
     favoriteItem,unfavoriteItem,
     likeItem, unlikeItem,
+    unfollowerItem,followerItem,
 } from "../../../../../redux/actions/forum/forumActions";
 import ButonMiniSubscribedEmployment from "../../../../inc/vendor/ButonMiniSubscribedEmployment";
 import ButonFollowerUser from "../../../../inc/vendor/follow/ButonFollowerUser";
@@ -309,6 +310,7 @@ export default connect(mapStateToProps, {
     loadforumsbyuserpublic,
     loadProfileusersforpublic,
     favoriteItem,unfavoriteItem,
+    unfollowerItem,followerItem,
     likeItem,unlikeItem,
     deleteItem
 })(PublicUserForums);

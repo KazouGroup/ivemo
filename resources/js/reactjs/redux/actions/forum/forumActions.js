@@ -11,7 +11,7 @@ import {
     GET_SLUG_CATEGORY_FORUM,
     GET_FORUM_ALL_SITE,
     LIKE_FORUM_ADD,
-    LIKE_FORUM_REMOVE, GET_PROFILE_USER_FOR_PUBLIC,
+    LIKE_FORUM_REMOVE, GET_PROFILE_USER_FOR_PUBLIC, FOLLOWERUSER_ADD, FOLLOWERUSER_REMOVE,
 
 } from "../types";
 import Swal from "sweetalert2";
@@ -142,6 +142,50 @@ export const unlikeItem = props => dispatch => {
 
     }).catch(error => console.error(error))
 };
+
+/*
+Avec le code ci dessous je recupere m'abonne à l'utilisateur
+*/
+export const followerItem = (props) => dispatch => {
+
+
+    let url = route('users_followeuser.follow',[props.id]);
+    dyaxios.post(url)
+        .then(() => dispatch({
+                type: FOLLOWERUSER_ADD,
+                payload: props.id
+            })
+        ).catch(error => console.error(error));
+};
+
+export const unfollowerItem = (props) => dispatch => {
+
+    Swal.fire({
+        text:  "Se désabonner de "+props.first_name+" ?",
+        buttonsStyling: false,
+        confirmButtonClass: "btn btn-info",
+        cancelButtonClass: 'btn btn-danger',
+        confirmButtonText: 'Oui, se désabonner',
+        cancelButtonText: 'Non, annuller',
+        showCancelButton: true,
+        reverseButtons: true,
+    }).then((result) => {
+        if (result.value) {
+
+            let url = route('users_followeuser.follow',[props.id]);
+            dyaxios.post(url)
+                .then(() => dispatch({
+                        type: FOLLOWERUSER_REMOVE,
+                        payload: props.id
+                    })
+                ).catch(error => console.error(error));
+        }
+    })
+};
+/*
+End
+*/
+
 
 export const favoriteItem = props => dispatch => {
 
