@@ -51,6 +51,7 @@ class CommentForumNotification extends Notification implements ShouldQueue
             ->action('Voir le poste', url(route('forumscategoryslugin_site',
                 [
                     $this->forum->categoryforum->slug,
+                    $this->forum->user->slug,
                     $this->forum->slugin,
                 ])))
             ->salutation('Visiter le site pour en savoir plus');

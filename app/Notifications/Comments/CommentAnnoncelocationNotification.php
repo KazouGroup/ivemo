@@ -53,6 +53,7 @@ class CommentAnnoncelocationNotification extends Notification implements ShouldQ
                     $this->annoncelocation->annoncetype->slug,
                     $this->annoncelocation->categoryannoncelocation->slug,
                     $this->annoncelocation->city->slug,
+                    $this->annoncelocation->user->slug,
                     $this->annoncelocation->slug,
                 ])))
             ->salutation('Visiter le site pour en savoir plus');

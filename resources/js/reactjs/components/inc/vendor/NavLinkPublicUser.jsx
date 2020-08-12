@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { Link, NavLink, withRouter } from 'react-router-dom';
 
 
-class NavLinkPublicEmploymentUser extends PureComponent {
+class NavLinkPublicUser extends PureComponent {
 
     render() {
         return (
@@ -40,4 +40,4 @@ class NavLinkPublicEmploymentUser extends PureComponent {
         )
     }
 }
-export default withRouter(NavLinkPublicEmploymentUser);
+export default withRouter(NavLinkPublicUser);

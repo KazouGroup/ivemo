@@ -1,32 +1,33 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { Button } from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
-import EmploymentListSkeleton from "../../../../inc/user/employment/EmploymentListSkeleton";
 import Navlinknewemployment from "../../../employment/treatement/Navlinknewemployment";
 import ButonSubscribedEmployment from "../../../../inc/vendor/ButonSubscribedEmployment";
 import HelmetSite from "../../../../inc/user/HelmetSite";
-import EmployementList from "../../../employment/inc/EmployementList";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {
+    loadforumsbyuserpublic,
+    loadProfileusersforpublic,
     deleteItem,
-    favoriteItem,
-    loademploymentbyuserpublic,loadProfileusersforpublic, unactiveItem,
-    unfavoriteItem,
-    unsubscribeItem,subscribeItem,
-    unfollowerItem,followerItem,
-} from "../../../../../redux/actions/employment/employmentActions";
+    favoriteItem,unfavoriteItem,
+    likeItem, unlikeItem,
+} from "../../../../../redux/actions/forum/forumActions";
 import ButonMiniSubscribedEmployment from "../../../../inc/vendor/ButonMiniSubscribedEmployment";
 import ButonFollowerUser from "../../../../inc/vendor/follow/ButonFollowerUser";
+import ForumList from "../../../forum/inc/ForumList";
+import ForumListSkeleton from "../../../../inc/user/forum/ForumListSkeleton";
 import NavLinkPublicUser from "../../../../inc/vendor/NavLinkPublicUser";
+import Navlinknewforum from "../../../forum/treatement/Navlinknewforum";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
-class PublicUserEmployments extends Component {
+class PublicUserForums extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -43,7 +44,7 @@ class PublicUserEmployments extends Component {
     }
 
     loadItems(){
-        this.props.loademploymentbyuserpublic(this.props);
+        this.props.loadforumsbyuserpublic(this.props);
         this.props.loadProfileusersforpublic(this.props);
     }
 
@@ -69,21 +70,18 @@ class PublicUserEmployments extends Component {
 
 
     render() {
-        const {employments,useremploymentPublick} = this.props;
+        const {forums,useremploymentPublick} = this.props;
         const {visiable} = this.state;
-        const mapEmployments = employments.length >= 0 ? (
-            employments.slice(0, visiable).map(item => {
-                return(
-
-                    <EmployementList key={item.id} {...item}
-                                     favoriteItem={this.props.favoriteItem}
-                                     unfavoriteItem={this.props.unfavoriteItem}
-                                     deleteItem={this.props.deleteItem}
-                                     unactiveItem={this.props.unactiveItem} />
+        const mapForums = forums.length >= 0 ? (
+            forums.map(item => {
+                return (
+                    <ForumList key={item.id} {...item}  unlikeItem={this.props.unlikeItem} likeItem={this.props.likeItem}
+                               unfavoriteItem={this.props.unfavoriteItem} favoriteItem={this.props.favoriteItem}
+                               deleteItem={this.props.deleteItem}/>
                 )
             })
-        ):(
-            <EmploymentListSkeleton/>
+        ) : (
+            <ForumListSkeleton />
         );
         return (
             <>
@@ -167,7 +165,7 @@ class PublicUserEmployments extends Component {
                                             <></>
                                             :
                                             <>
-                                                <Navlinknewemployment/>
+                                                <Navlinknewforum/>
 
 
                                                 <div className="card">
@@ -191,31 +189,6 @@ class PublicUserEmployments extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                {/**
-                                                 <div className="card">
-                                                    <div className="card-body">
-                                                        <div className="row">
-                                                            <div className="col-md-12">
-                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                                    <div className="card card-plain">
-                                                                        <div className="card-header" role="tab" id="headingTwo">
-                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                                <b>Articles de {useremploymentPublick.first_name}</b>
-                                                                            </a>
-                                                                        </div>
-
-                                                                        <NavLinkPublicBlogannoncesUser {...this.props} {...useremploymentPublick}/>
-
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                 */}
-
 
                                                 <div className="card">
                                                     <div className="card-body">
@@ -259,10 +232,10 @@ class PublicUserEmployments extends Component {
                                         :
                                         <div className="col-lg-8 col-md-12 mx-auto">
 
-                                            {mapEmployments}
+                                            {mapForums}
 
                                             <div className="text-center">
-                                                {visiable < employments.length ?
+                                                {visiable < forums.length ?
                                                     <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
                                                         <b>Voir plus </b>
                                                     </button>
@@ -322,24 +295,20 @@ class PublicUserEmployments extends Component {
         )
     }
 }
-PublicUserEmployments.propTypes = {
-    loademploymentbyuserpublic: PropTypes.func.isRequired,
+PublicUserForums.propTypes = {
+    loadforumsbyuserpublic: PropTypes.func.isRequired,
     loadProfileusersforpublic: PropTypes.func.isRequired,
 };
 
-const mapStoreToProps = store => ({
-    employments: store.employments.items,
-    useremploymentPublick: store.profile.profiluser
-
+const mapStateToProps = state => ({
+    forums: state.forums.forums,
+    useremploymentPublick: state.profile.profiluser
 });
 
-export default connect(mapStoreToProps,
-    {
-        loademploymentbyuserpublic,
-        loadProfileusersforpublic,
-        favoriteItem,unfavoriteItem,
-        deleteItem,unactiveItem,
-        unsubscribeItem,subscribeItem,
-        unfollowerItem,followerItem,
-    }
-)(PublicUserEmployments);
+export default connect(mapStateToProps, {
+    loadforumsbyuserpublic,
+    loadProfileusersforpublic,
+    favoriteItem,unfavoriteItem,
+    likeItem,unlikeItem,
+    deleteItem
+})(PublicUserForums);

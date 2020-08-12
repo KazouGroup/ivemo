@@ -115,3 +115,8 @@ Route::get(
     'ProfilepublicController@profilemployments'
 )->name('public_profile_employments.site');
 
+Route::get(
+    'pro/{user}/forums',
+    'ProfilepublicController@profilforums'
+)->name('public_profile_forums.site');
+

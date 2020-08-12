@@ -53,6 +53,7 @@ class CommentAnnonceventeNotification extends Notification implements ShouldQueu
                     $this->annoncevente->annoncetype->slug,
                     $this->annoncevente->categoryannoncevente->slug,
                     $this->annoncevente->city->slug,
+                    $this->annoncevente->user->slug,
                     $this->annoncevente->slug,
                 ])))
             ->salutation('Visiter le site pour en savoir plus');

@@ -53,6 +53,7 @@ class CommentAnnoncereservationNotification extends Notification implements Shou
                     $this->annoncereservation->annoncetype->slug,
                     $this->annoncereservation->categoryannoncereservation->slug,
                     $this->annoncereservation->city->slug,
+                    $this->annoncereservation->user->slug,
                     $this->annoncereservation->slug,
                 ])))
             ->salutation('Visiter le site pour en savoir plus');

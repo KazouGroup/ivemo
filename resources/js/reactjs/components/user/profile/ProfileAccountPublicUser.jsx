@@ -18,7 +18,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import { loadProfileusersforpublic,unfollowerItem,followerItem} from "../../../redux/actions/profileActions";
 import ButonFollowerUser from "../../inc/vendor/follow/ButonFollowerUser";
-import NavLinkPublicEmploymentUser from "./employments/public/NavLinkPublicEmploymentUser";
+import NavLinkPublicEmploymentUser from "../../inc/vendor/NavLinkPublicUser";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 

@@ -5,15 +5,29 @@ import {
     GET_CATEGORYFORUMS,
     GET_CATEGORYFORUMS_BY_USER,
     GET_FORUM_BY_PRIVATE_USER,
+    GET_FORUM_BY_PUBLIC_USER,
     GET_FORUM_BY_CATEGORY,
     GET_FORUM_INTERESSE,
     GET_SLUG_CATEGORY_FORUM,
     GET_FORUM_ALL_SITE,
     LIKE_FORUM_ADD,
-    LIKE_FORUM_REMOVE,
+    LIKE_FORUM_REMOVE, GET_PROFILE_USER_FOR_PUBLIC,
 
 } from "../types";
 import Swal from "sweetalert2";
+
+
+export const loadProfileusersforpublic = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let url = route('api.profilpublique',[itemuser]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_PROFILE_USER_FOR_PUBLIC,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
 
 
 export const loadCategoryforums = () => dispatch => {
@@ -86,6 +100,18 @@ export const loadforumsbyuserprivate = (props) => dispatch => {
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_FORUM_BY_PRIVATE_USER,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loadforumsbyuserpublic = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let url = route('api.profilpublique_forums', [itemuser]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_FORUM_BY_PUBLIC_USER,
                 payload: response.data
             })
         ).catch(error => console.error(error));

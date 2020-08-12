@@ -52,6 +52,7 @@ class CommentEmploymentNotification extends Notification implements ShouldQueue
                 [
                     $this->employment->categoryemployment->slug,
                     $this->employment->city->slug,
+                    $this->employment->user->slug,
                     $this->employment->slug,
                 ])))
             ->salutation('Visiter le site pour en savoir plus');

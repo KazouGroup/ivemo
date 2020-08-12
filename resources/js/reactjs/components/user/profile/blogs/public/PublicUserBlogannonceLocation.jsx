@@ -14,7 +14,7 @@ import Navlinknewblogannoncelocation from "../../../blog/blogannoncelocation/tre
 import Skeleton from "react-loading-skeleton";
 import BlogannoncePublicuserSkeleton from "../../../../inc/user/blog/BlogannoncePublicuserSkeleton";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
-import NavLinkPublicEmploymentUser from "../../employments/public/NavLinkPublicEmploymentUser";
+import NavLinkPublicEmploymentUser from "../../../../inc/vendor/NavLinkPublicUser";
 import ButonSubscribedBlogannonce from "../../../../inc/vendor/ButonSubscribedBlogannonce";
 import HelmetSite from "../../../../inc/user/HelmetSite";
 

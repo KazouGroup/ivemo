@@ -11,7 +11,7 @@ import NavLinkPublicBlogannoncesUser from "../../blogs/public/NavLinkPublicBloga
 import AnnonceventeList from "../../../annonces/annoncevente/inc/AnnonceventeList";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
 import AnnoncesListSkeleton from "../../../../inc/user/annonce/AnnoncesListSkeleton";
-import NavLinkPublicEmploymentUser from "../../employments/public/NavLinkPublicEmploymentUser";
+import NavLinkPublicEmploymentUser from "../../../../inc/vendor/NavLinkPublicUser";
 
 
 class PublicUserAnnonceVentes extends Component {

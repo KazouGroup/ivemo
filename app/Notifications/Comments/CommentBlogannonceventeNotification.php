@@ -51,6 +51,7 @@ class CommentBlogannonceventeNotification extends Notification implements Should
                 [
                     $this->blogannoncevente->categoryannoncevente->slug,
                     $this->blogannoncevente->created_at->format('Y-m-d'),
+                    $this->blogannoncevente->user->slug,
                     $this->blogannoncevente->slug,
                 ])))
             ->salutation('Visiter le site pour en savoir plus');

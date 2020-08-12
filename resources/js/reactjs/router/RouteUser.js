@@ -148,6 +148,7 @@ import PublicUserFollowers from "../components/user/profile/followers/PublicUser
 import PublicUserFollowings from "../components/user/profile/followers/PublicUserFollowings";
 import PersonalmessagesemploymentsUser
     from "../components/user/profile/mail/contactusersemployment/PersonalmessagesemploymentsUser";
+import PublicUserForums from "../components/user/profile/forum/public/PublicUserForums";
 
 
 const RouteUser = props => (
@@ -220,6 +221,7 @@ const RouteUser = props => (
           <Route exact path="/pro/:user/annonces_ventes/" component={PublicUserAnnonceVentes}/>
 
           <Route exact path="/pro/:user/employments/" component={PublicUserEmployments}/>
+          <Route exact path="/pro/:user/forums/" component={PublicUserForums}/>
 
 
           <Route exact path="/pro/:user/following/" component={withRouter(PublicUserFollowings)}/>

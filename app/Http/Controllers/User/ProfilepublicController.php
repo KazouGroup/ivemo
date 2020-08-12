@@ -176,4 +176,11 @@ class ProfilepublicController extends Controller
         ]);
     }
 
+    public function profilforums(user $user)
+    {
+        return view('user.profile.forums.privateprofilforum',[
+            'user' => $user,
+        ]);
+    }
+
 }

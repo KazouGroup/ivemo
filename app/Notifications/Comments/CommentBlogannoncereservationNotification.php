@@ -51,6 +51,7 @@ class CommentBlogannoncereservationNotification extends Notification implements 
                 [
                     $this->blogannoncereservation->categoryannoncereservation->slug,
                     $this->blogannoncereservation->created_at->format('Y-m-d'),
+                    $this->blogannoncereservation->user->slug,
                     $this->blogannoncereservation->slug,
                 ])))
             ->salutation('Visiter le site pour en savoir plus');

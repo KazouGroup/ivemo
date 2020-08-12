@@ -11,7 +11,7 @@ import FormContactProfileAccountUser from "../../form/FormContactProfileAccountU
 import NavLinkPublicBlogannoncesUser from "../../blogs/public/NavLinkPublicBlogannoncesUser";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
 import AnnoncesListSkeleton from "../../../../inc/user/annonce/AnnoncesListSkeleton";
-import NavLinkPublicEmploymentUser from "../../employments/public/NavLinkPublicEmploymentUser";
+import NavLinkPublicEmploymentUser from "../../../../inc/vendor/NavLinkPublicUser";
 
 
 class PublicUserAnnonceLocations extends Component {
