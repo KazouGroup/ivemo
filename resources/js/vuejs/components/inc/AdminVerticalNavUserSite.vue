@@ -56,6 +56,7 @@
                         <p> Dashboard </p>
                     </router-link>
                 </li>
+                <!--
                 <li class="nav-item ">
                     <a class="nav-link" data-toggle="collapse" href="#componentsExamples">
                         <i class="material-icons">apps</i>
@@ -128,6 +129,7 @@
                         </ul>
                     </div>
                 </li>
+                -->
 
                 <li class="nav-item ">
                     <a class="nav-link" data-toggle="collapse" href="#pagesModules">
@@ -216,6 +218,30 @@
                                 <router-link class="nav-link" :to="{ name: 'blogannonceventes.dashboard'}">
                                     <span class="sidebar-mini"> SBA </span>
                                     <span class="sidebar-normal"> Sales blog articles </span>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" data-toggle="collapse" href="#forumExamples">
+                        <i class="material-icons">insert_comment</i>
+                        <p> Forums
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="forumExamples">
+                        <ul class="nav">
+                            <li class="nav-item ">
+                                <router-link class="nav-link" :to="{ name: 'categoryforums.index'}">
+                                    <span class="sidebar-mini"> CF </span>
+                                    <span class="sidebar-normal"> Categories forums </span>
+                                </router-link>
+                            </li>
+                            <li class="nav-item ">
+                                <router-link class="nav-link" :to="{ name: 'forums.dashboard'}">
+                                    <span class="sidebar-mini"> FO </span>
+                                    <span class="sidebar-normal"> Forums </span>
                                 </router-link>
                             </li>
                         </ul>

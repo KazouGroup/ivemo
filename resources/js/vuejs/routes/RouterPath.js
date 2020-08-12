@@ -52,6 +52,7 @@ import UserProAdminIndex from "../components/admin/user/UserProAdminIndex";
 import UserParAdminIndex from "../components/admin/user/UserParAdminIndex";
 import UserModeratorsAdmin from "../components/admin/user/UserModeratorsAdmin";
 import ContactAdminIndex from "../components/admin/contact/contactadmin/ContactAdminIndex";
+import CategoryForumAdminIndex from "../components/admin/categories/CategoryForumAdminIndex";
 
 
 export const routes = [
@@ -97,6 +98,7 @@ export const routes = [
     {path: '/dashboard/categoryannonceventes/', name: 'categoryannonceventes.index', component: CategoryAnnonceventeAdminIndex},
     {path: '/dashboard/categoryworkwithuses/', name: 'categoryworkwithuses.index', component: CategoryWorkwithusAdminIndex},
     {path: '/dashboard/categoryemployements/', name: 'categoryemployements.index', component: CategoryEmployementAdminIndex},
+    {path: '/dashboard/categoryforums/', name: 'categoryforums.index', component: CategoryForumAdminIndex},
 
     {path: '/dashboard/signalannoncelocations/', name: 'signalannoncelocations.index', component: SignalannoncelocationsAdminIndex},
     {path: '/dashboard/signalannoncelocations/:annoncelocation/', name: 'signalannoncelocations.show', component: SignalannoncelocationsAdminShow},

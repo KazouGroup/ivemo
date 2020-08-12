@@ -8,3 +8,4 @@ Route::get('all_categoryannonceventes','CategoryannonceventeController@api')->na
 Route::get('categoryprofiles','CategoryFaqController@apicategoryprofiles')->name('api.categoryprofiles');
 Route::get('categoryusers','CategoryFaqController@apicategoryusers')->name('api.categoryusers');
 Route::get('categoryobjets','CategoryFaqController@apicategoryobjets')->name('api.categoryobjets');
+Route::get('all_categoryforums', 'CategoryforumController@api')->name('api.categoryforums');
