@@ -68,14 +68,17 @@ class ForumList extends Component {
 
                         <>
                             <h5 className="card-title">
-                               <a href={`/forums/${this.props.categoryforum.slug}/${this.props.user.slug}/${this.props.slugin}/`} >
+                               <a target="_blank" href={`/forums/${this.props.categoryforum.slug}/${this.props.user.slug}/${this.props.slugin}/`} >
                                    <b>{this.props.title}</b>
                                </a>
                             </h5>
 
                         </>
 
-                        <span className="text-justify" dangerouslySetInnerHTML={this.getDescription()}/>
+
+                        <a target="_blank" href={`/forums/${this.props.categoryforum.slug}/${this.props.user.slug}/${this.props.slugin}/`}>
+                         <span className="text-justify" dangerouslySetInnerHTML={this.getDescription()}/>
+                        </a>
 
                         <div className="card-header d-flex align-items-center">
                             <div className="d-flex align-items-center">
