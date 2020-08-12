@@ -9,7 +9,7 @@ import Skeleton from "react-loading-skeleton";
 class PrivateUserFavoritEmployementList extends PureComponent {
 
     getDescription() {
-        return { __html: (this.props.employment.description.length > 80 ? this.props.employment.description.substring(0, 80) + "..." : this.props.employment.description) };
+        return { __html: (this.props.favoriteable.description.length > 80 ? this.props.favoriteable.description.substring(0, 80) + "..." : this.props.favoriteable.description) };
     }
     render() {
         return (
@@ -24,35 +24,35 @@ class PrivateUserFavoritEmployementList extends PureComponent {
 
                                 <div className="row">
                                     <div className="col-md-5 col-6">
-                                        <NavLink to={`/employments/${this.props.employment.categoryemployment.slug}/`}>
+                                        <NavLink to={`/employments/${this.props.favoriteable.categoryemployment.slug}/`}>
                                             <span className="ml-auto mr-auto">
-                                                <strong>{this.props.employment.categoryemployment.name} </strong>
+                                                <strong>{this.props.favoriteable.categoryemployment.name} </strong>
                                             </span>
                                         </NavLink>
                                     </div>
                                     <div className="col-md-7 col-6">
-                                        <NavLink to={`/employments/${this.props.employment.categoryemployment.slug}/${this.props.employment.city.slug}/`}>
+                                        <NavLink to={`/employments/${this.props.favoriteable.categoryemployment.slug}/${this.props.favoriteable.city.slug}/`}>
                                             <span className="ml-auto mr-auto">
-                                                <strong>{this.props.employment.city.name} </strong>
+                                                <strong>{this.props.favoriteable.city.name} </strong>
                                             </span>
                                         </NavLink>
-                                        - {this.props.employment.district.length > 15 ? this.props.employment.district.substring(0, 15) + "..." : this.props.employment.district}
+                                        - {this.props.favoriteable.district.length > 15 ? this.props.favoriteable.district.substring(0, 15) + "..." : this.props.favoriteable.district}
                                     </div>
 
                                 </div>
 
                                      <span className="title">
-                                         {this.props.employment.status ?
-                                             <a target="_blank" href={`/employments/${this.props.employment.categoryemployment.slug}/${this.props.employment.city.slug}/${this.props.employment.slug}/`} className="card-link">
-                                                 {this.props.employment.title.length > 90 ? this.props.employment.title.substring(0, 90) + "..." : this.props.employment.title}
+                                         {this.props.favoriteable.status ?
+                                             <a target="_blank" href={`/employments/${this.props.favoriteable.categoryemployment.slug}/${this.props.favoriteable.city.slug}/${this.props.favoriteable.user.slug}/${this.props.favoriteable.slug}/`} className="card-link">
+                                                 {this.props.favoriteable.title.length > 90 ? this.props.favoriteable.title.substring(0, 90) + "..." : this.props.favoriteable.title}
                                              </a>
                                              :
-                                             <>{this.props.employment.title.length > 90 ? this.props.employment.title.substring(0, 90) + "..." : this.props.employment.title}</>
+                                             <>{this.props.favoriteable.title.length > 90 ? this.props.favoriteable.title.substring(0, 90) + "..." : this.props.favoriteable.title}</>
                                          }
                                      </span>
                                     <br/>
 
-                                    <a target="_blank" href={`/employments/${this.props.employment.categoryemployment.slug}/${this.props.employment.city.slug}/${this.props.employment.slug}/`}>
+                                    <a target="_blank" href={`/employments/${this.props.favoriteable.categoryemployment.slug}/${this.props.favoriteable.city.slug}/${this.props.favoriteable.user.slug}/${this.props.favoriteable.slug}/`}>
                                         <span dangerouslySetInnerHTML={this.getDescription()}/>
                                     </a>
 
@@ -62,24 +62,24 @@ class PrivateUserFavoritEmployementList extends PureComponent {
 
 
                                     <div className="d-flex align-items-center">
-                                        {this.props.employment.user.avatar ?
-                                            <NavLink to={`/pro/${this.props.employment.user.slug}/employments/`}>
-                                                <img src={this.props.employment.user.avatar}
+                                        {this.props.favoriteable.user.avatar ?
+                                            <NavLink to={`/pro/${this.props.favoriteable.user.slug}/employments/`}>
+                                                <img src={this.props.favoriteable.user.avatar}
                                                      style={{ height: "40px", width: "80px" }}
-                                                     alt={this.props.employment.user.first_name}
+                                                     alt={this.props.favoriteable.user.first_name}
                                                      className="avatar" />
                                             </NavLink>
                                             : <Skeleton circle={false} height={40} width={80} />}
                                         <div className="mx-3">
-                                            <NavLink to={`/pro/${this.props.employment.user.slug}/`} className="text-dark font-weight-600 text-sm">{this.props.employment.user.first_name}
-                                                <small className="d-block text-muted"><b><i className="now-ui-icons tech_watch-time"/> {moment(this.props.employment.created_at).format('ll')}</b></small>
+                                            <NavLink to={`/pro/${this.props.favoriteable.user.slug}/`} className="text-dark font-weight-600 text-sm">{this.props.favoriteable.user.first_name}
+                                                <small className="d-block text-muted"><b><i className="now-ui-icons tech_watch-time"/> {moment(this.props.favoriteable.created_at).format('ll')}</b></small>
                                             </NavLink>
                                         </div>
                                     </div>
 
                                     <div className="text-right mx-auto">
-                                        {this.props.employment.price && (
-                                            <h5 className="text-dark"><b>{this.props.employment.price.formatMoney(2,'.',',') || "0"} <small>FCFA</small></b></h5>
+                                        {this.props.favoriteable.price && (
+                                            <h5 className="text-dark"><b>{this.props.favoriteable.price.formatMoney(2,'.',',') || "0"} <small>FCFA</small></b></h5>
                                         )}
 
                                         {/*
@@ -96,10 +96,10 @@ class PrivateUserFavoritEmployementList extends PureComponent {
                             <div className="col-md-4">
 
                                 <div className="card-image">
-                                    <a target="_blank" href={`/employments/${this.props.employment.categoryemployment.slug}/${this.props.employment.city.slug}/${this.props.employment.slug}/`}>
+                                    <a target="_blank" href={`/employments/${this.props.favoriteable.categoryemployment.slug}/${this.props.favoriteable.city.slug}/${this.props.favoriteable.user.slug}/${this.props.favoriteable.slug}/`}>
                                         <LazyLoad>
                                             <img className="img rounded"
-                                                 src={this.props.employment.photo} alt={this.props.employment.title}/>
+                                                 src={this.props.favoriteable.photo} alt={this.props.favoriteable.title}/>
                                         </LazyLoad>
                                     </a>
 
@@ -109,7 +109,7 @@ class PrivateUserFavoritEmployementList extends PureComponent {
                                             <>
                                                 <div className="text-center">
                                                     <button type="button"
-                                                        className="btn btn-danger btn-icon btn-sm" onClick={() => this.props.favoriteItem(this.props.employment)} title="Supprimer cette annonce">
+                                                        className="btn btn-danger btn-icon btn-sm" onClick={() => this.props.favoriteItem(this.props)} title="Supprimer cette annonce">
                                                         <i className="fas fa-bookmark"></i>
                                                     </button>
                                                 </div>

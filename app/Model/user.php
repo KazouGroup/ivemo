@@ -180,6 +180,12 @@ class user extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(contactuser::class, 'user_id');
     }
 
+
+    public function favoritesemployments()
+    {
+        return $this->hasMany(favorite::class, 'user_id');
+    }
+
     public function contactservicesemployments()
     {
         return $this->hasMany(contactservice::class, 'to_id');

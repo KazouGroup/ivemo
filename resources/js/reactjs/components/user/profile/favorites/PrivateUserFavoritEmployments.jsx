@@ -45,9 +45,10 @@ class PrivateUserFavoritEmployments extends Component {
         }).then((result) => {
             if (result.value) {
 
+                let itemuser = this.props.match.params.user;
                 //Envoyer la requet au server
-                let url = route('employments_unfavorite.unfavorite',item.id);
-                dyaxios.get(url).then(() => {
+                let url = route('personal_favorites_delete.site',[itemuser,item.id]);
+                dyaxios.delete(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({

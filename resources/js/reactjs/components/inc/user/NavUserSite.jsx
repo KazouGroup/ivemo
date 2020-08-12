@@ -133,6 +133,10 @@ class NavUserSite extends PureComponent {
                                         )}
                                         */}
 
+
+                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/favorite_employments/`} className="dropdown-item">
+                                            <i className="now-ui-icons location_bookmark"/>Mes favoris
+                                        </NavLink>
                                         <NavLink to={`/profile/account/`}  className="dropdown-item">
                                             <i className="now-ui-icons users_circle-08"/> Editer mon profile
                                         </NavLink>
@@ -181,12 +185,9 @@ class NavUserSite extends PureComponent {
                                         <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/employments/`} className="dropdown-item">
                                             <i className="now-ui-icons business_briefcase-24"/>Emplois & services
                                         </NavLink>
-                                        <a href={`/profile/${$userIvemo.slug}/personal_settings/employments/`} className="dropdown-item">
+                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/forums/`} className="dropdown-item">
                                             <i className="now-ui-icons text_align-left"/>Forums
-                                        </a>
-                                        <a href={`/profile/${$userIvemo.slug}/personal_settings/favorite_employments/`} className="dropdown-item">
-                                            <i className="now-ui-icons location_bookmark"/>Mes favoris
-                                        </a>
+                                        </NavLink>
                                         <a href={`/profile/${$userIvemo.slug}/personal_settings/teams/`} className="dropdown-item">
                                             <i className="now-ui-icons users_circle-08"/>Team
                                         </a>

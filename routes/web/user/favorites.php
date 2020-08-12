@@ -80,3 +80,8 @@ Route::post(
     'blogannoncereservations_unfavorites/{blogannoncereservation:id}/unfavorites',
     'FavoriteController@unfavoritblogannoncereservation'
 )->name('blogannoncereservations_favorites.unactive');
+
+Route::delete(
+    'favorites/favorites_delete/{user}/{id}/delete',
+    'FavoriteController@destroy'
+)->name('personal_favorites_delete.site');

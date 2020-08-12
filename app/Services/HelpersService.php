@@ -59,44 +59,15 @@ class HelpersService
     public static function helpersfavoritescount($user)
     {
         $data = user::whereSlug($user->slug)
-            ->withCount(['favoritemployments' => function ($q) use ($user){
-                $q->with('user','employment')
+            ->withCount(['favoritesemployments' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id])
+                    ->with('user','favoriteable')
+                    ->where('favoriteable_type',employment::class)
                     ->whereIn('user_id',[$user->id])
-                    ->whereHas('employment', function ($q) {$q->where(['status' => 1,'status_admin' => 1]);})
-                    ->whereHas('employment.city', function ($q) {$q->where('status',1);})
-                    ->whereHas('employment.categoryemployment', function ($q) {$q->where('status',1);});
-            }])
-            ->withCount(['favoriteannonceventes' => function ($q) use ($user){
-                $q->with('user','annonceventes')
-                    ->whereIn('user_id',[$user->id])
-                    ->whereHas('annoncevente', function ($q) {$q->where(['status' => 1,'status_admin' => 1]);})
-                    ->whereHas('annoncevente.city', function ($q) {$q->where('status',1);})
-                    ->whereHas('annoncevente.categoryannoncevente', function ($q) {$q->where('status',1);});
-            }])
-            ->withCount(['favoriteannoncelocations' => function ($q) use ($user){
-                $q->with('user','annoncelocations')
-                    ->whereIn('user_id',[$user->id])
-                    ->whereHas('annoncelocation', function ($q) {$q->where(['status' => 1,'status_admin' => 1]);})
-                    ->whereHas('annoncelocation.city', function ($q) {$q->where('status',1);})
-                    ->whereHas('annoncelocation.categoryannoncelocation', function ($q) {$q->where('status',1);});
-            }])
-            ->withCount(['favoriteblogannoncereservations' => function ($q) use ($user){
-                $q->with('user','blogannoncereservation')
-                    ->whereIn('user_id',[$user->id])
-                    ->whereHas('blogannoncereservation', function ($q) {$q->where(['status' => 1,'status_admin' => 1]);})
-                    ->whereHas('blogannoncereservation.categoryannoncereservation', function ($q) {$q->where('status',1);});
-            }])
-            ->withCount(['favoriteblogannoncelocations' => function ($q) use ($user){
-                $q->with('user','blogannoncelocation')
-                    ->whereIn('user_id',[$user->id])
-                    ->whereHas('blogannoncelocation', function ($q) {$q->where(['status' => 1,'status_admin' => 1]);})
-                    ->whereHas('blogannoncelocation.categoryannoncelocation', function ($q) {$q->where('status',1);});
-            }])
-            ->withCount(['favoriteblogannonceventes' => function ($q) use ($user){
-                $q->with('user','blogannoncevente')
-                    ->whereIn('user_id',[$user->id])
-                    ->whereHas('blogannoncevente', function ($q) {$q->where(['status' => 1,'status_admin' => 1]);})
-                    ->whereHas('blogannoncevente.categoryannoncevente', function ($q) {$q->where('status',1);});
+                    ->with(['favoriteable.categoryemployment' => function ($q){
+                        $q->where('status',1);},
+                        'favoriteable.city' => function ($q){
+                            $q->where('status',1);},]);
             }]);
 
         return $data;

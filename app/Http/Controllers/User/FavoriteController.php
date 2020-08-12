@@ -11,8 +11,10 @@ use App\Model\blogannoncereservation;
 use App\Model\blogannoncevente;
 use App\Model\comment;
 use App\Model\employment;
+use App\Model\favorite;
 use App\Model\forum;
 use App\Model\responsecomment;
+use App\Model\user;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -206,6 +208,15 @@ class FavoriteController extends Controller
         $response = auth()->user()->removefavorites()->detach($blogannoncereservation);
 
         return response()->json(['success'=>$response]);
+    }
+
+    public function destroy(user $user,$id)
+    {
+        $favorite = favorite::where('id', $id)->findOrFail($id);
+
+        $this->authorize('update',$user);
+
+        $favorite->delete();
     }
 
 }
