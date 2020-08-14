@@ -14,10 +14,12 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {
     loadforumsbyuserprivate,
+    loadProfileusersforprivate,
     favoriteItem,unfavoriteItem,
     likeItem,unlikeItem,
     deleteItem
 } from "../../../../../redux/actions/forum/forumActions";
+import NavlinkconfigurationUser from "../../../configurations/inc/NavlinkconfigurationUser";
 
 
 class PrivateUserForum extends Component {
@@ -31,6 +33,7 @@ class PrivateUserForum extends Component {
 
     loadItems() {
        this.props.loadforumsbyuserprivate(this.props);
+       this.props.loadProfileusersforprivate(this.props);
     }
 
    // Lifecycle Component Method
@@ -38,7 +41,7 @@ class PrivateUserForum extends Component {
         this.loadItems();
     }
     render() {
-        const {forums} = this.props;
+        const {forums,userPrivate} = this.props;
         const mapForums = forums.length >= 0 ? (
             forums.map(item => {
                 return (
@@ -67,6 +70,26 @@ class PrivateUserForum extends Component {
                                 <br />
                                 <div className="row">
 
+                                    <div className="col-lg-4 col-md-12 mx-auto">
+
+                                        <Navlinknewforum/>
+
+                                        <NavlinkconfigurationUser {...this.props} {...userPrivate} />
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+
+                                                        <Navforumbyuser />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         {/*
                                             <div className="submit text-left">
@@ -90,23 +113,6 @@ class PrivateUserForum extends Component {
 
                                     </div>
 
-                                    <div className="col-lg-4 col-md-12 mx-auto">
-
-                                        <Navlinknewforum/>
-
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-
-                                                    <Navforumbyuser />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -123,14 +129,17 @@ class PrivateUserForum extends Component {
 }
 PrivateUserForum.propTypes = {
     loadforumsbyuserprivate: PropTypes.func.isRequired,
+    loadProfileusersforprivate: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
     forums: state.forums.forums,
+    userPrivate: state.profile.profiluser,
 });
 
 export default connect(mapStateToProps, {
     loadforumsbyuserprivate,
+    loadProfileusersforprivate,
     favoriteItem,unfavoriteItem,
     likeItem,unlikeItem,
     deleteItem

@@ -154,7 +154,7 @@ export const activeItem = id => dispatch => {
     });
 };
 
-export const unactiveItem = id => dispatch => {
+export const unactiveprivateItem = id => dispatch => {
 
     Swal.fire({
         title: 'Masquer cette annonce?',

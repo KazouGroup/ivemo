@@ -238,17 +238,16 @@ class EmploymentService
 
     public static function apiemploymentsbyuser($user)
     {
-        $employments = HelpersService::helpersannonceteamcount($user)
-            ->with(['employments' => function ($q) use ($user){
-                $q->with('user','city','categoryemployment','member')
-                    ->with(['user.profile' => function ($q){$q->distinct()->get();}])
-                    ->whereIn('user_id',[$user->id])
-                    ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
-                    ->whereHas('city', function ($q) {$q->where('status',1);})
-                    ->orderBy('created_at','DESC')
-                    ->distinct()->get();
-                },
-            ])->first();
+        $employments = $user->employments()->with('user','city','categoryemployment','member')
+            ->with(['user.profile' => function ($q){$q->distinct()->get();}])
+            ->whereIn('user_id',[$user->id])
+            ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->withCount(['contactservices' => function ($q) use ($user){
+                $q->where(['status_red' => 0])->whereIn('to_id',[$user->id]);
+            }])
+            ->orderBy('created_at','DESC')
+            ->distinct()->get();
 
         return $employments;
     }

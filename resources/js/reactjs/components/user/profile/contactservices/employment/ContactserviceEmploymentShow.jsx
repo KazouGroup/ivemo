@@ -15,10 +15,11 @@ import MailcontactserviceList from "../inc/MailcontactserviceList";
 import EmploymentListOnSkeleton from "../../../../inc/user/employment/EmploymentListOnSkeleton";
 import {connect} from "react-redux";
 import {
-    activecontactaddItem, activecontactremoveItem, activeItem,
+    activecontactaddItem, activecontactremoveItem,
+    unactiveprivateItem, activeItem,
     archvementaddItem, archvementremoveItem,
     favoriteaddItem, favoriteremoveItem,
-    loadContactserviceemploymentshow,unactiveItem,deletecontactItem
+    loadContactserviceemploymentshow,deletecontactItem
 } from "../../../../../redux/actions/contactserviceActions";
 import PropTypes from "prop-types";
 
@@ -175,7 +176,7 @@ class ContactserviceEmploymentShow extends Component {
                                         {employment.title ?
 
                                             <>
-                                                <PrivateUserEmployementList {...this.props} {...employment} deleteItem={this.deleteItem} unactiveItem={this.props.unactiveItem} activeItem={this.props.activeItem} />
+                                                <PrivateUserEmployementList {...this.props} {...employment} deleteItem={this.deleteItem} unactiveprivateItem={this.props.unactiveprivateItem} activeItem={this.props.activeItem} />
 
                                                 <div className="card">
                                                     <div className="social-line social-line-big-icons">
@@ -277,5 +278,5 @@ export default connect(mapStateToProps, {
     favoriteaddItem,favoriteremoveItem,
     archvementaddItem,archvementremoveItem,
     activecontactaddItem,activecontactremoveItem,
-    activeItem,unactiveItem,deletecontactItem
+    unactiveprivateItem,activeItem,deletecontactItem
 })(ContactserviceEmploymentShow);

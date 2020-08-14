@@ -14,9 +14,11 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {
     loadContactserviceemployments,
+    loadProfileusersforprivate,
     activeItem,unactiveprivateItem,
     deleteItem
 } from "../../../../../redux/actions/employment/employmentActions";
+import NavlinkconfigurationUser from "../../../configurations/inc/NavlinkconfigurationUser";
 
 
 class ContactserviceEmploymentIndex extends Component {
@@ -37,6 +39,7 @@ class ContactserviceEmploymentIndex extends Component {
 
     loadItems(){
         this.props.loadContactserviceemployments(this.props);
+        this.props.loadProfileusersforprivate(this.props);
     }
 
     componentDidMount() {
@@ -44,7 +47,7 @@ class ContactserviceEmploymentIndex extends Component {
     }
 
     render() {
-        const {employments} = this.props;
+        const {employments,userPrivate} = this.props;
         const {visiable} = this.state;
         const mapEmployments = employments.length >= 0 ? (
             employments.slice(0, visiable).map(item => {
@@ -80,6 +83,8 @@ class ContactserviceEmploymentIndex extends Component {
 
                                         <Navlinknewemployment/>
 
+                                        <NavlinkconfigurationUser {...this.props} {...userPrivate} />
+
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="row">
@@ -95,10 +100,6 @@ class ContactserviceEmploymentIndex extends Component {
                                         </div>
 
 
-
-
-
-
                                     </div>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
@@ -112,7 +113,7 @@ class ContactserviceEmploymentIndex extends Component {
                                         )}
 
                                         <div className="submit text-left">
-                                            <Link to={`/profile/${$userIvemo.slug}/statistics/employments/`} className="btn btn-neutral btn-sm">
+                                            <Link to={`/profile/${$userIvemo.slug}/personal_settings/employments/`} className="btn btn-neutral btn-sm">
                                                 <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos annonces</b>
                                             </Link>
                                         </div>
@@ -150,16 +151,18 @@ class ContactserviceEmploymentIndex extends Component {
 }
 ContactserviceEmploymentIndex.propTypes = {
     loadContactserviceemployments: PropTypes.func.isRequired,
+    loadProfileusersforprivate: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-
-    employments: state.employments.items
+    employments: state.employments.items,
+    userPrivate: state.profile.profiluser,
 
 });
 
 export default connect(mapStateToProps, {
     loadContactserviceemployments,
+    loadProfileusersforprivate,
     activeItem,unactiveprivateItem,
     deleteItem,
 })(ContactserviceEmploymentIndex);

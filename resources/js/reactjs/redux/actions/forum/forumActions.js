@@ -11,7 +11,11 @@ import {
     GET_SLUG_CATEGORY_FORUM,
     GET_FORUM_ALL_SITE,
     LIKE_FORUM_ADD,
-    LIKE_FORUM_REMOVE, GET_PROFILE_USER_FOR_PUBLIC, FOLLOWERUSER_ADD, FOLLOWERUSER_REMOVE,
+    LIKE_FORUM_REMOVE,
+    GET_PROFILE_USER_FOR_PUBLIC,
+    FOLLOWERUSER_ADD,
+    FOLLOWERUSER_REMOVE,
+    GET_PROFILE_USER_FOR_PRIVATE,
 
 } from "../types";
 import Swal from "sweetalert2";
@@ -29,6 +33,17 @@ export const loadProfileusersforpublic = (props) => dispatch => {
         ).catch(error => console.error(error));
 };
 
+export const loadProfileusersforprivate = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let url = route('api.profilprivate',[itemuser]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_PROFILE_USER_FOR_PRIVATE,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
 
 export const loadCategoryforums = () => dispatch => {
 

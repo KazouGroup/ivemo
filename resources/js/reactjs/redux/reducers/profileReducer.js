@@ -20,6 +20,10 @@ export default produce((draft, action = {}) => {
                 draft.userfollowers = action.payload;
                 return;
 
+            case 'GET_PROFILE_USER_FOR_PRIVATE':
+                draft.profiluser = action.payload;
+                return;
+
             case 'GET_PROFILE_USER_FOR_PUBLIC':
                 draft.profiluser = action.payload;
                 return;

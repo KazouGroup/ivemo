@@ -8,8 +8,20 @@ import NavlinkconfigurationUser from "../../../configurations/inc/Navlinkconfigu
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 import PrivateUserEmployementList from "../../../employment/inc/PrivateUserEmployementList";
 import EmploymentListSkeleton from "../../../../inc/user/employment/EmploymentListSkeleton";
-import Navemploymentsbyuser from "../../../employment/inc/Navemploymentsbyuser";
 import Navlinknewemployment from "../../../employment/treatement/Navlinknewemployment";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {
+    deleteItem,
+    favoriteItem, followerItem,
+    loademploymentbyuserprivate,
+    loadProfileusersforprivate,
+    subscribeItem,unsubscribeItem,
+    activeItem,unactiveprivateItem,
+    unfavoriteItem, unfollowerItem,
+
+} from "../../../../../redux/actions/employment/employmentActions";
+import Navemploymentsbyuser from "../../../employment/inc/Navemploymentsbyuser";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -17,17 +29,10 @@ class PrivateUserEmployments extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            employments_count: [],
-            employmentsactive_count: [],
-            employmentsunactive_count: [],
-            useremploymentsPrivate:{employments:{categoryemployment:[],user:[],city:[]}},
             visiable: 20,
 
         };
 
-        this.deleteItem = this.deleteItem.bind(this);
-        this.activeItem = this.activeItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
     }
 
@@ -36,205 +41,26 @@ class PrivateUserEmployments extends Component {
             return {visiable: old.visiable + 20}
         })
     }
-    activeItem(id){
-        Swal.fire({
-            title: 'Afficher cette annonce?',
-            text: "êtes vous sure de vouloir confirmer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                //Envoyer la requet au server
-                let url = route('employmentsactivated_site',id);
-                dyaxios.get(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            message: "Cette annonce est desormais visible aux utilisateurs",
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
-                            },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
-                            },
-                        });
-                    /** End alert ***/
-                    this.loadItems();
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        })
-
-    }
-
-    unactiveItem(id){
-        Swal.fire({
-            title: 'Masquer cette annonce?',
-            text: "êtes vous sure de vouloir confirmer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                //Envoyer la requet au server
-                let url = route('employmentsunactivated_site',id);
-                dyaxios.get(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            message: "Cette annonce a été masquée aux utilisateurs",
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
-                            },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
-                            },
-                        });
-                    /** End alert ***/
-                    this.loadItems();
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animated bounceInDown',
-                            exit: 'animated bounceOutUp'
-                        }
-                    });
-                })
-            }
-        })
-
-    }
-
-    deleteItem(id) {
-        Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                const url = route('employmentsdelete_site',[id]);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            // title: 'Update',
-                            message: 'Annonce suprimée avec success'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animate__animated animate__fadeInRight',
-                                exit: 'animate__animated animate__fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-                    this.loadItems();
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
 
     loadItems(){
-        let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.employments_premium_count',[itemuser])).then(response => this.setState({ employments_count: response.data, }));
-
-        dyaxios.get(route('api.employments_premiumactive_count',[itemuser])).then(response => this.setState({ employmentsactive_count: response.data, }));
-
-        dyaxios.get(route('api.employments_premiumunactive_count',[itemuser])).then(response => this.setState({ employmentsunactive_count: response.data, }));
-
-        dyaxios.get(route('api.employmentsbyuser_site',[itemuser])).then(response => this.setState({useremploymentsPrivate: response.data,}));
+        this.props.loademploymentbyuserprivate(this.props);
+        this.props.loadProfileusersforprivate(this.props);
     }
 
    // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
     }
-
-    data_countFormatter(employments_count, precision) {
-        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(employments_count)) / 3);
-        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
-        const suffix = abbrev[order];
-        return (employments_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
-    }
-
-    dataactive_countFormatter(employmentsactive_count, precision) {
-        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(employmentsactive_count)) / 3);
-        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
-        const suffix = abbrev[order];
-        return (employmentsactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
-    }
-
-    dataunactive_countFormatter(employmentsunactive_count, precision) {
-        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(employmentsunactive_count)) / 3);
-        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
-        const suffix = abbrev[order];
-        return (employmentsunactive_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
-    }
     render() {
-        const {useremploymentsPrivate,visiable,employments_count,employmentsactive_count,employmentsunactive_count} = this.state;
-        const mapEmployments = useremploymentsPrivate.employments.length >= 0 ? (
-            useremploymentsPrivate.employments.slice(0,visiable).map(item => {
+        const {employments,userPrivate} = this.props;
+        const {visiable} = this.state;
+        const mapEmployments = employments.length >= 0 ? (
+            employments.slice(0,visiable).map(item => {
                 return(
-                    <PrivateUserEmployementList key={item.id} {...item} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} activeItem={this.activeItem}/>
+                    <PrivateUserEmployementList key={item.id} {...item}
+                                                deleteItem={this.props.deleteItem}
+                                                unactiveprivateItem={this.props.unactiveprivateItem}
+                                                activeItem={this.props.activeItem}/>
                 )
             })
         ):(
@@ -266,6 +92,8 @@ class PrivateUserEmployments extends Component {
 
                                         <Navlinknewemployment/>
 
+                                        <NavlinkconfigurationUser {...this.props} {...userPrivate} />
+
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="row">
@@ -280,8 +108,6 @@ class PrivateUserEmployments extends Component {
                                             </div>
                                         </div>
 
-                                        <NavlinkconfigurationUser {...useremploymentsPrivate} />
-
                                     </div>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
@@ -293,7 +119,9 @@ class PrivateUserEmployments extends Component {
                                             </>
                                         )}
 
-                                        <div className="row">
+
+                                        {/*
+                                          <div className="row">
                                             <div className="col-md-4 col-4">
                                                 <div className="info info-hover">
                                                     <div className="icon icon-warning icon-circle">
@@ -318,11 +146,11 @@ class PrivateUserEmployments extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
+                                        */}
 
                                         {mapEmployments}
 
-                                        {visiable < useremploymentsPrivate.employments.length && (
+                                        {visiable < employments.length && (
                                             <div className="row">
                                                 <div className="col-md-4 ml-auto mr-auto text-center">
                                                     <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
@@ -351,4 +179,25 @@ class PrivateUserEmployments extends Component {
     }
 }
 
-export default PrivateUserEmployments;
+PrivateUserEmployments.propTypes = {
+    loademploymentbyuserprivate: PropTypes.func.isRequired,
+    loadProfileusersforprivate: PropTypes.func.isRequired,
+};
+
+const mapStoreToProps = store => ({
+    employments: store.employments.items,
+    userPrivate: store.profile.profiluser,
+
+});
+
+export default connect(mapStoreToProps,
+    {
+        loademploymentbyuserprivate,
+        loadProfileusersforprivate,
+        favoriteItem,unfavoriteItem,
+        unsubscribeItem,subscribeItem,
+        unfollowerItem,followerItem,
+        unactiveprivateItem,activeItem,
+        deleteItem,
+    }
+)(PrivateUserEmployments);

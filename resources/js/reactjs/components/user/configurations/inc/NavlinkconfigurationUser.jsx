@@ -7,19 +7,68 @@ class NavlinkconfigurationUser extends Component {
     render() {
         return (
 
+            <>
+
+
             <div className="card">
                 <div className="card-body">
                     <div className="row">
                         <div className="col-md-12">
+
                             <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
                                 <div className="card card-plain">
                                     <div className="card-header" role="tab" id="headingAnnonce">
                                         <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseAnnonce" aria-expanded="false" aria-controls="collapseAnnonce">
-                                            <b>Toutes mes annonces</b>
+                                            <b>Rubriques</b>
                                         </a>
                                     </div>
-                                    <div id="collapseAnnonce" className="collapse" role="tabpanel" aria-labelledby="headingAnnonce">
+
+                                    <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                        <div className="card-body">
+                                            <table>
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/employments/`}>
+                                                            <b>Emplois & Services</b>
+                                                        </NavLink>
+                                                    </td>
+                                                    <td className="text-right"> {this.props.employments_count} {this.props.employments_count > 1 ? "annonces" : "annonce"}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <NavLink to={`/profile/${this.props.slug}/personal_settings/forums/`}>
+                                                            <b>Forums</b>
+                                                        </NavLink>
+                                                    </td>
+                                                    <td className="text-right"> {this.props.forums_count} {this.props.forums_count > 1 ? "posts" : "post"}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/teams/`}>
+                                                            <b>Notre Teams</b>
+                                                        </NavLink>
+                                                    </td>
+                                                    <td className="text-right"> {this.props.teamusers_count} {this.props.teamusers_count > 1 ? "membres" : "membre"}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/subscriber_users/`}>
+                                                            <b>Email des abonnements</b>
+                                                        </NavLink>
+                                                    </td>
+                                                    <td className="text-right"> {this.props.subscriberusers_count} {this.props.subscriberusers_count > 1 ? "emails" : "email"}</td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    {/*
+                                     <div id="collapseAnnonce" className="collapse" role="tabpanel" aria-labelledby="headingAnnonce">
                                         <div className="card-body">
                                             <table>
                                                 <tbody>
@@ -51,9 +100,13 @@ class NavlinkconfigurationUser extends Component {
                                             </table>
                                         </div>
                                     </div>
+                                    */}
+
+
                                 </div>
 
-                                <div className="card card-plain">
+                                {/*
+                                  <div className="card card-plain">
                                     <div className="card-header" role="tab" id="headingAnnonceFRS">
                                         <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseAnnonceFRS" aria-expanded="false" aria-controls="collapseAnnonceFRS">
                                             <b>Toutes mes annonces Formations, services & recrutement</b>
@@ -117,43 +170,15 @@ class NavlinkconfigurationUser extends Component {
                                     </div>
                                 </div>
 
-                                <div className="card card-plain">
-                                    <div className="card-header" role="tab" id="headingInfopersonnel">
-                                        <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseInfopersonnel" aria-expanded="false" aria-controls="collapseInfopersonnel">
-                                            <b>Inforations personnel</b>
-                                        </a>
-                                    </div>
-                                    <div id="collapseInfopersonnel" className="collapse" role="tabpanel" aria-labelledby="headingInfopersonnel">
-                                        <div className="card-body">
-                                            <table>
-                                                <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/teams/`}>
-                                                            Notre Teams
-                                                        </NavLink>
-                                                    </td>
-                                                    <td className="text-right"> {this.props.teamusers_count} {this.props.teamusers_count > 1 ? "membres" : "membre"}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/subscriber_users/`}>
-                                                            Email des abonnements
-                                                        </NavLink>
-                                                    </td>
-                                                    <td className="text-right"> {this.props.subscriberusers_count} {this.props.subscriberusers_count > 1 ? "emails" : "email"}</td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                                */}
 
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+        </>
 
         )
     }

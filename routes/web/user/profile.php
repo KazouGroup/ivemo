@@ -8,9 +8,9 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api_profile_account.site');
 
     Route::get(
-        'user/{profile}',
-        'ProfileController@api_user_profile_account'
-    )->name('api_user_profile_data.site');
+        'user/{user}',
+        'ProfileController@apiprofileprivate'
+    )->name('api.profilprivate');
 
     Route::get(
         'profile/{profile}/account',

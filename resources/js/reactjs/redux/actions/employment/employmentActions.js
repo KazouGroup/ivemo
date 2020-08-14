@@ -8,6 +8,7 @@ import {
     GET_CATEGORYEMPLOYMENTS_BY_CATEGORY,
     GET_CATEGORYEMPLOYMENTS_BY_USER,
     GET_EMPLOYEMENT_BY_USER_PUBLIC,
+    GET_EMPLOYEMENT_BY_USER_PRIVATE,
     GET_EMPLOYEMENT_INTERESSE,
     GET_ALL_EMPLOYMENTS_FOR_CONTACTSERVICE,
     UNACTIVE_PRIVATE_EMPLOYEMENT,
@@ -15,6 +16,7 @@ import {
     ACTIVE_EMPLOYEMENT,
     DELETE_EMPLOYEMENT,
     GET_PROFILE_USER_FOR_PUBLIC,
+    GET_PROFILE_USER_FOR_PRIVATE,
     FOLLOWERUSER_ADD,
     FOLLOWERUSER_REMOVE,
 } from "../types";
@@ -93,6 +95,30 @@ export const loademploymentbyuserpublic = (props) => dispatch => {
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_EMPLOYEMENT_BY_USER_PUBLIC,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loadProfileusersforprivate = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let url = route('api.profilprivate',[itemuser]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_PROFILE_USER_FOR_PRIVATE,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loademploymentbyuserprivate = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let url = route('api.employmentsbyuser_site', [itemuser]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_EMPLOYEMENT_BY_USER_PRIVATE,
                 payload: response.data
             })
         ).catch(error => console.error(error));

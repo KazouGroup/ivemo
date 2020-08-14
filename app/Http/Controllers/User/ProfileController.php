@@ -131,32 +131,9 @@ class ProfileController extends Controller
     }
 
 
-    public function api_user_profile_account($user)
+    public function apiprofileprivate(user $user)
     {
-        $user = user::whereSlug($user)
-            ->with(['profile' => function ($q) use ($user){
-                $q->whereIn('user_id',[auth()->user()->id])
-                    ->distinct()->get()->toArray()
-                ;},
-            ])
-            ->withCount(['subscriberusers' => function ($q){
-                $q->whereIn('user_id',[auth()->user()->id]);
-            }])
-            ->withCount(['teamusers' => function ($q) use ($user){
-                $q->whereIn('user_id',[auth()->user()->id]);
-            }])->withCount(['annoncelocations' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['annoncereservations' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['annonceventes' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['blogannoncelocations' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['blogannoncereservations' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
-            }])->withCount(['blogannonceventes' => function ($q){
-                $q->where(['status' => 1,'status_admin' => 1]);
-            }])->first();
+        $user = new UserResource(ProfileService::apiprofileprivate($user));
 
         return response()->json($user, 200);
     }

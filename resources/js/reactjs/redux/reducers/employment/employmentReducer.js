@@ -28,6 +28,10 @@ export default produce((draft, action = {}) => {
                 draft.catgoryitems = action.payload;
                 return;
 
+            case 'GET_EMPLOYEMENT_BY_USER_PRIVATE':
+                draft.items = action.payload;
+                return;
+
             case 'GET_EMPLOYEMENT_BY_USER_PUBLIC':
                 draft.items = action.payload;
                 return;

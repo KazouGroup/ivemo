@@ -21,7 +21,7 @@ import {loadContactserviceemploymentsredmessage,
     favoriteaddItem,favoriteremoveItem,
     archvementaddItem,archvementremoveItem,
     activecontactaddItem,activecontactremoveItem,
-    activeItem,unactiveItem,
+    activeItem,unactiveprivateItem,
 } from "../../../../../redux/actions/contactserviceActions";
 
 
@@ -252,7 +252,7 @@ class ContactserviceEmploymentContactShow extends Component {
 
                                                     {contactservice.contactserviceable.title ?
 
-                                                        <PrivateUserEmployementList {...this.props} {...contactservice.contactserviceable} deleteItem={this.deleteItem} unactiveItem={this.props.unactiveItem} activeItem={this.props.activeItem}/>
+                                                        <PrivateUserEmployementList {...this.props} {...contactservice.contactserviceable} deleteItem={this.deleteItem} unactiveprivateItem={this.props.unactiveprivateItem} activeItem={this.props.activeItem}/>
                                                         :
                                                         <EmploymentListOnSkeleton />
 
@@ -362,5 +362,5 @@ export default connect(mapStateToProps, {
     favoriteaddItem,favoriteremoveItem,
     archvementaddItem,archvementremoveItem,
     activecontactaddItem,activecontactremoveItem,
-    activeItem,unactiveItem,
+    activeItem,unactiveprivateItem,
 })(ContactserviceEmploymentContactShow);
