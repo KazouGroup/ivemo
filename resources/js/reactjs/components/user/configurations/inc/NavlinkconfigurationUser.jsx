@@ -45,7 +45,8 @@ class NavlinkconfigurationUser extends Component {
                                                     <td className="text-right"> {this.props.forums_count} {this.props.forums_count > 1 ? "posts" : "post"}</td>
                                                 </tr>
 
-                                                <tr>
+                                                {/*
+                                                 <tr>
                                                     <td>
                                                         <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/teams/`}>
                                                             <b>Notre Teams</b>
@@ -61,6 +62,7 @@ class NavlinkconfigurationUser extends Component {
                                                     </td>
                                                     <td className="text-right"> {this.props.subscriberusers_count} {this.props.subscriberusers_count > 1 ? "emails" : "email"}</td>
                                                 </tr>
+                                                */}
 
                                                 </tbody>
                                             </table>

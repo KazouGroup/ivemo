@@ -101,7 +101,7 @@ class PrivateUserEmployementList extends PureComponent {
                                                     <div className="text-center">
                                                         <NavLink to={`/profile/${this.props.user.slug}/statistics/employments/${this.props.slugin}/`}
                                                             className="btn btn-sm btn-primary" title={`${this.props.contactservices_count} ${this.props.contactservices_count > 1 ? "messages non lus" : "message non lu"} `}>
-                                                            <i className="now-ui-icons ui-1_bell-53"/>  <b>{this.props.contactservices_count}</b>
+                                                              <b><i className="now-ui-icons ui-1_bell-53"/> {this.props.contactservices_count}</b>
                                                         </NavLink>
                                                         <NavLink to={`/profile/${this.props.user.slug}/statistics/employments/${this.props.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
                                                             <i className="now-ui-icons business_chart-bar-32"/>
@@ -127,7 +127,7 @@ class PrivateUserEmployementList extends PureComponent {
                                                         <Button
                                                             className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props)} title="Supprimer cette annonce">
                                                             <i className="now-ui-icons ui-1_simple-remove"/>
-                                                        </Button>{" "}
+                                                        </Button>
                                                     </div>
                                                 )}
 
