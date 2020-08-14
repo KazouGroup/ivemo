@@ -12,18 +12,33 @@ class HeaderProfileAccountPrivate extends PureComponent {
         return (
             <div className="card-header d-flex align-items-center">
                 <div className="d-flex align-items-center">
-                    <NavLink to={`/pro/${$userIvemo.slug}/`}>
-                        <img src={$userIvemo.avatar}
-                             alt={`${$userIvemo.first_name} ${$userIvemo.last_name}`}
-                             className="ivemoAvatar avatar"/>
-                    </NavLink>
+
+                    <a className="pull-left" href={$userIvemo.status_profile ?
+
+                        `${route('public_profile.site',[$userIvemo.slug])}`
+                        :
+                        `${route('userpublic_profile.site',[$userIvemo.slug])}`}
+                    >
+                        {$userIvemo.avatar === null ?
+                            <img className="ivemoAvatar avatar" alt={$userIvemo.first_name}
+                                 src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>
+                            :
+                            <img className="ivemoAvatar avatar" alt={$userIvemo.first_name}
+                                 src={$userIvemo.avatar}/>
+                        }
+                    </a>
                     <div className="mx-3">
-                        <NavLink to={`/pro/${$userIvemo.slug}/`}
-                                 className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name} {$userIvemo.last_name}</b>
+                        <a className="text-dark font-weight-600 text-sm" href={$userIvemo.status_profile ?
+
+                            `${route('public_profile.site',[$userIvemo.slug])}`
+                            :
+                            `${route('userpublic_profile.site',[$userIvemo.slug])}`}
+                        ><b>{$userIvemo.first_name} {$userIvemo.last_name}</b>
                             <small
                                 className="d-block text-muted mt-1">Membre
                                 depuis {moment($userIvemo.created_at).format('LL')}</small>
-                        </NavLink>
+                        </a>
+
                     </div>
                 </div>
             </div>

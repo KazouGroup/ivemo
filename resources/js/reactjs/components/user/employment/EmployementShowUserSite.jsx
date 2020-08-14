@@ -752,11 +752,9 @@ class EmployementShowUserSite extends Component {
 
                                 </div>
 
-
                                 <EmployementInteresse {...this.props} />
 
                             </div>
-
                         </div>
 
                         <FooterBigUserSite />

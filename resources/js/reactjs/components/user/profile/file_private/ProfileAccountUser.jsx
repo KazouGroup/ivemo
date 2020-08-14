@@ -386,7 +386,7 @@ class ProfileAccountUser extends PureComponent {
                                                                 <label className="d-block mb-4"><b>Ma Photo de Profil</b></label>
                                                                 <img className="ivemoAvatar"
                                                                     // src={showDefaultImage ? `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg` : avatar || `${$url_site}/assets/vendor/assets/img/placeholder.jpg`}
-                                                                    src={avatar === '' ? `${$userIvemo.avatar}` : avatar}
+                                                                    src={avatar === '' ? `${$userIvemo.avatar}` : avatar || `https://dummyimage.com/wsvga/0077ee/009900&text=qui`}
                                                                     alt={'avatar'}/>
                                                                 <input id="avatar" type="file"
                                                                        onChange={this.updateAvatarImage}
@@ -411,7 +411,7 @@ class ProfileAccountUser extends PureComponent {
                                                                 <label className="mb-4"><b>Ma Photo de Couverture</b></label>
                                                                 <img className="fileinput-new thumbnail img-raised"
                                                                     //src={showDefaultAvatarCoverImage ? `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg` : avatarcover || `${$url_site}/assets/vendor/assets/img/image_placeholder.jpg`}
-                                                                     src={avatarcover === '' ? `${$userIvemo.avatarcover}` : avatarcover}
+                                                                     src={avatarcover === '' ? `${$userIvemo.avatarcover}` : avatarcover || `https://dummyimage.com/wsvga/0077ee/009900&text=qui`}
                                                                      alt={'avatarcover'}/>
                                                                 <input id="avatarcover" type="file"
                                                                        onChange={this.updateAvatarCoverImage}

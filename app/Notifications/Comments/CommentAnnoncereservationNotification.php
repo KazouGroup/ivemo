@@ -43,7 +43,7 @@ class CommentAnnoncereservationNotification extends Notification implements Shou
     public function toMail()
     {
         return (new MailMessage)
-            ->greeting($this->userFrom->first_name.' à poster commentaire sur cette annonce ci-dessous')
+            ->greeting($this->userFrom->first_name.' a posté un commentaire sur cette annonce ci-dessous')
             ->subject('Nouveau commentaire')
             ->line('ID: '.$this->annoncereservation->id.' | Titre de l\'annonce: '.$this->annoncereservation->title.' | Prix: '.$this->annoncereservation->price.' | Ville: '.$this->annoncereservation->city->name.' | Categorie: '.$this->annoncereservation->categoryannoncereservation->name)
             ->from($this->userFrom->email,config('app.name'))

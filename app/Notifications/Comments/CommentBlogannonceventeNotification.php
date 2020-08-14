@@ -42,7 +42,7 @@ class CommentBlogannonceventeNotification extends Notification implements Should
     public function toMail()
     {
         return (new MailMessage)
-            ->greeting($this->userFrom->first_name.' à poster commentaire sur cette annonce ci-dessous')
+            ->greeting($this->userFrom->first_name.' a posté commentaire sur cette annonce ci-dessous')
             ->subject('Nouveau commentaire')
             ->line('ID: '.$this->blogannoncevente->id.' | Titre de l\'article: '.$this->blogannoncevente->title.' | Categorie: '.$this->blogannoncevente->categoryannoncevente->name)
             ->from($this->userFrom->email,config('app.name'))

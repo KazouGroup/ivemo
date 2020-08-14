@@ -307,7 +307,7 @@ class ProfileAccountPublicUser extends PureComponent {
                                                         <FormContactProfileAccountUser {...this.props} {...userPublick}/>
                                                     </div>
                                                 </div>
-                                                <div className="card card-raised card-form-horizontal">
+                                                <div className="card">
                                                     <div className="card-body mb-4">
                                                         <div className="card-header text-center mb-4">
                                                             <h4 className="card-title"><b>Restez à l’écoute des dernières nouveautés !</b></h4>

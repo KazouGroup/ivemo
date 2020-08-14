@@ -288,7 +288,7 @@ class PublicUserEmployments extends Component {
                                                 </div>
                                             </div>
 
-                                            <div className="card card-raised card-form-horizontal">
+                                            <div className="card">
 
                                                 <div className="card-body">
 

@@ -43,7 +43,7 @@ class CommentForumNotification extends Notification implements ShouldQueue
     public function toMail()
     {
         return (new MailMessage)
-            ->greeting($this->userFrom->first_name.' à poster commentaire sur le post ci-dessous')
+            ->greeting($this->userFrom->first_name.' a posté un commentaire sur le post ci-dessous')
             ->subject('Nouveau commentaire')
             ->line('ID: '.$this->forum->id.' | Titre du post: '.$this->forum->title.' | Categorie: '.$this->forum->categoryforum->name)
             ->from($this->userFrom->email,config('app.name'))

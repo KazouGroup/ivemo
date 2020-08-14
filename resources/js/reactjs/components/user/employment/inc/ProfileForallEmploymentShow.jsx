@@ -27,7 +27,7 @@ class ProfileForallEmploymentShow extends Component {
                     <div className="d-flex align-items-center">
                         {this.props.user.avatar ?
                             <NavLink to={`/pro/${this.props.user.slug}/employments/`}>
-                                <img src={this.props.user.avatar}
+                                <img src={this.props.user.avatar} 
                                      style={{ height: "40px", width: "80px" }}
                                      alt={this.props.user.first_name}
                                      className="avatar" />

@@ -51,21 +51,6 @@ const PubliciteIndexSite = () => {
                         </div>
 
                         <div className="container">
-                            <div className="row justify-content-center">
-                                <div className="col-md-12 ml-auto mr-auto">
-                                    {!$guest &&(
-                                        <>
-                                            {!$userIvemo.email_verified_at &&(
-                                                <LinkValicationEmail/>
-                                            )}
-                                        </>
-                                    )}
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="container">
 
                             <div className="row">
                                 <div className="col-md-10 mx-auto">

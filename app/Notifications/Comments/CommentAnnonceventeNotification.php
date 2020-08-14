@@ -43,7 +43,7 @@ class CommentAnnonceventeNotification extends Notification implements ShouldQueu
     public function toMail()
     {
         return (new MailMessage)
-            ->greeting($this->userFrom->first_name.' à poster commentaire sur cette annonce ci-dessous')
+            ->greeting($this->userFrom->first_name.' a posté un commentaire sur cette annonce ci-dessous')
             ->subject('Nouveau commentaire')
             ->line('ID: '.$this->annoncevente->id.' | Titre de l\'annonce: '.$this->annoncevente->title.' | Prix: '.$this->annoncevente->price.' | Ville: '.$this->annoncevente->city->name.' | Categorie: '.$this->annoncevente->categoryannoncevente->name)
             ->from($this->userFrom->email,config('app.name'))

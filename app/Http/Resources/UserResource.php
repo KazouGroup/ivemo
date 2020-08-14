@@ -28,7 +28,6 @@ class UserResource extends JsonResource
             //'birthday' => $this->birthday->format('d/m/Y'),
             'birthday' => $this->birthday,
             'color_name' => $this->color_name,
-            'status_user' => $this->status_user,
             'body' => $this->body,
             'avatar' => $this->avatar,
             'avatarcover' => $this->avatarcover,

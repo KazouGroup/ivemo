@@ -71,8 +71,8 @@ class FormContactProfileAccountUser extends PureComponent {
                             align: 'right'
                         },
                         animate: {
-                            enter: "animate__animated animate__fadeInUp",
-                            exit: "animate__animated animate__fadeOutDown"
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         },
                     });
 

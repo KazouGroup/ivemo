@@ -43,7 +43,7 @@ class CommentEmploymentNotification extends Notification implements ShouldQueue
     public function toMail()
     {
         return (new MailMessage)
-            ->greeting($this->userFrom->first_name.' à poster commentaire sur cette annonce ci-dessous')
+            ->greeting($this->userFrom->first_name.' a posté un commentaire sur cette annonce ci-dessous')
             ->subject('Nouveau commentaire')
             ->line('ID: '.$this->employment->id.' | Titre de l\'annonce: '.$this->employment->title.' | Ville: '.$this->employment->city->name.' | Categorie: '.$this->employment->categoryemployment->name)
             ->from($this->userFrom->email,config('app.name'))

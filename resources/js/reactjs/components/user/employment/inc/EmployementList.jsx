@@ -140,7 +140,7 @@ class EmployementList extends PureComponent {
                                                     {this.props.status ?
                                                         <>
                                                             <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props)}
-                                                                    className="btn btn-success btn-icon btn-sm" title="Desactiver l'annonce">
+                                                                    className="btn btn-success btn-icon btn-sm" title="Désactiver l'annonce">
                                                                 <i className="now-ui-icons ui-1_check"/>
                                                             </button>
                                                         </>

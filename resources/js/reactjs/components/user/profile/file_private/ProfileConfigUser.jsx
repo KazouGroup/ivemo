@@ -527,6 +527,31 @@ class ProfileConfigUser extends PureComponent {
                                                                             <div id="accordion" role="tablist"
                                                                                  aria-multiselectable="true"
                                                                                  className="card-collapse">
+
+                                                                                <div className="row">
+                                                                                    <div className="col-md-6 mx-auto">
+
+                                                                                        <FieldInputCheck name="status_comments"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck={`Me notifier par mail si un commentaire est posté sur mon annonce`}
+                                                                                                         checked={this.state.status_comments || false}
+                                                                                                         value={this.state.status_comments}
+                                                                                                         onChange={this.handleStatusComments}/>
+
+                                                                                    </div>
+                                                                                    <div className="col-md-6 mx-auto">
+
+                                                                                        <FieldInputCheck name="status_responsecomments"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck={`Me notifier par mail si une réponse est posté sur mon commentaires`}
+                                                                                                         checked={this.state.status_responsecomments || false}
+                                                                                                         value={this.state.status_responsecomments}
+                                                                                                         onChange={this.handleStatusResponseComments}/>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                {/** 
+
                                                                                 <div className="row">
                                                                                     <div className="col-md-6 mx-auto">
                                                                                         <FieldInputCheck name="status_avis"
@@ -546,6 +571,7 @@ class ProfileConfigUser extends PureComponent {
                                                                                                          onChange={this.handleStatusTeamUser}/>
                                                                                     </div>
                                                                                 </div>
+
                                                                                 <div className="row">
                                                                                     <div className="col-md-6 mx-auto">
 
@@ -567,6 +593,7 @@ class ProfileConfigUser extends PureComponent {
 
                                                                                     </div>
                                                                                 </div>
+
                                                                                 <div className="row">
                                                                                     <div className="col-md-6 mx-auto">
 
@@ -589,28 +616,6 @@ class ProfileConfigUser extends PureComponent {
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="row">
-                                                                                    <div className="col-md-6 mx-auto">
-
-                                                                                        <FieldInputCheck name="status_comments"
-                                                                                                         type='checkbox'
-                                                                                                         namecheck={`Notifications des commentaires ${this.state.status_comments ? "activés" : "désactivés"}`}
-                                                                                                         checked={this.state.status_comments || false}
-                                                                                                         value={this.state.status_comments}
-                                                                                                         onChange={this.handleStatusComments}/>
-
-                                                                                    </div>
-                                                                                    <div className="col-md-6 mx-auto">
-
-                                                                                        <FieldInputCheck name="status_responsecomments"
-                                                                                                         type='checkbox'
-                                                                                                         namecheck={`Notifications sur les réponses de vos commentaires
-                                                                                                         ${this.state.status_responsecomments ? "activés" : "désactivés"}`}
-                                                                                                         checked={this.state.status_responsecomments || false}
-                                                                                                         value={this.state.status_responsecomments}
-                                                                                                         onChange={this.handleStatusComments}/>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div className="row">
                                                                                     <div className="col-md-6">
 
                                                                                         <FieldInputCheck name="status_contactservice"
@@ -623,6 +628,11 @@ class ProfileConfigUser extends PureComponent {
 
                                                                                     </div>
                                                                                 </div>
+
+                                                                                */}
+
+
+
                                                                             </div>
                                                                         </div>
                                                                     </div>

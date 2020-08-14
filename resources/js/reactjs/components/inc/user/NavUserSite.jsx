@@ -161,7 +161,8 @@ class NavUserSite extends PureComponent {
                                     </div>
                                 </li>
 
-                                <li className="nav-item dropdown">
+                                { $userIvemo.status_profile === 1 && (
+                                 <li className="nav-item dropdown">
                                     <a href="#" className="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                         <i className="now-ui-icons business_chart-pie-36"/>
                                     </a>
@@ -197,6 +198,9 @@ class NavUserSite extends PureComponent {
                                         </NavLink>
                                     </div>
                                 </li>
+
+                                )}
+
                             </>
 
                         }

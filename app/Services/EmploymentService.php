@@ -282,6 +282,20 @@ class EmploymentService
         return $employments;
     }
 
+    public static function sendMessageToUser($request)
+    {
+        $fromUser = auth()->user();
+
+        $emailsubscribemployment = subscribemployment::with('user','member')
+            ->whereIn('member_id',[$fromUser->id])
+            ->distinct()->get();
+
+        $emailuserJob = (new NewemployementJob($emailsubscribemployment,$fromUser));
+
+        dispatch($emailuserJob);
+
+    }
+
     public static function storeUploadImage($request,$employment)
     {
 
@@ -299,20 +313,6 @@ class EmploymentService
             $myfilename = "/assets/img/employment/{$name}";
             $employment->photo = $myfilename;
         }
-
-    }
-
-    public static function sendMessageToUser($request)
-    {
-        $fromUser = auth()->user();
-
-        $emailsubscribemployment = subscribemployment::with('user','member')
-            ->whereIn('member_id',[$fromUser->id])
-            ->distinct()->get();
-
-        $emailuserJob = (new NewemployementJob($emailsubscribemployment,$fromUser));
-
-        dispatch($emailuserJob);
 
     }
 

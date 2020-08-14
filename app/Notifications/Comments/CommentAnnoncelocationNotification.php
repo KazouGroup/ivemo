@@ -43,7 +43,7 @@ class CommentAnnoncelocationNotification extends Notification implements ShouldQ
     public function toMail()
     {
         return (new MailMessage)
-            ->greeting($this->userFrom->first_name.' à poster commentaire sur cette annonce ci-dessous')
+            ->greeting($this->userFrom->first_name.' a posté un commentaire sur cette annonce ci-dessous')
             ->subject('Nouveau commentaire')
             ->line('ID: '.$this->annoncelocation->id.' | Titre de l\'annonce: '.$this->annoncelocation->title.' | Prix: '.$this->annoncelocation->price.' | Ville: '.$this->annoncelocation->city->name.' | Categorie: '.$this->annoncelocation->categoryannoncelocation->name)
             ->from($this->userFrom->email,config('app.name'))
