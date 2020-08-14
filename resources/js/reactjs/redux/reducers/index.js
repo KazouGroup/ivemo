@@ -17,8 +17,8 @@ import blogannonceventeReducer from "./blogannoncevente/blogannonceventeReducer"
 import annoncereservationshowReducer from "./annoncereservation/annoncereservationshowReducer";
 import annoncereservationReducer from "./annoncereservation/annoncereservationReducer";
 import blogannoncereservationReducer from "./blogannoncereservation/blogannoncereservationReducer";
-import contactuserReducer from "./contactservice/contactuser/contactuserReducer";
-import contactuseremploymentsReducer from "./contactservice/contactuser/contactuseremploymentsReducer";
+import contactservicesReducer from "./contactservice/contactservicesReducer";
+
 
 
 export default combineReducers({
@@ -38,8 +38,7 @@ export default combineReducers({
     blogannonceventes: blogannonceventeReducer,
     commentsites: commentsReducer,
     profile: profileReducer,
-    contactuseremployments: contactuseremploymentsReducer,
-    contactusers: contactuserReducer,
+    contactusers: contactservicesReducer,
     contactservicemploymentcontactshow: contactservicemploymentcontactshowReducer,
     contactservicemploymentshow: contactservicemploymentshowReducer,
 })

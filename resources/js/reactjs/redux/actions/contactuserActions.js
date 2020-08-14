@@ -7,7 +7,7 @@ import {
     ARCHVEMENT_CONTACTUSER_REMOVE,
     ACTIVE_CONTACTUSER_ADD,
     ACTIVE_CONTACTUSER_REMOVE,
-    DELETE_CONTACTUSER,
+    DELETE_CONTACTUSER, GET_ALL_CONTACTSERVICE,
 } from "./types";
 import Swal from "sweetalert2";
 import {history} from "../utils/history"
@@ -154,13 +154,12 @@ export const deletecontactItem = id => dispatch => {
 
 };
 
-export const loadContactusers = props => dispatch => {
+export const loadAllcontactservices = props => dispatch => {
 
-    let itemUser = props.match.params.user;
-    let url = route('api.personal_mails_contacts.site', [itemUser]);
+    let url = route('api.personal_mails_contactservices_site');
     dyaxios.get(url).then(response =>
         dispatch({
-            type: GET_ALL_CONTACTUSERS,
+            type: GET_ALL_CONTACTSERVICE,
             payload: response.data
         })
     ).catch(error => console.error(error));

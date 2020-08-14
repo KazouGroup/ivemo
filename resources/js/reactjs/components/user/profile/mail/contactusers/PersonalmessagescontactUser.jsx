@@ -14,7 +14,7 @@ import {
     activecontactaddItem, activecontactremoveItem,
     archvementaddItem, archvementremoveItem, deletecontactItem,
     favoriteaddItem,favoriteremoveItem,
-    loadContactusers,
+    loadAllcontactservices,
 } from "../../../../../redux/actions/contactuserActions";
 
 
@@ -36,7 +36,7 @@ class PersonalmessagescontactUser extends Component {
     }
 
     loadItems() {
-        this.props.loadContactusers(this.props);
+        this.props.loadAllcontactservices();
     }
 
 
@@ -180,17 +180,18 @@ class PersonalmessagescontactUser extends Component {
 }
 
 PersonalmessagescontactUser.propTypes = {
-    loadContactusers: PropTypes.func.isRequired,
+    loadAllcontactservices: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
 
-    contactusersprofile: state.contactusers.contactusers
+    contactusersprofile: state.contactusers.contactservices
 
 });
 
 export default connect(mapStateToProps, {
-    loadContactusers,
+    //loadContactusers,
+    loadAllcontactservices,
     favoriteaddItem,favoriteremoveItem,
     archvementaddItem,archvementremoveItem,
     activecontactaddItem,activecontactremoveItem,

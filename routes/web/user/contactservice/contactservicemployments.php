@@ -52,11 +52,6 @@ Route::group(['middleware' => 'verified'], function(){
 
 
             Route::get(
-                '{user}/personal_mails/employments',
-                'ContactservicemploymentController@apipersonalmessagesemployments'
-            )->name('api.personal_mails_employments_site');
-
-            Route::get(
                 'profile/{user}/statistics/employments',
                 'ContactservicemploymentController@apicontactservice'
             )->name('api.contactservice_employments_site');

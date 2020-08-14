@@ -4,7 +4,10 @@ namespace App\Http\Controllers\User\Contactservice;
 
 use App\Http\Controllers\Controller;
 use App\Model\contactservice;
+use App\Model\employment;
+use App\Services\HelpersService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class ContactserviceController extends Controller
@@ -15,7 +18,31 @@ class ContactserviceController extends Controller
     }
 
 
+    public function apipersonacontactservices()
+    {
+        $user = Auth::user();
 
+        $contactservices = HelpersService::helperscontactuserscount($user)
+            ->with(['contactusers' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id])
+                    ->latest()->distinct()->get()->toArray()
+                ;},
+            ])
+
+            ->with(['contactservicesemployments' => function ($q) use ($user){
+                $q->with('to','from','contactserviceable')
+                    ->where('contactserviceable_type',employment::class)
+                    ->whereIn('to_id',[$user->id])
+                    ->whereHas('contactserviceable', function ($q) {
+                        $q->whereIn('user_id',[Auth::id()]);})
+                    ->latest()->distinct()->get()->toArray()
+                ;},
+            ])
+            ->first();
+
+        return response()->json($contactservices,200);
+
+    }
 
     public function statusarchvement(contactservice $contactservice)
     {
@@ -55,7 +82,7 @@ class ContactserviceController extends Controller
 
     public function statuscontactsisadmin(contactservice $contactservice)
     {
-       
+
         $contactservice->update(['status_red' => !$contactservice->status_red,]);
 
         return response('Success',Response::HTTP_ACCEPTED);

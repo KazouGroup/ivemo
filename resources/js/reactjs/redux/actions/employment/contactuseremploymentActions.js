@@ -1,5 +1,5 @@
 import {
-    GET_ALL_CONTACTSERVICE_EMPLOYMENT,
+    GET_ALL_CONTACTSERVICE,
     ARCHVEMENT_CONTACTSERVICE_EMPLOYMENT_ADD,
     ARCHVEMENT_CONTACTSERVICE_EMPLOYMENT_REMOVE,
     FAVORITE_CONTACTSERVICE_EMPLOYMENT_ADD,
@@ -150,13 +150,12 @@ export const deletecontactItem = id => dispatch => {
 
 };
 
-export const loadAllcontactserviceemployments = props => dispatch => {
+export const loadAllcontactservices = props => dispatch => {
 
-    let itemUser = props.match.params.user;
-    let url = route('api.personal_mails_employments_site', [itemUser]);
+    let url = route('api.personal_mails_contactservices_site');
     dyaxios.get(url).then(response =>
         dispatch({
-            type: GET_ALL_CONTACTSERVICE_EMPLOYMENT,
+            type: GET_ALL_CONTACTSERVICE,
             payload: response.data
         })
     ).catch(error => console.error(error));

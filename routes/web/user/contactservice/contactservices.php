@@ -7,6 +7,10 @@ Route::group(['middleware' => 'verified'], function(){
 
     Route::group(['middleware' => 'verified_status_user'],function (){
 
+        Route::get(
+            'api/personal_mails/contactservices',
+            'ContactserviceController@apipersonacontactservices'
+        )->name('api.personal_mails_contactservices_site');
 
         Route::post(
             'contactservices/{contactservice:id}/statusarchvement',

@@ -6,12 +6,11 @@ import { Button } from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import NavlinkmailmessageUser from "../inc/NavlinkmailmessageUser";
-import HeadermailmessageUser from "../inc/HeadermailmessageUser";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 import HelmetSite from "../../../../inc/user/HelmetSite";
 import {connect} from "react-redux";
 import {
-    loadAllcontactserviceemployments,
+    loadAllcontactservices,
     favoriteaddItem,favoriteremoveItem,
     archvementaddItem,archvementremoveItem,
     activecontactaddItem,activecontactremoveItem,
@@ -38,7 +37,7 @@ class PersonalmessagesemploymentsUser extends Component {
     }
 
     loadItems() {
-        this.props.loadAllcontactserviceemployments(this.props);
+        this.props.loadAllcontactservices(this.props);
     }
 
 
@@ -185,17 +184,17 @@ class PersonalmessagesemploymentsUser extends Component {
 }
 
 PersonalmessagesemploymentsUser.propTypes = {
-    loadAllcontactserviceemployments: PropTypes.func.isRequired,
+    loadAllcontactservices: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
 
-    contactusersprofile: state.contactuseremployments.contactservices
+    contactusersprofile: state.contactusers.contactservices
 
 });
 
 export default connect(mapStateToProps, {
-    loadAllcontactserviceemployments,
+    loadAllcontactservices,
     favoriteaddItem,favoriteremoveItem,
     archvementaddItem,archvementremoveItem,
     activecontactaddItem,activecontactremoveItem,

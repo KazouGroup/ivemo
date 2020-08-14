@@ -1,6 +1,13 @@
 import React, { PureComponent } from "react";
 import {Link, NavLink, withRouter} from 'react-router-dom';
 import { Button } from "reactstrap";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {
+    loadAllcontactservices
+} from "../../../redux/actions/employment/contactuseremploymentActions";
+const abbrev = ['', 'k', 'M', 'B', 'T'];
+
 
 class NavUserSite extends PureComponent {
     constructor(props) {
@@ -16,7 +23,23 @@ class NavUserSite extends PureComponent {
             });
     }
 
+    componentDidMount() {
+        this.props.loadAllcontactservices();
+    }
+
+    data_countnotificationFormatter(notificationTotal, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(notificationTotal)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
+        const suffix = abbrev[order];
+        return (notificationTotal / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
+
     render() {
+        const {contactusersprofile} = this.props;
+        let notificationTotal = (
+            contactusersprofile.contactusers_count +
+            contactusersprofile.contactservicesemployments_count
+        );
         return (
 
             <div className="container">
@@ -102,7 +125,7 @@ class NavUserSite extends PureComponent {
                                 <li className="nav-item">
                                     <NavLink to={`/profile/${$userIvemo.slug}/personal_mails/contacts/`} className="nav-link">
                                         <i className="now-ui-icons ui-1_email-85"/>
-                                        <span className="notification"><b>2345</b></span>
+                                        <span className="notification"><b>{notificationTotal >= 1 &&(this.data_countnotificationFormatter(notificationTotal || ""))}</b></span>
                                     </NavLink>
                                 </li>
 
@@ -231,4 +254,16 @@ class NavUserSite extends PureComponent {
     }
 }
 
-export default withRouter(NavUserSite);
+NavUserSite.propTypes = {
+    loadAllcontactservices: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+
+    contactusersprofile: state.contactusers.contactservices
+
+});
+
+export default connect(mapStateToProps, {
+    loadAllcontactservices,
+})(withRouter(NavUserSite));
