@@ -48,7 +48,7 @@ class user extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'birthday' => 'date:d/m/Y',
         'email_verified_at' => 'datetime',
-        'status_user' => 'boolean',
+        'status_profile' => 'boolean',
     ];
 
      protected static function boot()

@@ -76,17 +76,19 @@ class PrivateUserForum extends Component {
 
                                         <NavlinkconfigurationUser {...this.props} {...userPrivate} />
 
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
+                                        {$userIvemo.status_profile && (
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <div className="row">
+                                                        <div className="col-md-12">
 
-                                                        <Navforumbyuser />
+                                                            <Navforumbyuser />
 
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        )}
 
                                     </div>
 

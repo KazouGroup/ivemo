@@ -203,7 +203,7 @@ class NavUserSite extends PureComponent {
                             </>
                             :
                             <>
-                                { $userIvemo.status_profile === 1 && (
+                                { $userIvemo.status_profile ?
                                     <>
                                         {$userIvemo.email_verified_at ?
                                             <>
@@ -278,7 +278,14 @@ class NavUserSite extends PureComponent {
                                             </div>
                                         </li>
                                     </>
-                                )}
+                                :
+
+                                    <li className="nav-item">
+                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/favorite_employments/`} className="nav-link">
+                                            <i className="now-ui-icons location_bookmark"/>
+                                        </NavLink>
+                                    </li>
+                                }
 
                                 <li className="nav-item dropdown">
                                     <a href=".." className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">

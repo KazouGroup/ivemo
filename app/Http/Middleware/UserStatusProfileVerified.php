@@ -19,7 +19,7 @@ class UserStatusProfileVerified
     {
         $user = $request->user();
 
-        if (!$user || ( $user->status_profile === 0 )) {
+        if (!$user || !$user->status_profile ) {
 
             return $request->expectsJson()
                 ? abort(403, 'Your status is not professional')

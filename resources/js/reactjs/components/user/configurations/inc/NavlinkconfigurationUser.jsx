@@ -28,14 +28,19 @@ class NavlinkconfigurationUser extends Component {
                                         <div className="card-body">
                                             <table>
                                                 <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/employments/`}>
-                                                            <b>Emplois & Services</b>
-                                                        </NavLink>
-                                                    </td>
-                                                    <td className="text-right"> {this.props.employments_count} {this.props.employments_count > 1 ? "annonces" : "annonce"}</td>
-                                                </tr>
+                                                {$userIvemo.status_profile && (
+
+                                                    <tr>
+                                                        <td>
+                                                            <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/employments/`}>
+                                                                <b>Emplois & Services</b>
+                                                            </NavLink>
+                                                        </td>
+                                                        <td className="text-right"> {this.props.employments_count} {this.props.employments_count > 1 ? "annonces" : "annonce"}</td>
+                                                    </tr>
+
+                                                )}
+
                                                 <tr>
                                                     <td>
                                                         <NavLink to={`/profile/${this.props.slug}/personal_settings/forums/`}>

@@ -44,7 +44,7 @@ class BaseRequest extends Request
                 'slug' => ['required','string','alpha_dash','min:2','max:100', Rule::unique((new User)->getTable())->ignore(auth()->id())],
                 'email' => ['required','string','email', Rule::unique((new User)->getTable())->ignore(auth()->id())],
                 "sex" => "required|in:female,male",
-                "phone" => "required|numeric",
+                "phone" => "nullable|numeric",
 
             ];
         } else { // 'edit'

@@ -131,8 +131,8 @@ class ProfileAccountUser extends PureComponent {
                             align: 'right'
                         },
                         animate: {
-                            enter: "animate__animated animate__fadeInUp",
-                            exit: "animate__animated animate__fadeOutDown"
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
                         },
                     });
                 setTimeout(() => {
@@ -271,7 +271,7 @@ class ProfileAccountUser extends PureComponent {
                                                         </div>
                                                     </Row>
                                                     <Row className="my-2">
-                                                        <div className="col-md-6 col-6">
+                                                        <div className="col-md-6 mx-auto">
                                                             <label htmlFor="address"><b>Pseudo</b></label>
                                                             <div className="input-group">
                                                                 <div className="input-group-prepend">
@@ -290,7 +290,7 @@ class ProfileAccountUser extends PureComponent {
                                                                             renderErrorFor={this.renderErrorFor}/>
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-6 col-6">
+                                                        <div className="col-md-6 mx-auto">
                                                             <label htmlFor="title"><b>Pseudo profil</b></label>
                                                             <div className="input-group">
                                                                 <div className="input-group-prepend">
@@ -307,44 +307,6 @@ class ProfileAccountUser extends PureComponent {
                                                                             hasErrorFor={this.hasErrorFor}
                                                                             renderErrorFor={this.renderErrorFor}/>
 
-                                                            </div>
-                                                        </div>
-                                                    </Row>
-                                                    <Row className="my-2">
-                                                        <div className="col-md-6 col-6">
-                                                            <label htmlFor="address"><b>Email</b></label>
-                                                            <div className="input-group">
-                                                                <div className="input-group-prepend">
-                                                                    <span className="input-group-text">
-                                                                        <i className="now-ui-icons ui-1_email-85"/>
-                                                                    </span>
-                                                                </div>
-
-                                                                <FieldInput name="email" type='email' minLength="2" maxLength="200"
-                                                                            placeholder="Email de l'agence"
-                                                                            value={this.state.email || ""}
-                                                                            required="required"
-                                                                            handleFieldChange={this.handleFieldChange}
-                                                                            hasErrorFor={this.hasErrorFor}
-                                                                            renderErrorFor={this.renderErrorFor}/>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-6 col-6">
-                                                            <label htmlFor="phone"><b>Téléphone</b></label>
-                                                            <div className="input-group">
-                                                                <div className="input-group-prepend">
-                                                                    <span className="input-group-text">
-                                                                        <i className="now-ui-icons tech_mobile"/>
-                                                                    </span>
-                                                                </div>
-
-                                                                <FieldInput name="phone" type='number' minLength="2" maxLength="30"
-                                                                            placeholder="Teléphone"
-                                                                            value={this.state.phone || ""}
-                                                                            required="required"
-                                                                            handleFieldChange={this.handleFieldChange}
-                                                                            hasErrorFor={this.hasErrorFor}
-                                                                            renderErrorFor={this.renderErrorFor}/>
                                                             </div>
                                                         </div>
                                                     </Row>
@@ -378,6 +340,48 @@ class ProfileAccountUser extends PureComponent {
                                                                 {this.renderErrorFor('categoryprofile_id')}
                                                             </div>
                                                         </div>
+                                                    </Row>
+                                                    <Row className="my-2">
+                                                        <div className="col-md-6 mx-auto">
+                                                            <label htmlFor="address"><b>Email</b></label>
+                                                            <div className="input-group">
+                                                                <div className="input-group-prepend">
+                                                                    <span className="input-group-text">
+                                                                        <i className="now-ui-icons ui-1_email-85"/>
+                                                                    </span>
+                                                                </div>
+
+                                                                <FieldInput name="email" type='email' minLength="2" maxLength="200"
+                                                                            placeholder="Email de l'agence"
+                                                                            value={this.state.email || ""}
+                                                                            required="required"
+                                                                            handleFieldChange={this.handleFieldChange}
+                                                                            hasErrorFor={this.hasErrorFor}
+                                                                            renderErrorFor={this.renderErrorFor}/>
+                                                            </div>
+                                                        </div>
+                                                        {this.state.status_profile && (
+
+                                                            <div className="col-md-6 mx-auto">
+                                                                <label htmlFor="phone"><b>Téléphone</b></label>
+                                                                <div className="input-group">
+                                                                    <div className="input-group-prepend">
+                                                                    <span className="input-group-text">
+                                                                        <i className="now-ui-icons tech_mobile"/>
+                                                                    </span>
+                                                                    </div>
+
+                                                                    <FieldInput name="phone" type='number' minLength="2" maxLength="30"
+                                                                                placeholder="Teléphone"
+                                                                                value={this.state.phone || ""}
+                                                                        //required="required"
+                                                                                handleFieldChange={this.handleFieldChange}
+                                                                                hasErrorFor={this.hasErrorFor}
+                                                                                renderErrorFor={this.renderErrorFor}/>
+                                                                </div>
+                                                            </div>
+                                                        )}
+
                                                     </Row>
                                                     <hr/>
                                                     <Row className="my-4">
