@@ -12,7 +12,7 @@ Route::group(['prefix' => 'api'], function () {
 Route::get(
     'profile/{user}/personal_settings/favorite_forums',
     'FavoriteController@sitefavoritforum'
-)->name('userfavoritemployment_site');
+)->name('userfavoriteforum_site');
 
 Route::get(
     'forums_favorites/{forum}/favorite',
