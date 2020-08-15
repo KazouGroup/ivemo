@@ -20,7 +20,7 @@ class LinkValicationEmail extends PureComponent {
                 confirmButtonText: 'Ok, compris',
                 reverseButtons: true,
             });
-            });
+        });
     }
 
     render() {

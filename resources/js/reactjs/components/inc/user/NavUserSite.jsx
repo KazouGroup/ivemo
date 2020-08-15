@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {
     loadAllcontactservices
 } from "../../../redux/actions/employment/contactuseremploymentActions";
+import Swal from "sweetalert2";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -13,7 +14,68 @@ class NavUserSite extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {};
+
         this.navLogout = this.navLogout.bind(this);
+        this.infoItem = this.infoItem.bind(this);
+        this.verifyItem = this.verifyItem.bind(this);
+    }
+
+    verifyItem() {
+        Swal.fire({
+            title: 'Confirmer votre adresse e-mail',
+            text: "Avant de continuer, veuillez vérifier votre e-mail pour un lien de vérification. Si vous n'avez pas reçu l'e-mail",
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-info",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer l\'envoie',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                dyaxios.post(route('verification.resend')).then(() => {
+
+                    Swal.fire({
+                        text: `Un nouveau lien de vérification a été envoyé à votre adresse e-mail ${$userIvemo.email}`,
+                        icon: 'success',
+                        buttonsStyling: false,
+                        confirmButtonClass: "btn btn-info",
+                        confirmButtonText: 'Ok, compris',
+                        reverseButtons: true,
+                    });
+
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
+    }
+
+    infoItem() {
+        Swal.fire({
+            title: 'Bon à savoir',
+            text: "Pour poster une offre, vueillez passer au status professionel",
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-info",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, modifier le profile',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+                window.location = "/profile/account";
+            }
+        });
     }
 
     navLogout(e) {
@@ -143,12 +205,37 @@ class NavUserSite extends PureComponent {
                             <>
                                 { $userIvemo.status_profile === 1 && (
                                     <>
-                                        <li className="nav-item">
-                                            <NavLink to={`/profile/${$userIvemo.slug}/personal_mails/contacts/`} className="nav-link">
-                                                <i className="now-ui-icons ui-1_email-85"/>
-                                                <span className="notification"><b>{notificationTotal >= 1 &&(this.data_countnotificationFormatter(notificationTotal || ""))}</b></span>
-                                            </NavLink>
-                                        </li>
+                                        {$userIvemo.email_verified_at ?
+                                            <>
+                                                {$userIvemo.status_profile ?
+                                                    <li className="nav-item">
+                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_mails/contacts/`} className="nav-link">
+                                                            <i className="now-ui-icons ui-1_email-85"/>
+                                                            <span className="notification"><b>{notificationTotal >= 1 &&(this.data_countnotificationFormatter(notificationTotal || ""))}</b></span>
+                                                        </NavLink>
+                                                    </li>
+                                                    :
+                                                    <>
+                                                        <li className="nav-item">
+                                                            <a href={void(0)} onClick={() => this.infoItem()} className="nav-link">
+                                                                <i className="now-ui-icons ui-1_email-85"/>
+                                                                <span className="notification"><b>{notificationTotal >= 1 &&(this.data_countnotificationFormatter(notificationTotal || ""))}</b></span>
+                                                            </a>
+                                                        </li>
+                                                    </>
+                                                }
+                                            </>
+                                            :
+                                            <>
+                                                <li className="nav-item">
+                                                    <a href={void(0)} onClick={() => this.verifyItem()} className="nav-link">
+                                                        <i className="now-ui-icons ui-1_email-85"/>
+                                                        <span className="notification"><b>{notificationTotal >= 1 &&(this.data_countnotificationFormatter(notificationTotal || ""))}</b></span>
+                                                    </a>
+                                                </li>
+                                            </>
+
+                                        }
 
                                         <li className="nav-item dropdown">
                                             <a href="#" className="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown">
