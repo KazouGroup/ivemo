@@ -125,24 +125,18 @@ class PublicUserEmployments extends Component {
                                     </div>
                                     <Link to={useremploymentPublick.status_profile ? `/pro/${useremploymentPublick.slug}/followers/`:`/user/${useremploymentPublick.slug}/followers/`} className="text-white"><b>{this.data_countfollowFormatter(useremploymentPublick.countfollowerusers || "")} {useremploymentPublick.countfollowerusers > 1 ? "Abonnés" : "Abonné"}</b></Link> | <Link to={useremploymentPublick.status_profile ? `/pro/${useremploymentPublick.slug}/following/`:`/user/${useremploymentPublick.slug}/following/`} className="text-white"><b>{this.data_countfollowingFormatter(useremploymentPublick.countfollowingusers || "")} {useremploymentPublick.countfollowingusers > 1 ? "Abonnements" : "Abonnement"}</b></Link>
                                     <br/>
-                                    {useremploymentPublick.status_profile === 0 ?
-                                        <>
-                                            <Link to={`/user/${useremploymentPublick.slug}/`} className="text-white">
-                                                <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
-                                            </Link>
-                                        </>
+                                    <Link  className="text-white" to={useremploymentPublick.status_profile ?
 
+                                        `/user/${useremploymentPublick.slug}/`
                                         :
-                                        <>
-                                            <Link to={`/pro/${useremploymentPublick.slug}/`} className="text-white">
-                                                <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
-                                            </Link>
+                                        `/pro/${useremploymentPublick.slug}/`}
+                                    >
+                                        <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
 
-                                            {useremploymentPublick.employments_count > 0 &&(
-                                                <h5><b>{useremploymentPublick.employments_count}</b> {useremploymentPublick.employments_count > 1 ? "annonces" : "annonce"} posté par {useremploymentPublick.first_name} sur les emploies et services</h5>
-                                            )}
-                                        </>
-                                    }
+                                    </Link>
+                                    {useremploymentPublick.employments_count > 0 &&(
+                                        <h5><b>{useremploymentPublick.employments_count}</b> {useremploymentPublick.employments_count > 1 ? "annonces" : "annonce"} posté par {useremploymentPublick.first_name} sur les emploies et services</h5>
+                                    )}
 
                                 </div>
 
@@ -163,9 +157,7 @@ class PublicUserEmployments extends Component {
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
 
-                                        {useremploymentPublick.status_profile === 0 ?
-                                            <></>
-                                            :
+                                        {!useremploymentPublick.status_profile ?
                                             <>
                                                 <Navlinknewemployment/>
 
@@ -191,6 +183,9 @@ class PublicUserEmployments extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </>
+                                            :
+                                            <>
 
                                                 {/**
                                                  <div className="card">
@@ -238,7 +233,7 @@ class PublicUserEmployments extends Component {
 
                                     </div>
 
-                                    {useremploymentPublick.status_profile === 0 ?
+                                    {!useremploymentPublick.status_profile ?
 
                                         <div className="col-lg-8 col-md-12 mx-auto">
                                             <div className="card">

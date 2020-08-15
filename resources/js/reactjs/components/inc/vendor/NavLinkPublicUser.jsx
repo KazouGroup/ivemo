@@ -11,14 +11,18 @@ class NavLinkPublicUser extends PureComponent {
                     <div className="card-body">
                         <table>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <NavLink to={`/pro/${this.props.slug}/employments/`}>
-                                         <b>Emplois & Services</b>
-                                    </NavLink>
-                                </td>
-                                <td className="text-right"> {this.props.employments_count} {this.props.employments_count > 1 ? "annonces" : "annonce"}</td>
-                            </tr>
+
+                            {this.props.status_profile && (
+                                <tr>
+                                    <td>
+                                        <NavLink to={`/pro/${this.props.slug}/employments/`}>
+                                            <b>Emplois & Services</b>
+                                        </NavLink>
+                                    </td>
+                                    <td className="text-right"> {this.props.employments_count} {this.props.employments_count > 1 ? "annonces" : "annonce"}</td>
+                                </tr>
+                            )}
+
                             <tr>
                                 <td>
                                     <NavLink to={`/pro/${this.props.slug}/forums/`}>

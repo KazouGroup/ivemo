@@ -7,7 +7,6 @@ import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
-import Navlinknewemployment from "../../../employment/treatement/Navlinknewemployment";
 import ButonSubscribedEmployment from "../../../../inc/vendor/ButonSubscribedEmployment";
 import HelmetSite from "../../../../inc/user/HelmetSite";
 import PropTypes from "prop-types";
@@ -124,24 +123,21 @@ class PublicUserForums extends Component {
                                     </div>
                                     <Link to={useremploymentPublick.status_profile ? `/pro/${useremploymentPublick.slug}/followers/`:`/user/${useremploymentPublick.slug}/followers/`} className="text-white"><b>{this.data_countfollowFormatter(useremploymentPublick.countfollowerusers || "")} {useremploymentPublick.countfollowerusers > 1 ? "Abonnés" : "Abonné"}</b></Link> | <Link to={useremploymentPublick.status_profile ? `/pro/${useremploymentPublick.slug}/following/`:`/user/${useremploymentPublick.slug}/following/`} className="text-white"><b>{this.data_countfollowingFormatter(useremploymentPublick.countfollowingusers || "")} {useremploymentPublick.countfollowingusers > 1 ? "Abonnements" : "Abonnement"}</b></Link>
                                     <br/>
-                                    {useremploymentPublick.status_profile === 0 ?
-                                        <>
-                                            <Link to={`/user/${useremploymentPublick.slug}/`} className="text-white">
-                                                <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
-                                            </Link>
-                                        </>
 
+                                    <Link  className="text-white" to={useremploymentPublick.status_profile ?
+
+                                        `/pro/${useremploymentPublick.slug}/`
                                         :
-                                        <>
-                                            <Link to={`/pro/${useremploymentPublick.slug}/`} className="text-white">
-                                                <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
-                                            </Link>
+                                        `/user/${useremploymentPublick.slug}/`}
+                                    >
+                                        <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
 
-                                            {useremploymentPublick.employments_count > 0 &&(
-                                                <h5><b>{useremploymentPublick.employments_count}</b> {useremploymentPublick.employments_count > 1 ? "annonces" : "annonce"} posté par {useremploymentPublick.first_name} sur les emploies et services</h5>
-                                            )}
-                                        </>
-                                    }
+                                    </Link>
+
+                                    {useremploymentPublick.employments_count > 0 &&(
+                                        <h5><b>{useremploymentPublick.employments_count}</b> {useremploymentPublick.employments_count > 1 ? "annonces" : "annonce"} posté par {useremploymentPublick.first_name} sur les emploies et services</h5>
+                                    )}
+
 
                                 </div>
 
@@ -162,9 +158,7 @@ class PublicUserForums extends Component {
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
 
-                                        {useremploymentPublick.status_profile === 0 ?
-                                            <></>
-                                            :
+                                        {!useremploymentPublick.status_profile ?
                                             <>
                                                 <Navlinknewforum/>
 
@@ -190,6 +184,9 @@ class PublicUserForums extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </>
+                                            :
+                                            <>
 
                                                 <div className="card">
                                                     <div className="card-body">
@@ -212,74 +209,62 @@ class PublicUserForums extends Component {
 
                                     </div>
 
-                                    {useremploymentPublick.status_profile === 0 ?
-
-                                        <div className="col-lg-8 col-md-12 mx-auto">
-                                            <div className="card">
-
-                                                <div className="card-body">
-
-                                                    <div className="card-header text-center">
-                                                        <h4 className="card-title"><b>Pour poster votre bien !</b></h4>
-                                                        <a href="#"
-                                                           className="btn btn-info btn-lg">
-                                                            <b>Devenez professionnel pour poster votre bien</b>
-                                                        </a>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        :
                                         <div className="col-lg-8 col-md-12 mx-auto">
 
-                                            {mapForums}
+                                            {!useremploymentPublick.status_profile ?
+                                                <>
+                                                    {mapForums}
 
-                                            <div className="text-center">
-                                                {visiable < forums.length ?
-                                                    <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
-                                                        <b>Voir plus </b>
-                                                    </button>
-                                                    :
-                                                    <ButonSubscribedEmployment namesubscribed={`Recevoir toutes les notifications`} nameunsubscribed={`Ne plus recevoir les notifications`}
-                                                                               titleToltipeSubscribed={`Abonnez vous pour recevoir tous annonces des emploies et services postées par`}
-                                                                               titleToltipeUnsubscribed={`Ne plus etre notifier des annonces des emploies et services postées par`}
-                                                                               subscribeItem={this.props.subscribeItem} unsubscribeItem={this.props.unsubscribeItem}
-                                                                               {...useremploymentPublick}/>
+                                                    <div className="text-center">
+                                                        {visiable < forums.length ?
+                                                            <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                                                <b>Voir plus </b>
+                                                            </button>
+                                                            :
+                                                            <ButonSubscribedEmployment namesubscribed={`Recevoir toutes les notifications`} nameunsubscribed={`Ne plus recevoir les notifications`}
+                                                                                       titleToltipeSubscribed={`Abonnez vous pour recevoir tous annonces des emploies et services postées par`}
+                                                                                       titleToltipeUnsubscribed={`Ne plus etre notifier des annonces des emploies et services postées par`}
+                                                                                       subscribeItem={this.props.subscribeItem} unsubscribeItem={this.props.unsubscribeItem}
+                                                                                       {...useremploymentPublick}/>
 
-                                                }
-                                            </div>
+                                                        }
+                                                    </div>
+                                                </>
+                                                :
 
-                                            <div className="card">
-                                                <div className="card-body">
+                                                <>
+                                                    <div className="card">
+                                                        <div className="card-body">
 
-                                                    <div className="card-header text-center">
-                                                        <h4 className="card-title"><b>Contacter {useremploymentPublick.first_name}</b></h4>
+                                                            <div className="card-header text-center">
+                                                                <h4 className="card-title"><b>Contacter {useremploymentPublick.first_name}</b></h4>
+                                                            </div>
+
+                                                            <FormContactProfileAccountUser {...this.props} {...useremploymentPublick}/>
+
+                                                        </div>
                                                     </div>
 
-                                                    <FormContactProfileAccountUser {...this.props} {...useremploymentPublick}/>
+                                                    <div className="card card-raised card-form-horizontal">
 
-                                                </div>
-                                            </div>
+                                                        <div className="card-body">
 
-                                            <div className="card card-raised card-form-horizontal">
+                                                            <div className="card-header text-center">
+                                                                <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
+                                                                <p className="card-title">
+                                                                    Abonnez-vous à la newsletter de <b>{useremploymentPublick.first_name}</b> afin d'être notifié des mises à jour
+                                                                </p>
+                                                            </div>
 
-                                                <div className="card-body">
+                                                            <FormNewletterSubcribeProfileAccountUser {...this.props} />
 
-                                                    <div className="card-header text-center">
-                                                        <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
-                                                        <p className="card-title">
-                                                            Abonnez-vous à la newsletter de <b>{useremploymentPublick.first_name}</b> afin d'être notifié des mises à jour
-                                                        </p>
+                                                        </div>
                                                     </div>
 
-                                                    <FormNewletterSubcribeProfileAccountUser {...this.props} />
-
-                                                </div>
-                                            </div>
-
+                                                </>
+                                            }
                                         </div>
-                                    }
+
 
                                 </div>
 
