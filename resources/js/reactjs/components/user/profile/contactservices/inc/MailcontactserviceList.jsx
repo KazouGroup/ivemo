@@ -22,7 +22,7 @@ class MailcontactserviceList extends Component {
                             <a href={void(0)} onClick={() => this.props.readItem(this.props)} style={{cursor:"pointer"}}>
                                 <div className={`ml-auto mr-auto`}>
                                     <b className={`${this.props.status_red ? "" : "text-primary"}`}>
-                                        {this.props.full_name} - {this.props.phone}
+                                        {this.props.status_red ? "" : <i className="fas fa-circle"></i> } {this.props.full_name} - {this.props.phone}
                                     </b>
                                     {this.props.status_red ? <Badge className="mr-1" color="success">Lu</Badge> : <Badge className="mr-1" color="danger">Non lu</Badge> }
                                 </div>

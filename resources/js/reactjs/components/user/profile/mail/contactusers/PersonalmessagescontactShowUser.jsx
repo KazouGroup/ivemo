@@ -136,7 +136,6 @@ class PersonalmessagescontactShowUser extends Component {
 
    // Lifecycle Component Method
     componentDidMount() {
-        window.scrollTo(0, 0);
         this.loadItem();
 
     }

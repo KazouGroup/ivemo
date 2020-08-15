@@ -23,8 +23,9 @@ class HeadermailmessageUser extends Component {
                             <a href={void(0)} onClick={() => this.props.readItem(this.props)} style={{cursor:"pointer"}}>
                                 <div className={`ml-auto mr-auto`}>
                                     <b className={`${this.props.status_red ? "text-primary" : ""}`}>
-                                        {this.props.subject}
+                                        {this.props.status_red ? <i className="fas fa-circle"></i> : "" } {this.props.subject}
                                     </b>
+                                    {/**/}
                                     {this.props.status_red ? <Badge className="mr-1" color="danger">Non lu</Badge> : <Badge className="mr-1" color="success">Lu</Badge>}
                                 </div>
                             </a>
