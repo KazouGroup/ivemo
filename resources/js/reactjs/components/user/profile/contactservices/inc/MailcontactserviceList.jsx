@@ -24,7 +24,7 @@ class MailcontactserviceList extends Component {
                                     <b className={`${this.props.status_red ? "" : "text-primary"}`}>
                                         {this.props.status_red ? "" : <i className="fas fa-circle"></i> } {this.props.full_name} - {this.props.phone}
                                     </b>
-                                    {this.props.status_red ? <Badge className="mr-1" color="success">Lu</Badge> : <Badge className="mr-1" color="danger">Non lu</Badge> }
+                                    {/* {this.props.status_red ? <Badge className="mr-1" color="success">Lu</Badge> : <Badge className="mr-1" color="danger">Non lu</Badge> }*/}
                                 </div>
                             </a>
                         </div>
