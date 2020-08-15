@@ -313,7 +313,7 @@ class ProfileConfigUser extends PureComponent {
                                                         </div>
                                                     */}
 
-                                                        <div className="col-md-3">
+                                                        <div className="col-md-3 mx-auto">
                                                             <label htmlFor="city_id"><b>Votre Ville</b></label>
                                                             <div className="form-group">
                                                                 <select value={this.state.city_id || ''}
@@ -331,7 +331,7 @@ class ProfileConfigUser extends PureComponent {
                                                                 {this.renderErrorFor('city_id')}
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-5">
+                                                        <div className="col-md-5 mx-auto">
                                                             <label htmlFor="categoryprofile_id"><b>Pourquoi êtes-vous
                                                                 sur Ivemo ?</b></label>
                                                             <div className="form-group">
@@ -550,7 +550,7 @@ class ProfileConfigUser extends PureComponent {
                                                                                     </div>
                                                                                 </div>
 
-                                                                                {/** 
+                                                                                {/**
 
                                                                                 <div className="row">
                                                                                     <div className="col-md-6 mx-auto">

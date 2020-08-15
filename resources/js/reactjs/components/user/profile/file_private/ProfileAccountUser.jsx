@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Helmet } from 'react-helmet';
-import { Button, Row, UncontrolledTooltip } from "reactstrap";
+import {Button, Input, Row, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import './ProfileAccountUser.css';
@@ -9,6 +9,8 @@ import NavProfileAccountPrivate from "./NavProfileAccountPrivate";
 import Swal from "sweetalert2";
 import HeaderProfileAccountPrivate from "./HeaderProfileAccountPrivate";
 import FieldInput from "../../../inc/vendor/FieldInput";
+import FieldInputRadio from "../../../inc/vendor/FieldInputRadio";
+import FieldInputCheck from "../../../inc/vendor/FieldInputCheck";
 
 class ProfileAccountUser extends PureComponent {
     constructor(props) {
@@ -38,6 +40,7 @@ class ProfileAccountUser extends PureComponent {
         this.updateAvatarCoverImage = this.updateAvatarCoverImage.bind(this);
         this.removeAvatarImage = this.removeAvatarImage.bind(this);
         this.removeAvatarCoverImage = this.removeAvatarCoverImage.bind(this);
+        this.handleCheckClick = this.handleCheckClick.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
@@ -64,6 +67,10 @@ class ProfileAccountUser extends PureComponent {
             )
         }
     }
+
+    handleCheckClick(event){
+        this.setState({status_profile: !this.state.status_profile});
+    };
 
     // Handle Upload Image
     updateAvatarImage(e) {
@@ -219,8 +226,32 @@ class ProfileAccountUser extends PureComponent {
                                                 <div className="card-body">
                                                     <HeaderProfileAccountPrivate />
                                                     <hr/>
+
+                                                    <div className="row mb-4">
+                                                        <div className="col-md-6 text-center">
+
+                                                            <FieldInputRadio  name="status_profile"
+                                                                              type='radio'
+                                                                              namecheck={`Je suis un Particulier`}
+                                                                              checked={this.state.status_profile === false}
+                                                                              value={this.state.status_profile}
+                                                                              onChange={this.handleCheckClick}/>
+
+                                                        </div>
+
+                                                        <div className="col-md-6 text-center">
+
+                                                            <FieldInputRadio  name="status_profile"
+                                                                              type='radio'
+                                                                              namecheck={`Je suis un Professionnel`}
+                                                                              checked={this.state.status_profile === true}
+                                                                              value={this.state.status_profile}
+                                                                              onChange={this.handleCheckClick}/>
+                                                        </div>
+                                                    </div>
+
                                                     <Row className="my-2">
-                                                        <div className="col-md-2">
+                                                        <div className="col-md-4">
                                                             <label htmlFor="address"><b>Sex</b></label>
                                                             <div className="form-group">
                                                                 <select value={this.state.sex || ''}
@@ -233,7 +264,7 @@ class ProfileAccountUser extends PureComponent {
                                                                 {this.renderErrorFor('sex')}
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-5 col-5">
+                                                        <div className="col-md-8 mx-auto">
                                                             <label htmlFor="first_name"><b>Nom</b></label>
                                                             <div className="input-group">
                                                                 <div className="input-group-prepend">
@@ -251,7 +282,9 @@ class ProfileAccountUser extends PureComponent {
                                                                             renderErrorFor={this.renderErrorFor}/>
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-5 col-5">
+                                                    </Row>
+                                                    <Row className="my-2">
+                                                        <div className="col-md-6 mx-auto">
                                                             <label htmlFor="last_name"><b>Prénom</b></label>
                                                             <div className="input-group">
                                                                 <div className="input-group-prepend">
@@ -269,8 +302,6 @@ class ProfileAccountUser extends PureComponent {
                                                                             renderErrorFor={this.renderErrorFor}/>
                                                             </div>
                                                         </div>
-                                                    </Row>
-                                                    <Row className="my-2">
                                                         <div className="col-md-6 mx-auto">
                                                             <label htmlFor="address"><b>Pseudo</b></label>
                                                             <div className="input-group">
@@ -290,6 +321,8 @@ class ProfileAccountUser extends PureComponent {
                                                                             renderErrorFor={this.renderErrorFor}/>
                                                             </div>
                                                         </div>
+                                                    </Row>
+                                                    <Row className="my-2">
                                                         <div className="col-md-6 mx-auto">
                                                             <label htmlFor="title"><b>Pseudo profil</b></label>
                                                             <div className="input-group">
@@ -309,39 +342,6 @@ class ProfileAccountUser extends PureComponent {
 
                                                             </div>
                                                         </div>
-                                                    </Row>
-                                                    <Row className="my-2">
-                                                        <div className="col-md-6">
-                                                            <label htmlFor="address"><b>Votre status</b></label>
-                                                            <div className="form-group">
-                                                                <select value={this.state.status_profile || ''}
-                                                                        className={`form-control ${this.hasErrorFor('status_profile') ? 'is-invalid' : ''}`}
-                                                                        onChange={this.handleFieldChange}
-                                                                        name="status_profile" required="required">
-                                                                    <option value="0"> Particulier</option>
-                                                                    <option value="1"> Professionnel</option>
-                                                                </select>
-                                                                {this.renderErrorFor('status_profile')}
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-6">
-                                                            <label htmlFor="phone"><b>Pourquoi êtes-vous sur Ivemo ?</b></label>
-                                                            <div className="form-group">
-                                                                <select value={this.state.categoryprofile_id || ''}
-                                                                        className={`form-control ${this.hasErrorFor('categoryprofile_id') ? 'is-invalid' : ''}`}
-                                                                        onChange={this.handleFieldChange}
-                                                                        name="categoryprofile_id" required="required">
-                                                                    <option value="" disabled>Pourquoi êtes-vous sur Ivemo</option>
-                                                                    {categoryprofiles.map((item) => (
-                                                                        <option key={item.id}
-                                                                                value={item.id}>{item.name}</option>
-                                                                    ))}
-                                                                </select>
-                                                                {this.renderErrorFor('categoryprofile_id')}
-                                                            </div>
-                                                        </div>
-                                                    </Row>
-                                                    <Row className="my-2">
                                                         <div className="col-md-6 mx-auto">
                                                             <label htmlFor="address"><b>Email</b></label>
                                                             <div className="input-group">
@@ -360,7 +360,27 @@ class ProfileAccountUser extends PureComponent {
                                                                             renderErrorFor={this.renderErrorFor}/>
                                                             </div>
                                                         </div>
-                                                        {this.state.status_profile && (
+                                                    </Row>
+
+                                                    {this.state.status_profile && (
+                                                        <Row className="my-2">
+
+                                                            <div className="col-md-6 mx-auto">
+                                                                <label htmlFor="phone"><b>Pourquoi êtes-vous sur Ivemo ?</b></label>
+                                                                <div className="form-group">
+                                                                    <select value={this.state.categoryprofile_id || ''}
+                                                                            className={`form-control ${this.hasErrorFor('categoryprofile_id') ? 'is-invalid' : ''}`}
+                                                                            onChange={this.handleFieldChange}
+                                                                            name="categoryprofile_id" required="required">
+                                                                        <option value="" disabled>Pourquoi êtes-vous sur Ivemo</option>
+                                                                        {categoryprofiles.map((item) => (
+                                                                            <option key={item.id}
+                                                                                    value={item.id}>{item.name}</option>
+                                                                        ))}
+                                                                    </select>
+                                                                    {this.renderErrorFor('categoryprofile_id')}
+                                                                </div>
+                                                            </div>
 
                                                             <div className="col-md-6 mx-auto">
                                                                 <label htmlFor="phone"><b>Téléphone</b></label>
@@ -374,15 +394,14 @@ class ProfileAccountUser extends PureComponent {
                                                                     <FieldInput name="phone" type='number' minLength="2" maxLength="30"
                                                                                 placeholder="Teléphone"
                                                                                 value={this.state.phone || ""}
-                                                                        //required="required"
+                                                                                required="required"
                                                                                 handleFieldChange={this.handleFieldChange}
                                                                                 hasErrorFor={this.hasErrorFor}
                                                                                 renderErrorFor={this.renderErrorFor}/>
                                                                 </div>
                                                             </div>
-                                                        )}
-
-                                                    </Row>
+                                                        </Row>
+                                                    )}
                                                     <hr/>
                                                     <Row className="my-4">
                                                         <div className="col-md-6">
