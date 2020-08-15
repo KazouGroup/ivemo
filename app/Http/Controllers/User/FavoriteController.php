@@ -15,7 +15,9 @@ use App\Model\favorite;
 use App\Model\forum;
 use App\Model\responsecomment;
 use App\Model\user;
+use App\Services\HelpersService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class FavoriteController extends Controller
@@ -28,6 +30,60 @@ class FavoriteController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function sitefavoritemployment(user $user)
+    {
+        $this->authorize('update',$user);
+
+        return view ('user.profile.privatefavorite',[
+            'user' => $user,
+        ]);
+    }
+
+    public function sitefavoritforum(user $user)
+    {
+        $this->authorize('update',$user);
+
+        return view ('user.profile.privatefavorite',[
+            'user' => $user,
+        ]);
+    }
+
+    public function apipersonalfavoritesuses()
+    {
+        $user = Auth::user();
+
+        $this->authorize('update',$user);
+
+        $favoritemployments = HelpersService::helpersfavoritescount($user)
+            ->with(['favoritesemployments' => function ($q) use ($user){
+                $q->with('favoriteable','user')
+                    ->where('favoriteable_type',employment::class)
+                    ->with(['favoriteable.categoryemployment' => function ($q){
+                        $q->where('status',1)->distinct()->get();},
+                        'favoriteable.city' => function ($q){
+                            $q->where('status',1)->distinct()->get();},
+                        'favoriteable.member' => function ($q){
+                            $q->distinct()->get();},
+                        'favoriteable.user' => function ($q){
+                            $q->distinct()->get();}])
+                    ->orderBy('created_at','DESC')->get()->toArray()
+                ;},
+            ])
+            ->with(['favoritesforums' => function ($q) use ($user){
+                $q->with('favoriteable','user')
+                    ->where('favoriteable_type',forum::class)
+                    ->with(['favoriteable.categoryforum' => function ($q){
+                        $q->where('status',1)->distinct()->get();},
+                        'favoriteable.user' => function ($q){
+                            $q->distinct()->get();}])
+                    ->orderBy('created_at','DESC')->get()->toArray()
+                ;},
+            ])->first();
+
+
+        return response()->json($favoritemployments, 200);
     }
 
     /**
@@ -210,11 +266,13 @@ class FavoriteController extends Controller
         return response()->json(['success'=>$response]);
     }
 
-    public function destroy(user $user,$id)
+    public function destroy($id)
     {
-        $favorite = favorite::where('id', $id)->findOrFail($id);
+        $user = Auth::user();
 
         $this->authorize('update',$user);
+
+        $favorite = favorite::where('id', $id)->findOrFail($id);
 
         $favorite->delete();
     }

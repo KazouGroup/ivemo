@@ -1,5 +1,18 @@
 <?php
 
+Route::group(['prefix' => 'api'], function () {
+
+    Route::get(
+        'personal_settings/favoritesuses',
+        'FavoriteController@apipersonalfavoritesuses'
+    )->name('api.personal_settings_favoritesuses_site');
+
+});
+
+Route::get(
+    'profile/{user}/personal_settings/favorite_forums',
+    'FavoriteController@sitefavoritforum'
+)->name('userfavoritemployment_site');
 
 Route::get(
     'forums_favorites/{forum}/favorite',
@@ -11,8 +24,13 @@ Route::get(
     'FavoriteController@unfavoriteforum'
 )->name('forums_favorites.unactive');
 
+Route::get(
+    'profile/{user}/personal_settings/favorite_employments',
+    'FavoriteController@sitefavoritemployment'
+)->name('userfavoritemployment_site');
+
 Route::post(
-    '/employments_favorite/{employment:id}/favorite',
+    'employments_favorite/{employment:id}/favorite',
     'FavoriteController@favoritemployment'
 )->name('employments_favorites.favorite');
 
@@ -82,6 +100,6 @@ Route::post(
 )->name('blogannoncereservations_favorites.unactive');
 
 Route::delete(
-    'favorites/favorites_delete/{user}/{id}/delete',
+    'favorites/favorites_delete/{id}/delete',
     'FavoriteController@destroy'
 )->name('personal_favorites_delete.site');

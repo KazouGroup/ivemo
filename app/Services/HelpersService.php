@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Model\annoncelocation;
 use App\Model\employment;
+use App\Model\forum;
 use App\Model\user;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,6 +66,16 @@ class HelpersService
                     ->where('favoriteable_type',employment::class)
                     ->whereIn('user_id',[$user->id])
                     ->with(['favoriteable.categoryemployment' => function ($q){
+                        $q->where('status',1);},
+                        'favoriteable.city' => function ($q){
+                            $q->where('status',1);},]);
+            }])
+            ->withCount(['favoritesforums' => function ($q) use ($user){
+                $q->whereIn('user_id',[$user->id])
+                    ->with('user','favoriteable')
+                    ->where('favoriteable_type',forum::class)
+                    ->whereIn('user_id',[$user->id])
+                    ->with(['favoriteable.categoryforum' => function ($q){
                         $q->where('status',1);},
                         'favoriteable.city' => function ($q){
                             $q->where('status',1);},]);

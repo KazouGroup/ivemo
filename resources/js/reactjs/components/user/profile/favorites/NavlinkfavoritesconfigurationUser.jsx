@@ -25,14 +25,23 @@ class NavlinkfavoritesconfigurationUser extends PureComponent {
                                         <div className="card-body">
                                             <table>
                                                 <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/favorite_employments/`}>
-                                                            Emplois & service
-                                                        </NavLink>
-                                                    </td>
-                                                    <td className="text-right"><b>{this.props.favoritesemployments_count || "0"}</b> {this.props.favoritesemployments_count > 1 ? "annonces" : "annonce"}</td>
-                                                </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/favorite_employments/`}>
+                                                                Emplois & service
+                                                            </NavLink>
+                                                        </td>
+                                                        <td className="text-right"><b>{this.props.favoritesemployments_count || "0"}</b> {this.props.favoritesemployments_count > 1 ? "annonces" : "annonce"}</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/favorite_forums/`}>
+                                                                Forums
+                                                            </NavLink>
+                                                        </td>
+                                                        <td className="text-right"><b>{this.props.favoritesforums_count || "0"}</b> {this.props.favoritesforums_count > 1 ? "posts" : "post"}</td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>

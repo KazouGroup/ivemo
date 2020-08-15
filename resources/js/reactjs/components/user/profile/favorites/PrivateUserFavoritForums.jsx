@@ -4,18 +4,16 @@ import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
-import EmploymentListSkeleton from "../../../inc/user/employment/EmploymentListSkeleton";
 import HelmetSite from "../../../inc/user/HelmetSite";
-import PrivateUserFavoritEmployementList from "../../employment/inc/PrivateUserFavoritEmployementList";
 import NavlinkfavoritesconfigurationUser from "./NavlinkfavoritesconfigurationUser";
+import PrivateUserForumList from "../../forum/inc/PrivateUserForumList";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {
-    loadAllfovoriteuser,unfavoritemploymentItem,
-} from "../../../../redux/actions/forumsActions";
+import {loadAllfovoriteuser, unfavoriteforumItem} from "../../../../redux/actions/forumsActions";
+import ForumListSkeleton from "../../../inc/user/forum/ForumListSkeleton";
 
 
-class PrivateUserFavoritEmployments extends Component {
+class PrivateUserFavoritForums extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,22 +30,26 @@ class PrivateUserFavoritEmployments extends Component {
         })
     }
 
+    loadItems(){
+        this.props.loadAllfovoriteuser();
+    }
+
    // Lifecycle Component Method
     componentDidMount() {
-        this.props.loadAllfovoriteuser();
+        this.loadItems();
     }
 
     render() {
         const {favoritesdata} = this.props;
         const {visiable} = this.state;
-        const mapEmployments = favoritesdata.favoritesemployments.length >= 0 ? (
-            favoritesdata.favoritesemployments.slice(0,visiable).map(item => {
+        const mapForums = favoritesdata.favoritesforums.length >= 0 ? (
+            favoritesdata.favoritesforums.slice(0,visiable).map(item => {
                 return(
-                    <PrivateUserFavoritEmployementList key={item.id} {...item} unfavoritemploymentItem={this.props.unfavoritemploymentItem}/>
+                    <PrivateUserForumList key={item.id} {...item} unfavoriteforumItem={this.props.unfavoriteforumItem}/>
                 )
             })
         ):(
-            <EmploymentListSkeleton/>
+            <ForumListSkeleton/>
         );
         return (
             <>
@@ -77,9 +79,9 @@ class PrivateUserFavoritEmployments extends Component {
                                             </>
                                         )}
 
-                                        {mapEmployments}
+                                        {mapForums}
 
-                                        {visiable < favoritesdata.favoritesemployments.length && (
+                                        {visiable < favoritesdata.favoritesforums.length && (
                                             <div className="row">
                                                 <div className="col-md-4 ml-auto mr-auto text-center">
                                                     <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
@@ -103,15 +105,14 @@ class PrivateUserFavoritEmployments extends Component {
     }
 }
 
-PrivateUserFavoritEmployments.propTypes = {
+PrivateUserFavoritForums.propTypes = {
     loadAllfovoriteuser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
     favoritesdata: state.favorites.favorites,
-
 });
 
 export default connect(mapStateToProps, {
-    loadAllfovoriteuser,unfavoritemploymentItem,
-})(PrivateUserFavoritEmployments);
+    loadAllfovoriteuser,unfavoriteforumItem,
+})(PrivateUserFavoritForums);

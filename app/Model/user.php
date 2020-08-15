@@ -180,8 +180,12 @@ class user extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(contactuser::class, 'user_id');
     }
 
-
     public function favoritesemployments()
+    {
+        return $this->hasMany(favorite::class, 'user_id');
+    }
+
+    public function favoritesforums()
     {
         return $this->hasMany(favorite::class, 'user_id');
     }

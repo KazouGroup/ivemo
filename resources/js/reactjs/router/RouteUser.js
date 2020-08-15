@@ -149,6 +149,7 @@ import PublicUserFollowings from "../components/user/profile/followers/PublicUse
 import PersonalmessagesemploymentsUser
     from "../components/user/profile/mail/contactusersemployment/PersonalmessagesemploymentsUser";
 import PublicUserForums from "../components/user/profile/forum/public/PublicUserForums";
+import PrivateUserFavoritForums from "../components/user/profile/favorites/PrivateUserFavoritForums";
 
 
 const RouteUser = props => (
@@ -264,6 +265,7 @@ const RouteUser = props => (
           <Route exact path="/profile/:user/personal_settings/favorite_annonces_locations/" component={PrivateUserFavoriteannoncelocations}/>
           <Route exact path="/profile/:user/personal_settings/favorite_annonces_ventes/" component={PrivateUserFavoriteannonceventes}/>
           <Route exact path="/profile/:user/personal_settings/favorite_employments/" component={PrivateUserFavoritEmployments}/>
+          <Route exact path="/profile/:user/personal_settings/favorite_forums/" component={PrivateUserFavoritForums}/>
           <Route exact path="/profile/:user/personal_settings/favorite_blogannoncelocations/" component={PrivateUserFavoriteblogannoncelocations}/>
           <Route exact path="/profile/:user/personal_settings/favorite_blogannonceventes/" component={PrivateUserFavoriteblogannonceventes}/>
           <Route exact path="/profile/:user/personal_settings/favorite_blogannoncereservations/" component={PrivateUserFavoriteblogannoncereservations}/>

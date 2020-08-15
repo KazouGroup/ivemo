@@ -1,6 +1,6 @@
 @extends('inc.user.main')
 <?php $item = htmlspecialchars(config('app.name'));?>
-@section('title', "Mes favoris Emplois, Formation & Services ".$user->first_name.' - '.$item)
+@section('title', "Favoris ".$user->first_name.' - '.$item)
 
 @section('style')
 @endsection
