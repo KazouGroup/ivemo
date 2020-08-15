@@ -58,21 +58,6 @@ class CompileTableSeeder extends Seeder
          $god->syncRoles('super-admin');
 
 
-        $admin = User::create([
-            'username' =>'patrick96',
-            'first_name' =>'Patrick',
-            'slug' => 'tafeng',
-            'status_profile' => 1,
-            //'birthday' => now(),
-            'email' => "darrytafeng@gmail.com",
-            'color_name' => "secondary",
-            "password" => bcrypt('tafeng30'),
-            'email_verified_at' => now(),
-            'remember_token' => Str::random(10),
-        ]);
-        $admin->profileadmin()->create([ 'status_user' => true]);
-        $admin->syncRoles('super-admin');
-
         $colors = [
             ['name' => 'danger','user_id' => 1],
             ['name' => 'info', 'user_id' => 1],
@@ -155,7 +140,23 @@ class CompileTableSeeder extends Seeder
         $admin_user->syncRoles('super-admin');
 
 
-        factory(user::class, 2500)->create();
+        $admin = User::create([
+            'username' =>'patrick96',
+            'first_name' =>'Patrick',
+            'slug' => 'tafeng',
+            'status_profile' => 1,
+            //'birthday' => now(),
+            'email' => "darrytafeng@gmail.com",
+            'color_name' => "secondary",
+            "password" => bcrypt('tafeng30'),
+            'email_verified_at' => now(),
+            'remember_token' => Str::random(10),
+        ]);
+        $admin->profileadmin()->create([ 'status_user' => true]);
+        $admin->syncRoles('super-admin');
+
+
+        factory(user::class, 1)->create();
         factory(categoryfaq::class, 5)->create();
         factory(faq::class, 1)->create();
         factory(contact::class, 100)->create();

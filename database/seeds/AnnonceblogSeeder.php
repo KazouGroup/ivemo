@@ -15,13 +15,22 @@ class AnnonceblogSeeder extends Seeder
      *
      * @return void
      */
+
     public function run()
+    {
+
+        if (config('app.env') !== 'production') {
+            $this->addTestData();
+        }
+    }
+
+    private function addTestData()
     {
         factory(blogannoncereservation::class, 100)->create();
         factory(blogannoncelocation::class, 100)->create();
         factory(blogannoncevente::class, 100)->create();
         factory(avisuser::class, 150)->create();
         factory(responseavisuser::class, 500)->create();
-        factory(workwithus::class, 30)->create();
+        factory(workwithus::class, 1)->create();
     }
 }
