@@ -12,20 +12,20 @@ use Faker\Generator as Faker;
 $factory->define(followeruser::class, function (Faker $faker) {
     return [
         'user_id' => user::inRandomOrder()->first()->id,
-        'member_id' => mt_rand(1, 3),
+        'member_id' => mt_rand(1, 2),
     ];
 });
 
 $factory->define(subscribemployment::class, function (Faker $faker) {
     return [
         'user_id' => user::inRandomOrder()->first()->id,
-        'member_id' => mt_rand(1, 3),
+        'member_id' => mt_rand(1, 2),
     ];
 });
 
 $factory->define(subscribeforum::class, function (Faker $faker) {
     return [
         'user_id' => user::inRandomOrder()->first()->id,
-        'member_id' => mt_rand(1, 3),
+        'member_id' => mt_rand(1, 2),
     ];
 });

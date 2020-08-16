@@ -34,7 +34,7 @@ $factory->define(like::class, function (Faker $faker) {
 
     return [
         'user_id' => user::inRandomOrder()->first()->id,
-        'likeable_id' => mt_rand(1, 500),
+        'likeable_id' => mt_rand(1, 2),
         'likeable_type' => $servicemodel->shuffle()->first()['name'],
         'created_at' => $faker->dateTime,
     ];

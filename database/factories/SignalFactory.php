@@ -19,7 +19,7 @@ $factory->define(signal::class, function (Faker $faker) {
 
     return [
         'user_id' => user::inRandomOrder()->first()->id,
-        'signalable_id' => mt_rand(1, 500),
+        'signalable_id' => mt_rand(1, 2),
         'signalable_type' => $servicemodel->shuffle()->first()['name'],
         'ip' => $faker->ipv4,
         'subject' => $faker->text(10),

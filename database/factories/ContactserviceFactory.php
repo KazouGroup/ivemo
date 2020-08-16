@@ -26,7 +26,7 @@ $factory->define(contactservice::class, function (Faker $faker) {
         'status_favorite' => $faker->boolean,
         'from_id' => user::inRandomOrder()->first()->id,
         'to_id' => user::inRandomOrder()->first()->id,
-        'contactserviceable_id' => mt_rand(1, 500),
+        'contactserviceable_id' => mt_rand(1, 2),
         'contactserviceable_type' => $servicemodel->shuffle()->first()['name'],
         'subject' => $faker->text(50),
         'message' => $faker->realText(rand(1000, 5000)),

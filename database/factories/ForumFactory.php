@@ -17,7 +17,7 @@ $factory->define(forum::class, function (Faker $faker) {
         'slugin' => Str::uuid(),
         'description' => "<p>".$faker->realText(rand(1000, 2000))."</p>",
         'categoryforum_id' => categoryforum::inRandomOrder()->first()->id,
-        'user_id' => mt_rand(1, 3),
+        'user_id' => mt_rand(1, 2),
         //'user_id' => user::inRandomOrder()->first()->id,
         'created_at' => $faker->dateTime,
     ];

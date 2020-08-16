@@ -32,7 +32,7 @@ $factory->define(comment::class, function (Faker $faker) {
 
     return [
         'user_id' => user::inRandomOrder()->first()->id,
-        'commentable_id' => mt_rand(1, 500),
+        'commentable_id' => mt_rand(1, 2),
         'commentable_type' => $servicemodel->shuffle()->first()['name'],
         'body' => $faker->realText(rand(10, 200)),
         'created_at' => $faker->dateTime,
