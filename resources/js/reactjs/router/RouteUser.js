@@ -150,6 +150,7 @@ import PersonalmessagesemploymentsUser
     from "../components/user/profile/mail/contactusersemployment/PersonalmessagesemploymentsUser";
 import PublicUserForums from "../components/user/profile/forum/public/PublicUserForums";
 import PrivateUserFavoritForums from "../components/user/profile/favorites/PrivateUserFavoritForums";
+import PersonalnotificationsUser from "../components/user/profile/mail/notifications/PersonalnotificationsUser";
 
 
 const RouteUser = props => (
@@ -248,6 +249,8 @@ const RouteUser = props => (
           <Route exact path="/profile/:user/personal_mails/annonces_ventes/:contactusersvente/" component={PersonalmessagesannoncesventesShowUser}/>
 
           <Route exact path="/profile/:user/personal_mails/employments/" component={PersonalmessagesemploymentsUser}/>
+
+          <Route exact path="/profile/:user/notifications/" component={PersonalnotificationsUser}/>
 
 
           <Route exact path="/profile/:user/personal_mails/contacts/" component={withRouter(PersonalmessagescontactUser)}/>

@@ -4,8 +4,8 @@ return [
 
     'description' => env('APP_DESCRIPTION', 'Fallback Description'),
     'author'      => env('APP_AUTHOR', 'Fallback Author'),
-    'keywords'    => env('APP_KEYWORDS', 'laravel'),
-    'phone'    => env('APP_PHONE', '00237677688066'),
+    'keywords'    => env('APP_KEYWORDS', 'Ivemo'),
+    'phone'    => env('APP_PHONE', '00393425712192'),
     'title'       => env('APP_TITLE', 'Title site'),
     'country'     => env('APP_COUNTRY', 'Italy'),
     'country_sigle'     => env('APP_COUNTRY_SIGLE', 'IT'),

@@ -6,26 +6,24 @@ import { Button } from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import NavlinkmailmessageUser from "../inc/NavlinkmailmessageUser";
-import HeadermailmessageUser from "../inc/HeadermailmessageUser";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 import HelmetSite from "../../../../inc/user/HelmetSite";
 import {connect} from "react-redux";
 import {
-    activecontactaddItem, activecontactremoveItem,
-    archvementaddItem, archvementremoveItem, deletecontactItem,
-    favoriteaddItem,favoriteremoveItem,
     loadAllcontactservices,
+    readnotificationItem,
 } from "../../../../../redux/actions/contactuserActions";
+import NotificationsList from "./inc/NotificationsList";
 
 
-class PersonalmessagescontactUser extends Component {
+class PersonalnotificationsUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
             visiable: 20,
         };
 
-        this.readItem = this.readItem.bind(this);
+        //this.readnotificationItem = this.readnotificationItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
     }
 
@@ -36,18 +34,18 @@ class PersonalmessagescontactUser extends Component {
     }
 
     loadItems() {
-        this.props.loadAllcontactservices();
+        this.props.loadAllcontactservices(this.props);
     }
 
 
-    readItem(item) {
-
-        const url = route('personal_contactusers_mails_unactive.site', [item.id]);
-        dyaxios.post(url).then(() => {
-            this.props.history.push(`/profile/${$userIvemo.slug}/personal_mails/contacts/${item.slug}/`);
-        })
-
-    }
+    //readnotificationItem(item) {
+    //    const url = route('contactservices_notification_red', [item.id]);
+    //    dyaxios.post(url).then(() => {
+//
+    //        //this.props.history.push(`/profile/${$userIvemo.slug}/statistics/employments_contactservice_show/${item.slug}/`);
+    //    })
+//
+    //}
 
    // Lifecycle Component Method
     componentDidMount() {
@@ -59,14 +57,11 @@ class PersonalmessagescontactUser extends Component {
     render() {
         const { contactusersprofile } = this.props;
         const {  visiable } = this.state;
-        const mapContactusers = contactusersprofile.contactusers.length ? (
-            contactusersprofile.contactusers.slice(0, visiable).map(item => {
+        const mapNotifications = contactusersprofile.notifications.length ? (
+            contactusersprofile.notifications.slice(0, visiable).map(item => {
                 return (
 
-                    <HeadermailmessageUser key={item.id} {...item} readItem={this.readItem} deletecontactItem={this.props.deletecontactItem}
-                        activecontactaddItem={this.props.activecontactaddItem} activecontactremoveItem={this.props.activecontactremoveItem}
-                        archvementaddItem={this.props.archvementaddItem} archvementremoveItem={this.props.archvementremoveItem}
-                        favoriteremoveItem={this.props.favoriteremoveItem} favoriteaddItem={this.props.favoriteaddItem} />
+                    <NotificationsList key={item.id} {...item} readnotificationItem={this.props.readnotificationItem} />
                 )
             })
         ) : (
@@ -76,7 +71,7 @@ class PersonalmessagescontactUser extends Component {
         return (
 
             <>
-                <HelmetSite title={`Messages contact ${$userIvemo.first_name} - ${$name_site}`} />
+                <HelmetSite title={`Notifications ${$userIvemo.first_name} - ${$name_site}`} />
 
                 <div className="landing-page sidebar-collapse">
 
@@ -114,11 +109,11 @@ class PersonalmessagescontactUser extends Component {
                                     </div>
 
 
-                                    <div className="col-lg-9 col-md-12 mx-auto">
+                                    <div className="col-sm-9 mx-auto">
 
                                         <div className="alert alert-info" role="alert">
                                             <div className="container text-center">
-                                                <strong>Boite de réception</strong>
+                                                <strong>Notifications</strong>
                                             </div>
                                         </div>
 
@@ -136,14 +131,14 @@ class PersonalmessagescontactUser extends Component {
                                                 <table>
                                                     <tbody>
 
-                                                        {mapContactusers}
+                                                        {mapNotifications}
 
                                                     </tbody>
                                                 </table>
                                             </div>
 
 
-                                        {visiable < contactusersprofile.contactusers.length && (
+                                        {visiable < contactusersprofile.notifications.length && (
                                             <div className="row">
                                                 <div className="col-md-4 ml-auto mr-auto text-center">
                                                     <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
@@ -155,8 +150,6 @@ class PersonalmessagescontactUser extends Component {
                                         </div>
 
                                     </div>
-
-
 
                                 </div>
 
@@ -179,7 +172,7 @@ class PersonalmessagescontactUser extends Component {
     }
 }
 
-PersonalmessagescontactUser.propTypes = {
+PersonalnotificationsUser.propTypes = {
     loadAllcontactservices: PropTypes.func.isRequired,
 };
 
@@ -190,11 +183,7 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-    //loadContactusers,
     loadAllcontactservices,
-    favoriteaddItem,favoriteremoveItem,
-    archvementaddItem,archvementremoveItem,
-    activecontactaddItem,activecontactremoveItem,
-    deletecontactItem
-})(PersonalmessagescontactUser);
+    readnotificationItem,
+})(PersonalnotificationsUser);
 

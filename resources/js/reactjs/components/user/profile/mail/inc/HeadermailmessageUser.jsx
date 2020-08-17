@@ -11,7 +11,7 @@ class HeadermailmessageUser extends Component {
 
     getDescription() {
         const md = new Remarkable();
-        return { __html: md.render(this.props.message.length > 80 ? this.props.message.substring(0, 80) + "..." : this.props.message) };
+        return { __html: md.render(this.props.message.length > 86 ? this.props.message.substring(0, 86) + "..." : this.props.message) };
     }
     render() {
         return (

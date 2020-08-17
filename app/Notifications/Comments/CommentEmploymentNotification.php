@@ -65,9 +65,13 @@ class CommentEmploymentNotification extends Notification implements ShouldQueue
     public function toArray()
     {
         return [
-            'employmentID' => $this->employment->id,
-            'employmentTitle' => $this->employment->title,
-            'userFromName' => $this->userFrom->first_name
+            'userToID' => $this->employment->id,
+            'userToTitle' => $this->employment->title,
+            'userToSlugCity' => $this->employment->city->slug,
+            'userToUserSlug' =>  $this->employment->user->slug,
+            'userToSlug' =>   $this->employment->slug,
+            'userFromName' => $this->userFrom->first_name,
+            'userFromBodyUser' => $this->fromBodyUser,
         ];
     }
 }

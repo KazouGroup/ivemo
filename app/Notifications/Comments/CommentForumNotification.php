@@ -64,9 +64,13 @@ class CommentForumNotification extends Notification implements ShouldQueue
     public function toArray()
     {
         return [
-            'forumID' => $this->forum->id,
-            'forumTitle' => $this->forum->title,
-            'userFromName' => $this->userFrom->first_name
+            'userToID' => $this->forum->id,
+            'userToTitle' => $this->forum->title,
+            'userToSlugCategory' => $this->forum->categoryforum->slug,
+            'userToUserSlug' =>  $this->forum->user->slug,
+            'userToSlug' =>   $this->forum->slugin,
+            'userFromName' => $this->userFrom->first_name,
+            'userFromBodyUser' => $this->fromBodyUser,
         ];
     }
 }

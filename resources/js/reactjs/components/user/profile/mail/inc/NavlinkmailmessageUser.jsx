@@ -19,23 +19,49 @@ class NavlinkmailmessageUser extends Component {
                     <table>
                         <tbody>
 
-                        <tr>
-                            <td>
-                                <NavLink to={`/profile/${this.props.slug}/personal_mails/contacts/`}>
-                                    <b>Contacts</b>
-                                </NavLink>
-                            </td>
-                            <td className="text-right"> {this.props.contactusers_count} {this.props.contactusers_count > 1 ? "messages" : "message"}</td>
-                        </tr>
 
-                        <tr>
-                            <td>
-                                <NavLink to={`/profile/${this.props.slug}/personal_mails/employments/`}>
-                                    <b>Contacts emplois & services</b>
-                                </NavLink>
-                            </td>
-                            <td className="text-right"> {this.props.contactservicesemployments_count} {this.props.contactservicesemployments_count > 1 ? "messages" : "message"}</td>
-                        </tr>
+                        {$userIvemo.status_profile ?
+                            <>
+                                <tr>
+                                    <td>
+                                        <NavLink to={`/profile/${this.props.slug}/personal_mails/contacts/`}>
+                                            <b>Contacts</b>
+                                        </NavLink>
+                                    </td>
+                                    <td> <span className="text-right">{this.props.contactusers_count} </span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <NavLink to={`/profile/${this.props.slug}/personal_mails/employments/`}>
+                                            <b>Contacts emplois & services</b>
+                                        </NavLink>
+                                    </td>
+                                    <td> <span className="text-right">{this.props.contactservicesemployments_count} </span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <NavLink to={`/profile/${this.props.slug}/notifications/`}>
+                                            <b>Notifications</b>
+                                        </NavLink>
+                                    </td>
+                                    <td> <span className="text-right">{this.props.unread_notifications_count} </span></td>
+                                </tr>
+                            </>
+                            :
+                            <>
+                                <tr>
+                                    <td>
+                                        <NavLink to={`/profile/${this.props.slug}/notifications/`}>
+                                            <b>Notifications</b>
+                                        </NavLink>
+                                    </td>
+                                    <td> <span className="text-right">{this.props.unread_notifications_count} </span></td>
+                                </tr>
+                            </>
+                        }
+
 
                         {/*
 

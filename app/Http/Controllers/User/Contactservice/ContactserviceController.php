@@ -5,9 +5,12 @@ namespace App\Http\Controllers\User\Contactservice;
 use App\Http\Controllers\Controller;
 use App\Model\contactservice;
 use App\Model\employment;
+use App\Model\user;
 use App\Services\HelpersService;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 class ContactserviceController extends Controller
@@ -27,6 +30,10 @@ class ContactserviceController extends Controller
                 $q->whereIn('user_id',[$user->id])
                     ->latest()->distinct()->get()->toArray()
                 ;},
+            ])
+            ->with(['notifications' => function ($q) use ($user){
+                $q->whereIn('notifiable_id',[$user->id])
+                    ->latest()->distinct()->get();},
             ])
 
             ->with(['contactservicesemployments' => function ($q) use ($user){
@@ -105,5 +112,26 @@ class ContactserviceController extends Controller
         $contactservice->delete();
 
         return ['message' => 'Deleted successfully'];
+    }
+
+    /*
+     * Ce traitement concerne la table notification rien a voir avec la table contactservices
+     */
+    public function allnotifications(user $user)
+    {
+        $this->authorize('update',$user);
+
+        return view('user.contactservice.notifications', compact('user'));
+    }
+
+    public function rednotification(DatabaseNotification $notification)
+    {
+        //$notification = DB::table('notifications')->where('id', $id);
+
+        //dd($notification);
+
+        $notification->markAsRead();
+
+        return ['message' => 'Message red successfully'];
     }
 }

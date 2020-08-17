@@ -89,6 +89,7 @@ class HelpersService
     public static function helperscontactuserscount($user)
     {
         $data = user::whereSlug($user->slug)
+            ->withCount('unreadNotifications')
             ->withCount(['contactusers' => function ($q) use ($user){
                 $q->where(['status_red' => 1])
                     ->with('user')

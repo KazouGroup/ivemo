@@ -1,6 +1,6 @@
 import {
     GET_RED_CONTACTUSER_SHOW,
-    GET_ALL_CONTACTUSERS,
+    ACTIVE_NOTIFICATION_RED,
     FAVORITE_CONTACTUSER_ADD,
     FAVORITE_CONTACTUSER_REMOVE,
     ARCHVEMENT_CONTACTUSER_ADD,
@@ -162,6 +162,19 @@ export const loadAllcontactservices = props => dispatch => {
             type: GET_ALL_CONTACTSERVICE,
             payload: response.data
         })
+    ).catch(error => console.error(error));
+};
+
+export const readnotificationItem = props => dispatch => {
+
+    const url = route('contactservices_notification_red', [props.id]);
+    dyaxios.post(url).then(() => {
+
+            dispatch({
+                type: ACTIVE_NOTIFICATION_RED,
+                payload: props.id
+            });
+        }
     ).catch(error => console.error(error));
 };
 

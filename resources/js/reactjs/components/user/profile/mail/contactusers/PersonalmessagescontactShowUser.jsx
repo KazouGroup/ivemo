@@ -163,13 +163,13 @@ class PersonalmessagescontactShowUser extends Component {
 
                                 <div className="row">
 
-                                    <div className="col-lg-4 col-md-12 mx-auto">
+                                    <div className="col-lg-3 col-md-12 mx-auto">
 
                                         <NavlinkmailmessagecontactUserShow/>
 
                                     </div>
 
-                                    <div className="col-lg-8 col-md-12 mx-auto">
+                                    <div className="col-lg-9 col-md-12 mx-auto">
 
                                         <div className="card">
                                             <div className="card-body">
