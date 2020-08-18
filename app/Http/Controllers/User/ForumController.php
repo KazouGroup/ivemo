@@ -170,7 +170,7 @@ class ForumController extends Controller
         $forum->slug = null;
         $forum->update($request->all());
 
-        return response()->json($forum,200);
+        return ['message' => 'post has ben updated'];
     }
 
     public function destroy(forum $forum)
