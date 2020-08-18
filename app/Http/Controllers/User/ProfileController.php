@@ -207,9 +207,9 @@ class ProfileController extends Controller
     public function profile_add_info_account_update(UpdateprofileRequest $request ,$id)
     {
 
-        $profile = profile::where('id', $id)->find($id);
+        $data = profile::where('id', $id)->find($id);
 
-        $data = $profile->update($request->all());
+        $data->update($request->all());
 
         return response()->json($data,200);
     }
