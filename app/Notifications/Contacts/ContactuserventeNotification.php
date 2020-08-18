@@ -68,10 +68,7 @@ class ContactuserventeNotification extends Notification implements ShouldQueue
     public function toArray()
     {
         return [
-            'annonceventeID' => $this->annoncevente->id,
-            'annonceventeTitle' => $this->annoncevente->title,
-            'fromMessage' => $this->fromMessageUser,
-            'fromFullnameUser' => $this->fromFullnameUser,
+            //
         ];
     }
 }

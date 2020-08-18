@@ -64,10 +64,11 @@ class CommentBlogannoncereservationNotification extends Notification implements 
     public function toArray()
     {
         return [
-            'blogannoncereservationID' => $this->blogannoncereservation->id,
-            'blogannoncereservationTitle' => $this->blogannoncereservation->title,
-            'blogannoncereservationCategory' => $this->blogannoncereservation->categoryannoncereservation->name,
-            'userFromName' => $this->userFrom->first_name
+            'userToID' => $this->blogannoncereservation->id,
+            'userToTitle' => $this->blogannoncereservation->title,
+            'userToSlug' =>   $this->blogannoncereservation->slug,
+            'userFromName' => $this->userFrom->first_name,
+            'userFromBodyUser' => $this->fromBodyUser,
         ];
     }
 }

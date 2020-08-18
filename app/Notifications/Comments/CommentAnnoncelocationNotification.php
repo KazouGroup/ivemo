@@ -66,9 +66,13 @@ class CommentAnnoncelocationNotification extends Notification implements ShouldQ
     public function toArray()
     {
         return [
-            'annoncelocationID' => $this->annoncelocation->id,
-            'annoncelocationTitle' => $this->annoncelocation->title,
-            'userFromName' => $this->userFrom->first_name
+            'userToID' => $this->annoncelocation->id,
+            'userToTitle' => $this->annoncelocation->title,
+            'userToSlugCity' => $this->annoncelocation->city->slug,
+            'userToUserSlug' =>  $this->annoncelocation->user->slug,
+            'userToSlug' =>   $this->annoncelocation->slug,
+            'userFromName' => $this->userFrom->first_name,
+            'userFromBodyUser' => $this->fromBodyUser,
         ];
     }
 }

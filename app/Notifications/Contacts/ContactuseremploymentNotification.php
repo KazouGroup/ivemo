@@ -64,10 +64,13 @@ class ContactuseremploymentNotification extends Notification
     public function toArray()
     {
         return [
-            'employmentID' => $this->employment->id,
-            'employmentTitle' => $this->employment->title,
-            'fromMessage' => $this->fromMessageUser,
-            'fromFullnameUser' => $this->fromFullnameUser,
+            'userToID' => $this->employment->id,
+            'userToTitle' => $this->employment->title,
+            'userToSlugCity' => $this->employment->city->slug,
+            'userToUserSlug' =>  $this->employment->user->slug,
+            'userToSlug' =>   $this->employment->slug,
+            'userFromName' => $this->fromFullnameUser,
+            'userFromBodyUser' => $this->fromMessageUser,
         ];
     }
 }

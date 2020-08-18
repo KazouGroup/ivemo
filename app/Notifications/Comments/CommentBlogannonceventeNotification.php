@@ -64,10 +64,11 @@ class CommentBlogannonceventeNotification extends Notification implements Should
     public function toArray()
     {
         return [
-            'blogannonceventeID' => $this->blogannoncevente->id,
-            'blogannonceventeTitle' => $this->blogannoncevente->title,
-            'blogannonceventeCategory' => $this->blogannoncevente->categoryannoncevente->name,
-            'userFromName' => $this->userFrom->first_name
+            'userToID' => $this->blogannoncevente->id,
+            'userToTitle' => $this->blogannoncevente->title,
+            'userToSlug' =>   $this->blogannoncevente->slug,
+            'userFromName' => $this->userFrom->first_name,
+            'userFromBodyUser' => $this->fromBodyUser,
         ];
     }
 }

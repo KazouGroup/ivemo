@@ -68,10 +68,7 @@ class ContactuserlocationNotification extends Notification implements ShouldQueu
     public function toArray()
     {
         return [
-            'annoncelocationID' => $this->annoncelocation->id,
-            'annoncelocationTitle' => $this->annoncelocation->title,
-            'fromMessage' => $this->fromMessageUser,
-            'fromFullnameUser' => $this->fromFullnameUser,
+            //
         ];
     }
 }

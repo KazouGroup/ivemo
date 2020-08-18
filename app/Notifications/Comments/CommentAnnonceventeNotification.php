@@ -66,9 +66,13 @@ class CommentAnnonceventeNotification extends Notification implements ShouldQueu
     public function toArray()
     {
         return [
-            'annonceventeID' => $this->annoncevente->id,
-            'annonceventeTitle' => $this->annoncevente->title,
-            'userFromName' => $this->userFrom->first_name
+            'userToID' => $this->annoncevente->id,
+            'userToTitle' => $this->annoncevente->title,
+            'userToSlugCity' => $this->annoncevente->city->slug,
+            'userToUserSlug' =>  $this->annoncevente->user->slug,
+            'userToSlug' =>   $this->annoncevente->slug,
+            'userFromName' => $this->userFrom->first_name,
+            'userFromBodyUser' => $this->fromBodyUser,
         ];
     }
 }

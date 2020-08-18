@@ -66,9 +66,13 @@ class CommentAnnoncereservationNotification extends Notification implements Shou
     public function toArray()
     {
         return [
-            'annoncereservationID' => $this->annoncereservation->id,
-            'annoncereservationTitle' => $this->annoncereservation->title,
-            'userFromName' => $this->userFrom->first_name
+            'userToID' => $this->annoncereservation->id,
+            'userToTitle' => $this->annoncereservation->title,
+            'userToSlugCity' => $this->annoncereservation->city->slug,
+            'userToUserSlug' =>  $this->annoncereservation->user->slug,
+            'userToSlug' =>   $this->annoncereservation->slug,
+            'userFromName' => $this->userFrom->first_name,
+            'userFromBodyUser' => $this->fromBodyUser,
         ];
     }
 }
