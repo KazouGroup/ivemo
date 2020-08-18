@@ -11,7 +11,9 @@ class profile extends Model
 
    protected $table = 'profiles';
 
-   protected $guarded = [];
+   protected $guarded = [
+           'created_at','updated_at'
+    ];
 
     protected $dates = [
         'birthdate',
