@@ -136,7 +136,6 @@ class ForumController extends Controller
         $forum= new forum();
 
         $forum->fill($request->all());
-        $forum->description = clean($request->description);
 
         ForumService::sendMessageToUser($request);
 
@@ -166,11 +165,10 @@ class ForumController extends Controller
     {
         $this->authorize('update',$forum);
 
-        $forum->description = clean($request->description);
         $forum->slug = null;
         $forum->update($request->all());
 
-        return ['message' => 'post has ben updated'];
+        return response()->json($forum,200);
     }
 
     public function destroy(forum $forum)

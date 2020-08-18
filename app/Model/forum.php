@@ -15,7 +15,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class forum extends Model
 {
 
-    use Purify, LogsActivity;
+    use  LogsActivity;
 
     protected $guarded = [];
 
