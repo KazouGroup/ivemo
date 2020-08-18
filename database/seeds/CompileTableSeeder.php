@@ -2,15 +2,9 @@
 
 use App\Model\annoncetype;
 use App\Model\categoryannoncereservation;
-use App\Model\categoryfaq;
 use App\Model\color;
-use App\Model\contact;
 use App\Model\categoryannoncelocation;
 use App\Model\categoryannoncevente;
-use App\Model\faq;
-use App\Model\link;
-use App\Model\teamuser;
-use App\Model\testimonial;
 use App\Model\user;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;

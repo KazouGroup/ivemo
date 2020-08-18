@@ -267,21 +267,21 @@ class NavUserSite extends PureComponent {
                                             </a>
                                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                                 {/*
-                                        <a href={`/profile/personal_reservations/`} className="dropdown-item">
-                                            <i className="now-ui-icons shopping_tag-content"/>Mes reservations
-                                        </a>
+                                                    <a href={`/profile/personal_reservations/`} className="dropdown-item">
+                                                        <i className="now-ui-icons shopping_tag-content"/>Mes reservations
+                                                    </a>
 
-                                         <a href={`/profile/${$userIvemo.slug}/personal_settings/annonces_locations/`} className="dropdown-item">
-                                            <i className="now-ui-icons text_align-left"/>Annonces
-                                        </a>
+                                                     <a href={`/profile/${$userIvemo.slug}/personal_settings/annonces_locations/`} className="dropdown-item">
+                                                        <i className="now-ui-icons text_align-left"/>Annonces
+                                                    </a>
 
-                                        <a href={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_ventes/`} className="dropdown-item">
-                                            <i className="now-ui-icons text_align-center"/>Blog annonces
-                                        </a>
-                                        <a href={`/profile/annonces_reservations_booked/`} className="dropdown-item">
-                                            <i className="now-ui-icons shopping_bag-16"/>Reservations
-                                        </a>
-                                        */}
+                                                    <a href={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_ventes/`} className="dropdown-item">
+                                                        <i className="now-ui-icons text_align-center"/>Blog annonces
+                                                    </a>
+                                                    <a href={`/profile/annonces_reservations_booked/`} className="dropdown-item">
+                                                        <i className="now-ui-icons shopping_bag-16"/>Reservations
+                                                    </a>
+                                                  */}
 
                                                 <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/employments/`} className="dropdown-item">
                                                     <i className="now-ui-icons business_briefcase-24"/>Emplois & services

@@ -18,11 +18,6 @@ class profile extends Model
     ];
 
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
-
     protected $casts = [
         'status_avis' => 'boolean',
         'status_team_user' => 'boolean',
