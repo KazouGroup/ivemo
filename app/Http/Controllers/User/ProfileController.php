@@ -196,9 +196,9 @@ class ProfileController extends Controller
              ]);
     }
 
-    public function api_profile_add_info_account(profile $profile)
+    public function api_profile_add_info_account($profile)
     {
-        $profile = profile::whereSlug($profile->slug)
+        $profile = profile::whereSlug($profile)
             ->first();
 
         return response()->json($profile,200);
@@ -213,7 +213,7 @@ class ProfileController extends Controller
         return response()->json($profile,200);
     }
 
-    public function profile_add_info_account(profile $profile)
+    public function profile_add_info_account($profile)
     {
         $user = auth()->user();
         return view('user.profile.profile_account',[
