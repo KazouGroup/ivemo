@@ -13,7 +13,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.profilprivate');
 
     Route::get(
-        'profile/{profile:slug}/account',
+        'myprofile/{profile:slug}/account',
         'ProfileController@api_profile_add_info_account'
     )->name('api_profile_add_info_account.site');
 
