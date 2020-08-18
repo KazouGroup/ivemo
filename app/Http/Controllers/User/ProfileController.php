@@ -8,7 +8,7 @@ use App\Http\Requests\Profile\UpdateprofileRequest;
 use App\Http\Requests\Profile\UpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Model\contactuser;
-use App\model\profile;
+use App\Model\profile;
 use App\Model\reservation;
 use App\Model\user;
 use App\Services\HelpersService;
@@ -196,9 +196,9 @@ class ProfileController extends Controller
              ]);
     }
 
-    public function api_profile_add_info_account($profile)
+    public function api_profile_add_info_account(profile $profile)
     {
-        $profile = profile::whereSlug($profile)
+        $profile = profile::whereSlug($profile->slug)
             ->first();
 
         return response()->json($profile,200);
@@ -213,7 +213,7 @@ class ProfileController extends Controller
         return response()->json($profile,200);
     }
 
-    public function profile_add_info_account($profile)
+    public function profile_add_info_account(profile $profile)
     {
         $user = auth()->user();
         return view('user.profile.profile_account',[

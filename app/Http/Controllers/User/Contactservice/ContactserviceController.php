@@ -126,10 +126,7 @@ class ContactserviceController extends Controller
 
     public function rednotification(DatabaseNotification $notification)
     {
-        //$notification = DB::table('notifications')->where('id', $id);
-
-        //dd($notification);
-
+        
         $notification->markAsRead();
 
         return ['message' => 'Message red successfully'];
