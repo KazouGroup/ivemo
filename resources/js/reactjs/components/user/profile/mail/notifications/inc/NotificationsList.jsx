@@ -1,16 +1,14 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import {Remarkable} from "remarkable";
-import { Badge } from "reactstrap";
 import moment from "moment";
-import {Button} from "reactstrap";
 
 
 class NotificationsList extends Component {
 
     getDescription() {
         const md = new Remarkable();
-        return { __html: md.render(this.props.data.userFromBodyUser.length > 100 ? this.props.data.userFromBodyUser.substring(0, 100) + "..." : this.props.data.userFromBodyUser) };
+        return { __html: md.render(this.props.data.userFromBodyUser) };
     }
     render() {
         return (
@@ -51,7 +49,6 @@ class NotificationsList extends Component {
                             <span dangerouslySetInnerHTML={this.getDescription()}/>
                         </a>
                     }
-
                 </td>
                 <td className="text-right">
 

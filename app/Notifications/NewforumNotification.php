@@ -49,7 +49,7 @@ class NewforumNotification extends Notification
             ->greeting($this->fromTitleUser)
             ->salutation('Cordiale')
             ->from($this->fromUser->email,config('app.name'))
-            //->action('En savoir plus', url(route('public_profile_forums.site',[$this->fromUser->slug])))
+            ->action('En savoir plus', url(route('public_profile_forums.site',[$this->fromUser->slug])))
             ->line('Thank you for using our application!');
     }
 

@@ -357,8 +357,11 @@ class NavUserSite extends PureComponent {
                                         <NavLink to={`/profile/account/`}  className="dropdown-item">
                                             <i className="now-ui-icons users_circle-08"/> Editer mon profile
                                         </NavLink>
+                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/employments/`} className="dropdown-item">
+                                            <i className="now-ui-icons business_briefcase-24"/> Emplois & services
+                                        </NavLink>
                                         <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/forums/`} className="dropdown-item">
-                                            <i className="now-ui-icons travel_info"/> Post forums
+                                            <i className="now-ui-icons text_align-left"/> Forums
                                         </NavLink>
                                         {/*<a style={{ cursor: "pointer" }} className="dropdown-item" onClick={() => this.navLogout()}>
                                             <i className="now-ui-icons ui-1_simple-remove" /> Déconnexion

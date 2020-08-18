@@ -159,30 +159,7 @@ class PublicUserEmployments extends Component {
 
                                         {!useremploymentPublick.status_profile ?
                                             <>
-                                                <Navlinknewemployment/>
 
-
-                                                <div className="card">
-                                                    <div className="card-body">
-                                                        <div className="row">
-                                                            <div className="col-md-12">
-                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                                    <div className="card card-plain">
-                                                                        <div className="card-header" role="tab" id="headingTree">
-                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
-                                                                                <b>Annonces de {useremploymentPublick.first_name}</b>
-                                                                            </a>
-                                                                        </div>
-
-                                                                        <NavLinkPublicUser {...this.props} {...useremploymentPublick}/>
-
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </>
                                             :
                                             <>
@@ -211,6 +188,30 @@ class PublicUserEmployments extends Component {
                                                 </div>
                                                  */}
 
+                                                <Navlinknewemployment/>
+
+
+                                                <div className="card">
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                                    <div className="card card-plain">
+                                                                        <div className="card-header" role="tab" id="headingTree">
+                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
+                                                                                <b>Annonces de {useremploymentPublick.first_name}</b>
+                                                                            </a>
+                                                                        </div>
+
+                                                                        <NavLinkPublicUser {...this.props} {...useremploymentPublick}/>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                                 <div className="card">
                                                     <div className="card-body">

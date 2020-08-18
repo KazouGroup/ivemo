@@ -85,12 +85,13 @@ const FooterBigUserSite = () =>  {
                                                 Travailler avec nous
                                             </Link>
                                         </li>
-                                        <li>
+                                        {/*
+                                         <li>
                                             <Link to={`/agences_immobilies/`} className="text-muted">
                                                 Agences immobilières
                                             </Link>
                                         </li>
-
+                                        */}
                                     </ul>
                                 </div>
 

@@ -444,7 +444,7 @@ class EmploymentEdit extends Component {
                                                         <Row>
                                                             <div className="col-md-12">
                                                                 <label className="labels">
-                                                                    Donner un titre à cet article
+                                                                    Donner un titre à cet annonce
                                                                     <span className="text-danger">*</span>
                                                                 </label>
                                                                 <InputGroup>
@@ -462,7 +462,7 @@ class EmploymentEdit extends Component {
                                                         <Row>
                                                             <div className="col-md-6">
                                                                 <label className="labels">
-                                                                    Quel est le montant de votre offre
+                                                                    Quel est le montant de votre annonce
                                                                 </label>
                                                                 <InputGroup>
                                                                     <div className="input-group-prepend">
@@ -549,7 +549,7 @@ class EmploymentEdit extends Component {
                                                             <div className="col-md-12">
                                                                 <FormGroup>
                                                                     <label className="labels">
-                                                                        Décrivez votre offre
+                                                                        Décrivez votre annonce
                                                                         <span className="text-danger">*</span>
                                                                     </label>
                                                                     <br />
@@ -560,6 +560,9 @@ class EmploymentEdit extends Component {
                                                                                 value={this.state.description || ''}
                                                                                 onChange={this.handleChangeBody} />
                                                                     {this.renderErrorFor('description')}
+                                                                    <label className="labels">
+                                                                        Les champs avec <span className="text-danger">*</span> sont obligatoires
+                                                                    </label>
                                                                 </FormGroup>
                                                             </div>
                                                         </Row>

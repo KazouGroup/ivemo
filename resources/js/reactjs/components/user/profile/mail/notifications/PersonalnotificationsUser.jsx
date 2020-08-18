@@ -37,16 +37,6 @@ class PersonalnotificationsUser extends Component {
         this.props.loadAllcontactservices(this.props);
     }
 
-
-    //readnotificationItem(item) {
-    //    const url = route('contactservices_notification_red', [item.id]);
-    //    dyaxios.post(url).then(() => {
-//
-    //        //this.props.history.push(`/profile/${$userIvemo.slug}/statistics/employments_contactservice_show/${item.slug}/`);
-    //    })
-//
-    //}
-
    // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
