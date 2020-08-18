@@ -208,7 +208,7 @@ class ProfileController extends Controller
     {
         $inputs = $request->all();
 
-        $profile = profile::where('id', $id)->findOrFail($id);
+        $profile = profile::where('id', $id)->find($id);
 
         $data = $profile->update($inputs);
 

@@ -9,6 +9,8 @@ class profile extends Model
 {
     //use AuditableTrait;
 
+   protected $table = 'profiles';
+
    protected $guarded = [
            'created_at','updated_at'
     ];
