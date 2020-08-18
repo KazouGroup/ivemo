@@ -42,7 +42,8 @@ const FooterBigUserSite = () =>  {
                                 <div className="column">
                                     <h5>Company</h5>
                                     <ul className="links-vertical">
-                                        <li>
+                                        {/*
+                                          <li>
                                             <Link to={`/about/`} className="text-muted">
                                                 Qui sommes-nous
                                             </Link>
@@ -52,6 +53,8 @@ const FooterBigUserSite = () =>  {
                                                 Presentation
                                             </NavLink>
                                         </li>
+                                        */}
+
                                         <li>
                                             <NavLink to={`/advertisement/`} className="text-muted">
                                                 Faire la publicité

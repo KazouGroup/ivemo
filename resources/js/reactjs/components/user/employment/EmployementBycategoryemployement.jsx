@@ -12,7 +12,17 @@ import EmploymentListSkeleton from "../../inc/user/employment/EmploymentListSkel
 import Navlinknewemployment from "./treatement/Navlinknewemployment";
 import EmployementList from "./inc/EmployementList";
 import HelmetSite from "../../inc/user/HelmetSite";
-import EmploymentLoader from "../../inc/user/annimation/EmploymentLoader";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {
+    deleteItem,
+    favoriteItem,
+    loademploymentsbycategory,
+    loademploymentscategorycount,
+    loademploymentbycategorybycount,
+    unactiveItem,
+    unfavoriteItem
+} from "../../../redux/actions/employment/employmentActions";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -20,228 +30,24 @@ class EmployementBycategoryemployement extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            employments:{categoryemployment:[],user:[],city:[]},user:[],
-            categoryemployment:[],
             cities:{user:[]},
-            progress:false,
-            completed:false,
+            visiable: 20,
         };
 
-        this.infiniteScroll = this.infiniteScroll.bind(this);
-
-        this.deleteItem = this.deleteItem.bind(this);
-        this.favoriteItem = this.favoriteItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
+        this.loadmoresItem = this.loadmoresItem.bind(this);
     }
 
-    favoriteItem(item) {
-        const url = route('employments_favorite.favorite', [item.id]);
-        dyaxios.get(url).then(() => {
-
-            if(item.bookmarked){
-                $.notify({
-                        message: "Annonce retirée de vos favoris",
-                    },
-                    {
-                        allow_dismiss: false,
-                        type: 'info',
-                        placement: {
-                            from: 'bottom',
-                            align: 'center'
-                        },
-                        animate: {
-                            enter: "animate__animated animate__fadeInUp",
-                            exit: "animate__animated animate__fadeOutDown"
-                        },
-                    });
-            }else {
-                $.notify({
-                        message: "Annonce ajoutée à vos favoris",
-                    },
-                    {
-                        allow_dismiss: false,
-                        type: 'info',
-                        placement: {
-                            from: 'bottom',
-                            align: 'center'
-                        },
-                        animate: {
-                            enter: "animate__animated animate__fadeInUp",
-                            exit: "animate__animated animate__fadeOutDown"
-                        },
-                    });
-            }
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
+    loadmoresItem() {
+        this.setState((old) => {
+            return { visiable: old.visiable + 10 }
         })
-    }
-
-    unactiveItem(id){
-        Swal.fire({
-            title: 'Masquer cette annonce?',
-            text: "êtes vous sure de vouloir confirmer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                // remove from local state
-                let isNotId = item => item.id !== id;
-                let updatedItems = this.state.employments.filter(isNotId);
-                this.setState({employments: updatedItems});
-
-                //Envoyer la requet au server
-                let url = route('employmentsunactivated_site',id);
-                dyaxios.get(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            message: "Cette offre a été masquée aux utilisateurs",
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
-                            },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
-                            },
-                        });
-                    /** End alert ***/
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        })
-
-    }
-
-    deleteItem(id) {
-        Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                // remove from local state
-                let isNotId = item => item.id !== id;
-                let updatedItems = this.state.employments.filter(isNotId);
-                this.setState({employments: updatedItems});
-
-                const url = route('employmentsdelete_site',[id]);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            // title: 'Update',
-                            message: 'Offre suprimée avec succès'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animate__animated animate__fadeInRight',
-                                exit: 'animate__animated animate__fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
-
-    loadItems(){
-        this.setState(()=>({
-            progress:true,
-        }));
-        let itemCategoryemployment = this.props.match.params.categoryemployment;
-        dyaxios.post(route('api.employmentscategory_site',[itemCategoryemployment]),{
-            'offset':this.state.employments.length
-        }).then((response)=>{
-            this.setState(()=>({
-                employments:response.data,
-                progress:false,
-                completed:!response.data.length
-            }));
-        }).catch((error)=>{
-            console.log(error);
-        });
-
-        dyaxios.get(route('api.employmentscategorycount_site', [itemCategoryemployment])).then(response => this.setState({ categoryemployment: response.data }));
-        dyaxios.get(route('api.employmentbycategorybycount_site', [itemCategoryemployment])).then(response => this.setState({ cities: response.data }));
-    }
-
-    infiniteScroll(){
-        if(!this.state.completed && !this.state.progress){
-            this.setState(()=>({
-                progress:true,
-            }));
-
-            let itemCategoryemployment = this.props.match.params.categoryemployment;
-            dyaxios.post(route('api.employmentscategory_site',[itemCategoryemployment]),{
-                'offset':this.state.employments.length
-            }).then((response)=>{
-                this.setState((prevState)=>({
-                    employments:prevState.employments.concat(response.data),
-                    progress:false,
-                    completed:!response.data.length
-                }));
-            }).catch((error)=>{
-                console.log(error);
-            });
-        }
     }
 
     componentDidMount() {
-        this.loadItems();
-        window.addEventListener('scroll',this.infiniteScroll);
+
+        this.props.loademploymentsbycategory(this.props);
+        this.props.loademploymentscategorycount(this.props);
+        this.props.loademploymentbycategorybycount(this.props);
     }
 
     getdataString(employments_count, precision) {
@@ -252,12 +58,17 @@ class EmployementBycategoryemployement extends Component {
         return (employments_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
     render() {
-        const {employments,categoryemployment,cities} = this.state;
+        const {employments,categoryemployment,cities} = this.props;
+        const {visiable} = this.state;
         const mapEmployments = employments.length >= 0 ? (
-            employments.map(item => {
+            employments.slice(0, visiable).map(item => {
                 return(
 
-                    <EmployementList key={item.id} {...item} favoriteItem={this.favoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
+                    <EmployementList key={item.id} {...item}
+                                     favoriteItem={this.props.favoriteItem}
+                                     unfavoriteItem={this.props.unfavoriteItem}
+                                     deleteItem={this.props.deleteItem}
+                                     unactiveItem={this.props.unactiveItem} />
                 )
             })
         ):(
@@ -321,7 +132,13 @@ class EmployementBycategoryemployement extends Component {
 
                                         {mapEmployments}
 
-                                        <EmploymentLoader progress={this.state.progress} completed={this.state.completed}/>
+                                        <div className="text-center">
+                                            {visiable < employments.length ?
+                                                <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-lg btn-block">
+                                                    <b>Voir plus d'annonce</b>
+                                                </button>
+                                                : null}
+                                        </div>
 
                                     </div>
 
@@ -414,4 +231,25 @@ class EmployementBycategoryemployement extends Component {
 
 }
 
-export default EmployementBycategoryemployement;
+EmployementBycategoryemployement.propTypes = {
+    loademploymentsbycategory: PropTypes.func.isRequired,
+    loademploymentscategorycount: PropTypes.func.isRequired,
+    loademploymentbycategorybycount: PropTypes.func.isRequired,
+};
+
+const mapStoreToProps = store => ({
+    employments: store.employments.items,
+    categoryemployment: store.employments.catgoryitem,
+    cities: store.employments.cityemployments,
+
+});
+
+export default connect(mapStoreToProps,
+    {
+        loademploymentsbycategory,
+        loademploymentscategorycount,
+        loademploymentbycategorybycount,
+        favoriteItem,unfavoriteItem,
+        deleteItem,unactiveItem,
+    }
+)(EmployementBycategoryemployement);

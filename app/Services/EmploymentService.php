@@ -24,7 +24,7 @@ class EmploymentService
         return $employment;
     }
 
-    public static function apiemploymentsbycategory($request,$categoryemployment)
+    public static function apiemploymentsbycategory($categoryemployment)
     {
         $employments = EmploymentResource::collection($categoryemployment->employments()->with('user','city','categoryemployment','member')
             ->where(['status' => 1,'status_admin' => 1])
@@ -33,7 +33,7 @@ class EmploymentService
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')
-            ->distinct()->limit(30)->offset($request->offset)->get());
+            ->distinct()->limit(30)->get());
 
         return $employments;
     }

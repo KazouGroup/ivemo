@@ -13,7 +13,15 @@ import SignalFromEmployementForShow from "./inc/SignalFromEmployementForShow";
 import EmployementList from "./inc/EmployementList";
 import HelmetSite from "../../inc/user/HelmetSite";
 import Navemployementsbycity from "./inc/Navemployementsbycity";
-import EmploymentLoader from "../../inc/user/annimation/EmploymentLoader";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {
+    deleteItem,
+    favoriteItem,
+    loademployments,
+    unactiveItem,
+    unfavoriteItem
+} from "../../../redux/actions/employment/employmentActions";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -21,237 +29,36 @@ class EmployementIndexSite extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            employments:{categoryemployment:[],user:[],city:[]},
-            progress:false,
-            completed:false,
+            visiable: 20,
         };
 
-        this.infiniteScroll = this.infiniteScroll.bind(this);
-
-        this.deleteItem = this.deleteItem.bind(this);
-        this.favoriteItem = this.favoriteItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
+        this.loadmoresItem = this.loadmoresItem.bind(this);
     }
 
-    favoriteItem(item) {
-        const url = route('employments_favorite.favorite', [item.id]);
-        dyaxios.get(url).then(() => {
-
-            if(item.bookmarked){
-                $.notify({
-                        message: "Annonce retirée de vos favoris",
-                    },
-                    {
-                        allow_dismiss: false,
-                        type: 'info',
-                        placement: {
-                            from: 'bottom',
-                            align: 'center'
-                        },
-                        animate: {
-                            enter: "animate__animated animate__fadeInUp",
-                            exit: "animate__animated animate__fadeOutDown"
-                        },
-                    });
-            }else {
-                $.notify({
-                        message: "Annonce ajoutée à vos favoris",
-                    },
-                    {
-                        allow_dismiss: false,
-                        type: 'info',
-                        placement: {
-                            from: 'bottom',
-                            align: 'center'
-                        },
-                        animate: {
-                            enter: "animate__animated animate__fadeInUp",
-                            exit: "animate__animated animate__fadeOutDown"
-                        },
-                    });
-            }
-            this.loadItems();
-
-        }).catch(() => {
-            //Failled message
-            $.notify("Ooop! Something wrong. Try later", {
-                type: 'danger',
-                animate: {
-                    enter: 'animate__animated animate__bounceInDown',
-                    exit: 'animate__animated animate__bounceOutUp'
-                }
-            });
+    loadmoresItem() {
+        this.setState((old) => {
+            return { visiable: old.visiable + 10 }
         })
-    }
-
-    unactiveItem(id){
-        Swal.fire({
-            title: 'Masquer cette annonce?',
-            text: "êtes vous sure de vouloir confirmer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                // remove from local state
-                let isNotId = item => item.id !== id;
-                let updatedItems = this.state.employments.filter(isNotId);
-                this.setState({employments: updatedItems});
-
-                //Envoyer la requet au server
-                let url = route('employmentsunactivated_site',id);
-                dyaxios.get(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            message: "Cette offre a été masquée aux utilisateurs",
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'info',
-                            placement: {
-                                from: 'bottom',
-                                align: 'center'
-                            },
-                            animate: {
-                                enter: "animate__animated animate__fadeInUp",
-                                exit: "animate__animated animate__fadeOutDown"
-                            },
-                        });
-                    /** End alert ***/
-
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        })
-
-    }
-
-    deleteItem(id) {
-        Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                // remove from local state
-                let isNotId = item => item.id !== id;
-                let updatedItems = this.state.employments.filter(isNotId);
-                this.setState({employments: updatedItems});
-
-                const url = route('employmentsdelete_site',[id]);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            // title: 'Update',
-                            message: 'Offre suprimée avec succès'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animate__animated animate__fadeInRight',
-                                exit: 'animate__animated animate__fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
-
-
-
-    loadItems(){
-        this.setState(()=>({
-            progress:true,
-        }));
-        dyaxios.post(route('api.employments_site'),{
-            'offset':this.state.employments.length
-        }).then((response)=>{
-            this.setState(()=>({
-                employments:response.data,
-                progress:false,
-                completed:response.data.length?false:true
-            }));
-        }).catch((error)=>{
-            console.log(error);
-        });
-    }
-
-    infiniteScroll(){
-        if(!this.state.completed && !this.state.progress){
-            this.setState(()=>({
-                progress:true,
-            }));
-
-        dyaxios.post(route('api.employments_site'),{
-                'offset':this.state.employments.length
-            }).then((response)=>{
-                this.setState((prevState)=>({
-                    employments:prevState.employments.concat(response.data),
-                    progress:false,
-                    completed:response.data.length?false:true
-                }));
-            }).catch((error)=>{
-                console.log(error);
-            });
-        }
     }
 
     componentDidMount() {
-        this.loadItems();
-        window.addEventListener('scroll',this.infiniteScroll);
+       this.props.loademployments()
     }
 
 
 
     render() {
-        const {employments} = this.state;
+        const {employments} = this.props;
+        const {visiable} = this.state;
         const mapEmployments = employments.length >= 0 ? (
-            employments.map(item => {
+            employments.slice(0, visiable).map(item => {
                 return(
 
-                    <EmployementList key={item.id} {...item} favoriteItem={this.favoriteItem} deleteItem={this.deleteItem} unactiveItem={this.unactiveItem} />
+                    <EmployementList key={item.id} {...item}
+                                     favoriteItem={this.props.favoriteItem}
+                                     unfavoriteItem={this.props.unfavoriteItem}
+                                     deleteItem={this.props.deleteItem}
+                                     unactiveItem={this.props.unactiveItem} />
                 )
             })
         ):(
@@ -303,8 +110,13 @@ class EmployementIndexSite extends Component {
 
                                         {mapEmployments}
 
-                                        <EmploymentLoader progress={this.state.progress} completed={this.state.completed}/>
-
+                                        <div className="text-center">
+                                            {visiable < employments.length ?
+                                                <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-lg btn-block">
+                                                    <b>Voir plus d'annonce</b>
+                                                </button>
+                                                : null}
+                                        </div>
                                     </div>
 
 
@@ -361,5 +173,19 @@ class EmployementIndexSite extends Component {
     }
 
 }
+EmployementIndexSite.propTypes = {
+    loademployments: PropTypes.func.isRequired,
+};
 
-export default EmployementIndexSite;
+const mapStoreToProps = store => ({
+    employments: store.employments.items
+
+});
+
+export default connect(mapStoreToProps,
+    {
+        loademployments,
+        favoriteItem,unfavoriteItem,
+        deleteItem,unactiveItem,
+    }
+)(EmployementIndexSite);

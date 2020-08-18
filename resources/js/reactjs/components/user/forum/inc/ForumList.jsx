@@ -61,24 +61,24 @@ class ForumList extends Component {
                             </div>
                             <div className="text-right ml-auto">
                             <span className="card-title">
-                                <Link to={`/forums/${this.props.categoryforum.slug}/`}><b>{this.props.categoryforum.name}</b></Link> - <Link to={`/employments/`}> </Link> <i className="now-ui-icons tech_watch-time"/> {moment(this.props.created_at).fromNow()}
+                                <Link to={`/forums/${this.props.categoryforum.slug}/`}><b>{this.props.categoryforum.name}</b></Link> - <Link to={`/forums/`}> </Link> <i className="now-ui-icons tech_watch-time"/> {moment(this.props.created_at).fromNow()}
                             </span>
                             </div>
                         </div>
 
                         <>
                             <h5 className="card-title">
-                               <a target="_blank" href={`/forums/${this.props.categoryforum.slug}/${this.props.user.slug}/${this.props.slugin}/`} >
+                               <NavLink to={`/forums/${this.props.categoryforum.slug}/${this.props.user.slug}/${this.props.slugin}/`} >
                                    <b>{this.props.title}</b>
-                               </a>
+                               </NavLink>
                             </h5>
 
                         </>
 
 
-                        <a target="_blank" href={`/forums/${this.props.categoryforum.slug}/${this.props.user.slug}/${this.props.slugin}/`}>
+                        <NavLink to={`/forums/${this.props.categoryforum.slug}/${this.props.user.slug}/${this.props.slugin}/`}>
                          <span className="text-justify" dangerouslySetInnerHTML={this.getDescription()}/>
-                        </a>
+                        </NavLink>
 
                         <div className="card-header d-flex align-items-center">
                             <div className="d-flex align-items-center">

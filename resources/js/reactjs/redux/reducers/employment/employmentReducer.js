@@ -7,6 +7,7 @@ const initialState = {
     items:{categoryemployment:[],user:{profile:[]},city:[]},
     catgoryitems: {user: []},
     cityemployments : {user:[]},
+    catgoryitem : {user:[]},
 };
 
 
@@ -38,6 +39,22 @@ export default produce((draft, action = {}) => {
 
             case 'GET_ALL_EMPLOYMENTS_FOR_CONTACTSERVICE':
                 draft.items = action.payload;
+                return;
+
+            case 'GET_ALL_EMPLOYEMENTS':
+                draft.items = action.payload;
+                return;
+
+            case 'GET_EMPLOYEMENT_BY_CATEGORY':
+                draft.items = action.payload;
+                return;
+
+            case 'GET_EMPLOYEMENT_CATEGORY_COUNT':
+                draft.catgoryitem = action.payload;
+                return;
+
+            case 'GET_EMPLOYEMENT_BY_CATEGORY_COUNT':
+                draft.cityemployments = action.payload;
                 return;
 
             case 'GET_EMPLOYEMENT_INTERESSE':

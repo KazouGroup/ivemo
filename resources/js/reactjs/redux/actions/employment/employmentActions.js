@@ -10,6 +10,10 @@ import {
     GET_EMPLOYEMENT_BY_USER_PUBLIC,
     GET_EMPLOYEMENT_BY_USER_PRIVATE,
     GET_EMPLOYEMENT_INTERESSE,
+    GET_ALL_EMPLOYEMENTS,
+    GET_EMPLOYEMENT_BY_CATEGORY,
+    GET_EMPLOYEMENT_CATEGORY_COUNT,
+    GET_EMPLOYEMENT_BY_CATEGORY_COUNT,
     GET_ALL_EMPLOYMENTS_FOR_CONTACTSERVICE,
     UNACTIVE_PRIVATE_EMPLOYEMENT,
     UNACTIVE_EMPLOYEMENT,
@@ -71,6 +75,53 @@ export const loadCategoryemploymentsbyuser = () => dispatch => {
     dyaxios.get(route('api.categoryemployments_by_user_site'))
         .then(response => dispatch({
                 type: GET_CATEGORYEMPLOYMENTS_BY_USER,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loademployments = () => dispatch => {
+
+    let url = route('api.employments_site');
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_ALL_EMPLOYEMENTS,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loademploymentsbycategory = (props) => dispatch => {
+
+    let itemCategoryemployment = props.match.params.categoryemployment;
+    let url = route('api.employmentscategory_site',[itemCategoryemployment]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_EMPLOYEMENT_BY_CATEGORY,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loademploymentscategorycount = (props) => dispatch => {
+
+    let itemCategoryemployment = props.match.params.categoryemployment;
+    let url = route('api.employmentscategorycount_site',[itemCategoryemployment]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_EMPLOYEMENT_CATEGORY_COUNT,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loademploymentbycategorybycount = (props) => dispatch => {
+
+    let itemCategoryemployment = props.match.params.categoryemployment;
+    let url = route('api.employmentbycategorybycount_site',[itemCategoryemployment]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_EMPLOYEMENT_BY_CATEGORY_COUNT,
                 payload: response.data
             })
         ).catch(error => console.error(error));
