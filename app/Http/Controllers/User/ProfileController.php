@@ -204,11 +204,11 @@ class ProfileController extends Controller
         return response()->json($profile,200);
     }
 
-    public function profile_add_info_account_update(UpdateprofileRequest $request ,$profile)
+    public function profile_add_info_account_update(UpdateprofileRequest $request ,$id)
     {
         $inputs = $request->all();
 
-        $profile = profile::findOrFail($profile);
+        $profile = profile::where('id', $id)->findOrFail($id);
 
         $data = $profile->update($inputs);
 

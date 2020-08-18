@@ -65,7 +65,7 @@ Route::get(
 )->name('profile_profile_account_account.site');
 
 Route::put(
-    'update/{profile:slug}/profile',
+    'profile/{profile:id}',
     'ProfileController@profile_add_info_account_update'
 )->name('profile_add_info_account.update');
 

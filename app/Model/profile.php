@@ -33,6 +33,12 @@ class profile extends Model
         'status_contactservice' => 'boolean',
     ];
 
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function user()
     {
         return $this->belongsTo(user::class,'user_id');
