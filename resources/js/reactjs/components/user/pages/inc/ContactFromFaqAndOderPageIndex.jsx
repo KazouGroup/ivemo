@@ -1,6 +1,7 @@
 import React, { Component,Fragment } from "react";
 import { Link } from 'react-router-dom';
 import { Row, Form, Input,InputGroup,FormGroup } from 'reactstrap';
+import FieldInput from "../../../inc/vendor/FieldInput";
 
 
 class ContactFromFaqAndOderPageIndex extends Component {
@@ -127,20 +128,10 @@ class ContactFromFaqAndOderPageIndex extends Component {
                                             <span className="input-group-text">
                                                 <i className="now-ui-icons users_circle-08"/></span>
                                         </div>
-                                        <Input id='full_name'
-                                               type='text'
-                                               required="required"
-                                               className={`form-control ${this.hasErrorFor('full_name') ? 'is-invalid' : ''}`}
-                                               name='full_name'
-                                               minLength="3"
-                                               maxLength="200"
-                                               placeholder="Nom complet"
-                                               aria-label="Nom complet"
-                                               autoComplete="full_name"
-                                               value={this.state.full_name}
-                                               onChange={this.handleFieldChange}
-                                        />
-                                        {this.renderErrorFor('full_name')}
+                                        <FieldInput name="full_name" minLength="3" maxLength="200" type='text' placeholder="Nom complet" value={this.state.full_name}
+                                                    handleFieldChange={this.handleFieldChange}
+                                                    hasErrorFor={this.hasErrorFor}
+                                                    renderErrorFor={this.renderErrorFor} required='required'/>
                                     </InputGroup>
                                 </div>
                                 <div className="col-md-6">
@@ -149,20 +140,10 @@ class ContactFromFaqAndOderPageIndex extends Component {
                                             <span className="input-group-text">
                                                 <i className="now-ui-icons ui-1_email-85"/></span>
                                         </div>
-                                        <Input id='email'
-                                               type='email'
-                                               required="required"
-                                               className={`form-control ${this.hasErrorFor('email') ? 'is-invalid' : ''}`}
-                                               name='email'
-                                               minLength="7"
-                                               maxLength="200"
-                                               placeholder="Email..."
-                                               aria-label="Email"
-                                               autoComplete="email"
-                                               value={this.state.email}
-                                               onChange={this.handleFieldChange}
-                                        />
-                                        {this.renderErrorFor('email')}
+                                        <FieldInput name="email" minLength="3" maxLength="200" type='email' placeholder="Email..." value={this.state.email}
+                                                    handleFieldChange={this.handleFieldChange}
+                                                    hasErrorFor={this.hasErrorFor}
+                                                    renderErrorFor={this.renderErrorFor} required='required'/>
                                     </InputGroup>
                                 </div>
                             </div>
@@ -174,16 +155,10 @@ class ContactFromFaqAndOderPageIndex extends Component {
                                             <span className="input-group-text">
                                                 <i className="now-ui-icons tech_mobile"/></span>
                                         </div>
-                                        <Input id='phone'
-                                               type='number'
-                                               className={`form-control ${this.hasErrorFor('phone') ? 'is-invalid' : ''}`}
-                                               name='phone'
-                                               placeholder="Téléphone"
-                                               aria-label="Téléphone"
-                                               value={this.state.phone}
-                                               onChange={this.handleFieldChange}
-                                        />
-                                        {this.renderErrorFor('phone')}
+                                        <FieldInput name="phone" minLength="6" maxLength="50" type='number' placeholder="Téléphone" value={this.state.phone}
+                                                    handleFieldChange={this.handleFieldChange}
+                                                    hasErrorFor={this.hasErrorFor}
+                                                    renderErrorFor={this.renderErrorFor}/>
                                     </InputGroup>
                                 </div>
                                 <div className="col-md-4">
@@ -215,16 +190,10 @@ class ContactFromFaqAndOderPageIndex extends Component {
                             <div className="row">
                                 <div className="col-md-12">
                                     <InputGroup>
-                                        <textarea name="message" value={this.state.message}
-                                                  onChange={this.handleFieldChange}
-                                                  required="required"
-                                                  placeholder={'Posez ici toutes vos questions !'}
-                                                  minLength="5"
-                                                  maxLength="5000"
-                                                  className={`form-control ${this.hasErrorFor('message') ? 'is-invalid' : ''} form-control-alternative"`}
-                                                  id="message"
-                                                  rows="17" />
-                                        {this.renderErrorFor('message')}
+                                        <FieldInput name="message" type='textarea' minLength="5" maxLength="5000" placeholder="Posez ici toutes vos questions !" value={this.state.message}
+                                                    handleFieldChange={this.handleFieldChange}
+                                                    hasErrorFor={this.hasErrorFor}
+                                                    renderErrorFor={this.renderErrorFor} rows="17" required='required'/>
                                     </InputGroup>
                                 </div>
                             </div>

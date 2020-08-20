@@ -8,7 +8,6 @@ use App\Jobs\Contacts\ContactuserJob;
 use App\Jobs\Contacts\ContactusersadvertsJob;
 use App\Jobs\Contacts\ContactadminsfaqsJob;
 use App\Model\profileadmin;
-use App\Model\user;
 use App\Services\HelpersService;
 
 class ContactuserService
