@@ -414,7 +414,7 @@ class ProfileAccountUser extends PureComponent {
                                                                 <input id="avatar" type="file"
                                                                        onChange={this.updateAvatarImage}
                                                                        className={`form-control ${this.hasErrorFor('avatar') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`}
-                                                                       name="avatar"/>
+                                                                       name="avatar" accept="image/*" />
                                                                 {this.renderErrorFor('avatar')}
                                                                 <div className="text-center mt-4">
                                                                     <label htmlFor="avatar" className="btn btn-primary btn-sm">
@@ -439,7 +439,7 @@ class ProfileAccountUser extends PureComponent {
                                                                 <input id="avatarcover" type="file"
                                                                        onChange={this.updateAvatarCoverImage}
                                                                        className={`form-control ${this.hasErrorFor('avatarcover') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`}
-                                                                       name="avatarcover"/>
+                                                                       name="avatarcover" accept="image/*" />
                                                                 {this.renderErrorFor('avatarcover')}
                                                                 <div className="text-center mt-4">
                                                                     <label htmlFor="avatarcover"
