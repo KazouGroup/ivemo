@@ -141,6 +141,7 @@ const FooterBigUserSite = () =>  {
                                         </a>
                                     </li>
 
+                                    {/**
                                     <li>
                                         <a href="/" className="text-muted">
                                             Congo
@@ -163,7 +164,7 @@ const FooterBigUserSite = () =>  {
                                         <a href="/" className="text-muted">
                                             Senegal
                                         </a>
-                                    </li>
+                                    </li> */}
 
                                 </ul>
                             </div>
