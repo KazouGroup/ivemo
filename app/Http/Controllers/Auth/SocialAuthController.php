@@ -117,7 +117,7 @@ class SocialAuthController extends Controller
             $user->update([
                 'provider' => $driver,
                 'provider_id' => $providerUser->id,
-                //'access_token' => $providerUser->token
+                'social_token' => $providerUser->token
             ]);
         } else {
             // create a new user

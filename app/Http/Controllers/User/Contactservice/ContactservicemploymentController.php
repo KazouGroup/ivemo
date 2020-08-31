@@ -46,14 +46,11 @@ class ContactservicemploymentController extends Controller
 
     public function contactservice_statistique($user, employment $employment)
     {
-        $this->authorize('update',$user);
-
         return view('user.contactservice.employment.show', compact('employment'));
     }
 
     public function contactservice_statistiqueshow($user,contactservice $contactservice )
     {
-        $this->authorize('update',$user);
 
         return view('user.contactservice.employment.showcontact', compact('contactservice'));
     }
