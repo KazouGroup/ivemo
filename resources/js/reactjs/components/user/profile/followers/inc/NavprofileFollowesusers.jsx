@@ -44,7 +44,8 @@ class NavprofileFollowesusers extends PureComponent {
                                                  alt={this.props.first_name}
                                                  className="avatar"/>
                                         </NavLink>
-                                        : <Skeleton circle={false} height={60} width={110}/>}
+                                        :<img style={{ height: "60px", width: "110px" }} alt={this.props.first_name}
+                                              src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>}
 
                                     <div className="mx-3">
                                         <NavLink to={`/pro/${this.props.slug}/`} className="text-dark font-weight-600 text-sm"><b> {this.props.first_name ?
@@ -99,6 +100,8 @@ class NavprofileFollowesusers extends PureComponent {
                                         <ButonFollowerUser {...this.props}
                                                            unfollowerItem={this.props.unfollowerItem}
                                                            followerItem={this.props.followerItem}
+                                                           classNameDanger="btn btn-sm btn-danger"
+                                                           classNameInfo="btn btn-sm btn-info"
                                                            nameunfollower={`Suivre`}
                                                            nameununfollower={`Abonné`}/>
                                         : <Skeleton height={20} width={50}/>}

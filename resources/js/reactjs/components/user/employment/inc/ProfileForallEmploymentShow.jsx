@@ -27,12 +27,13 @@ class ProfileForallEmploymentShow extends Component {
                     <div className="d-flex align-items-center">
                         {this.props.user.avatar ?
                             <NavLink to={`/pro/${this.props.user.slug}/employments/`}>
-                                <img src={this.props.user.avatar} 
+                                <img src={this.props.user.avatar}
                                      style={{ height: "40px", width: "80px" }}
                                      alt={this.props.user.first_name}
                                      className="avatar" />
                             </NavLink>
-                            : <Skeleton circle={false} height={40} width={80} />}
+                            :    <img style={{ height: "40px", width: "80px" }} alt={this.props.user.first_name}
+                                      src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>}
                         <div className="mx-3">
                             <NavLink to={`/pro/${this.props.user.slug}/employments/`} className="text-dark font-weight-600 text-sm"><b>{this.props.user.first_name} </b>
                                 <small className="d-block text-muted">{this.props.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(this.props.created_at).format('LL')}</small>

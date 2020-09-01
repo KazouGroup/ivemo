@@ -1,10 +1,6 @@
 import React, {Component, Fragment} from "react";
-import {Link, NavLink} from 'react-router-dom';
-import {Helmet} from 'react-helmet';
-import {Button} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-import Swal from "sweetalert2";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {
@@ -13,11 +9,9 @@ import {
     unfollowerItem, followerItem,
     followerForTableItem, unfollowerForTableItem,
 } from "../../../../redux/actions/profileActions";
-import ButonFollowerUser from "../../../inc/vendor/follow/ButonFollowerUser";
 import HelmetSite from "../../../inc/user/HelmetSite";
 import UserFollowSkeleton from "../../../inc/user/UserFollowSkeleton";
 import UserFollowersList from "./inc/UserFollowersList";
-import Skeleton from "react-loading-skeleton";
 import NavprofileFollowesusers from "./inc/NavprofileFollowesusers";
 
 const abbrev = ['', 'k', 'M', 'B', 'T'];
@@ -55,14 +49,6 @@ class PublicUserFollowers extends Component {
         const suffix = abbrev[order];
         return (countfollowerusers / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
-
-    data_countfollowingFormatter(countfollowingusers, precision) {
-        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countfollowingusers)) / 3);
-        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
-        const suffix = abbrev[order];
-        return (countfollowingusers / Math.pow(10, order * 3)).toFixed(precision) + suffix;
-    }
-
 
     render() {
         const {users,useremploymentPublick} = this.props;

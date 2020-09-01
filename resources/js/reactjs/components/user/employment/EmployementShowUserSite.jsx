@@ -372,7 +372,8 @@ class EmployementShowUserSite extends Component {
                                                                         className="avatar" />
                                                                </NavLink>
                                                            </>
-                                                            : <Skeleton circle={false} height={40} width={80} />}
+                                                            :  <img style={{ height: "40px", width: "80px" }} alt={employment.user.first_name}
+                                                                    src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>}
 
                                                          {employment.title && (
                                                             <>
