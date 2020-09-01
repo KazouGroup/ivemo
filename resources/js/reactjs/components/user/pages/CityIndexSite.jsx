@@ -8,8 +8,9 @@ import ReadMoreAndLess from "react-read-more-less";
 import CitycommentIndex from "../comments/CitycommentIndex";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {loadCityItemshow} from "../../../redux/actions/citiesActions";
+import {loadCityItemshow,likeItem,unlikeItem} from "../../../redux/actions/citiesActions";
 import Skeleton from "react-loading-skeleton";
+import {Button} from "reactstrap";
 
 
 class CityIndexSite extends Component {
@@ -28,7 +29,7 @@ class CityIndexSite extends Component {
         return (
             <Fragment>
 
-                <HelmetSite title={`${city.name}  - ${$name_site}`}/>
+                <HelmetSite title={`${city.name || $name_site}  - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
@@ -70,6 +71,38 @@ class CityIndexSite extends Component {
 
                                 <div className="row">
                                     <div className="col-md-3 mx-auto">
+
+                                        <div className="submit text-center">
+                                            {$guest ?
+                                                <>
+                                                    <Button data-toggle="modal" data-target="#loginModal"
+                                                            className="btn btn-facebook btn-sm btn-neutral" title={`${city.countlikes} J\'aime`}>
+                                                        <i className="far fa-heart"></i> <b> J'aime</b>
+                                                    </Button>
+                                                </>
+                                                :
+                                                <>
+
+                                                    {city.likeked ?
+                                                        <>
+                                                            <Button onClick={() => this.props.unlikeItem(city)}
+                                                                    className="btn btn-danger btn-sm" title={`${city.countlikes} J\'aime`}>
+                                                                <i className="fas fa-heart"></i> <b> J'aime</b>
+                                                            </Button>
+                                                        </>
+
+                                                        :
+                                                        <>
+                                                            <Button onClick={() => this.props.likeItem(city)}
+                                                                    className="btn btn-facebook btn-sm btn-neutral" title={`${city.countlikes} J\'aime`}>
+                                                                <i className="far fa-heart"></i> <b> J'aime</b>
+                                                            </Button>
+                                                        </>
+                                                    }
+                                                </>
+                                            }
+                                        </div>
+
 
                                         <div className="card">
                                             <div className="card-body">
@@ -272,4 +305,4 @@ const mapStateToProps = state => ({
 
 });
 
-export default connect(mapStateToProps, {loadCityItemshow})(CityIndexSite);
+export default connect(mapStateToProps, {loadCityItemshow,likeItem,unlikeItem})(CityIndexSite);

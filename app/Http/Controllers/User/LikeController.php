@@ -9,6 +9,7 @@ use App\Model\annoncevente;
 use App\Model\blogannoncelocation;
 use App\Model\blogannoncereservation;
 use App\Model\blogannoncevente;
+use App\Model\city;
 use App\Model\comment;
 use App\Model\employment;
 use App\Model\forum;
@@ -161,6 +162,26 @@ class LikeController extends Controller
     public function unlikeresponsecomment(Request $request,responsecomment $responsecomment)
     {
         $like =  auth()->user()->removelikes()->detach($responsecomment->id);
+
+        return response()->json($like,200);
+    }
+
+    /**
+     * @param Request $request
+     * @param city $city
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function likecity(Request $request,city $city)
+    {
+
+        $like = $city->likes()->create($request->all());
+
+        return response()->json($like,200);
+    }
+
+    public function unlikecity(Request $request,city $city)
+    {
+        $like =  auth()->user()->removelikes()->detach($city->id);
 
         return response()->json($like,200);
     }

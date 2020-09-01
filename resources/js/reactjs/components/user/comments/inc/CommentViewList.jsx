@@ -26,7 +26,7 @@ class CommentViewList extends PureComponent {
                     className="read-more-content"
                     charLimit={250}
                     readMoreText="lire plus"
-                    readLessText=""
+                    readLessText="Masquer"
                 >
                     {this.props.body || ""}
                 </ReadMoreAndLess>
@@ -81,7 +81,7 @@ class CommentViewList extends PureComponent {
                             )}
 
                             {/* Ce button donne l'autorisation a l'utilisateur de l'annonce de la masquer */}
-                            {$userIvemo.id === this.props.commentable.user_id && (
+                            {$auth.can('dashboard') && (
                                 <button onClick={() => this.props.unactiveItem(this.props.id) }
                                         className="btn btn-success btn-neutral pull-right" title="Masquer ce commentaire">
                                     <i className="now-ui-icons ui-1_check"></i> Masquer

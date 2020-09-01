@@ -77,6 +77,7 @@ class FormComment extends Component {
                                </Button>
 
                                <button type="button" onClick={cancelresponseCourse}
+                                       disabled={disabled}
                                        className="btn btn-default pull-right btn-sm"> <b>ANNULER</b>
                                </button>
                            </div>

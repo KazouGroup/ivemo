@@ -60,6 +60,16 @@ Route::post(
     'LikeController@unlikannoncevente'
 )->name('annonceventes_likes.unactive');
 
+Route::post(
+    'cities_likes/{city:id}/like',
+    'LikeController@likecity'
+)->name('cities_likes.active');
+
+Route::post(
+    'cities_unlikes/{city:id}/unlikes',
+    'LikeController@unlikecity'
+)->name('cities_likes.unactive');
+
 Route::get(
     'blogannoncelocations_likedata/{id}/like',
     'LikeController@likblogannoncelocation'

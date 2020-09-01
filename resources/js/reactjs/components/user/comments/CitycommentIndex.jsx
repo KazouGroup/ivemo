@@ -481,7 +481,7 @@ class CitycommentIndex extends PureComponent {
                                                                     className="read-more-content"
                                                                     charLimit={250}
                                                                     readMoreText="lire plus"
-                                                                    readLessText=""
+                                                                    readLessText="Masquer"
                                                                 >
                                                                     {lk.body || ""}
                                                                 </ReadMoreAndLess>

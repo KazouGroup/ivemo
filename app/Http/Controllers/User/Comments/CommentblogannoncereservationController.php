@@ -30,6 +30,7 @@ class CommentblogannoncereservationController extends Controller
         $comments = CommentResource::collection($blogannoncereservation->comments()
             ->with('user','commentable','responsecomments')
             ->whereIn('commentable_id',[$blogannoncereservation->id])
+            ->where('commentable_type',blogannoncereservation::class)
             ->where('status',1)
             ->with(['responsecomments' => function ($q){
                 $q->where('status',1)->with('user','comment')->orderByDesc('created_at')
