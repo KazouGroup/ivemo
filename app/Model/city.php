@@ -3,12 +3,15 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class city extends Model
 {
     protected $table = 'cities';
     protected $fillable = [
         'name',
+        'description',
+        'link_video',
         'user_id',
         'slug',
         'status',
@@ -40,6 +43,11 @@ class city extends Model
         });
     }
 
+    public function visits()
+    {
+        return visits($this);
+    }
+
     protected $casts = [
         'status' => 'boolean',
         'city_vip' => 'boolean',
@@ -68,5 +76,23 @@ class city extends Model
     public function employments()
     {
         return $this->hasMany(employment::class, 'city_id');
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(comment::class ,'commentable');
+    }
+
+    public function likes()
+    {
+        return $this->morphMany(like::class ,'likeable');
+    }
+
+    public function likeked()
+    {
+        return (bool) like::where('user_id', Auth::guard('web')->id())
+            ->where(['likeable_type' => 'App\Model\city',
+                'likeable_id' => $this->id ])
+            ->first();
     }
 }

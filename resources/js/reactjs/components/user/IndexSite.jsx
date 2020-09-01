@@ -25,7 +25,7 @@ class IndexSite extends Component {
     render() {
         return (
             <>
-                <HelmetSite title={`Location, réservation et vente de maisons, appartements, studios et d'autres biens - ${$name_site}`}/>
+                <HelmetSite title={`Trouvez un boulo, evenement, job bien d\'autre service - ${$name_site}`}/>
 
                 <div className="pricing sidebar-collapse">
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
@@ -41,12 +41,21 @@ class IndexSite extends Component {
                             <div className="content-center">
                                 <div className="row">
                                     <div className="col-md-8 ml-auto mr-auto">
-                                        <h4 className="title">La meilleure façon de réserver un bien, de trouver votre futur logement</h4>
+                                        <h3 className="title">Trouvez un Job ou participer à un événement</h3>
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="col-md-12 ml-auto mr-auto">
-                                        <Link to={`/annonces_locations/locations/`} className="btn btn-danger btn-lg">
+                                        <Link to={`/employments/`} className="btn btn-danger btn-lg">
+                                            Emplois et services
+                                        </Link>
+
+                                        <Link to={`/forums/`} className="btn btn-info btn-lg">
+                                            Forums
+                                        </Link>
+
+                                        {/*
+                                          <Link to={`/annonces_locations/locations/`} className="btn btn-danger btn-lg">
                                             Locations
                                         </Link>
 
@@ -57,6 +66,9 @@ class IndexSite extends Component {
                                         <Link to={`/annonces_ventes/ventes/`} className="btn btn-primary btn-lg">
                                             Achats
                                         </Link>
+                                        */}
+
+
                                     </div>
                                 </div>
                             </div>
@@ -64,6 +76,68 @@ class IndexSite extends Component {
 
 
                         <div className="container">
+
+                            <div className="row mt-5">
+
+                                <div className="col-md-3">
+                                    <Link to={`/city/yaounde/`}>
+                                        <div className="card card-background card-raised" data-background-color=""
+                                             style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg1.jpg' + ")" }}>
+                                            <div className="info">
+
+                                                <div className="description">
+                                                    <h4 className="info-title">Yaounde</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </div>
+
+                                <div className="col-md-3">
+                                    <Link to={`/city/douala/`}>
+                                        <div className="card card-background card-raised" data-background-color=""
+                                             style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg4.jpg' + ")" }}>
+                                            <div className="info">
+                                                <div className="description">
+                                                    <h4 className="info-title">Douala</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </div>
+
+                                <div className="col-md-3">
+                                    <Link to={`/city/bafousam/`}>
+                                        <div className="card card-background card-raised" data-background-color=""
+                                             style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg4.jpg' + ")" }}>
+                                            <div className="info">
+                                                <div className="description">
+                                                    <h4 className="info-title">Bafousam</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </div>
+
+                                <div className="col-md-3">
+                                    <Link to={`/city/dschang/`}>
+                                        <div className="card card-background card-raised" data-background-color=""
+                                             style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg3.jpg' + ")" }}>
+                                            <div className="info">
+                                                <div className="description">
+                                                    <h4 className="info-title">Dschang</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </div>
+
+
+                            </div>
+
+
+                            {/*
+
                             <div className="row mt-5">
                                 <div className="col-md-4">
                                     <div className="card card-background card-raised" data-background-color=""
@@ -115,9 +189,10 @@ class IndexSite extends Component {
                                 </div>
                             </div>
 
-                            <SectionBlogannonce/>
 
-                            <div className="row d-flex align-items-end">
+
+                             <SectionBlogannonce/>
+                             <div className="row d-flex align-items-end">
                                 <div className="col-md-12 mx-auto">
                                     <h5 className="title">Vous cherchez des biens par ville ? Terrains, Maisons, Appartements à vendre, ... </h5>
                                 </div>
@@ -138,6 +213,9 @@ class IndexSite extends Component {
                                 </div>
 
                             </div>
+                            */}
+
+
                         </div>
                         <FooterBigUserSite />
                     </div>

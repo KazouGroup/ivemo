@@ -138,7 +138,7 @@
 
                                 <div class="modal fade" id="addNew" tabindex="-1" role="dialog" aria-labelledby="addNewLabel"
                                      aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
+                                    <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h6 v-show="!editmode" class="modal-title" id="addNewLabel"><b>{{this.form.name || "Add Cities"}}</b></h6>
@@ -153,6 +153,12 @@
                                                         <label class="bmd-label-floating"></label>
                                                         <input v-model="form.name" type="text" name="name" minlength="2" maxlength="100" placeholder="Name..." class="form-control" :class="{ 'is-invalid': form.errors.has('name') }" />
                                                         <has-error :form="form" field="name"/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="bmd-label-floating"></label>
+                                                        <input v-model="form.link_video" type="url" name="link_video" minlength="2" maxlength="255" placeholder="Lien youtube, vimeo, etc..." class="form-control" :class="{ 'is-invalid': form.errors.has('link_video') }" />
+                                                        <has-error :form="form" field="link_video"/>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-8 ml-auto mr-auto">
@@ -192,6 +198,28 @@
                                                                     </div>
                                                                 </div>
                                                                 <has-error :form="form" field="photo"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label class="bmd-label-floating">Description <span style="color:red;">*</span></label>
+                                                                <br>
+                                                                <quill-editor v-model="form.description"
+                                                                              :class="{ 'is-invalid': form.errors.has('description') }"
+                                                                              :options="editorOption">
+                                                                </quill-editor>
+                                                                <div class="form-check">
+                                                                    <label class="form-check-label pull-right">
+                                                                        You can use the
+                                                                        <a href="https://help.github.com/articles/getting-started-with-writing-and-formatting-on-github/" class="text-danger" target="_blank">
+                                                                            Markdown here
+                                                                        </a>
+                                                                        <span class="form-check-sign"></span>
+                                                                    </label>
+                                                                </div>
+                                                                <has-error :form="form" field="description"></has-error>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -244,8 +272,24 @@
                 form: new Form({
                     id: '',
                     name: '',
+                    description: '',
+                    link_video: '',
                     photo: '',
-                })
+                }),
+                editorOption: {
+                    // some quill options
+                    modules: {
+                        toolbar: [
+                            [{ 'font': [] }],
+                            [{ 'size': ['small', false, 'large', 'huge'] }],
+                            ['bold', 'italic', 'underline'],
+                            [{'list': 'ordered'}, {'list': 'bullet'}],
+                            [{ 'align': [] }],
+                            [{ 'color': [] }, { 'background': [] }],
+                            ['clean']
+                        ]
+                    }
+                }
             }
         },
 

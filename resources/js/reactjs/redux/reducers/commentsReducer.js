@@ -32,6 +32,10 @@ export default produce((draft, action = {}) => {
             draft.comments = action.payload;
             return;
 
+        case 'GET_COMMENTS_CITIES':
+            draft.comments = action.payload;
+            return;
+
         case 'GET_COMMENTS_FORUMS':
             draft.comments = action.payload;
             return;

@@ -151,6 +151,7 @@ import PersonalmessagesemploymentsUser
 import PublicUserForums from "../components/user/profile/forum/public/PublicUserForums";
 import PrivateUserFavoritForums from "../components/user/profile/favorites/PrivateUserFavoritForums";
 import PersonalnotificationsUser from "../components/user/profile/mail/notifications/PersonalnotificationsUser";
+import CityIndexSite from "../components/user/pages/CityIndexSite";
 
 
 const RouteUser = props => (
@@ -298,6 +299,8 @@ const RouteUser = props => (
 
           <Route exact path="/profile/:user/personal_settings/forums/" component={PrivateUserForum}/>
 
+
+          <Route exact path="/city/:city" component={withRouter(CityIndexSite)}/>
 
           <Route exact path="/employments/" component={EmployementIndexSite}/>
           <Route exact path="/employment/ab/new/" component={EmploymentCreate}/>

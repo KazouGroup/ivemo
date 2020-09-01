@@ -4,6 +4,9 @@ Route::get('about','PageController@about')->name('about.site');
 Route::get('faqs','PageController@faqs')->name('faqs.site');
 Route::post('contactusersfaq_site','PageController@contactusersfaqs')->name('contactusersfaq_site');
 
+Route::get('city/{city}','PageController@city')->name('city.site');
+Route::get('api/city/{city}','PageController@apicity')->name('api.city_site');
+
 //Route contact
 Route::get('contact','PageController@contact')->name('contact_us.site');
 Route::post('contact/send','PageController@contactadmins')->name('contactadmins_save.store');

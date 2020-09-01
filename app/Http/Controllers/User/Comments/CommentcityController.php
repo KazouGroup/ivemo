@@ -4,15 +4,13 @@ namespace App\Http\Controllers\User\Comments;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CommentResource;
-use App\Model\categoryemployment;
 use App\Model\city;
 use App\Model\comment;
-use App\Model\employment;
 use App\Model\responsecomment;
 use App\Services\CommentAndResponseService;
 use Illuminate\Http\Request;
 
-class CommentemploymentController extends Controller
+class CommentcityController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,13 +25,13 @@ class CommentemploymentController extends Controller
     }
 
 
-    public function getcomment(categoryemployment $categoryemployment,city $city,$user,employment $employment)
+    public function getcomment(city $city)
     {
-        $comments = CommentResource::collection($employment->comments()
+        $comments = CommentResource::collection($city->comments()
             ->with('user','commentable','responsecomments')
-            ->whereIn('commentable_id',[$employment->id])
-            ->where('commentable_type',employment::class)
+            ->whereIn('commentable_id',[$city->id])
             ->where('status',1)
+            ->where('commentable_type',city::class)
             ->with(['responsecomments' => function ($q){
                 $q->where('status',1)->with('user','comment')->orderByDesc('created_at')
                     ->distinct()->get()
@@ -43,22 +41,20 @@ class CommentemploymentController extends Controller
         return response()->json($comments,200);
     }
 
-    public function sendcomment(Request $request,categoryemployment $categoryemployment,city $city,$user,employment $employment)
+    public function sendcomment(Request $request,city $city)
     {
         $this->validate($request,[
             'body'=>'required|max:5000',
         ]);
 
-        $comment = $employment->comments()->create($request->all());
-
-        CommentAndResponseService::newEmailTonewcommentemploymentpageShow($request,$employment);
+        $comment = $city->comments()->create($request->all());
 
         return response()->json($comment,200);
     }
 
 
 
-    public function updatecomment(Request $request,categoryemployment $categoryemployment,city $city,$user,employment $employment,comment $comment)
+    public function updatecomment(Request $request,city $city,comment $comment)
     {
 
         $this->authorize('updateComment',$comment);
@@ -67,11 +63,10 @@ class CommentemploymentController extends Controller
 
         $comment->update([ 'body' => $validatedData['body'],]);
 
-        return response()->json($comment,200);
+        return response()->json($city,200);
     }
 
-
-    public function sendresponsecomment(Request $request,categoryemployment $categoryemployment,city $city,$user,employment $employment,comment $comment)
+    public function sendresponsecomment(Request $request,city $city,comment $comment)
     {
         $validatedData = $request->validate(['body' => 'required|min:2|max:5000']);
 

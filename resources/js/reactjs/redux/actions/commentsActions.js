@@ -6,6 +6,7 @@ import {
     GET_COMMENTS_BLOGANNONCEVENTES,
     GET_COMMENTS_EMPLOYMENTS,
     GET_COMMENTS_FORUMS,
+    GET_COMMENTS_CITIES,
     LIKE_COMMENT_ADD,
     LIKE_COMMENT_REMOVE,
     UNACTIVE_COMMENTS,
@@ -114,6 +115,18 @@ export const loadCommentsForums = (props) => dispatch => {
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_COMMENTS_FORUMS,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loadCommentsCities = (props) => dispatch => {
+
+    let itemCity = props.match.params.city;
+    let url = route('api.citygetcomment_site', [itemCity]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_COMMENTS_CITIES,
                 payload: response.data
             })
         ).catch(error => console.error(error));

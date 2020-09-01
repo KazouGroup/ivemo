@@ -30,6 +30,7 @@ class CommentforumController extends Controller
         $comments = CommentResource::collection($forum->comments()
             ->with('user','commentable','responsecomments')
             ->whereIn('commentable_id',[$forum->id])
+            ->where('commentable_type',forum::class)
             ->where('status',1)
             ->with(['responsecomments' => function ($q){
                 $q->where('status',1)->with('user','comment')->orderByDesc('created_at')

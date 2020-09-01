@@ -19,6 +19,7 @@ import annoncereservationReducer from "./annoncereservation/annoncereservationRe
 import blogannoncereservationReducer from "./blogannoncereservation/blogannoncereservationReducer";
 import contactservicesReducer from "./contactservice/contactservicesReducer";
 import favoritesReducer from "./favoritesReducer";
+import pageReducer from "./pageReducer";
 
 
 
@@ -27,6 +28,7 @@ export default combineReducers({
     employments: employmentReducer,
     employmentshow: employmentshowReducer,
     forums: forumReducer,
+    pages: pageReducer,
     forumshow: forumshowReducer,
     favorites: favoritesReducer,
     annonceventes: annonceventeReducer,

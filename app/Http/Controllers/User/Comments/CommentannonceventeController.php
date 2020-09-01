@@ -33,6 +33,7 @@ class CommentannonceventeController extends Controller
         $comments = CommentResource::collection($annoncevente->comments()
             ->with('user','commentable','responsecomments')
             ->whereIn('commentable_id',[$annoncevente->id])
+            ->where('commentable_type',annoncevente::class)
             ->where('status',1)
             ->with(['responsecomments' => function ($q){
                 $q->where('status',1)->with('user','comment')->orderByDesc('created_at')

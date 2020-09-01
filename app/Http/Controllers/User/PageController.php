@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StorecontactuseradvertRequest;
 use App\Http\Requests\Contactuser\StorecontactuserfaqRequest;
 use App\Http\Requests\Contactuser\StorecontactadminsRequest;
+use App\Http\Resources\CityResource;
+use App\Model\city;
 use App\Model\contactusersadvert;
 use App\Model\contactusersfaq;
 use App\Model\contact;
@@ -52,6 +54,21 @@ class PageController extends Controller
     public function fairelapublicite()
     {
         return view('user.page.fairelapublicite');
+    }
+
+    public function city(city $city)
+    {
+        return view('user.page.city',compact('city'));
+    }
+
+    public function apicity(city $city)
+    {
+        visits($city)->seconds(60)->increment();
+
+        $city = new CityResource(city::whereSlug($city->slug)->firstOrFail());
+
+        return response()->json($city, 200);
+
     }
 
     public function contactusersfaqs(StorecontactuserfaqRequest $request)
