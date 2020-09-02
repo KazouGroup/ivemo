@@ -67,7 +67,7 @@ class comment extends Model
     public function likeked()
     {
         return (bool) like::where('user_id', Auth::guard('web')->id())
-            ->where(['likeable_type' => 'App\Model\comment', 
+            ->where(['likeable_type' => comment::class,
             'likeable_id' => $this->id ])
             ->first();
     }

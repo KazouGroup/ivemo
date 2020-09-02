@@ -51,6 +51,16 @@ Route::post(
 )->name('annoncereservations_likes.unactive');
 
 Route::post(
+    'activitycities_likes/{activitycity:id}/like',
+    'LikeController@likeactivitycity'
+)->name('activitycities_likes.active');
+
+Route::post(
+    'activitycities_unlikes/{activitycity:id}/unlikes',
+    'LikeController@unlikeactivitycity'
+)->name('activitycities_likes.unactive');
+
+Route::post(
     'annonceventes_likes/{annoncevente:id}/like',
     'LikeController@likannoncevente'
 )->name('annonceventes_likes.active');

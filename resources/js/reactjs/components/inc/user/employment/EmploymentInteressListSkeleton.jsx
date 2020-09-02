@@ -28,7 +28,7 @@ function EmploymentInteressListSkeleton(props) {
                                <div className="col-md-4">
 
                                    <div className="card-image">
-                                       <Skeleton circle={false} height={100} width={150} />
+                                       <Skeleton circle={false} height={100} width="100%" />
                                    </div>
 
                                </div>
@@ -62,7 +62,7 @@ function EmploymentInteressListSkeleton(props) {
                                <div className="col-md-4">
 
                                    <div className="card-image">
-                                       <Skeleton circle={false} height={100} width={150} />
+                                       <Skeleton circle={false} height={100} width="100%" />
                                    </div>
 
                                </div>

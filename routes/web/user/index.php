@@ -1,5 +1,6 @@
 <?php
 
+require(__DIR__ . DIRECTORY_SEPARATOR . 'activitycity.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'agences_immobilies.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'annoncereservation.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'annoncelocation.php');
@@ -24,5 +25,6 @@ require(__DIR__ . DIRECTORY_SEPARATOR . 'categories'. DIRECTORY_SEPARATOR . 'cat
 require(__DIR__ . DIRECTORY_SEPARATOR . 'blogs'. DIRECTORY_SEPARATOR . 'index.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'comments'. DIRECTORY_SEPARATOR . 'index.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'contactservice'. DIRECTORY_SEPARATOR . 'index.php');
+require(__DIR__ . DIRECTORY_SEPARATOR . 'uploadimages'. DIRECTORY_SEPARATOR . 'index.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'favorites'. DIRECTORY_SEPARATOR . 'index.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'subscribes'. DIRECTORY_SEPARATOR . 'index.php');

@@ -32,6 +32,7 @@ class CityResource extends JsonResource
             'visits_languages' => $this->visits()->languages(),
             'visits_operatingSystems' => $this->visits()->operatingSystems(),
             'employments_count' => $this->employments_count,
+            'activitycities_count' => $this->activitycities_count,
             'annoncelocations_count' => $this->annoncelocations_count,
             'annoncereservations_count' => $this->annoncereservations_count,
             'annonceventes_count' => $this->annonceventes_count,

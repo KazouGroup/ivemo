@@ -3,6 +3,7 @@ namespace App\Services\Contactusers;
 
 
 
+use App\Jobs\Contacts\ContactadminsActivitycityJob;
 use App\Jobs\Contacts\ContactadminsJob;
 use App\Jobs\Contacts\ContactuserJob;
 use App\Jobs\Contacts\ContactusersadvertsJob;
@@ -93,6 +94,21 @@ class ContactuserService
             ->with('user')->get();
 
         $emailToUser = (new ContactadminsfaqsJob($fromFullnameUser,$fromEmailUser,$fromMessageUser,$toAdminUser));
+
+        dispatch($emailToUser);
+    }
+
+    public static function newEmailToativitycitypageShow($request,$activitycity)
+    {
+        $fromFullnameUser = $request->get('full_name');
+        $fromPhoneUser = $request->get('phone');
+        $fromEmailUser = $request->get('email');
+        $fromMessageUser = $request->get('message');
+
+        $toAdminUser = profileadmin::where(['status_user' => 1])
+            ->with('user')->get();
+
+        $emailToUser = (new ContactadminsActivitycityJob($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromMessageUser,$activitycity,$toAdminUser));
 
         dispatch($emailToUser);
     }

@@ -65,7 +65,11 @@ class PageController extends Controller
     {
         visits($city)->seconds(60)->increment();
 
-        $city = new CityResource(city::whereSlug($city->slug)->firstOrFail());
+        $city = new CityResource(city::whereSlug($city->slug)
+            ->withCount(['activitycities' => function ($q){
+                $q->where(['status' => 1])
+                    ->whereHas('city', function ($q) {$q->where('status',1);});
+            }])->firstOrFail());
 
         return response()->json($city, 200);
 

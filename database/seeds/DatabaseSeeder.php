@@ -19,6 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AnnonceblogSeeder::class);
         $this->call(EmployementSeeder::class);
         $this->call(ForumSeeder::class);
-        $this->call(SignalTableSeeder::class);
+        $this->call(DataTableSeeder::class);
     }
 }

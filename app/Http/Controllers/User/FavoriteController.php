@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Model\activitycity;
 use App\Model\annoncelocation;
 use App\Model\annoncereservation;
 use App\Model\annoncevente;
@@ -262,6 +263,29 @@ class FavoriteController extends Controller
         $blogannoncereservation = blogannoncereservation::whereId($blogannoncereservation)->firstOrFail();
 
         $response = auth()->user()->removefavorites()->detach($blogannoncereservation);
+
+        return response()->json(['success'=>$response]);
+    }
+
+    /**
+     * @param Request $request
+     * @param activitycity $activitycity
+     * @return
+     */
+    public function favoritactivitycity(Request $request,$activitycity)
+    {
+        $activitycity = activitycity::whereId($activitycity)->firstOrFail();
+
+        $response = $activitycity->favorites()->create($request->all());
+
+        return response()->json(['success'=>$response]);
+    }
+
+    public function unfavoritactivitycity(Request $request,$activitycity)
+    {
+        $activitycity = activitycity::whereId($activitycity)->firstOrFail();
+
+        $response = auth()->user()->removefavorites()->detach($activitycity);
 
         return response()->json(['success'=>$response]);
     }

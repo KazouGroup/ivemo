@@ -2,6 +2,7 @@ import {
     GET_CITY_SHOW,
     LIKE_CITY_ADD,
     LIKE_CITY_REMOVE,
+    LIKE_ANNONCELOCATION_ADD,
 } from "./types";
 
 import Swal from "sweetalert2";
@@ -19,7 +20,7 @@ export const loadCityItemshow = (props) => dispatch => {
         ).catch(error => console.error(error));
 };
 
-export const likeItem = props => dispatch => {
+export const likecityItem = props => dispatch => {
 
     const url = route('cities_likes.active', [props.id]);
     dyaxios.post(url).then(() => {
@@ -49,13 +50,26 @@ export const likeItem = props => dispatch => {
     }).catch(error => console.error(error))
 };
 
-export const unlikeItem = props => dispatch => {
+export const unlikecityItem = props => dispatch => {
 
     const url = route('cities_likes.unactive', [props.id]);
     dyaxios.post(url).then(() => {
 
         dispatch({
             type: LIKE_CITY_REMOVE,
+            payload: props.id
+        });
+
+    }).catch(error => console.error(error))
+};
+
+export const likeItem = props => dispatch => {
+
+    const url = route('annoncelocations_likes.active', [props.id]);
+    dyaxios.post(url).then(() => {
+
+        dispatch({
+            type: LIKE_ANNONCELOCATION_ADD,
             payload: props.id
         });
 

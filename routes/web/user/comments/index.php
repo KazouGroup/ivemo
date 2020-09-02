@@ -3,6 +3,7 @@
 Route::group(['namespace' => 'Comments'], function(){
 
 
+    require(__DIR__ . DIRECTORY_SEPARATOR . 'commentactivitycity.php');
     require(__DIR__ . DIRECTORY_SEPARATOR . 'commentcity.php');
     require(__DIR__ . DIRECTORY_SEPARATOR . 'commentannoncereservation.php');
     require(__DIR__ . DIRECTORY_SEPARATOR . 'commentannoncelocation.php');

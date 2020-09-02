@@ -7,6 +7,7 @@ import {
     GET_COMMENTS_EMPLOYMENTS,
     GET_COMMENTS_FORUMS,
     GET_COMMENTS_CITIES,
+    GET_COMMENTS_ACTIVITYCITIES,
     LIKE_COMMENT_ADD,
     LIKE_COMMENT_REMOVE,
     UNACTIVE_COMMENTS,
@@ -127,6 +128,19 @@ export const loadCommentsCities = (props) => dispatch => {
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_COMMENTS_CITIES,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loadCommentsActivitycities = (props) => dispatch => {
+
+    let itemCity = props.match.params.city;
+    let itemActivitycity = props.match.params.activitycity;
+    let url = route('api.activitycitygetcomment_site', [itemCity,itemActivitycity]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_COMMENTS_ACTIVITYCITIES,
                 payload: response.data
             })
         ).catch(error => console.error(error));

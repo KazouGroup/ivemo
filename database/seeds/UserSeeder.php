@@ -1,5 +1,7 @@
 <?php
 
+use App\Model\activitycity;
+use App\Model\uploadimage;
 use App\Model\user;
 use App\Model\categoryfaq;
 use App\Model\faq;

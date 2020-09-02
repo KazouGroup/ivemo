@@ -152,6 +152,7 @@ import PublicUserForums from "../components/user/profile/forum/public/PublicUser
 import PrivateUserFavoritForums from "../components/user/profile/favorites/PrivateUserFavoritForums";
 import PersonalnotificationsUser from "../components/user/profile/mail/notifications/PersonalnotificationsUser";
 import CityIndexSite from "../components/user/pages/CityIndexSite";
+import ActivitycityShowUserSite from "../components/user/pages/activitycity/ActivitycityShowUserSite";
 
 
 const RouteUser = props => (
@@ -301,6 +302,7 @@ const RouteUser = props => (
 
 
           <Route exact path="/city/:city" component={withRouter(CityIndexSite)}/>
+          <Route exact path="/city/:city/a/:activitycity" component={withRouter(ActivitycityShowUserSite)}/>
 
           <Route exact path="/employments/" component={EmployementIndexSite}/>
           <Route exact path="/employment/ab/new/" component={EmploymentCreate}/>

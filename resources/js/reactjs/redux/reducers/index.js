@@ -20,6 +20,7 @@ import blogannoncereservationReducer from "./blogannoncereservation/blogannoncer
 import contactservicesReducer from "./contactservice/contactservicesReducer";
 import favoritesReducer from "./favoritesReducer";
 import pageReducer from "./pageReducer";
+import uploadimagesReducer from "./uploadimagesReducer";
 
 
 
@@ -41,6 +42,7 @@ export default combineReducers({
     blogannoncereservations: blogannoncereservationReducer,
     blogannonceventes: blogannonceventeReducer,
     commentsites: commentsReducer,
+    uploadimagesites: uploadimagesReducer,
     profile: profileReducer,
     contactusers: contactservicesReducer,
     contactservicemploymentcontactshow: contactservicemploymentcontactshowReducer,

@@ -8,9 +8,10 @@ import ReadMoreAndLess from "react-read-more-less";
 import CitycommentIndex from "../comments/CitycommentIndex";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {loadCityItemshow,likeItem,unlikeItem} from "../../../redux/actions/citiesActions";
+import {loadCityItemshow,likecityItem,unlikecityItem} from "../../../redux/actions/citiesActions";
 import Skeleton from "react-loading-skeleton";
 import {Button} from "reactstrap";
+import ActivitycityInteresse from "./activitycity/ActivitycityInteresse";
 
 
 class CityIndexSite extends Component {
@@ -85,7 +86,7 @@ class CityIndexSite extends Component {
 
                                                     {city.likeked ?
                                                         <>
-                                                            <Button onClick={() => this.props.unlikeItem(city)}
+                                                            <Button onClick={() => this.props.unlikecityItem(city)}
                                                                     className="btn btn-danger btn-sm" title={`${city.countlikes} J\'aime`}>
                                                                 <i className="fas fa-heart"></i> <b> J'aime</b>
                                                             </Button>
@@ -93,7 +94,7 @@ class CityIndexSite extends Component {
 
                                                         :
                                                         <>
-                                                            <Button onClick={() => this.props.likeItem(city)}
+                                                            <Button onClick={() => this.props.likecityItem(city)}
                                                                     className="btn btn-facebook btn-sm btn-neutral" title={`${city.countlikes} J\'aime`}>
                                                                 <i className="far fa-heart"></i> <b> J'aime</b>
                                                             </Button>
@@ -159,7 +160,7 @@ class CityIndexSite extends Component {
                                                 <div className="card-body">
                                                     <div className="row">
                                                         <div className="col-md-12 mx-auto">
-                                                            <h5><b>{city.name} - Guide de en vidéo</b></h5>
+                                                            <h5><b>{city.name} - Guide en vidéo</b></h5>
 
                                                             <iframe border="2px solid #ccc" width="100%" height="315"
                                                                     src={city.link_video}
@@ -173,21 +174,9 @@ class CityIndexSite extends Component {
                                             </div>
                                         )}
 
-                                        {/*
 
-                                         <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <h5><b>{city.name} – Quelques endroits populaires à visiter</b></h5>
+                                        <ActivitycityInteresse {...this.props} {...city} />
 
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        */}
 
 
                                         <div className="card">
@@ -305,4 +294,4 @@ const mapStateToProps = state => ({
 
 });
 
-export default connect(mapStateToProps, {loadCityItemshow,likeItem,unlikeItem})(CityIndexSite);
+export default connect(mapStateToProps, {loadCityItemshow,likecityItem,unlikecityItem})(CityIndexSite);

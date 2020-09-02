@@ -8,6 +8,10 @@ const initialState = {
 
 export default produce((draft, action = {}) => {
     switch (action.type) {
+        case 'GET_COMMENTS_ACTIVITYCITIES':
+            draft.comments = action.payload;
+            return;
+
         case 'GET_COMMENTS_ANNONCESLOCATIONS':
             draft.comments = action.payload;
             return;

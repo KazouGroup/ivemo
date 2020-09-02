@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Model\activitycity;
 use App\Model\annoncelocation;
 use App\Model\annoncereservation;
 use App\Model\annoncevente;
@@ -162,6 +163,26 @@ class LikeController extends Controller
     public function unlikeresponsecomment(Request $request,responsecomment $responsecomment)
     {
         $like =  auth()->user()->removelikes()->detach($responsecomment->id);
+
+        return response()->json($like,200);
+    }
+
+    /**
+     * @param Request $request
+     * @param activitycity $activitycity
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function likeactivitycity(Request $request,activitycity $activitycity)
+    {
+
+        $like = $activitycity->likes()->create($request->all());
+
+        return response()->json($like,200);
+    }
+
+    public function unlikeactivitycity(Request $request,activitycity $activitycity)
+    {
+        $like =  auth()->user()->removelikes()->detach($activitycity->id);
 
         return response()->json($like,200);
     }

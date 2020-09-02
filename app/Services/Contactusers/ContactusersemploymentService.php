@@ -4,8 +4,6 @@ namespace App\Services\Contactusers;
 
 
 use App\Jobs\Contacts\ContactuseremploymentJob;
-use App\Model\contactuseremployment;
-
 
 class ContactusersemploymentService
 {

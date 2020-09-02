@@ -50,6 +50,16 @@ Route::post(
 )->name('annoncelocations_favorites.unactive');
 
 Route::post(
+    'activitycities_favorite/{activitycity:id}/favorite',
+    'FavoriteController@favoritactivitycity'
+)->name('activitycities_favorites.favorite');
+
+Route::post(
+    'activitycities_unfavorites/{activitycity:id}/unfavorites',
+    'FavoriteController@unfavoritactivitycity'
+)->name('activitycities_favorites.unactive');
+
+Route::post(
     'annonceventes_favorite/{annoncevente:id}/favorite',
     'FavoriteController@favoritannoncevente'
 )->name('annonceventes_favorites.favorite');

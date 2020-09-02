@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User\Comments;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CommentResource;
+use App\Http\Resources\Comment\CommentForumResource;
 use App\Model\comment;
 use App\Model\forum;
 use App\Model\responsecomment;
@@ -27,7 +27,7 @@ class CommentforumController extends Controller
 
     public function getcomment($categoryforum,$user,forum $forum)
     {
-        $comments = CommentResource::collection($forum->comments()
+        $comments = CommentForumResource::collection($forum->comments()
             ->with('user','commentable','responsecomments')
             ->whereIn('commentable_id',[$forum->id])
             ->where('commentable_type',forum::class)
