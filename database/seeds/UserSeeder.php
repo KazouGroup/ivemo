@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        factory(user::class, 1)->create();
+        //factory(user::class, 1)->create();
         //factory(categoryfaq::class, 1)->create();
         //factory(faq::class, 1)->create();
         //factory(contact::class, 20)->create();
