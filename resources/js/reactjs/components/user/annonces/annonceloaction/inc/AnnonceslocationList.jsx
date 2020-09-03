@@ -102,7 +102,7 @@ class AnnonceslocationList extends PureComponent {
                                 </div>
                                 <div className="col-md-7">
                                     <div className="text-left pull-left">
-                                        <NavLink to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/`}>
+                                        <NavLink to={`/als/locations/${this.props.categoryannoncelocation.slug}/`}>
                                             <h6 className={`text-${this.props.categoryannoncelocation.color_name} ml-auto mr-auto`}>
                                                 {this.props.categoryannoncelocation.name}
                                             </h6>
@@ -116,7 +116,7 @@ class AnnonceslocationList extends PureComponent {
                                             <h6 className="text-dark">{this.props.pieces > 0 ?<>{this.props.pieces} p.</>:null } {this.props.rooms > 0 ? <>{this.props.rooms} ch.</>:null} {this.props.surface > 0 ? <>{this.props.surface} m<sup>2</sup></>:null}</h6>
                                         </div>
                                         <div className="col-md-7 col-6">
-                                            <NavLink to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/`}>
+                                            <NavLink to={`/als/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/`}>
                                             <span className="ml-auto mr-auto">
                                                 <strong>{this.props.city.name} </strong>
                                             </span>
@@ -129,7 +129,7 @@ class AnnonceslocationList extends PureComponent {
                                             {this.props.title.length > 90 ? this.props.title.substring(0, 90) + "..." : this.props.title}
                                         </Link>
                                     </h6>
-                                    <Link to={`/annonces_locations/${this.props.annoncetype.slug}/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`}>
+                                    <Link to={`/als/${this.props.annoncetype.slug}/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`}>
                                         <span dangerouslySetInnerHTML={this.getDescription()}/>
                                     </Link>
                                     <div className="card-header d-flex align-items-center">

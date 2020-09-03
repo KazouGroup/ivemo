@@ -4,7 +4,7 @@ namespace App\Http\Resources\Uploadimage;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UploadimageActivitycityResource extends JsonResource
+class UploadimageAnnoncelocationResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

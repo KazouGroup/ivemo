@@ -53,6 +53,10 @@ import UserParAdminIndex from "../components/admin/user/UserParAdminIndex";
 import UserModeratorsAdmin from "../components/admin/user/UserModeratorsAdmin";
 import ContactAdminIndex from "../components/admin/contact/contactadmin/ContactAdminIndex";
 import CategoryForumAdminIndex from "../components/admin/categories/CategoryForumAdminIndex";
+import ActivitycitesAdminIndex from "../components/admin/activitycity/ActivitycitesAdminIndex";
+import ActivitycitesbycityAdminIndex from "../components/admin/activitycity/ActivitycitesbycityAdminIndex";
+import ActivitycityAdminEdit from "../components/admin/activitycity/ActivitycityAdminEdit";
+import ActivitycityAdminNew from "../components/admin/activitycity/ActivitycityAdminNew";
 
 
 export const routes = [
@@ -109,6 +113,11 @@ export const routes = [
     {path: '/dashboard/signalannoncereservations/', name: 'signalannoncereservations.index', component: SignalannoncereservationAdminIndex},
     {path: '/dashboard/signalannoncereservations/:annoncereservation/', name: 'signalannoncereservations.show', component: SignalannoncelocationsAdminShow},
 
+
+    {path: '/dashboard/activitycities/', name: 'activitycities.dashboard', component: ActivitycitesAdminIndex},
+    {path: '/dashboard/activitycities/city/:city/', name: 'activitycitiesbycity_dashboard.dashboard', component: ActivitycitesbycityAdminIndex},
+    {path: '/dashboard/activitycities/data/new/', name: 'activitycitiesnew_dashboard.dashboard', component: ActivitycityAdminNew},
+    {path: '/dashboard/activitycities/data/:activitycity/edit/', name: 'activitycityshow.dashboard', component: ActivitycityAdminEdit},
 
     {path: '/dashboard/employments/', name: 'employments.dashboard', component: EmployementsAdminIndex},
     {path: '/dashboard/employments/:categoryemployment/', name: 'employments_show.dashboard', component: EmployementsbycategoryAdmin},

@@ -55,7 +55,7 @@ class IndexSite extends Component {
                                         </Link>
 
                                         {/*
-                                          <Link to={`/annonces_locations/locations/`} className="btn btn-danger btn-lg">
+                                          <Link to={`/als/locations/`} className="btn btn-danger btn-lg">
                                             Locations
                                         </Link>
 

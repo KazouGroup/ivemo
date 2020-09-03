@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class uploadimage extends Model
 {
 
-    protected $guarded = [];
+    /* Ce $fillable est très important ici a ne pas charger */
+
+    protected $fillable = ['photo','status'];
 
     protected $table = 'uploadimages';
 

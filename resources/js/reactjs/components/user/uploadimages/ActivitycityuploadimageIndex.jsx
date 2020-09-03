@@ -27,7 +27,7 @@ class ActivitycityuploadimageIndex extends PureComponent {
                             {uploadimages.map((item,index) => (
                                 <div key={item.id} className={`carousel-item ${index === 0 ? "active" : ""}`}>
                                     <img className="d-block"
-                                         src={item.name}
+                                         src={item.photo}
                                          alt={item.id}/>
                                 </div>
                             ))}

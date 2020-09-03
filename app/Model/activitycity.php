@@ -2,16 +2,19 @@
 
 namespace App\Model;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Filesystem\Cache;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class activitycity extends Model
 {
-    protected $guarded = [];
+    protected $fillable = ['description','slug','slugin','city_id','title','user_id','member_id','status'];
 
     protected $table = 'activitycities';
 
+    protected $with = ['member'];
 
     protected $casts = [
         'status' => 'boolean',
@@ -22,6 +25,11 @@ class activitycity extends Model
     public function user()
     {
         return $this->belongsTo(user::class,'user_id');
+    }
+
+    public function member()
+    {
+        return $this->belongsTo(user::class,'member_id');
     }
 
     public function city()
@@ -37,11 +45,13 @@ class activitycity extends Model
         static::creating(function ($model){
             if (auth()->check()){
                 $model->user_id = auth()->id();
+                $model->ip = request()->ip();
+                $model->slugin = Str::uuid();
             }
         });
         static::updating(function($model){
             if (auth()->check()){
-                $model->user_id = auth()->id();
+                $model->ip = request()->ip();
             }
         });
     }
@@ -56,6 +66,23 @@ class activitycity extends Model
         return Cache::has('user-is-online-' . $this->id);
     }
 
+    use Sluggable;
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title',
+                'separator' => '+'
+            ]
+
+        ];
+    }
+
     public function cities()
     {
         return $this->hasMany(faq::class,'city_id');
@@ -63,17 +90,20 @@ class activitycity extends Model
 
     public function contactservices()
     {
-        return $this->morphMany(contactservice::class ,'contactserviceable');
+        return $this->morphMany(contactservice::class ,'contactserviceable')
+            ->orderByDesc('created_at');
     }
 
     public function comments()
     {
-        return $this->morphMany(comment::class ,'commentable');
+        return $this->morphMany(comment::class ,'commentable')
+            ->orderByDesc('created_at');
     }
 
     public function uploadimages()
     {
-        return $this->morphMany(uploadimage::class ,'uploadimagealable');
+        return $this->morphMany(uploadimage::class ,'uploadimagealable')
+            ->orderByDesc('created_at');
     }
 
     public function likes()
@@ -84,20 +114,21 @@ class activitycity extends Model
     public function likeked()
     {
         return (bool) like::where('user_id', Auth::guard('web')->id())
-            ->where(['likeable_type' => 'App\Model\activitycity',
+            ->where(['likeable_type' => activitycity::class,
                 'likeable_id' => $this->id ])
             ->first();
     }
 
     public function favorites()
     {
-        return $this->morphMany(favorite::class ,'favoriteable');
+        return $this->morphMany(favorite::class ,'favoriteable')
+            ->orderByDesc('created_at');
     }
 
     public function favoriteted()
     {
         return (bool) favorite::where('user_id', Auth::guard('web')->id())
-            ->where(['favoriteable_type' => 'App\Model\activitycity',
+            ->where(['favoriteable_type' => activitycity::class,
                 'favoriteable_id' => $this->id ])
             ->first();
     }

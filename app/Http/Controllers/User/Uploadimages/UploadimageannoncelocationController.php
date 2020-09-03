@@ -4,7 +4,11 @@ namespace App\Http\Controllers\User\Uploadimages;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Uploadimage\UploadimageActivitycityResource;
+use App\Http\Resources\Uploadimage\UploadimageAnnoncelocationResource;
 use App\Model\activitycity;
+use App\Model\annoncelocation;
+use App\Model\annoncetype;
+use App\Model\categoryannoncelocation;
 use App\Model\city;
 use File;
 use App\Model\uploadimage;
@@ -12,7 +16,7 @@ use App\Model\user;use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpFoundation\Response;
 
-class UploadimageactivitycityController extends Controller
+class UploadimageannoncelocationController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,12 +31,12 @@ class UploadimageactivitycityController extends Controller
     }
 
 
-    public function getuploadimage(city $city,activitycity $activitycity)
+    public function getuploadimage(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$user,annoncelocation $annoncelocation)
     {
-        $uploadimages = UploadimageActivitycityResource::collection( $activitycity->uploadimages()
+        $uploadimages = UploadimageAnnoncelocationResource::collection($annoncelocation->uploadimages()
             ->where('status',1)
-            ->whereIn('uploadimagealable_id',[$activitycity->id])
-            ->where('uploadimagealable_type',activitycity::class)
+            ->whereIn('uploadimagealable_id',[$annoncelocation->id])
+            ->where('uploadimagealable_type',annoncelocation::class)
             ->orderByDesc('created_at')->distinct()->get());
 
         return response()->json($uploadimages,200);

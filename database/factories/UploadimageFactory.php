@@ -26,13 +26,16 @@ $factory->define(uploadimage::class, function (Faker $faker) {
 
     $servicemodel = collect([
         ['name' => 'App\Model\activitycity'],
+        ['name' => 'App\Model\annoncelocation'],
+        ['name' => 'App\Model\annoncereservation'],
+        ['name' => 'App\Model\annoncevente'],
     ]);
 
     return [
         'status' => $faker->boolean,
         'uploadimagealable_id' => mt_rand(1, 500),
         'uploadimagealable_type' => $servicemodel->shuffle()->first()['name'],
-        'name' => "https://dummyimage.com/wsvga/" . $backgroundColor . "/". $foregroundColor ."&text=" . $faker->word,
+        'photo' => "https://dummyimage.com/wsvga/" . $backgroundColor . "/". $foregroundColor ."&text=" . $faker->word,
         'created_at' => $faker->dateTime,
     ];
 });

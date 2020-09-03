@@ -253,6 +253,7 @@
                     });
                 });
             },
+
             getColorCardUser() {
                 return "card-header card-header-icon card-header-" + this.user.color_name;
             },

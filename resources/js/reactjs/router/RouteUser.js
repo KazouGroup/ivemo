@@ -196,11 +196,11 @@ const RouteUser = props => (
           <Route exact path="/annonce_reservation/:annoncetype/new/" component={AnnoncereservationCreate}/>
 
 
-          <Route exact path="/annonces_locations/:annoncetype/" component={AnnoncelocationIndex}/>
-          <Route exact path="/annonce_locations/:annoncetype/:city/" component={withRouter(Annoncelocationbyannoncetypebycity)}/>
-          <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/" component={withRouter(Annoncebycategoryannoncelocation)}/>
-          <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/" component={withRouter(Annoncelocationbycity)}/>
-          <Route exact path="/annonces_locations/:annoncetype/:categoryannoncelocation/:city/:user/:annoncelocation/" component={withRouter(Annoncelocationbycategorycityshow)}/>
+          <Route exact path="/als/:annoncetype/" component={AnnoncelocationIndex}/>
+          <Route exact path="/als/:annoncetype/:city/" component={withRouter(Annoncelocationbyannoncetypebycity)}/>
+          <Route exact path="/als/:annoncetype/:categoryannoncelocation/" component={withRouter(Annoncebycategoryannoncelocation)}/>
+          <Route exact path="/als/:annoncetype/:categoryannoncelocation/:city/" component={withRouter(Annoncelocationbycity)}/>
+          <Route exact path="/als/:annoncetype/:categoryannoncelocation/:city/:user/:annoncelocation/" component={withRouter(Annoncelocationbycategorycityshow)}/>
           <Route exact path="/annonce_location/:annoncetype/new/" component={AnnoncelocationCreate}/>
           <Route exact path="/annonce_location/:annoncetype/:annoncelocation/edit/" component={AnnoncelocationEdit}/>
 

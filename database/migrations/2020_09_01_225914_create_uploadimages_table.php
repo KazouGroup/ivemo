@@ -17,7 +17,7 @@ class CreateUploadimagesTable extends Migration
             $table->id();
             $table->string('uploadimagealable_type')->nullable();
             $table->unsignedBigInteger('uploadimagealable_id')->nullable();
-            $table->string('name')->nullable();
+            $table->string('photo')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

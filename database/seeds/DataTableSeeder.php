@@ -21,8 +21,8 @@ class DataTableSeeder extends Seeder
     public function run()
     {
 
-        factory(activitycity::class, 500)->create();
-        factory(uploadimage::class, 2500)->create();
+        //factory(activitycity::class, 500)->create();
+        //factory(uploadimage::class, 2500)->create();
         //factory(signal::class, 500)->create();
         //factory(comment::class, 200)->create();
         //factory(like::class, 3500)->create();

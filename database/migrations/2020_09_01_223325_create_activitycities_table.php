@@ -18,7 +18,7 @@ class CreateActivitycitiesTable extends Migration
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
             $table->string('slugin')->nullable();
-            $table->boolean('status')->default(false);
+            $table->boolean('status')->default(true);
             $table->boolean('status_comments')->default(false);
             $table->boolean('status_link_contact')->default(false);
             $table->longText('description')->nullable();
@@ -29,7 +29,9 @@ class CreateActivitycitiesTable extends Migration
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
 
             $table->unsignedBigInteger('user_id')->nullable()->index();
+            $table->unsignedBigInteger('member_id')->nullable()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('member_id')->references('id')->on('users')->onDelete('cascade');
 
         });
     }

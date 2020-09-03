@@ -248,6 +248,24 @@
                     </div>
                 </li>
                 <li class="nav-item ">
+                    <a class="nav-link" data-toggle="collapse" href="#activitycityExamples">
+                        <i class="material-icons">emoji_transportation</i>
+                        <p> Activity by city
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="activitycityExamples">
+                        <ul class="nav">
+                            <li class="nav-item ">
+                                <router-link class="nav-link" :to="{ name: 'activitycities.dashboard'}">
+                                    <span class="sidebar-mini"> ABC </span>
+                                    <span class="sidebar-normal"> Activities by city </span>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item ">
                     <a class="nav-link" data-toggle="collapse" href="#employementExamples">
                         <i class="material-icons">work</i>
                         <p> Employments & Trainings

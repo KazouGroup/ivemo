@@ -20,3 +20,4 @@ Route::get(
     'city/{city}/a/{activitycity:slug}',
     'ActivitycityController@activitycityshow'
 )->name('activitycity_show_site');
+

@@ -17,7 +17,7 @@ class ActivitycityInteresseList extends PureComponent {
                     <Fragment key={item.id} >
                         <LazyLoad>
                             <Link  to={`/city/${this.props.city.slug}/a/${this.props.slug}/`}>
-                                <img className="img img-raised rounded" alt={this.props.title} src={item.name}/>
+                                <img className="img img-raised rounded" alt={this.props.title} src={item.photo}/>
                             </Link>
                         </LazyLoad>
 

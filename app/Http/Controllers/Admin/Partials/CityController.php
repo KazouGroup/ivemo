@@ -40,6 +40,7 @@ class CityController extends Controller
             ->withCount('annoncereservations')
             ->withCount('annonceventes')
             ->withCount('employments')
+            ->withCount('activitycities')
             ->latest()->get());
 
         return response()->json($cities,200);

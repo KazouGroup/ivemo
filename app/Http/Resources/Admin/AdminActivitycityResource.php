@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Admin;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ActivitycityResource extends JsonResource
+class AdminActivitycityResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,14 +20,13 @@ class ActivitycityResource extends JsonResource
             'description' => $this->description,
             'slug' => $this->slug,
             'slugin' => $this->slugin,
-            'uploadimages' => $this->uploadimages()
-                ->where('status',1)->take(1)->get(),
+            'uploadimages' => $this->uploadimages()->get(),
+            'contactservices' => $this->contactservices()->get(),
             'likeked' => $this->likeked(),
             'countlikes' => $this->likes()->count(),
-            'countcomments' => $this->comments()
-                ->where('status',1)->count(),
-            'countuploadimages' => $this->uploadimages()
-                ->where('status',1)->count(),
+            'countcomments' => $this->comments()->count(),
+            'countcontactservices' => $this->contactservices()->where('status_red',0)->count(),
+            'countuploadimages' => $this->uploadimages()->count(),
             'status' => $this->status,
             'status_link_contact' => $this->status_link_contact,
             'status_comments' => $this->status_comments,

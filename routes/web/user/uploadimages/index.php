@@ -3,6 +3,7 @@
 Route::group(['namespace' => 'Uploadimages'], function(){
 
 
-    require(__DIR__ . DIRECTORY_SEPARATOR . 'activitycity.php');
+    require(__DIR__ . DIRECTORY_SEPARATOR . 'uploadimageactivitycity.php');
+    require(__DIR__ . DIRECTORY_SEPARATOR . 'uploadimageannoncelocation.php');
 
 });

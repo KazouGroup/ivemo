@@ -104,6 +104,12 @@ class annoncelocation extends Model
         return $this->morphMany(comment::class ,'commentable');
     }
 
+    public function uploadimages()
+    {
+        return $this->morphMany(uploadimage::class ,'uploadimagealable')
+            ->orderByDesc('created_at');
+    }
+
     public function signals()
     {
         return $this->morphMany(signal::class ,'signalable');
@@ -117,7 +123,7 @@ class annoncelocation extends Model
     public function likeked()
     {
         return (bool) like::where('user_id', Auth::guard('web')->id())
-            ->where(['likeable_type' => 'App\Model\annoncelocation',
+            ->where(['likeable_type' => annoncelocation::class,
                 'likeable_id' => $this->id ])
             ->first();
     }
@@ -130,7 +136,7 @@ class annoncelocation extends Model
     public function favoriteted()
     {
         return (bool) favorite::where('user_id', Auth::guard('web')->id())
-            ->where(['favoriteable_type' => 'App\Model\annoncelocation',
+            ->where(['favoriteable_type' => annoncelocation::class,
                 'favoriteable_id' => $this->id ])
             ->first();
     }

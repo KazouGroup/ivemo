@@ -75,6 +75,7 @@
                                             <th><b>AR</b></th>
                                             <th><b>AR</b></th>
                                             <th><b>EFS</b></th>
+                                            <th><b>ATC</b></th>
                                             <th v-if="$auth.can('manage-categories')" class="disabled-sorting text-right"><b>Actions</b></th>
                                         </tr>
                                         </thead>
@@ -87,6 +88,7 @@
                                             <th>AR</th>
                                             <th>AR</th>
                                             <th>EFS</th>
+                                            <th>ATC</th>
                                             <th v-if="$auth.can('manage-categories')" class="text-right">Actions</th>
                                         </tr>
                                         </tfoot>
@@ -104,6 +106,11 @@
                                             <td><b>{{item.annoncereservations_count}}</b></td>
                                             <td><b>{{item.annonceventes_count}}</b></td>
                                             <td><b>{{item.employments_count}}</b></td>
+                                            <td>
+                                                <router-link :to="{ name: 'activitycitiesbycity_dashboard.dashboard', params: { city: item.slug  } }">
+                                                    <b>{{item.activitycities_count}}</b>
+                                                </router-link>
+                                            </td>
                                             <td v-if="$auth.can('manage-categories')" class="text-right">
                                                 <template>
                                                     <button @click="disableItem(item.id)" v-if="item.status" type="button"
@@ -188,7 +195,7 @@
                                                                           @change="updateImage"
                                                                           type="file"
                                                                           class="form-control"
-                                                                          name="photo"/>
+                                                                          name="photo" accept="image/*"/>
                                                                </span>
                                                                         <a href="#pablo"
                                                                            class="btn btn-danger fileinput-exists"
@@ -264,7 +271,7 @@
     export default {
         components: {LoaderLdsDefault},
         data() {
-            document.title = `Dashboard Cities ${this.user.first_name || this.name_site} - ${this.name_site}`;
+            document.title = `Dashboard ${this.user.first_name || this.name_site} - ${this.name_site}`;
             return {
                 cities: {},
                 loaded: false,

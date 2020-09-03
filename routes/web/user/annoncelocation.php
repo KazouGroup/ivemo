@@ -3,7 +3,7 @@
 Route::group(['prefix' => 'api'], function () {
 
     Route::get(
-        'annonces_locations/{annoncetype}',
+        'al/{annoncetype}',
         'AnnoncelocationController@apiannoncelocationbyannoncetype'
     )->name('api.annoncelocationbyannoncetype_site');
 
@@ -13,7 +13,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.annoncelocationbycategoryannoncelocationscount_site');
 
     Route::get(
-        'annonces_locations/{annoncetype}/{categoryannoncelocation}',
+        'al/{annoncetype}/{categoryannoncelocation}',
         'AnnoncelocationController@apiannoncelocationbycategoryannoncelocation'
     )->name('api.annoncelocationbycategoryannoncelocations_site');
 
@@ -23,7 +23,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.annoncelocationbycitiescount_site');
 
     Route::get(
-        'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}',
+        'al/{annoncetype}/{categoryannoncelocation}/{city}',
         'AnnoncelocationController@apiannoncelocationbycity'
     )->name('api.annoncelocationbycities_site');
 
@@ -33,12 +33,12 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.annoncelocationsbyannoncetypebycitycount_site');
 
     Route::get(
-        'annonce_locations/{annoncetype}/{city}',
+        'al/{annoncetype}/{city}',
         'AnnoncelocationController@apiannoncelocationsbyannoncetypebycity'
     )->name('api.annoncelocationsbyannoncetypebycity_site');
 
     Route::get(
-        'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}/{user:slug}/{annoncelocation}',
+        'als/{annoncetype}/{categoryannoncelocation}/{city}/{user:slug}/{annoncelocation}',
         'AnnoncelocationController@apiannoncelocationbycategoryannoncelocationslug'
     )->name('api.annoncelocationbycategoryannoncelocationslug_site');
 
@@ -65,17 +65,17 @@ Route::group(['prefix' => 'api'], function () {
 });
 
 Route::get(
-    'annonces_locations/{annoncetype}',
+    'als/{annoncetype}',
     'AnnoncelocationController@index'
 )->name('annoncelocationbyannoncetypes_site');
 
 Route::get(
-    'annonce_locations/{annoncetype}/{city}',
+    'als/{annoncetype}/{city}',
     'AnnoncelocationController@annoncelocationsbyannoncetypebycity'
 )->name('annoncelocationsbyannoncetypebycity_site');
 
 Route::get(
-    'annonces_locations/{annoncetype}/{categoryannoncelocation}',
+    'als/{annoncetype}/{categoryannoncelocation}',
     'AnnoncelocationController@annoncelocationbycategoryannoncelocation'
 )->name('annoncelocationbycategoryannoncelocations_site');
 
@@ -85,12 +85,12 @@ Route::get(
 )->name('annonceslocationsbyuser_site');
 
 Route::get(
-    'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}',
+    'als/{annoncetype}/{categoryannoncelocation}/{city}',
     'AnnoncelocationController@annoncelocationnbycity'
 )->name('annoncelocationbycities_site');
 
 Route::get(
-    'annonces_locations/{annoncetype}/{categoryannoncelocation}/{city}/{user:slug}/{annoncelocation}',
+    'als/{annoncetype}/{categoryannoncelocation}/{city}/{user:slug}/{annoncelocation}',
     'AnnoncelocationController@annoncelocationbycategoryannoncelocationslug'
 )->name('annoncelocationbycategoryannoncereservationslug.site');
 

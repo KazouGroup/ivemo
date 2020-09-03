@@ -95,10 +95,12 @@ class ContactserviceController extends Controller
         return response('Success',Response::HTTP_ACCEPTED);
     }
 
+    /*
+     * Les permission ne sont pa trop obligatoire dans les action
+     */
 
     public function contactred(contactservice $contactservice)
     {
-        $this->authorize('update',$contactservice);
 
         $contactservice->update(['status_red' => 1,]);
 
@@ -107,8 +109,6 @@ class ContactserviceController extends Controller
 
     public function destroy(contactservice $contactservice)
     {
-        $this->authorize('update',$contactservice);
-
         $contactservice->delete();
 
         return ['message' => 'Deleted successfully'];
@@ -126,7 +126,7 @@ class ContactserviceController extends Controller
 
     public function rednotification(DatabaseNotification $notification)
     {
-        
+
         $notification->markAsRead();
 
         return ['message' => 'Message red successfully'];
