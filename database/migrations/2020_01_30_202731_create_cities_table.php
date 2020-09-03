@@ -17,6 +17,8 @@ class CreateCitiesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
+            $table->longText('description')->nullable();
+            $table->text('link_video')->nullable();
             $table->boolean('status')->default(false);
             $table->boolean('city_vip')->default(false);
             $table->string('photo')->nullable();
