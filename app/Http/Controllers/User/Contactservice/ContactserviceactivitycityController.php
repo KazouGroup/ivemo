@@ -40,7 +40,7 @@ class ContactserviceactivitycityController extends Controller
             'to_id' => $activitycity->user_id,
             'email' => $request->email,
             'phone' => $request->phone,
-            'from_id' => auth()->id(),
+            'from_id' => auth()->guest() ? null : auth()->id(),
             'slug' => sha1(('YmdHis') . str_random(30)),
             'ip' => request()->ip(),
             'message' => $request->message,

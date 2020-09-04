@@ -21,10 +21,10 @@ class contactservice extends Model
         return $this->belongsTo(user::class, 'to_id');
     }
 
-    public function contactserviceable()
-    {
-        return $this->belongsTo(employment::class);
-    }
+    //public function contactserviceable()
+    //{
+    //    return $this->belongsTo(annoncelocation::class);
+   // }
 
     protected $casts = [
         'status_red' => 'boolean',
@@ -33,8 +33,8 @@ class contactservice extends Model
     ];
 
 
-    //public function contactserviceable()
-    //{
-    //    return $this->morphTo();
-    //}
+    public function contactserviceable()
+    {
+        return $this->morphTo();
+    }
 }

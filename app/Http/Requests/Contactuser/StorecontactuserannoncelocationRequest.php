@@ -10,7 +10,7 @@ class StorecontactuserannoncelocationRequest extends BaseRequest
      */
     public function rules()
     {
-        return $this->getRules('sendcontactservicelocation');
+        return $this->getRules('sendcontactserviceannonce');
     }
 
 } // class

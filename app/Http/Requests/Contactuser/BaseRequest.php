@@ -18,15 +18,15 @@ class BaseRequest extends Request
     {
         if ($group === 'public_profile_send_message') {
             $rules = [
-                'full_name' => ['required', 'string','min:3','max:255'],
-                'message' => 'required',
-                'phone' => ['nullable', 'numeric'],
-                'email' => ['required', 'string', 'email','min:2', 'max:255'],
-                'subject' => ['required', 'string', 'max:255'],
+                'full_name' => 'required|string|min:3|max:200',
+                'message' => 'required|min:5|max:5000',
+                'phone' => 'nullable|numeric',
+                'subject' => 'required|string|min:3|max:200',
+                'email' => 'required|email|numeric|min:2|max:200',
             ];
         }elseif($group === 'sendcontactmessageuser') {
             $rules = [
-                'full_name' => ['required', 'string','min:3', 'max:255'],
+                'full_name' => ['required', 'string','min:3', 'max:200'],
                 'message' => 'required',
                 'phone' => ['nullable', 'numeric'],
                 'email' => ['required', 'string', 'email', 'max:255'],
@@ -58,16 +58,17 @@ class BaseRequest extends Request
             ];
         }elseif($group === 'sendcontactserviceannonce') {
             $rules = [
-                'full_name' => ['required', 'string','min:3','max:255'],
-                'email' => ['required', 'string', 'email','min:5','max:255'],
-                'phone' => ['required', 'numeric'],
-                'message' => ['required','min:10','max:5000'],
+                'full_name' => 'required|string|min:3|max:200',
+                'email' => 'required|string|email|min:5|max:200',
+                'phone' => 'required|numeric',
+                'subject' => 'required|string|min:3|max:200',
+                'message' => 'required|min:5|max:5000',
             ];
         }elseif($group === 'contactadmins') {
             $rules = [
-                'first_name' => ['required', 'string','min:3','max:255'],
-                'last_name' => ['required', 'string','min:3','max:255'],
-                'email' => ['required', 'string', 'email','min:2','max:255'],
+                'first_name' => ['required', 'string','min:3','max:200'],
+                'last_name' => ['required', 'string','min:3','max:200'],
+                'email' => ['required', 'string', 'email','min:2','max:200'],
                 'phone' => ['nullable', 'string','max:30'],
                 'subject' => ['required','string','min:2','max:255'],
                 'message' => 'required|min:5|max:5000',

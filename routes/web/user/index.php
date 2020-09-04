@@ -7,7 +7,6 @@ require(__DIR__ . DIRECTORY_SEPARATOR . 'annoncelocation.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'annoncevente.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'avisuser.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'contactuser.php');
-require(__DIR__ . DIRECTORY_SEPARATOR . 'contactuserslocaction.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'employment.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'page.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'profile.php');

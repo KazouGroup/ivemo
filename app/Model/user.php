@@ -195,6 +195,21 @@ class user extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(contactservice::class, 'to_id');
     }
 
+    public function contactservicesannoncelocations()
+    {
+        return $this->hasMany(contactservice::class, 'to_id');
+    }
+
+    public function contactservicesannonceventes()
+    {
+        return $this->hasMany(contactservice::class, 'to_id');
+    }
+
+    public function contactservicesannoncereservations()
+    {
+        return $this->hasMany(contactservice::class, 'to_id');
+    }
+
 
     public function subscriberusers()
     {

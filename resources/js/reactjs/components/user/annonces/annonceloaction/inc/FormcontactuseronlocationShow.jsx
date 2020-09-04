@@ -6,10 +6,10 @@ class FormcontactuseronlocationShow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
             full_name: '',
-            phone: '',
             subject: '',
+            email: '',
+            phone: '',
             message: '',
             errors: [],
         };
@@ -45,17 +45,18 @@ class FormcontactuseronlocationShow extends Component {
         e.preventDefault();
 
         let item = {
-            email: this.state.email,
             full_name: this.state.full_name,
-            phone: this.state.phone,
             subject: this.state.subject,
+            email: this.state.email,
+            phone: this.state.phone,
             message: this.state.message,
         };
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncelocation = this.props.match.params.categoryannoncelocation;
         let itemCity = this.props.match.params.city;
+        let itemuser = this.props.match.params.user;
         let itemannoncelocation = this.props.match.params.annoncelocation;
-        let url = route('annoncelocationsendcontactmessageuser_site', [itemannoncetype, itemCategoryannoncelocation, itemCity, itemannoncelocation]);
+        let url = route('annoncelocationsendcontactservice_site', [itemannoncetype,itemCategoryannoncelocation,itemCity,itemuser,itemannoncelocation]);
         dyaxios.post(url, item)
             .then(() => {
 
@@ -76,11 +77,11 @@ class FormcontactuseronlocationShow extends Component {
                     });
 
                 this.setState({
-                    email: "",
-                    full_name: "",
-                    phone: "",
-                    subject: "",
-                    message: "",
+                    full_name: '',
+                    subject: '',
+                    email: '',
+                    phone: '',
+                    message: '',
                 });
             }).catch(error => {
                 this.setState({
@@ -102,7 +103,7 @@ class FormcontactuseronlocationShow extends Component {
                                 <span className="input-group-text">
                                     <i className="now-ui-icons users_circle-08" /></span>
                             </div>
-                            <FieldInput name="full_name" type='text' minLength="4" maxLength="50" placeholder="Nom complet" value={this.state.full_name}
+                            <FieldInput name="full_name" type='text' minLength="5" maxLength="200" placeholder="Nom complet" value={this.state.full_name}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
                                         renderErrorFor={this.renderErrorFor}/>
@@ -128,7 +129,7 @@ class FormcontactuseronlocationShow extends Component {
                                 <span className="input-group-text">
                                     <i className="now-ui-icons tech_mobile" /></span>
                             </div>
-                            <FieldInput name="phone" type='number' minLength="3" maxLength="15" placeholder="Téléphone" value={this.state.phone}
+                            <FieldInput name="phone" type='number' minLength="3" maxLength="50" placeholder="Téléphone" value={this.state.phone}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
                                         renderErrorFor={this.renderErrorFor}/>
@@ -141,7 +142,7 @@ class FormcontactuseronlocationShow extends Component {
                                 <span className="input-group-text">
                                     <i className="now-ui-icons users_circle-08" /></span>
                             </div>
-                            <FieldInput name="subject" type='text' minLength="3" maxLength="200" placeholder="Object" value={this.state.subject}
+                            <FieldInput name="subject" type='text' minLength="5" maxLength="200" placeholder="Object" value={this.state.subject}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
                                         renderErrorFor={this.renderErrorFor}/>
@@ -150,24 +151,16 @@ class FormcontactuseronlocationShow extends Component {
                     <div className="row">
                         <div className="input-group">
 
-                            <FieldInput name="message" type='textarea' minLength="5" maxLength="5000" placeholder="Posez ici toutes vos questions !" value={this.state.message}
+                            <FieldInput name="message" type='textarea' minLength="10" maxLength="5000" placeholder="Posez ici toutes vos questions !" value={this.state.message}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
                                         renderErrorFor={this.renderErrorFor} rows="17"/>
                         </div>
                     </div>
                     <div className="submit text-center">
-                        {!$guest ?
-                            <>
-                                <button className="btn btn-primary btn-lg" type="submit">
-                                    <i className="now-ui-icons ui-1_email-85" /> Contacter
-                                </button>
-                            </>
-                            :
-                            <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="btn btn-primary btn-lg">
-                                <i className="now-ui-icons ui-1_email-85" /> Contacter
-                            </a>
-                        }
+                        <button className="btn btn-primary btn-lg" type="submit">
+                            <i className="now-ui-icons ui-1_email-85" /> Contacter
+                        </button>
                     </div>
                 </div>
             </form>

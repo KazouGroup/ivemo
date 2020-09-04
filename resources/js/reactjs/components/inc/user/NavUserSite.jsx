@@ -107,7 +107,10 @@ class NavUserSite extends PureComponent {
         const {contactusersprofile} = this.props;
         let unreadmailTotal = (
             contactusersprofile.contactusers_count +
-            contactusersprofile.contactservicesemployments_count
+            contactusersprofile.contactservicesemployments_count +
+            contactusersprofile.contactservicesannoncelocations_count +
+            contactusersprofile.contactservicesannonceventes_count +
+            contactusersprofile.contactservicesannoncereservations_count
         );
         let unreadnotificationsTotal = contactusersprofile.unread_notifications_count;
         return (
@@ -217,12 +220,28 @@ class NavUserSite extends PureComponent {
                                             <>
                                                 {$userIvemo.status_profile ?
                                                     <>
-                                                        <li className="nav-item">
-                                                            <NavLink to={`/profile/${$userIvemo.slug}/personal_mails/contacts/`} className="nav-link">
+                                                        <li className="nav-item dropdown">
+                                                            <a href="#" className="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                                                 <i className="now-ui-icons ui-1_email-85"/>
                                                                 <span className="notification"><b>{unreadmailTotal >= 1 &&(this.data_countnotificationFormatter(unreadmailTotal || ""))}</b></span>
-                                                            </NavLink>
+                                                            </a>
+                                                            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+
+                                                                <Link to={`/profile/${$userIvemo.slug}/personal_mails/contacts/`} className="dropdown-item">
+                                                                    {contactusersprofile.contactusers_count} Contact
+                                                                </Link>
+
+                                                                <Link to={`/profile/${$userIvemo.slug}/personal_mails/employments/`} className="dropdown-item">
+                                                                    {contactusersprofile.contactservicesemployments_count} Emplois & services
+                                                                </Link>
+
+                                                                <Link to={`/profile/${$userIvemo.slug}/personal_mails/als/`} className="dropdown-item">
+                                                                    {contactusersprofile.contactservicesannoncelocations_count} Locations
+                                                                </Link>
+
+                                                            </div>
                                                         </li>
+
                                                         <li className="nav-item">
                                                             <NavLink to={`/profile/${$userIvemo.slug}/notifications/`} className="nav-link">
                                                                 <i className="now-ui-icons ui-1_bell-53"/>

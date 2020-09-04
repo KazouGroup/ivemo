@@ -52,7 +52,7 @@ class ContactuserlocationNotification extends Notification implements ShouldQueu
             ->subject("Contact annonce en location sur ".config('app.name'))
             ->salutation('Cordiale')
             ->from($this->fromEmailUser,config('app.name'))
-            ->line($this->fromFullnameUser.' vous a contacté sur cette annonce ci-dessous posté en location sur la platforme - '.config('app.name'))
+            ->line($this->fromFullnameUser.' vous a contacté sur ce bien ci-dessous en location - '.config('app.name'))
             ->line('ID: '.$this->annoncelocation->id.' | Titre de l\'annonce: '.$this->annoncelocation->title.' | Prix: '.$this->annoncelocation->price.' | Ville: '.$this->annoncelocation->city->name.' | Categorie: '.$this->annoncelocation->categoryannoncelocation->name)
             ->line($this->fromMessageUser)
            // ->action('En savoir plus', url(route('personal_mails_annonces_locations.site',[$this->annoncelocation->user->slug])))

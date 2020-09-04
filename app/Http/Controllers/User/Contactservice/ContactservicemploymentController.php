@@ -69,7 +69,7 @@ class ContactservicemploymentController extends Controller
             'to_id' => $employment->user_id,
             'email' => $request->email,
             'phone' => $request->phone,
-            'from_id' => auth()->id(),
+            'from_id' => auth()->guest() ? null : auth()->id(),
             'slug' => sha1(('YmdHis') . str_random(30)),
             'ip' => request()->ip(),
             'message' => $request->message,
@@ -78,23 +78,6 @@ class ContactservicemploymentController extends Controller
         ContactusersemploymentService::newEmailToemploymentpageShow($request,$employment);
 
         return response()->json($contactservice,200);
-    }
-
-    public function apipersonalmessagesemployments(user $user)
-    {
-        $contactservices = HelpersService::helperscontactuserscount($user)
-            ->with(['contactservicesemployments' => function ($q) use ($user){
-                $q->with('to','from','contactserviceable')
-                    ->where('contactserviceable_type',employment::class)
-                    ->whereIn('to_id',[$user->id])
-                    ->whereHas('contactserviceable', function ($q) {
-                        $q->whereIn('user_id',[Auth::id()]);})
-                    ->latest()->distinct()->get()->toArray()
-                ;},
-            ])
-            ->first();
-
-        return response()->json($contactservices,200);
     }
 
     public function apicontactservice(user $user)

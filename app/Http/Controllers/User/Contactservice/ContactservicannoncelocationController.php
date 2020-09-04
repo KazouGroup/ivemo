@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ContactserviceemploymentExport;
 use App\Http\Resources\ContactserviceResource;
-use App\Services\Contactusers\ContactusersemploymentService;
 use App\Model\employment;
 use App\Model\contactservice;
 use Illuminate\Http\Request;
@@ -30,7 +29,9 @@ class ContactservicannoncelocationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except' => [
+            'sendcontactserviceannonce',
+        ]]);
     }
 
     public function contactservice(user $user)
@@ -40,7 +41,7 @@ class ContactservicannoncelocationController extends Controller
         return view('user.contactservice.index', compact('user'));
     }
 
-    public function personalmessagesemployments(user $user)
+    public function personalmessagesdatas(user $user)
     {
         $this->authorize('update',$user);
 
@@ -72,7 +73,7 @@ class ContactservicannoncelocationController extends Controller
             'to_id' => $annoncelocation->user_id,
             'email' => $request->email,
             'phone' => $request->phone,
-            'from_id' => auth()->id(),
+            'from_id' => auth()->guest() ? null : auth()->id(),
             'slug' => sha1(('YmdHis') . str_random(30)),
             'ip' => request()->ip(),
             'message' => $request->message,
@@ -83,22 +84,6 @@ class ContactservicannoncelocationController extends Controller
         return response()->json($contactservice,200);
     }
 
-    public function apipersonalmessagesemployments(user $user)
-    {
-        $contactservices = HelpersService::helperscontactuserscount($user)
-            ->with(['contactservicesemployments' => function ($q) use ($user){
-                $q->with('to','from','contactserviceable')
-                    ->where('contactserviceable_type',employment::class)
-                    ->whereIn('to_id',[$user->id])
-                    ->whereHas('contactserviceable', function ($q) {
-                        $q->whereIn('user_id',[Auth::id()]);})
-                    ->latest()->distinct()->get()->toArray()
-                ;},
-            ])
-            ->first();
-
-        return response()->json($contactservices,200);
-    }
 
     public function apicontactservice(user $user)
     {

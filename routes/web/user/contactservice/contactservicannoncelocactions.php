@@ -16,32 +16,32 @@ Route::group(['middleware' => 'verified'], function(){
 
 
         Route::get(
-            'profile/{user}/personal_mails/employments',
-            'ContactservicannoncelocationController@personalmessagesemployments'
+            'profile/{user}/personal_mails/als',
+            'ContactservicannoncelocationController@personalmessagesdatas'
         )->name('personal_mails_annoncelocations.site');
 
         Route::get(
-            'profile/{user}/personal_mails/employments/{contactservice:slug}',
+            'profile/{user}/personal_mails/als/{contactservice:slug}',
             'ContactservicannoncelocationController@personalmessages_show'
         )->name('personal_mails_annoncelocations_show.site');
 
         Route::get(
-            'profile/{user}/statistics/employments',
+            'profile/{user}/statistics/als',
             'ContactservicannoncelocationController@contactservice'
         )->name('contactservice_annoncelocations.site');
 
         Route::get(
-            'profile/{user}/statistics/employments/{employment:slugin}',
+            'profile/{user}/statistics/als/{employment:slugin}',
             'ContactservicannoncelocationController@contactservice_statistique'
         )->name('contactservice_annoncelocationsbyuserbystatistique_site');
 
         Route::get(
-            'profile/{user}/statistics/employments_export/{employment:slugin}',
+            'profile/{user}/statistics/als_export/{employment:slugin}',
             'ContactservicannoncelocationController@contactservice_export'
         )->name('contactservice_annoncelocationsbyuserbyexport_site');
 
         Route::get(
-            'profile/{user}/statistics/annoncelocations_contactservice_show/{contactservice:slug}',
+            'profile/{user}/statistics/als_contactservice_show/{contactservice:slug}',
             'ContactservicannoncelocationController@contactservice_statistiqueshow'
         )->name('contactservice_annoncelocationsbyuserbystatistiqueshow_site');
 
@@ -52,7 +52,7 @@ Route::group(['middleware' => 'verified'], function(){
 
 
             Route::get(
-                'profile/{user}/statistics/employments',
+                'profile/{user}/statistics/als',
                 'ContactservicannoncelocationController@apicontactservice'
             )->name('api.contactservice_employments_site');
 
@@ -62,7 +62,7 @@ Route::group(['middleware' => 'verified'], function(){
             )->name('api.contactservice_employmentsbyuserbystatistique_site');
 
             Route::get(
-                'profile/{user}/statistics/employments_contactservice_show/{contactservice:slug}',
+                'profile/{user}/statistics/als_contactservice_show/{contactservice:slug}',
                 'ContactservicannoncelocationController@apicontactservice_statistiqueshow'
             )->name('api.contactservice_employmentsbyuserbystatistiqueshow_site');
 

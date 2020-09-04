@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\User\Contactservice;
 
 use App\Http\Controllers\Controller;
+use App\Model\annoncelocation;
+use App\Model\annoncereservation;
+use App\Model\annoncevente;
 use App\Model\contactservice;
 use App\Model\employment;
 use App\Model\user;
@@ -40,8 +43,27 @@ class ContactserviceController extends Controller
                 $q->with('to','from','contactserviceable')
                     ->where('contactserviceable_type',employment::class)
                     ->whereIn('to_id',[$user->id])
-                    ->whereHas('contactserviceable', function ($q) {
-                        $q->whereIn('user_id',[Auth::id()]);})
+                    ->latest()->distinct()->get()->toArray()
+                ;},
+            ])
+            ->with(['contactservicesannoncelocations' => function ($q) use ($user){
+                $q->with('to','from','contactserviceable')
+                    ->where('contactserviceable_type',annoncelocation::class)
+                    ->whereIn('to_id',[$user->id])
+                    ->latest()->distinct()->get()->toArray()
+                ;},
+            ])
+            ->with(['contactservicesannonceventes' => function ($q) use ($user){
+                $q->with('to','from','contactserviceable')
+                    ->where('contactserviceable_type',annoncevente::class)
+                    ->whereIn('to_id',[$user->id])
+                    ->latest()->distinct()->get()->toArray()
+                ;},
+            ])
+            ->with(['contactservicesannoncereservations' => function ($q) use ($user){
+                $q->with('to','from','contactserviceable')
+                    ->where('contactserviceable_type',annoncereservation::class)
+                    ->whereIn('to_id',[$user->id])
                     ->latest()->distinct()->get()->toArray()
                 ;},
             ])

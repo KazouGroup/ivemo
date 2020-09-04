@@ -464,7 +464,10 @@ class ProfileAccountUser extends PureComponent {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <nav className="navbar navbar-expand-lg bg-danger">
+
+                                            {/*
+
+                                             <nav className="navbar navbar-expand-lg bg-danger">
                                                 <div className="container">
                                                     <div className="navbar-translate">
                                                         <div className="row">
@@ -485,6 +488,9 @@ class ProfileAccountUser extends PureComponent {
                                             <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
                                                 Supprimer Mon Profil
                                             </UncontrolledTooltip>
+
+                                            */}
+
                                         </div>
                                     </div>
                                 </form>

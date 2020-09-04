@@ -39,6 +39,14 @@ class NavlinkmailmessageUser extends Component {
                                     </td>
                                     <td> <span className="text-right">{this.props.contactservicesemployments_count} </span></td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        <NavLink to={`/profile/${this.props.slug}/personal_mails/als/`}>
+                                            <b>Contacts Locations</b>
+                                        </NavLink>
+                                    </td>
+                                    <td> <span className="text-right">{this.props.contactservicesannoncelocations_count} </span></td>
+                                </tr>
 
                                 <tr>
                                     <td>

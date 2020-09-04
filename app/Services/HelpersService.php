@@ -2,6 +2,8 @@
 namespace App\Services;
 
 use App\Model\annoncelocation;
+use App\Model\annoncereservation;
+use App\Model\annoncevente;
 use App\Model\employment;
 use App\Model\forum;
 use App\Model\user;
@@ -99,9 +101,25 @@ class HelpersService
                 $q->where(['status_red' => 0])
                     ->with('to','from','contactserviceable')
                     ->where('contactserviceable_type',employment::class)
-                    ->whereIn('to_id',[$user->id])
-                    ->whereHas('contactserviceable', function ($q) {
-                    $q->whereIn('user_id',[Auth::id()]);});
+                    ->whereIn('to_id',[$user->id]);
+                }])
+            ->withCount(['contactservicesannoncelocations' => function ($q) use ($user){
+                $q->where(['status_red' => 0])
+                    ->with('to','from','contactserviceable')
+                    ->where('contactserviceable_type',annoncelocation::class)
+                    ->whereIn('to_id',[$user->id]);
+                }])
+            ->withCount(['contactservicesannonceventes' => function ($q) use ($user){
+                $q->where(['status_red' => 0])
+                    ->with('to','from','contactserviceable')
+                    ->where('contactserviceable_type',annoncevente::class)
+                    ->whereIn('to_id',[$user->id]);
+                }])
+            ->withCount(['contactservicesannoncereservations' => function ($q) use ($user){
+                $q->where(['status_red' => 0])
+                    ->with('to','from','contactserviceable')
+                    ->where('contactserviceable_type',annoncereservation::class)
+                    ->whereIn('to_id',[$user->id]);
                 }]);
 
         return $data;

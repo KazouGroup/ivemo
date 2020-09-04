@@ -243,7 +243,7 @@ const RouteUser = props => (
           <Route exact path="/profile/change_password/" component={ProfileAccountChangePasswordUser}/>
           <Route exact path="/profile/:profile/account/" component={ProfileConfigUser}/>
 
-          <Route exact path="/profile/:user/personal_mails/annonces_locations/" component={withRouter(PersonalmessagesannonceslocationsUser)}/>
+          <Route exact path="/profile/:user/personal_mails/als/" component={withRouter(PersonalmessagesannonceslocationsUser)}/>
           <Route exact path="/profile/:user/personal_mails/annonces_locations/:contactuserslocation/" component={PersonalmessagesannonceslocationsShowUser}/>
 
 

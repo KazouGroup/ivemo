@@ -106,6 +106,12 @@ class annoncelocation extends Model
         return $this->morphMany(comment::class ,'commentable');
     }
 
+    public function contactservices()
+    {
+        return $this->morphMany(contactservice::class ,'contactserviceable')
+            ->orderByDesc('created_at');
+    }
+
     public function uploadimages()
     {
         return $this->morphMany(uploadimage::class ,'uploadimagealable')

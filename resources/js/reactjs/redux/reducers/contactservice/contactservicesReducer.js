@@ -5,7 +5,8 @@ const initialState = {
     contactservices: {
         contactusers: [],
         notifications: [],
-        contactservicesemployments: {to: [], from: [], contactserviceable: []}
+        contactservicesemployments: {to: [], from: [], contactserviceable: []},
+        contactservicesannoncelocations: {to: [], from: [], contactserviceable: []}
     },
 };
 
@@ -117,6 +118,50 @@ export default produce((draft, action = {}) => {
                 let datadelete = draft.contactservices.contactservicesemployments.findIndex(i => i.id === action.payload);
                 if (datadelete !== -1) draft.contactservices.contactservicesemployments.splice(datadelete, 1);
                 if (datadelete !== -1) draft.contactservices.contactservicesemployments_count--;
+                return draft;
+
+            /* *********End****** */
+
+            /* ********Init contactservice locations ****** */
+
+            case 'FAVORITE_CONTACTSERVICE_ANONCELOCATION_ADD':
+                draft.contactservices.contactservicesannoncelocations[
+                    draft.contactservices.contactservicesannoncelocations.findIndex(i => i.id === action.payload)
+                    ].status_favorite = action.payload;
+                return draft;
+
+            case 'FAVORITE_CONTACTSERVICE_ANONCELOCATION_REMOVE':
+                draft.contactservices.contactservicesannoncelocations[
+                    draft.contactservices.contactservicesannoncelocations.findIndex(i => i.id === action.payload)
+                    ].status_favorite = !action.payload;
+                return draft;
+
+            case 'ARCHVEMENT_CONTACTSERVICE_ANONCELOCATION_ADD':
+                let dataalsdd = draft.contactservices.contactservicesannoncelocations.findIndex(i => i.id === action.payload);
+                draft.contactservices.contactservicesannoncelocations[dataalsdd].status_archvement = action.payload;
+                return draft;
+
+            case 'ARCHVEMENT_CONTACTSERVICE_ANONCELOCATION_REMOVE':
+                let dataalsremove = draft.contactservices.contactservicesannoncelocations.findIndex(i => i.id === action.payload);
+                draft.contactservices.contactservicesannoncelocations[dataalsremove].status_archvement = !action.payload;
+                return draft;
+
+            case 'ACTIVE_CONTACTSERVICE_ANONCELOCATION_ADD':
+                let dataalsactive = draft.contactservices.contactservicesannoncelocations.findIndex(i => i.id === action.payload);
+                if (dataalsactive !== -1) draft.contactservices.contactservicesannoncelocations[dataalsactive].status_red = action.payload;
+                if (dataalsactive !== -1) draft.contactservices.contactservicesannoncelocations_count--;
+                return draft;
+
+            case 'ACTIVE_CONTACTSERVICE_ANONCELOCATION_REMOVE':
+                let dataalsremoveactive = draft.contactservices.contactservicesannoncelocations.findIndex(i => i.id === action.payload);
+                if (dataalsremoveactive !== -1) draft.contactservices.contactservicesannoncelocations[dataalsremoveactive].status_red = !action.payload;
+                if (dataalsremoveactive !== -1) draft.contactservices.contactservicesannoncelocations_count++;
+                return draft;
+
+            case 'DELETE_CONTACTSERVICE_ANONCELOCATION':
+                let dataalsdelete = draft.contactservices.contactservicesannoncelocations.findIndex(i => i.id === action.payload);
+                if (dataalsdelete !== -1) draft.contactservices.contactservicesannoncelocations.splice(dataalsdelete, 1);
+                if (dataalsdelete !== -1) draft.contactservices.contactservicesannoncelocations_count--;
                 return draft;
 
             /* *********End****** */
