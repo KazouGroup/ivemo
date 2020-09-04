@@ -1,16 +1,16 @@
 import React, {PureComponent, Fragment, Suspense} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {loadUploadimageActivitycities} from "../../../redux/actions/uploadimagesActions";
+import {loadUploadimageAnnoncelocations} from "../../../redux/actions/uploadimagesActions";
 import UploadimageListSkeleton from "../../inc/user/comment/UploadimageListSkeleton";
 import LazyLoad from "react-lazyload";
 import UploadimageList from "./inc/UploadimageList";
 
 
-class ActivitycityuploadimageIndex extends PureComponent {
+class AnnoncelocactionuploadimageIndex extends PureComponent {
 
     componentDidMount() {
-        this.props.loadUploadimageActivitycities(this.props);
+        this.props.loadUploadimageAnnoncelocations(this.props);
     }
 
     render() {
@@ -23,8 +23,8 @@ class ActivitycityuploadimageIndex extends PureComponent {
     }
 }
 
-ActivitycityuploadimageIndex.propTypes = {
-    loadUploadimageActivitycities: PropTypes.func.isRequired,
+AnnoncelocactionuploadimageIndex.propTypes = {
+    loadUploadimageAnnoncelocations: PropTypes.func.isRequired,
 };
 
 const mapStoreToProps = store => ({
@@ -32,5 +32,5 @@ const mapStoreToProps = store => ({
 
 });
 export default connect(mapStoreToProps, {
-    loadUploadimageActivitycities
-})(ActivitycityuploadimageIndex);
+    loadUploadimageAnnoncelocations
+})(AnnoncelocactionuploadimageIndex);

@@ -1,9 +1,12 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent,Fragment } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Remarkable } from 'remarkable';
 import { Button,UncontrolledTooltip } from "reactstrap";
 import moment from "moment";
 import Skeleton from "react-loading-skeleton";
+import UploadimageListSkeleton from "../../../../inc/user/comment/UploadimageListSkeleton";
+import LazyLoad from "react-lazyload";
+const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
 class AnnonceslocationList extends PureComponent {
@@ -13,7 +16,14 @@ class AnnonceslocationList extends PureComponent {
 
         return { __html: (this.props.description.length > 80 ? this.props.description.substring(0, 80) + "..." : this.props.description) };
     }
+    data_countuploadimageFormatter(countuploadimages, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countuploadimages)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (countuploadimages / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     render() {
+        let showlink = `/als/${this.props.annoncetype.slug}/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`;
         return (
 
             <>
@@ -22,28 +32,44 @@ class AnnonceslocationList extends PureComponent {
                         <div className="card card-plain card-blog">
                             <div className="row">
                                 <div className="col-md-5">
+
                                     <div className="card-image">
-                                        <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
-                                            <ol className="carousel-indicators">
-                                                <li data-target="#carouselAnnonceIndicators" data-slide-to="0" className=""></li>
-                                                <li data-target="#carouselAnnonceIndicators" data-slide-to="1" className=""></li>
-                                                <li data-target="#carouselAnnonceIndicators" data-slide-to="2" className="active"></li>
-                                            </ol>
-                                            <div className="carousel-inner" role="listbox">
-                                                <div className="carousel-item">
-                                                    <img className="d-block" src="/assets/vendor/assets/img/bg1.jpg" alt="First slide" />
-                                                </div>
-                                                <div className="carousel-item">
-                                                    <img className="d-block" src="/assets/vendor/assets/img/bg3.jpg" alt="Second slide" />
-                                                </div>
-                                                <div className="carousel-item active">
-                                                    <img className="d-block" src="/assets/vendor/assets/img/bg4.jpg" alt="Third slide" />
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {this.props.uploadimages < 1 ?
+                                            <>
+                                                <Link to={showlink}>
+                                                    <LazyLoad>
+                                                        <img className="img rounded"
+                                                             src={`/assets/vendor/assets/img/blurredimage1.jpg`} alt={this.props.title}/>
+                                                    </LazyLoad>
+                                                </Link>
+                                            </>
+                                            :
+                                            <>
+                                                {this.props.uploadimages.map((item,index) => (
+                                                    <Fragment key={item.id} >
+                                                        <Link to={showlink}>
+                                                            <LazyLoad>
+                                                                <img className="img rounded"
+                                                                     src={item.photo} alt={this.props.title}/>
+                                                            </LazyLoad>
+                                                        </Link>
+                                                    </Fragment>
+                                                ))}
+                                            </>
+                                        }
                                     </div>
 
                                     <div className="text-center">
+                                        <NavLink to={showlink} className="btn btn-dark btn-sm">
+                                            <i className="now-ui-icons media-1_album"></i>
+                                            <b>{this.data_countuploadimageFormatter(this.props.countuploadimages)}</b>
+                                        </NavLink>
+
+                                        {this.props.link_video && (
+                                            <NavLink to={showlink} className="btn btn-dark btn-sm">
+                                                <b>video</b>
+                                            </NavLink>
+                                        )}
 
                                         {!$guest && (
                                             <>
@@ -125,11 +151,11 @@ class AnnonceslocationList extends PureComponent {
                                         </div>
                                     </div>
                                     <h6 className="card-title">
-                                        <Link to={`/annonces_locations/${this.props.annoncetype.slug}/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`}>
+                                        <Link to={showlink}>
                                             {this.props.title.length > 90 ? this.props.title.substring(0, 90) + "..." : this.props.title}
                                         </Link>
                                     </h6>
-                                    <Link to={`/als/${this.props.annoncetype.slug}/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`}>
+                                    <Link to={showlink}>
                                         <span dangerouslySetInnerHTML={this.getDescription()}/>
                                     </Link>
                                     <div className="card-header d-flex align-items-center">
@@ -141,7 +167,8 @@ class AnnonceslocationList extends PureComponent {
                                                          alt={this.props.user.first_name}
                                                          className="avatar" />
                                                 </NavLink>
-                                                : <Skeleton circle={false} height={40} width={80} />}
+                                                :  <img className="avatar" style={{ height: "40px", width: "80px" }}
+                                                        src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
                                             <div className="mx-3">
                                                 <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
                                                     <small className="d-block text-muted"><b>{this.props.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(this.props.created_at).format('LL')}</b></small>

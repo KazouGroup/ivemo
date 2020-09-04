@@ -19,7 +19,10 @@ class CommentResource extends JsonResource
             'id' => $this->id,
             'statusOnline' => $this->isOnline(),
             'likeked' => $this->likeked(),
-            'likeked_count' => $this->likes(),
+            'likeked_count' => $this->likes()
+                ->whereIn('likeable_id',[$this->id])
+                ->where('likeable_type', comment::class)
+                ->count(),
             'user' => $this->user,
             'commentable' => $this->commentable,
             'commentable_type' => $this->commentable_type,

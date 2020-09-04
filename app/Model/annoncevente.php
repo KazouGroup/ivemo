@@ -89,6 +89,8 @@ class annoncevente extends Model
         return visits($this);
     }
 
+    public $dates = ['expired_at','created_at','updated_at'];
+    
     protected $casts = [
         'status' => 'boolean',
         'status_comments' => 'boolean',

@@ -122,6 +122,10 @@ class ActivitycityShowUserSite extends Component {
                                                 <div className="text-right ml-auto">
                                                     {activitycity.title ?
                                                         <>
+                                                            <Button className="btn btn-dark btn-sm">
+                                                                <i className="now-ui-icons media-1_album"></i>
+                                                                <b>{activitycity.countuploadimages || "0"}</b>
+                                                            </Button>
                                                             {$guest ?
                                                                 <>
                                                                     <Button data-toggle="modal" data-target="#loginModal"
@@ -209,7 +213,8 @@ class ActivitycityShowUserSite extends Component {
                                                                          alt={activitycity.city.name}
                                                                          className="avatar" />
                                                                 </NavLink>
-                                                                : <Skeleton circle={false} height={40} width={80} />}
+                                                                : <img className="avatar" style={{ height: "40px", width: "80px" }}
+                                                                       src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
 
                                                             {activitycity.title && (
                                                                 <>
@@ -344,7 +349,8 @@ class ActivitycityShowUserSite extends Component {
                                                                                  alt={activitycity.city.name}
                                                                                  className="avatar" />
                                                                         </NavLink>
-                                                                        : <Skeleton circle={false} height={40} width={80} />}
+                                                                        : <img className="avatar" style={{ height: "40px", width: "80px" }}
+                                                                               src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
 
                                                                     {activitycity.title && (
                                                                         <>

@@ -10,12 +10,14 @@ use Illuminate\Support\Str;
 
 class activitycity extends Model
 {
-    protected $fillable = ['description','slug','slugin','city_id','title','user_id','member_id','status'];
+    protected $fillable = ['description','link_video','slug','slugin','city_id','title','user_id','member_id','status'];
 
     protected $table = 'activitycities';
 
     protected $with = ['member'];
 
+    public $dates = ['expired_at','created_at','updated_at'];
+    
     protected $casts = [
         'status' => 'boolean',
         'status_comments' => 'boolean',

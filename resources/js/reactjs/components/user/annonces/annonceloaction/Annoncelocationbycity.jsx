@@ -120,7 +120,7 @@ class Annoncelocationbycity extends Component {
             });
         })
     }
-    
+
     contactUser(item) {
         $('#contactNew').modal('show');
         this.setState({
@@ -392,7 +392,7 @@ class Annoncelocationbycity extends Component {
                                                                                         {cityannoncelocations.map((item) => (
                                                                                             <tr key={item.id}>
                                                                                                 <td>
-                                                                                                    <NavLink to={`/annonces_locations/locations/${item.slug}/${annoncelocationbycity.slug}/`}>
+                                                                                                    <NavLink to={`/als/${this.props.match.params.annoncetype}/${item.slug}/${annoncelocationbycity.slug}/`}>
                                                                                                         locations <b style={{ textTransform: "lowercase" }}>{item.name}</b> à <b>{annoncelocationbycity.name}</b>
                                                                                                     </NavLink>
                                                                                                 </td>
@@ -408,6 +408,7 @@ class Annoncelocationbycity extends Component {
 
                                                             <Categoriesannoncereselocation />
 
+                                                            {/*
                                                             <div className="card card-plain">
                                                                 <div className="card-header" role="tab" id="headingAutre">
                                                                     <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseAutre" aria-expanded="false" aria-controls="collapseAutre">
@@ -436,6 +437,8 @@ class Annoncelocationbycity extends Component {
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            */}
+
                                                         </div>
                                                     </div>
                                                 </div>

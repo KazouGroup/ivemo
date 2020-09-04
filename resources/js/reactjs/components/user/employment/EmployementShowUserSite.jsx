@@ -372,8 +372,8 @@ class EmployementShowUserSite extends Component {
                                                                         className="avatar" />
                                                                </NavLink>
                                                            </>
-                                                            :  <img style={{ height: "40px", width: "80px" }} alt={employment.user.first_name}
-                                                                    src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>}
+                                                            :  <img className="avatar" style={{ height: "40px", width: "80px" }}
+                                                                    src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
 
                                                          {employment.title && (
                                                             <>

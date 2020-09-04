@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User\Comments;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Comment\CommentEmploymentResource;
+use App\Http\Resources\CommentResource;
 use App\Model\categoryemployment;
 use App\Model\city;
 use App\Model\comment;
@@ -29,7 +29,7 @@ class CommentemploymentController extends Controller
 
     public function getcomment(categoryemployment $categoryemployment,city $city,$user,employment $employment)
     {
-        $comments = CommentEmploymentResource::collection($employment->comments()
+        $comments = CommentResource::collection($employment->comments()
             ->with('user','commentable','responsecomments')
             ->whereIn('commentable_id',[$employment->id])
             ->where('commentable_type',employment::class)

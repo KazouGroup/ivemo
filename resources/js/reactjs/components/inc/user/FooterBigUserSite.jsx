@@ -18,7 +18,8 @@ const FooterBigUserSite = () =>  {
                             <div className="col-md-4">
                                 <div className="column">
                                     <Link to={'/'}>
-                                        <img src=".." className="logo" alt={$name_site} />
+                                        {/* <img src=".." className="logo" alt={$name_site} />*/}
+                                        <b>{$name_site}</b>
                                     </Link>
                                 </div>
                                 <div className="btn-wrapper profile text-left mt-3">

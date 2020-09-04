@@ -116,8 +116,8 @@ class NavUserSite extends PureComponent {
 
                 <div className="navbar-translate">
                     <Link to={'/'} className="navbar-brand" >
-                        <img src=".." />
-                        {$name_site}
+                        {/*<img src=".." />*/}
+                        <b>{$name_site}</b>
                     </Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-bar top-bar"></span>

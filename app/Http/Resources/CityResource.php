@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Model\city;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CityResource extends JsonResource
@@ -26,7 +27,10 @@ class CityResource extends JsonResource
             'description' => $this->description,
             'link_video' => $this->link_video,
             'likeked' => $this->likeked(),
-            'countlikes' => $this->likes()->count(),
+            'countlikes' => $this->likes()
+                ->whereIn('likeable_id',[$this->id])
+                ->where('likeable_type', city::class)
+                ->count(),
             'visits_count' => $this->visits()->count(),
             'visits_countries' => $this->visits()->countries(),
             'visits_languages' => $this->visits()->languages(),

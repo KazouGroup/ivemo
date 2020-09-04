@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 import AnnonceslocationList from "./inc/AnnonceslocationList";
 import Swal from "sweetalert2";
 import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
-import Categoriesannoncereselocationcity from "./inc/Categoriesannoncereselocationcity";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
 import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
 import Navlinknewannoncelocation from "./treatment/Navlinknewannoncelocation";
@@ -352,50 +351,6 @@ class Annoncelocationbyannoncetypebycity extends Component {
                                     <div className="col-lg-4 col-md-12 mx-auto">
                                         <div className="submit text-center">
                                             <Navlinknewannoncelocation {...this.props} />
-                                        </div>
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-
-                                                            <Categoriesannoncereselocationcity {...this.props} {...annoncelocationbycity} />
-
-                                                            {/*
-                                                              <div className="card card-plain">
-                                                                <div className="card-header" role="tab" id="headingAutre">
-                                                                    <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseAutre" aria-expanded="false" aria-controls="collapseAutre">
-                                                                        <b>Autres transactions </b>
-                                                                        <i className="now-ui-icons arrows-1_minimal-down"/>
-                                                                    </a>
-                                                                </div>
-                                                                <div id="collapseAutre" className="collapse" role="tabpanel" aria-labelledby="headingAutre">
-                                                                    <div className="card-body">
-                                                                        <table>
-                                                                            <tbody>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Toutes les ventes de maison Douala</a></td>
-                                                                                <td className="text-right"> 200 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Toutes les ventes de terrains Douala</a></td>
-                                                                                <td className="text-right"> 1 300 annonces</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> <a href="#pablo">Tous les achats de maison de prestige Douala</a></td>
-                                                                                <td className="text-right"> 380 annonces</td>
-                                                                            </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            */}
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
 
                                         <SectionLocationbyCity/>

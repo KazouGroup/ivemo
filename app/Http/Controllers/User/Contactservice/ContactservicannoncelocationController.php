@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\User\Contactservice;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Contactuser\StorecontactuserannoncelocationRequest;
 use App\Http\Resources\PrivateEmploymentResource;
-use App\Model\categoryemployment;
+use App\Model\annoncelocation;
+use App\Model\annoncetype;
+use App\Model\categoryannoncelocation;
 use App\Model\city;
 use App\Model\user;
+use App\Services\Contactusers\ContactuserslocationService;
 use App\Services\HelpersService;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -15,10 +19,9 @@ use App\Http\Resources\ContactserviceResource;
 use App\Services\Contactusers\ContactusersemploymentService;
 use App\Model\employment;
 use App\Model\contactservice;
-use App\Http\Requests\Contactuser\StorecontactuseremploymentRequest;
 use Illuminate\Http\Request;
 
-class ContactservicemploymentController extends Controller
+class ContactservicannoncelocationController extends Controller
 {
  /**
      * Create a new controller instance.
@@ -60,13 +63,13 @@ class ContactservicemploymentController extends Controller
         return view('user.contactservice.showcontact', compact('contactservice'));
     }
 
-    public function sendcontactservice(StorecontactuseremploymentRequest $request,categoryemployment $categoryemployment,city $city,employment $employment)
+    public function sendcontactserviceannonce(StorecontactuserannoncelocationRequest $request,annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$user,annoncelocation $annoncelocation)
     {
 
 
-        $contactservice = $employment->contactservices()->create([
+        $contactservice = $annoncelocation->contactservices()->create([
             'full_name' => $request->full_name,
-            'to_id' => $employment->user_id,
+            'to_id' => $annoncelocation->user_id,
             'email' => $request->email,
             'phone' => $request->phone,
             'from_id' => auth()->id(),
@@ -75,7 +78,7 @@ class ContactservicemploymentController extends Controller
             'message' => $request->message,
         ]);
 
-        ContactusersemploymentService::newEmailToemploymentpageShow($request,$employment);
+        ContactuserslocationService::newEmailToannoncelocationpageShow($request,$annoncelocation);
 
         return response()->json($contactservice,200);
     }

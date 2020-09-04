@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Model\annoncevente;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AnnonceventeResource extends JsonResource
@@ -22,6 +23,7 @@ class AnnonceventeResource extends JsonResource
             'description' => $this->description,
             'slug' => $this->slug,
             'slugin' => $this->slugin,
+            'link_video' => $this->link_video,
             'surface' => $this->surface,
             'rooms' => $this->rooms,
             'pieces' => $this->pieces,
@@ -38,6 +40,20 @@ class AnnonceventeResource extends JsonResource
             'status_admin' => $this->status_admin,
             'favoriteted' => $this->favoriteted(),
             'likeked' => $this->likeked(),
+            'countlikes' => $this->likes()
+                ->whereIn('likeable_id',[$this->id])
+                ->where('likeable_type', annoncevente::class)
+                ->count(),
+            'uploadimages' => $this->uploadimages()
+                ->where('status',1)
+                ->whereIn('uploadimagealable_id',[$this->id])
+                ->where('uploadimagealable_type', annoncevente::class)
+                ->take(1)->get(),
+            'countuploadimages' => $this->uploadimages()
+                ->where('status',1)
+                ->whereIn('uploadimagealable_id',[$this->id])
+                ->where('uploadimagealable_type', annoncevente::class)
+                ->count(),
             'countsignals' => $this->signals()->count(),
             'visits_count' => $this->visits()->count(),
             'visits_countries' => $this->visits()->countries(),
@@ -50,6 +66,7 @@ class AnnonceventeResource extends JsonResource
             'disponible_date' => (string) $this->disponible_date,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
+            'expired_at' => (string) $this->expired_at->diffInDays(),
         ];
     }
 }

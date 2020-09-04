@@ -68,7 +68,8 @@ class EmployementList extends PureComponent {
                                                      alt={this.props.user.first_name}
                                                      className="avatar" />
                                             </NavLink>
-                                            : <Skeleton circle={false} height={40} width={80} />}
+                                            : <img className="avatar" style={{ height: "40px", width: "80px" }}
+                                                   src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
                                         <div className="mx-3">
                                             <NavLink to={`/pro/${this.props.user.slug}/employments/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
                                                 <small className="d-block text-muted"><b> <i className="now-ui-icons tech_watch-time"/> {moment(this.props.created_at).format('ll')}</b></small>

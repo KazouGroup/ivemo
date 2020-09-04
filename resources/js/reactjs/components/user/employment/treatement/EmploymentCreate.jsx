@@ -254,7 +254,8 @@ class EmploymentCreate extends Component {
                                                                 <NavLink to={`/pro/${$userIvemo.slug}`}>
                                                                     <img src={$userIvemo.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
                                                                 </NavLink>
-                                                                :<Skeleton circle={false} height={40} width={80} />}
+                                                                :<img className="avatar" style={{ height: "40px", width: "80px" }}
+                                                                      src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
                                                             <div className="mx-3">
                                                                 <NavLink to={`/pro/${$userIvemo.slug}`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
                                                                     <small className="d-block text-muted"><b>{moment($userIvemo.created_at).format('LL')}</b></small>

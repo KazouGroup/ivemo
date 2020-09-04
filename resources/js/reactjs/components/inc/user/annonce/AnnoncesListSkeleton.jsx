@@ -14,7 +14,7 @@ function AnnoncesListSkeleton(props) {
                      <Row>
                          <div className="col-md-5">
 
-                             <Skeleton circle={false} height={179} width={245} />
+                             <Skeleton circle={false} height={179} width="100%" />
 
                          </div>
                          <div className="col-md-7">
@@ -54,7 +54,7 @@ function AnnoncesListSkeleton(props) {
                      <Row>
                          <div className="col-md-5">
 
-                             <Skeleton circle={false} height={179} width={245} />
+                             <Skeleton circle={false} height={179} width="100%" />
 
                          </div>
                          <div className="col-md-7">
@@ -94,7 +94,7 @@ function AnnoncesListSkeleton(props) {
                      <Row>
                          <div className="col-md-5">
 
-                             <Skeleton circle={false} height={179} width={245} />
+                             <Skeleton circle={false} height={179} width="100%" />
 
                          </div>
                          <div className="col-md-7">

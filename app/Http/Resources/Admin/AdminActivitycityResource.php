@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Admin;
 
+use App\Model\activitycity;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AdminActivitycityResource extends JsonResource
@@ -23,7 +24,10 @@ class AdminActivitycityResource extends JsonResource
             'uploadimages' => $this->uploadimages()->get(),
             'contactservices' => $this->contactservices()->get(),
             'likeked' => $this->likeked(),
-            'countlikes' => $this->likes()->count(),
+            'countlikes' => $this->likes()
+                ->whereIn('likeable_id',[$this->id])
+                ->where('likeable_type', activitycity::class)
+                ->count(),
             'countcomments' => $this->comments()->count(),
             'countcontactservices' => $this->contactservices()->where('status_red',0)->count(),
             'countuploadimages' => $this->uploadimages()->count(),
@@ -42,6 +46,7 @@ class AdminActivitycityResource extends JsonResource
             'city_id' => $this->city_id,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
+            'expired_at' => (string) $this->expired_at->diffInDays(),
         ];
     }
 }

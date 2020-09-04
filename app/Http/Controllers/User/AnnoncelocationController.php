@@ -107,22 +107,6 @@ class AnnoncelocationController extends Controller
         return response()->json($categoryannoncelocations, 200);
     }
 
-    public function apicategoryannoncelocationbycity(city $city)
-    {
-        $categoryannoncelocations = CategoryannoncelocationResource::collection(categoryannoncelocation::with('user')
-            ->where('status',1)
-            ->withCount(['annoncelocations' => function ($q) use ($city){
-                $q->where(['status' => 1,'status_admin' => 1])
-                    ->whereIn('city_id',[$city->id])
-                    ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
-                    ->whereHas('city', function ($q) {$q->where('status',1);});
-            }])
-            ->orderBy('annoncelocations_count','desc')
-            ->distinct()->get());
-
-        return response()->json($categoryannoncelocations, 200);
-    }
-
     public function apicategoryannoncelocations_by_user()
     {
         $categoryannoncelocations = CategoryannoncelocationResource::collection(categoryannoncelocation::with('user')
@@ -193,7 +177,7 @@ class AnnoncelocationController extends Controller
     {
         $annonceslocations = AnnoncelocationResource::collection($annoncetype->annoncelocations()
             ->whereIn('annoncetype_id',[$annoncetype->id])
-            ->with('user','categoryannoncelocation','city','annoncetype')
+            ->with('user','categoryannoncelocation','city','annoncetype','uploadimages')
             ->with(['user.profile' => function ($q){$q->distinct()->get();}])
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
@@ -251,7 +235,7 @@ class AnnoncelocationController extends Controller
             ->where('status',1)
             ->withCount(['annoncelocations' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->with('user','categoryannoncelocation','city','annoncetype')
+                    ->with('user','categoryannoncelocation','city','annoncetype','uploadimages')
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);});
             }])
@@ -282,7 +266,7 @@ class AnnoncelocationController extends Controller
      */
     public function apiannoncelocationinteressebycategoryannoncelocation(categoryannoncelocation $categoryannoncelocation)
     {
-        $annoncelocations = annoncelocation::with('user','city','annoncetype','categoryannoncelocation')
+        $annoncelocations = annoncelocation::with('user','city','annoncetype','categoryannoncelocation','uploadimages')
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
             ->WhereHas('city', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','desc')
@@ -302,7 +286,7 @@ class AnnoncelocationController extends Controller
     public function apiannoncelocationinteressebyuser(annoncetype $annoncetype,user $user)
     {
         $annoncelocations = AnnoncelocationResource::collection($user->annoncelocations()
-            ->with('user','city','annoncetype','categoryannoncelocation')
+            ->with('user','city','annoncetype','categoryannoncelocation','uploadimages')
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('user_id',[$user->id])
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
@@ -317,8 +301,9 @@ class AnnoncelocationController extends Controller
 
     public function apiannoncelocationinteresseslug(categoryannoncelocation $categoryannoncelocation)
     {
-        $annoncelocation = $categoryannoncelocation->annoncelocations()->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
-        ->with('user','city','annoncetype','categoryannoncelocation')
+        $annoncelocation = $categoryannoncelocation->annoncelocations()
+        ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
+        ->with('user','city','annoncetype','categoryannoncelocation','uploadimages')
         ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
         ->whereHas('city', function ($q) {$q->where('status',1);})
         ->orderByRaw('RAND()')

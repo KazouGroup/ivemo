@@ -3,6 +3,7 @@
 Route::group(['namespace' => 'Contactservice'], function(){
 
 
+    require(__DIR__ . DIRECTORY_SEPARATOR . 'contactservicannoncelocactions.php');
     require(__DIR__ . DIRECTORY_SEPARATOR . 'contactservices.php');
     require(__DIR__ . DIRECTORY_SEPARATOR . 'contactserviceactivitycity.php');
     require(__DIR__ . DIRECTORY_SEPARATOR . 'contactserviceannonceventes.php');

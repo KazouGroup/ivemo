@@ -14,7 +14,6 @@ class ContactuserlocationNotification extends Notification implements ShouldQueu
     protected $fromFullnameUser;
     protected $fromPhoneUser;
     protected $fromEmailUser;
-    protected $fromSubjectUser;
     protected $fromMessageUser;
     protected $annoncelocation;
 
@@ -23,16 +22,14 @@ class ContactuserlocationNotification extends Notification implements ShouldQueu
      * @param $fromFullnameUser
      * @param $fromPhoneUser
      * @param $fromEmailUser
-     * @param $fromSubjectUser
      * @param $fromMessageUser
      * @param $annoncelocation
      */
-    public function __construct($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$annoncelocation)
+    public function __construct($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromMessageUser,$annoncelocation)
     {
         $this->fromFullnameUser = $fromFullnameUser;
         $this->fromPhoneUser = $fromPhoneUser;
         $this->fromEmailUser = $fromEmailUser;
-        $this->fromSubjectUser = $fromSubjectUser;
         $this->fromMessageUser = $fromMessageUser;
         $this->annoncelocation = $annoncelocation;
     }
@@ -52,13 +49,13 @@ class ContactuserlocationNotification extends Notification implements ShouldQueu
     {
         return (new MailMessage)
             ->greeting('Salut '.$this->annoncelocation->user->first_name)
-            ->subject($this->fromSubjectUser)
+            ->subject("Contact annonce en location sur ".config('app.name'))
             ->salutation('Cordiale')
             ->from($this->fromEmailUser,config('app.name'))
-            ->line($this->fromFullnameUser.' vous a contacter sur un de vos bien mise en location sur la platforme - '.config('app.name'))
+            ->line($this->fromFullnameUser.' vous a contacté sur cette annonce ci-dessous posté en location sur la platforme - '.config('app.name'))
             ->line('ID: '.$this->annoncelocation->id.' | Titre de l\'annonce: '.$this->annoncelocation->title.' | Prix: '.$this->annoncelocation->price.' | Ville: '.$this->annoncelocation->city->name.' | Categorie: '.$this->annoncelocation->categoryannoncelocation->name)
             ->line($this->fromMessageUser)
-            ->action('En savoir plus', url(route('personal_mails_annonces_locations.site',[$this->annoncelocation->user->slug])))
+           // ->action('En savoir plus', url(route('personal_mails_annonces_locations.site',[$this->annoncelocation->user->slug])))
             ->line('Thank you for using our application!');
     }
 
@@ -68,7 +65,13 @@ class ContactuserlocationNotification extends Notification implements ShouldQueu
     public function toArray()
     {
         return [
-            //
+            'userToID' => $this->annoncelocation->id,
+            'userToTitle' => $this->annoncelocation->title,
+            'userToSlugCity' => $this->annoncelocation->city->slug,
+            'userToUserSlug' =>  $this->annoncelocation->user->slug,
+            'userToSlug' =>   $this->annoncelocation->slug,
+            'userFromName' => $this->fromFullnameUser,
+            'userFromBodyUser' => $this->fromMessageUser,
         ];
     }
 }

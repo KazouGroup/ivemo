@@ -56,6 +56,13 @@ class BaseRequest extends Request
                 'phone' => ['required', 'numeric'],
                 'message' => ['nullable','min:10','max:5000'],
             ];
+        }elseif($group === 'sendcontactserviceannonce') {
+            $rules = [
+                'full_name' => ['required', 'string','min:3','max:255'],
+                'email' => ['required', 'string', 'email','min:5','max:255'],
+                'phone' => ['required', 'numeric'],
+                'message' => ['required','min:10','max:5000'],
+            ];
         }elseif($group === 'contactadmins') {
             $rules = [
                 'first_name' => ['required', 'string','min:3','max:255'],

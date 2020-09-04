@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Model\annoncereservation;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AnnoncereservationResource extends JsonResource
@@ -21,6 +22,7 @@ class AnnoncereservationResource extends JsonResource
             'slugin' => $this->slugin,
             'district' => $this->district,
             'status' => $this->status,
+            'link_video' => $this->link_video,
             'status_comments' => $this->status_comments,
             'status_admin' => $this->status_admin,
             'description' => $this->description,
@@ -48,7 +50,20 @@ class AnnoncereservationResource extends JsonResource
             'favoriteted' => $this->favoriteted(),
             'countfavorites' => $this->favorites()->count(),
             'likeked' => $this->likeked(),
-            'countlikes' => $this->likes()->count(),
+            'countlikes' => $this->likes()
+                ->whereIn('likeable_id',[$this->id])
+                ->where('likeable_type', annoncereservation::class)
+                ->count(),
+            'uploadimages' => $this->uploadimages()
+                ->where('status',1)
+                ->whereIn('uploadimagealable_id',[$this->id])
+                ->where('uploadimagealable_type', annoncereservation::class)
+                ->take(1)->get(),
+            'countuploadimages' => $this->uploadimages()
+                ->where('status',1)
+                ->whereIn('uploadimagealable_id',[$this->id])
+                ->where('uploadimagealable_type', annoncereservation::class)
+                ->count(),
             'countsignals' => $this->signals()->count(),
             'visits_count' => $this->visits()->count(),
             'visits_countries' => $this->visits()->countries(),
@@ -62,6 +77,7 @@ class AnnoncereservationResource extends JsonResource
             'disponible_date' => (string) $this->disponible_date,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
+            'expired_at' => (string) $this->expired_at->diffInDays(),
         ];
     }
 }

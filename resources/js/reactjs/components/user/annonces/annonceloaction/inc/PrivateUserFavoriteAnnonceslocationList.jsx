@@ -43,7 +43,7 @@ class PrivateUserFavoriteAnnonceslocationList extends PureComponent {
                                 </div>
                                 <div className="col-md-7">
                                     <div className="text-left pull-left">
-                                        <NavLink to={`/annonces_locations/locations/${this.props.annoncelocation.categoryannoncelocation.slug}/`}>
+                                        <NavLink to={`/als/locations/${this.props.annoncelocation.categoryannoncelocation.slug}/`}>
                                             <h6 className={`text-${this.props.annoncelocation.categoryannoncelocation.color_name} ml-auto mr-auto`}>
                                                 {this.props.annoncelocation.categoryannoncelocation.name}
                                             </h6>
@@ -57,7 +57,7 @@ class PrivateUserFavoriteAnnonceslocationList extends PureComponent {
                                             <h6 className="text-dark">{this.props.annoncelocation.pieces > 0 ?<>{this.props.annoncelocation.pieces} p.</>:null } {this.props.annoncelocation.rooms > 0 ? <>{this.props.annoncelocation.rooms} ch.</>:null} {this.props.annoncelocation.surface > 0 ? <>{this.props.annoncelocation.surface} m<sup>2</sup></>:null}</h6>
                                         </div>
                                         <div className="col-md-7 col-6">
-                                            <NavLink to={`/annonces_locations/locations/${this.props.annoncelocation.categoryannoncelocation.slug}/${this.props.annoncelocation.city.slug}/`}>
+                                            <NavLink to={`/als/locations/${this.props.annoncelocation.categoryannoncelocation.slug}/${this.props.annoncelocation.city.slug}/`}>
                                             <span className="ml-auto mr-auto">
                                                 <strong>{this.props.annoncelocation.city.name} </strong>
                                             </span>
@@ -66,11 +66,11 @@ class PrivateUserFavoriteAnnonceslocationList extends PureComponent {
                                         </div>
                                     </div>
                                     <h6 className="card-title">
-                                        <Link to={`/annonces_locations/locations/${this.props.annoncelocation.categoryannoncelocation.slug}/${this.props.annoncelocation.city.slug}/${this.props.annoncelocation.slug}/`}>
+                                        <Link to={`/als/locations/${this.props.annoncelocation.categoryannoncelocation.slug}/${this.props.annoncelocation.city.slug}/${this.props.annoncelocation.slug}/`}>
                                             {this.props.annoncelocation.title.length > 90 ? this.props.annoncelocation.title.substring(0, 90) + "..." : this.props.annoncelocation.title}
                                         </Link>
                                     </h6>
-                                    <Link to={`/annonces_locations/locations/${this.props.annoncelocation.categoryannoncelocation.slug}/${this.props.annoncelocation.city.slug}/${this.props.annoncelocation.slug}/`}>
+                                    <Link to={`/als/locations/${this.props.annoncelocation.categoryannoncelocation.slug}/${this.props.annoncelocation.city.slug}/${this.props.annoncelocation.slug}/`}>
                                         <span dangerouslySetInnerHTML={this.getDescription()}/>
                                     </Link>
                                     <div className="card-header d-flex align-items-center">
@@ -82,7 +82,7 @@ class PrivateUserFavoriteAnnonceslocationList extends PureComponent {
                                                          alt={this.props.annoncelocation.user.first_name}
                                                          className="avatar" />
                                                 </NavLink>
-                                                : 
+                                                :
                                                 <Skeleton circle={false} height={40} width={80} />}
                                             <div className="mx-3">
                                                 <NavLink to={`/pro/${this.props.annoncelocation.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm">{this.props.annoncelocation.user.first_name}

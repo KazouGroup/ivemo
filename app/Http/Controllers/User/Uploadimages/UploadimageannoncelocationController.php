@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\User\Uploadimages;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Uploadimage\UploadimageActivitycityResource;
-use App\Http\Resources\Uploadimage\UploadimageAnnoncelocationResource;
+use App\Http\Resources\UploadimageResource;
 use App\Model\activitycity;
 use App\Model\annoncelocation;
 use App\Model\annoncetype;
@@ -33,7 +32,7 @@ class UploadimageannoncelocationController extends Controller
 
     public function getuploadimage(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$user,annoncelocation $annoncelocation)
     {
-        $uploadimages = UploadimageAnnoncelocationResource::collection($annoncelocation->uploadimages()
+        $uploadimages = UploadimageResource::collection($annoncelocation->uploadimages()
             ->where('status',1)
             ->whereIn('uploadimagealable_id',[$annoncelocation->id])
             ->where('uploadimagealable_type',annoncelocation::class)

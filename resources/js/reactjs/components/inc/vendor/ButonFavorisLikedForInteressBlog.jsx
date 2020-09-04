@@ -24,7 +24,7 @@ class ButonFavorisLikedForInteressBlog extends PureComponent {
                 <div className="author">
                     {this.props.user.avatar === null ?
                         <img className="avatar" alt={this.props.user.first_name}
-                             src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>
+                             src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
                         :
                         <img className="avatar" alt={this.props.user.first_name}
                              src={this.props.user.avatar}/>

@@ -38,9 +38,16 @@ class FormModalContactannonceUser extends PureComponent {
 
                                     <div className="row">
                                         <div className="d-flex align-items-center">
-                                            <a href={`/pro/${this.props.user.slug}/annonces_locations/`}>
-                                                <img src={this.props.user.avatar} style={{ height: "40px", width: "80px" }} alt={this.props.user.first_name} className="avatar" />
-                                            </a>
+                                            {this.props.user.avatar ?
+                                                <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`}>
+                                                    <img src={this.props.user.avatar}
+                                                         style={{ height: "40px", width: "80px" }}
+                                                         alt={this.props.user.first_name}
+                                                         className="avatar" />
+                                                </NavLink>
+                                                :  <img className="avatar" style={{ height: "40px", width: "80px" }}
+                                                        src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
+
                                             <div className="mx-3">
                                                 <a href={`/pro/${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm"><b>{this.props.user.first_name}</b>
                                                     <small className="d-block text-muted">{moment(this.props.user.created_at).format('LL')}</small>

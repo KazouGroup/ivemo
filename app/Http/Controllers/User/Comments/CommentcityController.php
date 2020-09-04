@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User\Comments;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Comment\CommentCityResource;
+use App\Http\Resources\CommentResource;
 use App\Model\city;
 use App\Model\comment;
 use App\Model\responsecomment;
@@ -27,7 +27,7 @@ class CommentcityController extends Controller
 
     public function getcomment(city $city)
     {
-        $comments = CommentCityResource::collection($city->comments()
+        $comments = CommentResource::collection($city->comments()
             ->with('user','commentable','responsecomments')
             ->whereIn('commentable_id',[$city->id])
             ->where('status',1)

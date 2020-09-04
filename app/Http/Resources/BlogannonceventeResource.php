@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Model\blogannoncevente;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BlogannonceventeResource extends JsonResource
@@ -30,7 +31,10 @@ class BlogannonceventeResource extends JsonResource
             'favoriteted' => $this->favoriteted(),
             'countfavorites' => $this->favorites()->count(),
             'likeked' => $this->likeked(),
-            'countlikes' => $this->likes()->count(),
+            'countlikes' => $this->likes()
+                ->whereIn('likeable_id',[$this->id])
+                ->where('likeable_type', blogannoncevente::class)
+                ->count(),
             'visits_count' => $this->visits()->count(),
             'visits_countries' => $this->visits()->countries(),
             'visits_languages' => $this->visits()->languages(),

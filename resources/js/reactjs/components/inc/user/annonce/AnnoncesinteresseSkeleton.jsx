@@ -14,7 +14,7 @@ function AnnoncesinteresseSkeleton(props) {
                      <div className="card card-plain card-blog">
                          <div className="row">
                              <div className="col-md-5">
-                                 <Skeleton circle={false} height={127} width={190} />
+                                 <Skeleton circle={false} height={127} width="100%" />
 
                                  <div className="text-center">
                                      <Skeleton width={35} />
@@ -54,7 +54,7 @@ function AnnoncesinteresseSkeleton(props) {
                      <div className="card card-plain card-blog">
                          <div className="row">
                              <div className="col-md-5">
-                                 <Skeleton circle={false} height={127} width={190} />
+                                 <Skeleton circle={false} height={127} width="100%" />
 
                                  <div className="text-center">
                                      <Skeleton width={35} />

@@ -320,7 +320,7 @@ class AnnoncelocationIndex extends Component {
 
                     <div className="wrapper">
                         <div className="page-header page-header-small">
-                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
+                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project21.jpg' + ")" }}>
                             </div>
                             <div className="content-center">
                                 <br />
@@ -334,7 +334,9 @@ class AnnoncelocationIndex extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="row">
+
+                                {/*
+                                   <div className="row">
                                     <div className="col-md-8 ml-auto mr-auto">
                                         <div className="card card-raised card-form-horizontal">
                                             <div className="card-body">
@@ -378,6 +380,8 @@ class AnnoncelocationIndex extends Component {
                                         </div>
                                     </div>
                                 </div>
+                                */}
+
                             </div>
                         </div>
 
@@ -423,11 +427,15 @@ class AnnoncelocationIndex extends Component {
                                         </div>
                                     </div>
 
-                                    <FormModalContactannonceUser {...this.props} {...annonceItem}
+                                    {/*
+                                        <FormModalContactannonceUser {...this.props} {...annonceItem}
                                         renderErrorFor={this.renderErrorFor}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
                                         sendmessageItem={this.sendmessageItem} />
+                                        
+                                    */}
+
 
                                 </div>
                             </div>

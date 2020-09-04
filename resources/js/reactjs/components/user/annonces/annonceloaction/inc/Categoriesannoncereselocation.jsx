@@ -30,7 +30,7 @@ class Categoriesannoncereselocation extends PureComponent {
                 return(
                     <tr key={item.id}>
                         <td>
-                            <NavLink to={`/annonces_locations/locations/${item.slug}/`}>
+                            <NavLink to={`/als/locations/${item.slug}/`}>
                                 Trouver un(e) <strong>{item.name}</strong> à louer
                             </NavLink>
                         </td>

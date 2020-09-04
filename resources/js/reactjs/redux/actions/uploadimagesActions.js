@@ -1,4 +1,5 @@
 import {
+    GET_UPLOADIMAGES_ANNONCELOCATION_SHOW_USER_SITE,
     GET_UPLOADIMAGES_ACTIVITYCITIES,
 } from "./types";
 
@@ -14,6 +15,22 @@ export const loadUploadimageActivitycities = (props) => dispatch => {
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_UPLOADIMAGES_ACTIVITYCITIES,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loadUploadimageAnnoncelocations = (props) => dispatch => {
+
+    let itemannoncetype = props.match.params.annoncetype;
+    let itemCategoryannoncelocation = props.match.params.categoryannoncelocation;
+    let itemCity = props.match.params.city;
+    let itemuser = props.match.params.user;
+    let itemannoncelocation = props.match.params.annoncelocation;
+    let url = route('api.annoncelocationgetuploadimage_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemuser,itemannoncelocation]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_UPLOADIMAGES_ANNONCELOCATION_SHOW_USER_SITE,
                 payload: response.data
             })
         ).catch(error => console.error(error));

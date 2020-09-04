@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User\Uploadimages;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Uploadimage\UploadimageActivitycityResource;
+use App\Http\Resources\UploadimageResource;
 use App\Model\activitycity;
 use App\Model\city;
 use File;
@@ -29,7 +29,7 @@ class UploadimageactivitycityController extends Controller
 
     public function getuploadimage(city $city,activitycity $activitycity)
     {
-        $uploadimages = UploadimageActivitycityResource::collection( $activitycity->uploadimages()
+        $uploadimages = UploadimageResource::collection( $activitycity->uploadimages()
             ->where('status',1)
             ->whereIn('uploadimagealable_id',[$activitycity->id])
             ->where('uploadimagealable_type',activitycity::class)

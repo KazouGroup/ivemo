@@ -18,6 +18,8 @@ class annoncelocation extends Model
 
     protected  $table = 'annoncelocations';
 
+    public $dates = ['expired_at','created_at','updated_at'];
+
     protected static function boot()
     {
         parent::boot();

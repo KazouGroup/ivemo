@@ -27,6 +27,7 @@ import {
 } from "../../../../redux/actions/annoncelocation/annoncelocationshowActions";
 import ButonFollowerUser from "../../../inc/vendor/follow/ButonFollowerUser";
 import ButonMiniSubscribedAllAnnonce from "../../../inc/vendor/ButonMiniSubscribedAllAnnonce";
+import AnnoncelocactionuploadimageIndex from "../../uploadimages/AnnoncelocactionuploadimageIndex";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -238,38 +239,40 @@ class Annoncelocationbycategorycityshow extends Component {
                                 <div className="row">
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="card-body">
-                                            <div className="submit text-left">
-                                                <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
-                                                    <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour au annonces </b>
-                                                </button>
-                                            </div>
+                                            <div className="d-flex align-items-center">
+                                                <div className="text-left pull-left">
+                                                    <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
+                                                        <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour au annonces </b>
+                                                    </button>
+                                                </div>
 
-                                            <div className="card-image">
-                                                <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
-                                                    <ol className="carousel-indicators">
-                                                        <li data-target="#carouselAnnonceIndicators" data-slide-to="0" className=""></li>
-                                                        <li data-target="#carouselAnnonceIndicators" data-slide-to="1" className=""></li>
-                                                        <li data-target="#carouselAnnonceIndicators" data-slide-to="2" className="active"></li>
-                                                    </ol>
-                                                    <div className="carousel-inner" role="listbox">
-                                                        <div className="carousel-item">
-                                                            <img className="d-block" src="/assets/vendor/assets/img/bg1.jpg" alt="First slide" />
-                                                        </div>
-                                                        <div className="carousel-item">
-                                                            <img className="d-block" src="/assets/vendor/assets/img/bg3.jpg" alt="Second slide" />
-                                                        </div>
-                                                        <div className="carousel-item active">
-                                                            <img className="d-block" src="/assets/vendor/assets/img/bg4.jpg" alt="Third slide" />
-                                                        </div>
-                                                    </div>
-                                                    <a className="carousel-control-prev" href="#carouselAnnonceIndicators" role="button" data-slide="prev">
-                                                        <i className="now-ui-icons arrows-1_minimal-left"></i>
-                                                    </a>
-                                                    <a className="carousel-control-next" href="#carouselAnnonceIndicators" role="button" data-slide="next">
-                                                        <i className="now-ui-icons arrows-1_minimal-right"></i>
-                                                    </a>
+                                                <div className="text-right ml-auto">
+                                                    {annoncelocation.title ?
+                                                            <>
+                                                                {annoncelocation.expired_at <= 6 && (
+                                                                    <Button className="btn btn-success btn-sm">
+                                                                        <b>New</b>
+                                                                    </Button>
+                                                                )}
+
+                                                                <Button className="btn btn-dark btn-sm">
+                                                                    <i className="now-ui-icons media-1_album"></i>
+                                                                    <b>{annoncelocation.countuploadimages || "0"}</b>
+                                                                </Button>
+                                                                {annoncelocation.link_video && (
+                                                                    <Button className="btn btn-dark btn-sm">
+                                                                        <b>video</b>
+                                                                    </Button>
+                                                                )}
+                                                            </>
+                                                        :
+                                                        <h5 className="text-dark"><b><Skeleton width={150} /></b></h5>
+                                                    }
                                                 </div>
                                             </div>
+
+                                            <AnnoncelocactionuploadimageIndex {...this.props}/>
+
                                             <br />
                                             <div className="d-flex align-items-center">
                                                 <div className="text-left pull-left">
@@ -402,7 +405,8 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                          alt={annoncelocation.user.first_name}
                                                                          className="avatar" />
                                                                 </NavLink>
-                                                                : <Skeleton circle={false} height={40} width={80} />}
+                                                                : <img className="avatar" style={{ height: "40px", width: "80px" }}
+                                                                       src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
 
                                                             {annoncelocation.title && (
                                                                 <>
@@ -623,7 +627,8 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                                  alt={annoncelocation.user.first_name}
                                                                                  className="avatar" />
                                                                         </NavLink>
-                                                                        : <Skeleton circle={false} height={40} width={80} />}
+                                                                        : <img className="avatar" style={{ height: "40px", width: "80px" }}
+                                                                               src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
 
                                                                     {annoncelocation.title && (
                                                                         <>
@@ -687,7 +692,10 @@ class Annoncelocationbycategorycityshow extends Component {
 
                                 <AnnoncelocationInteresse {...this.props}/>
 
-                                <BlogannoncelocationIntesseAnnonseShow {...this.props} />
+                                {/*
+                                 <BlogannoncelocationIntesseAnnonseShow {...this.props} />
+                                */}
+
 
                             </div>
                         </div>

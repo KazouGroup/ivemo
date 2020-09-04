@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Model\annoncelocation;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AnnoncelocationResource extends JsonResource
@@ -25,6 +26,7 @@ class AnnoncelocationResource extends JsonResource
             'pieces' => $this->pieces,
             'district' => $this->district,
             'price' => $this->price,
+            'link_video' => $this->link_video,
             'award_price' => $this->award_price,
             'user' => $this->user,
             'user_id' => $this->user_id,
@@ -37,6 +39,20 @@ class AnnoncelocationResource extends JsonResource
             'status_admin' => $this->status_admin,
             'favoriteted' => $this->favoriteted(),
             'likeked' => $this->likeked(),
+            'countlikes' => $this->likes()
+                ->whereIn('likeable_id',[$this->id])
+                ->where('likeable_type', annoncelocation::class)
+                ->count(),
+            'uploadimages' => $this->uploadimages()
+                ->where('status',1)
+                ->whereIn('uploadimagealable_id',[$this->id])
+                ->where('uploadimagealable_type', annoncelocation::class)
+                ->take(1)->get(),
+            'countuploadimages' => $this->uploadimages()
+                ->where('status',1)
+                ->whereIn('uploadimagealable_id',[$this->id])
+                ->where('uploadimagealable_type', annoncelocation::class)
+                ->count(),
             'countsignals' => $this->signals()->count(),
             'visits_count' => $this->visits()->count(),
             'visits_countries' => $this->visits()->countries(),
@@ -49,6 +65,7 @@ class AnnoncelocationResource extends JsonResource
             'disponible_date' => (string) $this->disponible_date,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
+            'expired_at' => (string) $this->expired_at->diffInDays(),
         ];
     }
 }

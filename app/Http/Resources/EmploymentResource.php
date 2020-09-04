@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Model\employment;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class EmploymentResource extends JsonResource
@@ -34,10 +35,14 @@ class EmploymentResource extends JsonResource
             'status_comments' => $this->status_comments,
             'status_admin' => $this->status_admin,
             'status_link_contact' => $this->status_link_contact,
+            'link_video' => $this->status_link_contact,
             'favoriteted' => $this->favoriteted(),
             'iscontactservice' => $this->iscontactservice(),
             'likeked' => $this->likeked(),
-            'countlikes' => $this->likes()->count(),
+            'countlikes' => $this->likes()
+                ->whereIn('likeable_id',[$this->id])
+                ->where('likeable_type', employment::class)
+                ->count(),
             'countsignals' => $this->signals()->count(),
             'visits_count' => $this->visits()->count(),
             'visits_countries' => $this->visits()->countries(),
@@ -47,6 +52,7 @@ class EmploymentResource extends JsonResource
             'categoryemployment' => $this->categoryemployment,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
+            'expired_at' => (string) $this->expired_at->diffInDays(),
         ];
     }
 }

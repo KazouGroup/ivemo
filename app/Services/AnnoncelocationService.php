@@ -29,7 +29,7 @@ class AnnoncelocationService
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);});
             }])->orderBy('annoncelocations_count','desc')
-            ->take(6)
+            ->take(8)
             ->distinct()->get();
 
         return $annoncesbycities;
@@ -44,7 +44,7 @@ class AnnoncelocationService
                     ->whereHas('city', function ($q) {$q->where('status',1);})
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);});
             }])->orderBy('annoncelocations_count','desc')
-            ->take(6)->distinct()->get();
+            ->take(8)->distinct()->get();
 
         return $annoncesbycities;
     }
@@ -55,7 +55,7 @@ class AnnoncelocationService
             ->where(['status' => 1])
             ->withCount([ 'annoncelocations' => function ($q) use ($annoncetype,$categoryannoncelocation){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->with('user','categoryannoncelocation','city','annoncetype')
+                    ->with('user','categoryannoncelocation','city','annoncetype','uploadimages')
                     ->whereIn('annoncetype_id',[$annoncetype->id])
                     ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
@@ -69,7 +69,7 @@ class AnnoncelocationService
     {
         $annoncesbycities = AnnoncelocationResource::collection($categoryannoncelocation->annoncelocations()
             ->where(['status' => 1,'status_admin' => 1])
-            ->with('user','categoryannoncelocation','city','annoncetype')
+            ->with('user','categoryannoncelocation','city','annoncetype','uploadimages')
             ->with(['user.profile' => function ($q){$q->distinct()->get();}])
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
@@ -86,7 +86,7 @@ class AnnoncelocationService
             ->where(['status' => 1])
             ->withCount(['annoncelocations' => function ($q) use ($annoncetype,$categoryannoncelocation,$city){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->with('user','categoryannoncelocation','city','annoncetype')
+                    ->with('user','categoryannoncelocation','city','annoncetype','uploadimages')
                     ->whereIn('annoncetype_id',[$annoncetype->id])
                     ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
                     ->whereIn('city_id',[$city->id])
@@ -101,7 +101,7 @@ class AnnoncelocationService
     {
         $annoncesbycities = AnnoncelocationResource::collection($city->annoncelocations()
             ->where(['status' => 1,'status_admin' => 1])
-            ->with('user','categoryannoncelocation','city','annoncetype')
+            ->with('user','categoryannoncelocation','city','annoncetype','uploadimages')
             ->with(['user.profile' => function ($q){$q->distinct()->get();}])
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
@@ -120,7 +120,7 @@ class AnnoncelocationService
             ->where(['status' => 1])
             ->withCount(['annoncelocations' => function ($q) use ($annoncetype,$city){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->with('user','categoryannoncelocation','city','annoncetype')
+                    ->with('user','categoryannoncelocation','city','annoncetype','uploadimages')
                     ->whereIn('annoncetype_id',[$annoncetype->id])
                     ->whereIn('city_id',[$city->id])
                     ->whereHas('city', function ($q) {$q->where('status',1);})
@@ -134,7 +134,7 @@ class AnnoncelocationService
     {
         $annoncesbycities = AnnoncelocationResource::collection($city->annoncelocations()
             ->where(['status' => 1,'status_admin' => 1])
-            ->with('user','categoryannoncelocation','city','annoncetype')
+            ->with('user','categoryannoncelocation','city','annoncetype','uploadimages')
             ->with(['user.profile' => function ($q){$q->distinct()->get();}])
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('city_id',[$city->id])
@@ -149,7 +149,7 @@ class AnnoncelocationService
     {
         $annonceslocations = HelpersService::helpersannonceteamcount($user)
             ->with(['annoncelocations' => function ($q) use ($user){
-                $q->with('user','categoryannoncelocation','city','annoncetype')
+                $q->with('user','categoryannoncelocation','city','annoncetype','uploadimages')
                     ->with(['user.profile' => function ($q){$q->distinct()->get();}])
                     ->whereIn('user_id',[$user->id])
                     ->whereHas('city', function ($q) {$q->where('status',1);})
@@ -165,6 +165,7 @@ class AnnoncelocationService
     {
         $annoncelocation = new AnnoncelocationResource(annoncelocation::whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('city_id',[$city->id])
+            ->with('user','categoryannoncelocation','city','annoncetype','uploadimages')
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
             ->where(['status' => 1,'status_admin' => 1])
             ->with(['user.profile' => function ($q){$q->distinct()->get();},])

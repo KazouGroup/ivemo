@@ -12,6 +12,7 @@ import {loadCityItemshow,likecityItem,unlikecityItem} from "../../../redux/actio
 import Skeleton from "react-loading-skeleton";
 import {Button} from "reactstrap";
 import ActivitycityInteresse from "./activitycity/ActivitycityInteresse";
+import NavannoncecategorySkeleton from "../../inc/user/NavannoncecategorySkeleton";
 
 
 class CityIndexSite extends Component {
@@ -123,9 +124,26 @@ class CityIndexSite extends Component {
                                                                     <div className="card-body">
                                                                         <table>
                                                                             <tbody>
-                                                                            <tr>
-                                                                                <td> <Link to={`/employment/${city.slug}/`} className="text-info" >Emplois & services</Link></td>
-                                                                            </tr>
+                                                                            {city.name ?
+                                                                                    <>
+                                                                                        <tr>
+                                                                                            <td> <Link to={`/al/locations/${city.slug}/`} className="text-info" >Location à {city.name}</Link></td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td> <Link to={`/employment/${city.slug}/`} className="text-info" >Emplois & services à {city.name}</Link></td>
+                                                                                        </tr>
+                                                                                    </>
+
+                                                                                :
+
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <strong><Skeleton width={200} count={5}/></strong>
+                                                                                    </td>
+                                                                                </tr>
+
+                                                                            }
+
                                                                             </tbody>
                                                                         </table>
                                                                     </div>

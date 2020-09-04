@@ -16,7 +16,6 @@ class ContactuserlocationJob implements ShouldQueue
     protected $fromFullnameUser;
     protected $fromPhoneUser;
     protected $fromEmailUser;
-    protected $fromSubjectUser;
     protected $fromMessageUser;
     protected $annoncelocation;
     /**
@@ -24,12 +23,11 @@ class ContactuserlocationJob implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$annoncelocation)
+    public function __construct($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromMessageUser,$annoncelocation)
     {
         $this->fromFullnameUser = $fromFullnameUser;
         $this->fromPhoneUser = $fromPhoneUser;
         $this->fromEmailUser = $fromEmailUser;
-        $this->fromSubjectUser = $fromSubjectUser;
         $this->fromMessageUser = $fromMessageUser;
         $this->annoncelocation = $annoncelocation;
 
@@ -47,7 +45,6 @@ class ContactuserlocationJob implements ShouldQueue
                 $this->fromFullnameUser,
                 $this->fromPhoneUser,
                 $this->fromEmailUser,
-                $this->fromSubjectUser,
                 $this->fromMessageUser,
                 $this->annoncelocation));
     }

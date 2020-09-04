@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User\Contactservice;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StorecontactRequest;
+use App\Http\Resources\ContactserviceResource;
 use App\Http\Resources\PrivateEmploymentResource;
 use App\Model\annoncetype;
 use App\Model\annoncevente;

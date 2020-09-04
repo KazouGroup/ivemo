@@ -386,7 +386,7 @@ class Annoncebycategoryannoncelocation extends Component {
                                                                                     {cityannoncelocations.map((item) => (
                                                                                     <tr key={item.id}>
                                                                                         <td>
-                                                                                            <NavLink to={`/annonces_locations/locations/${annoncelocationbycategory.slug}/${item.slug}/`}>
+                                                                                            <NavLink to={`/als/locations/${annoncelocationbycategory.slug}/${item.slug}/`}>
                                                                                                 locations <b style={{ textTransform: "lowercase" }}>{annoncelocationbycategory.name}</b> à <b>{item.name}</b>
                                                                                             </NavLink>
                                                                                         </td>

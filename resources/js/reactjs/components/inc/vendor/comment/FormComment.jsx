@@ -13,8 +13,8 @@ class FormComment extends Component {
                    <div className="media media-post">
                        <a className="pull-left" href="#">
                            <div className="author">
-                               <img className="avatar" alt="#"
-                                    src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>
+                               <img className="avatar"
+                                    src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
                            </div>
                        </a>
                        <div className="media-body">
@@ -56,7 +56,7 @@ class FormComment extends Component {
                            <div className="author">
                                {$userIvemo.avatar === null ?
                                    <img className="avatar" alt={$userIvemo.first_name}
-                                        src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>
+                                        src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
                                    :
                                    <img className="avatar" alt={$userIvemo.first_name}
                                         src={$userIvemo.avatar}/>
