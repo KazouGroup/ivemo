@@ -4,7 +4,9 @@ namespace App\Http\Controllers\User\Contactservice;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StorecontactuserannoncelocationRequest;
+use App\Http\Resources\AnnoncelocationResource;
 use App\Http\Resources\PrivateEmploymentResource;
+use App\Http\Resources\Profile\PrivateAnnoncelocationResource;
 use App\Model\annoncelocation;
 use App\Model\annoncetype;
 use App\Model\categoryannoncelocation;
@@ -89,27 +91,34 @@ class ContactservicannoncelocationController extends Controller
     {
         $this->authorize('update',$user);
 
-        $contactservices = $user->employments()
-        ->with('user','city','categoryemployment','member')
+        $contactservices = $user->annoncelocations()
+        ->with('user','city','annoncetype','categoryannoncelocation','uploadimages')
         ->whereIn('user_id',[$user->id])
         ->with(['user' => function ($q) {$q->with('profile')
             ->distinct()->get();}])
-        ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
+        ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
         ->whereHas('city', function ($q) {$q->where('status',1);})
+        ->with(['uploadimages' => function ($q) use ($user){
+            $q->where(['status' => 1])
+                ->get();
+        }])
+        ->withCount(['uploadimages' => function ($q) use ($user){
+            $q->where(['status' => 1]);
+        }])
         ->withCount(['contactservices' => function ($q) use ($user){
             $q->where(['status_red' => 0])->whereIn('to_id',[$user->id]);
         }])->orderBy('contactservices_count','desc')
         ->has('contactservices','>=',1)
-        //->having('contactservices_count', '>=', 1)
         ->distinct()->get();
 
         return response()->json($contactservices,200);
 
     }
 
-    public function apicontactservice_statistique(user $user, employment $employment)
+    public function apicontactservice_statistique(user $user, annoncelocation $annoncelocation)
     {
-        $contactservice = new PrivateEmploymentResource(employment::whereSlugin($employment->slugin)
+        $contactservice = new PrivateAnnoncelocationResource(annoncelocation::whereSlugin($annoncelocation->slugin)
+
             ->withCount(['contactservices' => function ($q) use ($user){
                 $q->where(['status_red' => 0])
                     ->with('to','from')
@@ -122,17 +131,17 @@ class ContactservicannoncelocationController extends Controller
                     ->distinct()->get()
                 ;},
             ])
-            ->with('user','city','categoryemployment','member')
-            ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
+            ->with('user','city','annoncetype','categoryannoncelocation','uploadimages')
+            ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->with(['user.profile' => function ($q){$q->distinct()->get();},])->first());
 
         return response()->json($contactservice,200);
     }
 
-    public function contactservice_export(user $user, employment $employment)
+    public function contactservice_export(user $user, annoncelocation $annoncelocation)
     {
-        return Excel::download(new ContactserviceemploymentExport($user,$employment), 'Infos-users.xlsx');
+        return Excel::download(new ContactserviceemploymentExport($user,$annoncelocation), 'Infos-users.xlsx');
     }
 
 
@@ -143,8 +152,9 @@ class ContactservicannoncelocationController extends Controller
         ->whereIn('to_id',[Auth::id()])
         ->with(['contactserviceable' => function ($q){
             $q->whereIn('user_id',[Auth::id()])
-            ->with('user','city','categoryemployment','member')
-            ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
+                ->withCount(['uploadimages'])
+            ->with('user','city','annoncetype','categoryannoncelocation','uploadimages')
+            ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->with(['user.profile' => function ($q){$q->distinct()->get();},]);},
         ])->first());

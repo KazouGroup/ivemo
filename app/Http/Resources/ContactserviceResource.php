@@ -27,6 +27,8 @@ class ContactserviceResource extends JsonResource
             'message' => $this->message,
             'contactserviceable' => $this->contactserviceable,
             'from' => $this->from,
+            'from_id' => $this->from_id,
+            'to_id' => $this->to_id,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
         ];

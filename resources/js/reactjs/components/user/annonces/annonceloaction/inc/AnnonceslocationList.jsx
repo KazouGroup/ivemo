@@ -91,13 +91,13 @@ class AnnonceslocationList extends PureComponent {
                                                             </>
                                                         }
 
-                                                        <NavLink to={`/annonce_location/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
+                                                        <NavLink to={`/al_data/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
                                                             <i className="now-ui-icons ui-2_settings-90"/>
                                                         </NavLink>
                                                         <Button
                                                             className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props.id)} title="Supprimer cette annonce">
                                                             <i className="now-ui-icons ui-1_simple-remove"/>
-                                                        </Button>{" "}
+                                                        </Button>
                                                     </>
                                                 )}
                                             </>
@@ -142,7 +142,7 @@ class AnnonceslocationList extends PureComponent {
                                             <h6 className="text-dark">{this.props.pieces > 0 ?<>{this.props.pieces} p.</>:null } {this.props.rooms > 0 ? <>{this.props.rooms} ch.</>:null} {this.props.surface > 0 ? <>{this.props.surface} m<sup>2</sup></>:null}</h6>
                                         </div>
                                         <div className="col-md-7 col-6">
-                                            <NavLink to={`/als/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/`}>
+                                            <NavLink to={`/als/${this.props.annoncetype.slug}/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/`}>
                                             <span className="ml-auto mr-auto">
                                                 <strong>{this.props.city.name} </strong>
                                             </span>

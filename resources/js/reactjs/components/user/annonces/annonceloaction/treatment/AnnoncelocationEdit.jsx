@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import moment from "moment";
 import Navlinknewannoncelocation from "./Navlinknewannoncelocation";
 import HelmetSite from "../../../../inc/user/HelmetSite";
+import FieldInput from "../../../../inc/vendor/FieldInput";
 
 
 class AnnoncelocationEdit extends Component {
@@ -35,7 +36,13 @@ class AnnoncelocationEdit extends Component {
             rooms: '',
             description: '',
             city_id: '',
+            slug:'',
+            link_video:'',
             categoryannoncelocation_id: '',
+            annoncetype: [],
+            categoryannoncelocation: [],
+            city: [],
+            user: [],
             errors: [],
             cities: [],
             categoryannoncelocations: [],
@@ -101,6 +108,7 @@ class AnnoncelocationEdit extends Component {
             rooms: this.state.rooms,
             pieces: this.state.pieces,
             price: this.state.price,
+            link_video: this.state.link_video,
             city_id: this.state.city_id,
             categoryannoncelocation_id: this.state.categoryannoncelocation_id,
         };
@@ -154,7 +162,8 @@ class AnnoncelocationEdit extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('blogannoncecategorylocationdelete_site',id);
+                let itemannoncetype = this.props.match.params.annoncetype;
+                const url = route('annonces_locations_delete.site',id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
                     /** Alert notify bootstrapp **/
@@ -175,7 +184,7 @@ class AnnoncelocationEdit extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.props.history.goBack();
+                    this.props.history.push(`/al_data/${itemannoncetype}/new/`);
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooops! Une erreur est survenue", {
@@ -193,7 +202,7 @@ class AnnoncelocationEdit extends Component {
 
     activeItem(id){
         //Envoyer la requet au server
-        let url = route('annonces_locations_active.site',[id]);
+        let url = route('annonces_locations_status.site',[id]);
         dyaxios.get(url).then(() => {
 
             /** Alert notify bootstrap **/
@@ -230,7 +239,7 @@ class AnnoncelocationEdit extends Component {
 
     unactiveItem(id){
         //Envoyer la requet au server
-        let url = route('annonces_locations_unactivated.site',[id]);
+        let url = route('annonces_locations_status.site',[id]);
         dyaxios.get(url).then(() => {
 
             /** Alert notify bootstrapp **/
@@ -282,7 +291,13 @@ class AnnoncelocationEdit extends Component {
                 rooms: response.data.rooms,
                 description: response.data.description,
                 city_id: response.data.city_id,
+                link_video: response.data.link_video,
+                slug: response.data.slug,
                 categoryannoncelocation_id: response.data.categoryannoncelocation_id,
+                annoncetype: response.data.annoncetype,
+                categoryannoncelocation: response.data.categoryannoncelocation,
+                city: response.data.city,
+                user: response.data.user,
             }));
     }
    // Lifecycle Component Method
@@ -311,56 +326,69 @@ class AnnoncelocationEdit extends Component {
                                 <br/>
                                 <Form role="form" id="contact-form" onSubmit={this.updateItem} acceptCharset="UTF-8">
                                     <div className="row">
-                                        <div className="col-lg-8 col-md-12 mx-auto">
-                                            <div className="submit text-left">
-                                                <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
-                                                    <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos annonces </b>
-                                                </button>
+                                        <div className="col-lg-9 mx-auto">
+                                            <div className="d-flex align-items-center">
+                                                <div className="d-flex align-items-center">
+                                                    <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
+                                                        <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos annonces </b>
+                                                    </button>
+                                                </div>
+                                                <div className="text-right ml-auto">
+                                                    <Navlinknewannoncelocation {...this.props} />
+                                                    {this.state.status && (
+                                                        <Link to={`/als/${this.state.annoncetype.slug}/${this.state.categoryannoncelocation.slug}/${this.state.city.slug}/${this.state.user.slug}/${this.state.slug}/`} className="btn btn-info">
+                                                            <b>Voir votre annonce</b>
+                                                        </Link>
+                                                    )}
+                                                </div>
                                             </div>
+
                                             <div className="card">
                                                 <div className="card-body">
                                                     <div className="card-header d-flex align-items-center">
                                                         <div className="d-flex align-items-center">
-                                                            <NavLink to={`/annonce/show/`}>
+                                                            {$userIvemo.avatar === null ?
+                                                                <img style={{height: "40px", width: "80px"}} alt={$userIvemo.first_name}
+                                                                     src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
+                                                                :
                                                                 <img src={$userIvemo.avatar}
                                                                      style={{height: "40px", width: "80px"}} alt={$userIvemo.first_name}
                                                                      className="avatar"/>
-                                                            </NavLink>
+                                                            }
                                                             <div className="mx-3">
-                                                                <NavLink to={`/annonce/show/`}
-                                                                         className="text-dark font-weight-600 text-sm">
+                                                                <span className="text-dark font-weight-600 text-sm">
                                                                     <b>{$userIvemo.first_name}</b>
                                                                     <small className="d-block text-muted">
                                                                         <b>{moment($userIvemo.created_at).format('LL')}</b>
                                                                     </small>
-                                                                </NavLink>
+                                                                </span>
                                                             </div>
                                                         </div>
                                                         <div className="text-right ml-auto">
                                                             {!this.state.status ?
-                                                                    <>
-                                                                        <Button onClick={() => this.activeItem(this.state.id)}
-                                                                                className="btn btn-primary btn-icon btn-sm" title="Annonce activé">
-                                                                            <i className="now-ui-icons ui-1_simple-delete"/>
-                                                                        </Button>
-                                                                    </>
-                                                                    :
-                                                                    <>
-                                                                        <Button onClick={() => this.unactiveItem(this.state.id)}
-                                                                                className="btn btn-success btn-icon btn-sm" title="Annonce déactivé">
-                                                                            <i className="now-ui-icons ui-1_check"/>
-                                                                        </Button>
-                                                                    </>
+                                                                <>
+                                                                    <Button onClick={() => this.activeItem(this.state.id)}
+                                                                            className="btn btn-primary btn-icon btn-sm" title="Annonce activé">
+                                                                        <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                    </Button>
+                                                                </>
+                                                                :
+                                                                <>
+                                                                    <Button onClick={() => this.unactiveItem(this.state.id)}
+                                                                            className="btn btn-success btn-icon btn-sm" title="Annonce déactivé">
+                                                                        <i className="now-ui-icons ui-1_check"/>
+                                                                    </Button>
+                                                                </>
 
-                                                                }
+                                                            }
                                                             <Button
                                                                 className="btn btn-sm btn-icon btn-danger" onClick={() => this.deleteItem(this.state.id)} title="Suprimer cette annonce">
                                                                 <i className="now-ui-icons ui-1_simple-remove"/>
-                                                            </Button>{" "}
+                                                            </Button>
                                                         </div>
                                                     </div>
                                                     <hr/>
-                                                    <div id="accordion" role="tablist" aria-multiselectable="true"
+                                                    <div id="accordion" role="tablist" aria-multiselectable="false"
                                                          className="card-collapse">
                                                         <div className="card card-plain">
                                                             <div className="card-header" role="tab" id="headingTypebien">
@@ -370,7 +398,7 @@ class AnnoncelocationEdit extends Component {
                                                                     <b>Type de bien </b>
                                                                 </a>
                                                             </div>
-                                                            <div id="collapseTypebien" className="collapse show"
+                                                            <div id="collapseTypebien" className="collapse"
                                                                  role="tabpanel" aria-labelledby="headingTypebien">
                                                                 <div className="card-body">
                                                                     <div className="row">
@@ -388,29 +416,41 @@ class AnnoncelocationEdit extends Component {
                                                                                         className="input-group-text"><i
                                                                                         className="now-ui-icons users_circle-08"></i></span>
                                                                                     </div>
-                                                                                    <Input id='title'
-                                                                                           type='text'
-                                                                                           className={`form-control ${this.hasErrorFor('title') ? 'is-invalid' : ''}`}
-                                                                                           name='title'
-                                                                                           placeholder="Titre du bien"
-                                                                                           aria-label="Title du bien"
-                                                                                           autoComplete="title"
-                                                                                           value={this.state.title}
-                                                                                           onChange={this.handleFieldChange}
-                                                                                    />
-                                                                                    {this.renderErrorFor('title')}
+                                                                                    <FieldInput name="title" type='text' minLength="5" maxLength="200" placeholder="Titre du bien" value={this.state.title}
+                                                                                                handleFieldChange={this.handleFieldChange}
+                                                                                                hasErrorFor={this.hasErrorFor}
+                                                                                                renderErrorFor={this.renderErrorFor} required="required"/>
                                                                                 </div>
 
                                                                                 <div className="row">
-                                                                                    <div className="col-md-4">
+
+                                                                                    <div className="col-md-6 ml-auto mr-auto">
+                                                                                        <label className="labels">
+                                                                                            Quel est le montant de votre bien ?
+                                                                                            <span className="text-danger">*</span>
+                                                                                        </label>
+                                                                                        <div className="input-group">
+                                                                                            <div className="input-group-prepend">
+                                                                                    <span
+                                                                                        className="input-group-text"><i
+                                                                                        className="now-ui-icons business_money-coins"></i></span>
+                                                                                            </div>
+                                                                                            <FieldInput name="price" type='number' placeholder="Motant de votre bien" value={this.state.price}
+                                                                                                        handleFieldChange={this.handleFieldChange}
+                                                                                                        hasErrorFor={this.hasErrorFor}
+                                                                                                        renderErrorFor={this.renderErrorFor} required="required"/>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div className="col-md-6">
                                                                                         <label className="labels">
                                                                                             Type de bien ?
                                                                                             <span className="text-danger">*</span>
                                                                                         </label>
                                                                                         <div className="form-group">
-                                                                                            <select name={'categoryannoncelocation_id'} value={this.state.categoryannoncelocation_id}
+                                                                                            <select name="categoryannoncelocation_id" value={this.state.categoryannoncelocation_id}
                                                                                                     className={`form-control`}
-                                                                                                    id="categoryannoncelocation_id" onChange={this.handleFieldChange}>
+                                                                                                    id="categoryannoncelocation_id" onChange={this.handleFieldChange} required="required">
                                                                                                 <option value="" disabled>Selectioner une category</option>
                                                                                                 {categoryannoncelocations.map((item) => (
                                                                                                     <option key={item.id} value={item.id}>{item.name}</option>
@@ -419,15 +459,20 @@ class AnnoncelocationEdit extends Component {
                                                                                             {this.renderErrorFor('categoryannoncelocation_id')}
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div className="col-md-4">
+
+                                                                                </div>
+
+                                                                                <div className="row">
+
+                                                                                    <div className="col-md-6">
                                                                                         <label className="labels">
                                                                                             Ville du bien ?
                                                                                             <span className="text-danger">*</span>
                                                                                         </label>
                                                                                         <div className="form-group">
-                                                                                            <select name={'city_id'} value={this.state.city_id}
+                                                                                            <select name="city_id" value={this.state.city_id}
                                                                                                     className={`form-control`}
-                                                                                                    id="city_id" onChange={this.handleFieldChange}>
+                                                                                                    id="city_id" onChange={this.handleFieldChange} required="required">
                                                                                                 <option value="" disabled>Selectioner une ville</option>
                                                                                                 {cities.map((item) => (
                                                                                                     <option key={item.id} value={item.id}>{item.name}</option>
@@ -437,26 +482,20 @@ class AnnoncelocationEdit extends Component {
                                                                                         </div>
                                                                                     </div>
                                                                                     <div
-                                                                                        className="col-md-4">
+                                                                                        className="col-md-6">
                                                                                         <label className="labels">
                                                                                             Localisation du bien?
                                                                                             <span className="text-danger">*</span>
                                                                                         </label>
                                                                                         <div className="form-group">
-                                                                                            <Input id='district'
-                                                                                                   type='text'
-                                                                                                   className={`form-control ${this.hasErrorFor('district') ? 'is-invalid' : ''}`}
-                                                                                                   name='district'
-                                                                                                   placeholder="Quartier"
-                                                                                                   aria-label="Quartier"
-                                                                                                   autoComplete="Quartier"
-                                                                                                   value={this.state.district}
-                                                                                                   onChange={this.handleFieldChange}
-                                                                                            />
-                                                                                            {this.renderErrorFor('district')}
+                                                                                            <FieldInput name="district" type='text' minLength="3" maxLength="200" placeholder="Quartier" value={this.state.district}
+                                                                                                        handleFieldChange={this.handleFieldChange}
+                                                                                                        hasErrorFor={this.hasErrorFor}
+                                                                                                        renderErrorFor={this.renderErrorFor} required="required"/>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -465,7 +504,7 @@ class AnnoncelocationEdit extends Component {
                                                         </div>
                                                     </div>
 
-                                                    <div id="accordion" role="tablist" aria-multiselectable="true"
+                                                    <div id="accordion" role="tablist" aria-multiselectable="false"
                                                          className="card-collapse">
                                                         <div className="card card-plain">
                                                             <div className="card-header" role="tab" id="headingOne">
@@ -476,7 +515,7 @@ class AnnoncelocationEdit extends Component {
                                                                         (Appartement,Maison,Terrain)</b>
                                                                 </a>
                                                             </div>
-                                                            <div id="collapseOne" className="collapse show" role="tabpanel"
+                                                            <div id="collapseOne" className="collapse" role="tabpanel"
                                                                  aria-labelledby="headingOne">
                                                                 <div className="card-body">
                                                                     <div className="row">
@@ -493,36 +532,21 @@ class AnnoncelocationEdit extends Component {
                                                                                             <span className="text-danger">*</span>
                                                                                         </label>
                                                                                         <div className="form-group">
-                                                                                            <Input id='surface'
-                                                                                                   type='number'
-                                                                                                   className={`form-control ${this.hasErrorFor('surface') ? 'is-invalid' : ''}`}
-                                                                                                   name='surface'
-                                                                                                   placeholder="Surface"
-                                                                                                   aria-label="Surface"
-                                                                                                   autoComplete="surface"
-                                                                                                   value={this.state.surface}
-                                                                                                   onChange={this.handleFieldChange}
-                                                                                            />
-                                                                                            {this.renderErrorFor('surface')}
+                                                                                            <FieldInput name="surface" type='number' placeholder="Surface" value={this.state.surface}
+                                                                                                        handleFieldChange={this.handleFieldChange}
+                                                                                                        hasErrorFor={this.hasErrorFor}
+                                                                                                        renderErrorFor={this.renderErrorFor} required="required"/>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div
-                                                                                        className="col-md-4 ml-auto mr-auto">
+                                                                                    <div className="col-md-4 ml-auto mr-auto">
                                                                                         <label htmlFor="pieces">
                                                                                             Pièces (optionnel)
                                                                                         </label>
                                                                                         <div className="form-group">
-                                                                                            <Input id='pieces'
-                                                                                                   type='number'
-                                                                                                   className={`form-control ${this.hasErrorFor('pieces') ? 'is-invalid' : ''}`}
-                                                                                                   name='pieces'
-                                                                                                   placeholder="Pièces"
-                                                                                                   aria-label="Pièces"
-                                                                                                   autoComplete="pieces"
-                                                                                                   value={this.state.pieces}
-                                                                                                   onChange={this.handleFieldChange}
-                                                                                            />
-                                                                                            {this.renderErrorFor('pieces')}
+                                                                                            <FieldInput name="pieces" type='number' placeholder="Pièces" value={this.state.pieces}
+                                                                                                        handleFieldChange={this.handleFieldChange}
+                                                                                                        hasErrorFor={this.hasErrorFor}
+                                                                                                        renderErrorFor={this.renderErrorFor} required="required"/>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div
@@ -530,17 +554,10 @@ class AnnoncelocationEdit extends Component {
                                                                                         <label htmlFor="Chambres">Chambres
                                                                                             (optionnel)</label>
                                                                                         <div className="form-group">
-                                                                                            <Input id='rooms'
-                                                                                                   type='number'
-                                                                                                   className={`form-control ${this.hasErrorFor('rooms') ? 'is-invalid' : ''}`}
-                                                                                                   name='rooms'
-                                                                                                   placeholder="Chambres"
-                                                                                                   aria-label="Chambres"
-                                                                                                   autoComplete="rooms"
-                                                                                                   value={this.state.rooms}
-                                                                                                   onChange={this.handleFieldChange}
-                                                                                            />
-                                                                                            {this.renderErrorFor('rooms')}
+                                                                                            <FieldInput name="rooms" type='number' placeholder="Chambres" value={this.state.rooms}
+                                                                                                        handleFieldChange={this.handleFieldChange}
+                                                                                                        hasErrorFor={this.hasErrorFor}
+                                                                                                        renderErrorFor={this.renderErrorFor} required="required"/>
                                                                                         </div>
                                                                                     </div>
                                                                                     <small>*optionnel: les champs ne sont
@@ -555,7 +572,7 @@ class AnnoncelocationEdit extends Component {
                                                         </div>
                                                     </div>
 
-                                                    <div id="accordion" role="tablist" aria-multiselectable="true"
+                                                    <div id="accordion" role="tablist" aria-multiselectable="false"
                                                          className="card-collapse">
                                                         <div className="card card-plain">
                                                             <div className="card-header" role="tab" id="headingDescription">
@@ -565,7 +582,7 @@ class AnnoncelocationEdit extends Component {
                                                                     <b>Description de l'annonce </b>
                                                                 </a>
                                                             </div>
-                                                            <div id="collapseDescription" className="collapse show"
+                                                            <div id="collapseDescription" className="collapse"
                                                                  role="tabpanel" aria-labelledby="headingDescription">
                                                                 <div className="card-body">
                                                                     <div className="row">
@@ -573,6 +590,24 @@ class AnnoncelocationEdit extends Component {
                                                                             <div id="accordion" role="tablist"
                                                                                  aria-multiselectable="true"
                                                                                  className="card-collapse">
+
+                                                                                {/*
+                                                                                   <label className="labels">
+                                                                                    Description du bien en video (optionnel)
+                                                                                </label>
+                                                                                <div className="input-group">
+                                                                                    <div className="input-group-prepend">
+                                                                                    <span
+                                                                                        className="input-group-text"><i
+                                                                                        className="now-ui-icons users_circle-08"></i></span>
+                                                                                    </div>
+                                                                                    <FieldInput name="link_video" type='text' minLength="5" maxLength="5000" placeholder="Description en video" value={this.state.link_video}
+                                                                                                handleFieldChange={this.handleFieldChange}
+                                                                                                hasErrorFor={this.hasErrorFor}
+                                                                                                renderErrorFor={this.renderErrorFor}/>
+                                                                                </div>
+
+                                                                                */}
 
                                                                                 <div className="form-group">
                                                                                     <label className="labels">
@@ -596,17 +631,19 @@ class AnnoncelocationEdit extends Component {
                                                     </div>
 
                                                     <div className="submit text-center">
-                                                        <button className="btn btn-secondary" type="button" onClick={this.props.history.goBack} title="Ne pas mettre à jour l'annonce">
-                                                             <b>Annuler</b>
+                                                        <button className="btn btn-secondary" type="button" onClick={this.props.history.goBack} title="Annuler">
+                                                            <b>Annuler</b>
                                                         </button>
                                                         <button className="btn btn-primary" type="submit" title="Mettre à jour l'annonce">
-                                                             <b>Poster votre annonce</b>
+                                                            <b>Mettre à jour votre annonce</b>
                                                         </button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
+
+                                        {/*
                                         <div className="col-lg-4 col-md-12 mx-auto">
                                             <div className="submit text-center">
                                                 <Navlinknewannoncelocation {...this.props} />
@@ -681,6 +718,7 @@ class AnnoncelocationEdit extends Component {
                                                 </div>
                                             </div>
                                         </div>
+                                        */}
                                     </div>
 
                                 </Form>

@@ -44,9 +44,8 @@ class PersonalmessagesannonceslocationsUser extends Component {
     readItem(item) {
         const url = route('contactservice_red', [item.id]);
         dyaxios.get(url).then(() => {
-            this.props.history.push(`/profile/${$userIvemo.slug}/statistics/employments_contactservice_show/${item.slug}/`);
+            this.props.history.push(`/profile/${$userIvemo.slug}/statistics/als_contactservice_show/${item.slug}/`);
         })
-
     }
 
     // Lifecycle Component Method

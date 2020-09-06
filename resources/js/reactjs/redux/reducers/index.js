@@ -21,6 +21,8 @@ import contactservicesReducer from "./contactservice/contactservicesReducer";
 import favoritesReducer from "./favoritesReducer";
 import pageReducer from "./pageReducer";
 import uploadimagesReducer from "./uploadimagesReducer";
+import contactserviceannoncelocationcontactshowReducer
+    from "./contactservice/annoncelocation/contactserviceannoncelocationcontactshowReducer";
 
 
 
@@ -46,5 +48,6 @@ export default combineReducers({
     profile: profileReducer,
     contactusers: contactservicesReducer,
     contactservicemploymentcontactshow: contactservicemploymentcontactshowReducer,
+    contactserviceannoncelocationcontactshow: contactserviceannoncelocationcontactshowReducer,
     contactservicemploymentshow: contactservicemploymentshowReducer,
 })

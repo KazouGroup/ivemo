@@ -17,28 +17,34 @@ import Navlinknewemployment from "../../../employment/treatement/Navlinknewemplo
 import Navemploymentsbyuser from "../../../employment/inc/Navemploymentsbyuser";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {loadContactserviceemploymentsredmessage,
-    favoriteaddItem,favoriteremoveItem,
-    archvementaddItem,archvementremoveItem,
+import {
+    loadContactserviceemploymentsredmessage,
+    loadAllcontactservices,
     activecontactaddItem,activecontactremoveItem,
     activeItem,unactiveprivateItem,
 } from "../../../../../redux/actions/contactserviceActions";
+import NavlinkmailmessageUser from "../../mail/inc/NavlinkmailmessageUser";
 
 
 class ContactserviceEmploymentContactShow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            //
+            showPhonenumber: false
         };
 
         this.deletecontactItem = this.deletecontactItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
 
+        this.showPhonenumberItem = this.showPhonenumberItem.bind(this);
+
     }
 
+    showPhonenumberItem() {
+        this.setState({showPhonenumber: true});
+    }
 
-    deletecontactItem(id){
+   deletecontactItem(id){
         Swal.fire({
             title: 'Confirmer la supression?',
             text: "êtes-vous sûr de vouloir executer cette action",
@@ -146,6 +152,7 @@ class ContactserviceEmploymentContactShow extends Component {
 
    loadItems(){
     this.props.loadContactserviceemploymentsredmessage(this.props);
+    //this.props.loadAllcontactservices(this.props);
    }
 
     componentDidMount() {
@@ -153,7 +160,7 @@ class ContactserviceEmploymentContactShow extends Component {
     }
 
     render() {
-        const {contactservice} = this.props;
+        const {contactservice,contactusersprofile} = this.props;
         return (
             <>
                 <HelmetSite title={`${contactservice.contactserviceable.title || $name_site} - ${$name_site}`}/>
@@ -185,7 +192,7 @@ class ContactserviceEmploymentContactShow extends Component {
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                            <Navemploymentsbyuser/>
+                                                            <NavlinkmailmessageUser {...this.props} {...contactusersprofile}/>
 
                                                         </div>
                                                     </div>
@@ -219,33 +226,47 @@ class ContactserviceEmploymentContactShow extends Component {
                                                     <div className="card-header d-flex align-items-center">
                                                         <div className="d-flex align-items-center">
 
-                                                            {contactservice.from.avatar === null ?
-                                                                <img className="avatar" alt={contactservice.from.first_name}
-                                                                     style={{ height: "35px", width: "35px", borderRadius:'35px' }}
-                                                                     src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>
+                                                            {contactservice.from_id === null ?
+                                                                <>
+                                                                    <img className="avatar" alt={contactservice.full_name}
+                                                                         style={{ height: "35px", width: "35px", borderRadius:'35px' }}
+                                                                         src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
+                                                                    <div className="mx-3">
+                                                                        {contactservice.full_name}
+                                                                    </div>
+                                                                </>
                                                                 :
-                                                                <img className="avatar"
-                                                                     style={{ height: "35px", width: "35px", borderRadius:'35px' }}
-                                                                     alt={contactservice.from.first_name}
-                                                                     src={contactservice.from.avatar}/>
+                                                                <>
+                                                                    <img className="avatar"
+                                                                         style={{ height: "35px", width: "35px", borderRadius:'35px' }}
+                                                                         alt={contactservice.from.first_name}
+                                                                         src={contactservice.from.avatar}/>
+                                                                    <div className="mx-3">
+                                                                        {contactservice.from.first_name}
+                                                                    </div>
+                                                                </>
                                                             }
-                                                            <div className="mx-3">
-                                                                {contactservice.from.first_name}
-                                                            </div>
                                                         </div>
                                                         <div className="text-right ml-auto">
-                                                            <h6 className="ml-auto mr-auto">
-                                                                <strong>{moment(contactservice.created_at).format('DD/MM/YYYY')}</strong>
+                                                            <span className="ml-auto mr-auto">
+                                                                {contactservice.slug && (
+                                                                    <>
+                                                                        {this.state.showPhonenumber ?
+                                                                                <b>{contactservice.phone !== null ? contactservice.phone : <>absent</>}</b>
+                                                                            :
+                                                                            <a style={{ cursor: "pointer" }} onClick={() => this.showPhonenumberItem()}>
+                                                                                Afficher le téléphone
+                                                                            </a>
+                                                                        }
+                                                                        - <strong>{moment(contactservice.created_at).format('DD/MM/YYYY')}</strong>
 
-                                                                <Buttonctionshowmailcontactservice {...contactservice} deletecontactItem={this.deletecontactItem}
-                                                                                                   favoriteaddItem={this.props.favoriteaddItem}
-                                                                                                   favoriteremoveItem={this.props.favoriteremoveItem}
-                                                                                                   archvementaddItem={this.props.archvementaddItem}
-                                                                                                   archvementremoveItem={this.props.archvementremoveItem}
-                                                                                                   activecontactaddItem={this.props.activecontactaddItem}
-                                                                                                   activecontactremoveItem={this.props.activecontactremoveItem}
-                                                                />
-                                                            </h6>
+                                                                        <Buttonctionshowmailcontactservice {...contactservice} deletecontactItem={this.deletecontactItem}
+                                                                                                           activecontactaddItem={this.props.activecontactaddItem}
+                                                                                                           activecontactremoveItem={this.props.activecontactremoveItem}
+                                                                        />
+                                                                    </>
+                                                                )}
+                                                            </span>
 
                                                         </div>
                                                     </div>
@@ -349,18 +370,21 @@ class ContactserviceEmploymentContactShow extends Component {
 
 ContactserviceEmploymentContactShow.propTypes = {
     loadContactserviceemploymentsredmessage: PropTypes.func.isRequired,
+    loadAllcontactservices: PropTypes.func.isRequired,
+
 };
 
 const mapStateToProps = state => ({
 
-    contactservice: state.contactservicemploymentcontactshow.item
+    contactservice: state.contactservicemploymentcontactshow.item,
+    contactusersprofile: state.contactusers.contactservices
+
 
 });
 
 export default connect(mapStateToProps, {
     loadContactserviceemploymentsredmessage,
-    favoriteaddItem,favoriteremoveItem,
-    archvementaddItem,archvementremoveItem,
+    loadAllcontactservices,
     activecontactaddItem,activecontactremoveItem,
     activeItem,unactiveprivateItem,
 })(ContactserviceEmploymentContactShow);

@@ -8,77 +8,93 @@ import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import moment from "moment";
 import FootermailmessageUser from "../inc/FootermailmessageUser";
 import Swal from "sweetalert2";
-import NavlinkmailmessageUserShow from "../inc/NavlinkmailmessageUserShow";
 import ReadMoreAndLess from "react-read-more-less";
 import Skeleton from "react-loading-skeleton";
-import ButtonctionshowmailmessageUser from "../inc/ButtonctionshowmailmessageUser";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
-import NavlinkmailmessagecontactonnocelocationUserShow from "../inc/NavlinkmailmessagecontactonnocelocationUserShow";
+import {connect} from "react-redux";
+import {
+    activecontactaddItem, activecontactremoveItem, activeaslItem,
+    archvementaddItem, archvementremoveItem,
+    favoriteaddItem, favoriteremoveItem,
+    loadContactserviceannoncelocationsredmessage,
+    loadAllcontactservices,
+    unactiveprivatealsItem
+} from "../../../../../redux/actions/contactserviceActions";
+import HelmetSite from "../../../../inc/user/HelmetSite";
+import PrivateUserAnnonceslocationList from "../../../annonces/annonceloaction/inc/PrivateUserAnnonceslocationList";
+import AnnoncesListOnSkeleton from "../../../../inc/user/annonce/AnnoncesListOnSkeleton";
+import NavlinkmailmessageUser from "../inc/NavlinkmailmessageUser";
+import Buttonctionshowmailcontactservice from "../../contactservices/inc/Buttonctionshowmailcontactservice";
 
 
 class PersonalmessagesannonceslocationsShowUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            contactuser:{annoncelocation:{categoryannoncelocation:[],city:[],user:[]}},
+            showPhonenumber: false
         };
 
+        this.deletecontactItem = this.deletecontactItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
-        this.archvementItem = this.archvementItem.bind(this);
-        this.unarchvementItem = this.unarchvementItem.bind(this);
-        this.activeItem = this.activeItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
-        this.favoriteItem = this.favoriteItem.bind(this);
-        this.unfavoriteItem = this.unfavoriteItem.bind(this);
+        this.showPhonenumberItem = this.showPhonenumberItem.bind(this);
+
     }
 
-    unfavoriteItem(id){
-        const url = route('personal_contactuserslocation_mails_unfavorite.site', [id]);
-        dyaxios.get(url).then(() => {
-            this.loadItem();
-        })
+    showPhonenumberItem() {
+        this.setState({showPhonenumber: true});
     }
 
-    favoriteItem(id){
-        const url = route('personal_contactuserslocation_mails_favorite.site', [id]);
-        dyaxios.get(url).then(() => {
-            this.loadItem();
-        })
-    }
+    deletecontactItem(id){
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes-vous sûr de vouloir executer cette action",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
 
-    activeItem(id) {
-        const url = route('personal_contactuserslocation_mails_active.site', [id]);
-        dyaxios.get(url).then(() => {
-            this.loadItem();
-        })
-    }
+                const url = route('contactservicedelete',[id]);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
 
-    unactiveItem(id) {
-        const url = route('personal_contactuserslocation_mails_unactive.site', [id]);
-        dyaxios.get(url).then(() => {
-            this.loadItem();
-        })
-    }
-
-    unarchvementItem(id){
-        const url = route('personal_contactuserslocation_mails_unarchvement.site', [id]);
-        dyaxios.get(url).then(() => {
-            this.loadItem();
-        })
-    }
-
-    archvementItem(id){
-        const url = route('personal_contactuserslocation_mails_archvement.site', [id]);
-        dyaxios.get(url).then(() => {
-            this.loadItem();
-        })
-    }
-
-    loadItem() {
-        let itemuser = this.props.match.params.user;
-        let itemcontactuserslocation = this.props.match.params.contactuserslocation;
-        let url = route('api.personal_mails_annonces_locations_show.site', [itemuser,itemcontactuserslocation]);
-        dyaxios.get(url).then(response => this.setState({ contactuser: response.data, }));
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update',
+                            message: 'Annonce suprimée avec success'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'primary',
+                            placement: {
+                                from: 'bottom',
+                                align: 'right'
+                            },
+                            animate: {
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
+                            },
+                        });
+                    /** End alert ***/
+                    this.props.history.goBack();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooop! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
     }
 
     deleteItem(id) {
@@ -96,14 +112,14 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('personal_annonces_locations_mails_delete.site',id);
+                const url = route('annonces_locations_delete.site',[id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Message suprimée avec success'
+                            message: 'Annonce suprimée avec success'
                         },
                         {
                             allow_dismiss: false,
@@ -118,8 +134,7 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.props.history.push(`/profile/${$userIvemo.slug}/personal_mails/annonces_locations/`);
-
+                    this.props.history.goBack();
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -135,21 +150,21 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
         });
     }
 
-
-   // Lifecycle Component Method
-    componentDidMount() {
-        window.scrollTo(0, 0)
-        this.loadItem();
-
+    loadItems(){
+        this.props.loadContactserviceannoncelocationsredmessage(this.props);
+        this.props.loadAllcontactservices(this.props);
     }
+
+    componentDidMount() {
+        this.loadItems();
+    }
+
     render() {
-        const {contactuser} = this.state;
+        const {contactservice,contactusersprofile} = this.props;
         return (
 
             <>
-                <Helmet>
-                    <title>{`${contactuser.subject || 'Messages contact annonces locations'}`} {`${$userIvemo.first_name}`} - {$name_site}</title>
-                </Helmet>
+              <HelmetSite title={`${contactservice.subject || 'Messages contact annonces locations'} ${$userIvemo.first_name} - ${$name_site}`} />
 
                 <div className="landing-page sidebar-collapse">
 
@@ -169,7 +184,20 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
-                                      <NavlinkmailmessagecontactonnocelocationUserShow/>
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+
+                                                            <NavlinkmailmessageUser {...this.props} {...contactusersprofile}/>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
 
                                     </div>
 
@@ -187,177 +215,112 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
                                             <div className="card-body">
                                                 <div className="card card-plain card-blog">
                                                     <div className="card-header d-flex align-items-center">
-                                                        <div className="text-left pull-left">
-                                                            <h5 className="ml-auto mr-auto">
-                                                                <b>{contactuser.subject}</b>
-                                                            </h5>
-                                                        </div>
-                                                        <div className="text-right ml-auto">
-                                                            <h6 className="ml-auto mr-auto">
-                                                                <strong>{moment(contactuser.created_at).format('DD/MM/YYYY')}</strong>
+                                                        <div className="d-flex align-items-center">
 
-                                                                <ButtonctionshowmailmessageUser {...contactuser} deleteItem={this.deleteItem}
-                                                                                                archvementItem={this.archvementItem} unarchvementItem={this.unarchvementItem}
-                                                                                                activeItem={this.activeItem} unactiveItem={this.unactiveItem}
-                                                                                                favoriteItem={this.favoriteItem} unfavoriteItem={this.unfavoriteItem}
-                                                                />
-                                                            </h6>
+                                                            {contactservice.from_id === null ?
+                                                                <>
+                                                                    <img className="avatar" alt={contactservice.full_name}
+                                                                         style={{ height: "35px", width: "35px", borderRadius:'35px' }}
+                                                                         src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
+                                                                    <div className="mx-3">
+                                                                        {contactservice.full_name}
+                                                                    </div>
+                                                                </>
+                                                                :
+                                                                <>
+                                                                <img className="avatar"
+                                                                     style={{ height: "35px", width: "35px", borderRadius:'35px' }}
+                                                                     alt={contactservice.from.first_name}
+                                                                     src={contactservice.from.avatar}/>
+                                                                    <div className="mx-3">
+                                                                        {contactservice.from.first_name}
+                                                                    </div>
+                                                                </>
+                                                            }
+                                                        </div>
+
+                                                        <div className="text-right ml-auto">
+                                                            {contactservice.slug && (
+                                                                <span className="ml-auto mr-auto">
+                                                                    {this.state.showPhonenumber ?
+                                                                        <b>{contactservice.phone !== null ? contactservice.phone : <>absent</>}</b>
+                                                                        :
+                                                                        <a style={{ cursor: "pointer" }} onClick={() => this.showPhonenumberItem()}>
+                                                                            Afficher le téléphone
+                                                                        </a>
+                                                                    } - <strong>{moment(contactservice.created_at).format('DD/MM/YYYY')}</strong>
+
+                                                                     <Buttonctionshowmailcontactservice {...contactservice} deletecontactItem={this.deletecontactItem}
+                                                                                                        activecontactaddItem={this.props.activecontactaddItem}
+                                                                                                        activecontactremoveItem={this.props.activecontactremoveItem}
+                                                                     />
+                                                            </span>
+                                                            )}
 
                                                         </div>
                                                     </div>
 
-                                                    <div className="card">
-                                                        <div className="card-body">
-                                                            <div className="card card-plain card-blog">
-                                                                <div className="row">
-                                                                    <div className="col-md-5">
-                                                                        <div className="card-image">
-                                                                            <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
-                                                                                <ol className="carousel-indicators">
-                                                                                    <li data-target="#carouselAnnonceIndicators" data-slide-to="0" className=""></li>
-                                                                                    <li data-target="#carouselAnnonceIndicators" data-slide-to="1" className=""></li>
-                                                                                    <li data-target="#carouselAnnonceIndicators" data-slide-to="2" className="active"></li>
-                                                                                </ol>
-                                                                                <div className="carousel-inner" role="listbox">
-                                                                                    <div className="carousel-item">
-                                                                                        <img className="d-block" src="/assets/vendor/assets/img/bg1.jpg" alt="First slide" />
-                                                                                    </div>
-                                                                                    <div className="carousel-item">
-                                                                                        <img className="d-block" src="/assets/vendor/assets/img/bg3.jpg" alt="Second slide" />
-                                                                                    </div>
-                                                                                    <div className="carousel-item active">
-                                                                                        <img className="d-block" src="/assets/vendor/assets/img/bg4.jpg" alt="Third slide" />
-                                                                                    </div>
-                                                                                </div>
+                                                    {contactservice.contactserviceable.title ?
 
-                                                                            </div>
-                                                                        </div>
+                                                        <PrivateUserAnnonceslocationList {...this.props} {...contactservice.contactserviceable} unactiveprivatealsItem={this.props.unactiveprivatealsItem} activeItem={this.props.activeItem} deleteItem={this.deleteItem} />
+                                                        :
+                                                        <AnnoncesListOnSkeleton />}
 
-                                                                        <div className="text-center">
-                                                                            {contactuser.annoncelocation.status ?
-                                                                                <>
-                                                                                    <button type="button" title={`Annonce visible`}
-                                                                                            className="btn btn-success btn-icon btn-sm">
-                                                                                        <i className="now-ui-icons ui-1_check"/>
-                                                                                    </button>
-                                                                                </>
-                                                                                :
-                                                                                <>
-                                                                                    <button type="button" title={`Annonce non visible`}
-                                                                                            className="btn btn-primary btn-icon btn-sm">
-                                                                                        <i className="now-ui-icons ui-1_simple-delete"/>
-                                                                                    </button>
-                                                                                </>
-                                                                            }
-                                                                        </div>
 
+
+                                                    {contactservice.message ?
+                                                        <>
+                                                            <div className="row">
+                                                                <div className="col-md-4">
+                                                                    <div className="form-group">
+                                                                        <input type="text" defaultValue={contactservice.full_name || ""} className="form-control"
+                                                                               placeholder="Name" />
                                                                     </div>
-                                                                    <div className="col-md-7">
-                                                                        <div className="card-header d-flex align-items-center">
-                                                                            <div className="text-left pull-left">
-                                                                                <NavLink to={`/annonces_locations/locations/${contactuser.annoncelocation.categoryannoncelocation.slug}/`}>
-                                                                                    <h6 className={`text-${contactuser.annoncelocation.categoryannoncelocation.color_name} ml-auto mr-auto`}>
-                                                                                        {contactuser.annoncelocation.categoryannoncelocation.name}
-                                                                                    </h6>
-                                                                                </NavLink>
-                                                                            </div>
-                                                                            <div className="text-right ml-auto">
-                                                                                <h5 className="text-success"><b>{contactuser.annoncelocation.price} <small>FCFA/mois</small></b></h5>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="row">
-                                                                            <div className="col-md-5 col-6">
-                                                                                <h6 className="text-dark">{contactuser.annoncelocation.pieces} p . {contactuser.annoncelocation.rooms && (<>{contactuser.annoncelocation.rooms} ch</>)}. {contactuser.annoncelocation.surface && (<>{contactuser.annoncelocation.surface} m<sup>2</sup></>)}</h6>
-                                                                            </div>
-                                                                            <div className="col-md-7 col-6">
-                                                                                <NavLink to={`/annonces_locations/locations/${contactuser.annoncelocation.categoryannoncelocation.slug}/${contactuser.annoncelocation.city.slug}/`}>
-                                                                                    <span className="ml-auto mr-auto">
-                                                                                        <strong>{contactuser.annoncelocation.city.name} </strong>
-                                                                                    </span>
-                                                                                </NavLink>
-                                                                                - {contactuser.annoncelocation.district}
-                                                                            </div>
+                                                                </div>
+                                                                <div className="col-md-4">
+                                                                    <div className="form-group">
+                                                                        <input type="email" defaultValue={contactservice.email || ""} className="form-control"
+                                                                               placeholder="Email" />
+                                                                    </div>
+                                                                </div>
 
-                                                                        </div>
-                                                                        <h6 className="card-title">
-                                                                            <Link to={`/annonces_locations/locations/${contactuser.annoncelocation.categoryannoncelocation.slug}/${contactuser.annoncelocation.city.slug}/${contactuser.annoncelocation.slug}/`} target="_blank">
-                                                                                {contactuser.annoncelocation.title}
-                                                                            </Link>
-                                                                        </h6>
-                                                                        <div className="card-header d-flex align-items-center">
-                                                                            <div className="d-flex align-items-center">
-                                                                                <NavLink to={`/po/${contactuser.annoncelocation.user.slug}/`}>
-                                                                                    <img src={contactuser.annoncelocation.user.avatar} style={{ height: "40px", width: "80px" }} alt="" className="avatar" />
-                                                                                </NavLink>
-                                                                                <div className="mx-3">
-                                                                                    <NavLink to={`/po/${contactuser.annoncelocation.user.slug}/`} className="text-dark font-weight-600 text-sm">{contactuser.annoncelocation.user.first_name}
-                                                                                        <small className="d-block text-muted"><b>{moment(contactuser.annoncelocation.created_at).format('LL')}</b></small>
-                                                                                    </NavLink>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div className="text-right mx-auto">
-
-                                                                                <UncontrolledTooltip placement="bottom" target="TooltipPhone">
-                                                                                    phone
-                                                                                </UncontrolledTooltip>
-                                                                                <Button className="btn btn-icon btn-sm btn-warning" id="TooltipPhone">
-                                                                                    <i className="now-ui-icons tech_mobile"/>
-                                                                                </Button>
-                                                                                <NavLink to={`/annonces_locations/locations/${contactuser.annoncelocation.categoryannoncelocation.slug}/${contactuser.annoncelocation.city.slug}/${contactuser.annoncelocation.slug}/`} className="btn btn-icon btn-sm btn-primary">
-                                                                                    <i className="now-ui-icons location_pin"/>
-                                                                                </NavLink>
-
-                                                                            </div>
-
-                                                                        </div>
+                                                                <div className="col-md-4">
+                                                                    <div className="form-group">
+                                                                        <input type="email" defaultValue={contactservice.phone || ""} className="form-control"
+                                                                               placeholder="Phone" />
                                                                     </div>
                                                                 </div>
                                                             </div>
 
-                                                        </div>
-                                                    </div>
+                                                            <div className="mb-2 text-justify">
 
-                                                    <div className="row">
-                                                        <div className="col-md-6">
-                                                            <div className="form-group">
-                                                                <input type="text" defaultValue={contactuser.full_name} className="form-control"
-                                                                    placeholder="Your Name" />
+                                                                <ReadMoreAndLess
+                                                                    className="read-more-content"
+                                                                    charLimit={300}
+                                                                    readMoreText="(Plus)"
+                                                                    readLessText=""
+                                                                >
+                                                                    {contactservice.message}
+                                                                </ReadMoreAndLess>
                                                             </div>
-                                                        </div>
-                                                        <div className="col-md-6">
-                                                            <div className="form-group">
-                                                                <input type="email" defaultValue={contactuser.email} className="form-control"
-                                                                    placeholder="Your email" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="mb-2 text-justify">
-                                                        {contactuser.message ?
-                                                            <ReadMoreAndLess
-                                                                className="read-more-content"
-                                                                charLimit={300}
-                                                                readMoreText="(Plus)"
-                                                                readLessText=""
-                                                            >
-                                                                {contactuser.message}
-                                                            </ReadMoreAndLess>: <Skeleton count={2}/>}
-                                                    </div>
+                                                        </>
+                                                        :
+                                                        <Skeleton count={2}/>
+                                                    }
                                                     <hr />
                                                     <div className="media-footer">
-                                                        <a href={`mailto:${contactuser.email}`} className="btn btn-primary pull-left" id="TooltipMail">
+                                                        <a href={`mailto:${contactservice.email}`} className="btn btn-primary pull-left" id="TooltipMail">
                                                             <i className="fas fa-reply-all"></i> Répondre
                                                         </a>
                                                         <UncontrolledTooltip placement="bottom" target="TooltipMail" delay={0}>
-                                                            Repondre à {contactuser.email}
+                                                            Repondre à {contactservice.email}
                                                         </UncontrolledTooltip>
-                                                        {contactuser.phone ?
-                                                            <a href={`tel:${contactuser.phone}`} rel="tooltip" title={contactuser.phone} data-placement="bottom" className="btn btn-success pull-left">
+                                                        {contactservice.phone ?
+                                                            <a href={`tel:${contactservice.phone}`} rel="tooltip" title={contactservice.phone} data-placement="bottom" className="btn btn-success pull-left">
                                                                 <i className="now-ui-icons tech_mobile" />
                                                                 Phone
                                                             </a>:null}
-                                                        <Button onClick={() => this.deleteItem(contactuser.id)} id="TooltipDelete"
+                                                        <Button onClick={() => this.deletecontactItem(contactservice.id)} id="TooltipDelete"
                                                                 className="btn btn-danger pull-left" title="Supprimer">
                                                             <i className="far fa-trash-alt"></i> Supprimer
                                                         </Button>
@@ -402,4 +365,24 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
         )
     }
 }
-export default PersonalmessagesannonceslocationsShowUser;
+
+PersonalmessagesannonceslocationsShowUser.propTypes = {
+    loadContactserviceannoncelocationsredmessage: PropTypes.func.isRequired,
+    loadAllcontactservices: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+
+    contactservice: state.contactserviceannoncelocationcontactshow.item,
+    contactusersprofile: state.contactusers.contactservices
+
+});
+
+export default connect(mapStateToProps, {
+    loadContactserviceannoncelocationsredmessage,
+    loadAllcontactservices,
+    favoriteaddItem,favoriteremoveItem,
+    archvementaddItem,archvementremoveItem,
+    activecontactaddItem,activecontactremoveItem,
+    activeaslItem,unactiveprivatealsItem,
+})(PersonalmessagesannonceslocationsShowUser);

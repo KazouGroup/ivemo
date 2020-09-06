@@ -77,7 +77,7 @@ class AnnoncelocationInteresseList extends Component {
                                                                     </button>
                                                                 </>
                                                             )}
-                                                            <NavLink to={`/annonce_location/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
+                                                            <NavLink to={`/al_data/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
                                                                 <i className="now-ui-icons ui-2_settings-90"/>
                                                             </NavLink>
                                                         </>

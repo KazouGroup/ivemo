@@ -115,46 +115,46 @@ Route::get(
 )->name('annoncelocationbycategoryannoncereservationslug.site');
 
 Route::get(
-    'annonces_locations_status/{id}',
+    'als_status/{id}/status',
     'AnnoncelocationController@statusitem'
 )->name('annonces_locations_status.site');
 
 Route::get(
-    'annoncelocations_active_comments/{annoncelocation:id}/active',
+    'als_active_comments/{annoncelocation:id}/active',
     'AnnoncelocationController@activecomments'
 )->name('annoncelocations_active_comments_site');
 
 Route::get(
-    'annoncelocations_active_comments/{annoncelocation:id}/desactive',
+    'als_active_comments/{annoncelocation:id}/desactive',
     'AnnoncelocationController@desactivecomments'
 )->name('annoncelocations_desactive_comments_site');
 
 Route::get(
-    'annonces_locations_admin_status/{id}',
+    'als_admin_status/{id}/admin_status',
     'AnnoncelocationController@adminstatusitem'
 )->name('annonces_locations_admin_status.dashboard');
 
 Route::delete(
-    'annonces_locations_delete/{id}',
+    'als_delete/{id}/delete',
     'AnnoncelocationController@destroy'
 )->name('annonces_locations_delete.site');
 
 Route::get(
-    'annonce_location/{annoncetype}/{annoncelocation:slugin}/edit',
+    'al_data/{annoncetype}/{annoncelocation:slugin}/edit',
     'AnnoncelocationController@edit'
 )->name('annoncelocationsedit_site');
 
 Route::put(
-    'annonce_location/{annoncetype}/{annoncelocation:slugin}',
+    'al/{annoncetype}/{annoncelocation:slugin}',
     'AnnoncelocationController@update'
 )->name('annoncelocationsupdate_site');
 
 Route::get(
-    'annonce_location/{annoncetype}/new',
+    'al_data/{annoncetype}/new',
     'AnnoncelocationController@create'
 )->name('annoncelocationsnew_site');
 
 Route::post(
-    'annonce_location/{annoncetype}/new',
+    'al_data/{annoncetype}/new',
     'AnnoncelocationController@store'
 )->name('annoncelocationsstore_site');

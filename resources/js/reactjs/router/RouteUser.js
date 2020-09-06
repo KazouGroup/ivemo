@@ -201,8 +201,8 @@ const RouteUser = props => (
           <Route exact path="/als/:annoncetype/:categoryannoncelocation/" component={withRouter(Annoncebycategoryannoncelocation)}/>
           <Route exact path="/als/:annoncetype/:categoryannoncelocation/:city/" component={withRouter(Annoncelocationbycity)}/>
           <Route exact path="/als/:annoncetype/:categoryannoncelocation/:city/:user/:annoncelocation/" component={withRouter(Annoncelocationbycategorycityshow)}/>
-          <Route exact path="/annonce_location/:annoncetype/new/" component={AnnoncelocationCreate}/>
-          <Route exact path="/annonce_location/:annoncetype/:annoncelocation/edit/" component={AnnoncelocationEdit}/>
+          <Route exact path="/al_data/:annoncetype/new/" component={AnnoncelocationCreate}/>
+          <Route exact path="/al_data/:annoncetype/:annoncelocation/edit/" component={AnnoncelocationEdit}/>
 
           <Route exact path="/annonce/show/create/" component={AnnonceShowCreateUserSite}/>
           <Route exact path="/annonce/show/vendre/create/" component={AnnonceBienAvendreCreate}/>
@@ -244,7 +244,7 @@ const RouteUser = props => (
           <Route exact path="/profile/:profile/account/" component={ProfileConfigUser}/>
 
           <Route exact path="/profile/:user/personal_mails/als/" component={withRouter(PersonalmessagesannonceslocationsUser)}/>
-          <Route exact path="/profile/:user/personal_mails/annonces_locations/:contactuserslocation/" component={PersonalmessagesannonceslocationsShowUser}/>
+          <Route exact path="/profile/:user/statistics/als_contactservice_show/:contactservice/" component={PersonalmessagesannonceslocationsShowUser}/>
 
 
           <Route exact path="/profile/:user/personal_mails/annonces_ventes/" component={withRouter(PersonalmessagesannoncesventesUser)}/>

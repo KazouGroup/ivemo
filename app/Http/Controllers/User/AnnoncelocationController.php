@@ -329,11 +329,11 @@ class AnnoncelocationController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return array|\Illuminate\Http\Response
      */
     public function store(StoreRequest $request,annoncetype $annoncetype)
     {
-        $annoncelocation= new annoncelocation();
+        $annoncelocation = new annoncelocation();
 
         $annoncelocation->fill($request->all());
 
@@ -342,7 +342,7 @@ class AnnoncelocationController extends Controller
 
         $annoncelocation->save();
 
-        return response('Created',Response::HTTP_CREATED);
+        return ['redirect' => route('annoncelocationsedit_site',[$annoncetype->slug,$annoncelocation->slugin])];
     }
 
     /**

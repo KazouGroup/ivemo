@@ -13,7 +13,7 @@ class Navlinknewemployment extends Component  {
     infoItem() {
         Swal.fire({
             title: 'Bon à savoir',
-            text: "Pour poster une offre, vueillez passer au status professionel",
+            text: "Pour poster une annonce, vueillez passer au status professionel",
             buttonsStyling: false,
             confirmButtonClass: "btn btn-info",
             cancelButtonClass: 'btn btn-danger',

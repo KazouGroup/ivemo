@@ -288,7 +288,14 @@ class Annoncelocationbycategorycityshow extends Component {
                                                 </div>
 
                                                 <div className="text-center ml-auto">
-                                                    <h6 className="text-dark"> {annoncelocation.pieces} p . {annoncelocation.rooms && (<>{annoncelocation.rooms} ch</>)}. {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
+                                                    {annoncelocation.slug ?
+                                                        <h6 className="text-dark"> {annoncelocation.pieces} p . {annoncelocation.rooms && (<>{annoncelocation.rooms} ch</>)}. {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
+
+                                                        :
+                                                        <h6 className={`ml-auto mr-auto`}>
+                                                            <Skeleton width={150} />
+                                                        </h6>
+                                                    }
                                                 </div>
 
                                                 <div className="text-right ml-auto">
@@ -301,68 +308,95 @@ class Annoncelocationbycategorycityshow extends Component {
                                             </div>
 
                                             <div className="text-center">
-                                                {$guest ?
+                                                {annoncelocation.slug && (
                                                     <>
-                                                        <Button data-toggle="modal" data-target="#loginModal"
-                                                                className="btn btn-facebook btn-sm btn-neutral" title="J'aime">
-                                                            <i className="far fa-heart"></i> <b>J'aime</b>
-                                                        </Button>
-                                                        <Button data-toggle="modal" data-target="#loginModal"
-                                                                className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
-                                                            <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
-                                                        </Button>
-                                                    </>
-                                                    :
-                                                    <>
-                                                        {annoncelocation.likeked ?
+                                                        {$guest ?
                                                             <>
-                                                                <Button onClick={() => this.props.unlikeItem(annoncelocation)}
-                                                                        className="btn btn-info btn-sm" title="Je n'aime plus">
-                                                                    <i className="fas fa-heart"></i> <b>J'aime</b>
-                                                                </Button>
-                                                            </>
-
-                                                            :
-                                                            <>
-                                                                <Button onClick={() => this.props.likeItem(annoncelocation)}
+                                                                <Button data-toggle="modal" data-target="#loginModal"
                                                                         className="btn btn-facebook btn-sm btn-neutral" title="J'aime">
                                                                     <i className="far fa-heart"></i> <b>J'aime</b>
                                                                 </Button>
-                                                            </>
-                                                        }
-
-                                                        {annoncelocation.favoriteted ?
-
-                                                            <>
-                                                                <Button onClick={() => this.props.unfavoriteItem(annoncelocation)}
-                                                                        className="btn btn-danger btn-sm" title="Retirer de vos favoris">
-                                                                    <i className="fas fa-bookmark"></i> <b>Sauvegarder</b>
+                                                                <Button data-toggle="modal" data-target="#loginModal"
+                                                                        className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
+                                                                    <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
                                                                 </Button>
                                                             </>
                                                             :
                                                             <>
-                                                                <Button onClick={() => this.props.favoriteItem(annoncelocation)}
-                                                                        className="btn btn-facebook btn-sm btn-neutral" title="Ajouter à vos favoris">
-                                                                    <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
-                                                                </Button>
+                                                                {annoncelocation.likeked ?
+                                                                    <>
+                                                                        <Button onClick={() => this.props.unlikeItem(annoncelocation)}
+                                                                                className="btn btn-info btn-sm" title="Je n'aime plus">
+                                                                            <i className="fas fa-heart"></i> <b>J'aime</b>
+                                                                        </Button>
+                                                                    </>
+
+                                                                    :
+                                                                    <>
+                                                                        <Button onClick={() => this.props.likeItem(annoncelocation)}
+                                                                                className="btn btn-facebook btn-sm btn-neutral" title="J'aime">
+                                                                            <i className="far fa-heart"></i> <b>J'aime</b>
+                                                                        </Button>
+                                                                    </>
+                                                                }
+
+                                                                {annoncelocation.favoriteted ?
+
+                                                                    <>
+                                                                        <Button onClick={() => this.props.unfavoriteItem(annoncelocation)}
+                                                                                className="btn btn-danger btn-sm" title="Retirer de vos favoris">
+                                                                            <i className="fas fa-bookmark"></i> <b>Sauvegarder</b>
+                                                                        </Button>
+                                                                    </>
+                                                                    :
+                                                                    <>
+                                                                        <Button onClick={() => this.props.favoriteItem(annoncelocation)}
+                                                                                className="btn btn-facebook btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                                            <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
+                                                                        </Button>
+                                                                    </>
+                                                                }
                                                             </>
                                                         }
-                                                    </>
-                                                }
 
+                                                    </>
+                                                )}
                                             </div>
                                         </div>
 
                                         <div className="card">
                                             <div className="card-body">
-                                                <h5 className="card-title">
-                                                    À propos de <b>{annoncelocation.categoryannoncelocation.label} {annoncelocation.pieces} pièces à {annoncelocation.district}</b>
-                                                </h5>
+                                                {annoncelocation.slug && (
+                                                    <h5 className="card-title">
+                                                        À propos de <b>{annoncelocation.categoryannoncelocation.label} {annoncelocation.pieces} pièces à {annoncelocation.city.name} - {annoncelocation.district}</b>
+                                                    </h5>
+                                                )}
 
                                                 {annoncelocation.description ? <span className="title text-justify" dangerouslySetInnerHTML={this.getDescription(annoncelocation)} /> : <Skeleton count={3}/>}
 
                                             </div>
                                         </div>
+
+
+                                        {annoncelocation.link_video && (
+
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <div className="row">
+                                                        <div className="col-md-12 mx-auto">
+                                                            <h5><b>Description en vidéo</b></h5>
+
+                                                            <iframe border="2px solid #ccc" width="100%" height="315"
+                                                                    src={annoncelocation.link_video}
+                                                                    frameBorder="0"
+                                                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                                                    allowFullScreen></iframe>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
 
                                         <div className="card">
                                             <div className="social-line social-line-big-icons">
@@ -507,7 +541,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                                 </Button>
 
                                                                             }
-                                                                            <NavLink to={`/annonce_location/${annoncelocation.annoncetype.slug}/${annoncelocation.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer cette annonce">
+                                                                            <NavLink to={`/al_data/${annoncelocation.annoncetype.slug}/${annoncelocation.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer cette annonce">
                                                                                 <i className="now-ui-icons ui-2_settings-90" />
                                                                             </NavLink>
                                                                             <Button onClick={() => this.deleteItem(annoncelocation.id)}

@@ -3,6 +3,8 @@ import { Link, NavLink } from "react-router-dom";
 import { Remarkable } from 'remarkable';
 import { Button,UncontrolledTooltip } from "reactstrap";
 import moment from "moment";
+import UploadimageList from "../../../uploadimages/inc/UploadimageList";
+const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
 class PrivateUserAnnonceslocationList extends PureComponent {
@@ -10,6 +12,13 @@ class PrivateUserAnnonceslocationList extends PureComponent {
 
     getDescription() {
         return { __html: (this.props.description.length > 80 ? this.props.description.substring(0, 80) + "..." : this.props.description) };
+    }
+
+    data_countuploadimageFormatter(uploadimages_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(uploadimages_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (uploadimages_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
     render() {
         return (
@@ -20,27 +29,24 @@ class PrivateUserAnnonceslocationList extends PureComponent {
                         <div className="card card-plain card-blog">
                             <div className="row">
                                 <div className="col-md-5">
-                                    <div className="card-image">
-                                        <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
-                                            <ol className="carousel-indicators">
-                                                <li data-target="#carouselAnnonceIndicators" data-slide-to="0" className=""></li>
-                                                <li data-target="#carouselAnnonceIndicators" data-slide-to="1" className=""></li>
-                                                <li data-target="#carouselAnnonceIndicators" data-slide-to="2" className="active"></li>
-                                            </ol>
-                                            <div className="carousel-inner" role="listbox">
-                                                <div className="carousel-item">
-                                                    <img className="d-block" src="/assets/vendor/assets/img/bg1.jpg" alt="First slide" />
-                                                </div>
-                                                <div className="carousel-item">
-                                                    <img className="d-block" src="/assets/vendor/assets/img/bg3.jpg" alt="Second slide" />
-                                                </div>
-                                                <div className="carousel-item active">
-                                                    <img className="d-block" src="/assets/vendor/assets/img/bg4.jpg" alt="Third slide" />
-                                                </div>
-                                            </div>
-                                        </div>
+
+                                    <UploadimageList {...this.props} />
+
+                                    <div className="text-center">
+                                        <button type="button" className="btn btn-dark btn-sm">
+                                            <i className="now-ui-icons media-1_album"></i>
+                                            <b>{this.data_countuploadimageFormatter(this.props.uploadimages_count)}</b>
+                                        </button>
+
+                                        {this.props.link_video && (
+                                            <button type="button" className="btn btn-dark btn-sm">
+                                                <b>video</b>
+                                            </button>
+                                        )}
                                     </div>
+
                                 </div>
+
                                 <div className="col-md-7">
                                     <div className="text-left pull-left">
                                         <NavLink to={`/als/${this.props.annoncetype.slug}/${this.props.categoryannoncelocation.slug}/`}>
@@ -95,21 +101,21 @@ class PrivateUserAnnonceslocationList extends PureComponent {
 
                                                             {this.props.status ?
                                                                 <>
-                                                                    <button type="button" rel="tooltip" onClick={() => this.props.statusItem(this.props)}
+                                                                    <button type="button" rel="tooltip" onClick={() => this.props.unactiveprivatealsItem(this.props)}
                                                                             className="btn btn-success btn-icon btn-sm">
                                                                         <i className="now-ui-icons ui-1_check"/>
                                                                     </button>
                                                                 </>
                                                                 :
                                                                 <>
-                                                                    <button type="button" onClick={() => this.props.statusItem(this.props)}
+                                                                    <button type="button" onClick={() => this.props.activeaslItem(this.props)}
                                                                             className="btn btn-primary btn-icon btn-sm">
                                                                         <i className="now-ui-icons ui-1_simple-delete"/>
                                                                     </button>
                                                                 </>
                                                             }
 
-                                                            <NavLink to={`/annonce_location/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
+                                                            <NavLink to={`/al_data/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
                                                                 <i className="now-ui-icons ui-2_settings-90"/>
                                                             </NavLink>
                                                             <Button
