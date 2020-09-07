@@ -54,7 +54,7 @@ Route::group(['middleware' => 'verified'], function(){
             Route::get(
                 'profile/{user}/statistics/als',
                 'ContactservicannoncelocationController@apicontactservice'
-            )->name('api.contactservice_employments_site');
+            )->name('api.contactservice_annoncelocations_site');
 
             Route::get(
                 'profile/{user}/statistics/als/{annoncelocation:slugin}',

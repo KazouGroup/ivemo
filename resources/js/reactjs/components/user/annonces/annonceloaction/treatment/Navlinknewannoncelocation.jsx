@@ -48,7 +48,7 @@ class Navlinknewannoncelocation extends PureComponent {
                                 }
                             </>
                             :
-                            <NavLink className="btn btn-danger" to={`/al_data/${this.props.match.params.annoncetype}/new/`}>
+                            <NavLink className="btn btn-danger" to={`/email/verify/`}>
                                 <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre bien en location</b>
                             </NavLink>
                         }
