@@ -269,6 +269,12 @@ class ActivitycityShowUserSite extends Component {
                                                                             <i className="far fa-bookmark"></i>
                                                                         </Button>
                                                                     }
+
+                                                                    {$auth.can('dashboard') && (
+                                                                        <a  href={`/dashboard/activitycities/data/${activitycity.slugin}/edit`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
+                                                                            <i className="now-ui-icons ui-2_settings-90"/>
+                                                                        </a>
+                                                                    )}
                                                                 </>
                                                             }
                                                             <Button className="btn btn-icon btn-sm btn-facebook" title="Copier le lien" onClick={() => this.copyToClipboard()}>

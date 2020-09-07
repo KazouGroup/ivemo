@@ -128,7 +128,7 @@ class AnnonceslocationList extends PureComponent {
                                 </div>
                                 <div className="col-md-7">
                                     <div className="text-left pull-left">
-                                        <NavLink to={`/als/locations/${this.props.categoryannoncelocation.slug}/`}>
+                                        <NavLink to={`/als/${this.props.annoncetype.slug}/${this.props.categoryannoncelocation.slug}/`}>
                                             <h6 className={`text-${this.props.categoryannoncelocation.color_name} ml-auto mr-auto`}>
                                                 {this.props.categoryannoncelocation.name}
                                             </h6>

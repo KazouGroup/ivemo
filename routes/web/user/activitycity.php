@@ -12,7 +12,6 @@ Route::group(['prefix' => 'api'], function () {
         'ActivitycityController@apiactivitycityshow'
     )->name('api.activitycity_show_site');
 
-
 });
 
 
