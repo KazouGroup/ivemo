@@ -80,6 +80,10 @@ class AnnoncelocationInteresseList extends Component {
                                                             <NavLink to={`/al_data/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
                                                                 <i className="now-ui-icons ui-2_settings-90"/>
                                                             </NavLink>
+                                                            <Button
+                                                                className="btn btn-icon btn-sm btn-danger" onClick={() => this.props.deleteItem(this.props)} title="Supprimer cette annonce">
+                                                                <i className="now-ui-icons ui-1_simple-remove"/>
+                                                            </Button>
                                                         </>
                                                     )}
                                                 </>
@@ -98,7 +102,7 @@ class AnnoncelocationInteresseList extends Component {
                                             </div>
                                             <div className="text-right ml-auto">
                                                 <div className="col-md-12 col-12">
-                                                    <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} - le mois</b></small> : <>{$money_country}<small><b> - le mois</b></small></>}</b></h5>
+                                                    <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} {this.props.periodeannonce_id !== null && (" - "+this.props.periodeannonce.name)}</b></small> : <>{$money_country}<small><b>{this.props.periodeannonce_id !== null && (" - "+this.props.periodeannonce.name)}</b></small></>}</b></h5>
                                                 </div>
 
                                             </div>

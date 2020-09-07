@@ -74,7 +74,7 @@ class AnnoncelocationController extends Controller
 
     public function annoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$user,annoncelocation $annoncelocation)
     {
-        visits($annoncelocation)->seconds(60)->increment();
+        visits($annoncelocation)->seconds(10)->increment();
 
         return view('user.annoncelocation.annonces_show',[
             'annoncelocation' => $annoncelocation,
@@ -235,7 +235,7 @@ class AnnoncelocationController extends Controller
             ->where('status',1)
             ->withCount(['annoncelocations' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->with('user','categoryannoncelocation','city','annoncetype','uploadimages')
+                    ->with('user','categoryannoncelocation','city','annoncetype','periodeannonce','uploadimages')
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);});
             }])
@@ -253,7 +253,7 @@ class AnnoncelocationController extends Controller
      */
     public function apiannoncelocationbycategoryannoncelocationslug(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$user,annoncelocation $annoncelocation)
     {
-        visits($annoncelocation)->seconds(60)->increment();
+        visits($annoncelocation)->seconds(10)->increment();
 
         $annoncelocation = AnnoncelocationService::apiannoncelocationbycategoryannoncelocationslug($annoncetype,$categoryannoncelocation,$city,$user,$annoncelocation);
 
@@ -266,7 +266,7 @@ class AnnoncelocationController extends Controller
      */
     public function apiannoncelocationinteressebycategoryannoncelocation(categoryannoncelocation $categoryannoncelocation)
     {
-        $annoncelocations = annoncelocation::with('user','city','annoncetype','categoryannoncelocation','uploadimages')
+        $annoncelocations = annoncelocation::with('user','city','annoncetype','periodeannonce','categoryannoncelocation','uploadimages')
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
             ->WhereHas('city', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','desc')
@@ -286,7 +286,7 @@ class AnnoncelocationController extends Controller
     public function apiannoncelocationinteressebyuser(annoncetype $annoncetype,user $user)
     {
         $annoncelocations = AnnoncelocationResource::collection($user->annoncelocations()
-            ->with('user','city','annoncetype','categoryannoncelocation','uploadimages')
+            ->with('user','city','annoncetype','periodeannonce','categoryannoncelocation','uploadimages')
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('user_id',[$user->id])
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
@@ -303,7 +303,7 @@ class AnnoncelocationController extends Controller
     {
         $annoncelocation = $categoryannoncelocation->annoncelocations()
         ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
-        ->with('user','city','annoncetype','categoryannoncelocation','uploadimages')
+        ->with('user','city','annoncetype','periodeannonce','categoryannoncelocation','uploadimages')
         ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
         ->whereHas('city', function ($q) {$q->where('status',1);})
         ->orderByRaw('RAND()')

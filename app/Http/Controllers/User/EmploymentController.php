@@ -64,7 +64,7 @@ class EmploymentController extends Controller
 
     public function employmentslug($categoryemployment,$city,$user,employment $employment)
     {
-        visits($employment)->seconds(5)->increment();
+        visits($employment)->seconds(10)->increment();
 
         return  view('user.employment.employmentshow',[
             'employment' => $employment
@@ -223,7 +223,7 @@ class EmploymentController extends Controller
 
     public function apiemploymentsbycategoryslug(categoryemployment $categoryemployment,city $city,$user,employment $employment)
     {
-        visits($employment)->seconds(5)->increment();
+        visits($employment)->seconds(10)->increment();
 
         $employments = EmploymentService::apiemploymentsbycategoryslug($categoryemployment,$city,$user,$employment);
 

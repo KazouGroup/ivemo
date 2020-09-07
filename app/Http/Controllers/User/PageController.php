@@ -11,6 +11,7 @@ use App\Model\city;
 use App\Model\contactusersadvert;
 use App\Model\contactusersfaq;
 use App\Model\contact;
+use App\Model\periodeannonce;
 use App\Services\Contactusers\ContactuserService;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -72,6 +73,14 @@ class PageController extends Controller
             }])->firstOrFail());
 
         return response()->json($city, 200);
+
+    }
+
+    public function apiperiodeannonce()
+    {
+        $apiperiodeannonces =  periodeannonce::orderByDesc('name')->distinct()->get();
+
+        return response()->json($apiperiodeannonces, 200);
 
     }
 

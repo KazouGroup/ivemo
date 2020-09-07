@@ -6,6 +6,7 @@ Route::post('contactusersfaq_site','PageController@contactusersfaqs')->name('con
 
 Route::get('city/{city}','PageController@city')->name('city.site');
 Route::get('api/city/{city}','PageController@apicity')->name('api.city_site');
+Route::get('api/periodeannonces','PageController@apiperiodeannonce')->name('api.periodeannonces');
 
 //Route contact
 Route::get('contact','PageController@contact')->name('contact_us.site');

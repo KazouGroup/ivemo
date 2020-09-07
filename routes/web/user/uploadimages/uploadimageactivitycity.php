@@ -19,8 +19,3 @@ Route::put(
     'uploadimages/{activitycity:slugin}/{uploadimage}/update',
     'UploadimageactivitycityController@updateuploadimage'
 )->name('activitycityupdateuploadimage_site');
-
-Route::post(
-    'uploadimages/{uploadimage}/status',
-    'UploadimageactivitycityController@statusuploadimage'
-)->name('statusuploadimage_site');

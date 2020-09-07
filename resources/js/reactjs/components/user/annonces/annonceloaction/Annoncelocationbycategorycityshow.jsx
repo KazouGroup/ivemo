@@ -300,7 +300,7 @@ class Annoncelocationbycategorycityshow extends Component {
 
                                                 <div className="text-right ml-auto">
                                                     {annoncelocation.price ?
-                                                        <h5 className="text-dark"><b>{annoncelocation.price.formatMoney(2,'.',',')} <small><b>{$money_country} - le mois</b></small></b></h5>
+                                                        <h5 className="text-dark"><b>{annoncelocation.price.formatMoney(2,'.',',')} <small><b>{$money_country} {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small></b></h5>
                                                         :
                                                         <h5 className="text-dark"><b><Skeleton width={150} /></b></h5>
                                                     }
@@ -406,7 +406,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                             <h5 className="info-title"><b>Le loyer est de</b></h5>
                                                             {annoncelocation.price && (
 
-                                                                <h3 className="text-dark"><b>{annoncelocation.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} - le mois</b></small> : <>{$money_country}<small><b> - le mois</b></small></>}</b></h3>
+                                                                <h3 className="text-dark"><b>{annoncelocation.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small> : <>{$money_country}<small><b> {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small></>}</b></h3>
                                                             )}
                                                         </div>
                                                         <div className="col-md-6">

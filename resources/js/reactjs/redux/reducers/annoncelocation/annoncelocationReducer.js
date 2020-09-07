@@ -39,6 +39,11 @@ export default produce((draft, action = {}) => {
                 let dataunactive = draft.annoncelocations.findIndex(i => i.id === action.payload);
                 if (dataunactive !== -1) draft.annoncelocations.splice(dataunactive, 1);
                 return draft;
+
+            case 'DELETE_ANNONCELOCATION':
+                let datadelete = draft.annoncelocations.findIndex(i => i.id === action.payload);
+                if (datadelete !== -1) draft.annoncelocations.splice(datadelete, 1);
+                return draft;
         }
     },
     initialState

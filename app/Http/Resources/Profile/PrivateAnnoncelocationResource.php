@@ -34,6 +34,8 @@ class PrivateAnnoncelocationResource extends JsonResource
             'city_id' => $this->city_id,
             'annoncetype' => $this->annoncetype,
             'annoncetype_id' => $this->annoncetype_id,
+            'periodeannonce_id' => $this->periodeannonce_id,
+            'periodeannonce' => $this->periodeannonce,
             'status' => $this->status,
             'contactservices' => $this->contactservices,
             'contactservices_count' => $this->contactservices_count,
@@ -46,12 +48,11 @@ class PrivateAnnoncelocationResource extends JsonResource
                 ->where('likeable_type', annoncelocation::class)
                 ->count(),
             'uploadimages' => $this->uploadimages()
-                ->where('status',1)
                 ->whereIn('uploadimagealable_id',[$this->id])
                 ->where('uploadimagealable_type', annoncelocation::class)
+                ->orderByDesc('created_at')
                 ->get(),
             'countuploadimages' => $this->uploadimages()
-                ->where('status',1)
                 ->whereIn('uploadimagealable_id',[$this->id])
                 ->where('uploadimagealable_type', annoncelocation::class)
                 ->count(),

@@ -32,11 +32,14 @@ class AnnoncelocationCreate extends Component {
             district: '',
             rooms: '',
             description: '',
+            award_price: '',
             city_id: '',
             link_video: '',
             categoryannoncelocation_id: '',
+            periodeannonce_id: '',
             errors: [],
             cities: [],
+            periodeannonces: [],
             categoryannoncelocations: [],
         };
         this.modules = {
@@ -97,6 +100,7 @@ class AnnoncelocationCreate extends Component {
             title: this.state.title,
             description: this.state.description,
             district: this.state.district,
+            award_price: this.state.award_price,
             surface: this.state.surface,
             rooms: this.state.rooms,
             pieces: this.state.pieces,
@@ -104,6 +108,7 @@ class AnnoncelocationCreate extends Component {
             city_id: this.state.city_id,
             link_video: this.state.link_video,
             categoryannoncelocation_id: this.state.categoryannoncelocation_id,
+            periodeannonce_id: this.state.periodeannonce_id,
         };
         let itemannoncetype = this.props.match.params.annoncetype;
         dyaxios.post(route('annoncelocationsstore_site', [itemannoncetype]), item)
@@ -145,7 +150,9 @@ class AnnoncelocationCreate extends Component {
    // Lifecycle Component Method
     componentDidMount() {
         fetch(route('api.categoryannoncelocation_site')).then(res => res.json()).then((result) => { this.setState({ categoryannoncelocations: result }) });
-        fetch(route('api.all_cities')).then(res => res.json()).then((result) => { this.setState({ cities: result }) })
+        fetch(route('api.all_cities')).then(res => res.json()).then((result) => { this.setState({ cities: result }) });
+        dyaxios.get(route('api.periodeannonces')).then(response => this.setState({ periodeannonces: response.data, }));
+
     }
 
     numberWithCommas() {
@@ -153,7 +160,7 @@ class AnnoncelocationCreate extends Component {
     }
 
     render() {
-        const {categoryannoncelocations,cities} = this.state;
+        const {categoryannoncelocations,cities,periodeannonces} = this.state;
         return (
             <Fragment>
                 <HelmetSite title={`${this.state.title || "Nouvelle annonce"} - ${$name_site}`}/>
@@ -232,8 +239,8 @@ class AnnoncelocationCreate extends Component {
                                                                                 <div className="input-group">
                                                                                     <div className="input-group-prepend">
                                                                                     <span
-                                                                                        className="input-group-text"><i
-                                                                                        className="now-ui-icons users_circle-08"></i></span>
+                                                                                        className="input-group-text">
+                                                                                        <i className="now-ui-icons users_circle-08"></i></span>
                                                                                     </div>
                                                                                     <FieldInput name="title" type='text' minLength="5" maxLength="200" placeholder="Titre du bien" value={this.state.title}
                                                                                                 handleFieldChange={this.handleFieldChange}
@@ -243,9 +250,9 @@ class AnnoncelocationCreate extends Component {
 
                                                                                 <div className="row">
 
-                                                                                    <div className="col-md-6 ml-auto mr-auto">
+                                                                                    <div className="col-md-4">
                                                                                         <label className="labels">
-                                                                                            Quel est le montant de votre bien ?
+                                                                                            Prix de ce bien ?
                                                                                             <span className="text-danger">*</span>
                                                                                         </label>
                                                                                         <div className="input-group">
@@ -254,28 +261,59 @@ class AnnoncelocationCreate extends Component {
                                                                                         className="input-group-text"><i
                                                                                         className="now-ui-icons business_money-coins"></i></span>
                                                                                             </div>
-                                                                                            <FieldInput name="price" type='number' placeholder="Motant de votre bien" value={this.state.price}
+                                                                                            <FieldInput name="price"
+                                                                                                        type='number'
+                                                                                                        placeholder="Motant de votre bien"
+                                                                                                        value={this.state.price}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
-                                                                                                        renderErrorFor={this.renderErrorFor} required="required"/>
+                                                                                                        renderErrorFor={this.renderErrorFor}
+                                                                                                        required="required"/>
                                                                                         </div>
                                                                                     </div>
 
-                                                                                    <div className="col-md-6">
+                                                                                    <div className="col-md-4">
                                                                                         <label className="labels">
-                                                                                            Type de bien ?
+                                                                                            Garantie ?
+                                                                                            <span className="text-danger">*</span>
+                                                                                        </label>
+                                                                                        <div className="input-group">
+                                                                                            <div className="input-group-prepend">
+                                                                                                <span className="input-group-text">
+                                                                                                    <i className="now-ui-icons business_money-coins"/>
+                                                                                                </span>
+                                                                                            </div>
+                                                                                            <FieldInput name="award_price"
+                                                                                                        type='number'
+                                                                                                        placeholder="Garantie"
+                                                                                                        value={this.state.award_price}
+                                                                                                        handleFieldChange={this.handleFieldChange}
+                                                                                                        hasErrorFor={this.hasErrorFor}
+                                                                                                        renderErrorFor={this.renderErrorFor}
+                                                                                                        required="required"/>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div className="col-md-4">
+                                                                                        <label className="labels">
+                                                                                            Periode ?
                                                                                             <span className="text-danger">*</span>
                                                                                         </label>
                                                                                         <div className="form-group">
-                                                                                            <select name="categoryannoncelocation_id" value={this.state.categoryannoncelocation_id}
-                                                                                                    className={`form-control`}
-                                                                                                    id="categoryannoncelocation_id" onChange={this.handleFieldChange} required="required">
-                                                                                                <option value="" disabled>Selectioner une category</option>
-                                                                                                {categoryannoncelocations.map((item) => (
-                                                                                                    <option key={item.id} value={item.id}>{item.name}</option>
+                                                                                            <select
+                                                                                                name="periodeannonce_id"
+                                                                                                value={this.state.periodeannonce_id}
+                                                                                                className={`form-control`}
+                                                                                                id="periodeannonce_id"
+                                                                                                onChange={this.handleFieldChange}
+                                                                                                required="required">
+                                                                                                <option value="" disabled>Selectioner une periode
+                                                                                                </option>
+                                                                                                {periodeannonces.map((item) => (
+                                                                                                    <option key={item.id}
+                                                                                                        value={item.id}>{item.name}</option>
                                                                                                 ))}
                                                                                             </select>
-                                                                                            {this.renderErrorFor('categoryannoncelocation_id')}
+                                                                                            {this.renderErrorFor('periodeannonce_id')}
                                                                                         </div>
                                                                                     </div>
 
@@ -283,34 +321,78 @@ class AnnoncelocationCreate extends Component {
 
                                                                                 <div className="row">
 
-                                                                                    <div className="col-md-6">
+                                                                                    <div className="col-md-4">
                                                                                         <label className="labels">
-                                                                                            Ville du bien ?
-                                                                                            <span className="text-danger">*</span>
+                                                                                            Type de bien ?
+                                                                                            <span
+                                                                                                className="text-danger">*</span>
                                                                                         </label>
                                                                                         <div className="form-group">
-                                                                                            <select name="city_id" value={this.state.city_id}
+                                                                                            <select
+                                                                                                name="categoryannoncelocation_id"
+                                                                                                value={this.state.categoryannoncelocation_id}
+                                                                                                className={`form-control`}
+                                                                                                id="categoryannoncelocation_id"
+                                                                                                onChange={this.handleFieldChange}
+                                                                                                required="required">
+                                                                                                <option value=""
+                                                                                                        disabled>Selectioner
+                                                                                                    une category
+                                                                                                </option>
+                                                                                                {categoryannoncelocations.map((item) => (
+                                                                                                    <option
+                                                                                                        key={item.id}
+                                                                                                        value={item.id}>{item.name}</option>
+                                                                                                ))}
+                                                                                            </select>
+                                                                                            {this.renderErrorFor('categoryannoncelocation_id')}
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div className="col-md-4">
+                                                                                        <label className="labels">
+                                                                                            Ville du bien ?
+                                                                                            <span
+                                                                                                className="text-danger">*</span>
+                                                                                        </label>
+                                                                                        <div className="form-group">
+                                                                                            <select name="city_id"
+                                                                                                    value={this.state.city_id}
                                                                                                     className={`form-control`}
-                                                                                                    id="city_id" onChange={this.handleFieldChange} required="required">
-                                                                                                <option value="" disabled>Selectioner une ville</option>
+                                                                                                    id="city_id"
+                                                                                                    onChange={this.handleFieldChange}
+                                                                                                    required="required">
+                                                                                                <option value=""
+                                                                                                        disabled>Selectioner
+                                                                                                    une ville
+                                                                                                </option>
                                                                                                 {cities.map((item) => (
-                                                                                                    <option key={item.id} value={item.id}>{item.name}</option>
+                                                                                                    <option
+                                                                                                        key={item.id}
+                                                                                                        value={item.id}>{item.name}</option>
                                                                                                 ))}
                                                                                             </select>
                                                                                             {this.renderErrorFor('city_id')}
                                                                                         </div>
                                                                                     </div>
                                                                                     <div
-                                                                                        className="col-md-6">
+                                                                                        className="col-md-4">
                                                                                         <label className="labels">
                                                                                             Localisation du bien?
-                                                                                            <span className="text-danger">*</span>
+                                                                                            <span
+                                                                                                className="text-danger">*</span>
                                                                                         </label>
                                                                                         <div className="form-group">
-                                                                                            <FieldInput name="district" type='text' minLength="3" maxLength="200" placeholder="Quartier" value={this.state.district}
+                                                                                            <FieldInput name="district"
+                                                                                                        type='text'
+                                                                                                        minLength="3"
+                                                                                                        maxLength="200"
+                                                                                                        placeholder="Quartier"
+                                                                                                        value={this.state.district}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
-                                                                                                        renderErrorFor={this.renderErrorFor} required="required"/>
+                                                                                                        renderErrorFor={this.renderErrorFor}
+                                                                                                        required="required"/>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>

@@ -22,10 +22,12 @@ class BaseRequest extends Request
                 'district' => 'required|string|min:3|max:200',
                 'description' => 'required|max:50000',
                 'price' => 'required|numeric|digits_between:2,13',
+                'award_price' => 'required|numeric|digits_between:1,13',
                 'surface' => 'required|numeric|digits_between:2,6',
                 'rooms' => 'required|numeric|digits_between:1,3',
                 'pieces' => 'required|numeric|digits_between:1,3',
                 'city_id' => 'required|numeric|digits_between:1,3',
+                'periodeannonce_id' => 'required|numeric|digits_between:1,3',
                 'categoryannoncelocation_id' => 'required|numeric|digits_between:1,3',
             ];
         }
@@ -35,10 +37,12 @@ class BaseRequest extends Request
                 'district' => 'required|string|min:3|max:200',
                 'description' => 'required|max:50000',
                 'price' => 'required|numeric|digits_between:2,13',
+                'award_price' => 'required|numeric|digits_between:1,13',
                 'surface' => 'required|numeric|digits_between:2,6',
                 'rooms' => 'required|numeric|digits_between:1,3',
                 'pieces' => 'required|numeric|digits_between:1,3',
                 'city_id' => 'required|numeric|digits_between:1,3',
+                'periodeannonce_id' => 'required|numeric|digits_between:1,3',
                 'categoryannoncelocation_id' => 'required|numeric|digits_between:1,3',
             ];
         }
@@ -61,6 +65,7 @@ class BaseRequest extends Request
     {
         return [
             'city_id' => 'ville de l\'annonce',
+            'periodeannonce_id' => 'periode de l\'annonce',
             'categoryannoncelocation_id' => 'categorie de l\'annonce',
         ];
     }

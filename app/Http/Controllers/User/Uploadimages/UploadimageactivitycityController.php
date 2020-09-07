@@ -46,14 +46,14 @@ class UploadimageactivitycityController extends Controller
             $namefile = sha1(date('YmdHis') . str_random(30));
             $name =   $namefile.'.' . explode('/',explode(':',substr($request->photo,0,strpos
                 ($request->photo,';')))[1])[1];
-            $dir = 'assets/img/activitycity/';
+            $dir = 'assets/img/uploadimage/';
             if(!file_exists($dir)){
                 mkdir($dir, 0775, true);
             }
-            $destinationPath = public_path("assets/img/activitycity/{$name}");
+            $destinationPath = public_path("assets/img/uploadimage/{$name}");
             Image::make($request->photo)->fit(1200,703)->save($destinationPath);
 
-            $myfilename = "/assets/img/activitycity/{$name}";
+            $myfilename = "/assets/img/uploadimage/{$name}";
         }
 
         $activitycity->uploadimages()->create([
@@ -72,10 +72,10 @@ class UploadimageactivitycityController extends Controller
             $namefile = sha1(date('YmdHis') . str_random(30));
             $name =   $namefile.'.' . explode('/',explode(':',substr($request->photo,0,strpos
                 ($request->photo,';')))[1])[1];
-            $dir = 'assets/img/cities/';
+            $dir = 'assets/img/uploadimage/';
             if(!file_exists($dir)){mkdir($dir, 0775, true);}
             Image::make($request->photo)->fit(1200,703)->save(public_path('assets/img/cities/').$name);
-            $request->merge(['photo' =>  "/assets/img/cities/{$name}"]);
+            $request->merge(['photo' =>  "/assets/img/uploadimage/{$name}"]);
             $oldFilename = $currentPhoto;
             File::delete(public_path($oldFilename));
         }
@@ -84,14 +84,6 @@ class UploadimageactivitycityController extends Controller
 
         return response('Success',Response::HTTP_ACCEPTED);
 
-    }
-
-
-    public function statusuploadimage(uploadimage $uploadimage)
-    {
-        $uploadimage->update(['status' => !$uploadimage->status,]);
-
-        return response('Success',Response::HTTP_ACCEPTED);
     }
 
 }

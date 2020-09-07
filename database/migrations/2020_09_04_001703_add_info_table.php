@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class AddInfoTable extends Migration
@@ -20,6 +21,7 @@ class AddInfoTable extends Migration
 
         Schema::table('annoncelocations', function (Blueprint $table) {
             $table->text('link_video')->after('title')->nullable();
+            $table->unsignedBigInteger('periodeannonce_id')->after('user_id')->nullable()->index();
             $table->timestamp('expired_at')->default(now()->addDays(7))->after('created_at');
         });
 
@@ -41,6 +43,11 @@ class AddInfoTable extends Migration
             $table->text('link_video')->after('title')->nullable();
             $table->timestamp('expired_at')->default(now()->addDays(7))->after('created_at');
         });
+
+        $periodeannonces = array(
+            array('name' => 'le mois','slug' => str_slug('le mois'),'status' => true),
+        );
+        DB::table('periodeannonces')->insert($periodeannonces);
     }
 
     /**

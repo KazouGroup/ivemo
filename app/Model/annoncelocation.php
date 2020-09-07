@@ -57,6 +57,11 @@ class annoncelocation extends Model
         return $this->belongsTo(user::class,'member_id');
     }
 
+    public function periodeannonce()
+    {
+        return $this->belongsTo(periodeannonce::class,'periodeannonce_id');
+    }
+
     public function categoryannoncelocation()
     {
         return $this->belongsTo(categoryannoncelocation::class,'categoryannoncelocation_id');

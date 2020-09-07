@@ -10,12 +10,16 @@ Route::group(['prefix' => 'api'], function () {
 });
 
 
-Route::post(
-    'uploadimages/{annoncelocation:slugin}/save',
-    'UploadimageannoncelocationController@storeuploadimage'
-)->name('annoncelocationsenduploadimage_site');
+Route::group(['middleware' => 'verified'], function(){
 
-Route::put(
-    'uploadimages/{annoncelocation:slugin}/{uploadimage}/update',
-    'UploadimageannoncelocationController@updateuploadimage'
-)->name('annoncelocationupdateuploadimage_site');
+    Route::group(['middleware' => 'verified_status_user'],function (){
+
+
+        Route::post(
+            'als_uploadimages/{annoncelocation:slugin}/save',
+            'UploadimageannoncelocationController@storeuploadimage'
+        )->name('annoncelocationsenduploadimage_site');
+
+    });
+
+});

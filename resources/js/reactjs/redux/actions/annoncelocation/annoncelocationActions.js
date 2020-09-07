@@ -6,6 +6,7 @@ import {
     FAVORITE_ANNONCELOCATION_ADD,
     FAVORITE_ANNONCELOCATION_REMOVE,
     UNACTIVE_ANNONCELOCATION,
+    DELETE_ANNONCELOCATION,
 } from "../types";
 
 import Swal from "sweetalert2";
@@ -84,7 +85,7 @@ export const unfavoriteItem = props => dispatch => {
 export const unactiveItem = props => dispatch => {
 
     Swal.fire({
-        title: 'Masquer cette article?',
+        title: 'Masquer cette annonce?',
         text: "êtes-vous sûr de vouloir executer cette action",
         type: 'warning',
         buttonsStyling: false,
@@ -109,6 +110,65 @@ export const unactiveItem = props => dispatch => {
                 /** Alert notify bootstrapp **/
                 $.notify({
                         message: 'Annonce masquée aux utilisateurs'
+                    },
+                    {
+                        allow_dismiss: false,
+                        type: 'primary',
+                        placement: {
+                            from: 'bottom',
+                            align: 'right'
+                        },
+                        animate: {
+                            enter: 'animate__animated animate__fadeInRight',
+                            exit: 'animate__animated animate__fadeOutRight'
+                        },
+                    });
+                /** End alert ***/
+
+            }).catch(() => {
+                //Failled message
+                $.notify("Ooop! Une erreur est survenue", {
+                    allow_dismiss: false,
+                    type: 'danger',
+                    animate: {
+                        enter: 'animate__animated animate__bounceInDown',
+                        exit: 'animate__animated animate__bounceOutUp'
+                    }
+                });
+            })
+        }
+    });
+
+};
+
+export const deleteItem = props => dispatch => {
+
+    Swal.fire({
+        title: 'Supprimer cette annonce?',
+        text: "êtes-vous sûr de vouloir executer cette action",
+        type: 'warning',
+        buttonsStyling: false,
+        confirmButtonClass: "btn btn-success",
+        cancelButtonClass: 'btn btn-danger',
+        confirmButtonText: 'Oui, confirmer',
+        cancelButtonText: 'Non, annuller',
+        showCancelButton: true,
+        reverseButtons: true,
+    }).then((result) => {
+        if (result.value) {
+
+            const url = route('annonces_locations_delete.site',[props.id]);
+            //Envoyer la requet au server
+            dyaxios.get(url).then(() => {
+
+                dispatch({
+                    type: DELETE_ANNONCELOCATION,
+                    payload: props.id
+                });
+
+                /** Alert notify bootstrapp **/
+                $.notify({
+                        message: 'Annonce supprimée avec succès'
                     },
                     {
                         allow_dismiss: false,
