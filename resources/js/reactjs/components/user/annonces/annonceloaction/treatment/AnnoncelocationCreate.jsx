@@ -9,6 +9,8 @@ import moment from "moment";
 import HelmetSite from "../../../../inc/user/HelmetSite";
 import Navlinknewannoncelocation from "./Navlinknewannoncelocation";
 import FieldInput from "../../../../inc/vendor/FieldInput";
+import Navannoncelocationsbyuser from "../inc/Navannoncelocationsbyuser";
+import NavlinkconfigurationUser from "../../../configurations/inc/NavlinkconfigurationUser";
 
 
 class AnnoncelocationCreate extends Component {
@@ -174,7 +176,26 @@ class AnnoncelocationCreate extends Component {
                                 <br/>
                                 <Form role="form" id="contact-form" onSubmit={this.saveItem} acceptCharset="UTF-8">
                                     <div className="row">
-                                        <div className="col-lg-9 mx-auto">
+
+                                        <div className="col-lg-4">
+
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <div className="row">
+                                                        <div className="col-md-12">
+                                                            <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+
+                                                                <Navannoncelocationsbyuser/>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div className="col-lg-8 mx-auto">
                                             <div className="d-flex align-items-center">
                                                 <div className="d-flex align-items-center">
                                                     <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>

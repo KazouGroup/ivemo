@@ -11,6 +11,7 @@ import HelmetSite from "../../../../inc/user/HelmetSite";
 import FieldInput from "../../../../inc/vendor/FieldInput";
 import LoaderLdsDefaultPage from "../../../../inc/user/annimation/LoaderLdsDefaultPage";
 import LazyLoad from "react-lazyload";
+import Navannoncelocationsbyuser from "../inc/Navannoncelocationsbyuser";
 
 class AnnoncelocationEdit extends Component {
     constructor(props) {
@@ -482,7 +483,25 @@ class AnnoncelocationEdit extends Component {
                             <div className="container">
                                 <br/>
                                 <div className="row">
-                                    <div className="col-lg-9 mx-auto">
+                                    <div className="col-md-4">
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+
+                                                            <Navannoncelocationsbyuser/>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div className="col-md-8 mx-auto">
                                         <div className="d-flex align-items-center">
                                             <div className="d-flex align-items-center">
                                                 <button type="button" className="btn btn-neutral btn-sm"

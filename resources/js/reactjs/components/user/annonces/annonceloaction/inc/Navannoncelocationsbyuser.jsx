@@ -36,9 +36,7 @@ class Navannoncelocationsbyuser extends Component {
                 return (
                     <tr key={item.id}>
                         <td>
-                            <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/blogs/annonce_locations/${item.slug}/`}>
-                                <strong>{item.name}</strong>
-                            </NavLink>
+                            <strong>{item.name}</strong>
                         </td>
                         <td className="text-right"> {this.getcountcategoryannonceString(item.annoncelocations_count)} {item.annoncelocations_count > 1 ? "annonces" : "annonce"}</td>
                     </tr>
