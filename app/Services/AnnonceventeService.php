@@ -27,7 +27,7 @@ class AnnonceventeService
     {
         $annonceventes = AnnonceventeResource::collection($categoryannoncevente->annonceventes()
             ->where(['status' => 1,'status_admin' => 1])
-            ->with('user','categoryannoncevente','city','annoncetype')
+            ->with('user','categoryannoncevente','city','annoncetype','uploadimages')
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
             ->whereHas('city', function ($q) {$q->where('status',1);})
@@ -42,7 +42,7 @@ class AnnonceventeService
         $annonceventes = categoryannoncevente::whereSlug($categoryannoncevente->slug)->where(['status' => 1])
             ->withCount(['annonceventes' => function ($q) use ($annoncetype,$categoryannoncevente){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->with('user','categoryannoncevente','city','annoncetype')
+                    ->with('user','categoryannoncevente','city','annoncetype','uploadimages')
                     ->whereIn('annoncetype_id',[$annoncetype->id])
                     ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
                     ->whereHas('city', function ($q) {$q->where('status',1);})
@@ -57,7 +57,7 @@ class AnnonceventeService
     {
         $annonceventes = AnnonceventeResource::collection($city->annonceventes()
             ->where(['status' => 1,'status_admin' => 1])
-            ->with('user','categoryannoncevente','city','annoncetype')
+            ->with('user','categoryannoncevente','city','annoncetype','uploadimages')
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
             ->whereIn('city_id',[$city->id])
@@ -91,7 +91,7 @@ class AnnonceventeService
         $annonceventes = city::whereSlug($city->slug)->where('status',1)
             ->withCount(['annonceventes' => function ($q) use ($annoncetype,$city){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->with('user','categoryannoncevente','city','annoncetype')
+                    ->with('user','categoryannoncevente','city','annoncetype','uploadimages')
                     ->whereIn('annoncetype_id',[$annoncetype->id])
                     ->whereIn('city_id',[$city->id])
                     ->whereHas('city', function ($q) {$q->where('status',1);})
@@ -106,7 +106,7 @@ class AnnonceventeService
     {
         $annonceventes = AnnonceventeResource::collection($city->annonceventes()
             ->where(['status' => 1,'status_admin' => 1])
-            ->with('user','categoryannoncevente','city','annoncetype')
+            ->with('user','categoryannoncevente','city','annoncetype','uploadimages')
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('city_id',[$city->id])
             ->whereHas('city', function ($q) {$q->where('status',1);})
@@ -151,7 +151,7 @@ class AnnonceventeService
     {
         $blogannoncereseventes = HelpersService::helpersannonceteamcount($user)
             ->with(['annonceventes' => function ($q) use ($user,$categoryannoncevente){
-                $q->with('user','categoryannoncevente','city','annoncetype')
+                $q->with('user','categoryannoncevente','city','annoncetype','uploadimages')
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id])
@@ -168,7 +168,7 @@ class AnnonceventeService
     {
         $annoncelocations = HelpersService::helpersannonceteamcount($user)
             ->with(['annonceventes' => function ($q) use ($user){
-                $q->with('user','categoryannoncevente','city','annoncetype')
+                $q->with('user','categoryannoncevente','city','annoncetype','uploadimages')
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id])
                     ->withCount(['contactusersventes' => function ($q) use ($user){

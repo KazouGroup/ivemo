@@ -1,6 +1,7 @@
 import {
     GET_UPLOADIMAGES_ANNONCELOCATION_SHOW_USER_SITE,
     GET_UPLOADIMAGES_ACTIVITYCITIES,
+    GET_UPLOADIMAGES_ANNONCEVENTE_SHOW_USER_SITE,
 } from "./types";
 
 import Swal from "sweetalert2";
@@ -31,6 +32,22 @@ export const loadUploadimageAnnoncelocations = (props) => dispatch => {
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_UPLOADIMAGES_ANNONCELOCATION_SHOW_USER_SITE,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loadUploadimageAnnonceventes = (props) => dispatch => {
+
+    let itemannoncetype = props.match.params.annoncetype;
+    let itemCategoryannoncevente = props.match.params.categoryannoncevente;
+    let itemcityannonce = props.match.params.city;
+    let itemuser = props.match.params.user;
+    let itemannoncevente = props.match.params.annoncevente;
+    let url = route('api.annonceventegetuploadimage_site',[itemannoncetype,itemCategoryannoncevente,itemcityannonce,itemuser,itemannoncevente]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_UPLOADIMAGES_ANNONCEVENTE_SHOW_USER_SITE,
                 payload: response.data
             })
         ).catch(error => console.error(error));

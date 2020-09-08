@@ -207,13 +207,13 @@ const RouteUser = props => (
           <Route exact path="/annonce/show/create/" component={AnnonceShowCreateUserSite}/>
           <Route exact path="/annonce/show/vendre/create/" component={AnnonceBienAvendreCreate}/>
 
-          <Route exact path="/annonces_ventes/:annoncetype/" component={AnnonceventeIndex}/>
-          <Route exact path="/annonce_ventes/:annoncetype/:city/" component={withRouter(Annonceventebyannoncetypebycity)}/>
-          <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/" component={withRouter(Annoncebycategoryannoncevente)}/>
-          <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/:city/" component={withRouter(Annoncebycategoryannonceventecity)}/>
-          <Route exact path="/annonces_ventes/:annoncetype/:categoryannoncevente/:city/:user/:annoncevente/" component={withRouter(Annonceventebycategorycityshow)}/>
-          <Route exact path="/annonce_vente/:annoncetype/new/" component={AnnonceventeCreate}/>
-          <Route exact path="/annonce_vente/:annoncetype/:annoncevente/edit/" component={AnnonceventeEdit}/>
+          <Route exact path="/avs/:annoncetype/" component={AnnonceventeIndex}/>
+          <Route exact path="/avs/:annoncetype/:city/" component={withRouter(Annonceventebyannoncetypebycity)}/>
+          <Route exact path="/avs/:annoncetype/:categoryannoncevente/" component={withRouter(Annoncebycategoryannoncevente)}/>
+          <Route exact path="/avs/:annoncetype/:categoryannoncevente/:city/" component={withRouter(Annoncebycategoryannonceventecity)}/>
+          <Route exact path="/avs/:annoncetype/:categoryannoncevente/:city/:user/:annoncevente/" component={withRouter(Annonceventebycategorycityshow)}/>
+          <Route exact path="/av_data/:annoncetype/new/" component={AnnonceventeCreate}/>
+          <Route exact path="/av_data/:annoncetype/:annoncevente/edit/" component={AnnonceventeEdit}/>
 
 
           <Route exact path="/profile/account/" component={ProfileAccountUser}/>

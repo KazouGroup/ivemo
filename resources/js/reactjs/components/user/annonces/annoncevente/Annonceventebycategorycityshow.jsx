@@ -7,7 +7,6 @@ import BlogannonceventeIntesseAnnonseShow from "../../blog/blognnoncevente/Bloga
 import FormcontactuseronannonceventeShow from "./inc/FormcontactuseronannonceventShow";
 import AnnonceventeInteresse from "./AnnonceventeInteresse";
 import Skeleton from "react-loading-skeleton";
-import ProfileForallAnnonceventeShow from "./ProfileForallAnnonceventeShow";
 import Swal from "sweetalert2";
 import Navlinknewannoncevente from "./treatment/Navlinknewannoncevente";
 import SignalFromAnnonceventeShow from "./inc/SignalFromAnnonceventeShow";
@@ -24,6 +23,7 @@ import {
 } from "../../../../redux/actions/annoncevente/annonceventeshowActions";
 import ButonMiniSubscribedAllAnnonce from "../../../inc/vendor/ButonMiniSubscribedAllAnnonce";
 import ButonFollowerUser from "../../../inc/vendor/follow/ButonFollowerUser";
+import AnnonceventeuploadimageIndex from "../../uploadimages/AnnonceventeuploadimageIndex";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -309,46 +309,52 @@ class Annonceventebycategorycityshow extends Component {
                                 <div className="row">
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="card-body">
-                                            <div className="submit text-left">
-                                                <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
-                                                    <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour au annonces</b>
-                                                </button>
-                                            </div>
+                                            <div className="d-flex align-items-center">
+                                                <div className="text-left pull-left">
+                                                    <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
+                                                        <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour au annonces </b>
+                                                    </button>
+                                                </div>
 
-                                            <div className="card-image">
-                                                <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
-                                                    <ol className="carousel-indicators">
-                                                        <li data-target="#carouselAnnonceIndicators" data-slide-to="0" className=""></li>
-                                                        <li data-target="#carouselAnnonceIndicators" data-slide-to="1" className=""></li>
-                                                        <li data-target="#carouselAnnonceIndicators" data-slide-to="2" className="active"></li>
-                                                    </ol>
-                                                    <div className="carousel-inner" role="listbox">
-                                                        <div className="carousel-item">
-                                                            <img className="d-block" src="/assets/vendor/assets/img/bg1.jpg" alt="First slide" />
-                                                        </div>
-                                                        <div className="carousel-item">
-                                                            <img className="d-block" src="/assets/vendor/assets/img/bg3.jpg" alt="Second slide" />
-                                                        </div>
-                                                        <div className="carousel-item active">
-                                                            <img className="d-block" src="/assets/vendor/assets/img/bg4.jpg" alt="Third slide" />
-                                                        </div>
-                                                    </div>
-                                                    <a className="carousel-control-prev" href="#carouselAnnonceIndicators" role="button" data-slide="prev">
-                                                        <i className="now-ui-icons arrows-1_minimal-left"></i>
-                                                    </a>
-                                                    <a className="carousel-control-next" href="#carouselAnnonceIndicators" role="button" data-slide="next">
-                                                        <i className="now-ui-icons arrows-1_minimal-right"></i>
-                                                    </a>
+                                                <div className="text-right ml-auto">
+                                                    {annoncevente.title ?
+                                                        <>
+                                                            {annoncevente.expired_at <= 6 && (
+                                                                <Button className="btn btn-success btn-sm">
+                                                                    <b>New</b>
+                                                                </Button>
+                                                            )}
+
+                                                            <Button className="btn btn-dark btn-sm">
+                                                                <i className="now-ui-icons media-1_album"></i>
+                                                                <b>{annoncevente.countuploadimages || "0"}</b>
+                                                            </Button>
+                                                            {annoncevente.link_video && (
+                                                                <Button className="btn btn-dark btn-sm">
+                                                                    <b>video</b>
+                                                                </Button>
+                                                            )}
+                                                        </>
+                                                        :
+                                                        <h5 className="text-dark"><b><Skeleton width={150} /></b></h5>
+                                                    }
                                                 </div>
                                             </div>
+
+                                            <AnnonceventeuploadimageIndex {...this.props}/>
                                             <br />
                                             <div className="d-flex align-items-center">
                                                 <div className="text-left pull-left">
-                                                    <NavLink to={`/annonces_ventes/${annoncevente.annoncetype.slug}/${annoncevente.categoryannoncevente.slug}/`}>
+                                                    {annoncevente.slug ?
                                                         <h6 className={`text-${annoncevente.categoryannoncevente.color_name} ml-auto mr-auto`}>
                                                             {annoncevente.categoryannoncevente.name}
                                                         </h6>
-                                                    </NavLink>
+                                                        :
+                                                        <h6 className={`ml-auto mr-auto`}>
+                                                            <Skeleton width={150}/>
+                                                        </h6>
+                                                    }
+
                                                 </div>
 
                                                 {/*
@@ -360,61 +366,71 @@ class Annonceventebycategorycityshow extends Component {
                                                 */}
 
                                                 <div className="text-center ml-auto">
-                                                    <h6 className="text-dark">{annoncevente.pieces} p . {annoncevente.rooms && (<>{annoncevente.rooms} ch</>)}. {annoncevente.surface && (<>{annoncevente.surface} m<sup>2</sup></>)}</h6>
+                                                    {annoncevente.slug ?
+                                                        <h6 className="text-dark"> {annoncevente.pieces} p . {annoncevente.rooms && (<>{annoncevente.rooms} ch</>)}. {annoncevente.surface && (<>{annoncevente.surface} m<sup>2</sup></>)}</h6>
+                                                        :
+                                                        <h6 className={`ml-auto mr-auto`}>
+                                                            <Skeleton width={150} />
+                                                        </h6>
+                                                    }
                                                 </div>
 
                                                 <div className="text-right ml-auto">
                                                 {annoncevente.price ?
                                                     <h5 className="text-dark"><b>{annoncevente.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country}</b></small> : <>{$money_country}</>}</b></h5>
                                                         :
-                                                        null
-                                                    }
+                                                    <h5 className="text-dark"><b><Skeleton width={150} /></b></h5>
+                                                }
                                                 </div>
                                             </div>
 
                                             <div className="text-center">
-                                                {$guest ?
-                                                    <Button data-toggle="modal" data-target="#loginModal"
-                                                            className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
-                                                        <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
-                                                    </Button>
-                                                    :
+                                                {annoncevente.slug && (
                                                     <>
-                                                        {annoncevente.likeked ?
-                                                            <>
-                                                                <Button onClick={() => this.props.unlikeItem(annoncevente)}
-                                                                        className="btn btn-info btn-sm" title="Je n'aime plus">
-                                                                    <i className="fas fa-heart"></i> <b>J'aime</b>
-                                                                </Button>
-                                                            </>
-
+                                                        {$guest ?
+                                                            <Button data-toggle="modal" data-target="#loginModal"
+                                                                    className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
+                                                                <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
+                                                            </Button>
                                                             :
                                                             <>
-                                                                <Button onClick={() => this.props.likeItem(annoncevente)}
-                                                                        className="btn btn-facebook btn-sm btn-neutral" title="J'aime">
-                                                                    <i className="far fa-heart"></i> <b>J'aime</b>
-                                                                </Button>
-                                                            </>
-                                                        }
+                                                                {annoncevente.likeked ?
+                                                                    <>
+                                                                        <Button onClick={() => this.props.unlikeItem(annoncevente)}
+                                                                                className="btn btn-info btn-sm" title="Je n'aime plus">
+                                                                            <i className="fas fa-heart"></i> <b>J'aime</b>
+                                                                        </Button>
+                                                                    </>
 
-                                                        {annoncevente.favoriteted ?
+                                                                    :
+                                                                    <>
+                                                                        <Button onClick={() => this.props.likeItem(annoncevente)}
+                                                                                className="btn btn-facebook btn-sm btn-neutral" title="J'aime">
+                                                                            <i className="far fa-heart"></i> <b>J'aime</b>
+                                                                        </Button>
+                                                                    </>
+                                                                }
 
-                                                            <>
-                                                                <Button onClick={() => this.props.unfavoriteItem(annoncevente)}
-                                                                        className="btn btn-danger btn-sm" title="Retirer de vos favoris">
-                                                                    <i className="fas fa-bookmark"></i> <b>Sauvegarder</b>
-                                                                </Button>
-                                                            </>
-                                                            :
-                                                            <>
-                                                                <Button onClick={() => this.props.favoriteItem(annoncevente)}
-                                                                        className="btn btn-facebook btn-sm btn-neutral" title="Ajouter à vos favoris">
-                                                                    <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
-                                                                </Button>
+                                                                {annoncevente.favoriteted ?
+
+                                                                    <>
+                                                                        <Button onClick={() => this.props.unfavoriteItem(annoncevente)}
+                                                                                className="btn btn-danger btn-sm" title="Retirer de vos favoris">
+                                                                            <i className="fas fa-bookmark"></i> <b>Sauvegarder</b>
+                                                                        </Button>
+                                                                    </>
+                                                                    :
+                                                                    <>
+                                                                        <Button onClick={() => this.props.favoriteItem(annoncevente)}
+                                                                                className="btn btn-facebook btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                                                            <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
+                                                                        </Button>
+                                                                    </>
+                                                                }
                                                             </>
                                                         }
                                                     </>
-                                                }
+                                                )}
                                             </div>
                                         </div>
 
@@ -434,7 +450,7 @@ class Annonceventebycategorycityshow extends Component {
                                                 <div className="container">
                                                     <div className="row">
                                                         <div className="col-md-6">
-                                                            <h5 className="info-title"><b>Ce bien est au prix de</b></h5>
+                                                            <h5 className="info-title"><b> {annoncevente.categoryannoncevente.label || "Ce bien"} est au prix de</b></h5>
                                                             {annoncevente.price && (
                                                                 <h3 className="text-dark"><b>{annoncevente.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country}</b></small> : <>{$money_country}</>}</b></h3>
                                                             )}
@@ -464,19 +480,20 @@ class Annonceventebycategorycityshow extends Component {
                                                     <div className="card-header d-flex align-items-center">
                                                         <div className="d-flex align-items-center">
                                                             {annoncevente.user.avatar ?
-                                                                <NavLink to={`/pro/${annoncevente.user.slug}/annonces_ventes/`}>
+                                                                <NavLink to={`/pro/${annoncevente.user.slug}/avs/${annoncevente.annoncetype.slug}/`}>
                                                                     <img src={annoncevente.user.avatar}
                                                                          style={{ height: "40px", width: "80px" }}
                                                                          alt={annoncevente.user.first_name}
                                                                          className="avatar" />
                                                                 </NavLink>
-                                                                : <Skeleton circle={false} height={40} width={80} />}
+                                                                : <img className="avatar" style={{ height: "40px", width: "80px" }}
+                                                                       src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
 
                                                             {annoncevente.title && (
                                                                 <>
                                                                     <div className="mx-3">
                                                                             <span className="text-dark font-weight-600 text-sm">
-                                                                                <Link to={`/pro/${annoncevente.user.slug}/annonces_ventes/`} ><b>{annoncevente.user.first_name}</b></Link>
+                                                                                <Link to={`/pro/${annoncevente.user.slug}/avs/${annoncevente.annoncetype.slug}/`} ><b>{annoncevente.user.first_name}</b></Link>
                                                                                 <small className="d-block text-muted">{annoncevente.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(annoncevente.created_at).format('LL')}</small>
                                                                                 <Link to={`/pro/${profileUser.slug}/followers/`}><b>{this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}</b></Link>
                                                                             </span>
@@ -574,7 +591,7 @@ class Annonceventebycategorycityshow extends Component {
                                                                                 </Button>
 
                                                                             }
-                                                                            <NavLink to={`/annonce_location/${annoncevente.annoncetype.slug}/${annoncevente.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer cette annonce">
+                                                                            <NavLink to={`/av_data/${annoncevente.annoncetype.slug}/${annoncevente.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer cette annonce">
                                                                                 <i className="now-ui-icons ui-2_settings-90" />
                                                                             </NavLink>
                                                                             <Button onClick={() => this.deleteItem(annoncevente.id)}
@@ -690,19 +707,20 @@ class Annonceventebycategorycityshow extends Component {
                                                             <div className="card-header d-flex align-items-center">
                                                                 <div className="d-flex align-items-center">
                                                                     {annoncevente.user.avatar ?
-                                                                        <NavLink to={`/pro/${annoncevente.user.slug}/annonces_ventes/`}>
+                                                                        <NavLink to={`/pro/${annoncevente.user.slug}/avs/${annoncevente.annoncetype.slug}/`}>
                                                                             <img src={annoncevente.user.avatar}
                                                                                  style={{ height: "40px", width: "80px" }}
                                                                                  alt={annoncevente.user.first_name}
                                                                                  className="avatar" />
                                                                         </NavLink>
-                                                                        : <Skeleton circle={false} height={40} width={80} />}
+                                                                        : <img className="avatar" style={{ height: "40px", width: "80px" }}
+                                                                               src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
 
                                                                     {annoncevente.title && (
                                                                         <>
                                                                             <div className="mx-3">
                                                                             <span className="text-dark font-weight-600 text-sm">
-                                                                                <Link to={`/pro/${annoncevente.user.slug}/annonces_ventes/`} ><b>{annoncevente.user.first_name}</b></Link>
+                                                                                <Link to={`/pro/${annoncevente.user.slug}/avs/${annoncevente.annoncetype.slug}/`} ><b>{annoncevente.user.first_name}</b></Link>
                                                                                 <small className="d-block text-muted">{annoncevente.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(annoncevente.created_at).format('LL')}</small>
                                                                                 <Link to={`/pro/${profileUser.slug}/followers/`}><b>{this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}</b></Link>
                                                                             </span>
@@ -752,9 +770,9 @@ class Annonceventebycategorycityshow extends Component {
                                     </div>
                                 </div>
 
-                                <AnnonceventeInteresse {...this.props}/>
+                                <AnnonceventeInteresse {...this.props} {...annoncevente}/>
 
-                                <BlogannonceventeIntesseAnnonseShow {...this.props} />
+                                {/* <BlogannonceventeIntesseAnnonseShow {...this.props} />*/}
 
                                 <SignalFromAnnonceventeShow {...this.props} {...annoncevente} />
 
