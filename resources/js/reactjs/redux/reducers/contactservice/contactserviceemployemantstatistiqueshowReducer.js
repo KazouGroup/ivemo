@@ -9,30 +9,29 @@ const initialState = {
 
 export default produce((draft, action = {}) => {
         switch (action.type) {
+
             case 'GET_RED_CONTACTSERVICEMPLOYMENT':
                 draft.employment = action.payload;
                 return;
 
             case 'FAVORITE_CONTACTSERVICE_ADD':
-                draft.employment.contactservices[
-                    draft.employment.contactservices.findIndex(i => i.id === action.payload)
-                    ].status_favorite = action.payload;
+                let dataddfav = draft.employment.contactservices.findIndex(i => i.id === action.payload);
+                if (dataddfav !== -1) draft.employment.contactservices[dataddfav].status_favorite = action.payload;
                 return draft;
 
             case 'FAVORITE_CONTACTSERVICE_REMOVE':
-                draft.employment.contactservices[
-                    draft.employment.contactservices.findIndex(i => i.id === action.payload)
-                    ].status_favorite = !action.payload;
+                let datrmfav = draft.employment.contactservices.findIndex(i => i.id === action.payload);
+                if (datrmfav !== -1) draft.employment.contactservices[datrmfav].status_favorite = !action.payload;
                 return draft;
 
             case 'ARCHVEMENT_CONTACTSERVICE_ADD':
-                let datadd = draft.employment.contactservices.findIndex(i => i.id === action.payload);
-                draft.employment.contactservices[datadd].status_archvement = action.payload;
+                let dataddach = draft.employment.contactservices.findIndex(i => i.id === action.payload);
+                if (dataddach !== -1) draft.employment.contactservices[dataddach].status_archvement = action.payload;
                 return draft;
 
             case 'ARCHVEMENT_CONTACTSERVICE_REMOVE':
-                let dataremove = draft.employment.contactservices.findIndex(i => i.id === action.payload);
-                draft.employment.contactservices[dataremove].status_archvement = !action.payload;
+                let dataremoveach = draft.employment.contactservices.findIndex(i => i.id === action.payload);
+                if (dataremoveach !== -1) draft.employment.contactservices[dataremoveach].status_archvement = !action.payload;
                 return draft;
 
             case 'ACTIVE_CONTACTSERVICE_ADD':

@@ -16,6 +16,10 @@ export default produce((draft, action = {}) => {
             draft.uploadimages = action.payload;
             return;
 
+        case 'GET_UPLOADIMAGES_ANNONCEVENTE_SHOW_USER_SITE':
+            draft.uploadimages = action.payload;
+            return;
+
     }
 },
     initialState

@@ -598,7 +598,7 @@ class AnnoncelocationEdit extends Component {
                                                                             {uploadimages.length >= 1 && (
 
                                                                                 <div className="toolbar">
-                                                                                    {this.state.countuploadimages < 10 && (
+                                                                                    {this.state.countuploadimages > 10 && (
 
                                                                                         <div className="submit text-center">
                                                                                             <a style={{cursor: "pointer"}}

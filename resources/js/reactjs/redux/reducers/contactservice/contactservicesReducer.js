@@ -35,15 +35,13 @@ export default produce((draft, action = {}) => {
                 return;
 
             case 'FAVORITE_CONTACTUSER_ADD':
-                draft.contactservices.contactusers[
-                    draft.contactservices.contactusers.findIndex(i => i.id === action.payload)
-                    ].status_favorite = action.payload;
+                let dataddfav = draft.contactservices.contactusers.findIndex(i => i.id === action.payload);
+                if (dataddfav !== -1) draft.contactservices.contactusers[dataddfav].status_favorite = action.payload;
                 return draft;
 
             case 'FAVORITE_CONTACTUSER_REMOVE':
-                draft.contactservices.contactusers[
-                    draft.contactservices.contactusers.findIndex(i => i.id === action.payload)
-                    ].status_favorite = !action.payload;
+                let datrmfav = draft.contactservices.contactusers.findIndex(i => i.id === action.payload);
+                if (datrmfav !== -1) draft.contactservices.contactusers[datrmfav].status_favorite = !action.payload;
                 return draft;
 
             case 'ARCHVEMENT_CONTACTUSER_ADD':

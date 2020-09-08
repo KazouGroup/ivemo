@@ -90,7 +90,7 @@ class annoncevente extends Model
     }
 
     public $dates = ['expired_at','created_at','updated_at'];
-    
+
     protected $casts = [
         'status' => 'boolean',
         'status_comments' => 'boolean',
@@ -128,7 +128,13 @@ class annoncevente extends Model
     {
         return $this->morphMany(contactservice::class ,'contactserviceable');
     }
-    
+
+    public function uploadimages()
+    {
+        return $this->morphMany(uploadimage::class ,'uploadimagealable')
+            ->orderByDesc('created_at');
+    }
+
     public function iscontactservice()
     {
         return (bool) contactservice::where('from_id', Auth::id())

@@ -13,7 +13,8 @@ class Buttonctionshowmailcontactservice extends Component {
             <>
 
 
-                {this.props.status_red ?
+                {/*
+                 {this.props.status_red ?
                     <Button onClick={() => this.props.activecontactremoveItem(this.props.id)}
                             className="btn btn-success btn-icon btn-sm btn-neutral" title="Marquer comme non lu">
                         <i className="fas fa-envelope-open"></i>
@@ -24,6 +25,8 @@ class Buttonctionshowmailcontactservice extends Component {
                         <i className="fas fa-envelope"></i>
                     </Button>
                 }
+                */}
+
 
 
                 <Button onClick={() => this.props.deletecontactItem(this.props.id)}

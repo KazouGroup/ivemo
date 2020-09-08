@@ -82,7 +82,7 @@ class AnnonceventeController extends Controller
     public function apiannonceventebyannoncetype(annoncetype $annoncetype)
     {
         $annoncesventes = AnnonceventeResource::collection($annoncetype->annonceventes()->whereIn('annoncetype_id',[$annoncetype->id])
-            ->with('user','categoryannoncevente','city','annoncetype')
+            ->with('user','categoryannoncevente','city','annoncetype','uploadimages')
             ->with(['user.profile' => function ($q){$q->distinct()->get();}])
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
@@ -156,7 +156,7 @@ class AnnonceventeController extends Controller
             ->where('status',1)
             ->withCount(['annonceventes' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->with('user','categoryannoncevente','city','annoncetype')
+                    ->with('user','categoryannoncevente','city','annoncetype','uploadimages')
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);});
             }])
@@ -186,11 +186,12 @@ class AnnonceventeController extends Controller
         visits($annoncevente)->seconds(60)->increment();
 
         $annoncevente = new AnnonceventeResource(annoncevente::whereIn('annoncetype_id',[$annoncetype->id])
-        ->whereIn('city_id',[$city->id])
-        ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
-        ->where(['status' => 1,'status_admin' => 1])
-        ->with(['user.profile' => function ($q){$q->distinct()->get();},])
-         ->whereSlug($annoncevente->slug)->firstOrFail());
+            ->with('user','city','annoncetype','uploadimages','categoryannoncevente')
+            ->whereIn('city_id',[$city->id])
+            ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
+            ->where(['status' => 1,'status_admin' => 1])
+            ->with(['user.profile' => function ($q){$q->distinct()->get();},])
+            ->whereSlug($annoncevente->slug)->firstOrFail());
 
         return response()->json($annoncevente, 200);
     }
@@ -255,11 +256,11 @@ class AnnonceventeController extends Controller
         return response()->json($data, 200);
     }
 
-    public function apiannonceventeinteresse(annoncetype $annoncetype,user $user)
+    public function apiannonceventeinteresse(annoncetype $annoncetype,city $city)
     {
-        $annoncevente = AnnonceventeResource::collection($user->annonceventes()->whereIn('annoncetype_id',[$annoncetype->id])
-            ->with('user','city','annoncetype','categoryannoncevente')
-            ->whereIn('user_id',[$user->id])
+        $annoncevente = AnnonceventeResource::collection($city->annonceventes()->whereIn('annoncetype_id',[$annoncetype->id])
+            ->with('user','city','annoncetype','uploadimages','categoryannoncevente')
+            ->whereIn('city_id',[$city->id])
             ->orderBy('created_at','desc')
             ->where(['status' => 1,'status_admin' => 1])
             ->take(10)->distinct()->get());
@@ -270,7 +271,7 @@ class AnnonceventeController extends Controller
     {
         $annoncevente = AnnonceventeResource::collection($categoryannoncevente->annonceventes()
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
-            ->with('user','city','annoncetype','categoryannoncevente')
+            ->with('user','city','annoncetype','uploadimages','categoryannoncevente')
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
             ->orderByRaw('RAND()')

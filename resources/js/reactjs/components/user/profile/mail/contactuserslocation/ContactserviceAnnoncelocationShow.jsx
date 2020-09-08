@@ -6,25 +6,25 @@ import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import moment from "moment";
 import HelmetSite from "../../../../inc/user/HelmetSite";
-import Navlinknewemployment from "../../../employment/treatement/Navlinknewemployment";
-import Navemploymentsbyuser from "../../../employment/inc/Navemploymentsbyuser";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
-import PrivateUserEmployementList from "../../../employment/inc/PrivateUserEmployementList";
 import { Button, FormText } from "reactstrap";
-import MailcontactserviceList from "../inc/MailcontactserviceList";
-import EmploymentListOnSkeleton from "../../../../inc/user/employment/EmploymentListOnSkeleton";
 import {connect} from "react-redux";
 import {
     activecontactaddItem, activecontactremoveItem,
     unactiveprivateItem, activeItem,
     archvementaddItem, archvementremoveItem,
     favoriteaddItem, favoriteremoveItem,
-    loadContactserviceemploymentshow,deletecontactItem
+    loadContactservicelocationshow,deletecontactItem
 } from "../../../../../redux/actions/contactserviceActions";
 import PropTypes from "prop-types";
+import Navannoncelocationsbyuser from "../../../annonces/annonceloaction/inc/Navannoncelocationsbyuser";
+import Navlinknewannoncelocation from "../../../annonces/annonceloaction/treatment/Navlinknewannoncelocation";
+import MailcontactserviceList from "../../contactservices/inc/MailcontactserviceList";
+import AnnoncesListOnSkeleton from "../../../../inc/user/annonce/AnnoncesListOnSkeleton";
+import PrivateUserAnnonceslocationList from "../../../annonces/annonceloaction/inc/PrivateUserAnnonceslocationList";
 
 
-class ContactserviceEmploymentShow extends Component {
+class ContactserviceAnnoncelocationShow extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -40,7 +40,7 @@ class ContactserviceEmploymentShow extends Component {
     readItem(item) {
         const url = route('contactservice_red', [item.id]);
         dyaxios.get(url).then(() => {
-            this.props.history.push(`/profile/${$userIvemo.slug}/statistics/employments_contactservice_show/${item.slug}/`);
+            this.props.history.push(`/profile/${$userIvemo.slug}/statistics/als_contactservice_show/${item.slug}/`);
         })
 
     }
@@ -60,7 +60,7 @@ class ContactserviceEmploymentShow extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('employmentsdelete_site', [id]);
+                const url = route('annonces_locations_delete.site', [id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
@@ -82,7 +82,7 @@ class ContactserviceEmploymentShow extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.props.history.push(`/profile/${$userIvemo.slug}/personal_settings/employments/`);
+                    this.props.history.push(`/profile/${$userIvemo.slug}/personal_settings/als/`);
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -99,7 +99,7 @@ class ContactserviceEmploymentShow extends Component {
     }
 
     loadItems() {
-        this.props.loadContactserviceemploymentshow(this.props);
+        this.props.loadContactservicelocationshow(this.props);
     }
 
     reloadItem(){
@@ -111,10 +111,10 @@ class ContactserviceEmploymentShow extends Component {
     }
 
     render() {
-        const { employment } = this.props;
+        const { annoncelocation } = this.props;
         return (
             <>
-                <HelmetSite title={`${employment.title || $name_site} - ${$name_site}`} />
+                <HelmetSite title={`${$userIvemo.first_name} - ${$name_site}`} />
 
                 <div className="landing-page sidebar-collapse">
 
@@ -134,7 +134,7 @@ class ContactserviceEmploymentShow extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
-                                        <Navlinknewemployment />
+                                        <Navlinknewannoncelocation {...this.props} />
 
                                         <div className="card">
                                             <div className="card-body">
@@ -142,7 +142,7 @@ class ContactserviceEmploymentShow extends Component {
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                            <Navemploymentsbyuser />
+                                                            <Navannoncelocationsbyuser/>
 
                                                         </div>
                                                     </div>
@@ -173,30 +173,30 @@ class ContactserviceEmploymentShow extends Component {
                                             </Button>
                                         </div>
 
-                                        {employment.title ?
+                                        {annoncelocation.title ?
 
                                             <>
-                                                <PrivateUserEmployementList {...this.props} {...employment} deleteItem={this.deleteItem} unactiveprivateItem={this.props.unactiveprivateItem} activeItem={this.props.activeItem} />
+                                                <PrivateUserAnnonceslocationList {...this.props} {...annoncelocation} unactiveprivatealsItem={this.props.unactiveprivatealsItem} activeItem={this.props.activeItem} deleteItem={this.deleteItem} />
 
                                                 <div className="card">
                                                     <div className="social-line social-line-big-icons">
                                                         <div className="container">
                                                             <div className="row">
                                                                 <div className="col-md-4">
-                                                                    <h5 className="info-title"><b>{employment.countcomments > 1 ? "Commentaires" : "Commentaire"}</b></h5>
-                                                                    {employment.countcomments}
+                                                                    <h5 className="info-title"><b>{annoncelocation.countcomments > 1 ? "Commentaires" : "Commentaire"}</b></h5>
+                                                                    {annoncelocation.countcomments}
                                                                 </div>
                                                                 <div className="col-md-2">
-                                                                    <h5 className="info-title"><b> {employment.visits_count > 1 ? "Vues" : "Vue"}</b></h5>
-                                                                    {employment.visits_count}
+                                                                    <h5 className="info-title"><b> {annoncelocation.visits_count > 1 ? "Vues" : "Vue"}</b></h5>
+                                                                    {annoncelocation.visits_count}
                                                                 </div>
                                                                 <div className="col-md-2">
-                                                                    <h5 className="info-title"><b> {employment.countlikes > 1 ? "Likes" : "Like"}</b></h5>
-                                                                    {employment.countlikes}
+                                                                    <h5 className="info-title"><b> {annoncelocation.countlikes > 1 ? "Likes" : "Like"}</b></h5>
+                                                                    {annoncelocation.countlikes}
                                                                 </div>
                                                                 <div className="col-md-4">
-                                                                    <h5 className="info-title"><b>  {employment.contactservices_count > 1 ? "Messages non lus" : "Message non lu"}</b></h5>
-                                                                    {employment.contactservices_count}
+                                                                    <h5 className="info-title"><b>  {annoncelocation.contactservices_count > 1 ? "Messages non lus" : "Message non lu"}</b></h5>
+                                                                    {annoncelocation.contactservices_count}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -204,9 +204,9 @@ class ContactserviceEmploymentShow extends Component {
                                                 </div>
 
 
-                                                {employment.contactservices.length >= 1 && (
+                                                {annoncelocation.contactservices.length >= 1 && (
                                                     <>
-                                                     <a href={`${route('contactservice_employmentsbyuserbyexport_site',[employment.user.slug, employment.slugin])}`} className="btn btn-primary btn-sm pull-right" title="Télécharger vos contacts">
+                                                     <a href={`${route('contactservice_annoncelocationsbyuserbyexport_site',[annoncelocation.user.slug, annoncelocation.slugin])}`} className="btn btn-primary btn-sm pull-right" title="Télécharger vos contacts">
                                                          <i className="fa fa-file-excel" />
                                                      </a>
                                                     <div className="card">
@@ -215,7 +215,7 @@ class ContactserviceEmploymentShow extends Component {
                                                             <table>
                                                                 <tbody>
 
-                                                                    {employment.contactservices.map(item => (
+                                                                    {annoncelocation.contactservices.map(item => (
                                                                         <MailcontactserviceList key={item.id} {...item}
                                                                                                 favoriteaddItem={this.props.favoriteaddItem}
                                                                                                 favoriteremoveItem={this.props.favoriteremoveItem}
@@ -242,7 +242,7 @@ class ContactserviceEmploymentShow extends Component {
 
                                             :
 
-                                            <EmploymentListOnSkeleton />
+                                            <AnnoncesListOnSkeleton />
                                         }
 
                                     </div>
@@ -263,20 +263,20 @@ class ContactserviceEmploymentShow extends Component {
         )
     }
 }
-ContactserviceEmploymentShow.propTypes = {
-    loadContactserviceemploymentshow: PropTypes.func.isRequired,
+ContactserviceAnnoncelocationShow.propTypes = {
+    loadContactservicelocationshow: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
 
-    employment: state.contactserviceemploymentstatistiqueshow.employment
+    annoncelocation: state.contactservicelocationstatistiqueshow.annoncelocation
 
 });
 
 export default connect(mapStateToProps, {
-    loadContactserviceemploymentshow,
+    loadContactservicelocationshow,
     favoriteaddItem,favoriteremoveItem,
     archvementaddItem,archvementremoveItem,
     activecontactaddItem,activecontactremoveItem,
     unactiveprivateItem,activeItem,deletecontactItem
-})(ContactserviceEmploymentShow);
+})(ContactserviceAnnoncelocationShow);

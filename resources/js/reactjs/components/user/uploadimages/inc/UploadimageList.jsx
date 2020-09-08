@@ -1,6 +1,5 @@
 import React, {PureComponent} from "react";
 import UploadimageListSkeleton from "../../../inc/user/comment/UploadimageListSkeleton";
-import {Link} from "react-router-dom";
 import LazyLoad from "react-lazyload";
 
 
