@@ -32,9 +32,7 @@ class Navemploymentsbyuser extends PureComponent {
                 return (
                     <tr key={item.id}>
                         <td>
-                            <NavLink to={`/employments/${item.slug}/`}>
-                                <strong>{item.name}</strong>
-                            </NavLink>
+                            <strong>{item.name}</strong>
                         </td>
                         <td className="text-right"> {this.getcountcategoryannonceString(item.employments_count)} {item.employments_count > 1 ? "annonces" : "annonce"}</td>
                     </tr>
