@@ -69,7 +69,8 @@ class PrivateUserFavoritEmployementList extends PureComponent {
                                                      alt={this.props.favoriteable.user.first_name}
                                                      className="avatar" />
                                             </NavLink>
-                                            : <Skeleton circle={false} height={40} width={80} />}
+                                            :  <img className="avatar" style={{ height: "40px", width: "80px" }}
+                                                    src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
                                         <div className="mx-3">
                                             <NavLink to={`/pro/${this.props.favoriteable.user.slug}/`} className="text-dark font-weight-600 text-sm">{this.props.favoriteable.user.first_name}
                                                 <small className="d-block text-muted"><b><i className="now-ui-icons tech_watch-time"/> {moment(this.props.favoriteable.created_at).format('ll')}</b></small>
