@@ -203,7 +203,7 @@ class AnnoncelocationCreate extends Component {
                                                     </button>
                                                 </div>
                                                 <div className="text-right ml-auto">
-                                                    <button className="btn btn-secondary" type="button" onClick={this.props.history.goBack} title="Ne pas mettre à jour l'annonce">
+                                                    <button className="btn btn-secondary" type="button" onClick={this.props.history.goBack} title="Ne pas poster">
                                                         <b>Annuler</b>
                                                     </button>
                                                 </div>
@@ -295,7 +295,7 @@ class AnnoncelocationCreate extends Component {
 
                                                                                     <div className="col-md-4">
                                                                                         <label className="labels">
-                                                                                            Garantie ?
+                                                                                            Caution ?
                                                                                             <span className="text-danger">*</span>
                                                                                         </label>
                                                                                         <div className="input-group">
@@ -316,7 +316,7 @@ class AnnoncelocationCreate extends Component {
                                                                                     </div>
                                                                                     <div className="col-md-4">
                                                                                         <label className="labels">
-                                                                                            Periode ?
+                                                                                            Période ?
                                                                                             <span className="text-danger">*</span>
                                                                                         </label>
                                                                                         <div className="form-group">
@@ -327,7 +327,7 @@ class AnnoncelocationCreate extends Component {
                                                                                                 id="periodeannonce_id"
                                                                                                 onChange={this.handleFieldChange}
                                                                                                 required="required">
-                                                                                                <option value="" disabled>Selectioner une periode
+                                                                                                <option value="" disabled>Sélectionner une période
                                                                                                 </option>
                                                                                                 {periodeannonces.map((item) => (
                                                                                                     <option key={item.id}
@@ -357,8 +357,8 @@ class AnnoncelocationCreate extends Component {
                                                                                                 onChange={this.handleFieldChange}
                                                                                                 required="required">
                                                                                                 <option value=""
-                                                                                                        disabled>Selectioner
-                                                                                                    une category
+                                                                                                        disabled>Sélectionner
+                                                                                                    une catégorie
                                                                                                 </option>
                                                                                                 {categoryannoncelocations.map((item) => (
                                                                                                     <option
@@ -384,7 +384,7 @@ class AnnoncelocationCreate extends Component {
                                                                                                     onChange={this.handleFieldChange}
                                                                                                     required="required">
                                                                                                 <option value=""
-                                                                                                        disabled>Selectioner
+                                                                                                        disabled>Sélectionner
                                                                                                     une ville
                                                                                                 </option>
                                                                                                 {cities.map((item) => (
@@ -515,7 +515,7 @@ class AnnoncelocationCreate extends Component {
 
                                                                                 <div className="form-group">
                                                                                     <label className="labels">
-                                                                                        Décrivez votre article
+                                                                                        Décrivez votre annonce
                                                                                         <span className="text-danger">*</span>
                                                                                     </label>
                                                                                     <br />
@@ -535,17 +535,16 @@ class AnnoncelocationCreate extends Component {
                                                     </div>
 
                                                     <div className="submit text-center">
-                                                        <button className="btn btn-secondary" type="button" onClick={this.props.history.goBack} title="Ne pas mettre à jour l'annonce">
+                                                        <button className="btn btn-secondary" type="button" onClick={this.props.history.goBack} title="Ne pas postée l'annonce">
                                                             <b>Annuler</b>
                                                         </button>
-                                                        <button className="btn btn-primary" type="submit" title="Mettre à jour l'annonce">
+                                                        <button className="btn btn-primary" type="submit" title="Poster l'annonce">
                                                             <b>Poster votre annonce</b>
                                                         </button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
 
                                 </Form>
