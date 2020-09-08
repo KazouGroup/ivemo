@@ -5,6 +5,8 @@ namespace App\Services;
 
 use App\Http\Resources\AnnoncelocationResource;
 use App\Http\Resources\Profile\PrivateAnnoncelocationResource;
+use App\Jobs\NewannonceJob;
+use App\Model\abonne\subscribeannonce;
 use App\Model\annoncelocation;
 use App\Model\annoncetype;
 use App\Model\categoryannoncelocation;
@@ -173,5 +175,20 @@ class AnnoncelocationService
             ->whereSlug($annoncelocation->slug)->firstOrFail());
 
         return $annoncelocation;
+    }
+
+
+    public static function sendMessageToUser($request,$annoncetype)
+    {
+        $fromUser = auth()->user();
+
+        $emailsubscribannonce = subscribeannonce::with('user','member')
+            ->whereIn('member_id',[$fromUser->id])
+            ->distinct()->get();
+
+        $emailuserJob = (new NewannonceJob($emailsubscribannonce,$fromUser,$annoncetype));
+
+        dispatch($emailuserJob);
+
     }
 }

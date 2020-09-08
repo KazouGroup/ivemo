@@ -22,7 +22,7 @@ class BaseRequest extends Request
                 'message' => 'required|min:5|max:5000',
                 'phone' => 'nullable|numeric',
                 'subject' => 'required|string|min:3|max:200',
-                'email' => 'required|email|numeric|min:2|max:200',
+                'email' => 'required|email|min:2|max:200',
             ];
         }elseif($group === 'sendcontactmessageuser') {
             $rules = [

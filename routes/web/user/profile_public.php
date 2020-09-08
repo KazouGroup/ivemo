@@ -8,7 +8,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.profilpublique');
 
     Route::get(
-        'pro/{user}/annonces_locations',
+        'pro/{user}/als/{annoncetype}',
         'ProfilepublicController@apiprofilannoncelocations'
     )->name('api.profilpublique_annoncelocations');
 
@@ -81,7 +81,7 @@ Route::post(
 )->name('public_profile_agences_send_message.site');
 
 Route::get(
-    'pro/{user}/annonces_locations',
+    'pro/{user}/als/{annoncetype}',
     'ProfilepublicController@publicprofilannoncelocations'
 )->name('public_profile_annoncelocations.site');
 

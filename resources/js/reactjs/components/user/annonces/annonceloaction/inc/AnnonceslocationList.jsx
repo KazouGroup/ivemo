@@ -77,14 +77,14 @@ class AnnonceslocationList extends PureComponent {
                                                     <>
                                                         {this.props.status ?
                                                             <>
-                                                                <button type="button" rel="tooltip" onClick={() => this.props.statusItem(this.props)}
+                                                                <button type="button" rel="tooltip" onClick={() => this.props.unactiveItem(this.props)}
                                                                         className="btn btn-success btn-icon btn-sm">
                                                                     <i className="now-ui-icons ui-1_check"/>
                                                                 </button>
                                                             </>
                                                             :
                                                             <>
-                                                                <button type="button" onClick={() => this.props.statusItem(this.props)}
+                                                                <button type="button" onClick={() => this.props.activeItem(this.props)}
                                                                         className="btn btn-primary btn-icon btn-sm">
                                                                     <i className="now-ui-icons ui-1_simple-delete"/>
                                                                 </button>
@@ -161,7 +161,7 @@ class AnnonceslocationList extends PureComponent {
                                     <div className="card-header d-flex align-items-center">
                                         <div className="d-flex align-items-center">
                                             {this.props.user.avatar ?
-                                                <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`}>
+                                                <NavLink to={`/pro/${this.props.user.slug}/als/`}>
                                                     <img src={this.props.user.avatar}
                                                          style={{ height: "40px", width: "80px" }}
                                                          alt={this.props.user.first_name}
@@ -170,8 +170,8 @@ class AnnonceslocationList extends PureComponent {
                                                 :  <img className="avatar" style={{ height: "40px", width: "80px" }}
                                                         src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
                                             <div className="mx-3">
-                                                <NavLink to={`/pro/${this.props.user.slug}/annonces_locations/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
-                                                    <small className="d-block text-muted"><b>{this.props.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(this.props.created_at).format('LL')}</b></small>
+                                                <NavLink to={`/pro/${this.props.user.slug}/als/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
+                                                    <small className="d-block text-muted"><b> {moment(this.props.created_at).format('LL')}</b></small>
                                                 </NavLink>
                                             </div>
                                         </div>
@@ -189,7 +189,7 @@ class AnnonceslocationList extends PureComponent {
                                                     {this.props.favoriteted ?
 
                                                         <>
-                                                            <Button onClick={() => this.props.favoriteItem(this.props)}
+                                                            <Button onClick={() => this.props.unfavoriteItem(this.props)}
                                                                     className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
                                                                 <i className="fas fa-bookmark"></i>
                                                             </Button>

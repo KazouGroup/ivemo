@@ -60,7 +60,6 @@ class AnnoncelocationResource extends JsonResource
             'visits_countries' => $this->visits()->countries(),
             'visits_languages' => $this->visits()->languages(),
             'visits_operatingSystems' => $this->visits()->operatingSystems(),
-            'statusOnline' => $this->isOnline(),
             'categoryannoncelocation' => $this->categoryannoncelocation,
             'signalannoncelocations_count' => $this->signalannoncelocations_count,
             'categoryannoncelocation_id' => $this->categoryannoncelocation_id,

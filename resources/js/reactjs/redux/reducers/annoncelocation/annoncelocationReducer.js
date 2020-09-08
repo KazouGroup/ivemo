@@ -1,7 +1,7 @@
 import produce from "immer"
 
 const initialState = {
-    annoncelocations: {annoncetype: [], categoryannoncelocation: [], city: [], user: []},
+    annoncelocations: {uploadimages:[],annoncetype: [], categoryannoncelocation: [], city: [], user: []},
     catgoryannoncelocations: {user: []},
     cityannoncelocations: {user: []}
 };
@@ -22,6 +22,10 @@ export default produce((draft, action = {}) => {
                 return;
 
             case 'GET_ANNONCELOCATION_INTERESSE_BY_CATEGORY':
+                draft.annoncelocations = action.payload;
+                return;
+
+            case 'GET_ANNONCELOCATION_BY_USER_PUBLIC':
                 draft.annoncelocations = action.payload;
                 return;
 

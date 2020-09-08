@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Http\Resources\AnnoncelocationResource;
 use App\Http\Resources\AnnoncereservationResource;
 use App\Http\Resources\BlogannoncelocationResource;
 use App\Http\Resources\BlogannoncereservationResource;
@@ -241,18 +242,15 @@ class ProfileService
     }
 
 
-    public static function apiprofilannoncelocations($user)
+    public static function apiprofilannoncelocations($user,$annoncetype)
     {
-        $personnalreservations = HelpersService::helpersdatabyuseractive($user)
-            ->with(['annoncelocations' => function ($q) use ($user){
-                $q->with('user','categoryannoncelocation','city','annoncetype')
-                    ->whereIn('annoncetype_id',[1])
+        $personnalreservations = AnnoncelocationResource::collection($user->annoncelocations()
+                    ->with('user','categoryannoncelocation','city','annoncetype','uploadimages')
+                    ->whereIn('annoncetype_id',[$annoncetype->id])
                     ->whereIn('user_id',[$user->id])
                     ->whereHas('city', function ($q) {$q->where('status',1);})
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
-                    ->where(['status' => 1,'status_admin' => 1])->distinct()->get()->toArray()
-                ;},
-            ])->first();
+                    ->where(['status' => 1,'status_admin' => 1])->distinct()->get());
 
         return $personnalreservations;
     }
@@ -276,14 +274,6 @@ class ProfileService
 
     public static function apiprofilemployments($user)
     {
-        //$employments = EmploymentResource::collection(employment::with('user','city','categoryemployment','member')
-        //            ->where(['status' => 1,'status_admin' => 1])
-        //            ->whereIn('user_id',[$user->id])
-        //            ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
-        //            ->whereHas('city', function ($q) {$q->where('status',1);})
-        //            //->distinct()->paginate(40));
-        //            ->distinct()->get());
-
 
         $employments = EmploymentResource::collection($user->employments()
             ->with('user','city','categoryemployment','member')
@@ -292,6 +282,7 @@ class ProfileService
             ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             //->distinct()->paginate(40));
+            ->orderByDesc('created_at')
             ->distinct()->get());
 
         return $employments;

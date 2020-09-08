@@ -342,6 +342,8 @@ class AnnoncelocationController extends Controller
 
         $annoncelocation->save();
 
+        AnnoncelocationService::sendMessageToUser($request,$annoncetype);
+
         return ['redirect' => route('annoncelocationsedit_site',[$annoncetype->slug,$annoncelocation->slugin])];
     }
 

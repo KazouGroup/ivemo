@@ -21,7 +21,7 @@ class HeaderProfileAccountPrivate extends PureComponent {
                     >
                         {$userIvemo.avatar === null ?
                             <img className="ivemoAvatar avatar" alt={$userIvemo.first_name}
-                                 src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>
+                                 src={`${$url_site}/assets/vendor/assets/img/blurredimage1.jpg`}/>
                             :
                             <img className="ivemoAvatar avatar" alt={$userIvemo.first_name}
                                  src={$userIvemo.avatar}/>

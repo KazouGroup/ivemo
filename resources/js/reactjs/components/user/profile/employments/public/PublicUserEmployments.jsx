@@ -98,7 +98,16 @@ class PublicUserEmployments extends Component {
 
                     <div className="wrapper">
                         <div className="page-header page-header-mini">
-                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}/>
+
+                            {useremploymentPublick.avatarcover ?
+                                <div className="page-header-image" data-parallax="true"
+                                     style={{backgroundImage: "url(" + useremploymentPublick.avatarcover + ")"}}>
+                                </div>
+                                :
+                                <div className="page-header-image" data-parallax="true"
+                                     style={{backgroundImage: "url(" + `${$url_site}/assets/vendor/assets/img/blurredimage1.jpg` + ")"}}>
+                                </div>
+                            }
 
                             {useremploymentPublick.first_name && (
 

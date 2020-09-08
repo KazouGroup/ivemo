@@ -403,7 +403,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                 <div className="container">
                                                     <div className="row">
                                                         <div className="col-md-6">
-                                                            <h5 className="info-title"><b>Le loyer est de</b></h5>
+                                                            <h5 className="info-title"><b>La location est de</b></h5>
                                                             {annoncelocation.price && (
 
                                                                 <h3 className="text-dark"><b>{annoncelocation.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small> : <>{$money_country}<small><b> {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small></>}</b></h3>
@@ -433,7 +433,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                     <div className="card-header d-flex align-items-center">
                                                         <div className="d-flex align-items-center">
                                                             {annoncelocation.user.avatar ?
-                                                                <NavLink to={`/pro/${annoncelocation.user.slug}/annonces_locations/`}>
+                                                                <NavLink to={`/pro/${annoncelocation.user.slug}/als/${annoncelocation.annoncetype.slug}/`}>
                                                                     <img src={annoncelocation.user.avatar}
                                                                          style={{ height: "40px", width: "80px" }}
                                                                          alt={annoncelocation.user.first_name}
@@ -446,8 +446,8 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                 <>
                                                                     <div className="mx-3">
                                                                          <span className="text-dark font-weight-600 text-sm">
-                                                                                <Link to={`/pro/${annoncelocation.user.slug}/annonces_locations/`} ><b>{annoncelocation.user.first_name}</b></Link>
-                                                                                <small className="d-block text-muted">{annoncelocation.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(annoncelocation.created_at).format('LL')}</small>
+                                                                                <Link to={`/pro/${annoncelocation.user.slug}/als/${annoncelocation.annoncetype.slug}/`} ><b>{annoncelocation.user.first_name}</b></Link>
+                                                                                <small className="d-block text-muted"> {moment(annoncelocation.created_at).format('LL')}</small>
                                                                                 <Link to={`/pro/${profileUser.slug}/followers/`}><b>{this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}</b></Link>
                                                                          </span>
                                                                     </div>
@@ -655,7 +655,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                             <div className="card-header d-flex align-items-center">
                                                                 <div className="d-flex align-items-center">
                                                                     {annoncelocation.user.avatar ?
-                                                                        <NavLink to={`/pro/${annoncelocation.user.slug}/annonces_locations/`}>
+                                                                        <NavLink to={`/pro/${annoncelocation.user.slug}/als/${annoncelocation.annoncetype.slug}/`}>
                                                                             <img src={annoncelocation.user.avatar}
                                                                                  style={{ height: "40px", width: "80px" }}
                                                                                  alt={annoncelocation.user.first_name}
@@ -668,8 +668,8 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                         <>
                                                                         <div className="mx-3">
                                                                             <span className="text-dark font-weight-600 text-sm">
-                                                                                <Link to={`/pro/${annoncelocation.user.slug}/annonces_locations/`} ><b>{annoncelocation.user.first_name}</b></Link>
-                                                                                <small className="d-block text-muted">{annoncelocation.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(annoncelocation.created_at).format('LL')}</small>
+                                                                                <Link to={`/pro/${annoncelocation.user.slug}/als/${annoncelocation.annoncetype.slug}/`} ><b>{annoncelocation.user.first_name}</b></Link>
+                                                                                <small className="d-block text-muted"> {moment(annoncelocation.created_at).format('LL')}</small>
                                                                                 <Link to={`/pro/${profileUser.slug}/followers/`}><b>{this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}</b></Link>
                                                                             </span>
 

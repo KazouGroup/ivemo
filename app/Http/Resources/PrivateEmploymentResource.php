@@ -45,7 +45,6 @@ class PrivateEmploymentResource extends JsonResource
             'visits_countries' => $this->visits()->countries(),
             'visits_languages' => $this->visits()->languages(),
             'visits_operatingSystems' => $this->visits()->operatingSystems(),
-            'statusOnline' => $this->isOnline(),
             'categoryemployment_id' => $this->categoryemployment_id,
             'categoryemployment' => $this->categoryemployment,
             'created_at' => (string) $this->created_at,

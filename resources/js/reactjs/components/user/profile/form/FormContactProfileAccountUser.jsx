@@ -122,7 +122,8 @@ class FormContactProfileAccountUser extends PureComponent {
                                          alt={this.props.first_name}
                                          className="avatar"/>
                                 </NavLink>
-                                : <Skeleton circle={false} height={40} width={80}/>}
+                                :    <img  style={{height: "40px", width: "80px"}}
+                                           src={`${$url_site}/assets/vendor/assets/img/blurredimage1.jpg`}/>}
                             <div className="mx-3">
                                 <span
                                    className="text-dark font-weight-600 text-sm"><b>{this.props.first_name}</b>

@@ -13,6 +13,15 @@ class NavLinkPublicUser extends PureComponent {
                             <tbody>
 
                             {this.props.status_profile && (
+                                <>
+                                <tr>
+                                    <td>
+                                        <NavLink to={`/pro/${this.props.slug}/als/locations/`}>
+                                            <b>Locations</b>
+                                        </NavLink>
+                                    </td>
+                                    <td className="text-right"> {this.props.annoncelocations_count} {this.props.annoncelocations_count > 1 ? "annonces" : "annonce"}</td>
+                                </tr>
                                 <tr>
                                     <td>
                                         <NavLink to={`/pro/${this.props.slug}/employments/`}>
@@ -21,6 +30,7 @@ class NavLinkPublicUser extends PureComponent {
                                     </td>
                                     <td className="text-right"> {this.props.employments_count} {this.props.employments_count > 1 ? "annonces" : "annonce"}</td>
                                 </tr>
+                                </>
                             )}
 
                             <tr>

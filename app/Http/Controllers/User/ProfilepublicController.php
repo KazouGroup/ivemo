@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StoreRequest;
 use App\Http\Resources\UserResource;
+use App\Model\annoncetype;
 use App\Model\contactuser;
 use App\Model\user;
 use App\Services\Contactusers\ContactuserService;
@@ -22,10 +23,10 @@ class ProfilepublicController extends Controller
         return response()->json($user, 200);
     }
 
-    public function apiprofilannoncelocations(user $user)
+    public function apiprofilannoncelocations(user $user,annoncetype $annoncetype)
     {
 
-        $userannoncelocations = ProfileService::apiprofilannoncelocations($user);
+        $userannoncelocations = ProfileService::apiprofilannoncelocations($user,$annoncetype);
 
         return response()->json($userannoncelocations, 200);
     }
