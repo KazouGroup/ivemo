@@ -50,7 +50,7 @@ class AnnoncelocationEdit extends Component {
             award_price: '',
             photo: '',
             created_at: '',
-            countuploadimages: '',
+            uploadimages_count: '',
             visiable: 6,
             categoryannoncelocation_id: '',
             periodeannonce_id: '',
@@ -442,7 +442,7 @@ class AnnoncelocationEdit extends Component {
                 city: response.data.city,
                 user: response.data.user,
                 uploadimages: response.data.uploadimages,
-                countuploadimages: response.data.countuploadimages,
+                uploadimages_count: response.data.uploadimages_count,
             }));
     }
 
@@ -598,7 +598,7 @@ class AnnoncelocationEdit extends Component {
                                                                             {uploadimages.length >= 1 && (
 
                                                                                 <div className="toolbar">
-                                                                                    {this.state.countuploadimages > 10 && (
+                                                                                    {this.state.uploadimages_count < 10 && (
 
                                                                                         <div className="submit text-center">
                                                                                             <a style={{cursor: "pointer"}}
@@ -723,7 +723,7 @@ class AnnoncelocationEdit extends Component {
                                                                                            onClick={this.loadmoresItem}
                                                                                            className="text-info">
                                                                                             <b>Afficher la totalité
-                                                                                                des {this.state.countuploadimages} images</b>
+                                                                                                des {this.state.uploadimages_count} images</b>
                                                                                         </a>
                                                                                     </div>
                                                                                 </div>
