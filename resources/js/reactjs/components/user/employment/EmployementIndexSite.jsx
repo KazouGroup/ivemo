@@ -22,6 +22,7 @@ import {
     unactiveItem,
     unfavoriteItem
 } from "../../../redux/actions/employment/employmentActions";
+import EmptyItems from "../../inc/user/EmptyItems";
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -81,7 +82,7 @@ class EmployementIndexSite extends Component {
                             <div className="content-center">
                                 <div className="row">
                                     <div className="col-md-10 mx-auto">
-                                        <h3 className="title">Gerer tous vos evenements et recrutements facilement et Gratuitement </h3>
+                                        <h3 className="title">Gérez tous vos événements et recrutements facilement et Gratuitement.</h3>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +109,7 @@ class EmployementIndexSite extends Component {
                                             </>
                                         )}
 
-                                        {mapEmployments}
+                                        {employments.length !== 0 ? <>{mapEmployments}</> : <EmptyItems syntaxe="d'" title={"Emplois & Services"} />}
 
                                         <div className="text-center">
                                             {visiable < employments.length ?

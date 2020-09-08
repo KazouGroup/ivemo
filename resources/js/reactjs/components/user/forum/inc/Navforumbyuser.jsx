@@ -33,7 +33,7 @@ class Navforumbyuser extends Component {
 
 
             <div className="card card-plain">
-                <b>Rubriques connexes</b>
+                <b>Rubriques Connexes</b>
 
                 <div className="card-body">
                     <table>

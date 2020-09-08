@@ -228,7 +228,7 @@ class ProfileAccountUser extends PureComponent {
                                                     <hr/>
 
                                                     <div className="row mb-4">
-                                                        <div className="col-md-6 text-center">
+                                                        <div className="col-md-6">
 
                                                             <FieldInputRadio  name="status_profile"
                                                                               type='radio'
@@ -239,7 +239,7 @@ class ProfileAccountUser extends PureComponent {
 
                                                         </div>
 
-                                                        <div className="col-md-6 text-center">
+                                                        <div className="col-md-6">
 
                                                             <FieldInputRadio  name="status_profile"
                                                                               type='radio'
@@ -372,7 +372,7 @@ class ProfileAccountUser extends PureComponent {
                                                                             className={`form-control ${this.hasErrorFor('categoryprofile_id') ? 'is-invalid' : ''}`}
                                                                             onChange={this.handleFieldChange}
                                                                             name="categoryprofile_id" required="required">
-                                                                        <option value="" disabled>Pourquoi êtes-vous sur Ivemo</option>
+                                                                        <option disabled hidden defaultValue value="" disabled>Pourquoi êtes-vous sur Ivemo</option>
                                                                         {categoryprofiles.map((item) => (
                                                                             <option key={item.id}
                                                                                     value={item.id}>{item.name}</option>

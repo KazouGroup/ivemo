@@ -31,7 +31,7 @@ class Navemployements extends PureComponent {
             <div className="card card-plain">
                 <div className="card-header" role="tab" id="headingOne">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <b>Rubriques connexes</b>
+                        <b>Rubriques Connexes</b>
                         <i className="now-ui-icons arrows-1_minimal-down"/>
                     </a>
                 </div>
@@ -50,7 +50,7 @@ class Navemployements extends PureComponent {
                                                         <strong>{item.name || <Skeleton width={80} />}</strong>
                                                     </NavLink>
                                                 </td>
-                                                <td className="text-right"> {this.getcountcategoryannonceString(item.employments_count)} {item.employments_count > 1 ? "annonces" : "annonce"}</td>
+                                                <td className="text-right"> <span className="ivemoItemsCount">{this.getcountcategoryannonceString(item.employments_count)}</span> <span className="ivemoItemsTitle">{item.employments_count > 1 ? "annonces" : "annonce"}</span></td>
                                             </tr>
                                         ))}
                                     </Fragment>
