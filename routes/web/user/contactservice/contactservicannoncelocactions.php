@@ -31,7 +31,7 @@ Route::group(['middleware' => 'verified'], function(){
         )->name('contactservice_annoncelocations.site');
 
         Route::get(
-            'profile/{user}/statistics/als/{annoncelocation:slugin}',
+            'profile/{user}/statistics/als/{annoncetype}/{annoncelocation:slugin}',
             'ContactservicannoncelocationController@contactservice_statistique'
         )->name('contactservice_annoncelocationsbyuserbystatistique_site');
 
@@ -57,7 +57,7 @@ Route::group(['middleware' => 'verified'], function(){
             )->name('api.contactservice_annoncelocations_site');
 
             Route::get(
-                'profile/{user}/statistics/als/{annoncelocation:slugin}',
+                'profile/{user}/statistics/als/{annoncetype}/{annoncelocation:slugin}',
                 'ContactservicannoncelocationController@apicontactservice_statistique'
             )->name('api.contactservice_annoncelocationsbyuserbystatistique_site');
 

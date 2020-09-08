@@ -153,6 +153,8 @@ import PrivateUserFavoritForums from "../components/user/profile/favorites/Priva
 import PersonalnotificationsUser from "../components/user/profile/mail/notifications/PersonalnotificationsUser";
 import CityIndexSite from "../components/user/pages/CityIndexSite";
 import ActivitycityShowUserSite from "../components/user/pages/activitycity/ActivitycityShowUserSite";
+import ContactserviceAnnoncelocationShow
+    from "../components/user/profile/mail/contactuserslocation/ContactserviceAnnoncelocationShow";
 
 
 const RouteUser = props => (
@@ -244,6 +246,7 @@ const RouteUser = props => (
           <Route exact path="/profile/:profile/account/" component={ProfileConfigUser}/>
 
           <Route exact path="/profile/:user/personal_mails/als/" component={withRouter(PersonalmessagesannonceslocationsUser)}/>
+          <Route exact path="/profile/:user/statistics/als/:annoncetype/:annoncelocation/" component={withRouter(ContactserviceAnnoncelocationShow)}/>
           <Route exact path="/profile/:user/statistics/als_contactservice_show/:contactservice/" component={PersonalmessagesannonceslocationsShowUser}/>
 
 

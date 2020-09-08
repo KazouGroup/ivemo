@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User\Contactservice;
 
+use App\Exports\ContactserviceannoncelocationExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StorecontactuserannoncelocationRequest;
 use App\Http\Resources\AnnoncelocationResource;
@@ -50,9 +51,9 @@ class ContactservicannoncelocationController extends Controller
         return view('user.contactservice.index', compact('user'));
     }
 
-    public function contactservice_statistique($user, employment $employment)
+    public function contactservice_statistique(user $user, annoncetype $annoncetype,annoncelocation $annoncelocation)
     {
-        return view('user.contactservice.show', compact('employment'));
+        return view('user.contactservice.show', compact('user'));
     }
 
     public function contactservice_statistiqueshow($user,contactservice $contactservice )
@@ -115,7 +116,7 @@ class ContactservicannoncelocationController extends Controller
 
     }
 
-    public function apicontactservice_statistique(user $user, annoncelocation $annoncelocation)
+    public function apicontactservice_statistique(user $user,annoncetype $annoncetype, annoncelocation $annoncelocation)
     {
         $contactservice = new PrivateAnnoncelocationResource(annoncelocation::whereSlugin($annoncelocation->slugin)
 
@@ -141,7 +142,7 @@ class ContactservicannoncelocationController extends Controller
 
     public function contactservice_export(user $user, annoncelocation $annoncelocation)
     {
-        return Excel::download(new ContactserviceemploymentExport($user,$annoncelocation), 'Infos-users.xlsx');
+        return Excel::download(new ContactserviceannoncelocationExport($user,$annoncelocation), 'Infos-users.xlsx');
     }
 
 

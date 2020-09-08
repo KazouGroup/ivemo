@@ -1,8 +1,7 @@
 import {combineReducers} from "redux";
 import workwithuseReducer from "./workwithuseReducer";
 import employmentReducer from "./employment/employmentReducer";
-import contactservicemploymentcontactshowReducer from "./contactservice/employment/contactservicemploymentcontactshowReducer";
-import contactservicemploymentshowReducer from "./contactservice/employment/contactservicemploymentshowReducer";
+import contactservicemploymentcontactshowReducer from "./contactservice/contactservicemploymentcontactshowReducer";
 import employmentshowReducer from "./employment/employmentshowReducer";
 import forumshowReducer from "./forum/forumshowReducer";
 import forumReducer from "./forum/forumReducer";
@@ -22,7 +21,11 @@ import favoritesReducer from "./favoritesReducer";
 import pageReducer from "./pageReducer";
 import uploadimagesReducer from "./uploadimagesReducer";
 import contactserviceannoncelocationcontactshowReducer
-    from "./contactservice/annoncelocation/contactserviceannoncelocationcontactshowReducer";
+    from "./contactservice/contactserviceannoncelocationcontactshowReducer";
+import contactserviceemployemantstatistiqueshowReducer
+    from "./contactservice/contactserviceemployemantstatistiqueshowReducer";
+import contactservicelocationstatistiqueshowReducer
+    from "./contactservice/contactservicelocationstatistiqueshowReducer";
 
 
 
@@ -49,5 +52,6 @@ export default combineReducers({
     contactusers: contactservicesReducer,
     contactservicemploymentcontactshow: contactservicemploymentcontactshowReducer,
     contactserviceannoncelocationcontactshow: contactserviceannoncelocationcontactshowReducer,
-    contactservicemploymentshow: contactservicemploymentshowReducer,
+    contactserviceemploymentstatistiqueshow: contactserviceemployemantstatistiqueshowReducer,
+    contactservicelocationstatistiqueshow: contactservicelocationstatistiqueshowReducer,
 })

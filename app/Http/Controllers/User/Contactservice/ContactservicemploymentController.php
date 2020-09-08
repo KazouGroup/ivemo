@@ -44,9 +44,9 @@ class ContactservicemploymentController extends Controller
         return view('user.contactservice.index', compact('user'));
     }
 
-    public function contactservice_statistique($user, employment $employment)
+    public function contactservice_statistique(user $user, employment $employment)
     {
-        return view('user.contactservice.show', compact('employment'));
+        return view('user.contactservice.show', compact('user'));
     }
 
     public function contactservice_statistiqueshow($user,contactservice $contactservice )

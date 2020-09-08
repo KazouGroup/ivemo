@@ -36,7 +36,7 @@ Route::group(['middleware' => 'verified'], function(){
         Route::get(
             'profile/{user}/statistics/als_export/{annoncevente:slugin}',
             'ContactservicannonceventeController@contactservice_export'
-        )->name('contactservice_annoncelocationsbyuserbyexport_site');
+        )->name('contactservice_annonceventesbyuserbyexport_site');
 
         Route::get(
             'profile/{user}/statistics/avs_contactservice_show/{contactservice:slug}',

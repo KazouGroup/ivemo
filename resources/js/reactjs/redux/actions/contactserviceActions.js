@@ -2,6 +2,7 @@ import {
     GET_RED_CONTACTSERVICEMPLOYMENT_SHOW,
     GET_RED_CONTACTSERVICANONCELOCATION_SHOW,
     GET_RED_CONTACTSERVICEMPLOYMENT,
+    GET_RED_CONTACTSERVICELOCATION,
     FAVORITE_CONTACTSERVICE_ADD,
     FAVORITE_CONTACTSERVICE_REMOVE,
     ARCHVEMENT_CONTACTSERVICE_ADD,
@@ -158,7 +159,6 @@ export const activeItem = id => dispatch => {
     });
 };
 
-
 export const unactiveprivateItem = id => dispatch => {
 
     const url = route('employmentsunactivated_site', [id]);
@@ -247,7 +247,6 @@ export const unactiveprivatealsItem = props => dispatch => {
         }
     ).catch(error => console.error(error));
 };
-
 
 export const deletecontactItem = id => dispatch => {
 
@@ -346,7 +345,6 @@ export const loadAllcontactservices = props => dispatch => {
     ).catch(error => console.error(error));
 };
 
-
 export const loadContactserviceemploymentshow = props => dispatch => {
 
     let itemUser = props.match.params.user;
@@ -355,6 +353,20 @@ export const loadContactserviceemploymentshow = props => dispatch => {
     dyaxios.get(url).then(response =>
         dispatch({
             type: GET_RED_CONTACTSERVICEMPLOYMENT,
+            payload: response.data
+        })
+    ).catch(error => console.error(error));
+};
+
+export const loadContactservicelocationshow = props => dispatch => {
+
+    let itemUser = props.match.params.user;
+    let itemannoncetype = props.match.params.annoncetype;
+    let itemannoncelocation = props.match.params.annoncelocation;
+    let url = route('api.contactservice_annoncelocationsbyuserbystatistique_site', [itemUser,itemannoncetype,itemannoncelocation]);
+    dyaxios.get(url).then(response =>
+        dispatch({
+            type: GET_RED_CONTACTSERVICELOCATION,
             payload: response.data
         })
     ).catch(error => console.error(error));

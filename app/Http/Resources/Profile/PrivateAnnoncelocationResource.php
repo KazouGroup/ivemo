@@ -52,11 +52,12 @@ class PrivateAnnoncelocationResource extends JsonResource
                 ->where('uploadimagealable_type', annoncelocation::class)
                 ->orderByDesc('created_at')
                 ->get(),
-            'countuploadimages' => $this->uploadimages()
+            'uploadimages_count' => $this->uploadimages()
                 ->whereIn('uploadimagealable_id',[$this->id])
                 ->where('uploadimagealable_type', annoncelocation::class)
                 ->count(),
             'countsignals' => $this->signals()->count(),
+            'countcomments' => $this->comments()->count(),
             'visits_count' => $this->visits()->count(),
             'visits_countries' => $this->visits()->countries(),
             'visits_languages' => $this->visits()->languages(),
