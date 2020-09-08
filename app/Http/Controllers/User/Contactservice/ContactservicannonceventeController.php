@@ -24,7 +24,9 @@ class ContactservicannonceventeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except' => [
+            'sendcontactserviceannonce',
+        ]]);
     }
 
     public function contactservice(user $user)
@@ -42,7 +44,7 @@ class ContactservicannonceventeController extends Controller
         return view('user.contactservice.annoncevente.showcontact', compact('contactservice'));
     }
 
-    public function sendcontactservice(StorecontactRequest $request, annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,$user,annoncevente $annoncevente)
+    public function sendcontactserviceannonce(StorecontactRequest $request, annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,$user,annoncevente $annoncevente)
     {
 
 
@@ -51,7 +53,7 @@ class ContactservicannonceventeController extends Controller
             'to_id' => $annoncevente->user_id,
             'email' => $request->email,
             'phone' => $request->phone,
-            'from_id' => auth()->id(),
+            'from_id' => auth()->guest() ? null : auth()->id(),
             'slug' => sha1(('YmdHis') . str_random(30)),
             'ip' => request()->ip(),
             'message' => $request->message,
