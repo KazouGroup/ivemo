@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import PropTypes from "prop-types";
-import { Link, NavLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import {Link, NavLink} from 'react-router-dom';
+import {Helmet} from 'react-helmet';
 import {Button, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
@@ -44,7 +44,7 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
         this.setState({showPhonenumber: true});
     }
 
-    deletecontactItem(id){
+    deletecontactItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
             text: "êtes-vous sûr de vouloir executer cette action",
@@ -59,7 +59,7 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('contactservicedelete',[id]);
+                const url = route('contactservicedelete', [id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
@@ -112,7 +112,7 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('annonces_locations_delete.site',[id]);
+                const url = route('annonces_locations_delete.site', [id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
@@ -150,7 +150,7 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
         });
     }
 
-    loadItems(){
+    loadItems() {
         this.props.loadContactserviceannoncelocationsredmessage(this.props);
         this.props.loadAllcontactservices(this.props);
     }
@@ -160,16 +160,22 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
     }
 
     render() {
-        const {contactservice,contactusersprofile} = this.props;
+        const {contactservice, contactusersprofile} = this.props;
+        const avatar_style = {
+            height: "35px",
+            width: "35px",
+            borderRadius: '35px'
+        };
         return (
 
             <>
-              <HelmetSite title={`${contactservice.subject || 'Messages contact annonces locations'} ${$userIvemo.first_name} - ${$name_site}`} />
+                <HelmetSite
+                    title={`${contactservice.subject || 'Messages contact annonces locations'} ${$userIvemo.first_name} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 
                     <nav className="navbar navbar-expand-lg bg-primary">
-                        <NavUserSite />
+                        <NavUserSite/>
                     </nav>
 
 
@@ -178,7 +184,7 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
                         <div className="main main-raised">
 
                             <div className="container">
-                                <br />
+                                <br/>
 
                                 <div className="row">
 
@@ -188,7 +194,8 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
                                             <div className="card-body">
                                                 <div className="row">
                                                     <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true"
+                                                             className="card-collapse">
 
                                                             <NavlinkmailmessageUser {...this.props} {...contactusersprofile}/>
 
@@ -203,9 +210,9 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
-                                        {!$guest &&(
+                                        {!$guest && (
                                             <>
-                                                {!$userIvemo.email_verified_at &&(
+                                                {!$userIvemo.email_verified_at && (
                                                     <LinkValicationEmail/>
                                                 )}
                                             </>
@@ -219,8 +226,9 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
 
                                                             {contactservice.from_id === null ?
                                                                 <>
-                                                                    <img className="avatar" alt={contactservice.full_name}
-                                                                         style={{ height: "35px", width: "35px", borderRadius:'35px' }}
+                                                                    <img className="avatar"
+                                                                         alt={contactservice.full_name}
+                                                                         style={avatar_style}
                                                                          src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
                                                                     <div className="mx-3">
                                                                         {contactservice.full_name}
@@ -228,10 +236,15 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
                                                                 </>
                                                                 :
                                                                 <>
-                                                                <img className="avatar"
-                                                                     style={{ height: "35px", width: "35px", borderRadius:'35px' }}
-                                                                     alt={contactservice.from.first_name}
-                                                                     src={contactservice.from.avatar}/>
+                                                                    {contactservice.from.avatar === null ?
+                                                                        <img style={avatar_style}
+                                                                             alt={contactservice.from.first_name}
+                                                                             src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
+                                                                        :
+                                                                        <img style={avatar_style}
+                                                                             alt={contactservice.from.first_name}
+                                                                             src={contactservice.from.avatar}/>
+                                                                    }
                                                                     <div className="mx-3">
                                                                         {contactservice.from.first_name}
                                                                     </div>
@@ -245,12 +258,14 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
                                                                     {this.state.showPhonenumber ?
                                                                         <b>{contactservice.phone !== null ? contactservice.phone : <>absent</>}</b>
                                                                         :
-                                                                        <a style={{ cursor: "pointer" }} onClick={() => this.showPhonenumberItem()}>
+                                                                        <a style={{cursor: "pointer"}}
+                                                                           onClick={() => this.showPhonenumberItem()}>
                                                                             Afficher le téléphone
                                                                         </a>
                                                                     } - <strong>{moment(contactservice.created_at).format('DD/MM/YYYY')}</strong>
 
-                                                                     <Buttonctionshowmailcontactservice {...contactservice} deletecontactItem={this.deletecontactItem}
+                                                                     <Buttonctionshowmailcontactservice {...contactservice}
+                                                                                                        deletecontactItem={this.deletecontactItem}
                                                                                                         activecontactaddItem={this.props.activecontactaddItem}
                                                                                                         activecontactremoveItem={this.props.activecontactremoveItem}
                                                                      />
@@ -262,10 +277,12 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
 
                                                     {contactservice.contactserviceable.title ?
 
-                                                        <PrivateUserAnnonceslocationList {...this.props} {...contactservice.contactserviceable} unactiveprivatealsItem={this.props.unactiveprivatealsItem} activeItem={this.props.activeItem} deleteItem={this.deleteItem} />
+                                                        <PrivateUserAnnonceslocationList {...this.props} {...contactservice.contactserviceable}
+                                                                                         unactiveprivatealsItem={this.props.unactiveprivatealsItem}
+                                                                                         activeItem={this.props.activeItem}
+                                                                                         deleteItem={this.deleteItem}/>
                                                         :
-                                                        <AnnoncesListOnSkeleton />}
-
+                                                        <AnnoncesListOnSkeleton/>}
 
 
                                                     {contactservice.message ?
@@ -273,21 +290,27 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
                                                             <div className="row">
                                                                 <div className="col-md-4">
                                                                     <div className="form-group">
-                                                                        <input type="text" defaultValue={contactservice.full_name || ""} className="form-control"
-                                                                               placeholder="Name" />
+                                                                        <input type="text"
+                                                                               defaultValue={contactservice.full_name || ""}
+                                                                               className="form-control"
+                                                                               placeholder="Name"/>
                                                                     </div>
                                                                 </div>
                                                                 <div className="col-md-4">
                                                                     <div className="form-group">
-                                                                        <input type="email" defaultValue={contactservice.email || ""} className="form-control"
-                                                                               placeholder="Email" />
+                                                                        <input type="email"
+                                                                               defaultValue={contactservice.email || ""}
+                                                                               className="form-control"
+                                                                               placeholder="Email"/>
                                                                     </div>
                                                                 </div>
 
                                                                 <div className="col-md-4">
                                                                     <div className="form-group">
-                                                                        <input type="email" defaultValue={contactservice.phone || ""} className="form-control"
-                                                                               placeholder="Phone" />
+                                                                        <input type="email"
+                                                                               defaultValue={contactservice.phone || ""}
+                                                                               className="form-control"
+                                                                               placeholder="Phone"/>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -307,37 +330,46 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
                                                         :
                                                         <Skeleton count={2}/>
                                                     }
-                                                    <hr />
+                                                    <hr/>
                                                     <div className="media-footer">
-                                                        <a href={`mailto:${contactservice.email}`} className="btn btn-primary pull-left" id="TooltipMail">
+                                                        <a href={`mailto:${contactservice.email}`}
+                                                           className="btn btn-primary pull-left" id="TooltipMail">
                                                             <i className="fas fa-reply-all"></i> Répondre
                                                         </a>
-                                                        <UncontrolledTooltip placement="bottom" target="TooltipMail" delay={0}>
+                                                        <UncontrolledTooltip placement="bottom" target="TooltipMail"
+                                                                             delay={0}>
                                                             Repondre à {contactservice.email}
                                                         </UncontrolledTooltip>
                                                         {contactservice.phone ?
-                                                            <a href={`tel:${contactservice.phone}`} rel="tooltip" title={contactservice.phone} data-placement="bottom" className="btn btn-success pull-left">
-                                                                <i className="now-ui-icons tech_mobile" />
+                                                            <a href={`tel:${contactservice.phone}`} rel="tooltip"
+                                                               title={contactservice.phone} data-placement="bottom"
+                                                               className="btn btn-success pull-left">
+                                                                <i className="now-ui-icons tech_mobile"/>
                                                                 Phone
-                                                            </a>:null}
-                                                        <Button onClick={() => this.deletecontactItem(contactservice.id)} id="TooltipDelete"
-                                                                className="btn btn-danger pull-left" title="Supprimer">
+                                                            </a> : null}
+                                                        <Button
+                                                            onClick={() => this.deletecontactItem(contactservice.id)}
+                                                            id="TooltipDelete"
+                                                            className="btn btn-danger pull-left" title="Supprimer">
                                                             <i className="far fa-trash-alt"></i> Supprimer
                                                         </Button>
-                                                        <UncontrolledTooltip placement="bottom" target="TooltipDelete" delay={0}>
+                                                        <UncontrolledTooltip placement="bottom" target="TooltipDelete"
+                                                                             delay={0}>
                                                             Supprimer ce message
                                                         </UncontrolledTooltip>
                                                     </div>
 
                                                 </div>
 
-                                                <FootermailmessageUser />
+                                                <FootermailmessageUser/>
 
                                             </div>
                                         </div>
                                         <div className="submit text-left">
-                                            <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
-                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à la boite de reception </b>
+                                            <button type="button" className="btn btn-neutral btn-sm"
+                                                    onClick={this.props.history.goBack}>
+                                                <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à la boite
+                                                de reception </b>
                                             </button>
                                         </div>
 
@@ -351,11 +383,10 @@ class PersonalmessagesannonceslocationsShowUser extends Component {
                             </div>
 
 
-
                         </div>
 
 
-                        <FooterBigUserSite />
+                        <FooterBigUserSite/>
                     </div>
                 </div>
 
@@ -381,8 +412,8 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
     loadContactserviceannoncelocationsredmessage,
     loadAllcontactservices,
-    favoriteaddItem,favoriteremoveItem,
-    archvementaddItem,archvementremoveItem,
-    activecontactaddItem,activecontactremoveItem,
-    activeaslItem,unactiveprivatealsItem,
+    favoriteaddItem, favoriteremoveItem,
+    archvementaddItem, archvementremoveItem,
+    activecontactaddItem, activecontactremoveItem,
+    activeaslItem, unactiveprivatealsItem,
 })(PersonalmessagesannonceslocationsShowUser);
