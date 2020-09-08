@@ -46,46 +46,46 @@ class ProfileService
     {
         $user =  user::whereSlug($user->slug)
             ->withCount(['annoncelocations' => function ($q) use ($user){
-                $q ->where(['status_admin' => 1])
+                $q ->where(['status' => 1,'status_admin' => 1])
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id]);
             }])
             ->withCount(['annoncereservations' => function ($q) use ($user){
-                $q ->where(['status_admin' => 1])
+                $q ->where(['status' => 1,'status_admin' => 1])
                     ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id]);
             }])
             ->withCount(['annonceventes' => function ($q) use ($user){
-                $q ->where(['status_admin' => 1])
+                $q ->where(['status' => 1,'status_admin' => 1])
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id]);
             }])
             ->withCount(['employments' => function ($q) use ($user){
-                $q->where(['status_admin' => 1])
+                $q->where(['status' => 1,'status_admin' => 1])
                     ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id]);
             }])
             ->withCount(['forums' => function ($q) use ($user){
-                $q->where(['status_admin' => 1])
+                $q->where(['status' => 1,'status_admin' => 1])
                     ->whereHas('categoryforum', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id]);
             }])
             ->withCount(['blogannoncelocations' => function ($q) use ($user){
-                $q ->where(['status_admin' => 1])
+                $q ->where(['status' => 1,'status_admin' => 1])
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id]);
             }])
             ->withCount(['blogannoncereservations' => function ($q) use ($user){
-                $q ->where(['status_admin' => 1])
+                $q ->where(['status' => 1,'status_admin' => 1])
                     ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id]);
             }])
             ->withCount(['blogannonceventes' => function ($q) use ($user){
-                $q ->where(['status_admin' => 1])
+                $q ->where(['status' => 1,'status_admin' => 1])
                     ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                     ->whereIn('user_id',[$user->id]);
             }])

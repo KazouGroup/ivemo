@@ -161,7 +161,7 @@ class AnnonceslocationList extends PureComponent {
                                     <div className="card-header d-flex align-items-center">
                                         <div className="d-flex align-items-center">
                                             {this.props.user.avatar ?
-                                                <NavLink to={`/pro/${this.props.user.slug}/als/`}>
+                                                <NavLink to={`/pro/${this.props.user.slug}/als/${this.props.annoncetype.slug}/`}>
                                                     <img src={this.props.user.avatar}
                                                          style={{ height: "40px", width: "80px" }}
                                                          alt={this.props.user.first_name}
@@ -170,7 +170,7 @@ class AnnonceslocationList extends PureComponent {
                                                 :  <img className="avatar" style={{ height: "40px", width: "80px" }}
                                                         src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
                                             <div className="mx-3">
-                                                <NavLink to={`/pro/${this.props.user.slug}/als/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
+                                                <NavLink to={`/pro/${this.props.user.slug}/als/${this.props.annoncetype.slug}/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
                                                     <small className="d-block text-muted"><b> {moment(this.props.created_at).format('LL')}</b></small>
                                                 </NavLink>
                                             </div>
