@@ -232,7 +232,7 @@ class NavUserSite extends PureComponent {
                                                                 </Link>
 
                                                                 <Link to={`/profile/${$userIvemo.slug}/personal_mails/employments/`} className="dropdown-item">
-                                                                    {contactusersprofile.contactservicesemployments_count} Emplois & services
+                                                                    {contactusersprofile.contactservicesemployments_count} Emplois & Services
                                                                 </Link>
 
                                                                 <Link to={`/profile/${$userIvemo.slug}/personal_mails/als/`} className="dropdown-item">
@@ -303,7 +303,7 @@ class NavUserSite extends PureComponent {
                                                   */}
 
                                                 <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/employments/`} className="dropdown-item">
-                                                    <i className="now-ui-icons business_briefcase-24"/>Emplois & services
+                                                    <i className="now-ui-icons business_briefcase-24"/>Emplois & Services
                                                 </NavLink>
                                                 <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/forums/`} className="dropdown-item">
                                                     <i className="now-ui-icons text_align-left"/>Forums

@@ -43,6 +43,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: auto;
 }
 
+.ivemoItemsCount {
+    background: #f96332 !important;
+    color: white;
+    padding: 4px;
+    font-weight: 600;
+    margin: -5px 0px 0px;
+}
+
+.ivemoItemsTitle {
+    position: relative;
+    left: 5px;
+}
+
 .ivemoAvisAvatar {
     margin-right: 15px;
 }
@@ -85,4 +98,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 0px !important;
     margin-bottom: 0px !important;
     margin: 10px 5px !important;
+}
+
+.emptyItemsIcon {
+    font-size: 6rem;
 }

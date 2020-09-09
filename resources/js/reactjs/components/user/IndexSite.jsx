@@ -47,7 +47,7 @@ class IndexSite extends Component {
                                 <div className="row">
                                     <div className="col-md-12 ml-auto mr-auto">
                                         <Link to={`/employments/`} className="btn btn-danger btn-lg">
-                                            Emplois et services
+                                            Emplois et Services
                                         </Link>
 
                                         <Link to={`/forums/`} className="btn btn-info btn-lg">

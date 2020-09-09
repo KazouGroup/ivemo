@@ -36,7 +36,7 @@ class Navblogannoncereservations extends Component {
             <div className="card card-plain">
                 <div className="card-header" role="tab" id="headingOne">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <b>Rubriques connexes</b>
+                        <b>Rubriques Connexes</b>
                         <i className="now-ui-icons arrows-1_minimal-down"/>
                     </a>
                 </div>

@@ -19,6 +19,7 @@ import {
     deleteItem
 } from "../../../redux/actions/forum/forumActions";
 import InfiniteScroll from 'react-infinite-scroller';
+import EmptyItems from "../../inc/user/EmptyItems";
 
 
 class ForumIndexSite extends Component {
@@ -77,12 +78,12 @@ class ForumIndexSite extends Component {
                             <div className="content-center">
                                 <div className="row">
                                     <div className="col-md-8 ml-auto mr-auto">
-                                        <h1 className="title">Forums </h1>
-                                        <h3 className="title">Toutes vos Questions touveront une solution </h3>
+                                        {/*<h1 className="title">Forums </h1>*/}
+                                        <h3 className="title">Trouvez une solution à vos questions à l'aide de notre Forums.</h3>
                                     </div>
                                 </div>
 
-                                <Navlinknewforum/>
+                                {/*<Navlinknewforum/>*/}
 
                             </div>
                         </div>
@@ -107,7 +108,7 @@ class ForumIndexSite extends Component {
                                             </>
                                         )}
 
-                                        {mapForums}
+                                        {mapForums.length !== 0 ? <>{mapForums}</> : <EmptyItems syntaxe="de" title="Forums" />}
 
                                         <div className="text-center">
                                             {visiable < forums.length && (
@@ -128,8 +129,9 @@ class ForumIndexSite extends Component {
                                                 <div className="row">
                                                     <div className="col-md-12">
 
-                                                        <Navforums/>
-
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                            <Navforums/>
+                                                        </div>
 
                                                     </div>
                                                 </div>

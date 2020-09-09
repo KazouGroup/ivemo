@@ -56,7 +56,7 @@ class Navemployementsbycity extends PureComponent {
                                                         <strong>{item.name || <Skeleton width={80} />}</strong>
                                                     </NavLink>
                                                 </td>
-                                                <td className="text-right"> {this.getdataString(item.employments_count)} {item.employments_count > 1 ? "annonces" : "annonce"}</td>
+                                                <td className="text-right"> <span className="ivemoItemsCount">{this.getdataString(item.employments_count)}</span> <span className="ivemoItemsTitle">{item.employments_count > 1 ? "annonces" : "annonce"}</span></td>
                                             </tr>
                                         ))}
                                     </Fragment>
