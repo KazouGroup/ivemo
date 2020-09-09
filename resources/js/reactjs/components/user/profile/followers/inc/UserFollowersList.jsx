@@ -40,8 +40,8 @@ class UserFollowList extends PureComponent {
                                     </LazyLoad>
 
                                 </NavLink>
-                                : <img style={{ height: "40px", width: "80px" }} alt={employment.user.first_name}
-                                       src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>}
+                                : <img style={{ height: "40px", width: "80px" }} alt={this.props.user.first_name}
+                                       src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
                             <div className="media-body">
                                 <h6 className="media-heading">{this.props.user.first_name}</h6>
                                 <div>

@@ -51,7 +51,7 @@ class PublicUserFollowers extends Component {
     }
 
     render() {
-        const {users,useremploymentPublick} = this.props;
+        const {users,userPublick} = this.props;
         const mapUsers = users.length >= 0 ? (
             users.map(item => {
                 return(
@@ -67,7 +67,7 @@ class PublicUserFollowers extends Component {
         return (
             <>
                 <HelmetSite
-                    title={`Personnes qui suivent ${useremploymentPublick.first_name || 'Profile'} - ${$name_site}`}/>
+                    title={`Personnes qui suivent ${userPublick.first_name || 'Profile'} - ${$name_site}`}/>
 
                 <div className="about-us sidebar-collapse">
 
@@ -81,7 +81,7 @@ class PublicUserFollowers extends Component {
                         <div className="main main-raised">
                             <div className="container">
                                 <div className="row">
-                                    <NavprofileFollowesusers {...this.props} {...useremploymentPublick} />
+                                    <NavprofileFollowesusers {...this.props} {...userPublick} />
                                 </div>
                             </div>
 
@@ -120,7 +120,7 @@ PublicUserFollowers.propTypes = {
 };
 
 const mapStoreToProps = store => ({
-    useremploymentPublick: store.profile.profiluser,
+    userPublick: store.profile.profiluser,
     users: store.profile.userfollowers
 
 });
