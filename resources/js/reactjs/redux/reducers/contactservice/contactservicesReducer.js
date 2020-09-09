@@ -71,7 +71,7 @@ export default produce((draft, action = {}) => {
             case 'DELETE_CONTACTUSER':
                 let datausdelete = draft.contactservices.contactusers.findIndex(i => i.id === action.payload);
                 if (datausdelete !== -1) draft.contactservices.contactusers.splice(datausdelete, 1);
-                if (datausdelete !== -1) draft.contactservices.contactusers_count--;
+                //if (datausdelete !== -1) draft.contactservices.contactusers_count--;
                 return draft;
 
             /* *********End****** */
@@ -115,7 +115,7 @@ export default produce((draft, action = {}) => {
             case 'DELETE_CONTACTSERVICE_EMPLOYMENT':
                 let datadelete = draft.contactservices.contactservicesemployments.findIndex(i => i.id === action.payload);
                 if (datadelete !== -1) draft.contactservices.contactservicesemployments.splice(datadelete, 1);
-                if (datadelete !== -1) draft.contactservices.contactservicesemployments_count--;
+                //if (datadelete !== -1) draft.contactservices.contactservicesemployments_count--;
                 return draft;
 
             /* *********End****** */
@@ -159,7 +159,7 @@ export default produce((draft, action = {}) => {
             case 'DELETE_CONTACTSERVICE_ANONCELOCATION':
                 let dataalsdelete = draft.contactservices.contactservicesannoncelocations.findIndex(i => i.id === action.payload);
                 if (dataalsdelete !== -1) draft.contactservices.contactservicesannoncelocations.splice(dataalsdelete, 1);
-                if (dataalsdelete !== -1) draft.contactservices.contactservicesannoncelocations_count--;
+                //if (dataalsdelete !== -1) draft.contactservices.contactservicesannoncelocations_count--;
                 return draft;
 
             /* *********End****** */

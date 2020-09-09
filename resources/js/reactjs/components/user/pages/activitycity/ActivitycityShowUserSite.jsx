@@ -95,7 +95,7 @@ class ActivitycityShowUserSite extends Component {
                             <div className="container">
                                 <br />
                                 <div className="row">
-                                    <div className="col-lg-8 col-md-12 mx-auto">
+                                    <div className="col-md-8 mx-auto">
                                         <div className="card-body">
                                             <div className="submit text-left">
                                                 <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
@@ -315,23 +315,7 @@ class ActivitycityShowUserSite extends Component {
                                         <div className="card">
                                             <div className="card-body">
 
-                                                {activitycity.status_comments ?
-
-                                                    <ActivitycitycommentIndex {...this.props} {...activitycity.city} />
-                                                    :
-                                                    <>
-                                                        {!$guest && (
-                                                            <>
-                                                                {($auth.can('dashboard'))  && (
-
-                                                                    <ActivitycitycommentIndex {...this.props} {...activitycity.city} />
-
-                                                                )}
-                                                            </>
-                                                        )}
-                                                    </>
-
-                                                }
+                                                <ActivitycitycommentIndex {...this.props} {...activitycity.city} />
 
                                             </div>
                                         </div>
@@ -339,7 +323,7 @@ class ActivitycityShowUserSite extends Component {
 
                                     </div>
 
-                                    <div className="col-lg-4 col-md-12 mx-auto">
+                                    <div className="col-md-4 mx-auto">
 
                                         <div className="card">
                                             <div className="card-body">

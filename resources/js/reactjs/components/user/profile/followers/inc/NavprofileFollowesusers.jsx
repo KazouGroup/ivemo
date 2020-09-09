@@ -45,7 +45,7 @@ class NavprofileFollowesusers extends PureComponent {
                                                  className="avatar"/>
                                         </NavLink>
                                         :<img style={{ height: "60px", width: "110px" }} alt={this.props.first_name}
-                                              src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>}
+                                              src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
 
                                     <div className="mx-3">
                                         <NavLink to={`/pro/${this.props.slug}/`} className="text-dark font-weight-600 text-sm"><b> {this.props.first_name ?
@@ -89,7 +89,7 @@ class NavprofileFollowesusers extends PureComponent {
                                                                      }
                                                                  </>
                                                                  :
-                                                                 <><Skeleton width={40}/> <Skeleton width={10}/> <Skeleton width={40}/></>
+                                                                 <><Skeleton width={40}/> <Skeleton width={10}/> </>
                                                              }
                                                          </span>
                                     </div>

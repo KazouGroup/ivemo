@@ -74,7 +74,7 @@ class CityController extends Controller
    {
        $this->validate($request,[
            'name'=>'required|string|min:2|max:100|unique:cities',
-           'link_video'=> "required|url|min:2|max:255",
+           'link_video'=> "nullable|url|min:2|max:255",
        ]);
 
        $city = new city();
@@ -133,7 +133,7 @@ class CityController extends Controller
     {
         $this->validate($request,[
             'name'=> "required|string|min:2|max:100|unique:cities,name,{$id}",
-            'link_video'=> "required|url|min:2|max:255",
+            'link_video'=> "nullable|url|min:2|max:255",
         ]);
 
         $city = city::findOrFail($id);

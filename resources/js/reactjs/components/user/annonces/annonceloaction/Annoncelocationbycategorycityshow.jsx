@@ -4,7 +4,6 @@ import {Button, Form, Input, Navbar, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import FormcontactuseronlocationShow from "./inc/FormcontactuseronlocationShow";
-import BlogannoncelocationIntesseAnnonseShow from "../../blog/blogannoncelocation/BlogannoncelocationIntesseAnnonseShow";
 import Swal from "sweetalert2";
 import AnnoncelocationInteresse from "./AnnoncelocationInteresse";
 import Skeleton from "react-loading-skeleton";
@@ -410,10 +409,10 @@ class Annoncelocationbycategorycityshow extends Component {
                                                             )}
                                                         </div>
                                                         <div className="col-md-6">
-                                                            <h5 className="info-title"><b>Informations suplementaires</b></h5>
+                                                            <h5 className="info-title"><b>Informations supplémentaires</b></h5>
                                                             {annoncelocation.award_price && (
                                                                 <p>
-                                                                    <b>Dépôt de garantie :</b>
+                                                                    <b>Caution:</b>
                                                                     <span className="title text-dark"><b> {annoncelocation.award_price ? <>{annoncelocation.award_price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country}</b></small> : <>{$money_country}</>}</>:null} </b></span>
                                                                 </p>
                                                             )}
@@ -541,6 +540,9 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                                 </Button>
 
                                                                             }
+                                                                            <NavLink to={`/profile/${annoncelocation.user.slug}/statistics/als/${annoncelocation.annoncetype.slug}/${annoncelocation.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
+                                                                                <i className="now-ui-icons business_chart-bar-32"/>
+                                                                            </NavLink>
                                                                             <NavLink to={`/al_data/${annoncelocation.annoncetype.slug}/${annoncelocation.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer cette annonce">
                                                                                 <i className="now-ui-icons ui-2_settings-90" />
                                                                             </NavLink>

@@ -73,3 +73,7 @@ Route::get('dashboard/active_activitycities/{activitycity}/active',
 Route::get('dashboard/unactive_activitycities/{activitycity}/unactive',
     'DashboardactivitycityController@unactivated'
 )->name('unactivated_activitycities.dashboard');
+
+Route::delete('dashboard/delete_activitycities/{activitycity}/delete',
+    'DashboardactivitycityController@destroy'
+)->name('activitycitiesdelete_dashboard.dashboard');

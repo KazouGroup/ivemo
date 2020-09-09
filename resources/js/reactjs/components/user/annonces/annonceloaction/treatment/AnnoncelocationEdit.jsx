@@ -46,11 +46,12 @@ class AnnoncelocationEdit extends Component {
             description: '',
             city_id: '',
             slug: '',
+            slugin: '',
             link_video: '',
             award_price: '',
             photo: '',
             created_at: '',
-            countuploadimages: '',
+            uploadimages_count: '',
             visiable: 6,
             categoryannoncelocation_id: '',
             periodeannonce_id: '',
@@ -434,6 +435,7 @@ class AnnoncelocationEdit extends Component {
                 link_video: response.data.link_video,
                 award_price: response.data.award_price,
                 slug: response.data.slug,
+                slugin: response.data.slugin,
                 created_at: response.data.created_at,
                 categoryannoncelocation_id: response.data.categoryannoncelocation_id,
                 periodeannonce_id: response.data.periodeannonce_id,
@@ -442,7 +444,7 @@ class AnnoncelocationEdit extends Component {
                 city: response.data.city,
                 user: response.data.user,
                 uploadimages: response.data.uploadimages,
-                countuploadimages: response.data.countuploadimages,
+                uploadimages_count: response.data.uploadimages_count,
             }));
     }
 
@@ -546,6 +548,9 @@ class AnnoncelocationEdit extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="text-right ml-auto">
+                                                        <NavLink to={`/profile/${this.state.user.slug}/statistics/als/${this.state.annoncetype.slug}/${this.state.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
+                                                            <i className="now-ui-icons business_chart-bar-32"/>
+                                                        </NavLink>
                                                         {!this.state.status ?
                                                             <>
                                                                 <Button
@@ -598,7 +603,7 @@ class AnnoncelocationEdit extends Component {
                                                                             {uploadimages.length >= 1 && (
 
                                                                                 <div className="toolbar">
-                                                                                    {this.state.countuploadimages > 10 && (
+                                                                                    {this.state.uploadimages_count < 10 && (
 
                                                                                         <div className="submit text-center">
                                                                                             <a style={{cursor: "pointer"}}
@@ -723,7 +728,7 @@ class AnnoncelocationEdit extends Component {
                                                                                            onClick={this.loadmoresItem}
                                                                                            className="text-info">
                                                                                             <b>Afficher la totalité
-                                                                                                des {this.state.countuploadimages} images</b>
+                                                                                                des {this.state.uploadimages_count} images</b>
                                                                                         </a>
                                                                                     </div>
                                                                                 </div>
@@ -861,7 +866,7 @@ class AnnoncelocationEdit extends Component {
 
                                                                                     <div className="col-md-4">
                                                                                         <label className="labels">
-                                                                                            Garantie ?
+                                                                                            Caution ?
                                                                                             <span className="text-danger">*</span>
                                                                                         </label>
                                                                                         <div className="input-group">
@@ -987,7 +992,6 @@ class AnnoncelocationEdit extends Component {
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-
                                                                             </div>
                                                                         </div>
                                                                     </div>

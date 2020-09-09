@@ -49,9 +49,6 @@ class employment extends Model
         });
 
         static::updating(function($model){
-            if (auth()->check()){
-                $model->user_id = auth()->id();
-            }
             $model->ip = request()->ip();
         });
     }
@@ -72,7 +69,7 @@ class employment extends Model
     }
 
     public $dates = ['expired_at','created_at','updated_at'];
-    
+
     protected $casts = [
         'status' => 'boolean',
         'status_comments' => 'boolean',

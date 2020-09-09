@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cache;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class faq extends Model 
+class faq extends Model
 {
     //use AuditableTrait;
 
@@ -53,9 +53,6 @@ class faq extends Model
             $model->ip = request()->ip();
         });
         static::updating(function($model){
-            if (auth()->check()){
-                $model->user_id = auth()->id();
-            }
             $model->ip = request()->ip();
         });
     }
