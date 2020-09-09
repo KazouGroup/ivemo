@@ -45,7 +45,7 @@ class ActivitycityInteresseList extends PureComponent {
                                 </h6>
                             </div>
                             <span
-                                dangerouslySetInnerHTML={{__html: (this.props.description.length > 96 ? this.props.description.substring(0, 96) + "<a class='text-dark' target=\"_blank\" href=" + route('activitycity_show_site',[this.props.city.slug,this.props.slug]) + ">...<b>lire plus</b></a>" : this.props.description)}}/>
+                                dangerouslySetInnerHTML={{__html: (this.props.description.length > 96 ? this.props.description.substring(0, 96) + "<a class='text-dark' href=" + route('activitycity_show_site',[this.props.city.slug,this.props.slug]) + ">...<b>lire plus</b></a>" : this.props.description)}}/>
 
 
                             <ButonFavorisLikedForInteressActivity {...this.props} unfavoriteItem={this.props.unfavoriteItem}
