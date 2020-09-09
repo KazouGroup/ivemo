@@ -161,6 +161,11 @@ class ContactserviceEmploymentContactShow extends Component {
 
     render() {
         const {contactservice,contactusersprofile} = this.props;
+        const avatar_style = {
+            height: "35px",
+            width: "35px",
+            borderRadius: '35px'
+        };
         return (
             <>
                 <HelmetSite title={`${contactservice.contactserviceable.title || $name_site} - ${$name_site}`}/>
@@ -229,7 +234,7 @@ class ContactserviceEmploymentContactShow extends Component {
                                                             {contactservice.from_id === null ?
                                                                 <>
                                                                     <img className="avatar" alt={contactservice.full_name}
-                                                                         style={{ height: "35px", width: "35px", borderRadius:'35px' }}
+                                                                         style={avatar_style}
                                                                          src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
                                                                     <div className="mx-3">
                                                                         {contactservice.full_name}
@@ -237,10 +242,16 @@ class ContactserviceEmploymentContactShow extends Component {
                                                                 </>
                                                                 :
                                                                 <>
-                                                                    <img className="avatar"
-                                                                         style={{ height: "35px", width: "35px", borderRadius:'35px' }}
-                                                                         alt={contactservice.from.first_name}
-                                                                         src={contactservice.from.avatar}/>
+                                                                    {contactservice.from.avatar === null ?
+                                                                        <img className="avatar"
+                                                                             style={avatar_style}
+                                                                             alt={contactservice.from.first_name}
+                                                                             src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
+                                                                        :
+                                                                        <img style={avatar_style}
+                                                                             alt={contactservice.from.first_name}
+                                                                             src={contactservice.from.avatar}/>
+                                                                    }
                                                                     <div className="mx-3">
                                                                         {contactservice.from.first_name}
                                                                     </div>

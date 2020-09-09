@@ -71,7 +71,10 @@ class PrivateUserEmployementList extends PureComponent {
                                                      alt={this.props.user.first_name}
                                                      className="avatar"/>
                                             </NavLink>
-                                            : <Skeleton circle={false} height={40} width={80}/>}
+                                            :  <img src={`/assets/vendor/assets/img/blurredimage1.jpg`}
+                                                     style={{height: "40px", width: "80px"}}
+                                                     alt={this.props.user.first_name}
+                                                     className="avatar"/>}
                                         <div className="mx-3">
                                             <NavLink to={`/pro/${this.props.user.slug}/`}
                                                      className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
