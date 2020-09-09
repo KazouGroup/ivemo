@@ -156,4 +156,14 @@ class DashboardactivitycityController extends Controller
 
         return response('Confirmed',Response::HTTP_ACCEPTED);
     }
+
+    public function destroy(activitycity $activitycity)
+    {
+        $activitycity->delete();
+
+        return response('Confirmed',Response::HTTP_ACCEPTED);
+    }
+
+
+
 }

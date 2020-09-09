@@ -212,7 +212,7 @@ class ForumShow extends Component {
                                                             {forum.user.avatar === null ?
                                                                 <img className="avatar" alt={forum.user.first_name}
                                                                      style={{ height: "35px", width: "35px", borderRadius:'35px' }}
-                                                                     src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>
+                                                                     src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
                                                                 :
                                                                 <img className="avatar"
                                                                      style={{ height: "35px", width: "35px", borderRadius:'35px' }}

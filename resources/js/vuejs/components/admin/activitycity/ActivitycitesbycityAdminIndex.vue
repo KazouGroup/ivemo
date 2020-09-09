@@ -160,6 +160,13 @@
                                                     :href="`/city/${item.city.slug}/a/${item.slug}/`">
                                                     <i class="material-icons">visibility</i>
                                                 </a>
+
+                                                <button @click="deleteItem(item)"
+                                                        class="btn btn-danger btn-sm btn-just-icon"
+                                                        title="Delete"
+                                                >
+                                                    <i class="material-icons">delete_forever</i>
+                                                </button>
                                             </td>
                                         </tr>
 
@@ -327,6 +334,60 @@
                     }
                 })
 
+            },
+
+            deleteItem(item){
+                Swal.fire({
+                    title: 'Delete data',
+                    text: "Are you sure you want to delete this data?",
+                    animation: false,
+                    customClass: 'animated pulse',
+                    buttonsStyling: false,
+                    confirmButtonClass: "btn btn-success",
+                    cancelButtonClass: 'btn btn-danger',
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'No',
+                    showCancelButton: true,
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        //Start Progress bar
+                        this.$Progress.start();
+
+                        let index = this.activitycities.indexOf(item);
+                        this.activitycities.splice(index, 1);
+                        //Envoyer la requete au server
+                        let url = route('activitycitiesdelete_dashboard.dashboard',item.id);
+                        dyaxios.delete(url).then(() => {
+                            /** Alert notify bootstrapp **/
+                            $.notify({
+                                message: "Image deleted Successfully"
+                            }, {
+                                allow_dismiss: false,
+                                type: 'success',
+                                placement: {
+                                    from: 'top',
+                                    align: 'right'
+                                }
+                            });
+                            /* End alert ***/
+                            //End Progress bar
+                            this.$Progress.finish();
+
+                            Fire.$emit('ItemGetter');
+                        }).catch(() => {
+                            this.$Progress.fail();
+                            //Alert error
+                            $.notify("Ooop! Something wrong. Try later", {
+                                type: 'danger',
+                                animate: {
+                                    enter: 'animated bounceInDown',
+                                    exit: 'animated bounceOutUp'
+                                }
+                            });
+                        })
+                    }
+                })
             },
 
 

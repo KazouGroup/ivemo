@@ -35,11 +35,6 @@ class avisuser extends Model
                 $model->slug = $myslug;
             }
         });
-        static::updating(function($model){
-            if (auth()->check()){
-                $model->slug = Str::uuid();;
-            }
-        });
     }
 
     public function responseavisusers()

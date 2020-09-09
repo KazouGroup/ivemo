@@ -61,8 +61,8 @@ class EmployementInteresseList extends PureComponent {
                                                          alt={this.props.user.first_name}
                                                          className="avatar" />
                                                 </NavLink>
-                                                :  <img style={{ height: "40px", width: "80px" }} alt={this.props.user.first_name}
-                                                        src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>}
+                                                :  <img className="avatar" style={{ height: "40px", width: "80px" }}
+                                                   src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
                                             <div className="mx-3">
                                                 <NavLink to={`/pro/${this.props.user.slug}/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name.length > 9 ? this.props.user.first_name.substring(0, 9) + "..." : this.props.user.first_name}
                                                     <small className="d-block text-muted"><b><i className="now-ui-icons tech_watch-time"/> {moment(this.props.created_at).format('ll')}</b></small>

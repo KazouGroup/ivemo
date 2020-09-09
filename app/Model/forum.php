@@ -22,7 +22,7 @@ class forum extends Model
     protected  $table = 'forums';
 
     public $dates = ['expired_at','created_at','updated_at'];
-    
+
     protected $casts = [
         'status' => 'boolean',
     ];
@@ -51,7 +51,6 @@ class forum extends Model
             $model->ip = request()->ip();
         });
         static::updating(function($model){
-
             $model->ip = request()->ip();
         });
     }

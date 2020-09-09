@@ -680,6 +680,57 @@
                 })
             },
 
+            deleteuploadimagesItem(lk){
+                Swal.fire({
+                    title: 'Delete image',
+                    text: "Are you sure you want to delete this image?",
+                    animation: false,
+                    customClass: 'animated pulse',
+                    buttonsStyling: false,
+                    confirmButtonClass: "btn btn-success",
+                    cancelButtonClass: 'btn btn-danger',
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'No',
+                    showCancelButton: true,
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        //Start Progress bar
+                        this.$Progress.start();
+
+                        //Envoyer la requete au server
+                        let url = route('destroyuploadimage_site',lk.id);
+                        dyaxios.delete(url).then(() => {
+                            /** Alert notify bootstrapp **/
+                            $.notify({
+                                message: "Image deleted Successfully"
+                            }, {
+                                allow_dismiss: false,
+                                type: 'success',
+                                placement: {
+                                    from: 'top',
+                                    align: 'right'
+                                }
+                            });
+                            /* End alert ***/
+                            //End Progress bar
+                            this.$Progress.finish();
+
+                            Fire.$emit('ItemGetter');
+                        }).catch(() => {
+                            this.$Progress.fail();
+                            //Alert error
+                            $.notify("Ooop! Something wrong. Try later", {
+                                type: 'danger',
+                                animate: {
+                                    enter: 'animated bounceInDown',
+                                    exit: 'animated bounceOutUp'
+                                }
+                            });
+                        })
+                    }
+                })
+            },
 
             /* End */
 
