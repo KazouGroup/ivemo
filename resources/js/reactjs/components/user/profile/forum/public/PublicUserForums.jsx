@@ -96,7 +96,15 @@ class PublicUserForums extends Component {
 
                     <div className="wrapper">
                         <div className="page-header page-header-mini">
-                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}/>
+                            {useremploymentPublick.avatarcover ?
+                                <div className="page-header-image" data-parallax="true"
+                                     style={{backgroundImage: "url(" + useremploymentPublick.avatarcover + ")"}}>
+                                </div>
+                                :
+                                <div className="page-header-image" data-parallax="true"
+                                     style={{backgroundImage: "url(" + `${$url_site}/assets/vendor/assets/img/blurredimage1.jpg` + ")"}}>
+                                </div>
+                            }
 
                             {useremploymentPublick.first_name && (
 
@@ -135,7 +143,7 @@ class PublicUserForums extends Component {
                                     </Link>
 
                                     {useremploymentPublick.employments_count > 0 &&(
-                                        <h5><b>{useremploymentPublick.employments_count}</b> {useremploymentPublick.employments_count > 1 ? "annonces" : "annonce"} posté par {useremploymentPublick.first_name} sur les emploies et services</h5>
+                                        <h5><b>{useremploymentPublick.employments_count}</b> {useremploymentPublick.employments_count > 1 ? "posts" : "post"} posté par {useremploymentPublick.first_name} sur les emploies et services</h5>
                                     )}
 
 
@@ -156,107 +164,72 @@ class PublicUserForums extends Component {
                                 <div className="row">
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
+                                        <Navlinknewforum/>
 
 
-                                        {!useremploymentPublick.status_profile ?
-                                            <>
-                                                <Navlinknewforum/>
-
-
-                                                <div className="card">
-                                                    <div className="card-body">
-                                                        <div className="row">
-                                                            <div className="col-md-12">
-                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                                    <div className="card card-plain">
-                                                                        <div className="card-header" role="tab" id="headingTree">
-                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
-                                                                                <b>Annonces de {useremploymentPublick.first_name}</b>
-                                                                            </a>
-                                                                        </div>
-
-                                                                        <NavLinkPublicUser {...this.props} {...useremploymentPublick}/>
-
-                                                                    </div>
-
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                            <div className="card card-plain">
+                                                                <div className="card-header" role="tab" id="headingTree">
+                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
+                                                                        <b>Annonces de {useremploymentPublick.first_name}</b>
+                                                                    </a>
                                                                 </div>
+
+                                                                <NavLinkPublicUser {...this.props} {...useremploymentPublick}/>
+
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </>
-                                            :
-                                            <>
+                                            </div>
+                                        </div>
 
-                                                <Navlinknewforum/>
+                                        {useremploymentPublick.status_profile && (
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <div className="row">
+                                                        <div className="col-md-12">
 
-
-                                                <div className="card">
-                                                    <div className="card-body">
-                                                        <div className="row">
-                                                            <div className="col-md-12">
-                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                                    <div className="card card-plain">
-                                                                        <div className="card-header" role="tab" id="headingTree">
-                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
-                                                                                <b>Annonces de {useremploymentPublick.first_name}</b>
-                                                                            </a>
-                                                                        </div>
-
-                                                                        <NavLinkPublicUser {...this.props} {...useremploymentPublick}/>
-
-                                                                    </div>
-
-                                                                </div>
+                                                            <div className="card-header text-center">
+                                                                <h4 className="card-title"><b>Contacter {useremploymentPublick.first_name}</b></h4>
                                                             </div>
+
+                                                            <FormContactProfileAccountUser {...this.props} {...useremploymentPublick}/>
+
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <div className="card">
-                                                    <div className="card-body">
-                                                        <div className="row">
-                                                            <div className="col-md-12">
-
-                                                                <div className="card-header text-center">
-                                                                    <h4 className="card-title"><b>Contacter {useremploymentPublick.first_name}</b></h4>
-                                                                </div>
-
-                                                                <FormContactProfileAccountUser {...this.props} {...useremploymentPublick}/>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </>
-
-                                        }
+                                            </div>
+                                        )}
 
                                     </div>
 
                                         <div className="col-lg-8 col-md-12 mx-auto">
 
-                                            {!useremploymentPublick.status_profile ?
-                                                <>
-                                                    {mapForums}
+                                            <>
+                                                {mapForums}
 
-                                                    <div className="text-center">
-                                                        {visiable < forums.length ?
-                                                            <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
-                                                                <b>Voir plus </b>
-                                                            </button>
-                                                            :
-                                                            <ButonSubscribedEmployment namesubscribed={`Recevoir toutes les notifications`} nameunsubscribed={`Ne plus recevoir les notifications`}
-                                                                                       titleToltipeSubscribed={`Abonnez vous pour recevoir tous annonces des emploies et services postées par`}
-                                                                                       titleToltipeUnsubscribed={`Ne plus etre notifier des annonces des emploies et services postées par`}
-                                                                                       subscribeItem={this.props.subscribeItem} unsubscribeItem={this.props.unsubscribeItem}
-                                                                                       {...useremploymentPublick}/>
+                                                <div className="text-center">
+                                                    {visiable < forums.length ?
+                                                        <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                                            <b>Voir plus </b>
+                                                        </button>
+                                                        :
+                                                        <ButonSubscribedEmployment namesubscribed={`Recevoir toutes les notifications`} nameunsubscribed={`Ne plus recevoir les notifications`}
+                                                                                   titleToltipeSubscribed={`Abonnez vous pour recevoir tous annonces des emploies et services postées par`}
+                                                                                   titleToltipeUnsubscribed={`Ne plus etre notifier des annonces des emploies et services postées par`}
+                                                                                   subscribeItem={this.props.subscribeItem} unsubscribeItem={this.props.unsubscribeItem}
+                                                                                   {...useremploymentPublick}/>
 
-                                                        }
-                                                    </div>
-                                                </>
-                                                :
-
+                                                    }
+                                                </div>
+                                            </>
+                                            {useremploymentPublick.status_profile && (
                                                 <>
                                                     <div className="card">
                                                         <div className="card-body">
@@ -287,7 +260,7 @@ class PublicUserForums extends Component {
                                                     </div>
 
                                                 </>
-                                            }
+                                            )}
                                         </div>
 
 

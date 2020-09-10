@@ -221,7 +221,7 @@ class ForumShow extends Component {
                                                             }
                                                             <div className="mx-3">
                                                                 <span className="text-dark font-weight-600 text-sm">
-                                                                    <Link to={forum.user.status_profile ? `/pro/${forum.user.slug}/` : `/user/${forum.user.slug}/`}>
+                                                                    <Link to={forum.user.status_profile ? `/pro/${forum.user.slug}/forums/` : `/user/${forum.user.slug}/forums/`}>
                                                                         <b>{forum.user.first_name}</b>
                                                                     </Link>
                                                                     <small className="d-block text-muted">{profileUser.statusOnline &&(<i className="fas fa-circle text-success"></i>)}  <i className="now-ui-icons tech_watch-time"/> {moment(forum.created_at).format('LL')}</small>
