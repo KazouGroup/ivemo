@@ -55,7 +55,7 @@ class ContactuserlocationNotification extends Notification implements ShouldQueu
             ->line($this->fromFullnameUser.' vous a contacté sur ce bien ci-dessous en location - '.config('app.name'))
             ->line('ID: '.$this->annoncelocation->id.' | Titre de l\'annonce: '.$this->annoncelocation->title.' | Prix: '.$this->annoncelocation->price.' | Ville: '.$this->annoncelocation->city->name.' | Categorie: '.$this->annoncelocation->categoryannoncelocation->name)
             ->line($this->fromMessageUser)
-           // ->action('En savoir plus', url(route('personal_mails_annonces_locations.site',[$this->annoncelocation->user->slug])))
+            ->action('En savoir plus', url(route('contactservice_annoncelocationsbyuserbystatistique_site',[$this->annoncelocation->user->slug,$this->annoncelocation->annoncetype->slug,$this->annoncelocation->slugin])))
             ->line('Thank you for using our application!');
     }
 

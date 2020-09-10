@@ -59,7 +59,7 @@ class AnnonceventeInteresse extends Component {
                 {annonceventesinteresses.length > 0 && (
 
                     <div className="text-center">
-                        <h4 className="title">Annonces similaires à {this.props.city.name}</h4>
+                        <h4 className="title">Annonces similaires en vente à {this.props.city.name}</h4>
                     </div>
                 )}
 

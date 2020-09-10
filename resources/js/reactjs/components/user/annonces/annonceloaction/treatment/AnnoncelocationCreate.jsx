@@ -399,7 +399,7 @@ class AnnoncelocationCreate extends Component {
                                                                                     <div
                                                                                         className="col-md-4">
                                                                                         <label className="labels">
-                                                                                            Localisation du bien?
+                                                                                            Quartier ou lieu ?
                                                                                             <span
                                                                                                 className="text-danger">*</span>
                                                                                         </label>
