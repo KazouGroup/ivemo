@@ -45,7 +45,7 @@ class UserFollowList extends PureComponent {
                             <div className="media-body">
                                 <h6 className="media-heading">{this.props.user.first_name}</h6>
                                 <div>
-                                        <Link
+                                    <Link
                                             to={this.props.user.status_profile ? `/pro/${this.props.user.slug}/followers/` : `/user/${this.props.user.slug}/followers/`}>
                                             <b>{this.data_countfollowFormatter(this.props.countfollowerusers || "")} {this.props.countfollowerusers > 1 ? "Abonnés" : "Abonné"}</b>
                                         </Link> | <Link
@@ -60,12 +60,9 @@ class UserFollowList extends PureComponent {
                                                                 nameunfollower={`Suivre`}
                                                                 nameununfollower={`Abonné`}/>
                                     </div>
-
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
                 </div>
 

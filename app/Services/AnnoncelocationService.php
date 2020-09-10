@@ -170,7 +170,7 @@ class AnnoncelocationService
             ->whereIn('city_id',[$city->id])
             ->with('user','categoryannoncelocation','city','annoncetype','periodeannonce','uploadimages')
             ->whereIn('categoryannoncelocation_id',[$categoryannoncelocation->id])
-            ->where(['status' => 1,'status_admin' => 1])
+            ->where(['status_admin' => 1])
             ->with(['user.profile' => function ($q){$q->distinct()->get();},])
             ->whereSlug($annoncelocation->slug)->firstOrFail());
 

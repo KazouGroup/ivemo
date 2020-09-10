@@ -125,7 +125,7 @@ class EmploymentService
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->whereIn('city_id',[$city->id])
             ->whereIn('categoryemployment_id',[$categoryemployment->id])
-            ->where(['status' => 1,'status_admin' => 1])->first());
+            ->where(['status_admin' => 1])->first());
 
         return $employment;
     }
