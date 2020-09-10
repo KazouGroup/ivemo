@@ -242,7 +242,7 @@ class ForumEdit extends Component {
                                                         {$userIvemo.avatar === null ?
                                                             <img className="avatar" alt={$userIvemo.first_name}
                                                                  style={{ height: "35px", width: "35px", borderRadius:'35px' }}
-                                                                 src={`https://dummyimage.com/wsvga/0077ee/009900&text=qui`}/>
+                                                                 src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
                                                             :
                                                             <img className="avatar"
                                                                  style={{ height: "35px", width: "35px", borderRadius:'35px' }}
@@ -250,7 +250,7 @@ class ForumEdit extends Component {
                                                                  src={$userIvemo.avatar}/>
                                                         }
                                                         <div className="mx-3">
-                                                            <NavLink to={`/pro/${$userIvemo.slug}/`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
+                                                            <NavLink to={`/pro/${$userIvemo.slug}/forums/`} className="text-dark font-weight-600 text-sm"><b>{$userIvemo.first_name}</b>
                                                                 <small className="d-block text-muted"> <i className="now-ui-icons tech_watch-time"/> {moment($userIvemo.created_at).format('LL')}</small>
                                                             </NavLink>
                                                         </div>

@@ -24,6 +24,7 @@ import {
 import ButonMiniSubscribedEmployment from "../../../../inc/vendor/ButonMiniSubscribedEmployment";
 import ButonFollowerUser from "../../../../inc/vendor/follow/ButonFollowerUser";
 import NavLinkPublicUser from "../../../../inc/vendor/NavLinkPublicUser";
+import ButonMiniSubscribedForum from "../../../../inc/vendor/ButonMiniSubscribedForum";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 class PublicUserEmployments extends Component {
@@ -69,7 +70,7 @@ class PublicUserEmployments extends Component {
 
 
     render() {
-        const {employments,useremploymentPublick} = this.props;
+        const {employments,userPublick} = this.props;
         const {visiable} = this.state;
         const mapEmployments = employments.length >= 0 ? (
             employments.slice(0, visiable).map(item => {
@@ -87,7 +88,7 @@ class PublicUserEmployments extends Component {
         );
         return (
             <>
-                <HelmetSite title={`Emplois, Formation & Services ${useremploymentPublick.first_name || 'Profile'} - ${$name_site}`}/>
+                <HelmetSite title={`Emplois, Formation & Services ${userPublick.first_name || 'Profile'} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 
@@ -99,9 +100,9 @@ class PublicUserEmployments extends Component {
                     <div className="wrapper">
                         <div className="page-header page-header-mini">
 
-                            {useremploymentPublick.avatarcover ?
+                            {userPublick.avatarcover ?
                                 <div className="page-header-image" data-parallax="true"
-                                     style={{backgroundImage: "url(" + useremploymentPublick.avatarcover + ")"}}>
+                                     style={{backgroundImage: "url(" + userPublick.avatarcover + ")"}}>
                                 </div>
                                 :
                                 <div className="page-header-image" data-parallax="true"
@@ -109,22 +110,22 @@ class PublicUserEmployments extends Component {
                                 </div>
                             }
 
-                            {useremploymentPublick.first_name && (
+                            {userPublick.first_name && (
 
                                 <div className="content-center">
 
-                                    <h2 className="title">{useremploymentPublick.first_name}</h2>
+                                    <h2 className="title">{userPublick.first_name}</h2>
 
                                     <div className="text-center">
 
 
-                                        {useremploymentPublick.followeruser &&(
-                                            <ButonMiniSubscribedEmployment {...this.props} {...useremploymentPublick}
+                                        {userPublick.followeruser &&(
+                                            <ButonMiniSubscribedEmployment {...this.props} {...userPublick}
                                                                            unsubscribeItem={this.props.unsubscribeItem}
                                                                            subscribeItem={this.props.subscribeItem}/>
                                         )}
 
-                                        <ButonFollowerUser {...this.props} {...useremploymentPublick}
+                                        <ButonFollowerUser {...this.props} {...userPublick}
                                                            unfollowerItem={this.props.unfollowerItem}
                                                            followerItem={this.props.followerItem}
                                                            classNameDanger="btn btn-danger"
@@ -132,19 +133,19 @@ class PublicUserEmployments extends Component {
                                                            nameunfollower={`Suivre`}
                                                            nameununfollower={`Abonné`}/>
                                     </div>
-                                    <Link to={useremploymentPublick.status_profile ? `/pro/${useremploymentPublick.slug}/followers/`:`/user/${useremploymentPublick.slug}/followers/`} className="text-white"><b>{this.data_countfollowFormatter(useremploymentPublick.countfollowerusers || "")} {useremploymentPublick.countfollowerusers > 1 ? "Abonnés" : "Abonné"}</b></Link> | <Link to={useremploymentPublick.status_profile ? `/pro/${useremploymentPublick.slug}/following/`:`/user/${useremploymentPublick.slug}/following/`} className="text-white"><b>{this.data_countfollowingFormatter(useremploymentPublick.countfollowingusers || "")} {useremploymentPublick.countfollowingusers > 1 ? "Abonnements" : "Abonnement"}</b></Link>
+                                    <Link to={userPublick.status_profile ? `/pro/${userPublick.slug}/followers/`:`/user/${userPublick.slug}/followers/`} className="text-white"><b>{this.data_countfollowFormatter(userPublick.countfollowerusers || "")} {userPublick.countfollowerusers > 1 ? "Abonnés" : "Abonné"}</b></Link> | <Link to={userPublick.status_profile ? `/pro/${userPublick.slug}/following/`:`/user/${userPublick.slug}/following/`} className="text-white"><b>{this.data_countfollowingFormatter(userPublick.countfollowingusers || "")} {userPublick.countfollowingusers > 1 ? "Abonnements" : "Abonnement"}</b></Link>
                                     <br/>
-                                    <Link  className="text-white" to={useremploymentPublick.status_profile ?
+                                    <Link  className="text-white" to={userPublick.status_profile ?
 
-                                        `/user/${useremploymentPublick.slug}/`
+                                        `/user/${userPublick.slug}/`
                                         :
-                                        `/pro/${useremploymentPublick.slug}/`}
+                                        `/pro/${userPublick.slug}/`}
                                     >
-                                        <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
+                                        <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userPublick.first_name}</b>
 
                                     </Link>
-                                    {useremploymentPublick.employments_count > 0 &&(
-                                        <h5><b>{useremploymentPublick.employments_count}</b> {useremploymentPublick.employments_count > 1 ? "annonces" : "annonce"} posté par {useremploymentPublick.first_name} sur les emploies et services</h5>
+                                    {userPublick.employments_count > 0 &&(
+                                        <h5><b>{userPublick.employments_count}</b> {userPublick.employments_count > 1 ? "annonces" : "annonce"} posté par {userPublick.first_name} sur les emploies et services</h5>
                                     )}
 
                                 </div>
@@ -166,7 +167,7 @@ class PublicUserEmployments extends Component {
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
 
-                                        {!useremploymentPublick.status_profile ?
+                                        {!userPublick.status_profile ?
                                             <>
 
                                             </>
@@ -182,11 +183,11 @@ class PublicUserEmployments extends Component {
                                                                     <div className="card card-plain">
                                                                         <div className="card-header" role="tab" id="headingTwo">
                                                                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                                <b>Articles de {useremploymentPublick.first_name}</b>
+                                                                                <b>Articles de {userPublick.first_name}</b>
                                                                             </a>
                                                                         </div>
 
-                                                                        <NavLinkPublicBlogannoncesUser {...this.props} {...useremploymentPublick}/>
+                                                                        <NavLinkPublicBlogannoncesUser {...this.props} {...userPublick}/>
 
                                                                     </div>
 
@@ -208,11 +209,11 @@ class PublicUserEmployments extends Component {
                                                                     <div className="card card-plain">
                                                                         <div className="card-header" role="tab" id="headingTree">
                                                                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
-                                                                                <b>Annonces de {useremploymentPublick.first_name}</b>
+                                                                                <b>Annonces de {userPublick.first_name}</b>
                                                                             </a>
                                                                         </div>
 
-                                                                        <NavLinkPublicUser {...this.props} {...useremploymentPublick}/>
+                                                                        <NavLinkPublicUser {...this.props} {...userPublick}/>
 
                                                                     </div>
 
@@ -228,10 +229,10 @@ class PublicUserEmployments extends Component {
                                                             <div className="col-md-12">
 
                                                                 <div className="card-header text-center">
-                                                                    <h4 className="card-title"><b>Contacter {useremploymentPublick.first_name}</b></h4>
+                                                                    <h4 className="card-title"><b>Contacter {userPublick.first_name}</b></h4>
                                                                 </div>
 
-                                                                <FormContactProfileAccountUser {...this.props} {...useremploymentPublick}/>
+                                                                <FormContactProfileAccountUser {...this.props} {...userPublick}/>
 
                                                             </div>
                                                         </div>
@@ -243,7 +244,7 @@ class PublicUserEmployments extends Component {
 
                                     </div>
 
-                                    {!useremploymentPublick.status_profile ?
+                                    {!userPublick.status_profile ?
 
                                         <div className="col-lg-8 col-md-12 mx-auto">
                                             <div className="card">
@@ -272,11 +273,17 @@ class PublicUserEmployments extends Component {
                                                         <b>Voir plus </b>
                                                     </button>
                                                     :
-                                                    <ButonSubscribedEmployment namesubscribed={`Recevoir toutes les notifications`} nameunsubscribed={`Ne plus recevoir les notifications`}
-                                                                               titleToltipeSubscribed={`Abonnez vous pour recevoir tous annonces des emploies et services postées par`}
-                                                                               titleToltipeUnsubscribed={`Ne plus etre notifier des annonces des emploies et services postées par`}
-                                                                               subscribeItem={this.props.subscribeItem} unsubscribeItem={this.props.unsubscribeItem}
-                                                                               {...useremploymentPublick}/>
+                                                    <>
+                                                        {userPublick.followeruser && (
+                                                            <ButonSubscribedEmployment namesubscribed={`Recevoir toutes les notifications`} nameunsubscribed={`Ne plus recevoir les notifications`}
+                                                                                       titleToltipeSubscribed={`Abonnez vous pour recevoir tous annonces des emploies et services postées par`}
+                                                                                       titleToltipeUnsubscribed={`Ne plus etre notifier des annonces des emploies et services postées par`}
+                                                                                       subscribeItem={this.props.subscribeItem} unsubscribeItem={this.props.unsubscribeItem}
+                                                                                       {...userPublick}/>
+                                                        )}
+
+                                                    </>
+
 
                                                 }
                                             </div>
@@ -285,10 +292,10 @@ class PublicUserEmployments extends Component {
                                                 <div className="card-body">
 
                                                     <div className="card-header text-center">
-                                                        <h4 className="card-title"><b>Contacter {useremploymentPublick.first_name}</b></h4>
+                                                        <h4 className="card-title"><b>Contacter {userPublick.first_name}</b></h4>
                                                     </div>
 
-                                                    <FormContactProfileAccountUser {...this.props} {...useremploymentPublick}/>
+                                                    <FormContactProfileAccountUser {...this.props} {...userPublick}/>
 
                                                 </div>
                                             </div>
@@ -300,7 +307,7 @@ class PublicUserEmployments extends Component {
                                                     <div className="card-header text-center">
                                                         <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
                                                         <p className="card-title">
-                                                            Abonnez-vous à la newsletter de <b>{useremploymentPublick.first_name}</b> afin d'être notifié des mises à jour
+                                                            Abonnez-vous à la newsletter de <b>{userPublick.first_name}</b> afin d'être notifié des mises à jour
                                                         </p>
                                                     </div>
 
@@ -334,7 +341,7 @@ PublicUserEmployments.propTypes = {
 
 const mapStoreToProps = store => ({
     employments: store.employments.items,
-    useremploymentPublick: store.profile.profiluser
+    userPublick: store.profile.profiluser
 
 });
 
