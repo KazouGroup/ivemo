@@ -53,7 +53,6 @@ class CityIndexSite extends Component {
 
                         <div className="main main-raised">
                             <br/>
-
                             <div className="container">
                                 <div className="row justify-content-center">
                                     <div className="col-md-12 ml-auto mr-auto">
@@ -92,7 +91,6 @@ class CityIndexSite extends Component {
                                                                 <i className="fas fa-heart"></i> <b> J'aime</b>
                                                             </Button>
                                                         </>
-
                                                         :
                                                         <>
                                                             <Button onClick={() => this.props.likecityItem(city)}
@@ -104,7 +102,6 @@ class CityIndexSite extends Component {
                                                 </>
                                             }
                                         </div>
-
 
                                         <div className="card">
                                             <div className="card-body">

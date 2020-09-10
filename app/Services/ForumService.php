@@ -114,7 +114,7 @@ class ForumService
     {
 
         $data = new ForumResource(forum::whereSlugin($forum->slugin)
-            ->where(['status' => 1,'status_admin' => 1])
+            //->where(['status' => 1,'status_admin' => 1])
             ->with('user','categoryforum')
             ->whereIn('categoryforum_id',[$categoryforum->id])
             ->with(['user' => function ($q) {$q->with('profile')

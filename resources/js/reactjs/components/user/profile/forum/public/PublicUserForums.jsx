@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
-import { Button } from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
-import Swal from "sweetalert2";
 import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
-import ButonSubscribedEmployment from "../../../../inc/vendor/ButonSubscribedEmployment";
 import HelmetSite from "../../../../inc/user/HelmetSite";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
@@ -16,15 +12,17 @@ import {
     loadProfileusersforpublic,
     deleteItem,
     favoriteItem,unfavoriteItem,
+    subscribeItem,unsubscribeItem,
     likeItem, unlikeItem,
     unfollowerItem,followerItem,
 } from "../../../../../redux/actions/forum/forumActions";
-import ButonMiniSubscribedEmployment from "../../../../inc/vendor/ButonMiniSubscribedEmployment";
 import ButonFollowerUser from "../../../../inc/vendor/follow/ButonFollowerUser";
 import ForumList from "../../../forum/inc/ForumList";
 import ForumListSkeleton from "../../../../inc/user/forum/ForumListSkeleton";
 import NavLinkPublicUser from "../../../../inc/vendor/NavLinkPublicUser";
 import Navlinknewforum from "../../../forum/treatement/Navlinknewforum";
+import ButonMiniSubscribedForum from "../../../../inc/vendor/ButonMiniSubscribedForum";
+import ButonSubscribedForum from "../../../../inc/vendor/ButonSubscribedForum";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 class PublicUserForums extends Component {
@@ -70,7 +68,7 @@ class PublicUserForums extends Component {
 
 
     render() {
-        const {forums,useremploymentPublick} = this.props;
+        const {forums,userPublick} = this.props;
         const {visiable} = this.state;
         const mapForums = forums.length >= 0 ? (
             forums.map(item => {
@@ -85,7 +83,7 @@ class PublicUserForums extends Component {
         );
         return (
             <>
-                <HelmetSite title={`Emplois, Formation & Services ${useremploymentPublick.first_name || 'Profile'} - ${$name_site}`}/>
+                <HelmetSite title={`Emplois, Formation & Services ${userPublick.first_name || 'Profile'} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 
@@ -96,24 +94,32 @@ class PublicUserForums extends Component {
 
                     <div className="wrapper">
                         <div className="page-header page-header-mini">
-                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}/>
+                            {userPublick.avatarcover ?
+                                <div className="page-header-image" data-parallax="true"
+                                     style={{backgroundImage: "url(" + userPublick.avatarcover + ")"}}>
+                                </div>
+                                :
+                                <div className="page-header-image" data-parallax="true"
+                                     style={{backgroundImage: "url(" + `${$url_site}/assets/vendor/assets/img/blurredimage1.jpg` + ")"}}>
+                                </div>
+                            }
 
-                            {useremploymentPublick.first_name && (
+                            {userPublick.first_name && (
 
                                 <div className="content-center">
 
-                                    <h2 className="title">{useremploymentPublick.first_name}</h2>
+                                    <h2 className="title">{userPublick.first_name}</h2>
 
                                     <div className="text-center">
 
 
-                                        {useremploymentPublick.followeruser &&(
-                                            <ButonMiniSubscribedEmployment {...this.props} {...useremploymentPublick}
-                                                                           unsubscribeItem={this.props.unsubscribeItem}
-                                                                           subscribeItem={this.props.subscribeItem}/>
+                                        {userPublick.followeruser &&(
+                                            <ButonMiniSubscribedForum {...this.props} {...userPublick}
+                                            unsubscribeItem={this.props.unsubscribeItem}
+                                            subscribeItem={this.props.subscribeItem}/>
                                         )}
 
-                                        <ButonFollowerUser {...this.props} {...useremploymentPublick}
+                                        <ButonFollowerUser {...this.props} {...userPublick}
                                                            unfollowerItem={this.props.unfollowerItem}
                                                            followerItem={this.props.followerItem}
                                                            classNameDanger="btn btn-danger"
@@ -121,21 +127,21 @@ class PublicUserForums extends Component {
                                                            nameunfollower={`Suivre`}
                                                            nameununfollower={`Abonné`}/>
                                     </div>
-                                    <Link to={useremploymentPublick.status_profile ? `/pro/${useremploymentPublick.slug}/followers/`:`/user/${useremploymentPublick.slug}/followers/`} className="text-white"><b>{this.data_countfollowFormatter(useremploymentPublick.countfollowerusers || "")} {useremploymentPublick.countfollowerusers > 1 ? "Abonnés" : "Abonné"}</b></Link> | <Link to={useremploymentPublick.status_profile ? `/pro/${useremploymentPublick.slug}/following/`:`/user/${useremploymentPublick.slug}/following/`} className="text-white"><b>{this.data_countfollowingFormatter(useremploymentPublick.countfollowingusers || "")} {useremploymentPublick.countfollowingusers > 1 ? "Abonnements" : "Abonnement"}</b></Link>
+                                    <Link to={userPublick.status_profile ? `/pro/${userPublick.slug}/followers/`:`/user/${userPublick.slug}/followers/`} className="text-white"><b>{this.data_countfollowFormatter(userPublick.countfollowerusers || "")} {userPublick.countfollowerusers > 1 ? "Abonnés" : "Abonné"}</b></Link> | <Link to={userPublick.status_profile ? `/pro/${userPublick.slug}/following/`:`/user/${userPublick.slug}/following/`} className="text-white"><b>{this.data_countfollowingFormatter(userPublick.countfollowingusers || "")} {userPublick.countfollowingusers > 1 ? "Abonnements" : "Abonnement"}</b></Link>
                                     <br/>
 
-                                    <Link  className="text-white" to={useremploymentPublick.status_profile ?
+                                    <Link  className="text-white" to={userPublick.status_profile ?
 
-                                        `/pro/${useremploymentPublick.slug}/`
+                                        `/pro/${userPublick.slug}/`
                                         :
-                                        `/user/${useremploymentPublick.slug}/`}
+                                        `/user/${userPublick.slug}/`}
                                     >
-                                        <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useremploymentPublick.first_name}</b>
+                                        <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userPublick.first_name}</b>
 
                                     </Link>
 
-                                    {useremploymentPublick.employments_count > 0 &&(
-                                        <h5><b>{useremploymentPublick.employments_count}</b> {useremploymentPublick.employments_count > 1 ? "annonces" : "annonce"} posté par {useremploymentPublick.first_name} sur les emploies et services</h5>
+                                    {userPublick.employments_count > 0 &&(
+                                        <h5><b>{userPublick.employments_count}</b> {userPublick.employments_count > 1 ? "posts" : "post"} posté par {userPublick.first_name} sur les emploies et services</h5>
                                     )}
 
 
@@ -156,116 +162,88 @@ class PublicUserForums extends Component {
                                 <div className="row">
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
+                                        <Navlinknewforum/>
 
 
-                                        {!useremploymentPublick.status_profile ?
-                                            <>
-                                                <Navlinknewforum/>
-
-
-                                                <div className="card">
-                                                    <div className="card-body">
-                                                        <div className="row">
-                                                            <div className="col-md-12">
-                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                                    <div className="card card-plain">
-                                                                        <div className="card-header" role="tab" id="headingTree">
-                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
-                                                                                <b>Annonces de {useremploymentPublick.first_name}</b>
-                                                                            </a>
-                                                                        </div>
-
-                                                                        <NavLinkPublicUser {...this.props} {...useremploymentPublick}/>
-
-                                                                    </div>
-
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                            <div className="card card-plain">
+                                                                <div className="card-header" role="tab" id="headingTree">
+                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
+                                                                        <b>Annonces de {userPublick.first_name}</b>
+                                                                    </a>
                                                                 </div>
+
+                                                                <NavLinkPublicUser {...this.props} {...userPublick}/>
+
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </>
-                                            :
-                                            <>
+                                            </div>
+                                        </div>
 
-                                                <Navlinknewforum/>
+                                        {userPublick.status_profile && (
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <div className="row">
+                                                        <div className="col-md-12">
 
-
-                                                <div className="card">
-                                                    <div className="card-body">
-                                                        <div className="row">
-                                                            <div className="col-md-12">
-                                                                <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                                    <div className="card card-plain">
-                                                                        <div className="card-header" role="tab" id="headingTree">
-                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
-                                                                                <b>Annonces de {useremploymentPublick.first_name}</b>
-                                                                            </a>
-                                                                        </div>
-
-                                                                        <NavLinkPublicUser {...this.props} {...useremploymentPublick}/>
-
-                                                                    </div>
-
-                                                                </div>
+                                                            <div className="card-header text-center">
+                                                                <h4 className="card-title"><b>Contacter {userPublick.first_name}</b></h4>
                                                             </div>
+
+                                                            <FormContactProfileAccountUser {...this.props} {...userPublick}/>
+
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <div className="card">
-                                                    <div className="card-body">
-                                                        <div className="row">
-                                                            <div className="col-md-12">
-
-                                                                <div className="card-header text-center">
-                                                                    <h4 className="card-title"><b>Contacter {useremploymentPublick.first_name}</b></h4>
-                                                                </div>
-
-                                                                <FormContactProfileAccountUser {...this.props} {...useremploymentPublick}/>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </>
-
-                                        }
+                                            </div>
+                                        )}
 
                                     </div>
 
                                         <div className="col-lg-8 col-md-12 mx-auto">
 
-                                            {!useremploymentPublick.status_profile ?
-                                                <>
-                                                    {mapForums}
+                                            <>
+                                                {mapForums}
 
-                                                    <div className="text-center">
-                                                        {visiable < forums.length ?
-                                                            <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
-                                                                <b>Voir plus </b>
-                                                            </button>
-                                                            :
-                                                            <ButonSubscribedEmployment namesubscribed={`Recevoir toutes les notifications`} nameunsubscribed={`Ne plus recevoir les notifications`}
-                                                                                       titleToltipeSubscribed={`Abonnez vous pour recevoir tous annonces des emploies et services postées par`}
-                                                                                       titleToltipeUnsubscribed={`Ne plus etre notifier des annonces des emploies et services postées par`}
-                                                                                       subscribeItem={this.props.subscribeItem} unsubscribeItem={this.props.unsubscribeItem}
-                                                                                       {...useremploymentPublick}/>
+                                                <div className="text-center">
+                                                    {visiable < forums.length ?
+                                                        <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
+                                                            <b>Voir plus </b>
+                                                        </button>
+                                                        :
+                                                        <>
+                                                            {userPublick.followeruser && (
 
-                                                        }
-                                                    </div>
-                                                </>
-                                                :
+                                                                <ButonSubscribedForum namesubscribed={`Recevoir toutes les notifications`} nameunsubscribed={`Ne plus recevoir les notifications`}
+                                                                                           titleToltipeSubscribed={`Abonnez vous pour recevoir tous les posts postés par`}
+                                                                                           titleToltipeUnsubscribed={`Ne plus etre notifier`}
+                                                                                           unsubscribeItem={this.props.unsubscribeItem}
+                                                                                           subscribeItem={this.props.subscribeItem}
+                                                                                           {...userPublick}/>
+                                                            )}
 
+                                                        </>
+
+                                                    }
+                                                </div>
+                                            </>
+                                            {userPublick.status_profile && (
                                                 <>
                                                     <div className="card">
                                                         <div className="card-body">
 
                                                             <div className="card-header text-center">
-                                                                <h4 className="card-title"><b>Contacter {useremploymentPublick.first_name}</b></h4>
+                                                                <h4 className="card-title"><b>Contacter {userPublick.first_name}</b></h4>
                                                             </div>
 
-                                                            <FormContactProfileAccountUser {...this.props} {...useremploymentPublick}/>
+                                                            <FormContactProfileAccountUser {...this.props} {...userPublick}/>
 
                                                         </div>
                                                     </div>
@@ -277,7 +255,7 @@ class PublicUserForums extends Component {
                                                             <div className="card-header text-center">
                                                                 <h4 className="card-title"><b>Restez à l’écoute !</b></h4>
                                                                 <p className="card-title">
-                                                                    Abonnez-vous à la newsletter de <b>{useremploymentPublick.first_name}</b> afin d'être notifié des mises à jour
+                                                                    Abonnez-vous à la newsletter de <b>{userPublick.first_name}</b> afin d'être notifié des mises à jour
                                                                 </p>
                                                             </div>
 
@@ -287,7 +265,7 @@ class PublicUserForums extends Component {
                                                     </div>
 
                                                 </>
-                                            }
+                                            )}
                                         </div>
 
 
@@ -313,13 +291,14 @@ PublicUserForums.propTypes = {
 
 const mapStateToProps = state => ({
     forums: state.forums.forums,
-    useremploymentPublick: state.profile.profiluser
+    userPublick: state.profile.profiluser
 });
 
 export default connect(mapStateToProps, {
     loadforumsbyuserpublic,
     loadProfileusersforpublic,
     favoriteItem,unfavoriteItem,
+    subscribeItem,unsubscribeItem,
     unfollowerItem,followerItem,
     likeItem,unlikeItem,
     deleteItem

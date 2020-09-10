@@ -79,7 +79,7 @@ class ForumIndexSite extends Component {
                                 <div className="row">
                                     <div className="col-md-8 ml-auto mr-auto">
                                         {/*<h1 className="title">Forums </h1>*/}
-                                        <h3 className="title">Trouvez une solution à vos questions à l'aide de notre Forums.</h3>
+                                        <h3 className="title">Trouvez une réponse à toutes vos questions sur notre Forum. Sentez vous a l'aise nous sommes en famille</h3>
                                     </div>
                                 </div>
 
@@ -137,11 +137,7 @@ class ForumIndexSite extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
-
-
-
                                 </div>
                             </div>
                         </div>

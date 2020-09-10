@@ -82,7 +82,7 @@ class EmployementIndexSite extends Component {
                             <div className="content-center">
                                 <div className="row">
                                     <div className="col-md-10 mx-auto">
-                                        <h3 className="title">Gérez tous vos événements et recrutements facilement et Gratuitement.</h3>
+                                        <h3 className="title">Proposez vos services, cherchez des partenaires et gérez tous vos événements & recrutements facilement et Gratuitement.</h3>
                                     </div>
                                 </div>
                             </div>
@@ -160,9 +160,6 @@ class EmployementIndexSite extends Component {
 
                                 </div>
                             </div>
-
-
-
                         </div>
 
                         <FooterBigUserSite />

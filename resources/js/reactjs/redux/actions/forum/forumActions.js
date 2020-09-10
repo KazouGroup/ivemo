@@ -15,7 +15,7 @@ import {
     GET_PROFILE_USER_FOR_PUBLIC,
     FOLLOWERUSER_ADD,
     FOLLOWERUSER_REMOVE,
-    GET_PROFILE_USER_FOR_PRIVATE,
+    GET_PROFILE_USER_FOR_PRIVATE, SUBSCRIBE_USER_FOR_FORUM_ADD, SUBSCRIBE_USER_FOR_FORUM_REMOVE,
 
 } from "../types";
 import Swal from "sweetalert2";
@@ -197,6 +197,33 @@ export const unfollowerItem = (props) => dispatch => {
         }
     })
 };
+
+export const   subscribeItem = props => dispatch => {
+
+    const url = route('forums_subscribe.subscribe', [props.id]);
+    dyaxios.post(url).then(() => {
+
+            dispatch({
+                type: SUBSCRIBE_USER_FOR_FORUM_ADD,
+                payload: props.id
+            });
+        }
+    ).catch(error => console.error(error));
+};
+
+export const  unsubscribeItem = props => dispatch => {
+
+    const url = route('forums_subscribe.subscribe', [props.id]);
+    dyaxios.post(url).then(() => {
+
+            dispatch({
+                type: SUBSCRIBE_USER_FOR_FORUM_REMOVE,
+                payload: props.id
+            });
+        }
+    ).catch(error => console.error(error));
+};
+
 /*
 End
 */

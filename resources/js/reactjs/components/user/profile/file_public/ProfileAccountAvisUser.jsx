@@ -472,7 +472,10 @@ class ProfileAccountAvisUser extends PureComponent {
                                                                  alt={item.from.first_name}
                                                                  className="media-object rounded"/>
                                                             :
-                                                            <Skeleton circle={false} height={40} width={60}/>}
+                                                            <img src={`${$url_site}/assets/vendor/assets/img/blurredimage1.jpg`}
+                                                                 style={{height: "40px", width: "80px"}}
+                                                                 alt={$userIvemo.first_name}
+                                                                 className="media-object rounded"/>}
                                                     </div>
 
                                                     <div className="media-body">
@@ -669,8 +672,11 @@ class ProfileAccountAvisUser extends PureComponent {
                                                                              alt={lk.user.first_name}
                                                                              className="media-object rounded"/>
                                                                         :
-                                                                        <Skeleton circle={false} height={40}
-                                                                                  width={60}/>}
+
+                                                                        <img src={`${$url_site}/assets/vendor/assets/img/blurredimage1.jpg`}
+                                                                             style={{height: "40px", width: "80px"}}
+                                                                             alt={$userIvemo.first_name}
+                                                                             className="media-object rounded"/>}
                                                                 </div>
                                                                 <div className="media-body">
                                                                     <div className="ivemoAvisUserContainer">
@@ -759,10 +765,11 @@ class ProfileAccountAvisUser extends PureComponent {
                                                                                                             }}
                                                                                                             alt={$userIvemo.first_name}
                                                                                                             className="media-object rounded"/>
-                                                                                                        : <Skeleton
-                                                                                                            circle={false}
-                                                                                                            height={40}
-                                                                                                            width={60}/>}
+                                                                                                        :
+                                                                                                        <img src={`${$url_site}/assets/vendor/assets/img/blurredimage1.jpg`}
+                                                                                                             style={{height: "40px", width: "80px"}}
+                                                                                                             alt={$userIvemo.first_name}
+                                                                                                             className="media-object rounded"/>}
                                                                                                 </div>
 
                                                                                                 <div

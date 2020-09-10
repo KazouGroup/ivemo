@@ -32,6 +32,7 @@ class ForumResource extends JsonResource
             'countcomments' => $this->comments()->count(),
             'status_comments' => $this->status_comments,
             'status_admin' => $this->status_admin,
+            'status' => $this->status,
             'favoriteted' => $this->favoriteted(),
             'countfavorites' => $this->favorites()->count(),
             'visits_count' => $this->visits()->count(),

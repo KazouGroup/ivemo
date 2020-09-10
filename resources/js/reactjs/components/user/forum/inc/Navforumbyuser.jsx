@@ -45,9 +45,7 @@ class Navforumbyuser extends Component {
                                 {categoryforums.map((item) => (
                                     <tr key={item.id}>
                                         <td>
-                                            <NavLink to={`/forums/${item.slug}/`}>
-                                                <strong>{item.name || <Skeleton width={80} />}</strong>
-                                            </NavLink>
+                                            <strong>{item.name || <Skeleton width={80} />}</strong>
                                         </td>
                                         <td className="text-right"> {this.getcountcategoryString(item.forums_count)} {item.forums_count > 1 ? "posts" : "post"}</td>
                                     </tr>
