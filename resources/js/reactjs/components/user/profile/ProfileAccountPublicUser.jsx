@@ -66,7 +66,15 @@ class ProfileAccountPublicUser extends PureComponent {
                     <div className="wrapper">
 
                         <div className="page-header page-header-mini">
-                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + userPublick.avatarcover + ")" }}/>
+                            {userPublick.avatarcover ?
+                                <div className="page-header-image" data-parallax="true"
+                                     style={{backgroundImage: "url(" + userPublick.avatarcover + ")"}}>
+                                </div>
+                                :
+                                <div className="page-header-image" data-parallax="true"
+                                     style={{backgroundImage: "url(" + `${$url_site}/assets/vendor/assets/img/blurredimage1.jpg` + ")"}}>
+                                </div>
+                            }
 
                             <div className="container">
                                 <div className="mt-lg-5 text-left">
